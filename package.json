@@ -1,0 +1,21 @@
+{
+  "name": "parts.js",
+  "version": "0.0.0",
+  "description": "JavaScript Code Parts",
+  "main": "./source_code/index.js",
+  "scripts": {
+    "start": "node ./test_code/test_core.js",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/standard-software/parts.js.git"
+  },
+  "keywords": [],
+  "author": "Satoshi Yamamoto <standard.software.net@gmail.com> (https://www.facebook.com/stndardsoftware/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/standard-software/parts.js/issues"
+  },
+  "homepage": "https://github.com/standard-software/parts.js#readme"
+}
