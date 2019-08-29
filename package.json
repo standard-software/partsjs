@@ -5,6 +5,7 @@
   "description": "JavaScript Code Parts",
   "main": "./source_code/index.js",
   "scripts": {
+    "babel": "./node_modules/.bin/babel ./source_code/index.js",
     "start": "node ./test_code/test_index.js",
     "test": ""
   },
@@ -18,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/standard-software/parts.js/issues"
   },
-  "homepage": "https://github.com/standard-software/partsjs#readme"
+  "homepage": "https://github.com/standard-software/partsjs#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
 }
