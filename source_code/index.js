@@ -1,6 +1,6 @@
 const parts = {};
 
-parts.VERSION = '0.1.0';
+parts.VERSION = '0.1.1';
 
 module.exports = parts;
 
