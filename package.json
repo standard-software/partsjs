@@ -5,7 +5,7 @@
   "description": "JavaScript Code Parts",
   "main": "./source_code/index.js",
   "scripts": {
-    "babel": "./node_modules/.bin/babel ./source_code/index.js",
+    "babel": "./node_modules/.bin/babel ./source_code --out-dir ./debug_build",
     "start": "node ./test_code/test_index.js",
     "test": ""
   },
@@ -24,5 +24,8 @@
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4"
   }
 }
