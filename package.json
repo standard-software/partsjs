@@ -1,5 +1,6 @@
 {
-  "name": "parts.js",
+  "private": false,
+  "name": "@standard-software/parts",
   "version": "0.1.0",
   "description": "JavaScript Code Parts",
   "main": "./source_code/index.js",
