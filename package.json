@@ -1,10 +1,10 @@
 {
   "name": "parts.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "JavaScript Code Parts",
   "main": "./source_code/index.js",
   "scripts": {
-    "start": "node ./test_code/test_core.js",
+    "start": "node ./test_code/test_index.js",
     "test": ""
   },
   "repository": {
