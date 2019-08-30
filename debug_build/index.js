@@ -1,7 +1,7 @@
 "use strict";
 
 var parts = {};
-parts.VERSION = '0.2.0 beta';
+parts.VERSION = '0.2.0';
 
 parts.test_babel = function () {
   var array = [1, 2, 3];

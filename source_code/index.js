@@ -1,6 +1,6 @@
 const parts = {};
 
-parts.VERSION = '0.2.0 beta';
+parts.VERSION = '0.2.0';
 
 parts.test_babel = () => {
   const array = [1, 2, 3];
