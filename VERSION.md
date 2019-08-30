@@ -5,6 +5,8 @@
 ### 0.2.2
 #### 2019/08/30(Fri)
 - Document update
+- add type.js (_isUndefined)
+- add debug test code
 
 ### 0.2.1
 #### 2019/08/29(Thu)

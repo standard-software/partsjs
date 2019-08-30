@@ -2,7 +2,7 @@
 
 var type = require('./type.js');
 
-var VERSION = '0.2.2 beta';
+var VERSION = '0.2.2';
 
 var test_babel = function test_babel() {
   var array = [1, 2, 3];
