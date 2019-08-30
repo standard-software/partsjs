@@ -44,6 +44,27 @@ console.log(
 
 ## Version
 
+### 0.2.3
+#### 2019/08/30(Fri)
+- add TypeCheck (type.js)
+  - PrimitiveTypeCheck
+    - isUndefined
+    - isNull
+    - isNaNStrict
+    - isBoolean
+    - isNumber
+    - isInteger
+    - isString
+    - isFunction
+  - ObjectTypeCheck
+    - isObject
+    - isArray
+    - isDate
+    - isRegExp
+  - OtherTypeCheck
+    - isException
+  - For Each isNotXxx isXxxArrayVersion isNotXxxArray
+
 ### 0.2.2
 #### 2019/08/30(Fri)
 - Document update
