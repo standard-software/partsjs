@@ -44,6 +44,10 @@ console.log(
 
 ## Version
 
+### 0.3.0
+#### 2019/08/30(Fri)
+- webpack ver4.x install
+
 ### 0.2.3
 #### 2019/08/30(Fri)
 - add TypeCheck (type.js)
