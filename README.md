@@ -1,7 +1,52 @@
 # Parts.js
 JavaScript Code Parts
 
+## URL
+
+### GitHub
+standard-software/partsjs: JavaScript Code Parts
+https://github.com/standard-software/partsjs
+
+### npm
+@standard-software/parts - npm
+https://www.npmjs.com/package/@standard-software/parts
+
+
+## Install
+
+### npm install
+    npm i @standard-software/parts
+
+
+### How to use type CommonJS
+
+```
+// index.js
+const parts = require("@standard-software/parts");
+
+console.log(
+  'parts version is ', parts.VERSION
+);
+```
+    node index.js
+
+### How to use type ES Modules
+
+```
+// index.mjs
+import parts from '@standard-software/parts';
+
+console.log(
+  'parts version is ', parts.VERSION
+);
+```
+    node --experimental-modules index.mjs
+
 ## Version
+
+### 0.2.2
+#### 2019/08/30(Fri)
+- Document update
 
 ### 0.2.1
 #### 2019/08/29(Thu)
@@ -23,3 +68,5 @@ JavaScript Code Parts
     test_code/test_index.js
     source_code/index.js
 
+### More Info
+[VERSION.md](./VERSION.md)
