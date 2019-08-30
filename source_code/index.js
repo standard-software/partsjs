@@ -1,11 +1,15 @@
-const parts = {};
+const type = require('./type.js');
 
-parts.VERSION = '0.2.2 beta';
+const VERSION = '0.2.2 beta';
 
-parts.test_babel = () => {
+const test_babel = () => {
   const array = [1, 2, 3];
-  console.log(array.map(n => n ** 2));
+  return array.map(n => n ** 2);
 };
 
-module.exports = parts;
+module.exports = {
+  VERSION,
+  test_babel,
+  type,
+};
 

@@ -1,13 +1,18 @@
 "use strict";
 
-var parts = {};
-parts.VERSION = '0.2.2 beta';
+var type = require('./type.js');
 
-parts.test_babel = function () {
+var VERSION = '0.2.2 beta';
+
+var test_babel = function test_babel() {
   var array = [1, 2, 3];
-  console.log(array.map(function (n) {
+  return array.map(function (n) {
     return Math.pow(n, 2);
-  }));
+  });
 };
 
-module.exports = parts;
+module.exports = {
+  VERSION: VERSION,
+  test_babel: test_babel,
+  type: type
+};

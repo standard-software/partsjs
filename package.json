@@ -6,7 +6,9 @@
   "main": "./source_code/index.js",
   "scripts": {
     "babel": "./node_modules/.bin/babel ./source_code --out-dir ./debug_build",
-    "start": "node ./test_code/test_index.js",
+    "test:source": "node ./test_code/source/test_index.js",
+    "test:debug": "node ./test_code/debug/test_index.js",
+    "start": "npm run test:source",
     "test": ""
   },
   "repository": {
