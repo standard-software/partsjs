@@ -2,9 +2,11 @@
 
 var type = require('./type.js');
 
-var VERSION = '0.2.2';
+var test = require('./test.js');
 
-var test_babel = function test_babel() {
+var VERSION = '0.2.3 beta';
+
+var test_babel_transpile = function test_babel_transpile() {
   var array = [1, 2, 3];
   return array.map(function (n) {
     return Math.pow(n, 2);
@@ -13,6 +15,7 @@ var test_babel = function test_babel() {
 
 module.exports = {
   VERSION: VERSION,
-  test_babel: test_babel,
-  type: type
+  test_babel_transpile: test_babel_transpile,
+  type: type,
+  test: test
 };

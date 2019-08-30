@@ -1,8 +1,27 @@
 const parts = require('../../debug_build/index.js');
 
-console.log(parts.VERSION);
-console.log(parts.test_babel());
-var valueA;
-console.log(parts.type._isUndefined(valueA));
-var valueA = 'valA';
-console.log(parts.type._isUndefined(valueA));
+const {
+  test_isUndefined,
+  test_isNull,
+  test_isBoolean,
+  test_isNumber,
+  test_isInteger,
+  test_isString,
+  test_isObject,
+  test_isArray,
+  test_isDate,
+  test_isExcection,
+} = require('./test_type.js');
+
+console.log('test start', parts.VERSION);
+test_isUndefined();
+test_isNull();
+test_isBoolean();
+test_isNumber();
+test_isInteger();
+test_isString();
+test_isObject();
+test_isArray();
+test_isDate();
+test_isExcection();
+console.log('test finish.');
