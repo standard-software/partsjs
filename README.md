@@ -4,11 +4,11 @@ JavaScript Code Parts
 ## URL
 
 ### GitHub
-standard-software/partsjs: JavaScript Code Parts
+standard-software/partsjs: JavaScript Code Parts  
 https://github.com/standard-software/partsjs
 
 ### npm
-@standard-software/parts - npm
+@standard-software/parts - npm  
 https://www.npmjs.com/package/@standard-software/parts
 
 
@@ -64,6 +64,7 @@ console.log(
   - OtherTypeCheck
     - isException
   - For Each isNotXxx isXxxArrayVersion isNotXxxArray
+- add TestCode TypeCheck (test_type.js)
 
 ### 0.2.2
 #### 2019/08/30(Fri)
