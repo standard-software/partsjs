@@ -3,6 +3,10 @@ JavaScript Code Parts
 
 ## Version
 
+### 0.2.1
+#### 2019/08/29(Thu)
+- repair version number miss
+
 ### 0.2.0
 #### 2019/08/29(Thu)
 - babel 7 install
