@@ -4,7 +4,7 @@ var type = require('./type.js');
 
 var test = require('./test.js');
 
-var VERSION = '0.2.3';
+var VERSION = '0.3.0 beta';
 
 var test_babel_transpile = function test_babel_transpile() {
   var array = [1, 2, 3];

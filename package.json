@@ -9,6 +9,7 @@
     "webpack": "./node_modules/.bin/webpack",
     "test:source": "node ./test_code/source/test_index.js",
     "test:debug": "node ./test_code/debug/test_index.js",
+    "test:release": "node ./test_code/release/test_index.js",
     "start": "npm run test:source",
     "test": ""
   },
