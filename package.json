@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@standard-software/parts",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "JavaScript Code Parts",
   "main": "./source_code/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "test:source": "node ./test_code/source/test_index.js",
     "test:debug": "node ./test_code/debug/test_index.js",
     "test:release": "node ./test_code/release/test_index.js",
-    "start": "npm run test:source",
+    "start": "npm run babel && npm run webpack && npm run test:source && npm run test:debug && npm run test:release",
     "test": ""
   },
   "repository": {
