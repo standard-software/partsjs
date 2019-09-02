@@ -11,6 +11,7 @@
 <script>
   var module = {};
   var parts;
+  var test;
 </script>
 
 <script src="../../release_build/parts.js"></script>
@@ -27,7 +28,7 @@
 
   document.write('test start ', parts.VERSION);
   document.write('<br>')
-  test_execute_type(parts);
+  test.test_execute_type(parts);
   document.write('test finish.');
   document.write('<br>')
 
