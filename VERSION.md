@@ -2,8 +2,14 @@
 
 ## Version
 
+### 0.4.0
+#### 2019/09/01(Sun)
+- for web
+  /test_code/release_web/test_index.html
+- update document
+
 ### 0.3.0
-#### 2019/08/30(Fri)
+#### 2019/08/31(Sat)
 - webpack ver4.x install
 - change test code file structure
 

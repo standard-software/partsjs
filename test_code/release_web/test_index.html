@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>test_index.html</title>
+
+</head>
+<body>
+  test_index.html<br><br>
+
+<script>
+  var module = {};
+  var parts;
+</script>
+
+<script src="../../release_build/parts.js"></script>
+<script>
+  parts = module.exports;
+</script>
+<script src="../test_type.js"></script>
+<script>
+  test = module.exports;
+
+  document.write('parts version is ' + parts.VERSION)
+  document.write('<br>')
+  document.write('<br>')
+
+  document.write('test start ', parts.VERSION);
+  document.write('<br>')
+  test_execute_type(parts);
+  document.write('test finish.');
+  document.write('<br>')
+
+</script>
+
+</body>
+</html>

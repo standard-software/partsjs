@@ -11,14 +11,12 @@ https://github.com/standard-software/partsjs
 @standard-software/parts - npm  
 https://www.npmjs.com/package/@standard-software/parts
 
-
-## Install
+## How to use Node.js
 
 ### npm install
     npm i @standard-software/parts
 
-
-### How to use type CommonJS
+### type CommonJS
 
 ```
 // index.js
@@ -30,7 +28,7 @@ console.log(
 ```
     node index.js
 
-### How to use type ES Modules
+## type ES Modules
 
 ```
 // index.mjs
@@ -44,8 +42,14 @@ console.log(
 
 ## Version
 
+### 0.4.0
+#### 2019/09/01(Sun)
+- support web html
+  /test_code/release_web/test_index.html
+- update document
+
 ### 0.3.0
-#### 2019/08/30(Fri)
+#### 2019/08/31(Sat)
 - webpack ver4.x install
 - change test code file structure
 
