@@ -14,7 +14,7 @@
 
 ]]>
 </script>
-<script language="JavaScript" src="./test_type.js"></script>
+<script language="JavaScript" src="../../debug_build/type.test.js"></script>
 <script language="JavaScript">
 <![CDATA[
   var test = module.exports;
