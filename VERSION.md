@@ -2,6 +2,10 @@
 
 ## Version
 
+### 0.4.1
+#### 2019/09/02(Mon)
+- update document "How to use HTML Page"
+
 ### 0.4.0
 #### 2019/09/01(Sun)
 - for web

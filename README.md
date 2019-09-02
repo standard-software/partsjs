@@ -40,7 +40,36 @@ console.log(
 ```
     node --experimental-modules index.mjs
 
+## How to use HTML Page
+
+### refer to example
+part.js/test_code/release_web/test_index.html
+
+### HTML file
+
+```
+<script>
+  var module = {};
+  var parts;
+</script>
+
+<script src="./release_build/parts.js"></script>
+<script>
+  parts = module.exports;
+</script>
+<script>
+  document.write('parts version is ' + parts.VERSION)
+</script>
+```
+
+You can now use the functions of the parts object.
+
+
 ## Version
+
+### 0.4.1
+#### 2019/09/02(Mon)
+- update document "How to use HTML Page"
 
 ### 0.4.0
 #### 2019/09/01(Sun)
