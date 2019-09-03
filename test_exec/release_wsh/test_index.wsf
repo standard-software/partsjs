@@ -16,6 +16,7 @@
 </script>
 <script language="JavaScript" src="../../debug_build/index.test.js"></script>
 <script language="JavaScript" src="../../debug_build/type.test.js"></script>
+<script language="JavaScript" src="../../debug_build/syntax.test.js"></script>
 <script language="JavaScript">
 <![CDATA[
   var test = module.exports;
@@ -30,7 +31,8 @@
   };
   var require = function() {
     return {
-      test_execute_type: test_execute_type
+      test_execute_type: test_execute_type,
+      test_execute_syntax: test_execute_syntax
     };
   };
 

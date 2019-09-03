@@ -1,5 +1,6 @@
 const type = require('./type.js');
 const test = require('./test.js');
+const syntax = require('./syntax.js')
 
 const VERSION = '0.6.0 beta';
 
@@ -13,5 +14,6 @@ module.exports = {
   test_babel_transpile,
   type,
   test,
+  syntax,
 };
 
