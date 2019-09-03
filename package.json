@@ -7,9 +7,9 @@
   "scripts": {
     "babel": "./node_modules/.bin/babel ./source_code --out-dir ./debug_build",
     "webpack": "./node_modules/.bin/webpack --config ./webpack_config/webpack.config.js",
-    "test:source": "node ./test_code/source/test_index.js",
-    "test:debug": "node ./test_code/debug/test_index.js",
-    "test:release": "node ./test_code/release/test_index.js",
+    "test:source": "node ./test_exec/source/test_index.js",
+    "test:debug": "node ./test_exec/debug/test_index.js",
+    "test:release": "node ./test_exec/release/test_index.js",
     "start": "npm run babel && npm run webpack && npm run test:source && npm run test:debug && npm run test:release",
     "test": ""
   },
