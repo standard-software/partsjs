@@ -5,21 +5,34 @@
 <![CDATA[
   var module = {};
   var parts;
+  var SyntaxError = Error;
 ]]>
 </script>
 <script language="JavaScript" src="../../release_build/parts.js"></script>
 <script language="JavaScript">
 <![CDATA[
   var parts = module.exports;
-
 ]]>
 </script>
+<script language="JavaScript" src="../../debug_build/index.test.js"></script>
 <script language="JavaScript" src="../../debug_build/type.test.js"></script>
 <script language="JavaScript">
 <![CDATA[
   var test = module.exports;
 
   var outputMessage = '';
+
+  var console = {
+    log: function(value) {
+      outputMessage += value;
+      outputMessage += '\n'
+    }
+  };
+  var require = function() {
+    return {
+      test_execute_type: test_execute_type
+    };
+  };
 
   outputMessage += 'test_index.wsf';
   outputMessage += '\n'
@@ -29,13 +42,7 @@
   outputMessage += '\n'
   outputMessage += '\n'
 
-  outputMessage += 'test start ' + parts.VERSION
-  outputMessage += '\n'
-
-  test.test_execute_type(parts);
-
-  outputMessage += 'test finish.'
-  outputMessage += '\n'
+  test_execute_index(parts);
 
   WScript.Echo(outputMessage);
 

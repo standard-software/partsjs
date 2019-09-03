@@ -1,9 +1,7 @@
 const parts = require('../../source_code/index.js');
 
 const {
-  test_execute_type,
-} = require('../../source_code/type.test.js');
+  test_execute_index,
+} = require('../../source_code/index.test.js');
 
-console.log('test start', parts.VERSION);
-test_execute_type(parts);
-console.log('test finish.');
+test_execute_index(parts);
