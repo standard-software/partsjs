@@ -43,7 +43,7 @@ console.log(
 ## How to use HTML Page
 
 ### refer to example
-part.js/test_code/release_web/test_index.html
+part.js/test_exec/release_web/test_index.html
 
 ### HTML file
 
@@ -64,8 +64,49 @@ part.js/test_code/release_web/test_index.html
 
 You can now use the functions of the parts object.
 
+## How to use WSH .wsf file
+
+### refer to example
+part.js/test_exec/release_wsh/test_index.wsf
+
+### wsf file (ex. index.wsf)
+
+```
+<?xml version="1.0" encoding="shift-jis" ?>
+
+<job>
+<script language="JavaScript">
+<![CDATA[
+  var module = {};
+  var parts;
+]]>
+</script>
+<script language="JavaScript" src="../../release_build/parts.js"></script>
+<script language="JavaScript">
+<![CDATA[
+  var parts = module.exports;
+
+  var outputMessage = '';
+  outputMessage += 'parts version is ' + parts.VERSION;
+  WScript.Echo(outputMessage);
+
+]]>
+</script>
+</job>
+```
+
+You can now use the functions of the parts object.
+
 
 ## Version
+
+### 0.5.0
+#### 2019/09/02(Mon)
+- support wsh(Windows Scripting Host)
+  /test_exec/release_wsh/test_index.html
+- Rename folder test_code/ >> test_exec
+- Uninstall @babel/polyfill
+- update document "How to use WSH .wsf file"
 
 ### 0.4.1
 #### 2019/09/02(Mon)

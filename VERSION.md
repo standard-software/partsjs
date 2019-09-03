@@ -2,6 +2,13 @@
 
 ## Version
 
+### 0.5.0
+#### 2019/09/02(Mon)
+- support wsh(Windows Scripting Host)
+  /test_exec/release_wsh/test_index.html
+- Rename folder test_code/ >> test_exec
+- Uninstall @babel/polyfill
+
 ### 0.4.1
 #### 2019/09/02(Mon)
 - update document "How to use HTML Page"
