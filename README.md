@@ -43,7 +43,7 @@ console.log(
 ## How to use HTML Page
 
 ### refer to example
-part.js/test_exec/release_web/test_index.html
+partjs/test_exec/release_web/test_index.html
 
 ### HTML file
 
@@ -67,7 +67,7 @@ You can now use the functions of the parts object.
 ## How to use WSH .wsf file
 
 ### refer to example
-part.js/test_exec/release_wsh/test_index.wsf
+partjs/test_exec/release_wsh/test_index.wsf
 
 ### wsf file (ex. index.wsf)
 
@@ -99,6 +99,11 @@ You can now use the functions of the parts object.
 
 
 ## Version
+
+### 0.7.0
+#### 2019/09/04(Wed)
+- add compare.js
+  - equal, or, match, matchValue, defaultValue,
 
 ### 0.6.1
 #### 2019/09/04(Wed)

@@ -5,6 +5,7 @@ const {
   _isUndefined,
   _isException,
 } = require('./type.js');
+
 const {
   guard,
 } = require('./syntax.js');
