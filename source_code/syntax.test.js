@@ -33,6 +33,7 @@ const test_execute_syntax = (parts) => {
 
   const {
     guard,
+    sc,
   } = parts.syntax;
 
   const test_guard = function () {
@@ -289,27 +290,11 @@ const test_execute_syntax = (parts) => {
 
   };
 
-  const test_isThrown = function() {
-    checkEqual(true, isThrown(function() { throw 1; }, function(throwValue) { return throwValue === 1; }));
-    checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue !== 1; }));
-    checkEqual(false, isThrown(function() { throw 2; }, function(throwValue) { return throwValue === 1; }));
-    checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue === '1'; }));
-    checkEqual(true, isThrown(function() { throw '1'; }, function(throwValue) { return throwValue === '1'; }));
-    checkEqual(true, isThrown(function() { throw ''; }, function(throwValue) { return throwValue === ''; }));
-    checkEqual(true, isThrown(function() { throw { test: 'TEST' }; }, function(throwValue) { return throwValue.test === 'TEST'; }));
-    checkEqual(false, isThrown(function() { throw { test: 'TEST' }; }, function(throwValue) { return throwValue.test === 'test'; }));
 
-    checkEqual(false, isThrown(function() { }, function() { }));
 
-    checkEqual(true, isThrown(function() { throw 1; }));
-    checkEqual(true, isThrown(function() { throw '1'; }));
-    checkEqual(false, isThrown(function() {  }));
-  };
-
-  console.log('test syntax start.');
+  console.log('  test syntax.js start.');
   test_guard();
-  test_isThrown();
-  console.log('test syntax finish.');
+  console.log('  test syntax.js finish.');
 }
 
 module.exports = {

@@ -357,7 +357,7 @@ const test_execute_type = (parts) => {
     checkEqual(true, isException(new UserException('message')));
   };
 
-  console.log('test type start.');
+  console.log('  test type.js start.');
   test_isUndefined();
   test_isNull();
   test_isBoolean();
@@ -369,7 +369,7 @@ const test_execute_type = (parts) => {
   test_isArray();
   test_isDate();
   test_isExcection();
-  console.log('test type finish.');
+  console.log('  test type.js finish.');
 }
 
 module.exports = {
