@@ -1,11 +1,19 @@
 const type = require('./type.js');
 
 const {
+  _isUndefined,
+  _isNull,
+  _isNaNStrict,
   _isBoolean,
+  _isNumber,
+  _isInteger,
   _isString,
   _isFunction,
+  _isObject,
   _isArray,
-  _isUndefined,
+  _isDate,
+  _isRegExp,
+  _isError,
   _isException,
 } = type;
 
@@ -113,14 +121,14 @@ const sc = (
  * if_
  */
 const if_ = (condition) => {
-  if (!isBoolean(condition)) {
+  if (!_isBoolean(condition)) {
     throw new TypeError('if_ args(condition) type is not boolean.');
   }
   const checkSyntax = (args) => {
-    if (!isObject(args)) {
+    if (!_isObject(args)) {
       throw new SyntaxError('if_() args type is not object.');
     }
-    if (isUndefined(args.then) && isUndefined(args.else)) {
+    if (_isUndefined(args.then) && _isUndefined(args.else)) {
       throw new SyntaxError('if_() args .then .else both nothing.');
     }
   };
@@ -142,21 +150,21 @@ const if_ = (condition) => {
  */
 const switch_ = (expression) => {
   return (args) => {
-    if (!isArray(args)) {
+    if (!_isArray(args)) {
       throw new SyntaxError('switch_() args type is not array.');
     }
     for (let i = 0; i < args.length; i += 1) {
-      // 配列の [a,b,] の最終カンマ対策
-      if ((i === args.length - 1) && copipe.isUndefined(args[i])) {
+      // support for wsh last comma in Array. [a,b,]
+      if ((i === args.length - 1) && _isUndefined(args[i])) {
         continue;
       }
-      if (!isArray(args[i])) {
+      if (!_isArray(args[i])) {
         throw new SyntaxError('switch_() args type is not array in array.');
       }
     }
     for (let i = 0; i < args.length; i += 1) {
-      // 配列の [a,b,] の最終カンマ対策
-      if ((i === args.length - 1) && copipe.isUndefined(args[i])) {
+      // support for wsh last comma in Array. [a,b,]
+      if ((i === args.length - 1) && _isUndefined(args[i])) {
         continue;
       }
       if (args[i].length === 0) { return undefined; }

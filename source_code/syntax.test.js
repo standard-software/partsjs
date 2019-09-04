@@ -34,6 +34,8 @@ const test_execute_syntax = (parts) => {
   const {
     guard,
     sc,
+    if_,
+    switch_,
   } = parts.syntax;
 
   const test_guard = function () {
@@ -290,10 +292,150 @@ const test_execute_syntax = (parts) => {
 
   };
 
+  const test_sc = () => {
+    // checkEqual(true, sc(1, equal, 1));
+    // checkEqual(false, sc(1, equal, 2));
 
+    // checkEqual(true, sc(1, or, [1, 2]));
+    // checkEqual(false, sc(0, or, [1, 2]));
+  };
+
+  const test_if_ = function () {
+    var ifResultValue = {
+      then: 'THEN',
+      else: 'ELSE',
+    };
+    checkEqual('THEN', if_(true)(ifResultValue));
+    checkEqual('ELSE', if_(false)(ifResultValue));
+
+    var ifResultFunc = {
+      then: function() { return 'THEN'; },
+      else: function() { return 'ELSE'; },
+    };
+    checkEqual('THEN', if_(true)(ifResultFunc));
+    checkEqual('ELSE', if_(false)(ifResultFunc));
+
+    var ifThenValue = {
+      then: 'THEN',
+    };
+    checkEqual('THEN', if_(true)(ifThenValue));
+    checkEqual(undefined, if_(false)(ifThenValue));
+
+    var ifElseValue = {
+      else: 'ELSE',
+    };
+    checkEqual(undefined, if_(true)(ifElseValue));
+    checkEqual('ELSE', if_(false)(ifElseValue));
+
+    var ifThenFunc = {
+      then: function() { return 'THEN'; },
+    };
+    checkEqual('THEN', if_(true)(ifThenFunc));
+    checkEqual(undefined, if_(false)(ifThenFunc));
+
+    var ifElseFunc = {
+      else: function() { return 'ELSE'; },
+    };
+    checkEqual(undefined, if_(true)(ifElseFunc));
+    checkEqual('ELSE', if_(false)(ifElseFunc));
+
+    // Error
+    checkEqual(true, isThrownException(
+      function() { if_(true)(); },
+      (new SyntaxError).name
+    ));
+
+    checkEqual(true, isThrownException(
+      function() { if_(true)({}); },
+      (new SyntaxError).name
+    ));
+
+    checkEqual(true, isThrownException(
+      function() { if_(true)({ thenn: '' }); },
+      (new SyntaxError).name
+    ));
+
+    checkEqual(false, isNotThrown(
+      function() { if_(true)(); }
+    ));
+    checkEqual(true, isNotThrown(
+      function() { if_(true)({ then: '' }); }
+    ));
+  };
+
+  const test_switch_ = function () {
+    var switchResultValue1 = [
+      [1, 'number 1'],
+      ['1', 'string 1'],
+    ];
+    checkEqual('number 1', switch_(1)(switchResultValue1));
+    checkEqual('string 1', switch_('1')(switchResultValue1));
+    checkEqual(undefined, switch_(2)(switchResultValue1));
+
+    var switchResultValue2 = [
+      [1, 'number 1'],
+      ['1', 'string 1'],
+      ['default'],
+    ];
+    checkEqual('number 1', switch_(1)(switchResultValue2));
+    checkEqual('string 1', switch_('1')(switchResultValue2));
+    checkEqual('default', switch_(2)(switchResultValue2));
+
+    var switchResultValue3 = [
+      [1, 'number 1'],
+      ['1', 'string 1'],
+      [],
+    ];
+    checkEqual('number 1', switch_(1)(switchResultValue3));
+    checkEqual('string 1', switch_('1')(switchResultValue3));
+    checkEqual(undefined, switch_(2)(switchResultValue3));
+
+    // Error
+    var switchResultValue4 = [
+      [1, '1'],
+      'default'
+    ];
+    checkEqual(true, isThrownException(
+      function() { switch_(1)(switchResultValue4); },
+      (new SyntaxError).name
+    ));
+    checkEqual(true, isThrownException(
+      function() { switch_(2)(switchResultValue4); },
+      (new SyntaxError).name
+    ));
+
+    var switchResultFunc1 = [
+      [1, function() { return 'number 1'; }],
+      ['1', function() { return 'string 1'; }],
+    ];
+    checkEqual('number 1', switch_(1)(switchResultFunc1));
+    checkEqual('string 1', switch_('1')(switchResultFunc1));
+    checkEqual(undefined, switch_(2)(switchResultFunc1));
+
+    var switchResultFunc2 = [
+      [1, function() { return 'number 1'; }],
+      ['1', function() { return 'string 1'; }],
+      [function() { return 'default'; }],
+    ];
+    checkEqual('number 1', switch_(1)(switchResultFunc2));
+    checkEqual('string 1', switch_('1')(switchResultFunc2));
+    checkEqual('default', switch_(2)(switchResultFunc2));
+
+    var switchResultFunc3 = [
+      [1, 'number 1'],
+      ['1', 'string 1'],
+      [function() { }],
+    ];
+    checkEqual('number 1', switch_(1)(switchResultFunc3));
+    checkEqual('string 1', switch_('1')(switchResultFunc3));
+    checkEqual(undefined, switch_(2)(switchResultFunc3));
+  };
 
   console.log('  test syntax.js start.');
   test_guard();
+  test_sc();
+  test_if_();
+  test_switch_();
   console.log('  test syntax.js finish.');
 }
 
