@@ -372,6 +372,20 @@ var test_execute_type = function test_execute_type(parts) {
 
     checkEqual(true, isException(new UserException('message')));
   };
+
+  console.log('test type start.');
+  test_isUndefined();
+  test_isNull();
+  test_isBoolean();
+  test_isNumber();
+  test_isInteger();
+  test_isString();
+  test_isFunction();
+  test_isObject();
+  test_isArray();
+  test_isDate();
+  test_isExcection();
+  console.log('test type finish.');
 };
 
 module.exports = {

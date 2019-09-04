@@ -4,7 +4,9 @@ var type = require('./type.js');
 
 var test = require('./test.js');
 
-var VERSION = '0.5.0';
+var syntax = require('./syntax.js');
+
+var VERSION = '0.6.0 beta';
 
 var test_babel_transpile = function test_babel_transpile() {
   var array = [1, 2, 3];
@@ -17,5 +19,6 @@ module.exports = {
   VERSION: VERSION,
   test_babel_transpile: test_babel_transpile,
   type: type,
-  test: test
+  test: test,
+  syntax: syntax
 };
