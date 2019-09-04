@@ -8,6 +8,8 @@ var syntax = require('./syntax.js');
 
 var compare = require('./compare.js');
 
+var polyfill = require('./polyfill.js');
+
 var VERSION = '0.7.0 beta';
 module.exports = {
   VERSION: VERSION,
