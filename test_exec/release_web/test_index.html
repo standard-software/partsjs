@@ -18,19 +18,38 @@
 <script>
   parts = module.exports;
 </script>
+<script src="../../debug_build/index.test.js"></script>
 <script src="../../debug_build/type.test.js"></script>
+<script src="../../debug_build/syntax.test.js"></script>
 <script>
-  test = module.exports;
 
-  document.write('parts version is ' + parts.VERSION)
-  document.write('<br>')
-  document.write('<br>')
+  var outputMessage = '';
 
-  document.write('test start ', parts.VERSION);
-  document.write('<br>')
-  test.test_execute_type(parts);
-  document.write('test finish.');
-  document.write('<br>')
+  var console = {
+    log: function(value) {
+      outputMessage += value;
+      outputMessage += '\n<br>\n'
+    }
+  };
+  var require = function() {
+    return {
+      test_execute_type: test_execute_type,
+      test_execute_syntax: test_execute_syntax
+    };
+  };
+
+  outputMessage += 'test_index.html';
+  outputMessage += '<br>\n'
+  outputMessage += '<br>\n'
+  
+  outputMessage += 'parts version is ' + parts.VERSION;
+  outputMessage += '<br>\n'
+  outputMessage += '<br>\n'
+
+  test_execute_index(parts);
+
+  document.write(outputMessage);
+
 
 </script>
 

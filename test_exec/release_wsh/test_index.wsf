@@ -19,7 +19,6 @@
 <script language="JavaScript" src="../../debug_build/syntax.test.js"></script>
 <script language="JavaScript">
 <![CDATA[
-  var test = module.exports;
 
   var outputMessage = '';
 
