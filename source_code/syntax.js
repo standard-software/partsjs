@@ -6,8 +6,12 @@ const {
   _isFunction,
   _isArray,
   _isUndefined,
+  _isException,
 } = type;
 
+/**
+ * assert
+ */
 const assert = (value, message = '') => {
   if (!_isBoolean(value)) {
     throw new TypeError('assert args1(value) type is not boolean. message:' + message);
@@ -20,6 +24,9 @@ const assert = (value, message = '') => {
   }
 };
 
+/**
+ * guard
+ */
 let guard_status = true;
 let guard_message;
 const guard = (guardFunc, runFunc) => {
@@ -38,7 +45,7 @@ const guard = (guardFunc, runFunc) => {
     if ((i === result.length - 1) && _isUndefined(result[i])) {
       continue;
     }
-    let resultValue;
+    let resultValue = undefined;
     let message = '';
     if (_isArray(result[i])) {
       if (!(1 <= result[i].length)) {
@@ -80,6 +87,9 @@ guard.off = () => {
   guard_status = false;
 };
 
+/**
+ * function Value
+ */
 const functionValue = (value) => {
   if (_isFunction(value)) {
     return value();
@@ -88,7 +98,82 @@ const functionValue = (value) => {
   }
 };
 
+/**
+ * isThrown isThrownValue isThrownException isNotThrown
+ */
+const isThrown = (
+  targetFunc,
+  compareFunc
+) => {
+  guard(() => [
+    [
+      _isFunction(targetFunc),
+      'isThrown args1(targetFunc) type is not function.'
+    ],
+    [
+      _isFunction(compareFunc) || _isUndefined(compareFunc),
+      'isThrown args2(compareFunc) type is not function or undefined.'
+    ]
+  ], () => {
+    throw new SyntaxError(guard.message());
+  });
+  try {
+    targetFunc();
+  } catch (e) {
+    if (_isUndefined(compareFunc)) { return true; }
+    return compareFunc(e);
+  }
+  return false;
+};
+
+const isThrownValue = (
+  targetFunc,
+  thrownValue
+) => {
+  return isThrown(
+    targetFunc,
+    (thrown) => {
+      return thrown === thrownValue;
+    }
+  );
+};
+
+const isThrownException = (
+  targetFunc,
+  exceptionName,
+) => {
+  guard(() => [
+    [
+      _isUndefined(exceptionName) || _isString(exceptionName),
+      'isThrownException args2(exceptionName) type is not string.'
+    ],
+  ], () => {
+    throw new SyntaxError(guard.message());
+  });
+
+  return isThrown(
+    targetFunc,
+    (thrown) => {
+      if (_isException(thrown)) {
+        if (_isUndefined(exceptionName)) {
+          return true;
+        }
+        return thrown.name === exceptionName;
+      }
+      return false;
+    }
+  );
+};
+
+const isNotThrown = (targetFunc) => {
+  return !isThrown(targetFunc, () => true);
+};
+
 module.exports = {
   assert,
   guard,
+  isThrown,
+  isThrownValue,
+  isThrownException,
+  isNotThrown,
 };
