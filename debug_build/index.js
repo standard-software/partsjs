@@ -6,7 +6,7 @@ var test = require('./test.js');
 
 var syntax = require('./syntax.js');
 
-var VERSION = '0.6.0';
+var VERSION = '0.6.1 beta';
 
 var test_babel_transpile = function test_babel_transpile() {
   var array = [1, 2, 3];

@@ -2,11 +2,19 @@
 
 var type = require('./type.js');
 
-var _isBoolean = type._isBoolean,
+var _isUndefined = type._isUndefined,
+    _isNull = type._isNull,
+    _isNaNStrict = type._isNaNStrict,
+    _isBoolean = type._isBoolean,
+    _isNumber = type._isNumber,
+    _isInteger = type._isInteger,
     _isString = type._isString,
     _isFunction = type._isFunction,
+    _isObject = type._isObject,
     _isArray = type._isArray,
-    _isUndefined = type._isUndefined,
+    _isDate = type._isDate,
+    _isRegExp = type._isRegExp,
+    _isError = type._isError,
     _isException = type._isException;
 /**
  * assert
@@ -127,66 +135,98 @@ var functionValue = function functionValue(value) {
   }
 };
 /**
- * isThrown isThrownValue isThrownException isNotThrown
+ * sc (second call)
  */
 
 
-var isThrown = function isThrown(targetFunc, compareFunc) {
-  guard(function () {
-    return [[_isFunction(targetFunc), 'isThrown args1(targetFunc) type is not function.'], [_isFunction(compareFunc) || _isUndefined(compareFunc), 'isThrown args2(compareFunc) type is not function or undefined.']];
-  }, function () {
-    throw new SyntaxError(guard.message());
-  });
-
-  try {
-    targetFunc();
-  } catch (e) {
-    if (_isUndefined(compareFunc)) {
-      return true;
-    }
-
-    return compareFunc(e);
+var sc = function sc(argsFirst, func) {
+  for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    argsRest[_key - 2] = arguments[_key];
   }
 
-  return false;
+  return func.apply(void 0, [argsFirst].concat(argsRest));
 };
+/**
+ * if_
+ */
 
-var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
-  return isThrown(targetFunc, function (thrown) {
-    return thrown === thrownValue;
-  });
-};
 
-var isThrownException = function isThrownException(targetFunc, exceptionName) {
-  guard(function () {
-    return [[_isUndefined(exceptionName) || _isString(exceptionName), 'isThrownException args2(exceptionName) type is not string.']];
-  }, function () {
-    throw new SyntaxError(guard.message());
-  });
-  return isThrown(targetFunc, function (thrown) {
-    if (_isException(thrown)) {
-      if (_isUndefined(exceptionName)) {
-        return true;
-      }
+var if_ = function if_(condition) {
+  if (!_isBoolean(condition)) {
+    throw new TypeError('if_ args(condition) type is not boolean.');
+  }
 
-      return thrown.name === exceptionName;
+  var checkSyntax = function checkSyntax(args) {
+    if (!_isObject(args)) {
+      throw new SyntaxError('if_() args type is not object.');
     }
 
-    return false;
-  });
-};
+    if (_isUndefined(args.then) && _isUndefined(args["else"])) {
+      throw new SyntaxError('if_() args .then .else both nothing.');
+    }
+  };
 
-var isNotThrown = function isNotThrown(targetFunc) {
-  return !isThrown(targetFunc, function () {
-    return true;
-  });
+  if (condition) {
+    return function (args) {
+      checkSyntax(args);
+      return functionValue(args.then);
+    };
+  } else {
+    return function (args) {
+      checkSyntax(args);
+      return functionValue(args["else"]);
+    };
+  }
+};
+/**
+ * switch_
+ */
+
+
+var switch_ = function switch_(expression) {
+  return function (args) {
+    if (!_isArray(args)) {
+      throw new SyntaxError('switch_() args type is not array.');
+    }
+
+    for (var i = 0; i < args.length; i += 1) {
+      // support for wsh last comma in Array. [a,b,]
+      if (i === args.length - 1 && _isUndefined(args[i])) {
+        continue;
+      }
+
+      if (!_isArray(args[i])) {
+        throw new SyntaxError('switch_() args type is not array in array.');
+      }
+    }
+
+    for (var _i = 0; _i < args.length; _i += 1) {
+      // support for wsh last comma in Array. [a,b,]
+      if (_i === args.length - 1 && _isUndefined(args[_i])) {
+        continue;
+      }
+
+      if (args[_i].length === 0) {
+        return undefined;
+      }
+
+      if (args[_i].length === 1) {
+        return functionValue(args[_i][0]);
+      }
+
+      if (args[_i][0] === expression) {
+        return functionValue(args[_i][1]);
+      }
+    }
+
+    return undefined;
+  };
 };
 
 module.exports = {
   assert: assert,
   guard: guard,
-  isThrown: isThrown,
-  isThrownValue: isThrownValue,
-  isThrownException: isThrownException,
-  isNotThrown: isNotThrown
+  sc: sc,
+  if_: if_,
+  switch_: switch_
 };
