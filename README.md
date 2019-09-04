@@ -104,6 +104,10 @@ You can now use the functions of the parts object.
 #### 2019/09/04(Wed)
 - add compare.js
   - equal, or, match, matchValue, defaultValue,
+  - add test code for each
+- add polyfill.js
+  - String.includes startsWith endsWith
+  - Array.some map
 
 ### 0.6.1
 #### 2019/09/04(Wed)
