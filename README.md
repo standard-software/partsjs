@@ -100,6 +100,16 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 0.6.0
+#### 2019/09/03(Tue)
+- add syntax.js
+  - assert
+  - guard
+  - functionValue
+  - isThrown isThrownValue isThrownException isNotThrown
+- add syntax.test.js
+- update test code(html, wsf)
+
 ### 0.5.0
 #### 2019/09/02(Mon)
 - support wsh(Windows Scripting Host)

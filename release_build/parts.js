@@ -105,7 +105,7 @@ var test = __webpack_require__(3);
 
 var syntax = __webpack_require__(4);
 
-var VERSION = '0.6.0 beta';
+var VERSION = '0.6.0';
 
 var test_babel_transpile = function test_babel_transpile() {
   var array = [1, 2, 3];

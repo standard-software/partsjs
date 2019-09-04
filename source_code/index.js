@@ -2,7 +2,7 @@ const type = require('./type.js');
 const test = require('./test.js');
 const syntax = require('./syntax.js')
 
-const VERSION = '0.6.0 beta';
+const VERSION = '0.6.0';
 
 const test_babel_transpile = () => {
   const array = [1, 2, 3];
