@@ -99,81 +99,80 @@ const functionValue = (value) => {
 };
 
 /**
- * isThrown isThrownValue isThrownException isNotThrown
+ * sc (second call)
  */
-const isThrown = (
-  targetFunc,
-  compareFunc
+const sc = (
+  argsFirst,
+  func,
+  ...argsRest
 ) => {
-  guard(() => [
-    [
-      _isFunction(targetFunc),
-      'isThrown args1(targetFunc) type is not function.'
-    ],
-    [
-      _isFunction(compareFunc) || _isUndefined(compareFunc),
-      'isThrown args2(compareFunc) type is not function or undefined.'
-    ]
-  ], () => {
-    throw new SyntaxError(guard.message());
-  });
-  try {
-    targetFunc();
-  } catch (e) {
-    if (_isUndefined(compareFunc)) { return true; }
-    return compareFunc(e);
+  return func(argsFirst, ...argsRest);
+};
+
+/**
+ * if_
+ */
+const if_ = (condition) => {
+  if (!isBoolean(condition)) {
+    throw new TypeError('if_ args(condition) type is not boolean.');
   }
-  return false;
-};
-
-const isThrownValue = (
-  targetFunc,
-  thrownValue
-) => {
-  return isThrown(
-    targetFunc,
-    (thrown) => {
-      return thrown === thrownValue;
+  const checkSyntax = (args) => {
+    if (!isObject(args)) {
+      throw new SyntaxError('if_() args type is not object.');
     }
-  );
+    if (isUndefined(args.then) && isUndefined(args.else)) {
+      throw new SyntaxError('if_() args .then .else both nothing.');
+    }
+  };
+  if (condition) {
+    return (args) => {
+      checkSyntax(args);
+      return functionValue(args.then);
+    };
+  } else {
+    return (args) => {
+      checkSyntax(args);
+      return functionValue(args.else);
+    };
+  }
 };
 
-const isThrownException = (
-  targetFunc,
-  exceptionName,
-) => {
-  guard(() => [
-    [
-      _isUndefined(exceptionName) || _isString(exceptionName),
-      'isThrownException args2(exceptionName) type is not string.'
-    ],
-  ], () => {
-    throw new SyntaxError(guard.message());
-  });
-
-  return isThrown(
-    targetFunc,
-    (thrown) => {
-      if (_isException(thrown)) {
-        if (_isUndefined(exceptionName)) {
-          return true;
-        }
-        return thrown.name === exceptionName;
+/**
+ * switch_
+ */
+const switch_ = (expression) => {
+  return (args) => {
+    if (!isArray(args)) {
+      throw new SyntaxError('switch_() args type is not array.');
+    }
+    for (let i = 0; i < args.length; i += 1) {
+      // 配列の [a,b,] の最終カンマ対策
+      if ((i === args.length - 1) && copipe.isUndefined(args[i])) {
+        continue;
       }
-      return false;
+      if (!isArray(args[i])) {
+        throw new SyntaxError('switch_() args type is not array in array.');
+      }
     }
-  );
-};
-
-const isNotThrown = (targetFunc) => {
-  return !isThrown(targetFunc, () => true);
+    for (let i = 0; i < args.length; i += 1) {
+      // 配列の [a,b,] の最終カンマ対策
+      if ((i === args.length - 1) && copipe.isUndefined(args[i])) {
+        continue;
+      }
+      if (args[i].length === 0) { return undefined; }
+      if (args[i].length === 1) { return functionValue(args[i][0]); }
+      if (args[i][0] === expression) {
+        return functionValue(args[i][1]);
+      }
+    }
+    return undefined;
+  };
 };
 
 module.exports = {
   assert,
   guard,
-  isThrown,
-  isThrownValue,
-  isThrownException,
-  isNotThrown,
+  sc,
+  if_,
+  switch_,
 };

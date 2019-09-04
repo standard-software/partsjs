@@ -1,7 +1,11 @@
 const test_execute_syntax = (parts) => {
 
   const {
-    checkEqual
+    checkEqual,
+    isThrown,
+    isThrownValue,
+    isThrownException,
+    isNotThrown,
   } = parts.test;
 
   const {
@@ -29,10 +33,6 @@ const test_execute_syntax = (parts) => {
 
   const {
     guard,
-    isThrown,
-    isThrownValue,
-    isThrownException,
-    isNotThrown,
   } = parts.syntax;
 
   const test_guard = function () {
