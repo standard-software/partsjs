@@ -100,6 +100,12 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 0.6.1
+#### 2019/09/04(Wed)
+- add sc, if_, switch_
+  - add test code for each
+- update test code
+
 ### 0.6.0
 #### 2019/09/03(Tue)
 - add syntax.js
@@ -127,11 +133,6 @@ You can now use the functions of the parts object.
 - support web html
   /test_code/release_web/test_index.html
 - update document
-
-### 0.3.0
-#### 2019/08/31(Sat)
-- webpack ver4.x install
-- change test code file structure
 
 ### More Info
 [VERSION.md](./VERSION.md)

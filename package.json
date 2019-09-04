@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@standard-software/parts",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "JavaScript Code Parts",
   "main": "./source_code/index.js",
   "scripts": {

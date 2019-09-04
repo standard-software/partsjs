@@ -2,6 +2,12 @@
 
 ## Version
 
+### 0.6.1
+#### 2019/09/04(Wed)
+- add sc, if_, switch_
+  - add test code for each
+- update test code
+
 ### 0.6.0
 #### 2019/09/03(Tue)
 - add syntax.js
