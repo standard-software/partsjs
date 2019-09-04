@@ -6,19 +6,13 @@ var test = require('./test.js');
 
 var syntax = require('./syntax.js');
 
-var VERSION = '0.6.1';
+var compare = require('./compare.js');
 
-var test_babel_transpile = function test_babel_transpile() {
-  var array = [1, 2, 3];
-  return array.map(function (n) {
-    return Math.pow(n, 2);
-  });
-};
-
+var VERSION = '0.7.0 beta';
 module.exports = {
   VERSION: VERSION,
-  test_babel_transpile: test_babel_transpile,
   type: type,
   test: test,
-  syntax: syntax
+  syntax: syntax,
+  compare: compare
 };

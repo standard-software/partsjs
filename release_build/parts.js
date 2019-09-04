@@ -105,21 +105,15 @@ var test = __webpack_require__(3);
 
 var syntax = __webpack_require__(4);
 
-var VERSION = '0.6.1';
+var compare = __webpack_require__(5);
 
-var test_babel_transpile = function test_babel_transpile() {
-  var array = [1, 2, 3];
-  return array.map(function (n) {
-    return Math.pow(n, 2);
-  });
-};
-
+var VERSION = '0.7.0 beta';
 module.exports = {
   VERSION: VERSION,
-  test_babel_transpile: test_babel_transpile,
   type: type,
   test: test,
-  syntax: syntax
+  syntax: syntax,
+  compare: compare
 };
 
 /***/ }),
@@ -811,6 +805,152 @@ module.exports = {
   sc: sc,
   if_: if_,
   switch_: switch_
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(2),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isError = _require._isError,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(4),
+    assert = _require2.assert,
+    guard = _require2.guard,
+    if_ = _require2.if_;
+
+var equal = function equal(valueA, valueB) {
+  return valueA === valueB;
+};
+
+var or = function or(value, compareArray) {
+  assert(_isArray(compareArray));
+
+  for (var i = 0; i < compareArray.length; i += 1) {
+    if (value === compareArray[i]) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+var _match = function _match(matchFunc, value, compareArray) {
+  guard(function () {
+    return [[_isArray(compareArray), '_match args2(compareArray) type is not Array.']];
+  }, function () {
+    throw new TypeError(guard.message());
+  });
+
+  if (_isString(value)) {
+    return compareArray.some(function (element) {
+      var result;
+
+      if (_isRegExp(element)) {
+        result = value.match(element) !== null;
+      } else if (_isFunction(element)) {
+        result = element(value);
+      } else {
+        result = matchFunc(value, element);
+      }
+
+      if (!_isBoolean(result)) {
+        throw new SyntaxError('_match args2(compareArray) Array element result is not Boolean.');
+      }
+
+      return result;
+    });
+  } else {
+    return compareArray.some(function (element) {
+      var result;
+
+      if (_isFunction(element)) {
+        result = element(value);
+      } else {
+        result = matchFunc(value, element);
+      }
+
+      if (!_isBoolean(result)) {
+        throw new SyntaxError('_match args2(compareArray) Array element result is not Boolean.');
+      }
+
+      return result;
+    });
+  }
+};
+
+var match = function match(value, compareArray) {
+  var matchFunc = function matchFunc(a, b) {
+    return a === b;
+  };
+
+  var parameter = if_(_isObject(value))({
+    then: value,
+    "else": {
+      value: value,
+      compareArray: compareArray
+    }
+  });
+  return _match(matchFunc, parameter.value, parameter.compareArray);
+};
+
+var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
+  var matchFunc = function matchFunc(a, b) {
+    return a === b;
+  };
+
+  if (_match(matchFunc, value, compareArray)) {
+    return inMatchValue;
+  }
+
+  return value;
+};
+
+var matchValue = function matchValue(value, compareArray, inMatchValue) {
+  var parameter = if_(_isObject(value))({
+    then: value,
+    "else": {
+      value: value,
+      compareArray: compareArray,
+      inMatchValue: inMatchValue
+    }
+  });
+  return _matchValue(parameter.value, parameter.compareArray, parameter.inMatchValue);
+};
+
+var defaultValue = function defaultValue(value, inMatchValue) {
+  var parameter = if_(_isObject(value))({
+    then: value,
+    "else": {
+      value: value,
+      inMatchValue: inMatchValue
+    }
+  });
+  return _matchValue(parameter.value, [_isUndefined, _isNull], parameter.inMatchValue);
+};
+
+module.exports = {
+  equal: equal,
+  or: or,
+  match: match,
+  matchValue: matchValue,
+  defaultValue: defaultValue
 };
 
 /***/ })

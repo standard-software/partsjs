@@ -10,10 +10,14 @@ var test_execute_index = function test_execute_index(parts) {
   var _require3 = require('./test.test.js'),
       test_execute_test = _require3.test_execute_test;
 
+  var _require4 = require('./compare.test.js'),
+      test_execute_compare = _require4.test_execute_compare;
+
   console.log('test start. ' + parts.VERSION);
   test_execute_type(parts);
   test_execute_syntax(parts);
   test_execute_test(parts);
+  test_execute_compare(parts);
   console.log('test finish.');
 };
 
