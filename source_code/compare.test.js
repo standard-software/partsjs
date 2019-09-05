@@ -20,12 +20,11 @@ const test_execute_compare = (parts) => {
     checkEqual(true, equal('1', '1'));
     checkEqual(false, equal('1', 1));
 
-    // args.length exception
-    checkEqual(true, isThrown(
-      () => { equal(1,2,3) },
-      (e) => (e.name === (new SyntaxError).name) && (e.message ===
-        'equal args.length is not 1 or 2.')
-    ));
+    // args.length
+    checkEqual(true, equal(1, 1, 2));
+    checkEqual(false, equal(1, 2, 3));
+    checkEqual(true, equal(undefined, undefined));
+    checkEqual(true, equal(undefined));
 
     // named argument
     checkEqual(true, equal({valueA:1, valueB:1}));

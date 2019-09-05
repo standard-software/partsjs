@@ -28,23 +28,17 @@ const _equal = (valueA, valueB) => {
   return valueA === valueB;
 };
 
-const equal = (...parameter) => {
-  if (parameter.length === 1) {
-    if (
-      (_isObject(parameter[0])) && ('valueA' in parameter[0]) && ('valueB' in parameter[0])
-    ) {
-      return _equal(parameter[0].valueA, parameter[0].valueB);
+const equal = (valueA, valueB) => {
+  if (_isObject(valueA)) {
+    if (('valueA' in valueA) && ('valueB' in valueA)) {
+      return _equal(valueA.valueA, valueA.valueB);
     } else {
       throw new SyntaxError(
         'equal args do not have valueA and valueB property.'
       );
     }
-  } else if (parameter.length === 2) {
-    return _equal(parameter[0], parameter[1]);
   } else {
-    throw new SyntaxError(
-      'equal args.length is not 1 or 2.'
-    );
+    return _equal(valueA, valueB);
   }
 };
 
