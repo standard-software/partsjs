@@ -24,35 +24,56 @@ const {
 /**
  * equal
  */
-const _equal = (valueA, valueB) => {
-  return valueA === valueB;
+const _equal = (value1, value2) => {
+  return value1 === value2;
 };
 
-const equal = (valueA, valueB) => {
-  if (_isObject(valueA)) {
-    if (('valueA' in valueA) && ('valueB' in valueA)) {
-      return _equal(valueA.valueA, valueA.valueB);
+const equal = (value1, value2) => {
+  if (_isObject(value1)) {
+    if (('value1' in value1) && ('value2' in value1)) {
+      return _equal(value1.value1, value1.value2);
     } else {
       throw new SyntaxError(
-        'equal args do not have valueA and valueB property.'
+        'equal args do not have value1 and value2 property.'
       );
     }
   } else {
-    return _equal(valueA, valueB);
+    return _equal(value1, value2);
   }
 };
 
 /**
  * or
  */
-const or = (value, compareArray) => {
-  assert(_isArray(compareArray));
+const _or = (value, compareArray) => {
   for (let i = 0; i < compareArray.length; i += 1) {
     if (value === compareArray[i]) {
       return true;
     }
   }
   return false;
+};
+
+const or = (value, compareArray) => {
+  let param;
+  if (_isObject(value)) {
+    if (('value' in value) && ('compareArray' in value)) {
+      param = value;
+    } else {
+      throw new SyntaxError(
+        'or args do not have value and compareArray property.'
+      );
+    }
+  } else {
+    param = { value, compareArray };
+  }
+
+  if (!_isArray(param.compareArray)) {
+    throw new SyntaxError(
+      'or args2(compareArray) type is not Array.'
+    );
+  }
+  return _or(param.value, param.compareArray)
 };
 
 const _match = (

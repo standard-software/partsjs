@@ -16,26 +16,26 @@ const test_execute_compare = (parts) => {
 
   const test_equal = () => {
     // normal args
-    checkEqual(true, equal(1, 1));
-    checkEqual(true, equal('1', '1'));
-    checkEqual(false, equal('1', 1));
+    checkEqual(true,  equal(  1,   1));
+    checkEqual(true,  equal('1', '1'));
+    checkEqual(false, equal('1',   1));
 
     // args.length
-    checkEqual(true, equal(1, 1, 2));
+    checkEqual(true,  equal(1, 1, 2));
     checkEqual(false, equal(1, 2, 3));
-    checkEqual(true, equal(undefined, undefined));
-    checkEqual(true, equal(undefined));
+    checkEqual(true,  equal(undefined, undefined));
+    checkEqual(true,  equal(undefined));
 
     // named argument
-    checkEqual(true, equal({valueA:1, valueB:1}));
-    checkEqual(true, equal({valueA:'1', valueB:'1'}));
-    checkEqual(false, equal({valueA:'1', valueB:1}));
+    checkEqual(true,  equal({value1:  1, value2:  1}));
+    checkEqual(true,  equal({value1:'1', value2:'1'}));
+    checkEqual(false, equal({value1:'1', value2:  1}));
 
     // named argument property exception
     checkEqual(true, isThrown(
       () => { equal({v1: 123, v2: 123}) },
       (e) => (e.name === (new SyntaxError).name) && (e.message ===
-        'equal args do not have valueA and valueB property.')
+        'equal args do not have value1 and value2 property.')
     ));
   }
 
@@ -68,6 +68,24 @@ const test_execute_compare = (parts) => {
     checkEqual(true, or(value, [1, 2, 3]));
     checkEqual(false, or(value, [2]));
     checkEqual(false, or(value, [2, 3]));
+
+    // exception
+    checkEqual(true, isThrown(
+      () => { or(123, 456) },
+      (e) => (e.name === (new SyntaxError).name) && (e.message ===
+        'or args2(compareArray) type is not Array.')
+    ));
+
+    checkEqual(true,  or({value: 1, compareArray: [1, 2]}))
+    checkEqual(false, or({value: 0, compareArray: [1, 2]}))
+
+    // exception
+    checkEqual(true, isThrown(
+      () => { or({value: 1, array: [1, 2]}) },
+      (e) => (e.name === (new SyntaxError).name) && (e.message ===
+        'or args do not have value and compareArray property.')
+    ));
+
   };
 
   const test_match = () => {
