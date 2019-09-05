@@ -38,6 +38,11 @@ const test_execute_syntax = (parts) => {
     switch_,
   } = parts.syntax;
 
+  const {
+    equal,
+    or,
+  } = parts.compare;
+
   const test_guard = function () {
 
     var guardFunc = () => [
@@ -293,11 +298,14 @@ const test_execute_syntax = (parts) => {
   };
 
   const test_sc = () => {
-    // checkEqual(true, sc(1, equal, 1));
-    // checkEqual(false, sc(1, equal, 2));
+    checkEqual(true, sc(1, equal, 1));
+    checkEqual(false, sc(1, equal, 2));
+    checkEqual(true, sc('1', equal, '1'));
+    checkEqual(false, sc(1, equal, '1'));
+    checkEqual(false, sc('1', equal, 1));
 
-    // checkEqual(true, sc(1, or, [1, 2]));
-    // checkEqual(false, sc(0, or, [1, 2]));
+    checkEqual(true, sc(1, or, [1, 2]));
+    checkEqual(false, sc(0, or, [1, 2]));
   };
 
   const test_if_ = function () {

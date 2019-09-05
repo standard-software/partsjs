@@ -105,6 +105,9 @@ You can now use the functions of the parts object.
 - add compare.js
   - equal, or, match, matchValue, defaultValue,
   - add test code for each
+- equal support named arguemnt
+  - add test code for each
+  - add test_sc
 - add polyfill.js
   - String.includes startsWith endsWith
   - Array.some map

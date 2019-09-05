@@ -210,6 +210,7 @@ var test_execute_compare = function test_execute_compare(parts) {
   };
 
   console.log('  test compare.js start.');
+  test_equal();
   test_or();
   test_match();
   test_matchValue();

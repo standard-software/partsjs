@@ -7,13 +7,40 @@ const test_execute_compare = (parts) => {
   } = parts.test;
 
   const {
+    equal,
     or,
     match,
     matchValue,
     defaultValue,
   } = parts.compare;
 
-  const test_or = function () {
+  const test_equal = () => {
+    // normal args
+    checkEqual(true, equal(1, 1));
+    checkEqual(true, equal('1', '1'));
+    checkEqual(false, equal('1', 1));
+
+    // args.length exception
+    checkEqual(true, isThrown(
+      () => { equal(1,2,3) },
+      (e) => (e.name === (new SyntaxError).name) && (e.message ===
+        'equal args.length is not 1 or 2.')
+    ));
+
+    // named argument
+    checkEqual(true, equal({valueA:1, valueB:1}));
+    checkEqual(true, equal({valueA:'1', valueB:'1'}));
+    checkEqual(false, equal({valueA:'1', valueB:1}));
+
+    // named argument property exception
+    checkEqual(true, isThrown(
+      () => { equal({v1: 123, v2: 123}) },
+      (e) => (e.name === (new SyntaxError).name) && (e.message ===
+        'equal args do not have valueA and valueB property.')
+    ));
+  }
+
+  const test_or = () => {
     var value;
     checkEqual(false, or(value, []));
     checkEqual(false, or(value, [null]));
@@ -181,6 +208,7 @@ const test_execute_compare = (parts) => {
 
 
   console.log('  test compare.js start.');
+  test_equal();
   test_or();
   test_match();
   test_matchValue();
