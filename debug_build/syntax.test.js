@@ -61,6 +61,9 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       sc = _parts$syntax.sc,
       if_ = _parts$syntax.if_,
       switch_ = _parts$syntax.switch_;
+  var _parts$compare = parts.compare,
+      equal = _parts$compare.equal,
+      or = _parts$compare.or;
 
   var test_guard = function test_guard() {
     var guardFunc = function guardFunc() {
@@ -408,10 +411,14 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     }), 'gurad exception args2(runFunc) 2');
   };
 
-  var test_sc = function test_sc() {// checkEqual(true, sc(1, equal, 1));
-    // checkEqual(false, sc(1, equal, 2));
-    // checkEqual(true, sc(1, or, [1, 2]));
-    // checkEqual(false, sc(0, or, [1, 2]));
+  var test_sc = function test_sc() {
+    checkEqual(true, sc(1, equal, 1));
+    checkEqual(false, sc(1, equal, 2));
+    checkEqual(true, sc('1', equal, '1'));
+    checkEqual(false, sc(1, equal, '1'));
+    checkEqual(false, sc('1', equal, 1));
+    checkEqual(true, sc(1, or, [1, 2]));
+    checkEqual(false, sc(0, or, [1, 2]));
   };
 
   var test_if_ = function test_if_() {

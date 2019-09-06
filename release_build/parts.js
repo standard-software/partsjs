@@ -836,14 +836,32 @@ var _require2 = __webpack_require__(4),
     assert = _require2.assert,
     guard = _require2.guard,
     if_ = _require2.if_;
+/**
+ * equal
+ */
 
-var equal = function equal(valueA, valueB) {
-  return valueA === valueB;
+
+var _equal = function _equal(value1, value2) {
+  return value1 === value2;
 };
 
-var or = function or(value, compareArray) {
-  assert(_isArray(compareArray));
+var equal = function equal(value1, value2) {
+  if (_isObject(value1)) {
+    if ('value1' in value1 && 'value2' in value1) {
+      return _equal(value1.value1, value1.value2);
+    } else {
+      throw new SyntaxError('equal args do not have value1 and value2 property.');
+    }
+  } else {
+    return _equal(value1, value2);
+  }
+};
+/**
+ * or
+ */
 
+
+var _or = function _or(value, compareArray) {
   for (var i = 0; i < compareArray.length; i += 1) {
     if (value === compareArray[i]) {
       return true;
@@ -853,13 +871,30 @@ var or = function or(value, compareArray) {
   return false;
 };
 
-var _match = function _match(matchFunc, value, compareArray) {
-  guard(function () {
-    return [[_isArray(compareArray), '_match args2(compareArray) type is not Array.']];
-  }, function () {
-    throw new TypeError(guard.message());
-  });
+var or = function or(value, compareArray) {
+  var param;
 
+  if (_isObject(value)) {
+    if ('value' in value && 'compareArray' in value) {
+      param = value;
+    } else {
+      throw new SyntaxError('or args do not have value and compareArray property.');
+    }
+  } else {
+    param = {
+      value: value,
+      compareArray: compareArray
+    };
+  }
+
+  if (!_isArray(param.compareArray)) {
+    throw new SyntaxError('or args2(compareArray) type is not Array.');
+  }
+
+  return _or(param.value, param.compareArray);
+};
+
+var _match = function _match(value, compareArray) {
   if (_isString(value)) {
     return compareArray.some(function (element) {
       var result;
@@ -869,11 +904,11 @@ var _match = function _match(matchFunc, value, compareArray) {
       } else if (_isFunction(element)) {
         result = element(value);
       } else {
-        result = matchFunc(value, element);
+        result = value === element;
       }
 
       if (!_isBoolean(result)) {
-        throw new SyntaxError('_match args2(compareArray) Array element result is not Boolean.');
+        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
 
       return result;
@@ -885,11 +920,11 @@ var _match = function _match(matchFunc, value, compareArray) {
       if (_isFunction(element)) {
         result = element(value);
       } else {
-        result = matchFunc(value, element);
+        result = value === element;
       }
 
       if (!_isBoolean(result)) {
-        throw new SyntaxError('_match args2(compareArray) Array element result is not Boolean.');
+        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
 
       return result;
@@ -898,10 +933,6 @@ var _match = function _match(matchFunc, value, compareArray) {
 };
 
 var match = function match(value, compareArray) {
-  var matchFunc = function matchFunc(a, b) {
-    return a === b;
-  };
-
   var parameter = if_(_isObject(value))({
     then: value,
     "else": {
@@ -909,19 +940,12 @@ var match = function match(value, compareArray) {
       compareArray: compareArray
     }
   });
-  return _match(matchFunc, parameter.value, parameter.compareArray);
-};
-
-var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
-  var matchFunc = function matchFunc(a, b) {
-    return a === b;
-  };
-
-  if (_match(matchFunc, value, compareArray)) {
-    return inMatchValue;
-  }
-
-  return value;
+  guard(function () {
+    return [[_isArray(parameter.compareArray), 'match args(compareArray) type is not Array.']];
+  }, function () {
+    throw new TypeError(guard.message());
+  });
+  return _match(parameter.value, parameter.compareArray);
 };
 
 var matchValue = function matchValue(value, compareArray, inMatchValue) {
@@ -933,7 +957,12 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
       inMatchValue: inMatchValue
     }
   });
-  return _matchValue(parameter.value, parameter.compareArray, parameter.inMatchValue);
+
+  if (match(parameter.value, parameter.compareArray)) {
+    return parameter.inMatchValue;
+  }
+
+  return parameter.value;
 };
 
 var defaultValue = function defaultValue(value, inMatchValue) {
@@ -944,10 +973,11 @@ var defaultValue = function defaultValue(value, inMatchValue) {
       inMatchValue: inMatchValue
     }
   });
-  return _matchValue(parameter.value, [_isUndefined, _isNull], parameter.inMatchValue);
+  return matchValue(parameter.value, [_isUndefined, _isNull], parameter.inMatchValue);
 };
 
 module.exports = {
+  _equal: _equal,
   equal: equal,
   or: or,
   match: match,

@@ -6,10 +6,45 @@ var test_execute_compare = function test_execute_compare(parts) {
       isThrown = _parts$test.isThrown,
       isThrownException = _parts$test.isThrownException;
   var _parts$compare = parts.compare,
+      equal = _parts$compare.equal,
       or = _parts$compare.or,
       match = _parts$compare.match,
       matchValue = _parts$compare.matchValue,
       defaultValue = _parts$compare.defaultValue;
+
+  var test_equal = function test_equal() {
+    // normal args
+    checkEqual(true, equal(1, 1));
+    checkEqual(true, equal('1', '1'));
+    checkEqual(false, equal('1', 1)); // args.length
+
+    checkEqual(true, equal(1, 1, 2));
+    checkEqual(false, equal(1, 2, 3));
+    checkEqual(true, equal(undefined, undefined));
+    checkEqual(true, equal(undefined)); // named argument
+
+    checkEqual(true, equal({
+      value1: 1,
+      value2: 1
+    }));
+    checkEqual(true, equal({
+      value1: '1',
+      value2: '1'
+    }));
+    checkEqual(false, equal({
+      value1: '1',
+      value2: 1
+    })); // named argument property exception
+
+    checkEqual(true, isThrown(function () {
+      equal({
+        v1: 123,
+        v2: 123
+      });
+    }, function (e) {
+      return e.name === new SyntaxError().name && e.message === 'equal args do not have value1 and value2 property.';
+    }));
+  };
 
   var test_or = function test_or() {
     var value;
@@ -39,7 +74,30 @@ var test_execute_compare = function test_execute_compare(parts) {
     checkEqual(true, or(value, [1, 2]));
     checkEqual(true, or(value, [1, 2, 3]));
     checkEqual(false, or(value, [2]));
-    checkEqual(false, or(value, [2, 3]));
+    checkEqual(false, or(value, [2, 3])); // exception
+
+    checkEqual(true, isThrown(function () {
+      or(123, 456);
+    }, function (e) {
+      return e.name === new SyntaxError().name && e.message === 'or args2(compareArray) type is not Array.';
+    }));
+    checkEqual(true, or({
+      value: 1,
+      compareArray: [1, 2]
+    }));
+    checkEqual(false, or({
+      value: 0,
+      compareArray: [1, 2]
+    })); // exception
+
+    checkEqual(true, isThrown(function () {
+      or({
+        value: 1,
+        array: [1, 2]
+      });
+    }, function (e) {
+      return e.name === new SyntaxError().name && e.message === 'or args do not have value and compareArray property.';
+    }));
   };
 
   var test_match = function test_match() {
@@ -171,6 +229,8 @@ var test_execute_compare = function test_execute_compare(parts) {
         value: '123',
         compareArray: 123
       });
+    }, function (e) {
+      return e.name === new TypeError().name && e.message === 'match args(compareArray) type is not Array.';
     }), 'test_match thrown 4');
   };
 
