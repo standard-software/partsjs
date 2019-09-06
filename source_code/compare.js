@@ -76,19 +76,7 @@ const or = (value, compareArray) => {
   return _or(param.value, param.compareArray)
 };
 
-const _match = (
-  matchFunc,
-  value, compareArray
-) => {
-  guard(() => [
-    [
-      _isArray(compareArray),
-      '_match args2(compareArray) type is not Array.'
-    ],
-  ], () => {
-    throw new TypeError(guard.message());
-  });
-
+const _match = (value, compareArray) => {
   if (_isString(value)) {
     return compareArray.some((element) => {
       let result;
@@ -97,10 +85,10 @@ const _match = (
       } else if (_isFunction(element)) {
         result = element(value);
       } else {
-        result = matchFunc(value, element);
+        result = value === element;
       }
       if (!_isBoolean(result)) {
-        throw new SyntaxError('_match args2(compareArray) Array element result is not Boolean.');
+        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
       return result;
     });
@@ -110,10 +98,10 @@ const _match = (
       if (_isFunction(element)) {
         result = element(value);
       } else {
-        result = matchFunc(value, element);
+        result = value === element;
       }
       if (!_isBoolean(result)) {
-        throw new SyntaxError('_match args2(compareArray) Array element result is not Boolean.');
+        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
       return result;
     });
@@ -124,24 +112,21 @@ const match = (
   value,
   compareArray
 ) => {
-  const matchFunc = (a, b) => a === b;
   const parameter = if_(_isObject(value))({
     then: value,
     else: { value, compareArray }
   });
-  return _match(matchFunc, parameter.value, parameter.compareArray);
-};
 
-const _matchValue = (
-  value,
-  compareArray,
-  inMatchValue,
-) => {
-  const matchFunc = (a, b) => a === b;
-  if (_match(matchFunc, value, compareArray)) {
-    return inMatchValue;
-  }
-  return value;
+  guard(() => [
+    [
+      _isArray(parameter.compareArray),
+      'match args(compareArray) type is not Array.'
+    ],
+  ], () => {
+    throw new TypeError(guard.message());
+  });
+
+  return _match(parameter.value, parameter.compareArray);
 };
 
 const matchValue = (
@@ -153,9 +138,10 @@ const matchValue = (
     then: value,
     else: { value, compareArray, inMatchValue }
   });
-  return _matchValue(
-    parameter.value, parameter.compareArray, parameter.inMatchValue
-  );
+  if (match(parameter.value, parameter.compareArray)) {
+    return parameter.inMatchValue;
+  }
+  return parameter.value;
 };
 
 const defaultValue = (
@@ -166,8 +152,10 @@ const defaultValue = (
     then: value,
     else: { value, inMatchValue }
   });
-  return _matchValue(
-    parameter.value, [ _isUndefined, _isNull], parameter.inMatchValue
+  return matchValue(
+    parameter.value,
+    [ _isUndefined, _isNull],
+    parameter.inMatchValue
   );
 };
 

@@ -100,14 +100,15 @@ You can now use the functions of the parts object.
 
 ## Version
 
-### 0.7.0
-#### 2019/09/04(Wed)
+## 0.7.0
+#### 2019/09/05(Thu)
 - add compare.js
   - equal, or, match, matchValue, defaultValue,
   - add test code for each
-- equal support named arguemnt
-  - add test_sc
-- or support named argument
+- support named arguemnt
+  - equal and add test_sc
+  - or
+  - update match, matchValue
 - add polyfill.js
   - String.includes startsWith endsWith
   - Array.some map

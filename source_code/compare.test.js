@@ -194,7 +194,9 @@ const test_execute_compare = (parts) => {
         match({
           value: '123', compareArray: 123
         });
-      }
+      },
+      (e) => (e.name === (new TypeError).name) && (e.message ===
+        'match args(compareArray) type is not Array.')
     ), 'test_match thrown 4');
 
   };
