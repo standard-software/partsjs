@@ -2,6 +2,19 @@
 
 ## Version
 
+## 0.7.0
+#### 2019/09/05(Thu)
+- add compare.js
+  - equal, or, match, matchValue, defaultValue,
+  - add test code for each
+- support named arguemnt
+  - equal and add test_sc
+  - or
+  - update match, matchValue
+- add polyfill.js
+  - String.includes startsWith endsWith
+  - Array.some map
+
 ### 0.6.1
 #### 2019/09/04(Wed)
 - add sc, if_, switch_

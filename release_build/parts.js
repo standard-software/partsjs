@@ -109,7 +109,7 @@ var compare = __webpack_require__(5);
 
 var polyfill = __webpack_require__(6);
 
-var VERSION = '0.7.0 beta';
+var VERSION = '0.7.0';
 module.exports = {
   VERSION: VERSION,
   type: type,

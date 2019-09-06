@@ -137,15 +137,5 @@ You can now use the functions of the parts object.
 - Uninstall @babel/polyfill
 - update document "How to use WSH .wsf file"
 
-### 0.4.1
-#### 2019/09/02(Mon)
-- update document "How to use HTML Page"
-
-### 0.4.0
-#### 2019/09/01(Sun)
-- support web html
-  /test_code/release_web/test_index.html
-- update document
-
 ### More Info
 [VERSION.md](./VERSION.md)
