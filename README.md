@@ -100,6 +100,10 @@ You can now use the functions of the parts object.
 
 ## Version
 
+## 0.7.1
+#### 2019/09/06(Fri)
+- update match, matchValue Error handling
+
 ## 0.7.0
 #### 2019/09/05(Thu)
 - add compare.js

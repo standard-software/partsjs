@@ -72,7 +72,7 @@ const test_execute_compare = (parts) => {
     // exception
     checkEqual(true, isThrown(
       () => { or(123, 456) },
-      (e) => (e.name === (new SyntaxError).name) && (e.message ===
+      (e) => (e.name === (new TypeError).name) && (e.message ===
         'or args2(compareArray) type is not Array.')
     ));
 

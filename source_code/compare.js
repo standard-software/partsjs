@@ -69,7 +69,7 @@ const or = (value, compareArray) => {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new SyntaxError(
+    throw new TypeError(
       'or args2(compareArray) type is not Array.'
     );
   }
@@ -112,21 +112,37 @@ const match = (
   value,
   compareArray
 ) => {
-  const parameter = if_(_isObject(value))({
-    then: value,
-    else: { value, compareArray }
-  });
+  let param;
+  if (_isObject(value)) {
+    if (('value' in value) && ('compareArray' in value)) {
+      param = value;
+    } else {
+      throw new SyntaxError(
+        'match args do not have value and compareArray property.'
+      );
+    }
+  } else {
+    param = { value, compareArray }
+  }
 
-  guard(() => [
-    [
-      _isArray(parameter.compareArray),
+  if (!_isArray(param.compareArray)) {
+    throw new TypeError(
       'match args(compareArray) type is not Array.'
-    ],
-  ], () => {
-    throw new TypeError(guard.message());
-  });
+    );
+  }
 
-  return _match(parameter.value, parameter.compareArray);
+  return _match(param.value, param.compareArray);
+};
+
+const _matchValue = (
+  value,
+  compareArray,
+  inMatchValue,
+) => {
+  if (_match(value, compareArray)) {
+    return inMatchValue;
+  }
+  return value;
 };
 
 const matchValue = (
@@ -134,14 +150,30 @@ const matchValue = (
   compareArray,
   inMatchValue,
 ) => {
-  const parameter = if_(_isObject(value))({
-    then: value,
-    else: { value, compareArray, inMatchValue }
-  });
-  if (match(parameter.value, parameter.compareArray)) {
-    return parameter.inMatchValue;
+  let param;
+  if (_isObject(value)) {
+    if (('value' in value) && ('compareArray' in value) && ('inMatchValue' in value)) {
+      param = value;
+    } else {
+      throw new SyntaxError(
+        'match args do not have value and compareArray property.'
+      );
+    }
+  } else {
+    param = { value, compareArray, inMatchValue }
   }
-  return parameter.value;
+
+  if (!_isArray(param.compareArray)) {
+    throw new TypeError(
+      'match args(compareArray) type is not Array.'
+    );
+  }
+
+  return _matchValue(
+    param.value,
+    param.compareArray,
+    param.inMatchValue,
+  );
 };
 
 const defaultValue = (
