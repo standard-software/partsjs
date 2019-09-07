@@ -10,7 +10,7 @@ var compare = require('./compare.js');
 
 var polyfill = require('./polyfill.js');
 
-var VERSION = '0.7.0';
+var VERSION = '0.7.1 beta';
 module.exports = {
   VERSION: VERSION,
   type: type,

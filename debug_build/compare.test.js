@@ -79,7 +79,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     checkEqual(true, isThrown(function () {
       or(123, 456);
     }, function (e) {
-      return e.name === new SyntaxError().name && e.message === 'or args2(compareArray) type is not Array.';
+      return e.name === new TypeError().name && e.message === 'or args2(compareArray) type is not Array.';
     }));
     checkEqual(true, or({
       value: 1,
