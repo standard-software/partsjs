@@ -14,7 +14,7 @@ var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   if (!_isString(message)) {
-    throw new SyntaxError('checkEqual args(message) type is not string.');
+    throw new TypeError('checkEqual args message is not string');
   }
 
   if (_isNaNStrict(a, b)) {
@@ -35,11 +35,13 @@ var checkEqual = function checkEqual(a, b) {
 
 
 var isThrown = function isThrown(targetFunc, compareFunc) {
-  guard(function () {
-    return [[_isFunction(targetFunc), 'isThrown args1(targetFunc) type is not function.'], [_isFunction(compareFunc) || _isUndefined(compareFunc), 'isThrown args2(compareFunc) type is not function or undefined.']];
-  }, function () {
-    throw new SyntaxError(guard.message());
-  });
+  if (!_isFunction(targetFunc)) {
+    throw new TypeError('isThrown args targetFunc is not function');
+  }
+
+  if (!(_isFunction(compareFunc) || _isUndefined(compareFunc))) {
+    throw new TypeError('isThrown args compareFunc is not function');
+  }
 
   try {
     targetFunc();
@@ -61,11 +63,10 @@ var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
 };
 
 var isThrownException = function isThrownException(targetFunc, exceptionName) {
-  guard(function () {
-    return [[_isUndefined(exceptionName) || _isString(exceptionName), 'isThrownException args2(exceptionName) type is not string.']];
-  }, function () {
-    throw new SyntaxError(guard.message());
-  });
+  if (!(_isString(exceptionName) || _isUndefined(exceptionName))) {
+    throw new TypeError('isThrownException args exceptionName is not string');
+  }
+
   return isThrown(targetFunc, function (thrown) {
     if (_isException(thrown)) {
       if (_isUndefined(exceptionName)) {

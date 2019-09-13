@@ -109,7 +109,7 @@ var compare = __webpack_require__(5);
 
 var polyfill = __webpack_require__(6);
 
-var VERSION = '0.7.1 beta';
+var VERSION = '0.7.1';
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -492,7 +492,7 @@ var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   if (!_isString(message)) {
-    throw new SyntaxError('checkEqual args(message) type is not string.');
+    throw new TypeError('checkEqual args message is not string');
   }
 
   if (_isNaNStrict(a, b)) {
@@ -513,11 +513,13 @@ var checkEqual = function checkEqual(a, b) {
 
 
 var isThrown = function isThrown(targetFunc, compareFunc) {
-  guard(function () {
-    return [[_isFunction(targetFunc), 'isThrown args1(targetFunc) type is not function.'], [_isFunction(compareFunc) || _isUndefined(compareFunc), 'isThrown args2(compareFunc) type is not function or undefined.']];
-  }, function () {
-    throw new SyntaxError(guard.message());
-  });
+  if (!_isFunction(targetFunc)) {
+    throw new TypeError('isThrown args targetFunc is not function');
+  }
+
+  if (!(_isFunction(compareFunc) || _isUndefined(compareFunc))) {
+    throw new TypeError('isThrown args compareFunc is not function');
+  }
 
   try {
     targetFunc();
@@ -539,11 +541,10 @@ var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
 };
 
 var isThrownException = function isThrownException(targetFunc, exceptionName) {
-  guard(function () {
-    return [[_isUndefined(exceptionName) || _isString(exceptionName), 'isThrownException args2(exceptionName) type is not string.']];
-  }, function () {
-    throw new SyntaxError(guard.message());
-  });
+  if (!(_isString(exceptionName) || _isUndefined(exceptionName))) {
+    throw new TypeError('isThrownException args exceptionName is not string');
+  }
+
   return isThrown(targetFunc, function (thrown) {
     if (_isException(thrown)) {
       if (_isUndefined(exceptionName)) {
@@ -602,15 +603,15 @@ var assert = function assert(value) {
   var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
   if (!_isBoolean(value)) {
-    throw new TypeError('assert args1(value) type is not boolean. message:' + message);
+    throw new TypeError('assert args value is not boolean message:' + message);
   }
 
   if (!_isString(message)) {
-    throw new TypeError('assert args2(message) type is not string. message:' + message);
+    throw new TypeError('assert args message is not string message:' + message);
   }
 
   if (!value) {
-    throw new Error('assert error. message:' + message);
+    throw new Error('assert error message:' + message);
   }
 };
 /**
@@ -629,13 +630,13 @@ var guard = function guard(guardFunc, runFunc) {
   }
 
   if (!_isFunction(guardFunc)) {
-    throw new SyntaxError('guard args1(guardFunc) type is not function.');
+    throw new TypeError('guard args guardFunc is not function');
   }
 
   var result = guardFunc();
 
   if (!_isArray(result)) {
-    throw new SyntaxError('guard args1(guardFunc) result type is not array.');
+    throw new TypeError('guard args guardFunc result is not array');
   }
 
   for (var i = 0; i < result.length; i += 1) {
@@ -649,7 +650,7 @@ var guard = function guard(guardFunc, runFunc) {
 
     if (_isArray(result[i])) {
       if (!(1 <= result[i].length)) {
-        throw new SyntaxError('guard args1(guardFunc) result item is not array.length >= 1.');
+        throw new TypeError('guard args guardFunc resultArray element is not array.length >= 1');
       }
 
       resultValue = result[i][0];
@@ -664,7 +665,7 @@ var guard = function guard(guardFunc, runFunc) {
     resultValue = functionValue(resultValue);
 
     if (!_isBoolean(resultValue)) {
-      throw new SyntaxError('guard args1(guardFunc) result item value type is not boolean.');
+      throw new TypeError('guard args guardFunc resultArray element value is not boolean');
     }
 
     if (resultValue === false) {
@@ -672,7 +673,7 @@ var guard = function guard(guardFunc, runFunc) {
 
       if (!_isUndefined(runFunc)) {
         if (!_isFunction(runFunc)) {
-          throw new SyntaxError('guard args2(runFunc) type is not function');
+          throw new TypeError('guard args runFunc is not function');
         }
 
         runFunc();
@@ -731,16 +732,16 @@ var sc = function sc(argsFirst, func) {
 
 var if_ = function if_(condition) {
   if (!_isBoolean(condition)) {
-    throw new TypeError('if_ args(condition) type is not boolean.');
+    throw new TypeError('if_ args condition is not boolean');
   }
 
   var checkSyntax = function checkSyntax(args) {
     if (!_isObject(args)) {
-      throw new SyntaxError('if_() args type is not object.');
+      throw new TypeError('if_() args is not object');
     }
 
     if (_isUndefined(args.then) && _isUndefined(args["else"])) {
-      throw new SyntaxError('if_() args .then .else both nothing.');
+      throw new ReferenceError('if_() args then,else is not defined');
     }
   };
 
@@ -764,7 +765,7 @@ var if_ = function if_(condition) {
 var switch_ = function switch_(expression) {
   return function (args) {
     if (!_isArray(args)) {
-      throw new SyntaxError('switch_() args type is not array.');
+      throw new TypeError('switch_() args is not array');
     }
 
     for (var i = 0; i < args.length; i += 1) {
@@ -774,7 +775,7 @@ var switch_ = function switch_(expression) {
       }
 
       if (!_isArray(args[i])) {
-        throw new SyntaxError('switch_() args type is not array in array.');
+        throw new TypeError('switch_() args is not array in array');
       }
     }
 
@@ -878,7 +879,7 @@ var or = function or(value, compareArray) {
     if ('value' in value && 'compareArray' in value) {
       param = value;
     } else {
-      throw new SyntaxError('or args do not have value and compareArray property.');
+      throw new ReferenceError('or parameter args value,compareArray is not defined');
     }
   } else {
     param = {
@@ -888,7 +889,7 @@ var or = function or(value, compareArray) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('or args2(compareArray) type is not Array.');
+    throw new TypeError('or args compareArray is not array');
   }
 
   return _or(param.value, param.compareArray);
@@ -903,12 +904,12 @@ var _match = function _match(value, compareArray) {
         result = value.match(element) !== null;
       } else if (_isFunction(element)) {
         result = element(value);
+
+        if (!_isBoolean(result)) {
+          throw new TypeError('_match args compareArray element function result is not boolean');
+        }
       } else {
         result = value === element;
-      }
-
-      if (!_isBoolean(result)) {
-        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
 
       return result;
@@ -919,12 +920,12 @@ var _match = function _match(value, compareArray) {
 
       if (_isFunction(element)) {
         result = element(value);
+
+        if (!_isBoolean(result)) {
+          throw new TypeError('_match args compareArray element function result is not boolean');
+        }
       } else {
         result = value === element;
-      }
-
-      if (!_isBoolean(result)) {
-        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
 
       return result;
@@ -939,7 +940,7 @@ var match = function match(value, compareArray) {
     if ('value' in value && 'compareArray' in value) {
       param = value;
     } else {
-      throw new SyntaxError('match args do not have value and compareArray property.');
+      throw new ReferenceError('match parameter args value,compareArray is not defined');
     }
   } else {
     param = {
@@ -949,7 +950,7 @@ var match = function match(value, compareArray) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('match args(compareArray) type is not Array.');
+    throw new TypeError('match args compareArray is not array');
   }
 
   return _match(param.value, param.compareArray);
@@ -970,7 +971,7 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
     if ('value' in value && 'compareArray' in value && 'inMatchValue' in value) {
       param = value;
     } else {
-      throw new SyntaxError('match args do not have value and compareArray property.');
+      throw new ReferenceError('matchValue parameter args value,compareArray,inMatchValue is not defined');
     }
   } else {
     param = {
@@ -981,7 +982,7 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('match args(compareArray) type is not Array.');
+    throw new TypeError('match args compareArray is not array');
   }
 
   return _matchValue(param.value, param.compareArray, param.inMatchValue);

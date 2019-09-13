@@ -259,14 +259,14 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       }));
       checkEqual(true, isThrownException(function () {
         return guard(123);
-      }, new SyntaxError().name));
+      }, new TypeError().name));
       checkEqual(true, isThrown(function () {
         return guard(123);
       }));
       checkEqual(true, isThrown(function () {
         return guard(123);
       }, function (e) {
-        return e.message === 'guard args1(guardFunc) type is not function.';
+        return e.message === 'guard args guardFunc is not function';
       }));
     } // (new SyntaxError).name
     // environment
@@ -279,7 +279,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         return guard(function () {
           return 123;
         });
-      }, new SyntaxError().name));
+      }, new TypeError().name));
       checkEqual(true, isThrown(function () {
         return guard(function () {
           return 123;
@@ -290,7 +290,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           return 123;
         });
       }, function (e) {
-        return e.message === 'guard args1(guardFunc) result type is not array.';
+        return e.message === 'guard args guardFunc result is not array';
       }));
     } // gurad exception args1 function result array
 
@@ -323,7 +323,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args1(guardFunc) result item is not array.length >= 1.';
+      return e.message === 'guard args guardFunc resultArray element is not array.length >= 1';
     }), 'gurad exception args1 function result array 3-2');
 
     var guardFunc = function guardFunc() {
@@ -352,7 +352,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args1(guardFunc) result item is not array.length >= 1.';
+      return e.message === 'guard args guardFunc resultArray element is not array.length >= 1';
     }), 'gurad exception args1 function result array 6-2'); // gurad exception function result array function result
 
     var guardFunc = function guardFunc() {
@@ -378,7 +378,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args1(guardFunc) result item value type is not boolean.';
+      return e.message === 'guard args guardFunc resultArray element value is not boolean';
     }), 'gurad exception function result array function result 2');
 
     var guardFunc = function guardFunc() {
@@ -392,7 +392,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args1(guardFunc) result item value type is not boolean.';
+      return e.message === 'guard args guardFunc resultArray element value is not boolean';
     }), 'gurad exception function result array function result 3'); // gurad exception args2
 
     var guardFunc = function guardFunc() {
@@ -465,15 +465,15 @@ var test_execute_syntax = function test_execute_syntax(parts) {
 
     checkEqual(true, isThrownException(function () {
       if_(true)();
-    }, new SyntaxError().name));
+    }, new TypeError().name));
     checkEqual(true, isThrownException(function () {
       if_(true)({});
-    }, new SyntaxError().name));
+    }, new ReferenceError().name));
     checkEqual(true, isThrownException(function () {
       if_(true)({
         thenn: ''
       });
-    }, new SyntaxError().name));
+    }, new ReferenceError().name));
     checkEqual(false, isNotThrown(function () {
       if_(true)();
     }));
@@ -501,10 +501,10 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     var switchResultValue4 = [[1, '1'], 'default'];
     checkEqual(true, isThrownException(function () {
       switch_(1)(switchResultValue4);
-    }, new SyntaxError().name));
+    }, new TypeError().name));
     checkEqual(true, isThrownException(function () {
       switch_(2)(switchResultValue4);
-    }, new SyntaxError().name));
+    }, new TypeError().name));
     var switchResultFunc1 = [[1, function () {
       return 'number 1';
     }], ['1', function () {
