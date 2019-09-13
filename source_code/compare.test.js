@@ -73,7 +73,7 @@ const test_execute_compare = (parts) => {
     checkEqual(true, isThrown(
       () => { or(123, 456) },
       (e) => (e.name === (new TypeError).name) && (e.message ===
-        'or args2(compareArray) type is not Array.')
+        'or args compareArray is not array')
     ));
 
     checkEqual(true,  or({value: 1, compareArray: [1, 2]}))
@@ -82,8 +82,8 @@ const test_execute_compare = (parts) => {
     // exception
     checkEqual(true, isThrown(
       () => { or({value: 1, array: [1, 2]}) },
-      (e) => (e.name === (new SyntaxError).name) && (e.message ===
-        'or args do not have value and compareArray property.')
+      (e) => (e.name === (new ReferenceError).name) && (e.message ===
+        'or parameter args value,compareArray is not defined')
     ));
 
   };
@@ -196,7 +196,7 @@ const test_execute_compare = (parts) => {
         });
       },
       (e) => (e.name === (new TypeError).name) && (e.message ===
-        'match args(compareArray) type is not Array.')
+        'match args compareArray is not array')
     ), 'test_match thrown 4');
 
   };

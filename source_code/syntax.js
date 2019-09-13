@@ -22,13 +22,13 @@ const {
  */
 const assert = (value, message = '') => {
   if (!_isBoolean(value)) {
-    throw new TypeError('assert args1(value) type is not boolean. message:' + message);
+    throw new TypeError('assert args value is not boolean message:' + message);
   }
   if (!_isString(message)) {
-    throw new TypeError('assert args2(message) type is not string. message:' + message);
+    throw new TypeError('assert args message is not string message:' + message);
   }
   if (!value) {
-    throw new Error('assert error. message:' + message);
+    throw new Error('assert error message:' + message);
   }
 };
 
@@ -42,11 +42,11 @@ const guard = (guardFunc, runFunc) => {
   if (guard_status === false) { return false; }
 
   if (!_isFunction(guardFunc)) {
-    throw new SyntaxError('guard args1(guardFunc) type is not function.');
+    throw new TypeError('guard args guardFunc is not function');
   }
   const result = guardFunc();
   if (!_isArray(result)) {
-    throw new SyntaxError('guard args1(guardFunc) result type is not array.');
+    throw new TypeError('guard args guardFunc result is not array');
   }
   for (let i = 0; i < result.length; i += 1) {
     // support for wsh last comma in Array. [a,b,]
@@ -57,7 +57,9 @@ const guard = (guardFunc, runFunc) => {
     let message = '';
     if (_isArray(result[i])) {
       if (!(1 <= result[i].length)) {
-        throw new SyntaxError('guard args1(guardFunc) result item is not array.length >= 1.');
+        throw new TypeError(
+          'guard args guardFunc resultArray element is not array.length >= 1'
+        );
       }
       resultValue = result[i][0];
       if (2 <= result[i].length) {
@@ -68,13 +70,17 @@ const guard = (guardFunc, runFunc) => {
     }
     resultValue = functionValue(resultValue);
     if (!_isBoolean(resultValue)) {
-      throw new SyntaxError('guard args1(guardFunc) result item value type is not boolean.');
+      throw new TypeError(
+        'guard args guardFunc resultArray element value is not boolean'
+      );
     }
     if (resultValue === false) {
       guard_message = message;
       if (!_isUndefined(runFunc)) {
         if (!_isFunction(runFunc)) {
-          throw new SyntaxError('guard args2(runFunc) type is not function');
+          throw new TypeError(
+            'guard args runFunc is not function'
+          );
         }
         runFunc();
       }
@@ -122,14 +128,14 @@ const sc = (
  */
 const if_ = (condition) => {
   if (!_isBoolean(condition)) {
-    throw new TypeError('if_ args(condition) type is not boolean.');
+    throw new TypeError('if_ args condition is not boolean');
   }
   const checkSyntax = (args) => {
     if (!_isObject(args)) {
-      throw new SyntaxError('if_() args type is not object.');
+      throw new TypeError('if_() args is not object');
     }
     if (_isUndefined(args.then) && _isUndefined(args.else)) {
-      throw new SyntaxError('if_() args .then .else both nothing.');
+      throw new ReferenceError('if_() args then,else is not defined');
     }
   };
   if (condition) {
@@ -151,7 +157,7 @@ const if_ = (condition) => {
 const switch_ = (expression) => {
   return (args) => {
     if (!_isArray(args)) {
-      throw new SyntaxError('switch_() args type is not array.');
+      throw new TypeError('switch_() args is not array');
     }
     for (let i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
@@ -159,7 +165,7 @@ const switch_ = (expression) => {
         continue;
       }
       if (!_isArray(args[i])) {
-        throw new SyntaxError('switch_() args type is not array in array.');
+        throw new TypeError('switch_() args is not array in array');
       }
     }
     for (let i = 0; i < args.length; i += 1) {

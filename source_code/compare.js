@@ -60,8 +60,8 @@ const or = (value, compareArray) => {
     if (('value' in value) && ('compareArray' in value)) {
       param = value;
     } else {
-      throw new SyntaxError(
-        'or args do not have value and compareArray property.'
+      throw new ReferenceError(
+        'or parameter args value,compareArray is not defined'
       );
     }
   } else {
@@ -70,7 +70,7 @@ const or = (value, compareArray) => {
 
   if (!_isArray(param.compareArray)) {
     throw new TypeError(
-      'or args2(compareArray) type is not Array.'
+      'or args compareArray is not array'
     );
   }
   return _or(param.value, param.compareArray)
@@ -84,11 +84,13 @@ const _match = (value, compareArray) => {
         result = value.match(element) !== null;
       } else if (_isFunction(element)) {
         result = element(value);
+        if (!_isBoolean(result)) {
+          throw new TypeError(
+            '_match args compareArray element function result is not boolean'
+          );
+        }
       } else {
         result = value === element;
-      }
-      if (!_isBoolean(result)) {
-        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
       return result;
     });
@@ -97,11 +99,13 @@ const _match = (value, compareArray) => {
       let result;
       if (_isFunction(element)) {
         result = element(value);
+        if (!_isBoolean(result)) {
+          throw new TypeError(
+            '_match args compareArray element function result is not boolean'
+          );
+        }
       } else {
         result = value === element;
-      }
-      if (!_isBoolean(result)) {
-        throw new SyntaxError('_matchBase args(compareArray) Array element result is not Boolean.');
       }
       return result;
     });
@@ -117,8 +121,8 @@ const match = (
     if (('value' in value) && ('compareArray' in value)) {
       param = value;
     } else {
-      throw new SyntaxError(
-        'match args do not have value and compareArray property.'
+      throw new ReferenceError(
+        'match parameter args value,compareArray is not defined'
       );
     }
   } else {
@@ -127,7 +131,7 @@ const match = (
 
   if (!_isArray(param.compareArray)) {
     throw new TypeError(
-      'match args(compareArray) type is not Array.'
+      'match args compareArray is not array'
     );
   }
 
@@ -155,8 +159,8 @@ const matchValue = (
     if (('value' in value) && ('compareArray' in value) && ('inMatchValue' in value)) {
       param = value;
     } else {
-      throw new SyntaxError(
-        'match args do not have value and compareArray property.'
+      throw new ReferenceError(
+        'matchValue parameter args value,compareArray,inMatchValue is not defined'
       );
     }
   } else {
@@ -165,7 +169,7 @@ const matchValue = (
 
   if (!_isArray(param.compareArray)) {
     throw new TypeError(
-      'match args(compareArray) type is not Array.'
+      'match args compareArray is not array'
     );
   }
 

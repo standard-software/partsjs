@@ -12,7 +12,7 @@ const {
 
 const checkEqual = (a, b, message = '') => {
   if (!_isString(message)) {
-    throw new SyntaxError('checkEqual args(message) type is not string.');
+    throw new TypeError('checkEqual args message is not string');
   }
 
   if (_isNaNStrict(a, b)) {
@@ -37,18 +37,17 @@ const isThrown = (
   targetFunc,
   compareFunc
 ) => {
-  guard(() => [
-    [
-      _isFunction(targetFunc),
-      'isThrown args1(targetFunc) type is not function.'
-    ],
-    [
-      _isFunction(compareFunc) || _isUndefined(compareFunc),
-      'isThrown args2(compareFunc) type is not function or undefined.'
-    ]
-  ], () => {
-    throw new SyntaxError(guard.message());
-  });
+  if (!_isFunction(targetFunc)) {
+    throw new TypeError(
+      'isThrown args targetFunc is not function'
+    );
+  }
+  if (!( _isFunction(compareFunc) || _isUndefined(compareFunc) )) {
+    throw new TypeError(
+      'isThrown args compareFunc is not function'
+    );
+  }
+
   try {
     targetFunc();
   } catch (e) {
@@ -74,14 +73,11 @@ const isThrownException = (
   targetFunc,
   exceptionName,
 ) => {
-  guard(() => [
-    [
-      _isUndefined(exceptionName) || _isString(exceptionName),
-      'isThrownException args2(exceptionName) type is not string.'
-    ],
-  ], () => {
-    throw new SyntaxError(guard.message());
-  });
+  if (!( _isString(exceptionName) || _isUndefined(exceptionName) )) {
+    throw new TypeError(
+      'isThrownException args exceptionName is not string'
+    );
+  }
 
   return isThrown(
     targetFunc,

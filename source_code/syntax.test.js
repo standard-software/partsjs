@@ -159,7 +159,7 @@ const test_execute_syntax = (parts) => {
       ));
       checkEqual(true, isThrownException(
         () => guard(123),
-        (new SyntaxError).name,
+        (new TypeError).name,
       ));
       checkEqual(true, isThrown(
         () => guard(123),
@@ -167,7 +167,7 @@ const test_execute_syntax = (parts) => {
       checkEqual(true, isThrown(
         () => guard(123),
         (e) => e.message ===
-          'guard args1(guardFunc) type is not function.'
+          'guard args guardFunc is not function'
       ));
     }
     // (new SyntaxError).name
@@ -179,7 +179,7 @@ const test_execute_syntax = (parts) => {
     {
       checkEqual(true, isThrownException(
         () => guard(() => 123),
-        (new SyntaxError).name,
+        (new TypeError).name,
       ));
       checkEqual(true, isThrown(
         () => guard(() => 123),
@@ -187,7 +187,7 @@ const test_execute_syntax = (parts) => {
       checkEqual(true, isThrown(
         () => guard(() => 123),
         (e) => e.message ===
-          'guard args1(guardFunc) result type is not array.'
+          'guard args guardFunc result is not array'
       ));
     }
 
@@ -220,7 +220,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args1(guardFunc) result item is not array.length >= 1.'
+        'guard args guardFunc resultArray element is not array.length >= 1'
     ), 'gurad exception args1 function result array 3-2');
 
     var guardFunc = () => [
@@ -249,7 +249,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args1(guardFunc) result item is not array.length >= 1.'
+        'guard args guardFunc resultArray element is not array.length >= 1'
     ), 'gurad exception args1 function result array 6-2');
 
     // gurad exception function result array function result
@@ -269,7 +269,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args1(guardFunc) result item value type is not boolean.'
+        'guard args guardFunc resultArray element value is not boolean'
     ), 'gurad exception function result array function result 2');
 
     var guardFunc = () => [
@@ -279,7 +279,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args1(guardFunc) result item value type is not boolean.'
+        'guard args guardFunc resultArray element value is not boolean'
     ), 'gurad exception function result array function result 3');
 
     // gurad exception args2
@@ -350,17 +350,17 @@ const test_execute_syntax = (parts) => {
     // Error
     checkEqual(true, isThrownException(
       function() { if_(true)(); },
-      (new SyntaxError).name
+      (new TypeError).name
     ));
 
     checkEqual(true, isThrownException(
       function() { if_(true)({}); },
-      (new SyntaxError).name
+      (new ReferenceError).name
     ));
 
     checkEqual(true, isThrownException(
       function() { if_(true)({ thenn: '' }); },
-      (new SyntaxError).name
+      (new ReferenceError).name
     ));
 
     checkEqual(false, isNotThrown(
@@ -405,11 +405,11 @@ const test_execute_syntax = (parts) => {
     ];
     checkEqual(true, isThrownException(
       function() { switch_(1)(switchResultValue4); },
-      (new SyntaxError).name
+      (new TypeError).name
     ));
     checkEqual(true, isThrownException(
       function() { switch_(2)(switchResultValue4); },
-      (new SyntaxError).name
+      (new TypeError).name
     ));
 
     var switchResultFunc1 = [
