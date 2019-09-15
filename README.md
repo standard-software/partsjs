@@ -102,8 +102,8 @@ You can now use the functions of the parts object.
 
 ### 0.7.2
 #### 2019/09/14(Sat)
-- add _text.js
 - add Array.forEach
+- add _text.js(discard)
 
 ### 0.7.1
 #### 2019/09/12(Thu)

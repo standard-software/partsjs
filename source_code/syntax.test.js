@@ -222,7 +222,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args guardFunc resultArray element is not array.length >= 1'
+        'guard args(guardFunc resultArray element) is not array.length >= 1'
     ), 'gurad exception args1 function result array 3-2');
 
     var guardFunc = () => [
@@ -251,7 +251,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args guardFunc resultArray element is not array.length >= 1'
+        'guard args(guardFunc resultArray element) is not array.length >= 1'
     ), 'gurad exception args1 function result array 6-2');
 
     // gurad exception function result array function result
@@ -271,7 +271,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args guardFunc resultArray element value is not boolean'
+        'guard args(guardFunc resultArray element value) is not boolean'
     ), 'gurad exception function result array function result 2');
 
     var guardFunc = () => [
@@ -281,7 +281,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args guardFunc resultArray element value is not boolean'
+        'guard args(guardFunc resultArray element value) is not boolean'
     ), 'gurad exception function result array function result 3');
 
     // gurad exception args2
