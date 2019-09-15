@@ -10,7 +10,7 @@ var syntax = require('./syntax.js');
 
 var compare = require('./compare.js');
 
-var VERSION = '0.7.2 beta';
+var VERSION = '0.7.2';
 module.exports = {
   VERSION: VERSION,
   type: type,

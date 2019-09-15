@@ -2,13 +2,19 @@
 
 ## Version
 
-## 0.7.1
+### 0.7.2
+#### 2019/09/14(Sat)
+- update ErrorMessage
+- add Polyfill Array.forEach
+- add _text.js(discard)
+
+### 0.7.1
 #### 2019/09/12(Thu)
 - update or, match, matchValue Error handling
   - SyntaxError -> TypeError, ReferenceError
 - update ErrorMessage
 
-## 0.7.0
+### 0.7.0
 #### 2019/09/05(Thu)
 - add compare.js
   - equal, or, match, matchValue, defaultValue,
@@ -43,6 +49,7 @@
   /test_exec/release_wsh/test_index.html
 - Rename folder test_code/ >> test_exec
 - Uninstall @babel/polyfill
+- update document "How to use WSH .wsf file"
 
 ### 0.4.1
 #### 2019/09/02(Mon)

@@ -4,7 +4,7 @@ const test = require('./test.js');
 const syntax = require('./syntax.js');
 const compare = require('./compare.js');
 
-const VERSION = '0.7.2 beta';
+const VERSION = '0.7.2';
 
 module.exports = {
   VERSION,

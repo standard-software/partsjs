@@ -109,7 +109,7 @@ var syntax = __webpack_require__(5);
 
 var compare = __webpack_require__(6);
 
-var VERSION = '0.7.2 beta';
+var VERSION = '0.7.2';
 module.exports = {
   VERSION: VERSION,
   type: type,

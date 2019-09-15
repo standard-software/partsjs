@@ -102,7 +102,8 @@ You can now use the functions of the parts object.
 
 ### 0.7.2
 #### 2019/09/14(Sat)
-- add Array.forEach
+- update ErrorMessage
+- add Polyfill Array.forEach
 - add _text.js(discard)
 
 ### 0.7.1
