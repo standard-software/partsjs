@@ -24,15 +24,15 @@ var assert = function assert(value) {
   var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
   if (!_isBoolean(value)) {
-    throw new TypeError('assert args value is not boolean message:' + message);
+    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
   }
 
   if (!_isString(message)) {
-    throw new TypeError('assert args message is not string message:' + message);
+    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
   }
 
   if (!value) {
-    throw new Error('assert error message:' + message);
+    throw new Error("assert error|message:".concat(message));
   }
 };
 /**
@@ -51,13 +51,13 @@ var guard = function guard(guardFunc, runFunc) {
   }
 
   if (!_isFunction(guardFunc)) {
-    throw new TypeError('guard args guardFunc is not function');
+    throw new TypeError('guard args(guardFunc) is not function');
   }
 
   var result = guardFunc();
 
   if (!_isArray(result)) {
-    throw new TypeError('guard args guardFunc result is not array');
+    throw new TypeError('guard args(guardFunc result) is not array');
   }
 
   for (var i = 0; i < result.length; i += 1) {
@@ -71,7 +71,7 @@ var guard = function guard(guardFunc, runFunc) {
 
     if (_isArray(result[i])) {
       if (!(1 <= result[i].length)) {
-        throw new TypeError('guard args guardFunc resultArray element is not array.length >= 1');
+        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
       }
 
       resultValue = result[i][0];
@@ -86,7 +86,7 @@ var guard = function guard(guardFunc, runFunc) {
     resultValue = functionValue(resultValue);
 
     if (!_isBoolean(resultValue)) {
-      throw new TypeError('guard args guardFunc resultArray element value is not boolean');
+      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
     }
 
     if (resultValue === false) {
@@ -94,7 +94,7 @@ var guard = function guard(guardFunc, runFunc) {
 
       if (!_isUndefined(runFunc)) {
         if (!_isFunction(runFunc)) {
-          throw new TypeError('guard args runFunc is not function');
+          throw new TypeError('guard args(runFunc) is not function');
         }
 
         runFunc();
@@ -153,7 +153,7 @@ var sc = function sc(argsFirst, func) {
 
 var if_ = function if_(condition) {
   if (!_isBoolean(condition)) {
-    throw new TypeError('if_ args condition is not boolean');
+    throw new TypeError('if_ args(condition) is not boolean');
   }
 
   var checkSyntax = function checkSyntax(args) {
@@ -162,7 +162,7 @@ var if_ = function if_(condition) {
     }
 
     if (_isUndefined(args.then) && _isUndefined(args["else"])) {
-      throw new ReferenceError('if_() args then,else is not defined');
+      throw new ReferenceError('if_() parameter args(then,else) is not defined');
     }
   };
 

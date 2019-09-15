@@ -99,17 +99,17 @@ module.exports = __webpack_require__(1);
 "use strict";
 
 
-var type = __webpack_require__(2);
+var polyfill = __webpack_require__(2);
 
-var test = __webpack_require__(3);
+var type = __webpack_require__(3);
 
-var syntax = __webpack_require__(4);
+var test = __webpack_require__(4);
 
-var compare = __webpack_require__(5);
+var syntax = __webpack_require__(5);
 
-var polyfill = __webpack_require__(6);
+var compare = __webpack_require__(6);
 
-var VERSION = '0.7.1';
+var VERSION = '0.7.2 beta';
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -120,6 +120,141 @@ module.exports = {
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var polyfillDefine = function polyfillDefine() {
+  if (!String.prototype.includes) {
+    String.prototype.includes = function (search, start) {
+      'use strict';
+
+      if (typeof start !== 'number') {
+        start = 0;
+      }
+
+      if (start + search.length > this.length) {
+        return false;
+      } else {
+        return this.indexOf(search, start) !== -1;
+      }
+    };
+  }
+
+  if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function (search, pos) {
+      pos = !pos || pos < 0 ? 0 : +pos;
+      return this.substring(pos, pos + search.length) === search;
+    };
+  }
+
+  if (!String.prototype.endsWith) {
+    String.prototype.endsWith = function (search, this_len) {
+      if (this_len === undefined || this_len > this.length) {
+        this_len = this.length;
+      }
+
+      return this.substring(this_len - search.length, this_len) === search;
+    };
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+
+
+  if (!Array.prototype.some) {
+    Array.prototype.some = function (fun, thisArg) {
+      'use strict';
+
+      if (this == null) {
+        throw new TypeError('Array.prototype.some called on null or undefined');
+      }
+
+      if (typeof fun !== 'function') {
+        throw new TypeError();
+      }
+
+      var t = Object(this);
+      var len = t.length >>> 0;
+      var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+
+      for (var i = 0; i < len; i++) {
+        if (i in t && fun.call(thisArg, t[i], i, t)) {
+          return true;
+        }
+      }
+
+      return false;
+    };
+  } // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+
+  if (!Array.prototype.map) {
+    Array.prototype.map = function (callback
+    /*, thisArg*/
+    ) {
+      var T, A, k;
+
+      if (this == null) {
+        throw new TypeError('this is null or not defined');
+      }
+
+      var O = Object(this);
+      var len = O.length >>> 0;
+
+      if (typeof callback !== 'function') {
+        throw new TypeError(callback + ' is not a function');
+      }
+
+      if (arguments.length > 1) {
+        T = arguments[1];
+      }
+
+      A = new Array(len);
+      k = 0;
+
+      while (k < len) {
+        var kValue, mappedValue;
+
+        if (k in O) {
+          kValue = O[k];
+          mappedValue = callback.call(T, kValue, k, O);
+          A[k] = mappedValue;
+        }
+
+        k++;
+      }
+
+      return A;
+    };
+  } // update from: https://gist.github.com/hufyhang/c303ce1b80c7b6f8a73e
+
+
+  if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function (callback, thisArg) {
+      'use strict';
+
+      if (this == null) {
+        throw new TypeError('Array.prototype.some called on null or undefined');
+      }
+
+      if (typeof callback !== 'function') {
+        throw new TypeError(callback + ' is not a function');
+      }
+
+      var array = this;
+      thisArg = thisArg || this;
+
+      for (var i = 0, l = array.length; i !== l; ++i) {
+        callback.call(thisArg, array[i], i, array);
+      }
+    };
+  }
+};
+
+polyfillDefine();
+module.exports = {};
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -472,20 +607,20 @@ module.exports = {
 };
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(2),
+var _require = __webpack_require__(3),
     _isString = _require._isString,
     _isNaNStrict = _require._isNaNStrict,
     _isFunction = _require._isFunction,
     _isUndefined = _require._isUndefined,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(4),
+var _require2 = __webpack_require__(5),
     guard = _require2.guard;
 
 var checkEqual = function checkEqual(a, b) {
@@ -573,13 +708,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var type = __webpack_require__(2);
+var type = __webpack_require__(3);
 
 var _isUndefined = type._isUndefined,
     _isNull = type._isNull,
@@ -603,15 +738,15 @@ var assert = function assert(value) {
   var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
   if (!_isBoolean(value)) {
-    throw new TypeError('assert args value is not boolean message:' + message);
+    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
   }
 
   if (!_isString(message)) {
-    throw new TypeError('assert args message is not string message:' + message);
+    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
   }
 
   if (!value) {
-    throw new Error('assert error message:' + message);
+    throw new Error("assert error|message:".concat(message));
   }
 };
 /**
@@ -630,13 +765,13 @@ var guard = function guard(guardFunc, runFunc) {
   }
 
   if (!_isFunction(guardFunc)) {
-    throw new TypeError('guard args guardFunc is not function');
+    throw new TypeError('guard args(guardFunc) is not function');
   }
 
   var result = guardFunc();
 
   if (!_isArray(result)) {
-    throw new TypeError('guard args guardFunc result is not array');
+    throw new TypeError('guard args(guardFunc result) is not array');
   }
 
   for (var i = 0; i < result.length; i += 1) {
@@ -650,7 +785,7 @@ var guard = function guard(guardFunc, runFunc) {
 
     if (_isArray(result[i])) {
       if (!(1 <= result[i].length)) {
-        throw new TypeError('guard args guardFunc resultArray element is not array.length >= 1');
+        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
       }
 
       resultValue = result[i][0];
@@ -665,7 +800,7 @@ var guard = function guard(guardFunc, runFunc) {
     resultValue = functionValue(resultValue);
 
     if (!_isBoolean(resultValue)) {
-      throw new TypeError('guard args guardFunc resultArray element value is not boolean');
+      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
     }
 
     if (resultValue === false) {
@@ -673,7 +808,7 @@ var guard = function guard(guardFunc, runFunc) {
 
       if (!_isUndefined(runFunc)) {
         if (!_isFunction(runFunc)) {
-          throw new TypeError('guard args runFunc is not function');
+          throw new TypeError('guard args(runFunc) is not function');
         }
 
         runFunc();
@@ -732,7 +867,7 @@ var sc = function sc(argsFirst, func) {
 
 var if_ = function if_(condition) {
   if (!_isBoolean(condition)) {
-    throw new TypeError('if_ args condition is not boolean');
+    throw new TypeError('if_ args(condition) is not boolean');
   }
 
   var checkSyntax = function checkSyntax(args) {
@@ -741,7 +876,7 @@ var if_ = function if_(condition) {
     }
 
     if (_isUndefined(args.then) && _isUndefined(args["else"])) {
-      throw new ReferenceError('if_() args then,else is not defined');
+      throw new ReferenceError('if_() parameter args(then,else) is not defined');
     }
   };
 
@@ -811,13 +946,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(2),
+var _require = __webpack_require__(3),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -833,7 +968,7 @@ var _require = __webpack_require__(2),
     _isError = _require._isError,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(4),
+var _require2 = __webpack_require__(5),
     assert = _require2.assert,
     guard = _require2.guard,
     if_ = _require2.if_;
@@ -851,7 +986,7 @@ var equal = function equal(value1, value2) {
     if ('value1' in value1 && 'value2' in value1) {
       return _equal(value1.value1, value1.value2);
     } else {
-      throw new SyntaxError('equal args do not have value1 and value2 property.');
+      throw new ReferenceError('equal parameter args(value1,value2) is not defined');
     }
   } else {
     return _equal(value1, value2);
@@ -879,7 +1014,7 @@ var or = function or(value, compareArray) {
     if ('value' in value && 'compareArray' in value) {
       param = value;
     } else {
-      throw new ReferenceError('or parameter args value,compareArray is not defined');
+      throw new ReferenceError('or parameter args(value,compareArray) is not defined');
     }
   } else {
     param = {
@@ -889,7 +1024,7 @@ var or = function or(value, compareArray) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('or args compareArray is not array');
+    throw new TypeError('or args(compareArray) is not array');
   }
 
   return _or(param.value, param.compareArray);
@@ -906,7 +1041,7 @@ var _match = function _match(value, compareArray) {
         result = element(value);
 
         if (!_isBoolean(result)) {
-          throw new TypeError('_match args compareArray element function result is not boolean');
+          throw new TypeError('_match args(compareArray element function result) is not boolean');
         }
       } else {
         result = value === element;
@@ -922,7 +1057,7 @@ var _match = function _match(value, compareArray) {
         result = element(value);
 
         if (!_isBoolean(result)) {
-          throw new TypeError('_match args compareArray element function result is not boolean');
+          throw new TypeError('_match args(compareArray element function result) is not boolean');
         }
       } else {
         result = value === element;
@@ -940,7 +1075,7 @@ var match = function match(value, compareArray) {
     if ('value' in value && 'compareArray' in value) {
       param = value;
     } else {
-      throw new ReferenceError('match parameter args value,compareArray is not defined');
+      throw new ReferenceError('match parameter args(value,compareArray) is not defined');
     }
   } else {
     param = {
@@ -950,7 +1085,7 @@ var match = function match(value, compareArray) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('match args compareArray is not array');
+    throw new TypeError('match args(compareArray) is not array');
   }
 
   return _match(param.value, param.compareArray);
@@ -971,7 +1106,7 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
     if ('value' in value && 'compareArray' in value && 'inMatchValue' in value) {
       param = value;
     } else {
-      throw new ReferenceError('matchValue parameter args value,compareArray,inMatchValue is not defined');
+      throw new ReferenceError('matchValue parameter args(value,compareArray,inMatchValue) is not defined');
     }
   } else {
     param = {
@@ -982,7 +1117,7 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('match args compareArray is not array');
+    throw new TypeError('matchValue args compareArray is not array');
   }
 
   return _matchValue(param.value, param.compareArray, param.inMatchValue);
@@ -1007,118 +1142,6 @@ module.exports = {
   matchValue: matchValue,
   defaultValue: defaultValue
 };
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var polyfillDefine = function polyfillDefine() {
-  if (!String.prototype.includes) {
-    String.prototype.includes = function (search, start) {
-      'use strict';
-
-      if (typeof start !== 'number') {
-        start = 0;
-      }
-
-      if (start + search.length > this.length) {
-        return false;
-      } else {
-        return this.indexOf(search, start) !== -1;
-      }
-    };
-  }
-
-  if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function (search, pos) {
-      pos = !pos || pos < 0 ? 0 : +pos;
-      return this.substring(pos, pos + search.length) === search;
-    };
-  }
-
-  if (!String.prototype.endsWith) {
-    String.prototype.endsWith = function (search, this_len) {
-      if (this_len === undefined || this_len > this.length) {
-        this_len = this.length;
-      }
-
-      return this.substring(this_len - search.length, this_len) === search;
-    };
-  }
-
-  if (!Array.prototype.some) {
-    Array.prototype.some = function (fun, thisArg) {
-      'use strict';
-
-      if (this == null) {
-        throw new TypeError('Array.prototype.some called on null or undefined');
-      }
-
-      if (typeof fun !== 'function') {
-        throw new TypeError();
-      }
-
-      var t = Object(this);
-      var len = t.length >>> 0;
-      var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
-
-      for (var i = 0; i < len; i++) {
-        if (i in t && fun.call(thisArg, t[i], i, t)) {
-          return true;
-        }
-      }
-
-      return false;
-    };
-  } // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-
-
-  if (!Array.prototype.map) {
-    Array.prototype.map = function (callback
-    /*, thisArg*/
-    ) {
-      var T, A, k;
-
-      if (this == null) {
-        throw new TypeError('this is null or not defined');
-      }
-
-      var O = Object(this);
-      var len = O.length >>> 0;
-
-      if (typeof callback !== 'function') {
-        throw new TypeError(callback + ' is not a function');
-      }
-
-      if (arguments.length > 1) {
-        T = arguments[1];
-      }
-
-      A = new Array(len);
-      k = 0;
-
-      while (k < len) {
-        var kValue, mappedValue;
-
-        if (k in O) {
-          kValue = O[k];
-          mappedValue = callback.call(T, kValue, k, O);
-          A[k] = mappedValue;
-        }
-
-        k++;
-      }
-
-      return A;
-    };
-  }
-};
-
-polyfillDefine();
-module.exports = {};
 
 /***/ })
 /******/ ]);

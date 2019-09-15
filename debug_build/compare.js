@@ -34,7 +34,7 @@ var equal = function equal(value1, value2) {
     if ('value1' in value1 && 'value2' in value1) {
       return _equal(value1.value1, value1.value2);
     } else {
-      throw new SyntaxError('equal args do not have value1 and value2 property.');
+      throw new ReferenceError('equal parameter args(value1,value2) is not defined');
     }
   } else {
     return _equal(value1, value2);
@@ -62,7 +62,7 @@ var or = function or(value, compareArray) {
     if ('value' in value && 'compareArray' in value) {
       param = value;
     } else {
-      throw new ReferenceError('or parameter args value,compareArray is not defined');
+      throw new ReferenceError('or parameter args(value,compareArray) is not defined');
     }
   } else {
     param = {
@@ -72,7 +72,7 @@ var or = function or(value, compareArray) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('or args compareArray is not array');
+    throw new TypeError('or args(compareArray) is not array');
   }
 
   return _or(param.value, param.compareArray);
@@ -89,7 +89,7 @@ var _match = function _match(value, compareArray) {
         result = element(value);
 
         if (!_isBoolean(result)) {
-          throw new TypeError('_match args compareArray element function result is not boolean');
+          throw new TypeError('_match args(compareArray element function result) is not boolean');
         }
       } else {
         result = value === element;
@@ -105,7 +105,7 @@ var _match = function _match(value, compareArray) {
         result = element(value);
 
         if (!_isBoolean(result)) {
-          throw new TypeError('_match args compareArray element function result is not boolean');
+          throw new TypeError('_match args(compareArray element function result) is not boolean');
         }
       } else {
         result = value === element;
@@ -123,7 +123,7 @@ var match = function match(value, compareArray) {
     if ('value' in value && 'compareArray' in value) {
       param = value;
     } else {
-      throw new ReferenceError('match parameter args value,compareArray is not defined');
+      throw new ReferenceError('match parameter args(value,compareArray) is not defined');
     }
   } else {
     param = {
@@ -133,7 +133,7 @@ var match = function match(value, compareArray) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('match args compareArray is not array');
+    throw new TypeError('match args(compareArray) is not array');
   }
 
   return _match(param.value, param.compareArray);
@@ -154,7 +154,7 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
     if ('value' in value && 'compareArray' in value && 'inMatchValue' in value) {
       param = value;
     } else {
-      throw new ReferenceError('matchValue parameter args value,compareArray,inMatchValue is not defined');
+      throw new ReferenceError('matchValue parameter args(value,compareArray,inMatchValue) is not defined');
     }
   } else {
     param = {
@@ -165,7 +165,7 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
   }
 
   if (!_isArray(param.compareArray)) {
-    throw new TypeError('match args compareArray is not array');
+    throw new TypeError('matchValue args compareArray is not array');
   }
 
   return _matchValue(param.value, param.compareArray, param.inMatchValue);

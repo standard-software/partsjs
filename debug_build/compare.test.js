@@ -42,7 +42,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         v2: 123
       });
     }, function (e) {
-      return e.name === new SyntaxError().name && e.message === 'equal args do not have value1 and value2 property.';
+      return e.name === new ReferenceError().name && e.message === 'equal parameter args(value1,value2) is not defined';
     }));
   };
 
@@ -79,7 +79,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     checkEqual(true, isThrown(function () {
       or(123, 456);
     }, function (e) {
-      return e.name === new TypeError().name && e.message === 'or args compareArray is not array';
+      return e.name === new TypeError().name && e.message === 'or args(compareArray) is not array';
     }));
     checkEqual(true, or({
       value: 1,
@@ -96,7 +96,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         array: [1, 2]
       });
     }, function (e) {
-      return e.name === new ReferenceError().name && e.message === 'or parameter args value,compareArray is not defined';
+      return e.name === new ReferenceError().name && e.message === 'or parameter args(value,compareArray) is not defined';
     }));
   };
 
@@ -230,7 +230,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         compareArray: 123
       });
     }, function (e) {
-      return e.name === new TypeError().name && e.message === 'match args compareArray is not array';
+      return e.name === new TypeError().name && e.message === 'match args(compareArray) is not array';
     }), 'test_match thrown 4');
   };
 

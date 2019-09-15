@@ -266,8 +266,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       checkEqual(true, isThrown(function () {
         return guard(123);
       }, function (e) {
-        return e.message === 'guard args guardFunc is not function';
-      }));
+        return e.message === 'guard args(guardFunc) is not function';
+      }), 'gurad exception args1 4');
     } // (new SyntaxError).name
     // environment
     //  normal: 'SyntaxError'
@@ -290,7 +290,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           return 123;
         });
       }, function (e) {
-        return e.message === 'guard args guardFunc result is not array';
+        return e.message === 'guard args(guardFunc result) is not array';
       }));
     } // gurad exception args1 function result array
 
@@ -323,7 +323,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args guardFunc resultArray element is not array.length >= 1';
+      return e.message === 'guard args(guardFunc resultArray element) is not array.length >= 1';
     }), 'gurad exception args1 function result array 3-2');
 
     var guardFunc = function guardFunc() {
@@ -352,7 +352,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args guardFunc resultArray element is not array.length >= 1';
+      return e.message === 'guard args(guardFunc resultArray element) is not array.length >= 1';
     }), 'gurad exception args1 function result array 6-2'); // gurad exception function result array function result
 
     var guardFunc = function guardFunc() {
@@ -378,7 +378,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args guardFunc resultArray element value is not boolean';
+      return e.message === 'guard args(guardFunc resultArray element value) is not boolean';
     }), 'gurad exception function result array function result 2');
 
     var guardFunc = function guardFunc() {
@@ -392,7 +392,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     checkEqual(true, isThrown(function () {
       return guard(guardFunc);
     }, function (e) {
-      return e.message === 'guard args guardFunc resultArray element value is not boolean';
+      return e.message === 'guard args(guardFunc resultArray element value) is not boolean';
     }), 'gurad exception function result array function result 3'); // gurad exception args2
 
     var guardFunc = function guardFunc() {

@@ -32,7 +32,8 @@ var polyfillDefine = function polyfillDefine() {
 
       return this.substring(this_len - search.length, this_len) === search;
     };
-  }
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+
 
   if (!Array.prototype.some) {
     Array.prototype.some = function (fun, thisArg) {
@@ -58,7 +59,7 @@ var polyfillDefine = function polyfillDefine() {
 
       return false;
     };
-  } // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+  } // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
 
   if (!Array.prototype.map) {
@@ -98,6 +99,28 @@ var polyfillDefine = function polyfillDefine() {
       }
 
       return A;
+    };
+  } // update from: https://gist.github.com/hufyhang/c303ce1b80c7b6f8a73e
+
+
+  if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function (callback, thisArg) {
+      'use strict';
+
+      if (this == null) {
+        throw new TypeError('Array.prototype.some called on null or undefined');
+      }
+
+      if (typeof callback !== 'function') {
+        throw new TypeError(callback + ' is not a function');
+      }
+
+      var array = this;
+      thisArg = thisArg || this;
+
+      for (var i = 0, l = array.length; i !== l; ++i) {
+        callback.call(thisArg, array[i], i, array);
+      }
     };
   }
 };
