@@ -34,8 +34,10 @@ const test_execute_compare = (parts) => {
     // named argument property exception
     checkEqual(true, isThrown(
       () => { equal({v1: 123, v2: 123}) },
-      (e) => (e.name === (new SyntaxError).name) && (e.message ===
-        'equal args do not have value1 and value2 property.')
+      (e) => (e.name === (new ReferenceError).name) && (
+        e.message ===
+          'equal parameter args(value1,value2) is not defined'
+      )
     ));
   }
 
@@ -72,8 +74,10 @@ const test_execute_compare = (parts) => {
     // exception
     checkEqual(true, isThrown(
       () => { or(123, 456) },
-      (e) => (e.name === (new TypeError).name) && (e.message ===
-        'or args compareArray is not array')
+      (e) => (e.name === (new TypeError).name) && (
+        e.message ===
+          'or args(compareArray) is not array'
+      )
     ));
 
     checkEqual(true,  or({value: 1, compareArray: [1, 2]}))
@@ -82,10 +86,11 @@ const test_execute_compare = (parts) => {
     // exception
     checkEqual(true, isThrown(
       () => { or({value: 1, array: [1, 2]}) },
-      (e) => (e.name === (new ReferenceError).name) && (e.message ===
-        'or parameter args value,compareArray is not defined')
+      (e) => (e.name === (new ReferenceError).name) && (
+        e.message ===
+          'or parameter args(value,compareArray) is not defined'
+      )
     ));
-
   };
 
   const test_match = () => {
@@ -195,8 +200,12 @@ const test_execute_compare = (parts) => {
           value: '123', compareArray: 123
         });
       },
-      (e) => (e.name === (new TypeError).name) && (e.message ===
-        'match args compareArray is not array')
+      (e) => {
+        return (e.name === (new TypeError).name) && (
+        e.message ===
+          'match args(compareArray) is not array'
+        )
+      }
     ), 'test_match thrown 4');
 
   };

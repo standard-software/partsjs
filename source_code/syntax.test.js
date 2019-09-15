@@ -166,9 +166,11 @@ const test_execute_syntax = (parts) => {
       ));
       checkEqual(true, isThrown(
         () => guard(123),
-        (e) => e.message ===
-          'guard args guardFunc is not function'
-      ));
+        (e) => {
+          return e.message ===
+            'guard args(guardFunc) is not function'
+        }
+      ), 'gurad exception args1 4');
     }
     // (new SyntaxError).name
     // environment
@@ -187,7 +189,7 @@ const test_execute_syntax = (parts) => {
       checkEqual(true, isThrown(
         () => guard(() => 123),
         (e) => e.message ===
-          'guard args guardFunc result is not array'
+          'guard args(guardFunc result) is not array'
       ));
     }
 

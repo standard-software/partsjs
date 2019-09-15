@@ -100,13 +100,18 @@ You can now use the functions of the parts object.
 
 ## Version
 
-## 0.7.1
+### 0.7.2
+#### 2019/09/14(Sat)
+- add _text.js
+- add Array.forEach
+
+### 0.7.1
 #### 2019/09/12(Thu)
 - update or, match, matchValue Error handling
   - SyntaxError -> TypeError, ReferenceError
 - update ErrorMessage
 
-## 0.7.0
+### 0.7.0
 #### 2019/09/05(Thu)
 - add compare.js
   - equal, or, match, matchValue, defaultValue,

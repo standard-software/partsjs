@@ -21,6 +21,8 @@ const {
   if_,
 } = require('./syntax.js');
 
+const _TEXT = require('./_text.js');
+
 /**
  * equal
  */
@@ -33,8 +35,10 @@ const equal = (value1, value2) => {
     if (('value1' in value1) && ('value2' in value1)) {
       return _equal(value1.value1, value1.value2);
     } else {
-      throw new SyntaxError(
-        'equal args do not have value1 and value2 property.'
+      // 'equal args(value1,value2) is not defined'
+      throw new ReferenceError(
+        _TEXT.ReferenceError
+        .value1ParameterArgsValue2IsNotDefined('equal', 'value1,value2')
       );
     }
   } else {
@@ -60,8 +64,10 @@ const or = (value, compareArray) => {
     if (('value' in value) && ('compareArray' in value)) {
       param = value;
     } else {
+      // 'or parameter args(value,compareArray) is not defined'
       throw new ReferenceError(
-        'or parameter args value,compareArray is not defined'
+        _TEXT.ReferenceError
+        .value1ParameterArgsValue2IsNotDefined('or', 'value,compareArray')
       );
     }
   } else {
@@ -69,8 +75,10 @@ const or = (value, compareArray) => {
   }
 
   if (!_isArray(param.compareArray)) {
+    // 'or args(compareArray) is not array'
     throw new TypeError(
-      'or args compareArray is not array'
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotArray('or', 'compareArray')
     );
   }
   return _or(param.value, param.compareArray)
@@ -85,8 +93,10 @@ const _match = (value, compareArray) => {
       } else if (_isFunction(element)) {
         result = element(value);
         if (!_isBoolean(result)) {
+          // '_match args(compareArray element function result) is not boolean'
           throw new TypeError(
-            '_match args compareArray element function result is not boolean'
+            _TEXT.TypeError
+            .value1ArgsValue2IsNotBoolean('_match', 'compareArray element function result')
           );
         }
       } else {
@@ -101,7 +111,9 @@ const _match = (value, compareArray) => {
         result = element(value);
         if (!_isBoolean(result)) {
           throw new TypeError(
-            '_match args compareArray element function result is not boolean'
+          // '_match args(compareArray element function result) is not boolean'
+          _TEXT.TypeError
+            .value1ArgsValue2IsNotBoolean('_match', 'compareArray element function result')
           );
         }
       } else {
@@ -121,8 +133,10 @@ const match = (
     if (('value' in value) && ('compareArray' in value)) {
       param = value;
     } else {
+      // 'match parameter args(value,compareArray) is not defined'
       throw new ReferenceError(
-        'match parameter args value,compareArray is not defined'
+        _TEXT.ReferenceError
+        .value1ParameterArgsValue2IsNotDefined('match', 'value,compareArray')
       );
     }
   } else {
@@ -130,8 +144,10 @@ const match = (
   }
 
   if (!_isArray(param.compareArray)) {
+    // 'match args compareArray is not array'
     throw new TypeError(
-      'match args compareArray is not array'
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotArray('match', 'compareArray')
     );
   }
 
@@ -159,8 +175,10 @@ const matchValue = (
     if (('value' in value) && ('compareArray' in value) && ('inMatchValue' in value)) {
       param = value;
     } else {
+      // 'matchValue parameter args(value,compareArray,inMatchValue) is not defined'
       throw new ReferenceError(
-        'matchValue parameter args value,compareArray,inMatchValue is not defined'
+        _TEXT.ReferenceError
+        .value1ParameterArgsValue2IsNotDefined('matchValue', 'value,compareArray,inMatchValue')
       );
     }
   } else {
@@ -168,8 +186,10 @@ const matchValue = (
   }
 
   if (!_isArray(param.compareArray)) {
+    // 'matchValue args compareArray is not array'
     throw new TypeError(
-      'match args compareArray is not array'
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotArray('matchValue', 'compareArray')
     );
   }
 

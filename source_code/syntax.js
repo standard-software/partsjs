@@ -17,18 +17,30 @@ const {
   _isException,
 } = type;
 
+const _TEXT = require('./_text.js');
+
 /**
  * assert
  */
 const assert = (value, message = '') => {
   if (!_isBoolean(value)) {
-    throw new TypeError('assert args value is not boolean message:' + message);
+    // 'assert args(value) is not boolean|message:'
+    throw new TypeError(
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotBoolean('assert', 'value')
+      + `|message:${message}`
+    );
   }
   if (!_isString(message)) {
-    throw new TypeError('assert args message is not string message:' + message);
+    // 'assert args(message) is not string|message:'
+    throw new TypeError(
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotString('assert', 'message')
+      + `|message:${message}`
+    );
   }
   if (!value) {
-    throw new Error('assert error message:' + message);
+    throw new Error(`assert error|message:${message}`);
   }
 };
 
@@ -42,11 +54,19 @@ const guard = (guardFunc, runFunc) => {
   if (guard_status === false) { return false; }
 
   if (!_isFunction(guardFunc)) {
-    throw new TypeError('guard args guardFunc is not function');
+    // 'guard args(guardFunc) is not function'
+    throw new TypeError(
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotFunction('guard', 'guardFunc')
+    );
   }
   const result = guardFunc();
   if (!_isArray(result)) {
-    throw new TypeError('guard args guardFunc result is not array');
+    // 'guard args(guardFunc result) is not array'
+    throw new TypeError(
+      _TEXT.TypeError
+      .value1ArgsValue2IsNotArray('guard', 'guardFunc result')
+    );
   }
   for (let i = 0; i < result.length; i += 1) {
     // support for wsh last comma in Array. [a,b,]
