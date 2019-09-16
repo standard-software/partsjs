@@ -156,7 +156,9 @@ const matchValue = (
 ) => {
   let param;
   if (_isObject(value)) {
-    if (('value' in value) && ('compareArray' in value) && ('inMatchValue' in value)) {
+    if (('value' in value)
+    && ('compareArray' in value)
+    && ('inMatchValue' in value)) {
       param = value;
     } else {
       throw new ReferenceError(
@@ -180,18 +182,36 @@ const matchValue = (
   );
 };
 
-const defaultValue = (
+const _initialValue = (
   value,
   inMatchValue,
 ) => {
-  const parameter = if_(_isObject(value))({
-    then: value,
-    else: { value, inMatchValue }
-  });
-  return matchValue(
-    parameter.value,
-    [ _isUndefined, _isNull],
-    parameter.inMatchValue
+  if (_match(value, [ _isUndefined])) {
+    return inMatchValue;
+  }
+  return value;
+};
+
+const initialValue = (
+  value,
+  inMatchValue,
+) => {
+  let param;
+  if (_isObject(value)) {
+    if (('value' in value) && ('inMatchValue' in value)) {
+      param = value;
+    } else {
+      throw new ReferenceError(
+        'initialValue parameter args(value,inMatchValue) is not defined'
+      );
+    }
+  } else {
+    param = { value, inMatchValue }
+  }
+
+  return _initialValue(
+    param.value,
+    param.inMatchValue
   );
 };
 
@@ -200,5 +220,5 @@ module.exports = {
   or,
   match,
   matchValue,
-  defaultValue,
+  initialValue,
 };

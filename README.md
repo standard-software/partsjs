@@ -100,6 +100,10 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 0.8.0
+#### 2019/09/15(Sun)
+- change defaultValue -> initalValue
+
 ### 0.7.2
 #### 2019/09/14(Sat)
 - update ErrorMessage

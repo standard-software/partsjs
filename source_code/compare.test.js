@@ -11,7 +11,7 @@ const test_execute_compare = (parts) => {
     or,
     match,
     matchValue,
-    defaultValue,
+    initialValue,
   } = parts.compare;
 
   const test_equal = () => {
@@ -223,15 +223,15 @@ const test_execute_compare = (parts) => {
     }));
   };
 
-  const test_defaultValue = () => {
+  const test_initialValue = () => {
     // almost test_match done
-    checkEqual('123', defaultValue('123', 999));
-    checkEqual(999,  defaultValue(undefined, 999));
-    checkEqual(999,  defaultValue(null, 999));
+    checkEqual('123', initialValue('123', 999));
+    checkEqual(999,  initialValue(undefined, 999));
+    checkEqual(null,  initialValue(null, 999));
 
-    checkEqual('123', defaultValue({ value: '123', inMatchValue: 999 }));
-    checkEqual(999, defaultValue({ value: undefined, inMatchValue: 999 }));
-    checkEqual(999, defaultValue({ value: null, inMatchValue: 999 }));
+    checkEqual('123', initialValue({ value: '123', inMatchValue: 999 }));
+    checkEqual(999, initialValue({ value: undefined, inMatchValue: 999 }));
+    checkEqual(null, initialValue({ value: null, inMatchValue: 999 }));
   };
 
 
@@ -240,7 +240,7 @@ const test_execute_compare = (parts) => {
   test_or();
   test_match();
   test_matchValue();
-  test_defaultValue();
+  test_initialValue();
   console.log('  test commpare.js finish.');
 }
 
