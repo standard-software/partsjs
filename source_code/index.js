@@ -6,7 +6,7 @@ const compare = require('./compare.js');
 const convert = require('./convert.js');
 const string = require('./string.js');
 
-const VERSION = '0.8.0 beta';
+const VERSION = '0.8.0';
 
 module.exports = {
   VERSION,

@@ -150,13 +150,5 @@ You can now use the functions of the parts object.
 - add syntax.test.js
 - update test code(html, wsf)
 
-### 0.5.0
-#### 2019/09/02(Mon)
-- support wsh(Windows Scripting Host)
-  /test_exec/release_wsh/test_index.html
-- Rename folder test_code/ >> test_exec
-- Uninstall @babel/polyfill
-- update document "How to use WSH .wsf file"
-
 ### More Info
 [VERSION.md](./VERSION.md)

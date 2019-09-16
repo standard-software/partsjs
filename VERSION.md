@@ -2,6 +2,15 @@
 
 ## Version
 
+### 0.8.0
+#### 2019/09/15(Sun)
+- add convert.js
+  - numberToString,stringToNumber,stringToInteger,
+- add string.js
+  - matchFormat
+- add _isNotXxx
+- change defaultValue -> initalValue
+
 ### 0.7.2
 #### 2019/09/14(Sat)
 - update ErrorMessage

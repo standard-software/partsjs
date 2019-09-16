@@ -113,7 +113,7 @@ var convert = __webpack_require__(7);
 
 var string = __webpack_require__(8);
 
-var VERSION = '0.8.0 beta';
+var VERSION = '0.8.0';
 module.exports = {
   VERSION: VERSION,
   type: type,
