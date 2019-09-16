@@ -1,4 +1,25 @@
-  /**
+const {
+  _isUndefined,
+  _isNull,
+  _isNaNStrict,
+  _isBoolean,
+  _isNumber,
+  _isInteger,
+  _isString,
+  _isFunction,
+  _isObject,
+  _isArray,
+  _isDate,
+  _isRegExp,
+  _isError,
+  _isException,
+} = require('./type.js');
+
+const {
+  _match,
+} = require('./compare.js');
+
+/**
    * matchFormat
    */
   const _matchFormat = (
@@ -82,6 +103,7 @@
         );
     }
   };
+
   const matchFormat = (
     formatName,
     value,
@@ -99,12 +121,12 @@
       param = { formatName, value }
     }
 
-    if (!_isString(formatName)) {
+    if (!_isString(param.formatName)) {
       throw new TypeError(
         'matchFormat args(formatName) is not string'
       );
     }
-    if (!_isString(value)) {
+    if (!_isString(param.value)) {
       throw new TypeError(
         'matchFormat args(value) is not string'
       );
@@ -116,7 +138,52 @@
     );
   };
 
+  /**
+   * includes
+   */
+  const _includes = (
+    value,
+    compareArray
+  ) => {
+    const compareFunctionArray =
+      compareArray.map((element) => {
+        if (_isRegExp(element)) {
+          return element
+        } else if (_isString(element)) {
+          return value => value.includes(element)
+        }
+      });
+    return _match(value, compareFunctionArray);
+  }
+
+  const includes = (
+    value,
+    compareArray
+  ) => {
+    let param;
+    if (_isObject(value)) {
+      if (('value' in value) && ('compareArray' in value)) {
+        param = value;
+      } else {
+        throw new ReferenceError(
+          'includes parameter args(value,compareArray) is not defined'
+        );
+      }
+    } else {
+      param = { value, compareArray }
+    }
+
+    if (!_isArray(param.compareArray)) {
+      throw new TypeError(
+        'includes args(compareArray) is not array'
+      );
+    }
+
+    return _includes(param.value, param.compareArray);
+
+  }
 
 module.exports = {
   _matchFormat, matchFormat,
+  includes,
 };
