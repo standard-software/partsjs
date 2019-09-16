@@ -10,11 +10,17 @@ var syntax = require('./syntax.js');
 
 var compare = require('./compare.js');
 
-var VERSION = '0.7.2';
+var convert = require('./convert.js');
+
+var string = require('./string.js');
+
+var VERSION = '0.8.0 beta';
 module.exports = {
   VERSION: VERSION,
   type: type,
   test: test,
   syntax: syntax,
-  compare: compare
+  compare: compare,
+  convert: convert,
+  string: string
 };

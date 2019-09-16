@@ -171,15 +171,31 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
   return _matchValue(param.value, param.compareArray, param.inMatchValue);
 };
 
-var defaultValue = function defaultValue(value, inMatchValue) {
-  var parameter = if_(_isObject(value))({
-    then: value,
-    "else": {
+var _initialValue = function _initialValue(value, inMatchValue) {
+  if (_match(value, [_isUndefined])) {
+    return inMatchValue;
+  }
+
+  return value;
+};
+
+var initialValue = function initialValue(value, inMatchValue) {
+  var param;
+
+  if (_isObject(value)) {
+    if ('value' in value && 'inMatchValue' in value) {
+      param = value;
+    } else {
+      throw new ReferenceError('initialValue parameter args(value,inMatchValue) is not defined');
+    }
+  } else {
+    param = {
       value: value,
       inMatchValue: inMatchValue
-    }
-  });
-  return matchValue(parameter.value, [_isUndefined, _isNull], parameter.inMatchValue);
+    };
+  }
+
+  return _initialValue(param.value, param.inMatchValue);
 };
 
 module.exports = {
@@ -187,6 +203,8 @@ module.exports = {
   equal: equal,
   or: or,
   match: match,
+  _matchValue: _matchValue,
   matchValue: matchValue,
-  defaultValue: defaultValue
+  _initialValue: _initialValue,
+  initialValue: initialValue
 };

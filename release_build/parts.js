@@ -109,13 +109,19 @@ var syntax = __webpack_require__(5);
 
 var compare = __webpack_require__(6);
 
-var VERSION = '0.7.2';
+var convert = __webpack_require__(7);
+
+var string = __webpack_require__(8);
+
+var VERSION = '0.8.0 beta';
 module.exports = {
   VERSION: VERSION,
   type: type,
   test: test,
   syntax: syntax,
-  compare: compare
+  compare: compare,
+  convert: convert,
+  string: string
 };
 
 /***/ }),
@@ -340,6 +346,58 @@ var _isException = function _isException(value) {
 
   return false;
 };
+
+var _isNotUndefined = function _isNotUndefined(value) {
+  return !_isUndefined(value);
+};
+
+var _isNotNull = function _isNotNull(value) {
+  return !_isNull(value);
+};
+
+var _isNotNaNStrict = function _isNotNaNStrict(value) {
+  return !_isNaNStrict(value);
+};
+
+var _isNotBoolean = function _isNotBoolean(value) {
+  return !_isBoolean(value);
+};
+
+var _isNotNumber = function _isNotNumber(value) {
+  return !_isNumber(value);
+};
+
+var _isNotInteger = function _isNotInteger(value) {
+  return !_isInteger(value);
+};
+
+var _isNotString = function _isNotString(value) {
+  return !_isString(value);
+};
+
+var _isNotFunction = function _isNotFunction(value) {
+  return !_isFunction(value);
+};
+
+var _isNotObject = function _isNotObject(value) {
+  return !_isObject(value);
+};
+
+var _isNotArray = function _isNotArray(value) {
+  return !_isArray(value);
+};
+
+var _isNotDate = function _isNotDate(value) {
+  return !_isDate(value);
+};
+
+var _isNotRegExp = function _isNotRegExp(value) {
+  return !_isRegExp(value);
+};
+
+var _isNotException = function _isNotException(value) {
+  return !_isException(value);
+};
 /**
  * _isTypeCheck
  * description:
@@ -407,57 +465,31 @@ var isRegExp = _isTypeCheckArgsFunc(_isRegExp);
 
 var isException = _isTypeCheckArgsFunc(_isException);
 
-var isNotUndefined = _isTypeCheckArgsFunc(function (value) {
-  return !_isUndefined(value);
-});
+var isNotUndefined = _isTypeCheckArgsFunc(_isNotUndefined);
 
-var isNotNull = _isTypeCheckArgsFunc(function (value) {
-  return !_isNull(value);
-});
+var isNotNull = _isTypeCheckArgsFunc(_isNotNull);
 
-var isNotNaNStrict = _isTypeCheckArgsFunc(function (value) {
-  return !_isNaNStrict(value);
-});
+var isNotNaNStrict = _isTypeCheckArgsFunc(_isNotNaNStrict);
 
-var isNotBoolean = _isTypeCheckArgsFunc(function (value) {
-  return !_isBoolean(value);
-});
+var isNotBoolean = _isTypeCheckArgsFunc(_isNotBoolean);
 
-var isNotNumber = _isTypeCheckArgsFunc(function (value) {
-  return !_isNumber(value);
-});
+var isNotNumber = _isTypeCheckArgsFunc(_isNotNumber);
 
-var isNotInteger = _isTypeCheckArgsFunc(function (value) {
-  return !_isInteger(value);
-});
+var isNotInteger = _isTypeCheckArgsFunc(_isNotInteger);
 
-var isNotString = _isTypeCheckArgsFunc(function (value) {
-  return !_isString(value);
-});
+var isNotString = _isTypeCheckArgsFunc(_isNotString);
 
-var isNotFunction = _isTypeCheckArgsFunc(function (value) {
-  return !_isFunction(value);
-});
+var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
-var isNotObject = _isTypeCheckArgsFunc(function (value) {
-  return !_isObject(value);
-});
+var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
 
-var isNotArray = _isTypeCheckArgsFunc(function (value) {
-  return !_isArray(value);
-});
+var isNotArray = _isTypeCheckArgsFunc(_isNotArray);
 
-var isNotDate = _isTypeCheckArgsFunc(function (value) {
-  return !_isDate(value);
-});
+var isNotDate = _isTypeCheckArgsFunc(_isNotDate);
 
-var isNotRegExp = _isTypeCheckArgsFunc(function (value) {
-  return !_isRegExp(value);
-});
+var isNotRegExp = _isTypeCheckArgsFunc(_isNotRegExp);
 
-var isNotException = _isTypeCheckArgsFunc(function (value) {
-  return !_isException(value);
-});
+var isNotException = _isTypeCheckArgsFunc(_isNotException);
 
 var isUndefinedArray = _isTypeCheckArrayFunc(_isUndefined);
 
@@ -552,6 +584,19 @@ module.exports = {
   _isRegExp: _isRegExp,
   _isError: _isError,
   _isException: _isException,
+  _isNotUndefined: _isNotUndefined,
+  _isNotNull: _isNotNull,
+  _isNotNaNStrict: _isNotNaNStrict,
+  _isNotBoolean: _isNotBoolean,
+  _isNotNumber: _isNotNumber,
+  _isNotInteger: _isNotInteger,
+  _isNotString: _isNotString,
+  _isNotFunction: _isNotFunction,
+  _isNotObject: _isNotObject,
+  _isNotArray: _isNotArray,
+  _isNotDate: _isNotDate,
+  _isNotRegExp: _isNotRegExp,
+  _isNotException: _isNotException,
   isUndefined: isUndefined,
   isNull: isNull,
   isNaNStrict: isNaNStrict,
@@ -1123,15 +1168,31 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
   return _matchValue(param.value, param.compareArray, param.inMatchValue);
 };
 
-var defaultValue = function defaultValue(value, inMatchValue) {
-  var parameter = if_(_isObject(value))({
-    then: value,
-    "else": {
+var _initialValue = function _initialValue(value, inMatchValue) {
+  if (_match(value, [_isUndefined])) {
+    return inMatchValue;
+  }
+
+  return value;
+};
+
+var initialValue = function initialValue(value, inMatchValue) {
+  var param;
+
+  if (_isObject(value)) {
+    if ('value' in value && 'inMatchValue' in value) {
+      param = value;
+    } else {
+      throw new ReferenceError('initialValue parameter args(value,inMatchValue) is not defined');
+    }
+  } else {
+    param = {
       value: value,
       inMatchValue: inMatchValue
-    }
-  });
-  return matchValue(parameter.value, [_isUndefined, _isNull], parameter.inMatchValue);
+    };
+  }
+
+  return _initialValue(param.value, param.inMatchValue);
 };
 
 module.exports = {
@@ -1139,8 +1200,330 @@ module.exports = {
   equal: equal,
   or: or,
   match: match,
+  _matchValue: _matchValue,
   matchValue: matchValue,
-  defaultValue: defaultValue
+  _initialValue: _initialValue,
+  initialValue: initialValue
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(3),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isError = _require._isError,
+    _isException = _require._isException,
+    _isNotUndefined = _require._isNotUndefined,
+    _isNotNull = _require._isNotNull,
+    _isNotNaNStrict = _require._isNotNaNStrict,
+    _isNotBoolean = _require._isNotBoolean,
+    _isNotNumber = _require._isNotNumber,
+    _isNotInteger = _require._isNotInteger,
+    _isNotString = _require._isNotString,
+    _isNotFunction = _require._isNotFunction,
+    _isNotObject = _require._isNotObject,
+    _isNotArray = _require._isNotArray,
+    _isNotDate = _require._isNotDate,
+    _isNotRegExp = _require._isNotRegExp,
+    _isNotException = _require._isNotException;
+
+var _require2 = __webpack_require__(6),
+    _matchValue = _require2._matchValue,
+    _initialValue = _require2._initialValue;
+
+var _require3 = __webpack_require__(8),
+    _matchFormat = _require3._matchFormat;
+/**
+ * numberToString
+ */
+
+
+var _numberToString = function _numberToString(value, radix) {
+  radix = _initialValue(radix, 10);
+  return value.toString(radix);
+};
+
+var numberToString = function numberToString(value, radix) {
+  radix = _initialValue(radix, 10);
+  var param;
+
+  if (_isObject(value)) {
+    if ('value' in value) {
+      param = value;
+      param.radix = _initialValue(param.radix, radix);
+    } else {
+      throw new ReferenceError('numberToString parameter args(value) is not defined');
+    }
+  } else {
+    param = {
+      value: value,
+      radix: radix
+    };
+  }
+
+  if (!_isNumber(param.value)) {
+    throw new TypeError('numberToString args(value) is not number');
+  }
+
+  if (!_isInteger(param.radix)) {
+    throw new TypeError('numberToString args(radix) is not integer');
+  }
+
+  if (!(2 <= param.radix && param.radix <= 36)) {
+    throw new RangeError('numberToString args(radix) must be between 2 and 36');
+  }
+
+  return _numberToString(param.value, param.radix);
+};
+/**
+ * stringToNumber
+ */
+
+
+var _stringToNumber = function _stringToNumber(value, defaultValue) {
+  if (!_matchFormat('float', value)) {
+    return defaultValue;
+  }
+
+  return _matchValue(Number(value), [_isNotNumber], defaultValue);
+};
+
+var stringToNumber = function stringToNumber(value, defaultValue) {
+  var param;
+
+  if (_isObject(value)) {
+    if ('value' in value) {
+      param = value;
+    } else {
+      throw new ReferenceError('stringToNumber parameter args(value) is not defined');
+    }
+  } else {
+    param = {
+      value: value,
+      defaultValue: defaultValue
+    };
+  }
+
+  if (!_isString(param.value)) {
+    throw new TypeError('stringToNumber args(value) is not string');
+  }
+
+  return _stringToNumber(param.value, param.defaultValue);
+};
+/**
+ * stringToInteger
+ */
+
+
+var _stringToInteger = function _stringToInteger(value, defaultValue, radix) {
+  radix = _initialValue(radix, 10);
+
+  if (!_matchFormat(String(radix) + '_base_number', value)) {
+    return defaultValue;
+  }
+
+  return _matchValue(parseInt(value, radix), [_isNotInteger], defaultValue);
+};
+
+var stringToInteger = function stringToInteger(value, defaultValue, radix) {
+  radix = _initialValue(radix, 10);
+  var param;
+
+  if (_isObject(value)) {
+    if ('value' in value) {
+      param = value;
+      param.radix = _initialValue(param.radix, radix);
+    } else {
+      throw new ReferenceError('stringToInteger parameter args(value) is not defined');
+    }
+  } else {
+    param = {
+      value: value,
+      defaultValue: defaultValue,
+      radix: radix
+    };
+  }
+
+  if (!_isString(param.value)) {
+    throw new TypeError('stringToInteger args(value) is not string');
+  }
+
+  if (!_isInteger(param.radix)) {
+    throw new TypeError('stringToInteger args(radix) is not integer');
+  }
+
+  if (!(2 <= param.radix && param.radix <= 36)) {
+    throw new RangeError('stringToInteger args(radix) must be between 2 and 36');
+  }
+
+  return _stringToInteger(param.value, param.defaultValue, param.radix);
+};
+
+module.exports = {
+  numberToString: numberToString,
+  stringToNumber: stringToNumber,
+  stringToInteger: stringToInteger
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * matchFormat
+ */
+var _matchFormat = function _matchFormat(formatName, value) {
+  switch (formatName) {
+    case 'zenkaku':
+      return value.match(/^[^\x01-\x7E\xA1-\xDF]+$/) ? true : false;
+
+    case 'hiragana':
+      return value.match(/^[\u3041-\u3096]+$/) ? true : false;
+
+    case 'katakana':
+      return value.match(/^[\u30a1-\u30f6]+$/) ? true : false;
+
+    case 'alphabet-number':
+      return value.match(/^[0-9a-zA-Z]+$/) ? true : false;
+
+    case 'number':
+      return value.match(/^[0-9]+$/) ? true : false;
+
+    case 'alphabet':
+      return value.match(/^[a-zA-Z]+$/) ? true : false;
+
+    case 'upper_alphabet':
+      return value.match(/^[A-Z]+$/) ? true : false;
+
+    case 'lower_alphabet':
+      return value.match(/^[a-z]+$/) ? true : false;
+
+    case 'integer':
+      return value.match(/^[+|-]?[0-9]+$/) ? true : false;
+
+    case 'float_only':
+      return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
+
+    case 'float':
+      return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
+
+    case '2_base_number':
+    case 'binary':
+      return value.match(/^[-|+]?[01]+$/) ? true : false;
+
+    case '3_base_number':
+      return value.match(/^[-|+]?[0-2]+$/) ? true : false;
+
+    case '4_base_number':
+      return value.match(/^[-|+]?[0-3]+$/) ? true : false;
+
+    case '5_base_number':
+      return value.match(/^[-|+]?[0-4]+$/) ? true : false;
+
+    case '6_base_number':
+      return value.match(/^[-|+]?[0-5]+$/) ? true : false;
+
+    case '7_base_number':
+      return value.match(/^[-|+]?[0-6]+$/) ? true : false;
+
+    case '8_base_number':
+    case 'octal':
+      return value.match(/^[-|+]?[0-7]+$/) ? true : false;
+
+    case '9_base_number':
+      return value.match(/^[-|+]?[0-8]+$/) ? true : false;
+
+    case '10_base_number':
+      return value.match(/^[-|+]?[0-9]+$/) ? true : false;
+
+    case '11_base_number':
+      return value.match(/^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/) ? true : false;
+
+    case '12_base_number':
+      return value.match(/^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/) ? true : false;
+
+    case '13_base_number':
+      return value.match(/^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/) ? true : false;
+
+    case '14_base_number':
+      return value.match(/^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/) ? true : false;
+
+    case '15_base_number':
+      return value.match(/^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/) ? true : false;
+
+    case '16_base_number':
+    case 'hex':
+      return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
+
+    case 'date':
+      // y/m/d
+      return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
+
+    case 'date-minutes':
+      // y/m/d h:n
+      return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/) ? true : false;
+
+    case 'date-seconds':
+      // y/m/d h:n:s
+      return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/) ? true : false;
+
+    case 'date-milliseconds':
+      // y/m/d h:n:s.ms
+      return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
+
+    default:
+      throw new Error("matchFormat args2(formatName) is not exists format. ".concat(formatName));
+  }
+};
+
+var matchFormat = function matchFormat(formatName, value) {
+  var param;
+
+  if (_isObject(formatName)) {
+    if ('formatName' in formatName && 'value' in formatName) {
+      param = formatName;
+    } else {
+      throw new ReferenceError('matchFormat parameter args(formatName,value) is not defined');
+    }
+  } else {
+    param = {
+      formatName: formatName,
+      value: value
+    };
+  }
+
+  if (!_isString(formatName)) {
+    throw new TypeError('matchFormat args(formatName) is not string');
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('matchFormat args(value) is not string');
+  }
+
+  return _matchFormat(param.formatName, param.value);
+};
+
+module.exports = {
+  _matchFormat: _matchFormat,
+  matchFormat: matchFormat
 };
 
 /***/ })

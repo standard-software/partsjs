@@ -80,6 +80,58 @@ var _isException = function _isException(value) {
 
   return false;
 };
+
+var _isNotUndefined = function _isNotUndefined(value) {
+  return !_isUndefined(value);
+};
+
+var _isNotNull = function _isNotNull(value) {
+  return !_isNull(value);
+};
+
+var _isNotNaNStrict = function _isNotNaNStrict(value) {
+  return !_isNaNStrict(value);
+};
+
+var _isNotBoolean = function _isNotBoolean(value) {
+  return !_isBoolean(value);
+};
+
+var _isNotNumber = function _isNotNumber(value) {
+  return !_isNumber(value);
+};
+
+var _isNotInteger = function _isNotInteger(value) {
+  return !_isInteger(value);
+};
+
+var _isNotString = function _isNotString(value) {
+  return !_isString(value);
+};
+
+var _isNotFunction = function _isNotFunction(value) {
+  return !_isFunction(value);
+};
+
+var _isNotObject = function _isNotObject(value) {
+  return !_isObject(value);
+};
+
+var _isNotArray = function _isNotArray(value) {
+  return !_isArray(value);
+};
+
+var _isNotDate = function _isNotDate(value) {
+  return !_isDate(value);
+};
+
+var _isNotRegExp = function _isNotRegExp(value) {
+  return !_isRegExp(value);
+};
+
+var _isNotException = function _isNotException(value) {
+  return !_isException(value);
+};
 /**
  * _isTypeCheck
  * description:
@@ -147,57 +199,31 @@ var isRegExp = _isTypeCheckArgsFunc(_isRegExp);
 
 var isException = _isTypeCheckArgsFunc(_isException);
 
-var isNotUndefined = _isTypeCheckArgsFunc(function (value) {
-  return !_isUndefined(value);
-});
+var isNotUndefined = _isTypeCheckArgsFunc(_isNotUndefined);
 
-var isNotNull = _isTypeCheckArgsFunc(function (value) {
-  return !_isNull(value);
-});
+var isNotNull = _isTypeCheckArgsFunc(_isNotNull);
 
-var isNotNaNStrict = _isTypeCheckArgsFunc(function (value) {
-  return !_isNaNStrict(value);
-});
+var isNotNaNStrict = _isTypeCheckArgsFunc(_isNotNaNStrict);
 
-var isNotBoolean = _isTypeCheckArgsFunc(function (value) {
-  return !_isBoolean(value);
-});
+var isNotBoolean = _isTypeCheckArgsFunc(_isNotBoolean);
 
-var isNotNumber = _isTypeCheckArgsFunc(function (value) {
-  return !_isNumber(value);
-});
+var isNotNumber = _isTypeCheckArgsFunc(_isNotNumber);
 
-var isNotInteger = _isTypeCheckArgsFunc(function (value) {
-  return !_isInteger(value);
-});
+var isNotInteger = _isTypeCheckArgsFunc(_isNotInteger);
 
-var isNotString = _isTypeCheckArgsFunc(function (value) {
-  return !_isString(value);
-});
+var isNotString = _isTypeCheckArgsFunc(_isNotString);
 
-var isNotFunction = _isTypeCheckArgsFunc(function (value) {
-  return !_isFunction(value);
-});
+var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
-var isNotObject = _isTypeCheckArgsFunc(function (value) {
-  return !_isObject(value);
-});
+var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
 
-var isNotArray = _isTypeCheckArgsFunc(function (value) {
-  return !_isArray(value);
-});
+var isNotArray = _isTypeCheckArgsFunc(_isNotArray);
 
-var isNotDate = _isTypeCheckArgsFunc(function (value) {
-  return !_isDate(value);
-});
+var isNotDate = _isTypeCheckArgsFunc(_isNotDate);
 
-var isNotRegExp = _isTypeCheckArgsFunc(function (value) {
-  return !_isRegExp(value);
-});
+var isNotRegExp = _isTypeCheckArgsFunc(_isNotRegExp);
 
-var isNotException = _isTypeCheckArgsFunc(function (value) {
-  return !_isException(value);
-});
+var isNotException = _isTypeCheckArgsFunc(_isNotException);
 
 var isUndefinedArray = _isTypeCheckArrayFunc(_isUndefined);
 
@@ -292,6 +318,19 @@ module.exports = {
   _isRegExp: _isRegExp,
   _isError: _isError,
   _isException: _isException,
+  _isNotUndefined: _isNotUndefined,
+  _isNotNull: _isNotNull,
+  _isNotNaNStrict: _isNotNaNStrict,
+  _isNotBoolean: _isNotBoolean,
+  _isNotNumber: _isNotNumber,
+  _isNotInteger: _isNotInteger,
+  _isNotString: _isNotString,
+  _isNotFunction: _isNotFunction,
+  _isNotObject: _isNotObject,
+  _isNotArray: _isNotArray,
+  _isNotDate: _isNotDate,
+  _isNotRegExp: _isNotRegExp,
+  _isNotException: _isNotException,
   isUndefined: isUndefined,
   isNull: isNull,
   isNaNStrict: isNaNStrict,

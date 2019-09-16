@@ -10,7 +10,7 @@ var test_execute_compare = function test_execute_compare(parts) {
       or = _parts$compare.or,
       match = _parts$compare.match,
       matchValue = _parts$compare.matchValue,
-      defaultValue = _parts$compare.defaultValue;
+      initialValue = _parts$compare.initialValue;
 
   var test_equal = function test_equal() {
     // normal args
@@ -250,20 +250,20 @@ var test_execute_compare = function test_execute_compare(parts) {
     }));
   };
 
-  var test_defaultValue = function test_defaultValue() {
+  var test_initialValue = function test_initialValue() {
     // almost test_match done
-    checkEqual('123', defaultValue('123', 999));
-    checkEqual(999, defaultValue(undefined, 999));
-    checkEqual(999, defaultValue(null, 999));
-    checkEqual('123', defaultValue({
+    checkEqual('123', initialValue('123', 999));
+    checkEqual(999, initialValue(undefined, 999));
+    checkEqual(null, initialValue(null, 999));
+    checkEqual('123', initialValue({
       value: '123',
       inMatchValue: 999
     }));
-    checkEqual(999, defaultValue({
+    checkEqual(999, initialValue({
       value: undefined,
       inMatchValue: 999
     }));
-    checkEqual(999, defaultValue({
+    checkEqual(null, initialValue({
       value: null,
       inMatchValue: 999
     }));
@@ -274,7 +274,7 @@ var test_execute_compare = function test_execute_compare(parts) {
   test_or();
   test_match();
   test_matchValue();
-  test_defaultValue();
+  test_initialValue();
   console.log('  test commpare.js finish.');
 };
 
