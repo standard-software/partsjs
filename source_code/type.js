@@ -69,6 +69,20 @@ const _isException = (value) => {
   return false;
 };
 
+const _isNotUndefined = value => !_isUndefined(value);
+const _isNotNull      = value => !_isNull(value);
+const _isNotNaNStrict = value => !_isNaNStrict(value);
+const _isNotBoolean   = value => !_isBoolean(value);
+const _isNotNumber    = value => !_isNumber(value);
+const _isNotInteger   = value => !_isInteger(value);
+const _isNotString    = value => !_isString(value);
+const _isNotFunction  = value => !_isFunction(value);
+const _isNotObject    = value => !_isObject(value);
+const _isNotArray     = value => !_isArray(value);
+const _isNotDate      = value => !_isDate(value);
+const _isNotRegExp    = value => !_isRegExp(value);
+const _isNotException = value => !_isException(value);
+
 /**
  * _isTypeCheck
  * description:
@@ -112,19 +126,19 @@ const isDate      = _isTypeCheckArgsFunc(_isDate);
 const isRegExp    = _isTypeCheckArgsFunc(_isRegExp);
 const isException = _isTypeCheckArgsFunc(_isException);
 
-const isNotUndefined  = _isTypeCheckArgsFunc(value => !_isUndefined(value));
-const isNotNull       = _isTypeCheckArgsFunc(value => !_isNull(value));
-const isNotNaNStrict  = _isTypeCheckArgsFunc(value => !_isNaNStrict(value));
-const isNotBoolean    = _isTypeCheckArgsFunc(value => !_isBoolean(value));
-const isNotNumber     = _isTypeCheckArgsFunc(value => !_isNumber(value));
-const isNotInteger    = _isTypeCheckArgsFunc(value => !_isInteger(value));
-const isNotString     = _isTypeCheckArgsFunc(value => !_isString(value));
-const isNotFunction   = _isTypeCheckArgsFunc(value => !_isFunction(value));
-const isNotObject     = _isTypeCheckArgsFunc(value => !_isObject(value));
-const isNotArray      = _isTypeCheckArgsFunc(value => !_isArray(value));
-const isNotDate       = _isTypeCheckArgsFunc(value => !_isDate(value));
-const isNotRegExp     = _isTypeCheckArgsFunc(value => !_isRegExp(value));
-const isNotException  = _isTypeCheckArgsFunc(value => !_isException(value));
+const isNotUndefined  = _isTypeCheckArgsFunc(_isNotUndefined);
+const isNotNull       = _isTypeCheckArgsFunc(_isNotNull);
+const isNotNaNStrict  = _isTypeCheckArgsFunc(_isNotNaNStrict);
+const isNotBoolean    = _isTypeCheckArgsFunc(_isNotBoolean);
+const isNotNumber     = _isTypeCheckArgsFunc(_isNotNumber);
+const isNotInteger    = _isTypeCheckArgsFunc(_isNotInteger);
+const isNotString     = _isTypeCheckArgsFunc(_isNotString);
+const isNotFunction   = _isTypeCheckArgsFunc(_isNotFunction);
+const isNotObject     = _isTypeCheckArgsFunc(_isNotObject);
+const isNotArray      = _isTypeCheckArgsFunc(_isNotArray);
+const isNotDate       = _isTypeCheckArgsFunc(_isNotDate);
+const isNotRegExp     = _isTypeCheckArgsFunc(_isNotRegExp);
+const isNotException  = _isTypeCheckArgsFunc(_isNotException);
 
 const isUndefinedArray  = _isTypeCheckArrayFunc(_isUndefined);
 const isNullArray       = _isTypeCheckArrayFunc(_isNull);
@@ -170,6 +184,20 @@ module.exports = {
   _isRegExp,
   _isError,
   _isException,
+
+  _isNotUndefined,
+  _isNotNull,
+  _isNotNaNStrict,
+  _isNotBoolean,
+  _isNotNumber,
+  _isNotInteger,
+  _isNotString,
+  _isNotFunction,
+  _isNotObject,
+  _isNotArray,
+  _isNotDate,
+  _isNotRegExp,
+  _isNotException,
 
   isUndefined,
   isNull,

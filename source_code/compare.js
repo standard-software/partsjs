@@ -219,6 +219,6 @@ module.exports = {
   _equal, equal,
   or,
   match,
-  matchValue,
-  initialValue,
+  _matchValue, matchValue,
+  _initialValue, initialValue,
 };
