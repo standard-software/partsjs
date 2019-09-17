@@ -98,8 +98,8 @@ const {
           /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/))
           ? true : false;
       default:
-        throw new Error(
-          `matchFormat args2(formatName) is not exists format. ${formatName}`
+        throw new RangeError(
+          `matchFormat args(formatName) is not exists format. ${formatName}`
         );
     }
   };
@@ -150,7 +150,13 @@ const {
         if (_isRegExp(element)) {
           return element
         } else if (_isString(element)) {
-          return value => value.includes(element)
+          return element === ''
+            ? () => false
+            : value => value.includes(element)
+        } else {
+          throw new TypeError(
+            '_includes args(compareArray element) is not regexp or string'
+          );
         }
       });
     return _match(value, compareFunctionArray);
