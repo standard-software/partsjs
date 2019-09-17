@@ -2,6 +2,12 @@
 
 ## Version
 
+### 0.8.1
+#### 2019/09/16(Mon)
+- add string.includes
+  - test code
+- update string.matchFormat
+
 ### 0.8.0
 #### 2019/09/15(Sun)
 - add convert.js
