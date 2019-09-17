@@ -1,8 +1,28 @@
 "use strict";
 
+var _require = require('./type.js'),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isError = _require._isError,
+    _isException = _require._isException;
+
+var _require2 = require('./compare.js'),
+    _match = _require2._match;
 /**
- * matchFormat
- */
+   * matchFormat
+   */
+
+
 var _matchFormat = function _matchFormat(formatName, value) {
   switch (formatName) {
     case 'zenkaku':
@@ -103,7 +123,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
       return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
 
     default:
-      throw new Error("matchFormat args2(formatName) is not exists format. ".concat(formatName));
+      throw new RangeError("matchFormat args(formatName) is not exists format. ".concat(formatName));
   }
 };
 
@@ -123,18 +143,63 @@ var matchFormat = function matchFormat(formatName, value) {
     };
   }
 
-  if (!_isString(formatName)) {
+  if (!_isString(param.formatName)) {
     throw new TypeError('matchFormat args(formatName) is not string');
   }
 
-  if (!_isString(value)) {
+  if (!_isString(param.value)) {
     throw new TypeError('matchFormat args(value) is not string');
   }
 
   return _matchFormat(param.formatName, param.value);
 };
+/**
+ * includes
+ */
+
+
+var _includes = function _includes(value, compareArray) {
+  var compareFunctionArray = compareArray.map(function (element) {
+    if (_isRegExp(element)) {
+      return element;
+    } else if (_isString(element)) {
+      return element === '' ? function () {
+        return false;
+      } : function (value) {
+        return value.includes(element);
+      };
+    } else {
+      throw new TypeError('_includes args(compareArray element) is not regexp or string');
+    }
+  });
+  return _match(value, compareFunctionArray);
+};
+
+var includes = function includes(value, compareArray) {
+  var param;
+
+  if (_isObject(value)) {
+    if ('value' in value && 'compareArray' in value) {
+      param = value;
+    } else {
+      throw new ReferenceError('includes parameter args(value,compareArray) is not defined');
+    }
+  } else {
+    param = {
+      value: value,
+      compareArray: compareArray
+    };
+  }
+
+  if (!_isArray(param.compareArray)) {
+    throw new TypeError('includes args(compareArray) is not array');
+  }
+
+  return _includes(param.value, param.compareArray);
+};
 
 module.exports = {
   _matchFormat: _matchFormat,
-  matchFormat: matchFormat
+  matchFormat: matchFormat,
+  includes: includes
 };

@@ -14,7 +14,7 @@ var convert = require('./convert.js');
 
 var string = require('./string.js');
 
-var VERSION = '0.8.0';
+var VERSION = '0.8.1 beta';
 module.exports = {
   VERSION: VERSION,
   type: type,

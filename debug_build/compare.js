@@ -202,6 +202,7 @@ module.exports = {
   _equal: _equal,
   equal: equal,
   or: or,
+  _match: _match,
   match: match,
   _matchValue: _matchValue,
   matchValue: matchValue,

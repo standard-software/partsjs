@@ -16,12 +16,16 @@ var test_execute_index = function test_execute_index(parts) {
   var _require5 = require('./convert.test.js'),
       test_execute_convert = _require5.test_execute_convert;
 
+  var _require6 = require('./string.test.js'),
+      test_execute_string = _require6.test_execute_string;
+
   console.log('test start. ' + parts.VERSION);
   test_execute_type(parts);
   test_execute_syntax(parts);
   test_execute_test(parts);
   test_execute_compare(parts);
   test_execute_convert(parts);
+  test_execute_string(parts);
   console.log('test finish.');
 };
 
