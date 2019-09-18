@@ -201,6 +201,7 @@ var initialValue = function initialValue(value, inMatchValue) {
 module.exports = {
   _equal: _equal,
   equal: equal,
+  _or: _or,
   or: or,
   _match: _match,
   match: match,

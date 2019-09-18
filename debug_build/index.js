@@ -14,7 +14,9 @@ var convert = require('./convert.js');
 
 var string = require('./string.js');
 
-var VERSION = '0.8.1';
+var consoleHook = require('./consoleHook.js');
+
+var VERSION = '0.9.0 beta';
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -22,5 +24,6 @@ module.exports = {
   syntax: syntax,
   compare: compare,
   convert: convert,
-  string: string
+  string: string,
+  consoleHook: consoleHook
 };

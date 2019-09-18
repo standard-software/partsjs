@@ -169,7 +169,7 @@ var _includes = function _includes(value, compareArray) {
         return value.includes(element);
       };
     } else {
-      throw new TypeError('_includes args(compareArray element) is not regexp or string');
+      throw new TypeError('_includes args(compareArray element) is not [regexp|string]');
     }
   });
   return _match(value, compareFunctionArray);
@@ -201,5 +201,6 @@ var includes = function includes(value, compareArray) {
 module.exports = {
   _matchFormat: _matchFormat,
   matchFormat: matchFormat,
+  _includes: _includes,
   includes: includes
 };
