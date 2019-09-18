@@ -2,6 +2,10 @@
 
 ## Version
 
+### 0.9.0
+#### 2019/09/17(Tue)
+- add consoleHook.js
+
 ### 0.8.1
 #### 2019/09/16(Mon)
 - add string.includes

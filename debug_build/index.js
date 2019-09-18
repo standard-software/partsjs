@@ -16,7 +16,7 @@ var string = require('./string.js');
 
 var consoleHook = require('./consoleHook.js');
 
-var VERSION = '0.9.0 beta';
+var VERSION = '0.9.0';
 module.exports = {
   VERSION: VERSION,
   type: type,

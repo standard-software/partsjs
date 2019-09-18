@@ -144,21 +144,5 @@ You can now use the functions of the parts object.
   - String.includes startsWith endsWith
   - Array.some map
 
-### 0.6.1
-#### 2019/09/04(Wed)
-- add sc, if_, switch_
-  - add test code for each
-- update test code
-
-### 0.6.0
-#### 2019/09/03(Tue)
-- add syntax.js
-  - assert
-  - guard
-  - functionValue
-  - isThrown isThrownValue isThrownException isNotThrown
-- add syntax.test.js
-- update test code(html, wsf)
-
 ### More Info
 [VERSION.md](./VERSION.md)

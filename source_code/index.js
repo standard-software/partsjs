@@ -7,7 +7,7 @@ const convert = require('./convert.js');
 const string = require('./string.js');
 const consoleHook = require('./consoleHook.js');
 
-const VERSION = '0.9.0 beta';
+const VERSION = '0.9.0';
 
 module.exports = {
   VERSION,

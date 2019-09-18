@@ -115,7 +115,7 @@ var string = __webpack_require__(8);
 
 var consoleHook = __webpack_require__(9);
 
-var VERSION = '0.9.0 beta';
+var VERSION = '0.9.0';
 module.exports = {
   VERSION: VERSION,
   type: type,
