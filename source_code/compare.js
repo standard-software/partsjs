@@ -217,7 +217,7 @@ const initialValue = (
 
 module.exports = {
   _equal, equal,
-  or,
+  _or, or,
   _match, match,
   _matchValue, matchValue,
   _initialValue, initialValue,

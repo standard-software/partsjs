@@ -5,8 +5,9 @@ const syntax = require('./syntax.js');
 const compare = require('./compare.js');
 const convert = require('./convert.js');
 const string = require('./string.js');
+const consoleHook = require('./consoleHook.js');
 
-const VERSION = '0.8.1';
+const VERSION = '0.9.0 beta';
 
 module.exports = {
   VERSION,
@@ -16,5 +17,6 @@ module.exports = {
   compare,
   convert,
   string,
+  consoleHook,
 };
 

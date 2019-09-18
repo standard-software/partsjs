@@ -155,7 +155,7 @@ const {
             : value => value.includes(element)
         } else {
           throw new TypeError(
-            '_includes args(compareArray element) is not regexp or string'
+            '_includes args(compareArray element) is not [regexp|string]'
           );
         }
       });
@@ -191,5 +191,5 @@ const {
 
 module.exports = {
   _matchFormat, matchFormat,
-  includes,
+  _includes, includes,
 };
