@@ -1,17 +1,7 @@
 const {
-  _isUndefined,
-  _isNull,
-  _isNaNStrict,
-  _isBoolean,
-  _isNumber,
-  _isInteger,
-  _isString,
-  _isFunction,
-  _isObject,
-  _isArray,
-  _isDate,
-  _isRegExp,
-  _isError,
+  _isUndefined,_isNull,_isNaNStrict,
+  _isBoolean,_isNumber,_isInteger,_isString,
+  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
 } = require('./type.js');
 
@@ -36,6 +26,22 @@ const _hook = (
 ) => {
   console[methodName] = hookFunc;
 };
+
+const hook = (
+  methodName,
+  hookFunc
+) => {
+  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  if (!_isFunction(hookFunc)) {
+    throw new TypeError('hook args(hookFunc) is not function');
+  }
+
+  _hook(methodName, hookFunc);
+};
+
 const hookLog = (hookFunc) => {
   _hook('log', hookFunc);
 };
@@ -55,6 +61,15 @@ const hookDebug = (hookFunc) => {
 const _unHook = (methodName) => {
   console[methodName] = original[methodName];
 };
+
+var unHook = (methodName) => {
+  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new RangeError('unHook args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  _unHook(methodName);
+};
+
 const unHookLog = () => {
   _unHook('log');
 };
@@ -161,23 +176,8 @@ const acceptDebug = (
 
 module.exports = {
   _hook,
-  hookLog,
-  hookInfo,
-  hookWarn,
-  hookError,
-  hookDebug,
-
+  hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,
   _unHook,
-  unHookLog,
-  unHookInfo,
-  unHookWarn,
-  unHookError,
-  unHookDebug,
-
-  accept,
-  acceptLog,
-  acceptInfo,
-  acceptWarn,
-  acceptError,
-  acceptDebug,
+  unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,
+  accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,
 };

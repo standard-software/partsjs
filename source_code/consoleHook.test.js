@@ -13,7 +13,7 @@ const test_execute_consoleHook = (parts) => {
 
     var consoleOutput = '';
     var consoleHook_hook = function() {
-      consoleHook._hook(methodName, function(args) {
+      consoleHook.hook(methodName, function(args) {
         consoleOutput += args + ';';
       });
     };
@@ -30,63 +30,63 @@ const test_execute_consoleHook = (parts) => {
     consoleOutput = '';
     consoleHook_hook();
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;debug2;release1;release2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, ['debug1'], [], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, ['debug'], [], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;debug2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, ['debug1', 'release1'], [], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;release1;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, [/debug?/], [], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;debug2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, [/debug?/], ['debug1'], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, [], ['release1'], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;debug2;release2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, [], [/debug?/], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('release1;release2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, ['debug1', 'debug2'], ['debug1'], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug2;', consoleOutput);
 
     var testConsoleMethod = function() {
@@ -100,31 +100,31 @@ const test_execute_consoleHook = (parts) => {
     consoleHook_hook();
     consoleHook.accept(methodName, ['debug', ' a '], [], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug1;debug2;release1;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, ['debug'], [' a '], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('debug2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, [' b '], ['messageB'], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('release2;', consoleOutput);
 
     consoleOutput = '';
     consoleHook_hook();
     consoleHook.accept(methodName, ['messageD'], [], console[methodName]);
     testConsoleMethod();
-    consoleHook._unHook(methodName);
+    consoleHook.unHook(methodName);
     checkEqual('release2;', consoleOutput);
 
-    consoleHook._hook(methodName, consoleMethod);
+    consoleHook.hook(methodName, consoleMethod);
   };
 
   console.log('  test consoleHook.js start.');
