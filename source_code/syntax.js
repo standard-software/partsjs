@@ -1,21 +1,9 @@
-const type = require('./type.js');
-
 const {
-  _isUndefined,
-  _isNull,
-  _isNaNStrict,
-  _isBoolean,
-  _isNumber,
-  _isInteger,
-  _isString,
-  _isFunction,
-  _isObject,
-  _isArray,
-  _isDate,
-  _isRegExp,
-  _isError,
+  _isUndefined,_isNull,_isNaNStrict,
+  _isBoolean,_isNumber,_isInteger,_isString,
+  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
-} = type;
+} = require('./type.js');
 
 /**
  * assert
@@ -200,9 +188,6 @@ const switch_ = (expression) => {
 };
 
 module.exports = {
-  assert,
-  guard,
-  sc,
-  if_,
-  switch_,
+  assert,guard,
+  sc,if_,switch_,
 };

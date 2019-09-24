@@ -1,17 +1,7 @@
 const {
-  _isUndefined,
-  _isNull,
-  _isNaNStrict,
-  _isBoolean,
-  _isNumber,
-  _isInteger,
-  _isString,
-  _isFunction,
-  _isObject,
-  _isArray,
-  _isDate,
-  _isRegExp,
-  _isError,
+  _isUndefined,_isNull,_isNaNStrict,
+  _isBoolean,_isNumber,_isInteger,_isString,
+  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
 } = require('./type.js');
 
@@ -190,6 +180,6 @@ const {
   }
 
 module.exports = {
-  _matchFormat, matchFormat,
-  _includes, includes,
+  _matchFormat,_includes,
+  matchFormat,includes,
 };

@@ -2,13 +2,12 @@ const {
   _isUndefined, _isNull, _isNaNStrict,
   _isBoolean, _isNumber, _isInteger, _isString,
   _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isError, _isException,
+  _isException,
 
   _isNotUndefined, _isNotNull, _isNotNaNStrict,
   _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
   _isNotFunction, _isNotObject, _isNotArray, _isNotDate, _isNotRegExp,
   _isNotException,
-
 } = require('./type.js');
 
 const {
@@ -182,7 +181,6 @@ const stringToInteger = (
 
 module.exports = {
   numberToString,
-  stringToNumber,
-  stringToInteger,
+  stringToNumber,stringToInteger,
 };
 

@@ -1,17 +1,7 @@
 const {
-  _isUndefined,
-  _isNull,
-  _isNaNStrict,
-  _isBoolean,
-  _isNumber,
-  _isInteger,
-  _isString,
-  _isFunction,
-  _isObject,
-  _isArray,
-  _isDate,
-  _isRegExp,
-  _isError,
+  _isUndefined,_isNull,_isNaNStrict,
+  _isBoolean,_isNumber,_isInteger,_isString,
+  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
 } = require('./type.js');
 
@@ -171,7 +161,7 @@ const matchValue = (
 
   if (!_isArray(param.compareArray)) {
     throw new TypeError(
-      'matchValue args compareArray is not array'
+      'matchValue args(compareArray) is not array'
     );
   }
 
@@ -216,9 +206,9 @@ const initialValue = (
 };
 
 module.exports = {
-  _equal, equal,
-  _or, or,
-  _match, match,
-  _matchValue, matchValue,
-  _initialValue, initialValue,
+  _equal,_or,
+  _match,_matchValue,_initialValue,
+
+  equal,or,
+  match,matchValue,initialValue,
 };

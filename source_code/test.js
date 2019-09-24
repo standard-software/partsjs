@@ -1,8 +1,7 @@
 const {
-  _isString,
-  _isNaNStrict,
-  _isFunction,
-  _isUndefined,
+  _isUndefined,_isNull,_isNaNStrict,
+  _isBoolean,_isNumber,_isInteger,_isString,
+  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
 } = require('./type.js');
 
@@ -99,9 +98,6 @@ const isNotThrown = (targetFunc) => {
 
 module.exports = {
   checkEqual,
-  isThrown,
-  isThrownValue,
-  isThrownException,
-  isNotThrown,
+  isThrown,isThrownValue,isThrownException,isNotThrown,
 };
 
