@@ -32,42 +32,32 @@ const _numberToString = (
 
 const numberToString = (
   value,
-  radix
+  radix = 10
 ) => {
-  radix = _initialValue(radix, 10);
-
-  let param;
-  if (_isObject(value)) {
-    if ('value' in value) {
-      param = value;
-      param.radix = _initialValue(param.radix, radix);
-    } else {
-      throw new ReferenceError(
-        'numberToString parameter args(value) is not defined'
-      );
-    }
-  } else {
-    param = { value, radix };
+  if (_isObject(value)
+  && ('value' in value)) {
+    ({ value, radix = 10 } = value)
   }
 
-  if (!_isNumber(param.value)) {
+  if (!_isNumber(value)) {
     throw new TypeError(
       'numberToString args(value) is not number'
     );
   }
-  if (!_isInteger(param.radix)) {
+  if (!_isInteger(radix)) {
     throw new TypeError(
       'numberToString args(radix) is not integer'
     );
   }
-  if (!(2 <= param.radix && param.radix <= 36)) {
+  if (!(2 <= radix && radix <= 36)) {
     throw new RangeError(
       'numberToString args(radix) must be between 2 and 36'
     );
   }
 
   return _numberToString(
-    param.value, param.radix
+    value,
+    radix
   );
 };
 
@@ -91,27 +81,20 @@ const stringToNumber = (
   value,
   defaultValue,
 ) => {
-  let param;
-  if (_isObject(value)) {
-    if ('value' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError(
-        'stringToNumber parameter args(value) is not defined'
-      );
-    }
-  } else {
-    param = { value, defaultValue };
+  if (_isObject(value)
+  && ('value' in value)) {
+    ({ value, defaultValue } = value);
   }
 
-  if (!_isString(param.value)) {
+  if (!_isString(value)) {
     throw new TypeError(
       'stringToNumber args(value) is not string'
     );
   }
 
   return _stringToNumber(
-    param.value, param.defaultValue
+    value,
+    defaultValue
   );
 };
 
@@ -121,10 +104,8 @@ const stringToNumber = (
 const _stringToInteger = (
   value,
   defaultValue,
-  radix,
+  radix = 10,
 ) => {
-  radix = _initialValue(radix, 10);
-
   if (!_matchFormat(String(radix)+'_base_number',value )) {
     return defaultValue;
   }
@@ -138,44 +119,33 @@ const _stringToInteger = (
 const stringToInteger = (
   value,
   defaultValue,
-  radix,
+  radix = 10,
 ) => {
-  radix = _initialValue(radix, 10);
-
-  let param;
-  if (_isObject(value)) {
-    if ('value' in value) {
-      param = value;
-      param.radix = _initialValue(param.radix, radix);
-    } else {
-      throw new ReferenceError(
-        'stringToInteger parameter args(value) is not defined'
-      );
-    }
-  } else {
-    param = { value, defaultValue, radix };
+  if (_isObject(value)
+  && ('value' in value)) {
+    ({ value, defaultValue, radix = 10 } = value);
   }
 
-  if (!_isString(param.value)) {
+  if (!_isString(value)) {
     throw new TypeError(
       'stringToInteger args(value) is not string'
     );
   }
-  if (!_isInteger(param.radix)) {
+  if (!_isInteger(radix)) {
     throw new TypeError(
       'stringToInteger args(radix) is not integer'
     );
   }
-  if (!(2 <= param.radix && param.radix <= 36)) {
+  if (!(2 <= radix && radix <= 36)) {
     throw new RangeError(
       'stringToInteger args(radix) must be between 2 and 36'
     );
   }
 
   return _stringToInteger(
-    param.value,
-    param.defaultValue,
-    param.radix,
+    value,
+    defaultValue,
+    radix,
   );
 };
 

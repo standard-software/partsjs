@@ -103,12 +103,11 @@ You can now use the functions of the parts object.
 ### 2.0.0
 #### 2019/09/24(Tue)
 - update consoleHook
-- add object.js
+- add object.js copyProperty
+  - add test_copyProperty
+- update Parameter Args
 - define root function(property) name
 - define public function(property) name
-- update copyProperty
-  - add test_copyProperty
-- update update equal or match matchValue initialValue
 
 ### 0.9.0
 #### 2019/09/17(Tue)
