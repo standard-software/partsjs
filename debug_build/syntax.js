@@ -1,24 +1,23 @@
 "use strict";
 
-var type = require('./type.js');
-
-var _isUndefined = type._isUndefined,
-    _isNull = type._isNull,
-    _isNaNStrict = type._isNaNStrict,
-    _isBoolean = type._isBoolean,
-    _isNumber = type._isNumber,
-    _isInteger = type._isInteger,
-    _isString = type._isString,
-    _isFunction = type._isFunction,
-    _isObject = type._isObject,
-    _isArray = type._isArray,
-    _isDate = type._isDate,
-    _isRegExp = type._isRegExp,
-    _isError = type._isError,
-    _isException = type._isException;
+var _require = require('./type.js'),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
 /**
  * assert
  */
+
 
 var assert = function assert(value) {
   var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';

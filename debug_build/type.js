@@ -70,10 +70,8 @@ var _isError = _objectTypeCheckFunc('Error');
 
 
 var _isException = function _isException(value) {
-  if (_isObject(value)) {
-    if ('name' in value && 'message' in value) {
-      return true;
-    }
+  if (_isObject(value) && 'name' in value && 'message' in value) {
+    return true;
   } else if (_isError(value)) {
     return true;
   }
@@ -316,7 +314,6 @@ module.exports = {
   _isArray: _isArray,
   _isDate: _isDate,
   _isRegExp: _isRegExp,
-  _isError: _isError,
   _isException: _isException,
   _isNotUndefined: _isNotUndefined,
   _isNotNull: _isNotNull,

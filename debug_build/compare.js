@@ -13,7 +13,6 @@ var _require = require('./type.js'),
     _isArray = _require._isArray,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
-    _isError = _require._isError,
     _isException = _require._isException;
 
 var _require2 = require('./syntax.js'),
@@ -30,15 +29,13 @@ var _equal = function _equal(value1, value2) {
 };
 
 var equal = function equal(value1, value2) {
-  if (_isObject(value1)) {
-    if ('value1' in value1 && 'value2' in value1) {
-      return _equal(value1.value1, value1.value2);
-    } else {
-      throw new ReferenceError('equal parameter args(value1,value2) is not defined');
-    }
-  } else {
-    return _equal(value1, value2);
+  if (_isObject(value1) && 'value1' in value1 && 'value2' in value1) {
+    var _value = value1;
+    value1 = _value.value1;
+    value2 = _value.value2;
   }
+
+  return _equal(value1, value2);
 };
 /**
  * or
@@ -56,26 +53,17 @@ var _or = function _or(value, compareArray) {
 };
 
 var or = function or(value, compareArray) {
-  var param;
-
-  if (_isObject(value)) {
-    if ('value' in value && 'compareArray' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError('or parameter args(value,compareArray) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      compareArray: compareArray
-    };
+  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+    var _value2 = value;
+    value = _value2.value;
+    compareArray = _value2.compareArray;
   }
 
-  if (!_isArray(param.compareArray)) {
+  if (!_isArray(compareArray)) {
     throw new TypeError('or args(compareArray) is not array');
   }
 
-  return _or(param.value, param.compareArray);
+  return _or(value, compareArray);
 };
 
 var _match = function _match(value, compareArray) {
@@ -117,26 +105,17 @@ var _match = function _match(value, compareArray) {
 };
 
 var match = function match(value, compareArray) {
-  var param;
-
-  if (_isObject(value)) {
-    if ('value' in value && 'compareArray' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError('match parameter args(value,compareArray) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      compareArray: compareArray
-    };
+  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+    var _value3 = value;
+    value = _value3.value;
+    compareArray = _value3.compareArray;
   }
 
-  if (!_isArray(param.compareArray)) {
+  if (!_isArray(compareArray)) {
     throw new TypeError('match args(compareArray) is not array');
   }
 
-  return _match(param.value, param.compareArray);
+  return _match(value, compareArray);
 };
 
 var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
@@ -148,27 +127,18 @@ var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
 };
 
 var matchValue = function matchValue(value, compareArray, inMatchValue) {
-  var param;
-
-  if (_isObject(value)) {
-    if ('value' in value && 'compareArray' in value && 'inMatchValue' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError('matchValue parameter args(value,compareArray,inMatchValue) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      compareArray: compareArray,
-      inMatchValue: inMatchValue
-    };
+  if (_isObject(value) && 'value' in value && 'compareArray' in value && 'inMatchValue' in value) {
+    var _value4 = value;
+    value = _value4.value;
+    compareArray = _value4.compareArray;
+    inMatchValue = _value4.inMatchValue;
   }
 
-  if (!_isArray(param.compareArray)) {
-    throw new TypeError('matchValue args compareArray is not array');
+  if (!_isArray(compareArray)) {
+    throw new TypeError('matchValue args(compareArray) is not array');
   }
 
-  return _matchValue(param.value, param.compareArray, param.inMatchValue);
+  return _matchValue(value, compareArray, inMatchValue);
 };
 
 var _initialValue = function _initialValue(value, inMatchValue) {
@@ -180,33 +150,24 @@ var _initialValue = function _initialValue(value, inMatchValue) {
 };
 
 var initialValue = function initialValue(value, inMatchValue) {
-  var param;
-
-  if (_isObject(value)) {
-    if ('value' in value && 'inMatchValue' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError('initialValue parameter args(value,inMatchValue) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      inMatchValue: inMatchValue
-    };
+  if (_isObject(value) && 'value' in value && 'inMatchValue' in value) {
+    var _value5 = value;
+    value = _value5.value;
+    inMatchValue = _value5.inMatchValue;
   }
 
-  return _initialValue(param.value, param.inMatchValue);
+  return _initialValue(value, inMatchValue);
 };
 
 module.exports = {
   _equal: _equal,
-  equal: equal,
   _or: _or,
-  or: or,
   _match: _match,
-  match: match,
   _matchValue: _matchValue,
-  matchValue: matchValue,
   _initialValue: _initialValue,
+  equal: equal,
+  or: or,
+  match: match,
+  matchValue: matchValue,
   initialValue: initialValue
 };

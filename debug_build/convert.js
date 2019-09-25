@@ -13,7 +13,6 @@ var _require = require('./type.js'),
     _isArray = _require._isArray,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
-    _isError = _require._isError,
     _isException = _require._isException,
     _isNotUndefined = _require._isNotUndefined,
     _isNotNull = _require._isNotNull,
@@ -45,37 +44,29 @@ var _numberToString = function _numberToString(value, radix) {
   return value.toString(radix);
 };
 
-var numberToString = function numberToString(value, radix) {
-  radix = _initialValue(radix, 10);
-  var param;
+var numberToString = function numberToString(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_isObject(value)) {
-    if ('value' in value) {
-      param = value;
-      param.radix = _initialValue(param.radix, radix);
-    } else {
-      throw new ReferenceError('numberToString parameter args(value) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      radix: radix
-    };
+  if (_isObject(value) && 'value' in value) {
+    var _value = value;
+    value = _value.value;
+    var _value$radix = _value.radix;
+    radix = _value$radix === void 0 ? 10 : _value$radix;
   }
 
-  if (!_isNumber(param.value)) {
+  if (!_isNumber(value)) {
     throw new TypeError('numberToString args(value) is not number');
   }
 
-  if (!_isInteger(param.radix)) {
+  if (!_isInteger(radix)) {
     throw new TypeError('numberToString args(radix) is not integer');
   }
 
-  if (!(2 <= param.radix && param.radix <= 36)) {
+  if (!(2 <= radix && radix <= 36)) {
     throw new RangeError('numberToString args(radix) must be between 2 and 36');
   }
 
-  return _numberToString(param.value, param.radix);
+  return _numberToString(value, radix);
 };
 /**
  * stringToNumber
@@ -91,34 +82,25 @@ var _stringToNumber = function _stringToNumber(value, defaultValue) {
 };
 
 var stringToNumber = function stringToNumber(value, defaultValue) {
-  var param;
-
-  if (_isObject(value)) {
-    if ('value' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError('stringToNumber parameter args(value) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      defaultValue: defaultValue
-    };
+  if (_isObject(value) && 'value' in value) {
+    var _value2 = value;
+    value = _value2.value;
+    defaultValue = _value2.defaultValue;
   }
 
-  if (!_isString(param.value)) {
+  if (!_isString(value)) {
     throw new TypeError('stringToNumber args(value) is not string');
   }
 
-  return _stringToNumber(param.value, param.defaultValue);
+  return _stringToNumber(value, defaultValue);
 };
 /**
  * stringToInteger
  */
 
 
-var _stringToInteger = function _stringToInteger(value, defaultValue, radix) {
-  radix = _initialValue(radix, 10);
+var _stringToInteger = function _stringToInteger(value, defaultValue) {
+  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
   if (!_matchFormat(String(radix) + '_base_number', value)) {
     return defaultValue;
@@ -127,38 +109,30 @@ var _stringToInteger = function _stringToInteger(value, defaultValue, radix) {
   return _matchValue(parseInt(value, radix), [_isNotInteger], defaultValue);
 };
 
-var stringToInteger = function stringToInteger(value, defaultValue, radix) {
-  radix = _initialValue(radix, 10);
-  var param;
+var stringToInteger = function stringToInteger(value, defaultValue) {
+  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (_isObject(value)) {
-    if ('value' in value) {
-      param = value;
-      param.radix = _initialValue(param.radix, radix);
-    } else {
-      throw new ReferenceError('stringToInteger parameter args(value) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      defaultValue: defaultValue,
-      radix: radix
-    };
+  if (_isObject(value) && 'value' in value) {
+    var _value3 = value;
+    value = _value3.value;
+    defaultValue = _value3.defaultValue;
+    var _value3$radix = _value3.radix;
+    radix = _value3$radix === void 0 ? 10 : _value3$radix;
   }
 
-  if (!_isString(param.value)) {
+  if (!_isString(value)) {
     throw new TypeError('stringToInteger args(value) is not string');
   }
 
-  if (!_isInteger(param.radix)) {
+  if (!_isInteger(radix)) {
     throw new TypeError('stringToInteger args(radix) is not integer');
   }
 
-  if (!(2 <= param.radix && param.radix <= 36)) {
+  if (!(2 <= radix && radix <= 36)) {
     throw new RangeError('stringToInteger args(radix) must be between 2 and 36');
   }
 
-  return _stringToInteger(param.value, param.defaultValue, param.radix);
+  return _stringToInteger(value, defaultValue, radix);
 };
 
 module.exports = {

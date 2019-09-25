@@ -1,6 +1,20 @@
 "use strict";
 
 var test_execute_compare = function test_execute_compare(parts) {
+  var _parts$type = parts.type,
+      isUndefined = _parts$type.isUndefined,
+      isNull = _parts$type.isNull,
+      isNaNStrict = _parts$type.isNaNStrict,
+      isBoolean = _parts$type.isBoolean,
+      isNumber = _parts$type.isNumber,
+      isInteger = _parts$type.isInteger,
+      isString = _parts$type.isString,
+      isFunction = _parts$type.isFunction,
+      isObject = _parts$type.isObject,
+      isArray = _parts$type.isArray,
+      isDate = _parts$type.isDate,
+      isRegExp = _parts$type.isRegExp,
+      isException = _parts$type.isException;
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
       isThrown = _parts$test.isThrown,
@@ -34,15 +48,6 @@ var test_execute_compare = function test_execute_compare(parts) {
     checkEqual(false, equal({
       value1: '1',
       value2: 1
-    })); // named argument property exception
-
-    checkEqual(true, isThrown(function () {
-      equal({
-        v1: 123,
-        v2: 123
-      });
-    }, function (e) {
-      return e.name === new ReferenceError().name && e.message === 'equal parameter args(value1,value2) is not defined';
     }));
   };
 
@@ -90,13 +95,35 @@ var test_execute_compare = function test_execute_compare(parts) {
       compareArray: [1, 2]
     })); // exception
 
+    checkEqual(false, isThrown(function () {
+      or({
+        value: 1,
+        compareArray: [1, 2]
+      });
+    }));
     checkEqual(true, isThrown(function () {
       or({
         value: 1,
         array: [1, 2]
       });
     }, function (e) {
-      return e.name === new ReferenceError().name && e.message === 'or parameter args(value,compareArray) is not defined';
+      return e.name === new TypeError().name && e.message === 'or args(compareArray) is not array';
+    }));
+    checkEqual(true, isThrown(function () {
+      or({
+        value1: 1,
+        compareArray: [1, 2]
+      });
+    }, function (e) {
+      return e.name === new TypeError().name && e.message === 'or args(compareArray) is not array';
+    }));
+    checkEqual(false, isThrown(function () {
+      or({
+        value1: 1,
+        compareArray: [1, 2]
+      }, []);
+    }, function (e) {
+      return e.name === new TypeError().name && e.message === 'or args(compareArray) is not array';
     }));
   };
 
@@ -232,6 +259,40 @@ var test_execute_compare = function test_execute_compare(parts) {
     }, function (e) {
       return e.name === new TypeError().name && e.message === 'match args(compareArray) is not array';
     }), 'test_match thrown 4');
+    checkEqual(true, isThrown(function () {
+      match({
+        value1: '123',
+        compareArray: [123]
+      });
+    }), 'test_match thrown 5');
+    checkEqual(false, isThrown(function () {
+      match({
+        value1: '123',
+        compareArray: [123]
+      }, []);
+    }), 'test_match thrown 5');
+    checkEqual(false, match({
+      value1: '123',
+      compareArray: [123]
+    }, []));
+    checkEqual(true, match({
+      value1: '123',
+      compareArray: [123]
+    }, [function () {
+      return true;
+    }]));
+    checkEqual(false, match({
+      value1: '123',
+      compareArray: [123]
+    }, [function () {
+      return false;
+    }]));
+    checkEqual(true, match({
+      value1: '123',
+      compareArray: [123]
+    }, [function (value) {
+      return isObject(value);
+    }]));
   };
 
   var test_matchValue = function test_matchValue() {
@@ -267,6 +328,9 @@ var test_execute_compare = function test_execute_compare(parts) {
       value: null,
       inMatchValue: 999
     }));
+    checkEqual('[object Object]', String(initialValue({}, 'test')));
+    checkEqual('null', String(initialValue(null, {})));
+    checkEqual('[object Object]', String(initialValue(undefined, {})));
   };
 
   console.log('  test compare.js start.');

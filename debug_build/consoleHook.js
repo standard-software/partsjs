@@ -13,7 +13,6 @@ var _require = require('./type.js'),
     _isArray = _require._isArray,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
-    _isError = _require._isError,
     _isException = _require._isException;
 
 var _require2 = require('./compare.js'),
@@ -31,6 +30,18 @@ original.debug = console.debug;
 
 var _hook = function _hook(methodName, hookFunc) {
   console[methodName] = hookFunc;
+};
+
+var hook = function hook(methodName, hookFunc) {
+  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  if (!_isFunction(hookFunc)) {
+    throw new TypeError('hook args(hookFunc) is not function');
+  }
+
+  _hook(methodName, hookFunc);
 };
 
 var hookLog = function hookLog(hookFunc) {
@@ -55,6 +66,14 @@ var hookDebug = function hookDebug(hookFunc) {
 
 var _unHook = function _unHook(methodName) {
   console[methodName] = original[methodName];
+};
+
+var unHook = function unHook(methodName) {
+  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new RangeError('unHook args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  _unHook(methodName);
 };
 
 var unHookLog = function unHookLog() {
@@ -145,12 +164,14 @@ var acceptDebug = function acceptDebug(acceptArray, rejectArray) {
 
 module.exports = {
   _hook: _hook,
+  hook: hook,
   hookLog: hookLog,
   hookInfo: hookInfo,
   hookWarn: hookWarn,
   hookError: hookError,
   hookDebug: hookDebug,
   _unHook: _unHook,
+  unHook: unHook,
   unHookLog: unHookLog,
   unHookInfo: unHookInfo,
   unHookWarn: unHookWarn,

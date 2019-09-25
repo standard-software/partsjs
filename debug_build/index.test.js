@@ -19,8 +19,11 @@ var test_execute_index = function test_execute_index(parts) {
   var _require6 = require('./string.test.js'),
       test_execute_string = _require6.test_execute_string;
 
-  var _require7 = require('./consoleHook.test.js'),
-      test_execute_consoleHook = _require7.test_execute_consoleHook;
+  var _require7 = require('./object.test.js'),
+      test_execute_object = _require7.test_execute_object;
+
+  var _require8 = require('./consoleHook.test.js'),
+      test_execute_consoleHook = _require8.test_execute_consoleHook;
 
   console.log('test start. ' + parts.VERSION);
   test_execute_type(parts);
@@ -29,6 +32,7 @@ var test_execute_index = function test_execute_index(parts) {
   test_execute_compare(parts);
   test_execute_convert(parts);
   test_execute_string(parts);
+  test_execute_object(parts);
   test_execute_consoleHook(parts);
   console.log('test finish.');
 };

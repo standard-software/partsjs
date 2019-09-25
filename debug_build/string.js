@@ -13,14 +13,13 @@ var _require = require('./type.js'),
     _isArray = _require._isArray,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
-    _isError = _require._isError,
     _isException = _require._isException;
 
 var _require2 = require('./compare.js'),
     _match = _require2._match;
 /**
-   * matchFormat
-   */
+ * matchFormat
+ */
 
 
 var _matchFormat = function _matchFormat(formatName, value) {
@@ -128,30 +127,21 @@ var _matchFormat = function _matchFormat(formatName, value) {
 };
 
 var matchFormat = function matchFormat(formatName, value) {
-  var param;
-
-  if (_isObject(formatName)) {
-    if ('formatName' in formatName && 'value' in formatName) {
-      param = formatName;
-    } else {
-      throw new ReferenceError('matchFormat parameter args(formatName,value) is not defined');
-    }
-  } else {
-    param = {
-      formatName: formatName,
-      value: value
-    };
+  if (_isObject(formatName) && 'formatName' in formatName && 'value' in formatName) {
+    var _formatName = formatName;
+    formatName = _formatName.formatName;
+    value = _formatName.value;
   }
 
-  if (!_isString(param.formatName)) {
+  if (!_isString(formatName)) {
     throw new TypeError('matchFormat args(formatName) is not string');
   }
 
-  if (!_isString(param.value)) {
+  if (!_isString(value)) {
     throw new TypeError('matchFormat args(value) is not string');
   }
 
-  return _matchFormat(param.formatName, param.value);
+  return _matchFormat(formatName, value);
 };
 /**
  * includes
@@ -176,31 +166,22 @@ var _includes = function _includes(value, compareArray) {
 };
 
 var includes = function includes(value, compareArray) {
-  var param;
-
-  if (_isObject(value)) {
-    if ('value' in value && 'compareArray' in value) {
-      param = value;
-    } else {
-      throw new ReferenceError('includes parameter args(value,compareArray) is not defined');
-    }
-  } else {
-    param = {
-      value: value,
-      compareArray: compareArray
-    };
+  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
   }
 
-  if (!_isArray(param.compareArray)) {
+  if (!_isArray(compareArray)) {
     throw new TypeError('includes args(compareArray) is not array');
   }
 
-  return _includes(param.value, param.compareArray);
+  return _includes(value, compareArray);
 };
 
 module.exports = {
   _matchFormat: _matchFormat,
-  matchFormat: matchFormat,
   _includes: _includes,
+  matchFormat: matchFormat,
   includes: includes
 };
