@@ -108,6 +108,7 @@ You can now use the functions of the parts object.
 - define public function(property) name
 - update copyProperty
   - add test_copyProperty
+- update initialValue
 
 ### 0.9.0
 #### 2019/09/17(Tue)

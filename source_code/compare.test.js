@@ -232,6 +232,10 @@ const test_execute_compare = (parts) => {
     checkEqual('123', initialValue({ value: '123', inMatchValue: 999 }));
     checkEqual(999, initialValue({ value: undefined, inMatchValue: 999 }));
     checkEqual(null, initialValue({ value: null, inMatchValue: 999 }));
+
+    checkEqual('[object Object]', String(initialValue({}, 'test')));
+    checkEqual('null',            String(initialValue(null, {})));
+    checkEqual('[object Object]', String(initialValue(undefined, {})));
   };
 
 

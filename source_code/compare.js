@@ -186,22 +186,15 @@ const initialValue = (
   value,
   inMatchValue,
 ) => {
-  let param;
-  if (_isObject(value)) {
-    if (('value' in value) && ('inMatchValue' in value)) {
-      param = value;
-    } else {
-      throw new ReferenceError(
-        'initialValue parameter args(value,inMatchValue) is not defined'
-      );
-    }
-  } else {
-    param = { value, inMatchValue }
+  if (_isObject(value)
+  && ('value' in value)
+  && ('inMatchValue' in value)) {
+    ({ value, inMatchValue } = value);
   }
 
   return _initialValue(
-    param.value,
-    param.inMatchValue
+    value,
+    inMatchValue
   );
 };
 
