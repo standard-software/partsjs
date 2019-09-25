@@ -106,26 +106,19 @@ const match = (
   value,
   compareArray
 ) => {
-  let param;
-  if (_isObject(value)) {
-    if (('value' in value) && ('compareArray' in value)) {
-      param = value;
-    } else {
-      throw new ReferenceError(
-        'match parameter args(value,compareArray) is not defined'
-      );
-    }
-  } else {
-    param = { value, compareArray }
+  if (_isObject(value)
+  && ('value' in value)
+  && ('compareArray' in value)) {
+    ({ value, compareArray } = value);
   }
 
-  if (!_isArray(param.compareArray)) {
+  if (!_isArray(compareArray)) {
     throw new TypeError(
       'match args(compareArray) is not array'
     );
   }
 
-  return _match(param.value, param.compareArray);
+  return _match(value, compareArray);
 };
 
 const _matchValue = (
@@ -144,31 +137,23 @@ const matchValue = (
   compareArray,
   inMatchValue,
 ) => {
-  let param;
-  if (_isObject(value)) {
-    if (('value' in value)
-    && ('compareArray' in value)
-    && ('inMatchValue' in value)) {
-      param = value;
-    } else {
-      throw new ReferenceError(
-        'matchValue parameter args(value,compareArray,inMatchValue) is not defined'
-      );
-    }
-  } else {
-    param = { value, compareArray, inMatchValue }
+  if (_isObject(value)
+  && ('value' in value)
+  && ('compareArray' in value)
+  && ('inMatchValue' in value)) {
+    ({ value, compareArray, inMatchValue } = value);
   }
 
-  if (!_isArray(param.compareArray)) {
+  if (!_isArray(compareArray)) {
     throw new TypeError(
       'matchValue args(compareArray) is not array'
     );
   }
 
   return _matchValue(
-    param.value,
-    param.compareArray,
-    param.inMatchValue,
+    value,
+    compareArray,
+    inMatchValue,
   );
 };
 

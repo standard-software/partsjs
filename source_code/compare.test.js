@@ -1,6 +1,13 @@
 const test_execute_compare = (parts) => {
 
   const {
+    isUndefined,isNull,isNaNStrict,
+    isBoolean,isNumber,isInteger,isString,
+    isFunction,isObject,isArray,isDate,isRegExp,
+    isException,
+  } = parts.type;
+
+  const {
     checkEqual,
     isThrown,
     isThrownException,
@@ -207,6 +214,45 @@ const test_execute_compare = (parts) => {
         )
       }
     ), 'test_match thrown 4');
+    checkEqual(true, isThrown(
+      () => {
+        match({
+          value1: '123', compareArray: [123]
+        });
+      }
+    ), 'test_match thrown 5');
+    checkEqual(false, isThrown(
+      () => {
+        match({
+          value1: '123', compareArray: [123]
+        }, []);
+      }
+    ), 'test_match thrown 5');
+
+    checkEqual(false, match(
+      {
+        value1: '123', compareArray: [123]
+      },
+      []
+    ));
+    checkEqual(true, match(
+      {
+        value1: '123', compareArray: [123]
+      },
+      [() => true]
+    ));
+    checkEqual(false, match(
+      {
+        value1: '123', compareArray: [123]
+      },
+      [() => false]
+    ));
+    checkEqual(true, match(
+      {
+        value1: '123', compareArray: [123]
+      },
+      [(value) => isObject(value)]
+    ));
 
   };
 

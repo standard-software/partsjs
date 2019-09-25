@@ -109,6 +109,7 @@ You can now use the functions of the parts object.
 - update copyProperty
   - add test_copyProperty
 - update initialValue
+- update match matchValue
 
 ### 0.9.0
 #### 2019/09/17(Tue)
@@ -158,5 +159,5 @@ You can now use the functions of the parts object.
 [VERSION.md](./VERSION.md)
 
 ### Before ver2.0.0
-Previous product  
+Verssion 1.x.x = Previous product  
 [standard-software / Copipe.js](./copipejs)
