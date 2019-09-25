@@ -19,17 +19,13 @@ const _equal = (value1, value2) => {
 };
 
 const equal = (value1, value2) => {
-  if (_isObject(value1)) {
-    if (('value1' in value1) && ('value2' in value1)) {
-      return _equal(value1.value1, value1.value2);
-    } else {
-      throw new ReferenceError(
-        'equal parameter args(value1,value2) is not defined'
-      );
-    }
-  } else {
-    return _equal(value1, value2);
+  if (_isObject(value1)
+  && ('value1' in value1)
+  && ('value2' in value1)) {
+    ({ value1, value2 } = value1);
   }
+
+  return _equal(value1, value2);
 };
 
 /**
@@ -45,25 +41,18 @@ const _or = (value, compareArray) => {
 };
 
 const or = (value, compareArray) => {
-  let param;
-  if (_isObject(value)) {
-    if (('value' in value) && ('compareArray' in value)) {
-      param = value;
-    } else {
-      throw new ReferenceError(
-        'or parameter args(value,compareArray) is not defined'
-      );
-    }
-  } else {
-    param = { value, compareArray };
+  if (_isObject(value)
+  && ('value' in value)
+  && ('compareArray' in value)) {
+      ({ value, compareArray } = value)
   }
 
-  if (!_isArray(param.compareArray)) {
+  if (!_isArray(compareArray)) {
     throw new TypeError(
       'or args(compareArray) is not array'
     );
   }
-  return _or(param.value, param.compareArray)
+  return _or(value, compareArray)
 };
 
 const _match = (value, compareArray) => {
