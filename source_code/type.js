@@ -59,10 +59,10 @@ const _isError = _objectTypeCheckFunc('Error');
  *  Only whether the object has name and message properties.
  */
 const _isException = (value) => {
-  if (_isObject(value)) {
-    if (('name' in value) && ('message' in value)) {
-        return true;
-    }
+  if (_isObject(value)
+  && ('name' in value)
+  && ('message' in value)) {
+    return true;
   } else if (_isError(value)) {
     return true;
   }
