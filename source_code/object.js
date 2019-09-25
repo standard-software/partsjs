@@ -5,6 +5,10 @@ const {
   _isException,
 } = require('./type.js');
 
+const {
+  initialValue,
+} = require('./compare.js');
+
 const _copyProperty = (fromObject, propertyString, toObject = {}) => {
   const propertyArray = propertyString.split(',');
   for (let i = 0; i < propertyArray.length; i += 1) {
@@ -18,16 +22,11 @@ const _copyProperty = (fromObject, propertyString, toObject = {}) => {
 
 const copyProperty = (fromObject, propertyString, toObject = {}) => {
   let param;
-  if (_isObject(fromObject)) {
-    if (('fromObject' in fromObject)
-    && ('propertyString' in fromObject)
-    && ('toObject' in fromObject)) {
-      param = fromObject;
-    } else {
-      throw new ReferenceError(
-        'copyProperty parameter args(fromObject,propertyString,toObject) is not defined'
-      );
-    }
+  if (_isObject(fromObject)
+  && ('fromObject' in fromObject)
+  && ('propertyString' in fromObject)) {
+    param = fromObject;
+    param.toObject = initialValue(param.toObject, {});
   } else {
     param = { fromObject, propertyString, toObject }
   }

@@ -106,6 +106,8 @@ You can now use the functions of the parts object.
 - add object.js
 - define root function(property) name
 - define public function(property) name
+- update copyProperty
+  - add test_copyProperty
 
 ### 0.9.0
 #### 2019/09/17(Tue)
