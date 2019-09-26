@@ -2,6 +2,21 @@
 
 ## Version
 
+### 2.0.0
+#### 2019/09/26(Thu)
+- update consoleHook
+- add object.js copyProperty
+  - add test_copyProperty
+- update Parameter Args
+- define root function(property) name
+- define public function(property) name
+- update test_isObject
+- add Shortcut Name
+
+### 1.0.0
+Verssion 1.x.x = Previous product  
+[standard-software / Copipe.js](./copipejs)
+
 ### 0.9.0
 #### 2019/09/17(Tue)
 - add consoleHook.js
@@ -132,3 +147,7 @@
   parts.js/
     test_code/test_index.js
     source_code/index.js
+
+### Before ver2.0.0
+Verssion 1.x.x = Previous product  
+[standard-software / Copipe.js](./copipejs)

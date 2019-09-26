@@ -111,6 +111,10 @@ You can now use the functions of the parts object.
 - update test_isObject
 - add Shortcut Name
 
+### 1.0.0
+Verssion 1.x.x = Previous product  
+[standard-software / Copipe.js](./copipejs)
+
 ### 0.9.0
 #### 2019/09/17(Tue)
 - add consoleHook.js
