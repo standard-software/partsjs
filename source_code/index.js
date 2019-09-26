@@ -8,7 +8,7 @@ const _string = require('./string.js');
 const _consoleHook = require('./consoleHook.js');
 const _object = require('./object.js');
 
-const VERSION = '2.0.0';
+const VERSION = '2.0.1';
 
 // Public Property
 const type = _object._copyProperty(_type,

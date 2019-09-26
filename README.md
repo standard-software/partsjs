@@ -100,6 +100,11 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.0.1
+#### 2019/09/26(Thu)
+- document update
+- update test code(html, wsf)
+
 ### 2.0.0
 #### 2019/09/26(Thu)
 - update consoleHook
@@ -113,7 +118,7 @@ You can now use the functions of the parts object.
 
 ### 1.0.0
 Verssion 1.x.x = Previous product  
-[standard-software / Copipe.js](./copipejs)
+[standard-software / Copipe.js](https://github.com/standard-software/copipejs)
 
 ### 0.9.0
 #### 2019/09/17(Tue)
@@ -159,9 +164,11 @@ Verssion 1.x.x = Previous product
   - String.includes startsWith endsWith
   - Array.some map
 
+
 ### More Info
 [VERSION.md](./VERSION.md)
 
+
 ### Before ver2.0.0
 Verssion 1.x.x = Previous product  
-[standard-software / Copipe.js](./copipejs)
+[standard-software / Copipe.js](https://github.com/standard-software/copipejs)
