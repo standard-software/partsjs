@@ -282,16 +282,27 @@ var test_execute_type = function test_execute_type(parts) {
 
   var test_isObject = function test_isObject() {
     checkEqual(true, isObject({}));
-    checkEqual(false, isObject([]));
-    checkEqual(false, isObject(null));
-    checkEqual(false, isObject(undefined));
-    checkEqual(true, isObject({}));
     checkEqual(true, isObject({
       a: 0
     }));
     checkEqual(true, isObject({
       a: 0,
       b: 1
+    }));
+    checkEqual(false, isObject([]));
+    checkEqual(false, isObject(null));
+    checkEqual(false, isObject(undefined));
+    checkEqual(false, isObject(function () {}));
+    checkEqual(false, isObject(function () {}));
+    checkEqual(false, isObject(new Error()));
+    checkEqual(false, isObject(new Date()));
+    checkEqual(false, isObject(new RegExp()));
+    checkEqual(true, isObject({
+      a: 0,
+      b: 1
+    }, {
+      c: 0,
+      d: 1
     }));
     checkEqual(true, isObjectArray([{}, {
       a: 0,
@@ -305,17 +316,6 @@ var test_execute_type = function test_execute_type(parts) {
       a: 0,
       b: 1
     }]));
-    checkEqual(true, isObject({
-      a: 0,
-      b: 1
-    }, {
-      c: 0,
-      d: 1
-    }));
-    checkEqual(false, isObject([]));
-    checkEqual(false, isObject(null));
-    checkEqual(false, isObject(undefined));
-    checkEqual(false, isObject(function () {}));
   };
 
   var test_isArray = function test_isArray() {

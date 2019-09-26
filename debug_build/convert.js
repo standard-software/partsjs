@@ -135,8 +135,20 @@ var stringToInteger = function stringToInteger(value, defaultValue) {
   return _stringToInteger(value, defaultValue, radix);
 };
 
+var numToString = numberToString;
+var strToNumber = stringToNumber;
+var strToInteger = stringToInteger;
+var numToStr = numberToString;
+var strToNum = stringToNumber;
+var strToInt = stringToInteger;
 module.exports = {
   numberToString: numberToString,
   stringToNumber: stringToNumber,
-  stringToInteger: stringToInteger
+  stringToInteger: stringToInteger,
+  numToString: numToString,
+  strToNumber: strToNumber,
+  strToInteger: strToInteger,
+  numToStr: numToStr,
+  strToNum: strToNum,
+  strToInt: strToInt
 };

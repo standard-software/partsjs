@@ -301,6 +301,22 @@ var isNotExceptionArray = _isTypeCheckArrayFunc(function (value) {
   return !_isException(value);
 });
 
+var isUndef = isUndefined;
+var isBool = isBoolean;
+var isNum = isNumber;
+var isInt = isInteger;
+var isStr = isString;
+var isFunc = isFunction;
+var isObj = isObject;
+var isExcept = isException;
+var isNotUndef = isUndefined;
+var isNotBool = isBoolean;
+var isNotNum = isNumber;
+var isNotInt = isInteger;
+var isNotStr = isString;
+var isNotFunc = isFunction;
+var isNotObj = isObject;
+var isNotExcept = isException;
 module.exports = {
   _isUndefined: _isUndefined,
   _isNull: _isNull,
@@ -379,5 +395,21 @@ module.exports = {
   isNotArrayArray: isNotArrayArray,
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
-  isNotExceptionArray: isNotExceptionArray
+  isNotExceptionArray: isNotExceptionArray,
+  isUndef: isUndef,
+  isBool: isBool,
+  isNum: isNum,
+  isInt: isInt,
+  isStr: isStr,
+  isFunc: isFunc,
+  isObj: isObj,
+  isExcept: isExcept,
+  isNotUndef: isNotUndef,
+  isNotBool: isNotBool,
+  isNotNum: isNotNum,
+  isNotInt: isNotInt,
+  isNotStr: isNotStr,
+  isNotFunc: isNotFunc,
+  isNotObj: isNotObj,
+  isNotExcept: isNotExcept
 };

@@ -20,21 +20,21 @@ var _object = require('./object.js');
 
 var VERSION = '2.0.0 beta'; // Public Property
 
-var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,');
+var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,' + 'isNotExcept,' + '');
 
-var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,');
+var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '');
 
-var syntax = _object._copyProperty(_syntax, 'assert,guard,' + 'sc,if_,switch_,');
+var syntax = _object._copyProperty(_syntax, 'assert,guard,' + 'sc,if_,switch_,' + '');
 
-var compare = _object._copyProperty(_compare, '_equal,equal,_or,or,' + '_match,match,matchValue,matchValue,_initialValue,initialValue,');
+var compare = _object._copyProperty(_compare, '_equal,equal,_or,or,' + '_match,match,matchValue,matchValue,_initialValue,initialValue,' + '');
 
-var convert = _object._copyProperty(_convert, 'numberToString,' + 'stringToNumber,stringToInteger,');
+var convert = _object._copyProperty(_convert, 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + '');
 
-var string = _object._copyProperty(_string, 'matchFormat,includes,');
+var string = _object._copyProperty(_string, 'matchFormat,includes,' + '');
 
-var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,');
+var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' + '');
 
-var object = _object._copyProperty(_object, 'copyProperty,'); // Root Property
+var object = _object._copyProperty(_object, 'copyProperty,' + ''); // Root Property
 
 
 var isUndefined = _type.isUndefined,
@@ -88,7 +88,23 @@ var isUndefined = _type.isUndefined,
     isNotArrayArray = _type.isNotArrayArray,
     isNotDateArray = _type.isNotDateArray,
     isNotRegExpArray = _type.isNotRegExpArray,
-    isNotExceptionArray = _type.isNotExceptionArray;
+    isNotExceptionArray = _type.isNotExceptionArray,
+    isUndef = _type.isUndef,
+    isBool = _type.isBool,
+    isNum = _type.isNum,
+    isInt = _type.isInt,
+    isStr = _type.isStr,
+    isFunc = _type.isFunc,
+    isObj = _type.isObj,
+    isExcept = _type.isExcept,
+    isNotUndef = _type.isNotUndef,
+    isNotBool = _type.isNotBool,
+    isNotNum = _type.isNotNum,
+    isNotInt = _type.isNotInt,
+    isNotStr = _type.isNotStr,
+    isNotFunc = _type.isNotFunc,
+    isNotObj = _type.isNotObj,
+    isNotExcept = _type.isNotExcept;
 var checkEqual = _test.checkEqual,
     isThrown = _test.isThrown,
     isThrownValue = _test.isThrownValue,
@@ -106,7 +122,13 @@ var equal = _compare.equal,
     initialValue = _compare.initialValue;
 var numberToString = _convert.numberToString,
     stringToNumber = _convert.stringToNumber,
-    stringToInteger = _convert.stringToInteger;
+    stringToInteger = _convert.stringToInteger,
+    numToString = _convert.numToString,
+    strToNumber = _convert.strToNumber,
+    strToInteger = _convert.strToInteger,
+    numToStr = _convert.numToStr,
+    strToNum = _convert.strToNum,
+    strToInt = _convert.strToInt;
 var matchFormat = _string.matchFormat,
     includes = _string.includes;
 var copyProperty = _object.copyProperty;
@@ -173,6 +195,22 @@ module.exports = {
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
   isNotExceptionArray: isNotExceptionArray,
+  isUndef: isUndef,
+  isBool: isBool,
+  isNum: isNum,
+  isInt: isInt,
+  isStr: isStr,
+  isFunc: isFunc,
+  isObj: isObj,
+  isExcept: isExcept,
+  isNotUndef: isNotUndef,
+  isNotBool: isNotBool,
+  isNotNum: isNotNum,
+  isNotInt: isNotInt,
+  isNotStr: isNotStr,
+  isNotFunc: isNotFunc,
+  isNotObj: isNotObj,
+  isNotExcept: isNotExcept,
   // test
   checkEqual: checkEqual,
   isThrown: isThrown,
@@ -195,6 +233,12 @@ module.exports = {
   numberToString: numberToString,
   stringToNumber: stringToNumber,
   stringToInteger: stringToInteger,
+  numToString: numToString,
+  strToNumber: strToNumber,
+  strToInteger: strToInteger,
+  numToStr: numToStr,
+  strToNum: strToNum,
+  strToInt: strToInt,
   // string
   matchFormat: matchFormat,
   includes: includes,
