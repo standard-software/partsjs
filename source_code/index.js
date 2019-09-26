@@ -30,41 +30,65 @@ const type = _object._copyProperty(_type,
   'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' +
   'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' +
   'isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,' +
-  'isNotExceptionArray,'
+  'isNotExceptionArray,' +
+
+  'isUndef,' +
+  'isBool,isNum,isInt,isStr,' +
+  'isFunc,isObj,' +
+  'isExcept,' +
+
+  'isNotUndef,' +
+  'isNotBool,isNotNum,isNotInt,isNotStr,' +
+  'isNotFunc,isNotObj,' +
+  'isNotExcept,' +
+  ''
 );
 
 const test = _object._copyProperty(_test,
   'checkEqual,' +
-  'isThrown,isThrownValue,isThrownException,isNotThrown,'
+  'isThrown,isThrownValue,isThrownException,isNotThrown,' +
+  ''
 );
 
 const syntax = _object._copyProperty(_syntax,
   'assert,guard,' +
-  'sc,if_,switch_,'
+  'sc,if_,switch_,' +
+  ''
 );
 
 const compare = _object._copyProperty(_compare,
   '_equal,equal,_or,or,' +
-  '_match,match,matchValue,matchValue,_initialValue,initialValue,'
+  '_match,match,matchValue,matchValue,_initialValue,initialValue,' +
+  ''
 );
 
 const convert = _object._copyProperty(_convert,
   'numberToString,' +
-  'stringToNumber,stringToInteger,'
+  'stringToNumber,stringToInteger,' +
+
+  'numToString,' +
+  'strToNumber,strToInteger,' +
+
+  'numToStr,' +
+  'strToNum,strToInt,' +
+  ''
 );
 
 const string = _object._copyProperty(_string,
-  'matchFormat,includes,'
+  'matchFormat,includes,' +
+  ''
 );
 
 const consoleHook = _object._copyProperty(_consoleHook,
   'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' +
   'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' +
-  'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,'
+  'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' +
+  ''
 );
 
 const object = _object._copyProperty(_object,
-  'copyProperty,'
+  'copyProperty,' +
+  ''
 );
 
 // Root Property
@@ -88,6 +112,16 @@ const {
   isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
   isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,
   isNotExceptionArray,
+
+  isUndef,
+  isBool,isNum,isInt,isStr,
+  isFunc,isObj,
+  isExcept,
+
+  isNotUndef,
+  isNotBool,isNotNum,isNotInt,isNotStr,
+  isNotFunc,isNotObj,
+  isNotExcept,
 } = _type;
 
 const {
@@ -108,6 +142,13 @@ const {
 const {
   numberToString,
   stringToNumber,stringToInteger,
+
+  numToString,
+  strToNumber,strToInteger,
+
+  numToStr,
+  strToNum,strToInt,
+
 } = _convert;
 
 const {
@@ -150,6 +191,16 @@ module.exports = {
   isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,
   isNotExceptionArray,
 
+  isUndef,
+  isBool,isNum,isInt,isStr,
+  isFunc,isObj,
+  isExcept,
+
+  isNotUndef,
+  isNotBool,isNotNum,isNotInt,isNotStr,
+  isNotFunc,isNotObj,
+  isNotExcept,
+
   // test
   checkEqual,
   isThrown,isThrownValue,isThrownException,isNotThrown,
@@ -165,6 +216,12 @@ module.exports = {
   // convert
   numberToString,
   stringToNumber,stringToInteger,
+
+  numToString,
+  strToNumber,strToInteger,
+
+  numToStr,
+  strToNum,strToInt,
 
   // string
   matchFormat,includes,

@@ -101,13 +101,15 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.0.0
-#### 2019/09/24(Tue)
+#### 2019/09/26(Thu)
 - update consoleHook
 - add object.js copyProperty
   - add test_copyProperty
 - update Parameter Args
 - define root function(property) name
 - define public function(property) name
+- update test_isObject
+- add Shortcut Name
 
 ### 0.9.0
 #### 2019/09/17(Tue)

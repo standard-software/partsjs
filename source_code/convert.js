@@ -149,8 +149,23 @@ const stringToInteger = (
   );
 };
 
+const numToString   = numberToString;
+const strToNumber   = stringToNumber;
+const strToInteger  = stringToInteger;
+
+const numToStr      = numberToString;
+const strToNum      = stringToNumber;
+const strToInt      = stringToInteger;
+
 module.exports = {
   numberToString,
   stringToNumber,stringToInteger,
+
+  numToString,
+  strToNumber,strToInteger,
+
+  numToStr,
+  strToNum,strToInt,
+
 };
 

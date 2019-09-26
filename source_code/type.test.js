@@ -284,24 +284,24 @@ const test_execute_type = (parts) => {
   };
 
   const test_isObject = function () {
-    checkEqual(true, isObject({}));
-    checkEqual(false, isObject([]));
-    checkEqual(false, isObject(null));
-    checkEqual(false, isObject(undefined));
-
-    checkEqual(true, isObject({}));
-    checkEqual(true, isObject({ a: 0 }));
-    checkEqual(true, isObject({ a: 0, b: 1 }));
-    checkEqual(true, isObjectArray([{}, { a: 0, b: 1 }]));
-    checkEqual(false, isObjectArray([[], { a: 0, b: 1 }]));
-    checkEqual(false, isObjectArray([[{}], { a: 0, b: 1 }]));
-
-    checkEqual(true, isObject({ a: 0, b: 1 }, { c: 0, d: 1 }));
+    checkEqual(true,  isObject({}));
+    checkEqual(true,  isObject({ a: 0 }));
+    checkEqual(true,  isObject({ a: 0, b: 1 }));
 
     checkEqual(false, isObject([]));
     checkEqual(false, isObject(null));
     checkEqual(false, isObject(undefined));
     checkEqual(false, isObject(function () { }));
+    checkEqual(false, isObject(() => {}));
+    checkEqual(false, isObject(new Error()));
+    checkEqual(false, isObject(new Date()));
+    checkEqual(false, isObject(new RegExp()));
+
+    checkEqual(true,  isObject({ a: 0, b: 1 }, { c: 0, d: 1 }));
+
+    checkEqual(true,  isObjectArray([{}, { a: 0, b: 1 }]));
+    checkEqual(false, isObjectArray([[], { a: 0, b: 1 }]));
+    checkEqual(false, isObjectArray([[{}], { a: 0, b: 1 }]));
   };
 
   const test_isArray = function () {
