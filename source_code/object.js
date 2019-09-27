@@ -61,9 +61,61 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
     toObject,
   )
 }
+
+const _inProperty = (object, propertyArray) => {
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
+  let result = true;
+  for (let i = 0; i < propertyArray.length; i += 1) {
+    if ((propertyArray[i] === '')
+    || (_isUndefined(propertyArray[i]))) {
+      continue;
+    }
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError(
+        'copyProperty args(propertyArray) element is not string'
+      );
+    }
+    if (!(propertyArray[i] in object)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+const inProperty = (object, propertyArray) => {
+  if (_isObject(object)
+  && ('object' in object)
+  && ('propertyArray' in object)) {
+    ({ object, propertyArray } = object)
+  }
+
+  // no object check
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError(
+        'copyProperty args(propertyArray) is not [array|string]'
+      );
+    }
+  }
+
+  return _inProperty(
+    object,
+    propertyArray,
   )
 }
 
+const copyProp = copyProperty;
+const inProp = inProperty;
+
 module.exports = {
-  _copyProperty, copyProperty,
+  _copyProperty, _inProperty,
+
+  copyProperty, inProperty,
+
+  copyProp, inProp,
 };

@@ -148,7 +148,6 @@ const {
 
   numToStr,
   strToNum,strToInt,
-
 } = _convert;
 
 const {
@@ -157,6 +156,8 @@ const {
 
 const {
   copyProperty,inProperty,
+
+  copyProp,inProp,
 } = _object;
 
 module.exports = {
@@ -227,7 +228,9 @@ module.exports = {
   matchFormat,includes,
 
   // object
-  copyProperty,inProperty
+  copyProperty,inProperty,
+
+  copyProp,inProp,
 
 };
 

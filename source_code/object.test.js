@@ -6,7 +6,7 @@ const test_execute_object = (parts) => {
   } = parts.test;
 
   const {
-    copyProperty
+    copyProperty, inProperty,
   } = parts.object;
 
   const test_copyProperty = () => {
@@ -36,7 +36,7 @@ const test_execute_object = (parts) => {
     var destObject = {};
     copyProperty({
       fromObject: sourceObject,
-      propertyString: 'a',
+      propertyArray: 'a',
       toObject: destObject
     });
     checkEqual(true , 'a' in destObject);
@@ -62,8 +62,69 @@ const test_execute_object = (parts) => {
 
   };
 
+  const test_inProperty = () => {
+
+    var sourceObject = {
+      a: '1', b: '2', c: '3'
+    }
+    checkEqual(true , inProperty(sourceObject, 'a'));
+    checkEqual(true , inProperty(sourceObject, 'b'));
+    checkEqual(true , inProperty(sourceObject, 'c'));
+    checkEqual(false, inProperty(sourceObject, 'd'));
+
+    checkEqual(true,  inProperty(sourceObject, 'a,b'));
+    checkEqual(true,  inProperty(sourceObject, 'b,c'));
+    checkEqual(true,  inProperty(sourceObject, 'a,c'));
+    checkEqual(true,  inProperty(sourceObject, 'c,a'));
+    checkEqual(false, inProperty(sourceObject, 'a,d'));
+
+    checkEqual(true,  inProperty(sourceObject, 'a,b,'));
+    checkEqual(true,  inProperty(sourceObject, 'b,c,'));
+    checkEqual(true,  inProperty(sourceObject, 'a,c,'));
+    checkEqual(true,  inProperty(sourceObject, 'c,a,'));
+    checkEqual(false, inProperty(sourceObject, 'a,d,'));
+
+    // parameter args
+    checkEqual(true,
+      inProperty({
+        object: sourceObject,
+        propertyArray: 'c,a,',
+      })
+    );
+    checkEqual(false,
+      inProperty({
+        object: sourceObject,
+        propertyArray: 'd',
+      })
+    );
+
+    // exception
+    checkEqual(false, isThrown(() => {
+      inProperty({}, 'a')
+    }));
+
+    checkEqual(true, isThrown(() => {
+      inProperty(1, 'a')
+    }));
+
+    checkEqual(true, isThrown(() => {
+      inProperty({}, 1)
+    }));
+
+    checkEqual(false, isThrown(() => {
+      inProperty({}, ['a'])
+    }));
+
+    checkEqual(true, isThrown(() => {
+      inProperty({}, [1])
+    }));
+
+
+  };
+
   console.log('  test object.js start.');
   test_copyProperty();
+  test_inProperty();
   console.log('  test object.js finish.');
 }
 
