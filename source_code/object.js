@@ -9,48 +9,58 @@ const {
   initialValue,
 } = require('./compare.js');
 
-const _copyProperty = (fromObject, propertyString, toObject = {}) => {
-  const propertyArray = propertyString.split(',');
+const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
   for (let i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '') {
+    if ((propertyArray[i] === '')
+    || (_isUndefined(propertyArray[i]))) {
       continue;
+    }
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError(
+        'copyProperty args(propertyArray) element is not string'
+      );
     }
     toObject[propertyArray[i]] = fromObject[propertyArray[i]];
   }
   return toObject;
 }
 
-const copyProperty = (fromObject, propertyString, toObject = {}) => {
-  let param;
+const copyProperty = (fromObject, propertyArray, toObject = {}) => {
   if (_isObject(fromObject)
   && ('fromObject' in fromObject)
-  && ('propertyString' in fromObject)) {
-    param = fromObject;
-    param.toObject = initialValue(param.toObject, {});
-  } else {
-    param = { fromObject, propertyString, toObject }
+  && ('propertyArray' in fromObject)) {
+    ({ fromObject, propertyArray, toObject = {} } = fromObject)
   }
 
-  if (!_isObject(param.fromObject)) {
+  if (!_isObject(fromObject)) {
     throw new TypeError(
       'copyProperty args(fromObject) is not object'
     );
   }
-  if (!_isString(param.propertyString)) {
-    throw new TypeError(
-      'copyProperty args(propertyString) is not object'
-    );
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError(
+        'copyProperty args(propertyArray) is not [array|string]'
+      );
+    }
   }
-  if (!_isObject(param.toObject)) {
+  if (!_isObject(toObject)) {
     throw new TypeError(
       'copyProperty args(toObject) is not object'
     );
   }
 
   _copyProperty(
-    param.fromObject,
-    param.propertyString,
-    param.toObject,
+    fromObject,
+    propertyArray,
+    toObject,
+  )
+}
   )
 }
 

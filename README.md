@@ -28,7 +28,7 @@ console.log(
 ```
     node index.js
 
-## type ES Modules
+### type ES Modules
 
 ```
 // index.mjs
@@ -99,6 +99,10 @@ You can now use the functions of the parts object.
 
 
 ## Version
+
+### 2.1.0
+#### 2019/09/27(Fri)
+- update copyProperty
 
 ### 2.0.1
 #### 2019/09/26(Thu)

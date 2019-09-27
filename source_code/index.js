@@ -8,7 +8,7 @@ const _string = require('./string.js');
 const _consoleHook = require('./consoleHook.js');
 const _object = require('./object.js');
 
-const VERSION = '2.0.1';
+const VERSION = '2.1.0 beta';
 
 // Public Property
 const type = _object._copyProperty(_type,
@@ -87,7 +87,7 @@ const consoleHook = _object._copyProperty(_consoleHook,
 );
 
 const object = _object._copyProperty(_object,
-  'copyProperty,' +
+  'copyProperty,inProperty' +
   ''
 );
 
@@ -156,7 +156,7 @@ const {
 } = _string;
 
 const {
-  copyProperty,
+  copyProperty,inProperty,
 } = _object;
 
 module.exports = {
@@ -227,7 +227,7 @@ module.exports = {
   matchFormat,includes,
 
   // object
-  copyProperty,
+  copyProperty,inProperty
 
 };
 
