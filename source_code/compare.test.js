@@ -3,7 +3,8 @@ const test_execute_compare = (parts) => {
   const {
     isUndefined,isNull,isNaNStrict,
     isBoolean,isNumber,isInteger,isString,
-    isFunction,isObject,isArray,isDate,isRegExp,
+    isFunction,isObject,isObjectType,
+    isArray,isDate,isRegExp,
     isException,
   } = parts.type;
 

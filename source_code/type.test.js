@@ -5,25 +5,30 @@ const test_execute_type = (parts) => {
   } = parts.test;
 
   const {
-    isUndefined, isNull,
-    isBoolean, isNumber, isInteger, isString,
-    isFunction, isObject, isArray, isDate,
-    isRegExp, isException,
 
-    isNotUndefined, isNotNull,
-    isNotBoolean, isNotNumber,isNotInteger, isNotString,
-    isNotFunction, isNotObject, isNotArray, isNotDate,
-    isNotRegExp, isNotException,
+    isUndefined,isNull,isNaNStrict,
+    isBoolean,isNumber,isInteger,isString,
+    isFunction,isObject,isObjectType,
+    isArray,isDate,isRegExp,
+    isException,
 
-    isUndefinedArray, isNullArray,
-    isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-    isFunctionArray, isObjectArray, isArrayArray, isDateArray,
-    isRegExpArray, isExceptionArray,
+    isNotUndefined,isNotNull,isNotNaNStrict,
+    isNotBoolean,isNotNumber,isNotInteger,isNotString,
+    isNotFunction,isNotObject,isNotObjectType,
+    isNotArray,isNotDate,isNotRegExp,
+    isNotException,
 
-    isNotUndefinedArray, isNotNullArray,
-    isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-    isNotFunctionArray, isNotObjectArray, isNotArrayArray, isNotDateArray,
-    isNotRegExpArray, isNotExceptionArray,
+    isUndefinedArray,isNullArray,isNaNStrictArray,
+    isBooleanArray,isNumberArray,isIntegerArray,isStringArray,
+    isFunctionArray,isObjectArray,isObjectTypeArray,
+    isArrayArray,isDateArray,isRegExpArray,
+    isExceptionArray,
+
+    isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,
+    isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
+    isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,
+    isNotArrayArray,isNotDateArray,isNotRegExpArray,
+    isNotExceptionArray,
 
   } = parts.type;
 
@@ -304,6 +309,27 @@ const test_execute_type = (parts) => {
     checkEqual(false, isObjectArray([[{}], { a: 0, b: 1 }]));
   };
 
+  const test_isObjectType = function () {
+    checkEqual(true,  isObjectType({}));
+    checkEqual(true,  isObjectType({ a: 0 }));
+    checkEqual(true,  isObjectType({ a: 0, b: 1 }));
+
+    checkEqual(true,  isObjectType([]));
+    checkEqual(false, isObjectType(null));
+    checkEqual(false, isObjectType(undefined));
+    checkEqual(true,  isObjectType(function () { }));
+    checkEqual(true,  isObjectType(() => {}));
+    checkEqual(true,  isObjectType(new Error()));
+    checkEqual(true,  isObjectType(new Date()));
+    checkEqual(true,  isObjectType(new RegExp()));
+
+    checkEqual(true,  isObjectType({ a: 0, b: 1 }, { c: 0, d: 1 }));
+
+    checkEqual(true,  isObjectTypeArray([{}, { a: 0, b: 1 }]));
+    checkEqual(true,  isObjectTypeArray([[], { a: 0, b: 1 }]));
+    checkEqual(true,  isObjectTypeArray([[{}], { a: 0, b: 1 }]));
+  };
+
   const test_isArray = function () {
     checkEqual(true, isArray([123]));
     checkEqual(true, isArray([]));
@@ -366,6 +392,7 @@ const test_execute_type = (parts) => {
   test_isString();
   test_isFunction();
   test_isObject();
+  test_isObjectType();
   test_isArray();
   test_isDate();
   test_isExcection();
