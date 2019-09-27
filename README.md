@@ -105,6 +105,7 @@ You can now use the functions of the parts object.
 - update copyProperty
 - add inProperty
 - add isObjectType
+- polyfill array.includes
 
 ### 2.0.1
 #### 2019/09/26(Thu)
