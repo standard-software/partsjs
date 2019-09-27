@@ -5,48 +5,56 @@ var test_execute_type = function test_execute_type(parts) {
   var _parts$type = parts.type,
       isUndefined = _parts$type.isUndefined,
       isNull = _parts$type.isNull,
+      isNaNStrict = _parts$type.isNaNStrict,
       isBoolean = _parts$type.isBoolean,
       isNumber = _parts$type.isNumber,
       isInteger = _parts$type.isInteger,
       isString = _parts$type.isString,
       isFunction = _parts$type.isFunction,
       isObject = _parts$type.isObject,
+      isObjectType = _parts$type.isObjectType,
       isArray = _parts$type.isArray,
       isDate = _parts$type.isDate,
       isRegExp = _parts$type.isRegExp,
       isException = _parts$type.isException,
       isNotUndefined = _parts$type.isNotUndefined,
       isNotNull = _parts$type.isNotNull,
+      isNotNaNStrict = _parts$type.isNotNaNStrict,
       isNotBoolean = _parts$type.isNotBoolean,
       isNotNumber = _parts$type.isNotNumber,
       isNotInteger = _parts$type.isNotInteger,
       isNotString = _parts$type.isNotString,
       isNotFunction = _parts$type.isNotFunction,
       isNotObject = _parts$type.isNotObject,
+      isNotObjectType = _parts$type.isNotObjectType,
       isNotArray = _parts$type.isNotArray,
       isNotDate = _parts$type.isNotDate,
       isNotRegExp = _parts$type.isNotRegExp,
       isNotException = _parts$type.isNotException,
       isUndefinedArray = _parts$type.isUndefinedArray,
       isNullArray = _parts$type.isNullArray,
+      isNaNStrictArray = _parts$type.isNaNStrictArray,
       isBooleanArray = _parts$type.isBooleanArray,
       isNumberArray = _parts$type.isNumberArray,
       isIntegerArray = _parts$type.isIntegerArray,
       isStringArray = _parts$type.isStringArray,
       isFunctionArray = _parts$type.isFunctionArray,
       isObjectArray = _parts$type.isObjectArray,
+      isObjectTypeArray = _parts$type.isObjectTypeArray,
       isArrayArray = _parts$type.isArrayArray,
       isDateArray = _parts$type.isDateArray,
       isRegExpArray = _parts$type.isRegExpArray,
       isExceptionArray = _parts$type.isExceptionArray,
       isNotUndefinedArray = _parts$type.isNotUndefinedArray,
       isNotNullArray = _parts$type.isNotNullArray,
+      isNotNaNStrictArray = _parts$type.isNotNaNStrictArray,
       isNotBooleanArray = _parts$type.isNotBooleanArray,
       isNotNumberArray = _parts$type.isNotNumberArray,
       isNotIntegerArray = _parts$type.isNotIntegerArray,
       isNotStringArray = _parts$type.isNotStringArray,
       isNotFunctionArray = _parts$type.isNotFunctionArray,
       isNotObjectArray = _parts$type.isNotObjectArray,
+      isNotObjectTypeArray = _parts$type.isNotObjectTypeArray,
       isNotArrayArray = _parts$type.isNotArrayArray,
       isNotDateArray = _parts$type.isNotDateArray,
       isNotRegExpArray = _parts$type.isNotRegExpArray,
@@ -318,6 +326,44 @@ var test_execute_type = function test_execute_type(parts) {
     }]));
   };
 
+  var test_isObjectType = function test_isObjectType() {
+    checkEqual(true, isObjectType({}));
+    checkEqual(true, isObjectType({
+      a: 0
+    }));
+    checkEqual(true, isObjectType({
+      a: 0,
+      b: 1
+    }));
+    checkEqual(true, isObjectType([]));
+    checkEqual(false, isObjectType(null));
+    checkEqual(false, isObjectType(undefined));
+    checkEqual(true, isObjectType(function () {}));
+    checkEqual(true, isObjectType(function () {}));
+    checkEqual(true, isObjectType(new Error()));
+    checkEqual(true, isObjectType(new Date()));
+    checkEqual(true, isObjectType(new RegExp()));
+    checkEqual(true, isObjectType({
+      a: 0,
+      b: 1
+    }, {
+      c: 0,
+      d: 1
+    }));
+    checkEqual(true, isObjectTypeArray([{}, {
+      a: 0,
+      b: 1
+    }]));
+    checkEqual(true, isObjectTypeArray([[], {
+      a: 0,
+      b: 1
+    }]));
+    checkEqual(true, isObjectTypeArray([[{}], {
+      a: 0,
+      b: 1
+    }]));
+  };
+
   var test_isArray = function test_isArray() {
     checkEqual(true, isArray([123]));
     checkEqual(true, isArray([]));
@@ -382,6 +428,7 @@ var test_execute_type = function test_execute_type(parts) {
   test_isString();
   test_isFunction();
   test_isObject();
+  test_isObjectType();
   test_isArray();
   test_isDate();
   test_isExcection();

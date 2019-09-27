@@ -117,9 +117,9 @@ var _consoleHook = __webpack_require__(9);
 
 var _object = __webpack_require__(10);
 
-var VERSION = '2.0.1'; // Public Property
+var VERSION = '2.1.0 beta'; // Public Property
 
-var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,' + 'isNotExcept,' + '');
+var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isObjectType,' + 'isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotObjectType,' + 'isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isObjectTypeArray,' + 'isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,' + 'isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,isObjType,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,isNotObjType,' + 'isNotExcept,' + '');
 
 var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '');
 
@@ -133,7 +133,7 @@ var string = _object._copyProperty(_string, 'matchFormat,includes,' + '');
 
 var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' + '');
 
-var object = _object._copyProperty(_object, 'copyProperty,' + ''); // Root Property
+var object = _object._copyProperty(_object, 'copyProperty,inProperty' + ''); // Root Property
 
 
 var isUndefined = _type.isUndefined,
@@ -145,6 +145,7 @@ var isUndefined = _type.isUndefined,
     isString = _type.isString,
     isFunction = _type.isFunction,
     isObject = _type.isObject,
+    isObjectType = _type.isObjectType,
     isArray = _type.isArray,
     isDate = _type.isDate,
     isRegExp = _type.isRegExp,
@@ -158,6 +159,7 @@ var isUndefined = _type.isUndefined,
     isNotString = _type.isNotString,
     isNotFunction = _type.isNotFunction,
     isNotObject = _type.isNotObject,
+    isNotObjectType = _type.isNotObjectType,
     isNotArray = _type.isNotArray,
     isNotDate = _type.isNotDate,
     isNotRegExp = _type.isNotRegExp,
@@ -171,6 +173,7 @@ var isUndefined = _type.isUndefined,
     isStringArray = _type.isStringArray,
     isFunctionArray = _type.isFunctionArray,
     isObjectArray = _type.isObjectArray,
+    isObjectTypeArray = _type.isObjectTypeArray,
     isArrayArray = _type.isArrayArray,
     isDateArray = _type.isDateArray,
     isRegExpArray = _type.isRegExpArray,
@@ -184,6 +187,7 @@ var isUndefined = _type.isUndefined,
     isNotStringArray = _type.isNotStringArray,
     isNotFunctionArray = _type.isNotFunctionArray,
     isNotObjectArray = _type.isNotObjectArray,
+    isNotObjectTypeArray = _type.isNotObjectTypeArray,
     isNotArrayArray = _type.isNotArrayArray,
     isNotDateArray = _type.isNotDateArray,
     isNotRegExpArray = _type.isNotRegExpArray,
@@ -195,6 +199,7 @@ var isUndefined = _type.isUndefined,
     isStr = _type.isStr,
     isFunc = _type.isFunc,
     isObj = _type.isObj,
+    isObjType = _type.isObjType,
     isExcept = _type.isExcept,
     isNotUndef = _type.isNotUndef,
     isNotBool = _type.isNotBool,
@@ -203,6 +208,7 @@ var isUndefined = _type.isUndefined,
     isNotStr = _type.isNotStr,
     isNotFunc = _type.isNotFunc,
     isNotObj = _type.isNotObj,
+    isNotObjType = _type.isNotObjType,
     isNotExcept = _type.isNotExcept;
 var checkEqual = _test.checkEqual,
     isThrown = _test.isThrown,
@@ -230,7 +236,10 @@ var numberToString = _convert.numberToString,
     strToInt = _convert.strToInt;
 var matchFormat = _string.matchFormat,
     includes = _string.includes;
-var copyProperty = _object.copyProperty;
+var copyProperty = _object.copyProperty,
+    inProperty = _object.inProperty,
+    copyProp = _object.copyProp,
+    inProp = _object.inProp;
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -251,6 +260,7 @@ module.exports = {
   isString: isString,
   isFunction: isFunction,
   isObject: isObject,
+  isObjectType: isObjectType,
   isArray: isArray,
   isDate: isDate,
   isRegExp: isRegExp,
@@ -264,6 +274,7 @@ module.exports = {
   isNotString: isNotString,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
+  isNotObjectType: isNotObjectType,
   isNotArray: isNotArray,
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
@@ -277,6 +288,7 @@ module.exports = {
   isStringArray: isStringArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
+  isObjectTypeArray: isObjectTypeArray,
   isArrayArray: isArrayArray,
   isDateArray: isDateArray,
   isRegExpArray: isRegExpArray,
@@ -290,6 +302,7 @@ module.exports = {
   isNotStringArray: isNotStringArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
+  isNotObjectTypeArray: isNotObjectTypeArray,
   isNotArrayArray: isNotArrayArray,
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
@@ -301,6 +314,7 @@ module.exports = {
   isStr: isStr,
   isFunc: isFunc,
   isObj: isObj,
+  isObjType: isObjType,
   isExcept: isExcept,
   isNotUndef: isNotUndef,
   isNotBool: isNotBool,
@@ -309,6 +323,7 @@ module.exports = {
   isNotStr: isNotStr,
   isNotFunc: isNotFunc,
   isNotObj: isNotObj,
+  isNotObjType: isNotObjType,
   isNotExcept: isNotExcept,
   // test
   checkEqual: checkEqual,
@@ -342,7 +357,10 @@ module.exports = {
   matchFormat: matchFormat,
   includes: includes,
   // object
-  copyProperty: copyProperty
+  copyProperty: copyProperty,
+  inProperty: inProperty,
+  copyProp: copyProp,
+  inProp: inProp
 };
 
 /***/ }),
@@ -489,23 +507,19 @@ module.exports = {};
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var objectToString = function objectToString(value) {
-  return Object.prototype.toString.call(value);
-};
-
-var _primitiveTypeCheckFunc = function _primitiveTypeCheckFunc(typeName) {
+var _typeofCheck = function _typeofCheck(typeName) {
   return function (value) {
     return _typeof(value) === typeName;
   };
 };
 
-var _objectTypeCheckFunc = function _objectTypeCheckFunc(typeName) {
+var _objectToStringCheck = function _objectToStringCheck(typeName) {
   return function (value) {
-    return objectToString(value) === "[object ".concat(typeName, "]");
+    return Object.prototype.toString.call(value) === "[object ".concat(typeName, "]");
   };
 };
 
-var _isUndefined = _primitiveTypeCheckFunc('undefined');
+var _isUndefined = _typeofCheck('undefined');
 
 var _isNull = function _isNull(value) {
   return value === null;
@@ -515,10 +529,10 @@ var _isNaNStrict = function _isNaNStrict(value) {
   return value !== value;
 };
 
-var _isBoolean = _primitiveTypeCheckFunc('boolean');
+var _isBoolean = _typeofCheck('boolean');
 
 var _isNumber = function _isNumber(value) {
-  return _primitiveTypeCheckFunc('number')(value) && isFinite(value);
+  return _typeofCheck('number')(value) && isFinite(value);
 };
 
 var _isInteger = function _isInteger(value) {
@@ -529,25 +543,33 @@ var _isInteger = function _isInteger(value) {
   return Math.round(value) === value;
 };
 
-var _isString = _primitiveTypeCheckFunc('string');
+var _isString = _typeofCheck('string');
 
-var _isFunction = _primitiveTypeCheckFunc('function');
+var _isFunction = _typeofCheck('function');
 
 var _isObject = function _isObject(value) {
-  if (_objectTypeCheckFunc('Object')(value) && !_isNull(value) && !_isUndefined(value)) {
+  if (_objectToStringCheck('Object')(value) && !_isNull(value) && !_isUndefined(value)) {
     return true;
   }
 
   return false;
 };
 
-var _isArray = _objectTypeCheckFunc('Array');
+var _isObjectType = function _isObjectType(value) {
+  if (_isNull(value)) {
+    return false;
+  }
 
-var _isDate = _objectTypeCheckFunc('Date');
+  return ['function', 'object'].includes(_typeof(value));
+};
 
-var _isRegExp = _objectTypeCheckFunc('RegExp');
+var _isArray = _objectToStringCheck('Array');
 
-var _isError = _objectTypeCheckFunc('Error');
+var _isDate = _objectToStringCheck('Date');
+
+var _isRegExp = _objectToStringCheck('RegExp');
+
+var _isError = _objectToStringCheck('Error');
 /**
  * _isException
  * description:
@@ -600,6 +622,10 @@ var _isNotFunction = function _isNotFunction(value) {
 
 var _isNotObject = function _isNotObject(value) {
   return !_isObject(value);
+};
+
+var _isNotObjectType = function _isNotObjectType(value) {
+  return !_isObjectType(value);
 };
 
 var _isNotArray = function _isNotArray(value) {
@@ -676,6 +702,8 @@ var isFunction = _isTypeCheckArgsFunc(_isFunction);
 
 var isObject = _isTypeCheckArgsFunc(_isObject);
 
+var isObjectType = _isTypeCheckArgsFunc(_isObjectType);
+
 var isArray = _isTypeCheckArgsFunc(_isArray);
 
 var isDate = _isTypeCheckArgsFunc(_isDate);
@@ -702,6 +730,8 @@ var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
 var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
 
+var isNotObjectType = _isTypeCheckArgsFunc(_isNotObjectType);
+
 var isNotArray = _isTypeCheckArgsFunc(_isNotArray);
 
 var isNotDate = _isTypeCheckArgsFunc(_isNotDate);
@@ -727,6 +757,8 @@ var isStringArray = _isTypeCheckArrayFunc(_isString);
 var isFunctionArray = _isTypeCheckArrayFunc(_isFunction);
 
 var isObjectArray = _isTypeCheckArrayFunc(_isObject);
+
+var isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
 
 var isArrayArray = _isTypeCheckArrayFunc(_isArray);
 
@@ -772,6 +804,10 @@ var isNotObjectArray = _isTypeCheckArrayFunc(function (value) {
   return !_isObject(value);
 });
 
+var isNotObjectTypeArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isObjectType(value);
+});
+
 var isNotArrayArray = _isTypeCheckArrayFunc(function (value) {
   return !_isArray(value);
 });
@@ -795,15 +831,17 @@ var isInt = isInteger;
 var isStr = isString;
 var isFunc = isFunction;
 var isObj = isObject;
+var isObjType = isObjectType;
 var isExcept = isException;
-var isNotUndef = isUndefined;
-var isNotBool = isBoolean;
-var isNotNum = isNumber;
-var isNotInt = isInteger;
-var isNotStr = isString;
-var isNotFunc = isFunction;
-var isNotObj = isObject;
-var isNotExcept = isException;
+var isNotUndef = isNotUndefined;
+var isNotBool = isNotBoolean;
+var isNotNum = isNotNumber;
+var isNotInt = isNotInteger;
+var isNotStr = isNotString;
+var isNotFunc = isNotFunction;
+var isNotObj = isNotObject;
+var isNotObjType = isNotObjectType;
+var isNotExcept = isNotException;
 module.exports = {
   _isUndefined: _isUndefined,
   _isNull: _isNull,
@@ -814,6 +852,7 @@ module.exports = {
   _isString: _isString,
   _isFunction: _isFunction,
   _isObject: _isObject,
+  _isObjectType: _isObjectType,
   _isArray: _isArray,
   _isDate: _isDate,
   _isRegExp: _isRegExp,
@@ -827,6 +866,7 @@ module.exports = {
   _isNotString: _isNotString,
   _isNotFunction: _isNotFunction,
   _isNotObject: _isNotObject,
+  _isNotObjectType: _isNotObjectType,
   _isNotArray: _isNotArray,
   _isNotDate: _isNotDate,
   _isNotRegExp: _isNotRegExp,
@@ -840,6 +880,7 @@ module.exports = {
   isString: isString,
   isFunction: isFunction,
   isObject: isObject,
+  isObjectType: isObjectType,
   isArray: isArray,
   isDate: isDate,
   isRegExp: isRegExp,
@@ -853,6 +894,7 @@ module.exports = {
   isNotString: isNotString,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
+  isNotObjectType: isNotObjectType,
   isNotArray: isNotArray,
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
@@ -866,6 +908,7 @@ module.exports = {
   isStringArray: isStringArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
+  isObjectTypeArray: isObjectTypeArray,
   isArrayArray: isArrayArray,
   isDateArray: isDateArray,
   isRegExpArray: isRegExpArray,
@@ -879,6 +922,7 @@ module.exports = {
   isNotStringArray: isNotStringArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
+  isNotObjectTypeArray: isNotObjectTypeArray,
   isNotArrayArray: isNotArrayArray,
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
@@ -890,6 +934,7 @@ module.exports = {
   isStr: isStr,
   isFunc: isFunc,
   isObj: isObj,
+  isObjType: isObjType,
   isExcept: isExcept,
   isNotUndef: isNotUndef,
   isNotBool: isNotBool,
@@ -898,6 +943,7 @@ module.exports = {
   isNotStr: isNotStr,
   isNotFunc: isNotFunc,
   isNotObj: isNotObj,
+  isNotObjType: isNotObjType,
   isNotExcept: isNotExcept
 };
 
@@ -1996,13 +2042,20 @@ var _require = __webpack_require__(3),
 var _require2 = __webpack_require__(6),
     initialValue = _require2.initialValue;
 
-var _copyProperty = function _copyProperty(fromObject, propertyString) {
+var _copyProperty = function _copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var propertyArray = propertyString.split(',');
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
 
   for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '') {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
       continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
     }
 
     toObject[propertyArray[i]] = fromObject[propertyArray[i]];
@@ -2011,39 +2064,84 @@ var _copyProperty = function _copyProperty(fromObject, propertyString) {
   return toObject;
 };
 
-var copyProperty = function copyProperty(fromObject, propertyString) {
+var copyProperty = function copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var param;
 
-  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyString' in fromObject) {
-    param = fromObject;
-    param.toObject = initialValue(param.toObject, {});
-  } else {
-    param = {
-      fromObject: fromObject,
-      propertyString: propertyString,
-      toObject: toObject
-    };
+  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyArray' in fromObject) {
+    var _fromObject = fromObject;
+    fromObject = _fromObject.fromObject;
+    propertyArray = _fromObject.propertyArray;
+    var _fromObject$toObject = _fromObject.toObject;
+    toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
   }
 
-  if (!_isObject(param.fromObject)) {
+  if (!_isObject(fromObject)) {
     throw new TypeError('copyProperty args(fromObject) is not object');
   }
 
-  if (!_isString(param.propertyString)) {
-    throw new TypeError('copyProperty args(propertyString) is not object');
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
   }
 
-  if (!_isObject(param.toObject)) {
+  if (!_isObject(toObject)) {
     throw new TypeError('copyProperty args(toObject) is not object');
   }
 
-  _copyProperty(param.fromObject, param.propertyString, param.toObject);
+  _copyProperty(fromObject, propertyArray, toObject);
 };
 
+var _inProperty = function _inProperty(object, propertyArray) {
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
+  var result = true;
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
+    }
+
+    if (!(propertyArray[i] in object)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var inProperty = function inProperty(object, propertyArray) {
+  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
+    var _object = object;
+    object = _object.object;
+    propertyArray = _object.propertyArray;
+  } // no object check
+
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  return _inProperty(object, propertyArray);
+};
+
+var copyProp = copyProperty;
+var inProp = inProperty;
 module.exports = {
   _copyProperty: _copyProperty,
-  copyProperty: copyProperty
+  _inProperty: _inProperty,
+  copyProperty: copyProperty,
+  inProperty: inProperty,
+  copyProp: copyProp,
+  inProp: inProp
 };
 
 /***/ })

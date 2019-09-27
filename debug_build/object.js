@@ -18,13 +18,20 @@ var _require = require('./type.js'),
 var _require2 = require('./compare.js'),
     initialValue = _require2.initialValue;
 
-var _copyProperty = function _copyProperty(fromObject, propertyString) {
+var _copyProperty = function _copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var propertyArray = propertyString.split(',');
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
 
   for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '') {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
       continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
     }
 
     toObject[propertyArray[i]] = fromObject[propertyArray[i]];
@@ -33,37 +40,82 @@ var _copyProperty = function _copyProperty(fromObject, propertyString) {
   return toObject;
 };
 
-var copyProperty = function copyProperty(fromObject, propertyString) {
+var copyProperty = function copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var param;
 
-  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyString' in fromObject) {
-    param = fromObject;
-    param.toObject = initialValue(param.toObject, {});
-  } else {
-    param = {
-      fromObject: fromObject,
-      propertyString: propertyString,
-      toObject: toObject
-    };
+  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyArray' in fromObject) {
+    var _fromObject = fromObject;
+    fromObject = _fromObject.fromObject;
+    propertyArray = _fromObject.propertyArray;
+    var _fromObject$toObject = _fromObject.toObject;
+    toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
   }
 
-  if (!_isObject(param.fromObject)) {
+  if (!_isObject(fromObject)) {
     throw new TypeError('copyProperty args(fromObject) is not object');
   }
 
-  if (!_isString(param.propertyString)) {
-    throw new TypeError('copyProperty args(propertyString) is not object');
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
   }
 
-  if (!_isObject(param.toObject)) {
+  if (!_isObject(toObject)) {
     throw new TypeError('copyProperty args(toObject) is not object');
   }
 
-  _copyProperty(param.fromObject, param.propertyString, param.toObject);
+  _copyProperty(fromObject, propertyArray, toObject);
 };
 
+var _inProperty = function _inProperty(object, propertyArray) {
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
+  var result = true;
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
+    }
+
+    if (!(propertyArray[i] in object)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var inProperty = function inProperty(object, propertyArray) {
+  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
+    var _object = object;
+    object = _object.object;
+    propertyArray = _object.propertyArray;
+  } // no object check
+
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  return _inProperty(object, propertyArray);
+};
+
+var copyProp = copyProperty;
+var inProp = inProperty;
 module.exports = {
   _copyProperty: _copyProperty,
-  copyProperty: copyProperty
+  _inProperty: _inProperty,
+  copyProperty: copyProperty,
+  inProperty: inProperty,
+  copyProp: copyProp,
+  inProp: inProp
 };

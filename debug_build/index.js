@@ -18,9 +18,9 @@ var _consoleHook = require('./consoleHook.js');
 
 var _object = require('./object.js');
 
-var VERSION = '2.0.1'; // Public Property
+var VERSION = '2.1.0 beta'; // Public Property
 
-var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,' + 'isNotExcept,' + '');
+var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isObjectType,' + 'isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotObjectType,' + 'isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isObjectTypeArray,' + 'isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,' + 'isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,isObjType,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,isNotObjType,' + 'isNotExcept,' + '');
 
 var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '');
 
@@ -34,7 +34,7 @@ var string = _object._copyProperty(_string, 'matchFormat,includes,' + '');
 
 var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' + '');
 
-var object = _object._copyProperty(_object, 'copyProperty,' + ''); // Root Property
+var object = _object._copyProperty(_object, 'copyProperty,inProperty' + ''); // Root Property
 
 
 var isUndefined = _type.isUndefined,
@@ -46,6 +46,7 @@ var isUndefined = _type.isUndefined,
     isString = _type.isString,
     isFunction = _type.isFunction,
     isObject = _type.isObject,
+    isObjectType = _type.isObjectType,
     isArray = _type.isArray,
     isDate = _type.isDate,
     isRegExp = _type.isRegExp,
@@ -59,6 +60,7 @@ var isUndefined = _type.isUndefined,
     isNotString = _type.isNotString,
     isNotFunction = _type.isNotFunction,
     isNotObject = _type.isNotObject,
+    isNotObjectType = _type.isNotObjectType,
     isNotArray = _type.isNotArray,
     isNotDate = _type.isNotDate,
     isNotRegExp = _type.isNotRegExp,
@@ -72,6 +74,7 @@ var isUndefined = _type.isUndefined,
     isStringArray = _type.isStringArray,
     isFunctionArray = _type.isFunctionArray,
     isObjectArray = _type.isObjectArray,
+    isObjectTypeArray = _type.isObjectTypeArray,
     isArrayArray = _type.isArrayArray,
     isDateArray = _type.isDateArray,
     isRegExpArray = _type.isRegExpArray,
@@ -85,6 +88,7 @@ var isUndefined = _type.isUndefined,
     isNotStringArray = _type.isNotStringArray,
     isNotFunctionArray = _type.isNotFunctionArray,
     isNotObjectArray = _type.isNotObjectArray,
+    isNotObjectTypeArray = _type.isNotObjectTypeArray,
     isNotArrayArray = _type.isNotArrayArray,
     isNotDateArray = _type.isNotDateArray,
     isNotRegExpArray = _type.isNotRegExpArray,
@@ -96,6 +100,7 @@ var isUndefined = _type.isUndefined,
     isStr = _type.isStr,
     isFunc = _type.isFunc,
     isObj = _type.isObj,
+    isObjType = _type.isObjType,
     isExcept = _type.isExcept,
     isNotUndef = _type.isNotUndef,
     isNotBool = _type.isNotBool,
@@ -104,6 +109,7 @@ var isUndefined = _type.isUndefined,
     isNotStr = _type.isNotStr,
     isNotFunc = _type.isNotFunc,
     isNotObj = _type.isNotObj,
+    isNotObjType = _type.isNotObjType,
     isNotExcept = _type.isNotExcept;
 var checkEqual = _test.checkEqual,
     isThrown = _test.isThrown,
@@ -131,7 +137,10 @@ var numberToString = _convert.numberToString,
     strToInt = _convert.strToInt;
 var matchFormat = _string.matchFormat,
     includes = _string.includes;
-var copyProperty = _object.copyProperty;
+var copyProperty = _object.copyProperty,
+    inProperty = _object.inProperty,
+    copyProp = _object.copyProp,
+    inProp = _object.inProp;
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -152,6 +161,7 @@ module.exports = {
   isString: isString,
   isFunction: isFunction,
   isObject: isObject,
+  isObjectType: isObjectType,
   isArray: isArray,
   isDate: isDate,
   isRegExp: isRegExp,
@@ -165,6 +175,7 @@ module.exports = {
   isNotString: isNotString,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
+  isNotObjectType: isNotObjectType,
   isNotArray: isNotArray,
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
@@ -178,6 +189,7 @@ module.exports = {
   isStringArray: isStringArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
+  isObjectTypeArray: isObjectTypeArray,
   isArrayArray: isArrayArray,
   isDateArray: isDateArray,
   isRegExpArray: isRegExpArray,
@@ -191,6 +203,7 @@ module.exports = {
   isNotStringArray: isNotStringArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
+  isNotObjectTypeArray: isNotObjectTypeArray,
   isNotArrayArray: isNotArrayArray,
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
@@ -202,6 +215,7 @@ module.exports = {
   isStr: isStr,
   isFunc: isFunc,
   isObj: isObj,
+  isObjType: isObjType,
   isExcept: isExcept,
   isNotUndef: isNotUndef,
   isNotBool: isNotBool,
@@ -210,6 +224,7 @@ module.exports = {
   isNotStr: isNotStr,
   isNotFunc: isNotFunc,
   isNotObj: isNotObj,
+  isNotObjType: isNotObjType,
   isNotExcept: isNotExcept,
   // test
   checkEqual: checkEqual,
@@ -243,5 +258,8 @@ module.exports = {
   matchFormat: matchFormat,
   includes: includes,
   // object
-  copyProperty: copyProperty
+  copyProperty: copyProperty,
+  inProperty: inProperty,
+  copyProp: copyProp,
+  inProp: inProp
 };

@@ -2,23 +2,19 @@
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var objectToString = function objectToString(value) {
-  return Object.prototype.toString.call(value);
-};
-
-var _primitiveTypeCheckFunc = function _primitiveTypeCheckFunc(typeName) {
+var _typeofCheck = function _typeofCheck(typeName) {
   return function (value) {
     return _typeof(value) === typeName;
   };
 };
 
-var _objectTypeCheckFunc = function _objectTypeCheckFunc(typeName) {
+var _objectToStringCheck = function _objectToStringCheck(typeName) {
   return function (value) {
-    return objectToString(value) === "[object ".concat(typeName, "]");
+    return Object.prototype.toString.call(value) === "[object ".concat(typeName, "]");
   };
 };
 
-var _isUndefined = _primitiveTypeCheckFunc('undefined');
+var _isUndefined = _typeofCheck('undefined');
 
 var _isNull = function _isNull(value) {
   return value === null;
@@ -28,10 +24,10 @@ var _isNaNStrict = function _isNaNStrict(value) {
   return value !== value;
 };
 
-var _isBoolean = _primitiveTypeCheckFunc('boolean');
+var _isBoolean = _typeofCheck('boolean');
 
 var _isNumber = function _isNumber(value) {
-  return _primitiveTypeCheckFunc('number')(value) && isFinite(value);
+  return _typeofCheck('number')(value) && isFinite(value);
 };
 
 var _isInteger = function _isInteger(value) {
@@ -42,25 +38,33 @@ var _isInteger = function _isInteger(value) {
   return Math.round(value) === value;
 };
 
-var _isString = _primitiveTypeCheckFunc('string');
+var _isString = _typeofCheck('string');
 
-var _isFunction = _primitiveTypeCheckFunc('function');
+var _isFunction = _typeofCheck('function');
 
 var _isObject = function _isObject(value) {
-  if (_objectTypeCheckFunc('Object')(value) && !_isNull(value) && !_isUndefined(value)) {
+  if (_objectToStringCheck('Object')(value) && !_isNull(value) && !_isUndefined(value)) {
     return true;
   }
 
   return false;
 };
 
-var _isArray = _objectTypeCheckFunc('Array');
+var _isObjectType = function _isObjectType(value) {
+  if (_isNull(value)) {
+    return false;
+  }
 
-var _isDate = _objectTypeCheckFunc('Date');
+  return ['function', 'object'].includes(_typeof(value));
+};
 
-var _isRegExp = _objectTypeCheckFunc('RegExp');
+var _isArray = _objectToStringCheck('Array');
 
-var _isError = _objectTypeCheckFunc('Error');
+var _isDate = _objectToStringCheck('Date');
+
+var _isRegExp = _objectToStringCheck('RegExp');
+
+var _isError = _objectToStringCheck('Error');
 /**
  * _isException
  * description:
@@ -113,6 +117,10 @@ var _isNotFunction = function _isNotFunction(value) {
 
 var _isNotObject = function _isNotObject(value) {
   return !_isObject(value);
+};
+
+var _isNotObjectType = function _isNotObjectType(value) {
+  return !_isObjectType(value);
 };
 
 var _isNotArray = function _isNotArray(value) {
@@ -189,6 +197,8 @@ var isFunction = _isTypeCheckArgsFunc(_isFunction);
 
 var isObject = _isTypeCheckArgsFunc(_isObject);
 
+var isObjectType = _isTypeCheckArgsFunc(_isObjectType);
+
 var isArray = _isTypeCheckArgsFunc(_isArray);
 
 var isDate = _isTypeCheckArgsFunc(_isDate);
@@ -215,6 +225,8 @@ var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
 var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
 
+var isNotObjectType = _isTypeCheckArgsFunc(_isNotObjectType);
+
 var isNotArray = _isTypeCheckArgsFunc(_isNotArray);
 
 var isNotDate = _isTypeCheckArgsFunc(_isNotDate);
@@ -240,6 +252,8 @@ var isStringArray = _isTypeCheckArrayFunc(_isString);
 var isFunctionArray = _isTypeCheckArrayFunc(_isFunction);
 
 var isObjectArray = _isTypeCheckArrayFunc(_isObject);
+
+var isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
 
 var isArrayArray = _isTypeCheckArrayFunc(_isArray);
 
@@ -285,6 +299,10 @@ var isNotObjectArray = _isTypeCheckArrayFunc(function (value) {
   return !_isObject(value);
 });
 
+var isNotObjectTypeArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isObjectType(value);
+});
+
 var isNotArrayArray = _isTypeCheckArrayFunc(function (value) {
   return !_isArray(value);
 });
@@ -308,15 +326,17 @@ var isInt = isInteger;
 var isStr = isString;
 var isFunc = isFunction;
 var isObj = isObject;
+var isObjType = isObjectType;
 var isExcept = isException;
-var isNotUndef = isUndefined;
-var isNotBool = isBoolean;
-var isNotNum = isNumber;
-var isNotInt = isInteger;
-var isNotStr = isString;
-var isNotFunc = isFunction;
-var isNotObj = isObject;
-var isNotExcept = isException;
+var isNotUndef = isNotUndefined;
+var isNotBool = isNotBoolean;
+var isNotNum = isNotNumber;
+var isNotInt = isNotInteger;
+var isNotStr = isNotString;
+var isNotFunc = isNotFunction;
+var isNotObj = isNotObject;
+var isNotObjType = isNotObjectType;
+var isNotExcept = isNotException;
 module.exports = {
   _isUndefined: _isUndefined,
   _isNull: _isNull,
@@ -327,6 +347,7 @@ module.exports = {
   _isString: _isString,
   _isFunction: _isFunction,
   _isObject: _isObject,
+  _isObjectType: _isObjectType,
   _isArray: _isArray,
   _isDate: _isDate,
   _isRegExp: _isRegExp,
@@ -340,6 +361,7 @@ module.exports = {
   _isNotString: _isNotString,
   _isNotFunction: _isNotFunction,
   _isNotObject: _isNotObject,
+  _isNotObjectType: _isNotObjectType,
   _isNotArray: _isNotArray,
   _isNotDate: _isNotDate,
   _isNotRegExp: _isNotRegExp,
@@ -353,6 +375,7 @@ module.exports = {
   isString: isString,
   isFunction: isFunction,
   isObject: isObject,
+  isObjectType: isObjectType,
   isArray: isArray,
   isDate: isDate,
   isRegExp: isRegExp,
@@ -366,6 +389,7 @@ module.exports = {
   isNotString: isNotString,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
+  isNotObjectType: isNotObjectType,
   isNotArray: isNotArray,
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
@@ -379,6 +403,7 @@ module.exports = {
   isStringArray: isStringArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
+  isObjectTypeArray: isObjectTypeArray,
   isArrayArray: isArrayArray,
   isDateArray: isDateArray,
   isRegExpArray: isRegExpArray,
@@ -392,6 +417,7 @@ module.exports = {
   isNotStringArray: isNotStringArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
+  isNotObjectTypeArray: isNotObjectTypeArray,
   isNotArrayArray: isNotArrayArray,
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
@@ -403,6 +429,7 @@ module.exports = {
   isStr: isStr,
   isFunc: isFunc,
   isObj: isObj,
+  isObjType: isObjType,
   isExcept: isExcept,
   isNotUndef: isNotUndef,
   isNotBool: isNotBool,
@@ -411,5 +438,6 @@ module.exports = {
   isNotStr: isNotStr,
   isNotFunc: isNotFunc,
   isNotObj: isNotObj,
+  isNotObjType: isNotObjType,
   isNotExcept: isNotExcept
 };
