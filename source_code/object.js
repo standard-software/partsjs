@@ -62,13 +62,16 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
   )
 }
 
-const _inProperty = (object, propertyArray) => {
+const _inProperty = (object, propertyArray, hasOwn = true) => {
+
+  if (!_isObject(object)) {
+    return false;
+  }
 
   if (_isString(propertyArray)) {
     propertyArray = propertyArray.split(',');
   }
 
-  let result = true;
   for (let i = 0; i < propertyArray.length; i += 1) {
     if ((propertyArray[i] === '')
     || (_isUndefined(propertyArray[i]))) {
@@ -79,18 +82,24 @@ const _inProperty = (object, propertyArray) => {
         'copyProperty args(propertyArray) element is not string'
       );
     }
-    if (!(propertyArray[i] in object)) {
-      return false;
+    if (hasOwn) {
+      if (!object.hasOwnProperty(propertyArray[i])) {
+        return false;
+      }
+    } else {
+      if (!(propertyArray[i] in object)) {
+        return false;
+      }
     }
   }
   return true;
 }
 
-const inProperty = (object, propertyArray) => {
+const inProperty = (object, propertyArray, hasOwn = true) => {
   if (_isObject(object)
   && ('object' in object)
   && ('propertyArray' in object)) {
-    ({ object, propertyArray } = object)
+    ({ object, propertyArray, hasOwn = true } = object)
   }
 
   // no object check
@@ -102,20 +111,47 @@ const inProperty = (object, propertyArray) => {
       );
     }
   }
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError(
+      'copyProperty args(hasOwn) is not boolean'
+    );
+  }
 
   return _inProperty(
     object,
     propertyArray,
+    hasOwn,
   )
+}
+
+const _propertyCount = (object) => {
+  var result = 0;
+  for (let [key, value] of Object.entries(object)) {
+    result += 1;
+  }
+  return result;
+}
+
+const propertyCount = (object) => {
+  if (!_isObject(object)) {
+    throw new TypeError(
+      'propertyCount args(object) is not object'
+    );
+  }
+  return _propertyCount(object);
 }
 
 const copyProp = copyProperty;
 const inProp = inProperty;
+const propCount = propertyCount;
 
 module.exports = {
   _copyProperty, _inProperty,
+  _propertyCount,
 
   copyProperty, inProperty,
+  propertyCount,
 
   copyProp, inProp,
+  propCount,
 };

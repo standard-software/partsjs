@@ -15,11 +15,9 @@ const test_execute_compare = (parts) => {
   } = parts.test;
 
   const {
-    equal,
-    or,
-    match,
-    matchValue,
-    initialValue,
+    equal,or,
+    match,matchValue,initialValue,
+    isEmpty,
   } = parts.compare;
 
   const test_equal = () => {
@@ -294,6 +292,19 @@ const test_execute_compare = (parts) => {
     checkEqual('[object Object]', String(initialValue(undefined, {})));
   };
 
+  const test_isEmpty = () =>{
+    checkEqual(true,  isEmpty());
+    checkEqual(true,  isEmpty(undefined));
+    checkEqual(true,  isEmpty(null));
+    checkEqual(true,  isEmpty(''));
+    checkEqual(true,  isEmpty([]));
+    checkEqual(true,  isEmpty({}));
+
+    checkEqual(false, isEmpty(1));
+    checkEqual(false, isEmpty('0'));
+    checkEqual(false, isEmpty([1]));
+    checkEqual(false, isEmpty({a:1}));
+  }
 
   console.log('  test compare.js start.');
   test_equal();
@@ -301,6 +312,7 @@ const test_execute_compare = (parts) => {
   test_match();
   test_matchValue();
   test_initialValue();
+  test_isEmpty();
   console.log('  test commpare.js finish.');
 }
 

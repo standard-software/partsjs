@@ -61,8 +61,12 @@ const syntax = _object._copyProperty(_syntax,
 );
 
 const compare = _object._copyProperty(_compare,
-  '_equal,equal,_or,or,' +
-  '_match,match,matchValue,matchValue,_initialValue,initialValue,' +
+  '_equal,_or,' +
+  '_match,_matchValue,_initialValue,' +
+
+  'equal,or,' +
+  'match,matchValue,initialValue,' +
+  'isEmpty,' +
   ''
 );
 
@@ -91,7 +95,8 @@ const consoleHook = _object._copyProperty(_consoleHook,
 );
 
 const object = _object._copyProperty(_object,
-  'copyProperty,inProperty' +
+  'copyProperty,inProperty,' +
+  'propertyCount,' +
   ''
 );
 
@@ -164,8 +169,10 @@ const {
 
 const {
   copyProperty,inProperty,
+  propertyCount,
 
   copyProp,inProp,
+  propCount,
 } = _object;
 
 module.exports = {
@@ -241,8 +248,10 @@ module.exports = {
 
   // object
   copyProperty,inProperty,
+  propertyCount,
 
   copyProp,inProp,
+  propCount,
 
 };
 

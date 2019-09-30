@@ -11,6 +11,10 @@ const {
   if_,
 } = require('./syntax.js');
 
+const {
+  _propertyCount
+} = require('./object.js');
+
 /**
  * equal
  */
@@ -172,10 +176,27 @@ const initialValue = (
   );
 };
 
+const isEmpty = (
+  value,
+) => {
+  return _match(
+    value,
+    [
+      undefined,
+      null,
+      '',
+      (value) => _isObject(value) && _propertyCount(value) === 0,
+      (value) => _isArray(value) && value.length === 0,
+    ]
+  )
+}
+
 module.exports = {
   _equal,_or,
   _match,_matchValue,_initialValue,
 
   equal,or,
   match,matchValue,initialValue,
+  isEmpty,
+
 };
