@@ -32,7 +32,9 @@ var _hook = function _hook(methodName, hookFunc) {
   console[methodName] = hookFunc;
 };
 
-var hook = function hook(methodName, hookFunc) {
+var hook = function hook(methodName) {
+  var hookFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
   }
@@ -134,6 +136,10 @@ var accept = function accept(methodName, acceptArray, rejectArray, hookFunc) {
     throw new TypeError('accept args(rejectArray) is not array');
   }
 
+  if (!_isFunction(hookFunc)) {
+    throw new TypeError('accept args(hookFunc) is not function');
+  }
+
   _accept(methodName, acceptArray, rejectArray, hookFunc);
 };
 
@@ -143,22 +149,22 @@ var acceptLog = function acceptLog(acceptArray, rejectArray) {
 };
 
 var acceptInfo = function acceptInfo(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.info;
   accept('info', acceptArray, rejectArray, hookFunc);
 };
 
 var acceptWarn = function acceptWarn(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.warn;
   accept('warn', acceptArray, rejectArray, hookFunc);
 };
 
 var acceptError = function acceptError(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.error;
   accept('error', acceptArray, rejectArray, hookFunc);
 };
 
 var acceptDebug = function acceptDebug(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.debug;
   accept('debug', acceptArray, rejectArray, hookFunc);
 };
 

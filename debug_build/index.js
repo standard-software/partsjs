@@ -26,7 +26,7 @@ var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,
 
 var syntax = _object._copyProperty(_syntax, 'assert,guard,' + 'sc,if_,switch_,' + '');
 
-var compare = _object._copyProperty(_compare, '_equal,equal,_or,or,' + '_match,match,matchValue,matchValue,_initialValue,initialValue,' + '');
+var compare = _object._copyProperty(_compare, '_equal,_or,' + '_match,_matchValue,_initialValue,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + '');
 
 var convert = _object._copyProperty(_convert, 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + '');
 
@@ -34,7 +34,7 @@ var string = _object._copyProperty(_string, 'matchFormat,includes,' + '');
 
 var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' + '');
 
-var object = _object._copyProperty(_object, 'copyProperty,inProperty' + ''); // Root Property
+var object = _object._copyProperty(_object, 'copyProperty,inProperty,' + 'propertyCount,' + ''); // Root Property
 
 
 var isUndefined = _type.isUndefined,
@@ -139,8 +139,10 @@ var matchFormat = _string.matchFormat,
     includes = _string.includes;
 var copyProperty = _object.copyProperty,
     inProperty = _object.inProperty,
+    propertyCount = _object.propertyCount,
     copyProp = _object.copyProp,
-    inProp = _object.inProp;
+    inProp = _object.inProp,
+    propCount = _object.propCount;
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -260,6 +262,8 @@ module.exports = {
   // object
   copyProperty: copyProperty,
   inProperty: inProperty,
+  propertyCount: propertyCount,
   copyProp: copyProp,
-  inProp: inProp
+  inProp: inProp,
+  propCount: propCount
 };

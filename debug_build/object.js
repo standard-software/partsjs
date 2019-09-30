@@ -1,5 +1,13 @@
 "use strict";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var _require = require('./type.js'),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
@@ -69,11 +77,15 @@ var copyProperty = function copyProperty(fromObject, propertyArray) {
 };
 
 var _inProperty = function _inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (!_isObject(object)) {
+    return false;
+  }
+
   if (_isString(propertyArray)) {
     propertyArray = propertyArray.split(',');
   }
-
-  var result = true;
 
   for (var i = 0; i < propertyArray.length; i += 1) {
     if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
@@ -84,8 +96,14 @@ var _inProperty = function _inProperty(object, propertyArray) {
       throw new TypeError('copyProperty args(propertyArray) element is not string');
     }
 
-    if (!(propertyArray[i] in object)) {
-      return false;
+    if (hasOwn) {
+      if (!object.hasOwnProperty(propertyArray[i])) {
+        return false;
+      }
+    } else {
+      if (!(propertyArray[i] in object)) {
+        return false;
+      }
     }
   }
 
@@ -93,10 +111,14 @@ var _inProperty = function _inProperty(object, propertyArray) {
 };
 
 var inProperty = function inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
   if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
     var _object = object;
     object = _object.object;
     propertyArray = _object.propertyArray;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   } // no object check
 
 
@@ -106,16 +128,46 @@ var inProperty = function inProperty(object, propertyArray) {
     }
   }
 
-  return _inProperty(object, propertyArray);
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('copyProperty args(hasOwn) is not boolean');
+  }
+
+  return _inProperty(object, propertyArray, hasOwn);
+};
+
+var _propertyCount = function _propertyCount(object) {
+  var result = 0;
+
+  for (var _i = 0, _Object$entries = Object.entries(object); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+
+    result += 1;
+  }
+
+  return result;
+};
+
+var propertyCount = function propertyCount(object) {
+  if (!_isObject(object)) {
+    throw new TypeError('propertyCount args(object) is not object');
+  }
+
+  return _propertyCount(object);
 };
 
 var copyProp = copyProperty;
 var inProp = inProperty;
+var propCount = propertyCount;
 module.exports = {
   _copyProperty: _copyProperty,
   _inProperty: _inProperty,
+  _propertyCount: _propertyCount,
   copyProperty: copyProperty,
   inProperty: inProperty,
+  propertyCount: propertyCount,
   copyProp: copyProp,
-  inProp: inProp
+  inProp: inProp,
+  propCount: propCount
 };

@@ -25,7 +25,8 @@ var test_execute_compare = function test_execute_compare(parts) {
       or = _parts$compare.or,
       match = _parts$compare.match,
       matchValue = _parts$compare.matchValue,
-      initialValue = _parts$compare.initialValue;
+      initialValue = _parts$compare.initialValue,
+      isEmpty = _parts$compare.isEmpty;
 
   var test_equal = function test_equal() {
     // normal args
@@ -334,12 +335,28 @@ var test_execute_compare = function test_execute_compare(parts) {
     checkEqual('[object Object]', String(initialValue(undefined, {})));
   };
 
+  var test_isEmpty = function test_isEmpty() {
+    checkEqual(true, isEmpty());
+    checkEqual(true, isEmpty(undefined));
+    checkEqual(true, isEmpty(null));
+    checkEqual(true, isEmpty(''));
+    checkEqual(true, isEmpty([]));
+    checkEqual(true, isEmpty({}));
+    checkEqual(false, isEmpty(1));
+    checkEqual(false, isEmpty('0'));
+    checkEqual(false, isEmpty([1]));
+    checkEqual(false, isEmpty({
+      a: 1
+    }));
+  };
+
   console.log('  test compare.js start.');
   test_equal();
   test_or();
   test_match();
   test_matchValue();
   test_initialValue();
+  test_isEmpty();
   console.log('  test commpare.js finish.');
 };
 

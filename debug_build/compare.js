@@ -19,6 +19,9 @@ var _require2 = require('./syntax.js'),
     assert = _require2.assert,
     guard = _require2.guard,
     if_ = _require2.if_;
+
+var _require3 = require('./object.js'),
+    _propertyCount = _require3._propertyCount;
 /**
  * equal
  */
@@ -159,6 +162,14 @@ var initialValue = function initialValue(value, inMatchValue) {
   return _initialValue(value, inMatchValue);
 };
 
+var isEmpty = function isEmpty(value) {
+  return _match(value, [undefined, null, '', function (value) {
+    return _isObject(value) && _propertyCount(value) === 0;
+  }, function (value) {
+    return _isArray(value) && value.length === 0;
+  }]);
+};
+
 module.exports = {
   _equal: _equal,
   _or: _or,
@@ -169,5 +180,6 @@ module.exports = {
   or: or,
   match: match,
   matchValue: matchValue,
-  initialValue: initialValue
+  initialValue: initialValue,
+  isEmpty: isEmpty
 };

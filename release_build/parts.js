@@ -109,13 +109,13 @@ var _syntax = __webpack_require__(5);
 
 var _compare = __webpack_require__(6);
 
-var _convert = __webpack_require__(7);
+var _convert = __webpack_require__(8);
 
-var _string = __webpack_require__(8);
+var _string = __webpack_require__(9);
 
-var _consoleHook = __webpack_require__(9);
+var _consoleHook = __webpack_require__(10);
 
-var _object = __webpack_require__(10);
+var _object = __webpack_require__(7);
 
 var VERSION = '2.1.0 beta'; // Public Property
 
@@ -125,7 +125,7 @@ var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,
 
 var syntax = _object._copyProperty(_syntax, 'assert,guard,' + 'sc,if_,switch_,' + '');
 
-var compare = _object._copyProperty(_compare, '_equal,equal,_or,or,' + '_match,match,matchValue,matchValue,_initialValue,initialValue,' + '');
+var compare = _object._copyProperty(_compare, '_equal,_or,' + '_match,_matchValue,_initialValue,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + '');
 
 var convert = _object._copyProperty(_convert, 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + '');
 
@@ -133,7 +133,7 @@ var string = _object._copyProperty(_string, 'matchFormat,includes,' + '');
 
 var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' + '');
 
-var object = _object._copyProperty(_object, 'copyProperty,inProperty' + ''); // Root Property
+var object = _object._copyProperty(_object, 'copyProperty,inProperty,' + 'propertyCount,' + ''); // Root Property
 
 
 var isUndefined = _type.isUndefined,
@@ -238,8 +238,10 @@ var matchFormat = _string.matchFormat,
     includes = _string.includes;
 var copyProperty = _object.copyProperty,
     inProperty = _object.inProperty,
+    propertyCount = _object.propertyCount,
     copyProp = _object.copyProp,
-    inProp = _object.inProp;
+    inProp = _object.inProp,
+    propCount = _object.propCount;
 module.exports = {
   VERSION: VERSION,
   type: type,
@@ -359,8 +361,10 @@ module.exports = {
   // object
   copyProperty: copyProperty,
   inProperty: inProperty,
+  propertyCount: propertyCount,
   copyProp: copyProp,
-  inProp: inProp
+  inProp: inProp,
+  propCount: propCount
 };
 
 /***/ }),
@@ -554,6 +558,9 @@ module.exports = {};
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+// const {
+//   _inProperty,
+// } = require('./object.js');
 var _typeofCheck = function _typeofCheck(typeName) {
   return function (value) {
     return _typeof(value) === typeName;
@@ -1366,6 +1373,9 @@ var _require2 = __webpack_require__(5),
     assert = _require2.assert,
     guard = _require2.guard,
     if_ = _require2.if_;
+
+var _require3 = __webpack_require__(7),
+    _propertyCount = _require3._propertyCount;
 /**
  * equal
  */
@@ -1506,6 +1516,14 @@ var initialValue = function initialValue(value, inMatchValue) {
   return _initialValue(value, inMatchValue);
 };
 
+var isEmpty = function isEmpty(value) {
+  return _match(value, [undefined, null, '', function (value) {
+    return _isObject(value) && _propertyCount(value) === 0;
+  }, function (value) {
+    return _isArray(value) && value.length === 0;
+  }]);
+};
+
 module.exports = {
   _equal: _equal,
   _or: _or,
@@ -1516,11 +1534,191 @@ module.exports = {
   or: or,
   match: match,
   matchValue: matchValue,
-  initialValue: initialValue
+  initialValue: initialValue,
+  isEmpty: isEmpty
 };
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var _require = __webpack_require__(3),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(6),
+    initialValue = _require2.initialValue;
+
+var _copyProperty = function _copyProperty(fromObject, propertyArray) {
+  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
+    }
+
+    toObject[propertyArray[i]] = fromObject[propertyArray[i]];
+  }
+
+  return toObject;
+};
+
+var copyProperty = function copyProperty(fromObject, propertyArray) {
+  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyArray' in fromObject) {
+    var _fromObject = fromObject;
+    fromObject = _fromObject.fromObject;
+    propertyArray = _fromObject.propertyArray;
+    var _fromObject$toObject = _fromObject.toObject;
+    toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
+  }
+
+  if (!_isObject(fromObject)) {
+    throw new TypeError('copyProperty args(fromObject) is not object');
+  }
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  if (!_isObject(toObject)) {
+    throw new TypeError('copyProperty args(toObject) is not object');
+  }
+
+  _copyProperty(fromObject, propertyArray, toObject);
+};
+
+var _inProperty = function _inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (!_isObject(object)) {
+    return false;
+  }
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
+    }
+
+    if (hasOwn) {
+      if (!object.hasOwnProperty(propertyArray[i])) {
+        return false;
+      }
+    } else {
+      if (!(propertyArray[i] in object)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
+var inProperty = function inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
+    var _object = object;
+    object = _object.object;
+    propertyArray = _object.propertyArray;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
+  } // no object check
+
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('copyProperty args(hasOwn) is not boolean');
+  }
+
+  return _inProperty(object, propertyArray, hasOwn);
+};
+
+var _propertyCount = function _propertyCount(object) {
+  var result = 0;
+
+  for (var _i = 0, _Object$entries = Object.entries(object); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+
+    result += 1;
+  }
+
+  return result;
+};
+
+var propertyCount = function propertyCount(object) {
+  if (!_isObject(object)) {
+    throw new TypeError('propertyCount args(object) is not object');
+  }
+
+  return _propertyCount(object);
+};
+
+var copyProp = copyProperty;
+var inProp = inProperty;
+var propCount = propertyCount;
+module.exports = {
+  _copyProperty: _copyProperty,
+  _inProperty: _inProperty,
+  _propertyCount: _propertyCount,
+  copyProperty: copyProperty,
+  inProperty: inProperty,
+  propertyCount: propertyCount,
+  copyProp: copyProp,
+  inProp: inProp,
+  propCount: propCount
+};
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1558,7 +1756,7 @@ var _require2 = __webpack_require__(6),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(8),
+var _require3 = __webpack_require__(9),
     _matchFormat = _require3._matchFormat;
 /**
  * numberToString
@@ -1680,7 +1878,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1873,7 +2071,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1897,7 +2095,7 @@ var _require = __webpack_require__(3),
 var _require2 = __webpack_require__(6),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(8),
+var _require3 = __webpack_require__(9),
     _includes = _require3._includes;
 
 var original = {};
@@ -1911,7 +2109,9 @@ var _hook = function _hook(methodName, hookFunc) {
   console[methodName] = hookFunc;
 };
 
-var hook = function hook(methodName, hookFunc) {
+var hook = function hook(methodName) {
+  var hookFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
   }
@@ -2013,6 +2213,10 @@ var accept = function accept(methodName, acceptArray, rejectArray, hookFunc) {
     throw new TypeError('accept args(rejectArray) is not array');
   }
 
+  if (!_isFunction(hookFunc)) {
+    throw new TypeError('accept args(hookFunc) is not function');
+  }
+
   _accept(methodName, acceptArray, rejectArray, hookFunc);
 };
 
@@ -2022,22 +2226,22 @@ var acceptLog = function acceptLog(acceptArray, rejectArray) {
 };
 
 var acceptInfo = function acceptInfo(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.info;
   accept('info', acceptArray, rejectArray, hookFunc);
 };
 
 var acceptWarn = function acceptWarn(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.warn;
   accept('warn', acceptArray, rejectArray, hookFunc);
 };
 
 var acceptError = function acceptError(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.error;
   accept('error', acceptArray, rejectArray, hookFunc);
 };
 
 var acceptDebug = function acceptDebug(acceptArray, rejectArray) {
-  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.debug;
   accept('debug', acceptArray, rejectArray, hookFunc);
 };
 
@@ -2062,133 +2266,6 @@ module.exports = {
   acceptWarn: acceptWarn,
   acceptError: acceptError,
   acceptDebug: acceptDebug
-};
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(3),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(6),
-    initialValue = _require2.initialValue;
-
-var _copyProperty = function _copyProperty(fromObject, propertyArray) {
-  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
-  }
-
-  for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
-      continue;
-    }
-
-    if (!_isString(propertyArray[i])) {
-      throw new TypeError('copyProperty args(propertyArray) element is not string');
-    }
-
-    toObject[propertyArray[i]] = fromObject[propertyArray[i]];
-  }
-
-  return toObject;
-};
-
-var copyProperty = function copyProperty(fromObject, propertyArray) {
-  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyArray' in fromObject) {
-    var _fromObject = fromObject;
-    fromObject = _fromObject.fromObject;
-    propertyArray = _fromObject.propertyArray;
-    var _fromObject$toObject = _fromObject.toObject;
-    toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
-  }
-
-  if (!_isObject(fromObject)) {
-    throw new TypeError('copyProperty args(fromObject) is not object');
-  }
-
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
-    }
-  }
-
-  if (!_isObject(toObject)) {
-    throw new TypeError('copyProperty args(toObject) is not object');
-  }
-
-  _copyProperty(fromObject, propertyArray, toObject);
-};
-
-var _inProperty = function _inProperty(object, propertyArray) {
-  if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
-  }
-
-  var result = true;
-
-  for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
-      continue;
-    }
-
-    if (!_isString(propertyArray[i])) {
-      throw new TypeError('copyProperty args(propertyArray) element is not string');
-    }
-
-    if (!(propertyArray[i] in object)) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-var inProperty = function inProperty(object, propertyArray) {
-  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
-    var _object = object;
-    object = _object.object;
-    propertyArray = _object.propertyArray;
-  } // no object check
-
-
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
-    }
-  }
-
-  return _inProperty(object, propertyArray);
-};
-
-var copyProp = copyProperty;
-var inProp = inProperty;
-module.exports = {
-  _copyProperty: _copyProperty,
-  _inProperty: _inProperty,
-  copyProperty: copyProperty,
-  inProperty: inProperty,
-  copyProp: copyProp,
-  inProp: inProp
 };
 
 /***/ })
