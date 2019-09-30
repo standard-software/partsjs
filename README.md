@@ -101,7 +101,7 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.1.0
-#### 2019/09/27(Fri)
+#### 2019/10/01(Tue)
 - update copyProperty
 - add inProperty
 - add isObjectType
@@ -109,6 +109,7 @@ You can now use the functions of the parts object.
 - add propertyCount
 - add isEmpty
 - update inProperty(hasOwn)
+- update consoleHook.hook,accept
 
 ### 2.0.1
 #### 2019/09/26(Thu)

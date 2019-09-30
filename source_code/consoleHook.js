@@ -29,14 +29,18 @@ const _hook = (
 
 const hook = (
   methodName,
-  hookFunc
+  hookFunc = () => {},
 ) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
+    throw new RangeError(
+      'hook args(methodName) is not [log|info|warn|error|debug]'
+    );
   }
 
   if (!_isFunction(hookFunc)) {
-    throw new TypeError('hook args(hookFunc) is not function');
+    throw new TypeError(
+      'hook args(hookFunc) is not function'
+    );
   }
 
   _hook(methodName, hookFunc);
@@ -129,6 +133,11 @@ const accept = (
       'accept args(rejectArray) is not array'
     );
   }
+  if (!_isFunction(hookFunc)) {
+    throw new TypeError(
+      'accept args(hookFunc) is not function'
+    );
+  }
 
   _accept(
     methodName,
@@ -148,28 +157,28 @@ const acceptLog = (
 const acceptInfo = (
   acceptArray,
   rejectArray,
-  hookFunc = original.log,
+  hookFunc = original.info,
 ) => {
   accept('info', acceptArray, rejectArray, hookFunc);
 };
 const acceptWarn = (
   acceptArray,
   rejectArray,
-  hookFunc = original.log,
+  hookFunc = original.warn,
 ) => {
   accept('warn', acceptArray, rejectArray, hookFunc);
 };
 const acceptError = (
   acceptArray,
   rejectArray,
-  hookFunc = original.log,
+  hookFunc = original.error,
 ) => {
   accept('error', acceptArray, rejectArray, hookFunc);
 };
 const acceptDebug = (
   acceptArray,
   rejectArray,
-  hookFunc = original.log,
+  hookFunc = original.debug,
 ) => {
   accept('debug', acceptArray, rejectArray, hookFunc);
 };
