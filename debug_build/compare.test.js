@@ -36,6 +36,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     checkEqual(true, equal(1, 1, 2));
     checkEqual(false, equal(1, 2, 3));
+    checkEqual(true, equal(null, null));
     checkEqual(true, equal(undefined, undefined));
     checkEqual(true, equal(undefined)); // named argument
 

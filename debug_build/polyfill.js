@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 var polyfillDefine = function polyfillDefine() {
   if (!String.prototype.includes) {
     String.prototype.includes = function (search, start) {
@@ -32,7 +34,15 @@ var polyfillDefine = function polyfillDefine() {
 
       return this.substring(this_len - search.length, this_len) === search;
     };
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
+
+
+  if (!Array.isArray) {
+    Array.isArray = function (arg) {
+      return Object.prototype.toString.call(arg) === '[object Array]';
+    };
   } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+  // update
 
 
   if (!Array.prototype.some) {
@@ -52,7 +62,7 @@ var polyfillDefine = function polyfillDefine() {
       var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
 
       for (var i = 0; i < len; i++) {
-        if (i in t && fun.call(thisArg, t[i], i, t)) {
+        if (fun.call(thisArg, t[i], i, t)) {
           return true;
         }
       }
@@ -168,6 +178,60 @@ var polyfillDefine = function polyfillDefine() {
 
 
       return false;
+    };
+  } // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+
+
+  if (!Object.keys) {
+    Object.keys = function () {
+      'use strict';
+
+      var hasOwnProperty = Object.prototype.hasOwnProperty,
+          hasDontEnumBug = !{
+        toString: null
+      }.propertyIsEnumerable('toString'),
+          dontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'],
+          dontEnumsLength = dontEnums.length;
+      return function (obj) {
+        if (typeof obj !== 'function' && (_typeof(obj) !== 'object' || obj === null)) {
+          throw new TypeError('Object.keys called on non-object');
+        }
+
+        var result = [],
+            prop,
+            i;
+
+        for (prop in obj) {
+          if (hasOwnProperty.call(obj, prop)) {
+            result.push(prop);
+          }
+        }
+
+        if (hasDontEnumBug) {
+          for (i = 0; i < dontEnumsLength; i++) {
+            if (hasOwnProperty.call(obj, dontEnums[i])) {
+              result.push(dontEnums[i]);
+            }
+          }
+        }
+
+        return result;
+      };
+    }();
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+
+
+  if (!Object.entries) {
+    Object.entries = function (obj) {
+      var ownProps = Object.keys(obj),
+          i = ownProps.length,
+          resArray = new Array(i); // preallocate the Array
+
+      while (i--) {
+        resArray[i] = [ownProps[i], obj[ownProps[i]]];
+      }
+
+      return resArray;
     };
   }
 };
