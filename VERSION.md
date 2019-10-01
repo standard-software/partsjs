@@ -2,6 +2,18 @@
 
 ## Version
 
+### 2.1.0
+#### 2019/10/01(Tue)
+- update copyProperty
+- add inProperty
+- add isObjectType
+- add polyfill array.includes
+- add polyfill Object.keys entries
+- update polyfill array.some
+- add propertyCount
+- add isEmpty
+- update consoleHook.hook,accept
+
 ### 2.0.1
 #### 2019/09/26(Thu)
 - document update

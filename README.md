@@ -106,9 +106,10 @@ You can now use the functions of the parts object.
 - add inProperty
 - add isObjectType
 - add polyfill array.includes
+- add polyfill Object.keys entries
+- update polyfill array.some
 - add propertyCount
 - add isEmpty
-- update inProperty(hasOwn)
 - update consoleHook.hook,accept
 
 ### 2.0.1
