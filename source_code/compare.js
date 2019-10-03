@@ -9,7 +9,7 @@ const {
   assert,
   guard,
   if_,
-} = require('./syntax.js');
+} = require('./syntax/syntax.js');
 
 const {
   _propertyCount
