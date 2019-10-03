@@ -6,8 +6,10 @@ const {
 } = require('../type/type.js');
 
 const {
-  initialValue,
-} = require('../compare.js');
+  _inProperty,
+  inProperty,
+  inProp,
+} = require('./inProperty.js');
 
 const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 
@@ -31,9 +33,7 @@ const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 }
 
 const copyProperty = (fromObject, propertyArray, toObject = {}) => {
-  if (_isObject(fromObject)
-  && ('fromObject' in fromObject)
-  && ('propertyArray' in fromObject)) {
+  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
     ({ fromObject, propertyArray, toObject = {} } = fromObject)
   }
 
@@ -62,68 +62,6 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
   )
 }
 
-const _inProperty = (object, propertyArray, hasOwn = true) => {
-
-  if (!_isObject(object)) {
-    return false;
-  }
-
-  if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
-  }
-
-  for (let i = 0; i < propertyArray.length; i += 1) {
-    if ((propertyArray[i] === '')
-    || (_isUndefined(propertyArray[i]))) {
-      continue;
-    }
-    if (!_isString(propertyArray[i])) {
-      throw new TypeError(
-        'copyProperty args(propertyArray) element is not string'
-      );
-    }
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-const inProperty = (object, propertyArray, hasOwn = true) => {
-  if (_isObject(object)
-  && ('object' in object)
-  && ('propertyArray' in object)) {
-    ({ object, propertyArray, hasOwn = true } = object)
-  }
-
-  // no object check
-
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError(
-        'copyProperty args(propertyArray) is not [array|string]'
-      );
-    }
-  }
-  if (!_isBoolean(hasOwn)) {
-    throw new TypeError(
-      'copyProperty args(hasOwn) is not boolean'
-    );
-  }
-
-  return _inProperty(
-    object,
-    propertyArray,
-    hasOwn,
-  )
-}
-
 const _propertyCount = (object) => {
   var result = 0;
   for (let [key, value] of Object.entries(object)) {
@@ -142,7 +80,6 @@ const propertyCount = (object) => {
 }
 
 const copyProp = copyProperty;
-const inProp = inProperty;
 const propCount = propertyCount;
 
 module.exports = {
