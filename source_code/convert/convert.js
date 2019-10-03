@@ -8,16 +8,16 @@ const {
   _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
   _isNotFunction, _isNotObject, _isNotArray, _isNotDate, _isNotRegExp,
   _isNotException,
-} = require('./type/type.js');
+} = require('../type/type.js');
 
 const {
   _matchValue,
   _initialValue,
-} = require('./compare/compare.js');
+} = require('../compare/compare.js');
 
 const {
   _matchFormat,
-} = require('./string.js');
+} = require('../string.js');
 
 /**
  * numberToString
