@@ -99,150 +99,67 @@ module.exports = __webpack_require__(1);
 "use strict";
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var polyfill = __webpack_require__(2);
 
 var _type = __webpack_require__(3);
 
-var _test = __webpack_require__(4);
+var _test = __webpack_require__(8);
 
-var _syntax = __webpack_require__(5);
+var _syntax = __webpack_require__(9);
 
-var _compare = __webpack_require__(6);
+var _compare = __webpack_require__(10);
 
-var _convert = __webpack_require__(8);
+var _convert = __webpack_require__(13);
 
-var _string = __webpack_require__(9);
+var _string = __webpack_require__(14);
 
-var _consoleHook = __webpack_require__(10);
+var _consoleHook = __webpack_require__(15);
 
-var _object = __webpack_require__(7);
+var _object = __webpack_require__(11);
 
-var VERSION = '2.1.1'; // Public Property
+var _constant = __webpack_require__(16);
 
-var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isObjectType,' + 'isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotObjectType,' + 'isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isObjectTypeArray,' + 'isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,' + 'isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,isObjType,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,isNotObjType,' + 'isNotExcept,' + '');
+var VERSION = '2.2.0 beta';
+var rootNames = {}; // type
 
-var test = _object._copyProperty(_test, 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '');
+var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
 
-var syntax = _object._copyProperty(_syntax, 'assert,guard,' + 'sc,if_,switch_,' + '');
+rootNames = _objectSpread({}, rootNames, {}, type); // test
 
-var compare = _object._copyProperty(_compare, '_equal,_or,' + '_match,_matchValue,_initialValue,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + '');
+var test = _object._copyProperty(_test, _constant.propertyNames.TEST);
 
-var convert = _object._copyProperty(_convert, 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + '');
+rootNames = _objectSpread({}, rootNames, {}, test); // syntax
 
-var string = _object._copyProperty(_string, 'matchFormat,includes,' + '');
+var syntax = _object._copyProperty(_syntax, _constant.propertyNames.SYNTAX);
 
-var consoleHook = _object._copyProperty(_consoleHook, 'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' + 'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' + 'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' + '');
+rootNames = _objectSpread({}, rootNames, {}, syntax); // compare
 
-var object = _object._copyProperty(_object, 'copyProperty,inProperty,' + 'propertyCount,' + ''); // Root Property
+var compare = _object._copyProperty(_compare, _constant.propertyNames.COMPARE);
+
+rootNames = _objectSpread({}, rootNames, {}, compare); // convert
+
+var convert = _object._copyProperty(_convert, _constant.propertyNames.CONVERT);
+
+rootNames = _objectSpread({}, rootNames, {}, convert); // string
+
+var string = _object._copyProperty(_string, _constant.propertyNames.STRING_PUBLIC);
+
+_object._copyProperty(_string, _constant.propertyNames.STRING_ROOT, rootNames); // object
 
 
-var isUndefined = _type.isUndefined,
-    isNull = _type.isNull,
-    isNaNStrict = _type.isNaNStrict,
-    isBoolean = _type.isBoolean,
-    isNumber = _type.isNumber,
-    isInteger = _type.isInteger,
-    isString = _type.isString,
-    isFunction = _type.isFunction,
-    isObject = _type.isObject,
-    isObjectType = _type.isObjectType,
-    isArray = _type.isArray,
-    isDate = _type.isDate,
-    isRegExp = _type.isRegExp,
-    isException = _type.isException,
-    isNotUndefined = _type.isNotUndefined,
-    isNotNull = _type.isNotNull,
-    isNotNaNStrict = _type.isNotNaNStrict,
-    isNotBoolean = _type.isNotBoolean,
-    isNotNumber = _type.isNotNumber,
-    isNotInteger = _type.isNotInteger,
-    isNotString = _type.isNotString,
-    isNotFunction = _type.isNotFunction,
-    isNotObject = _type.isNotObject,
-    isNotObjectType = _type.isNotObjectType,
-    isNotArray = _type.isNotArray,
-    isNotDate = _type.isNotDate,
-    isNotRegExp = _type.isNotRegExp,
-    isNotException = _type.isNotException,
-    isUndefinedArray = _type.isUndefinedArray,
-    isNullArray = _type.isNullArray,
-    isNaNStrictArray = _type.isNaNStrictArray,
-    isBooleanArray = _type.isBooleanArray,
-    isNumberArray = _type.isNumberArray,
-    isIntegerArray = _type.isIntegerArray,
-    isStringArray = _type.isStringArray,
-    isFunctionArray = _type.isFunctionArray,
-    isObjectArray = _type.isObjectArray,
-    isObjectTypeArray = _type.isObjectTypeArray,
-    isArrayArray = _type.isArrayArray,
-    isDateArray = _type.isDateArray,
-    isRegExpArray = _type.isRegExpArray,
-    isExceptionArray = _type.isExceptionArray,
-    isNotUndefinedArray = _type.isNotUndefinedArray,
-    isNotNullArray = _type.isNotNullArray,
-    isNotNaNStrictArray = _type.isNotNaNStrictArray,
-    isNotBooleanArray = _type.isNotBooleanArray,
-    isNotNumberArray = _type.isNotNumberArray,
-    isNotIntegerArray = _type.isNotIntegerArray,
-    isNotStringArray = _type.isNotStringArray,
-    isNotFunctionArray = _type.isNotFunctionArray,
-    isNotObjectArray = _type.isNotObjectArray,
-    isNotObjectTypeArray = _type.isNotObjectTypeArray,
-    isNotArrayArray = _type.isNotArrayArray,
-    isNotDateArray = _type.isNotDateArray,
-    isNotRegExpArray = _type.isNotRegExpArray,
-    isNotExceptionArray = _type.isNotExceptionArray,
-    isUndef = _type.isUndef,
-    isBool = _type.isBool,
-    isNum = _type.isNum,
-    isInt = _type.isInt,
-    isStr = _type.isStr,
-    isFunc = _type.isFunc,
-    isObj = _type.isObj,
-    isObjType = _type.isObjType,
-    isExcept = _type.isExcept,
-    isNotUndef = _type.isNotUndef,
-    isNotBool = _type.isNotBool,
-    isNotNum = _type.isNotNum,
-    isNotInt = _type.isNotInt,
-    isNotStr = _type.isNotStr,
-    isNotFunc = _type.isNotFunc,
-    isNotObj = _type.isNotObj,
-    isNotObjType = _type.isNotObjType,
-    isNotExcept = _type.isNotExcept;
-var checkEqual = _test.checkEqual,
-    isThrown = _test.isThrown,
-    isThrownValue = _test.isThrownValue,
-    isThrownException = _test.isThrownException,
-    isNotThrown = _test.isNotThrown;
-var assert = _syntax.assert,
-    guard = _syntax.guard,
-    sc = _syntax.sc,
-    if_ = _syntax.if_,
-    switch_ = _syntax.switch_;
-var equal = _compare.equal,
-    or = _compare.or,
-    match = _compare.match,
-    matchValue = _compare.matchValue,
-    initialValue = _compare.initialValue;
-var numberToString = _convert.numberToString,
-    stringToNumber = _convert.stringToNumber,
-    stringToInteger = _convert.stringToInteger,
-    numToString = _convert.numToString,
-    strToNumber = _convert.strToNumber,
-    strToInteger = _convert.strToInteger,
-    numToStr = _convert.numToStr,
-    strToNum = _convert.strToNum,
-    strToInt = _convert.strToInt;
-var matchFormat = _string.matchFormat,
-    includes = _string.includes;
-var copyProperty = _object.copyProperty,
-    inProperty = _object.inProperty,
-    propertyCount = _object.propertyCount,
-    copyProp = _object.copyProp,
-    inProp = _object.inProp,
-    propCount = _object.propCount;
-module.exports = {
+var object = _object._copyProperty(_object, _constant.propertyNames.OBJECT);
+
+rootNames = _objectSpread({}, rootNames, {}, object); // consoleHook
+
+var consoleHook = _object._copyProperty(_consoleHook, _constant.propertyNames.CONSOLE_HOOK);
+
+module.exports = _objectSpread({
   VERSION: VERSION,
   type: type,
   test: test,
@@ -251,121 +168,8 @@ module.exports = {
   convert: convert,
   string: string,
   consoleHook: consoleHook,
-  object: object,
-  // type
-  isUndefined: isUndefined,
-  isNull: isNull,
-  isNaNStrict: isNaNStrict,
-  isBoolean: isBoolean,
-  isNumber: isNumber,
-  isInteger: isInteger,
-  isString: isString,
-  isFunction: isFunction,
-  isObject: isObject,
-  isObjectType: isObjectType,
-  isArray: isArray,
-  isDate: isDate,
-  isRegExp: isRegExp,
-  isException: isException,
-  isNotUndefined: isNotUndefined,
-  isNotNull: isNotNull,
-  isNotNaNStrict: isNotNaNStrict,
-  isNotBoolean: isNotBoolean,
-  isNotNumber: isNotNumber,
-  isNotInteger: isNotInteger,
-  isNotString: isNotString,
-  isNotFunction: isNotFunction,
-  isNotObject: isNotObject,
-  isNotObjectType: isNotObjectType,
-  isNotArray: isNotArray,
-  isNotDate: isNotDate,
-  isNotRegExp: isNotRegExp,
-  isNotException: isNotException,
-  isUndefinedArray: isUndefinedArray,
-  isNullArray: isNullArray,
-  isNaNStrictArray: isNaNStrictArray,
-  isBooleanArray: isBooleanArray,
-  isNumberArray: isNumberArray,
-  isIntegerArray: isIntegerArray,
-  isStringArray: isStringArray,
-  isFunctionArray: isFunctionArray,
-  isObjectArray: isObjectArray,
-  isObjectTypeArray: isObjectTypeArray,
-  isArrayArray: isArrayArray,
-  isDateArray: isDateArray,
-  isRegExpArray: isRegExpArray,
-  isExceptionArray: isExceptionArray,
-  isNotUndefinedArray: isNotUndefinedArray,
-  isNotNullArray: isNotNullArray,
-  isNotNaNStrictArray: isNotNaNStrictArray,
-  isNotBooleanArray: isNotBooleanArray,
-  isNotNumberArray: isNotNumberArray,
-  isNotIntegerArray: isNotIntegerArray,
-  isNotStringArray: isNotStringArray,
-  isNotFunctionArray: isNotFunctionArray,
-  isNotObjectArray: isNotObjectArray,
-  isNotObjectTypeArray: isNotObjectTypeArray,
-  isNotArrayArray: isNotArrayArray,
-  isNotDateArray: isNotDateArray,
-  isNotRegExpArray: isNotRegExpArray,
-  isNotExceptionArray: isNotExceptionArray,
-  isUndef: isUndef,
-  isBool: isBool,
-  isNum: isNum,
-  isInt: isInt,
-  isStr: isStr,
-  isFunc: isFunc,
-  isObj: isObj,
-  isObjType: isObjType,
-  isExcept: isExcept,
-  isNotUndef: isNotUndef,
-  isNotBool: isNotBool,
-  isNotNum: isNotNum,
-  isNotInt: isNotInt,
-  isNotStr: isNotStr,
-  isNotFunc: isNotFunc,
-  isNotObj: isNotObj,
-  isNotObjType: isNotObjType,
-  isNotExcept: isNotExcept,
-  // test
-  checkEqual: checkEqual,
-  isThrown: isThrown,
-  isThrownValue: isThrownValue,
-  isThrownException: isThrownException,
-  isNotThrown: isNotThrown,
-  // syntax
-  assert: assert,
-  guard: guard,
-  sc: sc,
-  if_: if_,
-  switch_: switch_,
-  // compare
-  equal: equal,
-  or: or,
-  match: match,
-  matchValue: matchValue,
-  initialValue: initialValue,
-  // convert
-  numberToString: numberToString,
-  stringToNumber: stringToNumber,
-  stringToInteger: stringToInteger,
-  numToString: numToString,
-  strToNumber: strToNumber,
-  strToInteger: strToInteger,
-  numToStr: numToStr,
-  strToNum: strToNum,
-  strToInt: strToInt,
-  // string
-  matchFormat: matchFormat,
-  includes: includes,
-  // object
-  copyProperty: copyProperty,
-  inProperty: inProperty,
-  propertyCount: propertyCount,
-  copyProp: copyProp,
-  inProp: inProp,
-  propCount: propCount
-};
+  object: object
+}, rootNames);
 
 /***/ }),
 /* 2 */
@@ -607,6 +411,86 @@ var polyfillDefine = function polyfillDefine() {
 
       return resArray;
     };
+  } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
+  // ES 15.2.3.6 Object.defineProperty ( O, P, Attributes )
+  // Partial support for most common case - getters, setters, and values
+
+
+  if (!Object.defineProperty || !function () {
+    try {
+      Object.defineProperty({}, 'x', {});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }()) {
+    var orig = Object.defineProperty;
+
+    Object.defineProperty = function (o, prop, desc) {
+      // In IE8 try built-in implementation for defining properties on DOM prototypes.
+      if (orig) {
+        try {
+          return orig(o, prop, desc);
+        } catch (e) {}
+      }
+
+      if (o !== Object(o)) {
+        throw TypeError("Object.defineProperty called on non-object");
+      }
+
+      if (Object.prototype.__defineGetter__ && 'get' in desc) {
+        Object.prototype.__defineGetter__.call(o, prop, desc.get);
+      }
+
+      if (Object.prototype.__defineSetter__ && 'set' in desc) {
+        Object.prototype.__defineSetter__.call(o, prop, desc.set);
+      }
+
+      if ('value' in desc) {
+        o[prop] = desc.value;
+      }
+
+      return o;
+    };
+  } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
+  // ES 15.2.3.7 Object.defineProperties ( O, Properties )
+
+
+  if (typeof Object.defineProperties !== "function") {
+    Object.defineProperties = function (o, properties) {
+      if (o !== Object(o)) {
+        throw TypeError("Object.defineProperties called on non-object");
+      }
+
+      var name;
+
+      for (name in properties) {
+        if (Object.prototype.hasOwnProperty.call(properties, name)) {
+          Object.defineProperty(o, name, properties[name]);
+        }
+      }
+
+      return o;
+    };
+  } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
+  // ES5 15.2.3.3 Object.getOwnPropertyDescriptor ( O, P )
+
+
+  if (typeof Object.getOwnPropertyDescriptor !== "function") {
+    Object.getOwnPropertyDescriptor = function (o, name) {
+      if (o !== Object(o)) {
+        throw TypeError();
+      }
+
+      if (o.hasOwnProperty(name)) {
+        return {
+          value: o[name],
+          enumerable: true,
+          writable: true,
+          configurable: true
+        };
+      }
+    };
   }
 };
 
@@ -620,11 +504,23 @@ module.exports = {};
 "use strict";
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+module.exports = _objectSpread({}, __webpack_require__(4), {}, __webpack_require__(5), {}, __webpack_require__(7));
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-// const {
-//   _inProperty,
-// } = require('./object.js');
 var _typeofCheck = function _typeofCheck(typeName) {
   return function (value) {
     return _typeof(value) === typeName;
@@ -688,23 +584,6 @@ var _isDate = _objectToStringCheck('Date');
 var _isRegExp = _objectToStringCheck('RegExp');
 
 var _isError = _objectToStringCheck('Error');
-/**
- * _isException
- * description:
- *  _isException can determine standard Error objects and user-specific exception objects.
- *  Only whether the object has name and message properties.
- */
-
-
-var _isException = function _isException(value) {
-  if (_isObject(value) && 'name' in value && 'message' in value) {
-    return true;
-  } else if (_isError(value)) {
-    return true;
-  }
-
-  return false;
-};
 
 var _isNotUndefined = function _isNotUndefined(value) {
   return !_isUndefined(value);
@@ -758,9 +637,201 @@ var _isNotRegExp = function _isNotRegExp(value) {
   return !_isRegExp(value);
 };
 
+module.exports = {
+  _isUndefined: _isUndefined,
+  _isNull: _isNull,
+  _isNaNStrict: _isNaNStrict,
+  _isBoolean: _isBoolean,
+  _isNumber: _isNumber,
+  _isInteger: _isInteger,
+  _isString: _isString,
+  _isFunction: _isFunction,
+  _isObject: _isObject,
+  _isObjectType: _isObjectType,
+  _isArray: _isArray,
+  _isDate: _isDate,
+  _isRegExp: _isRegExp,
+  _isError: _isError,
+  _isNotUndefined: _isNotUndefined,
+  _isNotNull: _isNotNull,
+  _isNotNaNStrict: _isNotNaNStrict,
+  _isNotBoolean: _isNotBoolean,
+  _isNotNumber: _isNotNumber,
+  _isNotInteger: _isNotInteger,
+  _isNotString: _isNotString,
+  _isNotFunction: _isNotFunction,
+  _isNotObject: _isNotObject,
+  _isNotObjectType: _isNotObjectType,
+  _isNotArray: _isNotArray,
+  _isNotDate: _isNotDate,
+  _isNotRegExp: _isNotRegExp
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(4),
+    _isError = _require._isError;
+
+var _require2 = __webpack_require__(6),
+    _inProperty = _require2._inProperty;
+/**
+ * _isException
+ * description:
+ *  _isException can determine standard Error objects and user-specific exception objects.
+ *  Only whether the object has name and message properties.
+ */
+
+
+var _isException = function _isException(value) {
+  if (_inProperty(value, 'name,message')) {
+    return true;
+  } else if (_isError(value)) {
+    return true;
+  }
+
+  return false;
+};
+
 var _isNotException = function _isNotException(value) {
   return !_isException(value);
 };
+
+module.exports = {
+  _isException: _isException,
+  _isNotException: _isNotException
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(4),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _inProperty = function _inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (!_isObject(object)) {
+    return false;
+  }
+
+  if (_isString(propertyArray)) {
+    propertyArray = propertyArray.split(',');
+  }
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
+    }
+
+    if (hasOwn) {
+      if (!object.hasOwnProperty(propertyArray[i])) {
+        return false;
+      }
+    } else {
+      if (!(propertyArray[i] in object)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
+var inProperty = function inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
+    var _object = object;
+    object = _object.object;
+    propertyArray = _object.propertyArray;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
+  } // no object check
+
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('copyProperty args(hasOwn) is not boolean');
+  }
+
+  return _inProperty(object, propertyArray, hasOwn);
+};
+
+var inProp = inProperty;
+module.exports = {
+  _inProperty: _inProperty,
+  inProperty: inProperty,
+  inProp: inProp
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(4),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isNotUndefined = _require._isNotUndefined,
+    _isNotNull = _require._isNotNull,
+    _isNotNaNStrict = _require._isNotNaNStrict,
+    _isNotBoolean = _require._isNotBoolean,
+    _isNotNumber = _require._isNotNumber,
+    _isNotInteger = _require._isNotInteger,
+    _isNotString = _require._isNotString,
+    _isNotFunction = _require._isNotFunction,
+    _isNotObject = _require._isNotObject,
+    _isNotObjectType = _require._isNotObjectType,
+    _isNotArray = _require._isNotArray,
+    _isNotDate = _require._isNotDate,
+    _isNotRegExp = _require._isNotRegExp;
+
+var _require2 = __webpack_require__(5),
+    _isException = _require2._isException,
+    _isNotException = _require2._isNotException;
 /**
  * _isTypeCheck
  * description:
@@ -961,34 +1032,6 @@ var isNotObj = isNotObject;
 var isNotObjType = isNotObjectType;
 var isNotExcept = isNotException;
 module.exports = {
-  _isUndefined: _isUndefined,
-  _isNull: _isNull,
-  _isNaNStrict: _isNaNStrict,
-  _isBoolean: _isBoolean,
-  _isNumber: _isNumber,
-  _isInteger: _isInteger,
-  _isString: _isString,
-  _isFunction: _isFunction,
-  _isObject: _isObject,
-  _isObjectType: _isObjectType,
-  _isArray: _isArray,
-  _isDate: _isDate,
-  _isRegExp: _isRegExp,
-  _isException: _isException,
-  _isNotUndefined: _isNotUndefined,
-  _isNotNull: _isNotNull,
-  _isNotNaNStrict: _isNotNaNStrict,
-  _isNotBoolean: _isNotBoolean,
-  _isNotNumber: _isNotNumber,
-  _isNotInteger: _isNotInteger,
-  _isNotString: _isNotString,
-  _isNotFunction: _isNotFunction,
-  _isNotObject: _isNotObject,
-  _isNotObjectType: _isNotObjectType,
-  _isNotArray: _isNotArray,
-  _isNotDate: _isNotDate,
-  _isNotRegExp: _isNotRegExp,
-  _isNotException: _isNotException,
   isUndefined: isUndefined,
   isNull: isNull,
   isNaNStrict: isNaNStrict,
@@ -1066,7 +1109,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 4 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1086,9 +1129,6 @@ var _require = __webpack_require__(3),
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
-
-var _require2 = __webpack_require__(5),
-    guard = _require2.guard;
 
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -1175,7 +1215,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1412,7 +1452,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1433,13 +1473,8 @@ var _require = __webpack_require__(3),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(5),
-    assert = _require2.assert,
-    guard = _require2.guard,
-    if_ = _require2.if_;
-
-var _require3 = __webpack_require__(7),
-    _propertyCount = _require3._propertyCount;
+var _require2 = __webpack_require__(11),
+    _propertyCount = _require2._propertyCount;
 /**
  * equal
  */
@@ -1603,7 +1638,22 @@ module.exports = {
 };
 
 /***/ }),
-/* 7 */
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+module.exports = _objectSpread({}, __webpack_require__(12), {}, __webpack_require__(6));
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1633,7 +1683,7 @@ var _require = __webpack_require__(3),
     _isException = _require._isException;
 
 var _require2 = __webpack_require__(6),
-    initialValue = _require2.initialValue;
+    _inProperty = _require2._inProperty;
 
 var _copyProperty = function _copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -1660,7 +1710,7 @@ var _copyProperty = function _copyProperty(fromObject, propertyArray) {
 var copyProperty = function copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  if (_isObject(fromObject) && 'fromObject' in fromObject && 'propertyArray' in fromObject) {
+  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
     var _fromObject = fromObject;
     fromObject = _fromObject.fromObject;
     propertyArray = _fromObject.propertyArray;
@@ -1683,65 +1733,6 @@ var copyProperty = function copyProperty(fromObject, propertyArray) {
   }
 
   _copyProperty(fromObject, propertyArray, toObject);
-};
-
-var _inProperty = function _inProperty(object, propertyArray) {
-  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-  if (!_isObject(object)) {
-    return false;
-  }
-
-  if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
-  }
-
-  for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
-      continue;
-    }
-
-    if (!_isString(propertyArray[i])) {
-      throw new TypeError('copyProperty args(propertyArray) element is not string');
-    }
-
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
-    }
-  }
-
-  return true;
-};
-
-var inProperty = function inProperty(object, propertyArray) {
-  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
-    var _object = object;
-    object = _object.object;
-    propertyArray = _object.propertyArray;
-    var _object$hasOwn = _object.hasOwn;
-    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
-  } // no object check
-
-
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
-    }
-  }
-
-  if (!_isBoolean(hasOwn)) {
-    throw new TypeError('copyProperty args(hasOwn) is not boolean');
-  }
-
-  return _inProperty(object, propertyArray, hasOwn);
 };
 
 var _propertyCount = function _propertyCount(object) {
@@ -1767,22 +1758,18 @@ var propertyCount = function propertyCount(object) {
 };
 
 var copyProp = copyProperty;
-var inProp = inProperty;
 var propCount = propertyCount;
 module.exports = {
   _copyProperty: _copyProperty,
-  _inProperty: _inProperty,
   _propertyCount: _propertyCount,
   copyProperty: copyProperty,
-  inProperty: inProperty,
   propertyCount: propertyCount,
   copyProp: copyProp,
-  inProp: inProp,
   propCount: propCount
 };
 
 /***/ }),
-/* 8 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1816,11 +1803,11 @@ var _require = __webpack_require__(3),
     _isNotRegExp = _require._isNotRegExp,
     _isNotException = _require._isNotException;
 
-var _require2 = __webpack_require__(6),
+var _require2 = __webpack_require__(10),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(9),
+var _require3 = __webpack_require__(14),
     _matchFormat = _require3._matchFormat;
 /**
  * numberToString
@@ -1942,7 +1929,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 9 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1963,7 +1950,7 @@ var _require = __webpack_require__(3),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(6),
+var _require2 = __webpack_require__(10),
     _match = _require2._match;
 /**
  * matchFormat
@@ -2135,7 +2122,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 10 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2156,10 +2143,10 @@ var _require = __webpack_require__(3),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(6),
+var _require2 = __webpack_require__(10),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(9),
+var _require3 = __webpack_require__(14),
     _includes = _require3._includes;
 
 var original = {};
@@ -2330,6 +2317,80 @@ module.exports = {
   acceptWarn: acceptWarn,
   acceptError: acceptError,
   acceptDebug: acceptDebug
+};
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// type
+var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
+
+var IS_TYPE = _TYPE_BASE.split(',').map(function (item) {
+  return "is".concat(item);
+}).join(',');
+
+var ISNOT_TYPE = _TYPE_BASE.split(',').map(function (item) {
+  return "isNot".concat(item);
+}).join(',');
+
+var IS_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
+  return "is".concat(item, "Array");
+}).join(',');
+
+var ISNOT_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
+  return "isNot".concat(item, "Array");
+}).join(',');
+
+var _TYPE_BASE_SHORT = 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
+
+var IS_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
+  return "is".concat(item);
+}).join(',');
+
+var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
+  return "isNot".concat(item);
+}).join(',');
+
+var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
+
+var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + ''; // syntax
+
+var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
+
+var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
+
+var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + ''; // string
+
+var STRING_PUBLIC = 'matchFormat,includes,' + '';
+var STRING_ROOT = 'matchFormat,' + ''; // object
+
+var OBJECT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // consoleHook
+
+var _CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
+var CONSOLE_HOOK = _CONSOLE_HOOK_BASE.split(',').map(function (item) {
+  return "hook".concat(item);
+}).join(',') + ',' + _CONSOLE_HOOK_BASE.split(',').map(function (item) {
+  return "unHook".concat(item);
+}).join(',') + ',' + _CONSOLE_HOOK_BASE.split(',').map(function (item) {
+  return "accept".concat(item);
+}).join(',') + ',' + '';
+var propertyNames = {
+  TYPE: TYPE,
+  TEST: TEST,
+  SYNTAX: SYNTAX,
+  COMPARE: COMPARE,
+  CONVERT: CONVERT,
+  STRING_PUBLIC: STRING_PUBLIC,
+  STRING_ROOT: STRING_ROOT,
+  OBJECT: OBJECT,
+  CONSOLE_HOOK: CONSOLE_HOOK
+};
+module.exports = {
+  propertyNames: propertyNames
 };
 
 /***/ })
