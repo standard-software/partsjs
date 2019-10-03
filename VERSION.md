@@ -2,6 +2,10 @@
 
 ## Version
 
+### 2.1.1
+#### 2019/10/03(Thu)
+- update consoleHook.hookXxx
+
 ### 2.1.0
 #### 2019/10/01(Tue)
 - update copyProperty
