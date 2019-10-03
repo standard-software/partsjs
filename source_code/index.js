@@ -5,7 +5,7 @@ const _syntax = require('./syntax/syntax.js');
 const _compare = require('./compare/compare.js');
 const _convert = require('./convert/convert.js');
 const _string = require('./string/string.js');
-const _consoleHook = require('./consoleHook.js');
+const _consoleHook = require('./consoleHook/consoleHook.js');
 const _object = require('./object/object.js');
 
 const VERSION = '2.2.0 beta';
