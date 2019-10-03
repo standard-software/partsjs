@@ -7,7 +7,7 @@ const {
 
 const {
   _match,
-} = require('./compare.js');
+} = require('./compare/compare.js');
 
 /**
  * matchFormat

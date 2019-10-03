@@ -7,7 +7,7 @@ const {
 
 const {
   _or,
-} = require('./compare.js');
+} = require('./compare/compare.js');
 
 const {
   _includes,

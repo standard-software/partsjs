@@ -3,17 +3,11 @@ const {
   _isBoolean,_isNumber,_isInteger,_isString,
   _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
-} = require('./type/type.js');
-
-const {
-  assert,
-  guard,
-  if_,
-} = require('./syntax/syntax.js');
+} = require('../type/type.js');
 
 const {
   _propertyCount
-} = require('./object/object.js');
+} = require('../object/object.js');
 
 /**
  * equal

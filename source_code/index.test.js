@@ -3,7 +3,7 @@ const test_execute_index = (parts) => {
   const { test_execute_type     } = require('./type/type.test.js');
   const { test_execute_syntax   } = require('./syntax/syntax.test.js');
   const { test_execute_test     } = require('./test/test.test.js');
-  const { test_execute_compare  } = require('./compare.test.js');
+  const { test_execute_compare  } = require('./compare/compare.test.js');
   const { test_execute_convert  } = require('./convert.test.js');
   const { test_execute_string   } = require('./string.test.js');
   const { test_execute_object   } = require('./object/object.test.js');

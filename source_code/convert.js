@@ -13,7 +13,7 @@ const {
 const {
   _matchValue,
   _initialValue,
-} = require('./compare.js');
+} = require('./compare/compare.js');
 
 const {
   _matchFormat,
