@@ -17,7 +17,7 @@ const {
 
 const {
   _matchFormat,
-} = require('../string.js');
+} = require('../string/string.js');
 
 /**
  * numberToString
