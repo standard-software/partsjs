@@ -1,6 +1,6 @@
 const polyfill = require('./polyfill.js');
 const _type = require('./type/type.js');
-const _test = require('./test.js');
+const _test = require('./test/test.js');
 const _syntax = require('./syntax.js');
 const _compare = require('./compare.js');
 const _convert = require('./convert.js');

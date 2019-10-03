@@ -3,11 +3,7 @@ const {
   _isBoolean,_isNumber,_isInteger,_isString,
   _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
-} = require('./type/type.js');
-
-const {
-  guard,
-} = require('./syntax.js');
+} = require('../type/type.js');
 
 const checkEqual = (a, b, message = '') => {
   if (!_isString(message)) {
