@@ -1,7 +1,3 @@
-// const {
-//   _inProperty,
-// } = require('./object.js');
-
 const _typeofCheck = (typeName) => {
   return ((value) => typeof value === typeName);
 };

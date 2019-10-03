@@ -3,7 +3,7 @@ const {
   _isBoolean,_isNumber,_isInteger,_isString,
   _isFunction,_isObject,_isArray,_isDate,_isRegExp,
   _isException,
-} = require('./type.js');
+} = require('./type/type.js');
 
 const {
   assert,
@@ -13,7 +13,7 @@ const {
 
 const {
   _propertyCount
-} = require('./object.js');
+} = require('./object/object.js');
 
 /**
  * equal

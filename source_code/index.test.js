@@ -1,12 +1,12 @@
 const test_execute_index = (parts) => {
 
-  const { test_execute_type     } = require('./type.test.js');
+  const { test_execute_type     } = require('./type/type.test.js');
   const { test_execute_syntax   } = require('./syntax.test.js');
   const { test_execute_test     } = require('./test.test.js');
   const { test_execute_compare  } = require('./compare.test.js');
   const { test_execute_convert  } = require('./convert.test.js');
   const { test_execute_string   } = require('./string.test.js');
-  const { test_execute_object   } = require('./object.test.js');
+  const { test_execute_object   } = require('./object/object.test.js');
   const { test_execute_consoleHook  } = require('./consoleHook.test.js');
 
   console.log('test start. ' + parts.VERSION);

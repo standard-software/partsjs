@@ -8,7 +8,7 @@ const {
   _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
   _isNotFunction, _isNotObject, _isNotArray, _isNotDate, _isNotRegExp,
   _isNotException,
-} = require('./type.js');
+} = require('./type/type.js');
 
 const {
   _matchValue,

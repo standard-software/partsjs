@@ -1,12 +1,12 @@
 const polyfill = require('./polyfill.js');
-const _type = require('./type.js');
+const _type = require('./type/type.js');
 const _test = require('./test.js');
 const _syntax = require('./syntax.js');
 const _compare = require('./compare.js');
 const _convert = require('./convert.js');
 const _string = require('./string.js');
 const _consoleHook = require('./consoleHook.js');
-const _object = require('./object.js');
+const _object = require('./object/object.js');
 
 const VERSION = '2.2.0 beta';
 
