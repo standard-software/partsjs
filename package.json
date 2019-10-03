@@ -6,7 +6,7 @@
   "main": "./source_code/index.js",
   "scripts": {
     "babel": "./node_modules/.bin/babel ./source_code --out-dir ./debug_build",
-    "webpack": "./node_modules/.bin/webpack --config ./webpack_config/webpack.config.js",
+    "webpack": "./node_modules/.bin/webpack --config ./config/webpack.config.js",
     "test:source": "node ./test_exec/source/test_index.js",
     "test:debug": "node ./test_exec/debug/test_index.js",
     "test:release": "node ./test_exec/release/test_index.js",
