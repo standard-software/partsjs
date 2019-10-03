@@ -9,6 +9,57 @@ const test_execute_index = (parts) => {
   const { test_execute_object   } = require('./object/object.test.js');
   const { test_execute_consoleHook  } = require('./consoleHook/consoleHook.test.js');
 
+  const test_execute_nameSpace = (parts) => {
+    const {
+      checkEqual
+    } = parts.test;
+
+    const {
+      copyProperty,propertyCount,inProperty,
+    } = parts.object;
+
+    checkEqual(115, propertyCount(parts));
+    checkEqual(true,
+      inProperty(
+        parts,
+        'type,syntax,test,compare,convert,string,object,consoleHook'
+      )
+    );
+
+    checkEqual(true,
+      inProperty(
+        parts,
+        'isUndefined,isNotNull,isBooleanArray,isNotNumberArray,' +
+        'isFunc,isNotObj,' +
+        'checkEqual,' +
+        'isThrown,isThrownValue,isThrownException,isNotThrown,' +
+        'assert,guard,' +
+        'sc,if_,switch_,' +
+        'equal,or,' +
+        'match,matchValue,initialValue,' +
+        'isEmpty,' +
+        'numberToString,' +
+        'stringToNumber,stringToInteger,' +
+        'numToString,' +
+        'strToNumber,strToInteger,' +
+        'numToStr,' +
+        'strToNum,strToInt,' +
+        'matchFormat,' +
+        'copyProperty,propertyCount,inProperty,' +
+        'copyProp,propCount,inProp,' +
+        ''
+      )
+    );
+
+    checkEqual(false,
+      inProperty(
+        parts,
+        'iscludes,' +
+        ''
+      )
+    );
+  }
+
   console.log('test start. ' + parts.VERSION);
   test_execute_type(parts);
   test_execute_syntax(parts);
@@ -18,6 +69,7 @@ const test_execute_index = (parts) => {
   test_execute_string(parts);
   test_execute_object(parts);
   test_execute_consoleHook(parts);
+  test_execute_nameSpace(parts);
   console.log('test finish.');
 }
 
