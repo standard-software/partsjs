@@ -47,19 +47,19 @@ const hook = (
 };
 
 const hookLog = (hookFunc) => {
-  _hook('log', hookFunc);
+  hook('log', hookFunc);
 };
 const hookInfo = (hookFunc) => {
-  _hook('info', hookFunc);
+  hook('info', hookFunc);
 };
 const hookWarn = (hookFunc) => {
-  _hook('warn', hookFunc);
+  hook('warn', hookFunc);
 };
 const hookError = (hookFunc) => {
-  _hook('error', hookFunc);
+  hook('error', hookFunc);
 };
 const hookDebug = (hookFunc) => {
-  _hook('debug', hookFunc);
+  hook('debug', hookFunc);
 };
 
 const _unHook = (methodName) => {
@@ -75,19 +75,19 @@ var unHook = (methodName) => {
 };
 
 const unHookLog = () => {
-  _unHook('log');
+  unHook('log');
 };
 const unHookInfo = () => {
-  _unHook('info');
+  unHook('info');
 };
 const unHookWarn = () => {
-  _unHook('warn');
+  unHook('warn');
 };
 const unHookError = () => {
-  _unHook('error');
+  unHook('error');
 };
 const unHookDebug = () => {
-  _unHook('debug');
+  unHook('debug');
 };
 
 const _accept = (

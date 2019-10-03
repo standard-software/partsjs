@@ -47,23 +47,23 @@ var hook = function hook(methodName) {
 };
 
 var hookLog = function hookLog(hookFunc) {
-  _hook('log', hookFunc);
+  hook('log', hookFunc);
 };
 
 var hookInfo = function hookInfo(hookFunc) {
-  _hook('info', hookFunc);
+  hook('info', hookFunc);
 };
 
 var hookWarn = function hookWarn(hookFunc) {
-  _hook('warn', hookFunc);
+  hook('warn', hookFunc);
 };
 
 var hookError = function hookError(hookFunc) {
-  _hook('error', hookFunc);
+  hook('error', hookFunc);
 };
 
 var hookDebug = function hookDebug(hookFunc) {
-  _hook('debug', hookFunc);
+  hook('debug', hookFunc);
 };
 
 var _unHook = function _unHook(methodName) {
@@ -79,23 +79,23 @@ var unHook = function unHook(methodName) {
 };
 
 var unHookLog = function unHookLog() {
-  _unHook('log');
+  unHook('log');
 };
 
 var unHookInfo = function unHookInfo() {
-  _unHook('info');
+  unHook('info');
 };
 
 var unHookWarn = function unHookWarn() {
-  _unHook('warn');
+  unHook('warn');
 };
 
 var unHookError = function unHookError() {
-  _unHook('error');
+  unHook('error');
 };
 
 var unHookDebug = function unHookDebug() {
-  _unHook('debug');
+  unHook('debug');
 };
 
 var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {

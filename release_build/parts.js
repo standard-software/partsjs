@@ -117,7 +117,7 @@ var _consoleHook = __webpack_require__(10);
 
 var _object = __webpack_require__(7);
 
-var VERSION = '2.1.0'; // Public Property
+var VERSION = '2.1.1 beta'; // Public Property
 
 var type = _object._copyProperty(_type, 'isUndefined,isNull,isNaNStrict,' + 'isBoolean,isNumber,isInteger,isString,' + 'isFunction,isObject,isObjectType,' + 'isArray,isDate,isRegExp,' + 'isException,' + 'isNotUndefined,isNotNull,isNotNaNStrict,' + 'isNotBoolean,isNotNumber,isNotInteger,isNotString,' + 'isNotFunction,isNotObject,isNotObjectType,' + 'isNotArray,isNotDate,isNotRegExp,' + 'isNotException,' + 'isUndefinedArray,isNullArray,isNaNStrictArray,' + 'isBooleanArray,isNumberArray,isIntegerArray,isStringArray,' + 'isFunctionArray,isObjectArray,isObjectTypeArray,' + 'isArrayArray,isDateArray,isRegExpArray,' + 'isExceptionArray,' + 'isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,' + 'isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,' + 'isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,' + 'isNotArrayArray,isNotDateArray,isNotRegExpArray,' + 'isNotExceptionArray,' + 'isUndef,' + 'isBool,isNum,isInt,isStr,' + 'isFunc,isObj,isObjType,' + 'isExcept,' + 'isNotUndef,' + 'isNotBool,isNotNum,isNotInt,isNotStr,' + 'isNotFunc,isNotObj,isNotObjType,' + 'isNotExcept,' + '');
 
@@ -2188,23 +2188,23 @@ var hook = function hook(methodName) {
 };
 
 var hookLog = function hookLog(hookFunc) {
-  _hook('log', hookFunc);
+  hook('log', hookFunc);
 };
 
 var hookInfo = function hookInfo(hookFunc) {
-  _hook('info', hookFunc);
+  hook('info', hookFunc);
 };
 
 var hookWarn = function hookWarn(hookFunc) {
-  _hook('warn', hookFunc);
+  hook('warn', hookFunc);
 };
 
 var hookError = function hookError(hookFunc) {
-  _hook('error', hookFunc);
+  hook('error', hookFunc);
 };
 
 var hookDebug = function hookDebug(hookFunc) {
-  _hook('debug', hookFunc);
+  hook('debug', hookFunc);
 };
 
 var _unHook = function _unHook(methodName) {
@@ -2220,23 +2220,23 @@ var unHook = function unHook(methodName) {
 };
 
 var unHookLog = function unHookLog() {
-  _unHook('log');
+  unHook('log');
 };
 
 var unHookInfo = function unHookInfo() {
-  _unHook('info');
+  unHook('info');
 };
 
 var unHookWarn = function unHookWarn() {
-  _unHook('warn');
+  unHook('warn');
 };
 
 var unHookError = function unHookError() {
-  _unHook('error');
+  unHook('error');
 };
 
 var unHookDebug = function unHookDebug() {
-  _unHook('debug');
+  unHook('debug');
 };
 
 var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
