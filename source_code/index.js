@@ -7,100 +7,61 @@ const _convert = require('./convert/convert.js');
 const _string = require('./string/string.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 const _object = require('./object/object.js');
+const _constant = require('./constant.js');
 
 const VERSION = '2.2.0 beta';
 
 let rootNames = {};
 
 // type
-const typePropertyBaseNames =
-  'Undefined,Null,NaNStrict,' +
-  'Boolean,Number,Integer,String,' +
-  'Function,Object,ObjectType,' +
-  'Array,Date,RegExp,' +
-  'Exception,' +
-  '';
-const type = {};
-_object._copyProperty(_type,
-  typePropertyBaseNames.split(',').map(item => `is${item}`).join(',') + ',' +
-  typePropertyBaseNames.split(',').map(item => `isNot${item}`).join(',') + ',' +
-  typePropertyBaseNames.split(',').map(item => `is${item}Array`).join(',') + ',' +
-  typePropertyBaseNames.split(',').map(item => `isNot${item}Array`).join(',') + ',' +
-  '', type
-);
-const typePropertyBaseShortNames =
-  'Bool,Num,Int,Str,' +
-  'Func,Obj,ObjType,' +
-  'Except,' +
-  '';
-_object._copyProperty(_type,
-  typePropertyBaseShortNames.split(',').map(item => 'is' + item).join(',') + ',' +
-  typePropertyBaseShortNames.split(',').map(item => 'isNot' + item).join(',') + ',' +
-  '', type
+const type = _object._copyProperty(_type,
+  _constant.propertyNames.TYPE
 );
 rootNames = { ...rootNames, ...type };
 
 // test
 const test = _object._copyProperty(_test,
-  'checkEqual,' +
-  'isThrown,isThrownValue,isThrownException,isNotThrown,' +
-  ''
+  _constant.propertyNames.TEST
 );
 rootNames = { ...rootNames, ...test };
 
 // syntax
 const syntax = _object._copyProperty(_syntax,
-  'assert,guard,' +
-  'sc,if_,switch_,' +
-  ''
+  _constant.propertyNames.SYNTAX
 );
 rootNames = { ...rootNames, ...syntax };
 
 // compare
 const compare = _object._copyProperty(_compare,
-  'equal,or,' +
-  'match,matchValue,initialValue,' +
-  'isEmpty,' +
-  ''
+  _constant.propertyNames.COMPARE
 );
 rootNames = { ...rootNames, ...compare };
 
 // convert
 const convert = _object._copyProperty(_convert,
-  'numberToString,' +
-  'stringToNumber,stringToInteger,' +
-
-  'numToString,' +
-  'strToNumber,strToInteger,' +
-
-  'numToStr,' +
-  'strToNum,strToInt,' +
-  ''
+  _constant.propertyNames.CONVERT
 );
 rootNames = { ...rootNames, ...convert };
 
 // string
 const string = _object._copyProperty(_string,
-  'matchFormat,includes,' +
-  ''
+  _constant.propertyNames.STRING_PUBLIC
 );
-rootNames = { ...rootNames, matchFormat: string.matchFormat };
-
-// consoleHook
-const consoleHook = _object._copyProperty(_consoleHook,
-  'hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,' +
-  'unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,' +
-  'accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,' +
-  ''
+_object._copyProperty(_string,
+  _constant.propertyNames.STRING_ROOT,
+  rootNames
 );
 
 // object
 const object = _object._copyProperty(_object,
-  'copyProperty,propertyCount,inProperty,' +
-  'copyProp,propCount,inProp,' +
-  ''
+  _constant.propertyNames.OBJECT
 );
 rootNames = { ...rootNames, ...object };
+
+// consoleHook
+const consoleHook = _object._copyProperty(_consoleHook,
+  _constant.propertyNames.CONSOLE_HOOK
+);
 
 module.exports = {
   VERSION,
