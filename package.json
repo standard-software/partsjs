@@ -10,7 +10,8 @@
     "test:source": "node ./test_exec/source/test_index.js",
     "test:debug": "node ./test_exec/debug/test_index.js",
     "test:release": "node ./test_exec/release/test_index.js",
-    "start": "npm run babel && npm run webpack && npm run test:source && npm run test:debug && npm run test:release",
+    "test:release_wsh": "cscript ./test_exec/release_wsh/test_index.wsf",
+    "start": "npm run babel && npm run webpack && npm run test:source && npm run test:debug && npm run test:release && npm run test:release_wsh",
     "test": ""
   },
   "repository": {
