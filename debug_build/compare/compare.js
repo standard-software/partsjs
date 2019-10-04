@@ -16,7 +16,9 @@ var _require = require('../type/type.js'),
     _isException = _require._isException;
 
 var _require2 = require('../object/object.js'),
-    _propertyCount = _require2._propertyCount;
+    _copyProperty = _require2._copyProperty,
+    _propertyCount = _require2._propertyCount,
+    _inProperty = _require2._inProperty;
 /**
  * equal
  */
@@ -27,7 +29,7 @@ var _equal = function _equal(value1, value2) {
 };
 
 var equal = function equal(value1, value2) {
-  if (_isObject(value1) && 'value1' in value1 && 'value2' in value1) {
+  if (_inProperty(value1, 'value1,value2')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
@@ -51,7 +53,7 @@ var _or = function _or(value, compareArray) {
 };
 
 var or = function or(value, compareArray) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+  if (_inProperty(value, 'value,compareArray')) {
     var _value2 = value;
     value = _value2.value;
     compareArray = _value2.compareArray;
@@ -103,7 +105,7 @@ var _match = function _match(value, compareArray) {
 };
 
 var match = function match(value, compareArray) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+  if (_inProperty(value, 'value,compareArray')) {
     var _value3 = value;
     value = _value3.value;
     compareArray = _value3.compareArray;
@@ -125,7 +127,7 @@ var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
 };
 
 var matchValue = function matchValue(value, compareArray, inMatchValue) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value && 'inMatchValue' in value) {
+  if (_inProperty(value, 'value,compareArray,inMatchValue')) {
     var _value4 = value;
     value = _value4.value;
     compareArray = _value4.compareArray;
@@ -148,7 +150,7 @@ var _initialValue = function _initialValue(value, inMatchValue) {
 };
 
 var initialValue = function initialValue(value, inMatchValue) {
-  if (_isObject(value) && 'value' in value && 'inMatchValue' in value) {
+  if (_inProperty(value, 'value,inMatchValue')) {
     var _value5 = value;
     value = _value5.value;
     inMatchValue = _value5.inMatchValue;

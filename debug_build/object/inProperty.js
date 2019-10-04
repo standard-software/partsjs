@@ -52,7 +52,7 @@ var _inProperty = function _inProperty(object, propertyArray) {
 var inProperty = function inProperty(object, propertyArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
+  if (_inProperty(object, 'object,propertyArray')) {
     var _object = object;
     object = _object.object;
     propertyArray = _object.propertyArray;

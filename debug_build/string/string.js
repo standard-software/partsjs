@@ -17,6 +17,11 @@ var _require = require('../type/type.js'),
 
 var _require2 = require('../compare/compare.js'),
     _match = _require2._match;
+
+var _require3 = require('../object/object.js'),
+    _copyProperty = _require3._copyProperty,
+    _propertyCount = _require3._propertyCount,
+    _inProperty = _require3._inProperty;
 /**
  * matchFormat
  */
@@ -127,7 +132,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
 };
 
 var matchFormat = function matchFormat(formatName, value) {
-  if (_isObject(formatName) && 'formatName' in formatName && 'value' in formatName) {
+  if (_inProperty(formatName, 'formatName,value')) {
     var _formatName = formatName;
     formatName = _formatName.formatName;
     value = _formatName.value;
@@ -166,7 +171,7 @@ var _includes = function _includes(value, compareArray) {
 };
 
 var includes = function includes(value, compareArray) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+  if (_inProperty(value, 'value,compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;

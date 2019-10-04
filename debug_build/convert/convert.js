@@ -34,6 +34,11 @@ var _require2 = require('../compare/compare.js'),
 
 var _require3 = require('../string/string.js'),
     _matchFormat = _require3._matchFormat;
+
+var _require4 = require('../object/object.js'),
+    _copyProperty = _require4._copyProperty,
+    _propertyCount = _require4._propertyCount,
+    _inProperty = _require4._inProperty;
 /**
  * numberToString
  */
@@ -47,7 +52,7 @@ var _numberToString = function _numberToString(value, radix) {
 var numberToString = function numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_isObject(value) && 'value' in value) {
+  if (_inProperty(value, 'value')) {
     var _value = value;
     value = _value.value;
     var _value$radix = _value.radix;
@@ -82,7 +87,7 @@ var _stringToNumber = function _stringToNumber(value, defaultValue) {
 };
 
 var stringToNumber = function stringToNumber(value, defaultValue) {
-  if (_isObject(value) && 'value' in value) {
+  if (_inProperty(value, 'value')) {
     var _value2 = value;
     value = _value2.value;
     defaultValue = _value2.defaultValue;
@@ -112,7 +117,7 @@ var _stringToInteger = function _stringToInteger(value, defaultValue) {
 var stringToInteger = function stringToInteger(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (_isObject(value) && 'value' in value) {
+  if (_inProperty(value, 'value')) {
     var _value3 = value;
     value = _value3.value;
     defaultValue = _value3.defaultValue;

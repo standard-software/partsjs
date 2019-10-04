@@ -765,7 +765,7 @@ var _inProperty = function _inProperty(object, propertyArray) {
 var inProperty = function inProperty(object, propertyArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (_isObject(object) && 'object' in object && 'propertyArray' in object) {
+  if (_inProperty(object, 'object,propertyArray')) {
     var _object = object;
     object = _object.object;
     propertyArray = _object.propertyArray;
@@ -1474,7 +1474,9 @@ var _require = __webpack_require__(3),
     _isException = _require._isException;
 
 var _require2 = __webpack_require__(11),
-    _propertyCount = _require2._propertyCount;
+    _copyProperty = _require2._copyProperty,
+    _propertyCount = _require2._propertyCount,
+    _inProperty = _require2._inProperty;
 /**
  * equal
  */
@@ -1485,7 +1487,7 @@ var _equal = function _equal(value1, value2) {
 };
 
 var equal = function equal(value1, value2) {
-  if (_isObject(value1) && 'value1' in value1 && 'value2' in value1) {
+  if (_inProperty(value1, 'value1,value2')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
@@ -1509,7 +1511,7 @@ var _or = function _or(value, compareArray) {
 };
 
 var or = function or(value, compareArray) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+  if (_inProperty(value, 'value,compareArray')) {
     var _value2 = value;
     value = _value2.value;
     compareArray = _value2.compareArray;
@@ -1561,7 +1563,7 @@ var _match = function _match(value, compareArray) {
 };
 
 var match = function match(value, compareArray) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+  if (_inProperty(value, 'value,compareArray')) {
     var _value3 = value;
     value = _value3.value;
     compareArray = _value3.compareArray;
@@ -1583,7 +1585,7 @@ var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
 };
 
 var matchValue = function matchValue(value, compareArray, inMatchValue) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value && 'inMatchValue' in value) {
+  if (_inProperty(value, 'value,compareArray,inMatchValue')) {
     var _value4 = value;
     value = _value4.value;
     compareArray = _value4.compareArray;
@@ -1606,7 +1608,7 @@ var _initialValue = function _initialValue(value, inMatchValue) {
 };
 
 var initialValue = function initialValue(value, inMatchValue) {
-  if (_isObject(value) && 'value' in value && 'inMatchValue' in value) {
+  if (_inProperty(value, 'value,inMatchValue')) {
     var _value5 = value;
     value = _value5.value;
     inMatchValue = _value5.inMatchValue;
@@ -1809,6 +1811,11 @@ var _require2 = __webpack_require__(10),
 
 var _require3 = __webpack_require__(14),
     _matchFormat = _require3._matchFormat;
+
+var _require4 = __webpack_require__(11),
+    _copyProperty = _require4._copyProperty,
+    _propertyCount = _require4._propertyCount,
+    _inProperty = _require4._inProperty;
 /**
  * numberToString
  */
@@ -1822,7 +1829,7 @@ var _numberToString = function _numberToString(value, radix) {
 var numberToString = function numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_isObject(value) && 'value' in value) {
+  if (_inProperty(value, 'value')) {
     var _value = value;
     value = _value.value;
     var _value$radix = _value.radix;
@@ -1857,7 +1864,7 @@ var _stringToNumber = function _stringToNumber(value, defaultValue) {
 };
 
 var stringToNumber = function stringToNumber(value, defaultValue) {
-  if (_isObject(value) && 'value' in value) {
+  if (_inProperty(value, 'value')) {
     var _value2 = value;
     value = _value2.value;
     defaultValue = _value2.defaultValue;
@@ -1887,7 +1894,7 @@ var _stringToInteger = function _stringToInteger(value, defaultValue) {
 var stringToInteger = function stringToInteger(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (_isObject(value) && 'value' in value) {
+  if (_inProperty(value, 'value')) {
     var _value3 = value;
     value = _value3.value;
     defaultValue = _value3.defaultValue;
@@ -1952,6 +1959,11 @@ var _require = __webpack_require__(3),
 
 var _require2 = __webpack_require__(10),
     _match = _require2._match;
+
+var _require3 = __webpack_require__(11),
+    _copyProperty = _require3._copyProperty,
+    _propertyCount = _require3._propertyCount,
+    _inProperty = _require3._inProperty;
 /**
  * matchFormat
  */
@@ -2062,7 +2074,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
 };
 
 var matchFormat = function matchFormat(formatName, value) {
-  if (_isObject(formatName) && 'formatName' in formatName && 'value' in formatName) {
+  if (_inProperty(formatName, 'formatName,value')) {
     var _formatName = formatName;
     formatName = _formatName.formatName;
     value = _formatName.value;
@@ -2101,7 +2113,7 @@ var _includes = function _includes(value, compareArray) {
 };
 
 var includes = function includes(value, compareArray) {
-  if (_isObject(value) && 'value' in value && 'compareArray' in value) {
+  if (_inProperty(value, 'value,compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
