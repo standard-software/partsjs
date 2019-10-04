@@ -4,12 +4,13 @@ const _test = require('./test/test.js');
 const _syntax = require('./syntax/syntax.js');
 const _compare = require('./compare/compare.js');
 const _convert = require('./convert/convert.js');
+const _number = require('./number/number.js');
 const _string = require('./string/string.js');
-const _consoleHook = require('./consoleHook/consoleHook.js');
 const _object = require('./object/object.js');
 const _constant = require('./constant.js');
+const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '2.2.0';
+const VERSION = '2.3.0 beta';
 
 let rootNames = {};
 
@@ -43,6 +44,15 @@ const convert = _object._copyProperty(_convert,
 );
 rootNames = { ...rootNames, ...convert };
 
+// number
+const number = _object._copyProperty(_number,
+  _constant.propertyNames.NUMBER
+);
+_object._copyProperty(_number,
+  _constant.propertyNames.NUMBER,
+  rootNames
+);
+
 // string
 const string = _object._copyProperty(_string,
   _constant.propertyNames.STRING_PUBLIC
@@ -70,6 +80,7 @@ module.exports = {
   syntax,
   compare,
   convert,
+  number,
   string,
   consoleHook,
   object,

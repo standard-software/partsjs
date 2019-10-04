@@ -56,6 +56,11 @@ const CONVERT =
   ''
 
 // string
+const NUMBER =
+  'isMultiples,isEven,isOdd,' +
+  ''
+
+// string
 const STRING_PUBLIC =
   'matchFormat,includes,' +
   ''
@@ -84,6 +89,7 @@ const propertyNames = {
   SYNTAX,
   COMPARE,
   CONVERT,
+  NUMBER,
   STRING_PUBLIC,
   STRING_ROOT,
   OBJECT,
