@@ -94,12 +94,49 @@ const nearEqual = (value1, value2, diff) => {
     );
   }
   if (diff < 0) {
-    throw new TypeError(
-      'nearEqual args(diff) is < 0'
+    throw new RangeError(
+      'nearEqual args(diff) must be < 0'
     );
   }
 
   return _nearEqual(value1, value2, diff);
+};
+
+const _inRange = (value, from, to) => {
+  if ((from <= value) && (value <= to)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const inRange = (value, from, to) => {
+  if (_inProperty(value, 'value,from,to')) {
+    ({ value, from, to } = value);
+  }
+
+  if (!_isNumber(value)) {
+    throw new TypeError(
+      'inRange args(value) is not number'
+    );
+  }
+  if (!_isNumber(from)) {
+    throw new TypeError(
+      'inRange args(from) is not number'
+    );
+  }
+  if (!_isNumber(to)) {
+    throw new TypeError(
+      'inRange args(to) is not number'
+    );
+  }
+  if (!(from <= to)) {
+    throw new RangeError(
+      'inRange args(from,to) must be from <= to'
+    );
+  }
+
+  return _inRange(value, from, to);
 };
 
 module.exports = {

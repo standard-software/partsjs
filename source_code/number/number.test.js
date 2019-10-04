@@ -7,7 +7,7 @@ const test_execute_number = (parts) => {
 
   const {
     isMultiples,isEven,isOdd,
-    round,nearEqual,
+    round,nearEqual,inRange,
   } = parts.number;
 
   const test_isMultiples = () => {
@@ -142,10 +142,39 @@ const test_execute_number = (parts) => {
     checkEqual(true,  isThrown(() => { nearEqual(0.50, 0.51, -0.001)}));
   };
 
+  const test_inRange = () => {
+    checkEqual(true,  inRange(20,     10,     30));
+    checkEqual(true,  inRange(10,     10,     30));
+    checkEqual(true,  inRange(30,     10,     30));
+    checkEqual(false, inRange( 9,     10,     30));
+    checkEqual(false, inRange(31,     10,     30));
+    checkEqual(false, inRange( 9.99,  10,     30));
+    checkEqual(false, inRange(30.01,  10,     30));
+
+    // parameter args
+    checkEqual(true,  inRange({
+      value:  30,
+      from:   10,
+      to:     30
+    }));
+    checkEqual(false,  inRange({
+      value:  9,
+      from:   10,
+      to:     30
+    }));
+
+    // exception
+    checkEqual(false, isThrown(() => { inRange(20, 10, 30)}));
+    checkEqual(true,  isThrown(() => { inRange('20', 10, 30)}));
+    checkEqual(true,  isThrown(() => { inRange(20, '10', 30)}));
+    checkEqual(true,  isThrown(() => { inRange(20, 10, '30')}));
+  };
+
   console.log('  test number.js start.');
   test_isMultiples();
   test_round();
   test_nearEqual();
+  test_inRange();
   console.log('  test number.js finish.');
 }
 
