@@ -28,7 +28,7 @@ var _constant = require('./constant.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '2.3.0 beta';
+var VERSION = '2.3.0';
 var rootNames = {}; // type
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);

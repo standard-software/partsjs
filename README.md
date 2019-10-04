@@ -100,6 +100,12 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.3.0
+#### 2019/10/05(Sat)
+- add number.js
+  - isMultiples,isEven,isOdd,
+  - round,nearEqual,inRange,randomInt
+
 ### 2.2.0
 #### 2019/10/04(Fri)
 - move webpack.config.js babel.config.js
