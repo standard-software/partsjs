@@ -101,10 +101,12 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.2.0
-#### 2019/10/03(Thu)
+#### 2019/10/04(Fri)
 - move webpack.config.js babel.config.js
 - update test release_wsh
-- move js file
+- change file position
+- add constant.js
+- add test nameSpace
 
 ### 2.1.1
 #### 2019/10/03(Thu)

@@ -26,7 +26,7 @@ var _object = require('./object/object.js');
 
 var _constant = require('./constant.js');
 
-var VERSION = '2.2.0 beta';
+var VERSION = '2.2.0';
 var rootNames = {}; // type
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);

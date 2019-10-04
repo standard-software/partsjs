@@ -125,7 +125,7 @@ var _object = __webpack_require__(11);
 
 var _constant = __webpack_require__(16);
 
-var VERSION = '2.2.0 beta';
+var VERSION = '2.2.0';
 var rootNames = {}; // type
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
