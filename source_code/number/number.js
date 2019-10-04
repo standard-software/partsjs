@@ -139,12 +139,35 @@ const inRange = (value, from, to) => {
   return _inRange(value, from, to);
 };
 
+const _randomInt = (min, max) => {
+  return Math.floor( Math.random() * (max + 1 - min) ) + min;
+};
+
+const randomInt = (min, max) => {
+  if (_inProperty(min, 'min,max')) {
+    ({ min, max } = min);
+  }
+
+  if (!_isInteger(min)) {
+    throw new TypeError(
+      'randomInt args(min) is not integer'
+    );
+  }
+  if (!_isInteger(max)) {
+    throw new TypeError(
+      'randomInt args(max) is not integer'
+    );
+  }
+
+  return _randomInt(min, max)
+};
+
 module.exports = {
   _isMultiples,
-  _round,_nearEqual,
+  _round,_nearEqual,_inRange,
 
   isMultiples,isEven,isOdd,
-  round,nearEqual,
+  round,nearEqual,inRange,randomInt
 
 };
 

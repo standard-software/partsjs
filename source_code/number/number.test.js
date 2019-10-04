@@ -7,7 +7,7 @@ const test_execute_number = (parts) => {
 
   const {
     isMultiples,isEven,isOdd,
-    round,nearEqual,inRange,
+    round,nearEqual,inRange,randomInt,
   } = parts.number;
 
   const test_isMultiples = () => {
@@ -164,10 +164,27 @@ const test_execute_number = (parts) => {
     }));
 
     // exception
-    checkEqual(false, isThrown(() => { inRange(20, 10, 30)}));
-    checkEqual(true,  isThrown(() => { inRange('20', 10, 30)}));
-    checkEqual(true,  isThrown(() => { inRange(20, '10', 30)}));
-    checkEqual(true,  isThrown(() => { inRange(20, 10, '30')}));
+    checkEqual(false, isThrown(() => { inRange( 20,  10,  30)}));
+    checkEqual(true,  isThrown(() => { inRange('20', 10,  30)}));
+    checkEqual(true,  isThrown(() => { inRange( 20, '10', 30)}));
+    checkEqual(true,  isThrown(() => { inRange( 20,  10, '30')}));
+  };
+
+  const test_randomInt = () => {
+    checkEqual(5,  randomInt(5, 5));
+    var result = randomInt(1, 10);
+    checkEqual(true, inRange(result, 1, 10));
+
+    // parameter args
+    checkEqual(10,  randomInt({
+      min:  10,
+      max:  10,
+    }));
+
+    // exception
+    checkEqual(false, isThrown(() => { randomInt( 10,  10)}));
+    checkEqual(true,  isThrown(() => { randomInt('10', 10)}));
+    checkEqual(true,  isThrown(() => { randomInt( 10, '10')}));
   };
 
   console.log('  test number.js start.');
@@ -175,6 +192,7 @@ const test_execute_number = (parts) => {
   test_round();
   test_nearEqual();
   test_inRange();
+  test_randomInt();
   console.log('  test number.js finish.');
 }
 

@@ -58,7 +58,7 @@ const CONVERT =
 // number
 const NUMBER =
   'isMultiples,isEven,isOdd,' +
-  'round,nearEqual,inRange' +
+  'round,nearEqual,inRange,randomInt,' +
   ''
 
 // string
