@@ -55,9 +55,10 @@ const CONVERT =
   'strToNum,strToInt,' +
   ''
 
-// string
+// number
 const NUMBER =
   'isMultiples,isEven,isOdd,' +
+  'round,nearEqual,' +
   ''
 
 // string
