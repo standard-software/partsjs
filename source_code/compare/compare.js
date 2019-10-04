@@ -6,7 +6,7 @@ const {
 } = require('../type/type.js');
 
 const {
-  _propertyCount
+  _copyProperty,_propertyCount,_inProperty,
 } = require('../object/object.js');
 
 /**
@@ -17,9 +17,7 @@ const _equal = (value1, value2) => {
 };
 
 const equal = (value1, value2) => {
-  if (_isObject(value1)
-  && ('value1' in value1)
-  && ('value2' in value1)) {
+  if (_inProperty(value1, 'value1,value2')) {
     ({ value1, value2 } = value1);
   }
 
@@ -39,9 +37,7 @@ const _or = (value, compareArray) => {
 };
 
 const or = (value, compareArray) => {
-  if (_isObject(value)
-  && ('value' in value)
-  && ('compareArray' in value)) {
+  if (_inProperty(value, 'value,compareArray')) {
       ({ value, compareArray } = value)
   }
 
@@ -93,9 +89,7 @@ const match = (
   value,
   compareArray
 ) => {
-  if (_isObject(value)
-  && ('value' in value)
-  && ('compareArray' in value)) {
+  if (_inProperty(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 
@@ -124,10 +118,7 @@ const matchValue = (
   compareArray,
   inMatchValue,
 ) => {
-  if (_isObject(value)
-  && ('value' in value)
-  && ('compareArray' in value)
-  && ('inMatchValue' in value)) {
+  if (_inProperty(value, 'value,compareArray,inMatchValue')) {
     ({ value, compareArray, inMatchValue } = value);
   }
 
@@ -158,9 +149,7 @@ const initialValue = (
   value,
   inMatchValue,
 ) => {
-  if (_isObject(value)
-  && ('value' in value)
-  && ('inMatchValue' in value)) {
+  if (_inProperty(value, 'value,inMatchValue')) {
     ({ value, inMatchValue } = value);
   }
 

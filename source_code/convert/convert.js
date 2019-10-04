@@ -19,6 +19,11 @@ const {
   _matchFormat,
 } = require('../string/string.js');
 
+const {
+  _copyProperty,_propertyCount,_inProperty,
+} = require('../object/object.js');
+
+
 /**
  * numberToString
  */
@@ -34,8 +39,7 @@ const numberToString = (
   value,
   radix = 10
 ) => {
-  if (_isObject(value)
-  && ('value' in value)) {
+  if (_inProperty(value, 'value')) {
     ({ value, radix = 10 } = value)
   }
 
@@ -81,8 +85,7 @@ const stringToNumber = (
   value,
   defaultValue,
 ) => {
-  if (_isObject(value)
-  && ('value' in value)) {
+  if (_inProperty(value, 'value')) {
     ({ value, defaultValue } = value);
   }
 
@@ -121,8 +124,7 @@ const stringToInteger = (
   defaultValue,
   radix = 10,
 ) => {
-  if (_isObject(value)
-  && ('value' in value)) {
+  if (_inProperty(value, 'value')) {
     ({ value, defaultValue, radix = 10 } = value);
   }
 

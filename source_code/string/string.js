@@ -9,6 +9,11 @@ const {
   _match,
 } = require('../compare/compare.js');
 
+const {
+  _copyProperty,_propertyCount,_inProperty,
+} = require('../object/object.js');
+
+
 /**
  * matchFormat
  */
@@ -98,9 +103,7 @@ const matchFormat = (
   formatName,
   value,
 ) => {
-  if (_isObject(formatName)
-  && ('formatName' in formatName)
-  && ('value' in formatName)) {
+  if (_inProperty(formatName, 'formatName,value')) {
     ({ formatName, value } = formatName);
   }
 
@@ -149,9 +152,7 @@ const includes = (
   value,
   compareArray
 ) => {
-  if (_isObject(value)
-  && ('value' in value)
-  && ('compareArray' in value)) {
+  if (_inProperty(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 

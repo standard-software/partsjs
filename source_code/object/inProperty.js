@@ -39,9 +39,7 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
 }
 
 const inProperty = (object, propertyArray, hasOwn = true) => {
-  if (_isObject(object)
-  && ('object' in object)
-  && ('propertyArray' in object)) {
+  if (_inProperty(object, 'object,propertyArray')) {
     ({ object, propertyArray, hasOwn = true } = object)
   }
 
