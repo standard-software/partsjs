@@ -16,14 +16,17 @@ var test_execute_index = function test_execute_index(parts) {
   var _require5 = require('./convert/convert.test.js'),
       test_execute_convert = _require5.test_execute_convert;
 
-  var _require6 = require('./string/string.test.js'),
-      test_execute_string = _require6.test_execute_string;
+  var _require6 = require('./number/number.test.js'),
+      test_execute_number = _require6.test_execute_number;
 
-  var _require7 = require('./object/object.test.js'),
-      test_execute_object = _require7.test_execute_object;
+  var _require7 = require('./string/string.test.js'),
+      test_execute_string = _require7.test_execute_string;
 
-  var _require8 = require('./consoleHook/consoleHook.test.js'),
-      test_execute_consoleHook = _require8.test_execute_consoleHook;
+  var _require8 = require('./object/object.test.js'),
+      test_execute_object = _require8.test_execute_object;
+
+  var _require9 = require('./consoleHook/consoleHook.test.js'),
+      test_execute_consoleHook = _require9.test_execute_consoleHook;
 
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var checkEqual = parts.test.checkEqual;
@@ -31,11 +34,12 @@ var test_execute_index = function test_execute_index(parts) {
         copyProperty = _parts$object.copyProperty,
         propertyCount = _parts$object.propertyCount,
         inProperty = _parts$object.inProperty;
-    checkEqual(115, propertyCount(parts));
+    checkEqual(123, propertyCount(parts));
     checkEqual(74, propertyCount(parts.type));
     checkEqual(5, propertyCount(parts.test));
     checkEqual(6, propertyCount(parts.compare));
     checkEqual(9, propertyCount(parts.convert));
+    checkEqual(7, propertyCount(parts.number));
     checkEqual(2, propertyCount(parts.string));
     checkEqual(6, propertyCount(parts.object));
     checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,string,object,consoleHook'));
@@ -49,6 +53,7 @@ var test_execute_index = function test_execute_index(parts) {
   test_execute_test(parts);
   test_execute_compare(parts);
   test_execute_convert(parts);
+  test_execute_number(parts);
   test_execute_string(parts);
   test_execute_object(parts);
   test_execute_consoleHook(parts);

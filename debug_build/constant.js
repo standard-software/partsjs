@@ -37,7 +37,9 @@ var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
 
 var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
 
-var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + ''; // string
+var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + ''; // number
+
+var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' + ''; // string
 
 var STRING_PUBLIC = 'matchFormat,includes,' + '';
 var STRING_ROOT = 'matchFormat,' + ''; // object
@@ -58,6 +60,7 @@ var propertyNames = {
   SYNTAX: SYNTAX,
   COMPARE: COMPARE,
   CONVERT: CONVERT,
+  NUMBER: NUMBER,
   STRING_PUBLIC: STRING_PUBLIC,
   STRING_ROOT: STRING_ROOT,
   OBJECT: OBJECT,

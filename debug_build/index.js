@@ -18,15 +18,17 @@ var _compare = require('./compare/compare.js');
 
 var _convert = require('./convert/convert.js');
 
-var _string = require('./string/string.js');
+var _number = require('./number/number.js');
 
-var _consoleHook = require('./consoleHook/consoleHook.js');
+var _string = require('./string/string.js');
 
 var _object = require('./object/object.js');
 
 var _constant = require('./constant.js');
 
-var VERSION = '2.2.0';
+var _consoleHook = require('./consoleHook/consoleHook.js');
+
+var VERSION = '2.3.0 beta';
 var rootNames = {}; // type
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
@@ -47,7 +49,12 @@ rootNames = _objectSpread({}, rootNames, {}, compare); // convert
 
 var convert = _object._copyProperty(_convert, _constant.propertyNames.CONVERT);
 
-rootNames = _objectSpread({}, rootNames, {}, convert); // string
+rootNames = _objectSpread({}, rootNames, {}, convert); // number
+
+var number = _object._copyProperty(_number, _constant.propertyNames.NUMBER);
+
+_object._copyProperty(_number, _constant.propertyNames.NUMBER, rootNames); // string
+
 
 var string = _object._copyProperty(_string, _constant.propertyNames.STRING_PUBLIC);
 
@@ -67,6 +74,7 @@ module.exports = _objectSpread({
   syntax: syntax,
   compare: compare,
   convert: convert,
+  number: number,
   string: string,
   consoleHook: consoleHook,
   object: object

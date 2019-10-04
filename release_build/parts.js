@@ -117,15 +117,17 @@ var _compare = __webpack_require__(10);
 
 var _convert = __webpack_require__(13);
 
-var _string = __webpack_require__(14);
+var _number = __webpack_require__(15);
 
-var _consoleHook = __webpack_require__(15);
+var _string = __webpack_require__(14);
 
 var _object = __webpack_require__(11);
 
 var _constant = __webpack_require__(16);
 
-var VERSION = '2.2.0';
+var _consoleHook = __webpack_require__(17);
+
+var VERSION = '2.3.0 beta';
 var rootNames = {}; // type
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
@@ -146,7 +148,12 @@ rootNames = _objectSpread({}, rootNames, {}, compare); // convert
 
 var convert = _object._copyProperty(_convert, _constant.propertyNames.CONVERT);
 
-rootNames = _objectSpread({}, rootNames, {}, convert); // string
+rootNames = _objectSpread({}, rootNames, {}, convert); // number
+
+var number = _object._copyProperty(_number, _constant.propertyNames.NUMBER);
+
+_object._copyProperty(_number, _constant.propertyNames.NUMBER, rootNames); // string
+
 
 var string = _object._copyProperty(_string, _constant.propertyNames.STRING_PUBLIC);
 
@@ -166,6 +173,7 @@ module.exports = _objectSpread({
   syntax: syntax,
   compare: compare,
   convert: convert,
+  number: number,
   string: string,
   consoleHook: consoleHook,
   object: object
@@ -2155,6 +2163,276 @@ var _require = __webpack_require__(3),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
+var _require2 = __webpack_require__(11),
+    _copyProperty = _require2._copyProperty,
+    _propertyCount = _require2._propertyCount,
+    _inProperty = _require2._inProperty;
+
+var _isMultiples = function _isMultiples(number, radix) {
+  return number % radix === 0;
+};
+
+var isMultiples = function isMultiples(number, radix) {
+  if (_inProperty(number, 'number,radix')) {
+    var _number = number;
+    number = _number.number;
+    radix = _number.radix;
+  }
+
+  if (!_isInteger(number)) {
+    throw new TypeError('isMultiples args(number) is not integer');
+  }
+
+  if (!_isInteger(radix)) {
+    throw new TypeError('isMultiples args(radix) is not integer');
+  }
+
+  return _isMultiples(number, radix);
+};
+
+var isEven = function isEven(number) {
+  return isMultiples(number, 2);
+};
+
+var isOdd = function isOdd(number) {
+  return !_.isMultiples(number, 2);
+};
+
+var _round = function _round(value) {
+  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var powResult;
+  var plusFlag = 0 <= value ? true : false;
+  powResult = Math.pow(10, digit);
+
+  if (plusFlag) {
+    return Math.round(value * powResult) / powResult;
+  } else {
+    return -1 * Math.round(-1 * value * powResult) / powResult;
+  }
+};
+
+var round = function round(value) {
+  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+  if (_inProperty(value, 'value')) {
+    var _value = value;
+    value = _value.value;
+    var _value$digit = _value.digit;
+    digit = _value$digit === void 0 ? 0 : _value$digit;
+  }
+
+  if (!_isInteger(digit)) {
+    throw new TypeError('round args(value) is not integer');
+  }
+
+  return _round(value, digit);
+};
+
+var _nearEqual = function _nearEqual(value1, value2, diff) {
+  if (Math.abs(value1 - value2) <= diff) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+var nearEqual = function nearEqual(value1, value2, diff) {
+  if (_inProperty(value1, 'value1,value2,diff')) {
+    var _value2 = value1;
+    value1 = _value2.value1;
+    value2 = _value2.value2;
+    diff = _value2.diff;
+  }
+
+  if (!_isNumber(value1)) {
+    throw new TypeError('nearEqual args(value1) is not number');
+  }
+
+  if (!_isNumber(value2)) {
+    throw new TypeError('nearEqual args(value2) is not number');
+  }
+
+  if (!_isNumber(diff)) {
+    throw new TypeError('nearEqual args(diff) is not number');
+  }
+
+  if (diff < 0) {
+    throw new RangeError('nearEqual args(diff) must be < 0');
+  }
+
+  return _nearEqual(value1, value2, diff);
+};
+
+var _inRange = function _inRange(value, from, to) {
+  if (from <= value && value <= to) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+var inRange = function inRange(value, from, to) {
+  if (_inProperty(value, 'value,from,to')) {
+    var _value3 = value;
+    value = _value3.value;
+    from = _value3.from;
+    to = _value3.to;
+  }
+
+  if (!_isNumber(value)) {
+    throw new TypeError('inRange args(value) is not number');
+  }
+
+  if (!_isNumber(from)) {
+    throw new TypeError('inRange args(from) is not number');
+  }
+
+  if (!_isNumber(to)) {
+    throw new TypeError('inRange args(to) is not number');
+  }
+
+  if (!(from <= to)) {
+    throw new RangeError('inRange args(from,to) must be from <= to');
+  }
+
+  return _inRange(value, from, to);
+};
+
+var _randomInt = function _randomInt(min, max) {
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
+};
+
+var randomInt = function randomInt(min, max) {
+  if (_inProperty(min, 'min,max')) {
+    var _min = min;
+    min = _min.min;
+    max = _min.max;
+  }
+
+  if (!_isInteger(min)) {
+    throw new TypeError('randomInt args(min) is not integer');
+  }
+
+  if (!_isInteger(max)) {
+    throw new TypeError('randomInt args(max) is not integer');
+  }
+
+  return _randomInt(min, max);
+};
+
+module.exports = {
+  _isMultiples: _isMultiples,
+  _round: _round,
+  _nearEqual: _nearEqual,
+  _inRange: _inRange,
+  isMultiples: isMultiples,
+  isEven: isEven,
+  isOdd: isOdd,
+  round: round,
+  nearEqual: nearEqual,
+  inRange: inRange,
+  randomInt: randomInt
+};
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// type
+var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
+
+var IS_TYPE = _TYPE_BASE.split(',').map(function (item) {
+  return "is".concat(item);
+}).join(',');
+
+var ISNOT_TYPE = _TYPE_BASE.split(',').map(function (item) {
+  return "isNot".concat(item);
+}).join(',');
+
+var IS_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
+  return "is".concat(item, "Array");
+}).join(',');
+
+var ISNOT_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
+  return "isNot".concat(item, "Array");
+}).join(',');
+
+var _TYPE_BASE_SHORT = 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
+
+var IS_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
+  return "is".concat(item);
+}).join(',');
+
+var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
+  return "isNot".concat(item);
+}).join(',');
+
+var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
+
+var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + ''; // syntax
+
+var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
+
+var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
+
+var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + ''; // number
+
+var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' + ''; // string
+
+var STRING_PUBLIC = 'matchFormat,includes,' + '';
+var STRING_ROOT = 'matchFormat,' + ''; // object
+
+var OBJECT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // consoleHook
+
+var _CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
+var CONSOLE_HOOK = _CONSOLE_HOOK_BASE.split(',').map(function (item) {
+  return "hook".concat(item);
+}).join(',') + ',' + _CONSOLE_HOOK_BASE.split(',').map(function (item) {
+  return "unHook".concat(item);
+}).join(',') + ',' + _CONSOLE_HOOK_BASE.split(',').map(function (item) {
+  return "accept".concat(item);
+}).join(',') + ',' + '';
+var propertyNames = {
+  TYPE: TYPE,
+  TEST: TEST,
+  SYNTAX: SYNTAX,
+  COMPARE: COMPARE,
+  CONVERT: CONVERT,
+  NUMBER: NUMBER,
+  STRING_PUBLIC: STRING_PUBLIC,
+  STRING_ROOT: STRING_ROOT,
+  OBJECT: OBJECT,
+  CONSOLE_HOOK: CONSOLE_HOOK
+};
+module.exports = {
+  propertyNames: propertyNames
+};
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(3),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
 var _require2 = __webpack_require__(10),
     _or = _require2._or;
 
@@ -2329,80 +2607,6 @@ module.exports = {
   acceptWarn: acceptWarn,
   acceptError: acceptError,
   acceptDebug: acceptDebug
-};
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// type
-var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
-
-var IS_TYPE = _TYPE_BASE.split(',').map(function (item) {
-  return "is".concat(item);
-}).join(',');
-
-var ISNOT_TYPE = _TYPE_BASE.split(',').map(function (item) {
-  return "isNot".concat(item);
-}).join(',');
-
-var IS_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
-  return "is".concat(item, "Array");
-}).join(',');
-
-var ISNOT_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
-  return "isNot".concat(item, "Array");
-}).join(',');
-
-var _TYPE_BASE_SHORT = 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
-
-var IS_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
-  return "is".concat(item);
-}).join(',');
-
-var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
-  return "isNot".concat(item);
-}).join(',');
-
-var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
-
-var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + ''; // syntax
-
-var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
-
-var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
-
-var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + ''; // string
-
-var STRING_PUBLIC = 'matchFormat,includes,' + '';
-var STRING_ROOT = 'matchFormat,' + ''; // object
-
-var OBJECT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // consoleHook
-
-var _CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
-var CONSOLE_HOOK = _CONSOLE_HOOK_BASE.split(',').map(function (item) {
-  return "hook".concat(item);
-}).join(',') + ',' + _CONSOLE_HOOK_BASE.split(',').map(function (item) {
-  return "unHook".concat(item);
-}).join(',') + ',' + _CONSOLE_HOOK_BASE.split(',').map(function (item) {
-  return "accept".concat(item);
-}).join(',') + ',' + '';
-var propertyNames = {
-  TYPE: TYPE,
-  TEST: TEST,
-  SYNTAX: SYNTAX,
-  COMPARE: COMPARE,
-  CONVERT: CONVERT,
-  STRING_PUBLIC: STRING_PUBLIC,
-  STRING_ROOT: STRING_ROOT,
-  OBJECT: OBJECT,
-  CONSOLE_HOOK: CONSOLE_HOOK
-};
-module.exports = {
-  propertyNames: propertyNames
 };
 
 /***/ })
