@@ -15,15 +15,16 @@
   var parts = module.exports;
 ]]>
 </script>
-<script language="JavaScript" src="../../debug_build/index.test.js"></script>
-<script language="JavaScript" src="../../debug_build/type.test.js"></script>
-<script language="JavaScript" src="../../debug_build/syntax.test.js"></script>
-<script language="JavaScript" src="../../debug_build/test.test.js"></script>
-<script language="JavaScript" src="../../debug_build/compare.test.js"></script>
-<script language="JavaScript" src="../../debug_build/convert.test.js"></script>
-<script language="JavaScript" src="../../debug_build/string.test.js"></script>
-<script language="JavaScript" src="../../debug_build/object.test.js"></script>
-<script language="JavaScript" src="../../debug_build/consoleHook.test.js"></script>
+<script src="../../debug_build/index.test.js"></script>
+<script src="../../debug_build/type/type.test.js"></script>
+<script src="../../debug_build/syntax/syntax.test.js"></script>
+<script src="../../debug_build/test/test.test.js"></script>
+<script src="../../debug_build/compare/compare.test.js"></script>
+<script src="../../debug_build/convert/convert.test.js"></script>
+<script src="../../debug_build/number/number.test.js"></script>
+<script src="../../debug_build/string/string.test.js"></script>
+<script src="../../debug_build/object/object.test.js"></script>
+<script src="../../debug_build/consoleHook/consoleHook.test.js"></script>
 <script language="JavaScript">
 <![CDATA[
 
@@ -42,6 +43,7 @@
       test_execute_test: test_execute_test,
       test_execute_compare: test_execute_compare,
       test_execute_convert: test_execute_convert,
+      test_execute_number: test_execute_number,
       test_execute_string: test_execute_string,
       test_execute_object: test_execute_object,
       test_execute_consoleHook: test_execute_consoleHook
