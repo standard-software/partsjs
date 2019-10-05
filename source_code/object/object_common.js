@@ -7,7 +7,7 @@ const {
 
 const {
   _inProperty,
-} = require('./inProperty.js');
+} = require('./_inProperty.js');
 
 const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 

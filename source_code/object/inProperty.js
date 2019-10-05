@@ -5,38 +5,9 @@ const {
   _isException,
 } = require('../type/_isType.js');
 
-const _inProperty = (object, propertyArray, hasOwn = true) => {
-
-  if (!_isObject(object)) {
-    return false;
-  }
-
-  if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
-  }
-
-  for (let i = 0; i < propertyArray.length; i += 1) {
-    if ((propertyArray[i] === '')
-    || (_isUndefined(propertyArray[i]))) {
-      continue;
-    }
-    if (!_isString(propertyArray[i])) {
-      throw new TypeError(
-        'copyProperty args(propertyArray) element is not string'
-      );
-    }
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
+const {
+  _inProperty,
+} = require('./_inProperty.js');
 
 const inProperty = (object, propertyArray, hasOwn = true) => {
   if (_inProperty(object, 'object,propertyArray')) {
@@ -68,7 +39,6 @@ const inProperty = (object, propertyArray, hasOwn = true) => {
 const inProp = inProperty;
 
 module.exports = {
-  _inProperty,
   inProperty,
   inProp,
 };

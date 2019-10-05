@@ -4,7 +4,7 @@ const {
 
 const {
   _inProperty,
-} = require('../object/inProperty.js')
+} = require('../object/_inProperty.js')
 
 /**
  * _isException
