@@ -185,11 +185,10 @@ const test_execute_object = (parts) => {
 
   };
 
-  console.log('  test object.js start.');
+  console.log('  test object.js');
   test_copyProperty();
   test_inProperty();
   test_propertyCount();
-  console.log('  test object.js finish.');
 }
 
 module.exports = {

@@ -187,13 +187,12 @@ const test_execute_number = (parts) => {
     checkEqual(true,  isThrown(() => { randomInt( 10, '10')}));
   };
 
-  console.log('  test number.js start.');
+  console.log('  test number.js');
   test_isMultiples();
   test_round();
   test_nearEqual();
   test_inRange();
   test_randomInt();
-  console.log('  test number.js finish.');
 }
 
 module.exports = {

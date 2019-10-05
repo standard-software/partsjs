@@ -10,7 +10,7 @@ const _object = require('./object/object.js');
 const _constant = require('./constant.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '2.3.0';
+const VERSION = '2.4.0 beta';
 
 let rootNames = {};
 

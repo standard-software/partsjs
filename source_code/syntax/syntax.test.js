@@ -441,12 +441,11 @@ const test_execute_syntax = (parts) => {
     checkEqual(undefined, switch_(2)(switchResultFunc3));
   };
 
-  console.log('  test syntax.js start.');
+  console.log('  test syntax.js');
   test_guard();
   test_sc();
   test_if_();
   test_switch_();
-  console.log('  test syntax.js finish.');
 }
 
 module.exports = {

@@ -114,10 +114,9 @@ const test_execute_string = (parts) => {
     ), 'test_includes thrown 4');
   };
 
-  console.log('  test string.js start.');
+  console.log('  test string.js');
   test_matchFormat();
   test_includes();
-  console.log('  test string.js finish.');
 }
 
 module.exports = {

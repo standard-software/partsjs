@@ -79,7 +79,6 @@ const test_execute_index = (parts) => {
   test_execute_object(parts);
   test_execute_consoleHook(parts);
   test_execute_nameSpace(parts);
-  console.log('test finish.');
 }
 
 module.exports = {

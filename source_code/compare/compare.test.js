@@ -307,14 +307,13 @@ const test_execute_compare = (parts) => {
     checkEqual(false, isEmpty({a:1}));
   }
 
-  console.log('  test compare.js start.');
+  console.log('  test compare.js');
   test_equal();
   test_or();
   test_match();
   test_matchValue();
   test_initialValue();
   test_isEmpty();
-  console.log('  test commpare.js finish.');
 }
 
 module.exports = {
