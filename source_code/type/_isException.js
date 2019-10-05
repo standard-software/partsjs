@@ -1,6 +1,6 @@
 const {
   _isError,
-} = require('./_isType.js')
+} = require('../type/_isType.js')
 
 const {
   _inProperty,

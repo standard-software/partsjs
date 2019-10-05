@@ -8,13 +8,12 @@ const {
   _isNotBoolean,_isNotNumber,_isNotInteger,_isNotString,
   _isNotFunction,_isNotObject,_isNotObjectType,
   _isNotArray,_isNotDate,_isNotRegExp,
-} = require('./_isType.js');
+} = require('../type/_isType.js');
 
 const {
   _isException,
   _isNotException,
-} = require('./_isException.js');
-
+} = require('../type/_isException.js');
 
 /**
  * _isTypeCheck

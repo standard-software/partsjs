@@ -7,7 +7,7 @@ const {
 
 const {
   _inProperty,
-} = require('./_inProperty.js');
+} = require('../object/_inProperty.js')
 
 const inProperty = (object, propertyArray, hasOwn = true) => {
   if (_inProperty(object, 'object,propertyArray')) {
