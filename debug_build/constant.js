@@ -41,8 +41,8 @@ var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToStri
 
 var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' + ''; // string
 
-var STRING_PUBLIC = 'matchFormat,includes,' + '';
-var STRING_ROOT = 'matchFormat,' + ''; // object
+var STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
+var STRING_ROOT = 'matchFormat,replaceAll,' + ''; // object
 
 var OBJECT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // consoleHook
 

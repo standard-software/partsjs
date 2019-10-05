@@ -8,6 +8,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var polyfill = require('./polyfill.js');
 
+var _constant = require('./constant.js');
+
 var _type = require('./type/type.js');
 
 var _test = require('./test/test.js');
@@ -24,11 +26,11 @@ var _string = require('./string/string.js');
 
 var _object = require('./object/object.js');
 
-var _constant = require('./constant.js');
+var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '2.3.0';
+var VERSION = '2.4.0 beta';
 var rootNames = {}; // type
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);

@@ -7,7 +7,8 @@ var test_execute_string = function test_execute_string(parts) {
       isThrownException = _parts$test.isThrownException;
   var _parts$string = parts.string,
       matchFormat = _parts$string.matchFormat,
-      includes = _parts$string.includes;
+      includes = _parts$string.includes,
+      replaceAll = _parts$string.replaceAll;
 
   var test_matchFormat = function test_matchFormat() {
     checkEqual(true, matchFormat('number', '123'));
@@ -96,10 +97,35 @@ var test_execute_string = function test_execute_string(parts) {
     }), 'test_includes thrown 4');
   };
 
-  console.log('  test string.js start.');
+  var test_replaceAll = function test_replaceAll() {
+    checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
+    checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
+    checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // parameter args
+
+    checkEqual('abcabc', replaceAll({
+      str: 'abab',
+      before: 'ab',
+      after: 'abc'
+    })); // exception
+
+    checkEqual(false, isThrown(function () {
+      replaceAll('1212', '12', '123');
+    }));
+    checkEqual(true, isThrown(function () {
+      replaceAll(1212, '12', '123');
+    }));
+    checkEqual(true, isThrown(function () {
+      replaceAll('1212', 12, '123');
+    }));
+    checkEqual(true, isThrown(function () {
+      replaceAll('1212', '12', 123);
+    }));
+  };
+
+  console.log('  test string.js');
   test_matchFormat();
   test_includes();
-  console.log('  test string.js finish.');
+  test_replaceAll();
 };
 
 module.exports = {

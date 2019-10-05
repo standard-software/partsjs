@@ -112,13 +112,12 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
     consoleHook.hook(methodName, consoleMethod);
   };
 
-  console.log('  test consoleHook.js start.');
+  console.log('  test consoleHook.js');
   test_consoleHook('log');
   test_consoleHook('info');
   test_consoleHook('warn');
   test_consoleHook('error');
   test_consoleHook('debug');
-  console.log('  test consoleHook.js finish.');
 };
 
 module.exports = {

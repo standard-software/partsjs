@@ -351,14 +351,13 @@ var test_execute_compare = function test_execute_compare(parts) {
     }));
   };
 
-  console.log('  test compare.js start.');
+  console.log('  test compare.js');
   test_equal();
   test_or();
   test_match();
   test_matchValue();
   test_initialValue();
   test_isEmpty();
-  console.log('  test commpare.js finish.');
 };
 
 module.exports = {

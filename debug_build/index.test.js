@@ -34,17 +34,17 @@ var test_execute_index = function test_execute_index(parts) {
         copyProperty = _parts$object.copyProperty,
         propertyCount = _parts$object.propertyCount,
         inProperty = _parts$object.inProperty;
-    checkEqual(123, propertyCount(parts));
+    checkEqual(124, propertyCount(parts));
     checkEqual(74, propertyCount(parts.type));
     checkEqual(5, propertyCount(parts.test));
     checkEqual(6, propertyCount(parts.compare));
     checkEqual(9, propertyCount(parts.convert));
     checkEqual(7, propertyCount(parts.number));
-    checkEqual(2, propertyCount(parts.string));
+    checkEqual(3, propertyCount(parts.string));
     checkEqual(6, propertyCount(parts.object));
     checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,string,object,consoleHook'));
     checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,isBooleanArray,isNotNumberArray,' + 'isFunc,isNotObj,' + 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''));
-    checkEqual(false, inProperty(parts, 'iscludes,' + ''));
+    checkEqual(false, inProperty(parts, 'abc,' + ''));
   };
 
   console.log('test start. ' + parts.VERSION);
@@ -58,7 +58,6 @@ var test_execute_index = function test_execute_index(parts) {
   test_execute_object(parts);
   test_execute_consoleHook(parts);
   test_execute_nameSpace(parts);
-  console.log('test finish.');
 };
 
 module.exports = {

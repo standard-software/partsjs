@@ -23,14 +23,17 @@ var _require = require('../type/type.js'),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = require('./inProperty.js'),
+var _require2 = require('../object/_inProperty.js'),
     _inProperty = _require2._inProperty;
+
+var _require3 = require('../string/_replaceAll.js'),
+    _replaceAll = _require3._replaceAll;
 
 var _copyProperty = function _copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
+    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
 
   for (var i = 0; i < propertyArray.length; i += 1) {

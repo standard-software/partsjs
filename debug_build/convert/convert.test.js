@@ -279,11 +279,10 @@ var test_execute_convert = function test_execute_convert(parts) {
     }));
   };
 
-  console.log('  test convert.js start.');
+  console.log('  test convert.js');
   test_numberToString();
   test_stringToNumber();
   test_stringToInteger();
-  console.log('  test convert.js finish.');
 };
 
 module.exports = {

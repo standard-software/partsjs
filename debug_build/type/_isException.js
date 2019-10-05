@@ -1,9 +1,9 @@
 "use strict";
 
-var _require = require('./_isType.js'),
+var _require = require('../type/_isType.js'),
     _isError = _require._isError;
 
-var _require2 = require('../object/inProperty.js'),
+var _require2 = require('../object/_inProperty.js'),
     _inProperty = _require2._inProperty;
 /**
  * _isException

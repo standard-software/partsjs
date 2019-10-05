@@ -1,6 +1,6 @@
 "use strict";
 
-var _require = require('./_isType.js'),
+var _require = require('../type/_isType.js'),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -28,7 +28,7 @@ var _require = require('./_isType.js'),
     _isNotDate = _require._isNotDate,
     _isNotRegExp = _require._isNotRegExp;
 
-var _require2 = require('./_isException.js'),
+var _require2 = require('../type/_isException.js'),
     _isException = _require2._isException,
     _isNotException = _require2._isNotException;
 /**

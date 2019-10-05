@@ -60,9 +60,8 @@ var test_execute_test = function test_execute_test(parts) {
     checkEqual(false, isThrown(function () {}));
   };
 
-  console.log('  test test.js start.');
+  console.log('  test test.js');
   test_isThrown();
-  console.log('  test test.js finish.');
 };
 
 module.exports = {
