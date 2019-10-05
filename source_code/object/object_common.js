@@ -7,12 +7,16 @@ const {
 
 const {
   _inProperty,
-} = require('./_inProperty.js');
+} = require('../object/_inProperty.js');
+
+const {
+  _replaceAll,
+} = require('../string/_replaceAll.js');
 
 const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 
   if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
+    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
 
   for (let i = 0; i < propertyArray.length; i += 1) {

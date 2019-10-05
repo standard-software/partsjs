@@ -5,6 +5,10 @@ const {
   _isException,
 } = require('../type/_isType.js');
 
+const {
+  _replaceAll,
+} = require('../string/_replaceAll.js');
+
 const _inProperty = (object, propertyArray, hasOwn = true) => {
 
   if (!_isObject(object)) {
@@ -12,7 +16,7 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
   }
 
   if (_isString(propertyArray)) {
-    propertyArray = propertyArray.split(',');
+    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
 
   for (let i = 0; i < propertyArray.length; i += 1) {
