@@ -63,10 +63,10 @@ const NUMBER =
 
 // string
 const STRING_PUBLIC =
-  'matchFormat,includes,' +
+  'matchFormat,includes,replaceAll,' +
   ''
 const STRING_ROOT =
-  'matchFormat,' +
+  'matchFormat,replaceAll,' +
   ''
 
 // object

@@ -19,13 +19,13 @@ const test_execute_index = (parts) => {
       copyProperty,propertyCount,inProperty,
     } = parts.object;
 
-    checkEqual(123, propertyCount(parts));
+    checkEqual(124, propertyCount(parts));
     checkEqual(74,  propertyCount(parts.type));
     checkEqual(5,   propertyCount(parts.test));
     checkEqual(6,   propertyCount(parts.compare));
     checkEqual(9,   propertyCount(parts.convert));
     checkEqual(7,   propertyCount(parts.number));
-    checkEqual(2,   propertyCount(parts.string));
+    checkEqual(3,   propertyCount(parts.string));
     checkEqual(6,   propertyCount(parts.object));
     checkEqual(true,
       inProperty(
@@ -62,7 +62,7 @@ const test_execute_index = (parts) => {
     checkEqual(false,
       inProperty(
         parts,
-        'iscludes,' +
+        'abc,' +
         ''
       )
     );

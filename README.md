@@ -102,6 +102,10 @@ You can now use the functions of the parts object.
 
 ### 2.3.0
 #### 2019/10/05(Sat)
+- add replaceAll
+
+### 2.3.0
+#### 2019/10/05(Sat)
 - add number.js
   - isMultiples,isEven,isOdd,
   - round,nearEqual,inRange,randomInt
@@ -145,54 +149,6 @@ You can now use the functions of the parts object.
 - define public function(property) name
 - update test_isObject
 - add Shortcut Name
-
-### 1.0.0
-Verssion 1.x.x = Previous product  
-[standard-software / Copipe.js](https://github.com/standard-software/copipejs)
-
-### 0.9.0
-#### 2019/09/17(Tue)
-- add consoleHook.js
-
-### 0.8.1
-#### 2019/09/16(Mon)
-- add string.includes
-  - test code
-- update string.matchFormat
-
-### 0.8.0
-#### 2019/09/15(Sun)
-- add convert.js
-  - numberToString,stringToNumber,stringToInteger,
-- add string.js
-  - matchFormat
-- add _isNotXxx
-- change defaultValue -> initalValue
-
-### 0.7.2
-#### 2019/09/14(Sat)
-- update ErrorMessage
-- add Polyfill Array.forEach
-- add _text.js(discard)
-
-### 0.7.1
-#### 2019/09/12(Thu)
-- update or, match, matchValue Error handling
-  - SyntaxError -> TypeError, ReferenceError
-- update ErrorMessage
-
-### 0.7.0
-#### 2019/09/05(Thu)
-- add compare.js
-  - equal, or, match, matchValue, defaultValue,
-  - add test code for each
-- support named arguemnt
-  - equal and add test_sc
-  - or
-  - update match, matchValue
-- add polyfill.js
-  - String.includes startsWith endsWith
-  - Array.some map
 
 
 ### More Info

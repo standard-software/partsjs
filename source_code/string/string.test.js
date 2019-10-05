@@ -7,8 +7,7 @@ const test_execute_string = (parts) => {
   } = parts.test;
 
   const {
-    matchFormat,
-    includes,
+    matchFormat, includes, replaceAll,
   } = parts.string;
 
   const test_matchFormat = () => {
@@ -114,9 +113,30 @@ const test_execute_string = (parts) => {
     ), 'test_includes thrown 4');
   };
 
+  const test_replaceAll = () => {
+    checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
+    checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
+    checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));
+
+    // parameter args
+    checkEqual('abcabc',  replaceAll({
+      str:    'abab',
+      before: 'ab',
+      after:  'abc',
+    }));
+
+    // exception
+    checkEqual(false, isThrown(() => { replaceAll('1212', '12', '123')}));
+    checkEqual(true,  isThrown(() => { replaceAll( 1212 , '12', '123')}));
+    checkEqual(true,  isThrown(() => { replaceAll('1212',  12 , '123')}));
+    checkEqual(true,  isThrown(() => { replaceAll('1212', '12',  123 )}));
+
+  };
+
   console.log('  test string.js');
   test_matchFormat();
   test_includes();
+  test_replaceAll();
 }
 
 module.exports = {
