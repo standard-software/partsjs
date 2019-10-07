@@ -46,6 +46,7 @@ const or = (value, compareArray) => {
       'or args(compareArray) is not array'
     );
   }
+
   return _or(value, compareArray)
 };
 

@@ -75,6 +75,15 @@ const OBJECT =
   'copyProp,propCount,inProp,' +
   ''
 
+// array
+const ARRAY_PUBLIC =
+  'equal,' +
+  ''
+const ARRAY_ROOT =
+  '' +
+  ''
+
+
 // consoleHook
 const _CONSOLE_HOOK_BASE =
   ',Log,Info,Warn,Error,Debug';
@@ -94,6 +103,8 @@ const propertyNames = {
   STRING_PUBLIC,
   STRING_ROOT,
   OBJECT,
+  ARRAY_PUBLIC,
+  ARRAY_ROOT,
   CONSOLE_HOOK,
 };
 

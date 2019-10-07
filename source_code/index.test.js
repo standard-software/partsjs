@@ -8,6 +8,7 @@ const test_execute_index = (parts) => {
   const { test_execute_number   } = require('./number/number.test.js');
   const { test_execute_string   } = require('./string/string.test.js');
   const { test_execute_object   } = require('./object/object.test.js');
+  const { test_execute_array   } = require('./array/array.test.js');
   const { test_execute_consoleHook  } = require('./consoleHook/consoleHook.test.js');
 
   const test_execute_nameSpace = (parts) => {
@@ -19,7 +20,7 @@ const test_execute_index = (parts) => {
       copyProperty,propertyCount,inProperty,
     } = parts.object;
 
-    checkEqual(124, propertyCount(parts));
+    checkEqual(125, propertyCount(parts));
     checkEqual(74,  propertyCount(parts.type));
     checkEqual(5,   propertyCount(parts.test));
     checkEqual(6,   propertyCount(parts.compare));
@@ -77,6 +78,7 @@ const test_execute_index = (parts) => {
   test_execute_number(parts);
   test_execute_string(parts);
   test_execute_object(parts);
+  test_execute_array(parts);
   test_execute_consoleHook(parts);
   test_execute_nameSpace(parts);
 }

@@ -1,4 +1,5 @@
 const polyfill = require('./polyfill.js');
+const _constant = require('./constant.js');
 const _type = require('./type/type.js');
 const _test = require('./test/test.js');
 const _syntax = require('./syntax/syntax.js');
@@ -7,7 +8,7 @@ const _convert = require('./convert/convert.js');
 const _number = require('./number/number.js');
 const _string = require('./string/string.js');
 const _object = require('./object/object.js');
-const _constant = require('./constant.js');
+const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
 const VERSION = '2.4.0 beta';
@@ -68,6 +69,15 @@ const object = _object._copyProperty(_object,
 );
 rootNames = { ...rootNames, ...object };
 
+// array
+const array = _object._copyProperty(_array,
+  _constant.propertyNames.ARRAY_PUBLIC
+);
+_object._copyProperty(_array,
+  _constant.propertyNames.ARRAY_ROOT,
+  rootNames
+);
+
 // consoleHook
 const consoleHook = _object._copyProperty(_consoleHook,
   _constant.propertyNames.CONSOLE_HOOK
@@ -84,6 +94,7 @@ module.exports = {
   string,
   consoleHook,
   object,
+  array,
 
   ...rootNames,
 };

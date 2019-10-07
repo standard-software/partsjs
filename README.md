@@ -100,9 +100,13 @@ You can now use the functions of the parts object.
 
 ## Version
 
-### 2.3.0
-#### 2019/10/05(Sat)
+### 2.4.0
+#### 2019/10/06(Sun)
 - add replaceAll
+- add _inProperty.js
+- update _copyProperty _inProperty 
+- update test message output
+- add array.js equal
 
 ### 2.3.0
 #### 2019/10/05(Sat)
