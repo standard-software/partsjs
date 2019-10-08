@@ -77,7 +77,7 @@ const OBJECT =
 
 // array
 const ARRAY_PUBLIC =
-  'equal,' +
+  'equal, min, max,' +
   ''
 const ARRAY_ROOT =
   '' +

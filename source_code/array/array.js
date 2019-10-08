@@ -47,8 +47,62 @@ const equal = (value1, value2) => {
   return _equal(value1, value2);
 };
 
+const _min = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
+  var result = array[0];
+  for (var i = 1, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])){
+      throw new TypeError(
+        '_min args(array) element is not number'
+      );
+    }
+    if (array[i] < result) {
+      result = array[i];
+    }
+  }
+  return result;
+};
+
+const min = (array) => {
+  if (!_isArray(array)){
+    throw new TypeError(
+      'min args(array) is not array'
+    );
+  }
+  return _min(array);
+};
+
+const _max = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
+  var result = array[0];
+  for (var i = 1, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])){
+      throw new TypeError(
+        '_max args(array) element is not number'
+      );
+    }
+    if (result < array[i]) {
+      result = array[i];
+    }
+  }
+  return result;
+};
+
+const max = (array) => {
+  if (!_isArray(array)){
+    throw new TypeError(
+      'max args(array) is not array'
+    );
+  }
+  return _max(array);
+};
+
 module.exports = {
-  _equal,
-  equal,
+  _equal, _min, _max,
+  equal, min, max,
 };
 

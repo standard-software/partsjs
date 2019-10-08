@@ -57,17 +57,71 @@ const test_execute_array = (parts) => {
     // exception
     checkEqual(false, isThrown(() => {
       array.equal([1,2,3], [4,5,6]);
-    }), 'test matchFormat exception');
+    }));
     checkEqual(true, isThrownException(() => {
       array.equal([1,2,3], 456);
-    }, (new TypeError).name), 'test matchFormat exception');
+    }, (new TypeError).name));
     checkEqual(true, isThrownException(() => {
       array.equal(123, [4,5,6]);
-    }, (new TypeError).name), 'test matchFormat exception');
+    }, (new TypeError).name));
   };
+
+  const test_min = () => {
+    checkEqual(5, array.min([5, 10, 15, 20]));
+    checkEqual(1, array.min([5, 4, 3, 2, 1]));
+    checkEqual(3, array.min([5, 4, 3,]));
+
+    // exception
+    checkEqual(false, isThrown(() => {
+      array.min([1,2,3]);
+    }));
+    checkEqual(false, isThrown(() => {
+      array.min([1,2,3,]);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.min('1,2,3');
+    }));
+    checkEqual(true, isThrown(() => {
+      array.min([1,,3]);
+    }));
+    checkEqual(false, isThrown(() => {
+      array.min([,1,2,3]);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.min([1,,3,]);
+    }));
+  }
+
+  const test_max = () => {
+    checkEqual(20, array.max([5, 10, 15, 20]));
+    checkEqual(5, array.max([5, 4, 3, 2, 1]));
+    checkEqual(3, array.max([1, 2, 3,]));
+
+    // exception
+    checkEqual(false, isThrown(() => {
+      array.max([1,2,3]);
+    }));
+    checkEqual(false, isThrown(() => {
+      array.max([1,2,3,]);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.max('1,2,3');
+    }));
+    checkEqual(true, isThrown(() => {
+      array.max([1,,3]);
+    }));
+    checkEqual(false, isThrown(() => {
+      array.max([,1,2,3]);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.max([1,,3,]);
+    }));
+  }
 
   console.log('  test array.js');
   test_array_equal();
+  test_min();
+  test_max();
 }
 
 module.exports = {
