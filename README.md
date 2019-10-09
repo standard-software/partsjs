@@ -101,7 +101,7 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.4.0
-#### 2019/10/08(Tue)
+#### 2019/10/09(Wed)
 - add replaceAll
 - add _inProperty.js
 - update _copyProperty _inProperty 

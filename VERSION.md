@@ -2,6 +2,16 @@
 
 ## Version
 
+### 2.4.0
+#### 2019/10/09(Wed)
+- add replaceAll
+- add _inProperty.js
+- update _copyProperty _inProperty 
+- update test message output
+- add array.js equal min max clone cloneDeep
+- add object.clone cloneDeep
+- update Package.json main
+
 ### 2.3.0
 #### 2019/10/05(Sat)
 - add number.js
