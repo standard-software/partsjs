@@ -3,7 +3,7 @@
   "name": "@standard-software/parts",
   "version": "2.3.0",
   "description": "JavaScript Code Parts",
-  "main": "./source_code/index.js",
+  "main": "./release_build/parts.js",
   "scripts": {
     "babel": "./node_modules/.bin/babel --config-file ./config/babel.config.js ./source_code --out-dir ./debug_build",
     "webpack": "./node_modules/.bin/webpack --config ./config/webpack.config.js",
