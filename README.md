@@ -106,7 +106,9 @@ You can now use the functions of the parts object.
 - add _inProperty.js
 - update _copyProperty _inProperty 
 - update test message output
-- add array.js equal min max
+- add array.js equal min max clone cloneDeep
+- add object.clone cloneDeep
+- update Package.json main
 
 ### 2.3.0
 #### 2019/10/05(Sat)

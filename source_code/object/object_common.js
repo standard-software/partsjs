@@ -81,15 +81,64 @@ const propertyCount = (object) => {
   return _propertyCount(object);
 }
 
+/**
+ * object.clone
+ */
+const _clone = (sourceObject) => {
+  const result = {};
+  for (let [key, value] of Object.entries(sourceObject)) {
+    result[key] = value;
+  }
+  return result;
+}
+
+const clone = (sourceObject) => {
+  if (!_isObject(sourceObject)) {
+    throw new TypeError(
+      'object.clone args(sourceObject) is not object'
+    );
+  }
+
+  return _clone(sourceObject)
+}
+
+const _cloneDeep = (sourceObject) => {
+  const __cloneDeep = (sourceObject) => {
+    const result = {};
+    for (let [key, value] of Object.entries(sourceObject)) {
+      if (_isObject(value)) {
+        result[key] = (__cloneDeep(value))
+      } else {
+        result[key] = value;
+      }
+    }
+    return result;
+  };
+  return __cloneDeep(sourceObject);
+}
+
+const cloneDeep = (sourceObject, destObject = {}) => {
+  if (!_isObject(sourceObject)) {
+    throw new TypeError(
+      'object.cloneDeep args(sourceObject) is not object'
+    );
+  }
+
+  return _cloneDeep(sourceObject)
+}
+
+
 const copyProp = copyProperty;
 const propCount = propertyCount;
 
 module.exports = {
   _copyProperty,
   _propertyCount,
+  _clone, _cloneDeep,
 
   copyProperty,
   propertyCount,
+  clone, cloneDeep,
 
   copyProp,
   propCount,

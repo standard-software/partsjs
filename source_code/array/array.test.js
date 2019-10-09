@@ -66,6 +66,74 @@ const test_execute_array = (parts) => {
     }, (new TypeError).name));
   };
 
+  const test_array_clone = () =>{
+    const testArray1 = [1,2,3];
+
+    // no clone
+    var array1 = testArray1;
+    array1[0] = 0;
+    checkEqual(0, array1[0]);
+    checkEqual(0, testArray1[0]);
+    testArray1[0] = 1;
+
+    // clone
+    var array1 = array.clone(testArray1);
+    array1[0] = 0;
+    checkEqual(0, array1[0]);
+    checkEqual(1, testArray1[0]);
+
+    // no clone deep
+    var testArray2 = ['a', 'b', 'c'];
+    var testArray3 = [1,2,3, testArray2];
+    var array1 = array.clone(testArray3);
+    array1[0] = 0;
+    checkEqual(0, array1[0]);
+    checkEqual(1, testArray3[0]);
+    checkEqual(true, array1[3] === testArray3[3]);
+    array1[3][0] = 'd';
+    checkEqual('d,b,c', array1[3].join(','));
+    checkEqual('d,b,c', testArray3[3].join(','));
+
+    // clone deep
+    var testArray2 = ['a', 'b', 'c'];
+    var testArray3 = [1,2,3, testArray2];
+    var array1 = array.cloneDeep(testArray3);
+    array1[0] = 0;
+    checkEqual(0, array1[0]);
+    checkEqual(1, testArray3[0]);
+    checkEqual(false, array1[3] === testArray3[3]);
+    array1[3][0] = 'd';
+    checkEqual('d,b,c', array1[3].join(','));
+    checkEqual('a,b,c', testArray3[3].join(','));
+
+    // exception
+    checkEqual(false, isThrown(() => {
+      array.clone([1,2,3]);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.clone(1);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.clone('a');
+    }));
+    checkEqual(true, isThrown(() => {
+      array.clone({});
+    }));
+
+    checkEqual(false, isThrown(() => {
+      array.cloneDeep([1,2,3]);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.cloneDeep(1);
+    }));
+    checkEqual(true, isThrown(() => {
+      array.cloneDeep('a');
+    }));
+    checkEqual(true, isThrown(() => {
+      array.cloneDeep({});
+    }));
+  }
+
   const test_min = () => {
     checkEqual(5, array.min([5, 10, 15, 20]));
     checkEqual(1, array.min([5, 4, 3, 2, 1]));
@@ -120,6 +188,7 @@ const test_execute_array = (parts) => {
 
   console.log('  test array.js');
   test_array_equal();
+  test_array_clone();
   test_min();
   test_max();
 }

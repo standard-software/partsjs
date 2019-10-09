@@ -47,6 +47,59 @@ const equal = (value1, value2) => {
   return _equal(value1, value2);
 };
 
+/**
+ * array.clone
+ */
+const _clone = (sourceArray) => {
+  const result = [];
+  // for (let [index, value] of sourceArray.entries()) {
+  for (let i = 0, l = sourceArray.length; i < l; i += 1) {
+    const value = sourceArray[i];
+    result.push(value);
+  }
+  return result;
+}
+
+const clone = (sourceArray) => {
+  if (!_isArray(sourceArray)) {
+    throw new TypeError(
+      'array.clone args(sourceArray) is not array'
+    );
+  }
+
+  return _clone(sourceArray)
+}
+
+const _cloneDeep = (sourceArray) => {
+  const __cloneDeep = (sourceArray) => {
+    const result = [];
+    // for (let [index, value] of sourceArray.entries()) {
+    for (let i = 0, l = sourceArray.length; i < l; i += 1) {
+      const value = sourceArray[i];
+      if (_isArray(value)) {
+        result.push(__cloneDeep(value))
+      } else {
+        result.push(value);
+      }
+    }
+    return result;
+  };
+  return __cloneDeep(sourceArray);
+}
+
+const cloneDeep = (sourceArray) => {
+  if (!_isArray(sourceArray)) {
+    throw new TypeError(
+      'array.cloneDeep args(sourceArray) is not array'
+    );
+  }
+
+  return _cloneDeep(sourceArray)
+}
+
+/**
+ * array.min max
+ */
 const _min = (array) => {
   if (array.length === 0) {
     return null;
@@ -102,7 +155,10 @@ const max = (array) => {
 };
 
 module.exports = {
-  _equal, _min, _max,
-  equal, min, max,
+  _equal, _clone, _cloneDeep,
+  _min, _max,
+
+  equal, clone, cloneDeep,
+  min, max,
 };
 

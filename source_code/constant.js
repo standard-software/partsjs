@@ -70,17 +70,23 @@ const STRING_ROOT =
   ''
 
 // object
-const OBJECT =
+const OBJECT_PUBLIC =
+  'clone, cloneDeep,' +
+  'copyProperty,propertyCount,inProperty,' +
+  'copyProp,propCount,inProp,' +
+  ''
+const OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
   'copyProp,propCount,inProp,' +
   ''
 
 // array
 const ARRAY_PUBLIC =
-  'equal, min, max,' +
+  'equal, clone, cloneDeep,' +
+  'min, max,' +
   ''
 const ARRAY_ROOT =
-  '' +
+  'min, max,' +
   ''
 
 
@@ -102,7 +108,8 @@ const propertyNames = {
   NUMBER,
   STRING_PUBLIC,
   STRING_ROOT,
-  OBJECT,
+  OBJECT_PUBLIC,
+  OBJECT_ROOT,
   ARRAY_PUBLIC,
   ARRAY_ROOT,
   CONSOLE_HOOK,

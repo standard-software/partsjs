@@ -65,9 +65,12 @@ _object._copyProperty(_string,
 
 // object
 const object = _object._copyProperty(_object,
-  _constant.propertyNames.OBJECT
+  _constant.propertyNames.OBJECT_PUBLIC
 );
-rootNames = { ...rootNames, ...object };
+_object._copyProperty(_object,
+  _constant.propertyNames.OBJECT_ROOT,
+  rootNames
+);
 
 // array
 const array = _object._copyProperty(_array,
