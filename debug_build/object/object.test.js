@@ -4,10 +4,107 @@ var test_execute_object = function test_execute_object(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
       isThrown = _parts$test.isThrown;
+  var object = parts.object;
   var _parts$object = parts.object,
       copyProperty = _parts$object.copyProperty,
       inProperty = _parts$object.inProperty,
       propertyCount = _parts$object.propertyCount;
+
+  var test_object_clone = function test_object_clone() {
+    var testObject1 = {
+      a: 1,
+      b: 2,
+      c: 3
+    }; // no clone
+
+    var object1 = testObject1;
+    object1.a = 0;
+    checkEqual(0, object1.a);
+    checkEqual(0, testObject1.a);
+    testObject1.a = 1; // clone
+
+    var object1 = object.clone(testObject1);
+    object1.a = 0;
+    checkEqual(0, object1.a);
+    checkEqual(1, testObject1.a); // no clone deep
+
+    var testObject2 = {
+      a: 4,
+      b: 5,
+      c: 6
+    };
+    var testObject3 = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: testObject2
+    };
+    var object1 = object.clone(testObject3);
+    object1.a = 0;
+    checkEqual(0, object1.a);
+    checkEqual(1, testObject3.a);
+    checkEqual(true, object1.d === testObject3.d);
+    checkEqual(6, object1.d.c);
+    checkEqual(6, testObject3.d.c);
+    object1.d.a = 7;
+    checkEqual(7, object1.d.a);
+    checkEqual(7, testObject3.d.a); // clone deep
+
+    var testObject2 = {
+      a: 4,
+      b: 5,
+      c: 6
+    };
+    var testObject3 = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: testObject2
+    };
+    var object1 = object.cloneDeep(testObject3);
+    object1.a = 0;
+    checkEqual(0, object1.a);
+    checkEqual(1, testObject3.a);
+    checkEqual(true, object1.d !== testObject3.d);
+    checkEqual(6, object1.d.c);
+    checkEqual(6, testObject3.d.c);
+    object1.d.a = 7;
+    checkEqual(7, object1.d.a);
+    checkEqual(4, testObject3.d.a); // exception
+
+    checkEqual(false, isThrown(function () {
+      object.clone({
+        a: 1,
+        b: 2,
+        c: 3
+      });
+    }));
+    checkEqual(true, isThrown(function () {
+      object.clone(1);
+    }));
+    checkEqual(true, isThrown(function () {
+      object.clone('a');
+    }));
+    checkEqual(true, isThrown(function () {
+      object.clone([]);
+    }));
+    checkEqual(false, isThrown(function () {
+      object.cloneDeep({
+        a: 1,
+        b: 2,
+        c: 3
+      });
+    }));
+    checkEqual(true, isThrown(function () {
+      object.cloneDeep(1);
+    }));
+    checkEqual(true, isThrown(function () {
+      object.cloneDeep('a');
+    }));
+    checkEqual(true, isThrown(function () {
+      object.cloneDeep([]);
+    }));
+  };
 
   var test_copyProperty = function test_copyProperty() {
     var sourceObject = {
@@ -159,6 +256,7 @@ var test_execute_object = function test_execute_object(parts) {
   };
 
   console.log('  test object.js');
+  test_object_clone();
   test_copyProperty();
   test_inProperty();
   test_propertyCount();

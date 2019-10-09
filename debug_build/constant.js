@@ -44,7 +44,11 @@ var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' 
 var STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
 var STRING_ROOT = 'matchFormat,replaceAll,' + ''; // object
 
-var OBJECT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // consoleHook
+var OBJECT_PUBLIC = 'clone, cloneDeep,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
+var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // array
+
+var ARRAY_PUBLIC = 'equal, clone, cloneDeep,' + 'min, max,' + '';
+var ARRAY_ROOT = 'min, max,' + ''; // consoleHook
 
 var _CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
 var CONSOLE_HOOK = _CONSOLE_HOOK_BASE.split(',').map(function (item) {
@@ -63,7 +67,10 @@ var propertyNames = {
   NUMBER: NUMBER,
   STRING_PUBLIC: STRING_PUBLIC,
   STRING_ROOT: STRING_ROOT,
-  OBJECT: OBJECT,
+  OBJECT_PUBLIC: OBJECT_PUBLIC,
+  OBJECT_ROOT: OBJECT_ROOT,
+  ARRAY_PUBLIC: ARRAY_PUBLIC,
+  ARRAY_ROOT: ARRAY_ROOT,
   CONSOLE_HOOK: CONSOLE_HOOK
 };
 module.exports = {

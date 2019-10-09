@@ -63,9 +63,15 @@ var string = _object._copyProperty(_string, _constant.propertyNames.STRING_PUBLI
 _object._copyProperty(_string, _constant.propertyNames.STRING_ROOT, rootNames); // object
 
 
-var object = _object._copyProperty(_object, _constant.propertyNames.OBJECT);
+var object = _object._copyProperty(_object, _constant.propertyNames.OBJECT_PUBLIC);
 
-rootNames = _objectSpread({}, rootNames, {}, object); // consoleHook
+_object._copyProperty(_object, _constant.propertyNames.OBJECT_ROOT, rootNames); // array
+
+
+var array = _object._copyProperty(_array, _constant.propertyNames.ARRAY_PUBLIC);
+
+_object._copyProperty(_array, _constant.propertyNames.ARRAY_ROOT, rootNames); // consoleHook
+
 
 var consoleHook = _object._copyProperty(_consoleHook, _constant.propertyNames.CONSOLE_HOOK);
 
@@ -79,5 +85,6 @@ module.exports = _objectSpread({
   number: number,
   string: string,
   consoleHook: consoleHook,
-  object: object
+  object: object,
+  array: array
 }, rootNames);

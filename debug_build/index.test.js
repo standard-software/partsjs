@@ -25,8 +25,11 @@ var test_execute_index = function test_execute_index(parts) {
   var _require8 = require('./object/object.test.js'),
       test_execute_object = _require8.test_execute_object;
 
-  var _require9 = require('./consoleHook/consoleHook.test.js'),
-      test_execute_consoleHook = _require9.test_execute_consoleHook;
+  var _require9 = require('./array/array.test.js'),
+      test_execute_array = _require9.test_execute_array;
+
+  var _require10 = require('./consoleHook/consoleHook.test.js'),
+      test_execute_consoleHook = _require10.test_execute_consoleHook;
 
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var checkEqual = parts.test.checkEqual;
@@ -34,14 +37,15 @@ var test_execute_index = function test_execute_index(parts) {
         copyProperty = _parts$object.copyProperty,
         propertyCount = _parts$object.propertyCount,
         inProperty = _parts$object.inProperty;
-    checkEqual(124, propertyCount(parts));
+    checkEqual(127, propertyCount(parts));
     checkEqual(74, propertyCount(parts.type));
     checkEqual(5, propertyCount(parts.test));
     checkEqual(6, propertyCount(parts.compare));
     checkEqual(9, propertyCount(parts.convert));
     checkEqual(7, propertyCount(parts.number));
     checkEqual(3, propertyCount(parts.string));
-    checkEqual(6, propertyCount(parts.object));
+    checkEqual(8, propertyCount(parts.object));
+    checkEqual(5, propertyCount(parts.array));
     checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,string,object,consoleHook'));
     checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,isBooleanArray,isNotNumberArray,' + 'isFunc,isNotObj,' + 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''));
     checkEqual(false, inProperty(parts, 'abc,' + ''));
@@ -56,6 +60,7 @@ var test_execute_index = function test_execute_index(parts) {
   test_execute_number(parts);
   test_execute_string(parts);
   test_execute_object(parts);
+  test_execute_array(parts);
   test_execute_consoleHook(parts);
   test_execute_nameSpace(parts);
 };
