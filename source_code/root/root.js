@@ -8,6 +8,10 @@ const {
 const object = require('../object/object.js');
 const array = require('../array/array.js');
 
+const {
+  _copyProperty
+} = object;
+
 /**
  * root.clone
  */
@@ -46,17 +50,14 @@ const clone = (source) => {
   return _clone(source)
 }
 
+/**
+ * root.cloneDeep
+ */
 const _cloneDeep = (source) => {
   const __cloneDeepObject = (source) => {
     const result = {};
     for (let [key, value] of Object.entries(source)) {
-      if (_isObject(value)) {
-        result[key] = (__cloneDeepObject(value))
-      } else if (_isArray(value)) {
-        result[key] = (__cloneDeepArray(value))
-      } else {
-        result[key] = value;
-      }
+      result[key] = conditionalReturn(value);
     }
     return result;
   };
@@ -64,16 +65,25 @@ const _cloneDeep = (source) => {
     const result = [];
     for (let i = 0, l = source.length; i < l; i += 1) {
       const value = source[i];
-      if (_isObject(value)) {
-        result.push(__cloneDeepObject(value));
-      } else if (_isArray(value)) {
-        result.push(__cloneDeepArray(value));
-      } else {
-        result.push(value);
-      }
+      result.push(conditionalReturn(value))
     }
     return result;
   };
+  const conditionalReturn = (value) => {
+    if (_isObject(value)) {
+      return __cloneDeepObject(value);
+    } else if (_isArray(value)) {
+      return __cloneDeepArray(value);
+    } else {
+      for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
+        const { result, cloneValue } = _cloneDeep.functions[i](value);
+        if (result) {
+          return cloneValue;
+        }
+      }
+      return value;
+    }
+  }
   const __cloneDeep = (source) => {
     if (_isObject(source)) {
       return __cloneDeepObject(source);
@@ -84,6 +94,23 @@ const _cloneDeep = (source) => {
   };
   return __cloneDeep(source);
 }
+_cloneDeep.functions = [];
+_cloneDeep.clearFunctions = () => {
+  _cloneDeep.functions = [];
+};
+_cloneDeep.pushFunction = (func) => {
+  _cloneDeep.functions.push(func);
+};
+_cloneDeep.dateClone = (element) =>
+  _isDate(element)
+  ? {
+    result: true,
+    cloneValue: new Date(element.getTime()),
+  }
+  : {
+    result: false,
+  }
+_cloneDeep.pushFunction(_cloneDeep.dateClone);
 
 const cloneDeep = (source) => {
   if (!(_isObject(source) || _isArray(source))) {
@@ -94,6 +121,7 @@ const cloneDeep = (source) => {
 
   return _cloneDeep(source)
 }
+_copyProperty(_cloneDeep, 'clearFunctions,pushFunction,dateClone', cloneDeep);
 
 module.exports = {
   _clone, _cloneDeep,

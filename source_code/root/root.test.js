@@ -39,6 +39,19 @@ const test_execute_root = (parts) => {
     checkEqual(7, object1.d.a);
     checkEqual(7, testObject3.d.a);
 
+    // exception
+    checkEqual(false, isThrown(() => {
+      clone({ a: 1, b: 2, c: 3 });
+    }));
+    checkEqual(true, isThrown(() => {
+      clone(1);
+    }));
+    checkEqual(true, isThrown(() => {
+      clone('a');
+    }));
+  }
+
+  const test_cloneDeep_object = () =>{
     // clone deep
     var testObject2 = { a: 4, b: 5, c: 6 };
     var testObject3 = { a: 1, b: 2, c: 3, d: testObject2 };
@@ -54,16 +67,6 @@ const test_execute_root = (parts) => {
     checkEqual(4, testObject3.d.a);
 
     // exception
-    checkEqual(false, isThrown(() => {
-      clone({ a: 1, b: 2, c: 3 });
-    }));
-    checkEqual(true, isThrown(() => {
-      clone(1);
-    }));
-    checkEqual(true, isThrown(() => {
-      clone('a');
-    }));
-
     checkEqual(false, isThrown(() => {
       cloneDeep({ a: 1, b: 2, c: 3 });
     }));
@@ -103,6 +106,13 @@ const test_execute_root = (parts) => {
     checkEqual('d,b,c', array1[3].join(','));
     checkEqual('d,b,c', testArray3[3].join(','));
 
+    // exception
+    checkEqual(false, isThrown(() => {
+      clone([1,2,3]);
+    }));
+  }
+
+  const test_cloneDeep_array = () =>{
     // clone deep
     var testArray2 = ['a', 'b', 'c'];
     var testArray3 = [1,2,3, testArray2];
@@ -117,29 +127,11 @@ const test_execute_root = (parts) => {
 
     // exception
     checkEqual(false, isThrown(() => {
-      clone([1,2,3]);
-    }));
-    checkEqual(true, isThrown(() => {
-      clone(1);
-    }));
-    checkEqual(true, isThrown(() => {
-      clone('a');
-    }));
-
-    checkEqual(false, isThrown(() => {
       cloneDeep([1,2,3]);
-    }));
-    checkEqual(true, isThrown(() => {
-      cloneDeep(1);
-    }));
-    checkEqual(true, isThrown(() => {
-      cloneDeep('a');
     }));
   }
 
-  const test_clone_object_array_mix = () => {
-    const testObject1 = { a: 1, b: 2, c: 3 };
-    const testArray1 = [1,2,3];
+  const test_cloneDeep_object_array_mix = () => {
 
     // no clone deep array object
     var testValue1 = [1,2,3,{ a: 1, b: 2, c: 3 }];
@@ -209,13 +201,55 @@ const test_execute_root = (parts) => {
     checkEqual(7, value2.d[0].e);
     checkEqual(4, testValue2.d[0].e);
 
-
   };
+
+  const test_cloneDeep_date = () => {
+
+    // no clone
+    var date1 = new Date('2019/10/11');
+    checkEqual(2019,  date1.getFullYear());
+    checkEqual(10,    date1.getMonth() + 1);
+    checkEqual(11,    date1.getDate());
+    date1.setDate(12);
+    checkEqual(2019,  date1.getFullYear());
+    checkEqual(10,    date1.getMonth() + 1);
+    checkEqual(12,    date1.getDate());
+
+    // date type clone no
+    var testValue1 = [1,2,3, date1];
+    var value1 = clone(testValue1);
+    value1[3].setDate(13);
+    checkEqual(13, value1[3].getDate());
+    checkEqual(13, testValue1[3].getDate());
+    date1.setDate(12);
+
+    // date type cloneDeep no
+    var date1 = new Date('2019/10/11');
+    cloneDeep.clearFunctions();
+    var testValue1 = [1,2,3, date1];
+    var value1 = cloneDeep(testValue1);
+    value1[3].setDate(13);
+    checkEqual(13, value1[3].getDate());
+    checkEqual(13, testValue1[3].getDate());
+    cloneDeep.pushFunction(cloneDeep.dateClone);
+
+    // date type cloneDeep
+    var date1 = new Date('2019/10/11');
+    var testValue1 = [1,2,3, date1];
+    var value1 = cloneDeep(testValue1);
+    value1[3].setDate(13);
+    checkEqual(13, value1[3].getDate());
+    checkEqual(11, testValue1[3].getDate());
+
+  }
 
   console.log('  test root.js');
   test_clone_object();
+  test_cloneDeep_object();
   test_clone_array();
-  test_clone_object_array_mix();
+  test_cloneDeep_array();
+  test_cloneDeep_object_array_mix();
+  test_cloneDeep_date();
 }
 
 module.exports = {
