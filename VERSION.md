@@ -2,6 +2,14 @@
 
 ## Version
 
+### 2.5.0
+#### 2019/10/10(Thu)
+- add root.js clone cloneDeep
+  - support date type
+- delete object.clone cloneDeep
+- delete array.clone cloneDeep
+- update test test_index.html test_index.wsf
+
 ### 2.4.0
 #### 2019/10/09(Wed)
 - add replaceAll
