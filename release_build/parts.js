@@ -109,28 +109,35 @@ var polyfill = __webpack_require__(2);
 
 var _constant = __webpack_require__(3);
 
-var _type = __webpack_require__(4);
+var _root = __webpack_require__(4);
 
-var _test = __webpack_require__(10);
+var _type = __webpack_require__(5);
 
-var _syntax = __webpack_require__(11);
+var _test = __webpack_require__(15);
 
-var _compare = __webpack_require__(12);
+var _syntax = __webpack_require__(16);
 
-var _convert = __webpack_require__(16);
+var _compare = __webpack_require__(17);
 
-var _number = __webpack_require__(20);
+var _convert = __webpack_require__(18);
 
-var _string = __webpack_require__(17);
+var _number = __webpack_require__(22);
 
-var _object = __webpack_require__(13);
+var _string = __webpack_require__(19);
 
-var _array = __webpack_require__(21);
+var _object = __webpack_require__(11);
 
-var _consoleHook = __webpack_require__(22);
+var _array = __webpack_require__(14);
 
-var VERSION = '2.4.0';
-var rootNames = {}; // type
+var _consoleHook = __webpack_require__(23);
+
+var VERSION = '2.5.0 beta';
+var rootNames = {}; // root
+
+var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
+
+_object._copyProperty(_root, _constant.propertyNames.ROOT, rootNames); // type
+
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
 
@@ -185,7 +192,8 @@ module.exports = _objectSpread({
   string: string,
   consoleHook: consoleHook,
   object: object,
-  array: array
+  array: array,
+  root: root
 }, rootNames);
 
 /***/ }),
@@ -552,6 +560,8 @@ var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
 
 var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
 
+var ROOT = 'clone, cloneDeep,' + ''; // test
+
 var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + ''; // syntax
 
 var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
@@ -565,10 +575,10 @@ var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' 
 var STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
 var STRING_ROOT = 'matchFormat,replaceAll,' + ''; // object
 
-var OBJECT_PUBLIC = 'clone, cloneDeep,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
+var OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
 var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // array
 
-var ARRAY_PUBLIC = 'equal, clone, cloneDeep,' + 'min, max,' + '';
+var ARRAY_PUBLIC = 'equal,' + 'min, max,' + '';
 var ARRAY_ROOT = 'min, max,' + ''; // consoleHook
 
 var _CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
@@ -580,6 +590,7 @@ var CONSOLE_HOOK = _CONSOLE_HOOK_BASE.split(',').map(function (item) {
   return "accept".concat(item);
 }).join(',') + ',' + '';
 var propertyNames = {
+  ROOT: ROOT,
   TYPE: TYPE,
   TEST: TEST,
   SYNTAX: SYNTAX,
@@ -605,16 +616,197 @@ module.exports = {
 "use strict";
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var object = __webpack_require__(11);
+
+var array = __webpack_require__(14);
+
+var _copyProperty = object._copyProperty;
+/**
+ * root.clone
+ */
+
+var _clone = function _clone(source) {
+  var __cloneObject = function __cloneObject(source) {
+    var result = {};
+
+    for (var _i = 0, _Object$entries = Object.entries(source); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          key = _Object$entries$_i[0],
+          value = _Object$entries$_i[1];
+
+      result[key] = value;
+    }
+
+    return result;
+  };
+
+  var __cloneArray = function __cloneArray(source) {
+    var result = []; // for (let [index, value] of source.entries()) {
+
+    for (var i = 0, l = source.length; i < l; i += 1) {
+      var value = source[i];
+      result.push(value);
+    }
+
+    return result;
+  };
+
+  if (_isObject(source)) {
+    return __cloneObject(source);
+  } else if (_isArray(source)) {
+    return __cloneArray(source);
+  }
+};
+
+var clone = function clone(source) {
+  if (!(_isObject(source) || _isArray(source))) {
+    throw new TypeError('root.clone args(source) is not [object|array]');
+  }
+
+  return _clone(source);
+};
+/**
+ * root.cloneDeep
+ */
+
+
+var _cloneDeep = function _cloneDeep(source) {
+  var __cloneDeepObject = function __cloneDeepObject(source) {
+    var result = {};
+
+    for (var _i2 = 0, _Object$entries2 = Object.entries(source); _i2 < _Object$entries2.length; _i2++) {
+      var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+          key = _Object$entries2$_i[0],
+          value = _Object$entries2$_i[1];
+
+      result[key] = conditionalReturn(value);
+    }
+
+    return result;
+  };
+
+  var __cloneDeepArray = function __cloneDeepArray(source) {
+    var result = [];
+
+    for (var i = 0, l = source.length; i < l; i += 1) {
+      var value = source[i];
+      result.push(conditionalReturn(value));
+    }
+
+    return result;
+  };
+
+  var conditionalReturn = function conditionalReturn(value) {
+    if (_isObject(value)) {
+      return __cloneDeepObject(value);
+    } else if (_isArray(value)) {
+      return __cloneDeepArray(value);
+    } else {
+      for (var i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
+        var _cloneDeep$functions$ = _cloneDeep.functions[i](value),
+            result = _cloneDeep$functions$.result,
+            cloneValue = _cloneDeep$functions$.cloneValue;
+
+        if (result) {
+          return cloneValue;
+        }
+      }
+
+      return value;
+    }
+  };
+
+  var __cloneDeep = function __cloneDeep(source) {
+    if (_isObject(source)) {
+      return __cloneDeepObject(source);
+    } else if (_isArray(source)) {
+      return __cloneDeepArray(source);
+    }
+
+    return;
+  };
+
+  return __cloneDeep(source);
+};
+
+_cloneDeep.functions = [];
+
+_cloneDeep.clearFunctions = function () {
+  _cloneDeep.functions = [];
+};
+
+_cloneDeep.pushFunction = function (func) {
+  _cloneDeep.functions.push(func);
+};
+
+_cloneDeep.dateClone = function (element) {
+  return _isDate(element) ? {
+    result: true,
+    cloneValue: new Date(element.getTime())
+  } : {
+    result: false
+  };
+};
+
+_cloneDeep.pushFunction(_cloneDeep.dateClone);
+
+var cloneDeep = function cloneDeep(source) {
+  if (!(_isObject(source) || _isArray(source))) {
+    throw new TypeError('root.cloneDeep args(source) is not [object|array]');
+  }
+
+  return _cloneDeep(source);
+};
+
+_copyProperty(_cloneDeep, 'clearFunctions,pushFunction,dateClone', cloneDeep);
+
+module.exports = {
+  _clone: _clone,
+  _cloneDeep: _cloneDeep,
+  clone: clone,
+  cloneDeep: cloneDeep
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(5), {}, __webpack_require__(6), {}, __webpack_require__(9));
+module.exports = _objectSpread({}, __webpack_require__(6), {}, __webpack_require__(7), {}, __webpack_require__(10));
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -769,16 +961,16 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(5),
+var _require = __webpack_require__(6),
     _isError = _require._isError;
 
-var _require2 = __webpack_require__(7),
+var _require2 = __webpack_require__(8),
     _inProperty = _require2._inProperty;
 /**
  * _isException
@@ -808,13 +1000,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(5),
+var _require = __webpack_require__(6),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -829,7 +1021,7 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(8),
+var _require2 = __webpack_require__(9),
     _replaceAll = _require2._replaceAll;
 
 var _inProperty = function _inProperty(object, propertyArray) {
@@ -871,7 +1063,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -886,13 +1078,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(5),
+var _require = __webpack_require__(6),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -920,7 +1112,7 @@ var _require = __webpack_require__(5),
     _isNotDate = _require._isNotDate,
     _isNotRegExp = _require._isNotRegExp;
 
-var _require2 = __webpack_require__(6),
+var _require2 = __webpack_require__(7),
     _isException = _require2._isException,
     _isNotException = _require2._isNotException;
 /**
@@ -1200,13 +1392,337 @@ module.exports = {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+module.exports = _objectSpread({}, __webpack_require__(12), {}, __webpack_require__(8), {}, __webpack_require__(13));
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(8),
+    _inProperty = _require2._inProperty;
+
+var _require3 = __webpack_require__(9),
+    _replaceAll = _require3._replaceAll;
+
+var _copyProperty = function _copyProperty(fromObject, propertyArray) {
+  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (_isString(propertyArray)) {
+    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  }
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('copyProperty args(propertyArray) element is not string');
+    }
+
+    toObject[propertyArray[i]] = fromObject[propertyArray[i]];
+  }
+
+  return toObject;
+};
+
+var copyProperty = function copyProperty(fromObject, propertyArray) {
+  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
+    var _fromObject = fromObject;
+    fromObject = _fromObject.fromObject;
+    propertyArray = _fromObject.propertyArray;
+    var _fromObject$toObject = _fromObject.toObject;
+    toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
+  }
+
+  if (!_isObject(fromObject)) {
+    throw new TypeError('copyProperty args(fromObject) is not object');
+  }
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  if (!_isObject(toObject)) {
+    throw new TypeError('copyProperty args(toObject) is not object');
+  }
+
+  _copyProperty(fromObject, propertyArray, toObject);
+};
+
+var _propertyCount = function _propertyCount(object) {
+  var result = 0;
+
+  for (var _i = 0, _Object$entries = Object.entries(object); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+
+    result += 1;
+  }
+
+  return result;
+};
+
+var propertyCount = function propertyCount(object) {
+  if (!_isObject(object)) {
+    throw new TypeError('propertyCount args(object) is not object');
+  }
+
+  return _propertyCount(object);
+};
+
+var copyProp = copyProperty;
+var propCount = propertyCount;
+module.exports = {
+  _copyProperty: _copyProperty,
+  _propertyCount: _propertyCount,
+  copyProperty: copyProperty,
+  propertyCount: propertyCount,
+  copyProp: copyProp,
+  propCount: propCount
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(6),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(8),
+    _inProperty = _require2._inProperty;
+
+var inProperty = function inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (_inProperty(object, 'object,propertyArray')) {
+    var _object = object;
+    object = _object.object;
+    propertyArray = _object.propertyArray;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
+  } // no object check
+
+
+  if (!_isString(propertyArray)) {
+    if (!_isArray(propertyArray)) {
+      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+    }
+  }
+
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('copyProperty args(hasOwn) is not boolean');
+  }
+
+  return _inProperty(object, propertyArray, hasOwn);
+};
+
+var inProp = inProperty;
+module.exports = {
+  inProperty: inProperty,
+  inProp: inProp
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(8),
+    _inProperty = _require2._inProperty;
+/**
+ * array.equal
+ */
+
+
+var _equal = function _equal(value1, value2) {
+  if (value1.length !== value2.length) {
+    return false;
+  }
+
+  for (var i = 0, l = value1.length; i < l; i += 1) {
+    if (_isArray(value1[i]) && _isArray(value2[i])) {
+      if (_equal(value1[i], value2[i]) === false) {
+        return false;
+      }
+    } else if (value1[i] !== value2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var equal = function equal(value1, value2) {
+  if (_inProperty(value1, 'value1,value2')) {
+    var _value = value1;
+    value1 = _value.value1;
+    value2 = _value.value2;
+  }
+
+  if (!_isArray(value1)) {
+    throw new TypeError('array.equal args(value) is not array');
+  }
+
+  if (!_isArray(value2)) {
+    throw new TypeError('array.equal args(value2) is not array');
+  }
+
+  return _equal(value1, value2);
+};
+/**
+ * array.min max
+ */
+
+
+var _min = function _min(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  var result = array[0];
+
+  for (var i = 1, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_min args(array) element is not number');
+    }
+
+    if (array[i] < result) {
+      result = array[i];
+    }
+  }
+
+  return result;
+};
+
+var min = function min(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('min args(array) is not array');
+  }
+
+  return _min(array);
+};
+
+var _max = function _max(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  var result = array[0];
+
+  for (var i = 1, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_max args(array) element is not number');
+    }
+
+    if (result < array[i]) {
+      result = array[i];
+    }
+  }
+
+  return result;
+};
+
+var max = function max(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('max args(array) is not array');
+  }
+
+  return _max(array);
+};
+
+module.exports = {
+  _equal: _equal,
+  _min: _min,
+  _max: _max,
+  equal: equal,
+  min: min,
+  max: max
+};
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -1306,13 +1822,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 11 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -1543,13 +2059,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 12 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -1564,7 +2080,7 @@ var _require = __webpack_require__(4),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(13),
+var _require2 = __webpack_require__(11),
     _copyProperty = _require2._copyProperty,
     _propertyCount = _require2._propertyCount,
     _inProperty = _require2._inProperty;
@@ -1731,265 +2247,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-module.exports = _objectSpread({}, __webpack_require__(14), {}, __webpack_require__(7), {}, __webpack_require__(15));
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var _require = __webpack_require__(4),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(7),
-    _inProperty = _require2._inProperty;
-
-var _require3 = __webpack_require__(8),
-    _replaceAll = _require3._replaceAll;
-
-var _copyProperty = function _copyProperty(fromObject, propertyArray) {
-  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  if (_isString(propertyArray)) {
-    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
-  }
-
-  for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
-      continue;
-    }
-
-    if (!_isString(propertyArray[i])) {
-      throw new TypeError('copyProperty args(propertyArray) element is not string');
-    }
-
-    toObject[propertyArray[i]] = fromObject[propertyArray[i]];
-  }
-
-  return toObject;
-};
-
-var copyProperty = function copyProperty(fromObject, propertyArray) {
-  var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
-    var _fromObject = fromObject;
-    fromObject = _fromObject.fromObject;
-    propertyArray = _fromObject.propertyArray;
-    var _fromObject$toObject = _fromObject.toObject;
-    toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
-  }
-
-  if (!_isObject(fromObject)) {
-    throw new TypeError('copyProperty args(fromObject) is not object');
-  }
-
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
-    }
-  }
-
-  if (!_isObject(toObject)) {
-    throw new TypeError('copyProperty args(toObject) is not object');
-  }
-
-  _copyProperty(fromObject, propertyArray, toObject);
-};
-
-var _propertyCount = function _propertyCount(object) {
-  var result = 0;
-
-  for (var _i = 0, _Object$entries = Object.entries(object); _i < _Object$entries.length; _i++) {
-    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-        key = _Object$entries$_i[0],
-        value = _Object$entries$_i[1];
-
-    result += 1;
-  }
-
-  return result;
-};
-
-var propertyCount = function propertyCount(object) {
-  if (!_isObject(object)) {
-    throw new TypeError('propertyCount args(object) is not object');
-  }
-
-  return _propertyCount(object);
-};
-/**
- * object.clone
- */
-
-
-var _clone = function _clone(sourceObject) {
-  var result = {};
-
-  for (var _i2 = 0, _Object$entries2 = Object.entries(sourceObject); _i2 < _Object$entries2.length; _i2++) {
-    var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-        key = _Object$entries2$_i[0],
-        value = _Object$entries2$_i[1];
-
-    result[key] = value;
-  }
-
-  return result;
-};
-
-var clone = function clone(sourceObject) {
-  if (!_isObject(sourceObject)) {
-    throw new TypeError('object.clone args(sourceObject) is not object');
-  }
-
-  return _clone(sourceObject);
-};
-
-var _cloneDeep = function _cloneDeep(sourceObject) {
-  var __cloneDeep = function __cloneDeep(sourceObject) {
-    var result = {};
-
-    for (var _i3 = 0, _Object$entries3 = Object.entries(sourceObject); _i3 < _Object$entries3.length; _i3++) {
-      var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
-          key = _Object$entries3$_i[0],
-          value = _Object$entries3$_i[1];
-
-      if (_isObject(value)) {
-        result[key] = __cloneDeep(value);
-      } else {
-        result[key] = value;
-      }
-    }
-
-    return result;
-  };
-
-  return __cloneDeep(sourceObject);
-};
-
-var cloneDeep = function cloneDeep(sourceObject) {
-  var destObject = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  if (!_isObject(sourceObject)) {
-    throw new TypeError('object.cloneDeep args(sourceObject) is not object');
-  }
-
-  return _cloneDeep(sourceObject);
-};
-
-var copyProp = copyProperty;
-var propCount = propertyCount;
-module.exports = {
-  _copyProperty: _copyProperty,
-  _propertyCount: _propertyCount,
-  _clone: _clone,
-  _cloneDeep: _cloneDeep,
-  copyProperty: copyProperty,
-  propertyCount: propertyCount,
-  clone: clone,
-  cloneDeep: cloneDeep,
-  copyProp: copyProp,
-  propCount: propCount
-};
-
-/***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var _require = __webpack_require__(5),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(7),
-    _inProperty = _require2._inProperty;
-
-var inProperty = function inProperty(object, propertyArray) {
-  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-  if (_inProperty(object, 'object,propertyArray')) {
-    var _object = object;
-    object = _object.object;
-    propertyArray = _object.propertyArray;
-    var _object$hasOwn = _object.hasOwn;
-    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
-  } // no object check
-
-
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
-    }
-  }
-
-  if (!_isBoolean(hasOwn)) {
-    throw new TypeError('copyProperty args(hasOwn) is not boolean');
-  }
-
-  return _inProperty(object, propertyArray, hasOwn);
-};
-
-var inProp = inProperty;
-module.exports = {
-  inProperty: inProperty,
-  inProp: inProp
-};
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(4),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -2017,14 +2281,14 @@ var _require = __webpack_require__(4),
     _isNotRegExp = _require._isNotRegExp,
     _isNotException = _require._isNotException;
 
-var _require2 = __webpack_require__(12),
+var _require2 = __webpack_require__(17),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(17),
+var _require3 = __webpack_require__(19),
     _matchFormat = _require3._matchFormat;
 
-var _require4 = __webpack_require__(13),
+var _require4 = __webpack_require__(11),
     _copyProperty = _require4._copyProperty,
     _propertyCount = _require4._propertyCount,
     _inProperty = _require4._inProperty;
@@ -2148,7 +2412,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2160,16 +2424,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(18), {}, __webpack_require__(8), {}, __webpack_require__(19));
+module.exports = _objectSpread({}, __webpack_require__(20), {}, __webpack_require__(9), {}, __webpack_require__(21));
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -2184,10 +2448,10 @@ var _require = __webpack_require__(4),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(12),
+var _require2 = __webpack_require__(17),
     _match = _require2._match;
 
-var _require3 = __webpack_require__(7),
+var _require3 = __webpack_require__(8),
     _inProperty = _require3._inProperty;
 /**
  * matchFormat
@@ -2388,13 +2652,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -2409,10 +2673,10 @@ var _require = __webpack_require__(4),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(7),
+var _require2 = __webpack_require__(8),
     _inProperty = _require2._inProperty;
 
-var _require3 = __webpack_require__(8),
+var _require3 = __webpack_require__(9),
     _replaceAll = _require3._replaceAll;
 
 var replaceAll = function replaceAll(str, before, after) {
@@ -2443,13 +2707,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -2464,7 +2728,7 @@ var _require = __webpack_require__(4),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(13),
+var _require2 = __webpack_require__(11),
     _copyProperty = _require2._copyProperty,
     _propertyCount = _require2._propertyCount,
     _inProperty = _require2._inProperty;
@@ -2636,13 +2900,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _require = __webpack_require__(4),
+var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -2657,199 +2921,10 @@ var _require = __webpack_require__(4),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(7),
-    _inProperty = _require2._inProperty;
-/**
- * array.equal
- */
-
-
-var _equal = function _equal(value1, value2) {
-  if (value1.length !== value2.length) {
-    return false;
-  }
-
-  for (var i = 0, l = value1.length; i < l; i += 1) {
-    if (_isArray(value1[i]) && _isArray(value2[i])) {
-      if (_equal(value1[i], value2[i]) === false) {
-        return false;
-      }
-    } else if (value1[i] !== value2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-var equal = function equal(value1, value2) {
-  if (_inProperty(value1, 'value1,value2')) {
-    var _value = value1;
-    value1 = _value.value1;
-    value2 = _value.value2;
-  }
-
-  if (!_isArray(value1)) {
-    throw new TypeError('array.equal args(value) is not array');
-  }
-
-  if (!_isArray(value2)) {
-    throw new TypeError('array.equal args(value2) is not array');
-  }
-
-  return _equal(value1, value2);
-};
-/**
- * array.clone
- */
-
-
-var _clone = function _clone(sourceArray) {
-  var result = []; // for (let [index, value] of sourceArray.entries()) {
-
-  for (var i = 0, l = sourceArray.length; i < l; i += 1) {
-    var value = sourceArray[i];
-    result.push(value);
-  }
-
-  return result;
-};
-
-var clone = function clone(sourceArray) {
-  if (!_isArray(sourceArray)) {
-    throw new TypeError('array.clone args(sourceArray) is not array');
-  }
-
-  return _clone(sourceArray);
-};
-
-var _cloneDeep = function _cloneDeep(sourceArray) {
-  var __cloneDeep = function __cloneDeep(sourceArray) {
-    var result = []; // for (let [index, value] of sourceArray.entries()) {
-
-    for (var i = 0, l = sourceArray.length; i < l; i += 1) {
-      var value = sourceArray[i];
-
-      if (_isArray(value)) {
-        result.push(__cloneDeep(value));
-      } else {
-        result.push(value);
-      }
-    }
-
-    return result;
-  };
-
-  return __cloneDeep(sourceArray);
-};
-
-var cloneDeep = function cloneDeep(sourceArray) {
-  if (!_isArray(sourceArray)) {
-    throw new TypeError('array.cloneDeep args(sourceArray) is not array');
-  }
-
-  return _cloneDeep(sourceArray);
-};
-/**
- * array.min max
- */
-
-
-var _min = function _min(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 1, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_min args(array) element is not number');
-    }
-
-    if (array[i] < result) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-var min = function min(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('min args(array) is not array');
-  }
-
-  return _min(array);
-};
-
-var _max = function _max(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 1, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_max args(array) element is not number');
-    }
-
-    if (result < array[i]) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-var max = function max(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('max args(array) is not array');
-  }
-
-  return _max(array);
-};
-
-module.exports = {
-  _equal: _equal,
-  _clone: _clone,
-  _cloneDeep: _cloneDeep,
-  _min: _min,
-  _max: _max,
-  equal: equal,
-  clone: clone,
-  cloneDeep: cloneDeep,
-  min: min,
-  max: max
-};
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(4),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(12),
+var _require2 = __webpack_require__(17),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(17),
+var _require3 = __webpack_require__(19),
     _includes = _require3._includes;
 
 var original = {};

@@ -58,57 +58,6 @@ var equal = function equal(value1, value2) {
   return _equal(value1, value2);
 };
 /**
- * array.clone
- */
-
-
-var _clone = function _clone(sourceArray) {
-  var result = []; // for (let [index, value] of sourceArray.entries()) {
-
-  for (var i = 0, l = sourceArray.length; i < l; i += 1) {
-    var value = sourceArray[i];
-    result.push(value);
-  }
-
-  return result;
-};
-
-var clone = function clone(sourceArray) {
-  if (!_isArray(sourceArray)) {
-    throw new TypeError('array.clone args(sourceArray) is not array');
-  }
-
-  return _clone(sourceArray);
-};
-
-var _cloneDeep = function _cloneDeep(sourceArray) {
-  var __cloneDeep = function __cloneDeep(sourceArray) {
-    var result = []; // for (let [index, value] of sourceArray.entries()) {
-
-    for (var i = 0, l = sourceArray.length; i < l; i += 1) {
-      var value = sourceArray[i];
-
-      if (_isArray(value)) {
-        result.push(__cloneDeep(value));
-      } else {
-        result.push(value);
-      }
-    }
-
-    return result;
-  };
-
-  return __cloneDeep(sourceArray);
-};
-
-var cloneDeep = function cloneDeep(sourceArray) {
-  if (!_isArray(sourceArray)) {
-    throw new TypeError('array.cloneDeep args(sourceArray) is not array');
-  }
-
-  return _cloneDeep(sourceArray);
-};
-/**
  * array.min max
  */
 
@@ -171,13 +120,9 @@ var max = function max(array) {
 
 module.exports = {
   _equal: _equal,
-  _clone: _clone,
-  _cloneDeep: _cloneDeep,
   _min: _min,
   _max: _max,
   equal: equal,
-  clone: clone,
-  cloneDeep: cloneDeep,
   min: min,
   max: max
 };

@@ -31,6 +31,8 @@ var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
 
 var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
 
+var ROOT = 'clone, cloneDeep,' + ''; // test
+
 var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + ''; // syntax
 
 var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
@@ -44,10 +46,10 @@ var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' 
 var STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
 var STRING_ROOT = 'matchFormat,replaceAll,' + ''; // object
 
-var OBJECT_PUBLIC = 'clone, cloneDeep,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
+var OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
 var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // array
 
-var ARRAY_PUBLIC = 'equal, clone, cloneDeep,' + 'min, max,' + '';
+var ARRAY_PUBLIC = 'equal,' + 'min, max,' + '';
 var ARRAY_ROOT = 'min, max,' + ''; // consoleHook
 
 var _CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
@@ -59,6 +61,7 @@ var CONSOLE_HOOK = _CONSOLE_HOOK_BASE.split(',').map(function (item) {
   return "accept".concat(item);
 }).join(',') + ',' + '';
 var propertyNames = {
+  ROOT: ROOT,
   TYPE: TYPE,
   TEST: TEST,
   SYNTAX: SYNTAX,

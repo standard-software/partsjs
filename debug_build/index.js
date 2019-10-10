@@ -10,6 +10,8 @@ var polyfill = require('./polyfill.js');
 
 var _constant = require('./constant.js');
 
+var _root = require('./root/root.js');
+
 var _type = require('./type/type.js');
 
 var _test = require('./test/test.js');
@@ -30,8 +32,13 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '2.4.0';
-var rootNames = {}; // type
+var VERSION = '2.5.0 beta';
+var rootNames = {}; // root
+
+var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
+
+_object._copyProperty(_root, _constant.propertyNames.ROOT, rootNames); // type
+
 
 var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
 
@@ -86,5 +93,6 @@ module.exports = _objectSpread({
   string: string,
   consoleHook: consoleHook,
   object: object,
-  array: array
+  array: array,
+  root: root
 }, rootNames);

@@ -100,76 +100,14 @@ var propertyCount = function propertyCount(object) {
 
   return _propertyCount(object);
 };
-/**
- * object.clone
- */
-
-
-var _clone = function _clone(sourceObject) {
-  var result = {};
-
-  for (var _i2 = 0, _Object$entries2 = Object.entries(sourceObject); _i2 < _Object$entries2.length; _i2++) {
-    var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-        key = _Object$entries2$_i[0],
-        value = _Object$entries2$_i[1];
-
-    result[key] = value;
-  }
-
-  return result;
-};
-
-var clone = function clone(sourceObject) {
-  if (!_isObject(sourceObject)) {
-    throw new TypeError('object.clone args(sourceObject) is not object');
-  }
-
-  return _clone(sourceObject);
-};
-
-var _cloneDeep = function _cloneDeep(sourceObject) {
-  var __cloneDeep = function __cloneDeep(sourceObject) {
-    var result = {};
-
-    for (var _i3 = 0, _Object$entries3 = Object.entries(sourceObject); _i3 < _Object$entries3.length; _i3++) {
-      var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
-          key = _Object$entries3$_i[0],
-          value = _Object$entries3$_i[1];
-
-      if (_isObject(value)) {
-        result[key] = __cloneDeep(value);
-      } else {
-        result[key] = value;
-      }
-    }
-
-    return result;
-  };
-
-  return __cloneDeep(sourceObject);
-};
-
-var cloneDeep = function cloneDeep(sourceObject) {
-  var destObject = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  if (!_isObject(sourceObject)) {
-    throw new TypeError('object.cloneDeep args(sourceObject) is not object');
-  }
-
-  return _cloneDeep(sourceObject);
-};
 
 var copyProp = copyProperty;
 var propCount = propertyCount;
 module.exports = {
   _copyProperty: _copyProperty,
   _propertyCount: _propertyCount,
-  _clone: _clone,
-  _cloneDeep: _cloneDeep,
   copyProperty: copyProperty,
   propertyCount: propertyCount,
-  clone: clone,
-  cloneDeep: cloneDeep,
   copyProp: copyProp,
   propCount: propCount
 };
