@@ -84,28 +84,28 @@ const propertyCount = (object) => {
 /**
  * object.clone
  */
-const _clone = (sourceObject) => {
+const _clone = (source) => {
   const result = {};
-  for (let [key, value] of Object.entries(sourceObject)) {
+  for (let [key, value] of Object.entries(source)) {
     result[key] = value;
   }
   return result;
 }
 
-const clone = (sourceObject) => {
-  if (!_isObject(sourceObject)) {
+const clone = (source) => {
+  if (!_isObject(source)) {
     throw new TypeError(
-      'object.clone args(sourceObject) is not object'
+      'object.clone args(source) is not object'
     );
   }
 
-  return _clone(sourceObject)
+  return _clone(source)
 }
 
-const _cloneDeep = (sourceObject) => {
-  const __cloneDeep = (sourceObject) => {
+const _cloneDeep = (source) => {
+  const __cloneDeep = (source) => {
     const result = {};
-    for (let [key, value] of Object.entries(sourceObject)) {
+    for (let [key, value] of Object.entries(source)) {
       if (_isObject(value)) {
         result[key] = (__cloneDeep(value))
       } else {
@@ -114,17 +114,17 @@ const _cloneDeep = (sourceObject) => {
     }
     return result;
   };
-  return __cloneDeep(sourceObject);
+  return __cloneDeep(source);
 }
 
-const cloneDeep = (sourceObject, destObject = {}) => {
-  if (!_isObject(sourceObject)) {
+const cloneDeep = (source) => {
+  if (!_isObject(source)) {
     throw new TypeError(
-      'object.cloneDeep args(sourceObject) is not object'
+      'object.cloneDeep args(source) is not object'
     );
   }
 
-  return _cloneDeep(sourceObject)
+  return _cloneDeep(source)
 }
 
 

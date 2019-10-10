@@ -100,6 +100,10 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.5.0
+#### 2019/10/10(Thu)
+- add root.js clone cloneDeep
+
 ### 2.4.0
 #### 2019/10/09(Wed)
 - add replaceAll

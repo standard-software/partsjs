@@ -50,32 +50,32 @@ const equal = (value1, value2) => {
 /**
  * array.clone
  */
-const _clone = (sourceArray) => {
+const _clone = (source) => {
   const result = [];
-  // for (let [index, value] of sourceArray.entries()) {
-  for (let i = 0, l = sourceArray.length; i < l; i += 1) {
-    const value = sourceArray[i];
+  // for (let [index, value] of source.entries()) {
+  for (let i = 0, l = source.length; i < l; i += 1) {
+    const value = source[i];
     result.push(value);
   }
   return result;
 }
 
-const clone = (sourceArray) => {
-  if (!_isArray(sourceArray)) {
+const clone = (source) => {
+  if (!_isArray(source)) {
     throw new TypeError(
-      'array.clone args(sourceArray) is not array'
+      'array.clone args(source) is not array'
     );
   }
 
-  return _clone(sourceArray)
+  return _clone(source)
 }
 
-const _cloneDeep = (sourceArray) => {
-  const __cloneDeep = (sourceArray) => {
+const _cloneDeep = (source) => {
+  const __cloneDeep = (source) => {
     const result = [];
-    // for (let [index, value] of sourceArray.entries()) {
-    for (let i = 0, l = sourceArray.length; i < l; i += 1) {
-      const value = sourceArray[i];
+    // for (let [index, value] of source.entries()) {
+    for (let i = 0, l = source.length; i < l; i += 1) {
+      const value = source[i];
       if (_isArray(value)) {
         result.push(__cloneDeep(value))
       } else {
@@ -84,17 +84,17 @@ const _cloneDeep = (sourceArray) => {
     }
     return result;
   };
-  return __cloneDeep(sourceArray);
+  return __cloneDeep(source);
 }
 
-const cloneDeep = (sourceArray) => {
-  if (!_isArray(sourceArray)) {
+const cloneDeep = (source) => {
+  if (!_isArray(source)) {
     throw new TypeError(
-      'array.cloneDeep args(sourceArray) is not array'
+      'array.cloneDeep args(source) is not array'
     );
   }
 
-  return _cloneDeep(sourceArray)
+  return _cloneDeep(source)
 }
 
 /**

@@ -1,5 +1,6 @@
 const test_execute_index = (parts) => {
 
+  const { test_execute_root     } = require('./root/root.test.js');
   const { test_execute_type     } = require('./type/type.test.js');
   const { test_execute_syntax   } = require('./syntax/syntax.test.js');
   const { test_execute_test     } = require('./test/test.test.js');
@@ -20,7 +21,7 @@ const test_execute_index = (parts) => {
       copyProperty,propertyCount,inProperty,
     } = parts.object;
 
-    checkEqual(127, propertyCount(parts));
+    checkEqual(130, propertyCount(parts));
     checkEqual(74,  propertyCount(parts.type));
     checkEqual(5,   propertyCount(parts.test));
     checkEqual(6,   propertyCount(parts.compare));
@@ -71,6 +72,7 @@ const test_execute_index = (parts) => {
   }
 
   console.log('test start. ' + parts.VERSION);
+  test_execute_root(parts);
   test_execute_type(parts);
   test_execute_syntax(parts);
   test_execute_test(parts);

@@ -1,5 +1,6 @@
 const polyfill = require('./polyfill.js');
 const _constant = require('./constant.js');
+const _root = require('./root/root.js');
 const _type = require('./type/type.js');
 const _test = require('./test/test.js');
 const _syntax = require('./syntax/syntax.js');
@@ -11,9 +12,18 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '2.4.0';
+const VERSION = '2.5.0 beta';
 
 let rootNames = {};
+
+// root
+const root = _object._copyProperty(_root,
+  _constant.propertyNames.ROOT
+);
+_object._copyProperty(_root,
+  _constant.propertyNames.ROOT,
+  rootNames
+);
 
 // type
 const type = _object._copyProperty(_type,
@@ -98,6 +108,8 @@ module.exports = {
   consoleHook,
   object,
   array,
+
+  root,
 
   ...rootNames,
 };

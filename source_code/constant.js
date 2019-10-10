@@ -25,6 +25,11 @@ const TYPE = [
 ].join(',');
 
 // test
+const ROOT =
+  'clone, cloneDeep,' +
+  '';
+
+// test
 const TEST =
   'checkEqual,' +
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
@@ -82,7 +87,8 @@ const OBJECT_ROOT =
 
 // array
 const ARRAY_PUBLIC =
-  'equal, clone, cloneDeep,' +
+  'equal,' +
+  'clone, cloneDeep,' +
   'min, max,' +
   ''
 const ARRAY_ROOT =
@@ -100,6 +106,7 @@ const CONSOLE_HOOK =
   ''
 
 const propertyNames = {
+  ROOT,
   TYPE,
   TEST,
   SYNTAX,
