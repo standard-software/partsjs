@@ -28,8 +28,8 @@ const test_execute_index = (parts) => {
     checkEqual(9,   propertyCount(parts.convert));
     checkEqual(7,   propertyCount(parts.number));
     checkEqual(3,   propertyCount(parts.string));
-    checkEqual(8,   propertyCount(parts.object));
-    checkEqual(5,   propertyCount(parts.array));
+    checkEqual(6,   propertyCount(parts.object));
+    checkEqual(3,   propertyCount(parts.array));
     checkEqual(true,
       inProperty(
         parts,

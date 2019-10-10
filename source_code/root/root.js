@@ -12,10 +12,27 @@ const array = require('../array/array.js');
  * root.clone
  */
 const _clone = (source) => {
+  const __cloneObject = (source) => {
+    const result = {};
+    for (let [key, value] of Object.entries(source)) {
+      result[key] = value;
+    }
+    return result;
+  }
+  const __cloneArray = (source) => {
+    const result = [];
+    // for (let [index, value] of source.entries()) {
+    for (let i = 0, l = source.length; i < l; i += 1) {
+      const value = source[i];
+      result.push(value);
+    }
+    return result;
+  }
+
   if (_isObject(source)) {
-    return object._clone(source);
+    return __cloneObject(source);
   } else if (_isArray(source)) {
-    return array._clone(source);
+    return __cloneArray(source);
   }
 }
 

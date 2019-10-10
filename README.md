@@ -103,6 +103,8 @@ You can now use the functions of the parts object.
 ### 2.5.0
 #### 2019/10/10(Thu)
 - add root.js clone cloneDeep
+- delete object.clone cloneDeep
+- delete array.clone cloneDeep
 
 ### 2.4.0
 #### 2019/10/09(Wed)

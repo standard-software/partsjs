@@ -76,7 +76,6 @@ const STRING_ROOT =
 
 // object
 const OBJECT_PUBLIC =
-  'clone, cloneDeep,' +
   'copyProperty,propertyCount,inProperty,' +
   'copyProp,propCount,inProp,' +
   ''
@@ -88,7 +87,6 @@ const OBJECT_ROOT =
 // array
 const ARRAY_PUBLIC =
   'equal,' +
-  'clone, cloneDeep,' +
   'min, max,' +
   ''
 const ARRAY_ROOT =
