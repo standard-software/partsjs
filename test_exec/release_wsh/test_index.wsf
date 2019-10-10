@@ -16,6 +16,7 @@
 ]]>
 </script>
 <script src="../../debug_build/index.test.js"></script>
+<script src="../../debug_build/root/root.test.js"></script>
 <script src="../../debug_build/type/type.test.js"></script>
 <script src="../../debug_build/syntax/syntax.test.js"></script>
 <script src="../../debug_build/test/test.test.js"></script>
@@ -39,6 +40,7 @@
   };
   var require = function() {
     return {
+      test_execute_root: test_execute_root,
       test_execute_type: test_execute_type,
       test_execute_syntax: test_execute_syntax,
       test_execute_test: test_execute_test,

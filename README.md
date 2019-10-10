@@ -105,6 +105,7 @@ You can now use the functions of the parts object.
 - add root.js clone cloneDeep
 - delete object.clone cloneDeep
 - delete array.clone cloneDeep
+- update test test_index.html test_index.wsf
 
 ### 2.4.0
 #### 2019/10/09(Wed)
