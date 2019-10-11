@@ -103,7 +103,9 @@ You can now use the functions of the parts object.
 ### 2.5.1
 #### 2019/10/11(Fri)
 - update match test
+- update clone cloneDeep
 - delete polifill Array.some
+
 ### 2.5.0
 #### 2019/10/10(Thu)
 - add root.js clone cloneDeep

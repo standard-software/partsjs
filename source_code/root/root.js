@@ -18,14 +18,13 @@ const {
 const _clone = (source) => {
   const __cloneObject = (source) => {
     const result = {};
-    for (let [key, value] of Object.entries(source)) {
-      result[key] = value;
+    for (let key in source) {
+      result[key] = source[key];
     }
     return result;
   }
   const __cloneArray = (source) => {
     const result = [];
-    // for (let [index, value] of source.entries()) {
     for (let i = 0, l = source.length; i < l; i += 1) {
       const value = source[i];
       result.push(value);
@@ -56,8 +55,8 @@ const clone = (source) => {
 const _cloneDeep = (source) => {
   const __cloneDeepObject = (source) => {
     const result = {};
-    for (let [key, value] of Object.entries(source)) {
-      result[key] = conditionalReturn(value);
+    for (let key in source) {
+      result[key] = __cloneDeep(source[key]);
     }
     return result;
   };
@@ -65,33 +64,25 @@ const _cloneDeep = (source) => {
     const result = [];
     for (let i = 0, l = source.length; i < l; i += 1) {
       const value = source[i];
-      result.push(conditionalReturn(value))
+      result.push(__cloneDeep(value))
     }
     return result;
   };
-  const conditionalReturn = (value) => {
+  const __cloneDeep = (value) => {
+    for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
+      const { result, cloneValue } = _cloneDeep.functions[i](value);
+      if (result) {
+        return cloneValue;
+      }
+    }
     if (_isObject(value)) {
       return __cloneDeepObject(value);
-    } else if (_isArray(value)) {
+    }
+    if (_isArray(value)) {
       return __cloneDeepArray(value);
-    } else {
-      for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
-        const { result, cloneValue } = _cloneDeep.functions[i](value);
-        if (result) {
-          return cloneValue;
-        }
-      }
-      return value;
     }
+    return value;
   }
-  const __cloneDeep = (source) => {
-    if (_isObject(source)) {
-      return __cloneDeepObject(source);
-    } else if (_isArray(source)) {
-      return __cloneDeepArray(source);
-    }
-    return;
-  };
   return __cloneDeep(source);
 }
 _cloneDeep.functions = [];
