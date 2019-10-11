@@ -52,8 +52,9 @@ const or = (value, compareArray) => {
 
 const _match = (value, compareArray) => {
   if (_isString(value)) {
-    return compareArray.some((element) => {
-      let result;
+    for (let i = 0, l = compareArray.length; i < l; i += 1) {
+      const element = compareArray[i];
+      let result = false;
       if (_isRegExp(element)) {
         result = value.match(element) !== null;
       } else if (_isFunction(element)) {
@@ -66,10 +67,14 @@ const _match = (value, compareArray) => {
       } else {
         result = value === element;
       }
-      return result;
-    });
+      if (result) {
+        return true;
+      }
+    }
+    return false;
   } else {
-    return compareArray.some((element) => {
+    for (let i = 0, l = compareArray.length; i < l; i += 1) {
+      const element = compareArray[i];
       let result;
       if (_isFunction(element)) {
         result = element(value);
@@ -81,8 +86,11 @@ const _match = (value, compareArray) => {
       } else {
         result = value === element;
       }
-      return result;
-    });
+      if (result) {
+        return true;
+      }
+    }
+    return false;
   }
 };
 

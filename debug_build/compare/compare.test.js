@@ -156,7 +156,21 @@ var test_execute_compare = function test_execute_compare(parts) {
     }]), 'test_match 7');
     checkEqual(false, match(99, [function (value) {
       return 100 <= value;
-    }]), 'test_match 8'); // exception
+    }]), 'test_match 8');
+    checkEqual(true, match(null, [null, undefined, 123, 'abc']), 'test_match 1');
+    checkEqual(true, match(undefined, [null, undefined, 123, 'abc']), 'test_match 2');
+    checkEqual(true, match(123, [null, undefined, 123, 'abc']), 'test_match 3');
+    checkEqual(true, match('abc', [null, undefined, 123, 'abc']), 'test_match 4');
+    checkEqual(true, match(1, [null, undefined, 1, '1']));
+    checkEqual(false, match(1, [null, undefined, 2, '1']));
+    checkEqual(true, match('1', [null, undefined, 1, '1']));
+    checkEqual(false, match('1', [null, undefined, 1, '2']));
+    checkEqual(true, match(null, [null, undefined, 0]));
+    checkEqual(true, match(undefined, [null, undefined, 0]));
+    checkEqual(true, match(0, [null, undefined, 0]));
+    checkEqual(false, match(null, [undefined, 0]));
+    checkEqual(false, match(undefined, [null, 0]));
+    checkEqual(false, match(0, [null, undefined])); // exception
 
     checkEqual(true, isThrownException(function () {
       match('123', 'abc');

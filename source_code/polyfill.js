@@ -38,34 +38,6 @@ const polyfillDefine = () => {
     };
   }
 
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-  // update
-  if (!Array.prototype.some) {
-    Array.prototype.some = function(fun, thisArg) {
-      'use strict';
-
-      if (this == null) {
-        throw new TypeError('Array.prototype.some called on null or undefined');
-      }
-
-      if (typeof fun !== 'function') {
-        throw new TypeError();
-      }
-
-      var t = Object(this);
-      var len = t.length >>> 0;
-
-      var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
-      for (var i = 0; i < len; i++) {
-        if (fun.call(thisArg, t[i], i, t)) {
-          return true;
-        }
-      }
-
-      return false;
-    };
-  }
-
   // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
   if (!Array.prototype.map) {
     Array.prototype.map = function(callback/*, thisArg*/) {
