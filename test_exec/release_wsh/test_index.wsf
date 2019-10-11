@@ -13,6 +13,7 @@
 <script language="JavaScript">
 <![CDATA[
   var parts = module.exports;
+  parts.platform.wsh = true;
 ]]>
 </script>
 <script src="../../debug_build/index.test.js"></script>

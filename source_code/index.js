@@ -98,6 +98,7 @@ const consoleHook = _object._copyProperty(_consoleHook,
 
 module.exports = {
   VERSION,
+  platform: {},
   type,
   test,
   syntax,

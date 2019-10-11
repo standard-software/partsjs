@@ -89,7 +89,7 @@ _cloneDeep.functions = [];
 _cloneDeep.clearFunctions = () => {
   _cloneDeep.functions = [];
 };
-_cloneDeep.pushFunction = (func) => {
+_cloneDeep.addFunction = (func) => {
   _cloneDeep.functions.push(func);
 };
 _cloneDeep.dateClone = (element) =>
@@ -101,7 +101,7 @@ _cloneDeep.dateClone = (element) =>
   : {
     result: false,
   }
-_cloneDeep.pushFunction(_cloneDeep.dateClone);
+_cloneDeep.addFunction(_cloneDeep.dateClone);
 
 const cloneDeep = (source) => {
   if (!(_isObject(source) || _isArray(source))) {
@@ -112,7 +112,7 @@ const cloneDeep = (source) => {
 
   return _cloneDeep(source)
 }
-_copyProperty(_cloneDeep, 'clearFunctions,pushFunction,dateClone', cloneDeep);
+_copyProperty(_cloneDeep, 'clearFunctions,addFunction,dateClone', cloneDeep);
 
 module.exports = {
   _clone, _cloneDeep,
