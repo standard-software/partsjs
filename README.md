@@ -101,7 +101,7 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.5.1
-#### 2019/10/11(Fri)
+#### 2019/10/12(Sat)
 - update match test
 - update clone cloneDeep
 - delete polifill Array.some
