@@ -281,7 +281,7 @@ var test_execute_root = function test_execute_root(parts) {
     value1[3].setDate(13);
     checkEqual(13, value1[3].getDate());
     checkEqual(13, testValue1[3].getDate());
-    cloneDeep.pushFunction(cloneDeep.dateClone); // date type cloneDeep
+    cloneDeep.addFunction(cloneDeep.dateClone); // date type cloneDeep
 
     var date1 = new Date('2019/10/11');
     var testValue1 = [1, 2, 3, date1];
@@ -291,13 +291,57 @@ var test_execute_root = function test_execute_root(parts) {
     checkEqual(11, testValue1[3].getDate());
   };
 
+  var test_cloneDeep_moment = function test_cloneDeep_moment() {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    var moment = require('moment'); // moment type clone no
+
+
+    var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    var testValue1 = [1, 2, 3, moment1];
+    var value1 = clone(testValue1);
+    value1[3].set('year', 2018);
+    checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+    checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD')); // date type cloneDeep
+
+    var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    var testValue1 = [1, 2, 3, moment1];
+    var value1 = cloneDeep(testValue1);
+    value1[3].set('year', 2018);
+    checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+    checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD')); // date type cloneDeep
+
+    var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    var testValue1 = [1, 2, 3, moment1];
+    cloneDeep.addFunction(function (element) {
+      if (moment.isMoment(element)) {
+        var cloneMoment = moment(element);
+        cloneMoment.set('date', 15);
+        return {
+          result: true,
+          cloneValue: cloneMoment
+        };
+      }
+
+      return {
+        result: false
+      };
+    });
+    var value1 = cloneDeep(testValue1);
+    value1[3].set('year', 2018);
+    checkEqual('2018/10/15', value1[3].format('YYYY/MM/DD'));
+    checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
+  };
+
   console.log('  test root.js');
   test_clone_object();
   test_cloneDeep_object();
   test_clone_array();
   test_cloneDeep_array();
   test_cloneDeep_object_array_mix();
-  test_cloneDeep_date();
+  test_cloneDeep_date(); // test_cloneDeep_moment();
 };
 
 module.exports = {

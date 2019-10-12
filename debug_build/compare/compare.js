@@ -68,8 +68,9 @@ var or = function or(value, compareArray) {
 
 var _match = function _match(value, compareArray) {
   if (_isString(value)) {
-    return compareArray.some(function (element) {
-      var result;
+    for (var i = 0, l = compareArray.length; i < l; i += 1) {
+      var element = compareArray[i];
+      var result = false;
 
       if (_isRegExp(element)) {
         result = value.match(element) !== null;
@@ -83,24 +84,34 @@ var _match = function _match(value, compareArray) {
         result = value === element;
       }
 
-      return result;
-    });
+      if (result) {
+        return true;
+      }
+    }
+
+    return false;
   } else {
-    return compareArray.some(function (element) {
-      var result;
+    for (var _i = 0, _l = compareArray.length; _i < _l; _i += 1) {
+      var _element = compareArray[_i];
 
-      if (_isFunction(element)) {
-        result = element(value);
+      var _result = void 0;
 
-        if (!_isBoolean(result)) {
+      if (_isFunction(_element)) {
+        _result = _element(value);
+
+        if (!_isBoolean(_result)) {
           throw new TypeError('_match args(compareArray element function result) is not boolean');
         }
       } else {
-        result = value === element;
+        _result = value === _element;
       }
 
-      return result;
-    });
+      if (_result) {
+        return true;
+      }
+    }
+
+    return false;
   }
 };
 

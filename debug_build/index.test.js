@@ -40,7 +40,7 @@ var test_execute_index = function test_execute_index(parts) {
         copyProperty = _parts$object.copyProperty,
         propertyCount = _parts$object.propertyCount,
         inProperty = _parts$object.inProperty;
-    checkEqual(130, propertyCount(parts));
+    checkEqual(131, propertyCount(parts));
     checkEqual(74, propertyCount(parts.type));
     checkEqual(5, propertyCount(parts.test));
     checkEqual(6, propertyCount(parts.compare));

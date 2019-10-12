@@ -131,7 +131,7 @@ var _array = __webpack_require__(14);
 
 var _consoleHook = __webpack_require__(23);
 
-var VERSION = '2.6.0 beta';
+var VERSION = '2.5.1 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -183,6 +183,7 @@ var consoleHook = _object._copyProperty(_consoleHook, _constant.propertyNames.CO
 
 module.exports = _objectSpread({
   VERSION: VERSION,
+  platform: {},
   type: type,
   test: test,
   syntax: syntax,
@@ -243,34 +244,6 @@ var polyfillDefine = function polyfillDefine() {
   if (!Array.isArray) {
     Array.isArray = function (arg) {
       return Object.prototype.toString.call(arg) === '[object Array]';
-    };
-  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-  // update
-
-
-  if (!Array.prototype.some) {
-    Array.prototype.some = function (fun, thisArg) {
-      'use strict';
-
-      if (this == null) {
-        throw new TypeError('Array.prototype.some called on null or undefined');
-      }
-
-      if (typeof fun !== 'function') {
-        throw new TypeError();
-      }
-
-      var t = Object(this);
-      var len = t.length >>> 0;
-      var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
-
-      for (var i = 0; i < len; i++) {
-        if (fun.call(thisArg, t[i], i, t)) {
-          return true;
-        }
-      }
-
-      return false;
     };
   } // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
@@ -616,14 +589,6 @@ module.exports = {
 "use strict";
 
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var _require = __webpack_require__(5),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
@@ -652,19 +617,15 @@ var _clone = function _clone(source) {
   var __cloneObject = function __cloneObject(source) {
     var result = {};
 
-    for (var _i = 0, _Object$entries = Object.entries(source); _i < _Object$entries.length; _i++) {
-      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-          key = _Object$entries$_i[0],
-          value = _Object$entries$_i[1];
-
-      result[key] = value;
+    for (var key in source) {
+      result[key] = source[key];
     }
 
     return result;
   };
 
   var __cloneArray = function __cloneArray(source) {
-    var result = []; // for (let [index, value] of source.entries()) {
+    var result = [];
 
     for (var i = 0, l = source.length; i < l; i += 1) {
       var value = source[i];
@@ -697,12 +658,8 @@ var _cloneDeep = function _cloneDeep(source) {
   var __cloneDeepObject = function __cloneDeepObject(source) {
     var result = {};
 
-    for (var _i2 = 0, _Object$entries2 = Object.entries(source); _i2 < _Object$entries2.length; _i2++) {
-      var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-          key = _Object$entries2$_i[0],
-          value = _Object$entries2$_i[1];
-
-      result[key] = conditionalReturn(value);
+    for (var key in source) {
+      result[key] = __cloneDeep(source[key]);
     }
 
     return result;
@@ -713,40 +670,32 @@ var _cloneDeep = function _cloneDeep(source) {
 
     for (var i = 0, l = source.length; i < l; i += 1) {
       var value = source[i];
-      result.push(conditionalReturn(value));
+      result.push(__cloneDeep(value));
     }
 
     return result;
   };
 
-  var conditionalReturn = function conditionalReturn(value) {
+  var __cloneDeep = function __cloneDeep(value) {
+    for (var i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
+      var _cloneDeep$functions$ = _cloneDeep.functions[i](value),
+          result = _cloneDeep$functions$.result,
+          cloneValue = _cloneDeep$functions$.cloneValue;
+
+      if (result) {
+        return cloneValue;
+      }
+    }
+
     if (_isObject(value)) {
       return __cloneDeepObject(value);
-    } else if (_isArray(value)) {
+    }
+
+    if (_isArray(value)) {
       return __cloneDeepArray(value);
-    } else {
-      for (var i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
-        var _cloneDeep$functions$ = _cloneDeep.functions[i](value),
-            result = _cloneDeep$functions$.result,
-            cloneValue = _cloneDeep$functions$.cloneValue;
-
-        if (result) {
-          return cloneValue;
-        }
-      }
-
-      return value;
-    }
-  };
-
-  var __cloneDeep = function __cloneDeep(source) {
-    if (_isObject(source)) {
-      return __cloneDeepObject(source);
-    } else if (_isArray(source)) {
-      return __cloneDeepArray(source);
     }
 
-    return;
+    return value;
   };
 
   return __cloneDeep(source);
@@ -758,7 +707,7 @@ _cloneDeep.clearFunctions = function () {
   _cloneDeep.functions = [];
 };
 
-_cloneDeep.pushFunction = function (func) {
+_cloneDeep.addFunction = function (func) {
   _cloneDeep.functions.push(func);
 };
 
@@ -771,7 +720,7 @@ _cloneDeep.dateClone = function (element) {
   };
 };
 
-_cloneDeep.pushFunction(_cloneDeep.dateClone);
+_cloneDeep.addFunction(_cloneDeep.dateClone);
 
 var cloneDeep = function cloneDeep(source) {
   if (!(_isObject(source) || _isArray(source))) {
@@ -781,7 +730,7 @@ var cloneDeep = function cloneDeep(source) {
   return _cloneDeep(source);
 };
 
-_copyProperty(_cloneDeep, 'clearFunctions,pushFunction,dateClone', cloneDeep);
+_copyProperty(_cloneDeep, 'clearFunctions,addFunction,dateClone', cloneDeep);
 
 module.exports = {
   _clone: _clone,
@@ -2133,8 +2082,9 @@ var or = function or(value, compareArray) {
 
 var _match = function _match(value, compareArray) {
   if (_isString(value)) {
-    return compareArray.some(function (element) {
-      var result;
+    for (var i = 0, l = compareArray.length; i < l; i += 1) {
+      var element = compareArray[i];
+      var result = false;
 
       if (_isRegExp(element)) {
         result = value.match(element) !== null;
@@ -2148,24 +2098,34 @@ var _match = function _match(value, compareArray) {
         result = value === element;
       }
 
-      return result;
-    });
+      if (result) {
+        return true;
+      }
+    }
+
+    return false;
   } else {
-    return compareArray.some(function (element) {
-      var result;
+    for (var _i = 0, _l = compareArray.length; _i < _l; _i += 1) {
+      var _element = compareArray[_i];
 
-      if (_isFunction(element)) {
-        result = element(value);
+      var _result = void 0;
 
-        if (!_isBoolean(result)) {
+      if (_isFunction(_element)) {
+        _result = _element(value);
+
+        if (!_isBoolean(_result)) {
           throw new TypeError('_match args(compareArray element function result) is not boolean');
         }
       } else {
-        result = value === element;
+        _result = value === _element;
       }
 
-      return result;
-    });
+      if (_result) {
+        return true;
+      }
+    }
+
+    return false;
   }
 };
 
