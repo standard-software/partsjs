@@ -1,7 +1,8 @@
 const {
   _isUndefined,_isNull,_isNaNStrict,
   _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isFunction,_isObject,_isObjectType,
+  _isArray,_isDate,_isRegExp,
   _isException,
 } = require('../type/type.js');
 
@@ -53,45 +54,49 @@ const clone = (source) => {
  * root.cloneDeep
  */
 const _cloneDeep = (source) => {
-  const __cloneDeepObject = (source) => {
-    const result = {};
-    for (let key in source) {
-      result[key] = __cloneDeep(source[key]);
-    }
-    return result;
-  };
-  const __cloneDeepArray = (source) => {
-    const result = [];
-    for (let i = 0, l = source.length; i < l; i += 1) {
-      const value = source[i];
-      result.push(__cloneDeep(value))
-    }
-    return result;
-  };
   const __cloneDeep = (value) => {
     for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
-      const { result, cloneValue } = _cloneDeep.functions[i](value);
+      const { result, cloneValue } = _cloneDeep.functions[i](value, __cloneDeep);
       if (result) {
         return cloneValue;
       }
-    }
-    if (_isObject(value)) {
-      return __cloneDeepObject(value);
-    }
-    if (_isArray(value)) {
-      return __cloneDeepArray(value);
     }
     return value;
   }
   return __cloneDeep(source);
 }
+
 _cloneDeep.functions = [];
-_cloneDeep.clearFunctions = () => {
-  _cloneDeep.functions = [];
-};
+
 _cloneDeep.addFunction = (func) => {
-  _cloneDeep.functions.push(func);
+  _cloneDeep.functions.unshift(func);
 };
+
+_cloneDeep.objectClone = (element, __cloneDeep) => {
+  if (_isObject(element)) {
+    const cloneValue = {};
+    for (let key in element) {
+      cloneValue[key] = __cloneDeep(element[key]);
+    }
+    return { result: true, cloneValue } ;
+  } else {
+    return { result: false };
+  }
+}
+
+_cloneDeep.arrayClone = (element, __cloneDeep) => {
+  if (_isArray(element)) {
+    const cloneValue = [];
+    for (let i = 0, l = element.length; i < l; i += 1) {
+      const value = element[i];
+      cloneValue.push(__cloneDeep(value))
+    }
+    return { result: true, cloneValue } ;
+  } else {
+    return { result: false };
+  }
+}
+
 _cloneDeep.dateClone = (element) =>
   _isDate(element)
   ? {
@@ -101,6 +106,13 @@ _cloneDeep.dateClone = (element) =>
   : {
     result: false,
   }
+
+_cloneDeep.resetFunctions = () => {
+  _cloneDeep.functions = [];
+  _cloneDeep.addFunction(_cloneDeep.arrayClone);
+  _cloneDeep.addFunction(_cloneDeep.objectClone);
+};
+_cloneDeep.resetFunctions();
 _cloneDeep.addFunction(_cloneDeep.dateClone);
 
 const cloneDeep = (source) => {
@@ -112,7 +124,12 @@ const cloneDeep = (source) => {
 
   return _cloneDeep(source)
 }
-_copyProperty(_cloneDeep, 'clearFunctions,addFunction,dateClone', cloneDeep);
+_copyProperty(_cloneDeep,
+  'resetFunctions,addFunction,' +
+  'objectClone,arrayClone,dateClone,' +
+  '',
+  cloneDeep
+);
 
 module.exports = {
   _clone, _cloneDeep,

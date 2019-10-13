@@ -225,7 +225,7 @@ const test_execute_root = (parts) => {
 
     // date type cloneDeep no
     var date1 = new Date('2019/10/11');
-    cloneDeep.clearFunctions();
+    cloneDeep.resetFunctions();
     var testValue1 = [1,2,3, date1];
     var value1 = cloneDeep(testValue1);
     value1[3].setDate(13);
@@ -269,6 +269,8 @@ const test_execute_root = (parts) => {
     // date type cloneDeep
     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
     var testValue1 = [1,2,3, moment1];
+    cloneDeep.resetFunctions();
+    cloneDeep.addFunction(cloneDeep.dateClone);
     cloneDeep.addFunction(
       (element)  => {
         if (moment.isMoment(element)) {
