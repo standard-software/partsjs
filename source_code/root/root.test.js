@@ -223,23 +223,35 @@ const test_execute_root = (parts) => {
     checkEqual(13, testValue1[3].getDate());
     date1.setDate(12);
 
-    // date type cloneDeep no
+    // date type cloneDeep
     var date1 = new Date('2019/10/11');
     cloneDeep.resetFunctions();
     var testValue1 = [1,2,3, date1];
     var value1 = cloneDeep(testValue1);
     value1[3].setDate(13);
     checkEqual(13, value1[3].getDate());
-    checkEqual(13, testValue1[3].getDate());
-    cloneDeep.addFunction(cloneDeep.dateClone);
+    checkEqual(11, testValue1[3].getDate());
 
-    // date type cloneDeep
+    // date type cloneDeep no
     var date1 = new Date('2019/10/11');
+    cloneDeep.clearFunctions();
+    cloneDeep.addFunction(cloneDeep.arrayClone);
+    cloneDeep.addFunction(cloneDeep.objectClone);
     var testValue1 = [1,2,3, date1];
     var value1 = cloneDeep(testValue1);
     value1[3].setDate(13);
     checkEqual(13, value1[3].getDate());
+    checkEqual(13, testValue1[3].getDate());
+
+    // date type cloneDeep
+    var date1 = new Date('2019/10/11');
+    var testValue1 = [1,2,3, date1];
+    cloneDeep.addFunction(cloneDeep.dateClone);
+    var value1 = cloneDeep(testValue1);
+    value1[3].setDate(13);
+    checkEqual(13, value1[3].getDate());
     checkEqual(11, testValue1[3].getDate());
+    cloneDeep.resetFunctions();
 
   }
 
@@ -259,18 +271,17 @@ const test_execute_root = (parts) => {
     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
 
     // date type cloneDeep
-    var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    var testValue1 = [1,2,3, moment1];
-    var value1 = cloneDeep(testValue1);
-    value1[3].set('year', 2018);
-    checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
+    // var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    // var testValue1 = [1,2,3, moment1];
+    // var value1 = cloneDeep(testValue1);
+    // value1[3].set('year', 2018);
+    // checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+    // checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
 
     // date type cloneDeep
     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
     var testValue1 = [1,2,3, moment1];
     cloneDeep.resetFunctions();
-    cloneDeep.addFunction(cloneDeep.dateClone);
     cloneDeep.addFunction(
       (element)  => {
         if (moment.isMoment(element)) {
@@ -298,7 +309,7 @@ const test_execute_root = (parts) => {
   test_cloneDeep_array();
   test_cloneDeep_object_array_mix();
   test_cloneDeep_date();
-  // test_cloneDeep_moment();
+  test_cloneDeep_moment();
 }
 
 module.exports = {

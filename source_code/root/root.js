@@ -17,26 +17,16 @@ const {
  * root.clone
  */
 const _clone = (source) => {
-  const __cloneObject = (source) => {
-    const result = {};
+  if (_isObjectType(source)) {
+    const cloneValue = new source.constructor();
     for (let key in source) {
-      result[key] = source[key];
+      if (source.hasOwnProperty(key)) {
+        cloneValue[key] = source[key];
+      }
     }
-    return result;
-  }
-  const __cloneArray = (source) => {
-    const result = [];
-    for (let i = 0, l = source.length; i < l; i += 1) {
-      const value = source[i];
-      result.push(value);
-    }
-    return result;
-  }
-
-  if (_isObject(source)) {
-    return __cloneObject(source);
-  } else if (_isArray(source)) {
-    return __cloneArray(source);
+    return cloneValue;
+  } else {
+    return source;
   }
 }
 
@@ -68,6 +58,10 @@ const _cloneDeep = (source) => {
 
 _cloneDeep.functions = [];
 
+_cloneDeep.clearFunctions = (func) => {
+  _cloneDeep.functions = [];
+};
+
 _cloneDeep.addFunction = (func) => {
   _cloneDeep.functions.unshift(func);
 };
@@ -97,6 +91,20 @@ _cloneDeep.arrayClone = (element, __cloneDeep) => {
   }
 }
 
+_cloneDeep.objectTypeClone = (element, __cloneDeep) => {
+  if (_isObjectType(element)) {
+    const cloneValue = new element.constructor();
+    for (let key in element) {
+      if (element.hasOwnProperty(key)) {
+        cloneValue[key] = __cloneDeep(element[key]);
+      }
+    }
+    return { result: true, cloneValue } ;
+  } else {
+    return { result: false };
+  }
+}
+
 _cloneDeep.dateClone = (element) =>
   _isDate(element)
   ? {
@@ -108,12 +116,10 @@ _cloneDeep.dateClone = (element) =>
   }
 
 _cloneDeep.resetFunctions = () => {
-  _cloneDeep.functions = [];
-  _cloneDeep.addFunction(_cloneDeep.arrayClone);
-  _cloneDeep.addFunction(_cloneDeep.objectClone);
+  _cloneDeep.clearFunctions()
+  _cloneDeep.addFunction(_cloneDeep.objectTypeClone)
 };
 _cloneDeep.resetFunctions();
-_cloneDeep.addFunction(_cloneDeep.dateClone);
 
 const cloneDeep = (source) => {
   if (!(_isObject(source) || _isArray(source))) {
@@ -125,7 +131,7 @@ const cloneDeep = (source) => {
   return _cloneDeep(source)
 }
 _copyProperty(_cloneDeep,
-  'resetFunctions,addFunction,' +
+  'clearFunctions,resetFunctions,addFunction,' +
   'objectClone,arrayClone,dateClone,' +
   '',
   cloneDeep
