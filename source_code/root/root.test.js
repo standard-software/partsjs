@@ -39,16 +39,16 @@ const test_execute_root = (parts) => {
     checkEqual(7, object1.d.a);
     checkEqual(7, testObject3.d.a);
 
-    // exception
-    checkEqual(false, isThrown(() => {
-      clone({ a: 1, b: 2, c: 3 });
-    }));
-    checkEqual(true, isThrown(() => {
-      clone(1);
-    }));
-    checkEqual(true, isThrown(() => {
-      clone('a');
-    }));
+    // // exception
+    // checkEqual(false, isThrown(() => {
+    //   clone({ a: 1, b: 2, c: 3 });
+    // }));
+    // checkEqual(true, isThrown(() => {
+    //   clone(1);
+    // }));
+    // checkEqual(true, isThrown(() => {
+    //   clone('a');
+    // }));
   }
 
   const test_cloneDeep_object = () =>{
@@ -70,12 +70,12 @@ const test_execute_root = (parts) => {
     checkEqual(false, isThrown(() => {
       cloneDeep({ a: 1, b: 2, c: 3 });
     }));
-    checkEqual(true, isThrown(() => {
-      cloneDeep(1);
-    }));
-    checkEqual(true, isThrown(() => {
-      cloneDeep('a');
-    }));
+    // checkEqual(true, isThrown(() => {
+    //   cloneDeep(1);
+    // }));
+    // checkEqual(true, isThrown(() => {
+    //   cloneDeep('a');
+    // }));
   }
 
   const test_clone_array = () =>{
@@ -302,14 +302,90 @@ const test_execute_root = (parts) => {
 
   }
 
+  const test_clone_function = () => {
+    const testFunc1 = () => 'ABC';
+
+    // no clone
+    var func1 = testFunc1;
+    checkEqual(true,  func1 === testFunc1);
+    checkEqual('ABC',  func1());
+
+    // clone
+    var func1 = clone(testFunc1);
+    checkEqual(true,  func1 === testFunc1);
+    checkEqual('ABC',  func1());
+
+    // no clone
+    var object1 = { func: testFunc1 };
+    checkEqual(true,  object1.func === testFunc1);
+    checkEqual('ABC',  object1.func());
+
+    // clone
+    var object1 = clone({ func: testFunc1 });
+    checkEqual(true,  object1.func === testFunc1);
+    checkEqual('ABC',  object1.func());
+
+    // no clone
+    var array1 = [ testFunc1 ];
+    checkEqual(true,  array1[0] === testFunc1);
+    checkEqual('ABC',  array1[0]());
+
+    // clone
+    var array1 = clone([ testFunc1 ]);
+    checkEqual(true,  array1[0] === testFunc1);
+    checkEqual('ABC',  array1[0]());
+  }
+
+  const test_clone_regexp = () => {
+    const testRegExp1 = new RegExp('^a');
+
+    // no clone
+    var regexp1 = testRegExp1;
+    checkEqual(true,  regexp1 === testRegExp1);
+    checkEqual('^a',  testRegExp1.source);
+    checkEqual('^a',  regexp1.source);
+
+    // clone
+    var regexp1 = clone(testRegExp1);
+    regexp1.source = '^a';
+    checkEqual(false,  regexp1 === testRegExp1);
+    checkEqual('^a',  testRegExp1.source);
+    checkEqual('(?:)',  regexp1.source);
+
+    // clone
+    var regexp1 = cloneDeep(testRegExp1);
+    regexp1.source = '^a';
+    checkEqual(false,  regexp1 === testRegExp1);
+    checkEqual('^a',  testRegExp1.source);
+    checkEqual('(?:)',  regexp1.source);
+
+    // clone Deep
+    var regexp1 = cloneDeep(testRegExp1);
+    regexp1.source = '^a';
+    checkEqual(false,  regexp1 === testRegExp1);
+    checkEqual('^a',  testRegExp1.source);
+    checkEqual('(?:)',  regexp1.source);
+
+    cloneDeep.addFunction(cloneDeep.regExpClone);
+    var regexp1 = cloneDeep(testRegExp1);
+    regexp1.source = '^a';
+    checkEqual(false,  regexp1 === testRegExp1);
+    checkEqual('^a',  testRegExp1.source);
+    checkEqual('^a',  regexp1.source);
+
+  }
+
   console.log('  test root.js');
   test_clone_object();
-  test_cloneDeep_object();
   test_clone_array();
+  test_cloneDeep_object();
   test_cloneDeep_array();
   test_cloneDeep_object_array_mix();
   test_cloneDeep_date();
   test_cloneDeep_moment();
+
+  test_clone_function();
+  test_clone_regexp();
 }
 
 module.exports = {

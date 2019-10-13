@@ -17,26 +17,22 @@ const {
  * root.clone
  */
 const _clone = (source) => {
-  if (_isObjectType(source)) {
-    const cloneValue = new source.constructor();
-    for (let key in source) {
-      if (source.hasOwnProperty(key)) {
-        cloneValue[key] = source[key];
-      }
-    }
-    return cloneValue;
-  } else {
+  if (_isFunction(source)) {
     return source;
   }
+  if (!_isObjectType(source)) {
+    return source;
+  }
+  const cloneValue = new source.constructor();
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      cloneValue[key] = source[key];
+    }
+  }
+  return cloneValue;
 }
 
 const clone = (source) => {
-  if (!(_isObject(source) || _isArray(source))) {
-    throw new TypeError(
-      'root.clone args(source) is not [object|array]'
-    );
-  }
-
   return _clone(source)
 }
 
@@ -46,7 +42,10 @@ const clone = (source) => {
 const _cloneDeep = (source) => {
   const __cloneDeep = (value) => {
     for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
-      const { result, cloneValue } = _cloneDeep.functions[i](value, __cloneDeep);
+      const {
+        result,
+        cloneValue,
+      } = _cloneDeep.functions[i](value, __cloneDeep);
       if (result) {
         return cloneValue;
       }
@@ -66,11 +65,11 @@ _cloneDeep.addFunction = (func) => {
   _cloneDeep.functions.unshift(func);
 };
 
-_cloneDeep.objectClone = (element, __cloneDeep) => {
-  if (_isObject(element)) {
+_cloneDeep.objectClone = (source, __cloneDeep) => {
+  if (_isObject(source)) {
     const cloneValue = {};
-    for (let key in element) {
-      cloneValue[key] = __cloneDeep(element[key]);
+    for (let key in source) {
+      cloneValue[key] = __cloneDeep(source[key]);
     }
     return { result: true, cloneValue } ;
   } else {
@@ -78,11 +77,11 @@ _cloneDeep.objectClone = (element, __cloneDeep) => {
   }
 }
 
-_cloneDeep.arrayClone = (element, __cloneDeep) => {
-  if (_isArray(element)) {
+_cloneDeep.arrayClone = (source, __cloneDeep) => {
+  if (_isArray(source)) {
     const cloneValue = [];
-    for (let i = 0, l = element.length; i < l; i += 1) {
-      const value = element[i];
+    for (let i = 0, l = source.length; i < l; i += 1) {
+      const value = source[i];
       cloneValue.push(__cloneDeep(value))
     }
     return { result: true, cloneValue } ;
@@ -91,25 +90,39 @@ _cloneDeep.arrayClone = (element, __cloneDeep) => {
   }
 }
 
-_cloneDeep.objectTypeClone = (element, __cloneDeep) => {
-  if (_isObjectType(element)) {
-    const cloneValue = new element.constructor();
-    for (let key in element) {
-      if (element.hasOwnProperty(key)) {
-        cloneValue[key] = __cloneDeep(element[key]);
-      }
-    }
-    return { result: true, cloneValue } ;
-  } else {
+_cloneDeep.objectTypeClone = (source, __cloneDeep) => {
+  if (_isFunction(source)) {
     return { result: false };
   }
+  if (!_isObjectType(source)) {
+    return { result: false };
+  }
+
+  const cloneValue = new source.constructor();
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+  return { result: true, cloneValue } ;
 }
 
-_cloneDeep.dateClone = (element) =>
-  _isDate(element)
+_cloneDeep.dateClone = (source) =>
+  _isDate(source)
   ? {
     result: true,
-    cloneValue: new Date(element.getTime()),
+    cloneValue: new Date(source.getTime()),
+  }
+  : {
+    result: false,
+  }
+
+
+  _cloneDeep.regExpClone = (source) =>
+  _isRegExp(source)
+  ? {
+    result: true,
+    cloneValue: new RegExp(source.source),
   }
   : {
     result: false,
@@ -122,17 +135,11 @@ _cloneDeep.resetFunctions = () => {
 _cloneDeep.resetFunctions();
 
 const cloneDeep = (source) => {
-  if (!(_isObject(source) || _isArray(source))) {
-    throw new TypeError(
-      'root.cloneDeep args(source) is not [object|array]'
-    );
-  }
-
   return _cloneDeep(source)
 }
 _copyProperty(_cloneDeep,
   'clearFunctions,resetFunctions,addFunction,' +
-  'objectClone,arrayClone,dateClone,' +
+  'objectClone,arrayClone,dateClone,regExpClone,' +
   '',
   cloneDeep
 );
