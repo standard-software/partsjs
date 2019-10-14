@@ -131,7 +131,7 @@ var _array = __webpack_require__(14);
 
 var _consoleHook = __webpack_require__(23);
 
-var VERSION = '2.5.2 beta';
+var VERSION = '2.5.2';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);

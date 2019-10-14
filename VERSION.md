@@ -2,6 +2,11 @@
 
 ## Version
 
+### 2.5.2
+#### 2019/10/14(Mon)
+- update clone cloneDeep
+- add cloneFunction
+
 ### 2.5.1
 #### 2019/10/12(Sat)
 - update match test

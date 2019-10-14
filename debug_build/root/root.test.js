@@ -436,6 +436,10 @@ var test_execute_root = function test_execute_root(parts) {
       return;
     }
 
+    if (parts.platform.web) {
+      return;
+    }
+
     var moment = require('moment'); // moment type clone no
 
 

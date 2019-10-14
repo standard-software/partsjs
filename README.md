@@ -100,6 +100,11 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.5.2
+#### 2019/10/14(Mon)
+- update clone cloneDeep
+- add cloneFunction
+
 ### 2.5.1
 #### 2019/10/12(Sat)
 - update match test
@@ -129,47 +134,6 @@ You can now use the functions of the parts object.
 - add number.js
   - isMultiples,isEven,isOdd,
   - round,nearEqual,inRange,randomInt
-
-### 2.2.0
-#### 2019/10/04(Fri)
-- move webpack.config.js babel.config.js
-- update test release_wsh
-- change file position
-- add constant.js
-- add test nameSpace
-
-### 2.1.1
-#### 2019/10/03(Thu)
-- update consoleHook.hookXxx
-
-### 2.1.0
-#### 2019/10/01(Tue)
-- update copyProperty
-- add inProperty
-- add isObjectType
-- add polyfill array.includes
-- add polyfill Object.keys entries
-- update polyfill array.some
-- add propertyCount
-- add isEmpty
-- update consoleHook.hook,accept
-
-### 2.0.1
-#### 2019/09/26(Thu)
-- document update
-- update test code(html, wsf)
-
-### 2.0.0
-#### 2019/09/26(Thu)
-- update consoleHook
-- add object.js copyProperty
-  - add test_copyProperty
-- update Parameter Args
-- define root function(property) name
-- define public function(property) name
-- update test_isObject
-- add Shortcut Name
-
 
 ### More Info
 [VERSION.md](./VERSION.md)
