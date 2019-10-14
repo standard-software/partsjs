@@ -66,28 +66,26 @@ _cloneDeep.addFunction = (func) => {
 };
 
 _cloneDeep.objectClone = (source, __cloneDeep) => {
-  if (_isObject(source)) {
-    const cloneValue = {};
-    for (let key in source) {
-      cloneValue[key] = __cloneDeep(source[key]);
-    }
-    return { result: true, cloneValue } ;
-  } else {
+  if (!_isObject(source)) {
     return { result: false };
   }
+  const cloneValue = {};
+  for (let key in source) {
+    cloneValue[key] = __cloneDeep(source[key]);
+  }
+  return { result: true, cloneValue } ;
 }
 
 _cloneDeep.arrayClone = (source, __cloneDeep) => {
-  if (_isArray(source)) {
-    const cloneValue = [];
-    for (let i = 0, l = source.length; i < l; i += 1) {
-      const value = source[i];
-      cloneValue.push(__cloneDeep(value))
-    }
-    return { result: true, cloneValue } ;
-  } else {
+  if (!_isArray(source)) {
     return { result: false };
   }
+  const cloneValue = [];
+  for (let i = 0, l = source.length; i < l; i += 1) {
+    const value = source[i];
+    cloneValue.push(__cloneDeep(value))
+  }
+  return { result: true, cloneValue } ;
 }
 
 _cloneDeep.objectTypeClone = (source, __cloneDeep) => {
