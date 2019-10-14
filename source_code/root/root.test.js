@@ -403,6 +403,9 @@ const test_execute_root = (parts) => {
     if (parts.platform.wsh) {
       return;
     }
+    if (parts.platform.web) {
+      return;
+    }
 
     const moment = require('moment');
 
