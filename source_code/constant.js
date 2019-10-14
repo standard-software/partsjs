@@ -27,6 +27,7 @@ const TYPE = [
 // test
 const ROOT =
   'clone, cloneDeep,' +
+  'cloneFunction,' +
   '';
 
 // test
