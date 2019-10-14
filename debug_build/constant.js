@@ -31,7 +31,7 @@ var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
 
 var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
 
-var ROOT = 'clone, cloneDeep,' + ''; // test
+var ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + ''; // test
 
 var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + ''; // syntax
 
