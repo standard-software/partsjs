@@ -146,6 +146,8 @@ const test_execute_type = (parts) => {
     checkEqual(true, isBooleanArray([true, true, true]));
     checkEqual(true, isBooleanArray([true, false, true]));
     checkEqual(false, isBooleanArray([true, 1, true]));
+
+    checkEqual(false, isBoolean(new Boolean()));
   };
 
   const test_isNumber = function () {
@@ -207,6 +209,8 @@ const test_execute_type = (parts) => {
     checkEqual(false, isNotNumberArray([1, 2, true]));
     checkEqual(true, isNotNumberArray([false, true]));
     checkEqual(true, isNotNumberArray(['a', 'b']));
+
+    checkEqual(false, isNumber(new Number()));
   };
 
   const test_isInteger = function () {
@@ -250,6 +254,8 @@ const test_execute_type = (parts) => {
     checkEqual(false, isIntegerArray([1, 2, NaN]));
     checkEqual(false, isIntegerArray([1, 2, null]));
     checkEqual(false, isIntegerArray(['a', 'b', 1]));
+
+    checkEqual(false, isInteger(new Number()));
   };
 
   const test_isString = function () {
@@ -271,6 +277,8 @@ const test_execute_type = (parts) => {
     checkEqual(false, isStringArray(['a', 'b', 1]));
     checkEqual(false, isStringArray(['a', 'b', null]));
     checkEqual(false, isStringArray(['a', 'b', undefined]));
+
+    checkEqual(false, isString(new String()));
   };
 
   const test_isFunction = function () {
@@ -289,45 +297,80 @@ const test_execute_type = (parts) => {
   };
 
   const test_isObject = function () {
+    checkEqual(false, isObject(null));
+    checkEqual(false, isObject(undefined));
+    checkEqual(false, isObject(undefined));
+    checkEqual(false, isObject('a'));
+    checkEqual(false, isObject(1));
+    checkEqual(false, isObject(true));
+
     checkEqual(true,  isObject({}));
     checkEqual(true,  isObject({ a: 0 }));
     checkEqual(true,  isObject({ a: 0, b: 1 }));
 
     checkEqual(false, isObject([]));
-    checkEqual(false, isObject(null));
-    checkEqual(false, isObject(undefined));
     checkEqual(false, isObject(function () { }));
     checkEqual(false, isObject(() => {}));
     checkEqual(false, isObject(new Error()));
     checkEqual(false, isObject(new Date()));
     checkEqual(false, isObject(new RegExp()));
 
+    checkEqual(false, isObject(new String()));
+    checkEqual(false, isObject(new Number()));
+    checkEqual(false, isObject(new Boolean()));
+    checkEqual(true,  isObject(new Object()));
+    checkEqual(false, isObject(new Array()));
+    checkEqual(false, isObject(new Function()));
+
     checkEqual(true,  isObject({ a: 0, b: 1 }, { c: 0, d: 1 }));
 
     checkEqual(true,  isObjectArray([{}, { a: 0, b: 1 }]));
     checkEqual(false, isObjectArray([[], { a: 0, b: 1 }]));
     checkEqual(false, isObjectArray([[{}], { a: 0, b: 1 }]));
+
+    const TestObject = function() {
+      this.a = 'a';
+    }
+    var testObject1 = new TestObject();
+    checkEqual(true,  isObject(testObject1));
   };
 
   const test_isObjectType = function () {
+    checkEqual(false, isObjectType(null));
+    checkEqual(false, isObjectType(undefined));
+    checkEqual(false, isObjectType('a'));
+    checkEqual(false, isObjectType(1));
+    checkEqual(false, isObjectType(true));
+
     checkEqual(true,  isObjectType({}));
     checkEqual(true,  isObjectType({ a: 0 }));
     checkEqual(true,  isObjectType({ a: 0, b: 1 }));
 
     checkEqual(true,  isObjectType([]));
-    checkEqual(false, isObjectType(null));
-    checkEqual(false, isObjectType(undefined));
     checkEqual(true,  isObjectType(function () { }));
     checkEqual(true,  isObjectType(() => {}));
     checkEqual(true,  isObjectType(new Error()));
     checkEqual(true,  isObjectType(new Date()));
     checkEqual(true,  isObjectType(new RegExp()));
 
+    checkEqual(true,  isObjectType(new String()));
+    checkEqual(true,  isObjectType(new Number()));
+    checkEqual(true,  isObjectType(new Boolean()));
+    checkEqual(true,  isObjectType(new Object()));
+    checkEqual(true,  isObjectType(new Array()));
+    checkEqual(true,  isObjectType(new Function()));
+
     checkEqual(true,  isObjectType({ a: 0, b: 1 }, { c: 0, d: 1 }));
 
     checkEqual(true,  isObjectTypeArray([{}, { a: 0, b: 1 }]));
     checkEqual(true,  isObjectTypeArray([[], { a: 0, b: 1 }]));
     checkEqual(true,  isObjectTypeArray([[{}], { a: 0, b: 1 }]));
+
+    const TestObject = function() {
+      this.a = 'a';
+    }
+    var testObject1 = new TestObject();
+    checkEqual(true,  isObjectType(testObject1));
   };
 
   const test_isArray = function () {
