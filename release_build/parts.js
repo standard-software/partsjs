@@ -131,7 +131,7 @@ var _array = __webpack_require__(14);
 
 var _consoleHook = __webpack_require__(23);
 
-var VERSION = '2.5.2';
+var VERSION = '2.5.3 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -355,6 +355,39 @@ var polyfillDefine = function polyfillDefine() {
 
       return false;
     };
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+  // This version tries to optimize by only checking for "in" when looking for undefined and
+  // skipping the definitely fruitless NaN search. Other parts are merely cosmetic conciseness.
+  // Whether it is actually faster remains to be seen.
+
+
+  if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (Object, max, min) {
+      "use strict";
+
+      return function indexOf(member, fromIndex) {
+        if (this === null || this === undefined) throw TypeError("Array.prototype.indexOf called on null or undefined");
+        var that = Object(this),
+            Len = that.length >>> 0,
+            i = min(fromIndex | 0, Len);
+        if (i < 0) i = max(0, Len + i);else if (i >= Len) return -1;
+
+        if (member === void 0) {
+          // undefined
+          for (; i !== Len; ++i) {
+            if (that[i] === void 0 && i in that) return i;
+          }
+        } else if (member !== member) {
+          // NaN
+          return -1; // Since NaN !== NaN, it will never be found. Fast-path it.
+        } else // all else
+          for (; i !== Len; ++i) {
+            if (that[i] === member) return i;
+          }
+
+        return -1; // if the value was not found, then return -1
+      };
+    }(Object, Math.max, Math.min);
   } // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 
 
@@ -617,7 +650,9 @@ var _copyProperty = object._copyProperty;
 var cloneFunction = {};
 
 cloneFunction.objectType = function (source) {
-  var __cloneDeep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (value) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
     return value;
   };
 
@@ -634,6 +669,7 @@ cloneFunction.objectType = function (source) {
   }
 
   var cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
 
   for (var key in source) {
     if (source.hasOwnProperty(key)) {
@@ -648,7 +684,9 @@ cloneFunction.objectType = function (source) {
 };
 
 cloneFunction.object = function (source) {
-  var __cloneDeep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (value) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
     return value;
   };
 
@@ -659,6 +697,7 @@ cloneFunction.object = function (source) {
   }
 
   var cloneValue = {};
+  bufferWrite(source, cloneValue);
 
   for (var key in source) {
     cloneValue[key] = __cloneDeep(source[key]);
@@ -671,7 +710,9 @@ cloneFunction.object = function (source) {
 };
 
 cloneFunction.array = function (source) {
-  var __cloneDeep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (value) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
     return value;
   };
 
@@ -682,6 +723,7 @@ cloneFunction.array = function (source) {
   }
 
   var cloneValue = [];
+  bufferWrite(source, cloneValue);
 
   for (var i = 0, l = source.length; i < l; i += 1) {
     var value = source[i];
@@ -695,26 +737,50 @@ cloneFunction.array = function (source) {
 };
 
 cloneFunction.date = function (source) {
-  return _isDate(source) ? {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!_isDate(source)) {
+    return {
+      result: false
+    };
+  }
+
+  var cloneValue = new Date(source.getTime());
+  bufferWrite(source, cloneValue);
+  return {
     result: true,
-    cloneValue: new Date(source.getTime())
-  } : {
-    result: false
+    cloneValue: cloneValue
   };
 };
 
 cloneFunction.regExp = function (source) {
-  return _isRegExp(source) ? {
-    result: true,
-    cloneValue: new RegExp(source.source)
-  } : {
-    result: false
-    /**
-     * root.clone
-     */
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!_isRegExp(source)) {
+    return {
+      result: false
+    };
+  }
+
+  var cloneValue = new RegExp(source.source);
+  bufferWrite(source, cloneValue);
+  return {
+    result: true,
+    cloneValue: cloneValue
   };
 };
+/**
+ * root.clone
+ */
+
 
 var _clone = function _clone(source) {
   var __clone = function __clone(value) {
@@ -765,9 +831,23 @@ _copyProperty(_clone, 'clear,reset,add,' + '', clone);
 
 
 var _cloneDeep = function _cloneDeep(source) {
+  var CircularReferenceBuffer = {
+    source: [],
+    clone: []
+  };
+
   var __cloneDeep = function __cloneDeep(value) {
+    var index = CircularReferenceBuffer.source.indexOf(value);
+
+    if (index !== -1) {
+      return CircularReferenceBuffer.clone[index];
+    }
+
     for (var i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
-      var _cloneDeep$functions$ = _cloneDeep.functions[i](value, __cloneDeep),
+      var _cloneDeep$functions$ = _cloneDeep.functions[i](value, function (source, clone) {
+        CircularReferenceBuffer.source.push(source);
+        CircularReferenceBuffer.clone.push(clone);
+      }, __cloneDeep),
           result = _cloneDeep$functions$.result,
           cloneValue = _cloneDeep$functions$.cloneValue;
 
