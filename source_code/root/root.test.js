@@ -157,6 +157,21 @@ const test_execute_root = (parts) => {
     checkEqual(false, '^a' === regexp1.source);
     clone.reset();
 
+    // clone
+    const testRegExp2 = /^a/;
+    var regexp1 = clone(testRegExp2);
+    checkEqual(false,  regexp1 === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(true,  '^a' === regexp1.source);
+
+    // clone no RegExpFunction
+    clone.clear();
+    clone.add(cloneFunction.objectType);
+    var regexp1 = clone(testRegExp2);
+    checkEqual(false,  regexp1 === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(false, '^a' === regexp1.source);
+    clone.reset();
   }
 
   const test_cloneDeep_object = () =>{
@@ -396,6 +411,53 @@ const test_execute_root = (parts) => {
     checkEqual(false, '^a' === regexp1[0].source);
     cloneDeep.reset();
 
+
+    const testRegExp2 = /^a/;
+    // clone Deep
+    var regexp1 = cloneDeep(testRegExp2);
+    checkEqual(false,  regexp1 === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(true,  '^a' === regexp1.source);
+
+    // clone Deep no RegExpFunction
+    cloneDeep.clear();
+    cloneDeep.add(cloneFunction.objectType);
+    var regexp1 = cloneDeep(testRegExp2);
+    checkEqual(false,  regexp1 === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(false, '^a' === regexp1.source);
+    cloneDeep.reset();
+
+    // clone Deep in Object
+    var regexp1 = cloneDeep({ value: testRegExp2 });
+    checkEqual(false,  regexp1.value === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(true,  '^a' === regexp1.value.source);
+
+    // clone Deep no RegExpFunction in Object
+    cloneDeep.clear();
+    cloneDeep.add(cloneFunction.objectType);
+    var regexp1 = cloneDeep({ value: testRegExp2 });
+    checkEqual(false,  regexp1.value === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(false, '^a' === regexp1.value.source);
+    cloneDeep.reset();
+
+    // clone Deep in Array
+    var regexp1 = cloneDeep([ testRegExp2 ]);
+    checkEqual(false,  regexp1[0] === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(true,  '^a' === regexp1[0].source);
+
+    // clone Deep no RegExpFunction in Array
+    cloneDeep.clear();
+    cloneDeep.add(cloneFunction.objectType);
+    var regexp1 = cloneDeep([ testRegExp2 ]);
+    checkEqual(false,  regexp1[0] === testRegExp2);
+    checkEqual(true,  '^a' === testRegExp2.source);
+    checkEqual(false, '^a' === regexp1[0].source);
+    cloneDeep.reset();
+
   }
 
 
@@ -440,11 +502,12 @@ const test_execute_root = (parts) => {
     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
     var testValue1 = [1,2,3, moment1];
     cloneDeep.add(
-      (source)  => {
+      (source, cloneHistory)  => {
         if (!moment.isMoment(source)) {
           return { result: false }
         }
         const cloneValue = moment(source);
+
         return {
           result: true,
           cloneValue,
@@ -456,6 +519,26 @@ const test_execute_root = (parts) => {
     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
     checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
     // correct
+
+  }
+
+  const test_cloneDeep_CircularReference = () => {
+    const object1 = { b: 'test' };
+    object1.a = object1;
+
+    checkEqual('test', object1.b);
+    checkEqual('test', object1.a.b);
+    checkEqual('test', object1.a.a.b);
+
+    const object2 = cloneDeep(object1);
+    checkEqual('test', object2.b);
+    checkEqual('test', object2.a.b);
+    checkEqual('test', object2.a.a.b);
+
+    checkEqual(false, object1 === object2);
+    checkEqual(true,  object1.a === object1);
+    checkEqual(true,  object2.a === object2);
+    checkEqual(false, object2.a === object1.a);
 
   }
 
@@ -473,6 +556,8 @@ const test_execute_root = (parts) => {
   test_cloneDeep_function();
   test_cloneDeep_regExp();
   test_cloneDeep_moment();
+
+  test_cloneDeep_CircularReference();
 
 }
 

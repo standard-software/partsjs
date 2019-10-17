@@ -18,7 +18,11 @@ const {
  */
 const cloneFunction = {};
 
-cloneFunction.objectType = (source, __cloneDeep = value => value) => {
+cloneFunction.objectType = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
   if (_isFunction(source)) {
     return { result: false };
   }
@@ -27,6 +31,7 @@ cloneFunction.objectType = (source, __cloneDeep = value => value) => {
   }
 
   const cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
   for (let key in source) {
     if (source.hasOwnProperty(key)) {
       cloneValue[key] = __cloneDeep(source[key]);
@@ -35,23 +40,32 @@ cloneFunction.objectType = (source, __cloneDeep = value => value) => {
   return { result: true, cloneValue } ;
 }
 
-
-cloneFunction.object = (source, __cloneDeep = value => value) => {
+cloneFunction.object = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
   if (!_isObject(source)) {
     return { result: false };
   }
   const cloneValue = {};
+  bufferWrite(source, cloneValue);
   for (let key in source) {
     cloneValue[key] = __cloneDeep(source[key]);
   }
   return { result: true, cloneValue } ;
 }
 
-cloneFunction.array = (source, __cloneDeep = value => value) => {
+cloneFunction.array = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
   if (!_isArray(source)) {
     return { result: false };
   }
   const cloneValue = [];
+  bufferWrite(source, cloneValue);
   for (let i = 0, l = source.length; i < l; i += 1) {
     const value = source[i];
     cloneValue.push(__cloneDeep(value))
@@ -59,25 +73,31 @@ cloneFunction.array = (source, __cloneDeep = value => value) => {
   return { result: true, cloneValue } ;
 }
 
-cloneFunction.date = (source) =>
-  _isDate(source)
-  ? {
-    result: true,
-    cloneValue: new Date(source.getTime()),
+cloneFunction.date = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
+  if (!_isDate(source)) {
+    return { result: false };
   }
-  : {
-    result: false,
-  }
+  const cloneValue = new Date(source.getTime());
+  bufferWrite(source, cloneValue);
+  return { result: true, cloneValue } ;
+}
 
-cloneFunction.regExp = (source) =>
-  _isRegExp(source)
-  ? {
-    result: true,
-    cloneValue: new RegExp(source.source),
+cloneFunction.regExp = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
+  if (!_isRegExp(source)) {
+    return { result: false };
   }
-  : {
-    result: false,
-  }
+  const cloneValue = new RegExp(source.source);
+  bufferWrite(source, cloneValue);
+  return { result: true, cloneValue } ;
+}
 
 /**
  * root.clone
@@ -128,12 +148,27 @@ _copyProperty(_clone,
  * root.cloneDeep
  */
 const _cloneDeep = (source) => {
+  const CircularReferenceBuffer = {
+    source: [],
+    clone: [],
+  }
   const __cloneDeep = (value) => {
+    const index = CircularReferenceBuffer.source.indexOf(value);
+    if (index !== -1) {
+      return CircularReferenceBuffer.clone[index];
+    }
     for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
       const {
         result,
         cloneValue,
-      } = _cloneDeep.functions[i](value, __cloneDeep);
+      } = _cloneDeep.functions[i](
+        value,
+        (source, clone) => {
+          CircularReferenceBuffer.source.push(source);
+          CircularReferenceBuffer.clone.push(clone);
+        },
+        __cloneDeep,
+      );
       if (result) {
         return cloneValue;
       }

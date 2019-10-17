@@ -100,6 +100,11 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.5.3
+#### 2019/10/17(Thu)
+- update cloneDeep support CircularReference 
+- update test code
+
 ### 2.5.2
 #### 2019/10/14(Mon)
 - update clone cloneDeep
