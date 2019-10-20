@@ -150,13 +150,24 @@ const test_execute_convert = (parts) => {
     checkEqual(null,      stringToNumber('abc', null));
     checkEqual(NaN,       stringToNumber('abc', NaN));
 
+    // space string
+    checkEqual(0,         Number(''));
+    checkEqual(0,         Number(' '));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       Number('　'));
+    } else {
+      checkEqual(0,         Number('　'));
+    }
+    checkEqual(undefined, stringToNumber(''));
+    checkEqual(undefined, stringToNumber(' '));
+    checkEqual(undefined, stringToNumber('　'));
+
+    // exponential notation
     checkEqual(3.14,  Number(3.14));
     checkEqual(3.14,  Number('3.14'));
     checkEqual(3.14,  Number('314e-2'));
     checkEqual(3.14,  Number('0.0314E+2'));
-    checkEqual(.14,   Number('.14'));
-
-    checkEqual(undefined, stringToNumber(' '));
+    checkEqual(0.14,  Number('.14'));
     checkEqual(3.14,      stringToNumber('3.14'));
     checkEqual(3.14,      stringToNumber('314e-2'));
     checkEqual(3.14,      stringToNumber('0.0314E+2'));
@@ -166,22 +177,7 @@ const test_execute_convert = (parts) => {
     checkEqual(0.00000000000000001, stringToNumber('1e-17'));
     checkEqual(1e-17, stringToNumber('1e-17'));
 
-    checkEqual(291,  Number('0x123'));
-    checkEqual(NaN,  Number('+0x123'));
-    checkEqual(NaN,  Number('-0x123'));
-    checkEqual(Infinity,   Number('Infinity'));
-    checkEqual(NaN,   Number('infinity'));
-    checkEqual(NaN,   Number('inf'));
-    checkEqual(NaN,   Number('info'));
-
-    checkEqual(undefined, stringToNumber('0x123'));
-    checkEqual(undefined, stringToNumber('+0x123'));
-    checkEqual(undefined, stringToNumber('-0x123'));
-    checkEqual(undefined, stringToNumber('Infinity'));
-    checkEqual(undefined, stringToNumber('infinity'));
-    checkEqual(undefined, stringToNumber('inf'));
-    checkEqual(undefined, stringToNumber('info'));
-
+    // exponential notation detail
     checkEqual(1,       Number('1.'));
     checkEqual(NaN,     Number('1.1e'));
     checkEqual(NaN,     Number('1.1e+'));
@@ -190,7 +186,6 @@ const test_execute_convert = (parts) => {
     checkEqual(NaN,     Number('1.e'));
     checkEqual(NaN,     Number('1.e+'));
     checkEqual(100000,  Number('1.e+5'));
-
     checkEqual(1,         stringToNumber('1.'));
     checkEqual(undefined, stringToNumber('1.1e'));
     checkEqual(undefined, stringToNumber('1.1e+'));
@@ -199,6 +194,23 @@ const test_execute_convert = (parts) => {
     checkEqual(undefined, stringToNumber('1.e'));
     checkEqual(undefined, stringToNumber('1.e+'));
     checkEqual(100000,    stringToNumber('1.e+5'));
+
+    // Numer different
+    checkEqual(291,       Number('0x123'));
+    checkEqual(NaN,       Number('+0x123'));
+    checkEqual(NaN,       Number('-0x123'));
+    checkEqual(Infinity,  Number('Infinity'));
+    checkEqual(NaN,       Number('infinity'));
+    checkEqual(NaN,       Number('inf'));
+    checkEqual(NaN,       Number('info'));
+
+    checkEqual(undefined, stringToNumber('0x123'));
+    checkEqual(undefined, stringToNumber('+0x123'));
+    checkEqual(undefined, stringToNumber('-0x123'));
+    checkEqual(undefined, stringToNumber('Infinity'));
+    checkEqual(undefined, stringToNumber('infinity'));
+    checkEqual(undefined, stringToNumber('inf'));
+    checkEqual(undefined, stringToNumber('info'));
 
     // Exception
     let i = 0;
