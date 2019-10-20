@@ -72,14 +72,15 @@ const _stringToNumber = (
   value,
   defaultValue,
 ) => {
-  if (!_matchFormat('float', value)) {
+  if (!_matchFormat('float_more', value)) {
     return defaultValue;
   }
-  return _matchValue(
-    Number(value),
-    [_isNotNumber],
-    defaultValue
-  );
+
+  const result = Number(value);
+  if (!_isNumber(result)) {
+    return defaultValue;
+  }
+  return result;
 };
 const stringToNumber = (
   value,
@@ -112,11 +113,12 @@ const _stringToInteger = (
   if (!_matchFormat(String(radix)+'_base_number',value )) {
     return defaultValue;
   }
-  return _matchValue(
-    parseInt(value, radix),
-    [_isNotInteger],
-    defaultValue
-  );
+
+  const result = parseInt(value, radix);
+  if (!_isInteger(result)) {
+    return defaultValue;
+  }
+  return result;
 };
 
 const stringToInteger = (

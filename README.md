@@ -103,6 +103,7 @@ You can now use the functions of the parts object.
 ### 2.6.0
 #### 2019/10/20(Sun)
 - add isSymbol
+- update strintToNumber
 
 ### 2.5.3
 #### 2019/10/17(Thu)

@@ -41,8 +41,18 @@ const _matchFormat = (
       return (value.match(/^[+|-]?[0-9]+$/)) ? true : false;
     case 'float_only':
       return (value.match(/^[-|+]?[0-9]*\.[0-9]+$/)) ? true : false;
-    case 'float':
+    case 'float_integer':
       return (value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/)) ? true : false;
+    case 'float_more':
+      return (value.match(
+        /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/
+      )) ? true : false;
+      // integer + float + exponential notation
+      // return (value.match(new RegExp(
+      //   '^[-|+]?[0-9]*\\.[0-9]*$' +
+      //   '|^[+|-]?[0-9]+$' +
+      //   '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
+      // , 'g'))) ? true : false;
 
     case '2_base_number': case 'binary':
       return (value.match(/^[-|+]?[01]+$/)) ? true : false;
