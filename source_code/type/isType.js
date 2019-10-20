@@ -15,6 +15,11 @@ const {
   _isNotException,
 } = require('../type/_isException.js');
 
+const {
+  _isSymbol,
+  _isNotSymbol,
+} = require('../type/_isSymbol.js');
+
 /**
  * _isTypeCheck
  * description:
@@ -51,6 +56,7 @@ const isBoolean     = _isTypeCheckArgsFunc(_isBoolean);
 const isNumber      = _isTypeCheckArgsFunc(_isNumber);
 const isInteger     = _isTypeCheckArgsFunc(_isInteger);
 const isString      = _isTypeCheckArgsFunc(_isString);
+const isSymbol      = _isTypeCheckArgsFunc(_isSymbol);
 const isFunction    = _isTypeCheckArgsFunc(_isFunction);
 const isObject      = _isTypeCheckArgsFunc(_isObject);
 const isObjectType  = _isTypeCheckArgsFunc(_isObjectType);
@@ -66,6 +72,7 @@ const isNotBoolean    = _isTypeCheckArgsFunc(_isNotBoolean);
 const isNotNumber     = _isTypeCheckArgsFunc(_isNotNumber);
 const isNotInteger    = _isTypeCheckArgsFunc(_isNotInteger);
 const isNotString     = _isTypeCheckArgsFunc(_isNotString);
+const isNotSymbol     = _isTypeCheckArgsFunc(_isNotSymbol);
 const isNotFunction   = _isTypeCheckArgsFunc(_isNotFunction);
 const isNotObject     = _isTypeCheckArgsFunc(_isNotObject);
 const isNotObjectType = _isTypeCheckArgsFunc(_isNotObjectType);
@@ -81,6 +88,7 @@ const isBooleanArray    = _isTypeCheckArrayFunc(_isBoolean);
 const isNumberArray     = _isTypeCheckArrayFunc(_isNumber);
 const isIntegerArray    = _isTypeCheckArrayFunc(_isInteger);
 const isStringArray     = _isTypeCheckArrayFunc(_isString);
+const isSymbolArray     = _isTypeCheckArrayFunc(_isSymbol);
 const isFunctionArray   = _isTypeCheckArrayFunc(_isFunction);
 const isObjectArray     = _isTypeCheckArrayFunc(_isObject);
 const isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
@@ -96,6 +104,7 @@ const isNotBooleanArray     = _isTypeCheckArrayFunc(value => !_isBoolean(value))
 const isNotNumberArray      = _isTypeCheckArrayFunc(value => !_isNumber(value));
 const isNotIntegerArray     = _isTypeCheckArrayFunc(value => !_isInteger(value));
 const isNotStringArray      = _isTypeCheckArrayFunc(value => !_isString(value));
+const isNotSymbolArray      = _isTypeCheckArrayFunc(value => !_isSymbol(value));
 const isNotFunctionArray    = _isTypeCheckArrayFunc(value => !_isFunction(value));
 const isNotObjectArray      = _isTypeCheckArrayFunc(value => !_isObject(value));
 const isNotObjectTypeArray  = _isTypeCheckArrayFunc(value => !_isObjectType(value));
@@ -127,24 +136,28 @@ const isNotExcept   = isNotException;
 module.exports = {
   isUndefined,isNull,isNaNStrict,
   isBoolean,isNumber,isInteger,isString,
+  isSymbol,
   isFunction,isObject,isObjectType,
   isArray,isDate,isRegExp,
   isException,
 
   isNotUndefined,isNotNull,isNotNaNStrict,
   isNotBoolean,isNotNumber,isNotInteger,isNotString,
+  isNotSymbol,
   isNotFunction,isNotObject,isNotObjectType,
   isNotArray,isNotDate,isNotRegExp,
   isNotException,
 
   isUndefinedArray,isNullArray,isNaNStrictArray,
   isBooleanArray,isNumberArray,isIntegerArray,isStringArray,
+  isSymbolArray,
   isFunctionArray,isObjectArray,isObjectTypeArray,
   isArrayArray,isDateArray,isRegExpArray,
   isExceptionArray,
 
   isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,
   isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
+  isNotSymbolArray,
   isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,
   isNotArrayArray,isNotDateArray,isNotRegExpArray,
   isNotExceptionArray,

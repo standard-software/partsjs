@@ -522,6 +522,59 @@ const test_execute_root = (parts) => {
 
   }
 
+  const test_cloneDeep_symbol = () => {
+    if (parts.platform.wsh) {
+      return;
+    }
+    // if (parts.platform.web) {
+    //   return;
+    // }
+
+    var symbol1 = Symbol();
+    checkEqual(true,
+      parts.isSymbol(symbol1)
+    );
+
+    var value1 = [ symbol1 ];
+    var value2 = cloneDeep(value1);
+    checkEqual(true,
+      symbol1 === value1[0]
+    );
+    checkEqual(true,
+      value1[0] === value2[0]
+    );
+    checkEqual(true,
+      symbol1 === value2[0]
+    );
+
+    cloneFunction.symbol = (
+      source,
+      bufferWrite = () => {},
+      __cloneDeep = value => value,
+    ) => {
+      if (!parts.isSymbol(source)) {
+        return { result: false };
+      }
+      const cloneValue = Symbol();
+      bufferWrite(source, cloneValue);
+      return { result: true, cloneValue } ;
+    }
+    cloneDeep.add(cloneFunction.symbol);
+    var value1 = [ symbol1 ];
+    var value2 = cloneDeep(value1);
+    checkEqual(true,
+      symbol1 === value1[0]
+    );
+    checkEqual(false,
+      value1[0] === value2[0]
+      // cloneDeep and new symbol
+    );
+    checkEqual(false,
+      symbol1 === value2[0]
+      // cloneDeep and new symbol
+      );
+    cloneDeep.reset();
+  }
   const test_cloneDeep_CircularReference = () => {
     const object1 = { b: 'test' };
     object1.a = object1;
@@ -555,7 +608,9 @@ const test_execute_root = (parts) => {
   test_cloneDeep_date();
   test_cloneDeep_function();
   test_cloneDeep_regExp();
+
   test_cloneDeep_moment();
+  test_cloneDeep_symbol();
 
   test_cloneDeep_CircularReference();
 

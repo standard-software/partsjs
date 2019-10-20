@@ -73,6 +73,8 @@ const _isNotDate        = value => !_isDate(value);
 const _isNotRegExp      = value => !_isRegExp(value);
 
 module.exports = {
+  _typeofCheck, _objectToStringCheck,
+
   _isUndefined,_isNull,_isNaNStrict,
   _isBoolean,_isNumber,_isInteger,_isString,
   _isFunction,_isObject,_isObjectType,
