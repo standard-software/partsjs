@@ -72,6 +72,9 @@ const _stringToNumber = (
   value,
   defaultValue,
 ) => {
+  if (value === '') {
+    return defaultValue;
+  }
   if (!_matchFormat('float_more', value)) {
     return defaultValue;
   }
@@ -110,6 +113,9 @@ const _stringToInteger = (
   defaultValue,
   radix = 10,
 ) => {
+  if (value === '') {
+    return defaultValue;
+  }
   if (!_matchFormat(String(radix)+'_base_number',value )) {
     return defaultValue;
   }

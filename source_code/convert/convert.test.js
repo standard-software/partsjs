@@ -145,7 +145,7 @@ const test_execute_convert = (parts) => {
     checkEqual(123.45,    stringToNumber('123.45'));
     checkEqual(undefined, stringToNumber('123.4.5'));
 
-    // string
+    // string default value
     checkEqual(undefined, stringToNumber('abc'));
     checkEqual(null,      stringToNumber('abc', null));
     checkEqual(NaN,       stringToNumber('abc', NaN));
@@ -199,14 +199,20 @@ const test_execute_convert = (parts) => {
     checkEqual(291,       Number('0x123'));
     checkEqual(NaN,       Number('+0x123'));
     checkEqual(NaN,       Number('-0x123'));
+    checkEqual(83,        Number('0o123'));
+    checkEqual(NaN,       Number('+0o123'));
+    checkEqual(NaN,       Number('-0o123'));
+    checkEqual(undefined, stringToNumber('0x123'));
+    checkEqual(undefined, stringToNumber('+0x123'));
+    checkEqual(undefined, stringToNumber('-0x123'));
+    checkEqual(undefined, stringToNumber('0x123'));
+    checkEqual(undefined, stringToNumber('+0x123'));
+    checkEqual(undefined, stringToNumber('-0x123'));
+
     checkEqual(Infinity,  Number('Infinity'));
     checkEqual(NaN,       Number('infinity'));
     checkEqual(NaN,       Number('inf'));
     checkEqual(NaN,       Number('info'));
-
-    checkEqual(undefined, stringToNumber('0x123'));
-    checkEqual(undefined, stringToNumber('+0x123'));
-    checkEqual(undefined, stringToNumber('-0x123'));
     checkEqual(undefined, stringToNumber('Infinity'));
     checkEqual(undefined, stringToNumber('infinity'));
     checkEqual(undefined, stringToNumber('inf'));
@@ -322,6 +328,17 @@ const test_execute_convert = (parts) => {
     checkEqual(undefined, stringToInteger('abc'));
     checkEqual(null,      stringToInteger('abc', null,  10));
     checkEqual(NaN,       stringToInteger('abc', NaN,   10));
+
+    checkEqual(undefined, stringToInteger('0x123'));
+    checkEqual(undefined, stringToInteger('+0x123'));
+    checkEqual(undefined, stringToInteger('-0x123'));
+    checkEqual(undefined, stringToInteger('0x123'));
+    checkEqual(undefined, stringToInteger('+0x123'));
+    checkEqual(undefined, stringToInteger('-0x123'));
+    checkEqual(undefined, stringToInteger('Infinity'));
+    checkEqual(undefined, stringToInteger('infinity'));
+    checkEqual(undefined, stringToInteger('inf'));
+    checkEqual(undefined, stringToInteger('info'));
 
     // Exception
     let i = 0;
