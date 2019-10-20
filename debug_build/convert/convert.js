@@ -79,6 +79,10 @@ var numberToString = function numberToString(value) {
 
 
 var _stringToNumber = function _stringToNumber(value, defaultValue) {
+  if (value === '') {
+    return defaultValue;
+  }
+
   if (!_matchFormat('float_more', value)) {
     return defaultValue;
   }
@@ -112,6 +116,10 @@ var stringToNumber = function stringToNumber(value, defaultValue) {
 
 var _stringToInteger = function _stringToInteger(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+  if (value === '') {
+    return defaultValue;
+  }
 
   if (!_matchFormat(String(radix) + '_base_number', value)) {
     return defaultValue;
