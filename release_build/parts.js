@@ -113,25 +113,25 @@ var _root = __webpack_require__(4);
 
 var _type = __webpack_require__(5);
 
-var _test = __webpack_require__(15);
+var _test = __webpack_require__(16);
 
-var _syntax = __webpack_require__(16);
+var _syntax = __webpack_require__(17);
 
-var _compare = __webpack_require__(17);
+var _compare = __webpack_require__(18);
 
-var _convert = __webpack_require__(18);
+var _convert = __webpack_require__(19);
 
-var _number = __webpack_require__(22);
+var _number = __webpack_require__(23);
 
-var _string = __webpack_require__(19);
+var _string = __webpack_require__(20);
 
-var _object = __webpack_require__(11);
+var _object = __webpack_require__(12);
 
-var _array = __webpack_require__(14);
+var _array = __webpack_require__(15);
 
-var _consoleHook = __webpack_require__(23);
+var _consoleHook = __webpack_require__(24);
 
-var VERSION = '2.5.3';
+var VERSION = '2.6.0 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -536,7 +536,7 @@ module.exports = {};
 
 
 // type
-var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
+var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Symbol,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
 
 var IS_TYPE = _TYPE_BASE.split(',').map(function (item) {
   return "is".concat(item);
@@ -638,9 +638,9 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var object = __webpack_require__(11);
+var object = __webpack_require__(12);
 
-var array = __webpack_require__(14);
+var array = __webpack_require__(15);
 
 var _copyProperty = object._copyProperty;
 /**
@@ -909,7 +909,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(6), {}, __webpack_require__(7), {}, __webpack_require__(10));
+module.exports = _objectSpread({}, __webpack_require__(6), {}, __webpack_require__(7), {}, __webpack_require__(10), {}, __webpack_require__(11));
 
 /***/ }),
 /* 6 */
@@ -1037,6 +1037,8 @@ var _isNotRegExp = function _isNotRegExp(value) {
 };
 
 module.exports = {
+  _typeofCheck: _typeofCheck,
+  _objectToStringCheck: _objectToStringCheck,
   _isUndefined: _isUndefined,
   _isNull: _isNull,
   _isNaNStrict: _isNaNStrict,
@@ -1191,6 +1193,27 @@ module.exports = {
 
 
 var _require = __webpack_require__(6),
+    _typeofCheck = _require._typeofCheck;
+
+var _isSymbol = _typeofCheck('symbol');
+
+var _isNotSymbol = function _isNotSymbol(value) {
+  return !_isSymbol(value);
+};
+
+module.exports = {
+  _isSymbol: _isSymbol,
+  _isNotSymbol: _isNotSymbol
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(6),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
     _isNaNStrict = _require._isNaNStrict,
@@ -1221,6 +1244,10 @@ var _require = __webpack_require__(6),
 var _require2 = __webpack_require__(7),
     _isException = _require2._isException,
     _isNotException = _require2._isNotException;
+
+var _require3 = __webpack_require__(10),
+    _isSymbol = _require3._isSymbol,
+    _isNotSymbol = _require3._isNotSymbol;
 /**
  * _isTypeCheck
  * description:
@@ -1276,6 +1303,8 @@ var isInteger = _isTypeCheckArgsFunc(_isInteger);
 
 var isString = _isTypeCheckArgsFunc(_isString);
 
+var isSymbol = _isTypeCheckArgsFunc(_isSymbol);
+
 var isFunction = _isTypeCheckArgsFunc(_isFunction);
 
 var isObject = _isTypeCheckArgsFunc(_isObject);
@@ -1304,6 +1333,8 @@ var isNotInteger = _isTypeCheckArgsFunc(_isNotInteger);
 
 var isNotString = _isTypeCheckArgsFunc(_isNotString);
 
+var isNotSymbol = _isTypeCheckArgsFunc(_isNotSymbol);
+
 var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
 var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
@@ -1331,6 +1362,8 @@ var isNumberArray = _isTypeCheckArrayFunc(_isNumber);
 var isIntegerArray = _isTypeCheckArrayFunc(_isInteger);
 
 var isStringArray = _isTypeCheckArrayFunc(_isString);
+
+var isSymbolArray = _isTypeCheckArrayFunc(_isSymbol);
 
 var isFunctionArray = _isTypeCheckArrayFunc(_isFunction);
 
@@ -1372,6 +1405,10 @@ var isNotIntegerArray = _isTypeCheckArrayFunc(function (value) {
 
 var isNotStringArray = _isTypeCheckArrayFunc(function (value) {
   return !_isString(value);
+});
+
+var isNotSymbolArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isSymbol(value);
 });
 
 var isNotFunctionArray = _isTypeCheckArrayFunc(function (value) {
@@ -1428,6 +1465,7 @@ module.exports = {
   isNumber: isNumber,
   isInteger: isInteger,
   isString: isString,
+  isSymbol: isSymbol,
   isFunction: isFunction,
   isObject: isObject,
   isObjectType: isObjectType,
@@ -1442,6 +1480,7 @@ module.exports = {
   isNotNumber: isNotNumber,
   isNotInteger: isNotInteger,
   isNotString: isNotString,
+  isNotSymbol: isNotSymbol,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
   isNotObjectType: isNotObjectType,
@@ -1456,6 +1495,7 @@ module.exports = {
   isNumberArray: isNumberArray,
   isIntegerArray: isIntegerArray,
   isStringArray: isStringArray,
+  isSymbolArray: isSymbolArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
   isObjectTypeArray: isObjectTypeArray,
@@ -1470,6 +1510,7 @@ module.exports = {
   isNotNumberArray: isNotNumberArray,
   isNotIntegerArray: isNotIntegerArray,
   isNotStringArray: isNotStringArray,
+  isNotSymbolArray: isNotSymbolArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
   isNotObjectTypeArray: isNotObjectTypeArray,
@@ -1498,7 +1539,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1510,10 +1551,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(12), {}, __webpack_require__(8), {}, __webpack_require__(13));
+module.exports = _objectSpread({}, __webpack_require__(13), {}, __webpack_require__(8), {}, __webpack_require__(14));
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1632,7 +1673,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1688,7 +1729,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1822,7 +1863,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1850,7 +1891,7 @@ var checkEqual = function checkEqual(a, b) {
     throw new TypeError('checkEqual args message is not string');
   }
 
-  if (_isNaNStrict(a, b)) {
+  if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
   }
 
@@ -1928,7 +1969,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2165,7 +2206,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2186,7 +2227,7 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(11),
+var _require2 = __webpack_require__(12),
     _copyProperty = _require2._copyProperty,
     _propertyCount = _require2._propertyCount,
     _inProperty = _require2._inProperty;
@@ -2364,7 +2405,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2398,14 +2439,14 @@ var _require = __webpack_require__(5),
     _isNotRegExp = _require._isNotRegExp,
     _isNotException = _require._isNotException;
 
-var _require2 = __webpack_require__(17),
+var _require2 = __webpack_require__(18),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(19),
+var _require3 = __webpack_require__(20),
     _matchFormat = _require3._matchFormat;
 
-var _require4 = __webpack_require__(11),
+var _require4 = __webpack_require__(12),
     _copyProperty = _require4._copyProperty,
     _propertyCount = _require4._propertyCount,
     _inProperty = _require4._inProperty;
@@ -2449,11 +2490,17 @@ var numberToString = function numberToString(value) {
 
 
 var _stringToNumber = function _stringToNumber(value, defaultValue) {
-  if (!_matchFormat('float', value)) {
+  if (!_matchFormat('float_more', value)) {
     return defaultValue;
   }
 
-  return _matchValue(Number(value), [_isNotNumber], defaultValue);
+  var result = Number(value);
+
+  if (!_isNumber(result)) {
+    return defaultValue;
+  }
+
+  return result;
 };
 
 var stringToNumber = function stringToNumber(value, defaultValue) {
@@ -2481,7 +2528,13 @@ var _stringToInteger = function _stringToInteger(value, defaultValue) {
     return defaultValue;
   }
 
-  return _matchValue(parseInt(value, radix), [_isNotInteger], defaultValue);
+  var result = parseInt(value, radix);
+
+  if (!_isInteger(result)) {
+    return defaultValue;
+  }
+
+  return result;
 };
 
 var stringToInteger = function stringToInteger(value, defaultValue) {
@@ -2529,7 +2582,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2541,10 +2594,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(20), {}, __webpack_require__(9), {}, __webpack_require__(21));
+module.exports = _objectSpread({}, __webpack_require__(21), {}, __webpack_require__(9), {}, __webpack_require__(22));
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2565,7 +2618,7 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(17),
+var _require2 = __webpack_require__(18),
     _match = _require2._match;
 
 var _require3 = __webpack_require__(8),
@@ -2607,8 +2660,17 @@ var _matchFormat = function _matchFormat(formatName, value) {
     case 'float_only':
       return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
 
-    case 'float':
+    case 'float_integer':
       return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
+
+    case 'float_more':
+      return value.match(/^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
+    // integer + float + exponential notation
+    // return (value.match(new RegExp(
+    //   '^[-|+]?[0-9]*\\.[0-9]*$' +
+    //   '|^[+|-]?[0-9]+$' +
+    //   '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
+    // , 'g'))) ? true : false;
 
     case '2_base_number':
     case 'binary':
@@ -2769,7 +2831,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2824,7 +2886,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2845,7 +2907,7 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(11),
+var _require2 = __webpack_require__(12),
     _copyProperty = _require2._copyProperty,
     _propertyCount = _require2._propertyCount,
     _inProperty = _require2._inProperty;
@@ -3017,7 +3079,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3038,10 +3100,10 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(17),
+var _require2 = __webpack_require__(18),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(19),
+var _require3 = __webpack_require__(20),
     _includes = _require3._includes;
 
 var original = {};

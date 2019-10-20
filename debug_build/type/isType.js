@@ -31,6 +31,10 @@ var _require = require('../type/_isType.js'),
 var _require2 = require('../type/_isException.js'),
     _isException = _require2._isException,
     _isNotException = _require2._isNotException;
+
+var _require3 = require('../type/_isSymbol.js'),
+    _isSymbol = _require3._isSymbol,
+    _isNotSymbol = _require3._isNotSymbol;
 /**
  * _isTypeCheck
  * description:
@@ -86,6 +90,8 @@ var isInteger = _isTypeCheckArgsFunc(_isInteger);
 
 var isString = _isTypeCheckArgsFunc(_isString);
 
+var isSymbol = _isTypeCheckArgsFunc(_isSymbol);
+
 var isFunction = _isTypeCheckArgsFunc(_isFunction);
 
 var isObject = _isTypeCheckArgsFunc(_isObject);
@@ -114,6 +120,8 @@ var isNotInteger = _isTypeCheckArgsFunc(_isNotInteger);
 
 var isNotString = _isTypeCheckArgsFunc(_isNotString);
 
+var isNotSymbol = _isTypeCheckArgsFunc(_isNotSymbol);
+
 var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
 var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
@@ -141,6 +149,8 @@ var isNumberArray = _isTypeCheckArrayFunc(_isNumber);
 var isIntegerArray = _isTypeCheckArrayFunc(_isInteger);
 
 var isStringArray = _isTypeCheckArrayFunc(_isString);
+
+var isSymbolArray = _isTypeCheckArrayFunc(_isSymbol);
 
 var isFunctionArray = _isTypeCheckArrayFunc(_isFunction);
 
@@ -182,6 +192,10 @@ var isNotIntegerArray = _isTypeCheckArrayFunc(function (value) {
 
 var isNotStringArray = _isTypeCheckArrayFunc(function (value) {
   return !_isString(value);
+});
+
+var isNotSymbolArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isSymbol(value);
 });
 
 var isNotFunctionArray = _isTypeCheckArrayFunc(function (value) {
@@ -238,6 +252,7 @@ module.exports = {
   isNumber: isNumber,
   isInteger: isInteger,
   isString: isString,
+  isSymbol: isSymbol,
   isFunction: isFunction,
   isObject: isObject,
   isObjectType: isObjectType,
@@ -252,6 +267,7 @@ module.exports = {
   isNotNumber: isNotNumber,
   isNotInteger: isNotInteger,
   isNotString: isNotString,
+  isNotSymbol: isNotSymbol,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
   isNotObjectType: isNotObjectType,
@@ -266,6 +282,7 @@ module.exports = {
   isNumberArray: isNumberArray,
   isIntegerArray: isIntegerArray,
   isStringArray: isStringArray,
+  isSymbolArray: isSymbolArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
   isObjectTypeArray: isObjectTypeArray,
@@ -280,6 +297,7 @@ module.exports = {
   isNotNumberArray: isNotNumberArray,
   isNotIntegerArray: isNotIntegerArray,
   isNotStringArray: isNotStringArray,
+  isNotSymbolArray: isNotSymbolArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
   isNotObjectTypeArray: isNotObjectTypeArray,

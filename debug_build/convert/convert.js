@@ -79,11 +79,17 @@ var numberToString = function numberToString(value) {
 
 
 var _stringToNumber = function _stringToNumber(value, defaultValue) {
-  if (!_matchFormat('float', value)) {
+  if (!_matchFormat('float_more', value)) {
     return defaultValue;
   }
 
-  return _matchValue(Number(value), [_isNotNumber], defaultValue);
+  var result = Number(value);
+
+  if (!_isNumber(result)) {
+    return defaultValue;
+  }
+
+  return result;
 };
 
 var stringToNumber = function stringToNumber(value, defaultValue) {
@@ -111,7 +117,13 @@ var _stringToInteger = function _stringToInteger(value, defaultValue) {
     return defaultValue;
   }
 
-  return _matchValue(parseInt(value, radix), [_isNotInteger], defaultValue);
+  var result = parseInt(value, radix);
+
+  if (!_isInteger(result)) {
+    return defaultValue;
+  }
+
+  return result;
 };
 
 var stringToInteger = function stringToInteger(value, defaultValue) {

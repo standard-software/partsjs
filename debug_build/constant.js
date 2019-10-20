@@ -1,7 +1,7 @@
 "use strict";
 
 // type
-var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
+var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Symbol,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + '';
 
 var IS_TYPE = _TYPE_BASE.split(',').map(function (item) {
   return "is".concat(item);

@@ -525,10 +525,7 @@ var test_execute_root = function test_execute_root(parts) {
     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD')); // but not correct
     // moment type cloneDeep moment clone function
 
-    cloneDeep.reset();
-    var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    var testValue1 = [1, 2, 3, moment1];
-    cloneDeep.add(function (source, cloneHistory) {
+    cloneFunction.moment = function (source, cloneHistory) {
       if (!moment.isMoment(source)) {
         return {
           result: false
@@ -540,12 +537,75 @@ var test_execute_root = function test_execute_root(parts) {
         result: true,
         cloneValue: cloneValue
       };
-    });
+    };
+
+    cloneDeep.reset();
+    var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    var testValue1 = [1, 2, 3, moment1];
+    cloneDeep.add(cloneFunction.moment);
     var value1 = cloneDeep(testValue1);
     value1[3].set('year', 2018);
     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
     checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD')); // correct
   };
+
+  var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
+    if (parts.platform.wsh) {
+      return;
+    } // if (parts.platform.web) {
+    //   return;
+    // }
+
+
+    var symbol1 = Symbol();
+    checkEqual(true, parts.isSymbol(symbol1));
+    var value1 = [symbol1];
+    var value2 = cloneDeep(value1);
+    checkEqual(true, symbol1 === value1[0]);
+    checkEqual(true, value1[0] === value2[0]);
+    checkEqual(true, symbol1 === value2[0]);
+
+    cloneFunction.symbol = function (source) {
+      var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+      var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+        return value;
+      };
+
+      if (!parts.isSymbol(source)) {
+        return {
+          result: false
+        };
+      }
+
+      var cloneValue = Symbol();
+      bufferWrite(source, cloneValue);
+      return {
+        result: true,
+        cloneValue: cloneValue
+      };
+    };
+
+    cloneDeep.add(cloneFunction.symbol);
+    var value1 = [symbol1];
+    var value2 = cloneDeep(value1);
+    checkEqual(true, symbol1 === value1[0]);
+    checkEqual(false, value1[0] === value2[0] // cloneDeep and new symbol
+    );
+    checkEqual(false, symbol1 === value2[0] // cloneDeep and new symbol
+    );
+    cloneDeep.reset();
+  }; // const test_cloneDeep_map = () => {
+  //   if (parts.platform.wsh) {
+  //     return;
+  //   }
+  // }
+  // const test_cloneDeep_set = () => {
+  //   if (parts.platform.wsh) {
+  //     return;
+  //   }
+  // }
+
 
   var test_cloneDeep_CircularReference = function test_cloneDeep_CircularReference() {
     var object1 = {
@@ -578,6 +638,9 @@ var test_execute_root = function test_execute_root(parts) {
   test_cloneDeep_function();
   test_cloneDeep_regExp();
   test_cloneDeep_moment();
+  test_cloneDeep_symbol(); // test_cloneDeep_map();
+  // test_cloneDeep_set();
+
   test_cloneDeep_CircularReference();
 };
 

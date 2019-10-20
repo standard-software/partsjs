@@ -22,7 +22,7 @@ var checkEqual = function checkEqual(a, b) {
     throw new TypeError('checkEqual args message is not string');
   }
 
-  if (_isNaNStrict(a, b)) {
+  if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
   }
 

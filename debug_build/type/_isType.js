@@ -119,6 +119,8 @@ var _isNotRegExp = function _isNotRegExp(value) {
 };
 
 module.exports = {
+  _typeofCheck: _typeofCheck,
+  _objectToStringCheck: _objectToStringCheck,
   _isUndefined: _isUndefined,
   _isNull: _isNull,
   _isNaNStrict: _isNaNStrict,
