@@ -498,22 +498,17 @@ const test_execute_root = (parts) => {
     // but not correct
 
     // moment type cloneDeep moment clone function
+    cloneFunction.moment = (source, cloneHistory)  => {
+      if (!moment.isMoment(source)) {
+        return { result: false }
+      }
+      const cloneValue = moment(source);
+      return { result: true, cloneValue };
+    }
     cloneDeep.reset();
     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
     var testValue1 = [1,2,3, moment1];
-    cloneDeep.add(
-      (source, cloneHistory)  => {
-        if (!moment.isMoment(source)) {
-          return { result: false }
-        }
-        const cloneValue = moment(source);
-
-        return {
-          result: true,
-          cloneValue,
-        }
-      }
-    );
+    cloneDeep.add(cloneFunction.moment);
     var value1 = cloneDeep(testValue1);
     value1[3].set('year', 2018);
     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
@@ -575,6 +570,19 @@ const test_execute_root = (parts) => {
       );
     cloneDeep.reset();
   }
+
+  // const test_cloneDeep_map = () => {
+  //   if (parts.platform.wsh) {
+  //     return;
+  //   }
+  // }
+  // const test_cloneDeep_set = () => {
+  //   if (parts.platform.wsh) {
+  //     return;
+  //   }
+  // }
+
+
   const test_cloneDeep_CircularReference = () => {
     const object1 = { b: 'test' };
     object1.a = object1;
@@ -611,6 +619,8 @@ const test_execute_root = (parts) => {
 
   test_cloneDeep_moment();
   test_cloneDeep_symbol();
+  // test_cloneDeep_map();
+  // test_cloneDeep_set();
 
   test_cloneDeep_CircularReference();
 
