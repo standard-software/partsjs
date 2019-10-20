@@ -2,6 +2,11 @@
 
 ## Version
 
+### 2.6.0
+#### 2019/10/20(Sun)
+- add isSymbol
+- update strintToNumber stringToInteger
+
 ### 2.5.3
 #### 2019/10/17(Thu)
 - update cloneDeep support CircularReference 
