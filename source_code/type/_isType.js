@@ -9,28 +9,36 @@ const _objectToStringCheck = (typeName) => {
   );
 };
 
-const _isUndefined = _typeofCheck('undefined');
+// const _isUndefined = _typeofCheck('undefined');
+const _isUndefined = _objectToStringCheck('Undefined');
 
-const _isNull = (value) => (value === null);
+// const _isNull = (value) => (value === null);
+const _isNull = _objectToStringCheck('Null');
 
 const _isNaNStrict = (value) => value !== value;
 
-const _isBoolean = _typeofCheck('boolean');
+// const _isBoolean = _typeofCheck('boolean');
+const _isBoolean = _objectToStringCheck('Boolean');
 
 const _isNumber = (value) => {
-  return (_typeofCheck('number')(value) && (isFinite(value)));
+  // return (_typeofCheck('number')(value) && (isFinite(value)));
+  return (_objectToStringCheck('Number')(value) && (isFinite(value)));
 };
 
 const _isInteger = (value) => {
   if (!_isNumber(value)) {
     return false;
   }
-  return Math.round(value) === value;
+  // return Math.round(value) === value;
+  return Math.round(value) === Number(value);
+  // [Numer Cast] is for support Number Object
 };
 
-const _isString = _typeofCheck('string');
+// const _isString = _typeofCheck('string');
+const _isString = _objectToStringCheck('String');
 
-const _isFunction = _typeofCheck('function');
+// const _isFunction = _typeofCheck('function');
+const _isFunction = _objectToStringCheck('Function');
 
 const _isObject = (value) => {
   if (

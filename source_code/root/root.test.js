@@ -10,6 +10,10 @@ const test_execute_root = (parts) => {
     cloneFunction,
   } = parts;
 
+  const {
+    _typeofCheck, _objectToStringCheck,
+  } = require('../type/_isType.js')
+
   const test_clone_object = () =>{
     const testObject1 = { a: 1, b: 2, c: 3 };
 
@@ -521,9 +525,6 @@ const test_execute_root = (parts) => {
     if (parts.platform.wsh) {
       return;
     }
-    // if (parts.platform.web) {
-    //   return;
-    // }
 
     var symbol1 = Symbol();
     checkEqual(true,
@@ -571,16 +572,62 @@ const test_execute_root = (parts) => {
     cloneDeep.reset();
   }
 
-  // const test_cloneDeep_map = () => {
-  //   if (parts.platform.wsh) {
-  //     return;
-  //   }
-  // }
-  // const test_cloneDeep_set = () => {
-  //   if (parts.platform.wsh) {
-  //     return;
-  //   }
-  // }
+  const test_cloneDeep_map = () => {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    const map1 = new Map();
+    map1.set('key1', 'value1');
+    map1.set('key2', 'value2');
+    checkEqual('value1', map1.get('key1'));
+
+    checkEqual(false, parts.isObject(map1));
+    checkEqual(true,  parts.isObjectType(map1));
+
+    // isMap
+    const _isMap = _objectToStringCheck('Map');
+    checkEqual(true,  _isMap(map1));
+    checkEqual(false, _isMap({}));
+
+    var map2 = clone(map1);
+    checkEqual(undefined, map2.get('key1'));  // no clone
+
+    var map2 = cloneDeep(map1);
+    checkEqual(undefined, map2.get('key1'));  // no clone
+
+    cloneFunction.map = (
+      source,
+      bufferWrite = () => {},
+      __cloneDeep = value => value,
+    ) => {
+      if (!_isMap(source)) {
+        return { result: false };
+      }
+      const cloneValue = new Map();
+      bufferWrite(source, cloneValue);
+      for (const [key, value] of source.entries()) {
+        cloneValue.set(key, value);
+      }
+      return { result: true, cloneValue } ;
+    }
+    clone.add(cloneFunction.map);
+    cloneDeep.add(cloneFunction.map);
+
+    var map2 = clone(map1);
+    checkEqual('value1', map2.get('key1')); // clone
+    checkEqual(false, map1 === map2);
+
+    var map2 = cloneDeep(map1);
+    checkEqual('value1', map2.get('key1')); // clone
+    checkEqual(false, map1 === map2);
+
+  }
+  const test_cloneDeep_set = () => {
+    if (parts.platform.wsh) {
+      return;
+    }
+  }
 
 
   const test_cloneDeep_CircularReference = () => {
@@ -619,8 +666,8 @@ const test_execute_root = (parts) => {
 
   test_cloneDeep_moment();
   test_cloneDeep_symbol();
-  // test_cloneDeep_map();
-  // test_cloneDeep_set();
+  test_cloneDeep_map();
+  test_cloneDeep_set();
 
   test_cloneDeep_CircularReference();
 

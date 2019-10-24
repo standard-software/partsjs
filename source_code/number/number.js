@@ -9,6 +9,9 @@ const {
   _copyProperty,_propertyCount,_inProperty,
 } = require('../object/object.js');
 
+/**
+ * isMultiples isEven isOdd
+ */
 const _isMultiples = (number, radix) => {
   return (number % radix) === 0;
 };
@@ -40,6 +43,9 @@ const isOdd = (number) => {
   return !_.isMultiples(number, 2);
 };
 
+/**
+ * round
+ */
 const _round = (value, digit = 0) => {
   var powResult;
   var plusFlag = 0 <= value ? true: false;
@@ -65,6 +71,9 @@ const round = (value, digit = 0) => {
   return _round(value, digit);
 };
 
+/**
+ * nearEqual
+ */
 const _nearEqual = (value1, value2, diff) => {
   if ( Math.abs(value1 - value2) <= diff ) {
     return true;
@@ -102,6 +111,9 @@ const nearEqual = (value1, value2, diff) => {
   return _nearEqual(value1, value2, diff);
 };
 
+/**
+ * inRange
+ */
 const _inRange = (value, from, to) => {
   if ((from <= value) && (value <= to)) {
     return true;
@@ -139,6 +151,9 @@ const inRange = (value, from, to) => {
   return _inRange(value, from, to);
 };
 
+/**
+ * randomInt
+ */
 const _randomInt = (min, max) => {
   return Math.floor( Math.random() * (max + 1 - min) ) + min;
 };
