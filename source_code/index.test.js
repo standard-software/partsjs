@@ -21,8 +21,8 @@ const test_execute_index = (parts) => {
       copyProperty,propertyCount,inProperty,
     } = parts.object;
 
-    checkEqual(136, propertyCount(parts));
-    checkEqual(78,  propertyCount(parts.type));
+    checkEqual(148, propertyCount(parts));
+    checkEqual(90,  propertyCount(parts.type));
     checkEqual(5,   propertyCount(parts.test));
     checkEqual(6,   propertyCount(parts.compare));
     checkEqual(9,   propertyCount(parts.convert));

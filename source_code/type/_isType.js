@@ -2,43 +2,57 @@ const _typeofCheck = (typeName) => {
   return ((value) => typeof value === typeName);
 };
 
+const objectToString = value => {
+  return Object.prototype.toString.call(value);
+};
+
 const _objectToStringCheck = (typeName) => {
   return (
     (value) =>
-      Object.prototype.toString.call(value) === `[object ${typeName}]`
+      objectToString(value) === `[object ${typeName}]`
   );
 };
 
-// const _isUndefined = _typeofCheck('undefined');
-const _isUndefined = _objectToStringCheck('Undefined');
+const _isUndefined = _typeofCheck('undefined');
 
-// const _isNull = (value) => (value === null);
-const _isNull = _objectToStringCheck('Null');
+const _isNull = (value) => (value === null);
 
 const _isNaNStrict = (value) => value !== value;
 
-// const _isBoolean = _typeofCheck('boolean');
-const _isBoolean = _objectToStringCheck('Boolean');
+const _isBoolean = _typeofCheck('boolean');
+const _isBooleanObject = value => {
+  return (
+    _objectToStringCheck('Boolean')
+    && (!_isBoolean(value))
+  );
+}
 
 const _isNumber = (value) => {
-  // return (_typeofCheck('number')(value) && (isFinite(value)));
-  return (_objectToStringCheck('Number')(value) && (isFinite(value)));
+  return (_typeofCheck('number')(value) && (isFinite(value)));
+};
+const _isNumberObject = (value) => {
+  return (
+    _objectToStringCheck('Number')(value)
+    && (!_typeofCheck('number')(value))
+  );
 };
 
 const _isInteger = (value) => {
   if (!_isNumber(value)) {
     return false;
   }
-  // return Math.round(value) === value;
-  return Math.round(value) === Number(value);
-  // [Numer Cast] is for support Number Object
+  return Math.round(value) === value;
 };
 
-// const _isString = _typeofCheck('string');
-const _isString = _objectToStringCheck('String');
+const _isString = _typeofCheck('string');
+const _isStringObject = value => {
+  return (
+    _objectToStringCheck('String')
+    && (!_isString(value))
+  );
+}
 
-// const _isFunction = _typeofCheck('function');
-const _isFunction = _objectToStringCheck('Function');
+const _isFunction = _typeofCheck('function');
 
 const _isObject = (value) => {
   if (
@@ -79,19 +93,25 @@ const _isNotObjectType  = value => !_isObjectType(value);
 const _isNotArray       = value => !_isArray(value);
 const _isNotDate        = value => !_isDate(value);
 const _isNotRegExp      = value => !_isRegExp(value);
+const _isNotBooleanObject = value => !_isBooleanObject(value);
+const _isNotNumberObject  = value => !_isNumberObject(value);
+const _isNotStringObject  = value => !_isStringObject(value);
 
 module.exports = {
   _typeofCheck, _objectToStringCheck,
 
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isObjectType,
-  _isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isObjectType,
+  _isArray, _isDate, _isRegExp,
   _isError,
+  _isBooleanObject, _isNumberObject, _isStringObject,
 
-  _isNotUndefined,_isNotNull,_isNotNaNStrict,
-  _isNotBoolean,_isNotNumber,_isNotInteger,_isNotString,
-  _isNotFunction,_isNotObject,_isNotObjectType,
-  _isNotArray,_isNotDate,_isNotRegExp,
+  _isNotUndefined, _isNotNull, _isNotNaNStrict,
+  _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
+  _isNotFunction, _isNotObject, _isNotObjectType,
+  _isNotArray, _isNotDate, _isNotRegExp,
+  _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
+
 };
 

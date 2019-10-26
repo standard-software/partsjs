@@ -3,11 +3,14 @@ const {
   _isBoolean,_isNumber,_isInteger,_isString,
   _isFunction,_isObject,_isObjectType,
   _isArray,_isDate,_isRegExp,
+  _isBooleanObject, _isNumberObject, _isStringObject,
 
   _isNotUndefined,_isNotNull,_isNotNaNStrict,
   _isNotBoolean,_isNotNumber,_isNotInteger,_isNotString,
   _isNotFunction,_isNotObject,_isNotObjectType,
   _isNotArray,_isNotDate,_isNotRegExp,
+  _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
+
 } = require('../type/_isType.js');
 
 const {
@@ -64,6 +67,9 @@ const isArray       = _isTypeCheckArgsFunc(_isArray);
 const isDate        = _isTypeCheckArgsFunc(_isDate);
 const isRegExp      = _isTypeCheckArgsFunc(_isRegExp);
 const isException   = _isTypeCheckArgsFunc(_isException);
+const isBooleanObject = _isTypeCheckArgsFunc(_isBooleanObject);
+const isNumberObject  = _isTypeCheckArgsFunc(_isNumberObject);
+const isStringObject  = _isTypeCheckArgsFunc(_isStringObject);
 
 const isNotUndefined  = _isTypeCheckArgsFunc(_isNotUndefined);
 const isNotNull       = _isTypeCheckArgsFunc(_isNotNull);
@@ -80,6 +86,9 @@ const isNotArray      = _isTypeCheckArgsFunc(_isNotArray);
 const isNotDate       = _isTypeCheckArgsFunc(_isNotDate);
 const isNotRegExp     = _isTypeCheckArgsFunc(_isNotRegExp);
 const isNotException  = _isTypeCheckArgsFunc(_isNotException);
+const isNotBooleanObject  = _isTypeCheckArgsFunc(_isNotBooleanObject);
+const isNotNumberObject    = _isTypeCheckArgsFunc(_isNotNumberObject);
+const isNotStringObject    = _isTypeCheckArgsFunc(_isNotStringObject);
 
 const isUndefinedArray  = _isTypeCheckArrayFunc(_isUndefined);
 const isNullArray       = _isTypeCheckArrayFunc(_isNull);
@@ -96,6 +105,9 @@ const isArrayArray      = _isTypeCheckArrayFunc(_isArray);
 const isDateArray       = _isTypeCheckArrayFunc(_isDate);
 const isRegExpArray     = _isTypeCheckArrayFunc(_isRegExp);
 const isExceptionArray  = _isTypeCheckArrayFunc(_isException);
+const isBooleanObjectArray  = _isTypeCheckArrayFunc(_isBooleanObject);
+const isNumberObjectArray   = _isTypeCheckArrayFunc(_isNumberObject);
+const isStringObjectArray   = _isTypeCheckArrayFunc(_isStringObject);
 
 const isNotUndefinedArray   = _isTypeCheckArrayFunc(value => !_isUndefined(value));
 const isNotNullArray        = _isTypeCheckArrayFunc(value => !_isNull(value));
@@ -112,6 +124,9 @@ const isNotArrayArray       = _isTypeCheckArrayFunc(value => !_isArray(value));
 const isNotDateArray        = _isTypeCheckArrayFunc(value => !_isDate(value));
 const isNotRegExpArray      = _isTypeCheckArrayFunc(value => !_isRegExp(value));
 const isNotExceptionArray   = _isTypeCheckArrayFunc(value => !_isException(value));
+const isNotBooleanObjectArray = _isTypeCheckArrayFunc(value => !_isBooleanObject(value));
+const isNotNumberObjectArray  = _isTypeCheckArrayFunc(value => !_isNumberObject(value));
+const isNotStringObjectArray  = _isTypeCheckArrayFunc(value => !_isStringObject(value));
 
 const isUndef   = isUndefined;
 const isBool    = isBoolean;
@@ -134,42 +149,46 @@ const isNotObjType  = isNotObjectType;
 const isNotExcept   = isNotException;
 
 module.exports = {
-  isUndefined,isNull,isNaNStrict,
-  isBoolean,isNumber,isInteger,isString,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
   isSymbol,
-  isFunction,isObject,isObjectType,
-  isArray,isDate,isRegExp,
+  isFunction, isObject, isObjectType,
+  isArray, isDate, isRegExp,
   isException,
+  isBooleanObject, isNumberObject, isStringObject,
 
-  isNotUndefined,isNotNull,isNotNaNStrict,
-  isNotBoolean,isNotNumber,isNotInteger,isNotString,
+  isNotUndefined, isNotNull, isNotNaNStrict,
+  isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotSymbol,
-  isNotFunction,isNotObject,isNotObjectType,
-  isNotArray,isNotDate,isNotRegExp,
+  isNotFunction, isNotObject, isNotObjectType,
+  isNotArray, isNotDate, isNotRegExp,
   isNotException,
+  isNotBooleanObject, isNotNumberObject, isNotStringObject,
 
-  isUndefinedArray,isNullArray,isNaNStrictArray,
-  isBooleanArray,isNumberArray,isIntegerArray,isStringArray,
+  isUndefinedArray, isNullArray, isNaNStrictArray,
+  isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isSymbolArray,
-  isFunctionArray,isObjectArray,isObjectTypeArray,
-  isArrayArray,isDateArray,isRegExpArray,
+  isFunctionArray, isObjectArray, isObjectTypeArray,
+  isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
+  isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
 
-  isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,
-  isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
+  isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
+  isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
   isNotSymbolArray,
-  isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,
-  isNotArrayArray,isNotDateArray,isNotRegExpArray,
+  isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
+  isNotArrayArray, isNotDateArray, isNotRegExpArray,
   isNotExceptionArray,
+  isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObject,
 
   isUndef,
-  isBool,isNum,isInt,isStr,
-  isFunc,isObj,isObjType,
+  isBool, isNum, isInt, isStr,
+  isFunc, isObj, isObjType,
   isExcept,
 
   isNotUndef,
-  isNotBool,isNotNum,isNotInt,isNotStr,
-  isNotFunc,isNotObj,isNotObjType,
+  isNotBool, isNotNum, isNotInt, isNotStr,
+  isNotFunc, isNotObj, isNotObjType,
   isNotExcept,
 
 };

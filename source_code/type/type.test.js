@@ -6,29 +6,33 @@ const test_execute_type = (parts) => {
 
   const {
 
-    isUndefined,isNull,isNaNStrict,
-    isBoolean,isNumber,isInteger,isString,
-    isFunction,isObject,isObjectType,
-    isArray,isDate,isRegExp,
+    isUndefined, isNull, isNaNStrict,
+    isBoolean, isNumber, isInteger, isString,
+    isFunction, isObject, isObjectType,
+    isArray, isDate, isRegExp,
     isException,
+    isBooleanObject, isNumberObject, isStringObject,
 
-    isNotUndefined,isNotNull,isNotNaNStrict,
-    isNotBoolean,isNotNumber,isNotInteger,isNotString,
-    isNotFunction,isNotObject,isNotObjectType,
-    isNotArray,isNotDate,isNotRegExp,
+    isNotUndefined, isNotNull, isNotNaNStrict,
+    isNotBoolean, isNotNumber, isNotInteger, isNotString,
+    isNotFunction, isNotObject, isNotObjectType,
+    isNotArray, isNotDate, isNotRegExp,
     isNotException,
+    isNotBooleanObject, isNotNumberObject, isNotStringObject,
 
-    isUndefinedArray,isNullArray,isNaNStrictArray,
-    isBooleanArray,isNumberArray,isIntegerArray,isStringArray,
-    isFunctionArray,isObjectArray,isObjectTypeArray,
-    isArrayArray,isDateArray,isRegExpArray,
+    isUndefinedArray, isNullArray, isNaNStrictArray,
+    isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
+    isFunctionArray, isObjectArray, isObjectTypeArray,
+    isArrayArray, isDateArray, isRegExpArray,
     isExceptionArray,
+    isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
 
-    isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,
-    isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
-    isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,
-    isNotArrayArray,isNotDateArray,isNotRegExpArray,
+    isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
+    isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
+    isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
+    isNotArrayArray, isNotDateArray, isNotRegExpArray,
     isNotExceptionArray,
+    isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
 
   } = parts.type;
 
@@ -47,156 +51,76 @@ const test_execute_type = (parts) => {
       checkEqual(objectStringName, objectToString(value));
     }
 
-    checkEqual('undefined', typeof undefined);
-    checkEqual('object',    typeof null); // bad specification
-    checkEqual('boolean',   typeof true);
-    checkEqual('boolean',   typeof false);
-    checkEqual('object',    typeof new Boolean);
-    checkEqual('number',    typeof 1);
-    checkEqual('number',    typeof NaN);
-    checkEqual('number',    typeof Infinity);
-    checkEqual('object',    typeof new Number(1));
-    checkEqual('object',    typeof new Number(NaN));
-    checkEqual('object',    typeof new Number(Infinity));
-    checkEqual('object',    typeof new Number(null));
-    checkEqual('object',    typeof new Number(undefined));
-    checkEqual('string',    typeof '');
-    checkEqual('string',    typeof '1');
-    checkEqual('object',    typeof new String(''));
-    checkEqual('object',    typeof new String('1'));
-    checkEqual('object',    typeof new String(null));
-    checkEqual('object',    typeof new String(undefined));
+    checkType('undefined', '[object Undefined]',  undefined);
+    checkType('object',    '[object Null]',       null); // bad specification
+    checkType('boolean',   '[object Boolean]',    true);
+    checkType('boolean',   '[object Boolean]',    false);
+    checkType('object',    '[object Boolean]',    new Boolean);
+    checkType('number',    '[object Number]',     1);
+    checkType('number',    '[object Number]',     NaN);
+    checkType('number',    '[object Number]',     Infinity);
+    checkType('object',    '[object Number]',     new Number(1));
+    checkType('object',    '[object Number]',     new Number(NaN));
+    checkType('object',    '[object Number]',     new Number(Infinity));
+    checkType('object',    '[object Number]',     new Number(null));
+    checkType('object',    '[object Number]',     new Number(undefined));
+    checkType('string',    '[object String]',     '');
+    checkType('string',    '[object String]',     '1');
+    checkType('object',    '[object String]',     new String(''));
+    checkType('object',    '[object String]',     new String('1'));
+    checkType('object',    '[object String]',     new String(null));
+    checkType('object',    '[object String]',     new String(undefined));
     function testFunc() {}
-    checkEqual('function',  typeof testFunc);
-    checkEqual('function',  typeof function() {});
-    checkEqual('function',  typeof (() => {}));
-    checkEqual('object',    typeof {});
-    checkEqual('object',    typeof new Object());
-    checkEqual('object',    typeof []);
-    checkEqual('object',    typeof new Array());
-    checkEqual('object',    typeof /^a/);
-    checkEqual('object',    typeof new RegExp('^a'));
-    checkEqual('object',    typeof Math);
+    checkType('function',  '[object Function]',   testFunc);
+    checkType('function',  '[object Function]',   function() {});
+    checkType('function',  '[object Function]',   (() => {}));
+    checkType('object',    '[object Object]',     {});
+    checkType('object',    '[object Object]',     new Object());
+    checkType('object',    '[object Array]',      []);
+    checkType('object',    '[object Array]',      new Array());
+    checkType('object',    '[object RegExp]',     /^a/);
+    checkType('object',    '[object RegExp]',     new RegExp('^a'));
+    checkType('object',    '[object Math]',       Math);
 
     if (parts.platform.wsh) {
       return;
     }
-    checkEqual('object',    typeof new Int8Array());
-    checkEqual('object',    typeof new Uint8Array());
-    checkEqual('object',    typeof new Uint8ClampedArray());
-    checkEqual('object',    typeof new Int16Array());
-    checkEqual('object',    typeof new Uint16Array());
-    checkEqual('object',    typeof new Int32Array());
-    checkEqual('object',    typeof new Uint32Array());
-    checkEqual('object',    typeof new Float32Array());
-    checkEqual('object',    typeof new Float64Array());
+    checkType('object',    '[object Int8Array]',          new Int8Array());
+    checkType('object',    '[object Uint8Array]',         new Uint8Array());
+    checkType('object',    '[object Uint8ClampedArray]',  new Uint8ClampedArray());
+    checkType('object',    '[object Int16Array]',         new Int16Array());
+    checkType('object',    '[object Uint16Array]',        new Uint16Array());
+    checkType('object',    '[object Int32Array]',         new Int32Array());
+    checkType('object',    '[object Uint32Array]',        new Uint32Array());
+    checkType('object',    '[object Float32Array]',       new Float32Array());
+    checkType('object',    '[object Float64Array]',       new Float64Array());
 
-    checkEqual('symbol',    typeof Symbol());
-    checkEqual('object',    typeof new Map());
-    checkEqual('object',    typeof new WeakMap());
-    checkEqual('object',    typeof new Set());
-    checkEqual('object',    typeof new WeakSet());
+    checkType('symbol',    '[object Symbol]',             Symbol());
+    checkType('object',    '[object Map]',                new Map());
+    checkType('object',    '[object WeakMap]',            new WeakMap());
+    checkType('object',    '[object Set]',                new Set());
+    checkType('object',    '[object WeakSet]',            new WeakSet());
 
-    checkEqual('object',    typeof new ArrayBuffer(8));
-    checkEqual('object',    typeof new SharedArrayBuffer(8));
-    checkEqual('object',    typeof Atomics);
-    checkEqual('object',    typeof new DataView(new ArrayBuffer(16)));
-    checkEqual('object',    typeof JSON);
+    checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
+    checkType('object',    '[object SharedArrayBuffer]',  new SharedArrayBuffer(8));
+    checkType('object',    '[object Atomics]',            Atomics);
+    checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
+    checkType('object',    '[object JSON]',               JSON);
 
-    checkEqual('function',  typeof Promise);
-    function* gen() {
-      yield 1;
-      yield 2;
-      yield 3;
-    }
-    checkEqual('object',    typeof gen());
+    checkType('function',  '[object Function]',           Promise);
+
+    function* Generator() { yield 1; yield 2; yield 3; }
     var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
-    checkEqual('function',  typeof new GeneratorFunction());
     var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
-    checkEqual('function',  typeof new AsyncFunction());
+    checkType('object',    '[object Generator]',          Generator());
+    checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
+    checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
 
-    checkEqual('object',    typeof Reflect);
-    checkEqual('object',    typeof new Proxy({}, {}));
-    checkEqual('object',    typeof Intl);
-    checkEqual('object',    typeof WebAssembly);
+    checkType('object',    '[object Object]',             Reflect);
+    checkType('object',    '[object Object]',             new Proxy({}, {}));
+    checkType('object',    '[object Object]',             Intl);
+    checkType('object',    '[object WebAssembly]',        WebAssembly);
 
-  }
-
-  const test_objectToStringCheck = () => {
-    const objectToString = value => Object.prototype.toString.call(value);
-
-      checkEqual('[object Undefined]',  objectToString(undefined));
-      checkEqual('[object Null]',       objectToString(null));
-      checkEqual('[object Boolean]',    objectToString(true));
-      checkEqual('[object Boolean]',    objectToString(false));
-      checkEqual('[object Boolean]',    objectToString(new Boolean));
-      checkEqual('[object Number]',     objectToString(1));
-      checkEqual('[object Number]',     objectToString(NaN));
-      checkEqual('[object Number]',     objectToString(Infinity));
-      checkEqual('[object Number]',     objectToString(new Number(1)));
-      checkEqual('[object Number]',     objectToString(new Number(NaN)));
-      checkEqual('[object Number]',     objectToString(new Number(Infinity)));
-      checkEqual('[object Number]',     objectToString(new Number(null)));
-      checkEqual('[object Number]',     objectToString(new Number(undefined)));
-      checkEqual('[object String]',     objectToString(''));
-      checkEqual('[object String]',     objectToString('1'));
-      checkEqual('[object String]',     objectToString(new String('')));
-      checkEqual('[object String]',     objectToString(new String('1')));
-      checkEqual('[object String]',     objectToString(new String(null)));
-      checkEqual('[object String]',     objectToString(new String(undefined)));
-      function testFunc() {}
-      checkEqual('[object Function]',   objectToString(testFunc));
-      checkEqual('[object Function]',   objectToString(function() {}));
-      checkEqual('[object Function]',   objectToString((() => {})));
-      checkEqual('[object Object]',     objectToString({}));
-      checkEqual('[object Object]',     objectToString(new Object()));
-      checkEqual('[object Array]',      objectToString([]));
-      checkEqual('[object Array]',      objectToString(new Array()));
-      checkEqual('[object RegExp]',     objectToString(/^a/));
-      checkEqual('[object RegExp]',     objectToString(new RegExp('^a')));
-      checkEqual('[object Math]',       objectToString(Math));
-
-      if (parts.platform.wsh) {
-        return;
-      }
-      checkEqual('[object Int8Array]',          objectToString(new Int8Array()));
-      checkEqual('[object Uint8Array]',         objectToString(new Uint8Array()));
-      checkEqual('[object Uint8ClampedArray]',  objectToString(new Uint8ClampedArray()));
-      checkEqual('[object Int16Array]',         objectToString(new Int16Array()));
-      checkEqual('[object Uint16Array]',        objectToString(new Uint16Array()));
-      checkEqual('[object Int32Array]',         objectToString(new Int32Array()));
-      checkEqual('[object Uint32Array]',        objectToString(new Uint32Array()));
-      checkEqual('[object Float32Array]',       objectToString(new Float32Array()));
-      checkEqual('[object Float64Array]',       objectToString(new Float64Array()));
-
-      checkEqual('[object Symbol]',             objectToString(Symbol()));
-      checkEqual('[object Map]',                objectToString(new Map()));
-      checkEqual('[object WeakMap]',            objectToString(new WeakMap()));
-      checkEqual('[object Set]',                objectToString(new Set()));
-      checkEqual('[object WeakSet]',            objectToString(new WeakSet()));
-
-      checkEqual('[object ArrayBuffer]',        objectToString(new ArrayBuffer(8)));
-      checkEqual('[object SharedArrayBuffer]',  objectToString(new SharedArrayBuffer(8)));
-      checkEqual('[object Atomics]',            objectToString(Atomics));
-      checkEqual('[object DataView]',           objectToString(new DataView(new ArrayBuffer(16))));
-      checkEqual('[object JSON]',               objectToString(JSON));
-
-      checkEqual('[object Function]',           objectToString(Promise));
-      function* gen() {
-        yield 1;
-        yield 2;
-        yield 3;
-      }
-      checkEqual('[object Generator]',          objectToString(gen()));
-      var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
-      checkEqual('[object GeneratorFunction]',  objectToString(new GeneratorFunction()));
-      var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
-      checkEqual('[object AsyncFunction]',      objectToString(new AsyncFunction()));
-
-      checkEqual('[object Object]',             objectToString(Reflect));
-      checkEqual('[object Object]',             objectToString(new Proxy({}, {})));
-      checkEqual('[object Object]',             objectToString(Intl));
-      checkEqual('[object WebAssembly]',        objectToString(WebAssembly));
   }
 
   const test_isUndefined = function () {
@@ -309,15 +233,19 @@ const test_execute_type = (parts) => {
 
     checkEqual(false, isBoolean([true, true]));
 
-    checkEqual(true, isBooleanArray([true, true]));
-    checkEqual(true, isBooleanArray([true, true, true]));
-    checkEqual(true, isBooleanArray([true, false, true]));
+    checkEqual(true,  isBooleanArray([true, true]));
+    checkEqual(true,  isBooleanArray([true, true, true]));
+    checkEqual(true,  isBooleanArray([true, false, true]));
     checkEqual(false, isBooleanArray([true, 1, true]));
 
-    checkEqual(true, isBoolean(new Boolean()));
-    checkEqual(true, isBoolean(new Boolean('1')));
-    checkEqual(true, isBoolean(new Boolean('a')));
-    checkEqual(true, isBoolean(new Boolean('true')));
+    checkEqual(false, isBoolean(new Boolean()));
+    checkEqual(false, isBoolean(new Boolean('1')));
+    checkEqual(false, isBoolean(new Boolean('a')));
+    checkEqual(false, isBoolean(new Boolean('true')));
+    checkEqual(true,  isBooleanObject(new Boolean()), 'test isBooleanObject');
+    checkEqual(true,  isBooleanObject(new Boolean('1')));
+    checkEqual(true,  isBooleanObject(new Boolean('a')));
+    checkEqual(true,  isBooleanObject(new Boolean('true')));
   };
 
   const test_isNumber = function () {
@@ -382,13 +310,23 @@ const test_execute_type = (parts) => {
 
     checkEqual(0,   Number(new Number()));
     checkEqual(0,   Number(new Number('')));
+    checkEqual(0,   Number(new Number(' ')));
+    checkEqual(0,   Number(new Number('　')));
     checkEqual(1,   Number(new Number('1')));
     checkEqual(1.1, Number(new Number('1.1')));
+    checkEqual(NaN,       Number(new Number(NaN)));
+    checkEqual(Infinity,  Number(new Number(Infinity)));
+    checkEqual(NaN,       Number(new Number(undefined)));
+    checkEqual(0,         Number(new Number(null)));
 
-    checkEqual(true, isNumber(new Number()));
-    checkEqual(true, isNumber(new Number('')));
-    checkEqual(true, isNumber(new Number('1')));
-    checkEqual(true, isNumber(new Number('1.1')));
+    checkEqual(false, isNumber(new Number()));
+    checkEqual(false, isNumber(new Number('')));
+    checkEqual(false, isNumber(new Number('1')));
+    checkEqual(false, isNumber(new Number('1.1')));
+    checkEqual(true,  isNumberObject(new Number()));
+    checkEqual(true,  isNumberObject(new Number('')));
+    checkEqual(true,  isNumberObject(new Number('1')));
+    checkEqual(true,  isNumberObject(new Number('1.1')));
   };
 
   const test_isInteger = function () {
@@ -433,12 +371,12 @@ const test_execute_type = (parts) => {
     checkEqual(false, isIntegerArray([1, 2, null]));
     checkEqual(false, isIntegerArray(['a', 'b', 1]));
 
-    checkEqual(true,  isInteger(new Number()));
-    checkEqual(true,  isInteger(new Number('')));
-    checkEqual(true,  isInteger(new Number('1')));
+    checkEqual(false, isInteger(new Number()));
+    checkEqual(false, isInteger(new Number('')));
+    checkEqual(false, isInteger(new Number('1')));
     checkEqual(false, isInteger(new Number('1.1')));
 
-    checkEqual(true,  isInteger(new Number(1)));
+    checkEqual(false, isInteger(new Number(1)));
   };
 
   const test_isString = function () {
@@ -464,10 +402,28 @@ const test_execute_type = (parts) => {
     checkEqual('',    String(new String()));
     checkEqual('',    String(new String('')));
     checkEqual(' ',   String(new String(' ')));
+    checkEqual('　',   String(new String('　')));
     checkEqual('1',   String(new String('1')));
     checkEqual('1.1', String(new String('1.1')));
+    checkEqual('1',   String(new String(1)));
+    checkEqual('1.1', String(new String(1.1)));
+    checkEqual('NaN',       String(new String(NaN)));
+    checkEqual('Infinity',  String(new String(Infinity)));
+    checkEqual('undefined', String(new String(undefined)));
+    checkEqual('null',      String(new String(null)));
 
-    checkEqual(true, isString(new String()));
+    checkEqual(false, isString(new String()));
+    checkEqual(false, isString(new String(undefined)));
+    checkEqual(false, isString(new String(null)));
+    checkEqual(false, isString(new String('')));
+    checkEqual(false, isString(new String('1')));
+    checkEqual(false, isString(new String(1)));
+    checkEqual(true,  isStringObject(new String()));
+    checkEqual(true,  isStringObject(new String(undefined)));
+    checkEqual(true,  isStringObject(new String(null)));
+    checkEqual(true,  isStringObject(new String('')));
+    checkEqual(true,  isStringObject(new String('1')));
+    checkEqual(true,  isStringObject(new String(1)));
   };
 
   const test_isFunction = function () {
@@ -617,7 +573,6 @@ const test_execute_type = (parts) => {
 
   console.log('  test type.js');
   test_checkType();
-  test_objectToStringCheck();
   test_isUndefined();
   test_isNull();
   test_isBoolean();

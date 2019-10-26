@@ -6,6 +6,7 @@ const _TYPE_BASE =
   'Function,Object,ObjectType,' +
   'Array,Date,RegExp,' +
   'Exception,' +
+  'BooleanObject,NumberObject,StringObject,'
   '';
 
 const IS_TYPE           = _TYPE_BASE.split(',').map(item => `is${item}`).join(',');
