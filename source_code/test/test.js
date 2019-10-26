@@ -10,6 +10,7 @@ const checkEqual = (a, b, message = '') => {
     throw new TypeError('checkEqual args message is not string');
   }
 
+  checkEqual.testCounter += 1;
   if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
   }
@@ -17,13 +18,14 @@ const checkEqual = (a, b, message = '') => {
     return true;
   }
   message =
-    `Test: ${message}\n` +
+    `Test: ${checkEqual.testCounter}: ${message}\n` +
     '  A !== B\n' +
     `  A = ${String(a)}\n` +
     `  B = ${String(b)}`;
   console.log(message);
   return false;
 };
+checkEqual.testCounter = 0;
 
 /**
  * isThrown isThrownValue isThrownException isNotThrown
