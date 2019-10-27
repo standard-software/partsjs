@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 var test_execute_type = function test_execute_type(parts) {
   var checkEqual = parts.test.checkEqual;
   var _parts$type = parts.type,
@@ -17,6 +19,14 @@ var test_execute_type = function test_execute_type(parts) {
       isDate = _parts$type.isDate,
       isRegExp = _parts$type.isRegExp,
       isException = _parts$type.isException,
+      isBooleanObject = _parts$type.isBooleanObject,
+      isNumberObject = _parts$type.isNumberObject,
+      isStringObject = _parts$type.isStringObject,
+      isSymbol = _parts$type.isSymbol,
+      isMap = _parts$type.isMap,
+      isWeakMap = _parts$type.isWeakMap,
+      isSet = _parts$type.isSet,
+      isWeakSet = _parts$type.isWeakSet,
       isNotUndefined = _parts$type.isNotUndefined,
       isNotNull = _parts$type.isNotNull,
       isNotNaNStrict = _parts$type.isNotNaNStrict,
@@ -31,6 +41,14 @@ var test_execute_type = function test_execute_type(parts) {
       isNotDate = _parts$type.isNotDate,
       isNotRegExp = _parts$type.isNotRegExp,
       isNotException = _parts$type.isNotException,
+      isNotBooleanObject = _parts$type.isNotBooleanObject,
+      isNotNumberObject = _parts$type.isNotNumberObject,
+      isNotStringObject = _parts$type.isNotStringObject,
+      isNotSymbol = _parts$type.isNotSymbol,
+      isNotMap = _parts$type.isNotMap,
+      isNotWeakMap = _parts$type.isNotWeakMap,
+      isNotSet = _parts$type.isNotSet,
+      isNotWeakSet = _parts$type.isNotWeakSet,
       isUndefinedArray = _parts$type.isUndefinedArray,
       isNullArray = _parts$type.isNullArray,
       isNaNStrictArray = _parts$type.isNaNStrictArray,
@@ -45,6 +63,9 @@ var test_execute_type = function test_execute_type(parts) {
       isDateArray = _parts$type.isDateArray,
       isRegExpArray = _parts$type.isRegExpArray,
       isExceptionArray = _parts$type.isExceptionArray,
+      isBooleanObjectArray = _parts$type.isBooleanObjectArray,
+      isNumberObjectArray = _parts$type.isNumberObjectArray,
+      isStringObjectArray = _parts$type.isStringObjectArray,
       isNotUndefinedArray = _parts$type.isNotUndefinedArray,
       isNotNullArray = _parts$type.isNotNullArray,
       isNotNaNStrictArray = _parts$type.isNotNaNStrictArray,
@@ -58,7 +79,109 @@ var test_execute_type = function test_execute_type(parts) {
       isNotArrayArray = _parts$type.isNotArrayArray,
       isNotDateArray = _parts$type.isNotDateArray,
       isNotRegExpArray = _parts$type.isNotRegExpArray,
-      isNotExceptionArray = _parts$type.isNotExceptionArray;
+      isNotExceptionArray = _parts$type.isNotExceptionArray,
+      isNotBooleanObjectArray = _parts$type.isNotBooleanObjectArray,
+      isNotNumberObjectArray = _parts$type.isNotNumberObjectArray,
+      isNotStringObjectArray = _parts$type.isNotStringObjectArray;
+
+  var _require = require('../type/_isType.js'),
+      _typeofCheck = _require._typeofCheck,
+      _objectToStringCheck = _require._objectToStringCheck;
+
+  var test_checkType = function test_checkType() {
+    var objectToString = function objectToString(value) {
+      return Object.prototype.toString.call(value);
+    };
+
+    var checkType = function checkType(typeofName, objectStringName, value) {
+      checkEqual(typeofName, _typeof(value));
+      checkEqual(objectStringName, objectToString(value));
+    };
+
+    if (parts.platform.wsh) {
+      checkType('undefined', '[object Object]', undefined);
+      checkType('object', '[object Object]', null);
+    } else {
+      checkType('undefined', '[object Undefined]', undefined);
+      checkType('object', '[object Null]', null); // bad specification
+    }
+
+    checkType('boolean', '[object Boolean]', true);
+    checkType('boolean', '[object Boolean]', false);
+    checkType('object', '[object Boolean]', new Boolean());
+    checkType('number', '[object Number]', 1);
+    checkType('number', '[object Number]', NaN);
+    checkType('number', '[object Number]', Infinity);
+    checkType('object', '[object Number]', new Number(1));
+    checkType('object', '[object Number]', new Number(NaN));
+    checkType('object', '[object Number]', new Number(Infinity));
+    checkType('object', '[object Number]', new Number(null));
+    checkType('object', '[object Number]', new Number(undefined));
+    checkType('string', '[object String]', '');
+    checkType('string', '[object String]', '1');
+    checkType('object', '[object String]', new String(''));
+    checkType('object', '[object String]', new String('1'));
+    checkType('object', '[object String]', new String(null));
+    checkType('object', '[object String]', new String(undefined));
+
+    function testFunc() {}
+
+    checkType('function', '[object Function]', testFunc);
+    checkType('function', '[object Function]', function () {});
+    checkType('function', '[object Function]', function () {});
+    checkType('object', '[object Object]', {});
+    checkType('object', '[object Object]', new Object());
+    checkType('object', '[object Array]', []);
+    checkType('object', '[object Array]', new Array());
+    checkType('object', '[object RegExp]', /^a/);
+    checkType('object', '[object RegExp]', new RegExp('^a'));
+    checkType('object', '[object Math]', Math);
+
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkType('object', '[object Int8Array]', new Int8Array());
+    checkType('object', '[object Uint8Array]', new Uint8Array());
+    checkType('object', '[object Uint8ClampedArray]', new Uint8ClampedArray());
+    checkType('object', '[object Int16Array]', new Int16Array());
+    checkType('object', '[object Uint16Array]', new Uint16Array());
+    checkType('object', '[object Int32Array]', new Int32Array());
+    checkType('object', '[object Uint32Array]', new Uint32Array());
+    checkType('object', '[object Float32Array]', new Float32Array());
+    checkType('object', '[object Float64Array]', new Float64Array());
+    checkEqual(true, Array.isArray(new Array()));
+    checkEqual(false, Array.isArray(new Int8Array()));
+    checkEqual(false, Array.isArray(new Uint8Array()));
+    checkEqual(false, Array.isArray(new Uint8ClampedArray()));
+    checkEqual(false, Array.isArray(new Int16Array()));
+    checkEqual(false, Array.isArray(new Uint16Array()));
+    checkEqual(false, Array.isArray(new Int32Array()));
+    checkEqual(false, Array.isArray(new Uint32Array()));
+    checkEqual(false, Array.isArray(new Float32Array()));
+    checkEqual(false, Array.isArray(new Float64Array()));
+    checkType('symbol', '[object Symbol]', Symbol());
+    checkType('object', '[object Map]', new Map());
+    checkType('object', '[object WeakMap]', new WeakMap());
+    checkType('object', '[object Set]', new Set());
+    checkType('object', '[object WeakSet]', new WeakSet());
+    checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
+    checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
+    checkType('object', '[object Atomics]', Atomics);
+    checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
+    checkType('object', '[object JSON]', JSON);
+    checkType('function', '[object Function]', Promise); // function* Generator() { yield 1; yield 2; yield 3; }
+    // var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
+    // var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
+    // checkType('object',    '[object Generator]',          Generator());
+    // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
+    // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
+
+    checkType('object', '[object Object]', Reflect);
+    checkType('object', '[object Object]', new Proxy({}, {}));
+    checkType('object', '[object Object]', Intl);
+    checkType('object', '[object WebAssembly]', WebAssembly);
+  };
 
   var test_isUndefined = function test_isUndefined() {
     var u1;
@@ -163,6 +286,13 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(true, isBooleanArray([true, false, true]));
     checkEqual(false, isBooleanArray([true, 1, true]));
     checkEqual(false, isBoolean(new Boolean()));
+    checkEqual(false, isBoolean(new Boolean('1')));
+    checkEqual(false, isBoolean(new Boolean('a')));
+    checkEqual(false, isBoolean(new Boolean('true')));
+    checkEqual(true, isBooleanObject(new Boolean()), 'test isBooleanObject');
+    checkEqual(true, isBooleanObject(new Boolean('1')));
+    checkEqual(true, isBooleanObject(new Boolean('a')));
+    checkEqual(true, isBooleanObject(new Boolean('true')));
   };
 
   var test_isNumber = function test_isNumber() {
@@ -219,7 +349,30 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isNotNumberArray([1, 2, true]));
     checkEqual(true, isNotNumberArray([false, true]));
     checkEqual(true, isNotNumberArray(['a', 'b']));
+    checkEqual(0, Number(new Number()));
+    checkEqual(0, Number(new Number('')));
+    checkEqual(0, Number(new Number(' ')));
+
+    if (parts.platform.wsh) {
+      checkEqual(NaN, Number(new Number('　')));
+    } else {
+      checkEqual(0, Number(new Number('　')));
+    }
+
+    checkEqual(1, Number(new Number('1')));
+    checkEqual(1.1, Number(new Number('1.1')));
+    checkEqual(NaN, Number(new Number(NaN)));
+    checkEqual(Infinity, Number(new Number(Infinity)));
+    checkEqual(NaN, Number(new Number(undefined)));
+    checkEqual(0, Number(new Number(null)));
     checkEqual(false, isNumber(new Number()));
+    checkEqual(false, isNumber(new Number('')));
+    checkEqual(false, isNumber(new Number('1')));
+    checkEqual(false, isNumber(new Number('1.1')));
+    checkEqual(true, isNumberObject(new Number()));
+    checkEqual(true, isNumberObject(new Number('')));
+    checkEqual(true, isNumberObject(new Number('1')));
+    checkEqual(true, isNumberObject(new Number('1.1')));
   };
 
   var test_isInteger = function test_isInteger() {
@@ -260,6 +413,10 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isIntegerArray([1, 2, null]));
     checkEqual(false, isIntegerArray(['a', 'b', 1]));
     checkEqual(false, isInteger(new Number()));
+    checkEqual(false, isInteger(new Number('')));
+    checkEqual(false, isInteger(new Number('1')));
+    checkEqual(false, isInteger(new Number('1.1')));
+    checkEqual(false, isInteger(new Number(1)));
   };
 
   var test_isString = function test_isString() {
@@ -280,7 +437,30 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isStringArray(['a', 'b', 1]));
     checkEqual(false, isStringArray(['a', 'b', null]));
     checkEqual(false, isStringArray(['a', 'b', undefined]));
+    checkEqual('', String(new String()));
+    checkEqual('', String(new String('')));
+    checkEqual(' ', String(new String(' ')));
+    checkEqual('　', String(new String('　')));
+    checkEqual('1', String(new String('1')));
+    checkEqual('1.1', String(new String('1.1')));
+    checkEqual('1', String(new String(1)));
+    checkEqual('1.1', String(new String(1.1)));
+    checkEqual('NaN', String(new String(NaN)));
+    checkEqual('Infinity', String(new String(Infinity)));
+    checkEqual('undefined', String(new String(undefined)));
+    checkEqual('null', String(new String(null)));
     checkEqual(false, isString(new String()));
+    checkEqual(false, isString(new String(undefined)));
+    checkEqual(false, isString(new String(null)));
+    checkEqual(false, isString(new String('')));
+    checkEqual(false, isString(new String('1')));
+    checkEqual(false, isString(new String(1)));
+    checkEqual(true, isStringObject(new String()));
+    checkEqual(true, isStringObject(new String(undefined)));
+    checkEqual(true, isStringObject(new String(null)));
+    checkEqual(true, isStringObject(new String('')));
+    checkEqual(true, isStringObject(new String('1')));
+    checkEqual(true, isStringObject(new String(1)));
   };
 
   var test_isFunction = function test_isFunction() {
@@ -456,7 +636,43 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(true, isException(new UserException('message')));
   };
 
+  var test_isSymbol = function test_isSymbol() {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkEqual(false, isSymbol(1));
+    checkEqual(true, isSymbol(Symbol()));
+  };
+
+  var test_isMap = function test_isMap() {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkEqual(false, isMap({}));
+    checkEqual(false, isWeakMap({}));
+    checkEqual(true, isMap(new Map()));
+    checkEqual(false, isWeakMap(new Map()));
+    checkEqual(false, isMap(new WeakMap()));
+    checkEqual(true, isWeakMap(new WeakMap()));
+  };
+
+  var test_isSet = function test_isSet() {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkEqual(false, isSet({}));
+    checkEqual(false, isWeakSet({}));
+    checkEqual(true, isSet(new Set()));
+    checkEqual(false, isWeakSet(new Set()));
+    checkEqual(false, isSet(new WeakSet()));
+    checkEqual(true, isWeakSet(new WeakSet()));
+  };
+
   console.log('  test type.js');
+  test_checkType();
   test_isUndefined();
   test_isNull();
   test_isBoolean();
@@ -469,6 +685,9 @@ var test_execute_type = function test_execute_type(parts) {
   test_isArray();
   test_isDate();
   test_isExcection();
+  test_isSymbol();
+  test_isMap();
+  test_isSet();
 };
 
 module.exports = {

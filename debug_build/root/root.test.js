@@ -1,5 +1,13 @@
 "use strict";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var test_execute_root = function test_execute_root(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
@@ -7,6 +15,10 @@ var test_execute_root = function test_execute_root(parts) {
   var clone = parts.clone,
       cloneDeep = parts.cloneDeep,
       cloneFunction = parts.cloneFunction;
+
+  var _require = require('../type/_isType.js'),
+      _typeofCheck = _require._typeofCheck,
+      _objectToStringCheck = _require._objectToStringCheck;
 
   var test_clone_object = function test_clone_object() {
     var testObject1 = {
@@ -552,10 +564,7 @@ var test_execute_root = function test_execute_root(parts) {
   var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
     if (parts.platform.wsh) {
       return;
-    } // if (parts.platform.web) {
-    //   return;
-    // }
-
+    }
 
     var symbol1 = Symbol();
     checkEqual(true, parts.isSymbol(symbol1));
@@ -595,17 +604,166 @@ var test_execute_root = function test_execute_root(parts) {
     checkEqual(false, symbol1 === value2[0] // cloneDeep and new symbol
     );
     cloneDeep.reset();
-  }; // const test_cloneDeep_map = () => {
-  //   if (parts.platform.wsh) {
-  //     return;
-  //   }
-  // }
-  // const test_cloneDeep_set = () => {
-  //   if (parts.platform.wsh) {
-  //     return;
-  //   }
-  // }
+  };
 
+  var test_cloneDeep_map = function test_cloneDeep_map() {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    var map1 = new Map();
+    map1.set('key1', 'value1');
+    map1.set('key2', 'value2');
+    checkEqual('value1', map1.get('key1'));
+    checkEqual(false, parts.isObject(map1));
+    checkEqual(true, parts.isObjectType(map1)); // isMap
+
+    checkEqual(true, parts.isMap(map1));
+    checkEqual(false, parts.isMap({}));
+    var map2 = clone(map1);
+    checkEqual(undefined, map2.get('key1')); // no clone
+
+    var map2 = cloneDeep(map1);
+    checkEqual(undefined, map2.get('key1')); // no clone
+
+    cloneFunction.map = function (source) {
+      var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+      var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+        return value;
+      };
+
+      if (!parts.isMap(source)) {
+        return {
+          result: false
+        };
+      }
+
+      var cloneValue = new Map();
+      bufferWrite(source, cloneValue);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = source.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _step$value = _slicedToArray(_step.value, 2),
+              key = _step$value[0],
+              value = _step$value[1];
+
+          cloneValue.set(key, value);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return {
+        result: true,
+        cloneValue: cloneValue
+      };
+    };
+
+    clone.add(cloneFunction.map);
+    cloneDeep.add(cloneFunction.map);
+    var map2 = clone(map1);
+    checkEqual('value1', map2.get('key1')); // clone
+
+    checkEqual(false, map1 === map2);
+    var map2 = cloneDeep(map1);
+    checkEqual('value1', map2.get('key1')); // clone
+
+    checkEqual(false, map1 === map2);
+  };
+
+  var test_cloneDeep_set = function test_cloneDeep_set() {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    var set1 = new Set();
+    set1.add('value1');
+    set1.add('value2');
+    checkEqual(true, set1.has('value1'));
+    checkEqual(true, set1.has('value2'));
+    checkEqual(false, set1.has('value3'));
+    checkEqual(false, parts.isObject(set1));
+    checkEqual(true, parts.isObjectType(set1)); // isSet
+
+    checkEqual(true, parts.isSet(set1));
+    checkEqual(false, parts.isSet({}));
+    var set2 = clone(set1);
+    checkEqual(false, set2.has('value1')); // no clone
+
+    var set2 = cloneDeep(set1);
+    checkEqual(false, set2.has('value1')); // no clone
+
+    cloneFunction.set = function (source) {
+      var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+      var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+        return value;
+      };
+
+      if (!parts.isSet(source)) {
+        return {
+          result: false
+        };
+      }
+
+      var cloneValue = new Set();
+      bufferWrite(source, cloneValue);
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = source[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var value = _step2.value;
+          cloneValue.add(value);
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      return {
+        result: true,
+        cloneValue: cloneValue
+      };
+    };
+
+    clone.add(cloneFunction.set);
+    cloneDeep.add(cloneFunction.set);
+    var set2 = clone(set1);
+    checkEqual(true, set2.has('value1')); // clone
+
+    checkEqual(false, set1 === set2);
+    var set2 = cloneDeep(set1);
+    checkEqual(true, set2.has('value1')); // clone
+
+    checkEqual(false, set1 === set2);
+  };
 
   var test_cloneDeep_CircularReference = function test_cloneDeep_CircularReference() {
     var object1 = {
@@ -638,9 +796,9 @@ var test_execute_root = function test_execute_root(parts) {
   test_cloneDeep_function();
   test_cloneDeep_regExp();
   test_cloneDeep_moment();
-  test_cloneDeep_symbol(); // test_cloneDeep_map();
-  // test_cloneDeep_set();
-
+  test_cloneDeep_symbol();
+  test_cloneDeep_map();
+  test_cloneDeep_set();
   test_cloneDeep_CircularReference();
 };
 

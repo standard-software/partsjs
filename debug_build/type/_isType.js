@@ -8,9 +8,13 @@ var _typeofCheck = function _typeofCheck(typeName) {
   };
 };
 
+var objectToString = function objectToString(value) {
+  return Object.prototype.toString.call(value);
+};
+
 var _objectToStringCheck = function _objectToStringCheck(typeName) {
   return function (value) {
-    return Object.prototype.toString.call(value) === "[object ".concat(typeName, "]");
+    return objectToString(value) === "[object ".concat(typeName, "]");
   };
 };
 
@@ -26,8 +30,16 @@ var _isNaNStrict = function _isNaNStrict(value) {
 
 var _isBoolean = _typeofCheck('boolean');
 
+var _isBooleanObject = function _isBooleanObject(value) {
+  return _objectToStringCheck('Boolean') && !_isBoolean(value);
+};
+
 var _isNumber = function _isNumber(value) {
   return _typeofCheck('number')(value) && isFinite(value);
+};
+
+var _isNumberObject = function _isNumberObject(value) {
+  return _objectToStringCheck('Number')(value) && !_typeofCheck('number')(value);
 };
 
 var _isInteger = function _isInteger(value) {
@@ -39,6 +51,10 @@ var _isInteger = function _isInteger(value) {
 };
 
 var _isString = _typeofCheck('string');
+
+var _isStringObject = function _isStringObject(value) {
+  return _objectToStringCheck('String') && !_isString(value);
+};
 
 var _isFunction = _typeofCheck('function');
 
@@ -118,9 +134,22 @@ var _isNotRegExp = function _isNotRegExp(value) {
   return !_isRegExp(value);
 };
 
+var _isNotBooleanObject = function _isNotBooleanObject(value) {
+  return !_isBooleanObject(value);
+};
+
+var _isNotNumberObject = function _isNotNumberObject(value) {
+  return !_isNumberObject(value);
+};
+
+var _isNotStringObject = function _isNotStringObject(value) {
+  return !_isStringObject(value);
+};
+
 module.exports = {
   _typeofCheck: _typeofCheck,
   _objectToStringCheck: _objectToStringCheck,
+  objectToString: objectToString,
   _isUndefined: _isUndefined,
   _isNull: _isNull,
   _isNaNStrict: _isNaNStrict,
@@ -135,6 +164,9 @@ module.exports = {
   _isDate: _isDate,
   _isRegExp: _isRegExp,
   _isError: _isError,
+  _isBooleanObject: _isBooleanObject,
+  _isNumberObject: _isNumberObject,
+  _isStringObject: _isStringObject,
   _isNotUndefined: _isNotUndefined,
   _isNotNull: _isNotNull,
   _isNotNaNStrict: _isNotNaNStrict,
@@ -147,5 +179,8 @@ module.exports = {
   _isNotObjectType: _isNotObjectType,
   _isNotArray: _isNotArray,
   _isNotDate: _isNotDate,
-  _isNotRegExp: _isNotRegExp
+  _isNotRegExp: _isNotRegExp,
+  _isNotBooleanObject: _isNotBooleanObject,
+  _isNotNumberObject: _isNotNumberObject,
+  _isNotStringObject: _isNotStringObject
 };

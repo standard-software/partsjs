@@ -19,6 +19,10 @@ var _require2 = require('../object/object.js'),
     _copyProperty = _require2._copyProperty,
     _propertyCount = _require2._propertyCount,
     _inProperty = _require2._inProperty;
+/**
+ * isMultiples isEven isOdd
+ */
+
 
 var _isMultiples = function _isMultiples(number, radix) {
   return number % radix === 0;
@@ -49,6 +53,10 @@ var isEven = function isEven(number) {
 var isOdd = function isOdd(number) {
   return !_.isMultiples(number, 2);
 };
+/**
+ * round
+ */
+
 
 var _round = function _round(value) {
   var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -79,6 +87,10 @@ var round = function round(value) {
 
   return _round(value, digit);
 };
+/**
+ * nearEqual
+ */
+
 
 var _nearEqual = function _nearEqual(value1, value2, diff) {
   if (Math.abs(value1 - value2) <= diff) {
@@ -114,6 +126,10 @@ var nearEqual = function nearEqual(value1, value2, diff) {
 
   return _nearEqual(value1, value2, diff);
 };
+/**
+ * inRange
+ */
+
 
 var _inRange = function _inRange(value, from, to) {
   if (from <= value && value <= to) {
@@ -149,6 +165,10 @@ var inRange = function inRange(value, from, to) {
 
   return _inRange(value, from, to);
 };
+/**
+ * randomInt
+ */
+
 
 var _randomInt = function _randomInt(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;

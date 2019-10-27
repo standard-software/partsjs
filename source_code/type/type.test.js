@@ -57,8 +57,13 @@ const test_execute_type = (parts) => {
       checkEqual(objectStringName, objectToString(value));
     }
 
-    checkType('undefined', '[object Undefined]',  undefined);
-    checkType('object',    '[object Null]',       null); // bad specification
+    if (parts.platform.wsh) {
+      checkType('undefined', '[object Object]',     undefined);
+      checkType('object',    '[object Object]',     null);
+    } else {
+      checkType('undefined', '[object Undefined]',  undefined);
+      checkType('object',    '[object Null]',       null); // bad specification
+    }
     checkType('boolean',   '[object Boolean]',    true);
     checkType('boolean',   '[object Boolean]',    false);
     checkType('object',    '[object Boolean]',    new Boolean);
@@ -126,12 +131,12 @@ const test_execute_type = (parts) => {
 
     checkType('function',  '[object Function]',           Promise);
 
-    function* Generator() { yield 1; yield 2; yield 3; }
-    var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
-    var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
-    checkType('object',    '[object Generator]',          Generator());
-    checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
-    checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
+    // function* Generator() { yield 1; yield 2; yield 3; }
+    // var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
+    // var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
+    // checkType('object',    '[object Generator]',          Generator());
+    // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
+    // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
 
     checkType('object',    '[object Object]',             Reflect);
     checkType('object',    '[object Object]',             new Proxy({}, {}));
@@ -328,7 +333,11 @@ const test_execute_type = (parts) => {
     checkEqual(0,   Number(new Number()));
     checkEqual(0,   Number(new Number('')));
     checkEqual(0,   Number(new Number(' ')));
-    checkEqual(0,   Number(new Number('　')));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,   Number(new Number('　')));
+    } else {
+      checkEqual(0,   Number(new Number('　')));
+    }
     checkEqual(1,   Number(new Number('1')));
     checkEqual(1.1, Number(new Number('1.1')));
     checkEqual(NaN,       Number(new Number(NaN)));

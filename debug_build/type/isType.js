@@ -14,6 +14,9 @@ var _require = require('../type/_isType.js'),
     _isArray = _require._isArray,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
+    _isBooleanObject = _require._isBooleanObject,
+    _isNumberObject = _require._isNumberObject,
+    _isStringObject = _require._isStringObject,
     _isNotUndefined = _require._isNotUndefined,
     _isNotNull = _require._isNotNull,
     _isNotNaNStrict = _require._isNotNaNStrict,
@@ -26,7 +29,10 @@ var _require = require('../type/_isType.js'),
     _isNotObjectType = _require._isNotObjectType,
     _isNotArray = _require._isNotArray,
     _isNotDate = _require._isNotDate,
-    _isNotRegExp = _require._isNotRegExp;
+    _isNotRegExp = _require._isNotRegExp,
+    _isNotBooleanObject = _require._isNotBooleanObject,
+    _isNotNumberObject = _require._isNotNumberObject,
+    _isNotStringObject = _require._isNotStringObject;
 
 var _require2 = require('../type/_isException.js'),
     _isException = _require2._isException,
@@ -35,6 +41,18 @@ var _require2 = require('../type/_isException.js'),
 var _require3 = require('../type/_isSymbol.js'),
     _isSymbol = _require3._isSymbol,
     _isNotSymbol = _require3._isNotSymbol;
+
+var _require4 = require('../type/_isMap.js'),
+    _isMap = _require4._isMap,
+    _isNotMap = _require4._isNotMap,
+    _isWeakMap = _require4._isWeakMap,
+    _isNotWeakMap = _require4._isNotWeakMap;
+
+var _require5 = require('../type/_isSet.js'),
+    _isSet = _require5._isSet,
+    _isNotSet = _require5._isNotSet,
+    _isWeakSet = _require5._isWeakSet,
+    _isNotWeakSet = _require5._isNotWeakSet;
 /**
  * _isTypeCheck
  * description:
@@ -90,8 +108,6 @@ var isInteger = _isTypeCheckArgsFunc(_isInteger);
 
 var isString = _isTypeCheckArgsFunc(_isString);
 
-var isSymbol = _isTypeCheckArgsFunc(_isSymbol);
-
 var isFunction = _isTypeCheckArgsFunc(_isFunction);
 
 var isObject = _isTypeCheckArgsFunc(_isObject);
@@ -105,6 +121,22 @@ var isDate = _isTypeCheckArgsFunc(_isDate);
 var isRegExp = _isTypeCheckArgsFunc(_isRegExp);
 
 var isException = _isTypeCheckArgsFunc(_isException);
+
+var isBooleanObject = _isTypeCheckArgsFunc(_isBooleanObject);
+
+var isNumberObject = _isTypeCheckArgsFunc(_isNumberObject);
+
+var isStringObject = _isTypeCheckArgsFunc(_isStringObject);
+
+var isSymbol = _isTypeCheckArgsFunc(_isSymbol);
+
+var isMap = _isTypeCheckArgsFunc(_isMap);
+
+var isWeakMap = _isTypeCheckArgsFunc(_isWeakMap);
+
+var isSet = _isTypeCheckArgsFunc(_isSet);
+
+var isWeakSet = _isTypeCheckArgsFunc(_isWeakSet);
 
 var isNotUndefined = _isTypeCheckArgsFunc(_isNotUndefined);
 
@@ -120,8 +152,6 @@ var isNotInteger = _isTypeCheckArgsFunc(_isNotInteger);
 
 var isNotString = _isTypeCheckArgsFunc(_isNotString);
 
-var isNotSymbol = _isTypeCheckArgsFunc(_isNotSymbol);
-
 var isNotFunction = _isTypeCheckArgsFunc(_isNotFunction);
 
 var isNotObject = _isTypeCheckArgsFunc(_isNotObject);
@@ -135,6 +165,22 @@ var isNotDate = _isTypeCheckArgsFunc(_isNotDate);
 var isNotRegExp = _isTypeCheckArgsFunc(_isNotRegExp);
 
 var isNotException = _isTypeCheckArgsFunc(_isNotException);
+
+var isNotBooleanObject = _isTypeCheckArgsFunc(_isNotBooleanObject);
+
+var isNotNumberObject = _isTypeCheckArgsFunc(_isNotNumberObject);
+
+var isNotStringObject = _isTypeCheckArgsFunc(_isNotStringObject);
+
+var isNotSymbol = _isTypeCheckArgsFunc(_isNotSymbol);
+
+var isNotMap = _isTypeCheckArgsFunc(_isNotMap);
+
+var isNotWeakMap = _isTypeCheckArgsFunc(_isNotWeakMap);
+
+var isNotSet = _isTypeCheckArgsFunc(_isNotSet);
+
+var isNotWeakSet = _isTypeCheckArgsFunc(_isNotWeakSet);
 
 var isUndefinedArray = _isTypeCheckArrayFunc(_isUndefined);
 
@@ -150,8 +196,6 @@ var isIntegerArray = _isTypeCheckArrayFunc(_isInteger);
 
 var isStringArray = _isTypeCheckArrayFunc(_isString);
 
-var isSymbolArray = _isTypeCheckArrayFunc(_isSymbol);
-
 var isFunctionArray = _isTypeCheckArrayFunc(_isFunction);
 
 var isObjectArray = _isTypeCheckArrayFunc(_isObject);
@@ -165,6 +209,22 @@ var isDateArray = _isTypeCheckArrayFunc(_isDate);
 var isRegExpArray = _isTypeCheckArrayFunc(_isRegExp);
 
 var isExceptionArray = _isTypeCheckArrayFunc(_isException);
+
+var isBooleanObjectArray = _isTypeCheckArrayFunc(_isBooleanObject);
+
+var isNumberObjectArray = _isTypeCheckArrayFunc(_isNumberObject);
+
+var isStringObjectArray = _isTypeCheckArrayFunc(_isStringObject);
+
+var isSymbolArray = _isTypeCheckArrayFunc(_isSymbol);
+
+var isMapArray = _isTypeCheckArrayFunc(_isMap);
+
+var isWeakMapArray = _isTypeCheckArrayFunc(_isWeakMap);
+
+var isSetArray = _isTypeCheckArrayFunc(_isSet);
+
+var isWeakSetArray = _isTypeCheckArrayFunc(_isWeakSet);
 
 var isNotUndefinedArray = _isTypeCheckArrayFunc(function (value) {
   return !_isUndefined(value);
@@ -192,10 +252,6 @@ var isNotIntegerArray = _isTypeCheckArrayFunc(function (value) {
 
 var isNotStringArray = _isTypeCheckArrayFunc(function (value) {
   return !_isString(value);
-});
-
-var isNotSymbolArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isSymbol(value);
 });
 
 var isNotFunctionArray = _isTypeCheckArrayFunc(function (value) {
@@ -226,6 +282,38 @@ var isNotExceptionArray = _isTypeCheckArrayFunc(function (value) {
   return !_isException(value);
 });
 
+var isNotBooleanObjectArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isBooleanObject(value);
+});
+
+var isNotNumberObjectArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isNumberObject(value);
+});
+
+var isNotStringObjectArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isStringObject(value);
+});
+
+var isNotSymbolArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isSymbol(value);
+});
+
+var isNotMapArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isMap(value);
+});
+
+var isNotWeakMapArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isWeakMap(value);
+});
+
+var isNotSetArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isSet(value);
+});
+
+var isNotWeakSetArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isWeakSet(value);
+});
+
 var isUndef = isUndefined;
 var isBool = isBoolean;
 var isNum = isNumber;
@@ -252,7 +340,6 @@ module.exports = {
   isNumber: isNumber,
   isInteger: isInteger,
   isString: isString,
-  isSymbol: isSymbol,
   isFunction: isFunction,
   isObject: isObject,
   isObjectType: isObjectType,
@@ -260,6 +347,14 @@ module.exports = {
   isDate: isDate,
   isRegExp: isRegExp,
   isException: isException,
+  isBooleanObject: isBooleanObject,
+  isNumberObject: isNumberObject,
+  isStringObject: isStringObject,
+  isSymbol: isSymbol,
+  isMap: isMap,
+  isWeakMap: isWeakMap,
+  isSet: isSet,
+  isWeakSet: isWeakSet,
   isNotUndefined: isNotUndefined,
   isNotNull: isNotNull,
   isNotNaNStrict: isNotNaNStrict,
@@ -267,7 +362,6 @@ module.exports = {
   isNotNumber: isNotNumber,
   isNotInteger: isNotInteger,
   isNotString: isNotString,
-  isNotSymbol: isNotSymbol,
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
   isNotObjectType: isNotObjectType,
@@ -275,6 +369,14 @@ module.exports = {
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
   isNotException: isNotException,
+  isNotBooleanObject: isNotBooleanObject,
+  isNotNumberObject: isNotNumberObject,
+  isNotStringObject: isNotStringObject,
+  isNotSymbol: isNotSymbol,
+  isNotMap: isNotMap,
+  isNotWeakMap: isNotWeakMap,
+  isNotSet: isNotSet,
+  isNotWeakSet: isNotWeakSet,
   isUndefinedArray: isUndefinedArray,
   isNullArray: isNullArray,
   isNaNStrictArray: isNaNStrictArray,
@@ -282,7 +384,6 @@ module.exports = {
   isNumberArray: isNumberArray,
   isIntegerArray: isIntegerArray,
   isStringArray: isStringArray,
-  isSymbolArray: isSymbolArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
   isObjectTypeArray: isObjectTypeArray,
@@ -290,6 +391,14 @@ module.exports = {
   isDateArray: isDateArray,
   isRegExpArray: isRegExpArray,
   isExceptionArray: isExceptionArray,
+  isBooleanObjectArray: isBooleanObjectArray,
+  isNumberObjectArray: isNumberObjectArray,
+  isStringObjectArray: isStringObjectArray,
+  isSymbolArray: isSymbolArray,
+  isMapArray: isMapArray,
+  isWeakMapArray: isWeakMapArray,
+  isSetArray: isSetArray,
+  isWeakSetArray: isWeakSetArray,
   isNotUndefinedArray: isNotUndefinedArray,
   isNotNullArray: isNotNullArray,
   isNotNaNStrictArray: isNotNaNStrictArray,
@@ -297,7 +406,6 @@ module.exports = {
   isNotNumberArray: isNotNumberArray,
   isNotIntegerArray: isNotIntegerArray,
   isNotStringArray: isNotStringArray,
-  isNotSymbolArray: isNotSymbolArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
   isNotObjectTypeArray: isNotObjectTypeArray,
@@ -305,6 +413,14 @@ module.exports = {
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
   isNotExceptionArray: isNotExceptionArray,
+  isNotBooleanObjectArray: isNotBooleanObjectArray,
+  isNotNumberObjectArray: isNotNumberObjectArray,
+  isNotStringObjectArray: isNotStringObjectArray,
+  isNotSymbolArray: isNotSymbolArray,
+  isNotMapArray: isNotMapArray,
+  isNotWeakMapArray: isNotWeakMapArray,
+  isNotSetArray: isNotSetArray,
+  isNotWeakSetArray: isNotWeakSetArray,
   isUndef: isUndef,
   isBool: isBool,
   isNum: isNum,

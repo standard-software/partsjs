@@ -1,7 +1,9 @@
 "use strict";
 
 var _require = require('../type/_isType.js'),
-    _typeofCheck = _require._typeofCheck;
+    _typeofCheck = _require._typeofCheck,
+    _objectToStringCheck = _require._objectToStringCheck,
+    objectToString = _require.objectToString;
 
 var _isSymbol = _typeofCheck('symbol');
 

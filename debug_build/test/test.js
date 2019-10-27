@@ -22,6 +22,8 @@ var checkEqual = function checkEqual(a, b) {
     throw new TypeError('checkEqual args message is not string');
   }
 
+  checkEqual.testCounter += 1;
+
   if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
   }
@@ -30,14 +32,15 @@ var checkEqual = function checkEqual(a, b) {
     return true;
   }
 
-  message = "Test: ".concat(message, "\n") + '  A !== B\n' + "  A = ".concat(String(a), "\n") + "  B = ".concat(String(b));
+  message = "Test: ".concat(checkEqual.testCounter, ": ").concat(message, "\n") + '  A !== B\n' + "  A = ".concat(String(a), "\n") + "  B = ".concat(String(b));
   console.log(message);
   return false;
 };
+
+checkEqual.testCounter = 0;
 /**
  * isThrown isThrownValue isThrownException isNotThrown
  */
-
 
 var isThrown = function isThrown(targetFunc, compareFunc) {
   if (!_isFunction(targetFunc)) {
