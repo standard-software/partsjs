@@ -98,7 +98,7 @@ const _isNotNumberObject  = value => !_isNumberObject(value);
 const _isNotStringObject  = value => !_isStringObject(value);
 
 module.exports = {
-  _typeofCheck, _objectToStringCheck,
+  _typeofCheck, _objectToStringCheck, objectToString,
 
   _isUndefined, _isNull, _isNaNStrict,
   _isBoolean, _isNumber, _isInteger, _isString,

@@ -586,9 +586,8 @@ const test_execute_root = (parts) => {
     checkEqual(true,  parts.isObjectType(map1));
 
     // isMap
-    const _isMap = _objectToStringCheck('Map');
-    checkEqual(true,  _isMap(map1));
-    checkEqual(false, _isMap({}));
+    checkEqual(true,  parts.isMap(map1));
+    checkEqual(false, parts.isMap({}));
 
     var map2 = clone(map1);
     checkEqual(undefined, map2.get('key1'));  // no clone
@@ -601,7 +600,7 @@ const test_execute_root = (parts) => {
       bufferWrite = () => {},
       __cloneDeep = value => value,
     ) => {
-      if (!_isMap(source)) {
+      if (!parts.isMap(source)) {
         return { result: false };
       }
       const cloneValue = new Map();
@@ -621,14 +620,59 @@ const test_execute_root = (parts) => {
     var map2 = cloneDeep(map1);
     checkEqual('value1', map2.get('key1')); // clone
     checkEqual(false, map1 === map2);
-
   }
+
   const test_cloneDeep_set = () => {
     if (parts.platform.wsh) {
       return;
     }
-  }
 
+    const set1 = new Set();
+    set1.add('value1');
+    set1.add('value2');
+    checkEqual(true,  set1.has('value1'));
+    checkEqual(true,  set1.has('value2'));
+    checkEqual(false, set1.has('value3'));
+
+    checkEqual(false, parts.isObject(set1));
+    checkEqual(true,  parts.isObjectType(set1));
+
+    // isSet
+    checkEqual(true,  parts.isSet(set1));
+    checkEqual(false, parts.isSet({}));
+
+    var set2 = clone(set1);
+    checkEqual(false, set2.has('value1'));  // no clone
+
+    var set2 = cloneDeep(set1);
+    checkEqual(false, set2.has('value1'));  // no clone
+
+    cloneFunction.set = (
+      source,
+      bufferWrite = () => {},
+      __cloneDeep = value => value,
+    ) => {
+      if (!parts.isSet(source)) {
+        return { result: false };
+      }
+      const cloneValue = new Set();
+      bufferWrite(source, cloneValue);
+      for (const value of source) {
+        cloneValue.add(value);
+      }
+      return { result: true, cloneValue } ;
+    }
+    clone.add(cloneFunction.set);
+    cloneDeep.add(cloneFunction.set);
+
+    var set2 = clone(set1);
+    checkEqual(true, set2.has('value1'));  // clone
+    checkEqual(false, set1 === set2);
+
+    var set2 = cloneDeep(set1);
+    checkEqual(true, set2.has('value1'));  // clone
+    checkEqual(false, set1 === set2);
+  }
 
   const test_cloneDeep_CircularReference = () => {
     const object1 = { b: 'test' };

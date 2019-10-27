@@ -12,6 +12,9 @@ const test_execute_type = (parts) => {
     isArray, isDate, isRegExp,
     isException,
     isBooleanObject, isNumberObject, isStringObject,
+    isSymbol,
+    isMap, isWeakMap,
+    isSet, isWeakSet,
 
     isNotUndefined, isNotNull, isNotNaNStrict,
     isNotBoolean, isNotNumber, isNotInteger, isNotString,
@@ -19,6 +22,9 @@ const test_execute_type = (parts) => {
     isNotArray, isNotDate, isNotRegExp,
     isNotException,
     isNotBooleanObject, isNotNumberObject, isNotStringObject,
+    isNotSymbol,
+    isNotMap, isNotWeakMap,
+    isNotSet, isNotWeakSet,
 
     isUndefinedArray, isNullArray, isNaNStrictArray,
     isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
@@ -94,6 +100,17 @@ const test_execute_type = (parts) => {
     checkType('object',    '[object Uint32Array]',        new Uint32Array());
     checkType('object',    '[object Float32Array]',       new Float32Array());
     checkType('object',    '[object Float64Array]',       new Float64Array());
+
+    checkEqual(true,  Array.isArray(new Array()));
+    checkEqual(false, Array.isArray(new Int8Array()));
+    checkEqual(false, Array.isArray(new Uint8Array()));
+    checkEqual(false, Array.isArray(new Uint8ClampedArray()));
+    checkEqual(false, Array.isArray(new Int16Array()));
+    checkEqual(false, Array.isArray(new Uint16Array()));
+    checkEqual(false, Array.isArray(new Int32Array()));
+    checkEqual(false, Array.isArray(new Uint32Array()));
+    checkEqual(false, Array.isArray(new Float32Array()));
+    checkEqual(false, Array.isArray(new Float64Array()));
 
     checkType('symbol',    '[object Symbol]',             Symbol());
     checkType('object',    '[object Map]',                new Map());
@@ -571,6 +588,41 @@ const test_execute_type = (parts) => {
     checkEqual(true, isException(new UserException('message')));
   };
 
+  const test_isSymbol = function () {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkEqual(false, isSymbol(1));
+    checkEqual(true, isSymbol(Symbol()));
+  };
+
+  const test_isMap = function () {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkEqual(false, isMap({}));
+    checkEqual(false, isWeakMap({}));
+    checkEqual(true,  isMap(new Map()));
+    checkEqual(false, isWeakMap(new Map()));
+    checkEqual(false, isMap(new WeakMap()));
+    checkEqual(true,  isWeakMap(new WeakMap()));
+  };
+
+  const test_isSet = function () {
+    if (parts.platform.wsh) {
+      return;
+    }
+
+    checkEqual(false, isSet({}));
+    checkEqual(false, isWeakSet({}));
+    checkEqual(true,  isSet(new Set()));
+    checkEqual(false, isWeakSet(new Set()));
+    checkEqual(false, isSet(new WeakSet()));
+    checkEqual(true,  isWeakSet(new WeakSet()));
+  };
+
   console.log('  test type.js');
   test_checkType();
   test_isUndefined();
@@ -585,6 +637,9 @@ const test_execute_type = (parts) => {
   test_isArray();
   test_isDate();
   test_isExcection();
+  test_isSymbol();
+  test_isMap();
+  test_isSet();
 }
 
 module.exports = {

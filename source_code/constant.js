@@ -2,11 +2,12 @@
 const _TYPE_BASE =
   'Undefined,Null,NaNStrict,' +
   'Boolean,Number,Integer,String,' +
-  'Symbol,' +
   'Function,Object,ObjectType,' +
   'Array,Date,RegExp,' +
   'Exception,' +
-  'BooleanObject,NumberObject,StringObject,'
+  'Symbol,' +
+  'Map,WeakMap,Set,WeakSet,' +
+  'BooleanObject,NumberObject,StringObject,' +
   '';
 
 const IS_TYPE           = _TYPE_BASE.split(',').map(item => `is${item}`).join(',');
