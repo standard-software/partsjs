@@ -2,6 +2,11 @@
 
 ## Version
 
+### 2.6.1
+#### 2019/10/28(Mon)
+- add isBooleanObject, isNumberObject, isStringObject
+- add isMap isWeakMap isSet isWeakSet
+
 ### 2.6.0
 #### 2019/10/20(Sun)
 - add isSymbol
