@@ -574,7 +574,7 @@ var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
 
 var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
 
-var CONVERT = 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + ''; // number
+var CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + ''; // number
 
 var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' + ''; // string
 
@@ -2737,71 +2737,102 @@ var numberToString = function numberToString(value) {
  */
 
 
-var _stringToNumber = function _stringToNumber(value, defaultValue) {
+var __stringToNumber = function __stringToNumber(value, defaultValueFunc) {
   if (value === '') {
-    return defaultValue;
+    return defaultValueFunc();
   }
 
   if (!_matchFormat('float_more', value)) {
-    return defaultValue;
+    return defaultValueFunc();
   }
 
   var result = Number(value);
 
   if (!_isNumber(result)) {
-    return defaultValue;
+    return defaultValueFunc();
   }
 
   return result;
 };
 
-var stringToNumber = function stringToNumber(value, defaultValue) {
+var _stringToNumber = function _stringToNumber(value) {
+  return __stringToNumber(value, function () {
+    throw new RangeError('stringToNumber args(value) is not changeing number');
+  });
+};
+
+var stringToNumber = function stringToNumber(value) {
   if (_inProperty(value, 'value')) {
     var _value2 = value;
     value = _value2.value;
-    defaultValue = _value2.defaultValue;
   }
 
   if (!_isString(value)) {
     throw new TypeError('stringToNumber args(value) is not string');
   }
 
-  return _stringToNumber(value, defaultValue);
+  return _stringToNumber(value);
+};
+
+var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue) {
+  return __stringToNumber(value, function () {
+    return defaultValue;
+  });
+};
+
+var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) {
+  if (_inProperty(value, 'value')) {
+    var _value3 = value;
+    value = _value3.value;
+    defaultValue = _value3.defaultValue;
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('stringToNumberDefault args(value) is not string');
+  }
+
+  return _stringToNumberDefault(value, defaultValue);
 };
 /**
  * stringToInteger
  */
 
 
-var _stringToInteger = function _stringToInteger(value, defaultValue) {
+var __stringToInteger = function __stringToInteger(value, defaultValueFunc) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
   if (value === '') {
-    return defaultValue;
+    return defaultValueFunc();
   }
 
   if (!_matchFormat(String(radix) + '_base_number', value)) {
-    return defaultValue;
+    return defaultValueFunc();
   }
 
   var result = parseInt(value, radix);
 
   if (!_isInteger(result)) {
-    return defaultValue;
+    return defaultValueFunc();
   }
 
   return result;
 };
 
-var stringToInteger = function stringToInteger(value, defaultValue) {
-  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+var _stringToInteger = function _stringToInteger(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+  return __stringToNumber(value, function () {
+    throw new RangeError('stringToInteger args(value) is not changeing integer');
+  }, radix);
+};
+
+var stringToInteger = function stringToInteger(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
   if (_inProperty(value, 'value')) {
-    var _value3 = value;
-    value = _value3.value;
-    defaultValue = _value3.defaultValue;
-    var _value3$radix = _value3.radix;
-    radix = _value3$radix === void 0 ? 10 : _value3$radix;
+    var _value4 = value;
+    value = _value4.value;
+    var _value4$radix = _value4.radix;
+    radix = _value4$radix === void 0 ? 10 : _value4$radix;
   }
 
   if (!_isString(value)) {
@@ -2816,25 +2847,68 @@ var stringToInteger = function stringToInteger(value, defaultValue) {
     throw new RangeError('stringToInteger args(radix) must be between 2 and 36');
   }
 
-  return _stringToInteger(value, defaultValue, radix);
+  return _stringToInteger(value, radix);
+};
+
+var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultValue) {
+  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+  return __stringToInteger(value, function () {
+    return defaultValue;
+  }, radix);
+};
+
+var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue) {
+  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+  if (_inProperty(value, 'value')) {
+    var _value5 = value;
+    value = _value5.value;
+    defaultValue = _value5.defaultValue;
+    var _value5$radix = _value5.radix;
+    radix = _value5$radix === void 0 ? 10 : _value5$radix;
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('stringToInteger args(value) is not string');
+  }
+
+  if (!_isInteger(radix)) {
+    throw new TypeError('stringToInteger args(radix) is not integer');
+  }
+
+  if (!(2 <= radix && radix <= 36)) {
+    throw new RangeError('stringToInteger args(radix) must be between 2 and 36');
+  }
+
+  return _stringToIntegerDefault(value, defaultValue, radix);
 };
 
 var numToString = numberToString;
 var strToNumber = stringToNumber;
+var strToNumberDef = stringToNumberDefault;
 var strToInteger = stringToInteger;
+var strToIntegerDef = stringToIntegerDefault;
 var numToStr = numberToString;
 var strToNum = stringToNumber;
+var strToNumDef = stringToNumberDefault;
 var strToInt = stringToInteger;
+var strToIntDef = stringToIntegerDefault;
 module.exports = {
   numberToString: numberToString,
   stringToNumber: stringToNumber,
+  stringToNumberDefault: stringToNumberDefault,
   stringToInteger: stringToInteger,
+  stringToIntegerDefault: stringToIntegerDefault,
   numToString: numToString,
   strToNumber: strToNumber,
+  strToNumberDef: strToNumberDef,
   strToInteger: strToInteger,
+  strToIntegerDef: strToIntegerDef,
   numToStr: numToStr,
   strToNum: strToNum,
-  strToInt: strToInt
+  strToNumDef: strToNumDef,
+  strToInt: strToInt,
+  strToIntDef: strToIntDef
 };
 
 /***/ }),
