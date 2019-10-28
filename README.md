@@ -103,6 +103,10 @@ You can now use the functions of the parts object.
 ### 2.6.2
 #### 2019/10/28(Mon)
 - add isArrayType
+- update stringToNumber stringToInteger
+- add stringToNumberDefault stringToIntegerDefault
+  - strToNumberDef strToIntegerDef
+  - strToNumDef strToIntDef
 
 ### 2.6.1
 #### 2019/10/28(Mon)

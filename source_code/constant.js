@@ -56,13 +56,16 @@ const COMPARE =
 // convert
 const CONVERT =
   'numberToString,' +
-  'stringToNumber,stringToInteger,' +
+  'stringToNumber,stringToNumberDefault,' +
+  'stringToInteger,stringToIntegerDefault,' +
 
   'numToString,' +
-  'strToNumber,strToInteger,' +
+  'strToNumber,strToNumberDef,' +
+  'strToInteger,strToIntegerDef,' +
 
   'numToStr,' +
-  'strToNum,strToInt,' +
+  'strToNum,strToNumDef,' +
+  'strToInt,strToIntDef,' +
   ''
 
 // number
