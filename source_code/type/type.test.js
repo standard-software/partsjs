@@ -571,15 +571,17 @@ const test_execute_type = (parts) => {
     checkEqual(true,  Array.isArray(new Array()));
     checkEqual(true,  Array.isArray(new Array(1,2,3)));
     checkEqual(true,  Array.isArray(new Array()));
-    checkEqual(false, Array.isArray(new Int8Array()));
-    checkEqual(false, Array.isArray(new Uint8Array()));
-    checkEqual(false, Array.isArray(new Uint8ClampedArray()));
-    checkEqual(false, Array.isArray(new Int16Array()));
-    checkEqual(false, Array.isArray(new Uint16Array()));
-    checkEqual(false, Array.isArray(new Int32Array()));
-    checkEqual(false, Array.isArray(new Uint32Array()));
-    checkEqual(false, Array.isArray(new Float32Array()));
-    checkEqual(false, Array.isArray(new Float64Array()));
+    if (!parts.platform.wsh) {
+      checkEqual(false, Array.isArray(new Int8Array()));
+      checkEqual(false, Array.isArray(new Uint8Array()));
+      checkEqual(false, Array.isArray(new Uint8ClampedArray()));
+      checkEqual(false, Array.isArray(new Int16Array()));
+      checkEqual(false, Array.isArray(new Uint16Array()));
+      checkEqual(false, Array.isArray(new Int32Array()));
+      checkEqual(false, Array.isArray(new Uint32Array()));
+      checkEqual(false, Array.isArray(new Float32Array()));
+      checkEqual(false, Array.isArray(new Float64Array()));
+    }
 
     checkEqual(true,  isArray([]));
     checkEqual(true,  isArray([123]));
@@ -587,15 +589,17 @@ const test_execute_type = (parts) => {
     checkEqual(true,  isArray(new Array()));
     checkEqual(true,  isArray(new Array(1,2,3)));
     checkEqual(true,  isArray(new Array()));
-    checkEqual(false, isArray(new Int8Array()));
-    checkEqual(false, isArray(new Uint8Array()));
-    checkEqual(false, isArray(new Uint8ClampedArray()));
-    checkEqual(false, isArray(new Int16Array()));
-    checkEqual(false, isArray(new Uint16Array()));
-    checkEqual(false, isArray(new Int32Array()));
-    checkEqual(false, isArray(new Uint32Array()));
-    checkEqual(false, isArray(new Float32Array()));
-    checkEqual(false, isArray(new Float64Array()));
+    if (!parts.platform.wsh) {
+      checkEqual(false, isArray(new Int8Array()));
+      checkEqual(false, isArray(new Uint8Array()));
+      checkEqual(false, isArray(new Uint8ClampedArray()));
+      checkEqual(false, isArray(new Int16Array()));
+      checkEqual(false, isArray(new Uint16Array()));
+      checkEqual(false, isArray(new Int32Array()));
+      checkEqual(false, isArray(new Uint32Array()));
+      checkEqual(false, isArray(new Float32Array()));
+      checkEqual(false, isArray(new Float64Array()));
+    }
 
     checkEqual(true,  isArrayType([]));
     checkEqual(true,  isArrayType([123]));
@@ -603,15 +607,17 @@ const test_execute_type = (parts) => {
     checkEqual(true,  isArrayType(new Array()));
     checkEqual(true,  isArrayType(new Array(1,2,3)));
     checkEqual(true,  isArrayType(new Array()));
-    checkEqual(true,  isArrayType(new Int8Array()));
-    checkEqual(true,  isArrayType(new Uint8Array()));
-    checkEqual(true,  isArrayType(new Uint8ClampedArray()));
-    checkEqual(true,  isArrayType(new Int16Array()));
-    checkEqual(true,  isArrayType(new Uint16Array()));
-    checkEqual(true,  isArrayType(new Int32Array()));
-    checkEqual(true,  isArrayType(new Uint32Array()));
-    checkEqual(true,  isArrayType(new Float32Array()));
-    checkEqual(true,  isArrayType(new Float64Array()));
+    if (!parts.platform.wsh) {
+      checkEqual(true,  isArrayType(new Int8Array()));
+      checkEqual(true,  isArrayType(new Uint8Array()));
+      checkEqual(true,  isArrayType(new Uint8ClampedArray()));
+      checkEqual(true,  isArrayType(new Int16Array()));
+      checkEqual(true,  isArrayType(new Uint16Array()));
+      checkEqual(true,  isArrayType(new Int32Array()));
+      checkEqual(true,  isArrayType(new Uint32Array()));
+      checkEqual(true,  isArrayType(new Float32Array()));
+      checkEqual(true,  isArrayType(new Float64Array()));
+    }
 
   };
 

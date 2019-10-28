@@ -76,6 +76,14 @@ var _isObjectType = function _isObjectType(value) {
 
 var _isArray = _objectToStringCheck('Array');
 
+var _isArrayType = function _isArrayType(value) {
+  if (objectToString(value).includes('Array]')) {
+    return true;
+  }
+
+  return false;
+};
+
 var _isDate = _objectToStringCheck('Date');
 
 var _isRegExp = _objectToStringCheck('RegExp');
@@ -126,6 +134,10 @@ var _isNotArray = function _isNotArray(value) {
   return !_isArray(value);
 };
 
+var _isNotArrayType = function _isNotArrayType(value) {
+  return !_isArrayType(value);
+};
+
 var _isNotDate = function _isNotDate(value) {
   return !_isDate(value);
 };
@@ -161,6 +173,7 @@ module.exports = {
   _isObject: _isObject,
   _isObjectType: _isObjectType,
   _isArray: _isArray,
+  _isArrayType: _isArrayType,
   _isDate: _isDate,
   _isRegExp: _isRegExp,
   _isError: _isError,
@@ -178,6 +191,7 @@ module.exports = {
   _isNotObject: _isNotObject,
   _isNotObjectType: _isNotObjectType,
   _isNotArray: _isNotArray,
+  _isNotArrayType: _isNotArrayType,
   _isNotDate: _isNotDate,
   _isNotRegExp: _isNotRegExp,
   _isNotBooleanObject: _isNotBooleanObject,

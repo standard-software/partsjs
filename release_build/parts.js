@@ -131,7 +131,7 @@ var _array = __webpack_require__(17);
 
 var _consoleHook = __webpack_require__(26);
 
-var VERSION = '2.6.1';
+var VERSION = '2.6.2 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -536,7 +536,7 @@ module.exports = {};
 
 
 // type
-var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,Date,RegExp,' + 'Exception,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + '';
+var _TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + '';
 
 var IS_TYPE = _TYPE_BASE.split(',').map(function (item) {
   return "is".concat(item);
@@ -994,6 +994,14 @@ var _isObjectType = function _isObjectType(value) {
 
 var _isArray = _objectToStringCheck('Array');
 
+var _isArrayType = function _isArrayType(value) {
+  if (objectToString(value).includes('Array]')) {
+    return true;
+  }
+
+  return false;
+};
+
 var _isDate = _objectToStringCheck('Date');
 
 var _isRegExp = _objectToStringCheck('RegExp');
@@ -1044,6 +1052,10 @@ var _isNotArray = function _isNotArray(value) {
   return !_isArray(value);
 };
 
+var _isNotArrayType = function _isNotArrayType(value) {
+  return !_isArrayType(value);
+};
+
 var _isNotDate = function _isNotDate(value) {
   return !_isDate(value);
 };
@@ -1079,6 +1091,7 @@ module.exports = {
   _isObject: _isObject,
   _isObjectType: _isObjectType,
   _isArray: _isArray,
+  _isArrayType: _isArrayType,
   _isDate: _isDate,
   _isRegExp: _isRegExp,
   _isError: _isError,
@@ -1096,6 +1109,7 @@ module.exports = {
   _isNotObject: _isNotObject,
   _isNotObjectType: _isNotObjectType,
   _isNotArray: _isNotArray,
+  _isNotArrayType: _isNotArrayType,
   _isNotDate: _isNotDate,
   _isNotRegExp: _isNotRegExp,
   _isNotBooleanObject: _isNotBooleanObject,
@@ -1324,6 +1338,7 @@ var _require = __webpack_require__(6),
     _isObject = _require._isObject,
     _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
     _isBooleanObject = _require._isBooleanObject,
@@ -1340,6 +1355,7 @@ var _require = __webpack_require__(6),
     _isNotObject = _require._isNotObject,
     _isNotObjectType = _require._isNotObjectType,
     _isNotArray = _require._isNotArray,
+    _isNotArrayType = _require._isNotArrayType,
     _isNotDate = _require._isNotDate,
     _isNotRegExp = _require._isNotRegExp,
     _isNotBooleanObject = _require._isNotBooleanObject,
@@ -1428,6 +1444,8 @@ var isObjectType = _isTypeCheckArgsFunc(_isObjectType);
 
 var isArray = _isTypeCheckArgsFunc(_isArray);
 
+var isArrayType = _isTypeCheckArgsFunc(_isArrayType);
+
 var isDate = _isTypeCheckArgsFunc(_isDate);
 
 var isRegExp = _isTypeCheckArgsFunc(_isRegExp);
@@ -1472,6 +1490,8 @@ var isNotObjectType = _isTypeCheckArgsFunc(_isNotObjectType);
 
 var isNotArray = _isTypeCheckArgsFunc(_isNotArray);
 
+var isNotArrayType = _isTypeCheckArgsFunc(_isNotArrayType);
+
 var isNotDate = _isTypeCheckArgsFunc(_isNotDate);
 
 var isNotRegExp = _isTypeCheckArgsFunc(_isNotRegExp);
@@ -1515,6 +1535,8 @@ var isObjectArray = _isTypeCheckArrayFunc(_isObject);
 var isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
 
 var isArrayArray = _isTypeCheckArrayFunc(_isArray);
+
+var isArrayTypeArray = _isTypeCheckArrayFunc(_isArrayType);
 
 var isDateArray = _isTypeCheckArrayFunc(_isDate);
 
@@ -1580,6 +1602,10 @@ var isNotObjectTypeArray = _isTypeCheckArrayFunc(function (value) {
 
 var isNotArrayArray = _isTypeCheckArrayFunc(function (value) {
   return !_isArray(value);
+});
+
+var isNotArrayTypeArray = _isTypeCheckArrayFunc(function (value) {
+  return !_isArrayType(value);
 });
 
 var isNotDateArray = _isTypeCheckArrayFunc(function (value) {
@@ -1656,6 +1682,7 @@ module.exports = {
   isObject: isObject,
   isObjectType: isObjectType,
   isArray: isArray,
+  isArrayType: isArrayType,
   isDate: isDate,
   isRegExp: isRegExp,
   isException: isException,
@@ -1678,6 +1705,7 @@ module.exports = {
   isNotObject: isNotObject,
   isNotObjectType: isNotObjectType,
   isNotArray: isNotArray,
+  isNotArrayType: isNotArrayType,
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
   isNotException: isNotException,
@@ -1700,6 +1728,7 @@ module.exports = {
   isObjectArray: isObjectArray,
   isObjectTypeArray: isObjectTypeArray,
   isArrayArray: isArrayArray,
+  isArrayTypeArray: isArrayTypeArray,
   isDateArray: isDateArray,
   isRegExpArray: isRegExpArray,
   isExceptionArray: isExceptionArray,
@@ -1722,6 +1751,7 @@ module.exports = {
   isNotObjectArray: isNotObjectArray,
   isNotObjectTypeArray: isNotObjectTypeArray,
   isNotArrayArray: isNotArrayArray,
+  isNotArrayTypeArray: isNotArrayTypeArray,
   isNotDateArray: isNotDateArray,
   isNotRegExpArray: isNotRegExpArray,
   isNotExceptionArray: isNotExceptionArray,

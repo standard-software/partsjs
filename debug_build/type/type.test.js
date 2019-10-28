@@ -16,6 +16,7 @@ var test_execute_type = function test_execute_type(parts) {
       isObject = _parts$type.isObject,
       isObjectType = _parts$type.isObjectType,
       isArray = _parts$type.isArray,
+      isArrayType = _parts$type.isArrayType,
       isDate = _parts$type.isDate,
       isRegExp = _parts$type.isRegExp,
       isException = _parts$type.isException,
@@ -38,6 +39,7 @@ var test_execute_type = function test_execute_type(parts) {
       isNotObject = _parts$type.isNotObject,
       isNotObjectType = _parts$type.isNotObjectType,
       isNotArray = _parts$type.isNotArray,
+      isNotArrayType = _parts$type.isNotArrayType,
       isNotDate = _parts$type.isNotDate,
       isNotRegExp = _parts$type.isNotRegExp,
       isNotException = _parts$type.isNotException,
@@ -150,16 +152,6 @@ var test_execute_type = function test_execute_type(parts) {
     checkType('object', '[object Uint32Array]', new Uint32Array());
     checkType('object', '[object Float32Array]', new Float32Array());
     checkType('object', '[object Float64Array]', new Float64Array());
-    checkEqual(true, Array.isArray(new Array()));
-    checkEqual(false, Array.isArray(new Int8Array()));
-    checkEqual(false, Array.isArray(new Uint8Array()));
-    checkEqual(false, Array.isArray(new Uint8ClampedArray()));
-    checkEqual(false, Array.isArray(new Int16Array()));
-    checkEqual(false, Array.isArray(new Uint16Array()));
-    checkEqual(false, Array.isArray(new Int32Array()));
-    checkEqual(false, Array.isArray(new Uint32Array()));
-    checkEqual(false, Array.isArray(new Float32Array()));
-    checkEqual(false, Array.isArray(new Float64Array()));
     checkType('symbol', '[object Symbol]', Symbol());
     checkType('object', '[object Map]', new Map());
     checkType('object', '[object WeakMap]', new WeakMap());
@@ -605,6 +597,65 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isNotArrayArray([10, 20, [30]]));
   };
 
+  var test_isArrayType = function test_isArrayType() {
+    checkEqual(true, Array.isArray([]));
+    checkEqual(true, Array.isArray([123]));
+    checkEqual(true, Array.isArray([1, 2, 3]));
+    checkEqual(true, Array.isArray(new Array()));
+    checkEqual(true, Array.isArray(new Array(1, 2, 3)));
+    checkEqual(true, Array.isArray(new Array()));
+
+    if (!parts.platform.wsh) {
+      checkEqual(false, Array.isArray(new Int8Array()));
+      checkEqual(false, Array.isArray(new Uint8Array()));
+      checkEqual(false, Array.isArray(new Uint8ClampedArray()));
+      checkEqual(false, Array.isArray(new Int16Array()));
+      checkEqual(false, Array.isArray(new Uint16Array()));
+      checkEqual(false, Array.isArray(new Int32Array()));
+      checkEqual(false, Array.isArray(new Uint32Array()));
+      checkEqual(false, Array.isArray(new Float32Array()));
+      checkEqual(false, Array.isArray(new Float64Array()));
+    }
+
+    checkEqual(true, isArray([]));
+    checkEqual(true, isArray([123]));
+    checkEqual(true, isArray([1, 2, 3]));
+    checkEqual(true, isArray(new Array()));
+    checkEqual(true, isArray(new Array(1, 2, 3)));
+    checkEqual(true, isArray(new Array()));
+
+    if (!parts.platform.wsh) {
+      checkEqual(false, isArray(new Int8Array()));
+      checkEqual(false, isArray(new Uint8Array()));
+      checkEqual(false, isArray(new Uint8ClampedArray()));
+      checkEqual(false, isArray(new Int16Array()));
+      checkEqual(false, isArray(new Uint16Array()));
+      checkEqual(false, isArray(new Int32Array()));
+      checkEqual(false, isArray(new Uint32Array()));
+      checkEqual(false, isArray(new Float32Array()));
+      checkEqual(false, isArray(new Float64Array()));
+    }
+
+    checkEqual(true, isArrayType([]));
+    checkEqual(true, isArrayType([123]));
+    checkEqual(true, isArrayType([1, 2, 3]));
+    checkEqual(true, isArrayType(new Array()));
+    checkEqual(true, isArrayType(new Array(1, 2, 3)));
+    checkEqual(true, isArrayType(new Array()));
+
+    if (!parts.platform.wsh) {
+      checkEqual(true, isArrayType(new Int8Array()));
+      checkEqual(true, isArrayType(new Uint8Array()));
+      checkEqual(true, isArrayType(new Uint8ClampedArray()));
+      checkEqual(true, isArrayType(new Int16Array()));
+      checkEqual(true, isArrayType(new Uint16Array()));
+      checkEqual(true, isArrayType(new Int32Array()));
+      checkEqual(true, isArrayType(new Uint32Array()));
+      checkEqual(true, isArrayType(new Float32Array()));
+      checkEqual(true, isArrayType(new Float64Array()));
+    }
+  };
+
   var test_isDate = function test_isDate() {
     checkEqual(true, isDate(new Date(2017, 1, 1)));
     checkEqual(true, isDate(new Date('2017/01')));
@@ -683,6 +734,7 @@ var test_execute_type = function test_execute_type(parts) {
   test_isObject();
   test_isObjectType();
   test_isArray();
+  test_isArrayType();
   test_isDate();
   test_isExcection();
   test_isSymbol();
