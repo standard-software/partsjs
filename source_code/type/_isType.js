@@ -73,6 +73,12 @@ const _isObjectType = (value) => {
 };
 
 const _isArray = _objectToStringCheck('Array');
+const _isArrayType = (value) => {
+  if (objectToString(value).includes('Array]')) {
+    return true;
+  }
+  return false;
+};
 
 const _isDate = _objectToStringCheck('Date');
 
@@ -91,6 +97,7 @@ const _isNotFunction    = value => !_isFunction(value);
 const _isNotObject      = value => !_isObject(value);
 const _isNotObjectType  = value => !_isObjectType(value);
 const _isNotArray       = value => !_isArray(value);
+const _isNotArrayType   = value => !_isArrayType(value);
 const _isNotDate        = value => !_isDate(value);
 const _isNotRegExp      = value => !_isRegExp(value);
 const _isNotBooleanObject = value => !_isBooleanObject(value);
@@ -103,14 +110,16 @@ module.exports = {
   _isUndefined, _isNull, _isNaNStrict,
   _isBoolean, _isNumber, _isInteger, _isString,
   _isFunction, _isObject, _isObjectType,
-  _isArray, _isDate, _isRegExp,
+  _isArray, _isArrayType,
+  _isDate, _isRegExp,
   _isError,
   _isBooleanObject, _isNumberObject, _isStringObject,
 
   _isNotUndefined, _isNotNull, _isNotNaNStrict,
   _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
   _isNotFunction, _isNotObject, _isNotObjectType,
-  _isNotArray, _isNotDate, _isNotRegExp,
+  _isNotArray, _isNotArrayType,
+  _isNotDate, _isNotRegExp,
   _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
 
 };

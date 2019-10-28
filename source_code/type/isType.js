@@ -1,14 +1,16 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isObjectType,
-  _isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isObjectType,
+  _isArray, _isArrayType,
+  _isDate, _isRegExp,
   _isBooleanObject, _isNumberObject, _isStringObject,
 
-  _isNotUndefined,_isNotNull,_isNotNaNStrict,
-  _isNotBoolean,_isNotNumber,_isNotInteger,_isNotString,
-  _isNotFunction,_isNotObject,_isNotObjectType,
-  _isNotArray,_isNotDate,_isNotRegExp,
+  _isNotUndefined, _isNotNull, _isNotNaNStrict,
+  _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
+  _isNotFunction, _isNotObject, _isNotObjectType,
+  _isNotArray, _isNotArrayType,
+  _isNotDate, _isNotRegExp,
   _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
 
 } = require('../type/_isType.js');
@@ -72,6 +74,7 @@ const isFunction    = _isTypeCheckArgsFunc(_isFunction);
 const isObject      = _isTypeCheckArgsFunc(_isObject);
 const isObjectType  = _isTypeCheckArgsFunc(_isObjectType);
 const isArray       = _isTypeCheckArgsFunc(_isArray);
+const isArrayType   = _isTypeCheckArgsFunc(_isArrayType);
 const isDate        = _isTypeCheckArgsFunc(_isDate);
 const isRegExp      = _isTypeCheckArgsFunc(_isRegExp);
 const isException   = _isTypeCheckArgsFunc(_isException);
@@ -95,12 +98,13 @@ const isNotFunction   = _isTypeCheckArgsFunc(_isNotFunction);
 const isNotObject     = _isTypeCheckArgsFunc(_isNotObject);
 const isNotObjectType = _isTypeCheckArgsFunc(_isNotObjectType);
 const isNotArray      = _isTypeCheckArgsFunc(_isNotArray);
+const isNotArrayType  = _isTypeCheckArgsFunc(_isNotArrayType);
 const isNotDate       = _isTypeCheckArgsFunc(_isNotDate);
 const isNotRegExp     = _isTypeCheckArgsFunc(_isNotRegExp);
 const isNotException  = _isTypeCheckArgsFunc(_isNotException);
 const isNotBooleanObject  = _isTypeCheckArgsFunc(_isNotBooleanObject);
-const isNotNumberObject    = _isTypeCheckArgsFunc(_isNotNumberObject);
-const isNotStringObject    = _isTypeCheckArgsFunc(_isNotStringObject);
+const isNotNumberObject   = _isTypeCheckArgsFunc(_isNotNumberObject);
+const isNotStringObject   = _isTypeCheckArgsFunc(_isNotStringObject);
 const isNotSymbol     = _isTypeCheckArgsFunc(_isNotSymbol);
 const isNotMap         = _isTypeCheckArgsFunc(_isNotMap);
 const isNotWeakMap     = _isTypeCheckArgsFunc(_isNotWeakMap);
@@ -118,6 +122,7 @@ const isFunctionArray   = _isTypeCheckArrayFunc(_isFunction);
 const isObjectArray     = _isTypeCheckArrayFunc(_isObject);
 const isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
 const isArrayArray      = _isTypeCheckArrayFunc(_isArray);
+const isArrayTypeArray  = _isTypeCheckArrayFunc(_isArrayType);
 const isDateArray       = _isTypeCheckArrayFunc(_isDate);
 const isRegExpArray     = _isTypeCheckArrayFunc(_isRegExp);
 const isExceptionArray  = _isTypeCheckArrayFunc(_isException);
@@ -141,6 +146,7 @@ const isNotFunctionArray    = _isTypeCheckArrayFunc(value => !_isFunction(value)
 const isNotObjectArray      = _isTypeCheckArrayFunc(value => !_isObject(value));
 const isNotObjectTypeArray  = _isTypeCheckArrayFunc(value => !_isObjectType(value));
 const isNotArrayArray       = _isTypeCheckArrayFunc(value => !_isArray(value));
+const isNotArrayTypeArray   = _isTypeCheckArrayFunc(value => !_isArrayType(value));
 const isNotDateArray        = _isTypeCheckArrayFunc(value => !_isDate(value));
 const isNotRegExpArray      = _isTypeCheckArrayFunc(value => !_isRegExp(value));
 const isNotExceptionArray   = _isTypeCheckArrayFunc(value => !_isException(value));
@@ -178,7 +184,8 @@ module.exports = {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
-  isArray, isDate, isRegExp,
+  isArray, isArrayType,
+  isDate, isRegExp,
   isException,
   isBooleanObject, isNumberObject, isStringObject,
   isSymbol,
@@ -188,7 +195,8 @@ module.exports = {
   isNotUndefined, isNotNull, isNotNaNStrict,
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotFunction, isNotObject, isNotObjectType,
-  isNotArray, isNotDate, isNotRegExp,
+  isNotArray, isNotArrayType,
+  isNotDate, isNotRegExp,
   isNotException,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotSymbol,
@@ -198,7 +206,8 @@ module.exports = {
   isUndefinedArray, isNullArray, isNaNStrictArray,
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray, isObjectArray, isObjectTypeArray,
-  isArrayArray, isDateArray, isRegExpArray,
+  isArrayArray, isArrayTypeArray,
+  isDateArray, isRegExpArray,
   isExceptionArray,
   isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
   isSymbolArray,
@@ -208,7 +217,8 @@ module.exports = {
   isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
   isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
   isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
-  isNotArrayArray, isNotDateArray, isNotRegExpArray,
+  isNotArrayArray, isNotArrayTypeArray,
+  isNotDateArray, isNotRegExpArray,
   isNotExceptionArray,
   isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
   isNotSymbolArray,

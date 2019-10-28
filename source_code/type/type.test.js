@@ -9,7 +9,8 @@ const test_execute_type = (parts) => {
     isUndefined, isNull, isNaNStrict,
     isBoolean, isNumber, isInteger, isString,
     isFunction, isObject, isObjectType,
-    isArray, isDate, isRegExp,
+    isArray, isArrayType,
+    isDate, isRegExp,
     isException,
     isBooleanObject, isNumberObject, isStringObject,
     isSymbol,
@@ -19,7 +20,8 @@ const test_execute_type = (parts) => {
     isNotUndefined, isNotNull, isNotNaNStrict,
     isNotBoolean, isNotNumber, isNotInteger, isNotString,
     isNotFunction, isNotObject, isNotObjectType,
-    isNotArray, isNotDate, isNotRegExp,
+    isNotArray, isNotArrayType,
+    isNotDate, isNotRegExp,
     isNotException,
     isNotBooleanObject, isNotNumberObject, isNotStringObject,
     isNotSymbol,
@@ -105,17 +107,6 @@ const test_execute_type = (parts) => {
     checkType('object',    '[object Uint32Array]',        new Uint32Array());
     checkType('object',    '[object Float32Array]',       new Float32Array());
     checkType('object',    '[object Float64Array]',       new Float64Array());
-
-    checkEqual(true,  Array.isArray(new Array()));
-    checkEqual(false, Array.isArray(new Int8Array()));
-    checkEqual(false, Array.isArray(new Uint8Array()));
-    checkEqual(false, Array.isArray(new Uint8ClampedArray()));
-    checkEqual(false, Array.isArray(new Int16Array()));
-    checkEqual(false, Array.isArray(new Uint16Array()));
-    checkEqual(false, Array.isArray(new Int32Array()));
-    checkEqual(false, Array.isArray(new Uint32Array()));
-    checkEqual(false, Array.isArray(new Float32Array()));
-    checkEqual(false, Array.isArray(new Float64Array()));
 
     checkType('symbol',    '[object Symbol]',             Symbol());
     checkType('object',    '[object Map]',                new Map());
@@ -545,32 +536,83 @@ const test_execute_type = (parts) => {
   };
 
   const test_isArray = function () {
-    checkEqual(true, isArray([123]));
-    checkEqual(true, isArray([]));
-    checkEqual(true, isArray([1, 2, 3]));
+    checkEqual(true,  isArray([123]));
+    checkEqual(true,  isArray([]));
+    checkEqual(true,  isArray([1, 2, 3]));
     checkEqual(false, isArray(123));
     checkEqual(false, isArray('1,2,3'));
 
-    checkEqual(true, isArray([1], [2]));
-    checkEqual(true, isArray([3], [4], [5]));
-    checkEqual(true, isArray([10, 20], [30]));
+    checkEqual(true,  isArray([1], [2]));
+    checkEqual(true,  isArray([3], [4], [5]));
+    checkEqual(true,  isArray([10, 20], [30]));
     checkEqual(false, isArray([1, 2], 3));
 
-    checkEqual(true, isNotArray(1, 2));
+    checkEqual(true,  isNotArray(1, 2));
     checkEqual(false, isNotArray([3], [4], 5));
-    checkEqual(true, isNotArray(10, 20, 30));
+    checkEqual(true,  isNotArray(10, 20, 30));
     checkEqual(false, isNotArray(10, 20, [30]));
 
 
-    checkEqual(true, isArrayArray([[1], [2]]));
-    checkEqual(true, isArrayArray([[3], [4], [5]]));
-    checkEqual(true, isArrayArray([[10, 20], [30]]));
+    checkEqual(true,  isArrayArray([[1], [2]]));
+    checkEqual(true,  isArrayArray([[3], [4], [5]]));
+    checkEqual(true,  isArrayArray([[10, 20], [30]]));
     checkEqual(false, isArrayArray([[1, 2], 3]));
 
-    checkEqual(true, isNotArrayArray([1, 2]));
+    checkEqual(true,  isNotArrayArray([1, 2]));
     checkEqual(false, isNotArrayArray([[3], [4], 5]));
-    checkEqual(true, isNotArrayArray([10, 20, 30]));
+    checkEqual(true,  isNotArrayArray([10, 20, 30]));
     checkEqual(false, isNotArrayArray([10, 20, [30]]));
+  };
+
+  const test_isArrayType = function () {
+    checkEqual(true,  Array.isArray([]));
+    checkEqual(true,  Array.isArray([123]));
+    checkEqual(true,  Array.isArray([1, 2, 3]));
+    checkEqual(true,  Array.isArray(new Array()));
+    checkEqual(true,  Array.isArray(new Array(1,2,3)));
+    checkEqual(true,  Array.isArray(new Array()));
+    checkEqual(false, Array.isArray(new Int8Array()));
+    checkEqual(false, Array.isArray(new Uint8Array()));
+    checkEqual(false, Array.isArray(new Uint8ClampedArray()));
+    checkEqual(false, Array.isArray(new Int16Array()));
+    checkEqual(false, Array.isArray(new Uint16Array()));
+    checkEqual(false, Array.isArray(new Int32Array()));
+    checkEqual(false, Array.isArray(new Uint32Array()));
+    checkEqual(false, Array.isArray(new Float32Array()));
+    checkEqual(false, Array.isArray(new Float64Array()));
+
+    checkEqual(true,  isArray([]));
+    checkEqual(true,  isArray([123]));
+    checkEqual(true,  isArray([1, 2, 3]));
+    checkEqual(true,  isArray(new Array()));
+    checkEqual(true,  isArray(new Array(1,2,3)));
+    checkEqual(true,  isArray(new Array()));
+    checkEqual(false, isArray(new Int8Array()));
+    checkEqual(false, isArray(new Uint8Array()));
+    checkEqual(false, isArray(new Uint8ClampedArray()));
+    checkEqual(false, isArray(new Int16Array()));
+    checkEqual(false, isArray(new Uint16Array()));
+    checkEqual(false, isArray(new Int32Array()));
+    checkEqual(false, isArray(new Uint32Array()));
+    checkEqual(false, isArray(new Float32Array()));
+    checkEqual(false, isArray(new Float64Array()));
+
+    checkEqual(true,  isArrayType([]));
+    checkEqual(true,  isArrayType([123]));
+    checkEqual(true,  isArrayType([1, 2, 3]));
+    checkEqual(true,  isArrayType(new Array()));
+    checkEqual(true,  isArrayType(new Array(1,2,3)));
+    checkEqual(true,  isArrayType(new Array()));
+    checkEqual(true,  isArrayType(new Int8Array()));
+    checkEqual(true,  isArrayType(new Uint8Array()));
+    checkEqual(true,  isArrayType(new Uint8ClampedArray()));
+    checkEqual(true,  isArrayType(new Int16Array()));
+    checkEqual(true,  isArrayType(new Uint16Array()));
+    checkEqual(true,  isArrayType(new Int32Array()));
+    checkEqual(true,  isArrayType(new Uint32Array()));
+    checkEqual(true,  isArrayType(new Float32Array()));
+    checkEqual(true,  isArrayType(new Float64Array()));
+
   };
 
   const test_isDate = function () {
@@ -644,6 +686,7 @@ const test_execute_type = (parts) => {
   test_isObject();
   test_isObjectType();
   test_isArray();
+  test_isArrayType();
   test_isDate();
   test_isExcection();
   test_isSymbol();

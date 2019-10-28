@@ -3,7 +3,8 @@ const _TYPE_BASE =
   'Undefined,Null,NaNStrict,' +
   'Boolean,Number,Integer,String,' +
   'Function,Object,ObjectType,' +
-  'Array,Date,RegExp,' +
+  'Array,ArrayType,' +
+  'Date,RegExp,' +
   'Exception,' +
   'Symbol,' +
   'Map,WeakMap,Set,WeakSet,' +
