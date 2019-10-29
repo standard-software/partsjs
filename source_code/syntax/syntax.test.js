@@ -19,16 +19,6 @@ const test_execute_syntax = (parts) => {
     isNotFunction, isNotObject, isNotArray, isNotDate,
     isNotRegExp, isNotException,
 
-    isUndefinedArray, isNullArray,
-    isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-    isFunctionArray, isObjectArray, isArrayArray, isDateArray,
-    isRegExpArray, isExceptionArray,
-
-    isNotUndefinedArray, isNotNullArray,
-    isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-    isNotFunctionArray, isNotObjectArray, isNotArrayArray, isNotDateArray,
-    isNotRegExpArray, isNotExceptionArray,
-
   } = parts.type;
 
   const {

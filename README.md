@@ -106,6 +106,7 @@ You can now use the functions of the parts object.
   - matchAll(matchEvery)
   - matchSome(matchAny)
   - matchSomeIndex(matchAnyIndex)
+- delete isXxxArray, isNotXxxArray
 
 ### 2.6.2
 #### 2019/10/28(Mon)

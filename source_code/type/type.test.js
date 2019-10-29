@@ -28,28 +28,20 @@ const test_execute_type = (parts) => {
     isNotMap, isNotWeakMap,
     isNotSet, isNotWeakSet,
 
-    isUndefinedArray, isNullArray, isNaNStrictArray,
-    isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-    isFunctionArray, isObjectArray, isObjectTypeArray,
-    isArrayArray, isDateArray, isRegExpArray,
-    isExceptionArray,
-    isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
-
-    isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
-    isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-    isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
-    isNotArrayArray, isNotDateArray, isNotRegExpArray,
-    isNotExceptionArray,
-    isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
-
   } = parts.type;
 
+
   const {
-    _typeofCheck, _objectToStringCheck,
+    matchAll,
+  } = parts.compare
+
+  const {
+    objectToString,
   } = require('../type/_isType.js')
 
+
   const test_checkType = () => {
-    const objectToString = value => Object.prototype.toString.call(value);
+    // const objectToString = value => Object.prototype.toString.call(value);
     const checkType = (
       typeofName,
       objectStringName,
@@ -137,6 +129,13 @@ const test_execute_type = (parts) => {
   }
 
   const test_isUndefined = function () {
+    const isUndefinedArray = (array) => {
+      return matchAll(array, [undefined])
+    }
+    const isNotUndefinedArray = (array) => {
+      return matchAll(array, [isNotUndefined])
+    }
+
     var u1;
     var n1 = null;
     var v1 = 1;
@@ -186,6 +185,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isNull = function () {
+    const isNullArray = (array) => {
+      return matchAll(array, [null])
+    }
+    const isNotNullArray = (array) => {
+      return matchAll(array, [isNotNull])
+    }
+
     var u1;
     var n1 = null;
     var v1 = 1;
@@ -228,6 +234,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isBoolean = function () {
+    const isBooleanArray = (array) => {
+      return matchAll(array, [isBoolean])
+    }
+    const isNotBooleanArray = (array) => {
+      return matchAll(array, [isNotBoolean])
+    }
+
     checkEqual(true, isBoolean(true));
     checkEqual(true, isBoolean(false));
     checkEqual(false, isBoolean(undefined));
@@ -262,6 +275,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isNumber = function () {
+    const isNumberArray = (array) => {
+      return matchAll(array, [isNumber])
+    }
+    const isNotNumberArray = (array) => {
+      return matchAll(array, [isNotNumber])
+    }
+
     checkEqual(true, isNumber(123));
     checkEqual(true, isNumber(0));
     checkEqual(true, isNumber(-1));
@@ -347,6 +367,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isInteger = function () {
+    const isIntegerArray = (array) => {
+      return matchAll(array, [isInteger])
+    }
+    const isNotIntegerArray = (array) => {
+      return matchAll(array, [isNotInteger])
+    }
+
     checkEqual(true, isInteger(123));
     checkEqual(true, isInteger(0));
     checkEqual(true, isInteger(-1));
@@ -383,10 +410,28 @@ const test_execute_type = (parts) => {
     checkEqual(false, isIntegerArray([]));
     checkEqual(true,  isIntegerArray([1]));
     checkEqual(true,  isIntegerArray([1, 2, 3]));
+    checkEqual(false, isIntegerArray([1.1, 2, 3]));
+    checkEqual(false, isIntegerArray([1.1, 2.2, 3]));
+    checkEqual(false, isIntegerArray([1.1, 2.2, 3.3]));
     checkEqual(true,  isIntegerArray([1, 2, 0]));
     checkEqual(false, isIntegerArray([1, 2, NaN]));
     checkEqual(false, isIntegerArray([1, 2, null]));
     checkEqual(false, isIntegerArray(['a', 'b', 1]));
+    checkEqual(false, isIntegerArray(['a', 'b', 1.1]));
+    checkEqual(false, isIntegerArray(['a', 'b', 'c']));
+
+    checkEqual(false, isNotIntegerArray([]));
+    checkEqual(false, isNotIntegerArray([1]));
+    checkEqual(false, isNotIntegerArray([1, 2, 3]));
+    checkEqual(false, isNotIntegerArray([1.1, 2, 3]));
+    checkEqual(false, isNotIntegerArray([1.1, 2.2, 3]));
+    checkEqual(true,  isNotIntegerArray([1.1, 2.2, 3.3]));
+    checkEqual(false, isNotIntegerArray([1, 2, 0]));
+    checkEqual(false, isNotIntegerArray([1, 2, NaN]));
+    checkEqual(false, isNotIntegerArray([1, 2, null]));
+    checkEqual(false, isNotIntegerArray(['a', 'b', 1]));
+    checkEqual(true,  isNotIntegerArray(['a', 'b', 1.1]));
+    checkEqual(true,  isNotIntegerArray(['a', 'b', 'c']));
 
     checkEqual(false, isInteger(new Number()));
     checkEqual(false, isInteger(new Number('')));
@@ -397,6 +442,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isString = function () {
+    const isStringArray = (array) => {
+      return matchAll(array, [isString])
+    }
+    const isNotStringArray = (array) => {
+      return matchAll(array, [isNotString])
+    }
+
     checkEqual(true, isString(''));
     checkEqual(true, isString('a'));
     checkEqual(true, isString('a', 'b', 'c'));
@@ -444,6 +496,12 @@ const test_execute_type = (parts) => {
   };
 
   const test_isFunction = function () {
+    const isFunctionArray = (array) => {
+      return matchAll(array, [isFunction])
+    }
+    const isNotFunctionArray = (array) => {
+      return matchAll(array, [isNotFunction])
+    }
 
     checkEqual(true, isFunction(function () { }));
     checkEqual(false, isFunction({}));
@@ -459,6 +517,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isObject = function () {
+    const isObjectArray = (array) => {
+      return matchAll(array, [isObject])
+    }
+    const isNotObjectArray = (array) => {
+      return matchAll(array, [isNotObject])
+    }
+
     checkEqual(false, isObject(null));
     checkEqual(false, isObject(undefined));
     checkEqual(false, isObject(undefined));
@@ -498,6 +563,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isObjectType = function () {
+    const isObjectTypeArray = (array) => {
+      return matchAll(array, [isObjectType])
+    }
+    const isNotObjectTypeArray = (array) => {
+      return matchAll(array, [isNotObjectType])
+    }
+
     checkEqual(false, isObjectType(null));
     checkEqual(false, isObjectType(undefined));
     checkEqual(false, isObjectType('a'));
@@ -536,6 +608,13 @@ const test_execute_type = (parts) => {
   };
 
   const test_isArray = function () {
+    const isArrayArray = (array) => {
+      return matchAll(array, [isArray])
+    }
+    const isNotArrayArray = (array) => {
+      return matchAll(array, [isNotArray])
+    }
+
     checkEqual(true,  isArray([123]));
     checkEqual(true,  isArray([]));
     checkEqual(true,  isArray([1, 2, 3]));

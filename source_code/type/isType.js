@@ -59,10 +59,6 @@ const _isTypeCheckArgsFunc = (func) => {
   return (...args) => _isTypeCheck(func, args);
 };
 
-const _isTypeCheckArrayFunc = (func) => {
-  return (value) => _isTypeCheck(func, value);
-};
-
 const isUndefined   = _isTypeCheckArgsFunc(_isUndefined);
 const isNull        = _isTypeCheckArgsFunc(_isNull);
 const isNaNStrict   = _isTypeCheckArgsFunc(_isNaNStrict);
@@ -111,55 +107,6 @@ const isNotWeakMap     = _isTypeCheckArgsFunc(_isNotWeakMap);
 const isNotSet         = _isTypeCheckArgsFunc(_isNotSet);
 const isNotWeakSet     = _isTypeCheckArgsFunc(_isNotWeakSet);
 
-const isUndefinedArray  = _isTypeCheckArrayFunc(_isUndefined);
-const isNullArray       = _isTypeCheckArrayFunc(_isNull);
-const isNaNStrictArray  = _isTypeCheckArrayFunc(_isNaNStrict);
-const isBooleanArray    = _isTypeCheckArrayFunc(_isBoolean);
-const isNumberArray     = _isTypeCheckArrayFunc(_isNumber);
-const isIntegerArray    = _isTypeCheckArrayFunc(_isInteger);
-const isStringArray     = _isTypeCheckArrayFunc(_isString);
-const isFunctionArray   = _isTypeCheckArrayFunc(_isFunction);
-const isObjectArray     = _isTypeCheckArrayFunc(_isObject);
-const isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
-const isArrayArray      = _isTypeCheckArrayFunc(_isArray);
-const isArrayTypeArray  = _isTypeCheckArrayFunc(_isArrayType);
-const isDateArray       = _isTypeCheckArrayFunc(_isDate);
-const isRegExpArray     = _isTypeCheckArrayFunc(_isRegExp);
-const isExceptionArray  = _isTypeCheckArrayFunc(_isException);
-const isBooleanObjectArray  = _isTypeCheckArrayFunc(_isBooleanObject);
-const isNumberObjectArray   = _isTypeCheckArrayFunc(_isNumberObject);
-const isStringObjectArray   = _isTypeCheckArrayFunc(_isStringObject);
-const isSymbolArray     = _isTypeCheckArrayFunc(_isSymbol);
-const isMapArray        = _isTypeCheckArrayFunc(_isMap);
-const isWeakMapArray    = _isTypeCheckArrayFunc(_isWeakMap);
-const isSetArray        = _isTypeCheckArrayFunc(_isSet);
-const isWeakSetArray    = _isTypeCheckArrayFunc(_isWeakSet);
-
-const isNotUndefinedArray   = _isTypeCheckArrayFunc(value => !_isUndefined(value));
-const isNotNullArray        = _isTypeCheckArrayFunc(value => !_isNull(value));
-const isNotNaNStrictArray   = _isTypeCheckArrayFunc(value => !_isNaNStrict(value));
-const isNotBooleanArray     = _isTypeCheckArrayFunc(value => !_isBoolean(value));
-const isNotNumberArray      = _isTypeCheckArrayFunc(value => !_isNumber(value));
-const isNotIntegerArray     = _isTypeCheckArrayFunc(value => !_isInteger(value));
-const isNotStringArray      = _isTypeCheckArrayFunc(value => !_isString(value));
-const isNotFunctionArray    = _isTypeCheckArrayFunc(value => !_isFunction(value));
-const isNotObjectArray      = _isTypeCheckArrayFunc(value => !_isObject(value));
-const isNotObjectTypeArray  = _isTypeCheckArrayFunc(value => !_isObjectType(value));
-const isNotArrayArray       = _isTypeCheckArrayFunc(value => !_isArray(value));
-const isNotArrayTypeArray   = _isTypeCheckArrayFunc(value => !_isArrayType(value));
-const isNotDateArray        = _isTypeCheckArrayFunc(value => !_isDate(value));
-const isNotRegExpArray      = _isTypeCheckArrayFunc(value => !_isRegExp(value));
-const isNotExceptionArray   = _isTypeCheckArrayFunc(value => !_isException(value));
-const isNotBooleanObjectArray = _isTypeCheckArrayFunc(value => !_isBooleanObject(value));
-const isNotNumberObjectArray  = _isTypeCheckArrayFunc(value => !_isNumberObject(value));
-const isNotStringObjectArray  = _isTypeCheckArrayFunc(value => !_isStringObject(value));
-const isNotSymbolArray      = _isTypeCheckArrayFunc(value => !_isSymbol(value));
-const isNotMapArray         = _isTypeCheckArrayFunc(value => !_isMap(value));
-const isNotWeakMapArray     = _isTypeCheckArrayFunc(value => !_isWeakMap(value));
-const isNotSetArray         = _isTypeCheckArrayFunc(value => !_isSet(value));
-const isNotWeakSetArray     = _isTypeCheckArrayFunc(value => !_isWeakSet(value));
-
-
 const isUndef   = isUndefined;
 const isBool    = isBoolean;
 const isNum     = isNumber;
@@ -202,28 +149,6 @@ module.exports = {
   isNotSymbol,
   isNotMap, isNotWeakMap,
   isNotSet, isNotWeakSet,
-
-  isUndefinedArray, isNullArray, isNaNStrictArray,
-  isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-  isFunctionArray, isObjectArray, isObjectTypeArray,
-  isArrayArray, isArrayTypeArray,
-  isDateArray, isRegExpArray,
-  isExceptionArray,
-  isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
-  isSymbolArray,
-  isMapArray, isWeakMapArray,
-  isSetArray, isWeakSetArray,
-
-  isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
-  isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-  isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
-  isNotArrayArray, isNotArrayTypeArray,
-  isNotDateArray, isNotRegExpArray,
-  isNotExceptionArray,
-  isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
-  isNotSymbolArray,
-  isNotMapArray, isNotWeakMapArray,
-  isNotSetArray, isNotWeakSetArray,
 
   isUndef,
   isBool, isNum, isInt, isStr,

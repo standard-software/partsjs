@@ -13,8 +13,6 @@ const _TYPE_BASE =
 
 const IS_TYPE           = _TYPE_BASE.split(',').map(item => `is${item}`).join(',');
 const ISNOT_TYPE        = _TYPE_BASE.split(',').map(item => `isNot${item}`).join(',');
-const IS_TYPE_ARRAY     = _TYPE_BASE.split(',').map(item => `is${item}Array`).join(',');
-const ISNOT_TYPE_ARRAY  = _TYPE_BASE.split(',').map(item => `isNot${item}Array`).join(',');
 
 const _TYPE_BASE_SHORT =
   'Bool,Num,Int,Str,' +
@@ -24,7 +22,7 @@ const _TYPE_BASE_SHORT =
 const IS_TYPE_SHORT     = _TYPE_BASE_SHORT.split(',').map(item => `is${item}`).join(',');
 const ISNOT_TYPE_SHORT  = _TYPE_BASE_SHORT.split(',').map(item => `isNot${item}`).join(',');
 const TYPE = [
-  IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY,
+  IS_TYPE, ISNOT_TYPE,
   IS_TYPE_SHORT, ISNOT_TYPE_SHORT,
 ].join(',');
 
