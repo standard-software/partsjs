@@ -68,7 +68,7 @@ const numberToString = (
 /**
  * stringToNumber
  */
-const __stringToNumber = (
+const _stringToNumberBase = (
   value,
   defaultValueFunc,
 ) => {
@@ -89,7 +89,7 @@ const __stringToNumber = (
 const _stringToNumber = (
   value,
 ) => {
-  return __stringToNumber(
+  return _stringToNumberBase(
     value,
     () => {
       throw new RangeError(
@@ -121,7 +121,7 @@ const _stringToNumberDefault = (
   value,
   defaultValue,
 ) => {
-  return __stringToNumber(
+  return _stringToNumberBase(
     value,
     () => defaultValue,
   );
@@ -173,7 +173,7 @@ const _stringToInteger = (
   value,
   radix = 10,
 ) => {
-  return __stringToNumber(
+  return _stringToNumberBase(
     value,
     () => {
       throw new RangeError(
