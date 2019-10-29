@@ -100,6 +100,13 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.7.0
+### 2019/10/29(Tue)
+- add
+  - matchAll(matchEvery)
+  - matchSome(matchAny)
+  - matchSomeIndex(matchAnyIndex)
+
 ### 2.6.2
 #### 2019/10/28(Mon)
 - add isArrayType

@@ -50,6 +50,8 @@ const SYNTAX =
 const COMPARE =
   'equal,or,' +
   'match,matchValue,initialValue,' +
+  'matchAll,matchSomeIndex,matchSome,' +
+  'matchEvery,matchAnyIndex,matchAny,' +
   'isEmpty,' +
   '';
 
