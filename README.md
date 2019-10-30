@@ -101,7 +101,7 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.7.0
-### 2019/10/29(Tue)
+### 2019/10/30(Wed)
 - add
   - matchAll(matchEvery)
   - matchSome(matchAny)

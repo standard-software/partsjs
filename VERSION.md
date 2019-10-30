@@ -2,6 +2,14 @@
 
 ## Version
 
+### 2.7.0
+### 2019/10/30(Wed)
+- add
+  - matchAll(matchEvery)
+  - matchSome(matchAny)
+  - matchSomeIndex(matchAnyIndex)
+- delete isXxxArray, isNotXxxArray
+
 ### 2.6.2
 #### 2019/10/28(Mon)
 - add isArrayType
