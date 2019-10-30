@@ -50,51 +50,11 @@ var test_execute_type = function test_execute_type(parts) {
       isNotMap = _parts$type.isNotMap,
       isNotWeakMap = _parts$type.isNotWeakMap,
       isNotSet = _parts$type.isNotSet,
-      isNotWeakSet = _parts$type.isNotWeakSet,
-      isUndefinedArray = _parts$type.isUndefinedArray,
-      isNullArray = _parts$type.isNullArray,
-      isNaNStrictArray = _parts$type.isNaNStrictArray,
-      isBooleanArray = _parts$type.isBooleanArray,
-      isNumberArray = _parts$type.isNumberArray,
-      isIntegerArray = _parts$type.isIntegerArray,
-      isStringArray = _parts$type.isStringArray,
-      isFunctionArray = _parts$type.isFunctionArray,
-      isObjectArray = _parts$type.isObjectArray,
-      isObjectTypeArray = _parts$type.isObjectTypeArray,
-      isArrayArray = _parts$type.isArrayArray,
-      isDateArray = _parts$type.isDateArray,
-      isRegExpArray = _parts$type.isRegExpArray,
-      isExceptionArray = _parts$type.isExceptionArray,
-      isBooleanObjectArray = _parts$type.isBooleanObjectArray,
-      isNumberObjectArray = _parts$type.isNumberObjectArray,
-      isStringObjectArray = _parts$type.isStringObjectArray,
-      isNotUndefinedArray = _parts$type.isNotUndefinedArray,
-      isNotNullArray = _parts$type.isNotNullArray,
-      isNotNaNStrictArray = _parts$type.isNotNaNStrictArray,
-      isNotBooleanArray = _parts$type.isNotBooleanArray,
-      isNotNumberArray = _parts$type.isNotNumberArray,
-      isNotIntegerArray = _parts$type.isNotIntegerArray,
-      isNotStringArray = _parts$type.isNotStringArray,
-      isNotFunctionArray = _parts$type.isNotFunctionArray,
-      isNotObjectArray = _parts$type.isNotObjectArray,
-      isNotObjectTypeArray = _parts$type.isNotObjectTypeArray,
-      isNotArrayArray = _parts$type.isNotArrayArray,
-      isNotDateArray = _parts$type.isNotDateArray,
-      isNotRegExpArray = _parts$type.isNotRegExpArray,
-      isNotExceptionArray = _parts$type.isNotExceptionArray,
-      isNotBooleanObjectArray = _parts$type.isNotBooleanObjectArray,
-      isNotNumberObjectArray = _parts$type.isNotNumberObjectArray,
-      isNotStringObjectArray = _parts$type.isNotStringObjectArray;
-
-  var _require = require('../type/_isType.js'),
-      _typeofCheck = _require._typeofCheck,
-      _objectToStringCheck = _require._objectToStringCheck;
+      isNotWeakSet = _parts$type.isNotWeakSet;
+  var matchAll = parts.compare.matchAll;
+  var objectToString = parts.objectToString;
 
   var test_checkType = function test_checkType() {
-    var objectToString = function objectToString(value) {
-      return Object.prototype.toString.call(value);
-    };
-
     var checkType = function checkType(typeofName, objectStringName, value) {
       checkEqual(typeofName, _typeof(value));
       checkEqual(objectStringName, objectToString(value));
@@ -176,6 +136,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isUndefined = function test_isUndefined() {
+    var isUndefinedArray = function isUndefinedArray(array) {
+      return matchAll(array, [undefined]);
+    };
+
+    var isNotUndefinedArray = function isNotUndefinedArray(array) {
+      return matchAll(array, [isNotUndefined]);
+    };
+
     var u1;
     var n1 = null;
     var v1 = 1;
@@ -220,6 +188,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isNull = function test_isNull() {
+    var isNullArray = function isNullArray(array) {
+      return matchAll(array, [null]);
+    };
+
+    var isNotNullArray = function isNotNullArray(array) {
+      return matchAll(array, [isNotNull]);
+    };
+
     var u1;
     var n1 = null;
     var v1 = 1;
@@ -258,6 +234,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isBoolean = function test_isBoolean() {
+    var isBooleanArray = function isBooleanArray(array) {
+      return matchAll(array, [isBoolean]);
+    };
+
+    var isNotBooleanArray = function isNotBooleanArray(array) {
+      return matchAll(array, [isNotBoolean]);
+    };
+
     checkEqual(true, isBoolean(true));
     checkEqual(true, isBoolean(false));
     checkEqual(false, isBoolean(undefined));
@@ -288,6 +272,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isNumber = function test_isNumber() {
+    var isNumberArray = function isNumberArray(array) {
+      return matchAll(array, [isNumber]);
+    };
+
+    var isNotNumberArray = function isNotNumberArray(array) {
+      return matchAll(array, [isNotNumber]);
+    };
+
     checkEqual(true, isNumber(123));
     checkEqual(true, isNumber(0));
     checkEqual(true, isNumber(-1));
@@ -368,6 +360,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isInteger = function test_isInteger() {
+    var isIntegerArray = function isIntegerArray(array) {
+      return matchAll(array, [isInteger]);
+    };
+
+    var isNotIntegerArray = function isNotIntegerArray(array) {
+      return matchAll(array, [isNotInteger]);
+    };
+
     checkEqual(true, isInteger(123));
     checkEqual(true, isInteger(0));
     checkEqual(true, isInteger(-1));
@@ -400,10 +400,27 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isIntegerArray([]));
     checkEqual(true, isIntegerArray([1]));
     checkEqual(true, isIntegerArray([1, 2, 3]));
+    checkEqual(false, isIntegerArray([1.1, 2, 3]));
+    checkEqual(false, isIntegerArray([1.1, 2.2, 3]));
+    checkEqual(false, isIntegerArray([1.1, 2.2, 3.3]));
     checkEqual(true, isIntegerArray([1, 2, 0]));
     checkEqual(false, isIntegerArray([1, 2, NaN]));
     checkEqual(false, isIntegerArray([1, 2, null]));
     checkEqual(false, isIntegerArray(['a', 'b', 1]));
+    checkEqual(false, isIntegerArray(['a', 'b', 1.1]));
+    checkEqual(false, isIntegerArray(['a', 'b', 'c']));
+    checkEqual(false, isNotIntegerArray([]));
+    checkEqual(false, isNotIntegerArray([1]));
+    checkEqual(false, isNotIntegerArray([1, 2, 3]));
+    checkEqual(false, isNotIntegerArray([1.1, 2, 3]));
+    checkEqual(false, isNotIntegerArray([1.1, 2.2, 3]));
+    checkEqual(true, isNotIntegerArray([1.1, 2.2, 3.3]));
+    checkEqual(false, isNotIntegerArray([1, 2, 0]));
+    checkEqual(false, isNotIntegerArray([1, 2, NaN]));
+    checkEqual(false, isNotIntegerArray([1, 2, null]));
+    checkEqual(false, isNotIntegerArray(['a', 'b', 1]));
+    checkEqual(true, isNotIntegerArray(['a', 'b', 1.1]));
+    checkEqual(true, isNotIntegerArray(['a', 'b', 'c']));
     checkEqual(false, isInteger(new Number()));
     checkEqual(false, isInteger(new Number('')));
     checkEqual(false, isInteger(new Number('1')));
@@ -412,6 +429,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isString = function test_isString() {
+    var isStringArray = function isStringArray(array) {
+      return matchAll(array, [isString]);
+    };
+
+    var isNotStringArray = function isNotStringArray(array) {
+      return matchAll(array, [isNotString]);
+    };
+
     checkEqual(true, isString(''));
     checkEqual(true, isString('a'));
     checkEqual(true, isString('a', 'b', 'c'));
@@ -456,6 +481,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isFunction = function test_isFunction() {
+    var isFunctionArray = function isFunctionArray(array) {
+      return matchAll(array, [isFunction]);
+    };
+
+    var isNotFunctionArray = function isNotFunctionArray(array) {
+      return matchAll(array, [isNotFunction]);
+    };
+
     checkEqual(true, isFunction(function () {}));
     checkEqual(false, isFunction({}));
     checkEqual(true, isFunction(function () {}, test_isFunction));
@@ -465,6 +498,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isObject = function test_isObject() {
+    var isObjectArray = function isObjectArray(array) {
+      return matchAll(array, [isObject]);
+    };
+
+    var isNotObjectArray = function isNotObjectArray(array) {
+      return matchAll(array, [isNotObject]);
+    };
+
     checkEqual(false, isObject(null));
     checkEqual(false, isObject(undefined));
     checkEqual(false, isObject(undefined));
@@ -520,6 +561,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isObjectType = function test_isObjectType() {
+    var isObjectTypeArray = function isObjectTypeArray(array) {
+      return matchAll(array, [isObjectType]);
+    };
+
+    var isNotObjectTypeArray = function isNotObjectTypeArray(array) {
+      return matchAll(array, [isNotObjectType]);
+    };
+
     checkEqual(false, isObjectType(null));
     checkEqual(false, isObjectType(undefined));
     checkEqual(false, isObjectType('a'));
@@ -574,6 +623,14 @@ var test_execute_type = function test_execute_type(parts) {
   };
 
   var test_isArray = function test_isArray() {
+    var isArrayArray = function isArrayArray(array) {
+      return matchAll(array, [isArray]);
+    };
+
+    var isNotArrayArray = function isNotArrayArray(array) {
+      return matchAll(array, [isNotArray]);
+    };
+
     checkEqual(true, isArray([123]));
     checkEqual(true, isArray([]));
     checkEqual(true, isArray([1, 2, 3]));

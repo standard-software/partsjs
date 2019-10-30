@@ -78,7 +78,7 @@ var numberToString = function numberToString(value) {
  */
 
 
-var __stringToNumber = function __stringToNumber(value, defaultValueFunc) {
+var _stringToNumberBase = function _stringToNumberBase(value, defaultValueFunc) {
   if (value === '') {
     return defaultValueFunc();
   }
@@ -97,7 +97,7 @@ var __stringToNumber = function __stringToNumber(value, defaultValueFunc) {
 };
 
 var _stringToNumber = function _stringToNumber(value) {
-  return __stringToNumber(value, function () {
+  return _stringToNumberBase(value, function () {
     throw new RangeError('stringToNumber args(value) is not changeing number');
   });
 };
@@ -116,7 +116,7 @@ var stringToNumber = function stringToNumber(value) {
 };
 
 var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue) {
-  return __stringToNumber(value, function () {
+  return _stringToNumberBase(value, function () {
     return defaultValue;
   });
 };
@@ -161,7 +161,7 @@ var __stringToInteger = function __stringToInteger(value, defaultValueFunc) {
 
 var _stringToInteger = function _stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
-  return __stringToNumber(value, function () {
+  return _stringToNumberBase(value, function () {
     throw new RangeError('stringToInteger args(value) is not changeing integer');
   }, radix);
 };

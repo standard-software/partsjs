@@ -81,6 +81,8 @@ _object._copyProperty(_object,
   _constant.propertyNames.OBJECT_ROOT,
   rootNames
 );
+object.objectToString = _type.objectToString;
+rootNames.objectToString = _type.objectToString;
 
 // array
 const array = _object._copyProperty(_array,

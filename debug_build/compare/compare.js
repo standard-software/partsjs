@@ -10,7 +10,9 @@ var _require = require('../type/type.js'),
     _isString = _require._isString,
     _isFunction = _require._isFunction,
     _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
@@ -65,6 +67,10 @@ var or = function or(value, compareArray) {
 
   return _or(value, compareArray);
 };
+/**
+ * match
+ */
+
 
 var _match = function _match(value, compareArray) {
   if (_isString(value)) {
@@ -128,6 +134,90 @@ var match = function match(value, compareArray) {
 
   return _match(value, compareArray);
 };
+/**
+ * matchAll
+ */
+
+
+var _matchAll = function _matchAll(valueArray, compareArray) {
+  var result = false;
+
+  for (var i = 0, l = valueArray.length; i < l; i += 1) {
+    if (_match(valueArray[i], compareArray)) {
+      result = true;
+    } else {
+      result = false;
+      break;
+    }
+  }
+
+  return result;
+};
+
+var matchAll = function matchAll(valueArray, compareArray) {
+  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  }
+
+  if (!_isArray(valueArray)) {
+    throw new TypeError('matchAll args(valueArray) is not array');
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('matchAll args(compareArray) is not array');
+  }
+
+  return _matchAll(valueArray, compareArray);
+};
+/**
+ * matchSome
+ */
+
+
+var _matchSomeIndex = function _matchSomeIndex(valueArray, compareArray) {
+  var result = -1;
+
+  for (var i = 0, l = valueArray.length; i < l; i += 1) {
+    if (!_match(valueArray[i], compareArray)) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+};
+
+var _matchSome = function _matchSome(valueArray, compareArray) {
+  return _matchSomeIndex(valueArray, compareArray) !== -1;
+};
+
+var matchSomeIndex = function matchSomeIndex(valueArray, compareArray) {
+  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+    var _valueArray2 = valueArray;
+    valueArray = _valueArray2.valueArray;
+    compareArray = _valueArray2.compareArray;
+  }
+
+  if (!_isArray(valueArray)) {
+    throw new TypeError('matchSomeIndex args(valueArray) is not array');
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('matchSomeIndex args(compareArray) is not array');
+  }
+
+  return _matchSome(valueArray, compareArray);
+};
+
+var matchSome = function matchSome(valueArray, compareArray) {
+  return matchSomeIndex(valueArray, compareArray) !== -1;
+};
+/**
+ * matchValue
+ */
+
 
 var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
   if (_match(value, compareArray)) {
@@ -151,6 +241,10 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
 
   return _matchValue(value, compareArray, inMatchValue);
 };
+/**
+ * initialValue
+ */
+
 
 var _initialValue = function _initialValue(value, inMatchValue) {
   if (_match(value, [_isUndefined])) {
@@ -169,25 +263,41 @@ var initialValue = function initialValue(value, inMatchValue) {
 
   return _initialValue(value, inMatchValue);
 };
+/**
+ * isEmpty
+ */
+
 
 var isEmpty = function isEmpty(value) {
   return _match(value, [undefined, null, '', function (value) {
     return _isObject(value) && _propertyCount(value) === 0;
   }, function (value) {
-    return _isArray(value) && value.length === 0;
+    return _isArrayType(value) && value.length === 0;
   }]);
 };
 
+var matchEvery = matchAll;
+var matchAnyIndex = matchSomeIndex;
+var matchAny = matchSome;
 module.exports = {
   _equal: _equal,
   _or: _or,
   _match: _match,
   _matchValue: _matchValue,
   _initialValue: _initialValue,
+  _matchAll: _matchAll,
+  _matchSomeIndex: _matchSomeIndex,
+  _matchSome: _matchSome,
   equal: equal,
   or: or,
   match: match,
   matchValue: matchValue,
   initialValue: initialValue,
+  matchAll: matchAll,
+  matchSomeIndex: matchSomeIndex,
+  matchSome: matchSome,
+  matchEvery: matchEvery,
+  matchAnyIndex: matchAnyIndex,
+  matchAny: matchAny,
   isEmpty: isEmpty
 };

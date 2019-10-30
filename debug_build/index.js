@@ -32,7 +32,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '2.6.2';
+var VERSION = '2.7.0 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -72,8 +72,10 @@ _object._copyProperty(_string, _constant.propertyNames.STRING_ROOT, rootNames); 
 
 var object = _object._copyProperty(_object, _constant.propertyNames.OBJECT_PUBLIC);
 
-_object._copyProperty(_object, _constant.propertyNames.OBJECT_ROOT, rootNames); // array
+_object._copyProperty(_object, _constant.propertyNames.OBJECT_ROOT, rootNames);
 
+object.objectToString = _type.objectToString;
+rootNames.objectToString = _type.objectToString; // array
 
 var array = _object._copyProperty(_array, _constant.propertyNames.ARRAY_PUBLIC);
 

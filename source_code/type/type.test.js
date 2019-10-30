@@ -33,20 +33,19 @@ const test_execute_type = (parts) => {
 
   const {
     matchAll,
-  } = parts.compare
+  } = parts.compare;
 
   const {
     objectToString,
-  } = require('../type/_isType.js')
+  } = parts;
 
 
   const test_checkType = () => {
-    // const objectToString = value => Object.prototype.toString.call(value);
-    const checkType = (
+    const checkType = function(
       typeofName,
       objectStringName,
       value,
-    ) => {
+    ) {
       checkEqual(typeofName, typeof value);
       checkEqual(objectStringName, objectToString(value));
     }

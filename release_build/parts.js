@@ -131,7 +131,7 @@ var _array = __webpack_require__(17);
 
 var _consoleHook = __webpack_require__(26);
 
-var VERSION = '2.6.2';
+var VERSION = '2.7.0 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -171,8 +171,10 @@ _object._copyProperty(_string, _constant.propertyNames.STRING_ROOT, rootNames); 
 
 var object = _object._copyProperty(_object, _constant.propertyNames.OBJECT_PUBLIC);
 
-_object._copyProperty(_object, _constant.propertyNames.OBJECT_ROOT, rootNames); // array
+_object._copyProperty(_object, _constant.propertyNames.OBJECT_ROOT, rootNames);
 
+object.objectToString = _type.objectToString;
+rootNames.objectToString = _type.objectToString; // array
 
 var array = _object._copyProperty(_array, _constant.propertyNames.ARRAY_PUBLIC);
 
@@ -546,14 +548,6 @@ var ISNOT_TYPE = _TYPE_BASE.split(',').map(function (item) {
   return "isNot".concat(item);
 }).join(',');
 
-var IS_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
-  return "is".concat(item, "Array");
-}).join(',');
-
-var ISNOT_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
-  return "isNot".concat(item, "Array");
-}).join(',');
-
 var _TYPE_BASE_SHORT = 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
 
 var IS_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
@@ -564,7 +558,7 @@ var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
   return "isNot".concat(item);
 }).join(',');
 
-var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
+var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
 
 var ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + ''; // test
 
@@ -572,7 +566,7 @@ var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown
 
 var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
 
-var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
+var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'matchAll,matchSomeIndex,matchSome,' + 'matchEvery,matchAnyIndex,matchAny,' + 'isEmpty,' + ''; // convert
 
 var CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + ''; // number
 
@@ -1416,12 +1410,6 @@ var _isTypeCheckArgsFunc = function _isTypeCheckArgsFunc(func) {
   };
 };
 
-var _isTypeCheckArrayFunc = function _isTypeCheckArrayFunc(func) {
-  return function (value) {
-    return _isTypeCheck(func, value);
-  };
-};
-
 var isUndefined = _isTypeCheckArgsFunc(_isUndefined);
 
 var isNull = _isTypeCheckArgsFunc(_isNull);
@@ -1514,144 +1502,6 @@ var isNotSet = _isTypeCheckArgsFunc(_isNotSet);
 
 var isNotWeakSet = _isTypeCheckArgsFunc(_isNotWeakSet);
 
-var isUndefinedArray = _isTypeCheckArrayFunc(_isUndefined);
-
-var isNullArray = _isTypeCheckArrayFunc(_isNull);
-
-var isNaNStrictArray = _isTypeCheckArrayFunc(_isNaNStrict);
-
-var isBooleanArray = _isTypeCheckArrayFunc(_isBoolean);
-
-var isNumberArray = _isTypeCheckArrayFunc(_isNumber);
-
-var isIntegerArray = _isTypeCheckArrayFunc(_isInteger);
-
-var isStringArray = _isTypeCheckArrayFunc(_isString);
-
-var isFunctionArray = _isTypeCheckArrayFunc(_isFunction);
-
-var isObjectArray = _isTypeCheckArrayFunc(_isObject);
-
-var isObjectTypeArray = _isTypeCheckArrayFunc(_isObjectType);
-
-var isArrayArray = _isTypeCheckArrayFunc(_isArray);
-
-var isArrayTypeArray = _isTypeCheckArrayFunc(_isArrayType);
-
-var isDateArray = _isTypeCheckArrayFunc(_isDate);
-
-var isRegExpArray = _isTypeCheckArrayFunc(_isRegExp);
-
-var isExceptionArray = _isTypeCheckArrayFunc(_isException);
-
-var isBooleanObjectArray = _isTypeCheckArrayFunc(_isBooleanObject);
-
-var isNumberObjectArray = _isTypeCheckArrayFunc(_isNumberObject);
-
-var isStringObjectArray = _isTypeCheckArrayFunc(_isStringObject);
-
-var isSymbolArray = _isTypeCheckArrayFunc(_isSymbol);
-
-var isMapArray = _isTypeCheckArrayFunc(_isMap);
-
-var isWeakMapArray = _isTypeCheckArrayFunc(_isWeakMap);
-
-var isSetArray = _isTypeCheckArrayFunc(_isSet);
-
-var isWeakSetArray = _isTypeCheckArrayFunc(_isWeakSet);
-
-var isNotUndefinedArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isUndefined(value);
-});
-
-var isNotNullArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isNull(value);
-});
-
-var isNotNaNStrictArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isNaNStrict(value);
-});
-
-var isNotBooleanArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isBoolean(value);
-});
-
-var isNotNumberArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isNumber(value);
-});
-
-var isNotIntegerArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isInteger(value);
-});
-
-var isNotStringArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isString(value);
-});
-
-var isNotFunctionArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isFunction(value);
-});
-
-var isNotObjectArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isObject(value);
-});
-
-var isNotObjectTypeArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isObjectType(value);
-});
-
-var isNotArrayArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isArray(value);
-});
-
-var isNotArrayTypeArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isArrayType(value);
-});
-
-var isNotDateArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isDate(value);
-});
-
-var isNotRegExpArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isRegExp(value);
-});
-
-var isNotExceptionArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isException(value);
-});
-
-var isNotBooleanObjectArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isBooleanObject(value);
-});
-
-var isNotNumberObjectArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isNumberObject(value);
-});
-
-var isNotStringObjectArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isStringObject(value);
-});
-
-var isNotSymbolArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isSymbol(value);
-});
-
-var isNotMapArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isMap(value);
-});
-
-var isNotWeakMapArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isWeakMap(value);
-});
-
-var isNotSetArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isSet(value);
-});
-
-var isNotWeakSetArray = _isTypeCheckArrayFunc(function (value) {
-  return !_isWeakSet(value);
-});
-
 var isUndef = isUndefined;
 var isBool = isBoolean;
 var isNum = isNumber;
@@ -1717,52 +1567,6 @@ module.exports = {
   isNotWeakMap: isNotWeakMap,
   isNotSet: isNotSet,
   isNotWeakSet: isNotWeakSet,
-  isUndefinedArray: isUndefinedArray,
-  isNullArray: isNullArray,
-  isNaNStrictArray: isNaNStrictArray,
-  isBooleanArray: isBooleanArray,
-  isNumberArray: isNumberArray,
-  isIntegerArray: isIntegerArray,
-  isStringArray: isStringArray,
-  isFunctionArray: isFunctionArray,
-  isObjectArray: isObjectArray,
-  isObjectTypeArray: isObjectTypeArray,
-  isArrayArray: isArrayArray,
-  isArrayTypeArray: isArrayTypeArray,
-  isDateArray: isDateArray,
-  isRegExpArray: isRegExpArray,
-  isExceptionArray: isExceptionArray,
-  isBooleanObjectArray: isBooleanObjectArray,
-  isNumberObjectArray: isNumberObjectArray,
-  isStringObjectArray: isStringObjectArray,
-  isSymbolArray: isSymbolArray,
-  isMapArray: isMapArray,
-  isWeakMapArray: isWeakMapArray,
-  isSetArray: isSetArray,
-  isWeakSetArray: isWeakSetArray,
-  isNotUndefinedArray: isNotUndefinedArray,
-  isNotNullArray: isNotNullArray,
-  isNotNaNStrictArray: isNotNaNStrictArray,
-  isNotBooleanArray: isNotBooleanArray,
-  isNotNumberArray: isNotNumberArray,
-  isNotIntegerArray: isNotIntegerArray,
-  isNotStringArray: isNotStringArray,
-  isNotFunctionArray: isNotFunctionArray,
-  isNotObjectArray: isNotObjectArray,
-  isNotObjectTypeArray: isNotObjectTypeArray,
-  isNotArrayArray: isNotArrayArray,
-  isNotArrayTypeArray: isNotArrayTypeArray,
-  isNotDateArray: isNotDateArray,
-  isNotRegExpArray: isNotRegExpArray,
-  isNotExceptionArray: isNotExceptionArray,
-  isNotBooleanObjectArray: isNotBooleanObjectArray,
-  isNotNumberObjectArray: isNotNumberObjectArray,
-  isNotStringObjectArray: isNotStringObjectArray,
-  isNotSymbolArray: isNotSymbolArray,
-  isNotMapArray: isNotMapArray,
-  isNotWeakMapArray: isNotWeakMapArray,
-  isNotSetArray: isNotSetArray,
-  isNotWeakSetArray: isNotWeakSetArray,
   isUndef: isUndef,
   isBool: isBool,
   isNum: isNum,
@@ -2470,7 +2274,9 @@ var _require = __webpack_require__(5),
     _isString = _require._isString,
     _isFunction = _require._isFunction,
     _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
@@ -2525,6 +2331,10 @@ var or = function or(value, compareArray) {
 
   return _or(value, compareArray);
 };
+/**
+ * match
+ */
+
 
 var _match = function _match(value, compareArray) {
   if (_isString(value)) {
@@ -2588,6 +2398,90 @@ var match = function match(value, compareArray) {
 
   return _match(value, compareArray);
 };
+/**
+ * matchAll
+ */
+
+
+var _matchAll = function _matchAll(valueArray, compareArray) {
+  var result = false;
+
+  for (var i = 0, l = valueArray.length; i < l; i += 1) {
+    if (_match(valueArray[i], compareArray)) {
+      result = true;
+    } else {
+      result = false;
+      break;
+    }
+  }
+
+  return result;
+};
+
+var matchAll = function matchAll(valueArray, compareArray) {
+  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  }
+
+  if (!_isArray(valueArray)) {
+    throw new TypeError('matchAll args(valueArray) is not array');
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('matchAll args(compareArray) is not array');
+  }
+
+  return _matchAll(valueArray, compareArray);
+};
+/**
+ * matchSome
+ */
+
+
+var _matchSomeIndex = function _matchSomeIndex(valueArray, compareArray) {
+  var result = -1;
+
+  for (var i = 0, l = valueArray.length; i < l; i += 1) {
+    if (!_match(valueArray[i], compareArray)) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+};
+
+var _matchSome = function _matchSome(valueArray, compareArray) {
+  return _matchSomeIndex(valueArray, compareArray) !== -1;
+};
+
+var matchSomeIndex = function matchSomeIndex(valueArray, compareArray) {
+  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+    var _valueArray2 = valueArray;
+    valueArray = _valueArray2.valueArray;
+    compareArray = _valueArray2.compareArray;
+  }
+
+  if (!_isArray(valueArray)) {
+    throw new TypeError('matchSomeIndex args(valueArray) is not array');
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('matchSomeIndex args(compareArray) is not array');
+  }
+
+  return _matchSome(valueArray, compareArray);
+};
+
+var matchSome = function matchSome(valueArray, compareArray) {
+  return matchSomeIndex(valueArray, compareArray) !== -1;
+};
+/**
+ * matchValue
+ */
+
 
 var _matchValue = function _matchValue(value, compareArray, inMatchValue) {
   if (_match(value, compareArray)) {
@@ -2611,6 +2505,10 @@ var matchValue = function matchValue(value, compareArray, inMatchValue) {
 
   return _matchValue(value, compareArray, inMatchValue);
 };
+/**
+ * initialValue
+ */
+
 
 var _initialValue = function _initialValue(value, inMatchValue) {
   if (_match(value, [_isUndefined])) {
@@ -2629,26 +2527,42 @@ var initialValue = function initialValue(value, inMatchValue) {
 
   return _initialValue(value, inMatchValue);
 };
+/**
+ * isEmpty
+ */
+
 
 var isEmpty = function isEmpty(value) {
   return _match(value, [undefined, null, '', function (value) {
     return _isObject(value) && _propertyCount(value) === 0;
   }, function (value) {
-    return _isArray(value) && value.length === 0;
+    return _isArrayType(value) && value.length === 0;
   }]);
 };
 
+var matchEvery = matchAll;
+var matchAnyIndex = matchSomeIndex;
+var matchAny = matchSome;
 module.exports = {
   _equal: _equal,
   _or: _or,
   _match: _match,
   _matchValue: _matchValue,
   _initialValue: _initialValue,
+  _matchAll: _matchAll,
+  _matchSomeIndex: _matchSomeIndex,
+  _matchSome: _matchSome,
   equal: equal,
   or: or,
   match: match,
   matchValue: matchValue,
   initialValue: initialValue,
+  matchAll: matchAll,
+  matchSomeIndex: matchSomeIndex,
+  matchSome: matchSome,
+  matchEvery: matchEvery,
+  matchAnyIndex: matchAnyIndex,
+  matchAny: matchAny,
   isEmpty: isEmpty
 };
 
@@ -2737,7 +2651,7 @@ var numberToString = function numberToString(value) {
  */
 
 
-var __stringToNumber = function __stringToNumber(value, defaultValueFunc) {
+var _stringToNumberBase = function _stringToNumberBase(value, defaultValueFunc) {
   if (value === '') {
     return defaultValueFunc();
   }
@@ -2756,7 +2670,7 @@ var __stringToNumber = function __stringToNumber(value, defaultValueFunc) {
 };
 
 var _stringToNumber = function _stringToNumber(value) {
-  return __stringToNumber(value, function () {
+  return _stringToNumberBase(value, function () {
     throw new RangeError('stringToNumber args(value) is not changeing number');
   });
 };
@@ -2775,7 +2689,7 @@ var stringToNumber = function stringToNumber(value) {
 };
 
 var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue) {
-  return __stringToNumber(value, function () {
+  return _stringToNumberBase(value, function () {
     return defaultValue;
   });
 };
@@ -2820,7 +2734,7 @@ var __stringToInteger = function __stringToInteger(value, defaultValueFunc) {
 
 var _stringToInteger = function _stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
-  return __stringToNumber(value, function () {
+  return _stringToNumberBase(value, function () {
     throw new RangeError('stringToInteger args(value) is not changeing integer');
   }, radix);
 };

@@ -11,14 +11,6 @@ var ISNOT_TYPE = _TYPE_BASE.split(',').map(function (item) {
   return "isNot".concat(item);
 }).join(',');
 
-var IS_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
-  return "is".concat(item, "Array");
-}).join(',');
-
-var ISNOT_TYPE_ARRAY = _TYPE_BASE.split(',').map(function (item) {
-  return "isNot".concat(item, "Array");
-}).join(',');
-
 var _TYPE_BASE_SHORT = 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
 
 var IS_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
@@ -29,7 +21,7 @@ var ISNOT_TYPE_SHORT = _TYPE_BASE_SHORT.split(',').map(function (item) {
   return "isNot".concat(item);
 }).join(',');
 
-var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_ARRAY, ISNOT_TYPE_ARRAY, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
+var TYPE = [IS_TYPE, ISNOT_TYPE, IS_TYPE_SHORT, ISNOT_TYPE_SHORT].join(','); // test
 
 var ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + ''; // test
 
@@ -37,7 +29,7 @@ var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown
 
 var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
 
-var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + ''; // convert
+var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'matchAll,matchSomeIndex,matchSome,' + 'matchEvery,matchAnyIndex,matchAny,' + 'isEmpty,' + ''; // convert
 
 var CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + ''; // number
 
