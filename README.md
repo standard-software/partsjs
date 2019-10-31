@@ -133,45 +133,6 @@ You can now use the functions of the parts object.
 - add isSymbol
 - update strintToNumber stringToInteger
 
-### 2.5.3
-#### 2019/10/17(Thu)
-- update cloneDeep support CircularReference 
-- update test code
-
-### 2.5.2
-#### 2019/10/14(Mon)
-- update clone cloneDeep
-- add cloneFunction
-
-### 2.5.1
-#### 2019/10/12(Sat)
-- update match test
-- update clone cloneDeep
-- delete polifill Array.some
-
-### 2.5.0
-#### 2019/10/10(Thu)
-- add root.js clone cloneDeep
-  - support date type
-- delete object.clone cloneDeep
-- delete array.clone cloneDeep
-- update test test_index.html test_index.wsf
-
-### 2.4.0
-#### 2019/10/09(Wed)
-- add replaceAll
-- add _inProperty.js
-- update _copyProperty _inProperty 
-- update test message output
-- add array.js equal min max clone cloneDeep
-- add object.clone cloneDeep
-- update Package.json main
-
-### 2.3.0
-#### 2019/10/05(Sat)
-- add number.js
-  - isMultiples,isEven,isOdd,
-  - round,nearEqual,inRange,randomInt
 
 ### More Info
 [VERSION.md](./VERSION.md)
