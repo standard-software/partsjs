@@ -166,7 +166,7 @@ const _matchSomeIndex = (
 ) => {
   let result = -1;
   for (let i = 0, l = valueArray.length; i < l; i += 1) {
-    if (!_match(valueArray[i], compareArray)) {
+    if (_match(valueArray[i], compareArray)) {
       result = i;
       break;
     }
@@ -203,7 +203,7 @@ const matchSomeIndex = (
     );
   }
 
-  return _matchSome(valueArray, compareArray);
+  return _matchSomeIndex(valueArray, compareArray);
 };
 
 const matchSome = (

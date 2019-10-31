@@ -18,6 +18,7 @@ const test_execute_compare = (parts) => {
     equal,or,
     match,matchValue,initialValue,
     isEmpty,
+    matchAll, matchSome, matchSomeIndex,
   } = parts.compare;
 
   const test_equal = () => {
@@ -324,6 +325,135 @@ const test_execute_compare = (parts) => {
     checkEqual(false, isEmpty({a:1}));
   }
 
+  const test_matchAll = () =>{
+    checkEqual(true,
+      matchAll([10, 20, 30], [value => value > 5])
+    );
+    checkEqual(false,
+      matchAll([10, 20, 30], [value => value > 15])
+    );
+    checkEqual(true,
+      matchAll([null, undefined], [null, undefined])
+    );
+    checkEqual(false,
+      matchAll([null, undefined], [null])
+    );
+    checkEqual(true,
+      matchAll([null, undefined], [isNull, isUndefined])
+    );
+    checkEqual(false,
+      matchAll([null, undefined], [isNull])
+    );
+    checkEqual(false,
+      matchAll([null, undefined, NaN], [null, undefined])
+    );
+    checkEqual(false,
+      matchAll([null, undefined, NaN], [null, undefined, NaN])
+    );
+    checkEqual(true,
+      matchAll([null, undefined, NaN], [null, undefined, isNaNStrict])
+    );
+
+    checkEqual(false, isThrown(() => {
+      matchAll([10], [value => value > 15])
+    }));
+    checkEqual(true, isThrown(() => {
+      matchAll(10, [value => value > 15])
+    }));
+  }
+
+  const test_matchSome = () =>{
+    checkEqual(true,
+      matchSome([10, 20, 30], [value => value > 5])
+    , 'test_matchSome');
+    checkEqual(true,
+      matchSome([10, 20, 30], [value => value > 25])
+    );
+    checkEqual(false,
+      matchSome([10, 20, 30], [value => value > 35])
+    );
+    checkEqual(true,
+      matchSome([null, undefined], [null, undefined])
+    );
+    checkEqual(true,
+      matchSome([null, undefined], [null])
+    );
+    checkEqual(true,
+      matchSome([null, undefined], [isNull, isUndefined])
+    );
+    checkEqual(true,
+      matchSome([null, undefined], [isNull])
+    );
+    checkEqual(true,
+      matchSome([null, undefined, NaN], [null, undefined])
+    );
+    checkEqual(true,
+      matchSome([null, undefined, NaN], [null, undefined, NaN])
+    );
+    checkEqual(true,
+      matchSome([null, undefined, NaN], [null, undefined, isNaNStrict])
+    );
+    checkEqual(false,
+      matchSome([null, undefined, NaN], [NaN])
+    );
+    checkEqual(true,
+      matchSome([null, undefined, NaN], [isNaNStrict])
+    );
+
+    checkEqual(false, isThrown(() => {
+      matchSome([10], [value => value > 15])
+    }));
+    checkEqual(true, isThrown(() => {
+      matchSome(10, [value => value > 15])
+    }));
+  }
+
+  const test_matchSomeIndex = () =>{
+    checkEqual(0,
+      matchSomeIndex([10, 20, 30], [value => value > 5])
+    , 'test_matchSomeIndex');
+    checkEqual(2,
+      matchSomeIndex([10, 20, 30], [value => value > 25])
+    );
+    checkEqual(-1,
+      matchSomeIndex([10, 20, 30], [value => value > 35])
+    );
+    checkEqual(0,
+      matchSomeIndex([null, undefined], [null, undefined])
+    );
+    checkEqual(1,
+      matchSomeIndex([null, undefined], [undefined])
+    );
+    checkEqual(0,
+      matchSomeIndex([null, undefined], [isNull, isUndefined])
+    );
+    checkEqual(1,
+      matchSomeIndex([null, undefined], [isUndefined])
+    );
+    checkEqual(0,
+      matchSomeIndex([null, undefined, NaN], [null, undefined])
+    );
+    checkEqual(0,
+      matchSomeIndex([null, undefined, NaN], [null, undefined, NaN])
+    );
+    checkEqual(0,
+      matchSomeIndex([null, undefined, NaN], [null, undefined, isNaNStrict])
+    );
+    checkEqual(-1,
+      matchSomeIndex([null, undefined, NaN], [NaN])
+    );
+    checkEqual(2,
+      matchSomeIndex([null, undefined, NaN], [isNaNStrict])
+    );
+
+    checkEqual(false, isThrown(() => {
+      matchSomeIndex([10], [value => value > 15])
+    }));
+    checkEqual(true, isThrown(() => {
+      matchSomeIndex(10, [value => value > 15])
+    }));
+  }
+
   console.log('  test compare.js');
   test_equal();
   test_or();
@@ -331,6 +461,11 @@ const test_execute_compare = (parts) => {
   test_matchValue();
   test_initialValue();
   test_isEmpty();
+
+  test_matchAll();
+  test_matchSome();
+  test_matchSomeIndex();
+
 }
 
 module.exports = {

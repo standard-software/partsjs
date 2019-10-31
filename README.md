@@ -105,6 +105,7 @@ You can now use the functions of the parts object.
 - add getProperty(getProp)
 - add setProperty(setProp)
 - update some ErrorMessage
+- bugfix matchSome matchSomeIndex
 
 ### 2.7.0
 #### 2019/10/30(Wed)
