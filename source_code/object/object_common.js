@@ -81,16 +81,106 @@ const propertyCount = (object) => {
   return _propertyCount(object);
 }
 
+/**
+ * getProperty
+ */
+const _getProperty = (
+  object,
+  propertyPath
+) => {
+  let result = object;
+  const propertyArray = propertyPath.split('.');
+  for (let i = 0, l = propertyArray.length; i < l; i += 1) {
+    if (propertyArray[i] === '' ) {
+      return undefined;
+    }
+    if (_isUndefined(result[propertyArray[i]])) {
+      return undefined;
+    }
+    result = result[propertyArray[i]];
+  }
+  return result;
+}
+
+const getProperty = (object, propertyPath) => {
+  if (_inProperty(object, 'object, propertyPath')) {
+    ({ object, propertyPath } = object)
+  }
+
+  if (!_isObject(object)) {
+    throw new TypeError(
+      'getProperty args(object) is not object'
+    );
+  }
+  if (!_isString(propertyPath)) {
+    throw new TypeError(
+      'getProperty args(propertyPath) is not string'
+    );
+  }
+
+  return _getProperty(object, propertyPath);
+}
+
+/**
+ * setProperty
+ */
+const _setProperty = (object, path, value) => {
+  const propertyArray = path.split('.');
+  for (let i = 0, l = propertyArray.length; i < l; i += 1) {
+    if (propertyArray[i] === '' ) {
+      throw new Error('setProperty args(propertyPath) is no exist property');
+    }
+  }
+
+  let result = object;
+  for (let i = 0, l = propertyArray.length - 1; i < l; i += 1) {
+    if (
+      !(
+        _isObject(result[propertyArray[i]])
+        || _isArrayType(result[propertyArray[i]])
+      )
+    ) {
+      result[propertyArray[i]] = {};
+    }
+    result = result[propertyArray[i]];
+  }
+  result[propertyArray[propertyArray.length - 1]] = value;
+}
+
+const setProperty = (object, propertyPath, value) => {
+  if (_inProperty(object, 'object, propertyPath, value')) {
+    ({ object, propertyPath, value } = object)
+  }
+
+  if (!_isObject(object)) {
+    throw new TypeError(
+      'setProperty args(object) is not object'
+    );
+  }
+  if (!_isString(propertyPath)) {
+    throw new TypeError(
+      'setProperty args(propertyPath) is not string'
+    );
+  }
+
+  return _setProperty(object, propertyPath, value);
+}
+
 const copyProp = copyProperty;
 const propCount = propertyCount;
+const getProp = getProperty;
+const setProp = setProperty;
 
 module.exports = {
   _copyProperty,
   _propertyCount,
+  _getProperty, _setProperty,
 
   copyProperty,
   propertyCount,
+  getProperty, setProperty,
 
   copyProp,
   propCount,
+  getProp, setProp,
 };

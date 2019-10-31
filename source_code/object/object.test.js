@@ -6,12 +6,9 @@ const test_execute_object = (parts) => {
   } = parts.test;
 
   const {
-    object,
-  } = parts;
-
-  const {
     copyProperty, inProperty,
     propertyCount,
+    getProperty, setProperty,
   } = parts.object;
 
   const test_copyProperty = () => {
@@ -186,13 +183,69 @@ const test_execute_object = (parts) => {
     checkEqual(true, isThrown(() => {
       propertyCount([])
     }));
-
   };
+
+  const test_getProperty = () => {
+
+    let testObj1 = {
+      a: {
+        b: {
+          c: false
+        }
+      }
+    };
+
+    checkEqual(false,     getProperty(testObj1, 'a'       ).b.c );
+    checkEqual(false,     getProperty(testObj1, 'a.b'     ).c );
+    checkEqual(false,     getProperty(testObj1, 'a.b.c'   ) );
+    checkEqual(undefined, getProperty(testObj1, 'a.b.c.d' ) );
+    checkEqual(undefined, getProperty(testObj1, 'a.b.b'   ) );
+    checkEqual(undefined, getProperty(testObj1, ''        ) );
+    checkEqual(undefined, getProperty(testObj1, 'a.'      ) );
+    checkEqual(undefined, getProperty(testObj1, '.a'      ) );
+    checkEqual(undefined, getProperty(testObj1, 'a.c'     ) );
+    checkEqual(undefined, getProperty(testObj1, 'b'       ) );
+    checkEqual(undefined, getProperty(testObj1, 'b.c'     ) );
+  }
+
+  const test_setProperty = () => {
+
+    var testObj1 = {};
+    setProperty(testObj1, 'a.b'   , true);
+    checkEqual(true, testObj1.a.b);
+    setProperty(testObj1, 'a'     , true);
+    checkEqual(true, testObj1.a);
+    setProperty(testObj1, 'a.b.c' , true);
+    checkEqual(true, testObj1.a.b.c);
+    setProperty(testObj1, 'a.c'   , true);
+    checkEqual(true, testObj1.a.c);
+    setProperty(testObj1, 'b'     , true);
+    checkEqual(true, testObj1.b);
+    setProperty(testObj1, 'b.c'   , true);
+    checkEqual(true, testObj1.b.c);
+
+    // // エラー
+    // // var path = '';      setProperty(testObj1, path, true); console.log(path, testObj1);
+    // // var path = 'a.';    setProperty(testObj1, path, true); console.log(path, testObj1);
+    // // var path = '.a';    setProperty(testObj1, path, true); console.log(path, testObj1);
+
+    var testObj1 = { a: [ 'abc', { b: 'b' } ] };
+    checkEqual('abc', testObj1.a[0]);
+    setProperty(testObj1, 'a.0'   , 'def');
+    checkEqual('def', testObj1.a[0]);
+
+    checkEqual('b', testObj1.a[1].b);
+    setProperty(testObj1, 'a.1.b'   , 'c');
+    checkEqual('c', testObj1.a[1].b);
+
+  }
 
   console.log('  test object.js');
   test_copyProperty();
   test_inProperty();
   test_propertyCount();
+  test_getProperty();
+  test_setProperty();
 }
 
 module.exports = {

@@ -10,7 +10,6 @@ const _TYPE_BASE =
   'Map,WeakMap,Set,WeakSet,' +
   'BooleanObject,NumberObject,StringObject,' +
   '';
-
 const IS_TYPE           = _TYPE_BASE.split(',').map(item => `is${item}`).join(',');
 const ISNOT_TYPE        = _TYPE_BASE.split(',').map(item => `isNot${item}`).join(',');
 
@@ -85,10 +84,12 @@ const STRING_ROOT =
 // object
 const OBJECT_PUBLIC =
   'copyProperty,propertyCount,inProperty,' +
+  'getProperty,setProperty,' +
   'copyProp,propCount,inProp,' +
   ''
 const OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
+  'getProp,setProp,' +
   'copyProp,propCount,inProp,' +
   ''
 

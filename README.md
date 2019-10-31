@@ -100,8 +100,13 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.8.0
+#### 2019/10/31(Thu)
+- add getProperty(getProp)
+- add setProperty(setProp)
+
 ### 2.7.0
-### 2019/10/30(Wed)
+#### 2019/10/30(Wed)
 - add
   - matchAll(matchEvery)
   - matchSome(matchAny)
