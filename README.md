@@ -104,6 +104,7 @@ You can now use the functions of the parts object.
 #### 2019/10/31(Thu)
 - add getProperty(getProp)
 - add setProperty(setProp)
+- update some ErrorMessage
 
 ### 2.7.0
 #### 2019/10/30(Wed)

@@ -9,6 +9,9 @@ const {
   _inProperty,
 } = require('../object/_inProperty.js')
 
+/**
+ * inProperty
+ */
 const inProperty = (object, propertyArray, hasOwn = true) => {
   if (_inProperty(object, 'object,propertyArray')) {
     ({ object, propertyArray, hasOwn = true } = object)
@@ -19,13 +22,13 @@ const inProperty = (object, propertyArray, hasOwn = true) => {
   if (!_isString(propertyArray)) {
     if (!_isArray(propertyArray)) {
       throw new TypeError(
-        'copyProperty args(propertyArray) is not [array|string]'
+        'inProperty args(propertyArray) is not [array|string]'
       );
     }
   }
   if (!_isBoolean(hasOwn)) {
     throw new TypeError(
-      'copyProperty args(hasOwn) is not boolean'
+      'inProperty args(hasOwn) is not boolean'
     );
   }
 

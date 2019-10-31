@@ -1,8 +1,11 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
-  _isException,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isObjectType,
+  _isArray, _isArrayType,
+  _isDate, _isRegExp,
+  _isError,
+  _isBooleanObject, _isNumberObject, _isStringObject,
 } = require('../type/type.js');
 
 const {
@@ -13,6 +16,9 @@ const {
   _replaceAll,
 } = require('../string/_replaceAll.js');
 
+/**
+ * copyProperty
+ */
 const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 
   if (_isString(propertyArray)) {
@@ -64,6 +70,9 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
   )
 }
 
+/**
+ * propertyCount
+ */
 const _propertyCount = (object) => {
   var result = 0;
   for (let [key, value] of Object.entries(object)) {

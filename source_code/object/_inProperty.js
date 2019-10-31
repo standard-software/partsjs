@@ -9,6 +9,9 @@ const {
   _replaceAll,
 } = require('../string/_replaceAll.js');
 
+/**
+ * _inProperty
+ */
 const _inProperty = (object, propertyArray, hasOwn = true) => {
 
   if (!_isObject(object)) {
@@ -26,7 +29,7 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
     }
     if (!_isString(propertyArray[i])) {
       throw new TypeError(
-        'copyProperty args(propertyArray) element is not string'
+        '_inProperty args(propertyArray) element is not string'
       );
     }
     if (hasOwn) {
