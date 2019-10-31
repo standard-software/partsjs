@@ -131,7 +131,7 @@ var _array = __webpack_require__(17);
 
 var _consoleHook = __webpack_require__(26);
 
-var VERSION = '2.7.0';
+var VERSION = '2.8.0 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -575,8 +575,8 @@ var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' 
 var STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
 var STRING_ROOT = 'matchFormat,replaceAll,' + ''; // object
 
-var OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
-var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // array
+var OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'copyProp,propCount,inProp,' + '';
+var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'getProp,setProp,' + 'copyProp,propCount,inProp,' + ''; // array
 
 var ARRAY_PUBLIC = 'equal,' + 'min, max,' + '';
 var ARRAY_ROOT = 'min, max,' + ''; // consoleHook
@@ -1174,6 +1174,10 @@ var _require = __webpack_require__(6),
 
 var _require2 = __webpack_require__(9),
     _replaceAll = _require2._replaceAll;
+/**
+ * _inProperty
+ */
+
 
 var _inProperty = function _inProperty(object, propertyArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -1192,7 +1196,7 @@ var _inProperty = function _inProperty(object, propertyArray) {
     }
 
     if (!_isString(propertyArray[i])) {
-      throw new TypeError('copyProperty args(propertyArray) element is not string');
+      throw new TypeError('_inProperty args(propertyArray) element is not string');
     }
 
     if (hasOwn) {
@@ -1627,16 +1631,25 @@ var _require = __webpack_require__(5),
     _isString = _require._isString,
     _isFunction = _require._isFunction,
     _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    _isError = _require._isError,
+    _isBooleanObject = _require._isBooleanObject,
+    _isNumberObject = _require._isNumberObject,
+    _isStringObject = _require._isStringObject;
 
 var _require2 = __webpack_require__(8),
     _inProperty = _require2._inProperty;
 
 var _require3 = __webpack_require__(9),
     _replaceAll = _require3._replaceAll;
+/**
+ * copyProperty
+ */
+
 
 var _copyProperty = function _copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -1687,6 +1700,10 @@ var copyProperty = function copyProperty(fromObject, propertyArray) {
 
   _copyProperty(fromObject, propertyArray, toObject);
 };
+/**
+ * propertyCount
+ */
+
 
 var _propertyCount = function _propertyCount(object) {
   var result = 0;
@@ -1709,16 +1726,110 @@ var propertyCount = function propertyCount(object) {
 
   return _propertyCount(object);
 };
+/**
+ * getProperty
+ */
+
+
+var _getProperty = function _getProperty(object, propertyPath) {
+  var result = object;
+  var propertyArray = propertyPath.split('.');
+
+  for (var i = 0, l = propertyArray.length; i < l; i += 1) {
+    if (propertyArray[i] === '') {
+      return undefined;
+    }
+
+    if (_isUndefined(result[propertyArray[i]])) {
+      return undefined;
+    }
+
+    result = result[propertyArray[i]];
+  }
+
+  return result;
+};
+
+var getProperty = function getProperty(object, propertyPath) {
+  if (_inProperty(object, 'object, propertyPath')) {
+    var _object = object;
+    object = _object.object;
+    propertyPath = _object.propertyPath;
+  }
+
+  if (!_isObject(object)) {
+    throw new TypeError('getProperty args(object) is not object');
+  }
+
+  if (!_isString(propertyPath)) {
+    throw new TypeError('getProperty args(propertyPath) is not string');
+  }
+
+  return _getProperty(object, propertyPath);
+};
+/**
+ * setProperty
+ */
+
+
+var _setProperty = function _setProperty(object, path, value) {
+  var propertyArray = path.split('.');
+
+  for (var i = 0, l = propertyArray.length; i < l; i += 1) {
+    if (propertyArray[i] === '') {
+      throw new Error('setProperty args(propertyPath) is no exist property');
+    }
+  }
+
+  var result = object;
+
+  for (var _i2 = 0, _l = propertyArray.length - 1; _i2 < _l; _i2 += 1) {
+    if (!(_isObject(result[propertyArray[_i2]]) || _isArrayType(result[propertyArray[_i2]]))) {
+      result[propertyArray[_i2]] = {};
+    }
+
+    result = result[propertyArray[_i2]];
+  }
+
+  result[propertyArray[propertyArray.length - 1]] = value;
+};
+
+var setProperty = function setProperty(object, propertyPath, value) {
+  if (_inProperty(object, 'object, propertyPath, value')) {
+    var _object2 = object;
+    object = _object2.object;
+    propertyPath = _object2.propertyPath;
+    value = _object2.value;
+  }
+
+  if (!_isObject(object)) {
+    throw new TypeError('setProperty args(object) is not object');
+  }
+
+  if (!_isString(propertyPath)) {
+    throw new TypeError('setProperty args(propertyPath) is not string');
+  }
+
+  return _setProperty(object, propertyPath, value);
+};
 
 var copyProp = copyProperty;
 var propCount = propertyCount;
+var getProp = getProperty;
+var setProp = setProperty;
 module.exports = {
   _copyProperty: _copyProperty,
   _propertyCount: _propertyCount,
+  _getProperty: _getProperty,
+  _setProperty: _setProperty,
   copyProperty: copyProperty,
   propertyCount: propertyCount,
+  getProperty: getProperty,
+  setProperty: setProperty,
   copyProp: copyProp,
-  propCount: propCount
+  propCount: propCount,
+  getProp: getProp,
+  setProp: setProp
 };
 
 /***/ }),
@@ -1745,6 +1856,10 @@ var _require = __webpack_require__(6),
 
 var _require2 = __webpack_require__(8),
     _inProperty = _require2._inProperty;
+/**
+ * inProperty
+ */
+
 
 var inProperty = function inProperty(object, propertyArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -1760,12 +1875,12 @@ var inProperty = function inProperty(object, propertyArray) {
 
   if (!_isString(propertyArray)) {
     if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+      throw new TypeError('inProperty args(propertyArray) is not [array|string]');
     }
   }
 
   if (!_isBoolean(hasOwn)) {
-    throw new TypeError('copyProperty args(hasOwn) is not boolean');
+    throw new TypeError('inProperty args(hasOwn) is not boolean');
   }
 
   return _inProperty(object, propertyArray, hasOwn);
@@ -2444,7 +2559,7 @@ var _matchSomeIndex = function _matchSomeIndex(valueArray, compareArray) {
   var result = -1;
 
   for (var i = 0, l = valueArray.length; i < l; i += 1) {
-    if (!_match(valueArray[i], compareArray)) {
+    if (_match(valueArray[i], compareArray)) {
       result = i;
       break;
     }
@@ -2472,7 +2587,7 @@ var matchSomeIndex = function matchSomeIndex(valueArray, compareArray) {
     throw new TypeError('matchSomeIndex args(compareArray) is not array');
   }
 
-  return _matchSome(valueArray, compareArray);
+  return _matchSomeIndex(valueArray, compareArray);
 };
 
 var matchSome = function matchSome(valueArray, compareArray) {

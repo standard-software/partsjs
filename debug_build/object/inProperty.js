@@ -17,6 +17,10 @@ var _require = require('../type/_isType.js'),
 
 var _require2 = require('../object/_inProperty.js'),
     _inProperty = _require2._inProperty;
+/**
+ * inProperty
+ */
+
 
 var inProperty = function inProperty(object, propertyArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -32,12 +36,12 @@ var inProperty = function inProperty(object, propertyArray) {
 
   if (!_isString(propertyArray)) {
     if (!_isArray(propertyArray)) {
-      throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
+      throw new TypeError('inProperty args(propertyArray) is not [array|string]');
     }
   }
 
   if (!_isBoolean(hasOwn)) {
-    throw new TypeError('copyProperty args(hasOwn) is not boolean');
+    throw new TypeError('inProperty args(hasOwn) is not boolean');
   }
 
   return _inProperty(object, propertyArray, hasOwn);

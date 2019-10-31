@@ -38,8 +38,8 @@ var NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' 
 var STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
 var STRING_ROOT = 'matchFormat,replaceAll,' + ''; // object
 
-var OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + '';
-var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''; // array
+var OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'copyProp,propCount,inProp,' + '';
+var OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'getProp,setProp,' + 'copyProp,propCount,inProp,' + ''; // array
 
 var ARRAY_PUBLIC = 'equal,' + 'min, max,' + '';
 var ARRAY_ROOT = 'min, max,' + ''; // consoleHook

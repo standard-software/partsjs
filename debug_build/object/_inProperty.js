@@ -17,6 +17,10 @@ var _require = require('../type/_isType.js'),
 
 var _require2 = require('../string/_replaceAll.js'),
     _replaceAll = _require2._replaceAll;
+/**
+ * _inProperty
+ */
+
 
 var _inProperty = function _inProperty(object, propertyArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -35,7 +39,7 @@ var _inProperty = function _inProperty(object, propertyArray) {
     }
 
     if (!_isString(propertyArray[i])) {
-      throw new TypeError('copyProperty args(propertyArray) element is not string');
+      throw new TypeError('_inProperty args(propertyArray) element is not string');
     }
 
     if (hasOwn) {

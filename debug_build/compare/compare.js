@@ -180,7 +180,7 @@ var _matchSomeIndex = function _matchSomeIndex(valueArray, compareArray) {
   var result = -1;
 
   for (var i = 0, l = valueArray.length; i < l; i += 1) {
-    if (!_match(valueArray[i], compareArray)) {
+    if (_match(valueArray[i], compareArray)) {
       result = i;
       break;
     }
@@ -208,7 +208,7 @@ var matchSomeIndex = function matchSomeIndex(valueArray, compareArray) {
     throw new TypeError('matchSomeIndex args(compareArray) is not array');
   }
 
-  return _matchSome(valueArray, compareArray);
+  return _matchSomeIndex(valueArray, compareArray);
 };
 
 var matchSome = function matchSome(valueArray, compareArray) {

@@ -26,7 +26,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       match = _parts$compare.match,
       matchValue = _parts$compare.matchValue,
       initialValue = _parts$compare.initialValue,
-      isEmpty = _parts$compare.isEmpty;
+      isEmpty = _parts$compare.isEmpty,
+      matchAll = _parts$compare.matchAll,
+      matchSome = _parts$compare.matchSome,
+      matchSomeIndex = _parts$compare.matchSomeIndex;
 
   var test_equal = function test_equal() {
     // normal args
@@ -365,6 +368,94 @@ var test_execute_compare = function test_execute_compare(parts) {
     }));
   };
 
+  var test_matchAll = function test_matchAll() {
+    checkEqual(true, matchAll([10, 20, 30], [function (value) {
+      return value > 5;
+    }]));
+    checkEqual(false, matchAll([10, 20, 30], [function (value) {
+      return value > 15;
+    }]));
+    checkEqual(true, matchAll([null, undefined], [null, undefined]));
+    checkEqual(false, matchAll([null, undefined], [null]));
+    checkEqual(true, matchAll([null, undefined], [isNull, isUndefined]));
+    checkEqual(false, matchAll([null, undefined], [isNull]));
+    checkEqual(false, matchAll([null, undefined, NaN], [null, undefined]));
+    checkEqual(false, matchAll([null, undefined, NaN], [null, undefined, NaN]));
+    checkEqual(true, matchAll([null, undefined, NaN], [null, undefined, isNaNStrict]));
+    checkEqual(false, isThrown(function () {
+      matchAll([10], [function (value) {
+        return value > 15;
+      }]);
+    }));
+    checkEqual(true, isThrown(function () {
+      matchAll(10, [function (value) {
+        return value > 15;
+      }]);
+    }));
+  };
+
+  var test_matchSome = function test_matchSome() {
+    checkEqual(true, matchSome([10, 20, 30], [function (value) {
+      return value > 5;
+    }]), 'test_matchSome');
+    checkEqual(true, matchSome([10, 20, 30], [function (value) {
+      return value > 25;
+    }]));
+    checkEqual(false, matchSome([10, 20, 30], [function (value) {
+      return value > 35;
+    }]));
+    checkEqual(true, matchSome([null, undefined], [null, undefined]));
+    checkEqual(true, matchSome([null, undefined], [null]));
+    checkEqual(true, matchSome([null, undefined], [isNull, isUndefined]));
+    checkEqual(true, matchSome([null, undefined], [isNull]));
+    checkEqual(true, matchSome([null, undefined, NaN], [null, undefined]));
+    checkEqual(true, matchSome([null, undefined, NaN], [null, undefined, NaN]));
+    checkEqual(true, matchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+    checkEqual(false, matchSome([null, undefined, NaN], [NaN]));
+    checkEqual(true, matchSome([null, undefined, NaN], [isNaNStrict]));
+    checkEqual(false, isThrown(function () {
+      matchSome([10], [function (value) {
+        return value > 15;
+      }]);
+    }));
+    checkEqual(true, isThrown(function () {
+      matchSome(10, [function (value) {
+        return value > 15;
+      }]);
+    }));
+  };
+
+  var test_matchSomeIndex = function test_matchSomeIndex() {
+    checkEqual(0, matchSomeIndex([10, 20, 30], [function (value) {
+      return value > 5;
+    }]), 'test_matchSomeIndex');
+    checkEqual(2, matchSomeIndex([10, 20, 30], [function (value) {
+      return value > 25;
+    }]));
+    checkEqual(-1, matchSomeIndex([10, 20, 30], [function (value) {
+      return value > 35;
+    }]));
+    checkEqual(0, matchSomeIndex([null, undefined], [null, undefined]));
+    checkEqual(1, matchSomeIndex([null, undefined], [undefined]));
+    checkEqual(0, matchSomeIndex([null, undefined], [isNull, isUndefined]));
+    checkEqual(1, matchSomeIndex([null, undefined], [isUndefined]));
+    checkEqual(0, matchSomeIndex([null, undefined, NaN], [null, undefined]));
+    checkEqual(0, matchSomeIndex([null, undefined, NaN], [null, undefined, NaN]));
+    checkEqual(0, matchSomeIndex([null, undefined, NaN], [null, undefined, isNaNStrict]));
+    checkEqual(-1, matchSomeIndex([null, undefined, NaN], [NaN]));
+    checkEqual(2, matchSomeIndex([null, undefined, NaN], [isNaNStrict]));
+    checkEqual(false, isThrown(function () {
+      matchSomeIndex([10], [function (value) {
+        return value > 15;
+      }]);
+    }));
+    checkEqual(true, isThrown(function () {
+      matchSomeIndex(10, [function (value) {
+        return value > 15;
+      }]);
+    }));
+  };
+
   console.log('  test compare.js');
   test_equal();
   test_or();
@@ -372,6 +463,9 @@ var test_execute_compare = function test_execute_compare(parts) {
   test_matchValue();
   test_initialValue();
   test_isEmpty();
+  test_matchAll();
+  test_matchSome();
+  test_matchSomeIndex();
 };
 
 module.exports = {
