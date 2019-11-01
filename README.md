@@ -100,6 +100,10 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.9.0
+#### 2019/11/01(Fri)
+- update clone cloneDeep cloneFunction
+
 ### 2.8.0
 #### 2019/10/31(Thu)
 - add getProperty(getProp)
