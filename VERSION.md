@@ -5,6 +5,8 @@
 ### 2.9.0
 #### 2019/11/01(Fri)
 - update clone cloneDeep cloneFunction
+  - support Map Set
+  - clone ignore WeakMap WeakSet
 
 ### 2.8.0
 #### 2019/10/31(Thu)

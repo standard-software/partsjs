@@ -100,9 +100,17 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.9.1
+#### 2019/11/02(Sat)
+- update clone cloneDeep cloneFunction
+  - support only object and arrayType
+  - clone ignore Math Object etc
+
 ### 2.9.0
 #### 2019/11/01(Fri)
 - update clone cloneDeep cloneFunction
+  - support Map Set
+  - clone ignore WeakMap WeakSet
 
 ### 2.8.0
 #### 2019/10/31(Thu)

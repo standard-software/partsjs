@@ -1,8 +1,9 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isObjectType,
-  _isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isObjectType,
+  _isArray, _isArrayType,
+  _isDate, _isRegExp,
   _isException,
   _isBooleanObject, _isNumberObject, _isStringObject,
   _isSymbol,
@@ -22,6 +23,7 @@ const {
  */
 const cloneFunction = {};
 
+// function is no clone
 cloneFunction.cloneIgnoreFunction = (
   source,
   bufferWrite = () => {},
@@ -33,7 +35,32 @@ cloneFunction.cloneIgnoreFunction = (
   return source;
 }
 
-// support object and array
+// support
+//  user object and user arrayType
+//  Just good usability
+cloneFunction.cloneObjectAndArrayType = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
+  if (!(_isObject(source) || _isArrayType(source))) {
+    return undefined;
+  }
+
+  const cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+  return cloneValue;
+}
+
+// support
+//  all object
+//  but Math or JSON etc clone
+//  Cloning unnecessary objects
 cloneFunction.cloneObjectType = (
   source,
   bufferWrite = () => {},
@@ -53,6 +80,7 @@ cloneFunction.cloneObjectType = (
   return cloneValue;
 }
 
+// support only simple object
 cloneFunction.cloneObject = (
   source,
   bufferWrite = () => {},
@@ -69,6 +97,7 @@ cloneFunction.cloneObject = (
   return cloneValue;
 }
 
+// support only simple array
 cloneFunction.cloneArray = (
   source,
   bufferWrite = () => {},
@@ -167,7 +196,7 @@ cloneFunction.cloneIgnoreWeakSet = (
 }
 
 /**
- * root.clone
+ * clone
  */
 const _clone = (source) => {
   const __clone = (value) => {
@@ -196,7 +225,7 @@ _clone.add = (func) => {
 
 _clone.reset = () => {
   _clone.clear()
-  _clone.add(cloneFunction.cloneObjectType);
+  _clone.add(cloneFunction.cloneObjectAndArrayType);
   _clone.add(cloneFunction.cloneIgnoreWeakSet);
   _clone.add(cloneFunction.cloneSet);
   _clone.add(cloneFunction.cloneIgnoreWeakMap);
@@ -218,7 +247,7 @@ _copyProperty(_clone,
 );
 
 /**
- * root.cloneDeep
+ * cloneDeep
  */
 const _cloneDeep = (source) => {
   const CircularReferenceBuffer = {
@@ -263,7 +292,7 @@ _cloneDeep.add = (func) => {
 
 _cloneDeep.reset = () => {
   _cloneDeep.clear()
-  _cloneDeep.add(cloneFunction.cloneObjectType);
+  _cloneDeep.add(cloneFunction.cloneObjectAndArrayType);
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakSet);
   _cloneDeep.add(cloneFunction.cloneSet);
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakMap);
