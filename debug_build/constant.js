@@ -29,7 +29,7 @@ var TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown
 
 var SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + ''; // compare
 
-var COMPARE = 'equal,or,' + 'match,matchValue,initialValue,' + 'matchAll,matchSomeIndex,matchSome,' + 'matchEvery,matchAnyIndex,matchAny,' + 'isEmpty,' + ''; // convert
+var COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match,matchValue,initialValue,' + 'matchAll,matchSomeIndex,matchSome,' + 'matchEvery,matchAnyIndex,matchAny,' + 'isEmpty,' + ''; // convert
 
 var CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + ''; // number
 

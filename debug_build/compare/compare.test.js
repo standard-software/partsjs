@@ -22,6 +22,8 @@ var test_execute_compare = function test_execute_compare(parts) {
       isThrownException = _parts$test.isThrownException;
   var _parts$compare = parts.compare,
       equal = _parts$compare.equal,
+      equalDeep = _parts$compare.equalDeep,
+      equalFunction = _parts$compare.equalFunction,
       or = _parts$compare.or,
       match = _parts$compare.match,
       matchValue = _parts$compare.matchValue,
@@ -32,16 +34,64 @@ var test_execute_compare = function test_execute_compare(parts) {
       matchSomeIndex = _parts$compare.matchSomeIndex;
 
   var test_equal = function test_equal() {
-    // normal args
+    // Primitive value
     checkEqual(true, equal(1, 1));
     checkEqual(true, equal('1', '1'));
-    checkEqual(false, equal('1', 1)); // args.length
-
-    checkEqual(true, equal(1, 1, 2));
-    checkEqual(false, equal(1, 2, 3));
+    checkEqual(false, equal('1', 1));
     checkEqual(true, equal(null, null));
     checkEqual(true, equal(undefined, undefined));
-    checkEqual(true, equal(undefined)); // named argument
+    checkEqual(true, equal(undefined));
+    checkEqual(false, equal(null, undefined));
+    checkEqual(false, equal(null)); // object
+
+    checkEqual(true, equal({}, {}));
+    checkEqual(false, equal({
+      a: {}
+    }, {
+      a: {}
+    }));
+    checkEqual(true, equal({
+      a: '1',
+      b: '2'
+    }, {
+      a: '1',
+      b: '2'
+    }), 'test_equal object 1');
+    checkEqual(false, equal({
+      a: '2',
+      b: '2'
+    }, {
+      a: '1',
+      b: '2'
+    }), 'test_equal object 2');
+    checkEqual(false, equal({
+      a: '1',
+      b: '2',
+      c: {}
+    }, {
+      a: '1',
+      b: '2',
+      c: {}
+    }), 'test_equal object 3');
+    checkEqual(false, equal({
+      a: '1',
+      b: '2',
+      c: []
+    }, {
+      a: '1',
+      b: '2',
+      c: []
+    }), 'test_equal object 4'); // array
+
+    checkEqual(true, equal([], []));
+    checkEqual(false, equal([[]], [[]]));
+    checkEqual(true, equal([1, 2], [1, 2]), 'test_equal array 1');
+    checkEqual(false, equal([2, 2], [1, 2]), 'test_equal array 2');
+    checkEqual(false, equal([1, 2, {}], [1, 2, {}]), 'test_equal array 3');
+    checkEqual(false, equal([1, 2, [3]], [1, 2, [3]]), 'test_equal array 4'); // args.length
+
+    checkEqual(true, equal(1, 1, 2));
+    checkEqual(false, equal(1, 2, 3)); // named argument
 
     checkEqual(true, equal({
       value1: 1,
@@ -54,7 +104,481 @@ var test_execute_compare = function test_execute_compare(parts) {
     checkEqual(false, equal({
       value1: '1',
       value2: 1
+    })); // date
+
+    checkEqual(true, equal(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equal date'); // date in object
+
+    checkEqual(false, equal({
+      date: new Date('2019/11/02')
+    }, {
+      date: new Date('2019/11/02')
+    }), 'test_equal date'); // date in array
+
+    checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
+
+    equal.clear();
+    equal.add(equalFunction.equalObject);
+    equal.add(equalFunction.equalArrayType);
+    equal.add(equalFunction.equalFunction);
+    equal.add(equalFunction.equalRegExp); // date
+
+    checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equal date'); // date in object
+
+    checkEqual(false, equal({
+      date: new Date('2019/11/02')
+    }, {
+      date: new Date('2019/11/02')
+    }), 'test_equal date'); // date in array
+
+    checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date');
+    equal.reset(); // regexp
+
+    checkEqual(true, equal(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+
+    checkEqual(false, equal({
+      reg: new RegExp(/^a/)
+    }, {
+      reg: new RegExp(/^a/)
+    }), 'test_equal regexp'); // regexp in array
+
+    checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
+
+    equal.clear();
+    equal.add(equalFunction.equalObject);
+    equal.add(equalFunction.equalArrayType);
+    equal.add(equalFunction.equalFunction);
+    equal.add(equalFunction.equalDate); // regexp
+
+    checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+
+    checkEqual(false, equal({
+      reg: new RegExp(/^a/)
+    }, {
+      reg: new RegExp(/^a/)
+    }), 'test_equal regexp'); // regexp in array
+
+    checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp');
+    equal.reset();
+
+    if (parts.platform.wsh) {
+      return;
+    } // Map
+
+
+    var map1 = new Map();
+    map1.set('a', 1);
+    map1.set('b', 2);
+    var map2 = new Map();
+    map2.set('a', 1);
+    map2.set('b', 2);
+    checkEqual(true, equal(map1, map2), 'test_equal Map'); // Map in object
+
+    checkEqual(false, equal({
+      map: map1
+    }, {
+      map: map2
+    }), 'test_equal Map'); // Map in array
+
+    checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
+
+    equal.clear();
+    equal.add(equalFunction.equalObject);
+    equal.add(equalFunction.equalArrayType);
+    equal.add(equalFunction.equalFunction);
+    equal.add(equalFunction.equalRegExp);
+    equal.add(equalFunction.equalDate);
+    checkEqual(false, equal(map1, map2), 'test_equal map'); // Map in object
+
+    checkEqual(false, equal({
+      map: map1
+    }, {
+      map: map2
+    }), 'test_equal Map'); // Map in array
+
+    checkEqual(false, equal([map1], [map2]), 'test_equal Map');
+    equal.reset(); // Set
+
+    var set1 = new Set();
+    set1.add('a');
+    set1.add('b');
+    var set2 = new Set();
+    set2.add('a');
+    set2.add('b');
+    checkEqual(true, equal(set1, set2), 'test_equal Set'); // Set in object
+
+    checkEqual(false, equal({
+      set: set1
+    }, {
+      set: set2
+    }), 'test_equal Set'); // Set in array
+
+    checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
+
+    equal.clear();
+    equal.add(equalFunction.equalObject);
+    equal.add(equalFunction.equalArrayType);
+    equal.add(equalFunction.equalFunction);
+    equal.add(equalFunction.equalRegExp);
+    equal.add(equalFunction.equalDate);
+    checkEqual(false, equal(set1, set2), 'test_equal map'); // Set in object
+
+    checkEqual(false, equal({
+      set: set1
+    }, {
+      set: set2
+    }), 'test_equal Set'); // Set in array
+
+    checkEqual(false, equal([set1], [set2]), 'test_equal Set');
+    equal.reset();
+  };
+
+  var test_equalDeep = function test_equalDeep() {
+    // Primitive value
+    checkEqual(true, equalDeep(1, 1), 'test_equalDeep 1');
+    checkEqual(true, equalDeep('1', '1'));
+    checkEqual(false, equalDeep('1', 1));
+    checkEqual(true, equalDeep(null, null));
+    checkEqual(true, equalDeep(undefined, undefined));
+    checkEqual(true, equalDeep(undefined));
+    checkEqual(false, equalDeep(null, undefined));
+    checkEqual(false, equalDeep(null)); // object
+
+    checkEqual(true, equalDeep({}, {}));
+    checkEqual(true, equalDeep({
+      a: {}
+    }, {
+      a: {}
     }));
+    checkEqual(true, equalDeep({
+      a: '1',
+      b: '2'
+    }, {
+      a: '1',
+      b: '2'
+    }), 'test_equalDeep object 1');
+    checkEqual(false, equalDeep({
+      a: '2',
+      b: '2'
+    }, {
+      a: '1',
+      b: '2'
+    }), 'test_equalDeep object 2');
+    checkEqual(true, equalDeep({
+      a: '1',
+      b: '2',
+      c: {}
+    }, {
+      a: '1',
+      b: '2',
+      c: {}
+    }), 'test_equalDeep object 3');
+    checkEqual(true, equalDeep({
+      a: '1',
+      b: '2',
+      c: []
+    }, {
+      a: '1',
+      b: '2',
+      c: []
+    }), 'test_equalDeep object 4');
+    checkEqual(false, equalDeep({
+      a: '1',
+      b: '2',
+      c: {}
+    }, {
+      a: '1',
+      b: '2',
+      c: {},
+      d: ''
+    }), 'test_equalDeep object 3');
+    checkEqual(false, equalDeep({
+      a: '1',
+      b: '2',
+      c: []
+    }, {
+      a: '1',
+      b: '2',
+      c: [],
+      d: ''
+    }), 'test_equalDeep object 4'); // // CircularReference
+    // var object1 = { a: '1', b: '2', c: {} };
+    // object1.obj = object1;
+    // var object2 = { a: '1', b: '2', c: {} };
+    // object2.obj = object2;
+    // checkEqual(true,
+    //   equalDeep( object1,  object2 ),
+    // 'test_equalDeep object 3');
+    // var object1 = { a: '1', b: '2', c: {} };
+    // object1.obj = object1;
+    // var object2 = { a: '1', b: '2', c: {} };
+    // object2.obj = object1;
+    // checkEqual(true,
+    //   equalDeep( object1,  object2 ),
+    // 'test_equalDeep object 3');
+    // var object1 = { a: '1', b: '2', c: {} };
+    // var object2 = { a: '1', b: '2', c: {} };
+    // object1.obj = object2;
+    // object2.obj = object1;
+    // checkEqual(true,
+    //   equalDeep( object1,  object2 ),
+    // 'test_equalDeep object 3');
+    // var object1 = { a: '1', b: '2', c: {} };
+    // var object2 = { a: '1', b: '2', c: {} };
+    // object1.obj = object2;
+    // object2.obj = object2;
+    // checkEqual(true,
+    //   equalDeep( object1,  object2 ),
+    // 'test_equalDeep object 3');
+    // array
+
+    checkEqual(true, equalDeep([], []));
+    checkEqual(true, equalDeep([[]], [[]]));
+    checkEqual(true, equalDeep([1, 2], [1, 2]), 'test_equalDeep array 1');
+    checkEqual(false, equalDeep([2, 2], [1, 2]), 'test_equalDeep array 2');
+    checkEqual(true, equalDeep([1, 2, {}], [1, 2, {}]), 'test_equalDeep array 3');
+    checkEqual(true, equalDeep([1, 2, [3]], [1, 2, [3]]), 'test_equalDeep array 4'); // args.length
+
+    checkEqual(true, equalDeep(1, 1, 2));
+    checkEqual(false, equalDeep(1, 2, 3)); // named argument
+
+    checkEqual(true, equalDeep({
+      value1: 1,
+      value2: 1
+    }));
+    checkEqual(true, equalDeep({
+      value1: '1',
+      value2: '1'
+    }));
+    checkEqual(false, equalDeep({
+      value1: '1',
+      value2: 1
+    })); // date
+
+    checkEqual(true, equalDeep(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equalDeep date'); // date in object
+
+    checkEqual(true, equalDeep({
+      date: new Date('2019/11/02')
+    }, {
+      date: new Date('2019/11/02')
+    }), 'test_equalDeep date'); // date in array
+
+    checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
+
+    equalDeep.clear();
+    equalDeep.add(equalFunction.equalObject);
+    equalDeep.add(equalFunction.equalArrayType);
+    equalDeep.add(equalFunction.equalFunction);
+    equalDeep.add(equalFunction.equalRegExp); // date
+
+    checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equalDeep date'); // date in object
+
+    checkEqual(false, equalDeep({
+      date: new Date('2019/11/02')
+    }, {
+      date: new Date('2019/11/02')
+    }), 'test_equalDeep date'); // date in array
+
+    checkEqual(false, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date');
+    equalDeep.reset(); // regexp
+
+    checkEqual(true, equalDeep(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+
+    checkEqual(true, equalDeep({
+      reg: new RegExp(/^a/)
+    }, {
+      reg: new RegExp(/^a/)
+    }), 'test_equal regexp'); // regexp in array
+
+    checkEqual(true, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
+
+    equalDeep.clear();
+    equalDeep.add(equalFunction.equalObject);
+    equalDeep.add(equalFunction.equalArrayType);
+    equalDeep.add(equalFunction.equalFunction);
+    equalDeep.add(equalFunction.equalDate); // regexp
+
+    checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+
+    checkEqual(false, equalDeep({
+      reg: new RegExp(/^a/)
+    }, {
+      reg: new RegExp(/^a/)
+    }), 'test_equal regexp'); // regexp in array
+
+    checkEqual(false, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp');
+    equalDeep.reset();
+
+    if (parts.platform.wsh) {
+      return;
+    } // Map
+
+
+    var map1 = new Map();
+    map1.set('a', 1);
+    map1.set('b', 2);
+    var map2 = new Map();
+    map2.set('a', 1);
+    map2.set('b', 2);
+    checkEqual(true, equalDeep(map1, map2), 'test_equal Map'); // Map in object
+
+    checkEqual(true, equalDeep({
+      map: map1
+    }, {
+      map: map2
+    }), 'test_equal Map'); // Map in array
+
+    checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map'); // ignore Map
+
+    equalDeep.clear();
+    equalDeep.add(equalFunction.equalObject);
+    equalDeep.add(equalFunction.equalArrayType);
+    equalDeep.add(equalFunction.equalFunction);
+    equalDeep.add(equalFunction.equalRegExp);
+    equalDeep.add(equalFunction.equalDate);
+    checkEqual(false, equalDeep(map1, map2), 'test_equal map'); // Map in object
+
+    checkEqual(false, equalDeep({
+      map: map1
+    }, {
+      map: map2
+    }), 'test_equal Map'); // Map in array
+
+    checkEqual(false, equalDeep([map1], [map2]), 'test_equal Map');
+    equalDeep.reset(); // Map Object Array
+
+    var map1 = new Map();
+    map1.set('a', {
+      a: '1'
+    });
+    map1.set('b', ['b']);
+    var map2 = new Map();
+    map2.set('a', {
+      a: '1'
+    });
+    map2.set('b', ['b']);
+    checkEqual(true, equalDeep(map1, map2), 'test_equal Map object array'); // Map in object
+
+    checkEqual(true, equalDeep({
+      map: map1
+    }, {
+      map: map2
+    }), 'test_equal Map object array'); // Map in array
+
+    checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map object array'); // Set
+
+    var set1 = new Set();
+    set1.add('a');
+    set1.add('b');
+    var set2 = new Set();
+    set2.add('a');
+    set2.add('b');
+    checkEqual(true, equalDeep(set1, set2), 'test_equal Set1'); // Set in object
+
+    checkEqual(true, equalDeep({
+      set: set1
+    }, {
+      set: set2
+    }), 'test_equal Set2'); // Set in array
+
+    checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set3'); // ignore Set
+
+    equalDeep.clear();
+    equalDeep.add(equalFunction.equalObject);
+    equalDeep.add(equalFunction.equalArrayType);
+    equalDeep.add(equalFunction.equalFunction);
+    equalDeep.add(equalFunction.equalRegExp);
+    equalDeep.add(equalFunction.equalDate);
+    checkEqual(false, equalDeep(set1, set2), 'test_equal map'); // Set in object
+
+    checkEqual(false, equalDeep({
+      set: set1
+    }, {
+      set: set2
+    }), 'test_equal Set'); // Set in array
+
+    checkEqual(false, equalDeep([set1], [set2]), 'test_equal Set');
+    equalDeep.reset(); // Set Object Array
+
+    var set1 = new Set();
+    set1.add({
+      a: '1'
+    });
+    set1.add(['b']);
+    var set2 = new Set();
+    set2.add({
+      a: '1'
+    });
+    set2.add(['b']);
+    checkEqual(true, equalDeep(set1, set2), 'test_equal Set object array'); // Set in object
+
+    checkEqual(true, equalDeep({
+      map: set1
+    }, {
+      map: set2
+    }), 'test_equal Set object array'); // Set in array
+
+    checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set object array'); // more set add object
+
+    var set1 = new Set();
+    set1.add({
+      a: 1,
+      b: 2,
+      c: {
+        c1: 10
+      }
+    });
+    set1.add({
+      c: 3,
+      b: 4
+    });
+    var set2 = new Set();
+    set2.add({
+      a: 1,
+      b: 2,
+      c: {
+        c1: 10
+      }
+    });
+    set2.add({
+      c: 3,
+      b: 4
+    });
+    checkEqual(true, equalDeep({
+      set: set1
+    }, {
+      set: set2
+    }), 'test_equal Set add object'); // more set add object
+
+    var set1 = new Set();
+    set1.add({
+      a: 1,
+      b: 2,
+      c: {
+        c1: 10
+      }
+    });
+    set1.add({
+      c: 3,
+      b: 4
+    });
+    var set2 = new Set();
+    set2.add({
+      a: 1,
+      b: 2,
+      c: {
+        c1: 10
+      },
+      d: ''
+    });
+    set2.add({
+      c: 3,
+      b: 4
+    });
+    checkEqual(false, equalDeep({
+      set: set1
+    }, {
+      set: set2
+    }), 'test_equal Set add object');
   };
 
   var test_or = function test_or() {
@@ -458,6 +982,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
   console.log('  test compare.js');
   test_equal();
+  test_equalDeep();
   test_or();
   test_match();
   test_matchValue();
