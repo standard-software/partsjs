@@ -131,7 +131,7 @@ var _array = __webpack_require__(17);
 
 var _consoleHook = __webpack_require__(26);
 
-var VERSION = '2.9.0';
+var VERSION = '2.9.1 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -636,6 +636,7 @@ var _require = __webpack_require__(5),
     _isObject = _require._isObject,
     _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
     _isException = _require._isException,
@@ -657,7 +658,7 @@ var _copyProperty = object._copyProperty;
  * cloneFunction
  */
 
-var cloneFunction = {};
+var cloneFunction = {}; // function is no clone
 
 cloneFunction.cloneIgnoreFunction = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
@@ -671,7 +672,36 @@ cloneFunction.cloneIgnoreFunction = function (source) {
   }
 
   return source;
-}; // support object and array
+}; // support
+//  user object and user arrayType
+//  Just good usability
+
+
+cloneFunction.cloneObjectAndArrayType = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!(_isObject(source) || _isArrayType(source))) {
+    return undefined;
+  }
+
+  var cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
+
+  for (var key in source) {
+    if (source.hasOwnProperty(key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+
+  return cloneValue;
+}; // support
+//  all object
+//  but Math or JSON etc clone
+//  Cloning unnecessary objects
 
 
 cloneFunction.cloneObjectType = function (source) {
@@ -695,7 +725,8 @@ cloneFunction.cloneObjectType = function (source) {
   }
 
   return cloneValue;
-};
+}; // support only simple object
+
 
 cloneFunction.cloneObject = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
@@ -716,7 +747,8 @@ cloneFunction.cloneObject = function (source) {
   }
 
   return cloneValue;
-};
+}; // support only simple array
+
 
 cloneFunction.cloneArray = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
@@ -887,7 +919,7 @@ cloneFunction.cloneIgnoreWeakSet = function (source) {
   return source;
 };
 /**
- * root.clone
+ * clone
  */
 
 
@@ -924,7 +956,7 @@ _clone.add = function (func) {
 _clone.reset = function () {
   _clone.clear();
 
-  _clone.add(cloneFunction.cloneObjectType);
+  _clone.add(cloneFunction.cloneObjectAndArrayType);
 
   _clone.add(cloneFunction.cloneIgnoreWeakSet);
 
@@ -949,7 +981,7 @@ var clone = function clone(source) {
 
 _copyProperty(_clone, 'clear,reset,add,' + '', clone);
 /**
- * root.cloneDeep
+ * cloneDeep
  */
 
 
@@ -1000,7 +1032,7 @@ _cloneDeep.add = function (func) {
 _cloneDeep.reset = function () {
   _cloneDeep.clear();
 
-  _cloneDeep.add(cloneFunction.cloneObjectType);
+  _cloneDeep.add(cloneFunction.cloneObjectAndArrayType);
 
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakSet);
 

@@ -141,7 +141,7 @@ var test_execute_root = function test_execute_root(parts) {
     var testRegExp1 = new RegExp('^a'); // no clone
 
     var regexp1 = testRegExp1;
-    checkEqual(true, regexp1 === testRegExp1);
+    checkEqual(true, regexp1 === testRegExp1, 'test_clone_regexp 1');
     checkEqual(true, '^a' === testRegExp1.source);
     checkEqual(true, '^a' === regexp1.source); // clone
 
@@ -153,7 +153,7 @@ var test_execute_root = function test_execute_root(parts) {
     clone.clear();
     clone.add(cloneFunction.cloneObjectType);
     var regexp1 = clone(testRegExp1);
-    checkEqual(false, regexp1 === testRegExp1);
+    checkEqual(false, regexp1 === testRegExp1, 'test_clone_regexp clone');
     checkEqual(true, '^a' === testRegExp1.source);
     checkEqual(false, '^a' === regexp1.source);
     clone.reset(); // clone
