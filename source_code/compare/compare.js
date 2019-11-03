@@ -302,7 +302,6 @@ const equalFunction = {};
 // function is no recursive call
 equalFunction.equalFunction = (
   value1, value2,
-  __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isFunction(value1, value2)) {
     return;
@@ -312,6 +311,7 @@ equalFunction.equalFunction = (
 
 equalFunction.equalObject = (
   value1, value2,
+  bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!(isObject(value1, value2))) {
@@ -322,6 +322,7 @@ equalFunction.equalObject = (
   if (value1Keys.length !== value2Keys.length) {
     return false;
   }
+  bufferWrite(value1, value2);
   for (let i = 0, l = value1Keys.length; i < l; i += 1) {
     const key = value1Keys[i];
     if (__equalDeep(value1[key], value2[key]) === false) {
@@ -333,6 +334,7 @@ equalFunction.equalObject = (
 
 equalFunction.equalArrayType = (
   value1, value2,
+  bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!(isArrayType(value1, value2))) {
@@ -341,6 +343,7 @@ equalFunction.equalArrayType = (
   if (value1.length !== value2.length) {
     return false;
   }
+  bufferWrite(value1, value2);
   for (let i = 0, l = value1.length; i < l; i += 1) {
     if (__equalDeep(value1[i], value2[i]) === false) {
       return false;
@@ -351,7 +354,6 @@ equalFunction.equalArrayType = (
 
 equalFunction.equalDate = (
   value1, value2,
-  __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isDate(value1, value2)) {
     return;
@@ -361,7 +363,6 @@ equalFunction.equalDate = (
 
 equalFunction.equalRegExp = (
   value1, value2,
-  __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isRegExp(value1, value2)) {
     return;
@@ -371,6 +372,7 @@ equalFunction.equalRegExp = (
 
 equalFunction.equalMap = (
   value1, value2,
+  bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isMap(value1, value2)) {
@@ -379,6 +381,7 @@ equalFunction.equalMap = (
   if (value1.size !== value2.size) {
     return false;
   }
+  bufferWrite(value1, value2);
   for (const [key, value] of value1.entries()) {
     if (__equalDeep(value, value2.get(key)) === false) {
       return false;
@@ -389,6 +392,7 @@ equalFunction.equalMap = (
 
 equalFunction.equalWeakMap = (
   value1, value2,
+  bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isWeakMap(value1, value2)) {
@@ -397,6 +401,7 @@ equalFunction.equalWeakMap = (
   if (value1.size !== value2.size) {
     return false;
   }
+  bufferWrite(value1, value2);
   for (const [key, value] of value1.entries()) {
     if (__equalDeep(value, value2.get(key)) === false) {
       return false;
@@ -407,6 +412,7 @@ equalFunction.equalWeakMap = (
 
 equalFunction.equalSet = (
   value1, value2,
+  bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isSet(value1, value2)) {
@@ -415,6 +421,7 @@ equalFunction.equalSet = (
   if (value1.size !== value2.size) {
     return false;
   }
+  bufferWrite(value1, value2);
   for (const v1item of value1) {
     let result = false;
     for (const v2item of value2) {
@@ -431,6 +438,7 @@ equalFunction.equalSet = (
 
 equalFunction.equalWeakSet = (
   value1, value2,
+  bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isWeakSet(value1, value2)) {
@@ -439,6 +447,7 @@ equalFunction.equalWeakSet = (
   if (value1.size !== value2.size) {
     return false;
   }
+  bufferWrite(value1, value2);
   for (const v1item of value1) {
     let result = false;
     for (const v2item of value2) {
@@ -509,16 +518,34 @@ _copyProperty(_equal,
  * equalDeep
  */
 const _equalDeep = (value1, value2) => {
-  const __equal = (value1, value2) => {
+  const CircularReferenceBuffer = {
+    v1Array: [],
+    v2Array: [],
+  }
+  const __equalDeep = (value1, value2) => {
+    const index = CircularReferenceBuffer.v1Array.indexOf(value1);
+    if (index !== -1) {
+      if (CircularReferenceBuffer.v2Array[index] === value2) {
+        return true;
+      }
+      return value1 === value2;
+    }
     for (let i = 0, l = _equalDeep.functions.length; i < l; i += 1) {
-      const result = _equalDeep.functions[i](value1, value2, __equal)
+      const result = _equalDeep.functions[i](
+        value1, value2,
+        (v1, v2) => {
+          CircularReferenceBuffer.v1Array.push(v1);
+          CircularReferenceBuffer.v2Array.push(v2);
+        },
+        __equalDeep
+      )
       if (!_isUndefined(result)) {
         return result;
       }
     }
     return value1 === value2;
   }
-  return __equal(value1, value2);
+  return __equalDeep(value1, value2);
 };
 _equalDeep.functions = [];
 

@@ -273,43 +273,52 @@ const test_execute_compare = (parts) => {
 
     checkEqual(false,
       equalDeep( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {}, d: '' }),
-    'test_equalDeep object 3');
+    'test_equalDeep object 5');
     checkEqual(false,
       equalDeep( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [], d: '' }),
-    'test_equalDeep object 4');
+    'test_equalDeep object 6');
 
-    // // CircularReference
-    // var object1 = { a: '1', b: '2', c: {} };
-    // object1.obj = object1;
-    // var object2 = { a: '1', b: '2', c: {} };
-    // object2.obj = object2;
-    // checkEqual(true,
-    //   equalDeep( object1,  object2 ),
-    // 'test_equalDeep object 3');
+    // CircularReference
+    var object1 = { a: '1', b: '2', c: {} };
+    object1.obj = object1;
+    var object2 = { a: '1', b: '2', c: {} };
+    object2.obj = object2;
+    checkEqual(true,
+      equalDeep( object1,  object2 ),
+    'test_equalDeep CircularReference 1');
 
-    // var object1 = { a: '1', b: '2', c: {} };
-    // object1.obj = object1;
-    // var object2 = { a: '1', b: '2', c: {} };
-    // object2.obj = object1;
-    // checkEqual(true,
-    //   equalDeep( object1,  object2 ),
-    // 'test_equalDeep object 3');
+    var object1 = { a: '1', b: '2', c: {} };
+    object1.obj = object1;
+    var object2 = { a: '1', b: '2', c: {} };
+    object2.obj = object1;
+    checkEqual(true,
+      equalDeep( object1,  object2 ),
+    'test_equalDeep CircularReference 2');
 
-    // var object1 = { a: '1', b: '2', c: {} };
-    // var object2 = { a: '1', b: '2', c: {} };
-    // object1.obj = object2;
-    // object2.obj = object1;
-    // checkEqual(true,
-    //   equalDeep( object1,  object2 ),
-    // 'test_equalDeep object 3');
+    var object1 = { a: '1', b: '2', c: {} };
+    var object2 = { a: '1', b: '2', c: {} };
+    object1.obj = object2;
+    object2.obj = object1;
+    checkEqual(true,
+      equalDeep( object1,  object2 ),
+    'test_equalDeep CircularReference 3');
 
-    // var object1 = { a: '1', b: '2', c: {} };
-    // var object2 = { a: '1', b: '2', c: {} };
-    // object1.obj = object2;
-    // object2.obj = object2;
-    // checkEqual(true,
-    //   equalDeep( object1,  object2 ),
-    // 'test_equalDeep object 3');
+    var object1 = { a: '1', b: '2', c: {} };
+    var object2 = { a: '1', b: '2', c: {} };
+    object1.obj = object2;
+    object2.obj = object2;
+    checkEqual(true,
+      equalDeep( object1,  object2 ),
+    'test_equalDeep CircularReference 4');
+
+    var object1 = { a: '1', b: '2', c: {} };
+    var object2 = { a: '1', b: '2', c: {} };
+    var object3 = { a: '1', b: '2', c: {} };
+    object1.obj = object2;
+    object2.obj = object3;
+    checkEqual(false,
+      equalDeep( object1,  object2 ),
+    'test_equalDeep CircularReference 5');
 
     // array
     checkEqual(true,
@@ -368,7 +377,7 @@ const test_execute_compare = (parts) => {
     // date in object
     checkEqual(false,
       equalDeep( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
-    'test_equalDeep date');
+    'test_equalDeep date in object');
     // date in array
     checkEqual(false,
       equalDeep( [ new Date('2019/11/02') ],  [ new Date('2019/11/02') ] ),
@@ -965,7 +974,7 @@ const test_execute_compare = (parts) => {
   }
 
   console.log('  test compare.js');
-  test_equal();
+  // test_equal();
   test_equalDeep();
   test_or();
   test_match();
