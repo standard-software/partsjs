@@ -45,7 +45,9 @@ const SYNTAX =
 
 // compare
 const COMPARE =
-  'equal,or,' +
+  'equal, equalDeep,' +
+  'equalFunction,' +
+  'or,' +
   'match,matchValue,initialValue,' +
   'matchAll,matchSomeIndex,matchSome,' +
   'matchEvery,matchAnyIndex,matchAny,' +
