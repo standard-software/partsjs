@@ -101,7 +101,7 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.9.1
-#### 2019/11/02(Sat)
+#### 2019/11/04(Mon)
 - update clone cloneDeep cloneFunction
   - support only object and arrayType
   - clone ignore Math Object etc

@@ -2,6 +2,12 @@
 
 ## Version
 
+### 2.9.1
+#### 2019/11/04(Mon)
+- update clone cloneDeep cloneFunction
+  - support only object and arrayType
+  - clone ignore Math Object etc
+
 ### 2.9.0
 #### 2019/11/01(Fri)
 - update clone cloneDeep cloneFunction
