@@ -2850,10 +2850,6 @@ var isEmpty = function isEmpty(value) {
 var equalFunction = {}; // function is no recursive call
 
 equalFunction.equalFunction = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
-    return v1 === v2;
-  };
-
   if (!isFunction(value1, value2)) {
     return;
   }
@@ -2862,7 +2858,9 @@ equalFunction.equalFunction = function (value1, value2) {
 };
 
 equalFunction.equalObject = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
+  var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
@@ -2877,6 +2875,8 @@ equalFunction.equalObject = function (value1, value2) {
     return false;
   }
 
+  bufferWrite(value1, value2);
+
   for (var i = 0, l = value1Keys.length; i < l; i += 1) {
     var key = value1Keys[i];
 
@@ -2889,7 +2889,9 @@ equalFunction.equalObject = function (value1, value2) {
 };
 
 equalFunction.equalArrayType = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
+  var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
@@ -2901,6 +2903,8 @@ equalFunction.equalArrayType = function (value1, value2) {
     return false;
   }
 
+  bufferWrite(value1, value2);
+
   for (var i = 0, l = value1.length; i < l; i += 1) {
     if (__equalDeep(value1[i], value2[i]) === false) {
       return false;
@@ -2911,10 +2915,6 @@ equalFunction.equalArrayType = function (value1, value2) {
 };
 
 equalFunction.equalDate = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
-    return v1 === v2;
-  };
-
   if (!isDate(value1, value2)) {
     return;
   }
@@ -2923,10 +2923,6 @@ equalFunction.equalDate = function (value1, value2) {
 };
 
 equalFunction.equalRegExp = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
-    return v1 === v2;
-  };
-
   if (!isRegExp(value1, value2)) {
     return;
   }
@@ -2935,7 +2931,9 @@ equalFunction.equalRegExp = function (value1, value2) {
 };
 
 equalFunction.equalMap = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
+  var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
@@ -2947,6 +2945,7 @@ equalFunction.equalMap = function (value1, value2) {
     return false;
   }
 
+  bufferWrite(value1, value2);
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -2980,7 +2979,9 @@ equalFunction.equalMap = function (value1, value2) {
 };
 
 equalFunction.equalWeakMap = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
+  var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
@@ -2992,6 +2993,7 @@ equalFunction.equalWeakMap = function (value1, value2) {
     return false;
   }
 
+  bufferWrite(value1, value2);
   var _iteratorNormalCompletion2 = true;
   var _didIteratorError2 = false;
   var _iteratorError2 = undefined;
@@ -3025,7 +3027,9 @@ equalFunction.equalWeakMap = function (value1, value2) {
 };
 
 equalFunction.equalSet = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
+  var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
@@ -3038,6 +3042,7 @@ equalFunction.equalSet = function (value1, value2) {
     return false;
   }
 
+  bufferWrite(value1, value2);
   var _iteratorNormalCompletion3 = true;
   var _didIteratorError3 = false;
   var _iteratorError3 = undefined;
@@ -3096,7 +3101,9 @@ equalFunction.equalSet = function (value1, value2) {
 };
 
 equalFunction.equalWeakSet = function (value1, value2) {
-  var __equalDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v1, v2) {
+  var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
@@ -3109,6 +3116,7 @@ equalFunction.equalWeakSet = function (value1, value2) {
     return false;
   }
 
+  bufferWrite(value1, value2);
   var _iteratorNormalCompletion5 = true;
   var _didIteratorError5 = false;
   var _iteratorError5 = undefined;
@@ -3237,9 +3245,27 @@ _copyProperty(_equal, 'clear,reset,add,' + '', equal);
 
 
 var _equalDeep = function _equalDeep(value1, value2) {
-  var __equal = function __equal(value1, value2) {
+  var CircularReferenceBuffer = {
+    v1Array: [],
+    v2Array: []
+  };
+
+  var __equalDeep = function __equalDeep(value1, value2) {
+    var index = CircularReferenceBuffer.v1Array.indexOf(value1);
+
+    if (index !== -1) {
+      if (CircularReferenceBuffer.v2Array[index] === value2) {
+        return true;
+      }
+
+      return value1 === value2;
+    }
+
     for (var i = 0, l = _equalDeep.functions.length; i < l; i += 1) {
-      var result = _equalDeep.functions[i](value1, value2, __equal);
+      var result = _equalDeep.functions[i](value1, value2, function (v1, v2) {
+        CircularReferenceBuffer.v1Array.push(v1);
+        CircularReferenceBuffer.v2Array.push(v2);
+      }, __equalDeep);
 
       if (!_isUndefined(result)) {
         return result;
@@ -3249,7 +3275,7 @@ var _equalDeep = function _equalDeep(value1, value2) {
     return value1 === value2;
   };
 
-  return __equal(value1, value2);
+  return __equalDeep(value1, value2);
 };
 
 _equalDeep.functions = [];
