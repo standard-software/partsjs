@@ -156,10 +156,13 @@ cloneFunction.cloneRegExp = (
   return cloneValue;
 }
 
-// cloneMap inside element not recursive call
+// cloneMap
+//  key not recursive call
+//  value recursive call
 cloneFunction.cloneMap = (
   source,
   bufferWrite = () => {},
+  __cloneDeep = value => value,
 ) => {
   if (!_isMap(source)) {
     return undefined;;
@@ -167,7 +170,7 @@ cloneFunction.cloneMap = (
   const cloneValue = new Map();
   bufferWrite(source, cloneValue);
   for (const [key, value] of source.entries()) {
-    cloneValue.set(key, value);
+    cloneValue.set(key, __cloneDeep(value));
   }
   return cloneValue ;
 }
@@ -181,7 +184,9 @@ cloneFunction.cloneIgnoreWeakMap = (
   return source ;
 }
 
-// cloneSet inside element not recursive call
+// cloneSet
+//  element not recursive call
+//  same map key
 cloneFunction.cloneSet = (
   source,
   bufferWrite = () => {},
