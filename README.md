@@ -102,9 +102,10 @@ You can now use the functions of the parts object.
 
 ### 2.10.0
 #### 2019/11/04(Mon)
-- update compare.equal
-- add compare.equalDeep
-- add equalFunction
+- update compare.equal add compare.equalDeep
+  - add equalFunction
+  - support CircularReference
+- update clone cloneDeep
 
 ### 2.9.1
 #### 2019/11/04(Mon)
