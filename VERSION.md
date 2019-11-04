@@ -2,6 +2,10 @@
 
 ## Version
 
+### 2.10.1
+#### 2019/11/04(Mon)
+- update tag version mistake
+
 ### 2.10.0
 #### 2019/11/04(Mon)
 - update compare.equal add compare.equalDeep
