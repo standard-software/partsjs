@@ -26,8 +26,6 @@ const cloneFunction = {};
 // function is no clone
 cloneFunction.cloneIgnoreFunction = (
   source,
-  bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isFunction(source)) {
     return undefined;
@@ -38,12 +36,31 @@ cloneFunction.cloneIgnoreFunction = (
 // support
 //  user object and user arrayType
 //  Just good usability
-cloneFunction.cloneObjectAndArrayType = (
+cloneFunction.cloneObject = (
   source,
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!(_isObject(source) || _isArrayType(source))) {
+  if (!(_isObject(source))) {
+    return undefined;
+  }
+
+  const cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+  return cloneValue;
+}
+
+cloneFunction.cloneArrayType = (
+  source,
+  bufferWrite = () => {},
+  __cloneDeep = value => value,
+) => {
+  if (!(_isArrayType(source))) {
     return undefined;
   }
 
@@ -80,45 +97,44 @@ cloneFunction.cloneObjectType = (
   return cloneValue;
 }
 
-// support only simple object
-cloneFunction.cloneObject = (
-  source,
-  bufferWrite = () => {},
-  __cloneDeep = value => value,
-) => {
-  if (!_isObject(source)) {
-    return undefined;
-  }
-  const cloneValue = {};
-  bufferWrite(source, cloneValue);
-  for (let key in source) {
-    cloneValue[key] = __cloneDeep(source[key]);
-  }
-  return cloneValue;
-}
+// // support only simple object
+// cloneFunction.cloneObject = (
+//   source,
+//   bufferWrite = () => {},
+//   __cloneDeep = value => value,
+// ) => {
+//   if (!_isObject(source)) {
+//     return undefined;
+//   }
+//   const cloneValue = {};
+//   bufferWrite(source, cloneValue);
+//   for (let key in source) {
+//     cloneValue[key] = __cloneDeep(source[key]);
+//   }
+//   return cloneValue;
+// }
 
-// support only simple array
-cloneFunction.cloneArray = (
-  source,
-  bufferWrite = () => {},
-  __cloneDeep = value => value,
-) => {
-  if (!_isArray(source)) {
-    return undefined;
-  }
-  const cloneValue = [];
-  bufferWrite(source, cloneValue);
-  for (let i = 0, l = source.length; i < l; i += 1) {
-    const value = source[i];
-    cloneValue.push(__cloneDeep(value))
-  }
-  return cloneValue;
-}
+// // support only simple array
+// cloneFunction.cloneArray = (
+//   source,
+//   bufferWrite = () => {},
+//   __cloneDeep = value => value,
+// ) => {
+//   if (!_isArray(source)) {
+//     return undefined;
+//   }
+//   const cloneValue = [];
+//   bufferWrite(source, cloneValue);
+//   for (let i = 0, l = source.length; i < l; i += 1) {
+//     const value = source[i];
+//     cloneValue.push(__cloneDeep(value))
+//   }
+//   return cloneValue;
+// }
 
 cloneFunction.cloneDate = (
   source,
   bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isDate(source)) {
     return undefined;
@@ -131,7 +147,6 @@ cloneFunction.cloneDate = (
 cloneFunction.cloneRegExp = (
   source,
   bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isRegExp(source)) {
     return undefined;
@@ -141,10 +156,10 @@ cloneFunction.cloneRegExp = (
   return cloneValue;
 }
 
+// cloneMap inside element not recursive call
 cloneFunction.cloneMap = (
   source,
   bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isMap(source)) {
     return undefined;;
@@ -159,8 +174,6 @@ cloneFunction.cloneMap = (
 
 cloneFunction.cloneIgnoreWeakMap = (
   source,
-  bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isWeakMap(source)) {
     return undefined;;
@@ -168,10 +181,10 @@ cloneFunction.cloneIgnoreWeakMap = (
   return source ;
 }
 
+// cloneSet inside element not recursive call
 cloneFunction.cloneSet = (
   source,
   bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isSet(source)) {
     return undefined;;
@@ -186,8 +199,6 @@ cloneFunction.cloneSet = (
 
 cloneFunction.cloneIgnoreWeakSet = (
   source,
-  bufferWrite = () => {},
-  __cloneDeep = value => value,
 ) => {
   if (!_isWeakSet(source)) {
     return undefined;;
@@ -225,7 +236,8 @@ _clone.add = (func) => {
 
 _clone.reset = () => {
   _clone.clear()
-  _clone.add(cloneFunction.cloneObjectAndArrayType);
+  _clone.add(cloneFunction.cloneObject);
+  _clone.add(cloneFunction.cloneArrayType);
   _clone.add(cloneFunction.cloneIgnoreWeakSet);
   _clone.add(cloneFunction.cloneSet);
   _clone.add(cloneFunction.cloneIgnoreWeakMap);
@@ -292,7 +304,8 @@ _cloneDeep.add = (func) => {
 
 _cloneDeep.reset = () => {
   _cloneDeep.clear()
-  _cloneDeep.add(cloneFunction.cloneObjectAndArrayType);
+  _cloneDeep.add(cloneFunction.cloneObject);
+  _cloneDeep.add(cloneFunction.cloneArrayType);
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakSet);
   _cloneDeep.add(cloneFunction.cloneSet);
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakMap);
