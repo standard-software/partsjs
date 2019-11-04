@@ -45,12 +45,6 @@ var _copyProperty = object._copyProperty;
 var cloneFunction = {}; // function is no clone
 
 cloneFunction.cloneIgnoreFunction = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
   if (!_isFunction(source)) {
     return undefined;
   }
@@ -61,14 +55,37 @@ cloneFunction.cloneIgnoreFunction = function (source) {
 //  Just good usability
 
 
-cloneFunction.cloneObjectAndArrayType = function (source) {
+cloneFunction.cloneObject = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
   var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
     return value;
   };
 
-  if (!(_isObject(source) || _isArrayType(source))) {
+  if (!_isObject(source)) {
+    return undefined;
+  }
+
+  var cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
+
+  for (var key in source) {
+    if (source.hasOwnProperty(key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+
+  return cloneValue;
+};
+
+cloneFunction.cloneArrayType = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!_isArrayType(source)) {
     return undefined;
   }
 
@@ -109,59 +126,43 @@ cloneFunction.cloneObjectType = function (source) {
   }
 
   return cloneValue;
-}; // support only simple object
+}; // // support only simple object
+// cloneFunction.cloneObject = (
+//   source,
+//   bufferWrite = () => {},
+//   __cloneDeep = value => value,
+// ) => {
+//   if (!_isObject(source)) {
+//     return undefined;
+//   }
+//   const cloneValue = {};
+//   bufferWrite(source, cloneValue);
+//   for (let key in source) {
+//     cloneValue[key] = __cloneDeep(source[key]);
+//   }
+//   return cloneValue;
+// }
+// // support only simple array
+// cloneFunction.cloneArray = (
+//   source,
+//   bufferWrite = () => {},
+//   __cloneDeep = value => value,
+// ) => {
+//   if (!_isArray(source)) {
+//     return undefined;
+//   }
+//   const cloneValue = [];
+//   bufferWrite(source, cloneValue);
+//   for (let i = 0, l = source.length; i < l; i += 1) {
+//     const value = source[i];
+//     cloneValue.push(__cloneDeep(value))
+//   }
+//   return cloneValue;
+// }
 
-
-cloneFunction.cloneObject = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
-  if (!_isObject(source)) {
-    return undefined;
-  }
-
-  var cloneValue = {};
-  bufferWrite(source, cloneValue);
-
-  for (var key in source) {
-    cloneValue[key] = __cloneDeep(source[key]);
-  }
-
-  return cloneValue;
-}; // support only simple array
-
-
-cloneFunction.cloneArray = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
-  if (!_isArray(source)) {
-    return undefined;
-  }
-
-  var cloneValue = [];
-  bufferWrite(source, cloneValue);
-
-  for (var i = 0, l = source.length; i < l; i += 1) {
-    var value = source[i];
-    cloneValue.push(__cloneDeep(value));
-  }
-
-  return cloneValue;
-};
 
 cloneFunction.cloneDate = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
 
   if (!_isDate(source)) {
     return undefined;
@@ -175,10 +176,6 @@ cloneFunction.cloneDate = function (source) {
 cloneFunction.cloneRegExp = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
   if (!_isRegExp(source)) {
     return undefined;
   }
@@ -186,14 +183,11 @@ cloneFunction.cloneRegExp = function (source) {
   var cloneValue = new RegExp(source.source);
   bufferWrite(source, cloneValue);
   return cloneValue;
-};
+}; // cloneMap inside element not recursive call
+
 
 cloneFunction.cloneMap = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
 
   if (!_isMap(source)) {
     return undefined;
@@ -233,26 +227,17 @@ cloneFunction.cloneMap = function (source) {
 };
 
 cloneFunction.cloneIgnoreWeakMap = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
   if (!_isWeakMap(source)) {
     return undefined;
     ;
   }
 
   return source;
-};
+}; // cloneSet inside element not recursive call
+
 
 cloneFunction.cloneSet = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
 
   if (!_isSet(source)) {
     return undefined;
@@ -289,12 +274,6 @@ cloneFunction.cloneSet = function (source) {
 };
 
 cloneFunction.cloneIgnoreWeakSet = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
   if (!_isWeakSet(source)) {
     return undefined;
     ;
@@ -340,7 +319,9 @@ _clone.add = function (func) {
 _clone.reset = function () {
   _clone.clear();
 
-  _clone.add(cloneFunction.cloneObjectAndArrayType);
+  _clone.add(cloneFunction.cloneObject);
+
+  _clone.add(cloneFunction.cloneArrayType);
 
   _clone.add(cloneFunction.cloneIgnoreWeakSet);
 
@@ -416,7 +397,9 @@ _cloneDeep.add = function (func) {
 _cloneDeep.reset = function () {
   _cloneDeep.clear();
 
-  _cloneDeep.add(cloneFunction.cloneObjectAndArrayType);
+  _cloneDeep.add(cloneFunction.cloneObject);
+
+  _cloneDeep.add(cloneFunction.cloneArrayType);
 
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakSet);
 

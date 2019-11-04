@@ -764,6 +764,9 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isWeakMap(new Map()));
     checkEqual(false, isMap(new WeakMap()));
     checkEqual(true, isWeakMap(new WeakMap()));
+    checkEqual(true, isObject({}));
+    checkEqual(false, isObject(new Map()));
+    checkEqual(false, isObject(new WeakMap()));
   };
 
   var test_isSet = function test_isSet() {

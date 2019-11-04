@@ -102,7 +102,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     clone.clear();
     clone.add(cloneFunction.cloneObject);
-    clone.add(cloneFunction.cloneArray);
+    clone.add(cloneFunction.cloneArrayType);
     var testDate1 = new Date('2019/10/11');
     var date1 = clone(testDate1);
     date1.setDate(12);
@@ -112,7 +112,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     clone.clear();
     clone.add(cloneFunction.cloneObject);
-    clone.add(cloneFunction.cloneArray);
+    clone.add(cloneFunction.cloneArrayType);
     clone.add(cloneFunction.cloneDate);
     var testDate1 = new Date('2019/10/11');
     var date1 = clone(testDate1);
@@ -347,8 +347,8 @@ var test_execute_root = function test_execute_root(parts) {
 
     var date1 = new Date('2019/10/11');
     cloneDeep.clear();
-    cloneDeep.add(cloneFunction.cloneArray);
     cloneDeep.add(cloneFunction.cloneObject);
+    cloneDeep.add(cloneFunction.cloneArrayType);
     var testValue1 = [1, 2, 3, date1];
     var value1 = cloneDeep(testValue1);
     value1[3].setDate(13);
@@ -513,18 +513,15 @@ var test_execute_root = function test_execute_root(parts) {
     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD')); // moment object fail
     // const cloneValue = new source.constructor();
-    // As can't use cloneFunction.cloneObjectType
     // moment type cloneDeep
 
     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
     var testValue1 = [1, 2, 3, moment1]; // initialise
 
     cloneDeep.clear();
-    cloneDeep.add(cloneFunction.cloneObject);
-    cloneDeep.add(cloneFunction.cloneArray);
     var value1 = cloneDeep(testValue1);
     value1[3].set('year', 2018);
-    checkEqual(false, value1[3] === testValue1[3]); // clone
+    checkEqual(true, value1[3] === testValue1[3]); // clone
 
     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD')); // but not correct
@@ -603,10 +600,7 @@ var test_execute_root = function test_execute_root(parts) {
     map1.set('key2', 'value2');
     checkEqual('value1', map1.get('key1'));
     checkEqual(false, parts.isObject(map1));
-    checkEqual(true, parts.isObjectType(map1)); // isMap
-
-    checkEqual(true, parts.isMap(map1));
-    checkEqual(false, parts.isMap({})); // initializse nothing cloneMap
+    checkEqual(true, parts.isObjectType(map1)); // initializse nothing cloneMap
 
     clone.clear();
     clone.add(cloneFunction.cloneObjectType);
@@ -621,9 +615,11 @@ var test_execute_root = function test_execute_root(parts) {
     var map2 = clone(map1);
     checkEqual(undefined, map2.get('key1')); // no clone
 
+    checkEqual(false, map1 === map2);
     var map2 = cloneDeep(map1);
     checkEqual(undefined, map2.get('key1')); // no clone
 
+    checkEqual(false, map1 === map2);
     clone.reset();
     cloneDeep.reset();
     var map2 = clone(map1);
@@ -633,7 +629,29 @@ var test_execute_root = function test_execute_root(parts) {
     var map2 = cloneDeep(map1);
     checkEqual('value1', map2.get('key1')); // clone
 
+    checkEqual(false, map1 === map2); // map object array
+
+    var map1 = new Map();
+    map1.set('a', {
+      a: '1'
+    });
+    map1.set('b', ['b']);
+    map1.set('c', {
+      a: [1, 2, 3, {
+        b: 'c'
+      }]
+    });
+    map1.set('d', [1, 2, 3, {
+      b: 'c',
+      d: [4, 5, 6]
+    }]);
+    var map2 = cloneDeep(map1);
     checkEqual(false, map1 === map2);
+    checkEqual('1', map2.get('a').a); // cloneDeep
+
+    checkEqual('b', map2.get('b')[0]);
+    checkEqual('c', map2.get('c').a[3].b);
+    checkEqual(6, map2.get('d')[3].d[2]);
   };
 
   var test_cloneDeep_set = function test_cloneDeep_set() {
@@ -648,10 +666,7 @@ var test_execute_root = function test_execute_root(parts) {
     checkEqual(true, set1.has('value2'));
     checkEqual(false, set1.has('value3'));
     checkEqual(false, parts.isObject(set1));
-    checkEqual(true, parts.isObjectType(set1)); // isSet
-
-    checkEqual(true, parts.isSet(set1));
-    checkEqual(false, parts.isSet({})); // initializse nothing cloneSet
+    checkEqual(true, parts.isObjectType(set1)); // initializse nothing cloneSet
 
     clone.clear();
     clone.add(cloneFunction.cloneObjectType);
