@@ -131,7 +131,7 @@ var _array = __webpack_require__(17);
 
 var _consoleHook = __webpack_require__(26);
 
-var VERSION = '2.10.1';
+var VERSION = '2.10.2 beta';
 var rootNames = {}; // root
 
 var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
@@ -799,11 +799,17 @@ cloneFunction.cloneRegExp = function (source) {
   var cloneValue = new RegExp(source.source);
   bufferWrite(source, cloneValue);
   return cloneValue;
-}; // cloneMap inside element not recursive call
+}; // cloneMap
+//  key not recursive call
+//  value recursive call
 
 
 cloneFunction.cloneMap = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
 
   if (!_isMap(source)) {
     return undefined;
@@ -822,7 +828,7 @@ cloneFunction.cloneMap = function (source) {
           key = _step$value[0],
           value = _step$value[1];
 
-      cloneValue.set(key, value);
+      cloneValue.set(key, __cloneDeep(value));
     }
   } catch (err) {
     _didIteratorError = true;
@@ -849,7 +855,9 @@ cloneFunction.cloneIgnoreWeakMap = function (source) {
   }
 
   return source;
-}; // cloneSet inside element not recursive call
+}; // cloneSet
+//  element not recursive call
+//  same map key
 
 
 cloneFunction.cloneSet = function (source) {
