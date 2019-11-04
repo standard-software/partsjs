@@ -100,6 +100,18 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.10.2
+#### 2019/11/05(Tue)
+- update cloneDeep
+  - cloneMap
+  - test code
+- update namespace
+  - compare
+    - compare_common.js
+    - equal.js
+  - root
+    - clone.js
+
 ### 2.10.1
 #### 2019/11/04(Mon)
 - update tag version mistake
