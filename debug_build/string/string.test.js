@@ -14,7 +14,61 @@ var test_execute_string = function test_execute_string(parts) {
     checkEqual(true, matchFormat('number', '123'));
     checkEqual(false, matchFormat('number', '12a'));
     checkEqual(false, matchFormat('number', '-123'));
-    checkEqual(true, matchFormat('integer', '-123')); // Parameter Args
+    checkEqual(true, matchFormat('integer', '-123'));
+    checkEqual(true, matchFormat('date_y/m/d', '2019/11/05'));
+    checkEqual(true, matchFormat('date_y/m/d', '2019/9/5'));
+    checkEqual(true, matchFormat('date_y/m/d', '19/1/1'));
+    checkEqual(true, matchFormat('date_y/m/d', '9/11/11'));
+    checkEqual(false, matchFormat('date_y/m/d', '/11/11'));
+    checkEqual(false, matchFormat('date_y/m/d', '9//1'));
+    checkEqual(false, matchFormat('date_y/m/d', '9/1/'));
+    checkEqual(false, matchFormat('date_y/m/d', '2019-09-09'));
+    checkEqual(false, matchFormat('date_y/m/d', '2019-9-9'));
+    checkEqual(true, matchFormat('date_yyyy/m/d', '2019/11/05'));
+    checkEqual(true, matchFormat('date_yyyy/m/d', '2019/9/5'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '19/1/1'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '9/11/11'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '/11/11'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '9//1'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '9/1/'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '2019-09-09'));
+    checkEqual(false, matchFormat('date_yyyy/m/d', '2019-9-9'));
+    checkEqual(true, matchFormat('date_yyyy/mm/dd', '2019/11/05'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '2019/9/5'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '19/1/1'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '9/11/11'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '/11/11'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '9//1'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '9/1/'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '2019-09-09'));
+    checkEqual(false, matchFormat('date_yyyy/mm/dd', '2019-9-9'));
+    checkEqual(true, matchFormat('date_y-m-d', '2019-11-05'));
+    checkEqual(true, matchFormat('date_y-m-d', '2019-9-5'));
+    checkEqual(true, matchFormat('date_y-m-d', '19-1-1'));
+    checkEqual(true, matchFormat('date_y-m-d', '9-11-11'));
+    checkEqual(false, matchFormat('date_y-m-d', '-11-11'));
+    checkEqual(false, matchFormat('date_y-m-d', '9--1'));
+    checkEqual(false, matchFormat('date_y-m-d', '9-1-'));
+    checkEqual(false, matchFormat('date_y-m-d', '2019/09/09'));
+    checkEqual(false, matchFormat('date_y-m-d', '2019/9/9'));
+    checkEqual(true, matchFormat('date_yyyy-m-d', '2019-11-05'));
+    checkEqual(true, matchFormat('date_yyyy-m-d', '2019-9-5'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '19-1-1'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '9-11-11'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '-11-11'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '9--1'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '9-1-'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '2019/09/09'));
+    checkEqual(false, matchFormat('date_yyyy-m-d', '2019/9/9'));
+    checkEqual(true, matchFormat('date_yyyy-mm-dd', '2019-11-05'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019-9-5'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '19-1-1'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '9-11-11'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '-11-11'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '9--1'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '9-1-'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019/09/09'));
+    checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019/9/9')); // Parameter Args
 
     checkEqual(false, matchFormat({
       formatName: 'number',
