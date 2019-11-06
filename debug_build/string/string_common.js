@@ -170,7 +170,7 @@ _matchFormat.reset = function () {
     return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
   });
 
-  _matchFormat.add(['date_y/m/d'], function (value) {
+  _matchFormat.add(['date_y/m/d', 'date'], function (value) {
     return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
   });
 
@@ -180,18 +180,6 @@ _matchFormat.reset = function () {
 
   _matchFormat.add(['date_yyyy/mm/dd'], function (value) {
     return value.match(/^\d{4}\/\d{2}\/\d{2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y-m-d'], function (value) {
-    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-m-d'], function (value) {
-    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
-    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
   });
 
   _matchFormat.add(['date_y/m/d_h:n'], function (value) {
@@ -204,6 +192,18 @@ _matchFormat.reset = function () {
 
   _matchFormat.add(['date_y/m/d_h:n:s.ms'], function (value) {
     return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y-m-d'], function (value) {
+    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy-m-d'], function (value) {
+    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
+    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
   });
 };
 

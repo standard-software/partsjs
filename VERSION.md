@@ -2,6 +2,10 @@
 
 ## Version
 
+### 2.11.0
+#### 2019/11/06(Wed)
+- update matchFormat
+
 ### 2.10.2
 #### 2019/11/05(Tue)
 - update cloneDeep
