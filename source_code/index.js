@@ -42,16 +42,13 @@ propertyNames._TYPE_BASE =
   'Func,Obj,ObjType,' +
   'Except,' +
   '';
-
 const isPrefixAdd = (prefix, commaString) =>
   _replaceAll(commaString, ' ', '').split(',')
   .map(item => prefix + item).join(',');
-
 propertyNames.TYPE = [
   isPrefixAdd('is', propertyNames._TYPE_BASE),
   isPrefixAdd('isNot', propertyNames._TYPE_BASE)
 ].join(',')
-
 const type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames);
 
@@ -68,9 +65,7 @@ propertyNames.SYNTAX =
   'assert,guard,' +
   'sc,if_,switch_,' +
   '';
-const syntax = _copyProperty(_syntax,
-  propertyNames.SYNTAX
-);
+const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
 
 // compare
@@ -83,9 +78,7 @@ propertyNames.COMPARE =
   'matchEvery,matchAnyIndex,matchAny,' +
   'isEmpty,' +
   '';
-const compare = _copyProperty(_compare,
-  propertyNames.COMPARE
-);
+const compare = _copyProperty(_compare, propertyNames.COMPARE);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
 // convert
@@ -140,9 +133,7 @@ propertyNames.OBJECT_ROOT =
   'getProp,setProp,' +
   'copyProp,propCount,inProp,' +
   ''
-const object = _copyProperty(_object,
-  propertyNames.OBJECT_PUBLIC
-);
+const object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString;
@@ -166,10 +157,7 @@ propertyNames.CONSOLE_HOOK = [
   isPrefixAdd('unHook', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixAdd('accept', propertyNames._CONSOLE_HOOK_BASE),
 ].join(',')
-
-const consoleHook = _copyProperty(_consoleHook,
-  propertyNames.CONSOLE_HOOK
-);
+const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = {
   VERSION,

@@ -10,7 +10,7 @@ const test_execute_convert = (parts) => {
     numberToString,
     stringToNumber, stringToNumberDefault,
     stringToIntegerDefault,
-    toNumber,
+    toNumber, toInteger,
   } = parts.convert;
 
   const test_numberToString = () => {
@@ -161,7 +161,6 @@ const test_execute_convert = (parts) => {
     checkEqual(3.14,      stringToNumberDefault('314e-2'));
     checkEqual(3.14,      stringToNumberDefault('0.0314E+2'));
     checkEqual(0.14,      stringToNumberDefault('.14'));
-
     checkEqual('1e-17',   0.00000000000000001.toString());
     checkEqual(0.00000000000000001, stringToNumberDefault('1e-17'));
     checkEqual(1e-17, stringToNumberDefault('1e-17'));
@@ -356,6 +355,47 @@ const test_execute_convert = (parts) => {
   };
 
   const test_NumerCast = () => {
+    // Integer
+    checkEqual(123,       Number('123'));
+    checkEqual(123,       Number('0123'));
+    checkEqual(123,       Number('+123'));
+    checkEqual(-123,      Number('-0123'));
+    checkEqual(123,       Number(' 123'), '1');
+    checkEqual(123,       Number('123 '), '2');
+    checkEqual(123,       Number(' 123 '), '3');
+    checkEqual(123,       Number('　123'), '4');
+    checkEqual(123,       Number('123　'), '5');
+    checkEqual(123,       Number('　123　'), '6');
+    checkEqual(NaN,       Number('123 0'));
+    checkEqual(NaN,       Number('0 123'));
+    checkEqual(NaN,       Number('1 123'));
+    checkEqual(NaN,       Number('123a'));
+    checkEqual(NaN,       Number('a123'));
+
+    // Decimal
+    checkEqual(123.4,     Number('123.4'));
+    checkEqual(123.4,     Number('0123.4'));
+    checkEqual(123.4,     Number('+123.4'));
+    checkEqual(-123.4,    Number('-0123.4'));
+    checkEqual(123.4,     Number(' 123.4'));
+    checkEqual(123.4,     Number('123.4 '));
+    checkEqual(123.4,     Number(' 123.4 '));
+    checkEqual(123.4,     Number('　123.4'));
+    checkEqual(123.4,     Number('123.4　'));
+    checkEqual(123.4,     Number('　123.4　'));
+    checkEqual(NaN,       Number('123.4 0'));
+    checkEqual(NaN,       Number('0 123.4'));
+    checkEqual(NaN,       Number('1 123.4'));
+    checkEqual(NaN,       Number('123 .4'));
+    checkEqual(NaN,       Number('123. 4'));
+    checkEqual(NaN,       Number('123.4a'));
+    checkEqual(NaN,       Number('a123.4'));
+    checkEqual(123.45,    Number('123.45'));
+    checkEqual(NaN,       Number('123.4.5'));
+
+    // string default value
+    checkEqual(NaN,       Number('abc'));
+
     // space string
     checkEqual(0,         Number(''));
     checkEqual(0,         Number(' '));
@@ -371,6 +411,8 @@ const test_execute_convert = (parts) => {
     checkEqual(3.14,  Number('314e-2'));
     checkEqual(3.14,  Number('0.0314E+2'));
     checkEqual(0.14,  Number('.14'));
+    checkEqual(0.00000000000000001, Number('1e-17'));
+    checkEqual(1e-17, Number('1e-17'));
 
     // exponential notation detail
     checkEqual(1,       Number('1.'));
@@ -398,18 +440,51 @@ const test_execute_convert = (parts) => {
     checkEqual(NaN,       Number('infinity'));
     checkEqual(NaN,       Number('inf'));
     checkEqual(NaN,       Number('info'));
-
   };
 
   const test_toNumber = () => {
+    // Integer
+    checkEqual(123,       toNumber('123'));
+    checkEqual(123,       toNumber('0123'));
+    checkEqual(123,       toNumber('+123'));
+    checkEqual(-123,      toNumber('-0123'));
+    checkEqual(NaN,       toNumber(' 123'), '1');
+    checkEqual(NaN,       toNumber('123 '), '2');
+    checkEqual(NaN,       toNumber(' 123 '), '3');
+    checkEqual(NaN,       toNumber('　123'), '4');
+    checkEqual(NaN,       toNumber('123　'), '5');
+    checkEqual(NaN,       toNumber('　123　'), '6');
+    checkEqual(NaN,       toNumber('123 0'));
+    checkEqual(NaN,       toNumber('0 123'));
+    checkEqual(NaN,       toNumber('1 123'));
+    checkEqual(NaN,       toNumber('123a'));
+    checkEqual(NaN,       toNumber('a123'));
+
+    // Decimal
+    checkEqual(123.4,     toNumber('123.4'));
+    checkEqual(123.4,     toNumber('0123.4'));
+    checkEqual(123.4,     toNumber('+123.4'));
+    checkEqual(-123.4,    toNumber('-0123.4'));
+    checkEqual(NaN,       toNumber(' 123.4'));
+    checkEqual(NaN,       toNumber('123.4 '));
+    checkEqual(NaN,       toNumber(' 123.4 '));
+    checkEqual(NaN,       toNumber('　123.4'));
+    checkEqual(NaN,       toNumber('123.4　'));
+    checkEqual(NaN,       toNumber('　123.4　'));
+    checkEqual(NaN,       toNumber('123.4 0'));
+    checkEqual(NaN,       toNumber('0 123.4'));
+    checkEqual(NaN,       toNumber('1 123.4'));
+    checkEqual(NaN,       toNumber('123 .4'));
+    checkEqual(NaN,       toNumber('123. 4'));
+    checkEqual(NaN,       toNumber('123.4a'));
+    checkEqual(NaN,       toNumber('a123.4'));
+    checkEqual(123.45,    toNumber('123.45'));
+    checkEqual(NaN,       toNumber('123.4.5'));
+
     // space string
     checkEqual(NaN,         toNumber(''));
     checkEqual(NaN,         toNumber(' '));
-    if (parts.platform.wsh) {
-      checkEqual(NaN,       toNumber('　'));
-    } else {
-      checkEqual(NaN,         toNumber('　'));
-    }
+    checkEqual(NaN,         toNumber('　'));
 
     // exponential notation
     checkEqual(3.14,  toNumber(3.14));
@@ -432,20 +507,90 @@ const test_execute_convert = (parts) => {
     checkEqual(NaN,       toNumber('0x123'));
     checkEqual(NaN,       toNumber('+0x123'));
     checkEqual(NaN,       toNumber('-0x123'));
-    if (parts.platform.wsh) {
-      checkEqual(NaN,       toNumber('0o123'));
-    } else {
-      checkEqual(NaN,        toNumber('0o123'));
-    }
+    checkEqual(NaN,       toNumber('0o123'));
     checkEqual(NaN,       toNumber('+0o123'));
     checkEqual(NaN,       toNumber('-0o123'));
 
-    checkEqual(NaN,  toNumber('Infinity'));
+    checkEqual(NaN,       toNumber('Infinity'));
     checkEqual(NaN,       toNumber('infinity'));
     checkEqual(NaN,       toNumber('inf'));
     checkEqual(NaN,       toNumber('info'));
-
   };
+
+  const test_toInteger = () => {
+    // Integer
+    checkEqual(123,       toInteger('123'));
+    checkEqual(123,       toInteger('0123'));
+    checkEqual(123,       toInteger('+123'));
+    checkEqual(-123,      toInteger('-0123'));
+    checkEqual(NaN,       toInteger(' 123'), '1');
+    checkEqual(NaN,       toInteger('123 '), '2');
+    checkEqual(NaN,       toInteger(' 123 '), '3');
+    checkEqual(NaN,       toInteger('　123'), '4');
+    checkEqual(NaN,       toInteger('123　'), '5');
+    checkEqual(NaN,       toInteger('　123　'), '6');
+    checkEqual(NaN,       toInteger('123 0'));
+    checkEqual(NaN,       toInteger('0 123'));
+    checkEqual(NaN,       toInteger('1 123'));
+    checkEqual(NaN,       toInteger('123a'));
+    checkEqual(NaN,       toInteger('a123'));
+
+    // Decimal
+    checkEqual(123,       toInteger('123.4'));
+    checkEqual(123,       toInteger('0123.4'));
+    checkEqual(123,       toInteger('+123.4'));
+    checkEqual(-123,      toInteger('-0123.4'));
+    checkEqual(NaN,       toInteger(' 123.4'));
+    checkEqual(NaN,       toInteger('123.4 '));
+    checkEqual(NaN,       toInteger(' 123.4 '));
+    checkEqual(NaN,       toInteger('　123.4'));
+    checkEqual(NaN,       toInteger('123.4　'));
+    checkEqual(NaN,       toInteger('　123.4　'));
+    checkEqual(NaN,       toInteger('123.4 0'));
+    checkEqual(NaN,       toInteger('0 123.4'));
+    checkEqual(NaN,       toInteger('1 123.4'));
+    checkEqual(NaN,       toInteger('123 .4'));
+    checkEqual(NaN,       toInteger('123. 4'));
+    checkEqual(NaN,       toInteger('123.4a'));
+    checkEqual(NaN,       toInteger('a123.4'));
+    checkEqual(123,       toInteger('123.45'));
+    checkEqual(NaN,       toInteger('123.4.5'));
+
+    // space string
+    checkEqual(NaN,       toInteger(''));
+    checkEqual(NaN,       toInteger(' '));
+    checkEqual(NaN,       toInteger('　'));
+
+    // exponential notation
+    checkEqual(3,       toInteger(3.14));
+    checkEqual(3,       toInteger('3.14'));
+    checkEqual(3,       toInteger('314e-2'));
+    checkEqual(3,       toInteger('0.0314E+2'));
+    checkEqual(0,       toInteger('.14'));
+
+    // exponential notation detail
+    checkEqual(1,       toInteger('1.'));
+    checkEqual(NaN,     toInteger('1.1e'));
+    checkEqual(NaN,     toInteger('1.1e+'));
+    checkEqual(100000,  toInteger('1e+5'));
+    checkEqual(0,       toInteger('1e-5'));
+    checkEqual(NaN,     toInteger('1.e'));
+    checkEqual(NaN,     toInteger('1.e+'));
+    checkEqual(100000,  toInteger('1.e+5'));
+
+    // Numer different
+    checkEqual(NaN,       toInteger('0x123'));
+    checkEqual(NaN,       toInteger('+0x123'));
+    checkEqual(NaN,       toInteger('-0x123'));
+    checkEqual(NaN,       toInteger('0o123'));
+    checkEqual(NaN,       toInteger('+0o123'));
+    checkEqual(NaN,       toInteger('-0o123'));
+
+    checkEqual(NaN,       toInteger('Infinity'));
+    checkEqual(NaN,       toInteger('infinity'));
+    checkEqual(NaN,       toInteger('inf'));
+    checkEqual(NaN,       toInteger('info'));
+  }
 
   console.log('  test convert.js');
   test_numberToString();
@@ -453,6 +598,7 @@ const test_execute_convert = (parts) => {
   test_stringToIntegerDefault();
   test_NumerCast();
   test_toNumber();
+  test_toInteger();
 }
 
 module.exports = {
