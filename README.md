@@ -101,8 +101,9 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 2.12.0
-### 2019/11/14(Thu)
+### 2019/11/15(Fri)
 - add toNumber toNumberDefault
+- delete constant.js
 
 ### 2.11.0
 #### 2019/11/06(Wed)

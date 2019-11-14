@@ -1,5 +1,4 @@
 const polyfill = require('./polyfill.js');
-const _constant = require('./constant.js');
 const _root = require('./root/root.js');
 const _type = require('./type/type.js');
 const _test = require('./test/test.js');
@@ -12,90 +11,164 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '2.11.0';
+const VERSION = '2.12.0 beta';
 
-let rootNames = {};
+const rootNames = {};
+const propertyNames = {};
+
+const { _copyProperty } = _object;
+const { _replaceAll } = _string;
 
 // root
-const root = _object._copyProperty(_root,
-  _constant.propertyNames.ROOT
-);
-_object._copyProperty(_root,
-  _constant.propertyNames.ROOT,
-  rootNames
-);
+propertyNames.ROOT =
+  'clone, cloneDeep,' +
+  'cloneFunction,' +
+  '';
+const root = _copyProperty(_root, propertyNames.ROOT);
+_copyProperty(_root, propertyNames.ROOT, rootNames);
 
 // type
-const type = _object._copyProperty(_type,
-  _constant.propertyNames.TYPE
-);
-rootNames = { ...rootNames, ...type };
+propertyNames._TYPE_BASE =
+  'Undefined,Null,NaNStrict,' +
+  'Boolean,Number,Integer,String,' +
+  'Function,Object,ObjectType,' +
+  'Array,ArrayType,' +
+  'Date,RegExp,' +
+  'Exception,' +
+  'Symbol,' +
+  'Map,WeakMap,Set,WeakSet,' +
+  'BooleanObject,NumberObject,StringObject,' +
+  'Bool,Num,Int,Str,' +
+  'Func,Obj,ObjType,' +
+  'Except,' +
+  '';
+
+const isPrefixAdd = (prefix, commaString) =>
+  _replaceAll(commaString, ' ', '').split(',')
+  .map(item => prefix + item).join(',');
+
+propertyNames.TYPE = [
+  isPrefixAdd('is', propertyNames._TYPE_BASE),
+  isPrefixAdd('isNot', propertyNames._TYPE_BASE)
+].join(',')
+
+const type = _copyProperty(_type, propertyNames.TYPE);
+_copyProperty(_type, propertyNames.TYPE, rootNames);
 
 // test
-const test = _object._copyProperty(_test,
-  _constant.propertyNames.TEST
-);
-rootNames = { ...rootNames, ...test };
+propertyNames.TEST =
+  'checkEqual,' +
+  'isThrown,isThrownValue,isThrownException,isNotThrown,' +
+  '';
+const test = _copyProperty(_test, propertyNames.TEST);
+_copyProperty(_test, propertyNames.TEST, rootNames);
 
 // syntax
-const syntax = _object._copyProperty(_syntax,
-  _constant.propertyNames.SYNTAX
+propertyNames.SYNTAX =
+  'assert,guard,' +
+  'sc,if_,switch_,' +
+  '';
+const syntax = _copyProperty(_syntax,
+  propertyNames.SYNTAX
 );
-rootNames = { ...rootNames, ...syntax };
+_copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
 
 // compare
-const compare = _object._copyProperty(_compare,
-  _constant.propertyNames.COMPARE
+propertyNames.COMPARE =
+  'equal, equalDeep,' +
+  'equalFunction,' +
+  'or,' +
+  'match,matchValue,initialValue,' +
+  'matchAll,matchSomeIndex,matchSome,' +
+  'matchEvery,matchAnyIndex,matchAny,' +
+  'isEmpty,' +
+  '';
+const compare = _copyProperty(_compare,
+  propertyNames.COMPARE
 );
-rootNames = { ...rootNames, ...compare };
+_copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
 // convert
-const convert = _object._copyProperty(_convert,
-  _constant.propertyNames.CONVERT
+propertyNames.CONVERT =
+  'numberToString,' +
+  'stringToNumber,stringToNumberDefault,' +
+  'stringToInteger,stringToIntegerDefault,' +
+  'toNumber, toNumberDefault,' +
+  'toInteger, toIntegerDefault,' +
+
+  'numToString,' +
+  'strToNumber,strToNumberDef,' +
+  'strToInteger,strToIntegerDef,' +
+  'toNum, toNumDef,' +
+  'toInt, toIntDef,' +
+
+  'numToStr,' +
+  'strToNum,strToNumDef,' +
+  'strToInt,strToIntDef,' +
+  ''
+const convert = _copyProperty(_convert,
+  propertyNames.CONVERT
 );
-rootNames = { ...rootNames, ...convert };
+_copyProperty(_convert, propertyNames.CONVERT, rootNames);
 
 // number
-const number = _object._copyProperty(_number,
-  _constant.propertyNames.NUMBER
-);
-_object._copyProperty(_number,
-  _constant.propertyNames.NUMBER,
-  rootNames
-);
+propertyNames.NUMBER =
+  'isMultiples,isEven,isOdd,' +
+  'round,nearEqual,inRange,randomInt,' +
+  ''
+const number = _copyProperty(_number, propertyNames.NUMBER);
+_copyProperty(_number, propertyNames.NUMBER, rootNames);
 
 // string
-const string = _object._copyProperty(_string,
-  _constant.propertyNames.STRING_PUBLIC
-);
-_object._copyProperty(_string,
-  _constant.propertyNames.STRING_ROOT,
-  rootNames
-);
+propertyNames.STRING_PUBLIC =
+  'matchFormat,includes,replaceAll,' +
+  ''
+propertyNames.STRING_ROOT =
+  'matchFormat,replaceAll,' +
+  ''
+const string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
+_copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 
 // object
-const object = _object._copyProperty(_object,
-  _constant.propertyNames.OBJECT_PUBLIC
+propertyNames.OBJECT_PUBLIC =
+  'copyProperty,propertyCount,inProperty,' +
+  'getProperty,setProperty,' +
+  'copyProp,propCount,inProp,' +
+  ''
+propertyNames.OBJECT_ROOT =
+  'copyProperty,propertyCount,inProperty,' +
+  'getProp,setProp,' +
+  'copyProp,propCount,inProp,' +
+  ''
+const object = _copyProperty(_object,
+  propertyNames.OBJECT_PUBLIC
 );
-_object._copyProperty(_object,
-  _constant.propertyNames.OBJECT_ROOT,
-  rootNames
-);
+_copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString;
 
 // array
-const array = _object._copyProperty(_array,
-  _constant.propertyNames.ARRAY_PUBLIC
-);
-_object._copyProperty(_array,
-  _constant.propertyNames.ARRAY_ROOT,
-  rootNames
-);
+propertyNames.ARRAY_PUBLIC =
+  'equal,' +
+  'min, max,' +
+  ''
+propertyNames.ARRAY_ROOT =
+  'min, max,' +
+  ''
+const array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
+_copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);
 
 // consoleHook
-const consoleHook = _object._copyProperty(_consoleHook,
-  _constant.propertyNames.CONSOLE_HOOK
+propertyNames._CONSOLE_HOOK_BASE =
+  ',Log,Info,Warn,Error,Debug';
+propertyNames.CONSOLE_HOOK = [
+  isPrefixAdd('hook', propertyNames._CONSOLE_HOOK_BASE),
+  isPrefixAdd('unHook', propertyNames._CONSOLE_HOOK_BASE),
+  isPrefixAdd('accept', propertyNames._CONSOLE_HOOK_BASE),
+].join(',')
+
+const consoleHook = _copyProperty(_consoleHook,
+  propertyNames.CONSOLE_HOOK
 );
 
 module.exports = {
