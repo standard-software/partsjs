@@ -40,6 +40,16 @@ const test_execute_number = (parts) => {
     }));
   };
 
+  const test_Math_round = () => {
+    checkEqual(5,    Math.round(5));
+    checkEqual(5,    Math.round(5.4));
+    checkEqual(6,    Math.round(5.5));
+
+    checkEqual(-5,    Math.round(-5));
+    checkEqual(-5,    Math.round(-5.4));
+    checkEqual(-5,    Math.round(-5.5));
+  }
+
   const test_round = () => {
     checkEqual(5,    round(5));
     checkEqual(5,    round(5.4));
@@ -189,6 +199,7 @@ const test_execute_number = (parts) => {
 
   console.log('  test number.js');
   test_isMultiples();
+  test_Math_round();
   test_round();
   test_nearEqual();
   test_inRange();

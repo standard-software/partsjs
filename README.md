@@ -100,6 +100,10 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 2.12.0
+### 2019/11/14(Thu)
+- add toNumber toNumberDefault
+
 ### 2.11.0
 #### 2019/11/06(Wed)
 - update matchFormat

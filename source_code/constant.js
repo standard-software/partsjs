@@ -59,10 +59,14 @@ const CONVERT =
   'numberToString,' +
   'stringToNumber,stringToNumberDefault,' +
   'stringToInteger,stringToIntegerDefault,' +
+  'toNumber, toNumberDefault,' +
+  'toInteger, toIntegerDefault,' +
 
   'numToString,' +
   'strToNumber,strToNumberDef,' +
   'strToInteger,strToIntegerDef,' +
+  'toNum, toNumDef,' +
+  'toInt, toIntDef,' +
 
   'numToStr,' +
   'strToNum,strToNumDef,' +

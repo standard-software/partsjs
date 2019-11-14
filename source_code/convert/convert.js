@@ -23,6 +23,10 @@ const {
   _copyProperty,_propertyCount,_inProperty,
 } = require('../object/object.js');
 
+const {
+  _round,
+} = require('../number/number.js');
+
 
 /**
  * numberToString
@@ -150,7 +154,7 @@ const stringToNumberDefault = (
 /**
  * stringToInteger
  */
-const __stringToInteger = (
+const _stringToIntegerBase = (
   value,
   defaultValueFunc,
   radix = 10,
@@ -219,7 +223,7 @@ const _stringToIntegerDefault = (
   defaultValue,
   radix = 10,
 ) => {
-  return __stringToInteger(
+  return _stringToIntegerBase(
     value,
     () => defaultValue,
     radix,
@@ -258,6 +262,55 @@ const stringToIntegerDefault = (
   );
 };
 
+/**
+ * toNumber
+ */
+const toNumber = (value) => {
+  if (_isNull(value)) {
+    return NaN;
+  }
+  if (!_isString(value)) {
+    return Number(value)
+  }
+  return stringToNumberDefault(value, NaN);
+};
+
+const toNumberDefault = (value, defaultValue) => {
+  if (_inProperty(value, 'value,defaultValue')) {
+    ({ value, defaultValue } = value);
+  }
+
+  const result = toNumber(value);
+  if (_isNaNStrict(result)) {
+    return defaultValue;
+  }
+  return result;
+};
+
+/**
+ * toInteger
+ */
+const toInteger = (value) => {
+  const result = toNumber(value);
+  if (_isNaNStrict(result)) {
+    return NaN;
+  }
+  return _round(result);
+};
+
+const toIntegerDefault = (value, defaultValue) => {
+  if (_inProperty(value, 'value,defaultValue')) {
+    ({ value, defaultValue } = value);
+  }
+
+  const result = toInteger(value);
+  if (_isNaNStrict(result)) {
+    return defaultValue;
+  }
+  return result;
+};
+
+
 const numToString     = numberToString;
 const strToNumber     = stringToNumber;
 const strToNumberDef  = stringToNumberDefault;
@@ -270,14 +323,23 @@ const strToNumDef     = stringToNumberDefault;
 const strToInt        = stringToInteger;
 const strToIntDef     = stringToIntegerDefault;
 
+const toNum           = toNumber;
+const toNumDef        = toNumberDefault;
+const toInt           = toInteger;
+const toIntDef        = toIntegerDefault;
+
 module.exports = {
   numberToString,
   stringToNumber, stringToNumberDefault,
   stringToInteger, stringToIntegerDefault,
+  toNumber, toNumberDefault,
+  toInteger, toIntegerDefault,
 
   numToString,
   strToNumber, strToNumberDef,
   strToInteger, strToIntegerDef,
+  toNum, toNumDef,
+  toInt, toIntDef,
 
   numToStr,
   strToNum, strToNumDef,

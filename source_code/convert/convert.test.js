@@ -10,6 +10,7 @@ const test_execute_convert = (parts) => {
     numberToString,
     stringToNumber, stringToNumberDefault,
     stringToIntegerDefault,
+    toNumber,
   } = parts.convert;
 
   const test_numberToString = () => {
@@ -151,23 +152,11 @@ const test_execute_convert = (parts) => {
     checkEqual(NaN,       stringToNumberDefault('abc', NaN));
 
     // space string
-    checkEqual(0,         Number(''));
-    checkEqual(0,         Number(' '));
-    if (parts.platform.wsh) {
-      checkEqual(NaN,       Number('　'));
-    } else {
-      checkEqual(0,         Number('　'));
-    }
     checkEqual(undefined, stringToNumberDefault(''));
     checkEqual(undefined, stringToNumberDefault(' '));
     checkEqual(undefined, stringToNumberDefault('　'));
 
     // exponential notation
-    checkEqual(3.14,  Number(3.14));
-    checkEqual(3.14,  Number('3.14'));
-    checkEqual(3.14,  Number('314e-2'));
-    checkEqual(3.14,  Number('0.0314E+2'));
-    checkEqual(0.14,  Number('.14'));
     checkEqual(3.14,      stringToNumberDefault('3.14'));
     checkEqual(3.14,      stringToNumberDefault('314e-2'));
     checkEqual(3.14,      stringToNumberDefault('0.0314E+2'));
@@ -178,14 +167,6 @@ const test_execute_convert = (parts) => {
     checkEqual(1e-17, stringToNumberDefault('1e-17'));
 
     // exponential notation detail
-    checkEqual(1,       Number('1.'));
-    checkEqual(NaN,     Number('1.1e'));
-    checkEqual(NaN,     Number('1.1e+'));
-    checkEqual(100000,  Number('1e+5'));
-    checkEqual(0.00001, Number('1e-5'));
-    checkEqual(NaN,     Number('1.e'));
-    checkEqual(NaN,     Number('1.e+'));
-    checkEqual(100000,  Number('1.e+5'));
     checkEqual(1,         stringToNumberDefault('1.'));
     checkEqual(undefined, stringToNumberDefault('1.1e'));
     checkEqual(undefined, stringToNumberDefault('1.1e+'));
@@ -196,16 +177,6 @@ const test_execute_convert = (parts) => {
     checkEqual(100000,    stringToNumberDefault('1.e+5'));
 
     // Numer different
-    checkEqual(291,       Number('0x123'));
-    checkEqual(NaN,       Number('+0x123'));
-    checkEqual(NaN,       Number('-0x123'));
-    if (parts.platform.wsh) {
-      checkEqual(NaN,       Number('0o123'));
-    } else {
-      checkEqual(83,        Number('0o123'));
-    }
-    checkEqual(NaN,       Number('+0o123'));
-    checkEqual(NaN,       Number('-0o123'));
     checkEqual(undefined, stringToNumberDefault('0x123'));
     checkEqual(undefined, stringToNumberDefault('+0x123'));
     checkEqual(undefined, stringToNumberDefault('-0x123'));
@@ -213,10 +184,6 @@ const test_execute_convert = (parts) => {
     checkEqual(undefined, stringToNumberDefault('+0x123'));
     checkEqual(undefined, stringToNumberDefault('-0x123'));
 
-    checkEqual(Infinity,  Number('Infinity'));
-    checkEqual(NaN,       Number('infinity'));
-    checkEqual(NaN,       Number('inf'));
-    checkEqual(NaN,       Number('info'));
     checkEqual(undefined, stringToNumberDefault('Infinity'));
     checkEqual(undefined, stringToNumberDefault('infinity'));
     checkEqual(undefined, stringToNumberDefault('inf'));
@@ -388,10 +355,104 @@ const test_execute_convert = (parts) => {
     }));
   };
 
+  const test_NumerCast = () => {
+    // space string
+    checkEqual(0,         Number(''));
+    checkEqual(0,         Number(' '));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       Number('　'));
+    } else {
+      checkEqual(0,         Number('　'));
+    }
+
+    // exponential notation
+    checkEqual(3.14,  Number(3.14));
+    checkEqual(3.14,  Number('3.14'));
+    checkEqual(3.14,  Number('314e-2'));
+    checkEqual(3.14,  Number('0.0314E+2'));
+    checkEqual(0.14,  Number('.14'));
+
+    // exponential notation detail
+    checkEqual(1,       Number('1.'));
+    checkEqual(NaN,     Number('1.1e'));
+    checkEqual(NaN,     Number('1.1e+'));
+    checkEqual(100000,  Number('1e+5'));
+    checkEqual(0.00001, Number('1e-5'));
+    checkEqual(NaN,     Number('1.e'));
+    checkEqual(NaN,     Number('1.e+'));
+    checkEqual(100000,  Number('1.e+5'));
+
+    // Numer different
+    checkEqual(291,       Number('0x123'));
+    checkEqual(NaN,       Number('+0x123'));
+    checkEqual(NaN,       Number('-0x123'));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       Number('0o123'));
+    } else {
+      checkEqual(83,        Number('0o123'));
+    }
+    checkEqual(NaN,       Number('+0o123'));
+    checkEqual(NaN,       Number('-0o123'));
+
+    checkEqual(Infinity,  Number('Infinity'));
+    checkEqual(NaN,       Number('infinity'));
+    checkEqual(NaN,       Number('inf'));
+    checkEqual(NaN,       Number('info'));
+
+  };
+
+  const test_toNumber = () => {
+    // space string
+    checkEqual(NaN,         toNumber(''));
+    checkEqual(NaN,         toNumber(' '));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       toNumber('　'));
+    } else {
+      checkEqual(NaN,         toNumber('　'));
+    }
+
+    // exponential notation
+    checkEqual(3.14,  toNumber(3.14));
+    checkEqual(3.14,  toNumber('3.14'));
+    checkEqual(3.14,  toNumber('314e-2'));
+    checkEqual(3.14,  toNumber('0.0314E+2'));
+    checkEqual(0.14,  toNumber('.14'));
+
+    // exponential notation detail
+    checkEqual(1,       toNumber('1.'));
+    checkEqual(NaN,     toNumber('1.1e'));
+    checkEqual(NaN,     toNumber('1.1e+'));
+    checkEqual(100000,  toNumber('1e+5'));
+    checkEqual(0.00001, toNumber('1e-5'));
+    checkEqual(NaN,     toNumber('1.e'));
+    checkEqual(NaN,     toNumber('1.e+'));
+    checkEqual(100000,  toNumber('1.e+5'));
+
+    // Numer different
+    checkEqual(NaN,       toNumber('0x123'));
+    checkEqual(NaN,       toNumber('+0x123'));
+    checkEqual(NaN,       toNumber('-0x123'));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       toNumber('0o123'));
+    } else {
+      checkEqual(NaN,        toNumber('0o123'));
+    }
+    checkEqual(NaN,       toNumber('+0o123'));
+    checkEqual(NaN,       toNumber('-0o123'));
+
+    checkEqual(NaN,  toNumber('Infinity'));
+    checkEqual(NaN,       toNumber('infinity'));
+    checkEqual(NaN,       toNumber('inf'));
+    checkEqual(NaN,       toNumber('info'));
+
+  };
+
   console.log('  test convert.js');
   test_numberToString();
   test_stringToNumber();
   test_stringToIntegerDefault();
+  test_NumerCast();
+  test_toNumber();
 }
 
 module.exports = {
