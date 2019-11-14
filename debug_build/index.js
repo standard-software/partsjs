@@ -8,8 +8,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var polyfill = require('./polyfill.js');
 
-var _constant = require('./constant.js');
-
 var _root = require('./root/root.js');
 
 var _type = require('./type/type.js');
@@ -32,57 +30,99 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '2.11.0';
-var rootNames = {}; // root
+var VERSION = '2.12.0 beta';
+var rootNames = {};
+var propertyNames = {};
+var _copyProperty = _object._copyProperty;
+var _replaceAll = _string._replaceAll; // root
 
-var root = _object._copyProperty(_root, _constant.propertyNames.ROOT);
+propertyNames.ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + '';
 
-_object._copyProperty(_root, _constant.propertyNames.ROOT, rootNames); // type
+var root = _copyProperty(_root, propertyNames.ROOT);
 
-
-var type = _object._copyProperty(_type, _constant.propertyNames.TYPE);
-
-rootNames = _objectSpread({}, rootNames, {}, type); // test
-
-var test = _object._copyProperty(_test, _constant.propertyNames.TEST);
-
-rootNames = _objectSpread({}, rootNames, {}, test); // syntax
-
-var syntax = _object._copyProperty(_syntax, _constant.propertyNames.SYNTAX);
-
-rootNames = _objectSpread({}, rootNames, {}, syntax); // compare
-
-var compare = _object._copyProperty(_compare, _constant.propertyNames.COMPARE);
-
-rootNames = _objectSpread({}, rootNames, {}, compare); // convert
-
-var convert = _object._copyProperty(_convert, _constant.propertyNames.CONVERT);
-
-rootNames = _objectSpread({}, rootNames, {}, convert); // number
-
-var number = _object._copyProperty(_number, _constant.propertyNames.NUMBER);
-
-_object._copyProperty(_number, _constant.propertyNames.NUMBER, rootNames); // string
+_copyProperty(_root, propertyNames.ROOT, rootNames); // type
 
 
-var string = _object._copyProperty(_string, _constant.propertyNames.STRING_PUBLIC);
+propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
 
-_object._copyProperty(_string, _constant.propertyNames.STRING_ROOT, rootNames); // object
+var isPrefixAdd = function isPrefixAdd(prefix, commaString) {
+  return _replaceAll(commaString, ' ', '').split(',').map(function (item) {
+    return prefix + item;
+  }).join(',');
+};
+
+propertyNames.TYPE = [isPrefixAdd('is', propertyNames._TYPE_BASE), isPrefixAdd('isNot', propertyNames._TYPE_BASE)].join(',');
+
+var type = _copyProperty(_type, propertyNames.TYPE);
+
+_copyProperty(_type, propertyNames.TYPE, rootNames); // test
 
 
-var object = _object._copyProperty(_object, _constant.propertyNames.OBJECT_PUBLIC);
+propertyNames.TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 
-_object._copyProperty(_object, _constant.propertyNames.OBJECT_ROOT, rootNames);
+var test = _copyProperty(_test, propertyNames.TEST);
+
+_copyProperty(_test, propertyNames.TEST, rootNames); // syntax
+
+
+propertyNames.SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + '';
+
+var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
+
+_copyProperty(_syntax, propertyNames.SYNTAX, rootNames); // compare
+
+
+propertyNames.COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match,matchValue,initialValue,' + 'matchAll,matchSomeIndex,matchSome,' + 'matchEvery,matchAnyIndex,matchAny,' + 'isEmpty,' + '';
+
+var compare = _copyProperty(_compare, propertyNames.COMPARE);
+
+_copyProperty(_compare, propertyNames.COMPARE, rootNames); // convert
+
+
+propertyNames.CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'toNumber, toNumberDefault,' + 'toInteger, toIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'toNum, toNumDef,' + 'toInt, toIntDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + '';
+
+var convert = _copyProperty(_convert, propertyNames.CONVERT);
+
+_copyProperty(_convert, propertyNames.CONVERT, rootNames); // number
+
+
+propertyNames.NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' + '';
+
+var number = _copyProperty(_number, propertyNames.NUMBER);
+
+_copyProperty(_number, propertyNames.NUMBER, rootNames); // string
+
+
+propertyNames.STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
+propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + '';
+
+var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
+
+_copyProperty(_string, propertyNames.STRING_ROOT, rootNames); // object
+
+
+propertyNames.OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'copyProp,propCount,inProp,' + '';
+propertyNames.OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'getProp,setProp,' + 'copyProp,propCount,inProp,' + '';
+
+var object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
+
+_copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-var array = _object._copyProperty(_array, _constant.propertyNames.ARRAY_PUBLIC);
+propertyNames.ARRAY_PUBLIC = 'equal,' + 'min, max,' + '';
+propertyNames.ARRAY_ROOT = 'min, max,' + '';
 
-_object._copyProperty(_array, _constant.propertyNames.ARRAY_ROOT, rootNames); // consoleHook
+var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
+
+_copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames); // consoleHook
 
 
-var consoleHook = _object._copyProperty(_consoleHook, _constant.propertyNames.CONSOLE_HOOK);
+propertyNames._CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
+propertyNames.CONSOLE_HOOK = [isPrefixAdd('hook', propertyNames._CONSOLE_HOOK_BASE), isPrefixAdd('unHook', propertyNames._CONSOLE_HOOK_BASE), isPrefixAdd('accept', propertyNames._CONSOLE_HOOK_BASE)].join(',');
+
+var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = _objectSpread({
   VERSION: VERSION,

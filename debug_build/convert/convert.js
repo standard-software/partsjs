@@ -39,6 +39,9 @@ var _require4 = require('../object/object.js'),
     _copyProperty = _require4._copyProperty,
     _propertyCount = _require4._propertyCount,
     _inProperty = _require4._inProperty;
+
+var _require5 = require('../number/number.js'),
+    _round = _require5._round;
 /**
  * numberToString
  */
@@ -139,7 +142,7 @@ var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) 
  */
 
 
-var __stringToInteger = function __stringToInteger(value, defaultValueFunc) {
+var _stringToIntegerBase = function _stringToIntegerBase(value, defaultValueFunc) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
   if (value === '') {
@@ -193,7 +196,7 @@ var stringToInteger = function stringToInteger(value) {
 
 var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
-  return __stringToInteger(value, function () {
+  return _stringToIntegerBase(value, function () {
     return defaultValue;
   }, radix);
 };
@@ -223,6 +226,68 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
 
   return _stringToIntegerDefault(value, defaultValue, radix);
 };
+/**
+ * toNumber
+ */
+
+
+var toNumber = function toNumber(value) {
+  if (_isNull(value)) {
+    return NaN;
+  }
+
+  if (!_isString(value)) {
+    return Number(value);
+  }
+
+  return stringToNumberDefault(value, NaN);
+};
+
+var toNumberDefault = function toNumberDefault(value, defaultValue) {
+  if (_inProperty(value, 'value,defaultValue')) {
+    var _value6 = value;
+    value = _value6.value;
+    defaultValue = _value6.defaultValue;
+  }
+
+  var result = toNumber(value);
+
+  if (_isNaNStrict(result)) {
+    return defaultValue;
+  }
+
+  return result;
+};
+/**
+ * toInteger
+ */
+
+
+var toInteger = function toInteger(value) {
+  var result = toNumber(value);
+
+  if (_isNaNStrict(result)) {
+    return NaN;
+  }
+
+  return _round(result);
+};
+
+var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
+  if (_inProperty(value, 'value,defaultValue')) {
+    var _value7 = value;
+    value = _value7.value;
+    defaultValue = _value7.defaultValue;
+  }
+
+  var result = toInteger(value);
+
+  if (_isNaNStrict(result)) {
+    return defaultValue;
+  }
+
+  return result;
+};
 
 var numToString = numberToString;
 var strToNumber = stringToNumber;
@@ -234,17 +299,29 @@ var strToNum = stringToNumber;
 var strToNumDef = stringToNumberDefault;
 var strToInt = stringToInteger;
 var strToIntDef = stringToIntegerDefault;
+var toNum = toNumber;
+var toNumDef = toNumberDefault;
+var toInt = toInteger;
+var toIntDef = toIntegerDefault;
 module.exports = {
   numberToString: numberToString,
   stringToNumber: stringToNumber,
   stringToNumberDefault: stringToNumberDefault,
   stringToInteger: stringToInteger,
   stringToIntegerDefault: stringToIntegerDefault,
+  toNumber: toNumber,
+  toNumberDefault: toNumberDefault,
+  toInteger: toInteger,
+  toIntegerDefault: toIntegerDefault,
   numToString: numToString,
   strToNumber: strToNumber,
   strToNumberDef: strToNumberDef,
   strToInteger: strToInteger,
   strToIntegerDef: strToIntegerDef,
+  toNum: toNum,
+  toNumDef: toNumDef,
+  toInt: toInt,
+  toIntDef: toIntDef,
   numToStr: numToStr,
   strToNum: strToNum,
   strToNumDef: strToNumDef,

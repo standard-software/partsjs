@@ -41,6 +41,15 @@ var test_execute_number = function test_execute_number(parts) {
     }));
   };
 
+  var test_Math_round = function test_Math_round() {
+    checkEqual(5, Math.round(5));
+    checkEqual(5, Math.round(5.4));
+    checkEqual(6, Math.round(5.5));
+    checkEqual(-5, Math.round(-5));
+    checkEqual(-5, Math.round(-5.4));
+    checkEqual(-5, Math.round(-5.5));
+  };
+
   var test_round = function test_round() {
     checkEqual(5, round(5));
     checkEqual(5, round(5.4));
@@ -204,6 +213,7 @@ var test_execute_number = function test_execute_number(parts) {
 
   console.log('  test number.js');
   test_isMultiples();
+  test_Math_round();
   test_round();
   test_nearEqual();
   test_inRange();
