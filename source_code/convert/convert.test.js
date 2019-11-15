@@ -363,9 +363,15 @@ const test_execute_convert = (parts) => {
     checkEqual(123,       Number(' 123'), '1');
     checkEqual(123,       Number('123 '), '2');
     checkEqual(123,       Number(' 123 '), '3');
-    checkEqual(123,       Number('　123'), '4');
-    checkEqual(123,       Number('123　'), '5');
-    checkEqual(123,       Number('　123　'), '6');
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       Number('　123'), '4');
+      checkEqual(NaN,       Number('123　'), '5');
+      checkEqual(NaN,       Number('　123　'), '6');
+    } else {
+      checkEqual(123,       Number('　123'), '4');
+      checkEqual(123,       Number('123　'), '5');
+      checkEqual(123,       Number('　123　'), '6');
+    }
     checkEqual(NaN,       Number('123 0'));
     checkEqual(NaN,       Number('0 123'));
     checkEqual(NaN,       Number('1 123'));
@@ -380,9 +386,15 @@ const test_execute_convert = (parts) => {
     checkEqual(123.4,     Number(' 123.4'));
     checkEqual(123.4,     Number('123.4 '));
     checkEqual(123.4,     Number(' 123.4 '));
-    checkEqual(123.4,     Number('　123.4'));
-    checkEqual(123.4,     Number('123.4　'));
-    checkEqual(123.4,     Number('　123.4　'));
+    if (parts.platform.wsh) {
+      checkEqual(NaN,       Number('　123.4'));
+      checkEqual(NaN,       Number('123.4　'));
+      checkEqual(NaN,       Number('　123.4　'));
+    } else {
+      checkEqual(123.4,     Number('　123.4'));
+      checkEqual(123.4,     Number('123.4　'));
+      checkEqual(123.4,     Number('　123.4　'));
+    }
     checkEqual(NaN,       Number('123.4 0'));
     checkEqual(NaN,       Number('0 123.4'));
     checkEqual(NaN,       Number('1 123.4'));
