@@ -103,6 +103,7 @@ You can now use the functions of the parts object.
 ### 2.12.0
 ### 2019/11/15(Fri)
 - add toNumber toNumberDefault
+- add toInteger toIntegerDefault
 - delete constant.js
 
 ### 2.11.0
@@ -131,51 +132,6 @@ You can now use the functions of the parts object.
   - add equalFunction
   - support CircularReference
 - update clone cloneDeep
-
-### 2.9.1
-#### 2019/11/04(Mon)
-- update clone cloneDeep cloneFunction
-  - support only object and arrayType
-  - clone ignore Math Object etc
-
-### 2.9.0
-#### 2019/11/01(Fri)
-- update clone cloneDeep cloneFunction
-  - support Map Set
-  - clone ignore WeakMap WeakSet
-
-### 2.8.0
-#### 2019/10/31(Thu)
-- add getProperty(getProp)
-- add setProperty(setProp)
-- update some ErrorMessage
-- bugfix matchSome matchSomeIndex
-
-### 2.7.0
-#### 2019/10/30(Wed)
-- add
-  - matchAll(matchEvery)
-  - matchSome(matchAny)
-  - matchSomeIndex(matchAnyIndex)
-- delete isXxxArray, isNotXxxArray
-
-### 2.6.2
-#### 2019/10/28(Mon)
-- add isArrayType
-- update stringToNumber stringToInteger
-- add stringToNumberDefault stringToIntegerDefault
-  - strToNumberDef strToIntegerDef
-  - strToNumDef strToIntDef
-
-### 2.6.1
-#### 2019/10/28(Mon)
-- add isBooleanObject, isNumberObject, isStringObject
-- add isMap isWeakMap isSet isWeakSet
-
-### 2.6.0
-#### 2019/10/20(Sun)
-- add isSymbol
-- update strintToNumber stringToInteger
 
 
 ### More Info
