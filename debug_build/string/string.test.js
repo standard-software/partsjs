@@ -1,5 +1,10 @@
 "use strict";
 
+/* eslint-disable comma-spacing */
+
+/* eslint-disable max-len */
+
+/* eslint-disable no-var */
 var test_execute_string = function test_execute_string(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,

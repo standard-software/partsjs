@@ -105,31 +105,31 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var polyfill = __webpack_require__(2);
+__webpack_require__(2);
 
 var _root = __webpack_require__(3);
 
 var _type = __webpack_require__(5);
 
-var _test = __webpack_require__(18);
+var _test = __webpack_require__(17);
 
-var _syntax = __webpack_require__(19);
+var _syntax = __webpack_require__(18);
 
-var _compare = __webpack_require__(20);
+var _compare = __webpack_require__(19);
 
-var _convert = __webpack_require__(23);
+var _convert = __webpack_require__(22);
 
-var _number = __webpack_require__(27);
+var _number = __webpack_require__(26);
 
-var _string = __webpack_require__(24);
+var _string = __webpack_require__(23);
 
 var _object = __webpack_require__(14);
 
-var _array = __webpack_require__(17);
+var _array = __webpack_require__(27);
 
 var _consoleHook = __webpack_require__(28);
 
-var VERSION = '2.12.0';
+var VERSION = '3.0.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -210,8 +210,8 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'equal,' + 'min, max,' + '';
-propertyNames.ARRAY_ROOT = 'min, max,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + '';
+propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, midian,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
 
@@ -248,6 +248,35 @@ module.exports = _objectSpread({
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+/* eslint-disable brace-style */
+
+/* eslint-disable space-before-blocks */
+
+/* eslint-disable comma-dangle */
+
+/* eslint-disable curly */
+
+/* eslint-disable new-cap */
+
+/* eslint-disable semi */
+
+/* eslint-disable quotes */
+
+/* eslint-disable max-len */
+
+/* eslint-disable space-before-function-paren */
+
+/* eslint-disable spaced-comment */
+
+/* eslint-disable indent */
+
+/* eslint-disable one-var */
+
+/* eslint-disable no-var */
+
+/* eslint-disable prefer-rest-params */
+
+/* eslint-disable no-extend-native */
 var polyfillDefine = function polyfillDefine() {
   if (!String.prototype.includes) {
     String.prototype.includes = function (search, start) {
@@ -625,14 +654,12 @@ var _require = __webpack_require__(5),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var object = __webpack_require__(14);
-
-var array = __webpack_require__(17);
-
-var _copyProperty = object._copyProperty;
+var _require2 = __webpack_require__(14),
+    _copyProperty = _require2._copyProperty;
 /**
  * cloneFunction
  */
+
 
 var cloneFunction = {}; // function is no clone
 
@@ -789,7 +816,6 @@ cloneFunction.cloneMap = function (source) {
 
   if (!_isMap(source)) {
     return undefined;
-    ;
   }
 
   var cloneValue = new Map();
@@ -827,7 +853,6 @@ cloneFunction.cloneMap = function (source) {
 cloneFunction.cloneIgnoreWeakMap = function (source) {
   if (!_isWeakMap(source)) {
     return undefined;
-    ;
   }
 
   return source;
@@ -841,7 +866,6 @@ cloneFunction.cloneSet = function (source) {
 
   if (!_isSet(source)) {
     return undefined;
-    ;
   }
 
   var cloneValue = new Set();
@@ -876,7 +900,6 @@ cloneFunction.cloneSet = function (source) {
 cloneFunction.cloneIgnoreWeakSet = function (source) {
   if (!_isWeakSet(source)) {
     return undefined;
-    ;
   }
 
   return source;
@@ -1268,7 +1291,8 @@ var _require2 = __webpack_require__(8),
 /**
  * _isException
  * description:
- *  _isException can determine standard Error objects and user-specific exception objects.
+ *  _isException can determine standard Error objects
+ *  and user-specific exception objects.
  *  Only whether the object has name and message properties.
  */
 
@@ -2056,140 +2080,6 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(8),
-    _inProperty = _require2._inProperty;
-/**
- * array.equal
- */
-
-
-var _equal = function _equal(value1, value2) {
-  if (value1.length !== value2.length) {
-    return false;
-  }
-
-  for (var i = 0, l = value1.length; i < l; i += 1) {
-    if (_isArray(value1[i]) && _isArray(value2[i])) {
-      if (_equal(value1[i], value2[i]) === false) {
-        return false;
-      }
-    } else if (value1[i] !== value2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-var equal = function equal(value1, value2) {
-  if (_inProperty(value1, 'value1,value2')) {
-    var _value = value1;
-    value1 = _value.value1;
-    value2 = _value.value2;
-  }
-
-  if (!_isArray(value1)) {
-    throw new TypeError('array.equal args(value) is not array');
-  }
-
-  if (!_isArray(value2)) {
-    throw new TypeError('array.equal args(value2) is not array');
-  }
-
-  return _equal(value1, value2);
-};
-/**
- * array.min max
- */
-
-
-var _min = function _min(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 1, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_min args(array) element is not number');
-    }
-
-    if (array[i] < result) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-var min = function min(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('min args(array) is not array');
-  }
-
-  return _min(array);
-};
-
-var _max = function _max(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 1, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_max args(array) element is not number');
-    }
-
-    if (result < array[i]) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-var max = function max(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('max args(array) is not array');
-  }
-
-  return _max(array);
-};
-
-module.exports = {
-  _equal: _equal,
-  _min: _min,
-  _max: _max,
-  equal: equal,
-  min: min,
-  max: max
-};
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(5),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
@@ -2278,7 +2168,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2515,7 +2405,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2527,10 +2417,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(21), {}, __webpack_require__(22));
+module.exports = _objectSpread({}, __webpack_require__(20), {}, __webpack_require__(21));
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2823,7 +2713,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3074,7 +2964,6 @@ equalFunction.equalSet = function (value1, value2) {
 
   if (!isSet(value1, value2)) {
     return;
-    ;
   }
 
   if (value1.size !== value2.size) {
@@ -3148,7 +3037,6 @@ equalFunction.equalWeakSet = function (value1, value2) {
 
   if (!isWeakSet(value1, value2)) {
     return;
-    ;
   }
 
   if (value1.size !== value2.size) {
@@ -3372,7 +3260,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3406,11 +3294,11 @@ var _require = __webpack_require__(5),
     _isNotRegExp = _require._isNotRegExp,
     _isNotException = _require._isNotException;
 
-var _require2 = __webpack_require__(20),
+var _require2 = __webpack_require__(19),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(24),
+var _require3 = __webpack_require__(23),
     _matchFormat = _require3._matchFormat;
 
 var _require4 = __webpack_require__(14),
@@ -3418,7 +3306,7 @@ var _require4 = __webpack_require__(14),
     _propertyCount = _require4._propertyCount,
     _inProperty = _require4._inProperty;
 
-var _require5 = __webpack_require__(27),
+var _require5 = __webpack_require__(26),
     _round = _require5._round;
 /**
  * numberToString
@@ -3708,7 +3596,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3720,10 +3608,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(25), {}, __webpack_require__(9), {}, __webpack_require__(26));
+module.exports = _objectSpread({}, __webpack_require__(24), {}, __webpack_require__(9), {}, __webpack_require__(25));
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3744,7 +3632,7 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(20),
+var _require2 = __webpack_require__(19),
     _match = _require2._match;
 
 var _require3 = __webpack_require__(8),
@@ -3765,7 +3653,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
   var result = _matchFormat.pattern[patterns[index]](value);
 
   if (!_isBoolean(result)) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") function result is not boolean"));
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
   }
 
   return result;
@@ -3829,7 +3717,8 @@ _matchFormat.reset = function () {
   });
 
   _matchFormat.add(['float_more'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
+    return value.match( // eslint-disable-next-line max-len
+    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
   }); // float_more
   //  integer + float + exponential notation
   //  value.match(new RegExp(
@@ -4032,7 +3921,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4087,7 +3976,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4153,9 +4042,8 @@ var isOdd = function isOdd(number) {
 
 var _round = function _round(value) {
   var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var powResult;
   var plusFlag = 0 <= value ? true : false;
-  powResult = Math.pow(10, digit);
+  var powResult = Math.pow(10, digit);
 
   if (plusFlag) {
     return Math.round(value * powResult) / powResult;
@@ -4300,6 +4188,197 @@ module.exports = {
 };
 
 /***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(26),
+    isEven = _require2.isEven;
+
+var _require3 = __webpack_require__(8),
+    _inProperty = _require3._inProperty;
+
+var _require4 = __webpack_require__(4),
+    _clone = _require4._clone,
+    _cloneDeep = _require4._cloneDeep;
+/**
+ * array.min max
+ */
+
+
+var _min = function _min(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  var result = array[0];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_min args(array) element is not number');
+    }
+
+    if (array[i] < result) {
+      result = array[i];
+    }
+  }
+
+  return result;
+};
+
+var min = function min(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('min args(array) is not array');
+  }
+
+  return _min(array);
+};
+
+var _max = function _max(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  var result = array[0];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_max args(array) element is not number');
+    }
+
+    if (result < array[i]) {
+      result = array[i];
+    }
+  }
+
+  return result;
+};
+
+var max = function max(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('max args(array) is not array');
+  }
+
+  return _max(array);
+};
+/**
+ * from
+ */
+
+
+var from = function from(arrayLike) {
+  return Array.prototype.slice.call(arrayLike);
+};
+/**
+ * sum
+ */
+
+
+var _sum = function _sum(array) {
+  var result = 0;
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_min args(array) element is not number');
+    }
+
+    result += array[i];
+  }
+
+  return result;
+};
+
+var sum = function sum(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('sum args(array) is not array');
+  }
+
+  return _sum(array);
+};
+/**
+ * average
+ */
+
+
+var _average = function _average(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  return _sum(array) / array.length;
+};
+
+var average = function average(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('average args(array) is not array');
+  }
+
+  return _average(array);
+};
+/**
+ * midian
+ */
+
+
+var _midian = function _midian(array) {
+  var sortedArray = _cloneDeep(array);
+
+  sortedArray.sort(function (a, b) {
+    return a - b;
+  });
+
+  if (isEven(sortedArray.length)) {
+    // Even number length
+    var centerIndex = sortedArray.length / 2;
+    return (sortedArray[centerIndex - 1] + sortedArray[centerIndex]) / 2;
+  } else {
+    // Odd number length
+    return sortedArray[(sortedArray.length - 1) / 2];
+  }
+};
+
+var midian = function midian(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('midian args(array) is not array');
+  }
+
+  return _midian(array);
+};
+
+module.exports = {
+  _min: _min,
+  _max: _max,
+  _sum: _sum,
+  _average: _average,
+  _midian: _midian,
+  // _mode,
+  from: from,
+  min: min,
+  max: max,
+  sum: sum,
+  average: average,
+  midian: midian // mode,
+
+};
+
+/***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4321,10 +4400,10 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(20),
+var _require2 = __webpack_require__(19),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(24),
+var _require3 = __webpack_require__(23),
     _includes = _require3._includes;
 
 var original = {};

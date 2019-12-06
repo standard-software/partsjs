@@ -8,7 +8,8 @@ var _require2 = require('../object/_inProperty.js'),
 /**
  * _isException
  * description:
- *  _isException can determine standard Error objects and user-specific exception objects.
+ *  _isException can determine standard Error objects
+ *  and user-specific exception objects.
  *  Only whether the object has name and message properties.
  */
 

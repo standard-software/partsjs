@@ -15,48 +15,15 @@ var _require = require('../type/type.js'),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = require('../object/_inProperty.js'),
-    _inProperty = _require2._inProperty;
-/**
- * array.equal
- */
+var _require2 = require('../number/number.js'),
+    isEven = _require2.isEven;
 
+var _require3 = require('../object/_inProperty.js'),
+    _inProperty = _require3._inProperty;
 
-var _equal = function _equal(value1, value2) {
-  if (value1.length !== value2.length) {
-    return false;
-  }
-
-  for (var i = 0, l = value1.length; i < l; i += 1) {
-    if (_isArray(value1[i]) && _isArray(value2[i])) {
-      if (_equal(value1[i], value2[i]) === false) {
-        return false;
-      }
-    } else if (value1[i] !== value2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-var equal = function equal(value1, value2) {
-  if (_inProperty(value1, 'value1,value2')) {
-    var _value = value1;
-    value1 = _value.value1;
-    value2 = _value.value2;
-  }
-
-  if (!_isArray(value1)) {
-    throw new TypeError('array.equal args(value) is not array');
-  }
-
-  if (!_isArray(value2)) {
-    throw new TypeError('array.equal args(value2) is not array');
-  }
-
-  return _equal(value1, value2);
-};
+var _require4 = require('../root/clone.js'),
+    _clone = _require4._clone,
+    _cloneDeep = _require4._cloneDeep;
 /**
  * array.min max
  */
@@ -69,7 +36,7 @@ var _min = function _min(array) {
 
   var result = array[0];
 
-  for (var i = 1, l = array.length; i < l; i += 1) {
+  for (var i = 0, l = array.length; i < l; i += 1) {
     if (!_isNumber(array[i])) {
       throw new TypeError('_min args(array) element is not number');
     }
@@ -97,7 +64,7 @@ var _max = function _max(array) {
 
   var result = array[0];
 
-  for (var i = 1, l = array.length; i < l; i += 1) {
+  for (var i = 0, l = array.length; i < l; i += 1) {
     if (!_isNumber(array[i])) {
       throw new TypeError('_max args(array) element is not number');
     }
@@ -117,12 +84,102 @@ var max = function max(array) {
 
   return _max(array);
 };
+/**
+ * from
+ */
+
+
+var from = function from(arrayLike) {
+  return Array.prototype.slice.call(arrayLike);
+};
+/**
+ * sum
+ */
+
+
+var _sum = function _sum(array) {
+  var result = 0;
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_min args(array) element is not number');
+    }
+
+    result += array[i];
+  }
+
+  return result;
+};
+
+var sum = function sum(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('sum args(array) is not array');
+  }
+
+  return _sum(array);
+};
+/**
+ * average
+ */
+
+
+var _average = function _average(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  return _sum(array) / array.length;
+};
+
+var average = function average(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('average args(array) is not array');
+  }
+
+  return _average(array);
+};
+/**
+ * midian
+ */
+
+
+var _midian = function _midian(array) {
+  var sortedArray = _cloneDeep(array);
+
+  sortedArray.sort(function (a, b) {
+    return a - b;
+  });
+
+  if (isEven(sortedArray.length)) {
+    // Even number length
+    var centerIndex = sortedArray.length / 2;
+    return (sortedArray[centerIndex - 1] + sortedArray[centerIndex]) / 2;
+  } else {
+    // Odd number length
+    return sortedArray[(sortedArray.length - 1) / 2];
+  }
+};
+
+var midian = function midian(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('midian args(array) is not array');
+  }
+
+  return _midian(array);
+};
 
 module.exports = {
-  _equal: _equal,
   _min: _min,
   _max: _max,
-  equal: equal,
+  _sum: _sum,
+  _average: _average,
+  _midian: _midian,
+  // _mode,
+  from: from,
   min: min,
-  max: max
+  max: max,
+  sum: sum,
+  average: average,
+  midian: midian // mode,
+
 };

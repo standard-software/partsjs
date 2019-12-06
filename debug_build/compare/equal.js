@@ -245,7 +245,6 @@ equalFunction.equalSet = function (value1, value2) {
 
   if (!isSet(value1, value2)) {
     return;
-    ;
   }
 
   if (value1.size !== value2.size) {
@@ -319,7 +318,6 @@ equalFunction.equalWeakSet = function (value1, value2) {
 
   if (!isWeakSet(value1, value2)) {
     return;
-    ;
   }
 
   if (value1.size !== value2.size) {

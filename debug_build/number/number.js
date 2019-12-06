@@ -60,9 +60,8 @@ var isOdd = function isOdd(number) {
 
 var _round = function _round(value) {
   var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var powResult;
   var plusFlag = 0 <= value ? true : false;
-  powResult = Math.pow(10, digit);
+  var powResult = Math.pow(10, digit);
 
   if (plusFlag) {
     return Math.round(value * powResult) / powResult;

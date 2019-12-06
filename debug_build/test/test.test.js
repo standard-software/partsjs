@@ -1,5 +1,10 @@
 "use strict";
 
+/* eslint-disable no-throw-literal */
+
+/* eslint-disable max-len */
+
+/* eslint-disable no-var */
 var test_execute_test = function test_execute_test(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,

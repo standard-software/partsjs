@@ -36,7 +36,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
   var result = _matchFormat.pattern[patterns[index]](value);
 
   if (!_isBoolean(result)) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") function result is not boolean"));
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
   }
 
   return result;
@@ -100,7 +100,8 @@ _matchFormat.reset = function () {
   });
 
   _matchFormat.add(['float_more'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
+    return value.match( // eslint-disable-next-line max-len
+    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
   }); // float_more
   //  integer + float + exponential notation
   //  value.match(new RegExp(

@@ -1,5 +1,8 @@
 "use strict";
 
+/* eslint-disable max-len */
+
+/* eslint-disable no-var */
 var test_execute_syntax = function test_execute_syntax(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,

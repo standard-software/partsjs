@@ -2,6 +2,15 @@
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+/* eslint-disable no-array-constructor */
+
+/* eslint-disable no-new-object */
+
+/* eslint-disable no-new-wrappers */
+
+/* eslint-disable max-len */
+
+/* eslint-disable no-var */
 var test_execute_type = function test_execute_type(parts) {
   var checkEqual = parts.test.checkEqual;
   var _parts$type = parts.type,
@@ -178,8 +187,8 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isNotUndefinedArray([n1, u1]));
     checkEqual(true, isNotUndefinedArray([v1, v1]));
     checkEqual(true, isNotUndefinedArray([v1, n1]));
-    checkEqual(false, isNotUndefinedArray([v1, u1])); //配列の中身ではなく配列自体を判定する
-    //配列はundefinedではない
+    checkEqual(false, isNotUndefinedArray([v1, u1])); // 配列の中身ではなく配列自体を判定する
+    // 配列はundefinedではない
 
     checkEqual(false, isUndefined([v1, v1]));
     checkEqual(false, isUndefined([u1, u1]));
@@ -289,7 +298,7 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(false, isNumber(false));
     checkEqual(false, isNumber(null));
     checkEqual(false, isNumber(undefined));
-    checkEqual(false, isNumber(Infinity)); //InfinityもNumberとして許可しないことにする
+    checkEqual(false, isNumber(Infinity)); // InfinityもNumberとして許可しないことにする
 
     checkEqual(false, isNumber(NaN));
     checkEqual(false, isNumber(''));
@@ -372,7 +381,7 @@ var test_execute_type = function test_execute_type(parts) {
     checkEqual(true, isInteger(0));
     checkEqual(true, isInteger(-1));
     checkEqual(false, isInteger(123.4));
-    checkEqual(true, isInteger(123.0)); //.0の場合は整数か小数かは判断できない
+    checkEqual(true, isInteger(123.0)); // .0の場合は整数か小数かは判断できない
 
     checkEqual(false, isInteger(true));
     checkEqual(false, isInteger(false));

@@ -33,14 +33,12 @@ var _require = require('../type/type.js'),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var object = require('../object/object.js');
-
-var array = require('../array/array.js');
-
-var _copyProperty = object._copyProperty;
+var _require2 = require('../object/object.js'),
+    _copyProperty = _require2._copyProperty;
 /**
  * cloneFunction
  */
+
 
 var cloneFunction = {}; // function is no clone
 
@@ -197,7 +195,6 @@ cloneFunction.cloneMap = function (source) {
 
   if (!_isMap(source)) {
     return undefined;
-    ;
   }
 
   var cloneValue = new Map();
@@ -235,7 +232,6 @@ cloneFunction.cloneMap = function (source) {
 cloneFunction.cloneIgnoreWeakMap = function (source) {
   if (!_isWeakMap(source)) {
     return undefined;
-    ;
   }
 
   return source;
@@ -249,7 +245,6 @@ cloneFunction.cloneSet = function (source) {
 
   if (!_isSet(source)) {
     return undefined;
-    ;
   }
 
   var cloneValue = new Set();
@@ -284,7 +279,6 @@ cloneFunction.cloneSet = function (source) {
 cloneFunction.cloneIgnoreWeakSet = function (source) {
   if (!_isWeakSet(source)) {
     return undefined;
-    ;
   }
 
   return source;

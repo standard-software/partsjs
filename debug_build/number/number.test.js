@@ -1,5 +1,8 @@
 "use strict";
 
+/* eslint-disable max-len */
+
+/* eslint-disable no-var */
 var test_execute_number = function test_execute_number(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
@@ -126,7 +129,7 @@ var test_execute_number = function test_execute_number(parts) {
     checkEqual(true, nearEqual(0.051, 0.050, 0.001));
     checkEqual(true, nearEqual(0.0509, 0.050, 0.001));
     checkEqual(true, nearEqual(0.0510, 0.050, 0.001));
-    checkEqual(false, nearEqual(0.051000001, 0.050, 0.001)); // parameter args
+    checkEqual(false, nearEqual(0.05100001, 0.050, 0.001)); // parameter args
 
     checkEqual(false, nearEqual({
       value1: 0.050,
