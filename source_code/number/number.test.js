@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_number = (parts) => {
 
   const {
@@ -6,8 +8,8 @@ const test_execute_number = (parts) => {
   } = parts.test;
 
   const {
-    isMultiples,isEven,isOdd,
-    round,nearEqual,inRange,randomInt,
+    isMultiples, isEven, isOdd,
+    round, nearEqual, inRange, randomInt,
   } = parts.number;
 
   const test_isMultiples = () => {
@@ -21,11 +23,11 @@ const test_execute_number = (parts) => {
     // parameter args
     checkEqual(true,  isMultiples({
       number: 10,
-      radix: 2
+      radix: 2,
     }));
     checkEqual(false,  isMultiples({
       number: 9,
-      radix: 2
+      radix: 2,
     }));
 
     // exception
@@ -48,7 +50,7 @@ const test_execute_number = (parts) => {
     checkEqual(-5,    Math.round(-5));
     checkEqual(-5,    Math.round(-5.4));
     checkEqual(-5,    Math.round(-5.5));
-  }
+  };
 
   const test_round = () => {
     checkEqual(5,    round(5));
@@ -103,11 +105,11 @@ const test_execute_number = (parts) => {
     }));
     checkEqual(5.06, round({
       value: 5.055,
-      digit: 2
+      digit: 2,
     }));
     checkEqual(5600, round({
       value: 5550,
-      digit: -2
+      digit: -2,
     }));
 
     // exception
@@ -130,26 +132,26 @@ const test_execute_number = (parts) => {
     checkEqual(true,  nearEqual(0.051,      0.050,        0.001));
     checkEqual(true,  nearEqual(0.0509,     0.050,        0.001));
     checkEqual(true,  nearEqual(0.0510,     0.050,        0.001));
-    checkEqual(false, nearEqual(0.051000001,0.050,        0.001));
+    checkEqual(false, nearEqual(0.05100001, 0.050,        0.001));
 
     // parameter args
     checkEqual(false, nearEqual({
       value1: 0.050,
       value2: 0.051000001,
-      diff:  0.001
+      diff:  0.001,
     }));
     checkEqual(true,  nearEqual({
       value1: 0.050011,
       value2: 0.049999,
-      diff:  0.001
+      diff:  0.001,
     }));
 
     // exception
-    checkEqual(false, isThrown(() => { nearEqual(0.50, 0.51, 0.001)}));
-    checkEqual(true,  isThrown(() => { nearEqual('0.50', 0.51, 0.001)}));
-    checkEqual(true,  isThrown(() => { nearEqual(0.50, '0.51', 0.001)}));
-    checkEqual(true,  isThrown(() => { nearEqual(0.50, 0.51, '0.001')}));
-    checkEqual(true,  isThrown(() => { nearEqual(0.50, 0.51, -0.001)}));
+    checkEqual(false, isThrown(() => { nearEqual( 0.50,  0.51,  0.001 ); }));
+    checkEqual(true,  isThrown(() => { nearEqual('0.50', 0.51,  0.001 ); }));
+    checkEqual(true,  isThrown(() => { nearEqual( 0.50, '0.51', 0.001 ); }));
+    checkEqual(true,  isThrown(() => { nearEqual( 0.50,  0.51, '0.001'); }));
+    checkEqual(true,  isThrown(() => { nearEqual( 0.50,  0.51, -0.001 ); }));
   };
 
   const test_inRange = () => {
@@ -165,19 +167,19 @@ const test_execute_number = (parts) => {
     checkEqual(true,  inRange({
       value:  30,
       from:   10,
-      to:     30
+      to:     30,
     }));
     checkEqual(false,  inRange({
       value:  9,
       from:   10,
-      to:     30
+      to:     30,
     }));
 
     // exception
-    checkEqual(false, isThrown(() => { inRange( 20,  10,  30)}));
-    checkEqual(true,  isThrown(() => { inRange('20', 10,  30)}));
-    checkEqual(true,  isThrown(() => { inRange( 20, '10', 30)}));
-    checkEqual(true,  isThrown(() => { inRange( 20,  10, '30')}));
+    checkEqual(false, isThrown(() => { inRange( 20,  10,  30  ); }));
+    checkEqual(true,  isThrown(() => { inRange('20', 10,  30  ); }));
+    checkEqual(true,  isThrown(() => { inRange( 20, '10', 30  ); }));
+    checkEqual(true,  isThrown(() => { inRange( 20,  10, '30' ); }));
   };
 
   const test_randomInt = () => {
@@ -192,9 +194,9 @@ const test_execute_number = (parts) => {
     }));
 
     // exception
-    checkEqual(false, isThrown(() => { randomInt( 10,  10)}));
-    checkEqual(true,  isThrown(() => { randomInt('10', 10)}));
-    checkEqual(true,  isThrown(() => { randomInt( 10, '10')}));
+    checkEqual(false, isThrown(() => { randomInt( 10,  10 ); }));
+    checkEqual(true,  isThrown(() => { randomInt('10', 10 ); }));
+    checkEqual(true,  isThrown(() => { randomInt( 10, '10'); }));
   };
 
   console.log('  test number.js');
@@ -204,7 +206,7 @@ const test_execute_number = (parts) => {
   test_nearEqual();
   test_inRange();
   test_randomInt();
-}
+};
 
 module.exports = {
   test_execute_number,

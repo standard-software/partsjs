@@ -1,10 +1,12 @@
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_compare = (parts) => {
 
   const {
-    isUndefined,isNull,isNaNStrict,
-    isBoolean,isNumber,isInteger,isString,
-    isFunction,isObject,isObjectType,
-    isArray,isDate,isRegExp,
+    isUndefined, isNull, isNaNStrict,
+    isBoolean, isNumber, isInteger, isString,
+    isFunction, isObject, isObjectType,
+    isArray, isDate, isRegExp,
     isException,
   } = parts.type;
 
@@ -18,7 +20,7 @@ const test_execute_compare = (parts) => {
     equal, equalDeep,
     equalFunction,
     or,
-    match,matchValue,initialValue,
+    match, matchValue, initialValue,
     isEmpty,
     matchAll, matchSome, matchSomeIndex,
   } = parts.compare;
@@ -42,7 +44,7 @@ const test_execute_compare = (parts) => {
     checkEqual(true,  equal({value1:  1, value2:  1}));
     checkEqual(true,  equal({value1:'1', value2:'1'}));
     checkEqual(false, equal({value1:'1', value2:  1}));
-  }
+  };
 
   const test_equal_object = () => {
     // object
@@ -54,19 +56,19 @@ const test_execute_compare = (parts) => {
     );
     checkEqual(true,
       equal( { a: '1', b: '2' },   { a: '1', b: '2' }),
-    'test_equal object 1');
+      'test_equal object 1');
     checkEqual(false,
       equal( { a: '2', b: '2' },   { a: '1', b: '2' }),
-    'test_equal object 2');
+      'test_equal object 2');
 
     checkEqual(false,
       equal( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {} }),
-    'test_equal object 3');
+      'test_equal object 3');
     checkEqual(false,
       equal( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
-    'test_equal object 4');
+      'test_equal object 4');
 
-  }
+  };
 
   const test_equal_array = () => {
     // array
@@ -77,95 +79,95 @@ const test_execute_compare = (parts) => {
       equal( [[]],   [[]]),
     );
     checkEqual(true,
-      equal( [ 1, 2],   [ 1, 2]),
-    'test_equal array 1');
+      equal( [1, 2],   [1, 2]),
+      'test_equal array 1');
     checkEqual(false,
-      equal( [ 2, 2],   [ 1, 2]),
-    'test_equal array 2');
+      equal( [2, 2],   [1, 2]),
+      'test_equal array 2');
 
     checkEqual(false,
-      equal( [ 1, 2, {}],   [ 1, 2, {}]),
-    'test_equal array 3');
+      equal( [1, 2, {}],   [1, 2, {}]),
+      'test_equal array 3');
     checkEqual(false,
-      equal( [ 1, 2, [3]],   [ 1, 2, [3]]),
-    'test_equal array 4');
+      equal( [1, 2, [3]],   [1, 2, [3]]),
+      'test_equal array 4');
 
-  }
+  };
 
   const test_equal_date = () => {
     // date
     checkEqual(true,
       equal( new Date('2019/11/02'),  new Date('2019/11/02')),
-    'test_equal date');
+      'test_equal date');
     // date in object
     checkEqual(false,
       equal( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
-    'test_equal date');
+      'test_equal date');
     // date in array
     checkEqual(false,
-      equal( [ new Date('2019/11/02') ],  [ new Date('2019/11/02') ] ),
-    'test_equal date');
+      equal( [new Date('2019/11/02')],  [new Date('2019/11/02')] ),
+      'test_equal date');
 
     // date ignore
-    equal.clear()
+    equal.clear();
     equal.add(equalFunction.equalObject);
     equal.add(equalFunction.equalArrayType);
     equal.add(equalFunction.equalFunction);
-    equal.add(equalFunction.equalRegExp)
+    equal.add(equalFunction.equalRegExp);
 
     // date
     checkEqual(false,
       equal( new Date('2019/11/02'),  new Date('2019/11/02')),
-    'test_equal date');
+      'test_equal date');
     // date in object
     checkEqual(false,
       equal( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
-    'test_equal date');
+      'test_equal date');
     // date in array
     checkEqual(false,
-      equal( [ new Date('2019/11/02') ],  [ new Date('2019/11/02') ] ),
-    'test_equal date');
+      equal( [new Date('2019/11/02')],  [new Date('2019/11/02')] ),
+      'test_equal date');
 
     equal.reset();
 
-  }
+  };
 
   const test_equal_regexp = () => {
     // regexp
     checkEqual(true,
       equal( new RegExp(/^a/),  new RegExp(/^a/) ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in object
     checkEqual(false,
       equal( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) } ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in array
     checkEqual(false,
-      equal( [ new RegExp(/^a/) ],  [ new RegExp(/^a/) ] ),
-    'test_equal regexp');
+      equal( [new RegExp(/^a/)],  [new RegExp(/^a/)] ),
+      'test_equal regexp');
 
     // regexp ignore
-    equal.clear()
+    equal.clear();
     equal.add(equalFunction.equalObject);
     equal.add(equalFunction.equalArrayType);
     equal.add(equalFunction.equalFunction);
-    equal.add(equalFunction.equalDate)
+    equal.add(equalFunction.equalDate);
 
     // regexp
     checkEqual(false,
       equal( new RegExp(/^a/),  new RegExp(/^a/) ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in object
     checkEqual(false,
       equal( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) } ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in array
     checkEqual(false,
-      equal( [ new RegExp(/^a/) ],  [ new RegExp(/^a/) ] ),
-    'test_equal regexp');
+      equal( [new RegExp(/^a/)],  [new RegExp(/^a/)] ),
+      'test_equal regexp');
 
     equal.reset();
-  }
+  };
 
   const test_equal_map = () => {
     if (parts.platform.wsh) {
@@ -179,38 +181,38 @@ const test_execute_compare = (parts) => {
     map2.set('a', 1); map2.set('b', 2);
     checkEqual(true,
       equal( map1,  map2 ),
-    'test_equal Map');
+      'test_equal Map');
     // Map in object
     checkEqual(false,
       equal( { map: map1 }, { map: map2 } ),
-    'test_equal Map');
+      'test_equal Map');
     // Map in array
     checkEqual(false,
-      equal( [ map1 ],  [ map2 ] ),
-    'test_equal Map');
+      equal( [map1],  [map2] ),
+      'test_equal Map');
 
     // ignore Map
-    equal.clear()
+    equal.clear();
     equal.add(equalFunction.equalObject);
     equal.add(equalFunction.equalArrayType);
     equal.add(equalFunction.equalFunction);
-    equal.add(equalFunction.equalRegExp)
-    equal.add(equalFunction.equalDate)
+    equal.add(equalFunction.equalRegExp);
+    equal.add(equalFunction.equalDate);
 
     checkEqual(false,
       equal( map1,  map2 ),
-    'test_equal map');
+      'test_equal map');
     // Map in object
     checkEqual(false,
       equal( { map: map1 }, { map: map2 } ),
-    'test_equal Map');
+      'test_equal Map');
     // Map in array
     checkEqual(false,
-      equal( [ map1 ],  [ map2 ] ),
-    'test_equal Map');
+      equal( [map1],  [map2] ),
+      'test_equal Map');
 
     equal.reset();
-  }
+  };
 
   const test_equal_set = () => {
     if (parts.platform.wsh) {
@@ -224,38 +226,38 @@ const test_execute_compare = (parts) => {
     set2.add('a'); set2.add('b');
     checkEqual(true,
       equal( set1,  set2 ),
-    'test_equal Set');
+      'test_equal Set');
     // Set in object
     checkEqual(false,
       equal( { set: set1 }, { set: set2 } ),
-    'test_equal Set');
+      'test_equal Set');
     // Set in array
     checkEqual(false,
-      equal( [ set1 ],  [ set2 ] ),
-    'test_equal Set');
+      equal( [set1],  [set2] ),
+      'test_equal Set');
 
     // ignore Set
-    equal.clear()
+    equal.clear();
     equal.add(equalFunction.equalObject);
     equal.add(equalFunction.equalArrayType);
     equal.add(equalFunction.equalFunction);
-    equal.add(equalFunction.equalRegExp)
-    equal.add(equalFunction.equalDate)
+    equal.add(equalFunction.equalRegExp);
+    equal.add(equalFunction.equalDate);
 
     checkEqual(false,
       equal( set1,  set2 ),
-    'test_equal map');
+      'test_equal map');
     // Set in object
     checkEqual(false,
       equal( { set: set1 }, { set: set2 } ),
-    'test_equal Set');
+      'test_equal Set');
     // Set in array
     checkEqual(false,
-      equal( [ set1 ],  [ set2 ] ),
-    'test_equal Set');
+      equal( [set1],  [set2] ),
+      'test_equal Set');
 
     equal.reset();
-  }
+  };
 
   const test_equalDeep = () => {
     // Primitive value
@@ -276,7 +278,7 @@ const test_execute_compare = (parts) => {
     checkEqual(true,  equalDeep({value1:  1, value2:  1}));
     checkEqual(true,  equalDeep({value1:'1', value2:'1'}));
     checkEqual(false, equalDeep({value1:'1', value2:  1}));
-  }
+  };
 
   const test_equalDeep_object = () => {
     // object
@@ -288,53 +290,53 @@ const test_execute_compare = (parts) => {
     );
     checkEqual(true,
       equalDeep( { a: '1', b: '2' },   { a: '1', b: '2' }),
-    'test_equalDeep object 1');
+      'test_equalDeep object 1');
     checkEqual(false,
       equalDeep( { a: '2', b: '2' },   { a: '1', b: '2' }),
-    'test_equalDeep object 2');
+      'test_equalDeep object 2');
 
     checkEqual(true,
       equalDeep( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {} }),
-    'test_equalDeep object 3');
+      'test_equalDeep object 3');
     checkEqual(true,
       equalDeep( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
-    'test_equalDeep object 4');
+      'test_equalDeep object 4');
 
     checkEqual(false,
       equalDeep( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {}, d: '' }),
-    'test_equalDeep object 5');
+      'test_equalDeep object 5');
     checkEqual(false,
       equalDeep( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [], d: '' }),
-    'test_equalDeep object 6');
+      'test_equalDeep object 6');
 
-  }
+  };
 
   const test_equalDeep_object_array_mix = () => {
 
     // equal false array object
-    var testValue1 = [1,2,3,{ a: 1, b: 2, c: 3 }];
-    var testValue2 = [1,2,3,{ a: 1, b: 2, c: 3 }];
+    var testValue1 = [1, 2, 3, { a: 1, b: 2, c: 3 }];
+    var testValue2 = [1, 2, 3, { a: 1, b: 2, c: 3 }];
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true array object
     checkEqual(true,  equalDeep(testValue1, testValue2));
 
     // equal false object array
-    var testValue1 = { a: 1, b: 2, c: 3 , d: [1,2,3]};
-    var testValue2 = { a: 1, b: 2, c: 3 , d: [1,2,3]};
+    var testValue1 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
+    var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true object array
     checkEqual(true, equalDeep(testValue1, testValue2));
 
     // equal false array object array
-    var testValue1 = [1,2,3,{ a: 1, b: 2, c: [3,4,5] }];
-    var testValue2 = [1,2,3,{ a: 1, b: 2, c: [3,4,5] }];
+    var testValue1 = [1, 2, 3, { a: 1, b: 2, c: [3, 4, 5] }];
+    var testValue2 = [1, 2, 3, { a: 1, b: 2, c: [3, 4, 5] }];
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true array object array
     checkEqual(true, equalDeep(testValue1, testValue2));
 
     // equal false object array object
-    var testValue1 = { a: 1, b: 2, c: 3 , d: [{ e: 4, f: 5, g: 6 },2,3]};
-    var testValue2 = { a: 1, b: 2, c: 3 , d: [{ e: 4, f: 5, g: 6 },2,3]};
+    var testValue1 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
+    var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true object array object
     checkEqual(true, equalDeep(testValue1, testValue2));
@@ -349,7 +351,7 @@ const test_execute_compare = (parts) => {
     object2.obj = object2;
     checkEqual(true,
       equalDeep( object1,  object2 ),
-    'test_equalDeep CircularReference 1');
+      'test_equalDeep CircularReference 1');
 
     var object1 = { a: '1', b: '2', c: {} };
     var object2 = { a: '1', b: '2', c: {} };
@@ -357,7 +359,7 @@ const test_execute_compare = (parts) => {
     object2.obj = object1;
     checkEqual(true,
       equalDeep( object1,  object2 ),
-    'test_equalDeep CircularReference 2');
+      'test_equalDeep CircularReference 2');
 
     var object1 = { a: '1', b: '2', c: {} };
     var object2 = { a: '1', b: '2', c: {} };
@@ -365,7 +367,7 @@ const test_execute_compare = (parts) => {
     object2.obj = object1;
     checkEqual(true,
       equalDeep( object1,  object2 ),
-    'test_equalDeep CircularReference 3');
+      'test_equalDeep CircularReference 3');
 
     var object1 = { a: '1', b: '2', c: {} };
     var object2 = { a: '1', b: '2', c: {} };
@@ -373,7 +375,7 @@ const test_execute_compare = (parts) => {
     object2.obj = object2;
     checkEqual(true,
       equalDeep( object1,  object2 ),
-    'test_equalDeep CircularReference 4');
+      'test_equalDeep CircularReference 4');
 
     var object1 = { a: '1', b: '2', c: {} };
     var object2 = { a: '1', b: '2', c: {} };
@@ -382,139 +384,139 @@ const test_execute_compare = (parts) => {
     object2.obj = object3;
     checkEqual(false,
       equalDeep( object1,  object2 ),
-    'test_equalDeep CircularReference 5');
-  }
+      'test_equalDeep CircularReference 5');
+  };
 
   const test_equalDeep_array = () => {
     // array
     checkEqual(true,  equalDeep( [],   []));
     checkEqual(true,  equalDeep( [[]],   [[]]));
-    checkEqual(true,  equalDeep( [ 1, 2],   [ 1, 2]));
-    checkEqual(false, equalDeep( [ 2, 2],   [ 1, 2]));
+    checkEqual(true,  equalDeep( [1, 2],   [1, 2]));
+    checkEqual(false, equalDeep( [2, 2],   [1, 2]));
 
-    checkEqual(true,  equalDeep( [ 1, 2, {}],   [ 1, 2, {}]));
-    checkEqual(true,  equalDeep( [ 1, 2, [3]],   [ 1, 2, [3]]));
-  }
+    checkEqual(true,  equalDeep( [1, 2, {}],   [1, 2, {}]));
+    checkEqual(true,  equalDeep( [1, 2, [3]],   [1, 2, [3]]));
+  };
 
   const test_equalDeep_array_CircularReference = () => {
     // CircularReference
-    var array1 = [ { a: '1', b: '2' } , 1, 2];
-    var array2 = [ { a: '1', b: '2' } , 1, 2];
+    var array1 = [{ a: '1', b: '2' }, 1, 2];
+    var array2 = [{ a: '1', b: '2' }, 1, 2];
     array1.push(array1);
     array2.push(array2);
     checkEqual(true,
       equalDeep( array1,  array2 ),
-    'test_equalDeep array CircularReference 1');
+      'test_equalDeep array CircularReference 1');
 
-    var array1 = [ { a: '1', b: '2' } , 1, 2];
-    var array2 = [ { a: '1', b: '2' } , 1, 2];
+    var array1 = [{ a: '1', b: '2' }, 1, 2];
+    var array2 = [{ a: '1', b: '2' }, 1, 2];
     array1.push(array1);
     array2.push(array1);
     checkEqual(true,
       equalDeep( array1,  array2 ),
-    'test_equalDeep array CircularReference 2');
+      'test_equalDeep array CircularReference 2');
 
-    var array1 = [ { a: '1', b: '2' } , 1, 2];
-    var array2 = [ { a: '1', b: '2' } , 1, 2];
+    var array1 = [{ a: '1', b: '2' }, 1, 2];
+    var array2 = [{ a: '1', b: '2' }, 1, 2];
     array1.push(array2);
     array2.push(array1);
     checkEqual(true,
       equalDeep( array1,  array2 ),
-    'test_equalDeep array CircularReference 3');
+      'test_equalDeep array CircularReference 3');
 
-    var array1 = [ { a: '1', b: '2' } , 1, 2];
-    var array2 = [ { a: '1', b: '2' } , 1, 2];
+    var array1 = [{ a: '1', b: '2' }, 1, 2];
+    var array2 = [{ a: '1', b: '2' }, 1, 2];
     array1.push(array2);
     array2.push(array2);
     checkEqual(true,
       equalDeep( array1,  array2 ),
-    'test_equalDeep array CircularReference 4');
+      'test_equalDeep array CircularReference 4');
 
-    var array1 = [ { a: '1', b: '2' } , 1, 2];
-    var array2 = [ { a: '1', b: '2' } , 1, 2];
-    var array3 = [ { a: '1', b: '2' } , 1, 2];
+    var array1 = [{ a: '1', b: '2' }, 1, 2];
+    var array2 = [{ a: '1', b: '2' }, 1, 2];
+    var array3 = [{ a: '1', b: '2' }, 1, 2];
     array1.push(array2);
     array2.push(array3);
     checkEqual(false,
       equalDeep( array1,  array2 ),
-    'test_equalDeep array CircularReference 5');
-  }
+      'test_equalDeep array CircularReference 5');
+  };
 
   const test_equalDeep_date = () => {
     // date
     checkEqual(true,
       equalDeep( new Date('2019/11/02'),  new Date('2019/11/02')),
-    'test_equalDeep date');
+      'test_equalDeep date');
     // date in object
     checkEqual(true,
       equalDeep( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
-    'test_equalDeep date');
+      'test_equalDeep date');
     // date in array
     checkEqual(true,
-      equalDeep( [ new Date('2019/11/02') ],  [ new Date('2019/11/02') ] ),
-    'test_equalDeep date');
+      equalDeep( [new Date('2019/11/02')],  [new Date('2019/11/02')] ),
+      'test_equalDeep date');
 
     // date ignore
-    equalDeep.clear()
+    equalDeep.clear();
     equalDeep.add(equalFunction.equalObject);
     equalDeep.add(equalFunction.equalArrayType);
     equalDeep.add(equalFunction.equalFunction);
-    equalDeep.add(equalFunction.equalRegExp)
+    equalDeep.add(equalFunction.equalRegExp);
 
     // date
     checkEqual(false,
       equalDeep( new Date('2019/11/02'),  new Date('2019/11/02')),
-    'test_equalDeep date');
+      'test_equalDeep date');
     // date in object
     checkEqual(false,
       equalDeep( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
-    'test_equalDeep date in object');
+      'test_equalDeep date in object');
     // date in array
     checkEqual(false,
-      equalDeep( [ new Date('2019/11/02') ],  [ new Date('2019/11/02') ] ),
-    'test_equalDeep date');
+      equalDeep( [new Date('2019/11/02')],  [new Date('2019/11/02')] ),
+      'test_equalDeep date');
 
     equalDeep.reset();
 
-  }
+  };
 
   const test_equalDeep_regexp = () => {
     // regexp
     checkEqual(true,
       equalDeep( new RegExp(/^a/),  new RegExp(/^a/) ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in object
     checkEqual(true,
       equalDeep( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) } ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in array
     checkEqual(true,
-      equalDeep( [ new RegExp(/^a/) ],  [ new RegExp(/^a/) ] ),
-    'test_equal regexp');
+      equalDeep( [new RegExp(/^a/)],  [new RegExp(/^a/)] ),
+      'test_equal regexp');
 
     // regexp ignore
-    equalDeep.clear()
+    equalDeep.clear();
     equalDeep.add(equalFunction.equalObject);
     equalDeep.add(equalFunction.equalArrayType);
     equalDeep.add(equalFunction.equalFunction);
-    equalDeep.add(equalFunction.equalDate)
+    equalDeep.add(equalFunction.equalDate);
 
     // regexp
     checkEqual(false,
       equalDeep( new RegExp(/^a/),  new RegExp(/^a/) ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in object
     checkEqual(false,
       equalDeep( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) } ),
-    'test_equal regexp');
+      'test_equal regexp');
     // regexp in array
     checkEqual(false,
-      equalDeep( [ new RegExp(/^a/) ],  [ new RegExp(/^a/) ] ),
-    'test_equal regexp');
+      equalDeep( [new RegExp(/^a/)],  [new RegExp(/^a/)] ),
+      'test_equal regexp');
 
     equalDeep.reset();
 
-  }
+  };
 
   const test_equalDeep_map = () => {
 
@@ -529,38 +531,38 @@ const test_execute_compare = (parts) => {
     map2.set('a', 1); map2.set('b', 2);
     checkEqual(true,
       equalDeep( map1,  map2 ),
-    'test_equal Map');
+      'test_equal Map');
     // Map in object
     checkEqual(true,
       equalDeep( { map: map1 }, { map: map2 } ),
-    'test_equal Map');
+      'test_equal Map');
     // Map in array
     checkEqual(true,
-      equalDeep( [ map1 ],  [ map2 ] ),
-    'test_equal Map');
+      equalDeep( [map1],  [map2] ),
+      'test_equal Map');
 
     // ignore Map
-    equalDeep.clear()
+    equalDeep.clear();
     equalDeep.add(equalFunction.equalObject);
     equalDeep.add(equalFunction.equalArrayType);
     equalDeep.add(equalFunction.equalFunction);
-    equalDeep.add(equalFunction.equalRegExp)
-    equalDeep.add(equalFunction.equalDate)
+    equalDeep.add(equalFunction.equalRegExp);
+    equalDeep.add(equalFunction.equalDate);
 
     checkEqual(false,
       equalDeep( map1,  map2 ),
-    'test_equal map');
+      'test_equal map');
     // Map in object
     checkEqual(false,
       equalDeep( { map: map1 }, { map: map2 } ),
-    'test_equal Map');
+      'test_equal Map');
     // Map in array
     checkEqual(false,
-      equalDeep( [ map1 ],  [ map2 ] ),
-    'test_equal Map');
+      equalDeep( [map1],  [map2] ),
+      'test_equal Map');
 
     equalDeep.reset();
-  }
+  };
 
   const test_equalDeep_map_object_array = () => {
     if (parts.platform.wsh) {
@@ -569,20 +571,20 @@ const test_execute_compare = (parts) => {
 
     // Map Object Array
     var map1 = new Map();
-    map1.set('a', { a: '1' }); map1.set('b', [ 'b' ]);
+    map1.set('a', { a: '1' }); map1.set('b', ['b']);
     var map2 = new Map();
-    map2.set('a', { a: '1' }); map2.set('b', [ 'b' ]);
+    map2.set('a', { a: '1' }); map2.set('b', ['b']);
     checkEqual(true,
       equalDeep( map1,  map2 ),
-    'test_equal Map object array');
+      'test_equal Map object array');
     // Map in object
     checkEqual(true,
       equalDeep( { map: map1 }, { map: map2 } ),
-    'test_equal Map object array');
+      'test_equal Map object array');
     // Map in array
     checkEqual(true,
-      equalDeep( [ map1 ],  [ map2 ] ),
-    'test_equal Map object array');
+      equalDeep( [map1],  [map2] ),
+      'test_equal Map object array');
 
     // more map add object
     var map1 = new Map();
@@ -593,7 +595,7 @@ const test_execute_compare = (parts) => {
     map2.set('b', { c: 3, b: 4 });
     checkEqual(true,
       equalDeep( { map: map1 }, { map: map2 } ),
-    'test_equal Map set object');
+      'test_equal Map set object');
 
     // more map set object
     var map1 = new Map();
@@ -604,9 +606,9 @@ const test_execute_compare = (parts) => {
     map2.set('b', { c: 3, b: 4 });
     checkEqual(false,
       equalDeep( { map: map1 }, { map: map2 } ),
-    'test_equal Map set object');
+      'test_equal Map set object');
 
-  }
+  };
 
   const test_equalDeep_map_CircularReference = () => {
     if (parts.platform.wsh) {
@@ -615,9 +617,9 @@ const test_execute_compare = (parts) => {
 
     // CircularReference
     var map1 = new Map();
-    map1.set('a', { a: '1' }); map1.set('b', [ 'b' ]);
+    map1.set('a', { a: '1' }); map1.set('b', ['b']);
     var map2 = new Map();
-    map2.set('a', { a: '1' }); map2.set('b', [ 'b' ]);
+    map2.set('a', { a: '1' }); map2.set('b', ['b']);
     map1.set('map', map1);
     map2.set('map', map2);
     checkEqual(true,
@@ -625,9 +627,9 @@ const test_execute_compare = (parts) => {
     );
 
     var map1 = new Map();
-    map1.set('a', { a: '1' }); map1.set('b', [ 'b' ]);
+    map1.set('a', { a: '1' }); map1.set('b', ['b']);
     var map2 = new Map();
-    map2.set('a', { a: '1' }); map2.set('b', [ 'b' ]);
+    map2.set('a', { a: '1' }); map2.set('b', ['b']);
     map1.set('map', map1);
     map2.set('map', map1);
     checkEqual(true,
@@ -635,9 +637,9 @@ const test_execute_compare = (parts) => {
     );
 
     var map1 = new Map();
-    map1.set('a', { a: '1' }); map1.set('b', [ 'b' ]);
+    map1.set('a', { a: '1' }); map1.set('b', ['b']);
     var map2 = new Map();
-    map2.set('a', { a: '1' }); map2.set('b', [ 'b' ]);
+    map2.set('a', { a: '1' }); map2.set('b', ['b']);
     map1.set('map', map2);
     map2.set('map', map2);
     checkEqual(true,
@@ -645,9 +647,9 @@ const test_execute_compare = (parts) => {
     );
 
     var map1 = new Map();
-    map1.set('a', { a: '1' }); map1.set('b', [ 'b' ]);
+    map1.set('a', { a: '1' }); map1.set('b', ['b']);
     var map2 = new Map();
-    map2.set('a', { a: '1' }); map2.set('b', [ 'b' ]);
+    map2.set('a', { a: '1' }); map2.set('b', ['b']);
     map1.set('map', map2);
     map2.set('map', map1);
     checkEqual(true,
@@ -655,17 +657,17 @@ const test_execute_compare = (parts) => {
     );
 
     var map1 = new Map();
-    map1.set('a', { a: '1' }); map1.set('b', [ 'b' ]);
+    map1.set('a', { a: '1' }); map1.set('b', ['b']);
     var map2 = new Map();
-    map2.set('a', { a: '1' }); map2.set('b', [ 'b' ]);
+    map2.set('a', { a: '1' }); map2.set('b', ['b']);
     var map3 = new Map();
-    map3.set('a', { a: '1' }); map3.set('b', [ 'b' ]);
+    map3.set('a', { a: '1' }); map3.set('b', ['b']);
     map1.set('map', map2);
     map2.set('map', map3);
     checkEqual(false,
       equalDeep( map1,  map2 ),
     );
-  }
+  };
 
   const test_equalDeep_set = () => {
 
@@ -679,38 +681,38 @@ const test_execute_compare = (parts) => {
     set2.add('a'); set2.add('b');
     checkEqual(true,
       equalDeep( set1,  set2 ),
-    'test_equal Set1');
+      'test_equal Set1');
     // Set in object
     checkEqual(true,
       equalDeep( { set: set1 }, { set: set2 } ),
-    'test_equal Set2');
+      'test_equal Set2');
     // Set in array
     checkEqual(true,
-      equalDeep( [ set1 ],  [ set2 ] ),
-    'test_equal Set3');
+      equalDeep( [set1],  [set2] ),
+      'test_equal Set3');
 
     // ignore Set
-    equalDeep.clear()
+    equalDeep.clear();
     equalDeep.add(equalFunction.equalObject);
     equalDeep.add(equalFunction.equalArrayType);
     equalDeep.add(equalFunction.equalFunction);
-    equalDeep.add(equalFunction.equalRegExp)
-    equalDeep.add(equalFunction.equalDate)
+    equalDeep.add(equalFunction.equalRegExp);
+    equalDeep.add(equalFunction.equalDate);
 
     checkEqual(false,
       equalDeep( set1,  set2 ),
-    'test_equal map');
+      'test_equal map');
     // Set in object
     checkEqual(false,
       equalDeep( { set: set1 }, { set: set2 } ),
-    'test_equal Set');
+      'test_equal Set');
     // Set in array
     checkEqual(false,
-      equalDeep( [ set1 ],  [ set2 ] ),
-    'test_equal Set');
+      equalDeep( [set1],  [set2] ),
+      'test_equal Set');
 
     equalDeep.reset();
-  }
+  };
 
   const test_equalDeep_set_object_array = () => {
     if (parts.platform.wsh) {
@@ -719,20 +721,20 @@ const test_execute_compare = (parts) => {
 
     // Set Object Array
     var set1 = new Set();
-    set1.add({ a: '1' }); set1.add([ 'b' ]);
+    set1.add({ a: '1' }); set1.add(['b']);
     var set2 = new Set();
-    set2.add({ a: '1' }); set2.add([ 'b' ]);
+    set2.add({ a: '1' }); set2.add(['b']);
     checkEqual(true,
       equalDeep( set1,  set2 ),
-    'test_equal Set object array');
+      'test_equal Set object array');
     // Set in object
     checkEqual(true,
       equalDeep( { map: set1 }, { map: set2 } ),
-    'test_equal Set object array');
+      'test_equal Set object array');
     // Set in array
     checkEqual(true,
-      equalDeep( [ set1 ],  [ set2 ] ),
-    'test_equal Set object array');
+      equalDeep( [set1],  [set2] ),
+      'test_equal Set object array');
 
     // more set add object object
     var set1 = new Set();
@@ -743,7 +745,7 @@ const test_execute_compare = (parts) => {
     set2.add({ c: 3, b: 4 });
     checkEqual(true,
       equalDeep( { set: set1 }, { set: set2 } ),
-    'test_equal Set add object');
+      'test_equal Set add object');
 
     // more set add object object
     var set1 = new Set();
@@ -754,9 +756,9 @@ const test_execute_compare = (parts) => {
     set2.add({ c: 3, b: 4 });
     checkEqual(false,
       equalDeep( { set: set1 }, { set: set2 } ),
-    'test_equal Set add object');
+      'test_equal Set add object');
 
-  }
+  };
 
   const test_equalDeep_set_CircularReference = () => {
     if (parts.platform.wsh) {
@@ -764,9 +766,9 @@ const test_execute_compare = (parts) => {
     }
     // CircularReference
     var set1 = new Set();
-    set1.add({ a: '1' }); set1.add([ 'b' ]);
+    set1.add({ a: '1' }); set1.add(['b']);
     var set2 = new Set();
-    set2.add({ a: '1' }); set2.add([ 'b' ]);
+    set2.add({ a: '1' }); set2.add(['b']);
     set1.add(set1);
     set2.add(set2);
     checkEqual(true,
@@ -774,9 +776,9 @@ const test_execute_compare = (parts) => {
     );
 
     var set1 = new Set();
-    set1.add({ a: '1' }); set1.add([ 'b' ]);
+    set1.add({ a: '1' }); set1.add(['b']);
     var set2 = new Set();
-    set2.add({ a: '1' }); set2.add([ 'b' ]);
+    set2.add({ a: '1' }); set2.add(['b']);
     set1.add(set1);
     set2.add(set1);
     checkEqual(true,
@@ -784,9 +786,9 @@ const test_execute_compare = (parts) => {
     );
 
     var set1 = new Set();
-    set1.add({ a: '1' }); set1.add([ 'b' ]);
+    set1.add({ a: '1' }); set1.add(['b']);
     var set2 = new Set();
-    set2.add({ a: '1' }); set2.add([ 'b' ]);
+    set2.add({ a: '1' }); set2.add(['b']);
     set1.add(set2);
     set2.add(set2);
     checkEqual(true,
@@ -794,9 +796,9 @@ const test_execute_compare = (parts) => {
     );
 
     var set1 = new Set();
-    set1.add({ a: '1' }); set1.add([ 'b' ]);
+    set1.add({ a: '1' }); set1.add(['b']);
     var set2 = new Set();
-    set2.add({ a: '1' }); set2.add([ 'b' ]);
+    set2.add({ a: '1' }); set2.add(['b']);
     set1.add(set2);
     set2.add(set1);
     checkEqual(true,
@@ -804,18 +806,18 @@ const test_execute_compare = (parts) => {
     );
 
     var set1 = new Set();
-    set1.add({ a: '1' }); set1.add([ 'b' ]);
+    set1.add({ a: '1' }); set1.add(['b']);
     var set2 = new Set();
-    set2.add({ a: '1' }); set2.add([ 'b' ]);
+    set2.add({ a: '1' }); set2.add(['b']);
     var set3 = new Set();
-    set3.add({ a: '1' }); set3.add([ 'b' ]);
+    set3.add({ a: '1' }); set3.add(['b']);
     set1.add(set2);
     set2.add(set3);
     checkEqual(false,
       equalDeep( { set: set1 }, { set: set2 } ),
     );
 
-  }
+  };
 
   const test_or = () => {
     var value;
@@ -824,65 +826,65 @@ const test_execute_compare = (parts) => {
     checkEqual(false, or(value, [null, null]));
     checkEqual(false, or(value, [null, 0]));
     checkEqual(false, or(value, [0, '']));
-    checkEqual(true, or(value, [undefined]));
-    checkEqual(true, or(value, [undefined, null]));
-    checkEqual(true, or(value, [null, undefined]));
-    checkEqual(true, or(value, [undefined, undefined]));
-    checkEqual(true, or(value, [undefined, 0]));
+    checkEqual(true,  or(value, [undefined]));
+    checkEqual(true,  or(value, [undefined, null]));
+    checkEqual(true,  or(value, [null, undefined]));
+    checkEqual(true,  or(value, [undefined, undefined]));
+    checkEqual(true,  or(value, [undefined, 0]));
     value = null;
     checkEqual(false, or(value, []));
     checkEqual(false, or(value, [undefined]));
     checkEqual(false, or(value, [undefined, undefined]));
     checkEqual(false, or(value, [undefined, 0]));
     checkEqual(false, or(value, [0, '']));
-    checkEqual(true, or(value, [null]));
-    checkEqual(true, or(value, [null, undefined]));
-    checkEqual(true, or(value, [undefined, null]));
-    checkEqual(true, or(value, [null, null]));
-    checkEqual(true, or(value, [null, 0]));
+    checkEqual(true,  or(value, [null]));
+    checkEqual(true,  or(value, [null, undefined]));
+    checkEqual(true,  or(value, [undefined, null]));
+    checkEqual(true,  or(value, [null, null]));
+    checkEqual(true,  or(value, [null, 0]));
     value = 1;
-    checkEqual(true, or(value, [1]));
-    checkEqual(true, or(value, [1, 2]));
-    checkEqual(true, or(value, [1, 2, 3]));
+    checkEqual(true,  or(value, [1]));
+    checkEqual(true,  or(value, [1, 2]));
+    checkEqual(true,  or(value, [1, 2, 3]));
     checkEqual(false, or(value, [2]));
     checkEqual(false, or(value, [2, 3]));
 
     // exception
     checkEqual(true, isThrown(
-      () => { or(123, 456) },
+      () => { or(123, 456); },
       (e) => (e.name === (new TypeError).name) && (
         e.message ===
           'or args(compareArray) is not array'
-      )
+      ),
     ));
 
-    checkEqual(true,  or({value: 1, compareArray: [1, 2]}))
-    checkEqual(false, or({value: 0, compareArray: [1, 2]}))
+    checkEqual(true,  or({value: 1, compareArray: [1, 2]}));
+    checkEqual(false, or({value: 0, compareArray: [1, 2]}));
 
     // exception
     checkEqual(false, isThrown(
-      () => { or({value: 1, compareArray: [1, 2]}) }
+      () => { or({value: 1, compareArray: [1, 2]}); },
     ));
     checkEqual(true, isThrown(
-      () => { or({value: 1, array: [1, 2]}) },
+      () => { or({value: 1, array: [1, 2]}); },
       (e) => (e.name === (new TypeError).name) && (
         e.message ===
         'or args(compareArray) is not array'
-      )
+      ),
     ));
     checkEqual(true, isThrown(
-      () => { or({value1: 1, compareArray: [1, 2]}) },
+      () => { or({value1: 1, compareArray: [1, 2]}); },
       (e) => (e.name === (new TypeError).name) && (
         e.message ===
         'or args(compareArray) is not array'
-      )
+      ),
     ));
     checkEqual(false, isThrown(
-      () => { or({value1: 1, compareArray: [1, 2]}, []) },
+      () => { or({value1: 1, compareArray: [1, 2]}, []); },
       (e) => (e.name === (new TypeError).name) && (
         e.message ===
         'or args(compareArray) is not array'
-      )
+      ),
     ));
   };
 
@@ -912,10 +914,10 @@ const test_execute_compare = (parts) => {
     checkEqual(true, match(123,       [null, undefined, 123, 'abc']), 'test_match 3');
     checkEqual(true, match('abc',     [null, undefined, 123, 'abc']), 'test_match 4');
 
-    checkEqual(true,  match(1,  [null, undefined, 1, '1']));
-    checkEqual(false, match(1,  [null, undefined, 2, '1']));
-    checkEqual(true,  match('1',[null, undefined, 1, '1']));
-    checkEqual(false, match('1',[null, undefined, 1, '2']));
+    checkEqual(true,  match(1,    [null, undefined, 1, '1']));
+    checkEqual(false, match(1,    [null, undefined, 2, '1']));
+    checkEqual(true,  match('1',  [null, undefined, 1, '1']));
+    checkEqual(false, match('1',  [null, undefined, 1, '2']));
 
     checkEqual(true,  match(null,      [null, undefined, 0]));
     checkEqual(true,  match(undefined, [null, undefined, 0]));
@@ -927,7 +929,7 @@ const test_execute_compare = (parts) => {
     // exception
     checkEqual(true, isThrownException(
       () => { match('123', 'abc'); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
 
     // parameter args string
@@ -941,19 +943,19 @@ const test_execute_compare = (parts) => {
       value: 'abc', compareArray: ['123', '456', /^b/],
     }), 'test_match param 3');
     checkEqual(true,  match({
-      value: 'abc', compareArray: ['123', '456', /^a/]
+      value: 'abc', compareArray: ['123', '456', /^a/],
     }), 'test_match param 4');
     checkEqual(false,  match({
-      value: 'abc', compareArray: []
+      value: 'abc', compareArray: [],
     }), 'test_match param 5');
     checkEqual(false, match({
-      value: '123', compareArray: [null, undefined, 123, 'abc']
+      value: '123', compareArray: [null, undefined, 123, 'abc'],
     }), 'test_match param 6');
     checkEqual(true,  match({
-      value: 'abc', compareArray: [(value) => value.startsWith('a')]
+      value: 'abc', compareArray: [(value) => value.startsWith('a')],
     }), 'test_match param 7');
     checkEqual(false, match({
-      value: 'abc', compareArray: [(value) => value.startsWith('b')]
+      value: 'abc', compareArray: [(value) => value.startsWith('b')],
     }), 'test_match param 8');
 
     // parameter args number
@@ -967,94 +969,94 @@ const test_execute_compare = (parts) => {
       value: 123, compareArray: ['123', '456', /^1/],
     }), 'test_match param number 3');
     checkEqual(true,  match({
-      value: 123, compareArray: [123, '456', /^1/]
+      value: 123, compareArray: [123, '456', /^1/],
     }), 'test_match param number 4');
     checkEqual(false,  match({
-      value: 123, compareArray: []
+      value: 123, compareArray: [],
     }), 'test_match param number 5');
     checkEqual(true,  match({
-      value: 123, compareArray: [null, undefined, 123, 'abc']
+      value: 123, compareArray: [null, undefined, 123, 'abc'],
     }), 'test_match param number 6');
     checkEqual(true,  match({
-      value: 100, compareArray: [(value) => 100 <= value]
+      value: 100, compareArray: [(value) => 100 <= value],
     }), 'test_match param 7');
     checkEqual(false, match({
-      value: 99,  compareArray: [(value) => 100 <= value]
+      value: 99,  compareArray: [(value) => 100 <= value],
     }), 'test_match param 8');
 
     // exception
     checkEqual(false, isThrown(
       () => {
         match({
-          value: '123', compareArray: ['123']
+          value: '123', compareArray: ['123'],
         });
-      }
+      },
     ), 'test_match thrown 1');
     checkEqual(false, isThrown(
       () => {
         match({
-          value: '123', compareArray: []
+          value: '123', compareArray: [],
         });
-      }
+      },
     ), 'test_match thrown 2');
     checkEqual(false, isThrown(
       () => {
         match({
-          value: '123', compareArray: [123]
+          value: '123', compareArray: [123],
         });
-      }
+      },
     ), 'test_match thrown 3');
     checkEqual(true, isThrown(
       () => {
         match({
-          value: '123', compareArray: 123
+          value: '123', compareArray: 123,
         });
       },
       (e) => {
         return (e.name === (new TypeError).name) && (
-        e.message ===
+          e.message ===
           'match args(compareArray) is not array'
-        )
-      }
+        );
+      },
     ), 'test_match thrown 4');
     checkEqual(true, isThrown(
       () => {
         match({
-          value1: '123', compareArray: [123]
+          value1: '123', compareArray: [123],
         });
-      }
+      },
     ), 'test_match thrown 5');
     checkEqual(false, isThrown(
       () => {
         match({
-          value1: '123', compareArray: [123]
+          value1: '123', compareArray: [123],
         }, []);
-      }
+      },
     ), 'test_match thrown 5');
 
     checkEqual(false, match(
       {
-        value1: '123', compareArray: [123]
+        value1: '123', compareArray: [123],
       },
-      []
+      [],
     ));
     checkEqual(true, match(
       {
-        value1: '123', compareArray: [123]
+        value1: '123', compareArray: [123],
       },
-      [() => true]
+      [() => true],
     ));
     checkEqual(false, match(
       {
-        value1: '123', compareArray: [123]
+        value1: '123', compareArray: [123],
       },
-      [() => false]
+      [() => false],
     ));
     checkEqual(true, match(
       {
-        value1: '123', compareArray: [123]
+        value1: '123', compareArray: [123],
       },
-      [(value) => isObject(value)]
+      [(value) => isObject(value)],
     ));
 
   };
@@ -1099,136 +1101,136 @@ const test_execute_compare = (parts) => {
     checkEqual(false, isEmpty('0'));
     checkEqual(false, isEmpty([1]));
     checkEqual(false, isEmpty({a:1}));
-  }
+  };
 
   const test_matchAll = () =>{
     checkEqual(true,
-      matchAll([10, 20, 30], [value => value > 5])
+      matchAll([10, 20, 30], [value => value > 5]),
     );
     checkEqual(false,
-      matchAll([10, 20, 30], [value => value > 15])
+      matchAll([10, 20, 30], [value => value > 15]),
     );
     checkEqual(true,
-      matchAll([null, undefined], [null, undefined])
+      matchAll([null, undefined], [null, undefined]),
     );
     checkEqual(false,
-      matchAll([null, undefined], [null])
+      matchAll([null, undefined], [null]),
     );
     checkEqual(true,
-      matchAll([null, undefined], [isNull, isUndefined])
+      matchAll([null, undefined], [isNull, isUndefined]),
     );
     checkEqual(false,
-      matchAll([null, undefined], [isNull])
+      matchAll([null, undefined], [isNull]),
     );
     checkEqual(false,
-      matchAll([null, undefined, NaN], [null, undefined])
+      matchAll([null, undefined, NaN], [null, undefined]),
     );
     checkEqual(false,
-      matchAll([null, undefined, NaN], [null, undefined, NaN])
+      matchAll([null, undefined, NaN], [null, undefined, NaN]),
     );
     checkEqual(true,
-      matchAll([null, undefined, NaN], [null, undefined, isNaNStrict])
+      matchAll([null, undefined, NaN], [null, undefined, isNaNStrict]),
     );
 
     checkEqual(false, isThrown(() => {
-      matchAll([10], [value => value > 15])
+      matchAll([10], [value => value > 15]);
     }));
     checkEqual(true, isThrown(() => {
-      matchAll(10, [value => value > 15])
+      matchAll(10, [value => value > 15]);
     }));
-  }
+  };
 
   const test_matchSome = () =>{
     checkEqual(true,
       matchSome([10, 20, 30], [value => value > 5])
-    , 'test_matchSome');
+      , 'test_matchSome');
     checkEqual(true,
-      matchSome([10, 20, 30], [value => value > 25])
+      matchSome([10, 20, 30], [value => value > 25]),
     );
     checkEqual(false,
-      matchSome([10, 20, 30], [value => value > 35])
+      matchSome([10, 20, 30], [value => value > 35]),
     );
     checkEqual(true,
-      matchSome([null, undefined], [null, undefined])
+      matchSome([null, undefined], [null, undefined]),
     );
     checkEqual(true,
-      matchSome([null, undefined], [null])
+      matchSome([null, undefined], [null]),
     );
     checkEqual(true,
-      matchSome([null, undefined], [isNull, isUndefined])
+      matchSome([null, undefined], [isNull, isUndefined]),
     );
     checkEqual(true,
-      matchSome([null, undefined], [isNull])
+      matchSome([null, undefined], [isNull]),
     );
     checkEqual(true,
-      matchSome([null, undefined, NaN], [null, undefined])
+      matchSome([null, undefined, NaN], [null, undefined]),
     );
     checkEqual(true,
-      matchSome([null, undefined, NaN], [null, undefined, NaN])
+      matchSome([null, undefined, NaN], [null, undefined, NaN]),
     );
     checkEqual(true,
-      matchSome([null, undefined, NaN], [null, undefined, isNaNStrict])
+      matchSome([null, undefined, NaN], [null, undefined, isNaNStrict]),
     );
     checkEqual(false,
-      matchSome([null, undefined, NaN], [NaN])
+      matchSome([null, undefined, NaN], [NaN]),
     );
     checkEqual(true,
-      matchSome([null, undefined, NaN], [isNaNStrict])
+      matchSome([null, undefined, NaN], [isNaNStrict]),
     );
 
     checkEqual(false, isThrown(() => {
-      matchSome([10], [value => value > 15])
+      matchSome([10], [value => value > 15]);
     }));
     checkEqual(true, isThrown(() => {
-      matchSome(10, [value => value > 15])
+      matchSome(10, [value => value > 15]);
     }));
-  }
+  };
 
   const test_matchSomeIndex = () =>{
     checkEqual(0,
       matchSomeIndex([10, 20, 30], [value => value > 5])
-    , 'test_matchSomeIndex');
+      , 'test_matchSomeIndex');
     checkEqual(2,
-      matchSomeIndex([10, 20, 30], [value => value > 25])
+      matchSomeIndex([10, 20, 30], [value => value > 25]),
     );
     checkEqual(-1,
-      matchSomeIndex([10, 20, 30], [value => value > 35])
+      matchSomeIndex([10, 20, 30], [value => value > 35]),
     );
     checkEqual(0,
-      matchSomeIndex([null, undefined], [null, undefined])
+      matchSomeIndex([null, undefined], [null, undefined]),
     );
     checkEqual(1,
-      matchSomeIndex([null, undefined], [undefined])
+      matchSomeIndex([null, undefined], [undefined]),
     );
     checkEqual(0,
-      matchSomeIndex([null, undefined], [isNull, isUndefined])
+      matchSomeIndex([null, undefined], [isNull, isUndefined]),
     );
     checkEqual(1,
-      matchSomeIndex([null, undefined], [isUndefined])
+      matchSomeIndex([null, undefined], [isUndefined]),
     );
     checkEqual(0,
-      matchSomeIndex([null, undefined, NaN], [null, undefined])
+      matchSomeIndex([null, undefined, NaN], [null, undefined]),
     );
     checkEqual(0,
-      matchSomeIndex([null, undefined, NaN], [null, undefined, NaN])
+      matchSomeIndex([null, undefined, NaN], [null, undefined, NaN]),
     );
     checkEqual(0,
-      matchSomeIndex([null, undefined, NaN], [null, undefined, isNaNStrict])
+      matchSomeIndex([null, undefined, NaN], [null, undefined, isNaNStrict]),
     );
     checkEqual(-1,
-      matchSomeIndex([null, undefined, NaN], [NaN])
+      matchSomeIndex([null, undefined, NaN], [NaN]),
     );
     checkEqual(2,
-      matchSomeIndex([null, undefined, NaN], [isNaNStrict])
+      matchSomeIndex([null, undefined, NaN], [isNaNStrict]),
     );
 
     checkEqual(false, isThrown(() => {
-      matchSomeIndex([10], [value => value > 15])
+      matchSomeIndex([10], [value => value > 15]);
     }));
     checkEqual(true, isThrown(() => {
-      matchSomeIndex(10, [value => value > 15])
+      matchSomeIndex(10, [value => value > 15]);
     }));
-  }
+  };
 
   console.log('  test compare.js');
   test_equal();
@@ -1264,7 +1266,7 @@ const test_execute_compare = (parts) => {
   test_matchSome();
   test_matchSomeIndex();
 
-}
+};
 
 module.exports = {
   test_execute_compare,

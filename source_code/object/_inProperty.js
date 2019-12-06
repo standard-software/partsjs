@@ -1,7 +1,7 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
   _isException,
 } = require('../type/_isType.js');
 
@@ -29,7 +29,7 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
     }
     if (!_isString(propertyArray[i])) {
       throw new TypeError(
-        '_inProperty args(propertyArray) element is not string'
+        '_inProperty args(propertyArray) element is not string',
       );
     }
     if (hasOwn) {
@@ -43,7 +43,7 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
     }
   }
   return true;
-}
+};
 
 module.exports = {
   _inProperty,

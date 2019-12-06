@@ -23,16 +23,16 @@ const isMultiples = (number, radix) => {
 
   if (!_isInteger(number)) {
     throw new TypeError(
-      'isMultiples args(number) is not integer'
+      'isMultiples args(number) is not integer',
     );
   }
   if (!_isInteger(radix)) {
     throw new TypeError(
-      'isMultiples args(radix) is not integer'
+      'isMultiples args(radix) is not integer',
     );
   }
 
-  return _isMultiples(number, radix)
+  return _isMultiples(number, radix);
 };
 
 const isEven = (number) => {
@@ -47,9 +47,8 @@ const isOdd = (number) => {
  * round
  */
 const _round = (value, digit = 0) => {
-  var powResult;
-  var plusFlag = 0 <= value ? true: false;
-  powResult = Math.pow(10, digit);
+  const plusFlag = 0 <= value ? true: false;
+  const powResult = Math.pow(10, digit);
   if (plusFlag) {
     return Math.round(value * powResult) / powResult;
   } else {
@@ -64,7 +63,7 @@ const round = (value, digit = 0) => {
 
   if (!_isInteger(digit)) {
     throw new TypeError(
-      'round args(value) is not integer'
+      'round args(value) is not integer',
     );
   }
 
@@ -89,22 +88,22 @@ const nearEqual = (value1, value2, diff) => {
 
   if (!_isNumber(value1)) {
     throw new TypeError(
-      'nearEqual args(value1) is not number'
+      'nearEqual args(value1) is not number',
     );
   }
   if (!_isNumber(value2)) {
     throw new TypeError(
-      'nearEqual args(value2) is not number'
+      'nearEqual args(value2) is not number',
     );
   }
   if (!_isNumber(diff)) {
     throw new TypeError(
-      'nearEqual args(diff) is not number'
+      'nearEqual args(diff) is not number',
     );
   }
   if (diff < 0) {
     throw new RangeError(
-      'nearEqual args(diff) must be < 0'
+      'nearEqual args(diff) must be < 0',
     );
   }
 
@@ -129,22 +128,22 @@ const inRange = (value, from, to) => {
 
   if (!_isNumber(value)) {
     throw new TypeError(
-      'inRange args(value) is not number'
+      'inRange args(value) is not number',
     );
   }
   if (!_isNumber(from)) {
     throw new TypeError(
-      'inRange args(from) is not number'
+      'inRange args(from) is not number',
     );
   }
   if (!_isNumber(to)) {
     throw new TypeError(
-      'inRange args(to) is not number'
+      'inRange args(to) is not number',
     );
   }
   if (!(from <= to)) {
     throw new RangeError(
-      'inRange args(from,to) must be from <= to'
+      'inRange args(from,to) must be from <= to',
     );
   }
 
@@ -165,16 +164,16 @@ const randomInt = (min, max) => {
 
   if (!_isInteger(min)) {
     throw new TypeError(
-      'randomInt args(min) is not integer'
+      'randomInt args(min) is not integer',
     );
   }
   if (!_isInteger(max)) {
     throw new TypeError(
-      'randomInt args(max) is not integer'
+      'randomInt args(max) is not integer',
     );
   }
 
-  return _randomInt(min, max)
+  return _randomInt(min, max);
 };
 
 module.exports = {
@@ -182,7 +181,7 @@ module.exports = {
   _round, _nearEqual, _inRange,
 
   isMultiples, isEven, isOdd,
-  round, nearEqual, inRange, randomInt
+  round, nearEqual, inRange, randomInt,
 
 };
 

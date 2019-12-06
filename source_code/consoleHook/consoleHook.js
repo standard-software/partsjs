@@ -1,7 +1,7 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
   _isException,
 } = require('../type/type.js');
 
@@ -22,7 +22,7 @@ original.debug = console.debug;
 
 const _hook = (
   methodName,
-  hookFunc
+  hookFunc,
 ) => {
   console[methodName] = hookFunc;
 };
@@ -33,13 +33,13 @@ const hook = (
 ) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new RangeError(
-      'hook args(methodName) is not [log|info|warn|error|debug]'
+      'hook args(methodName) is not [log|info|warn|error|debug]',
     );
   }
 
   if (!_isFunction(hookFunc)) {
     throw new TypeError(
-      'hook args(hookFunc) is not function'
+      'hook args(hookFunc) is not function',
     );
   }
 
@@ -66,9 +66,11 @@ const _unHook = (methodName) => {
   console[methodName] = original[methodName];
 };
 
-var unHook = (methodName) => {
+const unHook = (methodName) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError('unHook args(methodName) is not [log|info|warn|error|debug]');
+    throw new RangeError(
+      'unHook args(methodName) is not [log|info|warn|error|debug]',
+    );
   }
 
   _unHook(methodName);
@@ -118,24 +120,24 @@ const accept = (
   rejectArray,
   hookFunc,
 ) => {
-  if(!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new RangeError(
-      'accept args(methodName) is not [log|info|warn|error|debug]'
+      'accept args(methodName) is not [log|info|warn|error|debug]',
     );
   }
   if (!_isArray(acceptArray)) {
     throw new TypeError(
-      'accept args(acceptArray) is not array'
+      'accept args(acceptArray) is not array',
     );
   }
   if (!(_isUndefined(rejectArray) || _isArray(rejectArray))) {
     throw new TypeError(
-      'accept args(rejectArray) is not array'
+      'accept args(rejectArray) is not array',
     );
   }
   if (!_isFunction(hookFunc)) {
     throw new TypeError(
-      'accept args(hookFunc) is not function'
+      'accept args(hookFunc) is not function',
     );
   }
 
@@ -143,8 +145,8 @@ const accept = (
     methodName,
     acceptArray,
     rejectArray,
-    hookFunc
-  )
+    hookFunc,
+  );
 };
 
 const acceptLog = (
@@ -185,8 +187,8 @@ const acceptDebug = (
 
 module.exports = {
   _hook,
-  hook,hookLog,hookInfo,hookWarn,hookError,hookDebug,
+  hook, hookLog, hookInfo, hookWarn, hookError, hookDebug,
   _unHook,
-  unHook,unHookLog,unHookInfo,unHookWarn,unHookError,unHookDebug,
-  accept,acceptLog,acceptInfo,acceptWarn,acceptError,acceptDebug,
+  unHook, unHookLog, unHookInfo, unHookWarn, unHookError, unHookDebug,
+  accept, acceptLog, acceptInfo, acceptWarn, acceptError, acceptDebug,
 };

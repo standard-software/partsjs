@@ -1,3 +1,18 @@
+/* eslint-disable brace-style */
+/* eslint-disable space-before-blocks */
+/* eslint-disable comma-dangle */
+/* eslint-disable curly */
+/* eslint-disable new-cap */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable max-len */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable spaced-comment */
+/* eslint-disable indent */
+/* eslint-disable one-var */
+/* eslint-disable no-var */
+/* eslint-disable prefer-rest-params */
+/* eslint-disable no-extend-native */
 const polyfillDefine = () => {
 
   if (!String.prototype.includes) {

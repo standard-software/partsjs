@@ -32,34 +32,34 @@ const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
     }
     if (!_isString(propertyArray[i])) {
       throw new TypeError(
-        'copyProperty args(propertyArray) element is not string'
+        'copyProperty args(propertyArray) element is not string',
       );
     }
     toObject[propertyArray[i]] = fromObject[propertyArray[i]];
   }
   return toObject;
-}
+};
 
 const copyProperty = (fromObject, propertyArray, toObject = {}) => {
   if (_inProperty(fromObject, 'fromObject,propertyArray')) {
-    ({ fromObject, propertyArray, toObject = {} } = fromObject)
+    ({ fromObject, propertyArray, toObject = {} } = fromObject);
   }
 
   if (!_isObject(fromObject)) {
     throw new TypeError(
-      'copyProperty args(fromObject) is not object'
+      'copyProperty args(fromObject) is not object',
     );
   }
   if (!_isString(propertyArray)) {
     if (!_isArray(propertyArray)) {
       throw new TypeError(
-        'copyProperty args(propertyArray) is not [array|string]'
+        'copyProperty args(propertyArray) is not [array|string]',
       );
     }
   }
   if (!_isObject(toObject)) {
     throw new TypeError(
-      'copyProperty args(toObject) is not object'
+      'copyProperty args(toObject) is not object',
     );
   }
 
@@ -67,35 +67,35 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
     fromObject,
     propertyArray,
     toObject,
-  )
-}
+  );
+};
 
 /**
  * propertyCount
  */
 const _propertyCount = (object) => {
-  var result = 0;
-  for (let [key, value] of Object.entries(object)) {
+  let result = 0;
+  for (const [key, value] of Object.entries(object)) {
     result += 1;
   }
   return result;
-}
+};
 
 const propertyCount = (object) => {
   if (!_isObject(object)) {
     throw new TypeError(
-      'propertyCount args(object) is not object'
+      'propertyCount args(object) is not object',
     );
   }
   return _propertyCount(object);
-}
+};
 
 /**
  * getProperty
  */
 const _getProperty = (
   object,
-  propertyPath
+  propertyPath,
 ) => {
   let result = object;
   const propertyArray = propertyPath.split('.');
@@ -109,26 +109,26 @@ const _getProperty = (
     result = result[propertyArray[i]];
   }
   return result;
-}
+};
 
 const getProperty = (object, propertyPath) => {
   if (_inProperty(object, 'object, propertyPath')) {
-    ({ object, propertyPath } = object)
+    ({ object, propertyPath } = object);
   }
 
   if (!_isObject(object)) {
     throw new TypeError(
-      'getProperty args(object) is not object'
+      'getProperty args(object) is not object',
     );
   }
   if (!_isString(propertyPath)) {
     throw new TypeError(
-      'getProperty args(propertyPath) is not string'
+      'getProperty args(propertyPath) is not string',
     );
   }
 
   return _getProperty(object, propertyPath);
-}
+};
 
 /**
  * setProperty
@@ -154,26 +154,26 @@ const _setProperty = (object, path, value) => {
     result = result[propertyArray[i]];
   }
   result[propertyArray[propertyArray.length - 1]] = value;
-}
+};
 
 const setProperty = (object, propertyPath, value) => {
   if (_inProperty(object, 'object, propertyPath, value')) {
-    ({ object, propertyPath, value } = object)
+    ({ object, propertyPath, value } = object);
   }
 
   if (!_isObject(object)) {
     throw new TypeError(
-      'setProperty args(object) is not object'
+      'setProperty args(object) is not object',
     );
   }
   if (!_isString(propertyPath)) {
     throw new TypeError(
-      'setProperty args(propertyPath) is not string'
+      'setProperty args(propertyPath) is not string',
     );
   }
 
   return _setProperty(object, propertyPath, value);
-}
+};
 
 const copyProp = copyProperty;
 const propCount = propertyCount;

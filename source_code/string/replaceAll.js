@@ -1,7 +1,7 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
   _isException,
 } = require('../type/type.js');
 
@@ -20,22 +20,22 @@ const replaceAll = (str, before, after) => {
 
   if (!_isString(str)) {
     throw new TypeError(
-      'replaceAll args(str) is not string'
+      'replaceAll args(str) is not string',
     );
   }
   if (!_isString(before)) {
     throw new TypeError(
-      'replaceAll args(before) is not string'
+      'replaceAll args(before) is not string',
     );
   }
   if (!_isString(after)) {
     throw new TypeError(
-      'replaceAll args(after) is not string'
+      'replaceAll args(after) is not string',
     );
   }
 
   return _replaceAll(str, before, after);
-}
+};
 
 module.exports = {
   replaceAll,

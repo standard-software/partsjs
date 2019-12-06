@@ -1,7 +1,7 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
   _isException,
 } = require('../type/type.js');
 
@@ -24,13 +24,14 @@ const _matchFormat = (
   const index = patterns.indexOf(formatName);
   if (index === -1) {
     throw new RangeError(
-      `_matchFormat args(formatName:${formatName}) is not exists format`
+      `_matchFormat args(formatName:${formatName}) is not exists format`,
     );
   }
   const result = _matchFormat.pattern[patterns[index]](value);
   if (!_isBoolean(result)) {
     throw new RangeError(
-      `_matchFormat args(formatName:${formatName}) function result is not boolean`
+      `_matchFormat args(formatName:${formatName})` +
+      ` function result is not boolean`,
     );
   }
   return result;
@@ -40,72 +41,73 @@ _matchFormat.pattern = {};
 
 _matchFormat.clear = () => {
   _matchFormat.pattern = {};
-}
+};
 _matchFormat.add = (nameArray, patternFunction) => {
   nameArray.forEach(name => {
     _matchFormat.pattern[name] = patternFunction;
   });
-}
+};
 _matchFormat.reset = () => {
 
   _matchFormat.add(['zenkaku'],
     value => value.match(
-      /^[^\x01-\x7E\xA1-\xDF]+$/
+      /^[^\x01-\x7E\xA1-\xDF]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['hiragana'],
     value => value.match(
-      /^[\u3041-\u3096]+$/
+      /^[\u3041-\u3096]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['katakana'],
     value => value.match(
-      /^[\u30a1-\u30f6]+$/
+      /^[\u30a1-\u30f6]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['alphabet-number'],
     value => value.match(
-      /^[0-9a-zA-Z]+$/
+      /^[0-9a-zA-Z]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['number'],
     value => value.match(
-      /^[0-9]+$/
+      /^[0-9]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['alphabet'],
     value => value.match(
-      /^[a-zA-Z]+$/
+      /^[a-zA-Z]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['upper_alphabet'],
     value => value.match(
-      /^[A-Z]+$/
+      /^[A-Z]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['lower_alphabet'],
     value => value.match(
-      /^[a-z]+$/
+      /^[a-z]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['integer'],
     value => value.match(
-      /^[+|-]?[0-9]+$/
+      /^[+|-]?[0-9]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['float_only'],
     value => value.match(
-      /^[-|+]?[0-9]*\.[0-9]+$/
+      /^[-|+]?[0-9]*\.[0-9]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['float_integer'],
     value => value.match(
-      /^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/
+      /^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['float_more'],
     value => value.match(
-      /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/
+      // eslint-disable-next-line max-len
+      /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/,
     ) ? true : false,
   );
   // float_more
@@ -118,125 +120,125 @@ _matchFormat.reset = () => {
 
   _matchFormat.add(['2_base_number', 'binary'],
     value => value.match(
-      /^[-|+]?[01]+$/
+      /^[-|+]?[01]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['3_base_number'],
     value => value.match(
-      /^[-|+]?[0-2]+$/
+      /^[-|+]?[0-2]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['4_base_number'],
     value => value.match(
-      /^[-|+]?[0-3]+$/
+      /^[-|+]?[0-3]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['5_base_number'],
     value => value.match(
-      /^[-|+]?[0-4]+$/
+      /^[-|+]?[0-4]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['6_base_number'],
     value => value.match(
-      /^[-|+]?[0-5]+$/
+      /^[-|+]?[0-5]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['7_base_number'],
     value => value.match(
-      /^[-|+]?[0-6]+$/
+      /^[-|+]?[0-6]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['8_base_number', 'octal'],
     value => value.match(
-      /^[-|+]?[0-7]+$/
+      /^[-|+]?[0-7]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['9_base_number'],
     value => value.match(
-      /^[-|+]?[0-8]+$/
+      /^[-|+]?[0-8]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['10_base_number'],
     value => value.match(
-      /^[-|+]?[0-9]+$/
+      /^[-|+]?[0-9]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['11_base_number'],
     value => value.match(
-      /^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/
+      /^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['12_base_number'],
     value => value.match(
-      /^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/
+      /^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['13_base_number'],
     value => value.match(
-      /^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/
+      /^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['14_base_number'],
     value => value.match(
-      /^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/
+      /^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['15_base_number'],
     value => value.match(
-      /^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/
+      /^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['16_base_number', 'hex'],
     value => value.match(
-      /^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/
+      /^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_y/m/d', 'date'],
     value => value.match(
-      /^\d{1,4}\/\d{1,2}\/\d{1,2}$/
+      /^\d{1,4}\/\d{1,2}\/\d{1,2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_yyyy/m/d'],
     value => value.match(
-      /^\d{4}\/\d{1,2}\/\d{1,2}$/
+      /^\d{4}\/\d{1,2}\/\d{1,2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_yyyy/mm/dd'],
     value => value.match(
-      /^\d{4}\/\d{2}\/\d{2}$/
+      /^\d{4}\/\d{2}\/\d{2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_y/m/d_h:n'],
     value => value.match(
-      /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/
+      /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_y/m/d_h:n:s'],
     value => value.match(
-      /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/
+      /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_y/m/d_h:n:s.ms'],
     value => value.match(
-      /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/
+      /^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_y-m-d'],
     value => value.match(
-      /^\d{1,4}-\d{1,2}-\d{1,2}$/
+      /^\d{1,4}-\d{1,2}-\d{1,2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_yyyy-m-d'],
     value => value.match(
-      /^\d{4}-\d{1,2}-\d{1,2}$/
+      /^\d{4}-\d{1,2}-\d{1,2}$/,
     ) ? true : false,
   );
   _matchFormat.add(['date_yyyy-mm-dd'],
     value => value.match(
-      /^\d{4}-\d{2}-\d{2}$/
+      /^\d{4}-\d{2}-\d{2}$/,
     ) ? true : false,
   );
-}
+};
 _matchFormat.reset();
 
 const matchFormat = (
@@ -249,18 +251,18 @@ const matchFormat = (
 
   if (!_isString(formatName)) {
     throw new TypeError(
-      'matchFormat args(formatName) is not string'
+      'matchFormat args(formatName) is not string',
     );
   }
   if (!_isString(value)) {
     throw new TypeError(
-      'matchFormat args(value) is not string'
+      'matchFormat args(value) is not string',
     );
   }
 
   return _matchFormat(
     formatName,
-    value
+    value,
   );
 };
 
@@ -269,28 +271,28 @@ const matchFormat = (
  */
 const _includes = (
   value,
-  compareArray
+  compareArray,
 ) => {
   const compareFunctionArray =
     compareArray.map((element) => {
       if (_isRegExp(element)) {
-        return element
+        return element;
       } else if (_isString(element)) {
         return element === ''
           ? () => false
-          : value => value.includes(element)
+          : value => value.includes(element);
       } else {
         throw new TypeError(
-          '_includes args(compareArray element) is not [regexp|string]'
+          '_includes args(compareArray element) is not [regexp|string]',
         );
       }
     });
   return _match(value, compareFunctionArray);
-}
+};
 
 const includes = (
   value,
-  compareArray
+  compareArray,
 ) => {
   if (_inProperty(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
@@ -298,19 +300,19 @@ const includes = (
 
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'includes args(compareArray) is not array'
+      'includes args(compareArray) is not array',
     );
   }
 
   return _includes(value, compareArray);
-}
+};
 
 /**
  * replaceAll
  */
 const _replaceAll = (str, before, after) => {
   return str.split(before).join(after);
-}
+};
 
 const replaceAll = (str, before, after) => {
   if (_inProperty(str, 'str,before,after')) {
@@ -319,24 +321,24 @@ const replaceAll = (str, before, after) => {
 
   if (!_isString(str)) {
     throw new TypeError(
-      'replaceAll args(str) is not string'
+      'replaceAll args(str) is not string',
     );
   }
   if (!_isString(before)) {
     throw new TypeError(
-      'replaceAll args(before) is not string'
+      'replaceAll args(before) is not string',
     );
   }
   if (!_isString(after)) {
     throw new TypeError(
-      'replaceAll args(after) is not string'
+      'replaceAll args(after) is not string',
     );
   }
 
   return _replaceAll(str, before, after);
-}
+};
 
 module.exports = {
-  _matchFormat,_includes,_replaceAll,
-  matchFormat,includes,replaceAll,
+  _matchFormat, _includes, _replaceAll,
+  matchFormat, includes, replaceAll,
 };

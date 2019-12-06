@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_syntax = (parts) => {
 
   const {
@@ -15,7 +17,7 @@ const test_execute_syntax = (parts) => {
     isRegExp, isException,
 
     isNotUndefined, isNotNull,
-    isNotBoolean, isNotNumber,isNotInteger, isNotString,
+    isNotBoolean, isNotNumber, isNotInteger, isNotString,
     isNotFunction, isNotObject, isNotArray, isNotDate,
     isNotRegExp, isNotException,
 
@@ -33,10 +35,10 @@ const test_execute_syntax = (parts) => {
     or,
   } = parts.compare;
 
-  const test_guard = function () {
+  const test_guard = function() {
 
     var guardFunc = () => [
-      isInteger(value1), [isInteger(value2), 'testmessage']
+      isInteger(value1), [isInteger(value2), 'testmessage'],
     ];
     {
       // no guard
@@ -80,7 +82,7 @@ const test_execute_syntax = (parts) => {
     var guardFunc = () => [
       isInteger(value1),
       isArray(value2),
-      1 <= value2.length
+      1 <= value2.length,
     ];
     {
       var result1 = false; var value1 = 1; var value2 = [1];
@@ -145,7 +147,7 @@ const test_execute_syntax = (parts) => {
     // gurad exception args1
     {
       checkEqual(true, isNotThrown(
-        () => guard(() => [])
+        () => guard(() => []),
       ));
       checkEqual(true, isThrownException(
         () => guard(123),
@@ -158,8 +160,8 @@ const test_execute_syntax = (parts) => {
         () => guard(123),
         (e) => {
           return e.message ===
-            'guard args(guardFunc) is not function'
-        }
+            'guard args(guardFunc) is not function';
+        },
       ), 'gurad exception args1 4');
     }
     // (new SyntaxError).name
@@ -179,7 +181,7 @@ const test_execute_syntax = (parts) => {
       checkEqual(true, isThrown(
         () => guard(() => 123),
         (e) => e.message ===
-          'guard args(guardFunc result) is not array'
+          'guard args(guardFunc result) is not array',
       ));
     }
 
@@ -191,7 +193,7 @@ const test_execute_syntax = (parts) => {
       [isInteger(value2), 'testmessage'],
     ];
     checkEqual(true, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception args1 function result array 1');
 
     var guardFunc = () => [
@@ -199,7 +201,7 @@ const test_execute_syntax = (parts) => {
       [isInteger(value2)],
     ];
     checkEqual(true, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception args1 function result array 2');
 
     var guardFunc = () => [
@@ -207,12 +209,12 @@ const test_execute_syntax = (parts) => {
       [],
     ];
     checkEqual(false, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception args1 function result array 3');
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args(guardFunc resultArray element) is not array.length >= 1'
+        'guard args(guardFunc resultArray element) is not array.length >= 1',
     ), 'gurad exception args1 function result array 3-2');
 
     var guardFunc = () => [
@@ -220,7 +222,7 @@ const test_execute_syntax = (parts) => {
       isInteger(value1),
     ];
     checkEqual(true, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception args1 function result array 4');
 
     var guardFunc = () => [
@@ -228,7 +230,7 @@ const test_execute_syntax = (parts) => {
       isInteger(value1),
     ];
     checkEqual(true, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception args1 function result array 5');
 
     var guardFunc = () => [
@@ -236,12 +238,12 @@ const test_execute_syntax = (parts) => {
       isInteger(value1),
     ];
     checkEqual(false, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception args1 function result array 6');
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args(guardFunc resultArray element) is not array.length >= 1'
+        'guard args(guardFunc resultArray element) is not array.length >= 1',
     ), 'gurad exception args1 function result array 6-2');
 
     // gurad exception function result array function result
@@ -251,7 +253,7 @@ const test_execute_syntax = (parts) => {
       [() => true],
     ];
     checkEqual(true, isNotThrown(
-      () => guard(guardFunc)
+      () => guard(guardFunc),
     ), 'gurad exception function result array function result 1');
 
     var guardFunc = () => [
@@ -261,7 +263,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args(guardFunc resultArray element value) is not boolean'
+        'guard args(guardFunc resultArray element value) is not boolean',
     ), 'gurad exception function result array function result 2');
 
     var guardFunc = () => [
@@ -271,7 +273,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(true, isThrown(
       () => guard(guardFunc),
       (e) => e.message ===
-        'guard args(guardFunc resultArray element value) is not boolean'
+        'guard args(guardFunc resultArray element value) is not boolean',
     ), 'gurad exception function result array function result 3');
 
     // gurad exception args2
@@ -280,12 +282,12 @@ const test_execute_syntax = (parts) => {
       [() => true],
     ];
     checkEqual(true, isNotThrown(
-      () => guard(guardFunc, () => {})
+      () => guard(guardFunc, () => {}),
     ), 'gurad exception args2(runFunc) 1');
 
     checkEqual(false, isNotThrown(
-      () => guard(guardFunc, 'test')
-      ), 'gurad exception args2(runFunc) 2');
+      () => guard(guardFunc, 'test'),
+    ), 'gurad exception args2(runFunc) 2');
 
   };
 
@@ -300,7 +302,7 @@ const test_execute_syntax = (parts) => {
     checkEqual(false, sc(0, or, [1, 2]));
   };
 
-  const test_if_ = function () {
+  const test_if_ = function() {
     var ifResultValue = {
       then: 'THEN',
       else: 'ELSE',
@@ -342,28 +344,28 @@ const test_execute_syntax = (parts) => {
     // Error
     checkEqual(true, isThrownException(
       function() { if_(true)(); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
 
     checkEqual(true, isThrownException(
       function() { if_(true)({}); },
-      (new ReferenceError).name
+      (new ReferenceError).name,
     ));
 
     checkEqual(true, isThrownException(
       function() { if_(true)({ thenn: '' }); },
-      (new ReferenceError).name
+      (new ReferenceError).name,
     ));
 
     checkEqual(false, isNotThrown(
-      function() { if_(true)(); }
+      function() { if_(true)(); },
     ));
     checkEqual(true, isNotThrown(
-      function() { if_(true)({ then: '' }); }
+      function() { if_(true)({ then: '' }); },
     ));
   };
 
-  const test_switch_ = function () {
+  const test_switch_ = function() {
     var switchResultValue1 = [
       [1, 'number 1'],
       ['1', 'string 1'],
@@ -393,15 +395,15 @@ const test_execute_syntax = (parts) => {
     // Error
     var switchResultValue4 = [
       [1, '1'],
-      'default'
+      'default',
     ];
     checkEqual(true, isThrownException(
       function() { switch_(1)(switchResultValue4); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
     checkEqual(true, isThrownException(
       function() { switch_(2)(switchResultValue4); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
 
     var switchResultFunc1 = [
@@ -436,7 +438,7 @@ const test_execute_syntax = (parts) => {
   test_sc();
   test_if_();
   test_switch_();
-}
+};
 
 module.exports = {
   test_execute_syntax,

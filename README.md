@@ -106,6 +106,7 @@ You can now use the functions of the parts object.
 - array.js
   - add from
   - add sum average midian
+- eslint format fix
 
 ### 2.12.0
 #### 2019/11/15(Fri)

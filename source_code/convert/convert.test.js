@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_convert = (parts) => {
 
   const {
@@ -242,57 +244,57 @@ const test_execute_convert = (parts) => {
 
     // Positive number
     checkEqual(32,        stringToIntegerDefault('32'));
-    checkEqual(32,        stringToIntegerDefault('32',       undefined, 10  ));
-    checkEqual(undefined, stringToIntegerDefault('31.5',     undefined, 10  ));
-    checkEqual(32,        stringToIntegerDefault('100000',   undefined, 2   ));
-    checkEqual(31,        stringToIntegerDefault('11111',    undefined, 2   ));
-    checkEqual(undefined, stringToIntegerDefault('11111.1',  undefined, 2   ));
-    checkEqual(undefined, stringToIntegerDefault('11111.01', undefined, 2   ));
-    checkEqual(32,        stringToIntegerDefault('40',       undefined, 8   ));
-    checkEqual(31,        stringToIntegerDefault('37',       undefined, 8   ));
-    checkEqual(undefined, stringToIntegerDefault('37.4',     undefined, 8   ));
-    checkEqual(32,        stringToIntegerDefault('20',       undefined, 16  ));
-    checkEqual(31,        stringToIntegerDefault('1f',       undefined, 16  ));
-    checkEqual(undefined, stringToIntegerDefault('1f.8',     undefined, 16  ));
-    checkEqual(32,        stringToIntegerDefault('44',       undefined, 7   ));
-    checkEqual(31,        stringToIntegerDefault('43',       undefined, 7   ));
-    checkEqual(255,       stringToIntegerDefault('255',      undefined, 10  ));
-    checkEqual(11,        stringToIntegerDefault('11',       undefined, 10  ));
-    checkEqual(255,       stringToIntegerDefault('FF',       undefined, 16  ));
-    checkEqual(16,        stringToIntegerDefault('20',       undefined, 8   ));
-    checkEqual(255,       stringToIntegerDefault('ff',       undefined, 16  ));
-    checkEqual(11,        stringToIntegerDefault('b',        undefined, 16  ));
-    checkEqual(127,       stringToIntegerDefault('177',      undefined, 8   ));
-    checkEqual(10,        stringToIntegerDefault('12',       undefined, 8   ));
-    checkEqual(3,         stringToIntegerDefault('11',       undefined, 2   ));
-    checkEqual(15,        stringToIntegerDefault('1111',     undefined, 2   ));
+    checkEqual(32,        stringToIntegerDefault('32',        undefined, 10  ));
+    checkEqual(undefined, stringToIntegerDefault('31.5',      undefined, 10  ));
+    checkEqual(32,        stringToIntegerDefault('100000',    undefined, 2   ));
+    checkEqual(31,        stringToIntegerDefault('11111',     undefined, 2   ));
+    checkEqual(undefined, stringToIntegerDefault('11111.1',   undefined, 2   ));
+    checkEqual(undefined, stringToIntegerDefault('11111.01',  undefined, 2   ));
+    checkEqual(32,        stringToIntegerDefault('40',        undefined, 8   ));
+    checkEqual(31,        stringToIntegerDefault('37',        undefined, 8   ));
+    checkEqual(undefined, stringToIntegerDefault('37.4',      undefined, 8   ));
+    checkEqual(32,        stringToIntegerDefault('20',        undefined, 16  ));
+    checkEqual(31,        stringToIntegerDefault('1f',        undefined, 16  ));
+    checkEqual(undefined, stringToIntegerDefault('1f.8',      undefined, 16  ));
+    checkEqual(32,        stringToIntegerDefault('44',        undefined, 7   ));
+    checkEqual(31,        stringToIntegerDefault('43',        undefined, 7   ));
+    checkEqual(255,       stringToIntegerDefault('255',       undefined, 10  ));
+    checkEqual(11,        stringToIntegerDefault('11',        undefined, 10  ));
+    checkEqual(255,       stringToIntegerDefault('FF',        undefined, 16  ));
+    checkEqual(16,        stringToIntegerDefault('20',        undefined, 8   ));
+    checkEqual(255,       stringToIntegerDefault('ff',        undefined, 16  ));
+    checkEqual(11,        stringToIntegerDefault('b',         undefined, 16  ));
+    checkEqual(127,       stringToIntegerDefault('177',       undefined, 8   ));
+    checkEqual(10,        stringToIntegerDefault('12',        undefined, 8   ));
+    checkEqual(3,         stringToIntegerDefault('11',        undefined, 2   ));
+    checkEqual(15,        stringToIntegerDefault('1111',      undefined, 2   ));
 
     // Negative number
     checkEqual(-32,       stringToIntegerDefault('-32'));
-    checkEqual(-32,       stringToIntegerDefault('-32',      undefined, 10  ));
-    checkEqual(undefined, stringToIntegerDefault('-31.5',    undefined, 10  ));
-    checkEqual(-32,       stringToIntegerDefault('-100000',  undefined, 2   ));
-    checkEqual(-31,       stringToIntegerDefault('-11111',   undefined, 2   ));
-    checkEqual(undefined, stringToIntegerDefault('-11111.1', undefined, 2   ));
-    checkEqual(undefined, stringToIntegerDefault('-11111.01',undefined, 2   ));
-    checkEqual(-32,       stringToIntegerDefault('-40',      undefined, 8   ));
-    checkEqual(-31,       stringToIntegerDefault('-37',      undefined, 8   ));
-    checkEqual(undefined, stringToIntegerDefault('-37.4',    undefined, 8   ));
-    checkEqual(-32,       stringToIntegerDefault('-20',      undefined, 16  ));
-    checkEqual(-31,       stringToIntegerDefault('-1f',      undefined, 16  ));
-    checkEqual(undefined, stringToIntegerDefault('-1f.8',    undefined, 16  ));
-    checkEqual(-32,       stringToIntegerDefault('-44',      undefined, 7   ));
-    checkEqual(-31,       stringToIntegerDefault('-43',      undefined, 7   ));
-    checkEqual(-255,      stringToIntegerDefault('-255',     undefined, 10  ));
-    checkEqual(-11,       stringToIntegerDefault('-11',      undefined, 10  ));
-    checkEqual(-255,      stringToIntegerDefault('-FF',      undefined, 16  ));
-    checkEqual(-16,       stringToIntegerDefault('-20',      undefined, 8   ));
-    checkEqual(-255,      stringToIntegerDefault('-ff',      undefined, 16  ));
-    checkEqual(-11,       stringToIntegerDefault('-b',       undefined, 16  ));
-    checkEqual(-127,      stringToIntegerDefault('-177',     undefined, 8   ));
-    checkEqual(-10,       stringToIntegerDefault('-12',      undefined, 8   ));
-    checkEqual(-3,        stringToIntegerDefault('-11',      undefined, 2   ));
-    checkEqual(-15,       stringToIntegerDefault('-1111',    undefined, 2   ));
+    checkEqual(-32,       stringToIntegerDefault('-32',       undefined, 10  ));
+    checkEqual(undefined, stringToIntegerDefault('-31.5',     undefined, 10  ));
+    checkEqual(-32,       stringToIntegerDefault('-100000',   undefined, 2   ));
+    checkEqual(-31,       stringToIntegerDefault('-11111',    undefined, 2   ));
+    checkEqual(undefined, stringToIntegerDefault('-11111.1',  undefined, 2   ));
+    checkEqual(undefined, stringToIntegerDefault('-11111.01', undefined, 2   ));
+    checkEqual(-32,       stringToIntegerDefault('-40',       undefined, 8   ));
+    checkEqual(-31,       stringToIntegerDefault('-37',       undefined, 8   ));
+    checkEqual(undefined, stringToIntegerDefault('-37.4',     undefined, 8   ));
+    checkEqual(-32,       stringToIntegerDefault('-20',       undefined, 16  ));
+    checkEqual(-31,       stringToIntegerDefault('-1f',       undefined, 16  ));
+    checkEqual(undefined, stringToIntegerDefault('-1f.8',     undefined, 16  ));
+    checkEqual(-32,       stringToIntegerDefault('-44',       undefined, 7   ));
+    checkEqual(-31,       stringToIntegerDefault('-43',       undefined, 7   ));
+    checkEqual(-255,      stringToIntegerDefault('-255',      undefined, 10  ));
+    checkEqual(-11,       stringToIntegerDefault('-11',       undefined, 10  ));
+    checkEqual(-255,      stringToIntegerDefault('-FF',       undefined, 16  ));
+    checkEqual(-16,       stringToIntegerDefault('-20',       undefined, 8   ));
+    checkEqual(-255,      stringToIntegerDefault('-ff',       undefined, 16  ));
+    checkEqual(-11,       stringToIntegerDefault('-b',        undefined, 16  ));
+    checkEqual(-127,      stringToIntegerDefault('-177',      undefined, 8   ));
+    checkEqual(-10,       stringToIntegerDefault('-12',       undefined, 8   ));
+    checkEqual(-3,        stringToIntegerDefault('-11',       undefined, 2   ));
+    checkEqual(-15,       stringToIntegerDefault('-1111',     undefined, 2   ));
 
     // Default Value
     checkEqual(undefined, stringToIntegerDefault('abc'));
@@ -602,7 +604,7 @@ const test_execute_convert = (parts) => {
     checkEqual(NaN,       toInteger('infinity'));
     checkEqual(NaN,       toInteger('inf'));
     checkEqual(NaN,       toInteger('info'));
-  }
+  };
 
   console.log('  test convert.js');
   test_numberToString();
@@ -611,7 +613,7 @@ const test_execute_convert = (parts) => {
   test_NumerCast();
   test_toNumber();
   test_toInteger();
-}
+};
 
 module.exports = {
   test_execute_convert,

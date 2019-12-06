@@ -20,7 +20,7 @@ const {
 } = require('../string/string.js');
 
 const {
-  _copyProperty,_propertyCount,_inProperty,
+  _copyProperty, _propertyCount, _inProperty,
 } = require('../object/object.js');
 
 const {
@@ -33,7 +33,7 @@ const {
  */
 const _numberToString = (
   value,
-  radix
+  radix,
 ) => {
   radix = _initialValue(radix, 10);
   return value.toString(radix);
@@ -41,31 +41,31 @@ const _numberToString = (
 
 const numberToString = (
   value,
-  radix = 10
+  radix = 10,
 ) => {
   if (_inProperty(value, 'value')) {
-    ({ value, radix = 10 } = value)
+    ({ value, radix = 10 } = value);
   }
 
   if (!_isNumber(value)) {
     throw new TypeError(
-      'numberToString args(value) is not number'
+      'numberToString args(value) is not number',
     );
   }
   if (!_isInteger(radix)) {
     throw new TypeError(
-      'numberToString args(radix) is not integer'
+      'numberToString args(radix) is not integer',
     );
   }
   if (!(2 <= radix && radix <= 36)) {
     throw new RangeError(
-      'numberToString args(radix) must be between 2 and 36'
+      'numberToString args(radix) must be between 2 and 36',
     );
   }
 
   return _numberToString(
     value,
-    radix
+    radix,
   );
 };
 
@@ -97,9 +97,9 @@ const _stringToNumber = (
     value,
     () => {
       throw new RangeError(
-        'stringToNumber args(value) is not changeing number'
+        'stringToNumber args(value) is not changeing number',
       );
-    }
+    },
   );
 };
 
@@ -112,7 +112,7 @@ const stringToNumber = (
 
   if (!_isString(value)) {
     throw new TypeError(
-      'stringToNumber args(value) is not string'
+      'stringToNumber args(value) is not string',
     );
   }
 
@@ -141,7 +141,7 @@ const stringToNumberDefault = (
 
   if (!_isString(value)) {
     throw new TypeError(
-      'stringToNumberDefault args(value) is not string'
+      'stringToNumberDefault args(value) is not string',
     );
   }
 
@@ -162,7 +162,7 @@ const _stringToIntegerBase = (
   if (value === '') {
     return defaultValueFunc();
   }
-  if (!_matchFormat(String(radix)+'_base_number',value )) {
+  if (!_matchFormat(String(radix)+'_base_number', value )) {
     return defaultValueFunc();
   }
 
@@ -181,11 +181,11 @@ const _stringToInteger = (
     value,
     () => {
       throw new RangeError(
-        'stringToInteger args(value) is not changeing integer'
+        'stringToInteger args(value) is not changeing integer',
       );
     },
     radix,
-  )
+  );
 };
 
 const stringToInteger = (
@@ -198,17 +198,17 @@ const stringToInteger = (
 
   if (!_isString(value)) {
     throw new TypeError(
-      'stringToInteger args(value) is not string'
+      'stringToInteger args(value) is not string',
     );
   }
   if (!_isInteger(radix)) {
     throw new TypeError(
-      'stringToInteger args(radix) is not integer'
+      'stringToInteger args(radix) is not integer',
     );
   }
   if (!(2 <= radix && radix <= 36)) {
     throw new RangeError(
-      'stringToInteger args(radix) must be between 2 and 36'
+      'stringToInteger args(radix) must be between 2 and 36',
     );
   }
 
@@ -227,7 +227,7 @@ const _stringToIntegerDefault = (
     value,
     () => defaultValue,
     radix,
-  )
+  );
 };
 
 const stringToIntegerDefault = (
@@ -241,17 +241,17 @@ const stringToIntegerDefault = (
 
   if (!_isString(value)) {
     throw new TypeError(
-      'stringToInteger args(value) is not string'
+      'stringToInteger args(value) is not string',
     );
   }
   if (!_isInteger(radix)) {
     throw new TypeError(
-      'stringToInteger args(radix) is not integer'
+      'stringToInteger args(radix) is not integer',
     );
   }
   if (!(2 <= radix && radix <= 36)) {
     throw new RangeError(
-      'stringToInteger args(radix) must be between 2 and 36'
+      'stringToInteger args(radix) must be between 2 and 36',
     );
   }
 
@@ -270,7 +270,7 @@ const toNumber = (value) => {
     return NaN;
   }
   if (!_isString(value)) {
-    return Number(value)
+    return Number(value);
   }
   return stringToNumberDefault(value, NaN);
 };

@@ -12,7 +12,7 @@ const {
 } = require('../type/type.js');
 
 const {
-  _copyProperty
+  _copyProperty,
 } = require('../object/object.js');
 
 /**
@@ -28,7 +28,7 @@ cloneFunction.cloneIgnoreFunction = (
     return undefined;
   }
   return source;
-}
+};
 
 // support
 //  user object and user arrayType
@@ -44,13 +44,13 @@ cloneFunction.cloneObject = (
 
   const cloneValue = new source.constructor();
   bufferWrite(source, cloneValue);
-  for (let key in source) {
+  for (const key in source) {
     if (source.hasOwnProperty(key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }
   return cloneValue;
-}
+};
 
 cloneFunction.cloneArrayType = (
   source,
@@ -63,13 +63,13 @@ cloneFunction.cloneArrayType = (
 
   const cloneValue = new source.constructor();
   bufferWrite(source, cloneValue);
-  for (let key in source) {
+  for (const key in source) {
     if (source.hasOwnProperty(key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }
   return cloneValue;
-}
+};
 
 // support
 //  all object
@@ -86,13 +86,13 @@ cloneFunction.cloneObjectType = (
 
   const cloneValue = new source.constructor();
   bufferWrite(source, cloneValue);
-  for (let key in source) {
+  for (const key in source) {
     if (source.hasOwnProperty(key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }
   return cloneValue;
-}
+};
 
 // // support only simple object
 // cloneFunction.cloneObject = (
@@ -139,7 +139,7 @@ cloneFunction.cloneDate = (
   const cloneValue = new Date(source.getTime());
   bufferWrite(source, cloneValue);
   return cloneValue;
-}
+};
 
 cloneFunction.cloneRegExp = (
   source,
@@ -151,7 +151,7 @@ cloneFunction.cloneRegExp = (
   const cloneValue = new RegExp(source.source);
   bufferWrite(source, cloneValue);
   return cloneValue;
-}
+};
 
 // cloneMap
 //  key not recursive call
@@ -162,24 +162,24 @@ cloneFunction.cloneMap = (
   __cloneDeep = value => value,
 ) => {
   if (!_isMap(source)) {
-    return undefined;;
+    return undefined;
   }
   const cloneValue = new Map();
   bufferWrite(source, cloneValue);
   for (const [key, value] of source.entries()) {
     cloneValue.set(key, __cloneDeep(value));
   }
-  return cloneValue ;
-}
+  return cloneValue;
+};
 
 cloneFunction.cloneIgnoreWeakMap = (
   source,
 ) => {
   if (!_isWeakMap(source)) {
-    return undefined;;
+    return undefined;
   }
-  return source ;
-}
+  return source;
+};
 
 // cloneSet
 //  element not recursive call
@@ -189,24 +189,24 @@ cloneFunction.cloneSet = (
   bufferWrite = () => {},
 ) => {
   if (!_isSet(source)) {
-    return undefined;;
+    return undefined;
   }
   const cloneValue = new Set();
   bufferWrite(source, cloneValue);
   for (const value of source) {
     cloneValue.add(value);
   }
-  return cloneValue ;
-}
+  return cloneValue;
+};
 
 cloneFunction.cloneIgnoreWeakSet = (
   source,
 ) => {
   if (!_isWeakSet(source)) {
-    return undefined;;
+    return undefined;
   }
-  return source ;
-}
+  return source;
+};
 
 /**
  * clone
@@ -223,9 +223,9 @@ const _clone = (source) => {
       }
     }
     return value;
-  }
+  };
   return __clone(source);
-}
+};
 _clone.functions = [];
 
 _clone.clear = () => {
@@ -237,7 +237,7 @@ _clone.add = (func) => {
 };
 
 _clone.reset = () => {
-  _clone.clear()
+  _clone.clear();
   _clone.add(cloneFunction.cloneObject);
   _clone.add(cloneFunction.cloneArrayType);
   _clone.add(cloneFunction.cloneIgnoreWeakSet);
@@ -245,19 +245,19 @@ _clone.reset = () => {
   _clone.add(cloneFunction.cloneIgnoreWeakMap);
   _clone.add(cloneFunction.cloneMap);
   _clone.add(cloneFunction.cloneIgnoreFunction);
-  _clone.add(cloneFunction.cloneRegExp)
-  _clone.add(cloneFunction.cloneDate)
+  _clone.add(cloneFunction.cloneRegExp);
+  _clone.add(cloneFunction.cloneDate);
 };
 _clone.reset();
 
 const clone = (source) => {
-  return _clone(source)
-}
+  return _clone(source);
+};
 
 _copyProperty(_clone,
   'clear,reset,add,' +
   '',
-  clone
+  clone,
 );
 
 /**
@@ -267,7 +267,7 @@ const _cloneDeep = (source) => {
   const CircularReferenceBuffer = {
     source: [],
     clone: [],
-  }
+  };
   const __cloneDeep = (value) => {
     const index = CircularReferenceBuffer.source.indexOf(value);
     if (index !== -1) {
@@ -290,9 +290,9 @@ const _cloneDeep = (source) => {
       }
     }
     return value;
-  }
+  };
   return __cloneDeep(source);
-}
+};
 
 _cloneDeep.functions = [];
 
@@ -305,7 +305,7 @@ _cloneDeep.add = (func) => {
 };
 
 _cloneDeep.reset = () => {
-  _cloneDeep.clear()
+  _cloneDeep.clear();
   _cloneDeep.add(cloneFunction.cloneObject);
   _cloneDeep.add(cloneFunction.cloneArrayType);
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakSet);
@@ -313,18 +313,18 @@ _cloneDeep.reset = () => {
   _cloneDeep.add(cloneFunction.cloneIgnoreWeakMap);
   _cloneDeep.add(cloneFunction.cloneMap);
   _cloneDeep.add(cloneFunction.cloneIgnoreFunction);
-  _cloneDeep.add(cloneFunction.cloneRegExp)
-  _cloneDeep.add(cloneFunction.cloneDate)
+  _cloneDeep.add(cloneFunction.cloneRegExp);
+  _cloneDeep.add(cloneFunction.cloneDate);
 };
 _cloneDeep.reset();
 
 const cloneDeep = (source) => {
-  return _cloneDeep(source)
-}
+  return _cloneDeep(source);
+};
 _copyProperty(_cloneDeep,
   'clear,reset,add,' +
   '',
-  cloneDeep
+  cloneDeep,
 );
 
 module.exports = {

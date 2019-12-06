@@ -25,7 +25,7 @@ const _isBooleanObject = value => {
     _objectToStringCheck('Boolean')
     && (!_isBoolean(value))
   );
-}
+};
 
 const _isNumber = (value) => {
   return (_typeofCheck('number')(value) && (isFinite(value)));
@@ -50,7 +50,7 @@ const _isStringObject = value => {
     _objectToStringCheck('String')
     && (!_isString(value))
   );
-}
+};
 
 const _isFunction = _typeofCheck('function');
 

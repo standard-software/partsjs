@@ -40,13 +40,13 @@ const {
  *  check type for array argument.
  */
 const _isTypeCheck = (func, argsArray) => {
-  var l = argsArray.length;
+  const l = argsArray.length;
   if (l === 0) {
     return false;
   } else if (l === 1) {
     return func(argsArray[0]);
   } else {
-    for (var i = 0; i < l; i += 1) {
+    for (let i = 0; i < l; i += 1) {
       if (!func(argsArray[i])) {
         return false;
       }

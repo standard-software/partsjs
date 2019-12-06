@@ -1,3 +1,6 @@
+/* eslint-disable no-throw-literal */
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_test = (parts) => {
 
   const {
@@ -24,7 +27,7 @@ const test_execute_test = (parts) => {
 
   console.log('  test test.js');
   test_isThrown();
-}
+};
 
 module.exports = {
   test_execute_test,

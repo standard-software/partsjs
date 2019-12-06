@@ -1,6 +1,6 @@
 const {
   _typeofCheck, _objectToStringCheck, objectToString,
-} = require('../type/_isType.js')
+} = require('../type/_isType.js');
 
 const _isSymbol = _typeofCheck('symbol');
 

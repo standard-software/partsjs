@@ -36,7 +36,7 @@ equalFunction.equalFunction = (
     return;
   }
   return value1 === value2;
-}
+};
 
 equalFunction.equalObject = (
   value1, value2,
@@ -59,7 +59,7 @@ equalFunction.equalObject = (
     }
   }
   return true;
-}
+};
 
 equalFunction.equalArrayType = (
   value1, value2,
@@ -79,7 +79,7 @@ equalFunction.equalArrayType = (
     }
   }
   return true;
-}
+};
 
 equalFunction.equalDate = (
   value1, value2,
@@ -88,7 +88,7 @@ equalFunction.equalDate = (
     return;
   }
   return value1.getTime() === value2.getTime();
-}
+};
 
 equalFunction.equalRegExp = (
   value1, value2,
@@ -97,7 +97,7 @@ equalFunction.equalRegExp = (
     return;
   }
   return value1.source === value2.source;
-}
+};
 
 equalFunction.equalMap = (
   value1, value2,
@@ -116,8 +116,8 @@ equalFunction.equalMap = (
       return false;
     }
   }
-  return true ;
-}
+  return true;
+};
 
 equalFunction.equalWeakMap = (
   value1, value2,
@@ -136,8 +136,8 @@ equalFunction.equalWeakMap = (
       return false;
     }
   }
-  return true ;
-}
+  return true;
+};
 
 equalFunction.equalSet = (
   value1, value2,
@@ -145,7 +145,7 @@ equalFunction.equalSet = (
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isSet(value1, value2)) {
-    return;;
+    return;
   }
   if (value1.size !== value2.size) {
     return false;
@@ -163,7 +163,7 @@ equalFunction.equalSet = (
     }
   }
   return true;
-}
+};
 
 equalFunction.equalWeakSet = (
   value1, value2,
@@ -171,7 +171,7 @@ equalFunction.equalWeakSet = (
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
   if (!isWeakSet(value1, value2)) {
-    return;;
+    return;
   }
   if (value1.size !== value2.size) {
     return false;
@@ -189,7 +189,7 @@ equalFunction.equalWeakSet = (
     }
   }
   return true;
-}
+};
 
 /**
  * equal
@@ -197,13 +197,13 @@ equalFunction.equalWeakSet = (
 const _equal = (value1, value2) => {
   const __equal = (value1, value2) => {
     for (let i = 0, l = _equal.functions.length; i < l; i += 1) {
-      const result = _equal.functions[i](value1, value2)
+      const result = _equal.functions[i](value1, value2);
       if (!_isUndefined(result)) {
         return result;
       }
     }
     return value1 === value2;
-  }
+  };
   return __equal(value1, value2);
 };
 _equal.functions = [];
@@ -217,7 +217,7 @@ _equal.add = (func) => {
 };
 
 _equal.reset = () => {
-  _equal.clear()
+  _equal.clear();
   _equal.add(equalFunction.equalObject);
   _equal.add(equalFunction.equalArrayType);
   _equal.add(equalFunction.equalWeakSet);
@@ -225,8 +225,8 @@ _equal.reset = () => {
   _equal.add(equalFunction.equalWeakMap);
   _equal.add(equalFunction.equalMap);
   _equal.add(equalFunction.equalFunction);
-  _equal.add(equalFunction.equalRegExp)
-  _equal.add(equalFunction.equalDate)
+  _equal.add(equalFunction.equalRegExp);
+  _equal.add(equalFunction.equalDate);
 };
 _equal.reset();
 
@@ -240,7 +240,7 @@ const equal = (value1, value2) => {
 _copyProperty(_equal,
   'clear,reset,add,' +
   '',
-  equal
+  equal,
 );
 
 /**
@@ -250,7 +250,7 @@ const _equalDeep = (value1, value2) => {
   const CircularReferenceBuffer = {
     v1Array: [],
     v2Array: [],
-  }
+  };
   const __equalDeep = (value1, value2) => {
     const index = CircularReferenceBuffer.v1Array.indexOf(value1);
     if (index !== -1) {
@@ -266,14 +266,14 @@ const _equalDeep = (value1, value2) => {
           CircularReferenceBuffer.v1Array.push(v1);
           CircularReferenceBuffer.v2Array.push(v2);
         },
-        __equalDeep
-      )
+        __equalDeep,
+      );
       if (!_isUndefined(result)) {
         return result;
       }
     }
     return value1 === value2;
-  }
+  };
   return __equalDeep(value1, value2);
 };
 _equalDeep.functions = [];
@@ -287,7 +287,7 @@ _equalDeep.add = (func) => {
 };
 
 _equalDeep.reset = () => {
-  _equalDeep.clear()
+  _equalDeep.clear();
   _equalDeep.add(equalFunction.equalObject);
   _equalDeep.add(equalFunction.equalArrayType);
   _equalDeep.add(equalFunction.equalWeakSet);
@@ -295,8 +295,8 @@ _equalDeep.reset = () => {
   _equalDeep.add(equalFunction.equalWeakMap);
   _equalDeep.add(equalFunction.equalMap);
   _equalDeep.add(equalFunction.equalFunction);
-  _equalDeep.add(equalFunction.equalRegExp)
-  _equalDeep.add(equalFunction.equalDate)
+  _equalDeep.add(equalFunction.equalRegExp);
+  _equalDeep.add(equalFunction.equalDate);
 };
 _equalDeep.reset();
 
@@ -310,7 +310,7 @@ const equalDeep = (value1, value2) => {
 _copyProperty(_equalDeep,
   'clear,reset,add,' +
   '',
-  equalDeep
+  equalDeep,
 );
 
 module.exports = {

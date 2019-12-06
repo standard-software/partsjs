@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_consoleHook = (parts) => {
 
   const {
@@ -133,7 +135,7 @@ const test_execute_consoleHook = (parts) => {
   test_consoleHook('warn');
   test_consoleHook('error');
   test_consoleHook('debug');
-}
+};
 
 module.exports = {
   test_execute_consoleHook,

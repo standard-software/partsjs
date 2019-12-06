@@ -27,16 +27,16 @@ const _or = (value, compareArray) => {
 
 const or = (value, compareArray) => {
   if (_inProperty(value, 'value,compareArray')) {
-      ({ value, compareArray } = value)
+    ({ value, compareArray } = value);
   }
 
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'or args(compareArray) is not array'
+      'or args(compareArray) is not array',
     );
   }
 
-  return _or(value, compareArray)
+  return _or(value, compareArray);
 };
 
 /**
@@ -53,7 +53,7 @@ const _match = (value, compareArray) => {
         result = element(value);
         if (!_isBoolean(result)) {
           throw new TypeError(
-            '_match args(compareArray element function result) is not boolean'
+            '_match args(compareArray element function result) is not boolean',
           );
         }
       } else {
@@ -72,7 +72,7 @@ const _match = (value, compareArray) => {
         result = element(value);
         if (!_isBoolean(result)) {
           throw new TypeError(
-            '_match args(compareArray element function result) is not boolean'
+            '_match args(compareArray element function result) is not boolean',
           );
         }
       } else {
@@ -88,7 +88,7 @@ const _match = (value, compareArray) => {
 
 const match = (
   value,
-  compareArray
+  compareArray,
 ) => {
   if (_inProperty(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
@@ -96,7 +96,7 @@ const match = (
 
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'match args(compareArray) is not array'
+      'match args(compareArray) is not array',
     );
   }
 
@@ -108,7 +108,7 @@ const match = (
  */
 const _matchAll = (
   valueArray,
-  compareArray
+  compareArray,
 ) => {
   let result = false;
   for (let i = 0, l = valueArray.length; i < l; i += 1) {
@@ -124,7 +124,7 @@ const _matchAll = (
 
 const matchAll = (
   valueArray,
-  compareArray
+  compareArray,
 ) => {
   if (_inProperty(valueArray, 'valueArray,compareArray')) {
     ({ valueArray, compareArray } = valueArray);
@@ -132,12 +132,12 @@ const matchAll = (
 
   if (!_isArray(valueArray)) {
     throw new TypeError(
-      'matchAll args(valueArray) is not array'
+      'matchAll args(valueArray) is not array',
     );
   }
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'matchAll args(compareArray) is not array'
+      'matchAll args(compareArray) is not array',
     );
   }
 
@@ -149,7 +149,7 @@ const matchAll = (
  */
 const _matchSomeIndex = (
   valueArray,
-  compareArray
+  compareArray,
 ) => {
   let result = -1;
   for (let i = 0, l = valueArray.length; i < l; i += 1) {
@@ -163,17 +163,17 @@ const _matchSomeIndex = (
 
 const _matchSome = (
   valueArray,
-  compareArray
+  compareArray,
 ) => {
   return _matchSomeIndex(
     valueArray,
     compareArray,
-  ) !== -1
+  ) !== -1;
 };
 
 const matchSomeIndex = (
   valueArray,
-  compareArray
+  compareArray,
 ) => {
   if (_inProperty(valueArray, 'valueArray,compareArray')) {
     ({ valueArray, compareArray } = valueArray);
@@ -181,12 +181,12 @@ const matchSomeIndex = (
 
   if (!_isArray(valueArray)) {
     throw new TypeError(
-      'matchSomeIndex args(valueArray) is not array'
+      'matchSomeIndex args(valueArray) is not array',
     );
   }
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'matchSomeIndex args(compareArray) is not array'
+      'matchSomeIndex args(compareArray) is not array',
     );
   }
 
@@ -195,12 +195,12 @@ const matchSomeIndex = (
 
 const matchSome = (
   valueArray,
-  compareArray
+  compareArray,
 ) => {
   return matchSomeIndex(
     valueArray,
     compareArray,
-  ) !== -1
+  ) !== -1;
 };
 
 /**
@@ -228,7 +228,7 @@ const matchValue = (
 
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'matchValue args(compareArray) is not array'
+      'matchValue args(compareArray) is not array',
     );
   }
 
@@ -246,7 +246,7 @@ const _initialValue = (
   value,
   inMatchValue,
 ) => {
-  if (_match(value, [ _isUndefined])) {
+  if (_match(value, [_isUndefined])) {
     return inMatchValue;
   }
   return value;
@@ -262,7 +262,7 @@ const initialValue = (
 
   return _initialValue(
     value,
-    inMatchValue
+    inMatchValue,
   );
 };
 
@@ -280,9 +280,9 @@ const isEmpty = (
       '',
       (value) => _isObject(value) && _propertyCount(value) === 0,
       (value) => _isArrayType(value) && value.length === 0,
-    ]
-  )
-}
+    ],
+  );
+};
 
 const matchEvery = matchAll;
 const matchAnyIndex = matchSomeIndex;
@@ -294,7 +294,7 @@ module.exports = {
   _matchAll, _matchSomeIndex, _matchSome,
 
   or,
-  match,matchValue,initialValue,
+  match, matchValue, initialValue,
   matchAll, matchSomeIndex, matchSome,
 
   matchEvery, matchAnyIndex, matchAny,

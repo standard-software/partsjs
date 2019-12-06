@@ -1,7 +1,7 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
   _isException,
 } = require('../type/type.js');
 
@@ -32,23 +32,25 @@ checkEqual.testCounter = 0;
  */
 const isThrown = (
   targetFunc,
-  compareFunc
+  compareFunc,
 ) => {
   if (!_isFunction(targetFunc)) {
     throw new TypeError(
-      'isThrown args targetFunc is not function'
+      'isThrown args targetFunc is not function',
     );
   }
   if (!( _isFunction(compareFunc) || _isUndefined(compareFunc) )) {
     throw new TypeError(
-      'isThrown args compareFunc is not function'
+      'isThrown args compareFunc is not function',
     );
   }
 
   try {
     targetFunc();
   } catch (e) {
-    if (_isUndefined(compareFunc)) { return true; }
+    if (_isUndefined(compareFunc)) {
+      return true;
+    }
     return compareFunc(e);
   }
   return false;
@@ -56,13 +58,13 @@ const isThrown = (
 
 const isThrownValue = (
   targetFunc,
-  thrownValue
+  thrownValue,
 ) => {
   return isThrown(
     targetFunc,
     (thrown) => {
       return thrown === thrownValue;
-    }
+    },
   );
 };
 
@@ -72,7 +74,7 @@ const isThrownException = (
 ) => {
   if (!( _isString(exceptionName) || _isUndefined(exceptionName) )) {
     throw new TypeError(
-      'isThrownException args exceptionName is not string'
+      'isThrownException args exceptionName is not string',
     );
   }
 
@@ -86,7 +88,7 @@ const isThrownException = (
         return thrown.name === exceptionName;
       }
       return false;
-    }
+    },
   );
 };
 
@@ -96,6 +98,6 @@ const isNotThrown = (targetFunc) => {
 
 module.exports = {
   checkEqual,
-  isThrown,isThrownValue,isThrownException,isNotThrown,
+  isThrown, isThrownValue, isThrownException, isNotThrown,
 };
 

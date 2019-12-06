@@ -1,3 +1,6 @@
+/* eslint-disable comma-spacing */
+/* eslint-disable max-len */
+/* eslint-disable no-var */
 const test_execute_string = (parts) => {
 
   const {
@@ -80,11 +83,11 @@ const test_execute_string = (parts) => {
     // Parameter Args
     checkEqual(false, matchFormat({
       formatName: 'number',
-      value: '-123'
+      value: '-123',
     }));
     checkEqual(true,  matchFormat({
       formatName: 'integer',
-      value: '-123'
+      value: '-123',
     }));
 
     // Exception
@@ -116,61 +119,61 @@ const test_execute_string = (parts) => {
     // exception
     checkEqual(true, isThrownException(
       () => { includes('abcdef', 'abc'); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
     checkEqual(false, isThrownException(
       () => { includes('123', ['1']); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
     checkEqual(true, isThrownException(
       () => { includes('123', [1]); },
-      (new TypeError).name
+      (new TypeError).name,
     ));
 
     // Parameter Args
     checkEqual(true, includes({
       value: 'abcdef',
-      compareArray: ['cd']
+      compareArray: ['cd'],
     }));
     checkEqual(false, includes({
       value: 'abcdef',
-      compareArray: ['ac']
+      compareArray: ['ac'],
     }));
 
     // exception
     checkEqual(false, isThrown(
       () => {
         includes({
-          value: '123', compareArray: ['123']
+          value: '123', compareArray: ['123'],
         });
-      }
+      },
     ), 'test_includes thrown 1');
     checkEqual(false, isThrown(
       () => {
         includes({
-          value: '123', compareArray: []
+          value: '123', compareArray: [],
         });
-      }
+      },
     ), 'test_includes thrown 2');
     checkEqual(true, isThrown(
       () => {
         includes({
-          value: '123', compareArray: [123]
+          value: '123', compareArray: [123],
         });
-      }
+      },
     ), 'test_includes thrown 3');
     checkEqual(true, isThrown(
       () => {
         includes({
-          value: '123', compareArray: 123
+          value: '123', compareArray: 123,
         });
       },
       (e) => {
         return (e.name === (new TypeError).name) && (
-        e.message ===
-          'includes args(compareArray) is not array'
-        )
-      }
+          e.message ===
+            'includes args(compareArray) is not array'
+        );
+      },
     ), 'test_includes thrown 4');
   };
 
@@ -187,10 +190,10 @@ const test_execute_string = (parts) => {
     }));
 
     // exception
-    checkEqual(false, isThrown(() => { replaceAll('1212', '12', '123')}));
-    checkEqual(true,  isThrown(() => { replaceAll( 1212 , '12', '123')}));
-    checkEqual(true,  isThrown(() => { replaceAll('1212',  12 , '123')}));
-    checkEqual(true,  isThrown(() => { replaceAll('1212', '12',  123 )}));
+    checkEqual(false, isThrown(() => { replaceAll('1212', '12', '123'); }));
+    checkEqual(true,  isThrown(() => { replaceAll( 1212 , '12', '123'); }));
+    checkEqual(true,  isThrown(() => { replaceAll('1212',  12 , '123'); }));
+    checkEqual(true,  isThrown(() => { replaceAll('1212', '12',  123 ); }));
 
   };
 
@@ -198,7 +201,7 @@ const test_execute_string = (parts) => {
   test_matchFormat();
   test_includes();
   test_replaceAll();
-}
+};
 
 module.exports = {
   test_execute_string,

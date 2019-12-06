@@ -9,12 +9,13 @@ const test_execute_index = (parts) => {
   const { test_execute_number   } = require('./number/number.test.js');
   const { test_execute_string   } = require('./string/string.test.js');
   const { test_execute_object   } = require('./object/object.test.js');
-  const { test_execute_array   } = require('./array/array.test.js');
-  const { test_execute_consoleHook  } = require('./consoleHook/consoleHook.test.js');
+  const { test_execute_array    } = require('./array/array.test.js');
+  const { test_execute_consoleHook  } =
+   require('./consoleHook/consoleHook.test.js');
 
   const test_execute_nameSpace = (parts) => {
     const {
-      checkEqual
+      checkEqual,
     } = parts.test;
 
     const {
@@ -33,8 +34,9 @@ const test_execute_index = (parts) => {
     checkEqual(true,
       inProperty(
         parts,
-        'type,syntax,test,compare,convert,string,object,consoleHook'
-      )
+        'type,syntax,test,compare,convert,' +
+        'string,object,consoleHook',
+      ),
     );
 
     checkEqual(true,
@@ -58,18 +60,18 @@ const test_execute_index = (parts) => {
         'matchFormat,' +
         'copyProperty,propertyCount,inProperty,' +
         'copyProp,propCount,inProp,' +
-        ''
-      )
+        '',
+      ),
     );
 
     checkEqual(false,
       inProperty(
         parts,
         'abc,' +
-        ''
-      )
+        '',
+      ),
     );
-  }
+  };
 
   console.log('test start. ' + parts.VERSION);
   test_execute_root(parts);
@@ -84,7 +86,7 @@ const test_execute_index = (parts) => {
   test_execute_array(parts);
   test_execute_consoleHook(parts);
   test_execute_nameSpace(parts);
-}
+};
 
 module.exports = {
   test_execute_index,
