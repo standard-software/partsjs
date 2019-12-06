@@ -1,4 +1,4 @@
-const polyfill = require('./polyfill.js');
+require('./polyfill.js');
 const _root = require('./root/root.js');
 const _type = require('./type/type.js');
 const _test = require('./test/test.js');
@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '2.12.0';
+const VERSION = '3.0.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -140,11 +140,13 @@ rootNames.objectToString = _type.objectToString;
 
 // array
 propertyNames.ARRAY_PUBLIC =
-  'equal,' +
+  'from,' +
   'min, max,' +
+  'sum, average, midian,' +
   ''
-propertyNames.ARRAY_ROOT =
+  propertyNames.ARRAY_ROOT =
   'min, max,' +
+  'sum, average, midian,' +
   ''
 const array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
 _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);

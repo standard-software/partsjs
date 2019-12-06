@@ -1,12 +1,12 @@
 const {
-  _isUndefined,_isNull,_isNaNStrict,
-  _isBoolean,_isNumber,_isInteger,_isString,
-  _isFunction,_isObject,_isArray,_isDate,_isRegExp,
+  _isUndefined, _isNull, _isNaNStrict,
+  _isBoolean, _isNumber, _isInteger, _isString,
+  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
   _isException,
 } = require('../type/type.js');
 
 const {
-  _copyProperty,_propertyCount,_inProperty,
+  _copyProperty, _propertyCount, _inProperty,
 } = require('../object/object.js');
 
 /**
@@ -179,10 +179,10 @@ const randomInt = (min, max) => {
 
 module.exports = {
   _isMultiples,
-  _round,_nearEqual,_inRange,
+  _round, _nearEqual, _inRange,
 
-  isMultiples,isEven,isOdd,
-  round,nearEqual,inRange,randomInt
+  isMultiples, isEven, isOdd,
+  round, nearEqual, inRange, randomInt
 
 };
 

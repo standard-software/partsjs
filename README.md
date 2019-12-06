@@ -100,8 +100,15 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 3.0.0
+#### 2019/12/06(Fri)
+- delete array.equal
+- array.js
+  - add from
+  - add sum average midian
+
 ### 2.12.0
-### 2019/11/15(Fri)
+#### 2019/11/15(Fri)
 - add toNumber toNumberDefault
 - add toInteger toIntegerDefault
 - delete constant.js

@@ -6,46 +6,16 @@ const {
 } = require('../type/type.js');
 
 const {
+  isEven,
+} = require('../number/number.js');
+
+const {
   _inProperty,
-} = require('../object/_inProperty.js')
+} = require('../object/_inProperty.js');
 
-/**
- * array.equal
- */
-const _equal = (value1, value2) => {
-  if (value1.length !== value2.length) {
-    return false;
-  }
-  for (let i = 0, l = value1.length; i < l; i += 1) {
-    if (_isArray(value1[i]) && _isArray(value2[i])) {
-      if (_equal(value1[i], value2[i]) === false) {
-        return false;
-      }
-    } else if (value1[i] !== value2[i]) {
-      return false;
-    }
-  }
-  return true;
-};
-
-const equal = (value1, value2) => {
-  if (_inProperty(value1, 'value1,value2')) {
-    ({ value1, value2 } = value1);
-  }
-
-  if (!_isArray(value1)) {
-    throw new TypeError(
-      'array.equal args(value) is not array'
-    );
-  }
-  if (!_isArray(value2)) {
-    throw new TypeError(
-      'array.equal args(value2) is not array'
-    );
-  }
-
-  return _equal(value1, value2);
-};
+const {
+  _clone, _cloneDeep,
+} = require('../root/clone.js');
 
 /**
  * array.min max
@@ -55,7 +25,7 @@ const _min = (array) => {
     return null;
   }
   var result = array[0];
-  for (var i = 1, l = array.length; i < l; i += 1) {
+  for (var i = 0, l = array.length; i < l; i += 1) {
     if (!_isNumber(array[i])){
       throw new TypeError(
         '_min args(array) element is not number'
@@ -82,7 +52,7 @@ const _max = (array) => {
     return null;
   }
   var result = array[0];
-  for (var i = 1, l = array.length; i < l; i += 1) {
+  for (var i = 0, l = array.length; i < l; i += 1) {
     if (!_isNumber(array[i])){
       throw new TypeError(
         '_max args(array) element is not number'
@@ -104,11 +74,96 @@ const max = (array) => {
   return _max(array);
 };
 
-module.exports = {
-  _equal,
-  _min, _max,
+/**
+ * from
+ */
+const from = (arrayLike) => {
+  return Array.prototype.slice.call(arrayLike);
+};
 
-  equal,
+/**
+ * sum
+ */
+const _sum = (array) => {
+  var result = 0;
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])){
+      throw new TypeError(
+        '_min args(array) element is not number'
+      );
+    }
+    result += array[i];
+  }
+  return result;
+}
+
+const sum = (array) => {
+  if (!_isArray(array)){
+    throw new TypeError(
+      'sum args(array) is not array'
+    );
+  }
+  return _sum(array);
+}
+
+/**
+ * average
+ */
+const _average = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
+  return _sum(array) / array.length;
+}
+
+const average = (array) => {
+  if (!_isArray(array)){
+    throw new TypeError(
+      'average args(array) is not array'
+    );
+  }
+  return _average(array);
+}
+
+/**
+ * midian
+ */
+const _midian = (array) => {
+  var sortedArray = _cloneDeep(array);
+  sortedArray.sort((a, b) => {
+    return a - b;
+  });
+  if (isEven(sortedArray.length)) {
+    // Even number length
+    const centerIndex = sortedArray.length / 2;
+    return (
+      sortedArray[centerIndex - 1] +
+      sortedArray[centerIndex]
+    ) / 2;
+  } else {
+    // Odd number length
+    return sortedArray[(sortedArray.length - 1) / 2];
+  }
+}
+
+const midian = (array) => {
+  if (!_isArray(array)){
+    throw new TypeError(
+      'midian args(array) is not array'
+    );
+  }
+  return _midian(array);
+}
+
+module.exports = {
+  _min, _max,
+  _sum, _average, _midian,
+  // _mode,
+
+  from,
   min, max,
+  sum, average, midian,
+  // mode,
+
 };
 

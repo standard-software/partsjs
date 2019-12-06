@@ -11,12 +11,9 @@ const {
   _isSet, _isWeakSet,
 } = require('../type/type.js');
 
-const object = require('../object/object.js');
-const array = require('../array/array.js');
-
 const {
   _copyProperty
-} = object;
+} = require('../object/object.js');
 
 /**
  * cloneFunction

@@ -387,25 +387,13 @@ const test_execute_compare = (parts) => {
 
   const test_equalDeep_array = () => {
     // array
-    checkEqual(true,
-      equalDeep( [],   []),
-    );
-    checkEqual(true,
-      equalDeep( [[]],   [[]]),
-    );
-    checkEqual(true,
-      equalDeep( [ 1, 2],   [ 1, 2]),
-    'test_equalDeep array 1');
-    checkEqual(false,
-      equalDeep( [ 2, 2],   [ 1, 2]),
-    'test_equalDeep array 2');
+    checkEqual(true,  equalDeep( [],   []));
+    checkEqual(true,  equalDeep( [[]],   [[]]));
+    checkEqual(true,  equalDeep( [ 1, 2],   [ 1, 2]));
+    checkEqual(false, equalDeep( [ 2, 2],   [ 1, 2]));
 
-    checkEqual(true,
-      equalDeep( [ 1, 2, {}],   [ 1, 2, {}]),
-    'test_equalDeep array 3');
-    checkEqual(true,
-      equalDeep( [ 1, 2, [3]],   [ 1, 2, [3]]),
-    'test_equalDeep array 4');
+    checkEqual(true,  equalDeep( [ 1, 2, {}],   [ 1, 2, {}]));
+    checkEqual(true,  equalDeep( [ 1, 2, [3]],   [ 1, 2, [3]]));
   }
 
   const test_equalDeep_array_CircularReference = () => {
