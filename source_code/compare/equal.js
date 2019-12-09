@@ -231,7 +231,7 @@ _equal.reset = () => {
 _equal.reset();
 
 const equal = (value1, value2) => {
-  if (_inProperty(value1, 'value1,value2')) {
+  if (_inProperty(value1, 'value1, value2')) {
     ({ value1, value2 } = value1);
   }
 

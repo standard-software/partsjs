@@ -71,27 +71,51 @@ const test_execute_compare = (parts) => {
   };
 
   const test_equal_array = () => {
-    // array
-    checkEqual(true,
-      equal( [],   []),
-    );
-    checkEqual(false,
-      equal( [[]],   [[]]),
-    );
-    checkEqual(true,
-      equal( [1, 2],   [1, 2]),
-      'test_equal array 1');
-    checkEqual(false,
-      equal( [2, 2],   [1, 2]),
-      'test_equal array 2');
+    checkEqual(true,  equal( [],   []));
+    checkEqual(false, equal( [[]],   [[]])    );
 
-    checkEqual(false,
-      equal( [1, 2, {}],   [1, 2, {}]),
-      'test_equal array 3');
-    checkEqual(false,
-      equal( [1, 2, [3]],   [1, 2, [3]]),
-      'test_equal array 4');
+    checkEqual(true,  equal([1], [1]));
+    checkEqual(false, equal([1], [2]));
+    checkEqual(true,  equal([1, 2], [1, 2]));
+    checkEqual(false, equal([1, 2], [2, 2]));
+    checkEqual(true,  equal([1, 2, 3], [1, 2, 3]));
+    checkEqual(false, equal([[1, 2], 3], [[1, 2], 3]));
+    checkEqual(false, equal([[1, 2, 3]], [[1, 2, 3]]));
+    checkEqual(false, equal([1, [2, 3]], [1, [2, 3]]));
+    checkEqual(false, equal([[1, 2], 3], [1, [2, 3]]));
+    checkEqual(false, equal([[1, 2, 3]], [1, 2, 3]));
+    checkEqual(false, equal([[1, [2], 3]], [[1, [2], 3]]));
+    checkEqual(false, equal([[1, [2], 3]], [[1, [3], 3]]));
 
+    checkEqual(true,  equal(['a'], ['a']));
+    checkEqual(false, equal(['a'], ['b']));
+    checkEqual(true,  equal(['a', 'b'], ['a', 'b']));
+    checkEqual(false, equal(['a', 'a'], ['a', 'b']));
+    checkEqual(true,  equal(['a', 'b'], ['a', 'b']));
+    checkEqual(false, equal([['a', 'b'], 'c'], [['a', 'b'], 'c']));
+    checkEqual(false, equal([['a', 'b'], 'c'], ['a', ['b', 'c']]));
+    checkEqual(false, equal([['a', ['b'], 'c']], [['a', ['b'], 'c']]));
+    checkEqual(false, equal([['a', ['b'], 'c']], [['a', ['a'], 'c']]));
+
+    checkEqual(true,  equal([undefined], [undefined]));
+    checkEqual(false, equal([undefined], [null]));
+    checkEqual(true,  equal([undefined, null], [undefined, null]));
+    checkEqual(false, equal([undefined, undefined], [undefined, null]));
+    checkEqual(true,  equal([undefined, null], [undefined, null]));
+    checkEqual(false, equal([[undefined, null], undefined], [[undefined, null], undefined]));
+    checkEqual(false, equal([[undefined, null], undefined], [undefined, [null, undefined]]));
+    checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
+    checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
+
+    // parameter Args
+    checkEqual(true,  equal({
+      value1:   [1, 2, 3, 4],
+      value2:   [1, 2, 3, 4],
+    }));
+    checkEqual(false,  equal({
+      value1:   [1, 2, 3, 4],
+      value2:   [1, 2, 3, 5],
+    }));
   };
 
   const test_equal_date = () => {
@@ -325,21 +349,21 @@ const test_execute_compare = (parts) => {
     var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true object array
-    checkEqual(true, equalDeep(testValue1, testValue2));
+    checkEqual(true,  equalDeep(testValue1, testValue2));
 
     // equal false array object array
     var testValue1 = [1, 2, 3, { a: 1, b: 2, c: [3, 4, 5] }];
     var testValue2 = [1, 2, 3, { a: 1, b: 2, c: [3, 4, 5] }];
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true array object array
-    checkEqual(true, equalDeep(testValue1, testValue2));
+    checkEqual(true,  equalDeep(testValue1, testValue2));
 
     // equal false object array object
     var testValue1 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
     var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
     checkEqual(false, equal(testValue1, testValue2));
     // equalDeep true object array object
-    checkEqual(true, equalDeep(testValue1, testValue2));
+    checkEqual(true,  equalDeep(testValue1, testValue2));
 
   };
 
@@ -388,14 +412,55 @@ const test_execute_compare = (parts) => {
   };
 
   const test_equalDeep_array = () => {
-    // array
-    checkEqual(true,  equalDeep( [],   []));
-    checkEqual(true,  equalDeep( [[]],   [[]]));
-    checkEqual(true,  equalDeep( [1, 2],   [1, 2]));
-    checkEqual(false, equalDeep( [2, 2],   [1, 2]));
-
     checkEqual(true,  equalDeep( [1, 2, {}],   [1, 2, {}]));
     checkEqual(true,  equalDeep( [1, 2, [3]],   [1, 2, [3]]));
+
+    checkEqual(true,  equalDeep( [],   []));
+    checkEqual(true,  equalDeep( [[]],   [[]])    );
+
+    checkEqual(true,  equalDeep([1], [1]));
+    checkEqual(false, equalDeep([1], [2]));
+    checkEqual(true,  equalDeep([1, 2], [1, 2]));
+    checkEqual(false, equalDeep([1, 2], [2, 2]));
+    checkEqual(true,  equalDeep([1, 2, 3], [1, 2, 3]));
+    checkEqual(true,  equalDeep([[1, 2], 3], [[1, 2], 3]));
+    checkEqual(true,  equalDeep([[1, 2, 3]], [[1, 2, 3]]));
+    checkEqual(true,  equalDeep([1, [2, 3]], [1, [2, 3]]));
+    checkEqual(false, equalDeep([[1, 2], 3], [1, [2, 3]]));
+    checkEqual(false, equalDeep([[1, 2, 3]], [1, 2, 3]));
+    checkEqual(true,  equalDeep([[1, [2], 3]], [[1, [2], 3]]));
+    checkEqual(false, equalDeep([[1, [2], 3]], [[1, [3], 3]]));
+
+    checkEqual(true,  equalDeep(['a'], ['a']));
+    checkEqual(false, equalDeep(['a'], ['b']));
+    checkEqual(true,  equalDeep(['a', 'b'], ['a', 'b']));
+    checkEqual(false, equalDeep(['a', 'a'], ['a', 'b']));
+    checkEqual(true,  equalDeep(['a', 'b'], ['a', 'b']));
+    checkEqual(true,  equalDeep([['a', 'b'], 'c'], [['a', 'b'], 'c']));
+    checkEqual(false, equalDeep([['a', 'b'], 'c'], ['a', ['b', 'c']]));
+    checkEqual(true,  equalDeep([['a', ['b'], 'c']], [['a', ['b'], 'c']]));
+    checkEqual(false, equalDeep([['a', ['b'], 'c']], [['a', ['a'], 'c']]));
+
+    checkEqual(true,  equalDeep([undefined], [undefined]));
+    checkEqual(false, equalDeep([undefined], [null]));
+    checkEqual(true,  equalDeep([undefined, null], [undefined, null]));
+    checkEqual(false, equalDeep([undefined, undefined], [undefined, null]));
+    checkEqual(true,  equalDeep([undefined, null], [undefined, null]));
+    checkEqual(true,  equalDeep([[undefined, null], undefined], [[undefined, null], undefined]));
+    checkEqual(false, equalDeep([[undefined, null], undefined], [undefined, [null, undefined]]));
+    checkEqual(true,  equalDeep([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
+    checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
+
+    // parameter Args
+    checkEqual(true,  equalDeep({
+      value1:   [1, 2, 3, 4],
+      value2:   [1, 2, 3, 4],
+    }));
+    checkEqual(false,  equalDeep({
+      value1:   [1, 2, 3, 4],
+      value2:   [1, 2, 3, 5],
+    }));
+
   };
 
   const test_equalDeep_array_CircularReference = () => {
