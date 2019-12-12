@@ -3156,7 +3156,7 @@ _equal.reset = function () {
 _equal.reset();
 
 var equal = function equal(value1, value2) {
-  if (_inProperty(value1, 'value1,value2')) {
+  if (_inProperty(value1, 'value1, value2')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
