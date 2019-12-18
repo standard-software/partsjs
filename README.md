@@ -101,12 +101,13 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 3.0.0
-#### 2019/12/06(Fri)
+#### 2019/12/18(Wed)
 - delete array.equal
 - array.js
   - add from
   - add sum average midian
-- eslint format fix
+- support eslint format fix
+- support jest
 
 ### 2.12.0
 #### 2019/11/15(Fri)
@@ -129,17 +130,6 @@ You can now use the functions of the parts object.
     - equal.js
   - root
     - clone.js
-
-### 2.10.1
-#### 2019/11/04(Mon)
-- update tag version mistake
-
-### 2.10.0
-#### 2019/11/04(Mon)
-- update compare.equal add compare.equalDeep
-  - add equalFunction
-  - support CircularReference
-- update clone cloneDeep
 
 
 ### More Info

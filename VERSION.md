@@ -2,6 +2,15 @@
 
 ## Version
 
+### 3.0.0
+#### 2019/12/18(Wed)
+- delete array.equal
+- array.js
+  - add from
+  - add sum average midian
+- support eslint format fix
+- support jest
+
 ### 2.12.0
 ### 2019/11/15(Fri)
 - add toNumber toNumberDefault
