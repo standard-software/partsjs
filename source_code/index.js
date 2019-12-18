@@ -44,21 +44,25 @@ propertyNames._TYPE_BASE =
   '';
 const isPrefixAdd = (prefix, commaString) =>
   _replaceAll(commaString, ' ', '').split(',')
-  .map(item => prefix + item).join(',');
+    .map(item => prefix + item).join(',');
 propertyNames.TYPE = [
   isPrefixAdd('is', propertyNames._TYPE_BASE),
-  isPrefixAdd('isNot', propertyNames._TYPE_BASE)
-].join(',')
+  isPrefixAdd('isNot', propertyNames._TYPE_BASE),
+].join(',');
 const type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames);
 
 // test
-propertyNames.TEST =
+propertyNames.TEST_PUBLIC =
   'checkEqual,' +
+  'describe, it, test,' +
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';
-const test = _copyProperty(_test, propertyNames.TEST);
-_copyProperty(_test, propertyNames.TEST, rootNames);
+propertyNames.TEST_ROOT =
+  'isThrown,isThrownValue,isThrownException,isNotThrown,' +
+  '';
+const test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
+_copyProperty(_test, propertyNames.TEST_ROOT, rootNames);
 
 // syntax
 propertyNames.SYNTAX =
@@ -98,9 +102,9 @@ propertyNames.CONVERT =
   'numToStr,' +
   'strToNum,strToNumDef,' +
   'strToInt,strToIntDef,' +
-  ''
+  '';
 const convert = _copyProperty(_convert,
-  propertyNames.CONVERT
+  propertyNames.CONVERT,
 );
 _copyProperty(_convert, propertyNames.CONVERT, rootNames);
 
@@ -108,17 +112,17 @@ _copyProperty(_convert, propertyNames.CONVERT, rootNames);
 propertyNames.NUMBER =
   'isMultiples,isEven,isOdd,' +
   'round,nearEqual,inRange,randomInt,' +
-  ''
+  '';
 const number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames);
 
 // string
 propertyNames.STRING_PUBLIC =
   'matchFormat,includes,replaceAll,' +
-  ''
+  '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
-  ''
+  '';
 const string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 
@@ -127,12 +131,12 @@ propertyNames.OBJECT_PUBLIC =
   'copyProperty,propertyCount,inProperty,' +
   'getProperty,setProperty,' +
   'copyProp,propCount,inProp,' +
-  ''
+  '';
 propertyNames.OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
   'getProp,setProp,' +
   'copyProp,propCount,inProp,' +
-  ''
+  '';
 const object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
@@ -143,11 +147,11 @@ propertyNames.ARRAY_PUBLIC =
   'from,' +
   'min, max,' +
   'sum, average, midian,' +
-  ''
-  propertyNames.ARRAY_ROOT =
+  '';
+propertyNames.ARRAY_ROOT =
   'min, max,' +
   'sum, average, midian,' +
-  ''
+  '';
 const array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
 _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);
 
@@ -158,7 +162,7 @@ propertyNames.CONSOLE_HOOK = [
   isPrefixAdd('hook', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixAdd('unHook', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixAdd('accept', propertyNames._CONSOLE_HOOK_BASE),
-].join(',')
+].join(',');
 const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = {

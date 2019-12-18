@@ -5,27 +5,53 @@ const {
   _isException,
 } = require('../type/type.js');
 
+
+const describeArray = [];
+let testName = '';
+let testCounter = 0;
+
+const describe = (text, func) => {
+  describeArray.push(text);
+  func();
+  describeArray.pop();
+};
+
+const it = (text, func) => {
+  testName = text;
+  testCounter = 0;
+  func();
+  testCounter = 0;
+  testName = '';
+};
+
 const checkEqual = (a, b, message = '') => {
   if (!_isString(message)) {
     throw new TypeError('checkEqual args message is not string');
   }
 
-  checkEqual.testCounter += 1;
+  testCounter += 1;
   if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
   }
   if (a === b) {
     return true;
   }
-  message =
-    `Test: ${checkEqual.testCounter}: ${message}\n` +
-    '  A !== B\n' +
-    `  A = ${String(a)}\n` +
-    `  B = ${String(b)}`;
-  console.log(message);
+  const indent = ' '.repeat(describeArray.length * 2);
+  let output = describeArray.map(
+    (desc, i) => '  '.repeat(i) + `describe: ${desc}`
+  ).join('\n') + '\n';
+  output +=
+    `${indent}Test: ${testName}\n` +
+    `${indent}  Counter: ${testCounter}\n` +
+      (message === ''
+        ? ''
+        : `${indent}  Message: ${message}\n`) +
+    `${indent}  A !== B\n` +
+    `${indent}  A = ${String(a)}\n` +
+    `${indent}  B = ${String(b)}`;
+  console.log(output);
   return false;
 };
-checkEqual.testCounter = 0;
 
 /**
  * isThrown isThrownValue isThrownException isNotThrown
@@ -96,8 +122,11 @@ const isNotThrown = (targetFunc) => {
   return !isThrown(targetFunc, () => true);
 };
 
+const test = it;
+
 module.exports = {
   checkEqual,
+  describe, it, test,
   isThrown, isThrownValue, isThrownException, isNotThrown,
 };
 

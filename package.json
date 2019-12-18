@@ -13,6 +13,7 @@
     "test:release_wsh": "cscript ./test_exec/release_wsh/test_index.wsf",
     "start": "npm run test:source && npm run babel && npm run webpack && npm run test:debug && npm run test:release && npm run test:release_wsh",
     "eslint": "eslint",
+    "jest": "jest",
     "test": ""
   },
   "repository": {
@@ -32,6 +33,7 @@
     "@babel/preset-env": "^7.5.5",
     "eslint": "^6.7.2",
     "eslint-config-google": "^0.14.0",
+    "jest": "^24.9.0",
     "moment": "^2.24.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
