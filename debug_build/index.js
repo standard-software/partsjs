@@ -58,11 +58,12 @@ var type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames); // test
 
 
-propertyNames.TEST = 'checkEqual,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
+propertyNames.TEST_PUBLIC = 'checkEqual,' + 'describe, it, test,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
+propertyNames.TEST_ROOT = 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 
-var test = _copyProperty(_test, propertyNames.TEST);
+var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
 
-_copyProperty(_test, propertyNames.TEST, rootNames); // syntax
+_copyProperty(_test, propertyNames.TEST_ROOT, rootNames); // syntax
 
 
 propertyNames.SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + '';

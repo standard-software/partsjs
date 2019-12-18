@@ -15,6 +15,24 @@ var _require = require('../type/type.js'),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
+var describeArray = [];
+var testName = '';
+var testCounter = 0;
+
+var describe = function describe(text, func) {
+  describeArray.push(text);
+  func();
+  describeArray.pop();
+};
+
+var it = function it(text, func) {
+  testName = text;
+  testCounter = 0;
+  func();
+  testCounter = 0;
+  testName = '';
+};
+
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
@@ -22,7 +40,7 @@ var checkEqual = function checkEqual(a, b) {
     throw new TypeError('checkEqual args message is not string');
   }
 
-  checkEqual.testCounter += 1;
+  testCounter += 1;
 
   if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
@@ -32,15 +50,18 @@ var checkEqual = function checkEqual(a, b) {
     return true;
   }
 
-  message = "Test: ".concat(checkEqual.testCounter, ": ").concat(message, "\n") + '  A !== B\n' + "  A = ".concat(String(a), "\n") + "  B = ".concat(String(b));
-  console.log(message);
+  var indent = ' '.repeat(describeArray.length * 2);
+  var output = describeArray.map(function (desc, i) {
+    return '  '.repeat(i) + "describe: ".concat(desc);
+  }).join('\n') + '\n';
+  output += "".concat(indent, "Test: ").concat(testName, "\n") + "".concat(indent, "  Counter: ").concat(testCounter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
+  console.log(output);
   return false;
 };
-
-checkEqual.testCounter = 0;
 /**
  * isThrown isThrownValue isThrownException isNotThrown
  */
+
 
 var isThrown = function isThrown(targetFunc, compareFunc) {
   if (!_isFunction(targetFunc)) {
@@ -94,8 +115,12 @@ var isNotThrown = function isNotThrown(targetFunc) {
   });
 };
 
+var test = it;
 module.exports = {
   checkEqual: checkEqual,
+  describe: describe,
+  it: it,
+  test: test,
   isThrown: isThrown,
   isThrownValue: isThrownValue,
   isThrownException: isThrownException,
