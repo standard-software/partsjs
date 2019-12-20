@@ -104,7 +104,9 @@ You can now use the functions of the parts object.
 #### 2019/12/20(Fri)
 - array.js
   - add filter
+  - add map
   - add unique
+  - add single
   - add multiple
   - add mode
 - update isOdd
@@ -130,19 +132,6 @@ You can now use the functions of the parts object.
 ### 2.11.0
 #### 2019/11/06(Wed)
 - update matchFormat
-
-### 2.10.2
-#### 2019/11/05(Tue)
-- update cloneDeep
-  - cloneMap
-  - test code
-- update namespace
-  - compare
-    - compare_common.js
-    - equal.js
-  - root
-    - clone.js
-
 
 ### More Info
 [VERSION.md](./VERSION.md)

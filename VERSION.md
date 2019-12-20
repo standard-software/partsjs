@@ -2,6 +2,20 @@
 
 ## Version
 
+### 3.1.0
+#### 2019/12/20(Fri)
+- array.js
+  - add filter
+  - add map
+  - add unique
+  - add single
+  - add multiple
+  - add mode
+- update isOdd
+- add jest test code
+  - debug build
+  - release build
+
 ### 3.0.0
 #### 2019/12/18(Wed)
 - delete array.equal
