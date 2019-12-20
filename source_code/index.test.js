@@ -1,6 +1,6 @@
 const test_execute_index = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
-  describe('test_execute_index', () => {
+  describe(test_execute_index.name, () => {
 
     const { test_execute_root     } = require('./root/root.test.js');
     const { test_execute_type     } = require('./type/type.test.js');
@@ -19,7 +19,7 @@ const test_execute_index = (parts) => {
       const { checkEqual, describe, it, test } = parts.test;
       const { propertyCount, inProperty } = parts.object;
 
-      describe('test_execute_nameSpace', () => {
+      describe(test_execute_nameSpace.name, () => {
 
         it('test_execute_nameSpace1', () => {
 
@@ -29,7 +29,7 @@ const test_execute_index = (parts) => {
           checkEqual(14,  propertyCount(parts.compare));
           checkEqual(23,  propertyCount(parts.convert));
           checkEqual(7,   propertyCount(parts.number));
-          checkEqual(3,   propertyCount(parts.string));
+          checkEqual(4,   propertyCount(parts.string));
           checkEqual(9,   propertyCount(parts.object));
           checkEqual(12,  propertyCount(parts.array));
           checkEqual(true,

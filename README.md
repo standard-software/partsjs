@@ -100,6 +100,12 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 3.2.0
+#### 2019/12/21(Sat)
+- delete Array.prototype.map
+- add string.repeat
+- update array.unique
+
 ### 3.1.0
 #### 2019/12/20(Fri)
 - array.js

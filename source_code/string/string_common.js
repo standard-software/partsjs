@@ -13,6 +13,10 @@ const {
   _inProperty,
 } = require('../object/_inProperty.js');
 
+const {
+  _map,
+} = require('../array/array.js');
+
 /**
  * matchFormat
  */
@@ -274,13 +278,13 @@ const _includes = (
   compareArray,
 ) => {
   const compareFunctionArray =
-    compareArray.map((element) => {
+    _map(compareArray, (element) => {
       if (_isRegExp(element)) {
         return element;
       } else if (_isString(element)) {
         return element === ''
           ? () => false
-          : value => value.includes(element);
+          : value => value.indexOf(element) >= 0;
       } else {
         throw new TypeError(
           '_includes args(compareArray element) is not [regexp|string]',
@@ -294,10 +298,15 @@ const includes = (
   value,
   compareArray,
 ) => {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (_inProperty(value, 'value, compareArray')) {
     ({ value, compareArray } = value);
   }
 
+  if (!_isString(value)) {
+    throw new TypeError(
+      'includes args(value) is not string',
+    );
+  }
   if (!_isArray(compareArray)) {
     throw new TypeError(
       'includes args(compareArray) is not array',
@@ -307,7 +316,46 @@ const includes = (
   return _includes(value, compareArray);
 };
 
+/**
+ * repeat
+ */
+const _repeat = (
+  value,
+  count,
+) => {
+  let result = '';
+  for (let i = 0; i < count; i += 1) {
+    result += value;
+  }
+  return result;
+};
+
+const repeat = (
+  value,
+  count,
+) => {
+  if (_inProperty(value, 'value, count')) {
+    ({ value, count } = value);
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError(
+      'repeat args(value) is not string',
+    );
+  }
+  if (!_isInteger(count)) {
+    throw new TypeError(
+      'includes args(compareArray) is not array',
+    );
+  }
+
+  return _repeat(value, count);
+};
+
 module.exports = {
   _matchFormat, _includes,
+  _repeat,
   matchFormat, includes,
+  repeat,
+
 };

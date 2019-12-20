@@ -163,7 +163,7 @@ const _mode = (array) => {
     return [];
   }
   const uniqueArray = _unique(array);
-  const countArray = uniqueArray.map(
+  const countArray = _map(uniqueArray,
     (element1) => _filter(array,
       (element2) => element1 === element2).length,
   );
@@ -186,11 +186,13 @@ const mode = (array) => {
  * uniqe
  */
 const _unique = (array) => {
-  return _filter(
-    array,
-    (element, index) =>
-      array.indexOf(element) === index,
-  );
+  const resultArray = [];
+  for (let i = 0, l = array.length; i < l; i += 1) {
+    if (!resultArray.includes(array[i])) {
+      resultArray.push(array[i]);
+    }
+  }
+  return resultArray;
 };
 
 const unique = (array) => {
@@ -210,7 +212,7 @@ const _single = (array) => {
     return [];
   }
   const uniqueArray = _unique(array);
-  const countArray = uniqueArray.map(
+  const countArray = _map(uniqueArray,
     (element1) => _filter(array,
       (element2) => element1 === element2).length,
   );
@@ -236,7 +238,7 @@ const _multiple = (array) => {
     return [];
   }
   const uniqueArray = _unique(array);
-  const countArray = uniqueArray.map(
+  const countArray = _map(uniqueArray,
     (element1) => _filter(array,
       (element2) => element1 === element2).length,
   );

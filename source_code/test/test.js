@@ -5,6 +5,13 @@ const {
   _isException,
 } = require('../type/type.js');
 
+const {
+  _map,
+} = require('../array/array.js');
+
+const {
+  _repeat,
+} = require('../string/string.js');
 
 const describeArray = [];
 let testName = '';
@@ -36,9 +43,9 @@ const checkEqual = (a, b, message = '') => {
   if (a === b) {
     return true;
   }
-  const indent = ' '.repeat(describeArray.length * 2);
-  let output = describeArray.map(
-    (desc, i) => '  '.repeat(i) + `describe: ${desc}`
+  const indent = _repeat(' ', describeArray.length * 2);
+  let output = _map(describeArray,
+    (desc, i) => _repeat('  ', i) + `describe: ${desc}`,
   ).join('\n') + '\n';
   output +=
     `${indent}Test: ${testName}\n` +

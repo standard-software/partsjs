@@ -13,6 +13,10 @@ const {
   _includes,
 } = require('../string/string.js');
 
+const {
+  map,
+} = require('../array/array.js');
+
 const original = {};
 original.log = console.log;
 original.info = console.info;
@@ -99,7 +103,7 @@ const _accept = (
   hookFunc,
 ) => {
   _hook(methodName, (...messageArgs) => {
-    const messageArgsAll = messageArgs.map((value) => String(value)).join(' ');
+    const messageArgsAll = map(messageArgs, (value) => String(value)).join(' ');
     let acceptFlag = acceptArray.length === 0;
     if (acceptFlag === false) {
       acceptFlag = _includes(messageArgsAll, acceptArray);

@@ -11,13 +11,14 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '3.1.0';
+const VERSION = '3.2.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
 
 const { _copyProperty } = _object;
 const { _replaceAll } = _string;
+const { _map } = _array;
 
 // root
 propertyNames.ROOT =
@@ -43,8 +44,8 @@ propertyNames._TYPE_BASE =
   'Except,' +
   '';
 const isPrefixAdd = (prefix, commaString) =>
-  _replaceAll(commaString, ' ', '').split(',')
-    .map(item => prefix + item).join(',');
+  _map(_replaceAll(commaString, ' ', '').split(','),
+    item => prefix + item).join(',');
 propertyNames.TYPE = [
   isPrefixAdd('is', propertyNames._TYPE_BASE),
   isPrefixAdd('isNot', propertyNames._TYPE_BASE),
@@ -118,7 +119,9 @@ _copyProperty(_number, propertyNames.NUMBER, rootNames);
 
 // string
 propertyNames.STRING_PUBLIC =
-  'matchFormat,includes,replaceAll,' +
+  'includes,' +
+  'matchFormat,replaceAll,' +
+  'repeat,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
