@@ -108,6 +108,9 @@ You can now use the functions of the parts object.
   - add multiple
   - add mode
 - update isOdd
+- add jest test code
+  - debug build
+  - release build
 
 ### 3.0.0
 #### 2019/12/18(Wed)

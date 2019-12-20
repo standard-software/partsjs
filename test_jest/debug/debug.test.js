@@ -1,4 +1,4 @@
-const parts = require('../../source_code/index.js');
+const parts = require('../../debug_build/index.js');
 
 const {
   test_execute_index,
