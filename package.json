@@ -11,7 +11,7 @@
     "test:debug": "node ./test_exec/debug/test_index.js",
     "test:release": "node ./test_exec/release/test_index.js",
     "test:release_wsh": "cscript ./test_exec/release_wsh/test_index.wsf",
-    "start": "npm run test:source && npm run babel && npm run webpack && npm run test:debug && npm run test:release && npm run test:release_wsh",
+    "start": "npm run test:source && npm run babel && npm run test:debug && npm run webpack && npm run test:release && npm run test:release_wsh",
     "eslint": "eslint",
     "jest": "jest",
     "test": ""

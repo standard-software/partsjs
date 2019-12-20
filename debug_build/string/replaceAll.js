@@ -22,7 +22,7 @@ var _require3 = require('../string/_replaceAll.js'),
     _replaceAll = _require3._replaceAll;
 
 var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str,before,after')) {
+  if (_inProperty(str, 'str, before, after')) {
     var _str = str;
     str = _str.str;
     before = _str.before;

@@ -17,6 +17,10 @@ var test_execute_array = function test_execute_array(parts) {
         isThrown = _parts$test2.isThrown,
         isThrownException = _parts$test2.isThrownException;
     var array = parts.array;
+    var _parts$number = parts.number,
+        isEven = _parts$number.isEven,
+        isOdd = _parts$number.isOdd;
+    var equal = parts.equal;
 
     var test_array_from = function test_array_from() {
       describe(test_array_from.name, function () {
@@ -34,6 +38,7 @@ var test_execute_array = function test_execute_array(parts) {
     var test_min = function test_min() {
       describe(test_min.name, function () {
         it(test_min.name, function () {
+          checkEqual(null, array.min([]));
           checkEqual(5, array.min([5, 10, 15, 20]));
           checkEqual(1, array.min([5, 4, 3, 2, 1]));
           checkEqual(3, array.min([5, 4, 3])); // exception
@@ -46,6 +51,9 @@ var test_execute_array = function test_execute_array(parts) {
           }));
           checkEqual(true, isThrown(function () {
             array.min('1,2,3');
+          }));
+          checkEqual(true, isThrown(function () {
+            array.min([1, 2, '3']);
           }));
           checkEqual(true, isThrown(function () {
             array.min([1,, 3]);
@@ -63,6 +71,7 @@ var test_execute_array = function test_execute_array(parts) {
     var test_max = function test_max() {
       describe(test_max.name, function () {
         it(test_max.name, function () {
+          checkEqual(null, array.max([]));
           checkEqual(20, array.max([5, 10, 15, 20]));
           checkEqual(5, array.max([5, 4, 3, 2, 1]));
           checkEqual(3, array.max([1, 2, 3])); // exception
@@ -77,6 +86,9 @@ var test_execute_array = function test_execute_array(parts) {
             array.max('1,2,3');
           }));
           checkEqual(true, isThrown(function () {
+            array.max([1, 2, '3']);
+          }));
+          checkEqual(true, isThrown(function () {
             array.max([1,, 3]);
           }));
           checkEqual(true, isThrown(function () {
@@ -89,11 +101,28 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_sum = function test_sum() {
+      describe(test_sum.name, function () {
+        it(test_sum.name, function () {
+          checkEqual(0, array.sum([]));
+          checkEqual(1, array.sum([1]));
+          checkEqual(0, array.sum([0]));
+          checkEqual(7, array.sum([3, 4]));
+          checkEqual(426, array.sum([52, 52, 70, 72, 80, 100]));
+          checkEqual(154, array.sum([6, 9, 9, 10, 10, 10, 100]));
+        });
+      });
+    };
+
     var test_average = function test_average() {
       describe(test_average.name, function () {
         it(test_average.name, function () {
-          checkEqual(71, array.average([52, 52, 70, 72, 80, 100]));
-          checkEqual(22, array.average([6, 9, 9, 10, 10, 10, 100]));
+          checkEqual(null, array.average([]));
+          checkEqual(1, array.average([1]));
+          checkEqual(0, array.average([0]));
+          checkEqual(3.5, array.average([3, 4]));
+          checkEqual(71, array.average([70, 72, 80, 52, 52, 100]));
+          checkEqual(22, array.average([9, 9, 10, 10, 10, 100, 6]));
         });
       });
     };
@@ -101,20 +130,87 @@ var test_execute_array = function test_execute_array(parts) {
     var test_midian = function test_midian() {
       describe(test_midian.name, function () {
         it(test_midian.name, function () {
-          checkEqual(71, array.midian([52, 52, 70, 72, 80, 100]));
-          checkEqual(10, array.midian([6, 9, 9, 10, 10, 10, 100]));
+          checkEqual(71, array.midian([70, 72, 80, 52, 52, 100]));
+          checkEqual(10, array.midian([9, 9, 10, 10, 10, 100, 6]));
         });
       });
     };
 
-    console.log('  test array.js'); // test_array_equal();
+    var test_mode = function test_mode() {
+      describe(test_mode.name, function () {
+        it(test_mode.name, function () {
+          checkEqual(true, equal([], array.mode([])));
+          checkEqual(true, equal([70], array.mode([70])));
+          checkEqual(true, equal([70, 52], array.mode([70, 70, 80, 52, 52, 100])));
+          checkEqual(true, equal([52], array.mode([70, 70, 80, 52, 52, 52, 100])));
+          checkEqual(true, equal([9, 10], array.mode([9, 9, 10, 10, 10, 9, 6])));
+        });
+      });
+    };
 
+    var test_uniqe = function test_uniqe() {
+      describe(test_uniqe.name, function () {
+        it(test_uniqe.name, function () {
+          checkEqual(true, equal([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])));
+        });
+      });
+    };
+
+    var test_single = function test_single() {
+      describe(test_single.name, function () {
+        it(test_single.name, function () {
+          checkEqual(true, equal([1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])));
+        });
+      });
+    };
+
+    var test_multiple = function test_multiple() {
+      describe(test_multiple.name, function () {
+        it(test_multiple.name, function () {
+          checkEqual(true, equal([2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])));
+        });
+      });
+    };
+
+    var test_filter = function test_filter() {
+      describe(test_filter.name, function () {
+        it(test_filter.name, function () {
+          checkEqual(true, equal([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
+            return isEven(value);
+          })));
+          checkEqual(true, equal([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven)));
+          checkEqual(true, equal([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)));
+        });
+      });
+    };
+
+    var test_map = function test_map() {
+      describe(test_map.name, function () {
+        it(test_map.name, function () {
+          checkEqual(true, equal([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
+            return isEven(value);
+          })));
+          checkEqual(true, equal([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven)));
+          checkEqual(true, equal([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd)));
+          checkEqual(true, equal([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
+            return value * 2;
+          })));
+        });
+      });
+    };
+
+    console.log('  test array.js');
     test_array_from();
     test_min();
-    test_max(); // test_sum();
-
+    test_max();
+    test_sum();
     test_average();
     test_midian();
+    test_mode();
+    test_uniqe();
+    test_multiple();
+    test_filter();
+    test_map();
   });
 };
 

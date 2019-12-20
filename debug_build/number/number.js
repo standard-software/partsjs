@@ -51,7 +51,7 @@ var isEven = function isEven(number) {
 };
 
 var isOdd = function isOdd(number) {
-  return !_.isMultiples(number, 2);
+  return !_isMultiples(number, 2);
 };
 /**
  * round

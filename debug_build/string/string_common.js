@@ -262,43 +262,10 @@ var includes = function includes(value, compareArray) {
 
   return _includes(value, compareArray);
 };
-/**
- * replaceAll
- */
-
-
-var _replaceAll = function _replaceAll(str, before, after) {
-  return str.split(before).join(after);
-};
-
-var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str,before,after')) {
-    var _str = str;
-    str = _str.str;
-    before = _str.before;
-    after = _str.after;
-  }
-
-  if (!_isString(str)) {
-    throw new TypeError('replaceAll args(str) is not string');
-  }
-
-  if (!_isString(before)) {
-    throw new TypeError('replaceAll args(before) is not string');
-  }
-
-  if (!_isString(after)) {
-    throw new TypeError('replaceAll args(after) is not string');
-  }
-
-  return _replaceAll(str, before, after);
-};
 
 module.exports = {
   _matchFormat: _matchFormat,
   _includes: _includes,
-  _replaceAll: _replaceAll,
   matchFormat: matchFormat,
-  includes: includes,
-  replaceAll: replaceAll
+  includes: includes
 };

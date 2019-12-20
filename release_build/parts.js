@@ -129,7 +129,7 @@ var _array = __webpack_require__(27);
 
 var _consoleHook = __webpack_require__(28);
 
-var VERSION = '3.0.0';
+var VERSION = '3.1.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -211,7 +211,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + 'mode,' + 'unique, single, multiple,' + 'filter, map,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, midian,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
@@ -3905,45 +3905,12 @@ var includes = function includes(value, compareArray) {
 
   return _includes(value, compareArray);
 };
-/**
- * replaceAll
- */
-
-
-var _replaceAll = function _replaceAll(str, before, after) {
-  return str.split(before).join(after);
-};
-
-var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str,before,after')) {
-    var _str = str;
-    str = _str.str;
-    before = _str.before;
-    after = _str.after;
-  }
-
-  if (!_isString(str)) {
-    throw new TypeError('replaceAll args(str) is not string');
-  }
-
-  if (!_isString(before)) {
-    throw new TypeError('replaceAll args(before) is not string');
-  }
-
-  if (!_isString(after)) {
-    throw new TypeError('replaceAll args(after) is not string');
-  }
-
-  return _replaceAll(str, before, after);
-};
 
 module.exports = {
   _matchFormat: _matchFormat,
   _includes: _includes,
-  _replaceAll: _replaceAll,
   matchFormat: matchFormat,
-  includes: includes,
-  replaceAll: replaceAll
+  includes: includes
 };
 
 /***/ }),
@@ -3975,7 +3942,7 @@ var _require3 = __webpack_require__(9),
     _replaceAll = _require3._replaceAll;
 
 var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str,before,after')) {
+  if (_inProperty(str, 'str, before, after')) {
     var _str = str;
     str = _str.str;
     before = _str.before;
@@ -4059,7 +4026,7 @@ var isEven = function isEven(number) {
 };
 
 var isOdd = function isOdd(number) {
-  return !_.isMultiples(number, 2);
+  return !_isMultiples(number, 2);
 };
 /**
  * round
@@ -4387,6 +4354,175 @@ var midian = function midian(array) {
 
   return _midian(array);
 };
+/**
+ * mode
+ */
+
+
+var _mode = function _mode(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  var uniqueArray = _unique(array);
+
+  var countArray = uniqueArray.map(function (element1) {
+    return _filter(array, function (element2) {
+      return element1 === element2;
+    }).length;
+  });
+
+  var maxValue = _max(countArray);
+
+  return _filter(uniqueArray, function (element, index) {
+    return countArray[index] === maxValue;
+  });
+};
+
+var mode = function mode(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('mode args(array) is not array');
+  }
+
+  return _mode(array);
+};
+/**
+ * uniqe
+ */
+
+
+var _unique = function _unique(array) {
+  return _filter(array, function (element, index) {
+    return array.indexOf(element) === index;
+  });
+};
+
+var unique = function unique(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('unique args(array) is not array');
+  }
+
+  return _unique(array);
+};
+/**
+ * single
+ */
+
+
+var _single = function _single(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  var uniqueArray = _unique(array);
+
+  var countArray = uniqueArray.map(function (element1) {
+    return _filter(array, function (element2) {
+      return element1 === element2;
+    }).length;
+  });
+  return _filter(uniqueArray, function (element, index) {
+    return countArray[index] === 1;
+  });
+};
+
+var single = function single(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('single args(array) is not array');
+  }
+
+  return _single(array);
+};
+/**
+ * multiple
+ */
+
+
+var _multiple = function _multiple(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  var uniqueArray = _unique(array);
+
+  var countArray = uniqueArray.map(function (element1) {
+    return _filter(array, function (element2) {
+      return element1 === element2;
+    }).length;
+  });
+  return _filter(uniqueArray, function (element, index) {
+    return countArray[index] >= 2;
+  });
+};
+
+var multiple = function multiple(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('multiple args(array) is not array');
+  }
+
+  return _multiple(array);
+};
+/**
+ * filter
+ */
+
+
+var _filter = function _filter(array, compareFunc) {
+  var resultArray = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var result = compareFunc(array[i], i, array);
+
+    if (!_isBoolean(result)) {
+      throw new TypeError('_filter args(compareFunc) result is not boolean');
+    }
+
+    if (result) {
+      resultArray.push(array[i]);
+    }
+  }
+
+  return resultArray;
+};
+
+var filter = function filter(array, compareFunc) {
+  if (!_isArray(array)) {
+    throw new TypeError('filter args(array) is not array');
+  }
+
+  if (!_isFunction(compareFunc)) {
+    throw new TypeError('filter args(compareFunc) is not function');
+  }
+
+  return _filter(array, compareFunc);
+};
+/**
+ * map
+ */
+
+
+var _map = function _map(array, productFunc) {
+  var resultArray = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var result = productFunc(array[i], i, array);
+    resultArray.push(result);
+  }
+
+  return resultArray;
+};
+
+var map = function map(array, productFunc) {
+  if (!_isArray(array)) {
+    throw new TypeError('map args(array) is not array');
+  }
+
+  if (!_isFunction(productFunc)) {
+    throw new TypeError('map args(productFunc) is not function');
+  }
+
+  return _map(array, productFunc);
+};
 
 module.exports = {
   _min: _min,
@@ -4394,14 +4530,24 @@ module.exports = {
   _sum: _sum,
   _average: _average,
   _midian: _midian,
-  // _mode,
+  _mode: _mode,
+  _unique: _unique,
+  _single: _single,
+  _multiple: _multiple,
+  _filter: _filter,
+  _map: _map,
   from: from,
   min: min,
   max: max,
   sum: sum,
   average: average,
-  midian: midian // mode,
-
+  midian: midian,
+  mode: mode,
+  unique: unique,
+  single: single,
+  multiple: multiple,
+  filter: filter,
+  map: map
 };
 
 /***/ }),
