@@ -30,11 +30,12 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '3.1.0';
+var VERSION = '3.2.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
-var _replaceAll = _string._replaceAll; // root
+var _replaceAll = _string._replaceAll;
+var _map = _array._map; // root
 
 propertyNames.ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + '';
 
@@ -46,7 +47,7 @@ _copyProperty(_root, propertyNames.ROOT, rootNames); // type
 propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
 
 var isPrefixAdd = function isPrefixAdd(prefix, commaString) {
-  return _replaceAll(commaString, ' ', '').split(',').map(function (item) {
+  return _map(_replaceAll(commaString, ' ', '').split(','), function (item) {
     return prefix + item;
   }).join(',');
 };
@@ -94,7 +95,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
+propertyNames.STRING_PUBLIC = 'includes,' + 'matchFormat,replaceAll,' + 'repeat,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);

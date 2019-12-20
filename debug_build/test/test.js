@@ -15,6 +15,12 @@ var _require = require('../type/type.js'),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
+var _require2 = require('../array/array.js'),
+    _map = _require2._map;
+
+var _require3 = require('../string/string.js'),
+    _repeat = _require3._repeat;
+
 var describeArray = [];
 var testName = '';
 var testCounter = 0;
@@ -50,9 +56,10 @@ var checkEqual = function checkEqual(a, b) {
     return true;
   }
 
-  var indent = ' '.repeat(describeArray.length * 2);
-  var output = describeArray.map(function (desc, i) {
-    return '  '.repeat(i) + "describe: ".concat(desc);
+  var indent = _repeat(' ', describeArray.length * 2);
+
+  var output = _map(describeArray, function (desc, i) {
+    return _repeat('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
   output += "".concat(indent, "Test: ").concat(testName, "\n") + "".concat(indent, "  Counter: ").concat(testCounter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
   console.log(output);

@@ -20,6 +20,9 @@ var _require2 = require('../compare/compare.js'),
 
 var _require3 = require('../object/_inProperty.js'),
     _inProperty = _require3._inProperty;
+
+var _require4 = require('../array/array.js'),
+    _map = _require4._map;
 /**
  * matchFormat
  */
@@ -233,27 +236,32 @@ var matchFormat = function matchFormat(formatName, value) {
 
 
 var _includes = function _includes(value, compareArray) {
-  var compareFunctionArray = compareArray.map(function (element) {
+  var compareFunctionArray = _map(compareArray, function (element) {
     if (_isRegExp(element)) {
       return element;
     } else if (_isString(element)) {
       return element === '' ? function () {
         return false;
       } : function (value) {
-        return value.includes(element);
+        return value.indexOf(element) >= 0;
       };
     } else {
       throw new TypeError('_includes args(compareArray element) is not [regexp|string]');
     }
   });
+
   return _match(value, compareFunctionArray);
 };
 
 var includes = function includes(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (_inProperty(value, 'value, compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('includes args(value) is not string');
   }
 
   if (!_isArray(compareArray)) {
@@ -262,10 +270,44 @@ var includes = function includes(value, compareArray) {
 
   return _includes(value, compareArray);
 };
+/**
+ * repeat
+ */
+
+
+var _repeat = function _repeat(value, count) {
+  var result = '';
+
+  for (var i = 0; i < count; i += 1) {
+    result += value;
+  }
+
+  return result;
+};
+
+var repeat = function repeat(value, count) {
+  if (_inProperty(value, 'value, count')) {
+    var _value2 = value;
+    value = _value2.value;
+    count = _value2.count;
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('repeat args(value) is not string');
+  }
+
+  if (!_isInteger(count)) {
+    throw new TypeError('includes args(compareArray) is not array');
+  }
+
+  return _repeat(value, count);
+};
 
 module.exports = {
   _matchFormat: _matchFormat,
   _includes: _includes,
+  _repeat: _repeat,
   matchFormat: matchFormat,
-  includes: includes
+  includes: includes,
+  repeat: repeat
 };

@@ -6,7 +6,7 @@ var test_execute_index = function test_execute_index(parts) {
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test;
-  describe('test_execute_index', function () {
+  describe(test_execute_index.name, function () {
     var _require = require('./root/root.test.js'),
         test_execute_root = _require.test_execute_root;
 
@@ -49,7 +49,7 @@ var test_execute_index = function test_execute_index(parts) {
       var _parts$object = parts.object,
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
-      describe('test_execute_nameSpace', function () {
+      describe(test_execute_nameSpace.name, function () {
         it('test_execute_nameSpace1', function () {
           checkEqual(149, propertyCount(parts));
           checkEqual(64, propertyCount(parts.type));
@@ -57,7 +57,7 @@ var test_execute_index = function test_execute_index(parts) {
           checkEqual(14, propertyCount(parts.compare));
           checkEqual(23, propertyCount(parts.convert));
           checkEqual(7, propertyCount(parts.number));
-          checkEqual(3, propertyCount(parts.string));
+          checkEqual(4, propertyCount(parts.string));
           checkEqual(9, propertyCount(parts.object));
           checkEqual(12, propertyCount(parts.array));
           checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));

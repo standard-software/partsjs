@@ -21,6 +21,9 @@ var _require2 = require('../compare/compare.js'),
 var _require3 = require('../string/string.js'),
     _includes = _require3._includes;
 
+var _require4 = require('../array/array.js'),
+    map = _require4.map;
+
 var original = {};
 original.log = console.log;
 original.info = console.info;
@@ -104,7 +107,7 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
       messageArgs[_key] = arguments[_key];
     }
 
-    var messageArgsAll = messageArgs.map(function (value) {
+    var messageArgsAll = map(messageArgs, function (value) {
       return String(value);
     }).join(' ');
     var acceptFlag = acceptArray.length === 0;

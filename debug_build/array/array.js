@@ -179,7 +179,7 @@ var _mode = function _mode(array) {
 
   var uniqueArray = _unique(array);
 
-  var countArray = uniqueArray.map(function (element1) {
+  var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
@@ -205,9 +205,15 @@ var mode = function mode(array) {
 
 
 var _unique = function _unique(array) {
-  return _filter(array, function (element, index) {
-    return array.indexOf(element) === index;
-  });
+  var resultArray = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!resultArray.includes(array[i])) {
+      resultArray.push(array[i]);
+    }
+  }
+
+  return resultArray;
 };
 
 var unique = function unique(array) {
@@ -229,11 +235,12 @@ var _single = function _single(array) {
 
   var uniqueArray = _unique(array);
 
-  var countArray = uniqueArray.map(function (element1) {
+  var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
+
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] === 1;
   });
@@ -258,11 +265,12 @@ var _multiple = function _multiple(array) {
 
   var uniqueArray = _unique(array);
 
-  var countArray = uniqueArray.map(function (element1) {
+  var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
+
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] >= 2;
   });

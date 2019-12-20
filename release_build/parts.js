@@ -113,27 +113,28 @@ var _type = __webpack_require__(5);
 
 var _test = __webpack_require__(17);
 
-var _syntax = __webpack_require__(18);
+var _syntax = __webpack_require__(26);
 
-var _compare = __webpack_require__(19);
+var _compare = __webpack_require__(22);
 
-var _convert = __webpack_require__(22);
+var _convert = __webpack_require__(27);
 
-var _number = __webpack_require__(26);
+var _number = __webpack_require__(19);
 
-var _string = __webpack_require__(23);
+var _string = __webpack_require__(20);
 
 var _object = __webpack_require__(14);
 
-var _array = __webpack_require__(27);
+var _array = __webpack_require__(18);
 
 var _consoleHook = __webpack_require__(28);
 
-var VERSION = '3.1.0';
+var VERSION = '3.2.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
-var _replaceAll = _string._replaceAll; // root
+var _replaceAll = _string._replaceAll;
+var _map = _array._map; // root
 
 propertyNames.ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + '';
 
@@ -145,7 +146,7 @@ _copyProperty(_root, propertyNames.ROOT, rootNames); // type
 propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
 
 var isPrefixAdd = function isPrefixAdd(prefix, commaString) {
-  return _replaceAll(commaString, ' ', '').split(',').map(function (item) {
+  return _map(_replaceAll(commaString, ' ', '').split(','), function (item) {
     return prefix + item;
   }).join(',');
 };
@@ -193,7 +194,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat,includes,replaceAll,' + '';
+propertyNames.STRING_PUBLIC = 'includes,' + 'matchFormat,replaceAll,' + 'repeat,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
@@ -316,47 +317,6 @@ var polyfillDefine = function polyfillDefine() {
   if (!Array.isArray) {
     Array.isArray = function (arg) {
       return Object.prototype.toString.call(arg) === '[object Array]';
-    };
-  } // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-
-
-  if (!Array.prototype.map) {
-    Array.prototype.map = function (callback
-    /*, thisArg*/
-    ) {
-      var T, A, k;
-
-      if (this == null) {
-        throw new TypeError('this is null or not defined');
-      }
-
-      var O = Object(this);
-      var len = O.length >>> 0;
-
-      if (typeof callback !== 'function') {
-        throw new TypeError(callback + ' is not a function');
-      }
-
-      if (arguments.length > 1) {
-        T = arguments[1];
-      }
-
-      A = new Array(len);
-      k = 0;
-
-      while (k < len) {
-        var kValue, mappedValue;
-
-        if (k in O) {
-          kValue = O[k];
-          mappedValue = callback.call(T, kValue, k, O);
-          A[k] = mappedValue;
-        }
-
-        k++;
-      }
-
-      return A;
     };
   } // update from: https://gist.github.com/hufyhang/c303ce1b80c7b6f8a73e
 
@@ -2081,6 +2041,12 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
+var _require2 = __webpack_require__(18),
+    _map = _require2._map;
+
+var _require3 = __webpack_require__(20),
+    _repeat = _require3._repeat;
+
 var describeArray = [];
 var testName = '';
 var testCounter = 0;
@@ -2116,9 +2082,10 @@ var checkEqual = function checkEqual(a, b) {
     return true;
   }
 
-  var indent = ' '.repeat(describeArray.length * 2);
-  var output = describeArray.map(function (desc, i) {
-    return '  '.repeat(i) + "describe: ".concat(desc);
+  var indent = _repeat(' ', describeArray.length * 2);
+
+  var output = _map(describeArray, function (desc, i) {
+    return _repeat('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
   output += "".concat(indent, "Test: ").concat(testName, "\n") + "".concat(indent, "  Counter: ").concat(testCounter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
   console.log(output);
@@ -2214,224 +2181,577 @@ var _require = __webpack_require__(5),
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
+
+var _require2 = __webpack_require__(19),
+    isEven = _require2.isEven;
+
+var _require3 = __webpack_require__(8),
+    _inProperty = _require3._inProperty;
+
+var _require4 = __webpack_require__(4),
+    _clone = _require4._clone,
+    _cloneDeep = _require4._cloneDeep;
 /**
- * assert
+ * array.min max
  */
 
 
-var assert = function assert(value) {
-  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-  if (!_isBoolean(value)) {
-    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
+var _min = function _min(array) {
+  if (array.length === 0) {
+    return null;
   }
 
-  if (!_isString(message)) {
-    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
+  var result = array[0];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_min args(array) element is not number');
+    }
+
+    if (array[i] < result) {
+      result = array[i];
+    }
   }
 
-  if (!value) {
-    throw new Error("assert error|message:".concat(message));
+  return result;
+};
+
+var min = function min(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('min args(array) is not array');
   }
+
+  return _min(array);
+};
+
+var _max = function _max(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  var result = array[0];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_max args(array) element is not number');
+    }
+
+    if (result < array[i]) {
+      result = array[i];
+    }
+  }
+
+  return result;
+};
+
+var max = function max(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('max args(array) is not array');
+  }
+
+  return _max(array);
 };
 /**
- * guard
+ * from
  */
 
 
-var guard_status = true;
-var guard_message;
-
-var guard = function guard(guardFunc, runFunc) {
-  guard_message = '';
-
-  if (guard_status === false) {
-    return false;
-  }
-
-  if (!_isFunction(guardFunc)) {
-    throw new TypeError('guard args(guardFunc) is not function');
-  }
-
-  var result = guardFunc();
-
-  if (!_isArray(result)) {
-    throw new TypeError('guard args(guardFunc result) is not array');
-  }
-
-  for (var i = 0; i < result.length; i += 1) {
-    // support for wsh last comma in Array. [a,b,]
-    if (i === result.length - 1 && _isUndefined(result[i])) {
-      continue;
-    }
-
-    var resultValue = undefined;
-    var message = '';
-
-    if (_isArray(result[i])) {
-      if (!(1 <= result[i].length)) {
-        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
-      }
-
-      resultValue = result[i][0];
-
-      if (2 <= result[i].length) {
-        message = result[i][1];
-      }
-    } else {
-      resultValue = result[i];
-    }
-
-    resultValue = functionValue(resultValue);
-
-    if (!_isBoolean(resultValue)) {
-      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
-    }
-
-    if (resultValue === false) {
-      guard_message = message;
-
-      if (!_isUndefined(runFunc)) {
-        if (!_isFunction(runFunc)) {
-          throw new TypeError('guard args(runFunc) is not function');
-        }
-
-        runFunc();
-      }
-
-      return true;
-    }
-  }
-
-  return false;
-};
-
-guard.message = function () {
-  return guard_message;
-};
-
-guard.status = function (value) {
-  return guard_status = value;
-};
-
-guard.on = function () {
-  guard_status = true;
-};
-
-guard.off = function () {
-  guard_status = false;
+var from = function from(arrayLike) {
+  return Array.prototype.slice.call(arrayLike);
 };
 /**
- * function Value
+ * sum
  */
 
 
-var functionValue = function functionValue(value) {
-  if (_isFunction(value)) {
-    return value();
+var _sum = function _sum(array) {
+  var result = 0;
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!_isNumber(array[i])) {
+      throw new TypeError('_min args(array) element is not number');
+    }
+
+    result += array[i];
+  }
+
+  return result;
+};
+
+var sum = function sum(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('sum args(array) is not array');
+  }
+
+  return _sum(array);
+};
+/**
+ * average
+ */
+
+
+var _average = function _average(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  return _sum(array) / array.length;
+};
+
+var average = function average(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('average args(array) is not array');
+  }
+
+  return _average(array);
+};
+/**
+ * midian
+ */
+
+
+var _midian = function _midian(array) {
+  var sortedArray = _cloneDeep(array);
+
+  sortedArray.sort(function (a, b) {
+    return a - b;
+  });
+
+  if (isEven(sortedArray.length)) {
+    // Even number length
+    var centerIndex = sortedArray.length / 2;
+    return (sortedArray[centerIndex - 1] + sortedArray[centerIndex]) / 2;
   } else {
-    return value;
+    // Odd number length
+    return sortedArray[(sortedArray.length - 1) / 2];
   }
 };
+
+var midian = function midian(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('midian args(array) is not array');
+  }
+
+  return _midian(array);
+};
 /**
- * sc (second call)
+ * mode
  */
 
 
-var sc = function sc(argsFirst, func) {
-  for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    argsRest[_key - 2] = arguments[_key];
+var _mode = function _mode(array) {
+  if (array.length === 0) {
+    return [];
   }
 
-  return func.apply(void 0, [argsFirst].concat(argsRest));
+  var uniqueArray = _unique(array);
+
+  var countArray = _map(uniqueArray, function (element1) {
+    return _filter(array, function (element2) {
+      return element1 === element2;
+    }).length;
+  });
+
+  var maxValue = _max(countArray);
+
+  return _filter(uniqueArray, function (element, index) {
+    return countArray[index] === maxValue;
+  });
+};
+
+var mode = function mode(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('mode args(array) is not array');
+  }
+
+  return _mode(array);
 };
 /**
- * if_
+ * uniqe
  */
 
 
-var if_ = function if_(condition) {
-  if (!_isBoolean(condition)) {
-    throw new TypeError('if_ args(condition) is not boolean');
+var _unique = function _unique(array) {
+  var resultArray = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    if (!resultArray.includes(array[i])) {
+      resultArray.push(array[i]);
+    }
   }
 
-  var checkSyntax = function checkSyntax(args) {
-    if (!_isObject(args)) {
-      throw new TypeError('if_() args is not object');
-    }
+  return resultArray;
+};
 
-    if (_isUndefined(args.then) && _isUndefined(args["else"])) {
-      throw new ReferenceError('if_() parameter args(then,else) is not defined');
-    }
-  };
-
-  if (condition) {
-    return function (args) {
-      checkSyntax(args);
-      return functionValue(args.then);
-    };
-  } else {
-    return function (args) {
-      checkSyntax(args);
-      return functionValue(args["else"]);
-    };
+var unique = function unique(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('unique args(array) is not array');
   }
+
+  return _unique(array);
 };
 /**
- * switch_
+ * single
  */
 
 
-var switch_ = function switch_(expression) {
-  return function (args) {
-    if (!_isArray(args)) {
-      throw new TypeError('switch_() args is not array');
+var _single = function _single(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  var uniqueArray = _unique(array);
+
+  var countArray = _map(uniqueArray, function (element1) {
+    return _filter(array, function (element2) {
+      return element1 === element2;
+    }).length;
+  });
+
+  return _filter(uniqueArray, function (element, index) {
+    return countArray[index] === 1;
+  });
+};
+
+var single = function single(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('single args(array) is not array');
+  }
+
+  return _single(array);
+};
+/**
+ * multiple
+ */
+
+
+var _multiple = function _multiple(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  var uniqueArray = _unique(array);
+
+  var countArray = _map(uniqueArray, function (element1) {
+    return _filter(array, function (element2) {
+      return element1 === element2;
+    }).length;
+  });
+
+  return _filter(uniqueArray, function (element, index) {
+    return countArray[index] >= 2;
+  });
+};
+
+var multiple = function multiple(array) {
+  if (!_isArray(array)) {
+    throw new TypeError('multiple args(array) is not array');
+  }
+
+  return _multiple(array);
+};
+/**
+ * filter
+ */
+
+
+var _filter = function _filter(array, compareFunc) {
+  var resultArray = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var result = compareFunc(array[i], i, array);
+
+    if (!_isBoolean(result)) {
+      throw new TypeError('_filter args(compareFunc) result is not boolean');
     }
 
-    for (var i = 0; i < args.length; i += 1) {
-      // support for wsh last comma in Array. [a,b,]
-      if (i === args.length - 1 && _isUndefined(args[i])) {
-        continue;
-      }
-
-      if (!_isArray(args[i])) {
-        throw new TypeError('switch_() args is not array in array');
-      }
+    if (result) {
+      resultArray.push(array[i]);
     }
+  }
 
-    for (var _i = 0; _i < args.length; _i += 1) {
-      // support for wsh last comma in Array. [a,b,]
-      if (_i === args.length - 1 && _isUndefined(args[_i])) {
-        continue;
-      }
+  return resultArray;
+};
 
-      if (args[_i].length === 0) {
-        return undefined;
-      }
+var filter = function filter(array, compareFunc) {
+  if (!_isArray(array)) {
+    throw new TypeError('filter args(array) is not array');
+  }
 
-      if (args[_i].length === 1) {
-        return functionValue(args[_i][0]);
-      }
+  if (!_isFunction(compareFunc)) {
+    throw new TypeError('filter args(compareFunc) is not function');
+  }
 
-      if (args[_i][0] === expression) {
-        return functionValue(args[_i][1]);
-      }
-    }
+  return _filter(array, compareFunc);
+};
+/**
+ * map
+ */
 
-    return undefined;
-  };
+
+var _map = function _map(array, productFunc) {
+  var resultArray = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var result = productFunc(array[i], i, array);
+    resultArray.push(result);
+  }
+
+  return resultArray;
+};
+
+var map = function map(array, productFunc) {
+  if (!_isArray(array)) {
+    throw new TypeError('map args(array) is not array');
+  }
+
+  if (!_isFunction(productFunc)) {
+    throw new TypeError('map args(productFunc) is not function');
+  }
+
+  return _map(array, productFunc);
 };
 
 module.exports = {
-  assert: assert,
-  guard: guard,
-  sc: sc,
-  if_: if_,
-  switch_: switch_
+  _min: _min,
+  _max: _max,
+  _sum: _sum,
+  _average: _average,
+  _midian: _midian,
+  _mode: _mode,
+  _unique: _unique,
+  _single: _single,
+  _multiple: _multiple,
+  _filter: _filter,
+  _map: _map,
+  from: from,
+  min: min,
+  max: max,
+  sum: sum,
+  average: average,
+  midian: midian,
+  mode: mode,
+  unique: unique,
+  single: single,
+  multiple: multiple,
+  filter: filter,
+  map: map
 };
 
 /***/ }),
 /* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(14),
+    _copyProperty = _require2._copyProperty,
+    _propertyCount = _require2._propertyCount,
+    _inProperty = _require2._inProperty;
+/**
+ * isMultiples isEven isOdd
+ */
+
+
+var _isMultiples = function _isMultiples(number, radix) {
+  return number % radix === 0;
+};
+
+var isMultiples = function isMultiples(number, radix) {
+  if (_inProperty(number, 'number,radix')) {
+    var _number = number;
+    number = _number.number;
+    radix = _number.radix;
+  }
+
+  if (!_isInteger(number)) {
+    throw new TypeError('isMultiples args(number) is not integer');
+  }
+
+  if (!_isInteger(radix)) {
+    throw new TypeError('isMultiples args(radix) is not integer');
+  }
+
+  return _isMultiples(number, radix);
+};
+
+var isEven = function isEven(number) {
+  return isMultiples(number, 2);
+};
+
+var isOdd = function isOdd(number) {
+  return !_isMultiples(number, 2);
+};
+/**
+ * round
+ */
+
+
+var _round = function _round(value) {
+  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var plusFlag = 0 <= value ? true : false;
+  var powResult = Math.pow(10, digit);
+
+  if (plusFlag) {
+    return Math.round(value * powResult) / powResult;
+  } else {
+    return -1 * Math.round(-1 * value * powResult) / powResult;
+  }
+};
+
+var round = function round(value) {
+  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+  if (_inProperty(value, 'value')) {
+    var _value = value;
+    value = _value.value;
+    var _value$digit = _value.digit;
+    digit = _value$digit === void 0 ? 0 : _value$digit;
+  }
+
+  if (!_isInteger(digit)) {
+    throw new TypeError('round args(value) is not integer');
+  }
+
+  return _round(value, digit);
+};
+/**
+ * nearEqual
+ */
+
+
+var _nearEqual = function _nearEqual(value1, value2, diff) {
+  if (Math.abs(value1 - value2) <= diff) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+var nearEqual = function nearEqual(value1, value2, diff) {
+  if (_inProperty(value1, 'value1,value2,diff')) {
+    var _value2 = value1;
+    value1 = _value2.value1;
+    value2 = _value2.value2;
+    diff = _value2.diff;
+  }
+
+  if (!_isNumber(value1)) {
+    throw new TypeError('nearEqual args(value1) is not number');
+  }
+
+  if (!_isNumber(value2)) {
+    throw new TypeError('nearEqual args(value2) is not number');
+  }
+
+  if (!_isNumber(diff)) {
+    throw new TypeError('nearEqual args(diff) is not number');
+  }
+
+  if (diff < 0) {
+    throw new RangeError('nearEqual args(diff) must be < 0');
+  }
+
+  return _nearEqual(value1, value2, diff);
+};
+/**
+ * inRange
+ */
+
+
+var _inRange = function _inRange(value, from, to) {
+  if (from <= value && value <= to) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+var inRange = function inRange(value, from, to) {
+  if (_inProperty(value, 'value,from,to')) {
+    var _value3 = value;
+    value = _value3.value;
+    from = _value3.from;
+    to = _value3.to;
+  }
+
+  if (!_isNumber(value)) {
+    throw new TypeError('inRange args(value) is not number');
+  }
+
+  if (!_isNumber(from)) {
+    throw new TypeError('inRange args(from) is not number');
+  }
+
+  if (!_isNumber(to)) {
+    throw new TypeError('inRange args(to) is not number');
+  }
+
+  if (!(from <= to)) {
+    throw new RangeError('inRange args(from,to) must be from <= to');
+  }
+
+  return _inRange(value, from, to);
+};
+/**
+ * randomInt
+ */
+
+
+var _randomInt = function _randomInt(min, max) {
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
+};
+
+var randomInt = function randomInt(min, max) {
+  if (_inProperty(min, 'min,max')) {
+    var _min = min;
+    min = _min.min;
+    max = _min.max;
+  }
+
+  if (!_isInteger(min)) {
+    throw new TypeError('randomInt args(min) is not integer');
+  }
+
+  if (!_isInteger(max)) {
+    throw new TypeError('randomInt args(max) is not integer');
+  }
+
+  return _randomInt(min, max);
+};
+
+module.exports = {
+  _isMultiples: _isMultiples,
+  _round: _round,
+  _nearEqual: _nearEqual,
+  _inRange: _inRange,
+  isMultiples: isMultiples,
+  isEven: isEven,
+  isOdd: isOdd,
+  round: round,
+  nearEqual: nearEqual,
+  inRange: inRange,
+  randomInt: randomInt
+};
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2443,10 +2763,344 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(20), {}, __webpack_require__(21));
+module.exports = _objectSpread({}, __webpack_require__(21), {}, __webpack_require__(9), {}, __webpack_require__(25));
 
 /***/ }),
-/* 20 */
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(22),
+    _match = _require2._match;
+
+var _require3 = __webpack_require__(8),
+    _inProperty = _require3._inProperty;
+
+var _require4 = __webpack_require__(18),
+    _map = _require4._map;
+/**
+ * matchFormat
+ */
+
+
+var _matchFormat = function _matchFormat(formatName, value) {
+  var patterns = Object.keys(_matchFormat.pattern);
+  var index = patterns.indexOf(formatName);
+
+  if (index === -1) {
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") is not exists format"));
+  }
+
+  var result = _matchFormat.pattern[patterns[index]](value);
+
+  if (!_isBoolean(result)) {
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
+  }
+
+  return result;
+};
+
+_matchFormat.pattern = {};
+
+_matchFormat.clear = function () {
+  _matchFormat.pattern = {};
+};
+
+_matchFormat.add = function (nameArray, patternFunction) {
+  nameArray.forEach(function (name) {
+    _matchFormat.pattern[name] = patternFunction;
+  });
+};
+
+_matchFormat.reset = function () {
+  _matchFormat.add(['zenkaku'], function (value) {
+    return value.match(/^[^\x01-\x7E\xA1-\xDF]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['hiragana'], function (value) {
+    return value.match(/^[\u3041-\u3096]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['katakana'], function (value) {
+    return value.match(/^[\u30a1-\u30f6]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['alphabet-number'], function (value) {
+    return value.match(/^[0-9a-zA-Z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['number'], function (value) {
+    return value.match(/^[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['alphabet'], function (value) {
+    return value.match(/^[a-zA-Z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['upper_alphabet'], function (value) {
+    return value.match(/^[A-Z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['lower_alphabet'], function (value) {
+    return value.match(/^[a-z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['integer'], function (value) {
+    return value.match(/^[+|-]?[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['float_only'], function (value) {
+    return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['float_integer'], function (value) {
+    return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['float_more'], function (value) {
+    return value.match( // eslint-disable-next-line max-len
+    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
+  }); // float_more
+  //  integer + float + exponential notation
+  //  value.match(new RegExp(
+  //    '^[-|+]?[0-9]*\\.[0-9]*$' +
+  //    '|^[+|-]?[0-9]+$' +
+  //    '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
+  //  , 'g'))) ? true : false;
+
+
+  _matchFormat.add(['2_base_number', 'binary'], function (value) {
+    return value.match(/^[-|+]?[01]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['3_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-2]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['4_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-3]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['5_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-4]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['6_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-5]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['7_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-6]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['8_base_number', 'octal'], function (value) {
+    return value.match(/^[-|+]?[0-7]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['9_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-8]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['10_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['11_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['12_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['13_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['14_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['15_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['16_base_number', 'hex'], function (value) {
+    return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d', 'date'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy/m/d'], function (value) {
+    return value.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy/mm/dd'], function (value) {
+    return value.match(/^\d{4}\/\d{2}\/\d{2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d_h:n'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d_h:n:s'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d_h:n:s.ms'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y-m-d'], function (value) {
+    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy-m-d'], function (value) {
+    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
+    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
+  });
+};
+
+_matchFormat.reset();
+
+var matchFormat = function matchFormat(formatName, value) {
+  if (_inProperty(formatName, 'formatName,value')) {
+    var _formatName = formatName;
+    formatName = _formatName.formatName;
+    value = _formatName.value;
+  }
+
+  if (!_isString(formatName)) {
+    throw new TypeError('matchFormat args(formatName) is not string');
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('matchFormat args(value) is not string');
+  }
+
+  return _matchFormat(formatName, value);
+};
+/**
+ * includes
+ */
+
+
+var _includes = function _includes(value, compareArray) {
+  var compareFunctionArray = _map(compareArray, function (element) {
+    if (_isRegExp(element)) {
+      return element;
+    } else if (_isString(element)) {
+      return element === '' ? function () {
+        return false;
+      } : function (value) {
+        return value.indexOf(element) >= 0;
+      };
+    } else {
+      throw new TypeError('_includes args(compareArray element) is not [regexp|string]');
+    }
+  });
+
+  return _match(value, compareFunctionArray);
+};
+
+var includes = function includes(value, compareArray) {
+  if (_inProperty(value, 'value, compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('includes args(value) is not string');
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('includes args(compareArray) is not array');
+  }
+
+  return _includes(value, compareArray);
+};
+/**
+ * repeat
+ */
+
+
+var _repeat = function _repeat(value, count) {
+  var result = '';
+
+  for (var i = 0; i < count; i += 1) {
+    result += value;
+  }
+
+  return result;
+};
+
+var repeat = function repeat(value, count) {
+  if (_inProperty(value, 'value, count')) {
+    var _value2 = value;
+    value = _value2.value;
+    count = _value2.count;
+  }
+
+  if (!_isString(value)) {
+    throw new TypeError('repeat args(value) is not string');
+  }
+
+  if (!_isInteger(count)) {
+    throw new TypeError('includes args(compareArray) is not array');
+  }
+
+  return _repeat(value, count);
+};
+
+module.exports = {
+  _matchFormat: _matchFormat,
+  _includes: _includes,
+  _repeat: _repeat,
+  matchFormat: matchFormat,
+  includes: includes,
+  repeat: repeat
+};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+module.exports = _objectSpread({}, __webpack_require__(23), {}, __webpack_require__(24));
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2739,7 +3393,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3286,7 +3940,299 @@ module.exports = {
 };
 
 /***/ }),
-/* 22 */
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(8),
+    _inProperty = _require2._inProperty;
+
+var _require3 = __webpack_require__(9),
+    _replaceAll = _require3._replaceAll;
+
+var replaceAll = function replaceAll(str, before, after) {
+  if (_inProperty(str, 'str, before, after')) {
+    var _str = str;
+    str = _str.str;
+    before = _str.before;
+    after = _str.after;
+  }
+
+  if (!_isString(str)) {
+    throw new TypeError('replaceAll args(str) is not string');
+  }
+
+  if (!_isString(before)) {
+    throw new TypeError('replaceAll args(before) is not string');
+  }
+
+  if (!_isString(after)) {
+    throw new TypeError('replaceAll args(after) is not string');
+  }
+
+  return _replaceAll(str, before, after);
+};
+
+module.exports = {
+  replaceAll: replaceAll
+};
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+/**
+ * assert
+ */
+
+
+var assert = function assert(value) {
+  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  if (!_isBoolean(value)) {
+    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
+  }
+
+  if (!_isString(message)) {
+    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
+  }
+
+  if (!value) {
+    throw new Error("assert error|message:".concat(message));
+  }
+};
+/**
+ * guard
+ */
+
+
+var guard_status = true;
+var guard_message;
+
+var guard = function guard(guardFunc, runFunc) {
+  guard_message = '';
+
+  if (guard_status === false) {
+    return false;
+  }
+
+  if (!_isFunction(guardFunc)) {
+    throw new TypeError('guard args(guardFunc) is not function');
+  }
+
+  var result = guardFunc();
+
+  if (!_isArray(result)) {
+    throw new TypeError('guard args(guardFunc result) is not array');
+  }
+
+  for (var i = 0; i < result.length; i += 1) {
+    // support for wsh last comma in Array. [a,b,]
+    if (i === result.length - 1 && _isUndefined(result[i])) {
+      continue;
+    }
+
+    var resultValue = undefined;
+    var message = '';
+
+    if (_isArray(result[i])) {
+      if (!(1 <= result[i].length)) {
+        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
+      }
+
+      resultValue = result[i][0];
+
+      if (2 <= result[i].length) {
+        message = result[i][1];
+      }
+    } else {
+      resultValue = result[i];
+    }
+
+    resultValue = functionValue(resultValue);
+
+    if (!_isBoolean(resultValue)) {
+      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
+    }
+
+    if (resultValue === false) {
+      guard_message = message;
+
+      if (!_isUndefined(runFunc)) {
+        if (!_isFunction(runFunc)) {
+          throw new TypeError('guard args(runFunc) is not function');
+        }
+
+        runFunc();
+      }
+
+      return true;
+    }
+  }
+
+  return false;
+};
+
+guard.message = function () {
+  return guard_message;
+};
+
+guard.status = function (value) {
+  return guard_status = value;
+};
+
+guard.on = function () {
+  guard_status = true;
+};
+
+guard.off = function () {
+  guard_status = false;
+};
+/**
+ * function Value
+ */
+
+
+var functionValue = function functionValue(value) {
+  if (_isFunction(value)) {
+    return value();
+  } else {
+    return value;
+  }
+};
+/**
+ * sc (second call)
+ */
+
+
+var sc = function sc(argsFirst, func) {
+  for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    argsRest[_key - 2] = arguments[_key];
+  }
+
+  return func.apply(void 0, [argsFirst].concat(argsRest));
+};
+/**
+ * if_
+ */
+
+
+var if_ = function if_(condition) {
+  if (!_isBoolean(condition)) {
+    throw new TypeError('if_ args(condition) is not boolean');
+  }
+
+  var checkSyntax = function checkSyntax(args) {
+    if (!_isObject(args)) {
+      throw new TypeError('if_() args is not object');
+    }
+
+    if (_isUndefined(args.then) && _isUndefined(args["else"])) {
+      throw new ReferenceError('if_() parameter args(then,else) is not defined');
+    }
+  };
+
+  if (condition) {
+    return function (args) {
+      checkSyntax(args);
+      return functionValue(args.then);
+    };
+  } else {
+    return function (args) {
+      checkSyntax(args);
+      return functionValue(args["else"]);
+    };
+  }
+};
+/**
+ * switch_
+ */
+
+
+var switch_ = function switch_(expression) {
+  return function (args) {
+    if (!_isArray(args)) {
+      throw new TypeError('switch_() args is not array');
+    }
+
+    for (var i = 0; i < args.length; i += 1) {
+      // support for wsh last comma in Array. [a,b,]
+      if (i === args.length - 1 && _isUndefined(args[i])) {
+        continue;
+      }
+
+      if (!_isArray(args[i])) {
+        throw new TypeError('switch_() args is not array in array');
+      }
+    }
+
+    for (var _i = 0; _i < args.length; _i += 1) {
+      // support for wsh last comma in Array. [a,b,]
+      if (_i === args.length - 1 && _isUndefined(args[_i])) {
+        continue;
+      }
+
+      if (args[_i].length === 0) {
+        return undefined;
+      }
+
+      if (args[_i].length === 1) {
+        return functionValue(args[_i][0]);
+      }
+
+      if (args[_i][0] === expression) {
+        return functionValue(args[_i][1]);
+      }
+    }
+
+    return undefined;
+  };
+};
+
+module.exports = {
+  assert: assert,
+  guard: guard,
+  sc: sc,
+  if_: if_,
+  switch_: switch_
+};
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3320,11 +4266,11 @@ var _require = __webpack_require__(5),
     _isNotRegExp = _require._isNotRegExp,
     _isNotException = _require._isNotException;
 
-var _require2 = __webpack_require__(19),
+var _require2 = __webpack_require__(22),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(23),
+var _require3 = __webpack_require__(20),
     _matchFormat = _require3._matchFormat;
 
 var _require4 = __webpack_require__(14),
@@ -3332,7 +4278,7 @@ var _require4 = __webpack_require__(14),
     _propertyCount = _require4._propertyCount,
     _inProperty = _require4._inProperty;
 
-var _require5 = __webpack_require__(26),
+var _require5 = __webpack_require__(19),
     _round = _require5._round;
 /**
  * numberToString
@@ -3622,935 +4568,6 @@ module.exports = {
 };
 
 /***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-module.exports = _objectSpread({}, __webpack_require__(24), {}, __webpack_require__(9), {}, __webpack_require__(25));
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(5),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(19),
-    _match = _require2._match;
-
-var _require3 = __webpack_require__(8),
-    _inProperty = _require3._inProperty;
-/**
- * matchFormat
- */
-
-
-var _matchFormat = function _matchFormat(formatName, value) {
-  var patterns = Object.keys(_matchFormat.pattern);
-  var index = patterns.indexOf(formatName);
-
-  if (index === -1) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") is not exists format"));
-  }
-
-  var result = _matchFormat.pattern[patterns[index]](value);
-
-  if (!_isBoolean(result)) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
-  }
-
-  return result;
-};
-
-_matchFormat.pattern = {};
-
-_matchFormat.clear = function () {
-  _matchFormat.pattern = {};
-};
-
-_matchFormat.add = function (nameArray, patternFunction) {
-  nameArray.forEach(function (name) {
-    _matchFormat.pattern[name] = patternFunction;
-  });
-};
-
-_matchFormat.reset = function () {
-  _matchFormat.add(['zenkaku'], function (value) {
-    return value.match(/^[^\x01-\x7E\xA1-\xDF]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['hiragana'], function (value) {
-    return value.match(/^[\u3041-\u3096]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['katakana'], function (value) {
-    return value.match(/^[\u30a1-\u30f6]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['alphabet-number'], function (value) {
-    return value.match(/^[0-9a-zA-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['number'], function (value) {
-    return value.match(/^[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['alphabet'], function (value) {
-    return value.match(/^[a-zA-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['upper_alphabet'], function (value) {
-    return value.match(/^[A-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['lower_alphabet'], function (value) {
-    return value.match(/^[a-z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['integer'], function (value) {
-    return value.match(/^[+|-]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_only'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_integer'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_more'], function (value) {
-    return value.match( // eslint-disable-next-line max-len
-    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
-  }); // float_more
-  //  integer + float + exponential notation
-  //  value.match(new RegExp(
-  //    '^[-|+]?[0-9]*\\.[0-9]*$' +
-  //    '|^[+|-]?[0-9]+$' +
-  //    '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
-  //  , 'g'))) ? true : false;
-
-
-  _matchFormat.add(['2_base_number', 'binary'], function (value) {
-    return value.match(/^[-|+]?[01]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['3_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-2]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['4_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-3]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['5_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-4]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['6_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-5]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['7_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-6]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['8_base_number', 'octal'], function (value) {
-    return value.match(/^[-|+]?[0-7]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['9_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-8]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['10_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['11_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['12_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['13_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['14_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['15_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['16_base_number', 'hex'], function (value) {
-    return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d', 'date'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy/m/d'], function (value) {
-    return value.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy/mm/dd'], function (value) {
-    return value.match(/^\d{4}\/\d{2}\/\d{2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n:s'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n:s.ms'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y-m-d'], function (value) {
-    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-m-d'], function (value) {
-    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
-    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
-  });
-};
-
-_matchFormat.reset();
-
-var matchFormat = function matchFormat(formatName, value) {
-  if (_inProperty(formatName, 'formatName,value')) {
-    var _formatName = formatName;
-    formatName = _formatName.formatName;
-    value = _formatName.value;
-  }
-
-  if (!_isString(formatName)) {
-    throw new TypeError('matchFormat args(formatName) is not string');
-  }
-
-  if (!_isString(value)) {
-    throw new TypeError('matchFormat args(value) is not string');
-  }
-
-  return _matchFormat(formatName, value);
-};
-/**
- * includes
- */
-
-
-var _includes = function _includes(value, compareArray) {
-  var compareFunctionArray = compareArray.map(function (element) {
-    if (_isRegExp(element)) {
-      return element;
-    } else if (_isString(element)) {
-      return element === '' ? function () {
-        return false;
-      } : function (value) {
-        return value.includes(element);
-      };
-    } else {
-      throw new TypeError('_includes args(compareArray element) is not [regexp|string]');
-    }
-  });
-  return _match(value, compareFunctionArray);
-};
-
-var includes = function includes(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  }
-
-  if (!_isArray(compareArray)) {
-    throw new TypeError('includes args(compareArray) is not array');
-  }
-
-  return _includes(value, compareArray);
-};
-
-module.exports = {
-  _matchFormat: _matchFormat,
-  _includes: _includes,
-  matchFormat: matchFormat,
-  includes: includes
-};
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(5),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(8),
-    _inProperty = _require2._inProperty;
-
-var _require3 = __webpack_require__(9),
-    _replaceAll = _require3._replaceAll;
-
-var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str, before, after')) {
-    var _str = str;
-    str = _str.str;
-    before = _str.before;
-    after = _str.after;
-  }
-
-  if (!_isString(str)) {
-    throw new TypeError('replaceAll args(str) is not string');
-  }
-
-  if (!_isString(before)) {
-    throw new TypeError('replaceAll args(before) is not string');
-  }
-
-  if (!_isString(after)) {
-    throw new TypeError('replaceAll args(after) is not string');
-  }
-
-  return _replaceAll(str, before, after);
-};
-
-module.exports = {
-  replaceAll: replaceAll
-};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(5),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(14),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
-/**
- * isMultiples isEven isOdd
- */
-
-
-var _isMultiples = function _isMultiples(number, radix) {
-  return number % radix === 0;
-};
-
-var isMultiples = function isMultiples(number, radix) {
-  if (_inProperty(number, 'number,radix')) {
-    var _number = number;
-    number = _number.number;
-    radix = _number.radix;
-  }
-
-  if (!_isInteger(number)) {
-    throw new TypeError('isMultiples args(number) is not integer');
-  }
-
-  if (!_isInteger(radix)) {
-    throw new TypeError('isMultiples args(radix) is not integer');
-  }
-
-  return _isMultiples(number, radix);
-};
-
-var isEven = function isEven(number) {
-  return isMultiples(number, 2);
-};
-
-var isOdd = function isOdd(number) {
-  return !_isMultiples(number, 2);
-};
-/**
- * round
- */
-
-
-var _round = function _round(value) {
-  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var plusFlag = 0 <= value ? true : false;
-  var powResult = Math.pow(10, digit);
-
-  if (plusFlag) {
-    return Math.round(value * powResult) / powResult;
-  } else {
-    return -1 * Math.round(-1 * value * powResult) / powResult;
-  }
-};
-
-var round = function round(value) {
-  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-  if (_inProperty(value, 'value')) {
-    var _value = value;
-    value = _value.value;
-    var _value$digit = _value.digit;
-    digit = _value$digit === void 0 ? 0 : _value$digit;
-  }
-
-  if (!_isInteger(digit)) {
-    throw new TypeError('round args(value) is not integer');
-  }
-
-  return _round(value, digit);
-};
-/**
- * nearEqual
- */
-
-
-var _nearEqual = function _nearEqual(value1, value2, diff) {
-  if (Math.abs(value1 - value2) <= diff) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-var nearEqual = function nearEqual(value1, value2, diff) {
-  if (_inProperty(value1, 'value1,value2,diff')) {
-    var _value2 = value1;
-    value1 = _value2.value1;
-    value2 = _value2.value2;
-    diff = _value2.diff;
-  }
-
-  if (!_isNumber(value1)) {
-    throw new TypeError('nearEqual args(value1) is not number');
-  }
-
-  if (!_isNumber(value2)) {
-    throw new TypeError('nearEqual args(value2) is not number');
-  }
-
-  if (!_isNumber(diff)) {
-    throw new TypeError('nearEqual args(diff) is not number');
-  }
-
-  if (diff < 0) {
-    throw new RangeError('nearEqual args(diff) must be < 0');
-  }
-
-  return _nearEqual(value1, value2, diff);
-};
-/**
- * inRange
- */
-
-
-var _inRange = function _inRange(value, from, to) {
-  if (from <= value && value <= to) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-var inRange = function inRange(value, from, to) {
-  if (_inProperty(value, 'value,from,to')) {
-    var _value3 = value;
-    value = _value3.value;
-    from = _value3.from;
-    to = _value3.to;
-  }
-
-  if (!_isNumber(value)) {
-    throw new TypeError('inRange args(value) is not number');
-  }
-
-  if (!_isNumber(from)) {
-    throw new TypeError('inRange args(from) is not number');
-  }
-
-  if (!_isNumber(to)) {
-    throw new TypeError('inRange args(to) is not number');
-  }
-
-  if (!(from <= to)) {
-    throw new RangeError('inRange args(from,to) must be from <= to');
-  }
-
-  return _inRange(value, from, to);
-};
-/**
- * randomInt
- */
-
-
-var _randomInt = function _randomInt(min, max) {
-  return Math.floor(Math.random() * (max + 1 - min)) + min;
-};
-
-var randomInt = function randomInt(min, max) {
-  if (_inProperty(min, 'min,max')) {
-    var _min = min;
-    min = _min.min;
-    max = _min.max;
-  }
-
-  if (!_isInteger(min)) {
-    throw new TypeError('randomInt args(min) is not integer');
-  }
-
-  if (!_isInteger(max)) {
-    throw new TypeError('randomInt args(max) is not integer');
-  }
-
-  return _randomInt(min, max);
-};
-
-module.exports = {
-  _isMultiples: _isMultiples,
-  _round: _round,
-  _nearEqual: _nearEqual,
-  _inRange: _inRange,
-  isMultiples: isMultiples,
-  isEven: isEven,
-  isOdd: isOdd,
-  round: round,
-  nearEqual: nearEqual,
-  inRange: inRange,
-  randomInt: randomInt
-};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(5),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
-
-var _require2 = __webpack_require__(26),
-    isEven = _require2.isEven;
-
-var _require3 = __webpack_require__(8),
-    _inProperty = _require3._inProperty;
-
-var _require4 = __webpack_require__(4),
-    _clone = _require4._clone,
-    _cloneDeep = _require4._cloneDeep;
-/**
- * array.min max
- */
-
-
-var _min = function _min(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_min args(array) element is not number');
-    }
-
-    if (array[i] < result) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-var min = function min(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('min args(array) is not array');
-  }
-
-  return _min(array);
-};
-
-var _max = function _max(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_max args(array) element is not number');
-    }
-
-    if (result < array[i]) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-var max = function max(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('max args(array) is not array');
-  }
-
-  return _max(array);
-};
-/**
- * from
- */
-
-
-var from = function from(arrayLike) {
-  return Array.prototype.slice.call(arrayLike);
-};
-/**
- * sum
- */
-
-
-var _sum = function _sum(array) {
-  var result = 0;
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
-      throw new TypeError('_min args(array) element is not number');
-    }
-
-    result += array[i];
-  }
-
-  return result;
-};
-
-var sum = function sum(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('sum args(array) is not array');
-  }
-
-  return _sum(array);
-};
-/**
- * average
- */
-
-
-var _average = function _average(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  return _sum(array) / array.length;
-};
-
-var average = function average(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('average args(array) is not array');
-  }
-
-  return _average(array);
-};
-/**
- * midian
- */
-
-
-var _midian = function _midian(array) {
-  var sortedArray = _cloneDeep(array);
-
-  sortedArray.sort(function (a, b) {
-    return a - b;
-  });
-
-  if (isEven(sortedArray.length)) {
-    // Even number length
-    var centerIndex = sortedArray.length / 2;
-    return (sortedArray[centerIndex - 1] + sortedArray[centerIndex]) / 2;
-  } else {
-    // Odd number length
-    return sortedArray[(sortedArray.length - 1) / 2];
-  }
-};
-
-var midian = function midian(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('midian args(array) is not array');
-  }
-
-  return _midian(array);
-};
-/**
- * mode
- */
-
-
-var _mode = function _mode(array) {
-  if (array.length === 0) {
-    return [];
-  }
-
-  var uniqueArray = _unique(array);
-
-  var countArray = uniqueArray.map(function (element1) {
-    return _filter(array, function (element2) {
-      return element1 === element2;
-    }).length;
-  });
-
-  var maxValue = _max(countArray);
-
-  return _filter(uniqueArray, function (element, index) {
-    return countArray[index] === maxValue;
-  });
-};
-
-var mode = function mode(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('mode args(array) is not array');
-  }
-
-  return _mode(array);
-};
-/**
- * uniqe
- */
-
-
-var _unique = function _unique(array) {
-  return _filter(array, function (element, index) {
-    return array.indexOf(element) === index;
-  });
-};
-
-var unique = function unique(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('unique args(array) is not array');
-  }
-
-  return _unique(array);
-};
-/**
- * single
- */
-
-
-var _single = function _single(array) {
-  if (array.length === 0) {
-    return [];
-  }
-
-  var uniqueArray = _unique(array);
-
-  var countArray = uniqueArray.map(function (element1) {
-    return _filter(array, function (element2) {
-      return element1 === element2;
-    }).length;
-  });
-  return _filter(uniqueArray, function (element, index) {
-    return countArray[index] === 1;
-  });
-};
-
-var single = function single(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('single args(array) is not array');
-  }
-
-  return _single(array);
-};
-/**
- * multiple
- */
-
-
-var _multiple = function _multiple(array) {
-  if (array.length === 0) {
-    return [];
-  }
-
-  var uniqueArray = _unique(array);
-
-  var countArray = uniqueArray.map(function (element1) {
-    return _filter(array, function (element2) {
-      return element1 === element2;
-    }).length;
-  });
-  return _filter(uniqueArray, function (element, index) {
-    return countArray[index] >= 2;
-  });
-};
-
-var multiple = function multiple(array) {
-  if (!_isArray(array)) {
-    throw new TypeError('multiple args(array) is not array');
-  }
-
-  return _multiple(array);
-};
-/**
- * filter
- */
-
-
-var _filter = function _filter(array, compareFunc) {
-  var resultArray = [];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    var result = compareFunc(array[i], i, array);
-
-    if (!_isBoolean(result)) {
-      throw new TypeError('_filter args(compareFunc) result is not boolean');
-    }
-
-    if (result) {
-      resultArray.push(array[i]);
-    }
-  }
-
-  return resultArray;
-};
-
-var filter = function filter(array, compareFunc) {
-  if (!_isArray(array)) {
-    throw new TypeError('filter args(array) is not array');
-  }
-
-  if (!_isFunction(compareFunc)) {
-    throw new TypeError('filter args(compareFunc) is not function');
-  }
-
-  return _filter(array, compareFunc);
-};
-/**
- * map
- */
-
-
-var _map = function _map(array, productFunc) {
-  var resultArray = [];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    var result = productFunc(array[i], i, array);
-    resultArray.push(result);
-  }
-
-  return resultArray;
-};
-
-var map = function map(array, productFunc) {
-  if (!_isArray(array)) {
-    throw new TypeError('map args(array) is not array');
-  }
-
-  if (!_isFunction(productFunc)) {
-    throw new TypeError('map args(productFunc) is not function');
-  }
-
-  return _map(array, productFunc);
-};
-
-module.exports = {
-  _min: _min,
-  _max: _max,
-  _sum: _sum,
-  _average: _average,
-  _midian: _midian,
-  _mode: _mode,
-  _unique: _unique,
-  _single: _single,
-  _multiple: _multiple,
-  _filter: _filter,
-  _map: _map,
-  from: from,
-  min: min,
-  max: max,
-  sum: sum,
-  average: average,
-  midian: midian,
-  mode: mode,
-  unique: unique,
-  single: single,
-  multiple: multiple,
-  filter: filter,
-  map: map
-};
-
-/***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4572,11 +4589,14 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(19),
+var _require2 = __webpack_require__(22),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(23),
+var _require3 = __webpack_require__(20),
     _includes = _require3._includes;
+
+var _require4 = __webpack_require__(18),
+    map = _require4.map;
 
 var original = {};
 original.log = console.log;
@@ -4661,7 +4681,7 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
       messageArgs[_key] = arguments[_key];
     }
 
-    var messageArgsAll = messageArgs.map(function (value) {
+    var messageArgsAll = map(messageArgs, function (value) {
       return String(value);
     }).join(' ');
     var acceptFlag = acceptArray.length === 0;
