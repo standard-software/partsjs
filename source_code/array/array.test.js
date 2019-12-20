@@ -143,11 +143,34 @@ const test_execute_array = (parts) => {
         it(test_mode.name, () => {
           checkEqual(true,
             equal(
+              [],
+              array.mode([])
+            )
+          );
+          checkEqual(true,
+            equal(
+              [70],
+              array.mode([70])
+            )
+          );
+          checkEqual(true,
+            equal(
               [70, 52],
               array.mode([70, 70, 80, 52, 52, 100])
             )
           );
-          // checkEqual(10, array.midian([9, 9, 10, 10, 10, 100, 6]));
+          checkEqual(true,
+            equal(
+              [52],
+              array.mode([70, 70, 80, 52, 52, 52, 100])
+            )
+          );
+          checkEqual(true,
+            equal(
+              [9, 10],
+              array.mode([9, 9, 10, 10, 10, 9, 6])
+            )
+          );
         });
       });
     };
@@ -157,27 +180,39 @@ const test_execute_array = (parts) => {
         it(test_uniqe.name, () => {
           checkEqual(true,
             equal(
-              [1, 2, 0],
-              array.unique([1, 2, 0, 0, 2, 2])
+              [1, 2, 3, 4, 0],
+              array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
             )
           );
         });
       });
     };
 
-    const test_muptiple = () => {
-      describe(test_uniqe.name, () => {
-        it(test_uniqe.name, () => {
+    const test_single = () => {
+      describe(test_single.name, () => {
+        it(test_single.name, () => {
           checkEqual(true,
             equal(
-              [2, 0],
-              array.multiple([1, 2, 0, 0, 2, 2])
+              [1, 0],
+              array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])
             )
           );
         });
       });
     };
 
+    const test_multiple = () => {
+      describe(test_multiple.name, () => {
+        it(test_multiple.name, () => {
+          checkEqual(true,
+            equal(
+              [2, 3, 4],
+              array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])
+            )
+          );
+        });
+      });
+    };
 
     const test_filter = () => {
       describe(test_filter.name, () => {
@@ -204,6 +239,37 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_map = () => {
+      describe(test_map.name, () => {
+        it(test_map.name, () => {
+          checkEqual(true,
+            equal(
+              [true, false, true, false, true, false],
+              array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
+            )
+          );
+          checkEqual(true,
+            equal(
+              [true, false, true, false, true, false],
+              array.map([0, 1, 2, 3, 4, 5], isEven)
+            )
+          );
+          checkEqual(true,
+            equal(
+              [false, true, false, true, false, true],
+              array.map([0, 1, 2, 3, 4, 5], isOdd)
+            )
+          );
+          checkEqual(true,
+            equal(
+              [0, 2, 4, 6, 8, 10],
+              array.map([0, 1, 2, 3, 4, 5], value => value * 2)
+            )
+          );
+        });
+      });
+    };
+
     console.log('  test array.js');
 
     test_array_from();
@@ -217,8 +283,10 @@ const test_execute_array = (parts) => {
     test_mode();
 
     test_uniqe();
+    test_multiple();
 
     test_filter();
+    test_map();
   });
 };
 

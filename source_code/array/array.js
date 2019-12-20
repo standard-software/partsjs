@@ -160,7 +160,7 @@ const midian = (array) => {
  */
 const _mode = (array) => {
   if (array.length === 0) {
-    return null;
+    return [];
   }
   const uniqueArray = _unique(array);
   const countArray = uniqueArray.map(
@@ -203,13 +203,45 @@ const unique = (array) => {
 };
 
 /**
+ * single
+ */
+const _single = (array) => {
+  if (array.length === 0) {
+    return [];
+  }
+  const uniqueArray = _unique(array);
+  const countArray = uniqueArray.map(
+    (element1) => _filter(array,
+      (element2) => element1 === element2).length,
+  );
+  return _filter(uniqueArray,
+    (element, index) => countArray[index] === 1,
+  );
+};
+
+const single = (array) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'single args(array) is not array',
+    );
+  }
+  return _single(array);
+};
+
+/**
  * multiple
  */
 const _multiple = (array) => {
-  return _filter(
-    array,
-    (element, index) =>
-      array.indexOf(element) !== index,
+  if (array.length === 0) {
+    return [];
+  }
+  const uniqueArray = _unique(array);
+  const countArray = uniqueArray.map(
+    (element1) => _filter(array,
+      (element2) => element1 === element2).length,
+  );
+  return _filter(uniqueArray,
+    (element, index) => countArray[index] >= 2,
   );
 };
 
@@ -255,19 +287,45 @@ const filter = (array, compareFunc) => {
   return _filter(array, compareFunc);
 };
 
+/**
+ * map
+ */
+const _map = (array, productFunc) => {
+  const resultArray = [];
+  for (let i = 0, l = array.length; i < l; i += 1) {
+    const result = productFunc(array[i], i, array);
+    resultArray.push(result);
+  }
+  return resultArray;
+};
+
+const map = (array, productFunc) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'map args(array) is not array',
+    );
+  }
+  if (!_isFunction(productFunc)) {
+    throw new TypeError(
+      'map args(productFunc) is not function',
+    );
+  }
+  return _map(array, productFunc);
+};
+
 module.exports = {
   _min, _max,
   _sum, _average, _midian,
   _mode,
-  _unique, _multiple,
-  _filter,
+  _unique, _single, _multiple,
+  _filter, _map,
 
   from,
   min, max,
   sum, average, midian,
   mode,
-  unique, multiple,
-  filter,
+  unique, single, multiple,
+  filter, map,
 
 };
 

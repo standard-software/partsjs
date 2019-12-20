@@ -148,8 +148,8 @@ propertyNames.ARRAY_PUBLIC =
   'min, max,' +
   'sum, average, midian,' +
   'mode,' +
-  'unique, multiple,' +
-  'filter,' +
+  'unique, single, multiple,' +
+  'filter, map,' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +
