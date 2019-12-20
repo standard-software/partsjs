@@ -307,38 +307,7 @@ const includes = (
   return _includes(value, compareArray);
 };
 
-/**
- * replaceAll
- */
-const _replaceAll = (str, before, after) => {
-  return str.split(before).join(after);
-};
-
-const replaceAll = (str, before, after) => {
-  if (_inProperty(str, 'str,before,after')) {
-    ({ str, before, after } = str);
-  }
-
-  if (!_isString(str)) {
-    throw new TypeError(
-      'replaceAll args(str) is not string',
-    );
-  }
-  if (!_isString(before)) {
-    throw new TypeError(
-      'replaceAll args(before) is not string',
-    );
-  }
-  if (!_isString(after)) {
-    throw new TypeError(
-      'replaceAll args(after) is not string',
-    );
-  }
-
-  return _replaceAll(str, before, after);
-};
-
 module.exports = {
-  _matchFormat, _includes, _replaceAll,
-  matchFormat, includes, replaceAll,
+  _matchFormat, _includes,
+  matchFormat, includes,
 };

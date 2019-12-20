@@ -14,7 +14,7 @@ const {
 } = require('../string/_replaceAll.js');
 
 const replaceAll = (str, before, after) => {
-  if (_inProperty(str, 'str,before,after')) {
+  if (_inProperty(str, 'str, before, after')) {
     ({ str, before, after } = str);
   }
 

@@ -155,15 +155,119 @@ const midian = (array) => {
   return _midian(array);
 };
 
+/**
+ * mode
+ */
+const _mode = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
+  const uniqueArray = _unique(array);
+  const countArray = uniqueArray.map(
+    (element1) => _filter(array,
+      (element2) => element1 === element2).length,
+  );
+  const maxValue = _max(countArray);
+  return _filter(uniqueArray,
+    (element, index) => countArray[index] === maxValue,
+  );
+};
+
+const mode = (array) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'mode args(array) is not array',
+    );
+  }
+  return _mode(array);
+};
+
+/**
+ * uniqe
+ */
+const _unique = (array) => {
+  return _filter(
+    array,
+    (element, index) =>
+      array.indexOf(element) === index,
+  );
+};
+
+const unique = (array) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'unique args(array) is not array',
+    );
+  }
+  return _unique(array);
+};
+
+/**
+ * multiple
+ */
+const _multiple = (array) => {
+  return _filter(
+    array,
+    (element, index) =>
+      array.indexOf(element) !== index,
+  );
+};
+
+const multiple = (array) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'multiple args(array) is not array',
+    );
+  }
+  return _multiple(array);
+};
+
+/**
+ * filter
+ */
+const _filter = (array, compareFunc) => {
+  const resultArray = [];
+  for (let i = 0, l = array.length; i < l; i += 1) {
+    const result = compareFunc(array[i], i, array);
+    if (!_isBoolean(result)) {
+      throw new TypeError(
+        '_filter args(compareFunc) result is not boolean',
+      );
+    }
+    if (result) {
+      resultArray.push(array[i]);
+    }
+  }
+  return resultArray;
+};
+
+const filter = (array, compareFunc) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'filter args(array) is not array',
+    );
+  }
+  if (!_isFunction(compareFunc)) {
+    throw new TypeError(
+      'filter args(compareFunc) is not function',
+    );
+  }
+  return _filter(array, compareFunc);
+};
+
 module.exports = {
   _min, _max,
   _sum, _average, _midian,
-  // _mode,
+  _mode,
+  _unique, _multiple,
+  _filter,
 
   from,
   min, max,
   sum, average, midian,
-  // mode,
+  mode,
+  unique, multiple,
+  filter,
 
 };
 

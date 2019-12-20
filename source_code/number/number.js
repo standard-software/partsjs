@@ -40,7 +40,7 @@ const isEven = (number) => {
 };
 
 const isOdd = (number) => {
-  return !_.isMultiples(number, 2);
+  return !_isMultiples(number, 2);
 };
 
 /**

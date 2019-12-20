@@ -1,5 +1,5 @@
 # Parts.js
-JavaScript Code Parts
+JavaScript Code Parts TypeSafe Library
 
 ## URL
 
@@ -99,6 +99,15 @@ You can now use the functions of the parts object.
 
 
 ## Version
+
+### 3.1.0
+#### 2019/12/20(Fri)
+- array.js
+  - add filter
+  - add unique
+  - add multiple
+  - add mode
+- update isOdd
 
 ### 3.0.0
 #### 2019/12/18(Wed)
