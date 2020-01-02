@@ -212,7 +212,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + 'mode,' + 'unique, single, multiple,' + 'filter, map,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, midian,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
@@ -2455,63 +2455,217 @@ var multiple = function multiple(array) {
  */
 
 
-var _filter = function _filter(array, compareFunc) {
-  var resultArray = [];
+var _filter = function _filter(array, func) {
+  var result = [];
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    var result = compareFunc(array[i], i, array);
+    var resultFunc = func(array[i], i, array);
 
-    if (!_isBoolean(result)) {
+    if (!_isBoolean(resultFunc)) {
       throw new TypeError('_filter args(compareFunc) result is not boolean');
     }
 
-    if (result) {
-      resultArray.push(array[i]);
+    if (resultFunc) {
+      result.push(array[i]);
     }
   }
 
-  return resultArray;
+  return result;
 };
 
-var filter = function filter(array, compareFunc) {
+var filter = function filter(array, func) {
   if (!_isArray(array)) {
     throw new TypeError('filter args(array) is not array');
   }
 
-  if (!_isFunction(compareFunc)) {
+  if (!_isFunction(func)) {
     throw new TypeError('filter args(compareFunc) is not function');
   }
 
-  return _filter(array, compareFunc);
+  return _filter(array, func);
 };
 /**
  * map
  */
 
 
-var _map = function _map(array, productFunc) {
-  var resultArray = [];
+var _map = function _map(array, func) {
+  var result = [];
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    var result = productFunc(array[i], i, array);
-    resultArray.push(result);
+    var resultFunc = func(array[i], i, array);
+    result.push(resultFunc);
   }
 
-  return resultArray;
+  return result;
 };
 
-var map = function map(array, productFunc) {
+var map = function map(array, func) {
   if (!_isArray(array)) {
     throw new TypeError('map args(array) is not array');
   }
 
-  if (!_isFunction(productFunc)) {
+  if (!_isFunction(func)) {
     throw new TypeError('map args(productFunc) is not function');
   }
 
-  return _map(array, productFunc);
+  return _map(array, func);
+};
+/**
+ * count
+ */
+
+
+var _count = function _count(array, func) {
+  var result = 0;
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var resultFunc = func(array[i], i, array);
+
+    if (!_isBoolean(resultFunc)) {
+      throw new TypeError('_count args(func) result is not boolean');
+    }
+
+    if (resultFunc) {
+      result += 1;
+    }
+  }
+
+  return result;
 };
 
+var count = function count(array, func) {
+  if (!_isArray(array)) {
+    throw new TypeError('count args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('count args(func) is not function');
+  }
+
+  return _count(array, func);
+};
+/**
+ * findIndex
+ */
+
+
+var _findIndex = function _findIndex(array, func) {
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var resultFunc = func(array[i], i, array);
+
+    if (!_isBoolean(resultFunc)) {
+      throw new TypeError('_findIndex args(compareFunc) result is not boolean');
+    }
+
+    if (resultFunc) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+var findIndex = function findIndex(array, func) {
+  if (!_isArray(array)) {
+    throw new TypeError('findIndex args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('findIndex args(compareFunc) is not function');
+  }
+
+  return _findIndex(array, func);
+};
+
+var findIndexFirst = findIndex;
+/**
+ * findBackIndex
+ */
+
+var _findBackIndex = function _findBackIndex(array, func) {
+  for (var i = array.length - 1; i >= 0; i -= 1) {
+    var resultFunc = func(array[i], i, array);
+
+    if (!_isBoolean(resultFunc)) {
+      throw new TypeError('_findBackIndex args(compareFunc) result is not boolean');
+    }
+
+    if (resultFunc) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+var findBackIndex = function findBackIndex(array, func) {
+  if (!_isArray(array)) {
+    throw new TypeError('findBackIndex args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('findBackIndex args(compareFunc) is not function');
+  }
+
+  return _findBackIndex(array, func);
+};
+
+var findIndexLast = findBackIndex;
+/**
+ * find
+ */
+
+var _find = function _find(array, func) {
+  var resultIndex = _findIndex(array, func);
+
+  if (resultIndex === -1) {
+    return undefined;
+  }
+
+  return array[resultIndex];
+};
+
+var find = function find(array, func) {
+  if (!_isArray(array)) {
+    throw new TypeError('find args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('find args(compareFunc) is not function');
+  }
+
+  return _find(array, func);
+};
+
+var findFirst = find;
+/**
+ * findBack
+ */
+
+var _findBack = function _findBack(array, func) {
+  var resultIndex = _findBackIndex(array, func);
+
+  if (resultIndex === -1) {
+    return undefined;
+  }
+
+  return array[resultIndex];
+};
+
+var findBack = function findBack(array, func) {
+  if (!_isArray(array)) {
+    throw new TypeError('findBack args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('findBack args(compareFunc) is not function');
+  }
+
+  return _findBack(array, func);
+};
+
+var findLast = findBack;
 module.exports = {
   _min: _min,
   _max: _max,
@@ -2524,6 +2678,11 @@ module.exports = {
   _multiple: _multiple,
   _filter: _filter,
   _map: _map,
+  _count: _count,
+  _findIndex: _findIndex,
+  _findBackIndex: _findBackIndex,
+  _find: _find,
+  _findBack: _findBack,
   from: from,
   min: min,
   max: max,
@@ -2535,7 +2694,16 @@ module.exports = {
   single: single,
   multiple: multiple,
   filter: filter,
-  map: map
+  map: map,
+  count: count,
+  findIndex: findIndex,
+  findIndexFirst: findIndexFirst,
+  findBackIndex: findBackIndex,
+  findIndexLast: findIndexLast,
+  find: find,
+  findFirst: findFirst,
+  findBack: findBack,
+  findLast: findLast
 };
 
 /***/ }),
