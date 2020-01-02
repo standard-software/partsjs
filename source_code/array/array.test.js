@@ -270,6 +270,124 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_count = () => {
+      describe(test_count.name, () => {
+        it(test_count.name, () => {
+          checkEqual(true,
+            equal(
+              3,
+              array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
+            )
+          );
+          checkEqual(true,
+            equal(
+              3,
+              array.count([0, 1, 2, 3, 4, 5], isEven)
+            )
+          );
+          checkEqual(true,
+            equal(
+              3,
+              array.count([0, 1, 2, 3, 4, 5], isOdd)
+            )
+          );
+        });
+      });
+    };
+
+    const test_findIndex = () => {
+      describe(test_count.name, () => {
+        it(test_count.name, () => {
+          checkEqual(0,
+            array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'a')
+          );
+          checkEqual(1,
+            array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'b')
+          );
+          checkEqual(2,
+            array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'c')
+          );
+          checkEqual(-1,
+            array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'd')
+          );
+        });
+      });
+    };
+
+    const test_findBackIndex = () => {
+      describe(test_count.name, () => {
+        it(test_count.name, () => {
+          checkEqual(3,
+            array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'a')
+          );
+          checkEqual(4,
+            array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'b')
+          );
+          checkEqual(5,
+            array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'c')
+          );
+          checkEqual(-1,
+            array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'd')
+          );
+        });
+      });
+    };
+
+    const test_find = () => {
+      describe(test_count.name, () => {
+        it(test_count.name, () => {
+          checkEqual('a',
+            array.find(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'a')
+          );
+          checkEqual('b',
+            array.find(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'b')
+          );
+          checkEqual('c',
+            array.find(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'c')
+          );
+          checkEqual(undefined,
+            array.find(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'd')
+          );
+        });
+      });
+    };
+
+    const test_findBack = () => {
+      describe(test_count.name, () => {
+        it(test_count.name, () => {
+          checkEqual('A',
+            array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'a')
+          );
+          checkEqual('B',
+            array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'b')
+          );
+          checkEqual('C',
+            array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'c')
+          );
+          checkEqual(undefined,
+            array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => value.toLowerCase() === 'd')
+          );
+        });
+      });
+    };
+
+
     console.log('  test array.js');
 
     test_array_from();
@@ -287,6 +405,12 @@ const test_execute_array = (parts) => {
 
     test_filter();
     test_map();
+    test_count();
+
+    test_findIndex();
+    test_findBackIndex();
+    test_find();
+    test_findBack();
   });
 };
 

@@ -101,10 +101,16 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 3.2.0
-#### 2019/12/21(Sat)
-- delete Array.prototype.map
+#### 2020/01/02(Thu)
+- delete Array.prototype.map polifill
 - add string.repeat
-- update array.unique
+- array.js
+  - update unique
+  - add findIndex
+  - add findIndex(findIndexFirst)
+  - add findBackjIndex(findIndexLast)
+  - add find(findFirst)
+  - add findBack(findLast)
 
 ### 3.1.0
 #### 2019/12/20(Fri)

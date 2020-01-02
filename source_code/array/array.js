@@ -259,75 +259,238 @@ const multiple = (array) => {
 /**
  * filter
  */
-const _filter = (array, compareFunc) => {
-  const resultArray = [];
+const _filter = (array, func) => {
+  const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
-    const result = compareFunc(array[i], i, array);
-    if (!_isBoolean(result)) {
+    const resultFunc = func(array[i], i, array);
+    if (!_isBoolean(resultFunc)) {
       throw new TypeError(
         '_filter args(compareFunc) result is not boolean',
       );
     }
-    if (result) {
-      resultArray.push(array[i]);
+    if (resultFunc) {
+      result.push(array[i]);
     }
   }
-  return resultArray;
+  return result;
 };
 
-const filter = (array, compareFunc) => {
+const filter = (array, func) => {
   if (!_isArray(array)) {
     throw new TypeError(
       'filter args(array) is not array',
     );
   }
-  if (!_isFunction(compareFunc)) {
+  if (!_isFunction(func)) {
     throw new TypeError(
       'filter args(compareFunc) is not function',
     );
   }
-  return _filter(array, compareFunc);
+  return _filter(array, func);
 };
 
 /**
  * map
  */
-const _map = (array, productFunc) => {
-  const resultArray = [];
+const _map = (array, func) => {
+  const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
-    const result = productFunc(array[i], i, array);
-    resultArray.push(result);
+    const resultFunc = func(array[i], i, array);
+    result.push(resultFunc);
   }
-  return resultArray;
+  return result;
 };
 
-const map = (array, productFunc) => {
+const map = (array, func) => {
   if (!_isArray(array)) {
     throw new TypeError(
       'map args(array) is not array',
     );
   }
-  if (!_isFunction(productFunc)) {
+  if (!_isFunction(func)) {
     throw new TypeError(
       'map args(productFunc) is not function',
     );
   }
-  return _map(array, productFunc);
+  return _map(array, func);
 };
+
+/**
+ * count
+ */
+const _count = (array, func) => {
+  let result = 0;
+  for (let i = 0, l = array.length; i < l; i += 1) {
+    const resultFunc = func(array[i], i, array);
+    if (!_isBoolean(resultFunc)) {
+      throw new TypeError(
+        '_count args(func) result is not boolean',
+      );
+    }
+    if (resultFunc) {
+      result += 1;
+    }
+  }
+  return result;
+};
+
+const count = (array, func) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'count args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'count args(func) is not function',
+    );
+  }
+  return _count(array, func);
+};
+
+/**
+ * findIndex
+ */
+const _findIndex = (array, func) => {
+  for (let i = 0, l = array.length; i < l; i += 1) {
+    const resultFunc = func(array[i], i, array);
+    if (!_isBoolean(resultFunc)) {
+      throw new TypeError(
+        '_findIndex args(compareFunc) result is not boolean',
+      );
+    }
+    if (resultFunc) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+const findIndex = (array, func) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'findIndex args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'findIndex args(compareFunc) is not function',
+    );
+  }
+  return _findIndex(array, func);
+};
+
+const findIndexFirst = findIndex;
+
+/**
+ * findBackIndex
+ */
+const _findBackIndex = (array, func) => {
+  for (let i = array.length - 1; i >= 0; i -= 1) {
+    const resultFunc = func(array[i], i, array);
+    if (!_isBoolean(resultFunc)) {
+      throw new TypeError(
+        '_findBackIndex args(compareFunc) result is not boolean',
+      );
+    }
+    if (resultFunc) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+const findBackIndex = (array, func) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'findBackIndex args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'findBackIndex args(compareFunc) is not function',
+    );
+  }
+  return _findBackIndex(array, func);
+};
+
+const findIndexLast = findBackIndex;
+
+/**
+ * find
+ */
+const _find = (array, func) => {
+  const resultIndex = _findIndex(array, func);
+  if (resultIndex === -1) {
+    return undefined;
+  }
+  return array[resultIndex];
+};
+
+const find = (array, func) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'find args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'find args(compareFunc) is not function',
+    );
+  }
+  return _find(array, func);
+};
+
+const findFirst = find;
+
+/**
+ * findBack
+ */
+const _findBack = (array, func) => {
+  const resultIndex = _findBackIndex(array, func);
+  if (resultIndex === -1) {
+    return undefined;
+  }
+  return array[resultIndex];
+};
+
+const findBack = (array, func) => {
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'findBack args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'findBack args(compareFunc) is not function',
+    );
+  }
+  return _findBack(array, func);
+};
+
+const findLast = findBack;
 
 module.exports = {
   _min, _max,
   _sum, _average, _midian,
   _mode,
   _unique, _single, _multiple,
-  _filter, _map,
+  _filter, _map, _count,
+  _findIndex,
+  _findBackIndex,
+  _find,
+  _findBack,
 
   from,
   min, max,
   sum, average, midian,
   mode,
   unique, single, multiple,
-  filter, map,
+  filter, map, count,
+  findIndex, findIndexFirst,
+  findBackIndex, findIndexLast,
+  find, findFirst,
+  findBack, findLast,
 
 };
 

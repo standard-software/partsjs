@@ -152,7 +152,11 @@ propertyNames.ARRAY_PUBLIC =
   'sum, average, midian,' +
   'mode,' +
   'unique, single, multiple,' +
-  'filter, map,' +
+  'filter, map, count,' +
+  'findIndex, findIndexFirst,' +
+  'findBackIndex, findIndexLast,' +
+  'find, findFirst,' +
+  'findBack, findLast,' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +
