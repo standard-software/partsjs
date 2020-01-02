@@ -1,11 +1,8 @@
 "use strict";
 
 var test_execute_index = function test_execute_index(parts) {
-  var _parts$test = parts.test,
-      checkEqual = _parts$test.checkEqual,
-      describe = _parts$test.describe,
-      it = _parts$test.it,
-      test = _parts$test.test;
+  console.log("parts.VERSION: ".concat(parts.VERSION, "\ntest start"));
+  var describe = parts.test.describe;
   describe(test_execute_index.name, function () {
     var _require = require('./root/root.test.js'),
         test_execute_root = _require.test_execute_root;
@@ -41,16 +38,15 @@ var test_execute_index = function test_execute_index(parts) {
         test_execute_consoleHook = _require11.test_execute_consoleHook;
 
     var test_execute_nameSpace = function test_execute_nameSpace(parts) {
-      var _parts$test2 = parts.test,
-          checkEqual = _parts$test2.checkEqual,
-          describe = _parts$test2.describe,
-          it = _parts$test2.it,
-          test = _parts$test2.test;
-      var _parts$object = parts.object,
-          propertyCount = _parts$object.propertyCount,
-          inProperty = _parts$object.inProperty;
+      var _parts$test = parts.test,
+          describe = _parts$test.describe,
+          it = _parts$test.it;
       describe(test_execute_nameSpace.name, function () {
-        it('test_execute_nameSpace1', function () {
+        var checkEqual = parts.test.checkEqual;
+        var _parts$object = parts.object,
+            propertyCount = _parts$object.propertyCount,
+            inProperty = _parts$object.inProperty;
+        it("".concat(test_execute_nameSpace.name, " 1"), function () {
           checkEqual(151, propertyCount(parts));
           checkEqual(64, propertyCount(parts.type));
           checkEqual(8, propertyCount(parts.test));
@@ -62,14 +58,13 @@ var test_execute_index = function test_execute_index(parts) {
           checkEqual(21, propertyCount(parts.array));
           checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
         });
-        it('test_execute_nameSpace2', function () {
+        it("".concat(test_execute_nameSpace.name, " 2"), function () {
           checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''));
           checkEqual(false, inProperty(parts, 'abc,' + ''));
         });
       });
     };
 
-    console.log('test start. ' + parts.VERSION);
     test_execute_root(parts);
     test_execute_type(parts);
     test_execute_syntax(parts);

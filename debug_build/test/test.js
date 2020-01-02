@@ -20,23 +20,48 @@ var _require2 = require('../array/array.js'),
 
 var _require3 = require('../string/string.js'),
     _repeat = _require3._repeat;
+/**
+ * test framework
+ */
 
-var describeArray = [];
-var testName = '';
-var testCounter = 0;
+
+var testFrame = {
+  describeArray: [],
+  testName: '',
+  counter: 0,
+  outputDescribe: true,
+  outputIt: false
+};
 
 var describe = function describe(text, func) {
-  describeArray.push(text);
+  if (testFrame.outputDescribe) {
+    var indent = _repeat(' ', testFrame.describeArray.length * 2);
+
+    console.log("".concat(indent, "describe: ").concat(text));
+  }
+
+  testFrame.describeArray.push(text);
   func();
-  describeArray.pop();
+  testFrame.describeArray.pop();
 };
 
 var it = function it(text, func) {
-  testName = text;
-  testCounter = 0;
+  testFrame.testName = text;
+  testFrame.counter = 0;
+
+  if (testFrame.outputIt) {
+    if (testFrame.outputDescribe) {
+      var indent = _repeat(' ', testFrame.describeArray.length * 2);
+
+      console.log("".concat(indent, "test: ").concat(testFrame.testName));
+    } else {
+      console.log("  test: ".concat(testFrame.testName));
+    }
+  }
+
   func();
-  testCounter = 0;
-  testName = '';
+  testFrame.counter = 0;
+  testFrame.testName = '';
 };
 
 var checkEqual = function checkEqual(a, b) {
@@ -46,7 +71,7 @@ var checkEqual = function checkEqual(a, b) {
     throw new TypeError('checkEqual args message is not string');
   }
 
-  testCounter += 1;
+  testFrame.counter += 1;
 
   if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
@@ -56,12 +81,12 @@ var checkEqual = function checkEqual(a, b) {
     return true;
   }
 
-  var indent = _repeat(' ', describeArray.length * 2);
+  var indent = _repeat(' ', testFrame.describeArray.length * 2);
 
-  var output = _map(describeArray, function (desc, i) {
+  var output = _map(testFrame.describeArray, function (desc, i) {
     return _repeat('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
-  output += "".concat(indent, "Test: ").concat(testName, "\n") + "".concat(indent, "  Counter: ").concat(testCounter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
+  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
   console.log(output);
   return false;
 };
