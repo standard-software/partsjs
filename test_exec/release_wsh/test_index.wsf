@@ -59,10 +59,6 @@
   outputMessage += '\n'
   outputMessage += '\n'
 
-  outputMessage += 'parts version is ' + parts.VERSION;
-  outputMessage += '\n'
-  outputMessage += '\n'
-
   test_execute_index(parts);
 
   WScript.Echo(outputMessage);

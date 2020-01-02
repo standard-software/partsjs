@@ -116,6 +116,7 @@ You can now use the functions of the parts object.
 - test
   - add testFrame
   - update describe it
+  - update wsh test
 
 ### 3.1.0
 #### 2019/12/20(Fri)
