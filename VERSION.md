@@ -2,6 +2,24 @@
 
 ## Version
 
+### 3.2.0
+#### 2020/01/02(Thu)
+- delete Array.prototype.map polifill
+- string
+  - add repeat
+  - add isLowerCase isUpperCase
+- array
+  - update unique
+  - add findIndex
+  - add findIndex(findIndexFirst)
+  - add findBackjIndex(findIndexLast)
+  - add find(findFirst)
+  - add findBack(findLast)
+- test
+  - add testFrame
+  - update describe it
+  - update wsh test
+
 ### 3.1.0
 #### 2019/12/20(Fri)
 - array.js
