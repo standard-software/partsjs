@@ -13,22 +13,41 @@ const {
   _repeat,
 } = require('../string/string.js');
 
-const describeArray = [];
-let testName = '';
-let testCounter = 0;
+/**
+ * test framework
+ */
+const testFrame = {
+  describeArray: [],
+  testName: '',
+  counter: 0,
+  outputDescribe: true,
+  outputIt: false,
+};
 
 const describe = (text, func) => {
-  describeArray.push(text);
+  if (testFrame.outputDescribe) {
+    const indent = _repeat(' ', testFrame.describeArray.length * 2);
+    console.log(`${indent}describe: ${text}`);
+  }
+  testFrame.describeArray.push(text);
   func();
-  describeArray.pop();
+  testFrame.describeArray.pop();
 };
 
 const it = (text, func) => {
-  testName = text;
-  testCounter = 0;
+  testFrame.testName = text;
+  testFrame.counter = 0;
+  if (testFrame.outputIt) {
+    if (testFrame.outputDescribe) {
+      const indent = _repeat(' ', testFrame.describeArray.length * 2);
+      console.log(`${indent}test: ${testFrame.testName}`);
+    } else {
+      console.log(`  test: ${testFrame.testName}`);
+    }
+  }
   func();
-  testCounter = 0;
-  testName = '';
+  testFrame.counter = 0;
+  testFrame.testName = '';
 };
 
 const checkEqual = (a, b, message = '') => {
@@ -36,20 +55,20 @@ const checkEqual = (a, b, message = '') => {
     throw new TypeError('checkEqual args message is not string');
   }
 
-  testCounter += 1;
+  testFrame.counter += 1;
   if (_isNaNStrict(a) && _isNaNStrict(b)) {
     return true;
   }
   if (a === b) {
     return true;
   }
-  const indent = _repeat(' ', describeArray.length * 2);
-  let output = _map(describeArray,
+  const indent = _repeat(' ', testFrame.describeArray.length * 2);
+  let output = _map(testFrame.describeArray,
     (desc, i) => _repeat('  ', i) + `describe: ${desc}`,
   ).join('\n') + '\n';
   output +=
-    `${indent}Test: ${testName}\n` +
-    `${indent}  Counter: ${testCounter}\n` +
+    `${indent}Test: ${testFrame.testName}\n` +
+    `${indent}  Counter: ${testFrame.counter}\n` +
       (message === ''
         ? ''
         : `${indent}  Message: ${message}\n`) +

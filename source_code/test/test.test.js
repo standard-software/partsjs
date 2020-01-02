@@ -11,27 +11,24 @@ const test_execute_test = (parts) => {
     } = parts.test;
 
     const test_isThrown = () => {
-      describe(test_isThrown.name, () => {
-        it(test_isThrown.name, () => {
-          checkEqual(true, isThrown(function() { throw 1; }, function(throwValue) { return throwValue === 1; }));
-          checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue !== 1; }));
-          checkEqual(false, isThrown(function() { throw 2; }, function(throwValue) { return throwValue === 1; }));
-          checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue === '1'; }));
-          checkEqual(true, isThrown(function() { throw '1'; }, function(throwValue) { return throwValue === '1'; }));
-          checkEqual(true, isThrown(function() { throw ''; }, function(throwValue) { return throwValue === ''; }));
-          checkEqual(true, isThrown(function() { throw { test: 'TEST' }; }, function(throwValue) { return throwValue.test === 'TEST'; }));
-          checkEqual(false, isThrown(function() { throw { test: 'TEST' }; }, function(throwValue) { return throwValue.test === 'test'; }));
+      it(test_isThrown.name, () => {
+        checkEqual(true,  isThrown(function() { throw 1; }, function(throwValue) { return throwValue === 1; }));
+        checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue !== 1; }));
+        checkEqual(false, isThrown(function() { throw 2; }, function(throwValue) { return throwValue === 1; }));
+        checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue === '1'; }));
+        checkEqual(true,  isThrown(function() { throw '1'; }, function(throwValue) { return throwValue === '1'; }));
+        checkEqual(true,  isThrown(function() { throw ''; }, function(throwValue) { return throwValue === ''; }));
+        checkEqual(true,  isThrown(function() { throw { test: 'TEST' }; }, function(throwValue) { return throwValue.test === 'TEST'; }));
+        checkEqual(false, isThrown(function() { throw { test: 'TEST' }; }, function(throwValue) { return throwValue.test === 'test'; }));
 
-          checkEqual(false, isThrown(function() { }, function() { }));
+        checkEqual(false, isThrown(function() { }, function() { }));
 
-          checkEqual(true, isThrown(function() { throw 1; }));
-          checkEqual(true, isThrown(function() { throw '1'; }));
-          checkEqual(false, isThrown(function() {  }));
-        });
+        checkEqual(true, isThrown(function() { throw 1; }));
+        checkEqual(true, isThrown(function() { throw '1'; }));
+        checkEqual(false, isThrown(function() {  }));
       });
     };
 
-    console.log('  test test.js');
     test_isThrown();
   });
 };

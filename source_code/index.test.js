@@ -1,5 +1,8 @@
 const test_execute_index = (parts) => {
-  const { checkEqual, describe, it, test } = parts.test;
+
+  console.log(`parts.VERSION: ${parts.VERSION}\ntest start`);
+
+  const { describe } = parts.test;
   describe(test_execute_index.name, () => {
 
     const { test_execute_root     } = require('./root/root.test.js');
@@ -16,12 +19,13 @@ const test_execute_index = (parts) => {
    require('./consoleHook/consoleHook.test.js');
 
     const test_execute_nameSpace = (parts) => {
-      const { checkEqual, describe, it, test } = parts.test;
-      const { propertyCount, inProperty } = parts.object;
-
+      const { describe, it } = parts.test;
       describe(test_execute_nameSpace.name, () => {
 
-        it('test_execute_nameSpace1', () => {
+        const { checkEqual } = parts.test;
+        const { propertyCount, inProperty } = parts.object;
+
+        it(`${test_execute_nameSpace.name} 1`, () => {
 
           checkEqual(151, propertyCount(parts));
           checkEqual(64,  propertyCount(parts.type));
@@ -42,28 +46,28 @@ const test_execute_index = (parts) => {
 
         });
 
-        it('test_execute_nameSpace2', () => {
+        it(`${test_execute_nameSpace.name} 2`, () => {
           checkEqual(true,
             inProperty(
               parts,
               'isUndefined,isNotNull,' +
-              'isFunc,isNotObj,' +
-              'isThrown,isThrownValue,isThrownException,isNotThrown,' +
-              'assert,guard,' +
-              'sc,if_,switch_,' +
-              'equal,or,' +
-              'match,matchValue,initialValue,' +
-              'isEmpty,' +
-              'numberToString,' +
-              'stringToNumber,stringToInteger,' +
-              'numToString,' +
-              'strToNumber,strToInteger,' +
-              'numToStr,' +
-              'strToNum,strToInt,' +
-              'matchFormat,' +
-              'copyProperty,propertyCount,inProperty,' +
-              'copyProp,propCount,inProp,' +
-              '',
+            'isFunc,isNotObj,' +
+            'isThrown,isThrownValue,isThrownException,isNotThrown,' +
+            'assert,guard,' +
+            'sc,if_,switch_,' +
+            'equal,or,' +
+            'match,matchValue,initialValue,' +
+            'isEmpty,' +
+            'numberToString,' +
+            'stringToNumber,stringToInteger,' +
+            'numToString,' +
+            'strToNumber,strToInteger,' +
+            'numToStr,' +
+            'strToNum,strToInt,' +
+            'matchFormat,' +
+            'copyProperty,propertyCount,inProperty,' +
+            'copyProp,propCount,inProp,' +
+            '',
             ),
           );
 
@@ -78,7 +82,6 @@ const test_execute_index = (parts) => {
       });
     };
 
-    console.log('test start. ' + parts.VERSION);
     test_execute_root(parts);
     test_execute_type(parts);
     test_execute_syntax(parts);

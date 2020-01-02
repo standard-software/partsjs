@@ -113,6 +113,9 @@ You can now use the functions of the parts object.
   - add findBackjIndex(findIndexLast)
   - add find(findFirst)
   - add findBack(findLast)
+- test
+  - add testFrame
+  - update describe it
 
 ### 3.1.0
 #### 2019/12/20(Fri)
