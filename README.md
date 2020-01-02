@@ -103,8 +103,10 @@ You can now use the functions of the parts object.
 ### 3.2.0
 #### 2020/01/02(Thu)
 - delete Array.prototype.map polifill
-- add string.repeat
-- array.js
+- string
+  - add repeat
+  - add isLowerCase isUpperCase
+- array
   - update unique
   - add findIndex
   - add findIndex(findIndexFirst)

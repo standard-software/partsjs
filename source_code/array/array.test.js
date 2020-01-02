@@ -23,6 +23,10 @@ const test_execute_array = (parts) => {
       equal
     } = parts;
 
+    const {
+      isLowerCase, isUpperCase,
+    } = parts;
+
     const test_array_from = () => {
       describe(test_array_from.name, () => {
         it(test_array_from.name, () => {
@@ -296,8 +300,8 @@ const test_execute_array = (parts) => {
     };
 
     const test_findIndex = () => {
-      describe(test_count.name, () => {
-        it(test_count.name, () => {
+      describe(test_findIndex.name, () => {
+        it(test_findIndex.name, () => {
           checkEqual(0,
             array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'a')
@@ -314,13 +318,21 @@ const test_execute_array = (parts) => {
             array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'd')
           );
+          checkEqual(3,
+            array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isUpperCase(value))
+          );
+          checkEqual(0,
+            array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isLowerCase(value))
+          );
         });
       });
     };
 
     const test_findBackIndex = () => {
-      describe(test_count.name, () => {
-        it(test_count.name, () => {
+      describe(test_findBackIndex.name, () => {
+        it(test_findBackIndex.name, () => {
           checkEqual(3,
             array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'a')
@@ -337,13 +349,21 @@ const test_execute_array = (parts) => {
             array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'd')
           );
+          checkEqual(5,
+            array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isUpperCase(value))
+          );
+          checkEqual(2,
+            array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isLowerCase(value))
+          );
         });
       });
     };
 
     const test_find = () => {
-      describe(test_count.name, () => {
-        it(test_count.name, () => {
+      describe(test_find.name, () => {
+        it(test_find.name, () => {
           checkEqual('a',
             array.find(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'a')
@@ -360,13 +380,21 @@ const test_execute_array = (parts) => {
             array.find(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'd')
           );
+          checkEqual('A',
+            array.find(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isUpperCase(value))
+          );
+          checkEqual('a',
+            array.find(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isLowerCase(value))
+          );
         });
       });
     };
 
     const test_findBack = () => {
-      describe(test_count.name, () => {
-        it(test_count.name, () => {
+      describe(test_findBack.name, () => {
+        it(test_findBack.name, () => {
           checkEqual('A',
             array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'a')
@@ -382,6 +410,14 @@ const test_execute_array = (parts) => {
           checkEqual(undefined,
             array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
               value => value.toLowerCase() === 'd')
+          );
+          checkEqual('C',
+            array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isUpperCase(value))
+          );
+          checkEqual('c',
+            array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
+              value => isLowerCase(value))
           );
         });
       });

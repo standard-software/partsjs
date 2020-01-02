@@ -345,17 +345,62 @@ const repeat = (
   }
   if (!_isInteger(count)) {
     throw new TypeError(
-      'includes args(compareArray) is not array',
+      'repeat args(count) is not integer',
     );
   }
 
   return _repeat(value, count);
 };
 
+/**
+ * isLowerCase
+ */
+const _isLowerCase = (
+  value,
+) => {
+  return value.toLowerCase() === value;
+};
+
+const isLowerCase = (
+  value,
+) => {
+  if (!_isString(value)) {
+    throw new TypeError(
+      'isLowerCase args(value) is not string',
+    );
+  }
+
+  return _isLowerCase(value);
+};
+
+/**
+ * isUpperCase
+ */
+const _isUpperCase = (
+  value,
+) => {
+  return value.toUpperCase() === value;
+};
+
+const isUpperCase = (
+  value,
+) => {
+  if (!_isString(value)) {
+    throw new TypeError(
+      'isUpperCase args(value) is not string',
+    );
+  }
+
+  return _isUpperCase(value);
+};
+
 module.exports = {
   _matchFormat, _includes,
   _repeat,
+  _isLowerCase, _isUpperCase,
+
   matchFormat, includes,
   repeat,
+  isLowerCase, isUpperCase,
 
 };

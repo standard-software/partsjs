@@ -122,9 +122,11 @@ propertyNames.STRING_PUBLIC =
   'includes,' +
   'matchFormat,replaceAll,' +
   'repeat,' +
+  'isLowerCase,isUpperCase,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
+  'isLowerCase,isUpperCase,' +
   '';
 const string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
