@@ -21,6 +21,8 @@ var test_execute_array = function test_execute_array(parts) {
         isEven = _parts$number.isEven,
         isOdd = _parts$number.isOdd;
     var equal = parts.equal;
+    var isLowerCase = parts.isLowerCase,
+        isUpperCase = parts.isUpperCase;
 
     var test_array_from = function test_array_from() {
       describe(test_array_from.name, function () {
@@ -212,8 +214,8 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_findIndex = function test_findIndex() {
-      describe(test_count.name, function () {
-        it(test_count.name, function () {
+      describe(test_findIndex.name, function () {
+        it(test_findIndex.name, function () {
           checkEqual(0, array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'a';
           }));
@@ -226,13 +228,19 @@ var test_execute_array = function test_execute_array(parts) {
           checkEqual(-1, array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'd';
           }));
+          checkEqual(3, array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isUpperCase(value);
+          }));
+          checkEqual(0, array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isLowerCase(value);
+          }));
         });
       });
     };
 
     var test_findBackIndex = function test_findBackIndex() {
-      describe(test_count.name, function () {
-        it(test_count.name, function () {
+      describe(test_findBackIndex.name, function () {
+        it(test_findBackIndex.name, function () {
           checkEqual(3, array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'a';
           }));
@@ -245,13 +253,19 @@ var test_execute_array = function test_execute_array(parts) {
           checkEqual(-1, array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'd';
           }));
+          checkEqual(5, array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isUpperCase(value);
+          }));
+          checkEqual(2, array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isLowerCase(value);
+          }));
         });
       });
     };
 
     var test_find = function test_find() {
-      describe(test_count.name, function () {
-        it(test_count.name, function () {
+      describe(test_find.name, function () {
+        it(test_find.name, function () {
           checkEqual('a', array.find(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'a';
           }));
@@ -264,13 +278,19 @@ var test_execute_array = function test_execute_array(parts) {
           checkEqual(undefined, array.find(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'd';
           }));
+          checkEqual('A', array.find(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isUpperCase(value);
+          }));
+          checkEqual('a', array.find(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isLowerCase(value);
+          }));
         });
       });
     };
 
     var test_findBack = function test_findBack() {
-      describe(test_count.name, function () {
-        it(test_count.name, function () {
+      describe(test_findBack.name, function () {
+        it(test_findBack.name, function () {
           checkEqual('A', array.findBack(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'a';
           }));
@@ -282,6 +302,12 @@ var test_execute_array = function test_execute_array(parts) {
           }));
           checkEqual(undefined, array.findBack(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
             return value.toLowerCase() === 'd';
+          }));
+          checkEqual('C', array.findBack(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isUpperCase(value);
+          }));
+          checkEqual('c', array.findBack(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+            return isLowerCase(value);
           }));
         });
       });

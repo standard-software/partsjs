@@ -194,8 +194,8 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'includes,' + 'matchFormat,replaceAll,' + 'repeat,' + '';
-propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + '';
+propertyNames.STRING_PUBLIC = 'includes,' + 'matchFormat,replaceAll,' + 'repeat,' + 'isLowerCase,isUpperCase,' + '';
+propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
 
@@ -3237,19 +3237,55 @@ var repeat = function repeat(value, count) {
   }
 
   if (!_isInteger(count)) {
-    throw new TypeError('includes args(compareArray) is not array');
+    throw new TypeError('repeat args(count) is not integer');
   }
 
   return _repeat(value, count);
+};
+/**
+ * isLowerCase
+ */
+
+
+var _isLowerCase = function _isLowerCase(value) {
+  return value.toLowerCase() === value;
+};
+
+var isLowerCase = function isLowerCase(value) {
+  if (!_isString(value)) {
+    throw new TypeError('isLowerCase args(value) is not string');
+  }
+
+  return _isLowerCase(value);
+};
+/**
+ * isUpperCase
+ */
+
+
+var _isUpperCase = function _isUpperCase(value) {
+  return value.toUpperCase() === value;
+};
+
+var isUpperCase = function isUpperCase(value) {
+  if (!_isString(value)) {
+    throw new TypeError('isUpperCase args(value) is not string');
+  }
+
+  return _isUpperCase(value);
 };
 
 module.exports = {
   _matchFormat: _matchFormat,
   _includes: _includes,
   _repeat: _repeat,
+  _isLowerCase: _isLowerCase,
+  _isUpperCase: _isUpperCase,
   matchFormat: matchFormat,
   includes: includes,
-  repeat: repeat
+  repeat: repeat,
+  isLowerCase: isLowerCase,
+  isUpperCase: isUpperCase
 };
 
 /***/ }),
