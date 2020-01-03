@@ -101,7 +101,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         i += 1;
         checkEqual(true, isThrownException(function () {
           numberToString(32, 37);
-        }, new RangeError().name), "test numberToString exception ".concat(i)); // Parameter Args
+        }, new RangeError().name), "test numberToString exception ".concat(i)); // Object Named Parameter
 
         checkEqual('-32', numberToString({
           value: -32
@@ -192,7 +192,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         i += 1;
         checkEqual(true, isThrownException(function () {
           stringToNumberDefault(123);
-        }, new TypeError().name), "test stringToNumberDefault exception ".concat(i)); // Parameter Args
+        }, new TypeError().name), "test stringToNumberDefault exception ".concat(i)); // Object Named Parameter
 
         checkEqual(-123, stringToNumberDefault({
           value: '-0123'
@@ -327,7 +327,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         i += 1;
         checkEqual(true, isThrownException(function () {
           stringToIntegerDefault('123', undefined, 37);
-        }, new RangeError().name), "test stringToIntegerDefault exception ".concat(i)); // Parameter Args
+        }, new RangeError().name), "test stringToIntegerDefault exception ".concat(i)); // Object Named Parameter
 
         checkEqual(-123, stringToIntegerDefault({
           value: '-0123'

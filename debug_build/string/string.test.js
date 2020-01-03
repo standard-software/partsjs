@@ -78,7 +78,7 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(false, matchFormat('date_yyyy-mm-dd', '9--1'));
         checkEqual(false, matchFormat('date_yyyy-mm-dd', '9-1-'));
         checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019/09/09'));
-        checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019/9/9')); // Parameter Args
+        checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019/9/9')); // Object Named Parameter
 
         checkEqual(false, matchFormat({
           formatName: 'number',
@@ -124,7 +124,7 @@ var test_execute_string = function test_execute_string(parts) {
         }, new TypeError().name));
         checkEqual(true, isThrownException(function () {
           includes('123', [1]);
-        }, new TypeError().name)); // Parameter Args
+        }, new TypeError().name)); // Object Named Parameter
 
         checkEqual(true, includes({
           value: 'abcdef',
@@ -168,7 +168,7 @@ var test_execute_string = function test_execute_string(parts) {
       it(test_replaceAll.name, function () {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
-        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // parameter args
+        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // Object Named Parameter
 
         checkEqual('abcabc', replaceAll({
           str: 'abab',

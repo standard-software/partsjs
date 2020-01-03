@@ -147,7 +147,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([[undefined, null], undefined], [[undefined, null], undefined]));
         checkEqual(false, equal([[undefined, null], undefined], [undefined, [null, undefined]]));
         checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
-        checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // parameter Args
+        checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // Object Named Parameter
 
         checkEqual(true, equal({
           value1: [1, 2, 3, 4],
@@ -174,6 +174,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
 
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -206,6 +207,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -248,6 +250,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
 
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -290,6 +293,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
 
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -586,7 +590,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([[undefined, null], undefined], [[undefined, null], undefined]));
         checkEqual(false, equalDeep([[undefined, null], undefined], [undefined, [null, undefined]]));
         checkEqual(true, equalDeep([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
-        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // parameter Args
+        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // Object Named Parameter
 
         checkEqual(true, equalDeep({
           value1: [1, 2, 3, 4],
@@ -1295,7 +1299,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, isThrownException(function () {
           match('123', 'abc');
-        }, new TypeError().name)); // parameter args string
+        }, new TypeError().name)); // Object Named Parameter string
 
         checkEqual(false, match({
           value: 'abc',
@@ -1332,7 +1336,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           compareArray: [function (value) {
             return value.startsWith('b');
           }]
-        }), 'test_match param 8'); // parameter args number
+        }), 'test_match param 8'); // Object Named Parameter number
 
         checkEqual(false, match({
           value: 123,

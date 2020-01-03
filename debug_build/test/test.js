@@ -20,6 +20,9 @@ var _require2 = require('../array/array.js'),
 
 var _require3 = require('../string/string.js'),
     _repeat = _require3._repeat;
+
+var _require4 = require('../compare/compare.js'),
+    equal = _require4.equal;
 /**
  * test framework
  */
@@ -64,8 +67,8 @@ var it = function it(text, func) {
   testFrame.testName = '';
 };
 
-var checkEqual = function checkEqual(a, b) {
-  var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+var checkCompare = function checkCompare(compareFunc, a, b) {
+  var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
   if (!_isString(message)) {
     throw new TypeError('checkEqual args message is not string');
@@ -73,11 +76,7 @@ var checkEqual = function checkEqual(a, b) {
 
   testFrame.counter += 1;
 
-  if (_isNaNStrict(a) && _isNaNStrict(b)) {
-    return true;
-  }
-
-  if (a === b) {
+  if (compareFunc(a, b) === true) {
     return true;
   }
 
@@ -89,6 +88,11 @@ var checkEqual = function checkEqual(a, b) {
   output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
   console.log(output);
   return false;
+};
+
+var checkEqual = function checkEqual(a, b) {
+  var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  return checkCompare(equal, a, b, message);
 };
 /**
  * isThrown isThrownValue isThrownException isNotThrown
@@ -150,6 +154,7 @@ var isNotThrown = function isNotThrown(targetFunc) {
 var test = it;
 module.exports = {
   checkEqual: checkEqual,
+  checkCompare: checkCompare,
   describe: describe,
   it: it,
   test: test,

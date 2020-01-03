@@ -49,7 +49,7 @@ var test_execute_index = function test_execute_index(parts) {
       it("".concat(test_execute_nameSpace.name, " 1"), function () {
         checkEqual(151, propertyCount(parts));
         checkEqual(64, propertyCount(parts.type));
-        checkEqual(8, propertyCount(parts.test));
+        checkEqual(9, propertyCount(parts.test));
         checkEqual(14, propertyCount(parts.compare));
         checkEqual(23, propertyCount(parts.convert));
         checkEqual(7, propertyCount(parts.number));

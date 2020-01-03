@@ -57,7 +57,16 @@ var _require2 = require('../object/object.js'),
  */
 
 
-var equalFunction = {}; // function is no recursive call
+var equalFunction = {};
+
+equalFunction.equalValue = function (value1, value2) {
+  if (_isNaNStrict(value1) && _isNaNStrict(value2)) {
+    return true;
+  }
+
+  return value1 === value2;
+}; // function is no recursive call
+
 
 equalFunction.equalFunction = function (value1, value2) {
   if (!isFunction(value1, value2)) {
@@ -396,7 +405,7 @@ var _equal = function _equal(value1, value2) {
       }
     }
 
-    return value1 === value2;
+    return false;
   };
 
   return __equal(value1, value2);
@@ -414,6 +423,8 @@ _equal.add = function (func) {
 
 _equal.reset = function () {
   _equal.clear();
+
+  _equal.add(equalFunction.equalValue);
 
   _equal.add(equalFunction.equalObject);
 

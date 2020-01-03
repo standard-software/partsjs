@@ -14,6 +14,7 @@ var test_execute_array = function test_execute_array(parts) {
   describe(test_execute_array.name, function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
+        checkCompare = _parts$test2.checkCompare,
         isThrown = _parts$test2.isThrown,
         isThrownException = _parts$test2.isThrownException;
     var array = parts.array;
@@ -128,62 +129,81 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_mode = function test_mode() {
       it(test_mode.name, function () {
-        checkEqual(true, equal([], array.mode([])));
-        checkEqual(true, equal([70], array.mode([70])));
-        checkEqual(true, equal([70, 52], array.mode([70, 70, 80, 52, 52, 100])));
-        checkEqual(true, equal([52], array.mode([70, 70, 80, 52, 52, 52, 100])));
-        checkEqual(true, equal([9, 10], array.mode([9, 9, 10, 10, 10, 9, 6])));
+        checkCompare(parts.compare.equal, [], array.mode([]));
+        checkCompare(parts.compare.equal, [70], array.mode([70]));
+        checkCompare(parts.compare.equal, [70, 52], array.mode([70, 70, 80, 52, 52, 100]));
+        checkCompare(parts.compare.equal, [52], array.mode([70, 70, 80, 52, 52, 52, 100]));
+        checkCompare(parts.compare.equal, [9, 10], array.mode([9, 9, 10, 10, 10, 9, 6]));
       });
     };
 
     var test_uniqe = function test_uniqe() {
       it(test_uniqe.name, function () {
-        checkEqual(true, equal([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])));
+        checkCompare(parts.compare.equal, [1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_single = function test_single() {
       it(test_single.name, function () {
-        checkEqual(true, equal([1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])));
+        checkCompare(parts.compare.equal, [1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_multiple = function test_multiple() {
       it(test_multiple.name, function () {
-        checkEqual(true, equal([2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])));
+        checkCompare(parts.compare.equal, [2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_filter = function test_filter() {
       it(test_filter.name, function () {
-        checkEqual(true, equal([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkCompare(parts.compare.equal, [0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
-        })));
-        checkEqual(true, equal([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven)));
-        checkEqual(true, equal([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)));
+        }));
+        checkCompare(parts.compare.equal, [0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
+        checkCompare(parts.compare.equal, [1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+
+        checkCompare(parts.compare.equal, [0, 2, 4], array.filter({
+          array: [0, 1, 2, 3, 4, 5],
+          func: function func(value) {
+            return isEven(value);
+          }
+        }));
       });
     };
 
     var test_map = function test_map() {
       it(test_map.name, function () {
-        checkEqual(true, equal([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
-        })));
-        checkEqual(true, equal([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven)));
-        checkEqual(true, equal([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd)));
-        checkEqual(true, equal([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        }));
+        checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
+        checkCompare(parts.compare.equal, [false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd));
+        checkCompare(parts.compare.equal, [0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return value * 2;
-        })));
+        })); // Object Named Parameter
+
+        checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map({
+          array: [0, 1, 2, 3, 4, 5],
+          func: function func(value) {
+            return isEven(value);
+          }
+        }));
       });
     };
 
     var test_count = function test_count() {
       it(test_count.name, function () {
-        checkEqual(true, equal(3, array.count([0, 1, 2, 3, 4, 5], function (value) {
+        checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
-        })));
-        checkEqual(true, equal(3, array.count([0, 1, 2, 3, 4, 5], isEven)));
-        checkEqual(true, equal(3, array.count([0, 1, 2, 3, 4, 5], isOdd)));
+        }));
+        checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], isEven));
+        checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+
+        checkCompare(parts.compare.equal, 3, array.count({
+          array: [0, 1, 2, 3, 4, 5],
+          func: isOdd
+        }));
       });
     };
 
@@ -206,6 +226,11 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(0, array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return isLowerCase(value);
+        })); // Object Named Parameter
+
+        checkEqual(3, array.findIndex({
+          array: ['a', 'b', 'c', 'A', 'B', 'C'],
+          func: isUpperCase
         }));
       });
     };
@@ -229,6 +254,11 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(2, array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return isLowerCase(value);
+        })); // Object Named Parameter
+
+        checkEqual(2, array.findBackIndex({
+          array: ['a', 'b', 'c', 'A', 'B', 'C'],
+          func: isLowerCase
         }));
       });
     };
@@ -252,6 +282,11 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual('a', array.find(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return isLowerCase(value);
+        })); // Object Named Parameter
+
+        checkEqual('A', array.find({
+          array: ['a', 'b', 'c', 'A', 'B', 'C'],
+          func: isUpperCase
         }));
       });
     };
@@ -275,6 +310,11 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual('c', array.findBack(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return isLowerCase(value);
+        })); // Object Named Parameter
+
+        checkEqual('c', array.findBack({
+          array: ['a', 'b', 'c', 'A', 'B', 'C'],
+          func: isLowerCase
         }));
       });
     };

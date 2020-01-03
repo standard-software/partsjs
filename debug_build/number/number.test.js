@@ -27,7 +27,7 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(false, isMultiples(10, 3));
         checkEqual(false, isMultiples(9, 2));
         checkEqual(false, isMultiples(9, 5));
-        checkEqual(true, isMultiples(9, 3)); // parameter args
+        checkEqual(true, isMultiples(9, 3)); // Object Named Parameter
 
         checkEqual(true, isMultiples({
           number: 10,
@@ -106,7 +106,7 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(-5400, round(-5440, -2));
         checkEqual(-5500, round(-5450, -2));
         checkEqual(-5500, round(-5540, -2));
-        checkEqual(-5600, round(-5550, -2)); // parameter args
+        checkEqual(-5600, round(-5550, -2)); // Object Named Parameter
 
         checkEqual(6, round({
           value: 5.5
@@ -140,7 +140,7 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(true, nearEqual(0.051, 0.050, 0.001));
         checkEqual(true, nearEqual(0.0509, 0.050, 0.001));
         checkEqual(true, nearEqual(0.0510, 0.050, 0.001));
-        checkEqual(false, nearEqual(0.05100001, 0.050, 0.001)); // parameter args
+        checkEqual(false, nearEqual(0.05100001, 0.050, 0.001)); // Object Named Parameter
 
         checkEqual(false, nearEqual({
           value1: 0.050,
@@ -179,7 +179,7 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(false, inRange(9, 10, 30));
         checkEqual(false, inRange(31, 10, 30));
         checkEqual(false, inRange(9.99, 10, 30));
-        checkEqual(false, inRange(30.01, 10, 30)); // parameter args
+        checkEqual(false, inRange(30.01, 10, 30)); // Object Named Parameter
 
         checkEqual(true, inRange({
           value: 30,
@@ -211,7 +211,7 @@ var test_execute_number = function test_execute_number(parts) {
       it(test_randomInt.name, function () {
         checkEqual(5, randomInt(5, 5));
         var result = randomInt(1, 10);
-        checkEqual(true, inRange(result, 1, 10)); // parameter args
+        checkEqual(true, inRange(result, 1, 10)); // Object Named Parameter
 
         checkEqual(10, randomInt({
           min: 10,

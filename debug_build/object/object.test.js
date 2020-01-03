@@ -39,7 +39,7 @@ var test_execute_object = function test_execute_object(parts) {
         copyProperty(sourceObject, 'a,c,', destObject);
         checkEqual(true, 'a' in destObject);
         checkEqual(false, 'b' in destObject);
-        checkEqual(true, 'c' in destObject); // parameter args
+        checkEqual(true, 'c' in destObject); // Object Named Parameter
 
         var destObject = {};
         copyProperty({
@@ -85,7 +85,7 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
         checkEqual(true, inProperty(sourceObject, 'b,a,'));
-        checkEqual(false, inProperty(sourceObject, 'a,d,')); // parameter args
+        checkEqual(false, inProperty(sourceObject, 'a,d,')); // Object Named Parameter
 
         checkEqual(true, inProperty({
           object: sourceObject,

@@ -161,7 +161,7 @@ var if_ = function if_(condition) {
     }
 
     if (_isUndefined(args.then) && _isUndefined(args["else"])) {
-      throw new ReferenceError('if_() parameter args(then,else) is not defined');
+      throw new ReferenceError('if_() args.then and .else is not defined');
     }
   };
 
