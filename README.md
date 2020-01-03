@@ -102,9 +102,12 @@ You can now use the functions of the parts object.
 
 ### 3.3.0
 #### 2020/01/03(Fri)
-- update equal
-- add equalFunction.equalValue
 - update checkEqual
+  - update equal
+  - add equalFunction.equalValue
+- update array support Object Named Arguemnt
+  - filter map count
+  - findIndex findBackIndex find findBack
 
 ### 3.2.0
 #### 2020/01/02(Thu)

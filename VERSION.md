@@ -195,7 +195,7 @@
 - update consoleHook
 - add object.js copyProperty
   - add test_copyProperty
-- update Parameter Args
+- update Object Named Parameter
 - define root function(property) name
 - define public function(property) name
 - update test_isObject

@@ -196,6 +196,15 @@ const test_execute_array = (parts) => {
           [1, 3, 5],
           array.filter([0, 1, 2, 3, 4, 5], isOdd)
         );
+
+        // Object Named Parameter
+        checkCompare(parts.compare.equal,
+          [0, 2, 4],
+          array.filter({
+            array: [0, 1, 2, 3, 4, 5],
+            func: (value) => isEven(value)
+          })
+        );
       });
     };
 
@@ -217,6 +226,15 @@ const test_execute_array = (parts) => {
           [0, 2, 4, 6, 8, 10],
           array.map([0, 1, 2, 3, 4, 5], value => value * 2)
         );
+
+        // Object Named Parameter
+        checkCompare(parts.compare.equal,
+          [true, false, true, false, true, false],
+          array.map({
+            array: [0, 1, 2, 3, 4, 5],
+            func: (value) => isEven(value)
+          })
+        );
       });
     };
 
@@ -234,6 +252,16 @@ const test_execute_array = (parts) => {
           3,
           array.count([0, 1, 2, 3, 4, 5], isOdd)
         );
+
+        // Object Named Parameter
+        checkCompare(parts.compare.equal,
+          3,
+          array.count({
+            array: [0, 1, 2, 3, 4, 5],
+            func: isOdd
+          })
+        );
+
       });
     };
 
@@ -262,6 +290,14 @@ const test_execute_array = (parts) => {
         checkEqual(0,
           array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
             value => isLowerCase(value))
+        );
+
+        // Object Named Parameter
+        checkEqual(3,
+          array.findIndex({
+            array: ['a', 'b', 'c', 'A', 'B', 'C'],
+            func: isUpperCase,
+          })
         );
       });
     };
@@ -292,6 +328,14 @@ const test_execute_array = (parts) => {
           array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
             value => isLowerCase(value))
         );
+
+        // Object Named Parameter
+        checkEqual(2,
+          array.findBackIndex({
+            array: ['a', 'b', 'c', 'A', 'B', 'C'],
+            func: isLowerCase,
+          })
+        );
       });
     };
 
@@ -320,6 +364,14 @@ const test_execute_array = (parts) => {
         checkEqual('a',
           array.find(['a', 'b', 'c', 'A', 'B', 'C'],
             value => isLowerCase(value))
+        );
+
+        // Object Named Parameter
+        checkEqual('A',
+          array.find({
+            array: ['a', 'b', 'c', 'A', 'B', 'C'],
+            func: isUpperCase,
+          })
         );
       });
     };
@@ -350,6 +402,15 @@ const test_execute_array = (parts) => {
           array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
             value => isLowerCase(value))
         );
+
+        // Object Named Parameter
+        checkEqual('c',
+          array.findBack({
+            array: ['a', 'b', 'c', 'A', 'B', 'C'],
+            func: isLowerCase,
+          })
+        );
+
       });
     };
 

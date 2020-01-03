@@ -100,7 +100,7 @@ const test_execute_convert = (parts) => {
           numberToString(32, 37);
         }, (new RangeError).name), `test numberToString exception ${i}`);
 
-        // Parameter Args
+        // Object Named Parameter
         checkEqual('-32', numberToString({
           value: -32,
         }));
@@ -201,7 +201,7 @@ const test_execute_convert = (parts) => {
           stringToNumberDefault(123);
         }, (new TypeError).name), `test stringToNumberDefault exception ${i}`);
 
-        // Parameter Args
+        // Object Named Parameter
         checkEqual(-123, stringToNumberDefault({
           value: '-0123',
         }));
@@ -345,7 +345,7 @@ const test_execute_convert = (parts) => {
           stringToIntegerDefault('123', undefined, 37);
         }, (new RangeError).name), `test stringToIntegerDefault exception ${i}`);
 
-        // Parameter Args
+        // Object Named Parameter
         checkEqual(-123, stringToIntegerDefault({
           value: '-0123',
         }));

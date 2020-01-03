@@ -140,7 +140,7 @@ const if_ = (condition) => {
     }
     if (_isUndefined(args.then) && _isUndefined(args.else)) {
       throw new ReferenceError(
-        'if_() parameter args(then,else) is not defined',
+        'if_() args.then and .else is not defined',
       );
     }
   };

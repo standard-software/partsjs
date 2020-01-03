@@ -83,7 +83,7 @@ const test_execute_string = (parts) => {
         checkEqual(false, matchFormat('date_yyyy-mm-dd', '2019/9/9'));
 
 
-        // Parameter Args
+        // Object Named Parameter
         checkEqual(false, matchFormat({
           formatName: 'number',
           value: '-123',
@@ -135,7 +135,7 @@ const test_execute_string = (parts) => {
           (new TypeError).name,
         ));
 
-        // Parameter Args
+        // Object Named Parameter
         checkEqual(true, includes({
           value: 'abcdef',
           compareArray: ['cd'],
@@ -189,7 +189,7 @@ const test_execute_string = (parts) => {
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
         checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual('abcabc',  replaceAll({
           str:    'abab',
           before: 'ab',

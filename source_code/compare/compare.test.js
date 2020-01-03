@@ -116,7 +116,7 @@ const test_execute_compare = (parts) => {
         checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
         checkEqual(false, equal([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
 
-        // parameter Args
+        // Object Named Parameter
         checkEqual(true,  equal({
           value1:   [1, 2, 3, 4],
           value2:   [1, 2, 3, 4],
@@ -491,7 +491,7 @@ const test_execute_compare = (parts) => {
         checkEqual(true,  equalDeep([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
         checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
 
-        // parameter Args
+        // Object Named Parameter
         checkEqual(true,  equalDeep({
           value1:   [1, 2, 3, 4],
           value2:   [1, 2, 3, 4],
@@ -1070,7 +1070,7 @@ const test_execute_compare = (parts) => {
           (new TypeError).name,
         ));
 
-        // parameter args string
+        // Object Named Parameter string
         checkEqual(false, match({
           value: 'abc', compareArray: ['123', '456', '789'],
         }), 'test_match param 1');
@@ -1096,7 +1096,7 @@ const test_execute_compare = (parts) => {
           value: 'abc', compareArray: [(value) => value.startsWith('b')],
         }), 'test_match param 8');
 
-        // parameter args number
+        // Object Named Parameter number
         checkEqual(false, match({
           value: 123, compareArray: ['123', '456', '789'],
         }), 'test_match param number 1');

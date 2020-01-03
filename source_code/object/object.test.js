@@ -39,7 +39,7 @@ const test_execute_object = (parts) => {
         checkEqual(false, 'b' in destObject);
         checkEqual(true,  'c' in destObject);
 
-        // parameter args
+        // Object Named Parameter
         var destObject = {};
         copyProperty({
           fromObject: sourceObject,
@@ -93,7 +93,7 @@ const test_execute_object = (parts) => {
         checkEqual(true, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,'));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual(true,
           inProperty({
             object: sourceObject,

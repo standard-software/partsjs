@@ -23,7 +23,7 @@ const test_execute_number = (parts) => {
         checkEqual(false, isMultiples( 9, 5));
         checkEqual(true,  isMultiples( 9, 3));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual(true,  isMultiples({
           number: 10,
           radix: 2,
@@ -106,7 +106,7 @@ const test_execute_number = (parts) => {
         checkEqual(-5500, round(-5540, -2));
         checkEqual(-5600, round(-5550, -2));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual(6, round({
           value: 5.5,
         }));
@@ -143,7 +143,7 @@ const test_execute_number = (parts) => {
         checkEqual(true,  nearEqual(0.0510,     0.050,        0.001));
         checkEqual(false, nearEqual(0.05100001, 0.050,        0.001));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual(false, nearEqual({
           value1: 0.050,
           value2: 0.051000001,
@@ -174,7 +174,7 @@ const test_execute_number = (parts) => {
         checkEqual(false, inRange( 9.99,  10,     30));
         checkEqual(false, inRange(30.01,  10,     30));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual(true,  inRange({
           value:  30,
           from:   10,
@@ -200,7 +200,7 @@ const test_execute_number = (parts) => {
         var result = randomInt(1, 10);
         checkEqual(true, inRange(result, 1, 10));
 
-        // parameter args
+        // Object Named Parameter
         checkEqual(10,  randomInt({
           min:  10,
           max:  10,
