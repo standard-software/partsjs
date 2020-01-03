@@ -7,7 +7,7 @@ const test_execute_array = (parts) => {
   describe(test_execute_array.name, () => {
 
     const {
-      checkEqual,
+      checkEqual, checkCompare,
       isThrown, isThrownException,
     } = parts.test;
 
@@ -132,143 +132,107 @@ const test_execute_array = (parts) => {
 
     const test_mode = () => {
       it(test_mode.name, () => {
-        checkEqual(true,
-          equal(
-            [],
-            array.mode([])
-          )
+        checkCompare(parts.compare.equal,
+          [],
+          array.mode([])
         );
-        checkEqual(true,
-          equal(
-            [70],
-            array.mode([70])
-          )
+        checkCompare(parts.compare.equal,
+          [70],
+          array.mode([70])
         );
-        checkEqual(true,
-          equal(
-            [70, 52],
-            array.mode([70, 70, 80, 52, 52, 100])
-          )
+        checkCompare(parts.compare.equal,
+          [70, 52],
+          array.mode([70, 70, 80, 52, 52, 100])
         );
-        checkEqual(true,
-          equal(
-            [52],
-            array.mode([70, 70, 80, 52, 52, 52, 100])
-          )
+        checkCompare(parts.compare.equal,
+          [52],
+          array.mode([70, 70, 80, 52, 52, 52, 100])
         );
-        checkEqual(true,
-          equal(
-            [9, 10],
-            array.mode([9, 9, 10, 10, 10, 9, 6])
-          )
+        checkCompare(parts.compare.equal,
+          [9, 10],
+          array.mode([9, 9, 10, 10, 10, 9, 6])
         );
       });
     };
 
     const test_uniqe = () => {
       it(test_uniqe.name, () => {
-        checkEqual(true,
-          equal(
-            [1, 2, 3, 4, 0],
-            array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
-          )
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, 4, 0],
+          array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
       });
     };
 
     const test_single = () => {
       it(test_single.name, () => {
-        checkEqual(true,
-          equal(
-            [1, 0],
-            array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])
-          )
+        checkCompare(parts.compare.equal,
+          [1, 0],
+          array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
       });
     };
 
     const test_multiple = () => {
       it(test_multiple.name, () => {
-        checkEqual(true,
-          equal(
-            [2, 3, 4],
-            array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])
-          )
+        checkCompare(parts.compare.equal,
+          [2, 3, 4],
+          array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
       });
     };
 
     const test_filter = () => {
       it(test_filter.name, () => {
-        checkEqual(true,
-          equal(
-            [0, 2, 4],
-            array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
-          )
+        checkCompare(parts.compare.equal,
+          [0, 2, 4],
+          array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkEqual(true,
-          equal(
-            [0, 2, 4],
-            array.filter([0, 1, 2, 3, 4, 5], isEven)
-          )
+        checkCompare(parts.compare.equal,
+          [0, 2, 4],
+          array.filter([0, 1, 2, 3, 4, 5], isEven)
         );
-        checkEqual(true,
-          equal(
-            [1, 3, 5],
-            array.filter([0, 1, 2, 3, 4, 5], isOdd)
-          )
+        checkCompare(parts.compare.equal,
+          [1, 3, 5],
+          array.filter([0, 1, 2, 3, 4, 5], isOdd)
         );
       });
     };
 
     const test_map = () => {
       it(test_map.name, () => {
-        checkEqual(true,
-          equal(
-            [true, false, true, false, true, false],
-            array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
-          )
+        checkCompare(parts.compare.equal,
+          [true, false, true, false, true, false],
+          array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkEqual(true,
-          equal(
-            [true, false, true, false, true, false],
-            array.map([0, 1, 2, 3, 4, 5], isEven)
-          )
+        checkCompare(parts.compare.equal,
+          [true, false, true, false, true, false],
+          array.map([0, 1, 2, 3, 4, 5], isEven)
         );
-        checkEqual(true,
-          equal(
-            [false, true, false, true, false, true],
-            array.map([0, 1, 2, 3, 4, 5], isOdd)
-          )
+        checkCompare(parts.compare.equal,
+          [false, true, false, true, false, true],
+          array.map([0, 1, 2, 3, 4, 5], isOdd)
         );
-        checkEqual(true,
-          equal(
-            [0, 2, 4, 6, 8, 10],
-            array.map([0, 1, 2, 3, 4, 5], value => value * 2)
-          )
+        checkCompare(parts.compare.equal,
+          [0, 2, 4, 6, 8, 10],
+          array.map([0, 1, 2, 3, 4, 5], value => value * 2)
         );
       });
     };
 
     const test_count = () => {
       it(test_count.name, () => {
-        checkEqual(true,
-          equal(
-            3,
-            array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
-          )
+        checkCompare(parts.compare.equal,
+          3,
+          array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkEqual(true,
-          equal(
-            3,
-            array.count([0, 1, 2, 3, 4, 5], isEven)
-          )
+        checkCompare(parts.compare.equal,
+          3,
+          array.count([0, 1, 2, 3, 4, 5], isEven)
         );
-        checkEqual(true,
-          equal(
-            3,
-            array.count([0, 1, 2, 3, 4, 5], isOdd)
-          )
+        checkCompare(parts.compare.equal,
+          3,
+          array.count([0, 1, 2, 3, 4, 5], isOdd)
         );
       });
     };

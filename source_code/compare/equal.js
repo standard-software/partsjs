@@ -28,6 +28,15 @@ const {
  */
 const equalFunction = {};
 
+equalFunction.equalValue = (
+  value1, value2,
+) => {
+  if (_isNaNStrict(value1) && _isNaNStrict(value2)) {
+    return true;
+  }
+  return value1 === value2;
+};
+
 // function is no recursive call
 equalFunction.equalFunction = (
   value1, value2,
@@ -202,7 +211,7 @@ const _equal = (value1, value2) => {
         return result;
       }
     }
-    return value1 === value2;
+    return false;
   };
   return __equal(value1, value2);
 };
@@ -218,6 +227,7 @@ _equal.add = (func) => {
 
 _equal.reset = () => {
   _equal.clear();
+  _equal.add(equalFunction.equalValue);
   _equal.add(equalFunction.equalObject);
   _equal.add(equalFunction.equalArrayType);
   _equal.add(equalFunction.equalWeakSet);

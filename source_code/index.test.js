@@ -27,7 +27,7 @@ const test_execute_index = (parts) => {
 
         checkEqual(151, propertyCount(parts));
         checkEqual(64,  propertyCount(parts.type));
-        checkEqual(8,   propertyCount(parts.test));
+        checkEqual(9,   propertyCount(parts.test));
         checkEqual(14,  propertyCount(parts.compare));
         checkEqual(23,  propertyCount(parts.convert));
         checkEqual(7,   propertyCount(parts.number));

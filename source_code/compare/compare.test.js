@@ -146,6 +146,7 @@ const test_execute_compare = (parts) => {
 
         // date ignore
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -187,6 +188,7 @@ const test_execute_compare = (parts) => {
 
         // regexp ignore
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -235,6 +237,7 @@ const test_execute_compare = (parts) => {
 
         // ignore Map
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);
@@ -283,6 +286,7 @@ const test_execute_compare = (parts) => {
 
         // ignore Set
         equal.clear();
+        equal.add(equalFunction.equalValue);
         equal.add(equalFunction.equalObject);
         equal.add(equalFunction.equalArrayType);
         equal.add(equalFunction.equalFunction);

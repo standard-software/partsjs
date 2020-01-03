@@ -100,6 +100,12 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 3.3.0
+#### 2020/01/03(Fri)
+- update equal
+- add equalFunction.equalValue
+- update checkEqual
+
 ### 3.2.0
 #### 2020/01/02(Thu)
 - delete Array.prototype.map polifill

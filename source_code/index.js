@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '3.2.0';
+const VERSION = '3.3.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -55,7 +55,7 @@ _copyProperty(_type, propertyNames.TYPE, rootNames);
 
 // test
 propertyNames.TEST_PUBLIC =
-  'checkEqual,' +
+  'checkEqual, checkCompare,' +
   'describe, it, test,' +
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';

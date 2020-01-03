@@ -13,6 +13,10 @@ const {
   _repeat,
 } = require('../string/string.js');
 
+const {
+  equal,
+} = require('../compare/compare.js');
+
 /**
  * test framework
  */
@@ -50,18 +54,16 @@ const it = (text, func) => {
   testFrame.testName = '';
 };
 
-const checkEqual = (a, b, message = '') => {
+const checkCompare = (compareFunc, a, b, message = '') => {
   if (!_isString(message)) {
     throw new TypeError('checkEqual args message is not string');
   }
 
   testFrame.counter += 1;
-  if (_isNaNStrict(a) && _isNaNStrict(b)) {
+  if (compareFunc(a, b) === true) {
     return true;
   }
-  if (a === b) {
-    return true;
-  }
+
   const indent = _repeat(' ', testFrame.describeArray.length * 2);
   let output = _map(testFrame.describeArray,
     (desc, i) => _repeat('  ', i) + `describe: ${desc}`,
@@ -77,6 +79,10 @@ const checkEqual = (a, b, message = '') => {
     `${indent}  B = ${String(b)}`;
   console.log(output);
   return false;
+};
+
+const checkEqual = (a, b, message = '') => {
+  return checkCompare(equal, a, b, message);
 };
 
 /**
@@ -151,7 +157,7 @@ const isNotThrown = (targetFunc) => {
 const test = it;
 
 module.exports = {
-  checkEqual,
+  checkEqual, checkCompare,
   describe, it, test,
   isThrown, isThrownValue, isThrownException, isNotThrown,
 };
