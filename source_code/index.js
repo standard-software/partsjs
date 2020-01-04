@@ -159,6 +159,7 @@ propertyNames.ARRAY_PUBLIC =
   'findBackIndex, findIndexLast,' +
   'find, findFirst,' +
   'findBack, findLast,' +
+  'operation,' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +

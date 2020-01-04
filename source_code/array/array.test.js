@@ -414,6 +414,122 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_operation_insert = () => {
+      it(test_operation_insert.name, () => {
+        checkCompare(parts.compare.equal,
+          [1, 2, 3],
+          array.operation.insert([1, 2, 3], [])
+        );
+        checkCompare(parts.compare.equal,
+          [0, 1, 2, 3],
+          array.operation.insert([1, 2, 3], [0])
+        );
+        checkCompare(parts.compare.equal,
+          [0, 1, 2, 3],
+          array.operation.insert([1, 2, 3], [0], 0)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 0, 2, 3],
+          array.operation.insert([1, 2, 3], [0], 1)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, 0, 3],
+          array.operation.insert([1, 2, 3], [0], 2)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, 0],
+          array.operation.insert([1, 2, 3], [0], 3)
+        );
+        checkCompare(parts.compare.equal,
+          [-1, 0, 1, 2, 3],
+          array.operation.insert([1, 2, 3], [-1, 0])
+        );
+        checkCompare(parts.compare.equal,
+          [1, -1, 0, 2, 3],
+          array.operation.insert([1, 2, 3], [-1, 0], 1)
+        );
+
+        // exception
+        checkEqual(true, isThrownException(() => {
+          array.operation.insert([1, 2, 3], [0], -1);
+        }, RangeError.name));
+        checkEqual(true, isThrownException(() => {
+          array.operation.insert([1, 2, 3], [0], 4);
+        }, RangeError.name));
+        checkEqual(true, isThrownException(() => {
+          array.operation.insert([1, 2, 3], 0, 4);
+        }, TypeError.name));
+
+        // Object Named Parameter
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, 0],
+          array.operation.insert({
+            array: [1, 2, 3],
+            values: [0],
+            index: 3
+          })
+        );
+      });
+    };
+
+    const test_operation_add = () => {
+      it(test_operation_add.name, () => {
+        checkCompare(parts.compare.equal,
+          [1, 2, 3],
+          array.operation.add([1, 2, 3], [])
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, 0],
+          array.operation.add([1, 2, 3], [0])
+        );
+        checkCompare(parts.compare.equal,
+          [0, 1, 2, 3],
+          array.operation.add([1, 2, 3], [0], -1)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 0, 2, 3],
+          array.operation.add([1, 2, 3], [0], 0)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, 0, 3],
+          array.operation.add([1, 2, 3], [0], 1)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, 0],
+          array.operation.add([1, 2, 3], [0], 2)
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, -1, 0],
+          array.operation.add([1, 2, 3], [-1, 0])
+        );
+        checkCompare(parts.compare.equal,
+          [1, 2, -1, 0, 3],
+          array.operation.add([1, 2, 3], [-1, 0], 1)
+        );
+
+        // exception
+        checkEqual(true, isThrownException(() => {
+          array.operation.add([1, 2, 3], [0], -2);
+        }, RangeError.name));
+        checkEqual(true, isThrownException(() => {
+          array.operation.add([1, 2, 3], [0], 3);
+        }, RangeError.name));
+        checkEqual(true, isThrownException(() => {
+          array.operation.add([1, 2, 3], 0, 4);
+        }, TypeError.name));
+
+        // Object Named Parameter
+        checkCompare(parts.compare.equal,
+          [1, 2, 3, 0],
+          array.operation.add({
+            array: [1, 2, 3],
+            values: [0],
+            index: 2
+          })
+        );
+      });
+    };
+
 
     test_array_from();
 
@@ -436,6 +552,9 @@ const test_execute_array = (parts) => {
     test_findBackIndex();
     test_find();
     test_findBack();
+
+    test_operation_insert();
+    test_operation_add();
   });
 };
 
