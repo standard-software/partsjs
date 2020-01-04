@@ -108,6 +108,8 @@ You can now use the functions of the parts object.
 - update array support Object Named Arguemnt
   - filter map count
   - findIndex findBackIndex find findBack
+- test
+  - support exception continue
 
 ### 3.2.0
 #### 2020/01/02(Thu)

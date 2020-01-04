@@ -39,17 +39,30 @@ const describe = (text, func) => {
 };
 
 const it = (text, func) => {
+
+  const indent = _repeat(
+    ' ',
+    testFrame.outputDescribe
+      ? (testFrame.describeArray.length * 2)
+      : 2,
+  );
+  const consoleLogTestName = () => {
+    console.log(indent + `test: ${testFrame.testName}`);
+  };
+
   testFrame.testName = text;
   testFrame.counter = 0;
   if (testFrame.outputIt) {
-    if (testFrame.outputDescribe) {
-      const indent = _repeat(' ', testFrame.describeArray.length * 2);
-      console.log(`${indent}test: ${testFrame.testName}`);
-    } else {
-      console.log(`  test: ${testFrame.testName}`);
-    }
+    consoleLogTestName();
   }
-  func();
+  try {
+    func();
+  } catch (e) {
+    if (!testFrame.outputIt) {
+      consoleLogTestName();
+    }
+    console.log(e);
+  }
   testFrame.counter = 0;
   testFrame.testName = '';
 };
