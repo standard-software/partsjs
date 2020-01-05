@@ -107,8 +107,59 @@ const add = (
   return _add(array, values, index);
 };
 
+/**
+ * array.delete
+ */
+const _delete = (
+  array,
+  index,
+  deleteCount = 1,
+) => {
+  array.splice(index, deleteCount);
+  return array;
+};
+
+const deleteLength = (
+  array,
+  index,
+  deleteCount = 1,
+) => {
+  if (_inProperty(array, 'array, index, length')) {
+    ({ array, index, length: deleteCount } = array);
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'delete args(array) is not array',
+    );
+  }
+  if (!_isInteger(index)) {
+    throw new TypeError(
+      'delete args(index) is not integer',
+    );
+  }
+  if (!_isInteger(deleteCount)) {
+    throw new TypeError(
+      'delete args(deleteCount) is not integer',
+    );
+  }
+  if (!_inRange(index, 0, array.length - deleteCount)) {
+    throw new RangeError(
+      'delete args(index) must be from 0 to array.length - args deleteCount',
+    );
+  }
+  if (deleteCount <= 0) {
+    throw new RangeError(
+      'delete args(deleteCount) must be >= 1',
+    );
+  }
+
+  return _delete(array, index, deleteCount);
+};
+
 module.exports = {
   insert, add,
+  delete: deleteLength,
 
 };
 

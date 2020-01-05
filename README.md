@@ -111,6 +111,7 @@ You can now use the functions of the parts object.
 - add array operation
   - insert
   - add
+  - delete
 - test
   - support exception continue
 
