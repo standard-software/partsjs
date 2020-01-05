@@ -2,6 +2,21 @@
 
 ## Version
 
+### 3.3.0
+#### 2020/01/05(Sun)
+- update checkEqual
+  - update equal
+  - add equalFunction.equalValue
+- update array support Object Named Arguemnt
+  - filter map count
+  - findIndex findBackIndex find findBack
+- add array operation
+  - insert
+  - add
+  - delete
+- test
+  - support exception continue
+
 ### 3.2.0
 #### 2020/01/02(Thu)
 - delete Array.prototype.map polifill
@@ -44,7 +59,7 @@
 - support jest
 
 ### 2.12.0
-### 2019/11/15(Fri)
+#### 2019/11/15(Fri)
 - add toNumber toNumberDefault
 - add toInteger toIntegerDefault
 - delete constant.js

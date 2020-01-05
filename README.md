@@ -156,16 +156,6 @@ You can now use the functions of the parts object.
 - support eslint format fix
 - support jest
 
-### 2.12.0
-#### 2019/11/15(Fri)
-- add toNumber toNumberDefault
-- add toInteger toIntegerDefault
-- delete constant.js
-
-### 2.11.0
-#### 2019/11/06(Wed)
-- update matchFormat
-
 ### More Info
 [VERSION.md](./VERSION.md)
 
