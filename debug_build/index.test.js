@@ -55,7 +55,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(7, propertyCount(parts.number));
         checkEqual(6, propertyCount(parts.string));
         checkEqual(9, propertyCount(parts.object));
-        checkEqual(21, propertyCount(parts.array));
+        checkEqual(22, propertyCount(parts.array));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it("".concat(test_execute_nameSpace.name, " 2"), function () {

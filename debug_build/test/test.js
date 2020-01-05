@@ -49,20 +49,29 @@ var describe = function describe(text, func) {
 };
 
 var it = function it(text, func) {
+  var indent = _repeat(' ', testFrame.outputDescribe ? testFrame.describeArray.length * 2 : 2);
+
+  var consoleLogTestName = function consoleLogTestName() {
+    console.log(indent + "test: ".concat(testFrame.testName));
+  };
+
   testFrame.testName = text;
   testFrame.counter = 0;
 
   if (testFrame.outputIt) {
-    if (testFrame.outputDescribe) {
-      var indent = _repeat(' ', testFrame.describeArray.length * 2);
-
-      console.log("".concat(indent, "test: ").concat(testFrame.testName));
-    } else {
-      console.log("  test: ".concat(testFrame.testName));
-    }
+    consoleLogTestName();
   }
 
-  func();
+  try {
+    func();
+  } catch (e) {
+    if (!testFrame.outputIt) {
+      consoleLogTestName();
+    }
+
+    console.log(e);
+  }
+
   testFrame.counter = 0;
   testFrame.testName = '';
 };

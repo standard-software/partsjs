@@ -113,21 +113,21 @@ var _type = __webpack_require__(5);
 
 var _test = __webpack_require__(17);
 
-var _syntax = __webpack_require__(27);
+var _syntax = __webpack_require__(28);
 
-var _compare = __webpack_require__(23);
+var _compare = __webpack_require__(24);
 
-var _convert = __webpack_require__(28);
+var _convert = __webpack_require__(29);
 
 var _number = __webpack_require__(20);
 
-var _string = __webpack_require__(21);
+var _string = __webpack_require__(22);
 
 var _object = __webpack_require__(14);
 
 var _array = __webpack_require__(18);
 
-var _consoleHook = __webpack_require__(29);
+var _consoleHook = __webpack_require__(30);
 
 var VERSION = '3.3.0 beta';
 var rootNames = {};
@@ -212,7 +212,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + 'operation,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, midian,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
@@ -2044,10 +2044,10 @@ var _require = __webpack_require__(5),
 var _require2 = __webpack_require__(18),
     _map = _require2._map;
 
-var _require3 = __webpack_require__(21),
+var _require3 = __webpack_require__(22),
     _repeat = _require3._repeat;
 
-var _require4 = __webpack_require__(23),
+var _require4 = __webpack_require__(24),
     equal = _require4.equal;
 /**
  * test framework
@@ -2075,20 +2075,29 @@ var describe = function describe(text, func) {
 };
 
 var it = function it(text, func) {
+  var indent = _repeat(' ', testFrame.outputDescribe ? testFrame.describeArray.length * 2 : 2);
+
+  var consoleLogTestName = function consoleLogTestName() {
+    console.log(indent + "test: ".concat(testFrame.testName));
+  };
+
   testFrame.testName = text;
   testFrame.counter = 0;
 
   if (testFrame.outputIt) {
-    if (testFrame.outputDescribe) {
-      var indent = _repeat(' ', testFrame.describeArray.length * 2);
-
-      console.log("".concat(indent, "test: ").concat(testFrame.testName));
-    } else {
-      console.log("  test: ".concat(testFrame.testName));
-    }
+    consoleLogTestName();
   }
 
-  func();
+  try {
+    func();
+  } catch (e) {
+    if (!testFrame.outputIt) {
+      consoleLogTestName();
+    }
+
+    console.log(e);
+  }
+
   testFrame.counter = 0;
   testFrame.testName = '';
 };
@@ -2203,7 +2212,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(19));
+module.exports = _objectSpread({}, __webpack_require__(19), {
+  operation: _objectSpread({}, __webpack_require__(21))
+});
 
 /***/ }),
 /* 19 */
@@ -3012,16 +3023,183 @@ module.exports = {
 "use strict";
 
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isArray = _require._isArray,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException;
+
+var _require2 = __webpack_require__(20),
+    _inRange = _require2._inRange;
+
+var _require3 = __webpack_require__(8),
+    _inProperty = _require3._inProperty;
+
+var _require4 = __webpack_require__(4),
+    _clone = _require4._clone,
+    _cloneDeep = _require4._cloneDeep;
+/**
+ * array.insert
+ */
+
+
+var _insert = function _insert(array, values) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  array.splice.apply(array, [index, 0].concat(_toConsumableArray(values)));
+  return array;
+};
+
+var insert = function insert(array, values) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+  if (_inProperty(array, 'array, values, index')) {
+    var _array = array;
+    array = _array.array;
+    values = _array.values;
+    index = _array.index;
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError('insert args(array) is not array');
+  }
+
+  if (!_isArray(values)) {
+    throw new TypeError('insert args(values) is not array');
+  }
+
+  if (!_isInteger(index)) {
+    throw new TypeError('insert args(index) is not integer');
+  }
+
+  if (!_inRange(index, 0, array.length)) {
+    throw new RangeError('insert args(index) must be from 0 to array.length');
+  }
+
+  return _insert(array, values, index);
+};
+/**
+ * array.add
+ */
+
+
+var _add = function _add(array, values) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - 1;
+  array.splice.apply(array, [index + 1, 0].concat(_toConsumableArray(values)));
+  return array;
+};
+
+var add = function add(array, values) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - 1;
+
+  if (_inProperty(array, 'array, values, index')) {
+    var _array2 = array;
+    array = _array2.array;
+    values = _array2.values;
+    index = _array2.index;
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError('add args(array) is not array');
+  }
+
+  if (!_isArray(values)) {
+    throw new TypeError('add args(values) is not array');
+  }
+
+  if (!_isInteger(index)) {
+    throw new TypeError('add args(index) is not integer');
+  }
+
+  if (!_inRange(index, -1, array.length - 1)) {
+    throw new RangeError('add args(index) must be from 0 to array.length - 1');
+  }
+
+  return _add(array, values, index);
+};
+/**
+ * array.delete
+ */
+
+
+var _delete = function _delete(array, index) {
+  var deleteCount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  array.splice(index, deleteCount);
+  return array;
+};
+
+var deleteLength = function deleteLength(array, index) {
+  var deleteCount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+
+  if (_inProperty(array, 'array, index, length')) {
+    var _array3 = array;
+    array = _array3.array;
+    index = _array3.index;
+    deleteCount = _array3.length;
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError('delete args(array) is not array');
+  }
+
+  if (!_isInteger(index)) {
+    throw new TypeError('delete args(index) is not integer');
+  }
+
+  if (!_isInteger(deleteCount)) {
+    throw new TypeError('delete args(deleteCount) is not integer');
+  }
+
+  if (!_inRange(index, 0, array.length - deleteCount)) {
+    throw new RangeError('delete args(index) must be from 0 to array.length - args deleteCount');
+  }
+
+  if (deleteCount <= 0) {
+    throw new RangeError('delete args(deleteCount) must be >= 1');
+  }
+
+  return _delete(array, index, deleteCount);
+};
+
+module.exports = {
+  insert: insert,
+  add: add,
+  "delete": deleteLength
+};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(22), {}, __webpack_require__(9), {}, __webpack_require__(26));
+module.exports = _objectSpread({}, __webpack_require__(23), {}, __webpack_require__(9), {}, __webpack_require__(27));
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3042,7 +3220,7 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(23),
+var _require2 = __webpack_require__(24),
     _match = _require2._match;
 
 var _require3 = __webpack_require__(8),
@@ -3376,7 +3554,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3388,10 +3566,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(24), {}, __webpack_require__(25));
+module.exports = _objectSpread({}, __webpack_require__(25), {}, __webpack_require__(26));
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3684,7 +3862,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4242,7 +4420,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4297,7 +4475,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4534,7 +4712,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4568,11 +4746,11 @@ var _require = __webpack_require__(5),
     _isNotRegExp = _require._isNotRegExp,
     _isNotException = _require._isNotException;
 
-var _require2 = __webpack_require__(23),
+var _require2 = __webpack_require__(24),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(21),
+var _require3 = __webpack_require__(22),
     _matchFormat = _require3._matchFormat;
 
 var _require4 = __webpack_require__(14),
@@ -4870,7 +5048,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4891,10 +5069,10 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(23),
+var _require2 = __webpack_require__(24),
     _or = _require2._or;
 
-var _require3 = __webpack_require__(21),
+var _require3 = __webpack_require__(22),
     _includes = _require3._includes;
 
 var _require4 = __webpack_require__(18),
