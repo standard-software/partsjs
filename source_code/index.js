@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '3.3.0';
+const VERSION = '3.4.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -135,12 +135,18 @@ _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 propertyNames.OBJECT_PUBLIC =
   'copyProperty,propertyCount,inProperty,' +
   'getProperty,setProperty,' +
+  'isEmptyObject,' +
   'copyProp,propCount,inProp,' +
+  'getProp,setProp,' +
+  'isEmptyObj,' +
   '';
 propertyNames.OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
-  'getProp,setProp,' +
+  'getProperty,setProperty,' +
+  'isEmptyObject,' +
   'copyProp,propCount,inProp,' +
+  'getProp,setProp,' +
+  'isEmptyObj,' +
   '';
 const object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);

@@ -100,6 +100,12 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 3.4.0
+#### 2020/01/14(Tue)
+- delete isEmpty
+- add isEmptyObject
+- update setProperty return value
+
 ### 3.3.0
 #### 2020/01/05(Sun)
 - update checkEqual

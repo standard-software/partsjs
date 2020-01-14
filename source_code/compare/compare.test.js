@@ -1235,23 +1235,6 @@ const test_execute_compare = (parts) => {
 
     };
 
-    const test_isEmpty = () =>{
-      it(test_isEmpty.name, () => {
-        checkEqual(true,  isEmpty());
-        checkEqual(true,  isEmpty(undefined));
-        checkEqual(true,  isEmpty(null));
-        checkEqual(true,  isEmpty(''));
-        checkEqual(true,  isEmpty([]));
-        checkEqual(true,  isEmpty({}));
-
-        checkEqual(false, isEmpty(1));
-        checkEqual(false, isEmpty('0'));
-        checkEqual(false, isEmpty([1]));
-        checkEqual(false, isEmpty({a:1}));
-      });
-
-    };
-
     const test_matchAll = () =>{
       it(test_matchAll.name, () => {
         checkEqual(true,
@@ -1417,7 +1400,6 @@ const test_execute_compare = (parts) => {
     test_match();
     test_matchValue();
     test_initialValue();
-    test_isEmpty();
 
     test_matchAll();
     test_matchSome();

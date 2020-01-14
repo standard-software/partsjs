@@ -13,6 +13,7 @@ const test_execute_object = (parts) => {
       copyProperty, inProperty,
       propertyCount,
       getProperty, setProperty,
+      isEmptyObject,
     } = parts.object;
 
     const test_copyProperty = () => {
@@ -254,11 +255,22 @@ const test_execute_object = (parts) => {
       });
     };
 
+
+    const test_isEmptyObject = () =>{
+      it(test_isEmptyObject.name, () => {
+        checkEqual(true,  isEmptyObject({}));
+        checkEqual(false, isEmptyObject({a:1}));
+      });
+
+    };
+
     test_copyProperty();
     test_inProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();
+    test_isEmptyObject();
+
   });
 };
 
