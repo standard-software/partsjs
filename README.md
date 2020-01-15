@@ -101,27 +101,23 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 3.4.0
-#### 2020/01/14(Tue)
+#### 2020/01/15(Wed)
 - delete isEmpty
 - add isEmptyObject
 - update setProperty return value
 - findIndexFirst >> findFirstIndex
 - findIndexLast >> findLastIndex
 - add match.js
-  - add match
-  - add matchValue
   - match >> matchSome
   - matchValue >> matchSomeValue
   - matchAll >> allMatchSome
   - matchSomeIndex >> indexOfMatchSome
   - matchSome >> someMatchSome
-  - add matchAll
-  - add matchAllValue
-  - delete matchEvery
-  - delete matchAnyIndex
-  - delete matchAny
-- add array.some
-- add array.all
+  - add match matchValue
+  - add matchAll matchAllValue
+  - add allMatchAll someMatchAll indexOfMatchAll
+  - delete matchEvery matchAnyIndex matchAny
+- add array .some .all
 
 ### 3.3.0
 #### 2020/01/05(Sun)

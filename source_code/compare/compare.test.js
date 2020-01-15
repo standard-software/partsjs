@@ -22,9 +22,16 @@ const test_execute_compare = (parts) => {
       equal, equalDeep,
       equalFunction,
       or,
-      matchSome, matchSomeValue, initialValue,
+      matchValue, initialValue,
+      matchSome, matchSomeValue,
       allMatchSome, someMatchSome, indexOfMatchSome,
+      matchAll, matchAllValue,
+      allMatchAll, someMatchAll, indexOfMatchAll,
     } = parts.compare;
+
+    const {
+      isEmptyObject,
+    } = parts.object;
 
     const test_equal = () => {
       it(test_equal.name, () => {
@@ -72,9 +79,7 @@ const test_execute_compare = (parts) => {
         checkEqual(false,
           equal( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
           'test_equal object 4');
-
       });
-
     };
 
     const test_equal_array = () => {
@@ -125,7 +130,6 @@ const test_execute_compare = (parts) => {
           value2:   [1, 2, 3, 5],
         }));
       });
-
     };
 
     const test_equal_date = () => {
@@ -165,9 +169,7 @@ const test_execute_compare = (parts) => {
           'test_equal date');
 
         equal.reset();
-
       });
-
     };
 
     const test_equal_regexp = () => {
@@ -208,7 +210,6 @@ const test_execute_compare = (parts) => {
 
         equal.reset();
       });
-
     };
 
     const test_equal_map = () => {
@@ -1023,6 +1024,34 @@ const test_execute_compare = (parts) => {
       });
     };
 
+    const test_matchValue = () => {
+      it(test_matchValue.name, () => {
+        // almost test_match done
+        checkEqual('123',       matchValue('123', null, 999));
+        checkEqual(undefined,   matchValue(undefined, null, 999));
+        checkEqual(999,         matchValue(null, null, 999));
+
+        checkEqual('123', matchValue({
+          value: '123',
+          compare: undefined,
+          valueWhenMatched: 999,
+        }));
+        checkEqual(999, matchValue({
+          value: undefined,
+          compare: undefined,
+          valueWhenMatched: 999,
+        }));
+        checkEqual(null, matchValue({
+          value: null,
+          compare: undefined,
+          valueWhenMatched: 999,
+        }));
+
+        checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
+        checkEqual('[object Object]', String(matchValue({a:1}, isEmptyObject, 'test')));
+      });
+    };
+
     const test_initialValue = () => {
       it(test_initialValue.name, () => {
         // almost test_match done
@@ -1217,9 +1246,7 @@ const test_execute_compare = (parts) => {
           },
           [(value) => isObject(value)],
         ));
-
       });
-
     };
 
     const test_matchSomeValue = () => {
@@ -1235,11 +1262,10 @@ const test_execute_compare = (parts) => {
           value: 98, compareArray: [99], valueWhenMatched: 999,
         }));
       });
-
     };
 
-    const test_allMatch = () =>{
-      it(test_allMatch.name, () => {
+    const test_allMatchSome = () =>{
+      it(test_allMatchSome.name, () => {
         checkEqual(true,
           allMatchSome([10, 20, 30], [value => value > 5]),
         );
@@ -1278,8 +1304,8 @@ const test_execute_compare = (parts) => {
 
     };
 
-    const test_someMatch = () =>{
-      it(test_someMatch.name, () => {
+    const test_someMatchSome = () =>{
+      it(test_someMatchSome.name, () => {
         checkEqual(true,
           someMatchSome([10, 20, 30], [value => value > 5])
           , 'test_matchSome');
@@ -1327,8 +1353,8 @@ const test_execute_compare = (parts) => {
 
     };
 
-    const test_someMatchIndex = () =>{
-      it(test_someMatchIndex.name, () => {
+    const test_indexOfMatchSome = () =>{
+      it(test_indexOfMatchSome.name, () => {
         checkEqual(0,
           indexOfMatchSome([10, 20, 30], [value => value > 5])
           , 'test_matchSomeIndex');
@@ -1376,6 +1402,300 @@ const test_execute_compare = (parts) => {
 
     };
 
+    const test_matchAll = () => {
+      it(test_matchAll.name, () => {
+        // normal args string
+        checkEqual(false, matchAll('abc', []));
+        checkEqual(true,  matchAll('abc', ['abc']));
+        checkEqual(false, matchAll('abc', ['abc', 'def']));
+        checkEqual(false, matchAll('abc', ['abc', undefined]));
+        checkEqual(false, matchAll('abc', ['abc', null]));
+        checkEqual(false, matchAll('abc', ['abc', '']));
+        checkEqual(true,  matchAll('abc', [/^a/]));
+        checkEqual(true,  matchAll('abc', [/c$/]));
+        checkEqual(true,  matchAll('abc', [/^a/, /c$/]));
+        checkEqual(true,  matchAll('abc', [/^a/, /.*b.*/, /c$/]));
+        checkEqual(false, matchAll('abc', [/^a/, /^b.*/, /c$/]));
+        checkEqual(true,  matchAll('aabbcc', [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true,  matchAll('abc', [
+          /^a/, /.*b.*/, /c$/,
+          value => value.length >= 3,
+          value => value.length <= 5,
+        ]));
+        checkEqual(true,  matchAll('aabcc', [
+          /^a/, /.*b.*/, /c$/,
+          value => value.length >= 3,
+          value => value.length <= 5,
+        ]));
+        checkEqual(false, matchAll('aabbcc', [
+          /^a/, /.*b.*/, /c$/,
+          value => value.length >= 3,
+          value => value.length <= 5,
+        ]));
+
+        // normal args number
+        checkEqual(false, matchAll(100, []));
+        checkEqual(true,  matchAll(100, [100]));
+        checkEqual(false, matchAll(100, [100, 0]));
+        checkEqual(false, matchAll(100, [100, undefined]));
+        checkEqual(false, matchAll(100, [100, null]));
+        checkEqual(false, matchAll(100, [100, NaN]));
+        checkEqual(true,  matchAll(100, [value => value >= 100, value => value <= 110]));
+        checkEqual(true,  matchAll(110, [value => value >= 100, value => value <= 110]));
+        checkEqual(false, matchAll(111, [value => value >= 100, value => value <= 110]));
+
+        checkEqual(true,  matchAll(null,  [null]));
+        checkEqual(false, matchAll(null,  [null, undefined]));
+        checkEqual(false, matchAll(null,  [undefined]));
+        checkEqual(false, matchAll(undefined,  [null]));
+        checkEqual(false, matchAll(undefined,  [null, undefined]));
+        checkEqual(true,  matchAll(undefined,  [undefined]));
+
+        // exception
+        checkEqual(false, isThrownException(
+          () => { matchAll('123', ['123']); },
+          (new TypeError).name,
+        ));
+        checkEqual(true, isThrownException(
+          () => { matchAll('123', '123'); },
+          (new TypeError).name,
+        ));
+        checkEqual(false, isThrownException(
+          () => { matchAll(123, [123]); },
+          (new TypeError).name,
+        ));
+        checkEqual(true, isThrownException(
+          () => { matchAll(123, 123); },
+          (new TypeError).name,
+        ));
+
+        // Object Named Parameter string
+        checkEqual(true, matchAll({
+          value: 'abc', compareArray: [
+            'abc',
+          ],
+        }));
+        checkEqual(false, matchAll({
+          value: 'abc', compareArray: [
+            'abc', '',
+          ],
+        }));
+        checkEqual(true, matchAll({
+          value: 'abc', compareArray: [
+            /^a/, /.*b.*/, /c$/,
+          ],
+        }));
+
+        // Object Named Parameter number
+        checkEqual(true, matchAll({
+          value: 100, compareArray: [
+            10*10,
+          ],
+        }));
+        checkEqual(false, matchAll({
+          value: 100, compareArray: [
+            100, 101,
+          ],
+        }));
+        checkEqual(true, matchAll({
+          value: 100, compareArray: [
+            value => value >= 100,
+            value => value <= 110,
+          ],
+        }));
+
+        // exception
+        checkEqual(false, isThrown(
+          () => {
+            matchAll({
+              value: 'abc', compareArray: ['abc'],
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            matchAll({
+              value: 'abc', compareArray: 'abc',
+            });
+          },
+        ));
+        checkEqual(false, isThrown(
+          () => {
+            matchAll({
+              value: 100, compareArray: [
+                value => value >= 100,
+                value => value <= 110,
+              ],
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            matchAll({
+              value: 100, compareArray: [
+                value => value,
+                value => value <= 110,
+              ],
+            });
+          },
+        ));
+      });
+    };
+
+    const test_matchAllValue = () => {
+      it(test_matchAllValue.name, () => {
+        // almost test_match done
+        checkEqual(999, matchAllValue(99, [99], 999));
+        checkEqual(98,  matchAllValue(98, [99], 999));
+        checkEqual(999,  matchAllValue(100, [
+          value => value >= 100, value => value <= 110,
+        ], 999));
+        checkEqual(999,  matchAllValue(110, [
+          value => value >= 100, value => value <= 110,
+        ], 999));
+        checkEqual(111, matchAllValue(111, [
+          value => value >= 100, value => value <= 110,
+        ], 999));
+
+        checkEqual(999, matchAllValue({
+          value: 100, compareArray: [
+            value => value >= 100, value => value <= 110,
+          ], valueWhenMatched: 999,
+        }));
+        checkEqual(999, matchAllValue({
+          value: 110, compareArray: [
+            value => value >= 100, value => value <= 110,
+          ], valueWhenMatched: 999,
+        }));
+        checkEqual(111, matchAllValue({
+          value: 111, compareArray: [
+            value => value >= 100, value => value <= 110,
+          ], valueWhenMatched: 999,
+        }));
+      });
+    };
+
+    const test_allMatchAll = () =>{
+      it(test_allMatchAll.name, () => {
+        checkEqual(false,
+          allMatchAll([], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(true,
+          allMatchAll(['abc', 'aabc', 'aabbcc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(false,
+          allMatchAll(['abc', 'aabc', 'aacc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+
+        checkEqual(true,
+          allMatchAll([100, 105, 110], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+        checkEqual(false,
+          allMatchAll([100, 105, 111], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+      });
+    };
+
+    const test_someMatchAll = () =>{
+      it(test_someMatchAll.name, () => {
+        checkEqual(false,
+          someMatchAll([], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(true,
+          someMatchAll(['abc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(false,
+          someMatchAll(['aaa', 'bbb', 'ccc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(true,
+          someMatchAll(['aaa', 'abc', 'ccc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+
+        checkEqual(true,
+          someMatchAll([105], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+        checkEqual(false,
+          someMatchAll([111, 115, 120], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+        checkEqual(true,
+          someMatchAll([111, 110, 120], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+      });
+    };
+
+    const test_indexOfMatchAll = () =>{
+      it(test_indexOfMatchAll.name, () => {
+        checkEqual(-1,
+          indexOfMatchAll([], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(0,
+          indexOfMatchAll(['abc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(-1,
+          indexOfMatchAll(['aaa', 'bbb', 'ccc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+        checkEqual(1,
+          indexOfMatchAll(['aaa', 'abc', 'ccc'], [
+            /^a/, /.*b.*/, /c$/,
+          ]),
+        );
+
+        checkEqual(0,
+          indexOfMatchAll([105], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+        checkEqual(-1,
+          indexOfMatchAll([111, 115, 120], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+        checkEqual(1,
+          indexOfMatchAll([111, 110, 120], [
+            value => value >= 100,
+            value => value <= 110,
+          ]),
+        );
+      });
+    };
+
     test_equal();
     test_equal_object();
     test_equal_array();
@@ -1400,13 +1720,22 @@ const test_execute_compare = (parts) => {
     test_equalDeep_set_CircularReference();
 
     test_or();
+    test_matchValue();
     test_initialValue();
+
     test_matchSome();
     test_matchSomeValue();
+    test_allMatchSome();
+    test_someMatchSome();
+    test_indexOfMatchSome();
 
-    test_allMatch();
-    test_someMatch();
-    test_someMatchIndex();
+    test_matchAll();
+    test_matchAllValue();
+    test_allMatchAll();
+    test_someMatchAll();
+    test_indexOfMatchAll();
+
+
   });
 };
 
