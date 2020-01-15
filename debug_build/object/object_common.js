@@ -179,6 +179,7 @@ var _setProperty = function _setProperty(object, path, value) {
   }
 
   result[propertyArray[propertyArray.length - 1]] = value;
+  return result;
 };
 
 var setProperty = function setProperty(object, propertyPath, value) {
@@ -199,7 +200,24 @@ var setProperty = function setProperty(object, propertyPath, value) {
 
   return _setProperty(object, propertyPath, value);
 };
+/**
+ * isEmptyObject
+ */
 
+
+var _isEmptyObject = function _isEmptyObject(object) {
+  return _propertyCount(object) === 0;
+};
+
+var isEmptyObject = function isEmptyObject(object) {
+  if (!_isObject(object)) {
+    throw new TypeError('isEmptyObject args(object) is not object');
+  }
+
+  return _isEmptyObject(object);
+};
+
+var isEmptyObj = isEmptyObject;
 var copyProp = copyProperty;
 var propCount = propertyCount;
 var getProp = getProperty;
@@ -209,12 +227,15 @@ module.exports = {
   _propertyCount: _propertyCount,
   _getProperty: _getProperty,
   _setProperty: _setProperty,
+  _isEmptyObject: _isEmptyObject,
   copyProperty: copyProperty,
   propertyCount: propertyCount,
   getProperty: getProperty,
   setProperty: setProperty,
+  isEmptyObject: isEmptyObject,
   copyProp: copyProp,
   propCount: propCount,
   getProp: getProp,
-  setProp: setProp
+  setProp: setProp,
+  isEmptyObj: isEmptyObj
 };

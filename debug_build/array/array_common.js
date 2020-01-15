@@ -1,5 +1,9 @@
 "use strict";
 
+var _module$exports;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _require = require('../type/type.js'),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
@@ -401,12 +405,12 @@ var count = function count(array, func) {
  */
 
 
-var _findIndex = function _findIndex(array, func) {
+var _findFirstIndex = function _findFirstIndex(array, func) {
   for (var i = 0, l = array.length; i < l; i += 1) {
     var resultFunc = func(array[i], i, array);
 
     if (!_isBoolean(resultFunc)) {
-      throw new TypeError('_findIndex args(compareFunc) result is not boolean');
+      throw new TypeError('_findFirstIndex args(compareFunc) result is not boolean');
     }
 
     if (resultFunc) {
@@ -417,7 +421,7 @@ var _findIndex = function _findIndex(array, func) {
   return -1;
 };
 
-var findIndex = function findIndex(array, func) {
+var findFirstIndex = function findFirstIndex(array, func) {
   if (_inProperty(array, 'array, func')) {
     var _array4 = array;
     array = _array4.array;
@@ -425,27 +429,27 @@ var findIndex = function findIndex(array, func) {
   }
 
   if (!_isArray(array)) {
-    throw new TypeError('findIndex args(array) is not array');
+    throw new TypeError('findFirstIndex args(array) is not array');
   }
 
   if (!_isFunction(func)) {
-    throw new TypeError('findIndex args(compareFunc) is not function');
+    throw new TypeError('findFirstIndex args(compareFunc) is not function');
   }
 
-  return _findIndex(array, func);
+  return _findFirstIndex(array, func);
 };
 
-var findIndexFirst = findIndex;
+var findIndex = findFirstIndex;
 /**
  * findBackIndex
  */
 
-var _findBackIndex = function _findBackIndex(array, func) {
+var _findLastIndex = function _findLastIndex(array, func) {
   for (var i = array.length - 1; i >= 0; i -= 1) {
     var resultFunc = func(array[i], i, array);
 
     if (!_isBoolean(resultFunc)) {
-      throw new TypeError('_findBackIndex args(compareFunc) result is not boolean');
+      throw new TypeError('_findLastIndex args(compareFunc) result is not boolean');
     }
 
     if (resultFunc) {
@@ -456,7 +460,7 @@ var _findBackIndex = function _findBackIndex(array, func) {
   return -1;
 };
 
-var findBackIndex = function findBackIndex(array, func) {
+var findLastIndex = function findLastIndex(array, func) {
   if (_inProperty(array, 'array, func')) {
     var _array5 = array;
     array = _array5.array;
@@ -464,23 +468,23 @@ var findBackIndex = function findBackIndex(array, func) {
   }
 
   if (!_isArray(array)) {
-    throw new TypeError('findBackIndex args(array) is not array');
+    throw new TypeError('findLastIndex args(array) is not array');
   }
 
   if (!_isFunction(func)) {
-    throw new TypeError('findBackIndex args(compareFunc) is not function');
+    throw new TypeError('findLastIndex args(compareFunc) is not function');
   }
 
-  return _findBackIndex(array, func);
+  return _findLastIndex(array, func);
 };
 
-var findIndexLast = findBackIndex;
+var findBackIndex = findLastIndex;
 /**
- * find
+ * findFirst
  */
 
-var _find = function _find(array, func) {
-  var resultIndex = _findIndex(array, func);
+var _findFirst = function _findFirst(array, func) {
+  var resultIndex = _findFirstIndex(array, func);
 
   if (resultIndex === -1) {
     return undefined;
@@ -489,7 +493,7 @@ var _find = function _find(array, func) {
   return array[resultIndex];
 };
 
-var find = function find(array, func) {
+var findFirst = function findFirst(array, func) {
   if (_inProperty(array, 'array, func')) {
     var _array6 = array;
     array = _array6.array;
@@ -497,23 +501,23 @@ var find = function find(array, func) {
   }
 
   if (!_isArray(array)) {
-    throw new TypeError('find args(array) is not array');
+    throw new TypeError('findFirst args(array) is not array');
   }
 
   if (!_isFunction(func)) {
-    throw new TypeError('find args(compareFunc) is not function');
+    throw new TypeError('findFirst args(compareFunc) is not function');
   }
 
-  return _find(array, func);
+  return _findFirst(array, func);
 };
 
-var findFirst = find;
+var find = findFirst;
 /**
- * findBack
+ * findLast
  */
 
-var _findBack = function _findBack(array, func) {
-  var resultIndex = _findBackIndex(array, func);
+var _findLast = function _findLast(array, func) {
+  var resultIndex = _findLastIndex(array, func);
 
   if (resultIndex === -1) {
     return undefined;
@@ -522,7 +526,7 @@ var _findBack = function _findBack(array, func) {
   return array[resultIndex];
 };
 
-var findBack = function findBack(array, func) {
+var findLast = function findLast(array, func) {
   if (_inProperty(array, 'array, func')) {
     var _array7 = array;
     array = _array7.array;
@@ -530,18 +534,75 @@ var findBack = function findBack(array, func) {
   }
 
   if (!_isArray(array)) {
-    throw new TypeError('findBack args(array) is not array');
+    throw new TypeError('findLast args(array) is not array');
   }
 
   if (!_isFunction(func)) {
-    throw new TypeError('findBack args(compareFunc) is not function');
+    throw new TypeError('findLast args(compareFunc) is not function');
   }
 
-  return _findBack(array, func);
+  return _findLast(array, func);
 };
 
-var findLast = findBack;
-module.exports = {
+var findBack = findLast;
+/**
+ * some
+ */
+
+var _some = function _some(array, func) {
+  return _findFirstIndex(array, func) !== -1;
+};
+
+var some = function some(array, func) {
+  if (_inProperty(array, 'array, func')) {
+    var _array8 = array;
+    array = _array8.array;
+    func = _array8.func;
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError('some args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('some args(compareFunc) is not function');
+  }
+
+  return _some(array, func);
+};
+/**
+ * all:every
+ */
+
+
+var _all = function _all(array, func) {
+  if (array.length === 0) {
+    return false;
+  }
+
+  return _filter(array, func).length === array.length;
+};
+
+var all = function all(array, func) {
+  if (_inProperty(array, 'array, func')) {
+    var _array9 = array;
+    array = _array9.array;
+    func = _array9.func;
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError('all args(array) is not array');
+  }
+
+  if (!_isFunction(func)) {
+    throw new TypeError('all args(compareFunc) is not function');
+  }
+
+  return _all(array, func);
+};
+
+var every = all;
+module.exports = (_module$exports = {
   _min: _min,
   _max: _max,
   _sum: _sum,
@@ -554,10 +615,12 @@ module.exports = {
   _filter: _filter,
   _map: _map,
   _count: _count,
-  _findIndex: _findIndex,
-  _findBackIndex: _findBackIndex,
-  _find: _find,
-  _findBack: _findBack,
+  _findFirstIndex: _findFirstIndex,
+  _findLastIndex: _findLastIndex,
+  _findFirst: _findFirst,
+  _findLast: _findLast,
+  _some: _some,
+  _all: _all,
   from: from,
   min: min,
   max: max,
@@ -571,12 +634,13 @@ module.exports = {
   filter: filter,
   map: map,
   count: count,
+  findFirstIndex: findFirstIndex,
   findIndex: findIndex,
-  findIndexFirst: findIndexFirst,
+  findLastIndex: findLastIndex,
   findBackIndex: findBackIndex,
-  findIndexLast: findIndexLast,
-  find: find,
   findFirst: findFirst,
-  findBack: findBack,
-  findLast: findLast
-};
+  findLast: findLast,
+  some: some,
+  all: all,
+  every: every
+}, _defineProperty(_module$exports, "findIndex", findIndex), _defineProperty(_module$exports, "findBackIndex", findBackIndex), _defineProperty(_module$exports, "find", find), _defineProperty(_module$exports, "findBack", findBack), _module$exports);

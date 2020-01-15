@@ -319,6 +319,67 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_some = function test_some() {
+      it(test_some.name, function () {
+        checkEqual(true, array.some(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+          return value.toLowerCase() === 'a';
+        }));
+        checkEqual(true, array.some(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+          return value.toLowerCase() === 'b';
+        }));
+        checkEqual(false, array.some(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+          return value.toLowerCase() === 'd';
+        }));
+        checkEqual(true, array.some(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+          return isUpperCase(value);
+        }));
+        checkEqual(true, array.some(['a', 'b', 'c', 'A', 'B', 'C'], isLowerCase));
+        checkEqual(false, array.some(['A', 'B', 'C'], isLowerCase));
+        checkEqual(true, array.some(['A', 'B', 'C'], function () {
+          return true;
+        }));
+        checkEqual(false, array.some([], function () {
+          return true;
+        })); // Object Named Parameter
+
+        checkEqual(true, array.some({
+          array: ['a', 'b', 'c', 'A', 'B', 'C'],
+          func: isUpperCase
+        }));
+      });
+    };
+
+    var test_all = function test_all() {
+      it(test_all.name, function () {
+        checkEqual(false, array.all(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+          return value.toLowerCase() === 'a';
+        }));
+        checkEqual(false, array.all(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
+          return value.toLowerCase() === 'd';
+        }));
+        checkEqual(true, array.all(['A', 'B', 'C'], function (value) {
+          return isUpperCase(value);
+        }));
+        checkEqual(false, array.all(['A', 'B', 'C'], isLowerCase));
+        checkEqual(true, array.all(['a', 'b', 'c'], isLowerCase));
+        checkEqual(true, array.all(['A', 'B', 'C'], function () {
+          return true;
+        }));
+        checkEqual(false, array.all([], function () {
+          return true;
+        })); // Object Named Parameter
+
+        checkEqual(true, array.all({
+          array: ['A', 'B', 'C'],
+          func: isUpperCase
+        }));
+        checkEqual(false, array.all({
+          array: ['A', 'B', 'c'],
+          func: isUpperCase
+        }));
+      });
+    };
+
     var test_operation_insert = function test_operation_insert() {
       it(test_operation_insert.name, function () {
         checkCompare(parts.compare.equal, [1, 2, 3], array.operation.insert([1, 2, 3], []));
@@ -393,6 +454,8 @@ var test_execute_array = function test_execute_array(parts) {
     test_findBackIndex();
     test_find();
     test_findBack();
+    test_some();
+    test_all();
     test_operation_insert();
     test_operation_add();
   });

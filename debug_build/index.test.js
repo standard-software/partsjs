@@ -47,19 +47,19 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it("".concat(test_execute_nameSpace.name, " 1"), function () {
-        checkEqual(151, propertyCount(parts));
+        checkEqual(158, propertyCount(parts));
         checkEqual(64, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
-        checkEqual(14, propertyCount(parts.compare));
+        checkEqual(17, propertyCount(parts.compare));
         checkEqual(23, propertyCount(parts.convert));
         checkEqual(7, propertyCount(parts.number));
         checkEqual(6, propertyCount(parts.string));
-        checkEqual(9, propertyCount(parts.object));
-        checkEqual(22, propertyCount(parts.array));
+        checkEqual(13, propertyCount(parts.object));
+        checkEqual(25, propertyCount(parts.array));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it("".concat(test_execute_nameSpace.name, " 2"), function () {
-        checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'match,matchValue,initialValue,' + 'isEmpty,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''));
+        checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''));
         checkEqual(false, inProperty(parts, 'abc,' + ''));
       });
     });

@@ -32,13 +32,19 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep = _parts$compare.equalDeep,
         equalFunction = _parts$compare.equalFunction,
         or = _parts$compare.or,
-        match = _parts$compare.match,
         matchValue = _parts$compare.matchValue,
         initialValue = _parts$compare.initialValue,
-        isEmpty = _parts$compare.isEmpty,
-        matchAll = _parts$compare.matchAll,
         matchSome = _parts$compare.matchSome,
-        matchSomeIndex = _parts$compare.matchSomeIndex;
+        matchSomeValue = _parts$compare.matchSomeValue,
+        allMatchSome = _parts$compare.allMatchSome,
+        someMatchSome = _parts$compare.someMatchSome,
+        indexOfMatchSome = _parts$compare.indexOfMatchSome,
+        matchAll = _parts$compare.matchAll,
+        matchAllValue = _parts$compare.matchAllValue,
+        allMatchAll = _parts$compare.allMatchAll,
+        someMatchAll = _parts$compare.someMatchAll,
+        indexOfMatchAll = _parts$compare.indexOfMatchAll;
+    var isEmptyObject = parts.object.isEmptyObject;
 
     var test_equal = function test_equal() {
       it(test_equal.name, function () {
@@ -1254,205 +1260,31 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
-    var test_match = function test_match() {
-      it(test_match.name, function () {
-        // normal args string
-        checkEqual(false, match('abc', ['123', '456', '789']), 'test_match 1');
-        checkEqual(true, match('abc', ['123', '456', 'abc']), 'test_match 2');
-        checkEqual(false, match('abc', ['123', '456', /^b/]), 'test_match 3');
-        checkEqual(true, match('abc', ['123', '456', /^a/]), 'test_match 4');
-        checkEqual(false, match('abc', []), 'test_match 5');
-        checkEqual(false, match('123', [null, undefined, 123, 'abc']), 'test_match 6');
-        checkEqual(true, match('abc', [function (value) {
-          return value.startsWith('a');
-        }]), 'test_match 7');
-        checkEqual(false, match('abc', [function (value) {
-          return value.startsWith('b');
-        }]), 'test_match 8'); // normal args number
-
-        checkEqual(false, match(123, ['123', '456', '789']), 'test_match number 1');
-        checkEqual(true, match(123, [123, 456, 'abc']), 'test_match number 2');
-        checkEqual(false, match(123, ['123', '456', /^1/]), 'test_match number 3');
-        checkEqual(true, match(123, [123, '456', /^1/]), 'test_match number 4');
-        checkEqual(false, match(123, []), 'test_match number 5');
-        checkEqual(true, match(123, [null, undefined, 123, 'abc']), 'test_match number 6');
-        checkEqual(true, match(100, [function (value) {
-          return 100 <= value;
-        }]), 'test_match 7');
-        checkEqual(false, match(99, [function (value) {
-          return 100 <= value;
-        }]), 'test_match 8');
-        checkEqual(true, match(null, [null, undefined, 123, 'abc']), 'test_match 1');
-        checkEqual(true, match(undefined, [null, undefined, 123, 'abc']), 'test_match 2');
-        checkEqual(true, match(123, [null, undefined, 123, 'abc']), 'test_match 3');
-        checkEqual(true, match('abc', [null, undefined, 123, 'abc']), 'test_match 4');
-        checkEqual(true, match(1, [null, undefined, 1, '1']));
-        checkEqual(false, match(1, [null, undefined, 2, '1']));
-        checkEqual(true, match('1', [null, undefined, 1, '1']));
-        checkEqual(false, match('1', [null, undefined, 1, '2']));
-        checkEqual(true, match(null, [null, undefined, 0]));
-        checkEqual(true, match(undefined, [null, undefined, 0]));
-        checkEqual(true, match(0, [null, undefined, 0]));
-        checkEqual(false, match(null, [undefined, 0]));
-        checkEqual(false, match(undefined, [null, 0]));
-        checkEqual(false, match(0, [null, undefined])); // exception
-
-        checkEqual(true, isThrownException(function () {
-          match('123', 'abc');
-        }, new TypeError().name)); // Object Named Parameter string
-
-        checkEqual(false, match({
-          value: 'abc',
-          compareArray: ['123', '456', '789']
-        }), 'test_match param 1');
-        checkEqual(true, match({
-          value: 'abc',
-          compareArray: ['123', '456', 'abc']
-        }), 'test_match param 2');
-        checkEqual(false, match({
-          value: 'abc',
-          compareArray: ['123', '456', /^b/]
-        }), 'test_match param 3');
-        checkEqual(true, match({
-          value: 'abc',
-          compareArray: ['123', '456', /^a/]
-        }), 'test_match param 4');
-        checkEqual(false, match({
-          value: 'abc',
-          compareArray: []
-        }), 'test_match param 5');
-        checkEqual(false, match({
-          value: '123',
-          compareArray: [null, undefined, 123, 'abc']
-        }), 'test_match param 6');
-        checkEqual(true, match({
-          value: 'abc',
-          compareArray: [function (value) {
-            return value.startsWith('a');
-          }]
-        }), 'test_match param 7');
-        checkEqual(false, match({
-          value: 'abc',
-          compareArray: [function (value) {
-            return value.startsWith('b');
-          }]
-        }), 'test_match param 8'); // Object Named Parameter number
-
-        checkEqual(false, match({
-          value: 123,
-          compareArray: ['123', '456', '789']
-        }), 'test_match param number 1');
-        checkEqual(true, match({
-          value: 123,
-          compareArray: [123, 456, 'abc']
-        }), 'test_match param number 2');
-        checkEqual(false, match({
-          value: 123,
-          compareArray: ['123', '456', /^1/]
-        }), 'test_match param number 3');
-        checkEqual(true, match({
-          value: 123,
-          compareArray: [123, '456', /^1/]
-        }), 'test_match param number 4');
-        checkEqual(false, match({
-          value: 123,
-          compareArray: []
-        }), 'test_match param number 5');
-        checkEqual(true, match({
-          value: 123,
-          compareArray: [null, undefined, 123, 'abc']
-        }), 'test_match param number 6');
-        checkEqual(true, match({
-          value: 100,
-          compareArray: [function (value) {
-            return 100 <= value;
-          }]
-        }), 'test_match param 7');
-        checkEqual(false, match({
-          value: 99,
-          compareArray: [function (value) {
-            return 100 <= value;
-          }]
-        }), 'test_match param 8'); // exception
-
-        checkEqual(false, isThrown(function () {
-          match({
-            value: '123',
-            compareArray: ['123']
-          });
-        }), 'test_match thrown 1');
-        checkEqual(false, isThrown(function () {
-          match({
-            value: '123',
-            compareArray: []
-          });
-        }), 'test_match thrown 2');
-        checkEqual(false, isThrown(function () {
-          match({
-            value: '123',
-            compareArray: [123]
-          });
-        }), 'test_match thrown 3');
-        checkEqual(true, isThrown(function () {
-          match({
-            value: '123',
-            compareArray: 123
-          });
-        }, function (e) {
-          return e.name === new TypeError().name && e.message === 'match args(compareArray) is not array';
-        }), 'test_match thrown 4');
-        checkEqual(true, isThrown(function () {
-          match({
-            value1: '123',
-            compareArray: [123]
-          });
-        }), 'test_match thrown 5');
-        checkEqual(false, isThrown(function () {
-          match({
-            value1: '123',
-            compareArray: [123]
-          }, []);
-        }), 'test_match thrown 5');
-        checkEqual(false, match({
-          value1: '123',
-          compareArray: [123]
-        }, []));
-        checkEqual(true, match({
-          value1: '123',
-          compareArray: [123]
-        }, [function () {
-          return true;
-        }]));
-        checkEqual(false, match({
-          value1: '123',
-          compareArray: [123]
-        }, [function () {
-          return false;
-        }]));
-        checkEqual(true, match({
-          value1: '123',
-          compareArray: [123]
-        }, [function (value) {
-          return isObject(value);
-        }]));
-      });
-    };
-
     var test_matchValue = function test_matchValue() {
       it(test_matchValue.name, function () {
         // almost test_match done
-        checkEqual(999, matchValue(99, [99], 999));
-        checkEqual(98, matchValue(98, [99], 999));
+        checkEqual('123', matchValue('123', null, 999));
+        checkEqual(undefined, matchValue(undefined, null, 999));
+        checkEqual(999, matchValue(null, null, 999));
+        checkEqual('123', matchValue({
+          value: '123',
+          compare: undefined,
+          valueWhenMatched: 999
+        }));
         checkEqual(999, matchValue({
-          value: 99,
-          compareArray: [99],
-          inMatchValue: 999
+          value: undefined,
+          compare: undefined,
+          valueWhenMatched: 999
         }));
-        checkEqual(98, matchValue({
-          value: 98,
-          compareArray: [99],
-          inMatchValue: 999
+        checkEqual(null, matchValue({
+          value: null,
+          compare: undefined,
+          valueWhenMatched: 999
         }));
+        checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
+        checkEqual('[object Object]', String(matchValue({
+          a: 1
+        }, isEmptyObject, 'test')));
       });
     };
 
@@ -1464,15 +1296,15 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(null, initialValue(null, 999));
         checkEqual('123', initialValue({
           value: '123',
-          inMatchValue: 999
+          valueWhenMatched: 999
         }));
         checkEqual(999, initialValue({
           value: undefined,
-          inMatchValue: 999
+          valueWhenMatched: 999
         }));
         checkEqual(null, initialValue({
           value: null,
-          inMatchValue: 999
+          valueWhenMatched: 999
         }));
         checkEqual('[object Object]', String(initialValue({}, 'test')));
         checkEqual('null', String(initialValue(null, {})));
@@ -1480,114 +1312,552 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
-    var test_isEmpty = function test_isEmpty() {
-      it(test_isEmpty.name, function () {
-        checkEqual(true, isEmpty());
-        checkEqual(true, isEmpty(undefined));
-        checkEqual(true, isEmpty(null));
-        checkEqual(true, isEmpty(''));
-        checkEqual(true, isEmpty([]));
-        checkEqual(true, isEmpty({}));
-        checkEqual(false, isEmpty(1));
-        checkEqual(false, isEmpty('0'));
-        checkEqual(false, isEmpty([1]));
-        checkEqual(false, isEmpty({
-          a: 1
+    var test_matchSome = function test_matchSome() {
+      it(test_matchSome.name, function () {
+        // normal args string
+        checkEqual(false, matchSome('abc', ['123', '456', '789']), 'test_match 1');
+        checkEqual(true, matchSome('abc', ['123', '456', 'abc']), 'test_match 2');
+        checkEqual(false, matchSome('abc', ['123', '456', /^b/]), 'test_match 3');
+        checkEqual(true, matchSome('abc', ['123', '456', /^a/]), 'test_match 4');
+        checkEqual(false, matchSome('abc', []), 'test_match 5');
+        checkEqual(false, matchSome('123', [null, undefined, 123, 'abc']), 'test_match 6');
+        checkEqual(true, matchSome('abc', [function (value) {
+          return value.startsWith('a');
+        }]), 'test_match 7');
+        checkEqual(false, matchSome('abc', [function (value) {
+          return value.startsWith('b');
+        }]), 'test_match 8'); // normal args number
+
+        checkEqual(false, matchSome(123, ['123', '456', '789']), 'test_match number 1');
+        checkEqual(true, matchSome(123, [123, 456, 'abc']), 'test_match number 2');
+        checkEqual(false, matchSome(123, ['123', '456', /^1/]), 'test_match number 3');
+        checkEqual(true, matchSome(123, [123, '456', /^1/]), 'test_match number 4');
+        checkEqual(false, matchSome(123, []), 'test_match number 5');
+        checkEqual(true, matchSome(123, [null, undefined, 123, 'abc']), 'test_match number 6');
+        checkEqual(true, matchSome(100, [function (value) {
+          return 100 <= value;
+        }]), 'test_match 7');
+        checkEqual(false, matchSome(99, [function (value) {
+          return 100 <= value;
+        }]), 'test_match 8');
+        checkEqual(true, matchSome(null, [null, undefined, 123, 'abc']), 'test_match 1');
+        checkEqual(true, matchSome(undefined, [null, undefined, 123, 'abc']), 'test_match 2');
+        checkEqual(true, matchSome(123, [null, undefined, 123, 'abc']), 'test_match 3');
+        checkEqual(true, matchSome('abc', [null, undefined, 123, 'abc']), 'test_match 4');
+        checkEqual(true, matchSome(1, [null, undefined, 1, '1']));
+        checkEqual(false, matchSome(1, [null, undefined, 2, '1']));
+        checkEqual(true, matchSome('1', [null, undefined, 1, '1']));
+        checkEqual(false, matchSome('1', [null, undefined, 1, '2']));
+        checkEqual(true, matchSome(null, [null, undefined, 0]));
+        checkEqual(true, matchSome(undefined, [null, undefined, 0]));
+        checkEqual(true, matchSome(0, [null, undefined, 0]));
+        checkEqual(false, matchSome(null, [undefined, 0]));
+        checkEqual(false, matchSome(undefined, [null, 0]));
+        checkEqual(false, matchSome(0, [null, undefined])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          matchSome('123', 'abc');
+        }, new TypeError().name)); // Object Named Parameter string
+
+        checkEqual(false, matchSome({
+          value: 'abc',
+          compareArray: ['123', '456', '789']
+        }), 'test_match param 1');
+        checkEqual(true, matchSome({
+          value: 'abc',
+          compareArray: ['123', '456', 'abc']
+        }), 'test_match param 2');
+        checkEqual(false, matchSome({
+          value: 'abc',
+          compareArray: ['123', '456', /^b/]
+        }), 'test_match param 3');
+        checkEqual(true, matchSome({
+          value: 'abc',
+          compareArray: ['123', '456', /^a/]
+        }), 'test_match param 4');
+        checkEqual(false, matchSome({
+          value: 'abc',
+          compareArray: []
+        }), 'test_match param 5');
+        checkEqual(false, matchSome({
+          value: '123',
+          compareArray: [null, undefined, 123, 'abc']
+        }), 'test_match param 6');
+        checkEqual(true, matchSome({
+          value: 'abc',
+          compareArray: [function (value) {
+            return value.startsWith('a');
+          }]
+        }), 'test_match param 7');
+        checkEqual(false, matchSome({
+          value: 'abc',
+          compareArray: [function (value) {
+            return value.startsWith('b');
+          }]
+        }), 'test_match param 8'); // Object Named Parameter number
+
+        checkEqual(false, matchSome({
+          value: 123,
+          compareArray: ['123', '456', '789']
+        }), 'test_match param number 1');
+        checkEqual(true, matchSome({
+          value: 123,
+          compareArray: [123, 456, 'abc']
+        }), 'test_match param number 2');
+        checkEqual(false, matchSome({
+          value: 123,
+          compareArray: ['123', '456', /^1/]
+        }), 'test_match param number 3');
+        checkEqual(true, matchSome({
+          value: 123,
+          compareArray: [123, '456', /^1/]
+        }), 'test_match param number 4');
+        checkEqual(false, matchSome({
+          value: 123,
+          compareArray: []
+        }), 'test_match param number 5');
+        checkEqual(true, matchSome({
+          value: 123,
+          compareArray: [null, undefined, 123, 'abc']
+        }), 'test_match param number 6');
+        checkEqual(true, matchSome({
+          value: 100,
+          compareArray: [function (value) {
+            return 100 <= value;
+          }]
+        }), 'test_match param 7');
+        checkEqual(false, matchSome({
+          value: 99,
+          compareArray: [function (value) {
+            return 100 <= value;
+          }]
+        }), 'test_match param 8'); // exception
+
+        checkEqual(false, isThrown(function () {
+          matchSome({
+            value: '123',
+            compareArray: ['123']
+          });
+        }), 'test_match thrown 1');
+        checkEqual(false, isThrown(function () {
+          matchSome({
+            value: '123',
+            compareArray: []
+          });
+        }), 'test_match thrown 2');
+        checkEqual(false, isThrown(function () {
+          matchSome({
+            value: '123',
+            compareArray: [123]
+          });
+        }), 'test_match thrown 3');
+        checkEqual(true, isThrown(function () {
+          matchSome({
+            value: '123',
+            compareArray: 123
+          });
+        }, function (e) {
+          return e.name === new TypeError().name && e.message === 'matchSome args(compareArray) is not array';
+        }), 'test_match thrown 4');
+        checkEqual(true, isThrown(function () {
+          matchSome({
+            value1: '123',
+            compareArray: [123]
+          });
+        }), 'test_match thrown 5');
+        checkEqual(false, isThrown(function () {
+          matchSome({
+            value1: '123',
+            compareArray: [123]
+          }, []);
+        }), 'test_match thrown 5');
+        checkEqual(false, matchSome({
+          value1: '123',
+          compareArray: [123]
+        }, []));
+        checkEqual(true, matchSome({
+          value1: '123',
+          compareArray: [123]
+        }, [function () {
+          return true;
+        }]));
+        checkEqual(false, matchSome({
+          value1: '123',
+          compareArray: [123]
+        }, [function () {
+          return false;
+        }]));
+        checkEqual(true, matchSome({
+          value1: '123',
+          compareArray: [123]
+        }, [function (value) {
+          return isObject(value);
+        }]));
+      });
+    };
+
+    var test_matchSomeValue = function test_matchSomeValue() {
+      it(test_matchSomeValue.name, function () {
+        // almost test_match done
+        checkEqual(999, matchSomeValue(99, [99], 999));
+        checkEqual(98, matchSomeValue(98, [99], 999));
+        checkEqual(999, matchSomeValue({
+          value: 99,
+          compareArray: [99],
+          valueWhenMatched: 999
+        }));
+        checkEqual(98, matchSomeValue({
+          value: 98,
+          compareArray: [99],
+          valueWhenMatched: 999
+        }));
+      });
+    };
+
+    var test_allMatchSome = function test_allMatchSome() {
+      it(test_allMatchSome.name, function () {
+        checkEqual(true, allMatchSome([10, 20, 30], [function (value) {
+          return value > 5;
+        }]));
+        checkEqual(false, allMatchSome([10, 20, 30], [function (value) {
+          return value > 15;
+        }]));
+        checkEqual(true, allMatchSome([null, undefined], [null, undefined]));
+        checkEqual(false, allMatchSome([null, undefined], [null]));
+        checkEqual(true, allMatchSome([null, undefined], [isNull, isUndefined]));
+        checkEqual(false, allMatchSome([null, undefined], [isNull]));
+        checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined]));
+        checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined, NaN]));
+        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(false, isThrown(function () {
+          allMatchSome([10], [function (value) {
+            return value > 15;
+          }]);
+        }));
+        checkEqual(true, isThrown(function () {
+          allMatchSome(10, [function (value) {
+            return value > 15;
+          }]);
+        }));
+      });
+    };
+
+    var test_someMatchSome = function test_someMatchSome() {
+      it(test_someMatchSome.name, function () {
+        checkEqual(true, someMatchSome([10, 20, 30], [function (value) {
+          return value > 5;
+        }]), 'test_matchSome');
+        checkEqual(true, someMatchSome([10, 20, 30], [function (value) {
+          return value > 25;
+        }]));
+        checkEqual(false, someMatchSome([10, 20, 30], [function (value) {
+          return value > 35;
+        }]));
+        checkEqual(true, someMatchSome([null, undefined], [null, undefined]));
+        checkEqual(true, someMatchSome([null, undefined], [null]));
+        checkEqual(true, someMatchSome([null, undefined], [isNull, isUndefined]));
+        checkEqual(true, someMatchSome([null, undefined], [isNull]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, NaN]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(false, someMatchSome([null, undefined, NaN], [NaN]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrict]));
+        checkEqual(false, isThrown(function () {
+          someMatchSome([10], [function (value) {
+            return value > 15;
+          }]);
+        }));
+        checkEqual(true, isThrown(function () {
+          someMatchSome(10, [function (value) {
+            return value > 15;
+          }]);
+        }));
+      });
+    };
+
+    var test_indexOfMatchSome = function test_indexOfMatchSome() {
+      it(test_indexOfMatchSome.name, function () {
+        checkEqual(0, indexOfMatchSome([10, 20, 30], [function (value) {
+          return value > 5;
+        }]), 'test_matchSomeIndex');
+        checkEqual(2, indexOfMatchSome([10, 20, 30], [function (value) {
+          return value > 25;
+        }]));
+        checkEqual(-1, indexOfMatchSome([10, 20, 30], [function (value) {
+          return value > 35;
+        }]));
+        checkEqual(0, indexOfMatchSome([null, undefined], [null, undefined]));
+        checkEqual(1, indexOfMatchSome([null, undefined], [undefined]));
+        checkEqual(0, indexOfMatchSome([null, undefined], [isNull, isUndefined]));
+        checkEqual(1, indexOfMatchSome([null, undefined], [isUndefined]));
+        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined]));
+        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, NaN]));
+        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(-1, indexOfMatchSome([null, undefined, NaN], [NaN]));
+        checkEqual(2, indexOfMatchSome([null, undefined, NaN], [isNaNStrict]));
+        checkEqual(false, isThrown(function () {
+          indexOfMatchSome([10], [function (value) {
+            return value > 15;
+          }]);
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfMatchSome(10, [function (value) {
+            return value > 15;
+          }]);
         }));
       });
     };
 
     var test_matchAll = function test_matchAll() {
       it(test_matchAll.name, function () {
-        checkEqual(true, matchAll([10, 20, 30], [function (value) {
-          return value > 5;
+        // normal args string
+        checkEqual(false, matchAll('abc', []));
+        checkEqual(true, matchAll('abc', ['abc']));
+        checkEqual(false, matchAll('abc', ['abc', 'def']));
+        checkEqual(false, matchAll('abc', ['abc', undefined]));
+        checkEqual(false, matchAll('abc', ['abc', null]));
+        checkEqual(false, matchAll('abc', ['abc', '']));
+        checkEqual(true, matchAll('abc', [/^a/]));
+        checkEqual(true, matchAll('abc', [/c$/]));
+        checkEqual(true, matchAll('abc', [/^a/, /c$/]));
+        checkEqual(true, matchAll('abc', [/^a/, /.*b.*/, /c$/]));
+        checkEqual(false, matchAll('abc', [/^a/, /^b.*/, /c$/]));
+        checkEqual(true, matchAll('aabbcc', [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true, matchAll('abc', [/^a/, /.*b.*/, /c$/, function (value) {
+          return value.length >= 3;
+        }, function (value) {
+          return value.length <= 5;
         }]));
-        checkEqual(false, matchAll([10, 20, 30], [function (value) {
-          return value > 15;
+        checkEqual(true, matchAll('aabcc', [/^a/, /.*b.*/, /c$/, function (value) {
+          return value.length >= 3;
+        }, function (value) {
+          return value.length <= 5;
         }]));
-        checkEqual(true, matchAll([null, undefined], [null, undefined]));
-        checkEqual(false, matchAll([null, undefined], [null]));
-        checkEqual(true, matchAll([null, undefined], [isNull, isUndefined]));
-        checkEqual(false, matchAll([null, undefined], [isNull]));
-        checkEqual(false, matchAll([null, undefined, NaN], [null, undefined]));
-        checkEqual(false, matchAll([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, matchAll([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(false, matchAll('aabbcc', [/^a/, /.*b.*/, /c$/, function (value) {
+          return value.length >= 3;
+        }, function (value) {
+          return value.length <= 5;
+        }])); // normal args number
+
+        checkEqual(false, matchAll(100, []));
+        checkEqual(true, matchAll(100, [100]));
+        checkEqual(false, matchAll(100, [100, 0]));
+        checkEqual(false, matchAll(100, [100, undefined]));
+        checkEqual(false, matchAll(100, [100, null]));
+        checkEqual(false, matchAll(100, [100, NaN]));
+        checkEqual(true, matchAll(100, [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(true, matchAll(110, [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(false, matchAll(111, [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(true, matchAll(null, [null]));
+        checkEqual(false, matchAll(null, [null, undefined]));
+        checkEqual(false, matchAll(null, [undefined]));
+        checkEqual(false, matchAll(undefined, [null]));
+        checkEqual(false, matchAll(undefined, [null, undefined]));
+        checkEqual(true, matchAll(undefined, [undefined])); // exception
+
+        checkEqual(false, isThrownException(function () {
+          matchAll('123', ['123']);
+        }, new TypeError().name));
+        checkEqual(true, isThrownException(function () {
+          matchAll('123', '123');
+        }, new TypeError().name));
+        checkEqual(false, isThrownException(function () {
+          matchAll(123, [123]);
+        }, new TypeError().name));
+        checkEqual(true, isThrownException(function () {
+          matchAll(123, 123);
+        }, new TypeError().name)); // Object Named Parameter string
+
+        checkEqual(true, matchAll({
+          value: 'abc',
+          compareArray: ['abc']
+        }));
+        checkEqual(false, matchAll({
+          value: 'abc',
+          compareArray: ['abc', '']
+        }));
+        checkEqual(true, matchAll({
+          value: 'abc',
+          compareArray: [/^a/, /.*b.*/, /c$/]
+        })); // Object Named Parameter number
+
+        checkEqual(true, matchAll({
+          value: 100,
+          compareArray: [10 * 10]
+        }));
+        checkEqual(false, matchAll({
+          value: 100,
+          compareArray: [100, 101]
+        }));
+        checkEqual(true, matchAll({
+          value: 100,
+          compareArray: [function (value) {
+            return value >= 100;
+          }, function (value) {
+            return value <= 110;
+          }]
+        })); // exception
+
         checkEqual(false, isThrown(function () {
-          matchAll([10], [function (value) {
-            return value > 15;
-          }]);
+          matchAll({
+            value: 'abc',
+            compareArray: ['abc']
+          });
         }));
         checkEqual(true, isThrown(function () {
-          matchAll(10, [function (value) {
-            return value > 15;
-          }]);
+          matchAll({
+            value: 'abc',
+            compareArray: 'abc'
+          });
+        }));
+        checkEqual(false, isThrown(function () {
+          matchAll({
+            value: 100,
+            compareArray: [function (value) {
+              return value >= 100;
+            }, function (value) {
+              return value <= 110;
+            }]
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          matchAll({
+            value: 100,
+            compareArray: [function (value) {
+              return value;
+            }, function (value) {
+              return value <= 110;
+            }]
+          });
         }));
       });
     };
 
-    var test_matchSome = function test_matchSome() {
-      it(test_matchSome.name, function () {
-        checkEqual(true, matchSome([10, 20, 30], [function (value) {
-          return value > 5;
-        }]), 'test_matchSome');
-        checkEqual(true, matchSome([10, 20, 30], [function (value) {
-          return value > 25;
-        }]));
-        checkEqual(false, matchSome([10, 20, 30], [function (value) {
-          return value > 35;
-        }]));
-        checkEqual(true, matchSome([null, undefined], [null, undefined]));
-        checkEqual(true, matchSome([null, undefined], [null]));
-        checkEqual(true, matchSome([null, undefined], [isNull, isUndefined]));
-        checkEqual(true, matchSome([null, undefined], [isNull]));
-        checkEqual(true, matchSome([null, undefined, NaN], [null, undefined]));
-        checkEqual(true, matchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, matchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
-        checkEqual(false, matchSome([null, undefined, NaN], [NaN]));
-        checkEqual(true, matchSome([null, undefined, NaN], [isNaNStrict]));
-        checkEqual(false, isThrown(function () {
-          matchSome([10], [function (value) {
-            return value > 15;
-          }]);
+    var test_matchAllValue = function test_matchAllValue() {
+      it(test_matchAllValue.name, function () {
+        // almost test_match done
+        checkEqual(999, matchAllValue(99, [99], 999));
+        checkEqual(98, matchAllValue(98, [99], 999));
+        checkEqual(999, matchAllValue(100, [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }], 999));
+        checkEqual(999, matchAllValue(110, [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }], 999));
+        checkEqual(111, matchAllValue(111, [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }], 999));
+        checkEqual(999, matchAllValue({
+          value: 100,
+          compareArray: [function (value) {
+            return value >= 100;
+          }, function (value) {
+            return value <= 110;
+          }],
+          valueWhenMatched: 999
         }));
-        checkEqual(true, isThrown(function () {
-          matchSome(10, [function (value) {
-            return value > 15;
-          }]);
+        checkEqual(999, matchAllValue({
+          value: 110,
+          compareArray: [function (value) {
+            return value >= 100;
+          }, function (value) {
+            return value <= 110;
+          }],
+          valueWhenMatched: 999
+        }));
+        checkEqual(111, matchAllValue({
+          value: 111,
+          compareArray: [function (value) {
+            return value >= 100;
+          }, function (value) {
+            return value <= 110;
+          }],
+          valueWhenMatched: 999
         }));
       });
     };
 
-    var test_matchSomeIndex = function test_matchSomeIndex() {
-      it(test_matchSomeIndex.name, function () {
-        checkEqual(0, matchSomeIndex([10, 20, 30], [function (value) {
-          return value > 5;
-        }]), 'test_matchSomeIndex');
-        checkEqual(2, matchSomeIndex([10, 20, 30], [function (value) {
-          return value > 25;
+    var test_allMatchAll = function test_allMatchAll() {
+      it(test_allMatchAll.name, function () {
+        checkEqual(false, allMatchAll([], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true, allMatchAll(['abc', 'aabc', 'aabbcc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(false, allMatchAll(['abc', 'aabc', 'aacc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true, allMatchAll([100, 105, 110], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
         }]));
-        checkEqual(-1, matchSomeIndex([10, 20, 30], [function (value) {
-          return value > 35;
+        checkEqual(false, allMatchAll([100, 105, 111], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
         }]));
-        checkEqual(0, matchSomeIndex([null, undefined], [null, undefined]));
-        checkEqual(1, matchSomeIndex([null, undefined], [undefined]));
-        checkEqual(0, matchSomeIndex([null, undefined], [isNull, isUndefined]));
-        checkEqual(1, matchSomeIndex([null, undefined], [isUndefined]));
-        checkEqual(0, matchSomeIndex([null, undefined, NaN], [null, undefined]));
-        checkEqual(0, matchSomeIndex([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(0, matchSomeIndex([null, undefined, NaN], [null, undefined, isNaNStrict]));
-        checkEqual(-1, matchSomeIndex([null, undefined, NaN], [NaN]));
-        checkEqual(2, matchSomeIndex([null, undefined, NaN], [isNaNStrict]));
-        checkEqual(false, isThrown(function () {
-          matchSomeIndex([10], [function (value) {
-            return value > 15;
-          }]);
-        }));
-        checkEqual(true, isThrown(function () {
-          matchSomeIndex(10, [function (value) {
-            return value > 15;
-          }]);
-        }));
+      });
+    };
+
+    var test_someMatchAll = function test_someMatchAll() {
+      it(test_someMatchAll.name, function () {
+        checkEqual(false, someMatchAll([], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true, someMatchAll(['abc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(false, someMatchAll(['aaa', 'bbb', 'ccc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true, someMatchAll(['aaa', 'abc', 'ccc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(true, someMatchAll([105], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(false, someMatchAll([111, 115, 120], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(true, someMatchAll([111, 110, 120], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+      });
+    };
+
+    var test_indexOfMatchAll = function test_indexOfMatchAll() {
+      it(test_indexOfMatchAll.name, function () {
+        checkEqual(-1, indexOfMatchAll([], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(0, indexOfMatchAll(['abc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(-1, indexOfMatchAll(['aaa', 'bbb', 'ccc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(1, indexOfMatchAll(['aaa', 'abc', 'ccc'], [/^a/, /.*b.*/, /c$/]));
+        checkEqual(0, indexOfMatchAll([105], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(-1, indexOfMatchAll([111, 115, 120], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
+        checkEqual(1, indexOfMatchAll([111, 110, 120], [function (value) {
+          return value >= 100;
+        }, function (value) {
+          return value <= 110;
+        }]));
       });
     };
 
@@ -1613,13 +1883,18 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_equalDeep_set_object_array();
     test_equalDeep_set_CircularReference();
     test_or();
-    test_match();
     test_matchValue();
     test_initialValue();
-    test_isEmpty();
-    test_matchAll();
     test_matchSome();
-    test_matchSomeIndex();
+    test_matchSomeValue();
+    test_allMatchSome();
+    test_someMatchSome();
+    test_indexOfMatchSome();
+    test_matchAll();
+    test_matchAllValue();
+    test_allMatchAll();
+    test_someMatchAll();
+    test_indexOfMatchAll();
   });
 };
 

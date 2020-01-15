@@ -16,7 +16,8 @@ var test_execute_object = function test_execute_object(parts) {
         inProperty = _parts$object.inProperty,
         propertyCount = _parts$object.propertyCount,
         getProperty = _parts$object.getProperty,
-        setProperty = _parts$object.setProperty;
+        setProperty = _parts$object.setProperty,
+        isEmptyObject = _parts$object.isEmptyObject;
 
     var test_copyProperty = function test_copyProperty() {
       it(test_copyProperty.name, function () {
@@ -229,11 +230,21 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
+    var test_isEmptyObject = function test_isEmptyObject() {
+      it(test_isEmptyObject.name, function () {
+        checkEqual(true, isEmptyObject({}));
+        checkEqual(false, isEmptyObject({
+          a: 1
+        }));
+      });
+    };
+
     test_copyProperty();
     test_inProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();
+    test_isEmptyObject();
   });
 };
 

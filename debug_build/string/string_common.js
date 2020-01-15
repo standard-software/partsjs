@@ -16,7 +16,7 @@ var _require = require('../type/type.js'),
     _isException = _require._isException;
 
 var _require2 = require('../compare/compare.js'),
-    _match = _require2._match;
+    _matchSome = _require2._matchSome;
 
 var _require3 = require('../object/_inProperty.js'),
     _inProperty = _require3._inProperty;
@@ -250,7 +250,7 @@ var _includes = function _includes(value, compareArray) {
     }
   });
 
-  return _match(value, compareFunctionArray);
+  return _matchSome(value, compareFunctionArray);
 };
 
 var includes = function includes(value, compareArray) {
