@@ -25,15 +25,15 @@ const test_execute_index = (parts) => {
 
       it(`${test_execute_nameSpace.name} 1`, () => {
 
-        checkEqual(155, propertyCount(parts));
+        checkEqual(158, propertyCount(parts));
         checkEqual(64,  propertyCount(parts.type));
         checkEqual(9,   propertyCount(parts.test));
-        checkEqual(14,  propertyCount(parts.compare));
+        checkEqual(17,  propertyCount(parts.compare));
         checkEqual(23,  propertyCount(parts.convert));
         checkEqual(7,   propertyCount(parts.number));
         checkEqual(6,   propertyCount(parts.string));
         checkEqual(13,   propertyCount(parts.object));
-        checkEqual(22,  propertyCount(parts.array));
+        checkEqual(25,  propertyCount(parts.array));
         checkEqual(true,
           inProperty(
             parts,
@@ -54,8 +54,7 @@ const test_execute_index = (parts) => {
           'assert,guard,' +
           'sc,if_,switch_,' +
           'equal,or,' +
-          'match,matchValue,initialValue,' +
-          'isEmpty,' +
+          'matchSome,matchSomeValue,initialValue,' +
           'numberToString,' +
           'stringToNumber,stringToInteger,' +
           'numToString,' +

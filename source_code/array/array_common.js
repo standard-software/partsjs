@@ -363,12 +363,12 @@ const count = (array, func) => {
 /**
  * findIndex
  */
-const _findIndex = (array, func) => {
+const _findFirstIndex = (array, func) => {
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
     if (!_isBoolean(resultFunc)) {
       throw new TypeError(
-        '_findIndex args(compareFunc) result is not boolean',
+        '_findFirstIndex args(compareFunc) result is not boolean',
       );
     }
     if (resultFunc) {
@@ -378,35 +378,35 @@ const _findIndex = (array, func) => {
   return -1;
 };
 
-const findIndex = (array, func) => {
+const findFirstIndex = (array, func) => {
   if (_inProperty(array, 'array, func')) {
     ({ array, func } = array);
   }
 
   if (!_isArray(array)) {
     throw new TypeError(
-      'findIndex args(array) is not array',
+      'findFirstIndex args(array) is not array',
     );
   }
   if (!_isFunction(func)) {
     throw new TypeError(
-      'findIndex args(compareFunc) is not function',
+      'findFirstIndex args(compareFunc) is not function',
     );
   }
-  return _findIndex(array, func);
+  return _findFirstIndex(array, func);
 };
 
-const findIndexFirst = findIndex;
+const findIndex = findFirstIndex;
 
 /**
  * findBackIndex
  */
-const _findBackIndex = (array, func) => {
+const _findLastIndex = (array, func) => {
   for (let i = array.length - 1; i >= 0; i -= 1) {
     const resultFunc = func(array[i], i, array);
     if (!_isBoolean(resultFunc)) {
       throw new TypeError(
-        '_findBackIndex args(compareFunc) result is not boolean',
+        '_findLastIndex args(compareFunc) result is not boolean',
       );
     }
     if (resultFunc) {
@@ -416,87 +416,143 @@ const _findBackIndex = (array, func) => {
   return -1;
 };
 
-const findBackIndex = (array, func) => {
+const findLastIndex = (array, func) => {
   if (_inProperty(array, 'array, func')) {
     ({ array, func } = array);
   }
 
   if (!_isArray(array)) {
     throw new TypeError(
-      'findBackIndex args(array) is not array',
+      'findLastIndex args(array) is not array',
     );
   }
   if (!_isFunction(func)) {
     throw new TypeError(
-      'findBackIndex args(compareFunc) is not function',
+      'findLastIndex args(compareFunc) is not function',
     );
   }
-  return _findBackIndex(array, func);
+  return _findLastIndex(array, func);
 };
 
-const findIndexLast = findBackIndex;
+const findBackIndex = findLastIndex;
 
 /**
- * find
+ * findFirst
  */
-const _find = (array, func) => {
-  const resultIndex = _findIndex(array, func);
+const _findFirst = (array, func) => {
+  const resultIndex = _findFirstIndex(array, func);
   if (resultIndex === -1) {
     return undefined;
   }
   return array[resultIndex];
 };
 
-const find = (array, func) => {
+const findFirst = (array, func) => {
   if (_inProperty(array, 'array, func')) {
     ({ array, func } = array);
   }
 
   if (!_isArray(array)) {
     throw new TypeError(
-      'find args(array) is not array',
+      'findFirst args(array) is not array',
     );
   }
   if (!_isFunction(func)) {
     throw new TypeError(
-      'find args(compareFunc) is not function',
+      'findFirst args(compareFunc) is not function',
     );
   }
-  return _find(array, func);
+  return _findFirst(array, func);
 };
 
-const findFirst = find;
+const find = findFirst;
 
 /**
- * findBack
+ * findLast
  */
-const _findBack = (array, func) => {
-  const resultIndex = _findBackIndex(array, func);
+const _findLast = (array, func) => {
+  const resultIndex = _findLastIndex(array, func);
   if (resultIndex === -1) {
     return undefined;
   }
   return array[resultIndex];
 };
 
-const findBack = (array, func) => {
+const findLast = (array, func) => {
   if (_inProperty(array, 'array, func')) {
     ({ array, func } = array);
   }
 
   if (!_isArray(array)) {
     throw new TypeError(
-      'findBack args(array) is not array',
+      'findLast args(array) is not array',
     );
   }
   if (!_isFunction(func)) {
     throw new TypeError(
-      'findBack args(compareFunc) is not function',
+      'findLast args(compareFunc) is not function',
     );
   }
-  return _findBack(array, func);
+  return _findLast(array, func);
 };
 
-const findLast = findBack;
+const findBack = findLast;
+
+/**
+ * some
+ */
+const _some = (array, func) => {
+  return (_findFirstIndex(array, func) !== -1);
+};
+
+const some = (array, func) => {
+  if (_inProperty(array, 'array, func')) {
+    ({ array, func } = array);
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'some args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'some args(compareFunc) is not function',
+    );
+  }
+  return _some(array, func);
+};
+
+
+/**
+ * all:every
+ */
+const _all = (array, func) => {
+  if (array.length === 0) {
+    return false;
+  }
+  return (_filter(array, func).length === array.length);
+};
+
+const all = (array, func) => {
+  if (_inProperty(array, 'array, func')) {
+    ({ array, func } = array);
+  }
+
+  if (!_isArray(array)) {
+    throw new TypeError(
+      'all args(array) is not array',
+    );
+  }
+  if (!_isFunction(func)) {
+    throw new TypeError(
+      'all args(compareFunc) is not function',
+    );
+  }
+  return _all(array, func);
+};
+
+const every = all;
 
 module.exports = {
   _min, _max,
@@ -504,10 +560,11 @@ module.exports = {
   _mode,
   _unique, _single, _multiple,
   _filter, _map, _count,
-  _findIndex,
-  _findBackIndex,
-  _find,
-  _findBack,
+  _findFirstIndex,
+  _findLastIndex,
+  _findFirst,
+  _findLast,
+  _some, _all,
 
   from,
   min, max,
@@ -515,10 +572,14 @@ module.exports = {
   mode,
   unique, single, multiple,
   filter, map, count,
-  findIndex, findIndexFirst,
-  findBackIndex, findIndexLast,
-  find, findFirst,
-  findBack, findLast,
+  findFirstIndex, findIndex,
+  findLastIndex, findBackIndex,
+  findFirst,
+  findLast,
+  some, all, every,
+
+  findIndex, findBackIndex,
+  find, findBack,
 
 };
 

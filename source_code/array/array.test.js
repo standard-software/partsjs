@@ -414,6 +414,98 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_some = () => {
+      it(test_some.name, () => {
+        checkEqual(true,
+          array.some(['a', 'b', 'c', 'A', 'B', 'C'],
+            value => value.toLowerCase() === 'a')
+        );
+        checkEqual(true,
+          array.some(['a', 'b', 'c', 'A', 'B', 'C'],
+            value => value.toLowerCase() === 'b')
+        );
+        checkEqual(false,
+          array.some(['a', 'b', 'c', 'A', 'B', 'C'],
+            value => value.toLowerCase() === 'd')
+        );
+        checkEqual(true,
+          array.some(['a', 'b', 'c', 'A', 'B', 'C'],
+            value => isUpperCase(value))
+        );
+        checkEqual(true,
+          array.some(['a', 'b', 'c', 'A', 'B', 'C'],
+            isLowerCase)
+        );
+        checkEqual(false,
+          array.some(['A', 'B', 'C'],
+            isLowerCase)
+        );
+        checkEqual(true,
+          array.some(['A', 'B', 'C'],
+            () => true)
+        );
+        checkEqual(false,
+          array.some([],
+            () => true)
+        );
+
+        // Object Named Parameter
+        checkEqual(true,
+          array.some({
+            array: ['a', 'b', 'c', 'A', 'B', 'C'],
+            func: isUpperCase,
+          })
+        );
+      });
+    };
+
+    const test_all = () => {
+      it(test_all.name, () => {
+        checkEqual(false,
+          array.all(['a', 'b', 'c', 'A', 'B', 'C'],
+            value => value.toLowerCase() === 'a')
+        );
+        checkEqual(false,
+          array.all(['a', 'b', 'c', 'A', 'B', 'C'],
+            value => value.toLowerCase() === 'd')
+        );
+        checkEqual(true,
+          array.all(['A', 'B', 'C'],
+            value => isUpperCase(value))
+        );
+        checkEqual(false,
+          array.all(['A', 'B', 'C'],
+            isLowerCase)
+        );
+        checkEqual(true,
+          array.all(['a', 'b', 'c'],
+            isLowerCase)
+        );
+        checkEqual(true,
+          array.all(['A', 'B', 'C'],
+            () => true)
+        );
+        checkEqual(false,
+          array.all([],
+            () => true)
+        );
+
+        // Object Named Parameter
+        checkEqual(true,
+          array.all({
+            array: ['A', 'B', 'C'],
+            func: isUpperCase,
+          })
+        );
+        checkEqual(false,
+          array.all({
+            array: ['A', 'B', 'c'],
+            func: isUpperCase,
+          })
+        );
+      });
+    };
+
     const test_operation_insert = () => {
       it(test_operation_insert.name, () => {
         checkCompare(parts.compare.equal,
@@ -552,6 +644,9 @@ const test_execute_array = (parts) => {
     test_findBackIndex();
     test_find();
     test_findBack();
+
+    test_some();
+    test_all();
 
     test_operation_insert();
     test_operation_add();

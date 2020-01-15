@@ -6,7 +6,7 @@ const {
 } = require('../type/type.js');
 
 const {
-  _match,
+  _matchSome,
 } = require('../compare/compare.js');
 
 const {
@@ -291,7 +291,7 @@ const _includes = (
         );
       }
     });
-  return _match(value, compareFunctionArray);
+  return _matchSome(value, compareFunctionArray);
 };
 
 const includes = (

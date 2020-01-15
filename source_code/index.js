@@ -78,10 +78,11 @@ propertyNames.COMPARE =
   'equal, equalDeep,' +
   'equalFunction,' +
   'or,' +
-  'match,matchValue,initialValue,' +
-  'matchAll,matchSomeIndex,matchSome,' +
-  'matchEvery,matchAnyIndex,matchAny,' +
-  'isEmpty,' +
+  'match, matchValue, initialValue,' +
+  'matchSome, matchSomeValue,' +
+  'allMatchSome, indexOfMatchSome, someMatchSome,' +
+  'matchAll, matchAllValue,' +
+  'allMatchAll, indexOfMatchAll, someMatchAll,' +
   '';
 const compare = _copyProperty(_compare, propertyNames.COMPARE);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames);
@@ -165,6 +166,7 @@ propertyNames.ARRAY_PUBLIC =
   'findBackIndex, findIndexLast,' +
   'find, findFirst,' +
   'findBack, findLast,' +
+  'some, all, every,' +
   'operation,' +
   '';
 propertyNames.ARRAY_ROOT =

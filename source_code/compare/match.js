@@ -13,54 +13,121 @@ const {
   _copyProperty, _propertyCount, _inProperty,
 } = require('../object/object.js');
 
+const {
+  _some, _all,
+  _findFirstIndex,
+} = require('../array/array_common.js');
+
 /**
  * match
  */
-const _match = (value, compareArray) => {
+const _match = (value, compare) => {
   if (_isString(value)) {
-    for (let i = 0, l = compareArray.length; i < l; i += 1) {
-      const element = compareArray[i];
-      let result = false;
-      if (_isRegExp(element)) {
-        result = value.match(element) !== null;
-      } else if (_isFunction(element)) {
-        result = element(value);
-        if (!_isBoolean(result)) {
-          throw new TypeError(
-            '_match args(compareArray element function result) is not boolean',
-          );
-        }
-      } else {
-        result = value === element;
+    let result;
+    if (_isRegExp(compare)) {
+      result = value.match(compare) !== null;
+    } else if (_isFunction(compare)) {
+      result = compare(value);
+      if (!_isBoolean(result)) {
+        throw new TypeError(
+          '_match args(compareArray element function result) is not boolean',
+        );
       }
-      if (result) {
-        return true;
-      }
+    } else {
+      result = value === compare;
     }
-    return false;
+    return result;
   } else {
-    for (let i = 0, l = compareArray.length; i < l; i += 1) {
-      const element = compareArray[i];
-      let result;
-      if (_isFunction(element)) {
-        result = element(value);
-        if (!_isBoolean(result)) {
-          throw new TypeError(
-            '_match args(compareArray element function result) is not boolean',
-          );
-        }
-      } else {
-        result = value === element;
+    let result;
+    if (_isFunction(compare)) {
+      result = compare(value);
+      if (!_isBoolean(result)) {
+        throw new TypeError(
+          '_match args(compareArray element function result) is not boolean',
+        );
       }
-      if (result) {
-        return true;
-      }
+    } else {
+      result = value === compare;
     }
-    return false;
+    return result;
   }
 };
 
 const match = (
+  value,
+  compare,
+) => {
+  if (_inProperty(value, 'value, compare')) {
+    ({ value, compare } = value);
+  }
+
+  return _match(value, compare);
+};
+
+/**
+ * matchValue
+ */
+const _matchValue = (
+  value,
+  compare,
+  valueWhenMatched,
+) => {
+  if (_match(value, compare)) {
+    return valueWhenMatched;
+  }
+  return value;
+};
+
+const matchValue = (
+  value,
+  compare,
+  valueWhenMatched,
+) => {
+  if (_inProperty(value, 'value, compare, valueWhenMatched')) {
+    ({ value, compare, valueWhenMatched } = value);
+  }
+
+  return _matchValue(
+    value,
+    compare,
+    valueWhenMatched,
+  );
+};
+
+/**
+ * initialValue
+ */
+const _initialValue = (
+  value,
+  valueWhenMatched,
+) => {
+  return _matchValue(value, _isUndefined, valueWhenMatched);
+};
+
+const initialValue = (
+  value,
+  valueWhenMatched,
+) => {
+  if (_inProperty(value, 'value, valueWhenMatched')) {
+    ({ value, valueWhenMatched } = value);
+  }
+
+  return _initialValue(
+    value,
+    valueWhenMatched,
+  );
+};
+
+/**
+ * matchSome
+ */
+const _matchSome = (value, compareArray) => {
+  return _some(compareArray, compare => {
+    return _match(value, compare);
+  });
+};
+
+const matchSome = (
   value,
   compareArray,
 ) => {
@@ -70,33 +137,26 @@ const match = (
 
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'match args(compareArray) is not array',
+      'matchSome args(compareArray) is not array',
     );
   }
 
-  return _match(value, compareArray);
+  return _matchSome(value, compareArray);
 };
 
 /**
- * matchAll
+ * allMatchSome
  */
-const _matchAll = (
+const _allMatchSome = (
   valueArray,
   compareArray,
 ) => {
-  let result = false;
-  for (let i = 0, l = valueArray.length; i < l; i += 1) {
-    if (_match(valueArray[i], compareArray)) {
-      result = true;
-    } else {
-      result = false;
-      break;
-    }
-  }
-  return result;
+  return _all(valueArray, value => {
+    return _matchSome(value, compareArray);
+  });
 };
 
-const matchAll = (
+const allMatchSome = (
   valueArray,
   compareArray,
 ) => {
@@ -106,46 +166,151 @@ const matchAll = (
 
   if (!_isArray(valueArray)) {
     throw new TypeError(
-      'matchAll args(valueArray) is not array',
+      'allMatchSome args(valueArray) is not array',
     );
   }
+  if (!_isArray(compareArray)) {
+    throw new TypeError(
+      'allMatchSome args(compareArray) is not array',
+    );
+  }
+
+  return _allMatchSome(valueArray, compareArray);
+};
+
+
+/**
+ * indexOfMatchSome
+ */
+const _indexOfMatchSome = (
+  valueArray,
+  compareArray,
+) => {
+  return _findFirstIndex(valueArray, value => {
+    return _matchSome(value, compareArray);
+  });
+};
+
+const indexOfMatchSome = (
+  valueArray,
+  compareArray,
+) => {
+  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+    ({ valueArray, compareArray } = valueArray);
+  }
+
+  if (!_isArray(valueArray)) {
+    throw new TypeError(
+      'indexOfMatchSome args(valueArray) is not array',
+    );
+  }
+  if (!_isArray(compareArray)) {
+    throw new TypeError(
+      'indexOfMatchSome args(compareArray) is not array',
+    );
+  }
+
+  return _indexOfMatchSome(valueArray, compareArray);
+};
+
+/**
+ * someMatchSome
+ */
+const _someMatchSome = (
+  valueArray,
+  compareArray,
+) => {
+  return _indexOfMatchSome(
+    valueArray,
+    compareArray,
+  ) !== -1;
+};
+
+const someMatchSome = (
+  valueArray,
+  compareArray,
+) => {
+  return indexOfMatchSome(
+    valueArray,
+    compareArray,
+  ) !== -1;
+};
+
+/**
+ * matchSomeValue
+ */
+const _matchSomeValue = (
+  value,
+  compareArray,
+  valueWhenMatched,
+) => {
+  if (_matchSome(value, compareArray)) {
+    return valueWhenMatched;
+  }
+  return value;
+};
+
+const matchSomeValue = (
+  value,
+  compareArray,
+  valueWhenMatched,
+) => {
+  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+    ({ value, compareArray, valueWhenMatched } = value);
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError(
+      'matchSomeValue args(compareArray) is not array',
+    );
+  }
+
+  return _matchSomeValue(
+    value,
+    compareArray,
+    valueWhenMatched,
+  );
+};
+
+/**
+ * matchAll
+ */
+const _matchAll = (value, compareArray) => {
+  return _all(compareArray, compare => {
+    return _match(value, compare);
+  });
+};
+
+const matchAll = (
+  value,
+  compareArray,
+) => {
+  if (_inProperty(value, 'value,compareArray')) {
+    ({ value, compareArray } = value);
+  }
+
   if (!_isArray(compareArray)) {
     throw new TypeError(
       'matchAll args(compareArray) is not array',
     );
   }
 
-  return _matchAll(valueArray, compareArray);
+  return _matchAll(value, compareArray);
 };
 
 /**
- * matchSome
+ * allMatchAll
  */
-const _matchSomeIndex = (
+const _allMatchAll = (
   valueArray,
   compareArray,
 ) => {
-  let result = -1;
-  for (let i = 0, l = valueArray.length; i < l; i += 1) {
-    if (_match(valueArray[i], compareArray)) {
-      result = i;
-      break;
-    }
-  }
-  return result;
+  return _all(valueArray, value => {
+    return _matchAll(value, compareArray);
+  });
 };
 
-const _matchSome = (
-  valueArray,
-  compareArray,
-) => {
-  return _matchSomeIndex(
-    valueArray,
-    compareArray,
-  ) !== -1;
-};
-
-const matchSomeIndex = (
+const allMatchAll = (
   valueArray,
   compareArray,
 ) => {
@@ -155,102 +320,123 @@ const matchSomeIndex = (
 
   if (!_isArray(valueArray)) {
     throw new TypeError(
-      'matchSomeIndex args(valueArray) is not array',
+      'allMatchAll args(valueArray) is not array',
     );
   }
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'matchSomeIndex args(compareArray) is not array',
+      'allMatchAll args(compareArray) is not array',
     );
   }
 
-  return _matchSomeIndex(valueArray, compareArray);
+  return _allMatchAll(valueArray, compareArray);
 };
 
-const matchSome = (
+
+/**
+ * indexOfMatchAll
+ */
+const _indexOfMatchAll = (
   valueArray,
   compareArray,
 ) => {
-  return matchSomeIndex(
+  return _findFirstIndex(valueArray, value => {
+    return _matchAll(value, compareArray);
+  });
+};
+
+const indexOfMatchAll = (
+  valueArray,
+  compareArray,
+) => {
+  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+    ({ valueArray, compareArray } = valueArray);
+  }
+
+  if (!_isArray(valueArray)) {
+    throw new TypeError(
+      'indexOfMatchAll args(valueArray) is not array',
+    );
+  }
+  if (!_isArray(compareArray)) {
+    throw new TypeError(
+      'indexOfMatchAll args(compareArray) is not array',
+    );
+  }
+
+  return _indexOfMatchAll(valueArray, compareArray);
+};
+
+/**
+ * someMatchAll
+ */
+const _someMatchAll = (
+  valueArray,
+  compareArray,
+) => {
+  return _indexOfMatchAll(
+    valueArray,
+    compareArray,
+  ) !== -1;
+};
+
+const someMatchAll = (
+  valueArray,
+  compareArray,
+) => {
+  return indexOfMatchAll(
     valueArray,
     compareArray,
   ) !== -1;
 };
 
 /**
- * matchValue
+ * matchAllValue
  */
-const _matchValue = (
+const _matchAllValue = (
   value,
   compareArray,
-  inMatchValue,
+  valueWhenMatched,
 ) => {
-  if (_match(value, compareArray)) {
-    return inMatchValue;
+  if (_matchAll(value, compareArray)) {
+    return valueWhenMatched;
   }
   return value;
 };
 
-const matchValue = (
+const matchAllValue = (
   value,
   compareArray,
-  inMatchValue,
+  valueWhenMatched,
 ) => {
-  if (_inProperty(value, 'value,compareArray,inMatchValue')) {
-    ({ value, compareArray, inMatchValue } = value);
+  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+    ({ value, compareArray, valueWhenMatched } = value);
   }
 
   if (!_isArray(compareArray)) {
     throw new TypeError(
-      'matchValue args(compareArray) is not array',
+      'matchAllValue args(compareArray) is not array',
     );
   }
 
-  return _matchValue(
+  return _matchAllValue(
     value,
     compareArray,
-    inMatchValue,
+    valueWhenMatched,
   );
 };
-
-/**
- * initialValue
- */
-const _initialValue = (
-  value,
-  inMatchValue,
-) => {
-  if (_match(value, [_isUndefined])) {
-    return inMatchValue;
-  }
-  return value;
-};
-
-const initialValue = (
-  value,
-  inMatchValue,
-) => {
-  if (_inProperty(value, 'value,inMatchValue')) {
-    ({ value, inMatchValue } = value);
-  }
-
-  return _initialValue(
-    value,
-    inMatchValue,
-  );
-};
-
-const matchEvery = matchAll;
-const matchAnyIndex = matchSomeIndex;
-const matchAny = matchSome;
 
 module.exports = {
   _match, _matchValue, _initialValue,
-  _matchAll, _matchSomeIndex, _matchSome,
+  _matchSome, _matchSomeValue,
+  _allMatchSome, _indexOfMatchSome, _someMatchSome,
+  _matchAll, _matchAllValue,
+  _allMatchAll, _indexOfMatchAll, _someMatchAll,
 
   match, matchValue, initialValue,
-  matchAll, matchSomeIndex, matchSome,
-
-  matchEvery, matchAnyIndex, matchAny,
+  matchSome, matchSomeValue,
+  allMatchSome, indexOfMatchSome, someMatchSome,
+  matchAll, matchAllValue,
+  allMatchAll, indexOfMatchAll, someMatchAll,
 
 };
