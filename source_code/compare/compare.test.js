@@ -27,6 +27,7 @@ const test_execute_compare = (parts) => {
       allMatchSome, someMatchSome, indexOfMatchSome,
       matchAll, matchAllValue,
       allMatchAll, someMatchAll, indexOfMatchAll,
+      includes, includesSome, includesAll,
     } = parts.compare;
 
     const {
@@ -1026,10 +1027,16 @@ const test_execute_compare = (parts) => {
 
     const test_matchValue = () => {
       it(test_matchValue.name, () => {
-        // almost test_match done
-        checkEqual('123',       matchValue('123', null, 999));
-        checkEqual(undefined,   matchValue(undefined, null, 999));
-        checkEqual(999,         matchValue(null, null, 999));
+        checkEqual('',          matchValue('', null,       999));
+        checkEqual(999,         matchValue('', '',       999));
+        checkEqual('123',       matchValue('123', null,       999));
+        checkEqual('123',       matchValue('123', undefined,  999));
+        checkEqual('123',       matchValue('123', 123,        999));
+        checkEqual(999,         matchValue('123', '123',      999));
+        checkEqual(undefined,   matchValue(undefined, null,       999));
+        checkEqual(999,         matchValue(undefined, undefined,  999));
+        checkEqual(999,         matchValue(null, null,      999));
+        checkEqual(null,        matchValue(null, undefined, 999));
 
         checkEqual('123', matchValue({
           value: '123',
@@ -1054,7 +1061,7 @@ const test_execute_compare = (parts) => {
 
     const test_initialValue = () => {
       it(test_initialValue.name, () => {
-        // almost test_match done
+        // almost test_matchSome done
         checkEqual('123', initialValue('123', 999));
         checkEqual(999,  initialValue(undefined, 999));
         checkEqual(null,  initialValue(null, 999));
@@ -1251,7 +1258,7 @@ const test_execute_compare = (parts) => {
 
     const test_matchSomeValue = () => {
       it(test_matchSomeValue.name, () => {
-        // almost test_match done
+        // almost test_matchSome done
         checkEqual(999, matchSomeValue(99, [99], 999));
         checkEqual(98,  matchSomeValue(98, [99], 999));
 
@@ -1544,7 +1551,6 @@ const test_execute_compare = (parts) => {
 
     const test_matchAllValue = () => {
       it(test_matchAllValue.name, () => {
-        // almost test_match done
         checkEqual(999, matchAllValue(99, [99], 999));
         checkEqual(98,  matchAllValue(98, [99], 999));
         checkEqual(999,  matchAllValue(100, [
@@ -1696,6 +1702,266 @@ const test_execute_compare = (parts) => {
       });
     };
 
+
+    const test_includes = () => {
+      it(test_includes.name, () => {
+        // string.includes strange empty string
+        checkEqual(true,  'abc'.includes(''));
+        checkEqual(false, 'abc'.includes(null));
+        checkEqual(false, 'abc'.includes(undefined));
+        checkEqual(false, 'abc'.includes());
+
+        checkEqual(false, includes('abc', ''));
+        checkEqual(true,  includes('abc', 'a'));
+        checkEqual(true,  includes('abc', 'b'));
+        checkEqual(false, includes('abc', 'd'));
+        checkEqual(false, includes('', ''));
+        checkEqual(false, includes('', 'a'));
+
+        checkEqual(false, includes([], null));
+        checkEqual(false, includes([], undefined));
+        checkEqual(false, includes([], []));
+        checkEqual(true,  includes([0, 1, 2], 0));
+        checkEqual(false, includes([0, 1, 2], 4));
+        checkEqual(false, includes([0, 1, 2], []));
+
+        checkEqual(false, includes({
+          value: 'abc',
+          compare: '',
+        }));
+        checkEqual(true, includes({
+          value: 'abc',
+          compare: 'c',
+        }));
+        checkEqual(false, includes({
+          value: [],
+          compare: null,
+        }));
+        checkEqual(true,  includes({
+          value: [0, 1],
+          compare: 0,
+        }));
+
+      });
+    };
+
+    const test_includesSome = () => {
+      it(test_includesSome.name, () => {
+
+        checkEqual(false, includesSome('abc', ['']));
+        checkEqual(true,  includesSome('abc', ['', 'a']));
+        checkEqual(false, includesSome('abc', ['', 'd']));
+        checkEqual(true,  includesSome('abc', ['a']));
+        checkEqual(true,  includesSome('abc', ['b']));
+        checkEqual(false, includesSome('abc', ['d']));
+        checkEqual(true,  includesSome('abc', ['d', 'a']));
+        checkEqual(true,  includesSome('abc', ['a', 'd']));
+        checkEqual(false, includesSome('abc', ['e', 'd']));
+
+        checkEqual(false, includesSome([], [null]));
+        checkEqual(false, includesSome([], [undefined]));
+        checkEqual(false, includesSome([], []));
+        checkEqual(false, includesSome([0, 1, 2], []));
+        checkEqual(true,  includesSome([0, 1, 2], [0]));
+        checkEqual(false, includesSome([0, 1, 2], [4]));
+        checkEqual(true,  includesSome([0, 1, 2], [0, 4]));
+        checkEqual(true,  includesSome([0, 1, 2], [0, 1]));
+        checkEqual(false, includesSome([0, 1, 2], [4, 5]));
+
+        checkEqual(false, includesSome({
+          value: 'abc',
+          compareArray: [''],
+        }));
+        checkEqual(true, includesSome({
+          value: 'abc',
+          compareArray: ['c'],
+        }));
+        checkEqual(false, includesSome({
+          value: [],
+          compareArray: [null],
+        }));
+        checkEqual(true,  includesSome({
+          value: [0, 1],
+          compareArray: [0],
+        }));
+
+        // exception
+        checkEqual(false, isThrown(
+          () => {
+            includesSome('abc', ['a']);
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome('abc', 'a');
+          },
+        ));
+
+        checkEqual(false, isThrown(
+          () => {
+            includesSome([0, 1, 2], [0, 10]);
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome([0, 1, 2], 0);
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome(0, [0, 10]);
+          },
+        ));
+
+        checkEqual(false, isThrown(
+          () => {
+            includesSome({
+              value: 'abc', compareArray: ['a'],
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome({
+              value: 'abc', compareArray: 'a',
+            });
+          },
+        ));
+
+        checkEqual(false, isThrown(
+          () => {
+            includesSome({
+              value: [0, 1, 2], compareArray: [0, 10],
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome({
+              value: [0, 1, 2], compareArray: 0,
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome({
+              value: 0, compareArray: [0, 10],
+            });
+          },
+        ));
+
+      });
+    };
+
+    const test_includesAll = () => {
+      it(test_includesAll.name, () => {
+
+        checkEqual(false, includesAll('abc', ['']));
+        checkEqual(false, includesAll('abc', ['', 'a']));
+        checkEqual(false, includesAll('abc', ['', 'd']));
+        checkEqual(true,  includesAll('abc', ['a']));
+        checkEqual(true,  includesAll('abc', ['b']));
+        checkEqual(false, includesAll('abc', ['d']));
+        checkEqual(false, includesAll('abc', ['d', 'a']));
+        checkEqual(false, includesAll('abc', ['a', 'd']));
+        checkEqual(false, includesAll('abc', ['e', 'd']));
+        checkEqual(true,  includesAll('abc', ['c', 'a']));
+
+        checkEqual(false, includesAll([], [null]));
+        checkEqual(false, includesAll([], [undefined]));
+        checkEqual(false, includesAll([], []));
+        checkEqual(false, includesAll([0, 1, 2], []));
+        checkEqual(true,  includesAll([0, 1, 2], [0]));
+        checkEqual(false, includesAll([0, 1, 2], [4]));
+        checkEqual(false, includesAll([0, 1, 2], [0, 4]));
+        checkEqual(true,  includesAll([0, 1, 2], [0, 1]));
+        checkEqual(false, includesAll([0, 1, 2], [4, 5]));
+
+        checkEqual(false, includesAll({
+          value: 'abc',
+          compareArray: [''],
+        }));
+        checkEqual(true, includesAll({
+          value: 'abc',
+          compareArray: ['c'],
+        }));
+        checkEqual(false, includesAll({
+          value: [],
+          compareArray: [null],
+        }));
+        checkEqual(true,  includesAll({
+          value: [0, 1],
+          compareArray: [0],
+        }));
+
+        // exception
+        checkEqual(false, isThrown(
+          () => {
+            includesAll('abc', ['a']);
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesAll('abc', 'a');
+          },
+        ));
+
+        checkEqual(false, isThrown(
+          () => {
+            includesAll([0, 1, 2], [0, 10]);
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesAll([0, 1, 2], 0);
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesAll(0, [0, 10]);
+          },
+        ));
+
+        checkEqual(false, isThrown(
+          () => {
+            includesAll({
+              value: 'abc', compareArray: ['a'],
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesAll({
+              value: 'abc', compareArray: 'a',
+            });
+          },
+        ));
+
+        checkEqual(false, isThrown(
+          () => {
+            includesAll({
+              value: [0, 1, 2], compareArray: [0, 10],
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesAll({
+              value: [0, 1, 2], compareArray: 0,
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesAll({
+              value: 0, compareArray: [0, 10],
+            });
+          },
+        ));
+
+      });
+    };
+
     test_equal();
     test_equal_object();
     test_equal_array();
@@ -1735,6 +2001,9 @@ const test_execute_compare = (parts) => {
     test_someMatchAll();
     test_indexOfMatchAll();
 
+    test_includes();
+    test_includesSome();
+    test_includesAll();
 
   });
 };

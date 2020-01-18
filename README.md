@@ -100,6 +100,10 @@ You can now use the functions of the parts object.
 
 ## Version
 
+### 3.5.0
+#### 2020/01/18(Sat)
+- add includes includesSome inclludesAll
+
 ### 3.4.0
 #### 2020/01/15(Wed)
 - delete isEmpty

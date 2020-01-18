@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '3.4.0';
+const VERSION = '3.5.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -83,6 +83,7 @@ propertyNames.COMPARE =
   'allMatchSome, indexOfMatchSome, someMatchSome,' +
   'matchAll, matchAllValue,' +
   'allMatchAll, indexOfMatchAll, someMatchAll,' +
+  'includes, includesSome, includesAll,' +
   '';
 const compare = _copyProperty(_compare, propertyNames.COMPARE);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames);
