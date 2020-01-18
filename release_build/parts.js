@@ -113,11 +113,11 @@ var _type = __webpack_require__(5);
 
 var _test = __webpack_require__(17);
 
-var _syntax = __webpack_require__(29);
+var _syntax = __webpack_require__(30);
 
 var _compare = __webpack_require__(24);
 
-var _convert = __webpack_require__(30);
+var _convert = __webpack_require__(31);
 
 var _number = __webpack_require__(20);
 
@@ -127,9 +127,9 @@ var _object = __webpack_require__(14);
 
 var _array = __webpack_require__(18);
 
-var _consoleHook = __webpack_require__(31);
+var _consoleHook = __webpack_require__(32);
 
-var VERSION = '3.4.0';
+var VERSION = '3.5.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -173,7 +173,7 @@ var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames); // compare
 
 
-propertyNames.COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match, matchValue, initialValue,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + '';
+propertyNames.COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match, matchValue, initialValue,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + 'includes, includesSome, includesAll,' + '';
 
 var compare = _copyProperty(_compare, propertyNames.COMPARE);
 
@@ -3281,7 +3281,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(23), {}, __webpack_require__(9), {}, __webpack_require__(28));
+module.exports = _objectSpread({}, __webpack_require__(23), {}, __webpack_require__(9), {}, __webpack_require__(29));
 
 /***/ }),
 /* 23 */
@@ -3651,7 +3651,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(25), {}, __webpack_require__(26), {}, __webpack_require__(27));
+module.exports = _objectSpread({}, __webpack_require__(25), {}, __webpack_require__(26), {}, __webpack_require__(27), {}, __webpack_require__(28));
 
 /***/ }),
 /* 25 */
@@ -4115,6 +4115,136 @@ module.exports = {
 
 /***/ }),
 /* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    _isUndefined = _require._isUndefined,
+    _isNull = _require._isNull,
+    _isNaNStrict = _require._isNaNStrict,
+    _isBoolean = _require._isBoolean,
+    _isNumber = _require._isNumber,
+    _isInteger = _require._isInteger,
+    _isString = _require._isString,
+    _isFunction = _require._isFunction,
+    _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
+    _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
+    _isDate = _require._isDate,
+    _isRegExp = _require._isRegExp,
+    _isException = _require._isException,
+    _isMap = _require._isMap,
+    _isWeakMap = _require._isWeakMap,
+    _isSet = _require._isSet,
+    _isWeakSet = _require._isWeakSet;
+
+var _require2 = __webpack_require__(14),
+    _copyProperty = _require2._copyProperty,
+    _propertyCount = _require2._propertyCount,
+    _inProperty = _require2._inProperty;
+
+var _require3 = __webpack_require__(19),
+    _some = _require3._some,
+    _all = _require3._all,
+    _findFirstIndex = _require3._findFirstIndex;
+/**
+ * includes
+ */
+
+
+var _includes = function _includes(value, compare) {
+  if (_isString(value)) {
+    if (compare === '') {
+      return false;
+    }
+
+    return value.includes(compare);
+  } else if (_isArray(value)) {
+    return value.includes(compare);
+  }
+};
+
+var includes = function includes(value, compare) {
+  if (_inProperty(value, 'value, compare')) {
+    var _value = value;
+    value = _value.value;
+    compare = _value.compare;
+  }
+
+  if (_isString(value)) {
+    if (!_isString(compare)) {
+      throw new TypeError('includes args(compare) is not string');
+    }
+  } else if (_isArray(value)) {//
+  } else {
+    throw new TypeError('includes args(value) is not [string|array]');
+  }
+
+  return _includes(value, compare);
+};
+/**
+ * includesSome
+ */
+
+
+var _includesSome = function _includesSome(value, compareArray) {
+  return _some(compareArray, function (compare) {
+    return _includes(value, compare);
+  });
+};
+
+var includesSome = function includesSome(value, compareArray) {
+  if (_inProperty(value, 'value,compareArray')) {
+    var _value2 = value;
+    value = _value2.value;
+    compareArray = _value2.compareArray;
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('includesSome args(compareArray) is not array');
+  }
+
+  return _includesSome(value, compareArray);
+};
+/**
+ * includesAll
+ */
+
+
+var _includesAll = function _includesAll(value, compareArray) {
+  return _all(compareArray, function (compare) {
+    return _includes(value, compare);
+  });
+};
+
+var includesAll = function includesAll(value, compareArray) {
+  if (_inProperty(value, 'value,compareArray')) {
+    var _value3 = value;
+    value = _value3.value;
+    compareArray = _value3.compareArray;
+  }
+
+  if (!_isArray(compareArray)) {
+    throw new TypeError('includesAll args(compareArray) is not array');
+  }
+
+  return _includesAll(value, compareArray);
+};
+
+module.exports = {
+  _includes: _includes,
+  _includesSome: _includesSome,
+  _includesAll: _includesAll,
+  includes: includes,
+  includesSome: includesSome,
+  includesAll: includesAll
+};
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4672,7 +4802,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4727,7 +4857,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4964,7 +5094,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5300,7 +5430,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

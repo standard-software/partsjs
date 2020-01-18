@@ -30,7 +30,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '3.4.0';
+var VERSION = '3.5.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -74,7 +74,7 @@ var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames); // compare
 
 
-propertyNames.COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match, matchValue, initialValue,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + '';
+propertyNames.COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match, matchValue, initialValue,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + 'includes, includesSome, includesAll,' + '';
 
 var compare = _copyProperty(_compare, propertyNames.COMPARE);
 
