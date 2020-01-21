@@ -10,8 +10,8 @@ const {
 } = require('../compare/compare.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _map,
@@ -249,7 +249,7 @@ const matchFormat = (
   formatName,
   value,
 ) => {
-  if (_inProperty(formatName, 'formatName,value')) {
+  if (isObjectParameter(formatName, 'formatName,value')) {
     ({ formatName, value } = formatName);
   }
 
@@ -298,7 +298,7 @@ const includes = (
   value,
   compareArray,
 ) => {
-  if (_inProperty(value, 'value, compareArray')) {
+  if (isObjectParameter(value, 'value, compareArray')) {
     ({ value, compareArray } = value);
   }
 
@@ -334,7 +334,7 @@ const repeat = (
   value,
   count,
 ) => {
-  if (_inProperty(value, 'value, count')) {
+  if (isObjectParameter(value, 'value, count')) {
     ({ value, count } = value);
   }
 

@@ -10,8 +10,8 @@ const {
 } = require('../number/number.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _clone, _cloneDeep,
@@ -276,7 +276,7 @@ const _filter = (array, func) => {
 };
 
 const filter = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -306,7 +306,7 @@ const _map = (array, func) => {
 };
 
 const map = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -343,7 +343,7 @@ const _count = (array, func) => {
 };
 
 const count = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -379,7 +379,7 @@ const _findFirstIndex = (array, func) => {
 };
 
 const findFirstIndex = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -417,7 +417,7 @@ const _findLastIndex = (array, func) => {
 };
 
 const findLastIndex = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -448,7 +448,7 @@ const _findFirst = (array, func) => {
 };
 
 const findFirst = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -479,7 +479,7 @@ const _findLast = (array, func) => {
 };
 
 const findLast = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -506,7 +506,7 @@ const _some = (array, func) => {
 };
 
 const some = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 
@@ -535,7 +535,7 @@ const _all = (array, func) => {
 };
 
 const all = (array, func) => {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
 

@@ -20,7 +20,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _copyProperty, _propertyCount, _inProperty,
+  _copyProperty,
+  isObjectParameter,
 } = require('../object/object.js');
 
 /**
@@ -241,7 +242,7 @@ _equal.reset = () => {
 _equal.reset();
 
 const equal = (value1, value2) => {
-  if (_inProperty(value1, 'value1, value2')) {
+  if (isObjectParameter(value1, 'value1, value2')) {
     ({ value1, value2 } = value1);
   }
 
@@ -311,7 +312,7 @@ _equalDeep.reset = () => {
 _equalDeep.reset();
 
 const equalDeep = (value1, value2) => {
-  if (_inProperty(value1, 'value1,value2')) {
+  if (isObjectParameter(value1, 'value1,value2')) {
     ({ value1, value2 } = value1);
   }
 

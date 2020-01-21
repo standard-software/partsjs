@@ -10,8 +10,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _copyProperty, _propertyCount, _inProperty,
-} = require('../object/object.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 /**
  * or
@@ -26,7 +26,7 @@ const _or = (value, compareArray) => {
 };
 
 const or = (value, compareArray) => {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 

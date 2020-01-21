@@ -10,8 +10,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _copyProperty, _propertyCount, _inProperty,
-} = require('../object/object.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _some, _all,
@@ -57,7 +57,7 @@ const match = (
   value,
   compare,
 ) => {
-  if (_inProperty(value, 'value, compare')) {
+  if (isObjectParameter(value, 'value, compare')) {
     ({ value, compare } = value);
   }
 
@@ -83,7 +83,7 @@ const matchValue = (
   compare,
   valueWhenMatched,
 ) => {
-  if (_inProperty(value, 'value, compare, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compare, valueWhenMatched')) {
     ({ value, compare, valueWhenMatched } = value);
   }
 
@@ -108,7 +108,7 @@ const initialValue = (
   value,
   valueWhenMatched,
 ) => {
-  if (_inProperty(value, 'value, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, valueWhenMatched')) {
     ({ value, valueWhenMatched } = value);
   }
 
@@ -131,7 +131,7 @@ const matchSome = (
   value,
   compareArray,
 ) => {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 
@@ -160,7 +160,7 @@ const allMatchSome = (
   valueArray,
   compareArray,
 ) => {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     ({ valueArray, compareArray } = valueArray);
   }
 
@@ -195,7 +195,7 @@ const indexOfMatchSome = (
   valueArray,
   compareArray,
 ) => {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     ({ valueArray, compareArray } = valueArray);
   }
 
@@ -255,7 +255,7 @@ const matchSomeValue = (
   compareArray,
   valueWhenMatched,
 ) => {
-  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
     ({ value, compareArray, valueWhenMatched } = value);
   }
 
@@ -285,7 +285,7 @@ const matchAll = (
   value,
   compareArray,
 ) => {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 
@@ -314,7 +314,7 @@ const allMatchAll = (
   valueArray,
   compareArray,
 ) => {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     ({ valueArray, compareArray } = valueArray);
   }
 
@@ -349,7 +349,7 @@ const indexOfMatchAll = (
   valueArray,
   compareArray,
 ) => {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     ({ valueArray, compareArray } = valueArray);
   }
 
@@ -409,7 +409,7 @@ const matchAllValue = (
   compareArray,
   valueWhenMatched,
 ) => {
-  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
     ({ value, compareArray, valueWhenMatched } = value);
   }
 

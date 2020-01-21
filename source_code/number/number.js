@@ -6,8 +6,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _copyProperty, _propertyCount, _inProperty,
-} = require('../object/object.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 /**
  * isMultiples isEven isOdd
@@ -17,7 +17,7 @@ const _isMultiples = (number, radix) => {
 };
 
 const isMultiples = (number, radix) => {
-  if (_inProperty(number, 'number,radix')) {
+  if (isObjectParameter(number, 'number,radix')) {
     ({ number, radix } = number);
   }
 
@@ -57,7 +57,7 @@ const _round = (value, digit = 0) => {
 };
 
 const round = (value, digit = 0) => {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     ({ value, digit = 0 } = value);
   }
 
@@ -82,7 +82,7 @@ const _nearEqual = (value1, value2, diff) => {
 };
 
 const nearEqual = (value1, value2, diff) => {
-  if (_inProperty(value1, 'value1,value2,diff')) {
+  if (isObjectParameter(value1, 'value1,value2,diff')) {
     ({ value1, value2, diff } = value1);
   }
 
@@ -122,7 +122,7 @@ const _inRange = (value, from, to) => {
 };
 
 const inRange = (value, from, to) => {
-  if (_inProperty(value, 'value,from,to')) {
+  if (isObjectParameter(value, 'value,from,to')) {
     ({ value, from, to } = value);
   }
 
@@ -158,7 +158,7 @@ const _randomInt = (min, max) => {
 };
 
 const randomInt = (min, max) => {
-  if (_inProperty(min, 'min,max')) {
+  if (isObjectParameter(min, 'min,max')) {
     ({ min, max } = min);
   }
 

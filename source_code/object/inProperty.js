@@ -6,8 +6,44 @@ const {
 } = require('../type/_isType.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  _replaceAll,
+} = require('../string/_replaceAll.js');
+
+/**
+ * _inProperty
+ */
+const _inProperty = (object, propertyArray, hasOwn = true) => {
+
+  if (!_isObject(object)) {
+    return false;
+  }
+
+  if (_isString(propertyArray)) {
+    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  }
+
+  for (let i = 0; i < propertyArray.length; i += 1) {
+    if ((propertyArray[i] === '')
+    || (_isUndefined(propertyArray[i]))) {
+      continue;
+    }
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError(
+        '_inProperty args(propertyArray) element is not string',
+      );
+    }
+    if (hasOwn) {
+      if (!object.hasOwnProperty(propertyArray[i])) {
+        return false;
+      }
+    } else {
+      if (!(propertyArray[i] in object)) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
 
 /**
  * inProperty
@@ -42,6 +78,8 @@ const inProperty = (object, propertyArray, hasOwn = true) => {
 const inProp = inProperty;
 
 module.exports = {
+  _inProperty,
+
   inProperty,
   inProp,
 };

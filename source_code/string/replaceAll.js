@@ -6,15 +6,15 @@ const {
 } = require('../type/type.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _replaceAll,
 } = require('../string/_replaceAll.js');
 
 const replaceAll = (str, before, after) => {
-  if (_inProperty(str, 'str, before, after')) {
+  if (isObjectParameter(str, 'str, before, after')) {
     ({ str, before, after } = str);
   }
 

@@ -10,8 +10,8 @@ const {
 } = require('../number/number.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _clone, _cloneDeep,
@@ -34,7 +34,7 @@ const insert = (
   values,
   index = 0,
 ) => {
-  if (_inProperty(array, 'array, values, index')) {
+  if (isObjectParameter(array, 'array, values, index')) {
     ({ array, values, index } = array);
   }
 
@@ -79,7 +79,7 @@ const add = (
   values,
   index = array.length - 1,
 ) => {
-  if (_inProperty(array, 'array, values, index')) {
+  if (isObjectParameter(array, 'array, values, index')) {
     ({ array, values, index } = array);
   }
 
@@ -124,7 +124,7 @@ const deleteLength = (
   index,
   deleteCount = 1,
 ) => {
-  if (_inProperty(array, 'array, index, length')) {
+  if (isObjectParameter(array, 'array, index, length')) {
     ({ array, index, length: deleteCount } = array);
   }
 

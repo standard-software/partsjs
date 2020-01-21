@@ -10,8 +10,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _copyProperty, _propertyCount, _inProperty,
-} = require('../object/object.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _some, _all,
@@ -36,7 +36,7 @@ const includes = (
   value,
   compare,
 ) => {
-  if (_inProperty(value, 'value, compare')) {
+  if (isObjectParameter(value, 'value, compare')) {
     ({ value, compare } = value);
   }
 
@@ -70,7 +70,7 @@ const includesSome = (
   value,
   compareArray,
 ) => {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 
@@ -96,7 +96,7 @@ const includesAll = (
   value,
   compareArray,
 ) => {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
 

@@ -20,8 +20,8 @@ const {
 } = require('../string/string.js');
 
 const {
-  _copyProperty, _propertyCount, _inProperty,
-} = require('../object/object.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _round,
@@ -43,7 +43,7 @@ const numberToString = (
   value,
   radix = 10,
 ) => {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     ({ value, radix = 10 } = value);
   }
 
@@ -106,7 +106,7 @@ const _stringToNumber = (
 const stringToNumber = (
   value,
 ) => {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     ({ value } = value);
   }
 
@@ -135,7 +135,7 @@ const stringToNumberDefault = (
   value,
   defaultValue,
 ) => {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     ({ value, defaultValue } = value);
   }
 
@@ -192,7 +192,7 @@ const stringToInteger = (
   value,
   radix = 10,
 ) => {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     ({ value, radix = 10 } = value);
   }
 
@@ -235,7 +235,7 @@ const stringToIntegerDefault = (
   defaultValue,
   radix = 10,
 ) => {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     ({ value, defaultValue, radix = 10 } = value);
   }
 
@@ -276,7 +276,7 @@ const toNumber = (value) => {
 };
 
 const toNumberDefault = (value, defaultValue) => {
-  if (_inProperty(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value,defaultValue')) {
     ({ value, defaultValue } = value);
   }
 
@@ -299,7 +299,7 @@ const toInteger = (value) => {
 };
 
 const toIntegerDefault = (value, defaultValue) => {
-  if (_inProperty(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value,defaultValue')) {
     ({ value, defaultValue } = value);
   }
 

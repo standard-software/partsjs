@@ -9,8 +9,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 const {
   _replaceAll,
@@ -41,7 +41,7 @@ const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 };
 
 const copyProperty = (fromObject, propertyArray, toObject = {}) => {
-  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
+  if (isObjectParameter(fromObject, 'fromObject,propertyArray')) {
     ({ fromObject, propertyArray, toObject = {} } = fromObject);
   }
 
@@ -112,7 +112,7 @@ const _getProperty = (
 };
 
 const getProperty = (object, propertyPath) => {
-  if (_inProperty(object, 'object, propertyPath')) {
+  if (isObjectParameter(object, 'object, propertyPath')) {
     ({ object, propertyPath } = object);
   }
 
@@ -158,7 +158,7 @@ const _setProperty = (object, path, value) => {
 };
 
 const setProperty = (object, propertyPath, value) => {
-  if (_inProperty(object, 'object, propertyPath, value')) {
+  if (isObjectParameter(object, 'object, propertyPath, value')) {
     ({ object, propertyPath, value } = object);
   }
 

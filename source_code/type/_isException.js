@@ -3,8 +3,8 @@ const {
 } = require('../type/_isType.js');
 
 const {
-  _inProperty,
-} = require('../object/_inProperty.js');
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 /**
  * _isException
@@ -14,7 +14,7 @@ const {
  *  Only whether the object has name and message properties.
  */
 const _isException = (value) => {
-  if (_inProperty(value, 'name,message')) {
+  if (isObjectParameter(value, 'name,message')) {
     return true;
   } else if (_isError(value)) {
     return true;

@@ -135,6 +135,7 @@ _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 
 // object
 propertyNames.OBJECT_PUBLIC =
+  'isObjectParameter,' +
   'copyProperty,propertyCount,inProperty,' +
   'getProperty,setProperty,' +
   'isEmptyObject,' +

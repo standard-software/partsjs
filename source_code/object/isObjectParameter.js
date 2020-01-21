@@ -10,9 +10,9 @@ const {
 } = require('../string/_replaceAll.js');
 
 /**
- * _inProperty
+ * isObjectParameter
  */
-const _inProperty = (object, propertyArray, hasOwn = true) => {
+const isObjectParameter = (object, propertyArray) => {
 
   if (!_isObject(object)) {
     return false;
@@ -29,22 +29,17 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
     }
     if (!_isString(propertyArray[i])) {
       throw new TypeError(
-        '_inProperty args(propertyArray) element is not string',
+        'isObjectParameter args(propertyArray) element is not string',
       );
     }
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
+
+    if (!object.hasOwnProperty(propertyArray[i])) {
+      return false;
     }
   }
   return true;
 };
 
 module.exports = {
-  _inProperty,
+  isObjectParameter,
 };
