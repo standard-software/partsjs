@@ -96,6 +96,7 @@ const propertyCount = (object) => {
 const _getProperty = (
   object,
   propertyPath,
+  hasOwn = true,
 ) => {
   let result = object;
   const propertyArray = propertyPath.split('.');
@@ -103,17 +104,29 @@ const _getProperty = (
     if (propertyArray[i] === '' ) {
       return undefined;
     }
+
+    if (hasOwn) {
+      if (!result.hasOwnProperty(propertyArray[i])) {
+        return undefined;
+      }
+    } else {
+      if (!(propertyArray[i] in result)) {
+        return undefined;
+      }
+    }
+
     if (_isUndefined(result[propertyArray[i]])) {
       return undefined;
     }
+
     result = result[propertyArray[i]];
   }
   return result;
 };
 
-const getProperty = (object, propertyPath) => {
+const getProperty = (object, propertyPath, hasOwn = true) => {
   if (isObjectParameter(object, 'object, propertyPath')) {
-    ({ object, propertyPath } = object);
+    ({ object, propertyPath, hasOwn = true } = object);
   }
 
   if (!_isObject(object)) {
@@ -126,8 +139,13 @@ const getProperty = (object, propertyPath) => {
       'getProperty args(propertyPath) is not string',
     );
   }
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError(
+      'getProperty args(hasOwn) is not boolean',
+    );
+  }
 
-  return _getProperty(object, propertyPath);
+  return _getProperty(object, propertyPath, hasOwn);
 };
 
 /**

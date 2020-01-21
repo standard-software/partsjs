@@ -77,6 +77,7 @@ const test_execute_object = (parts) => {
         var sourceObject = {
           a: '1', b: '2',
         };
+        checkEqual(false, inProperty(sourceObject, ''));
         checkEqual(true,  inProperty(sourceObject, 'a'));
         checkEqual(true,  inProperty(sourceObject, 'b'));
         checkEqual(false, inProperty(sourceObject, 'c'));
@@ -88,23 +89,23 @@ const test_execute_object = (parts) => {
         checkEqual(true,  inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
 
-        checkEqual(true,  inProperty(sourceObject, 'a,b,'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(true, inProperty(sourceObject, 'b,a,'));
+        checkEqual(false, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,'));
 
         // Object Named Parameter
         checkEqual(true,
           inProperty({
             object: sourceObject,
-            propertyArray: 'b,a,',
+            propertyPathArray: 'b,a',
           }),
         );
         checkEqual(false,
           inProperty({
             object: sourceObject,
-            propertyArray: 'd',
+            propertyPathArray: 'd',
           }),
         );
 
@@ -113,7 +114,7 @@ const test_execute_object = (parts) => {
           inProperty({}, 'a');
         }));
 
-        checkEqual(false, isThrown(() => {
+        checkEqual(true, isThrown(() => {
           inProperty(1, 'a');
         }));
 
@@ -153,10 +154,10 @@ const test_execute_object = (parts) => {
         checkEqual(true,  inProperty(sourceObject, 'b,a' ));
         checkEqual(false, inProperty(sourceObject, 'a,d' ));
 
-        checkEqual(true,  inProperty(sourceObject, 'a,b,' ));
+        checkEqual(false, inProperty(sourceObject, 'a,b,' ));
         checkEqual(false, inProperty(sourceObject, 'b,c,' ));
         checkEqual(false, inProperty(sourceObject, 'a,c,' ));
-        checkEqual(true,  inProperty(sourceObject, 'b,a,' ));
+        checkEqual(false, inProperty(sourceObject, 'b,a,' ));
         checkEqual(false, inProperty(sourceObject, 'a,d,' ));
 
         checkEqual(true,  inProperty(sourceObject, 'a', false));
@@ -170,11 +171,26 @@ const test_execute_object = (parts) => {
         checkEqual(true,  inProperty(sourceObject, 'b,a', false));
         checkEqual(true,  inProperty(sourceObject, 'a,d', false));
 
-        checkEqual(true,  inProperty(sourceObject, 'a,b,', false));
-        checkEqual(true,  inProperty(sourceObject, 'b,c,', false));
-        checkEqual(true,  inProperty(sourceObject, 'a,c,', false));
-        checkEqual(true,  inProperty(sourceObject, 'b,a,', false));
-        checkEqual(true,  inProperty(sourceObject, 'a,d,', false));
+        checkEqual(false,  inProperty(sourceObject, 'a,b,', false));
+        checkEqual(false,  inProperty(sourceObject, 'b,c,', false));
+        checkEqual(false,  inProperty(sourceObject, 'a,c,', false));
+        checkEqual(false,  inProperty(sourceObject, 'b,a,', false));
+        checkEqual(false,  inProperty(sourceObject, 'a,d,', false));
+
+        var sourceObject = {
+          a: '1', b: '2', c: { d: { e: 'E' } },
+        };
+        checkEqual(true,  inProperty(sourceObject, 'a'));
+        checkEqual(true,  inProperty(sourceObject, 'a,b'));
+        checkEqual(true,  inProperty(sourceObject, 'a,b,c'));
+        checkEqual(true,  inProperty(sourceObject, 'a,b,c.d'));
+        checkEqual(true,  inProperty(sourceObject, 'a,b,c.d.e'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.f'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d..e'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,.d'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.e,'));
 
       });
     };
@@ -213,6 +229,9 @@ const test_execute_object = (parts) => {
         checkEqual(undefined, getProperty(testObj1, 'a.b.c.d' ) );
         checkEqual(undefined, getProperty(testObj1, 'a.b.b'   ) );
         checkEqual(undefined, getProperty(testObj1, ''        ) );
+        checkEqual(undefined, getProperty(testObj1, '.'       ) );
+        checkEqual(undefined, getProperty(testObj1, '..'      ) );
+        checkEqual(undefined, getProperty(testObj1, 'a.b.c.'  ) );
         checkEqual(undefined, getProperty(testObj1, 'a.'      ) );
         checkEqual(undefined, getProperty(testObj1, '.a'      ) );
         checkEqual(undefined, getProperty(testObj1, 'a.c'     ) );

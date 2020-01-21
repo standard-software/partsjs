@@ -104,6 +104,7 @@ You can now use the functions of the parts object.
 #### 2020/01/21(Tue)
 - add includes includesSome inclludesAll
 - _inProperty >> isObjectParameter
+_ update getProperty inProperty
 
 ### 3.4.0
 #### 2020/01/15(Wed)

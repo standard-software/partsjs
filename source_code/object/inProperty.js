@@ -9,37 +9,40 @@ const {
   _replaceAll,
 } = require('../string/_replaceAll.js');
 
+const {
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
+
+const {
+  _getProperty,
+} = require('../object/object_common.js');
+
 /**
  * _inProperty
  */
-const _inProperty = (object, propertyArray, hasOwn = true) => {
+const _inProperty = (object, propertyPathArray, hasOwn = true) => {
 
   if (!_isObject(object)) {
     return false;
   }
 
-  if (_isString(propertyArray)) {
-    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  if (_isString(propertyPathArray)) {
+    propertyPathArray = _replaceAll(propertyPathArray, ' ', '').split(',');
   }
 
-  for (let i = 0; i < propertyArray.length; i += 1) {
-    if ((propertyArray[i] === '')
-    || (_isUndefined(propertyArray[i]))) {
-      continue;
-    }
-    if (!_isString(propertyArray[i])) {
+  for (let i = 0; i < propertyPathArray.length; i += 1) {
+    // if ((propertyPathArray[i] === '')
+    // || (_isUndefined(propertyPathArray[i]))) {
+    //   continue;
+    // }
+    if (!_isString(propertyPathArray[i])) {
       throw new TypeError(
         '_inProperty args(propertyArray) element is not string',
       );
     }
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
+    const result = _getProperty(object, propertyPathArray[i], hasOwn);
+    if (_isUndefined(result)) {
+      return false;
     }
   }
   return true;
@@ -48,17 +51,21 @@ const _inProperty = (object, propertyArray, hasOwn = true) => {
 /**
  * inProperty
  */
-const inProperty = (object, propertyArray, hasOwn = true) => {
-  if (_inProperty(object, 'object,propertyArray')) {
-    ({ object, propertyArray, hasOwn = true } = object);
+const inProperty = (object, propertyPathArray, hasOwn = true) => {
+  if (isObjectParameter(object, 'object, propertyPathArray')) {
+    ({ object, propertyPathArray, hasOwn = true } = object);
   }
 
-  // no object check
+  if (!_isObject(object)) {
+    throw new TypeError(
+      'inProperty args(fromObject) is not object',
+    );
+  }
 
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
+  if (!_isString(propertyPathArray)) {
+    if (!_isArray(propertyPathArray)) {
       throw new TypeError(
-        'inProperty args(propertyArray) is not [array|string]',
+        'inProperty args(propertyPathArray) is not [array|string]',
       );
     }
   }
@@ -70,7 +77,7 @@ const inProperty = (object, propertyArray, hasOwn = true) => {
 
   return _inProperty(
     object,
-    propertyArray,
+    propertyPathArray,
     hasOwn,
   );
 };

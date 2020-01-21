@@ -32,7 +32,7 @@ const test_execute_index = (parts) => {
         checkEqual(23,  propertyCount(parts.convert));
         checkEqual(7,   propertyCount(parts.number));
         checkEqual(6,   propertyCount(parts.string));
-        checkEqual(14,   propertyCount(parts.object));
+        checkEqual(14,  propertyCount(parts.object));
         checkEqual(25,  propertyCount(parts.array));
         checkEqual(true,
           inProperty(
@@ -64,7 +64,7 @@ const test_execute_index = (parts) => {
             'matchFormat,' +
             'copyProperty,propertyCount,inProperty,' +
             'copyProp,propCount,inProp,' +
-            '',
+            'root',
           ),
         );
 
