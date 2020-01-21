@@ -202,7 +202,7 @@ var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames); // object
 
 
-propertyNames.OBJECT_PUBLIC = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'isEmptyObject,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + 'isEmptyObj,' + '';
+propertyNames.OBJECT_PUBLIC = 'isObjectParameter,' + 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'isEmptyObject,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + 'isEmptyObj,' + '';
 propertyNames.OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'isEmptyObject,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + 'isEmptyObj,' + '';
 
 var object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
@@ -1248,7 +1248,7 @@ var _require = __webpack_require__(6),
     _isError = _require._isError;
 
 var _require2 = __webpack_require__(8),
-    _inProperty = _require2._inProperty;
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * _isException
  * description:
@@ -1259,7 +1259,7 @@ var _require2 = __webpack_require__(8),
 
 
 var _isException = function _isException(value) {
-  if (_inProperty(value, 'name,message')) {
+  if (isObjectParameter(value, 'name,message')) {
     return true;
   } else if (_isError(value)) {
     return true;
@@ -1302,13 +1302,11 @@ var _require = __webpack_require__(6),
 var _require2 = __webpack_require__(9),
     _replaceAll = _require2._replaceAll;
 /**
- * _inProperty
+ * isObjectParameter
  */
 
 
-var _inProperty = function _inProperty(object, propertyArray) {
-  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
+var isObjectParameter = function isObjectParameter(object, propertyArray) {
   if (!_isObject(object)) {
     return false;
   }
@@ -1323,17 +1321,11 @@ var _inProperty = function _inProperty(object, propertyArray) {
     }
 
     if (!_isString(propertyArray[i])) {
-      throw new TypeError('_inProperty args(propertyArray) element is not string');
+      throw new TypeError('isObjectParameter args(propertyArray) element is not string');
     }
 
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
+    if (!object.hasOwnProperty(propertyArray[i])) {
+      return false;
     }
   }
 
@@ -1341,7 +1333,7 @@ var _inProperty = function _inProperty(object, propertyArray) {
 };
 
 module.exports = {
-  _inProperty: _inProperty
+  isObjectParameter: isObjectParameter
 };
 
 /***/ }),
@@ -1769,7 +1761,7 @@ var _require = __webpack_require__(5),
     _isStringObject = _require._isStringObject;
 
 var _require2 = __webpack_require__(8),
-    _inProperty = _require2._inProperty;
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = __webpack_require__(9),
     _replaceAll = _require3._replaceAll;
@@ -1803,7 +1795,7 @@ var _copyProperty = function _copyProperty(fromObject, propertyArray) {
 var copyProperty = function copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
+  if (isObjectParameter(fromObject, 'fromObject,propertyArray')) {
     var _fromObject = fromObject;
     fromObject = _fromObject.fromObject;
     propertyArray = _fromObject.propertyArray;
@@ -1878,7 +1870,7 @@ var _getProperty = function _getProperty(object, propertyPath) {
 };
 
 var getProperty = function getProperty(object, propertyPath) {
-  if (_inProperty(object, 'object, propertyPath')) {
+  if (isObjectParameter(object, 'object, propertyPath')) {
     var _object = object;
     object = _object.object;
     propertyPath = _object.propertyPath;
@@ -1923,7 +1915,7 @@ var _setProperty = function _setProperty(object, path, value) {
 };
 
 var setProperty = function setProperty(object, propertyPath, value) {
-  if (_inProperty(object, 'object, propertyPath, value')) {
+  if (isObjectParameter(object, 'object, propertyPath, value')) {
     var _object2 = object;
     object = _object2.object;
     propertyPath = _object2.propertyPath;
@@ -2002,8 +1994,46 @@ var _require = __webpack_require__(6),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(8),
-    _inProperty = _require2._inProperty;
+var _require2 = __webpack_require__(9),
+    _replaceAll = _require2._replaceAll;
+/**
+ * _inProperty
+ */
+
+
+var _inProperty = function _inProperty(object, propertyArray) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (!_isObject(object)) {
+    return false;
+  }
+
+  if (_isString(propertyArray)) {
+    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  }
+
+  for (var i = 0; i < propertyArray.length; i += 1) {
+    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+      continue;
+    }
+
+    if (!_isString(propertyArray[i])) {
+      throw new TypeError('_inProperty args(propertyArray) element is not string');
+    }
+
+    if (hasOwn) {
+      if (!object.hasOwnProperty(propertyArray[i])) {
+        return false;
+      }
+    } else {
+      if (!(propertyArray[i] in object)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
 /**
  * inProperty
  */
@@ -2036,6 +2066,7 @@ var inProperty = function inProperty(object, propertyArray) {
 
 var inProp = inProperty;
 module.exports = {
+  _inProperty: _inProperty,
   inProperty: inProperty,
   inProp: inProp
 };
@@ -2267,7 +2298,7 @@ var _require2 = __webpack_require__(20),
     isEven = _require2.isEven;
 
 var _require3 = __webpack_require__(8),
-    _inProperty = _require3._inProperty;
+    isObjectParameter = _require3.isObjectParameter;
 
 var _require4 = __webpack_require__(4),
     _clone = _require4._clone,
@@ -2555,7 +2586,7 @@ var _filter = function _filter(array, func) {
 };
 
 var filter = function filter(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array = array;
     array = _array.array;
     func = _array.func;
@@ -2588,7 +2619,7 @@ var _map = function _map(array, func) {
 };
 
 var map = function map(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array2 = array;
     array = _array2.array;
     func = _array2.func;
@@ -2628,7 +2659,7 @@ var _count = function _count(array, func) {
 };
 
 var count = function count(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array3 = array;
     array = _array3.array;
     func = _array3.func;
@@ -2666,7 +2697,7 @@ var _findFirstIndex = function _findFirstIndex(array, func) {
 };
 
 var findFirstIndex = function findFirstIndex(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array4 = array;
     array = _array4.array;
     func = _array4.func;
@@ -2705,7 +2736,7 @@ var _findLastIndex = function _findLastIndex(array, func) {
 };
 
 var findLastIndex = function findLastIndex(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array5 = array;
     array = _array5.array;
     func = _array5.func;
@@ -2738,7 +2769,7 @@ var _findFirst = function _findFirst(array, func) {
 };
 
 var findFirst = function findFirst(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array6 = array;
     array = _array6.array;
     func = _array6.func;
@@ -2771,7 +2802,7 @@ var _findLast = function _findLast(array, func) {
 };
 
 var findLast = function findLast(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array7 = array;
     array = _array7.array;
     func = _array7.func;
@@ -2798,7 +2829,7 @@ var _some = function _some(array, func) {
 };
 
 var some = function some(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array8 = array;
     array = _array8.array;
     func = _array8.func;
@@ -2828,7 +2859,7 @@ var _all = function _all(array, func) {
 };
 
 var all = function all(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array9 = array;
     array = _array9.array;
     func = _array9.func;
@@ -2911,10 +2942,8 @@ var _require = __webpack_require__(5),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = __webpack_require__(14),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = __webpack_require__(8),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * isMultiples isEven isOdd
  */
@@ -2925,7 +2954,7 @@ var _isMultiples = function _isMultiples(number, radix) {
 };
 
 var isMultiples = function isMultiples(number, radix) {
-  if (_inProperty(number, 'number,radix')) {
+  if (isObjectParameter(number, 'number,radix')) {
     var _number = number;
     number = _number.number;
     radix = _number.radix;
@@ -2969,7 +2998,7 @@ var _round = function _round(value) {
 var round = function round(value) {
   var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value = value;
     value = _value.value;
     var _value$digit = _value.digit;
@@ -2996,7 +3025,7 @@ var _nearEqual = function _nearEqual(value1, value2, diff) {
 };
 
 var nearEqual = function nearEqual(value1, value2, diff) {
-  if (_inProperty(value1, 'value1,value2,diff')) {
+  if (isObjectParameter(value1, 'value1,value2,diff')) {
     var _value2 = value1;
     value1 = _value2.value1;
     value2 = _value2.value2;
@@ -3035,7 +3064,7 @@ var _inRange = function _inRange(value, from, to) {
 };
 
 var inRange = function inRange(value, from, to) {
-  if (_inProperty(value, 'value,from,to')) {
+  if (isObjectParameter(value, 'value,from,to')) {
     var _value3 = value;
     value = _value3.value;
     from = _value3.from;
@@ -3070,7 +3099,7 @@ var _randomInt = function _randomInt(min, max) {
 };
 
 var randomInt = function randomInt(min, max) {
-  if (_inProperty(min, 'min,max')) {
+  if (isObjectParameter(min, 'min,max')) {
     var _min = min;
     min = _min.min;
     max = _min.max;
@@ -3135,7 +3164,7 @@ var _require2 = __webpack_require__(20),
     _inRange = _require2._inRange;
 
 var _require3 = __webpack_require__(8),
-    _inProperty = _require3._inProperty;
+    isObjectParameter = _require3.isObjectParameter;
 
 var _require4 = __webpack_require__(4),
     _clone = _require4._clone,
@@ -3154,7 +3183,7 @@ var _insert = function _insert(array, values) {
 var insert = function insert(array, values) {
   var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-  if (_inProperty(array, 'array, values, index')) {
+  if (isObjectParameter(array, 'array, values, index')) {
     var _array = array;
     array = _array.array;
     values = _array.values;
@@ -3193,7 +3222,7 @@ var _add = function _add(array, values) {
 var add = function add(array, values) {
   var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - 1;
 
-  if (_inProperty(array, 'array, values, index')) {
+  if (isObjectParameter(array, 'array, values, index')) {
     var _array2 = array;
     array = _array2.array;
     values = _array2.values;
@@ -3232,7 +3261,7 @@ var _delete = function _delete(array, index) {
 var deleteLength = function deleteLength(array, index) {
   var deleteCount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
 
-  if (_inProperty(array, 'array, index, length')) {
+  if (isObjectParameter(array, 'array, index, length')) {
     var _array3 = array;
     array = _array3.array;
     index = _array3.index;
@@ -3309,7 +3338,7 @@ var _require2 = __webpack_require__(24),
     _matchSome = _require2._matchSome;
 
 var _require3 = __webpack_require__(8),
-    _inProperty = _require3._inProperty;
+    isObjectParameter = _require3.isObjectParameter;
 
 var _require4 = __webpack_require__(18),
     _map = _require4._map;
@@ -3504,7 +3533,7 @@ _matchFormat.reset = function () {
 _matchFormat.reset();
 
 var matchFormat = function matchFormat(formatName, value) {
-  if (_inProperty(formatName, 'formatName,value')) {
+  if (isObjectParameter(formatName, 'formatName,value')) {
     var _formatName = formatName;
     formatName = _formatName.formatName;
     value = _formatName.value;
@@ -3544,7 +3573,7 @@ var _includes = function _includes(value, compareArray) {
 };
 
 var includes = function includes(value, compareArray) {
-  if (_inProperty(value, 'value, compareArray')) {
+  if (isObjectParameter(value, 'value, compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
@@ -3576,7 +3605,7 @@ var _repeat = function _repeat(value, count) {
 };
 
 var repeat = function repeat(value, count) {
-  if (_inProperty(value, 'value, count')) {
+  if (isObjectParameter(value, 'value, count')) {
     var _value2 = value;
     value = _value2.value;
     count = _value2.count;
@@ -3681,10 +3710,8 @@ var _require = __webpack_require__(5),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var _require2 = __webpack_require__(14),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = __webpack_require__(8),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * or
  */
@@ -3701,7 +3728,7 @@ var _or = function _or(value, compareArray) {
 };
 
 var or = function or(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
@@ -3747,10 +3774,8 @@ var _require = __webpack_require__(5),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var _require2 = __webpack_require__(14),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = __webpack_require__(8),
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = __webpack_require__(19),
     _some = _require3._some,
@@ -3796,7 +3821,7 @@ var _match = function _match(value, compare) {
 };
 
 var match = function match(value, compare) {
-  if (_inProperty(value, 'value, compare')) {
+  if (isObjectParameter(value, 'value, compare')) {
     var _value = value;
     value = _value.value;
     compare = _value.compare;
@@ -3818,7 +3843,7 @@ var _matchValue = function _matchValue(value, compare, valueWhenMatched) {
 };
 
 var matchValue = function matchValue(value, compare, valueWhenMatched) {
-  if (_inProperty(value, 'value, compare, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compare, valueWhenMatched')) {
     var _value2 = value;
     value = _value2.value;
     compare = _value2.compare;
@@ -3837,7 +3862,7 @@ var _initialValue = function _initialValue(value, valueWhenMatched) {
 };
 
 var initialValue = function initialValue(value, valueWhenMatched) {
-  if (_inProperty(value, 'value, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, valueWhenMatched')) {
     var _value3 = value;
     value = _value3.value;
     valueWhenMatched = _value3.valueWhenMatched;
@@ -3857,7 +3882,7 @@ var _matchSome = function _matchSome(value, compareArray) {
 };
 
 var matchSome = function matchSome(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value4 = value;
     value = _value4.value;
     compareArray = _value4.compareArray;
@@ -3881,7 +3906,7 @@ var _allMatchSome = function _allMatchSome(valueArray, compareArray) {
 };
 
 var allMatchSome = function allMatchSome(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
     compareArray = _valueArray.compareArray;
@@ -3909,7 +3934,7 @@ var _indexOfMatchSome = function _indexOfMatchSome(valueArray, compareArray) {
 };
 
 var indexOfMatchSome = function indexOfMatchSome(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray2 = valueArray;
     valueArray = _valueArray2.valueArray;
     compareArray = _valueArray2.compareArray;
@@ -3951,7 +3976,7 @@ var _matchSomeValue = function _matchSomeValue(value, compareArray, valueWhenMat
 };
 
 var matchSomeValue = function matchSomeValue(value, compareArray, valueWhenMatched) {
-  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
     var _value5 = value;
     value = _value5.value;
     compareArray = _value5.compareArray;
@@ -3976,7 +4001,7 @@ var _matchAll = function _matchAll(value, compareArray) {
 };
 
 var matchAll = function matchAll(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value6 = value;
     value = _value6.value;
     compareArray = _value6.compareArray;
@@ -4000,7 +4025,7 @@ var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
 };
 
 var allMatchAll = function allMatchAll(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray3 = valueArray;
     valueArray = _valueArray3.valueArray;
     compareArray = _valueArray3.compareArray;
@@ -4028,7 +4053,7 @@ var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
 };
 
 var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray4 = valueArray;
     valueArray = _valueArray4.valueArray;
     compareArray = _valueArray4.compareArray;
@@ -4070,7 +4095,7 @@ var _matchAllValue = function _matchAllValue(value, compareArray, valueWhenMatch
 };
 
 var matchAllValue = function matchAllValue(value, compareArray, valueWhenMatched) {
-  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
     var _value7 = value;
     value = _value7.value;
     compareArray = _value7.compareArray;
@@ -4141,10 +4166,8 @@ var _require = __webpack_require__(5),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var _require2 = __webpack_require__(14),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = __webpack_require__(8),
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = __webpack_require__(19),
     _some = _require3._some,
@@ -4168,7 +4191,7 @@ var _includes = function _includes(value, compare) {
 };
 
 var includes = function includes(value, compare) {
-  if (_inProperty(value, 'value, compare')) {
+  if (isObjectParameter(value, 'value, compare')) {
     var _value = value;
     value = _value.value;
     compare = _value.compare;
@@ -4197,7 +4220,7 @@ var _includesSome = function _includesSome(value, compareArray) {
 };
 
 var includesSome = function includesSome(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value2 = value;
     value = _value2.value;
     compareArray = _value2.compareArray;
@@ -4221,7 +4244,7 @@ var _includesAll = function _includesAll(value, compareArray) {
 };
 
 var includesAll = function includesAll(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value3 = value;
     value = _value3.value;
     compareArray = _value3.compareArray;
@@ -4300,8 +4323,7 @@ var _require = __webpack_require__(5),
 
 var _require2 = __webpack_require__(14),
     _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * equalFunction
  */
@@ -4698,7 +4720,7 @@ _equal.reset = function () {
 _equal.reset();
 
 var equal = function equal(value1, value2) {
-  if (_inProperty(value1, 'value1, value2')) {
+  if (isObjectParameter(value1, 'value1, value2')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
@@ -4782,7 +4804,7 @@ _equalDeep.reset = function () {
 _equalDeep.reset();
 
 var equalDeep = function equalDeep(value1, value2) {
-  if (_inProperty(value1, 'value1,value2')) {
+  if (isObjectParameter(value1, 'value1,value2')) {
     var _value2 = value1;
     value1 = _value2.value1;
     value2 = _value2.value2;
@@ -4824,13 +4846,13 @@ var _require = __webpack_require__(5),
     _isException = _require._isException;
 
 var _require2 = __webpack_require__(8),
-    _inProperty = _require2._inProperty;
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = __webpack_require__(9),
     _replaceAll = _require3._replaceAll;
 
 var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str, before, after')) {
+  if (isObjectParameter(str, 'str, before, after')) {
     var _str = str;
     str = _str.str;
     before = _str.before;
@@ -5135,10 +5157,8 @@ var _require2 = __webpack_require__(24),
 var _require3 = __webpack_require__(22),
     _matchFormat = _require3._matchFormat;
 
-var _require4 = __webpack_require__(14),
-    _copyProperty = _require4._copyProperty,
-    _propertyCount = _require4._propertyCount,
-    _inProperty = _require4._inProperty;
+var _require4 = __webpack_require__(8),
+    isObjectParameter = _require4.isObjectParameter;
 
 var _require5 = __webpack_require__(20),
     _round = _require5._round;
@@ -5155,7 +5175,7 @@ var _numberToString = function _numberToString(value, radix) {
 var numberToString = function numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value = value;
     value = _value.value;
     var _value$radix = _value.radix;
@@ -5206,7 +5226,7 @@ var _stringToNumber = function _stringToNumber(value) {
 };
 
 var stringToNumber = function stringToNumber(value) {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value2 = value;
     value = _value2.value;
   }
@@ -5225,7 +5245,7 @@ var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue
 };
 
 var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value3 = value;
     value = _value3.value;
     defaultValue = _value3.defaultValue;
@@ -5272,7 +5292,7 @@ var _stringToInteger = function _stringToInteger(value) {
 var stringToInteger = function stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value4 = value;
     value = _value4.value;
     var _value4$radix = _value4.radix;
@@ -5304,7 +5324,7 @@ var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultVal
 var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value5 = value;
     value = _value5.value;
     defaultValue = _value5.defaultValue;
@@ -5344,7 +5364,7 @@ var toNumber = function toNumber(value) {
 };
 
 var toNumberDefault = function toNumberDefault(value, defaultValue) {
-  if (_inProperty(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value,defaultValue')) {
     var _value6 = value;
     value = _value6.value;
     defaultValue = _value6.defaultValue;
@@ -5374,7 +5394,7 @@ var toInteger = function toInteger(value) {
 };
 
 var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
-  if (_inProperty(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value,defaultValue')) {
     var _value7 = value;
     value = _value7.value;
     defaultValue = _value7.defaultValue;

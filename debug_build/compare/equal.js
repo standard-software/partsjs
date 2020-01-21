@@ -50,8 +50,7 @@ var _require = require('../type/type.js'),
 
 var _require2 = require('../object/object.js'),
     _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * equalFunction
  */
@@ -448,7 +447,7 @@ _equal.reset = function () {
 _equal.reset();
 
 var equal = function equal(value1, value2) {
-  if (_inProperty(value1, 'value1, value2')) {
+  if (isObjectParameter(value1, 'value1, value2')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
@@ -532,7 +531,7 @@ _equalDeep.reset = function () {
 _equalDeep.reset();
 
 var equalDeep = function equalDeep(value1, value2) {
-  if (_inProperty(value1, 'value1,value2')) {
+  if (isObjectParameter(value1, 'value1,value2')) {
     var _value2 = value1;
     value1 = _value2.value1;
     value2 = _value2.value2;

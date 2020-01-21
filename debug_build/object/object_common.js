@@ -28,8 +28,8 @@ var _require = require('../type/type.js'),
     _isNumberObject = _require._isNumberObject,
     _isStringObject = _require._isStringObject;
 
-var _require2 = require('../object/_inProperty.js'),
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../string/_replaceAll.js'),
     _replaceAll = _require3._replaceAll;
@@ -63,7 +63,7 @@ var _copyProperty = function _copyProperty(fromObject, propertyArray) {
 var copyProperty = function copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  if (_inProperty(fromObject, 'fromObject,propertyArray')) {
+  if (isObjectParameter(fromObject, 'fromObject,propertyArray')) {
     var _fromObject = fromObject;
     fromObject = _fromObject.fromObject;
     propertyArray = _fromObject.propertyArray;
@@ -138,7 +138,7 @@ var _getProperty = function _getProperty(object, propertyPath) {
 };
 
 var getProperty = function getProperty(object, propertyPath) {
-  if (_inProperty(object, 'object, propertyPath')) {
+  if (isObjectParameter(object, 'object, propertyPath')) {
     var _object = object;
     object = _object.object;
     propertyPath = _object.propertyPath;
@@ -183,7 +183,7 @@ var _setProperty = function _setProperty(object, path, value) {
 };
 
 var setProperty = function setProperty(object, propertyPath, value) {
-  if (_inProperty(object, 'object, propertyPath, value')) {
+  if (isObjectParameter(object, 'object, propertyPath, value')) {
     var _object2 = object;
     object = _object2.object;
     propertyPath = _object2.propertyPath;

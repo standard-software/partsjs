@@ -15,10 +15,8 @@ var _require = require('../type/type.js'),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = require('../object/object.js'),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * isMultiples isEven isOdd
  */
@@ -29,7 +27,7 @@ var _isMultiples = function _isMultiples(number, radix) {
 };
 
 var isMultiples = function isMultiples(number, radix) {
-  if (_inProperty(number, 'number,radix')) {
+  if (isObjectParameter(number, 'number,radix')) {
     var _number = number;
     number = _number.number;
     radix = _number.radix;
@@ -73,7 +71,7 @@ var _round = function _round(value) {
 var round = function round(value) {
   var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value = value;
     value = _value.value;
     var _value$digit = _value.digit;
@@ -100,7 +98,7 @@ var _nearEqual = function _nearEqual(value1, value2, diff) {
 };
 
 var nearEqual = function nearEqual(value1, value2, diff) {
-  if (_inProperty(value1, 'value1,value2,diff')) {
+  if (isObjectParameter(value1, 'value1,value2,diff')) {
     var _value2 = value1;
     value1 = _value2.value1;
     value2 = _value2.value2;
@@ -139,7 +137,7 @@ var _inRange = function _inRange(value, from, to) {
 };
 
 var inRange = function inRange(value, from, to) {
-  if (_inProperty(value, 'value,from,to')) {
+  if (isObjectParameter(value, 'value,from,to')) {
     var _value3 = value;
     value = _value3.value;
     from = _value3.from;
@@ -174,7 +172,7 @@ var _randomInt = function _randomInt(min, max) {
 };
 
 var randomInt = function randomInt(min, max) {
-  if (_inProperty(min, 'min,max')) {
+  if (isObjectParameter(min, 'min,max')) {
     var _min = min;
     min = _min.min;
     max = _min.max;

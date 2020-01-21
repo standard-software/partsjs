@@ -22,8 +22,8 @@ var _require = require('../type/type.js'),
 var _require2 = require('../number/number.js'),
     isEven = _require2.isEven;
 
-var _require3 = require('../object/_inProperty.js'),
-    _inProperty = _require3._inProperty;
+var _require3 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require3.isObjectParameter;
 
 var _require4 = require('../root/clone.js'),
     _clone = _require4._clone,
@@ -311,7 +311,7 @@ var _filter = function _filter(array, func) {
 };
 
 var filter = function filter(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array = array;
     array = _array.array;
     func = _array.func;
@@ -344,7 +344,7 @@ var _map = function _map(array, func) {
 };
 
 var map = function map(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array2 = array;
     array = _array2.array;
     func = _array2.func;
@@ -384,7 +384,7 @@ var _count = function _count(array, func) {
 };
 
 var count = function count(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array3 = array;
     array = _array3.array;
     func = _array3.func;
@@ -422,7 +422,7 @@ var _findFirstIndex = function _findFirstIndex(array, func) {
 };
 
 var findFirstIndex = function findFirstIndex(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array4 = array;
     array = _array4.array;
     func = _array4.func;
@@ -461,7 +461,7 @@ var _findLastIndex = function _findLastIndex(array, func) {
 };
 
 var findLastIndex = function findLastIndex(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array5 = array;
     array = _array5.array;
     func = _array5.func;
@@ -494,7 +494,7 @@ var _findFirst = function _findFirst(array, func) {
 };
 
 var findFirst = function findFirst(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array6 = array;
     array = _array6.array;
     func = _array6.func;
@@ -527,7 +527,7 @@ var _findLast = function _findLast(array, func) {
 };
 
 var findLast = function findLast(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array7 = array;
     array = _array7.array;
     func = _array7.func;
@@ -554,7 +554,7 @@ var _some = function _some(array, func) {
 };
 
 var some = function some(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array8 = array;
     array = _array8.array;
     func = _array8.func;
@@ -584,7 +584,7 @@ var _all = function _all(array, func) {
 };
 
 var all = function all(array, func) {
-  if (_inProperty(array, 'array, func')) {
+  if (isObjectParameter(array, 'array, func')) {
     var _array9 = array;
     array = _array9.array;
     func = _array9.func;

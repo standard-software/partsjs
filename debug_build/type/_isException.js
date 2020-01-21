@@ -3,8 +3,8 @@
 var _require = require('../type/_isType.js'),
     _isError = _require._isError;
 
-var _require2 = require('../object/_inProperty.js'),
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * _isException
  * description:
@@ -15,7 +15,7 @@ var _require2 = require('../object/_inProperty.js'),
 
 
 var _isException = function _isException(value) {
-  if (_inProperty(value, 'name,message')) {
+  if (isObjectParameter(value, 'name,message')) {
     return true;
   } else if (_isError(value)) {
     return true;

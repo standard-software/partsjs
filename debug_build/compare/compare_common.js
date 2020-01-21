@@ -21,10 +21,8 @@ var _require = require('../type/type.js'),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var _require2 = require('../object/object.js'),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * or
  */
@@ -41,7 +39,7 @@ var _or = function _or(value, compareArray) {
 };
 
 var or = function or(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;

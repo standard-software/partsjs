@@ -21,10 +21,8 @@ var _require = require('../type/type.js'),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var _require2 = require('../object/object.js'),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../array/array_common.js'),
     _some = _require3._some,
@@ -48,7 +46,7 @@ var _includes = function _includes(value, compare) {
 };
 
 var includes = function includes(value, compare) {
-  if (_inProperty(value, 'value, compare')) {
+  if (isObjectParameter(value, 'value, compare')) {
     var _value = value;
     value = _value.value;
     compare = _value.compare;
@@ -77,7 +75,7 @@ var _includesSome = function _includesSome(value, compareArray) {
 };
 
 var includesSome = function includesSome(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value2 = value;
     value = _value2.value;
     compareArray = _value2.compareArray;
@@ -101,7 +99,7 @@ var _includesAll = function _includesAll(value, compareArray) {
 };
 
 var includesAll = function includesAll(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value3 = value;
     value = _value3.value;
     compareArray = _value3.compareArray;

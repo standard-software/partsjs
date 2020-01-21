@@ -18,8 +18,8 @@ var _require = require('../type/type.js'),
 var _require2 = require('../compare/compare.js'),
     _matchSome = _require2._matchSome;
 
-var _require3 = require('../object/_inProperty.js'),
-    _inProperty = _require3._inProperty;
+var _require3 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require3.isObjectParameter;
 
 var _require4 = require('../array/array.js'),
     _map = _require4._map;
@@ -214,7 +214,7 @@ _matchFormat.reset = function () {
 _matchFormat.reset();
 
 var matchFormat = function matchFormat(formatName, value) {
-  if (_inProperty(formatName, 'formatName,value')) {
+  if (isObjectParameter(formatName, 'formatName,value')) {
     var _formatName = formatName;
     formatName = _formatName.formatName;
     value = _formatName.value;
@@ -254,7 +254,7 @@ var _includes = function _includes(value, compareArray) {
 };
 
 var includes = function includes(value, compareArray) {
-  if (_inProperty(value, 'value, compareArray')) {
+  if (isObjectParameter(value, 'value, compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
@@ -286,7 +286,7 @@ var _repeat = function _repeat(value, count) {
 };
 
 var repeat = function repeat(value, count) {
-  if (_inProperty(value, 'value, count')) {
+  if (isObjectParameter(value, 'value, count')) {
     var _value2 = value;
     value = _value2.value;
     count = _value2.count;

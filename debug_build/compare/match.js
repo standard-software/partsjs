@@ -21,10 +21,8 @@ var _require = require('../type/type.js'),
     _isSet = _require._isSet,
     _isWeakSet = _require._isWeakSet;
 
-var _require2 = require('../object/object.js'),
-    _copyProperty = _require2._copyProperty,
-    _propertyCount = _require2._propertyCount,
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../array/array_common.js'),
     _some = _require3._some,
@@ -70,7 +68,7 @@ var _match = function _match(value, compare) {
 };
 
 var match = function match(value, compare) {
-  if (_inProperty(value, 'value, compare')) {
+  if (isObjectParameter(value, 'value, compare')) {
     var _value = value;
     value = _value.value;
     compare = _value.compare;
@@ -92,7 +90,7 @@ var _matchValue = function _matchValue(value, compare, valueWhenMatched) {
 };
 
 var matchValue = function matchValue(value, compare, valueWhenMatched) {
-  if (_inProperty(value, 'value, compare, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compare, valueWhenMatched')) {
     var _value2 = value;
     value = _value2.value;
     compare = _value2.compare;
@@ -111,7 +109,7 @@ var _initialValue = function _initialValue(value, valueWhenMatched) {
 };
 
 var initialValue = function initialValue(value, valueWhenMatched) {
-  if (_inProperty(value, 'value, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, valueWhenMatched')) {
     var _value3 = value;
     value = _value3.value;
     valueWhenMatched = _value3.valueWhenMatched;
@@ -131,7 +129,7 @@ var _matchSome = function _matchSome(value, compareArray) {
 };
 
 var matchSome = function matchSome(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value4 = value;
     value = _value4.value;
     compareArray = _value4.compareArray;
@@ -155,7 +153,7 @@ var _allMatchSome = function _allMatchSome(valueArray, compareArray) {
 };
 
 var allMatchSome = function allMatchSome(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
     compareArray = _valueArray.compareArray;
@@ -183,7 +181,7 @@ var _indexOfMatchSome = function _indexOfMatchSome(valueArray, compareArray) {
 };
 
 var indexOfMatchSome = function indexOfMatchSome(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray2 = valueArray;
     valueArray = _valueArray2.valueArray;
     compareArray = _valueArray2.compareArray;
@@ -225,7 +223,7 @@ var _matchSomeValue = function _matchSomeValue(value, compareArray, valueWhenMat
 };
 
 var matchSomeValue = function matchSomeValue(value, compareArray, valueWhenMatched) {
-  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
     var _value5 = value;
     value = _value5.value;
     compareArray = _value5.compareArray;
@@ -250,7 +248,7 @@ var _matchAll = function _matchAll(value, compareArray) {
 };
 
 var matchAll = function matchAll(value, compareArray) {
-  if (_inProperty(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value,compareArray')) {
     var _value6 = value;
     value = _value6.value;
     compareArray = _value6.compareArray;
@@ -274,7 +272,7 @@ var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
 };
 
 var allMatchAll = function allMatchAll(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray3 = valueArray;
     valueArray = _valueArray3.valueArray;
     compareArray = _valueArray3.compareArray;
@@ -302,7 +300,7 @@ var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
 };
 
 var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
-  if (_inProperty(valueArray, 'valueArray,compareArray')) {
+  if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
     var _valueArray4 = valueArray;
     valueArray = _valueArray4.valueArray;
     compareArray = _valueArray4.compareArray;
@@ -344,7 +342,7 @@ var _matchAllValue = function _matchAllValue(value, compareArray, valueWhenMatch
 };
 
 var matchAllValue = function matchAllValue(value, compareArray, valueWhenMatched) {
-  if (_inProperty(value, 'value, compareArray, valueWhenMatched')) {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
     var _value7 = value;
     value = _value7.value;
     compareArray = _value7.compareArray;

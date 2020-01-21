@@ -15,14 +15,14 @@ var _require = require('../type/type.js'),
     _isRegExp = _require._isRegExp,
     _isException = _require._isException;
 
-var _require2 = require('../object/_inProperty.js'),
-    _inProperty = _require2._inProperty;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../string/_replaceAll.js'),
     _replaceAll = _require3._replaceAll;
 
 var replaceAll = function replaceAll(str, before, after) {
-  if (_inProperty(str, 'str, before, after')) {
+  if (isObjectParameter(str, 'str, before, after')) {
     var _str = str;
     str = _str.str;
     before = _str.before;

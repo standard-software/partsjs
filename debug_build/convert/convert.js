@@ -35,10 +35,8 @@ var _require2 = require('../compare/compare.js'),
 var _require3 = require('../string/string.js'),
     _matchFormat = _require3._matchFormat;
 
-var _require4 = require('../object/object.js'),
-    _copyProperty = _require4._copyProperty,
-    _propertyCount = _require4._propertyCount,
-    _inProperty = _require4._inProperty;
+var _require4 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require4.isObjectParameter;
 
 var _require5 = require('../number/number.js'),
     _round = _require5._round;
@@ -55,7 +53,7 @@ var _numberToString = function _numberToString(value, radix) {
 var numberToString = function numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value = value;
     value = _value.value;
     var _value$radix = _value.radix;
@@ -106,7 +104,7 @@ var _stringToNumber = function _stringToNumber(value) {
 };
 
 var stringToNumber = function stringToNumber(value) {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value2 = value;
     value = _value2.value;
   }
@@ -125,7 +123,7 @@ var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue
 };
 
 var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) {
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value3 = value;
     value = _value3.value;
     defaultValue = _value3.defaultValue;
@@ -172,7 +170,7 @@ var _stringToInteger = function _stringToInteger(value) {
 var stringToInteger = function stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value4 = value;
     value = _value4.value;
     var _value4$radix = _value4.radix;
@@ -204,7 +202,7 @@ var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultVal
 var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (_inProperty(value, 'value')) {
+  if (isObjectParameter(value, 'value')) {
     var _value5 = value;
     value = _value5.value;
     defaultValue = _value5.defaultValue;
@@ -244,7 +242,7 @@ var toNumber = function toNumber(value) {
 };
 
 var toNumberDefault = function toNumberDefault(value, defaultValue) {
-  if (_inProperty(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value,defaultValue')) {
     var _value6 = value;
     value = _value6.value;
     defaultValue = _value6.defaultValue;
@@ -274,7 +272,7 @@ var toInteger = function toInteger(value) {
 };
 
 var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
-  if (_inProperty(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value,defaultValue')) {
     var _value7 = value;
     value = _value7.value;
     defaultValue = _value7.defaultValue;
