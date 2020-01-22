@@ -37,5 +37,6 @@ module.exports = {
     "require-jsdoc": ["off"],
     "brace-style": ["off"],
     "key-spacing": ["off"],
+    "guard-for-in": ["off"],
   },
 };

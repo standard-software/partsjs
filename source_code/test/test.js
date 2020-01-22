@@ -61,7 +61,11 @@ const it = (text, func) => {
     if (!testFrame.outputIt) {
       consoleLogTestName();
     }
-    console.log(e);
+    let errorMessage = '';
+    for (prop in e) {
+      errorMessage += 'e.' + prop + ':' + e[prop] + '\n';
+    }
+    console.log(errorMessage);
   }
   testFrame.counter = 0;
   testFrame.testName = '';
