@@ -9,7 +9,7 @@ var test_execute_convert = function test_execute_convert(parts) {
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test;
-  describe(test_execute_convert.name, function () {
+  describe('test_execute_convert', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
@@ -23,7 +23,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         toInteger = _parts$convert.toInteger;
 
     var test_numberToString = function test_numberToString() {
-      it(test_numberToString.name, function () {
+      it('test_numberToString', function () {
         // Positive number
         checkEqual('32', numberToString(32));
         checkEqual('32', numberToString(32, 10));
@@ -114,7 +114,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_stringToNumber = function test_stringToNumber() {
-      it(test_stringToNumber.name, function () {
+      it('test_stringToNumber', function () {
         // Integer
         checkEqual(123, stringToNumberDefault('123'));
         checkEqual(123, stringToNumberDefault('0123'));
@@ -205,7 +205,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_stringToIntegerDefault = function test_stringToIntegerDefault() {
-      it(test_stringToIntegerDefault.name, function () {
+      it('test_stringToIntegerDefault', function () {
         // Integer
         checkEqual(123, stringToIntegerDefault('123'));
         checkEqual(123, stringToIntegerDefault('0123'));
@@ -347,7 +347,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_NumerCast = function test_NumerCast() {
-      it(test_NumerCast.name, function () {
+      it('test_NumerCast', function () {
         // Integer
         checkEqual(123, Number('123'));
         checkEqual(123, Number('0123'));
@@ -450,7 +450,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_toNumber = function test_toNumber() {
-      it(test_toNumber.name, function () {
+      it('test_toNumber', function () {
         // Integer
         checkEqual(123, toNumber('123'));
         checkEqual(123, toNumber('0123'));
@@ -521,7 +521,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_toInteger = function test_toInteger() {
-      it(test_toInteger.name, function () {
+      it('test_toInteger', function () {
         // Integer
         checkEqual(123, toInteger('123'));
         checkEqual(123, toInteger('0123'));

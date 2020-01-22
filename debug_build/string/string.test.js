@@ -9,7 +9,7 @@ var test_execute_string = function test_execute_string(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it;
-  describe(test_execute_string.name, function () {
+  describe('test_execute_string', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
@@ -20,7 +20,7 @@ var test_execute_string = function test_execute_string(parts) {
         replaceAll = _parts$string.replaceAll;
 
     var test_matchFormat = function test_matchFormat() {
-      it(test_matchFormat.name, function () {
+      it('test_matchFormat', function () {
         checkEqual(true, matchFormat('number', '123'));
         checkEqual(false, matchFormat('number', '12a'));
         checkEqual(false, matchFormat('number', '-123'));
@@ -105,7 +105,7 @@ var test_execute_string = function test_execute_string(parts) {
     };
 
     var test_includes = function test_includes() {
-      it(test_includes.name, function () {
+      it('test_includes', function () {
         checkEqual(true, includes('abcdef', ['ab']));
         checkEqual(true, includes('abcdef', ['cd']));
         checkEqual(false, includes('abcdef', ['ac']));
@@ -165,7 +165,7 @@ var test_execute_string = function test_execute_string(parts) {
     };
 
     var test_replaceAll = function test_replaceAll() {
-      it(test_replaceAll.name, function () {
+      it('test_replaceAll', function () {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
         checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // Object Named Parameter

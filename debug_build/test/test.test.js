@@ -11,13 +11,13 @@ var test_execute_test = function test_execute_test(parts) {
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test;
-  describe(test_execute_test.name, function () {
+  describe('test_execute_test', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown;
 
     var test_isThrown = function test_isThrown() {
-      it(test_isThrown.name, function () {
+      it('test_isThrown', function () {
         checkEqual(true, isThrown(function () {
           throw 1;
         }, function (throwValue) {

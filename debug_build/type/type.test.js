@@ -17,7 +17,7 @@ var test_execute_type = function test_execute_type(parts) {
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test;
-  describe(test_execute_type.name, function () {
+  describe('test_execute_type', function () {
     var _parts$type = parts.type,
         isUndefined = _parts$type.isUndefined,
         isNull = _parts$type.isNull,
@@ -69,7 +69,7 @@ var test_execute_type = function test_execute_type(parts) {
     var objectToString = parts.objectToString;
 
     var test_checkType = function test_checkType() {
-      it(test_checkType.name, function () {
+      it('test_checkType', function () {
         var checkType = function checkType(typeofName, objectStringName, value) {
           checkEqual(typeofName, _typeof(value));
           checkEqual(objectStringName, objectToString(value));
@@ -152,7 +152,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isUndefined = function test_isUndefined() {
-      it(test_isUndefined.name, function () {
+      it('test_isUndefined', function () {
         var isUndefinedArray = function isUndefinedArray(array) {
           return allMatchSome(array, [undefined]);
         };
@@ -206,7 +206,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isNull = function test_isNull() {
-      it(test_isNull.name, function () {
+      it('test_isNull', function () {
         var isNullArray = function isNullArray(array) {
           return allMatchSome(array, [null]);
         };
@@ -254,7 +254,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isBoolean = function test_isBoolean() {
-      it(test_isBoolean.name, function () {
+      it('test_isBoolean', function () {
         var isBooleanArray = function isBooleanArray(array) {
           return allMatchSome(array, [isBoolean]);
         };
@@ -294,7 +294,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isNumber = function test_isNumber() {
-      it(test_isNumber.name, function () {
+      it('test_isNumber', function () {
         var isNumberArray = function isNumberArray(array) {
           return allMatchSome(array, [isNumber]);
         };
@@ -384,7 +384,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isInteger = function test_isInteger() {
-      it(test_isInteger.name, function () {
+      it('test_isInteger', function () {
         var isIntegerArray = function isIntegerArray(array) {
           return allMatchSome(array, [isInteger]);
         };
@@ -455,7 +455,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isString = function test_isString() {
-      it(test_isString.name, function () {
+      it('test_isString', function () {
         var isStringArray = function isStringArray(array) {
           return allMatchSome(array, [isString]);
         };
@@ -509,7 +509,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isFunction = function test_isFunction() {
-      it(test_isFunction.name, function () {
+      it('test_isFunction', function () {
         var isFunctionArray = function isFunctionArray(array) {
           return allMatchSome(array, [isFunction]);
         };
@@ -528,7 +528,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isObject = function test_isObject() {
-      it(test_isObject.name, function () {
+      it('test_isObject', function () {
         var isObjectArray = function isObjectArray(array) {
           return allMatchSome(array, [isObject]);
         };
@@ -593,7 +593,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isObjectType = function test_isObjectType() {
-      it(test_isObjectType.name, function () {
+      it('test_isObjectType', function () {
         var isObjectTypeArray = function isObjectTypeArray(array) {
           return allMatchSome(array, [isObjectType]);
         };
@@ -657,7 +657,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isArray = function test_isArray() {
-      it(test_isArray.name, function () {
+      it('test_isArray', function () {
         var isArrayArray = function isArrayArray(array) {
           return allMatchSome(array, [isArray]);
         };
@@ -691,7 +691,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isArrayType = function test_isArrayType() {
-      it(test_isArrayType.name, function () {
+      it('test_isArrayType', function () {
         checkEqual(true, Array.isArray([]));
         checkEqual(true, Array.isArray([123]));
         checkEqual(true, Array.isArray([1, 2, 3]));
@@ -752,7 +752,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isDate = function test_isDate() {
-      it(test_isDate.name, function () {
+      it('test_isDate', function () {
         checkEqual(true, isDate(new Date(2017, 1, 1)));
         checkEqual(true, isDate(new Date('2017/01')));
         checkEqual(true, isDate(new Date(2017, 1)));
@@ -761,7 +761,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isExcection = function test_isExcection() {
-      it(test_isExcection.name, function () {
+      it('test_isExcection', function () {
         checkEqual(true, isException({
           name: '',
           message: ''
@@ -787,7 +787,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isSymbol = function test_isSymbol() {
-      it(test_isSymbol.name, function () {
+      it('test_isSymbol', function () {
         if (parts.platform.wsh) {
           return;
         }
@@ -798,7 +798,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isMap = function test_isMap() {
-      it(test_isMap.name, function () {
+      it('test_isMap', function () {
         if (parts.platform.wsh) {
           return;
         }
@@ -816,7 +816,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     var test_isSet = function test_isSet() {
-      it(test_isSet.name, function () {
+      it('test_isSet', function () {
         if (parts.platform.wsh) {
           return;
         }

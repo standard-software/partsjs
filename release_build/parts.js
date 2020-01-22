@@ -280,19 +280,20 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /* eslint-disable no-extend-native */
 var polyfillDefine = function polyfillDefine() {
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
   if (!String.prototype.includes) {
     String.prototype.includes = function (search, start) {
       'use strict';
 
-      if (typeof start !== 'number') {
+      if (search instanceof RegExp) {
+        throw TypeError('first argument must not be a RegExp');
+      }
+
+      if (start === undefined) {
         start = 0;
       }
 
-      if (start + search.length > this.length) {
-        return false;
-      } else {
-        return this.indexOf(search, start) !== -1;
-      }
+      return this.indexOf(search, start) !== -1;
     };
   }
 
@@ -1851,12 +1852,23 @@ var propertyCount = function propertyCount(object) {
 
 
 var _getProperty = function _getProperty(object, propertyPath) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   var result = object;
   var propertyArray = propertyPath.split('.');
 
   for (var i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '') {
       return undefined;
+    }
+
+    if (hasOwn) {
+      if (!result.hasOwnProperty(propertyArray[i])) {
+        return undefined;
+      }
+    } else {
+      if (!(propertyArray[i] in result)) {
+        return undefined;
+      }
     }
 
     if (_isUndefined(result[propertyArray[i]])) {
@@ -1870,10 +1882,14 @@ var _getProperty = function _getProperty(object, propertyPath) {
 };
 
 var getProperty = function getProperty(object, propertyPath) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
   if (isObjectParameter(object, 'object, propertyPath')) {
     var _object = object;
     object = _object.object;
     propertyPath = _object.propertyPath;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   }
 
   if (!_isObject(object)) {
@@ -1884,7 +1900,11 @@ var getProperty = function getProperty(object, propertyPath) {
     throw new TypeError('getProperty args(propertyPath) is not string');
   }
 
-  return _getProperty(object, propertyPath);
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('getProperty args(hasOwn) is not boolean');
+  }
+
+  return _getProperty(object, propertyPath, hasOwn);
 };
 /**
  * setProperty
@@ -1996,39 +2016,41 @@ var _require = __webpack_require__(6),
 
 var _require2 = __webpack_require__(9),
     _replaceAll = _require2._replaceAll;
+
+var _require3 = __webpack_require__(8),
+    isObjectParameter = _require3.isObjectParameter;
+
+var _require4 = __webpack_require__(15),
+    _getProperty = _require4._getProperty;
 /**
  * _inProperty
  */
 
 
-var _inProperty = function _inProperty(object, propertyArray) {
+var _inProperty = function _inProperty(object, propertyPathArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
   if (!_isObject(object)) {
     return false;
   }
 
-  if (_isString(propertyArray)) {
-    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  if (_isString(propertyPathArray)) {
+    propertyPathArray = _replaceAll(propertyPathArray, ' ', '').split(',');
   }
 
-  for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
-      continue;
-    }
-
-    if (!_isString(propertyArray[i])) {
+  for (var i = 0; i < propertyPathArray.length; i += 1) {
+    // if ((propertyPathArray[i] === '')
+    // || (_isUndefined(propertyPathArray[i]))) {
+    //   continue;
+    // }
+    if (!_isString(propertyPathArray[i])) {
       throw new TypeError('_inProperty args(propertyArray) element is not string');
     }
 
-    if (hasOwn) {
-      if (!object.hasOwnProperty(propertyArray[i])) {
-        return false;
-      }
-    } else {
-      if (!(propertyArray[i] in object)) {
-        return false;
-      }
+    var result = _getProperty(object, propertyPathArray[i], hasOwn);
+
+    if (_isUndefined(result)) {
+      return false;
     }
   }
 
@@ -2039,21 +2061,24 @@ var _inProperty = function _inProperty(object, propertyArray) {
  */
 
 
-var inProperty = function inProperty(object, propertyArray) {
+var inProperty = function inProperty(object, propertyPathArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (_inProperty(object, 'object,propertyArray')) {
+  if (isObjectParameter(object, 'object, propertyPathArray')) {
     var _object = object;
     object = _object.object;
-    propertyArray = _object.propertyArray;
+    propertyPathArray = _object.propertyPathArray;
     var _object$hasOwn = _object.hasOwn;
     hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
-  } // no object check
+  }
 
+  if (!_isObject(object)) {
+    throw new TypeError('inProperty args(fromObject) is not object');
+  }
 
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
-      throw new TypeError('inProperty args(propertyArray) is not [array|string]');
+  if (!_isString(propertyPathArray)) {
+    if (!_isArray(propertyPathArray)) {
+      throw new TypeError('inProperty args(propertyPathArray) is not [array|string]');
     }
   }
 
@@ -2061,7 +2086,7 @@ var inProperty = function inProperty(object, propertyArray) {
     throw new TypeError('inProperty args(hasOwn) is not boolean');
   }
 
-  return _inProperty(object, propertyArray, hasOwn);
+  return _inProperty(object, propertyPathArray, hasOwn);
 };
 
 var inProp = inProperty;
@@ -2147,7 +2172,13 @@ var it = function it(text, func) {
       consoleLogTestName();
     }
 
-    console.log(e);
+    var errorMessage = '';
+
+    for (prop in e) {
+      errorMessage += 'e.' + prop + ':' + e[prop] + '\n';
+    }
+
+    console.log(errorMessage);
   }
 
   testFrame.counter = 0;

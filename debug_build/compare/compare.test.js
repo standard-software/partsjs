@@ -7,7 +7,7 @@ var test_execute_compare = function test_execute_compare(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it;
-  describe(test_execute_compare.name, function () {
+  describe('test_execute_compare', function () {
     var _parts$type = parts.type,
         isUndefined = _parts$type.isUndefined,
         isNull = _parts$type.isNull,
@@ -50,7 +50,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     var isEmptyObject = parts.object.isEmptyObject;
 
     var test_equal = function test_equal() {
-      it(test_equal.name, function () {
+      it('test_equal', function () {
         // Primitive value
         checkEqual(true, equal(1, 1));
         checkEqual(true, equal('1', '1'));
@@ -80,7 +80,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equal_object = function test_equal_object() {
-      it(test_equal_object.name, function () {
+      it('test_equal_object', function () {
         // object
         checkEqual(true, equal({}, {}));
         checkEqual(false, equal({
@@ -124,7 +124,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equal_array = function test_equal_array() {
-      it(test_equal_array.name, function () {
+      it('test_equal_array', function () {
         checkEqual(true, equal([], []));
         checkEqual(false, equal([[]], [[]]));
         checkEqual(true, equal([1], [1]));
@@ -170,7 +170,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equal_date = function test_equal_date() {
-      it(test_equal_date.name, function () {
+      it('test_equal_date', function () {
         // date
         checkEqual(true, equal(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equal date'); // date in object
 
@@ -203,7 +203,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equal_regexp = function test_equal_regexp() {
-      it(test_equal_regexp.name, function () {
+      it('test_equal_regexp', function () {
         // regexp
         checkEqual(true, equal(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
 
@@ -236,7 +236,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equal_map = function test_equal_map() {
-      it(test_equal_map.name, function () {
+      it('test_equal_map', function () {
         if (parts.platform.wsh) {
           return;
         } // Map
@@ -279,7 +279,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equal_set = function test_equal_set() {
-      it(test_equal_set.name, function () {
+      it('test_equal_set', function () {
         if (parts.platform.wsh) {
           return;
         } // Set
@@ -322,7 +322,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep = function test_equalDeep() {
-      it(test_equalDeep.name, function () {
+      it('test_equalDeep', function () {
         // Primitive value
         checkEqual(true, equalDeep(1, 1), 'test_equalDeep 1');
         checkEqual(true, equalDeep('1', '1'));
@@ -352,7 +352,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_object = function test_equalDeep_object() {
-      it(test_equalDeep_object.name, function () {
+      it('test_equalDeep_object', function () {
         // object
         checkEqual(true, equalDeep({}, {}));
         checkEqual(true, equalDeep({
@@ -416,7 +416,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_object_array_mix = function test_equalDeep_object_array_mix() {
-      it(test_equalDeep_object_array_mix.name, function () {
+      it('test_equalDeep_object_array_mix', function () {
         // equal false array object
         var testValue1 = [1, 2, 3, {
           a: 1,
@@ -489,7 +489,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_object_CircularReference = function test_equalDeep_object_CircularReference() {
-      it(test_equalDeep_object_CircularReference.name, function () {
+      it('test_equalDeep_object_CircularReference', function () {
         // CircularReference
         var object1 = {
           a: '1',
@@ -565,7 +565,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_array = function test_equalDeep_array() {
-      it(test_equalDeep_array.name, function () {
+      it('test_equalDeep_array', function () {
         checkEqual(true, equalDeep([1, 2, {}], [1, 2, {}]));
         checkEqual(true, equalDeep([1, 2, [3]], [1, 2, [3]]));
         checkEqual(true, equalDeep([], []));
@@ -613,7 +613,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_array_CircularReference = function test_equalDeep_array_CircularReference() {
-      it(test_equalDeep_array_CircularReference.name, function () {
+      it('test_equalDeep_array_CircularReference', function () {
         // CircularReference
         var array1 = [{
           a: '1',
@@ -678,7 +678,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_date = function test_equalDeep_date() {
-      it(test_equalDeep_date.name, function () {
+      it('test_equalDeep_date', function () {
         // date
         checkEqual(true, equalDeep(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equalDeep date'); // date in object
 
@@ -710,7 +710,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_regexp = function test_equalDeep_regexp() {
-      it(test_equalDeep_regexp.name, function () {
+      it('test_equalDeep_regexp', function () {
         // regexp
         checkEqual(true, equalDeep(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
 
@@ -742,7 +742,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_map = function test_equalDeep_map() {
-      it(test_equalDeep_map.name, function () {
+      it('test_equalDeep_map', function () {
         if (parts.platform.wsh) {
           return;
         } // Map
@@ -784,7 +784,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_map_object_array = function test_equalDeep_map_object_array() {
-      it(test_equalDeep_map_object_array.name, function () {
+      it('test_equalDeep_map_object_array', function () {
         if (parts.platform.wsh) {
           return;
         } // Map Object Array
@@ -874,7 +874,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_map_CircularReference = function test_equalDeep_map_CircularReference() {
-      it(test_equalDeep_map_CircularReference.name, function () {
+      it('test_equalDeep_map_CircularReference', function () {
         if (parts.platform.wsh) {
           return;
         } // CircularReference
@@ -954,7 +954,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_set = function test_equalDeep_set() {
-      it(test_equalDeep_set.name, function () {
+      it('test_equalDeep_set', function () {
         if (parts.platform.wsh) {
           return;
         } // Set
@@ -996,7 +996,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_set_object_array = function test_equalDeep_set_object_array() {
-      it(test_equalDeep_set_object_array.name, function () {
+      it('test_equalDeep_set_object_array', function () {
         if (parts.platform.wsh) {
           return;
         } // Set Object Array
@@ -1086,7 +1086,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_set_CircularReference = function test_equalDeep_set_CircularReference() {
-      it(test_equalDeep_set_CircularReference.name, function () {
+      it('test_equalDeep_set_CircularReference', function () {
         if (parts.platform.wsh) {
           return;
         } // CircularReference
@@ -1186,7 +1186,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_or = function test_or() {
-      it(test_or.name, function () {
+      it('test_or', function () {
         var value;
         checkEqual(false, or(value, []));
         checkEqual(false, or(value, [null]));
@@ -1264,7 +1264,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_matchValue = function test_matchValue() {
-      it(test_matchValue.name, function () {
+      it('test_matchValue', function () {
         checkEqual('', matchValue('', null, 999));
         checkEqual(999, matchValue('', '', 999));
         checkEqual('123', matchValue('123', null, 999));
@@ -1298,7 +1298,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_initialValue = function test_initialValue() {
-      it(test_initialValue.name, function () {
+      it('test_initialValue', function () {
         // almost test_matchSome done
         checkEqual('123', initialValue('123', 999));
         checkEqual(999, initialValue(undefined, 999));
@@ -1322,7 +1322,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_matchSome = function test_matchSome() {
-      it(test_matchSome.name, function () {
+      it('test_matchSome', function () {
         // normal args string
         checkEqual(false, matchSome('abc', ['123', '456', '789']), 'test_match 1');
         checkEqual(true, matchSome('abc', ['123', '456', 'abc']), 'test_match 2');
@@ -1506,7 +1506,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_matchSomeValue = function test_matchSomeValue() {
-      it(test_matchSomeValue.name, function () {
+      it('test_matchSomeValue', function () {
         // almost test_matchSome done
         checkEqual(999, matchSomeValue(99, [99], 999));
         checkEqual(98, matchSomeValue(98, [99], 999));
@@ -1524,7 +1524,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_allMatchSome = function test_allMatchSome() {
-      it(test_allMatchSome.name, function () {
+      it('test_allMatchSome', function () {
         checkEqual(true, allMatchSome([10, 20, 30], [function (value) {
           return value > 5;
         }]));
@@ -1552,7 +1552,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_someMatchSome = function test_someMatchSome() {
-      it(test_someMatchSome.name, function () {
+      it('test_someMatchSome', function () {
         checkEqual(true, someMatchSome([10, 20, 30], [function (value) {
           return value > 5;
         }]), 'test_matchSome');
@@ -1585,7 +1585,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_indexOfMatchSome = function test_indexOfMatchSome() {
-      it(test_indexOfMatchSome.name, function () {
+      it('test_indexOfMatchSome', function () {
         checkEqual(0, indexOfMatchSome([10, 20, 30], [function (value) {
           return value > 5;
         }]), 'test_matchSomeIndex');
@@ -1618,7 +1618,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_matchAll = function test_matchAll() {
-      it(test_matchAll.name, function () {
+      it('test_matchAll', function () {
         // normal args string
         checkEqual(false, matchAll('abc', []));
         checkEqual(true, matchAll('abc', ['abc']));
@@ -1755,7 +1755,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_matchAllValue = function test_matchAllValue() {
-      it(test_matchAllValue.name, function () {
+      it('test_matchAllValue', function () {
         checkEqual(999, matchAllValue(99, [99], 999));
         checkEqual(98, matchAllValue(98, [99], 999));
         checkEqual(999, matchAllValue(100, [function (value) {
@@ -1804,7 +1804,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_allMatchAll = function test_allMatchAll() {
-      it(test_allMatchAll.name, function () {
+      it('test_allMatchAll', function () {
         checkEqual(false, allMatchAll([], [/^a/, /.*b.*/, /c$/]));
         checkEqual(true, allMatchAll(['abc', 'aabc', 'aabbcc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(false, allMatchAll(['abc', 'aabc', 'aacc'], [/^a/, /.*b.*/, /c$/]));
@@ -1822,7 +1822,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_someMatchAll = function test_someMatchAll() {
-      it(test_someMatchAll.name, function () {
+      it('test_someMatchAll', function () {
         checkEqual(false, someMatchAll([], [/^a/, /.*b.*/, /c$/]));
         checkEqual(true, someMatchAll(['abc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(false, someMatchAll(['aaa', 'bbb', 'ccc'], [/^a/, /.*b.*/, /c$/]));
@@ -1846,7 +1846,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_indexOfMatchAll = function test_indexOfMatchAll() {
-      it(test_indexOfMatchAll.name, function () {
+      it('test_indexOfMatchAll', function () {
         checkEqual(-1, indexOfMatchAll([], [/^a/, /.*b.*/, /c$/]));
         checkEqual(0, indexOfMatchAll(['abc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(-1, indexOfMatchAll(['aaa', 'bbb', 'ccc'], [/^a/, /.*b.*/, /c$/]));
@@ -1870,8 +1870,9 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_includes = function test_includes() {
-      it(test_includes.name, function () {
-        // string.includes strange empty string
+      it('test_includes', function () {
+        checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
+
         checkEqual(true, 'abc'.includes(''));
         checkEqual(false, 'abc'.includes(null));
         checkEqual(false, 'abc'.includes(undefined));
@@ -1908,7 +1909,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_includesSome = function test_includesSome() {
-      it(test_includesSome.name, function () {
+      it('test_includesSome', function () {
         checkEqual(false, includesSome('abc', ['']));
         checkEqual(true, includesSome('abc', ['', 'a']));
         checkEqual(false, includesSome('abc', ['', 'd']));
@@ -1993,7 +1994,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_includesAll = function test_includesAll() {
-      it(test_includesAll.name, function () {
+      it('test_includesAll', function () {
         checkEqual(false, includesAll('abc', ['']));
         checkEqual(false, includesAll('abc', ['', 'a']));
         checkEqual(false, includesAll('abc', ['', 'd']));

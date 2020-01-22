@@ -7,7 +7,7 @@ var test_execute_number = function test_execute_number(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it;
-  describe(test_execute_number.name, function () {
+  describe('test_execute_number', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown;
@@ -21,7 +21,7 @@ var test_execute_number = function test_execute_number(parts) {
         randomInt = _parts$number.randomInt;
 
     var test_isMultiples = function test_isMultiples() {
-      it(test_isMultiples.name, function () {
+      it('test_isMultiples', function () {
         checkEqual(true, isMultiples(10, 2));
         checkEqual(true, isMultiples(10, 5));
         checkEqual(false, isMultiples(10, 3));
@@ -51,7 +51,7 @@ var test_execute_number = function test_execute_number(parts) {
     };
 
     var test_Math_round = function test_Math_round() {
-      it(test_Math_round.name, function () {
+      it('test_Math_round', function () {
         checkEqual(5, Math.round(5));
         checkEqual(5, Math.round(5.4));
         checkEqual(6, Math.round(5.5));
@@ -62,7 +62,7 @@ var test_execute_number = function test_execute_number(parts) {
     };
 
     var test_round = function test_round() {
-      it(test_round.name, function () {
+      it('test_round', function () {
         checkEqual(5, round(5));
         checkEqual(5, round(5.4));
         checkEqual(6, round(5.5));
@@ -130,7 +130,7 @@ var test_execute_number = function test_execute_number(parts) {
     };
 
     var test_nearEqual = function test_nearEqual() {
-      it(test_nearEqual.name, function () {
+      it('test_nearEqual', function () {
         checkEqual(true, nearEqual(0.049999, 0.050011, 0.001));
         checkEqual(true, nearEqual(0.050, 0.051, 0.001));
         checkEqual(true, nearEqual(0.050, 0.0509, 0.001));
@@ -172,7 +172,7 @@ var test_execute_number = function test_execute_number(parts) {
     };
 
     var test_inRange = function test_inRange() {
-      it(test_inRange.name, function () {
+      it('test_inRange', function () {
         checkEqual(true, inRange(20, 10, 30));
         checkEqual(true, inRange(10, 10, 30));
         checkEqual(true, inRange(30, 10, 30));
@@ -208,7 +208,7 @@ var test_execute_number = function test_execute_number(parts) {
     };
 
     var test_randomInt = function test_randomInt() {
-      it(test_randomInt.name, function () {
+      it('test_randomInt', function () {
         checkEqual(5, randomInt(5, 5));
         var result = randomInt(1, 10);
         checkEqual(true, inRange(result, 1, 10)); // Object Named Parameter

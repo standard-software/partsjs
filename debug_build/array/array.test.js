@@ -11,7 +11,7 @@ var test_execute_array = function test_execute_array(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it;
-  describe(test_execute_array.name, function () {
+  describe('test_execute_array', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         checkCompare = _parts$test2.checkCompare,
@@ -26,7 +26,7 @@ var test_execute_array = function test_execute_array(parts) {
         isUpperCase = parts.isUpperCase;
 
     var test_array_from = function test_array_from() {
-      it(test_array_from.name, function () {
+      it('test_array_from', function () {
         function test() {
           // eslint-disable-next-line prefer-rest-params
           return array.from(arguments);
@@ -37,7 +37,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_min = function test_min() {
-      it(test_min.name, function () {
+      it('test_min', function () {
         checkEqual(null, array.min([]));
         checkEqual(5, array.min([5, 10, 15, 20]));
         checkEqual(1, array.min([5, 4, 3, 2, 1]));
@@ -68,7 +68,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_max = function test_max() {
-      it(test_max.name, function () {
+      it('test_max', function () {
         checkEqual(null, array.max([]));
         checkEqual(20, array.max([5, 10, 15, 20]));
         checkEqual(5, array.max([5, 4, 3, 2, 1]));
@@ -99,7 +99,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_sum = function test_sum() {
-      it(test_sum.name, function () {
+      it('test_sum', function () {
         checkEqual(0, array.sum([]));
         checkEqual(1, array.sum([1]));
         checkEqual(0, array.sum([0]));
@@ -110,7 +110,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_average = function test_average() {
-      it(test_average.name, function () {
+      it('test_average', function () {
         checkEqual(null, array.average([]));
         checkEqual(1, array.average([1]));
         checkEqual(0, array.average([0]));
@@ -121,14 +121,14 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_midian = function test_midian() {
-      it(test_midian.name, function () {
+      it('test_midian', function () {
         checkEqual(71, array.midian([70, 72, 80, 52, 52, 100]));
         checkEqual(10, array.midian([9, 9, 10, 10, 10, 100, 6]));
       });
     };
 
     var test_mode = function test_mode() {
-      it(test_mode.name, function () {
+      it('test_mode', function () {
         checkCompare(parts.compare.equal, [], array.mode([]));
         checkCompare(parts.compare.equal, [70], array.mode([70]));
         checkCompare(parts.compare.equal, [70, 52], array.mode([70, 70, 80, 52, 52, 100]));
@@ -138,25 +138,25 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_uniqe = function test_uniqe() {
-      it(test_uniqe.name, function () {
+      it('test_uniqe', function () {
         checkCompare(parts.compare.equal, [1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_single = function test_single() {
-      it(test_single.name, function () {
+      it('test_single', function () {
         checkCompare(parts.compare.equal, [1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_multiple = function test_multiple() {
-      it(test_multiple.name, function () {
+      it('test_multiple', function () {
         checkCompare(parts.compare.equal, [2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_filter = function test_filter() {
-      it(test_filter.name, function () {
+      it('test_filter', function () {
         checkCompare(parts.compare.equal, [0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
@@ -173,7 +173,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_map = function test_map() {
-      it(test_map.name, function () {
+      it('test_map', function () {
         checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
@@ -193,7 +193,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_count = function test_count() {
-      it(test_count.name, function () {
+      it('test_count', function () {
         checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
@@ -208,7 +208,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_findIndex = function test_findIndex() {
-      it(test_findIndex.name, function () {
+      it('test_findIndex', function () {
         checkEqual(0, array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return value.toLowerCase() === 'a';
         }));
@@ -236,7 +236,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_findBackIndex = function test_findBackIndex() {
-      it(test_findBackIndex.name, function () {
+      it('test_findBackIndex', function () {
         checkEqual(3, array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return value.toLowerCase() === 'a';
         }));
@@ -264,7 +264,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_find = function test_find() {
-      it(test_find.name, function () {
+      it('test_find', function () {
         checkEqual('a', array.find(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return value.toLowerCase() === 'a';
         }));
@@ -292,7 +292,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_findBack = function test_findBack() {
-      it(test_findBack.name, function () {
+      it('test_findBack', function () {
         checkEqual('A', array.findBack(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return value.toLowerCase() === 'a';
         }));
@@ -320,7 +320,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_some = function test_some() {
-      it(test_some.name, function () {
+      it('test_some', function () {
         checkEqual(true, array.some(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return value.toLowerCase() === 'a';
         }));
@@ -350,7 +350,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_all = function test_all() {
-      it(test_all.name, function () {
+      it('test_all', function () {
         checkEqual(false, array.all(['a', 'b', 'c', 'A', 'B', 'C'], function (value) {
           return value.toLowerCase() === 'a';
         }));
@@ -381,7 +381,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_operation_insert = function test_operation_insert() {
-      it(test_operation_insert.name, function () {
+      it('test_operation_insert', function () {
         checkCompare(parts.compare.equal, [1, 2, 3], array.operation.insert([1, 2, 3], []));
         checkCompare(parts.compare.equal, [0, 1, 2, 3], array.operation.insert([1, 2, 3], [0]));
         checkCompare(parts.compare.equal, [0, 1, 2, 3], array.operation.insert([1, 2, 3], [0], 0));
@@ -393,13 +393,13 @@ var test_execute_array = function test_execute_array(parts) {
 
         checkEqual(true, isThrownException(function () {
           array.operation.insert([1, 2, 3], [0], -1);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(function () {
           array.operation.insert([1, 2, 3], [0], 4);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(function () {
           array.operation.insert([1, 2, 3], 0, 4);
-        }, TypeError.name)); // Object Named Parameter
+        }, 'TypeError')); // Object Named Parameter
 
         checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.insert({
           array: [1, 2, 3],
@@ -410,7 +410,7 @@ var test_execute_array = function test_execute_array(parts) {
     };
 
     var test_operation_add = function test_operation_add() {
-      it(test_operation_add.name, function () {
+      it('test_operation_add', function () {
         checkCompare(parts.compare.equal, [1, 2, 3], array.operation.add([1, 2, 3], []));
         checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.add([1, 2, 3], [0]));
         checkCompare(parts.compare.equal, [0, 1, 2, 3], array.operation.add([1, 2, 3], [0], -1));
@@ -422,13 +422,13 @@ var test_execute_array = function test_execute_array(parts) {
 
         checkEqual(true, isThrownException(function () {
           array.operation.add([1, 2, 3], [0], -2);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(function () {
           array.operation.add([1, 2, 3], [0], 3);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(function () {
           array.operation.add([1, 2, 3], 0, 4);
-        }, TypeError.name)); // Object Named Parameter
+        }, 'TypeError')); // Object Named Parameter
 
         checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.add({
           array: [1, 2, 3],

@@ -14,7 +14,7 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
     var consoleHook = parts.consoleHook;
 
     var test_consoleHook = function test_consoleHook(methodName) {
-      it(test_consoleHook.name + ' ' + methodName, function () {
+      it('test_consoleHook' + ' ' + methodName, function () {
         var consoleOutput = '';
 
         var consoleHook_hook = function consoleHook_hook() {

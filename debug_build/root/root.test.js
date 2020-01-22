@@ -9,7 +9,7 @@ var test_execute_root = function test_execute_root(parts) {
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test;
-  describe(test_execute_root.name, function () {
+  describe('test_execute_root', function () {
     var clone = parts.clone,
         cloneDeep = parts.cloneDeep,
         cloneFunction = parts.cloneFunction;
@@ -19,7 +19,7 @@ var test_execute_root = function test_execute_root(parts) {
         _objectToStringCheck = _require._objectToStringCheck;
 
     var test_clone_object = function test_clone_object() {
-      it(test_clone_object.name, function () {
+      it('test_clone_object', function () {
         var testObject1 = {
           a: 1,
           b: 2,
@@ -62,7 +62,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_clone_array = function test_clone_array() {
-      it(test_clone_array.name, function () {
+      it('test_clone_array', function () {
         var testArray1 = [1, 2, 3]; // no clone
 
         var array1 = testArray1;
@@ -90,7 +90,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_clone_date = function test_clone_date() {
-      it(test_clone_date.name, function () {
+      it('test_clone_date', function () {
         // no clone
         var testDate1 = new Date('2019/10/11');
         var date1 = testDate1;
@@ -135,7 +135,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_clone_function = function test_clone_function() {
-      it(test_clone_function.name, function () {
+      it('test_clone_function', function () {
         var testFunc1 = function testFunc1() {
           return 'ABC';
         }; // no clone
@@ -152,7 +152,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_clone_regexp = function test_clone_regexp() {
-      it(test_clone_regexp.name, function () {
+      it('test_clone_regexp', function () {
         var testRegExp1 = new RegExp('^a'); // no clone
 
         var regexp1 = testRegExp1;
@@ -190,7 +190,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_object = function test_cloneDeep_object() {
-      it(test_cloneDeep_object.name, function () {
+      it('test_cloneDeep_object', function () {
         // clone deep
         var testObject2 = {
           a: 4,
@@ -217,7 +217,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_array = function test_cloneDeep_array() {
-      it(test_cloneDeep_array.name, function () {
+      it('test_cloneDeep_array', function () {
         // clone deep
         var testArray2 = ['a', 'b', 'c'];
         var testArray3 = [1, 2, 3, testArray2];
@@ -233,7 +233,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_object_array_mix = function test_cloneDeep_object_array_mix() {
-      it(test_cloneDeep_object_array_mix.name, function () {
+      it('test_cloneDeep_object_array_mix', function () {
         // no clone deep array object
         var testValue1 = [1, 2, 3, {
           a: 1,
@@ -342,7 +342,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_date = function test_cloneDeep_date() {
-      it(test_cloneDeep_date.name, function () {
+      it('test_cloneDeep_date', function () {
         // no clone
         var date1 = new Date('2019/10/11');
         checkEqual(2019, date1.getFullYear());
@@ -400,7 +400,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_regExp = function test_cloneDeep_regExp() {
-      it(test_cloneDeep_regExp.name, function () {
+      it('test_cloneDeep_regExp', function () {
         var regexp1 = new RegExp('^a'); // clone Deep
 
         var regexp2 = cloneDeep(regexp1);
@@ -500,7 +500,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_function = function test_cloneDeep_function() {
-      it(test_cloneDeep_function.name, function () {
+      it('test_cloneDeep_function', function () {
         var testFunc1 = function testFunc1() {
           return 'ABC';
         }; // no clone
@@ -539,7 +539,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_moment = function test_cloneDeep_moment() {
-      it(test_cloneDeep_moment.name, function () {
+      it('test_cloneDeep_moment', function () {
         if (parts.platform.wsh) {
           return;
         }
@@ -597,7 +597,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
-      it(test_cloneDeep_symbol.name, function () {
+      it('test_cloneDeep_symbol', function () {
         if (parts.platform.wsh) {
           return;
         }
@@ -640,7 +640,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_map = function test_cloneDeep_map() {
-      it(test_cloneDeep_map.name, function () {
+      it('test_cloneDeep_map', function () {
         if (parts.platform.wsh) {
           return;
         }
@@ -727,7 +727,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_set = function test_cloneDeep_set() {
-      it(test_cloneDeep_set.name, function () {
+      it('test_cloneDeep_set', function () {
         if (parts.platform.wsh) {
           return;
         }
@@ -771,7 +771,7 @@ var test_execute_root = function test_execute_root(parts) {
     };
 
     var test_cloneDeep_CircularReference = function test_cloneDeep_CircularReference() {
-      it(test_cloneDeep_CircularReference.name, function () {
+      it('test_cloneDeep_CircularReference', function () {
         var object1 = {
           b: 'test'
         };

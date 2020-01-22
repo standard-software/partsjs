@@ -7,7 +7,7 @@ var test_execute_object = function test_execute_object(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it;
-  describe(test_execute_object.name, function () {
+  describe('test_execute_object', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown;
@@ -20,7 +20,7 @@ var test_execute_object = function test_execute_object(parts) {
         isEmptyObject = _parts$object.isEmptyObject;
 
     var test_copyProperty = function test_copyProperty() {
-      it(test_copyProperty.name, function () {
+      it('test_copyProperty', function () {
         var sourceObject = {
           a: '1',
           b: '2',
@@ -68,11 +68,12 @@ var test_execute_object = function test_execute_object(parts) {
     };
 
     var test_inProperty = function test_inProperty() {
-      it(test_inProperty.name, function () {
+      it('test_inProperty', function () {
         var sourceObject = {
           a: '1',
           b: '2'
         };
+        checkEqual(false, inProperty(sourceObject, ''));
         checkEqual(true, inProperty(sourceObject, 'a'));
         checkEqual(true, inProperty(sourceObject, 'b'));
         checkEqual(false, inProperty(sourceObject, 'c'));
@@ -82,25 +83,25 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,c'));
         checkEqual(true, inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(true, inProperty(sourceObject, 'b,a,'));
+        checkEqual(false, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,')); // Object Named Parameter
 
         checkEqual(true, inProperty({
           object: sourceObject,
-          propertyArray: 'b,a,'
+          propertyPathArray: 'b,a'
         }));
         checkEqual(false, inProperty({
           object: sourceObject,
-          propertyArray: 'd'
+          propertyPathArray: 'd'
         })); // exception
 
         checkEqual(false, isThrown(function () {
           inProperty({}, 'a');
         }));
-        checkEqual(false, isThrown(function () {
+        checkEqual(true, isThrown(function () {
           inProperty(1, 'a');
         }));
         checkEqual(true, isThrown(function () {
@@ -134,10 +135,10 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,c'));
         checkEqual(true, inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(true, inProperty(sourceObject, 'b,a,'));
+        checkEqual(false, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,'));
         checkEqual(true, inProperty(sourceObject, 'a', false));
         checkEqual(true, inProperty(sourceObject, 'b', false));
@@ -148,16 +149,36 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject, 'a,c', false));
         checkEqual(true, inProperty(sourceObject, 'b,a', false));
         checkEqual(true, inProperty(sourceObject, 'a,d', false));
-        checkEqual(true, inProperty(sourceObject, 'a,b,', false));
-        checkEqual(true, inProperty(sourceObject, 'b,c,', false));
-        checkEqual(true, inProperty(sourceObject, 'a,c,', false));
-        checkEqual(true, inProperty(sourceObject, 'b,a,', false));
-        checkEqual(true, inProperty(sourceObject, 'a,d,', false));
+        checkEqual(false, inProperty(sourceObject, 'a,b,', false));
+        checkEqual(false, inProperty(sourceObject, 'b,c,', false));
+        checkEqual(false, inProperty(sourceObject, 'a,c,', false));
+        checkEqual(false, inProperty(sourceObject, 'b,a,', false));
+        checkEqual(false, inProperty(sourceObject, 'a,d,', false));
+        var sourceObject = {
+          a: '1',
+          b: '2',
+          c: {
+            d: {
+              e: 'E'
+            }
+          }
+        };
+        checkEqual(true, inProperty(sourceObject, 'a'));
+        checkEqual(true, inProperty(sourceObject, 'a,b'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,c'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,c.d'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,c.d.e'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.f'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d..e'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,.d'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,'));
+        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.e,'));
       });
     };
 
     var test_propertyCount = function test_propertyCount() {
-      it(test_propertyCount.name, function () {
+      it('test_propertyCount', function () {
         checkEqual(3, propertyCount({
           a: '1',
           b: '2',
@@ -175,7 +196,7 @@ var test_execute_object = function test_execute_object(parts) {
     };
 
     var test_getProperty = function test_getProperty() {
-      it(test_getProperty.name, function () {
+      it('test_getProperty', function () {
         var testObj1 = {
           a: {
             b: {
@@ -189,6 +210,9 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(undefined, getProperty(testObj1, 'a.b.c.d'));
         checkEqual(undefined, getProperty(testObj1, 'a.b.b'));
         checkEqual(undefined, getProperty(testObj1, ''));
+        checkEqual(undefined, getProperty(testObj1, '.'));
+        checkEqual(undefined, getProperty(testObj1, '..'));
+        checkEqual(undefined, getProperty(testObj1, 'a.b.c.'));
         checkEqual(undefined, getProperty(testObj1, 'a.'));
         checkEqual(undefined, getProperty(testObj1, '.a'));
         checkEqual(undefined, getProperty(testObj1, 'a.c'));
@@ -198,7 +222,7 @@ var test_execute_object = function test_execute_object(parts) {
     };
 
     var test_setProperty = function test_setProperty() {
-      it(test_setProperty.name, function () {
+      it('test_setProperty', function () {
         var testObj1 = {};
         setProperty(testObj1, 'a.b', true);
         checkEqual(true, testObj1.a.b);
@@ -231,7 +255,7 @@ var test_execute_object = function test_execute_object(parts) {
     };
 
     var test_isEmptyObject = function test_isEmptyObject() {
-      it(test_isEmptyObject.name, function () {
+      it('test_isEmptyObject', function () {
         checkEqual(true, isEmptyObject({}));
         checkEqual(false, isEmptyObject({
           a: 1

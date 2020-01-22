@@ -41,12 +41,12 @@ var test_execute_index = function test_execute_index(parts) {
     var _parts$test = parts.test,
         describe = _parts$test.describe,
         it = _parts$test.it;
-    describe(test_execute_nameSpace.name, function () {
+    describe('test_execute_nameSpace', function () {
       var checkEqual = parts.test.checkEqual;
       var _parts$object = parts.object,
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
-      it("".concat(test_execute_nameSpace.name, " 1"), function () {
+      it('test_execute_nameSpace 1', function () {
         checkEqual(161, propertyCount(parts));
         checkEqual(64, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
@@ -58,8 +58,8 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(25, propertyCount(parts.array));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
-      it("".concat(test_execute_nameSpace.name, " 2"), function () {
-        checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + ''));
+      it('test_execute_nameSpace 2', function () {
+        checkEqual(true, inProperty(parts, 'isUndefined,isNotNull,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'root'));
         checkEqual(false, inProperty(parts, 'abc,' + ''));
       });
     });
@@ -82,7 +82,7 @@ var test_execute_index = function test_execute_index(parts) {
   }
 
   var describe = parts.test.describe;
-  describe(test_execute_index.name, function () {
+  describe('test_execute_index', function () {
     test_execute_root(parts);
     test_execute_type(parts);
     test_execute_syntax(parts);

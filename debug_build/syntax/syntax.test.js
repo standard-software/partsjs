@@ -9,7 +9,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test;
-  describe(test_execute_syntax.name, function () {
+  describe('test_execute_syntax', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
@@ -51,7 +51,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         or = _parts$compare.or;
 
     var test_guard = function test_guard() {
-      it(test_guard.name, function () {
+      it('test_guard', function () {
         var guardFunc = function guardFunc() {
           return [isInteger(value1), [isInteger(value2), 'testmessage']];
         };
@@ -399,7 +399,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     };
 
     var test_sc = function test_sc() {
-      it(test_sc.name, function () {
+      it('test_sc', function () {
         checkEqual(true, sc(1, equal, 1));
         checkEqual(false, sc(1, equal, 2));
         checkEqual(true, sc('1', equal, '1'));
@@ -411,7 +411,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     };
 
     var test_if_ = function test_if_() {
-      it(test_if_.name, function () {
+      it('test_if_', function () {
         var ifResultValue = {
           then: 'THEN',
           "else": 'ELSE'
@@ -476,7 +476,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     };
 
     var test_switch_ = function test_switch_() {
-      it(test_switch_.name, function () {
+      it('test_switch_', function () {
         var switchResultValue1 = [[1, 'number 1'], ['1', 'string 1']];
         checkEqual('number 1', switch_(1)(switchResultValue1));
         checkEqual('string 1', switch_('1')(switchResultValue1));

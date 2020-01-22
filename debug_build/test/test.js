@@ -69,7 +69,13 @@ var it = function it(text, func) {
       consoleLogTestName();
     }
 
-    console.log(e);
+    var errorMessage = '';
+
+    for (prop in e) {
+      errorMessage += 'e.' + prop + ':' + e[prop] + '\n';
+    }
+
+    console.log(errorMessage);
   }
 
   testFrame.counter = 0;

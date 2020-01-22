@@ -119,12 +119,23 @@ var propertyCount = function propertyCount(object) {
 
 
 var _getProperty = function _getProperty(object, propertyPath) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   var result = object;
   var propertyArray = propertyPath.split('.');
 
   for (var i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '') {
       return undefined;
+    }
+
+    if (hasOwn) {
+      if (!result.hasOwnProperty(propertyArray[i])) {
+        return undefined;
+      }
+    } else {
+      if (!(propertyArray[i] in result)) {
+        return undefined;
+      }
     }
 
     if (_isUndefined(result[propertyArray[i]])) {
@@ -138,10 +149,14 @@ var _getProperty = function _getProperty(object, propertyPath) {
 };
 
 var getProperty = function getProperty(object, propertyPath) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
   if (isObjectParameter(object, 'object, propertyPath')) {
     var _object = object;
     object = _object.object;
     propertyPath = _object.propertyPath;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   }
 
   if (!_isObject(object)) {
@@ -152,7 +167,11 @@ var getProperty = function getProperty(object, propertyPath) {
     throw new TypeError('getProperty args(propertyPath) is not string');
   }
 
-  return _getProperty(object, propertyPath);
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('getProperty args(hasOwn) is not boolean');
+  }
+
+  return _getProperty(object, propertyPath, hasOwn);
 };
 /**
  * setProperty
