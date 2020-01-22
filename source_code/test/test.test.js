@@ -3,7 +3,7 @@
 /* eslint-disable no-var */
 const test_execute_test = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
-  describe(test_execute_test.name, () => {
+  describe('test_execute_test', () => {
 
     const {
       checkEqual,
@@ -11,7 +11,7 @@ const test_execute_test = (parts) => {
     } = parts.test;
 
     const test_isThrown = () => {
-      it(test_isThrown.name, () => {
+      it('test_isThrown', () => {
         checkEqual(true,  isThrown(function() { throw 1; }, function(throwValue) { return throwValue === 1; }));
         checkEqual(false, isThrown(function() { throw 1; }, function(throwValue) { return throwValue !== 1; }));
         checkEqual(false, isThrown(function() { throw 2; }, function(throwValue) { return throwValue === 1; }));

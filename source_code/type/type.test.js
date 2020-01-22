@@ -5,7 +5,7 @@
 /* eslint-disable no-var */
 const test_execute_type = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
-  describe(test_execute_type.name, () => {
+  describe('test_execute_type', () => {
 
     const {
 
@@ -42,7 +42,7 @@ const test_execute_type = (parts) => {
 
 
     const test_checkType = () => {
-      it(test_checkType.name, () => {
+      it('test_checkType', () => {
 
         const checkType = function(
           typeofName,
@@ -131,7 +131,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isUndefined = function() {
-      it(test_isUndefined.name, () => {
+      it('test_isUndefined', () => {
 
         const isUndefinedArray = (array) => {
           return allMatchSome(array, [undefined]);
@@ -190,7 +190,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isNull = function() {
-      it(test_isNull.name, () => {
+      it('test_isNull', () => {
 
         const isNullArray = (array) => {
           return allMatchSome(array, [null]);
@@ -242,7 +242,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isBoolean = function() {
-      it(test_isBoolean.name, () => {
+      it('test_isBoolean', () => {
 
         const isBooleanArray = (array) => {
           return allMatchSome(array, [isBoolean]);
@@ -286,7 +286,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isNumber = function() {
-      it(test_isNumber.name, () => {
+      it('test_isNumber', () => {
 
         const isNumberArray = (array) => {
           return allMatchSome(array, [isNumber]);
@@ -381,7 +381,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isInteger = function() {
-      it(test_isInteger.name, () => {
+      it('test_isInteger', () => {
 
         const isIntegerArray = (array) => {
           return allMatchSome(array, [isInteger]);
@@ -459,7 +459,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isString = function() {
-      it(test_isString.name, () => {
+      it('test_isString', () => {
 
         const isStringArray = (array) => {
           return allMatchSome(array, [isString]);
@@ -516,7 +516,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isFunction = function() {
-      it(test_isFunction.name, () => {
+      it('test_isFunction', () => {
 
         const isFunctionArray = (array) => {
           return allMatchSome(array, [isFunction]);
@@ -539,7 +539,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isObject = function() {
-      it(test_isObject.name, () => {
+      it('test_isObject', () => {
 
         const isObjectArray = (array) => {
           return allMatchSome(array, [isObject]);
@@ -588,7 +588,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isObjectType = function() {
-      it(test_isObjectType.name, () => {
+      it('test_isObjectType', () => {
 
         const isObjectTypeArray = (array) => {
           return allMatchSome(array, [isObjectType]);
@@ -636,7 +636,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isArray = function() {
-      it(test_isArray.name, () => {
+      it('test_isArray', () => {
 
         const isArrayArray = (array) => {
           return allMatchSome(array, [isArray]);
@@ -675,7 +675,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isArrayType = function() {
-      it(test_isArrayType.name, () => {
+      it('test_isArrayType', () => {
 
         checkEqual(true,  Array.isArray([]));
         checkEqual(true,  Array.isArray([123]));
@@ -734,7 +734,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isDate = function() {
-      it(test_isDate.name, () => {
+      it('test_isDate', () => {
 
         checkEqual(true, isDate(new Date(2017, 1, 1)));
         checkEqual(true, isDate(new Date('2017/01')));
@@ -744,7 +744,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isExcection = function() {
-      it(test_isExcection.name, () => {
+      it('test_isExcection', () => {
 
         checkEqual(true, isException({ name: '', message: '' }));
         checkEqual(false, isException({ name: '' }));
@@ -764,7 +764,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isSymbol = function() {
-      it(test_isSymbol.name, () => {
+      it('test_isSymbol', () => {
 
         if (parts.platform.wsh) {
           return;
@@ -776,7 +776,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isMap = function() {
-      it(test_isMap.name, () => {
+      it('test_isMap', () => {
 
         if (parts.platform.wsh) {
           return;
@@ -796,7 +796,7 @@ const test_execute_type = (parts) => {
     };
 
     const test_isSet = function() {
-      it(test_isSet.name, () => {
+      it('test_isSet', () => {
 
         if (parts.platform.wsh) {
           return;

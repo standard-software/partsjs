@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_root = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
-  describe(test_execute_root.name, () => {
+  describe('test_execute_root', () => {
 
     const {
       clone, cloneDeep,
@@ -14,7 +14,7 @@ const test_execute_root = (parts) => {
     } = require('../type/_isType.js');
 
     const test_clone_object = () =>{
-      it(test_clone_object.name, () => {
+      it('test_clone_object', () => {
 
         const testObject1 = { a: 1, b: 2, c: 3 };
 
@@ -50,7 +50,7 @@ const test_execute_root = (parts) => {
 
 
     const test_clone_array = () =>{
-      it(test_clone_array.name, () => {
+      it('test_clone_array', () => {
         const testArray1 = [1, 2, 3];
 
         // no clone
@@ -81,7 +81,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_clone_date = () => {
-      it(test_clone_date.name, () => {
+      it('test_clone_date', () => {
         // no clone
         var testDate1 = new Date('2019/10/11');
         var date1 = testDate1;
@@ -129,7 +129,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_clone_function = () => {
-      it(test_clone_function.name, () => {
+      it('test_clone_function', () => {
         const testFunc1 = () => 'ABC';
 
         // no clone
@@ -146,7 +146,7 @@ const test_execute_root = (parts) => {
 
 
     const test_clone_regexp = () => {
-      it(test_clone_regexp.name, () => {
+      it('test_clone_regexp', () => {
         const testRegExp1 = new RegExp('^a');
 
         // no clone
@@ -189,7 +189,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_object = () =>{
-      it(test_cloneDeep_object.name, () => {
+      it('test_cloneDeep_object', () => {
         // clone deep
         var testObject2 = { a: 4, b: 5, c: 6 };
         var testObject3 = { a: 1, b: 2, c: 3, d: testObject2 };
@@ -207,7 +207,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_array = () =>{
-      it(test_cloneDeep_array.name, () => {
+      it('test_cloneDeep_array', () => {
         // clone deep
         var testArray2 = ['a', 'b', 'c'];
         var testArray3 = [1, 2, 3, testArray2];
@@ -223,7 +223,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_object_array_mix = () => {
-      it(test_cloneDeep_object_array_mix.name, () => {
+      it('test_cloneDeep_object_array_mix', () => {
 
         // no clone deep array object
         var testValue1 = [1, 2, 3, { a: 1, b: 2, c: 3 }];
@@ -297,7 +297,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_date = () => {
-      it(test_cloneDeep_date.name, () => {
+      it('test_cloneDeep_date', () => {
 
         // no clone
         var date1 = new Date('2019/10/11');
@@ -361,7 +361,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_regExp = () => {
-      it(test_cloneDeep_regExp.name, () => {
+      it('test_cloneDeep_regExp', () => {
         var regexp1 = new RegExp('^a');
 
         // clone Deep
@@ -469,7 +469,7 @@ const test_execute_root = (parts) => {
 
 
     const test_cloneDeep_function = () => {
-      it(test_cloneDeep_function.name, () => {
+      it('test_cloneDeep_function', () => {
         const testFunc1 = () => 'ABC';
 
         // no clone
@@ -506,7 +506,7 @@ const test_execute_root = (parts) => {
 
 
     const test_cloneDeep_moment = () => {
-      it(test_cloneDeep_moment.name, () => {
+      it('test_cloneDeep_moment', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -568,7 +568,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_symbol = () => {
-      it(test_cloneDeep_symbol.name, () => {
+      it('test_cloneDeep_symbol', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -621,7 +621,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_map = () => {
-      it(test_cloneDeep_map.name, () => {
+      it('test_cloneDeep_map', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -702,7 +702,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_set = () => {
-      it(test_cloneDeep_set.name, () => {
+      it('test_cloneDeep_set', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -750,7 +750,7 @@ const test_execute_root = (parts) => {
     };
 
     const test_cloneDeep_CircularReference = () => {
-      it(test_cloneDeep_CircularReference.name, () => {
+      it('test_cloneDeep_CircularReference', () => {
         const object1 = { b: 'test' };
         object1.a = object1;
 

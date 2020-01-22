@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_number = (parts) => {
   const { describe, it } = parts.test;
-  describe(test_execute_number.name, () => {
+  describe('test_execute_number', () => {
 
     const {
       checkEqual,
@@ -15,7 +15,7 @@ const test_execute_number = (parts) => {
     } = parts.number;
 
     const test_isMultiples = () => {
-      it(test_isMultiples.name, () => {
+      it('test_isMultiples', () => {
         checkEqual(true,  isMultiples(10, 2));
         checkEqual(true,  isMultiples(10, 5));
         checkEqual(false, isMultiples(10, 3));
@@ -47,7 +47,7 @@ const test_execute_number = (parts) => {
     };
 
     const test_Math_round = () => {
-      it(test_Math_round.name, () => {
+      it('test_Math_round', () => {
         checkEqual(5,    Math.round(5));
         checkEqual(5,    Math.round(5.4));
         checkEqual(6,    Math.round(5.5));
@@ -59,7 +59,7 @@ const test_execute_number = (parts) => {
     };
 
     const test_round = () => {
-      it(test_round.name, () => {
+      it('test_round', () => {
         checkEqual(5,    round(5));
         checkEqual(5,    round(5.4));
         checkEqual(6,    round(5.5));
@@ -130,7 +130,7 @@ const test_execute_number = (parts) => {
     };
 
     const test_nearEqual = () => {
-      it(test_nearEqual.name, () => {
+      it('test_nearEqual', () => {
 
         checkEqual(true,  nearEqual(0.049999,   0.050011,     0.001));
         checkEqual(true,  nearEqual(0.050,      0.051,        0.001));
@@ -165,7 +165,7 @@ const test_execute_number = (parts) => {
     };
 
     const test_inRange = () => {
-      it(test_inRange.name, () => {
+      it('test_inRange', () => {
         checkEqual(true,  inRange(20,     10,     30));
         checkEqual(true,  inRange(10,     10,     30));
         checkEqual(true,  inRange(30,     10,     30));
@@ -195,7 +195,7 @@ const test_execute_number = (parts) => {
     };
 
     const test_randomInt = () => {
-      it(test_randomInt.name, () => {
+      it('test_randomInt', () => {
         checkEqual(5,  randomInt(5, 5));
         var result = randomInt(1, 10);
         checkEqual(true, inRange(result, 1, 10));

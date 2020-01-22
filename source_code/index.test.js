@@ -18,12 +18,12 @@ const test_execute_index = (parts) => {
 
   const test_execute_nameSpace = (parts) => {
     const { describe, it } = parts.test;
-    describe(test_execute_nameSpace.name, () => {
+    describe('test_execute_nameSpace', () => {
 
       const { checkEqual } = parts.test;
       const { propertyCount, inProperty } = parts.object;
 
-      it(`${test_execute_nameSpace.name} 1`, () => {
+      it('test_execute_nameSpace 1', () => {
 
         checkEqual(161, propertyCount(parts));
         checkEqual(64,  propertyCount(parts.type));
@@ -44,7 +44,7 @@ const test_execute_index = (parts) => {
 
       });
 
-      it(`${test_execute_nameSpace.name} 2`, () => {
+      it('test_execute_nameSpace 2', () => {
         checkEqual(true,
           inProperty(
             parts,
@@ -96,7 +96,7 @@ const test_execute_index = (parts) => {
   }
 
   const { describe } = parts.test;
-  describe(test_execute_index.name, () => {
+  describe('test_execute_index', () => {
 
     test_execute_root(parts);
     test_execute_type(parts);

@@ -4,7 +4,7 @@
 /* eslint-disable comma-dangle */
 const test_execute_array = (parts) => {
   const { describe, it } = parts.test;
-  describe(test_execute_array.name, () => {
+  describe('test_execute_array', () => {
 
     const {
       checkEqual, checkCompare,
@@ -28,7 +28,7 @@ const test_execute_array = (parts) => {
     } = parts;
 
     const test_array_from = () => {
-      it(test_array_from.name, () => {
+      it('test_array_from', () => {
         function test() {
           // eslint-disable-next-line prefer-rest-params
           return array.from(arguments);
@@ -38,7 +38,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_min = () => {
-      it(test_min.name, () => {
+      it('test_min', () => {
         checkEqual(null, array.min([]));
         checkEqual(5, array.min([5, 10, 15, 20]));
         checkEqual(1, array.min([5, 4, 3, 2, 1]));
@@ -70,7 +70,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_max = () => {
-      it(test_max.name, () => {
+      it('test_max', () => {
         checkEqual(null, array.max([]));
         checkEqual(20, array.max([5, 10, 15, 20]));
         checkEqual(5, array.max([5, 4, 3, 2, 1]));
@@ -102,7 +102,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_sum = () => {
-      it(test_sum.name, () => {
+      it('test_sum', () => {
         checkEqual(0, array.sum([]));
         checkEqual(1, array.sum([1]));
         checkEqual(0, array.sum([0]));
@@ -113,7 +113,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_average = () => {
-      it(test_average.name, () => {
+      it('test_average', () => {
         checkEqual(null, array.average([]));
         checkEqual(1, array.average([1]));
         checkEqual(0, array.average([0]));
@@ -124,14 +124,14 @@ const test_execute_array = (parts) => {
     };
 
     const test_midian = () => {
-      it(test_midian.name, () => {
+      it('test_midian', () => {
         checkEqual(71, array.midian([70, 72, 80, 52, 52, 100]));
         checkEqual(10, array.midian([9, 9, 10, 10, 10, 100, 6]));
       });
     };
 
     const test_mode = () => {
-      it(test_mode.name, () => {
+      it('test_mode', () => {
         checkCompare(parts.compare.equal,
           [],
           array.mode([])
@@ -156,7 +156,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_uniqe = () => {
-      it(test_uniqe.name, () => {
+      it('test_uniqe', () => {
         checkCompare(parts.compare.equal,
           [1, 2, 3, 4, 0],
           array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
@@ -165,7 +165,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_single = () => {
-      it(test_single.name, () => {
+      it('test_single', () => {
         checkCompare(parts.compare.equal,
           [1, 0],
           array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])
@@ -174,7 +174,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_multiple = () => {
-      it(test_multiple.name, () => {
+      it('test_multiple', () => {
         checkCompare(parts.compare.equal,
           [2, 3, 4],
           array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])
@@ -183,7 +183,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_filter = () => {
-      it(test_filter.name, () => {
+      it('test_filter', () => {
         checkCompare(parts.compare.equal,
           [0, 2, 4],
           array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
@@ -209,7 +209,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_map = () => {
-      it(test_map.name, () => {
+      it('test_map', () => {
         checkCompare(parts.compare.equal,
           [true, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
@@ -239,7 +239,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_count = () => {
-      it(test_count.name, () => {
+      it('test_count', () => {
         checkCompare(parts.compare.equal,
           3,
           array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
@@ -266,7 +266,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_findIndex = () => {
-      it(test_findIndex.name, () => {
+      it('test_findIndex', () => {
         checkEqual(0,
           array.findIndex(['a', 'b', 'c', 'A', 'B', 'C'],
             value => value.toLowerCase() === 'a')
@@ -303,7 +303,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_findBackIndex = () => {
-      it(test_findBackIndex.name, () => {
+      it('test_findBackIndex', () => {
         checkEqual(3,
           array.findBackIndex(['a', 'b', 'c', 'A', 'B', 'C'],
             value => value.toLowerCase() === 'a')
@@ -340,7 +340,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_find = () => {
-      it(test_find.name, () => {
+      it('test_find', () => {
         checkEqual('a',
           array.find(['a', 'b', 'c', 'A', 'B', 'C'],
             value => value.toLowerCase() === 'a')
@@ -377,7 +377,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_findBack = () => {
-      it(test_findBack.name, () => {
+      it('test_findBack', () => {
         checkEqual('A',
           array.findBack(['a', 'b', 'c', 'A', 'B', 'C'],
             value => value.toLowerCase() === 'a')
@@ -415,7 +415,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_some = () => {
-      it(test_some.name, () => {
+      it('test_some', () => {
         checkEqual(true,
           array.some(['a', 'b', 'c', 'A', 'B', 'C'],
             value => value.toLowerCase() === 'a')
@@ -460,7 +460,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_all = () => {
-      it(test_all.name, () => {
+      it('test_all', () => {
         checkEqual(false,
           array.all(['a', 'b', 'c', 'A', 'B', 'C'],
             value => value.toLowerCase() === 'a')
@@ -507,7 +507,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_operation_insert = () => {
-      it(test_operation_insert.name, () => {
+      it('test_operation_insert', () => {
         checkCompare(parts.compare.equal,
           [1, 2, 3],
           array.operation.insert([1, 2, 3], [])
@@ -544,13 +544,13 @@ const test_execute_array = (parts) => {
         // exception
         checkEqual(true, isThrownException(() => {
           array.operation.insert([1, 2, 3], [0], -1);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(() => {
           array.operation.insert([1, 2, 3], [0], 4);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(() => {
           array.operation.insert([1, 2, 3], 0, 4);
-        }, TypeError.name));
+        }, 'TypeError'));
 
         // Object Named Parameter
         checkCompare(parts.compare.equal,
@@ -565,7 +565,7 @@ const test_execute_array = (parts) => {
     };
 
     const test_operation_add = () => {
-      it(test_operation_add.name, () => {
+      it('test_operation_add', () => {
         checkCompare(parts.compare.equal,
           [1, 2, 3],
           array.operation.add([1, 2, 3], [])
@@ -602,13 +602,13 @@ const test_execute_array = (parts) => {
         // exception
         checkEqual(true, isThrownException(() => {
           array.operation.add([1, 2, 3], [0], -2);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(() => {
           array.operation.add([1, 2, 3], [0], 3);
-        }, RangeError.name));
+        }, 'RangeError'));
         checkEqual(true, isThrownException(() => {
           array.operation.add([1, 2, 3], 0, 4);
-        }, TypeError.name));
+        }, 'TypeError'));
 
         // Object Named Parameter
         checkCompare(parts.compare.equal,

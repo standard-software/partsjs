@@ -3,7 +3,7 @@
 /* eslint-disable no-var */
 const test_execute_string = (parts) => {
   const { describe, it } = parts.test;
-  describe(test_execute_string.name, () => {
+  describe('test_execute_string', () => {
 
     const {
       checkEqual,
@@ -16,7 +16,7 @@ const test_execute_string = (parts) => {
     } = parts.string;
 
     const test_matchFormat = () => {
-      it(test_matchFormat.name, () => {
+      it('test_matchFormat', () => {
         checkEqual(true,  matchFormat('number', '123'));
         checkEqual(false, matchFormat('number', '12a'));
         checkEqual(false, matchFormat('number', '-123'));
@@ -110,7 +110,7 @@ const test_execute_string = (parts) => {
     };
 
     const test_includes = () => {
-      it(test_includes.name, () => {
+      it('test_includes', () => {
         checkEqual(true,  includes('abcdef', ['ab']));
         checkEqual(true,  includes('abcdef', ['cd']));
         checkEqual(false, includes('abcdef', ['ac']));
@@ -184,7 +184,7 @@ const test_execute_string = (parts) => {
     };
 
     const test_replaceAll = () => {
-      it(test_replaceAll.name, () => {
+      it('test_replaceAll', () => {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
         checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));

@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_compare = (parts) => {
   const { describe, it } = parts.test;
-  describe(test_execute_compare.name, () => {
+  describe('test_execute_compare', () => {
 
     const {
       isUndefined, isNull, isNaNStrict,
@@ -35,7 +35,7 @@ const test_execute_compare = (parts) => {
     } = parts.object;
 
     const test_equal = () => {
-      it(test_equal.name, () => {
+      it('test_equal', () => {
         // Primitive value
         checkEqual(true,  equal(  1,   1));
         checkEqual(true,  equal('1', '1'));
@@ -59,7 +59,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equal_object = () => {
-      it(test_equal_object.name, () => {
+      it('test_equal_object', () => {
         // object
         checkEqual(true,
           equal( { },   { }),
@@ -84,7 +84,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equal_array = () => {
-      it(test_equal_array.name, () => {
+      it('test_equal_array', () => {
         checkEqual(true,  equal( [],   []));
         checkEqual(false, equal( [[]],   [[]])    );
 
@@ -134,7 +134,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equal_date = () => {
-      it(test_equal_date.name, () => {
+      it('test_equal_date', () => {
         // date
         checkEqual(true,
           equal( new Date('2019/11/02'),  new Date('2019/11/02')),
@@ -174,7 +174,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equal_regexp = () => {
-      it(test_equal_regexp.name, () => {
+      it('test_equal_regexp', () => {
         // regexp
         checkEqual(true,
           equal( new RegExp(/^a/),  new RegExp(/^a/) ),
@@ -214,7 +214,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equal_map = () => {
-      it(test_equal_map.name, () => {
+      it('test_equal_map', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -263,7 +263,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equal_set = () => {
-      it(test_equal_set.name, () => {
+      it('test_equal_set', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -312,7 +312,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep = () => {
-      it(test_equalDeep.name, () => {
+      it('test_equalDeep', () => {
         // Primitive value
         checkEqual(true,  equalDeep(  1,   1), 'test_equalDeep 1');
         checkEqual(true,  equalDeep('1', '1'));
@@ -336,7 +336,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_object = () => {
-      it(test_equalDeep_object.name, () => {
+      it('test_equalDeep_object', () => {
         // object
         checkEqual(true,
           equalDeep( { },   { }),
@@ -370,7 +370,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_object_array_mix = () => {
-      it(test_equalDeep_object_array_mix.name, () => {
+      it('test_equalDeep_object_array_mix', () => {
 
         // equal false array object
         var testValue1 = [1, 2, 3, { a: 1, b: 2, c: 3 }];
@@ -405,7 +405,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_object_CircularReference = () => {
-      it(test_equalDeep_object_CircularReference.name, () => {
+      it('test_equalDeep_object_CircularReference', () => {
         // CircularReference
         var object1 = { a: '1', b: '2', c: {} };
         var object2 = { a: '1', b: '2', c: {} };
@@ -452,7 +452,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_array = () => {
-      it(test_equalDeep_array.name, () => {
+      it('test_equalDeep_array', () => {
         checkEqual(true,  equalDeep( [1, 2, {}],   [1, 2, {}]));
         checkEqual(true,  equalDeep( [1, 2, [3]],   [1, 2, [3]]));
 
@@ -507,7 +507,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_array_CircularReference = () => {
-      it(test_equalDeep_array_CircularReference.name, () => {
+      it('test_equalDeep_array_CircularReference', () => {
         // CircularReference
         var array1 = [{ a: '1', b: '2' }, 1, 2];
         var array2 = [{ a: '1', b: '2' }, 1, 2];
@@ -554,7 +554,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_date = () => {
-      it(test_equalDeep_date.name, () => {
+      it('test_equalDeep_date', () => {
         // date
         checkEqual(true,
           equalDeep( new Date('2019/11/02'),  new Date('2019/11/02')),
@@ -595,7 +595,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_regexp = () => {
-      it(test_equalDeep_regexp.name, () => {
+      it('test_equalDeep_regexp', () => {
         // regexp
         checkEqual(true,
           equalDeep( new RegExp(/^a/),  new RegExp(/^a/) ),
@@ -636,7 +636,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_map = () => {
-      it(test_equalDeep_map.name, () => {
+      it('test_equalDeep_map', () => {
 
         if (parts.platform.wsh) {
           return;
@@ -685,7 +685,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_map_object_array = () => {
-      it(test_equalDeep_map_object_array.name, () => {
+      it('test_equalDeep_map_object_array', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -734,7 +734,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_map_CircularReference = () => {
-      it(test_equalDeep_map_CircularReference.name, () => {
+      it('test_equalDeep_map_CircularReference', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -796,7 +796,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_set = () => {
-      it(test_equalDeep_set.name, () => {
+      it('test_equalDeep_set', () => {
 
         if (parts.platform.wsh) {
           return;
@@ -844,7 +844,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_set_object_array = () => {
-      it(test_equalDeep_set_object_array.name, () => {
+      it('test_equalDeep_set_object_array', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -893,7 +893,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_equalDeep_set_CircularReference = () => {
-      it(test_equalDeep_set_CircularReference.name, () => {
+      it('test_equalDeep_set_CircularReference', () => {
         if (parts.platform.wsh) {
           return;
         }
@@ -955,7 +955,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_or = () => {
-      it(test_or.name, () => {
+      it('test_or', () => {
         var value;
         checkEqual(false, or(value, []));
         checkEqual(false, or(value, [null]));
@@ -1026,7 +1026,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_matchValue = () => {
-      it(test_matchValue.name, () => {
+      it('test_matchValue', () => {
         checkEqual('',          matchValue('', null,       999));
         checkEqual(999,         matchValue('', '',       999));
         checkEqual('123',       matchValue('123', null,       999));
@@ -1060,7 +1060,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_initialValue = () => {
-      it(test_initialValue.name, () => {
+      it('test_initialValue', () => {
         // almost test_matchSome done
         checkEqual('123', initialValue('123', 999));
         checkEqual(999,  initialValue(undefined, 999));
@@ -1083,7 +1083,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_matchSome = () => {
-      it(test_matchSome.name, () => {
+      it('test_matchSome', () => {
         // normal args string
         checkEqual(false, matchSome('abc', ['123', '456', '789']), 'test_match 1');
         checkEqual(true,  matchSome('abc', ['123', '456', 'abc']), 'test_match 2');
@@ -1257,7 +1257,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_matchSomeValue = () => {
-      it(test_matchSomeValue.name, () => {
+      it('test_matchSomeValue', () => {
         // almost test_matchSome done
         checkEqual(999, matchSomeValue(99, [99], 999));
         checkEqual(98,  matchSomeValue(98, [99], 999));
@@ -1272,7 +1272,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_allMatchSome = () =>{
-      it(test_allMatchSome.name, () => {
+      it('test_allMatchSome', () => {
         checkEqual(true,
           allMatchSome([10, 20, 30], [value => value > 5]),
         );
@@ -1312,7 +1312,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_someMatchSome = () =>{
-      it(test_someMatchSome.name, () => {
+      it('test_someMatchSome', () => {
         checkEqual(true,
           someMatchSome([10, 20, 30], [value => value > 5])
           , 'test_matchSome');
@@ -1361,7 +1361,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_indexOfMatchSome = () =>{
-      it(test_indexOfMatchSome.name, () => {
+      it('test_indexOfMatchSome', () => {
         checkEqual(0,
           indexOfMatchSome([10, 20, 30], [value => value > 5])
           , 'test_matchSomeIndex');
@@ -1410,7 +1410,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_matchAll = () => {
-      it(test_matchAll.name, () => {
+      it('test_matchAll', () => {
         // normal args string
         checkEqual(false, matchAll('abc', []));
         checkEqual(true,  matchAll('abc', ['abc']));
@@ -1550,7 +1550,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_matchAllValue = () => {
-      it(test_matchAllValue.name, () => {
+      it('test_matchAllValue', () => {
         checkEqual(999, matchAllValue(99, [99], 999));
         checkEqual(98,  matchAllValue(98, [99], 999));
         checkEqual(999,  matchAllValue(100, [
@@ -1582,7 +1582,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_allMatchAll = () =>{
-      it(test_allMatchAll.name, () => {
+      it('test_allMatchAll', () => {
         checkEqual(false,
           allMatchAll([], [
             /^a/, /.*b.*/, /c$/,
@@ -1615,7 +1615,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_someMatchAll = () =>{
-      it(test_someMatchAll.name, () => {
+      it('test_someMatchAll', () => {
         checkEqual(false,
           someMatchAll([], [
             /^a/, /.*b.*/, /c$/,
@@ -1659,7 +1659,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_indexOfMatchAll = () =>{
-      it(test_indexOfMatchAll.name, () => {
+      it('test_indexOfMatchAll', () => {
         checkEqual(-1,
           indexOfMatchAll([], [
             /^a/, /.*b.*/, /c$/,
@@ -1704,9 +1704,12 @@ const test_execute_compare = (parts) => {
 
 
     const test_includes = () => {
-      it(test_includes.name, () => {
+      it('test_includes', () => {
+        checkEqual(true,  'abc'.includes('a'));
+
         // string.includes strange empty string
         checkEqual(true,  'abc'.includes(''));
+
         checkEqual(false, 'abc'.includes(null));
         checkEqual(false, 'abc'.includes(undefined));
         checkEqual(false, 'abc'.includes());
@@ -1746,7 +1749,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_includesSome = () => {
-      it(test_includesSome.name, () => {
+      it('test_includesSome', () => {
 
         checkEqual(false, includesSome('abc', ['']));
         checkEqual(true,  includesSome('abc', ['', 'a']));
@@ -1854,7 +1857,7 @@ const test_execute_compare = (parts) => {
     };
 
     const test_includesAll = () => {
-      it(test_includesAll.name, () => {
+      it('test_includesAll', () => {
 
         checkEqual(false, includesAll('abc', ['']));
         checkEqual(false, includesAll('abc', ['', 'a']));

@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_syntax = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
-  describe(test_execute_syntax.name, () => {
+  describe('test_execute_syntax', () => {
 
     const {
       checkEqual,
@@ -38,7 +38,7 @@ const test_execute_syntax = (parts) => {
     } = parts.compare;
 
     const test_guard = function() {
-      it(test_guard.name, () => {
+      it('test_guard', () => {
 
         var guardFunc = () => [
           isInteger(value1), [isInteger(value2), 'testmessage'],
@@ -296,7 +296,7 @@ const test_execute_syntax = (parts) => {
     };
 
     const test_sc = () => {
-      it(test_sc.name, () => {
+      it('test_sc', () => {
         checkEqual(true, sc(1, equal, 1));
         checkEqual(false, sc(1, equal, 2));
         checkEqual(true, sc('1', equal, '1'));
@@ -309,7 +309,7 @@ const test_execute_syntax = (parts) => {
     };
 
     const test_if_ = function() {
-      it(test_if_.name, () => {
+      it('test_if_', () => {
         var ifResultValue = {
           then: 'THEN',
           else: 'ELSE',
@@ -374,7 +374,7 @@ const test_execute_syntax = (parts) => {
     };
 
     const test_switch_ = function() {
-      it(test_switch_.name, () => {
+      it('test_switch_', () => {
         var switchResultValue1 = [
           [1, 'number 1'],
           ['1', 'string 1'],

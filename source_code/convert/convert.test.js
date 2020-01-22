@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_convert = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
-  describe(test_execute_convert.name, () => {
+  describe('test_execute_convert', () => {
     const {
       checkEqual,
       isThrown,
@@ -17,7 +17,7 @@ const test_execute_convert = (parts) => {
     } = parts.convert;
 
     const test_numberToString = () => {
-      it(test_numberToString.name, () => {
+      it('test_numberToString', () => {
 
         // Positive number
         checkEqual('32',        numberToString(32));
@@ -112,7 +112,7 @@ const test_execute_convert = (parts) => {
     };
 
     const test_stringToNumber = () => {
-      it(test_stringToNumber.name, () => {
+      it('test_stringToNumber', () => {
 
         // Integer
         checkEqual(123,       stringToNumberDefault('123'));
@@ -214,7 +214,7 @@ const test_execute_convert = (parts) => {
     };
 
     const test_stringToIntegerDefault = () => {
-      it(test_stringToIntegerDefault.name, () => {
+      it('test_stringToIntegerDefault', () => {
 
         // Integer
         checkEqual(123,       stringToIntegerDefault('123'));
@@ -364,7 +364,7 @@ const test_execute_convert = (parts) => {
     };
 
     const test_NumerCast = () => {
-      it(test_NumerCast.name, () => {
+      it('test_NumerCast', () => {
         // Integer
         checkEqual(123,       Number('123'));
         checkEqual(123,       Number('0123'));
@@ -466,7 +466,7 @@ const test_execute_convert = (parts) => {
     };
 
     const test_toNumber = () => {
-      it(test_toNumber.name, () => {
+      it('test_toNumber', () => {
         // Integer
         checkEqual(123,       toNumber('123'));
         checkEqual(123,       toNumber('0123'));
@@ -543,7 +543,7 @@ const test_execute_convert = (parts) => {
     };
 
     const test_toInteger = () => {
-      it(test_toInteger.name, () => {
+      it('test_toInteger', () => {
         // Integer
         checkEqual(123,       toInteger('123'));
         checkEqual(123,       toInteger('0123'));

@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_object = (parts) => {
   const { describe, it } = parts.test;
-  describe(test_execute_object.name, () => {
+  describe('test_execute_object', () => {
 
     const {
       checkEqual,
@@ -17,7 +17,7 @@ const test_execute_object = (parts) => {
     } = parts.object;
 
     const test_copyProperty = () => {
-      it(test_copyProperty.name, () => {
+      it('test_copyProperty', () => {
 
         var sourceObject = {
           a: '1', b: '2', c: '3',
@@ -72,7 +72,7 @@ const test_execute_object = (parts) => {
     };
 
     const test_inProperty = () => {
-      it(test_inProperty.name, () => {
+      it('test_inProperty', () => {
 
         var sourceObject = {
           a: '1', b: '2',
@@ -196,7 +196,7 @@ const test_execute_object = (parts) => {
     };
 
     const test_propertyCount = () => {
-      it(test_propertyCount.name, () => {
+      it('test_propertyCount', () => {
         checkEqual(3, propertyCount({
           a: '1', b: '2', c: '3',
         }));
@@ -213,7 +213,7 @@ const test_execute_object = (parts) => {
     };
 
     const test_getProperty = () => {
-      it(test_getProperty.name, () => {
+      it('test_getProperty', () => {
 
         const testObj1 = {
           a: {
@@ -241,7 +241,7 @@ const test_execute_object = (parts) => {
     };
 
     const test_setProperty = () => {
-      it(test_setProperty.name, () => {
+      it('test_setProperty', () => {
 
         var testObj1 = {};
         setProperty(testObj1, 'a.b',    true);
@@ -276,7 +276,7 @@ const test_execute_object = (parts) => {
 
 
     const test_isEmptyObject = () =>{
-      it(test_isEmptyObject.name, () => {
+      it('test_isEmptyObject', () => {
         checkEqual(true,  isEmptyObject({}));
         checkEqual(false, isEmptyObject({a:1}));
       });
