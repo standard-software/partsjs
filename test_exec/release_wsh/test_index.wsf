@@ -35,8 +35,13 @@
 
   var console = {
     log: function(value) {
-      outputMessage += value;
-      outputMessage += '\n'
+      if (parts.isObjectType(value)) {
+        for (var prop in value) {
+          outputMessage += prop + ':' + value[prop] + '\n';
+        }
+      } else {
+        outputMessage += value + '\n';
+      }
     }
   };
   var require = function() {

@@ -1,7 +1,10 @@
 const {
   _isUndefined, _isNull, _isNaNStrict,
   _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
+  _isFunction, _isObject, _isObjectType,
+  _isArray, _isArrayType,
+  _isDate, _isRegExp,
+  _isError,
   _isException,
 } = require('../type/type.js');
 
@@ -61,11 +64,7 @@ const it = (text, func) => {
     if (!testFrame.outputIt) {
       consoleLogTestName();
     }
-    let errorMessage = '';
-    for (prop in e) {
-      errorMessage += 'e.' + prop + ':' + e[prop] + '\n';
-    }
-    console.log(errorMessage);
+    console.log(e);
   }
   testFrame.counter = 0;
   testFrame.testName = '';
