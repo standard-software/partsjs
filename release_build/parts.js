@@ -1840,8 +1840,8 @@ var _propertyCount = function _propertyCount(object) {
 };
 
 var propertyCount = function propertyCount(object) {
-  if (!_isObject(object)) {
-    throw new TypeError('propertyCount args(object) is not object');
+  if (!_isObjectType(object)) {
+    throw new TypeError('propertyCount args(object) is not object type');
   }
 
   return _propertyCount(object);
@@ -2113,9 +2113,12 @@ var _require = __webpack_require__(5),
     _isString = _require._isString,
     _isFunction = _require._isFunction,
     _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
+    _isError = _require._isError,
     _isException = _require._isException;
 
 var _require2 = __webpack_require__(18),
@@ -2172,13 +2175,7 @@ var it = function it(text, func) {
       consoleLogTestName();
     }
 
-    var errorMessage = '';
-
-    for (prop in e) {
-      errorMessage += 'e.' + prop + ':' + e[prop] + '\n';
-    }
-
-    console.log(errorMessage);
+    console.log(e);
   }
 
   testFrame.counter = 0;
@@ -3581,46 +3578,6 @@ var matchFormat = function matchFormat(formatName, value) {
   return _matchFormat(formatName, value);
 };
 /**
- * includes
- */
-
-
-var _includes = function _includes(value, compareArray) {
-  var compareFunctionArray = _map(compareArray, function (element) {
-    if (_isRegExp(element)) {
-      return element;
-    } else if (_isString(element)) {
-      return element === '' ? function () {
-        return false;
-      } : function (value) {
-        return value.indexOf(element) >= 0;
-      };
-    } else {
-      throw new TypeError('_includes args(compareArray element) is not [regexp|string]');
-    }
-  });
-
-  return _matchSome(value, compareFunctionArray);
-};
-
-var includes = function includes(value, compareArray) {
-  if (isObjectParameter(value, 'value, compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  }
-
-  if (!_isString(value)) {
-    throw new TypeError('includes args(value) is not string');
-  }
-
-  if (!_isArray(compareArray)) {
-    throw new TypeError('includes args(compareArray) is not array');
-  }
-
-  return _includes(value, compareArray);
-};
-/**
  * repeat
  */
 
@@ -3637,9 +3594,9 @@ var _repeat = function _repeat(value, count) {
 
 var repeat = function repeat(value, count) {
   if (isObjectParameter(value, 'value, count')) {
-    var _value2 = value;
-    value = _value2.value;
-    count = _value2.count;
+    var _value = value;
+    value = _value.value;
+    count = _value.count;
   }
 
   if (!_isString(value)) {
@@ -3687,12 +3644,10 @@ var isUpperCase = function isUpperCase(value) {
 
 module.exports = {
   _matchFormat: _matchFormat,
-  _includes: _includes,
   _repeat: _repeat,
   _isLowerCase: _isLowerCase,
   _isUpperCase: _isUpperCase,
   matchFormat: matchFormat,
-  includes: includes,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase
@@ -4204,6 +4159,9 @@ var _require3 = __webpack_require__(19),
     _some = _require3._some,
     _all = _require3._all,
     _findFirstIndex = _require3._findFirstIndex;
+
+var _require4 = __webpack_require__(26),
+    _match = _require4._match;
 /**
  * includes
  */
@@ -4215,9 +4173,13 @@ var _includes = function _includes(value, compare) {
       return false;
     }
 
-    return value.includes(compare);
+    if (_isRegExp(compare)) {
+      return _match(value, compare);
+    }
+
+    return value.indexOf(compare) !== -1;
   } else if (_isArray(value)) {
-    return value.includes(compare);
+    return value.indexOf(compare) !== -1;
   }
 };
 
@@ -4229,8 +4191,8 @@ var includes = function includes(value, compare) {
   }
 
   if (_isString(value)) {
-    if (!_isString(compare)) {
-      throw new TypeError('includes args(compare) is not string');
+    if (!(_isString(compare) || _isRegExp(compare))) {
+      throw new TypeError('includes args(compare) is not [string|RegExp]');
     }
   } else if (_isArray(value)) {//
   } else {
@@ -4246,7 +4208,7 @@ var includes = function includes(value, compare) {
 
 var _includesSome = function _includesSome(value, compareArray) {
   return _some(compareArray, function (compare) {
-    return _includes(value, compare);
+    return includes(value, compare);
   });
 };
 
@@ -4270,7 +4232,7 @@ var includesSome = function includesSome(value, compareArray) {
 
 var _includesAll = function _includesAll(value, compareArray) {
   return _all(compareArray, function (compare) {
-    return _includes(value, compare);
+    return includes(value, compare);
   });
 };
 
@@ -5503,13 +5465,13 @@ var _require = __webpack_require__(5),
     _isException = _require._isException;
 
 var _require2 = __webpack_require__(24),
-    _or = _require2._or;
+    _or = _require2._or,
+    _includes = _require2._includes,
+    _includesSome = _require2._includesSome,
+    _includesAll = _require2._includesAll;
 
-var _require3 = __webpack_require__(22),
-    _includes = _require3._includes;
-
-var _require4 = __webpack_require__(18),
-    map = _require4.map;
+var _require3 = __webpack_require__(18),
+    map = _require3.map;
 
 var original = {};
 original.log = console.log;
@@ -5600,11 +5562,11 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
     var acceptFlag = acceptArray.length === 0;
 
     if (acceptFlag === false) {
-      acceptFlag = _includes(messageArgsAll, acceptArray);
+      acceptFlag = _includesSome(messageArgsAll, acceptArray);
     }
 
     if (acceptFlag && _isArray(rejectArray)) {
-      acceptFlag = !_includes(messageArgsAll, rejectArray);
+      acceptFlag = !_includesSome(messageArgsAll, rejectArray);
     }
 
     if (acceptFlag) {

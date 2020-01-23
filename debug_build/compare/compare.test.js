@@ -1951,6 +1951,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, isThrown(function () {
           includesSome('abc', 'a');
         }));
+        checkEqual(false, isThrownException(function () {
+          includesSome('123', ['1']);
+        }, new TypeError().name));
+        checkEqual(true, isThrownException(function () {
+          includesSome('123', [1]);
+        }, new TypeError().name));
         checkEqual(false, isThrown(function () {
           includesSome([0, 1, 2], [0, 10]);
         }));
@@ -1970,6 +1976,12 @@ var test_execute_compare = function test_execute_compare(parts) {
           includesSome({
             value: 'abc',
             compareArray: 'a'
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          includesSome({
+            value: 'abc',
+            compareArray: [1]
           });
         }));
         checkEqual(false, isThrown(function () {

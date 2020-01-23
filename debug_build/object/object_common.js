@@ -107,8 +107,8 @@ var _propertyCount = function _propertyCount(object) {
 };
 
 var propertyCount = function propertyCount(object) {
-  if (!_isObject(object)) {
-    throw new TypeError('propertyCount args(object) is not object');
+  if (!_isObjectType(object)) {
+    throw new TypeError('propertyCount args(object) is not object type');
   }
 
   return _propertyCount(object);

@@ -10,9 +10,12 @@ var _require = require('../type/type.js'),
     _isString = _require._isString,
     _isFunction = _require._isFunction,
     _isObject = _require._isObject,
+    _isObjectType = _require._isObjectType,
     _isArray = _require._isArray,
+    _isArrayType = _require._isArrayType,
     _isDate = _require._isDate,
     _isRegExp = _require._isRegExp,
+    _isError = _require._isError,
     _isException = _require._isException;
 
 var _require2 = require('../array/array.js'),
@@ -69,13 +72,7 @@ var it = function it(text, func) {
       consoleLogTestName();
     }
 
-    var errorMessage = '';
-
-    for (prop in e) {
-      errorMessage += 'e.' + prop + ':' + e[prop] + '\n';
-    }
-
-    console.log(errorMessage);
+    console.log(e);
   }
 
   testFrame.counter = 0;

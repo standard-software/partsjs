@@ -189,8 +189,14 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, isThrown(function () {
           propertyCount({});
         }));
-        checkEqual(true, isThrown(function () {
+        checkEqual(false, isThrown(function () {
           propertyCount([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          propertyCount(10);
+        }));
+        checkEqual(true, isThrown(function () {
+          propertyCount('abc');
         }));
       });
     };

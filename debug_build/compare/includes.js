@@ -28,6 +28,9 @@ var _require3 = require('../array/array_common.js'),
     _some = _require3._some,
     _all = _require3._all,
     _findFirstIndex = _require3._findFirstIndex;
+
+var _require4 = require('../compare/match.js'),
+    _match = _require4._match;
 /**
  * includes
  */
@@ -39,9 +42,13 @@ var _includes = function _includes(value, compare) {
       return false;
     }
 
-    return value.includes(compare);
+    if (_isRegExp(compare)) {
+      return _match(value, compare);
+    }
+
+    return value.indexOf(compare) !== -1;
   } else if (_isArray(value)) {
-    return value.includes(compare);
+    return value.indexOf(compare) !== -1;
   }
 };
 
@@ -53,8 +60,8 @@ var includes = function includes(value, compare) {
   }
 
   if (_isString(value)) {
-    if (!_isString(compare)) {
-      throw new TypeError('includes args(compare) is not string');
+    if (!(_isString(compare) || _isRegExp(compare))) {
+      throw new TypeError('includes args(compare) is not [string|RegExp]');
     }
   } else if (_isArray(value)) {//
   } else {
@@ -70,7 +77,7 @@ var includes = function includes(value, compare) {
 
 var _includesSome = function _includesSome(value, compareArray) {
   return _some(compareArray, function (compare) {
-    return _includes(value, compare);
+    return includes(value, compare);
   });
 };
 
@@ -94,7 +101,7 @@ var includesSome = function includesSome(value, compareArray) {
 
 var _includesAll = function _includesAll(value, compareArray) {
   return _all(compareArray, function (compare) {
-    return _includes(value, compare);
+    return includes(value, compare);
   });
 };
 

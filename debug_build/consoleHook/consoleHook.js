@@ -16,13 +16,13 @@ var _require = require('../type/type.js'),
     _isException = _require._isException;
 
 var _require2 = require('../compare/compare.js'),
-    _or = _require2._or;
+    _or = _require2._or,
+    _includes = _require2._includes,
+    _includesSome = _require2._includesSome,
+    _includesAll = _require2._includesAll;
 
-var _require3 = require('../string/string.js'),
-    _includes = _require3._includes;
-
-var _require4 = require('../array/array.js'),
-    map = _require4.map;
+var _require3 = require('../array/array.js'),
+    map = _require3.map;
 
 var original = {};
 original.log = console.log;
@@ -113,11 +113,11 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
     var acceptFlag = acceptArray.length === 0;
 
     if (acceptFlag === false) {
-      acceptFlag = _includes(messageArgsAll, acceptArray);
+      acceptFlag = _includesSome(messageArgsAll, acceptArray);
     }
 
     if (acceptFlag && _isArray(rejectArray)) {
-      acceptFlag = !_includes(messageArgsAll, rejectArray);
+      acceptFlag = !_includesSome(messageArgsAll, rejectArray);
     }
 
     if (acceptFlag) {

@@ -231,46 +231,6 @@ var matchFormat = function matchFormat(formatName, value) {
   return _matchFormat(formatName, value);
 };
 /**
- * includes
- */
-
-
-var _includes = function _includes(value, compareArray) {
-  var compareFunctionArray = _map(compareArray, function (element) {
-    if (_isRegExp(element)) {
-      return element;
-    } else if (_isString(element)) {
-      return element === '' ? function () {
-        return false;
-      } : function (value) {
-        return value.indexOf(element) >= 0;
-      };
-    } else {
-      throw new TypeError('_includes args(compareArray element) is not [regexp|string]');
-    }
-  });
-
-  return _matchSome(value, compareFunctionArray);
-};
-
-var includes = function includes(value, compareArray) {
-  if (isObjectParameter(value, 'value, compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  }
-
-  if (!_isString(value)) {
-    throw new TypeError('includes args(value) is not string');
-  }
-
-  if (!_isArray(compareArray)) {
-    throw new TypeError('includes args(compareArray) is not array');
-  }
-
-  return _includes(value, compareArray);
-};
-/**
  * repeat
  */
 
@@ -287,9 +247,9 @@ var _repeat = function _repeat(value, count) {
 
 var repeat = function repeat(value, count) {
   if (isObjectParameter(value, 'value, count')) {
-    var _value2 = value;
-    value = _value2.value;
-    count = _value2.count;
+    var _value = value;
+    value = _value.value;
+    count = _value.count;
   }
 
   if (!_isString(value)) {
@@ -337,12 +297,10 @@ var isUpperCase = function isUpperCase(value) {
 
 module.exports = {
   _matchFormat: _matchFormat,
-  _includes: _includes,
   _repeat: _repeat,
   _isLowerCase: _isLowerCase,
   _isUpperCase: _isUpperCase,
   matchFormat: matchFormat,
-  includes: includes,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase
