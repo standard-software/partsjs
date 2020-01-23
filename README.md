@@ -108,6 +108,7 @@ You can now use the functions of the parts object.
 - update polyfill String.prototype.includes
 - update test output message
 - update test output testname
+- update propertyCount
 
 ### 3.4.0
 #### 2020/01/15(Wed)

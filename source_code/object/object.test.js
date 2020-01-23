@@ -206,8 +206,14 @@ const test_execute_object = (parts) => {
         checkEqual(false, isThrown(() => {
           propertyCount({});
         }));
-        checkEqual(true, isThrown(() => {
+        checkEqual(false, isThrown(() => {
           propertyCount([]);
+        }));
+        checkEqual(true, isThrown(() => {
+          propertyCount(10);
+        }));
+        checkEqual(true, isThrown(() => {
+          propertyCount('abc');
         }));
       });
     };

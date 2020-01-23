@@ -82,9 +82,9 @@ const _propertyCount = (object) => {
 };
 
 const propertyCount = (object) => {
-  if (!_isObject(object)) {
+  if (!_isObjectType(object)) {
     throw new TypeError(
-      'propertyCount args(object) is not object',
+      'propertyCount args(object) is not object type',
     );
   }
   return _propertyCount(object);
