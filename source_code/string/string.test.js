@@ -109,80 +109,6 @@ const test_execute_string = (parts) => {
       });
     };
 
-    const test_includes = () => {
-      it('test_includes', () => {
-        checkEqual(true,  includes('abcdef', ['ab']));
-        checkEqual(true,  includes('abcdef', ['cd']));
-        checkEqual(false, includes('abcdef', ['ac']));
-        checkEqual(false, includes('abcdef', ['ac', 'bd']));
-        checkEqual(true,  includes('abcdef', ['ac', 'de']));
-        checkEqual(false, includes('abcdef', ['ac', 'bd', '']));
-        checkEqual(true,  includes('abcdef', ['ac', 'de', '']));
-        checkEqual(false, includes('abcdef', ['']));
-        checkEqual(true,  includes('123', ['1']));
-
-        // exception
-        checkEqual(true, isThrownException(
-          () => { includes('abcdef', 'abc'); },
-          (new TypeError).name,
-        ));
-        checkEqual(false, isThrownException(
-          () => { includes('123', ['1']); },
-          (new TypeError).name,
-        ));
-        checkEqual(true, isThrownException(
-          () => { includes('123', [1]); },
-          (new TypeError).name,
-        ));
-
-        // Object Named Parameter
-        checkEqual(true, includes({
-          value: 'abcdef',
-          compareArray: ['cd'],
-        }));
-        checkEqual(false, includes({
-          value: 'abcdef',
-          compareArray: ['ac'],
-        }));
-
-        // exception
-        checkEqual(false, isThrown(
-          () => {
-            includes({
-              value: '123', compareArray: ['123'],
-            });
-          },
-        ), 'test_includes thrown 1');
-        checkEqual(false, isThrown(
-          () => {
-            includes({
-              value: '123', compareArray: [],
-            });
-          },
-        ), 'test_includes thrown 2');
-        checkEqual(true, isThrown(
-          () => {
-            includes({
-              value: '123', compareArray: [123],
-            });
-          },
-        ), 'test_includes thrown 3');
-        checkEqual(true, isThrown(
-          () => {
-            includes({
-              value: '123', compareArray: 123,
-            });
-          },
-          (e) => {
-            return (e.name === (new TypeError).name) && (
-              e.message ===
-            'includes args(compareArray) is not array'
-            );
-          },
-        ), 'test_includes thrown 4');
-      });
-    };
-
     const test_replaceAll = () => {
       it('test_replaceAll', () => {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
@@ -206,7 +132,6 @@ const test_execute_string = (parts) => {
     };
 
     test_matchFormat();
-    test_includes();
     test_replaceAll();
   });
 };

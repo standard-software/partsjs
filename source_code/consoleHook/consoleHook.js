@@ -6,12 +6,8 @@ const {
 } = require('../type/type.js');
 
 const {
-  _or,
+  _or, _includes, _includesSome, _includesAll,
 } = require('../compare/compare.js');
-
-const {
-  _includes,
-} = require('../string/string.js');
 
 const {
   map,
@@ -106,10 +102,10 @@ const _accept = (
     const messageArgsAll = map(messageArgs, (value) => String(value)).join(' ');
     let acceptFlag = acceptArray.length === 0;
     if (acceptFlag === false) {
-      acceptFlag = _includes(messageArgsAll, acceptArray);
+      acceptFlag = _includesSome(messageArgsAll, acceptArray);
     }
     if (acceptFlag && _isArray(rejectArray)) {
-      acceptFlag = !_includes(messageArgsAll, rejectArray);
+      acceptFlag = !_includesSome(messageArgsAll, rejectArray);
     }
 
     if (acceptFlag) {

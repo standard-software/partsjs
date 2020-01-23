@@ -1799,6 +1799,14 @@ const test_execute_compare = (parts) => {
             includesSome('abc', 'a');
           },
         ));
+        checkEqual(false, isThrownException(
+          () => { includesSome('123', ['1']); },
+          (new TypeError).name,
+        ));
+        checkEqual(true, isThrownException(
+          () => { includesSome('123', [1]); },
+          (new TypeError).name,
+        ));
 
         checkEqual(false, isThrown(
           () => {
@@ -1827,6 +1835,13 @@ const test_execute_compare = (parts) => {
           () => {
             includesSome({
               value: 'abc', compareArray: 'a',
+            });
+          },
+        ));
+        checkEqual(true, isThrown(
+          () => {
+            includesSome({
+              value: 'abc', compareArray: [1],
             });
           },
         ));

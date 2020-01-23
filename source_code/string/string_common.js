@@ -271,52 +271,6 @@ const matchFormat = (
 };
 
 /**
- * includes
- */
-const _includes = (
-  value,
-  compareArray,
-) => {
-  const compareFunctionArray =
-    _map(compareArray, (element) => {
-      if (_isRegExp(element)) {
-        return element;
-      } else if (_isString(element)) {
-        return element === ''
-          ? () => false
-          : value => value.indexOf(element) >= 0;
-      } else {
-        throw new TypeError(
-          '_includes args(compareArray element) is not [regexp|string]',
-        );
-      }
-    });
-  return _matchSome(value, compareFunctionArray);
-};
-
-const includes = (
-  value,
-  compareArray,
-) => {
-  if (isObjectParameter(value, 'value, compareArray')) {
-    ({ value, compareArray } = value);
-  }
-
-  if (!_isString(value)) {
-    throw new TypeError(
-      'includes args(value) is not string',
-    );
-  }
-  if (!_isArray(compareArray)) {
-    throw new TypeError(
-      'includes args(compareArray) is not array',
-    );
-  }
-
-  return _includes(value, compareArray);
-};
-
-/**
  * repeat
  */
 const _repeat = (
@@ -395,11 +349,11 @@ const isUpperCase = (
 };
 
 module.exports = {
-  _matchFormat, _includes,
+  _matchFormat,
   _repeat,
   _isLowerCase, _isUpperCase,
 
-  matchFormat, includes,
+  matchFormat,
   repeat,
   isLowerCase, isUpperCase,
 

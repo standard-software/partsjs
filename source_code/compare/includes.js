@@ -18,6 +18,10 @@ const {
   _findFirstIndex,
 } = require('../array/array_common.js');
 
+const {
+  _match,
+} = require('../compare/match.js');
+
 /**
  * includes
  */
@@ -26,9 +30,12 @@ const _includes = (value, compare) => {
     if (compare === '') {
       return false;
     }
-    return value.includes(compare);
+    if (_isRegExp(compare)) {
+      return _match(value, compare);
+    }
+    return value.indexOf(compare) !== -1;
   } else if (_isArray(value)) {
-    return value.includes(compare);
+    return value.indexOf(compare) !== -1;
   }
 };
 
@@ -41,9 +48,9 @@ const includes = (
   }
 
   if (_isString(value)) {
-    if (!_isString(compare)) {
+    if (!(_isString(compare) || _isRegExp(compare))) {
       throw new TypeError(
-        'includes args(compare) is not string',
+        'includes args(compare) is not [string|RegExp]',
       );
     }
   } else if (_isArray(value)) {
@@ -62,7 +69,7 @@ const includes = (
  */
 const _includesSome = (value, compareArray) => {
   return _some(compareArray, compare => {
-    return _includes(value, compare);
+    return includes(value, compare);
   });
 };
 
@@ -88,7 +95,7 @@ const includesSome = (
  */
 const _includesAll = (value, compareArray) => {
   return _all(compareArray, compare => {
-    return _includes(value, compare);
+    return includes(value, compare);
   });
 };
 
