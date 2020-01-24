@@ -101,7 +101,7 @@ You can now use the functions of the parts object.
 ## Version
 
 ### 3.5.0
-#### 2020/01/21(Tue)
+#### 2020/01/24(Fri)
 - add includes includesSome inclludesAll
 - delete string.includes
 - update consoleHook

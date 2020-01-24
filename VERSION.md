@@ -2,6 +2,18 @@
 
 ## Version
 
+### 3.5.0
+#### 2020/01/24(Fri)
+- add includes includesSome inclludesAll
+- delete string.includes
+- update consoleHook
+- _inProperty >> isObjectParameter
+- update getProperty inProperty
+- update polyfill String.prototype.includes
+- update test output message
+- update test output testname
+- update propertyCount
+
 ### 3.4.0
 #### 2020/01/15(Wed)
 - delete isEmpty

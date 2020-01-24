@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '3.5.0 beta';
+const VERSION = '3.5.0';
 
 const rootNames = {};
 const propertyNames = {};
