@@ -1,3 +1,7 @@
+const {
+  _propertyCount
+} = require('../object/_propertyCount.js');
+
 const _typeofCheck = (typeName) => {
   return ((value) => typeof value === typeName);
 };
@@ -72,12 +76,29 @@ const _isObjectType = (value) => {
   return ['function', 'object'].includes(typeof value);
 };
 
+const _isEmptyObject = value => {
+  if (!_isObject(value)) {
+    return false;
+  }
+  return _propertyCount(value) === 0;
+};
+
+
 const _isArray = _objectToStringCheck('Array');
+
+// Int8Array Uint16Array Float32Array Float64Array etc...
 const _isArrayType = (value) => {
   if (objectToString(value).includes('Array]')) {
     return true;
   }
   return false;
+};
+
+const _isEmptyArray = value => {
+  if (!_isArrayType(value)) {
+    return false;
+  }
+  return value.length === 0;
 };
 
 const _isDate = _objectToStringCheck('Date');
@@ -103,6 +124,8 @@ const _isNotRegExp      = value => !_isRegExp(value);
 const _isNotBooleanObject = value => !_isBooleanObject(value);
 const _isNotNumberObject  = value => !_isNumberObject(value);
 const _isNotStringObject  = value => !_isStringObject(value);
+const _isNotEmptyObject   = value => !_isEmptyObject(value);
+const _isNotEmptyArray    = value => !_isEmptyArray(value);
 
 module.exports = {
   _typeofCheck, _objectToStringCheck, objectToString,
@@ -114,6 +137,7 @@ module.exports = {
   _isDate, _isRegExp,
   _isError,
   _isBooleanObject, _isNumberObject, _isStringObject,
+  _isEmptyObject, _isEmptyArray,
 
   _isNotUndefined, _isNotNull, _isNotNaNStrict,
   _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
@@ -121,6 +145,6 @@ module.exports = {
   _isNotArray, _isNotArrayType,
   _isNotDate, _isNotRegExp,
   _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
-
+  _isNotEmptyObject, _isNotEmptyArray,
 };
 

@@ -200,26 +200,6 @@ const setProperty = (object, propertyPath, value) => {
   return _setProperty(object, propertyPath, value);
 };
 
-/**
- * isEmptyObject
- */
-const _isEmptyObject = (object) => {
-  return _propertyCount(object) === 0;
-};
-
-const isEmptyObject = (object) => {
-
-  if (!_isObject(object)) {
-    throw new TypeError(
-      'isEmptyObject args(object) is not object',
-    );
-  }
-
-  return _isEmptyObject(object);
-};
-
-const isEmptyObj = isEmptyObject;
-
 const copyProp = copyProperty;
 const propCount = propertyCount;
 const getProp = getProperty;
@@ -229,15 +209,12 @@ module.exports = {
   _copyProperty,
   _propertyCount,
   _getProperty, _setProperty,
-  _isEmptyObject,
 
   copyProperty,
   propertyCount,
   getProperty, setProperty,
-  isEmptyObject,
 
   copyProp,
   propCount,
   getProp, setProp,
-  isEmptyObj,
 };

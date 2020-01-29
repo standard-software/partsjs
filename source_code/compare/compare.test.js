@@ -10,6 +10,7 @@ const test_execute_compare = (parts) => {
       isFunction, isObject, isObjectType,
       isArray, isDate, isRegExp,
       isException,
+      isEmptyObject, isEmptyArray,
     } = parts.type;
 
     const {
@@ -29,10 +30,6 @@ const test_execute_compare = (parts) => {
       allMatchAll, someMatchAll, indexOfMatchAll,
       includes, includesSome, includesAll,
     } = parts.compare;
-
-    const {
-      isEmptyObject,
-    } = parts.object;
 
     const test_equal = () => {
       it('test_equal', () => {
@@ -1120,6 +1117,19 @@ const test_execute_compare = (parts) => {
         checkEqual(false, matchSome(null,      [undefined, 0]));
         checkEqual(false, matchSome(undefined, [null, 0]));
         checkEqual(false, matchSome(0,         [null, undefined]));
+
+        checkEqual(true,  matchSome(null,       [null, undefined]));
+        checkEqual(true,  matchSome(null,       [null, undefined, isEmptyArray]));
+        checkEqual(true,  matchSome(null,       [null, undefined, isEmptyObject]));
+        checkEqual(true,  matchSome(undefined,  [null, undefined]));
+        checkEqual(true,  matchSome(undefined,  [null, undefined, isEmptyArray]));
+        checkEqual(true,  matchSome(undefined,  [null, undefined, isEmptyObject]));
+        checkEqual(false, matchSome([],         [null, undefined]));
+        checkEqual(true,  matchSome([],         [null, undefined, isEmptyArray]));
+        checkEqual(false, matchSome([],         [null, undefined, isEmptyObject]));
+        checkEqual(false, matchSome({},         [null, undefined]));
+        checkEqual(false, matchSome({},         [null, undefined, isEmptyArray]));
+        checkEqual(true,  matchSome({},         [null, undefined, isEmptyObject]));
 
         // exception
         checkEqual(true, isThrownException(

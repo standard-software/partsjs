@@ -105,6 +105,8 @@ You can now use the functions of the parts.js object.
 - add _propertyCount.js
   - update propertyCount (hasOwn)
 - update isObjectParameter
+- update isEmptyObject object.js >> isType.js
+- add isEmptyArray
 
 ### 3.5.0
 #### 2020/01/24(Fri)

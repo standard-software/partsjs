@@ -36,12 +36,14 @@ propertyNames._TYPE_BASE =
   'Array,ArrayType,' +
   'Date,RegExp,' +
   'Exception,' +
+  'EmptyObject,EmptyArray,' +
   'Symbol,' +
   'Map,WeakMap,Set,WeakSet,' +
   'BooleanObject,NumberObject,StringObject,' +
   'Bool,Num,Int,Str,' +
   'Func,Obj,ObjType,' +
   'Except,' +
+  'EmptyObj,' +
   '';
 const isPrefixAdd = (prefix, commaString) =>
   _map(_replaceAll(commaString, ' ', '').split(','),
@@ -138,18 +140,14 @@ propertyNames.OBJECT_PUBLIC =
   'isObjectParameter,' +
   'copyProperty,propertyCount,inProperty,' +
   'getProperty,setProperty,' +
-  'isEmptyObject,' +
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
-  'isEmptyObj,' +
   '';
 propertyNames.OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
   'getProperty,setProperty,' +
-  'isEmptyObject,' +
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
-  'isEmptyObj,' +
   '';
 const object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);

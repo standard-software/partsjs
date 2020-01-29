@@ -5,6 +5,7 @@ const {
   _isArray, _isArrayType,
   _isDate, _isRegExp,
   _isBooleanObject, _isNumberObject, _isStringObject,
+  _isEmptyObject, _isEmptyArray,
 
   _isNotUndefined, _isNotNull, _isNotNaNStrict,
   _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
@@ -12,6 +13,7 @@ const {
   _isNotArray, _isNotArrayType,
   _isNotDate, _isNotRegExp,
   _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
+  _isNotEmptyObject, _isNotEmptyArray,
 
 } = require('../type/_isType.js');
 
@@ -77,6 +79,8 @@ const isException   = _isTypeCheckArgsFunc(_isException);
 const isBooleanObject = _isTypeCheckArgsFunc(_isBooleanObject);
 const isNumberObject  = _isTypeCheckArgsFunc(_isNumberObject);
 const isStringObject  = _isTypeCheckArgsFunc(_isStringObject);
+const isEmptyObject   = _isTypeCheckArgsFunc(_isEmptyObject);
+const isEmptyArray    = _isTypeCheckArgsFunc(_isEmptyArray);
 const isSymbol      = _isTypeCheckArgsFunc(_isSymbol);
 const isMap         = _isTypeCheckArgsFunc(_isMap);
 const isWeakMap     = _isTypeCheckArgsFunc(_isWeakMap);
@@ -101,21 +105,24 @@ const isNotException  = _isTypeCheckArgsFunc(_isNotException);
 const isNotBooleanObject  = _isTypeCheckArgsFunc(_isNotBooleanObject);
 const isNotNumberObject   = _isTypeCheckArgsFunc(_isNotNumberObject);
 const isNotStringObject   = _isTypeCheckArgsFunc(_isNotStringObject);
+const isNotEmptyObject   = _isTypeCheckArgsFunc(_isNotEmptyObject);
+const isNotEmptyArray    = _isTypeCheckArgsFunc(_isNotEmptyArray);
 const isNotSymbol     = _isTypeCheckArgsFunc(_isNotSymbol);
 const isNotMap         = _isTypeCheckArgsFunc(_isNotMap);
 const isNotWeakMap     = _isTypeCheckArgsFunc(_isNotWeakMap);
 const isNotSet         = _isTypeCheckArgsFunc(_isNotSet);
 const isNotWeakSet     = _isTypeCheckArgsFunc(_isNotWeakSet);
 
-const isUndef   = isUndefined;
-const isBool    = isBoolean;
-const isNum     = isNumber;
-const isInt     = isInteger;
-const isStr     = isString;
-const isFunc    = isFunction;
-const isObj     = isObject;
-const isObjType = isObjectType;
-const isExcept  = isException;
+const isUndef     = isUndefined;
+const isBool      = isBoolean;
+const isNum       = isNumber;
+const isInt       = isInteger;
+const isStr       = isString;
+const isFunc      = isFunction;
+const isObj       = isObject;
+const isObjType   = isObjectType;
+const isExcept    = isException;
+const isEmptyObj  = isEmptyObject;
 
 const isNotUndef    = isNotUndefined;
 const isNotBool     = isNotBoolean;
@@ -126,6 +133,7 @@ const isNotFunc     = isNotFunction;
 const isNotObj      = isNotObject;
 const isNotObjType  = isNotObjectType;
 const isNotExcept   = isNotException;
+const isNotEmptyObj = isNotEmptyObject;
 
 module.exports = {
   isUndefined, isNull, isNaNStrict,
@@ -135,6 +143,7 @@ module.exports = {
   isDate, isRegExp,
   isException,
   isBooleanObject, isNumberObject, isStringObject,
+  isEmptyObject, isEmptyArray,
   isSymbol,
   isMap, isWeakMap,
   isSet, isWeakSet,
@@ -146,6 +155,7 @@ module.exports = {
   isNotDate, isNotRegExp,
   isNotException,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
+  isNotEmptyObject, isNotEmptyArray,
   isNotSymbol,
   isNotMap, isNotWeakMap,
   isNotSet, isNotWeakSet,
@@ -154,11 +164,13 @@ module.exports = {
   isBool, isNum, isInt, isStr,
   isFunc, isObj, isObjType,
   isExcept,
+  isEmptyObj,
 
   isNotUndef,
   isNotBool, isNotNum, isNotInt, isNotStr,
   isNotFunc, isNotObj, isNotObjType,
   isNotExcept,
+  isNotEmptyObj,
 
 };
 

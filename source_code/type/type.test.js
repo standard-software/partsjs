@@ -16,6 +16,7 @@ const test_execute_type = (parts) => {
       isDate, isRegExp,
       isException,
       isBooleanObject, isNumberObject, isStringObject,
+      isEmptyObject, isEmptyArray,
       isSymbol,
       isMap, isWeakMap,
       isSet, isWeakSet,
@@ -27,6 +28,7 @@ const test_execute_type = (parts) => {
       isNotDate, isNotRegExp,
       isNotException,
       isNotBooleanObject, isNotNumberObject, isNotStringObject,
+      isNotEmptyObject, isNotEmptyArray,
       isNotSymbol,
       isNotMap, isNotWeakMap,
       isNotSet, isNotWeakSet,
@@ -763,6 +765,31 @@ const test_execute_type = (parts) => {
       });
     };
 
+    const test_isEmptyObject = () =>{
+      it('test_isEmptyObject', () => {
+        checkEqual(true,  isEmptyObject({}));
+        checkEqual(false, isEmptyObject({a:1}));
+        checkEqual(false, isEmptyObject(null));
+        checkEqual(false, isEmptyObject(undefined));
+        checkEqual(false, isEmptyObject(123));
+        checkEqual(false, isEmptyObject('abc'));
+        checkEqual(false, isEmptyObject([]));
+        checkEqual(false, isEmptyObject([123]));
+      });
+    };
+    const test_isEmptyArray = () =>{
+      it('test_isEmptyArray', () => {
+        checkEqual(false, isEmptyArray({}));
+        checkEqual(false, isEmptyArray({a:1}));
+        checkEqual(false, isEmptyArray(null));
+        checkEqual(false, isEmptyArray(undefined));
+        checkEqual(false, isEmptyArray(123));
+        checkEqual(false, isEmptyArray('abc'));
+        checkEqual(true,  isEmptyArray([]));
+        checkEqual(false, isEmptyArray([123]));
+      });
+    };
+
     const test_isSymbol = function() {
       it('test_isSymbol', () => {
 
@@ -825,6 +852,8 @@ const test_execute_type = (parts) => {
     test_isArrayType();
     test_isDate();
     test_isExcection();
+    test_isEmptyObject();
+    test_isEmptyArray();
     test_isSymbol();
     test_isMap();
     test_isSet();
