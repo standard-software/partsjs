@@ -37,6 +37,8 @@ var test_execute_type = function test_execute_type(parts) {
         isBooleanObject = _parts$type.isBooleanObject,
         isNumberObject = _parts$type.isNumberObject,
         isStringObject = _parts$type.isStringObject,
+        isEmptyObject = _parts$type.isEmptyObject,
+        isEmptyArray = _parts$type.isEmptyArray,
         isSymbol = _parts$type.isSymbol,
         isMap = _parts$type.isMap,
         isWeakMap = _parts$type.isWeakMap,
@@ -60,6 +62,8 @@ var test_execute_type = function test_execute_type(parts) {
         isNotBooleanObject = _parts$type.isNotBooleanObject,
         isNotNumberObject = _parts$type.isNotNumberObject,
         isNotStringObject = _parts$type.isNotStringObject,
+        isNotEmptyObject = _parts$type.isNotEmptyObject,
+        isNotEmptyArray = _parts$type.isNotEmptyArray,
         isNotSymbol = _parts$type.isNotSymbol,
         isNotMap = _parts$type.isNotMap,
         isNotWeakMap = _parts$type.isNotWeakMap,
@@ -786,6 +790,36 @@ var test_execute_type = function test_execute_type(parts) {
       });
     };
 
+    var test_isEmptyObject = function test_isEmptyObject() {
+      it('test_isEmptyObject', function () {
+        checkEqual(true, isEmptyObject({}));
+        checkEqual(false, isEmptyObject({
+          a: 1
+        }));
+        checkEqual(false, isEmptyObject(null));
+        checkEqual(false, isEmptyObject(undefined));
+        checkEqual(false, isEmptyObject(123));
+        checkEqual(false, isEmptyObject('abc'));
+        checkEqual(false, isEmptyObject([]));
+        checkEqual(false, isEmptyObject([123]));
+      });
+    };
+
+    var test_isEmptyArray = function test_isEmptyArray() {
+      it('test_isEmptyArray', function () {
+        checkEqual(false, isEmptyArray({}));
+        checkEqual(false, isEmptyArray({
+          a: 1
+        }));
+        checkEqual(false, isEmptyArray(null));
+        checkEqual(false, isEmptyArray(undefined));
+        checkEqual(false, isEmptyArray(123));
+        checkEqual(false, isEmptyArray('abc'));
+        checkEqual(true, isEmptyArray([]));
+        checkEqual(false, isEmptyArray([123]));
+      });
+    };
+
     var test_isSymbol = function test_isSymbol() {
       it('test_isSymbol', function () {
         if (parts.platform.wsh) {
@@ -844,6 +878,8 @@ var test_execute_type = function test_execute_type(parts) {
     test_isArrayType();
     test_isDate();
     test_isExcection();
+    test_isEmptyObject();
+    test_isEmptyArray();
     test_isSymbol();
     test_isMap();
     test_isSet();

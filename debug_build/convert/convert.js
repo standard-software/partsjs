@@ -53,7 +53,7 @@ var _numberToString = function _numberToString(value, radix) {
 var numberToString = function numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'radix')) {
     var _value = value;
     value = _value.value;
     var _value$radix = _value.radix;
@@ -123,7 +123,7 @@ var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue
 };
 
 var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) {
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'defaultValue')) {
     var _value3 = value;
     value = _value3.value;
     defaultValue = _value3.defaultValue;
@@ -170,7 +170,7 @@ var _stringToInteger = function _stringToInteger(value) {
 var stringToInteger = function stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'radix')) {
     var _value4 = value;
     value = _value4.value;
     var _value4$radix = _value4.radix;
@@ -202,7 +202,7 @@ var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultVal
 var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'defaultValue, radix')) {
     var _value5 = value;
     value = _value5.value;
     defaultValue = _value5.defaultValue;

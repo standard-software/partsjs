@@ -124,11 +124,11 @@ var _delete = function _delete(array, index) {
 var deleteLength = function deleteLength(array, index) {
   var deleteCount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
 
-  if (isObjectParameter(array, 'array, index, length')) {
+  if (isObjectParameter(array, 'array, index, deleteCount')) {
     var _array3 = array;
     array = _array3.array;
     index = _array3.index;
-    deleteCount = _array3.length;
+    deleteCount = _array3.deleteCount;
   }
 
   if (!_isArray(array)) {

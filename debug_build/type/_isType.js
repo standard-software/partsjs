@@ -2,6 +2,9 @@
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+var _require = require('../object/_propertyCount.js'),
+    _propertyCount = _require._propertyCount;
+
 var _typeofCheck = function _typeofCheck(typeName) {
   return function (value) {
     return _typeof(value) === typeName;
@@ -74,7 +77,16 @@ var _isObjectType = function _isObjectType(value) {
   return ['function', 'object'].includes(_typeof(value));
 };
 
-var _isArray = _objectToStringCheck('Array');
+var _isEmptyObject = function _isEmptyObject(value) {
+  if (!_isObject(value)) {
+    return false;
+  }
+
+  return _propertyCount(value) === 0;
+};
+
+var _isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Array Float64Array etc...
+
 
 var _isArrayType = function _isArrayType(value) {
   if (objectToString(value).includes('Array]')) {
@@ -82,6 +94,14 @@ var _isArrayType = function _isArrayType(value) {
   }
 
   return false;
+};
+
+var _isEmptyArray = function _isEmptyArray(value) {
+  if (!_isArrayType(value)) {
+    return false;
+  }
+
+  return value.length === 0;
 };
 
 var _isDate = _objectToStringCheck('Date');
@@ -158,6 +178,14 @@ var _isNotStringObject = function _isNotStringObject(value) {
   return !_isStringObject(value);
 };
 
+var _isNotEmptyObject = function _isNotEmptyObject(value) {
+  return !_isEmptyObject(value);
+};
+
+var _isNotEmptyArray = function _isNotEmptyArray(value) {
+  return !_isEmptyArray(value);
+};
+
 module.exports = {
   _typeofCheck: _typeofCheck,
   _objectToStringCheck: _objectToStringCheck,
@@ -180,6 +208,8 @@ module.exports = {
   _isBooleanObject: _isBooleanObject,
   _isNumberObject: _isNumberObject,
   _isStringObject: _isStringObject,
+  _isEmptyObject: _isEmptyObject,
+  _isEmptyArray: _isEmptyArray,
   _isNotUndefined: _isNotUndefined,
   _isNotNull: _isNotNull,
   _isNotNaNStrict: _isNotNaNStrict,
@@ -196,5 +226,7 @@ module.exports = {
   _isNotRegExp: _isNotRegExp,
   _isNotBooleanObject: _isNotBooleanObject,
   _isNotNumberObject: _isNotNumberObject,
-  _isNotStringObject: _isNotStringObject
+  _isNotStringObject: _isNotStringObject,
+  _isNotEmptyObject: _isNotEmptyObject,
+  _isNotEmptyArray: _isNotEmptyArray
 };

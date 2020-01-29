@@ -18,6 +18,8 @@ var _require = require('../type/_isType.js'),
     _isBooleanObject = _require._isBooleanObject,
     _isNumberObject = _require._isNumberObject,
     _isStringObject = _require._isStringObject,
+    _isEmptyObject = _require._isEmptyObject,
+    _isEmptyArray = _require._isEmptyArray,
     _isNotUndefined = _require._isNotUndefined,
     _isNotNull = _require._isNotNull,
     _isNotNaNStrict = _require._isNotNaNStrict,
@@ -34,7 +36,9 @@ var _require = require('../type/_isType.js'),
     _isNotRegExp = _require._isNotRegExp,
     _isNotBooleanObject = _require._isNotBooleanObject,
     _isNotNumberObject = _require._isNotNumberObject,
-    _isNotStringObject = _require._isNotStringObject;
+    _isNotStringObject = _require._isNotStringObject,
+    _isNotEmptyObject = _require._isNotEmptyObject,
+    _isNotEmptyArray = _require._isNotEmptyArray;
 
 var _require2 = require('../type/_isException.js'),
     _isException = _require2._isException,
@@ -126,6 +130,10 @@ var isNumberObject = _isTypeCheckArgsFunc(_isNumberObject);
 
 var isStringObject = _isTypeCheckArgsFunc(_isStringObject);
 
+var isEmptyObject = _isTypeCheckArgsFunc(_isEmptyObject);
+
+var isEmptyArray = _isTypeCheckArgsFunc(_isEmptyArray);
+
 var isSymbol = _isTypeCheckArgsFunc(_isSymbol);
 
 var isMap = _isTypeCheckArgsFunc(_isMap);
@@ -172,6 +180,10 @@ var isNotNumberObject = _isTypeCheckArgsFunc(_isNotNumberObject);
 
 var isNotStringObject = _isTypeCheckArgsFunc(_isNotStringObject);
 
+var isNotEmptyObject = _isTypeCheckArgsFunc(_isNotEmptyObject);
+
+var isNotEmptyArray = _isTypeCheckArgsFunc(_isNotEmptyArray);
+
 var isNotSymbol = _isTypeCheckArgsFunc(_isNotSymbol);
 
 var isNotMap = _isTypeCheckArgsFunc(_isNotMap);
@@ -191,6 +203,7 @@ var isFunc = isFunction;
 var isObj = isObject;
 var isObjType = isObjectType;
 var isExcept = isException;
+var isEmptyObj = isEmptyObject;
 var isNotUndef = isNotUndefined;
 var isNotBool = isNotBoolean;
 var isNotNum = isNotNumber;
@@ -200,6 +213,7 @@ var isNotFunc = isNotFunction;
 var isNotObj = isNotObject;
 var isNotObjType = isNotObjectType;
 var isNotExcept = isNotException;
+var isNotEmptyObj = isNotEmptyObject;
 module.exports = {
   isUndefined: isUndefined,
   isNull: isNull,
@@ -219,6 +233,8 @@ module.exports = {
   isBooleanObject: isBooleanObject,
   isNumberObject: isNumberObject,
   isStringObject: isStringObject,
+  isEmptyObject: isEmptyObject,
+  isEmptyArray: isEmptyArray,
   isSymbol: isSymbol,
   isMap: isMap,
   isWeakMap: isWeakMap,
@@ -242,6 +258,8 @@ module.exports = {
   isNotBooleanObject: isNotBooleanObject,
   isNotNumberObject: isNotNumberObject,
   isNotStringObject: isNotStringObject,
+  isNotEmptyObject: isNotEmptyObject,
+  isNotEmptyArray: isNotEmptyArray,
   isNotSymbol: isNotSymbol,
   isNotMap: isNotMap,
   isNotWeakMap: isNotWeakMap,
@@ -256,6 +274,7 @@ module.exports = {
   isObj: isObj,
   isObjType: isObjType,
   isExcept: isExcept,
+  isEmptyObj: isEmptyObj,
   isNotUndef: isNotUndef,
   isNotBool: isNotBool,
   isNotNum: isNotNum,
@@ -264,5 +283,6 @@ module.exports = {
   isNotFunc: isNotFunc,
   isNotObj: isNotObj,
   isNotObjType: isNotObjType,
-  isNotExcept: isNotExcept
+  isNotExcept: isNotExcept,
+  isNotEmptyObj: isNotEmptyObj
 };

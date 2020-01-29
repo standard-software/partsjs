@@ -44,7 +44,7 @@ var root = _copyProperty(_root, propertyNames.ROOT);
 _copyProperty(_root, propertyNames.ROOT, rootNames); // type
 
 
-propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + '';
+propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'EmptyObject,EmptyArray,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + 'EmptyObj,' + '';
 
 var isPrefixAdd = function isPrefixAdd(prefix, commaString) {
   return _map(_replaceAll(commaString, ' ', '').split(','), function (item) {
@@ -103,8 +103,8 @@ var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames); // object
 
 
-propertyNames.OBJECT_PUBLIC = 'isObjectParameter,' + 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'isEmptyObject,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + 'isEmptyObj,' + '';
-propertyNames.OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'isEmptyObject,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + 'isEmptyObj,' + '';
+propertyNames.OBJECT_PUBLIC = 'isObjectParameter,' + 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + '';
+propertyNames.OBJECT_ROOT = 'copyProperty,propertyCount,inProperty,' + 'getProperty,setProperty,' + 'copyProp,propCount,inProp,' + 'getProp,setProp,' + '';
 
 var object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
 

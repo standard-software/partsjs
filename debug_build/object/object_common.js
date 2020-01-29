@@ -1,13 +1,5 @@
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var _require = require('../type/type.js'),
     _isUndefined = _require._isUndefined,
     _isNull = _require._isNull,
@@ -31,8 +23,11 @@ var _require = require('../type/type.js'),
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
 
-var _require3 = require('../string/_replaceAll.js'),
-    _replaceAll = _require3._replaceAll;
+var _require3 = require('../object/_propertyCount.js'),
+    _propertyCount = _require3._propertyCount;
+
+var _require4 = require('../string/_replaceAll.js'),
+    _replaceAll = _require4._replaceAll;
 /**
  * copyProperty
  */
@@ -63,7 +58,7 @@ var _copyProperty = function _copyProperty(fromObject, propertyArray) {
 var copyProperty = function copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  if (isObjectParameter(fromObject, 'fromObject,propertyArray')) {
+  if (isObjectParameter(fromObject, 'fromObject,propertyArray', 'toObject')) {
     var _fromObject = fromObject;
     fromObject = _fromObject.fromObject;
     propertyArray = _fromObject.propertyArray;
@@ -92,26 +87,25 @@ var copyProperty = function copyProperty(fromObject, propertyArray) {
  */
 
 
-var _propertyCount = function _propertyCount(object) {
-  var result = 0;
+var propertyCount = function propertyCount(object) {
+  var hasOwn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-  for (var _i = 0, _Object$entries = Object.entries(object); _i < _Object$entries.length; _i++) {
-    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-        key = _Object$entries$_i[0],
-        value = _Object$entries$_i[1];
-
-    result += 1;
+  if (isObjectParameter(object, 'object', 'hasOwn')) {
+    var _object = object;
+    object = _object.object;
+    var _object$hasOwn = _object.hasOwn;
+    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   }
 
-  return result;
-};
-
-var propertyCount = function propertyCount(object) {
   if (!_isObjectType(object)) {
     throw new TypeError('propertyCount args(object) is not object type');
   }
 
-  return _propertyCount(object);
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError('getProperty args(hasOwn) is not boolean');
+  }
+
+  return _propertyCount(object, hasOwn);
 };
 /**
  * getProperty
@@ -151,12 +145,12 @@ var _getProperty = function _getProperty(object, propertyPath) {
 var getProperty = function getProperty(object, propertyPath) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (isObjectParameter(object, 'object, propertyPath')) {
-    var _object = object;
-    object = _object.object;
-    propertyPath = _object.propertyPath;
-    var _object$hasOwn = _object.hasOwn;
-    hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
+  if (isObjectParameter(object, 'object, propertyPath', 'hasOwn')) {
+    var _object2 = object;
+    object = _object2.object;
+    propertyPath = _object2.propertyPath;
+    var _object2$hasOwn = _object2.hasOwn;
+    hasOwn = _object2$hasOwn === void 0 ? true : _object2$hasOwn;
   }
 
   if (!_isObject(object)) {
@@ -189,12 +183,12 @@ var _setProperty = function _setProperty(object, path, value) {
 
   var result = object;
 
-  for (var _i2 = 0, _l = propertyArray.length - 1; _i2 < _l; _i2 += 1) {
-    if (!(_isObject(result[propertyArray[_i2]]) || _isArrayType(result[propertyArray[_i2]]))) {
-      result[propertyArray[_i2]] = {};
+  for (var _i = 0, _l = propertyArray.length - 1; _i < _l; _i += 1) {
+    if (!(_isObject(result[propertyArray[_i]]) || _isArrayType(result[propertyArray[_i]]))) {
+      result[propertyArray[_i]] = {};
     }
 
-    result = result[propertyArray[_i2]];
+    result = result[propertyArray[_i]];
   }
 
   result[propertyArray[propertyArray.length - 1]] = value;
@@ -203,10 +197,10 @@ var _setProperty = function _setProperty(object, path, value) {
 
 var setProperty = function setProperty(object, propertyPath, value) {
   if (isObjectParameter(object, 'object, propertyPath, value')) {
-    var _object2 = object;
-    object = _object2.object;
-    propertyPath = _object2.propertyPath;
-    value = _object2.value;
+    var _object3 = object;
+    object = _object3.object;
+    propertyPath = _object3.propertyPath;
+    value = _object3.value;
   }
 
   if (!_isObject(object)) {
@@ -219,24 +213,7 @@ var setProperty = function setProperty(object, propertyPath, value) {
 
   return _setProperty(object, propertyPath, value);
 };
-/**
- * isEmptyObject
- */
 
-
-var _isEmptyObject = function _isEmptyObject(object) {
-  return _propertyCount(object) === 0;
-};
-
-var isEmptyObject = function isEmptyObject(object) {
-  if (!_isObject(object)) {
-    throw new TypeError('isEmptyObject args(object) is not object');
-  }
-
-  return _isEmptyObject(object);
-};
-
-var isEmptyObj = isEmptyObject;
 var copyProp = copyProperty;
 var propCount = propertyCount;
 var getProp = getProperty;
@@ -246,15 +223,12 @@ module.exports = {
   _propertyCount: _propertyCount,
   _getProperty: _getProperty,
   _setProperty: _setProperty,
-  _isEmptyObject: _isEmptyObject,
   copyProperty: copyProperty,
   propertyCount: propertyCount,
   getProperty: getProperty,
   setProperty: setProperty,
-  isEmptyObject: isEmptyObject,
   copyProp: copyProp,
   propCount: propCount,
   getProp: getProp,
-  setProp: setProp,
-  isEmptyObj: isEmptyObj
+  setProp: setProp
 };

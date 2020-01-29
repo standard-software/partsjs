@@ -22,7 +22,9 @@ var test_execute_compare = function test_execute_compare(parts) {
         isArray = _parts$type.isArray,
         isDate = _parts$type.isDate,
         isRegExp = _parts$type.isRegExp,
-        isException = _parts$type.isException;
+        isException = _parts$type.isException,
+        isEmptyObject = _parts$type.isEmptyObject,
+        isEmptyArray = _parts$type.isEmptyArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
@@ -47,7 +49,6 @@ var test_execute_compare = function test_execute_compare(parts) {
         includes = _parts$compare.includes,
         includesSome = _parts$compare.includesSome,
         includesAll = _parts$compare.includesAll;
-    var isEmptyObject = parts.object.isEmptyObject;
 
     var test_equal = function test_equal() {
       it('test_equal', function () {
@@ -1362,7 +1363,19 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, matchSome(0, [null, undefined, 0]));
         checkEqual(false, matchSome(null, [undefined, 0]));
         checkEqual(false, matchSome(undefined, [null, 0]));
-        checkEqual(false, matchSome(0, [null, undefined])); // exception
+        checkEqual(false, matchSome(0, [null, undefined]));
+        checkEqual(true, matchSome(null, [null, undefined]));
+        checkEqual(true, matchSome(null, [null, undefined, isEmptyArray]));
+        checkEqual(true, matchSome(null, [null, undefined, isEmptyObject]));
+        checkEqual(true, matchSome(undefined, [null, undefined]));
+        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyArray]));
+        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyObject]));
+        checkEqual(false, matchSome([], [null, undefined]));
+        checkEqual(true, matchSome([], [null, undefined, isEmptyArray]));
+        checkEqual(false, matchSome([], [null, undefined, isEmptyObject]));
+        checkEqual(false, matchSome({}, [null, undefined]));
+        checkEqual(false, matchSome({}, [null, undefined, isEmptyArray]));
+        checkEqual(true, matchSome({}, [null, undefined, isEmptyObject])); // exception
 
         checkEqual(true, isThrownException(function () {
           matchSome('123', 'abc');

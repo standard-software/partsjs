@@ -71,7 +71,7 @@ var _round = function _round(value) {
 var round = function round(value) {
   var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'digit')) {
     var _value = value;
     value = _value.value;
     var _value$digit = _value.digit;

@@ -260,21 +260,11 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
-    var test_isEmptyObject = function test_isEmptyObject() {
-      it('test_isEmptyObject', function () {
-        checkEqual(true, isEmptyObject({}));
-        checkEqual(false, isEmptyObject({
-          a: 1
-        }));
-      });
-    };
-
     test_copyProperty();
     test_inProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();
-    test_isEmptyObject();
   });
 };
 
