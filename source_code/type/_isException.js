@@ -1,6 +1,6 @@
 const {
   _isError,
-} = require('../type/_isType.js');
+} = require('../type/isType.js');
 
 const {
   isObjectParameter,

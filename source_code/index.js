@@ -45,12 +45,14 @@ propertyNames._TYPE_BASE =
   'Except,' +
   'EmptyObj,' +
   '';
-const isPrefixAdd = (prefix, commaString) =>
+const isPrefixSafixAdd = (prefix, safix, commaString) =>
   _map(_replaceAll(commaString, ' ', '').split(','),
-    item => prefix + item).join(',');
+    item => prefix + item + safix).join(',');
 propertyNames.TYPE = [
-  isPrefixAdd('is', propertyNames._TYPE_BASE),
-  isPrefixAdd('isNot', propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('is',    '',     propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('isNot', '',     propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('is',    'All',  propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('isNot', 'All',  propertyNames._TYPE_BASE),
 ].join(',');
 const type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames);
@@ -180,9 +182,9 @@ _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);
 propertyNames._CONSOLE_HOOK_BASE =
   ',Log,Info,Warn,Error,Debug';
 propertyNames.CONSOLE_HOOK = [
-  isPrefixAdd('hook', propertyNames._CONSOLE_HOOK_BASE),
-  isPrefixAdd('unHook', propertyNames._CONSOLE_HOOK_BASE),
-  isPrefixAdd('accept', propertyNames._CONSOLE_HOOK_BASE),
+  isPrefixSafixAdd('hook',    '', propertyNames._CONSOLE_HOOK_BASE),
+  isPrefixSafixAdd('unHook',  '', propertyNames._CONSOLE_HOOK_BASE),
+  isPrefixSafixAdd('accept',  '', propertyNames._CONSOLE_HOOK_BASE),
 ].join(',');
 const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 

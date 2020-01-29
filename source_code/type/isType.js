@@ -1,5 +1,5 @@
 const {
-  _propertyCount
+  _propertyCount,
 } = require('../object/_propertyCount.js');
 
 const _typeofCheck = (typeName) => {

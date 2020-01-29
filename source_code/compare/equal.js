@@ -8,14 +8,14 @@ const {
   _isMap, _isWeakMap,
   _isSet, _isWeakSet,
 
-  isUndefined, isNull, isNaNStrict,
-  isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
-  isArray, isArrayType,
-  isDate, isRegExp,
-  isException,
-  isMap, isWeakMap,
-  isSet, isWeakSet,
+  isUndefinedAll, isNullAll, isNaNStrictAll,
+  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
+  isFunctionAll, isObjectAll, isObjectTypeAll,
+  isArrayAll, isArrayTypeAll,
+  isDateAll, isRegExpAll,
+  isExceptionAll,
+  isMapAll, isWeakMapAll,
+  isSetAll, isWeakSetAll,
 
 } = require('../type/type.js');
 
@@ -42,7 +42,7 @@ equalFunction.equalValue = (
 equalFunction.equalFunction = (
   value1, value2,
 ) => {
-  if (!isFunction(value1, value2)) {
+  if (!isFunctionAll(value1, value2)) {
     return;
   }
   return value1 === value2;
@@ -53,7 +53,7 @@ equalFunction.equalObject = (
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!(isObject(value1, value2))) {
+  if (!(isObjectAll(value1, value2))) {
     return;
   }
   const value1Keys = Object.keys(value1);
@@ -76,7 +76,7 @@ equalFunction.equalArrayType = (
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!(isArrayType(value1, value2))) {
+  if (!(isArrayTypeAll(value1, value2))) {
     return;
   }
   if (value1.length !== value2.length) {
@@ -94,7 +94,7 @@ equalFunction.equalArrayType = (
 equalFunction.equalDate = (
   value1, value2,
 ) => {
-  if (!isDate(value1, value2)) {
+  if (!isDateAll(value1, value2)) {
     return;
   }
   return value1.getTime() === value2.getTime();
@@ -103,7 +103,7 @@ equalFunction.equalDate = (
 equalFunction.equalRegExp = (
   value1, value2,
 ) => {
-  if (!isRegExp(value1, value2)) {
+  if (!isRegExpAll(value1, value2)) {
     return;
   }
   return value1.source === value2.source;
@@ -114,7 +114,7 @@ equalFunction.equalMap = (
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!isMap(value1, value2)) {
+  if (!isMapAll(value1, value2)) {
     return;
   }
   if (value1.size !== value2.size) {
@@ -134,7 +134,7 @@ equalFunction.equalWeakMap = (
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!isWeakMap(value1, value2)) {
+  if (!isWeakMapAll(value1, value2)) {
     return;
   }
   if (value1.size !== value2.size) {
@@ -154,7 +154,7 @@ equalFunction.equalSet = (
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!isSet(value1, value2)) {
+  if (!isSetAll(value1, value2)) {
     return;
   }
   if (value1.size !== value2.size) {
@@ -180,7 +180,7 @@ equalFunction.equalWeakSet = (
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!isWeakSet(value1, value2)) {
+  if (!isWeakSetAll(value1, value2)) {
     return;
   }
   if (value1.size !== value2.size) {

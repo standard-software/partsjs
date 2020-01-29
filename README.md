@@ -107,6 +107,7 @@ You can now use the functions of the parts.js object.
 - update isObjectParameter
 - update isEmptyObject object.js >> isType.js
 - add isEmptyArray
+- update isXxx >> isXxxAll
 
 ### 3.5.0
 #### 2020/01/24(Fri)
@@ -123,7 +124,7 @@ You can now use the functions of the parts.js object.
 ### 3.4.0
 #### 2020/01/15(Wed)
 - delete isEmpty
-- add isEmptyObject
+- add isEmptyObjectAll
 - update setProperty return value
 - findIndexFirst >> findFirstIndex
 - findIndexLast >> findLastIndex

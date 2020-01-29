@@ -13,7 +13,7 @@ const test_execute_object = (parts) => {
       copyProperty, inProperty,
       propertyCount,
       getProperty, setProperty,
-      isEmptyObject,
+      isEmptyObjectAll,
     } = parts.object;
 
     const test_copyProperty = () => {

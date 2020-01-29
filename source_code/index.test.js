@@ -25,8 +25,8 @@ const test_execute_index = (parts) => {
 
       it('test_execute_nameSpace 1', () => {
 
-        checkEqual(165, propertyCount(parts));
-        checkEqual(70,  propertyCount(parts.type));
+        checkEqual(235, propertyCount(parts));
+        checkEqual(140,  propertyCount(parts.type));
         checkEqual(9,   propertyCount(parts.test));
         checkEqual(20,  propertyCount(parts.compare));
         checkEqual(23,  propertyCount(parts.convert));
@@ -48,7 +48,7 @@ const test_execute_index = (parts) => {
         checkEqual(true,
           inProperty(
             parts,
-            'isUndefined,isNotNull,' +
+            'isUndefinedAll,isNotNullAll,' +
             'isFunc,isNotObj,' +
             'isThrown,isThrownValue,isThrownException,isNotThrown,' +
             'assert,guard,' +

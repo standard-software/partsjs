@@ -13,15 +13,15 @@ const test_execute_syntax = (parts) => {
     } = parts.test;
 
     const {
-      isUndefined, isNull,
-      isBoolean, isNumber, isInteger, isString,
-      isFunction, isObject, isArray, isDate,
-      isRegExp, isException,
+      isUndefinedAll, isNullAll,
+      isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
+      isFunctionAll, isObjectAll, isArrayAll, isDateAll,
+      isRegExpAll, isExceptionAll,
 
-      isNotUndefined, isNotNull,
-      isNotBoolean, isNotNumber, isNotInteger, isNotString,
-      isNotFunction, isNotObject, isNotArray, isNotDate,
-      isNotRegExp, isNotException,
+      isNotUndefinedAll, isNotNullAll,
+      isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
+      isNotFunctionAll, isNotObjectAll, isNotArrayAll, isNotDateAll,
+      isNotRegExpAll, isNotExceptionAll,
 
     } = parts.type;
 
@@ -41,7 +41,7 @@ const test_execute_syntax = (parts) => {
       it('test_guard', () => {
 
         var guardFunc = () => [
-          isInteger(value1), [isInteger(value2), 'testmessage'],
+          isIntegerAll(value1), [isIntegerAll(value2), 'testmessage'],
         ];
         {
           // no guard
@@ -83,8 +83,8 @@ const test_execute_syntax = (parts) => {
 
         // guard array length
         var guardFunc = () => [
-          isInteger(value1),
-          isArray(value2),
+          isIntegerAll(value1),
+          isArrayAll(value2),
           1 <= value2.length,
         ];
         {
@@ -103,10 +103,10 @@ const test_execute_syntax = (parts) => {
 
         // guard array value etc
         var guardFunc = () => [
-          isArray(value1),
+          isArrayAll(value1),
           [1 <= value1.length],
           [value1[0] === 1, 'value1[0]error'],
-          function() { return isArray(value2); },
+          function() { return isArrayAll(value2); },
           [function() { return 2 <= value2.length; }],
           [function() { return value2[0] === 1; }, 'value2[0]error'],
         ];
@@ -192,23 +192,23 @@ const test_execute_syntax = (parts) => {
         var value1 = 1; var value2 = 2;
 
         var guardFunc = () => [
-          isInteger(value1),
-          [isInteger(value2), 'testmessage'],
+          isIntegerAll(value1),
+          [isIntegerAll(value2), 'testmessage'],
         ];
         checkEqual(true, isNotThrown(
           () => guard(guardFunc),
         ), 'gurad exception args1 function result array 1');
 
         var guardFunc = () => [
-          isInteger(value1),
-          [isInteger(value2)],
+          isIntegerAll(value1),
+          [isIntegerAll(value2)],
         ];
         checkEqual(true, isNotThrown(
           () => guard(guardFunc),
         ), 'gurad exception args1 function result array 2');
 
         var guardFunc = () => [
-          isInteger(value1),
+          isIntegerAll(value1),
           [],
         ];
         checkEqual(false, isNotThrown(
@@ -221,16 +221,16 @@ const test_execute_syntax = (parts) => {
         ), 'gurad exception args1 function result array 3-2');
 
         var guardFunc = () => [
-          [isInteger(value2), 'testmessage'],
-          isInteger(value1),
+          [isIntegerAll(value2), 'testmessage'],
+          isIntegerAll(value1),
         ];
         checkEqual(true, isNotThrown(
           () => guard(guardFunc),
         ), 'gurad exception args1 function result array 4');
 
         var guardFunc = () => [
-          [isInteger(value2)],
-          isInteger(value1),
+          [isIntegerAll(value2)],
+          isIntegerAll(value1),
         ];
         checkEqual(true, isNotThrown(
           () => guard(guardFunc),
@@ -238,7 +238,7 @@ const test_execute_syntax = (parts) => {
 
         var guardFunc = () => [
           [],
-          isInteger(value1),
+          isIntegerAll(value1),
         ];
         checkEqual(false, isNotThrown(
           () => guard(guardFunc),

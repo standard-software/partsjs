@@ -1,6 +1,6 @@
 const {
   _typeofCheck, _objectToStringCheck, objectToString,
-} = require('../type/_isType.js')
+} = require('../type/isType.js');
 
 const _isMap = _objectToStringCheck('Map');
 const _isWeakMap = _objectToStringCheck('WeakMap');

@@ -32,7 +32,7 @@
 
   var console = {
     log: function(value) {
-      if (parts.isObjectType(value)) {
+      if (parts.isObjectTypeAll(value)) {
         for (var prop in value) {
           outputMessage += prop + ':' + value[prop] + '\n';
         }

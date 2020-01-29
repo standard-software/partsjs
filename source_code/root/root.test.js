@@ -11,7 +11,7 @@ const test_execute_root = (parts) => {
 
     const {
       _typeofCheck, _objectToStringCheck,
-    } = require('../type/_isType.js');
+    } = require('../type/isType.js');
 
     const test_clone_object = () =>{
       it('test_clone_object', () => {
@@ -575,7 +575,7 @@ const test_execute_root = (parts) => {
 
         var symbol1 = Symbol();
         checkEqual(true,
-          parts.isSymbol(symbol1),
+          parts.isSymbolAll(symbol1),
         );
 
         var value1 = [symbol1];
@@ -595,7 +595,7 @@ const test_execute_root = (parts) => {
           bufferWrite = () => {},
           __cloneDeep = value => value,
         ) => {
-          if (!parts.isSymbol(source)) {
+          if (!parts.isSymbolAll(source)) {
             return undefined; ;
           }
           const cloneValue = Symbol();
@@ -631,8 +631,8 @@ const test_execute_root = (parts) => {
         map1.set('key2', 'value2');
         checkEqual('value1', map1.get('key1'));
 
-        checkEqual(false, parts.isObject(map1));
-        checkEqual(true,  parts.isObjectType(map1));
+        checkEqual(false, parts.isObjectAll(map1));
+        checkEqual(true,  parts.isObjectTypeAll(map1));
 
         // initializse nothing cloneMap
         clone.clear();
@@ -714,8 +714,8 @@ const test_execute_root = (parts) => {
         checkEqual(true,  set1.has('value2'));
         checkEqual(false, set1.has('value3'));
 
-        checkEqual(false, parts.isObject(set1));
-        checkEqual(true,  parts.isObjectType(set1));
+        checkEqual(false, parts.isObjectAll(set1));
+        checkEqual(true,  parts.isObjectTypeAll(set1));
 
         // initializse nothing cloneSet
         clone.clear();
