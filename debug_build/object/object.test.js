@@ -17,7 +17,7 @@ var test_execute_object = function test_execute_object(parts) {
         propertyCount = _parts$object.propertyCount,
         getProperty = _parts$object.getProperty,
         setProperty = _parts$object.setProperty,
-        isEmptyObject = _parts$object.isEmptyObject;
+        isEmptyObjectAll = _parts$object.isEmptyObjectAll;
 
     var test_copyProperty = function test_copyProperty() {
       it('test_copyProperty', function () {

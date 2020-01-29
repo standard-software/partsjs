@@ -1,25 +1,25 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isObjectType = _require._isObjectType,
-    _isArray = _require._isArray,
-    _isArrayType = _require._isArrayType,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException,
-    _isMap = _require._isMap,
-    _isWeakMap = _require._isWeakMap,
-    _isSet = _require._isSet,
-    _isWeakSet = _require._isWeakSet;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
@@ -45,7 +45,7 @@ var or = function or(value, compareArray) {
     compareArray = _value.compareArray;
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('or args(compareArray) is not array');
   }
 

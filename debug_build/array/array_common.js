@@ -5,19 +5,19 @@ var _module$exports;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../number/number.js'),
     isEven = _require2.isEven;
@@ -41,7 +41,7 @@ var _min = function _min(array) {
   var result = array[0];
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
+    if (!isNumber(array[i])) {
       throw new TypeError('_min args(array) element is not number');
     }
 
@@ -54,7 +54,7 @@ var _min = function _min(array) {
 };
 
 var min = function min(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('min args(array) is not array');
   }
 
@@ -69,7 +69,7 @@ var _max = function _max(array) {
   var result = array[0];
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
+    if (!isNumber(array[i])) {
       throw new TypeError('_max args(array) element is not number');
     }
 
@@ -82,7 +82,7 @@ var _max = function _max(array) {
 };
 
 var max = function max(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('max args(array) is not array');
   }
 
@@ -105,7 +105,7 @@ var _sum = function _sum(array) {
   var result = 0;
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
+    if (!isNumber(array[i])) {
       throw new TypeError('_min args(array) element is not number');
     }
 
@@ -116,7 +116,7 @@ var _sum = function _sum(array) {
 };
 
 var sum = function sum(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('sum args(array) is not array');
   }
 
@@ -136,7 +136,7 @@ var _average = function _average(array) {
 };
 
 var average = function average(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('average args(array) is not array');
   }
 
@@ -165,7 +165,7 @@ var _midian = function _midian(array) {
 };
 
 var midian = function midian(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('midian args(array) is not array');
   }
 
@@ -197,7 +197,7 @@ var _mode = function _mode(array) {
 };
 
 var mode = function mode(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('mode args(array) is not array');
   }
 
@@ -221,7 +221,7 @@ var _unique = function _unique(array) {
 };
 
 var unique = function unique(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('unique args(array) is not array');
   }
 
@@ -251,7 +251,7 @@ var _single = function _single(array) {
 };
 
 var single = function single(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('single args(array) is not array');
   }
 
@@ -281,7 +281,7 @@ var _multiple = function _multiple(array) {
 };
 
 var multiple = function multiple(array) {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('multiple args(array) is not array');
   }
 
@@ -298,7 +298,7 @@ var _filter = function _filter(array, func) {
   for (var i = 0, l = array.length; i < l; i += 1) {
     var resultFunc = func(array[i], i, array);
 
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError('_filter args(compareFunc) result is not boolean');
     }
 
@@ -317,11 +317,11 @@ var filter = function filter(array, func) {
     func = _array.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('filter args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('filter args(compareFunc) is not function');
   }
 
@@ -350,11 +350,11 @@ var map = function map(array, func) {
     func = _array2.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('map args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('map args(productFunc) is not function');
   }
 
@@ -371,7 +371,7 @@ var _count = function _count(array, func) {
   for (var i = 0, l = array.length; i < l; i += 1) {
     var resultFunc = func(array[i], i, array);
 
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError('_count args(func) result is not boolean');
     }
 
@@ -390,11 +390,11 @@ var count = function count(array, func) {
     func = _array3.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('count args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('count args(func) is not function');
   }
 
@@ -409,7 +409,7 @@ var _findFirstIndex = function _findFirstIndex(array, func) {
   for (var i = 0, l = array.length; i < l; i += 1) {
     var resultFunc = func(array[i], i, array);
 
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError('_findFirstIndex args(compareFunc) result is not boolean');
     }
 
@@ -428,11 +428,11 @@ var findFirstIndex = function findFirstIndex(array, func) {
     func = _array4.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('findFirstIndex args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('findFirstIndex args(compareFunc) is not function');
   }
 
@@ -448,7 +448,7 @@ var _findLastIndex = function _findLastIndex(array, func) {
   for (var i = array.length - 1; i >= 0; i -= 1) {
     var resultFunc = func(array[i], i, array);
 
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError('_findLastIndex args(compareFunc) result is not boolean');
     }
 
@@ -467,11 +467,11 @@ var findLastIndex = function findLastIndex(array, func) {
     func = _array5.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('findLastIndex args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('findLastIndex args(compareFunc) is not function');
   }
 
@@ -500,11 +500,11 @@ var findFirst = function findFirst(array, func) {
     func = _array6.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('findFirst args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('findFirst args(compareFunc) is not function');
   }
 
@@ -533,11 +533,11 @@ var findLast = function findLast(array, func) {
     func = _array7.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('findLast args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('findLast args(compareFunc) is not function');
   }
 
@@ -560,11 +560,11 @@ var some = function some(array, func) {
     func = _array8.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('some args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('some args(compareFunc) is not function');
   }
 
@@ -590,11 +590,11 @@ var all = function all(array, func) {
     func = _array9.func;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('all args(array) is not array');
   }
 
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError('all args(compareFunc) is not function');
   }
 

@@ -1,25 +1,25 @@
 "use strict";
 
-var _require = require('../type/_isType.js'),
+var _require = require('../type/isType.js'),
     _typeofCheck = _require._typeofCheck,
     _objectToStringCheck = _require._objectToStringCheck,
     objectToString = _require.objectToString;
 
-var _isMap = _objectToStringCheck('Map');
+var isMap = _objectToStringCheck('Map');
 
-var _isWeakMap = _objectToStringCheck('WeakMap');
+var isWeakMap = _objectToStringCheck('WeakMap');
 
-var _isNotMap = function _isNotMap(value) {
-  return !_isMap(value);
+var isNotMap = function isNotMap(value) {
+  return !isMap(value);
 };
 
-var _isNotWeakMap = function _isNotWeakMap(value) {
-  return !_isWeakMap(value);
+var isNotWeakMap = function isNotWeakMap(value) {
+  return !isWeakMap(value);
 };
 
 module.exports = {
-  _isMap: _isMap,
-  _isNotMap: _isNotMap,
-  _isWeakMap: _isWeakMap,
-  _isNotWeakMap: _isNotWeakMap
+  isMap: isMap,
+  isNotMap: isNotMap,
+  isWeakMap: isWeakMap,
+  isNotWeakMap: isNotWeakMap
 };

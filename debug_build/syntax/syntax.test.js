@@ -17,30 +17,30 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         isThrownException = _parts$test2.isThrownException,
         isNotThrown = _parts$test2.isNotThrown;
     var _parts$type = parts.type,
-        isUndefined = _parts$type.isUndefined,
-        isNull = _parts$type.isNull,
-        isBoolean = _parts$type.isBoolean,
-        isNumber = _parts$type.isNumber,
-        isInteger = _parts$type.isInteger,
-        isString = _parts$type.isString,
-        isFunction = _parts$type.isFunction,
-        isObject = _parts$type.isObject,
-        isArray = _parts$type.isArray,
-        isDate = _parts$type.isDate,
-        isRegExp = _parts$type.isRegExp,
-        isException = _parts$type.isException,
-        isNotUndefined = _parts$type.isNotUndefined,
-        isNotNull = _parts$type.isNotNull,
-        isNotBoolean = _parts$type.isNotBoolean,
-        isNotNumber = _parts$type.isNotNumber,
-        isNotInteger = _parts$type.isNotInteger,
-        isNotString = _parts$type.isNotString,
-        isNotFunction = _parts$type.isNotFunction,
-        isNotObject = _parts$type.isNotObject,
-        isNotArray = _parts$type.isNotArray,
-        isNotDate = _parts$type.isNotDate,
-        isNotRegExp = _parts$type.isNotRegExp,
-        isNotException = _parts$type.isNotException;
+        isUndefinedAll = _parts$type.isUndefinedAll,
+        isNullAll = _parts$type.isNullAll,
+        isBooleanAll = _parts$type.isBooleanAll,
+        isNumberAll = _parts$type.isNumberAll,
+        isIntegerAll = _parts$type.isIntegerAll,
+        isStringAll = _parts$type.isStringAll,
+        isFunctionAll = _parts$type.isFunctionAll,
+        isObjectAll = _parts$type.isObjectAll,
+        isArrayAll = _parts$type.isArrayAll,
+        isDateAll = _parts$type.isDateAll,
+        isRegExpAll = _parts$type.isRegExpAll,
+        isExceptionAll = _parts$type.isExceptionAll,
+        isNotUndefinedAll = _parts$type.isNotUndefinedAll,
+        isNotNullAll = _parts$type.isNotNullAll,
+        isNotBooleanAll = _parts$type.isNotBooleanAll,
+        isNotNumberAll = _parts$type.isNotNumberAll,
+        isNotIntegerAll = _parts$type.isNotIntegerAll,
+        isNotStringAll = _parts$type.isNotStringAll,
+        isNotFunctionAll = _parts$type.isNotFunctionAll,
+        isNotObjectAll = _parts$type.isNotObjectAll,
+        isNotArrayAll = _parts$type.isNotArrayAll,
+        isNotDateAll = _parts$type.isNotDateAll,
+        isNotRegExpAll = _parts$type.isNotRegExpAll,
+        isNotExceptionAll = _parts$type.isNotExceptionAll;
     var _parts$syntax = parts.syntax,
         guard = _parts$syntax.guard,
         sc = _parts$syntax.sc,
@@ -53,7 +53,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     var test_guard = function test_guard() {
       it('test_guard', function () {
         var guardFunc = function guardFunc() {
-          return [isInteger(value1), [isInteger(value2), 'testmessage']];
+          return [isIntegerAll(value1), [isIntegerAll(value2), 'testmessage']];
         };
 
         {
@@ -121,7 +121,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         } // guard array length
 
         var guardFunc = function guardFunc() {
-          return [isInteger(value1), isArray(value2), 1 <= value2.length];
+          return [isIntegerAll(value1), isArrayAll(value2), 1 <= value2.length];
         };
 
         {
@@ -155,8 +155,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         } // guard array value etc
 
         var guardFunc = function guardFunc() {
-          return [isArray(value1), [1 <= value1.length], [value1[0] === 1, 'value1[0]error'], function () {
-            return isArray(value2);
+          return [isArrayAll(value1), [1 <= value1.length], [value1[0] === 1, 'value1[0]error'], function () {
+            return isArrayAll(value2);
           }, [function () {
             return 2 <= value2.length;
           }], [function () {
@@ -284,7 +284,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         var value2 = 2;
 
         var guardFunc = function guardFunc() {
-          return [isInteger(value1), [isInteger(value2), 'testmessage']];
+          return [isIntegerAll(value1), [isIntegerAll(value2), 'testmessage']];
         };
 
         checkEqual(true, isNotThrown(function () {
@@ -292,7 +292,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         }), 'gurad exception args1 function result array 1');
 
         var guardFunc = function guardFunc() {
-          return [isInteger(value1), [isInteger(value2)]];
+          return [isIntegerAll(value1), [isIntegerAll(value2)]];
         };
 
         checkEqual(true, isNotThrown(function () {
@@ -300,7 +300,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         }), 'gurad exception args1 function result array 2');
 
         var guardFunc = function guardFunc() {
-          return [isInteger(value1), []];
+          return [isIntegerAll(value1), []];
         };
 
         checkEqual(false, isNotThrown(function () {
@@ -313,7 +313,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         }), 'gurad exception args1 function result array 3-2');
 
         var guardFunc = function guardFunc() {
-          return [[isInteger(value2), 'testmessage'], isInteger(value1)];
+          return [[isIntegerAll(value2), 'testmessage'], isIntegerAll(value1)];
         };
 
         checkEqual(true, isNotThrown(function () {
@@ -321,7 +321,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         }), 'gurad exception args1 function result array 4');
 
         var guardFunc = function guardFunc() {
-          return [[isInteger(value2)], isInteger(value1)];
+          return [[isIntegerAll(value2)], isIntegerAll(value1)];
         };
 
         checkEqual(true, isNotThrown(function () {
@@ -329,7 +329,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         }), 'gurad exception args1 function result array 5');
 
         var guardFunc = function guardFunc() {
-          return [[], isInteger(value1)];
+          return [[], isIntegerAll(value1)];
         };
 
         checkEqual(false, isNotThrown(function () {

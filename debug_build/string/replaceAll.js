@@ -1,19 +1,19 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
@@ -29,15 +29,15 @@ var replaceAll = function replaceAll(str, before, after) {
     after = _str.after;
   }
 
-  if (!_isString(str)) {
+  if (!isString(str)) {
     throw new TypeError('replaceAll args(str) is not string');
   }
 
-  if (!_isString(before)) {
+  if (!isString(before)) {
     throw new TypeError('replaceAll args(before) is not string');
   }
 
-  if (!_isString(after)) {
+  if (!isString(after)) {
     throw new TypeError('replaceAll args(after) is not string');
   }
 

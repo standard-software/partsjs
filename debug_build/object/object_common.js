@@ -1,24 +1,24 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isObjectType = _require._isObjectType,
-    _isArray = _require._isArray,
-    _isArrayType = _require._isArrayType,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isError = _require._isError,
-    _isBooleanObject = _require._isBooleanObject,
-    _isNumberObject = _require._isNumberObject,
-    _isStringObject = _require._isStringObject;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isError = _require.isError,
+    isBooleanObject = _require.isBooleanObject,
+    isNumberObject = _require.isNumberObject,
+    isStringObject = _require.isStringObject;
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
@@ -36,16 +36,16 @@ var _require4 = require('../string/_replaceAll.js'),
 var _copyProperty = function _copyProperty(fromObject, propertyArray) {
   var toObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  if (_isString(propertyArray)) {
+  if (isString(propertyArray)) {
     propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
 
   for (var i = 0; i < propertyArray.length; i += 1) {
-    if (propertyArray[i] === '' || _isUndefined(propertyArray[i])) {
+    if (propertyArray[i] === '' || isUndefined(propertyArray[i])) {
       continue;
     }
 
-    if (!_isString(propertyArray[i])) {
+    if (!isString(propertyArray[i])) {
       throw new TypeError('copyProperty args(propertyArray) element is not string');
     }
 
@@ -66,17 +66,17 @@ var copyProperty = function copyProperty(fromObject, propertyArray) {
     toObject = _fromObject$toObject === void 0 ? {} : _fromObject$toObject;
   }
 
-  if (!_isObject(fromObject)) {
+  if (!isObject(fromObject)) {
     throw new TypeError('copyProperty args(fromObject) is not object');
   }
 
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
+  if (!isString(propertyArray)) {
+    if (!isArray(propertyArray)) {
       throw new TypeError('copyProperty args(propertyArray) is not [array|string]');
     }
   }
 
-  if (!_isObject(toObject)) {
+  if (!isObject(toObject)) {
     throw new TypeError('copyProperty args(toObject) is not object');
   }
 
@@ -97,11 +97,11 @@ var propertyCount = function propertyCount(object) {
     hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   }
 
-  if (!_isObjectType(object)) {
+  if (!isObjectType(object)) {
     throw new TypeError('propertyCount args(object) is not object type');
   }
 
-  if (!_isBoolean(hasOwn)) {
+  if (!isBoolean(hasOwn)) {
     throw new TypeError('getProperty args(hasOwn) is not boolean');
   }
 
@@ -132,7 +132,7 @@ var _getProperty = function _getProperty(object, propertyPath) {
       }
     }
 
-    if (_isUndefined(result[propertyArray[i]])) {
+    if (isUndefined(result[propertyArray[i]])) {
       return undefined;
     }
 
@@ -153,15 +153,15 @@ var getProperty = function getProperty(object, propertyPath) {
     hasOwn = _object2$hasOwn === void 0 ? true : _object2$hasOwn;
   }
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     throw new TypeError('getProperty args(object) is not object');
   }
 
-  if (!_isString(propertyPath)) {
+  if (!isString(propertyPath)) {
     throw new TypeError('getProperty args(propertyPath) is not string');
   }
 
-  if (!_isBoolean(hasOwn)) {
+  if (!isBoolean(hasOwn)) {
     throw new TypeError('getProperty args(hasOwn) is not boolean');
   }
 
@@ -184,7 +184,7 @@ var _setProperty = function _setProperty(object, path, value) {
   var result = object;
 
   for (var _i = 0, _l = propertyArray.length - 1; _i < _l; _i += 1) {
-    if (!(_isObject(result[propertyArray[_i]]) || _isArrayType(result[propertyArray[_i]]))) {
+    if (!(isObject(result[propertyArray[_i]]) || isArrayType(result[propertyArray[_i]]))) {
       result[propertyArray[_i]] = {};
     }
 
@@ -203,11 +203,11 @@ var setProperty = function setProperty(object, propertyPath, value) {
     value = _object3.value;
   }
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     throw new TypeError('setProperty args(object) is not object');
   }
 
-  if (!_isString(propertyPath)) {
+  if (!isString(propertyPath)) {
     throw new TypeError('setProperty args(propertyPath) is not string');
   }
 

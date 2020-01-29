@@ -1,19 +1,19 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 /**
  * assert
  */
@@ -22,11 +22,11 @@ var _require = require('../type/type.js'),
 var assert = function assert(value) {
   var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-  if (!_isBoolean(value)) {
+  if (!isBoolean(value)) {
     throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
   }
 
-  if (!_isString(message)) {
+  if (!isString(message)) {
     throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
   }
 
@@ -49,26 +49,26 @@ var guard = function guard(guardFunc, runFunc) {
     return false;
   }
 
-  if (!_isFunction(guardFunc)) {
+  if (!isFunction(guardFunc)) {
     throw new TypeError('guard args(guardFunc) is not function');
   }
 
   var result = guardFunc();
 
-  if (!_isArray(result)) {
+  if (!isArray(result)) {
     throw new TypeError('guard args(guardFunc result) is not array');
   }
 
   for (var i = 0; i < result.length; i += 1) {
     // support for wsh last comma in Array. [a,b,]
-    if (i === result.length - 1 && _isUndefined(result[i])) {
+    if (i === result.length - 1 && isUndefined(result[i])) {
       continue;
     }
 
     var resultValue = undefined;
     var message = '';
 
-    if (_isArray(result[i])) {
+    if (isArray(result[i])) {
       if (!(1 <= result[i].length)) {
         throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
       }
@@ -84,15 +84,15 @@ var guard = function guard(guardFunc, runFunc) {
 
     resultValue = functionValue(resultValue);
 
-    if (!_isBoolean(resultValue)) {
+    if (!isBoolean(resultValue)) {
       throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
     }
 
     if (resultValue === false) {
       guard_message = message;
 
-      if (!_isUndefined(runFunc)) {
-        if (!_isFunction(runFunc)) {
+      if (!isUndefined(runFunc)) {
+        if (!isFunction(runFunc)) {
           throw new TypeError('guard args(runFunc) is not function');
         }
 
@@ -127,7 +127,7 @@ guard.off = function () {
 
 
 var functionValue = function functionValue(value) {
-  if (_isFunction(value)) {
+  if (isFunction(value)) {
     return value();
   } else {
     return value;
@@ -151,16 +151,16 @@ var sc = function sc(argsFirst, func) {
 
 
 var if_ = function if_(condition) {
-  if (!_isBoolean(condition)) {
+  if (!isBoolean(condition)) {
     throw new TypeError('if_ args(condition) is not boolean');
   }
 
   var checkSyntax = function checkSyntax(args) {
-    if (!_isObject(args)) {
+    if (!isObject(args)) {
       throw new TypeError('if_() args is not object');
     }
 
-    if (_isUndefined(args.then) && _isUndefined(args["else"])) {
+    if (isUndefined(args.then) && isUndefined(args["else"])) {
       throw new ReferenceError('if_() args.then and .else is not defined');
     }
   };
@@ -184,24 +184,24 @@ var if_ = function if_(condition) {
 
 var switch_ = function switch_(expression) {
   return function (args) {
-    if (!_isArray(args)) {
+    if (!isArray(args)) {
       throw new TypeError('switch_() args is not array');
     }
 
     for (var i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if (i === args.length - 1 && _isUndefined(args[i])) {
+      if (i === args.length - 1 && isUndefined(args[i])) {
         continue;
       }
 
-      if (!_isArray(args[i])) {
+      if (!isArray(args[i])) {
         throw new TypeError('switch_() args is not array in array');
       }
     }
 
     for (var _i = 0; _i < args.length; _i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if (_i === args.length - 1 && _isUndefined(args[_i])) {
+      if (_i === args.length - 1 && isUndefined(args[_i])) {
         continue;
       }
 

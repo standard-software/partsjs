@@ -46,13 +46,13 @@ _copyProperty(_root, propertyNames.ROOT, rootNames); // type
 
 propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'EmptyObject,EmptyArray,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + 'EmptyObj,' + '';
 
-var isPrefixAdd = function isPrefixAdd(prefix, commaString) {
+var isPrefixSafixAdd = function isPrefixSafixAdd(prefix, safix, commaString) {
   return _map(_replaceAll(commaString, ' ', '').split(','), function (item) {
-    return prefix + item;
+    return prefix + item + safix;
   }).join(',');
 };
 
-propertyNames.TYPE = [isPrefixAdd('is', propertyNames._TYPE_BASE), isPrefixAdd('isNot', propertyNames._TYPE_BASE)].join(',');
+propertyNames.TYPE = [isPrefixSafixAdd('is', '', propertyNames._TYPE_BASE), isPrefixSafixAdd('isNot', '', propertyNames._TYPE_BASE), isPrefixSafixAdd('is', 'All', propertyNames._TYPE_BASE), isPrefixSafixAdd('isNot', 'All', propertyNames._TYPE_BASE)].join(',');
 
 var type = _copyProperty(_type, propertyNames.TYPE);
 
@@ -122,7 +122,7 @@ _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames); // consoleHook
 
 
 propertyNames._CONSOLE_HOOK_BASE = ',Log,Info,Warn,Error,Debug';
-propertyNames.CONSOLE_HOOK = [isPrefixAdd('hook', propertyNames._CONSOLE_HOOK_BASE), isPrefixAdd('unHook', propertyNames._CONSOLE_HOOK_BASE), isPrefixAdd('accept', propertyNames._CONSOLE_HOOK_BASE)].join(',');
+propertyNames.CONSOLE_HOOK = [isPrefixSafixAdd('hook', '', propertyNames._CONSOLE_HOOK_BASE), isPrefixSafixAdd('unHook', '', propertyNames._CONSOLE_HOOK_BASE), isPrefixSafixAdd('accept', '', propertyNames._CONSOLE_HOOK_BASE)].join(',');
 
 var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 

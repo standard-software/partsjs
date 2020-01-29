@@ -1,19 +1,23 @@
 "use strict";
 
+var _module$exports;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../compare/compare.js'),
     _matchSome = _require2._matchSome;
@@ -38,7 +42,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
 
   var result = _matchFormat.pattern[patterns[index]](value);
 
-  if (!_isBoolean(result)) {
+  if (!isBoolean(result)) {
     throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
   }
 
@@ -220,11 +224,11 @@ var matchFormat = function matchFormat(formatName, value) {
     value = _formatName.value;
   }
 
-  if (!_isString(formatName)) {
+  if (!isString(formatName)) {
     throw new TypeError('matchFormat args(formatName) is not string');
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('matchFormat args(value) is not string');
   }
 
@@ -252,11 +256,11 @@ var repeat = function repeat(value, count) {
     count = _value.count;
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('repeat args(value) is not string');
   }
 
-  if (!_isInteger(count)) {
+  if (!isInteger(count)) {
     throw new TypeError('repeat args(count) is not integer');
   }
 
@@ -272,7 +276,7 @@ var _isLowerCase = function _isLowerCase(value) {
 };
 
 var isLowerCase = function isLowerCase(value) {
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('isLowerCase args(value) is not string');
   }
 
@@ -288,20 +292,18 @@ var _isUpperCase = function _isUpperCase(value) {
 };
 
 var isUpperCase = function isUpperCase(value) {
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('isUpperCase args(value) is not string');
   }
 
   return _isUpperCase(value);
 };
 
-module.exports = {
+module.exports = (_module$exports = {
   _matchFormat: _matchFormat,
   _repeat: _repeat,
-  _isLowerCase: _isLowerCase,
-  _isUpperCase: _isUpperCase,
-  matchFormat: matchFormat,
-  repeat: repeat,
   isLowerCase: isLowerCase,
-  isUpperCase: isUpperCase
-};
+  isUpperCase: isUpperCase,
+  matchFormat: matchFormat,
+  repeat: repeat
+}, _defineProperty(_module$exports, "isLowerCase", isLowerCase), _defineProperty(_module$exports, "isUpperCase", isUpperCase), _module$exports);

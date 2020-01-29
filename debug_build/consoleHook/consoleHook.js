@@ -1,19 +1,19 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../compare/compare.js'),
     _or = _require2._or,
@@ -42,7 +42,7 @@ var hook = function hook(methodName) {
     throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
   }
 
-  if (!_isFunction(hookFunc)) {
+  if (!isFunction(hookFunc)) {
     throw new TypeError('hook args(hookFunc) is not function');
   }
 
@@ -116,7 +116,7 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
       acceptFlag = _includesSome(messageArgsAll, acceptArray);
     }
 
-    if (acceptFlag && _isArray(rejectArray)) {
+    if (acceptFlag && isArray(rejectArray)) {
       acceptFlag = !_includesSome(messageArgsAll, rejectArray);
     }
 
@@ -131,15 +131,15 @@ var accept = function accept(methodName, acceptArray, rejectArray, hookFunc) {
     throw new RangeError('accept args(methodName) is not [log|info|warn|error|debug]');
   }
 
-  if (!_isArray(acceptArray)) {
+  if (!isArray(acceptArray)) {
     throw new TypeError('accept args(acceptArray) is not array');
   }
 
-  if (!(_isUndefined(rejectArray) || _isArray(rejectArray))) {
+  if (!(isUndefined(rejectArray) || isArray(rejectArray))) {
     throw new TypeError('accept args(rejectArray) is not array');
   }
 
-  if (!_isFunction(hookFunc)) {
+  if (!isFunction(hookFunc)) {
     throw new TypeError('accept args(hookFunc) is not function');
   }
 

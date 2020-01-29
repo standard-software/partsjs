@@ -1,22 +1,22 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isObjectType = _require._isObjectType,
-    _isArray = _require._isArray,
-    _isArrayType = _require._isArrayType,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isError = _require._isError,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isError = _require.isError,
+    isException = _require.isException;
 
 var _require2 = require('../array/array.js'),
     _map = _require2._map;
@@ -82,7 +82,7 @@ var it = function it(text, func) {
 var checkCompare = function checkCompare(compareFunc, a, b) {
   var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-  if (!_isString(message)) {
+  if (!isString(message)) {
     throw new TypeError('checkEqual args message is not string');
   }
 
@@ -112,18 +112,18 @@ var checkEqual = function checkEqual(a, b) {
 
 
 var isThrown = function isThrown(targetFunc, compareFunc) {
-  if (!_isFunction(targetFunc)) {
+  if (!isFunction(targetFunc)) {
     throw new TypeError('isThrown args targetFunc is not function');
   }
 
-  if (!(_isFunction(compareFunc) || _isUndefined(compareFunc))) {
+  if (!(isFunction(compareFunc) || isUndefined(compareFunc))) {
     throw new TypeError('isThrown args compareFunc is not function');
   }
 
   try {
     targetFunc();
   } catch (e) {
-    if (_isUndefined(compareFunc)) {
+    if (isUndefined(compareFunc)) {
       return true;
     }
 
@@ -140,13 +140,13 @@ var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
 };
 
 var isThrownException = function isThrownException(targetFunc, exceptionName) {
-  if (!(_isString(exceptionName) || _isUndefined(exceptionName))) {
+  if (!(isString(exceptionName) || isUndefined(exceptionName))) {
     throw new TypeError('isThrownException args exceptionName is not string');
   }
 
   return isThrown(targetFunc, function (thrown) {
-    if (_isException(thrown)) {
-      if (_isUndefined(exceptionName)) {
+    if (isException(thrown)) {
+      if (isUndefined(exceptionName)) {
         return true;
       }
 

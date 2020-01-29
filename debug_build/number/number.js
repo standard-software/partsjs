@@ -1,19 +1,23 @@
 "use strict";
 
+var _module$exports;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
@@ -33,11 +37,11 @@ var isMultiples = function isMultiples(number, radix) {
     radix = _number.radix;
   }
 
-  if (!_isInteger(number)) {
+  if (!isInteger(number)) {
     throw new TypeError('isMultiples args(number) is not integer');
   }
 
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError('isMultiples args(radix) is not integer');
   }
 
@@ -49,7 +53,7 @@ var isEven = function isEven(number) {
 };
 
 var isOdd = function isOdd(number) {
-  return !_isMultiples(number, 2);
+  return !isMultiples(number, 2);
 };
 /**
  * round
@@ -78,7 +82,7 @@ var round = function round(value) {
     digit = _value$digit === void 0 ? 0 : _value$digit;
   }
 
-  if (!_isInteger(digit)) {
+  if (!isInteger(digit)) {
     throw new TypeError('round args(value) is not integer');
   }
 
@@ -105,15 +109,15 @@ var nearEqual = function nearEqual(value1, value2, diff) {
     diff = _value2.diff;
   }
 
-  if (!_isNumber(value1)) {
+  if (!isNumber(value1)) {
     throw new TypeError('nearEqual args(value1) is not number');
   }
 
-  if (!_isNumber(value2)) {
+  if (!isNumber(value2)) {
     throw new TypeError('nearEqual args(value2) is not number');
   }
 
-  if (!_isNumber(diff)) {
+  if (!isNumber(diff)) {
     throw new TypeError('nearEqual args(diff) is not number');
   }
 
@@ -144,15 +148,15 @@ var inRange = function inRange(value, from, to) {
     to = _value3.to;
   }
 
-  if (!_isNumber(value)) {
+  if (!isNumber(value)) {
     throw new TypeError('inRange args(value) is not number');
   }
 
-  if (!_isNumber(from)) {
+  if (!isNumber(from)) {
     throw new TypeError('inRange args(from) is not number');
   }
 
-  if (!_isNumber(to)) {
+  if (!isNumber(to)) {
     throw new TypeError('inRange args(to) is not number');
   }
 
@@ -178,27 +182,20 @@ var randomInt = function randomInt(min, max) {
     max = _min.max;
   }
 
-  if (!_isInteger(min)) {
+  if (!isInteger(min)) {
     throw new TypeError('randomInt args(min) is not integer');
   }
 
-  if (!_isInteger(max)) {
+  if (!isInteger(max)) {
     throw new TypeError('randomInt args(max) is not integer');
   }
 
   return _randomInt(min, max);
 };
 
-module.exports = {
-  _isMultiples: _isMultiples,
+module.exports = (_module$exports = {
+  isMultiples: isMultiples,
   _round: _round,
   _nearEqual: _nearEqual,
-  _inRange: _inRange,
-  isMultiples: isMultiples,
-  isEven: isEven,
-  isOdd: isOdd,
-  round: round,
-  nearEqual: nearEqual,
-  inRange: inRange,
-  randomInt: randomInt
-};
+  _inRange: _inRange
+}, _defineProperty(_module$exports, "isMultiples", isMultiples), _defineProperty(_module$exports, "isEven", isEven), _defineProperty(_module$exports, "isOdd", isOdd), _defineProperty(_module$exports, "round", round), _defineProperty(_module$exports, "nearEqual", nearEqual), _defineProperty(_module$exports, "inRange", inRange), _defineProperty(_module$exports, "randomInt", randomInt), _module$exports);

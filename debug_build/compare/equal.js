@@ -9,25 +9,6 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isObjectType = _require._isObjectType,
-    _isArray = _require._isArray,
-    _isArrayType = _require._isArrayType,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException,
-    _isMap = _require._isMap,
-    _isWeakMap = _require._isWeakMap,
-    _isSet = _require._isSet,
-    _isWeakSet = _require._isWeakSet,
     isUndefined = _require.isUndefined,
     isNull = _require.isNull,
     isNaNStrict = _require.isNaNStrict,
@@ -46,7 +27,26 @@ var _require = require('../type/type.js'),
     isMap = _require.isMap,
     isWeakMap = _require.isWeakMap,
     isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+    isWeakSet = _require.isWeakSet,
+    isUndefinedAll = _require.isUndefinedAll,
+    isNullAll = _require.isNullAll,
+    isNaNStrictAll = _require.isNaNStrictAll,
+    isBooleanAll = _require.isBooleanAll,
+    isNumberAll = _require.isNumberAll,
+    isIntegerAll = _require.isIntegerAll,
+    isStringAll = _require.isStringAll,
+    isFunctionAll = _require.isFunctionAll,
+    isObjectAll = _require.isObjectAll,
+    isObjectTypeAll = _require.isObjectTypeAll,
+    isArrayAll = _require.isArrayAll,
+    isArrayTypeAll = _require.isArrayTypeAll,
+    isDateAll = _require.isDateAll,
+    isRegExpAll = _require.isRegExpAll,
+    isExceptionAll = _require.isExceptionAll,
+    isMapAll = _require.isMapAll,
+    isWeakMapAll = _require.isWeakMapAll,
+    isSetAll = _require.isSetAll,
+    isWeakSetAll = _require.isWeakSetAll;
 
 var _require2 = require('../object/object.js'),
     _copyProperty = _require2._copyProperty,
@@ -59,7 +59,7 @@ var _require2 = require('../object/object.js'),
 var equalFunction = {};
 
 equalFunction.equalValue = function (value1, value2) {
-  if (_isNaNStrict(value1) && _isNaNStrict(value2)) {
+  if (isNaNStrict(value1) && isNaNStrict(value2)) {
     return true;
   }
 
@@ -68,7 +68,7 @@ equalFunction.equalValue = function (value1, value2) {
 
 
 equalFunction.equalFunction = function (value1, value2) {
-  if (!isFunction(value1, value2)) {
+  if (!isFunctionAll(value1, value2)) {
     return;
   }
 
@@ -82,7 +82,7 @@ equalFunction.equalObject = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isObject(value1, value2)) {
+  if (!isObjectAll(value1, value2)) {
     return;
   }
 
@@ -113,7 +113,7 @@ equalFunction.equalArrayType = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isArrayType(value1, value2)) {
+  if (!isArrayTypeAll(value1, value2)) {
     return;
   }
 
@@ -133,7 +133,7 @@ equalFunction.equalArrayType = function (value1, value2) {
 };
 
 equalFunction.equalDate = function (value1, value2) {
-  if (!isDate(value1, value2)) {
+  if (!isDateAll(value1, value2)) {
     return;
   }
 
@@ -141,7 +141,7 @@ equalFunction.equalDate = function (value1, value2) {
 };
 
 equalFunction.equalRegExp = function (value1, value2) {
-  if (!isRegExp(value1, value2)) {
+  if (!isRegExpAll(value1, value2)) {
     return;
   }
 
@@ -155,7 +155,7 @@ equalFunction.equalMap = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isMap(value1, value2)) {
+  if (!isMapAll(value1, value2)) {
     return;
   }
 
@@ -203,7 +203,7 @@ equalFunction.equalWeakMap = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isWeakMap(value1, value2)) {
+  if (!isWeakMapAll(value1, value2)) {
     return;
   }
 
@@ -251,7 +251,7 @@ equalFunction.equalSet = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isSet(value1, value2)) {
+  if (!isSetAll(value1, value2)) {
     return;
   }
 
@@ -324,7 +324,7 @@ equalFunction.equalWeakSet = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isWeakSet(value1, value2)) {
+  if (!isWeakSetAll(value1, value2)) {
     return;
   }
 
@@ -399,7 +399,7 @@ var _equal = function _equal(value1, value2) {
     for (var i = 0, l = _equal.functions.length; i < l; i += 1) {
       var result = _equal.functions[i](value1, value2);
 
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }
@@ -485,7 +485,7 @@ var _equalDeep = function _equalDeep(value1, value2) {
         CircularReferenceBuffer.v2Array.push(v2);
       }, __equalDeep);
 
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }

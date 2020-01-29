@@ -14,7 +14,7 @@ var test_execute_root = function test_execute_root(parts) {
         cloneDeep = parts.cloneDeep,
         cloneFunction = parts.cloneFunction;
 
-    var _require = require('../type/_isType.js'),
+    var _require = require('../type/isType.js'),
         _typeofCheck = _require._typeofCheck,
         _objectToStringCheck = _require._objectToStringCheck;
 
@@ -603,7 +603,7 @@ var test_execute_root = function test_execute_root(parts) {
         }
 
         var symbol1 = Symbol();
-        checkEqual(true, parts.isSymbol(symbol1));
+        checkEqual(true, parts.isSymbolAll(symbol1));
         var value1 = [symbol1];
         var value2 = cloneDeep(value1);
         checkEqual(true, symbol1 === value1[0]);
@@ -617,7 +617,7 @@ var test_execute_root = function test_execute_root(parts) {
             return value;
           };
 
-          if (!parts.isSymbol(source)) {
+          if (!parts.isSymbolAll(source)) {
             return undefined;
             ;
           }
@@ -649,8 +649,8 @@ var test_execute_root = function test_execute_root(parts) {
         map1.set('key1', 'value1');
         map1.set('key2', 'value2');
         checkEqual('value1', map1.get('key1'));
-        checkEqual(false, parts.isObject(map1));
-        checkEqual(true, parts.isObjectType(map1)); // initializse nothing cloneMap
+        checkEqual(false, parts.isObjectAll(map1));
+        checkEqual(true, parts.isObjectTypeAll(map1)); // initializse nothing cloneMap
 
         clone.clear();
         clone.add(cloneFunction.cloneObjectType);
@@ -738,8 +738,8 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value1'));
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
-        checkEqual(false, parts.isObject(set1));
-        checkEqual(true, parts.isObjectType(set1)); // initializse nothing cloneSet
+        checkEqual(false, parts.isObjectAll(set1));
+        checkEqual(true, parts.isObjectTypeAll(set1)); // initializse nothing cloneSet
 
         clone.clear();
         clone.add(cloneFunction.cloneObjectType);

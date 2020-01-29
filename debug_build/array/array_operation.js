@@ -9,19 +9,19 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../number/number.js'),
     _inRange = _require2._inRange;
@@ -53,15 +53,15 @@ var insert = function insert(array, values) {
     index = _array.index;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('insert args(array) is not array');
   }
 
-  if (!_isArray(values)) {
+  if (!isArray(values)) {
     throw new TypeError('insert args(values) is not array');
   }
 
-  if (!_isInteger(index)) {
+  if (!isInteger(index)) {
     throw new TypeError('insert args(index) is not integer');
   }
 
@@ -92,15 +92,15 @@ var add = function add(array, values) {
     index = _array2.index;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('add args(array) is not array');
   }
 
-  if (!_isArray(values)) {
+  if (!isArray(values)) {
     throw new TypeError('add args(values) is not array');
   }
 
-  if (!_isInteger(index)) {
+  if (!isInteger(index)) {
     throw new TypeError('add args(index) is not integer');
   }
 
@@ -131,15 +131,15 @@ var deleteLength = function deleteLength(array, index) {
     deleteCount = _array3.deleteCount;
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError('delete args(array) is not array');
   }
 
-  if (!_isInteger(index)) {
+  if (!isInteger(index)) {
     throw new TypeError('delete args(index) is not integer');
   }
 
-  if (!_isInteger(deleteCount)) {
+  if (!isInteger(deleteCount)) {
     throw new TypeError('delete args(deleteCount) is not integer');
   }
 

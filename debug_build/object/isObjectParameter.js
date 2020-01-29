@@ -1,19 +1,19 @@
 "use strict";
 
-var _require = require('../type/_isType.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException;
+var _require = require('../type/isType.js'),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
 
 var _require2 = require('../string/_replaceAll.js'),
     _replaceAll = _require2._replaceAll;
@@ -28,7 +28,7 @@ var _require3 = require('../object/_propertyCount.js'),
 var isObjectParameter = function isObjectParameter(object, propertyArray) {
   var defaultPropertyArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     return false;
   }
 
@@ -36,11 +36,11 @@ var isObjectParameter = function isObjectParameter(object, propertyArray) {
     var result = [];
 
     for (var i = 0; i < array.length; i += 1) {
-      if (array[i] === '' || _isUndefined(array[i])) {
+      if (array[i] === '' || isUndefined(array[i])) {
         continue;
       }
 
-      if (!_isString(array[i])) {
+      if (!isString(array[i])) {
         throw new TypeError('isObjectParameter args(propertyArray|defaultPropertyArray)' + ' element is not string');
       }
 
@@ -50,13 +50,13 @@ var isObjectParameter = function isObjectParameter(object, propertyArray) {
     return result;
   };
 
-  if (_isString(propertyArray)) {
+  if (isString(propertyArray)) {
     propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
 
   propertyArray = filterArray(propertyArray);
 
-  if (_isString(defaultPropertyArray)) {
+  if (isString(defaultPropertyArray)) {
     defaultPropertyArray = _replaceAll(defaultPropertyArray, ' ', '').split(',');
   }
 

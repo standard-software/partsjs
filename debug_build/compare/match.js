@@ -1,25 +1,25 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isObjectType = _require._isObjectType,
-    _isArray = _require._isArray,
-    _isArrayType = _require._isArrayType,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException,
-    _isMap = _require._isMap,
-    _isWeakMap = _require._isWeakMap,
-    _isSet = _require._isSet,
-    _isWeakSet = _require._isWeakSet;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
@@ -34,15 +34,15 @@ var _require3 = require('../array/array_common.js'),
 
 
 var _match = function _match(value, compare) {
-  if (_isString(value)) {
+  if (isString(value)) {
     var result;
 
-    if (_isRegExp(compare)) {
+    if (isRegExp(compare)) {
       result = value.match(compare) !== null;
-    } else if (_isFunction(compare)) {
+    } else if (isFunction(compare)) {
       result = compare(value);
 
-      if (!_isBoolean(result)) {
+      if (!isBoolean(result)) {
         throw new TypeError('_match args(compareArray element function result) is not boolean');
       }
     } else {
@@ -53,10 +53,10 @@ var _match = function _match(value, compare) {
   } else {
     var _result;
 
-    if (_isFunction(compare)) {
+    if (isFunction(compare)) {
       _result = compare(value);
 
-      if (!_isBoolean(_result)) {
+      if (!isBoolean(_result)) {
         throw new TypeError('_match args(compareArray element function result) is not boolean');
       }
     } else {
@@ -105,7 +105,7 @@ var matchValue = function matchValue(value, compare, valueWhenMatched) {
 
 
 var _initialValue = function _initialValue(value, valueWhenMatched) {
-  return _matchValue(value, _isUndefined, valueWhenMatched);
+  return _matchValue(value, isUndefined, valueWhenMatched);
 };
 
 var initialValue = function initialValue(value, valueWhenMatched) {
@@ -135,7 +135,7 @@ var matchSome = function matchSome(value, compareArray) {
     compareArray = _value4.compareArray;
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('matchSome args(compareArray) is not array');
   }
 
@@ -159,11 +159,11 @@ var allMatchSome = function allMatchSome(valueArray, compareArray) {
     compareArray = _valueArray.compareArray;
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError('allMatchSome args(valueArray) is not array');
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('allMatchSome args(compareArray) is not array');
   }
 
@@ -187,11 +187,11 @@ var indexOfMatchSome = function indexOfMatchSome(valueArray, compareArray) {
     compareArray = _valueArray2.compareArray;
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError('indexOfMatchSome args(valueArray) is not array');
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('indexOfMatchSome args(compareArray) is not array');
   }
 
@@ -230,7 +230,7 @@ var matchSomeValue = function matchSomeValue(value, compareArray, valueWhenMatch
     valueWhenMatched = _value5.valueWhenMatched;
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('matchSomeValue args(compareArray) is not array');
   }
 
@@ -254,7 +254,7 @@ var matchAll = function matchAll(value, compareArray) {
     compareArray = _value6.compareArray;
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('matchAll args(compareArray) is not array');
   }
 
@@ -278,11 +278,11 @@ var allMatchAll = function allMatchAll(valueArray, compareArray) {
     compareArray = _valueArray3.compareArray;
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError('allMatchAll args(valueArray) is not array');
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('allMatchAll args(compareArray) is not array');
   }
 
@@ -306,11 +306,11 @@ var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
     compareArray = _valueArray4.compareArray;
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError('indexOfMatchAll args(valueArray) is not array');
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('indexOfMatchAll args(compareArray) is not array');
   }
 
@@ -349,7 +349,7 @@ var matchAllValue = function matchAllValue(value, compareArray, valueWhenMatched
     valueWhenMatched = _value7.valueWhenMatched;
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError('matchAllValue args(compareArray) is not array');
   }
 

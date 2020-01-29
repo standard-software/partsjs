@@ -1,32 +1,32 @@
 "use strict";
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isArray = _require._isArray,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException,
-    _isNotUndefined = _require._isNotUndefined,
-    _isNotNull = _require._isNotNull,
-    _isNotNaNStrict = _require._isNotNaNStrict,
-    _isNotBoolean = _require._isNotBoolean,
-    _isNotNumber = _require._isNotNumber,
-    _isNotInteger = _require._isNotInteger,
-    _isNotString = _require._isNotString,
-    _isNotFunction = _require._isNotFunction,
-    _isNotObject = _require._isNotObject,
-    _isNotArray = _require._isNotArray,
-    _isNotDate = _require._isNotDate,
-    _isNotRegExp = _require._isNotRegExp,
-    _isNotException = _require._isNotException;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isNotUndefined = _require.isNotUndefined,
+    isNotNull = _require.isNotNull,
+    isNotNaNStrictAll = _require.isNotNaNStrictAll,
+    isNotBoolean = _require.isNotBoolean,
+    isNotNumber = _require.isNotNumber,
+    isNotInteger = _require.isNotInteger,
+    isNotString = _require.isNotString,
+    isNotFunction = _require.isNotFunction,
+    isNotObject = _require.isNotObject,
+    isNotArray = _require.isNotArray,
+    isNotDate = _require.isNotDate,
+    isNotRegExp = _require.isNotRegExp,
+    isNotException = _require.isNotException;
 
 var _require2 = require('../compare/compare.js'),
     _matchValue = _require2._matchValue,
@@ -60,11 +60,11 @@ var numberToString = function numberToString(value) {
     radix = _value$radix === void 0 ? 10 : _value$radix;
   }
 
-  if (!_isNumber(value)) {
+  if (!isNumber(value)) {
     throw new TypeError('numberToString args(value) is not number');
   }
 
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError('numberToString args(radix) is not integer');
   }
 
@@ -90,7 +90,7 @@ var _stringToNumberBase = function _stringToNumberBase(value, defaultValueFunc) 
 
   var result = Number(value);
 
-  if (!_isNumber(result)) {
+  if (!isNumber(result)) {
     return defaultValueFunc();
   }
 
@@ -109,7 +109,7 @@ var stringToNumber = function stringToNumber(value) {
     value = _value2.value;
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('stringToNumber args(value) is not string');
   }
 
@@ -129,7 +129,7 @@ var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) 
     defaultValue = _value3.defaultValue;
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('stringToNumberDefault args(value) is not string');
   }
 
@@ -153,7 +153,7 @@ var _stringToIntegerBase = function _stringToIntegerBase(value, defaultValueFunc
 
   var result = parseInt(value, radix);
 
-  if (!_isInteger(result)) {
+  if (!isInteger(result)) {
     return defaultValueFunc();
   }
 
@@ -177,11 +177,11 @@ var stringToInteger = function stringToInteger(value) {
     radix = _value4$radix === void 0 ? 10 : _value4$radix;
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('stringToInteger args(value) is not string');
   }
 
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError('stringToInteger args(radix) is not integer');
   }
 
@@ -210,11 +210,11 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
     radix = _value5$radix === void 0 ? 10 : _value5$radix;
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError('stringToInteger args(value) is not string');
   }
 
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError('stringToInteger args(radix) is not integer');
   }
 
@@ -230,11 +230,11 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
 
 
 var toNumber = function toNumber(value) {
-  if (_isNull(value)) {
+  if (isNull(value)) {
     return NaN;
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     return Number(value);
   }
 
@@ -250,7 +250,7 @@ var toNumberDefault = function toNumberDefault(value, defaultValue) {
 
   var result = toNumber(value);
 
-  if (_isNaNStrict(result)) {
+  if (isNaNStrict(result)) {
     return defaultValue;
   }
 
@@ -264,7 +264,7 @@ var toNumberDefault = function toNumberDefault(value, defaultValue) {
 var toInteger = function toInteger(value) {
   var result = toNumber(value);
 
-  if (_isNaNStrict(result)) {
+  if (isNaNStrict(result)) {
     return NaN;
   }
 
@@ -280,7 +280,7 @@ var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
 
   var result = toInteger(value);
 
-  if (_isNaNStrict(result)) {
+  if (isNaNStrict(result)) {
     return defaultValue;
   }
 

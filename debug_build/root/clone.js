@@ -9,29 +9,29 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var _require = require('../type/type.js'),
-    _isUndefined = _require._isUndefined,
-    _isNull = _require._isNull,
-    _isNaNStrict = _require._isNaNStrict,
-    _isBoolean = _require._isBoolean,
-    _isNumber = _require._isNumber,
-    _isInteger = _require._isInteger,
-    _isString = _require._isString,
-    _isFunction = _require._isFunction,
-    _isObject = _require._isObject,
-    _isObjectType = _require._isObjectType,
-    _isArray = _require._isArray,
-    _isArrayType = _require._isArrayType,
-    _isDate = _require._isDate,
-    _isRegExp = _require._isRegExp,
-    _isException = _require._isException,
-    _isBooleanObject = _require._isBooleanObject,
-    _isNumberObject = _require._isNumberObject,
-    _isStringObject = _require._isStringObject,
-    _isSymbol = _require._isSymbol,
-    _isMap = _require._isMap,
-    _isWeakMap = _require._isWeakMap,
-    _isSet = _require._isSet,
-    _isWeakSet = _require._isWeakSet;
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isBooleanObject = _require.isBooleanObject,
+    isNumberObject = _require.isNumberObject,
+    isStringObject = _require.isStringObject,
+    isSymbol = _require.isSymbol,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
 
 var _require2 = require('../object/object.js'),
     _copyProperty = _require2._copyProperty;
@@ -43,7 +43,7 @@ var _require2 = require('../object/object.js'),
 var cloneFunction = {}; // function is no clone
 
 cloneFunction.cloneIgnoreFunction = function (source) {
-  if (!_isFunction(source)) {
+  if (!isFunction(source)) {
     return undefined;
   }
 
@@ -60,7 +60,7 @@ cloneFunction.cloneObject = function (source) {
     return value;
   };
 
-  if (!_isObject(source)) {
+  if (!isObject(source)) {
     return undefined;
   }
 
@@ -83,7 +83,7 @@ cloneFunction.cloneArrayType = function (source) {
     return value;
   };
 
-  if (!_isArrayType(source)) {
+  if (!isArrayType(source)) {
     return undefined;
   }
 
@@ -110,7 +110,7 @@ cloneFunction.cloneObjectType = function (source) {
     return value;
   };
 
-  if (!_isObjectType(source)) {
+  if (!isObjectType(source)) {
     return undefined;
   }
 
@@ -130,7 +130,7 @@ cloneFunction.cloneObjectType = function (source) {
 //   bufferWrite = () => {},
 //   __cloneDeep = value => value,
 // ) => {
-//   if (!_isObject(source)) {
+//   if (!isObject(source)) {
 //     return undefined;
 //   }
 //   const cloneValue = {};
@@ -146,7 +146,7 @@ cloneFunction.cloneObjectType = function (source) {
 //   bufferWrite = () => {},
 //   __cloneDeep = value => value,
 // ) => {
-//   if (!_isArray(source)) {
+//   if (!isArray(source)) {
 //     return undefined;
 //   }
 //   const cloneValue = [];
@@ -162,7 +162,7 @@ cloneFunction.cloneObjectType = function (source) {
 cloneFunction.cloneDate = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!_isDate(source)) {
+  if (!isDate(source)) {
     return undefined;
   }
 
@@ -174,7 +174,7 @@ cloneFunction.cloneDate = function (source) {
 cloneFunction.cloneRegExp = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!_isRegExp(source)) {
+  if (!isRegExp(source)) {
     return undefined;
   }
 
@@ -193,7 +193,7 @@ cloneFunction.cloneMap = function (source) {
     return value;
   };
 
-  if (!_isMap(source)) {
+  if (!isMap(source)) {
     return undefined;
   }
 
@@ -230,7 +230,7 @@ cloneFunction.cloneMap = function (source) {
 };
 
 cloneFunction.cloneIgnoreWeakMap = function (source) {
-  if (!_isWeakMap(source)) {
+  if (!isWeakMap(source)) {
     return undefined;
   }
 
@@ -243,7 +243,7 @@ cloneFunction.cloneIgnoreWeakMap = function (source) {
 cloneFunction.cloneSet = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!_isSet(source)) {
+  if (!isSet(source)) {
     return undefined;
   }
 
@@ -277,7 +277,7 @@ cloneFunction.cloneSet = function (source) {
 };
 
 cloneFunction.cloneIgnoreWeakSet = function (source) {
-  if (!_isWeakSet(source)) {
+  if (!isWeakSet(source)) {
     return undefined;
   }
 
@@ -290,14 +290,14 @@ cloneFunction.cloneIgnoreWeakSet = function (source) {
 
 var _clone = function _clone(source) {
   var __clone = function __clone(value) {
-    if (_isUndefined(value)) {
+    if (isUndefined(value)) {
       return undefined;
     }
 
     for (var i = 0, l = _clone.functions.length; i < l; i += 1) {
       var result = _clone.functions[i](value);
 
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }
@@ -365,7 +365,7 @@ var _cloneDeep = function _cloneDeep(source) {
       return CircularReferenceBuffer.clone[index];
     }
 
-    if (_isUndefined(value)) {
+    if (isUndefined(value)) {
       return undefined;
     }
 
@@ -375,7 +375,7 @@ var _cloneDeep = function _cloneDeep(source) {
         CircularReferenceBuffer.clone.push(clone);
       }, __cloneDeep);
 
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }

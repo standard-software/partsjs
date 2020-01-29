@@ -9,22 +9,22 @@ var test_execute_compare = function test_execute_compare(parts) {
       it = _parts$test.it;
   describe('test_execute_compare', function () {
     var _parts$type = parts.type,
-        isUndefined = _parts$type.isUndefined,
-        isNull = _parts$type.isNull,
-        isNaNStrict = _parts$type.isNaNStrict,
-        isBoolean = _parts$type.isBoolean,
-        isNumber = _parts$type.isNumber,
-        isInteger = _parts$type.isInteger,
-        isString = _parts$type.isString,
-        isFunction = _parts$type.isFunction,
-        isObject = _parts$type.isObject,
-        isObjectType = _parts$type.isObjectType,
-        isArray = _parts$type.isArray,
-        isDate = _parts$type.isDate,
-        isRegExp = _parts$type.isRegExp,
-        isException = _parts$type.isException,
-        isEmptyObject = _parts$type.isEmptyObject,
-        isEmptyArray = _parts$type.isEmptyArray;
+        isUndefinedAll = _parts$type.isUndefinedAll,
+        isNullAll = _parts$type.isNullAll,
+        isNaNStrictAll = _parts$type.isNaNStrictAll,
+        isBooleanAll = _parts$type.isBooleanAll,
+        isNumberAll = _parts$type.isNumberAll,
+        isIntegerAll = _parts$type.isIntegerAll,
+        isStringAll = _parts$type.isStringAll,
+        isFunctionAll = _parts$type.isFunctionAll,
+        isObjectAll = _parts$type.isObjectAll,
+        isObjectTypeAll = _parts$type.isObjectTypeAll,
+        isArrayAll = _parts$type.isArrayAll,
+        isDateAll = _parts$type.isDateAll,
+        isRegExpAll = _parts$type.isRegExpAll,
+        isExceptionAll = _parts$type.isExceptionAll,
+        isEmptyObjectAll = _parts$type.isEmptyObjectAll,
+        isEmptyArrayAll = _parts$type.isEmptyArrayAll;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
@@ -1291,10 +1291,10 @@ var test_execute_compare = function test_execute_compare(parts) {
           compare: undefined,
           valueWhenMatched: 999
         }));
-        checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
+        checkEqual('test', String(matchValue({}, isEmptyObjectAll, 'test')));
         checkEqual('[object Object]', String(matchValue({
           a: 1
-        }, isEmptyObject, 'test')));
+        }, isEmptyObjectAll, 'test')));
       });
     };
 
@@ -1365,17 +1365,17 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, matchSome(undefined, [null, 0]));
         checkEqual(false, matchSome(0, [null, undefined]));
         checkEqual(true, matchSome(null, [null, undefined]));
-        checkEqual(true, matchSome(null, [null, undefined, isEmptyArray]));
-        checkEqual(true, matchSome(null, [null, undefined, isEmptyObject]));
+        checkEqual(true, matchSome(null, [null, undefined, isEmptyArrayAll]));
+        checkEqual(true, matchSome(null, [null, undefined, isEmptyObjectAll]));
         checkEqual(true, matchSome(undefined, [null, undefined]));
-        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyArray]));
-        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyObject]));
+        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyArrayAll]));
+        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyObjectAll]));
         checkEqual(false, matchSome([], [null, undefined]));
-        checkEqual(true, matchSome([], [null, undefined, isEmptyArray]));
-        checkEqual(false, matchSome([], [null, undefined, isEmptyObject]));
+        checkEqual(true, matchSome([], [null, undefined, isEmptyArrayAll]));
+        checkEqual(false, matchSome([], [null, undefined, isEmptyObjectAll]));
         checkEqual(false, matchSome({}, [null, undefined]));
-        checkEqual(false, matchSome({}, [null, undefined, isEmptyArray]));
-        checkEqual(true, matchSome({}, [null, undefined, isEmptyObject])); // exception
+        checkEqual(false, matchSome({}, [null, undefined, isEmptyArrayAll]));
+        checkEqual(true, matchSome({}, [null, undefined, isEmptyObjectAll])); // exception
 
         checkEqual(true, isThrownException(function () {
           matchSome('123', 'abc');
@@ -1513,7 +1513,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           value1: '123',
           compareArray: [123]
         }, [function (value) {
-          return isObject(value);
+          return isObjectAll(value);
         }]));
       });
     };
@@ -1546,11 +1546,11 @@ var test_execute_compare = function test_execute_compare(parts) {
         }]));
         checkEqual(true, allMatchSome([null, undefined], [null, undefined]));
         checkEqual(false, allMatchSome([null, undefined], [null]));
-        checkEqual(true, allMatchSome([null, undefined], [isNull, isUndefined]));
-        checkEqual(false, allMatchSome([null, undefined], [isNull]));
+        checkEqual(true, allMatchSome([null, undefined], [isNullAll, isUndefinedAll]));
+        checkEqual(false, allMatchSome([null, undefined], [isNullAll]));
         checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]));
         checkEqual(false, isThrown(function () {
           allMatchSome([10], [function (value) {
             return value > 15;
@@ -1577,13 +1577,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         }]));
         checkEqual(true, someMatchSome([null, undefined], [null, undefined]));
         checkEqual(true, someMatchSome([null, undefined], [null]));
-        checkEqual(true, someMatchSome([null, undefined], [isNull, isUndefined]));
-        checkEqual(true, someMatchSome([null, undefined], [isNull]));
+        checkEqual(true, someMatchSome([null, undefined], [isNullAll, isUndefinedAll]));
+        checkEqual(true, someMatchSome([null, undefined], [isNullAll]));
         checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]));
         checkEqual(false, someMatchSome([null, undefined, NaN], [NaN]));
-        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrict]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrictAll]));
         checkEqual(false, isThrown(function () {
           someMatchSome([10], [function (value) {
             return value > 15;
@@ -1610,13 +1610,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         }]));
         checkEqual(0, indexOfMatchSome([null, undefined], [null, undefined]));
         checkEqual(1, indexOfMatchSome([null, undefined], [undefined]));
-        checkEqual(0, indexOfMatchSome([null, undefined], [isNull, isUndefined]));
-        checkEqual(1, indexOfMatchSome([null, undefined], [isUndefined]));
+        checkEqual(0, indexOfMatchSome([null, undefined], [isNullAll, isUndefinedAll]));
+        checkEqual(1, indexOfMatchSome([null, undefined], [isUndefinedAll]));
         checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]));
         checkEqual(-1, indexOfMatchSome([null, undefined, NaN], [NaN]));
-        checkEqual(2, indexOfMatchSome([null, undefined, NaN], [isNaNStrict]));
+        checkEqual(2, indexOfMatchSome([null, undefined, NaN], [isNaNStrictAll]));
         checkEqual(false, isThrown(function () {
           indexOfMatchSome([10], [function (value) {
             return value > 15;
