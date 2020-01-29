@@ -2,6 +2,21 @@
 
 ## Version
 
+### 4.0.0
+#### 2020/01/29(Wed)
+- change build webpack config
+  - change How to use HTML script tag
+  - change How to use WSH
+  - more simple
+- add how_to_use.html how_to_use.wsf
+- add _propertyCount.js
+  - update propertyCount (hasOwn)
+- update isObjectParameter
+- update isEmptyObject object.js >> isType.js
+- add isEmptyArray
+- update isXxx >> isXxxAll
+- update _isXxx >> isXxx
+
 ### 3.5.0
 #### 2020/01/24(Fri)
 - add includes includesSome inclludesAll
