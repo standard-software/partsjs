@@ -52,7 +52,7 @@ const _inProperty = (object, propertyPathArray, hasOwn = true) => {
  * inProperty
  */
 const inProperty = (object, propertyPathArray, hasOwn = true) => {
-  if (isObjectParameter(object, 'object, propertyPathArray')) {
+  if (isObjectParameter(object, 'object, propertyPathArray', 'hasOwn')) {
     ({ object, propertyPathArray, hasOwn = true } = object);
   }
 

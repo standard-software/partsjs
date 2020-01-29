@@ -13,6 +13,10 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
+  _propertyCount,
+} = require('../object/_propertyCount.js');
+
+const {
   _replaceAll,
 } = require('../string/_replaceAll.js');
 
@@ -41,7 +45,7 @@ const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 };
 
 const copyProperty = (fromObject, propertyArray, toObject = {}) => {
-  if (isObjectParameter(fromObject, 'fromObject,propertyArray')) {
+  if (isObjectParameter(fromObject, 'fromObject,propertyArray', 'toObject')) {
     ({ fromObject, propertyArray, toObject = {} } = fromObject);
   }
 
@@ -73,21 +77,23 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
 /**
  * propertyCount
  */
-const _propertyCount = (object) => {
-  let result = 0;
-  for (const [key, value] of Object.entries(object)) {
-    result += 1;
+const propertyCount = (object, hasOwn = true) => {
+  if (isObjectParameter(object, 'object', 'hasOwn')) {
+    ({ object, hasOwn = true } = object);
   }
-  return result;
-};
 
-const propertyCount = (object) => {
   if (!_isObjectType(object)) {
     throw new TypeError(
       'propertyCount args(object) is not object type',
     );
   }
-  return _propertyCount(object);
+  if (!_isBoolean(hasOwn)) {
+    throw new TypeError(
+      'getProperty args(hasOwn) is not boolean',
+    );
+  }
+
+  return _propertyCount(object, hasOwn);
 };
 
 /**
@@ -125,7 +131,7 @@ const _getProperty = (
 };
 
 const getProperty = (object, propertyPath, hasOwn = true) => {
-  if (isObjectParameter(object, 'object, propertyPath')) {
+  if (isObjectParameter(object, 'object, propertyPath', 'hasOwn')) {
     ({ object, propertyPath, hasOwn = true } = object);
   }
 

@@ -43,7 +43,7 @@ const numberToString = (
   value,
   radix = 10,
 ) => {
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'radix')) {
     ({ value, radix = 10 } = value);
   }
 
@@ -135,7 +135,7 @@ const stringToNumberDefault = (
   value,
   defaultValue,
 ) => {
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'defaultValue')) {
     ({ value, defaultValue } = value);
   }
 
@@ -192,7 +192,7 @@ const stringToInteger = (
   value,
   radix = 10,
 ) => {
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'radix')) {
     ({ value, radix = 10 } = value);
   }
 
@@ -235,7 +235,7 @@ const stringToIntegerDefault = (
   defaultValue,
   radix = 10,
 ) => {
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'defaultValue, radix')) {
     ({ value, defaultValue, radix = 10 } = value);
   }
 

@@ -746,14 +746,14 @@ const test_execute_type = (parts) => {
     const test_isExcection = function() {
       it('test_isExcection', () => {
 
-        checkEqual(true, isException({ name: '', message: '' }));
+        checkEqual(true,  isException({ name: '', message: '' }));
         checkEqual(false, isException({ name: '' }));
         checkEqual(false, isException({ message: '' }));
 
-        checkEqual(true, isException(new Error()));
-        checkEqual(true, isException(new TypeError()));
-        checkEqual(true, isException(new SyntaxError()));
-        checkEqual(true, isException(new ReferenceError()));
+        checkEqual(true,  isException(new Error()));
+        checkEqual(true,  isException(new TypeError()));
+        checkEqual(true,  isException(new SyntaxError()));
+        checkEqual(true,  isException(new ReferenceError()));
 
         const UserException = function(message) {
           this.message = message;

@@ -102,6 +102,9 @@ You can now use the functions of the parts.js object.
   - change How to use WSH
   - more simple
 - add how_to_use.html how_to_use.wsf
+- add _propertyCount.js
+  - update propertyCount (hasOwn)
+- update isObjectParameter
 
 ### 3.5.0
 #### 2020/01/24(Fri)

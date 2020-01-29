@@ -124,8 +124,8 @@ const deleteLength = (
   index,
   deleteCount = 1,
 ) => {
-  if (isObjectParameter(array, 'array, index, length')) {
-    ({ array, index, length: deleteCount } = array);
+  if (isObjectParameter(array, 'array, index, deleteCount')) {
+    ({ array, index, deleteCount } = array);
   }
 
   if (!_isArray(array)) {

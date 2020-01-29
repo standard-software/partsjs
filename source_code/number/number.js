@@ -57,7 +57,7 @@ const _round = (value, digit = 0) => {
 };
 
 const round = (value, digit = 0) => {
-  if (isObjectParameter(value, 'value')) {
+  if (isObjectParameter(value, 'value', 'digit')) {
     ({ value, digit = 0 } = value);
   }
 
