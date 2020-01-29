@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '3.5.0';
+const VERSION = '4.0.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -190,7 +190,11 @@ const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = {
   VERSION,
-  platform: {},
+  platform: {
+    node: null,
+    web:  null,
+    wsh:  null,
+  },
   type,
   test,
   syntax,

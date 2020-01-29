@@ -30,7 +30,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '3.5.0';
+var VERSION = '4.0.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -128,7 +128,11 @@ var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = _objectSpread({
   VERSION: VERSION,
-  platform: {},
+  platform: {
+    node: null,
+    web: null,
+    wsh: null
+  },
   type: type,
   test: test,
   syntax: syntax,

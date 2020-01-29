@@ -7,16 +7,10 @@
 </head>
 <body>
 
-<script>
-  var module = {};
-  var parts;
-  var test;
-</script>
-
 <script src="../../release_build/parts.js"></script>
 <script>
-  parts = module.exports;
   parts.platform.web = true;
+  var module = {};
 </script>
 <script src="../../debug_build/index.test.js"></script>
 <script src="../../debug_build/root/root.test.js"></script>

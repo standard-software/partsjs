@@ -4,7 +4,8 @@ module.exports = {
   output: {
     filename: 'parts.js',
     path: __dirname + '/../release_build/',
-    library: '',
-    libraryTarget: 'commonjs2',
-  }
+    library: 'parts',
+    libraryTarget: 'umd',
+    globalObject: 'this',
+  },
 };

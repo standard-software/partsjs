@@ -40,65 +40,68 @@ console.log(
 ```
     node --experimental-modules index.mjs
 
-## How to use HTML Page
+## How to use parts.js in HTML page
 
 ### refer to example
-partjs/test_exec/release_web/test_index.html
+partsjs/how_to_use.html
+partsjs/test_exec/release_web/test_index.html
 
 ### HTML file
 
 ```
-<script>
-  var module = {};
-  var parts;
-</script>
-
-<script src="./release_build/parts.js"></script>
-<script>
-  parts = module.exports;
-</script>
-<script>
-  document.write('parts version is ' + parts.VERSION)
-</script>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>how_to_use.html</title>
+</head>
+<body>
+  <script src="./release_build/parts.js"></script>
+  <script>
+    document.write('parts version is ' + parts.VERSION)
+  </script>
+</body>
 ```
 
-You can now use the functions of the parts object.
+You can now use the functions of the parts.js object.
 
-## How to use WSH .wsf file
+## How to use parts in WSH (.wsf file)
 
 ### refer to example
-partjs/test_exec/release_wsh/test_index.wsf
+partsjs/how_to_use.wsf
+partsjs/test_exec/release_wsh/test_index.wsf
 
 ### wsf file (ex. index.wsf)
 
 ```
 <?xml version="1.0" encoding="shift-jis" ?>
-
 <job>
-<script language="JavaScript">
-<![CDATA[
-  var module = {};
-  var parts;
-]]>
-</script>
-<script language="JavaScript" src="../../release_build/parts.js"></script>
-<script language="JavaScript">
-<![CDATA[
-  var parts = module.exports;
-
-  var outputMessage = '';
-  outputMessage += 'parts version is ' + parts.VERSION;
-  WScript.Echo(outputMessage);
-
-]]>
-</script>
+  <script language="JavaScript">
+  <![CDATA[
+    var console = {};
+  ]]>
+  </script>
+  <script language="JavaScript" src="./release_build/parts.js"></script>
+  <script language="JavaScript">
+  <![CDATA[
+    WScript.Echo('parts version is ' + parts.VERSION)
+  ]]>
+  </script>
 </job>
 ```
 
-You can now use the functions of the parts object.
+You can now use the functions of the parts.js object.
 
 
 ## Version
+
+### 4.0.0
+#### 2020/01/29(Wed)
+- change build webpack config
+  - change How to use HTML script tag
+  - change How to use WSH
+  - more simple
+- add how_to_use.html how_to_use.wsf
 
 ### 3.5.0
 #### 2020/01/24(Fri)
@@ -145,47 +148,6 @@ You can now use the functions of the parts object.
   - delete
 - test
   - support exception continue
-
-### 3.2.0
-#### 2020/01/02(Thu)
-- delete Array.prototype.map polifill
-- string
-  - add repeat
-  - add isLowerCase isUpperCase
-- array
-  - update unique
-  - add findIndex
-  - add findIndex(findIndexFirst)
-  - add findBackjIndex(findIndexLast)
-  - add find(findFirst)
-  - add findBack(findLast)
-- test
-  - add testFrame
-  - update describe it
-  - update wsh test
-
-### 3.1.0
-#### 2019/12/20(Fri)
-- array.js
-  - add filter
-  - add map
-  - add unique
-  - add single
-  - add multiple
-  - add mode
-- update isOdd
-- add jest test code
-  - debug build
-  - release build
-
-### 3.0.0
-#### 2019/12/18(Wed)
-- delete array.equal
-- array.js
-  - add from
-  - add sum average midian
-- support eslint format fix
-- support jest
 
 ### More Info
 [VERSION.md](./VERSION.md)

@@ -1,5 +1,14 @@
-module.exports =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["parts"] = factory();
+	else
+		root["parts"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -129,7 +138,7 @@ var _array = __webpack_require__(18);
 
 var _consoleHook = __webpack_require__(32);
 
-var VERSION = '3.5.0';
+var VERSION = '4.0.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -227,7 +236,11 @@ var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = _objectSpread({
   VERSION: VERSION,
-  platform: {},
+  platform: {
+    node: null,
+    web: null,
+    wsh: null
+  },
   type: type,
   test: test,
   syntax: syntax,
@@ -5645,3 +5658,4 @@ module.exports = {
 
 /***/ })
 /******/ ]);
+});
