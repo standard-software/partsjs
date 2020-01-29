@@ -1,21 +1,21 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isArray,isDate,isRegExp,
+ isException,
 } = require('../type/type.js');
 
 /**
  * assert
  */
 const assert = (value, message = '') => {
-  if (!_isBoolean(value)) {
+  if (!isBoolean(value)) {
     throw new TypeError(
       'assert args(value) is not boolean|message:'
       + `|message:${message}`,
     );
   }
-  if (!_isString(message)) {
+  if (!isString(message)) {
     throw new TypeError(
       'assert args(message) is not string|message:'
       + `|message:${message}`,
@@ -37,25 +37,25 @@ const guard = (guardFunc, runFunc) => {
     return false;
   }
 
-  if (!_isFunction(guardFunc)) {
+  if (!isFunction(guardFunc)) {
     throw new TypeError(
       'guard args(guardFunc) is not function',
     );
   }
   const result = guardFunc();
-  if (!_isArray(result)) {
+  if (!isArray(result)) {
     throw new TypeError(
       'guard args(guardFunc result) is not array',
     );
   }
   for (let i = 0; i < result.length; i += 1) {
     // support for wsh last comma in Array. [a,b,]
-    if ((i === result.length - 1) && _isUndefined(result[i])) {
+    if ((i === result.length - 1) &&isUndefined(result[i])) {
       continue;
     }
     let resultValue = undefined;
     let message = '';
-    if (_isArray(result[i])) {
+    if (isArray(result[i])) {
       if (!(1 <= result[i].length)) {
         throw new TypeError(
           'guard args(guardFunc resultArray element) is not array.length >= 1',
@@ -69,15 +69,15 @@ const guard = (guardFunc, runFunc) => {
       resultValue = result[i];
     }
     resultValue = functionValue(resultValue);
-    if (!_isBoolean(resultValue)) {
+    if (!isBoolean(resultValue)) {
       throw new TypeError(
         'guard args(guardFunc resultArray element value) is not boolean',
       );
     }
     if (resultValue === false) {
       guard_message = message;
-      if (!_isUndefined(runFunc)) {
-        if (!_isFunction(runFunc)) {
+      if (!isUndefined(runFunc)) {
+        if (!isFunction(runFunc)) {
           throw new TypeError(
             'guard args(runFunc) is not function',
           );
@@ -105,7 +105,7 @@ guard.off = () => {
  * function Value
  */
 const functionValue = (value) => {
-  if (_isFunction(value)) {
+  if (isFunction(value)) {
     return value();
   } else {
     return value;
@@ -127,18 +127,18 @@ const sc = (
  * if_
  */
 const if_ = (condition) => {
-  if (!_isBoolean(condition)) {
+  if (!isBoolean(condition)) {
     throw new TypeError(
       'if_ args(condition) is not boolean',
     );
   }
   const checkSyntax = (args) => {
-    if (!_isObject(args)) {
+    if (!isObject(args)) {
       throw new TypeError(
         'if_() args is not object',
       );
     }
-    if (_isUndefined(args.then) && _isUndefined(args.else)) {
+    if (isUndefined(args.then) &&isUndefined(args.else)) {
       throw new ReferenceError(
         'if_() args.then and .else is not defined',
       );
@@ -162,21 +162,21 @@ const if_ = (condition) => {
  */
 const switch_ = (expression) => {
   return (args) => {
-    if (!_isArray(args)) {
+    if (!isArray(args)) {
       throw new TypeError('switch_() args is not array');
     }
     for (let i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if ((i === args.length - 1) && _isUndefined(args[i])) {
+      if ((i === args.length - 1) &&isUndefined(args[i])) {
         continue;
       }
-      if (!_isArray(args[i])) {
+      if (!isArray(args[i])) {
         throw new TypeError('switch_() args is not array in array');
       }
     }
     for (let i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if ((i === args.length - 1) && _isUndefined(args[i])) {
+      if ((i === args.length - 1) &&isUndefined(args[i])) {
         continue;
       }
       if (args[i].length === 0) {

@@ -1,8 +1,8 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isArray, isDate, isRegExp,
+  isException,
 } = require('../type/type.js');
 
 const {
@@ -26,7 +26,7 @@ const _min = (array) => {
   }
   let result = array[0];
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
+    if (!isNumber(array[i])) {
       throw new TypeError(
         '_min args(array) element is not number',
       );
@@ -39,7 +39,7 @@ const _min = (array) => {
 };
 
 const min = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'min args(array) is not array',
     );
@@ -53,7 +53,7 @@ const _max = (array) => {
   }
   let result = array[0];
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
+    if (!isNumber(array[i])) {
       throw new TypeError(
         '_max args(array) element is not number',
       );
@@ -66,7 +66,7 @@ const _max = (array) => {
 };
 
 const max = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'max args(array) is not array',
     );
@@ -87,7 +87,7 @@ const from = (arrayLike) => {
 const _sum = (array) => {
   let result = 0;
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!_isNumber(array[i])) {
+    if (!isNumber(array[i])) {
       throw new TypeError(
         '_min args(array) element is not number',
       );
@@ -98,7 +98,7 @@ const _sum = (array) => {
 };
 
 const sum = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'sum args(array) is not array',
     );
@@ -117,7 +117,7 @@ const _average = (array) => {
 };
 
 const average = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'average args(array) is not array',
     );
@@ -147,7 +147,7 @@ const _midian = (array) => {
 };
 
 const midian = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'midian args(array) is not array',
     );
@@ -174,7 +174,7 @@ const _mode = (array) => {
 };
 
 const mode = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'mode args(array) is not array',
     );
@@ -196,7 +196,7 @@ const _unique = (array) => {
 };
 
 const unique = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'unique args(array) is not array',
     );
@@ -222,7 +222,7 @@ const _single = (array) => {
 };
 
 const single = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'single args(array) is not array',
     );
@@ -248,7 +248,7 @@ const _multiple = (array) => {
 };
 
 const multiple = (array) => {
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'multiple args(array) is not array',
     );
@@ -263,7 +263,7 @@ const _filter = (array, func) => {
   const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError(
         '_filter args(compareFunc) result is not boolean',
       );
@@ -280,12 +280,12 @@ const filter = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'filter args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'filter args(compareFunc) is not function',
     );
@@ -310,12 +310,12 @@ const map = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'map args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'map args(productFunc) is not function',
     );
@@ -330,7 +330,7 @@ const _count = (array, func) => {
   let result = 0;
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError(
         '_count args(func) result is not boolean',
       );
@@ -347,12 +347,12 @@ const count = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'count args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'count args(func) is not function',
     );
@@ -366,7 +366,7 @@ const count = (array, func) => {
 const _findFirstIndex = (array, func) => {
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError(
         '_findFirstIndex args(compareFunc) result is not boolean',
       );
@@ -383,12 +383,12 @@ const findFirstIndex = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'findFirstIndex args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'findFirstIndex args(compareFunc) is not function',
     );
@@ -404,7 +404,7 @@ const findIndex = findFirstIndex;
 const _findLastIndex = (array, func) => {
   for (let i = array.length - 1; i >= 0; i -= 1) {
     const resultFunc = func(array[i], i, array);
-    if (!_isBoolean(resultFunc)) {
+    if (!isBoolean(resultFunc)) {
       throw new TypeError(
         '_findLastIndex args(compareFunc) result is not boolean',
       );
@@ -421,12 +421,12 @@ const findLastIndex = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'findLastIndex args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'findLastIndex args(compareFunc) is not function',
     );
@@ -452,12 +452,12 @@ const findFirst = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'findFirst args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'findFirst args(compareFunc) is not function',
     );
@@ -483,12 +483,12 @@ const findLast = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'findLast args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'findLast args(compareFunc) is not function',
     );
@@ -510,12 +510,12 @@ const some = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'some args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'some args(compareFunc) is not function',
     );
@@ -539,12 +539,12 @@ const all = (array, func) => {
     ({ array, func } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'all args(array) is not array',
     );
   }
-  if (!_isFunction(func)) {
+  if (!isFunction(func)) {
     throw new TypeError(
       'all args(compareFunc) is not function',
     );

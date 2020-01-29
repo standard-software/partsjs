@@ -1,8 +1,8 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isArray,isDate,isRegExp,
+ isException,
 } = require('../type/isType.js');
 
 const {
@@ -22,7 +22,7 @@ const isObjectParameter = (
   defaultPropertyArray = [],
 ) => {
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     return false;
   }
 
@@ -30,10 +30,10 @@ const isObjectParameter = (
     const result = [];
     for (let i = 0; i < array.length; i += 1) {
       if ((array[i] === '')
-      || (_isUndefined(array[i]))) {
+      || (isUndefined(array[i]))) {
         continue;
       }
-      if (!_isString(array[i])) {
+      if (!isString(array[i])) {
         throw new TypeError(
           'isObjectParameter args(propertyArray|defaultPropertyArray)' +
           ' element is not string',
@@ -44,12 +44,12 @@ const isObjectParameter = (
     return result;
   };
 
-  if (_isString(propertyArray)) {
+  if (isString(propertyArray)) {
     propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
   propertyArray = filterArray(propertyArray);
 
-  if (_isString(defaultPropertyArray)) {
+  if (isString(defaultPropertyArray)) {
     defaultPropertyArray =
       _replaceAll(defaultPropertyArray, ' ', '').split(',');
   }

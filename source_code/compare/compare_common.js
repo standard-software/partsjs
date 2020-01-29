@@ -1,12 +1,12 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isException,
-  _isMap, _isWeakMap,
-  _isSet, _isWeakSet,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isException,
+  isMap, isWeakMap,
+  isSet, isWeakSet,
 } = require('../type/type.js');
 
 const {
@@ -30,7 +30,7 @@ const or = (value, compareArray) => {
     ({ value, compareArray } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'or args(compareArray) is not array',
     );

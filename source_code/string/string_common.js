@@ -1,8 +1,8 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isArray, isDate, isRegExp,
+  isException,
 } = require('../type/type.js');
 
 const {
@@ -32,7 +32,7 @@ const _matchFormat = (
     );
   }
   const result = _matchFormat.pattern[patterns[index]](value);
-  if (!_isBoolean(result)) {
+  if (!isBoolean(result)) {
     throw new RangeError(
       `_matchFormat args(formatName:${formatName})` +
       ` function result is not boolean`,
@@ -253,12 +253,12 @@ const matchFormat = (
     ({ formatName, value } = formatName);
   }
 
-  if (!_isString(formatName)) {
+  if (!isString(formatName)) {
     throw new TypeError(
       'matchFormat args(formatName) is not string',
     );
   }
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'matchFormat args(value) is not string',
     );
@@ -292,12 +292,12 @@ const repeat = (
     ({ value, count } = value);
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'repeat args(value) is not string',
     );
   }
-  if (!_isInteger(count)) {
+  if (!isInteger(count)) {
     throw new TypeError(
       'repeat args(count) is not integer',
     );
@@ -318,7 +318,7 @@ const _isLowerCase = (
 const isLowerCase = (
   value,
 ) => {
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'isLowerCase args(value) is not string',
     );
@@ -339,7 +339,7 @@ const _isUpperCase = (
 const isUpperCase = (
   value,
 ) => {
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'isUpperCase args(value) is not string',
     );
@@ -351,7 +351,7 @@ const isUpperCase = (
 module.exports = {
   _matchFormat,
   _repeat,
-  _isLowerCase, _isUpperCase,
+  isLowerCase, isUpperCase,
 
   matchFormat,
   repeat,

@@ -1,8 +1,8 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isArray,isDate,isRegExp,
+ isException,
 } = require('../type/isType.js');
 
 const {
@@ -22,26 +22,26 @@ const {
  */
 const _inProperty = (object, propertyPathArray, hasOwn = true) => {
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     return false;
   }
 
-  if (_isString(propertyPathArray)) {
+  if (isString(propertyPathArray)) {
     propertyPathArray = _replaceAll(propertyPathArray, ' ', '').split(',');
   }
 
   for (let i = 0; i < propertyPathArray.length; i += 1) {
     // if ((propertyPathArray[i] === '')
-    // || (_isUndefined(propertyPathArray[i]))) {
+    // || (isUndefined(propertyPathArray[i]))) {
     //   continue;
     // }
-    if (!_isString(propertyPathArray[i])) {
+    if (!isString(propertyPathArray[i])) {
       throw new TypeError(
         '_inProperty args(propertyArray) element is not string',
       );
     }
     const result = _getProperty(object, propertyPathArray[i], hasOwn);
-    if (_isUndefined(result)) {
+    if (isUndefined(result)) {
       return false;
     }
   }
@@ -56,20 +56,20 @@ const inProperty = (object, propertyPathArray, hasOwn = true) => {
     ({ object, propertyPathArray, hasOwn = true } = object);
   }
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     throw new TypeError(
       'inProperty args(fromObject) is not object',
     );
   }
 
-  if (!_isString(propertyPathArray)) {
-    if (!_isArray(propertyPathArray)) {
+  if (!isString(propertyPathArray)) {
+    if (!isArray(propertyPathArray)) {
       throw new TypeError(
         'inProperty args(propertyPathArray) is not [array|string]',
       );
     }
   }
-  if (!_isBoolean(hasOwn)) {
+  if (!isBoolean(hasOwn)) {
     throw new TypeError(
       'inProperty args(hasOwn) is not boolean',
     );

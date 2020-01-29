@@ -1,12 +1,12 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isException,
-  _isMap, _isWeakMap,
-  _isSet, _isWeakSet,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isException,
+  isMap, isWeakMap,
+  isSet, isWeakSet,
 } = require('../type/type.js');
 
 const {
@@ -26,15 +26,15 @@ const {
  * includes
  */
 const _includes = (value, compare) => {
-  if (_isString(value)) {
+  if (isString(value)) {
     if (compare === '') {
       return false;
     }
-    if (_isRegExp(compare)) {
+    if (isRegExp(compare)) {
       return _match(value, compare);
     }
     return value.indexOf(compare) !== -1;
-  } else if (_isArray(value)) {
+  } else if (isArray(value)) {
     return value.indexOf(compare) !== -1;
   }
 };
@@ -47,13 +47,13 @@ const includes = (
     ({ value, compare } = value);
   }
 
-  if (_isString(value)) {
-    if (!(_isString(compare) || _isRegExp(compare))) {
+  if (isString(value)) {
+    if (!(isString(compare) || isRegExp(compare))) {
       throw new TypeError(
         'includes args(compare) is not [string|RegExp]',
       );
     }
-  } else if (_isArray(value)) {
+  } else if (isArray(value)) {
     //
   } else {
     throw new TypeError(
@@ -81,7 +81,7 @@ const includesSome = (
     ({ value, compareArray } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'includesSome args(compareArray) is not array',
     );
@@ -107,7 +107,7 @@ const includesAll = (
     ({ value, compareArray } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'includesAll args(compareArray) is not array',
     );

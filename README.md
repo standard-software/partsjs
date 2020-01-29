@@ -108,6 +108,7 @@ You can now use the functions of the parts.js object.
 - update isEmptyObject object.js >> isType.js
 - add isEmptyArray
 - update isXxx >> isXxxAll
+- update _isXxx >> isXxx
 
 ### 3.5.0
 #### 2020/01/24(Fri)

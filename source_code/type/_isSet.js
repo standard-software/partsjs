@@ -2,14 +2,14 @@ const {
   _typeofCheck, _objectToStringCheck, objectToString,
 } = require('../type/isType.js');
 
-const _isSet = _objectToStringCheck('Set');
-const _isWeakSet = _objectToStringCheck('WeakSet');
+const isSet = _objectToStringCheck('Set');
+const isWeakSet = _objectToStringCheck('WeakSet');
 
-const _isNotSet   = value => !_isSet(value);
-const _isNotWeakSet   = value => !_isWeakSet(value);
+const isNotSet   = value => !isSet(value);
+const isNotWeakSet   = value => !isWeakSet(value);
 
 module.exports = {
-  _isSet, _isNotSet,
-  _isWeakSet, _isNotWeakSet,
+ isSet,isNotSet,
+ isWeakSet,isNotWeakSet,
 };
 

@@ -2,14 +2,14 @@ const {
   _typeofCheck, _objectToStringCheck, objectToString,
 } = require('../type/isType.js');
 
-const _isMap = _objectToStringCheck('Map');
-const _isWeakMap = _objectToStringCheck('WeakMap');
+const isMap = _objectToStringCheck('Map');
+const isWeakMap = _objectToStringCheck('WeakMap');
 
-const _isNotMap   = value => !_isMap(value);
-const _isNotWeakMap   = value => !_isWeakMap(value);
+const isNotMap   = value => !isMap(value);
+const isNotWeakMap   = value => !isWeakMap(value);
 
 module.exports = {
-  _isMap, _isNotMap,
-  _isWeakMap, _isNotWeakMap,
+ isMap,isNotMap,
+ isWeakMap,isNotWeakMap,
 };
 

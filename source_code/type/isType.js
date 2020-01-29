@@ -17,134 +17,134 @@ const _objectToStringCheck = (typeName) => {
   );
 };
 
-const _isUndefined = _typeofCheck('undefined');
+const isUndefined = _typeofCheck('undefined');
 
-const _isNull = (value) => (value === null);
+const isNull = (value) => (value === null);
 
-const _isNaNStrict = (value) => value !== value;
+const isNaNStrict = (value) => value !== value;
 
-const _isBoolean = _typeofCheck('boolean');
-const _isBooleanObject = value => {
+const isBoolean = _typeofCheck('boolean');
+const isBooleanObject = value => {
   return (
     _objectToStringCheck('Boolean')
-    && (!_isBoolean(value))
+    && (!isBoolean(value))
   );
 };
 
-const _isNumber = (value) => {
+const isNumber = (value) => {
   return (_typeofCheck('number')(value) && (isFinite(value)));
 };
-const _isNumberObject = (value) => {
+const isNumberObject = (value) => {
   return (
     _objectToStringCheck('Number')(value)
     && (!_typeofCheck('number')(value))
   );
 };
 
-const _isInteger = (value) => {
-  if (!_isNumber(value)) {
+const isInteger = (value) => {
+  if (!isNumber(value)) {
     return false;
   }
   return Math.round(value) === value;
 };
 
-const _isString = _typeofCheck('string');
-const _isStringObject = value => {
+const isString = _typeofCheck('string');
+const isStringObject = value => {
   return (
     _objectToStringCheck('String')
-    && (!_isString(value))
+    && (!isString(value))
   );
 };
 
-const _isFunction = _typeofCheck('function');
+const isFunction = _typeofCheck('function');
 
-const _isObject = (value) => {
+const isObject = (value) => {
   if (
     (_objectToStringCheck('Object')(value))
-    && (!_isNull(value))
-    && (!_isUndefined(value))
+    && (!isNull(value))
+    && (!isUndefined(value))
   ) {
     return true;
   }
   return false;
 };
 
-const _isObjectType = (value) => {
-  if (_isNull(value)) {
+const isObjectType = (value) => {
+  if (isNull(value)) {
     return false;
   }
   return ['function', 'object'].includes(typeof value);
 };
 
-const _isEmptyObject = value => {
-  if (!_isObject(value)) {
+const isEmptyObject = value => {
+  if (!isObject(value)) {
     return false;
   }
   return _propertyCount(value) === 0;
 };
 
 
-const _isArray = _objectToStringCheck('Array');
+const isArray = _objectToStringCheck('Array');
 
 // Int8Array Uint16Array Float32Array Float64Array etc...
-const _isArrayType = (value) => {
+const isArrayType = (value) => {
   if (objectToString(value).includes('Array]')) {
     return true;
   }
   return false;
 };
 
-const _isEmptyArray = value => {
-  if (!_isArrayType(value)) {
+const isEmptyArray = value => {
+  if (!isArrayType(value)) {
     return false;
   }
   return value.length === 0;
 };
 
-const _isDate = _objectToStringCheck('Date');
+const isDate = _objectToStringCheck('Date');
 
-const _isRegExp = _objectToStringCheck('RegExp');
+const isRegExp = _objectToStringCheck('RegExp');
 
-const _isError = _objectToStringCheck('Error');
+const isError = _objectToStringCheck('Error');
 
-const _isNotUndefined   = value => !_isUndefined(value);
-const _isNotNull        = value => !_isNull(value);
-const _isNotNaNStrict   = value => !_isNaNStrict(value);
-const _isNotBoolean     = value => !_isBoolean(value);
-const _isNotNumber      = value => !_isNumber(value);
-const _isNotInteger     = value => !_isInteger(value);
-const _isNotString      = value => !_isString(value);
-const _isNotFunction    = value => !_isFunction(value);
-const _isNotObject      = value => !_isObject(value);
-const _isNotObjectType  = value => !_isObjectType(value);
-const _isNotArray       = value => !_isArray(value);
-const _isNotArrayType   = value => !_isArrayType(value);
-const _isNotDate        = value => !_isDate(value);
-const _isNotRegExp      = value => !_isRegExp(value);
-const _isNotBooleanObject = value => !_isBooleanObject(value);
-const _isNotNumberObject  = value => !_isNumberObject(value);
-const _isNotStringObject  = value => !_isStringObject(value);
-const _isNotEmptyObject   = value => !_isEmptyObject(value);
-const _isNotEmptyArray    = value => !_isEmptyArray(value);
+const isNotUndefined   = value => !isUndefined(value);
+const isNotNull        = value => !isNull(value);
+const isNotNaNStrictAll   = value => !isNaNStrict(value);
+const isNotBoolean     = value => !isBoolean(value);
+const isNotNumber      = value => !isNumber(value);
+const isNotInteger     = value => !isInteger(value);
+const isNotString      = value => !isString(value);
+const isNotFunction    = value => !isFunction(value);
+const isNotObject      = value => !isObject(value);
+const isNotObjectType  = value => !isObjectType(value);
+const isNotArray       = value => !isArray(value);
+const isNotArrayType   = value => !isArrayType(value);
+const isNotDate        = value => !isDate(value);
+const isNotRegExp      = value => !isRegExp(value);
+const isNotBooleanObject = value => !isBooleanObject(value);
+const isNotNumberObject  = value => !isNumberObject(value);
+const isNotStringObject  = value => !isStringObject(value);
+const isNotEmptyObject   = value => !isEmptyObject(value);
+const isNotEmptyArray    = value => !isEmptyArray(value);
 
 module.exports = {
   _typeofCheck, _objectToStringCheck, objectToString,
 
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isError,
-  _isBooleanObject, _isNumberObject, _isStringObject,
-  _isEmptyObject, _isEmptyArray,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isObjectType,
+ isArray,isArrayType,
+ isDate,isRegExp,
+ isError,
+ isBooleanObject,isNumberObject,isStringObject,
+ isEmptyObject,isEmptyArray,
 
-  _isNotUndefined, _isNotNull, _isNotNaNStrict,
-  _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
-  _isNotFunction, _isNotObject, _isNotObjectType,
-  _isNotArray, _isNotArrayType,
-  _isNotDate, _isNotRegExp,
-  _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
-  _isNotEmptyObject, _isNotEmptyArray,
+ isNotUndefined,isNotNull,isNotNaNStrictAll,
+ isNotBoolean,isNotNumber,isNotInteger,isNotString,
+ isNotFunction,isNotObject,isNotObjectType,
+ isNotArray,isNotArrayType,
+ isNotDate,isNotRegExp,
+ isNotBooleanObject,isNotNumberObject,isNotStringObject,
+ isNotEmptyObject,isNotEmptyArray,
 };
 

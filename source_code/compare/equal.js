@@ -1,12 +1,12 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isException,
-  _isMap, _isWeakMap,
-  _isSet, _isWeakSet,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isException,
+  isMap, isWeakMap,
+  isSet, isWeakSet,
 
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
@@ -32,7 +32,7 @@ const equalFunction = {};
 equalFunction.equalValue = (
   value1, value2,
 ) => {
-  if (_isNaNStrict(value1) && _isNaNStrict(value2)) {
+  if (isNaNStrict(value1) && isNaNStrict(value2)) {
     return true;
   }
   return value1 === value2;
@@ -208,7 +208,7 @@ const _equal = (value1, value2) => {
   const __equal = (value1, value2) => {
     for (let i = 0, l = _equal.functions.length; i < l; i += 1) {
       const result = _equal.functions[i](value1, value2);
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }
@@ -279,7 +279,7 @@ const _equalDeep = (value1, value2) => {
         },
         __equalDeep,
       );
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }

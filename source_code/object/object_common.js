@@ -1,11 +1,11 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isError,
-  _isBooleanObject, _isNumberObject, _isStringObject,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isObjectType,
+ isArray,isArrayType,
+ isDate,isRegExp,
+ isError,
+ isBooleanObject,isNumberObject,isStringObject,
 } = require('../type/type.js');
 
 const {
@@ -25,16 +25,16 @@ const {
  */
 const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 
-  if (_isString(propertyArray)) {
+  if (isString(propertyArray)) {
     propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
   }
 
   for (let i = 0; i < propertyArray.length; i += 1) {
     if ((propertyArray[i] === '')
-    || (_isUndefined(propertyArray[i]))) {
+    || (isUndefined(propertyArray[i]))) {
       continue;
     }
-    if (!_isString(propertyArray[i])) {
+    if (!isString(propertyArray[i])) {
       throw new TypeError(
         'copyProperty args(propertyArray) element is not string',
       );
@@ -49,19 +49,19 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
     ({ fromObject, propertyArray, toObject = {} } = fromObject);
   }
 
-  if (!_isObject(fromObject)) {
+  if (!isObject(fromObject)) {
     throw new TypeError(
       'copyProperty args(fromObject) is not object',
     );
   }
-  if (!_isString(propertyArray)) {
-    if (!_isArray(propertyArray)) {
+  if (!isString(propertyArray)) {
+    if (!isArray(propertyArray)) {
       throw new TypeError(
         'copyProperty args(propertyArray) is not [array|string]',
       );
     }
   }
-  if (!_isObject(toObject)) {
+  if (!isObject(toObject)) {
     throw new TypeError(
       'copyProperty args(toObject) is not object',
     );
@@ -82,12 +82,12 @@ const propertyCount = (object, hasOwn = true) => {
     ({ object, hasOwn = true } = object);
   }
 
-  if (!_isObjectType(object)) {
+  if (!isObjectType(object)) {
     throw new TypeError(
       'propertyCount args(object) is not object type',
     );
   }
-  if (!_isBoolean(hasOwn)) {
+  if (!isBoolean(hasOwn)) {
     throw new TypeError(
       'getProperty args(hasOwn) is not boolean',
     );
@@ -121,7 +121,7 @@ const _getProperty = (
       }
     }
 
-    if (_isUndefined(result[propertyArray[i]])) {
+    if (isUndefined(result[propertyArray[i]])) {
       return undefined;
     }
 
@@ -135,17 +135,17 @@ const getProperty = (object, propertyPath, hasOwn = true) => {
     ({ object, propertyPath, hasOwn = true } = object);
   }
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     throw new TypeError(
       'getProperty args(object) is not object',
     );
   }
-  if (!_isString(propertyPath)) {
+  if (!isString(propertyPath)) {
     throw new TypeError(
       'getProperty args(propertyPath) is not string',
     );
   }
-  if (!_isBoolean(hasOwn)) {
+  if (!isBoolean(hasOwn)) {
     throw new TypeError(
       'getProperty args(hasOwn) is not boolean',
     );
@@ -169,8 +169,8 @@ const _setProperty = (object, path, value) => {
   for (let i = 0, l = propertyArray.length - 1; i < l; i += 1) {
     if (
       !(
-        _isObject(result[propertyArray[i]])
-        || _isArrayType(result[propertyArray[i]])
+       isObject(result[propertyArray[i]])
+        ||isArrayType(result[propertyArray[i]])
       )
     ) {
       result[propertyArray[i]] = {};
@@ -186,12 +186,12 @@ const setProperty = (object, propertyPath, value) => {
     ({ object, propertyPath, value } = object);
   }
 
-  if (!_isObject(object)) {
+  if (!isObject(object)) {
     throw new TypeError(
       'setProperty args(object) is not object',
     );
   }
-  if (!_isString(propertyPath)) {
+  if (!isString(propertyPath)) {
     throw new TypeError(
       'setProperty args(propertyPath) is not string',
     );

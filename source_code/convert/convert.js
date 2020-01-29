@@ -1,13 +1,13 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isArray,isDate,isRegExp,
+ isException,
 
-  _isNotUndefined, _isNotNull, _isNotNaNStrict,
-  _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
-  _isNotFunction, _isNotObject, _isNotArray, _isNotDate, _isNotRegExp,
-  _isNotException,
+ isNotUndefined,isNotNull,isNotNaNStrictAll,
+ isNotBoolean,isNotNumber,isNotInteger,isNotString,
+ isNotFunction,isNotObject,isNotArray,isNotDate,isNotRegExp,
+ isNotException,
 } = require('../type/type.js');
 
 const {
@@ -47,12 +47,12 @@ const numberToString = (
     ({ value, radix = 10 } = value);
   }
 
-  if (!_isNumber(value)) {
+  if (!isNumber(value)) {
     throw new TypeError(
       'numberToString args(value) is not number',
     );
   }
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError(
       'numberToString args(radix) is not integer',
     );
@@ -84,7 +84,7 @@ const _stringToNumberBase = (
   }
 
   const result = Number(value);
-  if (!_isNumber(result)) {
+  if (!isNumber(result)) {
     return defaultValueFunc();
   }
   return result;
@@ -110,7 +110,7 @@ const stringToNumber = (
     ({ value } = value);
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'stringToNumber args(value) is not string',
     );
@@ -139,7 +139,7 @@ const stringToNumberDefault = (
     ({ value, defaultValue } = value);
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'stringToNumberDefault args(value) is not string',
     );
@@ -167,7 +167,7 @@ const _stringToIntegerBase = (
   }
 
   const result = parseInt(value, radix);
-  if (!_isInteger(result)) {
+  if (!isInteger(result)) {
     return defaultValueFunc();
   }
   return result;
@@ -196,12 +196,12 @@ const stringToInteger = (
     ({ value, radix = 10 } = value);
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'stringToInteger args(value) is not string',
     );
   }
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError(
       'stringToInteger args(radix) is not integer',
     );
@@ -239,12 +239,12 @@ const stringToIntegerDefault = (
     ({ value, defaultValue, radix = 10 } = value);
   }
 
-  if (!_isString(value)) {
+  if (!isString(value)) {
     throw new TypeError(
       'stringToInteger args(value) is not string',
     );
   }
-  if (!_isInteger(radix)) {
+  if (!isInteger(radix)) {
     throw new TypeError(
       'stringToInteger args(radix) is not integer',
     );
@@ -266,10 +266,10 @@ const stringToIntegerDefault = (
  * toNumber
  */
 const toNumber = (value) => {
-  if (_isNull(value)) {
+  if (isNull(value)) {
     return NaN;
   }
-  if (!_isString(value)) {
+  if (!isString(value)) {
     return Number(value);
   }
   return stringToNumberDefault(value, NaN);
@@ -281,7 +281,7 @@ const toNumberDefault = (value, defaultValue) => {
   }
 
   const result = toNumber(value);
-  if (_isNaNStrict(result)) {
+  if (isNaNStrict(result)) {
     return defaultValue;
   }
   return result;
@@ -292,7 +292,7 @@ const toNumberDefault = (value, defaultValue) => {
  */
 const toInteger = (value) => {
   const result = toNumber(value);
-  if (_isNaNStrict(result)) {
+  if (isNaNStrict(result)) {
     return NaN;
   }
   return _round(result);
@@ -304,7 +304,7 @@ const toIntegerDefault = (value, defaultValue) => {
   }
 
   const result = toInteger(value);
-  if (_isNaNStrict(result)) {
+  if (isNaNStrict(result)) {
     return defaultValue;
   }
   return result;

@@ -1,14 +1,14 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isException,
-  _isBooleanObject, _isNumberObject, _isStringObject,
-  _isSymbol,
-  _isMap, _isWeakMap,
-  _isSet, _isWeakSet,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isObjectType,
+ isArray,isArrayType,
+ isDate,isRegExp,
+ isException,
+ isBooleanObject,isNumberObject,isStringObject,
+ isSymbol,
+ isMap,isWeakMap,
+ isSet,isWeakSet,
 } = require('../type/type.js');
 
 const {
@@ -24,7 +24,7 @@ const cloneFunction = {};
 cloneFunction.cloneIgnoreFunction = (
   source,
 ) => {
-  if (!_isFunction(source)) {
+  if (!isFunction(source)) {
     return undefined;
   }
   return source;
@@ -38,7 +38,7 @@ cloneFunction.cloneObject = (
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!(_isObject(source))) {
+  if (!(isObject(source))) {
     return undefined;
   }
 
@@ -57,7 +57,7 @@ cloneFunction.cloneArrayType = (
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!(_isArrayType(source))) {
+  if (!(isArrayType(source))) {
     return undefined;
   }
 
@@ -80,7 +80,7 @@ cloneFunction.cloneObjectType = (
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!_isObjectType(source)) {
+  if (!isObjectType(source)) {
     return undefined;
   }
 
@@ -100,7 +100,7 @@ cloneFunction.cloneObjectType = (
 //   bufferWrite = () => {},
 //   __cloneDeep = value => value,
 // ) => {
-//   if (!_isObject(source)) {
+//   if (!isObject(source)) {
 //     return undefined;
 //   }
 //   const cloneValue = {};
@@ -117,7 +117,7 @@ cloneFunction.cloneObjectType = (
 //   bufferWrite = () => {},
 //   __cloneDeep = value => value,
 // ) => {
-//   if (!_isArray(source)) {
+//   if (!isArray(source)) {
 //     return undefined;
 //   }
 //   const cloneValue = [];
@@ -133,7 +133,7 @@ cloneFunction.cloneDate = (
   source,
   bufferWrite = () => {},
 ) => {
-  if (!_isDate(source)) {
+  if (!isDate(source)) {
     return undefined;
   }
   const cloneValue = new Date(source.getTime());
@@ -145,7 +145,7 @@ cloneFunction.cloneRegExp = (
   source,
   bufferWrite = () => {},
 ) => {
-  if (!_isRegExp(source)) {
+  if (!isRegExp(source)) {
     return undefined;
   }
   const cloneValue = new RegExp(source.source);
@@ -161,7 +161,7 @@ cloneFunction.cloneMap = (
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!_isMap(source)) {
+  if (!isMap(source)) {
     return undefined;
   }
   const cloneValue = new Map();
@@ -175,7 +175,7 @@ cloneFunction.cloneMap = (
 cloneFunction.cloneIgnoreWeakMap = (
   source,
 ) => {
-  if (!_isWeakMap(source)) {
+  if (!isWeakMap(source)) {
     return undefined;
   }
   return source;
@@ -188,7 +188,7 @@ cloneFunction.cloneSet = (
   source,
   bufferWrite = () => {},
 ) => {
-  if (!_isSet(source)) {
+  if (!isSet(source)) {
     return undefined;
   }
   const cloneValue = new Set();
@@ -202,7 +202,7 @@ cloneFunction.cloneSet = (
 cloneFunction.cloneIgnoreWeakSet = (
   source,
 ) => {
-  if (!_isWeakSet(source)) {
+  if (!isWeakSet(source)) {
     return undefined;
   }
   return source;
@@ -213,12 +213,12 @@ cloneFunction.cloneIgnoreWeakSet = (
  */
 const _clone = (source) => {
   const __clone = (value) => {
-    if (_isUndefined(value)) {
+    if (isUndefined(value)) {
       return undefined;
     }
     for (let i = 0, l = _clone.functions.length; i < l; i += 1) {
       const result = _clone.functions[i](value);
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }
@@ -273,7 +273,7 @@ const _cloneDeep = (source) => {
     if (index !== -1) {
       return CircularReferenceBuffer.clone[index];
     }
-    if (_isUndefined(value)) {
+    if (isUndefined(value)) {
       return undefined;
     }
     for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
@@ -285,7 +285,7 @@ const _cloneDeep = (source) => {
         },
         __cloneDeep,
       );
-      if (!_isUndefined(result)) {
+      if (!isUndefined(result)) {
         return result;
       }
     }

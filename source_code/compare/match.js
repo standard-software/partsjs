@@ -1,12 +1,12 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isException,
-  _isMap, _isWeakMap,
-  _isSet, _isWeakSet,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isObjectType,
+ isArray,isArrayType,
+ isDate,isRegExp,
+ isException,
+ isMap,isWeakMap,
+ isSet,isWeakSet,
 } = require('../type/type.js');
 
 const {
@@ -22,13 +22,13 @@ const {
  * match
  */
 const _match = (value, compare) => {
-  if (_isString(value)) {
+  if (isString(value)) {
     let result;
-    if (_isRegExp(compare)) {
+    if (isRegExp(compare)) {
       result = value.match(compare) !== null;
-    } else if (_isFunction(compare)) {
+    } else if (isFunction(compare)) {
       result = compare(value);
-      if (!_isBoolean(result)) {
+      if (!isBoolean(result)) {
         throw new TypeError(
           '_match args(compareArray element function result) is not boolean',
         );
@@ -39,9 +39,9 @@ const _match = (value, compare) => {
     return result;
   } else {
     let result;
-    if (_isFunction(compare)) {
+    if (isFunction(compare)) {
       result = compare(value);
-      if (!_isBoolean(result)) {
+      if (!isBoolean(result)) {
         throw new TypeError(
           '_match args(compareArray element function result) is not boolean',
         );
@@ -101,7 +101,7 @@ const _initialValue = (
   value,
   valueWhenMatched,
 ) => {
-  return _matchValue(value, _isUndefined, valueWhenMatched);
+  return _matchValue(value,isUndefined, valueWhenMatched);
 };
 
 const initialValue = (
@@ -135,7 +135,7 @@ const matchSome = (
     ({ value, compareArray } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'matchSome args(compareArray) is not array',
     );
@@ -164,12 +164,12 @@ const allMatchSome = (
     ({ valueArray, compareArray } = valueArray);
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError(
       'allMatchSome args(valueArray) is not array',
     );
   }
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'allMatchSome args(compareArray) is not array',
     );
@@ -199,12 +199,12 @@ const indexOfMatchSome = (
     ({ valueArray, compareArray } = valueArray);
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError(
       'indexOfMatchSome args(valueArray) is not array',
     );
   }
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'indexOfMatchSome args(compareArray) is not array',
     );
@@ -259,7 +259,7 @@ const matchSomeValue = (
     ({ value, compareArray, valueWhenMatched } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'matchSomeValue args(compareArray) is not array',
     );
@@ -289,7 +289,7 @@ const matchAll = (
     ({ value, compareArray } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'matchAll args(compareArray) is not array',
     );
@@ -318,12 +318,12 @@ const allMatchAll = (
     ({ valueArray, compareArray } = valueArray);
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError(
       'allMatchAll args(valueArray) is not array',
     );
   }
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'allMatchAll args(compareArray) is not array',
     );
@@ -353,12 +353,12 @@ const indexOfMatchAll = (
     ({ valueArray, compareArray } = valueArray);
   }
 
-  if (!_isArray(valueArray)) {
+  if (!isArray(valueArray)) {
     throw new TypeError(
       'indexOfMatchAll args(valueArray) is not array',
     );
   }
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'indexOfMatchAll args(compareArray) is not array',
     );
@@ -413,7 +413,7 @@ const matchAllValue = (
     ({ value, compareArray, valueWhenMatched } = value);
   }
 
-  if (!_isArray(compareArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
       'matchAllValue args(compareArray) is not array',
     );

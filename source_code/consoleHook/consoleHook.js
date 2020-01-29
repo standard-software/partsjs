@@ -1,8 +1,8 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+ isUndefined,isNull,isNaNStrict,
+ isBoolean,isNumber,isInteger,isString,
+ isFunction,isObject,isArray,isDate,isRegExp,
+ isException,
 } = require('../type/type.js');
 
 const {
@@ -37,7 +37,7 @@ const hook = (
     );
   }
 
-  if (!_isFunction(hookFunc)) {
+  if (!isFunction(hookFunc)) {
     throw new TypeError(
       'hook args(hookFunc) is not function',
     );
@@ -104,7 +104,7 @@ const _accept = (
     if (acceptFlag === false) {
       acceptFlag = _includesSome(messageArgsAll, acceptArray);
     }
-    if (acceptFlag && _isArray(rejectArray)) {
+    if (acceptFlag &&isArray(rejectArray)) {
       acceptFlag = !_includesSome(messageArgsAll, rejectArray);
     }
 
@@ -125,17 +125,17 @@ const accept = (
       'accept args(methodName) is not [log|info|warn|error|debug]',
     );
   }
-  if (!_isArray(acceptArray)) {
+  if (!isArray(acceptArray)) {
     throw new TypeError(
       'accept args(acceptArray) is not array',
     );
   }
-  if (!(_isUndefined(rejectArray) || _isArray(rejectArray))) {
+  if (!(isUndefined(rejectArray) ||isArray(rejectArray))) {
     throw new TypeError(
       'accept args(rejectArray) is not array',
     );
   }
-  if (!_isFunction(hookFunc)) {
+  if (!isFunction(hookFunc)) {
     throw new TypeError(
       'accept args(hookFunc) is not function',
     );

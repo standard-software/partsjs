@@ -1,47 +1,47 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isObjectType,
-  _isArray, _isArrayType,
-  _isDate, _isRegExp,
-  _isBooleanObject, _isNumberObject, _isStringObject,
-  _isEmptyObject, _isEmptyArray,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isBooleanObject, isNumberObject, isStringObject,
+  isEmptyObject, isEmptyArray,
 
-  _isNotUndefined, _isNotNull, _isNotNaNStrict,
-  _isNotBoolean, _isNotNumber, _isNotInteger, _isNotString,
-  _isNotFunction, _isNotObject, _isNotObjectType,
-  _isNotArray, _isNotArrayType,
-  _isNotDate, _isNotRegExp,
-  _isNotBooleanObject, _isNotNumberObject, _isNotStringObject,
-  _isNotEmptyObject, _isNotEmptyArray,
+  isNotUndefined, isNotNull, isNotNaNStrict,
+  isNotBoolean, isNotNumber, isNotInteger, isNotString,
+  isNotFunction, isNotObject, isNotObjectType,
+  isNotArray, isNotArrayType,
+  isNotDate, isNotRegExp,
+  isNotBooleanObject, isNotNumberObject, isNotStringObject,
+  isNotEmptyObject, isNotEmptyArray,
 
 } = require('../type/isType.js');
 
 const {
-  _isException,
-  _isNotException,
+  isException,
+  isNotException,
 } = require('../type/_isException.js');
 
 const {
-  _isSymbol, _isNotSymbol,
+  isSymbol, isNotSymbol,
 } = require('../type/_isSymbol.js');
 
 const {
-  _isMap, _isNotMap,
-  _isWeakMap, _isNotWeakMap,
+  isMap, isNotMap,
+  isWeakMap, isNotWeakMap,
 } = require('../type/_isMap.js');
 
 const {
-  _isSet, _isNotSet,
-  _isWeakSet, _isNotWeakSet,
+  isSet, isNotSet,
+  isWeakSet, isNotWeakSet,
 } = require('../type/_isSet.js');
 
 /**
- * _isTypeCheck
+ *isTypeCheck
  * description:
  *  check type for array argument.
  */
-const _isTypeCheck = (func, argsArray) => {
+const isTypeCheck = (func, argsArray) => {
   const l = argsArray.length;
   if (l === 0) {
     return false;
@@ -57,61 +57,61 @@ const _isTypeCheck = (func, argsArray) => {
   }
 };
 
-const _isTypeCheckArgsFunc = (func) => {
-  return (...args) => _isTypeCheck(func, args);
+const isTypeCheckArgsFunc = (func) => {
+  return (...args) =>isTypeCheck(func, args);
 };
 
-const isUndefinedAll   = _isTypeCheckArgsFunc(_isUndefined);
-const isNullAll        = _isTypeCheckArgsFunc(_isNull);
-const isNaNStrictAll   = _isTypeCheckArgsFunc(_isNaNStrict);
-const isBooleanAll     = _isTypeCheckArgsFunc(_isBoolean);
-const isNumberAll      = _isTypeCheckArgsFunc(_isNumber);
-const isIntegerAll     = _isTypeCheckArgsFunc(_isInteger);
-const isStringAll      = _isTypeCheckArgsFunc(_isString);
-const isFunctionAll    = _isTypeCheckArgsFunc(_isFunction);
-const isObjectAll      = _isTypeCheckArgsFunc(_isObject);
-const isObjectTypeAll  = _isTypeCheckArgsFunc(_isObjectType);
-const isArrayAll       = _isTypeCheckArgsFunc(_isArray);
-const isArrayTypeAll   = _isTypeCheckArgsFunc(_isArrayType);
-const isDateAll        = _isTypeCheckArgsFunc(_isDate);
-const isRegExpAll      = _isTypeCheckArgsFunc(_isRegExp);
-const isExceptionAll   = _isTypeCheckArgsFunc(_isException);
-const isBooleanObjectAll = _isTypeCheckArgsFunc(_isBooleanObject);
-const isNumberObjectAll  = _isTypeCheckArgsFunc(_isNumberObject);
-const isStringObjectAll  = _isTypeCheckArgsFunc(_isStringObject);
-const isEmptyObjectAll   = _isTypeCheckArgsFunc(_isEmptyObject);
-const isEmptyArrayAll    = _isTypeCheckArgsFunc(_isEmptyArray);
-const isSymbolAll      = _isTypeCheckArgsFunc(_isSymbol);
-const isMapAll         = _isTypeCheckArgsFunc(_isMap);
-const isWeakMapAll     = _isTypeCheckArgsFunc(_isWeakMap);
-const isSetAll         = _isTypeCheckArgsFunc(_isSet);
-const isWeakSetAll     = _isTypeCheckArgsFunc(_isWeakSet);
+const isUndefinedAll   =isTypeCheckArgsFunc(isUndefined);
+const isNullAll        =isTypeCheckArgsFunc(isNull);
+const isNaNStrictAll   =isTypeCheckArgsFunc(isNaNStrict);
+const isBooleanAll     =isTypeCheckArgsFunc(isBoolean);
+const isNumberAll      =isTypeCheckArgsFunc(isNumber);
+const isIntegerAll     =isTypeCheckArgsFunc(isInteger);
+const isStringAll      =isTypeCheckArgsFunc(isString);
+const isFunctionAll    =isTypeCheckArgsFunc(isFunction);
+const isObjectAll      =isTypeCheckArgsFunc(isObject);
+const isObjectTypeAll  =isTypeCheckArgsFunc(isObjectType);
+const isArrayAll       =isTypeCheckArgsFunc(isArray);
+const isArrayTypeAll   =isTypeCheckArgsFunc(isArrayType);
+const isDateAll        =isTypeCheckArgsFunc(isDate);
+const isRegExpAll      =isTypeCheckArgsFunc(isRegExp);
+const isExceptionAll   =isTypeCheckArgsFunc(isException);
+const isBooleanObjectAll =isTypeCheckArgsFunc(isBooleanObject);
+const isNumberObjectAll  =isTypeCheckArgsFunc(isNumberObject);
+const isStringObjectAll  =isTypeCheckArgsFunc(isStringObject);
+const isEmptyObjectAll   =isTypeCheckArgsFunc(isEmptyObject);
+const isEmptyArrayAll    =isTypeCheckArgsFunc(isEmptyArray);
+const isSymbolAll      =isTypeCheckArgsFunc(isSymbol);
+const isMapAll         =isTypeCheckArgsFunc(isMap);
+const isWeakMapAll     =isTypeCheckArgsFunc(isWeakMap);
+const isSetAll         =isTypeCheckArgsFunc(isSet);
+const isWeakSetAll     =isTypeCheckArgsFunc(isWeakSet);
 
-const isNotUndefinedAll  = _isTypeCheckArgsFunc(_isNotUndefined);
-const isNotNullAll       = _isTypeCheckArgsFunc(_isNotNull);
-const isNotNaNStrict  = _isTypeCheckArgsFunc(_isNotNaNStrict);
-const isNotBooleanAll    = _isTypeCheckArgsFunc(_isNotBoolean);
-const isNotNumberAll     = _isTypeCheckArgsFunc(_isNotNumber);
-const isNotIntegerAll    = _isTypeCheckArgsFunc(_isNotInteger);
-const isNotStringAll     = _isTypeCheckArgsFunc(_isNotString);
-const isNotFunctionAll   = _isTypeCheckArgsFunc(_isNotFunction);
-const isNotObjectAll     = _isTypeCheckArgsFunc(_isNotObject);
-const isNotObjectTypeAll = _isTypeCheckArgsFunc(_isNotObjectType);
-const isNotArrayAll      = _isTypeCheckArgsFunc(_isNotArray);
-const isNotArrayTypeAll  = _isTypeCheckArgsFunc(_isNotArrayType);
-const isNotDateAll       = _isTypeCheckArgsFunc(_isNotDate);
-const isNotRegExpAll     = _isTypeCheckArgsFunc(_isNotRegExp);
-const isNotExceptionAll  = _isTypeCheckArgsFunc(_isNotException);
-const isNotBooleanObjectAll  = _isTypeCheckArgsFunc(_isNotBooleanObject);
-const isNotNumberObjectAll   = _isTypeCheckArgsFunc(_isNotNumberObject);
-const isNotStringObjectAll   = _isTypeCheckArgsFunc(_isNotStringObject);
-const isNotEmptyObjectAll   = _isTypeCheckArgsFunc(_isNotEmptyObject);
-const isNotEmptyArrayAll    = _isTypeCheckArgsFunc(_isNotEmptyArray);
-const isNotSymbolAll     = _isTypeCheckArgsFunc(_isNotSymbol);
-const isNotMapAll         = _isTypeCheckArgsFunc(_isNotMap);
-const isNotWeakMapAll     = _isTypeCheckArgsFunc(_isNotWeakMap);
-const isNotSetAll         = _isTypeCheckArgsFunc(_isNotSet);
-const isNotWeakSetAll     = _isTypeCheckArgsFunc(_isNotWeakSet);
+const isNotUndefinedAll  =isTypeCheckArgsFunc(isNotUndefined);
+const isNotNullAll       =isTypeCheckArgsFunc(isNotNull);
+const isNotNaNStrictAll  = isTypeCheckArgsFunc(isNotNaNStrict);
+const isNotBooleanAll    =isTypeCheckArgsFunc(isNotBoolean);
+const isNotNumberAll     =isTypeCheckArgsFunc(isNotNumber);
+const isNotIntegerAll    =isTypeCheckArgsFunc(isNotInteger);
+const isNotStringAll     =isTypeCheckArgsFunc(isNotString);
+const isNotFunctionAll   =isTypeCheckArgsFunc(isNotFunction);
+const isNotObjectAll     =isTypeCheckArgsFunc(isNotObject);
+const isNotObjectTypeAll =isTypeCheckArgsFunc(isNotObjectType);
+const isNotArrayAll      =isTypeCheckArgsFunc(isNotArray);
+const isNotArrayTypeAll  =isTypeCheckArgsFunc(isNotArrayType);
+const isNotDateAll       =isTypeCheckArgsFunc(isNotDate);
+const isNotRegExpAll     =isTypeCheckArgsFunc(isNotRegExp);
+const isNotExceptionAll  =isTypeCheckArgsFunc(isNotException);
+const isNotBooleanObjectAll  =isTypeCheckArgsFunc(isNotBooleanObject);
+const isNotNumberObjectAll   =isTypeCheckArgsFunc(isNotNumberObject);
+const isNotStringObjectAll   =isTypeCheckArgsFunc(isNotStringObject);
+const isNotEmptyObjectAll   =isTypeCheckArgsFunc(isNotEmptyObject);
+const isNotEmptyArrayAll    =isTypeCheckArgsFunc(isNotEmptyArray);
+const isNotSymbolAll     =isTypeCheckArgsFunc(isNotSymbol);
+const isNotMapAll         =isTypeCheckArgsFunc(isNotMap);
+const isNotWeakMapAll     =isTypeCheckArgsFunc(isNotWeakMap);
+const isNotSetAll         =isTypeCheckArgsFunc(isNotSet);
+const isNotWeakSetAll     =isTypeCheckArgsFunc(isNotWeakSet);
 
 const isUndef     = isUndefinedAll;
 const isBool      = isBooleanAll;
@@ -148,7 +148,7 @@ module.exports = {
   isMapAll, isWeakMapAll,
   isSetAll, isWeakSetAll,
 
-  isNotUndefinedAll, isNotNullAll, isNotNaNStrict,
+  isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
   isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
   isNotFunctionAll, isNotObjectAll, isNotObjectTypeAll,
   isNotArrayAll, isNotArrayTypeAll,

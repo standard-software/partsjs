@@ -1,8 +1,8 @@
 const {
-  _isUndefined, _isNull, _isNaNStrict,
-  _isBoolean, _isNumber, _isInteger, _isString,
-  _isFunction, _isObject, _isArray, _isDate, _isRegExp,
-  _isException,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isArray, isDate, isRegExp,
+  isException,
 } = require('../type/type.js');
 
 const {
@@ -38,17 +38,17 @@ const insert = (
     ({ array, values, index } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'insert args(array) is not array',
     );
   }
-  if (!_isArray(values)) {
+  if (!isArray(values)) {
     throw new TypeError(
       'insert args(values) is not array',
     );
   }
-  if (!_isInteger(index)) {
+  if (!isInteger(index)) {
     throw new TypeError(
       'insert args(index) is not integer',
     );
@@ -83,17 +83,17 @@ const add = (
     ({ array, values, index } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'add args(array) is not array',
     );
   }
-  if (!_isArray(values)) {
+  if (!isArray(values)) {
     throw new TypeError(
       'add args(values) is not array',
     );
   }
-  if (!_isInteger(index)) {
+  if (!isInteger(index)) {
     throw new TypeError(
       'add args(index) is not integer',
     );
@@ -128,17 +128,17 @@ const deleteLength = (
     ({ array, index, deleteCount } = array);
   }
 
-  if (!_isArray(array)) {
+  if (!isArray(array)) {
     throw new TypeError(
       'delete args(array) is not array',
     );
   }
-  if (!_isInteger(index)) {
+  if (!isInteger(index)) {
     throw new TypeError(
       'delete args(index) is not integer',
     );
   }
-  if (!_isInteger(deleteCount)) {
+  if (!isInteger(deleteCount)) {
     throw new TypeError(
       'delete args(deleteCount) is not integer',
     );

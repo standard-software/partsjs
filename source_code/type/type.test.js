@@ -21,7 +21,7 @@ const test_execute_type = (parts) => {
       isMapAll, isWeakMapAll,
       isSetAll, isWeakSetAll,
 
-      isNotUndefinedAll, isNotNullAll, isNotNaNStrict,
+      isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
       isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
       isNotFunctionAll, isNotObjectAll, isNotObjectTypeAll,
       isNotArrayAll, isNotArrayTypeAll,

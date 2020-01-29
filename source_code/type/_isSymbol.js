@@ -2,11 +2,11 @@ const {
   _typeofCheck, _objectToStringCheck, objectToString,
 } = require('../type/isType.js');
 
-const _isSymbol = _typeofCheck('symbol');
+const isSymbol = _typeofCheck('symbol');
 
-const _isNotSymbol   = value => !_isSymbol(value);
+const isNotSymbol   = value => !isSymbol(value);
 
 module.exports = {
-  _isSymbol, _isNotSymbol,
+ isSymbol,isNotSymbol,
 };
 
