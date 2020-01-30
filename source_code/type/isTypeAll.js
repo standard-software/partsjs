@@ -20,21 +20,21 @@ const {
 const {
   isException,
   isNotException,
-} = require('../type/_isException.js');
+} = require('../type/isException.js');
 
 const {
   isSymbol, isNotSymbol,
-} = require('../type/_isSymbol.js');
+} = require('../type/isSymbol.js');
 
 const {
   isMap, isNotMap,
   isWeakMap, isNotWeakMap,
-} = require('../type/_isMap.js');
+} = require('../type/isMap.js');
 
 const {
   isSet, isNotSet,
   isWeakSet, isNotWeakSet,
-} = require('../type/_isSet.js');
+} = require('../type/isSet.js');
 
 /**
  *isTypeCheck
