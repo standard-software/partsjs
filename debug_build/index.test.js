@@ -37,6 +37,9 @@ var test_execute_index = function test_execute_index(parts) {
   var _require11 = require('./consoleHook/consoleHook.test.js'),
       test_execute_consoleHook = _require11.test_execute_consoleHook;
 
+  var _require12 = require('./other/other.test.js'),
+      test_execute_other = _require12.test_execute_other;
+
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var _parts$test = parts.test,
         describe = _parts$test.describe,
@@ -65,22 +68,6 @@ var test_execute_index = function test_execute_index(parts) {
     });
   };
 
-  if (parts.platform.wsh) {
-    test_execute_index.name = 'test_execute_index';
-    test_execute_root.name = 'test_execute_root';
-    test_execute_type.name = 'test_execute_type';
-    test_execute_syntax.name = 'test_execute_syntax';
-    test_execute_test.name = 'test_execute_test';
-    test_execute_compare.name = 'test_execute_compare';
-    test_execute_convert.name = 'test_execute_convert';
-    test_execute_number.name = 'test_execute_number';
-    test_execute_string.name = 'test_execute_string';
-    test_execute_object.name = 'test_execute_object';
-    test_execute_array.name = 'test_execute_array';
-    test_execute_consoleHook.name = 'test_execute_consoleHook';
-    test_execute_nameSpace.name = 'test_execute_nameSpace';
-  }
-
   var describe = parts.test.describe;
   describe('test_execute_index', function () {
     test_execute_root(parts);
@@ -95,6 +82,7 @@ var test_execute_index = function test_execute_index(parts) {
     test_execute_array(parts);
     test_execute_consoleHook(parts);
     test_execute_nameSpace(parts);
+    test_execute_other(parts);
   });
 };
 

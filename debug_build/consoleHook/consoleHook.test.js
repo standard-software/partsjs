@@ -7,7 +7,7 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it;
-  describe(test_execute_consoleHook.name, function () {
+  describe('test_execute_consoleHook', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown;
