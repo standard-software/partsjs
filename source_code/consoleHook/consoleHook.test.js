@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 const test_execute_consoleHook = (parts) => {
   const { describe, it } = parts.test;
-  describe(test_execute_consoleHook.name, () => {
+  describe('test_execute_consoleHook', () => {
 
     const {
       checkEqual,

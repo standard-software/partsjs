@@ -100,6 +100,7 @@ You can now use the functions of the parts.js object.
 - update isObjectParameter
 - rename filename _isXxx.js >> isXxx.js
 - eslint fix
+- add other.test.js test_split
 
 ### 4.0.0
 #### 2020/01/29(Wed)

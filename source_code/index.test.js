@@ -3,17 +3,18 @@ const test_execute_index = (parts) => {
   console.log(`parts.js version: ${parts.VERSION}`);
   console.log('test start');
 
-  const { test_execute_root     } = require('./root/root.test.js');
-  const { test_execute_type     } = require('./type/type.test.js');
-  const { test_execute_syntax   } = require('./syntax/syntax.test.js');
-  const { test_execute_test     } = require('./test/test.test.js');
-  const { test_execute_compare  } = require('./compare/compare.test.js');
-  const { test_execute_convert  } = require('./convert/convert.test.js');
-  const { test_execute_number   } = require('./number/number.test.js');
-  const { test_execute_string   } = require('./string/string.test.js');
-  const { test_execute_object   } = require('./object/object.test.js');
-  const { test_execute_array    } = require('./array/array.test.js');
+  const { test_execute_root         } = require('./root/root.test.js');
+  const { test_execute_type         } = require('./type/type.test.js');
+  const { test_execute_syntax       } = require('./syntax/syntax.test.js');
+  const { test_execute_test         } = require('./test/test.test.js');
+  const { test_execute_compare      } = require('./compare/compare.test.js');
+  const { test_execute_convert      } = require('./convert/convert.test.js');
+  const { test_execute_number       } = require('./number/number.test.js');
+  const { test_execute_string       } = require('./string/string.test.js');
+  const { test_execute_object       } = require('./object/object.test.js');
+  const { test_execute_array        } = require('./array/array.test.js');
   const { test_execute_consoleHook  } = require('./consoleHook/consoleHook.test.js');
+  const { test_execute_other        } = require('./other/other.test.js');
 
   const test_execute_nameSpace = (parts) => {
     const { describe, it } = parts.test;
@@ -78,21 +79,6 @@ const test_execute_index = (parts) => {
     });
   };
 
-  if (parts.platform.wsh) {
-    test_execute_index.name       = 'test_execute_index';
-    test_execute_root.name        = 'test_execute_root';
-    test_execute_type.name        = 'test_execute_type';
-    test_execute_syntax.name      = 'test_execute_syntax';
-    test_execute_test.name        = 'test_execute_test';
-    test_execute_compare.name     = 'test_execute_compare';
-    test_execute_convert.name     = 'test_execute_convert';
-    test_execute_number.name      = 'test_execute_number';
-    test_execute_string.name      = 'test_execute_string';
-    test_execute_object.name      = 'test_execute_object';
-    test_execute_array.name       = 'test_execute_array';
-    test_execute_consoleHook.name = 'test_execute_consoleHook';
-    test_execute_nameSpace.name   = 'test_execute_nameSpace';
-  }
 
   const { describe } = parts.test;
   describe('test_execute_index', () => {
@@ -109,6 +95,7 @@ const test_execute_index = (parts) => {
     test_execute_array(parts);
     test_execute_consoleHook(parts);
     test_execute_nameSpace(parts);
+    test_execute_other(parts);
 
   });
 };
