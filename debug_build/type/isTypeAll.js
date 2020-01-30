@@ -40,21 +40,21 @@ var _require = require('../type/isType.js'),
     isNotEmptyObject = _require.isNotEmptyObject,
     isNotEmptyArray = _require.isNotEmptyArray;
 
-var _require2 = require('../type/_isException.js'),
+var _require2 = require('../type/isException.js'),
     isException = _require2.isException,
     isNotException = _require2.isNotException;
 
-var _require3 = require('../type/_isSymbol.js'),
+var _require3 = require('../type/isSymbol.js'),
     isSymbol = _require3.isSymbol,
     isNotSymbol = _require3.isNotSymbol;
 
-var _require4 = require('../type/_isMap.js'),
+var _require4 = require('../type/isMap.js'),
     isMap = _require4.isMap,
     isNotMap = _require4.isNotMap,
     isWeakMap = _require4.isWeakMap,
     isNotWeakMap = _require4.isNotWeakMap;
 
-var _require5 = require('../type/_isSet.js'),
+var _require5 = require('../type/isSet.js'),
     isSet = _require5.isSet,
     isNotSet = _require5.isNotSet,
     isWeakSet = _require5.isWeakSet,

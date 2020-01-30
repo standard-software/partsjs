@@ -25,55 +25,37 @@ var _require3 = require('../object/_propertyCount.js'),
  */
 
 
-var isObjectParameter = function isObjectParameter(object, propertyArray) {
-  var defaultPropertyArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+var isObjectParameter = function isObjectParameter(object, props) {
+  var defaultProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   if (!isObject(object)) {
     return false;
   }
 
-  var filterArray = function filterArray(array) {
-    var result = [];
-
-    for (var i = 0; i < array.length; i += 1) {
-      if (array[i] === '' || isUndefined(array[i])) {
-        continue;
-      }
-
-      if (!isString(array[i])) {
-        throw new TypeError('isObjectParameter args(propertyArray|defaultPropertyArray)' + ' element is not string');
-      }
-
-      result.push(array[i]);
-    }
-
-    return result;
-  };
-
-  if (isString(propertyArray)) {
-    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  if (!isString(props)) {
+    return false;
   }
 
-  propertyArray = filterArray(propertyArray);
-
-  if (isString(defaultPropertyArray)) {
-    defaultPropertyArray = _replaceAll(defaultPropertyArray, ' ', '').split(',');
+  if (!isString(defaultProps)) {
+    return false;
   }
 
-  defaultPropertyArray = filterArray(defaultPropertyArray);
+  props = _replaceAll(props, ' ', '').split(',');
+  defaultProps = _replaceAll(defaultProps, ' ', '').split(',');
+  var propMatchCount = 0;
 
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
-      if (!(propertyArray.indexOf(property) !== -1 || defaultPropertyArray.indexOf(property) !== -1)) {
+      if (props.indexOf(property) !== -1) {
+        propMatchCount += 1;
+      } else if (defaultProps.indexOf(property) !== -1) {} else {
         return false;
       }
     }
   }
 
-  for (var i = 0; i < propertyArray.length; i += 1) {
-    if (!object.hasOwnProperty(propertyArray[i])) {
-      return false;
-    }
+  if (propMatchCount !== props.length) {
+    return false;
   }
 
   return true;
