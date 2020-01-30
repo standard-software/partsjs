@@ -95,6 +95,10 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 4.0.1
+#### 2020/01/30(Thu)
+- update isObjectParameter
+
 ### 4.0.0
 #### 2020/01/29(Wed)
 - change build webpack config

@@ -1,8 +1,8 @@
 const {
- isUndefined,isNull,isNaNStrict,
- isBoolean,isNumber,isInteger,isString,
- isFunction,isObject,isArray,isDate,isRegExp,
- isException,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isArray, isDate, isRegExp,
+  isException,
 } = require('../type/isType.js');
 
 const {
@@ -18,58 +18,37 @@ const {
  */
 const isObjectParameter = (
   object,
-  propertyArray,
-  defaultPropertyArray = [],
+  props,
+  defaultProps = '',
 ) => {
 
   if (!isObject(object)) {
     return false;
   }
-
-  const filterArray = (array) => {
-    const result = [];
-    for (let i = 0; i < array.length; i += 1) {
-      if ((array[i] === '')
-      || (isUndefined(array[i]))) {
-        continue;
-      }
-      if (!isString(array[i])) {
-        throw new TypeError(
-          'isObjectParameter args(propertyArray|defaultPropertyArray)' +
-          ' element is not string',
-        );
-      }
-      result.push(array[i]);
-    }
-    return result;
-  };
-
-  if (isString(propertyArray)) {
-    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
+  if (!isString(props)) {
+    return false;
   }
-  propertyArray = filterArray(propertyArray);
-
-  if (isString(defaultPropertyArray)) {
-    defaultPropertyArray =
-      _replaceAll(defaultPropertyArray, ' ', '').split(',');
+  if (!isString(defaultProps)) {
+    return false;
   }
-  defaultPropertyArray = filterArray(defaultPropertyArray);
 
+  props = _replaceAll(props, ' ', '').split(',');
+
+  defaultProps = _replaceAll(defaultProps, ' ', '').split(',');
+
+  let propMatchCount = 0;
   for (const property in object) {
     if (object.hasOwnProperty(property)) {
-      if (!(
-        (propertyArray.indexOf(property) !== -1)
-        || (defaultPropertyArray.indexOf(property) !== -1)
-      )) {
+      if (props.indexOf(property) !== -1) {
+        propMatchCount += 1;
+      } else if (defaultProps.indexOf(property) !== -1) {
+      } else {
         return false;
       }
     }
   }
-
-  for (let i = 0; i < propertyArray.length; i += 1) {
-    if (!object.hasOwnProperty(propertyArray[i])) {
-      return false;
-    }
+  if (propMatchCount !== props.length) {
+    return false;
   }
 
   return true;
