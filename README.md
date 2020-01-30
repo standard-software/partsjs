@@ -98,6 +98,8 @@ You can now use the functions of the parts.js object.
 ### 4.0.1
 #### 2020/01/30(Thu)
 - update isObjectParameter
+- rename filename _isXxx.js >> isXxx.js
+- eslint fix
 
 ### 4.0.0
 #### 2020/01/29(Wed)

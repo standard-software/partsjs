@@ -13,8 +13,7 @@ const test_execute_index = (parts) => {
   const { test_execute_string   } = require('./string/string.test.js');
   const { test_execute_object   } = require('./object/object.test.js');
   const { test_execute_array    } = require('./array/array.test.js');
-  const { test_execute_consoleHook  } =
- require('./consoleHook/consoleHook.test.js');
+  const { test_execute_consoleHook  } = require('./consoleHook/consoleHook.test.js');
 
   const test_execute_nameSpace = (parts) => {
     const { describe, it } = parts.test;
@@ -25,13 +24,8 @@ const test_execute_index = (parts) => {
 
       it('test_execute_nameSpace 1', () => {
 
-        // checkEqual(3,   'a,b,c'.split(',').length);
-        // checkEqual(4,   'a,b,c,'.split(',').length);
-        // checkEqual('a', 'a,b,c,'.split(',')[0]);
-        // checkEqual('',  'a,b,c,'.split(',')[3]);
-
         checkEqual(235, propertyCount(parts));
-        checkEqual(140,  propertyCount(parts.type));
+        checkEqual(140, propertyCount(parts.type));
         checkEqual(9,   propertyCount(parts.test));
         checkEqual(20,  propertyCount(parts.compare));
         checkEqual(23,  propertyCount(parts.convert));

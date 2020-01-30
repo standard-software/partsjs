@@ -35,8 +35,9 @@ module.exports = {
     // ],
     "operator-linebreak": ["off"],
     "require-jsdoc": ["off"],
-    "brace-style": ["off"],
-    "key-spacing": ["off"],
-    "guard-for-in": ["off"],
+    "brace-style":    ["off"],
+    "key-spacing":    ["off"],
+    "guard-for-in":   ["off"],
+    "max-len":        ["error", { "code": 90 }],
   },
 };

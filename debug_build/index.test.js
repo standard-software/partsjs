@@ -47,10 +47,6 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        // checkEqual(3,   'a,b,c'.split(',').length);
-        // checkEqual(4,   'a,b,c,'.split(',').length);
-        // checkEqual('a', 'a,b,c,'.split(',')[0]);
-        // checkEqual('',  'a,b,c,'.split(',')[3]);
         checkEqual(235, propertyCount(parts));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
