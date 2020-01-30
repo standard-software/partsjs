@@ -2,6 +2,13 @@
 
 ## Version
 
+### 4.0.1
+#### 2020/01/30(Thu)
+- update isObjectParameter
+- rename filename _isXxx.js >> isXxx.js
+- eslint fix
+- add other.test.js test_split
+
 ### 4.0.0
 #### 2020/01/29(Wed)
 - change build webpack config
