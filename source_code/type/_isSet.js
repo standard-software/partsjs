@@ -9,7 +9,7 @@ const isNotSet   = value => !isSet(value);
 const isNotWeakSet   = value => !isWeakSet(value);
 
 module.exports = {
- isSet,isNotSet,
- isWeakSet,isNotWeakSet,
+  isSet, isNotSet,
+  isWeakSet, isNotWeakSet,
 };
 

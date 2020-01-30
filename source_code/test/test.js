@@ -1,11 +1,11 @@
 const {
- isUndefined,isNull,isNaNStrict,
- isBoolean,isNumber,isInteger,isString,
- isFunction,isObject,isObjectType,
- isArray,isArrayType,
- isDate,isRegExp,
- isError,
- isException,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isError,
+  isException,
 } = require('../type/type.js');
 
 const {

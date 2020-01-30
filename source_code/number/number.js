@@ -1,8 +1,8 @@
 const {
- isUndefined,isNull,isNaNStrict,
- isBoolean,isNumber,isInteger,isString,
- isFunction,isObject,isArray,isDate,isRegExp,
- isException,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isArray, isDate, isRegExp,
+  isException,
 } = require('../type/type.js');
 
 const {
@@ -177,7 +177,7 @@ const randomInt = (min, max) => {
 };
 
 module.exports = {
- isMultiples,
+  isMultiples,
   _round, _nearEqual, _inRange,
 
   isMultiples, isEven, isOdd,

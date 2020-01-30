@@ -1,11 +1,11 @@
 const {
- isUndefined,isNull,isNaNStrict,
- isBoolean,isNumber,isInteger,isString,
- isFunction,isObject,isObjectType,
- isArray,isArrayType,
- isDate,isRegExp,
- isError,
- isBooleanObject,isNumberObject,isStringObject,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isError,
+  isBooleanObject, isNumberObject, isStringObject,
 } = require('../type/type.js');
 
 const {
@@ -169,7 +169,7 @@ const _setProperty = (object, path, value) => {
   for (let i = 0, l = propertyArray.length - 1; i < l; i += 1) {
     if (
       !(
-       isObject(result[propertyArray[i]])
+        isObject(result[propertyArray[i]])
         ||isArrayType(result[propertyArray[i]])
       )
     ) {

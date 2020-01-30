@@ -7,6 +7,6 @@ const isSymbol = _typeofCheck('symbol');
 const isNotSymbol   = value => !isSymbol(value);
 
 module.exports = {
- isSymbol,isNotSymbol,
+  isSymbol, isNotSymbol,
 };
 

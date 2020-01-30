@@ -1,12 +1,12 @@
 const {
- isUndefined,isNull,isNaNStrict,
- isBoolean,isNumber,isInteger,isString,
- isFunction,isObject,isObjectType,
- isArray,isArrayType,
- isDate,isRegExp,
- isException,
- isMap,isWeakMap,
- isSet,isWeakSet,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isException,
+  isMap, isWeakMap,
+  isSet, isWeakSet,
 } = require('../type/type.js');
 
 const {
@@ -101,7 +101,7 @@ const _initialValue = (
   value,
   valueWhenMatched,
 ) => {
-  return _matchValue(value,isUndefined, valueWhenMatched);
+  return _matchValue(value, isUndefined, valueWhenMatched);
 };
 
 const initialValue = (

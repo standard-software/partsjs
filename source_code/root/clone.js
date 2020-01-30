@@ -1,14 +1,14 @@
 const {
- isUndefined,isNull,isNaNStrict,
- isBoolean,isNumber,isInteger,isString,
- isFunction,isObject,isObjectType,
- isArray,isArrayType,
- isDate,isRegExp,
- isException,
- isBooleanObject,isNumberObject,isStringObject,
- isSymbol,
- isMap,isWeakMap,
- isSet,isWeakSet,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction, isObject, isObjectType,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isException,
+  isBooleanObject, isNumberObject, isStringObject,
+  isSymbol,
+  isMap, isWeakMap,
+  isSet, isWeakSet,
 } = require('../type/type.js');
 
 const {

@@ -1,5 +1,5 @@
 const {
- isError,
+  isError,
 } = require('../type/isType.js');
 
 const {
@@ -25,7 +25,7 @@ const isException = (value) => {
 const isNotException   = value => !isException(value);
 
 module.exports = {
- isException,
- isNotException,
+  isException,
+  isNotException,
 };
 

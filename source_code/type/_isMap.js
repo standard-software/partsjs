@@ -9,7 +9,7 @@ const isNotMap   = value => !isMap(value);
 const isNotWeakMap   = value => !isWeakMap(value);
 
 module.exports = {
- isMap,isNotMap,
- isWeakMap,isNotWeakMap,
+  isMap, isNotMap,
+  isWeakMap, isNotWeakMap,
 };
 
