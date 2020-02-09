@@ -1,5 +1,5 @@
 # Parts.js
-JavaScript Code Parts TypeSafe Library
+JavaScript Code Parts TypeSafe Library Compatible with any js platform
 
 ## URL
 
@@ -11,7 +11,7 @@ https://github.com/standard-software/partsjs
 @standard-software/parts - npm  
 https://www.npmjs.com/package/@standard-software/parts
 
-## How to use Node.js
+## How to use parts.js in Node.js
 
 ### npm install
     npm i @standard-software/parts
@@ -65,7 +65,129 @@ partsjs/test_exec/release_web/test_index.html
 
 You can now use the functions of the parts.js object.
 
-## How to use parts in WSH (.wsf file)
+## How to use Google Apps Script for Rhino and V8
+
+### access Google Apps Script Home 
+
+https://script.google.com/home
+
+### create new Project
+
+- input name for example [parts.js test]
+- menu [file][new][script file]
+- input [parts]
+- created parts.gs
+
+You can copy and paste ./release_build/parts.js code into parts.gs
+
+- project
+  - code.gs
+  - parts.gs
+
+### code.gs
+
+```
+// code.gs
+function myFunction() {
+  console.log('parts version is ' + parts.VERSION);
+}
+```
+
+You can now use the functions of the parts.js object.
+
+To see the execution results
+
+Google Apps Script Home
+[parts.js test][run count][my function]
+
+### support V8
+
+- menu [view][show manifest file]
+
+update manifest file
+```
+// appsscript.json
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8"
+}
+```
+
+```
+// code.gs
+function myFunction() {
+  outputFunction = () => {
+    return 'parts version is ' + parts.VERSION
+  }
+  console.log(outputFunction());
+}
+```
+
+## How to use Google SpreadSheet
+
+same [How to use Google Apps Script]
+
+### access Google SpreadSheet
+
+### create new script
+
+- spreadsheet menu [tool][script editor]
+
+open google apps script project
+
+- input name for example [SpreadSheets parts.js test]
+- menu [file][new][script file]
+- input [parts]
+- created parts.gs
+
+You can copy and paste ./release_build/parts.js code into parts.gs
+
+- project
+  - code.gs
+  - parts.gs
+
+### code.gs
+
+```
+// code.gs
+function myFunction() {
+  console.log('parts version is ' + parts.VERSION);
+  Browser.msgBox('parts version is ' + parts.VERSION);
+}
+```
+
+run and see sheet page.
+
+more write add code.gs
+
+```
+function onOpen() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  var entries = [
+    {
+      name : "execute myFunction",
+      functionName : "myFunction"
+    }
+  ];
+  sheet.addMenu("run script", entries);
+};
+
+function myFunction() {
+  console.log('parts version is ' + parts.VERSION);
+  Browser.msgBox('parts version is ' + parts.VERSION);
+}
+```
+
+- spreadsheet menu [run script]execute myFunction]
+
+### support V8
+
+same [How to use Google Apps Script]
+
+## How to use parts in WSH (Windows Scripting Host .wsf file)
 
 ### refer to example
 partsjs/how_to_use.wsf
@@ -94,6 +216,11 @@ You can now use the functions of the parts.js object.
 
 
 ## Version
+
+### 4.1.0
+- Operation check Google Apps Script Rhino and V8
+- Operation check Google Spreadsheet
+- update README.md
 
 ### 4.0.1
 #### 2020/01/30(Thu)
