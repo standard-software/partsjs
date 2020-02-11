@@ -104,22 +104,34 @@ const test_execute_type = (parts) => {
         checkType('object',    '[object Float32Array]',       new Float32Array());
         checkType('object',    '[object Float64Array]',       new Float64Array());
 
-        checkType('symbol',    '[object Symbol]',             Symbol());
-        checkType('object',    '[object Map]',                new Map());
-        checkType('object',    '[object WeakMap]',            new WeakMap());
-        checkType('object',    '[object Set]',                new Set());
-        checkType('object',    '[object WeakSet]',            new WeakSet());
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkType('object',    '[object Object]',                new Map());
+          checkType('object',    '[object Object]',            new WeakMap());
+          checkType('object',    '[object Object]',                new Set());
+        } else {
+          checkType('object',    '[object Map]',                new Map());
+          checkType('object',    '[object WeakMap]',            new WeakMap());
+          checkType('object',    '[object Set]',                new Set());
+          checkType('object',    '[object WeakSet]',            new WeakSet());
+          checkType('symbol',    '[object Symbol]',             Symbol());
+        }
 
         checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
-        if (parts.platform.isBrowser()
-        && ['edge', 'firefox'].indexOf(parts.platform.browserName()) === -1) {
+        if (['edge', 'firefox', 'ie'].indexOf(parts.platform.browserName()) === -1) {
           checkType('object',    '[object SharedArrayBuffer]',  new SharedArrayBuffer(8));
           checkType('object',    '[object Atomics]',            Atomics);
         }
-        checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkType('object',    '[object Object]',             new DataView(new ArrayBuffer(16)));
+        } else {
+          checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
+        }
         checkType('object',    '[object JSON]',               JSON);
 
-        checkType('function',  '[object Function]',           Promise);
+        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+          checkType('function',  '[object Function]',           Promise);
+        }
 
         // function* Generator() { yield 1; yield 2; yield 3; }
         // var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
@@ -128,10 +140,12 @@ const test_execute_type = (parts) => {
         // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
         // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
 
-        checkType('object',    '[object Object]',             Reflect);
-        checkType('object',    '[object Object]',             new Proxy({}, {}));
+        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+          checkType('object',    '[object Object]',             Reflect);
+          checkType('object',    '[object Object]',             new Proxy({}, {}));
+          checkType('object',    '[object WebAssembly]',        WebAssembly);
+        }
         checkType('object',    '[object Object]',             Intl);
-        checkType('object',    '[object WebAssembly]',        WebAssembly);
       });
     };
 
@@ -799,6 +813,10 @@ const test_execute_type = (parts) => {
         if (parts.platform.isWsh()) {
           return;
         }
+        if (parts.platform.isBrowser()
+        && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          return;
+        }
 
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
@@ -812,16 +830,29 @@ const test_execute_type = (parts) => {
           return;
         }
 
-        checkEqual(false, isMapAll({}));
-        checkEqual(false, isWeakMapAll({}));
-        checkEqual(true,  isMapAll(new Map()));
-        checkEqual(false, isWeakMapAll(new Map()));
-        checkEqual(false, isMapAll(new WeakMap()));
-        checkEqual(true,  isWeakMapAll(new WeakMap()));
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(false, isMapAll({}));
+          checkEqual(false, isWeakMapAll({}));
+          checkEqual(false, isMapAll(new Map()));
+          checkEqual(false, isWeakMapAll(new Map()));
+          checkEqual(false, isMapAll(new WeakMap()));
+          checkEqual(false, isWeakMapAll(new WeakMap()));
 
-        checkEqual(true,  isObjectAll({}));
-        checkEqual(false, isObjectAll(new Map()));
-        checkEqual(false, isObjectAll(new WeakMap()));
+          checkEqual(true,  isObjectAll({}));
+          checkEqual(true,  isObjectAll(new Map()));
+          checkEqual(true,  isObjectAll(new WeakMap()));
+        } else {
+          checkEqual(false, isMapAll({}));
+          checkEqual(false, isWeakMapAll({}));
+          checkEqual(true,  isMapAll(new Map()));
+          checkEqual(false, isWeakMapAll(new Map()));
+          checkEqual(false, isMapAll(new WeakMap()));
+          checkEqual(true,  isWeakMapAll(new WeakMap()));
+
+          checkEqual(true,  isObjectAll({}));
+          checkEqual(false, isObjectAll(new Map()));
+          checkEqual(false, isObjectAll(new WeakMap()));
+        }
       });
     };
 
@@ -832,12 +863,19 @@ const test_execute_type = (parts) => {
           return;
         }
 
-        checkEqual(false, isSetAll({}));
-        checkEqual(false, isWeakSetAll({}));
-        checkEqual(true,  isSetAll(new Set()));
-        checkEqual(false, isWeakSetAll(new Set()));
-        checkEqual(false, isSetAll(new WeakSet()));
-        checkEqual(true,  isWeakSetAll(new WeakSet()));
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(false, isSetAll({}));
+          checkEqual(false,  isSetAll(new Set()));
+          checkEqual(false, isWeakSetAll(new Set()));
+        } else {
+          checkEqual(false, isSetAll({}));
+          checkEqual(false, isWeakSetAll({}));
+          checkEqual(true,  isSetAll(new Set()));
+          checkEqual(false, isWeakSetAll(new Set()));
+          checkEqual(false, isSetAll(new WeakSet()));
+          checkEqual(true,  isWeakSetAll(new WeakSet()));
+        }
+
       });
     };
 
