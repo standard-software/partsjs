@@ -238,7 +238,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equal_map = function test_equal_map() {
       it('test_equal_map', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // Map
 
@@ -281,7 +281,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equal_set = function test_equal_set() {
       it('test_equal_set', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // Set
 
@@ -744,7 +744,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map = function test_equalDeep_map() {
       it('test_equalDeep_map', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // Map
 
@@ -786,7 +786,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map_object_array = function test_equalDeep_map_object_array() {
       it('test_equalDeep_map_object_array', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // Map Object Array
 
@@ -876,7 +876,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map_CircularReference = function test_equalDeep_map_CircularReference() {
       it('test_equalDeep_map_CircularReference', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // CircularReference
 
@@ -956,7 +956,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set = function test_equalDeep_set() {
       it('test_equalDeep_set', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // Set
 
@@ -998,7 +998,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set_object_array = function test_equalDeep_set_object_array() {
       it('test_equalDeep_set_object_array', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // Set Object Array
 
@@ -1088,7 +1088,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set_CircularReference = function test_equalDeep_set_CircularReference() {
       it('test_equalDeep_set_CircularReference', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         } // CircularReference
 
@@ -1884,7 +1884,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.wsh) {
+        if (!parts.platform.isWsh()) {
           checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
           checkEqual(true, 'abc'.includes(''));

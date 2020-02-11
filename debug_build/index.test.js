@@ -2,6 +2,12 @@
 
 var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
+  console.log("platform: ".concat(parts.platform.name()));
+
+  if (parts.platform.isBrowser()) {
+    console.log("web browser: ".concat(parts.platform.browserName()));
+  }
+
   console.log('test start');
 
   var _require = require('./root/root.test.js'),
@@ -51,6 +57,8 @@ var test_execute_index = function test_execute_index(parts) {
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
         checkEqual(235, propertyCount(parts));
+        checkEqual(3, propertyCount(parts.root));
+        checkEqual(4, propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
         checkEqual(20, propertyCount(parts.compare));

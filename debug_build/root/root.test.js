@@ -540,11 +540,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_moment = function test_cloneDeep_moment() {
       it('test_cloneDeep_moment', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
-        if (parts.platform.web) {
+        if (parts.platform.isBrowser()) {
           return;
         }
 
@@ -598,7 +598,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
       it('test_cloneDeep_symbol', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -641,7 +641,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_map = function test_cloneDeep_map() {
       it('test_cloneDeep_map', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -728,7 +728,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_set = function test_cloneDeep_set() {
       it('test_cloneDeep_set', function () {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 

@@ -10,6 +10,8 @@ require('./polyfill.js');
 
 var _root = require('./root/root.js');
 
+var _platform = require('./platform/platform.js');
+
 var _type = require('./type/type.js');
 
 var _test = require('./test/test.js');
@@ -41,7 +43,12 @@ propertyNames.ROOT = 'clone, cloneDeep,' + 'cloneFunction,' + '';
 
 var root = _copyProperty(_root, propertyNames.ROOT);
 
-_copyProperty(_root, propertyNames.ROOT, rootNames); // type
+_copyProperty(_root, propertyNames.ROOT, rootNames); // platform
+
+
+propertyNames.PLATFORM = 'isBrowser, ' + 'isWsh,' + 'name,' + 'browserName,' + '';
+
+var platform = _copyProperty(_platform, propertyNames.PLATFORM); // type
 
 
 propertyNames._TYPE_BASE = 'Undefined,Null,NaNStrict,' + 'Boolean,Number,Integer,String,' + 'Function,Object,ObjectType,' + 'Array,ArrayType,' + 'Date,RegExp,' + 'Exception,' + 'EmptyObject,EmptyArray,' + 'Symbol,' + 'Map,WeakMap,Set,WeakSet,' + 'BooleanObject,NumberObject,StringObject,' + 'Bool,Num,Int,Str,' + 'Func,Obj,ObjType,' + 'Except,' + 'EmptyObj,' + '';
@@ -128,11 +135,7 @@ var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = _objectSpread({
   VERSION: VERSION,
-  platform: {
-    node: null,
-    web: null,
-    wsh: null
-  },
+  platform: platform,
   type: type,
   test: test,
   syntax: syntax,
