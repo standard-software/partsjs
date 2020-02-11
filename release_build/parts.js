@@ -140,7 +140,7 @@ var _array = __webpack_require__(20);
 
 var _consoleHook = __webpack_require__(35);
 
-var VERSION = '4.1.0 beta';
+var VERSION = '4.1.0';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;

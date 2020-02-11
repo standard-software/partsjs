@@ -218,6 +218,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 4.1.0
+### 2020/02/11(Tue)
 - update README.md
   - Operation check Google Apps Script Rhino and V8
   - Operation check Google Spreadsheet

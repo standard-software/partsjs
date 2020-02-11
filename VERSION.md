@@ -2,6 +2,18 @@
 
 ## Version
 
+### 4.1.0
+### 2020/02/11(Tue)
+- update README.md
+  - Operation check Google Apps Script Rhino and V8
+  - Operation check Google Spreadsheet
+- add array. isFirst / isLast /isBothEnds
+- delete polyfill.js string.prototype.includes
+- add platform.js
+  - name = web/node/wsh
+  - browserName = chrome(=vivaldi) firefox edge ie opera
+- test support browser chrome firefox edge ie opera vivaldi
+
 ### 4.0.1
 #### 2020/01/30(Thu)
 - update isObjectParameter
