@@ -224,6 +224,13 @@ You can now use the functions of the parts.js object.
 - add array. isFirst / isLast /isBothEnds
 - delete polyfill.js string.prototype.includes
 - add platform.js
+  - name = web/node/wsh
+  - browserName = chrome firefox edge ie opera
+  - test support browser
+    - chrome
+    - edge
+    - opera
+    - vivaldi
 
 ### 4.0.1
 #### 2020/01/30(Thu)

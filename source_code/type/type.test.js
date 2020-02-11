@@ -111,8 +111,11 @@ const test_execute_type = (parts) => {
         checkType('object',    '[object WeakSet]',            new WeakSet());
 
         checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
-        checkType('object',    '[object SharedArrayBuffer]',  new SharedArrayBuffer(8));
-        checkType('object',    '[object Atomics]',            Atomics);
+        if (parts.platform.isBrowser()
+        && ['edge', 'firefox'].indexOf(parts.platform.browserName()) === -1) {
+          checkType('object',    '[object SharedArrayBuffer]',  new SharedArrayBuffer(8));
+          checkType('object',    '[object Atomics]',            Atomics);
+        }
         checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
         checkType('object',    '[object JSON]',               JSON);
 

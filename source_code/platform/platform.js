@@ -47,14 +47,14 @@ const browserName = () => {
       result = 'ie';
     } else if (ua.indexOf('edge') !== -1) {
       result = 'edge';
+    } else if (ua.indexOf('opr') !== -1) {
+      result = 'opera';
     } else if (ua.indexOf('chrome') !== -1) {
       result = 'chrome';
     } else if (ua.indexOf('safari') !== -1) {
       result = 'safari';
     } else if (ua.indexOf('firefox') !== -1) {
       result = 'firefox';
-    } else if (ua.indexOf('opera') !== -1) {
-      result = 'opera';
     } else {
       result = 'other';
     }

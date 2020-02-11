@@ -4,6 +4,7 @@ const test_execute_index = (parts) => {
   console.log(`platform: ${parts.platform.name()}`);
   if (parts.platform.isBrowser()) {
     console.log(`web browser: ${parts.platform.browserName()}`);
+    console.log(`User Agent: ${window.navigator.userAgent}`);
   }
   console.log('test start');
 
