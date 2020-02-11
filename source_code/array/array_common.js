@@ -549,10 +549,81 @@ const all = (array, func) => {
       'all args(compareFunc) is not function',
     );
   }
+
   return _all(array, func);
 };
 
 const every = all;
+
+/**
+ * isFirst
+ */
+const _isFirst = (array, value) => {
+  if (array.length === 0) {
+    return false;
+  }
+  return array[0] === value;
+};
+
+const isLast = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'isLast args(array) is not array',
+    );
+  }
+
+  return _isLast(array, value);
+};
+
+/**
+ * isLast
+ */
+const _isLast = (array, value) => {
+  if (array.length === 0) {
+    return false;
+  }
+  return array[array.length - 1] === value;
+};
+
+const isFirst = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'isFirst args(array) is not array',
+    );
+  }
+
+  return _isFirst(array, value);
+};
+
+const _isBothEnds = (array, value) => {
+  if (array.length <= 1) {
+    return false;
+  }
+  return _isFirst(array, value) && _isLast(array, value);
+};
+
+const isBothEnds = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'isBothEnds args(array) is not array',
+    );
+  }
+
+  return _isBothEnds(array, value);
+};
+
 
 module.exports = {
   _min, _max,
@@ -565,6 +636,7 @@ module.exports = {
   _findFirst,
   _findLast,
   _some, _all,
+  _isFirst, _isLast, _isBothEnds,
 
   from,
   min, max,
@@ -577,6 +649,7 @@ module.exports = {
   findFirst,
   findLast,
   some, all, every,
+  isFirst, isLast, isBothEnds,
 
   findIndex, findBackIndex,
   find, findBack,

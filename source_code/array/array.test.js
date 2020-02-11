@@ -506,6 +506,78 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_isFirst = () => {
+      it('test_isFirst', () => {
+        checkEqual(true,  array.isFirst([1, 2, 3], 1));
+        checkEqual(false, array.isFirst([1, 2, 3], 2));
+        checkEqual(true,  array.isFirst(['A', 'B', 'C'], 'A'));
+        checkEqual(false, array.isFirst(['A', 'B', 'C'], 'a'));
+        checkEqual(false, array.isFirst(['A', 'B', 'C'], 'B'));
+
+        // Object Named Parameter
+        checkEqual(true,
+          array.isFirst({
+            array: ['A', 'B', 'C'],
+            value: 'A',
+          })
+        );
+        checkEqual(false,
+          array.isFirst({
+            array: ['A', 'B', 'C'],
+            value: 'a',
+          })
+        );
+      });
+    };
+
+    const test_isLast = () => {
+      it('test_isLast', () => {
+        checkEqual(true,  array.isLast([1, 2, 3], 3));
+        checkEqual(false, array.isLast([1, 2, 3], 2));
+        checkEqual(true,  array.isLast(['A', 'B', 'C'], 'C'));
+        checkEqual(false, array.isLast(['A', 'B', 'C'], 'c'));
+        checkEqual(false, array.isLast(['A', 'B', 'C'], 'B'));
+
+        // Object Named Parameter
+        checkEqual(true,
+          array.isLast({
+            array: ['A', 'B', 'C'],
+            value: 'C',
+          })
+        );
+        checkEqual(false,
+          array.isLast({
+            array: ['A', 'B', 'C'],
+            value: 'c',
+          })
+        );
+      });
+    };
+
+    const test_isBothEnds = () => {
+      it('test_isBothEnds', () => {
+        checkEqual(true,  array.isBothEnds([1, 2, 1], 1));
+        checkEqual(false, array.isBothEnds([1, 2, 1], 2));
+        checkEqual(true,  array.isBothEnds(['A', 'B', 'A'], 'A'));
+        checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'a'));
+        checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'B'));
+
+        // Object Named Parameter
+        checkEqual(true,
+          array.isBothEnds({
+            array: ['A', 'B', 'A'],
+            value: 'A',
+          })
+        );
+        checkEqual(false,
+          array.isBothEnds({
+            array: ['A', 'B', 'A'],
+            value: 'a',
+          })
+        );
+      });
+    };
+
     const test_operation_insert = () => {
       it('test_operation_insert', () => {
         checkCompare(parts.compare.equal,
@@ -647,6 +719,10 @@ const test_execute_array = (parts) => {
 
     test_some();
     test_all();
+
+    test_isFirst();
+    test_isLast();
+    test_isBothEnds();
 
     test_operation_insert();
     test_operation_add();

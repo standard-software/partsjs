@@ -169,6 +169,7 @@ propertyNames.ARRAY_PUBLIC =
   'find, findFirst,' +
   'findBack, findLast,' +
   'some, all, every,' +
+  'isFirst, isLast, isBothEnds,' +
   'operation,' +
   '';
 propertyNames.ARRAY_ROOT =

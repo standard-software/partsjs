@@ -218,9 +218,10 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 4.1.0
-- Operation check Google Apps Script Rhino and V8
-- Operation check Google Spreadsheet
 - update README.md
+  - Operation check Google Apps Script Rhino and V8
+  - Operation check Google Spreadsheet
+- add array. isFirst / isLast /isBothEnds
 
 ### 4.0.1
 #### 2020/01/30(Thu)
