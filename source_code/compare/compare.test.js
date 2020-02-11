@@ -1715,14 +1715,17 @@ const test_execute_compare = (parts) => {
 
     const test_includes = () => {
       it('test_includes', () => {
-        checkEqual(true,  'abc'.includes('a'));
 
-        // string.includes strange empty string
-        checkEqual(true,  'abc'.includes(''));
+        if (!parts.platform.wsh) {
+          checkEqual(true,  'abc'.includes('a'));
 
-        checkEqual(false, 'abc'.includes(null));
-        checkEqual(false, 'abc'.includes(undefined));
-        checkEqual(false, 'abc'.includes());
+          // string.includes strange empty string
+          checkEqual(true,  'abc'.includes(''));
+
+          checkEqual(false, 'abc'.includes(null));
+          checkEqual(false, 'abc'.includes(undefined));
+          checkEqual(false, 'abc'.includes());
+        }
 
         checkEqual(false, includes('abc', ''));
         checkEqual(true,  includes('abc', 'a'));
