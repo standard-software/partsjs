@@ -6,6 +6,7 @@ var test_execute_index = function test_execute_index(parts) {
 
   if (parts.platform.isBrowser()) {
     console.log("web browser: ".concat(parts.platform.browserName()));
+    console.log("User Agent: ".concat(window.navigator.userAgent));
   }
 
   console.log('test start');

@@ -266,7 +266,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalFunction);
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
-        checkEqual(false, equal(map1, map2), 'test_equal map'); // Map in object
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equal(map1, map2), 'test_equal map');
+        } else {
+          checkEqual(false, equal(map1, map2), 'test_equal map');
+        } // Map in object
+
 
         checkEqual(false, equal({
           map: map1
@@ -309,7 +315,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalFunction);
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
-        checkEqual(false, equal(set1, set2), 'test_equal map'); // Set in object
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equal(set1, set2), 'test_equal map');
+        } else {
+          checkEqual(false, equal(set1, set2), 'test_equal map');
+        } // Set in object
+
 
         checkEqual(false, equal({
           set: set1
@@ -771,15 +783,29 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalFunction);
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
-        checkEqual(false, equalDeep(map1, map2), 'test_equal map'); // Map in object
 
-        checkEqual(false, equalDeep({
-          map: map1
-        }, {
-          map: map2
-        }), 'test_equal Map'); // Map in array
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equalDeep(map1, map2), 'test_equal map'); // Map in object
 
-        checkEqual(false, equalDeep([map1], [map2]), 'test_equal Map');
+          checkEqual(true, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          }), 'test_equal Map'); // Map in array
+
+          checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map');
+        } else {
+          checkEqual(false, equalDeep(map1, map2), 'test_equal map'); // Map in object
+
+          checkEqual(false, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          }), 'test_equal Map'); // Map in array
+
+          checkEqual(false, equalDeep([map1], [map2]), 'test_equal Map');
+        }
+
         equalDeep.reset();
       });
     };
@@ -866,11 +892,20 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-        checkEqual(false, equalDeep({
-          map: map1
-        }, {
-          map: map2
-        }), 'test_equal Map set object');
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          }), 'test_equal Map set object');
+        } else {
+          checkEqual(false, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          }), 'test_equal Map set object');
+        }
       });
     };
 
@@ -950,7 +985,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         map3.set('b', ['b']);
         map1.set('map', map2);
         map2.set('map', map3);
-        checkEqual(false, equalDeep(map1, map2));
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equalDeep(map1, map2));
+        } else {
+          checkEqual(false, equalDeep(map1, map2));
+        }
       });
     };
 
@@ -983,15 +1023,29 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalFunction);
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
-        checkEqual(false, equalDeep(set1, set2), 'test_equal map'); // Set in object
 
-        checkEqual(false, equalDeep({
-          set: set1
-        }, {
-          set: set2
-        }), 'test_equal Set'); // Set in array
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equalDeep(set1, set2), 'test_equal map'); // Set in object
 
-        checkEqual(false, equalDeep([set1], [set2]), 'test_equal Set');
+          checkEqual(true, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }), 'test_equal Set'); // Set in array
+
+          checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set');
+        } else {
+          checkEqual(false, equalDeep(set1, set2), 'test_equal map'); // Set in object
+
+          checkEqual(false, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }), 'test_equal Set'); // Set in array
+
+          checkEqual(false, equalDeep([set1], [set2]), 'test_equal Set');
+        }
+
         equalDeep.reset();
       });
     };
@@ -1078,11 +1132,20 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-        checkEqual(false, equalDeep({
-          set: set1
-        }, {
-          set: set2
-        }), 'test_equal Set add object');
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }), 'test_equal Set add object');
+        } else {
+          checkEqual(false, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }), 'test_equal Set add object');
+        }
       });
     };
 
@@ -1178,11 +1241,20 @@ var test_execute_compare = function test_execute_compare(parts) {
         set3.add(['b']);
         set1.add(set2);
         set2.add(set3);
-        checkEqual(false, equalDeep({
-          set: set1
-        }, {
-          set: set2
-        }));
+
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(true, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }));
+        } else {
+          checkEqual(false, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }));
+        }
       });
     };
 
@@ -1885,12 +1957,14 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_includes = function test_includes() {
       it('test_includes', function () {
         if (!parts.platform.isWsh()) {
-          checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
+          if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+            checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
-          checkEqual(true, 'abc'.includes(''));
-          checkEqual(false, 'abc'.includes(null));
-          checkEqual(false, 'abc'.includes(undefined));
-          checkEqual(false, 'abc'.includes());
+            checkEqual(true, 'abc'.includes(''));
+            checkEqual(false, 'abc'.includes(null));
+            checkEqual(false, 'abc'.includes(undefined));
+            checkEqual(false, 'abc'.includes());
+          }
         }
 
         checkEqual(false, includes('abc', ''));

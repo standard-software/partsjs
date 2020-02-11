@@ -436,6 +436,8 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         if (parts.platform.isWsh()) {
           checkEqual(NaN, Number('0o123'));
+        } else if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));
         }

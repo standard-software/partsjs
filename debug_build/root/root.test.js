@@ -602,6 +602,10 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
+        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          return;
+        }
+
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbolAll(symbol1));
         var value1 = [symbol1];
@@ -642,6 +646,10 @@ var test_execute_root = function test_execute_root(parts) {
     var test_cloneDeep_map = function test_cloneDeep_map() {
       it('test_cloneDeep_map', function () {
         if (parts.platform.isWsh()) {
+          return;
+        }
+
+        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
           return;
         }
 
@@ -738,7 +746,13 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value1'));
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
-        checkEqual(false, parts.isObjectAll(set1));
+
+        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+          checkEqual(false, parts.isObjectAll(set1));
+        } else {
+          checkEqual(true, parts.isObjectAll(set1));
+        }
+
         checkEqual(true, parts.isObjectTypeAll(set1)); // initializse nothing cloneSet
 
         clone.clear();
@@ -759,14 +773,26 @@ var test_execute_root = function test_execute_root(parts) {
 
         clone.reset();
         cloneDeep.reset();
-        var set2 = clone(set1);
-        checkEqual(true, set2.has('value1')); // clone
 
-        checkEqual(false, set1 === set2);
-        var set2 = cloneDeep(set1);
-        checkEqual(true, set2.has('value1')); // clone
+        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+          var set2 = clone(set1);
+          checkEqual(false, set2.has('value1')); // clone
 
-        checkEqual(false, set1 === set2);
+          checkEqual(false, set1 === set2);
+          var set2 = cloneDeep(set1);
+          checkEqual(false, set2.has('value1')); // clone
+
+          checkEqual(false, set1 === set2);
+        } else {
+          var set2 = clone(set1);
+          checkEqual(true, set2.has('value1')); // clone
+
+          checkEqual(false, set1 === set2);
+          var set2 = cloneDeep(set1);
+          checkEqual(true, set2.has('value1')); // clone
+
+          checkEqual(false, set1 === set2);
+        }
       });
     };
 
