@@ -32,23 +32,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /* eslint-disable no-extend-native */
 var polyfillDefine = function polyfillDefine() {
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
-  if (!String.prototype.includes) {
-    String.prototype.includes = function (search, start) {
-      'use strict';
-
-      if (search instanceof RegExp) {
-        throw TypeError('first argument must not be a RegExp');
-      }
-
-      if (start === undefined) {
-        start = 0;
-      }
-
-      return this.indexOf(search, start) !== -1;
-    };
-  }
-
   if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (search, pos) {
       pos = !pos || pos < 0 ? 0 : +pos;

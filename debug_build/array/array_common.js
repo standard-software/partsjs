@@ -602,6 +602,80 @@ var all = function all(array, func) {
 };
 
 var every = all;
+/**
+ * isFirst
+ */
+
+var _isFirst = function _isFirst(array, value) {
+  if (array.length === 0) {
+    return false;
+  }
+
+  return array[0] === value;
+};
+
+var isLast = function isLast(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array10 = array;
+    array = _array10.array;
+    value = _array10.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('isLast args(array) is not array');
+  }
+
+  return _isLast(array, value);
+};
+/**
+ * isLast
+ */
+
+
+var _isLast = function _isLast(array, value) {
+  if (array.length === 0) {
+    return false;
+  }
+
+  return array[array.length - 1] === value;
+};
+
+var isFirst = function isFirst(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array11 = array;
+    array = _array11.array;
+    value = _array11.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('isFirst args(array) is not array');
+  }
+
+  return _isFirst(array, value);
+};
+
+var _isBothEnds = function _isBothEnds(array, value) {
+  if (array.length <= 1) {
+    return false;
+  }
+
+  return _isFirst(array, value) && _isLast(array, value);
+};
+
+var isBothEnds = function isBothEnds(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array12 = array;
+    array = _array12.array;
+    value = _array12.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('isBothEnds args(array) is not array');
+  }
+
+  return _isBothEnds(array, value);
+};
+
 module.exports = (_module$exports = {
   _min: _min,
   _max: _max,
@@ -621,6 +695,9 @@ module.exports = (_module$exports = {
   _findLast: _findLast,
   _some: _some,
   _all: _all,
+  _isFirst: _isFirst,
+  _isLast: _isLast,
+  _isBothEnds: _isBothEnds,
   from: from,
   min: min,
   max: max,
@@ -642,5 +719,8 @@ module.exports = (_module$exports = {
   findLast: findLast,
   some: some,
   all: all,
-  every: every
+  every: every,
+  isFirst: isFirst,
+  isLast: isLast,
+  isBothEnds: isBothEnds
 }, _defineProperty(_module$exports, "findIndex", findIndex), _defineProperty(_module$exports, "findBackIndex", findBackIndex), _defineProperty(_module$exports, "find", find), _defineProperty(_module$exports, "findBack", findBack), _module$exports);
