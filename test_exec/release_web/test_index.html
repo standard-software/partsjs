@@ -8,22 +8,8 @@
 <body>
 
 <script src="../../release_build/parts.js"></script>
-<script>
-  var module = {};
-</script>
-<script src="../../debug_build/index.test.js"></script>
-<script src="../../debug_build/root/root.test.js"></script>
-<script src="../../debug_build/type/type.test.js"></script>
-<script src="../../debug_build/syntax/syntax.test.js"></script>
-<script src="../../debug_build/test/test.test.js"></script>
-<script src="../../debug_build/compare/compare.test.js"></script>
-<script src="../../debug_build/convert/convert.test.js"></script>
-<script src="../../debug_build/number/number.test.js"></script>
-<script src="../../debug_build/string/string.test.js"></script>
-<script src="../../debug_build/object/object.test.js"></script>
-<script src="../../debug_build/array/array.test.js"></script>
-<script src="../../debug_build/consoleHook/consoleHook.test.js"></script>
-<script src="../../debug_build/other/other.test.js"></script>
+<script src="../../release_build/test_parts.js"></script>
+
 <script>
 
   var outputMessage = '';
@@ -55,7 +41,7 @@
   outputMessage += '<br>\n'
   outputMessage += '<br>\n'
 
-  test_execute_index(parts);
+  test_parts.test_execute_index(parts);
 
   outputMessage = outputMessage.split('  ').join('&nbsp;&nbsp;');
   document.write(outputMessage);

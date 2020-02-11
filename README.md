@@ -11,6 +11,20 @@ https://github.com/standard-software/partsjs
 @standard-software/parts - npm  
 https://www.npmjs.com/package/@standard-software/parts
 
+## Support platform
+
+- Major Web Browser
+  - Chrome
+  - Edge
+  - firefox
+  - Opera
+  - Vivaldi
+  - IE
+- Google Apps Script
+  - Google SpreadSheet
+- Node
+- Windows Scripting Host (WSH)
+
 ## How to use parts.js in Node.js
 
 ### npm install
@@ -43,8 +57,9 @@ console.log(
 ## How to use parts.js in HTML page
 
 ### refer to example
-partsjs/how_to_use.html
-partsjs/test_exec/release_web/test_index.html
+
+- partsjs/how_to_use.html
+- partsjs/test_exec/release_web/test_index.html
 
 ### HTML file
 
@@ -190,8 +205,9 @@ same [How to use Google Apps Script]
 ## How to use parts in WSH (Windows Scripting Host .wsf file)
 
 ### refer to example
-partsjs/how_to_use.wsf
-partsjs/test_exec/release_wsh/test_index.wsf
+
+- partsjs/how_to_use.wsf
+- partsjs/test_exec/release_wsh/test_index.wsf
 
 ### wsf file (ex. index.wsf)
 
@@ -216,6 +232,10 @@ You can now use the functions of the parts.js object.
 
 
 ## Version
+
+### 4.2.0
+- update package.json
+- add ./release_build/test_parts.js
 
 ### 4.1.0
 ### 2020/02/11(Tue)
@@ -262,40 +282,6 @@ You can now use the functions of the parts.js object.
 - update test output message
 - update test output testname
 - update propertyCount
-
-### 3.4.0
-#### 2020/01/15(Wed)
-- delete isEmpty
-- add isEmptyObjectAll
-- update setProperty return value
-- findIndexFirst >> findFirstIndex
-- findIndexLast >> findLastIndex
-- add match.js
-  - match >> matchSome
-  - matchValue >> matchSomeValue
-  - matchAll >> allMatchSome
-  - matchSomeIndex >> indexOfMatchSome
-  - matchSome >> someMatchSome
-  - add match matchValue
-  - add matchAll matchAllValue
-  - add allMatchAll someMatchAll indexOfMatchAll
-  - delete matchEvery matchAnyIndex matchAny
-- add array .some .all
-
-### 3.3.0
-#### 2020/01/05(Sun)
-- update checkEqual
-  - update equal
-  - add equalFunction.equalValue
-- update array support Object Named Arguemnt
-  - filter map count
-  - findIndex findBackIndex find findBack
-- add array operation
-  - insert
-  - add
-  - delete
-- test
-  - support exception continue
 
 ### More Info
 [VERSION.md](./VERSION.md)
