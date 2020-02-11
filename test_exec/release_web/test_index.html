@@ -9,7 +9,6 @@
 
 <script src="../../release_build/parts.js"></script>
 <script>
-  parts.platform.web = true;
   var module = {};
 </script>
 <script src="../../debug_build/index.test.js"></script>
@@ -37,18 +36,18 @@
   };
   var require = function() {
     return {
-      test_execute_root,
-      test_execute_type,
-      test_execute_syntax,
-      test_execute_test,
-      test_execute_compare,
-      test_execute_convert,
-      test_execute_number,
-      test_execute_string,
-      test_execute_object,
-      test_execute_array,
-      test_execute_consoleHook,
-      test_execute_other,
+      test_execute_root:        test_execute_root,
+      test_execute_type:        test_execute_type,
+      test_execute_syntax:      test_execute_syntax,
+      test_execute_test:        test_execute_test,
+      test_execute_compare:     test_execute_compare,
+      test_execute_convert:     test_execute_convert,
+      test_execute_number:      test_execute_number,
+      test_execute_string:      test_execute_string,
+      test_execute_object:      test_execute_object,
+      test_execute_array:       test_execute_array,
+      test_execute_consoleHook: test_execute_consoleHook,
+      test_execute_other:       test_execute_other
     };
   };
 

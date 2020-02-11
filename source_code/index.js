@@ -1,5 +1,6 @@
 require('./polyfill.js');
 const _root = require('./root/root.js');
+const _platform = require('./platform/platform.js');
 const _type = require('./type/type.js');
 const _test = require('./test/test.js');
 const _syntax = require('./syntax/syntax.js');
@@ -27,6 +28,15 @@ propertyNames.ROOT =
   '';
 const root = _copyProperty(_root, propertyNames.ROOT);
 _copyProperty(_root, propertyNames.ROOT, rootNames);
+
+// platform
+propertyNames.PLATFORM =
+  'isBrowser, ' +
+  'isWsh,' +
+  'name,' +
+  'browserName,' +
+  '';
+const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 
 // type
 propertyNames._TYPE_BASE =
@@ -191,11 +201,7 @@ const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
 module.exports = {
   VERSION,
-  platform: {
-    node: null,
-    web:  null,
-    wsh:  null,
-  },
+  platform,
   type,
   test,
   syntax,

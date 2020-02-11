@@ -223,6 +223,7 @@ You can now use the functions of the parts.js object.
   - Operation check Google Spreadsheet
 - add array. isFirst / isLast /isBothEnds
 - delete polyfill.js string.prototype.includes
+- add platform.js
 
 ### 4.0.1
 #### 2020/01/30(Thu)

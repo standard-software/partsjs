@@ -212,7 +212,7 @@ const test_execute_compare = (parts) => {
 
     const test_equal_map = () => {
       it('test_equal_map', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -261,7 +261,7 @@ const test_execute_compare = (parts) => {
 
     const test_equal_set = () => {
       it('test_equal_set', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -635,7 +635,7 @@ const test_execute_compare = (parts) => {
     const test_equalDeep_map = () => {
       it('test_equalDeep_map', () => {
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -683,7 +683,7 @@ const test_execute_compare = (parts) => {
 
     const test_equalDeep_map_object_array = () => {
       it('test_equalDeep_map_object_array', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -732,7 +732,7 @@ const test_execute_compare = (parts) => {
 
     const test_equalDeep_map_CircularReference = () => {
       it('test_equalDeep_map_CircularReference', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -795,7 +795,7 @@ const test_execute_compare = (parts) => {
     const test_equalDeep_set = () => {
       it('test_equalDeep_set', () => {
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
         // Set
@@ -842,7 +842,7 @@ const test_execute_compare = (parts) => {
 
     const test_equalDeep_set_object_array = () => {
       it('test_equalDeep_set_object_array', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -891,7 +891,7 @@ const test_execute_compare = (parts) => {
 
     const test_equalDeep_set_CircularReference = () => {
       it('test_equalDeep_set_CircularReference', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
         // CircularReference
@@ -1716,7 +1716,7 @@ const test_execute_compare = (parts) => {
     const test_includes = () => {
       it('test_includes', () => {
 
-        if (!parts.platform.wsh) {
+        if (!parts.platform.isWsh()) {
           checkEqual(true,  'abc'.includes('a'));
 
           // string.includes strange empty string

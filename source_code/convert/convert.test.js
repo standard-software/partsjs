@@ -373,7 +373,7 @@ const test_execute_convert = (parts) => {
         checkEqual(123,       Number(' 123'), '1');
         checkEqual(123,       Number('123 '), '2');
         checkEqual(123,       Number(' 123 '), '3');
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           checkEqual(NaN,       Number('　123'), '4');
           checkEqual(NaN,       Number('123　'), '5');
           checkEqual(NaN,       Number('　123　'), '6');
@@ -396,7 +396,7 @@ const test_execute_convert = (parts) => {
         checkEqual(123.4,     Number(' 123.4'));
         checkEqual(123.4,     Number('123.4 '));
         checkEqual(123.4,     Number(' 123.4 '));
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           checkEqual(NaN,       Number('　123.4'));
           checkEqual(NaN,       Number('123.4　'));
           checkEqual(NaN,       Number('　123.4　'));
@@ -421,7 +421,7 @@ const test_execute_convert = (parts) => {
         // space string
         checkEqual(0,         Number(''));
         checkEqual(0,         Number(' '));
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           checkEqual(NaN,       Number('　'));
         } else {
           checkEqual(0,         Number('　'));
@@ -450,7 +450,7 @@ const test_execute_convert = (parts) => {
         checkEqual(291,       Number('0x123'));
         checkEqual(NaN,       Number('+0x123'));
         checkEqual(NaN,       Number('-0x123'));
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           checkEqual(NaN,       Number('0o123'));
         } else {
           checkEqual(83,        Number('0o123'));

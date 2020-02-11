@@ -507,10 +507,10 @@ const test_execute_root = (parts) => {
 
     const test_cloneDeep_moment = () => {
       it('test_cloneDeep_moment', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
-        if (parts.platform.web) {
+        if (parts.platform.isBrowser()) {
           return;
         }
 
@@ -569,7 +569,7 @@ const test_execute_root = (parts) => {
 
     const test_cloneDeep_symbol = () => {
       it('test_cloneDeep_symbol', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -622,7 +622,7 @@ const test_execute_root = (parts) => {
 
     const test_cloneDeep_map = () => {
       it('test_cloneDeep_map', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -703,7 +703,7 @@ const test_execute_root = (parts) => {
 
     const test_cloneDeep_set = () => {
       it('test_cloneDeep_set', () => {
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 

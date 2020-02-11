@@ -55,7 +55,7 @@ const test_execute_type = (parts) => {
           checkEqual(objectStringName, objectToString(value));
         };
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           checkType('undefined', '[object Object]',     undefined);
           checkType('object',    '[object Object]',     null);
         } else {
@@ -91,7 +91,7 @@ const test_execute_type = (parts) => {
         checkType('object',    '[object RegExp]',     new RegExp('^a'));
         checkType('object',    '[object Math]',       Math);
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
         checkType('object',    '[object Int8Array]',          new Int8Array());
@@ -359,7 +359,7 @@ const test_execute_type = (parts) => {
         checkEqual(0,   Number(new Number()));
         checkEqual(0,   Number(new Number('')));
         checkEqual(0,   Number(new Number(' ')));
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           checkEqual(NaN,   Number(new Number('　')));
         } else {
           checkEqual(0,   Number(new Number('　')));
@@ -685,7 +685,7 @@ const test_execute_type = (parts) => {
         checkEqual(true,  Array.isArray(new Array()));
         checkEqual(true,  Array.isArray(new Array(1, 2, 3)));
         checkEqual(true,  Array.isArray(new Array()));
-        if (!parts.platform.wsh) {
+        if (!parts.platform.isWsh()) {
           checkEqual(false, Array.isArray(new Int8Array()));
           checkEqual(false, Array.isArray(new Uint8Array()));
           checkEqual(false, Array.isArray(new Uint8ClampedArray()));
@@ -703,7 +703,7 @@ const test_execute_type = (parts) => {
         checkEqual(true,  isArrayAll(new Array()));
         checkEqual(true,  isArrayAll(new Array(1, 2, 3)));
         checkEqual(true,  isArrayAll(new Array()));
-        if (!parts.platform.wsh) {
+        if (!parts.platform.isWsh()) {
           checkEqual(false, isArrayAll(new Int8Array()));
           checkEqual(false, isArrayAll(new Uint8Array()));
           checkEqual(false, isArrayAll(new Uint8ClampedArray()));
@@ -721,7 +721,7 @@ const test_execute_type = (parts) => {
         checkEqual(true,  isArrayTypeAll(new Array()));
         checkEqual(true,  isArrayTypeAll(new Array(1, 2, 3)));
         checkEqual(true,  isArrayTypeAll(new Array()));
-        if (!parts.platform.wsh) {
+        if (!parts.platform.isWsh()) {
           checkEqual(true,  isArrayTypeAll(new Int8Array()));
           checkEqual(true,  isArrayTypeAll(new Uint8Array()));
           checkEqual(true,  isArrayTypeAll(new Uint8ClampedArray()));
@@ -793,7 +793,7 @@ const test_execute_type = (parts) => {
     const test_isSymbol = function() {
       it('test_isSymbol', () => {
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -805,7 +805,7 @@ const test_execute_type = (parts) => {
     const test_isMap = function() {
       it('test_isMap', () => {
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 
@@ -825,7 +825,7 @@ const test_execute_type = (parts) => {
     const test_isSet = function() {
       it('test_isSet', () => {
 
-        if (parts.platform.wsh) {
+        if (parts.platform.isWsh()) {
           return;
         }
 

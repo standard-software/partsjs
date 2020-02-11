@@ -9,7 +9,6 @@
 <script language="JavaScript" src="../../release_build/parts.js"></script>
 <script language="JavaScript">
 <![CDATA[
-  parts.platform.wsh = true;
   var module = {};
 ]]>
 </script>
