@@ -117,6 +117,7 @@ var test_execute_index = function test_execute_index(parts) {
     console.log("User Agent: ".concat(window.navigator.userAgent));
   }
 
+  console.log("isAppsScript:  ".concat(parts.platform.isAppsScript()));
   console.log('test start');
 
   var _require = __webpack_require__(2),
@@ -167,7 +168,7 @@ var test_execute_index = function test_execute_index(parts) {
       it('test_execute_nameSpace 1', function () {
         checkEqual(235, propertyCount(parts));
         checkEqual(3, propertyCount(parts.root));
-        checkEqual(4, propertyCount(parts.platform));
+        checkEqual(5, propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
         checkEqual(20, propertyCount(parts.compare));
@@ -23954,6 +23955,10 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
 
     var test_consoleHook = function test_consoleHook(methodName) {
       it('test_consoleHook' + ' ' + methodName, function () {
+        if (parts.platform.isAppsScript()) {
+          return;
+        }
+
         var consoleOutput = '';
 
         var consoleHook_hook = function consoleHook_hook() {

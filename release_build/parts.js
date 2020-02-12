@@ -154,7 +154,7 @@ var root = _copyProperty(_root, propertyNames.ROOT);
 _copyProperty(_root, propertyNames.ROOT, rootNames); // platform
 
 
-propertyNames.PLATFORM = 'isBrowser, ' + 'isWsh,' + 'name,' + 'browserName,' + '';
+propertyNames.PLATFORM = 'isBrowser,' + 'isWsh,' + 'isAppsScript,' + 'name,' + 'browserName,' + '';
 
 var platform = _copyProperty(_platform, propertyNames.PLATFORM); // type
 
@@ -2157,20 +2157,29 @@ var isWsh = function isWsh() {
   return typeof WScript !== 'undefined';
 };
 
+var isGas = function isGas() {
+  return typeof Browser !== 'undefined';
+}; // const isSpreadSheet = () => {
+//   return typeof SpreadsheetApp !== 'undefined';
+// };
+
+
 var name = function name() {
-  var result = '';
+  var result;
 
   if (isWsh()) {
     result = 'wsh';
-  } else if (!isBrowser()) {
-    result = 'node';
   } else if (isBrowser()) {
     result = 'web';
+  } else if (isGas()) {
+    result = 'gas';
+  } else {
+    result = 'node';
   }
 
   ;
 
-  if (['node', 'wsh', 'web'].indexOf(result) === -1) {
+  if (['node', 'wsh', 'web', 'gas'].indexOf(result) === -1) {
     throw new Error('platform name error');
   }
 
@@ -2214,6 +2223,7 @@ var browserName = function browserName() {
 module.exports = {
   isBrowser: isBrowser,
   isWsh: isWsh,
+  isAppsScript: isGas,
   name: name,
   browserName: browserName
 };

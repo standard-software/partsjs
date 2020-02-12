@@ -46,7 +46,7 @@ var root = _copyProperty(_root, propertyNames.ROOT);
 _copyProperty(_root, propertyNames.ROOT, rootNames); // platform
 
 
-propertyNames.PLATFORM = 'isBrowser, ' + 'isWsh,' + 'name,' + 'browserName,' + '';
+propertyNames.PLATFORM = 'isBrowser,' + 'isWsh,' + 'isAppsScript,' + 'name,' + 'browserName,' + '';
 
 var platform = _copyProperty(_platform, propertyNames.PLATFORM); // type
 
