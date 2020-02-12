@@ -6,6 +6,8 @@ const test_execute_index = (parts) => {
     console.log(`web browser: ${parts.platform.browserName()}`);
     console.log(`User Agent: ${window.navigator.userAgent}`);
   }
+  console.log(`isAppsScript:  ${parts.platform.isAppsScript()}`);
+
   console.log('test start');
 
   const { test_execute_root         } = require('./root/root.test.js');
@@ -31,8 +33,8 @@ const test_execute_index = (parts) => {
       it('test_execute_nameSpace 1', () => {
 
         checkEqual(235, propertyCount(parts));
-        checkEqual(3, propertyCount(parts.root));
-        checkEqual(4, propertyCount(parts.platform));
+        checkEqual(3,   propertyCount(parts.root));
+        checkEqual(5,   propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9,   propertyCount(parts.test));
         checkEqual(20,  propertyCount(parts.compare));

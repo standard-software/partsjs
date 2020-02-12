@@ -16,6 +16,10 @@ const test_execute_consoleHook = (parts) => {
     const test_consoleHook = (methodName) => {
       it('test_consoleHook' + ' ' + methodName, () => {
 
+        if (parts.platform.isAppsScript()) {
+          return;
+        }
+
         var consoleOutput = '';
         var consoleHook_hook = function() {
           consoleHook.hook(methodName, function(args) {

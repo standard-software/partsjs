@@ -19,19 +19,29 @@ const isWsh = () => {
   return typeof WScript !== 'undefined';
 };
 
+const isGas = () => {
+  return typeof Browser !== 'undefined';
+};
+
+// const isSpreadSheet = () => {
+//   return typeof SpreadsheetApp !== 'undefined';
+// };
+
 const name = () => {
-  let result = '';
+  let result;
 
   if (isWsh()) {
     result = 'wsh';
-  } else if (!isBrowser()) {
-    result = 'node';
   } else if (isBrowser()) {
     result = 'web';
+  } else if (isGas()) {
+    result = 'gas';
+  } else {
+    result = 'node';
   };
 
   if ([
-    'node', 'wsh', 'web',
+    'node', 'wsh', 'web', 'gas',
   ].indexOf(result) === -1) {
     throw new Error('platform name error');
   }
@@ -79,6 +89,7 @@ const browserName = () => {
 module.exports = {
   isBrowser,
   isWsh,
+  isAppsScript: isGas,
   name,
   browserName,
 };

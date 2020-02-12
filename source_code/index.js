@@ -31,8 +31,9 @@ _copyProperty(_root, propertyNames.ROOT, rootNames);
 
 // platform
 propertyNames.PLATFORM =
-  'isBrowser, ' +
+  'isBrowser,' +
   'isWsh,' +
+  'isAppsScript,' +
   'name,' +
   'browserName,' +
   '';
