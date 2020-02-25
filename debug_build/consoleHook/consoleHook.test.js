@@ -15,7 +15,7 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
 
     var test_consoleHook = function test_consoleHook(methodName) {
       it('test_consoleHook' + ' ' + methodName, function () {
-        if (parts.platform.isAppsScript()) {
+        if (parts.platform.isGoogleAppsScript()) {
           return;
         }
 

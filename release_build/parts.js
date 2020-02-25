@@ -154,7 +154,7 @@ var root = _copyProperty(_root, propertyNames.ROOT);
 _copyProperty(_root, propertyNames.ROOT, rootNames); // platform
 
 
-propertyNames.PLATFORM = 'isBrowser,' + 'isWsh,' + 'isAppsScript,' + 'name,' + 'browserName,' + '';
+propertyNames.PLATFORM = 'name,' + 'isWebBrowser,' + 'isWindowsScriptHost,' + 'isGoogleAppsScript,' + 'isNodeJs,' + 'browserName,' + 'isChrome,' + 'isFirefox,' + 'isEdge,' + 'isInternetExplorer,' + 'isSafari,' + 'isOpera,' + '';
 
 var platform = _copyProperty(_platform, propertyNames.PLATFORM); // type
 
@@ -2124,62 +2124,38 @@ module.exports = {
 "use strict";
 
 
-var _require = __webpack_require__(5),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isBooleanObject = _require.isBooleanObject,
-    isNumberObject = _require.isNumberObject,
-    isStringObject = _require.isStringObject,
-    isSymbol = _require.isSymbol,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
-
-var isBrowser = function isBrowser() {
+var isWebBrowser = function isWebBrowser() {
   return typeof window !== 'undefined';
 };
 
-var isWsh = function isWsh() {
+var isWindowsScriptHost = function isWindowsScriptHost() {
   return typeof WScript !== 'undefined';
 };
 
-var isGas = function isGas() {
+var isGoogleAppsScript = function isGoogleAppsScript() {
   return typeof Browser !== 'undefined';
-}; // const isSpreadSheet = () => {
-//   return typeof SpreadsheetApp !== 'undefined';
-// };
+};
 
+var isNodeJs = function isNodeJs() {
+  return name() === 'Node.js';
+};
 
 var name = function name() {
   var result;
 
-  if (isWsh()) {
-    result = 'wsh';
-  } else if (isBrowser()) {
-    result = 'web';
-  } else if (isGas()) {
-    result = 'gas';
+  if (isWindowsScriptHost()) {
+    result = 'WindowsScriptHost';
+  } else if (isWebBrowser()) {
+    result = 'WebBrowser';
+  } else if (isGoogleAppsScript()) {
+    result = 'GoogleAppsScript';
   } else {
-    result = 'node';
+    result = 'Node.js';
   }
 
   ;
 
-  if (['node', 'wsh', 'web', 'gas'].indexOf(result) === -1) {
+  if (['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'].indexOf(result) === -1) {
     throw new Error('platform name error');
   }
 
@@ -2189,43 +2165,70 @@ var name = function name() {
 var browserName = function browserName() {
   var result = '';
 
-  if (isBrowser()) {
+  if (isWebBrowser()) {
     var ua = window.navigator.userAgent.toLowerCase();
 
     if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
-      result = 'ie';
+      result = 'InternetExplorer';
     } else if (ua.indexOf('edge') !== -1) {
-      result = 'edge';
+      result = 'Edge';
     } else if (ua.indexOf('opr') !== -1) {
-      result = 'opera';
+      result = 'Opera';
     } else if (ua.indexOf('chrome') !== -1) {
-      result = 'chrome';
+      result = 'Chrome';
     } else if (ua.indexOf('safari') !== -1) {
-      result = 'safari';
+      result = 'Safari';
     } else if (ua.indexOf('firefox') !== -1) {
-      result = 'firefox';
+      result = 'Firefox';
     } else {
       result = 'other';
     }
   }
 
-  if (result === '') {
-    result = 'noBrowser';
-  }
-
-  if (['chrome', 'firefox', 'edge', 'ie', 'safari', 'opera', 'other', 'noBrowser'].indexOf(result) === -1) {
+  if (['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''].indexOf(result) === -1) {
     throw new Error('platform browserName error');
   }
 
   return result;
 };
 
+var isChrome = function isChrome() {
+  return browserName() === 'Chrome';
+};
+
+var isFirefox = function isFirefox() {
+  return browserName() === 'Firefox';
+};
+
+var isEdge = function isEdge() {
+  return browserName() === 'Edge';
+};
+
+var isInternetExplorer = function isInternetExplorer() {
+  return browserName() === 'InternetExplorer';
+};
+
+var isSafari = function isSafari() {
+  return browserName() === 'Safari';
+};
+
+var isOpera = function isOpera() {
+  return browserName() === 'Opera';
+};
+
 module.exports = {
-  isBrowser: isBrowser,
-  isWsh: isWsh,
-  isAppsScript: isGas,
   name: name,
-  browserName: browserName
+  isWebBrowser: isWebBrowser,
+  isWindowsScriptHost: isWindowsScriptHost,
+  isGoogleAppsScript: isGoogleAppsScript,
+  isNodeJs: isNodeJs,
+  browserName: browserName,
+  isChrome: isChrome,
+  isFirefox: isFirefox,
+  isEdge: isEdge,
+  isInternetExplorer: isInternetExplorer,
+  isSafari: isSafari,
+  isOpera: isOpera
 };
 
 /***/ }),

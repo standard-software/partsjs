@@ -540,11 +540,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_moment = function test_cloneDeep_moment() {
       it('test_cloneDeep_moment', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser()) {
+        if (parts.platform.isWebBrowser()) {
           return;
         }
 
@@ -598,11 +598,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
       it('test_cloneDeep_symbol', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -645,11 +645,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_map = function test_cloneDeep_map() {
       it('test_cloneDeep_map', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -736,7 +736,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_set = function test_cloneDeep_set() {
       it('test_cloneDeep_set', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
@@ -747,7 +747,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
 
-        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isInternetExplorer()) {
           checkEqual(false, parts.isObjectAll(set1));
         } else {
           checkEqual(true, parts.isObjectAll(set1));
@@ -774,7 +774,7 @@ var test_execute_root = function test_execute_root(parts) {
         clone.reset();
         cloneDeep.reset();
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           var set2 = clone(set1);
           checkEqual(false, set2.has('value1')); // clone
 

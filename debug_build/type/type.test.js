@@ -79,7 +79,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(objectStringName, objectToString(value));
         };
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkType('undefined', '[object Object]', undefined);
           checkType('object', '[object Object]', null);
         } else {
@@ -118,7 +118,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object RegExp]', new RegExp('^a'));
         checkType('object', '[object Math]', Math);
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
@@ -132,7 +132,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Float32Array]', new Float32Array());
         checkType('object', '[object Float64Array]', new Float64Array());
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new Map());
           checkType('object', '[object Object]', new WeakMap());
           checkType('object', '[object Object]', new Set());
@@ -146,12 +146,12 @@ var test_execute_type = function test_execute_type(parts) {
 
         checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
 
-        if (['edge', 'firefox', 'ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
           checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
           checkType('object', '[object Atomics]', Atomics);
         }
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
         } else {
           checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
@@ -159,7 +159,7 @@ var test_execute_type = function test_execute_type(parts) {
 
         checkType('object', '[object JSON]', JSON);
 
-        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isInternetExplorer()) {
           checkType('function', '[object Function]', Promise);
         } // function* Generator() { yield 1; yield 2; yield 3; }
         // var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
@@ -169,7 +169,7 @@ var test_execute_type = function test_execute_type(parts) {
         // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
 
 
-        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', Reflect);
           checkType('object', '[object Object]', new Proxy({}, {}));
           checkType('object', '[object WebAssembly]', WebAssembly);
@@ -388,7 +388,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(0, Number(new Number('')));
         checkEqual(0, Number(new Number(' ')));
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number(new Number('　')));
         } else {
           checkEqual(0, Number(new Number('　')));
@@ -727,7 +727,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, Array.isArray(new Array(1, 2, 3)));
         checkEqual(true, Array.isArray(new Array()));
 
-        if (!parts.platform.isWsh()) {
+        if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(false, Array.isArray(new Int8Array()));
           checkEqual(false, Array.isArray(new Uint8Array()));
           checkEqual(false, Array.isArray(new Uint8ClampedArray()));
@@ -746,7 +746,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isArrayAll(new Array(1, 2, 3)));
         checkEqual(true, isArrayAll(new Array()));
 
-        if (!parts.platform.isWsh()) {
+        if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(false, isArrayAll(new Int8Array()));
           checkEqual(false, isArrayAll(new Uint8Array()));
           checkEqual(false, isArrayAll(new Uint8ClampedArray()));
@@ -765,7 +765,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isArrayTypeAll(new Array(1, 2, 3)));
         checkEqual(true, isArrayTypeAll(new Array()));
 
-        if (!parts.platform.isWsh()) {
+        if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(true, isArrayTypeAll(new Int8Array()));
           checkEqual(true, isArrayTypeAll(new Uint8Array()));
           checkEqual(true, isArrayTypeAll(new Uint8ClampedArray()));
@@ -846,11 +846,11 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isSymbol = function test_isSymbol() {
       it('test_isSymbol', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -861,11 +861,11 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isMap = function test_isMap() {
       it('test_isMap', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(false, isMapAll({}));
           checkEqual(false, isWeakMapAll({}));
           checkEqual(false, isMapAll(new Map()));
@@ -891,11 +891,11 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isSet = function test_isSet() {
       it('test_isSet', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(false, isSetAll({}));
           checkEqual(false, isSetAll(new Set()));
           checkEqual(false, isWeakSetAll(new Set()));

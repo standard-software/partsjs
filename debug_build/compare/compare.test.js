@@ -238,7 +238,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equal_map = function test_equal_map() {
       it('test_equal_map', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Map
 
@@ -267,7 +267,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equal(map1, map2), 'test_equal map');
         } else {
           checkEqual(false, equal(map1, map2), 'test_equal map');
@@ -287,7 +287,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equal_set = function test_equal_set() {
       it('test_equal_set', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Set
 
@@ -316,7 +316,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equal(set1, set2), 'test_equal map');
         } else {
           checkEqual(false, equal(set1, set2), 'test_equal map');
@@ -756,7 +756,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map = function test_equalDeep_map() {
       it('test_equalDeep_map', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Map
 
@@ -784,7 +784,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep(map1, map2), 'test_equal map'); // Map in object
 
           checkEqual(true, equalDeep({
@@ -812,7 +812,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map_object_array = function test_equalDeep_map_object_array() {
       it('test_equalDeep_map_object_array', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Map Object Array
 
@@ -893,7 +893,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: 4
         });
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep({
             map: map1
           }, {
@@ -911,7 +911,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map_CircularReference = function test_equalDeep_map_CircularReference() {
       it('test_equalDeep_map_CircularReference', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // CircularReference
 
@@ -986,7 +986,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         map1.set('map', map2);
         map2.set('map', map3);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep(map1, map2));
         } else {
           checkEqual(false, equalDeep(map1, map2));
@@ -996,7 +996,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set = function test_equalDeep_set() {
       it('test_equalDeep_set', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Set
 
@@ -1024,7 +1024,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep(set1, set2), 'test_equal map'); // Set in object
 
           checkEqual(true, equalDeep({
@@ -1052,7 +1052,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set_object_array = function test_equalDeep_set_object_array() {
       it('test_equalDeep_set_object_array', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Set Object Array
 
@@ -1133,7 +1133,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: 4
         });
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep({
             set: set1
           }, {
@@ -1151,7 +1151,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set_CircularReference = function test_equalDeep_set_CircularReference() {
       it('test_equalDeep_set_CircularReference', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // CircularReference
 
@@ -1242,7 +1242,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         set1.add(set2);
         set2.add(set3);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep({
             set: set1
           }, {
@@ -1956,8 +1956,8 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.isWsh()) {
-          if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isWindowsScriptHost()) {
+          if (!parts.platform.isInternetExplorer()) {
             checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
             checkEqual(true, 'abc'.includes(''));

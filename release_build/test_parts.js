@@ -112,12 +112,11 @@ var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
   console.log("platform: ".concat(parts.platform.name()));
 
-  if (parts.platform.isBrowser()) {
+  if (parts.platform.isWebBrowser()) {
     console.log("web browser: ".concat(parts.platform.browserName()));
     console.log("User Agent: ".concat(window.navigator.userAgent));
   }
 
-  console.log("isAppsScript:  ".concat(parts.platform.isAppsScript()));
   console.log('test start');
 
   var _require = __webpack_require__(2),
@@ -168,7 +167,7 @@ var test_execute_index = function test_execute_index(parts) {
       it('test_execute_nameSpace 1', function () {
         checkEqual(235, propertyCount(parts));
         checkEqual(3, propertyCount(parts.root));
-        checkEqual(5, propertyCount(parts.platform));
+        checkEqual(12, propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
         checkEqual(20, propertyCount(parts.compare));
@@ -755,11 +754,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_moment = function test_cloneDeep_moment() {
       it('test_cloneDeep_moment', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser()) {
+        if (parts.platform.isWebBrowser()) {
           return;
         }
 
@@ -813,11 +812,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
       it('test_cloneDeep_symbol', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -860,11 +859,11 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_map = function test_cloneDeep_map() {
       it('test_cloneDeep_map', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -951,7 +950,7 @@ var test_execute_root = function test_execute_root(parts) {
 
     var test_cloneDeep_set = function test_cloneDeep_set() {
       it('test_cloneDeep_set', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
@@ -962,7 +961,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
 
-        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isInternetExplorer()) {
           checkEqual(false, parts.isObjectAll(set1));
         } else {
           checkEqual(true, parts.isObjectAll(set1));
@@ -989,7 +988,7 @@ var test_execute_root = function test_execute_root(parts) {
         clone.reset();
         cloneDeep.reset();
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           var set2 = clone(set1);
           checkEqual(false, set2.has('value1')); // clone
 
@@ -18399,7 +18398,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(objectStringName, objectToString(value));
         };
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkType('undefined', '[object Object]', undefined);
           checkType('object', '[object Object]', null);
         } else {
@@ -18438,7 +18437,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object RegExp]', new RegExp('^a'));
         checkType('object', '[object Math]', Math);
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
@@ -18452,7 +18451,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Float32Array]', new Float32Array());
         checkType('object', '[object Float64Array]', new Float64Array());
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new Map());
           checkType('object', '[object Object]', new WeakMap());
           checkType('object', '[object Object]', new Set());
@@ -18466,12 +18465,12 @@ var test_execute_type = function test_execute_type(parts) {
 
         checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
 
-        if (['edge', 'firefox', 'ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
           checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
           checkType('object', '[object Atomics]', Atomics);
         }
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
         } else {
           checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
@@ -18479,7 +18478,7 @@ var test_execute_type = function test_execute_type(parts) {
 
         checkType('object', '[object JSON]', JSON);
 
-        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isInternetExplorer()) {
           checkType('function', '[object Function]', Promise);
         } // function* Generator() { yield 1; yield 2; yield 3; }
         // var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
@@ -18489,7 +18488,7 @@ var test_execute_type = function test_execute_type(parts) {
         // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
 
 
-        if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', Reflect);
           checkType('object', '[object Object]', new Proxy({}, {}));
           checkType('object', '[object WebAssembly]', WebAssembly);
@@ -18708,7 +18707,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(0, Number(new Number('')));
         checkEqual(0, Number(new Number(' ')));
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number(new Number('　')));
         } else {
           checkEqual(0, Number(new Number('　')));
@@ -19047,7 +19046,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, Array.isArray(new Array(1, 2, 3)));
         checkEqual(true, Array.isArray(new Array()));
 
-        if (!parts.platform.isWsh()) {
+        if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(false, Array.isArray(new Int8Array()));
           checkEqual(false, Array.isArray(new Uint8Array()));
           checkEqual(false, Array.isArray(new Uint8ClampedArray()));
@@ -19066,7 +19065,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isArrayAll(new Array(1, 2, 3)));
         checkEqual(true, isArrayAll(new Array()));
 
-        if (!parts.platform.isWsh()) {
+        if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(false, isArrayAll(new Int8Array()));
           checkEqual(false, isArrayAll(new Uint8Array()));
           checkEqual(false, isArrayAll(new Uint8ClampedArray()));
@@ -19085,7 +19084,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isArrayTypeAll(new Array(1, 2, 3)));
         checkEqual(true, isArrayTypeAll(new Array()));
 
-        if (!parts.platform.isWsh()) {
+        if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(true, isArrayTypeAll(new Int8Array()));
           checkEqual(true, isArrayTypeAll(new Uint8Array()));
           checkEqual(true, isArrayTypeAll(new Uint8ClampedArray()));
@@ -19166,11 +19165,11 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isSymbol = function test_isSymbol() {
       it('test_isSymbol', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (parts.platform.isBrowser() && ['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -19181,11 +19180,11 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isMap = function test_isMap() {
       it('test_isMap', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(false, isMapAll({}));
           checkEqual(false, isWeakMapAll({}));
           checkEqual(false, isMapAll(new Map()));
@@ -19211,11 +19210,11 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isSet = function test_isSet() {
       it('test_isSet', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(false, isSetAll({}));
           checkEqual(false, isSetAll(new Set()));
           checkEqual(false, isWeakSetAll(new Set()));
@@ -20125,7 +20124,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equal_map = function test_equal_map() {
       it('test_equal_map', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Map
 
@@ -20154,7 +20153,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equal(map1, map2), 'test_equal map');
         } else {
           checkEqual(false, equal(map1, map2), 'test_equal map');
@@ -20174,7 +20173,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equal_set = function test_equal_set() {
       it('test_equal_set', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Set
 
@@ -20203,7 +20202,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equal(set1, set2), 'test_equal map');
         } else {
           checkEqual(false, equal(set1, set2), 'test_equal map');
@@ -20643,7 +20642,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map = function test_equalDeep_map() {
       it('test_equalDeep_map', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Map
 
@@ -20671,7 +20670,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep(map1, map2), 'test_equal map'); // Map in object
 
           checkEqual(true, equalDeep({
@@ -20699,7 +20698,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map_object_array = function test_equalDeep_map_object_array() {
       it('test_equalDeep_map_object_array', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Map Object Array
 
@@ -20780,7 +20779,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: 4
         });
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep({
             map: map1
           }, {
@@ -20798,7 +20797,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_map_CircularReference = function test_equalDeep_map_CircularReference() {
       it('test_equalDeep_map_CircularReference', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // CircularReference
 
@@ -20873,7 +20872,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         map1.set('map', map2);
         map2.set('map', map3);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep(map1, map2));
         } else {
           checkEqual(false, equalDeep(map1, map2));
@@ -20883,7 +20882,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set = function test_equalDeep_set() {
       it('test_equalDeep_set', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Set
 
@@ -20911,7 +20910,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep(set1, set2), 'test_equal map'); // Set in object
 
           checkEqual(true, equalDeep({
@@ -20939,7 +20938,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set_object_array = function test_equalDeep_set_object_array() {
       it('test_equalDeep_set_object_array', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // Set Object Array
 
@@ -21020,7 +21019,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: 4
         });
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep({
             set: set1
           }, {
@@ -21038,7 +21037,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_equalDeep_set_CircularReference = function test_equalDeep_set_CircularReference() {
       it('test_equalDeep_set_CircularReference', function () {
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           return;
         } // CircularReference
 
@@ -21129,7 +21128,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         set1.add(set2);
         set2.add(set3);
 
-        if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        if (parts.platform.isInternetExplorer()) {
           checkEqual(true, equalDeep({
             set: set1
           }, {
@@ -21843,8 +21842,8 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.isWsh()) {
-          if (['ie'].indexOf(parts.platform.browserName()) === -1) {
+        if (!parts.platform.isWindowsScriptHost()) {
+          if (!parts.platform.isInternetExplorer()) {
             checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
             checkEqual(true, 'abc'.includes(''));
@@ -22476,7 +22475,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, Number('123 '), '2');
         checkEqual(123, Number(' 123 '), '3');
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number('　123'), '4');
           checkEqual(NaN, Number('123　'), '5');
           checkEqual(NaN, Number('　123　'), '6');
@@ -22500,7 +22499,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, Number('123.4 '));
         checkEqual(123.4, Number(' 123.4 '));
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number('　123.4'));
           checkEqual(NaN, Number('123.4　'));
           checkEqual(NaN, Number('　123.4　'));
@@ -22525,7 +22524,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0, Number(''));
         checkEqual(0, Number(' '));
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number('　'));
         } else {
           checkEqual(0, Number('　'));
@@ -22553,9 +22552,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, Number('+0x123'));
         checkEqual(NaN, Number('-0x123'));
 
-        if (parts.platform.isWsh()) {
+        if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number('0o123'));
-        } else if (['ie'].indexOf(parts.platform.browserName()) !== -1) {
+        } else if (parts.platform.isInternetExplorer()) {
           checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));
@@ -23955,7 +23954,7 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
 
     var test_consoleHook = function test_consoleHook(methodName) {
       it('test_consoleHook' + ' ' + methodName, function () {
-        if (parts.platform.isAppsScript()) {
+        if (parts.platform.isGoogleAppsScript()) {
           return;
         }
 
