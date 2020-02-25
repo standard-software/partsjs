@@ -240,6 +240,9 @@ You can now use the functions of the parts.js object.
   - isWebBrowser/isWindowsScriptHost/isGoogleAppsScript/isNodeJs
 - update platform.browserName
   - isChrome/isFirefox/isEdge/isInternetExplorer/isSafari/isOpera
+- add @babel/polyfill
+  - support IE polyfill
+- delete parts polyfill.js
 
 ### 4.1.0
 ### 2020/02/11(Tue)

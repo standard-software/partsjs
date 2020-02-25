@@ -1,4 +1,3 @@
-require('./polyfill.js');
 const _root = require('./root/root.js');
 const _platform = require('./platform/platform.js');
 const _type = require('./type/type.js');
@@ -43,6 +42,7 @@ propertyNames.PLATFORM =
   'isInternetExplorer,' +
   'isSafari,' +
   'isOpera,' +
+  'buildMode,' +
   '';
 const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 

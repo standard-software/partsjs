@@ -6,6 +6,7 @@ const test_execute_index = (parts) => {
     console.log(`web browser: ${parts.platform.browserName()}`);
     console.log(`User Agent: ${window.navigator.userAgent}`);
   }
+  console.log(`buildMode: ${parts.platform.buildMode}`);
   console.log('test start');
 
   const { test_execute_root         } = require('./root/root.test.js');
@@ -32,7 +33,7 @@ const test_execute_index = (parts) => {
 
         checkEqual(235, propertyCount(parts));
         checkEqual(3,   propertyCount(parts.root));
-        checkEqual(12,  propertyCount(parts.platform));
+        checkEqual(13,  propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9,   propertyCount(parts.test));
         checkEqual(20,  propertyCount(parts.compare));
