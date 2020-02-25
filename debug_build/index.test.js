@@ -9,6 +9,7 @@ var test_execute_index = function test_execute_index(parts) {
     console.log("User Agent: ".concat(window.navigator.userAgent));
   }
 
+  console.log("buildMode: ".concat(parts.platform.buildMode));
   console.log('test start');
 
   var _require = require('./root/root.test.js'),
@@ -59,7 +60,7 @@ var test_execute_index = function test_execute_index(parts) {
       it('test_execute_nameSpace 1', function () {
         checkEqual(235, propertyCount(parts));
         checkEqual(3, propertyCount(parts.root));
-        checkEqual(12, propertyCount(parts.platform));
+        checkEqual(13, propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
         checkEqual(20, propertyCount(parts.compare));

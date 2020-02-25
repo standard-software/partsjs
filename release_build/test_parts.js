@@ -117,6 +117,7 @@ var test_execute_index = function test_execute_index(parts) {
     console.log("User Agent: ".concat(window.navigator.userAgent));
   }
 
+  console.log("buildMode: ".concat(parts.platform.buildMode));
   console.log('test start');
 
   var _require = __webpack_require__(2),
@@ -167,7 +168,7 @@ var test_execute_index = function test_execute_index(parts) {
       it('test_execute_nameSpace 1', function () {
         checkEqual(235, propertyCount(parts));
         checkEqual(3, propertyCount(parts.root));
-        checkEqual(12, propertyCount(parts.platform));
+        checkEqual(13, propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
         checkEqual(20, propertyCount(parts.compare));
@@ -816,10 +817,6 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
-
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbolAll(symbol1));
         var value1 = [symbol1];
@@ -863,10 +860,6 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
-
         var map1 = new Map();
         map1.set('key1', 'value1');
         map1.set('key2', 'value2');
@@ -885,13 +878,23 @@ var test_execute_root = function test_execute_root(parts) {
         cloneDeep.add(cloneFunction.cloneRegExp);
         cloneDeep.add(cloneFunction.cloneDate);
         var map2 = clone(map1);
-        checkEqual(undefined, map2.get('key1')); // no clone
+
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual('value1', map2.get('key1')); // IE polyfill clone
+        } else {
+          checkEqual(undefined, map2.get('key1')); // no clone
+        }
 
         checkEqual(false, map1 === map2);
-        var map2 = cloneDeep(map1);
-        checkEqual(undefined, map2.get('key1')); // no clone
 
-        checkEqual(false, map1 === map2);
+        if (parts.platform.isInternetExplorer()) {// IE Error
+        } else {
+          var map2 = cloneDeep(map1);
+          checkEqual(undefined, map2.get('key1')); // no clone
+
+          checkEqual(false, map1 === map2);
+        }
+
         clone.reset();
         cloneDeep.reset();
         var map2 = clone(map1);
@@ -960,13 +963,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value1'));
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, parts.isObjectAll(set1));
-        } else {
-          checkEqual(true, parts.isObjectAll(set1));
-        }
-
+        checkEqual(false, parts.isObjectAll(set1));
         checkEqual(true, parts.isObjectTypeAll(set1)); // initializse nothing cloneSet
 
         clone.clear();
@@ -980,33 +977,33 @@ var test_execute_root = function test_execute_root(parts) {
         cloneDeep.add(cloneFunction.cloneRegExp);
         cloneDeep.add(cloneFunction.cloneDate);
         var set2 = clone(set1);
-        checkEqual(false, set2.has('value1')); // no clone
-
-        var set2 = cloneDeep(set1);
-        checkEqual(false, set2.has('value1')); // no clone
-
-        clone.reset();
-        cloneDeep.reset();
 
         if (parts.platform.isInternetExplorer()) {
-          var set2 = clone(set1);
-          checkEqual(false, set2.has('value1')); // clone
-
-          checkEqual(false, set1 === set2);
-          var set2 = cloneDeep(set1);
-          checkEqual(false, set2.has('value1')); // clone
-
-          checkEqual(false, set1 === set2);
+          checkEqual(true, set2.has('value1')); // IE polyfill clone
         } else {
-          var set2 = clone(set1);
-          checkEqual(true, set2.has('value1')); // clone
+          checkEqual(false, set2.has('value1')); // no clone
+        }
 
-          checkEqual(false, set1 === set2);
+        checkEqual(false, set1 === set2);
+
+        if (parts.platform.isInternetExplorer()) {// IE Error
+        } else {
           var set2 = cloneDeep(set1);
-          checkEqual(true, set2.has('value1')); // clone
+          checkEqual(false, set2.has('value1')); // no clone
 
           checkEqual(false, set1 === set2);
         }
+
+        clone.reset();
+        cloneDeep.reset();
+        var set2 = clone(set1);
+        checkEqual(true, set2.has('value1')); // clone
+
+        checkEqual(false, set1 === set2);
+        var set2 = cloneDeep(set1);
+        checkEqual(true, set2.has('value1')); // clone
+
+        checkEqual(false, set1 === set2);
       });
     };
 
@@ -18319,7 +18316,13 @@ webpackContext.id = 7;
 "use strict";
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/* eslint-disable new-cap */
 
 /* eslint-disable no-array-constructor */
 
@@ -18393,6 +18396,10 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_checkType = function test_checkType() {
       it('test_checkType', function () {
+        var _marked =
+        /*#__PURE__*/
+        regeneratorRuntime.mark(Generator);
+
         var checkType = function checkType(typeofName, objectStringName, value) {
           checkEqual(typeofName, _typeof(value));
           checkEqual(objectStringName, objectToString(value));
@@ -18450,19 +18457,11 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Uint32Array]', new Uint32Array());
         checkType('object', '[object Float32Array]', new Float32Array());
         checkType('object', '[object Float64Array]', new Float64Array());
-
-        if (parts.platform.isInternetExplorer()) {
-          checkType('object', '[object Object]', new Map());
-          checkType('object', '[object Object]', new WeakMap());
-          checkType('object', '[object Object]', new Set());
-        } else {
-          checkType('object', '[object Map]', new Map());
-          checkType('object', '[object WeakMap]', new WeakMap());
-          checkType('object', '[object Set]', new Set());
-          checkType('object', '[object WeakSet]', new WeakSet());
-          checkType('symbol', '[object Symbol]', Symbol());
-        }
-
+        checkType('object', '[object Map]', new Map());
+        checkType('object', '[object WeakMap]', new WeakMap());
+        checkType('object', '[object Set]', new Set());
+        checkType('object', '[object WeakSet]', new WeakSet());
+        checkType('symbol', '[object Symbol]', Symbol());
         checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
 
         if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
@@ -18470,38 +18469,78 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object Atomics]', Atomics);
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
-        } else {
-          checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
+        checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
+        checkType('object', '[object JSON]', JSON);
+        checkType('function', '[object Function]', Promise);
+
+        function Generator() {
+          return regeneratorRuntime.wrap(function Generator$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return 1;
+
+                case 2:
+                  _context.next = 4;
+                  return 2;
+
+                case 4:
+                  _context.next = 6;
+                  return 3;
+
+                case 6:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _marked);
         }
 
-        checkType('object', '[object JSON]', JSON);
+        var GeneratorFunction = Object.getPrototypeOf(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee() {
+          return regeneratorRuntime.wrap(function _callee$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee);
+        })).constructor;
+        var AsyncFunction = Object.getPrototypeOf(
+        /*#__PURE__*/
+        _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee2() {
+          return regeneratorRuntime.wrap(function _callee2$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee2);
+        }))).constructor;
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkType('function', '[object Function]', Promise);
-        } // ------
-        // function* Generator() { yield 1; yield 2; yield 3; }
-        // var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
-        // var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
-        // // eslint-disable-next-line new-cap
-        // checkType('object',    '[object Generator]',          Generator());
-        // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
-        // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
-        // ------
-        // Even if you combine the above settings,
-        // comment out because it does not work well in any environment
-        // ------
-        //  npm install @babel/polyfill --save-dev
-        //  webpack.config.js
-        //    entry: ['@babel/polyfill', './src/index.js']
-        //  babel.config.js
-        //    const presets =  [ ['@babel/preset-env', { 'targets': { 'node': true } }] ];
-        // ------
+        if (parts.platform.buildMode === 'source') {
+          checkType('object', '[object Generator]', Generator());
+          checkType('function', '[object GeneratorFunction]', new GeneratorFunction());
+          checkType('function', '[object AsyncFunction]', new AsyncFunction());
+        } else {
+          checkType('object', '[object Generator]', Generator());
+          checkType('object', '[object GeneratorFunction]', new GeneratorFunction());
+          checkType('function', '[object Function]', new AsyncFunction());
+        }
 
+        checkType('object', '[object Object]', Reflect);
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkType('object', '[object Object]', Reflect);
+        if (parts.platform.isInternetExplorer()) {// no define Proxy
+          // no define WebAssembly
+        } else {
           checkType('object', '[object Object]', new Proxy({}, {}));
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
@@ -19181,10 +19220,6 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
-
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
       });
@@ -19196,27 +19231,15 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(false, isMapAll(new Map()));
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(false, isWeakMapAll(new WeakMap()));
-          checkEqual(true, isObjectAll({}));
-          checkEqual(true, isObjectAll(new Map()));
-          checkEqual(true, isObjectAll(new WeakMap()));
-        } else {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(true, isMapAll(new Map()));
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(true, isWeakMapAll(new WeakMap()));
-          checkEqual(true, isObjectAll({}));
-          checkEqual(false, isObjectAll(new Map()));
-          checkEqual(false, isObjectAll(new WeakMap()));
-        }
+        checkEqual(false, isMapAll({}));
+        checkEqual(false, isWeakMapAll({}));
+        checkEqual(true, isMapAll(new Map()));
+        checkEqual(false, isWeakMapAll(new Map()));
+        checkEqual(false, isMapAll(new WeakMap()));
+        checkEqual(true, isWeakMapAll(new WeakMap()));
+        checkEqual(true, isObjectAll({}));
+        checkEqual(false, isObjectAll(new Map()));
+        checkEqual(false, isObjectAll(new WeakMap()));
       });
     };
 
@@ -19226,18 +19249,12 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false, isSetAll(new Set()));
-          checkEqual(false, isWeakSetAll(new Set()));
-        } else {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false, isWeakSetAll({}));
-          checkEqual(true, isSetAll(new Set()));
-          checkEqual(false, isWeakSetAll(new Set()));
-          checkEqual(false, isSetAll(new WeakSet()));
-          checkEqual(true, isWeakSetAll(new WeakSet()));
-        }
+        checkEqual(false, isSetAll({}));
+        checkEqual(false, isWeakSetAll({}));
+        checkEqual(true, isSetAll(new Set()));
+        checkEqual(false, isWeakSetAll(new Set()));
+        checkEqual(false, isSetAll(new WeakSet()));
+        checkEqual(true, isWeakSetAll(new WeakSet()));
       });
     };
 
@@ -20164,13 +20181,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalFunction);
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equal(map1, map2), 'test_equal map');
-        } else {
-          checkEqual(false, equal(map1, map2), 'test_equal map');
-        } // Map in object
-
+        checkEqual(false, equal(map1, map2), 'test_equal map'); // Map in object
 
         checkEqual(false, equal({
           map: map1
@@ -20213,13 +20224,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalFunction);
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equal(set1, set2), 'test_equal map');
-        } else {
-          checkEqual(false, equal(set1, set2), 'test_equal map');
-        } // Set in object
-
+        checkEqual(false, equal(set1, set2), 'test_equal map'); // Set in object
 
         checkEqual(false, equal({
           set: set1
@@ -20681,28 +20686,15 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalFunction);
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
+        checkEqual(false, equalDeep(map1, map2), 'test_equal map'); // Map in object
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equalDeep(map1, map2), 'test_equal map'); // Map in object
+        checkEqual(false, equalDeep({
+          map: map1
+        }, {
+          map: map2
+        }), 'test_equal Map'); // Map in array
 
-          checkEqual(true, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }), 'test_equal Map'); // Map in array
-
-          checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map');
-        } else {
-          checkEqual(false, equalDeep(map1, map2), 'test_equal map'); // Map in object
-
-          checkEqual(false, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }), 'test_equal Map'); // Map in array
-
-          checkEqual(false, equalDeep([map1], [map2]), 'test_equal Map');
-        }
+        checkEqual(false, equalDeep([map1], [map2]), 'test_equal Map'); // }
 
         equalDeep.reset();
       });
@@ -20790,20 +20782,11 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }), 'test_equal Map set object');
-        } else {
-          checkEqual(false, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }), 'test_equal Map set object');
-        }
+        checkEqual(false, equalDeep({
+          map: map1
+        }, {
+          map: map2
+        }), 'test_equal Map set object');
       });
     };
 
@@ -20883,12 +20866,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         map3.set('b', ['b']);
         map1.set('map', map2);
         map2.set('map', map3);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equalDeep(map1, map2));
-        } else {
-          checkEqual(false, equalDeep(map1, map2));
-        }
+        checkEqual(false, equalDeep(map1, map2));
       });
     };
 
@@ -20921,29 +20899,15 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalFunction);
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
+        checkEqual(false, equalDeep(set1, set2), 'test_equal map'); // Set in object
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equalDeep(set1, set2), 'test_equal map'); // Set in object
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }), 'test_equal Set'); // Set in array
 
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }), 'test_equal Set'); // Set in array
-
-          checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set');
-        } else {
-          checkEqual(false, equalDeep(set1, set2), 'test_equal map'); // Set in object
-
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }), 'test_equal Set'); // Set in array
-
-          checkEqual(false, equalDeep([set1], [set2]), 'test_equal Set');
-        }
-
+        checkEqual(false, equalDeep([set1], [set2]), 'test_equal Set');
         equalDeep.reset();
       });
     };
@@ -21030,20 +20994,11 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }), 'test_equal Set add object');
-        } else {
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }), 'test_equal Set add object');
-        }
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }), 'test_equal Set add object');
       });
     };
 
@@ -21139,20 +21094,11 @@ var test_execute_compare = function test_execute_compare(parts) {
         set3.add(['b']);
         set1.add(set2);
         set2.add(set3);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-        } else {
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-        }
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }));
       });
     };
 
@@ -21855,14 +21801,12 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_includes = function test_includes() {
       it('test_includes', function () {
         if (!parts.platform.isWindowsScriptHost()) {
-          if (!parts.platform.isInternetExplorer()) {
-            checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
+          checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
-            checkEqual(true, 'abc'.includes(''));
-            checkEqual(false, 'abc'.includes(null));
-            checkEqual(false, 'abc'.includes(undefined));
-            checkEqual(false, 'abc'.includes());
-          }
+          checkEqual(true, 'abc'.includes(''));
+          checkEqual(false, 'abc'.includes(null));
+          checkEqual(false, 'abc'.includes(undefined));
+          checkEqual(false, 'abc'.includes());
         }
 
         checkEqual(false, includes('abc', ''));
@@ -22476,8 +22420,8 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_NumerCast = function test_NumerCast() {
-      it('test_NumerCast', function () {
+    var test_NumberCast = function test_NumberCast() {
+      it('test_NumberCast', function () {
         // Integer
         checkEqual(123, Number('123'));
         checkEqual(123, Number('0123'));
@@ -22563,15 +22507,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(291, Number('0x123'));
         checkEqual(NaN, Number('+0x123'));
         checkEqual(NaN, Number('-0x123'));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN, Number('0o123'));
-        } else {
-          checkEqual(83, Number('0o123'));
-        }
-
+        checkEqual(83, Number('0o123'));
         checkEqual(NaN, Number('+0o123'));
         checkEqual(NaN, Number('-0o123'));
         checkEqual(Infinity, Number('Infinity'));
@@ -22726,7 +22662,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     test_numberToString();
     test_stringToNumber();
     test_stringToIntegerDefault();
-    test_NumerCast();
+    test_NumberCast();
     test_toNumber();
     test_toInteger();
   });

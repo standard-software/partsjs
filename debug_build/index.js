@@ -6,8 +6,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-require('./polyfill.js');
-
 var _root = require('./root/root.js');
 
 var _platform = require('./platform/platform.js');
@@ -46,7 +44,7 @@ var root = _copyProperty(_root, propertyNames.ROOT);
 _copyProperty(_root, propertyNames.ROOT, rootNames); // platform
 
 
-propertyNames.PLATFORM = 'name,' + 'isWebBrowser,' + 'isWindowsScriptHost,' + 'isGoogleAppsScript,' + 'isNodeJs,' + 'browserName,' + 'isChrome,' + 'isFirefox,' + 'isEdge,' + 'isInternetExplorer,' + 'isSafari,' + 'isOpera,' + '';
+propertyNames.PLATFORM = 'name,' + 'isWebBrowser,' + 'isWindowsScriptHost,' + 'isGoogleAppsScript,' + 'isNodeJs,' + 'browserName,' + 'isChrome,' + 'isFirefox,' + 'isEdge,' + 'isInternetExplorer,' + 'isSafari,' + 'isOpera,' + 'buildMode,' + '';
 
 var platform = _copyProperty(_platform, propertyNames.PLATFORM); // type
 

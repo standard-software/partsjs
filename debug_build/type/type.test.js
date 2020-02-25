@@ -1,6 +1,12 @@
 "use strict";
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/* eslint-disable new-cap */
 
 /* eslint-disable no-array-constructor */
 
@@ -74,6 +80,10 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_checkType = function test_checkType() {
       it('test_checkType', function () {
+        var _marked =
+        /*#__PURE__*/
+        regeneratorRuntime.mark(Generator);
+
         var checkType = function checkType(typeofName, objectStringName, value) {
           checkEqual(typeofName, _typeof(value));
           checkEqual(objectStringName, objectToString(value));
@@ -131,19 +141,11 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Uint32Array]', new Uint32Array());
         checkType('object', '[object Float32Array]', new Float32Array());
         checkType('object', '[object Float64Array]', new Float64Array());
-
-        if (parts.platform.isInternetExplorer()) {
-          checkType('object', '[object Object]', new Map());
-          checkType('object', '[object Object]', new WeakMap());
-          checkType('object', '[object Object]', new Set());
-        } else {
-          checkType('object', '[object Map]', new Map());
-          checkType('object', '[object WeakMap]', new WeakMap());
-          checkType('object', '[object Set]', new Set());
-          checkType('object', '[object WeakSet]', new WeakSet());
-          checkType('symbol', '[object Symbol]', Symbol());
-        }
-
+        checkType('object', '[object Map]', new Map());
+        checkType('object', '[object WeakMap]', new WeakMap());
+        checkType('object', '[object Set]', new Set());
+        checkType('object', '[object WeakSet]', new WeakSet());
+        checkType('symbol', '[object Symbol]', Symbol());
         checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
 
         if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
@@ -151,38 +153,78 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object Atomics]', Atomics);
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
-        } else {
-          checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
+        checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
+        checkType('object', '[object JSON]', JSON);
+        checkType('function', '[object Function]', Promise);
+
+        function Generator() {
+          return regeneratorRuntime.wrap(function Generator$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return 1;
+
+                case 2:
+                  _context.next = 4;
+                  return 2;
+
+                case 4:
+                  _context.next = 6;
+                  return 3;
+
+                case 6:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _marked);
         }
 
-        checkType('object', '[object JSON]', JSON);
+        var GeneratorFunction = Object.getPrototypeOf(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee() {
+          return regeneratorRuntime.wrap(function _callee$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee);
+        })).constructor;
+        var AsyncFunction = Object.getPrototypeOf(
+        /*#__PURE__*/
+        _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee2() {
+          return regeneratorRuntime.wrap(function _callee2$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee2);
+        }))).constructor;
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkType('function', '[object Function]', Promise);
-        } // ------
-        // function* Generator() { yield 1; yield 2; yield 3; }
-        // var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
-        // var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
-        // // eslint-disable-next-line new-cap
-        // checkType('object',    '[object Generator]',          Generator());
-        // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
-        // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
-        // ------
-        // Even if you combine the above settings,
-        // comment out because it does not work well in any environment
-        // ------
-        //  npm install @babel/polyfill --save-dev
-        //  webpack.config.js
-        //    entry: ['@babel/polyfill', './src/index.js']
-        //  babel.config.js
-        //    const presets =  [ ['@babel/preset-env', { 'targets': { 'node': true } }] ];
-        // ------
+        if (parts.platform.buildMode === 'source') {
+          checkType('object', '[object Generator]', Generator());
+          checkType('function', '[object GeneratorFunction]', new GeneratorFunction());
+          checkType('function', '[object AsyncFunction]', new AsyncFunction());
+        } else {
+          checkType('object', '[object Generator]', Generator());
+          checkType('object', '[object GeneratorFunction]', new GeneratorFunction());
+          checkType('function', '[object Function]', new AsyncFunction());
+        }
 
+        checkType('object', '[object Object]', Reflect);
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkType('object', '[object Object]', Reflect);
+        if (parts.platform.isInternetExplorer()) {// no define Proxy
+          // no define WebAssembly
+        } else {
           checkType('object', '[object Object]', new Proxy({}, {}));
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
@@ -862,10 +904,6 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
-
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
       });
@@ -877,27 +915,15 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(false, isMapAll(new Map()));
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(false, isWeakMapAll(new WeakMap()));
-          checkEqual(true, isObjectAll({}));
-          checkEqual(true, isObjectAll(new Map()));
-          checkEqual(true, isObjectAll(new WeakMap()));
-        } else {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(true, isMapAll(new Map()));
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(true, isWeakMapAll(new WeakMap()));
-          checkEqual(true, isObjectAll({}));
-          checkEqual(false, isObjectAll(new Map()));
-          checkEqual(false, isObjectAll(new WeakMap()));
-        }
+        checkEqual(false, isMapAll({}));
+        checkEqual(false, isWeakMapAll({}));
+        checkEqual(true, isMapAll(new Map()));
+        checkEqual(false, isWeakMapAll(new Map()));
+        checkEqual(false, isMapAll(new WeakMap()));
+        checkEqual(true, isWeakMapAll(new WeakMap()));
+        checkEqual(true, isObjectAll({}));
+        checkEqual(false, isObjectAll(new Map()));
+        checkEqual(false, isObjectAll(new WeakMap()));
       });
     };
 
@@ -907,18 +933,12 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false, isSetAll(new Set()));
-          checkEqual(false, isWeakSetAll(new Set()));
-        } else {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false, isWeakSetAll({}));
-          checkEqual(true, isSetAll(new Set()));
-          checkEqual(false, isWeakSetAll(new Set()));
-          checkEqual(false, isSetAll(new WeakSet()));
-          checkEqual(true, isWeakSetAll(new WeakSet()));
-        }
+        checkEqual(false, isSetAll({}));
+        checkEqual(false, isWeakSetAll({}));
+        checkEqual(true, isSetAll(new Set()));
+        checkEqual(false, isWeakSetAll(new Set()));
+        checkEqual(false, isSetAll(new WeakSet()));
+        checkEqual(true, isWeakSetAll(new WeakSet()));
       });
     };
 

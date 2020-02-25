@@ -346,8 +346,8 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_NumerCast = function test_NumerCast() {
-      it('test_NumerCast', function () {
+    var test_NumberCast = function test_NumberCast() {
+      it('test_NumberCast', function () {
         // Integer
         checkEqual(123, Number('123'));
         checkEqual(123, Number('0123'));
@@ -433,15 +433,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(291, Number('0x123'));
         checkEqual(NaN, Number('+0x123'));
         checkEqual(NaN, Number('-0x123'));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN, Number('0o123'));
-        } else {
-          checkEqual(83, Number('0o123'));
-        }
-
+        checkEqual(83, Number('0o123'));
         checkEqual(NaN, Number('+0o123'));
         checkEqual(NaN, Number('-0o123'));
         checkEqual(Infinity, Number('Infinity'));
@@ -596,7 +588,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     test_numberToString();
     test_stringToNumber();
     test_stringToIntegerDefault();
-    test_NumerCast();
+    test_NumberCast();
     test_toNumber();
     test_toInteger();
   });

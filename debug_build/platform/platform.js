@@ -104,5 +104,6 @@ module.exports = {
   isEdge: isEdge,
   isInternetExplorer: isInternetExplorer,
   isSafari: isSafari,
-  isOpera: isOpera
+  isOpera: isOpera,
+  buildMode: ''
 };
