@@ -161,12 +161,24 @@ var test_execute_type = function test_execute_type(parts) {
 
         if (!parts.platform.isInternetExplorer()) {
           checkType('function', '[object Function]', Promise);
-        } // function* Generator() { yield 1; yield 2; yield 3; }
-        // var GeneratorFunction = Object.getPrototypeOf(function*(){}).constructor
-        // var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
+        } // ------
+        // function* Generator() { yield 1; yield 2; yield 3; }
+        // var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
+        // var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+        // // eslint-disable-next-line new-cap
         // checkType('object',    '[object Generator]',          Generator());
         // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
         // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
+        // ------
+        // Even if you combine the above settings,
+        // comment out because it does not work well in any environment
+        // ------
+        //  npm install @babel/polyfill --save-dev
+        //  webpack.config.js
+        //    entry: ['@babel/polyfill', './src/index.js']
+        //  babel.config.js
+        //    const presets =  [ ['@babel/preset-env', { 'targets': { 'node': true } }] ];
+        // ------
 
 
         if (!parts.platform.isInternetExplorer()) {
