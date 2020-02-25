@@ -100,7 +100,6 @@ const isOpera = () => {
   return browserName() === 'Opera';
 };
 
-
 module.exports = {
   name,
   isWebBrowser,
@@ -115,4 +114,6 @@ module.exports = {
   isInternetExplorer,
   isSafari,
   isOpera,
+
+  buildMode: '',
 };

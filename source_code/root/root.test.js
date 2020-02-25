@@ -572,9 +572,6 @@ const test_execute_root = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
 
         var symbol1 = Symbol();
         checkEqual(true,
@@ -628,9 +625,6 @@ const test_execute_root = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
 
         var map1 = new Map();
         map1.set('key1', 'value1');
@@ -654,12 +648,20 @@ const test_execute_root = (parts) => {
         cloneDeep.add(cloneFunction.cloneDate);
 
         var map2 = clone(map1);
-        checkEqual(undefined, map2.get('key1'));  // no clone
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual('value1',  map2.get('key1'));  // IE polyfill clone
+        } else {
+          checkEqual(undefined, map2.get('key1'));  // no clone
+        }
         checkEqual(false, map1 === map2);
 
-        var map2 = cloneDeep(map1);
-        checkEqual(undefined, map2.get('key1'));  // no clone
-        checkEqual(false, map1 === map2);
+        if (parts.platform.isInternetExplorer()) {
+          // IE Error
+        } else {
+          var map2 = cloneDeep(map1);
+          checkEqual(undefined, map2.get('key1'));  // no clone
+          checkEqual(false, map1 === map2);
+        }
 
         clone.reset();
         cloneDeep.reset();
@@ -720,11 +722,7 @@ const test_execute_root = (parts) => {
         checkEqual(true,  set1.has('value2'));
         checkEqual(false, set1.has('value3'));
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, parts.isObjectAll(set1));
-        } else {
-          checkEqual(true, parts.isObjectAll(set1));
-        }
+        checkEqual(false, parts.isObjectAll(set1));
         checkEqual(true,  parts.isObjectTypeAll(set1));
 
         // initializse nothing cloneSet
@@ -741,31 +739,31 @@ const test_execute_root = (parts) => {
         cloneDeep.add(cloneFunction.cloneDate);
 
         var set2 = clone(set1);
-        checkEqual(false, set2.has('value1'));  // no clone
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(true,  set2.has('value1'));  // IE polyfill clone
+        } else {
+          checkEqual(false, set2.has('value1'));  // no clone
+        }
+        checkEqual(false, set1 === set2);
 
-        var set2 = cloneDeep(set1);
-        checkEqual(false, set2.has('value1'));  // no clone
+        if (parts.platform.isInternetExplorer()) {
+          // IE Error
+        } else {
+          var set2 = cloneDeep(set1);
+          checkEqual(false, set2.has('value1'));  // no clone
+          checkEqual(false, set1 === set2);
+        }
 
         clone.reset();
         cloneDeep.reset();
 
-        if (parts.platform.isInternetExplorer()) {
-          var set2 = clone(set1);
-          checkEqual(false, set2.has('value1'));  // clone
-          checkEqual(false, set1 === set2);
+        var set2 = clone(set1);
+        checkEqual(true, set2.has('value1'));  // clone
+        checkEqual(false, set1 === set2);
 
-          var set2 = cloneDeep(set1);
-          checkEqual(false, set2.has('value1'));  // clone
-          checkEqual(false, set1 === set2);
-        } else {
-          var set2 = clone(set1);
-          checkEqual(true, set2.has('value1'));  // clone
-          checkEqual(false, set1 === set2);
-
-          var set2 = cloneDeep(set1);
-          checkEqual(true, set2.has('value1'));  // clone
-          checkEqual(false, set1 === set2);
-        }
+        var set2 = cloneDeep(set1);
+        checkEqual(true, set2.has('value1'));  // clone
+        checkEqual(false, set1 === set2);
 
       });
     };

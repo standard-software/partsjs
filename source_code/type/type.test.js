@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /* eslint-disable no-array-constructor */
 /* eslint-disable no-new-object */
 /* eslint-disable no-new-wrappers */
@@ -104,17 +105,11 @@ const test_execute_type = (parts) => {
         checkType('object',    '[object Float32Array]',       new Float32Array());
         checkType('object',    '[object Float64Array]',       new Float64Array());
 
-        if (parts.platform.isInternetExplorer()) {
-          checkType('object',    '[object Object]',                new Map());
-          checkType('object',    '[object Object]',            new WeakMap());
-          checkType('object',    '[object Object]',                new Set());
-        } else {
-          checkType('object',    '[object Map]',                new Map());
-          checkType('object',    '[object WeakMap]',            new WeakMap());
-          checkType('object',    '[object Set]',                new Set());
-          checkType('object',    '[object WeakSet]',            new WeakSet());
-          checkType('symbol',    '[object Symbol]',             Symbol());
-        }
+        checkType('object',    '[object Map]',                new Map());
+        checkType('object',    '[object WeakMap]',            new WeakMap());
+        checkType('object',    '[object Set]',                new Set());
+        checkType('object',    '[object WeakSet]',            new WeakSet());
+        checkType('symbol',    '[object Symbol]',             Symbol());
 
         checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
         if (parts.platform.isChrome()
@@ -124,38 +119,29 @@ const test_execute_type = (parts) => {
           checkType('object',    '[object Atomics]',            Atomics);
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkType('object',    '[object Object]',             new DataView(new ArrayBuffer(16)));
-        } else {
-          checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
-        }
+        checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
         checkType('object',    '[object JSON]',               JSON);
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkType('function',  '[object Function]',           Promise);
+        checkType('function',  '[object Function]',           Promise);
+
+        function* Generator() { yield 1; yield 2; yield 3; }
+        var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
+        var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+        if (parts.platform.buildMode === 'source') {
+          checkType('object',     '[object Generator]',         Generator());
+          checkType('function',   '[object GeneratorFunction]', new GeneratorFunction());
+          checkType('function',   '[object AsyncFunction]',     new AsyncFunction());
+        } else {
+          checkType('object',     '[object Generator]',         Generator());
+          checkType('object',     '[object GeneratorFunction]', new GeneratorFunction());
+          checkType('function',   '[object Function]',          new AsyncFunction());
         }
 
-        // ------
-        // function* Generator() { yield 1; yield 2; yield 3; }
-        // var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
-        // var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
-        // // eslint-disable-next-line new-cap
-        // checkType('object',    '[object Generator]',          Generator());
-        // checkType('function',  '[object GeneratorFunction]',  new GeneratorFunction());
-        // checkType('function',  '[object AsyncFunction]',      new AsyncFunction());
-        // ------
-        // Even if you combine the above settings,
-        // comment out because it does not work well in any environment
-        // ------
-        //  npm install @babel/polyfill --save-dev
-        //  webpack.config.js
-        //    entry: ['@babel/polyfill', './src/index.js']
-        //  babel.config.js
-        //    const presets =  [ ['@babel/preset-env', { 'targets': { 'node': true } }] ];
-        // ------
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkType('object',    '[object Object]',             Reflect);
+        checkType('object',    '[object Object]',             Reflect);
+        if (parts.platform.isInternetExplorer()) {
+          // no define Proxy
+          // no define WebAssembly
+        } else {
           checkType('object',    '[object Object]',             new Proxy({}, {}));
           checkType('object',    '[object WebAssembly]',        WebAssembly);
         }
@@ -827,9 +813,6 @@ const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
 
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
@@ -843,29 +826,16 @@ const test_execute_type = (parts) => {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(false, isMapAll(new Map()));
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(false, isWeakMapAll(new WeakMap()));
+        checkEqual(false, isMapAll({}));
+        checkEqual(false, isWeakMapAll({}));
+        checkEqual(true,  isMapAll(new Map()));
+        checkEqual(false, isWeakMapAll(new Map()));
+        checkEqual(false, isMapAll(new WeakMap()));
+        checkEqual(true,  isWeakMapAll(new WeakMap()));
 
-          checkEqual(true,  isObjectAll({}));
-          checkEqual(true,  isObjectAll(new Map()));
-          checkEqual(true,  isObjectAll(new WeakMap()));
-        } else {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(true,  isMapAll(new Map()));
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(true,  isWeakMapAll(new WeakMap()));
-
-          checkEqual(true,  isObjectAll({}));
-          checkEqual(false, isObjectAll(new Map()));
-          checkEqual(false, isObjectAll(new WeakMap()));
-        }
+        checkEqual(true,  isObjectAll({}));
+        checkEqual(false, isObjectAll(new Map()));
+        checkEqual(false, isObjectAll(new WeakMap()));
       });
     };
 
@@ -876,18 +846,12 @@ const test_execute_type = (parts) => {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false,  isSetAll(new Set()));
-          checkEqual(false, isWeakSetAll(new Set()));
-        } else {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false, isWeakSetAll({}));
-          checkEqual(true,  isSetAll(new Set()));
-          checkEqual(false, isWeakSetAll(new Set()));
-          checkEqual(false, isSetAll(new WeakSet()));
-          checkEqual(true,  isWeakSetAll(new WeakSet()));
-        }
+        checkEqual(false, isSetAll({}));
+        checkEqual(false, isWeakSetAll({}));
+        checkEqual(true,  isSetAll(new Set()));
+        checkEqual(false, isWeakSetAll(new Set()));
+        checkEqual(false, isSetAll(new WeakSet()));
+        checkEqual(true,  isWeakSetAll(new WeakSet()));
 
       });
     };
