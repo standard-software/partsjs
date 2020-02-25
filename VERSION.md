@@ -2,6 +2,18 @@
 
 ## Version
 
+### 4.2.0
+#### 2020/02/26(Wed)
+- update package.json
+- add ./release_build/test_parts.js
+- update platform.name
+  - isWebBrowser/isWindowsScriptHost/isGoogleAppsScript/isNodeJs
+- update platform.browserName
+  - isChrome/isFirefox/isEdge/isInternetExplorer/isSafari/isOpera
+- add @babel/polyfill
+  - support IE polyfill
+- delete parts polyfill.js
+
 ### 4.1.0
 ### 2020/02/11(Tue)
 - update README.md

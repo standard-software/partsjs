@@ -234,6 +234,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 4.2.0
+#### 2020/02/26(Wed)
 - update package.json
 - add ./release_build/test_parts.js
 - update platform.name
@@ -245,7 +246,7 @@ You can now use the functions of the parts.js object.
 - delete parts polyfill.js
 
 ### 4.1.0
-### 2020/02/11(Tue)
+#### 2020/02/11(Tue)
 - update README.md
   - Operation check Google Apps Script Rhino and V8
   - Operation check Google Spreadsheet
