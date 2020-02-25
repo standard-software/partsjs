@@ -1,47 +1,37 @@
-const {
-  isUndefined, isNull, isNaNStrict,
-  isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
-  isArray, isArrayType,
-  isDate, isRegExp,
-  isException,
-  isBooleanObject, isNumberObject, isStringObject,
-  isSymbol,
-  isMap, isWeakMap,
-  isSet, isWeakSet,
-} = require('../type/type.js');
-
-const isBrowser = () => {
+const isWebBrowser = () => {
   return typeof window !== 'undefined';
 };
 
-const isWsh = () => {
+const isWindowsScriptHost = () => {
   return typeof WScript !== 'undefined';
 };
 
-const isGas = () => {
+const isGoogleAppsScript = () => {
   return typeof Browser !== 'undefined';
 };
 
-// const isSpreadSheet = () => {
-//   return typeof SpreadsheetApp !== 'undefined';
-// };
+const isNodeJs = () => {
+  return name() === 'Node.js';
+};
 
 const name = () => {
   let result;
 
-  if (isWsh()) {
-    result = 'wsh';
-  } else if (isBrowser()) {
-    result = 'web';
-  } else if (isGas()) {
-    result = 'gas';
+  if (isWindowsScriptHost()) {
+    result = 'WindowsScriptHost';
+  } else if (isWebBrowser()) {
+    result = 'WebBrowser';
+  } else if (isGoogleAppsScript()) {
+    result = 'GoogleAppsScript';
   } else {
-    result = 'node';
+    result = 'Node.js';
   };
 
   if ([
-    'node', 'wsh', 'web', 'gas',
+    'WindowsScriptHost',
+    'WebBrowser',
+    'GoogleAppsScript',
+    'Node.js',
   ].indexOf(result) === -1) {
     throw new Error('platform name error');
   }
@@ -51,45 +41,78 @@ const name = () => {
 const browserName = () => {
   let result = '';
 
-  if (isBrowser()) {
+  if (isWebBrowser()) {
     const ua = window.navigator.userAgent.toLowerCase();
     if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
-      result = 'ie';
+      result = 'InternetExplorer';
     } else if (ua.indexOf('edge') !== -1) {
-      result = 'edge';
+      result = 'Edge';
     } else if (ua.indexOf('opr') !== -1) {
-      result = 'opera';
+      result = 'Opera';
     } else if (ua.indexOf('chrome') !== -1) {
-      result = 'chrome';
+      result = 'Chrome';
     } else if (ua.indexOf('safari') !== -1) {
-      result = 'safari';
+      result = 'Safari';
     } else if (ua.indexOf('firefox') !== -1) {
-      result = 'firefox';
+      result = 'Firefox';
     } else {
       result = 'other';
     }
   }
 
-  if (result === '') {
-    result = 'noBrowser';
-  }
-
   if ([
-    'chrome', 'firefox',
-    'edge', 'ie',
-    'safari', 'opera',
+    'Chrome',
+    'Firefox',
+    'Edge',
+    'InternetExplorer',
+    'Safari',
+    'Opera',
     'other',
-    'noBrowser',
+    '',
   ].indexOf(result) === -1) {
     throw new Error('platform browserName error');
   }
   return result;
 };
 
+
+const isChrome = () => {
+  return browserName() === 'Chrome';
+};
+
+const isFirefox = () => {
+  return browserName() === 'Firefox';
+};
+
+const isEdge = () => {
+  return browserName() === 'Edge';
+};
+
+const isInternetExplorer = () => {
+  return browserName() === 'InternetExplorer';
+};
+
+const isSafari = () => {
+  return browserName() === 'Safari';
+};
+
+const isOpera = () => {
+  return browserName() === 'Opera';
+};
+
+
 module.exports = {
-  isBrowser,
-  isWsh,
-  isAppsScript: isGas,
   name,
+  isWebBrowser,
+  isWindowsScriptHost,
+  isGoogleAppsScript,
+  isNodeJs,
+
   browserName,
+  isChrome,
+  isFirefox,
+  isEdge,
+  isInternetExplorer,
+  isSafari,
+  isOpera,
 };

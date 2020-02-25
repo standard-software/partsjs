@@ -31,11 +31,18 @@ _copyProperty(_root, propertyNames.ROOT, rootNames);
 
 // platform
 propertyNames.PLATFORM =
-  'isBrowser,' +
-  'isWsh,' +
-  'isAppsScript,' +
   'name,' +
+  'isWebBrowser,' +
+  'isWindowsScriptHost,' +
+  'isGoogleAppsScript,' +
+  'isNodeJs,' +
   'browserName,' +
+  'isChrome,' +
+  'isFirefox,' +
+  'isEdge,' +
+  'isInternetExplorer,' +
+  'isSafari,' +
+  'isOpera,' +
   '';
 const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 

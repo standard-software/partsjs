@@ -236,8 +236,10 @@ You can now use the functions of the parts.js object.
 ### 4.2.0
 - update package.json
 - add ./release_build/test_parts.js
-- add isGas
 - update platform.name
+  - isWebBrowser/isWindowsScriptHost/isGoogleAppsScript/isNodeJs
+- update platform.browserName
+  - isChrome/isFirefox/isEdge/isInternetExplorer/isSafari/isOpera
 
 ### 4.1.0
 ### 2020/02/11(Tue)
