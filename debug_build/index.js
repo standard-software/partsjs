@@ -118,8 +118,8 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, midian,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + 'some, all, every,' + 'isFirst, isLast, isBothEnds,' + 'operation,' + '';
-propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, midian,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + 'some, all, every,' + 'isFirst, isLast, isBothEnds,' + 'operation,' + '';
+propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
 

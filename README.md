@@ -236,6 +236,7 @@ You can now use the functions of the parts.js object.
 ### 4.3.0
 #### 2020/02/27(Thu)
 - update testcode for polyfill
+- rename midian >> median(misstake!!)
 
 ### 4.2.0
 #### 2020/02/26(Wed)

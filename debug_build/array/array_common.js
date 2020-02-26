@@ -143,11 +143,11 @@ var average = function average(array) {
   return _average(array);
 };
 /**
- * midian
+ * median
  */
 
 
-var _midian = function _midian(array) {
+var _median = function _median(array) {
   var sortedArray = _cloneDeep(array);
 
   sortedArray.sort(function (a, b) {
@@ -164,12 +164,12 @@ var _midian = function _midian(array) {
   }
 };
 
-var midian = function midian(array) {
+var median = function median(array) {
   if (!isArray(array)) {
-    throw new TypeError('midian args(array) is not array');
+    throw new TypeError('median args(array) is not array');
   }
 
-  return _midian(array);
+  return _median(array);
 };
 /**
  * mode
@@ -681,7 +681,7 @@ module.exports = (_module$exports = {
   _max: _max,
   _sum: _sum,
   _average: _average,
-  _midian: _midian,
+  _median: _median,
   _mode: _mode,
   _unique: _unique,
   _single: _single,
@@ -703,7 +703,7 @@ module.exports = (_module$exports = {
   max: max,
   sum: sum,
   average: average,
-  midian: midian,
+  median: median,
   mode: mode,
   unique: unique,
   single: single,

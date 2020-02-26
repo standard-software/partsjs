@@ -178,7 +178,7 @@ rootNames.objectToString = _type.objectToString;
 propertyNames.ARRAY_PUBLIC =
   'from,' +
   'min, max,' +
-  'sum, average, midian,' +
+  'sum, average, median,' +
   'mode,' +
   'unique, single, multiple,' +
   'filter, map, count,' +
@@ -192,7 +192,7 @@ propertyNames.ARRAY_PUBLIC =
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +
-  'sum, average, midian,' +
+  'sum, average, median,' +
   '';
 const array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
 _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);

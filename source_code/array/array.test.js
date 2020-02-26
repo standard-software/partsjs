@@ -123,10 +123,10 @@ const test_execute_array = (parts) => {
       });
     };
 
-    const test_midian = () => {
-      it('test_midian', () => {
-        checkEqual(71, array.midian([70, 72, 80, 52, 52, 100]));
-        checkEqual(10, array.midian([9, 9, 10, 10, 10, 100, 6]));
+    const test_median = () => {
+      it('test_median', () => {
+        checkEqual(71, array.median([70, 72, 80, 52, 52, 100]));
+        checkEqual(10, array.median([9, 9, 10, 10, 10, 100, 6]));
       });
     };
 
@@ -702,7 +702,7 @@ const test_execute_array = (parts) => {
 
     test_sum();
     test_average();
-    test_midian();
+    test_median();
     test_mode();
 
     test_uniqe();

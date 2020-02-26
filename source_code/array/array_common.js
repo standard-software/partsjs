@@ -126,9 +126,9 @@ const average = (array) => {
 };
 
 /**
- * midian
+ * median
  */
-const _midian = (array) => {
+const _median = (array) => {
   const sortedArray = _cloneDeep(array);
   sortedArray.sort((a, b) => {
     return a - b;
@@ -146,13 +146,13 @@ const _midian = (array) => {
   }
 };
 
-const midian = (array) => {
+const median = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
-      'midian args(array) is not array',
+      'median args(array) is not array',
     );
   }
-  return _midian(array);
+  return _median(array);
 };
 
 /**
@@ -627,7 +627,7 @@ const isBothEnds = (array, value) => {
 
 module.exports = {
   _min, _max,
-  _sum, _average, _midian,
+  _sum, _average, _median,
   _mode,
   _unique, _single, _multiple,
   _filter, _map, _count,
@@ -640,7 +640,7 @@ module.exports = {
 
   from,
   min, max,
-  sum, average, midian,
+  sum, average, median,
   mode,
   unique, single, multiple,
   filter, map, count,
