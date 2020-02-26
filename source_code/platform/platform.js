@@ -32,7 +32,7 @@ const name = () => {
     'WebBrowser',
     'GoogleAppsScript',
     'Node.js',
-  ].indexOf(result) === -1) {
+  ].includes(result) === false) {
     throw new Error('platform name error');
   }
   return result;
@@ -43,17 +43,17 @@ const browserName = () => {
 
   if (isWebBrowser()) {
     const ua = window.navigator.userAgent.toLowerCase();
-    if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
+    if (ua.includes('msie') || ua.includes('trident')) {
       result = 'InternetExplorer';
-    } else if (ua.indexOf('edge') !== -1) {
+    } else if (ua.includes('edge')) {
       result = 'Edge';
-    } else if (ua.indexOf('opr') !== -1) {
+    } else if (ua.includes('opr')) {
       result = 'Opera';
-    } else if (ua.indexOf('chrome') !== -1) {
+    } else if (ua.includes('chrome')) {
       result = 'Chrome';
-    } else if (ua.indexOf('safari') !== -1) {
+    } else if (ua.includes('safari')) {
       result = 'Safari';
-    } else if (ua.indexOf('firefox') !== -1) {
+    } else if (ua.includes('firefox')) {
       result = 'Firefox';
     } else {
       result = 'other';
@@ -69,7 +69,7 @@ const browserName = () => {
     'Opera',
     'other',
     '',
-  ].indexOf(result) === -1) {
+  ].includes(result) === false) {
     throw new Error('platform browserName error');
   }
   return result;

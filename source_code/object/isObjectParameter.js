@@ -39,9 +39,9 @@ const isObjectParameter = (
   let propMatchCount = 0;
   for (const property in object) {
     if (object.hasOwnProperty(property)) {
-      if (props.indexOf(property) !== -1) {
+      if (props.includes(property)) {
         propMatchCount += 1;
-      } else if (defaultProps.indexOf(property) !== -1) {
+      } else if (defaultProps.includes(property)) {
       } else {
         return false;
       }
