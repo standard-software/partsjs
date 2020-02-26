@@ -853,6 +853,9 @@ const test_execute_type = (parts) => {
         checkEqual(false, isSetAll(new WeakSet()));
         checkEqual(true,  isWeakSetAll(new WeakSet()));
 
+        checkEqual(true,  isObjectAll({}));
+        checkEqual(false, isObjectAll(new Set()));
+        checkEqual(false, isObjectAll(new WeakSet()));
       });
     };
 

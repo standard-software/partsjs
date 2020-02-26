@@ -802,6 +802,7 @@ const test_execute_compare = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+
         // Set
         var set1 = new Set();
         set1.add('a'); set1.add('b');
@@ -1722,17 +1723,14 @@ const test_execute_compare = (parts) => {
     const test_includes = () => {
       it('test_includes', () => {
 
-        if (!parts.platform.isWindowsScriptHost()) {
+        checkEqual(true,  'abc'.includes('a'));
 
-          checkEqual(true,  'abc'.includes('a'));
+        // string.includes strange empty string
+        checkEqual(true,  'abc'.includes(''));
 
-          // string.includes strange empty string
-          checkEqual(true,  'abc'.includes(''));
-
-          checkEqual(false, 'abc'.includes(null));
-          checkEqual(false, 'abc'.includes(undefined));
-          checkEqual(false, 'abc'.includes());
-        }
+        checkEqual(false, 'abc'.includes(null));
+        checkEqual(false, 'abc'.includes(undefined));
+        checkEqual(false, 'abc'.includes());
 
         checkEqual(false, includes('abc', ''));
         checkEqual(true,  includes('abc', 'a'));

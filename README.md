@@ -233,6 +233,10 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 4.3.0
+#### 2020/02/27(Thu)
+- update testcode for polyfill
+
 ### 4.2.0
 #### 2020/02/26(Wed)
 - update package.json
