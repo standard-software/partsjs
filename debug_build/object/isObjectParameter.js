@@ -46,9 +46,9 @@ var isObjectParameter = function isObjectParameter(object, props) {
 
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
-      if (props.indexOf(property) !== -1) {
+      if (props.includes(property)) {
         propMatchCount += 1;
-      } else if (defaultProps.indexOf(property) !== -1) {} else {
+      } else if (defaultProps.includes(property)) {} else {
         return false;
       }
     }

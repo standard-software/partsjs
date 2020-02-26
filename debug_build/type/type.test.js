@@ -939,6 +939,9 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(false, isWeakSetAll(new Set()));
         checkEqual(false, isSetAll(new WeakSet()));
         checkEqual(true, isWeakSetAll(new WeakSet()));
+        checkEqual(true, isObjectAll({}));
+        checkEqual(false, isObjectAll(new Set()));
+        checkEqual(false, isObjectAll(new WeakSet()));
       });
     };
 

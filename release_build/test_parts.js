@@ -1146,7 +1146,7 @@ var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Arr
 
 
 var isArrayType = function isArrayType(value) {
-  if (objectToString(value).indexOf('Array]') !== -1) {
+  if (objectToString(value).includes('Array]')) {
     return true;
   }
 
@@ -19255,6 +19255,9 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(false, isWeakSetAll(new Set()));
         checkEqual(false, isSetAll(new WeakSet()));
         checkEqual(true, isWeakSetAll(new WeakSet()));
+        checkEqual(true, isObjectAll({}));
+        checkEqual(false, isObjectAll(new Set()));
+        checkEqual(false, isObjectAll(new WeakSet()));
       });
     };
 
@@ -21800,15 +21803,12 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.isWindowsScriptHost()) {
-          checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
+        checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
-          checkEqual(true, 'abc'.includes(''));
-          checkEqual(false, 'abc'.includes(null));
-          checkEqual(false, 'abc'.includes(undefined));
-          checkEqual(false, 'abc'.includes());
-        }
-
+        checkEqual(true, 'abc'.includes(''));
+        checkEqual(false, 'abc'.includes(null));
+        checkEqual(false, 'abc'.includes(undefined));
+        checkEqual(false, 'abc'.includes());
         checkEqual(false, includes('abc', ''));
         checkEqual(true, includes('abc', 'a'));
         checkEqual(true, includes('abc', 'b'));

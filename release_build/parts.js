@@ -8765,7 +8765,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(341);
 
-var VERSION = '4.2.0';
+var VERSION = '4.3.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -9449,7 +9449,7 @@ var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Arr
 
 
 var isArrayType = function isArrayType(value) {
-  if (objectToString(value).indexOf('Array]') !== -1) {
+  if (objectToString(value).includes('Array]')) {
     return true;
   }
 
@@ -9717,9 +9717,9 @@ var isObjectParameter = function isObjectParameter(object, props) {
 
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
-      if (props.indexOf(property) !== -1) {
+      if (props.includes(property)) {
         propMatchCount += 1;
-      } else if (defaultProps.indexOf(property) !== -1) {} else {
+      } else if (defaultProps.includes(property)) {} else {
         return false;
       }
     }
@@ -10477,7 +10477,7 @@ var name = function name() {
 
   ;
 
-  if (['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'].indexOf(result) === -1) {
+  if (['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'].includes(result) === false) {
     throw new Error('platform name error');
   }
 
@@ -10490,24 +10490,24 @@ var browserName = function browserName() {
   if (isWebBrowser()) {
     var ua = window.navigator.userAgent.toLowerCase();
 
-    if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
+    if (ua.includes('msie') || ua.includes('trident')) {
       result = 'InternetExplorer';
-    } else if (ua.indexOf('edge') !== -1) {
+    } else if (ua.includes('edge')) {
       result = 'Edge';
-    } else if (ua.indexOf('opr') !== -1) {
+    } else if (ua.includes('opr')) {
       result = 'Opera';
-    } else if (ua.indexOf('chrome') !== -1) {
+    } else if (ua.includes('chrome')) {
       result = 'Chrome';
-    } else if (ua.indexOf('safari') !== -1) {
+    } else if (ua.includes('safari')) {
       result = 'Safari';
-    } else if (ua.indexOf('firefox') !== -1) {
+    } else if (ua.includes('firefox')) {
       result = 'Firefox';
     } else {
       result = 'other';
     }
   }
 
-  if (['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''].indexOf(result) === -1) {
+  if (['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''].includes(result) === false) {
     throw new Error('platform browserName error');
   }
 

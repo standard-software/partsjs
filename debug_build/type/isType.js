@@ -89,7 +89,7 @@ var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Arr
 
 
 var isArrayType = function isArrayType(value) {
-  if (objectToString(value).indexOf('Array]') !== -1) {
+  if (objectToString(value).includes('Array]')) {
     return true;
   }
 

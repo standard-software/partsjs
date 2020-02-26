@@ -31,7 +31,7 @@ var name = function name() {
 
   ;
 
-  if (['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'].indexOf(result) === -1) {
+  if (['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'].includes(result) === false) {
     throw new Error('platform name error');
   }
 
@@ -44,24 +44,24 @@ var browserName = function browserName() {
   if (isWebBrowser()) {
     var ua = window.navigator.userAgent.toLowerCase();
 
-    if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
+    if (ua.includes('msie') || ua.includes('trident')) {
       result = 'InternetExplorer';
-    } else if (ua.indexOf('edge') !== -1) {
+    } else if (ua.includes('edge')) {
       result = 'Edge';
-    } else if (ua.indexOf('opr') !== -1) {
+    } else if (ua.includes('opr')) {
       result = 'Opera';
-    } else if (ua.indexOf('chrome') !== -1) {
+    } else if (ua.includes('chrome')) {
       result = 'Chrome';
-    } else if (ua.indexOf('safari') !== -1) {
+    } else if (ua.includes('safari')) {
       result = 'Safari';
-    } else if (ua.indexOf('firefox') !== -1) {
+    } else if (ua.includes('firefox')) {
       result = 'Firefox';
     } else {
       result = 'other';
     }
   }
 
-  if (['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''].indexOf(result) === -1) {
+  if (['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''].includes(result) === false) {
     throw new Error('platform browserName error');
   }
 
