@@ -132,23 +132,23 @@ const test_execute_array = (parts) => {
 
     const test_mode = () => {
       it('test_mode', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [],
           array.mode([])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [70],
           array.mode([70])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [70, 52],
           array.mode([70, 70, 80, 52, 52, 100])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [52],
           array.mode([70, 70, 80, 52, 52, 52, 100])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [9, 10],
           array.mode([9, 9, 10, 10, 10, 9, 6])
         );
@@ -157,7 +157,7 @@ const test_execute_array = (parts) => {
 
     const test_uniqe = () => {
       it('test_uniqe', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, 4, 0],
           array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
@@ -166,7 +166,7 @@ const test_execute_array = (parts) => {
 
     const test_single = () => {
       it('test_single', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 0],
           array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
@@ -175,7 +175,7 @@ const test_execute_array = (parts) => {
 
     const test_multiple = () => {
       it('test_multiple', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [2, 3, 4],
           array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
@@ -184,21 +184,21 @@ const test_execute_array = (parts) => {
 
     const test_filter = () => {
       it('test_filter', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 2, 4],
           array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 2, 4],
           array.filter([0, 1, 2, 3, 4, 5], isEven)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 3, 5],
           array.filter([0, 1, 2, 3, 4, 5], isOdd)
         );
 
         // Object Named Parameter
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 2, 4],
           array.filter({
             array: [0, 1, 2, 3, 4, 5],
@@ -210,25 +210,25 @@ const test_execute_array = (parts) => {
 
     const test_map = () => {
       it('test_map', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [true, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [true, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], isEven)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [false, true, false, true, false, true],
           array.map([0, 1, 2, 3, 4, 5], isOdd)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 2, 4, 6, 8, 10],
           array.map([0, 1, 2, 3, 4, 5], value => value * 2)
         );
 
         // Object Named Parameter
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [true, false, true, false, true, false],
           array.map({
             array: [0, 1, 2, 3, 4, 5],
@@ -240,21 +240,21 @@ const test_execute_array = (parts) => {
 
     const test_count = () => {
       it('test_count', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           3,
           array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           3,
           array.count([0, 1, 2, 3, 4, 5], isEven)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           3,
           array.count([0, 1, 2, 3, 4, 5], isOdd)
         );
 
         // Object Named Parameter
-        checkCompare(parts.compare.equal,
+        checkEqual(
           3,
           array.count({
             array: [0, 1, 2, 3, 4, 5],
@@ -641,35 +641,35 @@ const test_execute_array = (parts) => {
 
     const test_operation_insert = () => {
       it('test_operation_insert', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3],
           array.operation.insert([1, 2, 3], [])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 1, 2, 3],
           array.operation.insert([1, 2, 3], [0])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 1, 2, 3],
           array.operation.insert([1, 2, 3], [0], 0)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 0, 2, 3],
           array.operation.insert([1, 2, 3], [0], 1)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 0, 3],
           array.operation.insert([1, 2, 3], [0], 2)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, 0],
           array.operation.insert([1, 2, 3], [0], 3)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [-1, 0, 1, 2, 3],
           array.operation.insert([1, 2, 3], [-1, 0])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, -1, 0, 2, 3],
           array.operation.insert([1, 2, 3], [-1, 0], 1)
         );
@@ -686,7 +686,7 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, 0],
           array.operation.insert({
             array: [1, 2, 3],
@@ -699,35 +699,35 @@ const test_execute_array = (parts) => {
 
     const test_operation_add = () => {
       it('test_operation_add', () => {
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3],
           array.operation.add([1, 2, 3], [])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, 0],
           array.operation.add([1, 2, 3], [0])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [0, 1, 2, 3],
           array.operation.add([1, 2, 3], [0], -1)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 0, 2, 3],
           array.operation.add([1, 2, 3], [0], 0)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 0, 3],
           array.operation.add([1, 2, 3], [0], 1)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, 0],
           array.operation.add([1, 2, 3], [0], 2)
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, -1, 0],
           array.operation.add([1, 2, 3], [-1, 0])
         );
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, -1, 0, 3],
           array.operation.add([1, 2, 3], [-1, 0], 1)
         );
@@ -744,7 +744,7 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkCompare(parts.compare.equal,
+        checkEqual(
           [1, 2, 3, 0],
           array.operation.add({
             array: [1, 2, 3],

@@ -14,26 +14,18 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
-  _clone, _cloneDeep,
-} = require('../root/clone.js');
+  _isFirst, _isLast,
+} = require('../array/array_common.js');
 
 /**
- * array.insert
+ * array.operation.insert
  */
-const _insert = (
-  array,
-  values,
-  index = 0,
-) => {
+const _insert = (array, values, index = 0) => {
   array.splice(index, 0, ...values);
   return array;
 };
 
-const insert = (
-  array,
-  values,
-  index = 0,
-) => {
+const insert = (array, values, index = 0) => {
   if (isObjectParameter(array, 'array, values, index')) {
     ({ array, values, index } = array);
   }
@@ -63,22 +55,14 @@ const insert = (
 };
 
 /**
- * array.add
+ * array.operation.add
  */
-const _add = (
-  array,
-  values,
-  index = array.length - 1,
-) => {
+const _add = (array, values, index = array.length - 1) => {
   array.splice(index + 1, 0, ...values);
   return array;
 };
 
-const add = (
-  array,
-  values,
-  index = array.length - 1,
-) => {
+const add = (array, values, index = array.length - 1) => {
   if (isObjectParameter(array, 'array, values, index')) {
     ({ array, values, index } = array);
   }
@@ -286,6 +270,7 @@ const excludeLast = (array, value) => {
 };
 
 module.exports = {
+  _insert, _add,
   _deleteLength, _deleteIndex,
   _includeFirst, _includeLast,
   _excludeFirst, _excludeLast,
