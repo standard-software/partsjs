@@ -242,6 +242,8 @@ You can now use the functions of the parts.js object.
 - update array isBothEnds
 - add array.operation
   - includeFirst/includeLast/excludeFirst/excludeLast
+- rename array delete >> deleteLength
+- add array deleteIndex
 
 ### 4.2.0
 #### 2020/02/26(Wed)

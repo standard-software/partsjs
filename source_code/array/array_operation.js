@@ -108,48 +108,90 @@ const add = (
 };
 
 /**
- * array.delete
+ * array.operation.deleteLength
  */
-const _delete = (
-  array,
-  index,
-  deleteCount = 1,
-) => {
-  array.splice(index, deleteCount);
+const _deleteLength = (array, index, length) => {
+  array.splice(index, length);
   return array;
 };
 
-const deleteLength = (
-  array,
-  index,
-  deleteCount = 1,
-) => {
-  if (isObjectParameter(array, 'array, index, deleteCount')) {
-    ({ array, index, deleteCount } = array);
+const deleteLength = (array, index, length) => {
+  if (isObjectParameter(array, 'array, index, length')) {
+    ({ array, index, length } = array);
   }
 
   if (!isArray(array)) {
     throw new TypeError(
-      'delete args(array) is not array',
+      'deleteLength args(array) is not array',
     );
   }
   if (!isInteger(index)) {
     throw new TypeError(
-      'delete args(index) is not integer',
+      'deleteLength args(index) is not integer',
     );
   }
-  if (!isInteger(deleteCount)) {
+  if (!isInteger(length)) {
     throw new TypeError(
-      'delete args(deleteCount) is not integer',
+      'deleteLength args(length) is not integer',
     );
   }
-  if (!_inRange(index, 0, array.length - deleteCount)) {
+  if (!_inRange(index, 0, array.length - 1)) {
     throw new RangeError(
-      'delete args(index) must be from 0 to array.length - args deleteCount',
+      'deleteLength args(index) must be from 0 to array.length - 1',
     );
   }
-  if (deleteCount <= 0) {
+  if (!_inRange(length, 1, array.length - index)) {
     throw new RangeError(
+      'deleteLength args(length) must be from 1 to array.length - index',
+    );
+  }
+
+  return _deleteLength(array, index, length);
+};
+
+/**
+ * array.operation.deleteIndex
+ */
+const _deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
+  array.splice(indexFirst, indexLast - indexFirst + 1);
+  return array;
+};
+
+const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
+  if (isObjectParameter(array, 'array, indexFirst', 'indexLast')) {
+    ({ array, indexFirst, indexLast = indexFirst } = array);
+  } else if (isObjectParameter(array, 'array, index')) {
+    ({ array, index: indexFirst, indexLast = indexFirst } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'deleteIndex args(array) is not array',
+    );
+  }
+  if (!isInteger(indexFirst)) {
+    throw new TypeError(
+      'deleteIndex args(indexFirst) is not integer',
+    );
+  }
+  if (!isInteger(indexLast)) {
+    throw new TypeError(
+      `deleteIndex args(indexLast) is not integer`,
+    );
+  }
+  if (!_inRange(indexFirst, 0, array.length - 1)) {
+    throw new RangeError(
+      'deleteIndex args(indexFirst) must be from 0 to array.length - 1',
+    );
+  }
+  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+    throw new RangeError(
+      'deleteIndex args(indexLast) must be from indexFirst to array.length - 1',
+    );
+  }
+
+  return _deleteIndex(array, indexFirst, indexLast);
+};
 
 /**
  * array.operation.includeFirst
@@ -244,10 +286,12 @@ const excludeLast = (array, value) => {
 };
 
 module.exports = {
+  _deleteLength, _deleteIndex,
   _includeFirst, _includeLast,
   _excludeFirst, _excludeLast,
 
   insert, add,
+  deleteLength, deleteIndex,
   includeFirst, includeLast,
   excludeFirst, excludeLast,
 };

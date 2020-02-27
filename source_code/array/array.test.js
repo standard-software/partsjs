@@ -732,6 +732,120 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_operation_deleteLength = () => {
+      it('test_operation_deleteLength', () => {
+        checkEqual(
+          [1, 3],
+          array.operation.deleteLength([1, 2, 3], 1, 1)
+        );
+        checkEqual(
+          [3],
+          array.operation.deleteLength([1, 2, 3], 0, 2)
+        );
+        checkEqual(
+          [1],
+          array.operation.deleteLength([1, 2, 3], 1, 2)
+        );
+
+        // exception
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], [0], 1);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], 1, 0);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], 0, 1);
+        }));
+        checkEqual(false, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], 0, 2);
+        }));
+        checkEqual(false, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], 0, 3);
+        }));
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], 0, 4);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteLength([1, 2, 3], -1, 2);
+        }, 'RangeError'));
+
+        // Object Named Parameter
+        checkEqual(
+          [0, 3],
+          array.operation.deleteLength({
+            array: [0, 1, 2, 3],
+            index: 1,
+            length: 2,
+          })
+        );
+      });
+    };
+
+    const test_operation_deleteIndex = () => {
+      it('test_operation_deleteIndex', () => {
+        checkEqual(
+          [1, 3],
+          array.operation.deleteIndex([1, 2, 3], 1, 1)
+        );
+        checkEqual(
+          [3],
+          array.operation.deleteIndex([1, 2, 3], 0, 1)
+        );
+        checkEqual(
+          [1],
+          array.operation.deleteIndex([1, 2, 3], 1, 2)
+        );
+
+        // exception
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], [0], 1);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], 1, 0);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], 0, 0);
+        }));
+        checkEqual(false, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], 0, 1);
+        }));
+        checkEqual(false, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], 0, 2);
+        }));
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], 0, 3);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          array.operation.deleteIndex([1, 2, 3], -1);
+        }, 'RangeError'));
+
+        // Object Named Parameter
+        checkEqual(
+          [0, 2, 3],
+          array.operation.deleteIndex({
+            array: [0, 1, 2, 3],
+            index: 1,
+          })
+        );
+        checkEqual(
+          [0, 2, 3],
+          array.operation.deleteIndex({
+            array: [0, 1, 2, 3],
+            indexFirst: 1,
+          })
+        );
+        checkEqual(
+          [0, 3],
+          array.operation.deleteIndex({
+            array: [0, 1, 2, 3],
+            indexFirst: 1,
+            indexLast: 2,
+          })
+        );
+      });
+    };
+
 
     test_array_from();
 
@@ -767,6 +881,8 @@ const test_execute_array = (parts) => {
 
     test_operation_insert();
     test_operation_add();
+    test_operation_deleteLength();
+    test_operation_deleteIndex();
   });
 };
 
