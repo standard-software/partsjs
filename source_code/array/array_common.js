@@ -621,9 +621,88 @@ const isBothEnds = (array, value) => {
     );
   }
 
-  return _isBothEnds(array, value);
+
+/**
+ * subIndex
+ */
+const _subIndex = (array, indexFirst, indexLast) => {
+  return array.slice(indexFirst, indexLast + 1);
 };
 
+const subIndex = (array, indexFirst, indexLast) => {
+  if (isObjectParameter(array, 'array, indexFirst, indexLast')) {
+    ({ array, indexFirst, indexLast } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'subIndex args(array) is not array',
+    );
+  }
+  if (!isInteger(indexFirst)) {
+    throw new TypeError(
+      'subIndex args(indexFirst) is not integer',
+    );
+  }
+  if (!_inRange(indexFirst, 0, array.length - 1)) {
+    throw new RangeError(
+      'subIndex args(indexFirst) must be from 0 to array.length - 1',
+    );
+  }
+  if (!isInteger(indexLast)) {
+    throw new TypeError(
+      'subIndex args(indexLast) is not integer',
+    );
+  }
+  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+    throw new RangeError(
+      'subIndex args(indexLast) must be from 0 to array.length - 1',
+    );
+  }
+
+  return _subIndex(array, indexFirst, indexLast);
+};
+
+/**
+ * subLength
+ */
+const _subLength = (array, index, length) => {
+  return array.slice(index, index + length);
+};
+
+const subLength = (array, index, length) => {
+  if (isObjectParameter(array, 'array, index, length')) {
+    ({ array, index, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'subLength args(array) is not array',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'subLength args(index) is not integer',
+    );
+  }
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError(
+      'subLength args(index) must be from 0 to array.length - 1',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'subLength args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, array.length - 1)) {
+    throw new RangeError(
+      'subLength args(length) must be from 0 to array.length - 1',
+    );
+  }
+
+  return _subLength(array, index, length);
+};
 
 module.exports = {
   _min, _max,
@@ -637,6 +716,7 @@ module.exports = {
   _findLast,
   _some, _all,
   _isFirst, _isLast, _isBothEnds,
+  _subIndex, _subLength,
 
   from,
   min, max,
@@ -650,6 +730,7 @@ module.exports = {
   findLast,
   some, all, every,
   isFirst, isLast, isBothEnds,
+  subIndex, subLength,
 
   findIndex, findBackIndex,
   find, findBack,

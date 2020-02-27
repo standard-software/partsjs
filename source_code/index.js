@@ -188,6 +188,7 @@ propertyNames.ARRAY_PUBLIC =
   'findBack, findLast,' +
   'some, all, every,' +
   'isFirst, isLast, isBothEnds,' +
+  'subIndex, subLength,' +
   'operation,' +
   '';
 propertyNames.ARRAY_ROOT =

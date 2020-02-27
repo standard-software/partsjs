@@ -3,10 +3,12 @@ const test_execute_index = (parts) => {
   console.log(`parts.js version: ${parts.VERSION}`);
   console.log(`platform: ${parts.platform.name()}`);
   if (parts.platform.isWebBrowser()) {
-    console.log(`web browser: ${parts.platform.browserName()}`);
-    console.log(`User Agent: ${window.navigator.userAgent}`);
+    console.log(`  web browser: ${parts.platform.browserName()}`);
+    console.log(`  User Agent: ${window.navigator.userAgent}`);
   }
-  console.log(`buildMode: ${parts.platform.buildMode}`);
+  if (parts.platform.buildMode !== '') {
+    console.log(`  buildMode: ${parts.platform.buildMode}`);
+  }
   console.log('test start');
 
   const { test_execute_root         } = require('./root/root.test.js');
@@ -41,7 +43,7 @@ const test_execute_index = (parts) => {
         checkEqual(7,   propertyCount(parts.number));
         checkEqual(6,   propertyCount(parts.string));
         checkEqual(12,  propertyCount(parts.object));
-        checkEqual(28,  propertyCount(parts.array));
+        checkEqual(30,  propertyCount(parts.array));
         checkEqual(true,
           inProperty(
             parts,

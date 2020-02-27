@@ -578,6 +578,44 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_array_subIndex = () => {
+      it('test_array_subIndex', () => {
+        var array1 = [0, 1, 2];
+        checkEqual([1],       array.subIndex(array1, 1, 1));
+        checkEqual([0, 1],    array.subIndex(array1, 0, 1));
+        checkEqual([1, 2],    array.subIndex(array1, 1, 2));
+        checkEqual([0, 1, 2], array1);
+
+        // Object Named Parameter
+        checkEqual(['A', 'B'],
+          array.subIndex({
+            array: ['A', 'B', 'A'],
+            indexFirst: 0,
+            indexLast: 1,
+          })
+        );
+      });
+    };
+
+    const test_array_subLength = () => {
+      it('test_array_subLength', () => {
+        var array1 = [0, 1, 2];
+        checkEqual([1],       array.subLength(array1, 1, 1));
+        checkEqual([0, 1],    array.subLength(array1, 0, 2));
+        checkEqual([1, 2],    array.subLength(array1, 1, 2));
+        checkEqual([0, 1, 2], array1);
+
+        // Object Named Parameter
+        checkEqual(['A', 'B'],
+          array.subLength({
+            array: ['A', 'B', 'A'],
+            index:  0,
+            length: 2,
+          })
+        );
+      });
+    };
+
     const test_operation_insert = () => {
       it('test_operation_insert', () => {
         checkCompare(parts.compare.equal,
@@ -723,6 +761,9 @@ const test_execute_array = (parts) => {
     test_isFirst();
     test_isLast();
     test_isBothEnds();
+
+    test_array_subIndex();
+    test_array_subLength();
 
     test_operation_insert();
     test_operation_add();
