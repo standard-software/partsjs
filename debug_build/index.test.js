@@ -5,11 +5,14 @@ var test_execute_index = function test_execute_index(parts) {
   console.log("platform: ".concat(parts.platform.name()));
 
   if (parts.platform.isWebBrowser()) {
-    console.log("web browser: ".concat(parts.platform.browserName()));
-    console.log("User Agent: ".concat(window.navigator.userAgent));
+    console.log("  web browser: ".concat(parts.platform.browserName()));
+    console.log("  User Agent: ".concat(window.navigator.userAgent));
   }
 
-  console.log("buildMode: ".concat(parts.platform.buildMode));
+  if (parts.platform.buildMode !== '') {
+    console.log("  buildMode: ".concat(parts.platform.buildMode));
+  }
+
   console.log('test start');
 
   var _require = require('./root/root.test.js'),
@@ -68,7 +71,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(7, propertyCount(parts.number));
         checkEqual(6, propertyCount(parts.string));
         checkEqual(12, propertyCount(parts.object));
-        checkEqual(28, propertyCount(parts.array));
+        checkEqual(30, propertyCount(parts.array));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it('test_execute_nameSpace 2', function () {

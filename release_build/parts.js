@@ -8853,7 +8853,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + 'some, all, every,' + 'isFirst, isLast, isBothEnds,' + 'operation,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findIndex, findIndexFirst,' + 'findBackIndex, findIndexLast,' + 'find, findFirst,' + 'findBack, findLast,' + 'some, all, every,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'operation,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
@@ -10700,14 +10700,16 @@ var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
   });
 };
 
-var isThrownException = function isThrownException(targetFunc, exceptionName) {
-  if (!(isString(exceptionName) || isUndefined(exceptionName))) {
+var isThrownException = function isThrownException(targetFunc) {
+  var exceptionName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  if (!isString(exceptionName)) {
     throw new TypeError('isThrownException args exceptionName is not string');
   }
 
   return isThrown(targetFunc, function (thrown) {
     if (isException(thrown)) {
-      if (isUndefined(exceptionName)) {
+      if (exceptionName === '') {
         return true;
       }
 
@@ -10781,7 +10783,8 @@ var _require = __webpack_require__(311),
     isException = _require.isException;
 
 var _require2 = __webpack_require__(328),
-    isEven = _require2.isEven;
+    isEven = _require2.isEven,
+    _inRange = _require2._inRange;
 
 var _require3 = __webpack_require__(315),
     isObjectParameter = _require3.isObjectParameter;
@@ -11414,27 +11417,121 @@ var isFirst = function isFirst(array, value) {
 
   return _isFirst(array, value);
 };
+/**
+ * isBothEnds
+ */
 
-var _isBothEnds = function _isBothEnds(array, value) {
+
+var _isBothEnds = function _isBothEnds(array, valueFirst) {
+  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
+
   if (array.length <= 1) {
     return false;
   }
 
-  return _isFirst(array, value) && _isLast(array, value);
+  return _isFirst(array, valueFirst) && _isLast(array, valueLast);
 };
 
-var isBothEnds = function isBothEnds(array, value) {
-  if (isObjectParameter(array, 'array, value')) {
+var isBothEnds = function isBothEnds(array, valueFirst) {
+  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
+
+  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
     var _array12 = array;
     array = _array12.array;
-    value = _array12.value;
+    valueFirst = _array12.valueFirst;
+    var _array12$valueLast = _array12.valueLast;
+    valueLast = _array12$valueLast === void 0 ? valueFirst : _array12$valueLast;
+  } else if (isObjectParameter(array, 'array, value')) {
+    var _array13 = array;
+    array = _array13.array;
+    valueFirst = _array13.value;
+    var _array13$valueLast = _array13.valueLast;
+    valueLast = _array13$valueLast === void 0 ? valueFirst : _array13$valueLast;
   }
 
   if (!isArray(array)) {
     throw new TypeError('isBothEnds args(array) is not array');
   }
 
-  return _isBothEnds(array, value);
+  return _isBothEnds(array, valueFirst, valueLast);
+};
+/**
+ * subIndex
+ */
+
+
+var _subIndex = function _subIndex(array, indexFirst, indexLast) {
+  return array.slice(indexFirst, indexLast + 1);
+};
+
+var subIndex = function subIndex(array, indexFirst, indexLast) {
+  if (isObjectParameter(array, 'array, indexFirst, indexLast')) {
+    var _array14 = array;
+    array = _array14.array;
+    indexFirst = _array14.indexFirst;
+    indexLast = _array14.indexLast;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('subIndex args(array) is not array');
+  }
+
+  if (!isInteger(indexFirst)) {
+    throw new TypeError('subIndex args(indexFirst) is not integer');
+  }
+
+  if (!_inRange(indexFirst, 0, array.length - 1)) {
+    throw new RangeError('subIndex args(indexFirst) must be from 0 to array.length - 1');
+  }
+
+  if (!isInteger(indexLast)) {
+    throw new TypeError('subIndex args(indexLast) is not integer');
+  }
+
+  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+    throw new RangeError('subIndex args(indexLast) must be from 0 to array.length - 1');
+  }
+
+  return _subIndex(array, indexFirst, indexLast);
+};
+/**
+ * subLength
+ */
+
+
+var _subLength = function _subLength(array, index, length) {
+  return array.slice(index, index + length);
+};
+
+var subLength = function subLength(array, index, length) {
+  if (isObjectParameter(array, 'array, index, length')) {
+    var _array15 = array;
+    array = _array15.array;
+    index = _array15.index;
+    length = _array15.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('subLength args(array) is not array');
+  }
+
+  if (!isInteger(index)) {
+    throw new TypeError('subLength args(index) is not integer');
+  }
+
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError('subLength args(index) must be from 0 to array.length - 1');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subLength args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, array.length - 1)) {
+    throw new RangeError('subLength args(length) must be from 0 to array.length - 1');
+  }
+
+  return _subLength(array, index, length);
 };
 
 module.exports = (_module$exports = {
@@ -11459,6 +11556,8 @@ module.exports = (_module$exports = {
   _isFirst: _isFirst,
   _isLast: _isLast,
   _isBothEnds: _isBothEnds,
+  _subIndex: _subIndex,
+  _subLength: _subLength,
   from: from,
   min: min,
   max: max,
@@ -11483,7 +11582,9 @@ module.exports = (_module$exports = {
   every: every,
   isFirst: isFirst,
   isLast: isLast,
-  isBothEnds: isBothEnds
+  isBothEnds: isBothEnds,
+  subIndex: subIndex,
+  subLength: subLength
 }, _defineProperty(_module$exports, "findIndex", findIndex), _defineProperty(_module$exports, "findBackIndex", findBackIndex), _defineProperty(_module$exports, "find", find), _defineProperty(_module$exports, "findBack", findBack), _module$exports);
 
 /***/ }),
@@ -11729,11 +11830,11 @@ var _require2 = __webpack_require__(328),
 var _require3 = __webpack_require__(315),
     isObjectParameter = _require3.isObjectParameter;
 
-var _require4 = __webpack_require__(310),
-    _clone = _require4._clone,
-    _cloneDeep = _require4._cloneDeep;
+var _require4 = __webpack_require__(327),
+    _isFirst = _require4._isFirst,
+    _isLast = _require4._isLast;
 /**
- * array.insert
+ * array.operation.insert
  */
 
 
@@ -11772,7 +11873,7 @@ var insert = function insert(array, values) {
   return _insert(array, values, index);
 };
 /**
- * array.add
+ * array.operation.add
  */
 
 
@@ -11811,53 +11912,209 @@ var add = function add(array, values) {
   return _add(array, values, index);
 };
 /**
- * array.delete
+ * array.operation.deleteLength
  */
 
 
-var _delete = function _delete(array, index) {
-  var deleteCount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  array.splice(index, deleteCount);
+var _deleteLength = function _deleteLength(array, index, length) {
+  array.splice(index, length);
   return array;
 };
 
-var deleteLength = function deleteLength(array, index) {
-  var deleteCount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-
-  if (isObjectParameter(array, 'array, index, deleteCount')) {
+var deleteLength = function deleteLength(array, index, length) {
+  if (isObjectParameter(array, 'array, index, length')) {
     var _array3 = array;
     array = _array3.array;
     index = _array3.index;
-    deleteCount = _array3.deleteCount;
+    length = _array3.length;
   }
 
   if (!isArray(array)) {
-    throw new TypeError('delete args(array) is not array');
+    throw new TypeError('deleteLength args(array) is not array');
   }
 
   if (!isInteger(index)) {
-    throw new TypeError('delete args(index) is not integer');
+    throw new TypeError('deleteLength args(index) is not integer');
   }
 
-  if (!isInteger(deleteCount)) {
-    throw new TypeError('delete args(deleteCount) is not integer');
+  if (!isInteger(length)) {
+    throw new TypeError('deleteLength args(length) is not integer');
   }
 
-  if (!_inRange(index, 0, array.length - deleteCount)) {
-    throw new RangeError('delete args(index) must be from 0 to array.length - args deleteCount');
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError('deleteLength args(index) must be from 0 to array.length - 1');
   }
 
-  if (deleteCount <= 0) {
-    throw new RangeError('delete args(deleteCount) must be >= 1');
+  if (!_inRange(length, 1, array.length - index)) {
+    throw new RangeError('deleteLength args(length) must be from 1 to array.length - index');
   }
 
-  return _delete(array, index, deleteCount);
+  return _deleteLength(array, index, length);
+};
+/**
+ * array.operation.deleteIndex
+ */
+
+
+var _deleteIndex = function _deleteIndex(array, indexFirst) {
+  var indexLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexFirst;
+  array.splice(indexFirst, indexLast - indexFirst + 1);
+  return array;
+};
+
+var deleteIndex = function deleteIndex(array, indexFirst) {
+  var indexLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexFirst;
+
+  if (isObjectParameter(array, 'array, indexFirst', 'indexLast')) {
+    var _array4 = array;
+    array = _array4.array;
+    indexFirst = _array4.indexFirst;
+    var _array4$indexLast = _array4.indexLast;
+    indexLast = _array4$indexLast === void 0 ? indexFirst : _array4$indexLast;
+  } else if (isObjectParameter(array, 'array, index')) {
+    var _array5 = array;
+    array = _array5.array;
+    indexFirst = _array5.index;
+    var _array5$indexLast = _array5.indexLast;
+    indexLast = _array5$indexLast === void 0 ? indexFirst : _array5$indexLast;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('deleteIndex args(array) is not array');
+  }
+
+  if (!isInteger(indexFirst)) {
+    throw new TypeError('deleteIndex args(indexFirst) is not integer');
+  }
+
+  if (!isInteger(indexLast)) {
+    throw new TypeError("deleteIndex args(indexLast) is not integer");
+  }
+
+  if (!_inRange(indexFirst, 0, array.length - 1)) {
+    throw new RangeError('deleteIndex args(indexFirst) must be from 0 to array.length - 1');
+  }
+
+  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+    throw new RangeError('deleteIndex args(indexLast) must be from indexFirst to array.length - 1');
+  }
+
+  return _deleteIndex(array, indexFirst, indexLast);
+};
+/**
+ * array.operation.includeFirst
+ */
+
+
+var _includeFirst = function _includeFirst(array, value) {
+  if (!_isFirst(array, value)) {
+    _insert(array, value);
+  }
+};
+
+var includeFirst = function includeFirst(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array6 = array;
+    array = _array6.array;
+    value = _array6.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('includeFirst args(array) is not array');
+  }
+
+  return _includeFirst(array, value);
+};
+/**
+ * array.operation.includeLast
+ */
+
+
+var _includeLast = function _includeLast(array, value) {
+  if (!_isLast(array, value)) {
+    _add(array, value);
+  }
+};
+
+var includeLast = function includeLast(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array7 = array;
+    array = _array7.array;
+    value = _array7.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('includeLast args(array) is not array');
+  }
+
+  return _includeLast(array, value);
+};
+/**
+ * array.operation.excludeFirst
+ */
+
+
+var _excludeFirst = function _excludeFirst(array, value) {
+  if (_isFirst(array, value)) {
+    _deleteLength(array, 0);
+  }
+};
+
+var excludeFirst = function excludeFirst(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array8 = array;
+    array = _array8.array;
+    value = _array8.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('excludeFirst args(array) is not array');
+  }
+
+  return _excludeFirst(array, value);
+};
+/**
+ * array.operation.excludeLast
+ */
+
+
+var _excludeLast = function _excludeLast(array, value) {
+  if (_isLast(array, value)) {
+    _deleteLength(array, array.length - 1);
+  }
+};
+
+var excludeLast = function excludeLast(array, value) {
+  if (isObjectParameter(array, 'array, value')) {
+    var _array9 = array;
+    array = _array9.array;
+    value = _array9.value;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('excludeLast args(array) is not array');
+  }
+
+  return _excludeLast(array, value);
 };
 
 module.exports = {
+  _insert: _insert,
+  _add: _add,
+  _deleteLength: _deleteLength,
+  _deleteIndex: _deleteIndex,
+  _includeFirst: _includeFirst,
+  _includeLast: _includeLast,
+  _excludeFirst: _excludeFirst,
+  _excludeLast: _excludeLast,
   insert: insert,
   add: add,
-  "delete": deleteLength
+  deleteLength: deleteLength,
+  deleteIndex: deleteIndex,
+  includeFirst: includeFirst,
+  includeLast: includeLast,
+  excludeFirst: excludeFirst,
+  excludeLast: excludeLast
 };
 
 /***/ }),

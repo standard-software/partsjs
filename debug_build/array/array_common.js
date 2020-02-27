@@ -20,7 +20,8 @@ var _require = require('../type/type.js'),
     isException = _require.isException;
 
 var _require2 = require('../number/number.js'),
-    isEven = _require2.isEven;
+    isEven = _require2.isEven,
+    _inRange = _require2._inRange;
 
 var _require3 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require3.isObjectParameter;
@@ -653,27 +654,121 @@ var isFirst = function isFirst(array, value) {
 
   return _isFirst(array, value);
 };
+/**
+ * isBothEnds
+ */
 
-var _isBothEnds = function _isBothEnds(array, value) {
+
+var _isBothEnds = function _isBothEnds(array, valueFirst) {
+  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
+
   if (array.length <= 1) {
     return false;
   }
 
-  return _isFirst(array, value) && _isLast(array, value);
+  return _isFirst(array, valueFirst) && _isLast(array, valueLast);
 };
 
-var isBothEnds = function isBothEnds(array, value) {
-  if (isObjectParameter(array, 'array, value')) {
+var isBothEnds = function isBothEnds(array, valueFirst) {
+  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
+
+  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
     var _array12 = array;
     array = _array12.array;
-    value = _array12.value;
+    valueFirst = _array12.valueFirst;
+    var _array12$valueLast = _array12.valueLast;
+    valueLast = _array12$valueLast === void 0 ? valueFirst : _array12$valueLast;
+  } else if (isObjectParameter(array, 'array, value')) {
+    var _array13 = array;
+    array = _array13.array;
+    valueFirst = _array13.value;
+    var _array13$valueLast = _array13.valueLast;
+    valueLast = _array13$valueLast === void 0 ? valueFirst : _array13$valueLast;
   }
 
   if (!isArray(array)) {
     throw new TypeError('isBothEnds args(array) is not array');
   }
 
-  return _isBothEnds(array, value);
+  return _isBothEnds(array, valueFirst, valueLast);
+};
+/**
+ * subIndex
+ */
+
+
+var _subIndex = function _subIndex(array, indexFirst, indexLast) {
+  return array.slice(indexFirst, indexLast + 1);
+};
+
+var subIndex = function subIndex(array, indexFirst, indexLast) {
+  if (isObjectParameter(array, 'array, indexFirst, indexLast')) {
+    var _array14 = array;
+    array = _array14.array;
+    indexFirst = _array14.indexFirst;
+    indexLast = _array14.indexLast;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('subIndex args(array) is not array');
+  }
+
+  if (!isInteger(indexFirst)) {
+    throw new TypeError('subIndex args(indexFirst) is not integer');
+  }
+
+  if (!_inRange(indexFirst, 0, array.length - 1)) {
+    throw new RangeError('subIndex args(indexFirst) must be from 0 to array.length - 1');
+  }
+
+  if (!isInteger(indexLast)) {
+    throw new TypeError('subIndex args(indexLast) is not integer');
+  }
+
+  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+    throw new RangeError('subIndex args(indexLast) must be from 0 to array.length - 1');
+  }
+
+  return _subIndex(array, indexFirst, indexLast);
+};
+/**
+ * subLength
+ */
+
+
+var _subLength = function _subLength(array, index, length) {
+  return array.slice(index, index + length);
+};
+
+var subLength = function subLength(array, index, length) {
+  if (isObjectParameter(array, 'array, index, length')) {
+    var _array15 = array;
+    array = _array15.array;
+    index = _array15.index;
+    length = _array15.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('subLength args(array) is not array');
+  }
+
+  if (!isInteger(index)) {
+    throw new TypeError('subLength args(index) is not integer');
+  }
+
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError('subLength args(index) must be from 0 to array.length - 1');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subLength args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, array.length - 1)) {
+    throw new RangeError('subLength args(length) must be from 0 to array.length - 1');
+  }
+
+  return _subLength(array, index, length);
 };
 
 module.exports = (_module$exports = {
@@ -698,6 +793,8 @@ module.exports = (_module$exports = {
   _isFirst: _isFirst,
   _isLast: _isLast,
   _isBothEnds: _isBothEnds,
+  _subIndex: _subIndex,
+  _subLength: _subLength,
   from: from,
   min: min,
   max: max,
@@ -722,5 +819,7 @@ module.exports = (_module$exports = {
   every: every,
   isFirst: isFirst,
   isLast: isLast,
-  isBothEnds: isBothEnds
+  isBothEnds: isBothEnds,
+  subIndex: subIndex,
+  subLength: subLength
 }, _defineProperty(_module$exports, "findIndex", findIndex), _defineProperty(_module$exports, "findBackIndex", findBackIndex), _defineProperty(_module$exports, "find", find), _defineProperty(_module$exports, "findBack", findBack), _module$exports);

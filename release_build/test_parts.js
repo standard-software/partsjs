@@ -113,11 +113,14 @@ var test_execute_index = function test_execute_index(parts) {
   console.log("platform: ".concat(parts.platform.name()));
 
   if (parts.platform.isWebBrowser()) {
-    console.log("web browser: ".concat(parts.platform.browserName()));
-    console.log("User Agent: ".concat(window.navigator.userAgent));
+    console.log("  web browser: ".concat(parts.platform.browserName()));
+    console.log("  User Agent: ".concat(window.navigator.userAgent));
   }
 
-  console.log("buildMode: ".concat(parts.platform.buildMode));
+  if (parts.platform.buildMode !== '') {
+    console.log("  buildMode: ".concat(parts.platform.buildMode));
+  }
+
   console.log('test start');
 
   var _require = __webpack_require__(2),
@@ -176,7 +179,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(7, propertyCount(parts.number));
         checkEqual(6, propertyCount(parts.string));
         checkEqual(12, propertyCount(parts.object));
-        checkEqual(28, propertyCount(parts.array));
+        checkEqual(30, propertyCount(parts.array));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it('test_execute_nameSpace 2', function () {
@@ -23484,41 +23487,41 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_mode = function test_mode() {
       it('test_mode', function () {
-        checkCompare(parts.compare.equal, [], array.mode([]));
-        checkCompare(parts.compare.equal, [70], array.mode([70]));
-        checkCompare(parts.compare.equal, [70, 52], array.mode([70, 70, 80, 52, 52, 100]));
-        checkCompare(parts.compare.equal, [52], array.mode([70, 70, 80, 52, 52, 52, 100]));
-        checkCompare(parts.compare.equal, [9, 10], array.mode([9, 9, 10, 10, 10, 9, 6]));
+        checkEqual([], array.mode([]));
+        checkEqual([70], array.mode([70]));
+        checkEqual([70, 52], array.mode([70, 70, 80, 52, 52, 100]));
+        checkEqual([52], array.mode([70, 70, 80, 52, 52, 52, 100]));
+        checkEqual([9, 10], array.mode([9, 9, 10, 10, 10, 9, 6]));
       });
     };
 
     var test_uniqe = function test_uniqe() {
       it('test_uniqe', function () {
-        checkCompare(parts.compare.equal, [1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_single = function test_single() {
       it('test_single', function () {
-        checkCompare(parts.compare.equal, [1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual([1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_multiple = function test_multiple() {
       it('test_multiple', function () {
-        checkCompare(parts.compare.equal, [2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual([2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0]));
       });
     };
 
     var test_filter = function test_filter() {
       it('test_filter', function () {
-        checkCompare(parts.compare.equal, [0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkCompare(parts.compare.equal, [0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
-        checkCompare(parts.compare.equal, [1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+        checkEqual([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
-        checkCompare(parts.compare.equal, [0, 2, 4], array.filter({
+        checkEqual([0, 2, 4], array.filter({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -23529,16 +23532,16 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_map = function test_map() {
       it('test_map', function () {
-        checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
-        checkCompare(parts.compare.equal, [false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd));
-        checkCompare(parts.compare.equal, [0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd));
+        checkEqual([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return value * 2;
         })); // Object Named Parameter
 
-        checkCompare(parts.compare.equal, [true, false, true, false, true, false], array.map({
+        checkEqual([true, false, true, false, true, false], array.map({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -23549,13 +23552,13 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_count = function test_count() {
       it('test_count', function () {
-        checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], isEven));
-        checkCompare(parts.compare.equal, 3, array.count([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
-        checkCompare(parts.compare.equal, 3, array.count({
+        checkEqual(3, array.count({
           array: [0, 1, 2, 3, 4, 5],
           func: isOdd
         }));
@@ -23779,7 +23782,9 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, array.isBothEnds([1, 2, 1], 2));
         checkEqual(true, array.isBothEnds(['A', 'B', 'A'], 'A'));
         checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'a'));
-        checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'B')); // Object Named Parameter
+        checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'B'));
+        checkEqual(false, array.isBothEnds(['A', 'B', 'A', 'D'], 'A'));
+        checkEqual(true, array.isBothEnds(['A', 'B', 'A', 'D'], 'A', 'D')); // Object Named Parameter
 
         checkEqual(true, array.isBothEnds({
           array: ['A', 'B', 'A'],
@@ -23789,19 +23794,64 @@ var test_execute_array = function test_execute_array(parts) {
           array: ['A', 'B', 'A'],
           value: 'a'
         }));
+        checkEqual(true, array.isBothEnds({
+          array: ['A', 'B', 'A'],
+          valueFirst: 'A'
+        }));
+        checkEqual(false, array.isBothEnds({
+          array: ['A', 'B', 'A', 'D'],
+          valueFirst: 'A'
+        }));
+        checkEqual(true, array.isBothEnds({
+          array: ['A', 'B', 'A', 'D'],
+          valueFirst: 'A',
+          valueLast: 'D'
+        }));
+      });
+    };
+
+    var test_array_subIndex = function test_array_subIndex() {
+      it('test_array_subIndex', function () {
+        var array1 = [0, 1, 2];
+        checkEqual([1], array.subIndex(array1, 1, 1));
+        checkEqual([0, 1], array.subIndex(array1, 0, 1));
+        checkEqual([1, 2], array.subIndex(array1, 1, 2));
+        checkEqual([0, 1, 2], array1); // Object Named Parameter
+
+        checkEqual(['A', 'B'], array.subIndex({
+          array: ['A', 'B', 'A'],
+          indexFirst: 0,
+          indexLast: 1
+        }));
+      });
+    };
+
+    var test_array_subLength = function test_array_subLength() {
+      it('test_array_subLength', function () {
+        var array1 = [0, 1, 2];
+        checkEqual([1], array.subLength(array1, 1, 1));
+        checkEqual([0, 1], array.subLength(array1, 0, 2));
+        checkEqual([1, 2], array.subLength(array1, 1, 2));
+        checkEqual([0, 1, 2], array1); // Object Named Parameter
+
+        checkEqual(['A', 'B'], array.subLength({
+          array: ['A', 'B', 'A'],
+          index: 0,
+          length: 2
+        }));
       });
     };
 
     var test_operation_insert = function test_operation_insert() {
       it('test_operation_insert', function () {
-        checkCompare(parts.compare.equal, [1, 2, 3], array.operation.insert([1, 2, 3], []));
-        checkCompare(parts.compare.equal, [0, 1, 2, 3], array.operation.insert([1, 2, 3], [0]));
-        checkCompare(parts.compare.equal, [0, 1, 2, 3], array.operation.insert([1, 2, 3], [0], 0));
-        checkCompare(parts.compare.equal, [1, 0, 2, 3], array.operation.insert([1, 2, 3], [0], 1));
-        checkCompare(parts.compare.equal, [1, 2, 0, 3], array.operation.insert([1, 2, 3], [0], 2));
-        checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.insert([1, 2, 3], [0], 3));
-        checkCompare(parts.compare.equal, [-1, 0, 1, 2, 3], array.operation.insert([1, 2, 3], [-1, 0]));
-        checkCompare(parts.compare.equal, [1, -1, 0, 2, 3], array.operation.insert([1, 2, 3], [-1, 0], 1)); // exception
+        checkEqual([1, 2, 3], array.operation.insert([1, 2, 3], []));
+        checkEqual([0, 1, 2, 3], array.operation.insert([1, 2, 3], [0]));
+        checkEqual([0, 1, 2, 3], array.operation.insert([1, 2, 3], [0], 0));
+        checkEqual([1, 0, 2, 3], array.operation.insert([1, 2, 3], [0], 1));
+        checkEqual([1, 2, 0, 3], array.operation.insert([1, 2, 3], [0], 2));
+        checkEqual([1, 2, 3, 0], array.operation.insert([1, 2, 3], [0], 3));
+        checkEqual([-1, 0, 1, 2, 3], array.operation.insert([1, 2, 3], [-1, 0]));
+        checkEqual([1, -1, 0, 2, 3], array.operation.insert([1, 2, 3], [-1, 0], 1)); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.insert([1, 2, 3], [0], -1);
@@ -23813,7 +23863,7 @@ var test_execute_array = function test_execute_array(parts) {
           array.operation.insert([1, 2, 3], 0, 4);
         }, 'TypeError')); // Object Named Parameter
 
-        checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.insert({
+        checkEqual([1, 2, 3, 0], array.operation.insert({
           array: [1, 2, 3],
           values: [0],
           index: 3
@@ -23823,14 +23873,14 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_add = function test_operation_add() {
       it('test_operation_add', function () {
-        checkCompare(parts.compare.equal, [1, 2, 3], array.operation.add([1, 2, 3], []));
-        checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.add([1, 2, 3], [0]));
-        checkCompare(parts.compare.equal, [0, 1, 2, 3], array.operation.add([1, 2, 3], [0], -1));
-        checkCompare(parts.compare.equal, [1, 0, 2, 3], array.operation.add([1, 2, 3], [0], 0));
-        checkCompare(parts.compare.equal, [1, 2, 0, 3], array.operation.add([1, 2, 3], [0], 1));
-        checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.add([1, 2, 3], [0], 2));
-        checkCompare(parts.compare.equal, [1, 2, 3, -1, 0], array.operation.add([1, 2, 3], [-1, 0]));
-        checkCompare(parts.compare.equal, [1, 2, -1, 0, 3], array.operation.add([1, 2, 3], [-1, 0], 1)); // exception
+        checkEqual([1, 2, 3], array.operation.add([1, 2, 3], []));
+        checkEqual([1, 2, 3, 0], array.operation.add([1, 2, 3], [0]));
+        checkEqual([0, 1, 2, 3], array.operation.add([1, 2, 3], [0], -1));
+        checkEqual([1, 0, 2, 3], array.operation.add([1, 2, 3], [0], 0));
+        checkEqual([1, 2, 0, 3], array.operation.add([1, 2, 3], [0], 1));
+        checkEqual([1, 2, 3, 0], array.operation.add([1, 2, 3], [0], 2));
+        checkEqual([1, 2, 3, -1, 0], array.operation.add([1, 2, 3], [-1, 0]));
+        checkEqual([1, 2, -1, 0, 3], array.operation.add([1, 2, 3], [-1, 0], 1)); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.add([1, 2, 3], [0], -2);
@@ -23842,10 +23892,90 @@ var test_execute_array = function test_execute_array(parts) {
           array.operation.add([1, 2, 3], 0, 4);
         }, 'TypeError')); // Object Named Parameter
 
-        checkCompare(parts.compare.equal, [1, 2, 3, 0], array.operation.add({
+        checkEqual([1, 2, 3, 0], array.operation.add({
           array: [1, 2, 3],
           values: [0],
           index: 2
+        }));
+      });
+    };
+
+    var test_operation_deleteLength = function test_operation_deleteLength() {
+      it('test_operation_deleteLength', function () {
+        checkEqual([1, 3], array.operation.deleteLength([1, 2, 3], 1, 1));
+        checkEqual([3], array.operation.deleteLength([1, 2, 3], 0, 2));
+        checkEqual([1], array.operation.deleteLength([1, 2, 3], 1, 2)); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], [0], 1);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], 1, 0);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], 0, 1);
+        }));
+        checkEqual(false, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], 0, 2);
+        }));
+        checkEqual(false, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], 0, 3);
+        }));
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], 0, 4);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteLength([1, 2, 3], -1, 2);
+        }, 'RangeError')); // Object Named Parameter
+
+        checkEqual([0, 3], array.operation.deleteLength({
+          array: [0, 1, 2, 3],
+          index: 1,
+          length: 2
+        }));
+      });
+    };
+
+    var test_operation_deleteIndex = function test_operation_deleteIndex() {
+      it('test_operation_deleteIndex', function () {
+        checkEqual([1, 3], array.operation.deleteIndex([1, 2, 3], 1, 1));
+        checkEqual([3], array.operation.deleteIndex([1, 2, 3], 0, 1));
+        checkEqual([1], array.operation.deleteIndex([1, 2, 3], 1, 2)); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], [0], 1);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], 1, 0);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], 0, 0);
+        }));
+        checkEqual(false, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], 0, 1);
+        }));
+        checkEqual(false, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], 0, 2);
+        }));
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], 0, 3);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.deleteIndex([1, 2, 3], -1);
+        }, 'RangeError')); // Object Named Parameter
+
+        checkEqual([0, 2, 3], array.operation.deleteIndex({
+          array: [0, 1, 2, 3],
+          index: 1
+        }));
+        checkEqual([0, 2, 3], array.operation.deleteIndex({
+          array: [0, 1, 2, 3],
+          indexFirst: 1
+        }));
+        checkEqual([0, 3], array.operation.deleteIndex({
+          array: [0, 1, 2, 3],
+          indexFirst: 1,
+          indexLast: 2
         }));
       });
     };
@@ -23871,8 +24001,12 @@ var test_execute_array = function test_execute_array(parts) {
     test_isFirst();
     test_isLast();
     test_isBothEnds();
+    test_array_subIndex();
+    test_array_subLength();
     test_operation_insert();
     test_operation_add();
+    test_operation_deleteLength();
+    test_operation_deleteIndex();
   });
 };
 

@@ -139,14 +139,16 @@ var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
   });
 };
 
-var isThrownException = function isThrownException(targetFunc, exceptionName) {
-  if (!(isString(exceptionName) || isUndefined(exceptionName))) {
+var isThrownException = function isThrownException(targetFunc) {
+  var exceptionName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  if (!isString(exceptionName)) {
     throw new TypeError('isThrownException args exceptionName is not string');
   }
 
   return isThrown(targetFunc, function (thrown) {
     if (isException(thrown)) {
-      if (isUndefined(exceptionName)) {
+      if (exceptionName === '') {
         return true;
       }
 
