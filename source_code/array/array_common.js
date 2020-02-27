@@ -7,6 +7,7 @@ const {
 
 const {
   isEven,
+  _inRange,
 } = require('../number/number.js');
 
 const {
@@ -603,16 +604,21 @@ const isFirst = (array, value) => {
   return _isFirst(array, value);
 };
 
-const _isBothEnds = (array, value) => {
+/**
+ * isBothEnds
+ */
+const _isBothEnds = (array, valueFirst, valueLast = valueFirst) => {
   if (array.length <= 1) {
     return false;
   }
-  return _isFirst(array, value) && _isLast(array, value);
+  return _isFirst(array, valueFirst) && _isLast(array, valueLast);
 };
 
-const isBothEnds = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const isBothEnds = (array, valueFirst, valueLast = valueFirst) => {
+  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
+    ({ array, valueFirst, valueLast = valueFirst } = array);
+  } else if (isObjectParameter(array, 'array, value')) {
+    ({ array, value: valueFirst, valueLast = valueFirst } = array);
   }
 
   if (!isArray(array)) {
@@ -621,6 +627,8 @@ const isBothEnds = (array, value) => {
     );
   }
 
+  return _isBothEnds(array, valueFirst, valueLast);
+};
 
 /**
  * subIndex

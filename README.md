@@ -239,6 +239,7 @@ You can now use the functions of the parts.js object.
 - rename midian >> median(misstake!!)
 - add array subIndex/subLength
 - update isThrownException
+- update array isBothEnds
 
 ### 4.2.0
 #### 2020/02/26(Wed)

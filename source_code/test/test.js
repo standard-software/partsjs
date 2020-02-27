@@ -113,7 +113,7 @@ const isThrown = (
       'isThrown args targetFunc is not function',
     );
   }
-  if (!(isFunction(compareFunc) ||isUndefined(compareFunc) )) {
+  if (!(isFunction(compareFunc) || isUndefined(compareFunc) )) {
     throw new TypeError(
       'isThrown args compareFunc is not function',
     );
