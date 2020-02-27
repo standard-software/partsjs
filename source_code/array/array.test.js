@@ -562,7 +562,11 @@ const test_execute_array = (parts) => {
         checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'a'));
         checkEqual(false, array.isBothEnds(['A', 'B', 'A'], 'B'));
 
+        checkEqual(false, array.isBothEnds(['A', 'B', 'A', 'D'], 'A'));
+        checkEqual(true,  array.isBothEnds(['A', 'B', 'A', 'D'], 'A', 'D'));
+
         // Object Named Parameter
+
         checkEqual(true,
           array.isBothEnds({
             array: ['A', 'B', 'A'],
@@ -573,6 +577,25 @@ const test_execute_array = (parts) => {
           array.isBothEnds({
             array: ['A', 'B', 'A'],
             value: 'a',
+          })
+        );
+        checkEqual(true,
+          array.isBothEnds({
+            array: ['A', 'B', 'A'],
+            valueFirst: 'A',
+          })
+        );
+        checkEqual(false,
+          array.isBothEnds({
+            array: ['A', 'B', 'A', 'D'],
+            valueFirst: 'A',
+          })
+        );
+        checkEqual(true,
+          array.isBothEnds({
+            array: ['A', 'B', 'A', 'D'],
+            valueFirst: 'A',
+            valueLast: 'D'
           })
         );
       });
