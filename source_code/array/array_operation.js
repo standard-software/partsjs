@@ -150,16 +150,105 @@ const deleteLength = (
   }
   if (deleteCount <= 0) {
     throw new RangeError(
-      'delete args(deleteCount) must be >= 1',
+
+/**
+ * array.operation.includeFirst
+ */
+const _includeFirst = (array, value) => {
+  if (!_isFirst(array, value)) {
+    _insert(array, value);
+  }
+};
+
+const includeFirst = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'includeFirst args(array) is not array',
     );
   }
 
-  return _delete(array, index, deleteCount);
+  return _includeFirst(array, value);
+};
+
+/**
+ * array.operation.includeLast
+ */
+const _includeLast = (array, value) => {
+  if (!_isLast(array, value)) {
+    _add(array, value);
+  }
+};
+
+const includeLast = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'includeLast args(array) is not array',
+    );
+  }
+
+  return _includeLast(array, value);
+};
+
+/**
+ * array.operation.excludeFirst
+ */
+const _excludeFirst = (array, value) => {
+  if (_isFirst(array, value)) {
+    _deleteLength(array, 0);
+  }
+};
+
+const excludeFirst = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'excludeFirst args(array) is not array',
+    );
+  }
+
+  return _excludeFirst(array, value);
+};
+
+/**
+ * array.operation.excludeLast
+ */
+const _excludeLast = (array, value) => {
+  if (_isLast(array, value)) {
+    _deleteLength(array, array.length - 1);
+  }
+};
+
+const excludeLast = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'excludeLast args(array) is not array',
+    );
+  }
+
+  return _excludeLast(array, value);
 };
 
 module.exports = {
-  insert, add,
-  delete: deleteLength,
+  _includeFirst, _includeLast,
+  _excludeFirst, _excludeLast,
 
+  insert, add,
+  includeFirst, includeLast,
+  excludeFirst, excludeLast,
 };
 
