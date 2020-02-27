@@ -144,9 +144,9 @@ const isThrownValue = (
 
 const isThrownException = (
   targetFunc,
-  exceptionName,
+  exceptionName = '',
 ) => {
-  if (!(isString(exceptionName) ||isUndefined(exceptionName) )) {
+  if (!isString(exceptionName)) {
     throw new TypeError(
       'isThrownException args exceptionName is not string',
     );
@@ -156,7 +156,7 @@ const isThrownException = (
     targetFunc,
     (thrown) => {
       if (isException(thrown)) {
-        if (isUndefined(exceptionName)) {
+        if (exceptionName === '') {
           return true;
         }
         return thrown.name === exceptionName;
