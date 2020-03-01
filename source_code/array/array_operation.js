@@ -339,18 +339,105 @@ const excludeBothEdges = (
 };
 
 const excludeBothEnds = excludeBothEdges;
+
+/**
+ * array.operation.trimFirst
+ */
+const _trimFirst = (array, value) => {
+  while (_isFirst(array, value)) {
+    _deleteIndex(array, 0);
+  }
+  return array;
+};
+
+const trimFirst = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'trimFirst args(array) is not array',
+    );
+  }
+
+  return _trimFirst(array, value);
+};
+
+/**
+ * array.operation.trimLast
+ */
+const _trimLast = (array, value) => {
+  while (_isLast(array, value)) {
+    _deleteIndex(array, array.length - 1);
+  }
+  return array;
+};
+
+const trimLast = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'trimLast args(array) is not array',
+    );
+  }
+
+  return _trimLast(array, value);
+};
+
+/**
+ * array.operation.trimBothEdges
+ */
+const _trimBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
+  while (_isFirst(array, valueFirst)) {
+    _deleteIndex(array, 0);
+  }
+  while (_isLast(array, valueLast)) {
+    _deleteIndex(array, array.length - 1);
+  }
+  return array;
+};
+
+const trimBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
+  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
+    ({ array, valueFirst, valueLast = valueFirst } = array);
+  } else if (isObjectParameter(array, 'array, value')) {
+    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'trimBothEdges args(array) is not array',
+    );
+  }
+
+  return _trimBothEdges(array, valueFirst, valueLast);
+};
+
+const trimBothEnds = trimBothEdges;
+
 module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
   _includeFirst, _includeLast, _includeBothEdges,
   _excludeFirst, _excludeLast, _excludeBothEdges,
+  _trimFirst, _trimLast, _trimBothEdges,
 
   insert, add,
   deleteLength, deleteIndex,
   includeFirst, includeLast, includeBothEdges,
   excludeFirst, excludeLast, excludeBothEdges,
+  trimFirst, trimLast, trimBothEdges,
 
   includeBothEnds,
   excludeBothEnds,
+  trimBothEnds,
 };
 
