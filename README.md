@@ -239,7 +239,7 @@ You can now use the functions of the parts.js object.
 - rename midian >> median(misstake!!)
 - add array subIndex/subLength
 - update isThrownException
-- update array isBothEnds
+- update array isBothEnds=isBothEdges
 - add array.operation
   - includeFirst/includeLast/excludeFirst/excludeLast
 - rename array delete >> deleteLength

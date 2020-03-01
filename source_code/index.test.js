@@ -43,7 +43,7 @@ const test_execute_index = (parts) => {
         checkEqual(7,   propertyCount(parts.number));
         checkEqual(6,   propertyCount(parts.string));
         checkEqual(12,  propertyCount(parts.object));
-        checkEqual(30,  propertyCount(parts.array));
+        checkEqual(31,  propertyCount(parts.array));
         checkEqual(true,
           inProperty(
             parts,

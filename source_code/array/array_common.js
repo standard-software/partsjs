@@ -605,16 +605,20 @@ const isFirst = (array, value) => {
 };
 
 /**
- * isBothEnds
+ * isBothEdges
  */
-const _isBothEnds = (array, valueFirst, valueLast = valueFirst) => {
+const _isBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
   if (array.length <= 1) {
     return false;
   }
   return _isFirst(array, valueFirst) && _isLast(array, valueLast);
 };
 
-const isBothEnds = (array, valueFirst, valueLast = valueFirst) => {
+const isBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
   if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
     ({ array, valueFirst, valueLast = valueFirst } = array);
   } else if (isObjectParameter(array, 'array, value')) {
@@ -623,12 +627,14 @@ const isBothEnds = (array, valueFirst, valueLast = valueFirst) => {
 
   if (!isArray(array)) {
     throw new TypeError(
-      'isBothEnds args(array) is not array',
+      'isBothEdges args(array) is not array',
     );
   }
 
-  return _isBothEnds(array, valueFirst, valueLast);
+  return _isBothEdges(array, valueFirst, valueLast);
 };
+
+const isBothEnds = isBothEdges;
 
 /**
  * subIndex
@@ -718,12 +724,10 @@ module.exports = {
   _mode,
   _unique, _single, _multiple,
   _filter, _map, _count,
-  _findFirstIndex,
-  _findLastIndex,
-  _findFirst,
-  _findLast,
+  _findFirstIndex, _findLastIndex,
+  _findFirst, _findLast,
   _some, _all,
-  _isFirst, _isLast, _isBothEnds,
+  _isFirst, _isLast, _isBothEdges,
   _subIndex, _subLength,
 
   from,
@@ -732,16 +736,16 @@ module.exports = {
   mode,
   unique, single, multiple,
   filter, map, count,
-  findFirstIndex, findIndex,
-  findLastIndex, findBackIndex,
-  findFirst,
-  findLast,
-  some, all, every,
-  isFirst, isLast, isBothEnds,
+  findFirstIndex, findLastIndex,
+  findFirst, findLast,
+  some, all,
+  isFirst, isLast, isBothEdges,
   subIndex, subLength,
 
   findIndex, findBackIndex,
   find, findBack,
+  every,
+  isBothEnds,
 
 };
 

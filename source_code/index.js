@@ -182,13 +182,15 @@ propertyNames.ARRAY_PUBLIC =
   'mode,' +
   'unique, single, multiple,' +
   'filter, map, count,' +
-  'findIndex, findIndexFirst,' +
-  'findBackIndex, findIndexLast,' +
-  'find, findFirst,' +
-  'findBack, findLast,' +
-  'some, all, every,' +
-  'isFirst, isLast, isBothEnds,' +
+  'findFirstIndex, findLastIndex,' +
+  'findFirst, findLast,' +
+  'some, all,' +
+  'isFirst, isLast, isBothEdges,' +
   'subIndex, subLength,' +
+  'findIndex, findBackIndex,' +
+  'find, findBack,' +
+  'every,' +
+  'isBothEnds,' +
   'operation,' +
   '';
 propertyNames.ARRAY_ROOT =
