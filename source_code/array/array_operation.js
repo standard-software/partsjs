@@ -14,7 +14,8 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
-  _isFirst, _isLast,
+  _min,
+  _isFirst, _isLast, _isBothEdges,
 } = require('../array/array_common.js');
 
 /**
@@ -182,8 +183,9 @@ const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
  */
 const _includeFirst = (array, value) => {
   if (!_isFirst(array, value)) {
-    _insert(array, value);
+    _insert(array, [value]);
   }
+  return array;
 };
 
 const includeFirst = (array, value) => {
@@ -205,8 +207,9 @@ const includeFirst = (array, value) => {
  */
 const _includeLast = (array, value) => {
   if (!_isLast(array, value)) {
-    _add(array, value);
+    _add(array, [value]);
   }
+  return array;
 };
 
 const includeLast = (array, value) => {
@@ -224,12 +227,46 @@ const includeLast = (array, value) => {
 };
 
 /**
+ * array.operation.includeBothEdges
+ */
+const _includeBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
+  if (!_isBothEdges(array, valueFirst, valueLast)) {
+    _insert(array, [valueFirst]);
+    _add(array, [valueLast]);
+  }
+  return array;
+};
+
+const includeBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
+  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
+    ({ array, valueFirst, valueLast = valueFirst } = array);
+  } else if (isObjectParameter(array, 'array, value')) {
+    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'includeBothEdges args(array) is not array',
+    );
+  }
+
+  return _includeBothEdges(array, valueFirst, valueLast);
+};
+
+const includeBothEnds = includeBothEdges;
+
+/**
  * array.operation.excludeFirst
  */
 const _excludeFirst = (array, value) => {
   if (_isFirst(array, value)) {
-    _deleteLength(array, 0);
+    _deleteIndex(array, 0);
   }
+  return array;
 };
 
 const excludeFirst = (array, value) => {
@@ -251,8 +288,9 @@ const excludeFirst = (array, value) => {
  */
 const _excludeLast = (array, value) => {
   if (_isLast(array, value)) {
-    _deleteLength(array, array.length - 1);
+    _deleteIndex(array, array.length - 1);
   }
+  return array;
 };
 
 const excludeLast = (array, value) => {
@@ -269,15 +307,50 @@ const excludeLast = (array, value) => {
   return _excludeLast(array, value);
 };
 
+/**
+ * array.operation.excludeBothEdges
+ */
+const _excludeBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
+  if (_isBothEdges(array, valueFirst, valueLast)) {
+    _deleteIndex(array, 0);
+    _deleteIndex(array, array.length - 1);
+  }
+  return array;
+};
+
+const excludeBothEdges = (
+  array, valueFirst, valueLast = valueFirst,
+) => {
+  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
+    ({ array, valueFirst, valueLast = valueFirst } = array);
+  } else if (isObjectParameter(array, 'array, value')) {
+    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'excludeBothEdges args(array) is not array',
+    );
+  }
+
+  return _excludeBothEdges(array, valueFirst, valueLast);
+};
+
+const excludeBothEnds = excludeBothEdges;
 module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
-  _includeFirst, _includeLast,
-  _excludeFirst, _excludeLast,
+  _includeFirst, _includeLast, _includeBothEdges,
+  _excludeFirst, _excludeLast, _excludeBothEdges,
 
   insert, add,
   deleteLength, deleteIndex,
-  includeFirst, includeLast,
-  excludeFirst, excludeLast,
+  includeFirst, includeLast, includeBothEdges,
+  excludeFirst, excludeLast, excludeBothEdges,
+
+  includeBothEnds,
+  excludeBothEnds,
 };
 

@@ -241,7 +241,10 @@ You can now use the functions of the parts.js object.
 - update isThrownException
 - update array isBothEnds=isBothEdges
 - add array.operation
-  - includeFirst/includeLast/excludeFirst/excludeLast
+  - includeFirst/includeLast
+  - includeBothEdges(=includeBothEnds)
+  - excludeFirst/excludeLast
+  - excludeBothEdges(=excludeBothEnds)
 - rename array delete >> deleteLength
 - add array deleteIndex
 
