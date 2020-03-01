@@ -27,6 +27,10 @@ var _require2 = require('../object/isObjectParameter.js'),
 
 
 var _isMultiples = function _isMultiples(number, radix) {
+  if (number === 0) {
+    return false;
+  }
+
   return number % radix === 0;
 };
 
@@ -49,10 +53,18 @@ var isMultiples = function isMultiples(number, radix) {
 };
 
 var isEven = function isEven(number) {
+  if (number === 0) {
+    return false;
+  }
+
   return isMultiples(number, 2);
 };
 
 var isOdd = function isOdd(number) {
+  if (number === 0) {
+    return false;
+  }
+
   return !isMultiples(number, 2);
 };
 /**

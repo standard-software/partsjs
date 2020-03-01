@@ -182,13 +182,13 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_filter = function test_filter() {
       it('test_filter', function () {
-        checkEqual([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
         checkEqual([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
-        checkEqual([0, 2, 4], array.filter({
+        checkEqual([2, 4], array.filter({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -199,16 +199,16 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_map = function test_map() {
       it('test_map', function () {
-        checkEqual([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
         checkEqual([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd));
         checkEqual([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return value * 2;
         })); // Object Named Parameter
 
-        checkEqual([true, false, true, false, true, false], array.map({
+        checkEqual([false, false, true, false, true, false], array.map({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -219,10 +219,10 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_count = function test_count() {
       it('test_count', function () {
-        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual(2, array.count([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual(2, array.count([0, 1, 2, 3, 4, 5], isEven));
         checkEqual(3, array.count([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
         checkEqual(3, array.count({
@@ -1007,6 +1007,23 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_operation_filter = function test_operation_filter() {
+      it('test_operation_filter', function () {
+        checkEqual([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], function (value) {
+          return isEven(value);
+        }));
+        checkEqual([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([1, 3, 5], array.operation.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+
+        checkEqual([2, 4], array.operation.filter({
+          array: [0, 1, 2, 3, 4, 5],
+          func: function func(value) {
+            return isEven(value);
+          }
+        }));
+      });
+    };
+
     test_array_from();
     test_min();
     test_max();
@@ -1049,6 +1066,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_pushLast();
     test_operation_remainFirst();
     test_operation_remainLast();
+    test_operation_filter();
   });
 };
 

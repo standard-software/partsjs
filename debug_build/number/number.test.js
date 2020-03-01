@@ -27,7 +27,10 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(false, isMultiples(10, 3));
         checkEqual(false, isMultiples(9, 2));
         checkEqual(false, isMultiples(9, 5));
-        checkEqual(true, isMultiples(9, 3)); // Object Named Parameter
+        checkEqual(true, isMultiples(9, 3));
+        checkEqual(false, isMultiples(0, 2));
+        checkEqual(false, isMultiples(-1, 2));
+        checkEqual(true, isMultiples(-2, 2)); // Object Named Parameter
 
         checkEqual(true, isMultiples({
           number: 10,

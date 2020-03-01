@@ -527,7 +527,8 @@ var popLast = function popLast(array, value) {
 
 
 var _pushFirst = function _pushFirst(array, value) {
-  return array.unshift(value);
+  array.unshift(value);
+  return array.length; // WSH array.unshift is return undefined
 };
 
 var pushFirst = function pushFirst(array, value) {
@@ -633,6 +634,44 @@ var remainLast = function remainLast(array, length) {
 
   return _remainLast(array, length);
 };
+/**
+ * filter
+ */
+
+
+var _filter = function _filter(array, func) {
+  for (var i = array.length - 1; 0 <= i; i -= 1) {
+    var resultFunc = func(array[i], i, array);
+
+    if (!isBoolean(resultFunc)) {
+      throw new TypeError('_filter args(compareFunc) result is not boolean');
+    }
+
+    if (!resultFunc) {
+      _deleteIndex(array, i);
+    }
+  }
+
+  return array;
+};
+
+var filter = function filter(array, func) {
+  if (isObjectParameter(array, 'array, func')) {
+    var _array23 = array;
+    array = _array23.array;
+    func = _array23.func;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('filter args(array) is not array');
+  }
+
+  if (!isFunction(func)) {
+    throw new TypeError('filter args(compareFunc) is not function');
+  }
+
+  return _filter(array, func);
+};
 
 module.exports = {
   _insert: _insert,
@@ -654,6 +693,7 @@ module.exports = {
   _pushLast: _pushLast,
   _remainFirst: _remainFirst,
   _remainLast: _remainLast,
+  _filter: _filter,
   insert: insert,
   add: add,
   deleteLength: deleteLength,
@@ -673,6 +713,7 @@ module.exports = {
   pushLast: pushLast,
   remainFirst: remainFirst,
   remainLast: remainLast,
+  filter: filter,
   includeBothEnds: includeBothEnds,
   excludeBothEnds: excludeBothEnds,
   trimBothEnds: trimBothEnds
