@@ -201,11 +201,11 @@ const test_execute_array = (parts) => {
     const test_filter = () => {
       it('test_filter', () => {
         checkEqual(
-          [0, 2, 4],
+          [2, 4],
           array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
         checkEqual(
-          [0, 2, 4],
+          [2, 4],
           array.filter([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual(
@@ -215,7 +215,7 @@ const test_execute_array = (parts) => {
 
         // Object Named Parameter
         checkEqual(
-          [0, 2, 4],
+          [2, 4],
           array.filter({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
@@ -227,11 +227,11 @@ const test_execute_array = (parts) => {
     const test_map = () => {
       it('test_map', () => {
         checkEqual(
-          [true, false, true, false, true, false],
+          [false, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
         checkEqual(
-          [true, false, true, false, true, false],
+          [false, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual(
@@ -245,7 +245,7 @@ const test_execute_array = (parts) => {
 
         // Object Named Parameter
         checkEqual(
-          [true, false, true, false, true, false],
+          [false, false, true, false, true, false],
           array.map({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
@@ -257,11 +257,11 @@ const test_execute_array = (parts) => {
     const test_count = () => {
       it('test_count', () => {
         checkEqual(
-          3,
+          2,
           array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
         checkEqual(
-          3,
+          2,
           array.count([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual(
@@ -1488,6 +1488,32 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_operation_filter = () => {
+      it('test_operation_filter', () => {
+        checkEqual(
+          [2, 4],
+          array.operation.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
+        );
+        checkEqual(
+          [2, 4],
+          array.operation.filter([0, 1, 2, 3, 4, 5], isEven)
+        );
+        checkEqual(
+          [1, 3, 5],
+          array.operation.filter([0, 1, 2, 3, 4, 5], isOdd)
+        );
+
+        // Object Named Parameter
+        checkEqual(
+          [2, 4],
+          array.operation.filter({
+            array: [0, 1, 2, 3, 4, 5],
+            func: (value) => isEven(value)
+          })
+        );
+      });
+    };
+
     test_array_from();
 
     test_min();
@@ -1543,6 +1569,8 @@ const test_execute_array = (parts) => {
 
     test_operation_remainFirst();
     test_operation_remainLast();
+
+    test_operation_filter();
   });
 };
 

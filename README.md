@@ -250,6 +250,7 @@ You can now use the functions of the parts.js object.
   - popFirst/popLast
   - pushFirst/pushLast
   - remainFirst/Last
+  - filter
 - rename array delete >> deleteLength
 - add array deleteIndex
 - update isMultiples isOdd isEven

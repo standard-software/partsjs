@@ -573,6 +573,43 @@ const remainLast = (array, length) => {
   return _remainLast(array, length);
 };
 
+/**
+ * filter
+ */
+const _filter = (array, func) => {
+  for (let i = array.length -1; 0 <= i; i -= 1) {
+    const resultFunc = func(array[i], i, array);
+    if (!isBoolean(resultFunc)) {
+      throw new TypeError(
+        '_filter args(compareFunc) result is not boolean',
+      );
+    }
+    if (!resultFunc) {
+      _deleteIndex(array, i);
+    }
+  }
+  return array;
+};
+
+const filter = (array, func) => {
+  if (isObjectParameter(array, 'array, func')) {
+    ({ array, func } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'filter args(array) is not array',
+    );
+  }
+  if (!isFunction(func)) {
+    throw new TypeError(
+      'filter args(compareFunc) is not function',
+    );
+  }
+  return _filter(array, func);
+};
+
+
 module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
@@ -582,6 +619,7 @@ module.exports = {
   _popFirst, _popLast,
   _pushFirst, _pushLast,
   _remainFirst, _remainLast,
+  _filter,
 
   insert, add,
   deleteLength, deleteIndex,
@@ -591,6 +629,7 @@ module.exports = {
   popFirst, popLast,
   pushFirst, pushLast,
   remainFirst, remainLast,
+  filter,
 
   includeBothEnds,
   excludeBothEnds,
