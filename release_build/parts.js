@@ -8853,7 +8853,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEdges,' + 'subIndex, subLength,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'isBothEnds,' + 'operation,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEdges,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'isBothEnds,' + 'operation,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
@@ -11530,6 +11530,66 @@ var subLength = function subLength(array, index, length) {
 
   return _subLength(array, index, length);
 };
+/**
+ * subFirst
+ */
+
+
+var _subFirst = function _subFirst(array, length) {
+  return _subLength(array, 0, length);
+};
+
+var subFirst = function subFirst(array, length) {
+  if (isObjectParameter(array, 'array, length')) {
+    var _array16 = array;
+    array = _array16.array;
+    length = _array16.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('subFirst args(array) is not array');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subFirst args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError('subFirst args(length) must be from 0 to array.length - 1');
+  }
+
+  return _subFirst(array, length);
+};
+/**
+ * subLast
+ */
+
+
+var _subLast = function _subLast(array, length) {
+  return _subLength(array, array.length - length, length);
+};
+
+var subLast = function subLast(array, length) {
+  if (isObjectParameter(array, 'array, length')) {
+    var _array17 = array;
+    array = _array17.array;
+    length = _array17.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('subLast args(array) is not array');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subLast args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError('subLast args(length) must be from 0 to array.length - 1');
+  }
+
+  return _subLast(array, length);
+};
 
 module.exports = {
   _min: _min,
@@ -11555,6 +11615,8 @@ module.exports = {
   _isBothEdges: _isBothEdges,
   _subIndex: _subIndex,
   _subLength: _subLength,
+  _subFirst: _subFirst,
+  _subLast: _subLast,
   from: from,
   min: min,
   max: max,
@@ -11579,6 +11641,8 @@ module.exports = {
   isBothEdges: isBothEdges,
   subIndex: subIndex,
   subLength: subLength,
+  subFirst: subFirst,
+  subLast: subLast,
   findIndex: findIndex,
   findBackIndex: findBackIndex,
   find: find,

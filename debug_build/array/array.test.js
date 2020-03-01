@@ -22,7 +22,9 @@ var test_execute_array = function test_execute_array(parts) {
         isLast = array.isLast,
         isBothEdges = array.isBothEdges,
         subIndex = array.subIndex,
-        subLength = array.subLength;
+        subLength = array.subLength,
+        subFirst = array.subFirst,
+        subLast = array.subLast;
     var _array$operation = array.operation,
         insert = _array$operation.insert,
         add = _array$operation.add,
@@ -511,6 +513,38 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(['A', 'B'], subLength({
           array: ['A', 'B', 'A'],
           index: 0,
+          length: 2
+        }));
+      });
+    };
+
+    var test_array_subFirst = function test_array_subFirst() {
+      it('test_array_subFirst', function () {
+        var array1 = [0, 1, 2];
+        checkEqual([], subFirst(array1, 0));
+        checkEqual([0], subFirst(array1, 1));
+        checkEqual([0, 1], subFirst(array1, 2));
+        checkEqual([0, 1, 2], subFirst(array1, 3));
+        checkEqual([0, 1, 2], array1); // Object Named Parameter
+
+        checkEqual(['A', 'B'], subFirst({
+          array: ['A', 'B', 'A'],
+          length: 2
+        }));
+      });
+    };
+
+    var test_array_subLast = function test_array_subLast() {
+      it('test_array_subLast', function () {
+        var array1 = [0, 1, 2];
+        checkEqual([], subLast(array1, 0));
+        checkEqual([2], subLast(array1, 1));
+        checkEqual([1, 2], subLast(array1, 2));
+        checkEqual([0, 1, 2], subLast(array1, 3));
+        checkEqual([0, 1, 2], array1); // Object Named Parameter
+
+        checkEqual(['B', 'A'], subLast({
+          array: ['A', 'B', 'A'],
           length: 2
         }));
       });
@@ -1047,6 +1081,8 @@ var test_execute_array = function test_execute_array(parts) {
     test_isBothEdges();
     test_array_subIndex();
     test_array_subLength();
+    test_array_subFirst();
+    test_array_subLast();
     test_operation_insert();
     test_operation_add();
     test_operation_deleteLength();
