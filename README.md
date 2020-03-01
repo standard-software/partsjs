@@ -249,6 +249,7 @@ You can now use the functions of the parts.js object.
   - trimBothEdges(=trimBothEnds)
   - popFirst/popLast
   - pushFirst/pushLast
+  - remainFirst/Last
 - rename array delete >> deleteLength
 - add array deleteIndex
 

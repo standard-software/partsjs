@@ -503,6 +503,74 @@ const pushLast = (array, value) => {
   return _pushLast(array, value);
 };
 
+/**
+ * array.operation.remainFirst
+ */
+const _remainFirst = (array, length) => {
+  if (array.length <= length) {
+    return array;
+  }
+  return _deleteIndex(array, length, array.length - 1);
+};
+
+const remainFirst = (array, length) => {
+  if (isObjectParameter(array, 'array, length')) {
+    ({ array, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'remainFirst args(array) is not array',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      `remainFirst args(length) is not integer`,
+    );
+  }
+  if (!(0 <= length)) {
+    throw new RangeError(
+      'remainFirst args(indexFirst) must be from 0 to array.length - 1',
+    );
+  }
+
+  return _remainFirst(array, length);
+};
+
+/**
+ * array.operation.remainLast
+ */
+const _remainLast = (array, length) => {
+  if (array.length <= length) {
+    return array;
+  }
+  return _deleteLength(array, 0, array.length - length);
+};
+
+const remainLast = (array, length) => {
+  if (isObjectParameter(array, 'array, length')) {
+    ({ array, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'remainLast args(array) is not array',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      `remainLast args(length) is not integer`,
+    );
+  }
+  if (!(0 <= length)) {
+    throw new RangeError(
+      'remainLast args(indexFirst) must be from 0 to array.length - 1',
+    );
+  }
+
+  return _remainLast(array, length);
+};
+
 module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
@@ -511,6 +579,7 @@ module.exports = {
   _trimFirst, _trimLast, _trimBothEdges,
   _popFirst, _popLast,
   _pushFirst, _pushLast,
+  _remainFirst, _remainLast,
 
   insert, add,
   deleteLength, deleteIndex,
@@ -519,6 +588,7 @@ module.exports = {
   trimFirst, trimLast, trimBothEdges,
   popFirst, popLast,
   pushFirst, pushLast,
+  remainFirst, remainLast,
 
   includeBothEnds,
   excludeBothEnds,

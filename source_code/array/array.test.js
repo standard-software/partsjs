@@ -28,6 +28,7 @@ const test_execute_array = (parts) => {
       trimFirst, trimLast, trimBothEdges,
       popFirst, popLast,
       pushFirst, pushLast,
+      remainFirst, remainLast,
     } = array.operation;
 
     const {
@@ -1422,6 +1423,71 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_operation_remainFirst = () => {
+      it('test_operation_remainFirst', () => {
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2, 3], remainFirst(array1, 4));
+        checkEqual([1, 2, 3], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2, 3], remainFirst(array1, 3));
+        checkEqual([1, 2, 3], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2], remainFirst(array1, 2));
+        checkEqual([1, 2], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([1], remainFirst(array1, 1));
+        checkEqual([1], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([], remainFirst(array1, 0));
+        checkEqual([], array1);
+
+        // Object Named Parameter
+        checkEqual(['A', 'B'],
+          remainFirst({
+            array: ['A', 'B', 'A'],
+            length: 2,
+          })
+        );
+
+      });
+    };
+
+    const test_operation_remainLast = () => {
+      it('test_operation_remainLast', () => {
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2, 3], remainLast(array1, 4));
+        checkEqual([1, 2, 3], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2, 3], remainLast(array1, 3));
+        checkEqual([1, 2, 3], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([2, 3], remainLast(array1, 2));
+        checkEqual([2, 3], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([3], remainLast(array1, 1));
+        checkEqual([3], array1);
+
+        var array1 = [1, 2, 3];
+        checkEqual([], remainLast(array1, 0));
+        checkEqual([], array1);
+
+        // Object Named Parameter
+        checkEqual(['B', 'A'],
+          remainLast({
+            array: ['A', 'B', 'A'],
+            length: 2,
+          })
+        );
+      });
+    };
+
     test_array_from();
 
     test_min();
@@ -1475,6 +1541,8 @@ const test_execute_array = (parts) => {
     test_operation_pushFirst();
     test_operation_pushLast();
 
+    test_operation_remainFirst();
+    test_operation_remainLast();
   });
 };
 
