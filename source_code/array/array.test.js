@@ -24,6 +24,7 @@ const test_execute_array = (parts) => {
     const {
       insert, add,
       deleteLength, deleteIndex,
+      deleteFirst, deleteLast,
       includeFirst, includeLast, includeBothEdges,
       excludeFirst, excludeLast, excludeBothEdges,
       trimFirst, trimLast, trimBothEdges,
@@ -35,10 +36,6 @@ const test_execute_array = (parts) => {
     const {
       isEven, isOdd,
     } = parts.number;
-
-    const {
-      equal
-    } = parts;
 
     const {
       isLowerCase, isUpperCase,
@@ -667,7 +664,7 @@ const test_execute_array = (parts) => {
     const test_array_subFirst = () => {
       it('test_array_subFirst', () => {
         var array1 = [0, 1, 2];
-        checkEqual([],       subFirst(array1, 0));
+        checkEqual([],        subFirst(array1, 0));
         checkEqual([0],       subFirst(array1, 1));
         checkEqual([0, 1],    subFirst(array1, 2));
         checkEqual([0, 1, 2], subFirst(array1, 3));
@@ -927,6 +924,102 @@ const test_execute_array = (parts) => {
             array: [0, 1, 2, 3],
             indexFirst: 1,
             indexLast: 2,
+          })
+        );
+      });
+    };
+
+    const test_operation_deleteFirst = () => {
+      it('test_operation_deleteFirst', () => {
+        var array1 = [0, 1, 2];
+        checkEqual([0, 1, 2], deleteFirst(array1, 0));
+        checkEqual([0, 1, 2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([1, 2],    deleteFirst(array1, 1));
+        checkEqual([1, 2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([2],       deleteFirst(array1, 2));
+        checkEqual([2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([], deleteFirst(array1, 3));
+        checkEqual([], array1);
+
+        // exception
+        checkEqual(true,  isThrownException(() => {
+          deleteFirst([1, 2, 3], [0]);
+        }, 'TypeError'));
+        checkEqual(true,  isThrownException(() => {
+          deleteFirst([1, 2, 3], 4);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteFirst([1, 2, 3], 3);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteFirst([1, 2, 3], 2);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteFirst([1, 2, 3], 1);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteFirst([1, 2, 3], 0);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          deleteFirst([1, 2, 3], -1);
+        }, 'RangeError'));
+
+        // Object Named Parameter
+        checkEqual([1, 2, 3],
+          deleteFirst({
+            array: [0, 1, 2, 3],
+            length: 1,
+          })
+        );
+      });
+    };
+
+    const test_operation_deleteLast = () => {
+      it('test_operation_deleteLast', () => {
+        var array1 = [0, 1, 2];
+        checkEqual([0, 1, 2], deleteLast(array1, 0));
+        checkEqual([0, 1, 2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([0, 1],    deleteLast(array1, 1));
+        checkEqual([0, 1], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([0],       deleteLast(array1, 2));
+        checkEqual([0], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([], deleteLast(array1, 3));
+        checkEqual([], array1);
+
+        // exception
+        checkEqual(true,  isThrownException(() => {
+          deleteLast([1, 2, 3], [0]);
+        }, 'TypeError'));
+        checkEqual(true,  isThrownException(() => {
+          deleteLast([1, 2, 3], 4);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteLast([1, 2, 3], 3);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteLast([1, 2, 3], 2);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteLast([1, 2, 3], 1);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteLast([1, 2, 3], 0);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          deleteLast([1, 2, 3], -1);
+        }, 'RangeError'));
+
+        // Object Named Parameter
+        checkEqual([0, 1, 2],
+          deleteLast({
+            array: [0, 1, 2, 3],
+            length: 1,
           })
         );
       });
@@ -1589,8 +1682,11 @@ const test_execute_array = (parts) => {
 
     test_operation_insert();
     test_operation_add();
+
     test_operation_deleteLength();
     test_operation_deleteIndex();
+    test_operation_deleteFirst();
+    test_operation_deleteLast();
 
     test_operation_includeFirst();
     test_operation_includeLast();

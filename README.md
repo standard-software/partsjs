@@ -233,6 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 4.4.0
+#### 2020/03/02(Mon)
+- add array.operation
+  - deleteFirst/deleteLast
+
 ### 4.3.0
 #### 2020/03/01(Sun)
 - update testcode for polyfill

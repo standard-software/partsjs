@@ -742,7 +742,7 @@ const subFirst = (array, length) => {
   }
   if (!_inRange(length, 0, array.length)) {
     throw new RangeError(
-      'subFirst args(length) must be from 0 to array.length - 1',
+      'subFirst args(length) must be from 0 to array.length',
     );
   }
 
@@ -773,7 +773,7 @@ const subLast = (array, length) => {
   }
   if (!_inRange(length, 0, array.length)) {
     throw new RangeError(
-      'subLast args(length) must be from 0 to array.length - 1',
+      'subLast args(length) must be from 0 to array.length',
     );
   }
 

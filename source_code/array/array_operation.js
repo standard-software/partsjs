@@ -179,6 +179,68 @@ const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
 };
 
 /**
+ * array.operation.deleteFirst
+ */
+const _deleteFirst = (array, length) => {
+  return _deleteLength(array, 0, length);
+};
+
+const deleteFirst = (array, length) => {
+  if (isObjectParameter(array, 'array, length')) {
+    ({ array, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'deleteFirst args(array) is not array',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'deleteFirst args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError(
+      'deleteFirst args(length) must be from 0 to array.length',
+    );
+  }
+
+  return _deleteFirst(array, length);
+};
+
+/**
+ * array.operation.deleteFirst
+ */
+const _deleteLast = (array, length) => {
+  return _deleteLength(array, array.length - length, length);
+};
+
+const deleteLast = (array, length) => {
+  if (isObjectParameter(array, 'array, length')) {
+    ({ array, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'deleteLast args(array) is not array',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'deleteLast args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError(
+      'deleteLast args(length) must be from 0 to array.length',
+    );
+  }
+
+  return _deleteLast(array, length);
+};
+
+/**
  * array.operation.includeFirst
  */
 const _includeFirst = (array, value) => {
@@ -613,6 +675,7 @@ const filter = (array, func) => {
 module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
+  _deleteFirst, _deleteLast,
   _includeFirst, _includeLast, _includeBothEdges,
   _excludeFirst, _excludeLast, _excludeBothEdges,
   _trimFirst, _trimLast, _trimBothEdges,
@@ -623,6 +686,7 @@ module.exports = {
 
   insert, add,
   deleteLength, deleteIndex,
+  deleteFirst, deleteLast,
   includeFirst, includeLast, includeBothEdges,
   excludeFirst, excludeLast, excludeBothEdges,
   trimFirst, trimLast, trimBothEdges,
