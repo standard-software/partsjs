@@ -423,18 +423,102 @@ const trimBothEdges = (
 
 const trimBothEnds = trimBothEdges;
 
+/**
+ * array.operation.popFirst
+ */
+const _popFirst = (array) => {
+  return array.shift();
+};
+
+const popFirst = (array) => {
+  if (!isArray(array)) {
+    throw new TypeError(
+      'popFirst args(array) is not array',
+    );
+  }
+
+  return _popFirst(array);
+};
+
+/**
+ * array.operation.popLast
+ */
+const _popLast = (array, value) => {
+  return array.pop();
+};
+
+const popLast = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'popLast args(array) is not array',
+    );
+  }
+
+  return _popLast(array, value);
+};
+
+/**
+ * array.operation.pushFirst
+ */
+const _pushFirst = (array, value) => {
+  return array.unshift(value);
+};
+
+const pushFirst = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'pushFirst args(array) is not array',
+    );
+  }
+
+  return _pushFirst(array, value);
+};
+
+/**
+ * array.operation.pushLast
+ */
+const _pushLast = (array, value) => {
+  return array.push(value);
+};
+
+const pushLast = (array, value) => {
+  if (isObjectParameter(array, 'array, value')) {
+    ({ array, value } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'pushLast args(array) is not array',
+    );
+  }
+
+  return _pushLast(array, value);
+};
+
 module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
   _includeFirst, _includeLast, _includeBothEdges,
   _excludeFirst, _excludeLast, _excludeBothEdges,
   _trimFirst, _trimLast, _trimBothEdges,
+  _popFirst, _popLast,
+  _pushFirst, _pushLast,
 
   insert, add,
   deleteLength, deleteIndex,
   includeFirst, includeLast, includeBothEdges,
   excludeFirst, excludeLast, excludeBothEdges,
   trimFirst, trimLast, trimBothEdges,
+  popFirst, popLast,
+  pushFirst, pushLast,
 
   includeBothEnds,
   excludeBothEnds,

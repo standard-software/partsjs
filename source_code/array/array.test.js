@@ -26,6 +26,8 @@ const test_execute_array = (parts) => {
       includeFirst, includeLast, includeBothEdges,
       excludeFirst, excludeLast, excludeBothEdges,
       trimFirst, trimLast, trimBothEdges,
+      popFirst, popLast,
+      pushFirst, pushLast,
     } = array.operation;
 
     const {
@@ -1364,6 +1366,62 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_operation_popFirst = () => {
+      it('test_operation_popFirst', () => {
+        var array1 = [1, 2, 3];
+        checkEqual(1, popFirst(array1));
+        checkEqual([2, 3], array1);
+
+        var array1 = ['A', 'B', 'C'];
+        checkEqual('A', popFirst(array1));
+        checkEqual(['B', 'C'], array1);
+      });
+    };
+
+    const test_operation_popLast = () => {
+      it('test_operation_popLast', () => {
+        var array1 = [1, 2, 3];
+        checkEqual(3, popLast(array1));
+        checkEqual([1, 2], array1);
+
+        var array1 = ['A', 'B', 'C'];
+        checkEqual('C', popLast(array1));
+        checkEqual(['A', 'B'], array1);
+      });
+    };
+
+    const test_operation_pushFirst = () => {
+      it('test_operation_pushFirst', () => {
+        var array1 = [1, 2, 3];
+        checkEqual(4, pushFirst(array1, 0));
+        checkEqual([0, 1, 2, 3], array1);
+        checkEqual(5, pushFirst(array1, 0));
+        checkEqual([0, 0, 1, 2, 3], array1);
+
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(4, pushFirst(array1, 'D'));
+        checkEqual(['D', 'A', 'B', 'C'], array1);
+        checkEqual(5, pushFirst(array1, 'D'));
+        checkEqual(['D', 'D', 'A', 'B', 'C'], array1);
+      });
+    };
+
+    const test_operation_pushLast = () => {
+      it('test_operation_pushLast', () => {
+        var array1 = [1, 2, 3];
+        checkEqual(4, pushLast(array1, 4));
+        checkEqual([1, 2, 3, 4], array1);
+        checkEqual(5, pushLast(array1, 4));
+        checkEqual([1, 2, 3, 4, 4], array1);
+
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(4, pushLast(array1, 'D'));
+        checkEqual(['A', 'B', 'C', 'D'], array1);
+        checkEqual(5, pushLast(array1, 'D'));
+        checkEqual(['A', 'B', 'C', 'D', 'D'], array1);
+      });
+    };
+
     test_array_from();
 
     test_min();
@@ -1411,6 +1469,11 @@ const test_execute_array = (parts) => {
     test_operation_trimFirst();
     test_operation_trimLast();
     test_operation_trimBothEdges();
+
+    test_operation_popFirst();
+    test_operation_popLast();
+    test_operation_pushFirst();
+    test_operation_pushLast();
 
   });
 };
