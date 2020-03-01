@@ -8765,7 +8765,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(341);
 
-var VERSION = '4.3.0 beta';
+var VERSION = '4.3.0';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;

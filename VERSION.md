@@ -2,6 +2,30 @@
 
 ## Version
 
+### 4.3.0
+#### 2020/03/01(Sun)
+- update testcode for polyfill
+- rename midian >> median(misstake!!)
+- update isThrownException
+- update array isBothEnds=isBothEdges
+- rename array delete >> deleteLength
+- add array 
+  - deleteIndex
+  - subIndex/subLength
+  - subFirst/subLast
+- add array.operation
+  - includeFirst/includeLast
+  - includeBothEdges(=includeBothEnds)
+  - excludeFirst/excludeLast
+  - excludeBothEdges(=excludeBothEnds)
+  - trimFirst/trimLast
+  - trimBothEdges(=trimBothEnds)
+  - popFirst/popLast
+  - pushFirst/pushLast
+  - remainFirst/Last
+  - filter
+- update isMultiples isOdd isEven
+
 ### 4.2.0
 #### 2020/02/26(Wed)
 - update package.json
