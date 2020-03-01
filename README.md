@@ -234,7 +234,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 4.3.0
-#### 2020/02/27(Thu)
+#### 2020/03/01(Sun)
 - update testcode for polyfill
 - rename midian >> median(misstake!!)
 - add array subIndex/subLength
@@ -252,6 +252,7 @@ You can now use the functions of the parts.js object.
   - remainFirst/Last
 - rename array delete >> deleteLength
 - add array deleteIndex
+- update isMultiples isOdd isEven
 
 ### 4.2.0
 #### 2020/02/26(Wed)

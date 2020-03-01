@@ -13,6 +13,9 @@ const {
  * isMultiples isEven isOdd
  */
 const _isMultiples = (number, radix) => {
+  if (number === 0) {
+    return false;
+  }
   return (number % radix) === 0;
 };
 
@@ -36,10 +39,16 @@ const isMultiples = (number, radix) => {
 };
 
 const isEven = (number) => {
+  if (number === 0) {
+    return false;
+  }
   return isMultiples(number, 2);
 };
 
 const isOdd = (number) => {
+  if (number === 0) {
+    return false;
+  }
   return !isMultiples(number, 2);
 };
 
