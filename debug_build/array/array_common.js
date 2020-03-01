@@ -1,9 +1,5 @@
 "use strict";
 
-var _module$exports;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var _require = require('../type/type.js'),
     isUndefined = _require.isUndefined,
     isNull = _require.isNull,
@@ -655,11 +651,11 @@ var isFirst = function isFirst(array, value) {
   return _isFirst(array, value);
 };
 /**
- * isBothEnds
+ * isBothEdges
  */
 
 
-var _isBothEnds = function _isBothEnds(array, valueFirst) {
+var _isBothEdges = function _isBothEdges(array, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if (array.length <= 1) {
@@ -669,7 +665,7 @@ var _isBothEnds = function _isBothEnds(array, valueFirst) {
   return _isFirst(array, valueFirst) && _isLast(array, valueLast);
 };
 
-var isBothEnds = function isBothEnds(array, valueFirst) {
+var isBothEdges = function isBothEdges(array, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
@@ -687,15 +683,16 @@ var isBothEnds = function isBothEnds(array, valueFirst) {
   }
 
   if (!isArray(array)) {
-    throw new TypeError('isBothEnds args(array) is not array');
+    throw new TypeError('isBothEdges args(array) is not array');
   }
 
-  return _isBothEnds(array, valueFirst, valueLast);
+  return _isBothEdges(array, valueFirst, valueLast);
 };
+
+var isBothEnds = isBothEdges;
 /**
  * subIndex
  */
-
 
 var _subIndex = function _subIndex(array, indexFirst, indexLast) {
   return array.slice(indexFirst, indexLast + 1);
@@ -771,7 +768,7 @@ var subLength = function subLength(array, index, length) {
   return _subLength(array, index, length);
 };
 
-module.exports = (_module$exports = {
+module.exports = {
   _min: _min,
   _max: _max,
   _sum: _sum,
@@ -792,7 +789,7 @@ module.exports = (_module$exports = {
   _all: _all,
   _isFirst: _isFirst,
   _isLast: _isLast,
-  _isBothEnds: _isBothEnds,
+  _isBothEdges: _isBothEdges,
   _subIndex: _subIndex,
   _subLength: _subLength,
   from: from,
@@ -809,17 +806,20 @@ module.exports = (_module$exports = {
   map: map,
   count: count,
   findFirstIndex: findFirstIndex,
-  findIndex: findIndex,
   findLastIndex: findLastIndex,
-  findBackIndex: findBackIndex,
   findFirst: findFirst,
   findLast: findLast,
   some: some,
   all: all,
-  every: every,
   isFirst: isFirst,
   isLast: isLast,
-  isBothEnds: isBothEnds,
+  isBothEdges: isBothEdges,
   subIndex: subIndex,
-  subLength: subLength
-}, _defineProperty(_module$exports, "findIndex", findIndex), _defineProperty(_module$exports, "findBackIndex", findBackIndex), _defineProperty(_module$exports, "find", find), _defineProperty(_module$exports, "findBack", findBack), _module$exports);
+  subLength: subLength,
+  findIndex: findIndex,
+  findBackIndex: findBackIndex,
+  find: find,
+  findBack: findBack,
+  every: every,
+  isBothEnds: isBothEnds
+};
