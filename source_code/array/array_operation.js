@@ -465,7 +465,9 @@ const popLast = (array, value) => {
  * array.operation.pushFirst
  */
 const _pushFirst = (array, value) => {
-  return array.unshift(value);
+  array.unshift(value);
+  return array.length;
+  // WSH array.unshift is return undefined
 };
 
 const pushFirst = (array, value) => {
