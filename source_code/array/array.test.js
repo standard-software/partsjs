@@ -18,6 +18,7 @@ const test_execute_array = (parts) => {
     const {
       isFirst, isLast, isBothEdges,
       subIndex, subLength,
+      subFirst, subLast,
     } = array;
 
     const {
@@ -657,6 +658,44 @@ const test_execute_array = (parts) => {
           subLength({
             array: ['A', 'B', 'A'],
             index:  0,
+            length: 2,
+          })
+        );
+      });
+    };
+
+    const test_array_subFirst = () => {
+      it('test_array_subFirst', () => {
+        var array1 = [0, 1, 2];
+        checkEqual([],       subFirst(array1, 0));
+        checkEqual([0],       subFirst(array1, 1));
+        checkEqual([0, 1],    subFirst(array1, 2));
+        checkEqual([0, 1, 2], subFirst(array1, 3));
+        checkEqual([0, 1, 2], array1);
+
+        // Object Named Parameter
+        checkEqual(['A', 'B'],
+          subFirst({
+            array: ['A', 'B', 'A'],
+            length: 2,
+          })
+        );
+      });
+    };
+
+    const test_array_subLast = () => {
+      it('test_array_subLast', () => {
+        var array1 = [0, 1, 2];
+        checkEqual([],       subLast(array1, 0));
+        checkEqual([2],       subLast(array1, 1));
+        checkEqual([1, 2],    subLast(array1, 2));
+        checkEqual([0, 1, 2], subLast(array1, 3));
+        checkEqual([0, 1, 2], array1);
+
+        // Object Named Parameter
+        checkEqual(['B', 'A'],
+          subLast({
+            array: ['A', 'B', 'A'],
             length: 2,
           })
         );
@@ -1545,6 +1584,8 @@ const test_execute_array = (parts) => {
 
     test_array_subIndex();
     test_array_subLength();
+    test_array_subFirst();
+    test_array_subLast();
 
     test_operation_insert();
     test_operation_add();

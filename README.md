@@ -237,9 +237,13 @@ You can now use the functions of the parts.js object.
 #### 2020/03/01(Sun)
 - update testcode for polyfill
 - rename midian >> median(misstake!!)
-- add array subIndex/subLength
 - update isThrownException
 - update array isBothEnds=isBothEdges
+- rename array delete >> deleteLength
+- add array 
+  - deleteIndex
+  - subIndex/subLength
+  - subFirst/subLast
 - add array.operation
   - includeFirst/includeLast
   - includeBothEdges(=includeBothEnds)
@@ -251,8 +255,6 @@ You can now use the functions of the parts.js object.
   - pushFirst/pushLast
   - remainFirst/Last
   - filter
-- rename array delete >> deleteLength
-- add array deleteIndex
 - update isMultiples isOdd isEven
 
 ### 4.2.0

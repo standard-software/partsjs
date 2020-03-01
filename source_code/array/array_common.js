@@ -718,6 +718,69 @@ const subLength = (array, index, length) => {
   return _subLength(array, index, length);
 };
 
+/**
+ * subFirst
+ */
+const _subFirst = (array, length) => {
+  return _subLength(array, 0, length);
+};
+
+const subFirst = (array, length) => {
+  if (isObjectParameter(array, 'array, length')) {
+    ({ array, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'subFirst args(array) is not array',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'subFirst args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError(
+      'subFirst args(length) must be from 0 to array.length - 1',
+    );
+  }
+
+  return _subFirst(array, length);
+};
+
+/**
+ * subLast
+ */
+const _subLast = (array, length) => {
+  return _subLength(array, array.length - length, length);
+};
+
+const subLast = (array, length) => {
+  if (isObjectParameter(array, 'array, length')) {
+    ({ array, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'subLast args(array) is not array',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'subLast args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError(
+      'subLast args(length) must be from 0 to array.length - 1',
+    );
+  }
+
+  return _subLast(array, length);
+};
+
+
 module.exports = {
   _min, _max,
   _sum, _average, _median,
@@ -729,6 +792,7 @@ module.exports = {
   _some, _all,
   _isFirst, _isLast, _isBothEdges,
   _subIndex, _subLength,
+  _subFirst, _subLast,
 
   from,
   min, max,
@@ -741,6 +805,7 @@ module.exports = {
   some, all,
   isFirst, isLast, isBothEdges,
   subIndex, subLength,
+  subFirst, subLast,
 
   findIndex, findBackIndex,
   find, findBack,

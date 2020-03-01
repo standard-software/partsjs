@@ -187,6 +187,7 @@ propertyNames.ARRAY_PUBLIC =
   'some, all,' +
   'isFirst, isLast, isBothEdges,' +
   'subIndex, subLength,' +
+  'subFirst, subLast,' +
   'findIndex, findBackIndex,' +
   'find, findBack,' +
   'every,' +
