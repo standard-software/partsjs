@@ -398,7 +398,7 @@ var count = function count(array, func) {
   return _count(array, func);
 };
 /**
- * findIndex
+ * findFirstIndex
  */
 
 
@@ -438,7 +438,7 @@ var findFirstIndex = function findFirstIndex(array, func) {
 
 var findIndex = findFirstIndex;
 /**
- * findBackIndex
+ * findLastIndex
  */
 
 var _findLastIndex = function _findLastIndex(array, func) {
@@ -792,7 +792,7 @@ var subFirst = function subFirst(array, length) {
   }
 
   if (!_inRange(length, 0, array.length)) {
-    throw new RangeError('subFirst args(length) must be from 0 to array.length - 1');
+    throw new RangeError('subFirst args(length) must be from 0 to array.length');
   }
 
   return _subFirst(array, length);
@@ -822,7 +822,7 @@ var subLast = function subLast(array, length) {
   }
 
   if (!_inRange(length, 0, array.length)) {
-    throw new RangeError('subLast args(length) must be from 0 to array.length - 1');
+    throw new RangeError('subLast args(length) must be from 0 to array.length');
   }
 
   return _subLast(array, length);

@@ -362,7 +362,7 @@ const count = (array, func) => {
 };
 
 /**
- * findIndex
+ * findFirstIndex
  */
 const _findFirstIndex = (array, func) => {
   for (let i = 0, l = array.length; i < l; i += 1) {
@@ -400,7 +400,7 @@ const findFirstIndex = (array, func) => {
 const findIndex = findFirstIndex;
 
 /**
- * findBackIndex
+ * findLastIndex
  */
 const _findLastIndex = (array, func) => {
   for (let i = array.length - 1; i >= 0; i -= 1) {

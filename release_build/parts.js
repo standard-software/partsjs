@@ -8765,7 +8765,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(341);
 
-var VERSION = '4.3.0';
+var VERSION = '4.4.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -11161,7 +11161,7 @@ var count = function count(array, func) {
   return _count(array, func);
 };
 /**
- * findIndex
+ * findFirstIndex
  */
 
 
@@ -11201,7 +11201,7 @@ var findFirstIndex = function findFirstIndex(array, func) {
 
 var findIndex = findFirstIndex;
 /**
- * findBackIndex
+ * findLastIndex
  */
 
 var _findLastIndex = function _findLastIndex(array, func) {
@@ -11555,7 +11555,7 @@ var subFirst = function subFirst(array, length) {
   }
 
   if (!_inRange(length, 0, array.length)) {
-    throw new RangeError('subFirst args(length) must be from 0 to array.length - 1');
+    throw new RangeError('subFirst args(length) must be from 0 to array.length');
   }
 
   return _subFirst(array, length);
@@ -11585,7 +11585,7 @@ var subLast = function subLast(array, length) {
   }
 
   if (!_inRange(length, 0, array.length)) {
-    throw new RangeError('subLast args(length) must be from 0 to array.length - 1');
+    throw new RangeError('subLast args(length) must be from 0 to array.length');
   }
 
   return _subLast(array, length);
@@ -12080,6 +12080,66 @@ var deleteIndex = function deleteIndex(array, indexFirst) {
   return _deleteIndex(array, indexFirst, indexLast);
 };
 /**
+ * array.operation.deleteFirst
+ */
+
+
+var _deleteFirst = function _deleteFirst(array, length) {
+  return _deleteLength(array, 0, length);
+};
+
+var deleteFirst = function deleteFirst(array, length) {
+  if (isObjectParameter(array, 'array, length')) {
+    var _array6 = array;
+    array = _array6.array;
+    length = _array6.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('deleteFirst args(array) is not array');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('deleteFirst args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError('deleteFirst args(length) must be from 0 to array.length');
+  }
+
+  return _deleteFirst(array, length);
+};
+/**
+ * array.operation.deleteFirst
+ */
+
+
+var _deleteLast = function _deleteLast(array, length) {
+  return _deleteLength(array, array.length - length, length);
+};
+
+var deleteLast = function deleteLast(array, length) {
+  if (isObjectParameter(array, 'array, length')) {
+    var _array7 = array;
+    array = _array7.array;
+    length = _array7.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('deleteLast args(array) is not array');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('deleteLast args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, array.length)) {
+    throw new RangeError('deleteLast args(length) must be from 0 to array.length');
+  }
+
+  return _deleteLast(array, length);
+};
+/**
  * array.operation.includeFirst
  */
 
@@ -12094,9 +12154,9 @@ var _includeFirst = function _includeFirst(array, value) {
 
 var includeFirst = function includeFirst(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array6 = array;
-    array = _array6.array;
-    value = _array6.value;
+    var _array8 = array;
+    array = _array8.array;
+    value = _array8.value;
   }
 
   if (!isArray(array)) {
@@ -12120,9 +12180,9 @@ var _includeLast = function _includeLast(array, value) {
 
 var includeLast = function includeLast(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array7 = array;
-    array = _array7.array;
-    value = _array7.value;
+    var _array9 = array;
+    array = _array9.array;
+    value = _array9.value;
   }
 
   if (!isArray(array)) {
@@ -12152,17 +12212,17 @@ var includeBothEdges = function includeBothEdges(array, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    var _array8 = array;
-    array = _array8.array;
-    valueFirst = _array8.valueFirst;
-    var _array8$valueLast = _array8.valueLast;
-    valueLast = _array8$valueLast === void 0 ? valueFirst : _array8$valueLast;
+    var _array10 = array;
+    array = _array10.array;
+    valueFirst = _array10.valueFirst;
+    var _array10$valueLast = _array10.valueLast;
+    valueLast = _array10$valueLast === void 0 ? valueFirst : _array10$valueLast;
   } else if (isObjectParameter(array, 'array, value')) {
-    var _array9 = array;
-    array = _array9.array;
-    valueFirst = _array9.value;
-    var _array9$valueLast = _array9.valueLast;
-    valueLast = _array9$valueLast === void 0 ? valueFirst : _array9$valueLast;
+    var _array11 = array;
+    array = _array11.array;
+    valueFirst = _array11.value;
+    var _array11$valueLast = _array11.valueLast;
+    valueLast = _array11$valueLast === void 0 ? valueFirst : _array11$valueLast;
   }
 
   if (!isArray(array)) {
@@ -12187,9 +12247,9 @@ var _excludeFirst = function _excludeFirst(array, value) {
 
 var excludeFirst = function excludeFirst(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array10 = array;
-    array = _array10.array;
-    value = _array10.value;
+    var _array12 = array;
+    array = _array12.array;
+    value = _array12.value;
   }
 
   if (!isArray(array)) {
@@ -12213,9 +12273,9 @@ var _excludeLast = function _excludeLast(array, value) {
 
 var excludeLast = function excludeLast(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array11 = array;
-    array = _array11.array;
-    value = _array11.value;
+    var _array13 = array;
+    array = _array13.array;
+    value = _array13.value;
   }
 
   if (!isArray(array)) {
@@ -12245,17 +12305,17 @@ var excludeBothEdges = function excludeBothEdges(array, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    var _array12 = array;
-    array = _array12.array;
-    valueFirst = _array12.valueFirst;
-    var _array12$valueLast = _array12.valueLast;
-    valueLast = _array12$valueLast === void 0 ? valueFirst : _array12$valueLast;
+    var _array14 = array;
+    array = _array14.array;
+    valueFirst = _array14.valueFirst;
+    var _array14$valueLast = _array14.valueLast;
+    valueLast = _array14$valueLast === void 0 ? valueFirst : _array14$valueLast;
   } else if (isObjectParameter(array, 'array, value')) {
-    var _array13 = array;
-    array = _array13.array;
-    valueFirst = _array13.value;
-    var _array13$valueLast = _array13.valueLast;
-    valueLast = _array13$valueLast === void 0 ? valueFirst : _array13$valueLast;
+    var _array15 = array;
+    array = _array15.array;
+    valueFirst = _array15.value;
+    var _array15$valueLast = _array15.valueLast;
+    valueLast = _array15$valueLast === void 0 ? valueFirst : _array15$valueLast;
   }
 
   if (!isArray(array)) {
@@ -12280,9 +12340,9 @@ var _trimFirst = function _trimFirst(array, value) {
 
 var trimFirst = function trimFirst(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array14 = array;
-    array = _array14.array;
-    value = _array14.value;
+    var _array16 = array;
+    array = _array16.array;
+    value = _array16.value;
   }
 
   if (!isArray(array)) {
@@ -12306,9 +12366,9 @@ var _trimLast = function _trimLast(array, value) {
 
 var trimLast = function trimLast(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array15 = array;
-    array = _array15.array;
-    value = _array15.value;
+    var _array17 = array;
+    array = _array17.array;
+    value = _array17.value;
   }
 
   if (!isArray(array)) {
@@ -12340,17 +12400,17 @@ var trimBothEdges = function trimBothEdges(array, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    var _array16 = array;
-    array = _array16.array;
-    valueFirst = _array16.valueFirst;
-    var _array16$valueLast = _array16.valueLast;
-    valueLast = _array16$valueLast === void 0 ? valueFirst : _array16$valueLast;
+    var _array18 = array;
+    array = _array18.array;
+    valueFirst = _array18.valueFirst;
+    var _array18$valueLast = _array18.valueLast;
+    valueLast = _array18$valueLast === void 0 ? valueFirst : _array18$valueLast;
   } else if (isObjectParameter(array, 'array, value')) {
-    var _array17 = array;
-    array = _array17.array;
-    valueFirst = _array17.value;
-    var _array17$valueLast = _array17.valueLast;
-    valueLast = _array17$valueLast === void 0 ? valueFirst : _array17$valueLast;
+    var _array19 = array;
+    array = _array19.array;
+    valueFirst = _array19.value;
+    var _array19$valueLast = _array19.valueLast;
+    valueLast = _array19$valueLast === void 0 ? valueFirst : _array19$valueLast;
   }
 
   if (!isArray(array)) {
@@ -12387,9 +12447,9 @@ var _popLast = function _popLast(array, value) {
 
 var popLast = function popLast(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array18 = array;
-    array = _array18.array;
-    value = _array18.value;
+    var _array20 = array;
+    array = _array20.array;
+    value = _array20.value;
   }
 
   if (!isArray(array)) {
@@ -12410,9 +12470,9 @@ var _pushFirst = function _pushFirst(array, value) {
 
 var pushFirst = function pushFirst(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array19 = array;
-    array = _array19.array;
-    value = _array19.value;
+    var _array21 = array;
+    array = _array21.array;
+    value = _array21.value;
   }
 
   if (!isArray(array)) {
@@ -12432,9 +12492,9 @@ var _pushLast = function _pushLast(array, value) {
 
 var pushLast = function pushLast(array, value) {
   if (isObjectParameter(array, 'array, value')) {
-    var _array20 = array;
-    array = _array20.array;
-    value = _array20.value;
+    var _array22 = array;
+    array = _array22.array;
+    value = _array22.value;
   }
 
   if (!isArray(array)) {
@@ -12458,9 +12518,9 @@ var _remainFirst = function _remainFirst(array, length) {
 
 var remainFirst = function remainFirst(array, length) {
   if (isObjectParameter(array, 'array, length')) {
-    var _array21 = array;
-    array = _array21.array;
-    length = _array21.length;
+    var _array23 = array;
+    array = _array23.array;
+    length = _array23.length;
   }
 
   if (!isArray(array)) {
@@ -12492,9 +12552,9 @@ var _remainLast = function _remainLast(array, length) {
 
 var remainLast = function remainLast(array, length) {
   if (isObjectParameter(array, 'array, length')) {
-    var _array22 = array;
-    array = _array22.array;
-    length = _array22.length;
+    var _array24 = array;
+    array = _array24.array;
+    length = _array24.length;
   }
 
   if (!isArray(array)) {
@@ -12534,9 +12594,9 @@ var _filter = function _filter(array, func) {
 
 var filter = function filter(array, func) {
   if (isObjectParameter(array, 'array, func')) {
-    var _array23 = array;
-    array = _array23.array;
-    func = _array23.func;
+    var _array25 = array;
+    array = _array25.array;
+    func = _array25.func;
   }
 
   if (!isArray(array)) {
@@ -12555,6 +12615,8 @@ module.exports = {
   _add: _add,
   _deleteLength: _deleteLength,
   _deleteIndex: _deleteIndex,
+  _deleteFirst: _deleteFirst,
+  _deleteLast: _deleteLast,
   _includeFirst: _includeFirst,
   _includeLast: _includeLast,
   _includeBothEdges: _includeBothEdges,
@@ -12575,6 +12637,8 @@ module.exports = {
   add: add,
   deleteLength: deleteLength,
   deleteIndex: deleteIndex,
+  deleteFirst: deleteFirst,
+  deleteLast: deleteLast,
   includeFirst: includeFirst,
   includeLast: includeLast,
   includeBothEdges: includeBothEdges,

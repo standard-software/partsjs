@@ -30,6 +30,8 @@ var test_execute_array = function test_execute_array(parts) {
         add = _array$operation.add,
         deleteLength = _array$operation.deleteLength,
         deleteIndex = _array$operation.deleteIndex,
+        deleteFirst = _array$operation.deleteFirst,
+        deleteLast = _array$operation.deleteLast,
         includeFirst = _array$operation.includeFirst,
         includeLast = _array$operation.includeLast,
         includeBothEdges = _array$operation.includeBothEdges,
@@ -48,7 +50,6 @@ var test_execute_array = function test_execute_array(parts) {
     var _parts$number = parts.number,
         isEven = _parts$number.isEven,
         isOdd = _parts$number.isOdd;
-    var equal = parts.equal;
     var isLowerCase = parts.isLowerCase,
         isUpperCase = parts.isUpperCase;
 
@@ -688,6 +689,94 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_operation_deleteFirst = function test_operation_deleteFirst() {
+      it('test_operation_deleteFirst', function () {
+        var array1 = [0, 1, 2];
+        checkEqual([0, 1, 2], deleteFirst(array1, 0));
+        checkEqual([0, 1, 2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([1, 2], deleteFirst(array1, 1));
+        checkEqual([1, 2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([2], deleteFirst(array1, 2));
+        checkEqual([2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([], deleteFirst(array1, 3));
+        checkEqual([], array1); // exception
+
+        checkEqual(true, isThrownException(function () {
+          deleteFirst([1, 2, 3], [0]);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteFirst([1, 2, 3], 4);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteFirst([1, 2, 3], 3);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteFirst([1, 2, 3], 2);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteFirst([1, 2, 3], 1);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteFirst([1, 2, 3], 0);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteFirst([1, 2, 3], -1);
+        }, 'RangeError')); // Object Named Parameter
+
+        checkEqual([1, 2, 3], deleteFirst({
+          array: [0, 1, 2, 3],
+          length: 1
+        }));
+      });
+    };
+
+    var test_operation_deleteLast = function test_operation_deleteLast() {
+      it('test_operation_deleteLast', function () {
+        var array1 = [0, 1, 2];
+        checkEqual([0, 1, 2], deleteLast(array1, 0));
+        checkEqual([0, 1, 2], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([0, 1], deleteLast(array1, 1));
+        checkEqual([0, 1], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([0], deleteLast(array1, 2));
+        checkEqual([0], array1);
+        var array1 = [0, 1, 2];
+        checkEqual([], deleteLast(array1, 3));
+        checkEqual([], array1); // exception
+
+        checkEqual(true, isThrownException(function () {
+          deleteLast([1, 2, 3], [0]);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteLast([1, 2, 3], 4);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteLast([1, 2, 3], 3);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteLast([1, 2, 3], 2);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteLast([1, 2, 3], 1);
+        }, 'RangeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteLast([1, 2, 3], 0);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteLast([1, 2, 3], -1);
+        }, 'RangeError')); // Object Named Parameter
+
+        checkEqual([0, 1, 2], deleteLast({
+          array: [0, 1, 2, 3],
+          length: 1
+        }));
+      });
+    };
+
     var test_operation_includeFirst = function test_operation_includeFirst() {
       it('test_operation_includeFirst', function () {
         checkEqual([1, 2, 3], includeFirst([1, 2, 3], 1));
@@ -1087,6 +1176,8 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_add();
     test_operation_deleteLength();
     test_operation_deleteIndex();
+    test_operation_deleteFirst();
+    test_operation_deleteLast();
     test_operation_includeFirst();
     test_operation_includeLast();
     test_operation_includeBothEdges();
