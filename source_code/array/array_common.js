@@ -657,11 +657,6 @@ const isBothEdges = (
       'isBothEdges args(valueFirstArray) is not array',
     );
   }
-  if (!isArray(valueFirstArray)) {
-    throw new TypeError(
-      'isBothEdges args(valueFirstArray) is not array',
-    );
-  }
   if (!isArray(valueLastArray)) {
     throw new TypeError(
       'isBothEdges args(valueLastArray) is not array',

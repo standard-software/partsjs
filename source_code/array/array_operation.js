@@ -243,16 +243,16 @@ const deleteLast = (array, length) => {
 /**
  * array.operation.includeFirst
  */
-const _includeFirst = (array, value) => {
-  if (!_isFirst(array, [value])) {
-    _insert(array, [value]);
+const _includeFirst = (array, valueArray) => {
+  if (!_isFirst(array, valueArray)) {
+    _insert(array, valueArray);
   }
   return array;
 };
 
-const includeFirst = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const includeFirst = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -260,23 +260,28 @@ const includeFirst = (array, value) => {
       'includeFirst args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'includeFirst args(valueArray) is not array',
+    );
+  }
 
-  return _includeFirst(array, value);
+  return _includeFirst(array, valueArray);
 };
 
 /**
  * array.operation.includeLast
  */
-const _includeLast = (array, value) => {
-  if (!_isLast(array, [value])) {
-    _add(array, [value]);
+const _includeLast = (array, valueArray) => {
+  if (!_isLast(array, valueArray)) {
+    _add(array, valueArray);
   }
   return array;
 };
 
-const includeLast = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const includeLast = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -284,30 +289,39 @@ const includeLast = (array, value) => {
       'includeLast args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'includeLast args(valueArray) is not array',
+    );
+  }
 
-  return _includeLast(array, value);
+  return _includeLast(array, valueArray);
 };
 
 /**
  * array.operation.includeBothEdges
  */
 const _includeBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array,
+  valueFirstArray,
+  valueLastArray = valueFirstArray,
 ) => {
-  if (!_isBothEdges(array, [valueFirst], [valueLast])) {
-    _insert(array, [valueFirst]);
-    _add(array, [valueLast]);
+  if (!_isBothEdges(array, valueFirstArray, valueLastArray)) {
+    _insert(array, valueFirstArray);
+    _add(array, valueLastArray);
   }
   return array;
 };
 
 const includeBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array,
+  valueFirstArray,
+  valueLastArray = valueFirstArray,
 ) => {
-  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    ({ array, valueFirst, valueLast = valueFirst } = array);
-  } else if (isObjectParameter(array, 'array, value')) {
-    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
+    ({ array, valueFirstArray, valueLastArray = valueFirstArray } = array);
+  } else if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray: valueFirstArray, valueLastArray = valueFirstArray } = array);
   }
 
   if (!isArray(array)) {
@@ -315,8 +329,18 @@ const includeBothEdges = (
       'includeBothEdges args(array) is not array',
     );
   }
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError(
+      'includeBothEdges args(valueFirstArray) is not array',
+    );
+  }
+  if (!isArray(valueLastArray)) {
+    throw new TypeError(
+      'includeBothEdges args(valueLastArray) is not array',
+    );
+  }
 
-  return _includeBothEdges(array, valueFirst, valueLast);
+  return _includeBothEdges(array, valueFirstArray, valueLastArray);
 };
 
 const includeBothEnds = includeBothEdges;
