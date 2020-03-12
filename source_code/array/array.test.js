@@ -750,7 +750,7 @@ const test_execute_array = (parts) => {
           [1, 2, 3, 0],
           insert({
             array: [1, 2, 3],
-            values: [0],
+            valueArray: [0],
             index: 3
           })
         );
@@ -808,7 +808,7 @@ const test_execute_array = (parts) => {
           [1, 2, 3, 0],
           add({
             array: [1, 2, 3],
-            values: [0],
+            valueArray: [0],
             index: 2
           })
         );

@@ -21,14 +21,14 @@ const {
 /**
  * array.operation.insert
  */
-const _insert = (array, values, index = 0) => {
-  array.splice(index, 0, ...values);
+const _insert = (array, valueArray, index = 0) => {
+  array.splice(index, 0, ...valueArray);
   return array;
 };
 
-const insert = (array, values, index = 0) => {
-  if (isObjectParameter(array, 'array, values, index')) {
-    ({ array, values, index } = array);
+const insert = (array, valueArray, index = 0) => {
+  if (isObjectParameter(array, 'array, valueArray, index')) {
+    ({ array, valueArray, index } = array);
   }
 
   if (!isArray(array)) {
@@ -36,9 +36,9 @@ const insert = (array, values, index = 0) => {
       'insert args(array) is not array',
     );
   }
-  if (!isArray(values)) {
+  if (!isArray(valueArray)) {
     throw new TypeError(
-      'insert args(values) is not array',
+      'insert args(valueArray) is not array',
     );
   }
   if (!isInteger(index)) {
@@ -52,20 +52,20 @@ const insert = (array, values, index = 0) => {
     );
   }
 
-  return _insert(array, values, index);
+  return _insert(array, valueArray, index);
 };
 
 /**
  * array.operation.add
  */
-const _add = (array, values, index = array.length - 1) => {
-  array.splice(index + 1, 0, ...values);
+const _add = (array, valueArray, index = array.length - 1) => {
+  array.splice(index + 1, 0, ...valueArray);
   return array;
 };
 
-const add = (array, values, index = array.length - 1) => {
-  if (isObjectParameter(array, 'array, values, index')) {
-    ({ array, values, index } = array);
+const add = (array, valueArray, index = array.length - 1) => {
+  if (isObjectParameter(array, 'array, valueArray, index')) {
+    ({ array, valueArray, index } = array);
   }
 
   if (!isArray(array)) {
@@ -73,9 +73,9 @@ const add = (array, values, index = array.length - 1) => {
       'add args(array) is not array',
     );
   }
-  if (!isArray(values)) {
+  if (!isArray(valueArray)) {
     throw new TypeError(
-      'add args(values) is not array',
+      'add args(valueArray) is not array',
     );
   }
   if (!isInteger(index)) {
@@ -89,7 +89,7 @@ const add = (array, values, index = array.length - 1) => {
     );
   }
 
-  return _add(array, values, index);
+  return _add(array, valueArray, index);
 };
 
 /**

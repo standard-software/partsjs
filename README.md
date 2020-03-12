@@ -237,6 +237,8 @@ You can now use the functions of the parts.js object.
 #### 2020/03/02(Mon)
 - add array.operation
   - deleteFirst/deleteLast
+- update array.operation
+  - insert/add args values>>valueArray
 
 ### 4.3.0
 #### 2020/03/01(Sun)
