@@ -182,7 +182,8 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(false, inRange(9, 10, 30));
         checkEqual(false, inRange(31, 10, 30));
         checkEqual(false, inRange(9.99, 10, 30));
-        checkEqual(false, inRange(30.01, 10, 30)); // Object Named Parameter
+        checkEqual(false, inRange(30.01, 10, 30));
+        checkEqual(true, inRange(10, 10, 10)); // Object Named Parameter
 
         checkEqual(true, inRange({
           value: 30,

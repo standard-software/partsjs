@@ -179,6 +179,49 @@ var inRange = function inRange(value, from, to) {
   return _inRange(value, from, to);
 };
 /**
+ * makeInRange
+ */
+
+
+var _makeInRange = function _makeInRange(value, from, to) {
+  if (value < from) {
+    return from;
+  }
+
+  if (to < value) {
+    return to;
+  }
+
+  return value;
+};
+
+var makeInRange = function makeInRange(value, from, to) {
+  if (isObjectParameter(value, 'value, from, to')) {
+    var _value4 = value;
+    value = _value4.value;
+    from = _value4.from;
+    to = _value4.to;
+  }
+
+  if (!isNumber(value)) {
+    throw new TypeError('makeInRange args(value) is not number');
+  }
+
+  if (!isNumber(from)) {
+    throw new TypeError('makeInRange args(from) is not number');
+  }
+
+  if (!isNumber(to)) {
+    throw new TypeError('makeInRange args(to) is not number');
+  }
+
+  if (!(from <= to)) {
+    throw new RangeError('makeInRange args(from,to) must be from <= to');
+  }
+
+  return _makeinRange(value, from, to);
+};
+/**
  * randomInt
  */
 
@@ -209,5 +252,7 @@ module.exports = (_module$exports = {
   isMultiples: isMultiples,
   _round: _round,
   _nearEqual: _nearEqual,
-  _inRange: _inRange
-}, _defineProperty(_module$exports, "isMultiples", isMultiples), _defineProperty(_module$exports, "isEven", isEven), _defineProperty(_module$exports, "isOdd", isOdd), _defineProperty(_module$exports, "round", round), _defineProperty(_module$exports, "nearEqual", nearEqual), _defineProperty(_module$exports, "inRange", inRange), _defineProperty(_module$exports, "randomInt", randomInt), _module$exports);
+  _inRange: _inRange,
+  _makeInRange: _makeInRange,
+  _randomInt: _randomInt
+}, _defineProperty(_module$exports, "isMultiples", isMultiples), _defineProperty(_module$exports, "isEven", isEven), _defineProperty(_module$exports, "isOdd", isOdd), _defineProperty(_module$exports, "round", round), _defineProperty(_module$exports, "nearEqual", nearEqual), _defineProperty(_module$exports, "inRange", inRange), _defineProperty(_module$exports, "makeInRange", makeInRange), _defineProperty(_module$exports, "randomInt", randomInt), _module$exports);
