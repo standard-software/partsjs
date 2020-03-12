@@ -234,13 +234,14 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 4.4.0
-#### 2020/03/02(Mon)
+#### 2020/03/12(Thu)
 - add array.operation
   - deleteFirst/deleteLast
 - update array.operation
   - insert/add args values>>valueArray
   - includeFirst/Last/BothEdges
   - excludeFirst/Last/BothEdges
+  - deleteLength/deleteIndex
 - update array
   - isFirst/isLast/isBothEdges
 - add makeInRange

@@ -6,7 +6,7 @@ const {
 } = require('../type/type.js');
 
 const {
-  _inRange,
+  _inRange, _makeInRange,
 } = require('../number/number.js');
 
 const {
@@ -96,6 +96,11 @@ const add = (array, valueArray, index = array.length - 1) => {
  * array.operation.deleteLength
  */
 const _deleteLength = (array, index, length) => {
+  if (length === 0) {
+    return array;
+  }
+  index = _makeInRange(index, 0, array.length - 1);
+  length = _makeInRange(length, 0, array.length - index);
   array.splice(index, length);
   return array;
 };
@@ -120,16 +125,6 @@ const deleteLength = (array, index, length) => {
       'deleteLength args(length) is not integer',
     );
   }
-  if (!_inRange(index, 0, array.length - 1)) {
-    throw new RangeError(
-      'deleteLength args(index) must be from 0 to array.length - 1',
-    );
-  }
-  if (!_inRange(length, 1, array.length - index)) {
-    throw new RangeError(
-      'deleteLength args(length) must be from 1 to array.length - index',
-    );
-  }
 
   return _deleteLength(array, index, length);
 };
@@ -137,7 +132,11 @@ const deleteLength = (array, index, length) => {
 /**
  * array.operation.deleteIndex
  */
-const _deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
+const _deleteIndex = (
+  array, indexFirst, indexLast = indexFirst,
+) => {
+  indexFirst = _makeInRange(indexFirst, 0, array.length - 1);
+  indexLast = _makeInRange(indexLast, indexFirst, array.length - 1);
   array.splice(indexFirst, indexLast - indexFirst + 1);
   return array;
 };
@@ -164,14 +163,9 @@ const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
       `deleteIndex args(indexLast) is not integer`,
     );
   }
-  if (!_inRange(indexFirst, 0, array.length - 1)) {
+  if (!(indexFirst <= indexLast)) {
     throw new RangeError(
-      'deleteIndex args(indexFirst) must be from 0 to array.length - 1',
-    );
-  }
-  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
-    throw new RangeError(
-      'deleteIndex args(indexLast) must be from indexFirst to array.length - 1',
+      'deleteIndex args(indexFirst,indexLast) must be indexFirst <= indexLast',
     );
   }
 
