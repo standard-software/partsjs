@@ -2,6 +2,20 @@
 
 ## Version
 
+### 4.4.0
+#### 2020/03/12(Thu)
+- add array.operation
+  - deleteFirst/deleteLast
+- update array.operation
+  - insert/add args values>>valueArray
+  - includeFirst/includeLast/includeBothEdges
+  - excludeFirst/excludeLast/excludeBothEdges
+  - deleteLength/deleteIndex
+  - trimFirst/trimLast/trimBothEdges
+- update array
+  - isFirst/isLast/isBothEdges
+- add makeInRange
+
 ### 4.3.0
 #### 2020/03/01(Sun)
 - update testcode for polyfill
