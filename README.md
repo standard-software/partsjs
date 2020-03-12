@@ -243,6 +243,7 @@ You can now use the functions of the parts.js object.
   - excludeFirst/Last/BothEdges
 - update array
   - isFirst/isLast/isBothEdges
+- add makeInRange
 
 ### 4.3.0
 #### 2020/03/01(Sun)

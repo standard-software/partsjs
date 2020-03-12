@@ -160,6 +160,49 @@ const inRange = (value, from, to) => {
 };
 
 /**
+ * makeInRange
+ */
+const _makeInRange = (value, from, to) => {
+  if (value < from) {
+    return from;
+  }
+  if (to < value) {
+    return to;
+  }
+  return value;
+};
+
+const makeInRange = (value, from, to) => {
+  if (isObjectParameter(value, 'value, from, to')) {
+    ({ value, from, to } = value);
+  }
+
+  if (!isNumber(value)) {
+    throw new TypeError(
+      'makeInRange args(value) is not number',
+    );
+  }
+  if (!isNumber(from)) {
+    throw new TypeError(
+      'makeInRange args(from) is not number',
+    );
+  }
+  if (!isNumber(to)) {
+    throw new TypeError(
+      'makeInRange args(to) is not number',
+    );
+  }
+  if (!(from <= to)) {
+    throw new RangeError(
+      'makeInRange args(from,to) must be from <= to',
+    );
+  }
+
+  return _makeinRange(value, from, to);
+};
+
+
+/**
  * randomInt
  */
 const _randomInt = (min, max) => {
@@ -187,10 +230,14 @@ const randomInt = (min, max) => {
 
 module.exports = {
   isMultiples,
-  _round, _nearEqual, _inRange,
+  _round, _nearEqual,
+  _inRange, _makeInRange,
+  _randomInt,
 
   isMultiples, isEven, isOdd,
-  round, nearEqual, inRange, randomInt,
+  round, nearEqual,
+  inRange, makeInRange,
+  randomInt,
 
 };
 
