@@ -1348,6 +1348,20 @@ const test_execute_array = (parts) => {
         checkEqual([],
           excludeBothEdges([1, 2, 1, 2], [1, 2])
         );
+        checkEqual([1, 2, 3, 4, 5],
+          excludeBothEdges(
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4],
+            [3, 5]
+          )
+        );
+        checkEqual([],
+          excludeBothEdges(
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4],
+            [3, 4, 5]
+          )
+        );
         checkEqual([],
           excludeBothEdges([1, 2, 1], [1, 2], [2, 1])
         );

@@ -455,7 +455,8 @@ const excludeBothEdges = (
     array,
     valueFirstArray,
     valueLastArray,
-  );};
+  );
+};
 
 const excludeBothEnds = excludeBothEdges;
 
