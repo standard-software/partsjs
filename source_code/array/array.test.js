@@ -1445,38 +1445,59 @@ const test_execute_array = (parts) => {
     const test_operation_trimFirst = () => {
       it('test_operation_trimFirst', () => {
         checkEqual([2, 3],
-          trimFirst([1, 2, 3], 1)
+          trimFirst([1, 2, 3], [1])
         );
         checkEqual([2, 3],
-          trimFirst([1, 1, 1, 2, 3], 1)
+          trimFirst([1, 1, 1, 2, 3], [1])
         );
         checkEqual([],
-          trimFirst([1, 1, 1, 1, 1], 1)
+          trimFirst([1, 1, 1, 1, 1], [1])
         );
         checkEqual([1, 2, 3],
-          trimFirst([1, 2, 3], 2)
+          trimFirst([1, 2, 3], [2])
         );
+
+        checkEqual([2, 1, 2, 3],
+          trimFirst([1, 2, 1, 2, 3], [1])
+        );
+        checkEqual([3],
+          trimFirst([1, 2, 1, 2, 3], [1, 2])
+        );
+        checkEqual([3],
+          trimFirst([1, 2, 1, 2, 3], [2, 1])
+        );
+
         checkEqual(['B', 'C'],
-          trimFirst(['A', 'B', 'C'], 'A')
+          trimFirst(['A', 'B', 'C'], ['A'])
         );
         checkEqual(['A', 'B', 'C'],
-          trimFirst(['A', 'B', 'C'], 'a')
+          trimFirst(['A', 'B', 'C'], ['a'])
         );
         checkEqual(['A', 'B', 'C'],
-          trimFirst(['A', 'B', 'C'], 'B')
+          trimFirst(['A', 'B', 'C'], ['B'])
+        );
+
+        checkEqual(['B', 'A', 'B', 'C'],
+          trimFirst(['A', 'B', 'A', 'B', 'C'], ['A'])
+        );
+        checkEqual(['C'],
+          trimFirst(['A', 'B', 'A', 'B', 'C'], ['A', 'B'])
+        );
+        checkEqual(['C'],
+          trimFirst(['A', 'B', 'A', 'B', 'C'], ['B', 'A'])
         );
 
         // Object Named Parameter
         checkEqual(['B', 'C'],
           trimFirst({
             array: ['A', 'B', 'C'],
-            value: 'A',
+            valueArray: ['A'],
           })
         );
         checkEqual(['A', 'B', 'C'],
           trimFirst({
             array: ['A', 'B', 'C'],
-            value: 'a',
+            valueArray: ['a'],
           })
         );
       });

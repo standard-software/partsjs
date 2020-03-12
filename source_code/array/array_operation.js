@@ -15,6 +15,7 @@ const {
 
 const {
   _min,
+  _some,
   _isFirst, _isLast, _isBothEdges,
 } = require('../array/array_common.js');
 
@@ -463,16 +464,16 @@ const excludeBothEnds = excludeBothEdges;
 /**
  * array.operation.trimFirst
  */
-const _trimFirst = (array, value) => {
-  while (_isFirst(array, [value])) {
+const _trimFirst = (array, valueArray) => {
+  while (_some(valueArray, value => _isFirst(array, [value]))) {
     _deleteIndex(array, 0);
   }
   return array;
 };
 
-const trimFirst = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const trimFirst = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -480,8 +481,13 @@ const trimFirst = (array, value) => {
       'trimFirst args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'trimFirst args(valueArray) is not array',
+    );
+  }
 
-  return _trimFirst(array, value);
+  return _trimFirst(array, valueArray);
 };
 
 /**

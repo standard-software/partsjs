@@ -242,6 +242,7 @@ You can now use the functions of the parts.js object.
   - includeFirst/Last/BothEdges
   - excludeFirst/Last/BothEdges
   - deleteLength/deleteIndex
+  - trimFirst
 - update array
   - isFirst/isLast/isBothEdges
 - add makeInRange
