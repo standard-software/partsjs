@@ -493,16 +493,16 @@ const trimFirst = (array, valueArray) => {
 /**
  * array.operation.trimLast
  */
-const _trimLast = (array, value) => {
-  while (_isLast(array, [value])) {
+const _trimLast = (array, valueArray) => {
+  while (_some(valueArray, value => _isLast(array, [value]))) {
     _deleteIndex(array, array.length - 1);
   }
   return array;
 };
 
-const trimLast = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const trimLast = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -510,8 +510,14 @@ const trimLast = (array, value) => {
       'trimLast args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'trimLast args(valueArray) is not array',
+    );
+  }
 
-  return _trimLast(array, value);
+
+  return _trimLast(array, valueArray);
 };
 
 /**
