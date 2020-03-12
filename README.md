@@ -240,6 +240,7 @@ You can now use the functions of the parts.js object.
 - update array.operation
   - insert/add args values>>valueArray
   - includeFirst/Last/BothEdges
+  - excludeFirst/Last/BothEdges
 - update array
   - isFirst/isLast/isBothEdges
 

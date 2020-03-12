@@ -1230,32 +1230,48 @@ const test_execute_array = (parts) => {
     const test_operation_excludeFirst = () => {
       it('test_operation_excludeFirst', () => {
         checkEqual([2, 3],
-          excludeFirst([1, 2, 3], 1)
+          excludeFirst([1, 2, 3], [1])
         );
         checkEqual([1, 2, 3],
-          excludeFirst([1, 2, 3], 2)
+          excludeFirst([1, 2, 3], [2])
         );
+        checkEqual([3],
+          excludeFirst([1, 2, 3], [1, 2])
+        );
+        checkEqual([1, 2, 3],
+          excludeFirst([1, 2, 3], [2, 1])
+        );
+
         checkEqual(['B', 'C'],
-          excludeFirst(['A', 'B', 'C'], 'A')
+          excludeFirst(['A', 'B', 'C'], ['A'])
         );
         checkEqual(['A', 'B', 'C'],
-          excludeFirst(['A', 'B', 'C'], 'a')
+          excludeFirst(['A', 'B', 'C'], ['a'])
         );
         checkEqual(['A', 'B', 'C'],
-          excludeFirst(['A', 'B', 'C'], 'B')
+          excludeFirst(['A', 'B', 'C'], ['B'])
+        );
+        checkEqual(['C'],
+          excludeFirst(['A', 'B', 'C'], ['A', 'B'])
+        );
+        checkEqual(['A', 'B', 'C'],
+          excludeFirst(['A', 'B', 'C'], ['a', 'B'])
+        );
+        checkEqual(['A', 'B', 'C'],
+          excludeFirst(['A', 'B', 'C'], ['B', 'A'])
         );
 
         // Object Named Parameter
         checkEqual(['B', 'C'],
           excludeFirst({
             array: ['A', 'B', 'C'],
-            value: 'A',
+            valueArray: ['A'],
           })
         );
         checkEqual(['A', 'B', 'C'],
           excludeFirst({
             array: ['A', 'B', 'C'],
-            value: 'a',
+            valueArray: ['a'],
           })
         );
       });
@@ -1264,32 +1280,48 @@ const test_execute_array = (parts) => {
     const test_operation_excludeLast = () => {
       it('test_operation_excludeLast', () => {
         checkEqual([1, 2],
-          excludeLast([1, 2, 3], 3)
+          excludeLast([1, 2, 3], [3])
         );
         checkEqual([1, 2, 3],
-          excludeLast([1, 2, 3], 2)
+          excludeLast([1, 2, 3], [2])
         );
+        checkEqual([1],
+          excludeLast([1, 2, 3], [2, 3])
+        );
+        checkEqual([1, 2, 3],
+          excludeLast([1, 2, 3], [3, 2])
+        );
+
         checkEqual(['A', 'B'],
-          excludeLast(['A', 'B', 'C'], 'C')
+          excludeLast(['A', 'B', 'C'], ['C'])
         );
         checkEqual(['A', 'B', 'C'],
-          excludeLast(['A', 'B', 'C'], 'c')
+          excludeLast(['A', 'B', 'C'], ['c'])
         );
         checkEqual(['A', 'B', 'C'],
-          excludeLast(['A', 'B', 'C'], 'B')
+          excludeLast(['A', 'B', 'C'], ['B'])
+        );
+        checkEqual(['A'],
+          excludeLast(['A', 'B', 'C'], ['B', 'C'])
+        );
+        checkEqual(['A', 'B', 'C'],
+          excludeLast(['A', 'B', 'C'], ['B', 'c'])
+        );
+        checkEqual(['A', 'B', 'C'],
+          excludeLast(['A', 'B', 'C'], ['C', 'B'])
         );
 
         // Object Named Parameter
         checkEqual(['A', 'B'],
           excludeLast({
             array: ['A', 'B', 'C'],
-            value: 'C',
+            valueArray: ['C'],
           })
         );
         checkEqual(['A', 'B', 'C'],
           excludeLast({
             array: ['A', 'B', 'C'],
-            value: 'c',
+            valueArray: ['c'],
           })
         );
       });
@@ -1299,42 +1331,52 @@ const test_execute_array = (parts) => {
       it('test_operation_excludeBothEdges', () => {
 
         checkEqual([2],
-          excludeBothEdges([1, 2, 1], 1)
+          excludeBothEdges([1, 2, 1], [1])
         );
         checkEqual([1, 2, 3],
-          excludeBothEdges([1, 2, 3], 1)
+          excludeBothEdges([1, 2, 3], [1])
         );
+        checkEqual([],
+          excludeBothEdges([1, 2, 1, 2], [1, 2])
+        );
+        checkEqual([],
+          excludeBothEdges([1, 2, 1], [1, 2], [2, 1])
+        );
+
         checkEqual(['B'],
-          excludeBothEdges(['A', 'B', 'A'], 'A')
+          excludeBothEdges(['A', 'B', 'A'], ['A'])
         );
         checkEqual(['A', 'B', 'A'],
-          excludeBothEdges(['A', 'B', 'A'], 'a')
+          excludeBothEdges(['A', 'B', 'A'], ['a'])
         );
         checkEqual(['A', 'B', 'C'],
-          excludeBothEdges(['A', 'B', 'C'], 'A')
+          excludeBothEdges(['A', 'B', 'C'], ['A'])
+        );
+        checkEqual([],
+          excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])
         );
 
         checkEqual([],
-          excludeBothEdges(['{', '}'], '{', '}')
+          excludeBothEdges(['{', '}'], ['{'], ['}'])
         );
         checkEqual(['A'],
-          excludeBothEdges(['{', 'A', '}'], '{', '}')
+          excludeBothEdges(['{', 'A', '}'], ['{'], ['}'])
         );
         checkEqual(['A', '{', '}'],
-          excludeBothEdges(['A', '{', '}'], '{', '}')
+          excludeBothEdges(['A', '{', '}'], ['{'], ['}'])
         );
 
         checkEqual([],
-          excludeBothEdges(['A', 'A'], 'A')
+          excludeBothEdges(['A', 'A'], ['A'])
         );
         checkEqual(['A'],
-          excludeBothEdges(['A'], 'A')
+          excludeBothEdges(['A'], ['A'])
         );
         checkEqual([''],
-          excludeBothEdges([''], 'A')
+          excludeBothEdges([''], ['A'])
         );
         checkEqual([],
-          excludeBothEdges([], 'A')
+          excludeBothEdges([], ['A'])
         );
 
         // exception
@@ -1346,32 +1388,32 @@ const test_execute_array = (parts) => {
         checkEqual(['B'],
           excludeBothEdges({
             array: ['A', 'B', 'A'],
-            value: 'A',
+            valueArray: ['A'],
           })
         );
         checkEqual(['A', 'B', 'A'],
           excludeBothEdges({
             array: ['A', 'B', 'A'],
-            value: 'a',
+            valueArray: ['a'],
           })
         );
         checkEqual(['B'],
           excludeBothEdges({
             array: ['A', 'B', 'A'],
-            valueFirst: 'A',
+            valueFirstArray: ['A'],
           })
         );
         checkEqual(['A', 'B', 'A', 'D'],
           excludeBothEdges({
             array: ['A', 'B', 'A', 'D'],
-            valueFirst: 'A',
+            valueFirstArray: ['A'],
           })
         );
         checkEqual(['B', 'A'],
           excludeBothEdges({
             array: ['A', 'B', 'A', 'D'],
-            valueFirst: 'A',
-            valueLast: 'D'
+            valueFirstArray: ['A'],
+            valueLastArray: ['D']
           })
         );
       });

@@ -340,7 +340,11 @@ const includeBothEdges = (
     );
   }
 
-  return _includeBothEdges(array, valueFirstArray, valueLastArray);
+  return _includeBothEdges(
+    array,
+    valueFirstArray,
+    valueLastArray,
+  );
 };
 
 const includeBothEnds = includeBothEdges;
@@ -348,16 +352,16 @@ const includeBothEnds = includeBothEdges;
 /**
  * array.operation.excludeFirst
  */
-const _excludeFirst = (array, value) => {
-  if (_isFirst(array, [value])) {
-    _deleteIndex(array, 0);
+const _excludeFirst = (array, valueArray) => {
+  if (_isFirst(array, valueArray)) {
+    _deleteLength(array, 0, valueArray.length);
   }
   return array;
 };
 
-const excludeFirst = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const excludeFirst = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -365,23 +369,32 @@ const excludeFirst = (array, value) => {
       'excludeFirst args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'excludeFirst args(valueArray) is not array',
+    );
+  }
 
-  return _excludeFirst(array, value);
+  return _excludeFirst(array, valueArray);
 };
 
 /**
  * array.operation.excludeLast
  */
-const _excludeLast = (array, value) => {
-  if (_isLast(array, [value])) {
-    _deleteIndex(array, array.length - 1);
+const _excludeLast = (array, valueArray) => {
+  if (_isLast(array, valueArray)) {
+    _deleteLength(
+      array,
+      array.length - valueArray.length,
+      valueArray.length,
+    );
   }
   return array;
 };
 
-const excludeLast = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const excludeLast = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -389,30 +402,43 @@ const excludeLast = (array, value) => {
       'excludeLast args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'excludeLast args(valueArray) is not array',
+    );
+  }
 
-  return _excludeLast(array, value);
+  return _excludeLast(array, valueArray);
 };
 
 /**
  * array.operation.excludeBothEdges
  */
 const _excludeBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array,
+  valueFirstArray,
+  valueLastArray = valueFirstArray,
 ) => {
-  if (_isBothEdges(array, [valueFirst], [valueLast])) {
-    _deleteIndex(array, 0);
-    _deleteIndex(array, array.length - 1);
+  if (_isBothEdges(array, valueFirstArray, valueLastArray)) {
+    _deleteLength(array, 0, valueFirstArray.length);
+    _deleteLength(
+      array,
+      array.length - valueLastArray.length,
+      valueLastArray.length,
+    );
   }
   return array;
 };
 
 const excludeBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array,
+  valueFirstArray,
+  valueLastArray = valueFirstArray,
 ) => {
-  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    ({ array, valueFirst, valueLast = valueFirst } = array);
-  } else if (isObjectParameter(array, 'array, value')) {
-    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
+    ({ array, valueFirstArray, valueLastArray = valueFirstArray } = array);
+  } else if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray: valueFirstArray, valueLastArray = valueFirstArray } = array);
   }
 
   if (!isArray(array)) {
@@ -420,9 +446,22 @@ const excludeBothEdges = (
       'excludeBothEdges args(array) is not array',
     );
   }
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError(
+      'excludeBothEdges args(valueFirstArray) is not array',
+    );
+  }
+  if (!isArray(valueLastArray)) {
+    throw new TypeError(
+      'excludeBothEdges args(valueLastArray) is not array',
+    );
+  }
 
-  return _excludeBothEdges(array, valueFirst, valueLast);
-};
+  return _excludeBothEdges(
+    array,
+    valueFirstArray,
+    valueLastArray,
+  );};
 
 const excludeBothEnds = excludeBothEdges;
 
