@@ -1568,54 +1568,81 @@ const test_execute_array = (parts) => {
       it('test_operation_trimBothEdges', () => {
 
         checkEqual([2],
-          trimBothEdges([1, 2, 1], 1)
+          trimBothEdges([1, 2, 1], [1])
         );
         checkEqual([2],
-          trimBothEdges([1, 1, 2, 1, 1, 1], 1)
+          trimBothEdges([1, 1, 2, 1, 1, 1], [1])
         );
         checkEqual([],
-          trimBothEdges([1, 1, 1], 1)
+          trimBothEdges([1, 1, 1], [1])
         );
         checkEqual([2, 3],
-          trimBothEdges([1, 2, 3], 1)
+          trimBothEdges([1, 2, 3], [1])
         );
+
+        checkEqual([2, 3, 1, 2],
+          trimBothEdges([1, 2, 3, 1, 2], [1])
+        );
+        checkEqual([1, 2, 3, 1],
+          trimBothEdges([1, 2, 3, 1, 2], [2])
+        );
+        checkEqual([3],
+          trimBothEdges([1, 2, 3, 1, 2], [1, 2])
+        );
+        checkEqual([3],
+          trimBothEdges([1, 2, 3, 1, 2], [2, 1])
+        );
+
         checkEqual(['B'],
-          trimBothEdges(['A', 'B', 'A'], 'A')
+          trimBothEdges(['A', 'B', 'A'], ['A'])
         );
         checkEqual(['A', 'B', 'A'],
-          trimBothEdges(['A', 'B', 'A'], 'a')
+          trimBothEdges(['A', 'B', 'A'], ['a'])
         );
         checkEqual(['B', 'C'],
-          trimBothEdges(['A', 'B', 'C'], 'A')
+          trimBothEdges(['A', 'B', 'C'], ['A'])
+        );
+
+        checkEqual(['B', 'C', 'A', 'B'],
+          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A'])
+        );
+        checkEqual(['A', 'B', 'C', 'A'],
+          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B'])
+        );
+        checkEqual(['C'],
+          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A', 'B'])
+        );
+        checkEqual(['C'],
+          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B', 'A'])
         );
 
         checkEqual([],
-          trimBothEdges(['{', '}'], '{', '}')
+          trimBothEdges(['{', '}'], ['{'], ['}'])
         );
         checkEqual([],
-          trimBothEdges(['{', '{', '{', '}', '}', '}'], '{', '}')
+          trimBothEdges(['{', '{', '{', '}', '}', '}'], ['{'], ['}'])
         );
         checkEqual([],
-          trimBothEdges(['{', '{', '{', '}'], '{', '}')
+          trimBothEdges(['{', '{', '{', '}'], ['{'], ['}'])
         );
         checkEqual(['A'],
-          trimBothEdges(['{', 'A', '}'], '{', '}')
+          trimBothEdges(['{', 'A', '}'], ['{'], ['}'])
         );
         checkEqual(['A', '{'],
-          trimBothEdges(['A', '{', '}'], '{', '}')
+          trimBothEdges(['A', '{', '}'], ['{'], ['}'])
         );
 
         checkEqual([],
-          trimBothEdges(['A', 'A'], 'A')
+          trimBothEdges(['A', 'A'], ['A'])
         );
         checkEqual([],
-          trimBothEdges(['A'], 'A')
+          trimBothEdges(['A'], ['A'])
         );
         checkEqual([''],
-          trimBothEdges([''], 'A')
+          trimBothEdges([''], ['A'])
         );
         checkEqual([],
-          trimBothEdges([], 'A')
+          trimBothEdges([], ['A'])
         );
 
         // exception
@@ -1627,32 +1654,32 @@ const test_execute_array = (parts) => {
         checkEqual(['B'],
           trimBothEdges({
             array: ['A', 'B', 'A'],
-            value: 'A',
+            valueArray: ['A'],
           })
         );
         checkEqual(['A', 'B', 'A'],
           trimBothEdges({
             array: ['A', 'B', 'A'],
-            value: 'a',
+            valueArray: ['a'],
           })
         );
         checkEqual(['B'],
           trimBothEdges({
             array: ['A', 'B', 'A'],
-            valueFirst: 'A',
+            valueFirstArray: ['A'],
           })
         );
         checkEqual(['B', 'A', 'D'],
           trimBothEdges({
             array: ['A', 'B', 'A', 'D'],
-            valueFirst: 'A',
+            valueFirstArray: ['A'],
           })
         );
         checkEqual(['B', 'A'],
           trimBothEdges({
             array: ['A', 'B', 'A', 'D'],
-            valueFirst: 'A',
-            valueLast: 'D'
+            valueFirstArray: ['A'],
+            valueLastArray: ['D']
           })
         );
       });

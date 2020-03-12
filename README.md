@@ -239,10 +239,10 @@ You can now use the functions of the parts.js object.
   - deleteFirst/deleteLast
 - update array.operation
   - insert/add args values>>valueArray
-  - includeFirst/Last/BothEdges
-  - excludeFirst/Last/BothEdges
+  - includeFirst/includeLast/includeBothEdges
+  - excludeFirst/excludeLast/excludeBothEdges
   - deleteLength/deleteIndex
-  - trimFirst/trimLast
+  - trimFirst/trimLast/trimBothEdges
 - update array
   - isFirst/isLast/isBothEdges
 - add makeInRange

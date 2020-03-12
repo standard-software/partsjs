@@ -524,24 +524,30 @@ const trimLast = (array, valueArray) => {
  * array.operation.trimBothEdges
  */
 const _trimBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array, valueFirstArray, valueLastArray = valueFirstArray,
 ) => {
-  while (_isFirst(array, [valueFirst])) {
+  while (_some(
+    valueFirstArray,
+    valueFirst => _isFirst(array, [valueFirst]),
+  )) {
     _deleteIndex(array, 0);
   }
-  while (_isLast(array, [valueLast])) {
+  while (_some(
+    valueLastArray,
+    valueLast => _isLast(array, [valueLast]),
+  )) {
     _deleteIndex(array, array.length - 1);
   }
   return array;
 };
 
 const trimBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array, valueFirstArray, valueLastArray = valueFirstArray,
 ) => {
-  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    ({ array, valueFirst, valueLast = valueFirst } = array);
-  } else if (isObjectParameter(array, 'array, value')) {
-    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
+    ({ array, valueFirstArray, valueLastArray = valueFirstArray } = array);
+  } else if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray: valueFirstArray, valueLastArray = valueFirstArray } = array);
   }
 
   if (!isArray(array)) {
@@ -549,8 +555,18 @@ const trimBothEdges = (
       'trimBothEdges args(array) is not array',
     );
   }
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError(
+      'trimBothEdges args(valueFirstArray) is not array',
+    );
+  }
+  if (!isArray(valueLastArray)) {
+    throw new TypeError(
+      'trimBothEdges args(valueLastArray) is not array',
+    );
+  }
 
-  return _trimBothEdges(array, valueFirst, valueLast);
+  return _trimBothEdges(array, valueFirstArray, valueLastArray);
 };
 
 const trimBothEnds = trimBothEdges;
