@@ -522,23 +522,27 @@ const test_execute_array = (parts) => {
 
     const test_isFirst = () => {
       it('test_isFirst', () => {
-        checkEqual(true,  isFirst([1, 2, 3], 1));
-        checkEqual(false, isFirst([1, 2, 3], 2));
-        checkEqual(true,  isFirst(['A', 'B', 'C'], 'A'));
-        checkEqual(false, isFirst(['A', 'B', 'C'], 'a'));
-        checkEqual(false, isFirst(['A', 'B', 'C'], 'B'));
+        checkEqual(true,  isFirst([1, 2, 3], [1]));
+        checkEqual(true,  isFirst([1, 2, 3], [1, 2]));
+        checkEqual(false, isFirst([1, 2, 3], [1, 3]));
+        checkEqual(false, isFirst([1, 2, 3], [2]));
+        checkEqual(true,  isFirst(['A', 'B', 'C'], ['A']));
+        checkEqual(true,  isFirst(['A', 'B', 'C'], ['A', 'B']));
+        checkEqual(false, isFirst(['A', 'B', 'C'], ['A', 'C']));
+        checkEqual(false, isFirst(['A', 'B', 'C'], ['a']));
+        checkEqual(false, isFirst(['A', 'B', 'C'], ['B']));
 
         // Object Named Parameter
         checkEqual(true,
           isFirst({
             array: ['A', 'B', 'C'],
-            value: 'A',
+            valueArray: ['A'],
           })
         );
         checkEqual(false,
           isFirst({
             array: ['A', 'B', 'C'],
-            value: 'a',
+            valueArray: ['a'],
           })
         );
       });
@@ -546,23 +550,27 @@ const test_execute_array = (parts) => {
 
     const test_isLast = () => {
       it('test_isLast', () => {
-        checkEqual(true,  isLast([1, 2, 3], 3));
-        checkEqual(false, isLast([1, 2, 3], 2));
-        checkEqual(true,  isLast(['A', 'B', 'C'], 'C'));
-        checkEqual(false, isLast(['A', 'B', 'C'], 'c'));
-        checkEqual(false, isLast(['A', 'B', 'C'], 'B'));
+        checkEqual(true,  isLast([1, 2, 3], [3]));
+        checkEqual(true,  isLast([1, 2, 3], [2, 3]));
+        checkEqual(false, isLast([1, 2, 3], [1, 3]));
+        checkEqual(false, isLast([1, 2, 3], [2]));
+        checkEqual(true,  isLast(['A', 'B', 'C'], ['C']));
+        checkEqual(true,  isLast(['A', 'B', 'C'], ['B', 'C']));
+        checkEqual(false, isLast(['A', 'B', 'C'], ['A', 'C']));
+        checkEqual(false, isLast(['A', 'B', 'C'], ['c']));
+        checkEqual(false, isLast(['A', 'B', 'C'], ['B']));
 
         // Object Named Parameter
         checkEqual(true,
           isLast({
             array: ['A', 'B', 'C'],
-            value: 'C',
+            valueArray: ['C'],
           })
         );
         checkEqual(false,
           isLast({
             array: ['A', 'B', 'C'],
-            value: 'c',
+            valueArray: ['c'],
           })
         );
       });
@@ -570,54 +578,56 @@ const test_execute_array = (parts) => {
 
     const test_isBothEdges = () => {
       it('test_isBothEdges', () => {
-        checkEqual(true,  isBothEdges([1, 2, 1], 1));
-        checkEqual(false, isBothEdges([1, 2, 1], 2));
-        checkEqual(true,  isBothEdges(['A', 'B', 'A'], 'A'));
-        checkEqual(false, isBothEdges(['A', 'B', 'A'], 'a'));
-        checkEqual(false, isBothEdges(['A', 'B', 'A'], 'B'));
+        checkEqual(true,  isBothEdges([1, 2, 1], [1]));
+        checkEqual(false, isBothEdges([1, 2, 1], [2]));
+        checkEqual(true,  isBothEdges([1, 2, 1], [1, 2], [2, 1]));
+        checkEqual(true,  isBothEdges(['A', 'B', 'A'], ['A']));
+        checkEqual(false, isBothEdges(['A', 'B', 'A'], ['a']));
+        checkEqual(false, isBothEdges(['A', 'B', 'A'], ['B']));
+        checkEqual(true,  isBothEdges(['A', 'B', 'A', 'B'], ['A', 'B']));
 
-        checkEqual(false, isBothEdges(['A', 'B', 'A', 'D'], 'A'));
-        checkEqual(true,  isBothEdges(['A', 'B', 'A', 'D'], 'A', 'D'));
+        checkEqual(false, isBothEdges(['A', 'B', 'A', 'D'], ['A']));
+        checkEqual(true,  isBothEdges(['A', 'B', 'A', 'D'], ['A'], ['D']));
 
-        checkEqual(true,  isBothEdges(['{', 'A', 'B', '}'], '{', '}'));
-        checkEqual(true,  isBothEdges(['{', '{', '}', '}'], '{', '}'));
-        checkEqual(false, isBothEdges(['A', '{', 'B', '}'], '{', '}'));
-        checkEqual(false, isBothEdges(['{', 'A', 'B', '}'], '}', '}'));
-        checkEqual(false, isBothEdges(['{', 'A', 'B', '}'], '{', '{'));
+        checkEqual(true,  isBothEdges(['{', 'A', 'B', '}'], ['{'], ['}']));
+        checkEqual(true,  isBothEdges(['{', '{', '}', '}'], ['{'], ['}']));
+        checkEqual(false, isBothEdges(['A', '{', 'B', '}'], ['{'], ['}']));
+        checkEqual(false, isBothEdges(['{', 'A', 'B', '}'], ['}'], ['}']));
+        checkEqual(false, isBothEdges(['{', 'A', 'B', '}'], ['{'], ['{']));
 
-        checkEqual(false, isBothEdges([1], 1));
-        checkEqual(true,  isBothEdges([1, 1], 1));
+        checkEqual(false, isBothEdges([1], [1]));
+        checkEqual(true,  isBothEdges([1, 1], [1]));
 
         // Object Named Parameter
         checkEqual(true,
           isBothEdges({
             array: ['A', 'B', 'A'],
-            value: 'A',
+            valueArray: ['A'],
           })
         );
         checkEqual(false,
           isBothEdges({
             array: ['A', 'B', 'A'],
-            value: 'a',
+            valueArray: ['a'],
           })
         );
         checkEqual(true,
           isBothEdges({
             array: ['A', 'B', 'A'],
-            valueFirst: 'A',
+            valueFirstArray: ['A'],
           })
         );
         checkEqual(false,
           isBothEdges({
             array: ['A', 'B', 'A', 'D'],
-            valueFirst: 'A',
+            valueFirstArray: ['A'],
           })
         );
         checkEqual(true,
           isBothEdges({
             array: ['A', 'B', 'A', 'D'],
-            valueFirst: 'A',
-            valueLast: 'D'
+            valueFirstArray: ['A'],
+            valueLastArray: ['D']
           })
         );
       });

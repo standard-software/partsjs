@@ -244,7 +244,7 @@ const deleteLast = (array, length) => {
  * array.operation.includeFirst
  */
 const _includeFirst = (array, value) => {
-  if (!_isFirst(array, value)) {
+  if (!_isFirst(array, [value])) {
     _insert(array, [value]);
   }
   return array;
@@ -268,7 +268,7 @@ const includeFirst = (array, value) => {
  * array.operation.includeLast
  */
 const _includeLast = (array, value) => {
-  if (!_isLast(array, value)) {
+  if (!_isLast(array, [value])) {
     _add(array, [value]);
   }
   return array;
@@ -294,7 +294,7 @@ const includeLast = (array, value) => {
 const _includeBothEdges = (
   array, valueFirst, valueLast = valueFirst,
 ) => {
-  if (!_isBothEdges(array, valueFirst, valueLast)) {
+  if (!_isBothEdges(array, [valueFirst], [valueLast])) {
     _insert(array, [valueFirst]);
     _add(array, [valueLast]);
   }
@@ -325,7 +325,7 @@ const includeBothEnds = includeBothEdges;
  * array.operation.excludeFirst
  */
 const _excludeFirst = (array, value) => {
-  if (_isFirst(array, value)) {
+  if (_isFirst(array, [value])) {
     _deleteIndex(array, 0);
   }
   return array;
@@ -349,7 +349,7 @@ const excludeFirst = (array, value) => {
  * array.operation.excludeLast
  */
 const _excludeLast = (array, value) => {
-  if (_isLast(array, value)) {
+  if (_isLast(array, [value])) {
     _deleteIndex(array, array.length - 1);
   }
   return array;
@@ -375,7 +375,7 @@ const excludeLast = (array, value) => {
 const _excludeBothEdges = (
   array, valueFirst, valueLast = valueFirst,
 ) => {
-  if (_isBothEdges(array, valueFirst, valueLast)) {
+  if (_isBothEdges(array, [valueFirst], [valueLast])) {
     _deleteIndex(array, 0);
     _deleteIndex(array, array.length - 1);
   }
@@ -406,7 +406,7 @@ const excludeBothEnds = excludeBothEdges;
  * array.operation.trimFirst
  */
 const _trimFirst = (array, value) => {
-  while (_isFirst(array, value)) {
+  while (_isFirst(array, [value])) {
     _deleteIndex(array, 0);
   }
   return array;
@@ -430,7 +430,7 @@ const trimFirst = (array, value) => {
  * array.operation.trimLast
  */
 const _trimLast = (array, value) => {
-  while (_isLast(array, value)) {
+  while (_isLast(array, [value])) {
     _deleteIndex(array, array.length - 1);
   }
   return array;
@@ -456,10 +456,10 @@ const trimLast = (array, value) => {
 const _trimBothEdges = (
   array, valueFirst, valueLast = valueFirst,
 ) => {
-  while (_isFirst(array, valueFirst)) {
+  while (_isFirst(array, [valueFirst])) {
     _deleteIndex(array, 0);
   }
-  while (_isLast(array, valueLast)) {
+  while (_isLast(array, [valueLast])) {
     _deleteIndex(array, array.length - 1);
   }
   return array;

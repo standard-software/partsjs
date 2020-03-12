@@ -239,6 +239,8 @@ You can now use the functions of the parts.js object.
   - deleteFirst/deleteLast
 - update array.operation
   - insert/add args values>>valueArray
+- update array
+  - isFirst/isLast/isBothEdges
 
 ### 4.3.0
 #### 2020/03/01(Sun)

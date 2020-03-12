@@ -559,40 +559,19 @@ const every = all;
 /**
  * isFirst
  */
-const _isFirst = (array, value) => {
-  if (array.length === 0) {
+const _isFirst = (array, valueArray) => {
+  if (array.length < valueArray.length ) {
     return false;
   }
-  return array[0] === value;
+  return _all(
+    valueArray,
+    (value, index) => array[index] === value,
+  );
 };
 
-const isLast = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
-  }
-
-  if (!isArray(array)) {
-    throw new TypeError(
-      'isLast args(array) is not array',
-    );
-  }
-
-  return _isLast(array, value);
-};
-
-/**
- * isLast
- */
-const _isLast = (array, value) => {
-  if (array.length === 0) {
-    return false;
-  }
-  return array[array.length - 1] === value;
-};
-
-const isFirst = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
+const isFirst = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
   }
 
   if (!isArray(array)) {
@@ -600,29 +579,72 @@ const isFirst = (array, value) => {
       'isFirst args(array) is not array',
     );
   }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'isFirst args(valueArray) is not array',
+    );
+  }
 
-  return _isFirst(array, value);
+  return _isFirst(array, valueArray);
+};
+
+/**
+ * isLast
+ */
+const _isLast = (array, valueArray) => {
+  if (array.length < valueArray.length ) {
+    return false;
+  }
+  return _all(
+    valueArray,
+    (value, index) => array[
+      array.length - valueArray.length + index
+    ] === value,
+  );
+};
+
+const isLast = (array, valueArray) => {
+  if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'isLast args(array) is not array',
+    );
+  }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'isFirst args(valueArray) is not array',
+    );
+  }
+
+  return _isLast(array, valueArray);
 };
 
 /**
  * isBothEdges
  */
 const _isBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array,
+  valueFirstArray,
+  valueLastArray = valueFirstArray,
 ) => {
   if (array.length <= 1) {
     return false;
   }
-  return _isFirst(array, valueFirst) && _isLast(array, valueLast);
+  return _isFirst(array, valueFirstArray) && _isLast(array, valueLastArray);
 };
 
 const isBothEdges = (
-  array, valueFirst, valueLast = valueFirst,
+  array,
+  valueFirstArray,
+  valueLastArray = valueFirstArray,
 ) => {
-  if (isObjectParameter(array, 'array, valueFirst', 'valueLast')) {
-    ({ array, valueFirst, valueLast = valueFirst } = array);
-  } else if (isObjectParameter(array, 'array, value')) {
-    ({ array, value: valueFirst, valueLast = valueFirst } = array);
+  if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
+    ({ array, valueFirstArray, valueLastArray = valueFirstArray } = array);
+  } else if (isObjectParameter(array, 'array, valueArray')) {
+    ({ array, valueArray: valueFirstArray, valueLastArray = valueFirstArray } = array);
   }
 
   if (!isArray(array)) {
@@ -630,8 +652,23 @@ const isBothEdges = (
       'isBothEdges args(array) is not array',
     );
   }
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError(
+      'isBothEdges args(valueFirstArray) is not array',
+    );
+  }
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError(
+      'isBothEdges args(valueFirstArray) is not array',
+    );
+  }
+  if (!isArray(valueLastArray)) {
+    throw new TypeError(
+      'isBothEdges args(valueLastArray) is not array',
+    );
+  }
 
-  return _isBothEdges(array, valueFirst, valueLast);
+  return _isBothEdges(array, valueFirstArray, valueLastArray);
 };
 
 const isBothEnds = isBothEdges;
