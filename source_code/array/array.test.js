@@ -839,18 +839,6 @@ const test_execute_array = (parts) => {
           [1],
           deleteLength([1, 2, 3], 1, 2)
         );
-        checkEqual(
-          [1, 2, 3],
-          deleteLength([1, 2, 3], 1, 0)
-        );
-        checkEqual(
-          [],
-          deleteLength([1, 2, 3], 0, 4)
-        );
-        checkEqual(
-          [3],
-          deleteLength([1, 2, 3], -1, 2)
-        );
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -865,6 +853,15 @@ const test_execute_array = (parts) => {
         checkEqual(false, isThrownException(() => {
           deleteLength([1, 2, 3], 0, 3);
         }));
+        checkEqual(true, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 0);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 4);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          deleteLength([1, 2, 3], -1, 2);
+        }, 'RangeError'));
 
         // Object Named Parameter
         checkEqual(
@@ -892,18 +889,6 @@ const test_execute_array = (parts) => {
           [1],
           deleteIndex([1, 2, 3], 1, 2)
         );
-        checkEqual(
-          [2, 3],
-          deleteIndex([1, 2, 3], -1, 0)
-        );
-        checkEqual(
-          [1],
-          deleteIndex([1, 2, 3], 1, 3)
-        );
-        checkEqual(
-          [2, 3],
-          deleteIndex([1, 2, 3], -1)
-        );
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -921,6 +906,12 @@ const test_execute_array = (parts) => {
         checkEqual(false, isThrownException(() => {
           deleteIndex([1, 2, 3], 0, 2);
         }));
+        checkEqual(true, isThrownException(() => {
+          deleteIndex([1, 2, 3], 0, 3);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(() => {
+          deleteIndex([1, 2, 3], -1);
+        }, 'RangeError'));
 
         // Object Named Parameter
         checkEqual(
@@ -1348,6 +1339,13 @@ const test_execute_array = (parts) => {
         checkEqual([],
           excludeBothEdges([1, 2, 1, 2], [1, 2])
         );
+        checkEqual([],
+          excludeBothEdges(
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4],
+            [5]
+          )
+        );
         checkEqual([1, 2, 3, 4, 5],
           excludeBothEdges(
             [1, 2, 3, 4, 5],
@@ -1377,6 +1375,9 @@ const test_execute_array = (parts) => {
         );
         checkEqual([],
           excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])
+        );
+        checkEqual([],
+          excludeBothEdges(['A', 'B', 'A'], ['A', 'B'], ['B', 'A'])
         );
 
         checkEqual([],

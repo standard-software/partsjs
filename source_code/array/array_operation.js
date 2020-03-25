@@ -97,11 +97,6 @@ const add = (array, valueArray, index = array.length - 1) => {
  * array.operation.deleteLength
  */
 const _deleteLength = (array, index, length) => {
-  if (length === 0) {
-    return array;
-  }
-  index = _makeInRange(index, 0, array.length - 1);
-  length = _makeInRange(length, 0, array.length - index);
   array.splice(index, length);
   return array;
 };
@@ -126,6 +121,16 @@ const deleteLength = (array, index, length) => {
       'deleteLength args(length) is not integer',
     );
   }
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError(
+      'deleteLength args(index) must be from 0 to array.length - 1',
+    );
+  }
+  if (!_inRange(length, 1, array.length - index)) {
+    throw new RangeError(
+      'deleteLength args(length) must be from 1 to array.length - index',
+    );
+  }
 
   return _deleteLength(array, index, length);
 };
@@ -136,8 +141,6 @@ const deleteLength = (array, index, length) => {
 const _deleteIndex = (
   array, indexFirst, indexLast = indexFirst,
 ) => {
-  indexFirst = _makeInRange(indexFirst, 0, array.length - 1);
-  indexLast = _makeInRange(indexLast, indexFirst, array.length - 1);
   array.splice(indexFirst, indexLast - indexFirst + 1);
   return array;
 };
@@ -164,9 +167,14 @@ const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
       `deleteIndex args(indexLast) is not integer`,
     );
   }
-  if (!(indexFirst <= indexLast)) {
+  if (!_inRange(indexFirst, 0, array.length - 1)) {
     throw new RangeError(
-      'deleteIndex args(indexFirst,indexLast) must be indexFirst <= indexLast',
+      'deleteIndex args(indexFirst) must be from 0 to array.length - 1',
+    );
+  }
+  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+    throw new RangeError(
+      'deleteIndex args(indexLast) must be from indexFirst to array.length - 1',
     );
   }
 
@@ -349,7 +357,7 @@ const includeBothEnds = includeBothEdges;
  */
 const _excludeFirst = (array, valueArray) => {
   if (_isFirst(array, valueArray)) {
-    _deleteLength(array, 0, valueArray.length);
+    _deleteFirst(array, valueArray.length);
   }
   return array;
 };
@@ -378,11 +386,7 @@ const excludeFirst = (array, valueArray) => {
  */
 const _excludeLast = (array, valueArray) => {
   if (_isLast(array, valueArray)) {
-    _deleteLength(
-      array,
-      array.length - valueArray.length,
-      valueArray.length,
-    );
+    _deleteLast(array, valueArray.length);
   }
   return array;
 };
@@ -415,12 +419,8 @@ const _excludeBothEdges = (
   valueLastArray = valueFirstArray,
 ) => {
   if (_isBothEdges(array, valueFirstArray, valueLastArray)) {
-    _deleteLength(array, 0, valueFirstArray.length);
-    _deleteLength(
-      array,
-      array.length - valueLastArray.length,
-      valueLastArray.length,
-    );
+    deleteFirst(array, valueFirstArray.length);
+    deleteLast(array, _min([valueLastArray.length, array.length]));
   }
   return array;
 };

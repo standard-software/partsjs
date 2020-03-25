@@ -80,7 +80,7 @@ console.log(
 
 You can now use the functions of the parts.js object.
 
-## How to use Google Apps Script for Rhino and V8
+## How to use parts.js in Google Apps Script for Rhino and V8
 
 ### access Google Apps Script Home 
 
@@ -141,7 +141,7 @@ function myFunction() {
 }
 ```
 
-## How to use Google SpreadSheet
+## How to use parts.js in Google SpreadSheet
 
 same [How to use Google Apps Script]
 
@@ -202,7 +202,7 @@ function myFunction() {
 
 same [How to use Google Apps Script]
 
-## How to use parts in WSH (Windows Scripting Host .wsf file)
+## How to use parts.js in WSH (Windows Scripting Host .wsf file)
 
 ### refer to example
 
@@ -232,6 +232,11 @@ You can now use the functions of the parts.js object.
 
 
 ## Version
+
+### 4.5.0
+#### 2020/03/26(Thu)
+- update array.operation
+  - deleteLength/deleteIndex
 
 ### 4.4.0
 #### 2020/03/12(Thu)
