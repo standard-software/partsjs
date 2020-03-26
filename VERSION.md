@@ -2,6 +2,12 @@
 
 ## Version
 
+### 4.4.1
+#### 2020/03/26(Thu)
+- update array.operation
+  - deleteLength/deleteIndex
+- update README.md
+
 ### 4.4.0
 #### 2020/03/12(Thu)
 - add array.operation

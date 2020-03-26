@@ -233,10 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
-### 4.5.0
+### 4.4.1
 #### 2020/03/26(Thu)
 - update array.operation
   - deleteLength/deleteIndex
+- update README.md
 
 ### 4.4.0
 #### 2020/03/12(Thu)
