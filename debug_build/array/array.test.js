@@ -623,10 +623,7 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_deleteLength', function () {
         checkEqual([1, 3], deleteLength([1, 2, 3], 1, 1));
         checkEqual([3], deleteLength([1, 2, 3], 0, 2));
-        checkEqual([1], deleteLength([1, 2, 3], 1, 2));
-        checkEqual([1, 2, 3], deleteLength([1, 2, 3], 1, 0));
-        checkEqual([], deleteLength([1, 2, 3], 0, 4));
-        checkEqual([3], deleteLength([1, 2, 3], -1, 2)); // exception
+        checkEqual([1], deleteLength([1, 2, 3], 1, 2)); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteLength([1, 2, 3], [0], 1);
@@ -639,7 +636,16 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(false, isThrownException(function () {
           deleteLength([1, 2, 3], 0, 3);
-        })); // Object Named Parameter
+        }));
+        checkEqual(true, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 0);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 4);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteLength([1, 2, 3], -1, 2);
+        }, 'RangeError')); // Object Named Parameter
 
         checkEqual([0, 3], deleteLength({
           array: [0, 1, 2, 3],
@@ -653,10 +659,7 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_deleteIndex', function () {
         checkEqual([1, 3], deleteIndex([1, 2, 3], 1, 1));
         checkEqual([3], deleteIndex([1, 2, 3], 0, 1));
-        checkEqual([1], deleteIndex([1, 2, 3], 1, 2));
-        checkEqual([2, 3], deleteIndex([1, 2, 3], -1, 0));
-        checkEqual([1], deleteIndex([1, 2, 3], 1, 3));
-        checkEqual([2, 3], deleteIndex([1, 2, 3], -1)); // exception
+        checkEqual([1], deleteIndex([1, 2, 3], 1, 2)); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteIndex([1, 2, 3], [0], 1);
@@ -672,7 +675,13 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(false, isThrownException(function () {
           deleteIndex([1, 2, 3], 0, 2);
-        })); // Object Named Parameter
+        }));
+        checkEqual(true, isThrownException(function () {
+          deleteIndex([1, 2, 3], 0, 3);
+        }, 'RangeError'));
+        checkEqual(true, isThrownException(function () {
+          deleteIndex([1, 2, 3], -1);
+        }, 'RangeError')); // Object Named Parameter
 
         checkEqual([0, 2, 3], deleteIndex({
           array: [0, 1, 2, 3],
@@ -925,6 +934,7 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual([2], excludeBothEdges([1, 2, 1], [1]));
         checkEqual([1, 2, 3], excludeBothEdges([1, 2, 3], [1]));
         checkEqual([], excludeBothEdges([1, 2, 1, 2], [1, 2]));
+        checkEqual([], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [5]));
         checkEqual([1, 2, 3, 4, 5], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [3, 5]));
         checkEqual([], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [3, 4, 5]));
         checkEqual([], excludeBothEdges([1, 2, 1], [1, 2], [2, 1]));
@@ -932,6 +942,7 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(['A', 'B', 'A'], excludeBothEdges(['A', 'B', 'A'], ['a']));
         checkEqual(['A', 'B', 'C'], excludeBothEdges(['A', 'B', 'C'], ['A']));
         checkEqual([], excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B']));
+        checkEqual([], excludeBothEdges(['A', 'B', 'A'], ['A', 'B'], ['B', 'A']));
         checkEqual([], excludeBothEdges(['{', '}'], ['{'], ['}']));
         checkEqual(['A'], excludeBothEdges(['{', 'A', '}'], ['{'], ['}']));
         checkEqual(['A', '{', '}'], excludeBothEdges(['A', '{', '}'], ['{'], ['}']));
