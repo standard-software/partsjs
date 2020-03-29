@@ -32,7 +32,7 @@ const hook = (
   hookFunc = () => {},
 ) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError(
+    throw new TypeError(
       'hook args(methodName) is not [log|info|warn|error|debug]',
     );
   }
@@ -68,7 +68,7 @@ const _unHook = (methodName) => {
 
 const unHook = (methodName) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError(
+    throw new TypeError(
       'unHook args(methodName) is not [log|info|warn|error|debug]',
     );
   }
@@ -121,7 +121,7 @@ const accept = (
   hookFunc,
 ) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError(
+    throw new TypeError(
       'accept args(methodName) is not [log|info|warn|error|debug]',
     );
   }
