@@ -235,6 +235,8 @@ You can now use the functions of the parts.js object.
 
 ### 4.5.0
 #### 2020/03/29(Sun)
+- add array.operation
+  - sort(Number|Length|Dictionary)(Ascending|Descending)
 - add compare
   - allMatch someMatch indexOfMatch
 - update consoleHook ErrorType

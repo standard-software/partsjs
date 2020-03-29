@@ -19,7 +19,9 @@ module.exports = {
     "object-curly-spacing": ["off"],
     "no-multi-spaces": ["off"],
     "no-unused-vars": ["off"],
-    "indent": ["warn", 2],
+    "indent": ["warn", 2, {
+      "flatTernaryExpressions": true
+    }],
     "padded-blocks": ["off"],
     "block-spacing": ["warn", "always"],
     "arrow-parens": ["off"],
