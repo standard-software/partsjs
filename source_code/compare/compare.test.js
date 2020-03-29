@@ -5,6 +5,8 @@ const test_execute_compare = (parts) => {
   describe('test_execute_compare', () => {
 
     const {
+      isNull, isUndefined, isNaNStrict,
+
       isUndefinedAll, isNullAll, isNaNStrictAll,
       isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
       isFunctionAll, isObjectAll, isObjectTypeAll,
@@ -24,6 +26,7 @@ const test_execute_compare = (parts) => {
       equalFunction,
       or,
       matchValue, initialValue,
+      allMatch, someMatch, indexOfMatch,
       matchSome, matchSomeValue,
       allMatchSome, someMatchSome, indexOfMatchSome,
       matchAll, matchAllValue,
@@ -1086,6 +1089,101 @@ const test_execute_compare = (parts) => {
       });
     };
 
+
+    const test_allMatch = () =>{
+      it('test_allMatch', () => {
+        checkEqual(true,
+          allMatch([10, 20, 30], value => value > 5),
+        );
+        checkEqual(false,
+          allMatch([10, 20, 30], value => value > 15),
+        );
+        checkEqual(true,
+          allMatch([null, undefined], value => value == null),
+        );
+        checkEqual(false,
+          allMatch([null, undefined], null),
+        );
+
+        checkEqual(false, isThrown(() => {
+          allMatch([10], value => value > 15);
+        }));
+        checkEqual(true, isThrown(() => {
+          allMatch(10, value => value > 15);
+        }));
+      });
+
+    };
+
+    const test_someMatch = () =>{
+      it('test_someMatch', () => {
+        checkEqual(true,
+          someMatch([10, 20, 30], value => value > 5)
+          , 'test_match');
+        checkEqual(true,
+          someMatch([10, 20, 30], value => value > 25),
+        );
+        checkEqual(false,
+          someMatch([10, 20, 30], value => value > 35),
+        );
+        checkEqual(true,
+          someMatch([null, undefined], null),
+        );
+        checkEqual(true,
+          someMatch([null, undefined], isUndefined),
+        );
+        checkEqual(true,
+          someMatch([null, undefined], isNull),
+        );
+        checkEqual(true,
+          someMatch([null, undefined, NaN], isNaNStrict),
+        );
+
+        checkEqual(false, isThrown(() => {
+          someMatch([10], value => value > 15);
+        }));
+        checkEqual(true, isThrown(() => {
+          someMatch(10, value => value > 15);
+        }));
+      });
+
+    };
+
+    const test_indexOfMatch = () =>{
+      it('test_indexOfMatch', () => {
+        checkEqual(0,
+          indexOfMatch([10, 20, 30], value => value > 5)
+          , 'test_match');
+        checkEqual(2,
+          indexOfMatch([10, 20, 30], value => value > 25),
+        );
+        checkEqual(-1,
+          indexOfMatch([10, 20, 30], value => value > 35),
+        );
+        checkEqual(0,
+          indexOfMatch([null, undefined], null),
+        );
+        checkEqual(1,
+          indexOfMatch([null, undefined], isUndefined),
+        );
+        checkEqual(0,
+          indexOfMatch([null, undefined], isNull),
+        );
+        checkEqual(2,
+          indexOfMatch([null, undefined, NaN], isNaNStrict),
+        );
+
+        checkEqual(false, isThrown(() => {
+          indexOfMatch([10], value => value > 15);
+        }));
+        checkEqual(true, isThrown(() => {
+          indexOfMatch(10, value => value > 15);
+        }));
+
+      });
+
+    };
+
     const test_matchSome = () => {
       it('test_matchSome', () => {
         // normal args string
@@ -2024,6 +2122,9 @@ const test_execute_compare = (parts) => {
     test_or();
     test_matchValue();
     test_initialValue();
+    test_allMatch();
+    test_someMatch();
+    test_indexOfMatch();
 
     test_matchSome();
     test_matchSomeValue();

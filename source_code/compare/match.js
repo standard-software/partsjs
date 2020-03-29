@@ -119,6 +119,87 @@ const initialValue = (
 };
 
 /**
+ * allMatch
+ */
+const _allMatch = (
+  valueArray,
+  compare,
+) => {
+  return _all(valueArray, value => {
+    return _match(value, compare);
+  });
+};
+
+const allMatch = (
+  valueArray,
+  compare,
+) => {
+  if (isObjectParameter(valueArray, 'valueArray, compare')) {
+    ({ valueArray, compare } = valueArray);
+  }
+
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'allMatch args(valueArray) is not array',
+    );
+  }
+
+  return _allMatch(valueArray, compare);
+};
+
+/**
+ * indexOfMatch
+ */
+const _indexOfMatch = (
+  valueArray,
+  compare,
+) => {
+  return _findFirstIndex(valueArray, value => {
+    return _match(value, compare);
+  });
+};
+
+const indexOfMatch = (
+  valueArray,
+  compare,
+) => {
+  if (isObjectParameter(valueArray, 'valueArray, compare')) {
+    ({ valueArray, compare } = valueArray);
+  }
+
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'indexOfMatch args(valueArray) is not array',
+    );
+  }
+
+  return _indexOfMatch(valueArray, compare);
+};
+
+/**
+ * someMatch
+ */
+const _someMatch = (
+  valueArray,
+  compare,
+) => {
+  return _indexOfMatch(
+    valueArray,
+    compare,
+  ) !== -1;
+};
+
+const someMatch = (
+  valueArray,
+  compare,
+) => {
+  return indexOfMatch(
+    valueArray,
+    compare,
+  ) !== -1;
+};
+
+/**
  * matchSome
  */
 const _matchSome = (value, compareArray) => {
@@ -142,6 +223,42 @@ const matchSome = (
   }
 
   return _matchSome(value, compareArray);
+};
+
+/**
+ * matchSomeValue
+ */
+const _matchSomeValue = (
+  value,
+  compareArray,
+  valueWhenMatched,
+) => {
+  if (_matchSome(value, compareArray)) {
+    return valueWhenMatched;
+  }
+  return value;
+};
+
+const matchSomeValue = (
+  value,
+  compareArray,
+  valueWhenMatched,
+) => {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
+    ({ value, compareArray, valueWhenMatched } = value);
+  }
+
+  if (!isArray(compareArray)) {
+    throw new TypeError(
+      'matchSomeValue args(compareArray) is not array',
+    );
+  }
+
+  return _matchSomeValue(
+    value,
+    compareArray,
+    valueWhenMatched,
+  );
 };
 
 /**
@@ -177,7 +294,6 @@ const allMatchSome = (
 
   return _allMatchSome(valueArray, compareArray);
 };
-
 
 /**
  * indexOfMatchSome
@@ -237,42 +353,6 @@ const someMatchSome = (
 };
 
 /**
- * matchSomeValue
- */
-const _matchSomeValue = (
-  value,
-  compareArray,
-  valueWhenMatched,
-) => {
-  if (_matchSome(value, compareArray)) {
-    return valueWhenMatched;
-  }
-  return value;
-};
-
-const matchSomeValue = (
-  value,
-  compareArray,
-  valueWhenMatched,
-) => {
-  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
-    ({ value, compareArray, valueWhenMatched } = value);
-  }
-
-  if (!isArray(compareArray)) {
-    throw new TypeError(
-      'matchSomeValue args(compareArray) is not array',
-    );
-  }
-
-  return _matchSomeValue(
-    value,
-    compareArray,
-    valueWhenMatched,
-  );
-};
-
-/**
  * matchAll
  */
 const _matchAll = (value, compareArray) => {
@@ -296,6 +376,42 @@ const matchAll = (
   }
 
   return _matchAll(value, compareArray);
+};
+
+/**
+ * matchAllValue
+ */
+const _matchAllValue = (
+  value,
+  compareArray,
+  valueWhenMatched,
+) => {
+  if (_matchAll(value, compareArray)) {
+    return valueWhenMatched;
+  }
+  return value;
+};
+
+const matchAllValue = (
+  value,
+  compareArray,
+  valueWhenMatched,
+) => {
+  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
+    ({ value, compareArray, valueWhenMatched } = value);
+  }
+
+  if (!isArray(compareArray)) {
+    throw new TypeError(
+      'matchAllValue args(compareArray) is not array',
+    );
+  }
+
+  return _matchAllValue(
+    value,
+    compareArray,
+    valueWhenMatched,
+  );
 };
 
 /**
@@ -390,50 +506,16 @@ const someMatchAll = (
   ) !== -1;
 };
 
-/**
- * matchAllValue
- */
-const _matchAllValue = (
-  value,
-  compareArray,
-  valueWhenMatched,
-) => {
-  if (_matchAll(value, compareArray)) {
-    return valueWhenMatched;
-  }
-  return value;
-};
-
-const matchAllValue = (
-  value,
-  compareArray,
-  valueWhenMatched,
-) => {
-  if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
-    ({ value, compareArray, valueWhenMatched } = value);
-  }
-
-  if (!isArray(compareArray)) {
-    throw new TypeError(
-      'matchAllValue args(compareArray) is not array',
-    );
-  }
-
-  return _matchAllValue(
-    value,
-    compareArray,
-    valueWhenMatched,
-  );
-};
-
 module.exports = {
   _match, _matchValue, _initialValue,
+  _allMatch, _indexOfMatch, _someMatch,
   _matchSome, _matchSomeValue,
   _allMatchSome, _indexOfMatchSome, _someMatchSome,
   _matchAll, _matchAllValue,
   _allMatchAll, _indexOfMatchAll, _someMatchAll,
 
   match, matchValue, initialValue,
+  allMatch, indexOfMatch, someMatch,
   matchSome, matchSomeValue,
   allMatchSome, indexOfMatchSome, someMatchSome,
   matchAll, matchAllValue,

@@ -233,6 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 4.5.0
+#### 2020/03/29(Sun)
+- add compare
+  - allMatch someMatch indexOfMatch
+
 ### 4.4.1
 #### 2020/03/26(Thu)
 - update array.operation
