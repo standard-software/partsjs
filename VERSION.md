@@ -2,6 +2,15 @@
 
 ## Version
 
+### 4.5.0
+#### 2020/03/30(Mon)
+- add array.operation
+  - sort(Number|Length|Dictionary)(Ascending|Descending)
+- add compare
+  - allMatch someMatch indexOfMatch
+- update consoleHook ErrorType
+- bugfix stringToInteger
+
 ### 4.4.1
 #### 2020/03/26(Thu)
 - update array.operation

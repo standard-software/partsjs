@@ -234,7 +234,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 4.5.0
-#### 2020/03/29(Sun)
+#### 2020/03/30(Mon)
 - add array.operation
   - sort(Number|Length|Dictionary)(Ascending|Descending)
 - add compare
