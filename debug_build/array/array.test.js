@@ -1207,6 +1207,78 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_operation_sort = function test_operation_sort() {
+      it('test_operation_sort', function () {
+        // exception
+        checkEqual(true, isThrownException(function () {
+          array.operation.sort([0, 1], 'a', 'ascending');
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sort([0, 1], 'number', 'b');
+        }, 'TypeError'));
+      });
+    };
+
+    var test_operation_sortNumber = function test_operation_sortNumber() {
+      it('test_operation_sortNumber', function () {
+        checkEqual([0, 1, 2, 3, 4, 5], array.operation.sortNumberAscending([3, 4, 1, 2, 5, 0]));
+        checkEqual([5, 4, 3, 2, 1, 0], array.operation.sortNumberDescending([3, 4, 1, 2, 5, 0])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortNumberAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortNumberAscending([0, 1, 2]);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortNumberAscending([0, '1', 2]);
+        }, 'TypeError'));
+      });
+    };
+
+    var test_operation_sortLength = function test_operation_sortLength() {
+      it('test_operation_sortLength', function () {
+        checkEqual(['a', 'aa', 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', 'aa']));
+        checkEqual(['aaa', 'aa', 'a'], array.operation.sortLengthDescending(['aaa', 'a', 'aa']));
+        checkCompare(parts.compare.equalDeep, ['a', [0, 1], 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortLengthAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortLengthAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortLengthAscending([0, 'aa']);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortLengthAscending([[0], [1, 2]]);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortLengthAscending([0, [1, 2]]);
+        }, 'TypeError'));
+      });
+    };
+
+    var test_operation_sortDictionary = function test_operation_sortDictionary() {
+      it('test_operation_sortDictionary', function () {
+        checkEqual(['A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sortDictionaryAscending(['a', 'A', 'Aa', 'aa', 'aA', 'AA']));
+        checkEqual(['aa', 'aA', 'a', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA']));
+        checkEqual(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'], array.operation.sortDictionaryAscending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']));
+        checkEqual(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab'])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError'));
+      });
+    };
+
     test_array_from();
     test_min();
     test_max();
@@ -1254,6 +1326,10 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_remainFirst();
     test_operation_remainLast();
     test_operation_filter();
+    test_operation_sort();
+    test_operation_sortNumber();
+    test_operation_sortLength();
+    test_operation_sortDictionary();
   });
 };
 

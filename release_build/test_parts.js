@@ -169,12 +169,12 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        checkEqual(235, propertyCount(parts));
+        checkEqual(238, propertyCount(parts));
         checkEqual(3, propertyCount(parts.root));
         checkEqual(13, propertyCount(parts.platform));
         checkEqual(140, propertyCount(parts.type));
         checkEqual(9, propertyCount(parts.test));
-        checkEqual(20, propertyCount(parts.compare));
+        checkEqual(23, propertyCount(parts.compare));
         checkEqual(23, propertyCount(parts.convert));
         checkEqual(7, propertyCount(parts.number));
         checkEqual(6, propertyCount(parts.string));
@@ -19930,6 +19930,9 @@ var test_execute_compare = function test_execute_compare(parts) {
       it = _parts$test.it;
   describe('test_execute_compare', function () {
     var _parts$type = parts.type,
+        isNull = _parts$type.isNull,
+        isUndefined = _parts$type.isUndefined,
+        isNaNStrict = _parts$type.isNaNStrict,
         isUndefinedAll = _parts$type.isUndefinedAll,
         isNullAll = _parts$type.isNullAll,
         isNaNStrictAll = _parts$type.isNaNStrictAll,
@@ -19957,6 +19960,9 @@ var test_execute_compare = function test_execute_compare(parts) {
         or = _parts$compare.or,
         matchValue = _parts$compare.matchValue,
         initialValue = _parts$compare.initialValue,
+        allMatch = _parts$compare.allMatch,
+        someMatch = _parts$compare.someMatch,
+        indexOfMatch = _parts$compare.indexOfMatch,
         matchSome = _parts$compare.matchSome,
         matchSomeValue = _parts$compare.matchSomeValue,
         allMatchSome = _parts$compare.allMatchSome,
@@ -21244,6 +21250,87 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
+    var test_allMatch = function test_allMatch() {
+      it('test_allMatch', function () {
+        checkEqual(true, allMatch([10, 20, 30], function (value) {
+          return value > 5;
+        }));
+        checkEqual(false, allMatch([10, 20, 30], function (value) {
+          return value > 15;
+        }));
+        checkEqual(true, allMatch([null, undefined], function (value) {
+          return value == null;
+        }));
+        checkEqual(false, allMatch([null, undefined], null));
+        checkEqual(false, isThrown(function () {
+          allMatch([10], function (value) {
+            return value > 15;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          allMatch(10, function (value) {
+            return value > 15;
+          });
+        }));
+      });
+    };
+
+    var test_someMatch = function test_someMatch() {
+      it('test_someMatch', function () {
+        checkEqual(true, someMatch([10, 20, 30], function (value) {
+          return value > 5;
+        }), 'test_match');
+        checkEqual(true, someMatch([10, 20, 30], function (value) {
+          return value > 25;
+        }));
+        checkEqual(false, someMatch([10, 20, 30], function (value) {
+          return value > 35;
+        }));
+        checkEqual(true, someMatch([null, undefined], null));
+        checkEqual(true, someMatch([null, undefined], isUndefined));
+        checkEqual(true, someMatch([null, undefined], isNull));
+        checkEqual(true, someMatch([null, undefined, NaN], isNaNStrict));
+        checkEqual(false, isThrown(function () {
+          someMatch([10], function (value) {
+            return value > 15;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          someMatch(10, function (value) {
+            return value > 15;
+          });
+        }));
+      });
+    };
+
+    var test_indexOfMatch = function test_indexOfMatch() {
+      it('test_indexOfMatch', function () {
+        checkEqual(0, indexOfMatch([10, 20, 30], function (value) {
+          return value > 5;
+        }), 'test_match');
+        checkEqual(2, indexOfMatch([10, 20, 30], function (value) {
+          return value > 25;
+        }));
+        checkEqual(-1, indexOfMatch([10, 20, 30], function (value) {
+          return value > 35;
+        }));
+        checkEqual(0, indexOfMatch([null, undefined], null));
+        checkEqual(1, indexOfMatch([null, undefined], isUndefined));
+        checkEqual(0, indexOfMatch([null, undefined], isNull));
+        checkEqual(2, indexOfMatch([null, undefined, NaN], isNaNStrict));
+        checkEqual(false, isThrown(function () {
+          indexOfMatch([10], function (value) {
+            return value > 15;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfMatch(10, function (value) {
+            return value > 15;
+          });
+        }));
+      });
+    };
+
     var test_matchSome = function test_matchSome() {
       it('test_matchSome', function () {
         // normal args string
@@ -22050,6 +22137,9 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_or();
     test_matchValue();
     test_initialValue();
+    test_allMatch();
+    test_someMatch();
+    test_indexOfMatch();
     test_matchSome();
     test_matchSomeValue();
     test_allMatchSome();
@@ -22095,6 +22185,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         numberToString = _parts$convert.numberToString,
         stringToNumber = _parts$convert.stringToNumber,
         stringToNumberDefault = _parts$convert.stringToNumberDefault,
+        stringToInteger = _parts$convert.stringToInteger,
         stringToIntegerDefault = _parts$convert.stringToIntegerDefault,
         toNumber = _parts$convert.toNumber,
         toInteger = _parts$convert.toInteger;
@@ -22193,6 +22284,177 @@ var test_execute_convert = function test_execute_convert(parts) {
     var test_stringToNumber = function test_stringToNumber() {
       it('test_stringToNumber', function () {
         // Integer
+        checkEqual(123, stringToNumber('123'));
+        checkEqual(123, stringToNumber('0123'));
+        checkEqual(123, stringToNumber('+123'));
+        checkEqual(-123, stringToNumber('-0123'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('a123');
+        })); // Decimal
+
+        checkEqual(123.4, stringToNumber('123.4'));
+        checkEqual(123.4, stringToNumber('0123.4'));
+        checkEqual(123.4, stringToNumber('+123.4'));
+        checkEqual(-123.4, stringToNumber('-0123.4'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123.4　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123 .4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123. 4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('a123.4');
+        }));
+        checkEqual(123.45, stringToNumber('123.45'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4.5');
+        })); // // string  value
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('abc');
+        })); // // space string
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　');
+        })); // // exponential notation
+
+        checkEqual(3.14, stringToNumber('3.14'));
+        checkEqual(3.14, stringToNumber('314e-2'));
+        checkEqual(3.14, stringToNumber('0.0314E+2'));
+        checkEqual(0.14, stringToNumber('.14'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
+        checkEqual(0.00000000000000001, stringToNumber('1e-17'));
+        checkEqual(1e-17, stringToNumber('1e-17')); // // exponential notation detail
+
+        checkEqual(1, stringToNumber('1.'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.1e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.1e+');
+        }));
+        checkEqual(100000, stringToNumber('1e+5'));
+        checkEqual(0.00001, stringToNumber('1e-5'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.e+');
+        }));
+        checkEqual(100000, stringToNumber('1.e+5')); // // Numer different
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('Infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('inf');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('info');
+        })); // Exception
+
+        var i = 0;
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToNumber(123);
+        }, new TypeError().name), "test stringToNumber exception ".concat(i)); // Object Named Parameter
+
+        checkEqual(-123, stringToNumber({
+          value: '-0123'
+        }));
+      });
+    };
+
+    var test_stringToNumberDefault = function test_stringToNumberDefault() {
+      it('test_stringToNumberDefault', function () {
+        // Integer
         checkEqual(123, stringToNumberDefault('123'));
         checkEqual(123, stringToNumberDefault('0123'));
         checkEqual(123, stringToNumberDefault('+123'));
@@ -22277,6 +22539,239 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(null, stringToNumberDefault({
           value: 'abc',
           defaultValue: null
+        }));
+      });
+    };
+
+    var test_stringToInteger = function test_stringToInteger() {
+      it('test_stringToInteger', function () {
+        // Integer
+        checkEqual(123, stringToInteger('123'));
+        checkEqual(123, stringToInteger('0123'));
+        checkEqual(123, stringToInteger('+123'));
+        checkEqual(-123, stringToInteger('-0123'));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('a123');
+        })); // Decimal
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('+123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-0123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123 .4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123. 4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('a123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.45');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4.5');
+        })); // Positive number
+
+        checkEqual(32, stringToInteger('32'));
+        checkEqual(32, stringToInteger('32', 10));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('31.5', 10);
+        }));
+        checkEqual(32, stringToInteger('100000', 2));
+        checkEqual(31, stringToInteger('11111', 2));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('11111.1', 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('11111.01', 2);
+        }));
+        checkEqual(32, stringToInteger('40', 8));
+        checkEqual(31, stringToInteger('37', 8));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('37.4', 8);
+        }));
+        checkEqual(32, stringToInteger('20', 16));
+        checkEqual(31, stringToInteger('1f', 16));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1f.8', 16);
+        }));
+        checkEqual(32, stringToInteger('44', 7));
+        checkEqual(31, stringToInteger('43', 7));
+        checkEqual(255, stringToInteger('255', 10));
+        checkEqual(11, stringToInteger('11', 10));
+        checkEqual(255, stringToInteger('FF', 16));
+        checkEqual(16, stringToInteger('20', 8));
+        checkEqual(255, stringToInteger('ff', 16));
+        checkEqual(11, stringToInteger('b', 16));
+        checkEqual(127, stringToInteger('177', 8));
+        checkEqual(10, stringToInteger('12', 8));
+        checkEqual(3, stringToInteger('11', 2));
+        checkEqual(15, stringToInteger('1111', 2)); // Negative number
+
+        checkEqual(-32, stringToInteger('-32'));
+        checkEqual(-32, stringToInteger('-32', 10));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-31.5', 10);
+        }));
+        checkEqual(-32, stringToInteger('-100000', 2));
+        checkEqual(-31, stringToInteger('-11111', 2));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-11111.1', 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-11111.01', 2);
+        }));
+        checkEqual(-32, stringToInteger('-40', 8));
+        checkEqual(-31, stringToInteger('-37', 8));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-37.4', 8);
+        }));
+        checkEqual(-32, stringToInteger('-20', 16));
+        checkEqual(-31, stringToInteger('-1f', 16));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-1f.8', 16);
+        }));
+        checkEqual(-32, stringToInteger('-44', 7));
+        checkEqual(-31, stringToInteger('-43', 7));
+        checkEqual(-255, stringToInteger('-255', 10));
+        checkEqual(-11, stringToInteger('-11', 10));
+        checkEqual(-255, stringToInteger('-FF', 16));
+        checkEqual(-16, stringToInteger('-20', 8));
+        checkEqual(-255, stringToInteger('-ff', 16));
+        checkEqual(-11, stringToInteger('-b', 16));
+        checkEqual(-127, stringToInteger('-177', 8));
+        checkEqual(-10, stringToInteger('-12', 8));
+        checkEqual(-3, stringToInteger('-11', 2));
+        checkEqual(-15, stringToInteger('-1111', 2)); // // Default Value
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('abc');
+        })); // checkEqual(null,      stringToInteger('abc', null,  10));
+        // checkEqual(NaN,       stringToInteger('abc', NaN,   10));
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('Infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('inf');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('info');
+        })); // Exception
+
+        var i = 0;
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger(123);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(false, isThrownException(function () {
+          stringToInteger('123', 2);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger('123', 2.5);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger('123', 1);
+        }, new RangeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(false, isThrownException(function () {
+          stringToInteger('123', 36);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger('123', 37);
+        }, new RangeError().name), "test stringToInteger exception ".concat(i)); // Object Named Parameter
+
+        checkEqual(-123, stringToInteger({
+          value: '-0123'
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger({
+            value: 'abc'
+          });
+        }));
+        checkEqual(-15, stringToInteger({
+          value: '-1111',
+          radix: 2
         }));
       });
     };
@@ -22664,6 +23159,8 @@ var test_execute_convert = function test_execute_convert(parts) {
 
     test_numberToString();
     test_stringToNumber();
+    test_stringToNumberDefault();
+    test_stringToInteger();
     test_stringToIntegerDefault();
     test_NumberCast();
     test_toNumber();
@@ -24569,6 +25066,78 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_operation_sort = function test_operation_sort() {
+      it('test_operation_sort', function () {
+        // exception
+        checkEqual(true, isThrownException(function () {
+          array.operation.sort([0, 1], 'a', 'ascending');
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sort([0, 1], 'number', 'b');
+        }, 'TypeError'));
+      });
+    };
+
+    var test_operation_sortNumber = function test_operation_sortNumber() {
+      it('test_operation_sortNumber', function () {
+        checkEqual([0, 1, 2, 3, 4, 5], array.operation.sortNumberAscending([3, 4, 1, 2, 5, 0]));
+        checkEqual([5, 4, 3, 2, 1, 0], array.operation.sortNumberDescending([3, 4, 1, 2, 5, 0])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortNumberAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortNumberAscending([0, 1, 2]);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortNumberAscending([0, '1', 2]);
+        }, 'TypeError'));
+      });
+    };
+
+    var test_operation_sortLength = function test_operation_sortLength() {
+      it('test_operation_sortLength', function () {
+        checkEqual(['a', 'aa', 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', 'aa']));
+        checkEqual(['aaa', 'aa', 'a'], array.operation.sortLengthDescending(['aaa', 'a', 'aa']));
+        checkCompare(parts.compare.equalDeep, ['a', [0, 1], 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortLengthAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortLengthAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortLengthAscending([0, 'aa']);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortLengthAscending([[0], [1, 2]]);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortLengthAscending([0, [1, 2]]);
+        }, 'TypeError'));
+      });
+    };
+
+    var test_operation_sortDictionary = function test_operation_sortDictionary() {
+      it('test_operation_sortDictionary', function () {
+        checkEqual(['A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sortDictionaryAscending(['a', 'A', 'Aa', 'aa', 'aA', 'AA']));
+        checkEqual(['aa', 'aA', 'a', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA']));
+        checkEqual(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'], array.operation.sortDictionaryAscending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']));
+        checkEqual(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab'])); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError'));
+      });
+    };
+
     test_array_from();
     test_min();
     test_max();
@@ -24616,6 +25185,10 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_remainFirst();
     test_operation_remainLast();
     test_operation_filter();
+    test_operation_sort();
+    test_operation_sortNumber();
+    test_operation_sortLength();
+    test_operation_sortDictionary();
   });
 };
 

@@ -162,7 +162,7 @@ var _stringToIntegerBase = function _stringToIntegerBase(value, defaultValueFunc
 
 var _stringToInteger = function _stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
-  return _stringToNumberBase(value, function () {
+  return _stringToIntegerBase(value, function () {
     throw new RangeError('stringToInteger args(value) is not changeing integer');
   }, radix);
 };

@@ -9,6 +9,9 @@ var test_execute_compare = function test_execute_compare(parts) {
       it = _parts$test.it;
   describe('test_execute_compare', function () {
     var _parts$type = parts.type,
+        isNull = _parts$type.isNull,
+        isUndefined = _parts$type.isUndefined,
+        isNaNStrict = _parts$type.isNaNStrict,
         isUndefinedAll = _parts$type.isUndefinedAll,
         isNullAll = _parts$type.isNullAll,
         isNaNStrictAll = _parts$type.isNaNStrictAll,
@@ -36,6 +39,9 @@ var test_execute_compare = function test_execute_compare(parts) {
         or = _parts$compare.or,
         matchValue = _parts$compare.matchValue,
         initialValue = _parts$compare.initialValue,
+        allMatch = _parts$compare.allMatch,
+        someMatch = _parts$compare.someMatch,
+        indexOfMatch = _parts$compare.indexOfMatch,
         matchSome = _parts$compare.matchSome,
         matchSomeValue = _parts$compare.matchSomeValue,
         allMatchSome = _parts$compare.allMatchSome,
@@ -1323,6 +1329,87 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
+    var test_allMatch = function test_allMatch() {
+      it('test_allMatch', function () {
+        checkEqual(true, allMatch([10, 20, 30], function (value) {
+          return value > 5;
+        }));
+        checkEqual(false, allMatch([10, 20, 30], function (value) {
+          return value > 15;
+        }));
+        checkEqual(true, allMatch([null, undefined], function (value) {
+          return value == null;
+        }));
+        checkEqual(false, allMatch([null, undefined], null));
+        checkEqual(false, isThrown(function () {
+          allMatch([10], function (value) {
+            return value > 15;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          allMatch(10, function (value) {
+            return value > 15;
+          });
+        }));
+      });
+    };
+
+    var test_someMatch = function test_someMatch() {
+      it('test_someMatch', function () {
+        checkEqual(true, someMatch([10, 20, 30], function (value) {
+          return value > 5;
+        }), 'test_match');
+        checkEqual(true, someMatch([10, 20, 30], function (value) {
+          return value > 25;
+        }));
+        checkEqual(false, someMatch([10, 20, 30], function (value) {
+          return value > 35;
+        }));
+        checkEqual(true, someMatch([null, undefined], null));
+        checkEqual(true, someMatch([null, undefined], isUndefined));
+        checkEqual(true, someMatch([null, undefined], isNull));
+        checkEqual(true, someMatch([null, undefined, NaN], isNaNStrict));
+        checkEqual(false, isThrown(function () {
+          someMatch([10], function (value) {
+            return value > 15;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          someMatch(10, function (value) {
+            return value > 15;
+          });
+        }));
+      });
+    };
+
+    var test_indexOfMatch = function test_indexOfMatch() {
+      it('test_indexOfMatch', function () {
+        checkEqual(0, indexOfMatch([10, 20, 30], function (value) {
+          return value > 5;
+        }), 'test_match');
+        checkEqual(2, indexOfMatch([10, 20, 30], function (value) {
+          return value > 25;
+        }));
+        checkEqual(-1, indexOfMatch([10, 20, 30], function (value) {
+          return value > 35;
+        }));
+        checkEqual(0, indexOfMatch([null, undefined], null));
+        checkEqual(1, indexOfMatch([null, undefined], isUndefined));
+        checkEqual(0, indexOfMatch([null, undefined], isNull));
+        checkEqual(2, indexOfMatch([null, undefined, NaN], isNaNStrict));
+        checkEqual(false, isThrown(function () {
+          indexOfMatch([10], function (value) {
+            return value > 15;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfMatch(10, function (value) {
+            return value > 15;
+          });
+        }));
+      });
+    };
+
     var test_matchSome = function test_matchSome() {
       it('test_matchSome', function () {
         // normal args string
@@ -2129,6 +2216,9 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_or();
     test_matchValue();
     test_initialValue();
+    test_allMatch();
+    test_someMatch();
+    test_indexOfMatch();
     test_matchSome();
     test_matchSomeValue();
     test_allMatchSome();

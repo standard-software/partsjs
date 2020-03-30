@@ -18,6 +18,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         numberToString = _parts$convert.numberToString,
         stringToNumber = _parts$convert.stringToNumber,
         stringToNumberDefault = _parts$convert.stringToNumberDefault,
+        stringToInteger = _parts$convert.stringToInteger,
         stringToIntegerDefault = _parts$convert.stringToIntegerDefault,
         toNumber = _parts$convert.toNumber,
         toInteger = _parts$convert.toInteger;
@@ -116,6 +117,177 @@ var test_execute_convert = function test_execute_convert(parts) {
     var test_stringToNumber = function test_stringToNumber() {
       it('test_stringToNumber', function () {
         // Integer
+        checkEqual(123, stringToNumber('123'));
+        checkEqual(123, stringToNumber('0123'));
+        checkEqual(123, stringToNumber('+123'));
+        checkEqual(-123, stringToNumber('-0123'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('a123');
+        })); // Decimal
+
+        checkEqual(123.4, stringToNumber('123.4'));
+        checkEqual(123.4, stringToNumber('0123.4'));
+        checkEqual(123.4, stringToNumber('+123.4'));
+        checkEqual(-123.4, stringToNumber('-0123.4'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' 123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　123.4　');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123 .4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123. 4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('a123.4');
+        }));
+        checkEqual(123.45, stringToNumber('123.45'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('123.4.5');
+        })); // // string  value
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('abc');
+        })); // // space string
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(' ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('　');
+        })); // // exponential notation
+
+        checkEqual(3.14, stringToNumber('3.14'));
+        checkEqual(3.14, stringToNumber('314e-2'));
+        checkEqual(3.14, stringToNumber('0.0314E+2'));
+        checkEqual(0.14, stringToNumber('.14'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
+        checkEqual(0.00000000000000001, stringToNumber('1e-17'));
+        checkEqual(1e-17, stringToNumber('1e-17')); // // exponential notation detail
+
+        checkEqual(1, stringToNumber('1.'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.1e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.1e+');
+        }));
+        checkEqual(100000, stringToNumber('1e+5'));
+        checkEqual(0.00001, stringToNumber('1e-5'));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('1.e+');
+        }));
+        checkEqual(100000, stringToNumber('1.e+5')); // // Numer different
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('Infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('inf');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('info');
+        })); // Exception
+
+        var i = 0;
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToNumber(123);
+        }, new TypeError().name), "test stringToNumber exception ".concat(i)); // Object Named Parameter
+
+        checkEqual(-123, stringToNumber({
+          value: '-0123'
+        }));
+      });
+    };
+
+    var test_stringToNumberDefault = function test_stringToNumberDefault() {
+      it('test_stringToNumberDefault', function () {
+        // Integer
         checkEqual(123, stringToNumberDefault('123'));
         checkEqual(123, stringToNumberDefault('0123'));
         checkEqual(123, stringToNumberDefault('+123'));
@@ -200,6 +372,239 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(null, stringToNumberDefault({
           value: 'abc',
           defaultValue: null
+        }));
+      });
+    };
+
+    var test_stringToInteger = function test_stringToInteger() {
+      it('test_stringToInteger', function () {
+        // Integer
+        checkEqual(123, stringToInteger('123'));
+        checkEqual(123, stringToInteger('0123'));
+        checkEqual(123, stringToInteger('+123'));
+        checkEqual(-123, stringToInteger('-0123'));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1 123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('a123');
+        })); // Decimal
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('+123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-0123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' 123.4 ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4 0');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1 123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123 .4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123. 4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4a');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('a123.4');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.45');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('123.4.5');
+        })); // Positive number
+
+        checkEqual(32, stringToInteger('32'));
+        checkEqual(32, stringToInteger('32', 10));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('31.5', 10);
+        }));
+        checkEqual(32, stringToInteger('100000', 2));
+        checkEqual(31, stringToInteger('11111', 2));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('11111.1', 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('11111.01', 2);
+        }));
+        checkEqual(32, stringToInteger('40', 8));
+        checkEqual(31, stringToInteger('37', 8));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('37.4', 8);
+        }));
+        checkEqual(32, stringToInteger('20', 16));
+        checkEqual(31, stringToInteger('1f', 16));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1f.8', 16);
+        }));
+        checkEqual(32, stringToInteger('44', 7));
+        checkEqual(31, stringToInteger('43', 7));
+        checkEqual(255, stringToInteger('255', 10));
+        checkEqual(11, stringToInteger('11', 10));
+        checkEqual(255, stringToInteger('FF', 16));
+        checkEqual(16, stringToInteger('20', 8));
+        checkEqual(255, stringToInteger('ff', 16));
+        checkEqual(11, stringToInteger('b', 16));
+        checkEqual(127, stringToInteger('177', 8));
+        checkEqual(10, stringToInteger('12', 8));
+        checkEqual(3, stringToInteger('11', 2));
+        checkEqual(15, stringToInteger('1111', 2)); // Negative number
+
+        checkEqual(-32, stringToInteger('-32'));
+        checkEqual(-32, stringToInteger('-32', 10));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-31.5', 10);
+        }));
+        checkEqual(-32, stringToInteger('-100000', 2));
+        checkEqual(-31, stringToInteger('-11111', 2));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-11111.1', 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-11111.01', 2);
+        }));
+        checkEqual(-32, stringToInteger('-40', 8));
+        checkEqual(-31, stringToInteger('-37', 8));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-37.4', 8);
+        }));
+        checkEqual(-32, stringToInteger('-20', 16));
+        checkEqual(-31, stringToInteger('-1f', 16));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-1f.8', 16);
+        }));
+        checkEqual(-32, stringToInteger('-44', 7));
+        checkEqual(-31, stringToInteger('-43', 7));
+        checkEqual(-255, stringToInteger('-255', 10));
+        checkEqual(-11, stringToInteger('-11', 10));
+        checkEqual(-255, stringToInteger('-FF', 16));
+        checkEqual(-16, stringToInteger('-20', 8));
+        checkEqual(-255, stringToInteger('-ff', 16));
+        checkEqual(-11, stringToInteger('-b', 16));
+        checkEqual(-127, stringToInteger('-177', 8));
+        checkEqual(-10, stringToInteger('-12', 8));
+        checkEqual(-3, stringToInteger('-11', 2));
+        checkEqual(-15, stringToInteger('-1111', 2)); // // Default Value
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('abc');
+        })); // checkEqual(null,      stringToInteger('abc', null,  10));
+        // checkEqual(NaN,       stringToInteger('abc', NaN,   10));
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('+0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('-0x123');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('Infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('infinity');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('inf');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('info');
+        })); // Exception
+
+        var i = 0;
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger(123);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(false, isThrownException(function () {
+          stringToInteger('123', 2);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger('123', 2.5);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger('123', 1);
+        }, new RangeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(false, isThrownException(function () {
+          stringToInteger('123', 36);
+        }, new TypeError().name), "test stringToInteger exception ".concat(i));
+        i += 1;
+        checkEqual(true, isThrownException(function () {
+          stringToInteger('123', 37);
+        }, new RangeError().name), "test stringToInteger exception ".concat(i)); // Object Named Parameter
+
+        checkEqual(-123, stringToInteger({
+          value: '-0123'
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger({
+            value: 'abc'
+          });
+        }));
+        checkEqual(-15, stringToInteger({
+          value: '-1111',
+          radix: 2
         }));
       });
     };
@@ -587,6 +992,8 @@ var test_execute_convert = function test_execute_convert(parts) {
 
     test_numberToString();
     test_stringToNumber();
+    test_stringToNumberDefault();
+    test_stringToInteger();
     test_stringToIntegerDefault();
     test_NumberCast();
     test_toNumber();

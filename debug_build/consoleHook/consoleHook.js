@@ -39,7 +39,7 @@ var hook = function hook(methodName) {
   var hookFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError('hook args(methodName) is not [log|info|warn|error|debug]');
+    throw new TypeError('hook args(methodName) is not [log|info|warn|error|debug]');
   }
 
   if (!isFunction(hookFunc)) {
@@ -75,7 +75,7 @@ var _unHook = function _unHook(methodName) {
 
 var unHook = function unHook(methodName) {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError('unHook args(methodName) is not [log|info|warn|error|debug]');
+    throw new TypeError('unHook args(methodName) is not [log|info|warn|error|debug]');
   }
 
   _unHook(methodName);
@@ -128,7 +128,7 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
 
 var accept = function accept(methodName, acceptArray, rejectArray, hookFunc) {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
-    throw new RangeError('accept args(methodName) is not [log|info|warn|error|debug]');
+    throw new TypeError('accept args(methodName) is not [log|info|warn|error|debug]');
   }
 
   if (!isArray(acceptArray)) {
