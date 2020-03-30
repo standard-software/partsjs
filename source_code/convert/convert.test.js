@@ -12,7 +12,7 @@ const test_execute_convert = (parts) => {
     const {
       numberToString,
       stringToNumber, stringToNumberDefault,
-      stringToIntegerDefault,
+      stringToInteger, stringToIntegerDefault,
       toNumber, toInteger,
     } = parts.convert;
 
@@ -115,6 +115,102 @@ const test_execute_convert = (parts) => {
       it('test_stringToNumber', () => {
 
         // Integer
+        checkEqual(123,       stringToNumber('123'));
+        checkEqual(123,       stringToNumber('0123'));
+        checkEqual(123,       stringToNumber('+123'));
+        checkEqual(-123,      stringToNumber('-0123'));
+        checkEqual(true,      isThrown(() => stringToNumber(' 123')));
+        checkEqual(true,      isThrown(() => stringToNumber('123 ')));
+        checkEqual(true,      isThrown(() => stringToNumber(' 123 ')));
+        checkEqual(true,      isThrown(() => stringToNumber('　123')));
+        checkEqual(true,      isThrown(() => stringToNumber('123　')));
+        checkEqual(true,      isThrown(() => stringToNumber('　123　')));
+        checkEqual(true,      isThrown(() => stringToNumber('123 0')));
+        checkEqual(true,      isThrown(() => stringToNumber('0 123')));
+        checkEqual(true,      isThrown(() => stringToNumber('1 123')));
+        checkEqual(true,      isThrown(() => stringToNumber('123a')));
+        checkEqual(true,      isThrown(() => stringToNumber('a123')));
+
+        // Decimal
+        checkEqual(123.4,     stringToNumber('123.4'));
+        checkEqual(123.4,     stringToNumber('0123.4'));
+        checkEqual(123.4,     stringToNumber('+123.4'));
+        checkEqual(-123.4,    stringToNumber('-0123.4'));
+        checkEqual(true,      isThrown(() => stringToNumber(' 123.4')));
+        checkEqual(true,      isThrown(() => stringToNumber('123.4 ')));
+        checkEqual(true,      isThrown(() => stringToNumber(' 123.4 ')));
+        checkEqual(true,      isThrown(() => stringToNumber('　123.4')));
+        checkEqual(true,      isThrown(() => stringToNumber('123.4　')));
+        checkEqual(true,      isThrown(() => stringToNumber('　123.4　')));
+        checkEqual(true,      isThrown(() => stringToNumber('123.4 0')));
+        checkEqual(true,      isThrown(() => stringToNumber('0 123.4')));
+        checkEqual(true,      isThrown(() => stringToNumber('1 123.4')));
+        checkEqual(true,      isThrown(() => stringToNumber('123 .4')));
+        checkEqual(true,      isThrown(() => stringToNumber('123. 4')));
+        checkEqual(true,      isThrown(() => stringToNumber('123.4a')));
+        checkEqual(true,      isThrown(() => stringToNumber('a123.4')));
+        checkEqual(123.45,    stringToNumber('123.45'));
+        checkEqual(true,      isThrown(() => stringToNumber('123.4.5')));
+
+        // // string  value
+        checkEqual(true,      isThrown(() => stringToNumber('abc')));
+
+        // // space string
+        checkEqual(true,      isThrown(() => stringToNumber('')));
+        checkEqual(true,      isThrown(() => stringToNumber(' ')));
+        checkEqual(true,      isThrown(() => stringToNumber('　')));
+
+        // // exponential notation
+        checkEqual(3.14,      stringToNumber('3.14'));
+        checkEqual(3.14,      stringToNumber('314e-2'));
+        checkEqual(3.14,      stringToNumber('0.0314E+2'));
+        checkEqual(0.14,      stringToNumber('.14'));
+        checkEqual('1e-17',   0.00000000000000001.toString());
+        checkEqual(0.00000000000000001, stringToNumber('1e-17'));
+        checkEqual(1e-17, stringToNumber('1e-17'));
+
+        // // exponential notation detail
+        checkEqual(1,         stringToNumber('1.'));
+        checkEqual(true,      isThrown(() => stringToNumber('1.1e')));
+        checkEqual(true,      isThrown(() => stringToNumber('1.1e+')));
+        checkEqual(100000,    stringToNumber('1e+5'));
+        checkEqual(0.00001,   stringToNumber('1e-5'));
+        checkEqual(true,      isThrown(() => stringToNumber('1.e')));
+        checkEqual(true,      isThrown(() => stringToNumber('1.e+')));
+        checkEqual(100000,    stringToNumber('1.e+5'));
+
+        // // Numer different
+        checkEqual(true,      isThrown(() => stringToNumber('0x123')));
+        checkEqual(true,      isThrown(() => stringToNumber('+0x123')));
+        checkEqual(true,      isThrown(() => stringToNumber('-0x123')));
+        checkEqual(true,      isThrown(() => stringToNumber('0x123')));
+        checkEqual(true,      isThrown(() => stringToNumber('+0x123')));
+        checkEqual(true,      isThrown(() => stringToNumber('-0x123')));
+
+        checkEqual(true,      isThrown(() => stringToNumber('Infinity')));
+        checkEqual(true,      isThrown(() => stringToNumber('infinity')));
+        checkEqual(true,      isThrown(() => stringToNumber('inf')));
+        checkEqual(true,      isThrown(() => stringToNumber('info')));
+
+        // Exception
+        let i = 0;
+        i += 1;
+        checkEqual(true, isThrownException(() => {
+          stringToNumber(123);
+        }, (new TypeError).name), `test stringToNumber exception ${i}`);
+
+        // Object Named Parameter
+        checkEqual(-123, stringToNumber({
+          value: '-0123',
+        }));
+
+      });
+    };
+
+    const test_stringToNumberDefault = () => {
+      it('test_stringToNumberDefault', () => {
+
+        // Integer
         checkEqual(123,       stringToNumberDefault('123'));
         checkEqual(123,       stringToNumberDefault('0123'));
         checkEqual(123,       stringToNumberDefault('+123'));
@@ -210,6 +306,155 @@ const test_execute_convert = (parts) => {
           defaultValue: null,
         }));
 
+      });
+    };
+
+    const test_stringToInteger = () => {
+      it('test_stringToInteger', () => {
+
+        // Integer
+        checkEqual(123,       stringToInteger('123'));
+        checkEqual(123,       stringToInteger('0123'));
+        checkEqual(123,       stringToInteger('+123'));
+        checkEqual(-123,      stringToInteger('-0123'));
+
+        checkEqual(true,      isThrown(() => stringToInteger(' 123')));
+
+        checkEqual(true,      isThrown(() => stringToInteger(' 123')));
+        checkEqual(true,      isThrown(() => stringToInteger('123 ')));
+        checkEqual(true,      isThrown(() => stringToInteger(' 123 ')));
+        checkEqual(true,      isThrown(() => stringToInteger('123 0')));
+        checkEqual(true,      isThrown(() => stringToInteger('0 123')));
+        checkEqual(true,      isThrown(() => stringToInteger('1 123')));
+        checkEqual(true,      isThrown(() => stringToInteger('123a')));
+        checkEqual(true,      isThrown(() => stringToInteger('a123')));
+
+        // Decimal
+        checkEqual(true,      isThrown(() => stringToInteger('123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('0123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('+123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('-0123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger(' 123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('123.4 ')));
+        checkEqual(true,      isThrown(() => stringToInteger(' 123.4 ')));
+        checkEqual(true,      isThrown(() => stringToInteger('123.4 0')));
+        checkEqual(true,      isThrown(() => stringToInteger('0 123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('1 123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('123 .4')));
+        checkEqual(true,      isThrown(() => stringToInteger('123. 4')));
+        checkEqual(true,      isThrown(() => stringToInteger('123.4a')));
+        checkEqual(true,      isThrown(() => stringToInteger('a123.4')));
+        checkEqual(true,      isThrown(() => stringToInteger('123.45')));
+        checkEqual(true,      isThrown(() => stringToInteger('123.4.5')));
+
+        // Positive number
+        checkEqual(32,        stringToInteger('32'));
+        checkEqual(32,        stringToInteger('32',         10  ));
+        checkEqual(true,      isThrown(() => stringToInteger('31.5',      10  )));
+        checkEqual(32,        stringToInteger('100000',     2   ));
+        checkEqual(31,        stringToInteger('11111',      2   ));
+        checkEqual(true,      isThrown(() => stringToInteger('11111.1',   2   )));
+        checkEqual(true,      isThrown(() => stringToInteger('11111.01',  2   )));
+        checkEqual(32,        stringToInteger('40',         8   ));
+        checkEqual(31,        stringToInteger('37',         8   ));
+        checkEqual(true,      isThrown(() => stringToInteger('37.4',      8   )));
+        checkEqual(32,        stringToInteger('20',         16  ));
+        checkEqual(31,        stringToInteger('1f',         16  ));
+        checkEqual(true,      isThrown(() => stringToInteger('1f.8',      16  )));
+        checkEqual(32,        stringToInteger('44',         7   ));
+        checkEqual(31,        stringToInteger('43',         7   ));
+        checkEqual(255,       stringToInteger('255',        10  ));
+        checkEqual(11,        stringToInteger('11',         10  ));
+        checkEqual(255,       stringToInteger('FF',         16  ));
+        checkEqual(16,        stringToInteger('20',         8   ));
+        checkEqual(255,       stringToInteger('ff',         16  ));
+        checkEqual(11,        stringToInteger('b',          16  ));
+        checkEqual(127,       stringToInteger('177',        8   ));
+        checkEqual(10,        stringToInteger('12',         8   ));
+        checkEqual(3,         stringToInteger('11',         2   ));
+        checkEqual(15,        stringToInteger('1111',       2   ));
+
+        // Negative number
+        checkEqual(-32,       stringToInteger('-32'));
+        checkEqual(-32,       stringToInteger('-32',        10  ));
+        checkEqual(true,      isThrown(() => stringToInteger('-31.5',     10  )));
+        checkEqual(-32,       stringToInteger('-100000',    2   ));
+        checkEqual(-31,       stringToInteger('-11111',     2   ));
+        checkEqual(true,      isThrown(() => stringToInteger('-11111.1',  2   )));
+        checkEqual(true,      isThrown(() => stringToInteger('-11111.01', 2   )));
+        checkEqual(-32,       stringToInteger('-40',        8   ));
+        checkEqual(-31,       stringToInteger('-37',        8   ));
+        checkEqual(true,      isThrown(() => stringToInteger('-37.4',     8   )));
+        checkEqual(-32,       stringToInteger('-20',        16  ));
+        checkEqual(-31,       stringToInteger('-1f',        16  ));
+        checkEqual(true,      isThrown(() => stringToInteger('-1f.8',     16  )));
+        checkEqual(-32,       stringToInteger('-44',        7   ));
+        checkEqual(-31,       stringToInteger('-43',        7   ));
+        checkEqual(-255,      stringToInteger('-255',       10  ));
+        checkEqual(-11,       stringToInteger('-11',        10  ));
+        checkEqual(-255,      stringToInteger('-FF',        16  ));
+        checkEqual(-16,       stringToInteger('-20',        8   ));
+        checkEqual(-255,      stringToInteger('-ff',        16  ));
+        checkEqual(-11,       stringToInteger('-b',         16  ));
+        checkEqual(-127,      stringToInteger('-177',       8   ));
+        checkEqual(-10,       stringToInteger('-12',        8   ));
+        checkEqual(-3,        stringToInteger('-11',        2   ));
+        checkEqual(-15,       stringToInteger('-1111',      2   ));
+
+        // // Default Value
+        checkEqual(true,      isThrown(() => stringToInteger('abc')));
+        // checkEqual(null,      stringToInteger('abc', null,  10));
+        // checkEqual(NaN,       stringToInteger('abc', NaN,   10));
+
+        checkEqual(true,      isThrown(() => stringToInteger('0x123')));
+        checkEqual(true,      isThrown(() => stringToInteger('+0x123')));
+        checkEqual(true,      isThrown(() => stringToInteger('-0x123')));
+        checkEqual(true,      isThrown(() => stringToInteger('0x123')));
+        checkEqual(true,      isThrown(() => stringToInteger('+0x123')));
+        checkEqual(true,      isThrown(() => stringToInteger('-0x123')));
+        checkEqual(true,      isThrown(() => stringToInteger('Infinity')));
+        checkEqual(true,      isThrown(() => stringToInteger('infinity')));
+        checkEqual(true,      isThrown(() => stringToInteger('inf')));
+        checkEqual(true,      isThrown(() => stringToInteger('info')));
+
+        // Exception
+        let i = 0;
+        i += 1;
+        checkEqual(true, isThrownException(() => {
+          stringToInteger(123);
+        }, (new TypeError).name), `test stringToInteger exception ${i}`);
+        i += 1;
+        checkEqual(false, isThrownException(() => {
+          stringToInteger('123', 2);
+        }, (new TypeError).name), `test stringToInteger exception ${i}`);
+        i += 1;
+        checkEqual(true, isThrownException(() => {
+          stringToInteger('123', 2.5);
+        }, (new TypeError).name), `test stringToInteger exception ${i}`);
+        i += 1;
+        checkEqual(true, isThrownException(() => {
+          stringToInteger('123', 1);
+        }, (new RangeError).name), `test stringToInteger exception ${i}`);
+        i += 1;
+        checkEqual(false, isThrownException(() => {
+          stringToInteger('123', 36);
+        }, (new TypeError).name), `test stringToInteger exception ${i}`);
+        i += 1;
+        checkEqual(true, isThrownException(() => {
+          stringToInteger('123', 37);
+        }, (new RangeError).name), `test stringToInteger exception ${i}`);
+
+        // Object Named Parameter
+        checkEqual(-123, stringToInteger({
+          value: '-0123',
+        }));
+        checkEqual(true, isThrown(() => stringToInteger({
+          value: 'abc',
+        })));
+        checkEqual(-15, stringToInteger({
+          value: '-1111',
+          radix: 2,
+        }));
       });
     };
 
@@ -619,6 +864,8 @@ const test_execute_convert = (parts) => {
 
     test_numberToString();
     test_stringToNumber();
+    test_stringToNumberDefault();
+    test_stringToInteger();
     test_stringToIntegerDefault();
     test_NumberCast();
     test_toNumber();

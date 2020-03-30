@@ -240,6 +240,7 @@ You can now use the functions of the parts.js object.
 - add compare
   - allMatch someMatch indexOfMatch
 - update consoleHook ErrorType
+- bugfix stringToInteger
 
 ### 4.4.1
 #### 2020/03/26(Thu)

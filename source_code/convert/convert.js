@@ -177,7 +177,7 @@ const _stringToInteger = (
   value,
   radix = 10,
 ) => {
-  return _stringToNumberBase(
+  return _stringToIntegerBase(
     value,
     () => {
       throw new RangeError(
