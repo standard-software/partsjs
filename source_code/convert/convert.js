@@ -269,6 +269,9 @@ const toNumber = (value) => {
   if (isNull(value)) {
     return NaN;
   }
+  if (isArray(value)) {
+    return NaN;
+  }
   if (!isString(value)) {
     return Number(value);
   }
