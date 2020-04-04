@@ -195,5 +195,6 @@ const switch_ = (expression) => {
 
 module.exports = {
   assert, guard,
+  functionValue,
   sc, if_, switch_,
 };

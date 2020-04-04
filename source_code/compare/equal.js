@@ -283,7 +283,7 @@ const _equalDeep = (value1, value2) => {
         return result;
       }
     }
-    return value1 === value2;
+    return false;
   };
   return __equalDeep(value1, value2);
 };
@@ -299,6 +299,7 @@ _equalDeep.add = (func) => {
 
 _equalDeep.reset = () => {
   _equalDeep.clear();
+  _equalDeep.add(equalFunction.equalValue);
   _equalDeep.add(equalFunction.equalObject);
   _equalDeep.add(equalFunction.equalArrayType);
   _equalDeep.add(equalFunction.equalWeakSet);

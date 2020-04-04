@@ -15,6 +15,7 @@ const test_execute_compare = (parts) => {
 
     const {
       checkEqual,
+      expect,
       isThrown,
       isThrownException,
     } = parts.test;
@@ -570,6 +571,7 @@ const test_execute_compare = (parts) => {
 
         // date ignore
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -611,6 +613,7 @@ const test_execute_compare = (parts) => {
 
         // regexp ignore
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -661,6 +664,7 @@ const test_execute_compare = (parts) => {
 
         // ignore Map
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -823,6 +827,7 @@ const test_execute_compare = (parts) => {
 
         // ignore Set
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);

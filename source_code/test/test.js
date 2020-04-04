@@ -17,7 +17,7 @@ const {
 } = require('../string/string.js');
 
 const {
-  equal,
+  equal, equalDeep,
 } = require('../compare/compare.js');
 
 /**
@@ -70,6 +70,8 @@ const it = (text, func) => {
   testFrame.testName = '';
 };
 
+const test = it;
+
 const checkCompare = (compareFunc, a, b, message = '') => {
   if (!isString(message)) {
     throw new TypeError('checkEqual args message is not string');
@@ -98,7 +100,13 @@ const checkCompare = (compareFunc, a, b, message = '') => {
 };
 
 const checkEqual = (a, b, message = '') => {
-  return checkCompare(equal, a, b, message);
+  return checkCompare(equalDeep, a, b, message);
+};
+
+const expect = a => {
+  return {
+    toBe: b => checkCompare(equalDeep, a, b),
+  };
 };
 
 /**
@@ -170,11 +178,9 @@ const isNotThrown = (targetFunc) => {
   return !isThrown(targetFunc, () => true);
 };
 
-const test = it;
-
 module.exports = {
   checkEqual, checkCompare,
-  describe, it, test,
+  describe, it, test, expect,
   isThrown, isThrownValue, isThrownException, isNotThrown,
 };
 

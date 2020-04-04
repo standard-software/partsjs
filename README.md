@@ -237,6 +237,9 @@ You can now use the functions of the parts.js object.
 #### 2020/04/03(Fri)
 - update matchValue matchSomeValue matchAllValue
 - update toNumber toInteger
+- add test.js expect().toBe()
+- update equalDeep
+- update functionValue
 
 ### 4.5.0
 #### 2020/03/30(Mon)

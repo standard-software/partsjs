@@ -78,7 +78,7 @@ _copyProperty(_type, propertyNames.TYPE, rootNames);
 // test
 propertyNames.TEST_PUBLIC =
   'checkEqual, checkCompare,' +
-  'describe, it, test,' +
+  'describe, it, test, expect,' +
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';
 propertyNames.TEST_ROOT =
@@ -90,6 +90,7 @@ _copyProperty(_test, propertyNames.TEST_ROOT, rootNames);
 // syntax
 propertyNames.SYNTAX =
   'assert,guard,' +
+  'functionValue,' +
   'sc,if_,switch_,' +
   '';
 const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
