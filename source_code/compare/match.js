@@ -73,6 +73,9 @@ const _matchValue = (
   valueWhenMatched,
 ) => {
   if (_match(value, compare)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
     return valueWhenMatched;
   }
   return value;
@@ -234,6 +237,9 @@ const _matchSomeValue = (
   valueWhenMatched,
 ) => {
   if (_matchSome(value, compareArray)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
     return valueWhenMatched;
   }
   return value;
@@ -387,6 +393,9 @@ const _matchAllValue = (
   valueWhenMatched,
 ) => {
   if (_matchAll(value, compareArray)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
     return valueWhenMatched;
   }
   return value;

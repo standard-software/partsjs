@@ -6,13 +6,11 @@ const test_execute_compare = (parts) => {
 
     const {
       isNull, isUndefined, isNaNStrict,
-
-      isUndefinedAll, isNullAll, isNaNStrictAll,
-      isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-      isFunctionAll, isObjectAll, isObjectTypeAll,
-      isArrayAll, isDateAll, isRegExpAll,
-      isExceptionAll,
-      isEmptyObjectAll, isEmptyArrayAll,
+      isBoolean, isNumber, isInteger, isString,
+      isFunction, isObject, isObjectType,
+      isArray, isDate, isRegExp,
+      isException,
+      isEmptyObject, isEmptyArray,
     } = parts.type;
 
     const {
@@ -1045,6 +1043,11 @@ const test_execute_compare = (parts) => {
         checkEqual(999,         matchValue(null, null,      999));
         checkEqual(null,        matchValue(null, undefined, 999));
 
+        checkEqual(1,           matchValue('1',       isString, parts.stringToInteger));
+        checkEqual(1,           matchValue(1,         isString, parts.stringToInteger));
+        checkEqual(null,        matchValue(null,      isString, parts.stringToInteger));
+        checkEqual(undefined,   matchValue(undefined, isString, parts.stringToInteger));
+
         checkEqual('123', matchValue({
           value: '123',
           compare: undefined,
@@ -1061,8 +1064,8 @@ const test_execute_compare = (parts) => {
           valueWhenMatched: 999,
         }));
 
-        checkEqual('test', String(matchValue({}, isEmptyObjectAll, 'test')));
-        checkEqual('[object Object]', String(matchValue({a:1}, isEmptyObjectAll, 'test')));
+        checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
+        checkEqual('[object Object]', String(matchValue({a:1}, isEmptyObject, 'test')));
       });
     };
 
@@ -1224,17 +1227,17 @@ const test_execute_compare = (parts) => {
         checkEqual(false, matchSome(0,         [null, undefined]));
 
         checkEqual(true,  matchSome(null,       [null, undefined]));
-        checkEqual(true,  matchSome(null,       [null, undefined, isEmptyArrayAll]));
-        checkEqual(true,  matchSome(null,       [null, undefined, isEmptyObjectAll]));
+        checkEqual(true,  matchSome(null,       [null, undefined, isEmptyArray]));
+        checkEqual(true,  matchSome(null,       [null, undefined, isEmptyObject]));
         checkEqual(true,  matchSome(undefined,  [null, undefined]));
-        checkEqual(true,  matchSome(undefined,  [null, undefined, isEmptyArrayAll]));
-        checkEqual(true,  matchSome(undefined,  [null, undefined, isEmptyObjectAll]));
+        checkEqual(true,  matchSome(undefined,  [null, undefined, isEmptyArray]));
+        checkEqual(true,  matchSome(undefined,  [null, undefined, isEmptyObject]));
         checkEqual(false, matchSome([],         [null, undefined]));
-        checkEqual(true,  matchSome([],         [null, undefined, isEmptyArrayAll]));
-        checkEqual(false, matchSome([],         [null, undefined, isEmptyObjectAll]));
+        checkEqual(true,  matchSome([],         [null, undefined, isEmptyArray]));
+        checkEqual(false, matchSome([],         [null, undefined, isEmptyObject]));
         checkEqual(false, matchSome({},         [null, undefined]));
-        checkEqual(false, matchSome({},         [null, undefined, isEmptyArrayAll]));
-        checkEqual(true,  matchSome({},         [null, undefined, isEmptyObjectAll]));
+        checkEqual(false, matchSome({},         [null, undefined, isEmptyArray]));
+        checkEqual(true,  matchSome({},         [null, undefined, isEmptyObject]));
 
         // exception
         checkEqual(true, isThrownException(
@@ -1366,7 +1369,7 @@ const test_execute_compare = (parts) => {
           {
             value1: '123', compareArray: [123],
           },
-          [(value) => isObjectAll(value)],
+          [(value) => isObject(value)],
         ));
       });
     };
@@ -1401,10 +1404,10 @@ const test_execute_compare = (parts) => {
           allMatchSome([null, undefined], [null]),
         );
         checkEqual(true,
-          allMatchSome([null, undefined], [isNullAll, isUndefinedAll]),
+          allMatchSome([null, undefined], [isNull, isUndefined]),
         );
         checkEqual(false,
-          allMatchSome([null, undefined], [isNullAll]),
+          allMatchSome([null, undefined], [isNull]),
         );
         checkEqual(false,
           allMatchSome([null, undefined, NaN], [null, undefined]),
@@ -1413,7 +1416,7 @@ const test_execute_compare = (parts) => {
           allMatchSome([null, undefined, NaN], [null, undefined, NaN]),
         );
         checkEqual(true,
-          allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]),
+          allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]),
         );
 
         checkEqual(false, isThrown(() => {
@@ -1444,10 +1447,10 @@ const test_execute_compare = (parts) => {
           someMatchSome([null, undefined], [null]),
         );
         checkEqual(true,
-          someMatchSome([null, undefined], [isNullAll, isUndefinedAll]),
+          someMatchSome([null, undefined], [isNull, isUndefined]),
         );
         checkEqual(true,
-          someMatchSome([null, undefined], [isNullAll]),
+          someMatchSome([null, undefined], [isNull]),
         );
         checkEqual(true,
           someMatchSome([null, undefined, NaN], [null, undefined]),
@@ -1456,13 +1459,13 @@ const test_execute_compare = (parts) => {
           someMatchSome([null, undefined, NaN], [null, undefined, NaN]),
         );
         checkEqual(true,
-          someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]),
+          someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]),
         );
         checkEqual(false,
           someMatchSome([null, undefined, NaN], [NaN]),
         );
         checkEqual(true,
-          someMatchSome([null, undefined, NaN], [isNaNStrictAll]),
+          someMatchSome([null, undefined, NaN], [isNaNStrict]),
         );
 
         checkEqual(false, isThrown(() => {
@@ -1493,10 +1496,10 @@ const test_execute_compare = (parts) => {
           indexOfMatchSome([null, undefined], [undefined]),
         );
         checkEqual(0,
-          indexOfMatchSome([null, undefined], [isNullAll, isUndefinedAll]),
+          indexOfMatchSome([null, undefined], [isNull, isUndefined]),
         );
         checkEqual(1,
-          indexOfMatchSome([null, undefined], [isUndefinedAll]),
+          indexOfMatchSome([null, undefined], [isUndefined]),
         );
         checkEqual(0,
           indexOfMatchSome([null, undefined, NaN], [null, undefined]),
@@ -1505,13 +1508,13 @@ const test_execute_compare = (parts) => {
           indexOfMatchSome([null, undefined, NaN], [null, undefined, NaN]),
         );
         checkEqual(0,
-          indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]),
+          indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]),
         );
         checkEqual(-1,
           indexOfMatchSome([null, undefined, NaN], [NaN]),
         );
         checkEqual(2,
-          indexOfMatchSome([null, undefined, NaN], [isNaNStrictAll]),
+          indexOfMatchSome([null, undefined, NaN], [isNaNStrict]),
         );
 
         checkEqual(false, isThrown(() => {
