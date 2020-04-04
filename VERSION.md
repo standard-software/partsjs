@@ -2,6 +2,14 @@
 
 ## Version
 
+### 4.6.0
+#### 2020/04/04(Sat)
+- update matchValue matchSomeValue matchAllValue
+- update toNumber toInteger
+- add test.js expect().toBe()
+- update equalDeep
+- update functionValue
+
 ### 4.5.0
 #### 2020/03/30(Mon)
 - add array.operation
