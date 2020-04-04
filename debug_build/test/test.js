@@ -25,7 +25,8 @@ var _require3 = require('../string/string.js'),
     _repeat = _require3._repeat;
 
 var _require4 = require('../compare/compare.js'),
-    equal = _require4.equal;
+    equal = _require4.equal,
+    equalDeep = _require4.equalDeep;
 /**
  * test framework
  */
@@ -79,6 +80,8 @@ var it = function it(text, func) {
   testFrame.testName = '';
 };
 
+var test = it;
+
 var checkCompare = function checkCompare(compareFunc, a, b) {
   var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
@@ -104,7 +107,15 @@ var checkCompare = function checkCompare(compareFunc, a, b) {
 
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  return checkCompare(equal, a, b, message);
+  return checkCompare(equalDeep, a, b, message);
+};
+
+var expect = function expect(a) {
+  return {
+    toBe: function toBe(b) {
+      return checkCompare(equalDeep, a, b);
+    }
+  };
 };
 /**
  * isThrown isThrownValue isThrownException isNotThrown
@@ -165,13 +176,13 @@ var isNotThrown = function isNotThrown(targetFunc) {
   });
 };
 
-var test = it;
 module.exports = {
   checkEqual: checkEqual,
   checkCompare: checkCompare,
   describe: describe,
   it: it,
   test: test,
+  expect: expect,
   isThrown: isThrown,
   isThrownValue: isThrownValue,
   isThrownException: isThrownException,

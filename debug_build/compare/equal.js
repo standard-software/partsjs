@@ -490,7 +490,7 @@ var _equalDeep = function _equalDeep(value1, value2) {
       }
     }
 
-    return value1 === value2;
+    return false;
   };
 
   return __equalDeep(value1, value2);
@@ -508,6 +508,8 @@ _equalDeep.add = function (func) {
 
 _equalDeep.reset = function () {
   _equalDeep.clear();
+
+  _equalDeep.add(equalFunction.equalValue);
 
   _equalDeep.add(equalFunction.equalObject);
 

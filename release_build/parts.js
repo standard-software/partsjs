@@ -8765,7 +8765,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(342);
 
-var VERSION = '4.5.0';
+var VERSION = '4.6.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -8799,7 +8799,7 @@ var type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames); // test
 
 
-propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
+propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 propertyNames.TEST_ROOT = 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 
 var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
@@ -8807,7 +8807,7 @@ var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames); // syntax
 
 
-propertyNames.SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + '';
+propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + '';
 
 var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 
@@ -10586,7 +10586,8 @@ var _require3 = __webpack_require__(333),
     _repeat = _require3._repeat;
 
 var _require4 = __webpack_require__(335),
-    equal = _require4.equal;
+    equal = _require4.equal,
+    equalDeep = _require4.equalDeep;
 /**
  * test framework
  */
@@ -10640,6 +10641,8 @@ var it = function it(text, func) {
   testFrame.testName = '';
 };
 
+var test = it;
+
 var checkCompare = function checkCompare(compareFunc, a, b) {
   var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
@@ -10665,7 +10668,15 @@ var checkCompare = function checkCompare(compareFunc, a, b) {
 
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  return checkCompare(equal, a, b, message);
+  return checkCompare(equalDeep, a, b, message);
+};
+
+var expect = function expect(a) {
+  return {
+    toBe: function toBe(b) {
+      return checkCompare(equalDeep, a, b);
+    }
+  };
 };
 /**
  * isThrown isThrownValue isThrownException isNotThrown
@@ -10726,13 +10737,13 @@ var isNotThrown = function isNotThrown(targetFunc) {
   });
 };
 
-var test = it;
 module.exports = {
   checkEqual: checkEqual,
   checkCompare: checkCompare,
   describe: describe,
   it: it,
   test: test,
+  expect: expect,
   isThrown: isThrown,
   isThrownValue: isThrownValue,
   isThrownException: isThrownException,
@@ -13061,6 +13072,10 @@ var match = function match(value, compare) {
 
 var _matchValue = function _matchValue(value, compare, valueWhenMatched) {
   if (_match(value, compare)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
+
     return valueWhenMatched;
   }
 
@@ -13186,6 +13201,10 @@ var matchSome = function matchSome(value, compareArray) {
 
 var _matchSomeValue = function _matchSomeValue(value, compareArray, valueWhenMatched) {
   if (_matchSome(value, compareArray)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
+
     return valueWhenMatched;
   }
 
@@ -13305,6 +13324,10 @@ var matchAll = function matchAll(value, compareArray) {
 
 var _matchAllValue = function _matchAllValue(value, compareArray, valueWhenMatched) {
   if (_matchAll(value, compareArray)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
+
     return valueWhenMatched;
   }
 
@@ -14511,7 +14534,7 @@ var _equalDeep = function _equalDeep(value1, value2) {
       }
     }
 
-    return value1 === value2;
+    return false;
   };
 
   return __equalDeep(value1, value2);
@@ -14529,6 +14552,8 @@ _equalDeep.add = function (func) {
 
 _equalDeep.reset = function () {
   _equalDeep.clear();
+
+  _equalDeep.add(equalFunction.equalValue);
 
   _equalDeep.add(equalFunction.equalObject);
 
@@ -14858,6 +14883,7 @@ var switch_ = function switch_(expression) {
 module.exports = {
   assert: assert,
   guard: guard,
+  functionValue: functionValue,
   sc: sc,
   if_: if_,
   switch_: switch_
@@ -15101,6 +15127,10 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
 
 var toNumber = function toNumber(value) {
   if (isNull(value)) {
+    return NaN;
+  }
+
+  if (isArray(value)) {
     return NaN;
   }
 

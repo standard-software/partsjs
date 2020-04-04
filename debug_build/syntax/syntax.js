@@ -225,6 +225,7 @@ var switch_ = function switch_(expression) {
 module.exports = {
   assert: assert,
   guard: guard,
+  functionValue: functionValue,
   sc: sc,
   if_: if_,
   switch_: switch_

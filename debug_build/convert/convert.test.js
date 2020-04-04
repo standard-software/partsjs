@@ -223,7 +223,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.14, stringToNumber('.14'));
         checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(0.00000000000000001, stringToNumber('1e-17'));
-        checkEqual(1e-17, stringToNumber('1e-17')); // // exponential notation detail
+        checkEqual(1e-17, stringToNumber('1e-17')); // exponential notation detail
 
         checkEqual(1, stringToNumber('1.'));
         checkEqual(true, isThrown(function () {
@@ -240,7 +240,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(true, isThrown(function () {
           return stringToNumber('1.e+');
         }));
-        checkEqual(100000, stringToNumber('1.e+5')); // // Numer different
+        checkEqual(100000, stringToNumber('1.e+5')); // Number different
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('0x123');
@@ -347,7 +347,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, stringToNumberDefault('1e-5'));
         checkEqual(undefined, stringToNumberDefault('1.e'));
         checkEqual(undefined, stringToNumberDefault('1.e+'));
-        checkEqual(100000, stringToNumberDefault('1.e+5')); // Numer different
+        checkEqual(100000, stringToNumberDefault('1.e+5')); // Number different
 
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
@@ -782,6 +782,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, Number('0123.4'));
         checkEqual(123.4, Number('+123.4'));
         checkEqual(-123.4, Number('-0123.4'));
+        checkEqual(123.5, Number('123.5'));
+        checkEqual(123.5, Number('0123.5'));
+        checkEqual(123.5, Number('+123.5'));
+        checkEqual(-123.5, Number('-0123.5'));
         checkEqual(123.4, Number(' 123.4'));
         checkEqual(123.4, Number('123.4 '));
         checkEqual(123.4, Number(' 123.4 '));
@@ -833,7 +837,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, Number('1e-5'));
         checkEqual(NaN, Number('1.e'));
         checkEqual(NaN, Number('1.e+'));
-        checkEqual(100000, Number('1.e+5')); // Numer different
+        checkEqual(100000, Number('1.e+5')); // Number different
 
         checkEqual(291, Number('0x123'));
         checkEqual(NaN, Number('+0x123'));
@@ -844,7 +848,26 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(Infinity, Number('Infinity'));
         checkEqual(NaN, Number('infinity'));
         checkEqual(NaN, Number('inf'));
-        checkEqual(NaN, Number('info'));
+        checkEqual(NaN, Number('info')); // Number
+
+        checkEqual(123, Number(123));
+        checkEqual(-123, Number(-123));
+        checkEqual(1.23, Number(1.23));
+        checkEqual(-1.23, Number(-1.23));
+        checkEqual(Infinity, Number(Infinity));
+        checkEqual(-Infinity, Number(-Infinity));
+        checkEqual(NaN, Number(NaN)); // Other
+
+        checkEqual(0, Number(null));
+        checkEqual(NaN, Number(undefined));
+        checkEqual(NaN, Number({}));
+        checkEqual(NaN, Number({
+          a: 1
+        }));
+        checkEqual(0, Number([]));
+        checkEqual(1, Number([1]));
+        checkEqual(123, Number([123]));
+        checkEqual(NaN, Number([1, 2]));
       });
     };
 
@@ -871,6 +894,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, toNumber('0123.4'));
         checkEqual(123.4, toNumber('+123.4'));
         checkEqual(-123.4, toNumber('-0123.4'));
+        checkEqual(123.5, toNumber('123.5'));
+        checkEqual(123.5, toNumber('0123.5'));
+        checkEqual(123.5, toNumber('+123.5'));
+        checkEqual(-123.5, toNumber('-0123.5'));
         checkEqual(NaN, toNumber(' 123.4'));
         checkEqual(NaN, toNumber('123.4 '));
         checkEqual(NaN, toNumber(' 123.4 '));
@@ -904,7 +931,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, toNumber('1e-5'));
         checkEqual(NaN, toNumber('1.e'));
         checkEqual(NaN, toNumber('1.e+'));
-        checkEqual(100000, toNumber('1.e+5')); // Numer different
+        checkEqual(100000, toNumber('1.e+5')); // Number different
 
         checkEqual(NaN, toNumber('0x123'));
         checkEqual(NaN, toNumber('+0x123'));
@@ -915,7 +942,26 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, toNumber('Infinity'));
         checkEqual(NaN, toNumber('infinity'));
         checkEqual(NaN, toNumber('inf'));
-        checkEqual(NaN, toNumber('info'));
+        checkEqual(NaN, toNumber('info')); // Number
+
+        checkEqual(123, toNumber(123));
+        checkEqual(-123, toNumber(-123));
+        checkEqual(1.23, toNumber(1.23));
+        checkEqual(-1.23, toNumber(-1.23));
+        checkEqual(Infinity, toNumber(Infinity));
+        checkEqual(-Infinity, toNumber(-Infinity));
+        checkEqual(NaN, toNumber(NaN)); // Other
+
+        checkEqual(NaN, toNumber(null));
+        checkEqual(NaN, toNumber(undefined));
+        checkEqual(NaN, toNumber({}));
+        checkEqual(NaN, toNumber({
+          a: 1
+        }));
+        checkEqual(NaN, toNumber([]));
+        checkEqual(NaN, toNumber([1]));
+        checkEqual(NaN, toNumber([123]));
+        checkEqual(NaN, toNumber([1, 2]));
       });
     };
 
@@ -942,6 +988,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, toInteger('0123.4'));
         checkEqual(123, toInteger('+123.4'));
         checkEqual(-123, toInteger('-0123.4'));
+        checkEqual(124, toInteger('123.5'));
+        checkEqual(124, toInteger('0123.5'));
+        checkEqual(124, toInteger('+123.5'));
+        checkEqual(-124, toInteger('-0123.5'));
         checkEqual(NaN, toInteger(' 123.4'));
         checkEqual(NaN, toInteger('123.4 '));
         checkEqual(NaN, toInteger(' 123.4 '));
@@ -975,7 +1025,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0, toInteger('1e-5'));
         checkEqual(NaN, toInteger('1.e'));
         checkEqual(NaN, toInteger('1.e+'));
-        checkEqual(100000, toInteger('1.e+5')); // Numer different
+        checkEqual(100000, toInteger('1.e+5')); // Number different
 
         checkEqual(NaN, toInteger('0x123'));
         checkEqual(NaN, toInteger('+0x123'));
@@ -986,7 +1036,27 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, toInteger('Infinity'));
         checkEqual(NaN, toInteger('infinity'));
         checkEqual(NaN, toInteger('inf'));
-        checkEqual(NaN, toInteger('info'));
+        checkEqual(NaN, toInteger('info')); // Number
+
+        checkEqual(123, toInteger(123));
+        checkEqual(-123, toInteger(-123));
+        checkEqual(1, toInteger(1.23));
+        checkEqual(2, toInteger(1.67));
+        checkEqual(-1, toInteger(-1.23));
+        checkEqual(-2, toInteger(-1.67));
+        checkEqual(Infinity, toInteger(Infinity));
+        checkEqual(-Infinity, toInteger(-Infinity));
+        checkEqual(NaN, toInteger(NaN)); // Other
+
+        checkEqual(NaN, toInteger(null));
+        checkEqual(NaN, toInteger(undefined));
+        checkEqual(NaN, toInteger({}));
+        checkEqual(NaN, toInteger({
+          a: 1
+        }));
+        checkEqual(NaN, toInteger([]));
+        checkEqual(NaN, toInteger([1]));
+        checkEqual(NaN, toInteger([123]));
       });
     };
 

@@ -169,11 +169,12 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        checkEqual(238, propertyCount(parts));
-        checkEqual(3, propertyCount(parts.root));
+        checkEqual(239, propertyCount(parts));
         checkEqual(13, propertyCount(parts.platform));
+        checkEqual(3, propertyCount(parts.root));
         checkEqual(140, propertyCount(parts.type));
-        checkEqual(9, propertyCount(parts.test));
+        checkEqual(6, propertyCount(parts.syntax));
+        checkEqual(10, propertyCount(parts.test));
         checkEqual(23, propertyCount(parts.compare));
         checkEqual(23, propertyCount(parts.convert));
         checkEqual(7, propertyCount(parts.number));
@@ -19933,24 +19934,22 @@ var test_execute_compare = function test_execute_compare(parts) {
         isNull = _parts$type.isNull,
         isUndefined = _parts$type.isUndefined,
         isNaNStrict = _parts$type.isNaNStrict,
-        isUndefinedAll = _parts$type.isUndefinedAll,
-        isNullAll = _parts$type.isNullAll,
-        isNaNStrictAll = _parts$type.isNaNStrictAll,
-        isBooleanAll = _parts$type.isBooleanAll,
-        isNumberAll = _parts$type.isNumberAll,
-        isIntegerAll = _parts$type.isIntegerAll,
-        isStringAll = _parts$type.isStringAll,
-        isFunctionAll = _parts$type.isFunctionAll,
-        isObjectAll = _parts$type.isObjectAll,
-        isObjectTypeAll = _parts$type.isObjectTypeAll,
-        isArrayAll = _parts$type.isArrayAll,
-        isDateAll = _parts$type.isDateAll,
-        isRegExpAll = _parts$type.isRegExpAll,
-        isExceptionAll = _parts$type.isExceptionAll,
-        isEmptyObjectAll = _parts$type.isEmptyObjectAll,
-        isEmptyArrayAll = _parts$type.isEmptyArrayAll;
+        isBoolean = _parts$type.isBoolean,
+        isNumber = _parts$type.isNumber,
+        isInteger = _parts$type.isInteger,
+        isString = _parts$type.isString,
+        isFunction = _parts$type.isFunction,
+        isObject = _parts$type.isObject,
+        isObjectType = _parts$type.isObjectType,
+        isArray = _parts$type.isArray,
+        isDate = _parts$type.isDate,
+        isRegExp = _parts$type.isRegExp,
+        isException = _parts$type.isException,
+        isEmptyObject = _parts$type.isEmptyObject,
+        isEmptyArray = _parts$type.isEmptyArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
+        expect = _parts$test2.expect,
         isThrown = _parts$test2.isThrown,
         isThrownException = _parts$test2.isThrownException;
     var _parts$compare = parts.compare,
@@ -20619,6 +20618,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
 
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -20651,6 +20651,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -20693,6 +20694,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map'); // ignore Map
 
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -20906,6 +20908,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set3'); // ignore Set
 
         equalDeep.clear();
+        equalDeep.add(equalFunction.equalValue);
         equalDeep.add(equalFunction.equalObject);
         equalDeep.add(equalFunction.equalArrayType);
         equalDeep.add(equalFunction.equalFunction);
@@ -21204,6 +21207,10 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(999, matchValue(undefined, undefined, 999));
         checkEqual(999, matchValue(null, null, 999));
         checkEqual(null, matchValue(null, undefined, 999));
+        checkEqual(1, matchValue('1', isString, parts.stringToInteger));
+        checkEqual(1, matchValue(1, isString, parts.stringToInteger));
+        checkEqual(null, matchValue(null, isString, parts.stringToInteger));
+        checkEqual(undefined, matchValue(undefined, isString, parts.stringToInteger));
         checkEqual('123', matchValue({
           value: '123',
           compare: undefined,
@@ -21219,10 +21226,10 @@ var test_execute_compare = function test_execute_compare(parts) {
           compare: undefined,
           valueWhenMatched: 999
         }));
-        checkEqual('test', String(matchValue({}, isEmptyObjectAll, 'test')));
+        checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
         checkEqual('[object Object]', String(matchValue({
           a: 1
-        }, isEmptyObjectAll, 'test')));
+        }, isEmptyObject, 'test')));
       });
     };
 
@@ -21374,17 +21381,17 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, matchSome(undefined, [null, 0]));
         checkEqual(false, matchSome(0, [null, undefined]));
         checkEqual(true, matchSome(null, [null, undefined]));
-        checkEqual(true, matchSome(null, [null, undefined, isEmptyArrayAll]));
-        checkEqual(true, matchSome(null, [null, undefined, isEmptyObjectAll]));
+        checkEqual(true, matchSome(null, [null, undefined, isEmptyArray]));
+        checkEqual(true, matchSome(null, [null, undefined, isEmptyObject]));
         checkEqual(true, matchSome(undefined, [null, undefined]));
-        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyArrayAll]));
-        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyObjectAll]));
+        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyArray]));
+        checkEqual(true, matchSome(undefined, [null, undefined, isEmptyObject]));
         checkEqual(false, matchSome([], [null, undefined]));
-        checkEqual(true, matchSome([], [null, undefined, isEmptyArrayAll]));
-        checkEqual(false, matchSome([], [null, undefined, isEmptyObjectAll]));
+        checkEqual(true, matchSome([], [null, undefined, isEmptyArray]));
+        checkEqual(false, matchSome([], [null, undefined, isEmptyObject]));
         checkEqual(false, matchSome({}, [null, undefined]));
-        checkEqual(false, matchSome({}, [null, undefined, isEmptyArrayAll]));
-        checkEqual(true, matchSome({}, [null, undefined, isEmptyObjectAll])); // exception
+        checkEqual(false, matchSome({}, [null, undefined, isEmptyArray]));
+        checkEqual(true, matchSome({}, [null, undefined, isEmptyObject])); // exception
 
         checkEqual(true, isThrownException(function () {
           matchSome('123', 'abc');
@@ -21522,7 +21529,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           value1: '123',
           compareArray: [123]
         }, [function (value) {
-          return isObjectAll(value);
+          return isObject(value);
         }]));
       });
     };
@@ -21555,11 +21562,11 @@ var test_execute_compare = function test_execute_compare(parts) {
         }]));
         checkEqual(true, allMatchSome([null, undefined], [null, undefined]));
         checkEqual(false, allMatchSome([null, undefined], [null]));
-        checkEqual(true, allMatchSome([null, undefined], [isNullAll, isUndefinedAll]));
-        checkEqual(false, allMatchSome([null, undefined], [isNullAll]));
+        checkEqual(true, allMatchSome([null, undefined], [isNull, isUndefined]));
+        checkEqual(false, allMatchSome([null, undefined], [isNull]));
         checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]));
+        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
         checkEqual(false, isThrown(function () {
           allMatchSome([10], [function (value) {
             return value > 15;
@@ -21586,13 +21593,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         }]));
         checkEqual(true, someMatchSome([null, undefined], [null, undefined]));
         checkEqual(true, someMatchSome([null, undefined], [null]));
-        checkEqual(true, someMatchSome([null, undefined], [isNullAll, isUndefinedAll]));
-        checkEqual(true, someMatchSome([null, undefined], [isNullAll]));
+        checkEqual(true, someMatchSome([null, undefined], [isNull, isUndefined]));
+        checkEqual(true, someMatchSome([null, undefined], [isNull]));
         checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
         checkEqual(false, someMatchSome([null, undefined, NaN], [NaN]));
-        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrictAll]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrict]));
         checkEqual(false, isThrown(function () {
           someMatchSome([10], [function (value) {
             return value > 15;
@@ -21619,13 +21626,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         }]));
         checkEqual(0, indexOfMatchSome([null, undefined], [null, undefined]));
         checkEqual(1, indexOfMatchSome([null, undefined], [undefined]));
-        checkEqual(0, indexOfMatchSome([null, undefined], [isNullAll, isUndefinedAll]));
-        checkEqual(1, indexOfMatchSome([null, undefined], [isUndefinedAll]));
+        checkEqual(0, indexOfMatchSome([null, undefined], [isNull, isUndefined]));
+        checkEqual(1, indexOfMatchSome([null, undefined], [isUndefined]));
         checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrictAll]));
+        checkEqual(0, indexOfMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
         checkEqual(-1, indexOfMatchSome([null, undefined, NaN], [NaN]));
-        checkEqual(2, indexOfMatchSome([null, undefined, NaN], [isNaNStrictAll]));
+        checkEqual(2, indexOfMatchSome([null, undefined, NaN], [isNaNStrict]));
         checkEqual(false, isThrown(function () {
           indexOfMatchSome([10], [function (value) {
             return value > 15;
@@ -22390,7 +22397,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.14, stringToNumber('.14'));
         checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(0.00000000000000001, stringToNumber('1e-17'));
-        checkEqual(1e-17, stringToNumber('1e-17')); // // exponential notation detail
+        checkEqual(1e-17, stringToNumber('1e-17')); // exponential notation detail
 
         checkEqual(1, stringToNumber('1.'));
         checkEqual(true, isThrown(function () {
@@ -22407,7 +22414,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(true, isThrown(function () {
           return stringToNumber('1.e+');
         }));
-        checkEqual(100000, stringToNumber('1.e+5')); // // Numer different
+        checkEqual(100000, stringToNumber('1.e+5')); // Number different
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('0x123');
@@ -22514,7 +22521,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, stringToNumberDefault('1e-5'));
         checkEqual(undefined, stringToNumberDefault('1.e'));
         checkEqual(undefined, stringToNumberDefault('1.e+'));
-        checkEqual(100000, stringToNumberDefault('1.e+5')); // Numer different
+        checkEqual(100000, stringToNumberDefault('1.e+5')); // Number different
 
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
@@ -22949,6 +22956,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, Number('0123.4'));
         checkEqual(123.4, Number('+123.4'));
         checkEqual(-123.4, Number('-0123.4'));
+        checkEqual(123.5, Number('123.5'));
+        checkEqual(123.5, Number('0123.5'));
+        checkEqual(123.5, Number('+123.5'));
+        checkEqual(-123.5, Number('-0123.5'));
         checkEqual(123.4, Number(' 123.4'));
         checkEqual(123.4, Number('123.4 '));
         checkEqual(123.4, Number(' 123.4 '));
@@ -23000,7 +23011,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, Number('1e-5'));
         checkEqual(NaN, Number('1.e'));
         checkEqual(NaN, Number('1.e+'));
-        checkEqual(100000, Number('1.e+5')); // Numer different
+        checkEqual(100000, Number('1.e+5')); // Number different
 
         checkEqual(291, Number('0x123'));
         checkEqual(NaN, Number('+0x123'));
@@ -23011,7 +23022,26 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(Infinity, Number('Infinity'));
         checkEqual(NaN, Number('infinity'));
         checkEqual(NaN, Number('inf'));
-        checkEqual(NaN, Number('info'));
+        checkEqual(NaN, Number('info')); // Number
+
+        checkEqual(123, Number(123));
+        checkEqual(-123, Number(-123));
+        checkEqual(1.23, Number(1.23));
+        checkEqual(-1.23, Number(-1.23));
+        checkEqual(Infinity, Number(Infinity));
+        checkEqual(-Infinity, Number(-Infinity));
+        checkEqual(NaN, Number(NaN)); // Other
+
+        checkEqual(0, Number(null));
+        checkEqual(NaN, Number(undefined));
+        checkEqual(NaN, Number({}));
+        checkEqual(NaN, Number({
+          a: 1
+        }));
+        checkEqual(0, Number([]));
+        checkEqual(1, Number([1]));
+        checkEqual(123, Number([123]));
+        checkEqual(NaN, Number([1, 2]));
       });
     };
 
@@ -23038,6 +23068,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, toNumber('0123.4'));
         checkEqual(123.4, toNumber('+123.4'));
         checkEqual(-123.4, toNumber('-0123.4'));
+        checkEqual(123.5, toNumber('123.5'));
+        checkEqual(123.5, toNumber('0123.5'));
+        checkEqual(123.5, toNumber('+123.5'));
+        checkEqual(-123.5, toNumber('-0123.5'));
         checkEqual(NaN, toNumber(' 123.4'));
         checkEqual(NaN, toNumber('123.4 '));
         checkEqual(NaN, toNumber(' 123.4 '));
@@ -23071,7 +23105,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, toNumber('1e-5'));
         checkEqual(NaN, toNumber('1.e'));
         checkEqual(NaN, toNumber('1.e+'));
-        checkEqual(100000, toNumber('1.e+5')); // Numer different
+        checkEqual(100000, toNumber('1.e+5')); // Number different
 
         checkEqual(NaN, toNumber('0x123'));
         checkEqual(NaN, toNumber('+0x123'));
@@ -23082,7 +23116,26 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, toNumber('Infinity'));
         checkEqual(NaN, toNumber('infinity'));
         checkEqual(NaN, toNumber('inf'));
-        checkEqual(NaN, toNumber('info'));
+        checkEqual(NaN, toNumber('info')); // Number
+
+        checkEqual(123, toNumber(123));
+        checkEqual(-123, toNumber(-123));
+        checkEqual(1.23, toNumber(1.23));
+        checkEqual(-1.23, toNumber(-1.23));
+        checkEqual(Infinity, toNumber(Infinity));
+        checkEqual(-Infinity, toNumber(-Infinity));
+        checkEqual(NaN, toNumber(NaN)); // Other
+
+        checkEqual(NaN, toNumber(null));
+        checkEqual(NaN, toNumber(undefined));
+        checkEqual(NaN, toNumber({}));
+        checkEqual(NaN, toNumber({
+          a: 1
+        }));
+        checkEqual(NaN, toNumber([]));
+        checkEqual(NaN, toNumber([1]));
+        checkEqual(NaN, toNumber([123]));
+        checkEqual(NaN, toNumber([1, 2]));
       });
     };
 
@@ -23109,6 +23162,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, toInteger('0123.4'));
         checkEqual(123, toInteger('+123.4'));
         checkEqual(-123, toInteger('-0123.4'));
+        checkEqual(124, toInteger('123.5'));
+        checkEqual(124, toInteger('0123.5'));
+        checkEqual(124, toInteger('+123.5'));
+        checkEqual(-124, toInteger('-0123.5'));
         checkEqual(NaN, toInteger(' 123.4'));
         checkEqual(NaN, toInteger('123.4 '));
         checkEqual(NaN, toInteger(' 123.4 '));
@@ -23142,7 +23199,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0, toInteger('1e-5'));
         checkEqual(NaN, toInteger('1.e'));
         checkEqual(NaN, toInteger('1.e+'));
-        checkEqual(100000, toInteger('1.e+5')); // Numer different
+        checkEqual(100000, toInteger('1.e+5')); // Number different
 
         checkEqual(NaN, toInteger('0x123'));
         checkEqual(NaN, toInteger('+0x123'));
@@ -23153,7 +23210,27 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, toInteger('Infinity'));
         checkEqual(NaN, toInteger('infinity'));
         checkEqual(NaN, toInteger('inf'));
-        checkEqual(NaN, toInteger('info'));
+        checkEqual(NaN, toInteger('info')); // Number
+
+        checkEqual(123, toInteger(123));
+        checkEqual(-123, toInteger(-123));
+        checkEqual(1, toInteger(1.23));
+        checkEqual(2, toInteger(1.67));
+        checkEqual(-1, toInteger(-1.23));
+        checkEqual(-2, toInteger(-1.67));
+        checkEqual(Infinity, toInteger(Infinity));
+        checkEqual(-Infinity, toInteger(-Infinity));
+        checkEqual(NaN, toInteger(NaN)); // Other
+
+        checkEqual(NaN, toInteger(null));
+        checkEqual(NaN, toInteger(undefined));
+        checkEqual(NaN, toInteger({}));
+        checkEqual(NaN, toInteger({
+          a: 1
+        }));
+        checkEqual(NaN, toInteger([]));
+        checkEqual(NaN, toInteger([1]));
+        checkEqual(NaN, toInteger([123]));
       });
     };
 

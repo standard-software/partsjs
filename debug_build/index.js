@@ -30,7 +30,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '4.5.0';
+var VERSION = '4.6.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -64,7 +64,7 @@ var type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames); // test
 
 
-propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
+propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 propertyNames.TEST_ROOT = 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 
 var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
@@ -72,7 +72,7 @@ var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames); // syntax
 
 
-propertyNames.SYNTAX = 'assert,guard,' + 'sc,if_,switch_,' + '';
+propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + '';
 
 var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 

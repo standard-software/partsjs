@@ -83,6 +83,10 @@ var match = function match(value, compare) {
 
 var _matchValue = function _matchValue(value, compare, valueWhenMatched) {
   if (_match(value, compare)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
+
     return valueWhenMatched;
   }
 
@@ -208,6 +212,10 @@ var matchSome = function matchSome(value, compareArray) {
 
 var _matchSomeValue = function _matchSomeValue(value, compareArray, valueWhenMatched) {
   if (_matchSome(value, compareArray)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
+
     return valueWhenMatched;
   }
 
@@ -327,6 +335,10 @@ var matchAll = function matchAll(value, compareArray) {
 
 var _matchAllValue = function _matchAllValue(value, compareArray, valueWhenMatched) {
   if (_matchAll(value, compareArray)) {
+    if (isFunction(valueWhenMatched)) {
+      return valueWhenMatched(value);
+    }
+
     return valueWhenMatched;
   }
 

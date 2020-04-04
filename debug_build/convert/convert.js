@@ -234,6 +234,10 @@ var toNumber = function toNumber(value) {
     return NaN;
   }
 
+  if (isArray(value)) {
+    return NaN;
+  }
+
   if (!isString(value)) {
     return Number(value);
   }

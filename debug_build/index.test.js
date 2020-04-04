@@ -61,11 +61,12 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        checkEqual(238, propertyCount(parts));
-        checkEqual(3, propertyCount(parts.root));
+        checkEqual(239, propertyCount(parts));
         checkEqual(13, propertyCount(parts.platform));
+        checkEqual(3, propertyCount(parts.root));
         checkEqual(140, propertyCount(parts.type));
-        checkEqual(9, propertyCount(parts.test));
+        checkEqual(6, propertyCount(parts.syntax));
+        checkEqual(10, propertyCount(parts.test));
         checkEqual(23, propertyCount(parts.compare));
         checkEqual(23, propertyCount(parts.convert));
         checkEqual(7, propertyCount(parts.number));
