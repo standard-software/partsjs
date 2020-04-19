@@ -2,6 +2,10 @@
 
 ## Version
 
+### 4.6.1
+#### 2020/04/19(Sun)
+- bugfix inPropety
+
 ### 4.6.0
 #### 2020/04/04(Sat)
 - update matchValue matchSomeValue matchAllValue
