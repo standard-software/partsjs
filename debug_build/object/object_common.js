@@ -112,34 +112,62 @@ var propertyCount = function propertyCount(object) {
  */
 
 
-var _getProperty = function _getProperty(object, propertyPath) {
+var _getPropertyBase = function _getPropertyBase(object, propertyPath) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   var result = object;
   var propertyArray = propertyPath.split('.');
 
   for (var i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '') {
-      return undefined;
+      return {
+        "in": false
+      };
     }
 
     if (hasOwn) {
       if (!result.hasOwnProperty(propertyArray[i])) {
-        return undefined;
+        return {
+          "in": false
+        };
       }
     } else {
       if (!(propertyArray[i] in result)) {
-        return undefined;
+        return {
+          "in": false
+        };
       }
     }
 
     if (isUndefined(result[propertyArray[i]])) {
-      return undefined;
+      return {
+        "in": true,
+        value: undefined
+      };
     }
 
     result = result[propertyArray[i]];
   }
 
-  return result;
+  return {
+    "in": true,
+    value: result
+  };
+};
+
+var _getProperty = function _getProperty(object, propertyPath) {
+  var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  var result = _getPropertyBase(object, propertyPath, hasOwn);
+
+  if (!isBoolean(result["in"])) {
+    throw new Error('_getProperty _getPropertyBase result is not boolean');
+  }
+
+  if (result["in"] === false) {
+    return undefined;
+  } else {
+    return result.value;
+  }
 };
 
 var getProperty = function getProperty(object, propertyPath) {
@@ -222,6 +250,7 @@ module.exports = {
   _copyProperty: _copyProperty,
   _propertyCount: _propertyCount,
   _getProperty: _getProperty,
+  _getPropertyBase: _getPropertyBase,
   _setProperty: _setProperty,
   copyProperty: copyProperty,
   propertyCount: propertyCount,

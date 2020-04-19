@@ -113,6 +113,23 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, isThrown(function () {
           inProperty({}, [1]);
         }));
+        var sourceObject = {
+          a: '1',
+          b: undefined
+        };
+        checkEqual(false, inProperty(sourceObject, ''));
+        checkEqual(true, inProperty(sourceObject, 'a'));
+        checkEqual(true, inProperty(sourceObject, 'b'));
+        checkEqual(false, inProperty(sourceObject, 'c'));
+        checkEqual(false, inProperty(sourceObject, 'd'));
+        var sourceObject = {
+          a: '1'
+        };
+        checkEqual(false, inProperty(sourceObject, ''));
+        checkEqual(true, inProperty(sourceObject, 'a'));
+        checkEqual(false, inProperty(sourceObject, 'b'));
+        checkEqual(false, inProperty(sourceObject, 'c'));
+        checkEqual(false, inProperty(sourceObject, 'd'));
 
         function First() {
           this.a = '1';

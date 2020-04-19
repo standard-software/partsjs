@@ -22,7 +22,7 @@ var _require3 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require3.isObjectParameter;
 
 var _require4 = require('../object/object_common.js'),
-    _getProperty = _require4._getProperty;
+    _getPropertyBase = _require4._getPropertyBase;
 /**
  * _inProperty
  */
@@ -48,9 +48,9 @@ var _inProperty = function _inProperty(object, propertyPathArray) {
       throw new TypeError('_inProperty args(propertyArray) element is not string');
     }
 
-    var result = _getProperty(object, propertyPathArray[i], hasOwn);
+    var result = _getPropertyBase(object, propertyPathArray[i], hasOwn);
 
-    if (isUndefined(result)) {
+    if (result["in"] === false) {
       return false;
     }
   }
