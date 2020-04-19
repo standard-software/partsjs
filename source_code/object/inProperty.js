@@ -14,7 +14,7 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
-  _getProperty,
+  _getPropertyBase,
 } = require('../object/object_common.js');
 
 /**
@@ -40,8 +40,8 @@ const _inProperty = (object, propertyPathArray, hasOwn = true) => {
         '_inProperty args(propertyArray) element is not string',
       );
     }
-    const result = _getProperty(object, propertyPathArray[i], hasOwn);
-    if (isUndefined(result)) {
+    const result = _getPropertyBase(object, propertyPathArray[i], hasOwn);
+    if (result.in === false) {
       return false;
     }
   }

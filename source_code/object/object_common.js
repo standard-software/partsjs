@@ -99,7 +99,7 @@ const propertyCount = (object, hasOwn = true) => {
 /**
  * getProperty
  */
-const _getProperty = (
+const _getPropertyBase = (
   object,
   propertyPath,
   hasOwn = true,
@@ -108,26 +108,45 @@ const _getProperty = (
   const propertyArray = propertyPath.split('.');
   for (let i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '' ) {
-      return undefined;
+      return { in: false };
     }
 
     if (hasOwn) {
       if (!result.hasOwnProperty(propertyArray[i])) {
-        return undefined;
+        return { in: false };
       }
     } else {
       if (!(propertyArray[i] in result)) {
-        return undefined;
+        return { in: false };
       }
     }
 
     if (isUndefined(result[propertyArray[i]])) {
-      return undefined;
+      return { in: true, value: undefined };
     }
 
     result = result[propertyArray[i]];
   }
-  return result;
+  return { in: true, value: result};
+};
+
+
+const _getProperty = (
+  object,
+  propertyPath,
+  hasOwn = true,
+) => {
+  const result = _getPropertyBase(object, propertyPath, hasOwn);
+
+  if (!isBoolean(result.in)) {
+    throw new Error('_getProperty _getPropertyBase result is not boolean');
+  }
+
+  if (result.in === false) {
+    return undefined;
+  } else {
+    return result.value;
+  }
 };
 
 const getProperty = (object, propertyPath, hasOwn = true) => {
@@ -208,11 +227,13 @@ const setProp = setProperty;
 module.exports = {
   _copyProperty,
   _propertyCount,
-  _getProperty, _setProperty,
+  _getProperty, _getPropertyBase,
+  _setProperty,
 
   copyProperty,
   propertyCount,
-  getProperty, setProperty,
+  getProperty,
+  setProperty,
 
   copyProp,
   propCount,
