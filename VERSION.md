@@ -2,6 +2,11 @@
 
 ## Version
 
+### 4.7.0
+#### 2020/04/21(Tue)
+- npm update
+- @babel/polyfill devDependencies > dependencies
+
 ### 4.6.1
 #### 2020/04/19(Sun)
 - bugfix inPropety
