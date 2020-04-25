@@ -3,7 +3,13 @@ const {
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
+
+  isUndefinedAll,
 } = require('../type/type.js');
+
+const {
+  isObjectParameter,
+} = require('../object/isObjectParameter.js');
 
 /**
  * assert
@@ -132,29 +138,41 @@ const if_ = (condition) => {
       'if_ args(condition) is not boolean',
     );
   }
-  const checkSyntax = (args) => {
-    if (!isObject(args)) {
-      throw new TypeError(
-        'if_() args is not object',
-      );
+
+  const returnFunc = (then_, else_) => {
+    if (isObjectParameter(then_, '', 'then, else', 1)) {
+      ({ then: then_, else: else_ } = then_);
     }
-    if (isUndefined(args.then) &&isUndefined(args.else)) {
-      throw new ReferenceError(
-        'if_() args.then and .else is not defined',
-      );
-    }
+    return condition
+      ? functionValue(then_)
+      : functionValue(else_);
   };
+
   if (condition) {
-    return (args) => {
-      checkSyntax(args);
-      return functionValue(args.then);
+    returnFunc.then = (value) => {
+      return {
+        else: () => functionValue(value),
+      };
+    };
+    returnFunc.else = () => {
+      return {
+        then: (value) => functionValue(value),
+      };
     };
   } else {
-    return (args) => {
-      checkSyntax(args);
-      return functionValue(args.else);
+    returnFunc.then = () => {
+      return {
+        else: (value) => functionValue(value),
+      };
+    };
+    returnFunc.else = (value) => {
+      return {
+        then: () => functionValue(value),
+      };
     };
   }
+
+  return returnFunc;
 };
 
 /**

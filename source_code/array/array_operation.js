@@ -213,7 +213,7 @@ const deleteFirst = (array, length) => {
 };
 
 /**
- * array.operation.deleteFirst
+ * array.operation.deleteLast
  */
 const _deleteLast = (array, length) => {
   return _deleteLength(array, array.length - length, length);

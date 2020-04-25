@@ -19,7 +19,8 @@ const {
 const isObjectParameter = (
   object,
   props,
-  defaultProps = '',
+  optionalProps = '',
+  optionalMinCount = 0,
 ) => {
 
   if (!isObject(object)) {
@@ -28,26 +29,38 @@ const isObjectParameter = (
   if (!isString(props)) {
     return false;
   }
-  if (!isString(defaultProps)) {
+  if (!isString(optionalProps)) {
     return false;
   }
 
   props = _replaceAll(props, ' ', '').split(',');
+  // last element === '' delete
+  if (props[props.length - 1]  === '') {
+    props.splice(props.length - 1, 1);
+  }
 
-  defaultProps = _replaceAll(defaultProps, ' ', '').split(',');
+  optionalProps = _replaceAll(optionalProps, ' ', '').split(',');
+  if (optionalProps[optionalProps.length - 1]  === '') {
+    optionalProps.splice(optionalProps.length - 1, 1);
+  }
 
   let propMatchCount = 0;
+  let optionalPropMatchCount = 0;
   for (const property in object) {
     if (object.hasOwnProperty(property)) {
       if (props.includes(property)) {
         propMatchCount += 1;
-      } else if (defaultProps.includes(property)) {
+      } else if (optionalProps.includes(property)) {
+        optionalPropMatchCount += 1;
       } else {
         return false;
       }
     }
   }
   if (propMatchCount !== props.length) {
+    return false;
+  }
+  if (optionalPropMatchCount < optionalMinCount) {
     return false;
   }
 

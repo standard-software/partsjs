@@ -26,7 +26,8 @@ var _require3 = require('../object/_propertyCount.js'),
 
 
 var isObjectParameter = function isObjectParameter(object, props) {
-  var defaultProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var optionalProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var optionalMinCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
   if (!isObject(object)) {
     return false;
@@ -36,25 +37,42 @@ var isObjectParameter = function isObjectParameter(object, props) {
     return false;
   }
 
-  if (!isString(defaultProps)) {
+  if (!isString(optionalProps)) {
     return false;
   }
 
-  props = _replaceAll(props, ' ', '').split(',');
-  defaultProps = _replaceAll(defaultProps, ' ', '').split(',');
+  props = _replaceAll(props, ' ', '').split(','); // last element === '' delete
+
+  if (props[props.length - 1] === '') {
+    props.splice(props.length - 1, 1);
+  }
+
+  optionalProps = _replaceAll(optionalProps, ' ', '').split(',');
+
+  if (optionalProps[optionalProps.length - 1] === '') {
+    optionalProps.splice(optionalProps.length - 1, 1);
+  }
+
   var propMatchCount = 0;
+  var optionalPropMatchCount = 0;
 
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
       if (props.includes(property)) {
         propMatchCount += 1;
-      } else if (defaultProps.includes(property)) {} else {
+      } else if (optionalProps.includes(property)) {
+        optionalPropMatchCount += 1;
+      } else {
         return false;
       }
     }
   }
 
   if (propMatchCount !== props.length) {
+    return false;
+  }
+
+  if (optionalPropMatchCount < optionalMinCount) {
     return false;
   }
 

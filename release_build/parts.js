@@ -8768,7 +8768,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(342);
 
-var VERSION = '4.7.0';
+var VERSION = '4.8.0';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -9688,7 +9688,8 @@ var _require3 = __webpack_require__(313),
 
 
 var isObjectParameter = function isObjectParameter(object, props) {
-  var defaultProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var optionalProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var optionalMinCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
   if (!isObject(object)) {
     return false;
@@ -9698,25 +9699,42 @@ var isObjectParameter = function isObjectParameter(object, props) {
     return false;
   }
 
-  if (!isString(defaultProps)) {
+  if (!isString(optionalProps)) {
     return false;
   }
 
-  props = _replaceAll(props, ' ', '').split(',');
-  defaultProps = _replaceAll(defaultProps, ' ', '').split(',');
+  props = _replaceAll(props, ' ', '').split(','); // last element === '' delete
+
+  if (props[props.length - 1] === '') {
+    props.splice(props.length - 1, 1);
+  }
+
+  optionalProps = _replaceAll(optionalProps, ' ', '').split(',');
+
+  if (optionalProps[optionalProps.length - 1] === '') {
+    optionalProps.splice(optionalProps.length - 1, 1);
+  }
+
   var propMatchCount = 0;
+  var optionalPropMatchCount = 0;
 
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
       if (props.includes(property)) {
         propMatchCount += 1;
-      } else if (defaultProps.includes(property)) {} else {
+      } else if (optionalProps.includes(property)) {
+        optionalPropMatchCount += 1;
+      } else {
         return false;
       }
     }
   }
 
   if (propMatchCount !== props.length) {
+    return false;
+  }
+
+  if (optionalPropMatchCount < optionalMinCount) {
     return false;
   }
 
@@ -12212,7 +12230,7 @@ var deleteFirst = function deleteFirst(array, length) {
   return _deleteFirst(array, length);
 };
 /**
- * array.operation.deleteFirst
+ * array.operation.deleteLast
  */
 
 
@@ -14647,7 +14665,11 @@ var _require = __webpack_require__(311),
     isArray = _require.isArray,
     isDate = _require.isDate,
     isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isException = _require.isException,
+    isUndefinedAll = _require.isUndefinedAll;
+
+var _require2 = __webpack_require__(315),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * assert
  */
@@ -14789,27 +14811,51 @@ var if_ = function if_(condition) {
     throw new TypeError('if_ args(condition) is not boolean');
   }
 
-  var checkSyntax = function checkSyntax(args) {
-    if (!isObject(args)) {
-      throw new TypeError('if_() args is not object');
+  var returnFunc = function returnFunc(then_, else_) {
+    if (isObjectParameter(then_, '', 'then, else', 1)) {
+      var _then_ = then_;
+      then_ = _then_.then;
+      else_ = _then_["else"];
     }
 
-    if (isUndefined(args.then) && isUndefined(args["else"])) {
-      throw new ReferenceError('if_() args.then and .else is not defined');
-    }
+    return condition ? functionValue(then_) : functionValue(else_);
   };
 
   if (condition) {
-    return function (args) {
-      checkSyntax(args);
-      return functionValue(args.then);
+    returnFunc.then = function (value) {
+      return {
+        "else": function _else() {
+          return functionValue(value);
+        }
+      };
+    };
+
+    returnFunc["else"] = function () {
+      return {
+        then: function then(value) {
+          return functionValue(value);
+        }
+      };
     };
   } else {
-    return function (args) {
-      checkSyntax(args);
-      return functionValue(args["else"]);
+    returnFunc.then = function () {
+      return {
+        "else": function _else(value) {
+          return functionValue(value);
+        }
+      };
+    };
+
+    returnFunc["else"] = function (value) {
+      return {
+        then: function then() {
+          return functionValue(value);
+        }
+      };
     };
   }
+
+  return returnFunc;
 };
 /**
  * switch_
