@@ -139,21 +139,40 @@ const if_ = (condition) => {
     );
   }
 
+  const returnFunc = (then_, else_) => {
+    if (isObjectParameter(then_, '', 'then, else', 1)) {
+      ({ then: then_, else: else_ } = then_);
+    }
+    return condition
+      ? functionValue(then_)
+      : functionValue(else_);
+  };
+
   if (condition) {
-    return (then_, else_) => {
-      if (isObjectParameter(then_, '', 'then, else', 1)) {
-        ({ then: then_, else: else_ } = then_);
-      }
-      return functionValue(then_);
+    returnFunc.then = (value) => {
+      return {
+        else: () => functionValue(value),
+      };
+    };
+    returnFunc.else = () => {
+      return {
+        then: (value) => functionValue(value),
+      };
     };
   } else {
-    return (then_, else_) => {
-      if (isObjectParameter(then_, '', 'then, else', 1)) {
-        ({ then: then_, else: else_ } = then_);
-      }
-      return functionValue(else_);
+    returnFunc.then = () => {
+      return {
+        else: (value) => functionValue(value),
+      };
+    };
+    returnFunc.else = (value) => {
+      return {
+        then: () => functionValue(value),
+      };
     };
   }
+
+  return returnFunc;
 };
 
 /**
