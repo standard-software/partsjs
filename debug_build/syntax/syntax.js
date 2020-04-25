@@ -13,7 +13,11 @@ var _require = require('../type/type.js'),
     isArray = _require.isArray,
     isDate = _require.isDate,
     isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isException = _require.isException,
+    isUndefinedAll = _require.isUndefinedAll;
+
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * assert
  */
@@ -155,27 +159,51 @@ var if_ = function if_(condition) {
     throw new TypeError('if_ args(condition) is not boolean');
   }
 
-  var checkSyntax = function checkSyntax(args) {
-    if (!isObject(args)) {
-      throw new TypeError('if_() args is not object');
+  var returnFunc = function returnFunc(then_, else_) {
+    if (isObjectParameter(then_, '', 'then, else', 1)) {
+      var _then_ = then_;
+      then_ = _then_.then;
+      else_ = _then_["else"];
     }
 
-    if (isUndefined(args.then) && isUndefined(args["else"])) {
-      throw new ReferenceError('if_() args.then and .else is not defined');
-    }
+    return condition ? functionValue(then_) : functionValue(else_);
   };
 
   if (condition) {
-    return function (args) {
-      checkSyntax(args);
-      return functionValue(args.then);
+    returnFunc.then = function (value) {
+      return {
+        "else": function _else() {
+          return functionValue(value);
+        }
+      };
+    };
+
+    returnFunc["else"] = function () {
+      return {
+        then: function then(value) {
+          return functionValue(value);
+        }
+      };
     };
   } else {
-    return function (args) {
-      checkSyntax(args);
-      return functionValue(args["else"]);
+    returnFunc.then = function () {
+      return {
+        "else": function _else(value) {
+          return functionValue(value);
+        }
+      };
+    };
+
+    returnFunc["else"] = function (value) {
+      return {
+        then: function then() {
+          return functionValue(value);
+        }
+      };
     };
   }
+
+  return returnFunc;
 };
 /**
  * switch_

@@ -239,7 +239,7 @@ var deleteFirst = function deleteFirst(array, length) {
   return _deleteFirst(array, length);
 };
 /**
- * array.operation.deleteFirst
+ * array.operation.deleteLast
  */
 
 
