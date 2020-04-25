@@ -2,6 +2,14 @@
 
 ## Version
 
+### 4.8.0
+#### 2020/04/25(Sat)
+- update if_
+  - update if_(true/false)({ then: A, else: B })
+  - add if_(true/false)(A, B)
+  - add if_(true/false).then(A).else(B)
+  - add if_(true/false).else(A).then(B)
+
 ### 4.7.0
 #### 2020/04/21(Tue)
 - npm update
@@ -9,7 +17,7 @@
 
 ### 4.6.1
 #### 2020/04/19(Sun)
-- bugfix inPropety
+- bugfix inProperty
 
 ### 4.6.0
 #### 2020/04/04(Sat)
