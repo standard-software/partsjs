@@ -310,65 +310,113 @@ const test_execute_syntax = (parts) => {
 
     const test_if_ = function() {
       it('test_if_', () => {
-        var ifResultValue = {
-          then: 'THEN',
-          else: 'ELSE',
-        };
-        checkEqual('THEN', if_(true)(ifResultValue));
-        checkEqual('ELSE', if_(false)(ifResultValue));
+        checkEqual('THEN',
+          if_(true)({
+            then: 'THEN',
+            else: 'ELSE',
+          }),
+        );
+        checkEqual('ELSE',
+          if_(false)({
+            then: 'THEN',
+            else: 'ELSE',
+          }),
+        );
+        checkEqual('THEN',
+          if_(true)({
+            then: 'THEN',
+          }),
+        );
+        checkEqual(undefined,
+          if_(false)({
+            then: 'ELSE',
+          }),
+        );
+        checkEqual(undefined,
+          if_(true)({
+            else: 'ELSE',
+          }),
+        );
+        checkEqual('ELSE',
+          if_(false)({
+            else: 'ELSE',
+          }),
+        );
 
-        var ifResultFunc = {
-          then: function() { return 'THEN'; },
-          else: function() { return 'ELSE'; },
-        };
-        checkEqual('THEN', if_(true)(ifResultFunc));
-        checkEqual('ELSE', if_(false)(ifResultFunc));
+        checkEqual('THEN',
+          if_(true)({
+            then: () => 'THEN',
+            else: () => 'ELSE',
+          }),
+        );
+        checkEqual('ELSE',
+          if_(false)({
+            then: () => 'THEN',
+            else: () => 'ELSE',
+          }),
+        );
+        checkEqual('THEN',
+          if_(true)({
+            then: () => 'THEN',
+          }),
+        );
+        checkEqual(undefined,
+          if_(false)({
+            then: () => 'THEN',
+          }),
+        );
+        checkEqual(undefined,
+          if_(true)({
+            else: () => 'ELSE',
+          }),
+        );
+        checkEqual('ELSE',
+          if_(false)({
+            else: () => 'ELSE',
+          }),
+        );
 
-        var ifThenValue = {
-          then: 'THEN',
-        };
-        checkEqual('THEN', if_(true)(ifThenValue));
-        checkEqual(undefined, if_(false)(ifThenValue));
+        checkEqual('THEN',
+          if_(true)('THEN', 'ELSE'),
+        );
+        checkEqual('ELSE',
+          if_(false)('THEN', 'ELSE'),
+        );
+        checkEqual('THEN',
+          if_(true)('THEN'),
+        );
+        checkEqual(undefined,
+          if_(false)('THEN'),
+        );
+        checkEqual(undefined,
+          if_(true)(undefined, 'ELSE'),
+        );
+        checkEqual('ELSE',
+          if_(false)(undefined, 'ELSE'),
+        );
 
-        var ifElseValue = {
-          else: 'ELSE',
-        };
-        checkEqual(undefined, if_(true)(ifElseValue));
-        checkEqual('ELSE', if_(false)(ifElseValue));
-
-        var ifThenFunc = {
-          then: function() { return 'THEN'; },
-        };
-        checkEqual('THEN', if_(true)(ifThenFunc));
-        checkEqual(undefined, if_(false)(ifThenFunc));
-
-        var ifElseFunc = {
-          else: function() { return 'ELSE'; },
-        };
-        checkEqual(undefined, if_(true)(ifElseFunc));
-        checkEqual('ELSE', if_(false)(ifElseFunc));
 
         // Error
-        checkEqual(true, isThrownException(
-          function() { if_(true)(); },
-          (new TypeError).name,
-        ));
+        // checkEqual(true, isThrownException(
+        //   () => { if_(true)(); },
+        //   (new TypeError).name,
+        // ));
 
-        checkEqual(true, isThrownException(
-          function() { if_(true)({}); },
-          (new ReferenceError).name,
-        ));
+        // checkEqual(true, isThrownException(
+        //   () => { if_(true)({}); },
+        //   (new ReferenceError).name,
+        // ));
 
-        checkEqual(true, isThrownException(
-          function() { if_(true)({ thenn: '' }); },
-          (new ReferenceError).name,
-        ));
+        // checkEqual(true, isThrownException(
+        //   () => { if_(true)({ thenn: '' }); },
+        //   (new ReferenceError).name,
+        // ));
 
-        checkEqual(false, isNotThrown(
-          function() { if_(true)(); },
-        ));
-        checkEqual(true, isNotThrown(
-          function() { if_(true)({ then: '' }); },
+        // checkEqual(true, isThrown(
+        //   () => { if_(true)(); },
+        // ));
+        checkEqual(false, isThrown(
+          () => { if_(true)({ then: '' }); },
         ));
       });
     };
