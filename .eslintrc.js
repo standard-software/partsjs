@@ -41,5 +41,6 @@ module.exports = {
     "key-spacing":    ["off"],
     "guard-for-in":   ["off"],
     "max-len":        ["error", { "code": 90 }],
+    "quotes":         ["warn", "single", { "avoidEscape": true }],
   },
 };

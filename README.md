@@ -233,6 +233,17 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 4.9.0
+#### 2020/04/27(Mon)
+- add toString
+- add test code
+  - String Cast
+  - value.toString()
+  - parseFloat
+  - parseInt
+- update eslint setting
+- update test message output
+
 ### 4.8.0
 #### 2020/04/25(Sat)
 - update if_
@@ -257,105 +268,6 @@ You can now use the functions of the parts.js object.
 - add test.js expect().toBe()
 - update equalDeep
 - update functionValue
-
-### 4.5.0
-#### 2020/03/30(Mon)
-- add array.operation
-  - sort(Number|Length|Dictionary)(Ascending|Descending)
-- add compare
-  - allMatch someMatch indexOfMatch
-- update consoleHook ErrorType
-- bugfix stringToInteger
-
-### 4.4.1
-#### 2020/03/26(Thu)
-- update array.operation
-  - deleteLength/deleteIndex
-- update README.md
-
-### 4.4.0
-#### 2020/03/12(Thu)
-- add array.operation
-  - deleteFirst/deleteLast
-- update array.operation
-  - insert/add args values>>valueArray
-  - includeFirst/includeLast/includeBothEdges
-  - excludeFirst/excludeLast/excludeBothEdges
-  - deleteLength/deleteIndex
-  - trimFirst/trimLast/trimBothEdges
-- update array
-  - isFirst/isLast/isBothEdges
-- add makeInRange
-
-### 4.3.0
-#### 2020/03/01(Sun)
-- update testcode for polyfill
-- rename midian >> median(misstake!!)
-- update isThrownException
-- update array isBothEnds=isBothEdges
-- rename array delete >> deleteLength
-- add array 
-  - deleteIndex
-  - subIndex/subLength
-  - subFirst/subLast
-- add array.operation
-  - includeFirst/includeLast
-  - includeBothEdges(=includeBothEnds)
-  - excludeFirst/excludeLast
-  - excludeBothEdges(=excludeBothEnds)
-  - trimFirst/trimLast
-  - trimBothEdges(=trimBothEnds)
-  - popFirst/popLast
-  - pushFirst/pushLast
-  - remainFirst/Last
-  - filter
-- update isMultiples isOdd isEven
-
-### 4.2.0
-#### 2020/02/26(Wed)
-- update package.json
-- add ./release_build/test_parts.js
-- update platform.name
-  - isWebBrowser/isWindowsScriptHost/isGoogleAppsScript/isNodeJs
-- update platform.browserName
-  - isChrome/isFirefox/isEdge/isInternetExplorer/isSafari/isOpera
-- add @babel/polyfill
-  - support IE polyfill
-- delete parts polyfill.js
-
-### 4.1.0
-#### 2020/02/11(Tue)
-- update README.md
-  - Operation check Google Apps Script Rhino and V8
-  - Operation check Google Spreadsheet
-- add array. isFirst / isLast /isBothEnds
-- delete polyfill.js string.prototype.includes
-- add platform.js
-  - name = web/node/wsh
-  - browserName = chrome(=vivaldi) firefox edge ie opera
-- test support browser chrome firefox edge ie opera vivaldi
-
-### 4.0.1
-#### 2020/01/30(Thu)
-- update isObjectParameter
-- rename filename _isXxx.js >> isXxx.js
-- eslint fix
-- add other.test.js test_split
-
-### 4.0.0
-#### 2020/01/29(Wed)
-- change build webpack config
-  - change How to use HTML script tag
-  - change How to use WSH
-  - more simple
-- add how_to_use.html how_to_use.wsf
-- add _propertyCount.js
-  - update propertyCount (hasOwn)
-- update isObjectParameter
-- update isEmptyObject object.js >> isType.js
-- add isEmptyArray
-- update isXxx >> isXxxAll
-- update _isXxx >> isXxx
 
 ### More Info
 [VERSION.md](./VERSION.md)

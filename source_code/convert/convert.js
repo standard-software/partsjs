@@ -70,6 +70,34 @@ const numberToString = (
 };
 
 /**
+ * toString
+ */
+const toString = (value, radix) => {
+  if (isObjectParameter(value, 'value', 'radix')) {
+    ({ value, radix = 10 } = value);
+  }
+
+  if (!isInteger(radix)) {
+    throw new TypeError(
+      'numberToString args(radix) is not integer',
+    );
+  }
+  if (!(2 <= radix && radix <= 36)) {
+    throw new RangeError(
+      'numberToString args(radix) must be between 2 and 36',
+    );
+  }
+
+  if (!isNumber(value)) {
+    return String(value);
+  }
+  return _numberToString(
+    value,
+    radix,
+  );
+};
+
+/**
  * stringToNumber
  */
 const _stringToNumberBase = (
@@ -283,6 +311,9 @@ const toNumberDefault = (value, defaultValue) => {
     ({ value, defaultValue } = value);
   }
 
+  if (isNaNStrict(value)) {
+    return value;
+  }
   const result = toNumber(value);
   if (isNaNStrict(result)) {
     return defaultValue;
@@ -321,6 +352,7 @@ const strToInteger    = stringToInteger;
 const strToIntegerDef = stringToIntegerDefault;
 
 const numToStr        = numberToString;
+const toStr           = toString;
 const strToNum        = stringToNumber;
 const strToNumDef     = stringToNumberDefault;
 const strToInt        = stringToInteger;
@@ -333,6 +365,8 @@ const toIntDef        = toIntegerDefault;
 
 module.exports = {
   numberToString,
+  toString,
+
   stringToNumber, stringToNumberDefault,
   stringToInteger, stringToIntegerDefault,
   toNumber, toNumberDefault,
@@ -345,6 +379,8 @@ module.exports = {
   toInt, toIntDef,
 
   numToStr,
+  toStr,
+
   strToNum, strToNumDef,
   strToInt, strToIntDef,
 

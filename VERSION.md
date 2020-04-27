@@ -2,6 +2,16 @@
 
 ## Version
 
+### 4.9.0
+#### 2020/04/27(Mon)
+- add toString
+- add test code
+  - String Cast
+  - value.toString()
+  - parseFloat
+  - parseInt
+- update eslint setting
+
 ### 4.8.0
 #### 2020/04/25(Sat)
 - update if_

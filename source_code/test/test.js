@@ -93,8 +93,8 @@ const checkCompare = (compareFunc, a, b, message = '') => {
         ? ''
         : `${indent}  Message: ${message}\n`) +
     `${indent}  A !== B\n` +
-    `${indent}  A = ${String(a)}\n` +
-    `${indent}  B = ${String(b)}`;
+    `${indent}  A = ${isString(a) ? "'" + a + "'" : String(a)}\n` +
+    `${indent}  B = ${isString(b) ? "'" + b + "'" : String(b)}`;
   console.log(output);
   return false;
 };
