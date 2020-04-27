@@ -75,6 +75,33 @@ var numberToString = function numberToString(value) {
   return _numberToString(value, radix);
 };
 /**
+ * toString
+ */
+
+
+var toString = function toString(value, radix) {
+  if (isObjectParameter(value, 'value', 'radix')) {
+    var _value2 = value;
+    value = _value2.value;
+    var _value2$radix = _value2.radix;
+    radix = _value2$radix === void 0 ? 10 : _value2$radix;
+  }
+
+  if (!isInteger(radix)) {
+    throw new TypeError('numberToString args(radix) is not integer');
+  }
+
+  if (!(2 <= radix && radix <= 36)) {
+    throw new RangeError('numberToString args(radix) must be between 2 and 36');
+  }
+
+  if (!isNumber(value)) {
+    return String(value);
+  }
+
+  return _numberToString(value, radix);
+};
+/**
  * stringToNumber
  */
 
@@ -105,8 +132,8 @@ var _stringToNumber = function _stringToNumber(value) {
 
 var stringToNumber = function stringToNumber(value) {
   if (isObjectParameter(value, 'value')) {
-    var _value2 = value;
-    value = _value2.value;
+    var _value3 = value;
+    value = _value3.value;
   }
 
   if (!isString(value)) {
@@ -124,9 +151,9 @@ var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue
 
 var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) {
   if (isObjectParameter(value, 'value', 'defaultValue')) {
-    var _value3 = value;
-    value = _value3.value;
-    defaultValue = _value3.defaultValue;
+    var _value4 = value;
+    value = _value4.value;
+    defaultValue = _value4.defaultValue;
   }
 
   if (!isString(value)) {
@@ -171,10 +198,10 @@ var stringToInteger = function stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
   if (isObjectParameter(value, 'value', 'radix')) {
-    var _value4 = value;
-    value = _value4.value;
-    var _value4$radix = _value4.radix;
-    radix = _value4$radix === void 0 ? 10 : _value4$radix;
+    var _value5 = value;
+    value = _value5.value;
+    var _value5$radix = _value5.radix;
+    radix = _value5$radix === void 0 ? 10 : _value5$radix;
   }
 
   if (!isString(value)) {
@@ -203,11 +230,11 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
   if (isObjectParameter(value, 'value', 'defaultValue, radix')) {
-    var _value5 = value;
-    value = _value5.value;
-    defaultValue = _value5.defaultValue;
-    var _value5$radix = _value5.radix;
-    radix = _value5$radix === void 0 ? 10 : _value5$radix;
+    var _value6 = value;
+    value = _value6.value;
+    defaultValue = _value6.defaultValue;
+    var _value6$radix = _value6.radix;
+    radix = _value6$radix === void 0 ? 10 : _value6$radix;
   }
 
   if (!isString(value)) {
@@ -247,9 +274,13 @@ var toNumber = function toNumber(value) {
 
 var toNumberDefault = function toNumberDefault(value, defaultValue) {
   if (isObjectParameter(value, 'value,defaultValue')) {
-    var _value6 = value;
-    value = _value6.value;
-    defaultValue = _value6.defaultValue;
+    var _value7 = value;
+    value = _value7.value;
+    defaultValue = _value7.defaultValue;
+  }
+
+  if (isNaNStrict(value)) {
+    return value;
   }
 
   var result = toNumber(value);
@@ -277,9 +308,9 @@ var toInteger = function toInteger(value) {
 
 var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
   if (isObjectParameter(value, 'value,defaultValue')) {
-    var _value7 = value;
-    value = _value7.value;
-    defaultValue = _value7.defaultValue;
+    var _value8 = value;
+    value = _value8.value;
+    defaultValue = _value8.defaultValue;
   }
 
   var result = toInteger(value);
@@ -297,6 +328,7 @@ var strToNumberDef = stringToNumberDefault;
 var strToInteger = stringToInteger;
 var strToIntegerDef = stringToIntegerDefault;
 var numToStr = numberToString;
+var toStr = toString;
 var strToNum = stringToNumber;
 var strToNumDef = stringToNumberDefault;
 var strToInt = stringToInteger;
@@ -307,6 +339,7 @@ var toInt = toInteger;
 var toIntDef = toIntegerDefault;
 module.exports = {
   numberToString: numberToString,
+  toString: toString,
   stringToNumber: stringToNumber,
   stringToNumberDefault: stringToNumberDefault,
   stringToInteger: stringToInteger,
@@ -325,6 +358,7 @@ module.exports = {
   toInt: toInt,
   toIntDef: toIntDef,
   numToStr: numToStr,
+  toStr: toStr,
   strToNum: strToNum,
   strToNumDef: strToNumDef,
   strToInt: strToInt,

@@ -100,7 +100,7 @@ var checkCompare = function checkCompare(compareFunc, a, b) {
   var output = _map(testFrame.describeArray, function (desc, i) {
     return _repeat('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
-  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(String(a), "\n") + "".concat(indent, "  B = ").concat(String(b));
+  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(isString(a) ? "'" + a + "'" : String(a), "\n") + "".concat(indent, "  B = ").concat(isString(b) ? "'" + b + "'" : String(b));
   console.log(output);
   return false;
 };
