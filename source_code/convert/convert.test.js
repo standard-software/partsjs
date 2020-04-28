@@ -133,8 +133,12 @@ const test_execute_convert = (parts) => {
         checkEqual('Infinity',    String(Infinity));
         checkEqual('-Infinity',   String(-Infinity));
 
-        checkEqual('null',        String(null));
-        checkEqual('undefined',   String(undefined));
+        checkEqual('null',            String(null));
+        checkEqual('undefined',       String(undefined));
+        checkEqual('[object Object]', String({}));
+        checkEqual('',                String([]));
+        checkEqual('1,2,3',           String([1, 2, 3]));
+        checkEqual('',                String(''));
 
         // Exception
         checkEqual(false, isThrown(() => {
@@ -176,8 +180,19 @@ const test_execute_convert = (parts) => {
         checkEqual('-Infinity',   (-Infinity).toString());
 
         // Exception
-        checkEqual(true,        isThrown(() => (null).toString()) );
-        checkEqual(true,        isThrown(() => (undefined).toString()) );
+        checkEqual(true,              isThrown(() => (null).toString()) );
+        checkEqual(true,              isThrown(() => (undefined).toString()) );
+
+        checkEqual('[object Object]', ({}).toString());
+        checkEqual('',                ([]).toString());
+        checkEqual('1,2,3',           ([1, 2, 3]).toString());
+        checkEqual('',                ('').toString());
+
+        // Decimal number other
+        checkEqual('1010.01',         (10.25).toString(2));
+        checkEqual('22.1',            (10.25).toString(4));
+        checkEqual('12.2',            (10.25).toString(8));
+        checkEqual('a.4',             (10.25).toString(16));
 
       });
     };
@@ -791,7 +806,7 @@ const test_execute_convert = (parts) => {
         checkEqual(NaN,       Number(NaN));
 
         // Other
-        checkEqual(0,         Number(null));        // !!!
+        checkEqual(0,         Number(null));        // !
         checkEqual(NaN,       Number(undefined));
         checkEqual(NaN,       Number({}));
         checkEqual(NaN,       Number({ a: 1 }));
@@ -1048,6 +1063,13 @@ const test_execute_convert = (parts) => {
         checkEqual(1,         parseInt10([1]));
         checkEqual(123,       parseInt10([123]));
         checkEqual(1,         parseInt10([1, 2]));
+
+        // Decimal number other
+        checkEqual(10,        parseInt('1010', 2));
+        checkEqual(10,        parseInt('22', 4));
+        checkEqual(10,        parseInt('12', 8));
+        checkEqual(10,        parseInt('a', 16));
+        checkEqual(10,        parseInt('A', 16));
       });
     };
 

@@ -33,9 +33,8 @@ const {
  */
 const _numberToString = (
   value,
-  radix,
+  radix = 10,
 ) => {
-  radix = _initialValue(radix, 10);
   return value.toString(radix);
 };
 
