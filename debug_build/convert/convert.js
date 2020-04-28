@@ -45,8 +45,8 @@ var _require5 = require('../number/number.js'),
  */
 
 
-var _numberToString = function _numberToString(value, radix) {
-  radix = _initialValue(radix, 10);
+var _numberToString = function _numberToString(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
   return value.toString(radix);
 };
 

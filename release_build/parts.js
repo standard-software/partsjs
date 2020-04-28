@@ -8768,7 +8768,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(342);
 
-var VERSION = '4.9.0';
+var VERSION = '4.9.1 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -14963,8 +14963,8 @@ var _require5 = __webpack_require__(328),
  */
 
 
-var _numberToString = function _numberToString(value, radix) {
-  radix = _initialValue(radix, 10);
+var _numberToString = function _numberToString(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
   return value.toString(radix);
 };
 
