@@ -249,6 +249,29 @@ var switch_ = function switch_(expression) {
     return undefined;
   };
 };
+/**
+ * canUseSet
+ */
+
+
+var _canUseSetFlag;
+
+var canUseSet = function canUseSet() {
+  if (isUndefined(_canUseSetFlag)) {
+    try {
+      new Set();
+      _canUseSetFlag = true;
+    } catch (e) {
+      _canUseSetFlag = false;
+    }
+  }
+
+  return _canUseSetFlag;
+};
+
+canUseSet.reset = function () {
+  _canUseSetFlag = undefined;
+};
 
 module.exports = {
   assert: assert,
@@ -256,5 +279,6 @@ module.exports = {
   functionValue: functionValue,
   sc: sc,
   if_: if_,
-  switch_: switch_
+  switch_: switch_,
+  canUseSet: canUseSet
 };

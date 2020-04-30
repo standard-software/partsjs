@@ -8752,15 +8752,15 @@ var _type = __webpack_require__(311);
 
 var _test = __webpack_require__(325);
 
-var _syntax = __webpack_require__(340);
+var _syntax = __webpack_require__(329);
 
-var _compare = __webpack_require__(335);
+var _compare = __webpack_require__(336);
 
 var _convert = __webpack_require__(341);
 
 var _number = __webpack_require__(328);
 
-var _string = __webpack_require__(333);
+var _string = __webpack_require__(334);
 
 var _object = __webpack_require__(321);
 
@@ -8768,7 +8768,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(342);
 
-var VERSION = '4.9.2';
+var VERSION = '4.10.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -8810,7 +8810,7 @@ var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames); // syntax
 
 
-propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + '';
+propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + 'canUseSet,' + '';
 
 var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 
@@ -10620,10 +10620,10 @@ var _require = __webpack_require__(311),
 var _require2 = __webpack_require__(326),
     _map = _require2._map;
 
-var _require3 = __webpack_require__(333),
+var _require3 = __webpack_require__(334),
     _repeat = _require3._repeat;
 
-var _require4 = __webpack_require__(335),
+var _require4 = __webpack_require__(336),
     equal = _require4.equal,
     equalDeep = _require4.equalDeep;
 /**
@@ -10811,7 +10811,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 module.exports = _objectSpread({}, __webpack_require__(327), {
-  operation: _objectSpread({}, __webpack_require__(329), {}, __webpack_require__(330))
+  operation: _objectSpread({}, __webpack_require__(330), {}, __webpack_require__(331))
 });
 
 /***/ }),
@@ -10846,6 +10846,9 @@ var _require3 = __webpack_require__(315),
 var _require4 = __webpack_require__(310),
     _clone = _require4._clone,
     _cloneDeep = _require4._cloneDeep;
+
+var _require5 = __webpack_require__(329),
+    canUseSet = _require5.canUseSet;
 /**
  * array.min max
  */
@@ -11027,15 +11030,19 @@ var mode = function mode(array) {
 
 
 var _unique = function _unique(array) {
-  var resultArray = [];
+  if (canUseSet()) {
+    return Array.from(new Set(array));
+  } else {
+    var resultArray = [];
 
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!resultArray.includes(array[i])) {
-      resultArray.push(array[i]);
+    for (var i = 0, l = array.length; i < l; i += 1) {
+      if (!resultArray.includes(array[i])) {
+        resultArray.push(array[i]);
+      }
     }
-  }
 
-  return resultArray;
+    return resultArray;
+  }
 };
 
 var unique = function unique(array) {
@@ -12000,6 +12007,296 @@ module.exports = (_module$exports = {
 "use strict";
 
 
+var _require = __webpack_require__(311),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isUndefinedAll = _require.isUndefinedAll;
+
+var _require2 = __webpack_require__(315),
+    isObjectParameter = _require2.isObjectParameter;
+/**
+ * assert
+ */
+
+
+var assert = function assert(value) {
+  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  if (!isBoolean(value)) {
+    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
+  }
+
+  if (!isString(message)) {
+    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
+  }
+
+  if (!value) {
+    throw new Error("assert error|message:".concat(message));
+  }
+};
+/**
+ * guard
+ */
+
+
+var guard_status = true;
+var guard_message;
+
+var guard = function guard(guardFunc, runFunc) {
+  guard_message = '';
+
+  if (guard_status === false) {
+    return false;
+  }
+
+  if (!isFunction(guardFunc)) {
+    throw new TypeError('guard args(guardFunc) is not function');
+  }
+
+  var result = guardFunc();
+
+  if (!isArray(result)) {
+    throw new TypeError('guard args(guardFunc result) is not array');
+  }
+
+  for (var i = 0; i < result.length; i += 1) {
+    // support for wsh last comma in Array. [a,b,]
+    if (i === result.length - 1 && isUndefined(result[i])) {
+      continue;
+    }
+
+    var resultValue = undefined;
+    var message = '';
+
+    if (isArray(result[i])) {
+      if (!(1 <= result[i].length)) {
+        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
+      }
+
+      resultValue = result[i][0];
+
+      if (2 <= result[i].length) {
+        message = result[i][1];
+      }
+    } else {
+      resultValue = result[i];
+    }
+
+    resultValue = functionValue(resultValue);
+
+    if (!isBoolean(resultValue)) {
+      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
+    }
+
+    if (resultValue === false) {
+      guard_message = message;
+
+      if (!isUndefined(runFunc)) {
+        if (!isFunction(runFunc)) {
+          throw new TypeError('guard args(runFunc) is not function');
+        }
+
+        runFunc();
+      }
+
+      return true;
+    }
+  }
+
+  return false;
+};
+
+guard.message = function () {
+  return guard_message;
+};
+
+guard.status = function (value) {
+  return guard_status = value;
+};
+
+guard.on = function () {
+  guard_status = true;
+};
+
+guard.off = function () {
+  guard_status = false;
+};
+/**
+ * function Value
+ */
+
+
+var functionValue = function functionValue(value) {
+  if (isFunction(value)) {
+    return value();
+  } else {
+    return value;
+  }
+};
+/**
+ * sc (second call)
+ */
+
+
+var sc = function sc(argsFirst, func) {
+  for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    argsRest[_key - 2] = arguments[_key];
+  }
+
+  return func.apply(void 0, [argsFirst].concat(argsRest));
+};
+/**
+ * if_
+ */
+
+
+var if_ = function if_(condition) {
+  if (!isBoolean(condition)) {
+    throw new TypeError('if_ args(condition) is not boolean');
+  }
+
+  var returnFunc = function returnFunc(then_, else_) {
+    if (isObjectParameter(then_, '', 'then, else', 1)) {
+      var _then_ = then_;
+      then_ = _then_.then;
+      else_ = _then_["else"];
+    }
+
+    return condition ? functionValue(then_) : functionValue(else_);
+  };
+
+  if (condition) {
+    returnFunc.then = function (value) {
+      return {
+        "else": function _else() {
+          return functionValue(value);
+        }
+      };
+    };
+
+    returnFunc["else"] = function () {
+      return {
+        then: function then(value) {
+          return functionValue(value);
+        }
+      };
+    };
+  } else {
+    returnFunc.then = function () {
+      return {
+        "else": function _else(value) {
+          return functionValue(value);
+        }
+      };
+    };
+
+    returnFunc["else"] = function (value) {
+      return {
+        then: function then() {
+          return functionValue(value);
+        }
+      };
+    };
+  }
+
+  return returnFunc;
+};
+/**
+ * switch_
+ */
+
+
+var switch_ = function switch_(expression) {
+  return function (args) {
+    if (!isArray(args)) {
+      throw new TypeError('switch_() args is not array');
+    }
+
+    for (var i = 0; i < args.length; i += 1) {
+      // support for wsh last comma in Array. [a,b,]
+      if (i === args.length - 1 && isUndefined(args[i])) {
+        continue;
+      }
+
+      if (!isArray(args[i])) {
+        throw new TypeError('switch_() args is not array in array');
+      }
+    }
+
+    for (var _i = 0; _i < args.length; _i += 1) {
+      // support for wsh last comma in Array. [a,b,]
+      if (_i === args.length - 1 && isUndefined(args[_i])) {
+        continue;
+      }
+
+      if (args[_i].length === 0) {
+        return undefined;
+      }
+
+      if (args[_i].length === 1) {
+        return functionValue(args[_i][0]);
+      }
+
+      if (args[_i][0] === expression) {
+        return functionValue(args[_i][1]);
+      }
+    }
+
+    return undefined;
+  };
+};
+/**
+ * canUseSet
+ */
+
+
+var _canUseSetFlag;
+
+var canUseSet = function canUseSet() {
+  if (isUndefined(_canUseSetFlag)) {
+    try {
+      new Set();
+      _canUseSetFlag = true;
+    } catch (e) {
+      _canUseSetFlag = false;
+    }
+  }
+
+  return _canUseSetFlag;
+};
+
+canUseSet.reset = function () {
+  _canUseSetFlag = undefined;
+};
+
+module.exports = {
+  assert: assert,
+  guard: guard,
+  functionValue: functionValue,
+  sc: sc,
+  if_: if_,
+  switch_: switch_,
+  canUseSet: canUseSet
+};
+
+/***/ }),
+/* 330 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -12845,7 +13142,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12866,14 +13163,14 @@ var _require = __webpack_require__(311),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = __webpack_require__(331),
+var _require2 = __webpack_require__(332),
     allMatch = _require2.allMatch,
     allMatchSome = _require2.allMatchSome; // const {
 //   _inProperty,
 // } = require('../object/inProperty.js');
 
 
-var _require3 = __webpack_require__(332),
+var _require3 = __webpack_require__(333),
     _or = _require3._or;
 /**
  * array.sort
@@ -13034,7 +13331,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13504,7 +13801,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13568,7 +13865,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13580,10 +13877,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(334), {}, __webpack_require__(316), {}, __webpack_require__(339));
+module.exports = _objectSpread({}, __webpack_require__(335), {}, __webpack_require__(316), {}, __webpack_require__(340));
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13608,7 +13905,7 @@ var _require = __webpack_require__(311),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = __webpack_require__(335),
+var _require2 = __webpack_require__(336),
     _matchSome = _require2._matchSome;
 
 var _require3 = __webpack_require__(315),
@@ -13898,7 +14195,7 @@ module.exports = (_module$exports = {
 }, _defineProperty(_module$exports, "isLowerCase", isLowerCase), _defineProperty(_module$exports, "isUpperCase", isUpperCase), _module$exports);
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13910,10 +14207,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread({}, __webpack_require__(332), {}, __webpack_require__(331), {}, __webpack_require__(336), {}, __webpack_require__(337), {}, __webpack_require__(338));
+module.exports = _objectSpread({}, __webpack_require__(333), {}, __webpack_require__(332), {}, __webpack_require__(337), {}, __webpack_require__(338), {}, __webpack_require__(339));
 
 /***/ }),
-/* 336 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13943,7 +14240,7 @@ var _require = __webpack_require__(311),
 var _require2 = __webpack_require__(315),
     isObjectParameter = _require2.isObjectParameter;
 
-var _require3 = __webpack_require__(331),
+var _require3 = __webpack_require__(332),
     _match = _require3._match;
 /**
  * includes
@@ -13991,7 +14288,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 337 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14026,10 +14323,10 @@ var _require3 = __webpack_require__(327),
     _all = _require3._all,
     _findFirstIndex = _require3._findFirstIndex;
 
-var _require4 = __webpack_require__(331),
+var _require4 = __webpack_require__(332),
     _match = _require4._match;
 
-var _require5 = __webpack_require__(336),
+var _require5 = __webpack_require__(337),
     _includes = _require5._includes,
     includes = _require5.includes;
 /**
@@ -14089,7 +14386,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 338 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14600,7 +14897,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 339 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14655,272 +14952,6 @@ module.exports = {
 };
 
 /***/ }),
-/* 340 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(311),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isUndefinedAll = _require.isUndefinedAll;
-
-var _require2 = __webpack_require__(315),
-    isObjectParameter = _require2.isObjectParameter;
-/**
- * assert
- */
-
-
-var assert = function assert(value) {
-  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-  if (!isBoolean(value)) {
-    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
-  }
-
-  if (!isString(message)) {
-    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
-  }
-
-  if (!value) {
-    throw new Error("assert error|message:".concat(message));
-  }
-};
-/**
- * guard
- */
-
-
-var guard_status = true;
-var guard_message;
-
-var guard = function guard(guardFunc, runFunc) {
-  guard_message = '';
-
-  if (guard_status === false) {
-    return false;
-  }
-
-  if (!isFunction(guardFunc)) {
-    throw new TypeError('guard args(guardFunc) is not function');
-  }
-
-  var result = guardFunc();
-
-  if (!isArray(result)) {
-    throw new TypeError('guard args(guardFunc result) is not array');
-  }
-
-  for (var i = 0; i < result.length; i += 1) {
-    // support for wsh last comma in Array. [a,b,]
-    if (i === result.length - 1 && isUndefined(result[i])) {
-      continue;
-    }
-
-    var resultValue = undefined;
-    var message = '';
-
-    if (isArray(result[i])) {
-      if (!(1 <= result[i].length)) {
-        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
-      }
-
-      resultValue = result[i][0];
-
-      if (2 <= result[i].length) {
-        message = result[i][1];
-      }
-    } else {
-      resultValue = result[i];
-    }
-
-    resultValue = functionValue(resultValue);
-
-    if (!isBoolean(resultValue)) {
-      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
-    }
-
-    if (resultValue === false) {
-      guard_message = message;
-
-      if (!isUndefined(runFunc)) {
-        if (!isFunction(runFunc)) {
-          throw new TypeError('guard args(runFunc) is not function');
-        }
-
-        runFunc();
-      }
-
-      return true;
-    }
-  }
-
-  return false;
-};
-
-guard.message = function () {
-  return guard_message;
-};
-
-guard.status = function (value) {
-  return guard_status = value;
-};
-
-guard.on = function () {
-  guard_status = true;
-};
-
-guard.off = function () {
-  guard_status = false;
-};
-/**
- * function Value
- */
-
-
-var functionValue = function functionValue(value) {
-  if (isFunction(value)) {
-    return value();
-  } else {
-    return value;
-  }
-};
-/**
- * sc (second call)
- */
-
-
-var sc = function sc(argsFirst, func) {
-  for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    argsRest[_key - 2] = arguments[_key];
-  }
-
-  return func.apply(void 0, [argsFirst].concat(argsRest));
-};
-/**
- * if_
- */
-
-
-var if_ = function if_(condition) {
-  if (!isBoolean(condition)) {
-    throw new TypeError('if_ args(condition) is not boolean');
-  }
-
-  var returnFunc = function returnFunc(then_, else_) {
-    if (isObjectParameter(then_, '', 'then, else', 1)) {
-      var _then_ = then_;
-      then_ = _then_.then;
-      else_ = _then_["else"];
-    }
-
-    return condition ? functionValue(then_) : functionValue(else_);
-  };
-
-  if (condition) {
-    returnFunc.then = function (value) {
-      return {
-        "else": function _else() {
-          return functionValue(value);
-        }
-      };
-    };
-
-    returnFunc["else"] = function () {
-      return {
-        then: function then(value) {
-          return functionValue(value);
-        }
-      };
-    };
-  } else {
-    returnFunc.then = function () {
-      return {
-        "else": function _else(value) {
-          return functionValue(value);
-        }
-      };
-    };
-
-    returnFunc["else"] = function (value) {
-      return {
-        then: function then() {
-          return functionValue(value);
-        }
-      };
-    };
-  }
-
-  return returnFunc;
-};
-/**
- * switch_
- */
-
-
-var switch_ = function switch_(expression) {
-  return function (args) {
-    if (!isArray(args)) {
-      throw new TypeError('switch_() args is not array');
-    }
-
-    for (var i = 0; i < args.length; i += 1) {
-      // support for wsh last comma in Array. [a,b,]
-      if (i === args.length - 1 && isUndefined(args[i])) {
-        continue;
-      }
-
-      if (!isArray(args[i])) {
-        throw new TypeError('switch_() args is not array in array');
-      }
-    }
-
-    for (var _i = 0; _i < args.length; _i += 1) {
-      // support for wsh last comma in Array. [a,b,]
-      if (_i === args.length - 1 && isUndefined(args[_i])) {
-        continue;
-      }
-
-      if (args[_i].length === 0) {
-        return undefined;
-      }
-
-      if (args[_i].length === 1) {
-        return functionValue(args[_i][0]);
-      }
-
-      if (args[_i][0] === expression) {
-        return functionValue(args[_i][1]);
-      }
-    }
-
-    return undefined;
-  };
-};
-
-module.exports = {
-  assert: assert,
-  guard: guard,
-  functionValue: functionValue,
-  sc: sc,
-  if_: if_,
-  switch_: switch_
-};
-
-/***/ }),
 /* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14955,11 +14986,11 @@ var _require = __webpack_require__(311),
     isNotRegExp = _require.isNotRegExp,
     isNotException = _require.isNotException;
 
-var _require2 = __webpack_require__(335),
+var _require2 = __webpack_require__(336),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(333),
+var _require3 = __webpack_require__(334),
     _matchFormat = _require3._matchFormat;
 
 var _require4 = __webpack_require__(315),
@@ -15316,7 +15347,7 @@ var _require = __webpack_require__(311),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = __webpack_require__(335),
+var _require2 = __webpack_require__(336),
     _or = _require2._or,
     _includes = _require2._includes,
     _includesSome = _require2._includesSome,

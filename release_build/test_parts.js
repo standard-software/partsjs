@@ -169,7 +169,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = !parts.platform.isWindowsScriptHost() ? [240, 13, 3, 140, 6, 11, 23, 24, 7, 6, 12, 33] : [239, 13, 3, 140, 6, 11, 23, 23, 7, 6, 12, 33];
+        var countArray = !parts.platform.isWindowsScriptHost() ? [241, 13, 3, 140, 7, 11, 23, 24, 7, 6, 12, 33] : [240, 13, 3, 140, 7, 11, 23, 23, 7, 6, 12, 33];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -19336,7 +19336,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         guard = _parts$syntax.guard,
         sc = _parts$syntax.sc,
         if_ = _parts$syntax.if_,
-        switch_ = _parts$syntax.switch_;
+        switch_ = _parts$syntax.switch_,
+        canUseSet = _parts$syntax.canUseSet;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -19901,10 +19902,21 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_canUseSet = function test_canUseSet() {
+      it('test_canUseSet', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseSet());
+        } else {
+          checkEqual(true, canUseSet());
+        }
+      });
+    };
+
     test_guard();
     test_sc();
     test_if_();
     test_switch_();
+    test_canUseSet();
   });
 };
 
@@ -25825,6 +25837,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_median();
     test_mode();
     test_uniqe();
+    test_single();
     test_multiple();
     test_filter();
     test_map();

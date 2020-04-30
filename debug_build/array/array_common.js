@@ -25,6 +25,9 @@ var _require3 = require('../object/isObjectParameter.js'),
 var _require4 = require('../root/clone.js'),
     _clone = _require4._clone,
     _cloneDeep = _require4._cloneDeep;
+
+var _require5 = require('../syntax/syntax.js'),
+    canUseSet = _require5.canUseSet;
 /**
  * array.min max
  */
@@ -206,15 +209,19 @@ var mode = function mode(array) {
 
 
 var _unique = function _unique(array) {
-  var resultArray = [];
+  if (canUseSet()) {
+    return Array.from(new Set(array));
+  } else {
+    var resultArray = [];
 
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!resultArray.includes(array[i])) {
-      resultArray.push(array[i]);
+    for (var i = 0, l = array.length; i < l; i += 1) {
+      if (!resultArray.includes(array[i])) {
+        resultArray.push(array[i]);
+      }
     }
-  }
 
-  return resultArray;
+    return resultArray;
+  }
 };
 
 var unique = function unique(array) {

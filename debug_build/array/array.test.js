@@ -1287,6 +1287,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_median();
     test_mode();
     test_uniqe();
+    test_single();
     test_multiple();
     test_filter();
     test_map();

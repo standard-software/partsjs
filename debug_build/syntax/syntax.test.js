@@ -45,7 +45,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         guard = _parts$syntax.guard,
         sc = _parts$syntax.sc,
         if_ = _parts$syntax.if_,
-        switch_ = _parts$syntax.switch_;
+        switch_ = _parts$syntax.switch_,
+        canUseSet = _parts$syntax.canUseSet;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -610,10 +611,21 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_canUseSet = function test_canUseSet() {
+      it('test_canUseSet', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseSet());
+        } else {
+          checkEqual(true, canUseSet());
+        }
+      });
+    };
+
     test_guard();
     test_sc();
     test_if_();
     test_switch_();
+    test_canUseSet();
   });
 };
 
