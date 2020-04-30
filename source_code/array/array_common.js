@@ -18,6 +18,10 @@ const {
   _clone, _cloneDeep,
 } = require('../root/clone.js');
 
+const {
+  canUseSet,
+} = require('../syntax/syntax.js');
+
 /**
  * array.min max
  */
@@ -187,13 +191,17 @@ const mode = (array) => {
  * uniqe
  */
 const _unique = (array) => {
-  const resultArray = [];
-  for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!resultArray.includes(array[i])) {
-      resultArray.push(array[i]);
+  if (canUseSet()) {
+    return Array.from(new Set(array));
+  } else {
+    const resultArray = [];
+    for (let i = 0, l = array.length; i < l; i += 1) {
+      if (!resultArray.includes(array[i])) {
+        resultArray.push(array[i]);
+      }
     }
+    return resultArray;
   }
-  return resultArray;
 };
 
 const unique = (array) => {

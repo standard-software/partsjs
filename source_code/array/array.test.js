@@ -1967,6 +1967,7 @@ const test_execute_array = (parts) => {
     test_mode();
 
     test_uniqe();
+    test_single();
     test_multiple();
 
     test_filter();
