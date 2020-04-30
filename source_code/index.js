@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '4.9.2';
+const VERSION = '4.10.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -92,6 +92,7 @@ propertyNames.SYNTAX =
   'assert,guard,' +
   'functionValue,' +
   'sc,if_,switch_,' +
+  'canUseSet,' +
   '';
 const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);

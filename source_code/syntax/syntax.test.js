@@ -30,6 +30,7 @@ const test_execute_syntax = (parts) => {
       sc,
       if_,
       switch_,
+      canUseSet,
     } = parts.syntax;
 
     const {
@@ -572,10 +573,21 @@ const test_execute_syntax = (parts) => {
       });
     };
 
+    const test_canUseSet = function() {
+      it('test_canUseSet', () => {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseSet());
+        } else {
+          checkEqual(true,  canUseSet());
+        }
+      });
+    };
+
     test_guard();
     test_sc();
     test_if_();
     test_switch_();
+    test_canUseSet();
   });
 };
 

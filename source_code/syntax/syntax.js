@@ -211,8 +211,30 @@ const switch_ = (expression) => {
   };
 };
 
+/**
+ * canUseSet
+ */
+let _canUseSetFlag;
+
+const canUseSet = () => {
+  if (isUndefined(_canUseSetFlag)) {
+    try {
+      new Set();
+      _canUseSetFlag = true;
+    } catch (e) {
+      _canUseSetFlag = false;
+    }
+  }
+  return _canUseSetFlag;
+};
+
+canUseSet.reset = () => {
+  _canUseSetFlag = undefined;
+};
+
 module.exports = {
   assert, guard,
   functionValue,
   sc, if_, switch_,
+  canUseSet,
 };
