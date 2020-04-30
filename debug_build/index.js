@@ -30,7 +30,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '4.9.1';
+var VERSION = '4.9.2 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -64,7 +64,7 @@ var type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames); // test
 
 
-propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
+propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'testCounter,';
 propertyNames.TEST_ROOT = 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 
 var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
@@ -86,7 +86,7 @@ var compare = _copyProperty(_compare, propertyNames.COMPARE);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames); // convert
 
 
-propertyNames.CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'toNumber, toNumberDefault,' + 'toInteger, toIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'toNum, toNumDef,' + 'toInt, toIntDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + '';
+propertyNames.CONVERT = 'numberToString, toString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'toNumber, toNumberDefault,' + 'toInteger, toIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'toNum, toNumDef,' + 'toInt, toIntDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + '';
 
 var convert = _copyProperty(_convert, propertyNames.CONVERT);
 

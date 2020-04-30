@@ -79,7 +79,9 @@ var numberToString = function numberToString(value) {
  */
 
 
-var toString = function toString(value, radix) {
+var toString = function toString(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+
   if (isObjectParameter(value, 'value', 'radix')) {
     var _value2 = value;
     value = _value2.value;

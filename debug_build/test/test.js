@@ -117,6 +117,14 @@ var expect = function expect(a) {
     }
   };
 };
+
+var testCounter = function testCounter(value) {
+  if (isInteger(value)) {
+    testFrame.counter = value;
+  }
+
+  return testFrame.counter;
+};
 /**
  * isThrown isThrownValue isThrownException isNotThrown
  */
@@ -186,5 +194,6 @@ module.exports = {
   isThrown: isThrown,
   isThrownValue: isThrownValue,
   isThrownException: isThrownException,
-  isNotThrown: isNotThrown
+  isNotThrown: isNotThrown,
+  testCounter: testCounter
 };

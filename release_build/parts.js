@@ -8768,7 +8768,7 @@ var _array = __webpack_require__(326);
 
 var _consoleHook = __webpack_require__(342);
 
-var VERSION = '4.9.1';
+var VERSION = '4.9.2 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -8802,7 +8802,7 @@ var type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames); // test
 
 
-propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
+propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'testCounter,';
 propertyNames.TEST_ROOT = 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
 
 var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
@@ -8824,7 +8824,7 @@ var compare = _copyProperty(_compare, propertyNames.COMPARE);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames); // convert
 
 
-propertyNames.CONVERT = 'numberToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'toNumber, toNumberDefault,' + 'toInteger, toIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'toNum, toNumDef,' + 'toInt, toIntDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + '';
+propertyNames.CONVERT = 'numberToString, toString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'toNumber, toNumberDefault,' + 'toInteger, toIntegerDefault,' + 'numToString,' + 'strToNumber,strToNumberDef,' + 'strToInteger,strToIntegerDef,' + 'toNum, toNumDef,' + 'toInt, toIntDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + '';
 
 var convert = _copyProperty(_convert, propertyNames.CONVERT);
 
@@ -10716,6 +10716,14 @@ var expect = function expect(a) {
     }
   };
 };
+
+var testCounter = function testCounter(value) {
+  if (isInteger(value)) {
+    testFrame.counter = value;
+  }
+
+  return testFrame.counter;
+};
 /**
  * isThrown isThrownValue isThrownException isNotThrown
  */
@@ -10785,7 +10793,8 @@ module.exports = {
   isThrown: isThrown,
   isThrownValue: isThrownValue,
   isThrownException: isThrownException,
-  isNotThrown: isNotThrown
+  isNotThrown: isNotThrown,
+  testCounter: testCounter
 };
 
 /***/ }),
@@ -14997,7 +15006,9 @@ var numberToString = function numberToString(value) {
  */
 
 
-var toString = function toString(value, radix) {
+var toString = function toString(value) {
+  var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+
   if (isObjectParameter(value, 'value', 'radix')) {
     var _value2 = value;
     value = _value2.value;
