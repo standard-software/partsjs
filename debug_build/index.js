@@ -30,7 +30,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '4.9.2 beta';
+var VERSION = '4.9.2';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
