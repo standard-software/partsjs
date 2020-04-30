@@ -109,6 +109,13 @@ const expect = a => {
   };
 };
 
+const testCounter = value => {
+  if (isInteger(value)) {
+    testFrame.counter = value;
+  }
+  return testFrame.counter;
+};
+
 /**
  * isThrown isThrownValue isThrownException isNotThrown
  */
@@ -182,5 +189,6 @@ module.exports = {
   checkEqual, checkCompare,
   describe, it, test, expect,
   isThrown, isThrownValue, isThrownException, isNotThrown,
+  testCounter,
 };
 

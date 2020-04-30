@@ -233,6 +233,12 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 4.9.2
+#### 2020/04/30(Thu)
+- bugfix convert.toString
+- add testCounter
+- update testCode
+
 ### 4.9.1
 #### 2020/04/28(Tue)
 - update test code

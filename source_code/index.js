@@ -11,7 +11,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '4.9.1';
+const VERSION = '4.9.2';
 
 const rootNames = {};
 const propertyNames = {};
@@ -80,7 +80,7 @@ propertyNames.TEST_PUBLIC =
   'checkEqual, checkCompare,' +
   'describe, it, test, expect,' +
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
-  '';
+  'testCounter,';
 propertyNames.TEST_ROOT =
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';
@@ -114,7 +114,7 @@ _copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
 // convert
 propertyNames.CONVERT =
-  'numberToString,' +
+  'numberToString, toString,' +
   'stringToNumber,stringToNumberDefault,' +
   'stringToInteger,stringToIntegerDefault,' +
   'toNumber, toNumberDefault,' +

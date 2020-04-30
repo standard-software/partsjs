@@ -33,18 +33,21 @@ const test_execute_index = (parts) => {
 
       it('test_execute_nameSpace 1', () => {
 
-        checkEqual(239, propertyCount(parts));
-        checkEqual(13,  propertyCount(parts.platform));
-        checkEqual(3,   propertyCount(parts.root));
-        checkEqual(140, propertyCount(parts.type));
-        checkEqual(6,   propertyCount(parts.syntax));
-        checkEqual(10,  propertyCount(parts.test));
-        checkEqual(23,  propertyCount(parts.compare));
-        checkEqual(23,  propertyCount(parts.convert));
-        checkEqual(7,   propertyCount(parts.number));
-        checkEqual(6,   propertyCount(parts.string));
-        checkEqual(12,  propertyCount(parts.object));
-        checkEqual(33,  propertyCount(parts.array));
+        const countArray = !parts.platform.isWindowsScriptHost()
+          ? [240, 13, 3, 140, 6, 11, 23, 24, 7, 6, 12, 33]
+          : [239, 13, 3, 140, 6, 11, 23, 23, 7, 6, 12, 33];
+        checkEqual(countArray.shift(),  propertyCount(parts));
+        checkEqual(countArray.shift(),  propertyCount(parts.platform));
+        checkEqual(countArray.shift(),  propertyCount(parts.root));
+        checkEqual(countArray.shift(),  propertyCount(parts.type));
+        checkEqual(countArray.shift(),  propertyCount(parts.syntax));
+        checkEqual(countArray.shift(),  propertyCount(parts.test));
+        checkEqual(countArray.shift(),  propertyCount(parts.compare));
+        checkEqual(countArray.shift(),  propertyCount(parts.convert));
+        checkEqual(countArray.shift(),  propertyCount(parts.number));
+        checkEqual(countArray.shift(),  propertyCount(parts.string));
+        checkEqual(countArray.shift(),  propertyCount(parts.object));
+        checkEqual(countArray.shift(),  propertyCount(parts.array));
         checkEqual(true,
           inProperty(
             parts,

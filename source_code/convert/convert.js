@@ -71,7 +71,10 @@ const numberToString = (
 /**
  * toString
  */
-const toString = (value, radix) => {
+const toString = (
+  value,
+  radix = 10,
+) => {
   if (isObjectParameter(value, 'value', 'radix')) {
     ({ value, radix = 10 } = value);
   }
