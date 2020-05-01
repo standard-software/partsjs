@@ -2,6 +2,16 @@
 
 ## Version
 
+### 4.10.0
+#### 2020/05/01(Fri)
+- add canUseMap
+- add canUseSet
+- update unique
+- rename
+  - toString >> valueToString
+  - toNumber >> valueToNumbeer
+  - toInteger >> valueToInteger
+
 ### 4.9.2
 #### 2020/04/30(Thu)
 - bugfix convert.toString
