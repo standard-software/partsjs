@@ -69,9 +69,9 @@ const numberToString = (
 };
 
 /**
- * toString
+ * valueToString
  */
-const toString = (
+const valueToString = (
   value,
   radix = 10,
 ) => {
@@ -293,9 +293,9 @@ const stringToIntegerDefault = (
 };
 
 /**
- * toNumber
+ * valueToNumber
  */
-const toNumber = (value) => {
+const valueToNumber = (value) => {
   if (isNull(value)) {
     return NaN;
   }
@@ -308,7 +308,7 @@ const toNumber = (value) => {
   return stringToNumberDefault(value, NaN);
 };
 
-const toNumberDefault = (value, defaultValue) => {
+const valueToNumberDefault = (value, defaultValue) => {
   if (isObjectParameter(value, 'value,defaultValue')) {
     ({ value, defaultValue } = value);
   }
@@ -316,7 +316,7 @@ const toNumberDefault = (value, defaultValue) => {
   if (isNaNStrict(value)) {
     return value;
   }
-  const result = toNumber(value);
+  const result = valueToNumber(value);
   if (isNaNStrict(result)) {
     return defaultValue;
   }
@@ -324,22 +324,25 @@ const toNumberDefault = (value, defaultValue) => {
 };
 
 /**
- * toInteger
+ * valueToInteger
  */
-const toInteger = (value) => {
-  const result = toNumber(value);
+const valueToInteger = (value) => {
+  const result = valueToNumber(value);
   if (isNaNStrict(result)) {
     return NaN;
   }
   return _round(result);
 };
 
-const toIntegerDefault = (value, defaultValue) => {
+const valueToIntegerDefault = (value, defaultValue) => {
   if (isObjectParameter(value, 'value,defaultValue')) {
     ({ value, defaultValue } = value);
   }
 
-  const result = toInteger(value);
+  if (isNaNStrict(value)) {
+    return value;
+  }
+  const result = valueToInteger(value);
   if (isNaNStrict(result)) {
     return defaultValue;
   }
@@ -348,40 +351,48 @@ const toIntegerDefault = (value, defaultValue) => {
 
 
 const numToString     = numberToString;
+const valToString     = valueToString;
 const strToNumber     = stringToNumber;
 const strToNumberDef  = stringToNumberDefault;
 const strToInteger    = stringToInteger;
 const strToIntegerDef = stringToIntegerDefault;
 
+const valToNumber       = valueToNumber;
+const valToNumberDef    = valueToNumberDefault;
+const valToInteger      = valueToInteger;
+const valToIntegerDef   = valueToIntegerDefault;
+
 const numToStr        = numberToString;
-const toStr           = toString;
+const valToStr        = valueToString;
 const strToNum        = stringToNumber;
 const strToNumDef     = stringToNumberDefault;
 const strToInt        = stringToInteger;
 const strToIntDef     = stringToIntegerDefault;
 
-const toNum           = toNumber;
-const toNumDef        = toNumberDefault;
-const toInt           = toInteger;
-const toIntDef        = toIntegerDefault;
+const valToNum           = valueToNumber;
+const valToNumDef        = valueToNumberDefault;
+const valToInt           = valueToInteger;
+const valToIntDef        = valueToIntegerDefault;
 
 module.exports = {
   numberToString,
-  toString,
-
+  valueToString,
   stringToNumber, stringToNumberDefault,
   stringToInteger, stringToIntegerDefault,
-  toNumber, toNumberDefault,
-  toInteger, toIntegerDefault,
+  valueToNumber, valueToNumberDefault,
+  valueToInteger, valueToIntegerDefault,
 
   numToString,
+  valToString,
   strToNumber, strToNumberDef,
   strToInteger, strToIntegerDef,
-  toNum, toNumDef,
-  toInt, toIntDef,
+  valToNumber, valToNumberDef,
+  valToInteger, valToIntegerDef,
 
   numToStr,
-  toStr,
+  valToStr,
+  valToNum, valToNumDef,
+  valToInt, valToIntDef,
 
   strToNum, strToNumDef,
   strToInt, strToIntDef,

@@ -238,6 +238,10 @@ You can now use the functions of the parts.js object.
 - add canUseMap
 - add canUseSet
 - update unique
+- rename
+  - toString >> valueToString
+  - toNumber >> valueToNumbeer
+  - toInteger >> valueToInteger
 
 ### 4.9.2
 #### 2020/04/30(Thu)

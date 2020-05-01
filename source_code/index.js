@@ -115,17 +115,20 @@ _copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
 // convert
 propertyNames.CONVERT =
-  'numberToString, toString,' +
+  'numberToString, valueToString,' +
   'stringToNumber,stringToNumberDefault,' +
   'stringToInteger,stringToIntegerDefault,' +
-  'toNumber, toNumberDefault,' +
-  'toInteger, toIntegerDefault,' +
+  'valueToNumber, valueToNumberDefault,' +
+  'valueToInteger, valueToIntegerDefault,' +
 
-  'numToString,' +
-  'strToNumber,strToNumberDef,' +
-  'strToInteger,strToIntegerDef,' +
-  'toNum, toNumDef,' +
-  'toInt, toIntDef,' +
+  'numToString, valToString,' +
+  'strToNumber, strToNumberDef,' +
+  'strToInteger, strToIntegerDef,' +
+  'valToNumber, valToNumberDefault,' +
+  'valToInteger, valToIntegerDefault,' +
+
+  'valToNum, valToNumDef,' +
+  'valToInt, valToIntDef,' +
 
   'numToStr,' +
   'strToNum,strToNumDef,' +
