@@ -169,7 +169,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = !parts.platform.isWindowsScriptHost() ? [241, 13, 3, 140, 7, 11, 23, 24, 7, 6, 12, 33] : [240, 13, 3, 140, 7, 11, 23, 23, 7, 6, 12, 33];
+        var countArray = !parts.platform.isWindowsScriptHost() ? [242, 13, 3, 140, 8, 11, 23, 24, 7, 6, 12, 33] : [241, 13, 3, 140, 8, 11, 23, 23, 7, 6, 12, 33];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -19337,6 +19337,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         sc = _parts$syntax.sc,
         if_ = _parts$syntax.if_,
         switch_ = _parts$syntax.switch_,
+        canUseMap = _parts$syntax.canUseMap,
         canUseSet = _parts$syntax.canUseSet;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
@@ -19902,6 +19903,16 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_canUseMap = function test_canUseMap() {
+      it('test_canUseMap', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseMap());
+        } else {
+          checkEqual(true, canUseMap());
+        }
+      });
+    };
+
     var test_canUseSet = function test_canUseSet() {
       it('test_canUseSet', function () {
         if (parts.platform.isWindowsScriptHost()) {
@@ -19916,6 +19927,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_sc();
     test_if_();
     test_switch_();
+    test_canUseMap();
     test_canUseSet();
   });
 };

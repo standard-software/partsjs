@@ -8810,7 +8810,7 @@ var test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames); // syntax
 
 
-propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + 'canUseSet,' + '';
+propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + 'canUseMap, canUseSet,' + '';
 
 var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 
@@ -12257,6 +12257,29 @@ var switch_ = function switch_(expression) {
   };
 };
 /**
+ * canUseMap
+ */
+
+
+var _canUseMapFlag;
+
+var canUseMap = function canUseMap() {
+  if (isUndefined(_canUseMapFlag)) {
+    try {
+      new Map();
+      _canUseMapFlag = true;
+    } catch (e) {
+      _canUseMapFlag = false;
+    }
+  }
+
+  return _canUseMapFlag;
+};
+
+canUseMap.reset = function () {
+  _canUseMapFlag = undefined;
+};
+/**
  * canUseSet
  */
 
@@ -12287,6 +12310,7 @@ module.exports = {
   sc: sc,
   if_: if_,
   switch_: switch_,
+  canUseMap: canUseMap,
   canUseSet: canUseSet
 };
 

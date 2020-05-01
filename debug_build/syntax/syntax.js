@@ -250,6 +250,29 @@ var switch_ = function switch_(expression) {
   };
 };
 /**
+ * canUseMap
+ */
+
+
+var _canUseMapFlag;
+
+var canUseMap = function canUseMap() {
+  if (isUndefined(_canUseMapFlag)) {
+    try {
+      new Map();
+      _canUseMapFlag = true;
+    } catch (e) {
+      _canUseMapFlag = false;
+    }
+  }
+
+  return _canUseMapFlag;
+};
+
+canUseMap.reset = function () {
+  _canUseMapFlag = undefined;
+};
+/**
  * canUseSet
  */
 
@@ -280,5 +303,6 @@ module.exports = {
   sc: sc,
   if_: if_,
   switch_: switch_,
+  canUseMap: canUseMap,
   canUseSet: canUseSet
 };
