@@ -212,6 +212,27 @@ const switch_ = (expression) => {
 };
 
 /**
+ * canUseMap
+ */
+let _canUseMapFlag;
+
+const canUseMap = () => {
+  if (isUndefined(_canUseMapFlag)) {
+    try {
+      new Map();
+      _canUseMapFlag = true;
+    } catch (e) {
+      _canUseMapFlag = false;
+    }
+  }
+  return _canUseMapFlag;
+};
+
+canUseMap.reset = () => {
+  _canUseMapFlag = undefined;
+};
+
+/**
  * canUseSet
  */
 let _canUseSetFlag;
@@ -236,5 +257,5 @@ module.exports = {
   assert, guard,
   functionValue,
   sc, if_, switch_,
-  canUseSet,
+  canUseMap, canUseSet,
 };

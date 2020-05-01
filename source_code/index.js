@@ -92,7 +92,7 @@ propertyNames.SYNTAX =
   'assert,guard,' +
   'functionValue,' +
   'sc,if_,switch_,' +
-  'canUseSet,' +
+  'canUseMap, canUseSet,' +
   '';
 const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);

@@ -30,6 +30,7 @@ const test_execute_syntax = (parts) => {
       sc,
       if_,
       switch_,
+      canUseMap,
       canUseSet,
     } = parts.syntax;
 
@@ -573,6 +574,16 @@ const test_execute_syntax = (parts) => {
       });
     };
 
+    const test_canUseMap = function() {
+      it('test_canUseMap', () => {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseMap());
+        } else {
+          checkEqual(true,  canUseMap());
+        }
+      });
+    };
+
     const test_canUseSet = function() {
       it('test_canUseSet', () => {
         if (parts.platform.isWindowsScriptHost()) {
@@ -587,6 +598,7 @@ const test_execute_syntax = (parts) => {
     test_sc();
     test_if_();
     test_switch_();
+    test_canUseMap();
     test_canUseSet();
   });
 };
