@@ -15,14 +15,15 @@ var test_execute_convert = function test_execute_convert(parts) {
         testCounter = _parts$test2.testCounter;
     var _parts$convert = parts.convert,
         numberToString = _parts$convert.numberToString,
-        toString = _parts$convert.toString,
+        valueToString = _parts$convert.valueToString,
         stringToNumber = _parts$convert.stringToNumber,
         stringToNumberDefault = _parts$convert.stringToNumberDefault,
         stringToInteger = _parts$convert.stringToInteger,
         stringToIntegerDefault = _parts$convert.stringToIntegerDefault,
-        toNumber = _parts$convert.toNumber,
-        toNumberDefault = _parts$convert.toNumberDefault,
-        toInteger = _parts$convert.toInteger;
+        valueToNumber = _parts$convert.valueToNumber,
+        valueToNumberDefault = _parts$convert.valueToNumberDefault,
+        valueToInteger = _parts$convert.valueToInteger,
+        valueToIntegerDefault = _parts$convert.valueToIntegerDefault;
 
     var test_numberToString = function test_numberToString() {
       it('test_numberToString', function () {
@@ -151,110 +152,110 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_toString = function test_toString() {
-      it('test_toString', function () {
+    var test_valueToString = function test_valueToString() {
+      it('test_valueToString', function () {
         // Positive number
-        checkEqual('32', toString(32));
-        checkEqual('32.5', toString(32.5));
-        checkEqual('32', toString(32, 10));
-        checkEqual('31.5', toString(31.5, 10));
-        checkEqual('100000', toString(32, 2));
-        checkEqual('11111', toString(31, 2));
-        checkEqual('11111.1', toString(31.5, 2));
-        checkEqual('11111.01', toString(31.25, 2));
-        checkEqual('40', toString(32, 8));
-        checkEqual('37', toString(31, 8));
-        checkEqual('37.4', toString(31.5, 8));
-        checkEqual('20', toString(32, 16));
-        checkEqual('1f', toString(31, 16));
-        checkEqual('1f.8', toString(31.5, 16));
-        checkEqual('44', toString(32, 7));
-        checkEqual('43', toString(31, 7));
-        checkEqual('255', toString(255));
-        checkEqual('11', toString(11));
-        checkEqual('255', toString(0xFF));
-        checkEqual('16', toString(16));
-        checkEqual('ff', toString(255, 16));
-        checkEqual('b', toString(11, 16));
-        checkEqual('177', toString(127, 8));
-        checkEqual('12', toString(10, 8));
-        checkEqual('11', toString(3, 2));
-        checkEqual('1111', toString(15, 2)); // Negative number
+        checkEqual('32', valueToString(32));
+        checkEqual('32.5', valueToString(32.5));
+        checkEqual('32', valueToString(32, 10));
+        checkEqual('31.5', valueToString(31.5, 10));
+        checkEqual('100000', valueToString(32, 2));
+        checkEqual('11111', valueToString(31, 2));
+        checkEqual('11111.1', valueToString(31.5, 2));
+        checkEqual('11111.01', valueToString(31.25, 2));
+        checkEqual('40', valueToString(32, 8));
+        checkEqual('37', valueToString(31, 8));
+        checkEqual('37.4', valueToString(31.5, 8));
+        checkEqual('20', valueToString(32, 16));
+        checkEqual('1f', valueToString(31, 16));
+        checkEqual('1f.8', valueToString(31.5, 16));
+        checkEqual('44', valueToString(32, 7));
+        checkEqual('43', valueToString(31, 7));
+        checkEqual('255', valueToString(255));
+        checkEqual('11', valueToString(11));
+        checkEqual('255', valueToString(0xFF));
+        checkEqual('16', valueToString(16));
+        checkEqual('ff', valueToString(255, 16));
+        checkEqual('b', valueToString(11, 16));
+        checkEqual('177', valueToString(127, 8));
+        checkEqual('12', valueToString(10, 8));
+        checkEqual('11', valueToString(3, 2));
+        checkEqual('1111', valueToString(15, 2)); // Negative number
 
-        checkEqual('-32', toString(-32));
-        checkEqual('-32.5', toString(-32.5));
-        checkEqual('-32', toString(-32, 10));
-        checkEqual('-31.5', toString(-31.5, 10));
-        checkEqual('-100000', toString(-32, 2));
-        checkEqual('-11111', toString(-31, 2));
-        checkEqual('-11111.1', toString(-31.5, 2));
-        checkEqual('-11111.01', toString(-31.25, 2));
-        checkEqual('-40', toString(-32, 8));
-        checkEqual('-37', toString(-31, 8));
-        checkEqual('-37.4', toString(-31.5, 8));
-        checkEqual('-20', toString(-32, 16));
-        checkEqual('-1f', toString(-31, 16));
-        checkEqual('-1f.8', toString(-31.5, 16));
-        checkEqual('-44', toString(-32, 7));
-        checkEqual('-43', toString(-31, 7));
-        checkEqual('-255', toString(-255));
-        checkEqual('-11', toString(-11));
-        checkEqual('-255', toString(-0xFF));
-        checkEqual('-16', toString(-16));
-        checkEqual('-ff', toString(-255, 16));
-        checkEqual('-b', toString(-11, 16));
-        checkEqual('-177', toString(-127, 8));
-        checkEqual('-12', toString(-10, 8));
-        checkEqual('-11', toString(-3, 2));
-        checkEqual('-1111', toString(-15, 2)); // spacial number value
+        checkEqual('-32', valueToString(-32));
+        checkEqual('-32.5', valueToString(-32.5));
+        checkEqual('-32', valueToString(-32, 10));
+        checkEqual('-31.5', valueToString(-31.5, 10));
+        checkEqual('-100000', valueToString(-32, 2));
+        checkEqual('-11111', valueToString(-31, 2));
+        checkEqual('-11111.1', valueToString(-31.5, 2));
+        checkEqual('-11111.01', valueToString(-31.25, 2));
+        checkEqual('-40', valueToString(-32, 8));
+        checkEqual('-37', valueToString(-31, 8));
+        checkEqual('-37.4', valueToString(-31.5, 8));
+        checkEqual('-20', valueToString(-32, 16));
+        checkEqual('-1f', valueToString(-31, 16));
+        checkEqual('-1f.8', valueToString(-31.5, 16));
+        checkEqual('-44', valueToString(-32, 7));
+        checkEqual('-43', valueToString(-31, 7));
+        checkEqual('-255', valueToString(-255));
+        checkEqual('-11', valueToString(-11));
+        checkEqual('-255', valueToString(-0xFF));
+        checkEqual('-16', valueToString(-16));
+        checkEqual('-ff', valueToString(-255, 16));
+        checkEqual('-b', valueToString(-11, 16));
+        checkEqual('-177', valueToString(-127, 8));
+        checkEqual('-12', valueToString(-10, 8));
+        checkEqual('-11', valueToString(-3, 2));
+        checkEqual('-1111', valueToString(-15, 2)); // spacial number value
 
         testCounter(0);
-        checkEqual('NaN', toString(NaN));
-        checkEqual('Infinity', toString(Infinity));
-        checkEqual('-Infinity', toString(-Infinity)); // Exception
+        checkEqual('NaN', valueToString(NaN));
+        checkEqual('Infinity', valueToString(Infinity));
+        checkEqual('-Infinity', valueToString(-Infinity)); // Exception
 
         checkEqual(false, isThrown(function () {
-          return toString('123', 10);
+          return valueToString('123', 10);
         }));
         checkEqual(false, isThrown(function () {
-          return toString(32, 2);
+          return valueToString(32, 2);
         }));
         checkEqual(true, isThrown(function () {
-          return toString(32, 2.5);
+          return valueToString(32, 2.5);
         }));
         checkEqual(true, isThrown(function () {
-          return toString(32, 1);
+          return valueToString(32, 1);
         }));
         checkEqual(false, isThrown(function () {
-          return toString(32, 36);
+          return valueToString(32, 36);
         }));
         checkEqual(true, isThrown(function () {
-          return toString(32, 37);
+          return valueToString(32, 37);
         })); // Object Named Parameter
 
-        checkEqual('-32', toString({
+        checkEqual('-32', valueToString({
           value: -32
         }));
-        checkEqual('-100000', toString({
+        checkEqual('-100000', valueToString({
           value: -32,
           radix: 2
         })); // Decimal number other
 
-        checkEqual('1010.01', toString(10.25, 2));
-        checkEqual('22.1', toString(10.25, 4));
-        checkEqual('12.2', toString(10.25, 8));
-        checkEqual('a.4', toString(10.25, 16)); // other type
+        checkEqual('1010.01', valueToString(10.25, 2));
+        checkEqual('22.1', valueToString(10.25, 4));
+        checkEqual('12.2', valueToString(10.25, 8));
+        checkEqual('a.4', valueToString(10.25, 16)); // other type
 
-        checkEqual('null', toString(null));
-        checkEqual('undefined', toString(undefined));
-        checkEqual('[object Object]', toString({}));
-        checkEqual('', toString([]));
-        checkEqual('1', toString([1]));
-        checkEqual('1,2,3', toString([1, 2, 3]));
-        checkEqual('', toString(''));
-        checkEqual('a', toString('a'));
-        checkEqual('true', toString(true));
-        checkEqual('false', toString(false));
+        checkEqual('null', valueToString(null));
+        checkEqual('undefined', valueToString(undefined));
+        checkEqual('[object Object]', valueToString({}));
+        checkEqual('', valueToString([]));
+        checkEqual('1', valueToString([1]));
+        checkEqual('1,2,3', valueToString([1, 2, 3]));
+        checkEqual('', valueToString(''));
+        checkEqual('a', valueToString('a'));
+        checkEqual('true', valueToString(true));
+        checkEqual('false', valueToString(false));
       });
     };
 
@@ -616,99 +617,100 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_toNumber = function test_toNumber() {
-      it('test_toNumber', function () {
+    var test_valueToNumber = function test_valueToNumber() {
+      it('test_valueToNumber', function () {
         // Integer
-        checkEqual(123, toNumber('123'));
-        checkEqual(123, toNumber('0123'));
-        checkEqual(123, toNumber('+123'));
-        checkEqual(-123, toNumber('-0123'));
-        checkEqual(NaN, toNumber(' 123'), '1');
-        checkEqual(NaN, toNumber('123 '), '2');
-        checkEqual(NaN, toNumber(' 123 '), '3');
-        checkEqual(NaN, toNumber('　123'), '4');
-        checkEqual(NaN, toNumber('123　'), '5');
-        checkEqual(NaN, toNumber('　123　'), '6');
-        checkEqual(NaN, toNumber('123 0'));
-        checkEqual(NaN, toNumber('0 123'));
-        checkEqual(NaN, toNumber('1 123'));
-        checkEqual(NaN, toNumber('123a'));
-        checkEqual(NaN, toNumber('a123')); // Decimal
+        checkEqual(123, valueToNumber('123'));
+        checkEqual(123, valueToNumber('0123'));
+        checkEqual(123, valueToNumber('+123'));
+        checkEqual(-123, valueToNumber('-0123'));
+        checkEqual(NaN, valueToNumber(' 123'), '1');
+        checkEqual(NaN, valueToNumber('123 '), '2');
+        checkEqual(NaN, valueToNumber(' 123 '), '3');
+        checkEqual(NaN, valueToNumber('　123'), '4');
+        checkEqual(NaN, valueToNumber('123　'), '5');
+        checkEqual(NaN, valueToNumber('　123　'), '6');
+        checkEqual(NaN, valueToNumber('123 0'));
+        checkEqual(NaN, valueToNumber('0 123'));
+        checkEqual(NaN, valueToNumber('1 123'));
+        checkEqual(NaN, valueToNumber('123a'));
+        checkEqual(NaN, valueToNumber('a123')); // Decimal
 
-        checkEqual(123.4, toNumber('123.4'));
-        checkEqual(123.4, toNumber('0123.4'));
-        checkEqual(123.4, toNumber('+123.4'));
-        checkEqual(-123.4, toNumber('-0123.4'));
-        checkEqual(123.5, toNumber('123.5'));
-        checkEqual(123.5, toNumber('0123.5'));
-        checkEqual(123.5, toNumber('+123.5'));
-        checkEqual(-123.5, toNumber('-0123.5'));
-        checkEqual(NaN, toNumber(' 123.4'));
-        checkEqual(NaN, toNumber('123.4 '));
-        checkEqual(NaN, toNumber(' 123.4 '));
-        checkEqual(NaN, toNumber('　123.4'));
-        checkEqual(NaN, toNumber('123.4　'));
-        checkEqual(NaN, toNumber('　123.4　'));
-        checkEqual(NaN, toNumber('123.4 0'));
-        checkEqual(NaN, toNumber('0 123.4'));
-        checkEqual(NaN, toNumber('1 123.4'));
-        checkEqual(NaN, toNumber('123 .4'));
-        checkEqual(NaN, toNumber('123. 4'));
-        checkEqual(NaN, toNumber('123.4a'));
-        checkEqual(NaN, toNumber('a123.4'));
-        checkEqual(123.45, toNumber('123.45'));
-        checkEqual(NaN, toNumber('123.4.5')); // space string
+        checkEqual(123.4, valueToNumber('123.4'));
+        checkEqual(123.4, valueToNumber('0123.4'));
+        checkEqual(123.4, valueToNumber('+123.4'));
+        checkEqual(-123.4, valueToNumber('-0123.4'));
+        checkEqual(123.5, valueToNumber('123.5'));
+        checkEqual(123.5, valueToNumber('0123.5'));
+        checkEqual(123.5, valueToNumber('+123.5'));
+        checkEqual(-123.5, valueToNumber('-0123.5'));
+        checkEqual(NaN, valueToNumber(' 123.4'));
+        checkEqual(NaN, valueToNumber('123.4 '));
+        checkEqual(NaN, valueToNumber(' 123.4 '));
+        checkEqual(NaN, valueToNumber('　123.4'));
+        checkEqual(NaN, valueToNumber('123.4　'));
+        checkEqual(NaN, valueToNumber('　123.4　'));
+        checkEqual(NaN, valueToNumber('123.4 0'));
+        checkEqual(NaN, valueToNumber('0 123.4'));
+        checkEqual(NaN, valueToNumber('1 123.4'));
+        checkEqual(NaN, valueToNumber('123 .4'));
+        checkEqual(NaN, valueToNumber('123. 4'));
+        checkEqual(NaN, valueToNumber('123.4a'));
+        checkEqual(NaN, valueToNumber('a123.4'));
+        checkEqual(123.45, valueToNumber('123.45'));
+        checkEqual(NaN, valueToNumber('123.4.5')); // space string
 
-        checkEqual(NaN, toNumber(''));
-        checkEqual(NaN, toNumber(' '));
-        checkEqual(NaN, toNumber('　')); // exponential notation
+        checkEqual(NaN, valueToNumber(''));
+        checkEqual(NaN, valueToNumber(' '));
+        checkEqual(NaN, valueToNumber('　')); // exponential notation
 
-        checkEqual(3.14, toNumber(3.14));
-        checkEqual(3.14, toNumber('3.14'));
-        checkEqual(3.14, toNumber('314e-2'));
-        checkEqual(3.14, toNumber('0.0314E+2'));
-        checkEqual(0.14, toNumber('.14')); // exponential notation detail
+        checkEqual(3.14, valueToNumber(3.14));
+        checkEqual(3.14, valueToNumber('3.14'));
+        checkEqual(3.14, valueToNumber('314e-2'));
+        checkEqual(3.14, valueToNumber('0.0314E+2'));
+        checkEqual(0.14, valueToNumber('.14')); // exponential notation detail
 
-        checkEqual(1, toNumber('1.'));
-        checkEqual(NaN, toNumber('1.1e'));
-        checkEqual(NaN, toNumber('1.1e+'));
-        checkEqual(100000, toNumber('1e+5'));
-        checkEqual(0.00001, toNumber('1e-5'));
-        checkEqual(NaN, toNumber('1.e'));
-        checkEqual(NaN, toNumber('1.e+'));
-        checkEqual(100000, toNumber('1.e+5')); // Number different
+        checkEqual(1, valueToNumber('1.'));
+        checkEqual(NaN, valueToNumber('1.1e'));
+        checkEqual(NaN, valueToNumber('1.1e+'));
+        checkEqual(100000, valueToNumber('1e+5'));
+        checkEqual(0.00001, valueToNumber('1e-5'));
+        checkEqual(NaN, valueToNumber('1.e'));
+        checkEqual(NaN, valueToNumber('1.e+'));
+        checkEqual(100000, valueToNumber('1.e+5')); // Number different
 
-        checkEqual(NaN, toNumber('0x123'));
-        checkEqual(NaN, toNumber('+0x123'));
-        checkEqual(NaN, toNumber('-0x123'));
-        checkEqual(NaN, toNumber('0o123'));
-        checkEqual(NaN, toNumber('+0o123'));
-        checkEqual(NaN, toNumber('-0o123'));
-        checkEqual(NaN, toNumber('Infinity'));
-        checkEqual(NaN, toNumber('infinity'));
-        checkEqual(NaN, toNumber('inf'));
-        checkEqual(NaN, toNumber('info')); // Number
+        checkEqual(NaN, valueToNumber('0x123'));
+        checkEqual(NaN, valueToNumber('+0x123'));
+        checkEqual(NaN, valueToNumber('-0x123'));
+        checkEqual(NaN, valueToNumber('0o123'));
+        checkEqual(NaN, valueToNumber('+0o123'));
+        checkEqual(NaN, valueToNumber('-0o123'));
+        checkEqual(NaN, valueToNumber('Infinity'));
+        checkEqual(NaN, valueToNumber('infinity'));
+        checkEqual(NaN, valueToNumber('inf'));
+        checkEqual(NaN, valueToNumber('info')); // Number
 
-        checkEqual(123, toNumber(123));
-        checkEqual(-123, toNumber(-123));
-        checkEqual(1.23, toNumber(1.23));
-        checkEqual(-1.23, toNumber(-1.23));
-        checkEqual(Infinity, toNumber(Infinity));
-        checkEqual(-Infinity, toNumber(-Infinity));
-        checkEqual(NaN, toNumber(NaN));
-        checkEqual(null, toNumberDefault('', null));
-        checkEqual(NaN, toNumberDefault(NaN, null)); // Other
+        checkEqual(123, valueToNumber(123));
+        checkEqual(-123, valueToNumber(-123));
+        checkEqual(1.23, valueToNumber(1.23));
+        checkEqual(-1.23, valueToNumber(-1.23));
+        checkEqual(Infinity, valueToNumber(Infinity));
+        checkEqual(-Infinity, valueToNumber(-Infinity));
+        checkEqual(NaN, valueToNumber(NaN)); // Default
 
-        checkEqual(NaN, toNumber(null));
-        checkEqual(NaN, toNumber(undefined));
-        checkEqual(NaN, toNumber({}));
-        checkEqual(NaN, toNumber({
+        checkEqual(null, valueToNumberDefault('', null));
+        checkEqual(NaN, valueToNumberDefault(NaN, null)); // Other
+
+        checkEqual(NaN, valueToNumber(null));
+        checkEqual(NaN, valueToNumber(undefined));
+        checkEqual(NaN, valueToNumber({}));
+        checkEqual(NaN, valueToNumber({
           a: 1
         }));
-        checkEqual(NaN, toNumber([]));
-        checkEqual(NaN, toNumber([1]));
-        checkEqual(NaN, toNumber([123]));
-        checkEqual(NaN, toNumber([1, 2]));
+        checkEqual(NaN, valueToNumber([]));
+        checkEqual(NaN, valueToNumber([1]));
+        checkEqual(NaN, valueToNumber([123]));
+        checkEqual(NaN, valueToNumber([1, 2]));
       });
     };
 
@@ -1087,98 +1089,101 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_toInteger = function test_toInteger() {
-      it('test_toInteger', function () {
+    var test_valueToInteger = function test_valueToInteger() {
+      it('test_valueToInteger', function () {
         // Integer
-        checkEqual(123, toInteger('123'));
-        checkEqual(123, toInteger('0123'));
-        checkEqual(123, toInteger('+123'));
-        checkEqual(-123, toInteger('-0123'));
-        checkEqual(NaN, toInteger(' 123'), '1');
-        checkEqual(NaN, toInteger('123 '), '2');
-        checkEqual(NaN, toInteger(' 123 '), '3');
-        checkEqual(NaN, toInteger('　123'), '4');
-        checkEqual(NaN, toInteger('123　'), '5');
-        checkEqual(NaN, toInteger('　123　'), '6');
-        checkEqual(NaN, toInteger('123 0'));
-        checkEqual(NaN, toInteger('0 123'));
-        checkEqual(NaN, toInteger('1 123'));
-        checkEqual(NaN, toInteger('123a'));
-        checkEqual(NaN, toInteger('a123')); // Decimal
+        checkEqual(123, valueToInteger('123'));
+        checkEqual(123, valueToInteger('0123'));
+        checkEqual(123, valueToInteger('+123'));
+        checkEqual(-123, valueToInteger('-0123'));
+        checkEqual(NaN, valueToInteger(' 123'), '1');
+        checkEqual(NaN, valueToInteger('123 '), '2');
+        checkEqual(NaN, valueToInteger(' 123 '), '3');
+        checkEqual(NaN, valueToInteger('　123'), '4');
+        checkEqual(NaN, valueToInteger('123　'), '5');
+        checkEqual(NaN, valueToInteger('　123　'), '6');
+        checkEqual(NaN, valueToInteger('123 0'));
+        checkEqual(NaN, valueToInteger('0 123'));
+        checkEqual(NaN, valueToInteger('1 123'));
+        checkEqual(NaN, valueToInteger('123a'));
+        checkEqual(NaN, valueToInteger('a123')); // Decimal
 
-        checkEqual(123, toInteger('123.4'));
-        checkEqual(123, toInteger('0123.4'));
-        checkEqual(123, toInteger('+123.4'));
-        checkEqual(-123, toInteger('-0123.4'));
-        checkEqual(124, toInteger('123.5'));
-        checkEqual(124, toInteger('0123.5'));
-        checkEqual(124, toInteger('+123.5'));
-        checkEqual(-124, toInteger('-0123.5'));
-        checkEqual(NaN, toInteger(' 123.4'));
-        checkEqual(NaN, toInteger('123.4 '));
-        checkEqual(NaN, toInteger(' 123.4 '));
-        checkEqual(NaN, toInteger('　123.4'));
-        checkEqual(NaN, toInteger('123.4　'));
-        checkEqual(NaN, toInteger('　123.4　'));
-        checkEqual(NaN, toInteger('123.4 0'));
-        checkEqual(NaN, toInteger('0 123.4'));
-        checkEqual(NaN, toInteger('1 123.4'));
-        checkEqual(NaN, toInteger('123 .4'));
-        checkEqual(NaN, toInteger('123. 4'));
-        checkEqual(NaN, toInteger('123.4a'));
-        checkEqual(NaN, toInteger('a123.4'));
-        checkEqual(123, toInteger('123.45'));
-        checkEqual(NaN, toInteger('123.4.5')); // space string
+        checkEqual(123, valueToInteger('123.4'));
+        checkEqual(123, valueToInteger('0123.4'));
+        checkEqual(123, valueToInteger('+123.4'));
+        checkEqual(-123, valueToInteger('-0123.4'));
+        checkEqual(124, valueToInteger('123.5'));
+        checkEqual(124, valueToInteger('0123.5'));
+        checkEqual(124, valueToInteger('+123.5'));
+        checkEqual(-124, valueToInteger('-0123.5'));
+        checkEqual(NaN, valueToInteger(' 123.4'));
+        checkEqual(NaN, valueToInteger('123.4 '));
+        checkEqual(NaN, valueToInteger(' 123.4 '));
+        checkEqual(NaN, valueToInteger('　123.4'));
+        checkEqual(NaN, valueToInteger('123.4　'));
+        checkEqual(NaN, valueToInteger('　123.4　'));
+        checkEqual(NaN, valueToInteger('123.4 0'));
+        checkEqual(NaN, valueToInteger('0 123.4'));
+        checkEqual(NaN, valueToInteger('1 123.4'));
+        checkEqual(NaN, valueToInteger('123 .4'));
+        checkEqual(NaN, valueToInteger('123. 4'));
+        checkEqual(NaN, valueToInteger('123.4a'));
+        checkEqual(NaN, valueToInteger('a123.4'));
+        checkEqual(123, valueToInteger('123.45'));
+        checkEqual(NaN, valueToInteger('123.4.5')); // space string
 
-        checkEqual(NaN, toInteger(''));
-        checkEqual(NaN, toInteger(' '));
-        checkEqual(NaN, toInteger('　')); // exponential notation
+        checkEqual(NaN, valueToInteger(''));
+        checkEqual(NaN, valueToInteger(' '));
+        checkEqual(NaN, valueToInteger('　')); // exponential notation
 
-        checkEqual(3, toInteger(3.14));
-        checkEqual(3, toInteger('3.14'));
-        checkEqual(3, toInteger('314e-2'));
-        checkEqual(3, toInteger('0.0314E+2'));
-        checkEqual(0, toInteger('.14')); // exponential notation detail
+        checkEqual(3, valueToInteger(3.14));
+        checkEqual(3, valueToInteger('3.14'));
+        checkEqual(3, valueToInteger('314e-2'));
+        checkEqual(3, valueToInteger('0.0314E+2'));
+        checkEqual(0, valueToInteger('.14')); // exponential notation detail
 
-        checkEqual(1, toInteger('1.'));
-        checkEqual(NaN, toInteger('1.1e'));
-        checkEqual(NaN, toInteger('1.1e+'));
-        checkEqual(100000, toInteger('1e+5'));
-        checkEqual(0, toInteger('1e-5'));
-        checkEqual(NaN, toInteger('1.e'));
-        checkEqual(NaN, toInteger('1.e+'));
-        checkEqual(100000, toInteger('1.e+5')); // Number different
+        checkEqual(1, valueToInteger('1.'));
+        checkEqual(NaN, valueToInteger('1.1e'));
+        checkEqual(NaN, valueToInteger('1.1e+'));
+        checkEqual(100000, valueToInteger('1e+5'));
+        checkEqual(0, valueToInteger('1e-5'));
+        checkEqual(NaN, valueToInteger('1.e'));
+        checkEqual(NaN, valueToInteger('1.e+'));
+        checkEqual(100000, valueToInteger('1.e+5')); // Number different
 
-        checkEqual(NaN, toInteger('0x123'));
-        checkEqual(NaN, toInteger('+0x123'));
-        checkEqual(NaN, toInteger('-0x123'));
-        checkEqual(NaN, toInteger('0o123'));
-        checkEqual(NaN, toInteger('+0o123'));
-        checkEqual(NaN, toInteger('-0o123'));
-        checkEqual(NaN, toInteger('Infinity'));
-        checkEqual(NaN, toInteger('infinity'));
-        checkEqual(NaN, toInteger('inf'));
-        checkEqual(NaN, toInteger('info')); // Number
+        checkEqual(NaN, valueToInteger('0x123'));
+        checkEqual(NaN, valueToInteger('+0x123'));
+        checkEqual(NaN, valueToInteger('-0x123'));
+        checkEqual(NaN, valueToInteger('0o123'));
+        checkEqual(NaN, valueToInteger('+0o123'));
+        checkEqual(NaN, valueToInteger('-0o123'));
+        checkEqual(NaN, valueToInteger('Infinity'));
+        checkEqual(NaN, valueToInteger('infinity'));
+        checkEqual(NaN, valueToInteger('inf'));
+        checkEqual(NaN, valueToInteger('info')); // Number
 
-        checkEqual(123, toInteger(123));
-        checkEqual(-123, toInteger(-123));
-        checkEqual(1, toInteger(1.23));
-        checkEqual(2, toInteger(1.67));
-        checkEqual(-1, toInteger(-1.23));
-        checkEqual(-2, toInteger(-1.67));
-        checkEqual(Infinity, toInteger(Infinity));
-        checkEqual(-Infinity, toInteger(-Infinity));
-        checkEqual(NaN, toInteger(NaN)); // Other
+        checkEqual(123, valueToInteger(123));
+        checkEqual(-123, valueToInteger(-123));
+        checkEqual(1, valueToInteger(1.23));
+        checkEqual(2, valueToInteger(1.67));
+        checkEqual(-1, valueToInteger(-1.23));
+        checkEqual(-2, valueToInteger(-1.67));
+        checkEqual(Infinity, valueToInteger(Infinity));
+        checkEqual(-Infinity, valueToInteger(-Infinity));
+        checkEqual(NaN, valueToInteger(NaN)); // Default
 
-        checkEqual(NaN, toInteger(null));
-        checkEqual(NaN, toInteger(undefined));
-        checkEqual(NaN, toInteger({}));
-        checkEqual(NaN, toInteger({
+        checkEqual(null, valueToIntegerDefault('', null));
+        checkEqual(NaN, valueToIntegerDefault(NaN, null)); // Other
+
+        checkEqual(NaN, valueToInteger(null));
+        checkEqual(NaN, valueToInteger(undefined));
+        checkEqual(NaN, valueToInteger({}));
+        checkEqual(NaN, valueToInteger({
           a: 1
         }));
-        checkEqual(NaN, toInteger([]));
-        checkEqual(NaN, toInteger([1]));
-        checkEqual(NaN, toInteger([123]));
+        checkEqual(NaN, valueToInteger([]));
+        checkEqual(NaN, valueToInteger([1]));
+        checkEqual(NaN, valueToInteger([123]));
       });
     };
 
@@ -1560,15 +1565,15 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     test_numberToString();
-    test_toString();
+    test_valueToString();
     test_standardStringCast();
     test_standardToString();
     test_stringToNumber();
     test_stringToNumberDefault();
-    test_toNumber();
+    test_valueToNumber();
     test_stringToInteger();
     test_stringToIntegerDefault();
-    test_toInteger();
+    test_valueToInteger();
     test_standardNumberCast();
     test_standardParseFloat();
     test_standardParseInt();

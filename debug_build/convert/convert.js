@@ -75,11 +75,11 @@ var numberToString = function numberToString(value) {
   return _numberToString(value, radix);
 };
 /**
- * toString
+ * valueToString
  */
 
 
-var toString = function toString(value) {
+var valueToString = function valueToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
   if (isObjectParameter(value, 'value', 'radix')) {
@@ -254,11 +254,11 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
   return _stringToIntegerDefault(value, defaultValue, radix);
 };
 /**
- * toNumber
+ * valueToNumber
  */
 
 
-var toNumber = function toNumber(value) {
+var valueToNumber = function valueToNumber(value) {
   if (isNull(value)) {
     return NaN;
   }
@@ -274,7 +274,7 @@ var toNumber = function toNumber(value) {
   return stringToNumberDefault(value, NaN);
 };
 
-var toNumberDefault = function toNumberDefault(value, defaultValue) {
+var valueToNumberDefault = function valueToNumberDefault(value, defaultValue) {
   if (isObjectParameter(value, 'value,defaultValue')) {
     var _value7 = value;
     value = _value7.value;
@@ -285,7 +285,7 @@ var toNumberDefault = function toNumberDefault(value, defaultValue) {
     return value;
   }
 
-  var result = toNumber(value);
+  var result = valueToNumber(value);
 
   if (isNaNStrict(result)) {
     return defaultValue;
@@ -294,12 +294,12 @@ var toNumberDefault = function toNumberDefault(value, defaultValue) {
   return result;
 };
 /**
- * toInteger
+ * valueToInteger
  */
 
 
-var toInteger = function toInteger(value) {
-  var result = toNumber(value);
+var valueToInteger = function valueToInteger(value) {
+  var result = valueToNumber(value);
 
   if (isNaNStrict(result)) {
     return NaN;
@@ -308,14 +308,18 @@ var toInteger = function toInteger(value) {
   return _round(result);
 };
 
-var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
+var valueToIntegerDefault = function valueToIntegerDefault(value, defaultValue) {
   if (isObjectParameter(value, 'value,defaultValue')) {
     var _value8 = value;
     value = _value8.value;
     defaultValue = _value8.defaultValue;
   }
 
-  var result = toInteger(value);
+  if (isNaNStrict(value)) {
+    return value;
+  }
+
+  var result = valueToInteger(value);
 
   if (isNaNStrict(result)) {
     return defaultValue;
@@ -325,42 +329,52 @@ var toIntegerDefault = function toIntegerDefault(value, defaultValue) {
 };
 
 var numToString = numberToString;
+var valToString = valueToString;
 var strToNumber = stringToNumber;
 var strToNumberDef = stringToNumberDefault;
 var strToInteger = stringToInteger;
 var strToIntegerDef = stringToIntegerDefault;
+var valToNumber = valueToNumber;
+var valToNumberDef = valueToNumberDefault;
+var valToInteger = valueToInteger;
+var valToIntegerDef = valueToIntegerDefault;
 var numToStr = numberToString;
-var toStr = toString;
+var valToStr = valueToString;
 var strToNum = stringToNumber;
 var strToNumDef = stringToNumberDefault;
 var strToInt = stringToInteger;
 var strToIntDef = stringToIntegerDefault;
-var toNum = toNumber;
-var toNumDef = toNumberDefault;
-var toInt = toInteger;
-var toIntDef = toIntegerDefault;
+var valToNum = valueToNumber;
+var valToNumDef = valueToNumberDefault;
+var valToInt = valueToInteger;
+var valToIntDef = valueToIntegerDefault;
 module.exports = {
   numberToString: numberToString,
-  toString: toString,
+  valueToString: valueToString,
   stringToNumber: stringToNumber,
   stringToNumberDefault: stringToNumberDefault,
   stringToInteger: stringToInteger,
   stringToIntegerDefault: stringToIntegerDefault,
-  toNumber: toNumber,
-  toNumberDefault: toNumberDefault,
-  toInteger: toInteger,
-  toIntegerDefault: toIntegerDefault,
+  valueToNumber: valueToNumber,
+  valueToNumberDefault: valueToNumberDefault,
+  valueToInteger: valueToInteger,
+  valueToIntegerDefault: valueToIntegerDefault,
   numToString: numToString,
+  valToString: valToString,
   strToNumber: strToNumber,
   strToNumberDef: strToNumberDef,
   strToInteger: strToInteger,
   strToIntegerDef: strToIntegerDef,
-  toNum: toNum,
-  toNumDef: toNumDef,
-  toInt: toInt,
-  toIntDef: toIntDef,
+  valToNumber: valToNumber,
+  valToNumberDef: valToNumberDef,
+  valToInteger: valToInteger,
+  valToIntegerDef: valToIntegerDef,
   numToStr: numToStr,
-  toStr: toStr,
+  valToStr: valToStr,
+  valToNum: valToNum,
+  valToNumDef: valToNumDef,
+  valToInt: valToInt,
+  valToIntDef: valToIntDef,
   strToNum: strToNum,
   strToNumDef: strToNumDef,
   strToInt: strToInt,
