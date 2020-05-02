@@ -191,17 +191,20 @@ const mode = (array) => {
  * uniqe
  */
 const _unique = (array) => {
-  if (canUseSet()) {
-    return Array.from(new Set(array));
+  if (canUseSet() && array.length > 120) {
+    return [...(new Set(array))];
   } else {
-    const resultArray = [];
+    const result = [];
     for (let i = 0, l = array.length; i < l; i += 1) {
-      if (!resultArray.includes(array[i])) {
-        resultArray.push(array[i]);
+      if (!result.includes(array[i])) {
+        result.push(array[i]);
       }
     }
-    return resultArray;
+    return result;
   }
+  // node.js v8
+  // It is faster to use Set
+  // when the array.lentgh is larger than about 120
 };
 
 const unique = (array) => {
