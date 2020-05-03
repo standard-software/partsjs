@@ -822,6 +822,10 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbolAll(symbol1));
         var value1 = [symbol1];
@@ -862,6 +866,10 @@ var test_execute_root = function test_execute_root(parts) {
     var test_cloneDeep_map = function test_cloneDeep_map() {
       it('test_cloneDeep_map', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -968,7 +976,13 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value1'));
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
-        checkEqual(false, parts.isObjectAll(set1));
+
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, parts.isObjectAll(set1));
+        } else {
+          checkEqual(false, parts.isObjectAll(set1));
+        }
+
         checkEqual(true, parts.isObjectTypeAll(set1)); // initializse nothing cloneSet
 
         clone.clear();
@@ -982,13 +996,7 @@ var test_execute_root = function test_execute_root(parts) {
         cloneDeep.add(cloneFunction.cloneRegExp);
         cloneDeep.add(cloneFunction.cloneDate);
         var set2 = clone(set1);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, set2.has('value1')); // IE polyfill clone
-        } else {
-          checkEqual(false, set2.has('value1')); // no clone
-        }
-
+        checkEqual(false, set2.has('value1'));
         checkEqual(false, set1 === set2);
 
         if (parts.platform.isInternetExplorer()) {// IE Error
@@ -1002,11 +1010,21 @@ var test_execute_root = function test_execute_root(parts) {
         clone.reset();
         cloneDeep.reset();
         var set2 = clone(set1);
-        checkEqual(true, set2.has('value1')); // clone
+
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, set2.has('value1'));
+        } else {
+          checkEqual(true, set2.has('value1')); // clone
+        }
 
         checkEqual(false, set1 === set2);
         var set2 = cloneDeep(set1);
-        checkEqual(true, set2.has('value1')); // clone
+
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, set2.has('value1'));
+        } else {
+          checkEqual(true, set2.has('value1')); // clone
+        }
 
         checkEqual(false, set1 === set2);
       });
@@ -1151,7 +1169,7 @@ var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Arr
 
 
 var isArrayType = function isArrayType(value) {
-  if (objectToString(value).indexOf('Array]') !== -1) {
+  if (objectToString(value).includes('Array]')) {
     return true;
   }
 
@@ -18458,21 +18476,35 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Uint32Array]', new Uint32Array());
         checkType('object', '[object Float32Array]', new Float32Array());
         checkType('object', '[object Float64Array]', new Float64Array());
-        checkType('object', '[object Map]', new Map());
-        checkType('object', '[object WeakMap]', new WeakMap());
-        checkType('object', '[object Set]', new Set());
-        checkType('object', '[object WeakSet]', new WeakSet());
-        checkType('symbol', '[object Symbol]', Symbol());
+
+        if (parts.platform.isInternetExplorer()) {
+          checkType('object', '[object Object]', new Map());
+          checkType('object', '[object Object]', new WeakMap());
+          checkType('object', '[object Object]', new Set());
+        } else {
+          checkType('object', '[object Map]', new Map());
+          checkType('object', '[object WeakMap]', new WeakMap());
+          checkType('object', '[object Set]', new Set());
+          checkType('object', '[object WeakSet]', new WeakSet());
+          checkType('symbol', '[object Symbol]', Symbol());
+        }
+
         checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
 
         if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
-          checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
-          checkType('object', '[object Atomics]', Atomics);
+          checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8)); // firefox no support
+
+          checkType('object', '[object Atomics]', Atomics); // firefox no support
         }
 
-        checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
         checkType('object', '[object JSON]', JSON);
-        checkType('function', '[object Function]', Promise);
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
+          checkType('function', '[object Function]', Promise);
+        } else {
+          checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
+        }
 
         if (parts.platform.buildMode === 'source') {
           var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
@@ -18525,11 +18557,10 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('function', '[object AsyncFunction]', new AsyncFunction());
         }
 
-        checkType('object', '[object Object]', Reflect);
-
         if (parts.platform.isInternetExplorer()) {// no define Proxy
           // no define WebAssembly
         } else {
+          checkType('object', '[object Object]', Reflect);
           checkType('object', '[object Object]', new Proxy({}, {}));
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
@@ -19209,6 +19240,10 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
       });
@@ -19220,15 +19255,30 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        checkEqual(false, isMapAll({}));
-        checkEqual(false, isWeakMapAll({}));
-        checkEqual(true, isMapAll(new Map()));
-        checkEqual(false, isWeakMapAll(new Map()));
-        checkEqual(false, isMapAll(new WeakMap()));
-        checkEqual(true, isWeakMapAll(new WeakMap()));
-        checkEqual(true, isObjectAll({}));
-        checkEqual(false, isObjectAll(new Map()));
-        checkEqual(false, isObjectAll(new WeakMap()));
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, isMapAll({}));
+          checkEqual(false, isWeakMapAll({}));
+          checkEqual(true, isMapAll(new Map()));
+          checkEqual(false, isWeakMapAll(new Map()));
+          checkEqual(false, isMapAll(new WeakMap()));
+          checkEqual(true, isWeakMapAll(new WeakMap()));
+          checkEqual(true, isObjectAll({}));
+          checkEqual(false, isObjectAll(new Map()));
+          checkEqual(false, isObjectAll(new WeakMap()));
+        } else {
+          checkEqual(false, isMapAll({}));
+          checkEqual(false, isWeakMapAll({}));
+          checkEqual(false, isMapAll(new Map())); // IE11 bug
+
+          checkEqual(false, isWeakMapAll(new Map()));
+          checkEqual(false, isMapAll(new WeakMap()));
+          checkEqual(false, isWeakMapAll(new WeakMap())); // IE11 bug
+
+          checkEqual(true, isObjectAll({}));
+          checkEqual(true, isObjectAll(new Map())); // IE11 bug
+
+          checkEqual(true, isObjectAll(new WeakMap())); // IE11 bug
+        }
       });
     };
 
@@ -19238,15 +19288,25 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        checkEqual(false, isSetAll({}));
-        checkEqual(false, isWeakSetAll({}));
-        checkEqual(true, isSetAll(new Set()));
-        checkEqual(false, isWeakSetAll(new Set()));
-        checkEqual(false, isSetAll(new WeakSet()));
-        checkEqual(true, isWeakSetAll(new WeakSet()));
-        checkEqual(true, isObjectAll({}));
-        checkEqual(false, isObjectAll(new Set()));
-        checkEqual(false, isObjectAll(new WeakSet()));
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, isSetAll({}));
+          checkEqual(true, isSetAll(new Set()));
+          checkEqual(false, isSetAll(new WeakSet()));
+          checkEqual(false, isWeakSetAll({}));
+          checkEqual(false, isWeakSetAll(new Set()));
+          checkEqual(true, isWeakSetAll(new WeakSet()));
+          checkEqual(true, isObjectAll({}));
+          checkEqual(false, isObjectAll(new Set()));
+          checkEqual(false, isObjectAll(new WeakSet()));
+        } else {
+          checkEqual(false, isSetAll({}));
+          checkEqual(false, isSetAll(new Set())); // IE11 bug
+
+          checkEqual(false, isWeakSetAll({}));
+          checkEqual(false, isWeakSetAll(new Set()));
+          checkEqual(true, isObjectAll({}));
+          checkEqual(true, isObjectAll(new Set())); // IE11 bug
+        }
       });
     };
 
@@ -20289,7 +20349,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalFunction);
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
-        checkEqual(false, equal(map1, map2), 'test_equal map'); // Map in object
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equal(map1, map2));
+        } else {
+          checkEqual(true, equal(map1, map2)); // IE11 bug
+        } // Map in object
+
 
         checkEqual(false, equal({
           map: map1
@@ -20332,7 +20398,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         equal.add(equalFunction.equalFunction);
         equal.add(equalFunction.equalRegExp);
         equal.add(equalFunction.equalDate);
-        checkEqual(false, equal(set1, set2), 'test_equal map'); // Set in object
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equal(set1, set2));
+        } else {
+          checkEqual(true, equal(set1, set2)); // IE11 bug
+        } // Set in object
+
 
         checkEqual(false, equal({
           set: set1
@@ -20797,15 +20869,27 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalFunction);
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
-        checkEqual(false, equalDeep(map1, map2), 'test_equal map'); // Map in object
 
-        checkEqual(false, equalDeep({
-          map: map1
-        }, {
-          map: map2
-        }), 'test_equal Map'); // Map in array
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equalDeep(map1, map2)); // Map in object
 
-        checkEqual(false, equalDeep([map1], [map2]), 'test_equal Map'); // }
+          checkEqual(false, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          })); // Map in array
+
+          checkEqual(false, equalDeep([map1], [map2]));
+        } else {
+          // IE11 bug
+          checkEqual(true, equalDeep(map1, map2));
+          checkEqual(true, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          }));
+          checkEqual(true, equalDeep([map1], [map2]));
+        }
 
         equalDeep.reset();
       });
@@ -20893,11 +20977,20 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-        checkEqual(false, equalDeep({
-          map: map1
-        }, {
-          map: map2
-        }), 'test_equal Map set object');
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          }));
+        } else {
+          checkEqual(true, equalDeep({
+            map: map1
+          }, {
+            map: map2
+          })); // IE11 bug
+        }
       });
     };
 
@@ -20977,7 +21070,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         map3.set('b', ['b']);
         map1.set('map', map2);
         map2.set('map', map3);
-        checkEqual(false, equalDeep(map1, map2));
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equalDeep(map1, map2));
+        } else {
+          checkEqual(true, equalDeep(map1, map2)); // IE11 bug
+        }
       });
     };
 
@@ -21011,15 +21109,28 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep.add(equalFunction.equalFunction);
         equalDeep.add(equalFunction.equalRegExp);
         equalDeep.add(equalFunction.equalDate);
-        checkEqual(false, equalDeep(set1, set2), 'test_equal map'); // Set in object
 
-        checkEqual(false, equalDeep({
-          set: set1
-        }, {
-          set: set2
-        }), 'test_equal Set'); // Set in array
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equalDeep(set1, set2)); // Set in object
 
-        checkEqual(false, equalDeep([set1], [set2]), 'test_equal Set');
+          checkEqual(false, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          })); // Set in array
+
+          checkEqual(false, equalDeep([set1], [set2]));
+        } else {
+          // IE11 bug
+          checkEqual(true, equalDeep(set1, set2));
+          checkEqual(true, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }));
+          checkEqual(true, equalDeep([set1], [set2]));
+        }
+
         equalDeep.reset();
       });
     };
@@ -21079,7 +21190,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           set: set1
         }, {
           set: set2
-        }), 'test_equal Set add object'); // more set add object object
+        })); // more set add object object
 
         var set1 = new Set();
         set1.add({
@@ -21106,11 +21217,20 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-        checkEqual(false, equalDeep({
-          set: set1
-        }, {
-          set: set2
-        }), 'test_equal Set add object');
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }));
+        } else {
+          checkEqual(true, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          })); // IE11 bug
+        }
       });
     };
 
@@ -21206,11 +21326,20 @@ var test_execute_compare = function test_execute_compare(parts) {
         set3.add(['b']);
         set1.add(set2);
         set2.add(set3);
-        checkEqual(false, equalDeep({
-          set: set1
-        }, {
-          set: set2
-        }));
+
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }));
+        } else {
+          checkEqual(true, equalDeep({
+            set: set1
+          }, {
+            set: set2
+          }));
+        }
       });
     };
 
@@ -21997,15 +22126,12 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.isWindowsScriptHost()) {
-          checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
+        checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
-          checkEqual(true, 'abc'.includes(''));
-          checkEqual(false, 'abc'.includes(null));
-          checkEqual(false, 'abc'.includes(undefined));
-          checkEqual(false, 'abc'.includes());
-        }
-
+        checkEqual(true, 'abc'.includes(''));
+        checkEqual(false, 'abc'.includes(null));
+        checkEqual(false, 'abc'.includes(undefined));
+        checkEqual(false, 'abc'.includes());
         checkEqual(false, includes('abc', ''));
         checkEqual(true, includes('abc', 'a'));
         checkEqual(true, includes('abc', 'b'));
@@ -23555,6 +23681,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, Number('-0x123'));
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, Number('0o123'));
+        } else if (parts.platform.isInternetExplorer()) {
           checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));

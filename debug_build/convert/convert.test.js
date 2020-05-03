@@ -1282,6 +1282,8 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number('0o123'));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));
         }

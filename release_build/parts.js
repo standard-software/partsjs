@@ -311,6 +311,23 @@ var polyfillDefine = function polyfillDefine() {
 
       return this.substring(this_len - search.length, this_len) === search;
     };
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes#Polyfill
+
+
+  if (!String.prototype.includes) {
+    String.prototype.includes = function (search, start) {
+      'use strict';
+
+      if (search instanceof RegExp) {
+        throw TypeError('first argument must not be a RegExp');
+      }
+
+      if (start === undefined) {
+        start = 0;
+      }
+
+      return this.indexOf(search, start) !== -1;
+    };
   } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
 
 
@@ -1115,7 +1132,7 @@ var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Arr
 
 
 var isArrayType = function isArrayType(value) {
-  if (objectToString(value).indexOf('Array]') !== -1) {
+  if (objectToString(value).includes('Array]')) {
     return true;
   }
 
