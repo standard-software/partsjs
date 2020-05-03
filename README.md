@@ -234,9 +234,9 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 5.0.0
-#### 2020/05/03(Sun)
+#### 2020/05/04(Mon)
 - Uninstall @babel/polyfill
-  - error fix IE11 but test fail
+  - support IE11 test all success
 - add Polyfill String.includes
 
 ### 4.10.1
