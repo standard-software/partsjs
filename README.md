@@ -233,6 +233,10 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.0.0
+#### 2020/05/03(Sun)
+- Uninstall @babel/polyfill
+
 ### 4.10.1
 #### 2020/05/02(Sat)
 - upddate unique

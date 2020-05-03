@@ -113,8 +113,8 @@ const test_execute_type = (parts) => {
 
         checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
         if (parts.platform.isChrome()
-        || parts.platform.isSafari()
-        || parts.platform.isOpera()) {
+          || parts.platform.isSafari()
+          || parts.platform.isOpera()) {
           checkType('object',    '[object SharedArrayBuffer]',  new SharedArrayBuffer(8));
           checkType('object',    '[object Atomics]',            Atomics);
         }
@@ -124,17 +124,13 @@ const test_execute_type = (parts) => {
 
         checkType('function',  '[object Function]',           Promise);
 
-        function* Generator() { yield 1; yield 2; yield 3; }
-        var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
-        var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
         if (parts.platform.buildMode === 'source') {
+          function* Generator() { yield 1; yield 2; yield 3; }
+          var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
+          var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
           checkType('object',     '[object Generator]',         Generator());
           checkType('function',   '[object GeneratorFunction]', new GeneratorFunction());
           checkType('function',   '[object AsyncFunction]',     new AsyncFunction());
-        } else {
-          checkType('object',     '[object Generator]',         Generator());
-          checkType('object',     '[object GeneratorFunction]', new GeneratorFunction());
-          checkType('function',   '[object Function]',          new AsyncFunction());
         }
 
         checkType('object',    '[object Object]',             Reflect);

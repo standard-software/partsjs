@@ -1,4 +1,3 @@
-require('@babel/polyfill');
 const parts = require('../../debug_build/index.js');
 
 const {

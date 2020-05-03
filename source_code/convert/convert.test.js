@@ -1130,7 +1130,11 @@ const test_execute_convert = (parts) => {
         checkEqual(NaN,       Number('+0x123'));
         checkEqual(NaN,       Number('-0x123'));
 
-        checkEqual(83,        Number('0o123'));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,        Number('0o123'));
+        } else {
+          checkEqual(83,        Number('0o123'));
+        }
 
         checkEqual(NaN,       Number('+0o123'));
         checkEqual(NaN,       Number('-0o123'));
