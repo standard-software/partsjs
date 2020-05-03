@@ -80,8 +80,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_checkType = function test_checkType() {
       it('test_checkType', function () {
-        var _marked = /*#__PURE__*/regeneratorRuntime.mark(Generator);
-
         var checkType = function checkType(typeofName, objectStringName, value) {
           checkEqual(typeofName, _typeof(value));
           checkEqual(objectStringName, objectToString(value));
@@ -155,61 +153,55 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object JSON]', JSON);
         checkType('function', '[object Function]', Promise);
 
-        function Generator() {
-          return regeneratorRuntime.wrap(function Generator$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.next = 2;
-                  return 1;
-
-                case 2:
-                  _context.next = 4;
-                  return 2;
-
-                case 4:
-                  _context.next = 6;
-                  return 3;
-
-                case 6:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _marked);
-        }
-
-        var GeneratorFunction = Object.getPrototypeOf( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-          return regeneratorRuntime.wrap(function _callee$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee);
-        })).constructor;
-        var AsyncFunction = Object.getPrototypeOf( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          return regeneratorRuntime.wrap(function _callee2$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee2);
-        }))).constructor;
-
         if (parts.platform.buildMode === 'source') {
+          var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
+            return regeneratorRuntime.wrap(function Generator$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return 1;
+
+                  case 2:
+                    _context.next = 4;
+                    return 2;
+
+                  case 4:
+                    _context.next = 6;
+                    return 3;
+
+                  case 6:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, Generator);
+          });
+          var GeneratorFunction = Object.getPrototypeOf( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return regeneratorRuntime.wrap(function _callee$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee);
+          })).constructor;
+          var AsyncFunction = Object.getPrototypeOf( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            return regeneratorRuntime.wrap(function _callee2$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee2);
+          }))).constructor;
           checkType('object', '[object Generator]', Generator());
           checkType('function', '[object GeneratorFunction]', new GeneratorFunction());
           checkType('function', '[object AsyncFunction]', new AsyncFunction());
-        } else {
-          checkType('object', '[object Generator]', Generator());
-          checkType('object', '[object GeneratorFunction]', new GeneratorFunction());
-          checkType('function', '[object Function]', new AsyncFunction());
         }
 
         checkType('object', '[object Object]', Reflect);
