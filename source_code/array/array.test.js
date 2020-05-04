@@ -41,6 +41,10 @@ const test_execute_array = (parts) => {
       isLowerCase, isUpperCase,
     } = parts;
 
+    const {
+      equal,
+    } = parts.compare;
+
     const test_array_from = () => {
       it('test_array_from', () => {
         function test() {
@@ -146,109 +150,93 @@ const test_execute_array = (parts) => {
 
     const test_mode = () => {
       it('test_mode', () => {
-        checkEqual(
+        checkEqual(true , equal(
           [],
           array.mode([])
-        );
-        checkEqual(
-          [70],
+        ));
+        checkEqual(true , equal([70],
           array.mode([70])
-        );
-        checkEqual(
-          [70, 52],
+        ));
+        checkEqual(true , equal([70, 52],
           array.mode([70, 70, 80, 52, 52, 100])
-        );
-        checkEqual(
-          [52],
+        ));
+        checkEqual(true , equal([52],
           array.mode([70, 70, 80, 52, 52, 52, 100])
-        );
-        checkEqual(
-          [9, 10],
+        ));
+        checkEqual(true , equal([9, 10],
           array.mode([9, 9, 10, 10, 10, 9, 6])
-        );
+        ));
       });
     };
 
     const test_uniqe = () => {
       it('test_uniqe', () => {
-        checkEqual(
-          [1, 2, 3, 4, 0],
+        checkEqual(true , equal([1, 2, 3, 4, 0],
           array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
-        );
+        ));
       });
     };
 
     const test_single = () => {
       it('test_single', () => {
-        checkEqual(
-          [1, 0],
+        checkEqual(true , equal([1, 0],
           array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])
-        );
+        ));
       });
     };
 
     const test_multiple = () => {
       it('test_multiple', () => {
-        checkEqual(
-          [2, 3, 4],
+        checkEqual(true , equal([2, 3, 4],
           array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])
-        );
+        ));
       });
     };
 
     const test_filter = () => {
       it('test_filter', () => {
-        checkEqual(
-          [2, 4],
+        checkEqual(true , equal([2, 4],
           array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
-        );
-        checkEqual(
-          [2, 4],
+        ));
+        checkEqual(true , equal([2, 4],
           array.filter([0, 1, 2, 3, 4, 5], isEven)
-        );
-        checkEqual(
-          [1, 3, 5],
+        ));
+        checkEqual(true , equal([1, 3, 5],
           array.filter([0, 1, 2, 3, 4, 5], isOdd)
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(
-          [2, 4],
+        checkEqual(true , equal([2, 4],
           array.filter({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
           })
-        );
+        ));
       });
     };
 
     const test_map = () => {
       it('test_map', () => {
-        checkEqual(
-          [false, false, true, false, true, false],
+        checkEqual(true , equal([false, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
-        );
-        checkEqual(
-          [false, false, true, false, true, false],
+        ));
+        checkEqual(true , equal([false, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], isEven)
-        );
-        checkEqual(
-          [false, true, false, true, false, true],
+        ));
+        checkEqual(true , equal([false, true, false, true, false, true],
           array.map([0, 1, 2, 3, 4, 5], isOdd)
-        );
-        checkEqual(
-          [0, 2, 4, 6, 8, 10],
+        ));
+        checkEqual(true , equal([0, 2, 4, 6, 8, 10],
           array.map([0, 1, 2, 3, 4, 5], value => value * 2)
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(
-          [false, false, true, false, true, false],
+        checkEqual(true , equal([false, false, true, false, true, false],
           array.map({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
           })
-        );
+        ));
       });
     };
 
@@ -636,113 +624,105 @@ const test_execute_array = (parts) => {
     const test_array_subIndex = () => {
       it('test_array_subIndex', () => {
         var array1 = [0, 1, 2];
-        checkEqual([1],       subIndex(array1, 1, 1));
-        checkEqual([0, 1],    subIndex(array1, 0, 1));
-        checkEqual([1, 2],    subIndex(array1, 1, 2));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true,  equal([1],       subIndex(array1, 1, 1)));
+        checkEqual(true,  equal([0, 1],    subIndex(array1, 0, 1)));
+        checkEqual(true,  equal([1, 2],    subIndex(array1, 1, 2)));
+        checkEqual(true,  equal([0, 1, 2], array1));
 
         // Object Named Parameter
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           subIndex({
             array: ['A', 'B', 'A'],
             indexFirst: 0,
             indexLast: 1,
           })
-        );
+        ));
       });
     };
 
     const test_array_subLength = () => {
       it('test_array_subLength', () => {
         var array1 = [0, 1, 2];
-        checkEqual([1],       subLength(array1, 1, 1));
-        checkEqual([0, 1],    subLength(array1, 0, 2));
-        checkEqual([1, 2],    subLength(array1, 1, 2));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true,  equal([1],       subLength(array1, 1, 1)));
+        checkEqual(true,  equal([0, 1],    subLength(array1, 0, 2)));
+        checkEqual(true,  equal([1, 2],    subLength(array1, 1, 2)));
+        checkEqual(true,  equal([0, 1, 2], array1));
 
         // Object Named Parameter
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           subLength({
             array: ['A', 'B', 'A'],
             index:  0,
             length: 2,
           })
-        );
+        ));
       });
     };
 
     const test_array_subFirst = () => {
       it('test_array_subFirst', () => {
         var array1 = [0, 1, 2];
-        checkEqual([],        subFirst(array1, 0));
-        checkEqual([0],       subFirst(array1, 1));
-        checkEqual([0, 1],    subFirst(array1, 2));
-        checkEqual([0, 1, 2], subFirst(array1, 3));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true,  equal([],        subFirst(array1, 0)));
+        checkEqual(true,  equal([0],       subFirst(array1, 1)));
+        checkEqual(true,  equal([0, 1],    subFirst(array1, 2)));
+        checkEqual(true,  equal([0, 1, 2], subFirst(array1, 3)));
+        checkEqual(true,  equal([0, 1, 2], array1));
 
         // Object Named Parameter
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           subFirst({
             array: ['A', 'B', 'A'],
             length: 2,
           })
-        );
+        ));
       });
     };
 
     const test_array_subLast = () => {
       it('test_array_subLast', () => {
         var array1 = [0, 1, 2];
-        checkEqual([],       subLast(array1, 0));
-        checkEqual([2],       subLast(array1, 1));
-        checkEqual([1, 2],    subLast(array1, 2));
-        checkEqual([0, 1, 2], subLast(array1, 3));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true,  equal([],       subLast(array1, 0)));
+        checkEqual(true,  equal([2],       subLast(array1, 1)));
+        checkEqual(true,  equal([1, 2],    subLast(array1, 2)));
+        checkEqual(true,  equal([0, 1, 2], subLast(array1, 3)));
+        checkEqual(true,  equal([0, 1, 2], array1));
 
         // Object Named Parameter
-        checkEqual(['B', 'A'],
+        checkEqual(true,  equal(['B', 'A'],
           subLast({
             array: ['A', 'B', 'A'],
             length: 2,
           })
-        );
+        ));
       });
     };
 
     const test_operation_insert = () => {
       it('test_operation_insert', () => {
-        checkEqual(
-          [1, 2, 3],
+        checkEqual(true , equal([1, 2, 3],
           insert([1, 2, 3], [])
-        );
-        checkEqual(
-          [0, 1, 2, 3],
+        ));
+        checkEqual(true , equal([0, 1, 2, 3],
           insert([1, 2, 3], [0])
-        );
-        checkEqual(
-          [0, 1, 2, 3],
+        ));
+        checkEqual(true , equal([0, 1, 2, 3],
           insert([1, 2, 3], [0], 0)
-        );
-        checkEqual(
-          [1, 0, 2, 3],
+        ));
+        checkEqual(true , equal([1, 0, 2, 3],
           insert([1, 2, 3], [0], 1)
-        );
-        checkEqual(
-          [1, 2, 0, 3],
+        ));
+        checkEqual(true , equal([1, 2, 0, 3],
           insert([1, 2, 3], [0], 2)
-        );
-        checkEqual(
-          [1, 2, 3, 0],
+        ));
+        checkEqual(true , equal([1, 2, 3, 0],
           insert([1, 2, 3], [0], 3)
-        );
-        checkEqual(
-          [-1, 0, 1, 2, 3],
+        ));
+        checkEqual(true , equal([-1, 0, 1, 2, 3],
           insert([1, 2, 3], [-1, 0])
-        );
-        checkEqual(
-          [1, -1, 0, 2, 3],
+        ));
+        checkEqual(true , equal([1, -1, 0, 2, 3],
           insert([1, 2, 3], [-1, 0], 1)
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -756,51 +736,42 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkEqual(
-          [1, 2, 3, 0],
+        checkEqual(true , equal([1, 2, 3, 0],
           insert({
             array: [1, 2, 3],
             valueArray: [0],
             index: 3
           })
-        );
+        ));
       });
     };
 
     const test_operation_add = () => {
       it('test_operation_add', () => {
-        checkEqual(
-          [1, 2, 3],
+        checkEqual(true , equal([1, 2, 3],
           add([1, 2, 3], [])
-        );
-        checkEqual(
-          [1, 2, 3, 0],
+        ));
+        checkEqual(true , equal([1, 2, 3, 0],
           add([1, 2, 3], [0])
-        );
-        checkEqual(
-          [0, 1, 2, 3],
+        ));
+        checkEqual(true , equal([0, 1, 2, 3],
           add([1, 2, 3], [0], -1)
-        );
-        checkEqual(
-          [1, 0, 2, 3],
+        ));
+        checkEqual(true , equal([1, 0, 2, 3],
           add([1, 2, 3], [0], 0)
-        );
-        checkEqual(
-          [1, 2, 0, 3],
+        ));
+        checkEqual(true , equal([1, 2, 0, 3],
           add([1, 2, 3], [0], 1)
-        );
-        checkEqual(
-          [1, 2, 3, 0],
+        ));
+        checkEqual(true , equal([1, 2, 3, 0],
           add([1, 2, 3], [0], 2)
-        );
-        checkEqual(
-          [1, 2, 3, -1, 0],
+        ));
+        checkEqual(true , equal([1, 2, 3, -1, 0],
           add([1, 2, 3], [-1, 0])
-        );
-        checkEqual(
-          [1, 2, -1, 0, 3],
+        ));
+        checkEqual(true , equal([1, 2, -1, 0, 3],
           add([1, 2, 3], [-1, 0], 1)
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -814,31 +785,27 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkEqual(
-          [1, 2, 3, 0],
+        checkEqual(true , equal([1, 2, 3, 0],
           add({
             array: [1, 2, 3],
             valueArray: [0],
             index: 2
           })
-        );
+        ));
       });
     };
 
     const test_operation_deleteLength = () => {
       it('test_operation_deleteLength', () => {
-        checkEqual(
-          [1, 3],
+        checkEqual(true , equal([1, 3],
           deleteLength([1, 2, 3], 1, 1)
-        );
-        checkEqual(
-          [3],
+        ));
+        checkEqual(true , equal([3],
           deleteLength([1, 2, 3], 0, 2)
-        );
-        checkEqual(
-          [1],
+        ));
+        checkEqual(true , equal([1],
           deleteLength([1, 2, 3], 1, 2)
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -864,31 +831,27 @@ const test_execute_array = (parts) => {
         }, 'RangeError'));
 
         // Object Named Parameter
-        checkEqual(
-          [0, 3],
+        checkEqual(true , equal([0, 3],
           deleteLength({
             array: [0, 1, 2, 3],
             index: 1,
             length: 2,
           })
-        );
+        ));
       });
     };
 
     const test_operation_deleteIndex = () => {
       it('test_operation_deleteIndex', () => {
-        checkEqual(
-          [1, 3],
+        checkEqual(true , equal([1, 3],
           deleteIndex([1, 2, 3], 1, 1)
-        );
-        checkEqual(
-          [3],
+        ));
+        checkEqual(true , equal([3],
           deleteIndex([1, 2, 3], 0, 1)
-        );
-        checkEqual(
-          [1],
+        ));
+        checkEqual(true , equal([1],
           deleteIndex([1, 2, 3], 1, 2)
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -914,45 +877,42 @@ const test_execute_array = (parts) => {
         }, 'RangeError'));
 
         // Object Named Parameter
-        checkEqual(
-          [0, 2, 3],
+        checkEqual(true , equal([0, 2, 3],
           deleteIndex({
             array: [0, 1, 2, 3],
             index: 1,
           })
-        );
-        checkEqual(
-          [0, 2, 3],
+        ));
+        checkEqual(true , equal([0, 2, 3],
           deleteIndex({
             array: [0, 1, 2, 3],
             indexFirst: 1,
           })
-        );
-        checkEqual(
-          [0, 3],
+        ));
+        checkEqual(true , equal([0, 3],
           deleteIndex({
             array: [0, 1, 2, 3],
             indexFirst: 1,
             indexLast: 2,
           })
-        );
+        ));
       });
     };
 
     const test_operation_deleteFirst = () => {
       it('test_operation_deleteFirst', () => {
         var array1 = [0, 1, 2];
-        checkEqual([0, 1, 2], deleteFirst(array1, 0));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true,  equal([0, 1, 2], deleteFirst(array1, 0)));
+        checkEqual(true,  equal([0, 1, 2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([1, 2],    deleteFirst(array1, 1));
-        checkEqual([1, 2], array1);
+        checkEqual(true,  equal([1, 2],    deleteFirst(array1, 1)));
+        checkEqual(true,  equal([1, 2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([2],       deleteFirst(array1, 2));
-        checkEqual([2], array1);
+        checkEqual(true,  equal([2],       deleteFirst(array1, 2)));
+        checkEqual(true,  equal([2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([], deleteFirst(array1, 3));
-        checkEqual([], array1);
+        checkEqual(true,  equal([], deleteFirst(array1, 3)));
+        checkEqual(true,  equal([], array1));
 
         // exception
         checkEqual(true,  isThrownException(() => {
@@ -978,29 +938,29 @@ const test_execute_array = (parts) => {
         }, 'RangeError'));
 
         // Object Named Parameter
-        checkEqual([1, 2, 3],
+        checkEqual(true,  equal([1, 2, 3],
           deleteFirst({
             array: [0, 1, 2, 3],
             length: 1,
           })
-        );
+        ));
       });
     };
 
     const test_operation_deleteLast = () => {
       it('test_operation_deleteLast', () => {
         var array1 = [0, 1, 2];
-        checkEqual([0, 1, 2], deleteLast(array1, 0));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true,  equal([0, 1, 2], deleteLast(array1, 0)));
+        checkEqual(true,  equal([0, 1, 2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([0, 1],    deleteLast(array1, 1));
-        checkEqual([0, 1], array1);
+        checkEqual(true,  equal([0, 1],    deleteLast(array1, 1)));
+        checkEqual(true,  equal([0, 1], array1));
         var array1 = [0, 1, 2];
-        checkEqual([0],       deleteLast(array1, 2));
-        checkEqual([0], array1);
+        checkEqual(true,  equal([0],       deleteLast(array1, 2)));
+        checkEqual(true,  equal([0], array1));
         var array1 = [0, 1, 2];
-        checkEqual([], deleteLast(array1, 3));
-        checkEqual([], array1);
+        checkEqual(true,  equal([], deleteLast(array1, 3)));
+        checkEqual(true,  equal([], array1));
 
         // exception
         checkEqual(true,  isThrownException(() => {
@@ -1026,166 +986,166 @@ const test_execute_array = (parts) => {
         }, 'RangeError'));
 
         // Object Named Parameter
-        checkEqual([0, 1, 2],
+        checkEqual(true,  equal([0, 1, 2],
           deleteLast({
             array: [0, 1, 2, 3],
             length: 1,
           })
-        );
+        ));
       });
     };
 
     const test_operation_includeFirst = () => {
       it('test_operation_includeFirst', () => {
-        checkEqual([1, 2, 3],
+        checkEqual(true,  equal([1, 2, 3],
           includeFirst([1, 2, 3], [1])
-        );
-        checkEqual([2, 1, 2, 3],
+        ));
+        checkEqual(true,  equal([2, 1, 2, 3],
           includeFirst([1, 2, 3], [2])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           includeFirst([1, 2, 3], [1, 2])
-        );
-        checkEqual([2, 1, 1, 2, 3],
+        ));
+        checkEqual(true,  equal([2, 1, 1, 2, 3],
           includeFirst([1, 2, 3], [2, 1])
-        );
+        ));
 
-        checkEqual(['A', 'B', 'C'],
+        checkEqual(true,  equal(['A', 'B', 'C'],
           includeFirst(['A', 'B', 'C'], ['A'])
-        );
-        checkEqual(['a', 'A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['a', 'A', 'B', 'C'],
           includeFirst(['A', 'B', 'C'], ['a'])
-        );
-        checkEqual(['B', 'A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['B', 'A', 'B', 'C'],
           includeFirst(['A', 'B', 'C'], ['B'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           includeFirst(['A', 'B', 'C'], ['A', 'B'])
-        );
-        checkEqual(['a', 'B', 'A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['a', 'B', 'A', 'B', 'C'],
           includeFirst(['A', 'B', 'C'], ['a', 'B'])
-        );
-        checkEqual(['B', 'A', 'A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['B', 'A', 'A', 'B', 'C'],
           includeFirst(['A', 'B', 'C'], ['B', 'A'])
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(['A', 'B', 'C'],
+        checkEqual(true,  equal(['A', 'B', 'C'],
           includeFirst({
             array: ['A', 'B', 'C'],
             valueArray: ['A'],
           })
-        );
-        checkEqual(['a', 'A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['a', 'A', 'B', 'C'],
           includeFirst({
             array: ['A', 'B', 'C'],
             valueArray: ['a'],
           })
-        );
+        ));
       });
     };
 
     const test_operation_includeLast = () => {
       it('test_operation_includeLast', () => {
-        checkEqual([1, 2, 3],
+        checkEqual(true,  equal([1, 2, 3],
           includeLast([1, 2, 3], [3])
-        );
-        checkEqual([1, 2, 3, 2],
+        ));
+        checkEqual(true,  equal([1, 2, 3, 2],
           includeLast([1, 2, 3], [2])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           includeLast([1, 2, 3], [2, 3])
-        );
-        checkEqual([1, 2, 3, 3, 2],
+        ));
+        checkEqual(true,  equal([1, 2, 3, 3, 2],
           includeLast([1, 2, 3], [3, 2])
-        );
+        ));
 
-        checkEqual(['A', 'B', 'C'],
+        checkEqual(true,  equal(['A', 'B', 'C'],
           includeLast(['A', 'B', 'C'], ['C'])
-        );
-        checkEqual(['A', 'B', 'C', 'c'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C', 'c'],
           includeLast(['A', 'B', 'C'], ['c'])
-        );
-        checkEqual(['A', 'B', 'C', 'B'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C', 'B'],
           includeLast(['A', 'B', 'C'], ['B'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           includeLast(['A', 'B', 'C'], ['B', 'C'])
-        );
-        checkEqual(['A', 'B', 'C', 'B', 'c'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C', 'B', 'c'],
           includeLast(['A', 'B', 'C'], ['B', 'c'])
-        );
-        checkEqual(['A', 'B', 'C', 'C', 'B'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C', 'C', 'B'],
           includeLast(['A', 'B', 'C'], ['C', 'B'])
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(['A', 'B', 'C'],
+        checkEqual(true,  equal(['A', 'B', 'C'],
           includeLast({
             array: ['A', 'B', 'C'],
             valueArray: ['C'],
           })
-        );
-        checkEqual(['A', 'B', 'C', 'c'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C', 'c'],
           includeLast({
             array: ['A', 'B', 'C'],
             valueArray: ['c'],
           })
-        );
+        ));
       });
     };
 
     const test_operation_includeBothEdges = () => {
       it('test_operation_includeBothEdges', () => {
 
-        checkEqual([1, 2, 1],
+        checkEqual(true,  equal([1, 2, 1],
           includeBothEdges([1, 2, 1], [1])
-        );
-        checkEqual([1, 1, 2, 3, 1],
+        ));
+        checkEqual(true,  equal([1, 1, 2, 3, 1],
           includeBothEdges([1, 2, 3], [1])
-        );
-        checkEqual([1, 2, 1, 2],
+        ));
+        checkEqual(true,  equal([1, 2, 1, 2],
           includeBothEdges([1, 2, 1, 2], [1, 2])
-        );
-        checkEqual([1, 2, 1],
+        ));
+        checkEqual(true,  equal([1, 2, 1],
           includeBothEdges([1, 2, 1], [1, 2], [2, 1])
-        );
+        ));
 
-        checkEqual(['A', 'B', 'A'],
+        checkEqual(true,  equal(['A', 'B', 'A'],
           includeBothEdges(['A', 'B', 'A'], ['A'])
-        );
-        checkEqual(['a', 'A', 'B', 'A', 'a'],
+        ));
+        checkEqual(true,  equal(['a', 'A', 'B', 'A', 'a'],
           includeBothEdges(['A', 'B', 'A'], ['a'])
-        );
-        checkEqual(['A', 'A', 'B', 'C', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'A', 'B', 'C', 'A'],
           includeBothEdges(['A', 'B', 'C'], ['A'])
-        );
-        checkEqual(['A', 'B', 'A', 'B'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A', 'B'],
           includeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])
-        );
+        ));
 
-        checkEqual(['{', '}'],
+        checkEqual(true,  equal(['{', '}'],
           includeBothEdges(['{', '}'], ['{'], ['}'])
-        );
-        checkEqual(['{', 'A', '}'],
+        ));
+        checkEqual(true,  equal(['{', 'A', '}'],
           includeBothEdges(['{', 'A', '}'], ['{'], ['}'])
-        );
-        checkEqual(['{', 'A', '{', '}', '}'],
+        ));
+        checkEqual(true,  equal(['{', 'A', '{', '}', '}'],
           includeBothEdges(['A', '{', '}'], ['{'], ['}'])
-        );
+        ));
 
-        checkEqual(['A', 'A'],
+        checkEqual(true,  equal(['A', 'A'],
           includeBothEdges(['A', 'A'], ['A'])
-        );
-        checkEqual(['A', 'A', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'A', 'A'],
           includeBothEdges(['A'], ['A'])
-        );
-        checkEqual(['A', '', 'A'],
+        ));
+        checkEqual(true,  equal(['A', '', 'A'],
           includeBothEdges([''], ['A'])
-        );
-        checkEqual(['A', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'A'],
           includeBothEdges([], ['A'])
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -1193,215 +1153,215 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkEqual(['A', 'B', 'A'],
+        checkEqual(true,  equal(['A', 'B', 'A'],
           includeBothEdges({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
-        );
-        checkEqual(['a', 'A', 'B', 'A', 'a'],
+        ));
+        checkEqual(true,  equal(['a', 'A', 'B', 'A', 'a'],
           includeBothEdges({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
-        );
-        checkEqual(['A', 'B', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A'],
           includeBothEdges({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
-        );
-        checkEqual(['A', 'A', 'B', 'A', 'D', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'A', 'B', 'A', 'D', 'A'],
           includeBothEdges({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
-        );
-        checkEqual(['A', 'B', 'A', 'D'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A', 'D'],
           includeBothEdges({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
           })
-        );
+        ));
       });
     };
 
     const test_operation_excludeFirst = () => {
       it('test_operation_excludeFirst', () => {
-        checkEqual([2, 3],
+        checkEqual(true,  equal([2, 3],
           excludeFirst([1, 2, 3], [1])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           excludeFirst([1, 2, 3], [2])
-        );
-        checkEqual([3],
+        ));
+        checkEqual(true,  equal([3],
           excludeFirst([1, 2, 3], [1, 2])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           excludeFirst([1, 2, 3], [2, 1])
-        );
+        ));
 
-        checkEqual(['B', 'C'],
+        checkEqual(true,  equal(['B', 'C'],
           excludeFirst(['A', 'B', 'C'], ['A'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeFirst(['A', 'B', 'C'], ['a'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeFirst(['A', 'B', 'C'], ['B'])
-        );
-        checkEqual(['C'],
+        ));
+        checkEqual(true,  equal(['C'],
           excludeFirst(['A', 'B', 'C'], ['A', 'B'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeFirst(['A', 'B', 'C'], ['a', 'B'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeFirst(['A', 'B', 'C'], ['B', 'A'])
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(['B', 'C'],
+        checkEqual(true,  equal(['B', 'C'],
           excludeFirst({
             array: ['A', 'B', 'C'],
             valueArray: ['A'],
           })
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeFirst({
             array: ['A', 'B', 'C'],
             valueArray: ['a'],
           })
-        );
+        ));
       });
     };
 
     const test_operation_excludeLast = () => {
       it('test_operation_excludeLast', () => {
-        checkEqual([1, 2],
+        checkEqual(true,  equal([1, 2],
           excludeLast([1, 2, 3], [3])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           excludeLast([1, 2, 3], [2])
-        );
-        checkEqual([1],
+        ));
+        checkEqual(true,  equal([1],
           excludeLast([1, 2, 3], [2, 3])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           excludeLast([1, 2, 3], [3, 2])
-        );
+        ));
 
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           excludeLast(['A', 'B', 'C'], ['C'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeLast(['A', 'B', 'C'], ['c'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeLast(['A', 'B', 'C'], ['B'])
-        );
-        checkEqual(['A'],
+        ));
+        checkEqual(true,  equal(['A'],
           excludeLast(['A', 'B', 'C'], ['B', 'C'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeLast(['A', 'B', 'C'], ['B', 'c'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeLast(['A', 'B', 'C'], ['C', 'B'])
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           excludeLast({
             array: ['A', 'B', 'C'],
             valueArray: ['C'],
           })
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeLast({
             array: ['A', 'B', 'C'],
             valueArray: ['c'],
           })
-        );
+        ));
       });
     };
 
     const test_operation_excludeBothEdges = () => {
       it('test_operation_excludeBothEdges', () => {
 
-        checkEqual([2],
+        checkEqual(true,  equal([2],
           excludeBothEdges([1, 2, 1], [1])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           excludeBothEdges([1, 2, 3], [1])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges([1, 2, 1, 2], [1, 2])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges(
             [1, 2, 3, 4, 5],
             [1, 2, 3, 4],
             [5]
           )
-        );
-        checkEqual([1, 2, 3, 4, 5],
+        ));
+        checkEqual(true,  equal([1, 2, 3, 4, 5],
           excludeBothEdges(
             [1, 2, 3, 4, 5],
             [1, 2, 3, 4],
             [3, 5]
           )
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges(
             [1, 2, 3, 4, 5],
             [1, 2, 3, 4],
             [3, 4, 5]
           )
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges([1, 2, 1], [1, 2], [2, 1])
-        );
+        ));
 
-        checkEqual(['B'],
+        checkEqual(true,  equal(['B'],
           excludeBothEdges(['A', 'B', 'A'], ['A'])
-        );
-        checkEqual(['A', 'B', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A'],
           excludeBothEdges(['A', 'B', 'A'], ['a'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           excludeBothEdges(['A', 'B', 'C'], ['A'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges(['A', 'B', 'A'], ['A', 'B'], ['B', 'A'])
-        );
+        ));
 
-        checkEqual([],
+        checkEqual(true,  equal([],
           excludeBothEdges(['{', '}'], ['{'], ['}'])
-        );
-        checkEqual(['A'],
+        ));
+        checkEqual(true,  equal(['A'],
           excludeBothEdges(['{', 'A', '}'], ['{'], ['}'])
-        );
-        checkEqual(['A', '{', '}'],
+        ));
+        checkEqual(true,  equal(['A', '{', '}'],
           excludeBothEdges(['A', '{', '}'], ['{'], ['}'])
-        );
+        ));
 
-        checkEqual([],
+        checkEqual(true,  equal([],
           excludeBothEdges(['A', 'A'], ['A'])
-        );
-        checkEqual(['A'],
+        ));
+        checkEqual(true,  equal(['A'],
           excludeBothEdges(['A'], ['A'])
-        );
-        checkEqual([''],
+        ));
+        checkEqual(true,  equal([''],
           excludeBothEdges([''], ['A'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           excludeBothEdges([], ['A'])
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -1409,242 +1369,242 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkEqual(['B'],
+        checkEqual(true,  equal(['B'],
           excludeBothEdges({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
-        );
-        checkEqual(['A', 'B', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A'],
           excludeBothEdges({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
-        );
-        checkEqual(['B'],
+        ));
+        checkEqual(true,  equal(['B'],
           excludeBothEdges({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
-        );
-        checkEqual(['A', 'B', 'A', 'D'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A', 'D'],
           excludeBothEdges({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
-        );
-        checkEqual(['B', 'A'],
+        ));
+        checkEqual(true,  equal(['B', 'A'],
           excludeBothEdges({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
           })
-        );
+        ));
       });
     };
 
     const test_operation_trimFirst = () => {
       it('test_operation_trimFirst', () => {
-        checkEqual([2, 3],
+        checkEqual(true,  equal([2, 3],
           trimFirst([1, 2, 3], [1])
-        );
-        checkEqual([2, 3],
+        ));
+        checkEqual(true,  equal([2, 3],
           trimFirst([1, 1, 1, 2, 3], [1])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimFirst([1, 1, 1, 1, 1], [1])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           trimFirst([1, 2, 3], [2])
-        );
+        ));
 
-        checkEqual([2, 1, 2, 3],
+        checkEqual(true,  equal([2, 1, 2, 3],
           trimFirst([1, 2, 1, 2, 3], [1])
-        );
-        checkEqual([3],
+        ));
+        checkEqual(true,  equal([3],
           trimFirst([1, 2, 1, 2, 3], [1, 2])
-        );
-        checkEqual([3],
+        ));
+        checkEqual(true,  equal([3],
           trimFirst([1, 2, 1, 2, 3], [2, 1])
-        );
+        ));
 
-        checkEqual(['B', 'C'],
+        checkEqual(true,  equal(['B', 'C'],
           trimFirst(['A', 'B', 'C'], ['A'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           trimFirst(['A', 'B', 'C'], ['a'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           trimFirst(['A', 'B', 'C'], ['B'])
-        );
+        ));
 
-        checkEqual(['B', 'A', 'B', 'C'],
+        checkEqual(true,  equal(['B', 'A', 'B', 'C'],
           trimFirst(['A', 'B', 'A', 'B', 'C'], ['A'])
-        );
-        checkEqual(['C'],
+        ));
+        checkEqual(true,  equal(['C'],
           trimFirst(['A', 'B', 'A', 'B', 'C'], ['A', 'B'])
-        );
-        checkEqual(['C'],
+        ));
+        checkEqual(true,  equal(['C'],
           trimFirst(['A', 'B', 'A', 'B', 'C'], ['B', 'A'])
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(['B', 'C'],
+        checkEqual(true,  equal(['B', 'C'],
           trimFirst({
             array: ['A', 'B', 'C'],
             valueArray: ['A'],
           })
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           trimFirst({
             array: ['A', 'B', 'C'],
             valueArray: ['a'],
           })
-        );
+        ));
       });
     };
 
     const test_operation_trimLast = () => {
       it('test_operation_trimLast', () => {
-        checkEqual([1, 2],
+        checkEqual(true,  equal([1, 2],
           trimLast([1, 2, 3], [3])
-        );
-        checkEqual([1, 2],
+        ));
+        checkEqual(true,  equal([1, 2],
           trimLast([1, 2, 3, 3, 3], [3])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimLast([3, 3, 3, 3, 3], [3])
-        );
-        checkEqual([1, 2, 3],
+        ));
+        checkEqual(true,  equal([1, 2, 3],
           trimLast([1, 2, 3], [2])
-        );
+        ));
 
-        checkEqual([1, 2, 3, 2],
+        checkEqual(true,  equal([1, 2, 3, 2],
           trimLast([1, 2, 3, 2, 3], [3])
-        );
-        checkEqual([1],
+        ));
+        checkEqual(true,  equal([1],
           trimLast([1, 2, 3, 2, 3], [2, 3])
-        );
-        checkEqual([1],
+        ));
+        checkEqual(true,  equal([1],
           trimLast([1, 2, 3, 2, 3], [3, 2])
-        );
+        ));
 
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           trimLast(['A', 'B', 'C'], ['C'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           trimLast(['A', 'B', 'C'], ['c'])
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           trimLast(['A', 'B', 'C'], ['B'])
-        );
+        ));
 
-        checkEqual(['A', 'B', 'C', 'B'],
+        checkEqual(true,  equal(['A', 'B', 'C', 'B'],
           trimLast(['A', 'B', 'C', 'B', 'C'], ['C'])
-        );
-        checkEqual(['A'],
+        ));
+        checkEqual(true,  equal(['A'],
           trimLast(['A', 'B', 'C', 'B', 'C'], ['B', 'C'])
-        );
-        checkEqual(['A'],
+        ));
+        checkEqual(true,  equal(['A'],
           trimLast(['A', 'B', 'C', 'B', 'C'], ['C', 'B'])
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           trimLast({
             array: ['A', 'B', 'C'],
             valueArray: ['C'],
           })
-        );
-        checkEqual(['A', 'B', 'C'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C'],
           trimLast({
             array: ['A', 'B', 'C'],
             valueArray: ['c'],
           })
-        );
+        ));
       });
     };
 
     const test_operation_trimBothEdges = () => {
       it('test_operation_trimBothEdges', () => {
 
-        checkEqual([2],
+        checkEqual(true,  equal([2],
           trimBothEdges([1, 2, 1], [1])
-        );
-        checkEqual([2],
+        ));
+        checkEqual(true,  equal([2],
           trimBothEdges([1, 1, 2, 1, 1, 1], [1])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimBothEdges([1, 1, 1], [1])
-        );
-        checkEqual([2, 3],
+        ));
+        checkEqual(true,  equal([2, 3],
           trimBothEdges([1, 2, 3], [1])
-        );
+        ));
 
-        checkEqual([2, 3, 1, 2],
+        checkEqual(true,  equal([2, 3, 1, 2],
           trimBothEdges([1, 2, 3, 1, 2], [1])
-        );
-        checkEqual([1, 2, 3, 1],
+        ));
+        checkEqual(true,  equal([1, 2, 3, 1],
           trimBothEdges([1, 2, 3, 1, 2], [2])
-        );
-        checkEqual([3],
+        ));
+        checkEqual(true,  equal([3],
           trimBothEdges([1, 2, 3, 1, 2], [1, 2])
-        );
-        checkEqual([3],
+        ));
+        checkEqual(true,  equal([3],
           trimBothEdges([1, 2, 3, 1, 2], [2, 1])
-        );
+        ));
 
-        checkEqual(['B'],
+        checkEqual(true,  equal(['B'],
           trimBothEdges(['A', 'B', 'A'], ['A'])
-        );
-        checkEqual(['A', 'B', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A'],
           trimBothEdges(['A', 'B', 'A'], ['a'])
-        );
-        checkEqual(['B', 'C'],
+        ));
+        checkEqual(true,  equal(['B', 'C'],
           trimBothEdges(['A', 'B', 'C'], ['A'])
-        );
+        ));
 
-        checkEqual(['B', 'C', 'A', 'B'],
+        checkEqual(true,  equal(['B', 'C', 'A', 'B'],
           trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A'])
-        );
-        checkEqual(['A', 'B', 'C', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'C', 'A'],
           trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B'])
-        );
-        checkEqual(['C'],
+        ));
+        checkEqual(true,  equal(['C'],
           trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A', 'B'])
-        );
-        checkEqual(['C'],
+        ));
+        checkEqual(true,  equal(['C'],
           trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B', 'A'])
-        );
+        ));
 
-        checkEqual([],
+        checkEqual(true,  equal([],
           trimBothEdges(['{', '}'], ['{'], ['}'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimBothEdges(['{', '{', '{', '}', '}', '}'], ['{'], ['}'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimBothEdges(['{', '{', '{', '}'], ['{'], ['}'])
-        );
-        checkEqual(['A'],
+        ));
+        checkEqual(true,  equal(['A'],
           trimBothEdges(['{', 'A', '}'], ['{'], ['}'])
-        );
-        checkEqual(['A', '{'],
+        ));
+        checkEqual(true,  equal(['A', '{'],
           trimBothEdges(['A', '{', '}'], ['{'], ['}'])
-        );
+        ));
 
-        checkEqual([],
+        checkEqual(true,  equal([],
           trimBothEdges(['A', 'A'], ['A'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimBothEdges(['A'], ['A'])
-        );
-        checkEqual([''],
+        ));
+        checkEqual(true,  equal([''],
           trimBothEdges([''], ['A'])
-        );
-        checkEqual([],
+        ));
+        checkEqual(true,  equal([],
           trimBothEdges([], ['A'])
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -1652,37 +1612,37 @@ const test_execute_array = (parts) => {
         }, 'TypeError'));
 
         // Object Named Parameter
-        checkEqual(['B'],
+        checkEqual(true,  equal(['B'],
           trimBothEdges({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
-        );
-        checkEqual(['A', 'B', 'A'],
+        ));
+        checkEqual(true,  equal(['A', 'B', 'A'],
           trimBothEdges({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
-        );
-        checkEqual(['B'],
+        ));
+        checkEqual(true,  equal(['B'],
           trimBothEdges({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
-        );
-        checkEqual(['B', 'A', 'D'],
+        ));
+        checkEqual(true,  equal(['B', 'A', 'D'],
           trimBothEdges({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
-        );
-        checkEqual(['B', 'A'],
+        ));
+        checkEqual(true,  equal(['B', 'A'],
           trimBothEdges({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
           })
-        );
+        ));
       });
     };
 
@@ -1690,11 +1650,11 @@ const test_execute_array = (parts) => {
       it('test_operation_popFirst', () => {
         var array1 = [1, 2, 3];
         checkEqual(1, popFirst(array1));
-        checkEqual([2, 3], array1);
+        checkEqual(true,  equal([2, 3], array1));
 
         var array1 = ['A', 'B', 'C'];
         checkEqual('A', popFirst(array1));
-        checkEqual(['B', 'C'], array1);
+        checkEqual(true,  equal(['B', 'C'], array1));
       });
     };
 
@@ -1702,11 +1662,11 @@ const test_execute_array = (parts) => {
       it('test_operation_popLast', () => {
         var array1 = [1, 2, 3];
         checkEqual(3, popLast(array1));
-        checkEqual([1, 2], array1);
+        checkEqual(true,  equal([1, 2], array1));
 
         var array1 = ['A', 'B', 'C'];
         checkEqual('C', popLast(array1));
-        checkEqual(['A', 'B'], array1);
+        checkEqual(true,  equal(['A', 'B'], array1));
       });
     };
 
@@ -1714,15 +1674,15 @@ const test_execute_array = (parts) => {
       it('test_operation_pushFirst', () => {
         var array1 = [1, 2, 3];
         checkEqual(4, pushFirst(array1, 0));
-        checkEqual([0, 1, 2, 3], array1);
+        checkEqual(true,  equal([0, 1, 2, 3], array1));
         checkEqual(5, pushFirst(array1, 0));
-        checkEqual([0, 0, 1, 2, 3], array1);
+        checkEqual(true,  equal([0, 0, 1, 2, 3], array1));
 
         var array1 = ['A', 'B', 'C'];
         checkEqual(4, pushFirst(array1, 'D'));
-        checkEqual(['D', 'A', 'B', 'C'], array1);
+        checkEqual(true,  equal(['D', 'A', 'B', 'C'], array1));
         checkEqual(5, pushFirst(array1, 'D'));
-        checkEqual(['D', 'D', 'A', 'B', 'C'], array1);
+        checkEqual(true,  equal(['D', 'D', 'A', 'B', 'C'], array1));
       });
     };
 
@@ -1730,47 +1690,47 @@ const test_execute_array = (parts) => {
       it('test_operation_pushLast', () => {
         var array1 = [1, 2, 3];
         checkEqual(4, pushLast(array1, 4));
-        checkEqual([1, 2, 3, 4], array1);
+        checkEqual(true,  equal([1, 2, 3, 4], array1));
         checkEqual(5, pushLast(array1, 4));
-        checkEqual([1, 2, 3, 4, 4], array1);
+        checkEqual(true,  equal([1, 2, 3, 4, 4], array1));
 
         var array1 = ['A', 'B', 'C'];
         checkEqual(4, pushLast(array1, 'D'));
-        checkEqual(['A', 'B', 'C', 'D'], array1);
+        checkEqual(true,  equal(['A', 'B', 'C', 'D'], array1));
         checkEqual(5, pushLast(array1, 'D'));
-        checkEqual(['A', 'B', 'C', 'D', 'D'], array1);
+        checkEqual(true,  equal(['A', 'B', 'C', 'D', 'D'], array1));
       });
     };
 
     const test_operation_remainFirst = () => {
       it('test_operation_remainFirst', () => {
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainFirst(array1, 4));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true,  equal([1, 2, 3], remainFirst(array1, 4)));
+        checkEqual(true,  equal([1, 2, 3], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainFirst(array1, 3));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true,  equal([1, 2, 3], remainFirst(array1, 3)));
+        checkEqual(true,  equal([1, 2, 3], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([1, 2], remainFirst(array1, 2));
-        checkEqual([1, 2], array1);
+        checkEqual(true,  equal([1, 2], remainFirst(array1, 2)));
+        checkEqual(true,  equal([1, 2], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([1], remainFirst(array1, 1));
-        checkEqual([1], array1);
+        checkEqual(true,  equal([1], remainFirst(array1, 1)));
+        checkEqual(true,  equal([1], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([], remainFirst(array1, 0));
-        checkEqual([], array1);
+        checkEqual(true,  equal([], remainFirst(array1, 0)));
+        checkEqual(true,  equal([], array1));
 
         // Object Named Parameter
-        checkEqual(['A', 'B'],
+        checkEqual(true,  equal(['A', 'B'],
           remainFirst({
             array: ['A', 'B', 'A'],
             length: 2,
           })
-        );
+        ));
 
       });
     };
@@ -1778,58 +1738,54 @@ const test_execute_array = (parts) => {
     const test_operation_remainLast = () => {
       it('test_operation_remainLast', () => {
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainLast(array1, 4));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true,  equal([1, 2, 3], remainLast(array1, 4)));
+        checkEqual(true,  equal([1, 2, 3], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainLast(array1, 3));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true,  equal([1, 2, 3], remainLast(array1, 3)));
+        checkEqual(true,  equal([1, 2, 3], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([2, 3], remainLast(array1, 2));
-        checkEqual([2, 3], array1);
+        checkEqual(true,  equal([2, 3], remainLast(array1, 2)));
+        checkEqual(true,  equal([2, 3], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([3], remainLast(array1, 1));
-        checkEqual([3], array1);
+        checkEqual(true,  equal([3], remainLast(array1, 1)));
+        checkEqual(true,  equal([3], array1));
 
         var array1 = [1, 2, 3];
-        checkEqual([], remainLast(array1, 0));
-        checkEqual([], array1);
+        checkEqual(true,  equal([], remainLast(array1, 0)));
+        checkEqual(true,  equal([], array1));
 
         // Object Named Parameter
-        checkEqual(['B', 'A'],
+        checkEqual(true,  equal(['B', 'A'],
           remainLast({
             array: ['A', 'B', 'A'],
             length: 2,
           })
-        );
+        ));
       });
     };
 
     const test_operation_filter = () => {
       it('test_operation_filter', () => {
-        checkEqual(
-          [2, 4],
+        checkEqual(true , equal([2, 4],
           array.operation.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
-        );
-        checkEqual(
-          [2, 4],
+        ));
+        checkEqual(true , equal([2, 4],
           array.operation.filter([0, 1, 2, 3, 4, 5], isEven)
-        );
-        checkEqual(
-          [1, 3, 5],
+        ));
+        checkEqual(true , equal([1, 3, 5],
           array.operation.filter([0, 1, 2, 3, 4, 5], isOdd)
-        );
+        ));
 
         // Object Named Parameter
-        checkEqual(
-          [2, 4],
+        checkEqual(true , equal([2, 4],
           array.operation.filter({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
           })
-        );
+        ));
       });
     };
 
@@ -1849,14 +1805,12 @@ const test_execute_array = (parts) => {
 
     const test_operation_sortNumber = () => {
       it('test_operation_sortNumber', () => {
-        checkEqual(
-          [0, 1, 2, 3, 4, 5],
+        checkEqual(true , equal([0, 1, 2, 3, 4, 5],
           array.operation.sortNumberAscending([3,4,1,2,5,0])
-        );
-        checkEqual(
-          [5, 4, 3, 2, 1, 0],
+        ));
+        checkEqual(true , equal([5, 4, 3, 2, 1, 0],
           array.operation.sortNumberDescending([3,4,1,2,5,0])
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -1876,14 +1830,12 @@ const test_execute_array = (parts) => {
 
     const test_operation_sortLength = () => {
       it('test_operation_sortLength', () => {
-        checkEqual(
-          ['a', 'aa', 'aaa'],
+        checkEqual(true , equal(['a', 'aa', 'aaa'],
           array.operation.sortLengthAscending(['aaa', 'a', 'aa'])
-        );
-        checkEqual(
-          ['aaa', 'aa', 'a'],
+        ));
+        checkEqual(true , equal(['aaa', 'aa', 'a'],
           array.operation.sortLengthDescending(['aaa', 'a', 'aa'])
-        );
+        ));
         checkCompare(parts.compare.equalDeep,
           ['a', [0, 1], 'aaa'],
           array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])
@@ -1915,30 +1867,26 @@ const test_execute_array = (parts) => {
 
     const test_operation_sortDictionary = () => {
       it('test_operation_sortDictionary', () => {
-        checkEqual(
-          ['A', 'AA', 'Aa', 'a', 'aA', 'aa'],
+        checkEqual(true , equal(['A', 'AA', 'Aa', 'a', 'aA', 'aa'],
           array.operation.sortDictionaryAscending(
             ['a', 'A', 'Aa', 'aa', 'aA', 'AA']
           )
-        );
-        checkEqual(
-          ['aa', 'aA', 'a', 'Aa', 'AA', 'A'],
+        ));
+        checkEqual(true , equal(['aa', 'aA', 'a', 'Aa', 'AA', 'A'],
           array.operation.sortDictionaryDescending(
             ['a', 'A', 'aa', 'Aa', 'AA', 'aA']
           )
-        );
-        checkEqual(
-          ['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'],
+        ));
+        checkEqual(true , equal(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'],
           array.operation.sortDictionaryAscending(
             ['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']
           )
-        );
-        checkEqual(
-          ['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'],
+        ));
+        checkEqual(true , equal(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'],
           array.operation.sortDictionaryDescending(
             ['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']
           )
-        );
+        ));
 
         // exception
         checkEqual(true, isThrownException(() => {

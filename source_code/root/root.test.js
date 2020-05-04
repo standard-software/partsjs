@@ -572,6 +572,9 @@ const test_execute_root = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
 
         var symbol1 = Symbol();
         checkEqual(true,
@@ -623,6 +626,9 @@ const test_execute_root = (parts) => {
     const test_cloneDeep_map = () => {
       it('test_cloneDeep_map', () => {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
@@ -722,7 +728,11 @@ const test_execute_root = (parts) => {
         checkEqual(true,  set1.has('value2'));
         checkEqual(false, set1.has('value3'));
 
-        checkEqual(false, parts.isObjectAll(set1));
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, parts.isObjectAll(set1));
+        } else {
+          checkEqual(false, parts.isObjectAll(set1));
+        }
         checkEqual(true,  parts.isObjectTypeAll(set1));
 
         // initializse nothing cloneSet
@@ -739,11 +749,7 @@ const test_execute_root = (parts) => {
         cloneDeep.add(cloneFunction.cloneDate);
 
         var set2 = clone(set1);
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true,  set2.has('value1'));  // IE polyfill clone
-        } else {
-          checkEqual(false, set2.has('value1'));  // no clone
-        }
+        checkEqual(false,  set2.has('value1'));
         checkEqual(false, set1 === set2);
 
         if (parts.platform.isInternetExplorer()) {
@@ -758,11 +764,19 @@ const test_execute_root = (parts) => {
         cloneDeep.reset();
 
         var set2 = clone(set1);
-        checkEqual(true, set2.has('value1'));  // clone
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, set2.has('value1'));
+        } else {
+          checkEqual(true, set2.has('value1'));  // clone
+        }
         checkEqual(false, set1 === set2);
 
         var set2 = cloneDeep(set1);
-        checkEqual(true, set2.has('value1'));  // clone
+        if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, set2.has('value1'));
+        } else {
+          checkEqual(true, set2.has('value1'));  // clone
+        }
         checkEqual(false, set1 === set2);
 
       });

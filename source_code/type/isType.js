@@ -88,7 +88,7 @@ const isArray = _objectToStringCheck('Array');
 
 // Int8Array Uint16Array Float32Array Float64Array etc...
 const isArrayType = (value) => {
-  if (objectToString(value).includes('Array]')) {
+  if (objectToString(value).includes('Array]') ) {
     return true;
   }
   return false;

@@ -105,43 +105,53 @@ const test_execute_type = (parts) => {
         checkType('object',    '[object Float32Array]',       new Float32Array());
         checkType('object',    '[object Float64Array]',       new Float64Array());
 
-        checkType('object',    '[object Map]',                new Map());
-        checkType('object',    '[object WeakMap]',            new WeakMap());
-        checkType('object',    '[object Set]',                new Set());
-        checkType('object',    '[object WeakSet]',            new WeakSet());
-        checkType('symbol',    '[object Symbol]',             Symbol());
+        if (parts.platform.isInternetExplorer()) {
+          checkType('object',    '[object Object]',             new Map());
+          checkType('object',    '[object Object]',             new WeakMap());
+          checkType('object',    '[object Object]',             new Set());
+        } else {
+          checkType('object',    '[object Map]',                new Map());
+          checkType('object',    '[object WeakMap]',            new WeakMap());
+          checkType('object',    '[object Set]',                new Set());
+          checkType('object',    '[object WeakSet]',            new WeakSet());
+          checkType('symbol',    '[object Symbol]',             Symbol());
+        }
 
         checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
         if (parts.platform.isChrome()
-        || parts.platform.isSafari()
-        || parts.platform.isOpera()) {
-          checkType('object',    '[object SharedArrayBuffer]',  new SharedArrayBuffer(8));
-          checkType('object',    '[object Atomics]',            Atomics);
+          || parts.platform.isSafari()
+          || parts.platform.isOpera()
+        ) {
+          checkType('object',    '[object SharedArrayBuffer]',
+            new SharedArrayBuffer(8));  // firefox no support
+          checkType('object',    '[object Atomics]',
+            Atomics);                   // firefox no support
         }
 
-        checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
         checkType('object',    '[object JSON]',               JSON);
 
-        checkType('function',  '[object Function]',           Promise);
+        if (!parts.platform.isInternetExplorer()) {
+          checkType('object',    '[object DataView]',           new DataView(new ArrayBuffer(16)));
+          checkType('function',  '[object Function]',           Promise);
+        } else {
+          checkType('object',    '[object Object]',             new DataView(new ArrayBuffer(16)));
+        }
 
-        function* Generator() { yield 1; yield 2; yield 3; }
-        var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
-        var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
         if (parts.platform.buildMode === 'source') {
+          function* Generator() { yield 1; yield 2; yield 3; }
+          var GeneratorFunction = Object.getPrototypeOf(function* () {}).constructor;
+          var AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
           checkType('object',     '[object Generator]',         Generator());
           checkType('function',   '[object GeneratorFunction]', new GeneratorFunction());
           checkType('function',   '[object AsyncFunction]',     new AsyncFunction());
-        } else {
-          checkType('object',     '[object Generator]',         Generator());
-          checkType('object',     '[object GeneratorFunction]', new GeneratorFunction());
-          checkType('function',   '[object Function]',          new AsyncFunction());
         }
 
-        checkType('object',    '[object Object]',             Reflect);
         if (parts.platform.isInternetExplorer()) {
           // no define Proxy
           // no define WebAssembly
         } else {
+          checkType('object',    '[object Object]',             Reflect);
+
           checkType('object',    '[object Object]',             new Proxy({}, {}));
           checkType('object',    '[object WebAssembly]',        WebAssembly);
         }
@@ -813,6 +823,9 @@ const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
 
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
@@ -826,16 +839,29 @@ const test_execute_type = (parts) => {
           return;
         }
 
-        checkEqual(false, isMapAll({}));
-        checkEqual(false, isWeakMapAll({}));
-        checkEqual(true,  isMapAll(new Map()));
-        checkEqual(false, isWeakMapAll(new Map()));
-        checkEqual(false, isMapAll(new WeakMap()));
-        checkEqual(true,  isWeakMapAll(new WeakMap()));
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, isMapAll({}));
+          checkEqual(false, isWeakMapAll({}));
+          checkEqual(true,  isMapAll(new Map()));
+          checkEqual(false, isWeakMapAll(new Map()));
+          checkEqual(false, isMapAll(new WeakMap()));
+          checkEqual(true,  isWeakMapAll(new WeakMap()));
 
-        checkEqual(true,  isObjectAll({}));
-        checkEqual(false, isObjectAll(new Map()));
-        checkEqual(false, isObjectAll(new WeakMap()));
+          checkEqual(true,  isObjectAll({}));
+          checkEqual(false, isObjectAll(new Map()));
+          checkEqual(false, isObjectAll(new WeakMap()));
+        } else {
+          checkEqual(false, isMapAll({}));
+          checkEqual(false, isWeakMapAll({}));
+          checkEqual(false, isMapAll(new Map()));          // IE11 bug
+          checkEqual(false, isWeakMapAll(new Map()));
+          checkEqual(false, isMapAll(new WeakMap()));
+          checkEqual(false, isWeakMapAll(new WeakMap()));  // IE11 bug
+
+          checkEqual(true,  isObjectAll({}));
+          checkEqual(true,  isObjectAll(new Map()));        // IE11 bug
+          checkEqual(true,  isObjectAll(new WeakMap()));    // IE11 bug
+        }
       });
     };
 
@@ -846,16 +872,27 @@ const test_execute_type = (parts) => {
           return;
         }
 
-        checkEqual(false, isSetAll({}));
-        checkEqual(false, isWeakSetAll({}));
-        checkEqual(true,  isSetAll(new Set()));
-        checkEqual(false, isWeakSetAll(new Set()));
-        checkEqual(false, isSetAll(new WeakSet()));
-        checkEqual(true,  isWeakSetAll(new WeakSet()));
+        if (!parts.platform.isInternetExplorer()) {
+          checkEqual(false, isSetAll({}));
+          checkEqual(true,  isSetAll(new Set()));
+          checkEqual(false, isSetAll(new WeakSet()));
+          checkEqual(false, isWeakSetAll({}));
+          checkEqual(false, isWeakSetAll(new Set()));
+          checkEqual(true,  isWeakSetAll(new WeakSet()));
 
-        checkEqual(true,  isObjectAll({}));
-        checkEqual(false, isObjectAll(new Set()));
-        checkEqual(false, isObjectAll(new WeakSet()));
+          checkEqual(true,  isObjectAll({}));
+          checkEqual(false, isObjectAll(new Set()));
+          checkEqual(false, isObjectAll(new WeakSet()));
+        } else {
+          checkEqual(false, isSetAll({}));
+          checkEqual(false, isSetAll(new Set()));     // IE11 bug
+          checkEqual(false, isWeakSetAll({}));
+          checkEqual(false, isWeakSetAll(new Set()));
+
+          checkEqual(true,  isObjectAll({}));
+          checkEqual(true,  isObjectAll(new Set()));  // IE11 bug
+        }
+
       });
     };
 

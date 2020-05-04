@@ -1,3 +1,4 @@
+require('./polyfill.js');
 const _root = require('./root/root.js');
 const _platform = require('./platform/platform.js');
 const _type = require('./type/type.js');
@@ -11,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '4.10.1';
+const VERSION = '5.0.0';
 
 const rootNames = {};
 const propertyNames = {};

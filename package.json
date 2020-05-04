@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@standard-software/parts",
-  "version": "4.10.1",
+  "version": "5.0.0",
   "description": "JavaScript Code Parts",
   "main": "./release_build/parts.js",
   "scripts": {
@@ -32,16 +32,14 @@
   "homepage": "https://github.com/standard-software/partsjs#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
-    "jest": "^24.9.0",
+    "jest": "^25.5.4",
     "moment": "^2.24.0",
-    "webpack": "^4.42.1",
+    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
-  "dependencies": {
-    "@babel/polyfill": "^7.8.7"
-  }
+  "dependencies": {}
 }
