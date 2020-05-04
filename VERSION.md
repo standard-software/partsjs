@@ -2,6 +2,16 @@
 
 ## Version
 
+### 5.0.0
+#### 2020/05/04(Mon)
+- Uninstall @babel/polyfill
+  - support IE11 test all success
+- add Polyfill String.includes
+- support bugfix run jest
+- npm update
+  - moment 2.24.0
+    - 2.25.0-2 webpack build bug exists
+
 ### 4.10.1
 #### 2020/05/02(Sat)
 - upddate unique
