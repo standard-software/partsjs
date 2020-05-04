@@ -238,6 +238,7 @@ You can now use the functions of the parts.js object.
 - Uninstall @babel/polyfill
   - support IE11 test all success
 - add Polyfill String.includes
+- support bugfix run jest
 
 ### 4.10.1
 #### 2020/05/02(Sat)

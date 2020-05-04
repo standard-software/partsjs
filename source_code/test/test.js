@@ -105,7 +105,7 @@ const checkEqual = (a, b, message = '') => {
 
 const expect = a => {
   return {
-    toBe: b => checkCompare(equalDeep, a, b),
+    toBe: b => checkCompare(equal, a, b),
   };
 };
 

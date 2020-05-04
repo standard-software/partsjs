@@ -1257,12 +1257,12 @@ const test_execute_convert = (parts) => {
         // parseFloat different
         checkEqual(0,         parseFloat('0x123'));
         checkEqual(0,         parseFloat('+0x123'));
-        checkEqual(0,         parseFloat('-0x123'));
+        checkEqual(-0,         parseFloat('-0x123'));
 
         checkEqual(0,         parseFloat('0o123'));
 
         checkEqual(0,         parseFloat('+0o123'));
-        checkEqual(0,         parseFloat('-0o123'));
+        checkEqual(-0,        parseFloat('-0o123'));
 
         checkEqual(Infinity,  parseFloat('Infinity'));
         checkEqual(NaN,       parseFloat('infinity'));
@@ -1383,12 +1383,12 @@ const test_execute_convert = (parts) => {
         // parseFloat different
         checkEqual(0,         parseInt10('0x123'));
         checkEqual(0,         parseInt10('+0x123'));
-        checkEqual(0,         parseInt10('-0x123'));
+        checkEqual(-0,        parseInt10('-0x123'));
 
         checkEqual(0,         parseInt10('0o123'));
 
         checkEqual(0,         parseInt10('+0o123'));
-        checkEqual(0,         parseInt10('-0o123'));
+        checkEqual(-0,        parseInt10('-0o123'));
 
         checkEqual(NaN,       parseInt10('Infinity'));     // ?
         checkEqual(NaN,       parseInt10('infinity'));
