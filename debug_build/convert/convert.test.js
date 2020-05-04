@@ -1410,10 +1410,10 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         checkEqual(0, parseFloat('0x123'));
         checkEqual(0, parseFloat('+0x123'));
-        checkEqual(0, parseFloat('-0x123'));
+        checkEqual(-0, parseFloat('-0x123'));
         checkEqual(0, parseFloat('0o123'));
         checkEqual(0, parseFloat('+0o123'));
-        checkEqual(0, parseFloat('-0o123'));
+        checkEqual(-0, parseFloat('-0o123'));
         checkEqual(Infinity, parseFloat('Infinity'));
         checkEqual(NaN, parseFloat('infinity'));
         checkEqual(NaN, parseFloat('inf'));
@@ -1535,10 +1535,10 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         checkEqual(0, parseInt10('0x123'));
         checkEqual(0, parseInt10('+0x123'));
-        checkEqual(0, parseInt10('-0x123'));
+        checkEqual(-0, parseInt10('-0x123'));
         checkEqual(0, parseInt10('0o123'));
         checkEqual(0, parseInt10('+0o123'));
-        checkEqual(0, parseInt10('-0o123'));
+        checkEqual(-0, parseInt10('-0o123'));
         checkEqual(NaN, parseInt10('Infinity')); // ?
 
         checkEqual(NaN, parseInt10('infinity'));

@@ -113,7 +113,7 @@ var checkEqual = function checkEqual(a, b) {
 var expect = function expect(a) {
   return {
     toBe: function toBe(b) {
-      return checkCompare(equalDeep, a, b);
+      return checkCompare(equal, a, b);
     }
   };
 };

@@ -23810,10 +23810,10 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         checkEqual(0, parseFloat('0x123'));
         checkEqual(0, parseFloat('+0x123'));
-        checkEqual(0, parseFloat('-0x123'));
+        checkEqual(-0, parseFloat('-0x123'));
         checkEqual(0, parseFloat('0o123'));
         checkEqual(0, parseFloat('+0o123'));
-        checkEqual(0, parseFloat('-0o123'));
+        checkEqual(-0, parseFloat('-0o123'));
         checkEqual(Infinity, parseFloat('Infinity'));
         checkEqual(NaN, parseFloat('infinity'));
         checkEqual(NaN, parseFloat('inf'));
@@ -23935,10 +23935,10 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         checkEqual(0, parseInt10('0x123'));
         checkEqual(0, parseInt10('+0x123'));
-        checkEqual(0, parseInt10('-0x123'));
+        checkEqual(-0, parseInt10('-0x123'));
         checkEqual(0, parseInt10('0o123'));
         checkEqual(0, parseInt10('+0o123'));
-        checkEqual(0, parseInt10('-0o123'));
+        checkEqual(-0, parseInt10('-0o123'));
         checkEqual(NaN, parseInt10('Infinity')); // ?
 
         checkEqual(NaN, parseInt10('infinity'));
@@ -24748,6 +24748,7 @@ var test_execute_array = function test_execute_array(parts) {
         isOdd = _parts$number.isOdd;
     var isLowerCase = parts.isLowerCase,
         isUpperCase = parts.isUpperCase;
+    var equal = parts.compare.equal;
 
     var test_array_from = function test_array_from() {
       it('test_array_from', function () {
@@ -24853,66 +24854,66 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_mode = function test_mode() {
       it('test_mode', function () {
-        checkEqual([], array.mode([]));
-        checkEqual([70], array.mode([70]));
-        checkEqual([70, 52], array.mode([70, 70, 80, 52, 52, 100]));
-        checkEqual([52], array.mode([70, 70, 80, 52, 52, 52, 100]));
-        checkEqual([9, 10], array.mode([9, 9, 10, 10, 10, 9, 6]));
+        checkEqual(true, equal([], array.mode([])));
+        checkEqual(true, equal([70], array.mode([70])));
+        checkEqual(true, equal([70, 52], array.mode([70, 70, 80, 52, 52, 100])));
+        checkEqual(true, equal([52], array.mode([70, 70, 80, 52, 52, 52, 100])));
+        checkEqual(true, equal([9, 10], array.mode([9, 9, 10, 10, 10, 9, 6])));
       });
     };
 
     var test_uniqe = function test_uniqe() {
       it('test_uniqe', function () {
-        checkEqual([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual(true, equal([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])));
       });
     };
 
     var test_single = function test_single() {
       it('test_single', function () {
-        checkEqual([1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual(true, equal([1, 0], array.single([1, 2, 3, 4, 4, 4, 3, 2, 0])));
       });
     };
 
     var test_multiple = function test_multiple() {
       it('test_multiple', function () {
-        checkEqual([2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual(true, equal([2, 3, 4], array.multiple([1, 2, 3, 4, 4, 4, 3, 2, 0])));
       });
     };
 
     var test_filter = function test_filter() {
       it('test_filter', function () {
-        checkEqual([2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual(true, equal([2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
-        }));
-        checkEqual([2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
-        checkEqual([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+        })));
+        checkEqual(true, equal([2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven)));
+        checkEqual(true, equal([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd))); // Object Named Parameter
 
-        checkEqual([2, 4], array.filter({
+        checkEqual(true, equal([2, 4], array.filter({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
           }
-        }));
+        })));
       });
     };
 
     var test_map = function test_map() {
       it('test_map', function () {
-        checkEqual([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual(true, equal([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
-        }));
-        checkEqual([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
-        checkEqual([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd));
-        checkEqual([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        })));
+        checkEqual(true, equal([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven)));
+        checkEqual(true, equal([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd)));
+        checkEqual(true, equal([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return value * 2;
-        })); // Object Named Parameter
+        }))); // Object Named Parameter
 
-        checkEqual([false, false, true, false, true, false], array.map({
+        checkEqual(true, equal([false, false, true, false, true, false], array.map({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
           }
-        }));
+        })));
       });
     };
 
@@ -25196,77 +25197,77 @@ var test_execute_array = function test_execute_array(parts) {
     var test_array_subIndex = function test_array_subIndex() {
       it('test_array_subIndex', function () {
         var array1 = [0, 1, 2];
-        checkEqual([1], subIndex(array1, 1, 1));
-        checkEqual([0, 1], subIndex(array1, 0, 1));
-        checkEqual([1, 2], subIndex(array1, 1, 2));
-        checkEqual([0, 1, 2], array1); // Object Named Parameter
+        checkEqual(true, equal([1], subIndex(array1, 1, 1)));
+        checkEqual(true, equal([0, 1], subIndex(array1, 0, 1)));
+        checkEqual(true, equal([1, 2], subIndex(array1, 1, 2)));
+        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
 
-        checkEqual(['A', 'B'], subIndex({
+        checkEqual(true, equal(['A', 'B'], subIndex({
           array: ['A', 'B', 'A'],
           indexFirst: 0,
           indexLast: 1
-        }));
+        })));
       });
     };
 
     var test_array_subLength = function test_array_subLength() {
       it('test_array_subLength', function () {
         var array1 = [0, 1, 2];
-        checkEqual([1], subLength(array1, 1, 1));
-        checkEqual([0, 1], subLength(array1, 0, 2));
-        checkEqual([1, 2], subLength(array1, 1, 2));
-        checkEqual([0, 1, 2], array1); // Object Named Parameter
+        checkEqual(true, equal([1], subLength(array1, 1, 1)));
+        checkEqual(true, equal([0, 1], subLength(array1, 0, 2)));
+        checkEqual(true, equal([1, 2], subLength(array1, 1, 2)));
+        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
 
-        checkEqual(['A', 'B'], subLength({
+        checkEqual(true, equal(['A', 'B'], subLength({
           array: ['A', 'B', 'A'],
           index: 0,
           length: 2
-        }));
+        })));
       });
     };
 
     var test_array_subFirst = function test_array_subFirst() {
       it('test_array_subFirst', function () {
         var array1 = [0, 1, 2];
-        checkEqual([], subFirst(array1, 0));
-        checkEqual([0], subFirst(array1, 1));
-        checkEqual([0, 1], subFirst(array1, 2));
-        checkEqual([0, 1, 2], subFirst(array1, 3));
-        checkEqual([0, 1, 2], array1); // Object Named Parameter
+        checkEqual(true, equal([], subFirst(array1, 0)));
+        checkEqual(true, equal([0], subFirst(array1, 1)));
+        checkEqual(true, equal([0, 1], subFirst(array1, 2)));
+        checkEqual(true, equal([0, 1, 2], subFirst(array1, 3)));
+        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
 
-        checkEqual(['A', 'B'], subFirst({
+        checkEqual(true, equal(['A', 'B'], subFirst({
           array: ['A', 'B', 'A'],
           length: 2
-        }));
+        })));
       });
     };
 
     var test_array_subLast = function test_array_subLast() {
       it('test_array_subLast', function () {
         var array1 = [0, 1, 2];
-        checkEqual([], subLast(array1, 0));
-        checkEqual([2], subLast(array1, 1));
-        checkEqual([1, 2], subLast(array1, 2));
-        checkEqual([0, 1, 2], subLast(array1, 3));
-        checkEqual([0, 1, 2], array1); // Object Named Parameter
+        checkEqual(true, equal([], subLast(array1, 0)));
+        checkEqual(true, equal([2], subLast(array1, 1)));
+        checkEqual(true, equal([1, 2], subLast(array1, 2)));
+        checkEqual(true, equal([0, 1, 2], subLast(array1, 3)));
+        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
 
-        checkEqual(['B', 'A'], subLast({
+        checkEqual(true, equal(['B', 'A'], subLast({
           array: ['A', 'B', 'A'],
           length: 2
-        }));
+        })));
       });
     };
 
     var test_operation_insert = function test_operation_insert() {
       it('test_operation_insert', function () {
-        checkEqual([1, 2, 3], insert([1, 2, 3], []));
-        checkEqual([0, 1, 2, 3], insert([1, 2, 3], [0]));
-        checkEqual([0, 1, 2, 3], insert([1, 2, 3], [0], 0));
-        checkEqual([1, 0, 2, 3], insert([1, 2, 3], [0], 1));
-        checkEqual([1, 2, 0, 3], insert([1, 2, 3], [0], 2));
-        checkEqual([1, 2, 3, 0], insert([1, 2, 3], [0], 3));
-        checkEqual([-1, 0, 1, 2, 3], insert([1, 2, 3], [-1, 0]));
-        checkEqual([1, -1, 0, 2, 3], insert([1, 2, 3], [-1, 0], 1)); // exception
+        checkEqual(true, equal([1, 2, 3], insert([1, 2, 3], [])));
+        checkEqual(true, equal([0, 1, 2, 3], insert([1, 2, 3], [0])));
+        checkEqual(true, equal([0, 1, 2, 3], insert([1, 2, 3], [0], 0)));
+        checkEqual(true, equal([1, 0, 2, 3], insert([1, 2, 3], [0], 1)));
+        checkEqual(true, equal([1, 2, 0, 3], insert([1, 2, 3], [0], 2)));
+        checkEqual(true, equal([1, 2, 3, 0], insert([1, 2, 3], [0], 3)));
+        checkEqual(true, equal([-1, 0, 1, 2, 3], insert([1, 2, 3], [-1, 0])));
+        checkEqual(true, equal([1, -1, 0, 2, 3], insert([1, 2, 3], [-1, 0], 1))); // exception
 
         checkEqual(true, isThrownException(function () {
           insert([1, 2, 3], [0], -1);
@@ -25278,24 +25279,24 @@ var test_execute_array = function test_execute_array(parts) {
           insert([1, 2, 3], 0, 4);
         }, 'TypeError')); // Object Named Parameter
 
-        checkEqual([1, 2, 3, 0], insert({
+        checkEqual(true, equal([1, 2, 3, 0], insert({
           array: [1, 2, 3],
           valueArray: [0],
           index: 3
-        }));
+        })));
       });
     };
 
     var test_operation_add = function test_operation_add() {
       it('test_operation_add', function () {
-        checkEqual([1, 2, 3], add([1, 2, 3], []));
-        checkEqual([1, 2, 3, 0], add([1, 2, 3], [0]));
-        checkEqual([0, 1, 2, 3], add([1, 2, 3], [0], -1));
-        checkEqual([1, 0, 2, 3], add([1, 2, 3], [0], 0));
-        checkEqual([1, 2, 0, 3], add([1, 2, 3], [0], 1));
-        checkEqual([1, 2, 3, 0], add([1, 2, 3], [0], 2));
-        checkEqual([1, 2, 3, -1, 0], add([1, 2, 3], [-1, 0]));
-        checkEqual([1, 2, -1, 0, 3], add([1, 2, 3], [-1, 0], 1)); // exception
+        checkEqual(true, equal([1, 2, 3], add([1, 2, 3], [])));
+        checkEqual(true, equal([1, 2, 3, 0], add([1, 2, 3], [0])));
+        checkEqual(true, equal([0, 1, 2, 3], add([1, 2, 3], [0], -1)));
+        checkEqual(true, equal([1, 0, 2, 3], add([1, 2, 3], [0], 0)));
+        checkEqual(true, equal([1, 2, 0, 3], add([1, 2, 3], [0], 1)));
+        checkEqual(true, equal([1, 2, 3, 0], add([1, 2, 3], [0], 2)));
+        checkEqual(true, equal([1, 2, 3, -1, 0], add([1, 2, 3], [-1, 0])));
+        checkEqual(true, equal([1, 2, -1, 0, 3], add([1, 2, 3], [-1, 0], 1))); // exception
 
         checkEqual(true, isThrownException(function () {
           add([1, 2, 3], [0], -2);
@@ -25307,19 +25308,19 @@ var test_execute_array = function test_execute_array(parts) {
           add([1, 2, 3], 0, 4);
         }, 'TypeError')); // Object Named Parameter
 
-        checkEqual([1, 2, 3, 0], add({
+        checkEqual(true, equal([1, 2, 3, 0], add({
           array: [1, 2, 3],
           valueArray: [0],
           index: 2
-        }));
+        })));
       });
     };
 
     var test_operation_deleteLength = function test_operation_deleteLength() {
       it('test_operation_deleteLength', function () {
-        checkEqual([1, 3], deleteLength([1, 2, 3], 1, 1));
-        checkEqual([3], deleteLength([1, 2, 3], 0, 2));
-        checkEqual([1], deleteLength([1, 2, 3], 1, 2)); // exception
+        checkEqual(true, equal([1, 3], deleteLength([1, 2, 3], 1, 1)));
+        checkEqual(true, equal([3], deleteLength([1, 2, 3], 0, 2)));
+        checkEqual(true, equal([1], deleteLength([1, 2, 3], 1, 2))); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteLength([1, 2, 3], [0], 1);
@@ -25343,19 +25344,19 @@ var test_execute_array = function test_execute_array(parts) {
           deleteLength([1, 2, 3], -1, 2);
         }, 'RangeError')); // Object Named Parameter
 
-        checkEqual([0, 3], deleteLength({
+        checkEqual(true, equal([0, 3], deleteLength({
           array: [0, 1, 2, 3],
           index: 1,
           length: 2
-        }));
+        })));
       });
     };
 
     var test_operation_deleteIndex = function test_operation_deleteIndex() {
       it('test_operation_deleteIndex', function () {
-        checkEqual([1, 3], deleteIndex([1, 2, 3], 1, 1));
-        checkEqual([3], deleteIndex([1, 2, 3], 0, 1));
-        checkEqual([1], deleteIndex([1, 2, 3], 1, 2)); // exception
+        checkEqual(true, equal([1, 3], deleteIndex([1, 2, 3], 1, 1)));
+        checkEqual(true, equal([3], deleteIndex([1, 2, 3], 0, 1)));
+        checkEqual(true, equal([1], deleteIndex([1, 2, 3], 1, 2))); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteIndex([1, 2, 3], [0], 1);
@@ -25379,36 +25380,36 @@ var test_execute_array = function test_execute_array(parts) {
           deleteIndex([1, 2, 3], -1);
         }, 'RangeError')); // Object Named Parameter
 
-        checkEqual([0, 2, 3], deleteIndex({
+        checkEqual(true, equal([0, 2, 3], deleteIndex({
           array: [0, 1, 2, 3],
           index: 1
-        }));
-        checkEqual([0, 2, 3], deleteIndex({
+        })));
+        checkEqual(true, equal([0, 2, 3], deleteIndex({
           array: [0, 1, 2, 3],
           indexFirst: 1
-        }));
-        checkEqual([0, 3], deleteIndex({
+        })));
+        checkEqual(true, equal([0, 3], deleteIndex({
           array: [0, 1, 2, 3],
           indexFirst: 1,
           indexLast: 2
-        }));
+        })));
       });
     };
 
     var test_operation_deleteFirst = function test_operation_deleteFirst() {
       it('test_operation_deleteFirst', function () {
         var array1 = [0, 1, 2];
-        checkEqual([0, 1, 2], deleteFirst(array1, 0));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true, equal([0, 1, 2], deleteFirst(array1, 0)));
+        checkEqual(true, equal([0, 1, 2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([1, 2], deleteFirst(array1, 1));
-        checkEqual([1, 2], array1);
+        checkEqual(true, equal([1, 2], deleteFirst(array1, 1)));
+        checkEqual(true, equal([1, 2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([2], deleteFirst(array1, 2));
-        checkEqual([2], array1);
+        checkEqual(true, equal([2], deleteFirst(array1, 2)));
+        checkEqual(true, equal([2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([], deleteFirst(array1, 3));
-        checkEqual([], array1); // exception
+        checkEqual(true, equal([], deleteFirst(array1, 3)));
+        checkEqual(true, equal([], array1)); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteFirst([1, 2, 3], [0]);
@@ -25432,27 +25433,27 @@ var test_execute_array = function test_execute_array(parts) {
           deleteFirst([1, 2, 3], -1);
         }, 'RangeError')); // Object Named Parameter
 
-        checkEqual([1, 2, 3], deleteFirst({
+        checkEqual(true, equal([1, 2, 3], deleteFirst({
           array: [0, 1, 2, 3],
           length: 1
-        }));
+        })));
       });
     };
 
     var test_operation_deleteLast = function test_operation_deleteLast() {
       it('test_operation_deleteLast', function () {
         var array1 = [0, 1, 2];
-        checkEqual([0, 1, 2], deleteLast(array1, 0));
-        checkEqual([0, 1, 2], array1);
+        checkEqual(true, equal([0, 1, 2], deleteLast(array1, 0)));
+        checkEqual(true, equal([0, 1, 2], array1));
         var array1 = [0, 1, 2];
-        checkEqual([0, 1], deleteLast(array1, 1));
-        checkEqual([0, 1], array1);
+        checkEqual(true, equal([0, 1], deleteLast(array1, 1)));
+        checkEqual(true, equal([0, 1], array1));
         var array1 = [0, 1, 2];
-        checkEqual([0], deleteLast(array1, 2));
-        checkEqual([0], array1);
+        checkEqual(true, equal([0], deleteLast(array1, 2)));
+        checkEqual(true, equal([0], array1));
         var array1 = [0, 1, 2];
-        checkEqual([], deleteLast(array1, 3));
-        checkEqual([], array1); // exception
+        checkEqual(true, equal([], deleteLast(array1, 3)));
+        checkEqual(true, equal([], array1)); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteLast([1, 2, 3], [0]);
@@ -25476,311 +25477,311 @@ var test_execute_array = function test_execute_array(parts) {
           deleteLast([1, 2, 3], -1);
         }, 'RangeError')); // Object Named Parameter
 
-        checkEqual([0, 1, 2], deleteLast({
+        checkEqual(true, equal([0, 1, 2], deleteLast({
           array: [0, 1, 2, 3],
           length: 1
-        }));
+        })));
       });
     };
 
     var test_operation_includeFirst = function test_operation_includeFirst() {
       it('test_operation_includeFirst', function () {
-        checkEqual([1, 2, 3], includeFirst([1, 2, 3], [1]));
-        checkEqual([2, 1, 2, 3], includeFirst([1, 2, 3], [2]));
-        checkEqual([1, 2, 3], includeFirst([1, 2, 3], [1, 2]));
-        checkEqual([2, 1, 1, 2, 3], includeFirst([1, 2, 3], [2, 1]));
-        checkEqual(['A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['A']));
-        checkEqual(['a', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['a']));
-        checkEqual(['B', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['B']));
-        checkEqual(['A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['A', 'B']));
-        checkEqual(['a', 'B', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['a', 'B']));
-        checkEqual(['B', 'A', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['B', 'A'])); // Object Named Parameter
+        checkEqual(true, equal([1, 2, 3], includeFirst([1, 2, 3], [1])));
+        checkEqual(true, equal([2, 1, 2, 3], includeFirst([1, 2, 3], [2])));
+        checkEqual(true, equal([1, 2, 3], includeFirst([1, 2, 3], [1, 2])));
+        checkEqual(true, equal([2, 1, 1, 2, 3], includeFirst([1, 2, 3], [2, 1])));
+        checkEqual(true, equal(['A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal(['a', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['a'])));
+        checkEqual(true, equal(['B', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['B'])));
+        checkEqual(true, equal(['A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['A', 'B'])));
+        checkEqual(true, equal(['a', 'B', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['a', 'B'])));
+        checkEqual(true, equal(['B', 'A', 'A', 'B', 'C'], includeFirst(['A', 'B', 'C'], ['B', 'A']))); // Object Named Parameter
 
-        checkEqual(['A', 'B', 'C'], includeFirst({
+        checkEqual(true, equal(['A', 'B', 'C'], includeFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['A']
-        }));
-        checkEqual(['a', 'A', 'B', 'C'], includeFirst({
+        })));
+        checkEqual(true, equal(['a', 'A', 'B', 'C'], includeFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['a']
-        }));
+        })));
       });
     };
 
     var test_operation_includeLast = function test_operation_includeLast() {
       it('test_operation_includeLast', function () {
-        checkEqual([1, 2, 3], includeLast([1, 2, 3], [3]));
-        checkEqual([1, 2, 3, 2], includeLast([1, 2, 3], [2]));
-        checkEqual([1, 2, 3], includeLast([1, 2, 3], [2, 3]));
-        checkEqual([1, 2, 3, 3, 2], includeLast([1, 2, 3], [3, 2]));
-        checkEqual(['A', 'B', 'C'], includeLast(['A', 'B', 'C'], ['C']));
-        checkEqual(['A', 'B', 'C', 'c'], includeLast(['A', 'B', 'C'], ['c']));
-        checkEqual(['A', 'B', 'C', 'B'], includeLast(['A', 'B', 'C'], ['B']));
-        checkEqual(['A', 'B', 'C'], includeLast(['A', 'B', 'C'], ['B', 'C']));
-        checkEqual(['A', 'B', 'C', 'B', 'c'], includeLast(['A', 'B', 'C'], ['B', 'c']));
-        checkEqual(['A', 'B', 'C', 'C', 'B'], includeLast(['A', 'B', 'C'], ['C', 'B'])); // Object Named Parameter
+        checkEqual(true, equal([1, 2, 3], includeLast([1, 2, 3], [3])));
+        checkEqual(true, equal([1, 2, 3, 2], includeLast([1, 2, 3], [2])));
+        checkEqual(true, equal([1, 2, 3], includeLast([1, 2, 3], [2, 3])));
+        checkEqual(true, equal([1, 2, 3, 3, 2], includeLast([1, 2, 3], [3, 2])));
+        checkEqual(true, equal(['A', 'B', 'C'], includeLast(['A', 'B', 'C'], ['C'])));
+        checkEqual(true, equal(['A', 'B', 'C', 'c'], includeLast(['A', 'B', 'C'], ['c'])));
+        checkEqual(true, equal(['A', 'B', 'C', 'B'], includeLast(['A', 'B', 'C'], ['B'])));
+        checkEqual(true, equal(['A', 'B', 'C'], includeLast(['A', 'B', 'C'], ['B', 'C'])));
+        checkEqual(true, equal(['A', 'B', 'C', 'B', 'c'], includeLast(['A', 'B', 'C'], ['B', 'c'])));
+        checkEqual(true, equal(['A', 'B', 'C', 'C', 'B'], includeLast(['A', 'B', 'C'], ['C', 'B']))); // Object Named Parameter
 
-        checkEqual(['A', 'B', 'C'], includeLast({
+        checkEqual(true, equal(['A', 'B', 'C'], includeLast({
           array: ['A', 'B', 'C'],
           valueArray: ['C']
-        }));
-        checkEqual(['A', 'B', 'C', 'c'], includeLast({
+        })));
+        checkEqual(true, equal(['A', 'B', 'C', 'c'], includeLast({
           array: ['A', 'B', 'C'],
           valueArray: ['c']
-        }));
+        })));
       });
     };
 
     var test_operation_includeBothEdges = function test_operation_includeBothEdges() {
       it('test_operation_includeBothEdges', function () {
-        checkEqual([1, 2, 1], includeBothEdges([1, 2, 1], [1]));
-        checkEqual([1, 1, 2, 3, 1], includeBothEdges([1, 2, 3], [1]));
-        checkEqual([1, 2, 1, 2], includeBothEdges([1, 2, 1, 2], [1, 2]));
-        checkEqual([1, 2, 1], includeBothEdges([1, 2, 1], [1, 2], [2, 1]));
-        checkEqual(['A', 'B', 'A'], includeBothEdges(['A', 'B', 'A'], ['A']));
-        checkEqual(['a', 'A', 'B', 'A', 'a'], includeBothEdges(['A', 'B', 'A'], ['a']));
-        checkEqual(['A', 'A', 'B', 'C', 'A'], includeBothEdges(['A', 'B', 'C'], ['A']));
-        checkEqual(['A', 'B', 'A', 'B'], includeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B']));
-        checkEqual(['{', '}'], includeBothEdges(['{', '}'], ['{'], ['}']));
-        checkEqual(['{', 'A', '}'], includeBothEdges(['{', 'A', '}'], ['{'], ['}']));
-        checkEqual(['{', 'A', '{', '}', '}'], includeBothEdges(['A', '{', '}'], ['{'], ['}']));
-        checkEqual(['A', 'A'], includeBothEdges(['A', 'A'], ['A']));
-        checkEqual(['A', 'A', 'A'], includeBothEdges(['A'], ['A']));
-        checkEqual(['A', '', 'A'], includeBothEdges([''], ['A']));
-        checkEqual(['A', 'A'], includeBothEdges([], ['A'])); // exception
+        checkEqual(true, equal([1, 2, 1], includeBothEdges([1, 2, 1], [1])));
+        checkEqual(true, equal([1, 1, 2, 3, 1], includeBothEdges([1, 2, 3], [1])));
+        checkEqual(true, equal([1, 2, 1, 2], includeBothEdges([1, 2, 1, 2], [1, 2])));
+        checkEqual(true, equal([1, 2, 1], includeBothEdges([1, 2, 1], [1, 2], [2, 1])));
+        checkEqual(true, equal(['A', 'B', 'A'], includeBothEdges(['A', 'B', 'A'], ['A'])));
+        checkEqual(true, equal(['a', 'A', 'B', 'A', 'a'], includeBothEdges(['A', 'B', 'A'], ['a'])));
+        checkEqual(true, equal(['A', 'A', 'B', 'C', 'A'], includeBothEdges(['A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal(['A', 'B', 'A', 'B'], includeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])));
+        checkEqual(true, equal(['{', '}'], includeBothEdges(['{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['{', 'A', '}'], includeBothEdges(['{', 'A', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['{', 'A', '{', '}', '}'], includeBothEdges(['A', '{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['A', 'A'], includeBothEdges(['A', 'A'], ['A'])));
+        checkEqual(true, equal(['A', 'A', 'A'], includeBothEdges(['A'], ['A'])));
+        checkEqual(true, equal(['A', '', 'A'], includeBothEdges([''], ['A'])));
+        checkEqual(true, equal(['A', 'A'], includeBothEdges([], ['A']))); // exception
 
         checkEqual(true, isThrownException(function () {
           includeBothEdges(0, 1);
         }, 'TypeError')); // Object Named Parameter
 
-        checkEqual(['A', 'B', 'A'], includeBothEdges({
+        checkEqual(true, equal(['A', 'B', 'A'], includeBothEdges({
           array: ['A', 'B', 'A'],
           valueArray: ['A']
-        }));
-        checkEqual(['a', 'A', 'B', 'A', 'a'], includeBothEdges({
+        })));
+        checkEqual(true, equal(['a', 'A', 'B', 'A', 'a'], includeBothEdges({
           array: ['A', 'B', 'A'],
           valueArray: ['a']
-        }));
-        checkEqual(['A', 'B', 'A'], includeBothEdges({
+        })));
+        checkEqual(true, equal(['A', 'B', 'A'], includeBothEdges({
           array: ['A', 'B', 'A'],
           valueFirstArray: ['A']
-        }));
-        checkEqual(['A', 'A', 'B', 'A', 'D', 'A'], includeBothEdges({
+        })));
+        checkEqual(true, equal(['A', 'A', 'B', 'A', 'D', 'A'], includeBothEdges({
           array: ['A', 'B', 'A', 'D'],
           valueFirstArray: ['A']
-        }));
-        checkEqual(['A', 'B', 'A', 'D'], includeBothEdges({
+        })));
+        checkEqual(true, equal(['A', 'B', 'A', 'D'], includeBothEdges({
           array: ['A', 'B', 'A', 'D'],
           valueFirstArray: ['A'],
           valueLastArray: ['D']
-        }));
+        })));
       });
     };
 
     var test_operation_excludeFirst = function test_operation_excludeFirst() {
       it('test_operation_excludeFirst', function () {
-        checkEqual([2, 3], excludeFirst([1, 2, 3], [1]));
-        checkEqual([1, 2, 3], excludeFirst([1, 2, 3], [2]));
-        checkEqual([3], excludeFirst([1, 2, 3], [1, 2]));
-        checkEqual([1, 2, 3], excludeFirst([1, 2, 3], [2, 1]));
-        checkEqual(['B', 'C'], excludeFirst(['A', 'B', 'C'], ['A']));
-        checkEqual(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['a']));
-        checkEqual(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['B']));
-        checkEqual(['C'], excludeFirst(['A', 'B', 'C'], ['A', 'B']));
-        checkEqual(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['a', 'B']));
-        checkEqual(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['B', 'A'])); // Object Named Parameter
+        checkEqual(true, equal([2, 3], excludeFirst([1, 2, 3], [1])));
+        checkEqual(true, equal([1, 2, 3], excludeFirst([1, 2, 3], [2])));
+        checkEqual(true, equal([3], excludeFirst([1, 2, 3], [1, 2])));
+        checkEqual(true, equal([1, 2, 3], excludeFirst([1, 2, 3], [2, 1])));
+        checkEqual(true, equal(['B', 'C'], excludeFirst(['A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['a'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['B'])));
+        checkEqual(true, equal(['C'], excludeFirst(['A', 'B', 'C'], ['A', 'B'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['a', 'B'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeFirst(['A', 'B', 'C'], ['B', 'A']))); // Object Named Parameter
 
-        checkEqual(['B', 'C'], excludeFirst({
+        checkEqual(true, equal(['B', 'C'], excludeFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['A']
-        }));
-        checkEqual(['A', 'B', 'C'], excludeFirst({
+        })));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['a']
-        }));
+        })));
       });
     };
 
     var test_operation_excludeLast = function test_operation_excludeLast() {
       it('test_operation_excludeLast', function () {
-        checkEqual([1, 2], excludeLast([1, 2, 3], [3]));
-        checkEqual([1, 2, 3], excludeLast([1, 2, 3], [2]));
-        checkEqual([1], excludeLast([1, 2, 3], [2, 3]));
-        checkEqual([1, 2, 3], excludeLast([1, 2, 3], [3, 2]));
-        checkEqual(['A', 'B'], excludeLast(['A', 'B', 'C'], ['C']));
-        checkEqual(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['c']));
-        checkEqual(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['B']));
-        checkEqual(['A'], excludeLast(['A', 'B', 'C'], ['B', 'C']));
-        checkEqual(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['B', 'c']));
-        checkEqual(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['C', 'B'])); // Object Named Parameter
+        checkEqual(true, equal([1, 2], excludeLast([1, 2, 3], [3])));
+        checkEqual(true, equal([1, 2, 3], excludeLast([1, 2, 3], [2])));
+        checkEqual(true, equal([1], excludeLast([1, 2, 3], [2, 3])));
+        checkEqual(true, equal([1, 2, 3], excludeLast([1, 2, 3], [3, 2])));
+        checkEqual(true, equal(['A', 'B'], excludeLast(['A', 'B', 'C'], ['C'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['c'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['B'])));
+        checkEqual(true, equal(['A'], excludeLast(['A', 'B', 'C'], ['B', 'C'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['B', 'c'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeLast(['A', 'B', 'C'], ['C', 'B']))); // Object Named Parameter
 
-        checkEqual(['A', 'B'], excludeLast({
+        checkEqual(true, equal(['A', 'B'], excludeLast({
           array: ['A', 'B', 'C'],
           valueArray: ['C']
-        }));
-        checkEqual(['A', 'B', 'C'], excludeLast({
+        })));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeLast({
           array: ['A', 'B', 'C'],
           valueArray: ['c']
-        }));
+        })));
       });
     };
 
     var test_operation_excludeBothEdges = function test_operation_excludeBothEdges() {
       it('test_operation_excludeBothEdges', function () {
-        checkEqual([2], excludeBothEdges([1, 2, 1], [1]));
-        checkEqual([1, 2, 3], excludeBothEdges([1, 2, 3], [1]));
-        checkEqual([], excludeBothEdges([1, 2, 1, 2], [1, 2]));
-        checkEqual([], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [5]));
-        checkEqual([1, 2, 3, 4, 5], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [3, 5]));
-        checkEqual([], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [3, 4, 5]));
-        checkEqual([], excludeBothEdges([1, 2, 1], [1, 2], [2, 1]));
-        checkEqual(['B'], excludeBothEdges(['A', 'B', 'A'], ['A']));
-        checkEqual(['A', 'B', 'A'], excludeBothEdges(['A', 'B', 'A'], ['a']));
-        checkEqual(['A', 'B', 'C'], excludeBothEdges(['A', 'B', 'C'], ['A']));
-        checkEqual([], excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B']));
-        checkEqual([], excludeBothEdges(['A', 'B', 'A'], ['A', 'B'], ['B', 'A']));
-        checkEqual([], excludeBothEdges(['{', '}'], ['{'], ['}']));
-        checkEqual(['A'], excludeBothEdges(['{', 'A', '}'], ['{'], ['}']));
-        checkEqual(['A', '{', '}'], excludeBothEdges(['A', '{', '}'], ['{'], ['}']));
-        checkEqual([], excludeBothEdges(['A', 'A'], ['A']));
-        checkEqual(['A'], excludeBothEdges(['A'], ['A']));
-        checkEqual([''], excludeBothEdges([''], ['A']));
-        checkEqual([], excludeBothEdges([], ['A'])); // exception
+        checkEqual(true, equal([2], excludeBothEdges([1, 2, 1], [1])));
+        checkEqual(true, equal([1, 2, 3], excludeBothEdges([1, 2, 3], [1])));
+        checkEqual(true, equal([], excludeBothEdges([1, 2, 1, 2], [1, 2])));
+        checkEqual(true, equal([], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [5])));
+        checkEqual(true, equal([1, 2, 3, 4, 5], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [3, 5])));
+        checkEqual(true, equal([], excludeBothEdges([1, 2, 3, 4, 5], [1, 2, 3, 4], [3, 4, 5])));
+        checkEqual(true, equal([], excludeBothEdges([1, 2, 1], [1, 2], [2, 1])));
+        checkEqual(true, equal(['B'], excludeBothEdges(['A', 'B', 'A'], ['A'])));
+        checkEqual(true, equal(['A', 'B', 'A'], excludeBothEdges(['A', 'B', 'A'], ['a'])));
+        checkEqual(true, equal(['A', 'B', 'C'], excludeBothEdges(['A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal([], excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])));
+        checkEqual(true, equal([], excludeBothEdges(['A', 'B', 'A'], ['A', 'B'], ['B', 'A'])));
+        checkEqual(true, equal([], excludeBothEdges(['{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['A'], excludeBothEdges(['{', 'A', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['A', '{', '}'], excludeBothEdges(['A', '{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal([], excludeBothEdges(['A', 'A'], ['A'])));
+        checkEqual(true, equal(['A'], excludeBothEdges(['A'], ['A'])));
+        checkEqual(true, equal([''], excludeBothEdges([''], ['A'])));
+        checkEqual(true, equal([], excludeBothEdges([], ['A']))); // exception
 
         checkEqual(true, isThrownException(function () {
           excludeBothEdges(0, 1);
         }, 'TypeError')); // Object Named Parameter
 
-        checkEqual(['B'], excludeBothEdges({
+        checkEqual(true, equal(['B'], excludeBothEdges({
           array: ['A', 'B', 'A'],
           valueArray: ['A']
-        }));
-        checkEqual(['A', 'B', 'A'], excludeBothEdges({
+        })));
+        checkEqual(true, equal(['A', 'B', 'A'], excludeBothEdges({
           array: ['A', 'B', 'A'],
           valueArray: ['a']
-        }));
-        checkEqual(['B'], excludeBothEdges({
+        })));
+        checkEqual(true, equal(['B'], excludeBothEdges({
           array: ['A', 'B', 'A'],
           valueFirstArray: ['A']
-        }));
-        checkEqual(['A', 'B', 'A', 'D'], excludeBothEdges({
+        })));
+        checkEqual(true, equal(['A', 'B', 'A', 'D'], excludeBothEdges({
           array: ['A', 'B', 'A', 'D'],
           valueFirstArray: ['A']
-        }));
-        checkEqual(['B', 'A'], excludeBothEdges({
+        })));
+        checkEqual(true, equal(['B', 'A'], excludeBothEdges({
           array: ['A', 'B', 'A', 'D'],
           valueFirstArray: ['A'],
           valueLastArray: ['D']
-        }));
+        })));
       });
     };
 
     var test_operation_trimFirst = function test_operation_trimFirst() {
       it('test_operation_trimFirst', function () {
-        checkEqual([2, 3], trimFirst([1, 2, 3], [1]));
-        checkEqual([2, 3], trimFirst([1, 1, 1, 2, 3], [1]));
-        checkEqual([], trimFirst([1, 1, 1, 1, 1], [1]));
-        checkEqual([1, 2, 3], trimFirst([1, 2, 3], [2]));
-        checkEqual([2, 1, 2, 3], trimFirst([1, 2, 1, 2, 3], [1]));
-        checkEqual([3], trimFirst([1, 2, 1, 2, 3], [1, 2]));
-        checkEqual([3], trimFirst([1, 2, 1, 2, 3], [2, 1]));
-        checkEqual(['B', 'C'], trimFirst(['A', 'B', 'C'], ['A']));
-        checkEqual(['A', 'B', 'C'], trimFirst(['A', 'B', 'C'], ['a']));
-        checkEqual(['A', 'B', 'C'], trimFirst(['A', 'B', 'C'], ['B']));
-        checkEqual(['B', 'A', 'B', 'C'], trimFirst(['A', 'B', 'A', 'B', 'C'], ['A']));
-        checkEqual(['C'], trimFirst(['A', 'B', 'A', 'B', 'C'], ['A', 'B']));
-        checkEqual(['C'], trimFirst(['A', 'B', 'A', 'B', 'C'], ['B', 'A'])); // Object Named Parameter
+        checkEqual(true, equal([2, 3], trimFirst([1, 2, 3], [1])));
+        checkEqual(true, equal([2, 3], trimFirst([1, 1, 1, 2, 3], [1])));
+        checkEqual(true, equal([], trimFirst([1, 1, 1, 1, 1], [1])));
+        checkEqual(true, equal([1, 2, 3], trimFirst([1, 2, 3], [2])));
+        checkEqual(true, equal([2, 1, 2, 3], trimFirst([1, 2, 1, 2, 3], [1])));
+        checkEqual(true, equal([3], trimFirst([1, 2, 1, 2, 3], [1, 2])));
+        checkEqual(true, equal([3], trimFirst([1, 2, 1, 2, 3], [2, 1])));
+        checkEqual(true, equal(['B', 'C'], trimFirst(['A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal(['A', 'B', 'C'], trimFirst(['A', 'B', 'C'], ['a'])));
+        checkEqual(true, equal(['A', 'B', 'C'], trimFirst(['A', 'B', 'C'], ['B'])));
+        checkEqual(true, equal(['B', 'A', 'B', 'C'], trimFirst(['A', 'B', 'A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal(['C'], trimFirst(['A', 'B', 'A', 'B', 'C'], ['A', 'B'])));
+        checkEqual(true, equal(['C'], trimFirst(['A', 'B', 'A', 'B', 'C'], ['B', 'A']))); // Object Named Parameter
 
-        checkEqual(['B', 'C'], trimFirst({
+        checkEqual(true, equal(['B', 'C'], trimFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['A']
-        }));
-        checkEqual(['A', 'B', 'C'], trimFirst({
+        })));
+        checkEqual(true, equal(['A', 'B', 'C'], trimFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['a']
-        }));
+        })));
       });
     };
 
     var test_operation_trimLast = function test_operation_trimLast() {
       it('test_operation_trimLast', function () {
-        checkEqual([1, 2], trimLast([1, 2, 3], [3]));
-        checkEqual([1, 2], trimLast([1, 2, 3, 3, 3], [3]));
-        checkEqual([], trimLast([3, 3, 3, 3, 3], [3]));
-        checkEqual([1, 2, 3], trimLast([1, 2, 3], [2]));
-        checkEqual([1, 2, 3, 2], trimLast([1, 2, 3, 2, 3], [3]));
-        checkEqual([1], trimLast([1, 2, 3, 2, 3], [2, 3]));
-        checkEqual([1], trimLast([1, 2, 3, 2, 3], [3, 2]));
-        checkEqual(['A', 'B'], trimLast(['A', 'B', 'C'], ['C']));
-        checkEqual(['A', 'B', 'C'], trimLast(['A', 'B', 'C'], ['c']));
-        checkEqual(['A', 'B', 'C'], trimLast(['A', 'B', 'C'], ['B']));
-        checkEqual(['A', 'B', 'C', 'B'], trimLast(['A', 'B', 'C', 'B', 'C'], ['C']));
-        checkEqual(['A'], trimLast(['A', 'B', 'C', 'B', 'C'], ['B', 'C']));
-        checkEqual(['A'], trimLast(['A', 'B', 'C', 'B', 'C'], ['C', 'B'])); // Object Named Parameter
+        checkEqual(true, equal([1, 2], trimLast([1, 2, 3], [3])));
+        checkEqual(true, equal([1, 2], trimLast([1, 2, 3, 3, 3], [3])));
+        checkEqual(true, equal([], trimLast([3, 3, 3, 3, 3], [3])));
+        checkEqual(true, equal([1, 2, 3], trimLast([1, 2, 3], [2])));
+        checkEqual(true, equal([1, 2, 3, 2], trimLast([1, 2, 3, 2, 3], [3])));
+        checkEqual(true, equal([1], trimLast([1, 2, 3, 2, 3], [2, 3])));
+        checkEqual(true, equal([1], trimLast([1, 2, 3, 2, 3], [3, 2])));
+        checkEqual(true, equal(['A', 'B'], trimLast(['A', 'B', 'C'], ['C'])));
+        checkEqual(true, equal(['A', 'B', 'C'], trimLast(['A', 'B', 'C'], ['c'])));
+        checkEqual(true, equal(['A', 'B', 'C'], trimLast(['A', 'B', 'C'], ['B'])));
+        checkEqual(true, equal(['A', 'B', 'C', 'B'], trimLast(['A', 'B', 'C', 'B', 'C'], ['C'])));
+        checkEqual(true, equal(['A'], trimLast(['A', 'B', 'C', 'B', 'C'], ['B', 'C'])));
+        checkEqual(true, equal(['A'], trimLast(['A', 'B', 'C', 'B', 'C'], ['C', 'B']))); // Object Named Parameter
 
-        checkEqual(['A', 'B'], trimLast({
+        checkEqual(true, equal(['A', 'B'], trimLast({
           array: ['A', 'B', 'C'],
           valueArray: ['C']
-        }));
-        checkEqual(['A', 'B', 'C'], trimLast({
+        })));
+        checkEqual(true, equal(['A', 'B', 'C'], trimLast({
           array: ['A', 'B', 'C'],
           valueArray: ['c']
-        }));
+        })));
       });
     };
 
     var test_operation_trimBothEdges = function test_operation_trimBothEdges() {
       it('test_operation_trimBothEdges', function () {
-        checkEqual([2], trimBothEdges([1, 2, 1], [1]));
-        checkEqual([2], trimBothEdges([1, 1, 2, 1, 1, 1], [1]));
-        checkEqual([], trimBothEdges([1, 1, 1], [1]));
-        checkEqual([2, 3], trimBothEdges([1, 2, 3], [1]));
-        checkEqual([2, 3, 1, 2], trimBothEdges([1, 2, 3, 1, 2], [1]));
-        checkEqual([1, 2, 3, 1], trimBothEdges([1, 2, 3, 1, 2], [2]));
-        checkEqual([3], trimBothEdges([1, 2, 3, 1, 2], [1, 2]));
-        checkEqual([3], trimBothEdges([1, 2, 3, 1, 2], [2, 1]));
-        checkEqual(['B'], trimBothEdges(['A', 'B', 'A'], ['A']));
-        checkEqual(['A', 'B', 'A'], trimBothEdges(['A', 'B', 'A'], ['a']));
-        checkEqual(['B', 'C'], trimBothEdges(['A', 'B', 'C'], ['A']));
-        checkEqual(['B', 'C', 'A', 'B'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A']));
-        checkEqual(['A', 'B', 'C', 'A'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B']));
-        checkEqual(['C'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A', 'B']));
-        checkEqual(['C'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B', 'A']));
-        checkEqual([], trimBothEdges(['{', '}'], ['{'], ['}']));
-        checkEqual([], trimBothEdges(['{', '{', '{', '}', '}', '}'], ['{'], ['}']));
-        checkEqual([], trimBothEdges(['{', '{', '{', '}'], ['{'], ['}']));
-        checkEqual(['A'], trimBothEdges(['{', 'A', '}'], ['{'], ['}']));
-        checkEqual(['A', '{'], trimBothEdges(['A', '{', '}'], ['{'], ['}']));
-        checkEqual([], trimBothEdges(['A', 'A'], ['A']));
-        checkEqual([], trimBothEdges(['A'], ['A']));
-        checkEqual([''], trimBothEdges([''], ['A']));
-        checkEqual([], trimBothEdges([], ['A'])); // exception
+        checkEqual(true, equal([2], trimBothEdges([1, 2, 1], [1])));
+        checkEqual(true, equal([2], trimBothEdges([1, 1, 2, 1, 1, 1], [1])));
+        checkEqual(true, equal([], trimBothEdges([1, 1, 1], [1])));
+        checkEqual(true, equal([2, 3], trimBothEdges([1, 2, 3], [1])));
+        checkEqual(true, equal([2, 3, 1, 2], trimBothEdges([1, 2, 3, 1, 2], [1])));
+        checkEqual(true, equal([1, 2, 3, 1], trimBothEdges([1, 2, 3, 1, 2], [2])));
+        checkEqual(true, equal([3], trimBothEdges([1, 2, 3, 1, 2], [1, 2])));
+        checkEqual(true, equal([3], trimBothEdges([1, 2, 3, 1, 2], [2, 1])));
+        checkEqual(true, equal(['B'], trimBothEdges(['A', 'B', 'A'], ['A'])));
+        checkEqual(true, equal(['A', 'B', 'A'], trimBothEdges(['A', 'B', 'A'], ['a'])));
+        checkEqual(true, equal(['B', 'C'], trimBothEdges(['A', 'B', 'C'], ['A'])));
+        checkEqual(true, equal(['B', 'C', 'A', 'B'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A'])));
+        checkEqual(true, equal(['A', 'B', 'C', 'A'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B'])));
+        checkEqual(true, equal(['C'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A', 'B'])));
+        checkEqual(true, equal(['C'], trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B', 'A'])));
+        checkEqual(true, equal([], trimBothEdges(['{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal([], trimBothEdges(['{', '{', '{', '}', '}', '}'], ['{'], ['}'])));
+        checkEqual(true, equal([], trimBothEdges(['{', '{', '{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['A'], trimBothEdges(['{', 'A', '}'], ['{'], ['}'])));
+        checkEqual(true, equal(['A', '{'], trimBothEdges(['A', '{', '}'], ['{'], ['}'])));
+        checkEqual(true, equal([], trimBothEdges(['A', 'A'], ['A'])));
+        checkEqual(true, equal([], trimBothEdges(['A'], ['A'])));
+        checkEqual(true, equal([''], trimBothEdges([''], ['A'])));
+        checkEqual(true, equal([], trimBothEdges([], ['A']))); // exception
 
         checkEqual(true, isThrownException(function () {
           trimBothEdges(0, 1);
         }, 'TypeError')); // Object Named Parameter
 
-        checkEqual(['B'], trimBothEdges({
+        checkEqual(true, equal(['B'], trimBothEdges({
           array: ['A', 'B', 'A'],
           valueArray: ['A']
-        }));
-        checkEqual(['A', 'B', 'A'], trimBothEdges({
+        })));
+        checkEqual(true, equal(['A', 'B', 'A'], trimBothEdges({
           array: ['A', 'B', 'A'],
           valueArray: ['a']
-        }));
-        checkEqual(['B'], trimBothEdges({
+        })));
+        checkEqual(true, equal(['B'], trimBothEdges({
           array: ['A', 'B', 'A'],
           valueFirstArray: ['A']
-        }));
-        checkEqual(['B', 'A', 'D'], trimBothEdges({
+        })));
+        checkEqual(true, equal(['B', 'A', 'D'], trimBothEdges({
           array: ['A', 'B', 'A', 'D'],
           valueFirstArray: ['A']
-        }));
-        checkEqual(['B', 'A'], trimBothEdges({
+        })));
+        checkEqual(true, equal(['B', 'A'], trimBothEdges({
           array: ['A', 'B', 'A', 'D'],
           valueFirstArray: ['A'],
           valueLastArray: ['D']
-        }));
+        })));
       });
     };
 
@@ -25788,10 +25789,10 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_popFirst', function () {
         var array1 = [1, 2, 3];
         checkEqual(1, popFirst(array1));
-        checkEqual([2, 3], array1);
+        checkEqual(true, equal([2, 3], array1));
         var array1 = ['A', 'B', 'C'];
         checkEqual('A', popFirst(array1));
-        checkEqual(['B', 'C'], array1);
+        checkEqual(true, equal(['B', 'C'], array1));
       });
     };
 
@@ -25799,10 +25800,10 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_popLast', function () {
         var array1 = [1, 2, 3];
         checkEqual(3, popLast(array1));
-        checkEqual([1, 2], array1);
+        checkEqual(true, equal([1, 2], array1));
         var array1 = ['A', 'B', 'C'];
         checkEqual('C', popLast(array1));
-        checkEqual(['A', 'B'], array1);
+        checkEqual(true, equal(['A', 'B'], array1));
       });
     };
 
@@ -25810,14 +25811,14 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_pushFirst', function () {
         var array1 = [1, 2, 3];
         checkEqual(4, pushFirst(array1, 0));
-        checkEqual([0, 1, 2, 3], array1);
+        checkEqual(true, equal([0, 1, 2, 3], array1));
         checkEqual(5, pushFirst(array1, 0));
-        checkEqual([0, 0, 1, 2, 3], array1);
+        checkEqual(true, equal([0, 0, 1, 2, 3], array1));
         var array1 = ['A', 'B', 'C'];
         checkEqual(4, pushFirst(array1, 'D'));
-        checkEqual(['D', 'A', 'B', 'C'], array1);
+        checkEqual(true, equal(['D', 'A', 'B', 'C'], array1));
         checkEqual(5, pushFirst(array1, 'D'));
-        checkEqual(['D', 'D', 'A', 'B', 'C'], array1);
+        checkEqual(true, equal(['D', 'D', 'A', 'B', 'C'], array1));
       });
     };
 
@@ -25825,81 +25826,81 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_pushLast', function () {
         var array1 = [1, 2, 3];
         checkEqual(4, pushLast(array1, 4));
-        checkEqual([1, 2, 3, 4], array1);
+        checkEqual(true, equal([1, 2, 3, 4], array1));
         checkEqual(5, pushLast(array1, 4));
-        checkEqual([1, 2, 3, 4, 4], array1);
+        checkEqual(true, equal([1, 2, 3, 4, 4], array1));
         var array1 = ['A', 'B', 'C'];
         checkEqual(4, pushLast(array1, 'D'));
-        checkEqual(['A', 'B', 'C', 'D'], array1);
+        checkEqual(true, equal(['A', 'B', 'C', 'D'], array1));
         checkEqual(5, pushLast(array1, 'D'));
-        checkEqual(['A', 'B', 'C', 'D', 'D'], array1);
+        checkEqual(true, equal(['A', 'B', 'C', 'D', 'D'], array1));
       });
     };
 
     var test_operation_remainFirst = function test_operation_remainFirst() {
       it('test_operation_remainFirst', function () {
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainFirst(array1, 4));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true, equal([1, 2, 3], remainFirst(array1, 4)));
+        checkEqual(true, equal([1, 2, 3], array1));
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainFirst(array1, 3));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true, equal([1, 2, 3], remainFirst(array1, 3)));
+        checkEqual(true, equal([1, 2, 3], array1));
         var array1 = [1, 2, 3];
-        checkEqual([1, 2], remainFirst(array1, 2));
-        checkEqual([1, 2], array1);
+        checkEqual(true, equal([1, 2], remainFirst(array1, 2)));
+        checkEqual(true, equal([1, 2], array1));
         var array1 = [1, 2, 3];
-        checkEqual([1], remainFirst(array1, 1));
-        checkEqual([1], array1);
+        checkEqual(true, equal([1], remainFirst(array1, 1)));
+        checkEqual(true, equal([1], array1));
         var array1 = [1, 2, 3];
-        checkEqual([], remainFirst(array1, 0));
-        checkEqual([], array1); // Object Named Parameter
+        checkEqual(true, equal([], remainFirst(array1, 0)));
+        checkEqual(true, equal([], array1)); // Object Named Parameter
 
-        checkEqual(['A', 'B'], remainFirst({
+        checkEqual(true, equal(['A', 'B'], remainFirst({
           array: ['A', 'B', 'A'],
           length: 2
-        }));
+        })));
       });
     };
 
     var test_operation_remainLast = function test_operation_remainLast() {
       it('test_operation_remainLast', function () {
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainLast(array1, 4));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true, equal([1, 2, 3], remainLast(array1, 4)));
+        checkEqual(true, equal([1, 2, 3], array1));
         var array1 = [1, 2, 3];
-        checkEqual([1, 2, 3], remainLast(array1, 3));
-        checkEqual([1, 2, 3], array1);
+        checkEqual(true, equal([1, 2, 3], remainLast(array1, 3)));
+        checkEqual(true, equal([1, 2, 3], array1));
         var array1 = [1, 2, 3];
-        checkEqual([2, 3], remainLast(array1, 2));
-        checkEqual([2, 3], array1);
+        checkEqual(true, equal([2, 3], remainLast(array1, 2)));
+        checkEqual(true, equal([2, 3], array1));
         var array1 = [1, 2, 3];
-        checkEqual([3], remainLast(array1, 1));
-        checkEqual([3], array1);
+        checkEqual(true, equal([3], remainLast(array1, 1)));
+        checkEqual(true, equal([3], array1));
         var array1 = [1, 2, 3];
-        checkEqual([], remainLast(array1, 0));
-        checkEqual([], array1); // Object Named Parameter
+        checkEqual(true, equal([], remainLast(array1, 0)));
+        checkEqual(true, equal([], array1)); // Object Named Parameter
 
-        checkEqual(['B', 'A'], remainLast({
+        checkEqual(true, equal(['B', 'A'], remainLast({
           array: ['A', 'B', 'A'],
           length: 2
-        }));
+        })));
       });
     };
 
     var test_operation_filter = function test_operation_filter() {
       it('test_operation_filter', function () {
-        checkEqual([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual(true, equal([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
-        }));
-        checkEqual([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], isEven));
-        checkEqual([1, 3, 5], array.operation.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
+        })));
+        checkEqual(true, equal([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], isEven)));
+        checkEqual(true, equal([1, 3, 5], array.operation.filter([0, 1, 2, 3, 4, 5], isOdd))); // Object Named Parameter
 
-        checkEqual([2, 4], array.operation.filter({
+        checkEqual(true, equal([2, 4], array.operation.filter({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
           }
-        }));
+        })));
       });
     };
 
@@ -25917,8 +25918,8 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sortNumber = function test_operation_sortNumber() {
       it('test_operation_sortNumber', function () {
-        checkEqual([0, 1, 2, 3, 4, 5], array.operation.sortNumberAscending([3, 4, 1, 2, 5, 0]));
-        checkEqual([5, 4, 3, 2, 1, 0], array.operation.sortNumberDescending([3, 4, 1, 2, 5, 0])); // exception
+        checkEqual(true, equal([0, 1, 2, 3, 4, 5], array.operation.sortNumberAscending([3, 4, 1, 2, 5, 0])));
+        checkEqual(true, equal([5, 4, 3, 2, 1, 0], array.operation.sortNumberDescending([3, 4, 1, 2, 5, 0]))); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.sortNumberAscending(1);
@@ -25934,8 +25935,8 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sortLength = function test_operation_sortLength() {
       it('test_operation_sortLength', function () {
-        checkEqual(['a', 'aa', 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', 'aa']));
-        checkEqual(['aaa', 'aa', 'a'], array.operation.sortLengthDescending(['aaa', 'a', 'aa']));
+        checkEqual(true, equal(['a', 'aa', 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', 'aa'])));
+        checkEqual(true, equal(['aaa', 'aa', 'a'], array.operation.sortLengthDescending(['aaa', 'a', 'aa'])));
         checkCompare(parts.compare.equalDeep, ['a', [0, 1], 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])); // exception
 
         checkEqual(true, isThrownException(function () {
@@ -25958,10 +25959,10 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sortDictionary = function test_operation_sortDictionary() {
       it('test_operation_sortDictionary', function () {
-        checkEqual(['A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sortDictionaryAscending(['a', 'A', 'Aa', 'aa', 'aA', 'AA']));
-        checkEqual(['aa', 'aA', 'a', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA']));
-        checkEqual(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'], array.operation.sortDictionaryAscending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']));
-        checkEqual(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab'])); // exception
+        checkEqual(true, equal(['A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sortDictionaryAscending(['a', 'A', 'Aa', 'aa', 'aA', 'AA'])));
+        checkEqual(true, equal(['aa', 'aA', 'a', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA'])));
+        checkEqual(true, equal(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'], array.operation.sortDictionaryAscending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab'])));
+        checkEqual(true, equal(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']))); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.sortDictionaryAscending(1);
