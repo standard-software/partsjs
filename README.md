@@ -237,6 +237,7 @@ You can now use the functions of the parts.js object.
 #### 2020/05/05(Tue)
 - delete Polyfill string.includes
 - delete Polyfill array.includes
+- move matchFormat from string_common.js to matchFormat.js
 
 ### 5.0.0
 #### 2020/05/04(Mon)
