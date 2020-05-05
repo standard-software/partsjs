@@ -1,5 +1,11 @@
 "use strict";
 
+var _require = require('../compare/includes.js'),
+    _includes = _require._includes;
+
+var _require2 = require('../compare/includes_common.js'),
+    _includesSome = _require2._includesSome;
+
 var isWebBrowser = function isWebBrowser() {
   return typeof window !== 'undefined';
 };
@@ -31,7 +37,7 @@ var name = function name() {
 
   ;
 
-  if (['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'].includes(result) === false) {
+  if (_includes(['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Node.js'], result) === false) {
     throw new Error('platform name error');
   }
 
@@ -44,24 +50,24 @@ var browserName = function browserName() {
   if (isWebBrowser()) {
     var ua = window.navigator.userAgent.toLowerCase();
 
-    if (ua.includes('msie') || ua.includes('trident')) {
+    if (_includesSome(ua, ['msie', 'trident'])) {
       result = 'InternetExplorer';
-    } else if (ua.includes('edge')) {
+    } else if (_includes(ua, 'edge')) {
       result = 'Edge';
-    } else if (ua.includes('opr')) {
+    } else if (_includes(ua, 'opr')) {
       result = 'Opera';
-    } else if (ua.includes('chrome')) {
+    } else if (_includes(ua, 'chrome')) {
       result = 'Chrome';
-    } else if (ua.includes('safari')) {
+    } else if (_includes(ua, 'safari')) {
       result = 'Safari';
-    } else if (ua.includes('firefox')) {
+    } else if (_includes(ua, 'firefox')) {
       result = 'Firefox';
     } else {
       result = 'other';
     }
   }
 
-  if (['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''].includes(result) === false) {
+  if (_includes(['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''], result) === false) {
     throw new Error('platform browserName error');
   }
 

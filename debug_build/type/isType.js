@@ -74,7 +74,7 @@ var isObjectType = function isObjectType(value) {
     return false;
   }
 
-  return ['function', 'object'].includes(_typeof(value));
+  return ['function', 'object'].indexOf(_typeof(value)) !== -1;
 };
 
 var isEmptyObject = function isEmptyObject(value) {
@@ -89,7 +89,7 @@ var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Arr
 
 
 var isArrayType = function isArrayType(value) {
-  if (objectToString(value).includes('Array]')) {
+  if (objectToString(value).indexOf('Array]') !== -1) {
     return true;
   }
 

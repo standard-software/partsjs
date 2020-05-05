@@ -227,7 +227,7 @@ var _unique = function _unique(array) {
     var result = [];
 
     for (var i = 0, l = array.length; i < l; i += 1) {
-      if (!result.includes(array[i])) {
+      if (result.indexOf(array[i]) === -1) {
         result.push(array[i]);
       }
     }
