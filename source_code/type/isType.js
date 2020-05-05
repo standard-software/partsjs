@@ -73,7 +73,7 @@ const isObjectType = (value) => {
   if (isNull(value)) {
     return false;
   }
-  return ['function', 'object'].includes(typeof value);
+  return ['function', 'object'].indexOf(typeof value) !== -1;
 };
 
 const isEmptyObject = value => {

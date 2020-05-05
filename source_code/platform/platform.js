@@ -35,12 +35,12 @@ const name = () => {
     result = 'Node.js';
   };
 
-  if ([
+  if (_includes([
     'WindowsScriptHost',
     'WebBrowser',
     'GoogleAppsScript',
     'Node.js',
-  ].includes(result) === false) {
+  ], result) === false) {
     throw new Error('platform name error');
   }
   return result;
@@ -68,7 +68,7 @@ const browserName = () => {
     }
   }
 
-  if ([
+  if (_includes([
     'Chrome',
     'Firefox',
     'Edge',
@@ -77,7 +77,7 @@ const browserName = () => {
     'Opera',
     'other',
     '',
-  ].includes(result) === false) {
+  ], result) === false) {
     throw new Error('platform browserName error');
   }
   return result;

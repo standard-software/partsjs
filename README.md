@@ -233,6 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.1.0
+#### 2020/05/05(Tue)
+- delete Polyfill string.includes
+- delete Polyfill array.includes
+
 ### 5.0.0
 #### 2020/05/04(Mon)
 - Uninstall @babel/polyfill
