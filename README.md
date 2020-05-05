@@ -238,6 +238,9 @@ You can now use the functions of the parts.js object.
 - delete Polyfill string.includes
 - delete Polyfill array.includes
 - move matchFormat from string_common.js to matchFormat.js
+- args name change value >> str
+  - repeat
+  - isLowerCase/isUpperCase
 
 ### 5.0.0
 #### 2020/05/04(Mon)

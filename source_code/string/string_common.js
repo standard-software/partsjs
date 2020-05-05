@@ -13,27 +13,27 @@ const {
  * repeat
  */
 const _repeat = (
-  value,
+  str,
   count,
 ) => {
   let result = '';
   for (let i = 0; i < count; i += 1) {
-    result += value;
+    result += str;
   }
   return result;
 };
 
 const repeat = (
-  value,
+  str,
   count,
 ) => {
-  if (isObjectParameter(value, 'value, count')) {
-    ({ value, count } = value);
+  if (isObjectParameter(str, 'str, count')) {
+    ({ str, count } = str);
   }
 
-  if (!isString(value)) {
+  if (!isString(str)) {
     throw new TypeError(
-      'repeat args(value) is not string',
+      'repeat args(str) is not string',
     );
   }
   if (!isInteger(count)) {
@@ -42,49 +42,49 @@ const repeat = (
     );
   }
 
-  return _repeat(value, count);
+  return _repeat(str, count);
 };
 
 /**
  * isLowerCase
  */
 const _isLowerCase = (
-  value,
+  str,
 ) => {
-  return value.toLowerCase() === value;
+  return str.toLowerCase() === str;
 };
 
 const isLowerCase = (
-  value,
+  str,
 ) => {
-  if (!isString(value)) {
+  if (!isString(str)) {
     throw new TypeError(
-      'isLowerCase args(value) is not string',
+      'isLowerCase args(str) is not string',
     );
   }
 
-  return _isLowerCase(value);
+  return _isLowerCase(str);
 };
 
 /**
  * isUpperCase
  */
 const _isUpperCase = (
-  value,
+  str,
 ) => {
-  return value.toUpperCase() === value;
+  return str.toUpperCase() === str;
 };
 
 const isUpperCase = (
-  value,
+  str,
 ) => {
-  if (!isString(value)) {
+  if (!isString(str)) {
     throw new TypeError(
-      'isUpperCase args(value) is not string',
+      'isUpperCase args(str) is not string',
     );
   }
 
-  return _isUpperCase(value);
+  return _isUpperCase(str);
 };
 
 module.exports = {
