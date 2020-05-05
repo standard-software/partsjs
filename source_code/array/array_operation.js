@@ -164,7 +164,7 @@ const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
   }
   if (!isInteger(indexLast)) {
     throw new TypeError(
-      `deleteIndex args(indexLast) is not integer`,
+      'deleteIndex args(indexLast) is not integer',
     );
   }
   if (!_inRange(indexFirst, 0, array.length - 1)) {
@@ -675,7 +675,7 @@ const remainFirst = (array, length) => {
   }
   if (!isInteger(length)) {
     throw new TypeError(
-      `remainFirst args(length) is not integer`,
+      'remainFirst args(length) is not integer',
     );
   }
   if (!(0 <= length)) {
@@ -709,7 +709,7 @@ const remainLast = (array, length) => {
   }
   if (!isInteger(length)) {
     throw new TypeError(
-      `remainLast args(length) is not integer`,
+      'remainLast args(length) is not integer',
     );
   }
   if (!(0 <= length)) {

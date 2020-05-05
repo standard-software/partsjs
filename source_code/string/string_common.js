@@ -35,7 +35,7 @@ const _matchFormat = (
   if (!isBoolean(result)) {
     throw new RangeError(
       `_matchFormat args(formatName:${formatName})` +
-      ` function result is not boolean`,
+      ' function result is not boolean',
     );
   }
   return result;
