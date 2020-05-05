@@ -1,3 +1,11 @@
+const {
+  _includes,
+} = require('../compare/includes.js');
+
+const {
+  _includesSome,
+} = require('../compare/includes_common.js');
+
 const isWebBrowser = () => {
   return typeof window !== 'undefined';
 };
@@ -43,17 +51,17 @@ const browserName = () => {
 
   if (isWebBrowser()) {
     const ua = window.navigator.userAgent.toLowerCase();
-    if (ua.includes('msie') || ua.includes('trident')) {
+    if (_includesSome(ua, ['msie', 'trident'])) {
       result = 'InternetExplorer';
-    } else if (ua.includes('edge')) {
+    } else if (_includes(ua, 'edge')) {
       result = 'Edge';
-    } else if (ua.includes('opr')) {
+    } else if (_includes(ua, 'opr')) {
       result = 'Opera';
-    } else if (ua.includes('chrome')) {
+    } else if (_includes(ua, 'chrome')) {
       result = 'Chrome';
-    } else if (ua.includes('safari')) {
+    } else if (_includes(ua, 'safari')) {
       result = 'Safari';
-    } else if (ua.includes('firefox')) {
+    } else if (_includes(ua, 'firefox')) {
       result = 'Firefox';
     } else {
       result = 'other';

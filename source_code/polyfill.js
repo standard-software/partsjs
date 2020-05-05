@@ -31,19 +31,6 @@ const polyfillDefine = () => {
     };
   }
 
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes#Polyfill
-  if (!String.prototype.includes) {
-    String.prototype.includes = function(search, start) {
-      'use strict';
-
-      if (search instanceof RegExp) {
-        throw TypeError('first argument must not be a RegExp');
-      }
-      if (start === undefined) { start = 0; }
-      return this.indexOf(search, start) !== -1;
-    };
-  }
-
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
   if (!Array.isArray) {
     Array.isArray = function(arg) {
@@ -95,7 +82,7 @@ const polyfillDefine = () => {
         //    (If fromIndex is undefined, this step produces the value 0.)
         var n = fromIndex | 0;
 
-        // 5. If n ≥ 0, then
+        // 5. If n â‰¥ 0, then
         //  a. Let k be n.
         // 6. Else n < 0,
         //  a. Let k be len + n.
