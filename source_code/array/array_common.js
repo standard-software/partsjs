@@ -634,9 +634,9 @@ const isLast = (array, valueArray) => {
 };
 
 /**
- * isBothEdges
+ * isBothEnds
  */
-const _isBothEdges = (
+const _isBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -647,7 +647,7 @@ const _isBothEdges = (
   return _isFirst(array, valueFirstArray) && _isLast(array, valueLastArray);
 };
 
-const isBothEdges = (
+const isBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -655,29 +655,28 @@ const isBothEdges = (
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
     ({ array, valueFirstArray, valueLastArray = valueFirstArray } = array);
   } else if (isObjectParameter(array, 'array, valueArray')) {
-    ({ array, valueArray: valueFirstArray, valueLastArray = valueFirstArray } = array);
+    ({ array, valueArray: valueFirstArray } = array);
+    valueLastArray = valueFirstArray;
   }
 
   if (!isArray(array)) {
     throw new TypeError(
-      'isBothEdges args(array) is not array',
+      'isBothEnds args(array) is not array',
     );
   }
   if (!isArray(valueFirstArray)) {
     throw new TypeError(
-      'isBothEdges args(valueFirstArray) is not array',
+      'isBothEnds args(valueFirstArray) is not array',
     );
   }
   if (!isArray(valueLastArray)) {
     throw new TypeError(
-      'isBothEdges args(valueLastArray) is not array',
+      'isBothEnds args(valueLastArray) is not array',
     );
   }
 
-  return _isBothEdges(array, valueFirstArray, valueLastArray);
+  return _isBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-const isBothEnds = isBothEdges;
 
 /**
  * subIndex
@@ -833,7 +832,7 @@ module.exports = {
   _findFirstIndex, _findLastIndex,
   _findFirst, _findLast,
   _some, _all,
-  _isFirst, _isLast, _isBothEdges,
+  _isFirst, _isLast, _isBothEnds,
   _subIndex, _subLength,
   _subFirst, _subLast,
 
@@ -846,14 +845,13 @@ module.exports = {
   findFirstIndex, findLastIndex,
   findFirst, findLast,
   some, all,
-  isFirst, isLast, isBothEdges,
+  isFirst, isLast, isBothEnds,
   subIndex, subLength,
   subFirst, subLast,
 
   findIndex, findBackIndex,
   find, findBack,
   every,
-  isBothEnds,
 
 };
 

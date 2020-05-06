@@ -238,6 +238,13 @@ You can now use the functions of the parts.js object.
 - update polyfill.js
   - delete Object.entries
   - delete Object.defineProperties
+- rename BothEdges >> BothEnds
+  - BothEnds change alias name to original name
+  - delete BothEdges
+    - array.isBothEdges >> isBothEnds
+    - array.operation.includeBothEdges >> includeBothEnds
+    - array.operation.excludeBothEdges >> excludeBothEnds
+    - array.operation.trimBothEdges >> trimBothEnds
 
 ### 5.1.0
 #### 2020/05/06(Wed)

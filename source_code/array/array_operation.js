@@ -16,7 +16,7 @@ const {
 const {
   _min,
   _some,
-  _isFirst, _isLast, _isBothEdges,
+  _isFirst, _isLast, _isBothEnds,
 } = require('../array/array_common.js');
 
 /**
@@ -302,21 +302,21 @@ const includeLast = (array, valueArray) => {
 };
 
 /**
- * array.operation.includeBothEdges
+ * array.operation.includeBothEnds
  */
-const _includeBothEdges = (
+const _includeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
 ) => {
-  if (!_isBothEdges(array, valueFirstArray, valueLastArray)) {
+  if (!_isBothEnds(array, valueFirstArray, valueLastArray)) {
     _insert(array, valueFirstArray);
     _add(array, valueLastArray);
   }
   return array;
 };
 
-const includeBothEdges = (
+const includeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -329,28 +329,26 @@ const includeBothEdges = (
 
   if (!isArray(array)) {
     throw new TypeError(
-      'includeBothEdges args(array) is not array',
+      'includeBothEnds args(array) is not array',
     );
   }
   if (!isArray(valueFirstArray)) {
     throw new TypeError(
-      'includeBothEdges args(valueFirstArray) is not array',
+      'includeBothEnds args(valueFirstArray) is not array',
     );
   }
   if (!isArray(valueLastArray)) {
     throw new TypeError(
-      'includeBothEdges args(valueLastArray) is not array',
+      'includeBothEnds args(valueLastArray) is not array',
     );
   }
 
-  return _includeBothEdges(
+  return _includeBothEnds(
     array,
     valueFirstArray,
     valueLastArray,
   );
 };
-
-const includeBothEnds = includeBothEdges;
 
 /**
  * array.operation.excludeFirst
@@ -411,21 +409,21 @@ const excludeLast = (array, valueArray) => {
 };
 
 /**
- * array.operation.excludeBothEdges
+ * array.operation.excludeBothEnds
  */
-const _excludeBothEdges = (
+const _excludeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
 ) => {
-  if (_isBothEdges(array, valueFirstArray, valueLastArray)) {
+  if (_isBothEnds(array, valueFirstArray, valueLastArray)) {
     deleteFirst(array, valueFirstArray.length);
     deleteLast(array, _min([valueLastArray.length, array.length]));
   }
   return array;
 };
 
-const excludeBothEdges = (
+const excludeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -438,28 +436,26 @@ const excludeBothEdges = (
 
   if (!isArray(array)) {
     throw new TypeError(
-      'excludeBothEdges args(array) is not array',
+      'excludeBothEnds args(array) is not array',
     );
   }
   if (!isArray(valueFirstArray)) {
     throw new TypeError(
-      'excludeBothEdges args(valueFirstArray) is not array',
+      'excludeBothEnds args(valueFirstArray) is not array',
     );
   }
   if (!isArray(valueLastArray)) {
     throw new TypeError(
-      'excludeBothEdges args(valueLastArray) is not array',
+      'excludeBothEnds args(valueLastArray) is not array',
     );
   }
 
-  return _excludeBothEdges(
+  return _excludeBothEnds(
     array,
     valueFirstArray,
     valueLastArray,
   );
 };
-
-const excludeBothEnds = excludeBothEdges;
 
 /**
  * array.operation.trimFirst
@@ -521,9 +517,9 @@ const trimLast = (array, valueArray) => {
 };
 
 /**
- * array.operation.trimBothEdges
+ * array.operation.trimBothEnds
  */
-const _trimBothEdges = (
+const _trimBothEnds = (
   array, valueFirstArray, valueLastArray = valueFirstArray,
 ) => {
   while (_some(
@@ -541,7 +537,7 @@ const _trimBothEdges = (
   return array;
 };
 
-const trimBothEdges = (
+const trimBothEnds = (
   array, valueFirstArray, valueLastArray = valueFirstArray,
 ) => {
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -552,24 +548,22 @@ const trimBothEdges = (
 
   if (!isArray(array)) {
     throw new TypeError(
-      'trimBothEdges args(array) is not array',
+      'trimBothEnds args(array) is not array',
     );
   }
   if (!isArray(valueFirstArray)) {
     throw new TypeError(
-      'trimBothEdges args(valueFirstArray) is not array',
+      'trimBothEnds args(valueFirstArray) is not array',
     );
   }
   if (!isArray(valueLastArray)) {
     throw new TypeError(
-      'trimBothEdges args(valueLastArray) is not array',
+      'trimBothEnds args(valueLastArray) is not array',
     );
   }
 
-  return _trimBothEdges(array, valueFirstArray, valueLastArray);
+  return _trimBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-const trimBothEnds = trimBothEdges;
 
 /**
  * array.operation.popFirst
@@ -762,9 +756,9 @@ module.exports = {
   _insert, _add,
   _deleteLength, _deleteIndex,
   _deleteFirst, _deleteLast,
-  _includeFirst, _includeLast, _includeBothEdges,
-  _excludeFirst, _excludeLast, _excludeBothEdges,
-  _trimFirst, _trimLast, _trimBothEdges,
+  _includeFirst, _includeLast, _includeBothEnds,
+  _excludeFirst, _excludeLast, _excludeBothEnds,
+  _trimFirst, _trimLast, _trimBothEnds,
   _popFirst, _popLast,
   _pushFirst, _pushLast,
   _remainFirst, _remainLast,
@@ -773,16 +767,13 @@ module.exports = {
   insert, add,
   deleteLength, deleteIndex,
   deleteFirst, deleteLast,
-  includeFirst, includeLast, includeBothEdges,
-  excludeFirst, excludeLast, excludeBothEdges,
-  trimFirst, trimLast, trimBothEdges,
+  includeFirst, includeLast, includeBothEnds,
+  excludeFirst, excludeLast, excludeBothEnds,
+  trimFirst, trimLast, trimBothEnds,
   popFirst, popLast,
   pushFirst, pushLast,
   remainFirst, remainLast,
   filter,
 
-  includeBothEnds,
-  excludeBothEnds,
-  trimBothEnds,
 };
 

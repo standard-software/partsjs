@@ -16,7 +16,7 @@ const test_execute_array = (parts) => {
     } = parts;
 
     const {
-      isFirst, isLast, isBothEdges,
+      isFirst, isLast, isBothEnds,
       subIndex, subLength,
       subFirst, subLast,
     } = array;
@@ -25,9 +25,9 @@ const test_execute_array = (parts) => {
       insert, add,
       deleteLength, deleteIndex,
       deleteFirst, deleteLast,
-      includeFirst, includeLast, includeBothEdges,
-      excludeFirst, excludeLast, excludeBothEdges,
-      trimFirst, trimLast, trimBothEdges,
+      includeFirst, includeLast, includeBothEnds,
+      excludeFirst, excludeLast, excludeBothEnds,
+      trimFirst, trimLast, trimBothEnds,
       popFirst, popLast,
       pushFirst, pushLast,
       remainFirst, remainLast,
@@ -564,55 +564,55 @@ const test_execute_array = (parts) => {
       });
     };
 
-    const test_isBothEdges = () => {
-      it('test_isBothEdges', () => {
-        checkEqual(true,  isBothEdges([1, 2, 1], [1]));
-        checkEqual(false, isBothEdges([1, 2, 1], [2]));
-        checkEqual(true,  isBothEdges([1, 2, 1], [1, 2], [2, 1]));
-        checkEqual(true,  isBothEdges(['A', 'B', 'A'], ['A']));
-        checkEqual(false, isBothEdges(['A', 'B', 'A'], ['a']));
-        checkEqual(false, isBothEdges(['A', 'B', 'A'], ['B']));
-        checkEqual(true,  isBothEdges(['A', 'B', 'A', 'B'], ['A', 'B']));
+    const test_isBothEnds = () => {
+      it('test_isBothEnds', () => {
+        checkEqual(true,  isBothEnds([1, 2, 1], [1]));
+        checkEqual(false, isBothEnds([1, 2, 1], [2]));
+        checkEqual(true,  isBothEnds([1, 2, 1], [1, 2], [2, 1]));
+        checkEqual(true,  isBothEnds(['A', 'B', 'A'], ['A']));
+        checkEqual(false, isBothEnds(['A', 'B', 'A'], ['a']));
+        checkEqual(false, isBothEnds(['A', 'B', 'A'], ['B']));
+        checkEqual(true,  isBothEnds(['A', 'B', 'A', 'B'], ['A', 'B']));
 
-        checkEqual(false, isBothEdges(['A', 'B', 'A', 'D'], ['A']));
-        checkEqual(true,  isBothEdges(['A', 'B', 'A', 'D'], ['A'], ['D']));
+        checkEqual(false, isBothEnds(['A', 'B', 'A', 'D'], ['A']));
+        checkEqual(true,  isBothEnds(['A', 'B', 'A', 'D'], ['A'], ['D']));
 
-        checkEqual(true,  isBothEdges(['{', 'A', 'B', '}'], ['{'], ['}']));
-        checkEqual(true,  isBothEdges(['{', '{', '}', '}'], ['{'], ['}']));
-        checkEqual(false, isBothEdges(['A', '{', 'B', '}'], ['{'], ['}']));
-        checkEqual(false, isBothEdges(['{', 'A', 'B', '}'], ['}'], ['}']));
-        checkEqual(false, isBothEdges(['{', 'A', 'B', '}'], ['{'], ['{']));
+        checkEqual(true,  isBothEnds(['{', 'A', 'B', '}'], ['{'], ['}']));
+        checkEqual(true,  isBothEnds(['{', '{', '}', '}'], ['{'], ['}']));
+        checkEqual(false, isBothEnds(['A', '{', 'B', '}'], ['{'], ['}']));
+        checkEqual(false, isBothEnds(['{', 'A', 'B', '}'], ['}'], ['}']));
+        checkEqual(false, isBothEnds(['{', 'A', 'B', '}'], ['{'], ['{']));
 
-        checkEqual(false, isBothEdges([1], [1]));
-        checkEqual(true,  isBothEdges([1, 1], [1]));
+        checkEqual(false, isBothEnds([1], [1]));
+        checkEqual(true,  isBothEnds([1, 1], [1]));
 
         // Object Named Parameter
         checkEqual(true,
-          isBothEdges({
+          isBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
         );
         checkEqual(false,
-          isBothEdges({
+          isBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
         );
         checkEqual(true,
-          isBothEdges({
+          isBothEnds({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
         );
         checkEqual(false,
-          isBothEdges({
+          isBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
         );
         checkEqual(true,
-          isBothEdges({
+          isBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
@@ -1095,90 +1095,90 @@ const test_execute_array = (parts) => {
       });
     };
 
-    const test_operation_includeBothEdges = () => {
-      it('test_operation_includeBothEdges', () => {
+    const test_operation_includeBothEnds = () => {
+      it('test_operation_includeBothEnds', () => {
 
         checkEqual(true,  equal([1, 2, 1],
-          includeBothEdges([1, 2, 1], [1])
+          includeBothEnds([1, 2, 1], [1])
         ));
         checkEqual(true,  equal([1, 1, 2, 3, 1],
-          includeBothEdges([1, 2, 3], [1])
+          includeBothEnds([1, 2, 3], [1])
         ));
         checkEqual(true,  equal([1, 2, 1, 2],
-          includeBothEdges([1, 2, 1, 2], [1, 2])
+          includeBothEnds([1, 2, 1, 2], [1, 2])
         ));
         checkEqual(true,  equal([1, 2, 1],
-          includeBothEdges([1, 2, 1], [1, 2], [2, 1])
+          includeBothEnds([1, 2, 1], [1, 2], [2, 1])
         ));
 
         checkEqual(true,  equal(['A', 'B', 'A'],
-          includeBothEdges(['A', 'B', 'A'], ['A'])
+          includeBothEnds(['A', 'B', 'A'], ['A'])
         ));
         checkEqual(true,  equal(['a', 'A', 'B', 'A', 'a'],
-          includeBothEdges(['A', 'B', 'A'], ['a'])
+          includeBothEnds(['A', 'B', 'A'], ['a'])
         ));
         checkEqual(true,  equal(['A', 'A', 'B', 'C', 'A'],
-          includeBothEdges(['A', 'B', 'C'], ['A'])
+          includeBothEnds(['A', 'B', 'C'], ['A'])
         ));
         checkEqual(true,  equal(['A', 'B', 'A', 'B'],
-          includeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])
+          includeBothEnds(['A', 'B', 'A', 'B'], ['A', 'B'])
         ));
 
         checkEqual(true,  equal(['{', '}'],
-          includeBothEdges(['{', '}'], ['{'], ['}'])
+          includeBothEnds(['{', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal(['{', 'A', '}'],
-          includeBothEdges(['{', 'A', '}'], ['{'], ['}'])
+          includeBothEnds(['{', 'A', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal(['{', 'A', '{', '}', '}'],
-          includeBothEdges(['A', '{', '}'], ['{'], ['}'])
+          includeBothEnds(['A', '{', '}'], ['{'], ['}'])
         ));
 
         checkEqual(true,  equal(['A', 'A'],
-          includeBothEdges(['A', 'A'], ['A'])
+          includeBothEnds(['A', 'A'], ['A'])
         ));
         checkEqual(true,  equal(['A', 'A', 'A'],
-          includeBothEdges(['A'], ['A'])
+          includeBothEnds(['A'], ['A'])
         ));
         checkEqual(true,  equal(['A', '', 'A'],
-          includeBothEdges([''], ['A'])
+          includeBothEnds([''], ['A'])
         ));
         checkEqual(true,  equal(['A', 'A'],
-          includeBothEdges([], ['A'])
+          includeBothEnds([], ['A'])
         ));
 
         // exception
         checkEqual(true, isThrownException(() => {
-          includeBothEdges(0, 1);
+          includeBothEnds(0, 1);
         }, 'TypeError'));
 
         // Object Named Parameter
         checkEqual(true,  equal(['A', 'B', 'A'],
-          includeBothEdges({
+          includeBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['a', 'A', 'B', 'A', 'a'],
-          includeBothEdges({
+          includeBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
         ));
         checkEqual(true,  equal(['A', 'B', 'A'],
-          includeBothEdges({
+          includeBothEnds({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['A', 'A', 'B', 'A', 'D', 'A'],
-          includeBothEdges({
+          includeBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['A', 'B', 'A', 'D'],
-          includeBothEdges({
+          includeBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
@@ -1287,114 +1287,114 @@ const test_execute_array = (parts) => {
       });
     };
 
-    const test_operation_excludeBothEdges = () => {
-      it('test_operation_excludeBothEdges', () => {
+    const test_operation_excludeBothEnds = () => {
+      it('test_operation_excludeBothEnds', () => {
 
         checkEqual(true,  equal([2],
-          excludeBothEdges([1, 2, 1], [1])
+          excludeBothEnds([1, 2, 1], [1])
         ));
         checkEqual(true,  equal([1, 2, 3],
-          excludeBothEdges([1, 2, 3], [1])
+          excludeBothEnds([1, 2, 3], [1])
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges([1, 2, 1, 2], [1, 2])
+          excludeBothEnds([1, 2, 1, 2], [1, 2])
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges(
+          excludeBothEnds(
             [1, 2, 3, 4, 5],
             [1, 2, 3, 4],
             [5]
           )
         ));
         checkEqual(true,  equal([1, 2, 3, 4, 5],
-          excludeBothEdges(
+          excludeBothEnds(
             [1, 2, 3, 4, 5],
             [1, 2, 3, 4],
             [3, 5]
           )
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges(
+          excludeBothEnds(
             [1, 2, 3, 4, 5],
             [1, 2, 3, 4],
             [3, 4, 5]
           )
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges([1, 2, 1], [1, 2], [2, 1])
+          excludeBothEnds([1, 2, 1], [1, 2], [2, 1])
         ));
 
         checkEqual(true,  equal(['B'],
-          excludeBothEdges(['A', 'B', 'A'], ['A'])
+          excludeBothEnds(['A', 'B', 'A'], ['A'])
         ));
         checkEqual(true,  equal(['A', 'B', 'A'],
-          excludeBothEdges(['A', 'B', 'A'], ['a'])
+          excludeBothEnds(['A', 'B', 'A'], ['a'])
         ));
         checkEqual(true,  equal(['A', 'B', 'C'],
-          excludeBothEdges(['A', 'B', 'C'], ['A'])
+          excludeBothEnds(['A', 'B', 'C'], ['A'])
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges(['A', 'B', 'A', 'B'], ['A', 'B'])
+          excludeBothEnds(['A', 'B', 'A', 'B'], ['A', 'B'])
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges(['A', 'B', 'A'], ['A', 'B'], ['B', 'A'])
+          excludeBothEnds(['A', 'B', 'A'], ['A', 'B'], ['B', 'A'])
         ));
 
         checkEqual(true,  equal([],
-          excludeBothEdges(['{', '}'], ['{'], ['}'])
+          excludeBothEnds(['{', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal(['A'],
-          excludeBothEdges(['{', 'A', '}'], ['{'], ['}'])
+          excludeBothEnds(['{', 'A', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal(['A', '{', '}'],
-          excludeBothEdges(['A', '{', '}'], ['{'], ['}'])
+          excludeBothEnds(['A', '{', '}'], ['{'], ['}'])
         ));
 
         checkEqual(true,  equal([],
-          excludeBothEdges(['A', 'A'], ['A'])
+          excludeBothEnds(['A', 'A'], ['A'])
         ));
         checkEqual(true,  equal(['A'],
-          excludeBothEdges(['A'], ['A'])
+          excludeBothEnds(['A'], ['A'])
         ));
         checkEqual(true,  equal([''],
-          excludeBothEdges([''], ['A'])
+          excludeBothEnds([''], ['A'])
         ));
         checkEqual(true,  equal([],
-          excludeBothEdges([], ['A'])
+          excludeBothEnds([], ['A'])
         ));
 
         // exception
         checkEqual(true, isThrownException(() => {
-          excludeBothEdges(0, 1);
+          excludeBothEnds(0, 1);
         }, 'TypeError'));
 
         // Object Named Parameter
         checkEqual(true,  equal(['B'],
-          excludeBothEdges({
+          excludeBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['A', 'B', 'A'],
-          excludeBothEdges({
+          excludeBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
         ));
         checkEqual(true,  equal(['B'],
-          excludeBothEdges({
+          excludeBothEnds({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['A', 'B', 'A', 'D'],
-          excludeBothEdges({
+          excludeBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['B', 'A'],
-          excludeBothEdges({
+          excludeBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
@@ -1525,119 +1525,119 @@ const test_execute_array = (parts) => {
       });
     };
 
-    const test_operation_trimBothEdges = () => {
-      it('test_operation_trimBothEdges', () => {
+    const test_operation_trimBothEnds = () => {
+      it('test_operation_trimBothEnds', () => {
 
         checkEqual(true,  equal([2],
-          trimBothEdges([1, 2, 1], [1])
+          trimBothEnds([1, 2, 1], [1])
         ));
         checkEqual(true,  equal([2],
-          trimBothEdges([1, 1, 2, 1, 1, 1], [1])
+          trimBothEnds([1, 1, 2, 1, 1, 1], [1])
         ));
         checkEqual(true,  equal([],
-          trimBothEdges([1, 1, 1], [1])
+          trimBothEnds([1, 1, 1], [1])
         ));
         checkEqual(true,  equal([2, 3],
-          trimBothEdges([1, 2, 3], [1])
+          trimBothEnds([1, 2, 3], [1])
         ));
 
         checkEqual(true,  equal([2, 3, 1, 2],
-          trimBothEdges([1, 2, 3, 1, 2], [1])
+          trimBothEnds([1, 2, 3, 1, 2], [1])
         ));
         checkEqual(true,  equal([1, 2, 3, 1],
-          trimBothEdges([1, 2, 3, 1, 2], [2])
+          trimBothEnds([1, 2, 3, 1, 2], [2])
         ));
         checkEqual(true,  equal([3],
-          trimBothEdges([1, 2, 3, 1, 2], [1, 2])
+          trimBothEnds([1, 2, 3, 1, 2], [1, 2])
         ));
         checkEqual(true,  equal([3],
-          trimBothEdges([1, 2, 3, 1, 2], [2, 1])
+          trimBothEnds([1, 2, 3, 1, 2], [2, 1])
         ));
 
         checkEqual(true,  equal(['B'],
-          trimBothEdges(['A', 'B', 'A'], ['A'])
+          trimBothEnds(['A', 'B', 'A'], ['A'])
         ));
         checkEqual(true,  equal(['A', 'B', 'A'],
-          trimBothEdges(['A', 'B', 'A'], ['a'])
+          trimBothEnds(['A', 'B', 'A'], ['a'])
         ));
         checkEqual(true,  equal(['B', 'C'],
-          trimBothEdges(['A', 'B', 'C'], ['A'])
+          trimBothEnds(['A', 'B', 'C'], ['A'])
         ));
 
         checkEqual(true,  equal(['B', 'C', 'A', 'B'],
-          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A'])
+          trimBothEnds(['A', 'B', 'C', 'A', 'B'], ['A'])
         ));
         checkEqual(true,  equal(['A', 'B', 'C', 'A'],
-          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B'])
+          trimBothEnds(['A', 'B', 'C', 'A', 'B'], ['B'])
         ));
         checkEqual(true,  equal(['C'],
-          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['A', 'B'])
+          trimBothEnds(['A', 'B', 'C', 'A', 'B'], ['A', 'B'])
         ));
         checkEqual(true,  equal(['C'],
-          trimBothEdges(['A', 'B', 'C', 'A', 'B'], ['B', 'A'])
+          trimBothEnds(['A', 'B', 'C', 'A', 'B'], ['B', 'A'])
         ));
 
         checkEqual(true,  equal([],
-          trimBothEdges(['{', '}'], ['{'], ['}'])
+          trimBothEnds(['{', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal([],
-          trimBothEdges(['{', '{', '{', '}', '}', '}'], ['{'], ['}'])
+          trimBothEnds(['{', '{', '{', '}', '}', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal([],
-          trimBothEdges(['{', '{', '{', '}'], ['{'], ['}'])
+          trimBothEnds(['{', '{', '{', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal(['A'],
-          trimBothEdges(['{', 'A', '}'], ['{'], ['}'])
+          trimBothEnds(['{', 'A', '}'], ['{'], ['}'])
         ));
         checkEqual(true,  equal(['A', '{'],
-          trimBothEdges(['A', '{', '}'], ['{'], ['}'])
+          trimBothEnds(['A', '{', '}'], ['{'], ['}'])
         ));
 
         checkEqual(true,  equal([],
-          trimBothEdges(['A', 'A'], ['A'])
+          trimBothEnds(['A', 'A'], ['A'])
         ));
         checkEqual(true,  equal([],
-          trimBothEdges(['A'], ['A'])
+          trimBothEnds(['A'], ['A'])
         ));
         checkEqual(true,  equal([''],
-          trimBothEdges([''], ['A'])
+          trimBothEnds([''], ['A'])
         ));
         checkEqual(true,  equal([],
-          trimBothEdges([], ['A'])
+          trimBothEnds([], ['A'])
         ));
 
         // exception
         checkEqual(true, isThrownException(() => {
-          trimBothEdges(0, 1);
+          trimBothEnds(0, 1);
         }, 'TypeError'));
 
         // Object Named Parameter
         checkEqual(true,  equal(['B'],
-          trimBothEdges({
+          trimBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['A', 'B', 'A'],
-          trimBothEdges({
+          trimBothEnds({
             array: ['A', 'B', 'A'],
             valueArray: ['a'],
           })
         ));
         checkEqual(true,  equal(['B'],
-          trimBothEdges({
+          trimBothEnds({
             array: ['A', 'B', 'A'],
             valueFirstArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['B', 'A', 'D'],
-          trimBothEdges({
+          trimBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
           })
         ));
         checkEqual(true,  equal(['B', 'A'],
-          trimBothEdges({
+          trimBothEnds({
             array: ['A', 'B', 'A', 'D'],
             valueFirstArray: ['A'],
             valueLastArray: ['D']
@@ -1932,7 +1932,7 @@ const test_execute_array = (parts) => {
 
     test_isFirst();
     test_isLast();
-    test_isBothEdges();
+    test_isBothEnds();
 
     test_array_subIndex();
     test_array_subLength();
@@ -1949,14 +1949,14 @@ const test_execute_array = (parts) => {
 
     test_operation_includeFirst();
     test_operation_includeLast();
-    test_operation_includeBothEdges();
+    test_operation_includeBothEnds();
     test_operation_excludeFirst();
     test_operation_excludeLast();
-    test_operation_excludeBothEdges();
+    test_operation_excludeBothEnds();
 
     test_operation_trimFirst();
     test_operation_trimLast();
-    test_operation_trimBothEdges();
+    test_operation_trimBothEnds();
 
     test_operation_popFirst();
     test_operation_popLast();

@@ -12,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '5.1.0';
+const VERSION = '5.2.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -193,13 +193,12 @@ propertyNames.ARRAY_PUBLIC =
   'findFirstIndex, findLastIndex,' +
   'findFirst, findLast,' +
   'some, all,' +
-  'isFirst, isLast, isBothEdges,' +
+  'isFirst, isLast, isBothEnds,' +
   'subIndex, subLength,' +
   'subFirst, subLast,' +
   'findIndex, findBackIndex,' +
   'find, findBack,' +
   'every,' +
-  'isBothEnds,' +
   'operation,' +
   '';
 propertyNames.ARRAY_ROOT =
