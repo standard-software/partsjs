@@ -109,7 +109,7 @@ const expect = a => {
   };
 };
 
-const testCounter = value => {
+const testCounter = (value = 0) => {
   if (isInteger(value)) {
     testFrame.counter = value;
   }
