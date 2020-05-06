@@ -179,13 +179,67 @@ const indexOfLast = (
   return _indexOfLast(str, search, startIndex);
 };
 
+/**
+ * isFirst
+ */
+const _isFirst = (str, search) => {
+  return _indexOfFirst(str, search) === 0;
+};
+
+const isFirst = (str, search) => {
+  if (isObjectParameter(str, 'str, search')) {
+    ({ str, search } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'isFirst args(str) is not string',
+    );
+  }
+  if (!isString(search)) {
+    throw new TypeError(
+      'isFirst args(search) is not string',
+    );
+  }
+
+  return _isFirst(str, search);
+};
+
+/**
+ * isLast
+ */
+const _isLast = (str, search) => {
+  return _indexOfLast(str, search) === str.length - search.length;
+};
+
+const isLast = (str, search) => {
+  if (isObjectParameter(str, 'str, search')) {
+    ({ str, search } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'isLast args(str) is not string',
+    );
+  }
+  if (!isString(search)) {
+    throw new TypeError(
+      'isLast args(search) is not string',
+    );
+  }
+
+  return _isLast(str, search);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
+  _isFirst, _isLast,
 
   repeat,
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
+  isFirst, isLast,
 
 };

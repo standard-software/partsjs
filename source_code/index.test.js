@@ -34,8 +34,8 @@ const test_execute_index = (parts) => {
       it('test_execute_nameSpace 1', () => {
 
         const countArray = parts.platform.isWindowsScriptHost()
-          ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 7, 12, 33]
-          : [248, 13, 3, 140, 8, 11, 23, 29, 7, 7, 12, 33];
+          ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 9, 12, 33]
+          : [248, 13, 3, 140, 8, 11, 23, 29, 7, 9, 12, 33];
         checkEqual(countArray.shift(),  propertyCount(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));

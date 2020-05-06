@@ -12,6 +12,7 @@ const test_execute_string = (parts) => {
     const {
       matchFormat, replaceAll,
       indexOfFirst, indexOfLast,
+      isFirst, isLast,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -330,6 +331,34 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_isFirst = () => {
+      it('test_isFirst', () => {
+        checkEqual(true,  isFirst('123', '1'));
+        checkEqual(true,  isFirst('123', '12'));
+        checkEqual(false, isFirst('123', '13'));
+        checkEqual(false, isFirst('123', '2'));
+        checkEqual(true,  isFirst('ABC', 'A'));
+        checkEqual(true,  isFirst('ABC', 'AB'));
+        checkEqual(false, isFirst('ABC', 'AC'));
+        checkEqual(false, isFirst('ABC', 'a'));
+        checkEqual(false, isFirst('ABC', 'B'));
+      });
+    };
+
+    const test_isLast = () => {
+      it('test_isLast', () => {
+        checkEqual(true,  isLast('123', '3'));
+        checkEqual(true,  isLast('123', '23'));
+        checkEqual(false, isLast('123', '13'));
+        checkEqual(false, isLast('123', '2'));
+        checkEqual(true,  isLast('ABC', 'C'));
+        checkEqual(true,  isLast('ABC', 'BC'));
+        checkEqual(false, isLast('ABC', 'AC'));
+        checkEqual(false, isLast('ABC', 'c'));
+        checkEqual(false, isLast('ABC', 'B'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -338,6 +367,8 @@ const test_execute_string = (parts) => {
     test_lastIndexOf_standard();
     test_indexOfLast();
 
+    test_isFirst();
+    test_isLast();
   });
 };
 
