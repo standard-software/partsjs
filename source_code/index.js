@@ -150,10 +150,10 @@ _copyProperty(_number, propertyNames.NUMBER, rootNames);
 
 // string
 propertyNames.STRING_PUBLIC =
-  'includes,' +
-  'matchFormat,replaceAll,' +
+  'matchFormat, replaceAll,' +
   'repeat,' +
-  'isLowerCase,isUpperCase,' +
+  'isLowerCase, isUpperCase,' +
+  'indexOfFirst, indexOfLast,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +

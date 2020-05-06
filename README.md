@@ -242,6 +242,7 @@ You can now use the functions of the parts.js object.
   - repeat
   - isLowerCase/isUpperCase
 - update test code
+- add string.indexOfFirst/indexOfLast
 
 ### 5.0.0
 #### 2020/05/04(Mon)
