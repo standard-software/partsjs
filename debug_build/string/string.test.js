@@ -16,7 +16,8 @@ var test_execute_string = function test_execute_string(parts) {
         indexOfFirst = _parts$string.indexOfFirst,
         indexOfLast = _parts$string.indexOfLast,
         isFirst = _parts$string.isFirst,
-        isLast = _parts$string.isLast;
+        isLast = _parts$string.isLast,
+        isBothEnds = _parts$string.isBothEnds;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -400,6 +401,49 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_isBothEnds = function test_isBothEnds() {
+      it('test_isBothEnds', function () {
+        checkEqual(true, isBothEnds('121', '1'));
+        checkEqual(false, isBothEnds('121', '2'));
+        checkEqual(true, isBothEnds('121', '12', '21'));
+        checkEqual(true, isBothEnds('ABA', 'A'));
+        checkEqual(false, isBothEnds('ABA', 'a'));
+        checkEqual(false, isBothEnds('ABA', 'B'));
+        checkEqual(true, isBothEnds('ABAB', 'AB'));
+        checkEqual(false, isBothEnds('ABAD', 'A'));
+        checkEqual(true, isBothEnds('ABAD', 'A', 'D'));
+        checkEqual(true, isBothEnds('{AB}', '{', '}'));
+        checkEqual(true, isBothEnds('{{}}', '{', '}'));
+        checkEqual(false, isBothEnds('A{B}', '{', '}'));
+        checkEqual(false, isBothEnds('{AB}', '}', '}'));
+        checkEqual(false, isBothEnds('{AB}', '{', '{'));
+        checkEqual(false, isBothEnds('1', '1'));
+        checkEqual(true, isBothEnds('11', '1')); // Object Named Parameter
+
+        checkEqual(true, isBothEnds({
+          str: 'ABA',
+          search: 'A'
+        }));
+        checkEqual(false, isBothEnds({
+          str: 'ABA',
+          search: 'a'
+        }));
+        checkEqual(true, isBothEnds({
+          str: 'ABA',
+          searchFirst: 'A'
+        }));
+        checkEqual(false, isBothEnds({
+          str: 'ABAD',
+          searchFirst: 'A'
+        }));
+        checkEqual(true, isBothEnds({
+          str: 'ABAD',
+          searchFirst: 'A',
+          searchLast: 'D'
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -408,6 +452,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_indexOfLast();
     test_isFirst();
     test_isLast();
+    test_isBothEnds();
   });
 };
 

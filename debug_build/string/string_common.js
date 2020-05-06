@@ -225,6 +225,51 @@ var isLast = function isLast(str, search) {
 
   return _isLast(str, search);
 };
+/**
+ * isBothEnds
+ */
+
+
+var _isBothEnds = function _isBothEnds(str, searchFirst) {
+  var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
+
+  if (str.length <= 1) {
+    return false;
+  }
+
+  return _isFirst(str, searchFirst) && _isLast(str, searchLast);
+};
+
+var isBothEnds = function isBothEnds(str, searchFirst) {
+  var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
+
+  if (isObjectParameter(str, 'str, searchFirst', 'searchLast')) {
+    var _str6 = str;
+    str = _str6.str;
+    searchFirst = _str6.searchFirst;
+    var _str6$searchLast = _str6.searchLast;
+    searchLast = _str6$searchLast === void 0 ? searchFirst : _str6$searchLast;
+  } else if (isObjectParameter(str, 'str, search')) {
+    var _str7 = str;
+    str = _str7.str;
+    searchFirst = _str7.search;
+    searchLast = searchFirst;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('isBothEnds args(str) is not string');
+  }
+
+  if (!isString(searchFirst)) {
+    throw new TypeError('isBothEnds args(searchFirst) is not string');
+  }
+
+  if (!isString(searchLast)) {
+    throw new TypeError('isBothEnds args(searchLast) is not string');
+  }
+
+  return _isBothEnds(str, searchFirst, searchLast);
+};
 
 module.exports = {
   _repeat: _repeat,
@@ -234,11 +279,13 @@ module.exports = {
   _indexOfLast: _indexOfLast,
   _isFirst: _isFirst,
   _isLast: _isLast,
+  _isBothEnds: _isBothEnds,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
   indexOfFirst: indexOfFirst,
   indexOfLast: indexOfLast,
   isFirst: isFirst,
-  isLast: isLast
+  isLast: isLast,
+  isBothEnds: isBothEnds
 };

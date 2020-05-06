@@ -32,7 +32,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '5.1.0';
+var VERSION = '5.2.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -102,7 +102,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
@@ -120,7 +120,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEdges,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'isBothEnds,' + 'operation,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'operation,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);

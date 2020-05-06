@@ -140,7 +140,7 @@ var _array = __webpack_require__(26);
 
 var _consoleHook = __webpack_require__(37);
 
-var VERSION = '5.1.0';
+var VERSION = '5.2.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -210,7 +210,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
@@ -228,7 +228,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEdges,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'isBothEnds,' + 'operation,' + '';
+propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'operation,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 
 var array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
@@ -399,21 +399,6 @@ var polyfillDefine = function polyfillDefine() {
         return result;
       };
     }();
-  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
-
-
-  if (!Object.entries) {
-    Object.entries = function (obj) {
-      var ownProps = Object.keys(obj),
-          i = ownProps.length,
-          resArray = new Array(i); // preallocate the Array
-
-      while (i--) {
-        resArray[i] = [ownProps[i], obj[ownProps[i]]];
-      }
-
-      return resArray;
-    };
   } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
   // ES 15.2.3.6 Object.defineProperty ( O, P, Attributes )
   // Partial support for most common case - getters, setters, and values
@@ -451,26 +436,6 @@ var polyfillDefine = function polyfillDefine() {
 
       if ('value' in desc) {
         o[prop] = desc.value;
-      }
-
-      return o;
-    };
-  } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
-  // ES 15.2.3.7 Object.defineProperties ( O, Properties )
-
-
-  if (typeof Object.defineProperties !== "function") {
-    Object.defineProperties = function (o, properties) {
-      if (o !== Object(o)) {
-        throw TypeError("Object.defineProperties called on non-object");
-      }
-
-      var name;
-
-      for (name in properties) {
-        if (Object.prototype.hasOwnProperty.call(properties, name)) {
-          Object.defineProperty(o, name, properties[name]);
-        }
       }
 
       return o;
@@ -3453,11 +3418,11 @@ var isLast = function isLast(array, valueArray) {
   return _isLast(array, valueArray);
 };
 /**
- * isBothEdges
+ * isBothEnds
  */
 
 
-var _isBothEdges = function _isBothEdges(array, valueFirstArray) {
+var _isBothEnds = function _isBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (array.length <= 1) {
@@ -3467,7 +3432,7 @@ var _isBothEdges = function _isBothEdges(array, valueFirstArray) {
   return _isFirst(array, valueFirstArray) && _isLast(array, valueLastArray);
 };
 
-var isBothEdges = function isBothEdges(array, valueFirstArray) {
+var isBothEnds = function isBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -3480,29 +3445,27 @@ var isBothEdges = function isBothEdges(array, valueFirstArray) {
     var _array13 = array;
     array = _array13.array;
     valueFirstArray = _array13.valueArray;
-    var _array13$valueLastArr = _array13.valueLastArray;
-    valueLastArray = _array13$valueLastArr === void 0 ? valueFirstArray : _array13$valueLastArr;
+    valueLastArray = valueFirstArray;
   }
 
   if (!isArray(array)) {
-    throw new TypeError('isBothEdges args(array) is not array');
+    throw new TypeError('isBothEnds args(array) is not array');
   }
 
   if (!isArray(valueFirstArray)) {
-    throw new TypeError('isBothEdges args(valueFirstArray) is not array');
+    throw new TypeError('isBothEnds args(valueFirstArray) is not array');
   }
 
   if (!isArray(valueLastArray)) {
-    throw new TypeError('isBothEdges args(valueLastArray) is not array');
+    throw new TypeError('isBothEnds args(valueLastArray) is not array');
   }
 
-  return _isBothEdges(array, valueFirstArray, valueLastArray);
+  return _isBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-var isBothEnds = isBothEdges;
 /**
  * subIndex
  */
+
 
 var _subIndex = function _subIndex(array, indexFirst, indexLast) {
   return array.slice(indexFirst, indexLast + 1);
@@ -3659,7 +3622,7 @@ module.exports = {
   _all: _all,
   _isFirst: _isFirst,
   _isLast: _isLast,
-  _isBothEdges: _isBothEdges,
+  _isBothEnds: _isBothEnds,
   _subIndex: _subIndex,
   _subLength: _subLength,
   _subFirst: _subFirst,
@@ -3685,7 +3648,7 @@ module.exports = {
   all: all,
   isFirst: isFirst,
   isLast: isLast,
-  isBothEdges: isBothEdges,
+  isBothEnds: isBothEnds,
   subIndex: subIndex,
   subLength: subLength,
   subFirst: subFirst,
@@ -3694,8 +3657,7 @@ module.exports = {
   findBackIndex: findBackIndex,
   find: find,
   findBack: findBack,
-  every: every,
-  isBothEnds: isBothEnds
+  every: every
 };
 
 /***/ }),
@@ -4644,7 +4606,7 @@ var _require4 = __webpack_require__(21),
     _some = _require4._some,
     _isFirst = _require4._isFirst,
     _isLast = _require4._isLast,
-    _isBothEdges = _require4._isBothEdges;
+    _isBothEnds = _require4._isBothEnds;
 /**
  * array.operation.insert
  */
@@ -4934,14 +4896,14 @@ var includeLast = function includeLast(array, valueArray) {
   return _includeLast(array, valueArray);
 };
 /**
- * array.operation.includeBothEdges
+ * array.operation.includeBothEnds
  */
 
 
-var _includeBothEdges = function _includeBothEdges(array, valueFirstArray) {
+var _includeBothEnds = function _includeBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
-  if (!_isBothEdges(array, valueFirstArray, valueLastArray)) {
+  if (!_isBothEnds(array, valueFirstArray, valueLastArray)) {
     _insert(array, valueFirstArray);
 
     _add(array, valueLastArray);
@@ -4950,7 +4912,7 @@ var _includeBothEdges = function _includeBothEdges(array, valueFirstArray) {
   return array;
 };
 
-var includeBothEdges = function includeBothEdges(array, valueFirstArray) {
+var includeBothEnds = function includeBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -4968,24 +4930,23 @@ var includeBothEdges = function includeBothEdges(array, valueFirstArray) {
   }
 
   if (!isArray(array)) {
-    throw new TypeError('includeBothEdges args(array) is not array');
+    throw new TypeError('includeBothEnds args(array) is not array');
   }
 
   if (!isArray(valueFirstArray)) {
-    throw new TypeError('includeBothEdges args(valueFirstArray) is not array');
+    throw new TypeError('includeBothEnds args(valueFirstArray) is not array');
   }
 
   if (!isArray(valueLastArray)) {
-    throw new TypeError('includeBothEdges args(valueLastArray) is not array');
+    throw new TypeError('includeBothEnds args(valueLastArray) is not array');
   }
 
-  return _includeBothEdges(array, valueFirstArray, valueLastArray);
+  return _includeBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-var includeBothEnds = includeBothEdges;
 /**
  * array.operation.excludeFirst
  */
+
 
 var _excludeFirst = function _excludeFirst(array, valueArray) {
   if (_isFirst(array, valueArray)) {
@@ -5043,14 +5004,14 @@ var excludeLast = function excludeLast(array, valueArray) {
   return _excludeLast(array, valueArray);
 };
 /**
- * array.operation.excludeBothEdges
+ * array.operation.excludeBothEnds
  */
 
 
-var _excludeBothEdges = function _excludeBothEdges(array, valueFirstArray) {
+var _excludeBothEnds = function _excludeBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
-  if (_isBothEdges(array, valueFirstArray, valueLastArray)) {
+  if (_isBothEnds(array, valueFirstArray, valueLastArray)) {
     deleteFirst(array, valueFirstArray.length);
     deleteLast(array, _min([valueLastArray.length, array.length]));
   }
@@ -5058,7 +5019,7 @@ var _excludeBothEdges = function _excludeBothEdges(array, valueFirstArray) {
   return array;
 };
 
-var excludeBothEdges = function excludeBothEdges(array, valueFirstArray) {
+var excludeBothEnds = function excludeBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -5076,24 +5037,23 @@ var excludeBothEdges = function excludeBothEdges(array, valueFirstArray) {
   }
 
   if (!isArray(array)) {
-    throw new TypeError('excludeBothEdges args(array) is not array');
+    throw new TypeError('excludeBothEnds args(array) is not array');
   }
 
   if (!isArray(valueFirstArray)) {
-    throw new TypeError('excludeBothEdges args(valueFirstArray) is not array');
+    throw new TypeError('excludeBothEnds args(valueFirstArray) is not array');
   }
 
   if (!isArray(valueLastArray)) {
-    throw new TypeError('excludeBothEdges args(valueLastArray) is not array');
+    throw new TypeError('excludeBothEnds args(valueLastArray) is not array');
   }
 
-  return _excludeBothEdges(array, valueFirstArray, valueLastArray);
+  return _excludeBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-var excludeBothEnds = excludeBothEdges;
 /**
  * array.operation.trimFirst
  */
+
 
 var _trimFirst = function _trimFirst(array, valueArray) {
   while (_some(valueArray, function (value) {
@@ -5155,11 +5115,11 @@ var trimLast = function trimLast(array, valueArray) {
   return _trimLast(array, valueArray);
 };
 /**
- * array.operation.trimBothEdges
+ * array.operation.trimBothEnds
  */
 
 
-var _trimBothEdges = function _trimBothEdges(array, valueFirstArray) {
+var _trimBothEnds = function _trimBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   while (_some(valueFirstArray, function (valueFirst) {
@@ -5177,7 +5137,7 @@ var _trimBothEdges = function _trimBothEdges(array, valueFirstArray) {
   return array;
 };
 
-var trimBothEdges = function trimBothEdges(array, valueFirstArray) {
+var trimBothEnds = function trimBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -5195,24 +5155,23 @@ var trimBothEdges = function trimBothEdges(array, valueFirstArray) {
   }
 
   if (!isArray(array)) {
-    throw new TypeError('trimBothEdges args(array) is not array');
+    throw new TypeError('trimBothEnds args(array) is not array');
   }
 
   if (!isArray(valueFirstArray)) {
-    throw new TypeError('trimBothEdges args(valueFirstArray) is not array');
+    throw new TypeError('trimBothEnds args(valueFirstArray) is not array');
   }
 
   if (!isArray(valueLastArray)) {
-    throw new TypeError('trimBothEdges args(valueLastArray) is not array');
+    throw new TypeError('trimBothEnds args(valueLastArray) is not array');
   }
 
-  return _trimBothEdges(array, valueFirstArray, valueLastArray);
+  return _trimBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-var trimBothEnds = trimBothEdges;
 /**
  * array.operation.popFirst
  */
+
 
 var _popFirst = function _popFirst(array) {
   return array.shift();
@@ -5408,13 +5367,13 @@ module.exports = {
   _deleteLast: _deleteLast,
   _includeFirst: _includeFirst,
   _includeLast: _includeLast,
-  _includeBothEdges: _includeBothEdges,
+  _includeBothEnds: _includeBothEnds,
   _excludeFirst: _excludeFirst,
   _excludeLast: _excludeLast,
-  _excludeBothEdges: _excludeBothEdges,
+  _excludeBothEnds: _excludeBothEnds,
   _trimFirst: _trimFirst,
   _trimLast: _trimLast,
-  _trimBothEdges: _trimBothEdges,
+  _trimBothEnds: _trimBothEnds,
   _popFirst: _popFirst,
   _popLast: _popLast,
   _pushFirst: _pushFirst,
@@ -5430,23 +5389,20 @@ module.exports = {
   deleteLast: deleteLast,
   includeFirst: includeFirst,
   includeLast: includeLast,
-  includeBothEdges: includeBothEdges,
+  includeBothEnds: includeBothEnds,
   excludeFirst: excludeFirst,
   excludeLast: excludeLast,
-  excludeBothEdges: excludeBothEdges,
+  excludeBothEnds: excludeBothEnds,
   trimFirst: trimFirst,
   trimLast: trimLast,
-  trimBothEdges: trimBothEdges,
+  trimBothEnds: trimBothEnds,
   popFirst: popFirst,
   popLast: popLast,
   pushFirst: pushFirst,
   pushLast: pushLast,
   remainFirst: remainFirst,
   remainLast: remainLast,
-  filter: filter,
-  includeBothEnds: includeBothEnds,
-  excludeBothEnds: excludeBothEnds,
-  trimBothEnds: trimBothEnds
+  filter: filter
 };
 
 /***/ }),
@@ -5949,6 +5905,51 @@ var isLast = function isLast(str, search) {
 
   return _isLast(str, search);
 };
+/**
+ * isBothEnds
+ */
+
+
+var _isBothEnds = function _isBothEnds(str, searchFirst) {
+  var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
+
+  if (str.length <= 1) {
+    return false;
+  }
+
+  return _isFirst(str, searchFirst) && _isLast(str, searchLast);
+};
+
+var isBothEnds = function isBothEnds(str, searchFirst) {
+  var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
+
+  if (isObjectParameter(str, 'str, searchFirst', 'searchLast')) {
+    var _str6 = str;
+    str = _str6.str;
+    searchFirst = _str6.searchFirst;
+    var _str6$searchLast = _str6.searchLast;
+    searchLast = _str6$searchLast === void 0 ? searchFirst : _str6$searchLast;
+  } else if (isObjectParameter(str, 'str, search')) {
+    var _str7 = str;
+    str = _str7.str;
+    searchFirst = _str7.search;
+    searchLast = searchFirst;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('isBothEnds args(str) is not string');
+  }
+
+  if (!isString(searchFirst)) {
+    throw new TypeError('isBothEnds args(searchFirst) is not string');
+  }
+
+  if (!isString(searchLast)) {
+    throw new TypeError('isBothEnds args(searchLast) is not string');
+  }
+
+  return _isBothEnds(str, searchFirst, searchLast);
+};
 
 module.exports = {
   _repeat: _repeat,
@@ -5958,13 +5959,15 @@ module.exports = {
   _indexOfLast: _indexOfLast,
   _isFirst: _isFirst,
   _isLast: _isLast,
+  _isBothEnds: _isBothEnds,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
   indexOfFirst: indexOfFirst,
   indexOfLast: indexOfLast,
   isFirst: isFirst,
-  isLast: isLast
+  isLast: isLast,
+  isBothEnds: isBothEnds
 };
 
 /***/ }),

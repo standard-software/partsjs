@@ -131,21 +131,6 @@ var polyfillDefine = function polyfillDefine() {
         return result;
       };
     }();
-  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
-
-
-  if (!Object.entries) {
-    Object.entries = function (obj) {
-      var ownProps = Object.keys(obj),
-          i = ownProps.length,
-          resArray = new Array(i); // preallocate the Array
-
-      while (i--) {
-        resArray[i] = [ownProps[i], obj[ownProps[i]]];
-      }
-
-      return resArray;
-    };
   } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
   // ES 15.2.3.6 Object.defineProperty ( O, P, Attributes )
   // Partial support for most common case - getters, setters, and values
@@ -183,26 +168,6 @@ var polyfillDefine = function polyfillDefine() {
 
       if ('value' in desc) {
         o[prop] = desc.value;
-      }
-
-      return o;
-    };
-  } // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
-  // ES 15.2.3.7 Object.defineProperties ( O, Properties )
-
-
-  if (typeof Object.defineProperties !== "function") {
-    Object.defineProperties = function (o, properties) {
-      if (o !== Object(o)) {
-        throw TypeError("Object.defineProperties called on non-object");
-      }
-
-      var name;
-
-      for (name in properties) {
-        if (Object.prototype.hasOwnProperty.call(properties, name)) {
-          Object.defineProperty(o, name, properties[name]);
-        }
       }
 
       return o;

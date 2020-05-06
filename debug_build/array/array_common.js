@@ -685,11 +685,11 @@ var isLast = function isLast(array, valueArray) {
   return _isLast(array, valueArray);
 };
 /**
- * isBothEdges
+ * isBothEnds
  */
 
 
-var _isBothEdges = function _isBothEdges(array, valueFirstArray) {
+var _isBothEnds = function _isBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (array.length <= 1) {
@@ -699,7 +699,7 @@ var _isBothEdges = function _isBothEdges(array, valueFirstArray) {
   return _isFirst(array, valueFirstArray) && _isLast(array, valueLastArray);
 };
 
-var isBothEdges = function isBothEdges(array, valueFirstArray) {
+var isBothEnds = function isBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -712,29 +712,27 @@ var isBothEdges = function isBothEdges(array, valueFirstArray) {
     var _array13 = array;
     array = _array13.array;
     valueFirstArray = _array13.valueArray;
-    var _array13$valueLastArr = _array13.valueLastArray;
-    valueLastArray = _array13$valueLastArr === void 0 ? valueFirstArray : _array13$valueLastArr;
+    valueLastArray = valueFirstArray;
   }
 
   if (!isArray(array)) {
-    throw new TypeError('isBothEdges args(array) is not array');
+    throw new TypeError('isBothEnds args(array) is not array');
   }
 
   if (!isArray(valueFirstArray)) {
-    throw new TypeError('isBothEdges args(valueFirstArray) is not array');
+    throw new TypeError('isBothEnds args(valueFirstArray) is not array');
   }
 
   if (!isArray(valueLastArray)) {
-    throw new TypeError('isBothEdges args(valueLastArray) is not array');
+    throw new TypeError('isBothEnds args(valueLastArray) is not array');
   }
 
-  return _isBothEdges(array, valueFirstArray, valueLastArray);
+  return _isBothEnds(array, valueFirstArray, valueLastArray);
 };
-
-var isBothEnds = isBothEdges;
 /**
  * subIndex
  */
+
 
 var _subIndex = function _subIndex(array, indexFirst, indexLast) {
   return array.slice(indexFirst, indexLast + 1);
@@ -891,7 +889,7 @@ module.exports = {
   _all: _all,
   _isFirst: _isFirst,
   _isLast: _isLast,
-  _isBothEdges: _isBothEdges,
+  _isBothEnds: _isBothEnds,
   _subIndex: _subIndex,
   _subLength: _subLength,
   _subFirst: _subFirst,
@@ -917,7 +915,7 @@ module.exports = {
   all: all,
   isFirst: isFirst,
   isLast: isLast,
-  isBothEdges: isBothEdges,
+  isBothEnds: isBothEnds,
   subIndex: subIndex,
   subLength: subLength,
   subFirst: subFirst,
@@ -926,6 +924,5 @@ module.exports = {
   findBackIndex: findBackIndex,
   find: find,
   findBack: findBack,
-  every: every,
-  isBothEnds: isBothEnds
+  every: every
 };
