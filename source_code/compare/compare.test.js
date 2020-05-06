@@ -33,6 +33,10 @@ const test_execute_compare = (parts) => {
       includes, includesSome, includesAll,
     } = parts.compare;
 
+    const {
+      isFirst,
+    } = parts.string;
+
     const test_equal = () => {
       it('test_equal', () => {
         // Primitive value
@@ -1212,8 +1216,8 @@ const test_execute_compare = (parts) => {
         checkEqual(true,  matchSome('abc', ['123', '456', /^a/]), 'test_match 4');
         checkEqual(false, matchSome('abc', []), 'test_match 5');
         checkEqual(false, matchSome('123', [null, undefined, 123, 'abc']), 'test_match 6');
-        checkEqual(true,  matchSome('abc', [(value) => value.startsWith('a')]), 'test_match 7');
-        checkEqual(false, matchSome('abc', [(value) => value.startsWith('b')]), 'test_match 8');
+        checkEqual(true,  matchSome('abc', [(value) => isFirst(value, 'a')]), 'test_match 7');
+        checkEqual(false, matchSome('abc', [(value) => isFirst(value, 'b')]), 'test_match 8');
 
         // normal args number
         checkEqual(false, matchSome(123, ['123', '456', '789']), 'test_match number 1');
@@ -1281,10 +1285,10 @@ const test_execute_compare = (parts) => {
           value: '123', compareArray: [null, undefined, 123, 'abc'],
         }), 'test_match param 6');
         checkEqual(true,  matchSome({
-          value: 'abc', compareArray: [(value) => value.startsWith('a')],
+          value: 'abc', compareArray: [(value) => isFirst(value, 'a')],
         }), 'test_match param 7');
         checkEqual(false, matchSome({
-          value: 'abc', compareArray: [(value) => value.startsWith('b')],
+          value: 'abc', compareArray: [(value) => isFirst(value, 'b')],
         }), 'test_match param 8');
 
         // Object Named Parameter number

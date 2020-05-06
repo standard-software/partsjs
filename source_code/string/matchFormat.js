@@ -39,9 +39,10 @@ _matchFormat.clear = () => {
   _matchFormat.pattern = {};
 };
 _matchFormat.add = (nameArray, patternFunction) => {
-  nameArray.forEach(name => {
+  for (let i = 0, l = nameArray.length; i < l; i += 1) {
+    const name = nameArray[i];
     _matchFormat.pattern[name] = patternFunction;
-  });
+  }
 };
 _matchFormat.reset = () => {
 
