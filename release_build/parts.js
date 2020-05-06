@@ -126,9 +126,9 @@ var _test = __webpack_require__(25);
 
 var _syntax = __webpack_require__(23);
 
-var _compare = __webpack_require__(32);
+var _compare = __webpack_require__(34);
 
-var _convert = __webpack_require__(35);
+var _convert = __webpack_require__(36);
 
 var _number = __webpack_require__(22);
 
@@ -138,7 +138,7 @@ var _object = __webpack_require__(15);
 
 var _array = __webpack_require__(26);
 
-var _consoleHook = __webpack_require__(36);
+var _consoleHook = __webpack_require__(37);
 
 var VERSION = '5.1.0 beta';
 var rootNames = {};
@@ -210,7 +210,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'includes,' + 'matchFormat,replaceAll,' + 'repeat,' + 'isLowerCase,isUpperCase,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
@@ -241,7 +241,7 @@ propertyNames.CONSOLE_HOOK = [isPrefixSafixAdd('hook', '', propertyNames._CONSOL
 
 var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
-module.exports = _objectSpread({
+var parts = _objectSpread({
   VERSION: VERSION,
   platform: platform,
   type: type,
@@ -256,6 +256,10 @@ module.exports = _objectSpread({
   array: array,
   root: root
 }, rootNames);
+
+module.exports = _objectSpread(_objectSpread({}, parts), {}, {
+  parts: parts
+});
 
 /***/ }),
 /* 2 */
@@ -4418,7 +4422,7 @@ var _require2 = __webpack_require__(26),
 var _require3 = __webpack_require__(30),
     _repeat = _require3._repeat;
 
-var _require4 = __webpack_require__(32),
+var _require4 = __webpack_require__(34),
     equal = _require4.equal,
     equalDeep = _require4.equalDeep;
 /**
@@ -4512,7 +4516,9 @@ var expect = function expect(a) {
   };
 };
 
-var testCounter = function testCounter(value) {
+var testCounter = function testCounter() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
   if (isInteger(value)) {
     testFrame.counter = value;
   }
@@ -4811,7 +4817,7 @@ var deleteIndex = function deleteIndex(array, indexFirst) {
   }
 
   if (!isInteger(indexLast)) {
-    throw new TypeError("deleteIndex args(indexLast) is not integer");
+    throw new TypeError('deleteIndex args(indexLast) is not integer');
   }
 
   if (!_inRange(indexFirst, 0, array.length - 1)) {
@@ -5328,7 +5334,7 @@ var remainFirst = function remainFirst(array, length) {
   }
 
   if (!isInteger(length)) {
-    throw new TypeError("remainFirst args(length) is not integer");
+    throw new TypeError('remainFirst args(length) is not integer');
   }
 
   if (!(0 <= length)) {
@@ -5362,7 +5368,7 @@ var remainLast = function remainLast(array, length) {
   }
 
   if (!isInteger(length)) {
-    throw new TypeError("remainLast args(length) is not integer");
+    throw new TypeError('remainLast args(length) is not integer');
   }
 
   if (!(0 <= length)) {
@@ -5726,7 +5732,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(31)), __webpack_require__(10)), __webpack_require__(34));
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(31)), __webpack_require__(10)), __webpack_require__(32)), __webpack_require__(33));
 
 /***/ }),
 /* 31 */
@@ -5734,10 +5740,6 @@ module.exports = _objectSpread(_objectSpread(_objectSpread({}, __webpack_require
 
 "use strict";
 
-
-var _module$exports;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _require = __webpack_require__(5),
     isUndefined = _require.isUndefined,
@@ -5754,14 +5756,313 @@ var _require = __webpack_require__(5),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = __webpack_require__(32),
-    _matchSome = _require2._matchSome;
+var _require2 = __webpack_require__(9),
+    isObjectParameter = _require2.isObjectParameter;
 
-var _require3 = __webpack_require__(9),
-    isObjectParameter = _require3.isObjectParameter;
+var _require3 = __webpack_require__(22),
+    _inRange = _require3._inRange;
 
 var _require4 = __webpack_require__(26),
-    _map = _require4._map;
+    _max = _require4._max;
+/**
+ * repeat
+ */
+
+
+var _repeat = function _repeat(str, count) {
+  var result = '';
+
+  for (var i = 0; i < count; i += 1) {
+    result += str;
+  }
+
+  return result;
+};
+
+var repeat = function repeat(str, count) {
+  if (isObjectParameter(str, 'str, count')) {
+    var _str = str;
+    str = _str.str;
+    count = _str.count;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('repeat args(str) is not string');
+  }
+
+  if (!isInteger(count)) {
+    throw new TypeError('repeat args(count) is not integer');
+  }
+
+  return _repeat(str, count);
+};
+/**
+ * isLowerCase
+ */
+
+
+var _isLowerCase = function _isLowerCase(str) {
+  return str.toLowerCase() === str;
+};
+
+var isLowerCase = function isLowerCase(str) {
+  if (!isString(str)) {
+    throw new TypeError('isLowerCase args(str) is not string');
+  }
+
+  return _isLowerCase(str);
+};
+/**
+ * isUpperCase
+ */
+
+
+var _isUpperCase = function _isUpperCase(str) {
+  return str.toUpperCase() === str;
+};
+
+var isUpperCase = function isUpperCase(str) {
+  if (!isString(str)) {
+    throw new TypeError('isUpperCase args(str) is not string');
+  }
+
+  return _isUpperCase(str);
+};
+/**
+ * indexOfFirst
+ */
+
+
+var _indexOfFirst = function _indexOfFirst(str, search, startIndex) {
+  if (search === '') {
+    return -1;
+  }
+
+  return str.indexOf(search, startIndex);
+};
+
+var indexOfFirst = function indexOfFirst(str, search) {
+  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+    var _str2 = str;
+    str = _str2.str;
+    search = _str2.search;
+    var _str2$startIndex = _str2.startIndex;
+    startIndex = _str2$startIndex === void 0 ? 0 : _str2$startIndex;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('indexOfFirst args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('indexOfFirst args(search) is not string');
+  }
+
+  if (!isInteger(startIndex)) {
+    throw new TypeError('indexOfFirst args(startIndex) is not integer');
+  }
+
+  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
+    throw new RangeError('indexOfFirst args(startIndex) must be from 0 to str.length - 1');
+  }
+
+  return _indexOfFirst(str, search, startIndex);
+};
+/**
+ * indexOfLast
+ */
+
+
+var _indexOfLast = function _indexOfLast(str, search) {
+  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
+
+  if (search === '') {
+    return -1;
+  }
+
+  return str.lastIndexOf(search, startIndex);
+};
+
+var indexOfLast = function indexOfLast(str, search) {
+  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
+
+  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+    var _str3 = str;
+    str = _str3.str;
+    search = _str3.search;
+    var _str3$startIndex = _str3.startIndex;
+    startIndex = _str3$startIndex === void 0 ? _max([0, str.length - 1]) : _str3$startIndex;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('indexOfLast args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('indexOfLast args(search) is not string');
+  }
+
+  if (!isInteger(startIndex)) {
+    throw new TypeError('indexOfLast args(startIndex) is not integer');
+  }
+
+  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
+    throw new RangeError('indexOfLast args(startIndex) must be from 0 to str.length - 1');
+  }
+
+  return _indexOfLast(str, search, startIndex);
+};
+/**
+ * isFirst
+ */
+
+
+var _isFirst = function _isFirst(str, search) {
+  return _indexOfFirst(str, search) === 0;
+};
+
+var isFirst = function isFirst(str, search) {
+  if (isObjectParameter(str, 'str, search')) {
+    var _str4 = str;
+    str = _str4.str;
+    search = _str4.search;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('isFirst args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('isFirst args(search) is not string');
+  }
+
+  return _isFirst(str, search);
+};
+/**
+ * isLast
+ */
+
+
+var _isLast = function _isLast(str, search) {
+  return _indexOfLast(str, search) === str.length - search.length;
+};
+
+var isLast = function isLast(str, search) {
+  if (isObjectParameter(str, 'str, search')) {
+    var _str5 = str;
+    str = _str5.str;
+    search = _str5.search;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('isLast args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('isLast args(search) is not string');
+  }
+
+  return _isLast(str, search);
+};
+
+module.exports = {
+  _repeat: _repeat,
+  _isLowerCase: _isLowerCase,
+  _isUpperCase: _isUpperCase,
+  _indexOfFirst: _indexOfFirst,
+  _indexOfLast: _indexOfLast,
+  _isFirst: _isFirst,
+  _isLast: _isLast,
+  repeat: repeat,
+  isLowerCase: isLowerCase,
+  isUpperCase: isUpperCase,
+  indexOfFirst: indexOfFirst,
+  indexOfLast: indexOfLast,
+  isFirst: isFirst,
+  isLast: isLast
+};
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
+
+var _require2 = __webpack_require__(9),
+    isObjectParameter = _require2.isObjectParameter;
+
+var _require3 = __webpack_require__(10),
+    _replaceAll = _require3._replaceAll;
+
+var replaceAll = function replaceAll(str, before, after) {
+  if (isObjectParameter(str, 'str, before, after')) {
+    var _str = str;
+    str = _str.str;
+    before = _str.before;
+    after = _str.after;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('replaceAll args(str) is not string');
+  }
+
+  if (!isString(before)) {
+    throw new TypeError('replaceAll args(before) is not string');
+  }
+
+  if (!isString(after)) {
+    throw new TypeError('replaceAll args(after) is not string');
+  }
+
+  return _replaceAll(str, before, after);
+};
+
+module.exports = {
+  replaceAll: replaceAll
+};
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isArray = _require.isArray,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException;
+
+var _require2 = __webpack_require__(9),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * matchFormat
  */
@@ -5778,7 +6079,7 @@ var _matchFormat = function _matchFormat(formatName, value) {
   var result = _matchFormat.pattern[patterns[index]](value);
 
   if (!isBoolean(result)) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + ' function result is not boolean');
   }
 
   return result;
@@ -5969,82 +6270,14 @@ var matchFormat = function matchFormat(formatName, value) {
 
   return _matchFormat(formatName, value);
 };
-/**
- * repeat
- */
 
-
-var _repeat = function _repeat(value, count) {
-  var result = '';
-
-  for (var i = 0; i < count; i += 1) {
-    result += value;
-  }
-
-  return result;
-};
-
-var repeat = function repeat(value, count) {
-  if (isObjectParameter(value, 'value, count')) {
-    var _value = value;
-    value = _value.value;
-    count = _value.count;
-  }
-
-  if (!isString(value)) {
-    throw new TypeError('repeat args(value) is not string');
-  }
-
-  if (!isInteger(count)) {
-    throw new TypeError('repeat args(count) is not integer');
-  }
-
-  return _repeat(value, count);
-};
-/**
- * isLowerCase
- */
-
-
-var _isLowerCase = function _isLowerCase(value) {
-  return value.toLowerCase() === value;
-};
-
-var isLowerCase = function isLowerCase(value) {
-  if (!isString(value)) {
-    throw new TypeError('isLowerCase args(value) is not string');
-  }
-
-  return _isLowerCase(value);
-};
-/**
- * isUpperCase
- */
-
-
-var _isUpperCase = function _isUpperCase(value) {
-  return value.toUpperCase() === value;
-};
-
-var isUpperCase = function isUpperCase(value) {
-  if (!isString(value)) {
-    throw new TypeError('isUpperCase args(value) is not string');
-  }
-
-  return _isUpperCase(value);
-};
-
-module.exports = (_module$exports = {
+module.exports = {
   _matchFormat: _matchFormat,
-  _repeat: _repeat,
-  isLowerCase: isLowerCase,
-  isUpperCase: isUpperCase,
-  matchFormat: matchFormat,
-  repeat: repeat
-}, _defineProperty(_module$exports, "isLowerCase", isLowerCase), _defineProperty(_module$exports, "isUpperCase", isUpperCase), _module$exports);
+  matchFormat: matchFormat
+};
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6056,10 +6289,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(29)), __webpack_require__(20)), __webpack_require__(19)), __webpack_require__(24)), __webpack_require__(33));
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(29)), __webpack_require__(20)), __webpack_require__(19)), __webpack_require__(24)), __webpack_require__(35));
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6570,62 +6803,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(5),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
-
-var _require2 = __webpack_require__(9),
-    isObjectParameter = _require2.isObjectParameter;
-
-var _require3 = __webpack_require__(10),
-    _replaceAll = _require3._replaceAll;
-
-var replaceAll = function replaceAll(str, before, after) {
-  if (isObjectParameter(str, 'str, before, after')) {
-    var _str = str;
-    str = _str.str;
-    before = _str.before;
-    after = _str.after;
-  }
-
-  if (!isString(str)) {
-    throw new TypeError('replaceAll args(str) is not string');
-  }
-
-  if (!isString(before)) {
-    throw new TypeError('replaceAll args(before) is not string');
-  }
-
-  if (!isString(after)) {
-    throw new TypeError('replaceAll args(after) is not string');
-  }
-
-  return _replaceAll(str, before, after);
-};
-
-module.exports = {
-  replaceAll: replaceAll
-};
-
-/***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6659,7 +6837,7 @@ var _require = __webpack_require__(5),
     isNotRegExp = _require.isNotRegExp,
     isNotException = _require.isNotException;
 
-var _require2 = __webpack_require__(32),
+var _require2 = __webpack_require__(34),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
@@ -7013,7 +7191,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7034,7 +7212,7 @@ var _require = __webpack_require__(5),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = __webpack_require__(32),
+var _require2 = __webpack_require__(34),
     _or = _require2._or,
     _includes = _require2._includes,
     _includesSome = _require2._includesSome,

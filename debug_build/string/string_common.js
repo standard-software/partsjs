@@ -1,9 +1,5 @@
 "use strict";
 
-var _module$exports;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var _require = require('../type/type.js'),
     isUndefined = _require.isUndefined,
     isNull = _require.isNull,
@@ -19,291 +15,230 @@ var _require = require('../type/type.js'),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = require('../compare/compare.js'),
-    _matchSome = _require2._matchSome;
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
 
-var _require3 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require3.isObjectParameter;
+var _require3 = require('../number/number.js'),
+    _inRange = _require3._inRange;
 
 var _require4 = require('../array/array.js'),
-    _map = _require4._map;
-/**
- * matchFormat
- */
-
-
-var _matchFormat = function _matchFormat(formatName, value) {
-  var patterns = Object.keys(_matchFormat.pattern);
-  var index = patterns.indexOf(formatName);
-
-  if (index === -1) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") is not exists format"));
-  }
-
-  var result = _matchFormat.pattern[patterns[index]](value);
-
-  if (!isBoolean(result)) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + " function result is not boolean");
-  }
-
-  return result;
-};
-
-_matchFormat.pattern = {};
-
-_matchFormat.clear = function () {
-  _matchFormat.pattern = {};
-};
-
-_matchFormat.add = function (nameArray, patternFunction) {
-  nameArray.forEach(function (name) {
-    _matchFormat.pattern[name] = patternFunction;
-  });
-};
-
-_matchFormat.reset = function () {
-  _matchFormat.add(['zenkaku'], function (value) {
-    return value.match(/^[^\x01-\x7E\xA1-\xDF]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['hiragana'], function (value) {
-    return value.match(/^[\u3041-\u3096]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['katakana'], function (value) {
-    return value.match(/^[\u30a1-\u30f6]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['alphabet-number'], function (value) {
-    return value.match(/^[0-9a-zA-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['number'], function (value) {
-    return value.match(/^[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['alphabet'], function (value) {
-    return value.match(/^[a-zA-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['upper_alphabet'], function (value) {
-    return value.match(/^[A-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['lower_alphabet'], function (value) {
-    return value.match(/^[a-z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['integer'], function (value) {
-    return value.match(/^[+|-]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_only'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_integer'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_more'], function (value) {
-    return value.match( // eslint-disable-next-line max-len
-    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
-  }); // float_more
-  //  integer + float + exponential notation
-  //  value.match(new RegExp(
-  //    '^[-|+]?[0-9]*\\.[0-9]*$' +
-  //    '|^[+|-]?[0-9]+$' +
-  //    '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
-  //  , 'g'))) ? true : false;
-
-
-  _matchFormat.add(['2_base_number', 'binary'], function (value) {
-    return value.match(/^[-|+]?[01]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['3_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-2]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['4_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-3]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['5_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-4]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['6_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-5]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['7_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-6]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['8_base_number', 'octal'], function (value) {
-    return value.match(/^[-|+]?[0-7]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['9_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-8]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['10_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['11_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['12_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['13_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['14_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['15_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['16_base_number', 'hex'], function (value) {
-    return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d', 'date'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy/m/d'], function (value) {
-    return value.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy/mm/dd'], function (value) {
-    return value.match(/^\d{4}\/\d{2}\/\d{2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n:s'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n:s.ms'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y-m-d'], function (value) {
-    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-m-d'], function (value) {
-    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
-    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
-  });
-};
-
-_matchFormat.reset();
-
-var matchFormat = function matchFormat(formatName, value) {
-  if (isObjectParameter(formatName, 'formatName,value')) {
-    var _formatName = formatName;
-    formatName = _formatName.formatName;
-    value = _formatName.value;
-  }
-
-  if (!isString(formatName)) {
-    throw new TypeError('matchFormat args(formatName) is not string');
-  }
-
-  if (!isString(value)) {
-    throw new TypeError('matchFormat args(value) is not string');
-  }
-
-  return _matchFormat(formatName, value);
-};
+    _max = _require4._max;
 /**
  * repeat
  */
 
 
-var _repeat = function _repeat(value, count) {
+var _repeat = function _repeat(str, count) {
   var result = '';
 
   for (var i = 0; i < count; i += 1) {
-    result += value;
+    result += str;
   }
 
   return result;
 };
 
-var repeat = function repeat(value, count) {
-  if (isObjectParameter(value, 'value, count')) {
-    var _value = value;
-    value = _value.value;
-    count = _value.count;
+var repeat = function repeat(str, count) {
+  if (isObjectParameter(str, 'str, count')) {
+    var _str = str;
+    str = _str.str;
+    count = _str.count;
   }
 
-  if (!isString(value)) {
-    throw new TypeError('repeat args(value) is not string');
+  if (!isString(str)) {
+    throw new TypeError('repeat args(str) is not string');
   }
 
   if (!isInteger(count)) {
     throw new TypeError('repeat args(count) is not integer');
   }
 
-  return _repeat(value, count);
+  return _repeat(str, count);
 };
 /**
  * isLowerCase
  */
 
 
-var _isLowerCase = function _isLowerCase(value) {
-  return value.toLowerCase() === value;
+var _isLowerCase = function _isLowerCase(str) {
+  return str.toLowerCase() === str;
 };
 
-var isLowerCase = function isLowerCase(value) {
-  if (!isString(value)) {
-    throw new TypeError('isLowerCase args(value) is not string');
+var isLowerCase = function isLowerCase(str) {
+  if (!isString(str)) {
+    throw new TypeError('isLowerCase args(str) is not string');
   }
 
-  return _isLowerCase(value);
+  return _isLowerCase(str);
 };
 /**
  * isUpperCase
  */
 
 
-var _isUpperCase = function _isUpperCase(value) {
-  return value.toUpperCase() === value;
+var _isUpperCase = function _isUpperCase(str) {
+  return str.toUpperCase() === str;
 };
 
-var isUpperCase = function isUpperCase(value) {
-  if (!isString(value)) {
-    throw new TypeError('isUpperCase args(value) is not string');
+var isUpperCase = function isUpperCase(str) {
+  if (!isString(str)) {
+    throw new TypeError('isUpperCase args(str) is not string');
   }
 
-  return _isUpperCase(value);
+  return _isUpperCase(str);
+};
+/**
+ * indexOfFirst
+ */
+
+
+var _indexOfFirst = function _indexOfFirst(str, search, startIndex) {
+  if (search === '') {
+    return -1;
+  }
+
+  return str.indexOf(search, startIndex);
 };
 
-module.exports = (_module$exports = {
-  _matchFormat: _matchFormat,
+var indexOfFirst = function indexOfFirst(str, search) {
+  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+    var _str2 = str;
+    str = _str2.str;
+    search = _str2.search;
+    var _str2$startIndex = _str2.startIndex;
+    startIndex = _str2$startIndex === void 0 ? 0 : _str2$startIndex;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('indexOfFirst args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('indexOfFirst args(search) is not string');
+  }
+
+  if (!isInteger(startIndex)) {
+    throw new TypeError('indexOfFirst args(startIndex) is not integer');
+  }
+
+  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
+    throw new RangeError('indexOfFirst args(startIndex) must be from 0 to str.length - 1');
+  }
+
+  return _indexOfFirst(str, search, startIndex);
+};
+/**
+ * indexOfLast
+ */
+
+
+var _indexOfLast = function _indexOfLast(str, search) {
+  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
+
+  if (search === '') {
+    return -1;
+  }
+
+  return str.lastIndexOf(search, startIndex);
+};
+
+var indexOfLast = function indexOfLast(str, search) {
+  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
+
+  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+    var _str3 = str;
+    str = _str3.str;
+    search = _str3.search;
+    var _str3$startIndex = _str3.startIndex;
+    startIndex = _str3$startIndex === void 0 ? _max([0, str.length - 1]) : _str3$startIndex;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('indexOfLast args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('indexOfLast args(search) is not string');
+  }
+
+  if (!isInteger(startIndex)) {
+    throw new TypeError('indexOfLast args(startIndex) is not integer');
+  }
+
+  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
+    throw new RangeError('indexOfLast args(startIndex) must be from 0 to str.length - 1');
+  }
+
+  return _indexOfLast(str, search, startIndex);
+};
+/**
+ * isFirst
+ */
+
+
+var _isFirst = function _isFirst(str, search) {
+  return _indexOfFirst(str, search) === 0;
+};
+
+var isFirst = function isFirst(str, search) {
+  if (isObjectParameter(str, 'str, search')) {
+    var _str4 = str;
+    str = _str4.str;
+    search = _str4.search;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('isFirst args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('isFirst args(search) is not string');
+  }
+
+  return _isFirst(str, search);
+};
+/**
+ * isLast
+ */
+
+
+var _isLast = function _isLast(str, search) {
+  return _indexOfLast(str, search) === str.length - search.length;
+};
+
+var isLast = function isLast(str, search) {
+  if (isObjectParameter(str, 'str, search')) {
+    var _str5 = str;
+    str = _str5.str;
+    search = _str5.search;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('isLast args(str) is not string');
+  }
+
+  if (!isString(search)) {
+    throw new TypeError('isLast args(search) is not string');
+  }
+
+  return _isLast(str, search);
+};
+
+module.exports = {
   _repeat: _repeat,
+  _isLowerCase: _isLowerCase,
+  _isUpperCase: _isUpperCase,
+  _indexOfFirst: _indexOfFirst,
+  _indexOfLast: _indexOfLast,
+  _isFirst: _isFirst,
+  _isLast: _isLast,
+  repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
-  matchFormat: matchFormat,
-  repeat: repeat
-}, _defineProperty(_module$exports, "isLowerCase", isLowerCase), _defineProperty(_module$exports, "isUpperCase", isUpperCase), _module$exports);
+  indexOfFirst: indexOfFirst,
+  indexOfLast: indexOfLast,
+  isFirst: isFirst,
+  isLast: isLast
+};

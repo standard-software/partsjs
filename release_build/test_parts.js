@@ -169,7 +169,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = !parts.platform.isWindowsScriptHost() ? [247, 13, 3, 140, 8, 11, 23, 29, 7, 6, 12, 33] : [247, 13, 3, 140, 8, 11, 23, 29, 7, 6, 12, 33];
+        var countArray = parts.platform.isWindowsScriptHost() ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 9, 12, 33] : [248, 13, 3, 140, 8, 11, 23, 29, 7, 9, 12, 33];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -22428,6 +22428,102 @@ var test_execute_convert = function test_execute_convert(parts) {
         valueToInteger = _parts$convert.valueToInteger,
         valueToIntegerDefault = _parts$convert.valueToIntegerDefault;
 
+    var test_StringCast_standard = function test_StringCast_standard() {
+      it('test_standardStringCast', function () {
+        // Positive number
+        checkEqual('32', String(32));
+        checkEqual('31.5', String(31.5));
+        checkEqual('255', String(255));
+        checkEqual('11', String(11));
+        checkEqual('255', String(0xFF));
+        checkEqual('16', String(16));
+        checkEqual('100000', String(1e+5));
+        checkEqual('0.00001', String(1e-5));
+        checkEqual('255', String(+0xFF));
+        checkEqual('16', String(+16));
+        checkEqual('100000', String(+1e+5));
+        checkEqual('0.00001', String(+1e-5)); // Negative number
+
+        checkEqual('-32', String(-32));
+        checkEqual('-31.5', String(-31.5));
+        checkEqual('-255', String(-255));
+        checkEqual('-11', String(-11));
+        checkEqual('-255', String(-0xFF));
+        checkEqual('-16', String(-16));
+        checkEqual('-100000', String(-1e+5));
+        checkEqual('-0.00001', String(-1e-5)); // spacial number value
+
+        checkEqual('NaN', String(NaN));
+        checkEqual('Infinity', String(Infinity));
+        checkEqual('-Infinity', String(-Infinity)); // other type
+
+        checkEqual('null', String(null));
+        checkEqual('undefined', String(undefined));
+        checkEqual('[object Object]', String({}));
+        checkEqual('', String([]));
+        checkEqual('1', String([1]));
+        checkEqual('1,2,3', String([1, 2, 3]));
+        checkEqual('', String(''));
+        checkEqual('a', String('a'));
+        checkEqual('true', String(true));
+        checkEqual('false', String(false));
+      });
+    };
+
+    var test_toString_standard = function test_toString_standard() {
+      it('test_standardToString', function () {
+        // Positive number
+        checkEqual('32', 32 .toString());
+        checkEqual('31.5', 31.5.toString());
+        checkEqual('255', 255 .toString());
+        checkEqual('11', 11 .toString());
+        checkEqual('255', 0xFF.toString());
+        checkEqual('16', 16 .toString());
+        checkEqual('100000', 1e+5.toString());
+        checkEqual('0.00001', 1e-5.toString());
+        checkEqual('255', (+0xFF).toString());
+        checkEqual('16', (+16).toString());
+        checkEqual('100000', (+1e+5).toString());
+        checkEqual('0.00001', (+1e-5).toString()); // Negative number
+
+        checkEqual('-32', (-32).toString());
+        checkEqual('-31.5', (-31.5).toString());
+        checkEqual('-255', (-255).toString());
+        checkEqual('-11', (-11).toString());
+        checkEqual('-255', (-0xFF).toString());
+        checkEqual('-16', (-16).toString());
+        checkEqual('-100000', (-1e+5).toString());
+        checkEqual('-0.00001', (-1e-5).toString()); // spacial number value
+
+        checkEqual('NaN', NaN.toString());
+        checkEqual('Infinity', Infinity.toString());
+        checkEqual('-Infinity', (-Infinity).toString());
+        checkEqual(-Infinity, -Infinity.toString());
+        checkEqual(-Infinity, -Infinity.toString());
+        checkEqual(-Infinity, -'Infinity'); // Decimal number other
+
+        checkEqual('1010.01', 10.25.toString(2));
+        checkEqual('22.1', 10.25.toString(4));
+        checkEqual('12.2', 10.25.toString(8));
+        checkEqual('a.4', 10.25.toString(16)); // other type
+
+        checkEqual(true, isThrown(function () {
+          return null.toString();
+        }));
+        checkEqual(true, isThrown(function () {
+          return undefined.toString();
+        }));
+        checkEqual('[object Object]', {}.toString());
+        checkEqual('', [].toString());
+        checkEqual('1', [1].toString());
+        checkEqual('1,2,3', [1, 2, 3].toString());
+        checkEqual('', ''.toString());
+        checkEqual('a', 'a'.toString());
+        checkEqual('true', true.toString());
+        checkEqual('false', false.toString());
+      });
+    };
+
     var test_numberToString = function test_numberToString() {
       it('test_numberToString', function () {
         // Positive number
@@ -22662,99 +22758,388 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_standardStringCast = function test_standardStringCast() {
-      it('test_standardStringCast', function () {
-        // Positive number
-        checkEqual('32', String(32));
-        checkEqual('31.5', String(31.5));
-        checkEqual('255', String(255));
-        checkEqual('11', String(11));
-        checkEqual('255', String(0xFF));
-        checkEqual('16', String(16));
-        checkEqual('100000', String(1e+5));
-        checkEqual('0.00001', String(1e-5));
-        checkEqual('255', String(+0xFF));
-        checkEqual('16', String(+16));
-        checkEqual('100000', String(+1e+5));
-        checkEqual('0.00001', String(+1e-5)); // Negative number
+    var test_NumberCast_standard = function test_NumberCast_standard() {
+      it('test_NumberCast', function () {
+        // Integer
+        checkEqual(123, Number('123'));
+        checkEqual(123, Number('0123'));
+        checkEqual(123, Number('+123'));
+        checkEqual(-123, Number('-0123'));
+        checkEqual(123, Number(' 123'), '1');
+        checkEqual(123, Number('123 '), '2');
+        checkEqual(123, Number(' 123 '), '3');
 
-        checkEqual('-32', String(-32));
-        checkEqual('-31.5', String(-31.5));
-        checkEqual('-255', String(-255));
-        checkEqual('-11', String(-11));
-        checkEqual('-255', String(-0xFF));
-        checkEqual('-16', String(-16));
-        checkEqual('-100000', String(-1e+5));
-        checkEqual('-0.00001', String(-1e-5)); // spacial number value
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, Number('　123'), '4');
+          checkEqual(NaN, Number('123　'), '5');
+          checkEqual(NaN, Number('　123　'), '6');
+        } else {
+          checkEqual(123, Number('　123'), '4');
+          checkEqual(123, Number('123　'), '5');
+          checkEqual(123, Number('　123　'), '6');
+        }
 
-        checkEqual('NaN', String(NaN));
-        checkEqual('Infinity', String(Infinity));
-        checkEqual('-Infinity', String(-Infinity)); // other type
+        checkEqual(NaN, Number('123 0'));
+        checkEqual(NaN, Number('0 123'));
+        checkEqual(NaN, Number('1 123'));
+        checkEqual(NaN, Number('123a'));
+        checkEqual(NaN, Number('a123')); // Decimal
 
-        checkEqual('null', String(null));
-        checkEqual('undefined', String(undefined));
-        checkEqual('[object Object]', String({}));
-        checkEqual('', String([]));
-        checkEqual('1', String([1]));
-        checkEqual('1,2,3', String([1, 2, 3]));
-        checkEqual('', String(''));
-        checkEqual('a', String('a'));
-        checkEqual('true', String(true));
-        checkEqual('false', String(false));
+        checkEqual(123.4, Number('123.4'));
+        checkEqual(123.4, Number('0123.4'));
+        checkEqual(123.4, Number('+123.4'));
+        checkEqual(-123.4, Number('-0123.4'));
+        checkEqual(123.5, Number('123.5'));
+        checkEqual(123.5, Number('0123.5'));
+        checkEqual(123.5, Number('+123.5'));
+        checkEqual(-123.5, Number('-0123.5'));
+        checkEqual(123.4, Number(' 123.4'));
+        checkEqual(123.4, Number('123.4 '));
+        checkEqual(123.4, Number(' 123.4 '));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, Number('　123.4'));
+          checkEqual(NaN, Number('123.4　'));
+          checkEqual(NaN, Number('　123.4　'));
+        } else {
+          checkEqual(123.4, Number('　123.4'));
+          checkEqual(123.4, Number('123.4　'));
+          checkEqual(123.4, Number('　123.4　'));
+        }
+
+        checkEqual(NaN, Number('123.4 0'));
+        checkEqual(NaN, Number('0 123.4'));
+        checkEqual(NaN, Number('1 123.4'));
+        checkEqual(NaN, Number('123 .4'));
+        checkEqual(NaN, Number('123. 4'));
+        checkEqual(NaN, Number('123.4a'));
+        checkEqual(NaN, Number('a123.4'));
+        checkEqual(123.45, Number('123.45'));
+        checkEqual(NaN, Number('123.4.5')); // string default value
+
+        checkEqual(NaN, Number('abc')); // space string
+
+        checkEqual(0, Number('')); // ?
+
+        checkEqual(0, Number(' ')); // ?
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, Number('　'));
+        } else {
+          checkEqual(0, Number('　')); // ?
+        } // exponential notation
+
+
+        checkEqual(3.14, Number(3.14));
+        checkEqual(3.14, Number('3.14'));
+        checkEqual(3.14, Number('314e-2'));
+        checkEqual(3.14, Number('0.0314E+2'));
+        checkEqual(0.14, Number('.14'));
+        checkEqual(0.00000000000000001, Number('1e-17'));
+        checkEqual(1e-17, Number('1e-17')); // exponential notation detail
+
+        checkEqual(1, Number('1.'));
+        checkEqual(NaN, Number('1.1e'));
+        checkEqual(NaN, Number('1.1e+'));
+        checkEqual(100000, Number('1e+5'));
+        checkEqual(0.00001, Number('1e-5'));
+        checkEqual(NaN, Number('1.e'));
+        checkEqual(NaN, Number('1.e+'));
+        checkEqual(100000, Number('1.e+5')); // Number different
+
+        checkEqual(291, Number('0x123'));
+        checkEqual(NaN, Number('+0x123'));
+        checkEqual(NaN, Number('-0x123'));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, Number('0o123'));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(NaN, Number('0o123'));
+        } else {
+          checkEqual(83, Number('0o123'));
+        }
+
+        checkEqual(NaN, Number('+0o123'));
+        checkEqual(NaN, Number('-0o123'));
+        checkEqual(Infinity, Number('Infinity'));
+        checkEqual(NaN, Number('infinity'));
+        checkEqual(NaN, Number('inf'));
+        checkEqual(NaN, Number('info')); // Number
+
+        checkEqual(123, Number(123));
+        checkEqual(-123, Number(-123));
+        checkEqual(1.23, Number(1.23));
+        checkEqual(-1.23, Number(-1.23));
+        checkEqual(Infinity, Number(Infinity));
+        checkEqual(-Infinity, Number(-Infinity));
+        checkEqual(NaN, Number(NaN)); // Other
+
+        checkEqual(0, Number(null)); // !
+
+        checkEqual(NaN, Number(undefined));
+        checkEqual(NaN, Number({}));
+        checkEqual(NaN, Number({
+          a: 1
+        }));
+        checkEqual(0, Number([])); // ?
+
+        checkEqual(1, Number([1])); // ?
+
+        checkEqual(123, Number([123])); // ?
+
+        checkEqual(NaN, Number([1, 2]));
       });
     };
 
-    var test_standardToString = function test_standardToString() {
-      it('test_standardToString', function () {
-        // Positive number
-        checkEqual('32', 32 .toString());
-        checkEqual('31.5', 31.5.toString());
-        checkEqual('255', 255 .toString());
-        checkEqual('11', 11 .toString());
-        checkEqual('255', 0xFF.toString());
-        checkEqual('16', 16 .toString());
-        checkEqual('100000', 1e+5.toString());
-        checkEqual('0.00001', 1e-5.toString());
-        checkEqual('255', (+0xFF).toString());
-        checkEqual('16', (+16).toString());
-        checkEqual('100000', (+1e+5).toString());
-        checkEqual('0.00001', (+1e-5).toString()); // Negative number
+    var test_parseFloat_standard = function test_parseFloat_standard() {
+      it('test_parseFloat', function () {
+        // Integer
+        checkEqual(123, parseFloat('123'));
+        checkEqual(123, parseFloat('0123'));
+        checkEqual(123, parseFloat('+123'));
+        checkEqual(-123, parseFloat('-0123'));
+        checkEqual(123, parseFloat(' 123'), '1');
+        checkEqual(123, parseFloat('123 '), '2');
+        checkEqual(123, parseFloat(' 123 '), '3');
 
-        checkEqual('-32', (-32).toString());
-        checkEqual('-31.5', (-31.5).toString());
-        checkEqual('-255', (-255).toString());
-        checkEqual('-11', (-11).toString());
-        checkEqual('-255', (-0xFF).toString());
-        checkEqual('-16', (-16).toString());
-        checkEqual('-100000', (-1e+5).toString());
-        checkEqual('-0.00001', (-1e-5).toString()); // spacial number value
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, parseFloat('　123'), '4');
+          checkEqual(123, parseFloat('123　'), '5');
+          checkEqual(NaN, parseFloat('　123　'), '6');
+        } else {
+          checkEqual(123, parseFloat('　123'), '4');
+          checkEqual(123, parseFloat('123　'), '5');
+          checkEqual(123, parseFloat('　123　'), '6');
+        }
 
-        checkEqual('NaN', NaN.toString());
-        checkEqual('Infinity', Infinity.toString());
-        checkEqual('-Infinity', (-Infinity).toString());
-        checkEqual(-Infinity, -Infinity.toString());
-        checkEqual(-Infinity, -Infinity.toString());
-        checkEqual(-Infinity, -'Infinity'); // Decimal number other
+        checkEqual(123, parseFloat('123 0'));
+        checkEqual(0, parseFloat('0 123'));
+        checkEqual(1, parseFloat('1 123'));
+        checkEqual(123, parseFloat('123a'));
+        checkEqual(NaN, parseFloat('a123')); // Decimal
 
-        checkEqual('1010.01', 10.25.toString(2));
-        checkEqual('22.1', 10.25.toString(4));
-        checkEqual('12.2', 10.25.toString(8));
-        checkEqual('a.4', 10.25.toString(16)); // other type
+        checkEqual(123.4, parseFloat('123.4'));
+        checkEqual(123.4, parseFloat('0123.4'));
+        checkEqual(123.4, parseFloat('+123.4'));
+        checkEqual(-123.4, parseFloat('-0123.4'));
+        checkEqual(123.5, parseFloat('123.5'));
+        checkEqual(123.5, parseFloat('0123.5'));
+        checkEqual(123.5, parseFloat('+123.5'));
+        checkEqual(-123.5, parseFloat('-0123.5'));
+        checkEqual(123.4, parseFloat(' 123.4'));
+        checkEqual(123.4, parseFloat('123.4 '));
+        checkEqual(123.4, parseFloat(' 123.4 '));
 
-        checkEqual(true, isThrown(function () {
-          return null.toString();
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, parseFloat('　123.4'));
+          checkEqual(123.4, parseFloat('123.4　'));
+          checkEqual(NaN, parseFloat('　123.4　'));
+        } else {
+          checkEqual(123.4, parseFloat('　123.4'));
+          checkEqual(123.4, parseFloat('123.4　'));
+          checkEqual(123.4, parseFloat('　123.4　'));
+        }
+
+        checkEqual(123.4, parseFloat('123.4 0'));
+        checkEqual(0, parseFloat('0 123.4'));
+        checkEqual(1, parseFloat('1 123.4'));
+        checkEqual(123, parseFloat('123 .4'));
+        checkEqual(123, parseFloat('123. 4'));
+        checkEqual(123.4, parseFloat('123.4a'));
+        checkEqual(NaN, parseFloat('a123.4'));
+        checkEqual(123.45, parseFloat('123.45'));
+        checkEqual(123.4, parseFloat('123.4.5')); // string default value
+
+        checkEqual(NaN, parseFloat('abc')); // space string
+
+        checkEqual(NaN, parseFloat(''));
+        checkEqual(NaN, parseFloat(' '));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, parseFloat('　'));
+        } else {
+          checkEqual(NaN, parseFloat('　'));
+        } // exponential notation
+
+
+        checkEqual(3.14, parseFloat(3.14));
+        checkEqual(3.14, parseFloat('3.14'));
+        checkEqual(3.14, parseFloat('314e-2'));
+        checkEqual(3.14, parseFloat('0.0314E+2'));
+        checkEqual(0.14, parseFloat('.14'));
+        checkEqual(0.00000000000000001, parseFloat('1e-17'));
+        checkEqual(1e-17, parseFloat('1e-17')); // exponential notation detail
+
+        checkEqual(1, parseFloat('1.'));
+        checkEqual(1.1, parseFloat('1.1e'));
+        checkEqual(1.1, parseFloat('1.1e+'));
+        checkEqual(100000, parseFloat('1e+5'));
+        checkEqual(0.00001, parseFloat('1e-5'));
+        checkEqual(1, parseFloat('1.e'));
+        checkEqual(1, parseFloat('1.e+'));
+        checkEqual(100000, parseFloat('1.e+5')); // parseFloat different
+
+        checkEqual(0, parseFloat('0x123'));
+        checkEqual(0, parseFloat('+0x123'));
+        checkEqual(-0, parseFloat('-0x123'));
+        checkEqual(0, parseFloat('0o123'));
+        checkEqual(0, parseFloat('+0o123'));
+        checkEqual(-0, parseFloat('-0o123'));
+        checkEqual(Infinity, parseFloat('Infinity'));
+        checkEqual(NaN, parseFloat('infinity'));
+        checkEqual(NaN, parseFloat('inf'));
+        checkEqual(NaN, parseFloat('info')); // parseFloat
+
+        checkEqual(123, parseFloat(123));
+        checkEqual(-123, parseFloat(-123));
+        checkEqual(1.23, parseFloat(1.23));
+        checkEqual(-1.23, parseFloat(-1.23));
+        checkEqual(Infinity, parseFloat(Infinity));
+        checkEqual(-Infinity, parseFloat(-Infinity));
+        checkEqual(NaN, parseFloat(NaN)); // Other
+
+        checkEqual(NaN, parseFloat(null));
+        checkEqual(NaN, parseFloat(undefined));
+        checkEqual(NaN, parseFloat({}));
+        checkEqual(NaN, parseFloat({
+          a: 1
         }));
-        checkEqual(true, isThrown(function () {
-          return undefined.toString();
+        checkEqual(NaN, parseFloat([]));
+        checkEqual(1, parseFloat([1]));
+        checkEqual(123, parseFloat([123]));
+        checkEqual(1, parseFloat([1, 2]));
+      });
+    };
+
+    var test_parseInt_standard = function test_parseInt_standard() {
+      it('test_parseInt', function () {
+        var parseInt10 = function parseInt10(value) {
+          return parseInt(value, 10);
+        }; // Integer
+
+
+        checkEqual(123, parseInt10('123'));
+        checkEqual(123, parseInt10('0123'));
+        checkEqual(123, parseInt10('+123'));
+        checkEqual(-123, parseInt10('-0123'));
+        checkEqual(123, parseInt10(' 123'), '1');
+        checkEqual(123, parseInt10('123 '), '2');
+        checkEqual(123, parseInt10(' 123 '), '3');
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, parseInt10('　123'), '4');
+          checkEqual(123, parseInt10('123　'), '5');
+          checkEqual(NaN, parseInt10('　123　'), '6');
+        } else {
+          checkEqual(123, parseInt10('　123'), '4');
+          checkEqual(123, parseInt10('123　'), '5');
+          checkEqual(123, parseInt10('　123　'), '6');
+        }
+
+        checkEqual(123, parseInt10('123 0'));
+        checkEqual(0, parseInt10('0 123'));
+        checkEqual(1, parseInt10('1 123'));
+        checkEqual(123, parseInt10('123a'));
+        checkEqual(NaN, parseInt10('a123')); // Decimal
+
+        checkEqual(123, parseInt10('123.4'));
+        checkEqual(123, parseInt10('0123.4'));
+        checkEqual(123, parseInt10('+123.4'));
+        checkEqual(-123, parseInt10('-0123.4'));
+        checkEqual(123, parseInt10('123.5'));
+        checkEqual(123, parseInt10('0123.5'));
+        checkEqual(123, parseInt10('+123.5'));
+        checkEqual(-123, parseInt10('-0123.5'));
+        checkEqual(123, parseInt10(' 123.4'));
+        checkEqual(123, parseInt10('123.4 '));
+        checkEqual(123, parseInt10(' 123.4 '));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, parseInt10('　123.4'));
+          checkEqual(123, parseInt10('123.4　'));
+          checkEqual(NaN, parseInt10('　123.4　'));
+        } else {
+          checkEqual(123, parseInt10('　123.4'));
+          checkEqual(123, parseInt10('123.4　'));
+          checkEqual(123, parseInt10('　123.4　'));
+        }
+
+        checkEqual(123, parseInt10('123.4 0'));
+        checkEqual(0, parseInt10('0 123.4'));
+        checkEqual(1, parseInt10('1 123.4'));
+        checkEqual(123, parseInt10('123 .4'));
+        checkEqual(123, parseInt10('123. 4'));
+        checkEqual(123, parseInt10('123.4a'));
+        checkEqual(NaN, parseInt10('a123.4'));
+        checkEqual(123, parseInt10('123.45'));
+        checkEqual(123, parseInt10('123.4.5')); // string default value
+
+        checkEqual(NaN, parseInt10('abc')); // space string
+
+        checkEqual(NaN, parseInt10(''));
+        checkEqual(NaN, parseInt10(' '));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN, parseInt10('　'));
+        } else {
+          checkEqual(NaN, parseInt10('　'));
+        } // exponential notation
+
+
+        checkEqual(3, parseInt10(3.14));
+        checkEqual(3, parseInt10('3.14'));
+        checkEqual(314, parseInt10('314e-2'));
+        checkEqual(0, parseInt10('0.0314E+2'));
+        checkEqual(NaN, parseInt10('.14')); // ?
+
+        checkEqual(1, parseInt10('1e-17'));
+        checkEqual(1, parseInt10('1e-17')); // exponential notation detail
+
+        checkEqual(1, parseInt10('1.'));
+        checkEqual(1, parseInt10('1.1e'));
+        checkEqual(1, parseInt10('1.1e+'));
+        checkEqual(1, parseInt10('1e+5'));
+        checkEqual(1, parseInt10('1e-5'));
+        checkEqual(1, parseInt10('1.e'));
+        checkEqual(1, parseInt10('1.e+'));
+        checkEqual(1, parseInt10('1.e+5')); // parseFloat different
+
+        checkEqual(0, parseInt10('0x123'));
+        checkEqual(0, parseInt10('+0x123'));
+        checkEqual(-0, parseInt10('-0x123'));
+        checkEqual(0, parseInt10('0o123'));
+        checkEqual(0, parseInt10('+0o123'));
+        checkEqual(-0, parseInt10('-0o123'));
+        checkEqual(NaN, parseInt10('Infinity')); // ?
+
+        checkEqual(NaN, parseInt10('infinity'));
+        checkEqual(NaN, parseInt10('inf'));
+        checkEqual(NaN, parseInt10('info')); // parseFloat
+
+        checkEqual(123, parseInt10(123));
+        checkEqual(-123, parseInt10(-123));
+        checkEqual(1, parseInt10(1.23));
+        checkEqual(-1, parseInt10(-1.23));
+        checkEqual(NaN, parseInt10(Infinity));
+        checkEqual(NaN, parseInt10(-Infinity));
+        checkEqual(NaN, parseInt10(NaN)); // Other
+
+        checkEqual(NaN, parseInt10(null));
+        checkEqual(NaN, parseInt10(undefined));
+        checkEqual(NaN, parseInt10({}));
+        checkEqual(NaN, parseInt10({
+          a: 1
         }));
-        checkEqual('[object Object]', {}.toString());
-        checkEqual('', [].toString());
-        checkEqual('1', [1].toString());
-        checkEqual('1,2,3', [1, 2, 3].toString());
-        checkEqual('', ''.toString());
-        checkEqual('a', 'a'.toString());
-        checkEqual('true', true.toString());
-        checkEqual('false', false.toString());
+        checkEqual(NaN, parseInt10([]));
+        checkEqual(1, parseInt10([1]));
+        checkEqual(123, parseInt10([123]));
+        checkEqual(1, parseInt10([1, 2])); // Decimal number other
+
+        checkEqual(10, parseInt('1010', 2));
+        checkEqual(10, parseInt('22', 4));
+        checkEqual(10, parseInt('12', 8));
+        checkEqual(10, parseInt('a', 16));
+        checkEqual(10, parseInt('A', 16));
       });
     };
 
@@ -23590,404 +23975,19 @@ var test_execute_convert = function test_execute_convert(parts) {
       });
     };
 
-    var test_standardNumberCast = function test_standardNumberCast() {
-      it('test_NumberCast', function () {
-        // Integer
-        checkEqual(123, Number('123'));
-        checkEqual(123, Number('0123'));
-        checkEqual(123, Number('+123'));
-        checkEqual(-123, Number('-0123'));
-        checkEqual(123, Number(' 123'), '1');
-        checkEqual(123, Number('123 '), '2');
-        checkEqual(123, Number(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　123'), '4');
-          checkEqual(NaN, Number('123　'), '5');
-          checkEqual(NaN, Number('　123　'), '6');
-        } else {
-          checkEqual(123, Number('　123'), '4');
-          checkEqual(123, Number('123　'), '5');
-          checkEqual(123, Number('　123　'), '6');
-        }
-
-        checkEqual(NaN, Number('123 0'));
-        checkEqual(NaN, Number('0 123'));
-        checkEqual(NaN, Number('1 123'));
-        checkEqual(NaN, Number('123a'));
-        checkEqual(NaN, Number('a123')); // Decimal
-
-        checkEqual(123.4, Number('123.4'));
-        checkEqual(123.4, Number('0123.4'));
-        checkEqual(123.4, Number('+123.4'));
-        checkEqual(-123.4, Number('-0123.4'));
-        checkEqual(123.5, Number('123.5'));
-        checkEqual(123.5, Number('0123.5'));
-        checkEqual(123.5, Number('+123.5'));
-        checkEqual(-123.5, Number('-0123.5'));
-        checkEqual(123.4, Number(' 123.4'));
-        checkEqual(123.4, Number('123.4 '));
-        checkEqual(123.4, Number(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　123.4'));
-          checkEqual(NaN, Number('123.4　'));
-          checkEqual(NaN, Number('　123.4　'));
-        } else {
-          checkEqual(123.4, Number('　123.4'));
-          checkEqual(123.4, Number('123.4　'));
-          checkEqual(123.4, Number('　123.4　'));
-        }
-
-        checkEqual(NaN, Number('123.4 0'));
-        checkEqual(NaN, Number('0 123.4'));
-        checkEqual(NaN, Number('1 123.4'));
-        checkEqual(NaN, Number('123 .4'));
-        checkEqual(NaN, Number('123. 4'));
-        checkEqual(NaN, Number('123.4a'));
-        checkEqual(NaN, Number('a123.4'));
-        checkEqual(123.45, Number('123.45'));
-        checkEqual(NaN, Number('123.4.5')); // string default value
-
-        checkEqual(NaN, Number('abc')); // space string
-
-        checkEqual(0, Number('')); // ?
-
-        checkEqual(0, Number(' ')); // ?
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　'));
-        } else {
-          checkEqual(0, Number('　')); // ?
-        } // exponential notation
-
-
-        checkEqual(3.14, Number(3.14));
-        checkEqual(3.14, Number('3.14'));
-        checkEqual(3.14, Number('314e-2'));
-        checkEqual(3.14, Number('0.0314E+2'));
-        checkEqual(0.14, Number('.14'));
-        checkEqual(0.00000000000000001, Number('1e-17'));
-        checkEqual(1e-17, Number('1e-17')); // exponential notation detail
-
-        checkEqual(1, Number('1.'));
-        checkEqual(NaN, Number('1.1e'));
-        checkEqual(NaN, Number('1.1e+'));
-        checkEqual(100000, Number('1e+5'));
-        checkEqual(0.00001, Number('1e-5'));
-        checkEqual(NaN, Number('1.e'));
-        checkEqual(NaN, Number('1.e+'));
-        checkEqual(100000, Number('1.e+5')); // Number different
-
-        checkEqual(291, Number('0x123'));
-        checkEqual(NaN, Number('+0x123'));
-        checkEqual(NaN, Number('-0x123'));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN, Number('0o123'));
-        } else {
-          checkEqual(83, Number('0o123'));
-        }
-
-        checkEqual(NaN, Number('+0o123'));
-        checkEqual(NaN, Number('-0o123'));
-        checkEqual(Infinity, Number('Infinity'));
-        checkEqual(NaN, Number('infinity'));
-        checkEqual(NaN, Number('inf'));
-        checkEqual(NaN, Number('info')); // Number
-
-        checkEqual(123, Number(123));
-        checkEqual(-123, Number(-123));
-        checkEqual(1.23, Number(1.23));
-        checkEqual(-1.23, Number(-1.23));
-        checkEqual(Infinity, Number(Infinity));
-        checkEqual(-Infinity, Number(-Infinity));
-        checkEqual(NaN, Number(NaN)); // Other
-
-        checkEqual(0, Number(null)); // !
-
-        checkEqual(NaN, Number(undefined));
-        checkEqual(NaN, Number({}));
-        checkEqual(NaN, Number({
-          a: 1
-        }));
-        checkEqual(0, Number([])); // ?
-
-        checkEqual(1, Number([1])); // ?
-
-        checkEqual(123, Number([123])); // ?
-
-        checkEqual(NaN, Number([1, 2]));
-      });
-    };
-
-    var test_standardParseFloat = function test_standardParseFloat() {
-      it('test_parseFloat', function () {
-        // Integer
-        checkEqual(123, parseFloat('123'));
-        checkEqual(123, parseFloat('0123'));
-        checkEqual(123, parseFloat('+123'));
-        checkEqual(-123, parseFloat('-0123'));
-        checkEqual(123, parseFloat(' 123'), '1');
-        checkEqual(123, parseFloat('123 '), '2');
-        checkEqual(123, parseFloat(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　123'), '4');
-          checkEqual(123, parseFloat('123　'), '5');
-          checkEqual(NaN, parseFloat('　123　'), '6');
-        } else {
-          checkEqual(123, parseFloat('　123'), '4');
-          checkEqual(123, parseFloat('123　'), '5');
-          checkEqual(123, parseFloat('　123　'), '6');
-        }
-
-        checkEqual(123, parseFloat('123 0'));
-        checkEqual(0, parseFloat('0 123'));
-        checkEqual(1, parseFloat('1 123'));
-        checkEqual(123, parseFloat('123a'));
-        checkEqual(NaN, parseFloat('a123')); // Decimal
-
-        checkEqual(123.4, parseFloat('123.4'));
-        checkEqual(123.4, parseFloat('0123.4'));
-        checkEqual(123.4, parseFloat('+123.4'));
-        checkEqual(-123.4, parseFloat('-0123.4'));
-        checkEqual(123.5, parseFloat('123.5'));
-        checkEqual(123.5, parseFloat('0123.5'));
-        checkEqual(123.5, parseFloat('+123.5'));
-        checkEqual(-123.5, parseFloat('-0123.5'));
-        checkEqual(123.4, parseFloat(' 123.4'));
-        checkEqual(123.4, parseFloat('123.4 '));
-        checkEqual(123.4, parseFloat(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　123.4'));
-          checkEqual(123.4, parseFloat('123.4　'));
-          checkEqual(NaN, parseFloat('　123.4　'));
-        } else {
-          checkEqual(123.4, parseFloat('　123.4'));
-          checkEqual(123.4, parseFloat('123.4　'));
-          checkEqual(123.4, parseFloat('　123.4　'));
-        }
-
-        checkEqual(123.4, parseFloat('123.4 0'));
-        checkEqual(0, parseFloat('0 123.4'));
-        checkEqual(1, parseFloat('1 123.4'));
-        checkEqual(123, parseFloat('123 .4'));
-        checkEqual(123, parseFloat('123. 4'));
-        checkEqual(123.4, parseFloat('123.4a'));
-        checkEqual(NaN, parseFloat('a123.4'));
-        checkEqual(123.45, parseFloat('123.45'));
-        checkEqual(123.4, parseFloat('123.4.5')); // string default value
-
-        checkEqual(NaN, parseFloat('abc')); // space string
-
-        checkEqual(NaN, parseFloat(''));
-        checkEqual(NaN, parseFloat(' '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　'));
-        } else {
-          checkEqual(NaN, parseFloat('　'));
-        } // exponential notation
-
-
-        checkEqual(3.14, parseFloat(3.14));
-        checkEqual(3.14, parseFloat('3.14'));
-        checkEqual(3.14, parseFloat('314e-2'));
-        checkEqual(3.14, parseFloat('0.0314E+2'));
-        checkEqual(0.14, parseFloat('.14'));
-        checkEqual(0.00000000000000001, parseFloat('1e-17'));
-        checkEqual(1e-17, parseFloat('1e-17')); // exponential notation detail
-
-        checkEqual(1, parseFloat('1.'));
-        checkEqual(1.1, parseFloat('1.1e'));
-        checkEqual(1.1, parseFloat('1.1e+'));
-        checkEqual(100000, parseFloat('1e+5'));
-        checkEqual(0.00001, parseFloat('1e-5'));
-        checkEqual(1, parseFloat('1.e'));
-        checkEqual(1, parseFloat('1.e+'));
-        checkEqual(100000, parseFloat('1.e+5')); // parseFloat different
-
-        checkEqual(0, parseFloat('0x123'));
-        checkEqual(0, parseFloat('+0x123'));
-        checkEqual(-0, parseFloat('-0x123'));
-        checkEqual(0, parseFloat('0o123'));
-        checkEqual(0, parseFloat('+0o123'));
-        checkEqual(-0, parseFloat('-0o123'));
-        checkEqual(Infinity, parseFloat('Infinity'));
-        checkEqual(NaN, parseFloat('infinity'));
-        checkEqual(NaN, parseFloat('inf'));
-        checkEqual(NaN, parseFloat('info')); // parseFloat
-
-        checkEqual(123, parseFloat(123));
-        checkEqual(-123, parseFloat(-123));
-        checkEqual(1.23, parseFloat(1.23));
-        checkEqual(-1.23, parseFloat(-1.23));
-        checkEqual(Infinity, parseFloat(Infinity));
-        checkEqual(-Infinity, parseFloat(-Infinity));
-        checkEqual(NaN, parseFloat(NaN)); // Other
-
-        checkEqual(NaN, parseFloat(null));
-        checkEqual(NaN, parseFloat(undefined));
-        checkEqual(NaN, parseFloat({}));
-        checkEqual(NaN, parseFloat({
-          a: 1
-        }));
-        checkEqual(NaN, parseFloat([]));
-        checkEqual(1, parseFloat([1]));
-        checkEqual(123, parseFloat([123]));
-        checkEqual(1, parseFloat([1, 2]));
-      });
-    };
-
-    var test_standardParseInt = function test_standardParseInt() {
-      it('test_parseInt', function () {
-        var parseInt10 = function parseInt10(value) {
-          return parseInt(value, 10);
-        }; // Integer
-
-
-        checkEqual(123, parseInt10('123'));
-        checkEqual(123, parseInt10('0123'));
-        checkEqual(123, parseInt10('+123'));
-        checkEqual(-123, parseInt10('-0123'));
-        checkEqual(123, parseInt10(' 123'), '1');
-        checkEqual(123, parseInt10('123 '), '2');
-        checkEqual(123, parseInt10(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　123'), '4');
-          checkEqual(123, parseInt10('123　'), '5');
-          checkEqual(NaN, parseInt10('　123　'), '6');
-        } else {
-          checkEqual(123, parseInt10('　123'), '4');
-          checkEqual(123, parseInt10('123　'), '5');
-          checkEqual(123, parseInt10('　123　'), '6');
-        }
-
-        checkEqual(123, parseInt10('123 0'));
-        checkEqual(0, parseInt10('0 123'));
-        checkEqual(1, parseInt10('1 123'));
-        checkEqual(123, parseInt10('123a'));
-        checkEqual(NaN, parseInt10('a123')); // Decimal
-
-        checkEqual(123, parseInt10('123.4'));
-        checkEqual(123, parseInt10('0123.4'));
-        checkEqual(123, parseInt10('+123.4'));
-        checkEqual(-123, parseInt10('-0123.4'));
-        checkEqual(123, parseInt10('123.5'));
-        checkEqual(123, parseInt10('0123.5'));
-        checkEqual(123, parseInt10('+123.5'));
-        checkEqual(-123, parseInt10('-0123.5'));
-        checkEqual(123, parseInt10(' 123.4'));
-        checkEqual(123, parseInt10('123.4 '));
-        checkEqual(123, parseInt10(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　123.4'));
-          checkEqual(123, parseInt10('123.4　'));
-          checkEqual(NaN, parseInt10('　123.4　'));
-        } else {
-          checkEqual(123, parseInt10('　123.4'));
-          checkEqual(123, parseInt10('123.4　'));
-          checkEqual(123, parseInt10('　123.4　'));
-        }
-
-        checkEqual(123, parseInt10('123.4 0'));
-        checkEqual(0, parseInt10('0 123.4'));
-        checkEqual(1, parseInt10('1 123.4'));
-        checkEqual(123, parseInt10('123 .4'));
-        checkEqual(123, parseInt10('123. 4'));
-        checkEqual(123, parseInt10('123.4a'));
-        checkEqual(NaN, parseInt10('a123.4'));
-        checkEqual(123, parseInt10('123.45'));
-        checkEqual(123, parseInt10('123.4.5')); // string default value
-
-        checkEqual(NaN, parseInt10('abc')); // space string
-
-        checkEqual(NaN, parseInt10(''));
-        checkEqual(NaN, parseInt10(' '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　'));
-        } else {
-          checkEqual(NaN, parseInt10('　'));
-        } // exponential notation
-
-
-        checkEqual(3, parseInt10(3.14));
-        checkEqual(3, parseInt10('3.14'));
-        checkEqual(314, parseInt10('314e-2'));
-        checkEqual(0, parseInt10('0.0314E+2'));
-        checkEqual(NaN, parseInt10('.14')); // ?
-
-        checkEqual(1, parseInt10('1e-17'));
-        checkEqual(1, parseInt10('1e-17')); // exponential notation detail
-
-        checkEqual(1, parseInt10('1.'));
-        checkEqual(1, parseInt10('1.1e'));
-        checkEqual(1, parseInt10('1.1e+'));
-        checkEqual(1, parseInt10('1e+5'));
-        checkEqual(1, parseInt10('1e-5'));
-        checkEqual(1, parseInt10('1.e'));
-        checkEqual(1, parseInt10('1.e+'));
-        checkEqual(1, parseInt10('1.e+5')); // parseFloat different
-
-        checkEqual(0, parseInt10('0x123'));
-        checkEqual(0, parseInt10('+0x123'));
-        checkEqual(-0, parseInt10('-0x123'));
-        checkEqual(0, parseInt10('0o123'));
-        checkEqual(0, parseInt10('+0o123'));
-        checkEqual(-0, parseInt10('-0o123'));
-        checkEqual(NaN, parseInt10('Infinity')); // ?
-
-        checkEqual(NaN, parseInt10('infinity'));
-        checkEqual(NaN, parseInt10('inf'));
-        checkEqual(NaN, parseInt10('info')); // parseFloat
-
-        checkEqual(123, parseInt10(123));
-        checkEqual(-123, parseInt10(-123));
-        checkEqual(1, parseInt10(1.23));
-        checkEqual(-1, parseInt10(-1.23));
-        checkEqual(NaN, parseInt10(Infinity));
-        checkEqual(NaN, parseInt10(-Infinity));
-        checkEqual(NaN, parseInt10(NaN)); // Other
-
-        checkEqual(NaN, parseInt10(null));
-        checkEqual(NaN, parseInt10(undefined));
-        checkEqual(NaN, parseInt10({}));
-        checkEqual(NaN, parseInt10({
-          a: 1
-        }));
-        checkEqual(NaN, parseInt10([]));
-        checkEqual(1, parseInt10([1]));
-        checkEqual(123, parseInt10([123]));
-        checkEqual(1, parseInt10([1, 2])); // Decimal number other
-
-        checkEqual(10, parseInt('1010', 2));
-        checkEqual(10, parseInt('22', 4));
-        checkEqual(10, parseInt('12', 8));
-        checkEqual(10, parseInt('a', 16));
-        checkEqual(10, parseInt('A', 16));
-      });
-    };
-
     test_numberToString();
     test_valueToString();
-    test_standardStringCast();
-    test_standardToString();
+    test_StringCast_standard();
+    test_toString_standard();
+    test_NumberCast_standard();
+    test_parseFloat_standard();
+    test_parseInt_standard();
     test_stringToNumber();
     test_stringToNumberDefault();
     test_valueToNumber();
     test_stringToInteger();
     test_stringToIntegerDefault();
     test_valueToInteger();
-    test_standardNumberCast();
-    test_standardParseFloat();
-    test_standardParseInt();
   });
 };
 
@@ -24256,11 +24256,6 @@ module.exports = {
 "use strict";
 
 
-/* eslint-disable comma-spacing */
-
-/* eslint-disable max-len */
-
-/* eslint-disable no-var */
 var test_execute_string = function test_execute_string(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
@@ -24269,11 +24264,15 @@ var test_execute_string = function test_execute_string(parts) {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
-        isThrownException = _parts$test2.isThrownException;
+        isThrownException = _parts$test2.isThrownException,
+        testCounter = _parts$test2.testCounter;
     var _parts$string = parts.string,
         matchFormat = _parts$string.matchFormat,
-        includes = _parts$string.includes,
-        replaceAll = _parts$string.replaceAll;
+        replaceAll = _parts$string.replaceAll,
+        indexOfFirst = _parts$string.indexOfFirst,
+        indexOfLast = _parts$string.indexOfLast,
+        isFirst = _parts$string.isFirst,
+        isLast = _parts$string.isLast;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -24387,8 +24386,284 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_indexOf_standard = function test_indexOf_standard() {
+      it('test_indexOf_standard', function () {
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        checkEqual(0, 'a'.indexOf('a'));
+        checkEqual(0, 'a'.indexOf('')); // strange
+
+        checkEqual(-1, ''.indexOf('a'));
+        checkEqual(0, ''.indexOf('')); // strange
+
+        checkEqual(0, 'abc'.indexOf('a'));
+        checkEqual(1, 'abc'.indexOf('b'));
+        checkEqual(2, 'abc'.indexOf('c'));
+        checkEqual(-1, 'abc'.indexOf('d'));
+        checkEqual(0, 'abc'.indexOf('')); // strange
+
+        checkEqual(0, 'abcabc'.indexOf('a'));
+        checkEqual(1, 'abcabc'.indexOf('b'));
+        checkEqual(2, 'abcabc'.indexOf('c'));
+        checkEqual(-1, 'abcabc'.indexOf('d'));
+        checkEqual(0, 'abcabc'.indexOf('')); // strange
+        // startIndex
+
+        checkEqual(0, 'abcabc'.indexOf('a', -1)); // ?
+
+        checkEqual(0, 'abcabc'.indexOf('a', 0));
+        checkEqual(3, 'abcabc'.indexOf('a', 1));
+        checkEqual(3, 'abcabc'.indexOf('a', 2));
+        checkEqual(3, 'abcabc'.indexOf('a', 3));
+        checkEqual(-1, 'abcabc'.indexOf('a', 4));
+        checkEqual(-1, 'abcabc'.indexOf('a', 5));
+        checkEqual(-1, 'abcabc'.indexOf('a', 6)); // ?
+
+        checkEqual(1, 'abcabc'.indexOf('b', -1)); // ?
+
+        checkEqual(1, 'abcabc'.indexOf('b', 0));
+        checkEqual(1, 'abcabc'.indexOf('b', 1));
+        checkEqual(4, 'abcabc'.indexOf('b', 2));
+        checkEqual(4, 'abcabc'.indexOf('b', 3));
+        checkEqual(4, 'abcabc'.indexOf('b', 4));
+        checkEqual(-1, 'abcabc'.indexOf('b', 5));
+        checkEqual(-1, 'abcabc'.indexOf('b', 6)); // ?
+
+        checkEqual(2, 'abcabc'.indexOf('c', -1)); // ?
+
+        checkEqual(2, 'abcabc'.indexOf('c', 0));
+        checkEqual(2, 'abcabc'.indexOf('c', 1));
+        checkEqual(2, 'abcabc'.indexOf('c', 2));
+        checkEqual(5, 'abcabc'.indexOf('c', 3));
+        checkEqual(5, 'abcabc'.indexOf('c', 4));
+        checkEqual(5, 'abcabc'.indexOf('c', 5));
+        checkEqual(-1, 'abcabc'.indexOf('c', 6)); // ?
+      });
+    };
+
+    var test_indexOfFirst = function test_indexOfFirst() {
+      it('test_indexOfFirst', function () {
+        checkEqual(0, indexOfFirst('a', 'a'));
+        checkEqual(-1, indexOfFirst('a', '')); // not strange
+
+        checkEqual(-1, indexOfFirst('', 'a'));
+        checkEqual(-1, indexOfFirst('', '')); // not strange
+
+        checkEqual(0, indexOfFirst('abc', 'a'));
+        checkEqual(1, indexOfFirst('abc', 'b'));
+        checkEqual(2, indexOfFirst('abc', 'c'));
+        checkEqual(-1, indexOfFirst('abc', 'd'));
+        checkEqual(-1, indexOfFirst('abc', '')); // not strange
+
+        checkEqual(0, indexOfFirst('abcabc', 'a'));
+        checkEqual(1, indexOfFirst('abcabc', 'b'));
+        checkEqual(2, indexOfFirst('abcabc', 'c'));
+        checkEqual(-1, indexOfFirst('abcabc', 'd'));
+        checkEqual(-1, indexOfFirst('abcabc', '')); // not strange
+        // startIndex
+
+        checkEqual(true, isThrown(function () {
+          return indexOfFirst('abcabc', 'a', -1);
+        }));
+        checkEqual(0, indexOfFirst('abcabc', 'a', 0));
+        checkEqual(3, indexOfFirst('abcabc', 'a', 1));
+        checkEqual(3, indexOfFirst('abcabc', 'a', 2));
+        checkEqual(3, indexOfFirst('abcabc', 'a', 3));
+        checkEqual(-1, indexOfFirst('abcabc', 'a', 4));
+        checkEqual(-1, indexOfFirst('abcabc', 'a', 5));
+        checkEqual(true, isThrown(function () {
+          return indexOfFirst('abcabc', 'a', 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfFirst('abcabc', 'b', -1);
+        }));
+        checkEqual(1, indexOfFirst('abcabc', 'b', 0));
+        checkEqual(1, indexOfFirst('abcabc', 'b', 1));
+        checkEqual(4, indexOfFirst('abcabc', 'b', 2));
+        checkEqual(4, indexOfFirst('abcabc', 'b', 3));
+        checkEqual(4, indexOfFirst('abcabc', 'b', 4));
+        checkEqual(-1, indexOfFirst('abcabc', 'b', 5));
+        checkEqual(true, isThrown(function () {
+          return indexOfFirst('abcabc', 'b', 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfFirst('abcabc', 'c', -1);
+        }));
+        checkEqual(2, indexOfFirst('abcabc', 'c', 0));
+        checkEqual(2, indexOfFirst('abcabc', 'c', 1));
+        checkEqual(2, indexOfFirst('abcabc', 'c', 2));
+        checkEqual(5, indexOfFirst('abcabc', 'c', 3));
+        checkEqual(5, indexOfFirst('abcabc', 'c', 4));
+        checkEqual(5, indexOfFirst('abcabc', 'c', 5));
+        checkEqual(true, isThrown(function () {
+          return indexOfFirst('abcabc', 'c', 6);
+        }));
+      });
+    };
+
+    var test_lastIndexOf_standard = function test_lastIndexOf_standard() {
+      it('test_lastIndexOf_standard', function () {
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        checkEqual(0, 'a'.lastIndexOf('a'));
+        checkEqual(1, 'a'.lastIndexOf('')); // strange
+
+        checkEqual(-1, ''.lastIndexOf('a'));
+        checkEqual(0, ''.lastIndexOf('')); // strange
+
+        checkEqual(0, 'abc'.lastIndexOf('a'));
+        checkEqual(1, 'abc'.lastIndexOf('b'));
+        checkEqual(2, 'abc'.lastIndexOf('c'));
+        checkEqual(-1, 'abc'.lastIndexOf('d'));
+        checkEqual(3, 'abc'.lastIndexOf('')); // strange
+
+        checkEqual(3, 'abcabc'.lastIndexOf('a'));
+        checkEqual(4, 'abcabc'.lastIndexOf('b'));
+        checkEqual(5, 'abcabc'.lastIndexOf('c'));
+        checkEqual(-1, 'abcabc'.lastIndexOf('d'));
+        checkEqual(6, 'abcabc'.lastIndexOf('')); // strange
+        // startIndex
+
+        checkEqual(0, 'abcabc'.lastIndexOf('a', -1)); // ??
+
+        checkEqual(0, 'abcabc'.lastIndexOf('a', 0));
+        checkEqual(0, 'abcabc'.lastIndexOf('a', 1));
+        checkEqual(0, 'abcabc'.lastIndexOf('a', 2));
+        checkEqual(3, 'abcabc'.lastIndexOf('a', 3));
+        checkEqual(3, 'abcabc'.lastIndexOf('a', 4));
+        checkEqual(3, 'abcabc'.lastIndexOf('a', 5));
+        checkEqual(3, 'abcabc'.lastIndexOf('a', 6)); // ?
+
+        checkEqual(-1, 'abcabc'.lastIndexOf('b', -1)); // ?
+
+        checkEqual(-1, 'abcabc'.lastIndexOf('b', 0));
+        checkEqual(1, 'abcabc'.lastIndexOf('b', 1));
+        checkEqual(1, 'abcabc'.lastIndexOf('b', 2));
+        checkEqual(1, 'abcabc'.lastIndexOf('b', 3));
+        checkEqual(4, 'abcabc'.lastIndexOf('b', 4));
+        checkEqual(4, 'abcabc'.lastIndexOf('b', 5));
+        checkEqual(4, 'abcabc'.lastIndexOf('b', 6)); // ?
+
+        checkEqual(-1, 'abcabc'.lastIndexOf('c', -1)); // ?
+
+        checkEqual(-1, 'abcabc'.lastIndexOf('c', 0));
+        checkEqual(-1, 'abcabc'.lastIndexOf('c', 1));
+        checkEqual(2, 'abcabc'.lastIndexOf('c', 2));
+        checkEqual(2, 'abcabc'.lastIndexOf('c', 3));
+        checkEqual(2, 'abcabc'.lastIndexOf('c', 4));
+        checkEqual(5, 'abcabc'.lastIndexOf('c', 5));
+        checkEqual(5, 'abcabc'.lastIndexOf('c', 6)); // ?
+      });
+    };
+
+    var test_indexOfLast = function test_indexOfLast() {
+      it('test_indexOfLast', function () {
+        checkEqual(0, indexOfLast('a', 'a'));
+        checkEqual(-1, indexOfLast('a', '')); // not strange
+
+        checkEqual(-1, indexOfLast('', 'a'));
+        checkEqual(-1, indexOfLast('', '')); // not strange
+
+        checkEqual(0, indexOfLast('abc', 'a'));
+        checkEqual(1, indexOfLast('abc', 'b'));
+        checkEqual(2, indexOfLast('abc', 'c'));
+        checkEqual(-1, indexOfLast('abc', 'd'));
+        checkEqual(-1, indexOfLast('abc', '')); // not strange
+
+        checkEqual(3, indexOfLast('abcabc', 'a'));
+        checkEqual(4, indexOfLast('abcabc', 'b'));
+        checkEqual(5, indexOfLast('abcabc', 'c'));
+        checkEqual(-1, indexOfLast('abcabc', 'd'));
+        checkEqual(-1, indexOfLast('abcabc', '')); // not strange
+        // startIndex
+
+        checkEqual(true, isThrown(function () {
+          return indexOfLast('abcabc', 'a', -1);
+        }));
+        checkEqual(0, indexOfLast('abcabc', 'a', 0));
+        checkEqual(0, indexOfLast('abcabc', 'a', 1));
+        checkEqual(0, indexOfLast('abcabc', 'a', 2));
+        checkEqual(3, indexOfLast('abcabc', 'a', 3));
+        checkEqual(3, indexOfLast('abcabc', 'a', 4));
+        checkEqual(3, indexOfLast('abcabc', 'a', 5));
+        checkEqual(true, isThrown(function () {
+          return indexOfLast('abcabc', 'a', 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfLast('abcabc', 'b', -1);
+        }));
+        checkEqual(-1, indexOfLast('abcabc', 'b', 0));
+        checkEqual(1, indexOfLast('abcabc', 'b', 1));
+        checkEqual(1, indexOfLast('abcabc', 'b', 2));
+        checkEqual(1, indexOfLast('abcabc', 'b', 3));
+        checkEqual(4, indexOfLast('abcabc', 'b', 4));
+        checkEqual(4, indexOfLast('abcabc', 'b', 5));
+        checkEqual(true, isThrown(function () {
+          return indexOfLast('abcabc', 'b', 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfLast('abcabc', 'c', -1);
+        }));
+        checkEqual(-1, indexOfLast('abcabc', 'c', 0));
+        checkEqual(-1, indexOfLast('abcabc', 'c', 1));
+        checkEqual(2, indexOfLast('abcabc', 'c', 2));
+        checkEqual(2, indexOfLast('abcabc', 'c', 3));
+        checkEqual(2, indexOfLast('abcabc', 'c', 4));
+        checkEqual(5, indexOfLast('abcabc', 'c', 5));
+        checkEqual(true, isThrown(function () {
+          return indexOfLast('abcabc', 'c', 6);
+        }));
+      });
+    };
+
+    var test_isFirst = function test_isFirst() {
+      it('test_isFirst', function () {
+        checkEqual(true, isFirst('123', '1'));
+        checkEqual(true, isFirst('123', '12'));
+        checkEqual(false, isFirst('123', '13'));
+        checkEqual(false, isFirst('123', '2'));
+        checkEqual(true, isFirst('ABC', 'A'));
+        checkEqual(true, isFirst('ABC', 'AB'));
+        checkEqual(false, isFirst('ABC', 'AC'));
+        checkEqual(false, isFirst('ABC', 'a'));
+        checkEqual(false, isFirst('ABC', 'B'));
+      });
+    };
+
+    var test_isLast = function test_isLast() {
+      it('test_isLast', function () {
+        checkEqual(true, isLast('123', '3'));
+        checkEqual(true, isLast('123', '23'));
+        checkEqual(false, isLast('123', '13'));
+        checkEqual(false, isLast('123', '2'));
+        checkEqual(true, isLast('ABC', 'C'));
+        checkEqual(true, isLast('ABC', 'BC'));
+        checkEqual(false, isLast('ABC', 'AC'));
+        checkEqual(false, isLast('ABC', 'c'));
+        checkEqual(false, isLast('ABC', 'B'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
+    test_indexOf_standard();
+    test_indexOfFirst();
+    test_lastIndexOf_standard();
+    test_indexOfLast();
+    test_isFirst();
+    test_isLast();
   });
 };
 

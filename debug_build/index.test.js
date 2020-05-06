@@ -54,14 +54,14 @@ var test_execute_index = function test_execute_index(parts) {
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var _parts$test = parts.test,
         describe = _parts$test.describe,
-        it = _parts$test.it;
+        it = _parts$test.it,
+        checkEqual = _parts$test.checkEqual;
     describe('test_execute_nameSpace', function () {
-      var checkEqual = parts.test.checkEqual;
       var _parts$object = parts.object,
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = !parts.platform.isWindowsScriptHost() ? [247, 13, 3, 140, 8, 11, 23, 29, 7, 6, 12, 33] : [247, 13, 3, 140, 8, 11, 23, 29, 7, 6, 12, 33];
+        var countArray = parts.platform.isWindowsScriptHost() ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 9, 12, 33] : [248, 13, 3, 140, 8, 11, 23, 29, 7, 9, 12, 33];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -83,6 +83,24 @@ var test_execute_index = function test_execute_index(parts) {
     });
   };
 
+  var test_execute_SelfReference = function test_execute_SelfReference(parts) {
+    var _parts$test2 = parts.test,
+        describe = _parts$test2.describe,
+        it = _parts$test2.it,
+        checkEqual = _parts$test2.checkEqual;
+    describe('test_execute_SelfReference', function () {
+      it('test_parts_SelfReference', function () {
+        checkEqual(parts.VERSION, parts.parts.VERSION);
+        checkEqual(false, parts.isUndefined(parts.parts));
+        checkEqual(true, parts.isUndefined(parts.parts.parts));
+        var parts1 = parts.cloneDeep(parts);
+        delete parts1.parts;
+        var parts2 = parts.cloneDeep(parts.parts);
+        checkEqual(true, parts.equalDeep(parts1, parts2));
+      });
+    });
+  };
+
   var describe = parts.test.describe;
   describe('test_execute_index', function () {
     test_execute_root(parts);
@@ -96,8 +114,9 @@ var test_execute_index = function test_execute_index(parts) {
     test_execute_object(parts);
     test_execute_array(parts);
     test_execute_consoleHook(parts);
-    test_execute_nameSpace(parts);
     test_execute_other(parts);
+    test_execute_nameSpace(parts);
+    test_execute_SelfReference(parts);
   });
 };
 

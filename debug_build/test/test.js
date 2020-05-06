@@ -118,7 +118,9 @@ var expect = function expect(a) {
   };
 };
 
-var testCounter = function testCounter(value) {
+var testCounter = function testCounter() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
   if (isInteger(value)) {
     testFrame.counter = value;
   }

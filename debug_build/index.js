@@ -102,7 +102,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'includes,' + 'matchFormat,replaceAll,' + 'repeat,' + 'isLowerCase,isUpperCase,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
@@ -133,7 +133,7 @@ propertyNames.CONSOLE_HOOK = [isPrefixSafixAdd('hook', '', propertyNames._CONSOL
 
 var consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
-module.exports = _objectSpread({
+var parts = _objectSpread({
   VERSION: VERSION,
   platform: platform,
   type: type,
@@ -148,3 +148,7 @@ module.exports = _objectSpread({
   array: array,
   root: root
 }, rootNames);
+
+module.exports = _objectSpread(_objectSpread({}, parts), {}, {
+  parts: parts
+});
