@@ -237,6 +237,7 @@ You can now use the functions of the parts.js object.
 #### 2020/05/06(Wed)
 - update polyfill.js
   - delete Object.entries
+  - delete Object.defineProperties
 
 ### 5.1.0
 #### 2020/05/06(Wed)
