@@ -18,6 +18,116 @@ const test_execute_convert = (parts) => {
       valueToInteger, valueToIntegerDefault,
     } = parts.convert;
 
+
+    const test_StringCast_standard = () => {
+      it('test_standardStringCast', () => {
+
+        // Positive number
+        checkEqual('32',        String(32));
+        checkEqual('31.5',      String(31.5));
+        checkEqual('255',       String(255));
+        checkEqual('11',        String(11));
+        checkEqual('255',       String(0xFF));
+        checkEqual('16',        String(0o20));
+        checkEqual('100000',    String(1e+5));
+        checkEqual('0.00001',   String(1e-5));
+
+        checkEqual('255',       String(+0xFF));
+        checkEqual('16',        String(+0o20));
+        checkEqual('100000',    String(+1e+5));
+        checkEqual('0.00001',   String(+1e-5));
+
+        // Negative number
+        checkEqual('-32',       String(-32));
+        checkEqual('-31.5',     String(-31.5));
+        checkEqual('-255',      String(-255));
+        checkEqual('-11',       String(-11));
+        checkEqual('-255',      String(-0xFF));
+        checkEqual('-16',       String(-0o20));
+        checkEqual('-100000',    String(-1e+5));
+        checkEqual('-0.00001',   String(-1e-5));
+
+        // spacial number value
+        checkEqual('NaN',         String(NaN));
+        checkEqual('Infinity',    String(Infinity));
+        checkEqual('-Infinity',   String(-Infinity));
+
+        // other type
+        checkEqual('null',            String(null));
+        checkEqual('undefined',       String(undefined));
+
+        checkEqual('[object Object]', String({}));
+        checkEqual('',                String([]));
+        checkEqual('1',               String([1]));
+        checkEqual('1,2,3',           String([1, 2, 3]));
+
+        checkEqual('',                String(''));
+        checkEqual('a',               String('a'));
+
+        checkEqual('true',            String(true));
+        checkEqual('false',           String(false));
+      });
+    };
+
+    const test_toString_standard = () => {
+      it('test_standardToString', () => {
+
+        // Positive number
+        checkEqual('32',        (32).toString());
+        checkEqual('31.5',      (31.5).toString());
+        checkEqual('255',       (255).toString());
+        checkEqual('11',        (11).toString());
+        checkEqual('255',       (0xFF).toString());
+        checkEqual('16',        (0o20).toString());
+        checkEqual('100000',    (1e+5).toString());
+        checkEqual('0.00001',   (1e-5).toString());
+        checkEqual('255',       (+0xFF).toString());
+        checkEqual('16',        (+0o20).toString());
+        checkEqual('100000',    (+1e+5).toString());
+        checkEqual('0.00001',   (+1e-5).toString());
+
+        // Negative number
+        checkEqual('-32',       (-32).toString());
+        checkEqual('-31.5',     (-31.5).toString());
+        checkEqual('-255',      (-255).toString());
+        checkEqual('-11',       (-11).toString());
+        checkEqual('-255',      (-0xFF).toString());
+        checkEqual('-16',       (-0o20).toString());
+        checkEqual('-100000',   (-1e+5).toString());
+        checkEqual('-0.00001',  (-1e-5).toString());
+
+        // spacial number value
+        checkEqual('NaN',           NaN.toString());
+        checkEqual('Infinity',      Infinity.toString());
+        checkEqual('-Infinity',     (-Infinity).toString());
+        checkEqual(-Infinity,       -Infinity.toString());
+        checkEqual(-Infinity,       -(Infinity.toString()));
+        checkEqual(-Infinity,       -('Infinity'));
+
+        // Decimal number other
+        checkEqual('1010.01',         10.25.toString(2));
+        checkEqual('22.1',            10.25.toString(4));
+        checkEqual('12.2',            10.25.toString(8));
+        checkEqual('a.4',             10.25.toString(16));
+
+        // other type
+        checkEqual(true,              isThrown(() => (null).toString()) );
+        checkEqual(true,              isThrown(() => (undefined).toString()) );
+
+        checkEqual('[object Object]', {}.toString());
+        checkEqual('',                [].toString());
+        checkEqual('1',               [1].toString());
+        checkEqual('1,2,3',           [1, 2, 3].toString());
+
+        checkEqual('',                ''.toString());
+        checkEqual('a',               'a'.toString());
+
+        checkEqual('true',            true.toString());
+        checkEqual('false',           false.toString());
+
+      });
+    };
+
     const test_numberToString = () => {
       it('test_numberToString', () => {
 
@@ -221,112 +331,388 @@ const test_execute_convert = (parts) => {
       });
     };
 
-    const test_standardStringCast = () => {
-      it('test_standardStringCast', () => {
+    const test_NumberCast_standard = () => {
+      it('test_NumberCast', () => {
+        // Integer
+        checkEqual(123,       Number('123'));
+        checkEqual(123,       Number('0123'));
+        checkEqual(123,       Number('+123'));
+        checkEqual(-123,      Number('-0123'));
+        checkEqual(123,       Number(' 123'), '1');
+        checkEqual(123,       Number('123 '), '2');
+        checkEqual(123,       Number(' 123 '), '3');
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       Number('　123'), '4');
+          checkEqual(NaN,       Number('123　'), '5');
+          checkEqual(NaN,       Number('　123　'), '6');
+        } else {
+          checkEqual(123,       Number('　123'), '4');
+          checkEqual(123,       Number('123　'), '5');
+          checkEqual(123,       Number('　123　'), '6');
+        }
+        checkEqual(NaN,       Number('123 0'));
+        checkEqual(NaN,       Number('0 123'));
+        checkEqual(NaN,       Number('1 123'));
+        checkEqual(NaN,       Number('123a'));
+        checkEqual(NaN,       Number('a123'));
 
-        // Positive number
-        checkEqual('32',        String(32));
-        checkEqual('31.5',      String(31.5));
-        checkEqual('255',       String(255));
-        checkEqual('11',        String(11));
-        checkEqual('255',       String(0xFF));
-        checkEqual('16',        String(0o20));
-        checkEqual('100000',    String(1e+5));
-        checkEqual('0.00001',   String(1e-5));
+        // Decimal
+        checkEqual(123.4,     Number('123.4'));
+        checkEqual(123.4,     Number('0123.4'));
+        checkEqual(123.4,     Number('+123.4'));
+        checkEqual(-123.4,    Number('-0123.4'));
+        checkEqual(123.5,     Number('123.5'));
+        checkEqual(123.5,     Number('0123.5'));
+        checkEqual(123.5,     Number('+123.5'));
+        checkEqual(-123.5,    Number('-0123.5'));
+        checkEqual(123.4,     Number(' 123.4'));
+        checkEqual(123.4,     Number('123.4 '));
+        checkEqual(123.4,     Number(' 123.4 '));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       Number('　123.4'));
+          checkEqual(NaN,       Number('123.4　'));
+          checkEqual(NaN,       Number('　123.4　'));
+        } else {
+          checkEqual(123.4,     Number('　123.4'));
+          checkEqual(123.4,     Number('123.4　'));
+          checkEqual(123.4,     Number('　123.4　'));
+        }
+        checkEqual(NaN,       Number('123.4 0'));
+        checkEqual(NaN,       Number('0 123.4'));
+        checkEqual(NaN,       Number('1 123.4'));
+        checkEqual(NaN,       Number('123 .4'));
+        checkEqual(NaN,       Number('123. 4'));
+        checkEqual(NaN,       Number('123.4a'));
+        checkEqual(NaN,       Number('a123.4'));
+        checkEqual(123.45,    Number('123.45'));
+        checkEqual(NaN,       Number('123.4.5'));
 
-        checkEqual('255',       String(+0xFF));
-        checkEqual('16',        String(+0o20));
-        checkEqual('100000',    String(+1e+5));
-        checkEqual('0.00001',   String(+1e-5));
+        // string default value
+        checkEqual(NaN,       Number('abc'));
 
-        // Negative number
-        checkEqual('-32',       String(-32));
-        checkEqual('-31.5',     String(-31.5));
-        checkEqual('-255',      String(-255));
-        checkEqual('-11',       String(-11));
-        checkEqual('-255',      String(-0xFF));
-        checkEqual('-16',       String(-0o20));
-        checkEqual('-100000',    String(-1e+5));
-        checkEqual('-0.00001',   String(-1e-5));
+        // space string
+        checkEqual(0,         Number(''));      // ?
+        checkEqual(0,         Number(' '));     // ?
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       Number('　'));
+        } else {
+          checkEqual(0,         Number('　'));    // ?
+        }
 
-        // spacial number value
-        checkEqual('NaN',         String(NaN));
-        checkEqual('Infinity',    String(Infinity));
-        checkEqual('-Infinity',   String(-Infinity));
+        // exponential notation
+        checkEqual(3.14,  Number(3.14));
+        checkEqual(3.14,  Number('3.14'));
+        checkEqual(3.14,  Number('314e-2'));
+        checkEqual(3.14,  Number('0.0314E+2'));
+        checkEqual(0.14,  Number('.14'));
+        checkEqual(0.00000000000000001, Number('1e-17'));
+        checkEqual(1e-17, Number('1e-17'));
 
-        // other type
-        checkEqual('null',            String(null));
-        checkEqual('undefined',       String(undefined));
+        // exponential notation detail
+        checkEqual(1,       Number('1.'));
+        checkEqual(NaN,     Number('1.1e'));
+        checkEqual(NaN,     Number('1.1e+'));
+        checkEqual(100000,  Number('1e+5'));
+        checkEqual(0.00001, Number('1e-5'));
+        checkEqual(NaN,     Number('1.e'));
+        checkEqual(NaN,     Number('1.e+'));
+        checkEqual(100000,  Number('1.e+5'));
 
-        checkEqual('[object Object]', String({}));
-        checkEqual('',                String([]));
-        checkEqual('1',               String([1]));
-        checkEqual('1,2,3',           String([1, 2, 3]));
+        // Number different
+        checkEqual(291,       Number('0x123'));
+        checkEqual(NaN,       Number('+0x123'));
+        checkEqual(NaN,       Number('-0x123'));
 
-        checkEqual('',                String(''));
-        checkEqual('a',               String('a'));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,        Number('0o123'));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(NaN,        Number('0o123'));
+        } else {
+          checkEqual(83,        Number('0o123'));
+        }
 
-        checkEqual('true',            String(true));
-        checkEqual('false',           String(false));
+        checkEqual(NaN,       Number('+0o123'));
+        checkEqual(NaN,       Number('-0o123'));
+
+        checkEqual(Infinity,  Number('Infinity'));
+        checkEqual(NaN,       Number('infinity'));
+        checkEqual(NaN,       Number('inf'));
+        checkEqual(NaN,       Number('info'));
+
+        // Number
+        checkEqual(123,       Number(123));
+        checkEqual(-123,      Number(-123));
+        checkEqual(1.23,      Number(1.23));
+        checkEqual(-1.23,     Number(-1.23));
+        checkEqual(Infinity,  Number(Infinity));
+        checkEqual(-Infinity, Number(-Infinity));
+        checkEqual(NaN,       Number(NaN));
+
+        // Other
+        checkEqual(0,         Number(null));        // !
+        checkEqual(NaN,       Number(undefined));
+        checkEqual(NaN,       Number({}));
+        checkEqual(NaN,       Number({ a: 1 }));
+        checkEqual(0,         Number([]));          // ?
+        checkEqual(1,         Number([1]));         // ?
+        checkEqual(123,       Number([123]));       // ?
+        checkEqual(NaN,       Number([1, 2]));
       });
     };
 
-    const test_standardToString = () => {
-      it('test_standardToString', () => {
+    const test_parseFloat_standard = () => {
+      it('test_parseFloat', () => {
+        // Integer
+        checkEqual(123,       parseFloat('123'));
+        checkEqual(123,       parseFloat('0123'));
+        checkEqual(123,       parseFloat('+123'));
+        checkEqual(-123,      parseFloat('-0123'));
+        checkEqual(123,       parseFloat(' 123'), '1');
+        checkEqual(123,       parseFloat('123 '), '2');
+        checkEqual(123,       parseFloat(' 123 '), '3');
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       parseFloat('　123'), '4');
+          checkEqual(123,       parseFloat('123　'), '5');
+          checkEqual(NaN,       parseFloat('　123　'), '6');
+        } else {
+          checkEqual(123,       parseFloat('　123'), '4');
+          checkEqual(123,       parseFloat('123　'), '5');
+          checkEqual(123,       parseFloat('　123　'), '6');
+        }
+        checkEqual(123,       parseFloat('123 0'));
+        checkEqual(0,         parseFloat('0 123'));
+        checkEqual(1,         parseFloat('1 123'));
+        checkEqual(123,       parseFloat('123a'));
+        checkEqual(NaN,       parseFloat('a123'));
 
-        // Positive number
-        checkEqual('32',        (32).toString());
-        checkEqual('31.5',      (31.5).toString());
-        checkEqual('255',       (255).toString());
-        checkEqual('11',        (11).toString());
-        checkEqual('255',       (0xFF).toString());
-        checkEqual('16',        (0o20).toString());
-        checkEqual('100000',    (1e+5).toString());
-        checkEqual('0.00001',   (1e-5).toString());
-        checkEqual('255',       (+0xFF).toString());
-        checkEqual('16',        (+0o20).toString());
-        checkEqual('100000',    (+1e+5).toString());
-        checkEqual('0.00001',   (+1e-5).toString());
+        // Decimal
+        checkEqual(123.4,     parseFloat('123.4'));
+        checkEqual(123.4,     parseFloat('0123.4'));
+        checkEqual(123.4,     parseFloat('+123.4'));
+        checkEqual(-123.4,    parseFloat('-0123.4'));
+        checkEqual(123.5,     parseFloat('123.5'));
+        checkEqual(123.5,     parseFloat('0123.5'));
+        checkEqual(123.5,     parseFloat('+123.5'));
+        checkEqual(-123.5,    parseFloat('-0123.5'));
+        checkEqual(123.4,     parseFloat(' 123.4'));
+        checkEqual(123.4,     parseFloat('123.4 '));
+        checkEqual(123.4,     parseFloat(' 123.4 '));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       parseFloat('　123.4'));
+          checkEqual(123.4,     parseFloat('123.4　'));
+          checkEqual(NaN,       parseFloat('　123.4　'));
+        } else {
+          checkEqual(123.4,     parseFloat('　123.4'));
+          checkEqual(123.4,     parseFloat('123.4　'));
+          checkEqual(123.4,     parseFloat('　123.4　'));
+        }
+        checkEqual(123.4,       parseFloat('123.4 0'));
+        checkEqual(0,           parseFloat('0 123.4'));
+        checkEqual(1,           parseFloat('1 123.4'));
+        checkEqual(123,         parseFloat('123 .4'));
+        checkEqual(123,         parseFloat('123. 4'));
+        checkEqual(123.4,       parseFloat('123.4a'));
+        checkEqual(NaN,         parseFloat('a123.4'));
+        checkEqual(123.45,      parseFloat('123.45'));
+        checkEqual(123.4,       parseFloat('123.4.5'));
 
-        // Negative number
-        checkEqual('-32',       (-32).toString());
-        checkEqual('-31.5',     (-31.5).toString());
-        checkEqual('-255',      (-255).toString());
-        checkEqual('-11',       (-11).toString());
-        checkEqual('-255',      (-0xFF).toString());
-        checkEqual('-16',       (-0o20).toString());
-        checkEqual('-100000',   (-1e+5).toString());
-        checkEqual('-0.00001',  (-1e-5).toString());
+        // string default value
+        checkEqual(NaN,         parseFloat('abc'));
 
-        // spacial number value
-        checkEqual('NaN',           NaN.toString());
-        checkEqual('Infinity',      Infinity.toString());
-        checkEqual('-Infinity',     (-Infinity).toString());
-        checkEqual(-Infinity,       -Infinity.toString());
-        checkEqual(-Infinity,       -(Infinity.toString()));
-        checkEqual(-Infinity,       -('Infinity'));
+        // space string
+        checkEqual(NaN,         parseFloat(''));
+        checkEqual(NaN,         parseFloat(' '));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,         parseFloat('　'));
+        } else {
+          checkEqual(NaN,         parseFloat('　'));
+        }
+
+        // exponential notation
+        checkEqual(3.14,  parseFloat(3.14));
+        checkEqual(3.14,  parseFloat('3.14'));
+        checkEqual(3.14,  parseFloat('314e-2'));
+        checkEqual(3.14,  parseFloat('0.0314E+2'));
+        checkEqual(0.14,  parseFloat('.14'));
+        checkEqual(0.00000000000000001, parseFloat('1e-17'));
+        checkEqual(1e-17, parseFloat('1e-17'));
+
+        // exponential notation detail
+        checkEqual(1,       parseFloat('1.'));
+        checkEqual(1.1,     parseFloat('1.1e'));
+        checkEqual(1.1,     parseFloat('1.1e+'));
+        checkEqual(100000,  parseFloat('1e+5'));
+        checkEqual(0.00001, parseFloat('1e-5'));
+        checkEqual(1,       parseFloat('1.e'));
+        checkEqual(1,       parseFloat('1.e+'));
+        checkEqual(100000,  parseFloat('1.e+5'));
+
+        // parseFloat different
+        checkEqual(0,         parseFloat('0x123'));
+        checkEqual(0,         parseFloat('+0x123'));
+        checkEqual(-0,         parseFloat('-0x123'));
+
+        checkEqual(0,         parseFloat('0o123'));
+
+        checkEqual(0,         parseFloat('+0o123'));
+        checkEqual(-0,        parseFloat('-0o123'));
+
+        checkEqual(Infinity,  parseFloat('Infinity'));
+        checkEqual(NaN,       parseFloat('infinity'));
+        checkEqual(NaN,       parseFloat('inf'));
+        checkEqual(NaN,       parseFloat('info'));
+
+        // parseFloat
+        checkEqual(123,       parseFloat(123));
+        checkEqual(-123,      parseFloat(-123));
+        checkEqual(1.23,      parseFloat(1.23));
+        checkEqual(-1.23,     parseFloat(-1.23));
+        checkEqual(Infinity,  parseFloat(Infinity));
+        checkEqual(-Infinity, parseFloat(-Infinity));
+        checkEqual(NaN,       parseFloat(NaN));
+
+        // Other
+        checkEqual(NaN,       parseFloat(null));
+        checkEqual(NaN,       parseFloat(undefined));
+        checkEqual(NaN,       parseFloat({}));
+        checkEqual(NaN,       parseFloat({ a: 1 }));
+        checkEqual(NaN,       parseFloat([]));
+        checkEqual(1,         parseFloat([1]));
+        checkEqual(123,       parseFloat([123]));
+        checkEqual(1,         parseFloat([1, 2]));
+      });
+    };
+
+    const test_parseInt_standard = () => {
+      it('test_parseInt', () => {
+
+        const parseInt10 = value => parseInt(value, 10);
+
+        // Integer
+        checkEqual(123,       parseInt10('123'));
+        checkEqual(123,       parseInt10('0123'));
+        checkEqual(123,       parseInt10('+123'));
+        checkEqual(-123,      parseInt10('-0123'));
+        checkEqual(123,       parseInt10(' 123'), '1');
+        checkEqual(123,       parseInt10('123 '), '2');
+        checkEqual(123,       parseInt10(' 123 '), '3');
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       parseInt10('　123'), '4');
+          checkEqual(123,       parseInt10('123　'), '5');
+          checkEqual(NaN,       parseInt10('　123　'), '6');
+        } else {
+          checkEqual(123,       parseInt10('　123'), '4');
+          checkEqual(123,       parseInt10('123　'), '5');
+          checkEqual(123,       parseInt10('　123　'), '6');
+        }
+        checkEqual(123,       parseInt10('123 0'));
+        checkEqual(0,         parseInt10('0 123'));
+        checkEqual(1,         parseInt10('1 123'));
+        checkEqual(123,       parseInt10('123a'));
+        checkEqual(NaN,       parseInt10('a123'));
+
+        // Decimal
+        checkEqual(123,     parseInt10('123.4'));
+        checkEqual(123,     parseInt10('0123.4'));
+        checkEqual(123,     parseInt10('+123.4'));
+        checkEqual(-123,    parseInt10('-0123.4'));
+        checkEqual(123,     parseInt10('123.5'));
+        checkEqual(123,     parseInt10('0123.5'));
+        checkEqual(123,     parseInt10('+123.5'));
+        checkEqual(-123,    parseInt10('-0123.5'));
+        checkEqual(123,     parseInt10(' 123.4'));
+        checkEqual(123,     parseInt10('123.4 '));
+        checkEqual(123,     parseInt10(' 123.4 '));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,       parseInt10('　123.4'));
+          checkEqual(123,       parseInt10('123.4　'));
+          checkEqual(NaN,       parseInt10('　123.4　'));
+        } else {
+          checkEqual(123,     parseInt10('　123.4'));
+          checkEqual(123,     parseInt10('123.4　'));
+          checkEqual(123,     parseInt10('　123.4　'));
+        }
+        checkEqual(123,         parseInt10('123.4 0'));
+        checkEqual(0,           parseInt10('0 123.4'));
+        checkEqual(1,           parseInt10('1 123.4'));
+        checkEqual(123,         parseInt10('123 .4'));
+        checkEqual(123,         parseInt10('123. 4'));
+        checkEqual(123,         parseInt10('123.4a'));
+        checkEqual(NaN,         parseInt10('a123.4'));
+        checkEqual(123,         parseInt10('123.45'));
+        checkEqual(123,         parseInt10('123.4.5'));
+
+        // string default value
+        checkEqual(NaN,         parseInt10('abc'));
+
+        // space string
+        checkEqual(NaN,         parseInt10(''));
+        checkEqual(NaN,         parseInt10(' '));
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(NaN,         parseInt10('　'));
+        } else {
+          checkEqual(NaN,         parseInt10('　'));
+        }
+
+        // exponential notation
+        checkEqual(3,       parseInt10(3.14));
+        checkEqual(3,       parseInt10('3.14'));
+        checkEqual(314,     parseInt10('314e-2'));
+        checkEqual(0,       parseInt10('0.0314E+2'));
+        checkEqual(NaN,     parseInt10('.14'));      // ?
+        checkEqual(1,       parseInt10('1e-17'));
+        checkEqual(1,       parseInt10('1e-17'));
+
+        // exponential notation detail
+        checkEqual(1,       parseInt10('1.'));
+        checkEqual(1,       parseInt10('1.1e'));
+        checkEqual(1,       parseInt10('1.1e+'));
+        checkEqual(1,       parseInt10('1e+5'));
+        checkEqual(1,       parseInt10('1e-5'));
+        checkEqual(1,       parseInt10('1.e'));
+        checkEqual(1,       parseInt10('1.e+'));
+        checkEqual(1,       parseInt10('1.e+5'));
+
+        // parseFloat different
+        checkEqual(0,         parseInt10('0x123'));
+        checkEqual(0,         parseInt10('+0x123'));
+        checkEqual(-0,        parseInt10('-0x123'));
+
+        checkEqual(0,         parseInt10('0o123'));
+
+        checkEqual(0,         parseInt10('+0o123'));
+        checkEqual(-0,        parseInt10('-0o123'));
+
+        checkEqual(NaN,       parseInt10('Infinity'));     // ?
+        checkEqual(NaN,       parseInt10('infinity'));
+        checkEqual(NaN,       parseInt10('inf'));
+        checkEqual(NaN,       parseInt10('info'));
+
+        // parseFloat
+        checkEqual(123,       parseInt10(123));
+        checkEqual(-123,      parseInt10(-123));
+        checkEqual(1,         parseInt10(1.23));
+        checkEqual(-1,        parseInt10(-1.23));
+        checkEqual(NaN,       parseInt10(Infinity));
+        checkEqual(NaN,       parseInt10(-Infinity));
+        checkEqual(NaN,       parseInt10(NaN));
+
+        // Other
+        checkEqual(NaN,       parseInt10(null));
+        checkEqual(NaN,       parseInt10(undefined));
+        checkEqual(NaN,       parseInt10({}));
+        checkEqual(NaN,       parseInt10({ a: 1 }));
+        checkEqual(NaN,       parseInt10([]));
+        checkEqual(1,         parseInt10([1]));
+        checkEqual(123,       parseInt10([123]));
+        checkEqual(1,         parseInt10([1, 2]));
 
         // Decimal number other
-        checkEqual('1010.01',         10.25.toString(2));
-        checkEqual('22.1',            10.25.toString(4));
-        checkEqual('12.2',            10.25.toString(8));
-        checkEqual('a.4',             10.25.toString(16));
-
-        // other type
-        checkEqual(true,              isThrown(() => (null).toString()) );
-        checkEqual(true,              isThrown(() => (undefined).toString()) );
-
-        checkEqual('[object Object]', {}.toString());
-        checkEqual('',                [].toString());
-        checkEqual('1',               [1].toString());
-        checkEqual('1,2,3',           [1, 2, 3].toString());
-
-        checkEqual('',                ''.toString());
-        checkEqual('a',               'a'.toString());
-
-        checkEqual('true',            true.toString());
-        checkEqual('false',           false.toString());
-
+        checkEqual(10,        parseInt('1010', 2));
+        checkEqual(10,        parseInt('22', 4));
+        checkEqual(10,        parseInt('12', 8));
+        checkEqual(10,        parseInt('a', 16));
+        checkEqual(10,        parseInt('A', 16));
       });
     };
 
@@ -1038,396 +1424,15 @@ const test_execute_convert = (parts) => {
       });
     };
 
-    const test_standardNumberCast = () => {
-      it('test_NumberCast', () => {
-        // Integer
-        checkEqual(123,       Number('123'));
-        checkEqual(123,       Number('0123'));
-        checkEqual(123,       Number('+123'));
-        checkEqual(-123,      Number('-0123'));
-        checkEqual(123,       Number(' 123'), '1');
-        checkEqual(123,       Number('123 '), '2');
-        checkEqual(123,       Number(' 123 '), '3');
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       Number('　123'), '4');
-          checkEqual(NaN,       Number('123　'), '5');
-          checkEqual(NaN,       Number('　123　'), '6');
-        } else {
-          checkEqual(123,       Number('　123'), '4');
-          checkEqual(123,       Number('123　'), '5');
-          checkEqual(123,       Number('　123　'), '6');
-        }
-        checkEqual(NaN,       Number('123 0'));
-        checkEqual(NaN,       Number('0 123'));
-        checkEqual(NaN,       Number('1 123'));
-        checkEqual(NaN,       Number('123a'));
-        checkEqual(NaN,       Number('a123'));
-
-        // Decimal
-        checkEqual(123.4,     Number('123.4'));
-        checkEqual(123.4,     Number('0123.4'));
-        checkEqual(123.4,     Number('+123.4'));
-        checkEqual(-123.4,    Number('-0123.4'));
-        checkEqual(123.5,     Number('123.5'));
-        checkEqual(123.5,     Number('0123.5'));
-        checkEqual(123.5,     Number('+123.5'));
-        checkEqual(-123.5,    Number('-0123.5'));
-        checkEqual(123.4,     Number(' 123.4'));
-        checkEqual(123.4,     Number('123.4 '));
-        checkEqual(123.4,     Number(' 123.4 '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       Number('　123.4'));
-          checkEqual(NaN,       Number('123.4　'));
-          checkEqual(NaN,       Number('　123.4　'));
-        } else {
-          checkEqual(123.4,     Number('　123.4'));
-          checkEqual(123.4,     Number('123.4　'));
-          checkEqual(123.4,     Number('　123.4　'));
-        }
-        checkEqual(NaN,       Number('123.4 0'));
-        checkEqual(NaN,       Number('0 123.4'));
-        checkEqual(NaN,       Number('1 123.4'));
-        checkEqual(NaN,       Number('123 .4'));
-        checkEqual(NaN,       Number('123. 4'));
-        checkEqual(NaN,       Number('123.4a'));
-        checkEqual(NaN,       Number('a123.4'));
-        checkEqual(123.45,    Number('123.45'));
-        checkEqual(NaN,       Number('123.4.5'));
-
-        // string default value
-        checkEqual(NaN,       Number('abc'));
-
-        // space string
-        checkEqual(0,         Number(''));      // ?
-        checkEqual(0,         Number(' '));     // ?
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       Number('　'));
-        } else {
-          checkEqual(0,         Number('　'));    // ?
-        }
-
-        // exponential notation
-        checkEqual(3.14,  Number(3.14));
-        checkEqual(3.14,  Number('3.14'));
-        checkEqual(3.14,  Number('314e-2'));
-        checkEqual(3.14,  Number('0.0314E+2'));
-        checkEqual(0.14,  Number('.14'));
-        checkEqual(0.00000000000000001, Number('1e-17'));
-        checkEqual(1e-17, Number('1e-17'));
-
-        // exponential notation detail
-        checkEqual(1,       Number('1.'));
-        checkEqual(NaN,     Number('1.1e'));
-        checkEqual(NaN,     Number('1.1e+'));
-        checkEqual(100000,  Number('1e+5'));
-        checkEqual(0.00001, Number('1e-5'));
-        checkEqual(NaN,     Number('1.e'));
-        checkEqual(NaN,     Number('1.e+'));
-        checkEqual(100000,  Number('1.e+5'));
-
-        // Number different
-        checkEqual(291,       Number('0x123'));
-        checkEqual(NaN,       Number('+0x123'));
-        checkEqual(NaN,       Number('-0x123'));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,        Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN,        Number('0o123'));
-        } else {
-          checkEqual(83,        Number('0o123'));
-        }
-
-        checkEqual(NaN,       Number('+0o123'));
-        checkEqual(NaN,       Number('-0o123'));
-
-        checkEqual(Infinity,  Number('Infinity'));
-        checkEqual(NaN,       Number('infinity'));
-        checkEqual(NaN,       Number('inf'));
-        checkEqual(NaN,       Number('info'));
-
-        // Number
-        checkEqual(123,       Number(123));
-        checkEqual(-123,      Number(-123));
-        checkEqual(1.23,      Number(1.23));
-        checkEqual(-1.23,     Number(-1.23));
-        checkEqual(Infinity,  Number(Infinity));
-        checkEqual(-Infinity, Number(-Infinity));
-        checkEqual(NaN,       Number(NaN));
-
-        // Other
-        checkEqual(0,         Number(null));        // !
-        checkEqual(NaN,       Number(undefined));
-        checkEqual(NaN,       Number({}));
-        checkEqual(NaN,       Number({ a: 1 }));
-        checkEqual(0,         Number([]));          // ?
-        checkEqual(1,         Number([1]));         // ?
-        checkEqual(123,       Number([123]));       // ?
-        checkEqual(NaN,       Number([1, 2]));
-      });
-    };
-
-    const test_standardParseFloat = () => {
-      it('test_parseFloat', () => {
-        // Integer
-        checkEqual(123,       parseFloat('123'));
-        checkEqual(123,       parseFloat('0123'));
-        checkEqual(123,       parseFloat('+123'));
-        checkEqual(-123,      parseFloat('-0123'));
-        checkEqual(123,       parseFloat(' 123'), '1');
-        checkEqual(123,       parseFloat('123 '), '2');
-        checkEqual(123,       parseFloat(' 123 '), '3');
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseFloat('　123'), '4');
-          checkEqual(123,       parseFloat('123　'), '5');
-          checkEqual(NaN,       parseFloat('　123　'), '6');
-        } else {
-          checkEqual(123,       parseFloat('　123'), '4');
-          checkEqual(123,       parseFloat('123　'), '5');
-          checkEqual(123,       parseFloat('　123　'), '6');
-        }
-        checkEqual(123,       parseFloat('123 0'));
-        checkEqual(0,         parseFloat('0 123'));
-        checkEqual(1,         parseFloat('1 123'));
-        checkEqual(123,       parseFloat('123a'));
-        checkEqual(NaN,       parseFloat('a123'));
-
-        // Decimal
-        checkEqual(123.4,     parseFloat('123.4'));
-        checkEqual(123.4,     parseFloat('0123.4'));
-        checkEqual(123.4,     parseFloat('+123.4'));
-        checkEqual(-123.4,    parseFloat('-0123.4'));
-        checkEqual(123.5,     parseFloat('123.5'));
-        checkEqual(123.5,     parseFloat('0123.5'));
-        checkEqual(123.5,     parseFloat('+123.5'));
-        checkEqual(-123.5,    parseFloat('-0123.5'));
-        checkEqual(123.4,     parseFloat(' 123.4'));
-        checkEqual(123.4,     parseFloat('123.4 '));
-        checkEqual(123.4,     parseFloat(' 123.4 '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseFloat('　123.4'));
-          checkEqual(123.4,     parseFloat('123.4　'));
-          checkEqual(NaN,       parseFloat('　123.4　'));
-        } else {
-          checkEqual(123.4,     parseFloat('　123.4'));
-          checkEqual(123.4,     parseFloat('123.4　'));
-          checkEqual(123.4,     parseFloat('　123.4　'));
-        }
-        checkEqual(123.4,       parseFloat('123.4 0'));
-        checkEqual(0,           parseFloat('0 123.4'));
-        checkEqual(1,           parseFloat('1 123.4'));
-        checkEqual(123,         parseFloat('123 .4'));
-        checkEqual(123,         parseFloat('123. 4'));
-        checkEqual(123.4,       parseFloat('123.4a'));
-        checkEqual(NaN,         parseFloat('a123.4'));
-        checkEqual(123.45,      parseFloat('123.45'));
-        checkEqual(123.4,       parseFloat('123.4.5'));
-
-        // string default value
-        checkEqual(NaN,         parseFloat('abc'));
-
-        // space string
-        checkEqual(NaN,         parseFloat(''));
-        checkEqual(NaN,         parseFloat(' '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,         parseFloat('　'));
-        } else {
-          checkEqual(NaN,         parseFloat('　'));
-        }
-
-        // exponential notation
-        checkEqual(3.14,  parseFloat(3.14));
-        checkEqual(3.14,  parseFloat('3.14'));
-        checkEqual(3.14,  parseFloat('314e-2'));
-        checkEqual(3.14,  parseFloat('0.0314E+2'));
-        checkEqual(0.14,  parseFloat('.14'));
-        checkEqual(0.00000000000000001, parseFloat('1e-17'));
-        checkEqual(1e-17, parseFloat('1e-17'));
-
-        // exponential notation detail
-        checkEqual(1,       parseFloat('1.'));
-        checkEqual(1.1,     parseFloat('1.1e'));
-        checkEqual(1.1,     parseFloat('1.1e+'));
-        checkEqual(100000,  parseFloat('1e+5'));
-        checkEqual(0.00001, parseFloat('1e-5'));
-        checkEqual(1,       parseFloat('1.e'));
-        checkEqual(1,       parseFloat('1.e+'));
-        checkEqual(100000,  parseFloat('1.e+5'));
-
-        // parseFloat different
-        checkEqual(0,         parseFloat('0x123'));
-        checkEqual(0,         parseFloat('+0x123'));
-        checkEqual(-0,         parseFloat('-0x123'));
-
-        checkEqual(0,         parseFloat('0o123'));
-
-        checkEqual(0,         parseFloat('+0o123'));
-        checkEqual(-0,        parseFloat('-0o123'));
-
-        checkEqual(Infinity,  parseFloat('Infinity'));
-        checkEqual(NaN,       parseFloat('infinity'));
-        checkEqual(NaN,       parseFloat('inf'));
-        checkEqual(NaN,       parseFloat('info'));
-
-        // parseFloat
-        checkEqual(123,       parseFloat(123));
-        checkEqual(-123,      parseFloat(-123));
-        checkEqual(1.23,      parseFloat(1.23));
-        checkEqual(-1.23,     parseFloat(-1.23));
-        checkEqual(Infinity,  parseFloat(Infinity));
-        checkEqual(-Infinity, parseFloat(-Infinity));
-        checkEqual(NaN,       parseFloat(NaN));
-
-        // Other
-        checkEqual(NaN,       parseFloat(null));
-        checkEqual(NaN,       parseFloat(undefined));
-        checkEqual(NaN,       parseFloat({}));
-        checkEqual(NaN,       parseFloat({ a: 1 }));
-        checkEqual(NaN,       parseFloat([]));
-        checkEqual(1,         parseFloat([1]));
-        checkEqual(123,       parseFloat([123]));
-        checkEqual(1,         parseFloat([1, 2]));
-      });
-    };
-
-    const test_standardParseInt = () => {
-      it('test_parseInt', () => {
-
-        const parseInt10 = value => parseInt(value, 10);
-
-        // Integer
-        checkEqual(123,       parseInt10('123'));
-        checkEqual(123,       parseInt10('0123'));
-        checkEqual(123,       parseInt10('+123'));
-        checkEqual(-123,      parseInt10('-0123'));
-        checkEqual(123,       parseInt10(' 123'), '1');
-        checkEqual(123,       parseInt10('123 '), '2');
-        checkEqual(123,       parseInt10(' 123 '), '3');
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseInt10('　123'), '4');
-          checkEqual(123,       parseInt10('123　'), '5');
-          checkEqual(NaN,       parseInt10('　123　'), '6');
-        } else {
-          checkEqual(123,       parseInt10('　123'), '4');
-          checkEqual(123,       parseInt10('123　'), '5');
-          checkEqual(123,       parseInt10('　123　'), '6');
-        }
-        checkEqual(123,       parseInt10('123 0'));
-        checkEqual(0,         parseInt10('0 123'));
-        checkEqual(1,         parseInt10('1 123'));
-        checkEqual(123,       parseInt10('123a'));
-        checkEqual(NaN,       parseInt10('a123'));
-
-        // Decimal
-        checkEqual(123,     parseInt10('123.4'));
-        checkEqual(123,     parseInt10('0123.4'));
-        checkEqual(123,     parseInt10('+123.4'));
-        checkEqual(-123,    parseInt10('-0123.4'));
-        checkEqual(123,     parseInt10('123.5'));
-        checkEqual(123,     parseInt10('0123.5'));
-        checkEqual(123,     parseInt10('+123.5'));
-        checkEqual(-123,    parseInt10('-0123.5'));
-        checkEqual(123,     parseInt10(' 123.4'));
-        checkEqual(123,     parseInt10('123.4 '));
-        checkEqual(123,     parseInt10(' 123.4 '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseInt10('　123.4'));
-          checkEqual(123,       parseInt10('123.4　'));
-          checkEqual(NaN,       parseInt10('　123.4　'));
-        } else {
-          checkEqual(123,     parseInt10('　123.4'));
-          checkEqual(123,     parseInt10('123.4　'));
-          checkEqual(123,     parseInt10('　123.4　'));
-        }
-        checkEqual(123,         parseInt10('123.4 0'));
-        checkEqual(0,           parseInt10('0 123.4'));
-        checkEqual(1,           parseInt10('1 123.4'));
-        checkEqual(123,         parseInt10('123 .4'));
-        checkEqual(123,         parseInt10('123. 4'));
-        checkEqual(123,         parseInt10('123.4a'));
-        checkEqual(NaN,         parseInt10('a123.4'));
-        checkEqual(123,         parseInt10('123.45'));
-        checkEqual(123,         parseInt10('123.4.5'));
-
-        // string default value
-        checkEqual(NaN,         parseInt10('abc'));
-
-        // space string
-        checkEqual(NaN,         parseInt10(''));
-        checkEqual(NaN,         parseInt10(' '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,         parseInt10('　'));
-        } else {
-          checkEqual(NaN,         parseInt10('　'));
-        }
-
-        // exponential notation
-        checkEqual(3,       parseInt10(3.14));
-        checkEqual(3,       parseInt10('3.14'));
-        checkEqual(314,     parseInt10('314e-2'));
-        checkEqual(0,       parseInt10('0.0314E+2'));
-        checkEqual(NaN,     parseInt10('.14'));      // ?
-        checkEqual(1,       parseInt10('1e-17'));
-        checkEqual(1,       parseInt10('1e-17'));
-
-        // exponential notation detail
-        checkEqual(1,       parseInt10('1.'));
-        checkEqual(1,       parseInt10('1.1e'));
-        checkEqual(1,       parseInt10('1.1e+'));
-        checkEqual(1,       parseInt10('1e+5'));
-        checkEqual(1,       parseInt10('1e-5'));
-        checkEqual(1,       parseInt10('1.e'));
-        checkEqual(1,       parseInt10('1.e+'));
-        checkEqual(1,       parseInt10('1.e+5'));
-
-        // parseFloat different
-        checkEqual(0,         parseInt10('0x123'));
-        checkEqual(0,         parseInt10('+0x123'));
-        checkEqual(-0,        parseInt10('-0x123'));
-
-        checkEqual(0,         parseInt10('0o123'));
-
-        checkEqual(0,         parseInt10('+0o123'));
-        checkEqual(-0,        parseInt10('-0o123'));
-
-        checkEqual(NaN,       parseInt10('Infinity'));     // ?
-        checkEqual(NaN,       parseInt10('infinity'));
-        checkEqual(NaN,       parseInt10('inf'));
-        checkEqual(NaN,       parseInt10('info'));
-
-        // parseFloat
-        checkEqual(123,       parseInt10(123));
-        checkEqual(-123,      parseInt10(-123));
-        checkEqual(1,         parseInt10(1.23));
-        checkEqual(-1,        parseInt10(-1.23));
-        checkEqual(NaN,       parseInt10(Infinity));
-        checkEqual(NaN,       parseInt10(-Infinity));
-        checkEqual(NaN,       parseInt10(NaN));
-
-        // Other
-        checkEqual(NaN,       parseInt10(null));
-        checkEqual(NaN,       parseInt10(undefined));
-        checkEqual(NaN,       parseInt10({}));
-        checkEqual(NaN,       parseInt10({ a: 1 }));
-        checkEqual(NaN,       parseInt10([]));
-        checkEqual(1,         parseInt10([1]));
-        checkEqual(123,       parseInt10([123]));
-        checkEqual(1,         parseInt10([1, 2]));
-
-        // Decimal number other
-        checkEqual(10,        parseInt('1010', 2));
-        checkEqual(10,        parseInt('22', 4));
-        checkEqual(10,        parseInt('12', 8));
-        checkEqual(10,        parseInt('a', 16));
-        checkEqual(10,        parseInt('A', 16));
-      });
-    };
-
     test_numberToString();
     test_valueToString();
 
-    test_standardStringCast();
-    test_standardToString();
+    test_StringCast_standard();
+    test_toString_standard();
+
+    test_NumberCast_standard();
+    test_parseFloat_standard();
+    test_parseInt_standard();
 
     test_stringToNumber();
     test_stringToNumberDefault();
@@ -1435,10 +1440,6 @@ const test_execute_convert = (parts) => {
     test_stringToInteger();
     test_stringToIntegerDefault();
     test_valueToInteger();
-
-    test_standardNumberCast();
-    test_standardParseFloat();
-    test_standardParseInt();
 
   });
 };
