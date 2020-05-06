@@ -233,6 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.2.0
+#### 2020/05/06(Wed)
+- update polyfill.js
+  - delete Object.entries
+
 ### 5.1.0
 #### 2020/05/06(Wed)
 - add string.indexOfFirst/indexOfLast

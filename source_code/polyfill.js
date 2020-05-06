@@ -112,19 +112,6 @@ const polyfillDefine = () => {
     }());
   }
 
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
-  if (!Object.entries) {
-    Object.entries = function( obj ){
-      var ownProps = Object.keys( obj ),
-          i = ownProps.length,
-          resArray = new Array(i); // preallocate the Array
-      while (i--)
-        resArray[i] = [ownProps[i], obj[ownProps[i]]];
-
-      return resArray;
-    };
-  }
-
   // https://jonlabelle.com/snippets/view/javascript/ecmascript-5-polyfills
   // ES 15.2.3.6 Object.defineProperty ( O, P, Attributes )
   // Partial support for most common case - getters, setters, and values
