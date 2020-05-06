@@ -245,6 +245,7 @@ You can now use the functions of the parts.js object.
     - array.operation.includeBothEdges >> includeBothEnds
     - array.operation.excludeBothEdges >> excludeBothEnds
     - array.operation.trimBothEdges >> trimBothEnds
+- add string.isBothEnds
 
 ### 5.1.0
 #### 2020/05/06(Wed)

@@ -12,7 +12,7 @@ const test_execute_string = (parts) => {
     const {
       matchFormat, replaceAll,
       indexOfFirst, indexOfLast,
-      isFirst, isLast,
+      isFirst, isLast, isBothEnds,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -359,6 +359,63 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_isBothEnds = () => {
+      it('test_isBothEnds', () => {
+        checkEqual(true,  isBothEnds('121', '1'));
+        checkEqual(false, isBothEnds('121', '2'));
+        checkEqual(true,  isBothEnds('121', '12', '21'));
+        checkEqual(true,  isBothEnds('ABA', 'A'));
+        checkEqual(false, isBothEnds('ABA', 'a'));
+        checkEqual(false, isBothEnds('ABA', 'B'));
+        checkEqual(true,  isBothEnds('ABAB', 'AB'));
+
+        checkEqual(false, isBothEnds('ABAD', 'A'));
+        checkEqual(true,  isBothEnds('ABAD', 'A', 'D'));
+
+        checkEqual(true,  isBothEnds('{AB}', '{', '}'));
+        checkEqual(true,  isBothEnds('{{}}', '{', '}'));
+        checkEqual(false, isBothEnds('A{B}', '{', '}'));
+        checkEqual(false, isBothEnds('{AB}', '}', '}'));
+        checkEqual(false, isBothEnds('{AB}', '{', '{'));
+
+        checkEqual(false, isBothEnds('1', '1'));
+        checkEqual(true,  isBothEnds('11', '1'));
+
+        // Object Named Parameter
+        checkEqual(true,
+          isBothEnds({
+            str: 'ABA',
+            search: 'A',
+          }),
+        );
+        checkEqual(false,
+          isBothEnds({
+            str: 'ABA',
+            search: 'a',
+          }),
+        );
+        checkEqual(true,
+          isBothEnds({
+            str: 'ABA',
+            searchFirst: 'A',
+          }),
+        );
+        checkEqual(false,
+          isBothEnds({
+            str: 'ABAD',
+            searchFirst: 'A',
+          }),
+        );
+        checkEqual(true,
+          isBothEnds({
+            str: 'ABAD',
+            searchFirst: 'A',
+            searchLast: 'D',
+          }),
+        );
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -369,6 +426,7 @@ const test_execute_string = (parts) => {
 
     test_isFirst();
     test_isLast();
+    test_isBothEnds();
   });
 };
 

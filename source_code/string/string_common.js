@@ -231,15 +231,61 @@ const isLast = (str, search) => {
   return _isLast(str, search);
 };
 
+/**
+ * isBothEnds
+ */
+const _isBothEnds = (
+  str,
+  searchFirst,
+  searchLast = searchFirst,
+) => {
+  if (str.length <= 1) {
+    return false;
+  }
+  return _isFirst(str, searchFirst) && _isLast(str, searchLast);
+};
+
+const isBothEnds = (
+  str,
+  searchFirst,
+  searchLast = searchFirst,
+) => {
+  if (isObjectParameter(str, 'str, searchFirst', 'searchLast')) {
+    ({ str, searchFirst, searchLast = searchFirst } = str);
+  } else if (isObjectParameter(str, 'str, search')) {
+    ({ str, search: searchFirst } = str);
+    searchLast = searchFirst;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'isBothEnds args(str) is not string',
+    );
+  }
+  if (!isString(searchFirst)) {
+    throw new TypeError(
+      'isBothEnds args(searchFirst) is not string',
+    );
+  }
+  if (!isString(searchLast)) {
+    throw new TypeError(
+      'isBothEnds args(searchLast) is not string',
+    );
+  }
+
+  return _isBothEnds(str, searchFirst, searchLast);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
   _isFirst, _isLast,
+  _isBothEnds,
 
   repeat,
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
   isFirst, isLast,
-
+  isBothEnds,
 };
