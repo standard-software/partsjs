@@ -46,9 +46,10 @@ _matchFormat.clear = function () {
 };
 
 _matchFormat.add = function (nameArray, patternFunction) {
-  nameArray.forEach(function (name) {
+  for (var i = 0, l = nameArray.length; i < l; i += 1) {
+    var name = nameArray[i];
     _matchFormat.pattern[name] = patternFunction;
-  });
+  }
 };
 
 _matchFormat.reset = function () {

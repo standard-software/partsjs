@@ -300,24 +300,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /* eslint-disable no-extend-native */
 var polyfillDefine = function polyfillDefine() {
-  if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function (search, pos) {
-      pos = !pos || pos < 0 ? 0 : +pos;
-      return this.substring(pos, pos + search.length) === search;
-    };
-  }
-
-  if (!String.prototype.endsWith) {
-    String.prototype.endsWith = function (search, this_len) {
-      if (this_len === undefined || this_len > this.length) {
-        this_len = this.length;
-      }
-
-      return this.substring(this_len - search.length, this_len) === search;
-    };
-  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
-
-
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
   if (!Array.isArray) {
     Array.isArray = function (arg) {
       return Object.prototype.toString.call(arg) === '[object Array]';
@@ -6092,9 +6075,10 @@ _matchFormat.clear = function () {
 };
 
 _matchFormat.add = function (nameArray, patternFunction) {
-  nameArray.forEach(function (name) {
+  for (var i = 0, l = nameArray.length; i < l; i += 1) {
+    var name = nameArray[i];
     _matchFormat.pattern[name] = patternFunction;
-  });
+  }
 };
 
 _matchFormat.reset = function () {

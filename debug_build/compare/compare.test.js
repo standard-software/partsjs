@@ -53,6 +53,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         includes = _parts$compare.includes,
         includesSome = _parts$compare.includesSome,
         includesAll = _parts$compare.includesAll;
+    var isFirst = parts.string.isFirst;
 
     var test_equal = function test_equal() {
       it('test_equal', function () {
@@ -1495,10 +1496,10 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, matchSome('abc', []), 'test_match 5');
         checkEqual(false, matchSome('123', [null, undefined, 123, 'abc']), 'test_match 6');
         checkEqual(true, matchSome('abc', [function (value) {
-          return value.startsWith('a');
+          return isFirst(value, 'a');
         }]), 'test_match 7');
         checkEqual(false, matchSome('abc', [function (value) {
-          return value.startsWith('b');
+          return isFirst(value, 'b');
         }]), 'test_match 8'); // normal args number
 
         checkEqual(false, matchSome(123, ['123', '456', '789']), 'test_match number 1');
@@ -1571,13 +1572,13 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, matchSome({
           value: 'abc',
           compareArray: [function (value) {
-            return value.startsWith('a');
+            return isFirst(value, 'a');
           }]
         }), 'test_match param 7');
         checkEqual(false, matchSome({
           value: 'abc',
           compareArray: [function (value) {
-            return value.startsWith('b');
+            return isFirst(value, 'b');
           }]
         }), 'test_match param 8'); // Object Named Parameter number
 
