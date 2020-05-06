@@ -2,6 +2,21 @@
 
 ## Version
 
+### 5.1.0
+#### 2020/05/06(Wed)
+- add string.indexOfFirst/indexOfLast
+- add string.isFirst/isLast like startsWith/endsWith
+- add parts.parts SelfReference
+- move matchFormat from string_common.js to matchFormat.js
+- args name change value >> str
+  - repeat
+  - isLowerCase/isUpperCase
+- update test code
+- update polyfill.js
+  - delete String.prototype.includes
+  - delete String.protoype.startsWith/endsWith
+  - delete Array.prototype.includes
+
 ### 5.0.0
 #### 2020/05/04(Mon)
 - Uninstall @babel/polyfill

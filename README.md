@@ -235,17 +235,18 @@ You can now use the functions of the parts.js object.
 
 ### 5.1.0
 #### 2020/05/06(Wed)
-- delete Polyfill string.includes
-- delete Polyfill array.includes
+- add string.indexOfFirst/indexOfLast
+- add string.isFirst/isLast like startsWith/endsWith
+- add parts.parts SelfReference
 - move matchFormat from string_common.js to matchFormat.js
 - args name change value >> str
   - repeat
   - isLowerCase/isUpperCase
 - update test code
-- add string.indexOfFirst/indexOfLast
-- add string.isFirst/isLast like startsWith/endsWith
-- add parts.parts SelfReference
-- delete polyfill.js startsWith/endsWith
+- update polyfill.js
+  - delete String.prototype.includes
+  - delete String.protoype.startsWith/endsWith
+  - delete Array.prototype.includes
 
 ### 5.0.0
 #### 2020/05/04(Mon)
@@ -295,35 +296,5 @@ You can now use the functions of the parts.js object.
 - update eslint setting
 - update test message output
 
-### 4.8.0
-#### 2020/04/25(Sat)
-- update if_
-  - update if_(true/false)({ then: A, else: B })
-  - add if_(true/false)(A, B)
-  - add if_(true/false).then(A).else(B)
-  - add if_(true/false).else(A).then(B)
-
-### 4.7.0
-#### 2020/04/21(Tue)
-- npm update
-- @babel/polyfill devDependencies > dependencies
-
-### 4.6.1
-#### 2020/04/19(Sun)
-- bugfix inProperty
-
-### 4.6.0
-#### 2020/04/04(Sat)
-- update matchValue matchSomeValue matchAllValue
-- update toNumber toInteger
-- add test.js expect().toBe()
-- update equalDeep
-- update functionValue
-
 ### More Info
 [VERSION.md](./VERSION.md)
-
-
-### Before ver2.0.0
-Verssion 1.x.x = Previous product  
-[standard-software / Copipe.js](https://github.com/standard-software/copipejs)
