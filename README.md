@@ -234,7 +234,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 5.1.0
-#### 2020/05/05(Tue)
+#### 2020/05/06(Wed)
 - delete Polyfill string.includes
 - delete Polyfill array.includes
 - move matchFormat from string_common.js to matchFormat.js
@@ -244,6 +244,7 @@ You can now use the functions of the parts.js object.
 - update test code
 - add string.indexOfFirst/indexOfLast
 - add string.isFirst/isLast like startsWith/endsWith
+- add parts.parts SelfReference
 
 ### 5.0.0
 #### 2020/05/04(Mon)

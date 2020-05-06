@@ -25,10 +25,9 @@ const test_execute_index = (parts) => {
   const { test_execute_other        } = require('./other/other.test.js');
 
   const test_execute_nameSpace = (parts) => {
-    const { describe, it } = parts.test;
+    const { describe, it, checkEqual } = parts.test;
     describe('test_execute_nameSpace', () => {
 
-      const { checkEqual } = parts.test;
       const { propertyCount, inProperty } = parts.object;
 
       it('test_execute_nameSpace 1', () => {
@@ -93,6 +92,22 @@ const test_execute_index = (parts) => {
     });
   };
 
+  const test_execute_SelfReference = (parts) => {
+    const { describe, it, checkEqual } = parts.test;
+    describe('test_execute_SelfReference', () => {
+      it('test_parts_SelfReference', () => {
+        checkEqual(parts.VERSION, parts.parts.VERSION);
+        checkEqual(false, parts.isUndefined(parts.parts));
+        checkEqual(true, parts.isUndefined(parts.parts.parts));
+
+        const parts1 = parts.cloneDeep(parts);
+        delete parts1.parts;
+        const parts2 = parts.cloneDeep(parts.parts);
+        checkEqual(true,  parts.equalDeep(parts1, parts2));
+
+      });
+    });
+  };
 
   const { describe } = parts.test;
   describe('test_execute_index', () => {
@@ -108,8 +123,9 @@ const test_execute_index = (parts) => {
     test_execute_object(parts);
     test_execute_array(parts);
     test_execute_consoleHook(parts);
-    test_execute_nameSpace(parts);
     test_execute_other(parts);
+    test_execute_nameSpace(parts);
+    test_execute_SelfReference(parts);
 
   });
 };

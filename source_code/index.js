@@ -219,7 +219,7 @@ propertyNames.CONSOLE_HOOK = [
 ].join(',');
 const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
 
-module.exports = {
+const parts = {
   VERSION,
   platform,
   type,
@@ -238,3 +238,7 @@ module.exports = {
   ...rootNames,
 };
 
+module.exports = {
+  ...parts,
+  parts,
+};
