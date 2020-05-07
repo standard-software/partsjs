@@ -245,6 +245,10 @@ You can now use the functions of the parts.js object.
     - array.operation.includeBothEdges >> includeBothEnds
     - array.operation.excludeBothEdges >> excludeBothEnds
     - array.operation.trimBothEdges >> trimBothEnds
+- rename indexFirst >> indexStart / indexLast >> indexEnd
+  - Reference String.prototype.substring()
+    - array.subindex
+    - array.operation.deleteIndex
 - add string.isBothEnds
 
 ### 5.1.0

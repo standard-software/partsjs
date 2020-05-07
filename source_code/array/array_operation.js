@@ -139,17 +139,17 @@ const deleteLength = (array, index, length) => {
  * array.operation.deleteIndex
  */
 const _deleteIndex = (
-  array, indexFirst, indexLast = indexFirst,
+  array, indexStart, indexEnd = indexStart,
 ) => {
-  array.splice(indexFirst, indexLast - indexFirst + 1);
+  array.splice(indexStart, indexEnd - indexStart + 1);
   return array;
 };
 
-const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
-  if (isObjectParameter(array, 'array, indexFirst', 'indexLast')) {
-    ({ array, indexFirst, indexLast = indexFirst } = array);
+const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
+  if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
+    ({ array, indexStart, indexEnd = indexStart } = array);
   } else if (isObjectParameter(array, 'array, index')) {
-    ({ array, index: indexFirst, indexLast = indexFirst } = array);
+    ({ array, index: indexStart, indexEnd = indexStart } = array);
   }
 
   if (!isArray(array)) {
@@ -157,28 +157,28 @@ const deleteIndex = (array, indexFirst, indexLast = indexFirst) => {
       'deleteIndex args(array) is not array',
     );
   }
-  if (!isInteger(indexFirst)) {
+  if (!isInteger(indexStart)) {
     throw new TypeError(
-      'deleteIndex args(indexFirst) is not integer',
+      'deleteIndex args(indexStart) is not integer',
     );
   }
-  if (!isInteger(indexLast)) {
+  if (!isInteger(indexEnd)) {
     throw new TypeError(
-      'deleteIndex args(indexLast) is not integer',
+      'deleteIndex args(indexEnd) is not integer',
     );
   }
-  if (!_inRange(indexFirst, 0, array.length - 1)) {
+  if (!_inRange(indexStart, 0, array.length - 1)) {
     throw new RangeError(
-      'deleteIndex args(indexFirst) must be from 0 to array.length - 1',
+      'deleteIndex args(indexStart) must be from 0 to array.length - 1',
     );
   }
-  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
+  if (!_inRange(indexEnd, indexStart, array.length - 1)) {
     throw new RangeError(
-      'deleteIndex args(indexLast) must be from indexFirst to array.length - 1',
+      'deleteIndex args(indexEnd) must be from indexStart to array.length - 1',
     );
   }
 
-  return _deleteIndex(array, indexFirst, indexLast);
+  return _deleteIndex(array, indexStart, indexEnd);
 };
 
 /**
@@ -674,7 +674,7 @@ const remainFirst = (array, length) => {
   }
   if (!(0 <= length)) {
     throw new RangeError(
-      'remainFirst args(indexFirst) must be from 0 to array.length - 1',
+      'remainFirst args(length) must be from 0 to array.length - 1',
     );
   }
 
@@ -708,7 +708,7 @@ const remainLast = (array, length) => {
   }
   if (!(0 <= length)) {
     throw new RangeError(
-      'remainLast args(indexFirst) must be from 0 to array.length - 1',
+      'remainLast args(length) must be from 0 to array.length - 1',
     );
   }
 
