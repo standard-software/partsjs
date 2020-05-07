@@ -773,16 +773,20 @@ var subIndex = function subIndex(array, indexStart, indexEnd) {
  */
 
 
-var _subLength = function _subLength(array, index, length) {
+var _subLength = function _subLength(array, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
   return array.slice(index, index + length);
 };
 
-var subLength = function subLength(array, index, length) {
-  if (isObjectParameter(array, 'array, index, length')) {
+var subLength = function subLength(array, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
+
+  if (isObjectParameter(array, 'array, index', 'length')) {
     var _array15 = array;
     array = _array15.array;
     index = _array15.index;
-    length = _array15.length;
+    var _array15$length = _array15.length;
+    length = _array15$length === void 0 ? array.length - index : _array15$length;
   }
 
   if (!isArray(array)) {
@@ -801,7 +805,9 @@ var subLength = function subLength(array, index, length) {
     throw new TypeError('subLength args(length) is not integer');
   }
 
-  if (!_inRange(length, 0, array.length - 1)) {
+  length = _min([length, array.length - index]);
+
+  if (!_inRange(length, 0, array.length - index)) {
     throw new RangeError('subLength args(length) must be from 0 to array.length - 1');
   }
 
@@ -812,15 +818,19 @@ var subLength = function subLength(array, index, length) {
  */
 
 
-var _subFirst = function _subFirst(array, length) {
+var _subFirst = function _subFirst(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   return _subLength(array, 0, length);
 };
 
-var subFirst = function subFirst(array, length) {
+var subFirst = function subFirst(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
   if (isObjectParameter(array, 'array, length')) {
     var _array16 = array;
     array = _array16.array;
-    length = _array16.length;
+    var _array16$length = _array16.length;
+    length = _array16$length === void 0 ? 1 : _array16$length;
   }
 
   if (!isArray(array)) {
@@ -842,15 +852,19 @@ var subFirst = function subFirst(array, length) {
  */
 
 
-var _subLast = function _subLast(array, length) {
+var _subLast = function _subLast(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   return _subLength(array, array.length - length, length);
 };
 
-var subLast = function subLast(array, length) {
+var subLast = function subLast(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
   if (isObjectParameter(array, 'array, length')) {
     var _array17 = array;
     array = _array17.array;
-    length = _array17.length;
+    var _array17$length = _array17.length;
+    length = _array17$length === void 0 ? 1 : _array17$length;
   }
 
   if (!isArray(array)) {

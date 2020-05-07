@@ -319,31 +319,31 @@ var subIndex = function subIndex(str, indexStart) {
  */
 
 
-var _subLength = function _subLength(str, indexStart) {
-  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - indexStart;
-  return str.substring(indexStart, indexStart + length);
+var _subLength = function _subLength(str, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
+  return str.substring(index, index + length);
 };
 
-var subLength = function subLength(str, indexStart) {
-  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - indexStart;
+var subLength = function subLength(str, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
 
-  if (isObjectParameter(str, 'str, indexStart', 'length')) {
+  if (isObjectParameter(str, 'str, index', 'length')) {
     var _str9 = str;
     str = _str9.str;
-    indexStart = _str9.indexStart;
+    index = _str9.index;
     var _str9$length = _str9.length;
-    length = _str9$length === void 0 ? str.length - indexStart : _str9$length;
+    length = _str9$length === void 0 ? str.length - index : _str9$length;
   }
 
   if (!isString(str)) {
     throw new TypeError('subLength args(str) is not string');
   }
 
-  if (!isInteger(indexStart)) {
+  if (!isInteger(index)) {
     throw new TypeError('subLength args(indexStart) is not integer');
   }
 
-  if (!_inRange(indexStart, 0, str.length - 1)) {
+  if (!_inRange(index, 0, str.length - 1)) {
     throw new RangeError('subLength args(indexStart) must be from 0 to str.length - 1');
   }
 
@@ -351,13 +351,81 @@ var subLength = function subLength(str, indexStart) {
     throw new TypeError('subLength args(length) is not integer');
   }
 
-  length = _min([length, str.length - indexStart]);
+  length = _min([length, str.length - index]);
 
-  if (!_inRange(length, 1, str.length - indexStart)) {
-    throw new RangeError('subLength args(length) must be from 1 to str.length - indexStart');
+  if (!_inRange(length, 0, str.length - index)) {
+    throw new RangeError('subLength args(length) must be from 0 to str.length - indexStart');
   }
 
-  return _subLength(str, indexStart, length);
+  return _subLength(str, index, length);
+};
+/**
+ * subFirst
+ */
+
+
+var _subFirst = function _subFirst(str) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  return _subLength(str, 0, length);
+};
+
+var subFirst = function subFirst(str) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+  if (isObjectParameter(str, 'str', 'length')) {
+    var _str10 = str;
+    str = _str10.str;
+    var _str10$length = _str10.length;
+    length = _str10$length === void 0 ? 1 : _str10$length;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('subFirst args(str) is not string');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subFirst args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, str.length)) {
+    throw new RangeError('subFirst args(length) must be from 0 to str.length');
+  }
+
+  return _subFirst(str, length);
+};
+/**
+ * subLast
+ */
+
+
+var _subLast = function _subLast(str) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  return _subLength(str, str.length - length, length);
+};
+
+var subLast = function subLast(str) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+  if (isObjectParameter(str, 'str', 'length')) {
+    var _str11 = str;
+    str = _str11.str;
+    var _str11$length = _str11.length;
+    length = _str11$length === void 0 ? 1 : _str11$length;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('subLast args(str) is not string');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subLast args(length) is not integer');
+  }
+
+  if (!_inRange(length, 0, str.length)) {
+    throw new RangeError('subLast args(length) must be from 0 to str.length');
+  }
+
+  return _subLast(str, length);
 };
 
 module.exports = {
@@ -371,6 +439,8 @@ module.exports = {
   _isBothEnds: _isBothEnds,
   _subIndex: _subIndex,
   _subLength: _subLength,
+  _subFirst: _subFirst,
+  _subLast: _subLast,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
@@ -380,5 +450,7 @@ module.exports = {
   isLast: isLast,
   isBothEnds: isBothEnds,
   subIndex: subIndex,
-  subLength: subLength
+  subLength: subLength,
+  subFirst: subFirst,
+  subLast: subLast
 };

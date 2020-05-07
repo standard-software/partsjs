@@ -19,7 +19,9 @@ var test_execute_string = function test_execute_string(parts) {
         isLast = _parts$string.isLast,
         isBothEnds = _parts$string.isBothEnds,
         subIndex = _parts$string.subIndex,
-        subLength = _parts$string.subLength;
+        subLength = _parts$string.subLength,
+        subFirst = _parts$string.subFirst,
+        subLast = _parts$string.subLast;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -448,32 +450,51 @@ var test_execute_string = function test_execute_string(parts) {
 
     var test_substring_stardard = function test_substring_stardard() {
       it('test_substring_stardard', function () {
-        checkEqual('01234', '01234'.substring(-2)); // ?
-
-        checkEqual('01234', '01234'.substring(-1)); // ?
-
+        checkEqual('01234', '01234'.substring(-2));
+        checkEqual('01234', '01234'.substring(-1));
         checkEqual('01234', '01234'.substring(0));
         checkEqual('1234', '01234'.substring(1));
         checkEqual('234', '01234'.substring(2));
         checkEqual('34', '01234'.substring(3));
         checkEqual('4', '01234'.substring(4));
-        checkEqual('', '01234'.substring(5)); // ?
-
-        checkEqual('', '01234'.substring(6)); // ?
-
-        checkEqual('012', '01234'.substring(-2, 3)); // ?
-
-        checkEqual('012', '01234'.substring(-1, 3)); // ?
-
+        checkEqual('', '01234'.substring(5));
+        checkEqual('', '01234'.substring(6));
+        checkEqual('', '01234'.substring(-2, 0));
+        checkEqual('', '01234'.substring(-1, 0));
+        checkEqual('', '01234'.substring(0, 0));
+        checkEqual('0', '01234'.substring(1, 0));
+        checkEqual('01', '01234'.substring(2, 0));
+        checkEqual('012', '01234'.substring(3, 0));
+        checkEqual('0123', '01234'.substring(4, 0));
+        checkEqual('01234', '01234'.substring(5, 0));
+        checkEqual('01234', '01234'.substring(6, 0));
+        checkEqual('012', '01234'.substring(-2, 3));
+        checkEqual('012', '01234'.substring(-1, 3));
         checkEqual('012', '01234'.substring(0, 3));
         checkEqual('12', '01234'.substring(1, 3));
         checkEqual('2', '01234'.substring(2, 3));
         checkEqual('', '01234'.substring(3, 3));
-        checkEqual('3', '01234'.substring(4, 3)); // ?
-
-        checkEqual('34', '01234'.substring(5, 3)); // ?
-
-        checkEqual('34', '01234'.substring(6, 3)); // ?
+        checkEqual('3', '01234'.substring(4, 3));
+        checkEqual('34', '01234'.substring(5, 3));
+        checkEqual('34', '01234'.substring(6, 3));
+        checkEqual('01234', '01234'.substring(-2, 5));
+        checkEqual('01234', '01234'.substring(-1, 5));
+        checkEqual('01234', '01234'.substring(0, 5));
+        checkEqual('1234', '01234'.substring(1, 5));
+        checkEqual('234', '01234'.substring(2, 5));
+        checkEqual('34', '01234'.substring(3, 5));
+        checkEqual('4', '01234'.substring(4, 5));
+        checkEqual('', '01234'.substring(5, 5));
+        checkEqual('', '01234'.substring(6, 5));
+        checkEqual('01234', '01234'.substring(-2, 6));
+        checkEqual('01234', '01234'.substring(-1, 6));
+        checkEqual('01234', '01234'.substring(0, 6));
+        checkEqual('1234', '01234'.substring(1, 6));
+        checkEqual('234', '01234'.substring(2, 6));
+        checkEqual('34', '01234'.substring(3, 6));
+        checkEqual('4', '01234'.substring(4, 6));
+        checkEqual('', '01234'.substring(5, 6));
+        checkEqual('', '01234'.substring(6, 6));
       });
     };
 
@@ -498,6 +519,16 @@ var test_execute_string = function test_execute_string(parts) {
 
         checkEqual('', '01234'.substr(6)); // ?
 
+        checkEqual('', '01234'.substr(-2, 0));
+        checkEqual('', '01234'.substr(-1, 0));
+        checkEqual('', '01234'.substr(0, 0));
+        checkEqual('', '01234'.substr(1, 0));
+        checkEqual('', '01234'.substr(2, 0));
+        checkEqual('', '01234'.substr(3, 0));
+        checkEqual('', '01234'.substr(4, 0));
+        checkEqual('', '01234'.substr(5, 0));
+        checkEqual('', '01234'.substr(6, 0));
+
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual('34', '01234'.substr(-2, 3)); // ?
 
@@ -516,6 +547,39 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('', '01234'.substr(5, 3)); // ?
 
         checkEqual('', '01234'.substr(6, 3)); // ?
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('34', '01234'.substr(-2, 5));
+          checkEqual('4', '01234'.substr(-1, 5));
+        } else {
+          checkEqual('01234', '01234'.substr(-2, 5));
+          checkEqual('01234', '01234'.substr(-1, 5));
+        }
+
+        checkEqual('01234', '01234'.substr(0, 5));
+        checkEqual('1234', '01234'.substr(1, 5));
+        checkEqual('234', '01234'.substr(2, 5));
+        checkEqual('34', '01234'.substr(3, 5));
+        checkEqual('4', '01234'.substr(4, 5));
+        checkEqual('', '01234'.substr(5, 5));
+        checkEqual('', '01234'.substr(6, 5));
+        testCounter();
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('34', '01234'.substr(-2, 6));
+          checkEqual('4', '01234'.substr(-1, 6));
+        } else {
+          checkEqual('01234', '01234'.substr(-2, 6));
+          checkEqual('01234', '01234'.substr(-1, 6));
+        }
+
+        checkEqual('01234', '01234'.substr(0, 6));
+        checkEqual('1234', '01234'.substr(1, 6));
+        checkEqual('234', '01234'.substr(2, 6));
+        checkEqual('34', '01234'.substr(3, 6));
+        checkEqual('4', '01234'.substr(4, 6));
+        checkEqual('', '01234'.substr(5, 6));
+        checkEqual('', '01234'.substr(6, 6));
       });
     };
 
@@ -538,8 +602,34 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(true, isThrown(function () {
           return subIndex('01234', 6);
         }));
+        testCounter();
         checkEqual(true, isThrown(function () {
-          return subIndex('01234', -1, 3);
+          return subIndex('01234', -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', -1, 0);
+        }));
+        checkEqual('0', subIndex('01234', 0, 0));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 1, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 3, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 4, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 6, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', -2, 3);
         }));
         checkEqual(true, isThrown(function () {
           return subIndex('01234', -1, 3);
@@ -556,6 +646,60 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return subIndex('01234', 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', -1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 0, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 3, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 4, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', -1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 0, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 3, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 4, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex('01234', 6, 6);
         }));
       });
     };
@@ -580,7 +724,24 @@ var test_execute_string = function test_execute_string(parts) {
           return subLength('01234', 6);
         }));
         checkEqual(true, isThrown(function () {
-          return subLength('01234', -1, 3);
+          return subLength('01234', -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', -1, 0);
+        }));
+        checkEqual('', subLength('01234', 0, 0));
+        checkEqual('', subLength('01234', 1, 0));
+        checkEqual('', subLength('01234', 2, 0));
+        checkEqual('', subLength('01234', 3, 0));
+        checkEqual('', subLength('01234', 4, 0));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', 6, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', -2, 3);
         }));
         checkEqual(true, isThrown(function () {
           return subLength('01234', -1, 3);
@@ -595,6 +756,80 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return subLength('01234', 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', -1, 5);
+        }));
+        checkEqual('01234', subLength('01234', 0, 5));
+        checkEqual('1234', subLength('01234', 1, 5));
+        checkEqual('234', subLength('01234', 2, 5));
+        checkEqual('34', subLength('01234', 3, 5));
+        checkEqual('4', subLength('01234', 4, 5));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', -1, 6);
+        }));
+        checkEqual('01234', subLength('01234', 0, 6));
+        checkEqual('1234', subLength('01234', 1, 6));
+        checkEqual('234', subLength('01234', 2, 6));
+        checkEqual('34', subLength('01234', 3, 6));
+        checkEqual('4', subLength('01234', 4, 6));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLength('01234', 6, 6);
+        }));
+      });
+    };
+
+    var test_subFirst = function test_subFirst() {
+      it('test_subFirst', function () {
+        checkEqual(true, isThrown(function () {
+          return subFirst('01234', -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subFirst('01234', -1);
+        }));
+        checkEqual('', subFirst('01234', 0));
+        checkEqual('0', subFirst('01234', 1));
+        checkEqual('01', subFirst('01234', 2));
+        checkEqual('012', subFirst('01234', 3));
+        checkEqual('0123', subFirst('01234', 4));
+        checkEqual('01234', subFirst('01234', 5));
+        checkEqual(true, isThrown(function () {
+          return subFirst('01234', 6);
+        }));
+      });
+    };
+
+    var test_subLast = function test_subLast() {
+      it('test_subLast', function () {
+        checkEqual(true, isThrown(function () {
+          return subLast('01234', -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLast('01234', -1);
+        }));
+        checkEqual('', subLast('01234', 0));
+        checkEqual('4', subLast('01234', 1));
+        checkEqual('34', subLast('01234', 2));
+        checkEqual('234', subLast('01234', 3));
+        checkEqual('1234', subLast('01234', 4));
+        checkEqual('01234', subLast('01234', 5));
+        checkEqual(true, isThrown(function () {
+          return subLast('01234', 6);
         }));
       });
     };
@@ -612,6 +847,8 @@ var test_execute_string = function test_execute_string(parts) {
     test_substr_stardard();
     test_subIndex();
     test_subLength();
+    test_subFirst();
+    test_subLast();
   });
 };
 
