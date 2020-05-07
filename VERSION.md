@@ -2,6 +2,11 @@
 
 ## Version
 
+### 5.2.1
+#### 2020/05/08(Fri)
+- update array.subIndex default parameter
+  - update test code
+
 ### 5.2.0
 #### 2020/05/08(Fri)
 - update polyfill.js
