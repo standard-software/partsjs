@@ -234,7 +234,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 5.2.0
-#### 2020/05/06(Wed)
+#### 2020/05/08(Fri)
 - update polyfill.js
   - delete Object.entries
   - delete Object.defineProperties
@@ -245,11 +245,11 @@ You can now use the functions of the parts.js object.
     - array.operation.includeBothEdges >> includeBothEnds
     - array.operation.excludeBothEdges >> excludeBothEnds
     - array.operation.trimBothEdges >> trimBothEnds
-- rename indexFirst >> indexStart / indexLast >> indexEnd
+- rename args name indexFirst >> indexStart / indexLast >> indexEnd
   - Reference String.prototype.substring()
-    - array.subindex
+    - array.subIndex
     - array.operation.deleteIndex
-- rename startIndex >> indexStart
+- rename args name startIndex >> indexStart
   - string.indexOfFirst / indexOfLast
 - add string
   - isBothEnds

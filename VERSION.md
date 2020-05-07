@@ -2,6 +2,33 @@
 
 ## Version
 
+### 5.2.0
+#### 2020/05/08(Fri)
+- update polyfill.js
+  - delete Object.entries
+  - delete Object.defineProperties
+- rename BothEdges >> BothEnds
+  - BothEnds change alias name to original name
+  - delete BothEdges
+    - array.isBothEdges >> isBothEnds
+    - array.operation.includeBothEdges >> includeBothEnds
+    - array.operation.excludeBothEdges >> excludeBothEnds
+    - array.operation.trimBothEdges >> trimBothEnds
+- rename args name indexFirst >> indexStart / indexLast >> indexEnd
+  - Reference String.prototype.substring()
+    - array.subIndex
+    - array.operation.deleteIndex
+- rename args name startIndex >> indexStart
+  - string.indexOfFirst / indexOfLast
+- add string
+  - isBothEnds
+  - subIndex / subLength
+  - subFirst / subLast
+- update array
+  - default parameter
+    - subLength / subFirst / subLast
+- bugfix array.subLength range length
+
 ### 5.1.0
 #### 2020/05/06(Wed)
 - add string.indexOfFirst/indexOfLast
