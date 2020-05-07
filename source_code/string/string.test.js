@@ -420,25 +420,55 @@ const test_execute_string = (parts) => {
 
     const test_substring_stardard = () => {
       it('test_substring_stardard', () => {
-        checkEqual('01234', '01234'.substring(-2)); // ?
-        checkEqual('01234', '01234'.substring(-1)); // ?
+        checkEqual('01234', '01234'.substring(-2));
+        checkEqual('01234', '01234'.substring(-1));
         checkEqual('01234', '01234'.substring( 0));
         checkEqual('1234',  '01234'.substring( 1));
         checkEqual('234',   '01234'.substring( 2));
         checkEqual('34',    '01234'.substring( 3));
         checkEqual('4',     '01234'.substring( 4));
-        checkEqual('',      '01234'.substring( 5));  // ?
-        checkEqual('',      '01234'.substring( 6));  // ?
+        checkEqual('',      '01234'.substring( 5));
+        checkEqual('',      '01234'.substring( 6));
 
-        checkEqual('012',   '01234'.substring(-2, 3)); // ?
-        checkEqual('012',   '01234'.substring(-1, 3)); // ?
+        checkEqual('',      '01234'.substring(-2, 0));
+        checkEqual('',      '01234'.substring(-1, 0));
+        checkEqual('',      '01234'.substring( 0, 0));
+        checkEqual('0',     '01234'.substring( 1, 0));
+        checkEqual('01',    '01234'.substring( 2, 0));
+        checkEqual('012',   '01234'.substring( 3, 0));
+        checkEqual('0123',  '01234'.substring( 4, 0));
+        checkEqual('01234', '01234'.substring( 5, 0));
+        checkEqual('01234', '01234'.substring( 6, 0));
+
+        checkEqual('012',   '01234'.substring(-2, 3));
+        checkEqual('012',   '01234'.substring(-1, 3));
         checkEqual('012',   '01234'.substring( 0, 3));
         checkEqual('12',    '01234'.substring( 1, 3));
         checkEqual('2',     '01234'.substring( 2, 3));
         checkEqual('',      '01234'.substring( 3, 3));
-        checkEqual('3',     '01234'.substring( 4, 3));  // ?
-        checkEqual('34',    '01234'.substring( 5, 3));  // ?
-        checkEqual('34',    '01234'.substring( 6, 3));  // ?
+        checkEqual('3',     '01234'.substring( 4, 3));
+        checkEqual('34',    '01234'.substring( 5, 3));
+        checkEqual('34',    '01234'.substring( 6, 3));
+
+        checkEqual('01234', '01234'.substring(-2, 5));
+        checkEqual('01234', '01234'.substring(-1, 5));
+        checkEqual('01234', '01234'.substring( 0, 5));
+        checkEqual('1234',  '01234'.substring( 1, 5));
+        checkEqual('234',   '01234'.substring( 2, 5));
+        checkEqual('34',    '01234'.substring( 3, 5));
+        checkEqual('4',     '01234'.substring( 4, 5));
+        checkEqual('',      '01234'.substring( 5, 5));
+        checkEqual('',      '01234'.substring( 6, 5));
+
+        checkEqual('01234', '01234'.substring(-2, 6));
+        checkEqual('01234', '01234'.substring(-1, 6));
+        checkEqual('01234', '01234'.substring( 0, 6));
+        checkEqual('1234',  '01234'.substring( 1, 6));
+        checkEqual('234',   '01234'.substring( 2, 6));
+        checkEqual('34',    '01234'.substring( 3, 6));
+        checkEqual('4',     '01234'.substring( 4, 6));
+        checkEqual('',      '01234'.substring( 5, 6));
+        checkEqual('',      '01234'.substring( 6, 6));
       });
     };
 
@@ -459,6 +489,16 @@ const test_execute_string = (parts) => {
         checkEqual('',      '01234'.substr( 5));  // ?
         checkEqual('',      '01234'.substr( 6));  // ?
 
+        checkEqual('',      '01234'.substr(-2, 0));
+        checkEqual('',      '01234'.substr(-1, 0));
+        checkEqual('',      '01234'.substr( 0, 0));
+        checkEqual('',      '01234'.substr( 1, 0));
+        checkEqual('',      '01234'.substr( 2, 0));
+        checkEqual('',      '01234'.substr( 3, 0));
+        checkEqual('',      '01234'.substr( 4, 0));
+        checkEqual('',      '01234'.substr( 5, 0));
+        checkEqual('',      '01234'.substr( 6, 0));
+
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual('34',    '01234'.substr(-2, 3)); // ?
           checkEqual('4',     '01234'.substr(-1, 3)); // ?
@@ -473,6 +513,37 @@ const test_execute_string = (parts) => {
         checkEqual('4',     '01234'.substr( 4, 3));
         checkEqual('',      '01234'.substr( 5, 3));  // ?
         checkEqual('',      '01234'.substr( 6, 3));  // ?
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('34',    '01234'.substr(-2, 5));
+          checkEqual('4',     '01234'.substr(-1, 5));
+        } else {
+          checkEqual('01234', '01234'.substr(-2, 5));
+          checkEqual('01234', '01234'.substr(-1, 5));
+        }
+        checkEqual('01234', '01234'.substr( 0, 5));
+        checkEqual('1234',  '01234'.substr( 1, 5));
+        checkEqual('234',   '01234'.substr( 2, 5));
+        checkEqual('34',    '01234'.substr( 3, 5));
+        checkEqual('4',     '01234'.substr( 4, 5));
+        checkEqual('',      '01234'.substr( 5, 5));
+        checkEqual('',      '01234'.substr( 6, 5));
+
+        testCounter();
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('34',    '01234'.substr(-2, 6));
+          checkEqual('4',     '01234'.substr(-1, 6));
+        } else {
+          checkEqual('01234', '01234'.substr(-2, 6));
+          checkEqual('01234', '01234'.substr(-1, 6));
+        }
+        checkEqual('01234', '01234'.substr( 0, 6));
+        checkEqual('1234',  '01234'.substr( 1, 6));
+        checkEqual('234',   '01234'.substr( 2, 6));
+        checkEqual('34',    '01234'.substr( 3, 6));
+        checkEqual('4',     '01234'.substr( 4, 6));
+        checkEqual('',      '01234'.substr( 5, 6));
+        checkEqual('',      '01234'.substr( 6, 6));
       });
     };
 
@@ -488,7 +559,18 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subIndex('01234', 5)));
         checkEqual(true,  isThrown(() => subIndex('01234', 6)));
 
-        checkEqual(true,  isThrown(() => subIndex('01234', -1, 3)));
+        testCounter();
+        checkEqual(true,  isThrown(() => subIndex('01234', -2, 0)));
+        checkEqual(true,  isThrown(() => subIndex('01234', -1, 0)));
+        checkEqual('0',     subIndex('01234', 0, 0));
+        checkEqual(true,  isThrown(() => subIndex('01234',  1, 0)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  2, 0)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  3, 0)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  4, 0)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  5, 0)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  6, 0)));
+
+        checkEqual(true,  isThrown(() => subIndex('01234', -2, 3)));
         checkEqual(true,  isThrown(() => subIndex('01234', -1, 3)));
         checkEqual('0123',  subIndex('01234', 0, 3));
         checkEqual('123',   subIndex('01234', 1, 3));
@@ -497,6 +579,26 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subIndex('01234',  4, 3)));
         checkEqual(true,  isThrown(() => subIndex('01234',  5, 3)));
         checkEqual(true,  isThrown(() => subIndex('01234',  6, 3)));
+
+        checkEqual(true,  isThrown(() => subIndex('01234', -2, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234', -1, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  0, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  1, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  2, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  3, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  4, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  5, 5)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  6, 5)));
+
+        checkEqual(true,  isThrown(() => subIndex('01234', -2, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234', -1, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  0, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  1, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  2, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  3, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  4, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  5, 6)));
+        checkEqual(true,  isThrown(() => subIndex('01234',  6, 6)));
       });
     };
 
@@ -512,6 +614,16 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subLength('01234', 5)));
         checkEqual(true,  isThrown(() => subLength('01234', 6)));
 
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 0)));
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 0)));
+        checkEqual('',      subLength('01234', 0, 0));
+        checkEqual('',      subLength('01234', 1, 0));
+        checkEqual('',      subLength('01234', 2, 0));
+        checkEqual('',      subLength('01234', 3, 0));
+        checkEqual('',      subLength('01234', 4, 0));
+        checkEqual(true,  isThrown(() => subLength('01234',  5, 0)));
+        checkEqual(true,  isThrown(() => subLength('01234',  6, 0)));
+
         checkEqual(true,  isThrown(() => subLength('01234', -1, 3)));
         checkEqual(true,  isThrown(() => subLength('01234', -1, 3)));
         checkEqual('012',   subLength('01234', 0, 3));
@@ -522,6 +634,26 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subLength('01234',  5, 3)));
         checkEqual(true,  isThrown(() => subLength('01234',  6, 3)));
 
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 5)));
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 5)));
+        checkEqual('01234', subLength('01234', 0, 5));
+        checkEqual('1234',  subLength('01234', 1, 5));
+        checkEqual('234',   subLength('01234', 2, 5));
+        checkEqual('34',    subLength('01234', 3, 5));
+        checkEqual('4',     subLength('01234', 4, 5));
+        checkEqual(true,  isThrown(() => subLength('01234',  5, 5)));
+        checkEqual(true,  isThrown(() => subLength('01234',  6, 5)));
+
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 6)));
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 6)));
+        checkEqual('01234', subLength('01234', 0, 6));
+        checkEqual('1234',  subLength('01234', 1, 6));
+        checkEqual('234',   subLength('01234', 2, 6));
+        checkEqual('34',    subLength('01234', 3, 6));
+        checkEqual('4',     subLength('01234', 4, 6));
+        checkEqual(true,  isThrown(() => subLength('01234',  5, 6)));
+        checkEqual(true,  isThrown(() => subLength('01234',  6, 6)));
+
       });
     };
 
@@ -529,7 +661,7 @@ const test_execute_string = (parts) => {
       it('test_subFirst', () => {
         checkEqual(true,  isThrown(() => subFirst('01234', -2)));
         checkEqual(true,  isThrown(() => subFirst('01234', -1)));
-        checkEqual(true,  isThrown(() => subFirst('01234',  0)));
+        checkEqual('',      subFirst('01234', 0));
         checkEqual('0',     subFirst('01234', 1));
         checkEqual('01',    subFirst('01234', 2));
         checkEqual('012',   subFirst('01234', 3));
@@ -543,7 +675,7 @@ const test_execute_string = (parts) => {
       it('test_subLast', () => {
         checkEqual(true,  isThrown(() => subLast('01234', -2)));
         checkEqual(true,  isThrown(() => subLast('01234', -1)));
-        checkEqual(true,  isThrown(() => subLast('01234',  0)));
+        checkEqual('',      subLast('01234', 0));
         checkEqual('4',     subLast('01234', 1));
         checkEqual('34',    subLast('01234', 2));
         checkEqual('234',   subLast('01234', 3));

@@ -358,9 +358,9 @@ const subLength = (
     );
   }
   length = _min([length, str.length - indexStart]);
-  if (!_inRange(length, 1, str.length - indexStart)) {
+  if (!_inRange(length, 0, str.length - indexStart)) {
     throw new RangeError(
-      'subLength args(length) must be from 1 to str.length - indexStart',
+      'subLength args(length) must be from 0 to str.length - indexStart',
     );
   }
 
@@ -391,9 +391,9 @@ const subFirst = (str, length = 1) => {
       'subFirst args(length) is not integer',
     );
   }
-  if (!_inRange(length, 1, str.length)) {
+  if (!_inRange(length, 0, str.length)) {
     throw new RangeError(
-      'subFirst args(length) must be from 1 to str.length',
+      'subFirst args(length) must be from 0 to str.length',
     );
   }
 
@@ -424,9 +424,9 @@ const subLast = (str, length = 1) => {
       'subLast args(length) is not integer',
     );
   }
-  if (!_inRange(length, 1, str.length)) {
+  if (!_inRange(length, 0, str.length)) {
     throw new RangeError(
-      'subLast args(length) must be from 1 to str.length',
+      'subLast args(length) must be from 0 to str.length',
     );
   }
 
