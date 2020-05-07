@@ -249,6 +249,8 @@ You can now use the functions of the parts.js object.
   - Reference String.prototype.substring()
     - array.subindex
     - array.operation.deleteIndex
+- rename startIndex >> indexStart
+  - string.indexOfFirst / indexOfLast
 - add string.isBothEnds
 
 ### 5.1.0

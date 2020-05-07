@@ -98,16 +98,16 @@ const isUpperCase = (
 /**
  * indexOfFirst
  */
-const _indexOfFirst = (str, search, startIndex) => {
+const _indexOfFirst = (str, search, indexStart) => {
   if (search === '') {
     return -1;
   }
-  return str.indexOf(search, startIndex);
+  return str.indexOf(search, indexStart);
 };
 
-const indexOfFirst = (str, search, startIndex = 0) => {
-  if (isObjectParameter(str, 'str, search', 'startIndex')) {
-    ({ str, search, startIndex = 0 } = str);
+const indexOfFirst = (str, search, indexStart = 0) => {
+  if (isObjectParameter(str, 'str, search', 'indexStart')) {
+    ({ str, search, indexStart = 0 } = str);
   }
 
   if (!isString(str)) {
@@ -120,38 +120,38 @@ const indexOfFirst = (str, search, startIndex = 0) => {
       'indexOfFirst args(search) is not string',
     );
   }
-  if (!isInteger(startIndex)) {
+  if (!isInteger(indexStart)) {
     throw new TypeError(
-      'indexOfFirst args(startIndex) is not integer',
+      'indexOfFirst args(indexStart) is not integer',
     );
   }
-  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
+  if (!_inRange(indexStart, 0, _max([0, str.length - 1]))) {
     throw new RangeError(
-      'indexOfFirst args(startIndex) must be from 0 to str.length - 1',
+      'indexOfFirst args(indexStart) must be from 0 to str.length - 1',
     );
   }
 
-  return _indexOfFirst(str, search, startIndex);
+  return _indexOfFirst(str, search, indexStart);
 };
 
 /**
  * indexOfLast
  */
 const _indexOfLast = (
-  str, search, startIndex = _max([0, str.length - 1]),
+  str, search, indexStart = _max([0, str.length - 1]),
 ) => {
   if (search === '') {
     return -1;
   }
-  return str.lastIndexOf(search, startIndex);
+  return str.lastIndexOf(search, indexStart);
 };
 
 const indexOfLast = (
-  str, search, startIndex = _max([0, str.length - 1]),
+  str, search, indexStart = _max([0, str.length - 1]),
 ) => {
-  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+  if (isObjectParameter(str, 'str, search', 'indexStart')) {
     ({
-      str, search, startIndex = _max([0, str.length - 1]),
+      str, search, indexStart = _max([0, str.length - 1]),
     } = str);
   }
 
@@ -165,18 +165,18 @@ const indexOfLast = (
       'indexOfLast args(search) is not string',
     );
   }
-  if (!isInteger(startIndex)) {
+  if (!isInteger(indexStart)) {
     throw new TypeError(
-      'indexOfLast args(startIndex) is not integer',
+      'indexOfLast args(indexStart) is not integer',
     );
   }
-  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
+  if (!_inRange(indexStart, 0, _max([0, str.length - 1]))) {
     throw new RangeError(
-      'indexOfLast args(startIndex) must be from 0 to str.length - 1',
+      'indexOfLast args(indexStart) must be from 0 to str.length - 1',
     );
   }
 
-  return _indexOfLast(str, search, startIndex);
+  return _indexOfLast(str, search, indexStart);
 };
 
 /**
