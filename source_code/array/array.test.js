@@ -642,11 +642,57 @@ const test_execute_array = (parts) => {
 
     const test_array_subLength = () => {
       it('test_array_subLength', () => {
-        var array1 = [0, 1, 2];
-        checkEqual(true,  equal([1],       subLength(array1, 1, 1)));
-        checkEqual(true,  equal([0, 1],    subLength(array1, 0, 2)));
-        checkEqual(true,  equal([1, 2],    subLength(array1, 1, 2)));
-        checkEqual(true,  equal([0, 1, 2], array1));
+        var array1 = [0,1,2,3,4];
+
+        checkEqual(true,  isThrown(() => subLength(array1, -2)));
+        checkEqual(true,  isThrown(() => subLength(array1, -1)));
+        checkEqual(true,  equal([0,1,2,3,4],  subLength(array1, 0)));
+        checkEqual(true,  equal([1,2,3,4],    subLength(array1, 1)));
+        checkEqual(true,  equal([2,3,4],      subLength(array1, 2)));
+        checkEqual(true,  equal([3,4],        subLength(array1, 3)));
+        checkEqual(true,  equal([4],          subLength(array1, 4)));
+        checkEqual(true,  isThrown(() => subLength(array1, 5)));
+        checkEqual(true,  isThrown(() => subLength(array1, 6)));
+
+        checkEqual(true,  isThrown(() => subLength(array1, -2, 0)));
+        checkEqual(true,  isThrown(() => subLength(array1, -1, 0)));
+        checkEqual(true,  equal([],           subLength(array1, 0, 0)));
+        checkEqual(true,  equal([],           subLength(array1, 1, 0)));
+        checkEqual(true,  equal([],           subLength(array1, 2, 0)));
+        checkEqual(true,  equal([],           subLength(array1, 3, 0)));
+        checkEqual(true,  equal([],           subLength(array1, 4, 0)));
+        checkEqual(true,  isThrown(() => subLength(array1, 5, 0)));
+        checkEqual(true,  isThrown(() => subLength(array1, 6, 0)));
+
+        checkEqual(true,  isThrown(() => subLength(array1, -2, 3)));
+        checkEqual(true,  isThrown(() => subLength(array1, -1, 3)));
+        checkEqual(true,  equal([0,1,2],      subLength(array1, 0, 3)));
+        checkEqual(true,  equal([1,2,3],      subLength(array1, 1, 3)));
+        checkEqual(true,  equal([2,3,4],      subLength(array1, 2, 3)));
+        checkEqual(true,  equal([3,4],        subLength(array1, 3, 3)));
+        checkEqual(true,  equal([4],          subLength(array1, 4, 3)));
+        checkEqual(true,  isThrown(() => subLength(array1, 5, 3)));
+        checkEqual(true,  isThrown(() => subLength(array1, 6, 3)));
+
+        checkEqual(true,  isThrown(() => subLength(array1, -2, 5)));
+        checkEqual(true,  isThrown(() => subLength(array1, -1, 5)));
+        checkEqual(true,  equal([0,1,2,3,4],  subLength(array1, 0, 5)));
+        checkEqual(true,  equal([1,2,3,4],    subLength(array1, 1, 5)));
+        checkEqual(true,  equal([2,3,4],      subLength(array1, 2, 5)));
+        checkEqual(true,  equal([3,4],        subLength(array1, 3, 5)));
+        checkEqual(true,  equal([4],          subLength(array1, 4, 5)));
+        checkEqual(true,  isThrown(() => subLength(array1, 5, 5)));
+        checkEqual(true,  isThrown(() => subLength(array1, 6, 5)));
+
+        checkEqual(true,  isThrown(() => subLength(array1, -2, 6)));
+        checkEqual(true,  isThrown(() => subLength(array1, -1, 6)));
+        checkEqual(true,  equal([0,1,2,3,4],  subLength(array1, 0, 6)));
+        checkEqual(true,  equal([1,2,3,4],    subLength(array1, 1, 6)));
+        checkEqual(true,  equal([2,3,4],      subLength(array1, 2, 6)));
+        checkEqual(true,  equal([3,4],        subLength(array1, 3, 6)));
+        checkEqual(true,  equal([4],          subLength(array1, 4, 6)));
+        checkEqual(true,  isThrown(() => subLength(array1, 5, 6)));
+        checkEqual(true,  isThrown(() => subLength(array1, 6, 6)));
 
         // Object Named Parameter
         checkEqual(true,  equal(['A', 'B'],

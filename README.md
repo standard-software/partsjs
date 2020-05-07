@@ -258,6 +258,7 @@ You can now use the functions of the parts.js object.
 - update array
   - default parameter
     - subLength / subFirst / subLast
+- bugfix array.subLength range length
 
 ### 5.1.0
 #### 2020/05/06(Wed)

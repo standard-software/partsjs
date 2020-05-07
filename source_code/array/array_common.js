@@ -757,7 +757,8 @@ const subLength = (
       'subLength args(length) is not integer',
     );
   }
-  if (!_inRange(length, 0, array.length - 1)) {
+  length = _min([length, array.length - index]);
+  if (!_inRange(length, 0, array.length - index)) {
     throw new RangeError(
       'subLength args(length) must be from 0 to array.length - 1',
     );
