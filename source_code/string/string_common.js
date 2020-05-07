@@ -276,16 +276,57 @@ const isBothEnds = (
   return _isBothEnds(str, searchFirst, searchLast);
 };
 
+/**
+ * subIndex
+ */
+const _subIndex = (str, indexStart, indexEnd) => {
+  return str.substring(indexStart, indexEnd + 1);
+};
+
+const subIndex = (str, indexStart, indexEnd = str.length - 1) => {
+  if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
+    ({ str, indexStart, indexEnd = str.length - 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'subIndex args(str) is not string',
+    );
+  }
+  if (!isInteger(indexStart)) {
+    throw new TypeError(
+      'subIndex args(indexStart) is not integer',
+    );
+  }
+  if (!_inRange(indexStart, 0, str.length - 1)) {
+    throw new RangeError(
+      'subIndex args(indexStart) must be from 0 to str.length - 1',
+    );
+  }
+  if (!isInteger(indexEnd)) {
+    throw new TypeError(
+      'subIndex args(indexEnd) is not integer',
+    );
+  }
+  if (!_inRange(indexEnd, indexStart, str.length - 1)) {
+    throw new RangeError(
+      'subIndex args(indexEnd) must be from indexStart to str.length - 1',
+    );
+  }
+
+  return _subIndex(str, indexStart, indexEnd);
+};
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
-  _isFirst, _isLast,
-  _isBothEnds,
+  _isFirst, _isLast, _isBothEnds,
+  _subIndex,
 
   repeat,
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
-  isFirst, isLast,
-  isBothEnds,
+  isFirst, isLast, isBothEnds,
+  subIndex,
+
 };
