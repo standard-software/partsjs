@@ -61,7 +61,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = parts.platform.isWindowsScriptHost() ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 10, 12, 32] : [248, 13, 3, 140, 8, 11, 23, 29, 7, 10, 12, 32];
+        var countArray = parts.platform.isWindowsScriptHost() ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 12, 12, 32] : [248, 13, 3, 140, 8, 11, 23, 29, 7, 12, 12, 32];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));

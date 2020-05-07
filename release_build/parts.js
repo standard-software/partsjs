@@ -210,7 +210,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
@@ -3467,39 +3467,39 @@ var isBothEnds = function isBothEnds(array, valueFirstArray) {
  */
 
 
-var _subIndex = function _subIndex(array, indexFirst, indexLast) {
-  return array.slice(indexFirst, indexLast + 1);
+var _subIndex = function _subIndex(array, indexStart, indexEnd) {
+  return array.slice(indexStart, indexEnd + 1);
 };
 
-var subIndex = function subIndex(array, indexFirst, indexLast) {
-  if (isObjectParameter(array, 'array, indexFirst, indexLast')) {
+var subIndex = function subIndex(array, indexStart, indexEnd) {
+  if (isObjectParameter(array, 'array, indexStart, indexEnd')) {
     var _array14 = array;
     array = _array14.array;
-    indexFirst = _array14.indexFirst;
-    indexLast = _array14.indexLast;
+    indexStart = _array14.indexStart;
+    indexEnd = _array14.indexEnd;
   }
 
   if (!isArray(array)) {
     throw new TypeError('subIndex args(array) is not array');
   }
 
-  if (!isInteger(indexFirst)) {
-    throw new TypeError('subIndex args(indexFirst) is not integer');
+  if (!isInteger(indexStart)) {
+    throw new TypeError('subIndex args(indexStart) is not integer');
   }
 
-  if (!_inRange(indexFirst, 0, array.length - 1)) {
-    throw new RangeError('subIndex args(indexFirst) must be from 0 to array.length - 1');
+  if (!_inRange(indexStart, 0, array.length - 1)) {
+    throw new RangeError('subIndex args(indexStart) must be from 0 to array.length - 1');
   }
 
-  if (!isInteger(indexLast)) {
-    throw new TypeError('subIndex args(indexLast) is not integer');
+  if (!isInteger(indexEnd)) {
+    throw new TypeError('subIndex args(indexEnd) is not integer');
   }
 
-  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
-    throw new RangeError('subIndex args(indexLast) must be from 0 to array.length - 1');
+  if (!_inRange(indexEnd, indexStart, array.length - 1)) {
+    throw new RangeError('subIndex args(indexEnd) must be from indexStart to array.length - 1');
   }
 
-  return _subIndex(array, indexFirst, indexLast);
+  return _subIndex(array, indexStart, indexEnd);
 };
 /**
  * subLength
@@ -4730,50 +4730,50 @@ var deleteLength = function deleteLength(array, index, length) {
  */
 
 
-var _deleteIndex = function _deleteIndex(array, indexFirst) {
-  var indexLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexFirst;
-  array.splice(indexFirst, indexLast - indexFirst + 1);
+var _deleteIndex = function _deleteIndex(array, indexStart) {
+  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
+  array.splice(indexStart, indexEnd - indexStart + 1);
   return array;
 };
 
-var deleteIndex = function deleteIndex(array, indexFirst) {
-  var indexLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexFirst;
+var deleteIndex = function deleteIndex(array, indexStart) {
+  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
-  if (isObjectParameter(array, 'array, indexFirst', 'indexLast')) {
+  if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
     var _array4 = array;
     array = _array4.array;
-    indexFirst = _array4.indexFirst;
-    var _array4$indexLast = _array4.indexLast;
-    indexLast = _array4$indexLast === void 0 ? indexFirst : _array4$indexLast;
+    indexStart = _array4.indexStart;
+    var _array4$indexEnd = _array4.indexEnd;
+    indexEnd = _array4$indexEnd === void 0 ? indexStart : _array4$indexEnd;
   } else if (isObjectParameter(array, 'array, index')) {
     var _array5 = array;
     array = _array5.array;
-    indexFirst = _array5.index;
-    var _array5$indexLast = _array5.indexLast;
-    indexLast = _array5$indexLast === void 0 ? indexFirst : _array5$indexLast;
+    indexStart = _array5.index;
+    var _array5$indexEnd = _array5.indexEnd;
+    indexEnd = _array5$indexEnd === void 0 ? indexStart : _array5$indexEnd;
   }
 
   if (!isArray(array)) {
     throw new TypeError('deleteIndex args(array) is not array');
   }
 
-  if (!isInteger(indexFirst)) {
-    throw new TypeError('deleteIndex args(indexFirst) is not integer');
+  if (!isInteger(indexStart)) {
+    throw new TypeError('deleteIndex args(indexStart) is not integer');
   }
 
-  if (!isInteger(indexLast)) {
-    throw new TypeError('deleteIndex args(indexLast) is not integer');
+  if (!isInteger(indexEnd)) {
+    throw new TypeError('deleteIndex args(indexEnd) is not integer');
   }
 
-  if (!_inRange(indexFirst, 0, array.length - 1)) {
-    throw new RangeError('deleteIndex args(indexFirst) must be from 0 to array.length - 1');
+  if (!_inRange(indexStart, 0, array.length - 1)) {
+    throw new RangeError('deleteIndex args(indexStart) must be from 0 to array.length - 1');
   }
 
-  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
-    throw new RangeError('deleteIndex args(indexLast) must be from indexFirst to array.length - 1');
+  if (!_inRange(indexEnd, indexStart, array.length - 1)) {
+    throw new RangeError('deleteIndex args(indexEnd) must be from indexStart to array.length - 1');
   }
 
-  return _deleteIndex(array, indexFirst, indexLast);
+  return _deleteIndex(array, indexStart, indexEnd);
 };
 /**
  * array.operation.deleteFirst
@@ -5280,7 +5280,7 @@ var remainFirst = function remainFirst(array, length) {
   }
 
   if (!(0 <= length)) {
-    throw new RangeError('remainFirst args(indexFirst) must be from 0 to array.length - 1');
+    throw new RangeError('remainFirst args(length) must be from 0 to array.length - 1');
   }
 
   return _remainFirst(array, length);
@@ -5314,7 +5314,7 @@ var remainLast = function remainLast(array, length) {
   }
 
   if (!(0 <= length)) {
-    throw new RangeError('remainLast args(indexFirst) must be from 0 to array.length - 1');
+    throw new RangeError('remainLast args(length) must be from 0 to array.length - 1');
   }
 
   return _remainLast(array, length);
@@ -5702,6 +5702,7 @@ var _require3 = __webpack_require__(22),
     _inRange = _require3._inRange;
 
 var _require4 = __webpack_require__(26),
+    _min = _require4._min,
     _max = _require4._max;
 /**
  * repeat
@@ -5772,23 +5773,23 @@ var isUpperCase = function isUpperCase(str) {
  */
 
 
-var _indexOfFirst = function _indexOfFirst(str, search, startIndex) {
+var _indexOfFirst = function _indexOfFirst(str, search, indexStart) {
   if (search === '') {
     return -1;
   }
 
-  return str.indexOf(search, startIndex);
+  return str.indexOf(search, indexStart);
 };
 
 var indexOfFirst = function indexOfFirst(str, search) {
-  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+  if (isObjectParameter(str, 'str, search', 'indexStart')) {
     var _str2 = str;
     str = _str2.str;
     search = _str2.search;
-    var _str2$startIndex = _str2.startIndex;
-    startIndex = _str2$startIndex === void 0 ? 0 : _str2$startIndex;
+    var _str2$indexStart = _str2.indexStart;
+    indexStart = _str2$indexStart === void 0 ? 0 : _str2$indexStart;
   }
 
   if (!isString(str)) {
@@ -5799,15 +5800,15 @@ var indexOfFirst = function indexOfFirst(str, search) {
     throw new TypeError('indexOfFirst args(search) is not string');
   }
 
-  if (!isInteger(startIndex)) {
-    throw new TypeError('indexOfFirst args(startIndex) is not integer');
+  if (!isInteger(indexStart)) {
+    throw new TypeError('indexOfFirst args(indexStart) is not integer');
   }
 
-  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
-    throw new RangeError('indexOfFirst args(startIndex) must be from 0 to str.length - 1');
+  if (!_inRange(indexStart, 0, _max([0, str.length - 1]))) {
+    throw new RangeError('indexOfFirst args(indexStart) must be from 0 to str.length - 1');
   }
 
-  return _indexOfFirst(str, search, startIndex);
+  return _indexOfFirst(str, search, indexStart);
 };
 /**
  * indexOfLast
@@ -5815,24 +5816,24 @@ var indexOfFirst = function indexOfFirst(str, search) {
 
 
 var _indexOfLast = function _indexOfLast(str, search) {
-  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
+  var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
 
   if (search === '') {
     return -1;
   }
 
-  return str.lastIndexOf(search, startIndex);
+  return str.lastIndexOf(search, indexStart);
 };
 
 var indexOfLast = function indexOfLast(str, search) {
-  var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
+  var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
 
-  if (isObjectParameter(str, 'str, search', 'startIndex')) {
+  if (isObjectParameter(str, 'str, search', 'indexStart')) {
     var _str3 = str;
     str = _str3.str;
     search = _str3.search;
-    var _str3$startIndex = _str3.startIndex;
-    startIndex = _str3$startIndex === void 0 ? _max([0, str.length - 1]) : _str3$startIndex;
+    var _str3$indexStart = _str3.indexStart;
+    indexStart = _str3$indexStart === void 0 ? _max([0, str.length - 1]) : _str3$indexStart;
   }
 
   if (!isString(str)) {
@@ -5843,15 +5844,15 @@ var indexOfLast = function indexOfLast(str, search) {
     throw new TypeError('indexOfLast args(search) is not string');
   }
 
-  if (!isInteger(startIndex)) {
-    throw new TypeError('indexOfLast args(startIndex) is not integer');
+  if (!isInteger(indexStart)) {
+    throw new TypeError('indexOfLast args(indexStart) is not integer');
   }
 
-  if (!_inRange(startIndex, 0, _max([0, str.length - 1]))) {
-    throw new RangeError('indexOfLast args(startIndex) must be from 0 to str.length - 1');
+  if (!_inRange(indexStart, 0, _max([0, str.length - 1]))) {
+    throw new RangeError('indexOfLast args(indexStart) must be from 0 to str.length - 1');
   }
 
-  return _indexOfLast(str, search, startIndex);
+  return _indexOfLast(str, search, indexStart);
 };
 /**
  * isFirst
@@ -5950,6 +5951,94 @@ var isBothEnds = function isBothEnds(str, searchFirst) {
 
   return _isBothEnds(str, searchFirst, searchLast);
 };
+/**
+ * subIndex
+ */
+
+
+var _subIndex = function _subIndex(str, indexStart) {
+  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
+  return str.substring(indexStart, indexEnd + 1);
+};
+
+var subIndex = function subIndex(str, indexStart) {
+  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
+
+  if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
+    var _str8 = str;
+    str = _str8.str;
+    indexStart = _str8.indexStart;
+    var _str8$indexEnd = _str8.indexEnd;
+    indexEnd = _str8$indexEnd === void 0 ? indexStart : _str8$indexEnd;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('subIndex args(str) is not string');
+  }
+
+  if (!isInteger(indexStart)) {
+    throw new TypeError('subIndex args(indexStart) is not integer');
+  }
+
+  if (!_inRange(indexStart, 0, str.length - 1)) {
+    throw new RangeError('subIndex args(indexStart) must be from 0 to str.length - 1');
+  }
+
+  if (!isInteger(indexEnd)) {
+    throw new TypeError('subIndex args(indexEnd) is not integer');
+  }
+
+  if (!_inRange(indexEnd, indexStart, str.length - 1)) {
+    throw new RangeError('subIndex args(indexEnd) must be from indexStart to str.length - 1');
+  }
+
+  return _subIndex(str, indexStart, indexEnd);
+};
+/**
+ * subLength
+ */
+
+
+var _subLength = function _subLength(str, indexStart) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - indexStart;
+  return str.substring(indexStart, indexStart + length);
+};
+
+var subLength = function subLength(str, indexStart) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - indexStart;
+
+  if (isObjectParameter(str, 'str, indexStart', 'length')) {
+    var _str9 = str;
+    str = _str9.str;
+    indexStart = _str9.indexStart;
+    var _str9$length = _str9.length;
+    length = _str9$length === void 0 ? str.length - indexStart : _str9$length;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('subLength args(str) is not string');
+  }
+
+  if (!isInteger(indexStart)) {
+    throw new TypeError('subLength args(indexStart) is not integer');
+  }
+
+  if (!_inRange(indexStart, 0, str.length - 1)) {
+    throw new RangeError('subLength args(indexStart) must be from 0 to str.length - 1');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('subLength args(length) is not integer');
+  }
+
+  length = _min([length, str.length - indexStart]);
+
+  if (!_inRange(length, 1, str.length - indexStart)) {
+    throw new RangeError('subLength args(length) must be from 1 to str.length - indexStart');
+  }
+
+  return _subLength(str, indexStart, length);
+};
 
 module.exports = {
   _repeat: _repeat,
@@ -5960,6 +6049,8 @@ module.exports = {
   _isFirst: _isFirst,
   _isLast: _isLast,
   _isBothEnds: _isBothEnds,
+  _subIndex: _subIndex,
+  _subLength: _subLength,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
@@ -5967,7 +6058,9 @@ module.exports = {
   indexOfLast: indexOfLast,
   isFirst: isFirst,
   isLast: isLast,
-  isBothEnds: isBothEnds
+  isBothEnds: isBothEnds,
+  subIndex: subIndex,
+  subLength: subLength
 };
 
 /***/ }),

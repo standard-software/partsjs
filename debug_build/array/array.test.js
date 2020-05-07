@@ -508,8 +508,8 @@ var test_execute_array = function test_execute_array(parts) {
 
         checkEqual(true, equal(['A', 'B'], subIndex({
           array: ['A', 'B', 'A'],
-          indexFirst: 0,
-          indexLast: 1
+          indexStart: 0,
+          indexEnd: 1
         })));
       });
     };
@@ -690,12 +690,12 @@ var test_execute_array = function test_execute_array(parts) {
         })));
         checkEqual(true, equal([0, 2, 3], deleteIndex({
           array: [0, 1, 2, 3],
-          indexFirst: 1
+          indexStart: 1
         })));
         checkEqual(true, equal([0, 3], deleteIndex({
           array: [0, 1, 2, 3],
-          indexFirst: 1,
-          indexLast: 2
+          indexStart: 1,
+          indexEnd: 2
         })));
       });
     };

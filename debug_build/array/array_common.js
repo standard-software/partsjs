@@ -734,39 +734,39 @@ var isBothEnds = function isBothEnds(array, valueFirstArray) {
  */
 
 
-var _subIndex = function _subIndex(array, indexFirst, indexLast) {
-  return array.slice(indexFirst, indexLast + 1);
+var _subIndex = function _subIndex(array, indexStart, indexEnd) {
+  return array.slice(indexStart, indexEnd + 1);
 };
 
-var subIndex = function subIndex(array, indexFirst, indexLast) {
-  if (isObjectParameter(array, 'array, indexFirst, indexLast')) {
+var subIndex = function subIndex(array, indexStart, indexEnd) {
+  if (isObjectParameter(array, 'array, indexStart, indexEnd')) {
     var _array14 = array;
     array = _array14.array;
-    indexFirst = _array14.indexFirst;
-    indexLast = _array14.indexLast;
+    indexStart = _array14.indexStart;
+    indexEnd = _array14.indexEnd;
   }
 
   if (!isArray(array)) {
     throw new TypeError('subIndex args(array) is not array');
   }
 
-  if (!isInteger(indexFirst)) {
-    throw new TypeError('subIndex args(indexFirst) is not integer');
+  if (!isInteger(indexStart)) {
+    throw new TypeError('subIndex args(indexStart) is not integer');
   }
 
-  if (!_inRange(indexFirst, 0, array.length - 1)) {
-    throw new RangeError('subIndex args(indexFirst) must be from 0 to array.length - 1');
+  if (!_inRange(indexStart, 0, array.length - 1)) {
+    throw new RangeError('subIndex args(indexStart) must be from 0 to array.length - 1');
   }
 
-  if (!isInteger(indexLast)) {
-    throw new TypeError('subIndex args(indexLast) is not integer');
+  if (!isInteger(indexEnd)) {
+    throw new TypeError('subIndex args(indexEnd) is not integer');
   }
 
-  if (!_inRange(indexLast, indexFirst, array.length - 1)) {
-    throw new RangeError('subIndex args(indexLast) must be from 0 to array.length - 1');
+  if (!_inRange(indexEnd, indexStart, array.length - 1)) {
+    throw new RangeError('subIndex args(indexEnd) must be from indexStart to array.length - 1');
   }
 
-  return _subIndex(array, indexFirst, indexLast);
+  return _subIndex(array, indexStart, indexEnd);
 };
 /**
  * subLength

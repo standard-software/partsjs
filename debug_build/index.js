@@ -102,7 +102,7 @@ var number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 
 var string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
