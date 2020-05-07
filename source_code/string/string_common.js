@@ -325,16 +325,18 @@ const subIndex = (
  * subLength
  */
 const _subLength = (
-  str, indexStart, length = str.length - indexStart,
+  str, index, length = str.length - index,
 ) => {
-  return str.substring(indexStart, indexStart + length);
+  return str.substring(index, index + length);
 };
 
 const subLength = (
-  str, indexStart, length = str.length - indexStart,
+  str, index, length = str.length - index,
 ) => {
-  if (isObjectParameter(str, 'str, indexStart', 'length')) {
-    ({ str, indexStart, length = str.length - indexStart } = str);
+  if (isObjectParameter(str, 'str, index', 'length')) {
+    ({
+      str, index, length = str.length - index,
+    } = str);
   }
 
   if (!isString(str)) {
@@ -342,12 +344,12 @@ const subLength = (
       'subLength args(str) is not string',
     );
   }
-  if (!isInteger(indexStart)) {
+  if (!isInteger(index)) {
     throw new TypeError(
       'subLength args(indexStart) is not integer',
     );
   }
-  if (!_inRange(indexStart, 0, str.length - 1)) {
+  if (!_inRange(index, 0, str.length - 1)) {
     throw new RangeError(
       'subLength args(indexStart) must be from 0 to str.length - 1',
     );
@@ -357,14 +359,14 @@ const subLength = (
       'subLength args(length) is not integer',
     );
   }
-  length = _min([length, str.length - indexStart]);
-  if (!_inRange(length, 0, str.length - indexStart)) {
+  length = _min([length, str.length - index]);
+  if (!_inRange(length, 0, str.length - index)) {
     throw new RangeError(
       'subLength args(length) must be from 0 to str.length - indexStart',
     );
   }
 
-  return _subLength(str, indexStart, length);
+  return _subLength(str, index, length);
 };
 
 /**

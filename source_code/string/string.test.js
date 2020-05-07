@@ -614,7 +614,7 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subLength('01234', 5)));
         checkEqual(true,  isThrown(() => subLength('01234', 6)));
 
-        checkEqual(true,  isThrown(() => subLength('01234', -1, 0)));
+        checkEqual(true,  isThrown(() => subLength('01234', -2, 0)));
         checkEqual(true,  isThrown(() => subLength('01234', -1, 0)));
         checkEqual('',      subLength('01234', 0, 0));
         checkEqual('',      subLength('01234', 1, 0));
@@ -624,7 +624,7 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subLength('01234',  5, 0)));
         checkEqual(true,  isThrown(() => subLength('01234',  6, 0)));
 
-        checkEqual(true,  isThrown(() => subLength('01234', -1, 3)));
+        checkEqual(true,  isThrown(() => subLength('01234', -2, 3)));
         checkEqual(true,  isThrown(() => subLength('01234', -1, 3)));
         checkEqual('012',   subLength('01234', 0, 3));
         checkEqual('123',   subLength('01234', 1, 3));
@@ -634,7 +634,7 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subLength('01234',  5, 3)));
         checkEqual(true,  isThrown(() => subLength('01234',  6, 3)));
 
-        checkEqual(true,  isThrown(() => subLength('01234', -1, 5)));
+        checkEqual(true,  isThrown(() => subLength('01234', -2, 5)));
         checkEqual(true,  isThrown(() => subLength('01234', -1, 5)));
         checkEqual('01234', subLength('01234', 0, 5));
         checkEqual('1234',  subLength('01234', 1, 5));
@@ -644,7 +644,7 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subLength('01234',  5, 5)));
         checkEqual(true,  isThrown(() => subLength('01234',  6, 5)));
 
-        checkEqual(true,  isThrown(() => subLength('01234', -1, 6)));
+        checkEqual(true,  isThrown(() => subLength('01234', -2, 6)));
         checkEqual(true,  isThrown(() => subLength('01234', -1, 6)));
         checkEqual('01234', subLength('01234', 0, 6));
         checkEqual('1234',  subLength('01234', 1, 6));
