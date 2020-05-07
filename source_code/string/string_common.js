@@ -14,7 +14,7 @@ const {
 } = require('../number/number.js');
 
 const {
-  _max,
+  _min, _max,
 } = require('../array/array.js');
 
 /**
@@ -279,13 +279,17 @@ const isBothEnds = (
 /**
  * subIndex
  */
-const _subIndex = (str, indexStart, indexEnd) => {
+const _subIndex = (
+  str, indexStart, indexEnd = indexStart,
+) => {
   return str.substring(indexStart, indexEnd + 1);
 };
 
-const subIndex = (str, indexStart, indexEnd = str.length - 1) => {
+const subIndex = (
+  str, indexStart, indexEnd = indexStart,
+) => {
   if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
-    ({ str, indexStart, indexEnd = str.length - 1 } = str);
+    ({ str, indexStart, indexEnd = indexStart } = str);
   }
 
   if (!isString(str)) {
@@ -316,17 +320,64 @@ const subIndex = (str, indexStart, indexEnd = str.length - 1) => {
 
   return _subIndex(str, indexStart, indexEnd);
 };
+
+/**
+ * subLength
+ */
+const _subLength = (
+  str, indexStart, length = str.length - indexStart,
+) => {
+  return str.substring(indexStart, indexStart + length);
+};
+
+const subLength = (
+  str, indexStart, length = str.length - indexStart,
+) => {
+  if (isObjectParameter(str, 'str, indexStart', 'length')) {
+    ({ str, indexStart, length = str.length - indexStart } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'subLength args(str) is not string',
+    );
+  }
+  if (!isInteger(indexStart)) {
+    throw new TypeError(
+      'subLength args(indexStart) is not integer',
+    );
+  }
+  if (!_inRange(indexStart, 0, str.length - 1)) {
+    throw new RangeError(
+      'subLength args(indexStart) must be from 0 to str.length - 1',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'subLength args(length) is not integer',
+    );
+  }
+  length = _min([length, str.length - indexStart]);
+  if (!_inRange(length, 1, str.length - indexStart)) {
+    throw new RangeError(
+      'subLength args(length) must be from 1 to str.length - indexStart',
+    );
+  }
+
+  return _subLength(str, indexStart, length);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
   _isFirst, _isLast, _isBothEnds,
-  _subIndex,
+  _subIndex, _subLength,
 
   repeat,
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
   isFirst, isLast, isBothEnds,
-  subIndex,
+  subIndex, subLength,
 
 };

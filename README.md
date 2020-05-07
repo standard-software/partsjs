@@ -251,8 +251,10 @@ You can now use the functions of the parts.js object.
     - array.operation.deleteIndex
 - rename startIndex >> indexStart
   - string.indexOfFirst / indexOfLast
-- add string.isBothEnds
-- add string.subIndex
+- add string
+  - isBothEnds
+  - subIndex
+  - subLength
 
 ### 5.1.0
 #### 2020/05/06(Wed)

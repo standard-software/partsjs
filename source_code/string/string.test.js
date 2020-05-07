@@ -13,6 +13,7 @@ const test_execute_string = (parts) => {
       matchFormat, replaceAll,
       indexOfFirst, indexOfLast,
       isFirst, isLast, isBothEnds,
+      subIndex, subLength,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -478,10 +479,10 @@ const test_execute_string = (parts) => {
       it('test_subIndex', () => {
         checkEqual(true,  isThrown(() => subIndex('01234', -2)));
         checkEqual(true,  isThrown(() => subIndex('01234', -1)));
-        checkEqual('01234', subIndex('01234', 0));
-        checkEqual('1234',  subIndex('01234', 1));
-        checkEqual('234',   subIndex('01234', 2));
-        checkEqual('34',    subIndex('01234', 3));
+        checkEqual('0',     subIndex('01234', 0));
+        checkEqual('1',     subIndex('01234', 1));
+        checkEqual('2',     subIndex('01234', 2));
+        checkEqual('3',     subIndex('01234', 3));
         checkEqual('4',     subIndex('01234', 4));
         checkEqual(true,  isThrown(() => subIndex('01234', 5)));
         checkEqual(true,  isThrown(() => subIndex('01234', 6)));
@@ -497,6 +498,32 @@ const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => subIndex('01234',  6, 3)));
       });
     };
+
+    const test_subLength = () => {
+      it('test_subLength', () => {
+        checkEqual(true,  isThrown(() => subLength('01234', -2)));
+        checkEqual(true,  isThrown(() => subLength('01234', -1)));
+        checkEqual('01234', subLength('01234', 0));
+        checkEqual('1234',  subLength('01234', 1));
+        checkEqual('234',   subLength('01234', 2));
+        checkEqual('34',    subLength('01234', 3));
+        checkEqual('4',     subLength('01234', 4));
+        checkEqual(true,  isThrown(() => subLength('01234', 5)));
+        checkEqual(true,  isThrown(() => subLength('01234', 6)));
+
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 3)));
+        checkEqual(true,  isThrown(() => subLength('01234', -1, 3)));
+        checkEqual('012',   subLength('01234', 0, 3));
+        checkEqual('123',   subLength('01234', 1, 3));
+        checkEqual('234',   subLength('01234', 2, 3));
+        checkEqual('34',    subLength('01234', 3, 3));
+        checkEqual('4',     subLength('01234', 4, 3));
+        checkEqual(true,  isThrown(() => subLength('01234',  5, 3)));
+        checkEqual(true,  isThrown(() => subLength('01234',  6, 3)));
+
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -512,6 +539,7 @@ const test_execute_string = (parts) => {
     test_substring_stardard();
     test_substr_stardard();
     test_subIndex();
+    test_subLength();
 
   });
 };
