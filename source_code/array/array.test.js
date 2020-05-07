@@ -662,11 +662,13 @@ const test_execute_array = (parts) => {
     const test_array_subFirst = () => {
       it('test_array_subFirst', () => {
         var array1 = [0, 1, 2];
-        checkEqual(true,  equal([],        subFirst(array1, 0)));
-        checkEqual(true,  equal([0],       subFirst(array1, 1)));
-        checkEqual(true,  equal([0, 1],    subFirst(array1, 2)));
-        checkEqual(true,  equal([0, 1, 2], subFirst(array1, 3)));
-        checkEqual(true,  equal([0, 1, 2], array1));
+        checkEqual(true,  isThrown(() => subFirst(array1, -1)));
+        checkEqual(true,  equal([],         subFirst(array1, 0)));
+        checkEqual(true,  equal([0],        subFirst(array1, 1)));
+        checkEqual(true,  equal([0],        subFirst(array1)));
+        checkEqual(true,  equal([0, 1],     subFirst(array1, 2)));
+        checkEqual(true,  equal([0, 1, 2],  subFirst(array1, 3)));
+        checkEqual(true,  equal([0, 1, 2],  array1));
 
         // Object Named Parameter
         checkEqual(true,  equal(['A', 'B'],
@@ -681,11 +683,12 @@ const test_execute_array = (parts) => {
     const test_array_subLast = () => {
       it('test_array_subLast', () => {
         var array1 = [0, 1, 2];
-        checkEqual(true,  equal([],       subLast(array1, 0)));
-        checkEqual(true,  equal([2],       subLast(array1, 1)));
-        checkEqual(true,  equal([1, 2],    subLast(array1, 2)));
-        checkEqual(true,  equal([0, 1, 2], subLast(array1, 3)));
-        checkEqual(true,  equal([0, 1, 2], array1));
+        checkEqual(true,  equal([],         subLast(array1, 0)));
+        checkEqual(true,  equal([2],        subLast(array1, 1)));
+        checkEqual(true,  equal([2],        subLast(array1)));
+        checkEqual(true,  equal([1, 2],     subLast(array1, 2)));
+        checkEqual(true,  equal([0, 1, 2],  subLast(array1, 3)));
+        checkEqual(true,  equal([0, 1, 2],  array1));
 
         // Object Named Parameter
         checkEqual(true,  equal(['B', 'A'],

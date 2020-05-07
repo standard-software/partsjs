@@ -255,6 +255,9 @@ You can now use the functions of the parts.js object.
   - isBothEnds
   - subIndex / subLength
   - subFirst / subLast
+- update array
+  - default parameter
+    - subLength / subFirst / subLast
 
 ### 5.1.0
 #### 2020/05/06(Wed)

@@ -722,13 +722,19 @@ const subIndex = (array, indexStart, indexEnd) => {
 /**
  * subLength
  */
-const _subLength = (array, index, length) => {
+const _subLength = (
+  array, index, length = array.length - index,
+) => {
   return array.slice(index, index + length);
 };
 
-const subLength = (array, index, length) => {
-  if (isObjectParameter(array, 'array, index, length')) {
-    ({ array, index, length } = array);
+const subLength = (
+  array, index, length = array.length - index,
+) => {
+  if (isObjectParameter(array, 'array, index', 'length')) {
+    ({
+      array, index, length = array.length - index,
+    } = array);
   }
 
   if (!isArray(array)) {
@@ -763,13 +769,15 @@ const subLength = (array, index, length) => {
 /**
  * subFirst
  */
-const _subFirst = (array, length) => {
-  return _subLength(array, 0, length);
+const _subFirst = (array, length = 1) => {
+  return _subLength(
+    array, 0, length,
+  );
 };
 
-const subFirst = (array, length) => {
+const subFirst = (array, length = 1) => {
   if (isObjectParameter(array, 'array, length')) {
-    ({ array, length } = array);
+    ({ array, length = 1 } = array);
   }
 
   if (!isArray(array)) {
@@ -794,13 +802,15 @@ const subFirst = (array, length) => {
 /**
  * subLast
  */
-const _subLast = (array, length) => {
-  return _subLength(array, array.length - length, length);
+const _subLast = (array, length = 1) => {
+  return _subLength(
+    array, array.length - length, length,
+  );
 };
 
-const subLast = (array, length) => {
+const subLast = (array, length = 1) => {
   if (isObjectParameter(array, 'array, length')) {
-    ({ array, length } = array);
+    ({ array, length = 1 } = array);
   }
 
   if (!isArray(array)) {
