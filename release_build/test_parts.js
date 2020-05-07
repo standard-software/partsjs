@@ -25935,11 +25935,122 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_array_subIndex = function test_array_subIndex() {
       it('test_array_subIndex', function () {
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([1], subIndex(array1, 1, 1)));
-        checkEqual(true, equal([0, 1], subIndex(array1, 0, 1)));
-        checkEqual(true, equal([1, 2], subIndex(array1, 1, 2)));
-        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -1);
+        }));
+        checkEqual(true, equal([0], subIndex(array1, 0)));
+        checkEqual(true, equal([1], subIndex(array1, 1)));
+        checkEqual(true, equal([2], subIndex(array1, 2)));
+        checkEqual(true, equal([3], subIndex(array1, 3)));
+        checkEqual(true, equal([4], subIndex(array1, 4)));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -1, 0);
+        }));
+        checkEqual(true, equal([0], subIndex(array1, 0, 0)));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 1, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 3, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 4, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 6, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -2, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -1, 3);
+        }));
+        checkEqual(true, equal([0, 1, 2, 3], subIndex(array1, 0, 3)));
+        checkEqual(true, equal([1, 2, 3], subIndex(array1, 1, 3)));
+        checkEqual(true, equal([2, 3], subIndex(array1, 2, 3)));
+        checkEqual(true, equal([3], subIndex(array1, 3, 3)));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 4, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 5, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 0, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 3, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 4, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, -1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 0, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 3, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 4, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subIndex(array1, 6, 6);
+        })); // Object Named Parameter
 
         checkEqual(true, equal(['A', 'B'], subIndex({
           array: ['A', 'B', 'A'],
@@ -26048,16 +26159,22 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_array_subFirst = function test_array_subFirst() {
       it('test_array_subFirst', function () {
-        var array1 = [0, 1, 2];
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, isThrown(function () {
+          return subFirst(array1, -2);
+        }));
         checkEqual(true, isThrown(function () {
           return subFirst(array1, -1);
         }));
         checkEqual(true, equal([], subFirst(array1, 0)));
         checkEqual(true, equal([0], subFirst(array1, 1)));
-        checkEqual(true, equal([0], subFirst(array1)));
         checkEqual(true, equal([0, 1], subFirst(array1, 2)));
         checkEqual(true, equal([0, 1, 2], subFirst(array1, 3)));
-        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
+        checkEqual(true, equal([0, 1, 2, 3], subFirst(array1, 4)));
+        checkEqual(true, equal([0, 1, 2, 3, 4], subFirst(array1, 5)));
+        checkEqual(true, isThrown(function () {
+          return subFirst(array1, 6);
+        })); // Object Named Parameter
 
         checkEqual(true, equal(['A', 'B'], subFirst({
           array: ['A', 'B', 'A'],
@@ -26068,13 +26185,22 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_array_subLast = function test_array_subLast() {
       it('test_array_subLast', function () {
-        var array1 = [0, 1, 2];
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, isThrown(function () {
+          return subLast(array1, -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return subLast(array1, -1);
+        }));
         checkEqual(true, equal([], subLast(array1, 0)));
-        checkEqual(true, equal([2], subLast(array1, 1)));
-        checkEqual(true, equal([2], subLast(array1)));
-        checkEqual(true, equal([1, 2], subLast(array1, 2)));
-        checkEqual(true, equal([0, 1, 2], subLast(array1, 3)));
-        checkEqual(true, equal([0, 1, 2], array1)); // Object Named Parameter
+        checkEqual(true, equal([4], subLast(array1, 1)));
+        checkEqual(true, equal([3, 4], subLast(array1, 2)));
+        checkEqual(true, equal([2, 3, 4], subLast(array1, 3)));
+        checkEqual(true, equal([1, 2, 3, 4], subLast(array1, 4)));
+        checkEqual(true, equal([0, 1, 2, 3, 4], subLast(array1, 5)));
+        checkEqual(true, isThrown(function () {
+          return subLast(array1, 6);
+        })); // Object Named Parameter
 
         checkEqual(true, equal(['B', 'A'], subLast({
           array: ['A', 'B', 'A'],

@@ -734,16 +734,20 @@ var isBothEnds = function isBothEnds(array, valueFirstArray) {
  */
 
 
-var _subIndex = function _subIndex(array, indexStart, indexEnd) {
+var _subIndex = function _subIndex(array, indexStart) {
+  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
   return array.slice(indexStart, indexEnd + 1);
 };
 
-var subIndex = function subIndex(array, indexStart, indexEnd) {
-  if (isObjectParameter(array, 'array, indexStart, indexEnd')) {
+var subIndex = function subIndex(array, indexStart) {
+  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
+
+  if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
     var _array14 = array;
     array = _array14.array;
     indexStart = _array14.indexStart;
-    indexEnd = _array14.indexEnd;
+    var _array14$indexEnd = _array14.indexEnd;
+    indexEnd = _array14$indexEnd === void 0 ? indexStart : _array14$indexEnd;
   }
 
   if (!isArray(array)) {
