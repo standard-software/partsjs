@@ -681,13 +681,17 @@ const isBothEnds = (
 /**
  * subIndex
  */
-const _subIndex = (array, indexStart, indexEnd) => {
+const _subIndex = (
+  array, indexStart, indexEnd = indexStart,
+) => {
   return array.slice(indexStart, indexEnd + 1);
 };
 
-const subIndex = (array, indexStart, indexEnd) => {
-  if (isObjectParameter(array, 'array, indexStart, indexEnd')) {
-    ({ array, indexStart, indexEnd } = array);
+const subIndex = (
+  array, indexStart, indexEnd = indexStart,
+) => {
+  if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
+    ({ array, indexStart, indexEnd = indexStart } = array);
   }
 
   if (!isArray(array)) {
