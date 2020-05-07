@@ -822,7 +822,6 @@ const subLast = (array, length) => {
   return _subLast(array, length);
 };
 
-
 module.exports = {
   _min, _max,
   _sum, _average, _median,

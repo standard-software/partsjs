@@ -156,6 +156,7 @@ propertyNames.STRING_PUBLIC =
   'indexOfFirst, indexOfLast,' +
   'isFirst, isLast, isBothEnds,' +
   'subIndex, subLength,' +
+  'subFirst, subLast,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +

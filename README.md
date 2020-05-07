@@ -253,8 +253,8 @@ You can now use the functions of the parts.js object.
   - string.indexOfFirst / indexOfLast
 - add string
   - isBothEnds
-  - subIndex
-  - subLength
+  - subIndex / subLength
+  - subFirst / subLast
 
 ### 5.1.0
 #### 2020/05/06(Wed)

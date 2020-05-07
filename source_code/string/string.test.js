@@ -14,6 +14,7 @@ const test_execute_string = (parts) => {
       indexOfFirst, indexOfLast,
       isFirst, isLast, isBothEnds,
       subIndex, subLength,
+      subFirst, subLast,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -524,6 +525,34 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_subFirst = () => {
+      it('test_subFirst', () => {
+        checkEqual(true,  isThrown(() => subFirst('01234', -2)));
+        checkEqual(true,  isThrown(() => subFirst('01234', -1)));
+        checkEqual(true,  isThrown(() => subFirst('01234',  0)));
+        checkEqual('0',     subFirst('01234', 1));
+        checkEqual('01',    subFirst('01234', 2));
+        checkEqual('012',   subFirst('01234', 3));
+        checkEqual('0123',  subFirst('01234', 4));
+        checkEqual('01234', subFirst('01234', 5));
+        checkEqual(true,  isThrown(() => subFirst('01234', 6)));
+      });
+    };
+
+    const test_subLast = () => {
+      it('test_subLast', () => {
+        checkEqual(true,  isThrown(() => subLast('01234', -2)));
+        checkEqual(true,  isThrown(() => subLast('01234', -1)));
+        checkEqual(true,  isThrown(() => subLast('01234',  0)));
+        checkEqual('4',     subLast('01234', 1));
+        checkEqual('34',    subLast('01234', 2));
+        checkEqual('234',   subLast('01234', 3));
+        checkEqual('1234',  subLast('01234', 4));
+        checkEqual('01234', subLast('01234', 5));
+        checkEqual(true,  isThrown(() => subLast('01234', 6)));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -540,6 +569,8 @@ const test_execute_string = (parts) => {
     test_substr_stardard();
     test_subIndex();
     test_subLength();
+    test_subFirst();
+    test_subLast();
 
   });
 };

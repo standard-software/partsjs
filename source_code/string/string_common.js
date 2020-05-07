@@ -367,17 +367,85 @@ const subLength = (
   return _subLength(str, indexStart, length);
 };
 
+/**
+ * subFirst
+ */
+const _subFirst = (str, length = 1) => {
+  return _subLength(
+    str, 0, length,
+  );
+};
+
+const subFirst = (str, length = 1) => {
+  if (isObjectParameter(str, 'str', 'length')) {
+    ({ str, length = 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'subFirst args(str) is not string',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'subFirst args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 1, str.length)) {
+    throw new RangeError(
+      'subFirst args(length) must be from 1 to str.length',
+    );
+  }
+
+  return _subFirst(str, length);
+};
+
+/**
+ * subLast
+ */
+const _subLast = (str, length = 1) => {
+  return _subLength(
+    str, str.length - length, length,
+  );
+};
+
+const subLast = (str, length = 1) => {
+  if (isObjectParameter(str, 'str', 'length')) {
+    ({ str, length = 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'subLast args(str) is not string',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'subLast args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 1, str.length)) {
+    throw new RangeError(
+      'subLast args(length) must be from 1 to str.length',
+    );
+  }
+
+  return _subLast(str, length);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
   _isFirst, _isLast, _isBothEnds,
   _subIndex, _subLength,
+  _subFirst, _subLast,
 
   repeat,
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
   isFirst, isLast, isBothEnds,
   subIndex, subLength,
+  subFirst, subLast,
 
 };
