@@ -94,48 +94,6 @@ const add = (array, valueArray, index = array.length - 1) => {
 };
 
 /**
- * array.operation.deleteLength
- */
-const _deleteLength = (array, index, length) => {
-  array.splice(index, length);
-  return array;
-};
-
-const deleteLength = (array, index, length) => {
-  if (isObjectParameter(array, 'array, index, length')) {
-    ({ array, index, length } = array);
-  }
-
-  if (!isArray(array)) {
-    throw new TypeError(
-      'deleteLength args(array) is not array',
-    );
-  }
-  if (!isInteger(index)) {
-    throw new TypeError(
-      'deleteLength args(index) is not integer',
-    );
-  }
-  if (!isInteger(length)) {
-    throw new TypeError(
-      'deleteLength args(length) is not integer',
-    );
-  }
-  if (!_inRange(index, 0, array.length - 1)) {
-    throw new RangeError(
-      'deleteLength args(index) must be from 0 to array.length - 1',
-    );
-  }
-  if (!_inRange(length, 1, array.length - index)) {
-    throw new RangeError(
-      'deleteLength args(length) must be from 1 to array.length - index',
-    );
-  }
-
-  return _deleteLength(array, index, length);
-};
-
-/**
  * array.operation.deleteIndex
  */
 const _deleteIndex = (
@@ -179,6 +137,48 @@ const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
   }
 
   return _deleteIndex(array, indexStart, indexEnd);
+};
+
+/**
+ * array.operation.deleteLength
+ */
+const _deleteLength = (array, index, length) => {
+  array.splice(index, length);
+  return array;
+};
+
+const deleteLength = (array, index, length) => {
+  if (isObjectParameter(array, 'array, index, length')) {
+    ({ array, index, length } = array);
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError(
+      'deleteLength args(array) is not array',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'deleteLength args(index) is not integer',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'deleteLength args(length) is not integer',
+    );
+  }
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError(
+      'deleteLength args(index) must be from 0 to array.length - 1',
+    );
+  }
+  if (!_inRange(length, 1, array.length - index)) {
+    throw new RangeError(
+      'deleteLength args(length) must be from 1 to array.length - index',
+    );
+  }
+
+  return _deleteLength(array, index, length);
 };
 
 /**
