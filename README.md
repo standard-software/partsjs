@@ -312,29 +312,5 @@ You can now use the functions of the parts.js object.
   - toNumber >> valueToNumbeer
   - toInteger >> valueToInteger
 
-### 4.9.2
-#### 2020/04/30(Thu)
-- bugfix convert.toString
-- add testCounter
-- update testCode
-
-### 4.9.1
-#### 2020/04/28(Tue)
-- update test code
-  - String(value)
-  - value.toString()
-  - parseInt
-
-### 4.9.0
-#### 2020/04/27(Mon)
-- add toString
-- add test code
-  - String Cast
-  - value.toString()
-  - parseFloat
-  - parseInt
-- update eslint setting
-- update test message output
-
 ### More Info
 [VERSION.md](./VERSION.md)

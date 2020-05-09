@@ -2,6 +2,14 @@
 
 ## Version
 
+### 5.3.0
+#### 2020/05/09(Sat)
+- add string
+  - includeFirst / includeLast / includeBothEnds
+  - excludeFirst / excludeLast / excludeBothEnds
+  - deleteIndex / deleteLength
+  - deleteFirst / deleteLast
+
 ### 5.2.1
 #### 2020/05/08(Fri)
 - update array.subIndex default parameter
