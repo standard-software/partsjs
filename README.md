@@ -237,6 +237,7 @@ You can now use the functions of the parts.js object.
 #### 2020/05/09(Sat)
 - add string
   - includeFirst / includeLast / includeBothEnds
+  - excludeFirst / excludeLast / excludeBothEnds
   - deleteIndex / deleteLength
   - deleteFirst / deleteLast
 

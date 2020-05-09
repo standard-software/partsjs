@@ -379,6 +379,114 @@ const includeBothEnds = (
   );
 };
 
+
+/**
+ * string.excludeFirst
+ */
+const _excludeFirst = (str, value) => {
+  if (_isFirst(str, value)) {
+    return _deleteFirst(str, value.length);
+  }
+  return str;
+};
+
+const excludeFirst = (str, value) => {
+  if (isObjectParameter(str, 'str, value')) {
+    ({ str, value } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'excludeFirst args(array) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'excludeFirst args(value) is not string',
+    );
+  }
+
+  return _excludeFirst(str, value);
+};
+
+/**
+ * string.excludeLast
+ */
+const _excludeLast = (str, value) => {
+  if (_isLast(str, value)) {
+    return _deleteLast(str, value.length);
+  }
+  return str;
+};
+
+const excludeLast = (str, value) => {
+  if (isObjectParameter(str, 'str, value')) {
+    ({ str, value } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'excludeLast args(array) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'excludeLast args(value) is not string',
+    );
+  }
+
+  return _excludeLast(str, value);
+};
+
+/**
+ * string.excludeBothEnds
+ */
+const _excludeBothEnds = (
+  str,
+  valueFirst,
+  valueLast = valueFirst,
+) => {
+  if (_isBothEnds(str, valueFirst, valueLast)) {
+    str = deleteFirst(str, valueFirst.length);
+    return deleteLast(str, _min([valueLast.length, str.length]));
+  }
+  return str;
+};
+
+const excludeBothEnds = (
+  str,
+  valueFirst,
+  valueLast = valueFirst,
+) => {
+  if (isObjectParameter(str, 'str, valueFirst', 'valueLast')) {
+    ({ str, valueFirst, valueLast = valueFirst } = str);
+  } else if (isObjectParameter(str, 'str, value')) {
+    ({ str, value: valueFirst, valueLast = valueFirst } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'excludeBothEnds args(array) is not string',
+    );
+  }
+  if (!isString(valueFirst)) {
+    throw new TypeError(
+      'excludeBothEnds args(valueFirst) is not string',
+    );
+  }
+  if (!isString(valueLast)) {
+    throw new TypeError(
+      'excludeBothEnds args(valueLast) is not string',
+    );
+  }
+
+  return _excludeBothEnds(
+    str,
+    valueFirst,
+    valueLast,
+  );
+};
+
 /**
  * subIndex
  */
@@ -707,6 +815,7 @@ module.exports = {
   _indexOfFirst, _indexOfLast,
   _isFirst, _isLast, _isBothEnds,
   _includeFirst, _includeLast, _includeBothEnds,
+  _excludeFirst, _excludeLast, _excludeBothEnds,
   _subIndex, _subLength, _subFirst, _subLast,
   _deleteIndex, _deleteLength, _deleteFirst, _deleteLast,
 
@@ -715,6 +824,7 @@ module.exports = {
   indexOfFirst, indexOfLast,
   isFirst, isLast, isBothEnds,
   includeFirst, includeLast, includeBothEnds,
+  excludeFirst, excludeLast, excludeBothEnds,
   subIndex, subLength, subFirst, subLast,
   deleteIndex, deleteLength, deleteFirst, deleteLast,
 

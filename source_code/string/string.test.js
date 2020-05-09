@@ -14,6 +14,7 @@ const test_execute_string = (parts) => {
       indexOfFirst, indexOfLast,
       isFirst, isLast, isBothEnds,
       includeFirst, includeLast, includeBothEnds,
+      excludeFirst, excludeLast, excludeBothEnds,
       subIndex, subLength,
       subFirst, subLast,
       deleteIndex, deleteLength,
@@ -506,6 +507,92 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_excludeFirst = () => {
+      it('test_excludeFirst', () => {
+        checkEqual('23',    excludeFirst('123', '1'));
+        checkEqual('3',     excludeFirst('123', '12'));
+        checkEqual('123',   excludeFirst('123', '13'));
+        checkEqual('123',   excludeFirst('123', '2'));
+        checkEqual('BC',    excludeFirst('ABC', 'A'));
+        checkEqual('C',     excludeFirst('ABC', 'AB'));
+        checkEqual('ABC',   excludeFirst('ABC', 'AC'));
+        checkEqual('ABC',   excludeFirst('ABC', 'a'));
+        checkEqual('ABC',   excludeFirst('ABC', 'B'));
+      });
+    };
+
+    const test_excludeLast = () => {
+      it('test_excludeLast', () => {
+        checkEqual('12',    excludeLast('123', '3'));
+        checkEqual('1',     excludeLast('123', '23'));
+        checkEqual('123',   excludeLast('123', '13'));
+        checkEqual('123',   excludeLast('123', '2'));
+        checkEqual('AB',    excludeLast('ABC', 'C'));
+        checkEqual('A',     excludeLast('ABC', 'BC'));
+        checkEqual('ABC',   excludeLast('ABC', 'AC'));
+        checkEqual('ABC',   excludeLast('ABC', 'c'));
+        checkEqual('ABC',   excludeLast('ABC', 'B'));
+      });
+    };
+
+    const test_excludeBothEnds = () => {
+      it('test_excludeBothEnds', () => {
+        checkEqual('2',       excludeBothEnds('121', '1'));
+        checkEqual('121',     excludeBothEnds('121', '2'));
+        checkEqual('',        excludeBothEnds('121', '12', '21'));
+        checkEqual('B',       excludeBothEnds('ABA', 'A'));
+        checkEqual('ABA',     excludeBothEnds('ABA', 'a'));
+        checkEqual('ABA',     excludeBothEnds('ABA', 'B'));
+        checkEqual('',        excludeBothEnds('ABAB', 'AB'));
+
+        checkEqual('ABAD',    excludeBothEnds('ABAD', 'A'));
+        checkEqual('BA',      excludeBothEnds('ABAD', 'A', 'D'));
+
+        testCounter();
+        checkEqual('AB',      excludeBothEnds('{AB}', '{', '}'));
+        checkEqual('{}',      excludeBothEnds('{{}}', '{', '}'));
+        checkEqual('A{B}',    excludeBothEnds('A{B}', '{', '}'));
+        checkEqual('{AB}',    excludeBothEnds('{AB}', '}', '}'));
+        checkEqual('{AB}',    excludeBothEnds('{AB}', '{', '{'));
+
+        checkEqual('1',       excludeBothEnds('1', '1'));
+        checkEqual('',        excludeBothEnds('11', '1'));
+
+        // Object Named Parameter
+        checkEqual('B',
+          excludeBothEnds({
+            str: 'ABA',
+            value: 'A',
+          }),
+        );
+        checkEqual('ABA',
+          excludeBothEnds({
+            str: 'ABA',
+            value: 'a',
+          }),
+        );
+        checkEqual('B',
+          excludeBothEnds({
+            str: 'ABA',
+            valueFirst: 'A',
+          }),
+        );
+        checkEqual('ABAD',
+          excludeBothEnds({
+            str: 'ABAD',
+            valueFirst: 'A',
+          }),
+        );
+        checkEqual('BA',
+          excludeBothEnds({
+            str: 'ABAD',
+            valueFirst: 'A',
+            valueLast: 'D',
+          }),
+        );
+      });
+    };
+
     const test_substring_stardard = () => {
       it('test_substring_stardard', () => {
         checkEqual('01234', '01234'.substring(-2));
@@ -926,6 +1013,9 @@ const test_execute_string = (parts) => {
     test_includeFirst();
     test_includeLast();
     test_includeBothEnds();
+    test_excludeFirst();
+    test_excludeLast();
+    test_excludeBothEnds();
 
     test_substring_stardard();
     test_substr_stardard();
