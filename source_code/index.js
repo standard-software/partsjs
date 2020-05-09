@@ -156,8 +156,8 @@ propertyNames.STRING_PUBLIC =
   'indexOfFirst, indexOfLast,' +
   'isFirst, isLast, isBothEnds,' +
   'includeFirst, includeLast, includeBothEnds,' +
-  'subIndex, subLength,' +
-  'subFirst, subLast,' +
+  'subIndex, subLength, subFirst, subLast,' +
+  'deleteIndex, deleteLength, deleteFirst, deleteLast,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +

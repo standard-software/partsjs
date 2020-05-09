@@ -237,6 +237,8 @@ You can now use the functions of the parts.js object.
 #### 2020/05/09(Sat)
 - add string
   - includeFirst / includeLast / includeBothEnds
+  - deleteIndex / deleteLength
+  - deleteFirst / deleteLast
 
 ### 5.2.1
 #### 2020/05/08(Fri)

@@ -538,6 +538,167 @@ const subLast = (str, length = 1) => {
   return _subLast(str, length);
 };
 
+/**
+ * deleteIndex
+ */
+const _deleteIndex = (
+  str, indexStart, indexEnd = indexStart,
+) => {
+  const startStr = str.slice(0, indexStart);
+  const endStr = str.slice(indexEnd + 1, str.length);
+  return startStr + endStr;
+};
+
+const deleteIndex = (
+  str, indexStart, indexEnd = indexStart,
+) => {
+  if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
+    ({ str, indexStart, indexEnd = indexStart } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'deleteIndex args(str) is not string',
+    );
+  }
+  if (!isInteger(indexStart)) {
+    throw new TypeError(
+      'deleteIndex args(indexStart) is not integer',
+    );
+  }
+  if (!_inRange(indexStart, 0, str.length - 1)) {
+    throw new RangeError(
+      'deleteIndex args(indexStart) must be from 0 to str.length - 1',
+    );
+  }
+  if (!isInteger(indexEnd)) {
+    throw new TypeError(
+      'deleteIndex args(indexEnd) is not integer',
+    );
+  }
+  if (!_inRange(indexEnd, indexStart, str.length - 1)) {
+    throw new RangeError(
+      'deleteIndex args(indexEnd) must be from indexStart to str.length - 1',
+    );
+  }
+
+  return _deleteIndex(str, indexStart, indexEnd);
+};
+
+/**
+ * deleteLength
+ */
+const _deleteLength = (
+  str, index, length = str.length - index,
+) => {
+  return _deleteIndex(str, index, index + length - 1);
+};
+
+const deleteLength = (
+  str, index, length = str.length - index,
+) => {
+  if (isObjectParameter(str, 'str, index', 'length')) {
+    ({
+      str, index, length = str.length - index,
+    } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'deleteLength args(str) is not string',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'deleteLength args(indexStart) is not integer',
+    );
+  }
+  if (!_inRange(index, 0, str.length - 1)) {
+    throw new RangeError(
+      'deleteLength args(indexStart) must be from 0 to str.length - 1',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'deleteLength args(length) is not integer',
+    );
+  }
+  length = _min([length, str.length - index]);
+  if (!_inRange(length, 0, str.length - index)) {
+    throw new RangeError(
+      'deleteLength args(length) must be from 0 to str.length - indexStart',
+    );
+  }
+
+  return _deleteLength(str, index, length);
+};
+
+/**
+ * deleteFirst
+ */
+const _deleteFirst = (str, length = 1) => {
+  return _deleteLength(
+    str, 0, length,
+  );
+};
+
+const deleteFirst = (str, length = 1) => {
+  if (isObjectParameter(str, 'str', 'length')) {
+    ({ str, length = 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'deleteFirst args(str) is not string',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'deleteFirst args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, str.length)) {
+    throw new RangeError(
+      'deleteFirst args(length) must be from 0 to str.length',
+    );
+  }
+
+  return _deleteFirst(str, length);
+};
+
+/**
+ * deleteLast
+ */
+const _deleteLast = (str, length = 1) => {
+  return _deleteLength(
+    str, str.length - length, length,
+  );
+};
+
+const deleteLast = (str, length = 1) => {
+  if (isObjectParameter(str, 'str', 'length')) {
+    ({ str, length = 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'deleteLast args(str) is not string',
+    );
+  }
+  if (!isInteger(length)) {
+    throw new TypeError(
+      'deleteLast args(length) is not integer',
+    );
+  }
+  if (!_inRange(length, 0, str.length)) {
+    throw new RangeError(
+      'deleteLast args(length) must be from 0 to str.length',
+    );
+  }
+
+  return _deleteLast(str, length);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
@@ -545,6 +706,7 @@ module.exports = {
   _isFirst, _isLast, _isBothEnds,
   _includeFirst, _includeLast, _includeBothEnds,
   _subIndex, _subLength, _subFirst, _subLast,
+  _deleteIndex, _deleteLength, _deleteFirst, _deleteLast,
 
   repeat,
   isLowerCase, isUpperCase,
@@ -552,5 +714,6 @@ module.exports = {
   isFirst, isLast, isBothEnds,
   includeFirst, includeLast, includeBothEnds,
   subIndex, subLength, subFirst, subLast,
+  deleteIndex, deleteLength, deleteFirst, deleteLast,
 
 };

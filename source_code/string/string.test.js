@@ -16,6 +16,8 @@ const test_execute_string = (parts) => {
       includeFirst, includeLast, includeBothEnds,
       subIndex, subLength,
       subFirst, subLast,
+      deleteIndex, deleteLength,
+      deleteFirst, deleteLast,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -771,6 +773,144 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_deleteIndex = () => {
+      it('test_deleteIndex', () => {
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -2)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -1)));
+        checkEqual('1234',  deleteIndex('01234', 0));
+        checkEqual('0234',  deleteIndex('01234', 1));
+        checkEqual('0134',  deleteIndex('01234', 2));
+        checkEqual('0124',  deleteIndex('01234', 3));
+        checkEqual('0123',  deleteIndex('01234', 4));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', 6)));
+
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -2, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -1, 0)));
+        checkEqual('1234',  deleteIndex('01234', 0, 0));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  1, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  2, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  3, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  4, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  5, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  6, 0)));
+
+        testCounter();
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -2, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -1, 3)));
+        checkEqual('4',     deleteIndex('01234', 0, 3));
+        checkEqual('04',    deleteIndex('01234', 1, 3));
+        checkEqual('014',   deleteIndex('01234', 2, 3));
+        checkEqual('0124',  deleteIndex('01234', 3, 3));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  4, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  5, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  6, 3)));
+
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -2, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -1, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  0, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  1, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  2, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  3, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  4, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  5, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  6, 5)));
+
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -2, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234', -1, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  0, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  1, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  2, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  3, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  4, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  5, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex('01234',  6, 6)));
+      });
+    };
+
+    const test_deleteLength = () => {
+      it('test_deleteLength', () => {
+        checkEqual(true,  isThrown(() => deleteLength('01234', -2)));
+        checkEqual(true,  isThrown(() => deleteLength('01234', -1)));
+        checkEqual('',      deleteLength('01234', 0));
+        checkEqual('0',     deleteLength('01234', 1));
+        checkEqual('01',    deleteLength('01234', 2));
+        checkEqual('012',   deleteLength('01234', 3));
+        checkEqual('0123',  deleteLength('01234', 4));
+        checkEqual(true,  isThrown(() => deleteLength('01234', 5)));
+        checkEqual(true,  isThrown(() => deleteLength('01234', 6)));
+
+        checkEqual(true,  isThrown(() => deleteLength('01234', -2, 0)));
+        checkEqual(true,  isThrown(() => deleteLength('01234', -1, 0)));
+        checkEqual('01234', deleteLength('01234', 0, 0));
+        checkEqual('01234', deleteLength('01234', 1, 0));
+        checkEqual('01234', deleteLength('01234', 2, 0));
+        checkEqual('01234', deleteLength('01234', 3, 0));
+        checkEqual('01234', deleteLength('01234', 4, 0));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  5, 0)));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  6, 0)));
+
+        checkEqual(true,  isThrown(() => deleteLength('01234', -2, 3)));
+        checkEqual(true,  isThrown(() => deleteLength('01234', -1, 3)));
+        checkEqual('34',    deleteLength('01234', 0, 3));
+        checkEqual('04',    deleteLength('01234', 1, 3));
+        checkEqual('01',    deleteLength('01234', 2, 3));
+        checkEqual('012',   deleteLength('01234', 3, 3));
+        checkEqual('0123',  deleteLength('01234', 4, 3));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  5, 3)));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  6, 3)));
+
+        checkEqual(true,  isThrown(() => deleteLength('01234', -2, 5)));
+        checkEqual(true,  isThrown(() => deleteLength('01234', -1, 5)));
+        checkEqual('',      deleteLength('01234', 0, 5));
+        checkEqual('0',     deleteLength('01234', 1, 5));
+        checkEqual('01',    deleteLength('01234', 2, 5));
+        checkEqual('012',   deleteLength('01234', 3, 5));
+        checkEqual('0123',  deleteLength('01234', 4, 5));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  5, 5)));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  6, 5)));
+
+        checkEqual(true,  isThrown(() => deleteLength('01234', -2, 6)));
+        checkEqual(true,  isThrown(() => deleteLength('01234', -1, 6)));
+        checkEqual('',      deleteLength('01234', 0, 6));
+        checkEqual('0',     deleteLength('01234', 1, 6));
+        checkEqual('01',    deleteLength('01234', 2, 6));
+        checkEqual('012',   deleteLength('01234', 3, 6));
+        checkEqual('0123',  deleteLength('01234', 4, 6));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  5, 6)));
+        checkEqual(true,  isThrown(() => deleteLength('01234',  6, 6)));
+
+      });
+    };
+
+    const test_deleteFirst = () => {
+      it('test_deleteFirst', () => {
+        checkEqual(true,  isThrown(() => deleteFirst('01234', -2)));
+        checkEqual(true,  isThrown(() => deleteFirst('01234', -1)));
+        checkEqual('01234', deleteFirst('01234', 0));
+        checkEqual('1234',  deleteFirst('01234', 1));
+        checkEqual('234',   deleteFirst('01234', 2));
+        checkEqual('34',    deleteFirst('01234', 3));
+        checkEqual('4',     deleteFirst('01234', 4));
+        checkEqual('',      deleteFirst('01234', 5));
+        checkEqual(true,  isThrown(() => deleteFirst('01234', 6)));
+      });
+    };
+
+    const test_deleteLast = () => {
+      it('test_deleteLast', () => {
+        checkEqual(true,  isThrown(() => deleteLast('01234', -2)));
+        checkEqual(true,  isThrown(() => deleteLast('01234', -1)));
+        checkEqual('01234', deleteLast('01234', 0));
+        checkEqual('0123',  deleteLast('01234', 1));
+        checkEqual('012',   deleteLast('01234', 2));
+        checkEqual('01',    deleteLast('01234', 3));
+        checkEqual('0',     deleteLast('01234', 4));
+        checkEqual('',      deleteLast('01234', 5));
+        checkEqual(true,  isThrown(() => deleteLast('01234', 6)));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -793,6 +933,11 @@ const test_execute_string = (parts) => {
     test_subLength();
     test_subFirst();
     test_subLast();
+
+    test_deleteIndex();
+    test_deleteLength();
+    test_deleteFirst();
+    test_deleteLast();
 
   });
 };
