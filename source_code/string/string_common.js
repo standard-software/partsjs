@@ -430,7 +430,9 @@ const subIndex = (
 const _subLength = (
   str, index, length = str.length - index,
 ) => {
-  return str.substring(index, index + length);
+  return _subIndex(str, index, index + length - 1);
+  // same:
+  //  return str.substring(index, index + length);
 };
 
 const subLength = (
