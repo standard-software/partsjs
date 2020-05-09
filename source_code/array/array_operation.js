@@ -143,8 +143,10 @@ const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
  * array.operation.deleteLength
  */
 const _deleteLength = (array, index, length) => {
-  array.splice(index, length);
-  return array;
+  return _deleteIndex(array, index, index + length - 1);
+  // same:
+  //  array.splice(index, length);
+  //  return array;
 };
 
 const deleteLength = (array, index, length) => {

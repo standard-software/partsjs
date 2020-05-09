@@ -729,7 +729,9 @@ const subIndex = (
 const _subLength = (
   array, index, length = array.length - index,
 ) => {
-  return array.slice(index, index + length);
+  return _subIndex(array, index, index + length - 1);
+  // same:
+  //  return array.slice(index, index + length);
 };
 
 const subLength = (
