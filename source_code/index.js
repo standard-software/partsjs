@@ -12,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '5.2.1';
+const VERSION = '5.3.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -155,6 +155,7 @@ propertyNames.STRING_PUBLIC =
   'isLowerCase, isUpperCase,' +
   'indexOfFirst, indexOfLast,' +
   'isFirst, isLast, isBothEnds,' +
+  'includeFirst, includeLast, includeBothEnds,' +
   'subIndex, subLength,' +
   'subFirst, subLast,' +
   '';

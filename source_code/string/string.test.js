@@ -13,6 +13,7 @@ const test_execute_string = (parts) => {
       matchFormat, replaceAll,
       indexOfFirst, indexOfLast,
       isFirst, isLast, isBothEnds,
+      includeFirst, includeLast, includeBothEnds,
       subIndex, subLength,
       subFirst, subLast,
     } = parts.string;
@@ -418,6 +419,91 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_includeFirst = () => {
+      it('test_includeFirst', () => {
+        checkEqual('123',   includeFirst('123', '1'));
+        checkEqual('123',   includeFirst('123', '12'));
+        checkEqual('13123', includeFirst('123', '13'));
+        checkEqual('2123',  includeFirst('123', '2'));
+        checkEqual('ABC',   includeFirst('ABC', 'A'));
+        checkEqual('ABC',   includeFirst('ABC', 'AB'));
+        checkEqual('ACABC', includeFirst('ABC', 'AC'));
+        checkEqual('aABC',  includeFirst('ABC', 'a'));
+        checkEqual('BABC',  includeFirst('ABC', 'B'));
+      });
+    };
+
+    const test_includeLast = () => {
+      it('test_includeLast', () => {
+        checkEqual('123',   includeLast('123', '3'));
+        checkEqual('123',   includeLast('123', '23'));
+        checkEqual('12313', includeLast('123', '13'));
+        checkEqual('1232',  includeLast('123', '2'));
+        checkEqual('ABC',   includeLast('ABC', 'C'));
+        checkEqual('ABC',   includeLast('ABC', 'BC'));
+        checkEqual('ABCAC', includeLast('ABC', 'AC'));
+        checkEqual('ABCc',  includeLast('ABC', 'c'));
+        checkEqual('ABCB',  includeLast('ABC', 'B'));
+      });
+    };
+
+    const test_includeBothEnds = () => {
+      it('test_includeBothEnds', () => {
+        checkEqual('121',     includeBothEnds('121', '1'));
+        checkEqual('21212',   includeBothEnds('121', '2'));
+        checkEqual('121',     includeBothEnds('121', '12', '21'));
+        checkEqual('ABA',     includeBothEnds('ABA', 'A'));
+        checkEqual('aABAa',   includeBothEnds('ABA', 'a'));
+        checkEqual('BABAB',   includeBothEnds('ABA', 'B'));
+        checkEqual('ABAB',    includeBothEnds('ABAB', 'AB'));
+
+        checkEqual('AABADA',  includeBothEnds('ABAD', 'A'));
+        checkEqual('ABAD',    includeBothEnds('ABAD', 'A', 'D'));
+
+        checkEqual('{AB}',    includeBothEnds('{AB}', '{', '}'));
+        checkEqual('{{}}',    includeBothEnds('{{}}', '{', '}'));
+        checkEqual('{A{B}}',  includeBothEnds('A{B}', '{', '}'));
+        checkEqual('}{AB}}',  includeBothEnds('{AB}', '}', '}'));
+        checkEqual('{{AB}{',  includeBothEnds('{AB}', '{', '{'));
+
+        checkEqual('111',     includeBothEnds('1', '1'));
+        checkEqual('11',      includeBothEnds('11', '1'));
+
+        // Object Named Parameter
+        checkEqual('ABA',
+          includeBothEnds({
+            str: 'ABA',
+            value: 'A',
+          }),
+        );
+        checkEqual('aABAa',
+          includeBothEnds({
+            str: 'ABA',
+            value: 'a',
+          }),
+        );
+        checkEqual('ABA',
+          includeBothEnds({
+            str: 'ABA',
+            valueFirst: 'A',
+          }),
+        );
+        checkEqual('AABADA',
+          includeBothEnds({
+            str: 'ABAD',
+            valueFirst: 'A',
+          }),
+        );
+        checkEqual('ABAD',
+          includeBothEnds({
+            str: 'ABAD',
+            valueFirst: 'A',
+            valueLast: 'D',
+          }),
+        );
+      });
+    };
+
     const test_substring_stardard = () => {
       it('test_substring_stardard', () => {
         checkEqual('01234', '01234'.substring(-2));
@@ -696,6 +782,10 @@ const test_execute_string = (parts) => {
     test_isFirst();
     test_isLast();
     test_isBothEnds();
+
+    test_includeFirst();
+    test_includeLast();
+    test_includeBothEnds();
 
     test_substring_stardard();
     test_substr_stardard();

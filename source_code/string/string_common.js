@@ -277,6 +277,109 @@ const isBothEnds = (
 };
 
 /**
+ * string.includeFirst
+ */
+const _includeFirst = (str, value) => {
+  if (!_isFirst(str, value)) {
+    return value + str;
+  }
+  return str;
+};
+
+const includeFirst = (str, value) => {
+  if (isObjectParameter(str, 'str, value')) {
+    ({ str, value } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'includeFirst args(str) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'includeFirst args(value) is not string',
+    );
+  }
+
+  return _includeFirst(str, value);
+};
+
+/**
+ * string.includeLast
+ */
+const _includeLast = (str, value) => {
+  if (!_isLast(str, value)) {
+    return str + value;
+  }
+  return str;
+};
+
+const includeLast = (str, value) => {
+  if (isObjectParameter(str, 'str, value')) {
+    ({ str, value } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'includeLast args(str) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'includeLast args(value) is not string',
+    );
+  }
+
+  return _includeLast(str, value);
+};
+
+/**
+ * string.includeBothEnds
+ */
+const _includeBothEnds = (
+  str, valueFirst, valueLast = valueFirst,
+) => {
+  if (!_isBothEnds(str, valueFirst, valueLast)) {
+    return valueFirst + str + valueLast;
+  }
+  return str;
+};
+
+const includeBothEnds = (
+  str, valueFirst, valueLast = valueFirst,
+) => {
+  if (isObjectParameter(str, 'str, valueFirst', 'valueLast')) {
+    ({ str, valueFirst, valueLast = valueFirst } = str);
+  } else if (isObjectParameter(str, 'str, value')) {
+    ({ str, value: valueFirst } = str);
+    valueLast = valueFirst;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'includeBothEnds args(str) is not string',
+    );
+  }
+  if (!isString(valueFirst)) {
+    throw new TypeError(
+      'includeBothEnds args(valueFirst) is not string',
+    );
+  }
+  if (!isString(valueLast)) {
+    throw new TypeError(
+      'includeBothEnds args(valueLast) is not string',
+    );
+  }
+
+  return _includeBothEnds(
+    str,
+    valueFirst,
+    valueLast,
+  );
+};
+
+/**
  * subIndex
  */
 const _subIndex = (
@@ -440,14 +543,14 @@ module.exports = {
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
   _isFirst, _isLast, _isBothEnds,
-  _subIndex, _subLength,
-  _subFirst, _subLast,
+  _includeFirst, _includeLast, _includeBothEnds,
+  _subIndex, _subLength, _subFirst, _subLast,
 
   repeat,
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
   isFirst, isLast, isBothEnds,
-  subIndex, subLength,
-  subFirst, subLast,
+  includeFirst, includeLast, includeBothEnds,
+  subIndex, subLength, subFirst, subLast,
 
 };
