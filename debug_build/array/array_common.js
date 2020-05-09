@@ -779,7 +779,8 @@ var subIndex = function subIndex(array, indexStart) {
 
 var _subLength = function _subLength(array, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
-  return array.slice(index, index + length);
+  return _subIndex(array, index, index + length - 1); // same:
+  //  return array.slice(index, index + length);
 };
 
 var subLength = function subLength(array, index) {

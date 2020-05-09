@@ -119,46 +119,6 @@ var add = function add(array, valueArray) {
   return _add(array, valueArray, index);
 };
 /**
- * array.operation.deleteLength
- */
-
-
-var _deleteLength = function _deleteLength(array, index, length) {
-  array.splice(index, length);
-  return array;
-};
-
-var deleteLength = function deleteLength(array, index, length) {
-  if (isObjectParameter(array, 'array, index, length')) {
-    var _array3 = array;
-    array = _array3.array;
-    index = _array3.index;
-    length = _array3.length;
-  }
-
-  if (!isArray(array)) {
-    throw new TypeError('deleteLength args(array) is not array');
-  }
-
-  if (!isInteger(index)) {
-    throw new TypeError('deleteLength args(index) is not integer');
-  }
-
-  if (!isInteger(length)) {
-    throw new TypeError('deleteLength args(length) is not integer');
-  }
-
-  if (!_inRange(index, 0, array.length - 1)) {
-    throw new RangeError('deleteLength args(index) must be from 0 to array.length - 1');
-  }
-
-  if (!_inRange(length, 1, array.length - index)) {
-    throw new RangeError('deleteLength args(length) must be from 1 to array.length - index');
-  }
-
-  return _deleteLength(array, index, length);
-};
-/**
  * array.operation.deleteIndex
  */
 
@@ -173,17 +133,17 @@ var deleteIndex = function deleteIndex(array, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
+    var _array3 = array;
+    array = _array3.array;
+    indexStart = _array3.indexStart;
+    var _array3$indexEnd = _array3.indexEnd;
+    indexEnd = _array3$indexEnd === void 0 ? indexStart : _array3$indexEnd;
+  } else if (isObjectParameter(array, 'array, index')) {
     var _array4 = array;
     array = _array4.array;
-    indexStart = _array4.indexStart;
+    indexStart = _array4.index;
     var _array4$indexEnd = _array4.indexEnd;
     indexEnd = _array4$indexEnd === void 0 ? indexStart : _array4$indexEnd;
-  } else if (isObjectParameter(array, 'array, index')) {
-    var _array5 = array;
-    array = _array5.array;
-    indexStart = _array5.index;
-    var _array5$indexEnd = _array5.indexEnd;
-    indexEnd = _array5$indexEnd === void 0 ? indexStart : _array5$indexEnd;
   }
 
   if (!isArray(array)) {
@@ -207,6 +167,47 @@ var deleteIndex = function deleteIndex(array, indexStart) {
   }
 
   return _deleteIndex(array, indexStart, indexEnd);
+};
+/**
+ * array.operation.deleteLength
+ */
+
+
+var _deleteLength = function _deleteLength(array, index, length) {
+  return _deleteIndex(array, index, index + length - 1); // same:
+  //  array.splice(index, length);
+  //  return array;
+};
+
+var deleteLength = function deleteLength(array, index, length) {
+  if (isObjectParameter(array, 'array, index, length')) {
+    var _array5 = array;
+    array = _array5.array;
+    index = _array5.index;
+    length = _array5.length;
+  }
+
+  if (!isArray(array)) {
+    throw new TypeError('deleteLength args(array) is not array');
+  }
+
+  if (!isInteger(index)) {
+    throw new TypeError('deleteLength args(index) is not integer');
+  }
+
+  if (!isInteger(length)) {
+    throw new TypeError('deleteLength args(length) is not integer');
+  }
+
+  if (!_inRange(index, 0, array.length - 1)) {
+    throw new RangeError('deleteLength args(index) must be from 0 to array.length - 1');
+  }
+
+  if (!_inRange(length, 1, array.length - index)) {
+    throw new RangeError('deleteLength args(length) must be from 1 to array.length - index');
+  }
+
+  return _deleteLength(array, index, length);
 };
 /**
  * array.operation.deleteFirst

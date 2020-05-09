@@ -18,10 +18,20 @@ var test_execute_string = function test_execute_string(parts) {
         isFirst = _parts$string.isFirst,
         isLast = _parts$string.isLast,
         isBothEnds = _parts$string.isBothEnds,
+        includeFirst = _parts$string.includeFirst,
+        includeLast = _parts$string.includeLast,
+        includeBothEnds = _parts$string.includeBothEnds,
+        excludeFirst = _parts$string.excludeFirst,
+        excludeLast = _parts$string.excludeLast,
+        excludeBothEnds = _parts$string.excludeBothEnds,
         subIndex = _parts$string.subIndex,
         subLength = _parts$string.subLength,
         subFirst = _parts$string.subFirst,
-        subLast = _parts$string.subLast;
+        subLast = _parts$string.subLast,
+        deleteIndex = _parts$string.deleteIndex,
+        deleteLength = _parts$string.deleteLength,
+        deleteFirst = _parts$string.deleteFirst,
+        deleteLast = _parts$string.deleteLast;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -448,6 +458,149 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_includeFirst = function test_includeFirst() {
+      it('test_includeFirst', function () {
+        checkEqual('123', includeFirst('123', '1'));
+        checkEqual('123', includeFirst('123', '12'));
+        checkEqual('13123', includeFirst('123', '13'));
+        checkEqual('2123', includeFirst('123', '2'));
+        checkEqual('ABC', includeFirst('ABC', 'A'));
+        checkEqual('ABC', includeFirst('ABC', 'AB'));
+        checkEqual('ACABC', includeFirst('ABC', 'AC'));
+        checkEqual('aABC', includeFirst('ABC', 'a'));
+        checkEqual('BABC', includeFirst('ABC', 'B'));
+      });
+    };
+
+    var test_includeLast = function test_includeLast() {
+      it('test_includeLast', function () {
+        checkEqual('123', includeLast('123', '3'));
+        checkEqual('123', includeLast('123', '23'));
+        checkEqual('12313', includeLast('123', '13'));
+        checkEqual('1232', includeLast('123', '2'));
+        checkEqual('ABC', includeLast('ABC', 'C'));
+        checkEqual('ABC', includeLast('ABC', 'BC'));
+        checkEqual('ABCAC', includeLast('ABC', 'AC'));
+        checkEqual('ABCc', includeLast('ABC', 'c'));
+        checkEqual('ABCB', includeLast('ABC', 'B'));
+      });
+    };
+
+    var test_includeBothEnds = function test_includeBothEnds() {
+      it('test_includeBothEnds', function () {
+        checkEqual('121', includeBothEnds('121', '1'));
+        checkEqual('21212', includeBothEnds('121', '2'));
+        checkEqual('121', includeBothEnds('121', '12', '21'));
+        checkEqual('ABA', includeBothEnds('ABA', 'A'));
+        checkEqual('aABAa', includeBothEnds('ABA', 'a'));
+        checkEqual('BABAB', includeBothEnds('ABA', 'B'));
+        checkEqual('ABAB', includeBothEnds('ABAB', 'AB'));
+        checkEqual('AABADA', includeBothEnds('ABAD', 'A'));
+        checkEqual('ABAD', includeBothEnds('ABAD', 'A', 'D'));
+        checkEqual('{AB}', includeBothEnds('{AB}', '{', '}'));
+        checkEqual('{{}}', includeBothEnds('{{}}', '{', '}'));
+        checkEqual('{A{B}}', includeBothEnds('A{B}', '{', '}'));
+        checkEqual('}{AB}}', includeBothEnds('{AB}', '}', '}'));
+        checkEqual('{{AB}{', includeBothEnds('{AB}', '{', '{'));
+        checkEqual('111', includeBothEnds('1', '1'));
+        checkEqual('11', includeBothEnds('11', '1')); // Object Named Parameter
+
+        checkEqual('ABA', includeBothEnds({
+          str: 'ABA',
+          value: 'A'
+        }));
+        checkEqual('aABAa', includeBothEnds({
+          str: 'ABA',
+          value: 'a'
+        }));
+        checkEqual('ABA', includeBothEnds({
+          str: 'ABA',
+          valueFirst: 'A'
+        }));
+        checkEqual('AABADA', includeBothEnds({
+          str: 'ABAD',
+          valueFirst: 'A'
+        }));
+        checkEqual('ABAD', includeBothEnds({
+          str: 'ABAD',
+          valueFirst: 'A',
+          valueLast: 'D'
+        }));
+      });
+    };
+
+    var test_excludeFirst = function test_excludeFirst() {
+      it('test_excludeFirst', function () {
+        checkEqual('23', excludeFirst('123', '1'));
+        checkEqual('3', excludeFirst('123', '12'));
+        checkEqual('123', excludeFirst('123', '13'));
+        checkEqual('123', excludeFirst('123', '2'));
+        checkEqual('BC', excludeFirst('ABC', 'A'));
+        checkEqual('C', excludeFirst('ABC', 'AB'));
+        checkEqual('ABC', excludeFirst('ABC', 'AC'));
+        checkEqual('ABC', excludeFirst('ABC', 'a'));
+        checkEqual('ABC', excludeFirst('ABC', 'B'));
+      });
+    };
+
+    var test_excludeLast = function test_excludeLast() {
+      it('test_excludeLast', function () {
+        checkEqual('12', excludeLast('123', '3'));
+        checkEqual('1', excludeLast('123', '23'));
+        checkEqual('123', excludeLast('123', '13'));
+        checkEqual('123', excludeLast('123', '2'));
+        checkEqual('AB', excludeLast('ABC', 'C'));
+        checkEqual('A', excludeLast('ABC', 'BC'));
+        checkEqual('ABC', excludeLast('ABC', 'AC'));
+        checkEqual('ABC', excludeLast('ABC', 'c'));
+        checkEqual('ABC', excludeLast('ABC', 'B'));
+      });
+    };
+
+    var test_excludeBothEnds = function test_excludeBothEnds() {
+      it('test_excludeBothEnds', function () {
+        checkEqual('2', excludeBothEnds('121', '1'));
+        checkEqual('121', excludeBothEnds('121', '2'));
+        checkEqual('', excludeBothEnds('121', '12', '21'));
+        checkEqual('B', excludeBothEnds('ABA', 'A'));
+        checkEqual('ABA', excludeBothEnds('ABA', 'a'));
+        checkEqual('ABA', excludeBothEnds('ABA', 'B'));
+        checkEqual('', excludeBothEnds('ABAB', 'AB'));
+        checkEqual('ABAD', excludeBothEnds('ABAD', 'A'));
+        checkEqual('BA', excludeBothEnds('ABAD', 'A', 'D'));
+        testCounter();
+        checkEqual('AB', excludeBothEnds('{AB}', '{', '}'));
+        checkEqual('{}', excludeBothEnds('{{}}', '{', '}'));
+        checkEqual('A{B}', excludeBothEnds('A{B}', '{', '}'));
+        checkEqual('{AB}', excludeBothEnds('{AB}', '}', '}'));
+        checkEqual('{AB}', excludeBothEnds('{AB}', '{', '{'));
+        checkEqual('1', excludeBothEnds('1', '1'));
+        checkEqual('', excludeBothEnds('11', '1')); // Object Named Parameter
+
+        checkEqual('B', excludeBothEnds({
+          str: 'ABA',
+          value: 'A'
+        }));
+        checkEqual('ABA', excludeBothEnds({
+          str: 'ABA',
+          value: 'a'
+        }));
+        checkEqual('B', excludeBothEnds({
+          str: 'ABA',
+          valueFirst: 'A'
+        }));
+        checkEqual('ABAD', excludeBothEnds({
+          str: 'ABAD',
+          valueFirst: 'A'
+        }));
+        checkEqual('BA', excludeBothEnds({
+          str: 'ABAD',
+          valueFirst: 'A',
+          valueLast: 'D'
+        }));
+      });
+    };
+
     var test_substring_stardard = function test_substring_stardard() {
       it('test_substring_stardard', function () {
         checkEqual('01234', '01234'.substring(-2));
@@ -834,6 +987,257 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_deleteIndex = function test_deleteIndex() {
+      it('test_deleteIndex', function () {
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -1);
+        }));
+        checkEqual('1234', deleteIndex('01234', 0));
+        checkEqual('0234', deleteIndex('01234', 1));
+        checkEqual('0134', deleteIndex('01234', 2));
+        checkEqual('0124', deleteIndex('01234', 3));
+        checkEqual('0123', deleteIndex('01234', 4));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -1, 0);
+        }));
+        checkEqual('1234', deleteIndex('01234', 0, 0));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 1, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 3, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 4, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 6, 0);
+        }));
+        testCounter();
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -2, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -1, 3);
+        }));
+        checkEqual('4', deleteIndex('01234', 0, 3));
+        checkEqual('04', deleteIndex('01234', 1, 3));
+        checkEqual('014', deleteIndex('01234', 2, 3));
+        checkEqual('0124', deleteIndex('01234', 3, 3));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 4, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 5, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 0, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 3, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 4, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', -1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 0, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 3, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 4, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex('01234', 6, 6);
+        }));
+      });
+    };
+
+    var test_deleteLength = function test_deleteLength() {
+      it('test_deleteLength', function () {
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -1);
+        }));
+        checkEqual('', deleteLength('01234', 0));
+        checkEqual('0', deleteLength('01234', 1));
+        checkEqual('01', deleteLength('01234', 2));
+        checkEqual('012', deleteLength('01234', 3));
+        checkEqual('0123', deleteLength('01234', 4));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -1, 0);
+        }));
+        checkEqual('01234', deleteLength('01234', 0, 0));
+        checkEqual('01234', deleteLength('01234', 1, 0));
+        checkEqual('01234', deleteLength('01234', 2, 0));
+        checkEqual('01234', deleteLength('01234', 3, 0));
+        checkEqual('01234', deleteLength('01234', 4, 0));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 6, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -2, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -1, 3);
+        }));
+        checkEqual('34', deleteLength('01234', 0, 3));
+        checkEqual('04', deleteLength('01234', 1, 3));
+        checkEqual('01', deleteLength('01234', 2, 3));
+        checkEqual('012', deleteLength('01234', 3, 3));
+        checkEqual('0123', deleteLength('01234', 4, 3));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 5, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -1, 5);
+        }));
+        checkEqual('', deleteLength('01234', 0, 5));
+        checkEqual('0', deleteLength('01234', 1, 5));
+        checkEqual('01', deleteLength('01234', 2, 5));
+        checkEqual('012', deleteLength('01234', 3, 5));
+        checkEqual('0123', deleteLength('01234', 4, 5));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', -1, 6);
+        }));
+        checkEqual('', deleteLength('01234', 0, 6));
+        checkEqual('0', deleteLength('01234', 1, 6));
+        checkEqual('01', deleteLength('01234', 2, 6));
+        checkEqual('012', deleteLength('01234', 3, 6));
+        checkEqual('0123', deleteLength('01234', 4, 6));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength('01234', 6, 6);
+        }));
+      });
+    };
+
+    var test_deleteFirst = function test_deleteFirst() {
+      it('test_deleteFirst', function () {
+        checkEqual(true, isThrown(function () {
+          return deleteFirst('01234', -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteFirst('01234', -1);
+        }));
+        checkEqual('01234', deleteFirst('01234', 0));
+        checkEqual('1234', deleteFirst('01234', 1));
+        checkEqual('234', deleteFirst('01234', 2));
+        checkEqual('34', deleteFirst('01234', 3));
+        checkEqual('4', deleteFirst('01234', 4));
+        checkEqual('', deleteFirst('01234', 5));
+        checkEqual(true, isThrown(function () {
+          return deleteFirst('01234', 6);
+        }));
+      });
+    };
+
+    var test_deleteLast = function test_deleteLast() {
+      it('test_deleteLast', function () {
+        checkEqual(true, isThrown(function () {
+          return deleteLast('01234', -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLast('01234', -1);
+        }));
+        checkEqual('01234', deleteLast('01234', 0));
+        checkEqual('0123', deleteLast('01234', 1));
+        checkEqual('012', deleteLast('01234', 2));
+        checkEqual('01', deleteLast('01234', 3));
+        checkEqual('0', deleteLast('01234', 4));
+        checkEqual('', deleteLast('01234', 5));
+        checkEqual(true, isThrown(function () {
+          return deleteLast('01234', 6);
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -843,12 +1247,22 @@ var test_execute_string = function test_execute_string(parts) {
     test_isFirst();
     test_isLast();
     test_isBothEnds();
+    test_includeFirst();
+    test_includeLast();
+    test_includeBothEnds();
+    test_excludeFirst();
+    test_excludeLast();
+    test_excludeBothEnds();
     test_substring_stardard();
     test_substr_stardard();
     test_subIndex();
     test_subLength();
     test_subFirst();
     test_subLast();
+    test_deleteIndex();
+    test_deleteLength();
+    test_deleteFirst();
+    test_deleteLast();
   });
 };
 
