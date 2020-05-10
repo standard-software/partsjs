@@ -140,7 +140,7 @@ var _array = __webpack_require__(26);
 
 var _consoleHook = __webpack_require__(37);
 
-var VERSION = '5.3.0';
+var VERSION = '5.3.1 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -2372,17 +2372,22 @@ var matchValue = function matchValue(value, compare, valueWhenMatched) {
 
 
 var _initialValue = function _initialValue(value, valueWhenMatched) {
-  return _matchValue(value, isUndefined, valueWhenMatched);
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+  return _matchSomeValue(value, compareArray, valueWhenMatched);
 };
 
 var initialValue = function initialValue(value, valueWhenMatched) {
-  if (isObjectParameter(value, 'value, valueWhenMatched')) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+
+  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
     var _value3 = value;
     value = _value3.value;
     valueWhenMatched = _value3.valueWhenMatched;
+    var _value3$compareArray = _value3.compareArray;
+    compareArray = _value3$compareArray === void 0 ? [undefined] : _value3$compareArray;
   }
 
-  return _initialValue(value, valueWhenMatched);
+  return _initialValue(value, valueWhenMatched, compareArray);
 };
 /**
  * allMatch
@@ -4759,18 +4764,22 @@ var deleteIndex = function deleteIndex(array, indexStart) {
  */
 
 
-var _deleteLength = function _deleteLength(array, index, length) {
+var _deleteLength = function _deleteLength(array, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
   return _deleteIndex(array, index, index + length - 1); // same:
   //  array.splice(index, length);
   //  return array;
 };
 
-var deleteLength = function deleteLength(array, index, length) {
-  if (isObjectParameter(array, 'array, index, length')) {
+var deleteLength = function deleteLength(array, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
+
+  if (isObjectParameter(array, 'array, index', 'length')) {
     var _array5 = array;
     array = _array5.array;
     index = _array5.index;
-    length = _array5.length;
+    var _array5$length = _array5.length;
+    length = _array5$length === void 0 ? array.length - index : _array5$length;
   }
 
   if (!isArray(array)) {
@@ -4789,8 +4798,10 @@ var deleteLength = function deleteLength(array, index, length) {
     throw new RangeError('deleteLength args(index) must be from 0 to array.length - 1');
   }
 
-  if (!_inRange(length, 1, array.length - index)) {
-    throw new RangeError('deleteLength args(length) must be from 1 to array.length - index');
+  length = _min([length, array.length - index]);
+
+  if (!_inRange(length, 0, array.length - index)) {
+    throw new RangeError('deleteLength args(length) must be from 0 to array.length - index');
   }
 
   return _deleteLength(array, index, length);

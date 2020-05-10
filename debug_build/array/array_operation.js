@@ -173,18 +173,22 @@ var deleteIndex = function deleteIndex(array, indexStart) {
  */
 
 
-var _deleteLength = function _deleteLength(array, index, length) {
+var _deleteLength = function _deleteLength(array, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
   return _deleteIndex(array, index, index + length - 1); // same:
   //  array.splice(index, length);
   //  return array;
 };
 
-var deleteLength = function deleteLength(array, index, length) {
-  if (isObjectParameter(array, 'array, index, length')) {
+var deleteLength = function deleteLength(array, index) {
+  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
+
+  if (isObjectParameter(array, 'array, index', 'length')) {
     var _array5 = array;
     array = _array5.array;
     index = _array5.index;
-    length = _array5.length;
+    var _array5$length = _array5.length;
+    length = _array5$length === void 0 ? array.length - index : _array5$length;
   }
 
   if (!isArray(array)) {
@@ -203,8 +207,10 @@ var deleteLength = function deleteLength(array, index, length) {
     throw new RangeError('deleteLength args(index) must be from 0 to array.length - 1');
   }
 
-  if (!_inRange(length, 1, array.length - index)) {
-    throw new RangeError('deleteLength args(length) must be from 1 to array.length - index');
+  length = _min([length, array.length - index]);
+
+  if (!_inRange(length, 0, array.length - index)) {
+    throw new RangeError('deleteLength args(length) must be from 0 to array.length - index');
   }
 
   return _deleteLength(array, index, length);

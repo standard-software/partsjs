@@ -25865,7 +25865,8 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual = _parts$test2.checkEqual,
         checkCompare = _parts$test2.checkCompare,
         isThrown = _parts$test2.isThrown,
-        isThrownException = _parts$test2.isThrownException;
+        isThrownException = _parts$test2.isThrownException,
+        testCounter = _parts$test2.testCounter;
     var array = parts.array;
     var isFirst = array.isFirst,
         isLast = array.isLast,
@@ -26681,47 +26682,126 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
-    var test_operation_deleteLength = function test_operation_deleteLength() {
-      it('test_operation_deleteLength', function () {
-        checkEqual(true, equal([1, 3], deleteLength([1, 2, 3], 1, 1)));
-        checkEqual(true, equal([3], deleteLength([1, 2, 3], 0, 2)));
-        checkEqual(true, equal([1], deleteLength([1, 2, 3], 1, 2))); // exception
-
-        checkEqual(true, isThrownException(function () {
-          deleteLength([1, 2, 3], [0], 1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          deleteLength([1, 2, 3], 0, 1);
-        }));
-        checkEqual(false, isThrownException(function () {
-          deleteLength([1, 2, 3], 0, 2);
-        }));
-        checkEqual(false, isThrownException(function () {
-          deleteLength([1, 2, 3], 0, 3);
-        }));
-        checkEqual(true, isThrownException(function () {
-          deleteLength([1, 2, 3], 0, 0);
-        }, 'RangeError'));
-        checkEqual(true, isThrownException(function () {
-          deleteLength([1, 2, 3], 0, 4);
-        }, 'RangeError'));
-        checkEqual(true, isThrownException(function () {
-          deleteLength([1, 2, 3], -1, 2);
-        }, 'RangeError')); // Object Named Parameter
-
-        checkEqual(true, equal([0, 3], deleteLength({
-          array: [0, 1, 2, 3],
-          index: 1,
-          length: 2
-        })));
-      });
-    };
-
     var test_operation_deleteIndex = function test_operation_deleteIndex() {
       it('test_operation_deleteIndex', function () {
-        checkEqual(true, equal([1, 3], deleteIndex([1, 2, 3], 1, 1)));
-        checkEqual(true, equal([3], deleteIndex([1, 2, 3], 0, 1)));
-        checkEqual(true, equal([1], deleteIndex([1, 2, 3], 1, 2))); // exception
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, equal([0, 1, 3, 4], deleteIndex(array1, 2)));
+        checkEqual(true, equal([0, 1, 3, 4], array1));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -1);
+        }));
+        checkEqual(true, equal([1, 2, 3, 4], deleteIndex([0, 1, 2, 3, 4], 0)));
+        checkEqual(true, equal([0, 2, 3, 4], deleteIndex([0, 1, 2, 3, 4], 1)));
+        checkEqual(true, equal([0, 1, 3, 4], deleteIndex([0, 1, 2, 3, 4], 2)));
+        checkEqual(true, equal([0, 1, 2, 4], deleteIndex([0, 1, 2, 3, 4], 3)));
+        checkEqual(true, equal([0, 1, 2, 3], deleteIndex([0, 1, 2, 3, 4], 4)));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -1, 0);
+        }));
+        checkEqual(true, equal([1, 2, 3, 4], deleteIndex([0, 1, 2, 3, 4], 0, 0)));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 1, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 3, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 4, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 6, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -2, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -1, 3);
+        }));
+        checkEqual(true, equal([4], deleteIndex([0, 1, 2, 3, 4], 0, 3)));
+        checkEqual(true, equal([0, 4], deleteIndex([0, 1, 2, 3, 4], 1, 3)));
+        checkEqual(true, equal([0, 1, 4], deleteIndex([0, 1, 2, 3, 4], 2, 3)));
+        checkEqual(true, equal([0, 1, 2, 4], deleteIndex([0, 1, 2, 3, 4], 3, 3)));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 4, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 5, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 0, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 1, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 3, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 4, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], -1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 0, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 1, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 3, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 4, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteIndex([0, 1, 2, 3, 4], 6, 6);
+        })); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteIndex([1, 2, 3], [0], 1);
@@ -26757,6 +26837,128 @@ var test_execute_array = function test_execute_array(parts) {
           array: [0, 1, 2, 3],
           indexStart: 1,
           indexEnd: 2
+        })));
+      });
+    };
+
+    var test_operation_deleteLength = function test_operation_deleteLength() {
+      it('test_operation_deleteLength', function () {
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, equal([0, 1], deleteLength(array1, 2)));
+        checkEqual(true, equal([0, 1], array1));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -1);
+        }));
+        checkEqual(true, equal([], deleteLength([0, 1, 2, 3, 4], 0)));
+        checkEqual(true, equal([0], deleteLength([0, 1, 2, 3, 4], 1)));
+        checkEqual(true, equal([0, 1], deleteLength([0, 1, 2, 3, 4], 2)));
+        checkEqual(true, equal([0, 1, 2], deleteLength([0, 1, 2, 3, 4], 3)));
+        checkEqual(true, equal([0, 1, 2, 3], deleteLength([0, 1, 2, 3, 4], 4)));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -2, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -1, 0);
+        }));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteLength([0, 1, 2, 3, 4], 0, 0)));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteLength([0, 1, 2, 3, 4], 1, 0)));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteLength([0, 1, 2, 3, 4], 2, 0)));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteLength([0, 1, 2, 3, 4], 3, 0)));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteLength([0, 1, 2, 3, 4], 4, 0)));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 5, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 6, 0);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -2, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -1, 3);
+        }));
+        checkEqual(true, equal([3, 4], deleteLength([0, 1, 2, 3, 4], 0, 3)));
+        checkEqual(true, equal([0, 4], deleteLength([0, 1, 2, 3, 4], 1, 3)));
+        checkEqual(true, equal([0, 1], deleteLength([0, 1, 2, 3, 4], 2, 3)));
+        checkEqual(true, equal([0, 1, 2], deleteLength([0, 1, 2, 3, 4], 3, 3)));
+        checkEqual(true, equal([0, 1, 2, 3], deleteLength([0, 1, 2, 3, 4], 4, 3)));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 5, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 6, 3);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -2, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -1, 5);
+        }));
+        checkEqual(true, equal([], deleteLength([0, 1, 2, 3, 4], 0, 5)));
+        checkEqual(true, equal([0], deleteLength([0, 1, 2, 3, 4], 1, 5)));
+        checkEqual(true, equal([0, 1], deleteLength([0, 1, 2, 3, 4], 2, 5)));
+        checkEqual(true, equal([0, 1, 2], deleteLength([0, 1, 2, 3, 4], 3, 5)));
+        checkEqual(true, equal([0, 1, 2, 3], deleteLength([0, 1, 2, 3, 4], 4, 5)));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 5, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 6, 5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -2, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], -1, 6);
+        }));
+        checkEqual(true, equal([], deleteLength([0, 1, 2, 3, 4], 0, 6)));
+        checkEqual(true, equal([0], deleteLength([0, 1, 2, 3, 4], 1, 6)));
+        checkEqual(true, equal([0, 1], deleteLength([0, 1, 2, 3, 4], 2, 6)));
+        checkEqual(true, equal([0, 1, 2], deleteLength([0, 1, 2, 3, 4], 3, 6)));
+        checkEqual(true, equal([0, 1, 2, 3], deleteLength([0, 1, 2, 3, 4], 4, 6)));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 5, 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLength([0, 1, 2, 3, 4], 6, 6);
+        }));
+        testCounter(); // exception
+
+        checkEqual(true, isThrownException(function () {
+          deleteLength([1, 2, 3], [0], 1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 1);
+        }));
+        checkEqual(false, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 2);
+        }));
+        checkEqual(false, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 3);
+        }));
+        checkEqual(false, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 0);
+        }));
+        checkEqual(false, isThrownException(function () {
+          deleteLength([1, 2, 3], 0, 4);
+        }));
+        checkEqual(true, isThrownException(function () {
+          deleteLength([1, 2, 3], -1, 2);
+        }, 'RangeError')); // Object Named Parameter
+
+        checkEqual(true, equal([0, 3], deleteLength({
+          array: [0, 1, 2, 3],
+          index: 1,
+          length: 2
         })));
       });
     };
