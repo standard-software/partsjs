@@ -2,6 +2,13 @@
 
 ## Version
 
+### 5.3.2
+#### 2020/05/10(Sun)
+- update test code
+  - add test_isObjectParameter
+  - update test_operation_deleteFirst
+  - update test_operation_deleteLast
+
 ### 5.3.1
 #### 2020/05/10(Sun)
 - update array.operation.deleteLength 
