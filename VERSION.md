@@ -2,6 +2,15 @@
 
 ## Version
 
+### 5.3.1
+#### 2020/05/10(Sun)
+- update array.operation.deleteLength 
+  - default parameter
+  - bugfix range length
+  - update test code
+- update compare.initialValue
+  - add args compareArray
+
 ### 5.3.0
 #### 2020/05/09(Sat)
 - add string
