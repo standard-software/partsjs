@@ -1093,7 +1093,7 @@ const test_execute_compare = (parts) => {
       it('test_initialValue', () => {
         // almost test_matchSome done
         checkEqual('123', initialValue('123', 999));
-        checkEqual(999,  initialValue(undefined, 999));
+        checkEqual(999,   initialValue(undefined, 999));
         checkEqual(null,  initialValue(null, 999));
 
         checkEqual('123', initialValue({

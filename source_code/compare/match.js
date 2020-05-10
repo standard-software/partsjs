@@ -103,21 +103,26 @@ const matchValue = (
 const _initialValue = (
   value,
   valueWhenMatched,
+  compareArray = [undefined],
 ) => {
-  return _matchValue(value, isUndefined, valueWhenMatched);
+  return _matchSomeValue(value, compareArray, valueWhenMatched);
 };
 
 const initialValue = (
   value,
   valueWhenMatched,
+  compareArray = [undefined],
 ) => {
-  if (isObjectParameter(value, 'value, valueWhenMatched')) {
-    ({ value, valueWhenMatched } = value);
+  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
+    ({
+      value, valueWhenMatched, compareArray = [undefined],
+    } = value);
   }
 
   return _initialValue(
     value,
     valueWhenMatched,
+    compareArray,
   );
 };
 
