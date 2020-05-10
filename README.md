@@ -233,6 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.3.1
+#### 2020/05/10(Sun)
+- update array.operation.deleteLength default parameter
+  - update test code
+
 ### 5.3.0
 #### 2020/05/09(Sat)
 - add string

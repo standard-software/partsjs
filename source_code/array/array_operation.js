@@ -142,16 +142,22 @@ const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
 /**
  * array.operation.deleteLength
  */
-const _deleteLength = (array, index, length) => {
+const _deleteLength = (
+  array, index, length = array.length - index,
+) => {
   return _deleteIndex(array, index, index + length - 1);
   // same:
   //  array.splice(index, length);
   //  return array;
 };
 
-const deleteLength = (array, index, length) => {
-  if (isObjectParameter(array, 'array, index, length')) {
-    ({ array, index, length } = array);
+const deleteLength = (
+  array, index, length = array.length - index,
+) => {
+  if (isObjectParameter(array, 'array, index', 'length')) {
+    ({
+      array, index, length  = array.length - index,
+    } = array);
   }
 
   if (!isArray(array)) {
@@ -174,9 +180,10 @@ const deleteLength = (array, index, length) => {
       'deleteLength args(index) must be from 0 to array.length - 1',
     );
   }
-  if (!_inRange(length, 1, array.length - index)) {
+  length = _min([length, array.length - index]);
+  if (!_inRange(length, 0, array.length - index)) {
     throw new RangeError(
-      'deleteLength args(length) must be from 1 to array.length - index',
+      'deleteLength args(length) must be from 0 to array.length - index',
     );
   }
 

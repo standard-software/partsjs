@@ -9,6 +9,7 @@ const test_execute_array = (parts) => {
     const {
       checkEqual, checkCompare,
       isThrown, isThrownException,
+      testCounter,
     } = parts.test;
 
     const {
@@ -895,63 +896,62 @@ const test_execute_array = (parts) => {
       });
     };
 
-    const test_operation_deleteLength = () => {
-      it('test_operation_deleteLength', () => {
-        checkEqual(true , equal([1, 3],
-          deleteLength([1, 2, 3], 1, 1)
-        ));
-        checkEqual(true , equal([3],
-          deleteLength([1, 2, 3], 0, 2)
-        ));
-        checkEqual(true , equal([1],
-          deleteLength([1, 2, 3], 1, 2)
-        ));
-
-        // exception
-        checkEqual(true, isThrownException(() => {
-          deleteLength([1, 2, 3], [0], 1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(() => {
-          deleteLength([1, 2, 3], 0, 1);
-        }));
-        checkEqual(false, isThrownException(() => {
-          deleteLength([1, 2, 3], 0, 2);
-        }));
-        checkEqual(false, isThrownException(() => {
-          deleteLength([1, 2, 3], 0, 3);
-        }));
-        checkEqual(true, isThrownException(() => {
-          deleteLength([1, 2, 3], 0, 0);
-        }, 'RangeError'));
-        checkEqual(true, isThrownException(() => {
-          deleteLength([1, 2, 3], 0, 4);
-        }, 'RangeError'));
-        checkEqual(true, isThrownException(() => {
-          deleteLength([1, 2, 3], -1, 2);
-        }, 'RangeError'));
-
-        // Object Named Parameter
-        checkEqual(true , equal([0, 3],
-          deleteLength({
-            array: [0, 1, 2, 3],
-            index: 1,
-            length: 2,
-          })
-        ));
-      });
-    };
 
     const test_operation_deleteIndex = () => {
       it('test_operation_deleteIndex', () => {
-        checkEqual(true , equal([1, 3],
-          deleteIndex([1, 2, 3], 1, 1)
-        ));
-        checkEqual(true , equal([3],
-          deleteIndex([1, 2, 3], 0, 1)
-        ));
-        checkEqual(true , equal([1],
-          deleteIndex([1, 2, 3], 1, 2)
-        ));
+        var array1 = [0,1,2,3,4];
+        checkEqual(true,  equal([0,1,3,4],    deleteIndex(array1, 2)));
+        checkEqual(true,  equal([0,1,3,4],    array1));
+
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -2)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -1)));
+        checkEqual(true,  equal([1,2,3,4],    deleteIndex([0,1,2,3,4], 0)));
+        checkEqual(true,  equal([0,2,3,4],    deleteIndex([0,1,2,3,4], 1)));
+        checkEqual(true,  equal([0,1,3,4],    deleteIndex([0,1,2,3,4], 2)));
+        checkEqual(true,  equal([0,1,2,4],    deleteIndex([0,1,2,3,4], 3)));
+        checkEqual(true,  equal([0,1,2,3],    deleteIndex([0,1,2,3,4], 4)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 6)));
+
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -2, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -1, 0)));
+        checkEqual(true,  equal([1,2,3,4],    deleteIndex([0,1,2,3,4], 0, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 1, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 2, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 3, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 4, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 5, 0)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], 6, 0)));
+
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -2, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -1, 3)));
+        checkEqual(true,  equal([4],          deleteIndex([0,1,2,3,4], 0, 3)));
+        checkEqual(true,  equal([0,4],        deleteIndex([0,1,2,3,4], 1, 3)));
+        checkEqual(true,  equal([0,1,4],      deleteIndex([0,1,2,3,4], 2, 3)));
+        checkEqual(true,  equal([0,1,2,4],    deleteIndex([0,1,2,3,4], 3, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  4, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  5, 3)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  6, 3)));
+
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -2, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -1, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  0, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  1, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  2, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  3, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  4, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  5, 5)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  6, 5)));
+
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -2, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4], -1, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  0, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  1, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  2, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  3, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  4, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  5, 6)));
+        checkEqual(true,  isThrown(() => deleteIndex([0,1,2,3,4],  6, 6)));
 
         // exception
         checkEqual(true, isThrownException(() => {
@@ -994,6 +994,98 @@ const test_execute_array = (parts) => {
             array: [0, 1, 2, 3],
             indexStart: 1,
             indexEnd: 2,
+          })
+        ));
+      });
+    };
+
+    const test_operation_deleteLength = () => {
+      it('test_operation_deleteLength', () => {
+
+        var array1 = [0,1,2,3,4];
+        checkEqual(true,  equal([0,1],        deleteLength(array1, 2)));
+        checkEqual(true,  equal([0,1],        array1));
+
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -2)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -1)));
+        checkEqual(true,  equal([],           deleteLength([0,1,2,3,4], 0)));
+        checkEqual(true,  equal([0],          deleteLength([0,1,2,3,4], 1)));
+        checkEqual(true,  equal([0,1],        deleteLength([0,1,2,3,4], 2)));
+        checkEqual(true,  equal([0,1,2],      deleteLength([0,1,2,3,4], 3)));
+        checkEqual(true,  equal([0,1,2,3],    deleteLength([0,1,2,3,4], 4)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], 5)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], 6)));
+
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -2, 0)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -1, 0)));
+        checkEqual(true,  equal([0,1,2,3,4],  deleteLength([0,1,2,3,4], 0, 0)));
+        checkEqual(true,  equal([0,1,2,3,4],  deleteLength([0,1,2,3,4], 1, 0)));
+        checkEqual(true,  equal([0,1,2,3,4],  deleteLength([0,1,2,3,4], 2, 0)));
+        checkEqual(true,  equal([0,1,2,3,4],  deleteLength([0,1,2,3,4], 3, 0)));
+        checkEqual(true,  equal([0,1,2,3,4],  deleteLength([0,1,2,3,4], 4, 0)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], 5, 0)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], 6, 0)));
+
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -2, 3)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -1, 3)));
+        checkEqual(true,  equal([3,4],        deleteLength([0,1,2,3,4], 0, 3)));
+        checkEqual(true,  equal([0,4],        deleteLength([0,1,2,3,4], 1, 3)));
+        checkEqual(true,  equal([0,1],        deleteLength([0,1,2,3,4], 2, 3)));
+        checkEqual(true,  equal([0,1,2],      deleteLength([0,1,2,3,4], 3, 3)));
+        checkEqual(true,  equal([0,1,2,3],    deleteLength([0,1,2,3,4], 4, 3)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4],  5, 3)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4],  6, 3)));
+
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -2, 5)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -1, 5)));
+        checkEqual(true,  equal([],           deleteLength([0,1,2,3,4], 0, 5)));
+        checkEqual(true,  equal([0],          deleteLength([0,1,2,3,4], 1, 5)));
+        checkEqual(true,  equal([0,1],        deleteLength([0,1,2,3,4], 2, 5)));
+        checkEqual(true,  equal([0,1,2],      deleteLength([0,1,2,3,4], 3, 5)));
+        checkEqual(true,  equal([0,1,2,3],    deleteLength([0,1,2,3,4], 4, 5)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4],  5, 5)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4],  6, 5)));
+
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -2, 6)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4], -1, 6)));
+        checkEqual(true,  equal([],           deleteLength([0,1,2,3,4], 0, 6)));
+        checkEqual(true,  equal([0],          deleteLength([0,1,2,3,4], 1, 6)));
+        checkEqual(true,  equal([0,1],        deleteLength([0,1,2,3,4], 2, 6)));
+        checkEqual(true,  equal([0,1,2],      deleteLength([0,1,2,3,4], 3, 6)));
+        checkEqual(true,  equal([0,1,2,3],    deleteLength([0,1,2,3,4], 4, 6)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4],  5, 6)));
+        checkEqual(true,  isThrown(() => deleteLength([0,1,2,3,4],  6, 6)));
+
+        testCounter();
+        // exception
+        checkEqual(true, isThrownException(() => {
+          deleteLength([1, 2, 3], [0], 1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 1);
+        }));
+        checkEqual(false, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 2);
+        }));
+        checkEqual(false, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 3);
+        }));
+        checkEqual(false, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 0);
+        }));
+        checkEqual(false, isThrownException(() => {
+          deleteLength([1, 2, 3], 0, 4);
+        }));
+        checkEqual(true, isThrownException(() => {
+          deleteLength([1, 2, 3], -1, 2);
+        }, 'RangeError'));
+
+        // Object Named Parameter
+        checkEqual(true , equal([0, 3],
+          deleteLength({
+            array: [0, 1, 2, 3],
+            index: 1,
+            length: 2,
           })
         ));
       });
