@@ -1116,18 +1116,24 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_deleteFirst = function test_operation_deleteFirst() {
       it('test_operation_deleteFirst', function () {
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([0, 1, 2], deleteFirst(array1, 0)));
-        checkEqual(true, equal([0, 1, 2], array1));
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([1, 2], deleteFirst(array1, 1)));
-        checkEqual(true, equal([1, 2], array1));
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([2], deleteFirst(array1, 2)));
-        checkEqual(true, equal([2], array1));
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([], deleteFirst(array1, 3)));
-        checkEqual(true, equal([], array1)); // exception
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, equal([2, 3, 4], deleteFirst(array1, 2)));
+        checkEqual(true, equal([2, 3, 4], array1));
+        checkEqual(true, isThrown(function () {
+          return deleteFirst([0, 1, 2, 3, 4], -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteFirst([0, 1, 2, 3, 4], -1);
+        }));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteFirst([0, 1, 2, 3, 4], 0)));
+        checkEqual(true, equal([1, 2, 3, 4], deleteFirst([0, 1, 2, 3, 4], 1)));
+        checkEqual(true, equal([2, 3, 4], deleteFirst([0, 1, 2, 3, 4], 2)));
+        checkEqual(true, equal([3, 4], deleteFirst([0, 1, 2, 3, 4], 3)));
+        checkEqual(true, equal([4], deleteFirst([0, 1, 2, 3, 4], 4)));
+        checkEqual(true, equal([], deleteFirst([0, 1, 2, 3, 4], 5)));
+        checkEqual(true, isThrown(function () {
+          return deleteFirst([0, 1, 2, 3, 4], 6);
+        })); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteFirst([1, 2, 3], [0]);
@@ -1160,18 +1166,24 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_deleteLast = function test_operation_deleteLast() {
       it('test_operation_deleteLast', function () {
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([0, 1, 2], deleteLast(array1, 0)));
+        var array1 = [0, 1, 2, 3, 4];
+        checkEqual(true, equal([0, 1, 2], deleteLast(array1, 2)));
         checkEqual(true, equal([0, 1, 2], array1));
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([0, 1], deleteLast(array1, 1)));
-        checkEqual(true, equal([0, 1], array1));
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([0], deleteLast(array1, 2)));
-        checkEqual(true, equal([0], array1));
-        var array1 = [0, 1, 2];
-        checkEqual(true, equal([], deleteLast(array1, 3)));
-        checkEqual(true, equal([], array1)); // exception
+        checkEqual(true, isThrown(function () {
+          return deleteLast([0, 1, 2, 3, 4], -2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return deleteLast([0, 1, 2, 3, 4], -1);
+        }));
+        checkEqual(true, equal([0, 1, 2, 3, 4], deleteLast([0, 1, 2, 3, 4], 0)));
+        checkEqual(true, equal([0, 1, 2, 3], deleteLast([0, 1, 2, 3, 4], 1)));
+        checkEqual(true, equal([0, 1, 2], deleteLast([0, 1, 2, 3, 4], 2)));
+        checkEqual(true, equal([0, 1], deleteLast([0, 1, 2, 3, 4], 3)));
+        checkEqual(true, equal([0], deleteLast([0, 1, 2, 3, 4], 4)));
+        checkEqual(true, equal([], deleteLast([0, 1, 2, 3, 4], 5)));
+        checkEqual(true, isThrown(function () {
+          return deleteLast([0, 1, 2, 3, 4], 6);
+        })); // exception
 
         checkEqual(true, isThrownException(function () {
           deleteLast([1, 2, 3], [0]);

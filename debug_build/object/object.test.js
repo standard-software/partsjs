@@ -17,7 +17,8 @@ var test_execute_object = function test_execute_object(parts) {
         propertyCount = _parts$object.propertyCount,
         getProperty = _parts$object.getProperty,
         setProperty = _parts$object.setProperty,
-        isEmptyObjectAll = _parts$object.isEmptyObjectAll;
+        isEmptyObjectAll = _parts$object.isEmptyObjectAll,
+        isObjectParameter = _parts$object.isObjectParameter;
 
     var test_copyProperty = function test_copyProperty() {
       it('test_copyProperty', function () {
@@ -258,11 +259,19 @@ var test_execute_object = function test_execute_object(parts) {
         setProperty(testObj1, 'b', true);
         checkEqual(true, testObj1.b);
         setProperty(testObj1, 'b.c', true);
-        checkEqual(true, testObj1.b.c); // // エラー
-        // // var path = '';      setProperty(testObj1, path, true); console.log(path, testObj1);
-        // // var path = 'a.';    setProperty(testObj1, path, true); console.log(path, testObj1);
-        // // var path = '.a';    setProperty(testObj1, path, true); console.log(path, testObj1);
-
+        checkEqual(true, testObj1.b.c);
+        checkEqual(true, isThrown(function () {
+          return setProperty(testObj1, '', true);
+        }));
+        checkEqual(true, isThrown(function () {
+          return setProperty(testObj1, 'a.', true);
+        }));
+        checkEqual(true, isThrown(function () {
+          return setProperty(testObj1, '.a', true);
+        }));
+        checkEqual(false, isThrown(function () {
+          return setProperty(testObj1, 'a', true);
+        }));
         var testObj1 = {
           a: ['abc', {
             b: 'b'
@@ -277,11 +286,212 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
+    var test_isObjectParameter = function test_isObjectParameter() {
+      it('test_isObjectParameter', function () {
+        var testFunction01 = function testFunction01(a, b) {
+          var c = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+          var d = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+          if (isObjectParameter(a, 'a, b', 'c, d')) {
+            var _a = a;
+            a = _a.a;
+            b = _a.b;
+            var _a$c = _a.c;
+            c = _a$c === void 0 ? '' : _a$c;
+            var _a$d = _a.d;
+            d = _a$d === void 0 ? '' : _a$d;
+          }
+
+          return a + b + c + d;
+        };
+
+        checkEqual('ABCD', testFunction01('A', 'B', 'C', 'D'));
+        checkEqual('ABC', testFunction01('A', 'B', 'C'));
+        checkEqual('AB', testFunction01('A', 'B'));
+        checkEqual('ABCD', testFunction01({
+          a: 'A',
+          b: 'B',
+          c: 'C',
+          d: 'D'
+        }));
+        checkEqual('ABC', testFunction01({
+          a: 'A',
+          b: 'B',
+          c: 'C'
+        }));
+        checkEqual('ABD', testFunction01({
+          a: 'A',
+          b: 'B',
+          d: 'D'
+        }));
+        checkEqual('AB', testFunction01({
+          a: 'A',
+          b: 'B'
+        }));
+
+        var testFunction02 = function testFunction02(a, b) {
+          var c = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+          var d = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+          if (isObjectParameter(a, 'a, b', 'c, d')) {
+            var _a2 = a;
+            a = _a2.a;
+            b = _a2.b;
+            var _a2$c = _a2.c;
+            c = _a2$c === void 0 ? '' : _a2$c;
+            var _a2$d = _a2.d;
+            d = _a2$d === void 0 ? '' : _a2$d;
+          } else if (isObjectParameter(b, 'b', 'c, d')) {
+            var _b = b;
+            b = _b.b;
+            var _b$c = _b.c;
+            c = _b$c === void 0 ? '' : _b$c;
+            var _b$d = _b.d;
+            d = _b$d === void 0 ? '' : _b$d;
+          } else if (isObjectParameter(c, '', 'c, d', 1)) {
+            var _c = c;
+            var _c$c = _c.c;
+            c = _c$c === void 0 ? '' : _c$c;
+            var _c$d = _c.d;
+            d = _c$d === void 0 ? '' : _c$d;
+          } else if (isObjectParameter(d, '', 'd', 1)) {
+            var _d = d;
+            var _d$d = _d.d;
+            d = _d$d === void 0 ? '' : _d$d;
+          }
+
+          return a + b + c + d;
+        };
+
+        checkEqual('ABCD', testFunction02('A', 'B', 'C', 'D'));
+        checkEqual('ABC', testFunction02('A', 'B', 'C'));
+        checkEqual('AB', testFunction02('A', 'B')); // object parameter a
+
+        checkEqual('ABCD', testFunction02({
+          a: 'A',
+          b: 'B',
+          c: 'C',
+          d: 'D'
+        }));
+        checkEqual('ABC', testFunction02({
+          a: 'A',
+          b: 'B',
+          c: 'C'
+        }));
+        checkEqual('ABD', testFunction02({
+          a: 'A',
+          b: 'B',
+          d: 'D'
+        }));
+        checkEqual('AB', testFunction02({
+          a: 'A',
+          b: 'B'
+        })); // object parameter b
+
+        checkEqual('ABCD', testFunction02('A', {
+          b: 'B',
+          c: 'C',
+          d: 'D'
+        }));
+        checkEqual('ABC', testFunction02('A', {
+          b: 'B',
+          c: 'C'
+        }));
+        checkEqual('ABD', testFunction02('A', {
+          b: 'B',
+          d: 'D'
+        }));
+        checkEqual('AB', testFunction02('A', {
+          b: 'B'
+        })); // object parameter c
+
+        checkEqual('ABCD', testFunction02('A', 'B', {
+          c: 'C',
+          d: 'D'
+        }));
+        checkEqual('ABC', testFunction02('A', 'B', {
+          c: 'C'
+        }));
+        checkEqual('ABD', testFunction02('A', 'B', {
+          d: 'D'
+        })); // object parameter c
+
+        checkEqual('ABCD', testFunction02('A', 'B', 'C', {
+          d: 'D'
+        })); // miss patern
+
+        checkEqual('[object Object]undefined', testFunction02({
+          a: 'A'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          b: 'A'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          a: 'A',
+          c: 'C'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          a: 'A',
+          d: 'D'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          b: 'B',
+          c: 'C'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          b: 'B',
+          d: 'D'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          a: 'A',
+          b: 'B',
+          c: 'C',
+          d: 'D',
+          e: 'E'
+        }));
+        checkEqual('[object Object]undefined', testFunction02({
+          a: 'A',
+          b: 'B',
+          e: 'E'
+        }));
+        checkEqual('A[object Object]', testFunction02('A', {}));
+        checkEqual('A[object Object]', testFunction02('A', {
+          b: 'B',
+          e: 'E'
+        }));
+        checkEqual('A[object Object]', testFunction02('A', {
+          a: 'A',
+          b: 'B'
+        }));
+        checkEqual('A[object Object]', testFunction02('A', {
+          c: 'C',
+          d: 'D'
+        }));
+        checkEqual('AB[object Object]', testFunction02('A', 'B', {}));
+        checkEqual('AB[object Object]', testFunction02('A', 'B', {
+          a: 'A'
+        }));
+        checkEqual('AB[object Object]', testFunction02('A', 'B', {
+          b: 'B'
+        }));
+        checkEqual('AB[object Object]', testFunction02('A', 'B', {
+          e: 'D'
+        }));
+        checkEqual('ABC[object Object]', testFunction02('A', 'B', 'C', {
+          c: 'C'
+        }));
+        checkEqual('ABC[object Object]', testFunction02('A', 'B', 'C', {
+          e: 'E'
+        }));
+      });
+    };
+
     test_copyProperty();
     test_inProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();
+    test_isObjectParameter();
   });
 };
 
