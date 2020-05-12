@@ -329,7 +329,7 @@ You can now use the functions of the parts.js object.
 - update unique
 - rename
   - toString >> valueToString
-  - toNumber >> valueToNumbeer
+  - toNumber >> valueToNumber
   - toInteger >> valueToInteger
 
 ### More Info

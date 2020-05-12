@@ -2,6 +2,10 @@
 
 ## Version
 
+### 5.3.3
+#### 2020/05/12(Tue)
+- bugfix string.isLast
+
 ### 5.3.2
 #### 2020/05/10(Sun)
 - update test code
@@ -94,7 +98,7 @@
 - update unique
 - rename
   - toString >> valueToString
-  - toNumber >> valueToNumbeer
+  - toNumber >> valueToNumber
   - toInteger >> valueToInteger
 
 ### 4.9.2
