@@ -140,7 +140,7 @@ var _array = __webpack_require__(26);
 
 var _consoleHook = __webpack_require__(37);
 
-var VERSION = '5.3.2';
+var VERSION = '5.3.3 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -5917,7 +5917,13 @@ var isFirst = function isFirst(str, search) {
 
 
 var _isLast = function _isLast(str, search) {
-  return _indexOfLast(str, search) === str.length - search.length;
+  var result = _indexOfLast(str, search);
+
+  if (result === -1) {
+    return false;
+  }
+
+  return result === str.length - search.length;
 };
 
 var isLast = function isLast(str, search) {
