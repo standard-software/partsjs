@@ -209,7 +209,11 @@ const isFirst = (str, search) => {
  * isLast
  */
 const _isLast = (str, search) => {
-  return _indexOfLast(str, search) === str.length - search.length;
+  const result = _indexOfLast(str, search);
+  if (result === -1) {
+    return false;
+  }
+  return result === str.length - search.length;
 };
 
 const isLast = (str, search) => {

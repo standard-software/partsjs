@@ -362,6 +362,8 @@ const test_execute_string = (parts) => {
         checkEqual(false, isLast('ABC', 'AC'));
         checkEqual(false, isLast('ABC', 'c'));
         checkEqual(false, isLast('ABC', 'B'));
+
+        checkEqual(false, isLast('1', '23'));
       });
     };
 
