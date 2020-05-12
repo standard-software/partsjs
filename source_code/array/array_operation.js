@@ -521,7 +521,6 @@ const trimLast = (array, valueArray) => {
     );
   }
 
-
   return _trimLast(array, valueArray);
 };
 

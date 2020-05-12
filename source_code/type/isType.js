@@ -83,7 +83,6 @@ const isEmptyObject = value => {
   return _propertyCount(value) === 0;
 };
 
-
 const isArray = _objectToStringCheck('Array');
 
 // Int8Array Uint16Array Float32Array Float64Array etc...
@@ -109,7 +108,7 @@ const isError = _objectToStringCheck('Error');
 
 const isNotUndefined   = value => !isUndefined(value);
 const isNotNull        = value => !isNull(value);
-const isNotNaNStrictAll   = value => !isNaNStrict(value);
+const isNotNaNStrict   = value => !isNaNStrict(value);
 const isNotBoolean     = value => !isBoolean(value);
 const isNotNumber      = value => !isNumber(value);
 const isNotInteger     = value => !isInteger(value);
@@ -127,6 +126,26 @@ const isNotStringObject  = value => !isStringObject(value);
 const isNotEmptyObject   = value => !isEmptyObject(value);
 const isNotEmptyArray    = value => !isEmptyArray(value);
 
+const isUndef     = isUndefined;
+const isBool      = isBoolean;
+const isNum       = isNumber;
+const isInt       = isInteger;
+const isStr       = isString;
+const isFunc      = isFunction;
+const isObj       = isObject;
+const isObjType   = isObjectType;
+const isEmptyObj  = isEmptyObject;
+
+const isNotUndef    = isNotUndefined;
+const isNotBool     = isNotBoolean;
+const isNotNum      = isNotNumber;
+const isNotInt      = isNotInteger;
+const isNotStr      = isNotString;
+const isNotFunc     = isNotFunction;
+const isNotObj      = isNotObject;
+const isNotObjType  = isNotObjectType;
+const isNotEmptyObj = isNotEmptyObject;
+
 module.exports = {
   _typeofCheck, _objectToStringCheck, objectToString,
 
@@ -139,12 +158,22 @@ module.exports = {
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
 
-  isNotUndefined, isNotNull, isNotNaNStrictAll,
+  isNotUndefined, isNotNull, isNotNaNStrict,
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotFunction, isNotObject, isNotObjectType,
   isNotArray, isNotArrayType,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
+
+  isUndef,
+  isBool, isNum, isInt, isStr,
+  isFunc, isObj, isObjType,
+  isEmptyObj,
+
+  isNotUndef,
+  isNotBool, isNotNum, isNotInt, isNotStr,
+  isNotFunc, isNotObj, isNotObjType,
+  isNotEmptyObj,
 };
 

@@ -72,6 +72,8 @@ propertyNames.TYPE = [
   isPrefixSafixAdd('isNot', '',     propertyNames._TYPE_BASE),
   isPrefixSafixAdd('is',    'All',  propertyNames._TYPE_BASE),
   isPrefixSafixAdd('isNot', 'All',  propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('is',    'Array',  propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('isNot', 'Array',  propertyNames._TYPE_BASE),
 ].join(',');
 const type = _copyProperty(_type, propertyNames.TYPE);
 _copyProperty(_type, propertyNames.TYPE, rootNames);

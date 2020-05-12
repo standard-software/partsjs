@@ -10,6 +10,30 @@ const test_execute_type = (parts) => {
 
     const {
 
+      isUndefined, isNull, isNaNStrict,
+      isBoolean, isNumber, isInteger, isString,
+      isFunction, isObject, isObjectType,
+      isArray, isArrayType,
+      isDate, isRegExp,
+      isException,
+      isBooleanObject, isNumberObject, isStringObject,
+      isEmptyObject, isEmptyArray,
+      isSymbol,
+      isMap, isWeakMap,
+      isSet, isWeakSet,
+
+      isNotUndefined, isNotNull, isNotNaNStrict,
+      isNotBoolean, isNotNumber, isNotInteger, isNotString,
+      isNotFunction, isNotObject, isNotObjectType,
+      isNotArray, isNotArrayType,
+      isNotDate, isNotRegExp,
+      isNotException,
+      isNotBooleanObject, isNotNumberObject, isNotStringObject,
+      isNotEmptyObject, isNotEmptyArray,
+      isNotSymbol,
+      isNotMap, isNotWeakMap,
+      isNotSet, isNotWeakSet,
+
       isUndefinedAll, isNullAll, isNaNStrictAll,
       isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
       isFunctionAll, isObjectAll, isObjectTypeAll,
@@ -33,6 +57,31 @@ const test_execute_type = (parts) => {
       isNotSymbolAll,
       isNotMapAll, isNotWeakMapAll,
       isNotSetAll, isNotWeakSetAll,
+
+      isUndefinedArray, isNullArray, isNaNStrictArray,
+      isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
+      isFunctionArray, isObjectArray, isObjectTypeArray,
+      isArrayArray, isArrayTypeArray,
+      isDateArray, isRegExpArray,
+      isExceptionArray,
+      isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
+      isEmptyObjectArray, isEmptyArrayArray,
+      isSymbolArray,
+      isMapArray, isWeakMapArray,
+      isSetArray, isWeakSetArray,
+
+      isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
+      isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
+      isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
+      isNotArrayArray, isNotArrayTypeArray,
+      isNotDateArray, isNotRegExpArray,
+      isNotExceptionArray,
+      isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
+      isNotEmptyObjectArray, isNotEmptyArrayArray,
+      isNotSymbolArray,
+      isNotMapArray, isNotWeakMapArray,
+      isNotSetArray, isNotWeakSetArray,
+
     } = parts.type;
 
     const {
@@ -490,31 +539,36 @@ const test_execute_type = (parts) => {
     const test_isString = function() {
       it('test_isString', () => {
 
-        const isStringArray = (array) => {
-          return allMatchSome(array, [isStringAll]);
-        };
-        const isNotStringArray = (array) => {
-          return allMatchSome(array, [isNotStringAll]);
-        };
-
-        checkEqual(true, isStringAll(''));
-        checkEqual(true, isStringAll('a'));
-        checkEqual(true, isStringAll('a', 'b', 'c'));
-        checkEqual(true, isStringAll('a', 'b', ''));
+        checkEqual(true,  isStringAll(''));
+        checkEqual(true,  isStringAll('a'));
+        checkEqual(true,  isStringAll('a', 'b', 'c'));
+        checkEqual(true,  isStringAll('a', 'b', ''));
         checkEqual(false, isStringAll('a', 'b', 0));
         checkEqual(false, isStringAll('a', 'b', 1));
         checkEqual(false, isStringAll('a', 'b', null));
         checkEqual(false, isStringAll('a', 'b', undefined));
 
         checkEqual(false, isStringArray([]));
-        checkEqual(true, isStringArray(['']));
-        checkEqual(true, isStringArray(['a']));
-        checkEqual(true, isStringArray(['a', 'b', 'c']));
-        checkEqual(true, isStringArray(['a', 'b', '']));
+        checkEqual(true,  isStringArray(['']));
+        checkEqual(true,  isStringArray(['a']));
+        checkEqual(true,  isStringArray(['a', 'b', 'c']));
+        checkEqual(true,  isStringArray(['a', 'b', '']));
         checkEqual(false, isStringArray(['a', 'b', 0]));
         checkEqual(false, isStringArray(['a', 'b', 1]));
         checkEqual(false, isStringArray(['a', 'b', null]));
         checkEqual(false, isStringArray(['a', 'b', undefined]));
+
+        checkEqual(false, isNotStringArray([]));
+        checkEqual(false, isNotStringArray(['']));
+        checkEqual(false, isNotStringArray(['a']));
+        checkEqual(false, isNotStringArray(['a', 'b', 'c']));
+        checkEqual(false, isNotStringArray(['a', 'b', '']));
+        checkEqual(false, isNotStringArray(['a', 'b', 0]));
+        checkEqual(false, isNotStringArray(['a', 'b', 1]));
+        checkEqual(false, isNotStringArray(['a', 'b', null]));
+        checkEqual(false, isNotStringArray(['a', 'b', undefined]));
+        checkEqual(true,  isNotStringArray([0, 1, 2]));
+        checkEqual(true,  isNotStringArray([0, null, undefined]));
 
         checkEqual('',    String(new String()));
         checkEqual('',    String(new String('')));
