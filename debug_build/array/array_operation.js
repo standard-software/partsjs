@@ -113,7 +113,7 @@ var add = function add(array, valueArray) {
   }
 
   if (!_inRange(index, -1, array.length - 1)) {
-    throw new RangeError('add args(index) must be from 0 to array.length - 1');
+    throw new RangeError('add args(index) must be from -1 to array.length - 1');
   }
 
   return _add(array, valueArray, index);

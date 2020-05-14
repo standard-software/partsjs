@@ -60,22 +60,21 @@ var _require5 = require('../type/isSet.js'),
     isWeakSet = _require5.isWeakSet,
     isNotWeakSet = _require5.isNotWeakSet;
 /**
- *isTypeCheck
- * description:
- *  check type for array argument.
+ * _isTypeArray
+ * check type for array argument.
  */
 
 
-var isTypeCheck = function isTypeCheck(func, argsArray) {
+var _isTypeArray = function _isTypeArray(isTypeFunc, argsArray) {
   var l = argsArray.length;
 
   if (l === 0) {
     return false;
   } else if (l === 1) {
-    return func(argsArray[0]);
+    return isTypeFunc(argsArray[0]);
   } else {
     for (var i = 0; i < l; i += 1) {
-      if (!func(argsArray[i])) {
+      if (!isTypeFunc(argsArray[i])) {
         return false;
       }
     }
@@ -84,87 +83,138 @@ var isTypeCheck = function isTypeCheck(func, argsArray) {
   }
 };
 
-var isTypeCheckArgsFunc = function isTypeCheckArgsFunc(func) {
+var _isTypeAllCheckFunc = function _isTypeAllCheckFunc(func) {
   return function () {
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return isTypeCheck(func, args);
+    return _isTypeArray(func, args);
   };
 };
 
-var isUndefinedAll = isTypeCheckArgsFunc(isUndefined);
-var isNullAll = isTypeCheckArgsFunc(isNull);
-var isNaNStrictAll = isTypeCheckArgsFunc(isNaNStrict);
-var isBooleanAll = isTypeCheckArgsFunc(isBoolean);
-var isNumberAll = isTypeCheckArgsFunc(isNumber);
-var isIntegerAll = isTypeCheckArgsFunc(isInteger);
-var isStringAll = isTypeCheckArgsFunc(isString);
-var isFunctionAll = isTypeCheckArgsFunc(isFunction);
-var isObjectAll = isTypeCheckArgsFunc(isObject);
-var isObjectTypeAll = isTypeCheckArgsFunc(isObjectType);
-var isArrayAll = isTypeCheckArgsFunc(isArray);
-var isArrayTypeAll = isTypeCheckArgsFunc(isArrayType);
-var isDateAll = isTypeCheckArgsFunc(isDate);
-var isRegExpAll = isTypeCheckArgsFunc(isRegExp);
-var isExceptionAll = isTypeCheckArgsFunc(isException);
-var isBooleanObjectAll = isTypeCheckArgsFunc(isBooleanObject);
-var isNumberObjectAll = isTypeCheckArgsFunc(isNumberObject);
-var isStringObjectAll = isTypeCheckArgsFunc(isStringObject);
-var isEmptyObjectAll = isTypeCheckArgsFunc(isEmptyObject);
-var isEmptyArrayAll = isTypeCheckArgsFunc(isEmptyArray);
-var isSymbolAll = isTypeCheckArgsFunc(isSymbol);
-var isMapAll = isTypeCheckArgsFunc(isMap);
-var isWeakMapAll = isTypeCheckArgsFunc(isWeakMap);
-var isSetAll = isTypeCheckArgsFunc(isSet);
-var isWeakSetAll = isTypeCheckArgsFunc(isWeakSet);
-var isNotUndefinedAll = isTypeCheckArgsFunc(isNotUndefined);
-var isNotNullAll = isTypeCheckArgsFunc(isNotNull);
-var isNotNaNStrictAll = isTypeCheckArgsFunc(isNotNaNStrict);
-var isNotBooleanAll = isTypeCheckArgsFunc(isNotBoolean);
-var isNotNumberAll = isTypeCheckArgsFunc(isNotNumber);
-var isNotIntegerAll = isTypeCheckArgsFunc(isNotInteger);
-var isNotStringAll = isTypeCheckArgsFunc(isNotString);
-var isNotFunctionAll = isTypeCheckArgsFunc(isNotFunction);
-var isNotObjectAll = isTypeCheckArgsFunc(isNotObject);
-var isNotObjectTypeAll = isTypeCheckArgsFunc(isNotObjectType);
-var isNotArrayAll = isTypeCheckArgsFunc(isNotArray);
-var isNotArrayTypeAll = isTypeCheckArgsFunc(isNotArrayType);
-var isNotDateAll = isTypeCheckArgsFunc(isNotDate);
-var isNotRegExpAll = isTypeCheckArgsFunc(isNotRegExp);
-var isNotExceptionAll = isTypeCheckArgsFunc(isNotException);
-var isNotBooleanObjectAll = isTypeCheckArgsFunc(isNotBooleanObject);
-var isNotNumberObjectAll = isTypeCheckArgsFunc(isNotNumberObject);
-var isNotStringObjectAll = isTypeCheckArgsFunc(isNotStringObject);
-var isNotEmptyObjectAll = isTypeCheckArgsFunc(isNotEmptyObject);
-var isNotEmptyArrayAll = isTypeCheckArgsFunc(isNotEmptyArray);
-var isNotSymbolAll = isTypeCheckArgsFunc(isNotSymbol);
-var isNotMapAll = isTypeCheckArgsFunc(isNotMap);
-var isNotWeakMapAll = isTypeCheckArgsFunc(isNotWeakMap);
-var isNotSetAll = isTypeCheckArgsFunc(isNotSet);
-var isNotWeakSetAll = isTypeCheckArgsFunc(isNotWeakSet);
-var isUndef = isUndefinedAll;
-var isBool = isBooleanAll;
-var isNum = isNumberAll;
-var isInt = isIntegerAll;
-var isStr = isStringAll;
-var isFunc = isFunctionAll;
-var isObj = isObjectAll;
-var isObjType = isObjectTypeAll;
-var isExcept = isExceptionAll;
-var isEmptyObj = isEmptyObjectAll;
-var isNotUndef = isNotUndefinedAll;
-var isNotBool = isNotBooleanAll;
-var isNotNum = isNotNumberAll;
-var isNotInt = isNotIntegerAll;
-var isNotStr = isNotStringAll;
-var isNotFunc = isNotFunctionAll;
-var isNotObj = isNotObjectAll;
-var isNotObjType = isNotObjectTypeAll;
-var isNotExcept = isNotExceptionAll;
-var isNotEmptyObj = isNotEmptyObjectAll;
+var isUndefinedAll = _isTypeAllCheckFunc(isUndefined);
+
+var isNullAll = _isTypeAllCheckFunc(isNull);
+
+var isNaNStrictAll = _isTypeAllCheckFunc(isNaNStrict);
+
+var isBooleanAll = _isTypeAllCheckFunc(isBoolean);
+
+var isNumberAll = _isTypeAllCheckFunc(isNumber);
+
+var isIntegerAll = _isTypeAllCheckFunc(isInteger);
+
+var isStringAll = _isTypeAllCheckFunc(isString);
+
+var isFunctionAll = _isTypeAllCheckFunc(isFunction);
+
+var isObjectAll = _isTypeAllCheckFunc(isObject);
+
+var isObjectTypeAll = _isTypeAllCheckFunc(isObjectType);
+
+var isArrayAll = _isTypeAllCheckFunc(isArray);
+
+var isArrayTypeAll = _isTypeAllCheckFunc(isArrayType);
+
+var isDateAll = _isTypeAllCheckFunc(isDate);
+
+var isRegExpAll = _isTypeAllCheckFunc(isRegExp);
+
+var isExceptionAll = _isTypeAllCheckFunc(isException);
+
+var isBooleanObjectAll = _isTypeAllCheckFunc(isBooleanObject);
+
+var isNumberObjectAll = _isTypeAllCheckFunc(isNumberObject);
+
+var isStringObjectAll = _isTypeAllCheckFunc(isStringObject);
+
+var isEmptyObjectAll = _isTypeAllCheckFunc(isEmptyObject);
+
+var isEmptyArrayAll = _isTypeAllCheckFunc(isEmptyArray);
+
+var isSymbolAll = _isTypeAllCheckFunc(isSymbol);
+
+var isMapAll = _isTypeAllCheckFunc(isMap);
+
+var isWeakMapAll = _isTypeAllCheckFunc(isWeakMap);
+
+var isSetAll = _isTypeAllCheckFunc(isSet);
+
+var isWeakSetAll = _isTypeAllCheckFunc(isWeakSet);
+
+var isNotUndefinedAll = _isTypeAllCheckFunc(isNotUndefined);
+
+var isNotNullAll = _isTypeAllCheckFunc(isNotNull);
+
+var isNotNaNStrictAll = _isTypeAllCheckFunc(isNotNaNStrict);
+
+var isNotBooleanAll = _isTypeAllCheckFunc(isNotBoolean);
+
+var isNotNumberAll = _isTypeAllCheckFunc(isNotNumber);
+
+var isNotIntegerAll = _isTypeAllCheckFunc(isNotInteger);
+
+var isNotStringAll = _isTypeAllCheckFunc(isNotString);
+
+var isNotFunctionAll = _isTypeAllCheckFunc(isNotFunction);
+
+var isNotObjectAll = _isTypeAllCheckFunc(isNotObject);
+
+var isNotObjectTypeAll = _isTypeAllCheckFunc(isNotObjectType);
+
+var isNotArrayAll = _isTypeAllCheckFunc(isNotArray);
+
+var isNotArrayTypeAll = _isTypeAllCheckFunc(isNotArrayType);
+
+var isNotDateAll = _isTypeAllCheckFunc(isNotDate);
+
+var isNotRegExpAll = _isTypeAllCheckFunc(isNotRegExp);
+
+var isNotExceptionAll = _isTypeAllCheckFunc(isNotException);
+
+var isNotBooleanObjectAll = _isTypeAllCheckFunc(isNotBooleanObject);
+
+var isNotNumberObjectAll = _isTypeAllCheckFunc(isNotNumberObject);
+
+var isNotStringObjectAll = _isTypeAllCheckFunc(isNotStringObject);
+
+var isNotEmptyObjectAll = _isTypeAllCheckFunc(isNotEmptyObject);
+
+var isNotEmptyArrayAll = _isTypeAllCheckFunc(isNotEmptyArray);
+
+var isNotSymbolAll = _isTypeAllCheckFunc(isNotSymbol);
+
+var isNotMapAll = _isTypeAllCheckFunc(isNotMap);
+
+var isNotWeakMapAll = _isTypeAllCheckFunc(isNotWeakMap);
+
+var isNotSetAll = _isTypeAllCheckFunc(isNotSet);
+
+var isNotWeakSetAll = _isTypeAllCheckFunc(isNotWeakSet);
+
+var isUndefAll = isUndefinedAll;
+var isBoolAll = isBooleanAll;
+var isNumAll = isNumberAll;
+var isIntAll = isIntegerAll;
+var isStrAll = isStringAll;
+var isFuncAll = isFunctionAll;
+var isObjAll = isObjectAll;
+var isObjTypeAll = isObjectTypeAll;
+var isExceptAll = isExceptionAll;
+var isEmptyObjAll = isEmptyObjectAll;
+var isNotUndefAll = isNotUndefinedAll;
+var isNotBoolAll = isNotBooleanAll;
+var isNotNumAll = isNotNumberAll;
+var isNotIntAll = isNotIntegerAll;
+var isNotStrAll = isNotStringAll;
+var isNotFuncAll = isNotFunctionAll;
+var isNotObjAll = isNotObjectAll;
+var isNotObjTypeAll = isNotObjectTypeAll;
+var isNotExceptAll = isNotExceptionAll;
+var isNotEmptyObjAll = isNotEmptyObjectAll;
 module.exports = {
+  _isTypeArray: _isTypeArray,
   isUndefinedAll: isUndefinedAll,
   isNullAll: isNullAll,
   isNaNStrictAll: isNaNStrictAll,
@@ -215,24 +265,24 @@ module.exports = {
   isNotWeakMapAll: isNotWeakMapAll,
   isNotSetAll: isNotSetAll,
   isNotWeakSetAll: isNotWeakSetAll,
-  isUndef: isUndef,
-  isBool: isBool,
-  isNum: isNum,
-  isInt: isInt,
-  isStr: isStr,
-  isFunc: isFunc,
-  isObj: isObj,
-  isObjType: isObjType,
-  isExcept: isExcept,
-  isEmptyObj: isEmptyObj,
-  isNotUndef: isNotUndef,
-  isNotBool: isNotBool,
-  isNotNum: isNotNum,
-  isNotInt: isNotInt,
-  isNotStr: isNotStr,
-  isNotFunc: isNotFunc,
-  isNotObj: isNotObj,
-  isNotObjType: isNotObjType,
-  isNotExcept: isNotExcept,
-  isNotEmptyObj: isNotEmptyObj
+  isUndefAll: isUndefAll,
+  isBoolAll: isBoolAll,
+  isNumAll: isNumAll,
+  isIntAll: isIntAll,
+  isStrAll: isStrAll,
+  isFuncAll: isFuncAll,
+  isObjAll: isObjAll,
+  isObjTypeAll: isObjTypeAll,
+  isExceptAll: isExceptAll,
+  isEmptyObjAll: isEmptyObjAll,
+  isNotUndefAll: isNotUndefAll,
+  isNotBoolAll: isNotBoolAll,
+  isNotNumAll: isNotNumAll,
+  isNotIntAll: isNotIntAll,
+  isNotStrAll: isNotStrAll,
+  isNotFuncAll: isNotFuncAll,
+  isNotObjAll: isNotObjAll,
+  isNotObjTypeAll: isNotObjTypeAll,
+  isNotExceptAll: isNotExceptAll,
+  isNotEmptyObjAll: isNotEmptyObjAll
 };
