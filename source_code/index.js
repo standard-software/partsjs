@@ -159,6 +159,7 @@ propertyNames.STRING_PUBLIC =
   'isFirst, isLast, isBothEnds,' +
   'includeFirst, includeLast, includeBothEnds,' +
   'excludeFirst, excludeLast, excludeBothEnds,' +
+  'trimFirst, trimLast, trimBothEnds,' +
   'subIndex, subLength, subFirst, subLast,' +
   'deleteIndex, deleteLength, deleteFirst, deleteLast,' +
   '';

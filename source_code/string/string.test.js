@@ -15,6 +15,7 @@ const test_execute_string = (parts) => {
       isFirst, isLast, isBothEnds,
       includeFirst, includeLast, includeBothEnds,
       excludeFirst, excludeLast, excludeBothEnds,
+      trimFirst, trimLast, trimBothEnds,
       subIndex, subLength,
       subFirst, subLast,
       deleteIndex, deleteLength,
@@ -595,6 +596,155 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_trimFirst = () => {
+      it('test_trimFirst', () => {
+        checkEqual('23',    trimFirst('123', ['1']));
+        checkEqual('3',     trimFirst('123', ['12']));
+        checkEqual('123',   trimFirst('123', ['13']));
+        checkEqual('123',   trimFirst('123', ['2']));
+        checkEqual('BC',    trimFirst('ABC', ['A']));
+        checkEqual('C',     trimFirst('ABC', ['AB']));
+        checkEqual('ABC',   trimFirst('ABC', ['AC']));
+        checkEqual('ABC',   trimFirst('ABC', ['a']));
+        checkEqual('ABC',   trimFirst('ABC', ['B']));
+
+        checkEqual('C',     trimFirst('ABC',    ['A', 'B']));
+        checkEqual('C',     trimFirst('ABC',    ['B', 'A']));
+        checkEqual('C',     trimFirst('AABBC',  ['A', 'B']));
+        checkEqual('C',     trimFirst('ABABC',  ['A', 'B']));
+        checkEqual('C',     trimFirst('BABAC',  ['A', 'B']));
+        checkEqual('C',     trimFirst('ABBAC',  ['A', 'B']));
+        checkEqual('C',     trimFirst('BAABC',  ['A', 'B']));
+        checkEqual('C',     trimFirst('AAABC',  ['A', 'B']));
+        checkEqual('C',     trimFirst('ABBBC',  ['A', 'B']));
+        checkEqual('CABC',  trimFirst('CABC',   ['A', 'B']));
+
+        checkEqual('ABC',   trimFirst('ABC',   []));
+        checkEqual('',      trimFirst('ABC',   ['ABC']));
+        checkEqual('',      trimFirst('ABC',   ['A', 'B', 'C']));
+        checkEqual('',      trimFirst('',      []));
+        checkEqual('',      trimFirst('',      ['ABC']));
+        checkEqual('',      trimFirst('',      ['A', 'B', 'C']));
+
+        checkEqual(true,  isThrown(() => trimFirst('ABC',   [0, 'B', 'C'])));
+        checkEqual(true,  isThrown(() => trimFirst('',      [0, 'B', 'C'])));
+      });
+    };
+
+    const test_trimLast = () => {
+      it('test_trimLast', () => {
+        checkEqual('12',    trimLast('123', ['3']));
+        checkEqual('1',     trimLast('123', ['23']));
+        checkEqual('123',   trimLast('123', ['13']));
+        checkEqual('123',   trimLast('123', ['2']));
+        checkEqual('AB',    trimLast('ABC', ['C']));
+        checkEqual('A',     trimLast('ABC', ['BC']));
+        checkEqual('ABC',   trimLast('ABC', ['AC']));
+        checkEqual('ABC',   trimLast('ABC', ['c']));
+        checkEqual('ABC',   trimLast('ABC', ['B']));
+
+        checkEqual('C',     trimLast('CAB',    ['A', 'B']));
+        checkEqual('C',     trimLast('CAB',    ['B', 'A']));
+        checkEqual('C',     trimLast('CAABB',  ['A', 'B']));
+        checkEqual('C',     trimLast('CABAB',  ['A', 'B']));
+        checkEqual('C',     trimLast('CBABA',  ['A', 'B']));
+        checkEqual('C',     trimLast('CABBA',  ['A', 'B']));
+        checkEqual('C',     trimLast('CBAAB',  ['A', 'B']));
+        checkEqual('C',     trimLast('CAAAB',  ['A', 'B']));
+        checkEqual('C',     trimLast('CABBB',  ['A', 'B']));
+        checkEqual('CABC',  trimLast('CABC',   ['A', 'B']));
+
+        checkEqual('ABC',   trimLast('ABC',   []));
+        checkEqual('',      trimLast('ABC',   ['ABC']));
+        checkEqual('',      trimLast('ABC',   ['A', 'B', 'C']));
+        checkEqual('',      trimLast('',      []));
+        checkEqual('',      trimLast('',      ['ABC']));
+        checkEqual('',      trimLast('',      ['A', 'B', 'C']));
+
+        checkEqual(true,  isThrown(() => trimLast('ABC',  [0, 'B', 'C'])));
+        checkEqual(true,  isThrown(() => trimLast('',     [0, 'B', 'C'])));
+      });
+    };
+
+    const test_trimBothEnds = () => {
+      it('test_trimBothEnds', () => {
+        checkEqual('2',       trimBothEnds('121',   ['1']));
+        checkEqual('121',     trimBothEnds('121',   ['2']));
+        checkEqual('1',       trimBothEnds('121',   ['12'], ['21']));
+        checkEqual('3',       trimBothEnds('123',   ['12'], ['23']));
+        checkEqual('B',       trimBothEnds('ABA',   ['A']));
+        checkEqual('ABA',     trimBothEnds('ABA',   ['a']));
+        checkEqual('ABA',     trimBothEnds('ABA',   ['B']));
+        checkEqual('',        trimBothEnds('ABAB',  ['AB']));
+
+        checkEqual('BAD',     trimBothEnds('ABAD',  ['A']));
+        checkEqual('BA',      trimBothEnds('ABAD',  ['A'], ['D']));
+
+        checkEqual('AB',      trimBothEnds('{AB}', ['{'], ['}']));
+        checkEqual('',        trimBothEnds('{{}}', ['{'], ['}']));
+        checkEqual('A{B',     trimBothEnds('A{B}', ['{'], ['}']));
+        checkEqual('{AB',     trimBothEnds('{AB}', ['}'], ['}']));
+        checkEqual('AB}',     trimBothEnds('{AB}', ['{'], ['{']));
+
+        checkEqual('232',     trimBothEnds('12321', ['1']));
+        checkEqual('12321',   trimBothEnds('12321', ['2']));
+        checkEqual('3',       trimBothEnds('12321', ['2', '1']));
+        checkEqual('232',     trimBothEnds('12321', ['', '1']));
+        checkEqual('32',      trimBothEnds('12321', ['2', '1'], ['1']));
+        checkEqual('321',     trimBothEnds('12321', ['2', '1'], ['2']));
+
+        checkEqual('',        trimBothEnds('1',   ['1']));
+        checkEqual('',        trimBothEnds('11',  ['1']));
+
+        // Object Named Parameter
+        checkEqual('B',
+          trimBothEnds({
+            str: 'ABA',
+            valueArray: ['A'],
+          }),
+        );
+        checkEqual('ABA',
+          trimBothEnds({
+            str: 'ABA',
+            valueArray: ['a'],
+          }),
+        );
+        checkEqual('B',
+          trimBothEnds({
+            str: 'ABA',
+            valueFirstArray: ['A'],
+          }),
+        );
+        checkEqual('BA',
+          trimBothEnds({
+            str: 'ABA',
+            valueFirstArray: ['A'],
+            valueLastArray: [],
+          }),
+        );
+        checkEqual('AB',
+          trimBothEnds({
+            str: 'ABA',
+            valueFirstArray: [],
+            valueLastArray: ['A'],
+          }),
+        );
+        checkEqual('BAD',
+          trimBothEnds({
+            str: 'ABAD',
+            valueFirstArray: ['A'],
+          }),
+        );
+        checkEqual('BA',
+          trimBothEnds({
+            str: 'ABAD',
+            valueFirstArray: ['A'],
+            valueLastArray: ['D'],
+          }),
+        );
+      });
+    };
+
     const test_substring_stardard = () => {
       it('test_substring_stardard', () => {
         checkEqual('01234', '01234'.substring(-2));
@@ -1018,6 +1168,10 @@ const test_execute_string = (parts) => {
     test_excludeFirst();
     test_excludeLast();
     test_excludeBothEnds();
+
+    test_trimFirst();
+    test_trimLast();
+    test_trimBothEnds();
 
     test_substring_stardard();
     test_substr_stardard();
