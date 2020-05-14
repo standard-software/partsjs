@@ -443,7 +443,8 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(true, isLast(['A', 'B', 'C'], ['B', 'C']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['A', 'C']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['c']));
-        checkEqual(false, isLast(['A', 'B', 'C'], ['B'])); // Object Named Parameter
+        checkEqual(false, isLast(['A', 'B', 'C'], ['B']));
+        checkEqual(false, isLast([1], [2, 3])); // Object Named Parameter
 
         checkEqual(true, isLast({
           array: ['A', 'B', 'C'],

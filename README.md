@@ -233,6 +233,17 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.4.0
+#### 2020/05/14(Thu)
+- add isTypeArray.js
+  - isNullArray isStringArray isIntegerArray etc...
+- bugfix isUndef isBool isNum etc...
+- add isUndefAll isBoolAll isNumAll etc..
+- add string
+  - trimFirst / trimLast / trimBothEnds
+  - insert / add
+- update index.js copyProperty
+
 ### 5.3.3
 #### 2020/05/12(Tue)
 - bugfix string.isLast

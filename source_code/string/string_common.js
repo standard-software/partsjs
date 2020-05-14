@@ -3,6 +3,7 @@ const {
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
+  isStringArray,
 } = require('../type/type.js');
 
 const {
@@ -15,7 +16,12 @@ const {
 
 const {
   _min, _max,
+  _findIndex, _findFirst,
 } = require('../array/array.js');
+
+const {
+  allMatchSome,
+} = require('../compare/compare.js');
 
 /**
  * repeat
@@ -492,6 +498,162 @@ const excludeBothEnds = (
 };
 
 /**
+ * string.trimFirst
+ */
+const _trimFirst = (
+  str,
+  valueArray = [' ', '\r', '\n'],
+) => {
+  while (true) {
+    const value = _findFirst(
+      valueArray, value => _isFirst(str, value),
+    );
+    if (isUndefined(value)) {
+      break;
+    }
+    str = _deleteFirst(str, value.length);
+  }
+  return str;
+};
+
+const trimFirst = (str, valueArray = [' ', '\r', '\n']) => {
+  if (isObjectParameter(str, 'str, valueArray')) {
+    ({ str, valueArray = [' ', '\r', '\n'] } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'trimFirst args(str) is not string',
+    );
+  }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'trimFirst args(valueArray) is not array',
+    );
+  }
+  if (valueArray.length > 0 && !isStringArray(valueArray)) {
+    throw new TypeError(
+      'trimFirst args(valueArray) is not string array',
+    );
+  }
+
+  return _trimFirst(str, valueArray);
+};
+
+/**
+ * string.trimLast
+ */
+const _trimLast = (
+  str,
+  valueArray = [' ', '\r', '\n'],
+) => {
+  while (true) {
+    const value = _findFirst(
+      valueArray, value => _isLast(str, value),
+    );
+    if (isUndefined(value)) {
+      break;
+    }
+    str = _deleteLast(str, value.length);
+  }
+  return str;
+};
+
+const trimLast = (str, valueArray = [' ', '\r', '\n']) => {
+  if (isObjectParameter(str, 'str, valueArray')) {
+    ({ str, valueArray = [' ', '\r', '\n'] } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'trimLast args(string) is not string',
+    );
+  }
+  if (!isArray(valueArray)) {
+    throw new TypeError(
+      'trimLast args(valueArray) is not array',
+    );
+  }
+  if (valueArray.length > 0 && !isStringArray(valueArray)) {
+    throw new TypeError(
+      'trimLast args(valueArray) element is not string array',
+    );
+  }
+
+  return _trimLast(str, valueArray);
+};
+
+/**
+ * string.trimBothEnds
+ */
+const _trimBothEnds = (
+  str,
+  valueFirstArray = [' ', '\r', '\n'],
+  valueLastArray = valueFirstArray,
+) => {
+  while (true) {
+    const value = _findFirst(
+      valueFirstArray, value => _isFirst(str, value),
+    );
+    if (isUndefined(value)) {
+      break;
+    }
+    str = _deleteFirst(str, value.length);
+  }
+  while (true) {
+    const value = _findFirst(
+      valueLastArray, value => _isLast(str, value),
+    );
+    if (isUndefined(value)) {
+      break;
+    }
+    str = _deleteLast(str, value.length);
+  }
+  return str;
+};
+
+const trimBothEnds = (
+  str,
+  valueFirstArray = [' ', '\r', '\n'],
+  valueLastArray = valueFirstArray,
+) => {
+  if (isObjectParameter(str, 'str, valueFirstArray', 'valueLastArray')) {
+    ({ str, valueFirstArray, valueLastArray = valueFirstArray } = str);
+  } else if (isObjectParameter(str, 'str, valueArray')) {
+    ({ str, valueArray: valueFirstArray } = str);
+    valueLastArray = valueFirstArray;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'trimBothEnds args(string) is not string',
+    );
+  }
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError(
+      'trimBothEnds args(valueFirstArray) is not array',
+    );
+  }
+  if (valueFirstArray.length > 0 && !isStringArray(valueFirstArray)) {
+    throw new TypeError(
+      'trimBothEnds args(valueFirstArray) is not string array',
+    );
+  }
+  if (!isArray(valueLastArray)) {
+    throw new TypeError(
+      'trimBothEnds args(valueLastArray) is not array',
+    );
+  }
+  if (valueLastArray.length > 0 && !isStringArray(valueLastArray)) {
+    throw new TypeError(
+      'trimBothEnds args(valueLastArray) is not string array',
+    );
+  }
+
+  return _trimBothEnds(str, valueFirstArray, valueLastArray);
+};
+
+/**
  * subIndex
  */
 const _subIndex = (
@@ -813,6 +975,82 @@ const deleteLast = (str, length = 1) => {
   return _deleteLast(str, length);
 };
 
+/**
+ * string.insert
+ */
+const _insert = (str, value, index = 0) => {
+  str = _subFirst(str, index)
+    + value + _subLast(str, str.length - index);
+  return str;
+};
+
+const insert = (str, value, index = 0) => {
+  if (isObjectParameter(str, 'str, value', 'index')) {
+    ({ str, value, index = 0 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'insert args(str) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'insert args(value) is not string',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'insert args(index) is not integer',
+    );
+  }
+  if (!_inRange(index, 0, str.length)) {
+    throw new RangeError(
+      'insert args(index) must be from 0 to str.length',
+    );
+  }
+
+  return _insert(str, value, index);
+};
+
+/**
+ * string.add
+ */
+const _add = (str, value, index = str.length - 1) => {
+  str = _subFirst(str, index + 1)
+    + value + _subLast(str, str.length - index - 1);
+  return str;
+};
+
+const add = (str, value, index = str.length - 1) => {
+  if (isObjectParameter(str, 'str, value', 'index')) {
+    ({ str, value, index = str.length - 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'add args(str) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'add args(value) is not string',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'add args(index) is not integer',
+    );
+  }
+  if (!_inRange(index, -1, str.length - 1)) {
+    throw new RangeError(
+      'add args(index) must be from -1 to str.length - 1',
+    );
+  }
+
+  return _add(str, value, index);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
@@ -820,8 +1058,10 @@ module.exports = {
   _isFirst, _isLast, _isBothEnds,
   _includeFirst, _includeLast, _includeBothEnds,
   _excludeFirst, _excludeLast, _excludeBothEnds,
+  _trimFirst, _trimLast, _trimBothEnds,
   _subIndex, _subLength, _subFirst, _subLast,
   _deleteIndex, _deleteLength, _deleteFirst, _deleteLast,
+  _insert, _add,
 
   repeat,
   isLowerCase, isUpperCase,
@@ -829,7 +1069,9 @@ module.exports = {
   isFirst, isLast, isBothEnds,
   includeFirst, includeLast, includeBothEnds,
   excludeFirst, excludeLast, excludeBothEnds,
+  trimFirst, trimLast, trimBothEnds,
   subIndex, subLength, subFirst, subLast,
   deleteIndex, deleteLength, deleteFirst, deleteLast,
+  insert, add,
 
 };

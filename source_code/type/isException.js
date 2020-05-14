@@ -24,8 +24,14 @@ const isException = (value) => {
 
 const isNotException   = value => !isException(value);
 
+const isExcept    = isException;
+const isNotExcept   = isNotException;
+
 module.exports = {
   isException,
   isNotException,
+
+  isExcept,
+  isNotExcept,
 };
 

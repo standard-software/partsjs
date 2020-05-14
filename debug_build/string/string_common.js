@@ -13,7 +13,8 @@ var _require = require('../type/type.js'),
     isArray = _require.isArray,
     isDate = _require.isDate,
     isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isException = _require.isException,
+    isStringArray = _require.isStringArray;
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
@@ -23,7 +24,12 @@ var _require3 = require('../number/number.js'),
 
 var _require4 = require('../array/array.js'),
     _min = _require4._min,
-    _max = _require4._max;
+    _max = _require4._max,
+    _findIndex = _require4._findIndex,
+    _findFirst = _require4._findFirst;
+
+var _require5 = require('../compare/compare.js'),
+    allMatchSome = _require5.allMatchSome;
 /**
  * repeat
  */
@@ -490,6 +496,175 @@ var excludeBothEnds = function excludeBothEnds(str, valueFirst) {
   return _excludeBothEnds(str, valueFirst, valueLast);
 };
 /**
+ * string.trimFirst
+ */
+
+
+var _trimFirst = function _trimFirst(str) {
+  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
+
+  while (true) {
+    var value = _findFirst(valueArray, function (value) {
+      return _isFirst(str, value);
+    });
+
+    if (isUndefined(value)) {
+      break;
+    }
+
+    str = _deleteFirst(str, value.length);
+  }
+
+  return str;
+};
+
+var trimFirst = function trimFirst(str) {
+  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
+
+  if (isObjectParameter(str, 'str, valueArray')) {
+    var _str16 = str;
+    str = _str16.str;
+    var _str16$valueArray = _str16.valueArray;
+    valueArray = _str16$valueArray === void 0 ? [' ', '\r', '\n'] : _str16$valueArray;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('trimFirst args(str) is not string');
+  }
+
+  if (!isArray(valueArray)) {
+    throw new TypeError('trimFirst args(valueArray) is not array');
+  }
+
+  if (valueArray.length > 0 && !isStringArray(valueArray)) {
+    throw new TypeError('trimFirst args(valueArray) is not string array');
+  }
+
+  return _trimFirst(str, valueArray);
+};
+/**
+ * string.trimLast
+ */
+
+
+var _trimLast = function _trimLast(str) {
+  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
+
+  while (true) {
+    var value = _findFirst(valueArray, function (value) {
+      return _isLast(str, value);
+    });
+
+    if (isUndefined(value)) {
+      break;
+    }
+
+    str = _deleteLast(str, value.length);
+  }
+
+  return str;
+};
+
+var trimLast = function trimLast(str) {
+  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
+
+  if (isObjectParameter(str, 'str, valueArray')) {
+    var _str17 = str;
+    str = _str17.str;
+    var _str17$valueArray = _str17.valueArray;
+    valueArray = _str17$valueArray === void 0 ? [' ', '\r', '\n'] : _str17$valueArray;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('trimLast args(string) is not string');
+  }
+
+  if (!isArray(valueArray)) {
+    throw new TypeError('trimLast args(valueArray) is not array');
+  }
+
+  if (valueArray.length > 0 && !isStringArray(valueArray)) {
+    throw new TypeError('trimLast args(valueArray) element is not string array');
+  }
+
+  return _trimLast(str, valueArray);
+};
+/**
+ * string.trimBothEnds
+ */
+
+
+var _trimBothEnds = function _trimBothEnds(str) {
+  var valueFirstArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
+  var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
+
+  while (true) {
+    var value = _findFirst(valueFirstArray, function (value) {
+      return _isFirst(str, value);
+    });
+
+    if (isUndefined(value)) {
+      break;
+    }
+
+    str = _deleteFirst(str, value.length);
+  }
+
+  while (true) {
+    var _value = _findFirst(valueLastArray, function (value) {
+      return _isLast(str, value);
+    });
+
+    if (isUndefined(_value)) {
+      break;
+    }
+
+    str = _deleteLast(str, _value.length);
+  }
+
+  return str;
+};
+
+var trimBothEnds = function trimBothEnds(str) {
+  var valueFirstArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
+  var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
+
+  if (isObjectParameter(str, 'str, valueFirstArray', 'valueLastArray')) {
+    var _str18 = str;
+    str = _str18.str;
+    valueFirstArray = _str18.valueFirstArray;
+    var _str18$valueLastArray = _str18.valueLastArray;
+    valueLastArray = _str18$valueLastArray === void 0 ? valueFirstArray : _str18$valueLastArray;
+  } else if (isObjectParameter(str, 'str, valueArray')) {
+    var _str19 = str;
+    str = _str19.str;
+    valueFirstArray = _str19.valueArray;
+    valueLastArray = valueFirstArray;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('trimBothEnds args(string) is not string');
+  }
+
+  if (!isArray(valueFirstArray)) {
+    throw new TypeError('trimBothEnds args(valueFirstArray) is not array');
+  }
+
+  if (valueFirstArray.length > 0 && !isStringArray(valueFirstArray)) {
+    throw new TypeError('trimBothEnds args(valueFirstArray) is not string array');
+  }
+
+  if (!isArray(valueLastArray)) {
+    throw new TypeError('trimBothEnds args(valueLastArray) is not array');
+  }
+
+  if (valueLastArray.length > 0 && !isStringArray(valueLastArray)) {
+    throw new TypeError('trimBothEnds args(valueLastArray) is not string array');
+  }
+
+  return _trimBothEnds(str, valueFirstArray, valueLastArray);
+};
+/**
  * subIndex
  */
 
@@ -503,11 +678,11 @@ var subIndex = function subIndex(str, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
-    var _str16 = str;
-    str = _str16.str;
-    indexStart = _str16.indexStart;
-    var _str16$indexEnd = _str16.indexEnd;
-    indexEnd = _str16$indexEnd === void 0 ? indexStart : _str16$indexEnd;
+    var _str20 = str;
+    str = _str20.str;
+    indexStart = _str20.indexStart;
+    var _str20$indexEnd = _str20.indexEnd;
+    indexEnd = _str20$indexEnd === void 0 ? indexStart : _str20$indexEnd;
   }
 
   if (!isString(str)) {
@@ -547,11 +722,11 @@ var subLength = function subLength(str, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
 
   if (isObjectParameter(str, 'str, index', 'length')) {
-    var _str17 = str;
-    str = _str17.str;
-    index = _str17.index;
-    var _str17$length = _str17.length;
-    length = _str17$length === void 0 ? str.length - index : _str17$length;
+    var _str21 = str;
+    str = _str21.str;
+    index = _str21.index;
+    var _str21$length = _str21.length;
+    length = _str21$length === void 0 ? str.length - index : _str21$length;
   }
 
   if (!isString(str)) {
@@ -592,10 +767,10 @@ var subFirst = function subFirst(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if (isObjectParameter(str, 'str', 'length')) {
-    var _str18 = str;
-    str = _str18.str;
-    var _str18$length = _str18.length;
-    length = _str18$length === void 0 ? 1 : _str18$length;
+    var _str22 = str;
+    str = _str22.str;
+    var _str22$length = _str22.length;
+    length = _str22$length === void 0 ? 1 : _str22$length;
   }
 
   if (!isString(str)) {
@@ -626,10 +801,10 @@ var subLast = function subLast(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if (isObjectParameter(str, 'str', 'length')) {
-    var _str19 = str;
-    str = _str19.str;
-    var _str19$length = _str19.length;
-    length = _str19$length === void 0 ? 1 : _str19$length;
+    var _str23 = str;
+    str = _str23.str;
+    var _str23$length = _str23.length;
+    length = _str23$length === void 0 ? 1 : _str23$length;
   }
 
   if (!isString(str)) {
@@ -662,11 +837,11 @@ var deleteIndex = function deleteIndex(str, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
-    var _str20 = str;
-    str = _str20.str;
-    indexStart = _str20.indexStart;
-    var _str20$indexEnd = _str20.indexEnd;
-    indexEnd = _str20$indexEnd === void 0 ? indexStart : _str20$indexEnd;
+    var _str24 = str;
+    str = _str24.str;
+    indexStart = _str24.indexStart;
+    var _str24$indexEnd = _str24.indexEnd;
+    indexEnd = _str24$indexEnd === void 0 ? indexStart : _str24$indexEnd;
   }
 
   if (!isString(str)) {
@@ -705,11 +880,11 @@ var deleteLength = function deleteLength(str, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
 
   if (isObjectParameter(str, 'str, index', 'length')) {
-    var _str21 = str;
-    str = _str21.str;
-    index = _str21.index;
-    var _str21$length = _str21.length;
-    length = _str21$length === void 0 ? str.length - index : _str21$length;
+    var _str25 = str;
+    str = _str25.str;
+    index = _str25.index;
+    var _str25$length = _str25.length;
+    length = _str25$length === void 0 ? str.length - index : _str25$length;
   }
 
   if (!isString(str)) {
@@ -750,10 +925,10 @@ var deleteFirst = function deleteFirst(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if (isObjectParameter(str, 'str', 'length')) {
-    var _str22 = str;
-    str = _str22.str;
-    var _str22$length = _str22.length;
-    length = _str22$length === void 0 ? 1 : _str22$length;
+    var _str26 = str;
+    str = _str26.str;
+    var _str26$length = _str26.length;
+    length = _str26$length === void 0 ? 1 : _str26$length;
   }
 
   if (!isString(str)) {
@@ -784,10 +959,10 @@ var deleteLast = function deleteLast(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if (isObjectParameter(str, 'str', 'length')) {
-    var _str23 = str;
-    str = _str23.str;
-    var _str23$length = _str23.length;
-    length = _str23$length === void 0 ? 1 : _str23$length;
+    var _str27 = str;
+    str = _str27.str;
+    var _str27$length = _str27.length;
+    length = _str27$length === void 0 ? 1 : _str27$length;
   }
 
   if (!isString(str)) {
@@ -803,6 +978,86 @@ var deleteLast = function deleteLast(str) {
   }
 
   return _deleteLast(str, length);
+};
+/**
+ * string.insert
+ */
+
+
+var _insert = function _insert(str, value) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  str = _subFirst(str, index) + value + _subLast(str, str.length - index);
+  return str;
+};
+
+var insert = function insert(str, value) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+  if (isObjectParameter(str, 'str, value', 'index')) {
+    var _str28 = str;
+    str = _str28.str;
+    value = _str28.value;
+    var _str28$index = _str28.index;
+    index = _str28$index === void 0 ? 0 : _str28$index;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('insert args(str) is not string');
+  }
+
+  if (!isString(value)) {
+    throw new TypeError('insert args(value) is not string');
+  }
+
+  if (!isInteger(index)) {
+    throw new TypeError('insert args(index) is not integer');
+  }
+
+  if (!_inRange(index, 0, str.length)) {
+    throw new RangeError('insert args(index) must be from 0 to str.length');
+  }
+
+  return _insert(str, value, index);
+};
+/**
+ * string.add
+ */
+
+
+var _add = function _add(str, value) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - 1;
+  str = _subFirst(str, index + 1) + value + _subLast(str, str.length - index - 1);
+  return str;
+};
+
+var add = function add(str, value) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - 1;
+
+  if (isObjectParameter(str, 'str, value', 'index')) {
+    var _str29 = str;
+    str = _str29.str;
+    value = _str29.value;
+    var _str29$index = _str29.index;
+    index = _str29$index === void 0 ? str.length - 1 : _str29$index;
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('add args(str) is not string');
+  }
+
+  if (!isString(value)) {
+    throw new TypeError('add args(value) is not string');
+  }
+
+  if (!isInteger(index)) {
+    throw new TypeError('add args(index) is not integer');
+  }
+
+  if (!_inRange(index, -1, str.length - 1)) {
+    throw new RangeError('add args(index) must be from -1 to str.length - 1');
+  }
+
+  return _add(str, value, index);
 };
 
 module.exports = {
@@ -820,6 +1075,9 @@ module.exports = {
   _excludeFirst: _excludeFirst,
   _excludeLast: _excludeLast,
   _excludeBothEnds: _excludeBothEnds,
+  _trimFirst: _trimFirst,
+  _trimLast: _trimLast,
+  _trimBothEnds: _trimBothEnds,
   _subIndex: _subIndex,
   _subLength: _subLength,
   _subFirst: _subFirst,
@@ -828,6 +1086,8 @@ module.exports = {
   _deleteLength: _deleteLength,
   _deleteFirst: _deleteFirst,
   _deleteLast: _deleteLast,
+  _insert: _insert,
+  _add: _add,
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
@@ -842,6 +1102,9 @@ module.exports = {
   excludeFirst: excludeFirst,
   excludeLast: excludeLast,
   excludeBothEnds: excludeBothEnds,
+  trimFirst: trimFirst,
+  trimLast: trimLast,
+  trimBothEnds: trimBothEnds,
   subIndex: subIndex,
   subLength: subLength,
   subFirst: subFirst,
@@ -849,5 +1112,7 @@ module.exports = {
   deleteIndex: deleteIndex,
   deleteLength: deleteLength,
   deleteFirst: deleteFirst,
-  deleteLast: deleteLast
+  deleteLast: deleteLast,
+  insert: insert,
+  add: add
 };

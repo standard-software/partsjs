@@ -25,6 +25,56 @@ var test_execute_type = function test_execute_type(parts) {
       test = _parts$test.test;
   describe('test_execute_type', function () {
     var _parts$type = parts.type,
+        isUndefined = _parts$type.isUndefined,
+        isNull = _parts$type.isNull,
+        isNaNStrict = _parts$type.isNaNStrict,
+        isBoolean = _parts$type.isBoolean,
+        isNumber = _parts$type.isNumber,
+        isInteger = _parts$type.isInteger,
+        isString = _parts$type.isString,
+        isFunction = _parts$type.isFunction,
+        isObject = _parts$type.isObject,
+        isObjectType = _parts$type.isObjectType,
+        isArray = _parts$type.isArray,
+        isArrayType = _parts$type.isArrayType,
+        isDate = _parts$type.isDate,
+        isRegExp = _parts$type.isRegExp,
+        isException = _parts$type.isException,
+        isBooleanObject = _parts$type.isBooleanObject,
+        isNumberObject = _parts$type.isNumberObject,
+        isStringObject = _parts$type.isStringObject,
+        isEmptyObject = _parts$type.isEmptyObject,
+        isEmptyArray = _parts$type.isEmptyArray,
+        isSymbol = _parts$type.isSymbol,
+        isMap = _parts$type.isMap,
+        isWeakMap = _parts$type.isWeakMap,
+        isSet = _parts$type.isSet,
+        isWeakSet = _parts$type.isWeakSet,
+        isNotUndefined = _parts$type.isNotUndefined,
+        isNotNull = _parts$type.isNotNull,
+        isNotNaNStrict = _parts$type.isNotNaNStrict,
+        isNotBoolean = _parts$type.isNotBoolean,
+        isNotNumber = _parts$type.isNotNumber,
+        isNotInteger = _parts$type.isNotInteger,
+        isNotString = _parts$type.isNotString,
+        isNotFunction = _parts$type.isNotFunction,
+        isNotObject = _parts$type.isNotObject,
+        isNotObjectType = _parts$type.isNotObjectType,
+        isNotArray = _parts$type.isNotArray,
+        isNotArrayType = _parts$type.isNotArrayType,
+        isNotDate = _parts$type.isNotDate,
+        isNotRegExp = _parts$type.isNotRegExp,
+        isNotException = _parts$type.isNotException,
+        isNotBooleanObject = _parts$type.isNotBooleanObject,
+        isNotNumberObject = _parts$type.isNotNumberObject,
+        isNotStringObject = _parts$type.isNotStringObject,
+        isNotEmptyObject = _parts$type.isNotEmptyObject,
+        isNotEmptyArray = _parts$type.isNotEmptyArray,
+        isNotSymbol = _parts$type.isNotSymbol,
+        isNotMap = _parts$type.isNotMap,
+        isNotWeakMap = _parts$type.isNotWeakMap,
+        isNotSet = _parts$type.isNotSet,
+        isNotWeakSet = _parts$type.isNotWeakSet,
         isUndefinedAll = _parts$type.isUndefinedAll,
         isNullAll = _parts$type.isNullAll,
         isNaNStrictAll = _parts$type.isNaNStrictAll,
@@ -74,7 +124,57 @@ var test_execute_type = function test_execute_type(parts) {
         isNotMapAll = _parts$type.isNotMapAll,
         isNotWeakMapAll = _parts$type.isNotWeakMapAll,
         isNotSetAll = _parts$type.isNotSetAll,
-        isNotWeakSetAll = _parts$type.isNotWeakSetAll;
+        isNotWeakSetAll = _parts$type.isNotWeakSetAll,
+        isUndefinedArray = _parts$type.isUndefinedArray,
+        isNullArray = _parts$type.isNullArray,
+        isNaNStrictArray = _parts$type.isNaNStrictArray,
+        isBooleanArray = _parts$type.isBooleanArray,
+        isNumberArray = _parts$type.isNumberArray,
+        isIntegerArray = _parts$type.isIntegerArray,
+        isStringArray = _parts$type.isStringArray,
+        isFunctionArray = _parts$type.isFunctionArray,
+        isObjectArray = _parts$type.isObjectArray,
+        isObjectTypeArray = _parts$type.isObjectTypeArray,
+        isArrayArray = _parts$type.isArrayArray,
+        isArrayTypeArray = _parts$type.isArrayTypeArray,
+        isDateArray = _parts$type.isDateArray,
+        isRegExpArray = _parts$type.isRegExpArray,
+        isExceptionArray = _parts$type.isExceptionArray,
+        isBooleanObjectArray = _parts$type.isBooleanObjectArray,
+        isNumberObjectArray = _parts$type.isNumberObjectArray,
+        isStringObjectArray = _parts$type.isStringObjectArray,
+        isEmptyObjectArray = _parts$type.isEmptyObjectArray,
+        isEmptyArrayArray = _parts$type.isEmptyArrayArray,
+        isSymbolArray = _parts$type.isSymbolArray,
+        isMapArray = _parts$type.isMapArray,
+        isWeakMapArray = _parts$type.isWeakMapArray,
+        isSetArray = _parts$type.isSetArray,
+        isWeakSetArray = _parts$type.isWeakSetArray,
+        isNotUndefinedArray = _parts$type.isNotUndefinedArray,
+        isNotNullArray = _parts$type.isNotNullArray,
+        isNotNaNStrictArray = _parts$type.isNotNaNStrictArray,
+        isNotBooleanArray = _parts$type.isNotBooleanArray,
+        isNotNumberArray = _parts$type.isNotNumberArray,
+        isNotIntegerArray = _parts$type.isNotIntegerArray,
+        isNotStringArray = _parts$type.isNotStringArray,
+        isNotFunctionArray = _parts$type.isNotFunctionArray,
+        isNotObjectArray = _parts$type.isNotObjectArray,
+        isNotObjectTypeArray = _parts$type.isNotObjectTypeArray,
+        isNotArrayArray = _parts$type.isNotArrayArray,
+        isNotArrayTypeArray = _parts$type.isNotArrayTypeArray,
+        isNotDateArray = _parts$type.isNotDateArray,
+        isNotRegExpArray = _parts$type.isNotRegExpArray,
+        isNotExceptionArray = _parts$type.isNotExceptionArray,
+        isNotBooleanObjectArray = _parts$type.isNotBooleanObjectArray,
+        isNotNumberObjectArray = _parts$type.isNotNumberObjectArray,
+        isNotStringObjectArray = _parts$type.isNotStringObjectArray,
+        isNotEmptyObjectArray = _parts$type.isNotEmptyObjectArray,
+        isNotEmptyArrayArray = _parts$type.isNotEmptyArrayArray,
+        isNotSymbolArray = _parts$type.isNotSymbolArray,
+        isNotMapArray = _parts$type.isNotMapArray,
+        isNotWeakMapArray = _parts$type.isNotWeakMapArray,
+        isNotSetArray = _parts$type.isNotSetArray,
+        isNotWeakSetArray = _parts$type.isNotWeakSetArray;
     var allMatchSome = parts.compare.allMatchSome;
     var objectToString = parts.objectToString;
 
@@ -535,14 +635,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isString = function test_isString() {
       it('test_isString', function () {
-        var isStringArray = function isStringArray(array) {
-          return allMatchSome(array, [isStringAll]);
-        };
-
-        var isNotStringArray = function isNotStringArray(array) {
-          return allMatchSome(array, [isNotStringAll]);
-        };
-
         checkEqual(true, isStringAll(''));
         checkEqual(true, isStringAll('a'));
         checkEqual(true, isStringAll('a', 'b', 'c'));
@@ -560,6 +652,17 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(false, isStringArray(['a', 'b', 1]));
         checkEqual(false, isStringArray(['a', 'b', null]));
         checkEqual(false, isStringArray(['a', 'b', undefined]));
+        checkEqual(false, isNotStringArray([]));
+        checkEqual(false, isNotStringArray(['']));
+        checkEqual(false, isNotStringArray(['a']));
+        checkEqual(false, isNotStringArray(['a', 'b', 'c']));
+        checkEqual(false, isNotStringArray(['a', 'b', '']));
+        checkEqual(false, isNotStringArray(['a', 'b', 0]));
+        checkEqual(false, isNotStringArray(['a', 'b', 1]));
+        checkEqual(false, isNotStringArray(['a', 'b', null]));
+        checkEqual(false, isNotStringArray(['a', 'b', undefined]));
+        checkEqual(true, isNotStringArray([0, 1, 2]));
+        checkEqual(true, isNotStringArray([0, null, undefined]));
         checkEqual('', String(new String()));
         checkEqual('', String(new String('')));
         checkEqual(' ', String(new String(' ')));

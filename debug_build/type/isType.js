@@ -118,7 +118,7 @@ var isNotNull = function isNotNull(value) {
   return !isNull(value);
 };
 
-var isNotNaNStrictAll = function isNotNaNStrictAll(value) {
+var isNotNaNStrict = function isNotNaNStrict(value) {
   return !isNaNStrict(value);
 };
 
@@ -186,6 +186,24 @@ var isNotEmptyArray = function isNotEmptyArray(value) {
   return !isEmptyArray(value);
 };
 
+var isUndef = isUndefined;
+var isBool = isBoolean;
+var isNum = isNumber;
+var isInt = isInteger;
+var isStr = isString;
+var isFunc = isFunction;
+var isObj = isObject;
+var isObjType = isObjectType;
+var isEmptyObj = isEmptyObject;
+var isNotUndef = isNotUndefined;
+var isNotBool = isNotBoolean;
+var isNotNum = isNotNumber;
+var isNotInt = isNotInteger;
+var isNotStr = isNotString;
+var isNotFunc = isNotFunction;
+var isNotObj = isNotObject;
+var isNotObjType = isNotObjectType;
+var isNotEmptyObj = isNotEmptyObject;
 module.exports = {
   _typeofCheck: _typeofCheck,
   _objectToStringCheck: _objectToStringCheck,
@@ -212,7 +230,7 @@ module.exports = {
   isEmptyArray: isEmptyArray,
   isNotUndefined: isNotUndefined,
   isNotNull: isNotNull,
-  isNotNaNStrictAll: isNotNaNStrictAll,
+  isNotNaNStrict: isNotNaNStrict,
   isNotBoolean: isNotBoolean,
   isNotNumber: isNotNumber,
   isNotInteger: isNotInteger,
@@ -228,5 +246,23 @@ module.exports = {
   isNotNumberObject: isNotNumberObject,
   isNotStringObject: isNotStringObject,
   isNotEmptyObject: isNotEmptyObject,
-  isNotEmptyArray: isNotEmptyArray
+  isNotEmptyArray: isNotEmptyArray,
+  isUndef: isUndef,
+  isBool: isBool,
+  isNum: isNum,
+  isInt: isInt,
+  isStr: isStr,
+  isFunc: isFunc,
+  isObj: isObj,
+  isObjType: isObjType,
+  isEmptyObj: isEmptyObj,
+  isNotUndef: isNotUndef,
+  isNotBool: isNotBool,
+  isNotNum: isNotNum,
+  isNotInt: isNotInt,
+  isNotStr: isNotStr,
+  isNotFunc: isNotFunc,
+  isNotObj: isNotObj,
+  isNotObjType: isNotObjType,
+  isNotEmptyObj: isNotEmptyObj
 };

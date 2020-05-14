@@ -169,7 +169,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = parts.platform.isWindowsScriptHost() ? [248, 13, 3, 140, 8, 11, 23, 29, 7, 24, 12, 32] : [248, 13, 3, 140, 8, 11, 23, 29, 7, 24, 12, 32];
+        var countArray = parts.platform.isWindowsScriptHost() ? [316, 13, 3, 208, 8, 11, 23, 29, 7, 29, 12, 32] : [316, 13, 3, 208, 8, 11, 23, 29, 7, 29, 12, 32];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -1217,7 +1217,7 @@ var isNotNull = function isNotNull(value) {
   return !isNull(value);
 };
 
-var isNotNaNStrictAll = function isNotNaNStrictAll(value) {
+var isNotNaNStrict = function isNotNaNStrict(value) {
   return !isNaNStrict(value);
 };
 
@@ -1285,6 +1285,24 @@ var isNotEmptyArray = function isNotEmptyArray(value) {
   return !isEmptyArray(value);
 };
 
+var isUndef = isUndefined;
+var isBool = isBoolean;
+var isNum = isNumber;
+var isInt = isInteger;
+var isStr = isString;
+var isFunc = isFunction;
+var isObj = isObject;
+var isObjType = isObjectType;
+var isEmptyObj = isEmptyObject;
+var isNotUndef = isNotUndefined;
+var isNotBool = isNotBoolean;
+var isNotNum = isNotNumber;
+var isNotInt = isNotInteger;
+var isNotStr = isNotString;
+var isNotFunc = isNotFunction;
+var isNotObj = isNotObject;
+var isNotObjType = isNotObjectType;
+var isNotEmptyObj = isNotEmptyObject;
 module.exports = {
   _typeofCheck: _typeofCheck,
   _objectToStringCheck: _objectToStringCheck,
@@ -1311,7 +1329,7 @@ module.exports = {
   isEmptyArray: isEmptyArray,
   isNotUndefined: isNotUndefined,
   isNotNull: isNotNull,
-  isNotNaNStrictAll: isNotNaNStrictAll,
+  isNotNaNStrict: isNotNaNStrict,
   isNotBoolean: isNotBoolean,
   isNotNumber: isNotNumber,
   isNotInteger: isNotInteger,
@@ -1327,7 +1345,25 @@ module.exports = {
   isNotNumberObject: isNotNumberObject,
   isNotStringObject: isNotStringObject,
   isNotEmptyObject: isNotEmptyObject,
-  isNotEmptyArray: isNotEmptyArray
+  isNotEmptyArray: isNotEmptyArray,
+  isUndef: isUndef,
+  isBool: isBool,
+  isNum: isNum,
+  isInt: isInt,
+  isStr: isStr,
+  isFunc: isFunc,
+  isObj: isObj,
+  isObjType: isObjType,
+  isEmptyObj: isEmptyObj,
+  isNotUndef: isNotUndef,
+  isNotBool: isNotBool,
+  isNotNum: isNotNum,
+  isNotInt: isNotInt,
+  isNotStr: isNotStr,
+  isNotFunc: isNotFunc,
+  isNotObj: isNotObj,
+  isNotObjType: isNotObjType,
+  isNotEmptyObj: isNotEmptyObj
 };
 
 /***/ }),
@@ -18383,6 +18419,56 @@ var test_execute_type = function test_execute_type(parts) {
       test = _parts$test.test;
   describe('test_execute_type', function () {
     var _parts$type = parts.type,
+        isUndefined = _parts$type.isUndefined,
+        isNull = _parts$type.isNull,
+        isNaNStrict = _parts$type.isNaNStrict,
+        isBoolean = _parts$type.isBoolean,
+        isNumber = _parts$type.isNumber,
+        isInteger = _parts$type.isInteger,
+        isString = _parts$type.isString,
+        isFunction = _parts$type.isFunction,
+        isObject = _parts$type.isObject,
+        isObjectType = _parts$type.isObjectType,
+        isArray = _parts$type.isArray,
+        isArrayType = _parts$type.isArrayType,
+        isDate = _parts$type.isDate,
+        isRegExp = _parts$type.isRegExp,
+        isException = _parts$type.isException,
+        isBooleanObject = _parts$type.isBooleanObject,
+        isNumberObject = _parts$type.isNumberObject,
+        isStringObject = _parts$type.isStringObject,
+        isEmptyObject = _parts$type.isEmptyObject,
+        isEmptyArray = _parts$type.isEmptyArray,
+        isSymbol = _parts$type.isSymbol,
+        isMap = _parts$type.isMap,
+        isWeakMap = _parts$type.isWeakMap,
+        isSet = _parts$type.isSet,
+        isWeakSet = _parts$type.isWeakSet,
+        isNotUndefined = _parts$type.isNotUndefined,
+        isNotNull = _parts$type.isNotNull,
+        isNotNaNStrict = _parts$type.isNotNaNStrict,
+        isNotBoolean = _parts$type.isNotBoolean,
+        isNotNumber = _parts$type.isNotNumber,
+        isNotInteger = _parts$type.isNotInteger,
+        isNotString = _parts$type.isNotString,
+        isNotFunction = _parts$type.isNotFunction,
+        isNotObject = _parts$type.isNotObject,
+        isNotObjectType = _parts$type.isNotObjectType,
+        isNotArray = _parts$type.isNotArray,
+        isNotArrayType = _parts$type.isNotArrayType,
+        isNotDate = _parts$type.isNotDate,
+        isNotRegExp = _parts$type.isNotRegExp,
+        isNotException = _parts$type.isNotException,
+        isNotBooleanObject = _parts$type.isNotBooleanObject,
+        isNotNumberObject = _parts$type.isNotNumberObject,
+        isNotStringObject = _parts$type.isNotStringObject,
+        isNotEmptyObject = _parts$type.isNotEmptyObject,
+        isNotEmptyArray = _parts$type.isNotEmptyArray,
+        isNotSymbol = _parts$type.isNotSymbol,
+        isNotMap = _parts$type.isNotMap,
+        isNotWeakMap = _parts$type.isNotWeakMap,
+        isNotSet = _parts$type.isNotSet,
+        isNotWeakSet = _parts$type.isNotWeakSet,
         isUndefinedAll = _parts$type.isUndefinedAll,
         isNullAll = _parts$type.isNullAll,
         isNaNStrictAll = _parts$type.isNaNStrictAll,
@@ -18432,7 +18518,57 @@ var test_execute_type = function test_execute_type(parts) {
         isNotMapAll = _parts$type.isNotMapAll,
         isNotWeakMapAll = _parts$type.isNotWeakMapAll,
         isNotSetAll = _parts$type.isNotSetAll,
-        isNotWeakSetAll = _parts$type.isNotWeakSetAll;
+        isNotWeakSetAll = _parts$type.isNotWeakSetAll,
+        isUndefinedArray = _parts$type.isUndefinedArray,
+        isNullArray = _parts$type.isNullArray,
+        isNaNStrictArray = _parts$type.isNaNStrictArray,
+        isBooleanArray = _parts$type.isBooleanArray,
+        isNumberArray = _parts$type.isNumberArray,
+        isIntegerArray = _parts$type.isIntegerArray,
+        isStringArray = _parts$type.isStringArray,
+        isFunctionArray = _parts$type.isFunctionArray,
+        isObjectArray = _parts$type.isObjectArray,
+        isObjectTypeArray = _parts$type.isObjectTypeArray,
+        isArrayArray = _parts$type.isArrayArray,
+        isArrayTypeArray = _parts$type.isArrayTypeArray,
+        isDateArray = _parts$type.isDateArray,
+        isRegExpArray = _parts$type.isRegExpArray,
+        isExceptionArray = _parts$type.isExceptionArray,
+        isBooleanObjectArray = _parts$type.isBooleanObjectArray,
+        isNumberObjectArray = _parts$type.isNumberObjectArray,
+        isStringObjectArray = _parts$type.isStringObjectArray,
+        isEmptyObjectArray = _parts$type.isEmptyObjectArray,
+        isEmptyArrayArray = _parts$type.isEmptyArrayArray,
+        isSymbolArray = _parts$type.isSymbolArray,
+        isMapArray = _parts$type.isMapArray,
+        isWeakMapArray = _parts$type.isWeakMapArray,
+        isSetArray = _parts$type.isSetArray,
+        isWeakSetArray = _parts$type.isWeakSetArray,
+        isNotUndefinedArray = _parts$type.isNotUndefinedArray,
+        isNotNullArray = _parts$type.isNotNullArray,
+        isNotNaNStrictArray = _parts$type.isNotNaNStrictArray,
+        isNotBooleanArray = _parts$type.isNotBooleanArray,
+        isNotNumberArray = _parts$type.isNotNumberArray,
+        isNotIntegerArray = _parts$type.isNotIntegerArray,
+        isNotStringArray = _parts$type.isNotStringArray,
+        isNotFunctionArray = _parts$type.isNotFunctionArray,
+        isNotObjectArray = _parts$type.isNotObjectArray,
+        isNotObjectTypeArray = _parts$type.isNotObjectTypeArray,
+        isNotArrayArray = _parts$type.isNotArrayArray,
+        isNotArrayTypeArray = _parts$type.isNotArrayTypeArray,
+        isNotDateArray = _parts$type.isNotDateArray,
+        isNotRegExpArray = _parts$type.isNotRegExpArray,
+        isNotExceptionArray = _parts$type.isNotExceptionArray,
+        isNotBooleanObjectArray = _parts$type.isNotBooleanObjectArray,
+        isNotNumberObjectArray = _parts$type.isNotNumberObjectArray,
+        isNotStringObjectArray = _parts$type.isNotStringObjectArray,
+        isNotEmptyObjectArray = _parts$type.isNotEmptyObjectArray,
+        isNotEmptyArrayArray = _parts$type.isNotEmptyArrayArray,
+        isNotSymbolArray = _parts$type.isNotSymbolArray,
+        isNotMapArray = _parts$type.isNotMapArray,
+        isNotWeakMapArray = _parts$type.isNotWeakMapArray,
+        isNotSetArray = _parts$type.isNotSetArray,
+        isNotWeakSetArray = _parts$type.isNotWeakSetArray;
     var allMatchSome = parts.compare.allMatchSome;
     var objectToString = parts.objectToString;
 
@@ -18893,14 +19029,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isString = function test_isString() {
       it('test_isString', function () {
-        var isStringArray = function isStringArray(array) {
-          return allMatchSome(array, [isStringAll]);
-        };
-
-        var isNotStringArray = function isNotStringArray(array) {
-          return allMatchSome(array, [isNotStringAll]);
-        };
-
         checkEqual(true, isStringAll(''));
         checkEqual(true, isStringAll('a'));
         checkEqual(true, isStringAll('a', 'b', 'c'));
@@ -18918,6 +19046,17 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(false, isStringArray(['a', 'b', 1]));
         checkEqual(false, isStringArray(['a', 'b', null]));
         checkEqual(false, isStringArray(['a', 'b', undefined]));
+        checkEqual(false, isNotStringArray([]));
+        checkEqual(false, isNotStringArray(['']));
+        checkEqual(false, isNotStringArray(['a']));
+        checkEqual(false, isNotStringArray(['a', 'b', 'c']));
+        checkEqual(false, isNotStringArray(['a', 'b', '']));
+        checkEqual(false, isNotStringArray(['a', 'b', 0]));
+        checkEqual(false, isNotStringArray(['a', 'b', 1]));
+        checkEqual(false, isNotStringArray(['a', 'b', null]));
+        checkEqual(false, isNotStringArray(['a', 'b', undefined]));
+        checkEqual(true, isNotStringArray([0, 1, 2]));
+        checkEqual(true, isNotStringArray([0, null, undefined]));
         checkEqual('', String(new String()));
         checkEqual('', String(new String('')));
         checkEqual(' ', String(new String(' ')));
@@ -24300,6 +24439,9 @@ var test_execute_string = function test_execute_string(parts) {
         excludeFirst = _parts$string.excludeFirst,
         excludeLast = _parts$string.excludeLast,
         excludeBothEnds = _parts$string.excludeBothEnds,
+        trimFirst = _parts$string.trimFirst,
+        trimLast = _parts$string.trimLast,
+        trimBothEnds = _parts$string.trimBothEnds,
         subIndex = _parts$string.subIndex,
         subLength = _parts$string.subLength,
         subFirst = _parts$string.subFirst,
@@ -24307,7 +24449,9 @@ var test_execute_string = function test_execute_string(parts) {
         deleteIndex = _parts$string.deleteIndex,
         deleteLength = _parts$string.deleteLength,
         deleteFirst = _parts$string.deleteFirst,
-        deleteLast = _parts$string.deleteLast;
+        deleteLast = _parts$string.deleteLast,
+        insert = _parts$string.insert,
+        add = _parts$string.add;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -24874,6 +25018,138 @@ var test_execute_string = function test_execute_string(parts) {
           str: 'ABAD',
           valueFirst: 'A',
           valueLast: 'D'
+        }));
+      });
+    };
+
+    var test_trimFirst = function test_trimFirst() {
+      it('test_trimFirst', function () {
+        checkEqual('23', trimFirst('123', ['1']));
+        checkEqual('3', trimFirst('123', ['12']));
+        checkEqual('123', trimFirst('123', ['13']));
+        checkEqual('123', trimFirst('123', ['2']));
+        checkEqual('BC', trimFirst('ABC', ['A']));
+        checkEqual('C', trimFirst('ABC', ['AB']));
+        checkEqual('ABC', trimFirst('ABC', ['AC']));
+        checkEqual('ABC', trimFirst('ABC', ['a']));
+        checkEqual('ABC', trimFirst('ABC', ['B']));
+        checkEqual('C', trimFirst('ABC', ['A', 'B']));
+        checkEqual('C', trimFirst('ABC', ['B', 'A']));
+        checkEqual('C', trimFirst('AABBC', ['A', 'B']));
+        checkEqual('C', trimFirst('ABABC', ['A', 'B']));
+        checkEqual('C', trimFirst('BABAC', ['A', 'B']));
+        checkEqual('C', trimFirst('ABBAC', ['A', 'B']));
+        checkEqual('C', trimFirst('BAABC', ['A', 'B']));
+        checkEqual('C', trimFirst('AAABC', ['A', 'B']));
+        checkEqual('C', trimFirst('ABBBC', ['A', 'B']));
+        checkEqual('CABC', trimFirst('CABC', ['A', 'B']));
+        checkEqual('ABC', trimFirst('ABC', []));
+        checkEqual('', trimFirst('ABC', ['ABC']));
+        checkEqual('', trimFirst('ABC', ['A', 'B', 'C']));
+        checkEqual('', trimFirst('', []));
+        checkEqual('', trimFirst('', ['ABC']));
+        checkEqual('', trimFirst('', ['A', 'B', 'C']));
+        checkEqual(true, isThrown(function () {
+          return trimFirst('ABC', [0, 'B', 'C']);
+        }));
+        checkEqual(true, isThrown(function () {
+          return trimFirst('', [0, 'B', 'C']);
+        }));
+      });
+    };
+
+    var test_trimLast = function test_trimLast() {
+      it('test_trimLast', function () {
+        checkEqual('12', trimLast('123', ['3']));
+        checkEqual('1', trimLast('123', ['23']));
+        checkEqual('123', trimLast('123', ['13']));
+        checkEqual('123', trimLast('123', ['2']));
+        checkEqual('AB', trimLast('ABC', ['C']));
+        checkEqual('A', trimLast('ABC', ['BC']));
+        checkEqual('ABC', trimLast('ABC', ['AC']));
+        checkEqual('ABC', trimLast('ABC', ['c']));
+        checkEqual('ABC', trimLast('ABC', ['B']));
+        checkEqual('C', trimLast('CAB', ['A', 'B']));
+        checkEqual('C', trimLast('CAB', ['B', 'A']));
+        checkEqual('C', trimLast('CAABB', ['A', 'B']));
+        checkEqual('C', trimLast('CABAB', ['A', 'B']));
+        checkEqual('C', trimLast('CBABA', ['A', 'B']));
+        checkEqual('C', trimLast('CABBA', ['A', 'B']));
+        checkEqual('C', trimLast('CBAAB', ['A', 'B']));
+        checkEqual('C', trimLast('CAAAB', ['A', 'B']));
+        checkEqual('C', trimLast('CABBB', ['A', 'B']));
+        checkEqual('CABC', trimLast('CABC', ['A', 'B']));
+        checkEqual('ABC', trimLast('ABC', []));
+        checkEqual('', trimLast('ABC', ['ABC']));
+        checkEqual('', trimLast('ABC', ['A', 'B', 'C']));
+        checkEqual('', trimLast('', []));
+        checkEqual('', trimLast('', ['ABC']));
+        checkEqual('', trimLast('', ['A', 'B', 'C']));
+        checkEqual(true, isThrown(function () {
+          return trimLast('ABC', [0, 'B', 'C']);
+        }));
+        checkEqual(true, isThrown(function () {
+          return trimLast('', [0, 'B', 'C']);
+        }));
+      });
+    };
+
+    var test_trimBothEnds = function test_trimBothEnds() {
+      it('test_trimBothEnds', function () {
+        checkEqual('2', trimBothEnds('121', ['1']));
+        checkEqual('121', trimBothEnds('121', ['2']));
+        checkEqual('1', trimBothEnds('121', ['12'], ['21']));
+        checkEqual('3', trimBothEnds('123', ['12'], ['23']));
+        checkEqual('B', trimBothEnds('ABA', ['A']));
+        checkEqual('ABA', trimBothEnds('ABA', ['a']));
+        checkEqual('ABA', trimBothEnds('ABA', ['B']));
+        checkEqual('', trimBothEnds('ABAB', ['AB']));
+        checkEqual('BAD', trimBothEnds('ABAD', ['A']));
+        checkEqual('BA', trimBothEnds('ABAD', ['A'], ['D']));
+        checkEqual('AB', trimBothEnds('{AB}', ['{'], ['}']));
+        checkEqual('', trimBothEnds('{{}}', ['{'], ['}']));
+        checkEqual('A{B', trimBothEnds('A{B}', ['{'], ['}']));
+        checkEqual('{AB', trimBothEnds('{AB}', ['}'], ['}']));
+        checkEqual('AB}', trimBothEnds('{AB}', ['{'], ['{']));
+        checkEqual('232', trimBothEnds('12321', ['1']));
+        checkEqual('12321', trimBothEnds('12321', ['2']));
+        checkEqual('3', trimBothEnds('12321', ['2', '1']));
+        checkEqual('232', trimBothEnds('12321', ['', '1']));
+        checkEqual('32', trimBothEnds('12321', ['2', '1'], ['1']));
+        checkEqual('321', trimBothEnds('12321', ['2', '1'], ['2']));
+        checkEqual('', trimBothEnds('1', ['1']));
+        checkEqual('', trimBothEnds('11', ['1'])); // Object Named Parameter
+
+        checkEqual('B', trimBothEnds({
+          str: 'ABA',
+          valueArray: ['A']
+        }));
+        checkEqual('ABA', trimBothEnds({
+          str: 'ABA',
+          valueArray: ['a']
+        }));
+        checkEqual('B', trimBothEnds({
+          str: 'ABA',
+          valueFirstArray: ['A']
+        }));
+        checkEqual('BA', trimBothEnds({
+          str: 'ABA',
+          valueFirstArray: ['A'],
+          valueLastArray: []
+        }));
+        checkEqual('AB', trimBothEnds({
+          str: 'ABA',
+          valueFirstArray: [],
+          valueLastArray: ['A']
+        }));
+        checkEqual('BAD', trimBothEnds({
+          str: 'ABAD',
+          valueFirstArray: ['A']
+        }));
+        checkEqual('BA', trimBothEnds({
+          str: 'ABAD',
+          valueFirstArray: ['A'],
+          valueLastArray: ['D']
         }));
       });
     };
@@ -25515,6 +25791,42 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_insert = function test_insert() {
+      it('test_insert', function () {
+        checkEqual('A01234', insert('01234', 'A'));
+        checkEqual(true, isThrown(function () {
+          return insert('01234', 'A', -1);
+        }));
+        checkEqual('A01234', insert('01234', 'A', 0));
+        checkEqual('0A1234', insert('01234', 'A', 1));
+        checkEqual('01A234', insert('01234', 'A', 2));
+        checkEqual('012A34', insert('01234', 'A', 3));
+        checkEqual('0123A4', insert('01234', 'A', 4));
+        checkEqual('01234A', insert('01234', 'A', 5));
+        checkEqual(true, isThrown(function () {
+          return insert('01234', 'A', 6);
+        }));
+      });
+    };
+
+    var test_add = function test_add() {
+      it('test_add', function () {
+        checkEqual('01234A', add('01234', 'A'));
+        checkEqual(true, isThrown(function () {
+          return add('01234', 'A', -2);
+        }));
+        checkEqual('A01234', add('01234', 'A', -1));
+        checkEqual('0A1234', add('01234', 'A', 0));
+        checkEqual('01A234', add('01234', 'A', 1));
+        checkEqual('012A34', add('01234', 'A', 2));
+        checkEqual('0123A4', add('01234', 'A', 3));
+        checkEqual('01234A', add('01234', 'A', 4));
+        checkEqual(true, isThrown(function () {
+          return add('01234', 'A', 5);
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -25530,6 +25842,9 @@ var test_execute_string = function test_execute_string(parts) {
     test_excludeFirst();
     test_excludeLast();
     test_excludeBothEnds();
+    test_trimFirst();
+    test_trimLast();
+    test_trimBothEnds();
     test_substring_stardard();
     test_substr_stardard();
     test_subIndex();
@@ -25540,6 +25855,8 @@ var test_execute_string = function test_execute_string(parts) {
     test_deleteLength();
     test_deleteFirst();
     test_deleteLast();
+    test_insert();
+    test_add();
   });
 };
 
@@ -26503,7 +26820,8 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(true, isLast(['A', 'B', 'C'], ['B', 'C']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['A', 'C']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['c']));
-        checkEqual(false, isLast(['A', 'B', 'C'], ['B'])); // Object Named Parameter
+        checkEqual(false, isLast(['A', 'B', 'C'], ['B']));
+        checkEqual(false, isLast([1], [2, 3])); // Object Named Parameter
 
         checkEqual(true, isLast({
           array: ['A', 'B', 'C'],

@@ -28,7 +28,11 @@ var isNotException = function isNotException(value) {
   return !isException(value);
 };
 
+var isExcept = isException;
+var isNotExcept = isNotException;
 module.exports = {
   isException: isException,
-  isNotException: isNotException
+  isNotException: isNotException,
+  isExcept: isExcept,
+  isNotExcept: isNotExcept
 };

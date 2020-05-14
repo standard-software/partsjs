@@ -12,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '5.3.3';
+const VERSION = '5.4.0';
 
 const rootNames = {};
 const propertyNames = {};
@@ -26,7 +26,8 @@ propertyNames.ROOT =
   'clone, cloneDeep,' +
   'cloneFunction,' +
   '';
-const root = _copyProperty(_root, propertyNames.ROOT);
+const root = {};
+_copyProperty(_root, propertyNames.ROOT, root);
 _copyProperty(_root, propertyNames.ROOT, rootNames);
 
 // platform
@@ -72,8 +73,11 @@ propertyNames.TYPE = [
   isPrefixSafixAdd('isNot', '',     propertyNames._TYPE_BASE),
   isPrefixSafixAdd('is',    'All',  propertyNames._TYPE_BASE),
   isPrefixSafixAdd('isNot', 'All',  propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('is',    'Array',  propertyNames._TYPE_BASE),
+  isPrefixSafixAdd('isNot', 'Array',  propertyNames._TYPE_BASE),
 ].join(',');
-const type = _copyProperty(_type, propertyNames.TYPE);
+const type = {};
+_copyProperty(_type, propertyNames.TYPE, type);
 _copyProperty(_type, propertyNames.TYPE, rootNames);
 
 // test
@@ -85,7 +89,8 @@ propertyNames.TEST_PUBLIC =
 propertyNames.TEST_ROOT =
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';
-const test = _copyProperty(_test, propertyNames.TEST_PUBLIC);
+const test = {};
+_copyProperty(_test, propertyNames.TEST_PUBLIC, test);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames);
 
 // syntax
@@ -111,7 +116,8 @@ propertyNames.COMPARE =
   'allMatchAll, indexOfMatchAll, someMatchAll,' +
   'includes, includesSome, includesAll,' +
   '';
-const compare = _copyProperty(_compare, propertyNames.COMPARE);
+const compare = {};
+_copyProperty(_compare, propertyNames.COMPARE, compare);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
 // convert
@@ -135,9 +141,8 @@ propertyNames.CONVERT =
   'strToNum,strToNumDef,' +
   'strToInt,strToIntDef,' +
   '';
-const convert = _copyProperty(_convert,
-  propertyNames.CONVERT,
-);
+const convert = {};
+_copyProperty(_convert, propertyNames.CONVERT, convert);
 _copyProperty(_convert, propertyNames.CONVERT, rootNames);
 
 // number
@@ -157,14 +162,17 @@ propertyNames.STRING_PUBLIC =
   'isFirst, isLast, isBothEnds,' +
   'includeFirst, includeLast, includeBothEnds,' +
   'excludeFirst, excludeLast, excludeBothEnds,' +
+  'trimFirst, trimLast, trimBothEnds,' +
   'subIndex, subLength, subFirst, subLast,' +
   'deleteIndex, deleteLength, deleteFirst, deleteLast,' +
+  'insert, add,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
   'isLowerCase,isUpperCase,' +
   '';
-const string = _copyProperty(_string, propertyNames.STRING_PUBLIC);
+const string = {};
+_copyProperty(_string, propertyNames.STRING_PUBLIC, string);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 
 // object
@@ -181,7 +189,8 @@ propertyNames.OBJECT_ROOT =
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
   '';
-const object = _copyProperty(_object, propertyNames.OBJECT_PUBLIC);
+const object = {};
+_copyProperty(_object, propertyNames.OBJECT_PUBLIC, object);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString;
@@ -203,14 +212,33 @@ propertyNames.ARRAY_PUBLIC =
   'findIndex, findBackIndex,' +
   'find, findBack,' +
   'every,' +
-  'operation,' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +
   'sum, average, median,' +
   '';
-const array = _copyProperty(_array, propertyNames.ARRAY_PUBLIC);
+const array = {};
+_copyProperty(_array, propertyNames.ARRAY_PUBLIC, array);
 _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);
+
+// array.operation
+propertyNames.ARRAY_OPERATION_PUBLIC =
+  'insert, add,' +
+  'deleteLength, deleteIndex,' +
+  'deleteFirst, deleteLast,' +
+  'includeFirst, includeLast, includeBothEnds,' +
+  'excludeFirst, excludeLast, excludeBothEnds,' +
+  'trimFirst, trimLast, trimBothEnds,' +
+  'popFirst, popLast,' +
+  'pushFirst, pushLast,' +
+  'remainFirst, remainLast,' +
+  'filter,' +
+  'sortNumberAscending, sortNumberDescending,' +
+  'sortLengthAscending, sortLengthDescending,' +
+  'sortDictionaryAscending, sortDictionaryDescending,' +
+  '';
+array.operation = {};
+_copyProperty(_array.operation, propertyNames.ARRAY_OPERATION_PUBLIC, array.operation);
 
 // consoleHook
 propertyNames._CONSOLE_HOOK_BASE =
@@ -220,7 +248,8 @@ propertyNames.CONSOLE_HOOK = [
   isPrefixSafixAdd('unHook',  '', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixSafixAdd('accept',  '', propertyNames._CONSOLE_HOOK_BASE),
 ].join(',');
-const consoleHook = _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK);
+const consoleHook = {};
+_copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
 
 const parts = {
   VERSION,

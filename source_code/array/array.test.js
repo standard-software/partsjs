@@ -549,6 +549,8 @@ const test_execute_array = (parts) => {
         checkEqual(false, isLast(['A', 'B', 'C'], ['c']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['B']));
 
+        checkEqual(false, isLast([1], [2, 3]));
+
         // Object Named Parameter
         checkEqual(true,
           isLast({

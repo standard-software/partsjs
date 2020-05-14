@@ -5,4 +5,5 @@ module.exports = {
   ...require('./isMap.js'),
   ...require('./isSet.js'),
   ...require('./isTypeAll.js'),
+  ...require('./isTypeArray.js'),
 };
