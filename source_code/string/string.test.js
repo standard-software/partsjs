@@ -20,6 +20,7 @@ const test_execute_string = (parts) => {
       subFirst, subLast,
       deleteIndex, deleteLength,
       deleteFirst, deleteLast,
+      insert, add,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -1150,6 +1151,34 @@ const test_execute_string = (parts) => {
       });
     };
 
+    const test_insert = () => {
+      it('test_insert', () => {
+        checkEqual('A01234', insert('01234', 'A'));
+        checkEqual(true,  isThrown(() => insert('01234', 'A', -1)));
+        checkEqual('A01234', insert('01234', 'A', 0));
+        checkEqual('0A1234', insert('01234', 'A', 1));
+        checkEqual('01A234', insert('01234', 'A', 2));
+        checkEqual('012A34', insert('01234', 'A', 3));
+        checkEqual('0123A4', insert('01234', 'A', 4));
+        checkEqual('01234A', insert('01234', 'A', 5));
+        checkEqual(true,  isThrown(() => insert('01234', 'A', 6)));
+      });
+    };
+
+    const test_add = () => {
+      it('test_add', () => {
+        checkEqual('01234A', add('01234', 'A'));
+        checkEqual(true,  isThrown(() => add('01234', 'A', -2)));
+        checkEqual('A01234', add('01234', 'A', -1));
+        checkEqual('0A1234', add('01234', 'A',  0));
+        checkEqual('01A234', add('01234', 'A',  1));
+        checkEqual('012A34', add('01234', 'A',  2));
+        checkEqual('0123A4', add('01234', 'A',  3));
+        checkEqual('01234A', add('01234', 'A',  4));
+        checkEqual(true,  isThrown(() => add('01234', 'A', 5)));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -1184,6 +1213,9 @@ const test_execute_string = (parts) => {
     test_deleteLength();
     test_deleteFirst();
     test_deleteLast();
+
+    test_insert();
+    test_add();
 
   });
 };

@@ -975,6 +975,82 @@ const deleteLast = (str, length = 1) => {
   return _deleteLast(str, length);
 };
 
+/**
+ * string.insert
+ */
+const _insert = (str, value, index = 0) => {
+  str = _subFirst(str, index)
+    + value + _subLast(str, str.length - index);
+  return str;
+};
+
+const insert = (str, value, index = 0) => {
+  if (isObjectParameter(str, 'str, value', 'index')) {
+    ({ str, value, index = 0 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'insert args(str) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'insert args(value) is not string',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'insert args(index) is not integer',
+    );
+  }
+  if (!_inRange(index, 0, str.length)) {
+    throw new RangeError(
+      'insert args(index) must be from 0 to str.length',
+    );
+  }
+
+  return _insert(str, value, index);
+};
+
+/**
+ * string.add
+ */
+const _add = (str, value, index = str.length - 1) => {
+  str = _subFirst(str, index + 1)
+    + value + _subLast(str, str.length - index - 1);
+  return str;
+};
+
+const add = (str, value, index = str.length - 1) => {
+  if (isObjectParameter(str, 'str, value', 'index')) {
+    ({ str, value, index = str.length - 1 } = str);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError(
+      'add args(str) is not string',
+    );
+  }
+  if (!isString(value)) {
+    throw new TypeError(
+      'add args(value) is not string',
+    );
+  }
+  if (!isInteger(index)) {
+    throw new TypeError(
+      'add args(index) is not integer',
+    );
+  }
+  if (!_inRange(index, -1, str.length - 1)) {
+    throw new RangeError(
+      'add args(index) must be from -1 to str.length - 1',
+    );
+  }
+
+  return _add(str, value, index);
+};
+
 module.exports = {
   _repeat,
   _isLowerCase, _isUpperCase,
@@ -985,6 +1061,7 @@ module.exports = {
   _trimFirst, _trimLast, _trimBothEnds,
   _subIndex, _subLength, _subFirst, _subLast,
   _deleteIndex, _deleteLength, _deleteFirst, _deleteLast,
+  _insert, _add,
 
   repeat,
   isLowerCase, isUpperCase,
@@ -995,5 +1072,6 @@ module.exports = {
   trimFirst, trimLast, trimBothEnds,
   subIndex, subLength, subFirst, subLast,
   deleteIndex, deleteLength, deleteFirst, deleteLast,
+  insert, add,
 
 };

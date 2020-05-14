@@ -165,6 +165,7 @@ propertyNames.STRING_PUBLIC =
   'trimFirst, trimLast, trimBothEnds,' +
   'subIndex, subLength, subFirst, subLast,' +
   'deleteIndex, deleteLength, deleteFirst, deleteLast,' +
+  'insert, add,' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +

@@ -86,7 +86,7 @@ const add = (array, valueArray, index = array.length - 1) => {
   }
   if (!_inRange(index, -1, array.length - 1)) {
     throw new RangeError(
-      'add args(index) must be from 0 to array.length - 1',
+      'add args(index) must be from -1 to array.length - 1',
     );
   }
 

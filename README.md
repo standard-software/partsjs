@@ -241,6 +241,7 @@ You can now use the functions of the parts.js object.
 - add isUndefAll isBoolAll isNumAll etc..
 - add string
   - trimFirst / trimLast / trimBothEnds
+  - insert / add
 - update index.js copyProperty
 
 ### 5.3.3
