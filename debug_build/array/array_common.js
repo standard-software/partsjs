@@ -25,7 +25,20 @@ var _require = require('../type/type.js'),
     isArray = _require.isArray,
     isDate = _require.isDate,
     isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isException = _require.isException,
+    isUndefinedArray = _require.isUndefinedArray,
+    isNullArray = _require.isNullArray,
+    isNaNStrictArray = _require.isNaNStrictArray,
+    isBooleanArray = _require.isBooleanArray,
+    isNumberArray = _require.isNumberArray,
+    isIntegerArray = _require.isIntegerArray,
+    isStringArray = _require.isStringArray,
+    isFunctionArray = _require.isFunctionArray,
+    isObjectArray = _require.isObjectArray,
+    isArrayArray = _require.isArrayArray,
+    isDateArray = _require.isDateArray,
+    isRegExpArray = _require.isRegExpArray,
+    isExceptionArray = _require.isExceptionArray;
 
 var _require2 = require('../number/number.js'),
     isEven = _require2.isEven,
@@ -41,6 +54,132 @@ var _require4 = require('../root/clone.js'),
 var _require5 = require('../syntax/syntax.js'),
     canUseSet = _require5.canUseSet;
 /**
+ * NumberArray
+ */
+
+
+var _NumberArray = function _NumberArray(start, end, increment) {
+  if (isUndefined(increment)) {
+    if (isUndefined(end)) {
+      increment = 1;
+      end = increment * start - 1;
+      start = 0;
+    } else {
+      if (start <= end) {
+        increment = 1;
+      } else {
+        increment = -1;
+      }
+    }
+  }
+
+  if (increment === 0) {
+    throw new RangeError('_NumberArray args(increment) is 0');
+  }
+
+  if (start <= end) {
+    if (increment < 0) {
+      throw new Error('_NumberArray args(increment) < 0');
+    }
+  } else {
+    if (increment > 0) {
+      throw new Error('_NumberArray args(increment) > 0');
+    }
+  }
+
+  var result = [];
+
+  if (start <= end) {
+    for (var i = start, l = end; i <= l; i += increment) {
+      result.push(i);
+    }
+  } else {
+    for (var _i = start, _l = end; _i >= _l; _i += increment) {
+      result.push(_i);
+    }
+  }
+
+  return result;
+};
+
+var NumberArray = function NumberArray(start, end, increment) {
+  if (isObjectParameter(start, 'count')) {
+    var _start = start;
+    start = _start.count;
+    end = undefined;
+    increment = undefined;
+  } else if (isObjectParameter(start, 'start, end', 'increment')) {
+    var _start2 = start;
+    start = _start2.start;
+    end = _start2.end;
+    increment = _start2.increment;
+  } else if (isObjectParameter(end, 'end', 'increment')) {
+    var _end = end;
+    end = _end.end;
+    increment = _end.increment;
+  } else if (isObjectParameter(increment, 'increment')) {
+    var _increment = increment;
+    increment = _increment.increment;
+  }
+
+  if (!isNumber(start)) {
+    throw new TypeError('NumberArray args(start) is not number');
+  }
+
+  if (!isUndefined(end) && !isNumber(end)) {
+    throw new TypeError('NumberArray args(end) is not number');
+  }
+
+  if (!isUndefined(increment) && !isNumber(increment)) {
+    throw new TypeError('NumberArray args(increment) is not number');
+  }
+
+  return _NumberArray(start, end, increment);
+};
+/**
+ * IntegerArray
+ */
+
+
+var _IntegerArray = function _IntegerArray(start, end, increment) {
+  return _NumberArray(start, end, increment);
+};
+
+var IntegerArray = function IntegerArray(start, end, increment) {
+  if (isObjectParameter(start, 'count')) {
+    var _start3 = start;
+    start = _start3.count;
+    end = undefined;
+    increment = undefined;
+  } else if (isObjectParameter(start, 'start, end', 'increment')) {
+    var _start4 = start;
+    start = _start4.start;
+    end = _start4.end;
+    increment = _start4.increment;
+  } else if (isObjectParameter(end, 'end', 'increment')) {
+    var _end2 = end;
+    end = _end2.end;
+    increment = _end2.increment;
+  } else if (isObjectParameter(increment, 'increment')) {
+    var _increment2 = increment;
+    increment = _increment2.increment;
+  }
+
+  if (!isInteger(start)) {
+    throw new TypeError('IntegerArray args(start) is not number');
+  }
+
+  if (!isUndefined(end) && !isInteger(end)) {
+    throw new TypeError('IntegerArray args(end) is not number');
+  }
+
+  if (!isUndefined(increment) && !isInteger(increment)) {
+    throw new TypeError('IntegerArray args(increment) is not number');
+  }
+
+  return _IntegerArray(start, end, increment);
+};
+/**
  * array.min max
  */
 
@@ -53,10 +192,6 @@ var _min = function _min(array) {
   var result = array[0];
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!isNumber(array[i])) {
-      throw new TypeError('_min args(array) element is not number');
-    }
-
     if (array[i] < result) {
       result = array[i];
     }
@@ -70,6 +205,10 @@ var min = function min(array) {
     throw new TypeError('min args(array) is not array');
   }
 
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError('min args(array) element is not number');
+  }
+
   return _min(array);
 };
 
@@ -81,10 +220,6 @@ var _max = function _max(array) {
   var result = array[0];
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!isNumber(array[i])) {
-      throw new TypeError('_max args(array) element is not number');
-    }
-
     if (result < array[i]) {
       result = array[i];
     }
@@ -96,6 +231,10 @@ var _max = function _max(array) {
 var max = function max(array) {
   if (!isArray(array)) {
     throw new TypeError('max args(array) is not array');
+  }
+
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError('max args(array) element is not number');
   }
 
   return _max(array);
@@ -117,10 +256,6 @@ var _sum = function _sum(array) {
   var result = 0;
 
   for (var i = 0, l = array.length; i < l; i += 1) {
-    if (!isNumber(array[i])) {
-      throw new TypeError('_min args(array) element is not number');
-    }
-
     result += array[i];
   }
 
@@ -130,6 +265,10 @@ var _sum = function _sum(array) {
 var sum = function sum(array) {
   if (!isArray(array)) {
     throw new TypeError('sum args(array) is not array');
+  }
+
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError('sum args(array) element is not number');
   }
 
   return _sum(array);
@@ -152,6 +291,10 @@ var average = function average(array) {
     throw new TypeError('average args(array) is not array');
   }
 
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError('average args(array) element is not number');
+  }
+
   return _average(array);
 };
 /**
@@ -160,6 +303,10 @@ var average = function average(array) {
 
 
 var _median = function _median(array) {
+  if (array.length === 0) {
+    return null;
+  }
+
   var sortedArray = _cloneDeep(array);
 
   sortedArray.sort(function (a, b) {
@@ -179,6 +326,10 @@ var _median = function _median(array) {
 var median = function median(array) {
   if (!isArray(array)) {
     throw new TypeError('median args(array) is not array');
+  }
+
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError('median args(array) element is not number');
   }
 
   return _median(array);
@@ -888,6 +1039,8 @@ var subLast = function subLast(array) {
 };
 
 module.exports = {
+  _NumberArray: _NumberArray,
+  _IntegerArray: _IntegerArray,
   _min: _min,
   _max: _max,
   _sum: _sum,
@@ -913,6 +1066,8 @@ module.exports = {
   _subLength: _subLength,
   _subFirst: _subFirst,
   _subLast: _subLast,
+  NumberArray: NumberArray,
+  IntegerArray: IntegerArray,
   from: from,
   min: min,
   max: max,

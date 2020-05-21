@@ -111,9 +111,34 @@ var checkEqual = function checkEqual(a, b) {
 };
 
 var expect = function expect(a) {
+  var toBe = function toBe(b) {
+    return checkCompare(function (v1, v2) {
+      return v1 === v2;
+    }, a, b);
+  };
+
+  var toEqual = function toEqual(b) {
+    return checkEqual(a, b);
+  };
+
+  var notToBe = function notToBe(b) {
+    return checkCompare(function (v1, v2) {
+      return v1 !== v2;
+    }, a, b);
+  };
+
+  var notToEqual = function notToEqual(b) {
+    return checkCompare(function (v1, v2) {
+      return !equalDeep(v1, v2);
+    }, a, b);
+  };
+
   return {
-    toBe: function toBe(b) {
-      return checkCompare(equal, a, b);
+    toBe: toBe,
+    toEqual: toEqual,
+    not: {
+      toBe: notToBe,
+      toEqual: notToEqual
     }
   };
 };

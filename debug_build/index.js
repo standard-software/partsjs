@@ -32,7 +32,7 @@ var _array = require('./array/array.js');
 
 var _consoleHook = require('./consoleHook/consoleHook.js');
 
-var VERSION = '5.4.0';
+var VERSION = '5.5.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -127,7 +127,7 @@ _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
 rootNames.objectToString = _type.objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + '';
+propertyNames.ARRAY_PUBLIC = 'NumberArray, IntegerArray,' + 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 var array = {};
 
