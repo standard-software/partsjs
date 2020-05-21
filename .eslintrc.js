@@ -15,17 +15,17 @@ module.exports = {
     'ecmaVersion': 2018,
   },
   'rules': {
-    "camelcase": ["off"],
-    "object-curly-spacing": ["off"],
-    "no-multi-spaces": ["off"],
-    "no-unused-vars": ["off"],
-    "indent": ["warn", 2, {
-      "flatTernaryExpressions": true
+    'camelcase': ['off'],
+    'object-curly-spacing': ['off'],
+    'no-multi-spaces': ['off'],
+    'no-unused-vars': ['off'],
+    'indent': ['warn', 2, {
+      'flatTernaryExpressions': true,
     }],
-    "padded-blocks": ["off"],
-    "block-spacing": ["warn", "always"],
-    "arrow-parens": ["off"],
-    "valid-jsdoc": ["off"],
+    'padded-blocks': ['off'],
+    'block-spacing': ['warn', 'always'],
+    'arrow-parens': ['off'],
+    'valid-jsdoc': ['off'],
     // "operator-linebreak": ["warn", "before",
     //   { "overrides": {
     //     "=": "ignore",
@@ -35,12 +35,13 @@ module.exports = {
     //     ":": "ignore" }
     //   }
     // ],
-    "operator-linebreak": ["off"],
-    "require-jsdoc": ["off"],
-    "brace-style":    ["off"],
-    "key-spacing":    ["off"],
-    "guard-for-in":   ["off"],
-    "max-len":        ["error", { "code": 90 }],
-    "quotes":         ["warn", "single", { "avoidEscape": true }],
+    'operator-linebreak': ['off'],
+    'require-jsdoc':  ['off'],
+    'brace-style':    ['off'],
+    'key-spacing':    ['off'],
+    'guard-for-in':   ['off'],
+    'max-len':        ['error', { 'code': 90 }],
+    'quotes':         ['warn', 'single', { 'avoidEscape': true }],
+    'new-cap':        ['off'],
   },
 };
