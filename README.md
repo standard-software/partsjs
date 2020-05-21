@@ -236,6 +236,10 @@ You can now use the functions of the parts.js object.
 ### 5.5.0
 #### 2020/05/21(Thu)
 - update checkEqual for jest
+  - checkEqual = expect().toEqual()
+  - expect().toEqual()
+  - expect().not.toBe()
+  - expect().not.toEqual()
 - update array.median
 - update array error check
   - min / max

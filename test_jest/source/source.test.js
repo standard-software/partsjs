@@ -5,10 +5,12 @@ const {
 } = require('../../source_code/index.test.js');
 
 parts.test.checkEqual = (a, b) => {
-  expect(true).toBe(parts.equalDeep(a, b));
+  expect(a).toEqual(b);
+  // jest expect().toEqual is deep equal
 };
 parts.test.it = it;
 parts.test.describe = describe;
+parts.test.expect = expect;
 
 parts.consoleHook.hook('log');
 
