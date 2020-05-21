@@ -144,6 +144,7 @@ const test_execute_array = (parts) => {
 
     const test_median = () => {
       it('test_median', () => {
+        checkEqual(null, array.median([]));
         checkEqual(71, array.median([70, 72, 80, 52, 52, 100]));
         checkEqual(10, array.median([9, 9, 10, 10, 10, 100, 6]));
       });

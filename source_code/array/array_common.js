@@ -134,6 +134,9 @@ const average = (array) => {
  * median
  */
 const _median = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
   const sortedArray = _cloneDeep(array);
   sortedArray.sort((a, b) => {
     return a - b;
@@ -155,6 +158,11 @@ const median = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'median args(array) is not array',
+    );
+  }
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError(
+      'median args(array) element is not number',
     );
   }
   return _median(array);
