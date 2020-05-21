@@ -77,6 +77,21 @@ const test_execute_array = (parts) => {
         checkEqual([0.3,0.19999999999999998,0.09999999999999998], NumberArray(0.3,0, -0.1));
         checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0)));
         checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0.1)));
+
+        // object parameter
+        checkEqual([0,1,2],       NumberArray({ count: 3 }));
+        checkEqual([1,2,3],       NumberArray({ start: 1, end: 3 }));
+        checkEqual([0,3,6,9],     NumberArray({ start: 0, end: 10, increment: 3 }));
+        checkEqual([7,8,9,10],    NumberArray(7, { end: 10 }));
+        checkEqual([7,9],         NumberArray(7, { end: 10, increment: 2 }));
+        checkEqual([7,9],         NumberArray(7, 10, { increment: 2 }));
+
+        checkEqual(true,  isThrown(() => NumberArray({ count: 3, start: 0 })));
+        checkEqual(true,  isThrown(() => NumberArray({ end: 10 })));
+        checkEqual(true,  isThrown(() => NumberArray(5, { start: 0, end: 10, increment: 3 })));
+        checkEqual(true,  isThrown(() => NumberArray(5, { increment: 3 })));
+        checkEqual(true,  isThrown(() => NumberArray(5, 10, {})));
+
       });
     };
 
@@ -110,6 +125,21 @@ const test_execute_array = (parts) => {
         checkEqual(true,  isThrown(() => IntegerArray(0.2,0, -0.1)));
         checkEqual(true,  isThrown(() => IntegerArray(0.3,0, 0)));
         checkEqual(true,  isThrown(() => IntegerArray(0.3,0, 0.1)));
+
+        // object parameter
+        checkEqual([0,1,2],       IntegerArray({ count: 3 }));
+        checkEqual([1,2,3],       IntegerArray({ start: 1, end: 3 }));
+        checkEqual([0,3,6,9],     IntegerArray({ start: 0, end: 10, increment: 3 }));
+        checkEqual([7,8,9,10],    IntegerArray(7, { end: 10 }));
+        checkEqual([7,9],         IntegerArray(7, { end: 10, increment: 2 }));
+        checkEqual([7,9],         IntegerArray(7, 10, { increment: 2 }));
+
+        checkEqual(true,  isThrown(() => IntegerArray({ count: 3, start: 0 })));
+        checkEqual(true,  isThrown(() => IntegerArray({ end: 10 })));
+        checkEqual(true,  isThrown(() => IntegerArray(5, { start: 0, end: 10, increment: 3 })));
+        checkEqual(true,  isThrown(() => IntegerArray(5, { increment: 3 })));
+        checkEqual(true,  isThrown(() => IntegerArray(5, 10, {})));
+
       });
     };
 
