@@ -17,7 +17,7 @@ const test_execute_array = (parts) => {
     } = parts;
 
     const {
-      NumberArray,
+      NumberArray, IntegerArray,
       isFirst, isLast, isBothEnds,
       subIndex, subLength,
       subFirst, subLast,
@@ -47,35 +47,70 @@ const test_execute_array = (parts) => {
       equal,
     } = parts.compare;
 
-    const test_array_NumberArray = ()   => {
-      checkEqual([0,1,2],       NumberArray(3));
-      checkEqual([1,2,3],       NumberArray(1,3));
-      checkEqual([0,3,6,9],     NumberArray(0,10, 3));
-      checkEqual([0,3,6,9],     NumberArray(0,11, 3));
-      checkEqual([0,3,6,9,12],  NumberArray(0,12, 3));
-      checkEqual([5,7,9],       NumberArray(5,10, 2));
-      checkEqual([-3,-2,-1,0],  NumberArray(-3,0));
-      checkEqual([-5,-3,-1],    NumberArray(-5, 0, 2));
-      checkEqual([-5,-3,-1],    NumberArray(-5,-1, 2));
-      checkEqual([-5,-3],       NumberArray(-5,-2, 2));
+    const test_array_NumberArray = () => {
+      it('test_array_NumberArray', () => {
+        checkEqual([0,1,2],       NumberArray(3));
+        checkEqual([1,2,3],       NumberArray(1,3));
+        checkEqual([0,3,6,9],     NumberArray(0,10, 3));
+        checkEqual([0,3,6,9],     NumberArray(0,11, 3));
+        checkEqual([0,3,6,9,12],  NumberArray(0,12, 3));
+        checkEqual([5,7,9],       NumberArray(5,10, 2));
+        checkEqual([-3,-2,-1,0],  NumberArray(-3,0));
+        checkEqual([-5,-3,-1],    NumberArray(-5, 0, 2));
+        checkEqual([-5,-3,-1],    NumberArray(-5,-1, 2));
+        checkEqual([-5,-3],       NumberArray(-5,-2, 2));
 
-      checkEqual([0, 0.1, 0.2, 0.30000000000000004,0.4], NumberArray(0,0.4, 0.1));
-      checkEqual(true,  isThrown(() => NumberArray(0,10, 0)));
-      checkEqual(true,  isThrown(() => NumberArray(0,10, -0.1)));
+        checkEqual([0, 0.1, 0.2, 0.30000000000000004,0.4], NumberArray(0,0.4, 0.1));
+        checkEqual(true,  isThrown(() => NumberArray(0,10, 0)));
+        checkEqual(true,  isThrown(() => NumberArray(0,10, -0.1)));
 
-      checkEqual([3,2,1],       NumberArray(3,1));
-      checkEqual([10,7,4,1],    NumberArray(10,0, -3));
-      checkEqual([10,7,4,1],    NumberArray(10,1, -3));
-      checkEqual([10,7,4],      NumberArray(10,2, -3));
-      checkEqual([10,8,6],      NumberArray(10,5, -2));
-      checkEqual([0,-1,-2,-3],  NumberArray(0,-3));
-      checkEqual([0,-2,-4],     NumberArray(0,-5, -2));
-      checkEqual([0,-2,-4],     NumberArray(0,-4, -2));
-      checkEqual([0,-2],        NumberArray(0,-3, -2));
+        checkEqual([3,2,1],       NumberArray(3,1));
+        checkEqual([10,7,4,1],    NumberArray(10,0, -3));
+        checkEqual([10,7,4,1],    NumberArray(10,1, -3));
+        checkEqual([10,7,4],      NumberArray(10,2, -3));
+        checkEqual([10,8,6],      NumberArray(10,5, -2));
+        checkEqual([0,-1,-2,-3],  NumberArray(0,-3));
+        checkEqual([0,-2,-4],     NumberArray(0,-5, -2));
+        checkEqual([0,-2,-4],     NumberArray(0,-4, -2));
+        checkEqual([0,-2],        NumberArray(0,-3, -2));
 
-      checkEqual([0.3,0.19999999999999998,0.09999999999999998], NumberArray(0.3,0, -0.1));
-      checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0)));
-      checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0.1)));
+        checkEqual([0.3,0.19999999999999998,0.09999999999999998], NumberArray(0.3,0, -0.1));
+        checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0)));
+        checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0.1)));
+      });
+    };
+
+    const test_array_IntegerArray = () => {
+      it('test_array_IntegerArray', () => {
+        checkEqual([0,1,2],       IntegerArray(3));
+        checkEqual([1,2,3],       IntegerArray(1,3));
+        checkEqual([0,3,6,9],     IntegerArray(0,10, 3));
+        checkEqual([0,3,6,9],     IntegerArray(0,11, 3));
+        checkEqual([0,3,6,9,12],  IntegerArray(0,12, 3));
+        checkEqual([5,7,9],       IntegerArray(5,10, 2));
+        checkEqual([-3,-2,-1,0],  IntegerArray(-3,0));
+        checkEqual([-5,-3,-1],    IntegerArray(-5, 0, 2));
+        checkEqual([-5,-3,-1],    IntegerArray(-5,-1, 2));
+        checkEqual([-5,-3],       IntegerArray(-5,-2, 2));
+
+        checkEqual(true,  isThrown(() => IntegerArray(0,0.2, 0.1)));
+        checkEqual(true,  isThrown(() => IntegerArray(0,10, 0)));
+        checkEqual(true,  isThrown(() => IntegerArray(0,10, -0.1)));
+
+        checkEqual([3,2,1],       IntegerArray(3,1));
+        checkEqual([10,7,4,1],    IntegerArray(10,0, -3));
+        checkEqual([10,7,4,1],    IntegerArray(10,1, -3));
+        checkEqual([10,7,4],      IntegerArray(10,2, -3));
+        checkEqual([10,8,6],      IntegerArray(10,5, -2));
+        checkEqual([0,-1,-2,-3],  IntegerArray(0,-3));
+        checkEqual([0,-2,-4],     IntegerArray(0,-5, -2));
+        checkEqual([0,-2,-4],     IntegerArray(0,-4, -2));
+        checkEqual([0,-2],        IntegerArray(0,-3, -2));
+
+        checkEqual(true,  isThrown(() => IntegerArray(0.2,0, -0.1)));
+        checkEqual(true,  isThrown(() => IntegerArray(0.3,0, 0)));
+        checkEqual(true,  isThrown(() => IntegerArray(0.3,0, 0.1)));
+      });
     };
 
     const test_array_from = () => {
@@ -2125,6 +2160,8 @@ const test_execute_array = (parts) => {
     };
 
     test_array_NumberArray();
+    test_array_IntegerArray();
+
     test_array_from();
 
     test_min();

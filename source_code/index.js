@@ -197,7 +197,7 @@ rootNames.objectToString = _type.objectToString;
 
 // array
 propertyNames.ARRAY_PUBLIC =
-  'NumberArray,' +
+  'NumberArray, IntegerArray,' +
   'from,' +
   'min, max,' +
   'sum, average, median,' +
