@@ -31,11 +31,6 @@ const _min = (array) => {
   }
   let result = array[0];
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!isNumber(array[i])) {
-      throw new TypeError(
-        '_min args(array) element is not number',
-      );
-    }
     if (array[i] < result) {
       result = array[i];
     }
@@ -49,6 +44,11 @@ const min = (array) => {
       'min args(array) is not array',
     );
   }
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError(
+      'min args(array) element is not number',
+    );
+  }
   return _min(array);
 };
 
@@ -58,11 +58,6 @@ const _max = (array) => {
   }
   let result = array[0];
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!isNumber(array[i])) {
-      throw new TypeError(
-        '_max args(array) element is not number',
-      );
-    }
     if (result < array[i]) {
       result = array[i];
     }
@@ -74,6 +69,11 @@ const max = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'max args(array) is not array',
+    );
+  }
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError(
+      'max args(array) element is not number',
     );
   }
   return _max(array);
@@ -92,11 +92,6 @@ const from = (arrayLike) => {
 const _sum = (array) => {
   let result = 0;
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (!isNumber(array[i])) {
-      throw new TypeError(
-        '_min args(array) element is not number',
-      );
-    }
     result += array[i];
   }
   return result;
@@ -106,6 +101,11 @@ const sum = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'sum args(array) is not array',
+    );
+  }
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError(
+      'sum args(array) element is not number',
     );
   }
   return _sum(array);
@@ -125,6 +125,11 @@ const average = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'average args(array) is not array',
+    );
+  }
+  if (array.length !== 0 && !isNumberArray(array)) {
+    throw new TypeError(
+      'average args(array) element is not number',
     );
   }
   return _average(array);
