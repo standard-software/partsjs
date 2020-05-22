@@ -77,7 +77,7 @@ _copyProperty(_test, propertyNames.TEST_PUBLIC, test);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames); // syntax
 
 
-propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + 'canUseMap, canUseSet,' + '';
+propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + 'loop,' + 'canUseMap, canUseSet,' + '';
 
 var syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 

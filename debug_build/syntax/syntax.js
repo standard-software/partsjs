@@ -18,6 +18,9 @@ var _require = require('../type/type.js'),
 
 var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
+
+var _require3 = require('../array/IntegerArray.js'),
+    IntegerArray = _require3.IntegerArray;
 /**
  * assert
  */
@@ -250,6 +253,41 @@ var switch_ = function switch_(expression) {
   };
 };
 /**
+ * loop
+ */
+
+
+var _loopBase = function _loopBase(loopArray) {
+  return function (func) {
+    if (!isFunction(func)) {
+      throw new TypeError('loop()(func) func is not function');
+    }
+
+    for (var i = 0, l = loopArray.length; i < l; i += 1) {
+      var element = loopArray[i];
+      var index = i;
+      var array = loopArray;
+      var loopFirst = i === 0;
+      var loopLast = i === loopArray.length - 1;
+      var result = func(element, index, array, loopFirst, loopLast);
+
+      if (!isUndefined(result) && result["break"] === true) {
+        return result;
+      }
+    }
+
+    return {};
+  };
+};
+
+var loop = function loop(start, end, increment) {
+  if (isArray(start)) {
+    return _loopBase(start);
+  } else {
+    return _loopBase(IntegerArray(start, end, increment));
+  }
+};
+/**
  * canUseMap
  */
 
@@ -303,6 +341,7 @@ module.exports = {
   sc: sc,
   if_: if_,
   switch_: switch_,
+  loop: loop,
   canUseMap: canUseMap,
   canUseSet: canUseSet
 };

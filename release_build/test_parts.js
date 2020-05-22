@@ -169,7 +169,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = parts.platform.isWindowsScriptHost() ? [316, 13, 3, 208, 8, 11, 23, 29, 7, 29, 12, 34] : [316, 13, 3, 208, 8, 11, 23, 29, 7, 29, 12, 34];
+        var countArray = parts.platform.isWindowsScriptHost() ? [317, 13, 3, 208, 9, 11, 23, 29, 7, 29, 12, 34] : [317, 13, 3, 208, 9, 11, 23, 29, 7, 29, 12, 34];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -19509,7 +19509,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       checkEqual = _parts$test.checkEqual,
       describe = _parts$test.describe,
       it = _parts$test.it,
-      test = _parts$test.test;
+      test = _parts$test.test,
+      expect = _parts$test.expect;
   describe('test_execute_syntax', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
@@ -19518,6 +19519,18 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         isThrownException = _parts$test2.isThrownException,
         isNotThrown = _parts$test2.isNotThrown;
     var _parts$type = parts.type,
+        isUndefined = _parts$type.isUndefined,
+        isNull = _parts$type.isNull,
+        isBoolean = _parts$type.isBoolean,
+        isNumber = _parts$type.isNumber,
+        isInteger = _parts$type.isInteger,
+        isString = _parts$type.isString,
+        isFunction = _parts$type.isFunction,
+        isObject = _parts$type.isObject,
+        isArray = _parts$type.isArray,
+        isDate = _parts$type.isDate,
+        isRegExp = _parts$type.isRegExp,
+        isException = _parts$type.isException,
         isUndefinedAll = _parts$type.isUndefinedAll,
         isNullAll = _parts$type.isNullAll,
         isBooleanAll = _parts$type.isBooleanAll,
@@ -19529,19 +19542,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         isArrayAll = _parts$type.isArrayAll,
         isDateAll = _parts$type.isDateAll,
         isRegExpAll = _parts$type.isRegExpAll,
-        isExceptionAll = _parts$type.isExceptionAll,
-        isNotUndefinedAll = _parts$type.isNotUndefinedAll,
-        isNotNullAll = _parts$type.isNotNullAll,
-        isNotBooleanAll = _parts$type.isNotBooleanAll,
-        isNotNumberAll = _parts$type.isNotNumberAll,
-        isNotIntegerAll = _parts$type.isNotIntegerAll,
-        isNotStringAll = _parts$type.isNotStringAll,
-        isNotFunctionAll = _parts$type.isNotFunctionAll,
-        isNotObjectAll = _parts$type.isNotObjectAll,
-        isNotArrayAll = _parts$type.isNotArrayAll,
-        isNotDateAll = _parts$type.isNotDateAll,
-        isNotRegExpAll = _parts$type.isNotRegExpAll,
-        isNotExceptionAll = _parts$type.isNotExceptionAll;
+        isExceptionAll = _parts$type.isExceptionAll;
     var _parts$syntax = parts.syntax,
         guard = _parts$syntax.guard,
         sc = _parts$syntax.sc,
@@ -20113,6 +20114,133 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_loop = function test_loop() {
+      it('test_loop', function () {
+        var outputConsoleText = '';
+
+        var console_log = function console_log() {
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          for (var _i = 0, _args = args; _i < _args.length; _i++) {
+            var arg = _args[_i];
+
+            if (isArray(arg)) {
+              outputConsoleText += "[".concat(arg, "] ");
+            } else {
+              outputConsoleText += "".concat(arg, " ");
+            }
+          }
+
+          outputConsoleText += '\n';
+        };
+
+        outputConsoleText = '';
+        {
+          // 3 times loop
+          parts.loop(3)(function (e, i, array, first, last) {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual('0 0 [0,1,2] true false \n' + '1 1 [0,1,2] false false \n' + '2 2 [0,1,2] false true \n' + '');
+        outputConsoleText = '';
+        {
+          // 1 to 3 loop
+          parts.loop(1, 3)(function (e, i, array, first, last) {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual('1 0 [1,2,3] true false \n' + '2 1 [1,2,3] false false \n' + '3 2 [1,2,3] false true \n' + '');
+        outputConsoleText = '';
+        {
+          // 1 times loop : first last flag
+          parts.loop(1)(function (e, i, array, first, last) {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual('0 0 [0] true true \n' + '');
+        outputConsoleText = '';
+        {
+          // 1 to 10 step 2 loop and continue and break
+          parts.loop(1, 10, 2)(function (e, i, array, first, last) {
+            if (i === 1) {
+              return;
+            }
+
+            console_log(e, i, array, first, last);
+
+            if (i === 3) {
+              return {
+                "break": true
+              };
+            }
+          });
+        }
+        expect(outputConsoleText).toEqual('1 0 [1,3,5,7,9] true false \n' + '5 2 [1,3,5,7,9] false false \n' + '7 3 [1,3,5,7,9] false false \n' + ''); // outputConsoleText = '';
+        // {
+        //   // double loop
+        //   parts.loop(3)((
+        //     e, j, array, first, last,
+        //   ) => {
+        //     parts.loop(3)((
+        //       e, i, array, first, last,
+        //     ) => {
+        //       console_log(e, i, array, first, last, j);
+        //     });
+        //   });
+        // }
+        // expect(outputConsoleText).toEqual(
+        //   '0 0 [0,1,2] true false 0 \n' +
+        //   '1 1 [0,1,2] false false 0 \n' +
+        //   '2 2 [0,1,2] false true 0 \n' +
+        //   '0 0 [0,1,2] true false 1 \n' +
+        //   '1 1 [0,1,2] false false 1 \n' +
+        //   '2 2 [0,1,2] false true 1 \n' +
+        //   '0 0 [0,1,2] true false 2 \n' +
+        //   '1 1 [0,1,2] false false 2 \n' +
+        //   '2 2 [0,1,2] false true 2 \n' +
+        // '');
+
+        outputConsoleText = '';
+        {
+          // Break from a double loop
+          parts.loop(3)(function (e, j, array, first, last) {
+            var loopResult = parts.loop(3)(function (e, i, array, first, last) {
+              console_log(e, i, array, first, last, j);
+
+              if (i === 0) {
+                console_log('continue');
+                return;
+              }
+
+              if (i === 1) {
+                console_log('break');
+                return {
+                  "break": true,
+                  parentLoopCounter: j
+                };
+              }
+            });
+
+            if (loopResult["break"] === true) {
+              console_log('return break');
+
+              if (loopResult.parentLoopCounter === 1) {
+                console_log('break the double loop');
+                return {
+                  "break": true
+                };
+              } else {
+                console_log('continue the double loop');
+              }
+            }
+          });
+        }
+        expect(outputConsoleText).toEqual('0 0 [0,1,2] true false 0 \n' + 'continue \n' + '1 1 [0,1,2] false false 0 \n' + 'break \n' + 'return break \n' + 'continue the double loop \n' + '0 0 [0,1,2] true false 1 \n' + 'continue \n' + '1 1 [0,1,2] false false 1 \n' + 'break \n' + 'return break \n' + 'break the double loop \n' + '');
+      });
+    };
+
     var test_canUseMap = function test_canUseMap() {
       it('test_canUseMap', function () {
         if (parts.platform.isWindowsScriptHost()) {
@@ -20137,6 +20265,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_sc();
     test_if_();
     test_switch_();
+    test_loop();
     test_canUseMap();
     test_canUseSet();
   });
