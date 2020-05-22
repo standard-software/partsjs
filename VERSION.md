@@ -2,6 +2,22 @@
 
 ## Version
 
+### 5.5.0
+#### 2020/05/22(Fri)
+- update checkEqual for jest
+  - checkEqual = expect().toEqual()
+  - expect().toEqual()
+  - expect().not.toBe()
+  - expect().not.toEqual()
+- update array.median
+- update array error check
+  - min / max
+  - sum / average
+- add array
+  - NumberArray
+  - IntegerArray
+- add syntax.loop
+
 ### 5.4.0
 #### 2020/05/14(Thu)
 - add isTypeArray.js

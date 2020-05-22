@@ -234,7 +234,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 5.5.0
-#### 2020/05/21(Thu)
+#### 2020/05/22(Fri)
 - update checkEqual for jest
   - checkEqual = expect().toEqual()
   - expect().toEqual()
@@ -344,20 +344,6 @@ You can now use the functions of the parts.js object.
 - npm update
   - moment 2.24.0
     - 2.25.0-2 webpack build bug exists
-
-### 4.10.1
-#### 2020/05/02(Sat)
-- upddate unique
-
-### 4.10.0
-#### 2020/05/01(Fri)
-- add canUseMap
-- add canUseSet
-- update unique
-- rename
-  - toString >> valueToString
-  - toNumber >> valueToNumber
-  - toInteger >> valueToInteger
 
 ### More Info
 [VERSION.md](./VERSION.md)
