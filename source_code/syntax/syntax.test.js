@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 const test_execute_syntax = (parts) => {
-  const { checkEqual, describe, it, test } = parts.test;
+  const { checkEqual, describe, it, test, expect } = parts.test;
   describe('test_execute_syntax', () => {
 
     const {
@@ -13,15 +13,15 @@ const test_execute_syntax = (parts) => {
     } = parts.test;
 
     const {
+      isUndefined, isNull,
+      isBoolean, isNumber, isInteger, isString,
+      isFunction, isObject, isArray, isDate,
+      isRegExp, isException,
+
       isUndefinedAll, isNullAll,
       isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
       isFunctionAll, isObjectAll, isArrayAll, isDateAll,
       isRegExpAll, isExceptionAll,
-
-      isNotUndefinedAll, isNotNullAll,
-      isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
-      isNotFunctionAll, isNotObjectAll, isNotArrayAll, isNotDateAll,
-      isNotRegExpAll, isNotExceptionAll,
 
     } = parts.type;
 
@@ -577,45 +577,149 @@ const test_execute_syntax = (parts) => {
     const test_loop = function() {
       it('test_loop', () => {
 
-        // parts.loop(parts.array.IntegerArray(3))((
-        //  e, i, array, first, last
-        // ) => {
-        //   console.log(e, i, array, first, last);
-        // });
-
-        // parts.loop(parts.array.IntegerArray(1))((
-        //  e, i, array, first, last
-        // ) => {
-        //   console.log(e, i, array, first, last);
-        // });
-
-        // parts.loop(parts.array.IntegerArray(1, 10, 2))((e, i, array, first, last) => {
-        //   if (i === 1) {
-        //     return;
-        //   }
-        //   console.log(e, i, array, first, last);
-        //   if (i === 3) {
-        //     return { break: true };
-        //   }
-        // });
-
-        parts.loop(parts.array.IntegerArray(3))((
-          e, j, array, first, last,
-        ) => {
-          const loopResult = parts.loop(parts.array.IntegerArray(3))((
-            e, i, array, first, last,
-          ) => {
-            console.log(e, i, array, first, last, j);
-            if (i === 1) {
-              return { break: true, parentLoopCounter: j };
-            }
-          });
-          if (loopResult.break === true) {
-            if (loopResult.parentLoopCounter === 1) {
-              return { break: true };
+        let outputConsoleText = '';
+        const console_log = (...args) => {
+          for (const arg of args) {
+            if (isArray(arg)) {
+              outputConsoleText += `[${arg}] `;
+            } else {
+              outputConsoleText += `${arg} `;
             }
           }
-        });
+          outputConsoleText += '\n';
+        };
+
+        outputConsoleText = '';
+        {
+          // 3 times loop
+          parts.loop(3)((
+            e, i, array, first, last,
+          ) => {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '0 0 [0,1,2] true false \n' +
+          '1 1 [0,1,2] false false \n' +
+          '2 2 [0,1,2] false true \n' +
+        '');
+
+        outputConsoleText = '';
+        {
+          // 1 to 3 loop
+          parts.loop(1, 3)((
+            e, i, array, first, last,
+          ) => {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '1 0 [1,2,3] true false \n' +
+          '2 1 [1,2,3] false false \n' +
+          '3 2 [1,2,3] false true \n' +
+        '');
+
+        outputConsoleText = '';
+        {
+          // 1 times loop : first last flag
+          parts.loop(1)((
+            e, i, array, first, last,
+          ) => {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '0 0 [0] true true \n' +
+        '');
+
+        outputConsoleText = '';
+        {
+          // 1 to 10 step 2 loop and continue and break
+          parts.loop(1, 10, 2)((e, i, array, first, last) => {
+            if (i === 1) {
+              return;
+            }
+            console_log(e, i, array, first, last);
+            if (i === 3) {
+              return { break: true };
+            }
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '1 0 [1,3,5,7,9] true false \n' +
+          '5 2 [1,3,5,7,9] false false \n' +
+          '7 3 [1,3,5,7,9] false false \n' +
+        '');
+
+        // outputConsoleText = '';
+        // {
+        //   // double loop
+        //   parts.loop(3)((
+        //     e, j, array, first, last,
+        //   ) => {
+        //     parts.loop(3)((
+        //       e, i, array, first, last,
+        //     ) => {
+        //       console_log(e, i, array, first, last, j);
+        //     });
+        //   });
+        // }
+        // expect(outputConsoleText).toEqual(
+        //   '0 0 [0,1,2] true false 0 \n' +
+        //   '1 1 [0,1,2] false false 0 \n' +
+        //   '2 2 [0,1,2] false true 0 \n' +
+        //   '0 0 [0,1,2] true false 1 \n' +
+        //   '1 1 [0,1,2] false false 1 \n' +
+        //   '2 2 [0,1,2] false true 1 \n' +
+        //   '0 0 [0,1,2] true false 2 \n' +
+        //   '1 1 [0,1,2] false false 2 \n' +
+        //   '2 2 [0,1,2] false true 2 \n' +
+        // '');
+
+        outputConsoleText = '';
+        {
+          // Break from a double loop
+          parts.loop(3)((
+            e, j, array, first, last,
+          ) => {
+            const loopResult = parts.loop(3)((
+              e, i, array, first, last,
+            ) => {
+              console_log(e, i, array, first, last, j);
+              if (i === 0) {
+                console_log('continue');
+                return;
+              }
+              if (i === 1) {
+                console_log('break');
+                return { break: true, parentLoopCounter: j };
+              }
+            });
+            if (loopResult.break === true) {
+              console_log('return break');
+              if (loopResult.parentLoopCounter === 1) {
+                console_log('break the double loop');
+                return { break: true };
+              } else {
+                console_log('continue the double loop');
+              }
+            }
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '0 0 [0,1,2] true false 0 \n' +
+          'continue \n' +
+          '1 1 [0,1,2] false false 0 \n' +
+          'break \n' +
+          'return break \n' +
+          'continue the double loop \n' +
+          '0 0 [0,1,2] true false 1 \n' +
+          'continue \n' +
+          '1 1 [0,1,2] false false 1 \n' +
+          'break \n' +
+          'return break \n' +
+          'break the double loop \n' +
+        '');
 
       });
     };
