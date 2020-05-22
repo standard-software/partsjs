@@ -11,6 +11,10 @@ const {
   isObjectParameter,
 } = require('../object/isObjectParameter.js');
 
+const {
+  _IntegerArray,
+} = require('../array/IntegerArray.js');
+
 /**
  * assert
  */
@@ -212,6 +216,66 @@ const switch_ = (expression) => {
 };
 
 /**
+ * loop
+ */
+const _loopBase = (loopArray) => {
+  return (func) => {
+    if (!isFunction(func)) {
+      throw new TypeError('loop()(func) func is not function');
+    }
+    for (let i = 0, l = loopArray.length; i < l; i += 1) {
+      const element = loopArray[i];
+      const index = i;
+      const array = loopArray;
+      const loopFirst = i === 0;
+      const loopLast = i === loopArray.length - 1;
+      const result = func(element, index, array, loopFirst, loopLast);
+      if (!isUndefined(result) && result.break === true) {
+        return result;
+      }
+    }
+    return {};
+  };
+};
+
+const _loop = (start, end, increment) => {
+  return _loopBase(_IntegerArray(start));
+};
+
+const loop = (start, end, increment) => {
+  if (isArray(start)) {
+    return _loopBase(start);
+  } else if (isObjectParameter(start, 'count')) {
+    ({ count: start } = start);
+    end = undefined;
+    increment = undefined;
+  } else if (isObjectParameter(start, 'start, end', 'increment')) {
+    ({ start, end, increment } = start);
+  } else if (isObjectParameter(end, 'end', 'increment')) {
+    ({ end, increment } = end);
+  } else if (isObjectParameter(increment, 'increment')) {
+    ({ increment } = increment);
+  }
+
+  if (!isInteger(start)) {
+    throw new TypeError(
+      'loop args(start) is not number',
+    );
+  }
+  if (!isUndefined(end) && !isInteger(end)) {
+    throw new TypeError(
+      'loop args(end) is not number',
+    );
+  }
+  if (!isUndefined(increment) && !isInteger(increment)) {
+    throw new TypeError(
+      'loop args(increment) is not number',
+    );
+  }
+  return _loop(start, end, increment);
+};
+
+/**
  * canUseMap
  */
 let _canUseMapFlag;
@@ -257,5 +321,6 @@ module.exports = {
   assert, guard,
   functionValue,
   sc, if_, switch_,
+  loop,
   canUseMap, canUseSet,
 };

@@ -574,6 +574,52 @@ const test_execute_syntax = (parts) => {
       });
     };
 
+    const test_loop = function() {
+      it('test_loop', () => {
+
+        // parts.loop(parts.array.IntegerArray(3))((
+        //  e, i, array, first, last
+        // ) => {
+        //   console.log(e, i, array, first, last);
+        // });
+
+        // parts.loop(parts.array.IntegerArray(1))((
+        //  e, i, array, first, last
+        // ) => {
+        //   console.log(e, i, array, first, last);
+        // });
+
+        // parts.loop(parts.array.IntegerArray(1, 10, 2))((e, i, array, first, last) => {
+        //   if (i === 1) {
+        //     return;
+        //   }
+        //   console.log(e, i, array, first, last);
+        //   if (i === 3) {
+        //     return { break: true };
+        //   }
+        // });
+
+        parts.loop(parts.array.IntegerArray(3))((
+          e, j, array, first, last,
+        ) => {
+          const loopResult = parts.loop(parts.array.IntegerArray(3))((
+            e, i, array, first, last,
+          ) => {
+            console.log(e, i, array, first, last, j);
+            if (i === 1) {
+              return { break: true, parentLoopCounter: j };
+            }
+          });
+          if (loopResult.break === true) {
+            if (loopResult.parentLoopCounter === 1) {
+              return { break: true };
+            }
+          }
+        });
+
+      });
+    };
+
     const test_canUseMap = function() {
       it('test_canUseMap', () => {
         if (parts.platform.isWindowsScriptHost()) {
@@ -598,6 +644,8 @@ const test_execute_syntax = (parts) => {
     test_sc();
     test_if_();
     test_switch_();
+    test_loop();
+
     test_canUseMap();
     test_canUseSet();
   });
