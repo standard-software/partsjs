@@ -1,6 +1,6 @@
 /* eslint-disable no-throw-literal */
 const test_execute_test = (parts) => {
-  const { checkEqual, describe, it, test } = parts.test;
+  const { checkEqual, describe, it, test, expect } = parts.test;
   describe('test_execute_test', () => {
 
     const {
@@ -49,7 +49,17 @@ const test_execute_test = (parts) => {
       });
     };
 
+    const test_expect = () => {
+      it('test_expect', () => {
+        expect(123).toBe(123);
+        expect([1, 2, 3]).not.toBe([1, 2, 3]);
+        expect([1, 2, 3]).toEqual([1, 2, 3]);
+        expect([1, 2, 3]).not.toEqual([1, 2, 2]);
+      });
+    };
+
     test_isThrown();
+    test_expect();
   });
 };
 

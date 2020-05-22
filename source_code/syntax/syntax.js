@@ -11,6 +11,10 @@ const {
   isObjectParameter,
 } = require('../object/isObjectParameter.js');
 
+const {
+  IntegerArray,
+} = require('../array/IntegerArray.js');
+
 /**
  * assert
  */
@@ -212,6 +216,37 @@ const switch_ = (expression) => {
 };
 
 /**
+ * loop
+ */
+const _loopBase = (loopArray) => {
+  return (func) => {
+    if (!isFunction(func)) {
+      throw new TypeError('loop()(func) func is not function');
+    }
+    for (let i = 0, l = loopArray.length; i < l; i += 1) {
+      const element = loopArray[i];
+      const index = i;
+      const array = loopArray;
+      const loopFirst = i === 0;
+      const loopLast = i === loopArray.length - 1;
+      const result = func(element, index, array, loopFirst, loopLast);
+      if (!isUndefined(result) && result.break === true) {
+        return result;
+      }
+    }
+    return {};
+  };
+};
+
+const loop = (start, end, increment) => {
+  if (isArray(start)) {
+    return _loopBase(start);
+  } else {
+    return _loopBase(IntegerArray(start, end, increment));
+  }
+};
+
+/**
  * canUseMap
  */
 let _canUseMapFlag;
@@ -257,5 +292,6 @@ module.exports = {
   assert, guard,
   functionValue,
   sc, if_, switch_,
+  loop,
   canUseMap, canUseSet,
 };

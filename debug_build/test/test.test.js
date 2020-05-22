@@ -6,7 +6,8 @@ var test_execute_test = function test_execute_test(parts) {
       checkEqual = _parts$test.checkEqual,
       describe = _parts$test.describe,
       it = _parts$test.it,
-      test = _parts$test.test;
+      test = _parts$test.test,
+      expect = _parts$test.expect;
   describe('test_execute_test', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
@@ -69,7 +70,17 @@ var test_execute_test = function test_execute_test(parts) {
       });
     };
 
+    var test_expect = function test_expect() {
+      it('test_expect', function () {
+        expect(123).toBe(123);
+        expect([1, 2, 3]).not.toBe([1, 2, 3]);
+        expect([1, 2, 3]).toEqual([1, 2, 3]);
+        expect([1, 2, 3]).not.toEqual([1, 2, 2]);
+      });
+    };
+
     test_isThrown();
+    test_expect();
   });
 };
 

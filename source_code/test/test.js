@@ -104,8 +104,26 @@ const checkEqual = (a, b, message = '') => {
 };
 
 const expect = a => {
+  const toBe = b => checkCompare(
+    (v1, v2) => v1 === v2,
+    a, b,
+  );
+  const toEqual = b => checkEqual(a, b);
+  const notToBe = b => checkCompare(
+    (v1, v2) => v1 !== v2,
+    a, b,
+  );
+  const notToEqual = b => checkCompare(
+    (v1, v2) => !equalDeep(v1, v2),
+    a, b,
+  );
   return {
-    toBe: b => checkCompare(equal, a, b),
+    toBe,
+    toEqual,
+    not: {
+      toBe: notToBe,
+      toEqual: notToEqual,
+    },
   };
 };
 

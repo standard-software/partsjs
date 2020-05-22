@@ -12,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '5.4.0';
+const VERSION = '5.5.0';
 
 const rootNames = {};
 const propertyNames = {};
@@ -98,6 +98,7 @@ propertyNames.SYNTAX =
   'assert,guard,' +
   'functionValue,' +
   'sc,if_,switch_,' +
+  'loop,' +
   'canUseMap, canUseSet,' +
   '';
 const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
@@ -197,6 +198,7 @@ rootNames.objectToString = _type.objectToString;
 
 // array
 propertyNames.ARRAY_PUBLIC =
+  'NumberArray, IntegerArray,' +
   'from,' +
   'min, max,' +
   'sum, average, median,' +
