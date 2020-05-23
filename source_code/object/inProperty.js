@@ -58,7 +58,7 @@ const inProperty = (object, propertyPathArray, hasOwn = true) => {
 
   if (!isObject(object)) {
     throw new TypeError(
-      'inProperty args(fromObject) is not object',
+      'inProperty args(object) is not object',
     );
   }
 
