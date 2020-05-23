@@ -396,7 +396,17 @@ const test_execute_object = (parts) => {
     const test_objectEntries = () => {
       it('test_objectEntries', () => {
 
-        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], objectEntries({a:'1', b:'2', c:'3'}));
+        const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
+        const array2 = [['a', '1'], ['b', '2'], ['c', '3']];
+        const object1 = {a:'1', b:'2', c:'3'};
+
+        checkEqual(array2, objectEntries(object1));
+
+        // only object type
+        checkEqual(true, isThrown(() => objectEntries(array1)));
+
+        // object parameter
+        checkEqual(array2, objectEntries({ object: object1 }));
 
       });
     };
