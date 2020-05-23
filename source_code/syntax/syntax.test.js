@@ -581,7 +581,16 @@ const test_execute_syntax = (parts) => {
         const console_log = (...args) => {
           for (const arg of args) {
             if (isArray(arg)) {
-              outputConsoleText += `[${arg}] `;
+              let argsText = '';
+              for (const element of arg) {
+                if (isArray(element)) {
+                  argsText += `[${element}],`;
+                } else {
+                  argsText += `${element},`;
+                }
+              }
+              argsText = parts.string.deleteLast(argsText, 1);
+              outputConsoleText += `[${argsText}] `;
             } else {
               outputConsoleText += `${arg} `;
             }
@@ -719,6 +728,36 @@ const test_execute_syntax = (parts) => {
           'break \n' +
           'return break \n' +
           'break the double loop \n' +
+        '');
+
+        outputConsoleText = '';
+        {
+          // loop array
+          parts.loop(['A', 'B', 'C'])((
+            e, i, array, first, last,
+          ) => {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          'A 0 [A,B,C] true false \n' +
+          'B 1 [A,B,C] false false \n' +
+          'C 2 [A,B,C] false true \n' +
+        '');
+
+        outputConsoleText = '';
+        {
+          // loop object
+          parts.loop({a: 'A', b: 'B', c: 'C'})((
+            e, i, array, first, last,
+          ) => {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '[a,A] 0 [[a,A],[b,B],[c,C]] true false \n' +
+          '[b,B] 1 [[a,A],[b,B],[c,C]] false false \n' +
+          '[c,C] 2 [[a,A],[b,B],[c,C]] false true \n' +
         '');
 
       });

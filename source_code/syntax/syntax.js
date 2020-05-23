@@ -12,8 +12,12 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
-  IntegerArray,
+  _IntegerArray,
 } = require('../array/IntegerArray.js');
+
+const {
+  objectToKeyValueArray,
+} = require('../object/objectToKeyValueArray.js');
 
 /**
  * assert
@@ -239,11 +243,40 @@ const _loopBase = (loopArray) => {
 };
 
 const loop = (start, end, increment) => {
-  if (isArray(start)) {
+
+  if (isObjectParameter(start, 'count')) {
+    ({ count: start } = start);
+    end = undefined;
+    increment = undefined;
+  } else if (isObjectParameter(start, 'start, end', 'increment')) {
+    ({ start, end, increment } = start);
+  } else if (isObjectParameter(end, 'end', 'increment')) {
+    ({ end, increment } = end);
+  } else if (isObjectParameter(increment, 'increment')) {
+    ({ increment } = increment);
+  } else if (isObject(start)) {
+    return _loopBase(objectToKeyValueArray(start));
+  } else if (isArray(start)) {
     return _loopBase(start);
-  } else {
-    return _loopBase(IntegerArray(start, end, increment));
   }
+
+  if (!isInteger(start)) {
+    throw new TypeError(
+      'loop args(start) is not number',
+    );
+  }
+  if (!isUndefined(end) && !isInteger(end)) {
+    throw new TypeError(
+      'loop args(end) is not number',
+    );
+  }
+  if (!isUndefined(increment) && !isInteger(increment)) {
+    throw new TypeError(
+      'loop args(increment) is not number',
+    );
+  }
+
+  return _loopBase(_IntegerArray(start, end, increment));
 };
 
 /**
