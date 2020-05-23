@@ -9,7 +9,7 @@ const {
   isObjectParameter,
 } = require('../object/isObjectParameter.js');
 
-const _objectEntries = (object) => {
+const _objectToKeyValueArray = (object) => {
   const result = [];
   for (const key in object) {
     if (object.hasOwnProperty(key)) {
@@ -19,26 +19,26 @@ const _objectEntries = (object) => {
   return result;
 };
 
-const objectEntries = (object) => {
+const objectToKeyValueArray = (object) => {
   if (isObjectParameter(object, 'object')) {
     ({ object } = object);
   }
 
   if (!isObject(object)) {
     throw new TypeError(
-      'objectEntries args(object) is not object',
+      'objectToKeyValueArray args(object) is not object',
     );
   }
 
-  return _objectEntries(object);
+  return _objectToKeyValueArray(object);
 };
 
-const entries = objectEntries;
+const entries = objectToKeyValueArray;
 
 module.exports = {
-  _objectEntries,
+  _objectToKeyValueArray,
 
-  objectEntries,
+  objectToKeyValueArray,
 
   entries,
 };
