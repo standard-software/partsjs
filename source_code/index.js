@@ -181,6 +181,7 @@ propertyNames.OBJECT_PUBLIC =
   'isObjectParameter,' +
   'copyProperty,propertyCount,inProperty,' +
   'getProperty,setProperty,' +
+  'objectEntries,' +
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
   '';

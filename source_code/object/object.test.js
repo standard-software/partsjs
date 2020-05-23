@@ -15,6 +15,7 @@ const test_execute_object = (parts) => {
       getProperty, setProperty,
       isEmptyObjectAll,
       isObjectParameter,
+      objectEntries,
     } = parts.object;
 
     const test_copyProperty = () => {
@@ -380,6 +381,25 @@ const test_execute_object = (parts) => {
       });
     };
 
+    const test_ObjectEntries_standard = () => {
+      it('test_ObjectEntries_standard', () => {
+
+        if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], Object.entries({a:'1', b:'2', c:'3'}));
+
+      });
+    };
+
+    const test_objectEntries = () => {
+      it('test_objectEntries', () => {
+
+        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], objectEntries({a:'1', b:'2', c:'3'}));
+
+      });
+    };
 
     test_copyProperty();
     test_inProperty();
@@ -388,6 +408,9 @@ const test_execute_object = (parts) => {
     test_setProperty();
 
     test_isObjectParameter();
+
+    test_ObjectEntries_standard();
+    test_objectEntries();
 
   });
 };
