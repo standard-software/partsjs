@@ -1,5 +1,11 @@
 "use strict";
 
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -626,7 +632,29 @@ var test_execute_syntax = function test_execute_syntax(parts) {
             var arg = _args[_i];
 
             if (isArray(arg)) {
-              outputConsoleText += "[".concat(arg, "] ");
+              var argsText = '';
+
+              var _iterator = _createForOfIteratorHelper(arg),
+                  _step;
+
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  var element = _step.value;
+
+                  if (isArray(element)) {
+                    argsText += "[".concat(element, "],");
+                  } else {
+                    argsText += "".concat(element, ",");
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+
+              argsText = parts.string.deleteLast(argsText, 1);
+              outputConsoleText += "[".concat(argsText, "] ");
             } else {
               outputConsoleText += "".concat(arg, " ");
             }
@@ -676,31 +704,17 @@ var test_execute_syntax = function test_execute_syntax(parts) {
             }
           });
         }
-        expect(outputConsoleText).toEqual('1 0 [1,3,5,7,9] true false \n' + '5 2 [1,3,5,7,9] false false \n' + '7 3 [1,3,5,7,9] false false \n' + ''); // outputConsoleText = '';
-        // {
-        //   // double loop
-        //   parts.loop(3)((
-        //     e, j, array, first, last,
-        //   ) => {
-        //     parts.loop(3)((
-        //       e, i, array, first, last,
-        //     ) => {
-        //       console_log(e, i, array, first, last, j);
-        //     });
-        //   });
-        // }
-        // expect(outputConsoleText).toEqual(
-        //   '0 0 [0,1,2] true false 0 \n' +
-        //   '1 1 [0,1,2] false false 0 \n' +
-        //   '2 2 [0,1,2] false true 0 \n' +
-        //   '0 0 [0,1,2] true false 1 \n' +
-        //   '1 1 [0,1,2] false false 1 \n' +
-        //   '2 2 [0,1,2] false true 1 \n' +
-        //   '0 0 [0,1,2] true false 2 \n' +
-        //   '1 1 [0,1,2] false false 2 \n' +
-        //   '2 2 [0,1,2] false true 2 \n' +
-        // '');
-
+        expect(outputConsoleText).toEqual('1 0 [1,3,5,7,9] true false \n' + '5 2 [1,3,5,7,9] false false \n' + '7 3 [1,3,5,7,9] false false \n' + '');
+        outputConsoleText = '';
+        {
+          // double loop
+          parts.loop(3)(function (e, j, array, first, last) {
+            parts.loop(3)(function (e, i, array, first, last) {
+              console_log(e, i, array, first, last, j);
+            });
+          });
+        }
+        expect(outputConsoleText).toEqual('0 0 [0,1,2] true false 0 \n' + '1 1 [0,1,2] false false 0 \n' + '2 2 [0,1,2] false true 0 \n' + '0 0 [0,1,2] true false 1 \n' + '1 1 [0,1,2] false false 1 \n' + '2 2 [0,1,2] false true 1 \n' + '0 0 [0,1,2] true false 2 \n' + '1 1 [0,1,2] false false 2 \n' + '2 2 [0,1,2] false true 2 \n' + '');
         outputConsoleText = '';
         {
           // Break from a double loop
@@ -737,6 +751,26 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           });
         }
         expect(outputConsoleText).toEqual('0 0 [0,1,2] true false 0 \n' + 'continue \n' + '1 1 [0,1,2] false false 0 \n' + 'break \n' + 'return break \n' + 'continue the double loop \n' + '0 0 [0,1,2] true false 1 \n' + 'continue \n' + '1 1 [0,1,2] false false 1 \n' + 'break \n' + 'return break \n' + 'break the double loop \n' + '');
+        outputConsoleText = '';
+        {
+          // loop array
+          parts.loop(['A', 'B', 'C'])(function (e, i, array, first, last) {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual('A 0 [A,B,C] true false \n' + 'B 1 [A,B,C] false false \n' + 'C 2 [A,B,C] false true \n' + '');
+        outputConsoleText = '';
+        {
+          // loop object
+          parts.loop({
+            a: 'A',
+            b: 'B',
+            c: 'C'
+          })(function (e, i, array, first, last) {
+            console_log(e, i, array, first, last);
+          });
+        }
+        expect(outputConsoleText).toEqual('[a,A] 0 [[a,A],[b,B],[c,C]] true false \n' + '[b,B] 1 [[a,A],[b,B],[c,C]] false false \n' + '[c,C] 2 [[a,A],[b,B],[c,C]] false true \n' + '');
       });
     };
 

@@ -74,7 +74,7 @@ var inProperty = function inProperty(object, propertyPathArray) {
   }
 
   if (!isObject(object)) {
-    throw new TypeError('inProperty args(fromObject) is not object');
+    throw new TypeError('inProperty args(object) is not object');
   }
 
   if (!isString(propertyPathArray)) {

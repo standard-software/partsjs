@@ -18,7 +18,8 @@ var test_execute_object = function test_execute_object(parts) {
         getProperty = _parts$object.getProperty,
         setProperty = _parts$object.setProperty,
         isEmptyObjectAll = _parts$object.isEmptyObjectAll,
-        isObjectParameter = _parts$object.isObjectParameter;
+        isObjectParameter = _parts$object.isObjectParameter,
+        objectToKeyValueArray = _parts$object.objectToKeyValueArray;
 
     var test_copyProperty = function test_copyProperty() {
       it('test_copyProperty', function () {
@@ -486,12 +487,50 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
+    var test_ObjectEntries_standard = function test_ObjectEntries_standard() {
+      it('test_ObjectEntries_standard', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
+        var object1 = {
+          a: '1',
+          b: '2',
+          c: '3'
+        };
+        checkEqual(array1, Object.entries(object1));
+      });
+    };
+
+    var test_objectToKeyValueArray = function test_objectToKeyValueArray() {
+      it('test_objectToKeyValueArray', function () {
+        var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
+        var object1 = {
+          a: '1',
+          b: '2',
+          c: '3'
+        };
+        checkEqual(array1, objectToKeyValueArray(object1)); // only object type
+
+        checkEqual(true, isThrown(function () {
+          return objectToKeyValueArray(array1);
+        })); // object parameter
+
+        checkEqual(array1, objectToKeyValueArray({
+          object: object1
+        }));
+      });
+    };
+
     test_copyProperty();
     test_inProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();
     test_isObjectParameter();
+    test_ObjectEntries_standard();
+    test_objectToKeyValueArray();
   });
 };
 

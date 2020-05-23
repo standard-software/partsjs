@@ -54,132 +54,6 @@ var _require4 = require('../root/clone.js'),
 var _require5 = require('../syntax/syntax.js'),
     canUseSet = _require5.canUseSet;
 /**
- * NumberArray
- */
-
-
-var _NumberArray = function _NumberArray(start, end, increment) {
-  if (isUndefined(increment)) {
-    if (isUndefined(end)) {
-      increment = 1;
-      end = increment * start - 1;
-      start = 0;
-    } else {
-      if (start <= end) {
-        increment = 1;
-      } else {
-        increment = -1;
-      }
-    }
-  }
-
-  if (increment === 0) {
-    throw new RangeError('_NumberArray args(increment) is 0');
-  }
-
-  if (start <= end) {
-    if (increment < 0) {
-      throw new Error('_NumberArray args(increment) < 0');
-    }
-  } else {
-    if (increment > 0) {
-      throw new Error('_NumberArray args(increment) > 0');
-    }
-  }
-
-  var result = [];
-
-  if (start <= end) {
-    for (var i = start, l = end; i <= l; i += increment) {
-      result.push(i);
-    }
-  } else {
-    for (var _i = start, _l = end; _i >= _l; _i += increment) {
-      result.push(_i);
-    }
-  }
-
-  return result;
-};
-
-var NumberArray = function NumberArray(start, end, increment) {
-  if (isObjectParameter(start, 'count')) {
-    var _start = start;
-    start = _start.count;
-    end = undefined;
-    increment = undefined;
-  } else if (isObjectParameter(start, 'start, end', 'increment')) {
-    var _start2 = start;
-    start = _start2.start;
-    end = _start2.end;
-    increment = _start2.increment;
-  } else if (isObjectParameter(end, 'end', 'increment')) {
-    var _end = end;
-    end = _end.end;
-    increment = _end.increment;
-  } else if (isObjectParameter(increment, 'increment')) {
-    var _increment = increment;
-    increment = _increment.increment;
-  }
-
-  if (!isNumber(start)) {
-    throw new TypeError('NumberArray args(start) is not number');
-  }
-
-  if (!isUndefined(end) && !isNumber(end)) {
-    throw new TypeError('NumberArray args(end) is not number');
-  }
-
-  if (!isUndefined(increment) && !isNumber(increment)) {
-    throw new TypeError('NumberArray args(increment) is not number');
-  }
-
-  return _NumberArray(start, end, increment);
-};
-/**
- * IntegerArray
- */
-
-
-var _IntegerArray = function _IntegerArray(start, end, increment) {
-  return _NumberArray(start, end, increment);
-};
-
-var IntegerArray = function IntegerArray(start, end, increment) {
-  if (isObjectParameter(start, 'count')) {
-    var _start3 = start;
-    start = _start3.count;
-    end = undefined;
-    increment = undefined;
-  } else if (isObjectParameter(start, 'start, end', 'increment')) {
-    var _start4 = start;
-    start = _start4.start;
-    end = _start4.end;
-    increment = _start4.increment;
-  } else if (isObjectParameter(end, 'end', 'increment')) {
-    var _end2 = end;
-    end = _end2.end;
-    increment = _end2.increment;
-  } else if (isObjectParameter(increment, 'increment')) {
-    var _increment2 = increment;
-    increment = _increment2.increment;
-  }
-
-  if (!isInteger(start)) {
-    throw new TypeError('IntegerArray args(start) is not number');
-  }
-
-  if (!isUndefined(end) && !isInteger(end)) {
-    throw new TypeError('IntegerArray args(end) is not number');
-  }
-
-  if (!isUndefined(increment) && !isInteger(increment)) {
-    throw new TypeError('IntegerArray args(increment) is not number');
-  }
-
-  return _IntegerArray(start, end, increment);
-};
-/**
  * array.min max
  */
 
@@ -1039,8 +913,6 @@ var subLast = function subLast(array) {
 };
 
 module.exports = {
-  _NumberArray: _NumberArray,
-  _IntegerArray: _IntegerArray,
   _min: _min,
   _max: _max,
   _sum: _sum,
@@ -1066,8 +938,6 @@ module.exports = {
   _subLength: _subLength,
   _subFirst: _subFirst,
   _subLast: _subLast,
-  NumberArray: NumberArray,
-  IntegerArray: IntegerArray,
   from: from,
   min: min,
   max: max,
