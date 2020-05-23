@@ -9,6 +9,9 @@ const {
   isObjectParameter,
 } = require('../object/isObjectParameter.js');
 
+/**
+ * objectToKeyValueArray
+ */
 const _objectToKeyValueArray = (object) => {
   const result = [];
   for (const key in object) {
@@ -33,12 +36,7 @@ const objectToKeyValueArray = (object) => {
   return _objectToKeyValueArray(object);
 };
 
-const entries = objectToKeyValueArray;
-
 module.exports = {
   _objectToKeyValueArray,
-
   objectToKeyValueArray,
-
-  entries,
 };
