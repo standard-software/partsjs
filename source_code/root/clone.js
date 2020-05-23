@@ -63,11 +63,17 @@ cloneFunction.cloneArrayType = (
 
   const cloneValue = new source.constructor();
   bufferWrite(source, cloneValue);
-  for (const key in source) {
-    if (source.hasOwnProperty(key)) {
-      cloneValue[key] = __cloneDeep(source[key]);
-    }
+  for (let i = 0, l = source.length; i < l; i += 1) {
+    cloneValue[i] = __cloneDeep(source[i]);
   }
+  // // Code that does the same thing
+  // // for in array key is string.
+  // // legacy for loop is simple for array
+  // for (const key in source) {
+  //   if (source.hasOwnProperty(key)) {
+  //     cloneValue[key] = __cloneDeep(source[key]);
+  //   }
+  // }
   return cloneValue;
 };
 
