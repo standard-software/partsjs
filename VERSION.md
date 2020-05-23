@@ -2,6 +2,13 @@
 
 ## Version
 
+### 5.6.0
+#### 2020/05/23(Sat)
+- add objectToKeyValueArray (Ponyfill Object.entries)
+- add arrayToIndexValueArray (Ponyfill array.entries)
+- update loop
+  - support object loop
+
 ### 5.5.0
 #### 2020/05/22(Fri)
 - update checkEqual for jest
