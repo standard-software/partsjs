@@ -651,30 +651,30 @@ const test_execute_syntax = (parts) => {
           '7 3 [1,3,5,7,9] false false \n' +
         '');
 
-        // outputConsoleText = '';
-        // {
-        //   // double loop
-        //   parts.loop(3)((
-        //     e, j, array, first, last,
-        //   ) => {
-        //     parts.loop(3)((
-        //       e, i, array, first, last,
-        //     ) => {
-        //       console_log(e, i, array, first, last, j);
-        //     });
-        //   });
-        // }
-        // expect(outputConsoleText).toEqual(
-        //   '0 0 [0,1,2] true false 0 \n' +
-        //   '1 1 [0,1,2] false false 0 \n' +
-        //   '2 2 [0,1,2] false true 0 \n' +
-        //   '0 0 [0,1,2] true false 1 \n' +
-        //   '1 1 [0,1,2] false false 1 \n' +
-        //   '2 2 [0,1,2] false true 1 \n' +
-        //   '0 0 [0,1,2] true false 2 \n' +
-        //   '1 1 [0,1,2] false false 2 \n' +
-        //   '2 2 [0,1,2] false true 2 \n' +
-        // '');
+        outputConsoleText = '';
+        {
+          // double loop
+          parts.loop(3)((
+            e, j, array, first, last,
+          ) => {
+            parts.loop(3)((
+              e, i, array, first, last,
+            ) => {
+              console_log(e, i, array, first, last, j);
+            });
+          });
+        }
+        expect(outputConsoleText).toEqual(
+          '0 0 [0,1,2] true false 0 \n' +
+          '1 1 [0,1,2] false false 0 \n' +
+          '2 2 [0,1,2] false true 0 \n' +
+          '0 0 [0,1,2] true false 1 \n' +
+          '1 1 [0,1,2] false false 1 \n' +
+          '2 2 [0,1,2] false true 1 \n' +
+          '0 0 [0,1,2] true false 2 \n' +
+          '1 1 [0,1,2] false false 2 \n' +
+          '2 2 [0,1,2] false true 2 \n' +
+        '');
 
         outputConsoleText = '';
         {
