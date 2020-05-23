@@ -388,7 +388,9 @@ const test_execute_object = (parts) => {
           return;
         }
 
-        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], Object.entries({a:'1', b:'2', c:'3'}));
+        const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
+        const object1 = {a:'1', b:'2', c:'3'};
+        checkEqual(array1, Object.entries(object1));
 
       });
     };
@@ -398,7 +400,6 @@ const test_execute_object = (parts) => {
 
         const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         const object1 = {a:'1', b:'2', c:'3'};
-
         checkEqual(array1, objectToKeyValueArray(object1));
 
         // only object type

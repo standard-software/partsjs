@@ -236,6 +236,7 @@ You can now use the functions of the parts.js object.
 ### 5.6.0
 #### 2020/05/23(Sat)
 - add objectToKeyValueArray (Ponyfill Object.entries)
+- add arrayToIndexValueArray (Ponyfill array.entries)
 
 ### 5.5.0
 #### 2020/05/22(Fri)

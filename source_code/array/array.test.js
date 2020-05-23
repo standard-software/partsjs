@@ -21,6 +21,7 @@ const test_execute_array = (parts) => {
       isFirst, isLast, isBothEnds,
       subIndex, subLength,
       subFirst, subLast,
+      arrayToIndexValueArray,
     } = array;
 
     const {
@@ -2189,6 +2190,43 @@ const test_execute_array = (parts) => {
       });
     };
 
+    const test_ArrayEntries_standard = () => {
+      it('test_ArrayEntries_standard', () => {
+
+        if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        const arrayEntries = (array) => {
+          const result = [];
+          for (const [i, v] of array.entries()) {
+            result.push([i,v]);
+          }
+          return result;
+        };
+
+        const array1 = ['a', 'b', 'c'];
+        const array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
+        checkEqual(array2, arrayEntries(array1));
+      });
+    };
+
+    const test_arrayToIndexValueArray = () => {
+      it('test_arrayToIndexValueArray', () => {
+
+        const array1 = ['a', 'b', 'c'];
+        const array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
+        checkEqual(array2, arrayToIndexValueArray(array1));
+
+        // only array type
+        checkEqual(true, isThrown(() => objectToKeyValueArray({})));
+
+        // object parameter
+        checkEqual(array2, arrayToIndexValueArray({ array: array1 }));
+
+      });
+    };
+
     test_array_NumberArray();
     test_array_IntegerArray();
 
@@ -2260,6 +2298,9 @@ const test_execute_array = (parts) => {
     test_operation_sortNumber();
     test_operation_sortLength();
     test_operation_sortDictionary();
+
+    test_ArrayEntries_standard();
+    test_arrayToIndexValueArray();
   });
 };
 

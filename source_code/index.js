@@ -215,6 +215,7 @@ propertyNames.ARRAY_PUBLIC =
   'findIndex, findBackIndex,' +
   'find, findBack,' +
   'every,' +
+  'arrayToIndexValueArray,' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +
