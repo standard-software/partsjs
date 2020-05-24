@@ -44,10 +44,14 @@ const matchValue = (
   thenResult,
   elseResult = value,
 ) => {
-  if (isObjectParameter(
-    value, 'value, compare, thenResult', 'elseResult',
-  )) {
-    ({ value, compare, thenResult, elseResult } = value);
+  if (isObjectParameter(value, 'value, compare, thenResult', 'elseResult')) {
+    ({ value, compare, thenResult, elseResult = value } = value);
+  } else if (isObjectParameter(compare, 'compare, thenResult', 'elseResult')) {
+    ({ compare, thenResult, elseResult = value } = compare);
+  } else if (isObjectParameter(thenResult, 'thenResult', 'elseResult')) {
+    ({ thenResult, elseResult = value } = thenResult);
+  } else if (isObjectParameter(elseResult, 'elseResult')) {
+    ({ elseResult } = elseResult);
   }
 
   return _matchValue(
