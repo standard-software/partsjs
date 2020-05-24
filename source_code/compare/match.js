@@ -65,39 +65,6 @@ const match = (
 };
 
 /**
- * matchValue
- */
-const _matchValue = (
-  value,
-  compare,
-  then,
-) => {
-  if (_match(value, compare)) {
-    if (isFunction(then)) {
-      return then(value);
-    }
-    return then;
-  }
-  return value;
-};
-
-const matchValue = (
-  value,
-  compare,
-  then,
-) => {
-  if (isObjectParameter(value, 'value, compare, then')) {
-    ({ value, compare, then } = value);
-  }
-
-  return _matchValue(
-    value,
-    compare,
-    then,
-  );
-};
-
-/**
  * initialValue
  */
 const _initialValue = (
@@ -521,14 +488,14 @@ const someMatchAll = (
 };
 
 module.exports = {
-  _match, _matchValue, _initialValue,
+  _match, _initialValue,
   _allMatch, _indexOfMatch, _someMatch,
   _matchSome, _matchSomeValue,
   _allMatchSome, _indexOfMatchSome, _someMatchSome,
   _matchAll, _matchAllValue,
   _allMatchAll, _indexOfMatchAll, _someMatchAll,
 
-  match, matchValue, initialValue,
+  match, initialValue,
   allMatch, indexOfMatch, someMatch,
   matchSome, matchSomeValue,
   allMatchSome, indexOfMatchSome, someMatchSome,

@@ -235,7 +235,8 @@ You can now use the functions of the parts.js object.
 
 ### 5.7.0
 #### 2020/05/24(Sun)
-- update matchValue 
+- update matchValue
+  - move match.js >> matchValue.js
   - rename args valueWhenMatched >> then
 
 ### 5.6.0
