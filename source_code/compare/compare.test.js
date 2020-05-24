@@ -1052,6 +1052,8 @@ const test_execute_compare = (parts) => {
 
     const test_matchValue = () => {
       it('test_matchValue', () => {
+        const { stringToInteger } = parts;
+
         checkEqual('',          matchValue('', null,       999));
         checkEqual(999,         matchValue('', '',       999));
         checkEqual('123',       matchValue('123', null,       999));
@@ -1063,25 +1065,28 @@ const test_execute_compare = (parts) => {
         checkEqual(999,         matchValue(null, null,      999));
         checkEqual(null,        matchValue(null, undefined, 999));
 
-        checkEqual(1,           matchValue('1',       isString, parts.stringToInteger));
-        checkEqual(1,           matchValue(1,         isString, parts.stringToInteger));
-        checkEqual(null,        matchValue(null,      isString, parts.stringToInteger));
-        checkEqual(undefined,   matchValue(undefined, isString, parts.stringToInteger));
+        checkEqual(1,           matchValue('1',       isString, stringToInteger));
+        checkEqual(1,           matchValue(1,         isString, stringToInteger));
+        checkEqual(null,        matchValue(null,      isString, stringToInteger));
+        checkEqual(undefined,   matchValue(undefined, isString, stringToInteger));
+
+        checkEqual('$100',      matchValue('100', '100', (v) => '$' + v));
+        checkEqual('200',       matchValue('200', '100', (v) => '$' + v));
 
         checkEqual('123', matchValue({
           value: '123',
           compare: undefined,
-          valueWhenMatched: 999,
+          then: 999,
         }));
         checkEqual(999, matchValue({
           value: undefined,
           compare: undefined,
-          valueWhenMatched: 999,
+          then: 999,
         }));
         checkEqual(null, matchValue({
           value: null,
           compare: undefined,
-          valueWhenMatched: 999,
+          then: 999,
         }));
 
         checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));

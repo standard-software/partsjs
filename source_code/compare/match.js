@@ -70,13 +70,13 @@ const match = (
 const _matchValue = (
   value,
   compare,
-  valueWhenMatched,
+  then,
 ) => {
   if (_match(value, compare)) {
-    if (isFunction(valueWhenMatched)) {
-      return valueWhenMatched(value);
+    if (isFunction(then)) {
+      return then(value);
     }
-    return valueWhenMatched;
+    return then;
   }
   return value;
 };
@@ -84,16 +84,16 @@ const _matchValue = (
 const matchValue = (
   value,
   compare,
-  valueWhenMatched,
+  then,
 ) => {
-  if (isObjectParameter(value, 'value, compare, valueWhenMatched')) {
-    ({ value, compare, valueWhenMatched } = value);
+  if (isObjectParameter(value, 'value, compare, then')) {
+    ({ value, compare, then } = value);
   }
 
   return _matchValue(
     value,
     compare,
-    valueWhenMatched,
+    then,
   );
 };
 
