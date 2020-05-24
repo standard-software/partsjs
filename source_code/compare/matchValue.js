@@ -23,30 +23,38 @@ const {
 const _matchValue = (
   value,
   compare,
-  then,
+  thenResult,
+  elseResult = value,
 ) => {
   if (_match(value, compare)) {
-    if (isFunction(then)) {
-      return then(value);
+    if (isFunction(thenResult)) {
+      return thenResult(value);
     }
-    return then;
+    return thenResult;
   }
-  return value;
+  if (isFunction(elseResult)) {
+    return elseResult(value);
+  }
+  return elseResult;
 };
 
 const matchValue = (
   value,
   compare,
-  then,
+  thenResult,
+  elseResult = value,
 ) => {
-  if (isObjectParameter(value, 'value, compare, then')) {
-    ({ value, compare, then } = value);
+  if (isObjectParameter(
+    value, 'value, compare, thenResult', 'elseResult',
+  )) {
+    ({ value, compare, thenResult, elseResult } = value);
   }
 
   return _matchValue(
     value,
     compare,
-    then,
+    thenResult,
+    elseResult,
   );
 };
 

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 const test_execute_compare = (parts) => {
-  const { describe, it } = parts.test;
+  const { describe, it, testCounter } = parts.test;
   describe('test_execute_compare', () => {
 
     const {
@@ -11,6 +11,13 @@ const test_execute_compare = (parts) => {
       isArray, isDate, isRegExp,
       isException,
       isEmptyObject, isEmptyArray,
+
+      isNotNull, isNotUndefined, isNotNaNStrict,
+      isNotBoolean, isNotNumber, isNotInteger, isNotString,
+      isNotFunction, isNotObject, isNotObjectType,
+      isNotArray, isNotDate, isNotRegExp,
+      isNotException,
+      isNotEmptyObject, isNotEmptyArray,
     } = parts.type;
 
     const {
@@ -1072,21 +1079,38 @@ const test_execute_compare = (parts) => {
 
         checkEqual('$100',      matchValue('100', '100', (v) => '$' + v));
         checkEqual('200',       matchValue('200', '100', (v) => '$' + v));
+        checkEqual(100,         matchValue(100,   '100', (v) => '$' + v));
+        checkEqual(200,         matchValue(200,   '100', (v) => '$' + v));
+        checkEqual(null,        matchValue(null,  '100', (v) => '$' + v));
+
+        checkEqual('$100',      matchValue('100',     isString, v => '$' + v, ''));
+        checkEqual('$200',      matchValue('200',     isString, v => '$' + v, ''));
+        checkEqual('',          matchValue(100,       isString, v => '$' + v, ''));
+        checkEqual('',          matchValue(200,       isString, v => '$' + v, ''));
+        checkEqual('',          matchValue(null,      isString, v => '$' + v, ''));
+        checkEqual('',          matchValue(undefined, isString, v => '$' + v, ''));
+
+        checkEqual('?100',        matchValue('100',     isInteger, v => '$' + v, v => '?' + v));
+        checkEqual('?200',        matchValue('200',     isInteger, v => '$' + v, v => '?' + v));
+        checkEqual('$100',        matchValue(100,       isInteger, v => '$' + v, v => '?' + v));
+        checkEqual('$200',        matchValue(200,       isInteger, v => '$' + v, v => '?' + v));
+        checkEqual('?null',       matchValue(null,      isInteger, v => '$' + v, v => '?' + v));
+        checkEqual('?undefined',  matchValue(undefined, isInteger, v => '$' + v, v => '?' + v));
 
         checkEqual('123', matchValue({
           value: '123',
           compare: undefined,
-          then: 999,
+          thenResult: 999,
         }));
         checkEqual(999, matchValue({
           value: undefined,
           compare: undefined,
-          then: 999,
+          thenResult: 999,
         }));
         checkEqual(null, matchValue({
           value: null,
           compare: undefined,
-          then: 999,
+          thenResult: 999,
         }));
 
         checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
