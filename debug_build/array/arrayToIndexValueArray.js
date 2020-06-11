@@ -61,7 +61,9 @@ var arrayToIndexValueArray = function arrayToIndexValueArray(array) {
   return _arrayToIndexValueArray(array);
 };
 
+var arrayEntries = arrayToIndexValueArray;
 module.exports = {
   _arrayToIndexValueArray: _arrayToIndexValueArray,
-  arrayToIndexValueArray: arrayToIndexValueArray
+  arrayToIndexValueArray: arrayToIndexValueArray,
+  arrayEntries: arrayEntries
 };

@@ -47,7 +47,9 @@ var objectToKeyValueArray = function objectToKeyValueArray(object) {
   return _objectToKeyValueArray(object);
 };
 
+var objectEntries = objectToKeyValueArray;
 module.exports = {
   _objectToKeyValueArray: _objectToKeyValueArray,
-  objectToKeyValueArray: objectToKeyValueArray
+  objectToKeyValueArray: objectToKeyValueArray,
+  objectEntries: objectEntries
 };
