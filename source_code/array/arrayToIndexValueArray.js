@@ -43,7 +43,11 @@ const arrayToIndexValueArray = (array) => {
   return _arrayToIndexValueArray(array);
 };
 
+const arrayEntries = arrayToIndexValueArray;
+
 module.exports = {
   _arrayToIndexValueArray,
   arrayToIndexValueArray,
+
+  arrayEntries,
 };

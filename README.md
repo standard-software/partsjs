@@ -245,6 +245,8 @@ You can now use the functions of the parts.js object.
 - update initialValue
   - move motch.js >> initialValue.js
 - update inProperty args propertyPathArray support empty str
+- add alias name objectEntries objectToKeyValueArray
+- add alias name arrayEntries arrayEntries
 
 ### 5.6.0
 #### 2020/05/23(Sat)
