@@ -23,42 +23,42 @@ const {
 const _matchValue = (
   value,
   compare,
-  thenResult,
-  elseResult = value,
+  match,
+  unmatch = value,
 ) => {
   if (_match(value, compare)) {
-    if (isFunction(thenResult)) {
-      return thenResult(value);
+    if (isFunction(match)) {
+      return match(value);
     }
-    return thenResult;
+    return match;
   }
-  if (isFunction(elseResult)) {
-    return elseResult(value);
+  if (isFunction(unmatch)) {
+    return unmatch(value);
   }
-  return elseResult;
+  return unmatch;
 };
 
 const matchValue = (
   value,
   compare,
-  thenResult,
-  elseResult = value,
+  match,
+  unmatch = value,
 ) => {
-  if (isObjectParameter(value, 'value, compare, thenResult', 'elseResult')) {
-    ({ value, compare, thenResult, elseResult = value } = value);
-  } else if (isObjectParameter(compare, 'compare, thenResult', 'elseResult')) {
-    ({ compare, thenResult, elseResult = value } = compare);
-  } else if (isObjectParameter(thenResult, 'thenResult', 'elseResult')) {
-    ({ thenResult, elseResult = value } = thenResult);
-  } else if (isObjectParameter(elseResult, 'elseResult')) {
-    ({ elseResult } = elseResult);
+  if (isObjectParameter(value, 'value, compare, match', 'unmatch')) {
+    ({ value, compare, match, unmatch = value } = value);
+  } else if (isObjectParameter(compare, 'compare, match', 'unmatch')) {
+    ({ compare, match, unmatch = value } = compare);
+  } else if (isObjectParameter(match, 'match', 'unmatch')) {
+    ({ match, unmatch = value } = match);
+  } else if (isObjectParameter(unmatch, 'unmatch')) {
+    ({ unmatch } = unmatch);
   }
 
   return _matchValue(
     value,
     compare,
-    thenResult,
-    elseResult,
+    match,
+    unmatch,
   );
 };
 

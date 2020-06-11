@@ -1103,53 +1103,53 @@ const test_execute_compare = (parts) => {
         checkEqual('123', matchValue({
           value: '123',
           compare: undefined,
-          thenResult: 999,
+          match: 999,
         }));
         checkEqual(999, matchValue({
           value: undefined,
           compare: undefined,
-          thenResult: 999,
+          match: 999,
         }));
         checkEqual(null, matchValue({
           value: null,
           compare: undefined,
-          thenResult: 999,
+          match: 999,
         }));
 
         // object parameter
         checkEqual(null,
-          matchValue({ value: null,       compare: undefined, thenResult: 100 }));
+          matchValue({ value: null,       compare: undefined, match: 100 }));
         checkEqual(200,
-          matchValue({ value: undefined,  compare: undefined, thenResult: 200 }));
+          matchValue({ value: undefined,  compare: undefined, match: 200 }));
         checkEqual(null,
-          matchValue(null,      { compare: undefined, thenResult: 100 }));
+          matchValue(null,      { compare: undefined, match: 100 }));
         checkEqual(200,
-          matchValue(undefined, { compare: undefined, thenResult: 200 }));
+          matchValue(undefined, { compare: undefined, match: 200 }));
         checkEqual(null,
-          matchValue(null,      undefined, { thenResult: 100 }));
+          matchValue(null,      undefined, { match: 100 }));
         checkEqual(200,
-          matchValue(undefined, undefined, { thenResult: 200 }));
+          matchValue(undefined, undefined, { match: 200 }));
         checkEqual(null,
           matchValue(null,      undefined, 100));
         checkEqual(200,
           matchValue(undefined, undefined, 200));
 
         checkEqual(101,
-          matchValue({ value: null,       compare: undefined, thenResult: 100, elseResult: 101 }));
+          matchValue({ value: null,       compare: undefined, match: 100, unmatch: 101 }));
         checkEqual(200,
-          matchValue({ value: undefined,  compare: undefined, thenResult: 200, elseResult: 201 }));
+          matchValue({ value: undefined,  compare: undefined, match: 200, unmatch: 201 }));
         checkEqual(101,
-          matchValue(null,      { compare: undefined, thenResult: 100, elseResult: 101 }));
+          matchValue(null,      { compare: undefined, match: 100, unmatch: 101 }));
         checkEqual(200,
-          matchValue(undefined, { compare: undefined, thenResult: 200, elseResult: 201 }));
+          matchValue(undefined, { compare: undefined, match: 200, unmatch: 201 }));
         checkEqual(101,
-          matchValue(null,      undefined, { thenResult: 100, elseResult: 101 }));
+          matchValue(null,      undefined, { match: 100, unmatch: 101 }));
         checkEqual(200,
-          matchValue(undefined, undefined, { thenResult: 200, elseResult: 201 }));
+          matchValue(undefined, undefined, { match: 200, unmatch: 201 }));
         checkEqual(101,
-          matchValue(null,      undefined, 100, { elseResult: 101 }));
+          matchValue(null,      undefined, 100, { unmatch: 101 }));
         checkEqual(200,
-          matchValue(undefined, undefined, 200, { elseResult: 201 }));
+          matchValue(undefined, undefined, 200, { unmatch: 201 }));
         checkEqual(101,
           matchValue(null,      undefined, 100, 101));
         checkEqual(200,
