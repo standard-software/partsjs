@@ -12,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '5.6.0';
+const VERSION = '5.7.0';
 
 const rootNames = {};
 const propertyNames = {};
@@ -179,11 +179,11 @@ _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 // object
 propertyNames.OBJECT_PUBLIC =
   'isObjectParameter,' +
-  'copyProperty,propertyCount,inProperty,' +
-  'getProperty,setProperty,' +
-  'objectToKeyValueArray,' +
-  'copyProp,propCount,inProp,' +
-  'getProp,setProp,' +
+  'copyProperty, propertyCount, inProperty,' +
+  'getProperty, setProperty,' +
+  'objectToKeyValueArray, objectEntries,' +
+  'copyProp, propCount, inProp,' +
+  'getProp, setProp,' +
   '';
 propertyNames.OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
@@ -215,7 +215,7 @@ propertyNames.ARRAY_PUBLIC =
   'findIndex, findBackIndex,' +
   'find, findBack,' +
   'every,' +
-  'arrayToIndexValueArray,' +
+  'arrayToIndexValueArray, arrayEntries' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +

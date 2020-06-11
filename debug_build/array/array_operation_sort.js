@@ -16,14 +16,16 @@ var _require = require('../type/type.js'),
     isException = _require.isException;
 
 var _require2 = require('../compare/match.js'),
-    allMatch = _require2.allMatch,
-    allMatchSome = _require2.allMatchSome; // const {
+    allMatchSome = _require2.allMatchSome;
+
+var _require3 = require('../compare/allMatch.js'),
+    allMatch = _require3.allMatch; // const {
 //   _inProperty,
 // } = require('../object/inProperty.js');
 
 
-var _require3 = require('../compare/compare_common.js'),
-    _or = _require3._or;
+var _require4 = require('../compare/compare_common.js'),
+    _or = _require4._or;
 /**
  * array.sort
  */

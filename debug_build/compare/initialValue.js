@@ -1,0 +1,56 @@
+"use strict";
+
+var _require = require('../type/type.js'),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
+
+var _require2 = require('../object/isObjectParameter.js'),
+    isObjectParameter = _require2.isObjectParameter;
+
+var _require3 = require('../compare/match.js'),
+    _matchSomeValue = _require3._matchSomeValue;
+/**
+ * initialValue
+ */
+
+
+var _initialValue = function _initialValue(value, valueWhenMatched) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+  return _matchSomeValue(value, compareArray, valueWhenMatched);
+};
+
+var initialValue = function initialValue(value, valueWhenMatched) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+
+  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
+    var _value = value;
+    value = _value.value;
+    valueWhenMatched = _value.valueWhenMatched;
+    var _value$compareArray = _value.compareArray;
+    compareArray = _value$compareArray === void 0 ? [undefined] : _value$compareArray;
+  }
+
+  return _initialValue(value, valueWhenMatched, compareArray);
+};
+
+module.exports = {
+  _initialValue: _initialValue,
+  initialValue: initialValue
+};

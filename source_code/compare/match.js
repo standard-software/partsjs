@@ -65,97 +65,6 @@ const match = (
 };
 
 /**
- * matchValue
- */
-const _matchValue = (
-  value,
-  compare,
-  valueWhenMatched,
-) => {
-  if (_match(value, compare)) {
-    if (isFunction(valueWhenMatched)) {
-      return valueWhenMatched(value);
-    }
-    return valueWhenMatched;
-  }
-  return value;
-};
-
-const matchValue = (
-  value,
-  compare,
-  valueWhenMatched,
-) => {
-  if (isObjectParameter(value, 'value, compare, valueWhenMatched')) {
-    ({ value, compare, valueWhenMatched } = value);
-  }
-
-  return _matchValue(
-    value,
-    compare,
-    valueWhenMatched,
-  );
-};
-
-/**
- * initialValue
- */
-const _initialValue = (
-  value,
-  valueWhenMatched,
-  compareArray = [undefined],
-) => {
-  return _matchSomeValue(value, compareArray, valueWhenMatched);
-};
-
-const initialValue = (
-  value,
-  valueWhenMatched,
-  compareArray = [undefined],
-) => {
-  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
-    ({
-      value, valueWhenMatched, compareArray = [undefined],
-    } = value);
-  }
-
-  return _initialValue(
-    value,
-    valueWhenMatched,
-    compareArray,
-  );
-};
-
-/**
- * allMatch
- */
-const _allMatch = (
-  valueArray,
-  compare,
-) => {
-  return _all(valueArray, value => {
-    return _match(value, compare);
-  });
-};
-
-const allMatch = (
-  valueArray,
-  compare,
-) => {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    ({ valueArray, compare } = valueArray);
-  }
-
-  if (!isArray(valueArray)) {
-    throw new TypeError(
-      'allMatch args(valueArray) is not array',
-    );
-  }
-
-  return _allMatch(valueArray, compare);
-};
-
-/**
  * indexOfMatch
  */
 const _indexOfMatch = (
@@ -521,15 +430,15 @@ const someMatchAll = (
 };
 
 module.exports = {
-  _match, _matchValue, _initialValue,
-  _allMatch, _indexOfMatch, _someMatch,
+  _match,
+  _indexOfMatch, _someMatch,
   _matchSome, _matchSomeValue,
   _allMatchSome, _indexOfMatchSome, _someMatchSome,
   _matchAll, _matchAllValue,
   _allMatchAll, _indexOfMatchAll, _someMatchAll,
 
-  match, matchValue, initialValue,
-  allMatch, indexOfMatch, someMatch,
+  match,
+  indexOfMatch, someMatch,
   matchSome, matchSomeValue,
   allMatchSome, indexOfMatchSome, someMatchSome,
   matchAll, matchAllValue,

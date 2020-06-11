@@ -40,10 +40,12 @@ var _inProperty = function _inProperty(object, propertyPathArray) {
   }
 
   for (var i = 0; i < propertyPathArray.length; i += 1) {
-    // if ((propertyPathArray[i] === '')
-    // || (isUndefined(propertyPathArray[i]))) {
-    //   continue;
-    // }
+    if (i !== 0 && i === propertyPathArray.length - 1) {
+      if (propertyPathArray[i] === '' || isUndefined(propertyPathArray[i])) {
+        continue;
+      }
+    }
+
     if (!isString(propertyPathArray[i])) {
       throw new TypeError('_inProperty args(propertyArray) element is not string');
     }

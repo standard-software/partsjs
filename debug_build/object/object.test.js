@@ -6,7 +6,8 @@
 var test_execute_object = function test_execute_object(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
-      it = _parts$test.it;
+      it = _parts$test.it,
+      testCounter = _parts$test.testCounter;
   describe('test_execute_object', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
@@ -85,10 +86,10 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,c'));
         checkEqual(true, inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(false, inProperty(sourceObject, 'b,a,'));
+        checkEqual(true, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,')); // Object Named Parameter
 
         checkEqual(true, inProperty({
@@ -145,6 +146,7 @@ var test_execute_object = function test_execute_object(parts) {
         First.prototype = new Second();
         Second.prototype.d = '4';
         var sourceObject = new First();
+        checkEqual(false, inProperty(sourceObject, ''));
         checkEqual(true, inProperty(sourceObject, 'a'));
         checkEqual(true, inProperty(sourceObject, 'b'));
         checkEqual(false, inProperty(sourceObject, 'c'));
@@ -154,10 +156,11 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,c'));
         checkEqual(true, inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,'));
+        testCounter();
+        checkEqual(true, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(false, inProperty(sourceObject, 'b,a,'));
+        checkEqual(true, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,'));
         checkEqual(true, inProperty(sourceObject, 'a', false));
         checkEqual(true, inProperty(sourceObject, 'b', false));
@@ -168,11 +171,11 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject, 'a,c', false));
         checkEqual(true, inProperty(sourceObject, 'b,a', false));
         checkEqual(true, inProperty(sourceObject, 'a,d', false));
-        checkEqual(false, inProperty(sourceObject, 'a,b,', false));
-        checkEqual(false, inProperty(sourceObject, 'b,c,', false));
-        checkEqual(false, inProperty(sourceObject, 'a,c,', false));
-        checkEqual(false, inProperty(sourceObject, 'b,a,', false));
-        checkEqual(false, inProperty(sourceObject, 'a,d,', false));
+        checkEqual(true, inProperty(sourceObject, 'a,b,', false));
+        checkEqual(true, inProperty(sourceObject, 'b,c,', false));
+        checkEqual(true, inProperty(sourceObject, 'a,c,', false));
+        checkEqual(true, inProperty(sourceObject, 'b,a,', false));
+        checkEqual(true, inProperty(sourceObject, 'a,d,', false));
         var sourceObject = {
           a: '1',
           b: '2',
@@ -191,8 +194,8 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,b,c.d.'));
         checkEqual(false, inProperty(sourceObject, 'a,b,c.d..e'));
         checkEqual(false, inProperty(sourceObject, 'a,b,.d'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.e,'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,c.d.e,'));
       });
     };
 

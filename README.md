@@ -233,6 +233,21 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.7.0
+#### 2020/06/11(Thu)
+- update matchValue
+  - move match.js >> matchValue.js
+  - rename args valueWhenMatched >> match
+  - add args unmatch
+  - support full object parameter
+- update allMatch
+  - move motch.js >> allMatch.js
+- update initialValue
+  - move motch.js >> initialValue.js
+- update inProperty args propertyPathArray support empty str
+- add alias name objectEntries objectToKeyValueArray
+- add alias name arrayEntries arrayEntries
+
 ### 5.6.0
 #### 2020/05/23(Sat)
 - add objectToKeyValueArray (Ponyfill Object.entries)

@@ -36,7 +36,11 @@ const objectToKeyValueArray = (object) => {
   return _objectToKeyValueArray(object);
 };
 
+const objectEntries = objectToKeyValueArray;
+
 module.exports = {
   _objectToKeyValueArray,
   objectToKeyValueArray,
+
+  objectEntries,
 };

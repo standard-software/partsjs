@@ -6,4 +6,4 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, require('./compare_common.js')), require('./match.js')), require('./includes.js')), require('./includes_common.js')), require('./equal.js'));
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, require('./compare_common.js')), require('./match.js')), require('./matchValue.js')), require('./allMatch.js')), require('./initialValue.js')), require('./includes.js')), require('./includes_common.js')), require('./equal.js'));
