@@ -126,21 +126,21 @@ var _test = __webpack_require__(29);
 
 var _syntax = __webpack_require__(25);
 
-var _compare = __webpack_require__(37);
+var _compare = __webpack_require__(38);
 
-var _convert = __webpack_require__(41);
+var _convert = __webpack_require__(44);
 
 var _number = __webpack_require__(24);
 
-var _string = __webpack_require__(35);
+var _string = __webpack_require__(36);
 
 var _object = __webpack_require__(16);
 
 var _array = __webpack_require__(30);
 
-var _consoleHook = __webpack_require__(42);
+var _consoleHook = __webpack_require__(45);
 
-var VERSION = '5.6.0';
+var VERSION = '5.7.0 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -2384,10 +2384,12 @@ var _inProperty = function _inProperty(object, propertyPathArray) {
   }
 
   for (var i = 0; i < propertyPathArray.length; i += 1) {
-    // if ((propertyPathArray[i] === '')
-    // || (isUndefined(propertyPathArray[i]))) {
-    //   continue;
-    // }
+    if (i !== 0 && i === propertyPathArray.length - 1) {
+      if (propertyPathArray[i] === '' || isUndefined(propertyPathArray[i])) {
+        continue;
+      }
+    }
+
     if (!isString(propertyPathArray[i])) {
       throw new TypeError('_inProperty args(propertyArray) element is not string');
     }
@@ -2783,80 +2785,6 @@ var match = function match(value, compare) {
   return _match(value, compare);
 };
 /**
- * matchValue
- */
-
-
-var _matchValue = function _matchValue(value, compare, valueWhenMatched) {
-  if (_match(value, compare)) {
-    if (isFunction(valueWhenMatched)) {
-      return valueWhenMatched(value);
-    }
-
-    return valueWhenMatched;
-  }
-
-  return value;
-};
-
-var matchValue = function matchValue(value, compare, valueWhenMatched) {
-  if (isObjectParameter(value, 'value, compare, valueWhenMatched')) {
-    var _value2 = value;
-    value = _value2.value;
-    compare = _value2.compare;
-    valueWhenMatched = _value2.valueWhenMatched;
-  }
-
-  return _matchValue(value, compare, valueWhenMatched);
-};
-/**
- * initialValue
- */
-
-
-var _initialValue = function _initialValue(value, valueWhenMatched) {
-  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
-  return _matchSomeValue(value, compareArray, valueWhenMatched);
-};
-
-var initialValue = function initialValue(value, valueWhenMatched) {
-  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
-
-  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
-    var _value3 = value;
-    value = _value3.value;
-    valueWhenMatched = _value3.valueWhenMatched;
-    var _value3$compareArray = _value3.compareArray;
-    compareArray = _value3$compareArray === void 0 ? [undefined] : _value3$compareArray;
-  }
-
-  return _initialValue(value, valueWhenMatched, compareArray);
-};
-/**
- * allMatch
- */
-
-
-var _allMatch = function _allMatch(valueArray, compare) {
-  return _all(valueArray, function (value) {
-    return _match(value, compare);
-  });
-};
-
-var allMatch = function allMatch(valueArray, compare) {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compare = _valueArray.compare;
-  }
-
-  if (!isArray(valueArray)) {
-    throw new TypeError('allMatch args(valueArray) is not array');
-  }
-
-  return _allMatch(valueArray, compare);
-};
-/**
  * indexOfMatch
  */
 
@@ -2869,9 +2797,9 @@ var _indexOfMatch = function _indexOfMatch(valueArray, compare) {
 
 var indexOfMatch = function indexOfMatch(valueArray, compare) {
   if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    var _valueArray2 = valueArray;
-    valueArray = _valueArray2.valueArray;
-    compare = _valueArray2.compare;
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compare = _valueArray.compare;
   }
 
   if (!isArray(valueArray)) {
@@ -2905,9 +2833,9 @@ var _matchSome = function _matchSome(value, compareArray) {
 
 var matchSome = function matchSome(value, compareArray) {
   if (isObjectParameter(value, 'value,compareArray')) {
-    var _value4 = value;
-    value = _value4.value;
-    compareArray = _value4.compareArray;
+    var _value2 = value;
+    value = _value2.value;
+    compareArray = _value2.compareArray;
   }
 
   if (!isArray(compareArray)) {
@@ -2935,10 +2863,10 @@ var _matchSomeValue = function _matchSomeValue(value, compareArray, valueWhenMat
 
 var matchSomeValue = function matchSomeValue(value, compareArray, valueWhenMatched) {
   if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
-    var _value5 = value;
-    value = _value5.value;
-    compareArray = _value5.compareArray;
-    valueWhenMatched = _value5.valueWhenMatched;
+    var _value3 = value;
+    value = _value3.value;
+    compareArray = _value3.compareArray;
+    valueWhenMatched = _value3.valueWhenMatched;
   }
 
   if (!isArray(compareArray)) {
@@ -2960,9 +2888,9 @@ var _allMatchSome = function _allMatchSome(valueArray, compareArray) {
 
 var allMatchSome = function allMatchSome(valueArray, compareArray) {
   if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
-    var _valueArray3 = valueArray;
-    valueArray = _valueArray3.valueArray;
-    compareArray = _valueArray3.compareArray;
+    var _valueArray2 = valueArray;
+    valueArray = _valueArray2.valueArray;
+    compareArray = _valueArray2.compareArray;
   }
 
   if (!isArray(valueArray)) {
@@ -2988,9 +2916,9 @@ var _indexOfMatchSome = function _indexOfMatchSome(valueArray, compareArray) {
 
 var indexOfMatchSome = function indexOfMatchSome(valueArray, compareArray) {
   if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
-    var _valueArray4 = valueArray;
-    valueArray = _valueArray4.valueArray;
-    compareArray = _valueArray4.compareArray;
+    var _valueArray3 = valueArray;
+    valueArray = _valueArray3.valueArray;
+    compareArray = _valueArray3.compareArray;
   }
 
   if (!isArray(valueArray)) {
@@ -3028,9 +2956,9 @@ var _matchAll = function _matchAll(value, compareArray) {
 
 var matchAll = function matchAll(value, compareArray) {
   if (isObjectParameter(value, 'value,compareArray')) {
-    var _value6 = value;
-    value = _value6.value;
-    compareArray = _value6.compareArray;
+    var _value4 = value;
+    value = _value4.value;
+    compareArray = _value4.compareArray;
   }
 
   if (!isArray(compareArray)) {
@@ -3058,10 +2986,10 @@ var _matchAllValue = function _matchAllValue(value, compareArray, valueWhenMatch
 
 var matchAllValue = function matchAllValue(value, compareArray, valueWhenMatched) {
   if (isObjectParameter(value, 'value, compareArray, valueWhenMatched')) {
-    var _value7 = value;
-    value = _value7.value;
-    compareArray = _value7.compareArray;
-    valueWhenMatched = _value7.valueWhenMatched;
+    var _value5 = value;
+    value = _value5.value;
+    compareArray = _value5.compareArray;
+    valueWhenMatched = _value5.valueWhenMatched;
   }
 
   if (!isArray(compareArray)) {
@@ -3083,9 +3011,9 @@ var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
 
 var allMatchAll = function allMatchAll(valueArray, compareArray) {
   if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
-    var _valueArray5 = valueArray;
-    valueArray = _valueArray5.valueArray;
-    compareArray = _valueArray5.compareArray;
+    var _valueArray4 = valueArray;
+    valueArray = _valueArray4.valueArray;
+    compareArray = _valueArray4.compareArray;
   }
 
   if (!isArray(valueArray)) {
@@ -3111,9 +3039,9 @@ var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
 
 var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
   if (isObjectParameter(valueArray, 'valueArray,compareArray')) {
-    var _valueArray6 = valueArray;
-    valueArray = _valueArray6.valueArray;
-    compareArray = _valueArray6.compareArray;
+    var _valueArray5 = valueArray;
+    valueArray = _valueArray5.valueArray;
+    compareArray = _valueArray5.compareArray;
   }
 
   if (!isArray(valueArray)) {
@@ -3141,9 +3069,6 @@ var someMatchAll = function someMatchAll(valueArray, compareArray) {
 
 module.exports = {
   _match: _match,
-  _matchValue: _matchValue,
-  _initialValue: _initialValue,
-  _allMatch: _allMatch,
   _indexOfMatch: _indexOfMatch,
   _someMatch: _someMatch,
   _matchSome: _matchSome,
@@ -3157,9 +3082,6 @@ module.exports = {
   _indexOfMatchAll: _indexOfMatchAll,
   _someMatchAll: _someMatchAll,
   match: match,
-  matchValue: matchValue,
-  initialValue: initialValue,
-  allMatch: allMatch,
   indexOfMatch: indexOfMatch,
   someMatch: someMatch,
   matchSome: matchSome,
@@ -5144,10 +5066,10 @@ var _require = __webpack_require__(5),
 var _require2 = __webpack_require__(30),
     _map = _require2._map;
 
-var _require3 = __webpack_require__(35),
+var _require3 = __webpack_require__(36),
     _repeat = _require3._repeat;
 
-var _require4 = __webpack_require__(37),
+var _require4 = __webpack_require__(38),
     equal = _require4.equal,
     equalDeep = _require4.equalDeep;
 /**
@@ -6313,14 +6235,16 @@ var _require = __webpack_require__(5),
     isException = _require.isException;
 
 var _require2 = __webpack_require__(22),
-    allMatch = _require2.allMatch,
-    allMatchSome = _require2.allMatchSome; // const {
+    allMatchSome = _require2.allMatchSome;
+
+var _require3 = __webpack_require__(34),
+    allMatch = _require3.allMatch; // const {
 //   _inProperty,
 // } = require('../object/inProperty.js');
 
 
-var _require3 = __webpack_require__(34),
-    _or = _require3._or;
+var _require4 = __webpack_require__(35),
+    _or = _require4._or;
 /**
  * array.sort
  */
@@ -6509,6 +6433,72 @@ var _require = __webpack_require__(5),
 
 var _require2 = __webpack_require__(9),
     isObjectParameter = _require2.isObjectParameter;
+
+var _require3 = __webpack_require__(23),
+    _all = _require3._all;
+
+var _require4 = __webpack_require__(22),
+    _match = _require4._match;
+/**
+ * allMatch
+ */
+
+
+var _allMatch = function _allMatch(valueArray, compare) {
+  return _all(valueArray, function (value) {
+    return _match(value, compare);
+  });
+};
+
+var allMatch = function allMatch(valueArray, compare) {
+  if (isObjectParameter(valueArray, 'valueArray, compare')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compare = _valueArray.compare;
+  }
+
+  if (!isArray(valueArray)) {
+    throw new TypeError('allMatch args(valueArray) is not array');
+  }
+
+  return _allMatch(valueArray, compare);
+};
+
+module.exports = {
+  _allMatch: _allMatch,
+  allMatch: allMatch
+};
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
+
+var _require2 = __webpack_require__(9),
+    isObjectParameter = _require2.isObjectParameter;
 /**
  * or
  */
@@ -6544,7 +6534,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6556,10 +6546,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(36)), __webpack_require__(10)), __webpack_require__(39)), __webpack_require__(40));
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(37)), __webpack_require__(10)), __webpack_require__(42)), __webpack_require__(43));
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6593,7 +6583,7 @@ var _require4 = __webpack_require__(30),
     _findIndex = _require4._findIndex,
     _findFirst = _require4._findFirst;
 
-var _require5 = __webpack_require__(37),
+var _require5 = __webpack_require__(38),
     allMatchSome = _require5.allMatchSome;
 /**
  * repeat
@@ -7683,7 +7673,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7695,10 +7685,162 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(34)), __webpack_require__(22)), __webpack_require__(21)), __webpack_require__(28)), __webpack_require__(38));
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(35)), __webpack_require__(22)), __webpack_require__(39)), __webpack_require__(34)), __webpack_require__(40)), __webpack_require__(21)), __webpack_require__(28)), __webpack_require__(41));
 
 /***/ }),
-/* 38 */
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
+
+var _require2 = __webpack_require__(9),
+    isObjectParameter = _require2.isObjectParameter;
+
+var _require3 = __webpack_require__(22),
+    _match = _require3._match;
+/**
+ * matchValue
+ */
+
+
+var _matchValue = function _matchValue(value, compare, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if (_match(value, compare)) {
+    if (isFunction(match)) {
+      return match(value);
+    }
+
+    return match;
+  }
+
+  if (isFunction(unmatch)) {
+    return unmatch(value);
+  }
+
+  return unmatch;
+};
+
+var matchValue = function matchValue(value, compare, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if (isObjectParameter(value, 'value, compare, match', 'unmatch')) {
+    var _value = value;
+    value = _value.value;
+    compare = _value.compare;
+    match = _value.match;
+    var _value$unmatch = _value.unmatch;
+    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
+  } else if (isObjectParameter(compare, 'compare, match', 'unmatch')) {
+    var _compare = compare;
+    compare = _compare.compare;
+    match = _compare.match;
+    var _compare$unmatch = _compare.unmatch;
+    unmatch = _compare$unmatch === void 0 ? value : _compare$unmatch;
+  } else if (isObjectParameter(match, 'match', 'unmatch')) {
+    var _match2 = match;
+    match = _match2.match;
+    var _match2$unmatch = _match2.unmatch;
+    unmatch = _match2$unmatch === void 0 ? value : _match2$unmatch;
+  } else if (isObjectParameter(unmatch, 'unmatch')) {
+    var _unmatch = unmatch;
+    unmatch = _unmatch.unmatch;
+  }
+
+  return _matchValue(value, compare, match, unmatch);
+};
+
+module.exports = {
+  _matchValue: _matchValue,
+  matchValue: matchValue
+};
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(5),
+    isUndefined = _require.isUndefined,
+    isNull = _require.isNull,
+    isNaNStrict = _require.isNaNStrict,
+    isBoolean = _require.isBoolean,
+    isNumber = _require.isNumber,
+    isInteger = _require.isInteger,
+    isString = _require.isString,
+    isFunction = _require.isFunction,
+    isObject = _require.isObject,
+    isObjectType = _require.isObjectType,
+    isArray = _require.isArray,
+    isArrayType = _require.isArrayType,
+    isDate = _require.isDate,
+    isRegExp = _require.isRegExp,
+    isException = _require.isException,
+    isMap = _require.isMap,
+    isWeakMap = _require.isWeakMap,
+    isSet = _require.isSet,
+    isWeakSet = _require.isWeakSet;
+
+var _require2 = __webpack_require__(9),
+    isObjectParameter = _require2.isObjectParameter;
+
+var _require3 = __webpack_require__(22),
+    _matchSomeValue = _require3._matchSomeValue;
+/**
+ * initialValue
+ */
+
+
+var _initialValue = function _initialValue(value, valueWhenMatched) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+  return _matchSomeValue(value, compareArray, valueWhenMatched);
+};
+
+var initialValue = function initialValue(value, valueWhenMatched) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+
+  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
+    var _value = value;
+    value = _value.value;
+    valueWhenMatched = _value.valueWhenMatched;
+    var _value$compareArray = _value.compareArray;
+    compareArray = _value$compareArray === void 0 ? [undefined] : _value$compareArray;
+  }
+
+  return _initialValue(value, valueWhenMatched, compareArray);
+};
+
+module.exports = {
+  _initialValue: _initialValue,
+  initialValue: initialValue
+};
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8209,7 +8351,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8264,7 +8406,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8502,7 +8644,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8536,11 +8678,11 @@ var _require = __webpack_require__(5),
     isNotRegExp = _require.isNotRegExp,
     isNotException = _require.isNotException;
 
-var _require2 = __webpack_require__(37),
+var _require2 = __webpack_require__(38),
     _matchValue = _require2._matchValue,
     _initialValue = _require2._initialValue;
 
-var _require3 = __webpack_require__(35),
+var _require3 = __webpack_require__(36),
     _matchFormat = _require3._matchFormat;
 
 var _require4 = __webpack_require__(9),
@@ -8890,7 +9032,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8911,7 +9053,7 @@ var _require = __webpack_require__(5),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = __webpack_require__(37),
+var _require2 = __webpack_require__(38),
     _or = _require2._or,
     _includes = _require2._includes,
     _includesSome = _require2._includesSome,

@@ -20417,7 +20417,8 @@ module.exports = {
 var test_execute_compare = function test_execute_compare(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
-      it = _parts$test.it;
+      it = _parts$test.it,
+      testCounter = _parts$test.testCounter;
   describe('test_execute_compare', function () {
     var _parts$type = parts.type,
         isNull = _parts$type.isNull,
@@ -20435,7 +20436,23 @@ var test_execute_compare = function test_execute_compare(parts) {
         isRegExp = _parts$type.isRegExp,
         isException = _parts$type.isException,
         isEmptyObject = _parts$type.isEmptyObject,
-        isEmptyArray = _parts$type.isEmptyArray;
+        isEmptyArray = _parts$type.isEmptyArray,
+        isNotNull = _parts$type.isNotNull,
+        isNotUndefined = _parts$type.isNotUndefined,
+        isNotNaNStrict = _parts$type.isNotNaNStrict,
+        isNotBoolean = _parts$type.isNotBoolean,
+        isNotNumber = _parts$type.isNotNumber,
+        isNotInteger = _parts$type.isNotInteger,
+        isNotString = _parts$type.isNotString,
+        isNotFunction = _parts$type.isNotFunction,
+        isNotObject = _parts$type.isNotObject,
+        isNotObjectType = _parts$type.isNotObjectType,
+        isNotArray = _parts$type.isNotArray,
+        isNotDate = _parts$type.isNotDate,
+        isNotRegExp = _parts$type.isNotRegExp,
+        isNotException = _parts$type.isNotException,
+        isNotEmptyObject = _parts$type.isNotEmptyObject,
+        isNotEmptyArray = _parts$type.isNotEmptyArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         expect = _parts$test2.expect,
@@ -21756,6 +21773,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_matchValue = function test_matchValue() {
       it('test_matchValue', function () {
+        var stringToInteger = parts.stringToInteger;
         checkEqual('', matchValue('', null, 999));
         checkEqual(999, matchValue('', '', 999));
         checkEqual('123', matchValue('123', null, 999));
@@ -21766,29 +21784,159 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(999, matchValue(undefined, undefined, 999));
         checkEqual(999, matchValue(null, null, 999));
         checkEqual(null, matchValue(null, undefined, 999));
-        checkEqual(1, matchValue('1', isString, parts.stringToInteger));
-        checkEqual(1, matchValue(1, isString, parts.stringToInteger));
-        checkEqual(null, matchValue(null, isString, parts.stringToInteger));
-        checkEqual(undefined, matchValue(undefined, isString, parts.stringToInteger));
+        checkEqual(1, matchValue('1', isString, stringToInteger));
+        checkEqual(1, matchValue(1, isString, stringToInteger));
+        checkEqual(null, matchValue(null, isString, stringToInteger));
+        checkEqual(undefined, matchValue(undefined, isString, stringToInteger));
+        checkEqual('test', matchValue({}, isEmptyObject, 'test'));
+        checkEqual({
+          a: 1
+        }, matchValue({
+          a: 1
+        }, isEmptyObject, 'test'));
+        checkEqual('$100', matchValue('100', '100', function (v) {
+          return '$' + v;
+        }));
+        checkEqual('200', matchValue('200', '100', function (v) {
+          return '$' + v;
+        }));
+        checkEqual(100, matchValue(100, '100', function (v) {
+          return '$' + v;
+        }));
+        checkEqual(200, matchValue(200, '100', function (v) {
+          return '$' + v;
+        }));
+        checkEqual(null, matchValue(null, '100', function (v) {
+          return '$' + v;
+        }));
+        checkEqual('$100', matchValue('100', isString, function (v) {
+          return '$' + v;
+        }, ''));
+        checkEqual('$200', matchValue('200', isString, function (v) {
+          return '$' + v;
+        }, ''));
+        checkEqual('', matchValue(100, isString, function (v) {
+          return '$' + v;
+        }, ''));
+        checkEqual('', matchValue(200, isString, function (v) {
+          return '$' + v;
+        }, ''));
+        checkEqual('', matchValue(null, isString, function (v) {
+          return '$' + v;
+        }, ''));
+        checkEqual('', matchValue(undefined, isString, function (v) {
+          return '$' + v;
+        }, ''));
+        checkEqual('?100', matchValue('100', isInteger, function (v) {
+          return '$' + v;
+        }, function (v) {
+          return '?' + v;
+        }));
+        checkEqual('?200', matchValue('200', isInteger, function (v) {
+          return '$' + v;
+        }, function (v) {
+          return '?' + v;
+        }));
+        checkEqual('$100', matchValue(100, isInteger, function (v) {
+          return '$' + v;
+        }, function (v) {
+          return '?' + v;
+        }));
+        checkEqual('$200', matchValue(200, isInteger, function (v) {
+          return '$' + v;
+        }, function (v) {
+          return '?' + v;
+        }));
+        checkEqual('?null', matchValue(null, isInteger, function (v) {
+          return '$' + v;
+        }, function (v) {
+          return '?' + v;
+        }));
+        checkEqual('?undefined', matchValue(undefined, isInteger, function (v) {
+          return '$' + v;
+        }, function (v) {
+          return '?' + v;
+        }));
         checkEqual('123', matchValue({
           value: '123',
           compare: undefined,
-          valueWhenMatched: 999
+          match: 999
         }));
         checkEqual(999, matchValue({
           value: undefined,
           compare: undefined,
-          valueWhenMatched: 999
+          match: 999
         }));
         checkEqual(null, matchValue({
           value: null,
           compare: undefined,
-          valueWhenMatched: 999
+          match: 999
+        })); // object parameter
+
+        checkEqual(null, matchValue({
+          value: null,
+          compare: undefined,
+          match: 100
         }));
-        checkEqual('test', String(matchValue({}, isEmptyObject, 'test')));
-        checkEqual('[object Object]', String(matchValue({
-          a: 1
-        }, isEmptyObject, 'test')));
+        checkEqual(200, matchValue({
+          value: undefined,
+          compare: undefined,
+          match: 200
+        }));
+        checkEqual(null, matchValue(null, {
+          compare: undefined,
+          match: 100
+        }));
+        checkEqual(200, matchValue(undefined, {
+          compare: undefined,
+          match: 200
+        }));
+        checkEqual(null, matchValue(null, undefined, {
+          match: 100
+        }));
+        checkEqual(200, matchValue(undefined, undefined, {
+          match: 200
+        }));
+        checkEqual(null, matchValue(null, undefined, 100));
+        checkEqual(200, matchValue(undefined, undefined, 200));
+        checkEqual(101, matchValue({
+          value: null,
+          compare: undefined,
+          match: 100,
+          unmatch: 101
+        }));
+        checkEqual(200, matchValue({
+          value: undefined,
+          compare: undefined,
+          match: 200,
+          unmatch: 201
+        }));
+        checkEqual(101, matchValue(null, {
+          compare: undefined,
+          match: 100,
+          unmatch: 101
+        }));
+        checkEqual(200, matchValue(undefined, {
+          compare: undefined,
+          match: 200,
+          unmatch: 201
+        }));
+        checkEqual(101, matchValue(null, undefined, {
+          match: 100,
+          unmatch: 101
+        }));
+        checkEqual(200, matchValue(undefined, undefined, {
+          match: 200,
+          unmatch: 201
+        }));
+        checkEqual(101, matchValue(null, undefined, 100, {
+          unmatch: 101
+        }));
+        checkEqual(200, matchValue(undefined, undefined, 200, {
+          unmatch: 201
+        }));
+        checkEqual(101, matchValue(null, undefined, 100, 101));
+        checkEqual(200, matchValue(undefined, undefined, 200, 201));
       });
     };
 
@@ -26051,7 +26199,8 @@ module.exports = {
 var test_execute_object = function test_execute_object(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
-      it = _parts$test.it;
+      it = _parts$test.it,
+      testCounter = _parts$test.testCounter;
   describe('test_execute_object', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
@@ -26130,10 +26279,10 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,c'));
         checkEqual(true, inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(false, inProperty(sourceObject, 'b,a,'));
+        checkEqual(true, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,')); // Object Named Parameter
 
         checkEqual(true, inProperty({
@@ -26190,6 +26339,7 @@ var test_execute_object = function test_execute_object(parts) {
         First.prototype = new Second();
         Second.prototype.d = '4';
         var sourceObject = new First();
+        checkEqual(false, inProperty(sourceObject, ''));
         checkEqual(true, inProperty(sourceObject, 'a'));
         checkEqual(true, inProperty(sourceObject, 'b'));
         checkEqual(false, inProperty(sourceObject, 'c'));
@@ -26199,10 +26349,11 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,c'));
         checkEqual(true, inProperty(sourceObject, 'b,a'));
         checkEqual(false, inProperty(sourceObject, 'a,d'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,'));
+        testCounter();
+        checkEqual(true, inProperty(sourceObject, 'a,b,'));
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
-        checkEqual(false, inProperty(sourceObject, 'b,a,'));
+        checkEqual(true, inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,'));
         checkEqual(true, inProperty(sourceObject, 'a', false));
         checkEqual(true, inProperty(sourceObject, 'b', false));
@@ -26213,11 +26364,11 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject, 'a,c', false));
         checkEqual(true, inProperty(sourceObject, 'b,a', false));
         checkEqual(true, inProperty(sourceObject, 'a,d', false));
-        checkEqual(false, inProperty(sourceObject, 'a,b,', false));
-        checkEqual(false, inProperty(sourceObject, 'b,c,', false));
-        checkEqual(false, inProperty(sourceObject, 'a,c,', false));
-        checkEqual(false, inProperty(sourceObject, 'b,a,', false));
-        checkEqual(false, inProperty(sourceObject, 'a,d,', false));
+        checkEqual(true, inProperty(sourceObject, 'a,b,', false));
+        checkEqual(true, inProperty(sourceObject, 'b,c,', false));
+        checkEqual(true, inProperty(sourceObject, 'a,c,', false));
+        checkEqual(true, inProperty(sourceObject, 'b,a,', false));
+        checkEqual(true, inProperty(sourceObject, 'a,d,', false));
         var sourceObject = {
           a: '1',
           b: '2',
@@ -26236,8 +26387,8 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'a,b,c.d.'));
         checkEqual(false, inProperty(sourceObject, 'a,b,c.d..e'));
         checkEqual(false, inProperty(sourceObject, 'a,b,.d'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.e,'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,'));
+        checkEqual(true, inProperty(sourceObject, 'a,b,c.d.e,'));
       });
     };
 
