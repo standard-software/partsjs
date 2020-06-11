@@ -240,6 +240,11 @@ You can now use the functions of the parts.js object.
   - rename args valueWhenMatched >> thenResult
   - add args elseResult
   - support full object parameter
+- update allMatch
+  - move motch.js >> allMatch.js
+- update initialValue
+  - move motch.js >> initialValue.js
+- update inProperty args propertyPathArray support empty str
 
 ### 5.6.0
 #### 2020/05/23(Sat)

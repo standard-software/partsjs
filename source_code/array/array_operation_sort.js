@@ -6,9 +6,12 @@ const {
 } = require('../type/type.js');
 
 const {
-  allMatch,
   allMatchSome,
 } = require('../compare/match.js');
+
+const {
+  allMatch,
+} = require('../compare/allMatch.js');
 
 // const {
 //   _inProperty,
