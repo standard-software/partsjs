@@ -233,6 +233,29 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.8.0
+#### 2020/06/15(Mon)
+- update match.js move function
+  - match series
+    - add indexOfMatch.js someMatch.js
+  - matchSome series
+    - add matchSome.js matchSomeValue.js 
+      indexOfMatchSome.js allMatchSome.js someMatchSome.js
+  - matchAll series
+    - add matchAll.js matchAllValue.js
+      indexOfMatchAll.js allMatchAll.js someMatchAll.js
+- support full object parameter
+  - match series
+    - match initialValue indexOfMatch allMatch someMatch
+  - matchSome series
+    - matchSome matchSomeValue indexOfMatchSome allMatchSome someMatchSome
+  - matchAll series
+    - matchAll matchAllValue indexOfMatchAll allMatchAll someMatchAll
+- rename args valueWhenMatched >> match
+  - initialValue matchSomeValue matchAllValue
+- add args unmatch
+  - matchSomeValue matchAllValue
+
 ### 5.7.0
 #### 2020/06/11(Thu)
 - update matchValue

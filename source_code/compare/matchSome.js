@@ -14,7 +14,7 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
-  _all,
+  _some,
 } = require('../array/array_common.js');
 
 const {
@@ -22,37 +22,34 @@ const {
 } = require('../compare/match.js');
 
 /**
- * allMatch
+ * matchSome
  */
-const _allMatch = (
-  valueArray,
-  compare,
-) => {
-  return _all(valueArray, value => {
+const _matchSome = (value, compareArray) => {
+  return _some(compareArray, compare => {
     return _match(value, compare);
   });
 };
 
-const allMatch = (
-  valueArray,
-  compare,
+const matchSome = (
+  value,
+  compareArray,
 ) => {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    ({ valueArray, compare } = valueArray);
-  } else if (isObjectParameter(compare, 'compare')) {
-    ({ compare } = compare);
+  if (isObjectParameter(value, 'value, compareArray')) {
+    ({ value, compareArray } = value);
+  } else if (isObjectParameter(compareArray, 'compareArray')) {
+    ({ compareArray } = compareArray);
   }
 
-  if (!isArray(valueArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
-      'allMatch args(valueArray) is not array',
+      'matchSome args(compareArray) is not array',
     );
   }
 
-  return _allMatch(valueArray, compare);
+  return _matchSome(value, compareArray);
 };
 
 module.exports = {
-  _allMatch,
-  allMatch,
+  _matchSome,
+  matchSome,
 };

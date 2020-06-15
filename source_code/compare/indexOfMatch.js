@@ -14,7 +14,7 @@ const {
 } = require('../object/isObjectParameter.js');
 
 const {
-  _all,
+  _findFirstIndex,
 } = require('../array/array_common.js');
 
 const {
@@ -22,18 +22,18 @@ const {
 } = require('../compare/match.js');
 
 /**
- * allMatch
+ * indexOfMatch
  */
-const _allMatch = (
+const _indexOfMatch = (
   valueArray,
   compare,
 ) => {
-  return _all(valueArray, value => {
+  return _findFirstIndex(valueArray, value => {
     return _match(value, compare);
   });
 };
 
-const allMatch = (
+const indexOfMatch = (
   valueArray,
   compare,
 ) => {
@@ -45,14 +45,14 @@ const allMatch = (
 
   if (!isArray(valueArray)) {
     throw new TypeError(
-      'allMatch args(valueArray) is not array',
+      'indexOfMatch args(valueArray) is not array',
     );
   }
 
-  return _allMatch(valueArray, compare);
+  return _indexOfMatch(valueArray, compare);
 };
 
 module.exports = {
-  _allMatch,
-  allMatch,
+  _indexOfMatch,
+  indexOfMatch,
 };

@@ -15,33 +15,41 @@ const {
 
 const {
   _matchSomeValue,
-} = require('../compare/match.js');
+} = require('../compare/matchSomeValue.js');
 
 /**
  * initialValue
  */
 const _initialValue = (
   value,
-  valueWhenMatched,
+  match,
   compareArray = [undefined],
 ) => {
-  return _matchSomeValue(value, compareArray, valueWhenMatched);
+  return _matchSomeValue(value, compareArray, match);
 };
 
 const initialValue = (
   value,
-  valueWhenMatched,
+  match,
   compareArray = [undefined],
 ) => {
-  if (isObjectParameter(value, 'value, valueWhenMatched', 'compareArray')) {
-    ({
-      value, valueWhenMatched, compareArray = [undefined],
-    } = value);
+  if (isObjectParameter(value, 'value, match', 'compareArray')) {
+    ({ value, match, compareArray = [undefined] } = value);
+  } else if (isObjectParameter(match, 'match', 'compareArray')) {
+    ({ match, compareArray = [undefined] } = match);
+  } else if (isObjectParameter(compareArray, 'compareArray')) {
+    ({ compareArray } = compareArray);
+  }
+
+  if (!isArray(compareArray)) {
+    throw new TypeError(
+      'initialValue args(compareArray) is not array',
+    );
   }
 
   return _initialValue(
     value,
-    valueWhenMatched,
+    match,
     compareArray,
   );
 };

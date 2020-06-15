@@ -31,6 +31,7 @@ const test_execute_compare = (parts) => {
       equal, equalDeep,
       equalFunction,
       or,
+      match,
       matchValue, initialValue,
       allMatch, someMatch, indexOfMatch,
       matchSome, matchSomeValue,
@@ -1057,6 +1058,96 @@ const test_execute_compare = (parts) => {
       });
     };
 
+    const test_match = () => {
+      it('test_match', () => {
+        const { stringToInteger } = parts;
+
+        checkEqual(false,   match('', null));
+        checkEqual(true,    match('', ''));
+        checkEqual(false,   match('123', null));
+        checkEqual(false,   match('123', undefined));
+        checkEqual(false,   match('123', 123));
+        checkEqual(true,    match('123', '123'));
+        checkEqual(false,   match(undefined, null));
+        checkEqual(true,    match(undefined, undefined));
+        checkEqual(true,    match(null, null));
+        checkEqual(false,   match(null, undefined));
+
+        checkEqual(true,    match('1',       isString));
+        checkEqual(false,   match(1,         isString));
+        checkEqual(false,   match(null,      isString));
+        checkEqual(false,   match(undefined, isString));
+
+        checkEqual(true,    match({},    isEmptyObject));
+        checkEqual(false,   match({a:1}, isEmptyObject));
+
+        checkEqual(true,    match('100', '100'));
+        checkEqual(false,   match('200', '100'));
+        checkEqual(false,   match(100,   '100'));
+        checkEqual(false,   match(200,   '100'));
+        checkEqual(false,   match(null,  '100'));
+
+        checkEqual(true,    match('100',     isString));
+        checkEqual(true,    match('200',     isString));
+        checkEqual(false,   match(100,       isString));
+        checkEqual(false,   match(200,       isString));
+        checkEqual(false,   match(null,      isString));
+        checkEqual(false,   match(undefined, isString));
+
+        checkEqual(false,   match('100',     isInteger));
+        checkEqual(false,   match('200',     isInteger));
+        checkEqual(true,    match(100,       isInteger));
+        checkEqual(true,    match(200,       isInteger));
+        checkEqual(false,   match(null,      isInteger));
+        checkEqual(false,   match(undefined, isInteger));
+
+        checkEqual(false, match({
+          value: '123',
+          compare: undefined,
+        }));
+        checkEqual(true, match({
+          value: undefined,
+          compare: undefined,
+        }));
+        checkEqual(false, match({
+          value: null,
+          compare: undefined,
+        }));
+
+        // object parameter
+        checkEqual(false,
+          match({ value: null,       compare: undefined }));
+        checkEqual(true,
+          match({ value: undefined,  compare: undefined }));
+        checkEqual(false,
+          match(null,      { compare: undefined }));
+        checkEqual(true,
+          match(undefined, { compare: undefined }));
+
+        // checkEqual(101,
+        //   matchValue({ value: null,       compare: undefined, match: 100, unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue({ value: undefined,  compare: undefined, match: 200, unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      { compare: undefined, match: 100, unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue(undefined, { compare: undefined, match: 200, unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      undefined, { match: 100, unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue(undefined, undefined, { match: 200, unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      undefined, 100, { unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue(undefined, undefined, 200, { unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      undefined, 100, 101));
+        // checkEqual(200,
+        //   matchValue(undefined, undefined, 200, 201));
+
+      });
+    };
+
     const test_matchValue = () => {
       it('test_matchValue', () => {
         const { stringToInteger } = parts;
@@ -1166,18 +1257,57 @@ const test_execute_compare = (parts) => {
         checkEqual(null,  initialValue(null, 999));
 
         checkEqual('123', initialValue({
-          value: '123', valueWhenMatched: 999,
+          value: '123', match: 999,
         }));
         checkEqual(999, initialValue({
-          value: undefined, valueWhenMatched: 999,
+          value: undefined, match: 999,
         }));
         checkEqual(null, initialValue({
-          value: null, valueWhenMatched: 999,
+          value: null, match: 999,
         }));
 
         checkEqual('[object Object]', String(initialValue({}, 'test')));
         checkEqual('null',            String(initialValue(null, {})));
         checkEqual('[object Object]', String(initialValue(undefined, {})));
+
+        // object parameter
+        checkEqual(null,
+          initialValue({ value: null,       match: 100 }));
+        checkEqual(200,
+          initialValue({ value: undefined,  match: 200 }));
+        checkEqual(null,
+          initialValue(null,      { match: 100 }));
+        checkEqual(200,
+          initialValue(undefined, { match: 200 }));
+        checkEqual(null,
+          initialValue(null,      100));
+        checkEqual(200,
+          initialValue(undefined, 200));
+
+        checkEqual(100,
+          initialValue({
+            value: null,       match: 100, compareArray: [undefined, null],
+          }));
+        checkEqual(200,
+          initialValue({
+            value: undefined,  match: 200, compareArray: [undefined, null],
+          }));
+        checkEqual(null,
+          initialValue({
+            value: null,       match: 100, compareArray: [undefined],
+          }));
+        checkEqual(100,
+          initialValue(null,      { match: 100,  compareArray: [undefined, null] }));
+        checkEqual(200,
+          initialValue(undefined, { match: 200,  compareArray: [undefined, null] }));
+        checkEqual(null,
+          initialValue(null,      { match: 100,  compareArray: [undefined] }));
+        checkEqual(100,
+          initialValue(null,      100, { compareArray: [undefined, null] }));
+        checkEqual(200,
+          initialValue(undefined, 200, { compareArray: [undefined, null] }));
+        checkEqual(null,
+          initialValue(null,      100, { compareArray: [undefined] }));
       });
     };
 
@@ -1203,6 +1333,17 @@ const test_execute_compare = (parts) => {
         checkEqual(true, isThrown(() => {
           allMatch(10, value => value > 15);
         }));
+
+        // object parameter
+        checkEqual(true,
+          allMatch({ valueArray: [10, 20, 30], compare: value => value > 5 }));
+        checkEqual(false,
+          allMatch({ valueArray: [10, 20, 30], compare: value => value > 15 }));
+        checkEqual(true,
+          allMatch([10, 20, 30], { compare: value => value > 5 }));
+        checkEqual(false,
+          allMatch([10, 20, 30], { compare: value => value > 15 }));
+
       });
 
     };
@@ -1231,12 +1372,24 @@ const test_execute_compare = (parts) => {
           someMatch([null, undefined, NaN], isNaNStrict),
         );
 
+        // object parameter
+        checkEqual(true,
+          someMatch({ valueArray: [10, 20], compare: v => v > 15 }));
+        checkEqual(false,
+          someMatch({ valueArray: [10, 15], compare: v => v > 15 }));
+        checkEqual(true,
+          someMatch([10, 20], { compare: v => v > 15 }));
+        checkEqual(false,
+          someMatch([10, 15], { compare: v => v > 15 }));
+
+        // exception
         checkEqual(false, isThrown(() => {
           someMatch([10], value => value > 15);
         }));
         checkEqual(true, isThrown(() => {
           someMatch(10, value => value > 15);
         }));
+
       });
 
     };
@@ -1271,6 +1424,16 @@ const test_execute_compare = (parts) => {
         checkEqual(true, isThrown(() => {
           indexOfMatch(10, value => value > 15);
         }));
+
+        // object parameter
+        checkEqual(1,
+          indexOfMatch({ valueArray: [10, 20, 30], compare: value => value > 15 }));
+        checkEqual(-1,
+          indexOfMatch({ valueArray: [10, 20, 30], compare: value => value > 35 }));
+        checkEqual(2,
+          indexOfMatch([10, 20, 30], { compare: value => value > 25 }));
+        checkEqual(-1,
+          indexOfMatch([10, 20, 30], { compare: value => value > 35 }));
 
       });
 
@@ -1360,6 +1523,13 @@ const test_execute_compare = (parts) => {
           value: 'abc', compareArray: [(value) => isFirst(value, 'b')],
         }), 'test_match param 8');
 
+        checkEqual(false, matchSome(
+          'abc', { compareArray: ['123', '456', '789'],
+          }));
+        checkEqual(true,  matchSome(
+          'abc', { compareArray: ['123', '456', 'abc'],
+          }));
+
         // Object Named Parameter number
         checkEqual(false, matchSome({
           value: 123, compareArray: ['123', '456', '789'],
@@ -1385,6 +1555,13 @@ const test_execute_compare = (parts) => {
         checkEqual(false, matchSome({
           value: 99,  compareArray: [(value) => 100 <= value],
         }), 'test_match param 8');
+
+        checkEqual(false, matchSome(
+          123, { compareArray: ['123', '456', '789'],
+          }));
+        checkEqual(true,  matchSome(
+          123, { compareArray: [123, 456, 'abc'],
+          }));
 
         // exception
         checkEqual(false, isThrown(
@@ -1466,15 +1643,40 @@ const test_execute_compare = (parts) => {
     const test_matchSomeValue = () => {
       it('test_matchSomeValue', () => {
         // almost test_matchSome done
-        checkEqual(999, matchSomeValue(99, [99], 999));
-        checkEqual(98,  matchSomeValue(98, [99], 999));
+        checkEqual(999, matchSomeValue(99, [99, 98, 97], 999));
+        checkEqual(999, matchSomeValue(98, [99, 98, 97], 999));
+        checkEqual(999, matchSomeValue(97, [99, 98, 97], 999));
+        checkEqual(96,  matchSomeValue(96, [99, 98, 97], 999));
 
         checkEqual(999, matchSomeValue({
-          value: 99, compareArray: [99], valueWhenMatched: 999,
-        }));
-        checkEqual(98, matchSomeValue({
-          value: 98, compareArray: [99], valueWhenMatched: 999,
-        }));
+          value: 99, compareArray: [99, 98, 97], match: 999, unmatch: 100 }));
+        checkEqual(100, matchSomeValue({
+          value: 96, compareArray: [99, 98, 97], match: 999, unmatch: 100 }));
+        checkEqual(999, matchSomeValue(
+          99, { compareArray: [99, 98, 97], match: 999, unmatch: 100 }));
+        checkEqual(100, matchSomeValue(
+          96, { compareArray: [99, 98, 97], match: 999, unmatch: 100 }));
+        checkEqual(999, matchSomeValue(
+          99, [99, 98, 97], { match: 999, unmatch: 100 }));
+        checkEqual(100, matchSomeValue(
+          96, [99, 98, 97], { match: 999, unmatch: 100 }));
+        checkEqual(999, matchSomeValue(
+          99, [99, 98, 97], 999, { unmatch: 100 }));
+        checkEqual(100, matchSomeValue(
+          96, [99, 98, 97], 999, { unmatch: 100 }));
+
+        checkEqual(999, matchSomeValue({
+          value: 99, compareArray: [99, 98, 97], match: 999 }));
+        checkEqual(96, matchSomeValue({
+          value: 96, compareArray: [99, 98, 97], match: 999 }));
+        checkEqual(999, matchSomeValue(
+          99, { compareArray: [99, 98, 97], match: 999 }));
+        checkEqual(96, matchSomeValue(
+          96, { compareArray: [99, 98, 97], match: 999 }));
+        checkEqual(999, matchSomeValue(
+          99, [99, 98, 97], { match: 999 }));
+        checkEqual(96, matchSomeValue(
+          96, [99, 98, 97], { match: 999 }));
       });
     };
 
@@ -1508,6 +1710,17 @@ const test_execute_compare = (parts) => {
           allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]),
         );
 
+        // object parameter
+        checkEqual(true,
+          allMatchSome({ valueArray: [10, 30, 40], compareArray: [v => v < 15, v => 25 < v] }));
+        checkEqual(false,
+          allMatchSome({ valueArray: [10, 20, 30], compareArray: [v => v < 15, v => 25 < v] }));
+        checkEqual(true,
+          allMatchSome([10, 30, 40], { compareArray: [v => v < 15, v => 25 < v] }));
+        checkEqual(false,
+          allMatchSome([10, 20, 30], { compareArray: [v => v < 15, v => 25 < v] }));
+
+        // exception
         checkEqual(false, isThrown(() => {
           allMatchSome([10], [value => value > 15]);
         }));
@@ -1557,6 +1770,17 @@ const test_execute_compare = (parts) => {
           someMatchSome([null, undefined, NaN], [isNaNStrict]),
         );
 
+        // object parameter
+        checkEqual(true,
+          someMatchSome({ valueArray: [10, 20, 30], compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(false,
+          someMatchSome({ valueArray: [10, 20, 25], compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(true,
+          someMatchSome([10, 20, 30], { compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(false,
+          someMatchSome([10, 20, 25], { compareArray: [v => v < 5, v => 25 < v] }));
+
+        // exception
         checkEqual(false, isThrown(() => {
           someMatchSome([10], [value => value > 15]);
         }));
@@ -1612,6 +1836,27 @@ const test_execute_compare = (parts) => {
         checkEqual(true, isThrown(() => {
           indexOfMatchSome(10, [value => value > 15]);
         }));
+
+        // object parameter
+        checkEqual(2,
+          indexOfMatchSome(
+            { valueArray: [10, 20, 30], compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(0,
+          indexOfMatchSome(
+            { valueArray: [1, 10, 20], compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(-1,
+          indexOfMatchSome(
+            { valueArray: [5, 10, 20], compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(2,
+          indexOfMatchSome(
+            [10, 20, 30], { compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(0,
+          indexOfMatchSome(
+            [1, 10, 20], { compareArray: [v => v < 5, v => 25 < v] }));
+        checkEqual(-1,
+          indexOfMatchSome(
+            [5, 10, 20], { compareArray: [v => v < 5, v => 25 < v] }));
+
       });
 
     };
@@ -1685,20 +1930,18 @@ const test_execute_compare = (parts) => {
 
         // Object Named Parameter string
         checkEqual(true, matchAll({
-          value: 'abc', compareArray: [
-            'abc',
-          ],
-        }));
+          value: 'abc', compareArray: ['abc'] }));
         checkEqual(false, matchAll({
-          value: 'abc', compareArray: [
-            'abc', '',
-          ],
-        }));
+          value: 'abc', compareArray: ['abc', ''] }));
         checkEqual(true, matchAll({
           value: 'abc', compareArray: [
             /^a/, /.*b.*/, /c$/,
           ],
         }));
+        checkEqual(true, matchAll(
+          'abc', { compareArray: ['abc'] }));
+        checkEqual(false, matchAll(
+          'abc', { compareArray: ['abc', ''] }));
 
         // Object Named Parameter number
         checkEqual(true, matchAll({
@@ -1713,10 +1956,22 @@ const test_execute_compare = (parts) => {
         }));
         checkEqual(true, matchAll({
           value: 100, compareArray: [
-            value => value >= 100,
-            value => value <= 110,
+            v => 100 <= v,
+            v => v <= 110,
           ],
         }));
+        checkEqual(true, matchAll(
+          100, { compareArray: [
+            v => 100 <= v,
+            v => v <= 110,
+          ],
+          }));
+        checkEqual(false, matchAll(
+          111, { compareArray: [
+            v => 100 <= v,
+            v => v <= 110,
+          ],
+          }));
 
         // exception
         checkEqual(false, isThrown(
@@ -1760,31 +2015,57 @@ const test_execute_compare = (parts) => {
       it('test_matchAllValue', () => {
         checkEqual(999, matchAllValue(99, [99], 999));
         checkEqual(98,  matchAllValue(98, [99], 999));
-        checkEqual(999,  matchAllValue(100, [
-          value => value >= 100, value => value <= 110,
-        ], 999));
-        checkEqual(999,  matchAllValue(110, [
-          value => value >= 100, value => value <= 110,
-        ], 999));
-        checkEqual(111, matchAllValue(111, [
-          value => value >= 100, value => value <= 110,
-        ], 999));
+        checkEqual(999,  matchAllValue(
+          100, [v => 100 <= v, v => v <= 110], 999));
+        checkEqual(999,  matchAllValue(
+          110, [v => 100 <= v, v => v <= 110], 999));
+        checkEqual(111, matchAllValue(
+          111, [v => 100 <= v, v => v <= 110], 999));
+
+        // Object Parameter
+        checkEqual(999, matchAllValue({
+          value: 100, compareArray: [v => 100 <= v, v => v <= 110], match: 999, unmatch: 888 }));
+        checkEqual(999, matchAllValue({
+          value: 110, compareArray: [v => 100 <= v, v => v <= 110], match: 999, unmatch: 888 }));
+        checkEqual(888, matchAllValue({
+          value: 111, compareArray: [v => 100 <= v, v => v <= 110], match: 999, unmatch: 888 }));
+        checkEqual(999, matchAllValue(
+          100, { compareArray: [v => 100 <= v, v => v <= 110], match: 999, unmatch: 888 }));
+        checkEqual(999, matchAllValue(
+          110, { compareArray: [v => 100 <= v, v => v <= 110], match: 999, unmatch: 888 }));
+        checkEqual(888, matchAllValue(
+          111, { compareArray: [v => 100 <= v, v => v <= 110], match: 999, unmatch: 888 }));
+        checkEqual(999, matchAllValue(
+          100, [v => 100 <= v, v => v <= 110], { match: 999, unmatch: 888 }));
+        checkEqual(999, matchAllValue(
+          110, [v => 100 <= v, v => v <= 110], { match: 999, unmatch: 888 }));
+        checkEqual(888, matchAllValue(
+          111, [v => 100 <= v, v => v <= 110], { match: 999, unmatch: 888 }));
+        checkEqual(999, matchAllValue(
+          100, [v => 100 <= v, v => v <= 110], 999, { unmatch: 888 }));
+        checkEqual(999, matchAllValue(
+          110, [v => 100 <= v, v => v <= 110], 999, { unmatch: 888 }));
+        checkEqual(888, matchAllValue(
+          111, [v => 100 <= v, v => v <= 110], 999, { unmatch: 888 }));
 
         checkEqual(999, matchAllValue({
-          value: 100, compareArray: [
-            value => value >= 100, value => value <= 110,
-          ], valueWhenMatched: 999,
-        }));
+          value: 100, compareArray: [v => 100 <= v, v => v <= 110], match: 999 }));
         checkEqual(999, matchAllValue({
-          value: 110, compareArray: [
-            value => value >= 100, value => value <= 110,
-          ], valueWhenMatched: 999,
-        }));
+          value: 110, compareArray: [v => 100 <= v, v => v <= 110], match: 999 }));
         checkEqual(111, matchAllValue({
-          value: 111, compareArray: [
-            value => value >= 100, value => value <= 110,
-          ], valueWhenMatched: 999,
-        }));
+          value: 111, compareArray: [v => 100 <= v, v => v <= 110], match: 999 }));
+        checkEqual(999, matchAllValue(
+          100, { compareArray: [v => 100 <= v, v => v <= 110], match: 999 }));
+        checkEqual(999, matchAllValue(
+          110, { compareArray: [v => 100 <= v, v => v <= 110], match: 999 }));
+        checkEqual(111, matchAllValue(
+          111, { compareArray: [v => 100 <= v, v => v <= 110], match: 999 }));
+        checkEqual(999, matchAllValue(
+          100, [v => 100 <= v, v => v <= 110], { match: 999 }));
+        checkEqual(999, matchAllValue(
+          110, [v => 100 <= v, v => v <= 110], { match: 999 }));
+        checkEqual(111, matchAllValue(
+          111, [v => 100 <= v, v => v <= 110], { match: 999 }));
       });
     };
 
@@ -1807,17 +2088,23 @@ const test_execute_compare = (parts) => {
         );
 
         checkEqual(true,
-          allMatchAll([100, 105, 110], [
-            value => value >= 100,
-            value => value <= 110,
-          ]),
-        );
+          allMatchAll([100, 105, 110], [v => 100 <= v, v => v <= 110]) );
         checkEqual(false,
-          allMatchAll([100, 105, 111], [
-            value => value >= 100,
-            value => value <= 110,
-          ]),
-        );
+          allMatchAll([100, 105, 111], [v => 100 <= v, v => v <= 110]) );
+
+        // object parameter
+        checkEqual(true,
+          allMatchAll(
+            { valueArray: [100, 105, 110], compareArray: [v => 100 <= v, v => v <= 110] }) );
+        checkEqual(false,
+          allMatchAll(
+            { valueArray: [100, 105, 111], compareArray: [v => 100 <= v, v => v <= 110] }) );
+        checkEqual(true,
+          allMatchAll(
+            [100, 105, 110], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+        checkEqual(false,
+          allMatchAll(
+            [100, 105, 111], { compareArray: [v => 100 <= v, v => v <= 110] }) );
       });
     };
 
@@ -1845,23 +2132,20 @@ const test_execute_compare = (parts) => {
         );
 
         checkEqual(true,
-          someMatchAll([105], [
-            value => value >= 100,
-            value => value <= 110,
-          ]),
-        );
+          someMatchAll([111, 110, 120], [v => 100 <= v, v => v <= 110]) );
         checkEqual(false,
-          someMatchAll([111, 115, 120], [
-            value => value >= 100,
-            value => value <= 110,
-          ]),
-        );
+          someMatchAll([111, 115, 120], [v => 100 <= v, v => v <= 110]) );
+
+        // object parameter
         checkEqual(true,
-          someMatchAll([111, 110, 120], [
-            value => value >= 100,
-            value => value <= 110,
-          ]),
-        );
+          someMatchAll({ valueArray: [111, 110, 120], compareArray: [v => 100 <= v, v => v <= 110] }) );
+        checkEqual(false,
+          someMatchAll({ valueArray: [111, 115, 120], compareArray: [v => 100 <= v, v => v <= 110] }) );
+        checkEqual(true,
+          someMatchAll([111, 110, 120], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+        checkEqual(false,
+          someMatchAll([111, 115, 120], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+
       });
     };
 
@@ -1890,22 +2174,43 @@ const test_execute_compare = (parts) => {
 
         checkEqual(0,
           indexOfMatchAll([105], [
-            value => value >= 100,
-            value => value <= 110,
+            v => 100 <= v,
+            v => v <= 110,
           ]),
         );
         checkEqual(-1,
           indexOfMatchAll([111, 115, 120], [
-            value => value >= 100,
-            value => value <= 110,
+            v => 100 <= v,
+            v => v <= 110,
           ]),
         );
         checkEqual(1,
           indexOfMatchAll([111, 110, 120], [
-            value => value >= 100,
-            value => value <= 110,
+            v => 100 <= v,
+            v => v <= 110,
           ]),
         );
+
+        // object parameter
+        checkEqual(0,
+          indexOfMatchAll(
+            { valueArray: [10, 20, 30], compareArray: [v => 10 <= v, v => v <= 30] }));
+        checkEqual(1,
+          indexOfMatchAll(
+            { valueArray: [1, 10, 20], compareArray: [v => 10 <= v, v => v <= 30] }));
+        checkEqual(-1,
+          indexOfMatchAll(
+            { valueArray: [5, 40, 50], compareArray: [v => 10 <= v, v => v <= 30] }));
+        checkEqual(0,
+          indexOfMatchAll(
+            [10, 20, 30], { compareArray: [v => 10 <= v, v => v <= 30] }));
+        checkEqual(1,
+          indexOfMatchAll(
+            [1, 10, 20], { compareArray: [v => 10 <= v, v => v <= 30] }));
+        checkEqual(-1,
+          indexOfMatchAll(
+            [5, 40, 50], { compareArray: [v => 10 <= v, v => v <= 30] }));
+
       });
     };
 
@@ -2215,6 +2520,8 @@ const test_execute_compare = (parts) => {
     test_equalDeep_set_CircularReference();
 
     test_or();
+
+    test_match();
     test_matchValue();
     test_initialValue();
     test_allMatch();

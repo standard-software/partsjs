@@ -22,37 +22,34 @@ const {
 } = require('../compare/match.js');
 
 /**
- * allMatch
+ * matchAll
  */
-const _allMatch = (
-  valueArray,
-  compare,
-) => {
-  return _all(valueArray, value => {
+const _matchAll = (value, compareArray) => {
+  return _all(compareArray, compare => {
     return _match(value, compare);
   });
 };
 
-const allMatch = (
-  valueArray,
-  compare,
+const matchAll = (
+  value,
+  compareArray,
 ) => {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    ({ valueArray, compare } = valueArray);
-  } else if (isObjectParameter(compare, 'compare')) {
-    ({ compare } = compare);
+  if (isObjectParameter(value, 'value,compareArray')) {
+    ({ value, compareArray } = value);
+  } else if (isObjectParameter(compareArray, 'compareArray')) {
+    ({ compareArray } = compareArray);
   }
 
-  if (!isArray(valueArray)) {
+  if (!isArray(compareArray)) {
     throw new TypeError(
-      'allMatch args(valueArray) is not array',
+      'matchAll args(compareArray) is not array',
     );
   }
 
-  return _allMatch(valueArray, compare);
+  return _matchAll(value, compareArray);
 };
 
 module.exports = {
-  _allMatch,
-  allMatch,
+  _matchAll,
+  matchAll,
 };
