@@ -20463,6 +20463,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         equalDeep = _parts$compare.equalDeep,
         equalFunction = _parts$compare.equalFunction,
         or = _parts$compare.or,
+        match = _parts$compare.match,
         matchValue = _parts$compare.matchValue,
         initialValue = _parts$compare.initialValue,
         allMatch = _parts$compare.allMatch,
@@ -21771,6 +21772,93 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
+    var test_match = function test_match() {
+      it('test_match', function () {
+        var stringToInteger = parts.stringToInteger;
+        checkEqual(false, match('', null));
+        checkEqual(true, match('', ''));
+        checkEqual(false, match('123', null));
+        checkEqual(false, match('123', undefined));
+        checkEqual(false, match('123', 123));
+        checkEqual(true, match('123', '123'));
+        checkEqual(false, match(undefined, null));
+        checkEqual(true, match(undefined, undefined));
+        checkEqual(true, match(null, null));
+        checkEqual(false, match(null, undefined));
+        checkEqual(true, match('1', isString));
+        checkEqual(false, match(1, isString));
+        checkEqual(false, match(null, isString));
+        checkEqual(false, match(undefined, isString));
+        checkEqual(true, match({}, isEmptyObject));
+        checkEqual(false, match({
+          a: 1
+        }, isEmptyObject));
+        checkEqual(true, match('100', '100'));
+        checkEqual(false, match('200', '100'));
+        checkEqual(false, match(100, '100'));
+        checkEqual(false, match(200, '100'));
+        checkEqual(false, match(null, '100'));
+        checkEqual(true, match('100', isString));
+        checkEqual(true, match('200', isString));
+        checkEqual(false, match(100, isString));
+        checkEqual(false, match(200, isString));
+        checkEqual(false, match(null, isString));
+        checkEqual(false, match(undefined, isString));
+        checkEqual(false, match('100', isInteger));
+        checkEqual(false, match('200', isInteger));
+        checkEqual(true, match(100, isInteger));
+        checkEqual(true, match(200, isInteger));
+        checkEqual(false, match(null, isInteger));
+        checkEqual(false, match(undefined, isInteger));
+        checkEqual(false, match({
+          value: '123',
+          compare: undefined
+        }));
+        checkEqual(true, match({
+          value: undefined,
+          compare: undefined
+        }));
+        checkEqual(false, match({
+          value: null,
+          compare: undefined
+        })); // object parameter
+
+        checkEqual(false, match({
+          value: null,
+          compare: undefined
+        }));
+        checkEqual(true, match({
+          value: undefined,
+          compare: undefined
+        }));
+        checkEqual(false, match(null, {
+          compare: undefined
+        }));
+        checkEqual(true, match(undefined, {
+          compare: undefined
+        })); // checkEqual(101,
+        //   matchValue({ value: null,       compare: undefined, match: 100, unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue({ value: undefined,  compare: undefined, match: 200, unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      { compare: undefined, match: 100, unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue(undefined, { compare: undefined, match: 200, unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      undefined, { match: 100, unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue(undefined, undefined, { match: 200, unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      undefined, 100, { unmatch: 101 }));
+        // checkEqual(200,
+        //   matchValue(undefined, undefined, 200, { unmatch: 201 }));
+        // checkEqual(101,
+        //   matchValue(null,      undefined, 100, 101));
+        // checkEqual(200,
+        //   matchValue(undefined, undefined, 200, 201));
+      });
+    };
+
     var test_matchValue = function test_matchValue() {
       it('test_matchValue', function () {
         var stringToInteger = parts.stringToInteger;
@@ -21948,19 +22036,72 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(null, initialValue(null, 999));
         checkEqual('123', initialValue({
           value: '123',
-          valueWhenMatched: 999
+          match: 999
         }));
         checkEqual(999, initialValue({
           value: undefined,
-          valueWhenMatched: 999
+          match: 999
         }));
         checkEqual(null, initialValue({
           value: null,
-          valueWhenMatched: 999
+          match: 999
         }));
         checkEqual('[object Object]', String(initialValue({}, 'test')));
         checkEqual('null', String(initialValue(null, {})));
-        checkEqual('[object Object]', String(initialValue(undefined, {})));
+        checkEqual('[object Object]', String(initialValue(undefined, {}))); // object parameter
+
+        checkEqual(null, initialValue({
+          value: null,
+          match: 100
+        }));
+        checkEqual(200, initialValue({
+          value: undefined,
+          match: 200
+        }));
+        checkEqual(null, initialValue(null, {
+          match: 100
+        }));
+        checkEqual(200, initialValue(undefined, {
+          match: 200
+        }));
+        checkEqual(null, initialValue(null, 100));
+        checkEqual(200, initialValue(undefined, 200));
+        checkEqual(100, initialValue({
+          value: null,
+          match: 100,
+          compareArray: [undefined, null]
+        }));
+        checkEqual(200, initialValue({
+          value: undefined,
+          match: 200,
+          compareArray: [undefined, null]
+        }));
+        checkEqual(null, initialValue({
+          value: null,
+          match: 100,
+          compareArray: [undefined]
+        }));
+        checkEqual(100, initialValue(null, {
+          match: 100,
+          compareArray: [undefined, null]
+        }));
+        checkEqual(200, initialValue(undefined, {
+          match: 200,
+          compareArray: [undefined, null]
+        }));
+        checkEqual(null, initialValue(null, {
+          match: 100,
+          compareArray: [undefined]
+        }));
+        checkEqual(100, initialValue(null, 100, {
+          compareArray: [undefined, null]
+        }));
+        checkEqual(200, initialValue(undefined, 200, {
+          compareArray: [undefined, null]
+        }));
+        checkEqual(null, initialValue(null, 100, {
+          compareArray: [undefined]
+        }));
       });
     };
 
@@ -21985,6 +22126,29 @@ var test_execute_compare = function test_execute_compare(parts) {
           allMatch(10, function (value) {
             return value > 15;
           });
+        })); // object parameter
+
+        checkEqual(true, allMatch({
+          valueArray: [10, 20, 30],
+          compare: function compare(value) {
+            return value > 5;
+          }
+        }));
+        checkEqual(false, allMatch({
+          valueArray: [10, 20, 30],
+          compare: function compare(value) {
+            return value > 15;
+          }
+        }));
+        checkEqual(true, allMatch([10, 20, 30], {
+          compare: function compare(value) {
+            return value > 5;
+          }
+        }));
+        checkEqual(false, allMatch([10, 20, 30], {
+          compare: function compare(value) {
+            return value > 15;
+          }
         }));
       });
     };
@@ -22003,7 +22167,31 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, someMatch([null, undefined], null));
         checkEqual(true, someMatch([null, undefined], isUndefined));
         checkEqual(true, someMatch([null, undefined], isNull));
-        checkEqual(true, someMatch([null, undefined, NaN], isNaNStrict));
+        checkEqual(true, someMatch([null, undefined, NaN], isNaNStrict)); // object parameter
+
+        checkEqual(true, someMatch({
+          valueArray: [10, 20],
+          compare: function compare(v) {
+            return v > 15;
+          }
+        }));
+        checkEqual(false, someMatch({
+          valueArray: [10, 15],
+          compare: function compare(v) {
+            return v > 15;
+          }
+        }));
+        checkEqual(true, someMatch([10, 20], {
+          compare: function compare(v) {
+            return v > 15;
+          }
+        }));
+        checkEqual(false, someMatch([10, 15], {
+          compare: function compare(v) {
+            return v > 15;
+          }
+        })); // exception
+
         checkEqual(false, isThrown(function () {
           someMatch([10], function (value) {
             return value > 15;
@@ -22041,6 +22229,29 @@ var test_execute_compare = function test_execute_compare(parts) {
           indexOfMatch(10, function (value) {
             return value > 15;
           });
+        })); // object parameter
+
+        checkEqual(1, indexOfMatch({
+          valueArray: [10, 20, 30],
+          compare: function compare(value) {
+            return value > 15;
+          }
+        }));
+        checkEqual(-1, indexOfMatch({
+          valueArray: [10, 20, 30],
+          compare: function compare(value) {
+            return value > 35;
+          }
+        }));
+        checkEqual(2, indexOfMatch([10, 20, 30], {
+          compare: function compare(value) {
+            return value > 25;
+          }
+        }));
+        checkEqual(-1, indexOfMatch([10, 20, 30], {
+          compare: function compare(value) {
+            return value > 35;
+          }
         }));
       });
     };
@@ -22139,7 +22350,13 @@ var test_execute_compare = function test_execute_compare(parts) {
           compareArray: [function (value) {
             return isFirst(value, 'b');
           }]
-        }), 'test_match param 8'); // Object Named Parameter number
+        }), 'test_match param 8');
+        checkEqual(false, matchSome('abc', {
+          compareArray: ['123', '456', '789']
+        }));
+        checkEqual(true, matchSome('abc', {
+          compareArray: ['123', '456', 'abc']
+        })); // Object Named Parameter number
 
         checkEqual(false, matchSome({
           value: 123,
@@ -22176,7 +22393,13 @@ var test_execute_compare = function test_execute_compare(parts) {
           compareArray: [function (value) {
             return 100 <= value;
           }]
-        }), 'test_match param 8'); // exception
+        }), 'test_match param 8');
+        checkEqual(false, matchSome(123, {
+          compareArray: ['123', '456', '789']
+        }));
+        checkEqual(true, matchSome(123, {
+          compareArray: [123, 456, 'abc']
+        })); // exception
 
         checkEqual(false, isThrown(function () {
           matchSome({
@@ -22244,17 +22467,69 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_matchSomeValue = function test_matchSomeValue() {
       it('test_matchSomeValue', function () {
         // almost test_matchSome done
-        checkEqual(999, matchSomeValue(99, [99], 999));
-        checkEqual(98, matchSomeValue(98, [99], 999));
+        checkEqual(999, matchSomeValue(99, [99, 98, 97], 999));
+        checkEqual(999, matchSomeValue(98, [99, 98, 97], 999));
+        checkEqual(999, matchSomeValue(97, [99, 98, 97], 999));
+        checkEqual(96, matchSomeValue(96, [99, 98, 97], 999));
         checkEqual(999, matchSomeValue({
           value: 99,
-          compareArray: [99],
-          valueWhenMatched: 999
+          compareArray: [99, 98, 97],
+          match: 999,
+          unmatch: 100
         }));
-        checkEqual(98, matchSomeValue({
-          value: 98,
-          compareArray: [99],
-          valueWhenMatched: 999
+        checkEqual(100, matchSomeValue({
+          value: 96,
+          compareArray: [99, 98, 97],
+          match: 999,
+          unmatch: 100
+        }));
+        checkEqual(999, matchSomeValue(99, {
+          compareArray: [99, 98, 97],
+          match: 999,
+          unmatch: 100
+        }));
+        checkEqual(100, matchSomeValue(96, {
+          compareArray: [99, 98, 97],
+          match: 999,
+          unmatch: 100
+        }));
+        checkEqual(999, matchSomeValue(99, [99, 98, 97], {
+          match: 999,
+          unmatch: 100
+        }));
+        checkEqual(100, matchSomeValue(96, [99, 98, 97], {
+          match: 999,
+          unmatch: 100
+        }));
+        checkEqual(999, matchSomeValue(99, [99, 98, 97], 999, {
+          unmatch: 100
+        }));
+        checkEqual(100, matchSomeValue(96, [99, 98, 97], 999, {
+          unmatch: 100
+        }));
+        checkEqual(999, matchSomeValue({
+          value: 99,
+          compareArray: [99, 98, 97],
+          match: 999
+        }));
+        checkEqual(96, matchSomeValue({
+          value: 96,
+          compareArray: [99, 98, 97],
+          match: 999
+        }));
+        checkEqual(999, matchSomeValue(99, {
+          compareArray: [99, 98, 97],
+          match: 999
+        }));
+        checkEqual(96, matchSomeValue(96, {
+          compareArray: [99, 98, 97],
+          match: 999
+        }));
+        checkEqual(999, matchSomeValue(99, [99, 98, 97], {
+          match: 999
+        }));
+        checkEqual(96, matchSomeValue(96, [99, 98, 97], {
+          match: 999
         }));
       });
     };
@@ -22273,7 +22548,39 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, allMatchSome([null, undefined], [isNull]));
         checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined]));
         checkEqual(false, allMatchSome([null, undefined, NaN], [null, undefined, NaN]));
-        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
+        checkEqual(true, allMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict])); // object parameter
+
+        checkEqual(true, allMatchSome({
+          valueArray: [10, 30, 40],
+          compareArray: [function (v) {
+            return v < 15;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(false, allMatchSome({
+          valueArray: [10, 20, 30],
+          compareArray: [function (v) {
+            return v < 15;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(true, allMatchSome([10, 30, 40], {
+          compareArray: [function (v) {
+            return v < 15;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(false, allMatchSome([10, 20, 30], {
+          compareArray: [function (v) {
+            return v < 15;
+          }, function (v) {
+            return 25 < v;
+          }]
+        })); // exception
+
         checkEqual(false, isThrown(function () {
           allMatchSome([10], [function (value) {
             return value > 15;
@@ -22306,7 +22613,39 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, NaN]));
         checkEqual(true, someMatchSome([null, undefined, NaN], [null, undefined, isNaNStrict]));
         checkEqual(false, someMatchSome([null, undefined, NaN], [NaN]));
-        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrict]));
+        checkEqual(true, someMatchSome([null, undefined, NaN], [isNaNStrict])); // object parameter
+
+        checkEqual(true, someMatchSome({
+          valueArray: [10, 20, 30],
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(false, someMatchSome({
+          valueArray: [10, 20, 25],
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(true, someMatchSome([10, 20, 30], {
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(false, someMatchSome([10, 20, 25], {
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        })); // exception
+
         checkEqual(false, isThrown(function () {
           someMatchSome([10], [function (value) {
             return value > 15;
@@ -22349,6 +22688,52 @@ var test_execute_compare = function test_execute_compare(parts) {
           indexOfMatchSome(10, [function (value) {
             return value > 15;
           }]);
+        })); // object parameter
+
+        checkEqual(2, indexOfMatchSome({
+          valueArray: [10, 20, 30],
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(0, indexOfMatchSome({
+          valueArray: [1, 10, 20],
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(-1, indexOfMatchSome({
+          valueArray: [5, 10, 20],
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(2, indexOfMatchSome([10, 20, 30], {
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(0, indexOfMatchSome([1, 10, 20], {
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
+        }));
+        checkEqual(-1, indexOfMatchSome([5, 10, 20], {
+          compareArray: [function (v) {
+            return v < 5;
+          }, function (v) {
+            return 25 < v;
+          }]
         }));
       });
     };
@@ -22436,6 +22821,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, matchAll({
           value: 'abc',
           compareArray: [/^a/, /.*b.*/, /c$/]
+        }));
+        checkEqual(true, matchAll('abc', {
+          compareArray: ['abc']
+        }));
+        checkEqual(false, matchAll('abc', {
+          compareArray: ['abc', '']
         })); // Object Named Parameter number
 
         checkEqual(true, matchAll({
@@ -22448,10 +22839,24 @@ var test_execute_compare = function test_execute_compare(parts) {
         }));
         checkEqual(true, matchAll({
           value: 100,
-          compareArray: [function (value) {
-            return value >= 100;
-          }, function (value) {
-            return value <= 110;
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(true, matchAll(100, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(false, matchAll(111, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
           }]
         })); // exception
 
@@ -22494,47 +22899,195 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_matchAllValue', function () {
         checkEqual(999, matchAllValue(99, [99], 999));
         checkEqual(98, matchAllValue(98, [99], 999));
-        checkEqual(999, matchAllValue(100, [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
+        checkEqual(999, matchAllValue(100, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
         }], 999));
-        checkEqual(999, matchAllValue(110, [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
+        checkEqual(999, matchAllValue(110, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
         }], 999));
-        checkEqual(111, matchAllValue(111, [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
-        }], 999));
+        checkEqual(111, matchAllValue(111, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], 999)); // Object Parameter
+
         checkEqual(999, matchAllValue({
           value: 100,
-          compareArray: [function (value) {
-            return value >= 100;
-          }, function (value) {
-            return value <= 110;
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
           }],
-          valueWhenMatched: 999
+          match: 999,
+          unmatch: 888
         }));
         checkEqual(999, matchAllValue({
           value: 110,
-          compareArray: [function (value) {
-            return value >= 100;
-          }, function (value) {
-            return value <= 110;
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
           }],
-          valueWhenMatched: 999
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(888, matchAllValue({
+          value: 111,
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue(100, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue(110, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(888, matchAllValue(111, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue(100, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], {
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue(110, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], {
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(888, matchAllValue(111, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], {
+          match: 999,
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue(100, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], 999, {
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue(110, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], 999, {
+          unmatch: 888
+        }));
+        checkEqual(888, matchAllValue(111, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], 999, {
+          unmatch: 888
+        }));
+        checkEqual(999, matchAllValue({
+          value: 100,
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999
+        }));
+        checkEqual(999, matchAllValue({
+          value: 110,
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999
         }));
         checkEqual(111, matchAllValue({
           value: 111,
-          compareArray: [function (value) {
-            return value >= 100;
-          }, function (value) {
-            return value <= 110;
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
           }],
-          valueWhenMatched: 999
+          match: 999
+        }));
+        checkEqual(999, matchAllValue(100, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999
+        }));
+        checkEqual(999, matchAllValue(110, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999
+        }));
+        checkEqual(111, matchAllValue(111, {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }],
+          match: 999
+        }));
+        checkEqual(999, matchAllValue(100, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], {
+          match: 999
+        }));
+        checkEqual(999, matchAllValue(110, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], {
+          match: 999
+        }));
+        checkEqual(111, matchAllValue(111, [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }], {
+          match: 999
         }));
       });
     };
@@ -22544,16 +23097,47 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, allMatchAll([], [/^a/, /.*b.*/, /c$/]));
         checkEqual(true, allMatchAll(['abc', 'aabc', 'aabbcc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(false, allMatchAll(['abc', 'aabc', 'aacc'], [/^a/, /.*b.*/, /c$/]));
-        checkEqual(true, allMatchAll([100, 105, 110], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
+        checkEqual(true, allMatchAll([100, 105, 110], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
         }]));
-        checkEqual(false, allMatchAll([100, 105, 111], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
-        }]));
+        checkEqual(false, allMatchAll([100, 105, 111], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }])); // object parameter
+
+        checkEqual(true, allMatchAll({
+          valueArray: [100, 105, 110],
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(false, allMatchAll({
+          valueArray: [100, 105, 111],
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(true, allMatchAll([100, 105, 110], {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(false, allMatchAll([100, 105, 111], {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
       });
     };
 
@@ -22563,21 +23147,47 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, someMatchAll(['abc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(false, someMatchAll(['aaa', 'bbb', 'ccc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(true, someMatchAll(['aaa', 'abc', 'ccc'], [/^a/, /.*b.*/, /c$/]));
-        checkEqual(true, someMatchAll([105], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
+        checkEqual(true, someMatchAll([111, 110, 120], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
         }]));
-        checkEqual(false, someMatchAll([111, 115, 120], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
-        }]));
-        checkEqual(true, someMatchAll([111, 110, 120], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
-        }]));
+        checkEqual(false, someMatchAll([111, 115, 120], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }])); // object parameter
+
+        checkEqual(true, someMatchAll({
+          valueArray: [111, 110, 120],
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(false, someMatchAll({
+          valueArray: [111, 115, 120],
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(true, someMatchAll([111, 110, 120], {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
+        checkEqual(false, someMatchAll([111, 115, 120], {
+          compareArray: [function (v) {
+            return 100 <= v;
+          }, function (v) {
+            return v <= 110;
+          }]
+        }));
       });
     };
 
@@ -22587,21 +23197,67 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(0, indexOfMatchAll(['abc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(-1, indexOfMatchAll(['aaa', 'bbb', 'ccc'], [/^a/, /.*b.*/, /c$/]));
         checkEqual(1, indexOfMatchAll(['aaa', 'abc', 'ccc'], [/^a/, /.*b.*/, /c$/]));
-        checkEqual(0, indexOfMatchAll([105], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
+        checkEqual(0, indexOfMatchAll([105], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
         }]));
-        checkEqual(-1, indexOfMatchAll([111, 115, 120], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
+        checkEqual(-1, indexOfMatchAll([111, 115, 120], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
         }]));
-        checkEqual(1, indexOfMatchAll([111, 110, 120], [function (value) {
-          return value >= 100;
-        }, function (value) {
-          return value <= 110;
-        }]));
+        checkEqual(1, indexOfMatchAll([111, 110, 120], [function (v) {
+          return 100 <= v;
+        }, function (v) {
+          return v <= 110;
+        }])); // object parameter
+
+        checkEqual(0, indexOfMatchAll({
+          valueArray: [10, 20, 30],
+          compareArray: [function (v) {
+            return 10 <= v;
+          }, function (v) {
+            return v <= 30;
+          }]
+        }));
+        checkEqual(1, indexOfMatchAll({
+          valueArray: [1, 10, 20],
+          compareArray: [function (v) {
+            return 10 <= v;
+          }, function (v) {
+            return v <= 30;
+          }]
+        }));
+        checkEqual(-1, indexOfMatchAll({
+          valueArray: [5, 40, 50],
+          compareArray: [function (v) {
+            return 10 <= v;
+          }, function (v) {
+            return v <= 30;
+          }]
+        }));
+        checkEqual(0, indexOfMatchAll([10, 20, 30], {
+          compareArray: [function (v) {
+            return 10 <= v;
+          }, function (v) {
+            return v <= 30;
+          }]
+        }));
+        checkEqual(1, indexOfMatchAll([1, 10, 20], {
+          compareArray: [function (v) {
+            return 10 <= v;
+          }, function (v) {
+            return v <= 30;
+          }]
+        }));
+        checkEqual(-1, indexOfMatchAll([5, 40, 50], {
+          compareArray: [function (v) {
+            return 10 <= v;
+          }, function (v) {
+            return v <= 30;
+          }]
+        }));
       });
     };
 
@@ -22852,6 +23508,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_equalDeep_set_object_array();
     test_equalDeep_set_CircularReference();
     test_or();
+    test_match();
     test_matchValue();
     test_initialValue();
     test_allMatch();

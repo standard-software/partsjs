@@ -30,34 +30,34 @@ var _require3 = require('../array/array_common.js'),
 var _require4 = require('../compare/match.js'),
     _match = _require4._match;
 /**
- * allMatch
+ * matchAll
  */
 
 
-var _allMatch = function _allMatch(valueArray, compare) {
-  return _all(valueArray, function (value) {
+var _matchAll = function _matchAll(value, compareArray) {
+  return _all(compareArray, function (compare) {
     return _match(value, compare);
   });
 };
 
-var allMatch = function allMatch(valueArray, compare) {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compare = _valueArray.compare;
-  } else if (isObjectParameter(compare, 'compare')) {
-    var _compare = compare;
-    compare = _compare.compare;
+var matchAll = function matchAll(value, compareArray) {
+  if (isObjectParameter(value, 'value,compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+  } else if (isObjectParameter(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
   }
 
-  if (!isArray(valueArray)) {
-    throw new TypeError('allMatch args(valueArray) is not array');
+  if (!isArray(compareArray)) {
+    throw new TypeError('matchAll args(compareArray) is not array');
   }
 
-  return _allMatch(valueArray, compare);
+  return _matchAll(value, compareArray);
 };
 
 module.exports = {
-  _allMatch: _allMatch,
-  allMatch: allMatch
+  _matchAll: _matchAll,
+  matchAll: matchAll
 };

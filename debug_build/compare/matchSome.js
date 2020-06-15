@@ -25,39 +25,39 @@ var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../array/array_common.js'),
-    _all = _require3._all;
+    _some = _require3._some;
 
 var _require4 = require('../compare/match.js'),
     _match = _require4._match;
 /**
- * allMatch
+ * matchSome
  */
 
 
-var _allMatch = function _allMatch(valueArray, compare) {
-  return _all(valueArray, function (value) {
+var _matchSome = function _matchSome(value, compareArray) {
+  return _some(compareArray, function (compare) {
     return _match(value, compare);
   });
 };
 
-var allMatch = function allMatch(valueArray, compare) {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compare = _valueArray.compare;
-  } else if (isObjectParameter(compare, 'compare')) {
-    var _compare = compare;
-    compare = _compare.compare;
+var matchSome = function matchSome(value, compareArray) {
+  if (isObjectParameter(value, 'value, compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+  } else if (isObjectParameter(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
   }
 
-  if (!isArray(valueArray)) {
-    throw new TypeError('allMatch args(valueArray) is not array');
+  if (!isArray(compareArray)) {
+    throw new TypeError('matchSome args(compareArray) is not array');
   }
 
-  return _allMatch(valueArray, compare);
+  return _matchSome(value, compareArray);
 };
 
 module.exports = {
-  _allMatch: _allMatch,
-  allMatch: allMatch
+  _matchSome: _matchSome,
+  matchSome: matchSome
 };

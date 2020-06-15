@@ -25,22 +25,22 @@ var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../array/array_common.js'),
-    _all = _require3._all;
+    _findFirstIndex = _require3._findFirstIndex;
 
 var _require4 = require('../compare/match.js'),
     _match = _require4._match;
 /**
- * allMatch
+ * indexOfMatch
  */
 
 
-var _allMatch = function _allMatch(valueArray, compare) {
-  return _all(valueArray, function (value) {
+var _indexOfMatch = function _indexOfMatch(valueArray, compare) {
+  return _findFirstIndex(valueArray, function (value) {
     return _match(value, compare);
   });
 };
 
-var allMatch = function allMatch(valueArray, compare) {
+var indexOfMatch = function indexOfMatch(valueArray, compare) {
   if (isObjectParameter(valueArray, 'valueArray, compare')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
@@ -51,13 +51,13 @@ var allMatch = function allMatch(valueArray, compare) {
   }
 
   if (!isArray(valueArray)) {
-    throw new TypeError('allMatch args(valueArray) is not array');
+    throw new TypeError('indexOfMatch args(valueArray) is not array');
   }
 
-  return _allMatch(valueArray, compare);
+  return _indexOfMatch(valueArray, compare);
 };
 
 module.exports = {
-  _allMatch: _allMatch,
-  allMatch: allMatch
+  _indexOfMatch: _indexOfMatch,
+  indexOfMatch: indexOfMatch
 };

@@ -25,39 +25,43 @@ var _require2 = require('../object/isObjectParameter.js'),
     isObjectParameter = _require2.isObjectParameter;
 
 var _require3 = require('../array/array_common.js'),
-    _all = _require3._all;
+    _findFirstIndex = _require3._findFirstIndex;
 
-var _require4 = require('../compare/match.js'),
-    _match = _require4._match;
+var _require4 = require('../compare/matchAll.js'),
+    _matchAll = _require4._matchAll;
 /**
- * allMatch
+ * indexOfMatchAll
  */
 
 
-var _allMatch = function _allMatch(valueArray, compare) {
-  return _all(valueArray, function (value) {
-    return _match(value, compare);
+var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
+  return _findFirstIndex(valueArray, function (value) {
+    return _matchAll(value, compareArray);
   });
 };
 
-var allMatch = function allMatch(valueArray, compare) {
-  if (isObjectParameter(valueArray, 'valueArray, compare')) {
+var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
+  if (isObjectParameter(valueArray, 'valueArray, compareArray')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
-    compare = _valueArray.compare;
-  } else if (isObjectParameter(compare, 'compare')) {
-    var _compare = compare;
-    compare = _compare.compare;
+    compareArray = _valueArray.compareArray;
+  } else if (isObjectParameter(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
   }
 
   if (!isArray(valueArray)) {
-    throw new TypeError('allMatch args(valueArray) is not array');
+    throw new TypeError('indexOfMatchAll args(valueArray) is not array');
   }
 
-  return _allMatch(valueArray, compare);
+  if (!isArray(compareArray)) {
+    throw new TypeError('indexOfMatchAll args(compareArray) is not array');
+  }
+
+  return _indexOfMatchAll(valueArray, compareArray);
 };
 
 module.exports = {
-  _allMatch: _allMatch,
-  allMatch: allMatch
+  _indexOfMatchAll: _indexOfMatchAll,
+  indexOfMatchAll: indexOfMatchAll
 };

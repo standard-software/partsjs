@@ -15,14 +15,11 @@ var _require = require('../type/type.js'),
     isRegExp = _require.isRegExp,
     isException = _require.isException;
 
-var _require2 = require('../compare/match.js'),
-    allMatchSome = _require2.allMatchSome;
+var _require2 = require('../compare/allMatch.js'),
+    allMatch = _require2.allMatch;
 
-var _require3 = require('../compare/allMatch.js'),
-    allMatch = _require3.allMatch; // const {
-//   _inProperty,
-// } = require('../object/inProperty.js');
-
+var _require3 = require('../compare/allMatchSome.js'),
+    allMatchSome = _require3.allMatchSome;
 
 var _require4 = require('../compare/compare_common.js'),
     _or = _require4._or;
