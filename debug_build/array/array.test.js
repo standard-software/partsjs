@@ -1910,6 +1910,10 @@ var test_execute_array = function test_execute_array(parts) {
           return;
         }
 
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
         var arrayEntries = function arrayEntries(array) {
           var result = [];
 

@@ -496,6 +496,10 @@ var test_execute_object = function test_execute_object(parts) {
           return;
         }
 
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
         var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         var object1 = {
           a: '1',

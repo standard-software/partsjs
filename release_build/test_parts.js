@@ -27346,6 +27346,10 @@ var test_execute_object = function test_execute_object(parts) {
           return;
         }
 
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
         var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         var object1 = {
           a: '1',
@@ -29305,6 +29309,10 @@ var test_execute_array = function test_execute_array(parts) {
     var test_ArrayEntries_standard = function test_ArrayEntries_standard() {
       it('test_ArrayEntries_standard', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isInternetExplorer()) {
           return;
         }
 
