@@ -2196,6 +2196,9 @@ const test_execute_array = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
 
         const arrayEntries = (array) => {
           const result = [];

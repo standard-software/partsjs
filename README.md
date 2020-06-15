@@ -233,6 +233,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.8.1
+#### 2020/06/16(Tue)
+- update test code for IE11
+  - no support object.entries / for of array.entries
+
 ### 5.8.0
 #### 2020/06/15(Mon)
 - update match.js move function
