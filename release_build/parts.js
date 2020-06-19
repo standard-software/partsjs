@@ -140,7 +140,7 @@ var _array = __webpack_require__(30);
 
 var _consoleHook = __webpack_require__(57);
 
-var VERSION = '5.8.1';
+var VERSION = '5.8.2 beta';
 var rootNames = {};
 var propertyNames = {};
 var _copyProperty = _object._copyProperty;
@@ -1315,8 +1315,7 @@ var _require = __webpack_require__(6),
     isObject = _require.isObject,
     isArray = _require.isArray,
     isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isRegExp = _require.isRegExp;
 
 var _require2 = __webpack_require__(10),
     _replaceAll = _require2._replaceAll;
@@ -2356,8 +2355,7 @@ var _require = __webpack_require__(6),
     isObject = _require.isObject,
     isArray = _require.isArray,
     isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isRegExp = _require.isRegExp;
 
 var _require2 = __webpack_require__(10),
     _replaceAll = _require2._replaceAll;
@@ -2462,8 +2460,7 @@ var _require = __webpack_require__(6),
     isObject = _require.isObject,
     isArray = _require.isArray,
     isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isRegExp = _require.isRegExp;
 
 var _require2 = __webpack_require__(9),
     isObjectParameter = _require2.isObjectParameter;
@@ -6418,7 +6415,6 @@ var _require3 = __webpack_require__(25),
 var _require4 = __webpack_require__(30),
     _min = _require4._min,
     _max = _require4._max,
-    _findIndex = _require4._findIndex,
     _findFirst = _require4._findFirst;
 
 var _require5 = __webpack_require__(40),

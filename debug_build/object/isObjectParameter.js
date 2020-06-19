@@ -12,8 +12,7 @@ var _require = require('../type/isType.js'),
     isObject = _require.isObject,
     isArray = _require.isArray,
     isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+    isRegExp = _require.isRegExp;
 
 var _require2 = require('../string/_replaceAll.js'),
     _replaceAll = _require2._replaceAll;

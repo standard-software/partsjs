@@ -25,7 +25,6 @@ var _require3 = require('../number/number.js'),
 var _require4 = require('../array/array.js'),
     _min = _require4._min,
     _max = _require4._max,
-    _findIndex = _require4._findIndex,
     _findFirst = _require4._findFirst;
 
 var _require5 = require('../compare/compare.js'),
