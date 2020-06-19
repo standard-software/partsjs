@@ -233,6 +233,9 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 5.8.2
+#### 2020/06/19(Fri)
+- bugfix not necessary require isException
 ### 5.8.1
 #### 2020/06/16(Tue)
 - update test code for IE11

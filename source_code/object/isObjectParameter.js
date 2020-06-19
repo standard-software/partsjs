@@ -2,7 +2,6 @@ const {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
-  isException,
 } = require('../type/isType.js');
 
 const {
