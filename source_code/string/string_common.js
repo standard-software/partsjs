@@ -16,7 +16,7 @@ const {
 
 const {
   _min, _max,
-  _findIndex, _findFirst,
+  _findFirst,
 } = require('../array/array.js');
 
 const {
