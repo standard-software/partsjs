@@ -12,7 +12,7 @@ const _object = require('./object/object.js');
 const _array = require('./array/array.js');
 const _consoleHook = require('./consoleHook/consoleHook.js');
 
-const VERSION = '5.8.1';
+const VERSION = '5.8.2 beta';
 
 const rootNames = {};
 const propertyNames = {};
