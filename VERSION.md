@@ -2,6 +2,11 @@
 
 ## Version
 
+### 5.8.2
+#### 2020/06/19(Fri)
+- bugfix not necessary require isException
+- bugfix not necessary require _findIndex
+
 ### 5.8.1
 #### 2020/06/16(Tue)
 - update test code for IE11
