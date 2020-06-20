@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -9,16 +9,16 @@ const {
   isSymbol,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   _copyProperty,
-} = require('../object/object.js');
+} from '../object/object.js';
 
 /**
  * cloneFunction
  */
-const cloneFunction = {};
+export const cloneFunction = {};
 
 // function is no clone
 cloneFunction.cloneIgnoreFunction = (
@@ -217,7 +217,7 @@ cloneFunction.cloneIgnoreWeakSet = (
 /**
  * clone
  */
-const _clone = (source) => {
+export const _clone = (source) => {
   const __clone = (value) => {
     if (isUndefined(value)) {
       return undefined;
@@ -256,7 +256,7 @@ _clone.reset = () => {
 };
 _clone.reset();
 
-const clone = (source) => {
+export const clone = (source) => {
   return _clone(source);
 };
 
@@ -269,7 +269,7 @@ _copyProperty(_clone,
 /**
  * cloneDeep
  */
-const _cloneDeep = (source) => {
+export const _cloneDeep = (source) => {
   const CircularReferenceBuffer = {
     source: [],
     clone: [],
@@ -324,7 +324,7 @@ _cloneDeep.reset = () => {
 };
 _cloneDeep.reset();
 
-const cloneDeep = (source) => {
+export const cloneDeep = (source) => {
   return _cloneDeep(source);
 };
 _copyProperty(_cloneDeep,
@@ -333,11 +333,11 @@ _copyProperty(_cloneDeep,
   cloneDeep,
 );
 
-module.exports = {
+export default {
   _clone, _cloneDeep,
 
   clone, cloneDeep,
 
   cloneFunction,
-};
+}
 

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-const test_execute_number = (parts) => {
+export const test_execute_number = (parts) => {
   const { describe, it } = parts.test;
   describe('test_execute_number', () => {
 
@@ -227,6 +227,6 @@ const test_execute_number = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_number,
-};
+}

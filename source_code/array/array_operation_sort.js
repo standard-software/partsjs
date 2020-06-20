@@ -1,26 +1,26 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   allMatch,
-} = require('../compare/allMatch.js');
+} from '../compare/allMatch.js';
 
-const {
+import {
   allMatchSome,
-} = require('../compare/allMatchSome.js');
+} from '../compare/allMatchSome.js';
 
-const {
+import {
   _or,
-} = require('../compare/compare_common.js');
+} from '../compare/compare_common.js';
 
 /**
  * array.sort
  */
-const _sort = (array, pattern, order) => {
+export const _sort = (array, pattern, order) => {
   switch (pattern) {
   case 'number':
     switch (order) {
@@ -58,7 +58,7 @@ const _sort = (array, pattern, order) => {
   }
 };
 
-const sort =  (array, pattern, order) => {
+export const sort =  (array, pattern, order) => {
 
   if (!isArray(array)) {
     throw new TypeError(
@@ -102,55 +102,55 @@ const sort =  (array, pattern, order) => {
   return _sort(array, pattern, order);
 };
 
-const _sortNumberAscending = (array) => {
+export const _sortNumberAscending = (array) => {
   return _sort(array, 'number', 'ascending');
 };
 
-const sortNumberAscending = (array) => {
+export const sortNumberAscending = (array) => {
   return sort(array, 'number', 'ascending');
 };
 
-const _sortNumberDescending = (array) => {
+export const _sortNumberDescending = (array) => {
   return _sort(array, 'number', 'descending');
 };
 
-const sortNumberDescending = (array) => {
+export const sortNumberDescending = (array) => {
   return sort(array, 'number', 'descending');
 };
 
-const _sortLengthAscending = (array) => {
+export const _sortLengthAscending = (array) => {
   return _sort(array, 'length', 'ascending');
 };
 
-const sortLengthAscending = (array) => {
+export const sortLengthAscending = (array) => {
   return sort(array, 'length', 'ascending');
 };
 
-const _sortLengthDescending = (array) => {
+export const _sortLengthDescending = (array) => {
   return _sort(array, 'length', 'descending');
 };
 
-const sortLengthDescending = (array) => {
+export const sortLengthDescending = (array) => {
   return sort(array, 'length', 'descending');
 };
 
-const _sortDictionaryAscending = (array) => {
+export const _sortDictionaryAscending = (array) => {
   return _sort(array, 'dictionary', 'ascending');
 };
 
-const sortDictionaryAscending = (array) => {
+export const sortDictionaryAscending = (array) => {
   return sort(array, 'dictionary', 'ascending');
 };
 
-const _sortDictionaryDescending = (array) => {
+export const _sortDictionaryDescending = (array) => {
   return _sort(array, 'dictionary', 'descending');
 };
 
-const sortDictionaryDescending = (array) => {
+export const sortDictionaryDescending = (array) => {
   return sort(array, 'dictionary', 'descending');
 };
 
-module.exports = {
+export default {
   _sortNumberAscending, _sortNumberDescending,
   _sortLengthAscending, _sortLengthDescending,
   _sortDictionaryAscending, _sortDictionaryDescending,
@@ -159,5 +159,5 @@ module.exports = {
   sortLengthAscending, sortLengthDescending,
   sortDictionaryAscending, sortDictionaryDescending,
 
-};
+}
 

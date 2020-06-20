@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 /* eslint-disable comma-spacing */
 /* eslint-disable comma-dangle */
-const test_execute_array = (parts) => {
+export const test_execute_array = (parts) => {
   const { describe, it, expect } = parts.test;
   describe('test_execute_array', () => {
 
@@ -2307,6 +2307,6 @@ const test_execute_array = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_array,
-};
+}

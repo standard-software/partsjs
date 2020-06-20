@@ -1,10 +1,10 @@
-const {
+import {
   isError,
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  *isException
@@ -13,7 +13,7 @@ const {
  *  and user-specific exception objects.
  *  Only whether the object has name and message properties.
  */
-const isException = (value) => {
+export const isException = (value) => {
   if (isObjectParameter(value, 'name,message')) {
     return true;
   } else if (isError(value)) {
@@ -22,16 +22,16 @@ const isException = (value) => {
   return false;
 };
 
-const isNotException   = value => !isException(value);
+export const isNotException   = value => !isException(value);
 
-const isExcept    = isException;
-const isNotExcept   = isNotException;
+export const isExcept    = isException;
+export const isNotExcept   = isNotException;
 
-module.exports = {
+export default {
   isException,
   isNotException,
 
   isExcept,
   isNotExcept,
-};
+}
 

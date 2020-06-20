@@ -1,28 +1,28 @@
-const {
+import {
   _includes,
-} = require('../compare/includes.js');
+} from '../compare/includes.js';
 
-const {
+import {
   _includesSome,
-} = require('../compare/includes_common.js');
+} from '../compare/includes_common.js';
 
-const isWebBrowser = () => {
+export const isWebBrowser = () => {
   return typeof window !== 'undefined';
 };
 
-const isWindowsScriptHost = () => {
+export const isWindowsScriptHost = () => {
   return typeof WScript !== 'undefined';
 };
 
-const isGoogleAppsScript = () => {
+export const isGoogleAppsScript = () => {
   return typeof Browser !== 'undefined';
 };
 
-const isNodeJs = () => {
+export const isNodeJs = () => {
   return name() === 'Node.js';
 };
 
-const name = () => {
+export const name = () => {
   let result;
 
   if (isWindowsScriptHost()) {
@@ -46,7 +46,7 @@ const name = () => {
   return result;
 };
 
-const browserName = () => {
+export const browserName = () => {
   let result = '';
 
   if (isWebBrowser()) {
@@ -84,31 +84,31 @@ const browserName = () => {
 };
 
 
-const isChrome = () => {
+export const isChrome = () => {
   return browserName() === 'Chrome';
 };
 
-const isFirefox = () => {
+export const isFirefox = () => {
   return browserName() === 'Firefox';
 };
 
-const isEdge = () => {
+export const isEdge = () => {
   return browserName() === 'Edge';
 };
 
-const isInternetExplorer = () => {
+export const isInternetExplorer = () => {
   return browserName() === 'InternetExplorer';
 };
 
-const isSafari = () => {
+export const isSafari = () => {
   return browserName() === 'Safari';
 };
 
-const isOpera = () => {
+export const isOpera = () => {
   return browserName() === 'Opera';
 };
 
-module.exports = {
+export default {
   name,
   isWebBrowser,
   isWindowsScriptHost,
@@ -124,4 +124,4 @@ module.exports = {
   isOpera,
 
   buildMode: '',
-};
+}

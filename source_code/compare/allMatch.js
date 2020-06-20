@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -7,24 +7,24 @@ const {
   isException,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _all,
-} = require('../array/array_common.js');
+} from '../array/array_common.js';
 
-const {
+import {
   _match,
-} = require('../compare/match.js');
+} from '../compare/match.js';
 
 /**
  * allMatch
  */
-const _allMatch = (
+export const _allMatch = (
   valueArray,
   compare,
 ) => {
@@ -33,7 +33,7 @@ const _allMatch = (
   });
 };
 
-const allMatch = (
+export const allMatch = (
   valueArray,
   compare,
 ) => {
@@ -52,7 +52,7 @@ const allMatch = (
   return _allMatch(valueArray, compare);
 };
 
-module.exports = {
+export default {
   _allMatch,
   allMatch,
-};
+}

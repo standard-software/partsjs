@@ -1,33 +1,33 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   _or, _includes, _includesSome, _includesAll,
-} = require('../compare/compare.js');
+} from '../compare/compare.js';
 
-const {
+import {
   map,
-} = require('../array/array.js');
+} from '../array/array.js';
 
-const original = {};
+export const original = {};
 original.log = console.log;
 original.info = console.info;
 original.warn = console.warn;
 original.error = console.error;
 original.debug = console.debug;
 
-const _hook = (
+export const _hook = (
   methodName,
   hookFunc,
 ) => {
   console[methodName] = hookFunc;
 };
 
-const hook = (
+export const hook = (
   methodName,
   hookFunc = () => {},
 ) => {
@@ -46,27 +46,27 @@ const hook = (
   _hook(methodName, hookFunc);
 };
 
-const hookLog = (hookFunc) => {
+export const hookLog = (hookFunc) => {
   hook('log', hookFunc);
 };
-const hookInfo = (hookFunc) => {
+export const hookInfo = (hookFunc) => {
   hook('info', hookFunc);
 };
-const hookWarn = (hookFunc) => {
+export const hookWarn = (hookFunc) => {
   hook('warn', hookFunc);
 };
-const hookError = (hookFunc) => {
+export const hookError = (hookFunc) => {
   hook('error', hookFunc);
 };
-const hookDebug = (hookFunc) => {
+export const hookDebug = (hookFunc) => {
   hook('debug', hookFunc);
 };
 
-const _unHook = (methodName) => {
+export const _unHook = (methodName) => {
   console[methodName] = original[methodName];
 };
 
-const unHook = (methodName) => {
+export const unHook = (methodName) => {
   if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new TypeError(
       'unHook args(methodName) is not [log|info|warn|error|debug]',
@@ -76,23 +76,23 @@ const unHook = (methodName) => {
   _unHook(methodName);
 };
 
-const unHookLog = () => {
+export const unHookLog = () => {
   unHook('log');
 };
-const unHookInfo = () => {
+export const unHookInfo = () => {
   unHook('info');
 };
-const unHookWarn = () => {
+export const unHookWarn = () => {
   unHook('warn');
 };
-const unHookError = () => {
+export const unHookError = () => {
   unHook('error');
 };
-const unHookDebug = () => {
+export const unHookDebug = () => {
   unHook('debug');
 };
 
-const _accept = (
+export const _accept = (
   methodName,
   acceptArray,
   rejectArray,
@@ -114,7 +114,7 @@ const _accept = (
   });
 };
 
-const accept = (
+export const accept = (
   methodName,
   acceptArray,
   rejectArray,
@@ -149,35 +149,35 @@ const accept = (
   );
 };
 
-const acceptLog = (
+export const acceptLog = (
   acceptArray,
   rejectArray,
   hookFunc = original.log,
 ) => {
   accept('log', acceptArray, rejectArray, hookFunc);
 };
-const acceptInfo = (
+export const acceptInfo = (
   acceptArray,
   rejectArray,
   hookFunc = original.info,
 ) => {
   accept('info', acceptArray, rejectArray, hookFunc);
 };
-const acceptWarn = (
+export const acceptWarn = (
   acceptArray,
   rejectArray,
   hookFunc = original.warn,
 ) => {
   accept('warn', acceptArray, rejectArray, hookFunc);
 };
-const acceptError = (
+export const acceptError = (
   acceptArray,
   rejectArray,
   hookFunc = original.error,
 ) => {
   accept('error', acceptArray, rejectArray, hookFunc);
 };
-const acceptDebug = (
+export const acceptDebug = (
   acceptArray,
   rejectArray,
   hookFunc = original.debug,
@@ -185,10 +185,10 @@ const acceptDebug = (
   accept('debug', acceptArray, rejectArray, hookFunc);
 };
 
-module.exports = {
+export default {
   _hook,
   hook, hookLog, hookInfo, hookWarn, hookError, hookDebug,
   _unHook,
   unHook, unHookLog, unHookInfo, unHookWarn, unHookError, unHookDebug,
   accept, acceptLog, acceptInfo, acceptWarn, acceptError, acceptDebug,
-};
+}

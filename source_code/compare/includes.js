@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -7,20 +7,20 @@ const {
   isException,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _match,
-} = require('../compare/match.js');
+} from '../compare/match.js';
 
 /**
  * includes
  */
-const _includes = (value, compare) => {
+export const _includes = (value, compare) => {
   if (isString(value)) {
     if (compare === '') {
       return false;
@@ -34,7 +34,7 @@ const _includes = (value, compare) => {
   }
 };
 
-const includes = (
+export const includes = (
   value,
   compare,
 ) => {
@@ -59,9 +59,9 @@ const includes = (
   return _includes(value, compare);
 };
 
-module.exports = {
+export default {
   _includes,
 
   includes,
 
-};
+}

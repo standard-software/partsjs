@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-const test_execute_test = (parts) => {
+export const test_execute_test = (parts) => {
   const { checkEqual, describe, it, test, expect } = parts.test;
   describe('test_execute_test', () => {
 
@@ -63,6 +63,6 @@ const test_execute_test = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_test,
-};
+}

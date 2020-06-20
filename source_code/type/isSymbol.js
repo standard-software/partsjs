@@ -1,12 +1,12 @@
-const {
+import {
   _typeofCheck, _objectToStringCheck, objectToString,
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const isSymbol = _typeofCheck('symbol');
+export const isSymbol = _typeofCheck('symbol');
 
-const isNotSymbol   = value => !isSymbol(value);
+export const isNotSymbol   = value => !isSymbol(value);
 
-module.exports = {
+export default {
   isSymbol, isNotSymbol,
-};
+}
 

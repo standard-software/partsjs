@@ -1,21 +1,21 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const {
+import {
   _replaceAll,
-} = require('../string/_replaceAll.js');
+} from '../string/_replaceAll.js';
 
-const {
+import {
   _propertyCount,
-} = require('../object/_propertyCount.js');
+} from '../object/_propertyCount.js';
 
 /**
  * isObjectParameter
  */
-const isObjectParameter = (
+export const isObjectParameter = (
   object,
   props,
   optionalProps = '',
@@ -66,6 +66,6 @@ const isObjectParameter = (
   return true;
 };
 
-module.exports = {
+export default {
   isObjectParameter,
-};
+}

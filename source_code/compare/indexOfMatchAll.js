@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -7,24 +7,24 @@ const {
   isException,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _findFirstIndex,
-} = require('../array/array_common.js');
+} from '../array/array_common.js';
 
-const {
+import {
   _matchAll,
-} = require('../compare/matchAll.js');
+} from '../compare/matchAll.js';
 
 /**
  * indexOfMatchAll
  */
-const _indexOfMatchAll = (
+export const _indexOfMatchAll = (
   valueArray,
   compareArray,
 ) => {
@@ -33,7 +33,7 @@ const _indexOfMatchAll = (
   });
 };
 
-const indexOfMatchAll = (
+export const indexOfMatchAll = (
   valueArray,
   compareArray,
 ) => {
@@ -57,7 +57,7 @@ const indexOfMatchAll = (
   return _indexOfMatchAll(valueArray, compareArray);
 };
 
-module.exports = {
+export default {
   _indexOfMatchAll,
   indexOfMatchAll,
-};
+}

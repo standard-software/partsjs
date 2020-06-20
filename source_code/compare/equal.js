@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -17,17 +17,17 @@ const {
   isMapAll, isWeakMapAll,
   isSetAll, isWeakSetAll,
 
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   _copyProperty,
   isObjectParameter,
-} = require('../object/object.js');
+} from '../object/object.js';
 
 /**
  * equalFunction
  */
-const equalFunction = {};
+export const equalFunction = {};
 
 equalFunction.equalValue = (
   value1, value2,
@@ -204,7 +204,7 @@ equalFunction.equalWeakSet = (
 /**
  * equal
  */
-const _equal = (value1, value2) => {
+export const _equal = (value1, value2) => {
   const __equal = (value1, value2) => {
     for (let i = 0, l = _equal.functions.length; i < l; i += 1) {
       const result = _equal.functions[i](value1, value2);
@@ -241,7 +241,7 @@ _equal.reset = () => {
 };
 _equal.reset();
 
-const equal = (value1, value2) => {
+export const equal = (value1, value2) => {
   if (isObjectParameter(value1, 'value1, value2')) {
     ({ value1, value2 } = value1);
   }
@@ -257,7 +257,7 @@ _copyProperty(_equal,
 /**
  * equalDeep
  */
-const _equalDeep = (value1, value2) => {
+export const _equalDeep = (value1, value2) => {
   const CircularReferenceBuffer = {
     v1Array: [],
     v2Array: [],
@@ -312,7 +312,7 @@ _equalDeep.reset = () => {
 };
 _equalDeep.reset();
 
-const equalDeep = (value1, value2) => {
+export const equalDeep = (value1, value2) => {
   if (isObjectParameter(value1, 'value1,value2')) {
     ({ value1, value2 } = value1);
   }
@@ -325,11 +325,11 @@ _copyProperty(_equalDeep,
   equalDeep,
 );
 
-module.exports = {
+export default {
   _equal, _equalDeep,
 
   equal, equalDeep,
 
   equalFunction,
 
-};
+}

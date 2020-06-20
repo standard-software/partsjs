@@ -1,8 +1,8 @@
-const parts = require('../../source_code/index.js');
+import parts from '../../source_code/index.js';
 
-const {
+import {
   test_execute_index,
-} = require('../../source_code/index.test.js');
+} from '../../source_code/index.test.js';
 
 parts.platform.buildMode = 'source';
 

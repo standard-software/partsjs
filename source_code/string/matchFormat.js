@@ -1,18 +1,18 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  * matchFormat
  */
-const _matchFormat = (
+export const _matchFormat = (
   formatName,
   value,
 ) => {
@@ -238,7 +238,7 @@ _matchFormat.reset = () => {
 };
 _matchFormat.reset();
 
-const matchFormat = (
+export const matchFormat = (
   formatName,
   value,
 ) => {
@@ -263,7 +263,7 @@ const matchFormat = (
   );
 };
 
-module.exports = {
+export default {
   _matchFormat,
   matchFormat,
-};
+}

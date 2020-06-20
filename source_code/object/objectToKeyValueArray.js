@@ -1,17 +1,17 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  * objectToKeyValueArray
  */
-const _objectToKeyValueArray = (object) => {
+export const _objectToKeyValueArray = (object) => {
   const result = [];
   for (const key in object) {
     if (object.hasOwnProperty(key)) {
@@ -21,7 +21,7 @@ const _objectToKeyValueArray = (object) => {
   return result;
 };
 
-const objectToKeyValueArray = (object) => {
+export const objectToKeyValueArray = (object) => {
   if (isObjectParameter(object, 'object')) {
     ({ object } = object);
   }
@@ -35,11 +35,11 @@ const objectToKeyValueArray = (object) => {
   return _objectToKeyValueArray(object);
 };
 
-const objectEntries = objectToKeyValueArray;
+export const objectEntries = objectToKeyValueArray;
 
-module.exports = {
+export default {
   _objectToKeyValueArray,
   objectToKeyValueArray,
 
   objectEntries,
-};
+}

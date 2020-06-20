@@ -1,10 +1,23 @@
-module.exports = {
-  ...require('./array_common.js'),
-  ...require('./NumberArray.js'),
-  ...require('./IntegerArray.js'),
-  ...require('./arrayToIndexValueArray.js'),
+import array_operation_sort from './array_operation_sort.js';
+import array_operation from './array_operation.js';
+import arrayToIndexValueArray from './arrayToIndexValueArray.js';
+import IntegerArray from './IntegerArray.js';
+import NumberArray from './NumberArray.js';
+import array_common from './array_common.js';
+export default {
+  ...array_common,
+  ...NumberArray,
+  ...IntegerArray,
+  ...arrayToIndexValueArray,
   operation: {
-    ...require('./array_operation.js'),
-    ...require('./array_operation_sort.js'),
+    ...array_operation,
+    ...array_operation_sort,
   },
-};
+}
+
+export * from './array_common.js'
+export * from './NumberArray.js'
+export * from './IntegerArray.js'
+export * from './arrayToIndexValueArray.js'
+export * from './array_operation.js'
+export * from './array_operation_sort.js'

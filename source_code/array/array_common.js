@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
@@ -8,29 +8,29 @@ const {
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray, isObjectArray, isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isEven,
   _inRange,
-} = require('../number/number.js');
+} from '../number/number.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _clone, _cloneDeep,
-} = require('../root/clone.js');
+} from '../root/clone.js';
 
-const {
+import {
   canUseSet,
-} = require('../syntax/syntax.js');
+} from '../syntax/syntax.js';
 
 /**
  * array.min max
  */
-const _min = (array) => {
+export const _min = (array) => {
   if (array.length === 0) {
     return null;
   }
@@ -43,7 +43,7 @@ const _min = (array) => {
   return result;
 };
 
-const min = (array) => {
+export const min = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'min args(array) is not array',
@@ -57,7 +57,7 @@ const min = (array) => {
   return _min(array);
 };
 
-const _max = (array) => {
+export const _max = (array) => {
   if (array.length === 0) {
     return null;
   }
@@ -70,7 +70,7 @@ const _max = (array) => {
   return result;
 };
 
-const max = (array) => {
+export const max = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'max args(array) is not array',
@@ -87,14 +87,14 @@ const max = (array) => {
 /**
  * from
  */
-const from = (arrayLike) => {
+export const from = (arrayLike) => {
   return Array.prototype.slice.call(arrayLike);
 };
 
 /**
  * sum
  */
-const _sum = (array) => {
+export const _sum = (array) => {
   let result = 0;
   for (let i = 0, l = array.length; i < l; i += 1) {
     result += array[i];
@@ -102,7 +102,7 @@ const _sum = (array) => {
   return result;
 };
 
-const sum = (array) => {
+export const sum = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'sum args(array) is not array',
@@ -119,14 +119,14 @@ const sum = (array) => {
 /**
  * average
  */
-const _average = (array) => {
+export const _average = (array) => {
   if (array.length === 0) {
     return null;
   }
   return _sum(array) / array.length;
 };
 
-const average = (array) => {
+export const average = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'average args(array) is not array',
@@ -143,7 +143,7 @@ const average = (array) => {
 /**
  * median
  */
-const _median = (array) => {
+export const _median = (array) => {
   if (array.length === 0) {
     return null;
   }
@@ -164,7 +164,7 @@ const _median = (array) => {
   }
 };
 
-const median = (array) => {
+export const median = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'median args(array) is not array',
@@ -181,7 +181,7 @@ const median = (array) => {
 /**
  * mode
  */
-const _mode = (array) => {
+export const _mode = (array) => {
   if (array.length === 0) {
     return [];
   }
@@ -196,7 +196,7 @@ const _mode = (array) => {
   );
 };
 
-const mode = (array) => {
+export const mode = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'mode args(array) is not array',
@@ -208,7 +208,7 @@ const mode = (array) => {
 /**
  * uniqe
  */
-const _unique = (array) => {
+export const _unique = (array) => {
   if (canUseSet() && array.length > 120) {
     return [...(new Set(array))];
   } else {
@@ -225,7 +225,7 @@ const _unique = (array) => {
   // when the array.lentgh is larger than about 120
 };
 
-const unique = (array) => {
+export const unique = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'unique args(array) is not array',
@@ -237,7 +237,7 @@ const unique = (array) => {
 /**
  * single
  */
-const _single = (array) => {
+export const _single = (array) => {
   if (array.length === 0) {
     return [];
   }
@@ -251,7 +251,7 @@ const _single = (array) => {
   );
 };
 
-const single = (array) => {
+export const single = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'single args(array) is not array',
@@ -263,7 +263,7 @@ const single = (array) => {
 /**
  * multiple
  */
-const _multiple = (array) => {
+export const _multiple = (array) => {
   if (array.length === 0) {
     return [];
   }
@@ -277,7 +277,7 @@ const _multiple = (array) => {
   );
 };
 
-const multiple = (array) => {
+export const multiple = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'multiple args(array) is not array',
@@ -289,7 +289,7 @@ const multiple = (array) => {
 /**
  * filter
  */
-const _filter = (array, func) => {
+export const _filter = (array, func) => {
   const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
@@ -305,7 +305,7 @@ const _filter = (array, func) => {
   return result;
 };
 
-const filter = (array, func) => {
+export const filter = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -326,7 +326,7 @@ const filter = (array, func) => {
 /**
  * map
  */
-const _map = (array, func) => {
+export const _map = (array, func) => {
   const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
@@ -335,7 +335,7 @@ const _map = (array, func) => {
   return result;
 };
 
-const map = (array, func) => {
+export const map = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -356,7 +356,7 @@ const map = (array, func) => {
 /**
  * count
  */
-const _count = (array, func) => {
+export const _count = (array, func) => {
   let result = 0;
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
@@ -372,7 +372,7 @@ const _count = (array, func) => {
   return result;
 };
 
-const count = (array, func) => {
+export const count = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -393,7 +393,7 @@ const count = (array, func) => {
 /**
  * findFirstIndex
  */
-const _findFirstIndex = (array, func) => {
+export const _findFirstIndex = (array, func) => {
   for (let i = 0, l = array.length; i < l; i += 1) {
     const resultFunc = func(array[i], i, array);
     if (!isBoolean(resultFunc)) {
@@ -408,7 +408,7 @@ const _findFirstIndex = (array, func) => {
   return -1;
 };
 
-const findFirstIndex = (array, func) => {
+export const findFirstIndex = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -426,12 +426,12 @@ const findFirstIndex = (array, func) => {
   return _findFirstIndex(array, func);
 };
 
-const findIndex = findFirstIndex;
+export const findIndex = findFirstIndex;
 
 /**
  * findLastIndex
  */
-const _findLastIndex = (array, func) => {
+export const _findLastIndex = (array, func) => {
   for (let i = array.length - 1; i >= 0; i -= 1) {
     const resultFunc = func(array[i], i, array);
     if (!isBoolean(resultFunc)) {
@@ -446,7 +446,7 @@ const _findLastIndex = (array, func) => {
   return -1;
 };
 
-const findLastIndex = (array, func) => {
+export const findLastIndex = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -464,12 +464,12 @@ const findLastIndex = (array, func) => {
   return _findLastIndex(array, func);
 };
 
-const findBackIndex = findLastIndex;
+export const findBackIndex = findLastIndex;
 
 /**
  * findFirst
  */
-const _findFirst = (array, func) => {
+export const _findFirst = (array, func) => {
   const resultIndex = _findFirstIndex(array, func);
   if (resultIndex === -1) {
     return undefined;
@@ -477,7 +477,7 @@ const _findFirst = (array, func) => {
   return array[resultIndex];
 };
 
-const findFirst = (array, func) => {
+export const findFirst = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -495,12 +495,12 @@ const findFirst = (array, func) => {
   return _findFirst(array, func);
 };
 
-const find = findFirst;
+export const find = findFirst;
 
 /**
  * findLast
  */
-const _findLast = (array, func) => {
+export const _findLast = (array, func) => {
   const resultIndex = _findLastIndex(array, func);
   if (resultIndex === -1) {
     return undefined;
@@ -508,7 +508,7 @@ const _findLast = (array, func) => {
   return array[resultIndex];
 };
 
-const findLast = (array, func) => {
+export const findLast = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -526,16 +526,16 @@ const findLast = (array, func) => {
   return _findLast(array, func);
 };
 
-const findBack = findLast;
+export const findBack = findLast;
 
 /**
  * some
  */
-const _some = (array, func) => {
+export const _some = (array, func) => {
   return (_findFirstIndex(array, func) !== -1);
 };
 
-const some = (array, func) => {
+export const some = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -557,14 +557,14 @@ const some = (array, func) => {
 /**
  * all:every
  */
-const _all = (array, func) => {
+export const _all = (array, func) => {
   if (array.length === 0) {
     return false;
   }
   return (_filter(array, func).length === array.length);
 };
 
-const all = (array, func) => {
+export const all = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -583,12 +583,12 @@ const all = (array, func) => {
   return _all(array, func);
 };
 
-const every = all;
+export const every = all;
 
 /**
  * isFirst
  */
-const _isFirst = (array, valueArray) => {
+export const _isFirst = (array, valueArray) => {
   if (array.length < valueArray.length ) {
     return false;
   }
@@ -598,7 +598,7 @@ const _isFirst = (array, valueArray) => {
   );
 };
 
-const isFirst = (array, valueArray) => {
+export const isFirst = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -620,7 +620,7 @@ const isFirst = (array, valueArray) => {
 /**
  * isLast
  */
-const _isLast = (array, valueArray) => {
+export const _isLast = (array, valueArray) => {
   if (array.length < valueArray.length ) {
     return false;
   }
@@ -632,7 +632,7 @@ const _isLast = (array, valueArray) => {
   );
 };
 
-const isLast = (array, valueArray) => {
+export const isLast = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -654,7 +654,7 @@ const isLast = (array, valueArray) => {
 /**
  * isBothEnds
  */
-const _isBothEnds = (
+export const _isBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -665,7 +665,7 @@ const _isBothEnds = (
   return _isFirst(array, valueFirstArray) && _isLast(array, valueLastArray);
 };
 
-const isBothEnds = (
+export const isBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -699,13 +699,13 @@ const isBothEnds = (
 /**
  * subIndex
  */
-const _subIndex = (
+export const _subIndex = (
   array, indexStart, indexEnd = indexStart,
 ) => {
   return array.slice(indexStart, indexEnd + 1);
 };
 
-const subIndex = (
+export const subIndex = (
   array, indexStart, indexEnd = indexStart,
 ) => {
   if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
@@ -744,7 +744,7 @@ const subIndex = (
 /**
  * subLength
  */
-const _subLength = (
+export const _subLength = (
   array, index, length = array.length - index,
 ) => {
   return _subIndex(array, index, index + length - 1);
@@ -752,7 +752,7 @@ const _subLength = (
   //  return array.slice(index, index + length);
 };
 
-const subLength = (
+export const subLength = (
   array, index, length = array.length - index,
 ) => {
   if (isObjectParameter(array, 'array, index', 'length')) {
@@ -794,13 +794,13 @@ const subLength = (
 /**
  * subFirst
  */
-const _subFirst = (array, length = 1) => {
+export const _subFirst = (array, length = 1) => {
   return _subLength(
     array, 0, length,
   );
 };
 
-const subFirst = (array, length = 1) => {
+export const subFirst = (array, length = 1) => {
   if (isObjectParameter(array, 'array, length')) {
     ({ array, length = 1 } = array);
   }
@@ -827,13 +827,13 @@ const subFirst = (array, length = 1) => {
 /**
  * subLast
  */
-const _subLast = (array, length = 1) => {
+export const _subLast = (array, length = 1) => {
   return _subLength(
     array, array.length - length, length,
   );
 };
 
-const subLast = (array, length = 1) => {
+export const subLast = (array, length = 1) => {
   if (isObjectParameter(array, 'array, length')) {
     ({ array, length = 1 } = array);
   }
@@ -857,7 +857,7 @@ const subLast = (array, length = 1) => {
   return _subLast(array, length);
 };
 
-module.exports = {
+export default {
   _min, _max,
   _sum, _average, _median,
   _mode,
@@ -887,5 +887,5 @@ module.exports = {
   find, findBack,
   every,
 
-};
+}
 

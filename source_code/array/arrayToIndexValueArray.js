@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
@@ -8,20 +8,20 @@ const {
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray, isObjectArray, isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _NumberArray,
-} = require('../array/NumberArray.js');
+} from '../array/NumberArray.js';
 
 /**
  * arrayToIndexValueArray
  */
-const _arrayToIndexValueArray = (array) => {
+export const _arrayToIndexValueArray = (array) => {
   const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
     result.push([i, array[i]]);
@@ -29,7 +29,7 @@ const _arrayToIndexValueArray = (array) => {
   return result;
 };
 
-const arrayToIndexValueArray = (array) => {
+export const arrayToIndexValueArray = (array) => {
   if (isObjectParameter(array, 'array')) {
     ({ array } = array);
   }
@@ -43,11 +43,11 @@ const arrayToIndexValueArray = (array) => {
   return _arrayToIndexValueArray(array);
 };
 
-const arrayEntries = arrayToIndexValueArray;
+export const arrayEntries = arrayToIndexValueArray;
 
-module.exports = {
+export default {
   _arrayToIndexValueArray,
   arrayToIndexValueArray,
 
   arrayEntries,
-};
+}

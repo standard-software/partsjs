@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-const test_execute_object = (parts) => {
+export const test_execute_object = (parts) => {
   const { describe, it, testCounter } = parts.test;
   describe('test_execute_object', () => {
 
@@ -430,6 +430,6 @@ const test_execute_object = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_object,
-};
+}

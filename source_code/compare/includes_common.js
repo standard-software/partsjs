@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -7,35 +7,35 @@ const {
   isException,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _some, _all,
   _findFirstIndex,
-} = require('../array/array_common.js');
+} from '../array/array_common.js';
 
-const {
+import {
   _match,
-} = require('../compare/match.js');
+} from '../compare/match.js';
 
-const {
+import {
   _includes, includes,
-} = require('../compare/includes.js');
+} from '../compare/includes.js';
 
 /**
  * includesSome
  */
-const _includesSome = (value, compareArray) => {
+export const _includesSome = (value, compareArray) => {
   return _some(compareArray, compare => {
     return includes(value, compare);
   });
 };
 
-const includesSome = (
+export const includesSome = (
   value,
   compareArray,
 ) => {
@@ -55,13 +55,13 @@ const includesSome = (
 /**
  * includesAll
  */
-const _includesAll = (value, compareArray) => {
+export const _includesAll = (value, compareArray) => {
   return _all(compareArray, compare => {
     return includes(value, compare);
   });
 };
 
-const includesAll = (
+export const includesAll = (
   value,
   compareArray,
 ) => {
@@ -78,11 +78,11 @@ const includesAll = (
   return _includesAll(value, compareArray);
 };
 
-module.exports = {
+export default {
   _includesSome,
   _includesAll,
 
   includesSome,
   includesAll,
 
-};
+}

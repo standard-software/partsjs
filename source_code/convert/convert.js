@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
@@ -8,37 +8,37 @@ const {
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotFunction, isNotObject, isNotArray, isNotDate, isNotRegExp,
   isNotException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   _matchValue,
   _initialValue,
-} = require('../compare/compare.js');
+} from '../compare/compare.js';
 
-const {
+import {
   _matchFormat,
-} = require('../string/string.js');
+} from '../string/string.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _round,
-} = require('../number/number.js');
+} from '../number/number.js';
 
 
 /**
  * numberToString
  */
-const _numberToString = (
+export const _numberToString = (
   value,
   radix = 10,
 ) => {
   return value.toString(radix);
 };
 
-const numberToString = (
+export const numberToString = (
   value,
   radix = 10,
 ) => {
@@ -71,7 +71,7 @@ const numberToString = (
 /**
  * valueToString
  */
-const valueToString = (
+export const valueToString = (
   value,
   radix = 10,
 ) => {
@@ -102,7 +102,7 @@ const valueToString = (
 /**
  * stringToNumber
  */
-const _stringToNumberBase = (
+export const _stringToNumberBase = (
   value,
   defaultValueFunc,
 ) => {
@@ -120,7 +120,7 @@ const _stringToNumberBase = (
   return result;
 };
 
-const _stringToNumber = (
+export const _stringToNumber = (
   value,
 ) => {
   return _stringToNumberBase(
@@ -133,7 +133,7 @@ const _stringToNumber = (
   );
 };
 
-const stringToNumber = (
+export const stringToNumber = (
   value,
 ) => {
   if (isObjectParameter(value, 'value')) {
@@ -151,7 +151,7 @@ const stringToNumber = (
   );
 };
 
-const _stringToNumberDefault = (
+export const _stringToNumberDefault = (
   value,
   defaultValue,
 ) => {
@@ -161,7 +161,7 @@ const _stringToNumberDefault = (
   );
 };
 
-const stringToNumberDefault = (
+export const stringToNumberDefault = (
   value,
   defaultValue,
 ) => {
@@ -184,7 +184,7 @@ const stringToNumberDefault = (
 /**
  * stringToInteger
  */
-const _stringToIntegerBase = (
+export const _stringToIntegerBase = (
   value,
   defaultValueFunc,
   radix = 10,
@@ -203,7 +203,7 @@ const _stringToIntegerBase = (
   return result;
 };
 
-const _stringToInteger = (
+export const _stringToInteger = (
   value,
   radix = 10,
 ) => {
@@ -218,7 +218,7 @@ const _stringToInteger = (
   );
 };
 
-const stringToInteger = (
+export const stringToInteger = (
   value,
   radix = 10,
 ) => {
@@ -248,7 +248,7 @@ const stringToInteger = (
   );
 };
 
-const _stringToIntegerDefault = (
+export const _stringToIntegerDefault = (
   value,
   defaultValue,
   radix = 10,
@@ -260,7 +260,7 @@ const _stringToIntegerDefault = (
   );
 };
 
-const stringToIntegerDefault = (
+export const stringToIntegerDefault = (
   value,
   defaultValue,
   radix = 10,
@@ -295,7 +295,7 @@ const stringToIntegerDefault = (
 /**
  * valueToNumber
  */
-const valueToNumber = (value) => {
+export const valueToNumber = (value) => {
   if (isNull(value)) {
     return NaN;
   }
@@ -308,7 +308,7 @@ const valueToNumber = (value) => {
   return stringToNumberDefault(value, NaN);
 };
 
-const valueToNumberDefault = (value, defaultValue) => {
+export const valueToNumberDefault = (value, defaultValue) => {
   if (isObjectParameter(value, 'value,defaultValue')) {
     ({ value, defaultValue } = value);
   }
@@ -326,7 +326,7 @@ const valueToNumberDefault = (value, defaultValue) => {
 /**
  * valueToInteger
  */
-const valueToInteger = (value) => {
+export const valueToInteger = (value) => {
   const result = valueToNumber(value);
   if (isNaNStrict(result)) {
     return NaN;
@@ -334,7 +334,7 @@ const valueToInteger = (value) => {
   return _round(result);
 };
 
-const valueToIntegerDefault = (value, defaultValue) => {
+export const valueToIntegerDefault = (value, defaultValue) => {
   if (isObjectParameter(value, 'value,defaultValue')) {
     ({ value, defaultValue } = value);
   }
@@ -350,31 +350,31 @@ const valueToIntegerDefault = (value, defaultValue) => {
 };
 
 
-const numToString     = numberToString;
-const valToString     = valueToString;
-const strToNumber     = stringToNumber;
-const strToNumberDef  = stringToNumberDefault;
-const strToInteger    = stringToInteger;
-const strToIntegerDef = stringToIntegerDefault;
+export const numToString     = numberToString;
+export const valToString     = valueToString;
+export const strToNumber     = stringToNumber;
+export const strToNumberDef  = stringToNumberDefault;
+export const strToInteger    = stringToInteger;
+export const strToIntegerDef = stringToIntegerDefault;
 
-const valToNumber       = valueToNumber;
-const valToNumberDef    = valueToNumberDefault;
-const valToInteger      = valueToInteger;
-const valToIntegerDef   = valueToIntegerDefault;
+export const valToNumber       = valueToNumber;
+export const valToNumberDef    = valueToNumberDefault;
+export const valToInteger      = valueToInteger;
+export const valToIntegerDef   = valueToIntegerDefault;
 
-const numToStr        = numberToString;
-const valToStr        = valueToString;
-const strToNum        = stringToNumber;
-const strToNumDef     = stringToNumberDefault;
-const strToInt        = stringToInteger;
-const strToIntDef     = stringToIntegerDefault;
+export const numToStr        = numberToString;
+export const valToStr        = valueToString;
+export const strToNum        = stringToNumber;
+export const strToNumDef     = stringToNumberDefault;
+export const strToInt        = stringToInteger;
+export const strToIntDef     = stringToIntegerDefault;
 
-const valToNum           = valueToNumber;
-const valToNumDef        = valueToNumberDefault;
-const valToInt           = valueToInteger;
-const valToIntDef        = valueToIntegerDefault;
+export const valToNum           = valueToNumber;
+export const valToNumDef        = valueToNumberDefault;
+export const valToInt           = valueToInteger;
+export const valToIntDef        = valueToIntegerDefault;
 
-module.exports = {
+export default {
   numberToString,
   valueToString,
   stringToNumber, stringToNumberDefault,
@@ -397,5 +397,5 @@ module.exports = {
   strToNum, strToNumDef,
   strToInt, strToIntDef,
 
-};
+}
 

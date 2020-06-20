@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -7,16 +7,16 @@ const {
   isException,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  * match
  */
-const _match = (value, compare) => {
+export const _match = (value, compare) => {
   if (isString(value)) {
     let result;
     if (isRegExp(compare)) {
@@ -48,7 +48,7 @@ const _match = (value, compare) => {
   }
 };
 
-const match = (
+export const match = (
   value,
   compare,
 ) => {
@@ -61,7 +61,7 @@ const match = (
   return _match(value, compare);
 };
 
-module.exports = {
+export default {
   _match,
   match,
-};
+}

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-const test_execute_consoleHook = (parts) => {
+export const test_execute_consoleHook = (parts) => {
   const { describe, it } = parts.test;
   describe('test_execute_consoleHook', () => {
 
@@ -145,6 +145,6 @@ const test_execute_consoleHook = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_consoleHook,
-};
+}

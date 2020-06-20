@@ -4,7 +4,7 @@
 /* eslint-disable no-new-wrappers */
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-const test_execute_type = (parts) => {
+export const test_execute_type = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
   describe('test_execute_type', () => {
 
@@ -972,6 +972,6 @@ const test_execute_type = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_type,
-};
+}

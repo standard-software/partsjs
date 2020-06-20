@@ -1,32 +1,32 @@
 require('./polyfill.js');
-const _root = require('./root/root.js');
-const _platform = require('./platform/platform.js');
-const _type = require('./type/type.js');
-const _test = require('./test/test.js');
-const _syntax = require('./syntax/syntax.js');
-const _compare = require('./compare/compare.js');
-const _convert = require('./convert/convert.js');
-const _number = require('./number/number.js');
-const _string = require('./string/string.js');
-const _object = require('./object/object.js');
-const _array = require('./array/array.js');
-const _consoleHook = require('./consoleHook/consoleHook.js');
+import _root from './root/root.js';
+import _platform from './platform/platform.js';
+import _type from './type/type.js';
+import _test from './test/test.js';
+import _syntax from './syntax/syntax.js';
+import _compare from './compare/compare.js';
+import _convert from './convert/convert.js';
+import _number from './number/number.js';
+import _string from './string/string.js';
+import _object from './object/object.js';
+import _array from './array/array.js';
+import _consoleHook from './consoleHook/consoleHook.js';
 
-const VERSION = '6.0.0 beta';
+export const VERSION = '6.0.0 beta';
 
-const rootNames = {};
-const propertyNames = {};
+export const rootNames = {};
+export const propertyNames = {};
 
-const { _copyProperty } = _object;
-const { _replaceAll } = _string;
-const { _map } = _array;
+export const { _copyProperty } = _object;
+export const { _replaceAll } = _string;
+export const { _map } = _array;
 
 // root
 propertyNames.ROOT =
   'clone, cloneDeep,' +
   'cloneFunction,' +
   '';
-const root = {};
+export const root = {};
 _copyProperty(_root, propertyNames.ROOT, root);
 _copyProperty(_root, propertyNames.ROOT, rootNames);
 
@@ -46,7 +46,7 @@ propertyNames.PLATFORM =
   'isOpera,' +
   'buildMode,' +
   '';
-const platform = _copyProperty(_platform, propertyNames.PLATFORM);
+export const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 
 // type
 propertyNames._TYPE_BASE =
@@ -65,7 +65,7 @@ propertyNames._TYPE_BASE =
   'Except,' +
   'EmptyObj,' +
   '';
-const isPrefixSafixAdd = (prefix, safix, commaString) =>
+export const isPrefixSafixAdd = (prefix, safix, commaString) =>
   _map(_replaceAll(commaString, ' ', '').split(','),
     item => prefix + item + safix).join(',');
 propertyNames.TYPE = [
@@ -76,7 +76,7 @@ propertyNames.TYPE = [
   isPrefixSafixAdd('is',    'Array',  propertyNames._TYPE_BASE),
   isPrefixSafixAdd('isNot', 'Array',  propertyNames._TYPE_BASE),
 ].join(',');
-const type = {};
+export const type = {};
 _copyProperty(_type, propertyNames.TYPE, type);
 _copyProperty(_type, propertyNames.TYPE, rootNames);
 
@@ -89,7 +89,7 @@ propertyNames.TEST_PUBLIC =
 propertyNames.TEST_ROOT =
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';
-const test = {};
+export const test = {};
 _copyProperty(_test, propertyNames.TEST_PUBLIC, test);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames);
 
@@ -101,7 +101,7 @@ propertyNames.SYNTAX =
   'loop,' +
   'canUseMap, canUseSet,' +
   '';
-const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
+export const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
 
 // compare
@@ -117,7 +117,7 @@ propertyNames.COMPARE =
   'allMatchAll, indexOfMatchAll, someMatchAll,' +
   'includes, includesSome, includesAll,' +
   '';
-const compare = {};
+export const compare = {};
 _copyProperty(_compare, propertyNames.COMPARE, compare);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
@@ -142,7 +142,7 @@ propertyNames.CONVERT =
   'strToNum,strToNumDef,' +
   'strToInt,strToIntDef,' +
   '';
-const convert = {};
+export const convert = {};
 _copyProperty(_convert, propertyNames.CONVERT, convert);
 _copyProperty(_convert, propertyNames.CONVERT, rootNames);
 
@@ -151,7 +151,7 @@ propertyNames.NUMBER =
   'isMultiples,isEven,isOdd,' +
   'round,nearEqual,inRange,randomInt,' +
   '';
-const number = _copyProperty(_number, propertyNames.NUMBER);
+export const number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames);
 
 // string
@@ -172,7 +172,7 @@ propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
   'isLowerCase,isUpperCase,' +
   '';
-const string = {};
+export const string = {};
 _copyProperty(_string, propertyNames.STRING_PUBLIC, string);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 
@@ -191,7 +191,7 @@ propertyNames.OBJECT_ROOT =
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
   '';
-const object = {};
+export const object = {};
 _copyProperty(_object, propertyNames.OBJECT_PUBLIC, object);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
@@ -221,7 +221,7 @@ propertyNames.ARRAY_ROOT =
   'min, max,' +
   'sum, average, median,' +
   '';
-const array = {};
+export const array = {};
 _copyProperty(_array, propertyNames.ARRAY_PUBLIC, array);
 _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);
 
@@ -252,10 +252,10 @@ propertyNames.CONSOLE_HOOK = [
   isPrefixSafixAdd('unHook',  '', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixSafixAdd('accept',  '', propertyNames._CONSOLE_HOOK_BASE),
 ].join(',');
-const consoleHook = {};
+export const consoleHook = {};
 _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
 
-const parts = {
+export const parts = {
   VERSION,
   platform,
   type,
@@ -274,7 +274,7 @@ const parts = {
   ...rootNames,
 };
 
-module.exports = {
+export default {
   ...parts,
   parts,
-};
+}

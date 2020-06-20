@@ -1,7 +1,7 @@
 /**
  * propertyCount
  */
-const _propertyCount = (
+export const _propertyCount = (
   object,
   hasOwn = true,
 ) => {
@@ -20,6 +20,6 @@ const _propertyCount = (
   return result;
 };
 
-module.exports = {
+export default {
   _propertyCount,
-};
+}

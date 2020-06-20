@@ -1,5 +1,5 @@
 /* eslint-disable no-var */
-const test_execute_convert = (parts) => {
+export const test_execute_convert = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
   describe('test_execute_convert', () => {
     const {
@@ -1444,6 +1444,6 @@ const test_execute_convert = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_convert,
-};
+}

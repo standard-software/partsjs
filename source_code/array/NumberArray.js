@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
@@ -8,16 +8,16 @@ const {
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray, isObjectArray, isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  * NumberArray
  */
-const _NumberArray = (start, end, increment) => {
+export const _NumberArray = (start, end, increment) => {
 
   if (isUndefined(increment)) {
     if (isUndefined(end)) {
@@ -59,7 +59,7 @@ const _NumberArray = (start, end, increment) => {
   return result;
 };
 
-const NumberArray = (start, end, increment) => {
+export const NumberArray = (start, end, increment) => {
 
   if (isObjectParameter(start, 'count')) {
     ({ count: start } = start);
@@ -91,10 +91,10 @@ const NumberArray = (start, end, increment) => {
   return _NumberArray(start, end, increment);
 };
 
-module.exports = {
+export default {
   _NumberArray,
 
   NumberArray,
 
-};
+}
 

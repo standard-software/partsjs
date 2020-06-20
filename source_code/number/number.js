@@ -1,25 +1,25 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  * isMultiples isEven isOdd
  */
-const _isMultiples = (number, radix) => {
+export const _isMultiples = (number, radix) => {
   if (number === 0) {
     return false;
   }
   return (number % radix) === 0;
 };
 
-const isMultiples = (number, radix) => {
+export const isMultiples = (number, radix) => {
   if (isObjectParameter(number, 'number,radix')) {
     ({ number, radix } = number);
   }
@@ -38,14 +38,14 @@ const isMultiples = (number, radix) => {
   return _isMultiples(number, radix);
 };
 
-const isEven = (number) => {
+export const isEven = (number) => {
   if (number === 0) {
     return false;
   }
   return isMultiples(number, 2);
 };
 
-const isOdd = (number) => {
+export const isOdd = (number) => {
   if (number === 0) {
     return false;
   }
@@ -55,7 +55,7 @@ const isOdd = (number) => {
 /**
  * round
  */
-const _round = (value, digit = 0) => {
+export const _round = (value, digit = 0) => {
   const plusFlag = 0 <= value ? true: false;
   const powResult = Math.pow(10, digit);
   if (plusFlag) {
@@ -65,7 +65,7 @@ const _round = (value, digit = 0) => {
   }
 };
 
-const round = (value, digit = 0) => {
+export const round = (value, digit = 0) => {
   if (isObjectParameter(value, 'value', 'digit')) {
     ({ value, digit = 0 } = value);
   }
@@ -82,7 +82,7 @@ const round = (value, digit = 0) => {
 /**
  * nearEqual
  */
-const _nearEqual = (value1, value2, diff) => {
+export const _nearEqual = (value1, value2, diff) => {
   if ( Math.abs(value1 - value2) <= diff ) {
     return true;
   } else {
@@ -90,7 +90,7 @@ const _nearEqual = (value1, value2, diff) => {
   }
 };
 
-const nearEqual = (value1, value2, diff) => {
+export const nearEqual = (value1, value2, diff) => {
   if (isObjectParameter(value1, 'value1,value2,diff')) {
     ({ value1, value2, diff } = value1);
   }
@@ -122,7 +122,7 @@ const nearEqual = (value1, value2, diff) => {
 /**
  * inRange
  */
-const _inRange = (value, from, to) => {
+export const _inRange = (value, from, to) => {
   if ((from <= value) && (value <= to)) {
     return true;
   } else {
@@ -130,7 +130,7 @@ const _inRange = (value, from, to) => {
   }
 };
 
-const inRange = (value, from, to) => {
+export const inRange = (value, from, to) => {
   if (isObjectParameter(value, 'value,from,to')) {
     ({ value, from, to } = value);
   }
@@ -162,7 +162,7 @@ const inRange = (value, from, to) => {
 /**
  * makeInRange
  */
-const _makeInRange = (value, from, to) => {
+export const _makeInRange = (value, from, to) => {
   if (value < from) {
     return from;
   }
@@ -172,7 +172,7 @@ const _makeInRange = (value, from, to) => {
   return value;
 };
 
-const makeInRange = (value, from, to) => {
+export const makeInRange = (value, from, to) => {
   if (isObjectParameter(value, 'value, from, to')) {
     ({ value, from, to } = value);
   }
@@ -205,11 +205,11 @@ const makeInRange = (value, from, to) => {
 /**
  * randomInt
  */
-const _randomInt = (min, max) => {
+export const _randomInt = (min, max) => {
   return Math.floor( Math.random() * (max + 1 - min) ) + min;
 };
 
-const randomInt = (min, max) => {
+export const randomInt = (min, max) => {
   if (isObjectParameter(min, 'min,max')) {
     ({ min, max } = min);
   }
@@ -228,7 +228,7 @@ const randomInt = (min, max) => {
   return _randomInt(min, max);
 };
 
-module.exports = {
+export default {
   isMultiples,
   _round, _nearEqual,
   _inRange, _makeInRange,
@@ -239,5 +239,5 @@ module.exports = {
   inRange, makeInRange,
   randomInt,
 
-};
+}
 

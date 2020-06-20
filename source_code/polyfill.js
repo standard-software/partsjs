@@ -13,7 +13,7 @@
 /* eslint-disable no-var */
 /* eslint-disable prefer-rest-params */
 /* eslint-disable no-extend-native */
-const polyfillDefine = () => {
+export const polyfillDefine = () => {
 
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
   if (!Array.isArray) {
@@ -171,5 +171,5 @@ const polyfillDefine = () => {
 
 polyfillDefine();
 
-module.exports = {};
+export default {}
 

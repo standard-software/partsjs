@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -6,24 +6,24 @@ const {
   isDate, isRegExp,
   isError,
   isBooleanObject, isNumberObject, isStringObject,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _propertyCount,
-} = require('../object/_propertyCount.js');
+} from '../object/_propertyCount.js';
 
-const {
+import {
   _replaceAll,
-} = require('../string/_replaceAll.js');
+} from '../string/_replaceAll.js';
 
 /**
  * copyProperty
  */
-const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
+export const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
 
   if (isString(propertyArray)) {
     propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
@@ -44,7 +44,7 @@ const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
   return toObject;
 };
 
-const copyProperty = (fromObject, propertyArray, toObject = {}) => {
+export const copyProperty = (fromObject, propertyArray, toObject = {}) => {
   if (isObjectParameter(fromObject, 'fromObject,propertyArray', 'toObject')) {
     ({ fromObject, propertyArray, toObject = {} } = fromObject);
   }
@@ -77,7 +77,7 @@ const copyProperty = (fromObject, propertyArray, toObject = {}) => {
 /**
  * propertyCount
  */
-const propertyCount = (object, hasOwn = true) => {
+export const propertyCount = (object, hasOwn = true) => {
   if (isObjectParameter(object, 'object', 'hasOwn')) {
     ({ object, hasOwn = true } = object);
   }
@@ -99,7 +99,7 @@ const propertyCount = (object, hasOwn = true) => {
 /**
  * getProperty
  */
-const _getPropertyBase = (
+export const _getPropertyBase = (
   object,
   propertyPath,
   hasOwn = true,
@@ -131,7 +131,7 @@ const _getPropertyBase = (
 };
 
 
-const _getProperty = (
+export const _getProperty = (
   object,
   propertyPath,
   hasOwn = true,
@@ -149,7 +149,7 @@ const _getProperty = (
   }
 };
 
-const getProperty = (object, propertyPath, hasOwn = true) => {
+export const getProperty = (object, propertyPath, hasOwn = true) => {
   if (isObjectParameter(object, 'object, propertyPath', 'hasOwn')) {
     ({ object, propertyPath, hasOwn = true } = object);
   }
@@ -176,7 +176,7 @@ const getProperty = (object, propertyPath, hasOwn = true) => {
 /**
  * setProperty
  */
-const _setProperty = (object, path, value) => {
+export const _setProperty = (object, path, value) => {
   const propertyArray = path.split('.');
   for (let i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '' ) {
@@ -200,7 +200,7 @@ const _setProperty = (object, path, value) => {
   return result;
 };
 
-const setProperty = (object, propertyPath, value) => {
+export const setProperty = (object, propertyPath, value) => {
   if (isObjectParameter(object, 'object, propertyPath, value')) {
     ({ object, propertyPath, value } = object);
   }
@@ -219,12 +219,12 @@ const setProperty = (object, propertyPath, value) => {
   return _setProperty(object, propertyPath, value);
 };
 
-const copyProp = copyProperty;
-const propCount = propertyCount;
-const getProp = getProperty;
-const setProp = setProperty;
+export const copyProp = copyProperty;
+export const propCount = propertyCount;
+export const getProp = getProperty;
+export const setProp = setProperty;
 
-module.exports = {
+export default {
   _copyProperty,
   _propertyCount,
   _getProperty, _getPropertyBase,
@@ -238,4 +238,4 @@ module.exports = {
   copyProp,
   propCount,
   getProp, setProp,
-};
+}

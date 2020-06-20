@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -6,24 +6,24 @@ const {
   isDate, isRegExp,
   isError,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   _map,
-} = require('../array/array.js');
+} from '../array/array.js';
 
-const {
+import {
   _repeat,
-} = require('../string/string.js');
+} from '../string/string.js';
 
-const {
+import {
   equal, equalDeep,
-} = require('../compare/compare.js');
+} from '../compare/compare.js';
 
 /**
  * test framework
  */
-const testFrame = {
+export const testFrame = {
   describeArray: [],
   testName: '',
   counter: 0,
@@ -31,7 +31,7 @@ const testFrame = {
   outputIt: false,
 };
 
-const describe = (text, func) => {
+export const describe = (text, func) => {
   if (testFrame.outputDescribe) {
     const indent = _repeat(' ', testFrame.describeArray.length * 2);
     console.log(`${indent}describe: ${text}`);
@@ -41,7 +41,7 @@ const describe = (text, func) => {
   testFrame.describeArray.pop();
 };
 
-const it = (text, func) => {
+export const it = (text, func) => {
 
   const indent = _repeat(
     ' ',
@@ -70,9 +70,9 @@ const it = (text, func) => {
   testFrame.testName = '';
 };
 
-const test = it;
+export const test = it;
 
-const checkCompare = (compareFunc, a, b, message = '') => {
+export const checkCompare = (compareFunc, a, b, message = '') => {
   if (!isString(message)) {
     throw new TypeError('checkEqual args message is not string');
   }
@@ -99,11 +99,11 @@ const checkCompare = (compareFunc, a, b, message = '') => {
   return false;
 };
 
-const checkEqual = (a, b, message = '') => {
+export const checkEqual = (a, b, message = '') => {
   return checkCompare(equalDeep, a, b, message);
 };
 
-const expect = a => {
+export const expect = a => {
   const toBe = b => checkCompare(
     (v1, v2) => v1 === v2,
     a, b,
@@ -127,7 +127,7 @@ const expect = a => {
   };
 };
 
-const testCounter = (value = 0) => {
+export const testCounter = (value = 0) => {
   if (isInteger(value)) {
     testFrame.counter = value;
   }
@@ -137,7 +137,7 @@ const testCounter = (value = 0) => {
 /**
  * isThrown isThrownValue isThrownException isNotThrown
  */
-const isThrown = (
+export const isThrown = (
   targetFunc,
   compareFunc,
 ) => {
@@ -163,7 +163,7 @@ const isThrown = (
   return false;
 };
 
-const isThrownValue = (
+export const isThrownValue = (
   targetFunc,
   thrownValue,
 ) => {
@@ -175,7 +175,7 @@ const isThrownValue = (
   );
 };
 
-const isThrownException = (
+export const isThrownException = (
   targetFunc,
   exceptionName = '',
 ) => {
@@ -199,14 +199,14 @@ const isThrownException = (
   );
 };
 
-const isNotThrown = (targetFunc) => {
+export const isNotThrown = (targetFunc) => {
   return !isThrown(targetFunc, () => true);
 };
 
-module.exports = {
+export default {
   checkEqual, checkCompare,
   describe, it, test, expect,
   isThrown, isThrownValue, isThrownException, isNotThrown,
   testCounter,
-};
+}
 

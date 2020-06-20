@@ -1,15 +1,15 @@
-const {
+import {
   _typeofCheck, _objectToStringCheck, objectToString,
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const isSet = _objectToStringCheck('Set');
-const isWeakSet = _objectToStringCheck('WeakSet');
+export const isSet = _objectToStringCheck('Set');
+export const isWeakSet = _objectToStringCheck('WeakSet');
 
-const isNotSet   = value => !isSet(value);
-const isNotWeakSet   = value => !isWeakSet(value);
+export const isNotSet   = value => !isSet(value);
+export const isNotWeakSet   = value => !isWeakSet(value);
 
-module.exports = {
+export default {
   isSet, isNotSet,
   isWeakSet, isNotWeakSet,
-};
+}
 

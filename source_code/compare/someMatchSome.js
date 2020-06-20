@@ -1,11 +1,11 @@
-const {
+import {
   _indexOfMatchSome, indexOfMatchSome,
-} = require('../compare/indexOfMatchSome.js');
+} from '../compare/indexOfMatchSome.js';
 
 /**
  * someMatchSome
  */
-const _someMatchSome = (
+export const _someMatchSome = (
   valueArray,
   compareArray,
 ) => {
@@ -15,7 +15,7 @@ const _someMatchSome = (
   ) !== -1;
 };
 
-const someMatchSome = (
+export const someMatchSome = (
   valueArray,
   compareArray,
 ) => {
@@ -25,7 +25,7 @@ const someMatchSome = (
   ) !== -1;
 };
 
-module.exports = {
+export default {
   _someMatchSome,
   someMatchSome,
-};
+}

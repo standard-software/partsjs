@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-const test_execute_syntax = (parts) => {
+export const test_execute_syntax = (parts) => {
   const { checkEqual, describe, it, test, expect } = parts.test;
   describe('test_execute_syntax', () => {
 
@@ -794,6 +794,6 @@ const test_execute_syntax = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_syntax,
-};
+}

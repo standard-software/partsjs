@@ -1,25 +1,25 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const {
+import {
   _replaceAll,
-} = require('../string/_replaceAll.js');
+} from '../string/_replaceAll.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _getPropertyBase,
-} = require('../object/object_common.js');
+} from '../object/object_common.js';
 
 /**
  * _inProperty
  */
-const _inProperty = (object, propertyPathArray, hasOwn = true) => {
+export const _inProperty = (object, propertyPathArray, hasOwn = true) => {
 
   if (!isObject(object)) {
     return false;
@@ -52,7 +52,7 @@ const _inProperty = (object, propertyPathArray, hasOwn = true) => {
 /**
  * inProperty
  */
-const inProperty = (object, propertyPathArray, hasOwn = true) => {
+export const inProperty = (object, propertyPathArray, hasOwn = true) => {
   if (isObjectParameter(object, 'object, propertyPathArray', 'hasOwn')) {
     ({ object, propertyPathArray, hasOwn = true } = object);
   }
@@ -83,11 +83,11 @@ const inProperty = (object, propertyPathArray, hasOwn = true) => {
   );
 };
 
-const inProp = inProperty;
+export const inProp = inProperty;
 
-module.exports = {
+export default {
   _inProperty,
 
   inProperty,
   inProp,
-};
+}

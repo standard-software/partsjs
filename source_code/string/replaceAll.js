@@ -1,19 +1,19 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _replaceAll,
-} = require('../string/_replaceAll.js');
+} from '../string/_replaceAll.js';
 
-const replaceAll = (str, before, after) => {
+export const replaceAll = (str, before, after) => {
   if (isObjectParameter(str, 'str, before, after')) {
     ({ str, before, after } = str);
   }
@@ -37,6 +37,6 @@ const replaceAll = (str, before, after) => {
   return _replaceAll(str, before, after);
 };
 
-module.exports = {
+export default {
   replaceAll,
-};
+}

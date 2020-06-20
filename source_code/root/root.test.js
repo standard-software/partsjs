@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-const test_execute_root = (parts) => {
+export const test_execute_root = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
   describe('test_execute_root', () => {
 
@@ -9,11 +9,11 @@ const test_execute_root = (parts) => {
       cloneFunction,
     } = parts;
 
-    const {
+    import {
       _typeofCheck, _objectToStringCheck,
-    } = require('../type/isType.js');
+    } from '../type/isType.js';
 
-    const test_clone_object = () =>{
+    const test_clone_object = ( =>{
       it('test_clone_object', () => {
 
         const testObject1 = { a: 1, b: 2, c: 3 };
@@ -514,7 +514,7 @@ const test_execute_root = (parts) => {
           return;
         }
 
-        const moment = require('moment');
+        import moment from 'moment');
 
         // moment type clone no
         var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
@@ -826,6 +826,6 @@ const test_execute_root = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_root,
-};
+}

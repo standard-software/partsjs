@@ -1,28 +1,28 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
 
   isUndefinedAll,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _IntegerArray,
-} = require('../array/IntegerArray.js');
+} from '../array/IntegerArray.js';
 
-const {
+import {
   objectToKeyValueArray,
-} = require('../object/objectToKeyValueArray.js');
+} from '../object/objectToKeyValueArray.js';
 
 /**
  * assert
  */
-const assert = (value, message = '') => {
+export const assert = (value, message = '') => {
   if (!isBoolean(value)) {
     throw new TypeError(
       'assert args(value) is not boolean|message:'
@@ -45,7 +45,7 @@ const assert = (value, message = '') => {
  */
 let guard_status = true;
 let guard_message;
-const guard = (guardFunc, runFunc) => {
+export const guard = (guardFunc, runFunc) => {
   guard_message = '';
   if (guard_status === false) {
     return false;
@@ -118,7 +118,7 @@ guard.off = () => {
 /**
  * function Value
  */
-const functionValue = (value) => {
+export const functionValue = (value) => {
   if (isFunction(value)) {
     return value();
   } else {
@@ -129,7 +129,7 @@ const functionValue = (value) => {
 /**
  * sc (second call)
  */
-const sc = (
+export const sc = (
   argsFirst,
   func,
   ...argsRest
@@ -140,7 +140,7 @@ const sc = (
 /**
  * if_
  */
-const if_ = (condition) => {
+export const if_ = (condition) => {
   if (!isBoolean(condition)) {
     throw new TypeError(
       'if_ args(condition) is not boolean',
@@ -186,7 +186,7 @@ const if_ = (condition) => {
 /**
  * switch_
  */
-const switch_ = (expression) => {
+export const switch_ = (expression) => {
   return (args) => {
     if (!isArray(args)) {
       throw new TypeError('switch_() args is not array');
@@ -222,7 +222,7 @@ const switch_ = (expression) => {
 /**
  * loop
  */
-const _loopBase = (loopArray) => {
+export const _loopBase = (loopArray) => {
   return (func) => {
     if (!isFunction(func)) {
       throw new TypeError('loop()(func) func is not function');
@@ -242,7 +242,7 @@ const _loopBase = (loopArray) => {
   };
 };
 
-const loop = (start, end, increment) => {
+export const loop = (start, end, increment) => {
 
   if (isObjectParameter(start, 'count')) {
     ({ count: start } = start);
@@ -284,7 +284,7 @@ const loop = (start, end, increment) => {
  */
 let _canUseMapFlag;
 
-const canUseMap = () => {
+export const canUseMap = () => {
   if (isUndefined(_canUseMapFlag)) {
     try {
       new Map();
@@ -305,7 +305,7 @@ canUseMap.reset = () => {
  */
 let _canUseSetFlag;
 
-const canUseSet = () => {
+export const canUseSet = () => {
   if (isUndefined(_canUseSetFlag)) {
     try {
       new Set();
@@ -321,10 +321,10 @@ canUseSet.reset = () => {
   _canUseSetFlag = undefined;
 };
 
-module.exports = {
+export default {
   assert, guard,
   functionValue,
   sc, if_, switch_,
   loop,
   canUseMap, canUseSet,
-};
+}

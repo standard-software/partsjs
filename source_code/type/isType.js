@@ -1,64 +1,64 @@
-const {
+import {
   _propertyCount,
-} = require('../object/_propertyCount.js');
+} from '../object/_propertyCount.js';
 
-const _typeofCheck = (typeName) => {
+export const _typeofCheck = (typeName) => {
   return ((value) => typeof value === typeName);
 };
 
-const objectToString = value => {
+export const objectToString = value => {
   return Object.prototype.toString.call(value);
 };
 
-const _objectToStringCheck = (typeName) => {
+export const _objectToStringCheck = (typeName) => {
   return (
     (value) =>
       objectToString(value) === `[object ${typeName}]`
   );
 };
 
-const isUndefined = _typeofCheck('undefined');
+export const isUndefined = _typeofCheck('undefined');
 
-const isNull = (value) => (value === null);
+export const isNull = (value) => (value === null);
 
-const isNaNStrict = (value) => value !== value;
+export const isNaNStrict = (value) => value !== value;
 
-const isBoolean = _typeofCheck('boolean');
-const isBooleanObject = value => {
+export const isBoolean = _typeofCheck('boolean');
+export const isBooleanObject = value => {
   return (
     _objectToStringCheck('Boolean')
     && (!isBoolean(value))
   );
 };
 
-const isNumber = (value) => {
+export const isNumber = (value) => {
   return (_typeofCheck('number')(value) && (isFinite(value)));
 };
-const isNumberObject = (value) => {
+export const isNumberObject = (value) => {
   return (
     _objectToStringCheck('Number')(value)
     && (!_typeofCheck('number')(value))
   );
 };
 
-const isInteger = (value) => {
+export const isInteger = (value) => {
   if (!isNumber(value)) {
     return false;
   }
   return Math.round(value) === value;
 };
 
-const isString = _typeofCheck('string');
-const isStringObject = value => {
+export const isString = _typeofCheck('string');
+export const isStringObject = value => {
   return (
     _objectToStringCheck('String')
     && (!isString(value))
   );
 };
 
-const isFunction = _typeofCheck('function');
+export const isFunction = _typeofCheck('function');
 
-const isObject = (value) => {
+export const isObject = (value) => {
   if (
     (_objectToStringCheck('Object')(value))
     && (!isNull(value))
@@ -69,84 +69,84 @@ const isObject = (value) => {
   return false;
 };
 
-const isObjectType = (value) => {
+export const isObjectType = (value) => {
   if (isNull(value)) {
     return false;
   }
   return ['function', 'object'].indexOf(typeof value) !== -1;
 };
 
-const isEmptyObject = value => {
+export const isEmptyObject = value => {
   if (!isObject(value)) {
     return false;
   }
   return _propertyCount(value) === 0;
 };
 
-const isArray = _objectToStringCheck('Array');
+export const isArray = _objectToStringCheck('Array');
 
 // Int8Array Uint16Array Float32Array Float64Array etc...
-const isArrayType = (value) => {
+export const isArrayType = (value) => {
   if (objectToString(value).indexOf('Array]') !== -1 ) {
     return true;
   }
   return false;
 };
 
-const isEmptyArray = value => {
+export const isEmptyArray = value => {
   if (!isArrayType(value)) {
     return false;
   }
   return value.length === 0;
 };
 
-const isDate = _objectToStringCheck('Date');
+export const isDate = _objectToStringCheck('Date');
 
-const isRegExp = _objectToStringCheck('RegExp');
+export const isRegExp = _objectToStringCheck('RegExp');
 
-const isError = _objectToStringCheck('Error');
+export const isError = _objectToStringCheck('Error');
 
-const isNotUndefined   = value => !isUndefined(value);
-const isNotNull        = value => !isNull(value);
-const isNotNaNStrict   = value => !isNaNStrict(value);
-const isNotBoolean     = value => !isBoolean(value);
-const isNotNumber      = value => !isNumber(value);
-const isNotInteger     = value => !isInteger(value);
-const isNotString      = value => !isString(value);
-const isNotFunction    = value => !isFunction(value);
-const isNotObject      = value => !isObject(value);
-const isNotObjectType  = value => !isObjectType(value);
-const isNotArray       = value => !isArray(value);
-const isNotArrayType   = value => !isArrayType(value);
-const isNotDate        = value => !isDate(value);
-const isNotRegExp      = value => !isRegExp(value);
-const isNotBooleanObject = value => !isBooleanObject(value);
-const isNotNumberObject  = value => !isNumberObject(value);
-const isNotStringObject  = value => !isStringObject(value);
-const isNotEmptyObject   = value => !isEmptyObject(value);
-const isNotEmptyArray    = value => !isEmptyArray(value);
+export const isNotUndefined   = value => !isUndefined(value);
+export const isNotNull        = value => !isNull(value);
+export const isNotNaNStrict   = value => !isNaNStrict(value);
+export const isNotBoolean     = value => !isBoolean(value);
+export const isNotNumber      = value => !isNumber(value);
+export const isNotInteger     = value => !isInteger(value);
+export const isNotString      = value => !isString(value);
+export const isNotFunction    = value => !isFunction(value);
+export const isNotObject      = value => !isObject(value);
+export const isNotObjectType  = value => !isObjectType(value);
+export const isNotArray       = value => !isArray(value);
+export const isNotArrayType   = value => !isArrayType(value);
+export const isNotDate        = value => !isDate(value);
+export const isNotRegExp      = value => !isRegExp(value);
+export const isNotBooleanObject = value => !isBooleanObject(value);
+export const isNotNumberObject  = value => !isNumberObject(value);
+export const isNotStringObject  = value => !isStringObject(value);
+export const isNotEmptyObject   = value => !isEmptyObject(value);
+export const isNotEmptyArray    = value => !isEmptyArray(value);
 
-const isUndef     = isUndefined;
-const isBool      = isBoolean;
-const isNum       = isNumber;
-const isInt       = isInteger;
-const isStr       = isString;
-const isFunc      = isFunction;
-const isObj       = isObject;
-const isObjType   = isObjectType;
-const isEmptyObj  = isEmptyObject;
+export const isUndef     = isUndefined;
+export const isBool      = isBoolean;
+export const isNum       = isNumber;
+export const isInt       = isInteger;
+export const isStr       = isString;
+export const isFunc      = isFunction;
+export const isObj       = isObject;
+export const isObjType   = isObjectType;
+export const isEmptyObj  = isEmptyObject;
 
-const isNotUndef    = isNotUndefined;
-const isNotBool     = isNotBoolean;
-const isNotNum      = isNotNumber;
-const isNotInt      = isNotInteger;
-const isNotStr      = isNotString;
-const isNotFunc     = isNotFunction;
-const isNotObj      = isNotObject;
-const isNotObjType  = isNotObjectType;
-const isNotEmptyObj = isNotEmptyObject;
+export const isNotUndef    = isNotUndefined;
+export const isNotBool     = isNotBoolean;
+export const isNotNum      = isNotNumber;
+export const isNotInt      = isNotInteger;
+export const isNotStr      = isNotString;
+export const isNotFunc     = isNotFunction;
+export const isNotObj      = isNotObject;
+export const isNotObjType  = isNotObjectType;
+export const isNotEmptyObj = isNotEmptyObject;
 
-module.exports = {
+export default {
   _typeofCheck, _objectToStringCheck, objectToString,
 
   isUndefined, isNull, isNaNStrict,
@@ -175,5 +175,5 @@ module.exports = {
   isNotBool, isNotNum, isNotInt, isNotStr,
   isNotFunc, isNotObj, isNotObjType,
   isNotEmptyObj,
-};
+}
 

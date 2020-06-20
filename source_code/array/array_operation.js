@@ -1,33 +1,33 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   _inRange, _makeInRange,
-} = require('../number/number.js');
+} from '../number/number.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _min,
   _some,
   _isFirst, _isLast, _isBothEnds,
-} = require('../array/array_common.js');
+} from '../array/array_common.js';
 
 /**
  * array.operation.insert
  */
-const _insert = (array, valueArray, index = 0) => {
+export const _insert = (array, valueArray, index = 0) => {
   array.splice(index, 0, ...valueArray);
   return array;
 };
 
-const insert = (array, valueArray, index = 0) => {
+export const insert = (array, valueArray, index = 0) => {
   if (isObjectParameter(array, 'array, valueArray, index')) {
     ({ array, valueArray, index } = array);
   }
@@ -59,12 +59,12 @@ const insert = (array, valueArray, index = 0) => {
 /**
  * array.operation.add
  */
-const _add = (array, valueArray, index = array.length - 1) => {
+export const _add = (array, valueArray, index = array.length - 1) => {
   array.splice(index + 1, 0, ...valueArray);
   return array;
 };
 
-const add = (array, valueArray, index = array.length - 1) => {
+export const add = (array, valueArray, index = array.length - 1) => {
   if (isObjectParameter(array, 'array, valueArray, index')) {
     ({ array, valueArray, index } = array);
   }
@@ -96,14 +96,14 @@ const add = (array, valueArray, index = array.length - 1) => {
 /**
  * array.operation.deleteIndex
  */
-const _deleteIndex = (
+export const _deleteIndex = (
   array, indexStart, indexEnd = indexStart,
 ) => {
   array.splice(indexStart, indexEnd - indexStart + 1);
   return array;
 };
 
-const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
+export const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
   if (isObjectParameter(array, 'array, indexStart', 'indexEnd')) {
     ({ array, indexStart, indexEnd = indexStart } = array);
   } else if (isObjectParameter(array, 'array, index')) {
@@ -142,7 +142,7 @@ const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
 /**
  * array.operation.deleteLength
  */
-const _deleteLength = (
+export const _deleteLength = (
   array, index, length = array.length - index,
 ) => {
   return _deleteIndex(array, index, index + length - 1);
@@ -151,7 +151,7 @@ const _deleteLength = (
   //  return array;
 };
 
-const deleteLength = (
+export const deleteLength = (
   array, index, length = array.length - index,
 ) => {
   if (isObjectParameter(array, 'array, index', 'length')) {
@@ -193,11 +193,11 @@ const deleteLength = (
 /**
  * array.operation.deleteFirst
  */
-const _deleteFirst = (array, length) => {
+export const _deleteFirst = (array, length) => {
   return _deleteLength(array, 0, length);
 };
 
-const deleteFirst = (array, length) => {
+export const deleteFirst = (array, length) => {
   if (isObjectParameter(array, 'array, length')) {
     ({ array, length } = array);
   }
@@ -224,11 +224,11 @@ const deleteFirst = (array, length) => {
 /**
  * array.operation.deleteLast
  */
-const _deleteLast = (array, length) => {
+export const _deleteLast = (array, length) => {
   return _deleteLength(array, array.length - length, length);
 };
 
-const deleteLast = (array, length) => {
+export const deleteLast = (array, length) => {
   if (isObjectParameter(array, 'array, length')) {
     ({ array, length } = array);
   }
@@ -255,14 +255,14 @@ const deleteLast = (array, length) => {
 /**
  * array.operation.includeFirst
  */
-const _includeFirst = (array, valueArray) => {
+export const _includeFirst = (array, valueArray) => {
   if (!_isFirst(array, valueArray)) {
     _insert(array, valueArray);
   }
   return array;
 };
 
-const includeFirst = (array, valueArray) => {
+export const includeFirst = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -284,14 +284,14 @@ const includeFirst = (array, valueArray) => {
 /**
  * array.operation.includeLast
  */
-const _includeLast = (array, valueArray) => {
+export const _includeLast = (array, valueArray) => {
   if (!_isLast(array, valueArray)) {
     _add(array, valueArray);
   }
   return array;
 };
 
-const includeLast = (array, valueArray) => {
+export const includeLast = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -313,7 +313,7 @@ const includeLast = (array, valueArray) => {
 /**
  * array.operation.includeBothEnds
  */
-const _includeBothEnds = (
+export const _includeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -325,7 +325,7 @@ const _includeBothEnds = (
   return array;
 };
 
-const includeBothEnds = (
+export const includeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -362,14 +362,14 @@ const includeBothEnds = (
 /**
  * array.operation.excludeFirst
  */
-const _excludeFirst = (array, valueArray) => {
+export const _excludeFirst = (array, valueArray) => {
   if (_isFirst(array, valueArray)) {
     _deleteFirst(array, valueArray.length);
   }
   return array;
 };
 
-const excludeFirst = (array, valueArray) => {
+export const excludeFirst = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -391,14 +391,14 @@ const excludeFirst = (array, valueArray) => {
 /**
  * array.operation.excludeLast
  */
-const _excludeLast = (array, valueArray) => {
+export const _excludeLast = (array, valueArray) => {
   if (_isLast(array, valueArray)) {
     _deleteLast(array, valueArray.length);
   }
   return array;
 };
 
-const excludeLast = (array, valueArray) => {
+export const excludeLast = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -420,7 +420,7 @@ const excludeLast = (array, valueArray) => {
 /**
  * array.operation.excludeBothEnds
  */
-const _excludeBothEnds = (
+export const _excludeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -432,7 +432,7 @@ const _excludeBothEnds = (
   return array;
 };
 
-const excludeBothEnds = (
+export const excludeBothEnds = (
   array,
   valueFirstArray,
   valueLastArray = valueFirstArray,
@@ -469,14 +469,14 @@ const excludeBothEnds = (
 /**
  * array.operation.trimFirst
  */
-const _trimFirst = (array, valueArray) => {
+export const _trimFirst = (array, valueArray) => {
   while (_some(valueArray, value => _isFirst(array, [value]))) {
     _deleteIndex(array, 0);
   }
   return array;
 };
 
-const trimFirst = (array, valueArray) => {
+export const trimFirst = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -498,14 +498,14 @@ const trimFirst = (array, valueArray) => {
 /**
  * array.operation.trimLast
  */
-const _trimLast = (array, valueArray) => {
+export const _trimLast = (array, valueArray) => {
   while (_some(valueArray, value => _isLast(array, [value]))) {
     _deleteIndex(array, array.length - 1);
   }
   return array;
 };
 
-const trimLast = (array, valueArray) => {
+export const trimLast = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
   }
@@ -527,7 +527,7 @@ const trimLast = (array, valueArray) => {
 /**
  * array.operation.trimBothEnds
  */
-const _trimBothEnds = (
+export const _trimBothEnds = (
   array, valueFirstArray, valueLastArray = valueFirstArray,
 ) => {
   while (_some(
@@ -545,7 +545,7 @@ const _trimBothEnds = (
   return array;
 };
 
-const trimBothEnds = (
+export const trimBothEnds = (
   array, valueFirstArray, valueLastArray = valueFirstArray,
 ) => {
   if (isObjectParameter(array, 'array, valueFirstArray', 'valueLastArray')) {
@@ -576,11 +576,11 @@ const trimBothEnds = (
 /**
  * array.operation.popFirst
  */
-const _popFirst = (array) => {
+export const _popFirst = (array) => {
   return array.shift();
 };
 
-const popFirst = (array) => {
+export const popFirst = (array) => {
   if (!isArray(array)) {
     throw new TypeError(
       'popFirst args(array) is not array',
@@ -593,11 +593,11 @@ const popFirst = (array) => {
 /**
  * array.operation.popLast
  */
-const _popLast = (array, value) => {
+export const _popLast = (array, value) => {
   return array.pop();
 };
 
-const popLast = (array, value) => {
+export const popLast = (array, value) => {
   if (isObjectParameter(array, 'array, value')) {
     ({ array, value } = array);
   }
@@ -614,13 +614,13 @@ const popLast = (array, value) => {
 /**
  * array.operation.pushFirst
  */
-const _pushFirst = (array, value) => {
+export const _pushFirst = (array, value) => {
   array.unshift(value);
   return array.length;
   // WSH array.unshift is return undefined
 };
 
-const pushFirst = (array, value) => {
+export const pushFirst = (array, value) => {
   if (isObjectParameter(array, 'array, value')) {
     ({ array, value } = array);
   }
@@ -637,11 +637,11 @@ const pushFirst = (array, value) => {
 /**
  * array.operation.pushLast
  */
-const _pushLast = (array, value) => {
+export const _pushLast = (array, value) => {
   return array.push(value);
 };
 
-const pushLast = (array, value) => {
+export const pushLast = (array, value) => {
   if (isObjectParameter(array, 'array, value')) {
     ({ array, value } = array);
   }
@@ -658,14 +658,14 @@ const pushLast = (array, value) => {
 /**
  * array.operation.remainFirst
  */
-const _remainFirst = (array, length) => {
+export const _remainFirst = (array, length) => {
   if (array.length <= length) {
     return array;
   }
   return _deleteIndex(array, length, array.length - 1);
 };
 
-const remainFirst = (array, length) => {
+export const remainFirst = (array, length) => {
   if (isObjectParameter(array, 'array, length')) {
     ({ array, length } = array);
   }
@@ -692,14 +692,14 @@ const remainFirst = (array, length) => {
 /**
  * array.operation.remainLast
  */
-const _remainLast = (array, length) => {
+export const _remainLast = (array, length) => {
   if (array.length <= length) {
     return array;
   }
   return _deleteLength(array, 0, array.length - length);
 };
 
-const remainLast = (array, length) => {
+export const remainLast = (array, length) => {
   if (isObjectParameter(array, 'array, length')) {
     ({ array, length } = array);
   }
@@ -726,7 +726,7 @@ const remainLast = (array, length) => {
 /**
  * filter
  */
-const _filter = (array, func) => {
+export const _filter = (array, func) => {
   for (let i = array.length -1; 0 <= i; i -= 1) {
     const resultFunc = func(array[i], i, array);
     if (!isBoolean(resultFunc)) {
@@ -741,7 +741,7 @@ const _filter = (array, func) => {
   return array;
 };
 
-const filter = (array, func) => {
+export const filter = (array, func) => {
   if (isObjectParameter(array, 'array, func')) {
     ({ array, func } = array);
   }
@@ -760,7 +760,7 @@ const filter = (array, func) => {
 };
 
 
-module.exports = {
+export default {
   _insert, _add,
   _deleteLength, _deleteIndex,
   _deleteFirst, _deleteLast,
@@ -783,5 +783,5 @@ module.exports = {
   remainFirst, remainLast,
   filter,
 
-};
+}
 

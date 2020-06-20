@@ -1,32 +1,32 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
   isStringArray,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
-const {
+import {
   _inRange,
-} = require('../number/number.js');
+} from '../number/number.js';
 
-const {
+import {
   _min, _max,
   _findFirst,
-} = require('../array/array.js');
+} from '../array/array.js';
 
-const {
+import {
   allMatchSome,
-} = require('../compare/compare.js');
+} from '../compare/compare.js';
 
 /**
  * repeat
  */
-const _repeat = (
+export const _repeat = (
   str,
   count,
 ) => {
@@ -37,7 +37,7 @@ const _repeat = (
   return result;
 };
 
-const repeat = (
+export const repeat = (
   str,
   count,
 ) => {
@@ -62,13 +62,13 @@ const repeat = (
 /**
  * isLowerCase
  */
-const _isLowerCase = (
+export const _isLowerCase = (
   str,
 ) => {
   return str.toLowerCase() === str;
 };
 
-const isLowerCase = (
+export const isLowerCase = (
   str,
 ) => {
   if (!isString(str)) {
@@ -83,13 +83,13 @@ const isLowerCase = (
 /**
  * isUpperCase
  */
-const _isUpperCase = (
+export const _isUpperCase = (
   str,
 ) => {
   return str.toUpperCase() === str;
 };
 
-const isUpperCase = (
+export const isUpperCase = (
   str,
 ) => {
   if (!isString(str)) {
@@ -104,14 +104,14 @@ const isUpperCase = (
 /**
  * indexOfFirst
  */
-const _indexOfFirst = (str, search, indexStart) => {
+export const _indexOfFirst = (str, search, indexStart) => {
   if (search === '') {
     return -1;
   }
   return str.indexOf(search, indexStart);
 };
 
-const indexOfFirst = (str, search, indexStart = 0) => {
+export const indexOfFirst = (str, search, indexStart = 0) => {
   if (isObjectParameter(str, 'str, search', 'indexStart')) {
     ({ str, search, indexStart = 0 } = str);
   }
@@ -143,7 +143,7 @@ const indexOfFirst = (str, search, indexStart = 0) => {
 /**
  * indexOfLast
  */
-const _indexOfLast = (
+export const _indexOfLast = (
   str, search, indexStart = _max([0, str.length - 1]),
 ) => {
   if (search === '') {
@@ -152,7 +152,7 @@ const _indexOfLast = (
   return str.lastIndexOf(search, indexStart);
 };
 
-const indexOfLast = (
+export const indexOfLast = (
   str, search, indexStart = _max([0, str.length - 1]),
 ) => {
   if (isObjectParameter(str, 'str, search', 'indexStart')) {
@@ -188,11 +188,11 @@ const indexOfLast = (
 /**
  * isFirst
  */
-const _isFirst = (str, search) => {
+export const _isFirst = (str, search) => {
   return _indexOfFirst(str, search) === 0;
 };
 
-const isFirst = (str, search) => {
+export const isFirst = (str, search) => {
   if (isObjectParameter(str, 'str, search')) {
     ({ str, search } = str);
   }
@@ -214,7 +214,7 @@ const isFirst = (str, search) => {
 /**
  * isLast
  */
-const _isLast = (str, search) => {
+export const _isLast = (str, search) => {
   const result = _indexOfLast(str, search);
   if (result === -1) {
     return false;
@@ -222,7 +222,7 @@ const _isLast = (str, search) => {
   return result === str.length - search.length;
 };
 
-const isLast = (str, search) => {
+export const isLast = (str, search) => {
   if (isObjectParameter(str, 'str, search')) {
     ({ str, search } = str);
   }
@@ -244,7 +244,7 @@ const isLast = (str, search) => {
 /**
  * isBothEnds
  */
-const _isBothEnds = (
+export const _isBothEnds = (
   str,
   searchFirst,
   searchLast = searchFirst,
@@ -255,7 +255,7 @@ const _isBothEnds = (
   return _isFirst(str, searchFirst) && _isLast(str, searchLast);
 };
 
-const isBothEnds = (
+export const isBothEnds = (
   str,
   searchFirst,
   searchLast = searchFirst,
@@ -289,14 +289,14 @@ const isBothEnds = (
 /**
  * string.includeFirst
  */
-const _includeFirst = (str, value) => {
+export const _includeFirst = (str, value) => {
   if (!_isFirst(str, value)) {
     return value + str;
   }
   return str;
 };
 
-const includeFirst = (str, value) => {
+export const includeFirst = (str, value) => {
   if (isObjectParameter(str, 'str, value')) {
     ({ str, value } = str);
   }
@@ -318,14 +318,14 @@ const includeFirst = (str, value) => {
 /**
  * string.includeLast
  */
-const _includeLast = (str, value) => {
+export const _includeLast = (str, value) => {
   if (!_isLast(str, value)) {
     return str + value;
   }
   return str;
 };
 
-const includeLast = (str, value) => {
+export const includeLast = (str, value) => {
   if (isObjectParameter(str, 'str, value')) {
     ({ str, value } = str);
   }
@@ -347,7 +347,7 @@ const includeLast = (str, value) => {
 /**
  * string.includeBothEnds
  */
-const _includeBothEnds = (
+export const _includeBothEnds = (
   str, valueFirst, valueLast = valueFirst,
 ) => {
   if (!_isBothEnds(str, valueFirst, valueLast)) {
@@ -356,7 +356,7 @@ const _includeBothEnds = (
   return str;
 };
 
-const includeBothEnds = (
+export const includeBothEnds = (
   str, valueFirst, valueLast = valueFirst,
 ) => {
   if (isObjectParameter(str, 'str, valueFirst', 'valueLast')) {
@@ -393,14 +393,14 @@ const includeBothEnds = (
 /**
  * string.excludeFirst
  */
-const _excludeFirst = (str, value) => {
+export const _excludeFirst = (str, value) => {
   if (_isFirst(str, value)) {
     return _deleteFirst(str, value.length);
   }
   return str;
 };
 
-const excludeFirst = (str, value) => {
+export const excludeFirst = (str, value) => {
   if (isObjectParameter(str, 'str, value')) {
     ({ str, value } = str);
   }
@@ -422,14 +422,14 @@ const excludeFirst = (str, value) => {
 /**
  * string.excludeLast
  */
-const _excludeLast = (str, value) => {
+export const _excludeLast = (str, value) => {
   if (_isLast(str, value)) {
     return _deleteLast(str, value.length);
   }
   return str;
 };
 
-const excludeLast = (str, value) => {
+export const excludeLast = (str, value) => {
   if (isObjectParameter(str, 'str, value')) {
     ({ str, value } = str);
   }
@@ -451,7 +451,7 @@ const excludeLast = (str, value) => {
 /**
  * string.excludeBothEnds
  */
-const _excludeBothEnds = (
+export const _excludeBothEnds = (
   str,
   valueFirst,
   valueLast = valueFirst,
@@ -463,7 +463,7 @@ const _excludeBothEnds = (
   return str;
 };
 
-const excludeBothEnds = (
+export const excludeBothEnds = (
   str,
   valueFirst,
   valueLast = valueFirst,
@@ -500,7 +500,7 @@ const excludeBothEnds = (
 /**
  * string.trimFirst
  */
-const _trimFirst = (
+export const _trimFirst = (
   str,
   valueArray = [' ', '\r', '\n'],
 ) => {
@@ -516,7 +516,7 @@ const _trimFirst = (
   return str;
 };
 
-const trimFirst = (str, valueArray = [' ', '\r', '\n']) => {
+export const trimFirst = (str, valueArray = [' ', '\r', '\n']) => {
   if (isObjectParameter(str, 'str, valueArray')) {
     ({ str, valueArray = [' ', '\r', '\n'] } = str);
   }
@@ -543,7 +543,7 @@ const trimFirst = (str, valueArray = [' ', '\r', '\n']) => {
 /**
  * string.trimLast
  */
-const _trimLast = (
+export const _trimLast = (
   str,
   valueArray = [' ', '\r', '\n'],
 ) => {
@@ -559,7 +559,7 @@ const _trimLast = (
   return str;
 };
 
-const trimLast = (str, valueArray = [' ', '\r', '\n']) => {
+export const trimLast = (str, valueArray = [' ', '\r', '\n']) => {
   if (isObjectParameter(str, 'str, valueArray')) {
     ({ str, valueArray = [' ', '\r', '\n'] } = str);
   }
@@ -586,7 +586,7 @@ const trimLast = (str, valueArray = [' ', '\r', '\n']) => {
 /**
  * string.trimBothEnds
  */
-const _trimBothEnds = (
+export const _trimBothEnds = (
   str,
   valueFirstArray = [' ', '\r', '\n'],
   valueLastArray = valueFirstArray,
@@ -612,7 +612,7 @@ const _trimBothEnds = (
   return str;
 };
 
-const trimBothEnds = (
+export const trimBothEnds = (
   str,
   valueFirstArray = [' ', '\r', '\n'],
   valueLastArray = valueFirstArray,
@@ -656,13 +656,13 @@ const trimBothEnds = (
 /**
  * subIndex
  */
-const _subIndex = (
+export const _subIndex = (
   str, indexStart, indexEnd = indexStart,
 ) => {
   return str.substring(indexStart, indexEnd + 1);
 };
 
-const subIndex = (
+export const subIndex = (
   str, indexStart, indexEnd = indexStart,
 ) => {
   if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
@@ -701,7 +701,7 @@ const subIndex = (
 /**
  * subLength
  */
-const _subLength = (
+export const _subLength = (
   str, index, length = str.length - index,
 ) => {
   return _subIndex(str, index, index + length - 1);
@@ -709,7 +709,7 @@ const _subLength = (
   //  return str.substring(index, index + length);
 };
 
-const subLength = (
+export const subLength = (
   str, index, length = str.length - index,
 ) => {
   if (isObjectParameter(str, 'str, index', 'length')) {
@@ -751,13 +751,13 @@ const subLength = (
 /**
  * subFirst
  */
-const _subFirst = (str, length = 1) => {
+export const _subFirst = (str, length = 1) => {
   return _subLength(
     str, 0, length,
   );
 };
 
-const subFirst = (str, length = 1) => {
+export const subFirst = (str, length = 1) => {
   if (isObjectParameter(str, 'str', 'length')) {
     ({ str, length = 1 } = str);
   }
@@ -784,13 +784,13 @@ const subFirst = (str, length = 1) => {
 /**
  * subLast
  */
-const _subLast = (str, length = 1) => {
+export const _subLast = (str, length = 1) => {
   return _subLength(
     str, str.length - length, length,
   );
 };
 
-const subLast = (str, length = 1) => {
+export const subLast = (str, length = 1) => {
   if (isObjectParameter(str, 'str', 'length')) {
     ({ str, length = 1 } = str);
   }
@@ -817,7 +817,7 @@ const subLast = (str, length = 1) => {
 /**
  * deleteIndex
  */
-const _deleteIndex = (
+export const _deleteIndex = (
   str, indexStart, indexEnd = indexStart,
 ) => {
   const startStr = str.slice(0, indexStart);
@@ -825,7 +825,7 @@ const _deleteIndex = (
   return startStr + endStr;
 };
 
-const deleteIndex = (
+export const deleteIndex = (
   str, indexStart, indexEnd = indexStart,
 ) => {
   if (isObjectParameter(str, 'str, indexStart', 'indexEnd')) {
@@ -864,13 +864,13 @@ const deleteIndex = (
 /**
  * deleteLength
  */
-const _deleteLength = (
+export const _deleteLength = (
   str, index, length = str.length - index,
 ) => {
   return _deleteIndex(str, index, index + length - 1);
 };
 
-const deleteLength = (
+export const deleteLength = (
   str, index, length = str.length - index,
 ) => {
   if (isObjectParameter(str, 'str, index', 'length')) {
@@ -912,13 +912,13 @@ const deleteLength = (
 /**
  * deleteFirst
  */
-const _deleteFirst = (str, length = 1) => {
+export const _deleteFirst = (str, length = 1) => {
   return _deleteLength(
     str, 0, length,
   );
 };
 
-const deleteFirst = (str, length = 1) => {
+export const deleteFirst = (str, length = 1) => {
   if (isObjectParameter(str, 'str', 'length')) {
     ({ str, length = 1 } = str);
   }
@@ -945,13 +945,13 @@ const deleteFirst = (str, length = 1) => {
 /**
  * deleteLast
  */
-const _deleteLast = (str, length = 1) => {
+export const _deleteLast = (str, length = 1) => {
   return _deleteLength(
     str, str.length - length, length,
   );
 };
 
-const deleteLast = (str, length = 1) => {
+export const deleteLast = (str, length = 1) => {
   if (isObjectParameter(str, 'str', 'length')) {
     ({ str, length = 1 } = str);
   }
@@ -978,13 +978,13 @@ const deleteLast = (str, length = 1) => {
 /**
  * string.insert
  */
-const _insert = (str, value, index = 0) => {
+export const _insert = (str, value, index = 0) => {
   str = _subFirst(str, index)
     + value + _subLast(str, str.length - index);
   return str;
 };
 
-const insert = (str, value, index = 0) => {
+export const insert = (str, value, index = 0) => {
   if (isObjectParameter(str, 'str, value', 'index')) {
     ({ str, value, index = 0 } = str);
   }
@@ -1016,13 +1016,13 @@ const insert = (str, value, index = 0) => {
 /**
  * string.add
  */
-const _add = (str, value, index = str.length - 1) => {
+export const _add = (str, value, index = str.length - 1) => {
   str = _subFirst(str, index + 1)
     + value + _subLast(str, str.length - index - 1);
   return str;
 };
 
-const add = (str, value, index = str.length - 1) => {
+export const add = (str, value, index = str.length - 1) => {
   if (isObjectParameter(str, 'str, value', 'index')) {
     ({ str, value, index = str.length - 1 } = str);
   }
@@ -1051,7 +1051,7 @@ const add = (str, value, index = str.length - 1) => {
   return _add(str, value, index);
 };
 
-module.exports = {
+export default {
   _repeat,
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
@@ -1074,4 +1074,4 @@ module.exports = {
   deleteIndex, deleteLength, deleteFirst, deleteLast,
   insert, add,
 
-};
+}

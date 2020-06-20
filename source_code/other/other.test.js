@@ -1,4 +1,4 @@
-const test_execute_other = (parts) => {
+export const test_execute_other = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
   describe('test_execute_other', () => {
 
@@ -17,6 +17,6 @@ const test_execute_other = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_other,
-};
+}

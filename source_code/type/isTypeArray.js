@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -15,32 +15,32 @@ const {
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
 
-} = require('../type/isType.js');
+} from '../type/isType.js';
 
-const {
+import {
   isException,
   isNotException,
-} = require('../type/isException.js');
+} from '../type/isException.js';
 
-const {
+import {
   isSymbol, isNotSymbol,
-} = require('../type/isSymbol.js');
+} from '../type/isSymbol.js';
 
-const {
+import {
   isMap, isNotMap,
   isWeakMap, isNotWeakMap,
-} = require('../type/isMap.js');
+} from '../type/isMap.js';
 
-const {
+import {
   isSet, isNotSet,
   isWeakSet, isNotWeakSet,
-} = require('../type/isSet.js');
+} from '../type/isSet.js';
 
-const {
+import {
   _isTypeArray,
-} = require('../type/isTypeAll.js');
+} from '../type/isTypeAll.js';
 
-const _isTypeArrayCheckFunc = (func) => {
+export const _isTypeArrayCheckFunc = (func) => {
   return (array) => {
     if (!isArray(array)) {
       return false;
@@ -49,81 +49,81 @@ const _isTypeArrayCheckFunc = (func) => {
   };
 };
 
-const isUndefinedArray        = _isTypeArrayCheckFunc(isUndefined);
-const isNullArray             = _isTypeArrayCheckFunc(isNull);
-const isNaNStrictArray        = _isTypeArrayCheckFunc(isNaNStrict);
-const isBooleanArray          = _isTypeArrayCheckFunc(isBoolean);
-const isNumberArray           = _isTypeArrayCheckFunc(isNumber);
-const isIntegerArray          = _isTypeArrayCheckFunc(isInteger);
-const isStringArray           = _isTypeArrayCheckFunc(isString);
-const isFunctionArray         = _isTypeArrayCheckFunc(isFunction);
-const isObjectArray           = _isTypeArrayCheckFunc(isObject);
-const isObjectTypeArray       = _isTypeArrayCheckFunc(isObjectType);
-const isArrayArray            = _isTypeArrayCheckFunc(isArray);
-const isArrayTypeArray        = _isTypeArrayCheckFunc(isArrayType);
-const isDateArray             = _isTypeArrayCheckFunc(isDate);
-const isRegExpArray           = _isTypeArrayCheckFunc(isRegExp);
-const isExceptionArray        = _isTypeArrayCheckFunc(isException);
-const isBooleanObjectArray    = _isTypeArrayCheckFunc(isBooleanObject);
-const isNumberObjectArray     = _isTypeArrayCheckFunc(isNumberObject);
-const isStringObjectArray     = _isTypeArrayCheckFunc(isStringObject);
-const isEmptyObjectArray      = _isTypeArrayCheckFunc(isEmptyObject);
-const isEmptyArrayArray       = _isTypeArrayCheckFunc(isEmptyArray);
-const isSymbolArray           = _isTypeArrayCheckFunc(isSymbol);
-const isMapArray              = _isTypeArrayCheckFunc(isMap);
-const isWeakMapArray          = _isTypeArrayCheckFunc(isWeakMap);
-const isSetArray              = _isTypeArrayCheckFunc(isSet);
-const isWeakSetArray          = _isTypeArrayCheckFunc(isWeakSet);
+export const isUndefinedArray        = _isTypeArrayCheckFunc(isUndefined);
+export const isNullArray             = _isTypeArrayCheckFunc(isNull);
+export const isNaNStrictArray        = _isTypeArrayCheckFunc(isNaNStrict);
+export const isBooleanArray          = _isTypeArrayCheckFunc(isBoolean);
+export const isNumberArray           = _isTypeArrayCheckFunc(isNumber);
+export const isIntegerArray          = _isTypeArrayCheckFunc(isInteger);
+export const isStringArray           = _isTypeArrayCheckFunc(isString);
+export const isFunctionArray         = _isTypeArrayCheckFunc(isFunction);
+export const isObjectArray           = _isTypeArrayCheckFunc(isObject);
+export const isObjectTypeArray       = _isTypeArrayCheckFunc(isObjectType);
+export const isArrayArray            = _isTypeArrayCheckFunc(isArray);
+export const isArrayTypeArray        = _isTypeArrayCheckFunc(isArrayType);
+export const isDateArray             = _isTypeArrayCheckFunc(isDate);
+export const isRegExpArray           = _isTypeArrayCheckFunc(isRegExp);
+export const isExceptionArray        = _isTypeArrayCheckFunc(isException);
+export const isBooleanObjectArray    = _isTypeArrayCheckFunc(isBooleanObject);
+export const isNumberObjectArray     = _isTypeArrayCheckFunc(isNumberObject);
+export const isStringObjectArray     = _isTypeArrayCheckFunc(isStringObject);
+export const isEmptyObjectArray      = _isTypeArrayCheckFunc(isEmptyObject);
+export const isEmptyArrayArray       = _isTypeArrayCheckFunc(isEmptyArray);
+export const isSymbolArray           = _isTypeArrayCheckFunc(isSymbol);
+export const isMapArray              = _isTypeArrayCheckFunc(isMap);
+export const isWeakMapArray          = _isTypeArrayCheckFunc(isWeakMap);
+export const isSetArray              = _isTypeArrayCheckFunc(isSet);
+export const isWeakSetArray          = _isTypeArrayCheckFunc(isWeakSet);
 
-const isNotUndefinedArray     = _isTypeArrayCheckFunc(isNotUndefined);
-const isNotNullArray          = _isTypeArrayCheckFunc(isNotNull);
-const isNotNaNStrictArray     = _isTypeArrayCheckFunc(isNotNaNStrict);
-const isNotBooleanArray       = _isTypeArrayCheckFunc(isNotBoolean);
-const isNotNumberArray        = _isTypeArrayCheckFunc(isNotNumber);
-const isNotIntegerArray       = _isTypeArrayCheckFunc(isNotInteger);
-const isNotStringArray        = _isTypeArrayCheckFunc(isNotString);
-const isNotFunctionArray      = _isTypeArrayCheckFunc(isNotFunction);
-const isNotObjectArray        = _isTypeArrayCheckFunc(isNotObject);
-const isNotObjectTypeArray    = _isTypeArrayCheckFunc(isNotObjectType);
-const isNotArrayArray         = _isTypeArrayCheckFunc(isNotArray);
-const isNotArrayTypeArray     = _isTypeArrayCheckFunc(isNotArrayType);
-const isNotDateArray          = _isTypeArrayCheckFunc(isNotDate);
-const isNotRegExpArray        = _isTypeArrayCheckFunc(isNotRegExp);
-const isNotExceptionArray     = _isTypeArrayCheckFunc(isNotException);
-const isNotBooleanObjectArray = _isTypeArrayCheckFunc(isNotBooleanObject);
-const isNotNumberObjectArray  = _isTypeArrayCheckFunc(isNotNumberObject);
-const isNotStringObjectArray  = _isTypeArrayCheckFunc(isNotStringObject);
-const isNotEmptyObjectArray   = _isTypeArrayCheckFunc(isNotEmptyObject);
-const isNotEmptyArrayArray    = _isTypeArrayCheckFunc(isNotEmptyArray);
-const isNotSymbolArray        = _isTypeArrayCheckFunc(isNotSymbol);
-const isNotMapArray           = _isTypeArrayCheckFunc(isNotMap);
-const isNotWeakMapArray       = _isTypeArrayCheckFunc(isNotWeakMap);
-const isNotSetArray           = _isTypeArrayCheckFunc(isNotSet);
-const isNotWeakSetArray       = _isTypeArrayCheckFunc(isNotWeakSet);
+export const isNotUndefinedArray     = _isTypeArrayCheckFunc(isNotUndefined);
+export const isNotNullArray          = _isTypeArrayCheckFunc(isNotNull);
+export const isNotNaNStrictArray     = _isTypeArrayCheckFunc(isNotNaNStrict);
+export const isNotBooleanArray       = _isTypeArrayCheckFunc(isNotBoolean);
+export const isNotNumberArray        = _isTypeArrayCheckFunc(isNotNumber);
+export const isNotIntegerArray       = _isTypeArrayCheckFunc(isNotInteger);
+export const isNotStringArray        = _isTypeArrayCheckFunc(isNotString);
+export const isNotFunctionArray      = _isTypeArrayCheckFunc(isNotFunction);
+export const isNotObjectArray        = _isTypeArrayCheckFunc(isNotObject);
+export const isNotObjectTypeArray    = _isTypeArrayCheckFunc(isNotObjectType);
+export const isNotArrayArray         = _isTypeArrayCheckFunc(isNotArray);
+export const isNotArrayTypeArray     = _isTypeArrayCheckFunc(isNotArrayType);
+export const isNotDateArray          = _isTypeArrayCheckFunc(isNotDate);
+export const isNotRegExpArray        = _isTypeArrayCheckFunc(isNotRegExp);
+export const isNotExceptionArray     = _isTypeArrayCheckFunc(isNotException);
+export const isNotBooleanObjectArray = _isTypeArrayCheckFunc(isNotBooleanObject);
+export const isNotNumberObjectArray  = _isTypeArrayCheckFunc(isNotNumberObject);
+export const isNotStringObjectArray  = _isTypeArrayCheckFunc(isNotStringObject);
+export const isNotEmptyObjectArray   = _isTypeArrayCheckFunc(isNotEmptyObject);
+export const isNotEmptyArrayArray    = _isTypeArrayCheckFunc(isNotEmptyArray);
+export const isNotSymbolArray        = _isTypeArrayCheckFunc(isNotSymbol);
+export const isNotMapArray           = _isTypeArrayCheckFunc(isNotMap);
+export const isNotWeakMapArray       = _isTypeArrayCheckFunc(isNotWeakMap);
+export const isNotSetArray           = _isTypeArrayCheckFunc(isNotSet);
+export const isNotWeakSetArray       = _isTypeArrayCheckFunc(isNotWeakSet);
 
-const isUndefArray        = isUndefinedArray;
-const isBoolArray         = isBooleanArray;
-const isNumArray          = isNumberArray;
-const isIntArray          = isIntegerArray;
-const isStrArray          = isStringArray;
-const isFuncArray         = isFunctionArray;
-const isObjArray          = isObjectArray;
-const isObjTypeArray      = isObjectTypeArray;
-const isExceptArray       = isExceptionArray;
-const isEmptyObjArray     = isEmptyObjectArray;
+export const isUndefArray        = isUndefinedArray;
+export const isBoolArray         = isBooleanArray;
+export const isNumArray          = isNumberArray;
+export const isIntArray          = isIntegerArray;
+export const isStrArray          = isStringArray;
+export const isFuncArray         = isFunctionArray;
+export const isObjArray          = isObjectArray;
+export const isObjTypeArray      = isObjectTypeArray;
+export const isExceptArray       = isExceptionArray;
+export const isEmptyObjArray     = isEmptyObjectArray;
 
-const isNotUndefArray     = isNotUndefinedArray;
-const isNotBoolArray      = isNotBooleanArray;
-const isNotNumArray       = isNotNumberArray;
-const isNotIntArray       = isNotIntegerArray;
-const isNotStrArray       = isNotStringArray;
-const isNotFuncArray      = isNotFunctionArray;
-const isNotObjArray       = isNotObjectArray;
-const isNotObjTypeArray   = isNotObjectTypeArray;
-const isNotExceptArray    = isNotExceptionArray;
-const isNotEmptyObjArray  = isNotEmptyObjectArray;
+export const isNotUndefArray     = isNotUndefinedArray;
+export const isNotBoolArray      = isNotBooleanArray;
+export const isNotNumArray       = isNotNumberArray;
+export const isNotIntArray       = isNotIntegerArray;
+export const isNotStrArray       = isNotStringArray;
+export const isNotFuncArray      = isNotFunctionArray;
+export const isNotObjArray       = isNotObjectArray;
+export const isNotObjTypeArray   = isNotObjectTypeArray;
+export const isNotExceptArray    = isNotExceptionArray;
+export const isNotEmptyObjArray  = isNotEmptyObjectArray;
 
-module.exports = {
+export default {
   isUndefinedArray, isNullArray, isNaNStrictArray,
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray, isObjectArray, isObjectTypeArray,
@@ -160,5 +160,5 @@ module.exports = {
   isNotExceptArray,
   isNotEmptyObjArray,
 
-};
+}
 

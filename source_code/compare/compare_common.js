@@ -1,4 +1,4 @@
-const {
+import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectType,
@@ -7,16 +7,16 @@ const {
   isException,
   isMap, isWeakMap,
   isSet, isWeakSet,
-} = require('../type/type.js');
+} from '../type/type.js';
 
-const {
+import {
   isObjectParameter,
-} = require('../object/isObjectParameter.js');
+} from '../object/isObjectParameter.js';
 
 /**
  * or
  */
-const _or = (value, compareArray) => {
+export const _or = (value, compareArray) => {
   for (let i = 0; i < compareArray.length; i += 1) {
     if (value === compareArray[i]) {
       return true;
@@ -25,7 +25,7 @@ const _or = (value, compareArray) => {
   return false;
 };
 
-const or = (value, compareArray) => {
+export const or = (value, compareArray) => {
   if (isObjectParameter(value, 'value,compareArray')) {
     ({ value, compareArray } = value);
   }
@@ -39,7 +39,7 @@ const or = (value, compareArray) => {
   return _or(value, compareArray);
 };
 
-module.exports = {
+export default {
   _or,
   or,
-};
+}

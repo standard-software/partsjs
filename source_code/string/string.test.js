@@ -1,4 +1,4 @@
-const test_execute_string = (parts) => {
+export const test_execute_string = (parts) => {
   const { describe, it } = parts.test;
   describe('test_execute_string', () => {
 
@@ -1220,6 +1220,6 @@ const test_execute_string = (parts) => {
   });
 };
 
-module.exports = {
+export default {
   test_execute_string,
-};
+}
