@@ -1,27 +1,17 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchFormat = exports._matchFormat = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
+
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
 /**
  * matchFormat
  */
-
-
 var _matchFormat = function _matchFormat(formatName, value) {
   var patterns = Object.keys(_matchFormat.pattern);
   var index = patterns.indexOf(formatName);
@@ -32,13 +22,14 @@ var _matchFormat = function _matchFormat(formatName, value) {
 
   var result = _matchFormat.pattern[patterns[index]](value);
 
-  if (!isBoolean(result)) {
+  if (!(0, _type.isBoolean)(result)) {
     throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + ' function result is not boolean');
   }
 
   return result;
 };
 
+exports._matchFormat = _matchFormat;
 _matchFormat.pattern = {};
 
 _matchFormat.clear = function () {
@@ -209,24 +200,26 @@ _matchFormat.reset = function () {
 _matchFormat.reset();
 
 var matchFormat = function matchFormat(formatName, value) {
-  if (isObjectParameter(formatName, 'formatName,value')) {
+  if ((0, _isObjectParameter.isObjectParameter)(formatName, 'formatName,value')) {
     var _formatName = formatName;
     formatName = _formatName.formatName;
     value = _formatName.value;
   }
 
-  if (!isString(formatName)) {
+  if (!(0, _type.isString)(formatName)) {
     throw new TypeError('matchFormat args(formatName) is not string');
   }
 
-  if (!isString(value)) {
+  if (!(0, _type.isString)(value)) {
     throw new TypeError('matchFormat args(value) is not string');
   }
 
   return _matchFormat(formatName, value);
 };
 
-module.exports = {
+exports.matchFormat = matchFormat;
+var _default = {
   _matchFormat: _matchFormat,
   matchFormat: matchFormat
 };
+exports["default"] = _default;

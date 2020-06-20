@@ -1,5 +1,14 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.cloneDeep = exports._cloneDeep = exports.clone = exports._clone = exports.cloneFunction = void 0;
+
+var _type = require("../type/type.js");
+
+var _object = require("../object/object.js");
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14,42 +23,15 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isBooleanObject = _require.isBooleanObject,
-    isNumberObject = _require.isNumberObject,
-    isStringObject = _require.isStringObject,
-    isSymbol = _require.isSymbol,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
-
-var _require2 = require('../object/object.js'),
-    _copyProperty = _require2._copyProperty;
 /**
  * cloneFunction
  */
-
-
 var cloneFunction = {}; // function is no clone
 
+exports.cloneFunction = cloneFunction;
+
 cloneFunction.cloneIgnoreFunction = function (source) {
-  if (!isFunction(source)) {
+  if (!(0, _type.isFunction)(source)) {
     return undefined;
   }
 
@@ -66,7 +48,7 @@ cloneFunction.cloneObject = function (source) {
     return value;
   };
 
-  if (!isObject(source)) {
+  if (!(0, _type.isObject)(source)) {
     return undefined;
   }
 
@@ -89,7 +71,7 @@ cloneFunction.cloneArrayType = function (source) {
     return value;
   };
 
-  if (!isArrayType(source)) {
+  if (!(0, _type.isArrayType)(source)) {
     return undefined;
   }
 
@@ -122,7 +104,7 @@ cloneFunction.cloneObjectType = function (source) {
     return value;
   };
 
-  if (!isObjectType(source)) {
+  if (!(0, _type.isObjectType)(source)) {
     return undefined;
   }
 
@@ -174,7 +156,7 @@ cloneFunction.cloneObjectType = function (source) {
 cloneFunction.cloneDate = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!isDate(source)) {
+  if (!(0, _type.isDate)(source)) {
     return undefined;
   }
 
@@ -186,7 +168,7 @@ cloneFunction.cloneDate = function (source) {
 cloneFunction.cloneRegExp = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!isRegExp(source)) {
+  if (!(0, _type.isRegExp)(source)) {
     return undefined;
   }
 
@@ -205,7 +187,7 @@ cloneFunction.cloneMap = function (source) {
     return value;
   };
 
-  if (!isMap(source)) {
+  if (!(0, _type.isMap)(source)) {
     return undefined;
   }
 
@@ -233,7 +215,7 @@ cloneFunction.cloneMap = function (source) {
 };
 
 cloneFunction.cloneIgnoreWeakMap = function (source) {
-  if (!isWeakMap(source)) {
+  if (!(0, _type.isWeakMap)(source)) {
     return undefined;
   }
 
@@ -246,7 +228,7 @@ cloneFunction.cloneIgnoreWeakMap = function (source) {
 cloneFunction.cloneSet = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!isSet(source)) {
+  if (!(0, _type.isSet)(source)) {
     return undefined;
   }
 
@@ -271,7 +253,7 @@ cloneFunction.cloneSet = function (source) {
 };
 
 cloneFunction.cloneIgnoreWeakSet = function (source) {
-  if (!isWeakSet(source)) {
+  if (!(0, _type.isWeakSet)(source)) {
     return undefined;
   }
 
@@ -284,14 +266,14 @@ cloneFunction.cloneIgnoreWeakSet = function (source) {
 
 var _clone = function _clone(source) {
   var __clone = function __clone(value) {
-    if (isUndefined(value)) {
+    if ((0, _type.isUndefined)(value)) {
       return undefined;
     }
 
     for (var i = 0, l = _clone.functions.length; i < l; i += 1) {
       var result = _clone.functions[i](value);
 
-      if (!isUndefined(result)) {
+      if (!(0, _type.isUndefined)(result)) {
         return result;
       }
     }
@@ -302,6 +284,7 @@ var _clone = function _clone(source) {
   return __clone(source);
 };
 
+exports._clone = _clone;
 _clone.functions = [];
 
 _clone.clear = function () {
@@ -340,11 +323,11 @@ var clone = function clone(source) {
   return _clone(source);
 };
 
-_copyProperty(_clone, 'clear,reset,add,' + '', clone);
+exports.clone = clone;
+(0, _object._copyProperty)(_clone, 'clear,reset,add,' + '', clone);
 /**
  * cloneDeep
  */
-
 
 var _cloneDeep = function _cloneDeep(source) {
   var CircularReferenceBuffer = {
@@ -359,7 +342,7 @@ var _cloneDeep = function _cloneDeep(source) {
       return CircularReferenceBuffer.clone[index];
     }
 
-    if (isUndefined(value)) {
+    if ((0, _type.isUndefined)(value)) {
       return undefined;
     }
 
@@ -369,7 +352,7 @@ var _cloneDeep = function _cloneDeep(source) {
         CircularReferenceBuffer.clone.push(clone);
       }, __cloneDeep);
 
-      if (!isUndefined(result)) {
+      if (!(0, _type.isUndefined)(result)) {
         return result;
       }
     }
@@ -380,6 +363,7 @@ var _cloneDeep = function _cloneDeep(source) {
   return __cloneDeep(source);
 };
 
+exports._cloneDeep = _cloneDeep;
 _cloneDeep.functions = [];
 
 _cloneDeep.clear = function (func) {
@@ -418,12 +402,13 @@ var cloneDeep = function cloneDeep(source) {
   return _cloneDeep(source);
 };
 
-_copyProperty(_cloneDeep, 'clear,reset,add,' + '', cloneDeep);
-
-module.exports = {
+exports.cloneDeep = cloneDeep;
+(0, _object._copyProperty)(_cloneDeep, 'clear,reset,add,' + '', cloneDeep);
+var _default = {
   _clone: _clone,
   _cloneDeep: _cloneDeep,
   clone: clone,
   cloneDeep: cloneDeep,
   cloneFunction: cloneFunction
 };
+exports["default"] = _default;

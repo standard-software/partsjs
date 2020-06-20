@@ -1,5 +1,14 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.equalDeep = exports._equalDeep = exports.equal = exports._equal = exports.equalFunction = void 0;
+
+var _type = require("../type/type.js");
+
+var _object = require("../object/object.js");
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14,58 +23,14 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet,
-    isUndefinedAll = _require.isUndefinedAll,
-    isNullAll = _require.isNullAll,
-    isNaNStrictAll = _require.isNaNStrictAll,
-    isBooleanAll = _require.isBooleanAll,
-    isNumberAll = _require.isNumberAll,
-    isIntegerAll = _require.isIntegerAll,
-    isStringAll = _require.isStringAll,
-    isFunctionAll = _require.isFunctionAll,
-    isObjectAll = _require.isObjectAll,
-    isObjectTypeAll = _require.isObjectTypeAll,
-    isArrayAll = _require.isArrayAll,
-    isArrayTypeAll = _require.isArrayTypeAll,
-    isDateAll = _require.isDateAll,
-    isRegExpAll = _require.isRegExpAll,
-    isExceptionAll = _require.isExceptionAll,
-    isMapAll = _require.isMapAll,
-    isWeakMapAll = _require.isWeakMapAll,
-    isSetAll = _require.isSetAll,
-    isWeakSetAll = _require.isWeakSetAll;
-
-var _require2 = require('../object/object.js'),
-    _copyProperty = _require2._copyProperty,
-    isObjectParameter = _require2.isObjectParameter;
 /**
  * equalFunction
  */
-
-
 var equalFunction = {};
+exports.equalFunction = equalFunction;
 
 equalFunction.equalValue = function (value1, value2) {
-  if (isNaNStrict(value1) && isNaNStrict(value2)) {
+  if ((0, _type.isNaNStrict)(value1) && (0, _type.isNaNStrict)(value2)) {
     return true;
   }
 
@@ -74,7 +39,7 @@ equalFunction.equalValue = function (value1, value2) {
 
 
 equalFunction.equalFunction = function (value1, value2) {
-  if (!isFunctionAll(value1, value2)) {
+  if (!(0, _type.isFunctionAll)(value1, value2)) {
     return;
   }
 
@@ -88,7 +53,7 @@ equalFunction.equalObject = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isObjectAll(value1, value2)) {
+  if (!(0, _type.isObjectAll)(value1, value2)) {
     return;
   }
 
@@ -119,7 +84,7 @@ equalFunction.equalArrayType = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isArrayTypeAll(value1, value2)) {
+  if (!(0, _type.isArrayTypeAll)(value1, value2)) {
     return;
   }
 
@@ -139,7 +104,7 @@ equalFunction.equalArrayType = function (value1, value2) {
 };
 
 equalFunction.equalDate = function (value1, value2) {
-  if (!isDateAll(value1, value2)) {
+  if (!(0, _type.isDateAll)(value1, value2)) {
     return;
   }
 
@@ -147,7 +112,7 @@ equalFunction.equalDate = function (value1, value2) {
 };
 
 equalFunction.equalRegExp = function (value1, value2) {
-  if (!isRegExpAll(value1, value2)) {
+  if (!(0, _type.isRegExpAll)(value1, value2)) {
     return;
   }
 
@@ -161,7 +126,7 @@ equalFunction.equalMap = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isMapAll(value1, value2)) {
+  if (!(0, _type.isMapAll)(value1, value2)) {
     return;
   }
 
@@ -200,7 +165,7 @@ equalFunction.equalWeakMap = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isWeakMapAll(value1, value2)) {
+  if (!(0, _type.isWeakMapAll)(value1, value2)) {
     return;
   }
 
@@ -239,7 +204,7 @@ equalFunction.equalSet = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isSetAll(value1, value2)) {
+  if (!(0, _type.isSetAll)(value1, value2)) {
     return;
   }
 
@@ -294,7 +259,7 @@ equalFunction.equalWeakSet = function (value1, value2) {
     return v1 === v2;
   };
 
-  if (!isWeakSetAll(value1, value2)) {
+  if (!(0, _type.isWeakSetAll)(value1, value2)) {
     return;
   }
 
@@ -351,7 +316,7 @@ var _equal = function _equal(value1, value2) {
     for (var i = 0, l = _equal.functions.length; i < l; i += 1) {
       var result = _equal.functions[i](value1, value2);
 
-      if (!isUndefined(result)) {
+      if (!(0, _type.isUndefined)(result)) {
         return result;
       }
     }
@@ -362,6 +327,7 @@ var _equal = function _equal(value1, value2) {
   return __equal(value1, value2);
 };
 
+exports._equal = _equal;
 _equal.functions = [];
 
 _equal.clear = function () {
@@ -399,7 +365,7 @@ _equal.reset = function () {
 _equal.reset();
 
 var equal = function equal(value1, value2) {
-  if (isObjectParameter(value1, 'value1, value2')) {
+  if ((0, _object.isObjectParameter)(value1, 'value1, value2')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
@@ -408,11 +374,11 @@ var equal = function equal(value1, value2) {
   return _equal(value1, value2);
 };
 
-_copyProperty(_equal, 'clear,reset,add,' + '', equal);
+exports.equal = equal;
+(0, _object._copyProperty)(_equal, 'clear,reset,add,' + '', equal);
 /**
  * equalDeep
  */
-
 
 var _equalDeep = function _equalDeep(value1, value2) {
   var CircularReferenceBuffer = {
@@ -437,7 +403,7 @@ var _equalDeep = function _equalDeep(value1, value2) {
         CircularReferenceBuffer.v2Array.push(v2);
       }, __equalDeep);
 
-      if (!isUndefined(result)) {
+      if (!(0, _type.isUndefined)(result)) {
         return result;
       }
     }
@@ -448,6 +414,7 @@ var _equalDeep = function _equalDeep(value1, value2) {
   return __equalDeep(value1, value2);
 };
 
+exports._equalDeep = _equalDeep;
 _equalDeep.functions = [];
 
 _equalDeep.clear = function () {
@@ -485,7 +452,7 @@ _equalDeep.reset = function () {
 _equalDeep.reset();
 
 var equalDeep = function equalDeep(value1, value2) {
-  if (isObjectParameter(value1, 'value1,value2')) {
+  if ((0, _object.isObjectParameter)(value1, 'value1,value2')) {
     var _value2 = value1;
     value1 = _value2.value1;
     value2 = _value2.value2;
@@ -494,12 +461,13 @@ var equalDeep = function equalDeep(value1, value2) {
   return _equalDeep(value1, value2);
 };
 
-_copyProperty(_equalDeep, 'clear,reset,add,' + '', equalDeep);
-
-module.exports = {
+exports.equalDeep = equalDeep;
+(0, _object._copyProperty)(_equalDeep, 'clear,reset,add,' + '', equalDeep);
+var _default = {
   _equal: _equal,
   _equalDeep: _equalDeep,
   equal: equal,
   equalDeep: equalDeep,
   equalFunction: equalFunction
 };
+exports["default"] = _default;

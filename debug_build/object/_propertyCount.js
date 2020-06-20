@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._propertyCount = void 0;
+
 /**
  * propertyCount
  */
@@ -22,6 +27,8 @@ var _propertyCount = function _propertyCount(object) {
   return result;
 };
 
-module.exports = {
+exports._propertyCount = _propertyCount;
+var _default = {
   _propertyCount: _propertyCount
 };
+exports["default"] = _default;

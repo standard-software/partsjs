@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_consoleHook = void 0;
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -133,6 +138,8 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_consoleHook = test_execute_consoleHook;
+var _default = {
   test_execute_consoleHook: test_execute_consoleHook
 };
+exports["default"] = _default;

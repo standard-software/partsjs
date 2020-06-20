@@ -1,63 +1,49 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchAll = exports._matchAll = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
 
-var _require3 = require('../array/array_common.js'),
-    _all = _require3._all;
+var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _require4 = require('../compare/match.js'),
-    _match = _require4._match;
+var _array_common = require("../array/array_common.js");
+
+var _match2 = require("../compare/match.js");
+
 /**
  * matchAll
  */
-
-
 var _matchAll = function _matchAll(value, compareArray) {
-  return _all(compareArray, function (compare) {
-    return _match(value, compare);
+  return (0, _array_common._all)(compareArray, function (compare) {
+    return (0, _match2._match)(value, compare);
   });
 };
 
+exports._matchAll = _matchAll;
+
 var matchAll = function matchAll(value, compareArray) {
-  if (isObjectParameter(value, 'value,compareArray')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
-  } else if (isObjectParameter(compareArray, 'compareArray')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
     var _compareArray = compareArray;
     compareArray = _compareArray.compareArray;
   }
 
-  if (!isArray(compareArray)) {
+  if (!(0, _type.isArray)(compareArray)) {
     throw new TypeError('matchAll args(compareArray) is not array');
   }
 
   return _matchAll(value, compareArray);
 };
 
-module.exports = {
+exports.matchAll = matchAll;
+var _default = {
   _matchAll: _matchAll,
   matchAll: matchAll
 };
+exports["default"] = _default;

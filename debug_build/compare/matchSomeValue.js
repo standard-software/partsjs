@@ -1,88 +1,75 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchSomeValue = exports._matchSomeValue = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
 
-var _require3 = require('../compare/matchSome.js'),
-    _matchSome = _require3._matchSome;
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
+var _matchSome2 = require("../compare/matchSome.js");
+
 /**
  * matchSomeValue
  */
-
-
 var _matchSomeValue = function _matchSomeValue(value, compareArray, match) {
   var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
 
-  if (_matchSome(value, compareArray)) {
-    if (isFunction(match)) {
+  if ((0, _matchSome2._matchSome)(value, compareArray)) {
+    if ((0, _type.isFunction)(match)) {
       return match(value);
     }
 
     return match;
   }
 
-  if (isFunction(unmatch)) {
+  if ((0, _type.isFunction)(unmatch)) {
     return unmatch(value);
   }
 
   return unmatch;
 };
 
+exports._matchSomeValue = _matchSomeValue;
+
 var matchSomeValue = function matchSomeValue(value, compareArray, match) {
   var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
 
-  if (isObjectParameter(value, 'value, compareArray, match', 'unmatch')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray, match', 'unmatch')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
     match = _value.match;
     var _value$unmatch = _value.unmatch;
     unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
-  } else if (isObjectParameter(compareArray, 'compareArray, match', 'unmatch')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray, match', 'unmatch')) {
     var _compareArray = compareArray;
     compareArray = _compareArray.compareArray;
     match = _compareArray.match;
     var _compareArray$unmatch = _compareArray.unmatch;
     unmatch = _compareArray$unmatch === void 0 ? value : _compareArray$unmatch;
-  } else if (isObjectParameter(match, 'match', 'unmatch')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
     var _match = match;
     match = _match.match;
     var _match$unmatch = _match.unmatch;
     unmatch = _match$unmatch === void 0 ? value : _match$unmatch;
-  } else if (isObjectParameter(unmatch, 'unmatch')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
     var _unmatch = unmatch;
     unmatch = _unmatch.unmatch;
   }
 
-  if (!isArray(compareArray)) {
+  if (!(0, _type.isArray)(compareArray)) {
     throw new TypeError('matchSomeValue args(compareArray) is not array');
   }
 
   return _matchSomeValue(value, compareArray, match, unmatch);
 };
 
-module.exports = {
+exports.matchSomeValue = matchSomeValue;
+var _default = {
   _matchSomeValue: _matchSomeValue,
   matchSomeValue: matchSomeValue
 };
+exports["default"] = _default;

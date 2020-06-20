@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_number = void 0;
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -243,6 +248,8 @@ var test_execute_number = function test_execute_number(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_number = test_execute_number;
+var _default = {
   test_execute_number: test_execute_number
 };
+exports["default"] = _default;

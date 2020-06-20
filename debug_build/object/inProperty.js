@@ -1,55 +1,44 @@
 "use strict";
 
-var _require = require('../type/isType.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.inProp = exports.inProperty = exports._inProperty = void 0;
 
-var _require2 = require('../string/_replaceAll.js'),
-    _replaceAll = _require2._replaceAll;
+var _isType = require("../type/isType.js");
 
-var _require3 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require3.isObjectParameter;
+var _replaceAll2 = require("../string/_replaceAll.js");
 
-var _require4 = require('../object/object_common.js'),
-    _getPropertyBase = _require4._getPropertyBase;
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
+var _object_common = require("../object/object_common.js");
+
 /**
  * _inProperty
  */
-
-
 var _inProperty = function _inProperty(object, propertyPathArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (!isObject(object)) {
+  if (!(0, _isType.isObject)(object)) {
     return false;
   }
 
-  if (isString(propertyPathArray)) {
-    propertyPathArray = _replaceAll(propertyPathArray, ' ', '').split(',');
+  if ((0, _isType.isString)(propertyPathArray)) {
+    propertyPathArray = (0, _replaceAll2._replaceAll)(propertyPathArray, ' ', '').split(',');
   }
 
   for (var i = 0; i < propertyPathArray.length; i += 1) {
     if (i !== 0 && i === propertyPathArray.length - 1) {
-      if (propertyPathArray[i] === '' || isUndefined(propertyPathArray[i])) {
+      if (propertyPathArray[i] === '' || (0, _isType.isUndefined)(propertyPathArray[i])) {
         continue;
       }
     }
 
-    if (!isString(propertyPathArray[i])) {
+    if (!(0, _isType.isString)(propertyPathArray[i])) {
       throw new TypeError('_inProperty args(propertyArray) element is not string');
     }
 
-    var result = _getPropertyBase(object, propertyPathArray[i], hasOwn);
+    var result = (0, _object_common._getPropertyBase)(object, propertyPathArray[i], hasOwn);
 
     if (result["in"] === false) {
       return false;
@@ -63,10 +52,12 @@ var _inProperty = function _inProperty(object, propertyPathArray) {
  */
 
 
+exports._inProperty = _inProperty;
+
 var inProperty = function inProperty(object, propertyPathArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (isObjectParameter(object, 'object, propertyPathArray', 'hasOwn')) {
+  if ((0, _isObjectParameter.isObjectParameter)(object, 'object, propertyPathArray', 'hasOwn')) {
     var _object = object;
     object = _object.object;
     propertyPathArray = _object.propertyPathArray;
@@ -74,26 +65,29 @@ var inProperty = function inProperty(object, propertyPathArray) {
     hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   }
 
-  if (!isObject(object)) {
+  if (!(0, _isType.isObject)(object)) {
     throw new TypeError('inProperty args(object) is not object');
   }
 
-  if (!isString(propertyPathArray)) {
-    if (!isArray(propertyPathArray)) {
+  if (!(0, _isType.isString)(propertyPathArray)) {
+    if (!(0, _isType.isArray)(propertyPathArray)) {
       throw new TypeError('inProperty args(propertyPathArray) is not [array|string]');
     }
   }
 
-  if (!isBoolean(hasOwn)) {
+  if (!(0, _isType.isBoolean)(hasOwn)) {
     throw new TypeError('inProperty args(hasOwn) is not boolean');
   }
 
   return _inProperty(object, propertyPathArray, hasOwn);
 };
 
+exports.inProperty = inProperty;
 var inProp = inProperty;
-module.exports = {
+exports.inProp = inProp;
+var _default = {
   _inProperty: _inProperty,
   inProperty: inProperty,
   inProp: inProp
 };
+exports["default"] = _default;

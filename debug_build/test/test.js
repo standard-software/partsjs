@@ -1,37 +1,21 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isError = _require.isError,
-    isException = _require.isException;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.testCounter = exports.expect = exports.checkEqual = exports.checkCompare = exports.test = exports.it = exports.describe = exports.testFrame = void 0;
 
-var _require2 = require('../array/array.js'),
-    _map = _require2._map;
+var _type = require("../type/type.js");
 
-var _require3 = require('../string/string.js'),
-    _repeat = _require3._repeat;
+var _array = require("../array/array.js");
 
-var _require4 = require('../compare/compare.js'),
-    equal = _require4.equal,
-    equalDeep = _require4.equalDeep;
+var _string = require("../string/string.js");
+
+var _compare = require("../compare/compare.js");
+
 /**
  * test framework
  */
-
-
 var testFrame = {
   describeArray: [],
   testName: '',
@@ -39,11 +23,11 @@ var testFrame = {
   outputDescribe: true,
   outputIt: false
 };
+exports.testFrame = testFrame;
 
 var describe = function describe(text, func) {
   if (testFrame.outputDescribe) {
-    var indent = _repeat(' ', testFrame.describeArray.length * 2);
-
+    var indent = (0, _string._repeat)(' ', testFrame.describeArray.length * 2);
     console.log("".concat(indent, "describe: ").concat(text));
   }
 
@@ -52,8 +36,10 @@ var describe = function describe(text, func) {
   testFrame.describeArray.pop();
 };
 
+exports.describe = describe;
+
 var it = function it(text, func) {
-  var indent = _repeat(' ', testFrame.outputDescribe ? testFrame.describeArray.length * 2 : 2);
+  var indent = (0, _string._repeat)(' ', testFrame.outputDescribe ? testFrame.describeArray.length * 2 : 2);
 
   var consoleLogTestName = function consoleLogTestName() {
     console.log(indent + "test: ".concat(testFrame.testName));
@@ -80,12 +66,14 @@ var it = function it(text, func) {
   testFrame.testName = '';
 };
 
+exports.it = it;
 var test = it;
+exports.test = test;
 
 var checkCompare = function checkCompare(compareFunc, a, b) {
   var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-  if (!isString(message)) {
+  if (!(0, _type.isString)(message)) {
     throw new TypeError('checkEqual args message is not string');
   }
 
@@ -95,20 +83,23 @@ var checkCompare = function checkCompare(compareFunc, a, b) {
     return true;
   }
 
-  var indent = _repeat(' ', testFrame.describeArray.length * 2);
-
-  var output = _map(testFrame.describeArray, function (desc, i) {
-    return _repeat('  ', i) + "describe: ".concat(desc);
+  var indent = (0, _string._repeat)(' ', testFrame.describeArray.length * 2);
+  var output = (0, _array._map)(testFrame.describeArray, function (desc, i) {
+    return (0, _string._repeat)('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
-  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(isString(a) ? "'" + a + "'" : String(a), "\n") + "".concat(indent, "  B = ").concat(isString(b) ? "'" + b + "'" : String(b));
+  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat((0, _type.isString)(a) ? "'" + a + "'" : String(a), "\n") + "".concat(indent, "  B = ").concat((0, _type.isString)(b) ? "'" + b + "'" : String(b));
   console.log(output);
   return false;
 };
 
+exports.checkCompare = checkCompare;
+
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  return checkCompare(equalDeep, a, b, message);
+  return checkCompare(_compare.equalDeep, a, b, message);
 };
+
+exports.checkEqual = checkEqual;
 
 var expect = function expect(a) {
   var toBe = function toBe(b) {
@@ -129,7 +120,7 @@ var expect = function expect(a) {
 
   var notToEqual = function notToEqual(b) {
     return checkCompare(function (v1, v2) {
-      return !equalDeep(v1, v2);
+      return !(0, _compare.equalDeep)(v1, v2);
     }, a, b);
   };
 
@@ -143,10 +134,12 @@ var expect = function expect(a) {
   };
 };
 
+exports.expect = expect;
+
 var testCounter = function testCounter() {
   var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-  if (isInteger(value)) {
+  if ((0, _type.isInteger)(value)) {
     testFrame.counter = value;
   }
 
@@ -157,19 +150,21 @@ var testCounter = function testCounter() {
  */
 
 
+exports.testCounter = testCounter;
+
 var isThrown = function isThrown(targetFunc, compareFunc) {
-  if (!isFunction(targetFunc)) {
+  if (!(0, _type.isFunction)(targetFunc)) {
     throw new TypeError('isThrown args targetFunc is not function');
   }
 
-  if (!(isFunction(compareFunc) || isUndefined(compareFunc))) {
+  if (!((0, _type.isFunction)(compareFunc) || (0, _type.isUndefined)(compareFunc))) {
     throw new TypeError('isThrown args compareFunc is not function');
   }
 
   try {
     targetFunc();
   } catch (e) {
-    if (isUndefined(compareFunc)) {
+    if ((0, _type.isUndefined)(compareFunc)) {
       return true;
     }
 
@@ -179,21 +174,25 @@ var isThrown = function isThrown(targetFunc, compareFunc) {
   return false;
 };
 
+exports.isThrown = isThrown;
+
 var isThrownValue = function isThrownValue(targetFunc, thrownValue) {
   return isThrown(targetFunc, function (thrown) {
     return thrown === thrownValue;
   });
 };
 
+exports.isThrownValue = isThrownValue;
+
 var isThrownException = function isThrownException(targetFunc) {
   var exceptionName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-  if (!isString(exceptionName)) {
+  if (!(0, _type.isString)(exceptionName)) {
     throw new TypeError('isThrownException args exceptionName is not string');
   }
 
   return isThrown(targetFunc, function (thrown) {
-    if (isException(thrown)) {
+    if ((0, _type.isException)(thrown)) {
       if (exceptionName === '') {
         return true;
       }
@@ -205,13 +204,16 @@ var isThrownException = function isThrownException(targetFunc) {
   });
 };
 
+exports.isThrownException = isThrownException;
+
 var isNotThrown = function isNotThrown(targetFunc) {
   return !isThrown(targetFunc, function () {
     return true;
   });
 };
 
-module.exports = {
+exports.isNotThrown = isNotThrown;
+var _default = {
   checkEqual: checkEqual,
   checkCompare: checkCompare,
   describe: describe,
@@ -224,3 +226,4 @@ module.exports = {
   isNotThrown: isNotThrown,
   testCounter: testCounter
 };
+exports["default"] = _default;

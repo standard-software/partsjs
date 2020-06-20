@@ -1,5 +1,34 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_index = void 0;
+
+var _rootTest = require("./root/root.test.js");
+
+var _typeTest = require("./type/type.test.js");
+
+var _syntaxTest = require("./syntax/syntax.test.js");
+
+var _testTest = require("./test/test.test.js");
+
+var _compareTest = require("./compare/compare.test.js");
+
+var _convertTest = require("./convert/convert.test.js");
+
+var _numberTest = require("./number/number.test.js");
+
+var _stringTest = require("./string/string.test.js");
+
+var _objectTest = require("./object/object.test.js");
+
+var _arrayTest = require("./array/array.test.js");
+
+var _consoleHookTest = require("./consoleHook/consoleHook.test.js");
+
+var _otherTest = require("./other/other.test.js");
+
 var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
   console.log("platform: ".concat(parts.platform.name()));
@@ -15,42 +44,6 @@ var test_execute_index = function test_execute_index(parts) {
 
   console.log('test start');
 
-  var _require = require('./root/root.test.js'),
-      test_execute_root = _require.test_execute_root;
-
-  var _require2 = require('./type/type.test.js'),
-      test_execute_type = _require2.test_execute_type;
-
-  var _require3 = require('./syntax/syntax.test.js'),
-      test_execute_syntax = _require3.test_execute_syntax;
-
-  var _require4 = require('./test/test.test.js'),
-      test_execute_test = _require4.test_execute_test;
-
-  var _require5 = require('./compare/compare.test.js'),
-      test_execute_compare = _require5.test_execute_compare;
-
-  var _require6 = require('./convert/convert.test.js'),
-      test_execute_convert = _require6.test_execute_convert;
-
-  var _require7 = require('./number/number.test.js'),
-      test_execute_number = _require7.test_execute_number;
-
-  var _require8 = require('./string/string.test.js'),
-      test_execute_string = _require8.test_execute_string;
-
-  var _require9 = require('./object/object.test.js'),
-      test_execute_object = _require9.test_execute_object;
-
-  var _require10 = require('./array/array.test.js'),
-      test_execute_array = _require10.test_execute_array;
-
-  var _require11 = require('./consoleHook/consoleHook.test.js'),
-      test_execute_consoleHook = _require11.test_execute_consoleHook;
-
-  var _require12 = require('./other/other.test.js'),
-      test_execute_other = _require12.test_execute_other;
-
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var _parts$test = parts.test,
         describe = _parts$test.describe,
@@ -61,7 +54,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = parts.platform.isWindowsScriptHost() ? [317, 13, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36] : [317, 13, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
+        var countArray = [317, 15, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -103,23 +96,25 @@ var test_execute_index = function test_execute_index(parts) {
 
   var describe = parts.test.describe;
   describe('test_execute_index', function () {
-    test_execute_root(parts);
-    test_execute_type(parts);
-    test_execute_syntax(parts);
-    test_execute_test(parts);
-    test_execute_compare(parts);
-    test_execute_convert(parts);
-    test_execute_number(parts);
-    test_execute_string(parts);
-    test_execute_object(parts);
-    test_execute_array(parts);
-    test_execute_consoleHook(parts);
-    test_execute_other(parts);
+    (0, _rootTest.test_execute_root)(parts);
+    (0, _typeTest.test_execute_type)(parts);
+    (0, _syntaxTest.test_execute_syntax)(parts);
+    (0, _testTest.test_execute_test)(parts);
+    (0, _compareTest.test_execute_compare)(parts);
+    (0, _convertTest.test_execute_convert)(parts);
+    (0, _numberTest.test_execute_number)(parts);
+    (0, _stringTest.test_execute_string)(parts);
+    (0, _objectTest.test_execute_object)(parts);
+    (0, _arrayTest.test_execute_array)(parts);
+    (0, _consoleHookTest.test_execute_consoleHook)(parts);
+    (0, _otherTest.test_execute_other)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
   });
 };
 
-module.exports = {
+exports.test_execute_index = test_execute_index;
+var _default = {
   test_execute_index: test_execute_index
 };
+exports["default"] = _default;

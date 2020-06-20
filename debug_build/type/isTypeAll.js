@@ -1,70 +1,24 @@
 "use strict";
 
-var _require = require('../type/isType.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isBooleanObject = _require.isBooleanObject,
-    isNumberObject = _require.isNumberObject,
-    isStringObject = _require.isStringObject,
-    isEmptyObject = _require.isEmptyObject,
-    isEmptyArray = _require.isEmptyArray,
-    isNotUndefined = _require.isNotUndefined,
-    isNotNull = _require.isNotNull,
-    isNotNaNStrict = _require.isNotNaNStrict,
-    isNotBoolean = _require.isNotBoolean,
-    isNotNumber = _require.isNotNumber,
-    isNotInteger = _require.isNotInteger,
-    isNotString = _require.isNotString,
-    isNotFunction = _require.isNotFunction,
-    isNotObject = _require.isNotObject,
-    isNotObjectType = _require.isNotObjectType,
-    isNotArray = _require.isNotArray,
-    isNotArrayType = _require.isNotArrayType,
-    isNotDate = _require.isNotDate,
-    isNotRegExp = _require.isNotRegExp,
-    isNotBooleanObject = _require.isNotBooleanObject,
-    isNotNumberObject = _require.isNotNumberObject,
-    isNotStringObject = _require.isNotStringObject,
-    isNotEmptyObject = _require.isNotEmptyObject,
-    isNotEmptyArray = _require.isNotEmptyArray;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.isNotEmptyObjAll = exports.isNotExceptAll = exports.isNotObjTypeAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isEmptyObjAll = exports.isExceptAll = exports.isObjTypeAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArrayTypeAll = exports.isNotArrayAll = exports.isNotObjectTypeAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArrayTypeAll = exports.isArrayAll = exports.isObjectTypeAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports._isTypeAllCheckFunc = exports._isTypeArray = void 0;
 
-var _require2 = require('../type/isException.js'),
-    isException = _require2.isException,
-    isNotException = _require2.isNotException;
+var _isType = require("../type/isType.js");
 
-var _require3 = require('../type/isSymbol.js'),
-    isSymbol = _require3.isSymbol,
-    isNotSymbol = _require3.isNotSymbol;
+var _isException = require("../type/isException.js");
 
-var _require4 = require('../type/isMap.js'),
-    isMap = _require4.isMap,
-    isNotMap = _require4.isNotMap,
-    isWeakMap = _require4.isWeakMap,
-    isNotWeakMap = _require4.isNotWeakMap;
+var _isSymbol = require("../type/isSymbol.js");
 
-var _require5 = require('../type/isSet.js'),
-    isSet = _require5.isSet,
-    isNotSet = _require5.isNotSet,
-    isWeakSet = _require5.isWeakSet,
-    isNotWeakSet = _require5.isNotWeakSet;
+var _isMap = require("../type/isMap.js");
+
+var _isSet = require("../type/isSet.js");
+
 /**
  * _isTypeArray
  * check type for array argument.
  */
-
-
 var _isTypeArray = function _isTypeArray(isTypeFunc, argsArray) {
   var l = argsArray.length;
 
@@ -83,6 +37,8 @@ var _isTypeArray = function _isTypeArray(isTypeFunc, argsArray) {
   }
 };
 
+exports._isTypeArray = _isTypeArray;
+
 var _isTypeAllCheckFunc = function _isTypeAllCheckFunc(func) {
   return function () {
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -93,127 +49,248 @@ var _isTypeAllCheckFunc = function _isTypeAllCheckFunc(func) {
   };
 };
 
-var isUndefinedAll = _isTypeAllCheckFunc(isUndefined);
+exports._isTypeAllCheckFunc = _isTypeAllCheckFunc;
 
-var isNullAll = _isTypeAllCheckFunc(isNull);
+var isUndefinedAll = _isTypeAllCheckFunc(_isType.isUndefined);
 
-var isNaNStrictAll = _isTypeAllCheckFunc(isNaNStrict);
+exports.isUndefinedAll = isUndefinedAll;
 
-var isBooleanAll = _isTypeAllCheckFunc(isBoolean);
+var isNullAll = _isTypeAllCheckFunc(_isType.isNull);
 
-var isNumberAll = _isTypeAllCheckFunc(isNumber);
+exports.isNullAll = isNullAll;
 
-var isIntegerAll = _isTypeAllCheckFunc(isInteger);
+var isNaNStrictAll = _isTypeAllCheckFunc(_isType.isNaNStrict);
 
-var isStringAll = _isTypeAllCheckFunc(isString);
+exports.isNaNStrictAll = isNaNStrictAll;
 
-var isFunctionAll = _isTypeAllCheckFunc(isFunction);
+var isBooleanAll = _isTypeAllCheckFunc(_isType.isBoolean);
 
-var isObjectAll = _isTypeAllCheckFunc(isObject);
+exports.isBooleanAll = isBooleanAll;
 
-var isObjectTypeAll = _isTypeAllCheckFunc(isObjectType);
+var isNumberAll = _isTypeAllCheckFunc(_isType.isNumber);
 
-var isArrayAll = _isTypeAllCheckFunc(isArray);
+exports.isNumberAll = isNumberAll;
 
-var isArrayTypeAll = _isTypeAllCheckFunc(isArrayType);
+var isIntegerAll = _isTypeAllCheckFunc(_isType.isInteger);
 
-var isDateAll = _isTypeAllCheckFunc(isDate);
+exports.isIntegerAll = isIntegerAll;
 
-var isRegExpAll = _isTypeAllCheckFunc(isRegExp);
+var isStringAll = _isTypeAllCheckFunc(_isType.isString);
 
-var isExceptionAll = _isTypeAllCheckFunc(isException);
+exports.isStringAll = isStringAll;
 
-var isBooleanObjectAll = _isTypeAllCheckFunc(isBooleanObject);
+var isFunctionAll = _isTypeAllCheckFunc(_isType.isFunction);
 
-var isNumberObjectAll = _isTypeAllCheckFunc(isNumberObject);
+exports.isFunctionAll = isFunctionAll;
 
-var isStringObjectAll = _isTypeAllCheckFunc(isStringObject);
+var isObjectAll = _isTypeAllCheckFunc(_isType.isObject);
 
-var isEmptyObjectAll = _isTypeAllCheckFunc(isEmptyObject);
+exports.isObjectAll = isObjectAll;
 
-var isEmptyArrayAll = _isTypeAllCheckFunc(isEmptyArray);
+var isObjectTypeAll = _isTypeAllCheckFunc(_isType.isObjectType);
 
-var isSymbolAll = _isTypeAllCheckFunc(isSymbol);
+exports.isObjectTypeAll = isObjectTypeAll;
 
-var isMapAll = _isTypeAllCheckFunc(isMap);
+var isArrayAll = _isTypeAllCheckFunc(_isType.isArray);
 
-var isWeakMapAll = _isTypeAllCheckFunc(isWeakMap);
+exports.isArrayAll = isArrayAll;
 
-var isSetAll = _isTypeAllCheckFunc(isSet);
+var isArrayTypeAll = _isTypeAllCheckFunc(_isType.isArrayType);
 
-var isWeakSetAll = _isTypeAllCheckFunc(isWeakSet);
+exports.isArrayTypeAll = isArrayTypeAll;
 
-var isNotUndefinedAll = _isTypeAllCheckFunc(isNotUndefined);
+var isDateAll = _isTypeAllCheckFunc(_isType.isDate);
 
-var isNotNullAll = _isTypeAllCheckFunc(isNotNull);
+exports.isDateAll = isDateAll;
 
-var isNotNaNStrictAll = _isTypeAllCheckFunc(isNotNaNStrict);
+var isRegExpAll = _isTypeAllCheckFunc(_isType.isRegExp);
 
-var isNotBooleanAll = _isTypeAllCheckFunc(isNotBoolean);
+exports.isRegExpAll = isRegExpAll;
 
-var isNotNumberAll = _isTypeAllCheckFunc(isNotNumber);
+var isExceptionAll = _isTypeAllCheckFunc(_isException.isException);
 
-var isNotIntegerAll = _isTypeAllCheckFunc(isNotInteger);
+exports.isExceptionAll = isExceptionAll;
 
-var isNotStringAll = _isTypeAllCheckFunc(isNotString);
+var isBooleanObjectAll = _isTypeAllCheckFunc(_isType.isBooleanObject);
 
-var isNotFunctionAll = _isTypeAllCheckFunc(isNotFunction);
+exports.isBooleanObjectAll = isBooleanObjectAll;
 
-var isNotObjectAll = _isTypeAllCheckFunc(isNotObject);
+var isNumberObjectAll = _isTypeAllCheckFunc(_isType.isNumberObject);
 
-var isNotObjectTypeAll = _isTypeAllCheckFunc(isNotObjectType);
+exports.isNumberObjectAll = isNumberObjectAll;
 
-var isNotArrayAll = _isTypeAllCheckFunc(isNotArray);
+var isStringObjectAll = _isTypeAllCheckFunc(_isType.isStringObject);
 
-var isNotArrayTypeAll = _isTypeAllCheckFunc(isNotArrayType);
+exports.isStringObjectAll = isStringObjectAll;
 
-var isNotDateAll = _isTypeAllCheckFunc(isNotDate);
+var isEmptyObjectAll = _isTypeAllCheckFunc(_isType.isEmptyObject);
 
-var isNotRegExpAll = _isTypeAllCheckFunc(isNotRegExp);
+exports.isEmptyObjectAll = isEmptyObjectAll;
 
-var isNotExceptionAll = _isTypeAllCheckFunc(isNotException);
+var isEmptyArrayAll = _isTypeAllCheckFunc(_isType.isEmptyArray);
 
-var isNotBooleanObjectAll = _isTypeAllCheckFunc(isNotBooleanObject);
+exports.isEmptyArrayAll = isEmptyArrayAll;
 
-var isNotNumberObjectAll = _isTypeAllCheckFunc(isNotNumberObject);
+var isSymbolAll = _isTypeAllCheckFunc(_isSymbol.isSymbol);
 
-var isNotStringObjectAll = _isTypeAllCheckFunc(isNotStringObject);
+exports.isSymbolAll = isSymbolAll;
 
-var isNotEmptyObjectAll = _isTypeAllCheckFunc(isNotEmptyObject);
+var isMapAll = _isTypeAllCheckFunc(_isMap.isMap);
 
-var isNotEmptyArrayAll = _isTypeAllCheckFunc(isNotEmptyArray);
+exports.isMapAll = isMapAll;
 
-var isNotSymbolAll = _isTypeAllCheckFunc(isNotSymbol);
+var isWeakMapAll = _isTypeAllCheckFunc(_isMap.isWeakMap);
 
-var isNotMapAll = _isTypeAllCheckFunc(isNotMap);
+exports.isWeakMapAll = isWeakMapAll;
 
-var isNotWeakMapAll = _isTypeAllCheckFunc(isNotWeakMap);
+var isSetAll = _isTypeAllCheckFunc(_isSet.isSet);
 
-var isNotSetAll = _isTypeAllCheckFunc(isNotSet);
+exports.isSetAll = isSetAll;
 
-var isNotWeakSetAll = _isTypeAllCheckFunc(isNotWeakSet);
+var isWeakSetAll = _isTypeAllCheckFunc(_isSet.isWeakSet);
 
+exports.isWeakSetAll = isWeakSetAll;
+
+var isNotUndefinedAll = _isTypeAllCheckFunc(_isType.isNotUndefined);
+
+exports.isNotUndefinedAll = isNotUndefinedAll;
+
+var isNotNullAll = _isTypeAllCheckFunc(_isType.isNotNull);
+
+exports.isNotNullAll = isNotNullAll;
+
+var isNotNaNStrictAll = _isTypeAllCheckFunc(_isType.isNotNaNStrict);
+
+exports.isNotNaNStrictAll = isNotNaNStrictAll;
+
+var isNotBooleanAll = _isTypeAllCheckFunc(_isType.isNotBoolean);
+
+exports.isNotBooleanAll = isNotBooleanAll;
+
+var isNotNumberAll = _isTypeAllCheckFunc(_isType.isNotNumber);
+
+exports.isNotNumberAll = isNotNumberAll;
+
+var isNotIntegerAll = _isTypeAllCheckFunc(_isType.isNotInteger);
+
+exports.isNotIntegerAll = isNotIntegerAll;
+
+var isNotStringAll = _isTypeAllCheckFunc(_isType.isNotString);
+
+exports.isNotStringAll = isNotStringAll;
+
+var isNotFunctionAll = _isTypeAllCheckFunc(_isType.isNotFunction);
+
+exports.isNotFunctionAll = isNotFunctionAll;
+
+var isNotObjectAll = _isTypeAllCheckFunc(_isType.isNotObject);
+
+exports.isNotObjectAll = isNotObjectAll;
+
+var isNotObjectTypeAll = _isTypeAllCheckFunc(_isType.isNotObjectType);
+
+exports.isNotObjectTypeAll = isNotObjectTypeAll;
+
+var isNotArrayAll = _isTypeAllCheckFunc(_isType.isNotArray);
+
+exports.isNotArrayAll = isNotArrayAll;
+
+var isNotArrayTypeAll = _isTypeAllCheckFunc(_isType.isNotArrayType);
+
+exports.isNotArrayTypeAll = isNotArrayTypeAll;
+
+var isNotDateAll = _isTypeAllCheckFunc(_isType.isNotDate);
+
+exports.isNotDateAll = isNotDateAll;
+
+var isNotRegExpAll = _isTypeAllCheckFunc(_isType.isNotRegExp);
+
+exports.isNotRegExpAll = isNotRegExpAll;
+
+var isNotExceptionAll = _isTypeAllCheckFunc(_isException.isNotException);
+
+exports.isNotExceptionAll = isNotExceptionAll;
+
+var isNotBooleanObjectAll = _isTypeAllCheckFunc(_isType.isNotBooleanObject);
+
+exports.isNotBooleanObjectAll = isNotBooleanObjectAll;
+
+var isNotNumberObjectAll = _isTypeAllCheckFunc(_isType.isNotNumberObject);
+
+exports.isNotNumberObjectAll = isNotNumberObjectAll;
+
+var isNotStringObjectAll = _isTypeAllCheckFunc(_isType.isNotStringObject);
+
+exports.isNotStringObjectAll = isNotStringObjectAll;
+
+var isNotEmptyObjectAll = _isTypeAllCheckFunc(_isType.isNotEmptyObject);
+
+exports.isNotEmptyObjectAll = isNotEmptyObjectAll;
+
+var isNotEmptyArrayAll = _isTypeAllCheckFunc(_isType.isNotEmptyArray);
+
+exports.isNotEmptyArrayAll = isNotEmptyArrayAll;
+
+var isNotSymbolAll = _isTypeAllCheckFunc(_isSymbol.isNotSymbol);
+
+exports.isNotSymbolAll = isNotSymbolAll;
+
+var isNotMapAll = _isTypeAllCheckFunc(_isMap.isNotMap);
+
+exports.isNotMapAll = isNotMapAll;
+
+var isNotWeakMapAll = _isTypeAllCheckFunc(_isMap.isNotWeakMap);
+
+exports.isNotWeakMapAll = isNotWeakMapAll;
+
+var isNotSetAll = _isTypeAllCheckFunc(_isSet.isNotSet);
+
+exports.isNotSetAll = isNotSetAll;
+
+var isNotWeakSetAll = _isTypeAllCheckFunc(_isSet.isNotWeakSet);
+
+exports.isNotWeakSetAll = isNotWeakSetAll;
 var isUndefAll = isUndefinedAll;
+exports.isUndefAll = isUndefAll;
 var isBoolAll = isBooleanAll;
+exports.isBoolAll = isBoolAll;
 var isNumAll = isNumberAll;
+exports.isNumAll = isNumAll;
 var isIntAll = isIntegerAll;
+exports.isIntAll = isIntAll;
 var isStrAll = isStringAll;
+exports.isStrAll = isStrAll;
 var isFuncAll = isFunctionAll;
+exports.isFuncAll = isFuncAll;
 var isObjAll = isObjectAll;
+exports.isObjAll = isObjAll;
 var isObjTypeAll = isObjectTypeAll;
+exports.isObjTypeAll = isObjTypeAll;
 var isExceptAll = isExceptionAll;
+exports.isExceptAll = isExceptAll;
 var isEmptyObjAll = isEmptyObjectAll;
+exports.isEmptyObjAll = isEmptyObjAll;
 var isNotUndefAll = isNotUndefinedAll;
+exports.isNotUndefAll = isNotUndefAll;
 var isNotBoolAll = isNotBooleanAll;
+exports.isNotBoolAll = isNotBoolAll;
 var isNotNumAll = isNotNumberAll;
+exports.isNotNumAll = isNotNumAll;
 var isNotIntAll = isNotIntegerAll;
+exports.isNotIntAll = isNotIntAll;
 var isNotStrAll = isNotStringAll;
+exports.isNotStrAll = isNotStrAll;
 var isNotFuncAll = isNotFunctionAll;
+exports.isNotFuncAll = isNotFuncAll;
 var isNotObjAll = isNotObjectAll;
+exports.isNotObjAll = isNotObjAll;
 var isNotObjTypeAll = isNotObjectTypeAll;
+exports.isNotObjTypeAll = isNotObjTypeAll;
 var isNotExceptAll = isNotExceptionAll;
+exports.isNotExceptAll = isNotExceptAll;
 var isNotEmptyObjAll = isNotEmptyObjectAll;
-module.exports = {
+exports.isNotEmptyObjAll = isNotEmptyObjAll;
+var _default = {
   _isTypeArray: _isTypeArray,
   isUndefinedAll: isUndefinedAll,
   isNullAll: isNullAll,
@@ -286,3 +363,4 @@ module.exports = {
   isNotExceptAll: isNotExceptAll,
   isNotEmptyObjAll: isNotEmptyObjAll
 };
+exports["default"] = _default;

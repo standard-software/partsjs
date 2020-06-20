@@ -1,43 +1,20 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isUndefinedArray = _require.isUndefinedArray,
-    isNullArray = _require.isNullArray,
-    isNaNStrictArray = _require.isNaNStrictArray,
-    isBooleanArray = _require.isBooleanArray,
-    isNumberArray = _require.isNumberArray,
-    isIntegerArray = _require.isIntegerArray,
-    isStringArray = _require.isStringArray,
-    isFunctionArray = _require.isFunctionArray,
-    isObjectArray = _require.isObjectArray,
-    isArrayArray = _require.isArrayArray,
-    isDateArray = _require.isDateArray,
-    isRegExpArray = _require.isRegExpArray,
-    isExceptionArray = _require.isExceptionArray;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.NumberArray = exports._NumberArray = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
+
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
 /**
  * NumberArray
  */
-
-
 var _NumberArray = function _NumberArray(start, end, increment) {
-  if (isUndefined(increment)) {
-    if (isUndefined(end)) {
+  if ((0, _type.isUndefined)(increment)) {
+    if ((0, _type.isUndefined)(end)) {
       increment = 1;
       end = increment * start - 1;
       start = 0;
@@ -79,42 +56,46 @@ var _NumberArray = function _NumberArray(start, end, increment) {
   return result;
 };
 
+exports._NumberArray = _NumberArray;
+
 var NumberArray = function NumberArray(start, end, increment) {
-  if (isObjectParameter(start, 'count')) {
+  if ((0, _isObjectParameter.isObjectParameter)(start, 'count')) {
     var _start = start;
     start = _start.count;
     end = undefined;
     increment = undefined;
-  } else if (isObjectParameter(start, 'start, end', 'increment')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(start, 'start, end', 'increment')) {
     var _start2 = start;
     start = _start2.start;
     end = _start2.end;
     increment = _start2.increment;
-  } else if (isObjectParameter(end, 'end', 'increment')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(end, 'end', 'increment')) {
     var _end = end;
     end = _end.end;
     increment = _end.increment;
-  } else if (isObjectParameter(increment, 'increment')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(increment, 'increment')) {
     var _increment = increment;
     increment = _increment.increment;
   }
 
-  if (!isNumber(start)) {
+  if (!(0, _type.isNumber)(start)) {
     throw new TypeError('NumberArray args(start) is not number');
   }
 
-  if (!isUndefined(end) && !isNumber(end)) {
+  if (!(0, _type.isUndefined)(end) && !(0, _type.isNumber)(end)) {
     throw new TypeError('NumberArray args(end) is not number');
   }
 
-  if (!isUndefined(increment) && !isNumber(increment)) {
+  if (!(0, _type.isUndefined)(increment) && !(0, _type.isNumber)(increment)) {
     throw new TypeError('NumberArray args(increment) is not number');
   }
 
   return _NumberArray(start, end, increment);
 };
 
-module.exports = {
+exports.NumberArray = NumberArray;
+var _default = {
   _NumberArray: _NumberArray,
   NumberArray: NumberArray
 };
+exports["default"] = _default;

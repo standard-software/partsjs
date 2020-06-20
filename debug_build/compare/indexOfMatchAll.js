@@ -1,67 +1,53 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.indexOfMatchAll = exports._indexOfMatchAll = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
 
-var _require3 = require('../array/array_common.js'),
-    _findFirstIndex = _require3._findFirstIndex;
+var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _require4 = require('../compare/matchAll.js'),
-    _matchAll = _require4._matchAll;
+var _array_common = require("../array/array_common.js");
+
+var _matchAll2 = require("../compare/matchAll.js");
+
 /**
  * indexOfMatchAll
  */
-
-
 var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
-  return _findFirstIndex(valueArray, function (value) {
-    return _matchAll(value, compareArray);
+  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
+    return (0, _matchAll2._matchAll)(value, compareArray);
   });
 };
 
+exports._indexOfMatchAll = _indexOfMatchAll;
+
 var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
-  if (isObjectParameter(valueArray, 'valueArray, compareArray')) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
     compareArray = _valueArray.compareArray;
-  } else if (isObjectParameter(compareArray, 'compareArray')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
     var _compareArray = compareArray;
     compareArray = _compareArray.compareArray;
   }
 
-  if (!isArray(valueArray)) {
+  if (!(0, _type.isArray)(valueArray)) {
     throw new TypeError('indexOfMatchAll args(valueArray) is not array');
   }
 
-  if (!isArray(compareArray)) {
+  if (!(0, _type.isArray)(compareArray)) {
     throw new TypeError('indexOfMatchAll args(compareArray) is not array');
   }
 
   return _indexOfMatchAll(valueArray, compareArray);
 };
 
-module.exports = {
+exports.indexOfMatchAll = indexOfMatchAll;
+var _default = {
   _indexOfMatchAll: _indexOfMatchAll,
   indexOfMatchAll: indexOfMatchAll
 };
+exports["default"] = _default;

@@ -1,30 +1,18 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.acceptDebug = exports.acceptError = exports.acceptWarn = exports.acceptInfo = exports.acceptLog = exports.accept = exports._accept = exports.unHookDebug = exports.unHookError = exports.unHookWarn = exports.unHookInfo = exports.unHookLog = exports.unHook = exports._unHook = exports.hookDebug = exports.hookError = exports.hookWarn = exports.hookInfo = exports.hookLog = exports.hook = exports._hook = exports.original = void 0;
 
-var _require2 = require('../compare/compare.js'),
-    _or = _require2._or,
-    _includes = _require2._includes,
-    _includesSome = _require2._includesSome,
-    _includesAll = _require2._includesAll;
+var _type = require("../type/type.js");
 
-var _require3 = require('../array/array.js'),
-    map = _require3.map;
+var _compare = require("../compare/compare.js");
+
+var _array = require("../array/array.js");
 
 var original = {};
+exports.original = original;
 original.log = console.log;
 original.info = console.info;
 original.warn = console.warn;
@@ -35,71 +23,99 @@ var _hook = function _hook(methodName, hookFunc) {
   console[methodName] = hookFunc;
 };
 
+exports._hook = _hook;
+
 var hook = function hook(methodName) {
   var hookFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+  if (!(0, _compare._or)(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new TypeError('hook args(methodName) is not [log|info|warn|error|debug]');
   }
 
-  if (!isFunction(hookFunc)) {
+  if (!(0, _type.isFunction)(hookFunc)) {
     throw new TypeError('hook args(hookFunc) is not function');
   }
 
   _hook(methodName, hookFunc);
 };
 
+exports.hook = hook;
+
 var hookLog = function hookLog(hookFunc) {
   hook('log', hookFunc);
 };
+
+exports.hookLog = hookLog;
 
 var hookInfo = function hookInfo(hookFunc) {
   hook('info', hookFunc);
 };
 
+exports.hookInfo = hookInfo;
+
 var hookWarn = function hookWarn(hookFunc) {
   hook('warn', hookFunc);
 };
+
+exports.hookWarn = hookWarn;
 
 var hookError = function hookError(hookFunc) {
   hook('error', hookFunc);
 };
 
+exports.hookError = hookError;
+
 var hookDebug = function hookDebug(hookFunc) {
   hook('debug', hookFunc);
 };
+
+exports.hookDebug = hookDebug;
 
 var _unHook = function _unHook(methodName) {
   console[methodName] = original[methodName];
 };
 
+exports._unHook = _unHook;
+
 var unHook = function unHook(methodName) {
-  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+  if (!(0, _compare._or)(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new TypeError('unHook args(methodName) is not [log|info|warn|error|debug]');
   }
 
   _unHook(methodName);
 };
 
+exports.unHook = unHook;
+
 var unHookLog = function unHookLog() {
   unHook('log');
 };
+
+exports.unHookLog = unHookLog;
 
 var unHookInfo = function unHookInfo() {
   unHook('info');
 };
 
+exports.unHookInfo = unHookInfo;
+
 var unHookWarn = function unHookWarn() {
   unHook('warn');
 };
+
+exports.unHookWarn = unHookWarn;
 
 var unHookError = function unHookError() {
   unHook('error');
 };
 
+exports.unHookError = unHookError;
+
 var unHookDebug = function unHookDebug() {
   unHook('debug');
 };
+
+exports.unHookDebug = unHookDebug;
 
 var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
   _hook(methodName, function () {
@@ -107,17 +123,17 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
       messageArgs[_key] = arguments[_key];
     }
 
-    var messageArgsAll = map(messageArgs, function (value) {
+    var messageArgsAll = (0, _array.map)(messageArgs, function (value) {
       return String(value);
     }).join(' ');
     var acceptFlag = acceptArray.length === 0;
 
     if (acceptFlag === false) {
-      acceptFlag = _includesSome(messageArgsAll, acceptArray);
+      acceptFlag = (0, _compare._includesSome)(messageArgsAll, acceptArray);
     }
 
-    if (acceptFlag && isArray(rejectArray)) {
-      acceptFlag = !_includesSome(messageArgsAll, rejectArray);
+    if (acceptFlag && (0, _type.isArray)(rejectArray)) {
+      acceptFlag = !(0, _compare._includesSome)(messageArgsAll, rejectArray);
     }
 
     if (acceptFlag) {
@@ -126,52 +142,65 @@ var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
   });
 };
 
+exports._accept = _accept;
+
 var accept = function accept(methodName, acceptArray, rejectArray, hookFunc) {
-  if (!_or(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+  if (!(0, _compare._or)(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
     throw new TypeError('accept args(methodName) is not [log|info|warn|error|debug]');
   }
 
-  if (!isArray(acceptArray)) {
+  if (!(0, _type.isArray)(acceptArray)) {
     throw new TypeError('accept args(acceptArray) is not array');
   }
 
-  if (!(isUndefined(rejectArray) || isArray(rejectArray))) {
+  if (!((0, _type.isUndefined)(rejectArray) || (0, _type.isArray)(rejectArray))) {
     throw new TypeError('accept args(rejectArray) is not array');
   }
 
-  if (!isFunction(hookFunc)) {
+  if (!(0, _type.isFunction)(hookFunc)) {
     throw new TypeError('accept args(hookFunc) is not function');
   }
 
   _accept(methodName, acceptArray, rejectArray, hookFunc);
 };
 
+exports.accept = accept;
+
 var acceptLog = function acceptLog(acceptArray, rejectArray) {
   var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
   accept('log', acceptArray, rejectArray, hookFunc);
 };
+
+exports.acceptLog = acceptLog;
 
 var acceptInfo = function acceptInfo(acceptArray, rejectArray) {
   var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.info;
   accept('info', acceptArray, rejectArray, hookFunc);
 };
 
+exports.acceptInfo = acceptInfo;
+
 var acceptWarn = function acceptWarn(acceptArray, rejectArray) {
   var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.warn;
   accept('warn', acceptArray, rejectArray, hookFunc);
 };
+
+exports.acceptWarn = acceptWarn;
 
 var acceptError = function acceptError(acceptArray, rejectArray) {
   var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.error;
   accept('error', acceptArray, rejectArray, hookFunc);
 };
 
+exports.acceptError = acceptError;
+
 var acceptDebug = function acceptDebug(acceptArray, rejectArray) {
   var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.debug;
   accept('debug', acceptArray, rejectArray, hookFunc);
 };
 
-module.exports = {
+exports.acceptDebug = acceptDebug;
+var _default = {
   _hook: _hook,
   hook: hook,
   hookLog: hookLog,
@@ -193,3 +222,4 @@ module.exports = {
   acceptError: acceptError,
   acceptDebug: acceptDebug
 };
+exports["default"] = _default;

@@ -1,52 +1,42 @@
 "use strict";
 
-var _require = require('../type/isType.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.isObjectParameter = void 0;
 
-var _require2 = require('../string/_replaceAll.js'),
-    _replaceAll = _require2._replaceAll;
+var _isType = require("../type/isType.js");
 
-var _require3 = require('../object/_propertyCount.js'),
-    _propertyCount = _require3._propertyCount;
+var _replaceAll2 = require("../string/_replaceAll.js");
+
+var _propertyCount2 = require("../object/_propertyCount.js");
+
 /**
  * isObjectParameter
  */
-
-
 var isObjectParameter = function isObjectParameter(object, props) {
   var optionalProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var optionalMinCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
-  if (!isObject(object)) {
+  if (!(0, _isType.isObject)(object)) {
     return false;
   }
 
-  if (!isString(props)) {
+  if (!(0, _isType.isString)(props)) {
     return false;
   }
 
-  if (!isString(optionalProps)) {
+  if (!(0, _isType.isString)(optionalProps)) {
     return false;
   }
 
-  props = _replaceAll(props, ' ', '').split(','); // last element === '' delete
+  props = (0, _replaceAll2._replaceAll)(props, ' ', '').split(','); // last element === '' delete
 
   if (props[props.length - 1] === '') {
     props.splice(props.length - 1, 1);
   }
 
-  optionalProps = _replaceAll(optionalProps, ' ', '').split(',');
+  optionalProps = (0, _replaceAll2._replaceAll)(optionalProps, ' ', '').split(',');
 
   if (optionalProps[optionalProps.length - 1] === '') {
     optionalProps.splice(optionalProps.length - 1, 1);
@@ -78,6 +68,8 @@ var isObjectParameter = function isObjectParameter(object, props) {
   return true;
 };
 
-module.exports = {
+exports.isObjectParameter = isObjectParameter;
+var _default = {
   isObjectParameter: isObjectParameter
 };
+exports["default"] = _default;

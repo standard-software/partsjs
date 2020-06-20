@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_other = void 0;
+
 var test_execute_other = function test_execute_other(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
@@ -20,6 +25,8 @@ var test_execute_other = function test_execute_other(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_other = test_execute_other;
+var _default = {
   test_execute_other: test_execute_other
 };
+exports["default"] = _default;

@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_convert = void 0;
+
 /* eslint-disable no-var */
 var test_execute_convert = function test_execute_convert(parts) {
   var _parts$test = parts.test,
@@ -1588,6 +1593,8 @@ var test_execute_convert = function test_execute_convert(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_convert = test_execute_convert;
+var _default = {
   test_execute_convert: test_execute_convert
 };
+exports["default"] = _default;

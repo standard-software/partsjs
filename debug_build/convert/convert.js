@@ -1,70 +1,45 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isNotUndefined = _require.isNotUndefined,
-    isNotNull = _require.isNotNull,
-    isNotNaNStrictAll = _require.isNotNaNStrictAll,
-    isNotBoolean = _require.isNotBoolean,
-    isNotNumber = _require.isNotNumber,
-    isNotInteger = _require.isNotInteger,
-    isNotString = _require.isNotString,
-    isNotFunction = _require.isNotFunction,
-    isNotObject = _require.isNotObject,
-    isNotArray = _require.isNotArray,
-    isNotDate = _require.isNotDate,
-    isNotRegExp = _require.isNotRegExp,
-    isNotException = _require.isNotException;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports._stringToIntegerDefault = exports.stringToInteger = exports._stringToInteger = exports._stringToIntegerBase = exports.stringToNumberDefault = exports._stringToNumberDefault = exports.stringToNumber = exports._stringToNumber = exports._stringToNumberBase = exports.valueToString = exports.numberToString = exports._numberToString = void 0;
 
-var _require2 = require('../compare/compare.js'),
-    _matchValue = _require2._matchValue,
-    _initialValue = _require2._initialValue;
+var _type = require("../type/type.js");
 
-var _require3 = require('../string/string.js'),
-    _matchFormat = _require3._matchFormat;
+var _compare = require("../compare/compare.js");
 
-var _require4 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require4.isObjectParameter;
+var _string = require("../string/string.js");
 
-var _require5 = require('../number/number.js'),
-    _round = _require5._round;
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
+var _number = require("../number/number.js");
+
 /**
  * numberToString
  */
-
-
 var _numberToString = function _numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
   return value.toString(radix);
 };
 
+exports._numberToString = _numberToString;
+
 var numberToString = function numberToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (isObjectParameter(value, 'value', 'radix')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'radix')) {
     var _value = value;
     value = _value.value;
     var _value$radix = _value.radix;
     radix = _value$radix === void 0 ? 10 : _value$radix;
   }
 
-  if (!isNumber(value)) {
+  if (!(0, _type.isNumber)(value)) {
     throw new TypeError('numberToString args(value) is not number');
   }
 
-  if (!isInteger(radix)) {
+  if (!(0, _type.isInteger)(radix)) {
     throw new TypeError('numberToString args(radix) is not integer');
   }
 
@@ -79,17 +54,19 @@ var numberToString = function numberToString(value) {
  */
 
 
+exports.numberToString = numberToString;
+
 var valueToString = function valueToString(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (isObjectParameter(value, 'value', 'radix')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'radix')) {
     var _value2 = value;
     value = _value2.value;
     var _value2$radix = _value2.radix;
     radix = _value2$radix === void 0 ? 10 : _value2$radix;
   }
 
-  if (!isInteger(radix)) {
+  if (!(0, _type.isInteger)(radix)) {
     throw new TypeError('numberToString args(radix) is not integer');
   }
 
@@ -97,7 +74,7 @@ var valueToString = function valueToString(value) {
     throw new RangeError('numberToString args(radix) must be between 2 and 36');
   }
 
-  if (!isNumber(value)) {
+  if (!(0, _type.isNumber)(value)) {
     return String(value);
   }
 
@@ -108,23 +85,27 @@ var valueToString = function valueToString(value) {
  */
 
 
+exports.valueToString = valueToString;
+
 var _stringToNumberBase = function _stringToNumberBase(value, defaultValueFunc) {
   if (value === '') {
     return defaultValueFunc();
   }
 
-  if (!_matchFormat('float_more', value)) {
+  if (!(0, _string._matchFormat)('float_more', value)) {
     return defaultValueFunc();
   }
 
   var result = Number(value);
 
-  if (!isNumber(result)) {
+  if (!(0, _type.isNumber)(result)) {
     return defaultValueFunc();
   }
 
   return result;
 };
+
+exports._stringToNumberBase = _stringToNumberBase;
 
 var _stringToNumber = function _stringToNumber(value) {
   return _stringToNumberBase(value, function () {
@@ -132,18 +113,22 @@ var _stringToNumber = function _stringToNumber(value) {
   });
 };
 
+exports._stringToNumber = _stringToNumber;
+
 var stringToNumber = function stringToNumber(value) {
-  if (isObjectParameter(value, 'value')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value')) {
     var _value3 = value;
     value = _value3.value;
   }
 
-  if (!isString(value)) {
+  if (!(0, _type.isString)(value)) {
     throw new TypeError('stringToNumber args(value) is not string');
   }
 
   return _stringToNumber(value);
 };
+
+exports.stringToNumber = stringToNumber;
 
 var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue) {
   return _stringToNumberBase(value, function () {
@@ -151,14 +136,16 @@ var _stringToNumberDefault = function _stringToNumberDefault(value, defaultValue
   });
 };
 
+exports._stringToNumberDefault = _stringToNumberDefault;
+
 var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) {
-  if (isObjectParameter(value, 'value', 'defaultValue')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'defaultValue')) {
     var _value4 = value;
     value = _value4.value;
     defaultValue = _value4.defaultValue;
   }
 
-  if (!isString(value)) {
+  if (!(0, _type.isString)(value)) {
     throw new TypeError('stringToNumberDefault args(value) is not string');
   }
 
@@ -169,6 +156,8 @@ var stringToNumberDefault = function stringToNumberDefault(value, defaultValue) 
  */
 
 
+exports.stringToNumberDefault = stringToNumberDefault;
+
 var _stringToIntegerBase = function _stringToIntegerBase(value, defaultValueFunc) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
@@ -176,18 +165,20 @@ var _stringToIntegerBase = function _stringToIntegerBase(value, defaultValueFunc
     return defaultValueFunc();
   }
 
-  if (!_matchFormat(String(radix) + '_base_number', value)) {
+  if (!(0, _string._matchFormat)(String(radix) + '_base_number', value)) {
     return defaultValueFunc();
   }
 
   var result = parseInt(value, radix);
 
-  if (!isInteger(result)) {
+  if (!(0, _type.isInteger)(result)) {
     return defaultValueFunc();
   }
 
   return result;
 };
+
+exports._stringToIntegerBase = _stringToIntegerBase;
 
 var _stringToInteger = function _stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
@@ -196,21 +187,23 @@ var _stringToInteger = function _stringToInteger(value) {
   }, radix);
 };
 
+exports._stringToInteger = _stringToInteger;
+
 var stringToInteger = function stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-  if (isObjectParameter(value, 'value', 'radix')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'radix')) {
     var _value5 = value;
     value = _value5.value;
     var _value5$radix = _value5.radix;
     radix = _value5$radix === void 0 ? 10 : _value5$radix;
   }
 
-  if (!isString(value)) {
+  if (!(0, _type.isString)(value)) {
     throw new TypeError('stringToInteger args(value) is not string');
   }
 
-  if (!isInteger(radix)) {
+  if (!(0, _type.isInteger)(radix)) {
     throw new TypeError('stringToInteger args(radix) is not integer');
   }
 
@@ -221,6 +214,8 @@ var stringToInteger = function stringToInteger(value) {
   return _stringToInteger(value, radix);
 };
 
+exports.stringToInteger = stringToInteger;
+
 var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
   return _stringToIntegerBase(value, function () {
@@ -228,10 +223,12 @@ var _stringToIntegerDefault = function _stringToIntegerDefault(value, defaultVal
   }, radix);
 };
 
+exports._stringToIntegerDefault = _stringToIntegerDefault;
+
 var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue) {
   var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
 
-  if (isObjectParameter(value, 'value', 'defaultValue, radix')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'defaultValue, radix')) {
     var _value6 = value;
     value = _value6.value;
     defaultValue = _value6.defaultValue;
@@ -239,11 +236,11 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
     radix = _value6$radix === void 0 ? 10 : _value6$radix;
   }
 
-  if (!isString(value)) {
+  if (!(0, _type.isString)(value)) {
     throw new TypeError('stringToInteger args(value) is not string');
   }
 
-  if (!isInteger(radix)) {
+  if (!(0, _type.isInteger)(radix)) {
     throw new TypeError('stringToInteger args(radix) is not integer');
   }
 
@@ -258,36 +255,40 @@ var stringToIntegerDefault = function stringToIntegerDefault(value, defaultValue
  */
 
 
+exports.stringToIntegerDefault = stringToIntegerDefault;
+
 var valueToNumber = function valueToNumber(value) {
-  if (isNull(value)) {
+  if ((0, _type.isNull)(value)) {
     return NaN;
   }
 
-  if (isArray(value)) {
+  if ((0, _type.isArray)(value)) {
     return NaN;
   }
 
-  if (!isString(value)) {
+  if (!(0, _type.isString)(value)) {
     return Number(value);
   }
 
   return stringToNumberDefault(value, NaN);
 };
 
+exports.valueToNumber = valueToNumber;
+
 var valueToNumberDefault = function valueToNumberDefault(value, defaultValue) {
-  if (isObjectParameter(value, 'value,defaultValue')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,defaultValue')) {
     var _value7 = value;
     value = _value7.value;
     defaultValue = _value7.defaultValue;
   }
 
-  if (isNaNStrict(value)) {
+  if ((0, _type.isNaNStrict)(value)) {
     return value;
   }
 
   var result = valueToNumber(value);
 
-  if (isNaNStrict(result)) {
+  if ((0, _type.isNaNStrict)(result)) {
     return defaultValue;
   }
 
@@ -298,57 +299,82 @@ var valueToNumberDefault = function valueToNumberDefault(value, defaultValue) {
  */
 
 
+exports.valueToNumberDefault = valueToNumberDefault;
+
 var valueToInteger = function valueToInteger(value) {
   var result = valueToNumber(value);
 
-  if (isNaNStrict(result)) {
+  if ((0, _type.isNaNStrict)(result)) {
     return NaN;
   }
 
-  return _round(result);
+  return (0, _number._round)(result);
 };
 
+exports.valueToInteger = valueToInteger;
+
 var valueToIntegerDefault = function valueToIntegerDefault(value, defaultValue) {
-  if (isObjectParameter(value, 'value,defaultValue')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,defaultValue')) {
     var _value8 = value;
     value = _value8.value;
     defaultValue = _value8.defaultValue;
   }
 
-  if (isNaNStrict(value)) {
+  if ((0, _type.isNaNStrict)(value)) {
     return value;
   }
 
   var result = valueToInteger(value);
 
-  if (isNaNStrict(result)) {
+  if ((0, _type.isNaNStrict)(result)) {
     return defaultValue;
   }
 
   return result;
 };
 
+exports.valueToIntegerDefault = valueToIntegerDefault;
 var numToString = numberToString;
+exports.numToString = numToString;
 var valToString = valueToString;
+exports.valToString = valToString;
 var strToNumber = stringToNumber;
+exports.strToNumber = strToNumber;
 var strToNumberDef = stringToNumberDefault;
+exports.strToNumberDef = strToNumberDef;
 var strToInteger = stringToInteger;
+exports.strToInteger = strToInteger;
 var strToIntegerDef = stringToIntegerDefault;
+exports.strToIntegerDef = strToIntegerDef;
 var valToNumber = valueToNumber;
+exports.valToNumber = valToNumber;
 var valToNumberDef = valueToNumberDefault;
+exports.valToNumberDef = valToNumberDef;
 var valToInteger = valueToInteger;
+exports.valToInteger = valToInteger;
 var valToIntegerDef = valueToIntegerDefault;
+exports.valToIntegerDef = valToIntegerDef;
 var numToStr = numberToString;
+exports.numToStr = numToStr;
 var valToStr = valueToString;
+exports.valToStr = valToStr;
 var strToNum = stringToNumber;
+exports.strToNum = strToNum;
 var strToNumDef = stringToNumberDefault;
+exports.strToNumDef = strToNumDef;
 var strToInt = stringToInteger;
+exports.strToInt = strToInt;
 var strToIntDef = stringToIntegerDefault;
+exports.strToIntDef = strToIntDef;
 var valToNum = valueToNumber;
+exports.valToNum = valToNum;
 var valToNumDef = valueToNumberDefault;
+exports.valToNumDef = valToNumDef;
 var valToInt = valueToInteger;
+exports.valToInt = valToInt;
 var valToIntDef = valueToIntegerDefault;
-module.exports = {
+exports.valToIntDef = valToIntDef;
+var _default = {
   numberToString: numberToString,
   valueToString: valueToString,
   stringToNumber: stringToNumber,
@@ -380,3 +406,4 @@ module.exports = {
   strToInt: strToInt,
   strToIntDef: strToIntDef
 };
+exports["default"] = _default;

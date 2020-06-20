@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_object = void 0;
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -541,6 +546,8 @@ var test_execute_object = function test_execute_object(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_object = test_execute_object;
+var _default = {
   test_execute_object: test_execute_object
 };
+exports["default"] = _default;

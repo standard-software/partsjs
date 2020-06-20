@@ -1,64 +1,49 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.includes = exports._includes = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
 
-var _require3 = require('../compare/match.js'),
-    _match = _require3._match;
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
+var _match2 = require("../compare/match.js");
+
 /**
  * includes
  */
-
-
 var _includes = function _includes(value, compare) {
-  if (isString(value)) {
+  if ((0, _type.isString)(value)) {
     if (compare === '') {
       return false;
     }
 
-    if (isRegExp(compare)) {
-      return _match(value, compare);
+    if ((0, _type.isRegExp)(compare)) {
+      return (0, _match2._match)(value, compare);
     }
 
     return value.indexOf(compare) !== -1;
-  } else if (isArray(value)) {
+  } else if ((0, _type.isArray)(value)) {
     return value.indexOf(compare) !== -1;
   }
 };
 
+exports._includes = _includes;
+
 var includes = function includes(value, compare) {
-  if (isObjectParameter(value, 'value, compare')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compare')) {
     var _value = value;
     value = _value.value;
     compare = _value.compare;
   }
 
-  if (isString(value)) {
-    if (!(isString(compare) || isRegExp(compare))) {
+  if ((0, _type.isString)(value)) {
+    if (!((0, _type.isString)(compare) || (0, _type.isRegExp)(compare))) {
       throw new TypeError('includes args(compare) is not [string|RegExp]');
     }
-  } else if (isArray(value)) {//
+  } else if ((0, _type.isArray)(value)) {//
   } else {
     throw new TypeError('includes args(value) is not [string|array]');
   }
@@ -66,7 +51,9 @@ var includes = function includes(value, compare) {
   return _includes(value, compare);
 };
 
-module.exports = {
+exports.includes = includes;
+var _default = {
   _includes: _includes,
   includes: includes
 };
+exports["default"] = _default;

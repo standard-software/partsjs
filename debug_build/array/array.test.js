@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_array = void 0;
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2018,6 +2023,8 @@ var test_execute_array = function test_execute_array(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_array = test_execute_array;
+var _default = {
   test_execute_array: test_execute_array
 };
+exports["default"] = _default;

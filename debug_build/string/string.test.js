@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_string = void 0;
+
 var test_execute_string = function test_execute_string(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
@@ -1445,6 +1450,8 @@ var test_execute_string = function test_execute_string(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_string = test_execute_string;
+var _default = {
   test_execute_string: test_execute_string
 };
+exports["default"] = _default;

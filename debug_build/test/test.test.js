@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_test = void 0;
+
 /* eslint-disable no-throw-literal */
 var test_execute_test = function test_execute_test(parts) {
   var _parts$test = parts.test,
@@ -84,6 +89,8 @@ var test_execute_test = function test_execute_test(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_test = test_execute_test;
+var _default = {
   test_execute_test: test_execute_test
 };
+exports["default"] = _default;

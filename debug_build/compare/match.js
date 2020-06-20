@@ -1,43 +1,27 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.match = exports._match = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
+
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
 /**
  * match
  */
-
-
 var _match = function _match(value, compare) {
-  if (isString(value)) {
+  if ((0, _type.isString)(value)) {
     var result;
 
-    if (isRegExp(compare)) {
+    if ((0, _type.isRegExp)(compare)) {
       result = value.match(compare) !== null;
-    } else if (isFunction(compare)) {
+    } else if ((0, _type.isFunction)(compare)) {
       result = compare(value);
 
-      if (!isBoolean(result)) {
+      if (!(0, _type.isBoolean)(result)) {
         throw new TypeError('_match args(compareArray element function result) is not boolean');
       }
     } else {
@@ -48,10 +32,10 @@ var _match = function _match(value, compare) {
   } else {
     var _result;
 
-    if (isFunction(compare)) {
+    if ((0, _type.isFunction)(compare)) {
       _result = compare(value);
 
-      if (!isBoolean(_result)) {
+      if (!(0, _type.isBoolean)(_result)) {
         throw new TypeError('_match args(compareArray element function result) is not boolean');
       }
     } else {
@@ -62,12 +46,14 @@ var _match = function _match(value, compare) {
   }
 };
 
+exports._match = _match;
+
 var match = function match(value, compare) {
-  if (isObjectParameter(value, 'value, compare')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compare')) {
     var _value = value;
     value = _value.value;
     compare = _value.compare;
-  } else if (isObjectParameter(compare, 'compare')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
     var _compare = compare;
     compare = _compare.compare;
   }
@@ -75,7 +61,9 @@ var match = function match(value, compare) {
   return _match(value, compare);
 };
 
-module.exports = {
+exports.match = match;
+var _default = {
   _match: _match,
   match: match
 };
+exports["default"] = _default;

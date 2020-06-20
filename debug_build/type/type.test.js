@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_type = void 0;
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -326,7 +331,9 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
 
-        checkType('object', '[object Object]', Intl);
+        if (!parts.platform.isDeno()) {
+          checkType('object', '[object Object]', Intl);
+        }
       });
     };
 
@@ -1096,6 +1103,8 @@ var test_execute_type = function test_execute_type(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_type = test_execute_type;
+var _default = {
   test_execute_type: test_execute_type
 };
+exports["default"] = _default;

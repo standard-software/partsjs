@@ -1,33 +1,21 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.sortDictionaryDescending = exports._sortDictionaryDescending = exports.sortDictionaryAscending = exports._sortDictionaryAscending = exports.sortLengthDescending = exports._sortLengthDescending = exports.sortLengthAscending = exports._sortLengthAscending = exports.sortNumberDescending = exports._sortNumberDescending = exports.sortNumberAscending = exports._sortNumberAscending = exports.sort = exports._sort = void 0;
 
-var _require2 = require('../compare/allMatch.js'),
-    allMatch = _require2.allMatch;
+var _type = require("../type/type.js");
 
-var _require3 = require('../compare/allMatchSome.js'),
-    allMatchSome = _require3.allMatchSome;
+var _allMatch = require("../compare/allMatch.js");
 
-var _require4 = require('../compare/compare_common.js'),
-    _or = _require4._or;
+var _allMatchSome = require("../compare/allMatchSome.js");
+
+var _compare_common = require("../compare/compare_common.js");
+
 /**
  * array.sort
  */
-
-
 var _sort = function _sort(array, pattern, order) {
   switch (pattern) {
     case 'number':
@@ -78,25 +66,27 @@ var _sort = function _sort(array, pattern, order) {
   }
 };
 
+exports._sort = _sort;
+
 var sort = function sort(array, pattern, order) {
-  if (!isArray(array)) {
+  if (!(0, _type.isArray)(array)) {
     throw new TypeError('sortNumberAscending args(array) is not array');
   }
 
-  if (!_or(order, ['ascending', 'descending'])) {
+  if (!(0, _compare_common._or)(order, ['ascending', 'descending'])) {
     throw new TypeError('sort args(order) is not [ascending|descending]');
   }
 
   switch (pattern) {
     case 'number':
-      if (!allMatch(array, isNumber)) {
+      if (!(0, _allMatch.allMatch)(array, _type.isNumber)) {
         throw new TypeError('sort number args(array) element is not number');
       }
 
       break;
 
     case 'length':
-      if (!allMatchSome(array, [isString, function (element) {
+      if (!(0, _allMatchSome.allMatchSome)(array, [_type.isString, function (element) {
         return 'length' in element;
       }])) {
         throw new TypeError('sort length args(array) element does not have length property');
@@ -105,7 +95,7 @@ var sort = function sort(array, pattern, order) {
       break;
 
     case 'dictionary':
-      if (!allMatch(array, isString)) {
+      if (!(0, _allMatch.allMatch)(array, _type.isString)) {
         throw new TypeError('sort dictionary args(array) element is not string');
       }
 
@@ -118,55 +108,80 @@ var sort = function sort(array, pattern, order) {
   return _sort(array, pattern, order);
 };
 
+exports.sort = sort;
+
 var _sortNumberAscending = function _sortNumberAscending(array) {
   return _sort(array, 'number', 'ascending');
 };
+
+exports._sortNumberAscending = _sortNumberAscending;
 
 var sortNumberAscending = function sortNumberAscending(array) {
   return sort(array, 'number', 'ascending');
 };
 
+exports.sortNumberAscending = sortNumberAscending;
+
 var _sortNumberDescending = function _sortNumberDescending(array) {
   return _sort(array, 'number', 'descending');
 };
+
+exports._sortNumberDescending = _sortNumberDescending;
 
 var sortNumberDescending = function sortNumberDescending(array) {
   return sort(array, 'number', 'descending');
 };
 
+exports.sortNumberDescending = sortNumberDescending;
+
 var _sortLengthAscending = function _sortLengthAscending(array) {
   return _sort(array, 'length', 'ascending');
 };
+
+exports._sortLengthAscending = _sortLengthAscending;
 
 var sortLengthAscending = function sortLengthAscending(array) {
   return sort(array, 'length', 'ascending');
 };
 
+exports.sortLengthAscending = sortLengthAscending;
+
 var _sortLengthDescending = function _sortLengthDescending(array) {
   return _sort(array, 'length', 'descending');
 };
+
+exports._sortLengthDescending = _sortLengthDescending;
 
 var sortLengthDescending = function sortLengthDescending(array) {
   return sort(array, 'length', 'descending');
 };
 
+exports.sortLengthDescending = sortLengthDescending;
+
 var _sortDictionaryAscending = function _sortDictionaryAscending(array) {
   return _sort(array, 'dictionary', 'ascending');
 };
+
+exports._sortDictionaryAscending = _sortDictionaryAscending;
 
 var sortDictionaryAscending = function sortDictionaryAscending(array) {
   return sort(array, 'dictionary', 'ascending');
 };
 
+exports.sortDictionaryAscending = sortDictionaryAscending;
+
 var _sortDictionaryDescending = function _sortDictionaryDescending(array) {
   return _sort(array, 'dictionary', 'descending');
 };
+
+exports._sortDictionaryDescending = _sortDictionaryDescending;
 
 var sortDictionaryDescending = function sortDictionaryDescending(array) {
   return sort(array, 'dictionary', 'descending');
 };
 
-module.exports = {
+exports.sortDictionaryDescending = sortDictionaryDescending;
+var _default = {
   _sortNumberAscending: _sortNumberAscending,
   _sortNumberDescending: _sortNumberDescending,
   _sortLengthAscending: _sortLengthAscending,
@@ -180,3 +195,4 @@ module.exports = {
   sortDictionaryAscending: sortDictionaryAscending,
   sortDictionaryDescending: sortDictionaryDescending
 };
+exports["default"] = _default;

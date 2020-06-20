@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.test_execute_root = void 0;
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -13,10 +18,6 @@ var test_execute_root = function test_execute_root(parts) {
     var clone = parts.clone,
         cloneDeep = parts.cloneDeep,
         cloneFunction = parts.cloneFunction;
-
-    var _require = require('../type/isType.js'),
-        _typeofCheck = _require._typeofCheck,
-        _objectToStringCheck = _require._objectToStringCheck;
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
@@ -536,65 +537,58 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, array1[0] === testFunc1);
         checkEqual('ABC', array1[0]());
       });
-    };
+    }; // const test_cloneDeep_moment = () => {
+    //   it('test_cloneDeep_moment', () => {
+    //     if (parts.platform.isWindowsScriptHost()) {
+    //       return;
+    //     }
+    //     if (parts.platform.isWebBrowser()) {
+    //       return;
+    //     }
+    //     import moment from 'moment';
+    //     // moment type clone no
+    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    //     var testValue1 = [1, 2, 3, moment1];
+    //     var value1 = clone(testValue1);
+    //     value1[3].set('year', 2018);
+    //     checkEqual(true, value1[3] === testValue1[3]);
+    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+    //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
+    //     // moment object fail
+    //     // const cloneValue = new source.constructor();
+    //     // moment type cloneDeep
+    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    //     var testValue1 = [1, 2, 3, moment1];
+    //     // initialise
+    //     cloneDeep.clear();
+    //     var value1 = cloneDeep(testValue1);
+    //     value1[3].set('year', 2018);
+    //     checkEqual(true, value1[3] === testValue1[3]); // clone
+    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+    //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
+    //     // but not correct
+    //     // moment type cloneDeep moment clone function
+    //     cloneFunction.cloneMoment = (source, bufferWrite)  => {
+    //       if (!moment.isMoment(source)) {
+    //         return undefined;
+    //       }
+    //       const cloneValue = moment(source);
+    //       bufferWrite(source, cloneValue);
+    //       return cloneValue;
+    //     };
+    //     cloneDeep.reset();
+    //     cloneDeep.add(cloneFunction.cloneMoment);
+    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+    //     var testValue1 = [1, 2, 3, moment1];
+    //     var value1 = cloneDeep(testValue1);
+    //     value1[3].set('year', 2018);
+    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+    //     checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
+    //     // correct
+    //     cloneDeep.reset();
+    //   });
+    // };
 
-    var test_cloneDeep_moment = function test_cloneDeep_moment() {
-      it('test_cloneDeep_moment', function () {
-        if (parts.platform.isWindowsScriptHost()) {
-          return;
-        }
-
-        if (parts.platform.isWebBrowser()) {
-          return;
-        }
-
-        var moment = require('moment'); // moment type clone no
-
-
-        var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-        var testValue1 = [1, 2, 3, moment1];
-        var value1 = clone(testValue1);
-        value1[3].set('year', 2018);
-        checkEqual(true, value1[3] === testValue1[3]);
-        checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-        checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD')); // moment object fail
-        // const cloneValue = new source.constructor();
-        // moment type cloneDeep
-
-        var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-        var testValue1 = [1, 2, 3, moment1]; // initialise
-
-        cloneDeep.clear();
-        var value1 = cloneDeep(testValue1);
-        value1[3].set('year', 2018);
-        checkEqual(true, value1[3] === testValue1[3]); // clone
-
-        checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-        checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD')); // but not correct
-        // moment type cloneDeep moment clone function
-
-        cloneFunction.cloneMoment = function (source, bufferWrite) {
-          if (!moment.isMoment(source)) {
-            return undefined;
-          }
-
-          var cloneValue = moment(source);
-          bufferWrite(source, cloneValue);
-          return cloneValue;
-        };
-
-        cloneDeep.reset();
-        cloneDeep.add(cloneFunction.cloneMoment);
-        var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-        var testValue1 = [1, 2, 3, moment1];
-        var value1 = cloneDeep(testValue1);
-        value1[3].set('year', 2018);
-        checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-        checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD')); // correct
-
-        cloneDeep.reset();
-      });
-    };
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
       it('test_cloneDeep_symbol', function () {
@@ -840,8 +834,8 @@ var test_execute_root = function test_execute_root(parts) {
     test_cloneDeep_object_array_mix();
     test_cloneDeep_date();
     test_cloneDeep_function();
-    test_cloneDeep_regExp();
-    test_cloneDeep_moment();
+    test_cloneDeep_regExp(); // test_cloneDeep_moment();
+
     test_cloneDeep_symbol();
     test_cloneDeep_map();
     test_cloneDeep_set();
@@ -849,6 +843,8 @@ var test_execute_root = function test_execute_root(parts) {
   });
 };
 
-module.exports = {
+exports.test_execute_root = test_execute_root;
+var _default = {
   test_execute_root: test_execute_root
 };
+exports["default"] = _default;

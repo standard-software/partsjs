@@ -1,33 +1,17 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isObjectType = _require.isObjectType,
-    isArray = _require.isArray,
-    isArrayType = _require.isArrayType,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isMap = _require.isMap,
-    isWeakMap = _require.isWeakMap,
-    isSet = _require.isSet,
-    isWeakSet = _require.isWeakSet;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.or = exports._or = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
+
+var _isObjectParameter = require("../object/isObjectParameter.js");
+
 /**
  * or
  */
-
-
 var _or = function _or(value, compareArray) {
   for (var i = 0; i < compareArray.length; i += 1) {
     if (value === compareArray[i]) {
@@ -38,21 +22,25 @@ var _or = function _or(value, compareArray) {
   return false;
 };
 
+exports._or = _or;
+
 var or = function or(value, compareArray) {
-  if (isObjectParameter(value, 'value,compareArray')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
   }
 
-  if (!isArray(compareArray)) {
+  if (!(0, _type.isArray)(compareArray)) {
     throw new TypeError('or args(compareArray) is not array');
   }
 
   return _or(value, compareArray);
 };
 
-module.exports = {
+exports.or = or;
+var _default = {
   _or: _or,
   or: or
 };
+exports["default"] = _default;

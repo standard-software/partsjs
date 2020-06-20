@@ -1,42 +1,29 @@
 "use strict";
 
-var _require = require('../type/type.js'),
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isNaNStrict = _require.isNaNStrict,
-    isBoolean = _require.isBoolean,
-    isNumber = _require.isNumber,
-    isInteger = _require.isInteger,
-    isString = _require.isString,
-    isFunction = _require.isFunction,
-    isObject = _require.isObject,
-    isArray = _require.isArray,
-    isDate = _require.isDate,
-    isRegExp = _require.isRegExp,
-    isException = _require.isException,
-    isUndefinedAll = _require.isUndefinedAll;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.canUseSet = exports.canUseMap = exports.loop = exports._loopBase = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = void 0;
 
-var _require2 = require('../object/isObjectParameter.js'),
-    isObjectParameter = _require2.isObjectParameter;
+var _type = require("../type/type.js");
 
-var _require3 = require('../array/IntegerArray.js'),
-    _IntegerArray = _require3._IntegerArray;
+var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _require4 = require('../object/objectToKeyValueArray.js'),
-    objectToKeyValueArray = _require4.objectToKeyValueArray;
+var _IntegerArray2 = require("../array/IntegerArray.js");
+
+var _objectToKeyValueArray = require("../object/objectToKeyValueArray.js");
+
 /**
  * assert
  */
-
-
 var assert = function assert(value) {
   var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-  if (!isBoolean(value)) {
+  if (!(0, _type.isBoolean)(value)) {
     throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
   }
 
-  if (!isString(message)) {
+  if (!(0, _type.isString)(message)) {
     throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
   }
 
@@ -49,6 +36,7 @@ var assert = function assert(value) {
  */
 
 
+exports.assert = assert;
 var guard_status = true;
 var guard_message;
 
@@ -59,26 +47,26 @@ var guard = function guard(guardFunc, runFunc) {
     return false;
   }
 
-  if (!isFunction(guardFunc)) {
+  if (!(0, _type.isFunction)(guardFunc)) {
     throw new TypeError('guard args(guardFunc) is not function');
   }
 
   var result = guardFunc();
 
-  if (!isArray(result)) {
+  if (!(0, _type.isArray)(result)) {
     throw new TypeError('guard args(guardFunc result) is not array');
   }
 
   for (var i = 0; i < result.length; i += 1) {
     // support for wsh last comma in Array. [a,b,]
-    if (i === result.length - 1 && isUndefined(result[i])) {
+    if (i === result.length - 1 && (0, _type.isUndefined)(result[i])) {
       continue;
     }
 
     var resultValue = undefined;
     var message = '';
 
-    if (isArray(result[i])) {
+    if ((0, _type.isArray)(result[i])) {
       if (!(1 <= result[i].length)) {
         throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
       }
@@ -94,15 +82,15 @@ var guard = function guard(guardFunc, runFunc) {
 
     resultValue = functionValue(resultValue);
 
-    if (!isBoolean(resultValue)) {
+    if (!(0, _type.isBoolean)(resultValue)) {
       throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
     }
 
     if (resultValue === false) {
       guard_message = message;
 
-      if (!isUndefined(runFunc)) {
-        if (!isFunction(runFunc)) {
+      if (!(0, _type.isUndefined)(runFunc)) {
+        if (!(0, _type.isFunction)(runFunc)) {
           throw new TypeError('guard args(runFunc) is not function');
         }
 
@@ -115,6 +103,8 @@ var guard = function guard(guardFunc, runFunc) {
 
   return false;
 };
+
+exports.guard = guard;
 
 guard.message = function () {
   return guard_message;
@@ -137,7 +127,7 @@ guard.off = function () {
 
 
 var functionValue = function functionValue(value) {
-  if (isFunction(value)) {
+  if ((0, _type.isFunction)(value)) {
     return value();
   } else {
     return value;
@@ -147,6 +137,8 @@ var functionValue = function functionValue(value) {
  * sc (second call)
  */
 
+
+exports.functionValue = functionValue;
 
 var sc = function sc(argsFirst, func) {
   for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
@@ -160,13 +152,15 @@ var sc = function sc(argsFirst, func) {
  */
 
 
+exports.sc = sc;
+
 var if_ = function if_(condition) {
-  if (!isBoolean(condition)) {
+  if (!(0, _type.isBoolean)(condition)) {
     throw new TypeError('if_ args(condition) is not boolean');
   }
 
   var returnFunc = function returnFunc(then_, else_) {
-    if (isObjectParameter(then_, '', 'then, else', 1)) {
+    if ((0, _isObjectParameter.isObjectParameter)(then_, '', 'then, else', 1)) {
       var _then_ = then_;
       then_ = _then_.then;
       else_ = _then_["else"];
@@ -216,26 +210,28 @@ var if_ = function if_(condition) {
  */
 
 
+exports.if_ = if_;
+
 var switch_ = function switch_(expression) {
   return function (args) {
-    if (!isArray(args)) {
+    if (!(0, _type.isArray)(args)) {
       throw new TypeError('switch_() args is not array');
     }
 
     for (var i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if (i === args.length - 1 && isUndefined(args[i])) {
+      if (i === args.length - 1 && (0, _type.isUndefined)(args[i])) {
         continue;
       }
 
-      if (!isArray(args[i])) {
+      if (!(0, _type.isArray)(args[i])) {
         throw new TypeError('switch_() args is not array in array');
       }
     }
 
     for (var _i = 0; _i < args.length; _i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if (_i === args.length - 1 && isUndefined(args[_i])) {
+      if (_i === args.length - 1 && (0, _type.isUndefined)(args[_i])) {
         continue;
       }
 
@@ -260,9 +256,11 @@ var switch_ = function switch_(expression) {
  */
 
 
+exports.switch_ = switch_;
+
 var _loopBase = function _loopBase(loopArray) {
   return function (func) {
-    if (!isFunction(func)) {
+    if (!(0, _type.isFunction)(func)) {
       throw new TypeError('loop()(func) func is not function');
     }
 
@@ -274,7 +272,7 @@ var _loopBase = function _loopBase(loopArray) {
       var loopLast = i === loopArray.length - 1;
       var result = func(element, index, array, loopFirst, loopLast);
 
-      if (!isUndefined(result) && result["break"] === true) {
+      if (!(0, _type.isUndefined)(result) && result["break"] === true) {
         return result;
       }
     }
@@ -283,53 +281,57 @@ var _loopBase = function _loopBase(loopArray) {
   };
 };
 
+exports._loopBase = _loopBase;
+
 var loop = function loop(start, end, increment) {
-  if (isObjectParameter(start, 'count')) {
+  if ((0, _isObjectParameter.isObjectParameter)(start, 'count')) {
     var _start = start;
     start = _start.count;
     end = undefined;
     increment = undefined;
-  } else if (isObjectParameter(start, 'start, end', 'increment')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(start, 'start, end', 'increment')) {
     var _start2 = start;
     start = _start2.start;
     end = _start2.end;
     increment = _start2.increment;
-  } else if (isObjectParameter(end, 'end', 'increment')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(end, 'end', 'increment')) {
     var _end = end;
     end = _end.end;
     increment = _end.increment;
-  } else if (isObjectParameter(increment, 'increment')) {
+  } else if ((0, _isObjectParameter.isObjectParameter)(increment, 'increment')) {
     var _increment = increment;
     increment = _increment.increment;
-  } else if (isObject(start)) {
-    return _loopBase(objectToKeyValueArray(start));
-  } else if (isArray(start)) {
+  } else if ((0, _type.isObject)(start)) {
+    return _loopBase((0, _objectToKeyValueArray.objectToKeyValueArray)(start));
+  } else if ((0, _type.isArray)(start)) {
     return _loopBase(start);
   }
 
-  if (!isInteger(start)) {
+  if (!(0, _type.isInteger)(start)) {
     throw new TypeError('loop args(start) is not number');
   }
 
-  if (!isUndefined(end) && !isInteger(end)) {
+  if (!(0, _type.isUndefined)(end) && !(0, _type.isInteger)(end)) {
     throw new TypeError('loop args(end) is not number');
   }
 
-  if (!isUndefined(increment) && !isInteger(increment)) {
+  if (!(0, _type.isUndefined)(increment) && !(0, _type.isInteger)(increment)) {
     throw new TypeError('loop args(increment) is not number');
   }
 
-  return _loopBase(_IntegerArray(start, end, increment));
+  return _loopBase((0, _IntegerArray2._IntegerArray)(start, end, increment));
 };
 /**
  * canUseMap
  */
 
 
+exports.loop = loop;
+
 var _canUseMapFlag;
 
 var canUseMap = function canUseMap() {
-  if (isUndefined(_canUseMapFlag)) {
+  if ((0, _type.isUndefined)(_canUseMapFlag)) {
     try {
       new Map();
       _canUseMapFlag = true;
@@ -340,6 +342,8 @@ var canUseMap = function canUseMap() {
 
   return _canUseMapFlag;
 };
+
+exports.canUseMap = canUseMap;
 
 canUseMap.reset = function () {
   _canUseMapFlag = undefined;
@@ -352,7 +356,7 @@ canUseMap.reset = function () {
 var _canUseSetFlag;
 
 var canUseSet = function canUseSet() {
-  if (isUndefined(_canUseSetFlag)) {
+  if ((0, _type.isUndefined)(_canUseSetFlag)) {
     try {
       new Set();
       _canUseSetFlag = true;
@@ -364,11 +368,13 @@ var canUseSet = function canUseSet() {
   return _canUseSetFlag;
 };
 
+exports.canUseSet = canUseSet;
+
 canUseSet.reset = function () {
   _canUseSetFlag = undefined;
 };
 
-module.exports = {
+var _default = {
   assert: assert,
   guard: guard,
   functionValue: functionValue,
@@ -379,3 +385,4 @@ module.exports = {
   canUseMap: canUseMap,
   canUseSet: canUseSet
 };
+exports["default"] = _default;
