@@ -27,7 +27,7 @@ https://www.npmjs.com/package/@standard-software/parts
   - V8 
   - Rhino
 - Windows Scripting Host (WSH)
-  - (not support above ver 6.0.0, support below ver 5.9.0 )
+  - (not support above ver 6.0.0, support below ver 5.8.2 )
 
 ## How to use parts.js in Node.js
 

@@ -2,6 +2,16 @@
 
 ## Version
 
+### 6.0.0
+#### 2020/06/20(Sat)
+- support deno 
+  - source CommonJS to ESModules
+  - add code change tool parts-CommonJS_To_ESModules
+- unsupport wsh
+  - Code converted from ESModules by babel does not support wsh
+- delete test_jest/source
+- delete test_exec/release_wsh
+
 ### 5.8.2
 #### 2020/06/19(Fri)
 - bugfix not necessary require isException
