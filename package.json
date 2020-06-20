@@ -17,7 +17,8 @@
     "eslint": "eslint",
     "eslint:fix": "eslint --fix ./source_code/*.js ./source_code/*/*.js",
     "jest": "jest",
-    "test": ""
+    "tool:argstest": "node ./tool/argstest.js a b c d",
+    "": ""
   },
   "repository": {
     "type": "git",
