@@ -18,6 +18,8 @@
     "eslint:fix": "eslint --fix ./source_code/*.js ./source_code/*/*.js",
     "jest": "jest",
     "tool:argstest": "node ./tool/argstest.js ./source_code",
+    "tool:c2e:source": "node ./tool/parts-CommonJS_To_ESModules/source/index.js ./source_code",
+    "tool:c2e:test_source": "node ./tool/parts-CommonJS_To_ESModules/source/index.js ./test_exec/source/test_index.js",
     "": ""
   },
   "repository": {
