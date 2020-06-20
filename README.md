@@ -13,17 +13,21 @@ https://www.npmjs.com/package/@standard-software/parts
 
 ## Support platform
 
+- Node.js
+- Deno
 - Major Web Browser
   - Chrome
   - Edge
   - firefox
   - Opera
   - Vivaldi
-  - IE
+  - IE11
 - Google Apps Script
   - Google SpreadSheet
-- Node
+  - V8 
+  - Rhino
 - Windows Scripting Host (WSH)
+  - (not support above ver 6.0.0, support below ver 5.9.0 )
 
 ## How to use parts.js in Node.js
 
@@ -53,6 +57,30 @@ console.log(
 );
 ```
     node --experimental-modules index.mjs
+
+## How to use parts.js in Deno
+
+### local
+```
+// index.js
+import parts from './source_code/index.js';
+
+console.log(
+  'parts version is ', parts.VERSION
+);
+```
+    deno run index.js
+
+### web
+```
+// index.js
+import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/master/source_code/index.js';
+
+console.log(
+  'parts version is ', parts.VERSION
+);
+```
+    deno run index.js
 
 ## How to use parts.js in HTML page
 
@@ -90,10 +118,8 @@ https://script.google.com/home
 
 - input name for example [parts.js test]
 - menu [file][new][script file]
-- input [parts]
-- created parts.gs
-
-You can copy and paste ./release_build/parts.js code into parts.gs
+- input [parts] and created parts.gs file
+- Please copy and paste ./release_build/parts.js to parts.gs 
 
 - project
   - code.gs
@@ -110,7 +136,7 @@ function myFunction() {
 
 You can now use the functions of the parts.js object.
 
-To see the execution results
+To see console.log execution results
 
 Google Apps Script Home
 [parts.js test][run count][my function]
@@ -140,6 +166,10 @@ function myFunction() {
   console.log(outputFunction());
 }
 ```
+
+V8 engine support arrow function.
+
+You can now use the functions of the parts.js object.
 
 ## How to use parts.js in Google SpreadSheet
 
@@ -202,36 +232,17 @@ function myFunction() {
 
 same [How to use Google Apps Script]
 
-## How to use parts.js in WSH (Windows Scripting Host .wsf file)
-
-### refer to example
-
-- partsjs/how_to_use.wsf
-- partsjs/test_exec/release_wsh/test_index.wsf
-
-### wsf file (ex. index.wsf)
-
-```
-<?xml version="1.0" encoding="shift-jis" ?>
-<job>
-  <script language="JavaScript">
-  <![CDATA[
-    var console = {};
-  ]]>
-  </script>
-  <script language="JavaScript" src="./release_build/parts.js"></script>
-  <script language="JavaScript">
-  <![CDATA[
-    WScript.Echo('parts version is ' + parts.VERSION)
-  ]]>
-  </script>
-</job>
-```
-
-You can now use the functions of the parts.js object.
-
-
 ## Version
+
+### 6.0.0
+#### 2020/06/20(Sat)
+- support deno 
+  - source CommonJS to ESModules
+  - add code change tool parts-CommonJS_To_ESModules
+- unsupport wsh
+  - Code converted from ESModules by babel does not support wsh
+- delete test_jest/source
+- delete test_exec/release_wsh
 
 ### 5.8.2
 #### 2020/06/19(Fri)

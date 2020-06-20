@@ -1,8 +1,8 @@
-const parts = require('../../release_build/parts.js');
+const { parts } = require('../../release_build/parts.js');
 
 const {
   test_execute_index,
-} = require('../../source_code/index.test.js');
+} = require('../../debug_build/index.test.js');
 
 parts.test.checkEqual = (a, b) => {
   expect(a).toEqual(b);

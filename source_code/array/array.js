@@ -19,5 +19,7 @@ export * from './array_common.js'
 export * from './NumberArray.js'
 export * from './IntegerArray.js'
 export * from './arrayToIndexValueArray.js'
-export * from './array_operation.js'
-export * from './array_operation_sort.js'
+export const operation = {
+  ...array_operation,
+  ...array_operation_sort,
+}

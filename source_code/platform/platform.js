@@ -7,39 +7,56 @@ import {
 } from '../compare/includes_common.js';
 
 export const isWebBrowser = () => {
-  return typeof window !== 'undefined';
+  return name() === 'WebBrowser';
 };
 
 export const isWindowsScriptHost = () => {
-  return typeof WScript !== 'undefined';
+  return name() === 'WindowsScriptHost';
 };
 
 export const isGoogleAppsScript = () => {
-  return typeof Browser !== 'undefined';
+  return name() === 'GoogleAppsScript';
+};
+
+export const isJest = () => {
+  return name() === 'Jest';
 };
 
 export const isNodeJs = () => {
   return name() === 'Node.js';
 };
 
+export const isDeno = () => {
+  return name() === 'Deno';
+}
+
 export const name = () => {
   let result;
 
-  if (isWindowsScriptHost()) {
+  if (typeof WScript !== 'undefined') {
     result = 'WindowsScriptHost';
-  } else if (isWebBrowser()) {
-    result = 'WebBrowser';
-  } else if (isGoogleAppsScript()) {
+  } else if (typeof Deno !== 'undefined') {
+    result = 'Deno';
+  } else if (typeof Browser !== 'undefined') {
     result = 'GoogleAppsScript';
-  } else {
+  } else if (typeof window === 'undefined') {
     result = 'Node.js';
+  } else if (typeof jest !== 'undefined') {
+    result = 'Jest';
+  } else if (typeof process !== 'undefined') {
+    result = 'WebBrowser';
+  } else {
+    result = 'unknown';
   };
 
   if (_includes([
     'WindowsScriptHost',
     'WebBrowser',
     'GoogleAppsScript',
+    'Deno',
     'Node.js',
+    'Jest',
+    'unknown',
   ], result) === false) {
     throw new Error('platform name error');
   }
@@ -114,6 +131,8 @@ export default {
   isWindowsScriptHost,
   isGoogleAppsScript,
   isNodeJs,
+  isDeno,
+  isJest,
 
   browserName,
   isChrome,

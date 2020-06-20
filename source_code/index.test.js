@@ -1,6 +1,20 @@
+import { test_execute_root         } from './root/root.test.js';
+import { test_execute_type         } from './type/type.test.js';
+import { test_execute_syntax       } from './syntax/syntax.test.js';
+import { test_execute_test         } from './test/test.test.js';
+import { test_execute_compare      } from './compare/compare.test.js';
+import { test_execute_convert      } from './convert/convert.test.js';
+import { test_execute_number       } from './number/number.test.js';
+import { test_execute_string       } from './string/string.test.js';
+import { test_execute_object       } from './object/object.test.js';
+import { test_execute_array        } from './array/array.test.js';
+import { test_execute_consoleHook  } from './consoleHook/consoleHook.test.js';
+import { test_execute_other        } from './other/other.test.js';
+
 export const test_execute_index = (parts) => {
 
   console.log(`parts.js version: ${parts.VERSION}`);
+
   console.log(`platform: ${parts.platform.name()}`);
   if (parts.platform.isWebBrowser()) {
     console.log(`  web browser: ${parts.platform.browserName()}`);
@@ -11,19 +25,6 @@ export const test_execute_index = (parts) => {
   }
   console.log('test start');
 
-  import { test_execute_root         } from './root/root.test.js';
-  import { test_execute_type         } from './type/type.test.js';
-  import { test_execute_syntax       } from './syntax/syntax.test.js';
-  import { test_execute_test         } from './test/test.test.js';
-  import { test_execute_compare      } from './compare/compare.test.js';
-  import { test_execute_convert      } from './convert/convert.test.js';
-  import { test_execute_number       } from './number/number.test.js';
-  import { test_execute_string       } from './string/string.test.js';
-  import { test_execute_object       } from './object/object.test.js';
-  import { test_execute_array        } from './array/array.test.js';
-  import { test_execute_consoleHook  } from './consoleHook/consoleHook.test.js';
-  import { test_execute_other        } from './other/other.test.js';
-
   const test_execute_nameSpace = (parts) => {
     const { describe, it, checkEqual } = parts.test;
     describe('test_execute_nameSpace', () => {
@@ -32,9 +33,8 @@ export const test_execute_index = (parts) => {
 
       it('test_execute_nameSpace 1', () => {
 
-        const countArray = parts.platform.isWindowsScriptHost()
-          ? [317, 13, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36]
-          : [317, 13, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
+        const countArray =
+          [317, 15, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
         checkEqual(countArray.shift(),  propertyCount(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));

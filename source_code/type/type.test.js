@@ -204,7 +204,10 @@ export const test_execute_type = (parts) => {
           checkType('object',    '[object Object]',             new Proxy({}, {}));
           checkType('object',    '[object WebAssembly]',        WebAssembly);
         }
-        checkType('object',    '[object Object]',             Intl);
+
+        if (!parts.platform.isDeno()) {
+          checkType('object',    '[object Object]',             Intl);
+        }
       });
     };
 

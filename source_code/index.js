@@ -1,4 +1,3 @@
-require('./polyfill.js');
 import _root from './root/root.js';
 import _platform from './platform/platform.js';
 import _type from './type/type.js';
@@ -36,7 +35,9 @@ propertyNames.PLATFORM =
   'isWebBrowser,' +
   'isWindowsScriptHost,' +
   'isGoogleAppsScript,' +
+  'isJest,' +
   'isNodeJs,' +
+  'isDeno,' +
   'browserName,' +
   'isChrome,' +
   'isFirefox,' +
@@ -268,13 +269,27 @@ export const parts = {
   consoleHook,
   object,
   array,
-
   root,
-
   ...rootNames,
+  parts: {
+    VERSION,
+    platform,
+    type,
+    test,
+    syntax,
+    compare,
+    convert,
+    number,
+    string,
+    consoleHook,
+    object,
+    array,
+    root,
+    ...rootNames,
+  }
 };
 
 export default {
   ...parts,
-  parts,
 }
+
