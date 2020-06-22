@@ -5,7 +5,7 @@
   "description": "JavaScript Code Parts",
   "main": "./release_build/parts.js",
   "scripts": {
-    "babel": "babel --config-file ./config/babel.config.js ./source_code --out-dir ./debug_build",
+    "babel": "babel --config-file ./config/babel.config.js ./source --out-dir ./debug_build",
     "webpack": "webpack --config ./config/webpack.config.js",
     "webpack_testcode": "webpack --config ./config/webpack_testcode.config.js",
     "_test:source:deno": "deno run ./test_exec/source/test_index.js",
@@ -14,7 +14,7 @@
     "start": "npm run _test:source:deno && npm run babel && npm run _test:debug && npm run webpack && npm run webpack_testcode && npm run _test:release",
     "start:all": "npm start && jest",
     "eslint": "eslint",
-    "eslint:fix": "eslint --fix ./source_code/*.js ./source_code/*/*.js",
+    "eslint:fix": "eslint --fix ./source/*.js ./source/*/*.js",
     "jest": "jest",
     "": ""
   },
