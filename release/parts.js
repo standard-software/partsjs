@@ -145,7 +145,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '6.0.0';
+var VERSION = '6.1.0 beta';
 exports.VERSION = VERSION;
 var rootNames = {};
 exports.rootNames = rootNames;
@@ -2820,7 +2820,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isOpera = exports.isSafari = exports.isInternetExplorer = exports.isEdge = exports.isFirefox = exports.isChrome = exports.browserName = exports.name = exports.isDeno = exports.isNodeJs = exports.isJest = exports.isGoogleAppsScript = exports.isWindowsScriptHost = exports.isWebBrowser = void 0;
+exports["default"] = exports.isGasRhino = exports.isGasV8 = exports.googleAppScriptEngineName = exports.isOpera = exports.isSafari = exports.isInternetExplorer = exports.isEdge = exports.isFirefox = exports.isChrome = exports.browserName = exports.name = exports.isDeno = exports.isNodeJs = exports.isJest = exports.isGoogleAppsScript = exports.isWindowsScriptHost = exports.isWebBrowser = void 0;
 
 var _includes2 = __webpack_require__(21);
 
@@ -2882,11 +2882,6 @@ var name = function name() {
   }
 
   ;
-
-  if ((0, _includes2._includes)(['WindowsScriptHost', 'WebBrowser', 'GoogleAppsScript', 'Deno', 'Node.js', 'Jest', 'unknown'], result) === false) {
-    throw new Error('platform name error');
-  }
-
   return result;
 };
 
@@ -2913,10 +2908,6 @@ var browserName = function browserName() {
     } else {
       result = 'other';
     }
-  }
-
-  if ((0, _includes2._includes)(['Chrome', 'Firefox', 'Edge', 'InternetExplorer', 'Safari', 'Opera', 'other', ''], result) === false) {
-    throw new Error('platform browserName error');
   }
 
   return result;
@@ -2959,6 +2950,32 @@ var isOpera = function isOpera() {
 };
 
 exports.isOpera = isOpera;
+
+var googleAppScriptEngineName = function googleAppScriptEngineName() {
+  var result = '';
+
+  if (isGoogleAppsScript()) {
+    if (typeof Object.toSource === 'undefined') {
+      result = 'V8';
+    } else {
+      result = 'Rhino';
+    }
+  }
+};
+
+exports.googleAppScriptEngineName = googleAppScriptEngineName;
+
+var isGasV8 = function isGasV8() {
+  return googleAppScriptEngineName() === 'V8';
+};
+
+exports.isGasV8 = isGasV8;
+
+var isGasRhino = function isGasRhino() {
+  return googleAppScriptEngineName() === 'Rhino';
+};
+
+exports.isGasRhino = isGasRhino;
 var _default = {
   name: name,
   isWebBrowser: isWebBrowser,

@@ -238,7 +238,8 @@ same [How to use Google Apps Script]
 #### 2020/06/22(Mon)
 - rename folder
   - source_code >> source
-  - debug_build >> build
+  - debug_build >> build/babel_webpack/babel
+  - release_build >> build/babel_webpack/webpack
 
 ### 6.0.0
 #### 2020/06/20(Sat)

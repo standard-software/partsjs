@@ -1,8 +1,8 @@
-const { parts } = require('../../release_build/parts.js');
+const { parts } = require('../../build/babel_webpack/webpack/parts.js');
 
 const {
   test_execute_index,
-} = require('../../release_build/test_parts.js');
+} = require('../../build/babel_webpack/webpack/test_parts.js');
 
 parts.platform.buildMode = 'release';
 
