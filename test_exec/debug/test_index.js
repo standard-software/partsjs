@@ -1,8 +1,8 @@
-const { parts } = require('../../debug_build/index.js');
+const { parts } = require('../../build/babel_webpack/babel/index.js');
 
 const {
   test_execute_index,
-} = require('../../debug_build/index.test.js');
+} = require('../../build/babel_webpack/babel/index.test.js');
 
 parts.platform.buildMode = 'debug';
 

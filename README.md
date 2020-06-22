@@ -234,6 +234,12 @@ same [How to use Google Apps Script]
 
 ## Version
 
+### 6.1.0
+#### 2020/06/22(Mon)
+- rename folder
+  - source_code >> source
+  - debug_build >> build
+
 ### 6.0.0
 #### 2020/06/20(Sat)
 - support deno 

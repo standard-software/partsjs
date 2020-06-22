@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'none',
-  entry: ['./debug_build/index.js'],
+  entry: ['./build/babel_webpack/babel/index.js'],
   output: {
     filename: 'parts.js',
     path: __dirname + '/../release_build/',

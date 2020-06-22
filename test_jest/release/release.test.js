@@ -2,7 +2,7 @@ const { parts } = require('../../release_build/parts.js');
 
 const {
   test_execute_index,
-} = require('../../debug_build/index.test.js');
+} = require('../../build/babel_webpack/babel/index.test.js');
 
 parts.test.checkEqual = (a, b) => {
   expect(a).toEqual(b);
