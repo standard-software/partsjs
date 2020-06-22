@@ -11,7 +11,7 @@ import _object from './object/object.js';
 import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 
-export const VERSION = '6.0.0';
+export const VERSION = '6.1.0 beta';
 
 export const rootNames = {};
 export const propertyNames = {};
