@@ -71,29 +71,27 @@ var name = function name() {
 exports.name = name;
 
 var browserName = function browserName() {
-  var result = '';
-
-  if (isWebBrowser()) {
-    var ua = window.navigator.userAgent.toLowerCase();
-
-    if ((0, _includes_common._includesSome)(ua, ['msie', 'trident'])) {
-      result = 'InternetExplorer';
-    } else if ((0, _includes2._includes)(ua, 'edge')) {
-      result = 'Edge';
-    } else if ((0, _includes2._includes)(ua, 'opr')) {
-      result = 'Opera';
-    } else if ((0, _includes2._includes)(ua, 'chrome')) {
-      result = 'Chrome';
-    } else if ((0, _includes2._includes)(ua, 'safari')) {
-      result = 'Safari';
-    } else if ((0, _includes2._includes)(ua, 'firefox')) {
-      result = 'Firefox';
-    } else {
-      result = 'other';
-    }
+  if (!isWebBrowser()) {
+    return '';
   }
 
-  return result;
+  var ua = window.navigator.userAgent.toLowerCase();
+
+  if ((0, _includes_common._includesSome)(ua, ['msie', 'trident'])) {
+    return 'InternetExplorer';
+  } else if ((0, _includes2._includes)(ua, 'edge')) {
+    return 'Edge';
+  } else if ((0, _includes2._includes)(ua, 'opr')) {
+    return 'Opera';
+  } else if ((0, _includes2._includes)(ua, 'chrome')) {
+    return 'Chrome';
+  } else if ((0, _includes2._includes)(ua, 'safari')) {
+    return 'Safari';
+  } else if ((0, _includes2._includes)(ua, 'firefox')) {
+    return 'Firefox';
+  } else {
+    return 'other';
+  }
 };
 
 exports.browserName = browserName;
@@ -135,14 +133,14 @@ var isOpera = function isOpera() {
 exports.isOpera = isOpera;
 
 var googleAppScriptEngineName = function googleAppScriptEngineName() {
-  var result = '';
+  if (!isGoogleAppsScript()) {
+    return '';
+  }
 
-  if (isGoogleAppsScript()) {
-    if (typeof Object.toSource === 'undefined') {
-      result = 'V8';
-    } else {
-      result = 'Rhino';
-    }
+  if (typeof Object.toSource === 'undefined') {
+    return 'V8';
+  } else {
+    return 'Rhino';
   }
 };
 

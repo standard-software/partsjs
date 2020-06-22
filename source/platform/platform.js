@@ -32,7 +32,6 @@ export const isDeno = () => {
 
 export const name = () => {
   let result;
-
   if (typeof WScript !== 'undefined') {
     result = 'WindowsScriptHost';
   } else if (typeof Deno !== 'undefined') {
@@ -48,56 +47,30 @@ export const name = () => {
   } else {
     result = 'unknown';
   };
-
-  if (_includes([
-    'WindowsScriptHost',
-    'WebBrowser',
-    'GoogleAppsScript',
-    'Deno',
-    'Node.js',
-    'Jest',
-    'unknown',
-  ], result) === false) {
-    throw new Error('platform name error');
-  }
   return result;
 };
 
 export const browserName = () => {
-  let result = '';
-
-  if (isWebBrowser()) {
-    const ua = window.navigator.userAgent.toLowerCase();
-    if (_includesSome(ua, ['msie', 'trident'])) {
-      result = 'InternetExplorer';
-    } else if (_includes(ua, 'edge')) {
-      result = 'Edge';
-    } else if (_includes(ua, 'opr')) {
-      result = 'Opera';
-    } else if (_includes(ua, 'chrome')) {
-      result = 'Chrome';
-    } else if (_includes(ua, 'safari')) {
-      result = 'Safari';
-    } else if (_includes(ua, 'firefox')) {
-      result = 'Firefox';
-    } else {
-      result = 'other';
-    }
+  if (!isWebBrowser()) {
+    return '';
   }
 
-  if (_includes([
-    'Chrome',
-    'Firefox',
-    'Edge',
-    'InternetExplorer',
-    'Safari',
-    'Opera',
-    'other',
-    '',
-  ], result) === false) {
-    throw new Error('platform browserName error');
+  const ua = window.navigator.userAgent.toLowerCase();
+  if (_includesSome(ua, ['msie', 'trident'])) {
+    return 'InternetExplorer';
+  } else if (_includes(ua, 'edge')) {
+    return 'Edge';
+  } else if (_includes(ua, 'opr')) {
+    return 'Opera';
+  } else if (_includes(ua, 'chrome')) {
+    return 'Chrome';
+  } else if (_includes(ua, 'safari')) {
+    return 'Safari';
+  } else if (_includes(ua, 'firefox')) {
+    return 'Firefox';
+  } else {
+    return 'other';
   }
-  return result;
 };
 
 
@@ -124,6 +97,25 @@ export const isSafari = () => {
 export const isOpera = () => {
   return browserName() === 'Opera';
 };
+
+export const googleAppScriptEngineName = () => {
+  if (!isGoogleAppsScript()) {
+    return '';
+  }
+  if (typeof Object.toSource === 'undefined') {
+    return 'V8';
+  } else {
+    return 'Rhino';
+  }
+};
+
+export const isGasV8 = () => {
+  return googleAppScriptEngineName() === 'V8';
+}
+
+export const isGasRhino = () => {
+  return googleAppScriptEngineName() === 'Rhino';
+}
 
 export default {
   name,

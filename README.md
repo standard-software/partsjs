@@ -240,6 +240,8 @@ same [How to use Google Apps Script]
   - source_code >> source
   - debug_build >> build/babel_webpack/babel
   - release_build >> build/babel_webpack/webpack
+- add platform.js
+  - googleAppScriptEngineName isGasV8 isGasRhino
 
 ### 6.0.0
 #### 2020/06/20(Sat)
