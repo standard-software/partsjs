@@ -1,8 +1,8 @@
-const { parts } = require('../../build/babel_webpack/webpack/parts.js');
+const { parts } = require('../../../build/babel_webpack/babel/index.js');
 
 const {
   test_execute_index,
-} = require('../../build/babel_webpack/babel/index.test.js');
+} = require('../../../build/babel_webpack/babel/index.test.js');
 
 parts.test.checkEqual = (a, b) => {
   expect(a).toEqual(b);

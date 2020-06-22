@@ -1,4 +1,4 @@
 module.exports = {
   verbose: true,
-  rootDir: 'test_jest',
+  rootDir: 'test/jest',
 };
