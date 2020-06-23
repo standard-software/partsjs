@@ -767,6 +767,8 @@ export const test_execute_syntax = (parts) => {
       it('test_canUseMap', () => {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseMap());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseMap());
         } else {
           checkEqual(true,  canUseMap());
         }
@@ -776,6 +778,8 @@ export const test_execute_syntax = (parts) => {
     const test_canUseSet = function() {
       it('test_canUseSet', () => {
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseSet());
+        } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseSet());
         } else {
           checkEqual(true,  canUseSet());

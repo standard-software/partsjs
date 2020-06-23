@@ -54,7 +54,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [317, 15, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
+        var countArray = [317, 18, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -110,6 +110,7 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _otherTest.test_execute_other)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
+    console.log('test finish');
   });
 };
 

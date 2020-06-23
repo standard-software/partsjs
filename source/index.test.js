@@ -34,7 +34,7 @@ export const test_execute_index = (parts) => {
       it('test_execute_nameSpace 1', () => {
 
         const countArray =
-          [317, 15, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
+          [317, 18, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
         checkEqual(countArray.shift(),  propertyCount(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));
@@ -127,6 +127,7 @@ export const test_execute_index = (parts) => {
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
 
+    console.log('test finish');
   });
 };
 

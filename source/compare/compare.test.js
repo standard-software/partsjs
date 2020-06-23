@@ -229,6 +229,9 @@ export const test_execute_compare = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
 
         // Map
         var map1 = new Map();
@@ -279,6 +282,9 @@ export const test_execute_compare = (parts) => {
     const test_equal_set = () => {
       it('test_equal_set', () => {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -660,6 +666,9 @@ export const test_execute_compare = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
 
         // Map
         var map1 = new Map();
@@ -707,7 +716,11 @@ export const test_execute_compare = (parts) => {
 
     const test_equalDeep_map_object_array = () => {
       it('test_equalDeep_map_object_array', () => {
+
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -758,7 +771,11 @@ export const test_execute_compare = (parts) => {
 
     const test_equalDeep_map_CircularReference = () => {
       it('test_equalDeep_map_CircularReference', () => {
+
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -827,6 +844,9 @@ export const test_execute_compare = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
 
         // Set
         var set1 = new Set();
@@ -874,7 +894,11 @@ export const test_execute_compare = (parts) => {
 
     const test_equalDeep_set_object_array = () => {
       it('test_equalDeep_set_object_array', () => {
+
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -925,9 +949,14 @@ export const test_execute_compare = (parts) => {
 
     const test_equalDeep_set_CircularReference = () => {
       it('test_equalDeep_set_CircularReference', () => {
+
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
+
         // CircularReference
         var set1 = new Set();
         set1.add({ a: '1' }); set1.add(['b']);
@@ -2219,7 +2248,9 @@ export const test_execute_compare = (parts) => {
       it('test_includes', () => {
 
         if (!parts.platform.isWindowsScriptHost()
-        && !parts.platform.isInternetExplorer()) {
+          && !parts.platform.isInternetExplorer()
+          && !parts.platform.isGasRhino()
+        ) {
           checkEqual(true,  'abc'.includes('a'));
 
           // string.includes strange empty string

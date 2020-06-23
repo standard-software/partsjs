@@ -571,6 +571,9 @@ export const test_execute_root = (parts) => {
         if (parts.platform.isInternetExplorer()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
 
         var symbol1 = Symbol();
         checkEqual(true,
@@ -625,6 +628,9 @@ export const test_execute_root = (parts) => {
           return;
         }
         if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -714,6 +720,9 @@ export const test_execute_root = (parts) => {
     const test_cloneDeep_set = () => {
       it('test_cloneDeep_set', () => {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+        if (parts.platform.isGasRhino()) {
           return;
         }
 

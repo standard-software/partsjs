@@ -2199,6 +2199,9 @@ export const test_execute_array = (parts) => {
         if (parts.platform.isInternetExplorer()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
 
         const arrayEntries = (array) => {
           const result = [];

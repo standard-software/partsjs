@@ -45,6 +45,9 @@ propertyNames.PLATFORM =
   'isInternetExplorer,' +
   'isSafari,' +
   'isOpera,' +
+  'googleAppScriptEngineName,' +
+  'isGasV8,' +
+  'isGasRhino,' +
   'buildMode,' +
   '';
 export const platform = _copyProperty(_platform, propertyNames.PLATFORM);

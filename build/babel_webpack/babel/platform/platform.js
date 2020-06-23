@@ -172,6 +172,9 @@ var _default = {
   isInternetExplorer: isInternetExplorer,
   isSafari: isSafari,
   isOpera: isOpera,
+  googleAppScriptEngineName: googleAppScriptEngineName,
+  isGasV8: isGasV8,
+  isGasRhino: isGasRhino,
   buildMode: ''
 };
 exports["default"] = _default;

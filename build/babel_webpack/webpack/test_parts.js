@@ -162,7 +162,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [317, 15, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
+        var countArray = [317, 18, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
         checkEqual(countArray.shift(), propertyCount(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -218,6 +218,7 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _otherTest.test_execute_other)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
+    console.log('test finish');
   });
 };
 
@@ -834,6 +835,10 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
+
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbolAll(symbol1));
         var value1 = [symbol1];
@@ -878,6 +883,10 @@ var test_execute_root = function test_execute_root(parts) {
         }
 
         if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -975,6 +984,10 @@ var test_execute_root = function test_execute_root(parts) {
     var test_cloneDeep_set = function test_cloneDeep_set() {
       it('test_cloneDeep_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -1283,6 +1296,9 @@ var test_execute_type = function test_execute_type(parts) {
         if (parts.platform.isWindowsScriptHost()) {
           checkType('undefined', '[object Object]', undefined);
           checkType('object', '[object Object]', null);
+        } else if (parts.platform.isGasRhino()) {
+          checkType('undefined', '[object Object]', undefined);
+          checkType('object', '[object Object]', null); // bad specification
         } else {
           checkType('undefined', '[object Undefined]', undefined);
           checkType('object', '[object Null]', null); // bad specification
@@ -1323,17 +1339,19 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
-        checkType('object', '[object Int8Array]', new Int8Array());
-        checkType('object', '[object Uint8Array]', new Uint8Array());
-        checkType('object', '[object Uint8ClampedArray]', new Uint8ClampedArray());
-        checkType('object', '[object Int16Array]', new Int16Array());
-        checkType('object', '[object Uint16Array]', new Uint16Array());
-        checkType('object', '[object Int32Array]', new Int32Array());
-        checkType('object', '[object Uint32Array]', new Uint32Array());
-        checkType('object', '[object Float32Array]', new Float32Array());
-        checkType('object', '[object Float64Array]', new Float64Array());
+        if (!parts.platform.isGasRhino()) {
+          checkType('object', '[object Int8Array]', new Int8Array());
+          checkType('object', '[object Uint8Array]', new Uint8Array());
+          checkType('object', '[object Uint8ClampedArray]', new Uint8ClampedArray());
+          checkType('object', '[object Int16Array]', new Int16Array());
+          checkType('object', '[object Uint16Array]', new Uint16Array());
+          checkType('object', '[object Int32Array]', new Int32Array());
+          checkType('object', '[object Uint32Array]', new Uint32Array());
+          checkType('object', '[object Float32Array]', new Float32Array());
+          checkType('object', '[object Float64Array]', new Float64Array());
+        }
 
-        if (parts.platform.isInternetExplorer()) {
+        if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new Map());
           checkType('object', '[object Object]', new WeakMap());
           checkType('object', '[object Object]', new Set());
@@ -1345,7 +1363,9 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('symbol', '[object Symbol]', Symbol());
         }
 
-        checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
+        if (!parts.platform.isGasRhino()) {
+          checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
+        }
 
         if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
           checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8)); // firefox no support
@@ -1355,7 +1375,7 @@ var test_execute_type = function test_execute_type(parts) {
 
         checkType('object', '[object JSON]', JSON);
 
-        if (!parts.platform.isInternetExplorer()) {
+        if (parts.platform.isGasRhino()) {} else if (!parts.platform.isInternetExplorer()) {
           checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
           checkType('function', '[object Function]', Promise);
         } else {
@@ -1413,7 +1433,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('function', '[object AsyncFunction]', new AsyncFunction());
         }
 
-        if (parts.platform.isInternetExplorer()) {// no define Proxy
+        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define Proxy
           // no define WebAssembly
         } else {
           checkType('object', '[object Object]', Reflect);
@@ -1421,7 +1441,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
 
-        if (!parts.platform.isDeno()) {
+        if (!parts.platform.isDeno() && !parts.platform.isGasRhino()) {
           checkType('object', '[object Object]', Intl);
         }
       });
@@ -1978,7 +1998,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, Array.isArray(new Array(1, 2, 3)));
         checkEqual(true, Array.isArray(new Array()));
 
-        if (!parts.platform.isWindowsScriptHost()) {
+        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isGasRhino()) {
           checkEqual(false, Array.isArray(new Int8Array()));
           checkEqual(false, Array.isArray(new Uint8Array()));
           checkEqual(false, Array.isArray(new Uint8ClampedArray()));
@@ -1997,7 +2017,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isArrayAll(new Array(1, 2, 3)));
         checkEqual(true, isArrayAll(new Array()));
 
-        if (!parts.platform.isWindowsScriptHost()) {
+        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isGasRhino()) {
           checkEqual(false, isArrayAll(new Int8Array()));
           checkEqual(false, isArrayAll(new Uint8Array()));
           checkEqual(false, isArrayAll(new Uint8ClampedArray()));
@@ -2016,7 +2036,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isArrayTypeAll(new Array(1, 2, 3)));
         checkEqual(true, isArrayTypeAll(new Array()));
 
-        if (!parts.platform.isWindowsScriptHost()) {
+        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isGasRhino()) {
           checkEqual(true, isArrayTypeAll(new Int8Array()));
           checkEqual(true, isArrayTypeAll(new Uint8Array()));
           checkEqual(true, isArrayTypeAll(new Uint8ClampedArray()));
@@ -2105,6 +2125,10 @@ var test_execute_type = function test_execute_type(parts) {
           return;
         }
 
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
+
         checkEqual(false, isSymbolAll(1));
         checkEqual(true, isSymbolAll(Symbol()));
       });
@@ -2113,6 +2137,10 @@ var test_execute_type = function test_execute_type(parts) {
     var test_isMap = function test_isMap() {
       it('test_isMap', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -2146,6 +2174,10 @@ var test_execute_type = function test_execute_type(parts) {
     var test_isSet = function test_isSet() {
       it('test_isSet', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -2989,6 +3021,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       it('test_canUseMap', function () {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseMap());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseMap());
         } else {
           checkEqual(true, canUseMap());
         }
@@ -2998,6 +3032,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     var test_canUseSet = function test_canUseSet() {
       it('test_canUseSet', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseSet());
+        } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseSet());
         } else {
           checkEqual(true, canUseSet());
@@ -3398,6 +3434,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equal_map', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // Map
 
 
@@ -3446,6 +3486,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equal_set = function test_equal_set() {
       it('test_equal_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // Set
 
@@ -3918,6 +3962,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equalDeep_map', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // Map
 
 
@@ -3973,6 +4021,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equalDeep_map_object_array = function test_equalDeep_map_object_array() {
       it('test_equalDeep_map_object_array', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // Map Object Array
 
@@ -4073,6 +4125,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equalDeep_map_CircularReference', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // CircularReference
 
 
@@ -4158,6 +4214,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equalDeep_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // Set
 
 
@@ -4213,6 +4273,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equalDeep_set_object_array = function test_equalDeep_set_object_array() {
       it('test_equalDeep_set_object_array', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // Set Object Array
 
@@ -4312,6 +4376,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equalDeep_set_CircularReference = function test_equalDeep_set_CircularReference() {
       it('test_equalDeep_set_CircularReference', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // CircularReference
 
@@ -5987,7 +6055,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isInternetExplorer()) {
+        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isInternetExplorer() && !parts.platform.isGasRhino()) {
           checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
           checkEqual(true, 'abc'.includes(''));
@@ -6717,12 +6785,20 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(100000, Number('1.e+5')); // Number different
 
         checkEqual(291, Number('0x123'));
-        checkEqual(NaN, Number('+0x123'));
-        checkEqual(NaN, Number('-0x123'));
+
+        if (parts.platform.isGasRhino()) {
+          checkEqual(291, Number('+0x123'));
+          checkEqual(-291, Number('-0x123'));
+        } else {
+          checkEqual(NaN, Number('+0x123'));
+          checkEqual(NaN, Number('-0x123'));
+        }
 
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN, Number('0o123'));
         } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(NaN, Number('0o123'));
+        } else if (parts.platform.isGasRhino()) {
           checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));
@@ -10102,6 +10178,10 @@ var test_execute_object = function test_execute_object(parts) {
           return;
         }
 
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
+
         var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         var object1 = {
           a: '1',
@@ -12072,6 +12152,10 @@ var test_execute_array = function test_execute_array(parts) {
         }
 
         if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 

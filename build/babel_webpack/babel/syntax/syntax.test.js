@@ -783,6 +783,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       it('test_canUseMap', function () {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseMap());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseMap());
         } else {
           checkEqual(true, canUseMap());
         }
@@ -792,6 +794,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     var test_canUseSet = function test_canUseSet() {
       it('test_canUseSet', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseSet());
+        } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseSet());
         } else {
           checkEqual(true, canUseSet());

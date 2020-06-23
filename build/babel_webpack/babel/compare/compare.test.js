@@ -268,6 +268,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equal_map', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // Map
 
 
@@ -316,6 +320,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equal_set = function test_equal_set() {
       it('test_equal_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // Set
 
@@ -788,6 +796,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equalDeep_map', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // Map
 
 
@@ -843,6 +855,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equalDeep_map_object_array = function test_equalDeep_map_object_array() {
       it('test_equalDeep_map_object_array', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // Map Object Array
 
@@ -943,6 +959,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equalDeep_map_CircularReference', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // CircularReference
 
 
@@ -1028,6 +1048,10 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equalDeep_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
         } // Set
 
 
@@ -1083,6 +1107,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equalDeep_set_object_array = function test_equalDeep_set_object_array() {
       it('test_equalDeep_set_object_array', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // Set Object Array
 
@@ -1182,6 +1210,10 @@ var test_execute_compare = function test_execute_compare(parts) {
     var test_equalDeep_set_CircularReference = function test_equalDeep_set_CircularReference() {
       it('test_equalDeep_set_CircularReference', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         } // CircularReference
 
@@ -2857,7 +2889,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
     var test_includes = function test_includes() {
       it('test_includes', function () {
-        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isInternetExplorer()) {
+        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isInternetExplorer() && !parts.platform.isGasRhino()) {
           checkEqual(true, 'abc'.includes('a')); // string.includes strange empty string
 
           checkEqual(true, 'abc'.includes(''));

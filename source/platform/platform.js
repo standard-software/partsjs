@@ -134,5 +134,9 @@ export default {
   isSafari,
   isOpera,
 
+  googleAppScriptEngineName,
+  isGasV8,
+  isGasRhino,
+
   buildMode: '',
 }

@@ -59,7 +59,7 @@ _copyProperty(_root2["default"], propertyNames.ROOT, root);
 _copyProperty(_root2["default"], propertyNames.ROOT, rootNames); // platform
 
 
-propertyNames.PLATFORM = 'name,' + 'isWebBrowser,' + 'isWindowsScriptHost,' + 'isGoogleAppsScript,' + 'isJest,' + 'isNodeJs,' + 'isDeno,' + 'browserName,' + 'isChrome,' + 'isFirefox,' + 'isEdge,' + 'isInternetExplorer,' + 'isSafari,' + 'isOpera,' + 'buildMode,' + '';
+propertyNames.PLATFORM = 'name,' + 'isWebBrowser,' + 'isWindowsScriptHost,' + 'isGoogleAppsScript,' + 'isJest,' + 'isNodeJs,' + 'isDeno,' + 'browserName,' + 'isChrome,' + 'isFirefox,' + 'isEdge,' + 'isInternetExplorer,' + 'isSafari,' + 'isOpera,' + 'googleAppScriptEngineName,' + 'isGasV8,' + 'isGasRhino,' + 'buildMode,' + '';
 
 var platform = _copyProperty(_platform2["default"], propertyNames.PLATFORM); // type
 

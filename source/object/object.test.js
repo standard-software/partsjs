@@ -392,6 +392,9 @@ export const test_execute_object = (parts) => {
         if (parts.platform.isInternetExplorer()) {
           return;
         }
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
 
         const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         const object1 = {a:'1', b:'2', c:'3'};

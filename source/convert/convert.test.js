@@ -420,12 +420,19 @@ export const test_execute_convert = (parts) => {
 
         // Number different
         checkEqual(291,       Number('0x123'));
-        checkEqual(NaN,       Number('+0x123'));
-        checkEqual(NaN,       Number('-0x123'));
+        if (parts.platform.isGasRhino()) {
+          checkEqual(291,       Number('+0x123'));
+          checkEqual(-291,      Number('-0x123'));
+        } else {
+          checkEqual(NaN,       Number('+0x123'));
+          checkEqual(NaN,       Number('-0x123'));
+        }
 
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(NaN,        Number('0o123'));
         } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(NaN,        Number('0o123'));
+        } else if (parts.platform.isGasRhino()) {
           checkEqual(NaN,        Number('0o123'));
         } else {
           checkEqual(83,        Number('0o123'));

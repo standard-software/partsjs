@@ -235,7 +235,7 @@ same [How to use Google Apps Script]
 ## Version
 
 ### 6.1.0
-#### 2020/06/22(Mon)
+#### 2020/06/24(Wed)
 - rename folder
   - source_code >> source
   - debug_build >> build/babel_webpack/babel
@@ -243,6 +243,7 @@ same [How to use Google Apps Script]
 - add platform.js
   - googleAppScriptEngineName isGasV8 isGasRhino
 - add run_check files
+- update testcode support Gas Rhino
 
 ### 6.0.0
 #### 2020/06/20(Sat)

@@ -600,6 +600,10 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
+
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbolAll(symbol1));
         var value1 = [symbol1];
@@ -644,6 +648,10 @@ var test_execute_root = function test_execute_root(parts) {
         }
 
         if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
@@ -741,6 +749,10 @@ var test_execute_root = function test_execute_root(parts) {
     var test_cloneDeep_set = function test_cloneDeep_set() {
       it('test_cloneDeep_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
           return;
         }
 
