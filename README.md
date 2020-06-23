@@ -242,6 +242,7 @@ same [How to use Google Apps Script]
   - release_build >> build/babel_webpack/webpack
 - add platform.js
   - googleAppScriptEngineName isGasV8 isGasRhino
+- add run_check files
 
 ### 6.0.0
 #### 2020/06/20(Sat)
