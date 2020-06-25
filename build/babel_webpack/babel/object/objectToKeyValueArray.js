@@ -16,7 +16,7 @@ var _objectToKeyValueArray = function _objectToKeyValueArray(object) {
   var result = [];
 
   for (var key in object) {
-    if (object.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(object, key)) {
       result.push([key, object[key]]);
     }
   }

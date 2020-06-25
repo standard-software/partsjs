@@ -54,8 +54,23 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [317, 18, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
-        checkEqual(countArray.shift(), propertyCount(parts));
+        var countArray = [318, 18, 3, 210, 9, 11, 23, 29, 7, 29, 14, 36];
+
+        var propertyCountForParts = function propertyCountForParts(parts) {
+          var result = propertyCount(parts);
+
+          if (!parts.isUndefined(parts["default"])) {
+            result -= 1;
+          }
+
+          if (!parts.isUndefined(parts.parts)) {
+            result -= 1;
+          }
+
+          return result;
+        };
+
+        checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
         checkEqual(countArray.shift(), propertyCount(parts.type));
@@ -83,12 +98,28 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual = _parts$test2.checkEqual;
     describe('test_execute_SelfReference', function () {
       it('test_parts_SelfReference', function () {
+        if (parts.isUndefined(parts.parts)) {
+          return;
+        }
+
         checkEqual(parts.VERSION, parts.parts.VERSION);
-        checkEqual(false, parts.isUndefined(parts.parts));
-        checkEqual(true, parts.isUndefined(parts.parts.parts));
         var parts1 = parts.cloneDeep(parts);
         delete parts1.parts;
+
+        if (!parts.isUndefined(parts1["default"])) {
+          delete parts1["default"];
+        }
+
         var parts2 = parts.cloneDeep(parts.parts);
+
+        if (!parts2.isUndefined(parts2.parts)) {
+          delete parts2.parts;
+        }
+
+        if (!parts.isUndefined(parts1["default"])) {
+          delete parts2["default"];
+        }
+
         checkEqual(true, parts.equalDeep(parts1, parts2));
       });
     });

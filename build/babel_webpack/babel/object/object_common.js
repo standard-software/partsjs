@@ -114,7 +114,7 @@ var _getPropertyBase = function _getPropertyBase(object, propertyPath) {
     }
 
     if (hasOwn) {
-      if (!result.hasOwnProperty(propertyArray[i])) {
+      if (!Object.prototype.hasOwnProperty.call(result, propertyArray[i])) {
         return {
           "in": false
         };

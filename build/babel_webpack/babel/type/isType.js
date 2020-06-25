@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotEmptyObj = exports.isNotObjType = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isEmptyObj = exports.isObjType = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArrayType = exports.isNotArray = exports.isNotObjectType = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArrayType = exports.isArray = exports.isEmptyObject = exports.isObjectType = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports._objectToStringCheck = exports.objectToString = exports._typeofCheck = void 0;
+exports["default"] = exports.isNotEmptyObj = exports.isNotObjType = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isEmptyObj = exports.isObjType = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArrayType = exports.isNotArray = exports.isNotModule = exports.isNotObjectType = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArrayType = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectType = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports._objectToStringCheck = exports.objectToString = exports._typeofCheck = void 0;
 
 var _propertyCount2 = require("../object/_propertyCount.js");
 
@@ -113,6 +113,16 @@ var isObjectType = function isObjectType(value) {
 
 exports.isObjectType = isObjectType;
 
+var isModule = function isModule(value) {
+  if (_objectToStringCheck('Module')(value)) {
+    return true;
+  }
+
+  return false;
+};
+
+exports.isModule = isModule;
+
 var isEmptyObject = function isEmptyObject(value) {
   if (!isObject(value)) {
     return false;
@@ -220,6 +230,12 @@ var isNotObjectType = function isNotObjectType(value) {
 
 exports.isNotObjectType = isNotObjectType;
 
+var isNotModule = function isNotModule(value) {
+  return !isModule(value);
+};
+
+exports.isNotModule = isNotModule;
+
 var isNotArray = function isNotArray(value) {
   return !isArray(value);
 };
@@ -323,6 +339,7 @@ var _default = {
   isFunction: isFunction,
   isObject: isObject,
   isObjectType: isObjectType,
+  isModule: isModule,
   isArray: isArray,
   isArrayType: isArrayType,
   isDate: isDate,
@@ -343,6 +360,7 @@ var _default = {
   isNotFunction: isNotFunction,
   isNotObject: isNotObject,
   isNotObjectType: isNotObjectType,
+  isNotModule: isNotModule,
   isNotArray: isNotArray,
   isNotArrayType: isNotArrayType,
   isNotDate: isNotDate,

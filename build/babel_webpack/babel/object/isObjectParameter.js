@@ -46,7 +46,7 @@ var isObjectParameter = function isObjectParameter(object, props) {
   var optionalPropMatchCount = 0;
 
   for (var property in object) {
-    if (object.hasOwnProperty(property)) {
+    if (Object.prototype.hasOwnProperty.call(object, property)) {
       if (props.indexOf(property) !== -1) {
         propMatchCount += 1;
       } else if (optionalProps.indexOf(property) !== -1) {

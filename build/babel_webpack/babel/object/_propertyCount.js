@@ -14,7 +14,7 @@ var _propertyCount = function _propertyCount(object) {
 
   if (hasOwn) {
     for (var property in object) {
-      if (object.hasOwnProperty(property)) {
+      if (Object.prototype.hasOwnProperty.call(object, property)) {
         result += 1;
       }
     }
