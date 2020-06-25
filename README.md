@@ -237,6 +237,9 @@ same [How to use Google Apps Script]
 ### 6.2.0
 #### 2020/06/25(Thu)
 - object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,
+- upddate testcode
+  - source deno import pattern
+  - build babel/webpack node requier pattern
 
 ### 6.1.0
 #### 2020/06/24(Wed)

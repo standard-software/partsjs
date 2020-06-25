@@ -1,4 +1,4 @@
-import parts from '../../source/index.js';
+import { parts } from '../../source/index.js';
 
 import {
   test_execute_index,
@@ -7,3 +7,5 @@ import {
 parts.platform.buildMode = 'source';
 
 test_execute_index(parts);
+
+// console.log(Object.keys(parts).toString());
