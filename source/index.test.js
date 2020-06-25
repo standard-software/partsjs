@@ -34,8 +34,18 @@ export const test_execute_index = (parts) => {
       it('test_execute_nameSpace 1', () => {
 
         const countArray =
-          [317, 18, 3, 208, 9, 11, 23, 29, 7, 29, 14, 36];
-        checkEqual(countArray.shift(),  propertyCount(parts));
+          [318, 18, 3, 210, 9, 11, 23, 29, 7, 29, 14, 36];
+        const propertyCountForParts = (parts) => {
+          let result = propertyCount(parts);
+          if (!parts.isUndefined(parts.default)) {
+            result -= 1;
+          }
+          if (!parts.isUndefined(parts.parts)) {
+            result -= 1;
+          }
+          return result;
+        }
+        checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));
         checkEqual(countArray.shift(),  propertyCount(parts.type));
@@ -47,6 +57,7 @@ export const test_execute_index = (parts) => {
         checkEqual(countArray.shift(),  propertyCount(parts.string));
         checkEqual(countArray.shift(),  propertyCount(parts.object));
         checkEqual(countArray.shift(),  propertyCount(parts.array));
+
         checkEqual(true,
           inProperty(
             parts,
@@ -96,15 +107,25 @@ export const test_execute_index = (parts) => {
     const { describe, it, checkEqual } = parts.test;
     describe('test_execute_SelfReference', () => {
       it('test_parts_SelfReference', () => {
+
+        if (parts.isUndefined(parts.parts)) {
+          return;
+        }
         checkEqual(parts.VERSION, parts.parts.VERSION);
-        checkEqual(false, parts.isUndefined(parts.parts));
-        checkEqual(true, parts.isUndefined(parts.parts.parts));
 
         const parts1 = parts.cloneDeep(parts);
         delete parts1.parts;
+        if (!parts.isUndefined(parts1.default)) {
+          delete parts1.default;
+        }
         const parts2 = parts.cloneDeep(parts.parts);
+        if (!parts2.isUndefined(parts2.parts)) {
+          delete parts2.parts;
+        }
+        if (!parts.isUndefined(parts1.default)) {
+          delete parts2.default;
+        }
         checkEqual(true,  parts.equalDeep(parts1, parts2));
-
       });
     });
   };

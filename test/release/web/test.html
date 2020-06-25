@@ -25,7 +25,8 @@
   outputMessage += '<br>\n'
   outputMessage += '<br>\n'
 
-  test_parts.test_execute_index(parts.parts);
+  test_parts.test_execute_index(parts);
+  // console.log(Object.keys(parts).toString());  
 
   outputMessage = outputMessage.split('  ').join('&nbsp;&nbsp;');
   document.write(outputMessage);

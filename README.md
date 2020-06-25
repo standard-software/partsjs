@@ -240,6 +240,7 @@ same [How to use Google Apps Script]
 - upddate testcode
   - source deno import pattern
   - build babel/webpack node requier pattern
+- add isModule isNotModule etc
 
 ### 6.1.0
 #### 2020/06/24(Wed)

@@ -76,6 +76,13 @@ export const isObjectType = (value) => {
   return ['function', 'object'].indexOf(typeof value) !== -1;
 };
 
+export const isModule = (value) => {
+  if (_objectToStringCheck('Module')(value)) {
+    return true;
+  }
+  return false;
+};
+
 export const isEmptyObject = value => {
   if (!isObject(value)) {
     return false;
@@ -116,6 +123,7 @@ export const isNotString      = value => !isString(value);
 export const isNotFunction    = value => !isFunction(value);
 export const isNotObject      = value => !isObject(value);
 export const isNotObjectType  = value => !isObjectType(value);
+export const isNotModule      = value => !isModule(value);
 export const isNotArray       = value => !isArray(value);
 export const isNotArrayType   = value => !isArrayType(value);
 export const isNotDate        = value => !isDate(value);
@@ -151,7 +159,7 @@ export default {
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction, isObject, isObjectType, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isError,
@@ -160,7 +168,7 @@ export default {
 
   isNotUndefined, isNotNull, isNotNaNStrict,
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
-  isNotFunction, isNotObject, isNotObjectType,
+  isNotFunction, isNotObject, isNotObjectType, isNotModule,
   isNotArray, isNotArrayType,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,

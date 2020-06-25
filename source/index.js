@@ -56,7 +56,7 @@ const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 propertyNames._TYPE_BASE =
   'Undefined,Null,NaNStrict,' +
   'Boolean,Number,Integer,String,' +
-  'Function,Object,ObjectType,' +
+  'Function,Object,ObjectType,Module,' +
   'Array,ArrayType,' +
   'Date,RegExp,' +
   'Exception,' +

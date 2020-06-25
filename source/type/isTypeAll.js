@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction, isObject, isObjectType, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
@@ -9,7 +9,7 @@ import {
 
   isNotUndefined, isNotNull, isNotNaNStrict,
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
-  isNotFunction, isNotObject, isNotObjectType,
+  isNotFunction, isNotObject, isNotObjectType, isNotModule,
   isNotArray, isNotArrayType,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
@@ -60,57 +60,59 @@ export const _isTypeAllCheckFunc = func => {
   return (...args) => _isTypeArray(func, args);
 };
 
-export const isUndefinedAll        = _isTypeAllCheckFunc(isUndefined);
-export const isNullAll             = _isTypeAllCheckFunc(isNull);
-export const isNaNStrictAll        = _isTypeAllCheckFunc(isNaNStrict);
-export const isBooleanAll          = _isTypeAllCheckFunc(isBoolean);
-export const isNumberAll           = _isTypeAllCheckFunc(isNumber);
-export const isIntegerAll          = _isTypeAllCheckFunc(isInteger);
-export const isStringAll           = _isTypeAllCheckFunc(isString);
-export const isFunctionAll         = _isTypeAllCheckFunc(isFunction);
-export const isObjectAll           = _isTypeAllCheckFunc(isObject);
-export const isObjectTypeAll       = _isTypeAllCheckFunc(isObjectType);
-export const isArrayAll            = _isTypeAllCheckFunc(isArray);
-export const isArrayTypeAll        = _isTypeAllCheckFunc(isArrayType);
-export const isDateAll             = _isTypeAllCheckFunc(isDate);
-export const isRegExpAll           = _isTypeAllCheckFunc(isRegExp);
-export const isExceptionAll        = _isTypeAllCheckFunc(isException);
-export const isBooleanObjectAll    = _isTypeAllCheckFunc(isBooleanObject);
-export const isNumberObjectAll     = _isTypeAllCheckFunc(isNumberObject);
-export const isStringObjectAll     = _isTypeAllCheckFunc(isStringObject);
-export const isEmptyObjectAll      = _isTypeAllCheckFunc(isEmptyObject);
-export const isEmptyArrayAll       = _isTypeAllCheckFunc(isEmptyArray);
-export const isSymbolAll           = _isTypeAllCheckFunc(isSymbol);
-export const isMapAll              = _isTypeAllCheckFunc(isMap);
-export const isWeakMapAll          = _isTypeAllCheckFunc(isWeakMap);
-export const isSetAll              = _isTypeAllCheckFunc(isSet);
-export const isWeakSetAll          = _isTypeAllCheckFunc(isWeakSet);
+export const isUndefinedAll         = _isTypeAllCheckFunc(isUndefined);
+export const isNullAll              = _isTypeAllCheckFunc(isNull);
+export const isNaNStrictAll         = _isTypeAllCheckFunc(isNaNStrict);
+export const isBooleanAll           = _isTypeAllCheckFunc(isBoolean);
+export const isNumberAll            = _isTypeAllCheckFunc(isNumber);
+export const isIntegerAll           = _isTypeAllCheckFunc(isInteger);
+export const isStringAll            = _isTypeAllCheckFunc(isString);
+export const isFunctionAll          = _isTypeAllCheckFunc(isFunction);
+export const isObjectAll            = _isTypeAllCheckFunc(isObject);
+export const isObjectTypeAll        = _isTypeAllCheckFunc(isObjectType);
+export const isModuleAll            = _isTypeAllCheckFunc(isModule);
+export const isArrayAll             = _isTypeAllCheckFunc(isArray);
+export const isArrayTypeAll         = _isTypeAllCheckFunc(isArrayType);
+export const isDateAll              = _isTypeAllCheckFunc(isDate);
+export const isRegExpAll            = _isTypeAllCheckFunc(isRegExp);
+export const isExceptionAll         = _isTypeAllCheckFunc(isException);
+export const isBooleanObjectAll     = _isTypeAllCheckFunc(isBooleanObject);
+export const isNumberObjectAll      = _isTypeAllCheckFunc(isNumberObject);
+export const isStringObjectAll      = _isTypeAllCheckFunc(isStringObject);
+export const isEmptyObjectAll       = _isTypeAllCheckFunc(isEmptyObject);
+export const isEmptyArrayAll        = _isTypeAllCheckFunc(isEmptyArray);
+export const isSymbolAll            = _isTypeAllCheckFunc(isSymbol);
+export const isMapAll               = _isTypeAllCheckFunc(isMap);
+export const isWeakMapAll           = _isTypeAllCheckFunc(isWeakMap);
+export const isSetAll               = _isTypeAllCheckFunc(isSet);
+export const isWeakSetAll           = _isTypeAllCheckFunc(isWeakSet);
 
-export const isNotUndefinedAll     = _isTypeAllCheckFunc(isNotUndefined);
-export const isNotNullAll          = _isTypeAllCheckFunc(isNotNull);
-export const isNotNaNStrictAll     = _isTypeAllCheckFunc(isNotNaNStrict);
-export const isNotBooleanAll       = _isTypeAllCheckFunc(isNotBoolean);
-export const isNotNumberAll        = _isTypeAllCheckFunc(isNotNumber);
-export const isNotIntegerAll       = _isTypeAllCheckFunc(isNotInteger);
-export const isNotStringAll        = _isTypeAllCheckFunc(isNotString);
-export const isNotFunctionAll      = _isTypeAllCheckFunc(isNotFunction);
-export const isNotObjectAll        = _isTypeAllCheckFunc(isNotObject);
-export const isNotObjectTypeAll    = _isTypeAllCheckFunc(isNotObjectType);
-export const isNotArrayAll         = _isTypeAllCheckFunc(isNotArray);
-export const isNotArrayTypeAll     = _isTypeAllCheckFunc(isNotArrayType);
-export const isNotDateAll          = _isTypeAllCheckFunc(isNotDate);
-export const isNotRegExpAll        = _isTypeAllCheckFunc(isNotRegExp);
-export const isNotExceptionAll     = _isTypeAllCheckFunc(isNotException);
-export const isNotBooleanObjectAll = _isTypeAllCheckFunc(isNotBooleanObject);
-export const isNotNumberObjectAll  = _isTypeAllCheckFunc(isNotNumberObject);
-export const isNotStringObjectAll  = _isTypeAllCheckFunc(isNotStringObject);
-export const isNotEmptyObjectAll   = _isTypeAllCheckFunc(isNotEmptyObject);
-export const isNotEmptyArrayAll    = _isTypeAllCheckFunc(isNotEmptyArray);
-export const isNotSymbolAll        = _isTypeAllCheckFunc(isNotSymbol);
-export const isNotMapAll           = _isTypeAllCheckFunc(isNotMap);
-export const isNotWeakMapAll       = _isTypeAllCheckFunc(isNotWeakMap);
-export const isNotSetAll           = _isTypeAllCheckFunc(isNotSet);
-export const isNotWeakSetAll       = _isTypeAllCheckFunc(isNotWeakSet);
+export const isNotUndefinedAll      = _isTypeAllCheckFunc(isNotUndefined);
+export const isNotNullAll           = _isTypeAllCheckFunc(isNotNull);
+export const isNotNaNStrictAll      = _isTypeAllCheckFunc(isNotNaNStrict);
+export const isNotBooleanAll        = _isTypeAllCheckFunc(isNotBoolean);
+export const isNotNumberAll         = _isTypeAllCheckFunc(isNotNumber);
+export const isNotIntegerAll        = _isTypeAllCheckFunc(isNotInteger);
+export const isNotStringAll         = _isTypeAllCheckFunc(isNotString);
+export const isNotFunctionAll       = _isTypeAllCheckFunc(isNotFunction);
+export const isNotObjectAll         = _isTypeAllCheckFunc(isNotObject);
+export const isNotObjectTypeAll     = _isTypeAllCheckFunc(isNotObjectType);
+export const isNotModuleAll         = _isTypeAllCheckFunc(isNotModule);
+export const isNotArrayAll          = _isTypeAllCheckFunc(isNotArray);
+export const isNotArrayTypeAll      = _isTypeAllCheckFunc(isNotArrayType);
+export const isNotDateAll           = _isTypeAllCheckFunc(isNotDate);
+export const isNotRegExpAll         = _isTypeAllCheckFunc(isNotRegExp);
+export const isNotExceptionAll      = _isTypeAllCheckFunc(isNotException);
+export const isNotBooleanObjectAll  = _isTypeAllCheckFunc(isNotBooleanObject);
+export const isNotNumberObjectAll   = _isTypeAllCheckFunc(isNotNumberObject);
+export const isNotStringObjectAll   = _isTypeAllCheckFunc(isNotStringObject);
+export const isNotEmptyObjectAll    = _isTypeAllCheckFunc(isNotEmptyObject);
+export const isNotEmptyArrayAll     = _isTypeAllCheckFunc(isNotEmptyArray);
+export const isNotSymbolAll         = _isTypeAllCheckFunc(isNotSymbol);
+export const isNotMapAll            = _isTypeAllCheckFunc(isNotMap);
+export const isNotWeakMapAll        = _isTypeAllCheckFunc(isNotWeakMap);
+export const isNotSetAll            = _isTypeAllCheckFunc(isNotSet);
+export const isNotWeakSetAll        = _isTypeAllCheckFunc(isNotWeakSet);
 
 export const isUndefAll        = isUndefinedAll;
 export const isBoolAll         = isBooleanAll;
@@ -139,7 +141,7 @@ export default {
 
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-  isFunctionAll, isObjectAll, isObjectTypeAll,
+  isFunctionAll, isObjectAll, isObjectTypeAll, isModuleAll,
   isArrayAll, isArrayTypeAll,
   isDateAll, isRegExpAll,
   isExceptionAll,
@@ -151,7 +153,7 @@ export default {
 
   isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
   isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
-  isNotFunctionAll, isNotObjectAll, isNotObjectTypeAll,
+  isNotFunctionAll, isNotObjectAll, isNotObjectTypeAll, isNotModuleAll,
   isNotArrayAll, isNotArrayTypeAll,
   isNotDateAll, isNotRegExpAll,
   isNotExceptionAll,

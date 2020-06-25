@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction, isObject, isObjectType, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
@@ -9,7 +9,7 @@ import {
 
   isNotUndefined, isNotNull, isNotNaNStrict,
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
-  isNotFunction, isNotObject, isNotObjectType,
+  isNotFunction, isNotObject, isNotObjectType, isNotModule,
   isNotArray, isNotArrayType,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
@@ -59,6 +59,7 @@ export const isStringArray           = _isTypeArrayCheckFunc(isString);
 export const isFunctionArray         = _isTypeArrayCheckFunc(isFunction);
 export const isObjectArray           = _isTypeArrayCheckFunc(isObject);
 export const isObjectTypeArray       = _isTypeArrayCheckFunc(isObjectType);
+export const isModuleArray            = _isTypeArrayCheckFunc(isModule);
 export const isArrayArray            = _isTypeArrayCheckFunc(isArray);
 export const isArrayTypeArray        = _isTypeArrayCheckFunc(isArrayType);
 export const isDateArray             = _isTypeArrayCheckFunc(isDate);
@@ -85,6 +86,7 @@ export const isNotStringArray        = _isTypeArrayCheckFunc(isNotString);
 export const isNotFunctionArray      = _isTypeArrayCheckFunc(isNotFunction);
 export const isNotObjectArray        = _isTypeArrayCheckFunc(isNotObject);
 export const isNotObjectTypeArray    = _isTypeArrayCheckFunc(isNotObjectType);
+export const isNotModuleArray         = _isTypeArrayCheckFunc(isNotModule);
 export const isNotArrayArray         = _isTypeArrayCheckFunc(isNotArray);
 export const isNotArrayTypeArray     = _isTypeArrayCheckFunc(isNotArrayType);
 export const isNotDateArray          = _isTypeArrayCheckFunc(isNotDate);
@@ -126,7 +128,7 @@ export const isNotEmptyObjArray  = isNotEmptyObjectArray;
 export default {
   isUndefinedArray, isNullArray, isNaNStrictArray,
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-  isFunctionArray, isObjectArray, isObjectTypeArray,
+  isFunctionArray, isObjectArray, isObjectTypeArray, isModuleArray,
   isArrayArray, isArrayTypeArray,
   isDateArray, isRegExpArray,
   isExceptionArray,
@@ -138,7 +140,7 @@ export default {
 
   isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
   isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-  isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
+  isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray, isNotModuleArray,
   isNotArrayArray, isNotArrayTypeArray,
   isNotDateArray, isNotRegExpArray,
   isNotExceptionArray,
