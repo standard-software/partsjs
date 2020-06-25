@@ -11,21 +11,21 @@ import _object from './object/object.js';
 import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 
-export const VERSION = '6.1.0';
+const VERSION = '6.2.0 beta';
 
-export const rootNames = {};
-export const propertyNames = {};
+const rootNames = {};
+const propertyNames = {};
 
-export const { _copyProperty } = _object;
-export const { _replaceAll } = _string;
-export const { _map } = _array;
+const { _copyProperty } = _object;
+const { _replaceAll } = _string;
+const { _map } = _array;
 
 // root
 propertyNames.ROOT =
   'clone, cloneDeep,' +
   'cloneFunction,' +
   '';
-export const root = {};
+const root = {};
 _copyProperty(_root, propertyNames.ROOT, root);
 _copyProperty(_root, propertyNames.ROOT, rootNames);
 
@@ -50,7 +50,7 @@ propertyNames.PLATFORM =
   'isGasRhino,' +
   'buildMode,' +
   '';
-export const platform = _copyProperty(_platform, propertyNames.PLATFORM);
+const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 
 // type
 propertyNames._TYPE_BASE =
@@ -69,8 +69,8 @@ propertyNames._TYPE_BASE =
   'Except,' +
   'EmptyObj,' +
   '';
-export const isPrefixSafixAdd = (prefix, safix, commaString) =>
-  _map(_replaceAll(commaString, ' ', '').split(','),
+const isPrefixSafixAdd = (prefix, safix, commaString) =>
+  _map(_array.filter(_replaceAll(commaString, ' ', '').split(','), v => v !== ''),
     item => prefix + item + safix).join(',');
 propertyNames.TYPE = [
   isPrefixSafixAdd('is',    '',     propertyNames._TYPE_BASE),
@@ -80,7 +80,7 @@ propertyNames.TYPE = [
   isPrefixSafixAdd('is',    'Array',  propertyNames._TYPE_BASE),
   isPrefixSafixAdd('isNot', 'Array',  propertyNames._TYPE_BASE),
 ].join(',');
-export const type = {};
+const type = {};
 _copyProperty(_type, propertyNames.TYPE, type);
 _copyProperty(_type, propertyNames.TYPE, rootNames);
 
@@ -93,7 +93,7 @@ propertyNames.TEST_PUBLIC =
 propertyNames.TEST_ROOT =
   'isThrown,isThrownValue,isThrownException,isNotThrown,' +
   '';
-export const test = {};
+const test = {};
 _copyProperty(_test, propertyNames.TEST_PUBLIC, test);
 _copyProperty(_test, propertyNames.TEST_ROOT, rootNames);
 
@@ -105,7 +105,7 @@ propertyNames.SYNTAX =
   'loop,' +
   'canUseMap, canUseSet,' +
   '';
-export const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
+const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
 
 // compare
@@ -121,7 +121,7 @@ propertyNames.COMPARE =
   'allMatchAll, indexOfMatchAll, someMatchAll,' +
   'includes, includesSome, includesAll,' +
   '';
-export const compare = {};
+const compare = {};
 _copyProperty(_compare, propertyNames.COMPARE, compare);
 _copyProperty(_compare, propertyNames.COMPARE, rootNames);
 
@@ -146,7 +146,7 @@ propertyNames.CONVERT =
   'strToNum,strToNumDef,' +
   'strToInt,strToIntDef,' +
   '';
-export const convert = {};
+const convert = {};
 _copyProperty(_convert, propertyNames.CONVERT, convert);
 _copyProperty(_convert, propertyNames.CONVERT, rootNames);
 
@@ -155,7 +155,7 @@ propertyNames.NUMBER =
   'isMultiples,isEven,isOdd,' +
   'round,nearEqual,inRange,randomInt,' +
   '';
-export const number = _copyProperty(_number, propertyNames.NUMBER);
+const number = _copyProperty(_number, propertyNames.NUMBER);
 _copyProperty(_number, propertyNames.NUMBER, rootNames);
 
 // string
@@ -176,7 +176,7 @@ propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
   'isLowerCase,isUpperCase,' +
   '';
-export const string = {};
+const string = {};
 _copyProperty(_string, propertyNames.STRING_PUBLIC, string);
 _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 
@@ -195,7 +195,7 @@ propertyNames.OBJECT_ROOT =
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
   '';
-export const object = {};
+const object = {};
 _copyProperty(_object, propertyNames.OBJECT_PUBLIC, object);
 _copyProperty(_object, propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type.objectToString;
@@ -225,7 +225,7 @@ propertyNames.ARRAY_ROOT =
   'min, max,' +
   'sum, average, median,' +
   '';
-export const array = {};
+const array = {};
 _copyProperty(_array, propertyNames.ARRAY_PUBLIC, array);
 _copyProperty(_array, propertyNames.ARRAY_ROOT, rootNames);
 
@@ -250,14 +250,179 @@ _copyProperty(_array.operation, propertyNames.ARRAY_OPERATION_PUBLIC, array.oper
 
 // consoleHook
 propertyNames._CONSOLE_HOOK_BASE =
-  ',Log,Info,Warn,Error,Debug';
+  'Log,Info,Warn,Error,Debug,';
 propertyNames.CONSOLE_HOOK = [
   isPrefixSafixAdd('hook',    '', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixSafixAdd('unHook',  '', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixSafixAdd('accept',  '', propertyNames._CONSOLE_HOOK_BASE),
+  'hook', 'unHook', 'accept'
 ].join(',');
-export const consoleHook = {};
+const consoleHook = {};
 _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
+
+export const {
+  clone, cloneDeep,
+  cloneFunction,
+
+  isUndefined,isNull,isNaNStrict,
+  isBoolean,isNumber,isInteger,isString,
+  isFunction,isObject,isObjectType,isModule,
+  isArray,isArrayType,
+  isDate,isRegExp,
+  isException,
+  isEmptyObject,isEmptyArray,
+  isSymbol,
+  isMap,isWeakMap,isSet,isWeakSet,
+  isBooleanObject,isNumberObject,isStringObject,
+  isBool,isNum,isInt,isStr,
+  isFunc,isObj,isObjType,
+  isExcept,
+  isEmptyObj,
+
+  isNotUndefined,isNotNull,isNotNaNStrict,
+  isNotBoolean,isNotNumber,isNotInteger,isNotString,
+  isNotFunction,isNotObject,isNotObjectType,isNotModule,
+  isNotArray,isNotArrayType,
+  isNotDate,isNotRegExp,
+  isNotException,
+  isNotEmptyObject,isNotEmptyArray,
+  isNotSymbol,
+  isNotMap,isNotWeakMap,isNotSet,isNotWeakSet,
+  isNotBooleanObject,isNotNumberObject,isNotStringObject,
+  isNotBool,isNotNum,isNotInt,isNotStr,
+  isNotFunc,isNotObj,isNotObjType,
+  isNotExcept,
+  isNotEmptyObj,
+
+  isUndefinedAll,isNullAll,isNaNStrictAll,
+  isBooleanAll,isNumberAll,isIntegerAll,isStringAll,
+  isFunctionAll,isObjectAll,isObjectTypeAll,isModuleAll,
+  isArrayAll,isArrayTypeAll,
+  isDateAll,isRegExpAll,
+  isExceptionAll,
+  isEmptyObjectAll,isEmptyArrayAll,
+  isSymbolAll,
+  isMapAll,isWeakMapAll,isSetAll,isWeakSetAll,
+  isBooleanObjectAll,isNumberObjectAll,isStringObjectAll,
+  isBoolAll,isNumAll,isIntAll,isStrAll,
+  isFuncAll,isObjAll,isObjTypeAll,
+  isExceptAll,
+  isEmptyObjAll,
+
+  isNotUndefinedAll,isNotNullAll,isNotNaNStrictAll,
+  isNotBooleanAll,isNotNumberAll,isNotIntegerAll,isNotStringAll,
+  isNotFunctionAll,isNotObjectAll,isNotObjectTypeAll,isNotModuleAll,
+  isNotArrayAll,isNotArrayTypeAll,
+  isNotDateAll,isNotRegExpAll,
+  isNotExceptionAll,
+  isNotEmptyObjectAll,isNotEmptyArrayAll,
+  isNotSymbolAll,
+  isNotMapAll,isNotWeakMapAll,isNotSetAll,isNotWeakSetAll,
+  isNotBooleanObjectAll,isNotNumberObjectAll,isNotStringObjectAll,
+  isNotBoolAll,isNotNumAll,isNotIntAll,isNotStrAll,
+  isNotFuncAll,isNotObjAll,isNotObjTypeAll,
+  isNotExceptAll,
+  isNotEmptyObjAll,
+
+  isUndefinedArray,isNullArray,isNaNStrictArray,
+  isBooleanArray,isNumberArray,isIntegerArray,isStringArray,
+  isFunctionArray,isObjectArray,isObjectTypeArray,isModuleArray,
+  isArrayArray,isArrayTypeArray,
+  isDateArray,isRegExpArray,
+  isExceptionArray,
+  isEmptyObjectArray,isEmptyArrayArray,
+  isSymbolArray,
+  isMapArray,isWeakMapArray,isSetArray,isWeakSetArray,
+  isBooleanObjectArray,isNumberObjectArray,isStringObjectArray,
+  isBoolArray,isNumArray,isIntArray,isStrArray,
+  isFuncArray,isObjArray,isObjTypeArray,
+  isExceptArray,
+  isEmptyObjArray,
+
+  isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,
+  isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
+  isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,isNotModuleArray,
+  isNotArrayArray,isNotArrayTypeArray,
+  isNotDateArray,isNotRegExpArray,
+  isNotExceptionArray,
+  isNotEmptyObjectArray,isNotEmptyArrayArray,
+  isNotSymbolArray,
+  isNotMapArray,isNotWeakMapArray,isNotSetArray,isNotWeakSetArray,
+  isNotBooleanObjectArray,isNotNumberObjectArray,isNotStringObjectArray,
+  isNotBoolArray,isNotNumArray,isNotIntArray,isNotStrArray,
+  isNotFuncArray,isNotObjArray,isNotObjTypeArray,
+  isNotExceptArray,
+  isNotEmptyObjArray,
+
+  isThrown,isThrownValue,isThrownException,isNotThrown,
+
+  assert,guard,
+  functionValue,
+  sc,if_,switch_,
+  loop,
+  canUseMap, canUseSet,
+
+  equal, equalDeep,
+  equalFunction,
+  or,
+  match, matchValue, initialValue,
+  allMatch, indexOfMatch, someMatch,
+  matchSome, matchSomeValue,
+  allMatchSome, indexOfMatchSome, someMatchSome,
+  matchAll, matchAllValue,
+  allMatchAll, indexOfMatchAll, someMatchAll,
+  includes, includesSome, includesAll,
+
+  numberToString, valueToString,
+  stringToNumber,stringToNumberDefault,
+  stringToInteger,stringToIntegerDefault,
+  valueToNumber, valueToNumberDefault,
+  valueToInteger, valueToIntegerDefault,
+
+  numToString, valToString,
+  strToNumber, strToNumberDef,
+  strToInteger, strToIntegerDef,
+  valToNumber, valToNumberDefault,
+  valToInteger, valToIntegerDefault,
+
+  valToNum, valToNumDef,
+  valToInt, valToIntDef,
+
+  numToStr,
+  strToNum,strToNumDef,
+  strToInt,strToIntDef,
+
+  isMultiples,isEven,isOdd,
+  round,nearEqual,inRange,randomInt,
+
+  matchFormat,replaceAll,
+  isLowerCase,isUpperCase,
+
+  copyProperty,propertyCount,inProperty,
+  getProperty,setProperty,
+  copyProp,propCount,inProp,
+  getProp,setProp,
+  objectToString,
+
+  min, max,
+  sum, average, median,
+} = rootNames;
+
+export {
+  VERSION,
+  root,
+  platform,
+  type,
+  test,
+  syntax,
+  compare,
+  convert,
+  number,
+  string,
+  object,
+  array,
+  consoleHook,
+}
 
 export const parts = {
   VERSION,
@@ -274,25 +439,10 @@ export const parts = {
   array,
   root,
   ...rootNames,
-  parts: {
-    VERSION,
-    platform,
-    type,
-    test,
-    syntax,
-    compare,
-    convert,
-    number,
-    string,
-    consoleHook,
-    object,
-    array,
-    root,
-    ...rootNames,
-  }
 };
 
 export default {
   ...parts,
+  parts
 }
 

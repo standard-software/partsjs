@@ -112,7 +112,7 @@ export const _getPropertyBase = (
     }
 
     if (hasOwn) {
-      if (!result.hasOwnProperty(propertyArray[i])) {
+      if (!Object.prototype.hasOwnProperty.call(result, propertyArray[i])) {
         return { in: false };
       }
     } else {

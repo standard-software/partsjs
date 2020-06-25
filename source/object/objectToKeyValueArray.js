@@ -14,7 +14,7 @@ import {
 export const _objectToKeyValueArray = (object) => {
   const result = [];
   for (const key in object) {
-    if (object.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(object, key)) {
       result.push([key, object[key]]);
     }
   }

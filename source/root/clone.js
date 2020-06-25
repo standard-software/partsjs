@@ -45,7 +45,7 @@ cloneFunction.cloneObject = (
   const cloneValue = new source.constructor();
   bufferWrite(source, cloneValue);
   for (const key in source) {
-    if (source.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }

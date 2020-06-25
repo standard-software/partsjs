@@ -8,7 +8,7 @@ export const _propertyCount = (
   let result = 0;
   if (hasOwn) {
     for (const property in object) {
-      if (object.hasOwnProperty(property)) {
+      if (Object.prototype.hasOwnProperty.call(object, property)) {
         result += 1;
       }
     }

@@ -234,6 +234,10 @@ same [How to use Google Apps Script]
 
 ## Version
 
+### 6.2.0
+#### 2020/06/25(Thu)
+- object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,
+
 ### 6.1.0
 #### 2020/06/24(Wed)
 - rename folder
