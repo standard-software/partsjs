@@ -235,12 +235,13 @@ same [How to use Google Apps Script]
 ## Version
 
 ### 6.2.0
-#### 2020/06/25(Thu)
+#### 2020/06/26(Fri)
 - object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,
 - upddate testcode
   - source deno import pattern
   - build babel/webpack node requier pattern
 - add isModule isNotModule etc
+- update inProperty support Module Object
 
 ### 6.1.0
 #### 2020/06/24(Wed)

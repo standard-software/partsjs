@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isArray, isDate, isRegExp,
+  isFunction, isObject, isModule, isArray, isDate, isRegExp,
 } from '../type/isType.js';
 
 import {
@@ -21,7 +21,7 @@ import {
  */
 export const _inProperty = (object, propertyPathArray, hasOwn = true) => {
 
-  if (!isObject(object)) {
+  if (!isObject(object) && !isModule(object)) {
     return false;
   }
 
@@ -57,7 +57,7 @@ export const inProperty = (object, propertyPathArray, hasOwn = true) => {
     ({ object, propertyPathArray, hasOwn = true } = object);
   }
 
-  if (!isObject(object)) {
+  if (!isObject(object) && !isModule(object)) {
     throw new TypeError(
       'inProperty args(object) is not object',
     );

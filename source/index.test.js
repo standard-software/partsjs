@@ -113,6 +113,10 @@ export const test_execute_index = (parts) => {
         }
         checkEqual(parts.VERSION, parts.parts.VERSION);
 
+        if (parts.isModule(parts)) {
+          return;
+        }
+
         const parts1 = parts.cloneDeep(parts);
         delete parts1.parts;
         if (!parts.isUndefined(parts1.default)) {
