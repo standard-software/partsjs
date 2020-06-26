@@ -1485,14 +1485,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isUndefinedAll = function test_isUndefinedAll() {
       it('test_isUndefinedAll', function () {
-        var isUndefinedArray = function isUndefinedArray(array) {
-          return allMatchSome(array, [undefined]);
-        };
-
-        var isNotUndefinedArray = function isNotUndefinedArray(array) {
-          return allMatchSome(array, [isNotUndefinedAll]);
-        };
-
         var u1;
         var n1 = null;
         var v1 = 1;
@@ -1539,14 +1531,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isNull = function test_isNull() {
       it('test_isNull', function () {
-        var isNullArray = function isNullArray(array) {
-          return allMatchSome(array, [null]);
-        };
-
-        var isNotNullArray = function isNotNullArray(array) {
-          return allMatchSome(array, [isNotNullAll]);
-        };
-
         var u1;
         var n1 = null;
         var v1 = 1;
@@ -1587,14 +1571,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isBoolean = function test_isBoolean() {
       it('test_isBoolean', function () {
-        var isBooleanArray = function isBooleanArray(array) {
-          return allMatchSome(array, [isBooleanAll]);
-        };
-
-        var isNotBooleanArray = function isNotBooleanArray(array) {
-          return allMatchSome(array, [isNotBooleanAll]);
-        };
-
         checkEqual(true, isBooleanAll(true));
         checkEqual(true, isBooleanAll(false));
         checkEqual(false, isBooleanAll(undefined));
@@ -1627,14 +1603,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isNumber = function test_isNumber() {
       it('test_isNumber', function () {
-        var isNumberArray = function isNumberArray(array) {
-          return allMatchSome(array, [isNumberAll]);
-        };
-
-        var isNotNumberArray = function isNotNumberArray(array) {
-          return allMatchSome(array, [isNotNumberAll]);
-        };
-
         checkEqual(true, isNumberAll(123));
         checkEqual(true, isNumberAll(0));
         checkEqual(true, isNumberAll(-1));
@@ -1717,14 +1685,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isInteger = function test_isInteger() {
       it('test_isInteger', function () {
-        var isIntegerArray = function isIntegerArray(array) {
-          return allMatchSome(array, [isIntegerAll]);
-        };
-
-        var isNotIntegerArray = function isNotIntegerArray(array) {
-          return allMatchSome(array, [isNotIntegerAll]);
-        };
-
         checkEqual(true, isIntegerAll(123));
         checkEqual(true, isIntegerAll(0));
         checkEqual(true, isIntegerAll(-1));
@@ -1845,14 +1805,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isFunction = function test_isFunction() {
       it('test_isFunction', function () {
-        var isFunctionArray = function isFunctionArray(array) {
-          return allMatchSome(array, [isFunctionAll]);
-        };
-
-        var isNotFunctionArray = function isNotFunctionArray(array) {
-          return allMatchSome(array, [isNotFunctionAll]);
-        };
-
         checkEqual(true, isFunctionAll(function () {}));
         checkEqual(false, isFunctionAll({}));
         checkEqual(true, isFunctionAll(function () {}, test_isFunction));
@@ -1864,14 +1816,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isObject = function test_isObject() {
       it('test_isObject', function () {
-        var isObjectArray = function isObjectArray(array) {
-          return allMatchSome(array, [isObjectAll]);
-        };
-
-        var isNotObjectArray = function isNotObjectArray(array) {
-          return allMatchSome(array, [isNotObjectAll]);
-        };
-
         checkEqual(false, isObjectAll(null));
         checkEqual(false, isObjectAll(undefined));
         checkEqual(false, isObjectAll(undefined));
@@ -1886,6 +1830,11 @@ var test_execute_type = function test_execute_type(parts) {
           a: 0,
           b: 1
         }));
+        checkEqual(true, isObjectAll(Object.create(null)));
+        checkEqual(true, 'hasOwnProperty' in {});
+        checkEqual(false, 'hasOwnProperty' in Object.create(null));
+        checkEqual(true, 'constructor' in {});
+        checkEqual(false, 'constructor' in Object.create(null));
         checkEqual(false, isObjectAll([]));
         checkEqual(false, isObjectAll(function () {}));
         checkEqual(false, isObjectAll(function () {}));
@@ -1898,6 +1847,11 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isObjectAll(new Object()));
         checkEqual(false, isObjectAll(new Array()));
         checkEqual(false, isObjectAll(new Function()));
+
+        if (parts.isModule(parts)) {
+          checkEqual(false, isObject(parts));
+        }
+
         checkEqual(true, isObjectAll({
           a: 0,
           b: 1
@@ -1929,14 +1883,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isObjectType = function test_isObjectType() {
       it('test_isObjectType', function () {
-        var isObjectTypeArray = function isObjectTypeArray(array) {
-          return allMatchSome(array, [isObjectTypeAll]);
-        };
-
-        var isNotObjectTypeArray = function isNotObjectTypeArray(array) {
-          return allMatchSome(array, [isNotObjectTypeAll]);
-        };
-
         checkEqual(false, isObjectTypeAll(null));
         checkEqual(false, isObjectTypeAll(undefined));
         checkEqual(false, isObjectTypeAll('a'));
@@ -1950,6 +1896,7 @@ var test_execute_type = function test_execute_type(parts) {
           a: 0,
           b: 1
         }));
+        checkEqual(true, isObjectTypeAll(Object.create(null)));
         checkEqual(true, isObjectTypeAll([]));
         checkEqual(true, isObjectTypeAll(function () {}));
         checkEqual(true, isObjectTypeAll(function () {}));
@@ -1993,14 +1940,6 @@ var test_execute_type = function test_execute_type(parts) {
 
     var test_isArray = function test_isArray() {
       it('test_isArray', function () {
-        var isArrayArray = function isArrayArray(array) {
-          return allMatchSome(array, [isArrayAll]);
-        };
-
-        var isNotArrayArray = function isNotArrayArray(array) {
-          return allMatchSome(array, [isNotArrayAll]);
-        };
-
         checkEqual(true, isArrayAll([123]));
         checkEqual(true, isArrayAll([]));
         checkEqual(true, isArrayAll([1, 2, 3]));

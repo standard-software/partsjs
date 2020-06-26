@@ -227,13 +227,6 @@ export const test_execute_type = (parts) => {
     const test_isUndefinedAll = function() {
       it('test_isUndefinedAll', () => {
 
-        const isUndefinedArray = (array) => {
-          return allMatchSome(array, [undefined]);
-        };
-        const isNotUndefinedArray = (array) => {
-          return allMatchSome(array, [isNotUndefinedAll]);
-        };
-
         var u1;
         var n1 = null;
         var v1 = 1;
@@ -286,13 +279,6 @@ export const test_execute_type = (parts) => {
     const test_isNull = function() {
       it('test_isNull', () => {
 
-        const isNullArray = (array) => {
-          return allMatchSome(array, [null]);
-        };
-        const isNotNullArray = (array) => {
-          return allMatchSome(array, [isNotNullAll]);
-        };
-
         var u1;
         var n1 = null;
         var v1 = 1;
@@ -338,13 +324,6 @@ export const test_execute_type = (parts) => {
     const test_isBoolean = function() {
       it('test_isBoolean', () => {
 
-        const isBooleanArray = (array) => {
-          return allMatchSome(array, [isBooleanAll]);
-        };
-        const isNotBooleanArray = (array) => {
-          return allMatchSome(array, [isNotBooleanAll]);
-        };
-
         checkEqual(true, isBooleanAll(true));
         checkEqual(true, isBooleanAll(false));
         checkEqual(false, isBooleanAll(undefined));
@@ -381,13 +360,6 @@ export const test_execute_type = (parts) => {
 
     const test_isNumber = function() {
       it('test_isNumber', () => {
-
-        const isNumberArray = (array) => {
-          return allMatchSome(array, [isNumberAll]);
-        };
-        const isNotNumberArray = (array) => {
-          return allMatchSome(array, [isNotNumberAll]);
-        };
 
         checkEqual(true, isNumberAll(123));
         checkEqual(true, isNumberAll(0));
@@ -476,13 +448,6 @@ export const test_execute_type = (parts) => {
 
     const test_isInteger = function() {
       it('test_isInteger', () => {
-
-        const isIntegerArray = (array) => {
-          return allMatchSome(array, [isIntegerAll]);
-        };
-        const isNotIntegerArray = (array) => {
-          return allMatchSome(array, [isNotIntegerAll]);
-        };
 
         checkEqual(true, isIntegerAll(123));
         checkEqual(true, isIntegerAll(0));
@@ -617,13 +582,6 @@ export const test_execute_type = (parts) => {
     const test_isFunction = function() {
       it('test_isFunction', () => {
 
-        const isFunctionArray = (array) => {
-          return allMatchSome(array, [isFunctionAll]);
-        };
-        const isNotFunctionArray = (array) => {
-          return allMatchSome(array, [isNotFunctionAll]);
-        };
-
         checkEqual(true, isFunctionAll(function() { }));
         checkEqual(false, isFunctionAll({}));
 
@@ -639,13 +597,6 @@ export const test_execute_type = (parts) => {
 
     const test_isObject = function() {
       it('test_isObject', () => {
-
-        const isObjectArray = (array) => {
-          return allMatchSome(array, [isObjectAll]);
-        };
-        const isNotObjectArray = (array) => {
-          return allMatchSome(array, [isNotObjectAll]);
-        };
 
         checkEqual(false, isObjectAll(null));
         checkEqual(false, isObjectAll(undefined));
@@ -689,13 +640,6 @@ export const test_execute_type = (parts) => {
     const test_isObjectType = function() {
       it('test_isObjectType', () => {
 
-        const isObjectTypeArray = (array) => {
-          return allMatchSome(array, [isObjectTypeAll]);
-        };
-        const isNotObjectTypeArray = (array) => {
-          return allMatchSome(array, [isNotObjectTypeAll]);
-        };
-
         checkEqual(false, isObjectTypeAll(null));
         checkEqual(false, isObjectTypeAll(undefined));
         checkEqual(false, isObjectTypeAll('a'));
@@ -736,13 +680,6 @@ export const test_execute_type = (parts) => {
 
     const test_isArray = function() {
       it('test_isArray', () => {
-
-        const isArrayArray = (array) => {
-          return allMatchSome(array, [isArrayAll]);
-        };
-        const isNotArrayArray = (array) => {
-          return allMatchSome(array, [isNotArrayAll]);
-        };
 
         checkEqual(true,  isArrayAll([123]));
         checkEqual(true,  isArrayAll([]));

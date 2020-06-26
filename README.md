@@ -240,6 +240,7 @@ same [How to use Google Apps Script]
 - upddate testcode
   - source deno import pattern
   - build babel/webpack node requier pattern
+  - delete local isTypeAll
 - add isModule isNotModule etc
 - update inProperty support Module Object
 
