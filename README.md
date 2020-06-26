@@ -243,6 +243,10 @@ same [How to use Google Apps Script]
   - delete local isTypeAll
 - add isModule isNotModule etc
 - update inProperty support Module Object
+- update object.js move function
+  - add getProperty.js
+- add has.js
+  - has / hasOwn / hasPrototype
 
 ### 6.1.0
 #### 2020/06/24(Wed)

@@ -184,6 +184,7 @@ _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 propertyNames.OBJECT_PUBLIC =
   'isObjectParameter,' +
   'copyProperty, propertyCount, inProperty,' +
+  'has,hasOwn,hasPrototype,' +
   'getProperty, setProperty,' +
   'objectToKeyValueArray, objectEntries,' +
   'copyProp, propCount, inProp,' +
@@ -191,6 +192,7 @@ propertyNames.OBJECT_PUBLIC =
   '';
 propertyNames.OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
+  'has,hasOwn,hasPrototype,' +
   'getProperty,setProperty,' +
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
@@ -399,6 +401,7 @@ export const {
   isLowerCase,isUpperCase,
 
   copyProperty,propertyCount,inProperty,
+  has,hasOwn,hasPrototype,
   getProperty,setProperty,
   copyProp,propCount,inProp,
   getProp,setProp,

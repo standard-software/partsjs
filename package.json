@@ -9,6 +9,7 @@
     "webpack":          "webpack --config ./config/webpack.config.js",
     "webpack_testcode": "webpack --config ./config/webpack_testcode.config.js",
     "copy:release":     "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/parts.js', './release/parts.js')\"",
+    "test:source:deno:1": "deno run ./test/source/test_source_deno_1.js",
     "test:source:deno": "deno run ./test/source/test_source_deno_1.js && deno run ./test/source/test_source_deno_2.js && deno run ./test/source/test_source_deno_3.js",
     "test:babel:node":  "node ./test/build/babel_webpack/babel/test_babel_webpack_babel_1.js && node ./test/build/babel_webpack/babel/test_babel_webpack_babel_2.js",
     "test:webpack:node":"node ./test/build/babel_webpack/webpack/test_babel_webpack_webpack_1.js && node ./test/build/babel_webpack/webpack/test_babel_webpack_webpack_2.js",

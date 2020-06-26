@@ -14,7 +14,7 @@ import {
 
 import {
   _getPropertyBase,
-} from '../object/object_common.js';
+} from '../object/getProperty.js';
 
 /**
  * _inProperty

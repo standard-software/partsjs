@@ -97,83 +97,6 @@ export const propertyCount = (object, hasOwn = true) => {
 };
 
 /**
- * getProperty
- */
-export const _getPropertyBase = (
-  object,
-  propertyPath,
-  hasOwn = true,
-) => {
-  let result = object;
-  const propertyArray = propertyPath.split('.');
-  for (let i = 0, l = propertyArray.length; i < l; i += 1) {
-    if (propertyArray[i] === '' ) {
-      return { in: false };
-    }
-
-    if (hasOwn) {
-      if (!Object.prototype.hasOwnProperty.call(result, propertyArray[i])) {
-        return { in: false };
-      }
-    } else {
-      if (!(propertyArray[i] in result)) {
-        return { in: false };
-      }
-    }
-
-    if (isUndefined(result[propertyArray[i]])) {
-      return { in: true, value: undefined };
-    }
-
-    result = result[propertyArray[i]];
-  }
-  return { in: true, value: result};
-};
-
-
-export const _getProperty = (
-  object,
-  propertyPath,
-  hasOwn = true,
-) => {
-  const result = _getPropertyBase(object, propertyPath, hasOwn);
-
-  if (!isBoolean(result.in)) {
-    throw new Error('_getProperty _getPropertyBase result is not boolean');
-  }
-
-  if (result.in === false) {
-    return undefined;
-  } else {
-    return result.value;
-  }
-};
-
-export const getProperty = (object, propertyPath, hasOwn = true) => {
-  if (isObjectParameter(object, 'object, propertyPath', 'hasOwn')) {
-    ({ object, propertyPath, hasOwn = true } = object);
-  }
-
-  if (!isObject(object)) {
-    throw new TypeError(
-      'getProperty args(object) is not object',
-    );
-  }
-  if (!isString(propertyPath)) {
-    throw new TypeError(
-      'getProperty args(propertyPath) is not string',
-    );
-  }
-  if (!isBoolean(hasOwn)) {
-    throw new TypeError(
-      'getProperty args(hasOwn) is not boolean',
-    );
-  }
-
-  return _getProperty(object, propertyPath, hasOwn);
-};
-
-/**
  * setProperty
  */
 export const _setProperty = (object, path, value) => {
@@ -221,21 +144,18 @@ export const setProperty = (object, propertyPath, value) => {
 
 export const copyProp = copyProperty;
 export const propCount = propertyCount;
-export const getProp = getProperty;
 export const setProp = setProperty;
 
 export default {
   _copyProperty,
   _propertyCount,
-  _getProperty, _getPropertyBase,
   _setProperty,
 
   copyProperty,
   propertyCount,
-  getProperty,
   setProperty,
 
   copyProp,
   propCount,
-  getProp, setProp,
+  setProp,
 }

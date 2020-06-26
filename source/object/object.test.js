@@ -16,7 +16,30 @@ export const test_execute_object = (parts) => {
       isEmptyObjectAll,
       isObjectParameter,
       objectToKeyValueArray,
+      has, hasOwn, hasPrototype,
     } = parts.object;
+
+    const test_has = () => {
+      it('test_has', () => {
+        const object1 = {
+          a: '1',
+        };
+        checkEqual(true,  has(object1,          'a'));
+        checkEqual(true,  has(object1,          'a', true));
+        checkEqual(true,  hasOwn(object1,       'a'));
+        checkEqual(false, hasPrototype(object1, 'a'));
+
+        checkEqual(false, has(object1,          'b'));
+        checkEqual(false, has(object1,          'b', true));
+        checkEqual(false, hasOwn(object1,       'b'));
+        checkEqual(false, hasPrototype(object1, 'b'));
+
+        checkEqual(true,  has(object1,          'constructor'));
+        checkEqual(false, has(object1,          'constructor', true));
+        checkEqual(false, hasOwn(object1,       'constructor'));
+        checkEqual(true,  hasPrototype(object1, 'constructor'));
+      })
+    }
 
     const test_copyProperty = () => {
       it('test_copyProperty', () => {
@@ -418,6 +441,8 @@ export const test_execute_object = (parts) => {
 
       });
     };
+
+    test_has();
 
     test_copyProperty();
     test_inProperty();
