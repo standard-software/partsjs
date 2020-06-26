@@ -245,6 +245,7 @@ same [How to use Google Apps Script]
 - update inProperty support Module Object
 - update object.js move function
   - add getProperty.js
+  - add propertyCount.js
 - add has.js
   - has / hasOwn / hasPrototype
 

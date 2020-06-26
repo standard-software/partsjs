@@ -75,28 +75,6 @@ export const copyProperty = (fromObject, propertyArray, toObject = {}) => {
 };
 
 /**
- * propertyCount
- */
-export const propertyCount = (object, hasOwn = true) => {
-  if (isObjectParameter(object, 'object', 'hasOwn')) {
-    ({ object, hasOwn = true } = object);
-  }
-
-  if (!isObjectType(object)) {
-    throw new TypeError(
-      'propertyCount args(object) is not object type',
-    );
-  }
-  if (!isBoolean(hasOwn)) {
-    throw new TypeError(
-      'getProperty args(hasOwn) is not boolean',
-    );
-  }
-
-  return _propertyCount(object, hasOwn);
-};
-
-/**
  * setProperty
  */
 export const _setProperty = (object, path, value) => {
@@ -143,19 +121,15 @@ export const setProperty = (object, propertyPath, value) => {
 };
 
 export const copyProp = copyProperty;
-export const propCount = propertyCount;
 export const setProp = setProperty;
 
 export default {
   _copyProperty,
-  _propertyCount,
   _setProperty,
 
   copyProperty,
-  propertyCount,
   setProperty,
 
   copyProp,
-  propCount,
   setProp,
 }

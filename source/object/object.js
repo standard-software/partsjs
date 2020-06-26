@@ -5,6 +5,8 @@ import object_common from './object_common.js';
 
 import getProperty from './getProperty.js';
 import has from './has.js';
+import _propertyCount from './_propertyCount.js';
+import propertyCount from './propertyCount.js';
 export default {
   ...object_common,
   ...isObjectParameter,
@@ -12,6 +14,8 @@ export default {
   ...objectToKeyValueArray,
   ...getProperty,
   ...has,
+  ..._propertyCount,
+  ...propertyCount,
 }
 
 export * from './object_common.js'
