@@ -211,6 +211,11 @@ var test_execute_index = function test_execute_index(parts) {
         }
 
         checkEqual(parts.VERSION, parts.parts.VERSION);
+
+        if (parts.isModule(parts)) {
+          return;
+        }
+
         var parts1 = parts.cloneDeep(parts);
         delete parts1.parts;
 

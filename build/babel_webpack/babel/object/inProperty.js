@@ -19,7 +19,7 @@ var _object_common = require("../object/object_common.js");
 var _inProperty = function _inProperty(object, propertyPathArray) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (!(0, _isType.isObject)(object)) {
+  if (!(0, _isType.isObject)(object) && !(0, _isType.isModule)(object)) {
     return false;
   }
 
@@ -65,7 +65,7 @@ var inProperty = function inProperty(object, propertyPathArray) {
     hasOwn = _object$hasOwn === void 0 ? true : _object$hasOwn;
   }
 
-  if (!(0, _isType.isObject)(object)) {
+  if (!(0, _isType.isObject)(object) && !(0, _isType.isModule)(object)) {
     throw new TypeError('inProperty args(object) is not object');
   }
 
