@@ -5,14 +5,16 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 export const test_execute_type = (parts) => {
-  const { checkEqual, describe, it, test } = parts.test;
+  const { checkEqual, describe, it, testCounter } = parts.test;
   describe('test_execute_type', () => {
 
     const {
 
       isUndefined, isNull, isNaNStrict,
       isBoolean, isNumber, isInteger, isString,
-      isFunction, isObject, isObjectType,
+      isFunction,
+      isObject, isObjectNormal, isObjectFromNull,
+      isObjectType,
       isArray, isArrayType,
       isDate, isRegExp,
       isException,
@@ -24,7 +26,9 @@ export const test_execute_type = (parts) => {
 
       isNotUndefined, isNotNull, isNotNaNStrict,
       isNotBoolean, isNotNumber, isNotInteger, isNotString,
-      isNotFunction, isNotObject, isNotObjectType,
+      isNotFunction,
+      isNotObject, isNotObjectNormal, isNotObjectFromNull,
+      isNotObjectType,
       isNotArray, isNotArrayType,
       isNotDate, isNotRegExp,
       isNotException,
@@ -36,7 +40,9 @@ export const test_execute_type = (parts) => {
 
       isUndefinedAll, isNullAll, isNaNStrictAll,
       isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-      isFunctionAll, isObjectAll, isObjectTypeAll,
+      isFunctionAll,
+      isObjectAll, isObjectNormalAll, isObjectFromNullAll,
+      isObjectTypeAll,
       isArrayAll, isArrayTypeAll,
       isDateAll, isRegExpAll,
       isExceptionAll,
@@ -48,7 +54,9 @@ export const test_execute_type = (parts) => {
 
       isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
       isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
-      isNotFunctionAll, isNotObjectAll, isNotObjectTypeAll,
+      isNotFunctionAll,
+      isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
+      isNotObjectTypeAll,
       isNotArrayAll, isNotArrayTypeAll,
       isNotDateAll, isNotRegExpAll,
       isNotExceptionAll,
@@ -60,7 +68,9 @@ export const test_execute_type = (parts) => {
 
       isUndefinedArray, isNullArray, isNaNStrictArray,
       isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-      isFunctionArray, isObjectArray, isObjectTypeArray,
+      isFunctionArray,
+      isObjectArray, isObjectNormalArray, isObjectFromNullArray,
+      isObjectTypeArray,
       isArrayArray, isArrayTypeArray,
       isDateArray, isRegExpArray,
       isExceptionArray,
@@ -72,7 +82,9 @@ export const test_execute_type = (parts) => {
 
       isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
       isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-      isNotFunctionArray, isNotObjectArray, isNotObjectTypeArray,
+      isNotFunctionArray,
+      isNotObjectArray, isNotObjectNormalArray, isNotObjectFromNullArray,
+      isNotObjectTypeArray,
       isNotArrayArray, isNotArrayTypeArray,
       isNotDateArray, isNotRegExpArray,
       isNotExceptionArray,
@@ -595,86 +607,249 @@ export const test_execute_type = (parts) => {
       });
     };
 
+    const test_different_objectNormal_objectFromNull = () => {
+      checkEqual(true,  'hasOwnProperty' in {});
+      checkEqual(false, 'hasOwnProperty' in Object.create(null));
+      checkEqual(true,  'constructor' in {});
+      checkEqual(false, 'constructor' in Object.create(null));
+    };
+
     const test_isObject = function() {
       it('test_isObject', () => {
 
-        checkEqual(false, isObjectAll(null));
-        checkEqual(false, isObjectAll(undefined));
-        checkEqual(false, isObjectAll(undefined));
-        checkEqual(false, isObjectAll('a'));
-        checkEqual(false, isObjectAll(1));
-        checkEqual(false, isObjectAll(true));
+        // object other value
+        checkEqual(false, isObject(null));
+        checkEqual(false, isObject(undefined));
+        checkEqual(false, isObject(undefined));
+        checkEqual(false, isObject('a'));
+        checkEqual(false, isObject(1));
+        checkEqual(false, isObject(true));
 
-        checkEqual(true,  isObjectAll({}));
-        checkEqual(true,  isObjectAll({ a: 0 }));
-        checkEqual(true,  isObjectAll({ a: 0, b: 1 }));
+        // normal object
+        checkEqual(true,  isObject({}));
+        checkEqual(true,  isObject({ a: 0 }));
+        checkEqual(true,  isObject({ a: 0, b: 1 }));
 
-        checkEqual(false, isObjectAll([]));
-        checkEqual(false, isObjectAll(function() { }));
-        checkEqual(false, isObjectAll(() => {}));
-        checkEqual(false, isObjectAll(new Error()));
-        checkEqual(false, isObjectAll(new Date()));
-        checkEqual(false, isObjectAll(new RegExp()));
+        // object from null
+        checkEqual(true,  isObject(Object.create(null)));
 
-        checkEqual(false, isObjectAll(new String()));
-        checkEqual(false, isObjectAll(new Number()));
-        checkEqual(false, isObjectAll(new Boolean()));
-        checkEqual(true,  isObjectAll(new Object()));
-        checkEqual(false, isObjectAll(new Array()));
-        checkEqual(false, isObjectAll(new Function()));
+        // object like
+        checkEqual(false, isObject([]));
+        checkEqual(false, isObject(function() { }));
+        checkEqual(false, isObject(() => {}));
+        checkEqual(false, isObject(new Error()));
+        checkEqual(false, isObject(new Date()));
+        checkEqual(false, isObject(new RegExp()));
 
+        checkEqual(false, isObject(new String()));
+        checkEqual(false, isObject(new Number()));
+        checkEqual(false, isObject(new Boolean()));
+        checkEqual(true,  isObject(new Object()));
+        checkEqual(false, isObject(new Array()));
+        checkEqual(false, isObject(new Function()));
+
+        if (parts.isModule(parts)) {
+          checkEqual(false, isObject(parts));
+        }
+
+        // is...All
         checkEqual(true,  isObjectAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
 
+        // is...Array
         checkEqual(true,  isObjectArray([{}, { a: 0, b: 1 }]));
         checkEqual(false, isObjectArray([[], { a: 0, b: 1 }]));
-        checkEqual(false, isObjectArray([[{}], { a: 0, b: 1 }]));
 
         const TestObject = function() {
           this.a = 'a';
         };
         var testObject1 = new TestObject();
-        checkEqual(true,  isObjectAll(testObject1));
+        checkEqual(true,  isObject(testObject1));
+      });
+    };
+
+    const test_isObjectNormal = function() {
+      it('test_isObjectNormal', () => {
+
+        // object other value
+        checkEqual(false, isObjectNormal(null));
+        checkEqual(false, isObjectNormal(undefined));
+        checkEqual(false, isObjectNormal(undefined));
+        checkEqual(false, isObjectNormal('a'));
+        checkEqual(false, isObjectNormal(1));
+        checkEqual(false, isObjectNormal(true));
+
+        // normal object
+        checkEqual(true,  isObjectNormal({}));
+        checkEqual(true,  isObjectNormal({ a: 0 }));
+        checkEqual(true,  isObjectNormal({ a: 0, b: 1 }));
+
+        // object from null
+        checkEqual(false,  isObjectNormal(Object.create(null)));
+
+        // object like
+        checkEqual(false, isObjectNormal([]));
+        checkEqual(false, isObjectNormal(function() { }));
+        checkEqual(false, isObjectNormal(() => {}));
+        checkEqual(false, isObjectNormal(new Error()));
+        checkEqual(false, isObjectNormal(new Date()));
+        checkEqual(false, isObjectNormal(new RegExp()));
+
+        checkEqual(false, isObjectNormal(new String()));
+        checkEqual(false, isObjectNormal(new Number()));
+        checkEqual(false, isObjectNormal(new Boolean()));
+        checkEqual(true,  isObjectNormal(new Object()));
+        checkEqual(false, isObjectNormal(new Array()));
+        checkEqual(false, isObjectNormal(new Function()));
+
+        if (parts.isModule(parts)) {
+          checkEqual(false, isObjectNormal(parts));
+        }
+
+        // is...All
+        testCounter();
+        checkEqual(true,  isObjectNormalAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
+        checkEqual(false, isObjectNormalAll({}, Object.create(null)));
+        checkEqual(false, isObjectNormalAll(Object.create(null), Object.create(null)));
+        checkEqual(false, isNotObjectNormalAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
+        checkEqual(false, isNotObjectNormalAll({}, Object.create(null)));
+        checkEqual(true,  isNotObjectNormalAll(Object.create(null), Object.create(null)));
+
+        // is...Array
+        checkEqual(true,  isObjectNormalArray([{}, { a: 0, b: 1 }]));
+        checkEqual(false, isObjectNormalArray([{}, Object.create(null)]));
+        checkEqual(false, isObjectNormalArray([Object.create(null), Object.create(null)]));
+        checkEqual(false, isNotObjectNormalArray([{}, { a: 0, b: 1 }]));
+        checkEqual(false, isNotObjectNormalArray([{}, Object.create(null)]));
+        checkEqual(true,  isNotObjectNormalArray([Object.create(null), Object.create(null)]));
+
+        const TestObject = function() {
+          this.a = 'a';
+        };
+        var testObject1 = new TestObject();
+        checkEqual(true,  isObjectNormal(testObject1));
+      });
+    };
+
+    const test_isObjectFromNull = function() {
+      it('test_isObjectFromNull', () => {
+
+        // object other value
+        checkEqual(false, isObjectFromNull(null));
+        checkEqual(false, isObjectFromNull(undefined));
+        checkEqual(false, isObjectFromNull(undefined));
+        checkEqual(false, isObjectFromNull('a'));
+        checkEqual(false, isObjectFromNull(1));
+        checkEqual(false, isObjectFromNull(true));
+
+        // normal object
+        checkEqual(false, isObjectFromNull({}));
+        checkEqual(false, isObjectFromNull({ a: 0 }));
+        checkEqual(false, isObjectFromNull({ a: 0, b: 1 }));
+
+        // object from null
+        checkEqual(true,  isObjectFromNull(Object.create(null)));
+
+        // object like
+        checkEqual(false, isObjectFromNull([]));
+        checkEqual(false, isObjectFromNull(function() { }));
+        checkEqual(false, isObjectFromNull(() => {}));
+        checkEqual(false, isObjectFromNull(new Error()));
+        checkEqual(false, isObjectFromNull(new Date()));
+        checkEqual(false, isObjectFromNull(new RegExp()));
+
+        checkEqual(false, isObjectFromNull(new String()));
+        checkEqual(false, isObjectFromNull(new Number()));
+        checkEqual(false, isObjectFromNull(new Boolean()));
+        checkEqual(false, isObjectFromNull(new Object()));
+        checkEqual(false, isObjectFromNull(new Array()));
+        checkEqual(false, isObjectFromNull(new Function()));
+
+        if (parts.isModule(parts)) {
+          checkEqual(false, isObjectFromNull(parts));
+        }
+
+        // is...All
+        testCounter();
+        checkEqual(false, isObjectFromNullAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
+        checkEqual(false, isObjectFromNullAll({}, Object.create(null)));
+        checkEqual(true,  isObjectFromNullAll(Object.create(null), Object.create(null)));
+        checkEqual(true,  isNotObjectFromNullAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
+        checkEqual(false, isNotObjectFromNullAll({}, Object.create(null)));
+        checkEqual(false, isNotObjectFromNullAll(Object.create(null), Object.create(null)));
+
+        // is...Array
+        checkEqual(false, isObjectFromNullArray([{}, { a: 0, b: 1 }]));
+        checkEqual(false, isObjectFromNullArray([{}, Object.create(null)]));
+        checkEqual(true,  isObjectFromNullArray([Object.create(null), Object.create(null)]));
+        checkEqual(true,  isNotObjectFromNullArray([{}, { a: 0, b: 1 }]));
+        checkEqual(false, isNotObjectFromNullArray([{}, Object.create(null)]));
+        checkEqual(false, isNotObjectFromNullArray([Object.create(null), Object.create(null)]));
+
+        const TestObject = function() {
+          this.a = 'a';
+        };
+        var testObject1 = new TestObject();
+        checkEqual(false,  isObjectFromNull(testObject1));
       });
     };
 
     const test_isObjectType = function() {
       it('test_isObjectType', () => {
 
-        checkEqual(false, isObjectTypeAll(null));
-        checkEqual(false, isObjectTypeAll(undefined));
-        checkEqual(false, isObjectTypeAll('a'));
-        checkEqual(false, isObjectTypeAll(1));
-        checkEqual(false, isObjectTypeAll(true));
+        // object other value
+        checkEqual(false, isObjectType(null));
+        checkEqual(false, isObjectType(undefined));
+        checkEqual(false, isObjectType('a'));
+        checkEqual(false, isObjectType(1));
+        checkEqual(false, isObjectType(true));
 
-        checkEqual(true,  isObjectTypeAll({}));
-        checkEqual(true,  isObjectTypeAll({ a: 0 }));
-        checkEqual(true,  isObjectTypeAll({ a: 0, b: 1 }));
+        // normal object
+        checkEqual(true,  isObjectType({}));
+        checkEqual(true,  isObjectType({ a: 0 }));
+        checkEqual(true,  isObjectType({ a: 0, b: 1 }));
 
-        checkEqual(true,  isObjectTypeAll([]));
-        checkEqual(true,  isObjectTypeAll(function() { }));
-        checkEqual(true,  isObjectTypeAll(() => {}));
-        checkEqual(true,  isObjectTypeAll(new Error()));
-        checkEqual(true,  isObjectTypeAll(new Date()));
-        checkEqual(true,  isObjectTypeAll(new RegExp()));
+        // object from null
+        checkEqual(true,  isObjectType(Object.create(null)));
 
-        checkEqual(true,  isObjectTypeAll(new String()));
-        checkEqual(true,  isObjectTypeAll(new Number()));
-        checkEqual(true,  isObjectTypeAll(new Boolean()));
-        checkEqual(true,  isObjectTypeAll(new Object()));
-        checkEqual(true,  isObjectTypeAll(new Array()));
-        checkEqual(true,  isObjectTypeAll(new Function()));
+        // object like
+        checkEqual(true,  isObjectType([]));
+        checkEqual(true,  isObjectType(function() { }));
+        checkEqual(true,  isObjectType(() => {}));
+        checkEqual(true,  isObjectType(new Error()));
+        checkEqual(true,  isObjectType(new Date()));
+        checkEqual(true,  isObjectType(new RegExp()));
 
+        checkEqual(true,  isObjectType(new String()));
+        checkEqual(true,  isObjectType(new Number()));
+        checkEqual(true,  isObjectType(new Boolean()));
+        checkEqual(true,  isObjectType(new Object()));
+        checkEqual(true,  isObjectType(new Array()));
+        checkEqual(true,  isObjectType(new Function()));
+
+        if (parts.isModule(parts)) {
+          checkEqual(true, isObjectType(parts));
+        }
+
+        // is...All
         checkEqual(true,  isObjectTypeAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
 
+        // is...Array
         checkEqual(true,  isObjectTypeArray([{}, { a: 0, b: 1 }]));
         checkEqual(true,  isObjectTypeArray([[], { a: 0, b: 1 }]));
-        checkEqual(true,  isObjectTypeArray([[{}], { a: 0, b: 1 }]));
 
         const TestObject = function() {
           this.a = 'a';
         };
         var testObject1 = new TestObject();
         checkEqual(true,  isObjectTypeAll(testObject1));
+      });
+    };
+
+    const test_isModule = () => {
+      it('test_isModule', () => {
+        if (parts.isModule(parts)) {
+          checkEqual(false, parts.platform.isWindowsScriptHost());
+        }
       });
     };
 
@@ -926,8 +1101,15 @@ export const test_execute_type = (parts) => {
     test_isInteger();
     test_isString();
     test_isFunction();
+
+    test_different_objectNormal_objectFromNull();
     test_isObject();
+    test_isObjectNormal();
+    test_isObjectFromNull();
     test_isObjectType();
+
+    test_isModule();
+
     test_isArray();
     test_isArrayType();
     test_isDate();
@@ -942,4 +1124,4 @@ export const test_execute_type = (parts) => {
 
 export default {
   test_execute_type,
-}
+};

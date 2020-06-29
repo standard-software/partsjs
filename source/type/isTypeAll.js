@@ -1,7 +1,9 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType, isModule,
+  isFunction,
+  isObject, isObjectNormal, isObjectFromNull,
+  isObjectType, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
@@ -9,7 +11,9 @@ import {
 
   isNotUndefined, isNotNull, isNotNaNStrict,
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
-  isNotFunction, isNotObject, isNotObjectType, isNotModule,
+  isNotFunction,
+  isNotObject, isNotObjectNormal, isNotObjectFromNull,
+  isNotObjectType, isNotModule,
   isNotArray, isNotArrayType,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
@@ -69,6 +73,8 @@ export const isIntegerAll           = _isTypeAllCheckFunc(isInteger);
 export const isStringAll            = _isTypeAllCheckFunc(isString);
 export const isFunctionAll          = _isTypeAllCheckFunc(isFunction);
 export const isObjectAll            = _isTypeAllCheckFunc(isObject);
+export const isObjectNormalAll      = _isTypeAllCheckFunc(isObjectNormal);
+export const isObjectFromNullAll    = _isTypeAllCheckFunc(isObjectFromNull);
 export const isObjectTypeAll        = _isTypeAllCheckFunc(isObjectType);
 export const isModuleAll            = _isTypeAllCheckFunc(isModule);
 export const isArrayAll             = _isTypeAllCheckFunc(isArray);
@@ -96,6 +102,8 @@ export const isNotIntegerAll        = _isTypeAllCheckFunc(isNotInteger);
 export const isNotStringAll         = _isTypeAllCheckFunc(isNotString);
 export const isNotFunctionAll       = _isTypeAllCheckFunc(isNotFunction);
 export const isNotObjectAll         = _isTypeAllCheckFunc(isNotObject);
+export const isNotObjectNormalAll   = _isTypeAllCheckFunc(isNotObjectNormal);
+export const isNotObjectFromNullAll = _isTypeAllCheckFunc(isNotObjectFromNull);
 export const isNotObjectTypeAll     = _isTypeAllCheckFunc(isNotObjectType);
 export const isNotModuleAll         = _isTypeAllCheckFunc(isNotModule);
 export const isNotArrayAll          = _isTypeAllCheckFunc(isNotArray);
@@ -114,34 +122,40 @@ export const isNotWeakMapAll        = _isTypeAllCheckFunc(isNotWeakMap);
 export const isNotSetAll            = _isTypeAllCheckFunc(isNotSet);
 export const isNotWeakSetAll        = _isTypeAllCheckFunc(isNotWeakSet);
 
-export const isUndefAll        = isUndefinedAll;
-export const isBoolAll         = isBooleanAll;
-export const isNumAll          = isNumberAll;
-export const isIntAll          = isIntegerAll;
-export const isStrAll          = isStringAll;
-export const isFuncAll         = isFunctionAll;
-export const isObjAll          = isObjectAll;
-export const isObjTypeAll      = isObjectTypeAll;
-export const isExceptAll       = isExceptionAll;
-export const isEmptyObjAll     = isEmptyObjectAll;
+export const isUndefAll           = isUndefinedAll;
+export const isBoolAll            = isBooleanAll;
+export const isNumAll             = isNumberAll;
+export const isIntAll             = isIntegerAll;
+export const isStrAll             = isStringAll;
+export const isFuncAll            = isFunctionAll;
+export const isObjAll             = isObjectAll;
+export const isObjNormalAll       = isObjectNormalAll;
+export const isObjFromNullAll     = isObjectFromNullAll;
+export const isObjTypeAll         = isObjectTypeAll;
+export const isExceptAll          = isExceptionAll;
+export const isEmptyObjAll        = isEmptyObjectAll;
 
-export const isNotUndefAll     = isNotUndefinedAll;
-export const isNotBoolAll      = isNotBooleanAll;
-export const isNotNumAll       = isNotNumberAll;
-export const isNotIntAll       = isNotIntegerAll;
-export const isNotStrAll       = isNotStringAll;
-export const isNotFuncAll      = isNotFunctionAll;
-export const isNotObjAll       = isNotObjectAll;
-export const isNotObjTypeAll   = isNotObjectTypeAll;
-export const isNotExceptAll    = isNotExceptionAll;
-export const isNotEmptyObjAll  = isNotEmptyObjectAll;
+export const isNotUndefAll        = isNotUndefinedAll;
+export const isNotBoolAll         = isNotBooleanAll;
+export const isNotNumAll          = isNotNumberAll;
+export const isNotIntAll          = isNotIntegerAll;
+export const isNotStrAll          = isNotStringAll;
+export const isNotFuncAll         = isNotFunctionAll;
+export const isNotObjAll          = isNotObjectAll;
+export const isNotObjNormalAll    = isNotObjectNormalAll;
+export const isNotObjFromNullAll  = isNotObjectFromNullAll;
+export const isNotObjTypeAll      = isNotObjectTypeAll;
+export const isNotExceptAll       = isNotExceptionAll;
+export const isNotEmptyObjAll     = isNotEmptyObjectAll;
 
 export default {
   _isTypeArray,
 
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-  isFunctionAll, isObjectAll, isObjectTypeAll, isModuleAll,
+  isFunctionAll,
+  isObjectAll, isObjectNormalAll, isObjectFromNullAll,
+  isObjectTypeAll, isModuleAll,
   isArrayAll, isArrayTypeAll,
   isDateAll, isRegExpAll,
   isExceptionAll,
@@ -153,7 +167,9 @@ export default {
 
   isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
   isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
-  isNotFunctionAll, isNotObjectAll, isNotObjectTypeAll, isNotModuleAll,
+  isNotFunctionAll,
+  isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
+  isNotObjectTypeAll, isNotModuleAll,
   isNotArrayAll, isNotArrayTypeAll,
   isNotDateAll, isNotRegExpAll,
   isNotExceptionAll,
@@ -165,15 +181,19 @@ export default {
 
   isUndefAll,
   isBoolAll, isNumAll, isIntAll, isStrAll,
-  isFuncAll, isObjAll, isObjTypeAll,
+  isFuncAll,
+  isObjAll, isObjNormalAll, isObjFromNullAll,
+  isObjTypeAll,
   isExceptAll,
   isEmptyObjAll,
 
   isNotUndefAll,
   isNotBoolAll, isNotNumAll, isNotIntAll, isNotStrAll,
-  isNotFuncAll, isNotObjAll, isNotObjTypeAll,
+  isNotFuncAll,
+  isNotObjAll, isNotObjNormalAll, isNotObjFromNullAll,
+  isNotObjTypeAll,
   isNotExceptAll,
   isNotEmptyObjAll,
 
-}
+};
 

@@ -253,6 +253,8 @@ same [How to use Google Apps Script]
 - support full object parameter
   - has / hasOwn / hasPrototype
   - propertyCount
+- add isObjectNormal isObjectFromNull
+  - isNot... is...All / is...Array
 
 ### 6.1.0
 #### 2020/06/24(Wed)

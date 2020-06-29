@@ -54,20 +54,24 @@ const platform = _copyProperty(_platform, propertyNames.PLATFORM);
 
 // type
 propertyNames._TYPE_BASE =
-  'Undefined,Null,NaNStrict,' +
-  'Boolean,Number,Integer,String,' +
-  'Function,Object,ObjectType,Module,' +
-  'Array,ArrayType,' +
-  'Date,RegExp,' +
-  'Exception,' +
-  'EmptyObject,EmptyArray,' +
-  'Symbol,' +
-  'Map,WeakMap,Set,WeakSet,' +
-  'BooleanObject,NumberObject,StringObject,' +
-  'Bool,Num,Int,Str,' +
-  'Func,Obj,ObjType,' +
-  'Except,' +
-  'EmptyObj,' +
+  'Undefined, Null, NaNStrict, ' +
+  'Boolean, Number, Integer, String, ' +
+  'Function, ' +
+  'Object, ObjectNormal, ObjectFromNull, ' +
+  'ObjectType, Module, ' +
+  'Array, ArrayType, ' +
+  'Date, RegExp, ' +
+  'Exception, ' +
+  'EmptyObject, EmptyArray, ' +
+  'Symbol, ' +
+  'Map, WeakMap, Set, WeakSet, ' +
+  'BooleanObject, NumberObject, StringObject, ' +
+  'Bool, Num, Int, Str, ' +
+  'Func, ' +
+  'Obj, ObjNormal, ObjFromNull, ' +
+  'ObjType, ' +
+  'Except, ' +
+  'EmptyObj, ' +
   '';
 const isPrefixSafixAdd = (prefix, safix, commaString) =>
   _map(_array.filter(_replaceAll(commaString, ' ', '').split(','), v => v !== ''),
@@ -257,7 +261,7 @@ propertyNames.CONSOLE_HOOK = [
   isPrefixSafixAdd('hook',    '', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixSafixAdd('unHook',  '', propertyNames._CONSOLE_HOOK_BASE),
   isPrefixSafixAdd('accept',  '', propertyNames._CONSOLE_HOOK_BASE),
-  'hook', 'unHook', 'accept'
+  'hook', 'unHook', 'accept',
 ].join(',');
 const consoleHook = {};
 _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
@@ -266,108 +270,132 @@ export const {
   clone, cloneDeep,
   cloneFunction,
 
-  isUndefined,isNull,isNaNStrict,
-  isBoolean,isNumber,isInteger,isString,
-  isFunction,isObject,isObjectType,isModule,
-  isArray,isArrayType,
-  isDate,isRegExp,
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction,
+  isObject, isObjectNormal, isObjectFromNull,
+  isObjectType, isModule,
+  isArray, isArrayType,
+  isDate, isRegExp,
   isException,
-  isEmptyObject,isEmptyArray,
+  isEmptyObject, isEmptyArray,
   isSymbol,
-  isMap,isWeakMap,isSet,isWeakSet,
-  isBooleanObject,isNumberObject,isStringObject,
-  isBool,isNum,isInt,isStr,
-  isFunc,isObj,isObjType,
+  isMap, isWeakMap, isSet, isWeakSet,
+  isBooleanObject, isNumberObject, isStringObject,
+  isBool, isNum, isInt, isStr,
+  isFunc,
+  isObj, isObjNormal, isObjFromNull,
+  isObjType,
   isExcept,
   isEmptyObj,
 
-  isNotUndefined,isNotNull,isNotNaNStrict,
-  isNotBoolean,isNotNumber,isNotInteger,isNotString,
-  isNotFunction,isNotObject,isNotObjectType,isNotModule,
-  isNotArray,isNotArrayType,
-  isNotDate,isNotRegExp,
+  isNotUndefined, isNotNull, isNotNaNStrict,
+  isNotBoolean, isNotNumber, isNotInteger, isNotString,
+  isNotFunction,
+  isNotObject, isNotObjectNormal, isNotObjectFromNull,
+  isNotObjectType, isNotModule,
+  isNotArray, isNotArrayType,
+  isNotDate, isNotRegExp,
   isNotException,
-  isNotEmptyObject,isNotEmptyArray,
+  isNotEmptyObject, isNotEmptyArray,
   isNotSymbol,
-  isNotMap,isNotWeakMap,isNotSet,isNotWeakSet,
-  isNotBooleanObject,isNotNumberObject,isNotStringObject,
-  isNotBool,isNotNum,isNotInt,isNotStr,
-  isNotFunc,isNotObj,isNotObjType,
+  isNotMap, isNotWeakMap, isNotSet, isNotWeakSet,
+  isNotBooleanObject, isNotNumberObject, isNotStringObject,
+  isNotBool, isNotNum, isNotInt, isNotStr,
+  isNotFunc,
+  isNotObj, isNotObjNormal, isNotObjFromNull,
+  isNotObjType,
   isNotExcept,
   isNotEmptyObj,
 
-  isUndefinedAll,isNullAll,isNaNStrictAll,
-  isBooleanAll,isNumberAll,isIntegerAll,isStringAll,
-  isFunctionAll,isObjectAll,isObjectTypeAll,isModuleAll,
-  isArrayAll,isArrayTypeAll,
-  isDateAll,isRegExpAll,
+  isUndefinedAll, isNullAll, isNaNStrictAll,
+  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
+  isFunctionAll,
+  isObjectAll, isObjectNormalAll, isObjectFromNullAll,
+  isObjectTypeAll, isModuleAll,
+  isArrayAll, isArrayTypeAll,
+  isDateAll, isRegExpAll,
   isExceptionAll,
-  isEmptyObjectAll,isEmptyArrayAll,
+  isEmptyObjectAll, isEmptyArrayAll,
   isSymbolAll,
-  isMapAll,isWeakMapAll,isSetAll,isWeakSetAll,
-  isBooleanObjectAll,isNumberObjectAll,isStringObjectAll,
-  isBoolAll,isNumAll,isIntAll,isStrAll,
-  isFuncAll,isObjAll,isObjTypeAll,
+  isMapAll, isWeakMapAll, isSetAll, isWeakSetAll,
+  isBooleanObjectAll, isNumberObjectAll, isStringObjectAll,
+  isBoolAll, isNumAll, isIntAll, isStrAll,
+  isFuncAll,
+  isObjAll, isObjNormalAll, isObjFromNullAll,
+  isObjTypeAll,
   isExceptAll,
   isEmptyObjAll,
 
-  isNotUndefinedAll,isNotNullAll,isNotNaNStrictAll,
-  isNotBooleanAll,isNotNumberAll,isNotIntegerAll,isNotStringAll,
-  isNotFunctionAll,isNotObjectAll,isNotObjectTypeAll,isNotModuleAll,
-  isNotArrayAll,isNotArrayTypeAll,
-  isNotDateAll,isNotRegExpAll,
+  isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
+  isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
+  isNotFunctionAll,
+  isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
+  isNotObjectTypeAll, isNotModuleAll,
+  isNotArrayAll, isNotArrayTypeAll,
+  isNotDateAll, isNotRegExpAll,
   isNotExceptionAll,
-  isNotEmptyObjectAll,isNotEmptyArrayAll,
+  isNotEmptyObjectAll, isNotEmptyArrayAll,
   isNotSymbolAll,
-  isNotMapAll,isNotWeakMapAll,isNotSetAll,isNotWeakSetAll,
-  isNotBooleanObjectAll,isNotNumberObjectAll,isNotStringObjectAll,
-  isNotBoolAll,isNotNumAll,isNotIntAll,isNotStrAll,
-  isNotFuncAll,isNotObjAll,isNotObjTypeAll,
+  isNotMapAll, isNotWeakMapAll, isNotSetAll, isNotWeakSetAll,
+  isNotBooleanObjectAll, isNotNumberObjectAll, isNotStringObjectAll,
+  isNotBoolAll, isNotNumAll, isNotIntAll, isNotStrAll,
+  isNotFuncAll,
+  isNotObjAll, isNotObjNormalAll, isNotObjFromNullAll,
+  isNotObjTypeAll,
   isNotExceptAll,
   isNotEmptyObjAll,
 
-  isUndefinedArray,isNullArray,isNaNStrictArray,
-  isBooleanArray,isNumberArray,isIntegerArray,isStringArray,
-  isFunctionArray,isObjectArray,isObjectTypeArray,isModuleArray,
-  isArrayArray,isArrayTypeArray,
-  isDateArray,isRegExpArray,
+  isUndefinedArray, isNullArray, isNaNStrictArray,
+  isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
+  isFunctionArray,
+  isObjectArray, isObjectNormalArray, isObjectFromNullArray,
+  isObjectTypeArray, isModuleArray,
+  isArrayArray, isArrayTypeArray,
+  isDateArray, isRegExpArray,
   isExceptionArray,
-  isEmptyObjectArray,isEmptyArrayArray,
+  isEmptyObjectArray, isEmptyArrayArray,
   isSymbolArray,
-  isMapArray,isWeakMapArray,isSetArray,isWeakSetArray,
-  isBooleanObjectArray,isNumberObjectArray,isStringObjectArray,
-  isBoolArray,isNumArray,isIntArray,isStrArray,
-  isFuncArray,isObjArray,isObjTypeArray,
+  isMapArray, isWeakMapArray, isSetArray, isWeakSetArray,
+  isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
+  isBoolArray, isNumArray, isIntArray, isStrArray,
+  isFuncArray,
+  isObjArray, isObjNormalArray, isObjFromNullArray,
+  isObjTypeArray,
   isExceptArray,
   isEmptyObjArray,
 
-  isNotUndefinedArray,isNotNullArray,isNotNaNStrictArray,
-  isNotBooleanArray,isNotNumberArray,isNotIntegerArray,isNotStringArray,
-  isNotFunctionArray,isNotObjectArray,isNotObjectTypeArray,isNotModuleArray,
-  isNotArrayArray,isNotArrayTypeArray,
-  isNotDateArray,isNotRegExpArray,
+  isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
+  isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
+  isNotFunctionArray,
+  isNotObjectArray, isNotObjectNormalArray, isNotObjectFromNullArray,
+  isNotObjectTypeArray, isNotModuleArray,
+  isNotArrayArray, isNotArrayTypeArray,
+  isNotDateArray, isNotRegExpArray,
   isNotExceptionArray,
-  isNotEmptyObjectArray,isNotEmptyArrayArray,
+  isNotEmptyObjectArray, isNotEmptyArrayArray,
   isNotSymbolArray,
-  isNotMapArray,isNotWeakMapArray,isNotSetArray,isNotWeakSetArray,
-  isNotBooleanObjectArray,isNotNumberObjectArray,isNotStringObjectArray,
-  isNotBoolArray,isNotNumArray,isNotIntArray,isNotStrArray,
-  isNotFuncArray,isNotObjArray,isNotObjTypeArray,
+  isNotMapArray, isNotWeakMapArray, isNotSetArray, isNotWeakSetArray,
+  isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
+  isNotBoolArray, isNotNumArray, isNotIntArray, isNotStrArray,
+  isNotFuncArray,
+  isNotObjArray, isNotObjNormalArray, isNotObjFromNullArray,
+  isNotObjTypeArray,
   isNotExceptArray,
   isNotEmptyObjArray,
 
-  isThrown,isThrownValue,isThrownException,isNotThrown,
+  isThrown, isThrownValue, isThrownException, isNotThrown,
 
-  assert,guard,
+  assert, guard,
   functionValue,
-  sc,if_,switch_,
+  sc, if_, switch_,
   loop,
-  canUseMap, canUseSet,
+  canUseMap,  canUseSet,
 
-  equal, equalDeep,
+  equal,  equalDeep,
   equalFunction,
   or,
-  match, matchValue, initialValue,
+  match,    matchValue,  initialValue,
   allMatch, indexOfMatch, someMatch,
   matchSome, matchSomeValue,
   allMatchSome, indexOfMatchSome, someMatchSome,
@@ -376,8 +404,8 @@ export const {
   includes, includesSome, includesAll,
 
   numberToString, valueToString,
-  stringToNumber,stringToNumberDefault,
-  stringToInteger,stringToIntegerDefault,
+  stringToNumber, stringToNumberDefault,
+  stringToInteger, stringToIntegerDefault,
   valueToNumber, valueToNumberDefault,
   valueToInteger, valueToIntegerDefault,
 
@@ -391,20 +419,20 @@ export const {
   valToInt, valToIntDef,
 
   numToStr,
-  strToNum,strToNumDef,
-  strToInt,strToIntDef,
+  strToNum, strToNumDef,
+  strToInt, strToIntDef,
 
-  isMultiples,isEven,isOdd,
-  round,nearEqual,inRange,randomInt,
+  isMultiples, isEven, isOdd,
+  round, nearEqual, inRange, randomInt,
 
-  matchFormat,replaceAll,
-  isLowerCase,isUpperCase,
+  matchFormat, replaceAll,
+  isLowerCase, isUpperCase,
 
-  copyProperty,propertyCount,inProperty,
-  has,hasOwn,hasPrototype,
-  getProperty,setProperty,
-  copyProp,propCount,inProp,
-  getProp,setProp,
+  copyProperty, propertyCount, inProperty,
+  has, hasOwn, hasPrototype,
+  getProperty, setProperty,
+  copyProp, propCount, inProp,
+  getProp, setProp,
   objectToString,
 
   min, max,
@@ -425,7 +453,7 @@ export {
   object,
   array,
   consoleHook,
-}
+};
 
 export const parts = {
   VERSION,
@@ -446,6 +474,6 @@ export const parts = {
 
 export default {
   ...parts,
-  parts
-}
+  parts,
+};
 
