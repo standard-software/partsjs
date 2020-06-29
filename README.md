@@ -248,6 +248,9 @@ same [How to use Google Apps Script]
   - add propertyCount.js
 - add has.js
   - has / hasOwn / hasPrototype
+- support full object parameter
+  - has / hasOwn / hasPrototype
+  - propertyCount
 
 ### 6.1.0
 #### 2020/06/24(Wed)

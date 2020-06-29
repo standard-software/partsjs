@@ -22,6 +22,8 @@ import {
 export const propertyCount = (object, hasOwn = true) => {
   if (isObjectParameter(object, 'object', 'hasOwn')) {
     ({ object, hasOwn = true } = object);
+  } else if (isObjectParameter(hasOwn, 'hasOwn')) {
+    ({ hasOwn } = hasOwn);
   }
 
   if (!isObjectType(object)) {
@@ -41,7 +43,6 @@ export const propertyCount = (object, hasOwn = true) => {
 export const propCount = propertyCount;
 
 export default {
-  _propertyCount,
   propertyCount,
   propCount,
 }
