@@ -154,6 +154,16 @@ export const test_execute_object = (parts) => {
         checkEqual(true,  inProperty(sourceObject, 'b,a,'));
         checkEqual(false, inProperty(sourceObject, 'a,d,'));
 
+        // other object function
+        checkEqual(false, inProperty(test_inProperty, 'constructor'));
+        checkEqual(true,  inProperty(test_inProperty, 'constructor', false));
+
+        // other object Module
+        if (parts.isModule(parts)) {
+          checkEqual(true,  inProperty(parts, 'VERSION'));
+          checkEqual(true,  inProperty(parts, 'VERSION', false));
+        }
+
         // array
         checkEqual(true,  inProperty(sourceObject, ['a']));
         checkEqual(true,  inProperty(sourceObject, ['a', 'b']));
@@ -163,13 +173,25 @@ export const test_execute_object = (parts) => {
         checkEqual(true,
           inProperty({
             object: sourceObject,
-            propertyPathArray: 'b,a',
+            propertyPaths: 'b,a',
           }),
         );
         checkEqual(false,
           inProperty({
             object: sourceObject,
-            propertyPathArray: 'd',
+            propertyPaths: 'd',
+          }),
+        );
+        checkEqual(true,
+          inProperty({
+            object: sourceObject,
+            propertyPaths: ['b','a'],
+          }),
+        );
+        checkEqual(false,
+          inProperty({
+            object: sourceObject,
+            propertyPaths: ['d'],
           }),
         );
 
@@ -297,6 +319,16 @@ export const test_execute_object = (parts) => {
         checkEqual(4, propertyCount(object2, false));
         checkEqual(0, propertyCount({}));
         checkEqual(0, propertyCount({}, false));
+
+        // other object function
+        checkEqual(0, propertyCount(test_propertyCount));
+        checkEqual(0, propertyCount(test_propertyCount, false));
+
+        // other object Module
+        if (parts.isModule(parts)) {
+          checkEqual(true,  0 !== propertyCount(parts));
+          checkEqual(true,  0 !== propertyCount(parts, false));
+        }
 
         // exception
         checkEqual(false, isThrown(() => {

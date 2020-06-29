@@ -1,7 +1,12 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isModule, isArray, isDate, isRegExp,
+  isFunction, isObject, isObjectType, isModule,
+  isArray, isArrayType,
+  isDate, isRegExp,
+  isError,
+  isBooleanObject, isNumberObject, isStringObject,
+  isEmptyObject, isEmptyArray,
 } from '../type/isType.js';
 
 import {
@@ -19,29 +24,29 @@ import {
 /**
  * _inProperty
  */
-export const _inProperty = (object, propertyPathArray, hasOwn = true) => {
+export const _inProperty = (object, propertyPaths, hasOwn = true) => {
 
-  if (!isObject(object) && !isModule(object)) {
+  if (!isObjectType(object)) {
     return false;
   }
 
-  if (isString(propertyPathArray)) {
-    propertyPathArray = _replaceAll(propertyPathArray, ' ', '').split(',');
+  if (isString(propertyPaths)) {
+    propertyPaths = _replaceAll(propertyPaths, ' ', '').split(',');
   }
 
-  for (let i = 0; i < propertyPathArray.length; i += 1) {
-    if ((i !== 0) && (i === propertyPathArray.length - 1)) {
-      if ((propertyPathArray[i] === '')
-      || (isUndefined(propertyPathArray[i]))) {
+  for (let i = 0; i < propertyPaths.length; i += 1) {
+    if ((i !== 0) && (i === propertyPaths.length - 1)) {
+      if ((propertyPaths[i] === '')
+      || (isUndefined(propertyPaths[i]))) {
         continue;
       }
     }
-    if (!isString(propertyPathArray[i])) {
+    if (!isString(propertyPaths[i])) {
       throw new TypeError(
-        '_inProperty args(propertyArray) element is not string',
+        '_inProperty args(propertyPaths) element is not string',
       );
     }
-    const result = _getPropertyBase(object, propertyPathArray[i], hasOwn);
+    const result = _getPropertyBase(object, propertyPaths[i], hasOwn);
     if (result.in === false) {
       return false;
     }
@@ -52,23 +57,21 @@ export const _inProperty = (object, propertyPathArray, hasOwn = true) => {
 /**
  * inProperty
  */
-export const inProperty = (object, propertyPathArray, hasOwn = true) => {
-  if (isObjectParameter(object, 'object, propertyPathArray', 'hasOwn')) {
-    ({ object, propertyPathArray, hasOwn = true } = object);
+export const inProperty = (object, propertyPaths, hasOwn = true) => {
+  if (isObjectParameter(object, 'object, propertyPaths', 'hasOwn')) {
+    ({ object, propertyPaths, hasOwn = true } = object);
   }
 
-  if (!isObject(object) && !isModule(object)) {
+  if (!isObjectType(object)) {
     throw new TypeError(
-      'inProperty args(object) is not object',
+      'inProperty args(object) is not object type',
     );
   }
 
-  if (!isString(propertyPathArray)) {
-    if (!isArray(propertyPathArray)) {
-      throw new TypeError(
-        'inProperty args(propertyPathArray) is not [array|string]',
-      );
-    }
+  if (!(isString(propertyPaths) || isArray(propertyPaths))) {
+    throw new TypeError(
+      'inProperty args(propertyPaths) is not [array|string]',
+    );
   }
   if (!isBoolean(hasOwn)) {
     throw new TypeError(
@@ -78,7 +81,7 @@ export const inProperty = (object, propertyPathArray, hasOwn = true) => {
 
   return _inProperty(
     object,
-    propertyPathArray,
+    propertyPaths,
     hasOwn,
   );
 };
@@ -90,4 +93,4 @@ export default {
 
   inProperty,
   inProp,
-}
+};

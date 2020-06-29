@@ -242,7 +242,9 @@ same [How to use Google Apps Script]
   - build babel/webpack node requier pattern
   - delete local isTypeAll
 - add isModule isNotModule etc
-- update inProperty support Module Object
+- update inProperty 
+  - support Module Object etc object like
+  - args propertyPathArray >> propertyPaths
 - update object.js move function
   - add getProperty.js
   - add propertyCount.js
