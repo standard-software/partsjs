@@ -39,4 +39,4 @@ export const replaceAll = (str, before, after) => {
 
 export default {
   replaceAll,
-}
+};

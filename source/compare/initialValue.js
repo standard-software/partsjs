@@ -57,4 +57,4 @@ export const initialValue = (
 export default {
   _initialValue,
   initialValue,
-}
+};

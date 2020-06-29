@@ -42,4 +42,4 @@ export const or = (value, compareArray) => {
 export default {
   _or,
   or,
-}
+};

@@ -28,4 +28,4 @@ export const someMatchSome = (
 export default {
   _someMatchSome,
   someMatchSome,
-}
+};

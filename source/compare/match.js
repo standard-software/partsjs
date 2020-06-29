@@ -64,4 +64,4 @@ export const match = (
 export default {
   _match,
   match,
-}
+};

@@ -19,4 +19,4 @@ export const test_execute_other = (parts) => {
 
 export default {
   test_execute_other,
-}
+};

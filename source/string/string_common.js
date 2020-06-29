@@ -1074,4 +1074,4 @@ export default {
   deleteIndex, deleteLength, deleteFirst, deleteLast,
   insert, add,
 
-}
+};

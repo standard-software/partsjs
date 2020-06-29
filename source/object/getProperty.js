@@ -99,4 +99,4 @@ export default {
   _getProperty,
   getProperty,
   getProp,
-}
+};

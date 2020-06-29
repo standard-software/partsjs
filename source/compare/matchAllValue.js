@@ -71,4 +71,4 @@ export const matchAllValue = (
 export default {
   _matchAllValue,
   matchAllValue,
-}
+};

@@ -41,39 +41,39 @@ export const test_execute_object = (parts) => {
 
         // object parameter
         checkEqual(true,  has(
-          { object: object1, propertyName: 'constructor' })
+          { object: object1, propertyName: 'constructor' }),
         );
         checkEqual(false,  has(
-          { object: object1, propertyName: 'constructor', hasOwn: true })
+          { object: object1, propertyName: 'constructor', hasOwn: true }),
         );
         checkEqual(true,  has(
-          object1, { propertyName: 'constructor' })
+          object1, { propertyName: 'constructor' }),
         );
         checkEqual(false,  has(
-          object1, { propertyName: 'constructor', hasOwn: true })
+          object1, { propertyName: 'constructor', hasOwn: true }),
         );
         checkEqual(true,  has(
-          object1, 'constructor', { hasOwn: false })
+          object1, 'constructor', { hasOwn: false }),
         );
         checkEqual(false,  has(
-          object1, 'constructor', { hasOwn: true })
+          object1, 'constructor', { hasOwn: true }),
         );
 
         checkEqual(false, hasOwn(
-          { object: object1, propertyName: 'constructor' })
+          { object: object1, propertyName: 'constructor' }),
         );
         checkEqual(false, hasOwn(
-          object1, { propertyName: 'constructor' })
+          object1, { propertyName: 'constructor' }),
         );
         checkEqual(true,  hasPrototype(
-          { object: object1, propertyName: 'constructor' })
+          { object: object1, propertyName: 'constructor' }),
         );
         checkEqual(true,  hasPrototype(
-          object1, { propertyName: 'constructor' })
+          object1, { propertyName: 'constructor' }),
         );
 
-      })
-    }
+      });
+    };
 
     const test_copyProperty = () => {
       it('test_copyProperty', () => {
@@ -185,7 +185,7 @@ export const test_execute_object = (parts) => {
         checkEqual(true,
           inProperty({
             object: sourceObject,
-            propertyPaths: ['b','a'],
+            propertyPaths: ['b', 'a'],
           }),
         );
         checkEqual(false,
@@ -304,23 +304,23 @@ export const test_execute_object = (parts) => {
         testCounter();
         checkEqual(false,
           inProperty(
-            { object: sourceObject, propertyPaths: 'b,c' }
-          )
+            { object: sourceObject, propertyPaths: 'b,c' },
+          ),
         );
         checkEqual(true,
           inProperty(
-            { object: sourceObject, propertyPaths: 'b,c', hasOwn: false }
-          )
+            { object: sourceObject, propertyPaths: 'b,c', hasOwn: false },
+          ),
         );
         checkEqual(true,
           inProperty(
-            sourceObject, { propertyPaths: 'b,c', hasOwn: false }
-          )
+            sourceObject, { propertyPaths: 'b,c', hasOwn: false },
+          ),
         );
         checkEqual(true,
           inProperty(
-            sourceObject, 'b,c', { hasOwn: false }
-          )
+            sourceObject, 'b,c', { hasOwn: false },
+          ),
         );
 
       });
@@ -369,13 +369,13 @@ export const test_execute_object = (parts) => {
 
         // object parameter
         checkEqual(1,  propertyCount(
-          { object: object2 })
+          { object: object2 }),
         );
         checkEqual(4,  propertyCount(
-          { object: object2, hasOwn: false })
+          { object: object2, hasOwn: false }),
         );
         checkEqual(4,  propertyCount(
-          object2, { hasOwn: false })
+          object2, { hasOwn: false }),
         );
       });
     };
@@ -422,23 +422,23 @@ export const test_execute_object = (parts) => {
 
         checkEqual(undefined,
           getProperty(
-            { object: object2, propertyPath: 'a.b.c', hasOwn: true }
-          )
+            { object: object2, propertyPath: 'a.b.c', hasOwn: true },
+          ),
         );
         checkEqual(false,
           getProperty(
-            { object: object2, propertyPath: 'a.b.c', hasOwn: false }
-          )
+            { object: object2, propertyPath: 'a.b.c', hasOwn: false },
+          ),
         );
         checkEqual(false,
           getProperty(
-            object2, { propertyPath: 'a.b.c', hasOwn: false }
-          )
+            object2, { propertyPath: 'a.b.c', hasOwn: false },
+          ),
         );
         checkEqual(false,
           getProperty(
-            object2, 'a.b.c', { hasOwn: false }
-          )
+            object2, 'a.b.c', { hasOwn: false },
+          ),
         );
       });
     };
@@ -612,4 +612,4 @@ export const test_execute_object = (parts) => {
 
 export default {
   test_execute_object,
-}
+};

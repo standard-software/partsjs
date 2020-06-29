@@ -208,5 +208,5 @@ export default {
   describe, it, test, expect,
   isThrown, isThrownValue, isThrownException, isNotThrown,
   testCounter,
-}
+};
 

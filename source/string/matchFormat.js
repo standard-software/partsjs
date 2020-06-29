@@ -266,4 +266,4 @@ export const matchFormat = (
 export default {
   _matchFormat,
   matchFormat,
-}
+};

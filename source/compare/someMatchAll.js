@@ -28,4 +28,4 @@ export const someMatchAll = (
 export default {
   _someMatchAll,
   someMatchAll,
-}
+};

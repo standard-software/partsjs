@@ -60,4 +60,4 @@ export const allMatchSome = (
 export default {
   _allMatchSome,
   allMatchSome,
-}
+};

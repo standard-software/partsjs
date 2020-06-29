@@ -4,4 +4,4 @@ export const _replaceAll = (str, before, after) => {
 
 export default {
   _replaceAll,
-}
+};

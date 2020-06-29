@@ -16,10 +16,10 @@ export default {
   ...has,
   ..._propertyCount,
   ...propertyCount,
-}
+};
 
-export * from './object_common.js'
-export * from './isObjectParameter.js'
-export * from './inProperty.js'
-export * from './objectToKeyValueArray.js'
+export * from './object_common.js';
+export * from './isObjectParameter.js';
+export * from './inProperty.js';
+export * from './objectToKeyValueArray.js';
 export * from './getProperty.js';

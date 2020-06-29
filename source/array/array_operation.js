@@ -783,5 +783,5 @@ export default {
   remainFirst, remainLast,
   filter,
 
-}
+};
 

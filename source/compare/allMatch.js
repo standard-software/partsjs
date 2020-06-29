@@ -55,4 +55,4 @@ export const allMatch = (
 export default {
   _allMatch,
   allMatch,
-}
+};

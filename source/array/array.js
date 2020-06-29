@@ -13,13 +13,13 @@ export default {
     ...array_operation,
     ...array_operation_sort,
   },
-}
+};
 
-export * from './array_common.js'
-export * from './NumberArray.js'
-export * from './IntegerArray.js'
-export * from './arrayToIndexValueArray.js'
+export * from './array_common.js';
+export * from './NumberArray.js';
+export * from './IntegerArray.js';
+export * from './arrayToIndexValueArray.js';
 export const operation = {
   ...array_operation,
   ...array_operation_sort,
-}
+};

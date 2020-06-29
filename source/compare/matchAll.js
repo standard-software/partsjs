@@ -52,4 +52,4 @@ export const matchAll = (
 export default {
   _matchAll,
   matchAll,
-}
+};

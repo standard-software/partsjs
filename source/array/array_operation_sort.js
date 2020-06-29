@@ -159,5 +159,5 @@ export default {
   sortLengthAscending, sortLengthDescending,
   sortDictionaryAscending, sortDictionaryDescending,
 
-}
+};
 

@@ -60,4 +60,4 @@ export const indexOfMatchSome = (
 export default {
   _indexOfMatchSome,
   indexOfMatchSome,
-}
+};

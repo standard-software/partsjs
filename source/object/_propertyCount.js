@@ -22,4 +22,4 @@ export const _propertyCount = (
 
 export default {
   _propertyCount,
-}
+};

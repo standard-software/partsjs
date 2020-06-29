@@ -2580,4 +2580,4 @@ export const test_execute_compare = (parts) => {
 
 export default {
   test_execute_compare,
-}
+};

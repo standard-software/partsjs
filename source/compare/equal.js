@@ -332,4 +332,4 @@ export default {
 
   equalFunction,
 
-}
+};

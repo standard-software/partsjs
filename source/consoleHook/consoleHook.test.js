@@ -147,4 +147,4 @@ export const test_execute_consoleHook = (parts) => {
 
 export default {
   test_execute_consoleHook,
-}
+};

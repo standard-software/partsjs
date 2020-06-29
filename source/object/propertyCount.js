@@ -45,4 +45,4 @@ export const propCount = propertyCount;
 export default {
   propertyCount,
   propCount,
-}
+};

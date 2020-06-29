@@ -339,5 +339,5 @@ export default {
   clone, cloneDeep,
 
   cloneFunction,
-}
+};
 

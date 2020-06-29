@@ -229,4 +229,4 @@ export const test_execute_number = (parts) => {
 
 export default {
   test_execute_number,
-}
+};

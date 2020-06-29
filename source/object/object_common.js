@@ -132,4 +132,4 @@ export default {
 
   copyProp,
   setProp,
-}
+};

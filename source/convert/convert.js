@@ -397,5 +397,5 @@ export default {
   strToNum, strToNumDef,
   strToInt, strToIntDef,
 
-}
+};
 

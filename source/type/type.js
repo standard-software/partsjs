@@ -13,12 +13,12 @@ export default {
   ...isSet,
   ...isTypeAll,
   ...isTypeArray,
-}
+};
 
-export * from './isType.js'
-export * from './isException.js'
-export * from './isSymbol.js'
-export * from './isMap.js'
-export * from './isSet.js'
-export * from './isTypeAll.js'
-export * from './isTypeArray.js'
+export * from './isType.js';
+export * from './isException.js';
+export * from './isSymbol.js';
+export * from './isMap.js';
+export * from './isSet.js';
+export * from './isTypeAll.js';
+export * from './isTypeArray.js';

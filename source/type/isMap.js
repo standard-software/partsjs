@@ -11,5 +11,5 @@ export const isNotWeakMap   = value => !isWeakMap(value);
 export default {
   isMap, isNotMap,
   isWeakMap, isNotWeakMap,
-}
+};
 

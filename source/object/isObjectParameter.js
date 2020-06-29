@@ -68,4 +68,4 @@ export const isObjectParameter = (
 
 export default {
   isObjectParameter,
-}
+};

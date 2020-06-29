@@ -887,5 +887,5 @@ export default {
   find, findBack,
   every,
 
-}
+};
 

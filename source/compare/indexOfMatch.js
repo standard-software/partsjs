@@ -55,4 +55,4 @@ export const indexOfMatch = (
 export default {
   _indexOfMatch,
   indexOfMatch,
-}
+};

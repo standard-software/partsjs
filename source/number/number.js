@@ -239,5 +239,5 @@ export default {
   inRange, makeInRange,
   randomInt,
 
-}
+};
 

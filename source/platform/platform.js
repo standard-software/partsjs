@@ -28,7 +28,7 @@ export const isNodeJs = () => {
 
 export const isDeno = () => {
   return name() === 'Deno';
-}
+};
 
 export const name = () => {
   let result;
@@ -111,11 +111,11 @@ export const googleAppScriptEngineName = () => {
 
 export const isGasV8 = () => {
   return googleAppScriptEngineName() === 'V8';
-}
+};
 
 export const isGasRhino = () => {
   return googleAppScriptEngineName() === 'Rhino';
-}
+};
 
 export default {
   name,
@@ -139,4 +139,4 @@ export default {
   isGasRhino,
 
   buildMode: '',
-}
+};

@@ -11,5 +11,5 @@ export const isNotWeakSet   = value => !isWeakSet(value);
 export default {
   isSet, isNotSet,
   isWeakSet, isNotWeakSet,
-}
+};
 

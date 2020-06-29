@@ -7,9 +7,9 @@ export default {
   ..._replaceAll,
   ...replaceAll,
   ...matchFormat,
-}
+};
 
-export * from './string_common.js'
-export * from './_replaceAll.js'
-export * from './replaceAll.js'
-export * from './matchFormat.js'
+export * from './string_common.js';
+export * from './_replaceAll.js';
+export * from './replaceAll.js';
+export * from './matchFormat.js';

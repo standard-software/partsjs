@@ -800,4 +800,4 @@ export const test_execute_syntax = (parts) => {
 
 export default {
   test_execute_syntax,
-}
+};

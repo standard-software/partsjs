@@ -42,25 +42,25 @@ export default {
   ...includes,
   ...includes_common,
   ...equal,
-}
+};
 
-export * from './compare_common.js'
-export * from './match.js'
-export * from './matchValue.js'
-export * from './initialValue.js'
-export * from './indexOfMatch.js'
-export * from './allMatch.js'
-export * from './someMatch.js'
-export * from './matchSome.js'
-export * from './matchSomeValue.js'
-export * from './indexOfMatchSome.js'
-export * from './allMatchSome.js'
-export * from './someMatchSome.js'
-export * from './matchAll.js'
-export * from './matchAllValue.js'
-export * from './indexOfMatchAll.js'
-export * from './allMatchAll.js'
-export * from './someMatchAll.js'
-export * from './includes.js'
-export * from './includes_common.js'
-export * from './equal.js'
+export * from './compare_common.js';
+export * from './match.js';
+export * from './matchValue.js';
+export * from './initialValue.js';
+export * from './indexOfMatch.js';
+export * from './allMatch.js';
+export * from './someMatch.js';
+export * from './matchSome.js';
+export * from './matchSomeValue.js';
+export * from './indexOfMatchSome.js';
+export * from './allMatchSome.js';
+export * from './someMatchSome.js';
+export * from './matchAll.js';
+export * from './matchAllValue.js';
+export * from './indexOfMatchAll.js';
+export * from './allMatchAll.js';
+export * from './someMatchAll.js';
+export * from './includes.js';
+export * from './includes_common.js';
+export * from './equal.js';

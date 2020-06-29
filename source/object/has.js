@@ -21,7 +21,7 @@ export const _has = (object, propertyName, hasOwn = false) => {
   } else {
     return propertyName in object;
   }
-}
+};
 
 export const has = (object, propertyName, hasOwn = false) => {
   if (isObjectParameter(object, 'object, propertyName', 'hasOwn')) {
@@ -49,14 +49,14 @@ export const has = (object, propertyName, hasOwn = false) => {
   }
 
   return _has(object, propertyName, hasOwn);
-}
+};
 
 /**
  * hasOwn
  */
 export const _hasOwn = (object, propertyName) => {
   return Object.prototype.hasOwnProperty.call(object, propertyName);
-}
+};
 
 export const hasOwn = (object, propertyName) => {
   if (isObjectParameter(object, 'object, propertyName')) {
@@ -77,7 +77,7 @@ export const hasOwn = (object, propertyName) => {
   }
 
   return _hasOwn(object, propertyName);
-}
+};
 
 /**
  * hasPrototype
@@ -87,7 +87,7 @@ export const _hasPrototype = (object, propertyName) => {
     return false;
   }
   return !_hasOwn(object, propertyName);
-}
+};
 
 export const hasPrototype = (object, propertyName) => {
   if (isObjectParameter(object, 'object, propertyName')) {
@@ -108,9 +108,9 @@ export const hasPrototype = (object, propertyName) => {
   }
 
   return _hasPrototype(object, propertyName);
-}
+};
 
 export default {
   _hasOwn, _hasPrototype, _has,
   hasOwn, hasPrototype, has,
-}
+};

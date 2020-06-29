@@ -235,7 +235,7 @@ same [How to use Google Apps Script]
 ## Version
 
 ### 6.2.0
-#### 2020/06/26(Fri)
+#### 2020/06/30(Tue)
 - object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,
 - upddate testcode
   - source deno import pattern
@@ -258,6 +258,7 @@ same [How to use Google Apps Script]
 - add isObjectNormal isObjectFromNull
   - isNot... is...All / is...Array
 - delete isType.js _typeofCheck
+- resetting eslint fix
 
 ### 6.1.0
 #### 2020/06/24(Wed)

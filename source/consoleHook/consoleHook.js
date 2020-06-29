@@ -191,4 +191,4 @@ export default {
   _unHook,
   unHook, unHookLog, unHookInfo, unHookWarn, unHookError, unHookDebug,
   accept, acceptLog, acceptInfo, acceptWarn, acceptError, acceptDebug,
-}
+};
