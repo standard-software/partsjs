@@ -254,6 +254,7 @@ same [How to use Google Apps Script]
   - has / hasOwn / hasPrototype
   - propertyCount
   - getProperty
+  - inProperty
 - add isObjectNormal isObjectFromNull
   - isNot... is...All / is...Array
 

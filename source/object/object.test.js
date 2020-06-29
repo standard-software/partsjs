@@ -285,20 +285,43 @@ export const test_execute_object = (parts) => {
         checkEqual(true,  inProperty(sourceObject, 'a,d,', false));
 
         // property path
-        var sourceObject = {
+        var sourceObject2 = {
           a: '1', b: '2', c: { d: { e: 'E' } },
         };
-        checkEqual(true,  inProperty(sourceObject, 'a'));
-        checkEqual(true,  inProperty(sourceObject, 'a,b'));
-        checkEqual(true,  inProperty(sourceObject, 'a,b,c'));
-        checkEqual(true,  inProperty(sourceObject, 'a,b,c.d'));
-        checkEqual(true,  inProperty(sourceObject, 'a,b,c.d.e'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.f'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d..e'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,.d'));
-        checkEqual(true,  inProperty(sourceObject, 'a,b,'));
-        checkEqual(true,  inProperty(sourceObject, 'a,b,c.d.e,'));
+        checkEqual(true,  inProperty(sourceObject2, 'a'));
+        checkEqual(true,  inProperty(sourceObject2, 'a,b'));
+        checkEqual(true,  inProperty(sourceObject2, 'a,b,c'));
+        checkEqual(true,  inProperty(sourceObject2, 'a,b,c.d'));
+        checkEqual(true,  inProperty(sourceObject2, 'a,b,c.d.e'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.f'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,.d'));
+        checkEqual(true,  inProperty(sourceObject2, 'a,b,'));
+        checkEqual(true,  inProperty(sourceObject2, 'a,b,c.d.e,'));
+
+        // object parameter
+        testCounter();
+        checkEqual(false,
+          inProperty(
+            { object: sourceObject, propertyPaths: 'b,c' }
+          )
+        );
+        checkEqual(true,
+          inProperty(
+            { object: sourceObject, propertyPaths: 'b,c', hasOwn: false }
+          )
+        );
+        checkEqual(true,
+          inProperty(
+            sourceObject, { propertyPaths: 'b,c', hasOwn: false }
+          )
+        );
+        checkEqual(true,
+          inProperty(
+            sourceObject, 'b,c', { hasOwn: false }
+          )
+        );
 
       });
     };
@@ -417,13 +440,6 @@ export const test_execute_object = (parts) => {
             object2, 'a.b.c', { hasOwn: false }
           )
         );
-
-        // checkEqual(false,
-        //   getProperty(
-        //     { object: testObj1, propertyPath: 'a' }
-        //   ).b.c
-        // );
-
       });
     };
 

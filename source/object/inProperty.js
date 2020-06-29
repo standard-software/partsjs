@@ -60,6 +60,10 @@ export const _inProperty = (object, propertyPaths, hasOwn = true) => {
 export const inProperty = (object, propertyPaths, hasOwn = true) => {
   if (isObjectParameter(object, 'object, propertyPaths', 'hasOwn')) {
     ({ object, propertyPaths, hasOwn = true } = object);
+  } else if (isObjectParameter(propertyPaths, 'propertyPaths', 'hasOwn')) {
+    ({ propertyPaths, hasOwn = true } = propertyPaths);
+  } else if (isObjectParameter(hasOwn, 'hasOwn')) {
+    ({ hasOwn } = hasOwn);
   }
 
   if (!isObjectType(object)) {
