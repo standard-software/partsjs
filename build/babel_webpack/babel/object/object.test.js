@@ -25,7 +25,67 @@ var test_execute_object = function test_execute_object(parts) {
         setProperty = _parts$object.setProperty,
         isEmptyObjectAll = _parts$object.isEmptyObjectAll,
         isObjectParameter = _parts$object.isObjectParameter,
-        objectToKeyValueArray = _parts$object.objectToKeyValueArray;
+        objectToKeyValueArray = _parts$object.objectToKeyValueArray,
+        has = _parts$object.has,
+        hasOwn = _parts$object.hasOwn,
+        hasPrototype = _parts$object.hasPrototype;
+
+    var test_has = function test_has() {
+      it('test_has', function () {
+        var object1 = {
+          a: '1'
+        };
+        checkEqual(true, has(object1, 'a'));
+        checkEqual(true, has(object1, 'a', true));
+        checkEqual(true, hasOwn(object1, 'a'));
+        checkEqual(false, hasPrototype(object1, 'a'));
+        checkEqual(false, has(object1, 'b'));
+        checkEqual(false, has(object1, 'b', true));
+        checkEqual(false, hasOwn(object1, 'b'));
+        checkEqual(false, hasPrototype(object1, 'b'));
+        checkEqual(true, has(object1, 'constructor'));
+        checkEqual(false, has(object1, 'constructor', true));
+        checkEqual(false, hasOwn(object1, 'constructor'));
+        checkEqual(true, hasPrototype(object1, 'constructor')); // object parameter
+
+        checkEqual(true, has({
+          object: object1,
+          propertyName: 'constructor'
+        }));
+        checkEqual(false, has({
+          object: object1,
+          propertyName: 'constructor',
+          hasOwn: true
+        }));
+        checkEqual(true, has(object1, {
+          propertyName: 'constructor'
+        }));
+        checkEqual(false, has(object1, {
+          propertyName: 'constructor',
+          hasOwn: true
+        }));
+        checkEqual(true, has(object1, 'constructor', {
+          hasOwn: false
+        }));
+        checkEqual(false, has(object1, 'constructor', {
+          hasOwn: true
+        }));
+        checkEqual(false, hasOwn({
+          object: object1,
+          propertyName: 'constructor'
+        }));
+        checkEqual(false, hasOwn(object1, {
+          propertyName: 'constructor'
+        }));
+        checkEqual(true, hasPrototype({
+          object: object1,
+          propertyName: 'constructor'
+        }));
+        checkEqual(true, hasPrototype(object1, {
+          propertyName: 'constructor'
+        }));
+      });
+    };
 
     var test_copyProperty = function test_copyProperty() {
       it('test_copyProperty', function () {
@@ -95,15 +155,36 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, inProperty(sourceObject, 'b,c,'));
         checkEqual(false, inProperty(sourceObject, 'a,c,'));
         checkEqual(true, inProperty(sourceObject, 'b,a,'));
-        checkEqual(false, inProperty(sourceObject, 'a,d,')); // Object Named Parameter
+        checkEqual(false, inProperty(sourceObject, 'a,d,')); // other object function
+
+        checkEqual(false, inProperty(test_inProperty, 'constructor'));
+        checkEqual(true, inProperty(test_inProperty, 'constructor', false)); // other object Module
+
+        if (parts.isModule(parts)) {
+          checkEqual(true, inProperty(parts, 'VERSION'));
+          checkEqual(true, inProperty(parts, 'VERSION', false));
+        } // array
+
+
+        checkEqual(true, inProperty(sourceObject, ['a']));
+        checkEqual(true, inProperty(sourceObject, ['a', 'b']));
+        checkEqual(false, inProperty(sourceObject, ['a', 'b', 'c'])); // Object Named Parameter
 
         checkEqual(true, inProperty({
           object: sourceObject,
-          propertyPathArray: 'b,a'
+          propertyPaths: 'b,a'
         }));
         checkEqual(false, inProperty({
           object: sourceObject,
-          propertyPathArray: 'd'
+          propertyPaths: 'd'
+        }));
+        checkEqual(true, inProperty({
+          object: sourceObject,
+          propertyPaths: ['b', 'a']
+        }));
+        checkEqual(false, inProperty({
+          object: sourceObject,
+          propertyPaths: ['d']
         })); // exception
 
         checkEqual(false, isThrown(function () {
@@ -120,7 +201,8 @@ var test_execute_object = function test_execute_object(parts) {
         }));
         checkEqual(true, isThrown(function () {
           inProperty({}, [1]);
-        }));
+        })); // property exist value undefined
+
         var sourceObject = {
           a: '1',
           b: undefined
@@ -137,7 +219,7 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject, 'a'));
         checkEqual(false, inProperty(sourceObject, 'b'));
         checkEqual(false, inProperty(sourceObject, 'c'));
-        checkEqual(false, inProperty(sourceObject, 'd'));
+        checkEqual(false, inProperty(sourceObject, 'd')); // hasOwn
 
         function First() {
           this.a = '1';
@@ -180,8 +262,9 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject, 'b,c,', false));
         checkEqual(true, inProperty(sourceObject, 'a,c,', false));
         checkEqual(true, inProperty(sourceObject, 'b,a,', false));
-        checkEqual(true, inProperty(sourceObject, 'a,d,', false));
-        var sourceObject = {
+        checkEqual(true, inProperty(sourceObject, 'a,d,', false)); // property path
+
+        var sourceObject2 = {
           a: '1',
           b: '2',
           c: {
@@ -190,28 +273,67 @@ var test_execute_object = function test_execute_object(parts) {
             }
           }
         };
-        checkEqual(true, inProperty(sourceObject, 'a'));
-        checkEqual(true, inProperty(sourceObject, 'a,b'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,c'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,c.d'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,c.d.e'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.f'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d.'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,c.d..e'));
-        checkEqual(false, inProperty(sourceObject, 'a,b,.d'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,'));
-        checkEqual(true, inProperty(sourceObject, 'a,b,c.d.e,'));
+        checkEqual(true, inProperty(sourceObject2, 'a'));
+        checkEqual(true, inProperty(sourceObject2, 'a,b'));
+        checkEqual(true, inProperty(sourceObject2, 'a,b,c'));
+        checkEqual(true, inProperty(sourceObject2, 'a,b,c.d'));
+        checkEqual(true, inProperty(sourceObject2, 'a,b,c.d.e'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.f'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(false, inProperty(sourceObject2, 'a,b,.d'));
+        checkEqual(true, inProperty(sourceObject2, 'a,b,'));
+        checkEqual(true, inProperty(sourceObject2, 'a,b,c.d.e,')); // object parameter
+
+        testCounter();
+        checkEqual(false, inProperty({
+          object: sourceObject,
+          propertyPaths: 'b,c'
+        }));
+        checkEqual(true, inProperty({
+          object: sourceObject,
+          propertyPaths: 'b,c',
+          hasOwn: false
+        }));
+        checkEqual(true, inProperty(sourceObject, {
+          propertyPaths: 'b,c',
+          hasOwn: false
+        }));
+        checkEqual(true, inProperty(sourceObject, 'b,c', {
+          hasOwn: false
+        }));
       });
     };
 
     var test_propertyCount = function test_propertyCount() {
       it('test_propertyCount', function () {
-        checkEqual(3, propertyCount({
-          a: '1',
-          b: '2',
-          c: '3'
-        }));
-        checkEqual(0, propertyCount({})); // exception
+        var object1 = {
+          a: 1,
+          b: 2,
+          c: 3
+        };
+
+        function Object2() {
+          this.d = 'red';
+        }
+
+        Object2.prototype = object1;
+        var object2 = new Object2();
+        checkEqual(3, propertyCount(object1));
+        checkEqual(3, propertyCount(object1, false));
+        checkEqual(1, propertyCount(object2));
+        checkEqual(4, propertyCount(object2, false));
+        checkEqual(0, propertyCount({}));
+        checkEqual(0, propertyCount({}, false)); // other object function
+
+        checkEqual(0, propertyCount(test_propertyCount));
+        checkEqual(0, propertyCount(test_propertyCount, false)); // other object Module
+
+        if (parts.isModule(parts)) {
+          checkEqual(true, 0 !== propertyCount(parts));
+          checkEqual(true, 0 !== propertyCount(parts, false));
+        } // exception
+
 
         checkEqual(false, isThrown(function () {
           propertyCount({});
@@ -224,6 +346,17 @@ var test_execute_object = function test_execute_object(parts) {
         }));
         checkEqual(true, isThrown(function () {
           propertyCount('abc');
+        })); // object parameter
+
+        checkEqual(1, propertyCount({
+          object: object2
+        }));
+        checkEqual(4, propertyCount({
+          object: object2,
+          hasOwn: false
+        }));
+        checkEqual(4, propertyCount(object2, {
+          hasOwn: false
         }));
       });
     };
@@ -250,7 +383,39 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(undefined, getProperty(testObj1, '.a'));
         checkEqual(undefined, getProperty(testObj1, 'a.c'));
         checkEqual(undefined, getProperty(testObj1, 'b'));
-        checkEqual(undefined, getProperty(testObj1, 'b.c'));
+        checkEqual(undefined, getProperty(testObj1, 'b.c')); // object parameter
+
+        var object1 = {
+          a: {
+            b: {
+              c: false
+            }
+          }
+        };
+
+        function Object2() {
+          this.d = true;
+        }
+
+        Object2.prototype = object1;
+        var object2 = new Object2();
+        checkEqual(undefined, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          hasOwn: true
+        }));
+        checkEqual(false, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          hasOwn: false
+        }));
+        checkEqual(false, getProperty(object2, {
+          propertyPath: 'a.b.c',
+          hasOwn: false
+        }));
+        checkEqual(false, getProperty(object2, 'a.b.c', {
+          hasOwn: false
+        }));
       });
     };
 
@@ -539,6 +704,7 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
+    test_has();
     test_copyProperty();
     test_inProperty();
     test_propertyCount();

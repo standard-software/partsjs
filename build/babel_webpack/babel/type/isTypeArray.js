@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotEmptyObjArray = exports.isNotExceptArray = exports.isNotObjTypeArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isEmptyObjArray = exports.isExceptArray = exports.isObjTypeArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArrayTypeArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectTypeArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArrayTypeArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectTypeArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports._isTypeArrayCheckFunc = void 0;
+exports["default"] = exports.isNotEmptyObjArray = exports.isNotExceptArray = exports.isNotObjTypeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isEmptyObjArray = exports.isExceptArray = exports.isObjTypeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArrayTypeArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectTypeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArrayTypeArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectTypeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports._isTypeArrayCheckFunc = void 0;
 
 var _isType = require("../type/isType.js");
 
@@ -64,6 +64,14 @@ exports.isFunctionArray = isFunctionArray;
 var isObjectArray = _isTypeArrayCheckFunc(_isType.isObject);
 
 exports.isObjectArray = isObjectArray;
+
+var isObjectNormalArray = _isTypeArrayCheckFunc(_isType.isObjectNormal);
+
+exports.isObjectNormalArray = isObjectNormalArray;
+
+var isObjectFromNullArray = _isTypeArrayCheckFunc(_isType.isObjectFromNull);
+
+exports.isObjectFromNullArray = isObjectFromNullArray;
 
 var isObjectTypeArray = _isTypeArrayCheckFunc(_isType.isObjectType);
 
@@ -169,6 +177,14 @@ var isNotObjectArray = _isTypeArrayCheckFunc(_isType.isNotObject);
 
 exports.isNotObjectArray = isNotObjectArray;
 
+var isNotObjectNormalArray = _isTypeArrayCheckFunc(_isType.isNotObjectNormal);
+
+exports.isNotObjectNormalArray = isNotObjectNormalArray;
+
+var isNotObjectFromNullArray = _isTypeArrayCheckFunc(_isType.isNotObjectFromNull);
+
+exports.isNotObjectFromNullArray = isNotObjectFromNullArray;
+
 var isNotObjectTypeArray = _isTypeArrayCheckFunc(_isType.isNotObjectType);
 
 exports.isNotObjectTypeArray = isNotObjectTypeArray;
@@ -250,6 +266,10 @@ var isFuncArray = isFunctionArray;
 exports.isFuncArray = isFuncArray;
 var isObjArray = isObjectArray;
 exports.isObjArray = isObjArray;
+var isObjNormalArray = isObjectNormalArray;
+exports.isObjNormalArray = isObjNormalArray;
+var isObjFromNullArray = isObjectFromNullArray;
+exports.isObjFromNullArray = isObjFromNullArray;
 var isObjTypeArray = isObjectTypeArray;
 exports.isObjTypeArray = isObjTypeArray;
 var isExceptArray = isExceptionArray;
@@ -270,6 +290,10 @@ var isNotFuncArray = isNotFunctionArray;
 exports.isNotFuncArray = isNotFuncArray;
 var isNotObjArray = isNotObjectArray;
 exports.isNotObjArray = isNotObjArray;
+var isNotObjNormalArray = isNotObjectNormalArray;
+exports.isNotObjNormalArray = isNotObjNormalArray;
+var isNotObjFromNullArray = isNotObjectFromNullArray;
+exports.isNotObjFromNullArray = isNotObjFromNullArray;
 var isNotObjTypeArray = isNotObjectTypeArray;
 exports.isNotObjTypeArray = isNotObjTypeArray;
 var isNotExceptArray = isNotExceptionArray;
@@ -286,6 +310,8 @@ var _default = {
   isStringArray: isStringArray,
   isFunctionArray: isFunctionArray,
   isObjectArray: isObjectArray,
+  isObjectNormalArray: isObjectNormalArray,
+  isObjectFromNullArray: isObjectFromNullArray,
   isObjectTypeArray: isObjectTypeArray,
   isModuleArray: isModuleArray,
   isArrayArray: isArrayArray,
@@ -312,6 +338,8 @@ var _default = {
   isNotStringArray: isNotStringArray,
   isNotFunctionArray: isNotFunctionArray,
   isNotObjectArray: isNotObjectArray,
+  isNotObjectNormalArray: isNotObjectNormalArray,
+  isNotObjectFromNullArray: isNotObjectFromNullArray,
   isNotObjectTypeArray: isNotObjectTypeArray,
   isNotModuleArray: isNotModuleArray,
   isNotArrayArray: isNotArrayArray,
@@ -336,6 +364,8 @@ var _default = {
   isStrArray: isStrArray,
   isFuncArray: isFuncArray,
   isObjArray: isObjArray,
+  isObjNormalArray: isObjNormalArray,
+  isObjFromNullArray: isObjFromNullArray,
   isObjTypeArray: isObjTypeArray,
   isExceptArray: isExceptArray,
   isEmptyObjArray: isEmptyObjArray,
@@ -346,6 +376,8 @@ var _default = {
   isNotStrArray: isNotStrArray,
   isNotFuncArray: isNotFuncArray,
   isNotObjArray: isNotObjArray,
+  isNotObjNormalArray: isNotObjNormalArray,
+  isNotObjFromNullArray: isNotObjFromNullArray,
   isNotObjTypeArray: isNotObjTypeArray,
   isNotExceptArray: isNotExceptArray,
   isNotEmptyObjArray: isNotEmptyObjArray
