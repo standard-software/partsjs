@@ -2,10 +2,6 @@ import {
   _propertyCount,
 } from '../object/_propertyCount.js';
 
-export const _typeofCheck = (typeName) => {
-  return ((value) => typeof value === typeName);
-};
-
 export const objectToString = value => {
   return Object.prototype.toString.call(value);
 };
@@ -17,13 +13,15 @@ export const _objectToStringCheck = (typeName) => {
   );
 };
 
-export const isUndefined = _typeofCheck('undefined');
+export const isUndefined =
+  (value) => typeof value === 'undefined';
 
 export const isNull = (value) => (value === null);
 
 export const isNaNStrict = (value) => value !== value;
 
-export const isBoolean = _typeofCheck('boolean');
+export const isBoolean =
+  (value) => typeof value === 'boolean';
 export const isBooleanObject = value => {
   return (
     _objectToStringCheck('Boolean')
@@ -32,12 +30,12 @@ export const isBooleanObject = value => {
 };
 
 export const isNumber = (value) => {
-  return (_typeofCheck('number')(value) && (isFinite(value)));
+  return (typeof value === 'number' && (isFinite(value)));
 };
 export const isNumberObject = (value) => {
   return (
     _objectToStringCheck('Number')(value)
-    && (!_typeofCheck('number')(value))
+    && (typeof value !== 'number')
   );
 };
 
@@ -48,7 +46,8 @@ export const isInteger = (value) => {
   return Math.round(value) === value;
 };
 
-export const isString = _typeofCheck('string');
+export const isString =
+  (value) => typeof value === 'string';
 export const isStringObject = value => {
   return (
     _objectToStringCheck('String')
@@ -56,7 +55,8 @@ export const isStringObject = value => {
   );
 };
 
-export const isFunction = _typeofCheck('function');
+export const isFunction =
+  (value) => typeof value === 'function';
 
 export const isObject = (value) => {
   if (isNull(value)) { return false; }
@@ -175,7 +175,7 @@ export const isNotObjType     = isNotObjectType;
 export const isNotEmptyObj    = isNotEmptyObject;
 
 export default {
-  _typeofCheck, _objectToStringCheck, objectToString,
+  _objectToStringCheck, objectToString,
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,

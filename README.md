@@ -257,6 +257,7 @@ same [How to use Google Apps Script]
   - inProperty
 - add isObjectNormal isObjectFromNull
   - isNot... is...All / is...Array
+- delete isType.js _typeofCheck
 
 ### 6.1.0
 #### 2020/06/24(Wed)

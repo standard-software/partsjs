@@ -1,5 +1,5 @@
 import {
-  _typeofCheck, _objectToStringCheck, objectToString,
+  _objectToStringCheck, objectToString,
 } from '../type/isType.js';
 
 export const isSet = _objectToStringCheck('Set');
