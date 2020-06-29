@@ -382,6 +382,48 @@ export const test_execute_object = (parts) => {
         checkEqual(undefined, getProperty(testObj1, 'a.c'     ) );
         checkEqual(undefined, getProperty(testObj1, 'b'       ) );
         checkEqual(undefined, getProperty(testObj1, 'b.c'     ) );
+
+        // object parameter
+        const object1 = {
+          a: {
+            b: {
+              c: false,
+            },
+          },
+        };
+        function Object2() {
+          this.d = true;
+        }
+        Object2.prototype = object1;
+        const object2  = new Object2();
+
+        checkEqual(undefined,
+          getProperty(
+            { object: object2, propertyPath: 'a.b.c', hasOwn: true }
+          )
+        );
+        checkEqual(false,
+          getProperty(
+            { object: object2, propertyPath: 'a.b.c', hasOwn: false }
+          )
+        );
+        checkEqual(false,
+          getProperty(
+            object2, { propertyPath: 'a.b.c', hasOwn: false }
+          )
+        );
+        checkEqual(false,
+          getProperty(
+            object2, 'a.b.c', { hasOwn: false }
+          )
+        );
+
+        // checkEqual(false,
+        //   getProperty(
+        //     { object: testObj1, propertyPath: 'a' }
+        //   ).b.c
+        // );
+
       });
     };
 

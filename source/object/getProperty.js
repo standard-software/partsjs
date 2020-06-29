@@ -67,6 +67,10 @@ export const _getProperty = (
 export const getProperty = (object, propertyPath, hasOwn = true) => {
   if (isObjectParameter(object, 'object, propertyPath', 'hasOwn')) {
     ({ object, propertyPath, hasOwn = true } = object);
+  } else if (isObjectParameter(propertyPath, 'propertyPath', 'hasOwn')) {
+    ({ propertyPath, hasOwn = true } = propertyPath);
+  } else if (isObjectParameter(hasOwn, 'hasOwn')) {
+    ({ hasOwn } = hasOwn);
   }
 
   if (!isObject(object)) {
