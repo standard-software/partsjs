@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@standard-software/parts",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "JavaScript Code Parts",
   "main": "./release/parts.js",
   "scripts": {
