@@ -43,8 +43,9 @@ cloneFunction.cloneObject = (
   if (!(isObject(source))) {
     return undefined;
   }
-
-  const cloneValue = new source.constructor();
+  const cloneValue = isObjectFromNull(source)
+    ? Object.create(null)
+    : new source.constructor();
   bufferWrite(source, cloneValue);
   for (const key in source) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -83,16 +84,18 @@ cloneFunction.cloneArrayType = (
 //  all object
 //  but Math or JSON etc clone
 //  Cloning unnecessary objects
-cloneFunction.cloneObjectType = (
+cloneFunction.cloneObjectLike = (
   source,
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!isObjectType(source)) {
+  if (!isObjectLike(source)) {
     return undefined;
   }
 
-  const cloneValue = new source.constructor();
+  const cloneValue = isObjectFromNull(source)
+    ? Object.create(null)
+    : new source.constructor();
   bufferWrite(source, cloneValue);
   for (const key in source) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {

@@ -243,6 +243,8 @@ same [How to use Google Apps Script]
     - alias name isArrayType
   - isObjectType >> isObjectLike
     - alias name isObjectType
+- update clone / cloneDeep
+  - support ObjectFromNull
 
 ### 6.2.0
 #### 2020/06/30(Tue)
@@ -295,56 +297,6 @@ same [How to use Google Apps Script]
 #### 2020/06/19(Fri)
 - bugfix not necessary require isException
 - bugfix not necessary require _findIndex
-
-### 5.8.1
-#### 2020/06/16(Tue)
-- update test code for IE11
-  - no support object.entries / for of array.entries
-
-### 5.8.0
-#### 2020/06/15(Mon)
-- update match.js move function
-  - match series
-    - add indexOfMatch.js someMatch.js
-  - matchSome series
-    - add matchSome.js matchSomeValue.js 
-      indexOfMatchSome.js allMatchSome.js someMatchSome.js
-  - matchAll series
-    - add matchAll.js matchAllValue.js
-      indexOfMatchAll.js allMatchAll.js someMatchAll.js
-- support full object parameter
-  - match series
-    - match initialValue indexOfMatch allMatch someMatch
-  - matchSome series
-    - matchSome matchSomeValue indexOfMatchSome allMatchSome someMatchSome
-  - matchAll series
-    - matchAll matchAllValue indexOfMatchAll allMatchAll someMatchAll
-- rename args valueWhenMatched >> match
-  - initialValue matchSomeValue matchAllValue
-- add args unmatch
-  - matchSomeValue matchAllValue
-
-### 5.7.0
-#### 2020/06/11(Thu)
-- update matchValue
-  - move match.js >> matchValue.js
-  - rename args valueWhenMatched >> match
-  - add args unmatch
-  - support full object parameter
-- update allMatch
-  - move motch.js >> allMatch.js
-- update initialValue
-  - move motch.js >> initialValue.js
-- update inProperty args propertyPathArray support empty str
-- add alias name objectEntries objectToKeyValueArray
-- add alias name arrayEntries arrayEntries
-
-### 5.6.0
-#### 2020/05/23(Sat)
-- add objectToKeyValueArray (Ponyfill Object.entries)
-- add arrayToIndexValueArray (Ponyfill array.entries)
-- update loop
-  - support object loop
 
 ### More Info
 [VERSION.md](./VERSION.md)
