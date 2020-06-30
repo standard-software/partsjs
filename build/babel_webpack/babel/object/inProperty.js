@@ -19,7 +19,7 @@ var _getProperty = require("../object/getProperty.js");
 var _inProperty = function _inProperty(object, propertyPaths) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (!(0, _isType.isObjectType)(object)) {
+  if (!(0, _isType.isObjectLike)(object)) {
     return false;
   }
 
@@ -73,7 +73,7 @@ var inProperty = function inProperty(object, propertyPaths) {
     hasOwn = _hasOwn.hasOwn;
   }
 
-  if (!(0, _isType.isObjectType)(object)) {
+  if (!(0, _isType.isObjectLike)(object)) {
     throw new TypeError('inProperty args(object) is not object type');
   }
 

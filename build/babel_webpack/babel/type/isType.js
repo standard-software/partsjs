@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotEmptyObj = exports.isNotObjType = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isEmptyObj = exports.isObjType = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArrayType = exports.isNotArray = exports.isNotModule = exports.isNotObjectType = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArrayType = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectType = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports._objectToStringCheck = exports.objectToString = void 0;
+exports["default"] = exports.isNotObjType = exports.isObjType = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isArrayType = exports.isObjectType = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArraySeries = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
 
 var _propertyCount2 = require("../object/_propertyCount.js");
 
@@ -14,14 +14,6 @@ var objectToString = function objectToString(value) {
 };
 
 exports.objectToString = objectToString;
-
-var _objectToStringCheck = function _objectToStringCheck(typeName) {
-  return function (value) {
-    return objectToString(value) === "[object ".concat(typeName, "]");
-  };
-};
-
-exports._objectToStringCheck = _objectToStringCheck;
 
 var isUndefined = function isUndefined(value) {
   return typeof value === 'undefined';
@@ -48,7 +40,7 @@ var isBoolean = function isBoolean(value) {
 exports.isBoolean = isBoolean;
 
 var isBooleanObject = function isBooleanObject(value) {
-  return _objectToStringCheck('Boolean') && !isBoolean(value);
+  return objectToString(value) === '[object Boolean]' && !isBoolean(value);
 };
 
 exports.isBooleanObject = isBooleanObject;
@@ -60,7 +52,7 @@ var isNumber = function isNumber(value) {
 exports.isNumber = isNumber;
 
 var isNumberObject = function isNumberObject(value) {
-  return _objectToStringCheck('Number')(value) && typeof value !== 'number';
+  return objectToString(value) === '[object Number]' && typeof value !== 'number';
 };
 
 exports.isNumberObject = isNumberObject;
@@ -82,7 +74,7 @@ var isString = function isString(value) {
 exports.isString = isString;
 
 var isStringObject = function isStringObject(value) {
-  return _objectToStringCheck('String') && !isString(value);
+  return objectToString(value) === '[object String]' && typeof value !== 'string';
 };
 
 exports.isStringObject = isStringObject;
@@ -139,22 +131,18 @@ var isObjectFromNull = function isObjectFromNull(value) {
 
 exports.isObjectFromNull = isObjectFromNull;
 
-var isObjectType = function isObjectType(value) {
+var isObjectLike = function isObjectLike(value) {
   if (isNull(value)) {
     return false;
   }
 
-  return ['function', 'object'].indexOf(_typeof(value)) !== -1;
+  return _typeof(value) === 'object' || typeof value === 'function';
 };
 
-exports.isObjectType = isObjectType;
+exports.isObjectLike = isObjectLike;
 
 var isModule = function isModule(value) {
-  if (_objectToStringCheck('Module')(value)) {
-    return true;
-  }
-
-  return false;
+  return objectToString(value) === '[object Module]';
 };
 
 exports.isModule = isModule;
@@ -169,12 +157,14 @@ var isEmptyObject = function isEmptyObject(value) {
 
 exports.isEmptyObject = isEmptyObject;
 
-var isArray = _objectToStringCheck('Array'); // Int8Array Uint16Array Float32Array Float64Array etc
+var isArray = function isArray(value) {
+  return objectToString(value) === '[object Array]';
+}; // Int8Array Uint16Array Float32Array Float64Array etc
 
 
 exports.isArray = isArray;
 
-var isArrayType = function isArrayType(value) {
+var isArraySeries = function isArraySeries(value) {
   if (objectToString(value).indexOf('Array]') !== -1) {
     return true;
   }
@@ -182,10 +172,10 @@ var isArrayType = function isArrayType(value) {
   return false;
 };
 
-exports.isArrayType = isArrayType;
+exports.isArraySeries = isArraySeries;
 
 var isEmptyArray = function isEmptyArray(value) {
-  if (!isArrayType(value)) {
+  if (!isArraySeries(value)) {
     return false;
   }
 
@@ -194,15 +184,21 @@ var isEmptyArray = function isEmptyArray(value) {
 
 exports.isEmptyArray = isEmptyArray;
 
-var isDate = _objectToStringCheck('Date');
+var isDate = function isDate(value) {
+  return objectToString(value) === '[object Date]';
+};
 
 exports.isDate = isDate;
 
-var isRegExp = _objectToStringCheck('RegExp');
+var isRegExp = function isRegExp(value) {
+  return objectToString(value) === '[object RegExp]';
+};
 
 exports.isRegExp = isRegExp;
 
-var isError = _objectToStringCheck('Error');
+var isError = function isError(value) {
+  return objectToString(value) === '[object Error]';
+};
 
 exports.isError = isError;
 
@@ -272,11 +268,11 @@ var isNotObjectFromNull = function isNotObjectFromNull(value) {
 
 exports.isNotObjectFromNull = isNotObjectFromNull;
 
-var isNotObjectType = function isNotObjectType(value) {
-  return !isObjectType(value);
+var isNotObjectLike = function isNotObjectLike(value) {
+  return !isObjectLike(value);
 };
 
-exports.isNotObjectType = isNotObjectType;
+exports.isNotObjectLike = isNotObjectLike;
 
 var isNotModule = function isNotModule(value) {
   return !isModule(value);
@@ -290,11 +286,11 @@ var isNotArray = function isNotArray(value) {
 
 exports.isNotArray = isNotArray;
 
-var isNotArrayType = function isNotArrayType(value) {
-  return !isArrayType(value);
+var isNotArraySeries = function isNotArraySeries(value) {
+  return !isArraySeries(value);
 };
 
-exports.isNotArrayType = isNotArrayType;
+exports.isNotArraySeries = isNotArraySeries;
 
 var isNotDate = function isNotDate(value) {
   return !isDate(value);
@@ -337,6 +333,14 @@ var isNotEmptyArray = function isNotEmptyArray(value) {
 };
 
 exports.isNotEmptyArray = isNotEmptyArray;
+var isObjectType = isObjectLike;
+exports.isObjectType = isObjectType;
+var isArrayType = isArraySeries;
+exports.isArrayType = isArrayType;
+var isNotObjectType = isNotObjectLike;
+exports.isNotObjectType = isNotObjectType;
+var isNotArrayType = isNotArraySeries;
+exports.isNotArrayType = isNotArrayType;
 var isUndef = isUndefined;
 exports.isUndef = isUndef;
 var isBool = isBoolean;
@@ -355,8 +359,8 @@ var isObjNormal = isObjectNormal;
 exports.isObjNormal = isObjNormal;
 var isObjFromNull = isObjectFromNull;
 exports.isObjFromNull = isObjFromNull;
-var isObjType = isObjectType;
-exports.isObjType = isObjType;
+var isObjLike = isObjectLike;
+exports.isObjLike = isObjLike;
 var isEmptyObj = isEmptyObject;
 exports.isEmptyObj = isEmptyObj;
 var isNotUndef = isNotUndefined;
@@ -377,12 +381,15 @@ var isNotObjNormal = isNotObjectNormal;
 exports.isNotObjNormal = isNotObjNormal;
 var isNotObjFromNull = isNotObjectFromNull;
 exports.isNotObjFromNull = isNotObjFromNull;
-var isNotObjType = isNotObjectType;
-exports.isNotObjType = isNotObjType;
+var isNotObjLike = isNotObjectLike;
+exports.isNotObjLike = isNotObjLike;
 var isNotEmptyObj = isNotEmptyObject;
 exports.isNotEmptyObj = isNotEmptyObj;
+var isObjType = isObjLike;
+exports.isObjType = isObjType;
+var isNotObjType = isNotObjLike;
+exports.isNotObjType = isNotObjType;
 var _default = {
-  _objectToStringCheck: _objectToStringCheck,
   objectToString: objectToString,
   isUndefined: isUndefined,
   isNull: isNull,
@@ -395,10 +402,10 @@ var _default = {
   isObject: isObject,
   isObjectNormal: isObjectNormal,
   isObjectFromNull: isObjectFromNull,
-  isObjectType: isObjectType,
+  isObjectLike: isObjectLike,
   isModule: isModule,
   isArray: isArray,
-  isArrayType: isArrayType,
+  isArraySeries: isArraySeries,
   isDate: isDate,
   isRegExp: isRegExp,
   isError: isError,
@@ -418,10 +425,10 @@ var _default = {
   isNotObject: isNotObject,
   isNotObjectNormal: isNotObjectNormal,
   isNotObjectFromNull: isNotObjectFromNull,
-  isNotObjectType: isNotObjectType,
+  isNotObjectLike: isNotObjectLike,
   isNotModule: isNotModule,
   isNotArray: isNotArray,
-  isNotArrayType: isNotArrayType,
+  isNotArraySeries: isNotArraySeries,
   isNotDate: isNotDate,
   isNotRegExp: isNotRegExp,
   isNotBooleanObject: isNotBooleanObject,
@@ -429,6 +436,10 @@ var _default = {
   isNotStringObject: isNotStringObject,
   isNotEmptyObject: isNotEmptyObject,
   isNotEmptyArray: isNotEmptyArray,
+  isObjectType: isObjectType,
+  isArrayType: isArrayType,
+  isNotObjectType: isNotObjectType,
+  isNotArrayType: isNotArrayType,
   isUndef: isUndef,
   isBool: isBool,
   isNum: isNum,
@@ -438,7 +449,7 @@ var _default = {
   isObj: isObj,
   isObjNormal: isObjNormal,
   isObjFromNull: isObjFromNull,
-  isObjType: isObjType,
+  isObjLike: isObjLike,
   isEmptyObj: isEmptyObj,
   isNotUndef: isNotUndef,
   isNotBool: isNotBool,
@@ -449,7 +460,9 @@ var _default = {
   isNotObj: isNotObj,
   isNotObjNormal: isNotObjNormal,
   isNotObjFromNull: isNotObjFromNull,
-  isNotObjType: isNotObjType,
-  isNotEmptyObj: isNotEmptyObj
+  isNotObjLike: isNotObjLike,
+  isNotEmptyObj: isNotEmptyObj,
+  isObjType: isObjType,
+  isNotObjType: isNotObjType
 };
 exports["default"] = _default;

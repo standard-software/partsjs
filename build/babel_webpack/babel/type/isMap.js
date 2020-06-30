@@ -7,9 +7,16 @@ exports["default"] = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap
 
 var _isType = require("../type/isType.js");
 
-var isMap = (0, _isType._objectToStringCheck)('Map');
+var isMap = function isMap(value) {
+  return (0, _isType.objectToString)(value) === '[object Map]';
+};
+
 exports.isMap = isMap;
-var isWeakMap = (0, _isType._objectToStringCheck)('WeakMap');
+
+var isWeakMap = function isWeakMap(value) {
+  return (0, _isType.objectToString)(value) === '[object WeakMap]';
+};
+
 exports.isWeakMap = isWeakMap;
 
 var isNotMap = function isNotMap(value) {

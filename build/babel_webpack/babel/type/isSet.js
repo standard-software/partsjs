@@ -7,9 +7,16 @@ exports["default"] = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet
 
 var _isType = require("../type/isType.js");
 
-var isSet = (0, _isType._objectToStringCheck)('Set');
+var isSet = function isSet(value) {
+  return (0, _isType.objectToString)(value) === '[object Set]';
+};
+
 exports.isSet = isSet;
-var isWeakSet = (0, _isType._objectToStringCheck)('WeakSet');
+
+var isWeakSet = function isWeakSet(value) {
+  return (0, _isType.objectToString)(value) === '[object WeakSet]';
+};
+
 exports.isWeakSet = isWeakSet;
 
 var isNotSet = function isNotSet(value) {

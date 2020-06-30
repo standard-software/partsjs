@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotEmptyObjAll = exports.isNotExceptAll = exports.isNotObjTypeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isEmptyObjAll = exports.isExceptAll = exports.isObjTypeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArrayTypeAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectTypeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArrayTypeAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectTypeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports._isTypeAllCheckFunc = exports._isTypeArray = void 0;
+exports["default"] = exports.isNotEmptyObjAll = exports.isNotExceptAll = exports.isNotObjTypeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isEmptyObjAll = exports.isExceptAll = exports.isObjTypeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArrayTypeAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectTypeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArrayTypeAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports._isTypeAllCheckFunc = exports._isTypeArray = void 0;
 
 var _isType = require("../type/isType.js");
 
@@ -95,9 +95,9 @@ var isObjectFromNullAll = _isTypeAllCheckFunc(_isType.isObjectFromNull);
 
 exports.isObjectFromNullAll = isObjectFromNullAll;
 
-var isObjectTypeAll = _isTypeAllCheckFunc(_isType.isObjectType);
+var isObjectLikeAll = _isTypeAllCheckFunc(_isType.isObjectLike);
 
-exports.isObjectTypeAll = isObjectTypeAll;
+exports.isObjectLikeAll = isObjectLikeAll;
 
 var isModuleAll = _isTypeAllCheckFunc(_isType.isModule);
 
@@ -292,7 +292,7 @@ var isObjNormalAll = isObjectNormalAll;
 exports.isObjNormalAll = isObjNormalAll;
 var isObjFromNullAll = isObjectFromNullAll;
 exports.isObjFromNullAll = isObjFromNullAll;
-var isObjTypeAll = isObjectTypeAll;
+var isObjTypeAll = isObjectLikeAll;
 exports.isObjTypeAll = isObjTypeAll;
 var isExceptAll = isExceptionAll;
 exports.isExceptAll = isExceptAll;
@@ -335,7 +335,7 @@ var _default = {
   isObjectAll: isObjectAll,
   isObjectNormalAll: isObjectNormalAll,
   isObjectFromNullAll: isObjectFromNullAll,
-  isObjectTypeAll: isObjectTypeAll,
+  isObjectLikeAll: isObjectLikeAll,
   isModuleAll: isModuleAll,
   isArrayAll: isArrayAll,
   isArrayTypeAll: isArrayTypeAll,

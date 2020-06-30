@@ -43,7 +43,7 @@ var has = function has(object, propertyName) {
     hasOwn = _hasOwn2.hasOwn;
   }
 
-  if (!(0, _type.isObjectType)(object)) {
+  if (!(0, _type.isObjectLike)(object)) {
     throw new TypeError('has args(object) is not object type');
   }
 
@@ -80,7 +80,7 @@ var hasOwn = function hasOwn(object, propertyName) {
     propertyName = _propertyName2.propertyName;
   }
 
-  if (!(0, _type.isObjectType)(object)) {
+  if (!(0, _type.isObjectLike)(object)) {
     throw new TypeError('hasOwn args(object) is not object type');
   }
 
@@ -117,7 +117,7 @@ var hasPrototype = function hasPrototype(object, propertyName) {
     propertyName = _propertyName3.propertyName;
   }
 
-  if (!(0, _type.isObjectType)(object)) {
+  if (!(0, _type.isObjectLike)(object)) {
     throw new TypeError('hasPrototype args(object) is not object type');
   }
 

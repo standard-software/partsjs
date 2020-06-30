@@ -58,7 +58,33 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(6, testObject3.d.c);
         object1.d.a = 7;
         checkEqual(7, object1.d.a);
-        checkEqual(7, testObject3.d.a);
+        checkEqual(7, testObject3.d.a); // object from null
+
+        var object1 = Object.create(null);
+        object1.a = 1;
+        var object2 = clone(object1);
+        object2.a = 0;
+        checkEqual(1, object1.a);
+        checkEqual(0, object2.a);
+        var object1 = Object.create(null);
+        object1.a = Object.create(null);
+        object1.a.b = 'test';
+        var object2 = clone(object1);
+        checkEqual(true, parts.isObjectFromNull(object1.a));
+        checkEqual(true, parts.isObjectFromNull(object1));
+        checkEqual(true, parts.isObjectFromNull(object2.a));
+        checkEqual(true, parts.isObjectFromNull(object2));
+        checkEqual(false, object1 === object2);
+        checkEqual(true, object1.a === object2.a);
+        checkEqual(true, object1.a.b === object2.a.b); // module object no support
+
+        if (parts.isModule(parts)) {
+          var cloneParts = parts.clone(parts);
+          checkEqual(true, cloneParts === parts);
+          checkEqual(true, parts.isModule(cloneParts));
+          checkEqual(false, parts.isObjectNormal(cloneParts));
+          checkEqual(false, parts.isObjectFromNull(cloneParts));
+        }
       });
     };
 
@@ -167,7 +193,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
 
         clone.clear();
-        clone.add(cloneFunction.cloneObjectType);
+        clone.add(cloneFunction.cloneObjectLike);
         var regexp1 = clone(testRegExp1);
         checkEqual(false, regexp1 === testRegExp1, 'test_clone_regexp clone');
         checkEqual(true, '^a' === testRegExp1.source);
@@ -181,7 +207,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
 
         clone.clear();
-        clone.add(cloneFunction.cloneObjectType);
+        clone.add(cloneFunction.cloneObjectLike);
         var regexp1 = clone(testRegExp2);
         checkEqual(false, regexp1 === testRegExp2);
         checkEqual(true, '^a' === testRegExp2.source);
@@ -213,7 +239,19 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(6, testObject3.d.c);
         object1.d.a = 7;
         checkEqual(7, object1.d.a);
-        checkEqual(4, testObject3.d.a);
+        checkEqual(4, testObject3.d.a); // object from null
+
+        var object1 = Object.create(null);
+        object1.a = Object.create(null);
+        object1.a.b = 'test';
+        var object2 = cloneDeep(object1);
+        checkEqual(true, parts.isObjectFromNull(object1.a));
+        checkEqual(true, parts.isObjectFromNull(object1));
+        checkEqual(true, parts.isObjectFromNull(object2.a));
+        checkEqual(true, parts.isObjectFromNull(object2));
+        checkEqual(false, object1 === object2);
+        checkEqual(false, object1.a === object2.a);
+        checkEqual(true, object1.a.b === object2.a.b);
       });
     };
 
@@ -410,7 +448,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp2.source); // clone Deep no RegExpFunction
 
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         var regexp2 = cloneDeep(regexp1);
         checkEqual(false, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
@@ -425,7 +463,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp2.value.source); // clone Deep no RegExpFunction in Object
 
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         var regexp2 = cloneDeep({
           value: regexp1
         });
@@ -440,7 +478,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp2[0].source); // clone Deep no RegExpFunction in Array
 
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         var regexp2 = cloneDeep([regexp1]);
         checkEqual(false, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
@@ -454,7 +492,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp2.source); // clone Deep no RegExpFunction
 
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         var regexp2 = cloneDeep(regexp1);
         checkEqual(false, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
@@ -469,7 +507,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp2.value.source); // clone Deep no RegExpFunction in Object
 
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         var regexp2 = cloneDeep({
           value: regexp1
         });
@@ -484,7 +522,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp2[0].source); // clone Deep no RegExpFunction in Array
 
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         var regexp2 = cloneDeep([regexp1]);
         checkEqual(false, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
@@ -660,15 +698,15 @@ var test_execute_root = function test_execute_root(parts) {
         map1.set('key2', 'value2');
         checkEqual('value1', map1.get('key1'));
         checkEqual(false, parts.isObjectAll(map1));
-        checkEqual(true, parts.isObjectTypeAll(map1)); // initializse nothing cloneMap
+        checkEqual(true, parts.isObjectLikeAll(map1)); // initializse nothing cloneMap
 
         clone.clear();
-        clone.add(cloneFunction.cloneObjectType);
+        clone.add(cloneFunction.cloneObjectLike);
         clone.add(cloneFunction.cloneIgnoreFunction);
         clone.add(cloneFunction.cloneRegExp);
         clone.add(cloneFunction.cloneDate);
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         cloneDeep.add(cloneFunction.cloneIgnoreFunction);
         cloneDeep.add(cloneFunction.cloneRegExp);
         cloneDeep.add(cloneFunction.cloneDate);
@@ -769,15 +807,15 @@ var test_execute_root = function test_execute_root(parts) {
           checkEqual(false, parts.isObjectAll(set1));
         }
 
-        checkEqual(true, parts.isObjectTypeAll(set1)); // initializse nothing cloneSet
+        checkEqual(true, parts.isObjectLikeAll(set1)); // initializse nothing cloneSet
 
         clone.clear();
-        clone.add(cloneFunction.cloneObjectType);
+        clone.add(cloneFunction.cloneObjectLike);
         clone.add(cloneFunction.cloneIgnoreFunction);
         clone.add(cloneFunction.cloneRegExp);
         clone.add(cloneFunction.cloneDate);
         cloneDeep.clear();
-        cloneDeep.add(cloneFunction.cloneObjectType);
+        cloneDeep.add(cloneFunction.cloneObjectLike);
         cloneDeep.add(cloneFunction.cloneIgnoreFunction);
         cloneDeep.add(cloneFunction.cloneRegExp);
         cloneDeep.add(cloneFunction.cloneDate);

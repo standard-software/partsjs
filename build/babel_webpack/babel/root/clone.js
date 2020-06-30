@@ -52,7 +52,7 @@ cloneFunction.cloneObject = function (source) {
     return undefined;
   }
 
-  var cloneValue = new source.constructor();
+  var cloneValue = (0, _type.isObjectFromNull)(source) ? Object.create(null) : new source.constructor();
   bufferWrite(source, cloneValue);
 
   for (var key in source) {
@@ -97,18 +97,18 @@ cloneFunction.cloneArrayType = function (source) {
 //  Cloning unnecessary objects
 
 
-cloneFunction.cloneObjectType = function (source) {
+cloneFunction.cloneObjectLike = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
   var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
     return value;
   };
 
-  if (!(0, _type.isObjectType)(source)) {
+  if (!(0, _type.isObjectLike)(source)) {
     return undefined;
   }
 
-  var cloneValue = new source.constructor();
+  var cloneValue = (0, _type.isObjectFromNull)(source) ? Object.create(null) : new source.constructor();
   bufferWrite(source, cloneValue);
 
   for (var key in source) {
