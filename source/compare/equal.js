@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction, isObject, isObjectLike,
   isArray, isArrayType,
   isDate, isRegExp,
   isException,
@@ -10,7 +10,7 @@ import {
 
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-  isFunctionAll, isObjectAll, isObjectTypeAll,
+  isFunctionAll, isObjectAll, isObjectLikeAll,
   isArrayAll, isArrayTypeAll,
   isDateAll, isRegExpAll,
   isExceptionAll,

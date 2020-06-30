@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType, isModule,
+  isFunction, isObject, isObjectLike, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isError,
@@ -26,7 +26,7 @@ import {
  */
 export const _inProperty = (object, propertyPaths, hasOwn = true) => {
 
-  if (!isObjectType(object)) {
+  if (!isObjectLike(object)) {
     return false;
   }
 
@@ -66,7 +66,7 @@ export const inProperty = (object, propertyPaths, hasOwn = true) => {
     ({ hasOwn } = hasOwn);
   }
 
-  if (!isObjectType(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'inProperty args(object) is not object type',
     );

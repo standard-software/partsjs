@@ -6,25 +6,16 @@ export const objectToString = value => {
   return Object.prototype.toString.call(value);
 };
 
-export const _objectToStringCheck = (typeName) => {
-  return (
-    (value) =>
-      objectToString(value) === `[object ${typeName}]`
-  );
-};
-
-export const isUndefined =
-  (value) => typeof value === 'undefined';
+export const isUndefined = (value) => typeof value === 'undefined';
 
 export const isNull = (value) => (value === null);
 
 export const isNaNStrict = (value) => value !== value;
 
-export const isBoolean =
-  (value) => typeof value === 'boolean';
+export const isBoolean = (value) => typeof value === 'boolean';
 export const isBooleanObject = value => {
   return (
-    _objectToStringCheck('Boolean')
+    objectToString(value) === '[object Boolean]'
     && (!isBoolean(value))
   );
 };
@@ -34,7 +25,7 @@ export const isNumber = (value) => {
 };
 export const isNumberObject = (value) => {
   return (
-    _objectToStringCheck('Number')(value)
+    objectToString(value) === '[object Number]'
     && (typeof value !== 'number')
   );
 };
@@ -50,8 +41,8 @@ export const isString =
   (value) => typeof value === 'string';
 export const isStringObject = value => {
   return (
-    _objectToStringCheck('String')
-    && (!isString(value))
+    objectToString(value) === '[object String]'
+    && (typeof value !== 'string')
   );
 };
 
@@ -83,18 +74,16 @@ export const isObjectFromNull = (value) => {
   return true;
 };
 
-export const isObjectType = (value) => {
+export const isObjectLike = (value) => {
   if (isNull(value)) {
     return false;
   }
-  return ['function', 'object'].indexOf(typeof value) !== -1;
+  return typeof value === 'object'
+    || typeof value === 'function';
 };
 
 export const isModule = (value) => {
-  if (_objectToStringCheck('Module')(value)) {
-    return true;
-  }
-  return false;
+  return objectToString(value) === '[object Module]';
 };
 
 export const isEmptyObject = value => {
@@ -104,10 +93,12 @@ export const isEmptyObject = value => {
   return _propertyCount(value) === 0;
 };
 
-export const isArray = _objectToStringCheck('Array');
+export const isArray = (value) => {
+  return objectToString(value) === '[object Array]';
+};
 
 // Int8Array Uint16Array Float32Array Float64Array etc
-export const isArrayType = (value) => {
+export const isArraySeries = (value) => {
   if (objectToString(value).indexOf('Array]') !== -1 ) {
     return true;
   }
@@ -115,17 +106,23 @@ export const isArrayType = (value) => {
 };
 
 export const isEmptyArray = value => {
-  if (!isArrayType(value)) {
+  if (!isArraySeries(value)) {
     return false;
   }
   return value.length === 0;
 };
 
-export const isDate = _objectToStringCheck('Date');
+export const isDate = (value) => {
+  return objectToString(value) === '[object Date]';
+};
 
-export const isRegExp = _objectToStringCheck('RegExp');
+export const isRegExp = (value) => {
+  return objectToString(value) === '[object RegExp]';
+};
 
-export const isError = _objectToStringCheck('Error');
+export const isError = (value) => {
+  return objectToString(value) === '[object Error]';
+};
 
 export const isNotUndefined       = value => !isUndefined(value);
 export const isNotNull            = value => !isNull(value);
@@ -138,10 +135,10 @@ export const isNotFunction        = value => !isFunction(value);
 export const isNotObject          = value => !isObject(value);
 export const isNotObjectNormal    = value => !isObjectNormal(value);
 export const isNotObjectFromNull  = value => !isObjectFromNull(value);
-export const isNotObjectType      = value => !isObjectType(value);
+export const isNotObjectLike      = value => !isObjectLike(value);
 export const isNotModule          = value => !isModule(value);
 export const isNotArray           = value => !isArray(value);
-export const isNotArrayType       = value => !isArrayType(value);
+export const isNotArraySeries     = value => !isArraySeries(value);
 export const isNotDate            = value => !isDate(value);
 export const isNotRegExp          = value => !isRegExp(value);
 export const isNotBooleanObject   = value => !isBooleanObject(value);
@@ -149,6 +146,11 @@ export const isNotNumberObject    = value => !isNumberObject(value);
 export const isNotStringObject    = value => !isStringObject(value);
 export const isNotEmptyObject     = value => !isEmptyObject(value);
 export const isNotEmptyArray      = value => !isEmptyArray(value);
+
+export const isObjectType     = isObjectLike;
+export const isArrayType      = isArraySeries;
+export const isNotObjectType  = isNotObjectLike;
+export const isNotArrayType   = isNotArraySeries;
 
 export const isUndef          = isUndefined;
 export const isBool           = isBoolean;
@@ -159,7 +161,7 @@ export const isFunc           = isFunction;
 export const isObj            = isObject;
 export const isObjNormal      = isObjectNormal;
 export const isObjFromNull    = isObjectFromNull;
-export const isObjType        = isObjectType;
+export const isObjLike        = isObjectLike;
 export const isEmptyObj       = isEmptyObject;
 
 export const isNotUndef       = isNotUndefined;
@@ -171,18 +173,21 @@ export const isNotFunc        = isNotFunction;
 export const isNotObj         = isNotObject;
 export const isNotObjNormal   = isNotObjectNormal;
 export const isNotObjFromNull = isNotObjectFromNull;
-export const isNotObjType     = isNotObjectType;
+export const isNotObjLike     = isNotObjectLike;
 export const isNotEmptyObj    = isNotEmptyObject;
 
+export const isObjType        = isObjLike;
+export const isNotObjType     = isNotObjLike;
+
 export default {
-  _objectToStringCheck, objectToString,
+  objectToString,
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
-  isObjectType, isModule,
-  isArray, isArrayType,
+  isObjectLike, isModule,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isError,
   isBooleanObject, isNumberObject, isStringObject,
@@ -192,24 +197,30 @@ export default {
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotFunction,
   isNotObject, isNotObjectNormal, isNotObjectFromNull,
-  isNotObjectType, isNotModule,
-  isNotArray, isNotArrayType,
+  isNotObjectLike, isNotModule,
+  isNotArray, isNotArraySeries,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
+
+  isObjectType, isArrayType,
+  isNotObjectType, isNotArrayType,
 
   isUndef,
   isBool, isNum, isInt, isStr,
   isFunc,
   isObj, isObjNormal, isObjFromNull,
-  isObjType,
+  isObjLike,
   isEmptyObj,
 
   isNotUndef,
   isNotBool, isNotNum, isNotInt, isNotStr,
   isNotFunc,
   isNotObj, isNotObjNormal, isNotObjFromNull,
-  isNotObjType,
+  isNotObjLike,
   isNotEmptyObj,
+
+  isObjType,
+  isNotObjType,
 };
 

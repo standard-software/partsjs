@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction, isObject, isObjectLike,
   isArray, isArrayType,
   isDate, isRegExp,
   isError,
@@ -26,7 +26,7 @@ export const propertyCount = (object, hasOwn = true) => {
     ({ hasOwn } = hasOwn);
   }
 
-  if (!isObjectType(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'propertyCount args(object) is not object type',
     );

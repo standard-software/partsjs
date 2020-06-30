@@ -3,7 +3,7 @@ import {
   isBoolean, isNumber, isInteger, isString,
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
-  isObjectType, isModule,
+  isObjectLike, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
@@ -75,7 +75,7 @@ export const isFunctionAll          = _isTypeAllCheckFunc(isFunction);
 export const isObjectAll            = _isTypeAllCheckFunc(isObject);
 export const isObjectNormalAll      = _isTypeAllCheckFunc(isObjectNormal);
 export const isObjectFromNullAll    = _isTypeAllCheckFunc(isObjectFromNull);
-export const isObjectTypeAll        = _isTypeAllCheckFunc(isObjectType);
+export const isObjectLikeAll        = _isTypeAllCheckFunc(isObjectLike);
 export const isModuleAll            = _isTypeAllCheckFunc(isModule);
 export const isArrayAll             = _isTypeAllCheckFunc(isArray);
 export const isArrayTypeAll         = _isTypeAllCheckFunc(isArrayType);
@@ -131,7 +131,7 @@ export const isFuncAll            = isFunctionAll;
 export const isObjAll             = isObjectAll;
 export const isObjNormalAll       = isObjectNormalAll;
 export const isObjFromNullAll     = isObjectFromNullAll;
-export const isObjTypeAll         = isObjectTypeAll;
+export const isObjTypeAll         = isObjectLikeAll;
 export const isExceptAll          = isExceptionAll;
 export const isEmptyObjAll        = isEmptyObjectAll;
 
@@ -155,7 +155,7 @@ export default {
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
   isFunctionAll,
   isObjectAll, isObjectNormalAll, isObjectFromNullAll,
-  isObjectTypeAll, isModuleAll,
+  isObjectLikeAll, isModuleAll,
   isArrayAll, isArrayTypeAll,
   isDateAll, isRegExpAll,
   isExceptionAll,

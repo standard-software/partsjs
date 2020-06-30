@@ -1,7 +1,7 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction, isObject, isObjectLike,
   isArray, isArrayType,
   isDate, isRegExp,
   isError,
@@ -32,7 +32,7 @@ export const has = (object, propertyName, hasOwn = false) => {
     ({ hasOwn } = hasOwn);
   }
 
-  if (!isObjectType(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'has args(object) is not object type',
     );
@@ -65,7 +65,7 @@ export const hasOwn = (object, propertyName) => {
     ({ propertyName } = propertyName);
   }
 
-  if (!isObjectType(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'hasOwn args(object) is not object type',
     );
@@ -96,7 +96,7 @@ export const hasPrototype = (object, propertyName) => {
     ({ propertyName } = propertyName);
   }
 
-  if (!isObjectType(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'hasPrototype args(object) is not object type',
     );

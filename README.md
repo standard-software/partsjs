@@ -234,6 +234,16 @@ same [How to use Google Apps Script]
 
 ## Version
 
+### 6.3.0
+#### 2020/06/30(Tue)
+- delete isType.js _objectToStringCheck
+- bugfix isBooleanObject / isStringObject
+- rename
+  - isArrayType >> isArraySeries
+    - alias name isArrayType
+  - isObjectType >> isObjectLike
+    - alias name isObjectType
+
 ### 6.2.0
 #### 2020/06/30(Tue)
 - object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,

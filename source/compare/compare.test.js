@@ -7,7 +7,7 @@ export const test_execute_compare = (parts) => {
     const {
       isNull, isUndefined, isNaNStrict,
       isBoolean, isNumber, isInteger, isString,
-      isFunction, isObject, isObjectType,
+      isFunction, isObject, isObjectLike,
       isArray, isDate, isRegExp,
       isException,
       isEmptyObject, isEmptyArray,

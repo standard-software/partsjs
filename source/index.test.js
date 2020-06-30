@@ -34,7 +34,7 @@ export const test_execute_index = (parts) => {
       it('test_execute_nameSpace 1', () => {
 
         const countArray =
-          [345, 18, 3, 234, 9, 11, 23, 29, 7, 29, 17, 36];
+          [363, 18, 3, 252, 9, 11, 23, 29, 7, 29, 17, 36];
         const propertyCountForParts = (parts) => {
           let result = propertyCount(parts);
           if (!parts.isUndefined(parts.default)) {

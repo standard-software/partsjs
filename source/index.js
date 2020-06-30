@@ -58,17 +58,19 @@ propertyNames._TYPE_BASE =
   'Boolean, Number, Integer, String, ' +
   'Function, ' +
   'Object, ObjectNormal, ObjectFromNull, ' +
-  'ObjectType, Module, ' +
-  'Array, ArrayType, ' +
+  'ObjectLike, Module, ' +
+  'Array, ArraySeries, ' +
   'Date, RegExp, ' +
   'Exception, ' +
   'EmptyObject, EmptyArray, ' +
   'Symbol, ' +
   'Map, WeakMap, Set, WeakSet, ' +
   'BooleanObject, NumberObject, StringObject, ' +
+  'ObjectType, ArrayType, ' +
   'Bool, Num, Int, Str, ' +
   'Func, ' +
   'Obj, ObjNormal, ObjFromNull, ' +
+  'ObjLike, ' +
   'ObjType, ' +
   'Except, ' +
   'EmptyObj, ' +
@@ -274,8 +276,8 @@ export const {
   isBoolean, isNumber, isInteger, isString,
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
-  isObjectType, isModule,
-  isArray, isArrayType,
+  isObjectLike, isModule,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isException,
   isEmptyObject, isEmptyArray,
@@ -285,7 +287,7 @@ export const {
   isBool, isNum, isInt, isStr,
   isFunc,
   isObj, isObjNormal, isObjFromNull,
-  isObjType,
+  isObjLike,
   isExcept,
   isEmptyObj,
 
@@ -293,8 +295,8 @@ export const {
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotFunction,
   isNotObject, isNotObjectNormal, isNotObjectFromNull,
-  isNotObjectType, isNotModule,
-  isNotArray, isNotArrayType,
+  isNotObjectLike, isNotModule,
+  isNotArray, isNotArraySeries,
   isNotDate, isNotRegExp,
   isNotException,
   isNotEmptyObject, isNotEmptyArray,
@@ -304,16 +306,21 @@ export const {
   isNotBool, isNotNum, isNotInt, isNotStr,
   isNotFunc,
   isNotObj, isNotObjNormal, isNotObjFromNull,
-  isNotObjType,
+  isNotObjLike,
   isNotExcept,
   isNotEmptyObj,
+
+  isObjectType, isArrayType,
+  isNotObjectType, isNotArrayType,
+  isObjType,
+  isNotObjType,
 
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
   isFunctionAll,
   isObjectAll, isObjectNormalAll, isObjectFromNullAll,
-  isObjectTypeAll, isModuleAll,
-  isArrayAll, isArrayTypeAll,
+  isObjectLikeAll, isModuleAll,
+  isArrayAll, isArraySeriesAll,
   isDateAll, isRegExpAll,
   isExceptionAll,
   isEmptyObjectAll, isEmptyArrayAll,
@@ -323,7 +330,7 @@ export const {
   isBoolAll, isNumAll, isIntAll, isStrAll,
   isFuncAll,
   isObjAll, isObjNormalAll, isObjFromNullAll,
-  isObjTypeAll,
+  isObjLikeAll,
   isExceptAll,
   isEmptyObjAll,
 
@@ -331,8 +338,8 @@ export const {
   isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
   isNotFunctionAll,
   isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
-  isNotObjectTypeAll, isNotModuleAll,
-  isNotArrayAll, isNotArrayTypeAll,
+  isNotObjectLikeAll, isNotModuleAll,
+  isNotArrayAll, isNotArraySeriesAll,
   isNotDateAll, isNotRegExpAll,
   isNotExceptionAll,
   isNotEmptyObjectAll, isNotEmptyArrayAll,
@@ -342,16 +349,21 @@ export const {
   isNotBoolAll, isNotNumAll, isNotIntAll, isNotStrAll,
   isNotFuncAll,
   isNotObjAll, isNotObjNormalAll, isNotObjFromNullAll,
-  isNotObjTypeAll,
+  isNotObjLikeAll,
   isNotExceptAll,
   isNotEmptyObjAll,
+
+  isObjectTypeAll, isArrayTypeAll,
+  isNotObjectTypeAll, isNotArrayTypeAll,
+  isObjTypeAll,
+  isNotObjTypeAll,
 
   isUndefinedArray, isNullArray, isNaNStrictArray,
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray,
   isObjectArray, isObjectNormalArray, isObjectFromNullArray,
-  isObjectTypeArray, isModuleArray,
-  isArrayArray, isArrayTypeArray,
+  isObjectLikeArray, isModuleArray,
+  isArrayArray, isArraySeriesArray,
   isDateArray, isRegExpArray,
   isExceptionArray,
   isEmptyObjectArray, isEmptyArrayArray,
@@ -361,7 +373,7 @@ export const {
   isBoolArray, isNumArray, isIntArray, isStrArray,
   isFuncArray,
   isObjArray, isObjNormalArray, isObjFromNullArray,
-  isObjTypeArray,
+  isObjLikeArray,
   isExceptArray,
   isEmptyObjArray,
 
@@ -369,8 +381,8 @@ export const {
   isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
   isNotFunctionArray,
   isNotObjectArray, isNotObjectNormalArray, isNotObjectFromNullArray,
-  isNotObjectTypeArray, isNotModuleArray,
-  isNotArrayArray, isNotArrayTypeArray,
+  isNotObjectLikeArray, isNotModuleArray,
+  isNotArrayArray, isNotArraySeriesArray,
   isNotDateArray, isNotRegExpArray,
   isNotExceptionArray,
   isNotEmptyObjectArray, isNotEmptyArrayArray,
@@ -380,9 +392,14 @@ export const {
   isNotBoolArray, isNotNumArray, isNotIntArray, isNotStrArray,
   isNotFuncArray,
   isNotObjArray, isNotObjNormalArray, isNotObjFromNullArray,
-  isNotObjTypeArray,
+  isNotObjLikeArray,
   isNotExceptArray,
   isNotEmptyObjArray,
+
+  isObjectTypeArray, isArrayTypeArray,
+  isNotObjectTypeArray, isNotArrayTypeArray,
+  isObjTypeArray,
+  isNotObjTypeArray,
 
   isThrown, isThrownValue, isThrownException, isNotThrown,
 

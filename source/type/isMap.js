@@ -1,9 +1,14 @@
 import {
-  _objectToStringCheck, objectToString,
+  objectToString,
 } from '../type/isType.js';
 
-export const isMap = _objectToStringCheck('Map');
-export const isWeakMap = _objectToStringCheck('WeakMap');
+export const isMap = (value) => {
+  return objectToString(value) === '[object Map]';
+};
+
+export const isWeakMap = (value) => {
+  return objectToString(value) === '[object WeakMap]';
+};
 
 export const isNotMap   = value => !isMap(value);
 export const isNotWeakMap   = value => !isWeakMap(value);

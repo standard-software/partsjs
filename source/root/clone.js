@@ -1,7 +1,9 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isObjectType,
+  isFunction,
+  isObject, isObjectNormal, isObjectFromNull,
+  isObjectLike,
   isArray, isArrayType,
   isDate, isRegExp,
   isException,

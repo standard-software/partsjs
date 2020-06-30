@@ -3,7 +3,7 @@ import {
   isBoolean, isNumber, isInteger, isString,
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
-  isObjectType, isModule,
+  isObjectLike, isModule,
   isArray, isArrayType,
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
@@ -64,7 +64,7 @@ export const isFunctionArray          = _isTypeArrayCheckFunc(isFunction);
 export const isObjectArray            = _isTypeArrayCheckFunc(isObject);
 export const isObjectNormalArray      = _isTypeArrayCheckFunc(isObjectNormal);
 export const isObjectFromNullArray    = _isTypeArrayCheckFunc(isObjectFromNull);
-export const isObjectTypeArray        = _isTypeArrayCheckFunc(isObjectType);
+export const isObjectLikeArray        = _isTypeArrayCheckFunc(isObjectLike);
 export const isModuleArray            = _isTypeArrayCheckFunc(isModule);
 export const isArrayArray             = _isTypeArrayCheckFunc(isArray);
 export const isArrayTypeArray         = _isTypeArrayCheckFunc(isArrayType);
@@ -120,7 +120,7 @@ export const isFuncArray            = isFunctionArray;
 export const isObjArray             = isObjectArray;
 export const isObjNormalArray       = isObjectNormalArray;
 export const isObjFromNullArray     = isObjectFromNullArray;
-export const isObjTypeArray         = isObjectTypeArray;
+export const isObjTypeArray         = isObjectLikeArray;
 export const isExceptArray          = isExceptionArray;
 export const isEmptyObjArray        = isEmptyObjectArray;
 
@@ -142,7 +142,7 @@ export default {
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray,
   isObjectArray, isObjectNormalArray, isObjectFromNullArray,
-  isObjectTypeArray, isModuleArray,
+  isObjectLikeArray, isModuleArray,
   isArrayArray, isArrayTypeArray,
   isDateArray, isRegExpArray,
   isExceptionArray,
