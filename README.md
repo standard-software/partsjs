@@ -234,6 +234,11 @@ same [How to use Google Apps Script]
 
 ## Version
 
+### 6.4.0
+#### 2020/07/03(Fri)
+- update clone / cloneDeep
+  - args cloneFunction
+
 ### 6.3.0
 #### 2020/06/30(Tue)
 - delete isType.js _objectToStringCheck

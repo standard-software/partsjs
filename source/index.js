@@ -11,7 +11,7 @@ import _object from './object/object.js';
 import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 
-const VERSION = '6.3.0';
+const VERSION = '6.4.0 beta';
 
 const rootNames = {};
 const propertyNames = {};
@@ -23,7 +23,7 @@ const { _map } = _array;
 // root
 propertyNames.ROOT =
   'clone, cloneDeep,' +
-  'cloneFunction,' +
+  'cloneFunction, cloneFunctionArrayDefault,' +
   '';
 const root = {};
 _copyProperty(_root, propertyNames.ROOT, root);
@@ -270,7 +270,7 @@ _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
 
 export const {
   clone, cloneDeep,
-  cloneFunction,
+  cloneFunction, cloneFunctionArrayDefault,
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,

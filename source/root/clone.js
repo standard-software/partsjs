@@ -219,16 +219,30 @@ cloneFunction.cloneIgnoreWeakSet = (
   return source;
 };
 
+export const cloneFunctionArrayDefault = [
+  cloneFunction.cloneDate,
+  cloneFunction.cloneRegExp,
+  cloneFunction.cloneIgnoreFunction,
+  cloneFunction.cloneMap,
+  cloneFunction.cloneIgnoreWeakMap,
+  cloneFunction.cloneSet,
+  cloneFunction.cloneIgnoreWeakSet,
+  cloneFunction.cloneArrayType,
+  cloneFunction.cloneObject,
+];
+
 /**
  * clone
  */
-export const _clone = (source) => {
+export const _clone = (
+  source, cloneFunctionArray = cloneFunctionArrayDefault,
+) => {
   const __clone = (value) => {
     if (isUndefined(value)) {
       return undefined;
     }
-    for (let i = 0, l = _clone.functions.length; i < l; i += 1) {
-      const result = _clone.functions[i](value);
+    for (let i = 0, l = cloneFunctionArray.length; i < l; i += 1) {
+      const result = cloneFunctionArray[i](value);
       if (!isUndefined(result)) {
         return result;
       }
@@ -237,44 +251,21 @@ export const _clone = (source) => {
   };
   return __clone(source);
 };
-_clone.functions = [];
 
-_clone.clear = () => {
-  _clone.functions = [];
+export const clone = (
+  source,
+  cloneFunctionArray = cloneFunctionArrayDefault,
+) => {
+  return _clone(source, cloneFunctionArray);
 };
-
-_clone.add = (func) => {
-  _clone.functions.unshift(func);
-};
-
-_clone.reset = () => {
-  _clone.clear();
-  _clone.add(cloneFunction.cloneObject);
-  _clone.add(cloneFunction.cloneArrayType);
-  _clone.add(cloneFunction.cloneIgnoreWeakSet);
-  _clone.add(cloneFunction.cloneSet);
-  _clone.add(cloneFunction.cloneIgnoreWeakMap);
-  _clone.add(cloneFunction.cloneMap);
-  _clone.add(cloneFunction.cloneIgnoreFunction);
-  _clone.add(cloneFunction.cloneRegExp);
-  _clone.add(cloneFunction.cloneDate);
-};
-_clone.reset();
-
-export const clone = (source) => {
-  return _clone(source);
-};
-
-_copyProperty(_clone,
-  'clear,reset,add,' +
-  '',
-  clone,
-);
 
 /**
  * cloneDeep
  */
-export const _cloneDeep = (source) => {
+export const _cloneDeep = (
+  source,
+  cloneFunctionArray = cloneFunctionArrayDefault,
+) => {
   const CircularReferenceBuffer = {
     source: [],
     clone: [],
@@ -287,8 +278,8 @@ export const _cloneDeep = (source) => {
     if (isUndefined(value)) {
       return undefined;
     }
-    for (let i = 0, l = _cloneDeep.functions.length; i < l; i += 1) {
-      const result = _cloneDeep.functions[i](
+    for (let i = 0, l = cloneFunctionArray.length; i < l; i += 1) {
+      const result = cloneFunctionArray[i](
         value,
         (source, clone) => {
           CircularReferenceBuffer.source.push(source);
@@ -305,44 +296,17 @@ export const _cloneDeep = (source) => {
   return __cloneDeep(source);
 };
 
-_cloneDeep.functions = [];
-
-_cloneDeep.clear = (func) => {
-  _cloneDeep.functions = [];
+export const cloneDeep = (
+  source,
+  cloneFunctionArray = cloneFunctionArrayDefault,
+) => {
+  return _cloneDeep(source, cloneFunctionArray);
 };
-
-_cloneDeep.add = (func) => {
-  _cloneDeep.functions.unshift(func);
-};
-
-_cloneDeep.reset = () => {
-  _cloneDeep.clear();
-  _cloneDeep.add(cloneFunction.cloneObject);
-  _cloneDeep.add(cloneFunction.cloneArrayType);
-  _cloneDeep.add(cloneFunction.cloneIgnoreWeakSet);
-  _cloneDeep.add(cloneFunction.cloneSet);
-  _cloneDeep.add(cloneFunction.cloneIgnoreWeakMap);
-  _cloneDeep.add(cloneFunction.cloneMap);
-  _cloneDeep.add(cloneFunction.cloneIgnoreFunction);
-  _cloneDeep.add(cloneFunction.cloneRegExp);
-  _cloneDeep.add(cloneFunction.cloneDate);
-};
-_cloneDeep.reset();
-
-export const cloneDeep = (source) => {
-  return _cloneDeep(source);
-};
-_copyProperty(_cloneDeep,
-  'clear,reset,add,' +
-  '',
-  cloneDeep,
-);
 
 export default {
   _clone, _cloneDeep,
-
   clone, cloneDeep,
-
   cloneFunction,
+  cloneFunctionArrayDefault,
 };
 
