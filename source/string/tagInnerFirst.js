@@ -11,30 +11,16 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
-export const _tagInnerFirstBase = (str, startTag, endTag) => {
-  if (str === '') { return { find: false, value: '' }; }
-
-  let indexStartTag = _indexOfFirst(str, startTag);
-  if (indexStartTag === -1) {
-    return { find: false, value: '' };
-  }
-  const indexEndTag = _indexOfFirst(str, endTag, indexStartTag + startTag.length);
-  if (indexEndTag === -1) {
-    return { find: false, value: '' };
-  }
-  indexStartTag = _indexOfLast(str, startTag, indexEndTag - startTag.length);
-  if (indexStartTag === -1) {
-    return { find: false, value: '' };
-  }
-  return {
-    find: true,
-    value: _subIndex(str, indexStartTag + startTag.length, indexEndTag - 1),
-  };
-};
+import {
+  _tagOuterFirst,
+} from './tagOuterFirst.js';
 
 export const _tagInnerFirst = (str, startTag, endTag) => {
-  const result = _tagInnerFirstBase(str, startTag, endTag);
-  return result.value;
+  const result = _tagOuterFirst(str, startTag, endTag);
+  if (result.length === 0) {
+    return '';
+  }
+  return _subIndex(result, startTag.length, result.length - endTag.length - 1);
 };
 
 export const tagInnerFirst = (str, startTag, endTag) => {
@@ -66,7 +52,6 @@ export const tagInnerFirst = (str, startTag, endTag) => {
 };
 
 export default {
-  _tagInnerFirstBase,
   _tagInnerFirst,
   tagInnerFirst,
 };

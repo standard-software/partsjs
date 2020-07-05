@@ -11,17 +11,22 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
-import {
-  _tagInnerFirstBase,
-} from './tagInnerFirst.js';
-
 export const _tagOuterFirst = (str, startTag, endTag) => {
-  const result = _tagInnerFirstBase(str, startTag, endTag);
+  if (str === '') { return ''; }
 
-  if (!result.find) {
+  let indexStartTag = _indexOfFirst(str, startTag);
+  if (indexStartTag === -1) {
     return '';
   }
-  return startTag + result.value + endTag;
+  const indexEndTag = _indexOfFirst(str, endTag, indexStartTag + startTag.length);
+  if (indexEndTag === -1) {
+    return '';
+  }
+  indexStartTag = _indexOfLast(str, startTag, indexEndTag - startTag.length);
+  if (indexStartTag === -1) {
+    return '';
+  }
+  return _subIndex(str, indexStartTag, indexEndTag + endTag.length - 1);
 };
 
 export const tagOuterFirst = (str, startTag, endTag) => {
