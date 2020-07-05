@@ -25,6 +25,7 @@ export const test_execute_string = (parts) => {
       subFirstDelimFirst, subFirstDelimLast,
       subLastDelimFirst, subLastDelimLast,
       tagInnerFirst, tagOuterFirst,
+      tagInnerLast, tagOuterLast,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -1363,6 +1364,62 @@ export const test_execute_string = (parts) => {
       });
     };
 
+    const test_tagInnerLast = () => {
+      it('test_tagInnerLast', () => {
+        checkEqual('b',   tagInnerLast('  <aba>  ',  '<a', 'a>'));
+        checkEqual('',    tagInnerLast('  <aa>  ',    '<a', 'a>'));
+        checkEqual('',    tagInnerLast('  <a>  ',     '<a', 'a>'));
+        checkEqual('b',   tagInnerLast('<<>>>a<<<a>><<aba>><<a>>>a<<<>>', '<a', 'a>'));
+        checkEqual('>>>', tagInnerLast('<<>><a<<<a>><<aba>><<a>>>a><<>>', '<a', 'a>'));
+
+        // object parameter
+        checkEqual('b',   tagInnerLast({
+          str: '  <aba>  ',
+          startTag: '<a',
+          endTag: 'a>',
+        }));
+        checkEqual('b',   tagInnerLast(
+          '  <aba>  ',
+          { startTag: '<a',
+            endTag: 'a>',
+          }));
+        checkEqual('b',   tagInnerLast(
+          '  <aba>  ',
+          '<a',
+          {
+            endTag: 'a>',
+          }));
+      });
+    };
+
+    const test_tagOuterLast = () => {
+      it('test_tagOuterLast', () => {
+        checkEqual('<aba>',   tagOuterLast('  <aba>  ',  '<a', 'a>'));
+        checkEqual('<aa>',    tagOuterLast('  <aa>  ',    '<a', 'a>'));
+        checkEqual('',        tagOuterLast('  <a>  ',     '<a', 'a>'));
+        checkEqual('<aba>',   tagOuterLast('<<>>>a<<<a>><<aba>><<a>>>a<<<>>', '<a', 'a>'));
+        checkEqual('<a>>>a>', tagOuterLast('<<>><a<<<a>><<aba>><<a>>>a><<>>', '<a', 'a>'));
+
+        // object parameter
+        checkEqual('<aba>',   tagOuterLast({
+          str: '  <aba>  ',
+          startTag: '<a',
+          endTag: 'a>',
+        }));
+        checkEqual('<aba>',   tagOuterLast(
+          '  <aba>  ',
+          { startTag: '<a',
+            endTag: 'a>',
+          }));
+        checkEqual('<aba>',   tagOuterLast(
+          '  <aba>  ',
+          '<a',
+          {
+            endTag: 'a>',
+          }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -1407,6 +1464,8 @@ export const test_execute_string = (parts) => {
     test_subLastDelimLast();
     test_tagInnerFirst();
     test_tagOuterFirst();
+    test_tagInnerLast();
+    test_tagOuterLast();
 
   });
 };

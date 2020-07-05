@@ -8,6 +8,8 @@ import subLastDelimFirst from './subLastDelimFirst.js';
 import subLastDelimLast from './subLastDelimLast.js';
 import tagInnerFirst from './tagInnerFirst.js';
 import tagOuterFirst from './tagOuterFirst.js';
+import tagInnerLast from './tagInnerLast.js';
+import tagOuterLast from './tagOuterLast.js';
 
 export default {
   ...string_common,
@@ -20,6 +22,8 @@ export default {
   ...subLastDelimLast,
   ...tagInnerFirst,
   ...tagOuterFirst,
+  ...tagInnerLast,
+  ...tagOuterLast,
 };
 
 export * from './string_common.js';

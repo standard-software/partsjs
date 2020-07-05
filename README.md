@@ -235,7 +235,7 @@ same [How to use Google Apps Script]
 ## Version
 
 ### 6.4.0
-#### 2020/07/03(Fri)
+#### 2020/07/05(Sun)
 - update clone / cloneDeep
   - args cloneFunction
   - support full object parameter
@@ -246,9 +246,11 @@ same [How to use Google Apps Script]
   - subLastDelimFirst.js 
   - subLastDelimLast.js
   - support full object parameter
-- add tagInner/OuterFirst
+- add tag Inner/Outer First/Last
   - tagInnerFirst.js
   - tagOuterFirst.js
+  - tagInnerLast.js
+  - tagOuterLast.js
 
 ### 6.3.0
 #### 2020/06/30(Tue)

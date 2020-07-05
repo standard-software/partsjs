@@ -180,6 +180,7 @@ propertyNames.STRING_PUBLIC =
   'subFirstDelimFirst, subFirstDelimLast, ' +
   'subLastDelimFirst, subLastDelimLast, ' +
   'tagInnerFirst, tagOuterFirst, ' +
+  'tagInnerLast, tagOuterLast, ' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
