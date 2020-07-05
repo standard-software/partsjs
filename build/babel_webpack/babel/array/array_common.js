@@ -13,6 +13,8 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _clone2 = require("../root/clone.js");
 
+var _cloneDeep2 = require("../root/cloneDeep.js");
+
 var _syntax = require("../syntax/syntax.js");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -171,7 +173,7 @@ var _median = function _median(array) {
     return null;
   }
 
-  var sortedArray = (0, _clone2._cloneDeep)(array);
+  var sortedArray = (0, _cloneDeep2._cloneDeep)(array);
   sortedArray.sort(function (a, b) {
     return a - b;
   });

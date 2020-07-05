@@ -8,6 +8,19 @@ Object.defineProperty(exports, "__esModule", {
 var _exportNames = {};
 exports["default"] = void 0;
 
+var _cloneFunction = _interopRequireWildcard(require("./cloneFunction.js"));
+
+Object.keys(_cloneFunction).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _cloneFunction[key];
+    }
+  });
+});
+
 var _clone = _interopRequireWildcard(require("./clone.js"));
 
 Object.keys(_clone).forEach(function (key) {
@@ -17,6 +30,19 @@ Object.keys(_clone).forEach(function (key) {
     enumerable: true,
     get: function get() {
       return _clone[key];
+    }
+  });
+});
+
+var _cloneDeep = _interopRequireWildcard(require("./cloneDeep.js"));
+
+Object.keys(_cloneDeep).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _cloneDeep[key];
     }
   });
 });
@@ -31,6 +57,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _default = _objectSpread({}, _clone["default"]);
+var _default = _objectSpread(_objectSpread(_objectSpread({}, _cloneFunction["default"]), _clone["default"]), _cloneDeep["default"]);
 
 exports["default"] = _default;
