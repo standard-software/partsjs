@@ -177,6 +177,8 @@ propertyNames.STRING_PUBLIC =
   'subIndex, subLength, subFirst, subLast,' +
   'deleteIndex, deleteLength, deleteFirst, deleteLast,' +
   'insert, add,' +
+  'subFirstDelimFirst, subFirstDelimLast, ' +
+  'subLastDelimFirst, subLastDelimLast, ' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +

@@ -19,10 +19,6 @@ import {
   _findFirst,
 } from '../array/array.js';
 
-import {
-  allMatchSome,
-} from '../compare/compare.js';
-
 /**
  * repeat
  */

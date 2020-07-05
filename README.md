@@ -240,6 +240,12 @@ same [How to use Google Apps Script]
   - args cloneFunction
   - support full object parameter
   - cloneFunction.js clone.js cloneDeep.js
+- add sub First/Last Delim First/Last
+  - subFirstDelimFirst.js 
+  - subFirstDelimLast.js
+  - subLastDelimFirst.js 
+  - subLastDelimLast.js
+  - support full object parameter
 
 ### 6.3.0
 #### 2020/06/30(Tue)

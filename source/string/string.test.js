@@ -21,6 +21,8 @@ export const test_execute_string = (parts) => {
       deleteIndex, deleteLength,
       deleteFirst, deleteLast,
       insert, add,
+      subFirstDelimFirst, subFirstDelimLast,
+      subLastDelimFirst, subLastDelimLast,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -1179,6 +1181,130 @@ export const test_execute_string = (parts) => {
       });
     };
 
+    const test_subFirstDelimFirst = () => {
+      it('test_subFirstDelimFirst', () => {
+        checkEqual('123',       subFirstDelimFirst('123,456', ','));
+        checkEqual('123',       subFirstDelimFirst('123,456,789', ','));
+        checkEqual('123',       subFirstDelimFirst('123ttt456', 'ttt'));
+        checkEqual('123',       subFirstDelimFirst('123ttt456', 'tt'));
+        checkEqual('123',       subFirstDelimFirst('123ttt456', 't'));
+        checkEqual('',          subFirstDelimFirst('123ttt456', ','));
+        checkEqual('123',       subFirstDelimFirst('123,,',   ','));
+        checkEqual('',          subFirstDelimFirst(',,123',   ','));
+        checkEqual('',          subFirstDelimFirst(',,123,,', ','));
+        checkEqual('123',       subFirstDelimFirst('123,,',   ',,'));
+        checkEqual('',          subFirstDelimFirst(',,123',   ',,'));
+        checkEqual('',          subFirstDelimFirst(',,123,,', ',,'));
+
+        // object parameter
+        checkEqual('123',
+          subFirstDelimFirst({
+            str: '123,456',
+            delimiter: ',',
+          }),
+        );
+        checkEqual('123',
+          subFirstDelimFirst(
+            '123,456', {
+              delimiter: ',',
+            }),
+        );
+      });
+    };
+
+    const test_subFirstDelimLast = () => {
+      it('test_subFirstDelimLast', () => {
+        checkEqual('123',       subFirstDelimLast('123,456', ','));
+        checkEqual('123,456',   subFirstDelimLast('123,456,789', ','));
+        checkEqual('123',       subFirstDelimLast('123ttt456', 'ttt'));
+        checkEqual('123t',      subFirstDelimLast('123ttt456', 'tt'));
+        checkEqual('123tt',     subFirstDelimLast('123ttt456', 't'));
+        checkEqual('',          subFirstDelimLast('123ttt456', ','));
+        checkEqual('123,',      subFirstDelimLast('123,,',    ','));
+        checkEqual(',',         subFirstDelimLast(',,123',    ','));
+        checkEqual(',,123,',    subFirstDelimLast(',,123,,',  ','));
+        checkEqual('123',       subFirstDelimLast('123,,',    ',,'));
+        checkEqual('',          subFirstDelimLast(',,123',    ',,'));
+        checkEqual(',,123',     subFirstDelimLast(',,123,,',  ',,'));
+
+        // object parameter
+        checkEqual('123',
+          subFirstDelimLast({
+            str: '123,456',
+            delimiter: ',',
+          }),
+        );
+        checkEqual('123',
+          subFirstDelimLast(
+            '123,456', {
+              delimiter: ',',
+            }),
+        );
+      });
+    };
+
+    const test_subLastDelimFirst = () => {
+      it('test_subLastDelimFirst', () => {
+        checkEqual('456',       subLastDelimFirst('123,456', ','));
+        checkEqual('456,789',   subLastDelimFirst('123,456,789', ','));
+        checkEqual('456',       subLastDelimFirst('123ttt456', 'ttt'));
+        checkEqual('t456',      subLastDelimFirst('123ttt456', 'tt'));
+        checkEqual('tt456',     subLastDelimFirst('123ttt456', 't'));
+        checkEqual('',          subLastDelimFirst('123ttt456', ','));
+        checkEqual(',',         subLastDelimFirst('123,,',    ','));
+        checkEqual(',123',      subLastDelimFirst(',,123',    ','));
+        checkEqual(',123,,',    subLastDelimFirst(',,123,,',  ','));
+        checkEqual('',          subLastDelimFirst('123,,',    ',,'));
+        checkEqual('123',       subLastDelimFirst(',,123',    ',,'));
+        checkEqual('123,,',     subLastDelimFirst(',,123,,',  ',,'));
+
+        // object parameter
+        checkEqual('456',
+          subLastDelimFirst({
+            str: '123,456',
+            delimiter: ',',
+          }),
+        );
+        checkEqual('456',
+          subLastDelimFirst(
+            '123,456', {
+              delimiter: ',',
+            }),
+        );
+      });
+    };
+
+    const test_subLastDelimLast = () => {
+      it('test_subLastDelimLast', () => {
+        checkEqual('456',       subLastDelimLast('123,456', ','));
+        checkEqual('789',       subLastDelimLast('123,456,789', ','));
+        checkEqual('456',       subLastDelimLast('123ttt456', 'ttt'));
+        checkEqual('456',       subLastDelimLast('123ttt456', 'tt'));
+        checkEqual('456',       subLastDelimLast('123ttt456', 't'));
+        checkEqual('',          subLastDelimLast('123ttt456', ','));
+        checkEqual('',          subLastDelimLast('123,,',     ','));
+        checkEqual('123',       subLastDelimLast(',,123',     ','));
+        checkEqual('',          subLastDelimLast(',,123,,',   ','));
+        checkEqual('',          subLastDelimLast('123,,',     ',,'));
+        checkEqual('123',       subLastDelimLast(',,123',     ',,'));
+        checkEqual('',          subLastDelimLast(',,123,,',   ',,'));
+
+        // object parameter
+        checkEqual('456',
+          subLastDelimLast({
+            str: '123,456',
+            delimiter: ',',
+          }),
+        );
+        checkEqual('456',
+          subLastDelimLast(
+            '123,456', {
+              delimiter: ',',
+            }),
+        );
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -1216,6 +1342,11 @@ export const test_execute_string = (parts) => {
 
     test_insert();
     test_add();
+
+    test_subFirstDelimFirst();
+    test_subFirstDelimLast();
+    test_subLastDelimFirst();
+    test_subLastDelimLast();
 
   });
 };
