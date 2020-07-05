@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_string = void 0;
 
+/* eslint-disable max-len */
 var test_execute_string = function test_execute_string(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
@@ -41,7 +42,15 @@ var test_execute_string = function test_execute_string(parts) {
         deleteFirst = _parts$string.deleteFirst,
         deleteLast = _parts$string.deleteLast,
         insert = _parts$string.insert,
-        add = _parts$string.add;
+        add = _parts$string.add,
+        subFirstDelimFirst = _parts$string.subFirstDelimFirst,
+        subFirstDelimLast = _parts$string.subFirstDelimLast,
+        subLastDelimFirst = _parts$string.subLastDelimFirst,
+        subLastDelimLast = _parts$string.subLastDelimLast,
+        tagInnerFirst = _parts$string.tagInnerFirst,
+        tagOuterFirst = _parts$string.tagOuterFirst,
+        tagInnerLast = _parts$string.tagInnerLast,
+        tagOuterLast = _parts$string.tagOuterLast;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -1417,6 +1426,198 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_subFirstDelimFirst = function test_subFirstDelimFirst() {
+      it('test_subFirstDelimFirst', function () {
+        checkEqual('123', subFirstDelimFirst('123,456', ','));
+        checkEqual('123', subFirstDelimFirst('123,456,789', ','));
+        checkEqual('123', subFirstDelimFirst('123ttt456', 'ttt'));
+        checkEqual('123', subFirstDelimFirst('123ttt456', 'tt'));
+        checkEqual('123', subFirstDelimFirst('123ttt456', 't'));
+        checkEqual('', subFirstDelimFirst('123ttt456', ','));
+        checkEqual('123', subFirstDelimFirst('123,,', ','));
+        checkEqual('', subFirstDelimFirst(',,123', ','));
+        checkEqual('', subFirstDelimFirst(',,123,,', ','));
+        checkEqual('123', subFirstDelimFirst('123,,', ',,'));
+        checkEqual('', subFirstDelimFirst(',,123', ',,'));
+        checkEqual('', subFirstDelimFirst(',,123,,', ',,')); // object parameter
+
+        checkEqual('123', subFirstDelimFirst({
+          str: '123,456',
+          delimiter: ','
+        }));
+        checkEqual('123', subFirstDelimFirst('123,456', {
+          delimiter: ','
+        }));
+      });
+    };
+
+    var test_subFirstDelimLast = function test_subFirstDelimLast() {
+      it('test_subFirstDelimLast', function () {
+        checkEqual('123', subFirstDelimLast('123,456', ','));
+        checkEqual('123,456', subFirstDelimLast('123,456,789', ','));
+        checkEqual('123', subFirstDelimLast('123ttt456', 'ttt'));
+        checkEqual('123t', subFirstDelimLast('123ttt456', 'tt'));
+        checkEqual('123tt', subFirstDelimLast('123ttt456', 't'));
+        checkEqual('', subFirstDelimLast('123ttt456', ','));
+        checkEqual('123,', subFirstDelimLast('123,,', ','));
+        checkEqual(',', subFirstDelimLast(',,123', ','));
+        checkEqual(',,123,', subFirstDelimLast(',,123,,', ','));
+        checkEqual('123', subFirstDelimLast('123,,', ',,'));
+        checkEqual('', subFirstDelimLast(',,123', ',,'));
+        checkEqual(',,123', subFirstDelimLast(',,123,,', ',,')); // object parameter
+
+        checkEqual('123', subFirstDelimLast({
+          str: '123,456',
+          delimiter: ','
+        }));
+        checkEqual('123', subFirstDelimLast('123,456', {
+          delimiter: ','
+        }));
+      });
+    };
+
+    var test_subLastDelimFirst = function test_subLastDelimFirst() {
+      it('test_subLastDelimFirst', function () {
+        checkEqual('456', subLastDelimFirst('123,456', ','));
+        checkEqual('456,789', subLastDelimFirst('123,456,789', ','));
+        checkEqual('456', subLastDelimFirst('123ttt456', 'ttt'));
+        checkEqual('t456', subLastDelimFirst('123ttt456', 'tt'));
+        checkEqual('tt456', subLastDelimFirst('123ttt456', 't'));
+        checkEqual('', subLastDelimFirst('123ttt456', ','));
+        checkEqual(',', subLastDelimFirst('123,,', ','));
+        checkEqual(',123', subLastDelimFirst(',,123', ','));
+        checkEqual(',123,,', subLastDelimFirst(',,123,,', ','));
+        checkEqual('', subLastDelimFirst('123,,', ',,'));
+        checkEqual('123', subLastDelimFirst(',,123', ',,'));
+        checkEqual('123,,', subLastDelimFirst(',,123,,', ',,')); // object parameter
+
+        checkEqual('456', subLastDelimFirst({
+          str: '123,456',
+          delimiter: ','
+        }));
+        checkEqual('456', subLastDelimFirst('123,456', {
+          delimiter: ','
+        }));
+      });
+    };
+
+    var test_subLastDelimLast = function test_subLastDelimLast() {
+      it('test_subLastDelimLast', function () {
+        checkEqual('456', subLastDelimLast('123,456', ','));
+        checkEqual('789', subLastDelimLast('123,456,789', ','));
+        checkEqual('456', subLastDelimLast('123ttt456', 'ttt'));
+        checkEqual('456', subLastDelimLast('123ttt456', 'tt'));
+        checkEqual('456', subLastDelimLast('123ttt456', 't'));
+        checkEqual('', subLastDelimLast('123ttt456', ','));
+        checkEqual('', subLastDelimLast('123,,', ','));
+        checkEqual('123', subLastDelimLast(',,123', ','));
+        checkEqual('', subLastDelimLast(',,123,,', ','));
+        checkEqual('', subLastDelimLast('123,,', ',,'));
+        checkEqual('123', subLastDelimLast(',,123', ',,'));
+        checkEqual('', subLastDelimLast(',,123,,', ',,')); // object parameter
+
+        checkEqual('456', subLastDelimLast({
+          str: '123,456',
+          delimiter: ','
+        }));
+        checkEqual('456', subLastDelimLast('123,456', {
+          delimiter: ','
+        }));
+      });
+    };
+
+    var test_tagInnerFirst = function test_tagInnerFirst() {
+      it('test_tagInnerFirst', function () {
+        checkEqual('b', tagInnerFirst('  <aba>  ', '<a', 'a>'));
+        checkEqual('', tagInnerFirst('  <aa>  ', '<a', 'a>'));
+        checkEqual('', tagInnerFirst('  <a>  ', '<a', 'a>'));
+        checkEqual('b', tagInnerFirst('<<>>>a<<<a>><<aba>><<a>>a><<>>', '<a', 'a>'));
+        checkEqual('<<<', tagInnerFirst('<<>><a<<<a>><<aba>><<a>>a><<>>', '<a', 'a>')); // object parameter
+
+        checkEqual('b', tagInnerFirst({
+          str: '  <aba>  ',
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('b', tagInnerFirst('  <aba>  ', {
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('b', tagInnerFirst('  <aba>  ', '<a', {
+          endTag: 'a>'
+        }));
+      });
+    };
+
+    var test_tagOuterFirst = function test_tagOuterFirst() {
+      it('test_tagOuterFirst', function () {
+        checkEqual('<aba>', tagOuterFirst('  <aba>  ', '<a', 'a>'));
+        checkEqual('<aa>', tagOuterFirst('  <aa>  ', '<a', 'a>'));
+        checkEqual('', tagOuterFirst('  <a>  ', '<a', 'a>'));
+        checkEqual('<aba>', tagOuterFirst('<<>>>a<<<a>><<aba>><<a>>a><<>>', '<a', 'a>'));
+        checkEqual('<a<<<a>', tagOuterFirst('<<>><a<<<a>><<aba>><<a>>a><<>>', '<a', 'a>')); // object parameter
+
+        checkEqual('<aba>', tagOuterFirst({
+          str: '  <aba>  ',
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('<aba>', tagOuterFirst('  <aba>  ', {
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('<aba>', tagOuterFirst('  <aba>  ', '<a', {
+          endTag: 'a>'
+        }));
+      });
+    };
+
+    var test_tagInnerLast = function test_tagInnerLast() {
+      it('test_tagInnerLast', function () {
+        checkEqual('b', tagInnerLast('  <aba>  ', '<a', 'a>'));
+        checkEqual('', tagInnerLast('  <aa>  ', '<a', 'a>'));
+        checkEqual('', tagInnerLast('  <a>  ', '<a', 'a>'));
+        checkEqual('b', tagInnerLast('<<>>>a<<<a>><<aba>><<a>>>a<<<>>', '<a', 'a>'));
+        checkEqual('>>>', tagInnerLast('<<>><a<<<a>><<aba>><<a>>>a><<>>', '<a', 'a>')); // object parameter
+
+        checkEqual('b', tagInnerLast({
+          str: '  <aba>  ',
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('b', tagInnerLast('  <aba>  ', {
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('b', tagInnerLast('  <aba>  ', '<a', {
+          endTag: 'a>'
+        }));
+      });
+    };
+
+    var test_tagOuterLast = function test_tagOuterLast() {
+      it('test_tagOuterLast', function () {
+        checkEqual('<aba>', tagOuterLast('  <aba>  ', '<a', 'a>'));
+        checkEqual('<aa>', tagOuterLast('  <aa>  ', '<a', 'a>'));
+        checkEqual('', tagOuterLast('  <a>  ', '<a', 'a>'));
+        checkEqual('<aba>', tagOuterLast('<<>>>a<<<a>><<aba>><<a>>>a<<<>>', '<a', 'a>'));
+        checkEqual('<a>>>a>', tagOuterLast('<<>><a<<<a>><<aba>><<a>>>a><<>>', '<a', 'a>')); // object parameter
+
+        checkEqual('<aba>', tagOuterLast({
+          str: '  <aba>  ',
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('<aba>', tagOuterLast('  <aba>  ', {
+          startTag: '<a',
+          endTag: 'a>'
+        }));
+        checkEqual('<aba>', tagOuterLast('  <aba>  ', '<a', {
+          endTag: 'a>'
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -1447,6 +1648,14 @@ var test_execute_string = function test_execute_string(parts) {
     test_deleteLast();
     test_insert();
     test_add();
+    test_subFirstDelimFirst();
+    test_subFirstDelimLast();
+    test_subLastDelimFirst();
+    test_subLastDelimLast();
+    test_tagInnerFirst();
+    test_tagOuterFirst();
+    test_tagInnerLast();
+    test_tagOuterLast();
   });
 };
 

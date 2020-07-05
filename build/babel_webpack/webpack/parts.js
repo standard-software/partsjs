@@ -126,9 +126,9 @@ var _test2 = _interopRequireDefault(__webpack_require__(34));
 
 var _syntax2 = _interopRequireDefault(__webpack_require__(31));
 
-var _compare2 = _interopRequireDefault(__webpack_require__(47));
+var _compare2 = _interopRequireDefault(__webpack_require__(55));
 
-var _convert2 = _interopRequireDefault(__webpack_require__(61));
+var _convert2 = _interopRequireDefault(__webpack_require__(69));
 
 var _number2 = _interopRequireDefault(__webpack_require__(30));
 
@@ -138,7 +138,7 @@ var _object2 = _interopRequireDefault(__webpack_require__(15));
 
 var _array2 = _interopRequireDefault(__webpack_require__(35));
 
-var _consoleHook2 = _interopRequireDefault(__webpack_require__(62));
+var _consoleHook2 = _interopRequireDefault(__webpack_require__(70));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -236,7 +236,7 @@ exports.number = number;
 _copyProperty(_number2["default"], propertyNames.NUMBER, rootNames); // string
 
 
-propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + 'includeFirst, includeLast, includeBothEnds,' + 'excludeFirst, excludeLast, excludeBothEnds,' + 'trimFirst, trimLast, trimBothEnds,' + 'subIndex, subLength, subFirst, subLast,' + 'deleteIndex, deleteLength, deleteFirst, deleteLast,' + 'insert, add,' + '';
+propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + 'includeFirst, includeLast, includeBothEnds,' + 'excludeFirst, excludeLast, excludeBothEnds,' + 'trimFirst, trimLast, trimBothEnds,' + 'subIndex, subLength, subFirst, subLast,' + 'deleteIndex, deleteLength, deleteFirst, deleteLast,' + 'insert, add,' + 'subFirstDelimFirst, subFirstDelimLast, ' + 'subLastDelimFirst, subLastDelimLast, ' + 'tagInnerFirst, tagOuterFirst, ' + 'tagInnerLast, tagOuterLast, ' + '';
 propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + '';
 var string = {};
 exports.string = string;
@@ -6450,7 +6450,7 @@ var _array = __webpack_require__(35);
 
 var _string = __webpack_require__(43);
 
-var _compare = __webpack_require__(47);
+var _compare = __webpack_require__(55);
 
 /**
  * test framework
@@ -8181,46 +8181,7 @@ Object.defineProperty(exports, "__esModule", {
 var _exportNames = {};
 exports["default"] = void 0;
 
-var _matchFormat = _interopRequireWildcard(__webpack_require__(44));
-
-Object.keys(_matchFormat).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _matchFormat[key];
-    }
-  });
-});
-
-var _replaceAll2 = _interopRequireWildcard(__webpack_require__(45));
-
-Object.keys(_replaceAll2).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _replaceAll2[key];
-    }
-  });
-});
-
-var _replaceAll3 = _interopRequireWildcard(__webpack_require__(10));
-
-Object.keys(_replaceAll3).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _replaceAll3[key];
-    }
-  });
-});
-
-var _string_common = _interopRequireWildcard(__webpack_require__(46));
+var _string_common = _interopRequireWildcard(__webpack_require__(44));
 
 Object.keys(_string_common).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -8233,6 +8194,63 @@ Object.keys(_string_common).forEach(function (key) {
   });
 });
 
+var _replaceAll2 = _interopRequireWildcard(__webpack_require__(10));
+
+Object.keys(_replaceAll2).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _replaceAll2[key];
+    }
+  });
+});
+
+var _replaceAll3 = _interopRequireWildcard(__webpack_require__(45));
+
+Object.keys(_replaceAll3).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _replaceAll3[key];
+    }
+  });
+});
+
+var _matchFormat = _interopRequireWildcard(__webpack_require__(46));
+
+Object.keys(_matchFormat).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _matchFormat[key];
+    }
+  });
+});
+
+var _subFirstDelimFirst = _interopRequireDefault(__webpack_require__(47));
+
+var _subFirstDelimLast = _interopRequireDefault(__webpack_require__(48));
+
+var _subLastDelimFirst = _interopRequireDefault(__webpack_require__(49));
+
+var _subLastDelimLast = _interopRequireDefault(__webpack_require__(50));
+
+var _tagInnerFirst = _interopRequireDefault(__webpack_require__(51));
+
+var _tagOuterFirst = _interopRequireDefault(__webpack_require__(52));
+
+var _tagInnerLast = _interopRequireDefault(__webpack_require__(53));
+
+var _tagOuterLast = _interopRequireDefault(__webpack_require__(54));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -8243,290 +8261,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _replaceAll3["default"]), _replaceAll2["default"]), _matchFormat["default"]);
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _matchFormat["default"]), _subFirstDelimFirst["default"]), _subFirstDelimLast["default"]), _subLastDelimFirst["default"]), _subLastDelimLast["default"]), _tagInnerFirst["default"]), _tagOuterFirst["default"]), _tagInnerLast["default"]), _tagOuterLast["default"]);
 
 exports["default"] = _default;
 
 /***/ }),
 /* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchFormat = exports._matchFormat = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-/**
- * matchFormat
- */
-var _matchFormat = function _matchFormat(formatName, value) {
-  var patterns = Object.keys(_matchFormat.pattern);
-  var index = patterns.indexOf(formatName);
-
-  if (index === -1) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") is not exists format"));
-  }
-
-  var result = _matchFormat.pattern[patterns[index]](value);
-
-  if (!(0, _type.isBoolean)(result)) {
-    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + ' function result is not boolean');
-  }
-
-  return result;
-};
-
-exports._matchFormat = _matchFormat;
-_matchFormat.pattern = {};
-
-_matchFormat.clear = function () {
-  _matchFormat.pattern = {};
-};
-
-_matchFormat.add = function (nameArray, patternFunction) {
-  for (var i = 0, l = nameArray.length; i < l; i += 1) {
-    var name = nameArray[i];
-    _matchFormat.pattern[name] = patternFunction;
-  }
-};
-
-_matchFormat.reset = function () {
-  _matchFormat.add(['zenkaku'], function (value) {
-    return value.match(/^[^\x01-\x7E\xA1-\xDF]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['hiragana'], function (value) {
-    return value.match(/^[\u3041-\u3096]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['katakana'], function (value) {
-    return value.match(/^[\u30a1-\u30f6]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['alphabet-number'], function (value) {
-    return value.match(/^[0-9a-zA-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['number'], function (value) {
-    return value.match(/^[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['alphabet'], function (value) {
-    return value.match(/^[a-zA-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['upper_alphabet'], function (value) {
-    return value.match(/^[A-Z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['lower_alphabet'], function (value) {
-    return value.match(/^[a-z]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['integer'], function (value) {
-    return value.match(/^[+|-]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_only'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_integer'], function (value) {
-    return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['float_more'], function (value) {
-    return value.match( // eslint-disable-next-line max-len
-    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
-  }); // float_more
-  //  integer + float + exponential notation
-  //  value.match(new RegExp(
-  //    '^[-|+]?[0-9]*\\.[0-9]*$' +
-  //    '|^[+|-]?[0-9]+$' +
-  //    '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
-  //  , 'g'))) ? true : false;
-
-
-  _matchFormat.add(['2_base_number', 'binary'], function (value) {
-    return value.match(/^[-|+]?[01]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['3_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-2]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['4_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-3]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['5_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-4]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['6_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-5]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['7_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-6]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['8_base_number', 'octal'], function (value) {
-    return value.match(/^[-|+]?[0-7]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['9_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-8]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['10_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['11_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['12_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['13_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['14_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['15_base_number'], function (value) {
-    return value.match(/^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['16_base_number', 'hex'], function (value) {
-    return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d', 'date'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy/m/d'], function (value) {
-    return value.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy/mm/dd'], function (value) {
-    return value.match(/^\d{4}\/\d{2}\/\d{2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n:s'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y/m/d_h:n:s.ms'], function (value) {
-    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_y-m-d'], function (value) {
-    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-m-d'], function (value) {
-    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
-  });
-
-  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
-    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
-  });
-};
-
-_matchFormat.reset();
-
-var matchFormat = function matchFormat(formatName, value) {
-  if ((0, _isObjectParameter.isObjectParameter)(formatName, 'formatName,value')) {
-    var _formatName = formatName;
-    formatName = _formatName.formatName;
-    value = _formatName.value;
-  }
-
-  if (!(0, _type.isString)(formatName)) {
-    throw new TypeError('matchFormat args(formatName) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('matchFormat args(value) is not string');
-  }
-
-  return _matchFormat(formatName, value);
-};
-
-exports.matchFormat = matchFormat;
-var _default = {
-  _matchFormat: _matchFormat,
-  matchFormat: matchFormat
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.replaceAll = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _replaceAll2 = __webpack_require__(10);
-
-var replaceAll = function replaceAll(str, before, after) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, before, after')) {
-    var _str = str;
-    str = _str.str;
-    before = _str.before;
-    after = _str.after;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('replaceAll args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(before)) {
-    throw new TypeError('replaceAll args(before) is not string');
-  }
-
-  if (!(0, _type.isString)(after)) {
-    throw new TypeError('replaceAll args(after) is not string');
-  }
-
-  return (0, _replaceAll2._replaceAll)(str, before, after);
-};
-
-exports.replaceAll = replaceAll;
-var _default = {
-  replaceAll: replaceAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8544,8 +8284,6 @@ var _isObjectParameter = __webpack_require__(9);
 var _number = __webpack_require__(30);
 
 var _array = __webpack_require__(35);
-
-var _compare = __webpack_require__(47);
 
 /**
  * repeat
@@ -9741,7 +9479,869 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.replaceAll = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _replaceAll2 = __webpack_require__(10);
+
+var replaceAll = function replaceAll(str, before, after) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, before, after')) {
+    var _str = str;
+    str = _str.str;
+    before = _str.before;
+    after = _str.after;
+  }
+
+  if (!(0, _type.isString)(str)) {
+    throw new TypeError('replaceAll args(str) is not string');
+  }
+
+  if (!(0, _type.isString)(before)) {
+    throw new TypeError('replaceAll args(before) is not string');
+  }
+
+  if (!(0, _type.isString)(after)) {
+    throw new TypeError('replaceAll args(after) is not string');
+  }
+
+  return (0, _replaceAll2._replaceAll)(str, before, after);
+};
+
+exports.replaceAll = replaceAll;
+var _default = {
+  replaceAll: replaceAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchFormat = exports._matchFormat = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+/**
+ * matchFormat
+ */
+var _matchFormat = function _matchFormat(formatName, value) {
+  var patterns = Object.keys(_matchFormat.pattern);
+  var index = patterns.indexOf(formatName);
+
+  if (index === -1) {
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ") is not exists format"));
+  }
+
+  var result = _matchFormat.pattern[patterns[index]](value);
+
+  if (!(0, _type.isBoolean)(result)) {
+    throw new RangeError("_matchFormat args(formatName:".concat(formatName, ")") + ' function result is not boolean');
+  }
+
+  return result;
+};
+
+exports._matchFormat = _matchFormat;
+_matchFormat.pattern = {};
+
+_matchFormat.clear = function () {
+  _matchFormat.pattern = {};
+};
+
+_matchFormat.add = function (nameArray, patternFunction) {
+  for (var i = 0, l = nameArray.length; i < l; i += 1) {
+    var name = nameArray[i];
+    _matchFormat.pattern[name] = patternFunction;
+  }
+};
+
+_matchFormat.reset = function () {
+  _matchFormat.add(['zenkaku'], function (value) {
+    return value.match(/^[^\x01-\x7E\xA1-\xDF]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['hiragana'], function (value) {
+    return value.match(/^[\u3041-\u3096]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['katakana'], function (value) {
+    return value.match(/^[\u30a1-\u30f6]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['alphabet-number'], function (value) {
+    return value.match(/^[0-9a-zA-Z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['number'], function (value) {
+    return value.match(/^[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['alphabet'], function (value) {
+    return value.match(/^[a-zA-Z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['upper_alphabet'], function (value) {
+    return value.match(/^[A-Z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['lower_alphabet'], function (value) {
+    return value.match(/^[a-z]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['integer'], function (value) {
+    return value.match(/^[+|-]?[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['float_only'], function (value) {
+    return value.match(/^[-|+]?[0-9]*\.[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['float_integer'], function (value) {
+    return value.match(/^[-|+]?[0-9]*\.[0-9]+$|^[+|-]?[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['float_more'], function (value) {
+    return value.match( // eslint-disable-next-line max-len
+    /^[-|+]?[0-9]*\.[0-9]*$|^[+|-]?[0-9]+$|^[-|+]?[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?$/) ? true : false;
+  }); // float_more
+  //  integer + float + exponential notation
+  //  value.match(new RegExp(
+  //    '^[-|+]?[0-9]*\\.[0-9]*$' +
+  //    '|^[+|-]?[0-9]+$' +
+  //    '|^[-|+]?[0-9]+\\.?[0-9]*([eE][+-]?[0-9]+)?$'
+  //  , 'g'))) ? true : false;
+
+
+  _matchFormat.add(['2_base_number', 'binary'], function (value) {
+    return value.match(/^[-|+]?[01]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['3_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-2]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['4_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-3]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['5_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-4]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['6_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-5]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['7_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-6]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['8_base_number', 'octal'], function (value) {
+    return value.match(/^[-|+]?[0-7]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['9_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-8]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['10_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['11_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A]+$|^[-|+]?[0-9a]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['12_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9AB]+$|^[-|+]?[0-9ab]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['13_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A-C]+$|^[-|+]?[0-9a-c]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['14_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A-D]+$|^[-|+]?[0-9a-d]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['15_base_number'], function (value) {
+    return value.match(/^[-|+]?[0-9A-E]+$|^[-|+]?[0-9a-e]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['16_base_number', 'hex'], function (value) {
+    return value.match(/^[-|+]?[0-9A-F]+$|^[-|+]?[0-9a-f]+$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d', 'date'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy/m/d'], function (value) {
+    return value.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy/mm/dd'], function (value) {
+    return value.match(/^\d{4}\/\d{2}\/\d{2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d_h:n'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d_h:n:s'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y/m/d_h:n:s.ms'], function (value) {
+    return value.match(/^\d{1,4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_y-m-d'], function (value) {
+    return value.match(/^\d{1,4}-\d{1,2}-\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy-m-d'], function (value) {
+    return value.match(/^\d{4}-\d{1,2}-\d{1,2}$/) ? true : false;
+  });
+
+  _matchFormat.add(['date_yyyy-mm-dd'], function (value) {
+    return value.match(/^\d{4}-\d{2}-\d{2}$/) ? true : false;
+  });
+};
+
+_matchFormat.reset();
+
+var matchFormat = function matchFormat(formatName, value) {
+  if ((0, _isObjectParameter.isObjectParameter)(formatName, 'formatName,value')) {
+    var _formatName = formatName;
+    formatName = _formatName.formatName;
+    value = _formatName.value;
+  }
+
+  if (!(0, _type.isString)(formatName)) {
+    throw new TypeError('matchFormat args(formatName) is not string');
+  }
+
+  if (!(0, _type.isString)(value)) {
+    throw new TypeError('matchFormat args(value) is not string');
+  }
+
+  return _matchFormat(formatName, value);
+};
+
+exports.matchFormat = matchFormat;
+var _default = {
+  _matchFormat: _matchFormat,
+  matchFormat: matchFormat
+};
+exports["default"] = _default;
+
+/***/ }),
 /* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.subFirstDelimFirst = exports._subFirstDelimFirst = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _subFirstDelimFirst = function _subFirstDelimFirst(str, delimiter) {
+  var index = (0, _string._indexOfFirst)(str, delimiter);
+
+  if (index === -1) {
+    return '';
+  } else {
+    return (0, _string._subIndex)(str, 0, index - 1);
+  }
+};
+
+exports._subFirstDelimFirst = _subFirstDelimFirst;
+
+var subFirstDelimFirst = function subFirstDelimFirst(str, delimiter) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, delimiter')) {
+    var _str = str;
+    str = _str.str;
+    delimiter = _str.delimiter;
+  } else if ((0, _isObjectParameter.isObjectParameter)(delimiter, 'delimiter')) {
+    var _delimiter = delimiter;
+    delimiter = _delimiter.delimiter;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('subFirstDelimFirst args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(delimiter)) {
+    throw new TypeError('subFirstDelimFirst args(delimiter) is not string');
+  }
+
+  return _subFirstDelimFirst(str, delimiter);
+};
+
+exports.subFirstDelimFirst = subFirstDelimFirst;
+var _default = {
+  _subFirstDelimFirst: _subFirstDelimFirst,
+  subFirstDelimFirst: subFirstDelimFirst
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.subFirstDelimLast = exports._subFirstDelimLast = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _subFirstDelimLast = function _subFirstDelimLast(str, delimiter) {
+  var index = (0, _string._indexOfLast)(str, delimiter);
+
+  if (index === -1) {
+    return '';
+  } else {
+    return (0, _string._subIndex)(str, 0, index - 1);
+  }
+};
+
+exports._subFirstDelimLast = _subFirstDelimLast;
+
+var subFirstDelimLast = function subFirstDelimLast(str, delimiter) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, delimiter')) {
+    var _str = str;
+    str = _str.str;
+    delimiter = _str.delimiter;
+  } else if ((0, _isObjectParameter.isObjectParameter)(delimiter, 'delimiter')) {
+    var _delimiter = delimiter;
+    delimiter = _delimiter.delimiter;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('subFirstDelimLast args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(delimiter)) {
+    throw new TypeError('subFirstDelimLast args(delimiter) is not string');
+  }
+
+  return _subFirstDelimLast(str, delimiter);
+};
+
+exports.subFirstDelimLast = subFirstDelimLast;
+var _default = {
+  _subFirstDelimLast: _subFirstDelimLast,
+  subFirstDelimLast: subFirstDelimLast
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.subLastDelimFirst = exports._subLastDelimFirst = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _subLastDelimFirst = function _subLastDelimFirst(str, delimiter) {
+  var index = (0, _string._indexOfFirst)(str, delimiter);
+
+  if (index === -1) {
+    return '';
+  } else {
+    return (0, _string._subLength)(str, index + delimiter.length);
+  }
+};
+
+exports._subLastDelimFirst = _subLastDelimFirst;
+
+var subLastDelimFirst = function subLastDelimFirst(str, delimiter) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, delimiter')) {
+    var _str = str;
+    str = _str.str;
+    delimiter = _str.delimiter;
+  } else if ((0, _isObjectParameter.isObjectParameter)(delimiter, 'delimiter')) {
+    var _delimiter = delimiter;
+    delimiter = _delimiter.delimiter;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('subLastDelimFirst args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(delimiter)) {
+    throw new TypeError('subLastDelimFirst args(delimiter) is not string');
+  }
+
+  return _subLastDelimFirst(str, delimiter);
+};
+
+exports.subLastDelimFirst = subLastDelimFirst;
+var _default = {
+  _subLastDelimFirst: _subLastDelimFirst,
+  subLastDelimFirst: subLastDelimFirst
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.subLastDelimLast = exports._subLastDelimLast = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _subLastDelimLast = function _subLastDelimLast(str, delimiter) {
+  var index = (0, _string._indexOfLast)(str, delimiter);
+
+  if (index === -1) {
+    return '';
+  } else {
+    return (0, _string._subLength)(str, index + delimiter.length);
+  }
+};
+
+exports._subLastDelimLast = _subLastDelimLast;
+
+var subLastDelimLast = function subLastDelimLast(str, delimiter) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, delimiter')) {
+    var _str = str;
+    str = _str.str;
+    delimiter = _str.delimiter;
+  } else if ((0, _isObjectParameter.isObjectParameter)(delimiter, 'delimiter')) {
+    var _delimiter = delimiter;
+    delimiter = _delimiter.delimiter;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('subLastDelimLast args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(delimiter)) {
+    throw new TypeError('subLastDelimLast args(delimiter) is not string');
+  }
+
+  return _subLastDelimLast(str, delimiter);
+};
+
+exports.subLastDelimLast = subLastDelimLast;
+var _default = {
+  _subLastDelimLast: _subLastDelimLast,
+  subLastDelimLast: subLastDelimLast
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.tagInnerFirst = exports._tagInnerFirst = exports._tagInnerFirstBase = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _tagInnerFirstBase = function _tagInnerFirstBase(str, startTag, endTag) {
+  if (str === '') {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  var indexStartTag = (0, _string._indexOfFirst)(str, startTag);
+
+  if (indexStartTag === -1) {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  var indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
+
+  if (indexEndTag === -1) {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
+
+  if (indexStartTag === -1) {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  return {
+    find: true,
+    value: (0, _string._subIndex)(str, indexStartTag + startTag.length, indexEndTag - 1)
+  };
+};
+
+exports._tagInnerFirstBase = _tagInnerFirstBase;
+
+var _tagInnerFirst = function _tagInnerFirst(str, startTag, endTag) {
+  var result = _tagInnerFirstBase(str, startTag, endTag);
+
+  return result.value;
+};
+
+exports._tagInnerFirst = _tagInnerFirst;
+
+var tagInnerFirst = function tagInnerFirst(str, startTag, endTag) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, startTag, endTag')) {
+    var _str = str;
+    str = _str.str;
+    startTag = _str.startTag;
+    endTag = _str.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(startTag, 'startTag, endTag')) {
+    var _startTag = startTag;
+    startTag = _startTag.startTag;
+    endTag = _startTag.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(endTag, 'endTag')) {
+    var _endTag = endTag;
+    endTag = _endTag.endTag;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('tagInnerFirst args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(startTag)) {
+    throw new TypeError('tagInnerFirst args(startTag) is not string');
+  }
+
+  if (!(0, _isType.isString)(endTag)) {
+    throw new TypeError('tagInnerFirst args(endTag) is not string');
+  }
+
+  return _tagInnerFirst(str, startTag, endTag);
+};
+
+exports.tagInnerFirst = tagInnerFirst;
+var _default = {
+  _tagInnerFirstBase: _tagInnerFirstBase,
+  _tagInnerFirst: _tagInnerFirst,
+  tagInnerFirst: tagInnerFirst
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.tagOuterFirst = exports._tagOuterFirst = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _tagInnerFirst = __webpack_require__(51);
+
+var _tagOuterFirst = function _tagOuterFirst(str, startTag, endTag) {
+  var result = (0, _tagInnerFirst._tagInnerFirstBase)(str, startTag, endTag);
+
+  if (!result.find) {
+    return '';
+  }
+
+  return startTag + result.value + endTag;
+};
+
+exports._tagOuterFirst = _tagOuterFirst;
+
+var tagOuterFirst = function tagOuterFirst(str, startTag, endTag) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, startTag, endTag')) {
+    var _str = str;
+    str = _str.str;
+    startTag = _str.startTag;
+    endTag = _str.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(startTag, 'startTag, endTag')) {
+    var _startTag = startTag;
+    startTag = _startTag.startTag;
+    endTag = _startTag.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(endTag, 'endTag')) {
+    var _endTag = endTag;
+    endTag = _endTag.endTag;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('tagOuterFirst args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(startTag)) {
+    throw new TypeError('tagOuterFirst args(startTag) is not string');
+  }
+
+  if (!(0, _isType.isString)(endTag)) {
+    throw new TypeError('tagOuterFirst args(endTag) is not string');
+  }
+
+  return _tagOuterFirst(str, startTag, endTag);
+};
+
+exports.tagOuterFirst = tagOuterFirst;
+var _default = {
+  _tagOuterFirst: _tagOuterFirst,
+  tagOuterFirst: tagOuterFirst
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.tagInnerLast = exports._tagInnerLast = exports._tagInnerLastBase = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _tagInnerLastBase = function _tagInnerLastBase(str, startTag, endTag) {
+  if (str === '') {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  var indexEndTag = (0, _string._indexOfLast)(str, endTag);
+
+  if (indexEndTag === -1) {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  var indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
+
+  if (indexStartTag === -1) {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
+
+  if (indexEndTag === -1) {
+    return {
+      find: false,
+      value: ''
+    };
+  }
+
+  return {
+    find: true,
+    value: (0, _string._subIndex)(str, indexStartTag + startTag.length, indexEndTag - 1)
+  };
+};
+
+exports._tagInnerLastBase = _tagInnerLastBase;
+
+var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
+  var result = _tagInnerLastBase(str, startTag, endTag);
+
+  return result.value;
+};
+
+exports._tagInnerLast = _tagInnerLast;
+
+var tagInnerLast = function tagInnerLast(str, startTag, endTag) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, startTag, endTag')) {
+    var _str = str;
+    str = _str.str;
+    startTag = _str.startTag;
+    endTag = _str.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(startTag, 'startTag, endTag')) {
+    var _startTag = startTag;
+    startTag = _startTag.startTag;
+    endTag = _startTag.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(endTag, 'endTag')) {
+    var _endTag = endTag;
+    endTag = _endTag.endTag;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('tagInnerLast args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(startTag)) {
+    throw new TypeError('tagInnerLast args(startTag) is not string');
+  }
+
+  if (!(0, _isType.isString)(endTag)) {
+    throw new TypeError('tagInnerLast args(endTag) is not string');
+  }
+
+  return _tagInnerLast(str, startTag, endTag);
+};
+
+exports.tagInnerLast = tagInnerLast;
+var _default = {
+  _tagInnerLastBase: _tagInnerLastBase,
+  _tagInnerLast: _tagInnerLast,
+  tagInnerLast: tagInnerLast
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.tagOuterLast = exports._tagOuterLast = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _string = __webpack_require__(43);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _tagInnerLast = __webpack_require__(53);
+
+var _tagOuterLast = function _tagOuterLast(str, startTag, endTag) {
+  var result = (0, _tagInnerLast._tagInnerLastBase)(str, startTag, endTag);
+
+  if (!result.find) {
+    return '';
+  }
+
+  return startTag + result.value + endTag;
+};
+
+exports._tagOuterLast = _tagOuterLast;
+
+var tagOuterLast = function tagOuterLast(str, startTag, endTag) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, startTag, endTag')) {
+    var _str = str;
+    str = _str.str;
+    startTag = _str.startTag;
+    endTag = _str.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(startTag, 'startTag, endTag')) {
+    var _startTag = startTag;
+    startTag = _startTag.startTag;
+    endTag = _startTag.endTag;
+  } else if ((0, _isObjectParameter.isObjectParameter)(endTag, 'endTag')) {
+    var _endTag = endTag;
+    endTag = _endTag.endTag;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError('tagOuterLast args(str) is not string');
+  }
+
+  if (!(0, _isType.isString)(startTag)) {
+    throw new TypeError('tagOuterLast args(startTag) is not string');
+  }
+
+  if (!(0, _isType.isString)(endTag)) {
+    throw new TypeError('tagOuterLast args(endTag) is not string');
+  }
+
+  return _tagOuterLast(str, startTag, endTag);
+};
+
+exports.tagOuterLast = tagOuterLast;
+var _default = {
+  _tagOuterLast: _tagOuterLast,
+  tagOuterLast: tagOuterLast
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9755,7 +10355,7 @@ Object.defineProperty(exports, "__esModule", {
 var _exportNames = {};
 exports["default"] = void 0;
 
-var _equal = _interopRequireWildcard(__webpack_require__(48));
+var _equal = _interopRequireWildcard(__webpack_require__(56));
 
 Object.keys(_equal).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9794,7 +10394,7 @@ Object.keys(_includes).forEach(function (key) {
   });
 });
 
-var _someMatchAll = _interopRequireWildcard(__webpack_require__(49));
+var _someMatchAll = _interopRequireWildcard(__webpack_require__(57));
 
 Object.keys(_someMatchAll).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9807,7 +10407,7 @@ Object.keys(_someMatchAll).forEach(function (key) {
   });
 });
 
-var _allMatchAll = _interopRequireWildcard(__webpack_require__(52));
+var _allMatchAll = _interopRequireWildcard(__webpack_require__(60));
 
 Object.keys(_allMatchAll).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9820,7 +10420,7 @@ Object.keys(_allMatchAll).forEach(function (key) {
   });
 });
 
-var _indexOfMatchAll = _interopRequireWildcard(__webpack_require__(50));
+var _indexOfMatchAll = _interopRequireWildcard(__webpack_require__(58));
 
 Object.keys(_indexOfMatchAll).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9833,7 +10433,7 @@ Object.keys(_indexOfMatchAll).forEach(function (key) {
   });
 });
 
-var _matchAllValue = _interopRequireWildcard(__webpack_require__(53));
+var _matchAllValue = _interopRequireWildcard(__webpack_require__(61));
 
 Object.keys(_matchAllValue).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9846,7 +10446,7 @@ Object.keys(_matchAllValue).forEach(function (key) {
   });
 });
 
-var _matchAll = _interopRequireWildcard(__webpack_require__(51));
+var _matchAll = _interopRequireWildcard(__webpack_require__(59));
 
 Object.keys(_matchAll).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9859,7 +10459,7 @@ Object.keys(_matchAll).forEach(function (key) {
   });
 });
 
-var _someMatchSome = _interopRequireWildcard(__webpack_require__(54));
+var _someMatchSome = _interopRequireWildcard(__webpack_require__(62));
 
 Object.keys(_someMatchSome).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9885,7 +10485,7 @@ Object.keys(_allMatchSome).forEach(function (key) {
   });
 });
 
-var _indexOfMatchSome = _interopRequireWildcard(__webpack_require__(55));
+var _indexOfMatchSome = _interopRequireWildcard(__webpack_require__(63));
 
 Object.keys(_indexOfMatchSome).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9898,7 +10498,7 @@ Object.keys(_indexOfMatchSome).forEach(function (key) {
   });
 });
 
-var _matchSomeValue = _interopRequireWildcard(__webpack_require__(56));
+var _matchSomeValue = _interopRequireWildcard(__webpack_require__(64));
 
 Object.keys(_matchSomeValue).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9924,7 +10524,7 @@ Object.keys(_matchSome).forEach(function (key) {
   });
 });
 
-var _someMatch = _interopRequireWildcard(__webpack_require__(57));
+var _someMatch = _interopRequireWildcard(__webpack_require__(65));
 
 Object.keys(_someMatch).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9950,7 +10550,7 @@ Object.keys(_allMatch).forEach(function (key) {
   });
 });
 
-var _indexOfMatch = _interopRequireWildcard(__webpack_require__(58));
+var _indexOfMatch = _interopRequireWildcard(__webpack_require__(66));
 
 Object.keys(_indexOfMatch).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9963,7 +10563,7 @@ Object.keys(_indexOfMatch).forEach(function (key) {
   });
 });
 
-var _initialValue = _interopRequireWildcard(__webpack_require__(59));
+var _initialValue = _interopRequireWildcard(__webpack_require__(67));
 
 Object.keys(_initialValue).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -9976,7 +10576,7 @@ Object.keys(_initialValue).forEach(function (key) {
   });
 });
 
-var _matchValue = _interopRequireWildcard(__webpack_require__(60));
+var _matchValue = _interopRequireWildcard(__webpack_require__(68));
 
 Object.keys(_matchValue).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -10030,7 +10630,7 @@ var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSp
 exports["default"] = _default;
 
 /***/ }),
-/* 48 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10509,7 +11109,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 49 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10520,7 +11120,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchAll = exports._someMatchAll = void 0;
 
-var _indexOfMatchAll2 = __webpack_require__(50);
+var _indexOfMatchAll2 = __webpack_require__(58);
 
 /**
  * someMatchAll
@@ -10543,7 +11143,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 50 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10560,7 +11160,7 @@ var _isObjectParameter = __webpack_require__(9);
 
 var _array_common = __webpack_require__(29);
 
-var _matchAll2 = __webpack_require__(51);
+var _matchAll2 = __webpack_require__(59);
 
 /**
  * indexOfMatchAll
@@ -10602,7 +11202,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 51 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10657,7 +11257,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 52 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10674,7 +11274,7 @@ var _isObjectParameter = __webpack_require__(9);
 
 var _array_common = __webpack_require__(29);
 
-var _matchAll2 = __webpack_require__(51);
+var _matchAll2 = __webpack_require__(59);
 
 /**
  * allMatchAll
@@ -10716,7 +11316,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 53 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10731,7 +11331,7 @@ var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _matchAll2 = __webpack_require__(51);
+var _matchAll2 = __webpack_require__(59);
 
 /**
  * matchAllValue
@@ -10797,7 +11397,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 54 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10808,7 +11408,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchSome = exports._someMatchSome = void 0;
 
-var _indexOfMatchSome2 = __webpack_require__(55);
+var _indexOfMatchSome2 = __webpack_require__(63);
 
 /**
  * someMatchSome
@@ -10831,7 +11431,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 55 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10890,7 +11490,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 56 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10971,7 +11571,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 57 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10982,7 +11582,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatch = exports._someMatch = void 0;
 
-var _indexOfMatch2 = __webpack_require__(58);
+var _indexOfMatch2 = __webpack_require__(66);
 
 /**
  * someMatch
@@ -11005,7 +11605,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 58 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11060,7 +11660,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 59 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11075,7 +11675,7 @@ var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _matchSomeValue2 = __webpack_require__(56);
+var _matchSomeValue2 = __webpack_require__(64);
 
 /**
  * initialValue
@@ -11121,7 +11721,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 60 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11198,7 +11798,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 61 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11211,7 +11811,7 @@ exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDe
 
 var _type = __webpack_require__(4);
 
-var _compare = __webpack_require__(47);
+var _compare = __webpack_require__(55);
 
 var _string = __webpack_require__(43);
 
@@ -11613,7 +12213,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 62 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11626,7 +12226,7 @@ exports["default"] = exports.acceptDebug = exports.acceptError = exports.acceptW
 
 var _type = __webpack_require__(4);
 
-var _compare = __webpack_require__(47);
+var _compare = __webpack_require__(55);
 
 var _array = __webpack_require__(35);
 

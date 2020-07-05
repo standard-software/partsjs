@@ -13,8 +13,6 @@ var _number = require("../number/number.js");
 
 var _array = require("../array/array.js");
 
-var _compare = require("../compare/compare.js");
-
 /**
  * repeat
  */
