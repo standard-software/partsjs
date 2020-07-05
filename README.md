@@ -246,6 +246,9 @@ same [How to use Google Apps Script]
   - subLastDelimFirst.js 
   - subLastDelimLast.js
   - support full object parameter
+- add tagInner/OuterFirst
+  - tagInnerFirst.js
+  - tagOuterFirst.js
 
 ### 6.3.0
 #### 2020/06/30(Tue)

@@ -179,6 +179,7 @@ propertyNames.STRING_PUBLIC =
   'insert, add,' +
   'subFirstDelimFirst, subFirstDelimLast, ' +
   'subLastDelimFirst, subLastDelimLast, ' +
+  'tagInnerFirst, tagOuterFirst, ' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
