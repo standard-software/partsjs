@@ -311,10 +311,5 @@ same [How to use Google Apps Script]
 - delete test_jest/source
 - delete test_exec/release_wsh
 
-### 5.8.2
-#### 2020/06/19(Fri)
-- bugfix not necessary require isException
-- bugfix not necessary require _findIndex
-
 ### More Info
 [VERSION.md](./VERSION.md)

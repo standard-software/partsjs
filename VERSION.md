@@ -2,6 +2,36 @@
 
 ## Version
 
+### 6.4.0
+#### 2020/07/05(Sun)
+- update clone / cloneDeep
+  - args cloneFunction
+  - support full object parameter
+  - cloneFunction.js clone.js cloneDeep.js
+- add sub First/Last Delim First/Last
+  - subFirstDelimFirst.js 
+  - subFirstDelimLast.js
+  - subLastDelimFirst.js 
+  - subLastDelimLast.js
+  - support full object parameter
+- add tag Inner/Outer First/Last
+  - tagInnerFirst.js
+  - tagOuterFirst.js
+  - tagInnerLast.js
+  - tagOuterLast.js
+
+### 6.3.0
+#### 2020/06/30(Tue)
+- delete isType.js _objectToStringCheck
+- bugfix isBooleanObject / isStringObject
+- rename
+  - isArrayType >> isArraySeries
+    - alias name isArrayType
+  - isObjectType >> isObjectLike
+    - alias name isObjectType
+- update clone / cloneDeep
+  - support ObjectFromNull
+
 ### 6.2.0
 #### 2020/06/30(Tue)
 - object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,
