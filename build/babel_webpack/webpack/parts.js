@@ -9998,7 +9998,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.tagInnerFirst = exports._tagInnerFirst = exports._tagInnerFirstBase = void 0;
+exports["default"] = exports.tagInnerFirst = exports._tagInnerFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
@@ -10006,53 +10006,16 @@ var _string = __webpack_require__(43);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _tagInnerFirstBase = function _tagInnerFirstBase(str, startTag, endTag) {
-  if (str === '') {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  var indexStartTag = (0, _string._indexOfFirst)(str, startTag);
-
-  if (indexStartTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  var indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
-
-  if (indexEndTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
-
-  if (indexStartTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  return {
-    find: true,
-    value: (0, _string._subIndex)(str, indexStartTag + startTag.length, indexEndTag - 1)
-  };
-};
-
-exports._tagInnerFirstBase = _tagInnerFirstBase;
+var _tagOuterFirst2 = __webpack_require__(52);
 
 var _tagInnerFirst = function _tagInnerFirst(str, startTag, endTag) {
-  var result = _tagInnerFirstBase(str, startTag, endTag);
+  var result = (0, _tagOuterFirst2._tagOuterFirst)(str, startTag, endTag);
 
-  return result.value;
+  if (result.length === 0) {
+    return '';
+  }
+
+  return (0, _string._subIndex)(result, startTag.length, result.length - endTag.length - 1);
 };
 
 exports._tagInnerFirst = _tagInnerFirst;
@@ -10089,7 +10052,6 @@ var tagInnerFirst = function tagInnerFirst(str, startTag, endTag) {
 
 exports.tagInnerFirst = tagInnerFirst;
 var _default = {
-  _tagInnerFirstBase: _tagInnerFirstBase,
   _tagInnerFirst: _tagInnerFirst,
   tagInnerFirst: tagInnerFirst
 };
@@ -10113,16 +10075,30 @@ var _string = __webpack_require__(43);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _tagInnerFirst = __webpack_require__(51);
-
 var _tagOuterFirst = function _tagOuterFirst(str, startTag, endTag) {
-  var result = (0, _tagInnerFirst._tagInnerFirstBase)(str, startTag, endTag);
-
-  if (!result.find) {
+  if (str === '') {
     return '';
   }
 
-  return startTag + result.value + endTag;
+  var indexStartTag = (0, _string._indexOfFirst)(str, startTag);
+
+  if (indexStartTag === -1) {
+    return '';
+  }
+
+  var indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
+
+  if (indexEndTag === -1) {
+    return '';
+  }
+
+  indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
+
+  if (indexStartTag === -1) {
+    return '';
+  }
+
+  return (0, _string._subIndex)(str, indexStartTag, indexEndTag + endTag.length - 1);
 };
 
 exports._tagOuterFirst = _tagOuterFirst;
@@ -10174,7 +10150,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.tagInnerLast = exports._tagInnerLast = exports._tagInnerLastBase = void 0;
+exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
 var _isType = __webpack_require__(6);
 
@@ -10182,53 +10158,16 @@ var _string = __webpack_require__(43);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _tagInnerLastBase = function _tagInnerLastBase(str, startTag, endTag) {
-  if (str === '') {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  var indexEndTag = (0, _string._indexOfLast)(str, endTag);
-
-  if (indexEndTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  var indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
-
-  if (indexStartTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
-
-  if (indexEndTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  return {
-    find: true,
-    value: (0, _string._subIndex)(str, indexStartTag + startTag.length, indexEndTag - 1)
-  };
-};
-
-exports._tagInnerLastBase = _tagInnerLastBase;
+var _tagOuterLast2 = __webpack_require__(54);
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
-  var result = _tagInnerLastBase(str, startTag, endTag);
+  var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
 
-  return result.value;
+  if (result.length === 0) {
+    return '';
+  }
+
+  return (0, _string._subIndex)(result, startTag.length, result.length - endTag.length - 1);
 };
 
 exports._tagInnerLast = _tagInnerLast;
@@ -10265,7 +10204,6 @@ var tagInnerLast = function tagInnerLast(str, startTag, endTag) {
 
 exports.tagInnerLast = tagInnerLast;
 var _default = {
-  _tagInnerLastBase: _tagInnerLastBase,
   _tagInnerLast: _tagInnerLast,
   tagInnerLast: tagInnerLast
 };
@@ -10289,16 +10227,30 @@ var _string = __webpack_require__(43);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _tagInnerLast = __webpack_require__(53);
-
 var _tagOuterLast = function _tagOuterLast(str, startTag, endTag) {
-  var result = (0, _tagInnerLast._tagInnerLastBase)(str, startTag, endTag);
-
-  if (!result.find) {
+  if (str === '') {
     return '';
   }
 
-  return startTag + result.value + endTag;
+  var indexEndTag = (0, _string._indexOfLast)(str, endTag);
+
+  if (indexEndTag === -1) {
+    return '';
+  }
+
+  var indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
+
+  if (indexStartTag === -1) {
+    return '';
+  }
+
+  indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
+
+  if (indexEndTag === -1) {
+    return '';
+  }
+
+  return (0, _string._subIndex)(str, indexStartTag, indexEndTag + endTag.length - 1);
 };
 
 exports._tagOuterLast = _tagOuterLast;

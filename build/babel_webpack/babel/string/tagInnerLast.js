@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.tagInnerLast = exports._tagInnerLast = exports._tagInnerLastBase = void 0;
+exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
 var _isType = require("../type/isType.js");
 
@@ -11,53 +11,16 @@ var _string = require("../string/string.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _tagInnerLastBase = function _tagInnerLastBase(str, startTag, endTag) {
-  if (str === '') {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  var indexEndTag = (0, _string._indexOfLast)(str, endTag);
-
-  if (indexEndTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  var indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
-
-  if (indexStartTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
-
-  if (indexEndTag === -1) {
-    return {
-      find: false,
-      value: ''
-    };
-  }
-
-  return {
-    find: true,
-    value: (0, _string._subIndex)(str, indexStartTag + startTag.length, indexEndTag - 1)
-  };
-};
-
-exports._tagInnerLastBase = _tagInnerLastBase;
+var _tagOuterLast2 = require("./tagOuterLast.js");
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
-  var result = _tagInnerLastBase(str, startTag, endTag);
+  var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
 
-  return result.value;
+  if (result.length === 0) {
+    return '';
+  }
+
+  return (0, _string._subIndex)(result, startTag.length, result.length - endTag.length - 1);
 };
 
 exports._tagInnerLast = _tagInnerLast;
@@ -94,7 +57,6 @@ var tagInnerLast = function tagInnerLast(str, startTag, endTag) {
 
 exports.tagInnerLast = tagInnerLast;
 var _default = {
-  _tagInnerLastBase: _tagInnerLastBase,
   _tagInnerLast: _tagInnerLast,
   tagInnerLast: tagInnerLast
 };

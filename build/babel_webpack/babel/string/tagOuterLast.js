@@ -11,16 +11,30 @@ var _string = require("../string/string.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _tagInnerLast = require("./tagInnerLast.js");
-
 var _tagOuterLast = function _tagOuterLast(str, startTag, endTag) {
-  var result = (0, _tagInnerLast._tagInnerLastBase)(str, startTag, endTag);
-
-  if (!result.find) {
+  if (str === '') {
     return '';
   }
 
-  return startTag + result.value + endTag;
+  var indexEndTag = (0, _string._indexOfLast)(str, endTag);
+
+  if (indexEndTag === -1) {
+    return '';
+  }
+
+  var indexStartTag = (0, _string._indexOfLast)(str, startTag, indexEndTag - startTag.length);
+
+  if (indexStartTag === -1) {
+    return '';
+  }
+
+  indexEndTag = (0, _string._indexOfFirst)(str, endTag, indexStartTag + startTag.length);
+
+  if (indexEndTag === -1) {
+    return '';
+  }
+
+  return (0, _string._subIndex)(str, indexStartTag, indexEndTag + endTag.length - 1);
 };
 
 exports._tagOuterLast = _tagOuterLast;
