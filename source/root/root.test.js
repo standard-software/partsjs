@@ -25,7 +25,11 @@ export const test_execute_root = (parts) => {
         var object1 = clone(testObject1);
         object1.a = 0;
         checkEqual(0, object1.a);
+        checkEqual(2, object1.b);
+        checkEqual(3, object1.c);
         checkEqual(1, testObject1.a);
+        checkEqual(2, testObject1.b);
+        checkEqual(3, testObject1.c);
 
         // no clone deep
         var testObject2 = { a: 4, b: 5, c: 6 };
@@ -166,7 +170,6 @@ export const test_execute_root = (parts) => {
       });
     };
 
-
     const test_clone_regexp = () => {
       it('test_clone_regexp', () => {
         const testRegExp1 = new RegExp('^a');
@@ -201,6 +204,57 @@ export const test_execute_root = (parts) => {
         checkEqual(false,  regexp1 === testRegExp2);
         checkEqual(true,  '^a' === testRegExp2.source);
         checkEqual(false, '^a' === regexp1.source);
+      });
+    };
+
+    const test_clone_objectParameter = () => {
+      it('test_clone_objectParameter', () => {
+
+        const testObject1 = { a: 1, b: 2, c: 3 };
+        // clone
+        var object1 = clone({ source: testObject1 });
+        object1.a = 0;
+        checkEqual(0, object1.a);
+        checkEqual(2, object1.b);
+        checkEqual(3, object1.c);
+        checkEqual(1, testObject1.a);
+        checkEqual(2, testObject1.b);
+        checkEqual(3, testObject1.c);
+
+        // date type clone
+        var testDate1 = new Date('2019/10/11');
+        var date1 = clone({ source: testDate1 });
+        date1.setDate(12);
+        checkEqual(12,    date1.getDate());
+        checkEqual(11,    testDate1.getDate());
+
+        // object array only clone
+        var testDate1 = new Date('2019/10/11');
+        var date1 = clone({
+          source: testDate1,
+          cloneFunctionArray: [
+            cloneFunction.cloneArrayType,
+            cloneFunction.cloneObject,
+          ],
+        });
+        date1.setDate(12);
+        checkEqual(12,    date1.getDate());
+        checkEqual(12,    testDate1.getDate());
+
+        // object array date clone
+        var testDate1 = new Date('2019/10/11');
+        var date1 = clone({
+          source: testDate1,
+          cloneFunctionArray: [
+            cloneFunction.cloneDate,
+            cloneFunction.cloneArrayType,
+            cloneFunction.cloneObject,
+          ],
+        });
+        date1.setDate(12);
+        checkEqual(12,    date1.getDate());
+        checkEqual(11,    testDate1.getDate());
+
       });
     };
 
@@ -491,6 +545,78 @@ export const test_execute_root = (parts) => {
       });
     };
 
+
+    const test_cloneDeep_objectParameter = () => {
+      it('test_cloneDeep_objectParameter', () => {
+
+        // clone deep
+        var testObject2 = { a: 4, b: 5, c: 6 };
+        var testObject3 = { a: 1, b: 2, c: 3, d: testObject2 };
+        var object1 = cloneDeep({ source: testObject3 });
+        object1.a = 0;
+        checkEqual(0, object1.a);
+        checkEqual(1, testObject3.a);
+        checkEqual(true, object1.d !== testObject3.d);
+        checkEqual(6, object1.d.c);
+        checkEqual(6, testObject3.d.c);
+        object1.d.a = 7;
+        checkEqual(7, object1.d.a);
+        checkEqual(4, testObject3.d.a);
+
+        // cloneDeep array date clone
+        var date1 = new Date('2019/10/11');
+        var value1 = [1, 2, 3, date1];
+        var value2 = cloneDeep({
+          source: value1,
+        });
+        value2[3].setDate(13);
+        checkEqual(13, value2[3].getDate());
+        checkEqual(11, value1[3].getDate());
+        checkEqual(false, value1[3] === value2[3]);
+
+        // cloneDeep ignore date
+        var date1 = new Date('2019/10/11');
+        var value1 = [1, 2, 3, date1];
+        var value2 = cloneDeep({
+          source: value1,
+          cloneFunctionArray: [
+            cloneFunction.cloneArrayType,
+            cloneFunction.cloneObject,
+          ],
+        });
+        value2[3].setDate(13);
+        checkEqual(13, value2[3].getDate());
+        checkEqual(13, value1[3].getDate());
+        checkEqual(true, value1[3] === value2[3]);
+
+        // cloneDeep add cloneDate
+        var date1 = new Date('2019/10/11');
+        var value1 = [1, 2, 3, date1];
+        var value2 = cloneDeep({
+          source: value1,
+          cloneFunctionArray: [
+            cloneFunction.cloneDate,
+            cloneFunction.cloneArrayType,
+            cloneFunction.cloneObject,
+          ],
+        });
+        value2[3].setDate(13);
+        checkEqual(13, value2[3].getDate());
+        checkEqual(11, value1[3].getDate());
+        checkEqual(false, value1[3] === value2[3]);
+
+        // date1 clone same object
+        var date1 = new Date('2019/10/11');
+        var value1 = [1, 2, 3, date1, date1];
+        var value2 = cloneDeep({
+          source: value1,
+        });
+        checkEqual(false, value1[3] === value2[3]);
+        checkEqual(true,  value1[3] === value1[4]);
+        checkEqual(true,  value2[3] === value2[4], 'date1 clone same object');
+
+      });
+    };
 
     const test_cloneDeep_function = () => {
       it('test_cloneDeep_function', () => {
@@ -830,6 +956,7 @@ export const test_execute_root = (parts) => {
     test_clone_date();
     test_clone_function();
     test_clone_regexp();
+    test_clone_objectParameter();
 
     test_cloneDeep_object();
     test_cloneDeep_array();
@@ -837,6 +964,7 @@ export const test_execute_root = (parts) => {
     test_cloneDeep_date();
     test_cloneDeep_function();
     test_cloneDeep_regExp();
+    test_cloneDeep_objectParameter();
 
     // test_cloneDeep_moment();
     test_cloneDeep_symbol();

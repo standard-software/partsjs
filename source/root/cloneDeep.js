@@ -26,27 +26,43 @@ import {
 } from '../root/cloneFunction.js';
 
 /**
- * clone
+ * cloneDeep
  */
-export const _clone = (
-  source, cloneFunctionArray = cloneFunctionArrayDefault,
+export const _cloneDeep = (
+  source,
+  cloneFunctionArray = cloneFunctionArrayDefault,
 ) => {
-  const __clone = (value) => {
+  const CircularReferenceBuffer = {
+    source: [],
+    clone: [],
+  };
+  const __cloneDeep = (value) => {
+    const index = CircularReferenceBuffer.source.indexOf(value);
+    if (index !== -1) {
+      return CircularReferenceBuffer.clone[index];
+    }
     if (isUndefined(value)) {
       return undefined;
     }
     for (let i = 0, l = cloneFunctionArray.length; i < l; i += 1) {
-      const result = cloneFunctionArray[i](value);
+      const result = cloneFunctionArray[i](
+        value,
+        (source, clone) => {
+          CircularReferenceBuffer.source.push(source);
+          CircularReferenceBuffer.clone.push(clone);
+        },
+        __cloneDeep,
+      );
       if (!isUndefined(result)) {
         return result;
       }
     }
     return value;
   };
-  return __clone(source);
+  return __cloneDeep(source);
 };
 
-export const clone = (
+export const cloneDeep = (
   source,
   cloneFunctionArray = cloneFunctionArrayDefault,
 ) => {
@@ -58,15 +74,15 @@ export const clone = (
 
   if (!isArray(cloneFunctionArray)) {
     throw new TypeError(
-      'clone args(cloneFunctionArray) is not array',
+      'cloneDeep args(cloneFunctionArray) is not array',
     );
   }
 
-  return _clone(source, cloneFunctionArray);
+  return _cloneDeep(source, cloneFunctionArray);
 };
 
 export default {
-  _clone,
-  clone,
+  _cloneDeep,
+  cloneDeep,
 };
 

@@ -238,6 +238,8 @@ same [How to use Google Apps Script]
 #### 2020/07/03(Fri)
 - update clone / cloneDeep
   - args cloneFunction
+  - support full object parameter
+  - cloneFunction.js clone.js cloneDeep.js
 
 ### 6.3.0
 #### 2020/06/30(Tue)

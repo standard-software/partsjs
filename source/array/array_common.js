@@ -20,8 +20,11 @@ import {
 } from '../object/isObjectParameter.js';
 
 import {
-  _clone, _cloneDeep,
+  _clone,
 } from '../root/clone.js';
+import {
+  _cloneDeep,
+} from '../root/cloneDeep.js';
 
 import {
   canUseSet,
