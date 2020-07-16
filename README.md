@@ -241,10 +241,12 @@ same [How to use Google Apps Script]
 - update 
   - isEven 0 is even
   - isMultiples 0 is all numbers multiple
-- add group.js
+- add group.js group function
   - support full object parameter
-- add unique.js
-  - move simple unique function
+- add unique.js unique function
+  - move from array_common.js
+  - support full object parameter
+  - add args func, detail
 
 ### 6.4.0
 #### 2020/07/05(Sun)

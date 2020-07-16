@@ -263,7 +263,80 @@ export const test_execute_array = (parts) => {
         checkEqual([1, 2, 3, 4, 0],
           array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
+        checkEqual([1, 2, 3, 4, 0],
+          array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], v => v)
+        );
+        checkEqual([1, 2],
+          array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0],
+            v => parts.isEven(v)
+          )
+        );
+        checkEqual({ result: [1, 2], index: [false, true] },
+          array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0],
+            v => parts.isEven(v), true
+          )
+        );
+        checkEqual(
+          { result: [
+            { x: 1, y: 1 },
+            { x: undefined, y: 4 },
+            { x: 2, y: 2 },
+          ], index: [1, undefined, 2]
+          },
+          array.unique([
+            { x: 1, y: 1 },
+            { x: undefined, y: 4 },
+            { x: 2, y: 2 },
+            { x: 1, y: 3 },
+            { y: 5 },
+          ], v => v.x, true)
+        );
       });
+
+      // Object Named Parameter
+      checkEqual([1, 2, 3, 4, 0],
+        array.unique({ array: [1, 2, 3, 4, 4, 4, 3, 2, 0] })
+      );
+      checkEqual([1, 2],
+        array.unique(
+          {
+            array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+            func: v => parts.isEven(v)
+          }
+        )
+      );
+      checkEqual([1, 2],
+        array.unique(
+          [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          {
+            func: v => parts.isEven(v)
+          }
+        )
+      );
+      checkEqual({ result: [1, 2], index: [false, true] },
+        array.unique(
+          {
+            array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+            func: v => parts.isEven(v),
+            detail: true
+          })
+      );
+      checkEqual({ result: [1, 2], index: [false, true] },
+        array.unique(
+          [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          {
+            func: v => parts.isEven(v),
+            detail: true
+          })
+      );
+      checkEqual({ result: [1, 2], index: [false, true] },
+        array.unique(
+          [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          v => parts.isEven(v),
+          {
+            detail: true
+          })
+      );
     };
 
     const test_single = () => {
@@ -288,10 +361,17 @@ export const test_execute_array = (parts) => {
           array.group([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
         checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]],
-          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], v => parts.isEven(v))
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0],
+            v => parts.isEven(v)
+          )
         );
-        checkEqual({ result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]], index: [false, true] },
-          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], v => parts.isEven(v), true)
+        checkEqual({
+          result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          index: [false, true]
+        },
+        array.group([1, 2, 3, 4, 4, 4, 3, 2, 0],
+          v => parts.isEven(v), true
+        )
         );
 
         // Object Named Parameter
