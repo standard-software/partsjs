@@ -282,6 +282,43 @@ export const test_execute_array = (parts) => {
       });
     };
 
+    const test_group = () => {
+      it('test_group', () => {
+        checkEqual([[1], [2, 2], [3, 3], [4, 4, 4], [0]],
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0])
+        );
+        checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], v => parts.isEven(v))
+        );
+        checkEqual({ result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]], index: [false, true] },
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], v => parts.isEven(v), true)
+        );
+
+        // Object Named Parameter
+        checkEqual([[1], [2, 2], [3, 3], [4, 4, 4], [0]],
+          array.group({ array: [1, 2, 3, 4, 4, 4, 3, 2, 0] })
+        );
+        checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          array.group({ array: [1, 2, 3, 4, 4, 4, 3, 2, 0], func: v => parts.isEven(v) })
+        );
+        checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], { func: v => parts.isEven(v) })
+        );
+        checkEqual({ result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]], index: [false, true] },
+          array.group({ array: [1, 2, 3, 4, 4, 4, 3, 2, 0], func: v => parts.isEven(v), detail: true })
+        );
+        checkEqual({ result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]], index: [false, true] },
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], { func: v => parts.isEven(v), detail: true })
+        );
+        checkEqual({ result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]], index: [false, true] },
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], v => parts.isEven(v), { detail: true })
+        );
+        checkEqual({ result: [[1], [2, 2], [3, 3], [4, 4, 4], [0]], index: [1, 2, 3, 4, 0] },
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], { detail: true })
+        );
+      });
+    };
+
     const test_filter = () => {
       it('test_filter', () => {
         checkEqual([0, 2, 4],
@@ -2249,6 +2286,7 @@ export const test_execute_array = (parts) => {
     test_uniqe();
     test_single();
     test_multiple();
+    test_group();
 
     test_filter();
     test_map();

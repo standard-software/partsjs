@@ -320,7 +320,7 @@ export const filter = (array, func) => {
   }
   if (!isFunction(func)) {
     throw new TypeError(
-      'filter args(compareFunc) is not function',
+      'filter args(func) is not function',
     );
   }
   return _filter(array, func);

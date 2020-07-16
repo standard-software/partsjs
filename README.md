@@ -241,6 +241,8 @@ same [How to use Google Apps Script]
 - update 
   - isEven 0 is even
   - isMultiples 0 is all numbers multiple
+- add group.js
+  - support full object parameter
 
 ### 6.4.0
 #### 2020/07/05(Sun)
