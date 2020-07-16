@@ -27,8 +27,8 @@ import {
 } from '../root/cloneDeep.js';
 
 import {
-  canUseSet,
-} from '../syntax/syntax.js';
+  _unique,
+} from '../array/unique.js';
 
 /**
  * array.min max
@@ -206,35 +206,6 @@ export const mode = (array) => {
     );
   }
   return _mode(array);
-};
-
-/**
- * uniqe
- */
-export const _unique = (array) => {
-  if (canUseSet() && array.length > 120) {
-    return [...(new Set(array))];
-  } else {
-    const result = [];
-    for (let i = 0, l = array.length; i < l; i += 1) {
-      if (result.indexOf(array[i]) === -1) {
-        result.push(array[i]);
-      }
-    }
-    return result;
-  }
-  // node.js v8
-  // It is faster to use Set
-  // when the array.lentgh is larger than about 120
-};
-
-export const unique = (array) => {
-  if (!isArray(array)) {
-    throw new TypeError(
-      'unique args(array) is not array',
-    );
-  }
-  return _unique(array);
 };
 
 /**
@@ -864,7 +835,7 @@ export default {
   _min, _max,
   _sum, _average, _median,
   _mode,
-  _unique, _single, _multiple,
+  _single, _multiple,
   _filter, _map, _count,
   _findFirstIndex, _findLastIndex,
   _findFirst, _findLast,
@@ -877,7 +848,7 @@ export default {
   min, max,
   sum, average, median,
   mode,
-  unique, single, multiple,
+  single, multiple,
   filter, map, count,
   findFirstIndex, findLastIndex,
   findFirst, findLast,

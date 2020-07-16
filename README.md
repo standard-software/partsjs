@@ -243,6 +243,8 @@ same [How to use Google Apps Script]
   - isMultiples 0 is all numbers multiple
 - add group.js
   - support full object parameter
+- add unique.js
+  - move simple unique function
 
 ### 6.4.0
 #### 2020/07/05(Sun)
