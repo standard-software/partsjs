@@ -234,23 +234,27 @@ same [How to use Google Apps Script]
 
 ## Version
 
+### 6.5.0
+#### 2020/07/16(Thu)
+- update browserName isEdge
+  - new Edge browser(Chromium base)
+
 ### 6.4.0
 #### 2020/07/05(Sun)
 - update clone / cloneDeep
   - args cloneFunction
   - support full object parameter
   - cloneFunction.js clone.js cloneDeep.js
-- add sub First/Last Delim First/Last
+- add parts.string functions
   - subFirstDelimFirst.js 
   - subFirstDelimLast.js
   - subLastDelimFirst.js 
   - subLastDelimLast.js
-  - support full object parameter
-- add tag Inner/Outer First/Last
   - tagInnerFirst.js
   - tagOuterFirst.js
   - tagInnerLast.js
   - tagOuterLast.js
+    - support full object parameter
 
 ### 6.3.0
 #### 2020/06/30(Tue)

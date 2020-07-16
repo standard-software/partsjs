@@ -58,7 +58,7 @@ export const browserName = () => {
   const ua = window.navigator.userAgent.toLowerCase();
   if (_includesSome(ua, ['msie', 'trident'])) {
     return 'InternetExplorer';
-  } else if (_includes(ua, 'edge')) {
+  } else if (_includes(ua, 'edg')) {
     return 'Edge';
   } else if (_includes(ua, 'opr')) {
     return 'Opera';
