@@ -13,9 +13,6 @@ import {
  * isMultiples isEven isOdd
  */
 export const _isMultiples = (number, radix) => {
-  if (number === 0) {
-    return false;
-  }
   return (number % radix) === 0;
 };
 
@@ -39,16 +36,10 @@ export const isMultiples = (number, radix) => {
 };
 
 export const isEven = (number) => {
-  if (number === 0) {
-    return false;
-  }
   return isMultiples(number, 2);
 };
 
 export const isOdd = (number) => {
-  if (number === 0) {
-    return false;
-  }
   return !isMultiples(number, 2);
 };
 

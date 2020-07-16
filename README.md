@@ -238,6 +238,9 @@ same [How to use Google Apps Script]
 #### 2020/07/16(Thu)
 - update browserName isEdge
   - new Edge browser(Chromium base)
+- update 
+  - isEven 0 is even
+  - isMultiples 0 is all numbers multiple
 
 ### 6.4.0
 #### 2020/07/05(Sun)

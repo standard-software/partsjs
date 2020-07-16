@@ -284,10 +284,10 @@ export const test_execute_array = (parts) => {
 
     const test_filter = () => {
       it('test_filter', () => {
-        checkEqual([2, 4],
+        checkEqual([0, 2, 4],
           array.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkEqual([2, 4],
+        checkEqual([0, 2, 4],
           array.filter([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual([1, 3, 5],
@@ -295,7 +295,7 @@ export const test_execute_array = (parts) => {
         );
 
         // Object Named Parameter
-        checkEqual([2, 4],
+        checkEqual([0, 2, 4],
           array.filter({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
@@ -306,10 +306,10 @@ export const test_execute_array = (parts) => {
 
     const test_map = () => {
       it('test_map', () => {
-        checkEqual([false, false, true, false, true, false],
+        checkEqual([true, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkEqual([false, false, true, false, true, false],
+        checkEqual([true, false, true, false, true, false],
           array.map([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual([false, true, false, true, false, true],
@@ -320,7 +320,7 @@ export const test_execute_array = (parts) => {
         );
 
         // Object Named Parameter
-        checkEqual([false, false, true, false, true, false],
+        checkEqual([true, false, true, false, true, false],
           array.map({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
@@ -332,11 +332,11 @@ export const test_execute_array = (parts) => {
     const test_count = () => {
       it('test_count', () => {
         checkEqual(
-          2,
+          3,
           array.count([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
         checkEqual(
-          2,
+          3,
           array.count([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual(
@@ -2055,10 +2055,10 @@ export const test_execute_array = (parts) => {
 
     const test_operation_filter = () => {
       it('test_operation_filter', () => {
-        checkEqual([2, 4],
+        checkEqual([0, 2, 4],
           array.operation.filter([0, 1, 2, 3, 4, 5], (value) => isEven(value))
         );
-        checkEqual([2, 4],
+        checkEqual([0, 2, 4],
           array.operation.filter([0, 1, 2, 3, 4, 5], isEven)
         );
         checkEqual([1, 3, 5],
@@ -2066,7 +2066,7 @@ export const test_execute_array = (parts) => {
         );
 
         // Object Named Parameter
-        checkEqual([2, 4],
+        checkEqual([0, 2, 4],
           array.operation.filter({
             array: [0, 1, 2, 3, 4, 5],
             func: (value) => isEven(value)
