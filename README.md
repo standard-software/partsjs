@@ -247,6 +247,10 @@ same [How to use Google Apps Script]
   - move from array_common.js
   - support full object parameter
   - add args func, detail
+- update equal / equalDeep
+  - args equalFunction
+  - support full object parameter
+  - equalFunction.js equal.js equalDeep.js
 
 ### 6.4.0
 #### 2020/07/05(Sun)

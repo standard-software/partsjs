@@ -8,15 +8,6 @@ import {
   isMap, isWeakMap,
   isSet, isWeakSet,
 
-  isUndefinedAll, isNullAll, isNaNStrictAll,
-  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-  isFunctionAll, isObjectAll, isObjectLikeAll,
-  isArrayAll, isArrayTypeAll,
-  isDateAll, isRegExpAll,
-  isExceptionAll,
-  isMapAll, isWeakMapAll,
-  isSetAll, isWeakSetAll,
-
 } from '../type/type.js';
 
 import {
@@ -29,24 +20,42 @@ import {
 } from '../compare/equalFunction.js';
 
 /**
- * equal
+ * equalDeep
  */
-export const _equal = (
+export const _equalDeep = (
   value1, value2, equalFunctionArray = equalFunctionArrayDefault,
 ) => {
-  const __equal = (value1, value2) => {
+  const CircularReferenceBuffer = {
+    v1Array: [],
+    v2Array: [],
+  };
+  const __equalDeep = (value1, value2) => {
+    const index = CircularReferenceBuffer.v1Array.indexOf(value1);
+    if (index !== -1) {
+      if (CircularReferenceBuffer.v2Array[index] === value2) {
+        return true;
+      }
+      return value1 === value2;
+    }
     for (let i = 0, l = equalFunctionArray.length; i < l; i += 1) {
-      const result = equalFunctionArray[i](value1, value2);
+      const result = equalFunctionArray[i](
+        value1, value2,
+        (v1, v2) => {
+          CircularReferenceBuffer.v1Array.push(v1);
+          CircularReferenceBuffer.v2Array.push(v2);
+        },
+        __equalDeep,
+      );
       if (!isUndefined(result)) {
         return result;
       }
     }
     return false;
   };
-  return __equal(value1, value2);
+  return __equalDeep(value1, value2);
 };
 
-export const equal = (
+export const equalDeep = (
   value1, value2, equalFunctionArray = equalFunctionArrayDefault,
 ) => {
   if (isObjectParameter(value1, 'value1, value2', 'equalFunctionArray')) {
@@ -59,10 +68,10 @@ export const equal = (
     ({ equalFunctionArray } = equalFunctionArray);
   }
 
-  return _equal(value1, value2, equalFunctionArray);
+  return _equalDeep(value1, value2, equalFunctionArray);
 };
 
 export default {
-  _equal,
-  equal,
+  _equalDeep,
+  equalDeep,
 };
