@@ -8,14 +8,14 @@ import {
   isMap, isWeakMap,
   isSet, isWeakSet,
 
-  isUndefinedAll, isNullAll, isNaNStrictAll,
-  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-  isFunctionAll, isObjectAll, isObjectLikeAll,
-  isArrayAll, isArrayTypeAll,
-  isDateAll, isRegExpAll,
-  isExceptionAll,
-  isMapAll, isWeakMapAll,
-  isSetAll, isWeakSetAll,
+  isUndefinedArray, isNullArray, isNaNStrictArray,
+  isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
+  isFunctionArray, isObjectArray, isObjectLikeArray,
+  isArrayArray, isArrayTypeArray,
+  isDateArray, isRegExpArray,
+  isExceptionArray,
+  isMapArray, isWeakMapArray,
+  isSetArray, isWeakSetArray,
 
 } from '../type/type.js';
 
@@ -57,6 +57,12 @@ export const equal = (
     ({ value2, equalFunctionArray = equalFunctionArrayDefault } = value2);
   } else if (isObjectParameter(equalFunctionArray, 'equalFunctionArray')) {
     ({ equalFunctionArray } = equalFunctionArray);
+  }
+
+  if (!isFunctionArray(equalFunctionArray)) {
+    throw new TypeError(
+      'equal args(equalFunctionArray) is not function array',
+    );
   }
 
   return _equal(value1, value2, equalFunctionArray);

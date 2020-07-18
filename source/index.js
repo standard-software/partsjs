@@ -232,7 +232,8 @@ propertyNames.ARRAY_PUBLIC =
   'findIndex, findBackIndex,' +
   'find, findBack,' +
   'every,' +
-  'arrayToIndexValueArray, arrayEntries' +
+  'arrayToIndexValueArray, arrayEntries, ' +
+  'sortOrderFunction, ' +
   '';
 propertyNames.ARRAY_ROOT =
   'min, max,' +
@@ -254,6 +255,7 @@ propertyNames.ARRAY_OPERATION_PUBLIC =
   'pushFirst, pushLast,' +
   'remainFirst, remainLast,' +
   'filter,' +
+  'sort,' +
   'sortNumberAscending, sortNumberDescending,' +
   'sortLengthAscending, sortLengthDescending,' +
   'sortDictionaryAscending, sortDictionaryDescending,' +

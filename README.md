@@ -235,7 +235,7 @@ same [How to use Google Apps Script]
 ## Version
 
 ### 6.5.0
-#### 2020/07/16(Thu)
+#### 2020/07/18(Sat)
 - update browserName isEdge
   - new Edge browser(Chromium base)
 - update 
@@ -251,6 +251,7 @@ same [How to use Google Apps Script]
   - args equalFunction
   - support full object parameter
   - equalFunction.js equal.js equalDeep.js
+- update array.operation.sort
 
 ### 6.4.0
 #### 2020/07/05(Sun)

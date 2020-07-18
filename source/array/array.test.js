@@ -13,6 +13,8 @@ export const test_execute_array = (parts) => {
     } = parts.test;
 
     const {
+      isLowerCase, isUpperCase,
+
       array,
     } = parts;
 
@@ -22,7 +24,8 @@ export const test_execute_array = (parts) => {
       subIndex, subLength,
       subFirst, subLast,
       arrayToIndexValueArray,
-    } = array;
+      sortOrderFunction,
+    } = parts.array;
 
     const {
       insert, add,
@@ -34,15 +37,11 @@ export const test_execute_array = (parts) => {
       popFirst, popLast,
       pushFirst, pushLast,
       remainFirst, remainLast,
-    } = array.operation;
+    } = parts.array.operation;
 
     const {
       isEven, isOdd,
     } = parts.number;
-
-    const {
-      isLowerCase, isUpperCase,
-    } = parts;
 
     const {
       equal,
@@ -2195,8 +2194,11 @@ export const test_execute_array = (parts) => {
     const test_operation_sort = () => {
       it('test_operation_sort', () => {
         // exception
+        checkEqual(false, isThrownException(() => {
+          array.operation.sort([0, 1], sortOrderFunction.number.ascending);
+        }, 'TypeError'));
         checkEqual(true, isThrownException(() => {
-          array.operation.sort([0, 1], 'a', 'ascending');
+          array.operation.sort([0, 1]);
         }, 'TypeError'));
 
         checkEqual(true, isThrownException(() => {
@@ -2242,6 +2244,10 @@ export const test_execute_array = (parts) => {
         checkCompare(parts.compare.equalDeep,
           ['a', [0, 1], 'aaa'],
           array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])
+        );
+        checkCompare(parts.compare.equalDeep,
+          ['aaa', [0, 1], 'a'],
+          array.operation.sortLengthDescending(['aaa', 'a', [0, 1]])
         );
 
         // exception
