@@ -77,11 +77,11 @@ export const copyProperty = (fromObject, propertyArray, toObject = {}) => {
 /**
  * setProperty
  */
-export const _setProperty = (object, path, value) => {
-  const propertyArray = path.split('.');
+export const _setProperty = (object, propertyPath, value) => {
+  const propertyArray = propertyPath.split('.');
   for (let i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '' ) {
-      throw new Error('setProperty args(propertyPath) is no exist property');
+      throw new Error('setProperty args(propertyPath) is empty string');
     }
   }
 

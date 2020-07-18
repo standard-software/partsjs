@@ -34,7 +34,7 @@ export const test_execute_index = (parts) => {
       it('test_execute_nameSpace 1', () => {
 
         const countArray =
-          [364, 18, 4, 252, 9, 11, 23, 29, 7, 37, 17, 38];
+          [364, 18, 4, 252, 9, 11, 23, 29, 7, 37, 17, 37, 32];
         const propertyCountForParts = (parts) => {
           let result = propertyCount(parts);
           if (!parts.isUndefined(parts.default)) {
@@ -57,6 +57,7 @@ export const test_execute_index = (parts) => {
         checkEqual(countArray.shift(),  propertyCount(parts.string));
         checkEqual(countArray.shift(),  propertyCount(parts.object));
         checkEqual(countArray.shift(),  propertyCount(parts.array));
+        checkEqual(countArray.shift(),  propertyCount(parts.array.operation));
 
         checkEqual(true,
           inProperty(

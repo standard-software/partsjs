@@ -5,7 +5,6 @@ import arrayToIndexValueArray from './arrayToIndexValueArray.js';
 import group from './group.js';
 import unique from './unique.js';
 import array_operation from './array_operation.js';
-import sortOrderFunction from './operation/sortOrderFunction.js';
 import sort from './operation/sort.js';
 
 export default {
@@ -15,7 +14,6 @@ export default {
   ...arrayToIndexValueArray,
   ...group,
   ...unique,
-  ...sortOrderFunction,
   operation: {
     ...array_operation,
     ...sort,
@@ -28,7 +26,6 @@ export * from './IntegerArray.js';
 export * from './arrayToIndexValueArray.js';
 export * from './group.js';
 export * from './unique.js';
-export * from './operation/sortOrderFunction.js';
 export const operation = {
   ...array_operation,
   ...sort,

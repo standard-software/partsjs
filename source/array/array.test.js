@@ -2193,16 +2193,67 @@ export const test_execute_array = (parts) => {
 
     const test_operation_sort = () => {
       it('test_operation_sort', () => {
+
+        checkEqual([0, 1, 2],
+          array.operation.sort([1, 2, 0])
+        );
+        checkEqual([2, 1, 0],
+          array.operation.sort([1, 2, 0], 'descending')
+        );
+        checkEqual(['', 'A', 'AA', 'Aa', 'a', 'aA', 'aa'],
+          array.operation.sort(
+            ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
+            'ascending'
+          )
+        );
+        checkEqual(['', 'a', 'A', 'Aa', 'aa', 'aA', 'AA'],
+          array.operation.sort(
+            ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
+            'ascending',
+            v => v.length
+          )
+        );
+
+        // object named parameter
+        checkEqual([0, 1, 2],
+          array.operation.sort(
+            { array: [1, 2, 0] }
+          )
+        );
+        checkEqual([2, 1, 0],
+          array.operation.sort(
+            {
+              array: [1, 2, 0],
+              order: 'descending'
+            }
+          )
+        );
+        checkEqual(['', 'a', 'A', 'Aa', 'aa', 'aA', 'AA'],
+          array.operation.sort(
+            {
+              array: ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
+              order: 'ascending',
+              func: v => v.length
+            }
+          )
+        );
+
         // exception
         checkEqual(false, isThrownException(() => {
-          array.operation.sort([0, 1], sortOrderFunction.number.ascending);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(() => {
           array.operation.sort([0, 1]);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(() => {
+          array.operation.sort([0, 1], 'ascending');
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(() => {
+          array.operation.sort([0, 1], 'descending');
         }, 'TypeError'));
 
         checkEqual(true, isThrownException(() => {
-          array.operation.sort([0, 1], 'number', 'b');
+          array.operation.sort([0, 1], 'desc');
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(() => {
+          array.operation.sort([0, 1], 'ascending', null);
         }, 'TypeError'));
 
       });

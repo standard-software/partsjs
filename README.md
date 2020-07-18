@@ -252,6 +252,8 @@ same [How to use Google Apps Script]
   - support full object parameter
   - equalFunction.js equal.js equalDeep.js
 - update array.operation.sort
+  - support full object parameter
+  - add sortNumber sortLength sortDictionary
 
 ### 6.4.0
 #### 2020/07/05(Sun)

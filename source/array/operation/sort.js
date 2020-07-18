@@ -11,127 +11,165 @@ import {
 } from '../../type/type.js';
 
 import {
-  allMatch,
-} from '../../compare/allMatch.js';
+  switch_,
+} from '../../syntax/syntax.js';
 
 import {
-  allMatchSome,
-} from '../../compare/allMatchSome.js';
+  _or,
+} from '../../compare/compare_common.js';
 
 import {
-  sortOrderFunction,
-} from '../../array/operation/sortOrderFunction.js';
+  isObjectParameter,
+} from '../../object/isObjectParameter.js';
 
 /**
  * array.operation.sort
  */
-export const _sort = (array, sortOrderFunc, func = v => v ) => {
+export const _sort = (
+  array,
+  order = sort.order.ascending,
+  func = v => v,
+) => {
+  const orderFunc =
+    switch_(order)([
+      [sort.order.ascending, () => sort.orderFunction.ascending],
+      [sort.order.descending, () => sort.orderFunction.descending],
+      [
+        () => { throw new Error(
+          '_sort args(order) is not ["ascending"|"descending"]',
+        ); },
+      ],
+    ]);
+
   array.sort((a, b) => {
-    return sortOrderFunc(func(a), func(b));
+    return orderFunc(func(a), func(b));
   });
   return array;
 };
 
-export const sort = (array, sortOrderFunc, func) => {
+export const sort = (
+  array,
+  order = sort.order.ascending,
+  func = v => v,
+) => {
+  if (isObjectParameter(array, 'array', 'order, func')) {
+    ({ array, order = sort.order.ascending, func = v => v } = array);
+  } else if (isObjectParameter(order, '', 'order, func')) {
+    ({ order = sort.order.ascending, func = v => v } = order);
+  } else if (isObjectParameter(func, 'func')) {
+    ({ func = v => v } = func);
+  }
 
   if (!isArray(array)) {
     throw new TypeError(
       'sort args(array) is not array',
     );
   }
-  if (!(isFunction(func) || isUndefined(func))) {
+  if (!_or(order, Object.values(sort.order))) {
+    throw new TypeError(
+      'sort args(order) is not ["ascending"|"descending"]',
+    );
+  }
+  if (!isFunction(func)) {
     throw new TypeError(
       'sort args(func) is not function',
     );
   }
-  if (!isFunction(sortOrderFunc)) {
-    throw new TypeError(
-      'sort args(sortOrderFunc) is not function',
-    );
-  }
 
-  if (isUndefined(func)) {
-    if (Object.values(sortOrderFunction.number).includes(sortOrderFunc)) {
-      if (!allMatch(array, isNumber)) {
-        throw new TypeError(
-          'sort args(array) element is not number',
-        );
-      }
-    }
-    if (Object.values(sortOrderFunction.length).includes(sortOrderFunc)) {
-      if (!allMatchSome(array, [isString, v => 'length' in v])) {
-        throw new TypeError(
-          'sort args(array) element has not length property',
-        );
-      }
-    }
-    if (Object.values(sortOrderFunction.dictionary).includes(sortOrderFunc)) {
-      if (!allMatch(array, isString)) {
-        throw new TypeError(
-          'sort args(array) element is not string',
-        );
-      }
-    }
-  }
-
-  return _sort(array, sortOrderFunc, func);
+  return _sort(array, order, func);
 };
 
-export const _sortNumberAscending = (array) => {
-  return _sort(array, sortOrderFunction.number.ascending);
+sort.orderFunction = {
+  ascending: (a, b) => (
+    a > b ? 1
+    : a < b ? -1
+    : 0
+  ),
+  descending: (a, b) => (
+    a > b ? -1
+    : a < b ? 1
+    : 0
+  ),
+};
+
+sort.order = {
+  ascending: 'ascending',
+  descending: 'descending',
+};
+
+export const _sortNumber = (array, order) => {
+  return _sort(array, order);
+};
+
+export const sortNumber = (array, order) => {
+  return sort(array, order, v => {
+    if (!isNumber(v)) {
+      throw new TypeError('sortLength args(array) element is not number');
+    }
+    return v;
+  });
+};
+
+export const _sortLength = (array, order) => {
+  return sort(array, order, v => v.length);
+};
+
+export const sortLength = (array, order) => {
+  return sort(array, order, v => {
+    if (!(isString(v) || ('length' in v))) {
+      throw new TypeError('sortLength args(array) element must have length property');
+    }
+    return v.length;
+  });
+};
+
+export const _sortDictionary = (array, order) => {
+  return sort(array, order);
+};
+
+export const sortDictionary = (array, order) => {
+  return sort(array, order, v => {
+    if (!isString(v)) {
+      throw new TypeError('sortLength args(array) element is not string');
+    }
+    return v;
+  });
 };
 
 export const sortNumberAscending = (array) => {
-  return sort(array, sortOrderFunction.number.ascending);
-};
-
-export const _sortNumberDescending = (array) => {
-  return _sort(array, sortOrderFunction.number.descending);
+  return sortNumber(array, sort.order.ascending);
 };
 
 export const sortNumberDescending = (array) => {
-  return sort(array, sortOrderFunction.number.descending);
-};
-
-export const _sortLengthAscending = (array) => {
-  return _sort(array, sortOrderFunction.length.ascending);
+  return sortNumber(array, sort.order.descending);
 };
 
 export const sortLengthAscending = (array) => {
-  return sort(array, sortOrderFunction.length.ascending);
-};
-
-export const _sortLengthDescending = (array) => {
-  return _sort(array, sortOrderFunction.length.descending);
+  return sortLength(array, sort.order.ascending);
 };
 
 export const sortLengthDescending = (array) => {
-  return sort(array, sortOrderFunction.length.descending);
-};
-
-export const _sortDictionaryAscending = (array) => {
-  return _sort(array, sortOrderFunction.dictionary.ascending);
+  return sortLength(array, sort.order.descending);
 };
 
 export const sortDictionaryAscending = (array) => {
-  return sort(array, sortOrderFunction.dictionary.ascending);
-};
-
-export const _sortDictionaryDescending = (array) => {
-  return _sort(array, sortOrderFunction.dictionary.descending);
+  return sortDictionary(array, sort.order.ascending);
 };
 
 export const sortDictionaryDescending = (array) => {
-  return sort(array, sortOrderFunction.dictionary.descending);
+  return sortDictionary(array, sort.order.descending);
 };
 
 export default {
   _sort,
-  _sortNumberAscending, _sortNumberDescending,
-  _sortLengthAscending, _sortLengthDescending,
-  _sortDictionaryAscending, _sortDictionaryDescending,
+  _sortNumber,
+  _sortLength,
+  _sortDictionary,
 
   sort,
+  sortNumber,
+  sortLength,
+  sortDictionary,
   sortNumberAscending, sortNumberDescending,
   sortLengthAscending, sortLengthDescending,
   sortDictionaryAscending, sortDictionaryDescending,

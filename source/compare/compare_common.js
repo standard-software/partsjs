@@ -26,7 +26,7 @@ export const _or = (value, compareArray) => {
 };
 
 export const or = (value, compareArray) => {
-  if (isObjectParameter(value, 'value,compareArray')) {
+  if (isObjectParameter(value, 'value, compareArray')) {
     ({ value, compareArray } = value);
   }
 
