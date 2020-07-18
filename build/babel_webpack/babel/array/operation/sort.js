@@ -71,7 +71,7 @@ var sort = function sort(array) {
     throw new TypeError('sort args(array) is not array');
   }
 
-  if (!(0, _compare_common._or)(order, Object.values(sort.order))) {
+  if (!(0, _compare_common._or)(order, [sort.order.ascending, sort.order.descending])) {
     throw new TypeError('sort args(order) is not ["ascending"|"descending"]');
   }
 

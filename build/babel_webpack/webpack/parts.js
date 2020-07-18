@@ -148,7 +148,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '6.5.0 beta';
+var VERSION = '6.5.0';
 exports.VERSION = VERSION;
 var rootNames = {};
 var propertyNames = {};
@@ -8019,7 +8019,7 @@ var sort = function sort(array) {
     throw new TypeError('sort args(array) is not array');
   }
 
-  if (!(0, _compare_common._or)(order, Object.values(sort.order))) {
+  if (!(0, _compare_common._or)(order, [sort.order.ascending, sort.order.descending])) {
     throw new TypeError('sort args(order) is not ["ascending"|"descending"]');
   }
 
