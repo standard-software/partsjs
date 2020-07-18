@@ -122,23 +122,23 @@ var _platform2 = _interopRequireDefault(__webpack_require__(24));
 
 var _type2 = _interopRequireDefault(__webpack_require__(4));
 
-var _test2 = _interopRequireDefault(__webpack_require__(34));
+var _test2 = _interopRequireDefault(__webpack_require__(35));
 
-var _syntax2 = _interopRequireDefault(__webpack_require__(31));
+var _syntax2 = _interopRequireDefault(__webpack_require__(32));
 
-var _compare2 = _interopRequireDefault(__webpack_require__(55));
+var _compare2 = _interopRequireDefault(__webpack_require__(54));
 
-var _convert2 = _interopRequireDefault(__webpack_require__(69));
+var _convert2 = _interopRequireDefault(__webpack_require__(73));
 
 var _number2 = _interopRequireDefault(__webpack_require__(30));
 
-var _string2 = _interopRequireDefault(__webpack_require__(43));
+var _string2 = _interopRequireDefault(__webpack_require__(42));
 
 var _object2 = _interopRequireDefault(__webpack_require__(15));
 
-var _array2 = _interopRequireDefault(__webpack_require__(35));
+var _array2 = _interopRequireDefault(__webpack_require__(36));
 
-var _consoleHook2 = _interopRequireDefault(__webpack_require__(70));
+var _consoleHook2 = _interopRequireDefault(__webpack_require__(74));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -148,7 +148,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '6.4.0';
+var VERSION = '6.5.0 beta';
 exports.VERSION = VERSION;
 var rootNames = {};
 var propertyNames = {};
@@ -258,7 +258,7 @@ _copyProperty(_object2["default"], propertyNames.OBJECT_ROOT, rootNames);
 object.objectToString = _type2["default"].objectToString;
 rootNames.objectToString = _type2["default"].objectToString; // array
 
-propertyNames.ARRAY_PUBLIC = 'NumberArray, IntegerArray,' + 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'arrayToIndexValueArray, arrayEntries' + '';
+propertyNames.ARRAY_PUBLIC = 'NumberArray, IntegerArray,' + 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'group,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'arrayToIndexValueArray, arrayEntries, ' + '';
 propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
 var array = {};
 exports.array = array;
@@ -268,7 +268,7 @@ _copyProperty(_array2["default"], propertyNames.ARRAY_PUBLIC, array);
 _copyProperty(_array2["default"], propertyNames.ARRAY_ROOT, rootNames); // array.operation
 
 
-propertyNames.ARRAY_OPERATION_PUBLIC = 'insert, add,' + 'deleteLength, deleteIndex,' + 'deleteFirst, deleteLast,' + 'includeFirst, includeLast, includeBothEnds,' + 'excludeFirst, excludeLast, excludeBothEnds,' + 'trimFirst, trimLast, trimBothEnds,' + 'popFirst, popLast,' + 'pushFirst, pushLast,' + 'remainFirst, remainLast,' + 'filter,' + 'sortNumberAscending, sortNumberDescending,' + 'sortLengthAscending, sortLengthDescending,' + 'sortDictionaryAscending, sortDictionaryDescending,' + '';
+propertyNames.ARRAY_OPERATION_PUBLIC = 'insert, add,' + 'deleteLength, deleteIndex,' + 'deleteFirst, deleteLast,' + 'includeFirst, includeLast, includeBothEnds,' + 'excludeFirst, excludeLast, excludeBothEnds,' + 'trimFirst, trimLast, trimBothEnds,' + 'popFirst, popLast,' + 'pushFirst, pushLast,' + 'remainFirst, remainLast,' + 'filter,' + 'sort,' + 'sortNumber,' + 'sortLength,' + 'sortDictionary,' + 'sortNumberAscending, sortNumberDescending,' + 'sortLengthAscending, sortLengthDescending,' + 'sortDictionaryAscending, sortDictionaryDescending,' + '';
 array.operation = {};
 
 _copyProperty(_array2["default"].operation, propertyNames.ARRAY_OPERATION_PUBLIC, array.operation); // consoleHook
@@ -3645,12 +3645,12 @@ var copyProperty = function copyProperty(fromObject, propertyArray) {
 
 exports.copyProperty = copyProperty;
 
-var _setProperty = function _setProperty(object, path, value) {
-  var propertyArray = path.split('.');
+var _setProperty = function _setProperty(object, propertyPath, value) {
+  var propertyArray = propertyPath.split('.');
 
   for (var i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '') {
-      throw new Error('setProperty args(propertyPath) is no exist property');
+      throw new Error('setProperty args(propertyPath) is empty string');
     }
   }
 
@@ -4005,7 +4005,7 @@ var browserName = function browserName() {
 
   if ((0, _includes_common._includesSome)(ua, ['msie', 'trident'])) {
     return 'InternetExplorer';
-  } else if ((0, _includes2._includes)(ua, 'edge')) {
+  } else if ((0, _includes2._includes)(ua, 'edg')) {
     return 'Edge';
   } else if ((0, _includes2._includes)(ua, 'opr')) {
     return 'Opera';
@@ -4530,7 +4530,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.unique = exports._unique = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = exports.max = exports._max = exports.min = exports._min = void 0;
+exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = exports.max = exports._max = exports.min = exports._min = void 0;
 
 var _type = __webpack_require__(4);
 
@@ -4542,19 +4542,7 @@ var _clone2 = __webpack_require__(22);
 
 var _cloneDeep2 = __webpack_require__(23);
 
-var _syntax = __webpack_require__(31);
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+var _unique2 = __webpack_require__(31);
 
 /**
  * array.min max
@@ -4740,7 +4728,7 @@ var _mode = function _mode(array) {
     return [];
   }
 
-  var uniqueArray = _unique(array);
+  var uniqueArray = (0, _unique2._unique)(array);
 
   var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
@@ -4765,53 +4753,18 @@ var mode = function mode(array) {
   return _mode(array);
 };
 /**
- * uniqe
- */
-
-
-exports.mode = mode;
-
-var _unique = function _unique(array) {
-  if ((0, _syntax.canUseSet)() && array.length > 120) {
-    return _toConsumableArray(new Set(array));
-  } else {
-    var result = [];
-
-    for (var i = 0, l = array.length; i < l; i += 1) {
-      if (result.indexOf(array[i]) === -1) {
-        result.push(array[i]);
-      }
-    }
-
-    return result;
-  } // node.js v8
-  // It is faster to use Set
-  // when the array.lentgh is larger than about 120
-
-};
-
-exports._unique = _unique;
-
-var unique = function unique(array) {
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('unique args(array) is not array');
-  }
-
-  return _unique(array);
-};
-/**
  * single
  */
 
 
-exports.unique = unique;
+exports.mode = mode;
 
 var _single = function _single(array) {
   if (array.length === 0) {
     return [];
   }
 
-  var uniqueArray = _unique(array);
+  var uniqueArray = (0, _unique2._unique)(array);
 
   var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
@@ -4845,7 +4798,7 @@ var _multiple = function _multiple(array) {
     return [];
   }
 
-  var uniqueArray = _unique(array);
+  var uniqueArray = (0, _unique2._unique)(array);
 
   var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
@@ -4906,7 +4859,7 @@ var filter = function filter(array, func) {
   }
 
   if (!(0, _type.isFunction)(func)) {
-    throw new TypeError('filter args(compareFunc) is not function');
+    throw new TypeError('filter args(func) is not function');
   }
 
   return _filter(array, func);
@@ -5525,7 +5478,6 @@ var _default = {
   _average: _average,
   _median: _median,
   _mode: _mode,
-  _unique: _unique,
   _single: _single,
   _multiple: _multiple,
   _filter: _filter,
@@ -5551,7 +5503,6 @@ var _default = {
   average: average,
   median: median,
   mode: mode,
-  unique: unique,
   single: single,
   multiple: multiple,
   filter: filter,
@@ -5602,10 +5553,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * isMultiples isEven isOdd
  */
 var _isMultiples = function _isMultiples(number, radix) {
-  if (number === 0) {
-    return false;
-  }
-
   return number % radix === 0;
 };
 
@@ -5632,20 +5579,12 @@ var isMultiples = function isMultiples(number, radix) {
 exports.isMultiples = isMultiples;
 
 var isEven = function isEven(number) {
-  if (number === 0) {
-    return false;
-  }
-
   return isMultiples(number, 2);
 };
 
 exports.isEven = isEven;
 
 var isOdd = function isOdd(number) {
-  if (number === 0) {
-    return false;
-  }
-
   return !isMultiples(number, 2);
 };
 /**
@@ -5872,13 +5811,148 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports.unique = exports._unique = exports.__unique = void 0;
+
+var _type = __webpack_require__(4);
+
+var _syntax = __webpack_require__(32);
+
+var _isObjectParameter = __webpack_require__(9);
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/**
+ * uniqe
+ */
+var __unique = function __unique(array) {
+  if ((0, _syntax.canUseSet)() && array.length > 120) {
+    return _toConsumableArray(new Set(array));
+  } else {
+    var result = [];
+
+    for (var i = 0, l = array.length; i < l; i += 1) {
+      if (result.indexOf(array[i]) === -1) {
+        result.push(array[i]);
+      }
+    }
+
+    return result;
+  } // node.js v8
+  // It is faster to use Set
+  // when the array.lentgh is larger than about 120
+
+};
+
+exports.__unique = __unique;
+
+var _unique = function _unique(array, func, detail) {
+  if ((0, _type.isUndefined)(func)) {
+    if (detail === false) {
+      return __unique(array);
+    }
+
+    func = function func(v) {
+      return v;
+    };
+  }
+
+  var index = [];
+  var result = [];
+  array.forEach(function (v) {
+    var funcResult = func(v);
+    var i = index.indexOf(funcResult);
+
+    if (i === -1) {
+      index.push(funcResult);
+      result.push(v);
+    }
+  });
+
+  if (detail) {
+    return {
+      index: index,
+      result: result
+    };
+  }
+
+  return result;
+};
+
+exports._unique = _unique;
+
+var unique = function unique(array, func) {
+  var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
+    var _array = array;
+    array = _array.array;
+    func = _array.func;
+    var _array$detail = _array.detail;
+    detail = _array$detail === void 0 ? false : _array$detail;
+  } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
+    var _func = func;
+    func = _func.func;
+    var _func$detail = _func.detail;
+    detail = _func$detail === void 0 ? false : _func$detail;
+  } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
+    var _detail = detail;
+    detail = _detail.detail;
+  }
+
+  if (!(0, _type.isArray)(array)) {
+    throw new TypeError('unique args(array) is not array');
+  }
+
+  if (!((0, _type.isFunction)(func) || (0, _type.isUndefined)(func))) {
+    throw new TypeError('group args(func) is not [function|undefined]');
+  }
+
+  if (!(0, _type.isBoolean)(detail)) {
+    throw new TypeError('group args(detail) is not boolean');
+  }
+
+  if (detail && (0, _type.isUndefined)(func)) {
+    throw new TypeError('group args(detail) is true and args(func) must be function');
+  }
+
+  return _unique(array, func, detail);
+};
+
+exports.unique = unique;
+var _default = {
+  __unique: __unique,
+  _unique: _unique,
+  unique: unique
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.canUseSet = exports.canUseMap = exports.loop = exports._loopBase = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = void 0;
 
 var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _IntegerArray2 = __webpack_require__(32);
+var _IntegerArray2 = __webpack_require__(33);
 
 var _objectToKeyValueArray = __webpack_require__(16);
 
@@ -6257,7 +6331,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6272,7 +6346,7 @@ var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _NumberArray2 = __webpack_require__(33);
+var _NumberArray2 = __webpack_require__(34);
 
 /**
  * IntegerArray
@@ -6326,7 +6400,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6433,7 +6507,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6446,11 +6520,11 @@ exports["default"] = exports.isNotThrown = exports.isThrownException = exports.i
 
 var _type = __webpack_require__(4);
 
-var _array = __webpack_require__(35);
+var _array = __webpack_require__(36);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
-var _compare = __webpack_require__(55);
+var _compare = __webpack_require__(54);
 
 /**
  * test framework
@@ -6668,7 +6742,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6684,49 +6758,6 @@ var _exportNames = {
 };
 exports.operation = exports["default"] = void 0;
 
-var _array_operation_sort = _interopRequireDefault(__webpack_require__(36));
-
-var _array_operation = _interopRequireDefault(__webpack_require__(41));
-
-var _arrayToIndexValueArray = _interopRequireWildcard(__webpack_require__(42));
-
-Object.keys(_arrayToIndexValueArray).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _arrayToIndexValueArray[key];
-    }
-  });
-});
-
-var _IntegerArray = _interopRequireWildcard(__webpack_require__(32));
-
-Object.keys(_IntegerArray).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _IntegerArray[key];
-    }
-  });
-});
-
-var _NumberArray = _interopRequireWildcard(__webpack_require__(33));
-
-Object.keys(_NumberArray).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _NumberArray[key];
-    }
-  });
-});
-
 var _array_common = _interopRequireWildcard(__webpack_require__(29));
 
 Object.keys(_array_common).forEach(function (key) {
@@ -6740,11 +6771,80 @@ Object.keys(_array_common).forEach(function (key) {
   });
 });
 
+var _NumberArray = _interopRequireWildcard(__webpack_require__(34));
+
+Object.keys(_NumberArray).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _NumberArray[key];
+    }
+  });
+});
+
+var _IntegerArray = _interopRequireWildcard(__webpack_require__(33));
+
+Object.keys(_IntegerArray).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _IntegerArray[key];
+    }
+  });
+});
+
+var _arrayToIndexValueArray = _interopRequireWildcard(__webpack_require__(37));
+
+Object.keys(_arrayToIndexValueArray).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _arrayToIndexValueArray[key];
+    }
+  });
+});
+
+var _group = _interopRequireWildcard(__webpack_require__(38));
+
+Object.keys(_group).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _group[key];
+    }
+  });
+});
+
+var _unique = _interopRequireWildcard(__webpack_require__(31));
+
+Object.keys(_unique).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _unique[key];
+    }
+  });
+});
+
+var _array_operation = _interopRequireDefault(__webpack_require__(39));
+
+var _sort = _interopRequireDefault(__webpack_require__(40));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -6752,219 +6852,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray["default"]), _IntegerArray["default"]), _arrayToIndexValueArray["default"]), {}, {
-  operation: _objectSpread(_objectSpread({}, _array_operation["default"]), _array_operation_sort["default"])
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray["default"]), _IntegerArray["default"]), _arrayToIndexValueArray["default"]), _group["default"]), _unique["default"]), {}, {
+  operation: _objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"])
 });
 
 exports["default"] = _default;
 
-var operation = _objectSpread(_objectSpread({}, _array_operation["default"]), _array_operation_sort["default"]);
+var operation = _objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]);
 
 exports.operation = operation;
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.sortDictionaryDescending = exports._sortDictionaryDescending = exports.sortDictionaryAscending = exports._sortDictionaryAscending = exports.sortLengthDescending = exports._sortLengthDescending = exports.sortLengthAscending = exports._sortLengthAscending = exports.sortNumberDescending = exports._sortNumberDescending = exports.sortNumberAscending = exports._sortNumberAscending = exports.sort = exports._sort = void 0;
-
-var _type = __webpack_require__(4);
-
-var _allMatch = __webpack_require__(37);
-
-var _allMatchSome = __webpack_require__(38);
-
-var _compare_common = __webpack_require__(40);
-
-/**
- * array.sort
- */
-var _sort = function _sort(array, pattern, order) {
-  switch (pattern) {
-    case 'number':
-      switch (order) {
-        case 'ascending':
-          return array.sort(function (a, b) {
-            return a - b;
-          });
-
-        case 'descending':
-          return array.sort(function (a, b) {
-            return b - a;
-          });
-      }
-
-      break;
-
-    case 'length':
-      switch (order) {
-        case 'ascending':
-          return array.sort(function (a, b) {
-            return a.length - b.length;
-          });
-
-        case 'descending':
-          return array.sort(function (a, b) {
-            return b.length - a.length;
-          });
-      }
-
-      break;
-
-    case 'dictionary':
-      switch (order) {
-        case 'ascending':
-          return array.sort(function (a, b) {
-            return a > b ? 1 : a < b ? -1 : 0;
-          });
-        // = array.sort();
-
-        case 'descending':
-          return array.sort(function (a, b) {
-            return a > b ? -1 : a < b ? 1 : 0;
-          });
-      }
-
-      break;
-  }
-};
-
-exports._sort = _sort;
-
-var sort = function sort(array, pattern, order) {
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('sortNumberAscending args(array) is not array');
-  }
-
-  if (!(0, _compare_common._or)(order, ['ascending', 'descending'])) {
-    throw new TypeError('sort args(order) is not [ascending|descending]');
-  }
-
-  switch (pattern) {
-    case 'number':
-      if (!(0, _allMatch.allMatch)(array, _type.isNumber)) {
-        throw new TypeError('sort number args(array) element is not number');
-      }
-
-      break;
-
-    case 'length':
-      if (!(0, _allMatchSome.allMatchSome)(array, [_type.isString, function (element) {
-        return 'length' in element;
-      }])) {
-        throw new TypeError('sort length args(array) element does not have length property');
-      }
-
-      break;
-
-    case 'dictionary':
-      if (!(0, _allMatch.allMatch)(array, _type.isString)) {
-        throw new TypeError('sort dictionary args(array) element is not string');
-      }
-
-      break;
-
-    default:
-      throw new TypeError('sort args(pattern) is not [number|length|dictionary]');
-  }
-
-  return _sort(array, pattern, order);
-};
-
-exports.sort = sort;
-
-var _sortNumberAscending = function _sortNumberAscending(array) {
-  return _sort(array, 'number', 'ascending');
-};
-
-exports._sortNumberAscending = _sortNumberAscending;
-
-var sortNumberAscending = function sortNumberAscending(array) {
-  return sort(array, 'number', 'ascending');
-};
-
-exports.sortNumberAscending = sortNumberAscending;
-
-var _sortNumberDescending = function _sortNumberDescending(array) {
-  return _sort(array, 'number', 'descending');
-};
-
-exports._sortNumberDescending = _sortNumberDescending;
-
-var sortNumberDescending = function sortNumberDescending(array) {
-  return sort(array, 'number', 'descending');
-};
-
-exports.sortNumberDescending = sortNumberDescending;
-
-var _sortLengthAscending = function _sortLengthAscending(array) {
-  return _sort(array, 'length', 'ascending');
-};
-
-exports._sortLengthAscending = _sortLengthAscending;
-
-var sortLengthAscending = function sortLengthAscending(array) {
-  return sort(array, 'length', 'ascending');
-};
-
-exports.sortLengthAscending = sortLengthAscending;
-
-var _sortLengthDescending = function _sortLengthDescending(array) {
-  return _sort(array, 'length', 'descending');
-};
-
-exports._sortLengthDescending = _sortLengthDescending;
-
-var sortLengthDescending = function sortLengthDescending(array) {
-  return sort(array, 'length', 'descending');
-};
-
-exports.sortLengthDescending = sortLengthDescending;
-
-var _sortDictionaryAscending = function _sortDictionaryAscending(array) {
-  return _sort(array, 'dictionary', 'ascending');
-};
-
-exports._sortDictionaryAscending = _sortDictionaryAscending;
-
-var sortDictionaryAscending = function sortDictionaryAscending(array) {
-  return sort(array, 'dictionary', 'ascending');
-};
-
-exports.sortDictionaryAscending = sortDictionaryAscending;
-
-var _sortDictionaryDescending = function _sortDictionaryDescending(array) {
-  return _sort(array, 'dictionary', 'descending');
-};
-
-exports._sortDictionaryDescending = _sortDictionaryDescending;
-
-var sortDictionaryDescending = function sortDictionaryDescending(array) {
-  return sort(array, 'dictionary', 'descending');
-};
-
-exports.sortDictionaryDescending = sortDictionaryDescending;
-var _default = {
-  _sortNumberAscending: _sortNumberAscending,
-  _sortNumberDescending: _sortNumberDescending,
-  _sortLengthAscending: _sortLengthAscending,
-  _sortLengthDescending: _sortLengthDescending,
-  _sortDictionaryAscending: _sortDictionaryAscending,
-  _sortDictionaryDescending: _sortDictionaryDescending,
-  sortNumberAscending: sortNumberAscending,
-  sortNumberDescending: sortNumberDescending,
-  sortLengthAscending: sortLengthAscending,
-  sortLengthDescending: sortLengthDescending,
-  sortDictionaryAscending: sortDictionaryAscending,
-  sortDictionaryDescending: sortDictionaryDescending
-};
-exports["default"] = _default;
 
 /***/ }),
 /* 37 */
@@ -6976,48 +6872,49 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.allMatch = exports._allMatch = void 0;
+exports["default"] = exports.arrayEntries = exports.arrayToIndexValueArray = exports._arrayToIndexValueArray = void 0;
 
 var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _array_common = __webpack_require__(29);
-
-var _match2 = __webpack_require__(27);
+var _NumberArray2 = __webpack_require__(34);
 
 /**
- * allMatch
+ * arrayToIndexValueArray
  */
-var _allMatch = function _allMatch(valueArray, compare) {
-  return (0, _array_common._all)(valueArray, function (value) {
-    return (0, _match2._match)(value, compare);
-  });
-};
+var _arrayToIndexValueArray = function _arrayToIndexValueArray(array) {
+  var result = [];
 
-exports._allMatch = _allMatch;
-
-var allMatch = function allMatch(valueArray, compare) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compare')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compare = _valueArray.compare;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
-    var _compare = compare;
-    compare = _compare.compare;
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    result.push([i, array[i]]);
   }
 
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('allMatch args(valueArray) is not array');
-  }
-
-  return _allMatch(valueArray, compare);
+  return result;
 };
 
-exports.allMatch = allMatch;
+exports._arrayToIndexValueArray = _arrayToIndexValueArray;
+
+var arrayToIndexValueArray = function arrayToIndexValueArray(array) {
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array')) {
+    var _array = array;
+    array = _array.array;
+  }
+
+  if (!(0, _type.isArray)(array)) {
+    throw new TypeError('arrayToIndexValueArray args(array) is not array');
+  }
+
+  return _arrayToIndexValueArray(array);
+};
+
+exports.arrayToIndexValueArray = arrayToIndexValueArray;
+var arrayEntries = arrayToIndexValueArray;
+exports.arrayEntries = arrayEntries;
 var _default = {
-  _allMatch: _allMatch,
-  allMatch: allMatch
+  _arrayToIndexValueArray: _arrayToIndexValueArray,
+  arrayToIndexValueArray: arrayToIndexValueArray,
+  arrayEntries: arrayEntries
 };
 exports["default"] = _default;
 
@@ -7031,164 +6928,98 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.allMatchSome = exports._allMatchSome = void 0;
+exports["default"] = exports.group = exports._group = void 0;
 
 var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _array_common = __webpack_require__(29);
-
-var _matchSome2 = __webpack_require__(39);
-
 /**
- * allMatchSome
+ * group
  */
-var _allMatchSome = function _allMatchSome(valueArray, compareArray) {
-  return (0, _array_common._all)(valueArray, function (value) {
-    return (0, _matchSome2._matchSome)(value, compareArray);
+var _group = function _group(array) {
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
+    return v;
+  };
+  var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var index = [];
+  var result = [];
+  array.forEach(function (v) {
+    var funcResult = func(v);
+    var i = index.indexOf(funcResult);
+
+    if (i === -1) {
+      index.push(funcResult);
+      result.push([v]);
+    } else {
+      result[i].push(v);
+    }
   });
+
+  if (detail) {
+    return {
+      index: index,
+      result: result
+    };
+  }
+
+  return result;
 };
 
-exports._allMatchSome = _allMatchSome;
+exports._group = _group;
 
-var allMatchSome = function allMatchSome(valueArray, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compareArray = _valueArray.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
+var group = function group(array) {
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
+    return v;
+  };
+  var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
+    var _array = array;
+    array = _array.array;
+    var _array$func = _array.func;
+    func = _array$func === void 0 ? function (v) {
+      return v;
+    } : _array$func;
+    var _array$detail = _array.detail;
+    detail = _array$detail === void 0 ? false : _array$detail;
+  } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
+    var _func = func;
+    var _func$func = _func.func;
+    func = _func$func === void 0 ? function (v) {
+      return v;
+    } : _func$func;
+    var _func$detail = _func.detail;
+    detail = _func$detail === void 0 ? false : _func$detail;
+  } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
+    var _detail = detail;
+    detail = _detail.detail;
   }
 
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('allMatchSome args(valueArray) is not array');
+  if (!(0, _type.isArray)(array)) {
+    throw new TypeError('group args(array) is not array');
   }
 
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('allMatchSome args(compareArray) is not array');
+  if (!(0, _type.isFunction)(func)) {
+    throw new TypeError('group args(func) is not function');
   }
 
-  return _allMatchSome(valueArray, compareArray);
+  if (!(0, _type.isBoolean)(detail)) {
+    throw new TypeError('group args(detail) is not boolean');
+  }
+
+  return _group(array, func, detail);
 };
 
-exports.allMatchSome = allMatchSome;
+exports.group = group;
 var _default = {
-  _allMatchSome: _allMatchSome,
-  allMatchSome: allMatchSome
+  _group: _group,
+  group: group
 };
 exports["default"] = _default;
 
 /***/ }),
 /* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchSome = exports._matchSome = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _array_common = __webpack_require__(29);
-
-var _match2 = __webpack_require__(27);
-
-/**
- * matchSome
- */
-var _matchSome = function _matchSome(value, compareArray) {
-  return (0, _array_common._some)(compareArray, function (compare) {
-    return (0, _match2._match)(value, compare);
-  });
-};
-
-exports._matchSome = _matchSome;
-
-var matchSome = function matchSome(value, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('matchSome args(compareArray) is not array');
-  }
-
-  return _matchSome(value, compareArray);
-};
-
-exports.matchSome = matchSome;
-var _default = {
-  _matchSome: _matchSome,
-  matchSome: matchSome
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.or = exports._or = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-/**
- * or
- */
-var _or = function _or(value, compareArray) {
-  for (var i = 0; i < compareArray.length; i += 1) {
-    if (value === compareArray[i]) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
-exports._or = _or;
-
-var or = function or(value, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('or args(compareArray) is not array');
-  }
-
-  return _or(value, compareArray);
-};
-
-exports.or = or;
-var _default = {
-  _or: _or,
-  or: or
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8111,7 +7942,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8120,54 +7951,262 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.arrayEntries = exports.arrayToIndexValueArray = exports._arrayToIndexValueArray = void 0;
+exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAscending = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortDictionary = exports._sortDictionary = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = exports._sort = void 0;
+
+var _type = __webpack_require__(4);
+
+var _syntax = __webpack_require__(32);
+
+var _compare_common = __webpack_require__(41);
+
+var _isObjectParameter = __webpack_require__(9);
+
+/**
+ * array.operation.sort
+ */
+var _sort = function _sort(array) {
+  var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sort.order.ascending;
+  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v) {
+    return v;
+  };
+  var orderFunc = (0, _syntax.switch_)(order)([[sort.order.ascending, function () {
+    return sort.orderFunction.ascending;
+  }], [sort.order.descending, function () {
+    return sort.orderFunction.descending;
+  }], [function () {
+    throw new Error('_sort args(order) is not ["ascending"|"descending"]');
+  }]]);
+  array.sort(function (a, b) {
+    return orderFunc(func(a), func(b));
+  });
+  return array;
+};
+
+exports._sort = _sort;
+
+var sort = function sort(array) {
+  var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sort.order.ascending;
+  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v) {
+    return v;
+  };
+
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'order, func')) {
+    var _array = array;
+    array = _array.array;
+    var _array$order = _array.order;
+    order = _array$order === void 0 ? sort.order.ascending : _array$order;
+    var _array$func = _array.func;
+    func = _array$func === void 0 ? function (v) {
+      return v;
+    } : _array$func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(order, '', 'order, func')) {
+    var _order = order;
+    var _order$order = _order.order;
+    order = _order$order === void 0 ? sort.order.ascending : _order$order;
+    var _order$func = _order.func;
+    func = _order$func === void 0 ? function (v) {
+      return v;
+    } : _order$func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(func, 'func')) {
+    var _func = func;
+    var _func$func = _func.func;
+    func = _func$func === void 0 ? function (v) {
+      return v;
+    } : _func$func;
+  }
+
+  if (!(0, _type.isArray)(array)) {
+    throw new TypeError('sort args(array) is not array');
+  }
+
+  if (!(0, _compare_common._or)(order, Object.values(sort.order))) {
+    throw new TypeError('sort args(order) is not ["ascending"|"descending"]');
+  }
+
+  if (!(0, _type.isFunction)(func)) {
+    throw new TypeError('sort args(func) is not function');
+  }
+
+  return _sort(array, order, func);
+};
+
+exports.sort = sort;
+sort.orderFunction = {
+  ascending: function ascending(a, b) {
+    return a > b ? 1 : a < b ? -1 : 0;
+  },
+  descending: function descending(a, b) {
+    return a > b ? -1 : a < b ? 1 : 0;
+  }
+};
+sort.order = {
+  ascending: 'ascending',
+  descending: 'descending'
+};
+
+var _sortNumber = function _sortNumber(array, order) {
+  return _sort(array, order);
+};
+
+exports._sortNumber = _sortNumber;
+
+var sortNumber = function sortNumber(array, order) {
+  return sort(array, order, function (v) {
+    if (!(0, _type.isNumber)(v)) {
+      throw new TypeError('sortLength args(array) element is not number');
+    }
+
+    return v;
+  });
+};
+
+exports.sortNumber = sortNumber;
+
+var _sortLength = function _sortLength(array, order) {
+  return sort(array, order, function (v) {
+    return v.length;
+  });
+};
+
+exports._sortLength = _sortLength;
+
+var sortLength = function sortLength(array, order) {
+  return sort(array, order, function (v) {
+    if (!((0, _type.isString)(v) || 'length' in v)) {
+      throw new TypeError('sortLength args(array) element must have length property');
+    }
+
+    return v.length;
+  });
+};
+
+exports.sortLength = sortLength;
+
+var _sortDictionary = function _sortDictionary(array, order) {
+  return sort(array, order);
+};
+
+exports._sortDictionary = _sortDictionary;
+
+var sortDictionary = function sortDictionary(array, order) {
+  return sort(array, order, function (v) {
+    if (!(0, _type.isString)(v)) {
+      throw new TypeError('sortLength args(array) element is not string');
+    }
+
+    return v;
+  });
+};
+
+exports.sortDictionary = sortDictionary;
+
+var sortNumberAscending = function sortNumberAscending(array) {
+  return sortNumber(array, sort.order.ascending);
+};
+
+exports.sortNumberAscending = sortNumberAscending;
+
+var sortNumberDescending = function sortNumberDescending(array) {
+  return sortNumber(array, sort.order.descending);
+};
+
+exports.sortNumberDescending = sortNumberDescending;
+
+var sortLengthAscending = function sortLengthAscending(array) {
+  return sortLength(array, sort.order.ascending);
+};
+
+exports.sortLengthAscending = sortLengthAscending;
+
+var sortLengthDescending = function sortLengthDescending(array) {
+  return sortLength(array, sort.order.descending);
+};
+
+exports.sortLengthDescending = sortLengthDescending;
+
+var sortDictionaryAscending = function sortDictionaryAscending(array) {
+  return sortDictionary(array, sort.order.ascending);
+};
+
+exports.sortDictionaryAscending = sortDictionaryAscending;
+
+var sortDictionaryDescending = function sortDictionaryDescending(array) {
+  return sortDictionary(array, sort.order.descending);
+};
+
+exports.sortDictionaryDescending = sortDictionaryDescending;
+var _default = {
+  _sort: _sort,
+  _sortNumber: _sortNumber,
+  _sortLength: _sortLength,
+  _sortDictionary: _sortDictionary,
+  sort: sort,
+  sortNumber: sortNumber,
+  sortLength: sortLength,
+  sortDictionary: sortDictionary,
+  sortNumberAscending: sortNumberAscending,
+  sortNumberDescending: sortNumberDescending,
+  sortLengthAscending: sortLengthAscending,
+  sortLengthDescending: sortLengthDescending,
+  sortDictionaryAscending: sortDictionaryAscending,
+  sortDictionaryDescending: sortDictionaryDescending
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.or = exports._or = void 0;
 
 var _type = __webpack_require__(4);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _NumberArray2 = __webpack_require__(33);
-
 /**
- * arrayToIndexValueArray
+ * or
  */
-var _arrayToIndexValueArray = function _arrayToIndexValueArray(array) {
-  var result = [];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    result.push([i, array[i]]);
+var _or = function _or(value, compareArray) {
+  for (var i = 0; i < compareArray.length; i += 1) {
+    if (value === compareArray[i]) {
+      return true;
+    }
   }
 
-  return result;
+  return false;
 };
 
-exports._arrayToIndexValueArray = _arrayToIndexValueArray;
+exports._or = _or;
 
-var arrayToIndexValueArray = function arrayToIndexValueArray(array) {
-  if ((0, _isObjectParameter.isObjectParameter)(array, 'array')) {
-    var _array = array;
-    array = _array.array;
+var or = function or(value, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
   }
 
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('arrayToIndexValueArray args(array) is not array');
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('or args(compareArray) is not array');
   }
 
-  return _arrayToIndexValueArray(array);
+  return _or(value, compareArray);
 };
 
-exports.arrayToIndexValueArray = arrayToIndexValueArray;
-var arrayEntries = arrayToIndexValueArray;
-exports.arrayEntries = arrayEntries;
+exports.or = or;
 var _default = {
-  _arrayToIndexValueArray: _arrayToIndexValueArray,
-  arrayToIndexValueArray: arrayToIndexValueArray,
-  arrayEntries: arrayEntries
+  _or: _or,
+  or: or
 };
 exports["default"] = _default;
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8181,7 +8220,7 @@ Object.defineProperty(exports, "__esModule", {
 var _exportNames = {};
 exports["default"] = void 0;
 
-var _string_common = _interopRequireWildcard(__webpack_require__(44));
+var _string_common = _interopRequireWildcard(__webpack_require__(43));
 
 Object.keys(_string_common).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -8207,7 +8246,7 @@ Object.keys(_replaceAll2).forEach(function (key) {
   });
 });
 
-var _replaceAll3 = _interopRequireWildcard(__webpack_require__(45));
+var _replaceAll3 = _interopRequireWildcard(__webpack_require__(44));
 
 Object.keys(_replaceAll3).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -8220,7 +8259,7 @@ Object.keys(_replaceAll3).forEach(function (key) {
   });
 });
 
-var _matchFormat = _interopRequireWildcard(__webpack_require__(46));
+var _matchFormat = _interopRequireWildcard(__webpack_require__(45));
 
 Object.keys(_matchFormat).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -8233,21 +8272,21 @@ Object.keys(_matchFormat).forEach(function (key) {
   });
 });
 
-var _subFirstDelimFirst = _interopRequireDefault(__webpack_require__(47));
+var _subFirstDelimFirst = _interopRequireDefault(__webpack_require__(46));
 
-var _subFirstDelimLast = _interopRequireDefault(__webpack_require__(48));
+var _subFirstDelimLast = _interopRequireDefault(__webpack_require__(47));
 
-var _subLastDelimFirst = _interopRequireDefault(__webpack_require__(49));
+var _subLastDelimFirst = _interopRequireDefault(__webpack_require__(48));
 
-var _subLastDelimLast = _interopRequireDefault(__webpack_require__(50));
+var _subLastDelimLast = _interopRequireDefault(__webpack_require__(49));
 
-var _tagInnerFirst = _interopRequireDefault(__webpack_require__(51));
+var _tagInnerFirst = _interopRequireDefault(__webpack_require__(50));
 
-var _tagOuterFirst = _interopRequireDefault(__webpack_require__(52));
+var _tagOuterFirst = _interopRequireDefault(__webpack_require__(51));
 
-var _tagInnerLast = _interopRequireDefault(__webpack_require__(53));
+var _tagInnerLast = _interopRequireDefault(__webpack_require__(52));
 
-var _tagOuterLast = _interopRequireDefault(__webpack_require__(54));
+var _tagOuterLast = _interopRequireDefault(__webpack_require__(53));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -8266,7 +8305,7 @@ var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSp
 exports["default"] = _default;
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8283,7 +8322,7 @@ var _isObjectParameter = __webpack_require__(9);
 
 var _number = __webpack_require__(30);
 
-var _array = __webpack_require__(35);
+var _array = __webpack_require__(36);
 
 /**
  * repeat
@@ -9479,7 +9518,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9526,7 +9565,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9757,7 +9796,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9770,7 +9809,7 @@ exports["default"] = exports.subFirstDelimFirst = exports._subFirstDelimFirst = 
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -9815,7 +9854,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9828,7 +9867,7 @@ exports["default"] = exports.subFirstDelimLast = exports._subFirstDelimLast = vo
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -9873,7 +9912,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9886,7 +9925,7 @@ exports["default"] = exports.subLastDelimFirst = exports._subLastDelimFirst = vo
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -9931,7 +9970,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9944,7 +9983,7 @@ exports["default"] = exports.subLastDelimLast = exports._subLastDelimLast = void
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -9989,7 +10028,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10002,11 +10041,11 @@ exports["default"] = exports.tagInnerFirst = exports._tagInnerFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _tagOuterFirst2 = __webpack_require__(52);
+var _tagOuterFirst2 = __webpack_require__(51);
 
 var _tagInnerFirst = function _tagInnerFirst(str, startTag, endTag) {
   var result = (0, _tagOuterFirst2._tagOuterFirst)(str, startTag, endTag);
@@ -10058,7 +10097,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10071,7 +10110,7 @@ exports["default"] = exports.tagOuterFirst = exports._tagOuterFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -10141,7 +10180,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10154,11 +10193,11 @@ exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
-var _tagOuterLast2 = __webpack_require__(54);
+var _tagOuterLast2 = __webpack_require__(53);
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
   var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
@@ -10210,7 +10249,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10223,7 +10262,7 @@ exports["default"] = exports.tagOuterLast = exports._tagOuterLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -10293,7 +10332,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10307,236 +10346,15 @@ Object.defineProperty(exports, "__esModule", {
 var _exportNames = {};
 exports["default"] = void 0;
 
-var _equal = _interopRequireWildcard(__webpack_require__(56));
+var _compare_common = _interopRequireWildcard(__webpack_require__(41));
 
-Object.keys(_equal).forEach(function (key) {
+Object.keys(_compare_common).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _equal[key];
-    }
-  });
-});
-
-var _includes_common = _interopRequireWildcard(__webpack_require__(28));
-
-Object.keys(_includes_common).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _includes_common[key];
-    }
-  });
-});
-
-var _includes = _interopRequireWildcard(__webpack_require__(26));
-
-Object.keys(_includes).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _includes[key];
-    }
-  });
-});
-
-var _someMatchAll = _interopRequireWildcard(__webpack_require__(57));
-
-Object.keys(_someMatchAll).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _someMatchAll[key];
-    }
-  });
-});
-
-var _allMatchAll = _interopRequireWildcard(__webpack_require__(60));
-
-Object.keys(_allMatchAll).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _allMatchAll[key];
-    }
-  });
-});
-
-var _indexOfMatchAll = _interopRequireWildcard(__webpack_require__(58));
-
-Object.keys(_indexOfMatchAll).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _indexOfMatchAll[key];
-    }
-  });
-});
-
-var _matchAllValue = _interopRequireWildcard(__webpack_require__(61));
-
-Object.keys(_matchAllValue).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _matchAllValue[key];
-    }
-  });
-});
-
-var _matchAll = _interopRequireWildcard(__webpack_require__(59));
-
-Object.keys(_matchAll).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _matchAll[key];
-    }
-  });
-});
-
-var _someMatchSome = _interopRequireWildcard(__webpack_require__(62));
-
-Object.keys(_someMatchSome).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _someMatchSome[key];
-    }
-  });
-});
-
-var _allMatchSome = _interopRequireWildcard(__webpack_require__(38));
-
-Object.keys(_allMatchSome).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _allMatchSome[key];
-    }
-  });
-});
-
-var _indexOfMatchSome = _interopRequireWildcard(__webpack_require__(63));
-
-Object.keys(_indexOfMatchSome).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _indexOfMatchSome[key];
-    }
-  });
-});
-
-var _matchSomeValue = _interopRequireWildcard(__webpack_require__(64));
-
-Object.keys(_matchSomeValue).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _matchSomeValue[key];
-    }
-  });
-});
-
-var _matchSome = _interopRequireWildcard(__webpack_require__(39));
-
-Object.keys(_matchSome).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _matchSome[key];
-    }
-  });
-});
-
-var _someMatch = _interopRequireWildcard(__webpack_require__(65));
-
-Object.keys(_someMatch).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _someMatch[key];
-    }
-  });
-});
-
-var _allMatch = _interopRequireWildcard(__webpack_require__(37));
-
-Object.keys(_allMatch).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _allMatch[key];
-    }
-  });
-});
-
-var _indexOfMatch = _interopRequireWildcard(__webpack_require__(66));
-
-Object.keys(_indexOfMatch).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _indexOfMatch[key];
-    }
-  });
-});
-
-var _initialValue = _interopRequireWildcard(__webpack_require__(67));
-
-Object.keys(_initialValue).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _initialValue[key];
-    }
-  });
-});
-
-var _matchValue = _interopRequireWildcard(__webpack_require__(68));
-
-Object.keys(_matchValue).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _matchValue[key];
+      return _compare_common[key];
     }
   });
 });
@@ -10554,15 +10372,262 @@ Object.keys(_match).forEach(function (key) {
   });
 });
 
-var _compare_common = _interopRequireWildcard(__webpack_require__(40));
+var _matchValue = _interopRequireWildcard(__webpack_require__(55));
 
-Object.keys(_compare_common).forEach(function (key) {
+Object.keys(_matchValue).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _compare_common[key];
+      return _matchValue[key];
+    }
+  });
+});
+
+var _initialValue = _interopRequireWildcard(__webpack_require__(56));
+
+Object.keys(_initialValue).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _initialValue[key];
+    }
+  });
+});
+
+var _indexOfMatch = _interopRequireWildcard(__webpack_require__(59));
+
+Object.keys(_indexOfMatch).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _indexOfMatch[key];
+    }
+  });
+});
+
+var _allMatch = _interopRequireWildcard(__webpack_require__(60));
+
+Object.keys(_allMatch).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _allMatch[key];
+    }
+  });
+});
+
+var _someMatch = _interopRequireWildcard(__webpack_require__(61));
+
+Object.keys(_someMatch).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _someMatch[key];
+    }
+  });
+});
+
+var _matchSome = _interopRequireWildcard(__webpack_require__(58));
+
+Object.keys(_matchSome).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _matchSome[key];
+    }
+  });
+});
+
+var _matchSomeValue = _interopRequireWildcard(__webpack_require__(57));
+
+Object.keys(_matchSomeValue).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _matchSomeValue[key];
+    }
+  });
+});
+
+var _indexOfMatchSome = _interopRequireWildcard(__webpack_require__(62));
+
+Object.keys(_indexOfMatchSome).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _indexOfMatchSome[key];
+    }
+  });
+});
+
+var _allMatchSome = _interopRequireWildcard(__webpack_require__(63));
+
+Object.keys(_allMatchSome).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _allMatchSome[key];
+    }
+  });
+});
+
+var _someMatchSome = _interopRequireWildcard(__webpack_require__(64));
+
+Object.keys(_someMatchSome).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _someMatchSome[key];
+    }
+  });
+});
+
+var _matchAll = _interopRequireWildcard(__webpack_require__(65));
+
+Object.keys(_matchAll).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _matchAll[key];
+    }
+  });
+});
+
+var _matchAllValue = _interopRequireWildcard(__webpack_require__(66));
+
+Object.keys(_matchAllValue).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _matchAllValue[key];
+    }
+  });
+});
+
+var _indexOfMatchAll = _interopRequireWildcard(__webpack_require__(67));
+
+Object.keys(_indexOfMatchAll).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _indexOfMatchAll[key];
+    }
+  });
+});
+
+var _allMatchAll = _interopRequireWildcard(__webpack_require__(68));
+
+Object.keys(_allMatchAll).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _allMatchAll[key];
+    }
+  });
+});
+
+var _someMatchAll = _interopRequireWildcard(__webpack_require__(69));
+
+Object.keys(_someMatchAll).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _someMatchAll[key];
+    }
+  });
+});
+
+var _includes = _interopRequireWildcard(__webpack_require__(26));
+
+Object.keys(_includes).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _includes[key];
+    }
+  });
+});
+
+var _includes_common = _interopRequireWildcard(__webpack_require__(28));
+
+Object.keys(_includes_common).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _includes_common[key];
+    }
+  });
+});
+
+var _equalFunction = _interopRequireWildcard(__webpack_require__(70));
+
+Object.keys(_equalFunction).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _equalFunction[key];
+    }
+  });
+});
+
+var _equal = _interopRequireWildcard(__webpack_require__(71));
+
+Object.keys(_equal).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _equal[key];
+    }
+  });
+});
+
+var _equalDeep = _interopRequireWildcard(__webpack_require__(72));
+
+Object.keys(_equalDeep).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _equalDeep[key];
     }
   });
 });
@@ -10577,8 +10642,85 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _compare_common["default"]), _match["default"]), _matchValue["default"]), _initialValue["default"]), _indexOfMatch["default"]), _allMatch["default"]), _someMatch["default"]), _matchSome["default"]), _matchSomeValue["default"]), _indexOfMatchSome["default"]), _allMatchSome["default"]), _someMatchSome["default"]), _matchAll["default"]), _matchAllValue["default"]), _indexOfMatchAll["default"]), _allMatchAll["default"]), _someMatchAll["default"]), _includes["default"]), _includes_common["default"]), _equal["default"]);
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _compare_common["default"]), _match["default"]), _matchValue["default"]), _initialValue["default"]), _indexOfMatch["default"]), _allMatch["default"]), _someMatch["default"]), _matchSome["default"]), _matchSomeValue["default"]), _indexOfMatchSome["default"]), _allMatchSome["default"]), _someMatchSome["default"]), _matchAll["default"]), _matchAllValue["default"]), _indexOfMatchAll["default"]), _allMatchAll["default"]), _someMatchAll["default"]), _includes["default"]), _includes_common["default"]), _equalFunction["default"]), _equal["default"]), _equalDeep["default"]);
 
+exports["default"] = _default;
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchValue = exports._matchValue = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _match3 = __webpack_require__(27);
+
+/**
+ * matchValue
+ */
+var _matchValue = function _matchValue(value, compare, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if ((0, _match3._match)(value, compare)) {
+    if ((0, _type.isFunction)(match)) {
+      return match(value);
+    }
+
+    return match;
+  }
+
+  if ((0, _type.isFunction)(unmatch)) {
+    return unmatch(value);
+  }
+
+  return unmatch;
+};
+
+exports._matchValue = _matchValue;
+
+var matchValue = function matchValue(value, compare, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compare, match', 'unmatch')) {
+    var _value = value;
+    value = _value.value;
+    compare = _value.compare;
+    match = _value.match;
+    var _value$unmatch = _value.unmatch;
+    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare, match', 'unmatch')) {
+    var _compare = compare;
+    compare = _compare.compare;
+    match = _compare.match;
+    var _compare$unmatch = _compare.unmatch;
+    unmatch = _compare$unmatch === void 0 ? value : _compare$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
+    var _match2 = match;
+    match = _match2.match;
+    var _match2$unmatch = _match2.unmatch;
+    unmatch = _match2$unmatch === void 0 ? value : _match2$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
+    var _unmatch = unmatch;
+    unmatch = _unmatch.unmatch;
+  }
+
+  return _matchValue(value, compare, match, unmatch);
+};
+
+exports.matchValue = matchValue;
+var _default = {
+  _matchValue: _matchValue,
+  matchValue: matchValue
+};
 exports["default"] = _default;
 
 /***/ }),
@@ -10591,7 +10733,788 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.equalDeep = exports._equalDeep = exports.equal = exports._equal = exports.equalFunction = void 0;
+exports["default"] = exports.initialValue = exports._initialValue = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _matchSomeValue2 = __webpack_require__(57);
+
+/**
+ * initialValue
+ */
+var _initialValue = function _initialValue(value, match) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+  return (0, _matchSomeValue2._matchSomeValue)(value, compareArray, match);
+};
+
+exports._initialValue = _initialValue;
+
+var initialValue = function initialValue(value, match) {
+  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
+
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, match', 'compareArray')) {
+    var _value = value;
+    value = _value.value;
+    match = _value.match;
+    var _value$compareArray = _value.compareArray;
+    compareArray = _value$compareArray === void 0 ? [undefined] : _value$compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'compareArray')) {
+    var _match = match;
+    match = _match.match;
+    var _match$compareArray = _match.compareArray;
+    compareArray = _match$compareArray === void 0 ? [undefined] : _match$compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('initialValue args(compareArray) is not array');
+  }
+
+  return _initialValue(value, match, compareArray);
+};
+
+exports.initialValue = initialValue;
+var _default = {
+  _initialValue: _initialValue,
+  initialValue: initialValue
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchSomeValue = exports._matchSomeValue = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _matchSome2 = __webpack_require__(58);
+
+/**
+ * matchSomeValue
+ */
+var _matchSomeValue = function _matchSomeValue(value, compareArray, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if ((0, _matchSome2._matchSome)(value, compareArray)) {
+    if ((0, _type.isFunction)(match)) {
+      return match(value);
+    }
+
+    return match;
+  }
+
+  if ((0, _type.isFunction)(unmatch)) {
+    return unmatch(value);
+  }
+
+  return unmatch;
+};
+
+exports._matchSomeValue = _matchSomeValue;
+
+var matchSomeValue = function matchSomeValue(value, compareArray, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray, match', 'unmatch')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+    match = _value.match;
+    var _value$unmatch = _value.unmatch;
+    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray, match', 'unmatch')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+    match = _compareArray.match;
+    var _compareArray$unmatch = _compareArray.unmatch;
+    unmatch = _compareArray$unmatch === void 0 ? value : _compareArray$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
+    var _match = match;
+    match = _match.match;
+    var _match$unmatch = _match.unmatch;
+    unmatch = _match$unmatch === void 0 ? value : _match$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
+    var _unmatch = unmatch;
+    unmatch = _unmatch.unmatch;
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('matchSomeValue args(compareArray) is not array');
+  }
+
+  return _matchSomeValue(value, compareArray, match, unmatch);
+};
+
+exports.matchSomeValue = matchSomeValue;
+var _default = {
+  _matchSomeValue: _matchSomeValue,
+  matchSomeValue: matchSomeValue
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchSome = exports._matchSome = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _match2 = __webpack_require__(27);
+
+/**
+ * matchSome
+ */
+var _matchSome = function _matchSome(value, compareArray) {
+  return (0, _array_common._some)(compareArray, function (compare) {
+    return (0, _match2._match)(value, compare);
+  });
+};
+
+exports._matchSome = _matchSome;
+
+var matchSome = function matchSome(value, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('matchSome args(compareArray) is not array');
+  }
+
+  return _matchSome(value, compareArray);
+};
+
+exports.matchSome = matchSome;
+var _default = {
+  _matchSome: _matchSome,
+  matchSome: matchSome
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.indexOfMatch = exports._indexOfMatch = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _match2 = __webpack_require__(27);
+
+/**
+ * indexOfMatch
+ */
+var _indexOfMatch = function _indexOfMatch(valueArray, compare) {
+  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
+    return (0, _match2._match)(value, compare);
+  });
+};
+
+exports._indexOfMatch = _indexOfMatch;
+
+var indexOfMatch = function indexOfMatch(valueArray, compare) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compare')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compare = _valueArray.compare;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
+    var _compare = compare;
+    compare = _compare.compare;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('indexOfMatch args(valueArray) is not array');
+  }
+
+  return _indexOfMatch(valueArray, compare);
+};
+
+exports.indexOfMatch = indexOfMatch;
+var _default = {
+  _indexOfMatch: _indexOfMatch,
+  indexOfMatch: indexOfMatch
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.allMatch = exports._allMatch = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _match2 = __webpack_require__(27);
+
+/**
+ * allMatch
+ */
+var _allMatch = function _allMatch(valueArray, compare) {
+  return (0, _array_common._all)(valueArray, function (value) {
+    return (0, _match2._match)(value, compare);
+  });
+};
+
+exports._allMatch = _allMatch;
+
+var allMatch = function allMatch(valueArray, compare) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compare')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compare = _valueArray.compare;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
+    var _compare = compare;
+    compare = _compare.compare;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('allMatch args(valueArray) is not array');
+  }
+
+  return _allMatch(valueArray, compare);
+};
+
+exports.allMatch = allMatch;
+var _default = {
+  _allMatch: _allMatch,
+  allMatch: allMatch
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.someMatch = exports._someMatch = void 0;
+
+var _indexOfMatch2 = __webpack_require__(59);
+
+/**
+ * someMatch
+ */
+var _someMatch = function _someMatch(valueArray, compare) {
+  return (0, _indexOfMatch2._indexOfMatch)(valueArray, compare) !== -1;
+};
+
+exports._someMatch = _someMatch;
+
+var someMatch = function someMatch(valueArray, compare) {
+  return (0, _indexOfMatch2.indexOfMatch)(valueArray, compare) !== -1;
+};
+
+exports.someMatch = someMatch;
+var _default = {
+  _someMatch: _someMatch,
+  someMatch: someMatch
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.indexOfMatchSome = exports._indexOfMatchSome = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _matchSome2 = __webpack_require__(58);
+
+/**
+ * indexOfMatchSome
+ */
+var _indexOfMatchSome = function _indexOfMatchSome(valueArray, compareArray) {
+  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
+    return (0, _matchSome2._matchSome)(value, compareArray);
+  });
+};
+
+exports._indexOfMatchSome = _indexOfMatchSome;
+
+var indexOfMatchSome = function indexOfMatchSome(valueArray, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('indexOfMatchSome args(valueArray) is not array');
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('indexOfMatchSome args(compareArray) is not array');
+  }
+
+  return _indexOfMatchSome(valueArray, compareArray);
+};
+
+exports.indexOfMatchSome = indexOfMatchSome;
+var _default = {
+  _indexOfMatchSome: _indexOfMatchSome,
+  indexOfMatchSome: indexOfMatchSome
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.allMatchSome = exports._allMatchSome = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _matchSome2 = __webpack_require__(58);
+
+/**
+ * allMatchSome
+ */
+var _allMatchSome = function _allMatchSome(valueArray, compareArray) {
+  return (0, _array_common._all)(valueArray, function (value) {
+    return (0, _matchSome2._matchSome)(value, compareArray);
+  });
+};
+
+exports._allMatchSome = _allMatchSome;
+
+var allMatchSome = function allMatchSome(valueArray, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('allMatchSome args(valueArray) is not array');
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('allMatchSome args(compareArray) is not array');
+  }
+
+  return _allMatchSome(valueArray, compareArray);
+};
+
+exports.allMatchSome = allMatchSome;
+var _default = {
+  _allMatchSome: _allMatchSome,
+  allMatchSome: allMatchSome
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.someMatchSome = exports._someMatchSome = void 0;
+
+var _indexOfMatchSome2 = __webpack_require__(62);
+
+/**
+ * someMatchSome
+ */
+var _someMatchSome = function _someMatchSome(valueArray, compareArray) {
+  return (0, _indexOfMatchSome2._indexOfMatchSome)(valueArray, compareArray) !== -1;
+};
+
+exports._someMatchSome = _someMatchSome;
+
+var someMatchSome = function someMatchSome(valueArray, compareArray) {
+  return (0, _indexOfMatchSome2.indexOfMatchSome)(valueArray, compareArray) !== -1;
+};
+
+exports.someMatchSome = someMatchSome;
+var _default = {
+  _someMatchSome: _someMatchSome,
+  someMatchSome: someMatchSome
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchAll = exports._matchAll = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _match2 = __webpack_require__(27);
+
+/**
+ * matchAll
+ */
+var _matchAll = function _matchAll(value, compareArray) {
+  return (0, _array_common._all)(compareArray, function (compare) {
+    return (0, _match2._match)(value, compare);
+  });
+};
+
+exports._matchAll = _matchAll;
+
+var matchAll = function matchAll(value, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('matchAll args(compareArray) is not array');
+  }
+
+  return _matchAll(value, compareArray);
+};
+
+exports.matchAll = matchAll;
+var _default = {
+  _matchAll: _matchAll,
+  matchAll: matchAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchAllValue = exports._matchAllValue = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _matchAll2 = __webpack_require__(65);
+
+/**
+ * matchAllValue
+ */
+var _matchAllValue = function _matchAllValue(value, compareArray, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if ((0, _matchAll2._matchAll)(value, compareArray)) {
+    if ((0, _type.isFunction)(match)) {
+      return match(value);
+    }
+
+    return match;
+  }
+
+  if ((0, _type.isFunction)(unmatch)) {
+    return unmatch(value);
+  }
+
+  return unmatch;
+};
+
+exports._matchAllValue = _matchAllValue;
+
+var matchAllValue = function matchAllValue(value, compareArray, match) {
+  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
+
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray, match', 'unmatch')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+    match = _value.match;
+    var _value$unmatch = _value.unmatch;
+    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray, match', 'unmatch')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+    match = _compareArray.match;
+    var _compareArray$unmatch = _compareArray.unmatch;
+    unmatch = _compareArray$unmatch === void 0 ? value : _compareArray$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
+    var _match = match;
+    match = _match.match;
+    var _match$unmatch = _match.unmatch;
+    unmatch = _match$unmatch === void 0 ? value : _match$unmatch;
+  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
+    var _unmatch = unmatch;
+    unmatch = _unmatch.unmatch;
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('matchAllValue args(compareArray) is not array');
+  }
+
+  return _matchAllValue(value, compareArray, match, unmatch);
+};
+
+exports.matchAllValue = matchAllValue;
+var _default = {
+  _matchAllValue: _matchAllValue,
+  matchAllValue: matchAllValue
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.indexOfMatchAll = exports._indexOfMatchAll = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _matchAll2 = __webpack_require__(65);
+
+/**
+ * indexOfMatchAll
+ */
+var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
+  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
+    return (0, _matchAll2._matchAll)(value, compareArray);
+  });
+};
+
+exports._indexOfMatchAll = _indexOfMatchAll;
+
+var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('indexOfMatchAll args(valueArray) is not array');
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('indexOfMatchAll args(compareArray) is not array');
+  }
+
+  return _indexOfMatchAll(valueArray, compareArray);
+};
+
+exports.indexOfMatchAll = indexOfMatchAll;
+var _default = {
+  _indexOfMatchAll: _indexOfMatchAll,
+  indexOfMatchAll: indexOfMatchAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.allMatchAll = exports._allMatchAll = void 0;
+
+var _type = __webpack_require__(4);
+
+var _isObjectParameter = __webpack_require__(9);
+
+var _array_common = __webpack_require__(29);
+
+var _matchAll2 = __webpack_require__(65);
+
+/**
+ * allMatchAll
+ */
+var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
+  return (0, _array_common._all)(valueArray, function (value) {
+    return (0, _matchAll2._matchAll)(value, compareArray);
+  });
+};
+
+exports._allMatchAll = _allMatchAll;
+
+var allMatchAll = function allMatchAll(valueArray, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('allMatchAll args(valueArray) is not array');
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('allMatchAll args(compareArray) is not array');
+  }
+
+  return _allMatchAll(valueArray, compareArray);
+};
+
+exports.allMatchAll = allMatchAll;
+var _default = {
+  _allMatchAll: _allMatchAll,
+  allMatchAll: allMatchAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.someMatchAll = exports._someMatchAll = void 0;
+
+var _indexOfMatchAll2 = __webpack_require__(67);
+
+/**
+ * someMatchAll
+ */
+var _someMatchAll = function _someMatchAll(valueArray, compareArray) {
+  return (0, _indexOfMatchAll2._indexOfMatchAll)(valueArray, compareArray) !== -1;
+};
+
+exports._someMatchAll = _someMatchAll;
+
+var someMatchAll = function someMatchAll(valueArray, compareArray) {
+  return (0, _indexOfMatchAll2.indexOfMatchAll)(valueArray, compareArray) !== -1;
+};
+
+exports.someMatchAll = someMatchAll;
+var _default = {
+  _someMatchAll: _someMatchAll,
+  someMatchAll: someMatchAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.equalFunctionArrayDefault = exports.equalFunction = void 0;
 
 var _type = __webpack_require__(4);
 
@@ -10894,15 +11817,42 @@ equalFunction.equalWeakSet = function (value1, value2) {
 
   return true;
 };
+
+var equalFunctionArrayDefault = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalMap, equalFunction.equalWeakMap, equalFunction.equalSet, equalFunction.equalWeakSet, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
+exports.equalFunctionArrayDefault = equalFunctionArrayDefault;
+var _default = {
+  equalFunction: equalFunction,
+  equalFunctionArrayDefault: equalFunctionArrayDefault
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.equal = exports._equal = void 0;
+
+var _type = __webpack_require__(4);
+
+var _object = __webpack_require__(15);
+
+var _equalFunction = __webpack_require__(70);
+
 /**
  * equal
  */
-
-
 var _equal = function _equal(value1, value2) {
+  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
+
   var __equal = function __equal(value1, value2) {
-    for (var i = 0, l = _equal.functions.length; i < l; i += 1) {
-      var result = _equal.functions[i](value1, value2);
+    for (var i = 0, l = equalFunctionArray.length; i < l; i += 1) {
+      var result = equalFunctionArray[i](value1, value2);
 
       if (!(0, _type.isUndefined)(result)) {
         return result;
@@ -10916,59 +11866,63 @@ var _equal = function _equal(value1, value2) {
 };
 
 exports._equal = _equal;
-_equal.functions = [];
-
-_equal.clear = function () {
-  _equal.functions = [];
-};
-
-_equal.add = function (func) {
-  _equal.functions.unshift(func);
-};
-
-_equal.reset = function () {
-  _equal.clear();
-
-  _equal.add(equalFunction.equalValue);
-
-  _equal.add(equalFunction.equalObject);
-
-  _equal.add(equalFunction.equalArrayType);
-
-  _equal.add(equalFunction.equalWeakSet);
-
-  _equal.add(equalFunction.equalSet);
-
-  _equal.add(equalFunction.equalWeakMap);
-
-  _equal.add(equalFunction.equalMap);
-
-  _equal.add(equalFunction.equalFunction);
-
-  _equal.add(equalFunction.equalRegExp);
-
-  _equal.add(equalFunction.equalDate);
-};
-
-_equal.reset();
 
 var equal = function equal(value1, value2) {
-  if ((0, _object.isObjectParameter)(value1, 'value1, value2')) {
+  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
+
+  if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFunctionArray')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
+    var _value$equalFunctionA = _value.equalFunctionArray;
+    equalFunctionArray = _value$equalFunctionA === void 0 ? _equalFunction.equalFunctionArrayDefault : _value$equalFunctionA;
+  } else if ((0, _object.isObjectParameter)(value2, 'value2', 'equalFunctionArray')) {
+    var _value2 = value2;
+    value2 = _value2.value2;
+    var _value2$equalFunction = _value2.equalFunctionArray;
+    equalFunctionArray = _value2$equalFunction === void 0 ? _equalFunction.equalFunctionArrayDefault : _value2$equalFunction;
+  } else if ((0, _object.isObjectParameter)(equalFunctionArray, 'equalFunctionArray')) {
+    var _equalFunctionArray = equalFunctionArray;
+    equalFunctionArray = _equalFunctionArray.equalFunctionArray;
   }
 
-  return _equal(value1, value2);
+  if (!(0, _type.isFunctionArray)(equalFunctionArray)) {
+    throw new TypeError('equal args(equalFunctionArray) is not function array');
+  }
+
+  return _equal(value1, value2, equalFunctionArray);
 };
 
 exports.equal = equal;
-(0, _object._copyProperty)(_equal, 'clear,reset,add,' + '', equal);
+var _default = {
+  _equal: _equal,
+  equal: equal
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.equalDeep = exports._equalDeep = void 0;
+
+var _type = __webpack_require__(4);
+
+var _object = __webpack_require__(15);
+
+var _equalFunction = __webpack_require__(70);
+
 /**
  * equalDeep
  */
-
 var _equalDeep = function _equalDeep(value1, value2) {
+  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
   var CircularReferenceBuffer = {
     v1Array: [],
     v2Array: []
@@ -10985,8 +11939,8 @@ var _equalDeep = function _equalDeep(value1, value2) {
       return value1 === value2;
     }
 
-    for (var i = 0, l = _equalDeep.functions.length; i < l; i += 1) {
-      var result = _equalDeep.functions[i](value1, value2, function (v1, v2) {
+    for (var i = 0, l = equalFunctionArray.length; i < l; i += 1) {
+      var result = equalFunctionArray[i](value1, value2, function (v1, v2) {
         CircularReferenceBuffer.v1Array.push(v1);
         CircularReferenceBuffer.v2Array.push(v2);
       }, __equalDeep);
@@ -11003,754 +11957,38 @@ var _equalDeep = function _equalDeep(value1, value2) {
 };
 
 exports._equalDeep = _equalDeep;
-_equalDeep.functions = [];
-
-_equalDeep.clear = function () {
-  _equalDeep.functions = [];
-};
-
-_equalDeep.add = function (func) {
-  _equalDeep.functions.unshift(func);
-};
-
-_equalDeep.reset = function () {
-  _equalDeep.clear();
-
-  _equalDeep.add(equalFunction.equalValue);
-
-  _equalDeep.add(equalFunction.equalObject);
-
-  _equalDeep.add(equalFunction.equalArrayType);
-
-  _equalDeep.add(equalFunction.equalWeakSet);
-
-  _equalDeep.add(equalFunction.equalSet);
-
-  _equalDeep.add(equalFunction.equalWeakMap);
-
-  _equalDeep.add(equalFunction.equalMap);
-
-  _equalDeep.add(equalFunction.equalFunction);
-
-  _equalDeep.add(equalFunction.equalRegExp);
-
-  _equalDeep.add(equalFunction.equalDate);
-};
-
-_equalDeep.reset();
 
 var equalDeep = function equalDeep(value1, value2) {
-  if ((0, _object.isObjectParameter)(value1, 'value1,value2')) {
-    var _value2 = value1;
-    value1 = _value2.value1;
+  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
+
+  if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFunctionArray')) {
+    var _value = value1;
+    value1 = _value.value1;
+    value2 = _value.value2;
+    var _value$equalFunctionA = _value.equalFunctionArray;
+    equalFunctionArray = _value$equalFunctionA === void 0 ? _equalFunction.equalFunctionArrayDefault : _value$equalFunctionA;
+  } else if ((0, _object.isObjectParameter)(value2, 'value2', 'equalFunctionArray')) {
+    var _value2 = value2;
     value2 = _value2.value2;
+    var _value2$equalFunction = _value2.equalFunctionArray;
+    equalFunctionArray = _value2$equalFunction === void 0 ? _equalFunction.equalFunctionArrayDefault : _value2$equalFunction;
+  } else if ((0, _object.isObjectParameter)(equalFunctionArray, 'equalFunctionArray')) {
+    var _equalFunctionArray = equalFunctionArray;
+    equalFunctionArray = _equalFunctionArray.equalFunctionArray;
   }
 
-  return _equalDeep(value1, value2);
+  return _equalDeep(value1, value2, equalFunctionArray);
 };
 
 exports.equalDeep = equalDeep;
-(0, _object._copyProperty)(_equalDeep, 'clear,reset,add,' + '', equalDeep);
 var _default = {
-  _equal: _equal,
   _equalDeep: _equalDeep,
-  equal: equal,
-  equalDeep: equalDeep,
-  equalFunction: equalFunction
+  equalDeep: equalDeep
 };
 exports["default"] = _default;
 
 /***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.someMatchAll = exports._someMatchAll = void 0;
-
-var _indexOfMatchAll2 = __webpack_require__(58);
-
-/**
- * someMatchAll
- */
-var _someMatchAll = function _someMatchAll(valueArray, compareArray) {
-  return (0, _indexOfMatchAll2._indexOfMatchAll)(valueArray, compareArray) !== -1;
-};
-
-exports._someMatchAll = _someMatchAll;
-
-var someMatchAll = function someMatchAll(valueArray, compareArray) {
-  return (0, _indexOfMatchAll2.indexOfMatchAll)(valueArray, compareArray) !== -1;
-};
-
-exports.someMatchAll = someMatchAll;
-var _default = {
-  _someMatchAll: _someMatchAll,
-  someMatchAll: someMatchAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.indexOfMatchAll = exports._indexOfMatchAll = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _array_common = __webpack_require__(29);
-
-var _matchAll2 = __webpack_require__(59);
-
-/**
- * indexOfMatchAll
- */
-var _indexOfMatchAll = function _indexOfMatchAll(valueArray, compareArray) {
-  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
-    return (0, _matchAll2._matchAll)(value, compareArray);
-  });
-};
-
-exports._indexOfMatchAll = _indexOfMatchAll;
-
-var indexOfMatchAll = function indexOfMatchAll(valueArray, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compareArray = _valueArray.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('indexOfMatchAll args(valueArray) is not array');
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('indexOfMatchAll args(compareArray) is not array');
-  }
-
-  return _indexOfMatchAll(valueArray, compareArray);
-};
-
-exports.indexOfMatchAll = indexOfMatchAll;
-var _default = {
-  _indexOfMatchAll: _indexOfMatchAll,
-  indexOfMatchAll: indexOfMatchAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchAll = exports._matchAll = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _array_common = __webpack_require__(29);
-
-var _match2 = __webpack_require__(27);
-
-/**
- * matchAll
- */
-var _matchAll = function _matchAll(value, compareArray) {
-  return (0, _array_common._all)(compareArray, function (compare) {
-    return (0, _match2._match)(value, compare);
-  });
-};
-
-exports._matchAll = _matchAll;
-
-var matchAll = function matchAll(value, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('matchAll args(compareArray) is not array');
-  }
-
-  return _matchAll(value, compareArray);
-};
-
-exports.matchAll = matchAll;
-var _default = {
-  _matchAll: _matchAll,
-  matchAll: matchAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.allMatchAll = exports._allMatchAll = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _array_common = __webpack_require__(29);
-
-var _matchAll2 = __webpack_require__(59);
-
-/**
- * allMatchAll
- */
-var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
-  return (0, _array_common._all)(valueArray, function (value) {
-    return (0, _matchAll2._matchAll)(value, compareArray);
-  });
-};
-
-exports._allMatchAll = _allMatchAll;
-
-var allMatchAll = function allMatchAll(valueArray, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compareArray = _valueArray.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('allMatchAll args(valueArray) is not array');
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('allMatchAll args(compareArray) is not array');
-  }
-
-  return _allMatchAll(valueArray, compareArray);
-};
-
-exports.allMatchAll = allMatchAll;
-var _default = {
-  _allMatchAll: _allMatchAll,
-  allMatchAll: allMatchAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchAllValue = exports._matchAllValue = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _matchAll2 = __webpack_require__(59);
-
-/**
- * matchAllValue
- */
-var _matchAllValue = function _matchAllValue(value, compareArray, match) {
-  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
-
-  if ((0, _matchAll2._matchAll)(value, compareArray)) {
-    if ((0, _type.isFunction)(match)) {
-      return match(value);
-    }
-
-    return match;
-  }
-
-  if ((0, _type.isFunction)(unmatch)) {
-    return unmatch(value);
-  }
-
-  return unmatch;
-};
-
-exports._matchAllValue = _matchAllValue;
-
-var matchAllValue = function matchAllValue(value, compareArray, match) {
-  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
-
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray, match', 'unmatch')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-    match = _value.match;
-    var _value$unmatch = _value.unmatch;
-    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray, match', 'unmatch')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-    match = _compareArray.match;
-    var _compareArray$unmatch = _compareArray.unmatch;
-    unmatch = _compareArray$unmatch === void 0 ? value : _compareArray$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
-    var _match = match;
-    match = _match.match;
-    var _match$unmatch = _match.unmatch;
-    unmatch = _match$unmatch === void 0 ? value : _match$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
-    var _unmatch = unmatch;
-    unmatch = _unmatch.unmatch;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('matchAllValue args(compareArray) is not array');
-  }
-
-  return _matchAllValue(value, compareArray, match, unmatch);
-};
-
-exports.matchAllValue = matchAllValue;
-var _default = {
-  _matchAllValue: _matchAllValue,
-  matchAllValue: matchAllValue
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.someMatchSome = exports._someMatchSome = void 0;
-
-var _indexOfMatchSome2 = __webpack_require__(63);
-
-/**
- * someMatchSome
- */
-var _someMatchSome = function _someMatchSome(valueArray, compareArray) {
-  return (0, _indexOfMatchSome2._indexOfMatchSome)(valueArray, compareArray) !== -1;
-};
-
-exports._someMatchSome = _someMatchSome;
-
-var someMatchSome = function someMatchSome(valueArray, compareArray) {
-  return (0, _indexOfMatchSome2.indexOfMatchSome)(valueArray, compareArray) !== -1;
-};
-
-exports.someMatchSome = someMatchSome;
-var _default = {
-  _someMatchSome: _someMatchSome,
-  someMatchSome: someMatchSome
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.indexOfMatchSome = exports._indexOfMatchSome = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _array_common = __webpack_require__(29);
-
-var _matchSome2 = __webpack_require__(39);
-
-/**
- * indexOfMatchSome
- */
-var _indexOfMatchSome = function _indexOfMatchSome(valueArray, compareArray) {
-  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
-    return (0, _matchSome2._matchSome)(value, compareArray);
-  });
-};
-
-exports._indexOfMatchSome = _indexOfMatchSome;
-
-var indexOfMatchSome = function indexOfMatchSome(valueArray, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compareArray = _valueArray.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('indexOfMatchSome args(valueArray) is not array');
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('indexOfMatchSome args(compareArray) is not array');
-  }
-
-  return _indexOfMatchSome(valueArray, compareArray);
-};
-
-exports.indexOfMatchSome = indexOfMatchSome;
-var _default = {
-  _indexOfMatchSome: _indexOfMatchSome,
-  indexOfMatchSome: indexOfMatchSome
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchSomeValue = exports._matchSomeValue = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _matchSome2 = __webpack_require__(39);
-
-/**
- * matchSomeValue
- */
-var _matchSomeValue = function _matchSomeValue(value, compareArray, match) {
-  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
-
-  if ((0, _matchSome2._matchSome)(value, compareArray)) {
-    if ((0, _type.isFunction)(match)) {
-      return match(value);
-    }
-
-    return match;
-  }
-
-  if ((0, _type.isFunction)(unmatch)) {
-    return unmatch(value);
-  }
-
-  return unmatch;
-};
-
-exports._matchSomeValue = _matchSomeValue;
-
-var matchSomeValue = function matchSomeValue(value, compareArray, match) {
-  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
-
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray, match', 'unmatch')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-    match = _value.match;
-    var _value$unmatch = _value.unmatch;
-    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray, match', 'unmatch')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-    match = _compareArray.match;
-    var _compareArray$unmatch = _compareArray.unmatch;
-    unmatch = _compareArray$unmatch === void 0 ? value : _compareArray$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
-    var _match = match;
-    match = _match.match;
-    var _match$unmatch = _match.unmatch;
-    unmatch = _match$unmatch === void 0 ? value : _match$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
-    var _unmatch = unmatch;
-    unmatch = _unmatch.unmatch;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('matchSomeValue args(compareArray) is not array');
-  }
-
-  return _matchSomeValue(value, compareArray, match, unmatch);
-};
-
-exports.matchSomeValue = matchSomeValue;
-var _default = {
-  _matchSomeValue: _matchSomeValue,
-  matchSomeValue: matchSomeValue
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.someMatch = exports._someMatch = void 0;
-
-var _indexOfMatch2 = __webpack_require__(66);
-
-/**
- * someMatch
- */
-var _someMatch = function _someMatch(valueArray, compare) {
-  return (0, _indexOfMatch2._indexOfMatch)(valueArray, compare) !== -1;
-};
-
-exports._someMatch = _someMatch;
-
-var someMatch = function someMatch(valueArray, compare) {
-  return (0, _indexOfMatch2.indexOfMatch)(valueArray, compare) !== -1;
-};
-
-exports.someMatch = someMatch;
-var _default = {
-  _someMatch: _someMatch,
-  someMatch: someMatch
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.indexOfMatch = exports._indexOfMatch = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _array_common = __webpack_require__(29);
-
-var _match2 = __webpack_require__(27);
-
-/**
- * indexOfMatch
- */
-var _indexOfMatch = function _indexOfMatch(valueArray, compare) {
-  return (0, _array_common._findFirstIndex)(valueArray, function (value) {
-    return (0, _match2._match)(value, compare);
-  });
-};
-
-exports._indexOfMatch = _indexOfMatch;
-
-var indexOfMatch = function indexOfMatch(valueArray, compare) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compare')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compare = _valueArray.compare;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
-    var _compare = compare;
-    compare = _compare.compare;
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('indexOfMatch args(valueArray) is not array');
-  }
-
-  return _indexOfMatch(valueArray, compare);
-};
-
-exports.indexOfMatch = indexOfMatch;
-var _default = {
-  _indexOfMatch: _indexOfMatch,
-  indexOfMatch: indexOfMatch
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.initialValue = exports._initialValue = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _matchSomeValue2 = __webpack_require__(64);
-
-/**
- * initialValue
- */
-var _initialValue = function _initialValue(value, match) {
-  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
-  return (0, _matchSomeValue2._matchSomeValue)(value, compareArray, match);
-};
-
-exports._initialValue = _initialValue;
-
-var initialValue = function initialValue(value, match) {
-  var compareArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [undefined];
-
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, match', 'compareArray')) {
-    var _value = value;
-    value = _value.value;
-    match = _value.match;
-    var _value$compareArray = _value.compareArray;
-    compareArray = _value$compareArray === void 0 ? [undefined] : _value$compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'compareArray')) {
-    var _match = match;
-    match = _match.match;
-    var _match$compareArray = _match.compareArray;
-    compareArray = _match$compareArray === void 0 ? [undefined] : _match$compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('initialValue args(compareArray) is not array');
-  }
-
-  return _initialValue(value, match, compareArray);
-};
-
-exports.initialValue = initialValue;
-var _default = {
-  _initialValue: _initialValue,
-  initialValue: initialValue
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchValue = exports._matchValue = void 0;
-
-var _type = __webpack_require__(4);
-
-var _isObjectParameter = __webpack_require__(9);
-
-var _match3 = __webpack_require__(27);
-
-/**
- * matchValue
- */
-var _matchValue = function _matchValue(value, compare, match) {
-  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
-
-  if ((0, _match3._match)(value, compare)) {
-    if ((0, _type.isFunction)(match)) {
-      return match(value);
-    }
-
-    return match;
-  }
-
-  if ((0, _type.isFunction)(unmatch)) {
-    return unmatch(value);
-  }
-
-  return unmatch;
-};
-
-exports._matchValue = _matchValue;
-
-var matchValue = function matchValue(value, compare, match) {
-  var unmatch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : value;
-
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compare, match', 'unmatch')) {
-    var _value = value;
-    value = _value.value;
-    compare = _value.compare;
-    match = _value.match;
-    var _value$unmatch = _value.unmatch;
-    unmatch = _value$unmatch === void 0 ? value : _value$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare, match', 'unmatch')) {
-    var _compare = compare;
-    compare = _compare.compare;
-    match = _compare.match;
-    var _compare$unmatch = _compare.unmatch;
-    unmatch = _compare$unmatch === void 0 ? value : _compare$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(match, 'match', 'unmatch')) {
-    var _match2 = match;
-    match = _match2.match;
-    var _match2$unmatch = _match2.unmatch;
-    unmatch = _match2$unmatch === void 0 ? value : _match2$unmatch;
-  } else if ((0, _isObjectParameter.isObjectParameter)(unmatch, 'unmatch')) {
-    var _unmatch = unmatch;
-    unmatch = _unmatch.unmatch;
-  }
-
-  return _matchValue(value, compare, match, unmatch);
-};
-
-exports.matchValue = matchValue;
-var _default = {
-  _matchValue: _matchValue,
-  matchValue: matchValue
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 69 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11763,9 +12001,9 @@ exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDe
 
 var _type = __webpack_require__(4);
 
-var _compare = __webpack_require__(55);
+var _compare = __webpack_require__(54);
 
-var _string = __webpack_require__(43);
+var _string = __webpack_require__(42);
 
 var _isObjectParameter = __webpack_require__(9);
 
@@ -12165,7 +12403,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 70 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12178,9 +12416,9 @@ exports["default"] = exports.acceptDebug = exports.acceptError = exports.acceptW
 
 var _type = __webpack_require__(4);
 
-var _compare = __webpack_require__(55);
+var _compare = __webpack_require__(54);
 
-var _array = __webpack_require__(35);
+var _array = __webpack_require__(36);
 
 var original = {};
 exports.original = original;

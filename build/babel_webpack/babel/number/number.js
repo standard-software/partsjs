@@ -17,10 +17,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * isMultiples isEven isOdd
  */
 var _isMultiples = function _isMultiples(number, radix) {
-  if (number === 0) {
-    return false;
-  }
-
   return number % radix === 0;
 };
 
@@ -47,20 +43,12 @@ var isMultiples = function isMultiples(number, radix) {
 exports.isMultiples = isMultiples;
 
 var isEven = function isEven(number) {
-  if (number === 0) {
-    return false;
-  }
-
   return isMultiples(number, 2);
 };
 
 exports.isEven = isEven;
 
 var isOdd = function isOdd(number) {
-  if (number === 0) {
-    return false;
-  }
-
   return !isMultiples(number, 2);
 };
 /**

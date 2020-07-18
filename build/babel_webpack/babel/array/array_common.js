@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.unique = exports._unique = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = exports.max = exports._max = exports.min = exports._min = void 0;
+exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = exports.max = exports._max = exports.min = exports._min = void 0;
 
 var _type = require("../type/type.js");
 
@@ -15,19 +15,7 @@ var _clone2 = require("../root/clone.js");
 
 var _cloneDeep2 = require("../root/cloneDeep.js");
 
-var _syntax = require("../syntax/syntax.js");
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+var _unique2 = require("../array/unique.js");
 
 /**
  * array.min max
@@ -213,7 +201,7 @@ var _mode = function _mode(array) {
     return [];
   }
 
-  var uniqueArray = _unique(array);
+  var uniqueArray = (0, _unique2._unique)(array);
 
   var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
@@ -238,53 +226,18 @@ var mode = function mode(array) {
   return _mode(array);
 };
 /**
- * uniqe
- */
-
-
-exports.mode = mode;
-
-var _unique = function _unique(array) {
-  if ((0, _syntax.canUseSet)() && array.length > 120) {
-    return _toConsumableArray(new Set(array));
-  } else {
-    var result = [];
-
-    for (var i = 0, l = array.length; i < l; i += 1) {
-      if (result.indexOf(array[i]) === -1) {
-        result.push(array[i]);
-      }
-    }
-
-    return result;
-  } // node.js v8
-  // It is faster to use Set
-  // when the array.lentgh is larger than about 120
-
-};
-
-exports._unique = _unique;
-
-var unique = function unique(array) {
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('unique args(array) is not array');
-  }
-
-  return _unique(array);
-};
-/**
  * single
  */
 
 
-exports.unique = unique;
+exports.mode = mode;
 
 var _single = function _single(array) {
   if (array.length === 0) {
     return [];
   }
 
-  var uniqueArray = _unique(array);
+  var uniqueArray = (0, _unique2._unique)(array);
 
   var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
@@ -318,7 +271,7 @@ var _multiple = function _multiple(array) {
     return [];
   }
 
-  var uniqueArray = _unique(array);
+  var uniqueArray = (0, _unique2._unique)(array);
 
   var countArray = _map(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
@@ -379,7 +332,7 @@ var filter = function filter(array, func) {
   }
 
   if (!(0, _type.isFunction)(func)) {
-    throw new TypeError('filter args(compareFunc) is not function');
+    throw new TypeError('filter args(func) is not function');
   }
 
   return _filter(array, func);
@@ -998,7 +951,6 @@ var _default = {
   _average: _average,
   _median: _median,
   _mode: _mode,
-  _unique: _unique,
   _single: _single,
   _multiple: _multiple,
   _filter: _filter,
@@ -1024,7 +976,6 @@ var _default = {
   average: average,
   median: median,
   mode: mode,
-  unique: unique,
   single: single,
   multiple: multiple,
   filter: filter,

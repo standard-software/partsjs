@@ -162,7 +162,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [364, 18, 4, 252, 9, 11, 23, 29, 7, 37, 17, 36];
+        var countArray = [364, 18, 4, 252, 9, 11, 23, 29, 7, 37, 17, 37, 32];
 
         var propertyCountForParts = function propertyCountForParts(parts) {
           var result = propertyCount(parts);
@@ -190,6 +190,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(countArray.shift(), propertyCount(parts.string));
         checkEqual(countArray.shift(), propertyCount(parts.object));
         checkEqual(countArray.shift(), propertyCount(parts.array));
+        checkEqual(countArray.shift(), propertyCount(parts.array.operation));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it('test_execute_nameSpace 2', function () {
@@ -3584,16 +3585,14 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equal', function () {
         // Primitive value
         checkEqual(true, equal(1, 1));
+        checkEqual(false, equal(1, 2));
         checkEqual(true, equal('1', '1'));
         checkEqual(false, equal('1', 1));
         checkEqual(true, equal(null, null));
         checkEqual(true, equal(undefined, undefined));
         checkEqual(true, equal(undefined));
         checkEqual(false, equal(null, undefined));
-        checkEqual(false, equal(null)); // args.length
-
-        checkEqual(true, equal(1, 1, 2));
-        checkEqual(false, equal(1, 2, 3)); // named argument
+        checkEqual(false, equal(null)); // named argument
 
         checkEqual(true, equal({
           value1: 1,
@@ -3713,23 +3712,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalRegExp); // date
+        var equalFunctions = [equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue]; // date
 
-        checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equal date'); // date in object
+        checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02'), equalFunctions), 'test_equal date'); // date in object
 
         checkEqual(false, equal({
           date: new Date('2019/11/02')
         }, {
           date: new Date('2019/11/02')
-        }), 'test_equal date'); // date in array
+        }, equalFunctions), 'test_equal date'); // date in array
 
-        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date');
-        equal.reset();
+        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')], equalFunctions), 'test_equal date');
       });
     };
 
@@ -3746,23 +3739,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalDate); // regexp
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue]; // regexp
 
-        checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+        checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/), equalFunctions), 'test_equal regexp'); // regexp in object
 
         checkEqual(false, equal({
           reg: new RegExp(/^a/)
         }, {
           reg: new RegExp(/^a/)
-        }), 'test_equal regexp'); // regexp in array
+        }, equalFunctions), 'test_equal regexp'); // regexp in array
 
-        checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp');
-        equal.reset();
+        checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)], equalFunctions), 'test_equal regexp');
       });
     };
 
@@ -3793,18 +3780,12 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalRegExp);
-        equal.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
 
         if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equal(map1, map2));
+          checkEqual(false, equal(map1, map2, equalFunctions));
         } else {
-          checkEqual(true, equal(map1, map2)); // IE11 bug
+          checkEqual(true, equal(map1, map2, equalFunctions)); // IE11 bug
         } // Map in object
 
 
@@ -3815,7 +3796,6 @@ var test_execute_compare = function test_execute_compare(parts) {
         }), 'test_equal Map'); // Map in array
 
         checkEqual(false, equal([map1], [map2]), 'test_equal Map');
-        equal.reset();
       });
     };
 
@@ -3846,18 +3826,12 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalRegExp);
-        equal.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
 
         if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equal(set1, set2));
+          checkEqual(false, equal(set1, set2, equalFunctions));
         } else {
-          checkEqual(true, equal(set1, set2)); // IE11 bug
+          checkEqual(true, equal(set1, set2, equalFunctions)); // IE11 bug
         } // Set in object
 
 
@@ -3868,24 +3842,21 @@ var test_execute_compare = function test_execute_compare(parts) {
         }), 'test_equal Set'); // Set in array
 
         checkEqual(false, equal([set1], [set2]), 'test_equal Set');
-        equal.reset();
       });
     };
 
     var test_equalDeep = function test_equalDeep() {
       it('test_equalDeep', function () {
         // Primitive value
-        checkEqual(true, equalDeep(1, 1), 'test_equalDeep 1');
+        checkEqual(true, equalDeep(1, 1));
+        checkEqual(false, equalDeep(1, 2));
         checkEqual(true, equalDeep('1', '1'));
         checkEqual(false, equalDeep('1', 1));
         checkEqual(true, equalDeep(null, null));
         checkEqual(true, equalDeep(undefined, undefined));
         checkEqual(true, equalDeep(undefined));
         checkEqual(false, equalDeep(null, undefined));
-        checkEqual(false, equalDeep(null)); // args.length
-
-        checkEqual(true, equalDeep(1, 1, 2));
-        checkEqual(false, equalDeep(1, 2, 3)); // named argument
+        checkEqual(false, equalDeep(null)); // named argument
 
         checkEqual(true, equalDeep({
           value1: 1,
@@ -4241,23 +4212,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalRegExp); // date
+        var equalFunctions = [equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue]; // date
 
-        checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equalDeep date'); // date in object
+        checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02'), equalFunction), 'test_equalDeep date'); // date in object
 
         checkEqual(false, equalDeep({
           date: new Date('2019/11/02')
         }, {
           date: new Date('2019/11/02')
-        }), 'test_equalDeep date in object'); // date in array
+        }, equalFunction), 'test_equalDeep date in object'); // date in array
 
-        checkEqual(false, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date');
-        equalDeep.reset();
+        checkEqual(false, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')], equalFunction), 'test_equalDeep date');
       });
     };
 
@@ -4274,23 +4239,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalDate); // regexp
+        var equalFunctions = [equalFunction.equalValue, equalFunction.equalObject, equalFunction.equalArrayType, equalFunction.equalFunction, equalFunction.equalDate]; // regexp
 
-        checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+        checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/), equalFunctions), 'test_equal regexp'); // regexp in object
 
         checkEqual(false, equalDeep({
           reg: new RegExp(/^a/)
         }, {
           reg: new RegExp(/^a/)
-        }), 'test_equal regexp'); // regexp in array
+        }, equalFunctions), 'test_equal regexp'); // regexp in array
 
-        checkEqual(false, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp');
-        equalDeep.reset();
+        checkEqual(false, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)], equalFunctions), 'test_equal regexp');
       });
     };
 
@@ -4321,36 +4280,16 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalRegExp);
-        equalDeep.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
+        checkEqual(false, equalDeep(map1, map2, equalFunction)); // Map in object
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep(map1, map2)); // Map in object
+        checkEqual(false, equalDeep({
+          map: map1
+        }, {
+          map: map2
+        }, equalFunction)); // Map in array
 
-          checkEqual(false, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          })); // Map in array
-
-          checkEqual(false, equalDeep([map1], [map2]));
-        } else {
-          // IE11 bug
-          checkEqual(true, equalDeep(map1, map2));
-          checkEqual(true, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }));
-          checkEqual(true, equalDeep([map1], [map2]));
-        }
-
-        equalDeep.reset();
+        checkEqual(false, equalDeep([map1], [map2], equalFunction));
       });
     };
 
@@ -4573,36 +4512,16 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set3'); // ignore Set
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalRegExp);
-        equalDeep.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
+        checkEqual(false, equalDeep(set1, set2, equalFunction)); // Set in object
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep(set1, set2)); // Set in object
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }, equalFunction)); // Set in array
 
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          })); // Set in array
-
-          checkEqual(false, equalDeep([set1], [set2]));
-        } else {
-          // IE11 bug
-          checkEqual(true, equalDeep(set1, set2));
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-          checkEqual(true, equalDeep([set1], [set2]));
-        }
-
-        equalDeep.reset();
+        checkEqual(false, equalDeep([set1], [set2], equalFunction));
       });
     };
 
@@ -8318,7 +8237,7 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(false, isMultiples(9, 2));
         checkEqual(false, isMultiples(9, 5));
         checkEqual(true, isMultiples(9, 3));
-        checkEqual(false, isMultiples(0, 2));
+        checkEqual(true, isMultiples(0, 2));
         checkEqual(false, isMultiples(-1, 2));
         checkEqual(true, isMultiples(-2, 2)); // Object Named Parameter
 
@@ -10985,44 +10904,46 @@ var test_execute_array = function test_execute_array(parts) {
         isThrown = _parts$test2.isThrown,
         isThrownException = _parts$test2.isThrownException,
         testCounter = _parts$test2.testCounter;
-    var array = parts.array;
-    var NumberArray = array.NumberArray,
-        IntegerArray = array.IntegerArray,
-        isFirst = array.isFirst,
-        isLast = array.isLast,
-        isBothEnds = array.isBothEnds,
-        subIndex = array.subIndex,
-        subLength = array.subLength,
-        subFirst = array.subFirst,
-        subLast = array.subLast,
-        arrayToIndexValueArray = array.arrayToIndexValueArray;
-    var _array$operation = array.operation,
-        insert = _array$operation.insert,
-        add = _array$operation.add,
-        deleteLength = _array$operation.deleteLength,
-        deleteIndex = _array$operation.deleteIndex,
-        deleteFirst = _array$operation.deleteFirst,
-        deleteLast = _array$operation.deleteLast,
-        includeFirst = _array$operation.includeFirst,
-        includeLast = _array$operation.includeLast,
-        includeBothEnds = _array$operation.includeBothEnds,
-        excludeFirst = _array$operation.excludeFirst,
-        excludeLast = _array$operation.excludeLast,
-        excludeBothEnds = _array$operation.excludeBothEnds,
-        trimFirst = _array$operation.trimFirst,
-        trimLast = _array$operation.trimLast,
-        trimBothEnds = _array$operation.trimBothEnds,
-        popFirst = _array$operation.popFirst,
-        popLast = _array$operation.popLast,
-        pushFirst = _array$operation.pushFirst,
-        pushLast = _array$operation.pushLast,
-        remainFirst = _array$operation.remainFirst,
-        remainLast = _array$operation.remainLast;
+    var isLowerCase = parts.isLowerCase,
+        isUpperCase = parts.isUpperCase,
+        array = parts.array;
+    var _parts$array = parts.array,
+        NumberArray = _parts$array.NumberArray,
+        IntegerArray = _parts$array.IntegerArray,
+        isFirst = _parts$array.isFirst,
+        isLast = _parts$array.isLast,
+        isBothEnds = _parts$array.isBothEnds,
+        subIndex = _parts$array.subIndex,
+        subLength = _parts$array.subLength,
+        subFirst = _parts$array.subFirst,
+        subLast = _parts$array.subLast,
+        arrayToIndexValueArray = _parts$array.arrayToIndexValueArray,
+        sortOrderFunction = _parts$array.sortOrderFunction;
+    var _parts$array$operatio = parts.array.operation,
+        insert = _parts$array$operatio.insert,
+        add = _parts$array$operatio.add,
+        deleteLength = _parts$array$operatio.deleteLength,
+        deleteIndex = _parts$array$operatio.deleteIndex,
+        deleteFirst = _parts$array$operatio.deleteFirst,
+        deleteLast = _parts$array$operatio.deleteLast,
+        includeFirst = _parts$array$operatio.includeFirst,
+        includeLast = _parts$array$operatio.includeLast,
+        includeBothEnds = _parts$array$operatio.includeBothEnds,
+        excludeFirst = _parts$array$operatio.excludeFirst,
+        excludeLast = _parts$array$operatio.excludeLast,
+        excludeBothEnds = _parts$array$operatio.excludeBothEnds,
+        trimFirst = _parts$array$operatio.trimFirst,
+        trimLast = _parts$array$operatio.trimLast,
+        trimBothEnds = _parts$array$operatio.trimBothEnds,
+        popFirst = _parts$array$operatio.popFirst,
+        popLast = _parts$array$operatio.popLast,
+        pushFirst = _parts$array$operatio.pushFirst,
+        pushLast = _parts$array$operatio.pushLast,
+        remainFirst = _parts$array$operatio.remainFirst,
+        remainLast = _parts$array$operatio.remainLast;
     var _parts$number = parts.number,
         isEven = _parts$number.isEven,
         isOdd = _parts$number.isOdd;
-    var isLowerCase = parts.isLowerCase,
-        isUpperCase = parts.isUpperCase;
     var equal = parts.compare.equal;
 
     var test_array_NumberArray = function test_array_NumberArray() {
@@ -11319,7 +11240,90 @@ var test_execute_array = function test_execute_array(parts) {
     var test_uniqe = function test_uniqe() {
       it('test_uniqe', function () {
         checkEqual([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
-      });
+        checkEqual([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return v;
+        }));
+        checkEqual([1, 2], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return parts.isEven(v);
+        }));
+        checkEqual({
+          result: [1, 2],
+          index: [false, true]
+        }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return parts.isEven(v);
+        }, true));
+        checkEqual({
+          result: [{
+            x: 1,
+            y: 1
+          }, {
+            x: undefined,
+            y: 4
+          }, {
+            x: 2,
+            y: 2
+          }],
+          index: [1, undefined, 2]
+        }, array.unique([{
+          x: 1,
+          y: 1
+        }, {
+          x: undefined,
+          y: 4
+        }, {
+          x: 2,
+          y: 2
+        }, {
+          x: 1,
+          y: 3
+        }, {
+          y: 5
+        }], function (v) {
+          return v.x;
+        }, true));
+      }); // Object Named Parameter
+
+      checkEqual([1, 2, 3, 4, 0], array.unique({
+        array: [1, 2, 3, 4, 4, 4, 3, 2, 0]
+      }));
+      checkEqual([1, 2], array.unique({
+        array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+        func: function func(v) {
+          return parts.isEven(v);
+        }
+      }));
+      checkEqual([1, 2], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+        func: function func(v) {
+          return parts.isEven(v);
+        }
+      }));
+      checkEqual({
+        result: [1, 2],
+        index: [false, true]
+      }, array.unique({
+        array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+        func: function func(v) {
+          return parts.isEven(v);
+        },
+        detail: true
+      }));
+      checkEqual({
+        result: [1, 2],
+        index: [false, true]
+      }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+        func: function func(v) {
+          return parts.isEven(v);
+        },
+        detail: true
+      }));
+      checkEqual({
+        result: [1, 2],
+        index: [false, true]
+      }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+        return parts.isEven(v);
+      }, {
+        detail: true
+      }));
     };
 
     var test_single = function test_single() {
@@ -11334,15 +11338,78 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_group = function test_group() {
+      it('test_group', function () {
+        checkEqual([[1], [2, 2], [3, 3], [4, 4, 4], [0]], array.group([1, 2, 3, 4, 4, 4, 3, 2, 0]));
+        checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]], array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return parts.isEven(v);
+        }));
+        checkEqual({
+          result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          index: [false, true]
+        }, array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return parts.isEven(v);
+        }, true)); // Object Named Parameter
+
+        checkEqual([[1], [2, 2], [3, 3], [4, 4, 4], [0]], array.group({
+          array: [1, 2, 3, 4, 4, 4, 3, 2, 0]
+        }));
+        checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]], array.group({
+          array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          func: function func(v) {
+            return parts.isEven(v);
+          }
+        }));
+        checkEqual([[1, 3, 3], [2, 4, 4, 4, 2, 0]], array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+          func: function func(v) {
+            return parts.isEven(v);
+          }
+        }));
+        checkEqual({
+          result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          index: [false, true]
+        }, array.group({
+          array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          func: function func(v) {
+            return parts.isEven(v);
+          },
+          detail: true
+        }));
+        checkEqual({
+          result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          index: [false, true]
+        }, array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+          func: function func(v) {
+            return parts.isEven(v);
+          },
+          detail: true
+        }));
+        checkEqual({
+          result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+          index: [false, true]
+        }, array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return parts.isEven(v);
+        }, {
+          detail: true
+        }));
+        checkEqual({
+          result: [[1], [2, 2], [3, 3], [4, 4, 4], [0]],
+          index: [1, 2, 3, 4, 0]
+        }, array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+          detail: true
+        }));
+      });
+    };
+
     var test_filter = function test_filter() {
       it('test_filter', function () {
-        checkEqual([2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual([2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([0, 2, 4], array.filter([0, 1, 2, 3, 4, 5], isEven));
         checkEqual([1, 3, 5], array.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
-        checkEqual([2, 4], array.filter({
+        checkEqual([0, 2, 4], array.filter({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -11353,16 +11420,16 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_map = function test_map() {
       it('test_map', function () {
-        checkEqual([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual([false, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([true, false, true, false, true, false], array.map([0, 1, 2, 3, 4, 5], isEven));
         checkEqual([false, true, false, true, false, true], array.map([0, 1, 2, 3, 4, 5], isOdd));
         checkEqual([0, 2, 4, 6, 8, 10], array.map([0, 1, 2, 3, 4, 5], function (value) {
           return value * 2;
         })); // Object Named Parameter
 
-        checkEqual([false, false, true, false, true, false], array.map({
+        checkEqual([true, false, true, false, true, false], array.map({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -11373,10 +11440,10 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_count = function test_count() {
       it('test_count', function () {
-        checkEqual(2, array.count([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual(2, array.count([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual(3, array.count([0, 1, 2, 3, 4, 5], isEven));
         checkEqual(3, array.count([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
         checkEqual(3, array.count({
@@ -12769,13 +12836,13 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_filter = function test_operation_filter() {
       it('test_operation_filter', function () {
-        checkEqual([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], function (value) {
+        checkEqual([0, 2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], function (value) {
           return isEven(value);
         }));
-        checkEqual([2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], isEven));
+        checkEqual([0, 2, 4], array.operation.filter([0, 1, 2, 3, 4, 5], isEven));
         checkEqual([1, 3, 5], array.operation.filter([0, 1, 2, 3, 4, 5], isOdd)); // Object Named Parameter
 
-        checkEqual([2, 4], array.operation.filter({
+        checkEqual([0, 2, 4], array.operation.filter({
           array: [0, 1, 2, 3, 4, 5],
           func: function func(value) {
             return isEven(value);
@@ -12786,12 +12853,42 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sort = function test_operation_sort() {
       it('test_operation_sort', function () {
-        // exception
-        checkEqual(true, isThrownException(function () {
-          array.operation.sort([0, 1], 'a', 'ascending');
+        checkEqual([0, 1, 2], array.operation.sort([1, 2, 0]));
+        checkEqual([2, 1, 0], array.operation.sort([1, 2, 0], 'descending'));
+        checkEqual(['', 'A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sort(['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''], 'ascending'));
+        checkEqual(['', 'a', 'A', 'Aa', 'aa', 'aA', 'AA'], array.operation.sort(['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''], 'ascending', function (v) {
+          return v.length;
+        })); // object named parameter
+
+        checkEqual([0, 1, 2], array.operation.sort({
+          array: [1, 2, 0]
+        }));
+        checkEqual([2, 1, 0], array.operation.sort({
+          array: [1, 2, 0],
+          order: 'descending'
+        }));
+        checkEqual(['', 'a', 'A', 'Aa', 'aa', 'aA', 'AA'], array.operation.sort({
+          array: ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
+          order: 'ascending',
+          func: function func(v) {
+            return v.length;
+          }
+        })); // exception
+
+        checkEqual(false, isThrownException(function () {
+          array.operation.sort([0, 1]);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sort([0, 1], 'ascending');
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sort([0, 1], 'descending');
         }, 'TypeError'));
         checkEqual(true, isThrownException(function () {
-          array.operation.sort([0, 1], 'number', 'b');
+          array.operation.sort([0, 1], 'desc');
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sort([0, 1], 'ascending', null);
         }, 'TypeError'));
       });
     };
@@ -12817,7 +12914,8 @@ var test_execute_array = function test_execute_array(parts) {
       it('test_operation_sortLength', function () {
         checkEqual(['a', 'aa', 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', 'aa']));
         checkEqual(['aaa', 'aa', 'a'], array.operation.sortLengthDescending(['aaa', 'a', 'aa']));
-        checkCompare(parts.compare.equalDeep, ['a', [0, 1], 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])); // exception
+        checkCompare(parts.compare.equalDeep, ['a', [0, 1], 'aaa'], array.operation.sortLengthAscending(['aaa', 'a', [0, 1]]));
+        checkCompare(parts.compare.equalDeep, ['aaa', [0, 1], 'a'], array.operation.sortLengthDescending(['aaa', 'a', [0, 1]])); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.sortLengthAscending(1);
@@ -12927,6 +13025,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_uniqe();
     test_single();
     test_multiple();
+    test_group();
     test_filter();
     test_map();
     test_count();

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.equal = exports._equal = void 0;
+exports["default"] = exports.equalDeep = exports._equalDeep = void 0;
 
 var _type = require("../type/type.js");
 
@@ -12,14 +12,31 @@ var _object = require("../object/object.js");
 var _equalFunction = require("../compare/equalFunction.js");
 
 /**
- * equal
+ * equalDeep
  */
-var _equal = function _equal(value1, value2) {
+var _equalDeep = function _equalDeep(value1, value2) {
   var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
+  var CircularReferenceBuffer = {
+    v1Array: [],
+    v2Array: []
+  };
 
-  var __equal = function __equal(value1, value2) {
+  var __equalDeep = function __equalDeep(value1, value2) {
+    var index = CircularReferenceBuffer.v1Array.indexOf(value1);
+
+    if (index !== -1) {
+      if (CircularReferenceBuffer.v2Array[index] === value2) {
+        return true;
+      }
+
+      return value1 === value2;
+    }
+
     for (var i = 0, l = equalFunctionArray.length; i < l; i += 1) {
-      var result = equalFunctionArray[i](value1, value2);
+      var result = equalFunctionArray[i](value1, value2, function (v1, v2) {
+        CircularReferenceBuffer.v1Array.push(v1);
+        CircularReferenceBuffer.v2Array.push(v2);
+      }, __equalDeep);
 
       if (!(0, _type.isUndefined)(result)) {
         return result;
@@ -29,12 +46,12 @@ var _equal = function _equal(value1, value2) {
     return false;
   };
 
-  return __equal(value1, value2);
+  return __equalDeep(value1, value2);
 };
 
-exports._equal = _equal;
+exports._equalDeep = _equalDeep;
 
-var equal = function equal(value1, value2) {
+var equalDeep = function equalDeep(value1, value2) {
   var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
 
   if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFunctionArray')) {
@@ -53,16 +70,12 @@ var equal = function equal(value1, value2) {
     equalFunctionArray = _equalFunctionArray.equalFunctionArray;
   }
 
-  if (!(0, _type.isFunctionArray)(equalFunctionArray)) {
-    throw new TypeError('equal args(equalFunctionArray) is not function array');
-  }
-
-  return _equal(value1, value2, equalFunctionArray);
+  return _equalDeep(value1, value2, equalFunctionArray);
 };
 
-exports.equal = equal;
+exports.equalDeep = equalDeep;
 var _default = {
-  _equal: _equal,
-  equal: equal
+  _equalDeep: _equalDeep,
+  equalDeep: equalDeep
 };
 exports["default"] = _default;

@@ -82,16 +82,14 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_equal', function () {
         // Primitive value
         checkEqual(true, equal(1, 1));
+        checkEqual(false, equal(1, 2));
         checkEqual(true, equal('1', '1'));
         checkEqual(false, equal('1', 1));
         checkEqual(true, equal(null, null));
         checkEqual(true, equal(undefined, undefined));
         checkEqual(true, equal(undefined));
         checkEqual(false, equal(null, undefined));
-        checkEqual(false, equal(null)); // args.length
-
-        checkEqual(true, equal(1, 1, 2));
-        checkEqual(false, equal(1, 2, 3)); // named argument
+        checkEqual(false, equal(null)); // named argument
 
         checkEqual(true, equal({
           value1: 1,
@@ -211,23 +209,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalRegExp); // date
+        var equalFunctions = [equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue]; // date
 
-        checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equal date'); // date in object
+        checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02'), equalFunctions), 'test_equal date'); // date in object
 
         checkEqual(false, equal({
           date: new Date('2019/11/02')
         }, {
           date: new Date('2019/11/02')
-        }), 'test_equal date'); // date in array
+        }, equalFunctions), 'test_equal date'); // date in array
 
-        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date');
-        equal.reset();
+        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')], equalFunctions), 'test_equal date');
       });
     };
 
@@ -244,23 +236,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalDate); // regexp
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue]; // regexp
 
-        checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+        checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/), equalFunctions), 'test_equal regexp'); // regexp in object
 
         checkEqual(false, equal({
           reg: new RegExp(/^a/)
         }, {
           reg: new RegExp(/^a/)
-        }), 'test_equal regexp'); // regexp in array
+        }, equalFunctions), 'test_equal regexp'); // regexp in array
 
-        checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp');
-        equal.reset();
+        checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)], equalFunctions), 'test_equal regexp');
       });
     };
 
@@ -291,18 +277,12 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalRegExp);
-        equal.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
 
         if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equal(map1, map2));
+          checkEqual(false, equal(map1, map2, equalFunctions));
         } else {
-          checkEqual(true, equal(map1, map2)); // IE11 bug
+          checkEqual(true, equal(map1, map2, equalFunctions)); // IE11 bug
         } // Map in object
 
 
@@ -313,7 +293,6 @@ var test_execute_compare = function test_execute_compare(parts) {
         }), 'test_equal Map'); // Map in array
 
         checkEqual(false, equal([map1], [map2]), 'test_equal Map');
-        equal.reset();
       });
     };
 
@@ -344,18 +323,12 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
 
-        equal.clear();
-        equal.add(equalFunction.equalValue);
-        equal.add(equalFunction.equalObject);
-        equal.add(equalFunction.equalArrayType);
-        equal.add(equalFunction.equalFunction);
-        equal.add(equalFunction.equalRegExp);
-        equal.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
 
         if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equal(set1, set2));
+          checkEqual(false, equal(set1, set2, equalFunctions));
         } else {
-          checkEqual(true, equal(set1, set2)); // IE11 bug
+          checkEqual(true, equal(set1, set2, equalFunctions)); // IE11 bug
         } // Set in object
 
 
@@ -366,24 +339,21 @@ var test_execute_compare = function test_execute_compare(parts) {
         }), 'test_equal Set'); // Set in array
 
         checkEqual(false, equal([set1], [set2]), 'test_equal Set');
-        equal.reset();
       });
     };
 
     var test_equalDeep = function test_equalDeep() {
       it('test_equalDeep', function () {
         // Primitive value
-        checkEqual(true, equalDeep(1, 1), 'test_equalDeep 1');
+        checkEqual(true, equalDeep(1, 1));
+        checkEqual(false, equalDeep(1, 2));
         checkEqual(true, equalDeep('1', '1'));
         checkEqual(false, equalDeep('1', 1));
         checkEqual(true, equalDeep(null, null));
         checkEqual(true, equalDeep(undefined, undefined));
         checkEqual(true, equalDeep(undefined));
         checkEqual(false, equalDeep(null, undefined));
-        checkEqual(false, equalDeep(null)); // args.length
-
-        checkEqual(true, equalDeep(1, 1, 2));
-        checkEqual(false, equalDeep(1, 2, 3)); // named argument
+        checkEqual(false, equalDeep(null)); // named argument
 
         checkEqual(true, equalDeep({
           value1: 1,
@@ -739,23 +709,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalRegExp); // date
+        var equalFunctions = [equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue]; // date
 
-        checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02')), 'test_equalDeep date'); // date in object
+        checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02'), equalFunction), 'test_equalDeep date'); // date in object
 
         checkEqual(false, equalDeep({
           date: new Date('2019/11/02')
         }, {
           date: new Date('2019/11/02')
-        }), 'test_equalDeep date in object'); // date in array
+        }, equalFunction), 'test_equalDeep date in object'); // date in array
 
-        checkEqual(false, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date');
-        equalDeep.reset();
+        checkEqual(false, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')], equalFunction), 'test_equalDeep date');
       });
     };
 
@@ -772,23 +736,17 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalDate); // regexp
+        var equalFunctions = [equalFunction.equalValue, equalFunction.equalObject, equalFunction.equalArrayType, equalFunction.equalFunction, equalFunction.equalDate]; // regexp
 
-        checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/)), 'test_equal regexp'); // regexp in object
+        checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/), equalFunctions), 'test_equal regexp'); // regexp in object
 
         checkEqual(false, equalDeep({
           reg: new RegExp(/^a/)
         }, {
           reg: new RegExp(/^a/)
-        }), 'test_equal regexp'); // regexp in array
+        }, equalFunctions), 'test_equal regexp'); // regexp in array
 
-        checkEqual(false, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp');
-        equalDeep.reset();
+        checkEqual(false, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)], equalFunctions), 'test_equal regexp');
       });
     };
 
@@ -819,36 +777,16 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalRegExp);
-        equalDeep.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
+        checkEqual(false, equalDeep(map1, map2, equalFunction)); // Map in object
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep(map1, map2)); // Map in object
+        checkEqual(false, equalDeep({
+          map: map1
+        }, {
+          map: map2
+        }, equalFunction)); // Map in array
 
-          checkEqual(false, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          })); // Map in array
-
-          checkEqual(false, equalDeep([map1], [map2]));
-        } else {
-          // IE11 bug
-          checkEqual(true, equalDeep(map1, map2));
-          checkEqual(true, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }));
-          checkEqual(true, equalDeep([map1], [map2]));
-        }
-
-        equalDeep.reset();
+        checkEqual(false, equalDeep([map1], [map2], equalFunction));
       });
     };
 
@@ -1071,36 +1009,16 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set3'); // ignore Set
 
-        equalDeep.clear();
-        equalDeep.add(equalFunction.equalValue);
-        equalDeep.add(equalFunction.equalObject);
-        equalDeep.add(equalFunction.equalArrayType);
-        equalDeep.add(equalFunction.equalFunction);
-        equalDeep.add(equalFunction.equalRegExp);
-        equalDeep.add(equalFunction.equalDate);
+        var equalFunctions = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
+        checkEqual(false, equalDeep(set1, set2, equalFunction)); // Set in object
 
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep(set1, set2)); // Set in object
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }, equalFunction)); // Set in array
 
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          })); // Set in array
-
-          checkEqual(false, equalDeep([set1], [set2]));
-        } else {
-          // IE11 bug
-          checkEqual(true, equalDeep(set1, set2));
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-          checkEqual(true, equalDeep([set1], [set2]));
-        }
-
-        equalDeep.reset();
+        checkEqual(false, equalDeep([set1], [set2], equalFunction));
       });
     };
 

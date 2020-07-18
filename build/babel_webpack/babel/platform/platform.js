@@ -79,7 +79,7 @@ var browserName = function browserName() {
 
   if ((0, _includes_common._includesSome)(ua, ['msie', 'trident'])) {
     return 'InternetExplorer';
-  } else if ((0, _includes2._includes)(ua, 'edge')) {
+  } else if ((0, _includes2._includes)(ua, 'edg')) {
     return 'Edge';
   } else if ((0, _includes2._includes)(ua, 'opr')) {
     return 'Opera';

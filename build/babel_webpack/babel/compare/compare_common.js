@@ -25,7 +25,7 @@ var _or = function _or(value, compareArray) {
 exports._or = _or;
 
 var or = function or(value, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compareArray')) {
     var _value = value;
     value = _value.value;
     compareArray = _value.compareArray;
