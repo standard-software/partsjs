@@ -65,7 +65,7 @@ export const sort = (
       'sort args(array) is not array',
     );
   }
-  if (!_or(order, Object.values(sort.order))) {
+  if (!_or(order, [sort.order.ascending, sort.order.descending])) {
     throw new TypeError(
       'sort args(order) is not ["ascending"|"descending"]',
     );
