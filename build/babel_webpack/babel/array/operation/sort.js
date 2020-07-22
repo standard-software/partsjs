@@ -9,7 +9,7 @@ var _type = require("../../type/type.js");
 
 var _syntax = require("../../syntax/syntax.js");
 
-var _compare_common = require("../../compare/compare_common.js");
+var _or2 = require("../../compare/or.js");
 
 var _isObjectParameter = require("../../object/isObjectParameter.js");
 
@@ -71,7 +71,7 @@ var sort = function sort(array) {
     throw new TypeError('sort args(array) is not array');
   }
 
-  if (!(0, _compare_common._or)(order, [sort.order.ascending, sort.order.descending])) {
+  if (!(0, _or2._or)(order, [sort.order.ascending, sort.order.descending])) {
     throw new TypeError('sort args(order) is not ["ascending"|"descending"]');
   }
 

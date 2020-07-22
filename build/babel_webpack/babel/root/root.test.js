@@ -78,23 +78,26 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(7, object1.d.a);
         checkEqual(7, testObject3.d.a); // object from null
 
-        var object1 = Object.create(null);
-        object1.a = 1;
-        var object2 = clone(object1);
-        object2.a = 0;
-        checkEqual(1, object1.a);
-        checkEqual(0, object2.a);
-        var object1 = Object.create(null);
-        object1.a = Object.create(null);
-        object1.a.b = 'test';
-        var object2 = clone(object1);
-        checkEqual(true, parts.isObjectFromNull(object1.a));
-        checkEqual(true, parts.isObjectFromNull(object1));
-        checkEqual(true, parts.isObjectFromNull(object2.a));
-        checkEqual(true, parts.isObjectFromNull(object2));
-        checkEqual(false, object1 === object2);
-        checkEqual(true, object1.a === object2.a);
-        checkEqual(true, object1.a.b === object2.a.b); // module object no support
+        if (!parts.platform.isWindowsScriptHost()) {
+          var object1 = Object.create(null);
+          object1.a = 1;
+          var object2 = clone(object1);
+          object2.a = 0;
+          checkEqual(1, object1.a);
+          checkEqual(0, object2.a);
+          var object1 = Object.create(null);
+          object1.a = Object.create(null);
+          object1.a.b = 'test';
+          var object2 = clone(object1);
+          checkEqual(true, parts.isObjectFromNull(object1.a));
+          checkEqual(true, parts.isObjectFromNull(object1));
+          checkEqual(true, parts.isObjectFromNull(object2.a));
+          checkEqual(true, parts.isObjectFromNull(object2));
+          checkEqual(false, object1 === object2);
+          checkEqual(true, object1.a === object2.a);
+          checkEqual(true, object1.a.b === object2.a.b);
+        } // module object clone no support
+
 
         if (parts.isModule(parts)) {
           var cloneParts = parts.clone(parts);
@@ -291,17 +294,19 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(7, object1.d.a);
         checkEqual(4, testObject3.d.a); // object from null
 
-        var object1 = Object.create(null);
-        object1.a = Object.create(null);
-        object1.a.b = 'test';
-        var object2 = cloneDeep(object1);
-        checkEqual(true, parts.isObjectFromNull(object1.a));
-        checkEqual(true, parts.isObjectFromNull(object1));
-        checkEqual(true, parts.isObjectFromNull(object2.a));
-        checkEqual(true, parts.isObjectFromNull(object2));
-        checkEqual(false, object1 === object2);
-        checkEqual(false, object1.a === object2.a);
-        checkEqual(true, object1.a.b === object2.a.b);
+        if (!parts.platform.isWindowsScriptHost()) {
+          var object1 = Object.create(null);
+          object1.a = Object.create(null);
+          object1.a.b = 'test';
+          var object2 = cloneDeep(object1);
+          checkEqual(true, parts.isObjectFromNull(object1.a));
+          checkEqual(true, parts.isObjectFromNull(object1));
+          checkEqual(true, parts.isObjectFromNull(object2.a));
+          checkEqual(true, parts.isObjectFromNull(object2));
+          checkEqual(false, object1 === object2);
+          checkEqual(false, object1.a === object2.a);
+          checkEqual(true, object1.a.b === object2.a.b);
+        }
       });
     };
 

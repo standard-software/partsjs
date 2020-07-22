@@ -371,8 +371,8 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
-    var test_uniqe = function test_uniqe() {
-      it('test_uniqe', function () {
+    var test_unique = function test_unique() {
+      it('test_unique', function () {
         checkEqual([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0]));
         checkEqual([1, 2, 3, 4, 0], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
           return v;
@@ -380,12 +380,12 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual([1, 2], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
           return parts.isEven(v);
         }));
-        checkEqual({
-          result: [1, 2],
-          index: [false, true]
-        }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+        checkEqual([1, 2], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
           return parts.isEven(v);
-        }, true));
+        }, true).result);
+        checkEqual([false, true], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
+          return parts.isEven(v);
+        }, true).index);
         checkEqual({
           result: [{
             x: 1,
@@ -2156,7 +2156,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_average();
     test_median();
     test_mode();
-    test_uniqe();
+    test_unique();
     test_single();
     test_multiple();
     test_group();

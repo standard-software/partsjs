@@ -47,15 +47,18 @@ var __unique = function __unique(array) {
 
 exports.__unique = __unique;
 
-var _unique = function _unique(array, func, detail) {
-  if ((0, _type.isUndefined)(func)) {
+var defaultUniqueFunc = function defaultUniqueFunc(v) {
+  return v;
+};
+
+var _unique = function _unique(array) {
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultUniqueFunc;
+  var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  if (func === defaultUniqueFunc) {
     if (detail === false) {
       return __unique(array);
     }
-
-    func = function func(v) {
-      return v;
-    };
   }
 
   var index = [];
@@ -69,6 +72,7 @@ var _unique = function _unique(array, func, detail) {
       result.push(v);
     }
   });
+  func = undefined;
 
   if (detail) {
     return {
@@ -82,18 +86,21 @@ var _unique = function _unique(array, func, detail) {
 
 exports._unique = _unique;
 
-var unique = function unique(array, func) {
+var unique = function unique(array) {
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultUniqueFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
     var _array = array;
     array = _array.array;
-    func = _array.func;
+    var _array$func = _array.func;
+    func = _array$func === void 0 ? defaultUniqueFunc : _array$func;
     var _array$detail = _array.detail;
     detail = _array$detail === void 0 ? false : _array$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
     var _func = func;
-    func = _func.func;
+    var _func$func = _func.func;
+    func = _func$func === void 0 ? defaultUniqueFunc : _func$func;
     var _func$detail = _func.detail;
     detail = _func$detail === void 0 ? false : _func$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
@@ -105,15 +112,15 @@ var unique = function unique(array, func) {
     throw new TypeError('unique args(array) is not array');
   }
 
-  if (!((0, _type.isFunction)(func) || (0, _type.isUndefined)(func))) {
-    throw new TypeError('group args(func) is not [function|undefined]');
+  if (!(0, _type.isFunction)(func)) {
+    throw new TypeError('group args(func) is not function');
   }
 
   if (!(0, _type.isBoolean)(detail)) {
     throw new TypeError('group args(detail) is not boolean');
   }
 
-  if (detail && (0, _type.isUndefined)(func)) {
+  if (detail && func === defaultUniqueFunc) {
     throw new TypeError('group args(detail) is true and args(func) must be function');
   }
 

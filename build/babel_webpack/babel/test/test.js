@@ -13,6 +13,8 @@ var _string = require("../string/string.js");
 
 var _compare = require("../compare/compare.js");
 
+var _platform = require("../platform/platform.js");
+
 /**
  * test framework
  */
@@ -52,14 +54,19 @@ var it = function it(text, func) {
     consoleLogTestName();
   }
 
-  try {
-    func();
-  } catch (e) {
-    if (!testFrame.outputIt) {
-      consoleLogTestName();
-    }
+  if ((0, _platform.isWindowsScriptHost)()) {
+    func(); // if wsh error catch
+    // Cannot determine where the error occurred
+  } else {
+    try {
+      func();
+    } catch (e) {
+      if (!testFrame.outputIt) {
+        consoleLogTestName();
+      }
 
-    console.log(e);
+      console.log(e);
+    }
   }
 
   testFrame.counter = 0;
