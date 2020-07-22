@@ -37,11 +37,18 @@ export const test_execute_index = (parts) => {
           [364, 18, 4, 252, 9, 11, 23, 29, 7, 37, 17, 37, 32];
         const propertyCountForParts = (parts) => {
           let result = propertyCount(parts);
-          if (!parts.isUndefined(parts.default)) {
+          if (parts.inProperty(parts, 'default')) {
             result -= 1;
           }
-          if (!parts.isUndefined(parts.parts)) {
+          if (parts.inProperty(parts, 'parts')) {
             result -= 1;
+          }
+          if (parts.platform.isWindowsScriptHost()) {
+            if (parts.inProperty(parts, '__esModule')) {
+              result -= 1;
+            }
+            // __esModule is "in" found but "for..in" or "Object.keys" not found
+            // and WSH found
           }
           return result;
         };
@@ -123,12 +130,18 @@ export const test_execute_index = (parts) => {
         if (!parts.isUndefined(parts1.default)) {
           delete parts1.default;
         }
+        if (!parts.isUndefined(parts1.__esModule)) {
+          delete parts1.__esModule;
+        }
         const parts2 = parts.cloneDeep(parts.parts);
         if (!parts2.isUndefined(parts2.parts)) {
           delete parts2.parts;
         }
-        if (!parts.isUndefined(parts1.default)) {
+        if (!parts.isUndefined(parts2.default)) {
           delete parts2.default;
+        }
+        if (!parts.isUndefined(parts2.__esModule)) {
+          delete parts2.__esModule;
         }
         checkEqual(true,  parts.equalDeep(parts1, parts2));
       });

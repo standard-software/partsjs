@@ -1,13 +1,24 @@
-import cloneFunction from './cloneFunction.js';
-import clone from './clone.js';
-import cloneDeep from './cloneDeep.js';
+import cloneFunction_js from './cloneFunction.js';
+import clone_js from './clone.js';
+import cloneDeep_js from './cloneDeep.js';
+
+export const {
+  cloneFunction,
+  cloneFunctionArrayDefault,
+} = cloneFunction_js;
+
+export const {
+  _clone,
+  clone,
+} = clone_js;
+
+export const {
+  _cloneDeep,
+  cloneDeep,
+} = cloneDeep_js;
 
 export default {
-  ...cloneFunction,
-  ...clone,
-  ...cloneDeep,
+  ...cloneFunction_js,
+  ...clone_js,
+  ...cloneDeep_js,
 };
-
-export * from './cloneFunction.js';
-export * from './clone.js';
-export * from './cloneDeep.js';

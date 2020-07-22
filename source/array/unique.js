@@ -33,12 +33,15 @@ export const __unique = (array) => {
   // when the array.lentgh is larger than about 120
 };
 
-export const _unique = (array, func, detail) => {
-  if (isUndefined(func)) {
+const defaultUniqueFunc = v => v;
+
+export const _unique = (
+  array, func = defaultUniqueFunc, detail = false,
+) => {
+  if (func === defaultUniqueFunc) {
     if (detail === false) {
       return __unique(array);
     }
-    func = v => v;
   }
 
   const index = [];
@@ -51,18 +54,18 @@ export const _unique = (array, func, detail) => {
       result.push(v);
     }
   });
-
+  func = undefined;
   if (detail) {
     return { index, result };
   }
   return result;
 };
 
-export const unique = (array, func, detail = false) => {
+export const unique = (array, func = defaultUniqueFunc, detail = false) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func, detail = false } = array);
+    ({ array, func = defaultUniqueFunc, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func, detail = false } = func);
+    ({ func = defaultUniqueFunc, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }
@@ -72,9 +75,9 @@ export const unique = (array, func, detail = false) => {
       'unique args(array) is not array',
     );
   }
-  if (!(isFunction(func) || isUndefined(func))) {
+  if (!isFunction(func)) {
     throw new TypeError(
-      'group args(func) is not [function|undefined]',
+      'group args(func) is not function',
     );
   }
   if (!isBoolean(detail)) {
@@ -82,7 +85,7 @@ export const unique = (array, func, detail = false) => {
       'group args(detail) is not boolean',
     );
   }
-  if (detail && isUndefined(func)) {
+  if (detail && func === defaultUniqueFunc) {
     throw new TypeError(
       'group args(detail) is true and args(func) must be function',
     );

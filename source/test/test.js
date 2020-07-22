@@ -17,8 +17,12 @@ import {
 } from '../string/string.js';
 
 import {
-  equal, equalDeep,
+  equalDeep,
 } from '../compare/compare.js';
+
+import {
+  isWindowsScriptHost,
+} from '../platform/platform.js';
 
 /**
  * test framework
@@ -58,13 +62,19 @@ export const it = (text, func) => {
   if (testFrame.outputIt) {
     consoleLogTestName();
   }
-  try {
+  if (isWindowsScriptHost()) {
     func();
-  } catch (e) {
-    if (!testFrame.outputIt) {
-      consoleLogTestName();
+    // if wsh error catch
+    // Cannot determine where the error occurred
+  } else {
+    try {
+      func();
+    } catch (e) {
+      if (!testFrame.outputIt) {
+        consoleLogTestName();
+      }
+      console.log(e);
     }
-    console.log(e);
   }
   testFrame.counter = 0;
   testFrame.testName = '';

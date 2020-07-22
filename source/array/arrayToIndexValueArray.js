@@ -48,6 +48,5 @@ export const arrayEntries = arrayToIndexValueArray;
 export default {
   _arrayToIndexValueArray,
   arrayToIndexValueArray,
-
   arrayEntries,
 };

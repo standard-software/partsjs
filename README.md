@@ -234,6 +234,13 @@ same [How to use Google Apps Script]
 
 ## Version
 
+### 7.0.0
+#### 2020/07/22(Wed)
+- Revive support wsh
+  - add test.wsf
+  - delete export * from
+- compare_common.js >> or.js
+
 ### 6.5.0
 #### 2020/07/18(Sat)
 - update browserName isEdge
@@ -283,53 +290,6 @@ same [How to use Google Apps Script]
     - alias name isObjectType
 - update clone / cloneDeep
   - support ObjectFromNull
-
-### 6.2.0
-#### 2020/06/30(Tue)
-- object.hasOwnProperty >> Object.prototype.hasOwnProperty.call(object,
-- upddate testcode
-  - source deno import pattern
-  - build babel/webpack node requier pattern
-  - delete local isTypeAll
-- add isModule isNotModule etc
-- update inProperty 
-  - support Module Object etc object like
-  - args propertyPathArray >> propertyPaths
-- update object.js move function
-  - add getProperty.js
-  - add propertyCount.js
-- add has.js
-  - has / hasOwn / hasPrototype
-- support full object parameter
-  - has / hasOwn / hasPrototype
-  - propertyCount
-  - getProperty
-  - inProperty
-- add isObjectNormal isObjectFromNull
-  - isNot... is...All / is...Array
-- delete isType.js _typeofCheck
-- resetting eslint fix
-
-### 6.1.0
-#### 2020/06/24(Wed)
-- rename folder
-  - source_code >> source
-  - debug_build >> build/babel_webpack/babel
-  - release_build >> build/babel_webpack/webpack
-- add platform.js
-  - googleAppScriptEngineName isGasV8 isGasRhino
-- add run_check files
-- update testcode support Gas Rhino
-
-### 6.0.0
-#### 2020/06/20(Sat)
-- support deno 
-  - source CommonJS to ESModules
-  - add code change tool parts-CommonJS_To_ESModules
-- unsupport wsh
-  - Code converted from ESModules by babel does not support wsh
-- delete test_jest/source
-- delete test_exec/release_wsh
 
 ### More Info
 [VERSION.md](./VERSION.md)

@@ -21,7 +21,6 @@ import {
 
 import {
   _copyProperty,
-  isObjectParameter,
 } from '../object/object.js';
 
 /**

@@ -59,8 +59,6 @@ export const IntegerArray = (start, end, increment) => {
 
 export default {
   _IntegerArray,
-
   IntegerArray,
-
 };
 

@@ -81,8 +81,6 @@ export const includesAll = (
 export default {
   _includesSome,
   _includesAll,
-
   includesSome,
   includesAll,
-
 };

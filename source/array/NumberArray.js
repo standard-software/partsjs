@@ -93,8 +93,6 @@ export const NumberArray = (start, end, increment) => {
 
 export default {
   _NumberArray,
-
   NumberArray,
-
 };
 

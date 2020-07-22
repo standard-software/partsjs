@@ -257,8 +257,8 @@ export const test_execute_array = (parts) => {
       });
     };
 
-    const test_uniqe = () => {
-      it('test_uniqe', () => {
+    const test_unique = () => {
+      it('test_unique', () => {
         checkEqual([1, 2, 3, 4, 0],
           array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0])
         );
@@ -270,10 +270,15 @@ export const test_execute_array = (parts) => {
             v => parts.isEven(v)
           )
         );
-        checkEqual({ result: [1, 2], index: [false, true] },
+        checkEqual([1, 2],
           array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0],
             v => parts.isEven(v), true
-          )
+          ).result
+        );
+        checkEqual([false, true],
+          array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0],
+            v => parts.isEven(v), true
+          ).index
         );
         checkEqual(
           { result: [
@@ -2420,7 +2425,7 @@ export const test_execute_array = (parts) => {
     test_median();
     test_mode();
 
-    test_uniqe();
+    test_unique();
     test_single();
     test_multiple();
     test_group();

@@ -782,6 +782,5 @@ export default {
   pushFirst, pushLast,
   remainFirst, remainLast,
   filter,
-
 };
 

@@ -243,48 +243,46 @@ export const test_execute_type = (parts) => {
         var n1 = null;
         var v1 = 1;
 
-        checkEqual(true, isUndefinedAll(u1));
+        checkEqual(true,  isUndefinedAll(u1));
         checkEqual(false, isUndefinedAll(n1));
         checkEqual(false, isUndefinedAll(v1));
-        checkEqual(true, isUndefinedArray([u1]));
+        checkEqual(true,  isUndefinedArray([u1]));
         checkEqual(false, isUndefinedArray([n1]));
         checkEqual(false, isUndefinedArray([v1]));
 
-        checkEqual(true, isUndefinedAll(u1, u1));
+        checkEqual(true,  isUndefinedAll(u1, u1));
         checkEqual(false, isUndefinedAll(u1, n1));
         checkEqual(false, isUndefinedAll(u1, v1));
-        checkEqual(true, isUndefinedArray([u1, u1]));
+        checkEqual(true,  isUndefinedArray([u1, u1]));
         checkEqual(false, isUndefinedArray([u1, n1]));
         checkEqual(false, isUndefinedArray([u1, v1]));
 
         checkEqual(false, isNotUndefinedAll(u1));
-        checkEqual(true, isNotUndefinedAll(n1));
-        checkEqual(true, isNotUndefinedAll(v1));
+        checkEqual(true,  isNotUndefinedAll(n1));
+        checkEqual(true,  isNotUndefinedAll(v1));
         checkEqual(false, isNotUndefinedArray([u1]));
-        checkEqual(true, isNotUndefinedArray([n1]));
-        checkEqual(true, isNotUndefinedArray([v1]));
+        checkEqual(true,  isNotUndefinedArray([n1]));
+        checkEqual(true,  isNotUndefinedArray([v1]));
 
         checkEqual(false, isNotUndefinedAll(u1, u1));
         checkEqual(false, isNotUndefinedAll(u1, n1));
-        checkEqual(true, isNotUndefinedAll(n1, n1));
+        checkEqual(true,  isNotUndefinedAll(n1, n1));
         checkEqual(false, isNotUndefinedAll(n1, u1));
-        checkEqual(true, isNotUndefinedAll(v1, v1));
-        checkEqual(true, isNotUndefinedAll(v1, n1));
+        checkEqual(true,  isNotUndefinedAll(v1, v1));
+        checkEqual(true,  isNotUndefinedAll(v1, n1));
         checkEqual(false, isNotUndefinedAll(v1, u1));
         checkEqual(false, isNotUndefinedArray([u1, u1]));
         checkEqual(false, isNotUndefinedArray([u1, n1]));
-        checkEqual(true, isNotUndefinedArray([n1, n1]));
+        checkEqual(true,  isNotUndefinedArray([n1, n1]));
         checkEqual(false, isNotUndefinedArray([n1, u1]));
-        checkEqual(true, isNotUndefinedArray([v1, v1]));
-        checkEqual(true, isNotUndefinedArray([v1, n1]));
+        checkEqual(true,  isNotUndefinedArray([v1, v1]));
+        checkEqual(true,  isNotUndefinedArray([v1, n1]));
         checkEqual(false, isNotUndefinedArray([v1, u1]));
 
-        // 配列の中身ではなく配列自体を判定する
-        // 配列はundefinedではない
         checkEqual(false, isUndefinedAll([v1, v1]));
         checkEqual(false, isUndefinedAll([u1, u1]));
-        checkEqual(true, isNotUndefinedAll([v1, v1]));
-        checkEqual(true, isNotUndefinedAll([u1, u1]));
+        checkEqual(true,  isNotUndefinedAll([v1, v1]));
+        checkEqual(true,  isNotUndefinedAll([u1, u1]));
       });
     };
 
@@ -666,9 +664,11 @@ export const test_execute_type = (parts) => {
 
     const test_different_objectNormal_objectFromNull = () => {
       checkEqual(true,  'hasOwnProperty' in {});
-      checkEqual(false, 'hasOwnProperty' in Object.create(null));
       checkEqual(true,  'constructor' in {});
-      checkEqual(false, 'constructor' in Object.create(null));
+      if (!parts.platform.isWindowsScriptHost()) {
+        checkEqual(false, 'hasOwnProperty' in Object.create(null));
+        checkEqual(false, 'constructor' in Object.create(null));
+      }
     };
 
     const test_isObject = function() {
@@ -688,7 +688,9 @@ export const test_execute_type = (parts) => {
         checkEqual(true,  isObject({ a: 0, b: 1 }));
 
         // object from null
-        checkEqual(true,  isObject(Object.create(null)));
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(true,  isObject(Object.create(null)));
+        }
 
         // object like
         checkEqual(false, isObject([]));
@@ -741,7 +743,9 @@ export const test_execute_type = (parts) => {
         checkEqual(true,  isObjectNormal({ a: 0, b: 1 }));
 
         // object from null
-        checkEqual(false,  isObjectNormal(Object.create(null)));
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(false,  isObjectNormal(Object.create(null)));
+        }
 
         // object like
         checkEqual(false, isObjectNormal([]));
@@ -765,20 +769,22 @@ export const test_execute_type = (parts) => {
         // is...All
         testCounter();
         checkEqual(true,  isObjectNormalAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
-        checkEqual(false, isObjectNormalAll({}, Object.create(null)));
-        checkEqual(false, isObjectNormalAll(Object.create(null), Object.create(null)));
         checkEqual(false, isNotObjectNormalAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
-        checkEqual(false, isNotObjectNormalAll({}, Object.create(null)));
-        checkEqual(true,  isNotObjectNormalAll(Object.create(null), Object.create(null)));
-
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, isObjectNormalAll({}, Object.create(null)));
+          checkEqual(false, isObjectNormalAll(Object.create(null), Object.create(null)));
+          checkEqual(false, isNotObjectNormalAll({}, Object.create(null)));
+          checkEqual(true,  isNotObjectNormalAll(Object.create(null), Object.create(null)));
+        }
         // is...Array
         checkEqual(true,  isObjectNormalArray([{}, { a: 0, b: 1 }]));
-        checkEqual(false, isObjectNormalArray([{}, Object.create(null)]));
-        checkEqual(false, isObjectNormalArray([Object.create(null), Object.create(null)]));
         checkEqual(false, isNotObjectNormalArray([{}, { a: 0, b: 1 }]));
-        checkEqual(false, isNotObjectNormalArray([{}, Object.create(null)]));
-        checkEqual(true,  isNotObjectNormalArray([Object.create(null), Object.create(null)]));
-
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, isObjectNormalArray([{}, Object.create(null)]));
+          checkEqual(false, isObjectNormalArray([Object.create(null), Object.create(null)]));
+          checkEqual(false, isNotObjectNormalArray([{}, Object.create(null)]));
+          checkEqual(true,  isNotObjectNormalArray([Object.create(null), Object.create(null)]));
+        }
         const TestObject = function() {
           this.a = 'a';
         };
@@ -804,7 +810,9 @@ export const test_execute_type = (parts) => {
         checkEqual(false, isObjectFromNull({ a: 0, b: 1 }));
 
         // object from null
-        checkEqual(true,  isObjectFromNull(Object.create(null)));
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(true,  isObjectFromNull(Object.create(null)));
+        }
 
         // object like
         checkEqual(false, isObjectFromNull([]));
@@ -828,19 +836,22 @@ export const test_execute_type = (parts) => {
         // is...All
         testCounter();
         checkEqual(false, isObjectFromNullAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
-        checkEqual(false, isObjectFromNullAll({}, Object.create(null)));
-        checkEqual(true,  isObjectFromNullAll(Object.create(null), Object.create(null)));
         checkEqual(true,  isNotObjectFromNullAll({ a: 0, b: 1 }, { c: 0, d: 1 }));
-        checkEqual(false, isNotObjectFromNullAll({}, Object.create(null)));
-        checkEqual(false, isNotObjectFromNullAll(Object.create(null), Object.create(null)));
-
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, isObjectFromNullAll({}, Object.create(null)));
+          checkEqual(true,  isObjectFromNullAll(Object.create(null), Object.create(null)));
+          checkEqual(false, isNotObjectFromNullAll({}, Object.create(null)));
+          checkEqual(false, isNotObjectFromNullAll(Object.create(null), Object.create(null)));
+        }
         // is...Array
         checkEqual(false, isObjectFromNullArray([{}, { a: 0, b: 1 }]));
-        checkEqual(false, isObjectFromNullArray([{}, Object.create(null)]));
-        checkEqual(true,  isObjectFromNullArray([Object.create(null), Object.create(null)]));
         checkEqual(true,  isNotObjectFromNullArray([{}, { a: 0, b: 1 }]));
-        checkEqual(false, isNotObjectFromNullArray([{}, Object.create(null)]));
-        checkEqual(false, isNotObjectFromNullArray([Object.create(null), Object.create(null)]));
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, isObjectFromNullArray([{}, Object.create(null)]));
+          checkEqual(true,  isObjectFromNullArray([Object.create(null), Object.create(null)]));
+          checkEqual(false, isNotObjectFromNullArray([{}, Object.create(null)]));
+          checkEqual(false, isNotObjectFromNullArray([Object.create(null), Object.create(null)]));
+        }
 
         const TestObject = function() {
           this.a = 'a';
@@ -866,7 +877,9 @@ export const test_execute_type = (parts) => {
         checkEqual(true,  isObjectLike({ a: 0, b: 1 }));
 
         // object from null
-        checkEqual(true,  isObjectLike(Object.create(null)));
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(true,  isObjectLike(Object.create(null)));
+        }
 
         // object like
         checkEqual(true,  isObjectLike([]));
@@ -1158,8 +1171,6 @@ export const test_execute_type = (parts) => {
     test_isInteger();
     test_isString();
     test_isFunction();
-
-    // test_isBooleanObject();
 
     test_different_objectNormal_objectFromNull();
     test_isObject();

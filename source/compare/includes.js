@@ -61,7 +61,5 @@ export const includes = (
 
 export default {
   _includes,
-
   includes,
-
 };

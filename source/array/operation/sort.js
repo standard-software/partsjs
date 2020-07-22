@@ -16,7 +16,7 @@ import {
 
 import {
   _or,
-} from '../../compare/compare_common.js';
+} from '../../compare/or.js';
 
 import {
   isObjectParameter,
