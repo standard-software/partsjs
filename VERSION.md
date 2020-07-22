@@ -2,6 +2,35 @@
 
 ## Version
 
+### 7.0.0
+#### 2020/07/22(Wed)
+- Revive support wsh
+  - add /test/wsh/test.wsf /run_check/wsh/index.wsf
+  - delete export * from
+  - add polyfill.js polyfill_Object_defineProperty.js
+- compare_common.js >> or.js
+
+### 6.5.0
+#### 2020/07/18(Sat)
+- update browserName isEdge
+  - new Edge browser(Chromium base)
+- update 
+  - isEven 0 is even
+  - isMultiples 0 is all numbers multiple
+- add group.js group function
+  - support full object parameter
+- add unique.js unique function
+  - move from array_common.js
+  - support full object parameter
+  - add args func, detail
+- update equal / equalDeep
+  - args equalFunction
+  - support full object parameter
+  - equalFunction.js equal.js equalDeep.js
+- update array.operation.sort
+  - support full object parameter
+  - add sortNumber sortLength sortDictionary
+
 ### 6.4.0
 #### 2020/07/05(Sun)
 - update clone / cloneDeep
