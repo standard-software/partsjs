@@ -1,3 +1,4 @@
+import _polyfill from './polyfill.js';
 import _root from './root/root.js';
 import _platform from './platform/platform.js';
 import _type from './type/type.js';

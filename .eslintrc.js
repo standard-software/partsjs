@@ -44,5 +44,6 @@ module.exports = {
     'max-len':        ['error', { 'code': 90 }],
     'quotes':         ['warn', 'single', { 'avoidEscape': true }],
     'new-cap':        ['off'],
+    'no-var':         ['off'],
   },
 };

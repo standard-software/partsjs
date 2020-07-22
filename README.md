@@ -1,5 +1,5 @@
 # Parts.js
-JavaScript Code Parts TypeSafe Library Compatible with any js platform
+JavaScript Code Parts TypeSafe Library Compatible with many js platform
 
 ## URL
 
@@ -27,7 +27,9 @@ https://www.npmjs.com/package/@standard-software/parts
   - V8 
   - Rhino
 - Windows Scripting Host (WSH)
-  - (not support above ver 6.0.0, support below ver 5.8.2 )
+  - revive support wsh ver 7.x above
+  - not support ver 6.x
+  - support ver 5.x.x below
 
 ## How to use parts.js in Node.js
 
@@ -58,6 +60,11 @@ console.log(
 ```
     node --experimental-modules index.mjs
 
+### refer to example
+
+- partsjs/run_check/node_release/
+- partsjs/test/build/
+
 ## How to use parts.js in Deno
 
 ### local
@@ -82,12 +89,13 @@ console.log(
 ```
     deno run index.js
 
-## How to use parts.js in HTML page
-
 ### refer to example
 
-- partsjs/how_to_use.html
-- partsjs/test_exec/release_web/test_index.html
+- partsjs/run_check/deno_local/
+- partsjs/run_check/deno_web/
+- partsjs/test/source/
+
+## How to use parts.js in HTML page
 
 ### HTML file
 
@@ -107,6 +115,11 @@ console.log(
 ```
 
 You can now use the functions of the parts.js object.
+
+### refer to example
+
+- partsjs/run_check/html/
+- partsjs/test/release/web/
 
 ## How to use parts.js in Google Apps Script for Rhino and V8
 
@@ -232,13 +245,63 @@ function myFunction() {
 
 same [How to use Google Apps Script]
 
+## How to use parts.js in WSH (Windows Scripting Host .wsf file)
+
+### refer to example
+
+- partsjs/run_check/wsh/
+- partsjs/test/release/wsh/
+
+### wsf file (ex. index.wsf)
+
+```
+<?xml version="1.0" encoding="shift-jis" ?>
+
+<job>
+<script language="JavaScript">
+<![CDATA[
+
+  var outputMessage = '';
+  var console = {
+    log: function() {
+      var args = Array.prototype.slice.call(arguments);
+      for (var i = 0; i < args.length; i += 1) {
+        outputMessage += args[i];
+        outputMessage += '\n'
+      }
+    }
+  };
+
+  var module = {};
+]]>
+</script>
+<script language="JavaScript" src="./polyfill_Object_defineProperty.js"></script>
+<script language="JavaScript" src="../../release/parts.js"></script>
+
+<script language="JavaScript">
+<![CDATA[
+
+  console.log('test_index.wsf\n\n');
+  console.log(parts.VERSION);
+
+  WScript.Echo(outputMessage);
+
+]]>
+</script>
+</job>
+```
+
+You can now use the functions of the parts.js object.
+
+
 ## Version
 
 ### 7.0.0
 #### 2020/07/22(Wed)
 - Revive support wsh
-  - add test.wsf
+  - add /test/wsh/test.wsf /run_check/wsh/index.wsf
   - delete export * from
+  - add polyfill.js polyfill_Object_defineProperty.js
 - compare_common.js >> or.js
 
 ### 6.5.0

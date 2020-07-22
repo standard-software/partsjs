@@ -19,15 +19,13 @@
 ]]>
 </script>
 <script language="JavaScript" src="./polyfill_Object_defineProperty.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/webpack/parts.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/webpack/test_parts.js"></script>
+<script language="JavaScript" src="../../release/parts.js"></script>
 
 <script language="JavaScript">
 <![CDATA[
 
   console.log('test_index.wsf\n\n');
-
-  test_parts.test_execute_index(parts);
+  console.log(parts.VERSION);
 
   WScript.Echo(outputMessage);
 
