@@ -25,8 +25,7 @@
 <script language="JavaScript">
 <![CDATA[
 
-  console.log('test_index.wsf\n\n');
-
+  console.log('test_index.wsf\n');
   test_parts.test_execute_index(parts);
 
   WScript.Echo(outputMessage);
