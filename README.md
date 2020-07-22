@@ -296,6 +296,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 7.1.0
+#### 2020/07/22(Wed)
+- update sort
+  - sort.valueFunction
+
 ### 7.0.0
 #### 2020/07/22(Wed)
 - Revive support wsh

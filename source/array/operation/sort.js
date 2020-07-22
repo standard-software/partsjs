@@ -28,7 +28,7 @@ import {
 export const _sort = (
   array,
   order = sort.order.ascending,
-  func = v => v,
+  func = sort.valueFunction.returnValue,
 ) => {
   const orderFunc =
     switch_(order)([
@@ -50,14 +50,16 @@ export const _sort = (
 export const sort = (
   array,
   order = sort.order.ascending,
-  func = v => v,
+  func = sort.valueFunction.returnValue,
 ) => {
   if (isObjectParameter(array, 'array', 'order, func')) {
-    ({ array, order = sort.order.ascending, func = v => v } = array);
+    ({
+      array, order = sort.order.ascending, func = sort.valueFunction.returnValue,
+    } = array);
   } else if (isObjectParameter(order, '', 'order, func')) {
-    ({ order = sort.order.ascending, func = v => v } = order);
+    ({ order = sort.order.ascending, func = sort.valueFunction.returnValue } = order);
   } else if (isObjectParameter(func, 'func')) {
-    ({ func = v => v } = func);
+    ({ func = sort.valueFunction.returnValue } = func);
   }
 
   if (!isArray(array)) {
@@ -97,30 +99,43 @@ sort.order = {
   descending: 'descending',
 };
 
+sort.valueFunction = {
+  returnValue: v => v,
+  returnValueErrorNotIsNumber: v => {
+    if (!isNumber(v)) {
+      throw new TypeError('sortNumber args(array) element is not number');
+    }
+    return v;
+  },
+  returnValueErrorNotIsString: v => {
+    if (!isString(v)) {
+      throw new TypeError('sortDictionary args(array) element is not string');
+    }
+    return v;
+  },
+  returnLength: v => v.length,
+  returnLengthErrorNotHasLength: v => {
+    if (!(isString(v) || ('length' in v))) {
+      throw new TypeError('sortLength args(array) element must have length property');
+    }
+    return v.length;
+  },
+};
+
 export const _sortNumber = (array, order) => {
   return _sort(array, order);
 };
 
 export const sortNumber = (array, order) => {
-  return sort(array, order, v => {
-    if (!isNumber(v)) {
-      throw new TypeError('sortLength args(array) element is not number');
-    }
-    return v;
-  });
+  return sort(array, order, sort.valueFunction.returnValueErrorNotIsNumber);
 };
 
 export const _sortLength = (array, order) => {
-  return sort(array, order, v => v.length);
+  return sort(array, order, sort.valueFunction.returnLength);
 };
 
 export const sortLength = (array, order) => {
-  return sort(array, order, v => {
-    if (!(isString(v) || ('length' in v))) {
-      throw new TypeError('sortLength args(array) element must have length property');
-    }
-    return v.length;
-  });
+  return sort(array, order, sort.valueFunction.returnLengthErrorNotHasLength);
 };
 
 export const _sortDictionary = (array, order) => {
@@ -128,12 +143,7 @@ export const _sortDictionary = (array, order) => {
 };
 
 export const sortDictionary = (array, order) => {
-  return sort(array, order, v => {
-    if (!isString(v)) {
-      throw new TypeError('sortLength args(array) element is not string');
-    }
-    return v;
-  });
+  return sort(array, order, sort.valueFunction.returnValueErrorNotIsString);
 };
 
 export const sortNumberAscending = (array) => {
