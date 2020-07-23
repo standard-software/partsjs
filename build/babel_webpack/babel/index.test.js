@@ -54,7 +54,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [363, 18, 4, 252, 9, 11, 22, 29, 7, 37, 17, 37, 32];
+        var countArray = [361, 18, 2, 252, 9, 11, 22, 29, 7, 37, 17, 37, 32];
 
         var propertyCountForParts = function propertyCountForParts(parts) {
           var result = propertyCount(parts);

@@ -11,13 +11,13 @@ var _object = require("../object/object.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _cloneFunction = require("../root/cloneFunction.js");
+var _clone = require("../root/clone.js");
 
 /**
  * cloneDeep
  */
 var _cloneDeep = function _cloneDeep(source) {
-  var cloneFunctionArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _cloneFunction.cloneFunctionArrayDefault;
+  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _clone.clone.func.defaultArray;
   var CircularReferenceBuffer = {
     source: [],
     clone: []
@@ -34,8 +34,8 @@ var _cloneDeep = function _cloneDeep(source) {
       return undefined;
     }
 
-    for (var i = 0, l = cloneFunctionArray.length; i < l; i += 1) {
-      var result = cloneFunctionArray[i](value, function (source, clone) {
+    for (var i = 0, l = cloneFuncArray.length; i < l; i += 1) {
+      var result = cloneFuncArray[i](value, function (source, clone) {
         CircularReferenceBuffer.source.push(source);
         CircularReferenceBuffer.clone.push(clone);
       }, __cloneDeep);
@@ -54,23 +54,23 @@ var _cloneDeep = function _cloneDeep(source) {
 exports._cloneDeep = _cloneDeep;
 
 var cloneDeep = function cloneDeep(source) {
-  var cloneFunctionArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _cloneFunction.cloneFunctionArrayDefault;
+  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _clone.clone.func.defaultArray;
 
-  if ((0, _isObjectParameter.isObjectParameter)(source, 'source', 'cloneFunctionArray')) {
+  if ((0, _isObjectParameter.isObjectParameter)(source, 'source', 'cloneFuncArray')) {
     var _source = source;
     source = _source.source;
-    var _source$cloneFunction = _source.cloneFunctionArray;
-    cloneFunctionArray = _source$cloneFunction === void 0 ? _cloneFunction.cloneFunctionArrayDefault : _source$cloneFunction;
-  } else if ((0, _isObjectParameter.isObjectParameter)(cloneFunctionArray, 'cloneFunctionArray')) {
-    var _cloneFunctionArray = cloneFunctionArray;
-    cloneFunctionArray = _cloneFunctionArray.cloneFunctionArray;
+    var _source$cloneFuncArra = _source.cloneFuncArray;
+    cloneFuncArray = _source$cloneFuncArra === void 0 ? _clone.clone.func.defaultArray : _source$cloneFuncArra;
+  } else if ((0, _isObjectParameter.isObjectParameter)(cloneFuncArray, 'cloneFuncArray')) {
+    var _cloneFuncArray = cloneFuncArray;
+    cloneFuncArray = _cloneFuncArray.cloneFuncArray;
   }
 
-  if (!(0, _type.isArray)(cloneFunctionArray)) {
-    throw new TypeError('cloneDeep args(cloneFunctionArray) is not array');
+  if (!(0, _type.isArray)(cloneFuncArray)) {
+    throw new TypeError('cloneDeep args(cloneFuncArray) is not array');
   }
 
-  return _cloneDeep(source, cloneFunctionArray);
+  return _cloneDeep(source, cloneFuncArray);
 };
 
 exports.cloneDeep = cloneDeep;

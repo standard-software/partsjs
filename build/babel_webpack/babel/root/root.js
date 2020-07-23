@@ -3,9 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.cloneDeep = exports._cloneDeep = exports.clone = exports._clone = exports.cloneFunctionArrayDefault = exports.cloneFunction = void 0;
-
-var _cloneFunction = _interopRequireDefault(require("./cloneFunction.js"));
+exports["default"] = exports.cloneDeep = exports._cloneDeep = exports.clone = exports._clone = void 0;
 
 var _clone2 = _interopRequireDefault(require("./clone.js"));
 
@@ -19,10 +17,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var cloneFunction = _cloneFunction["default"].cloneFunction,
-    cloneFunctionArrayDefault = _cloneFunction["default"].cloneFunctionArrayDefault;
-exports.cloneFunctionArrayDefault = cloneFunctionArrayDefault;
-exports.cloneFunction = cloneFunction;
 var _clone = _clone2["default"]._clone,
     clone = _clone2["default"].clone;
 exports.clone = clone;
@@ -32,6 +26,6 @@ var _cloneDeep = _cloneDeep2["default"]._cloneDeep,
 exports.cloneDeep = cloneDeep;
 exports._cloneDeep = _cloneDeep;
 
-var _default = _objectSpread(_objectSpread(_objectSpread({}, _cloneFunction["default"]), _clone2["default"]), _cloneDeep2["default"]);
+var _default = _objectSpread(_objectSpread({}, _clone2["default"]), _cloneDeep2["default"]);
 
 exports["default"] = _default;

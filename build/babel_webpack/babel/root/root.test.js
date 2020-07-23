@@ -29,9 +29,7 @@ var test_execute_root = function test_execute_root(parts) {
       testCounter = _parts$test.testCounter;
   describe('test_execute_root', function () {
     var clone = parts.clone,
-        cloneDeep = parts.cloneDeep,
-        cloneFunction = parts.cloneFunction,
-        cloneFunctionArrayDefault = parts.cloneFunctionArrayDefault;
+        cloneDeep = parts.cloneDeep;
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
@@ -160,13 +158,13 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(11, testDate1.getDate()); // object array only clone
 
         var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [cloneFunction.cloneArrayType, cloneFunction.cloneObject]);
+        var date1 = clone(testDate1, [clone.func.arrayType, clone.func.object]);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
         checkEqual(12, testDate1.getDate()); // object array date clone
 
         var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [cloneFunction.cloneDate, cloneFunction.cloneArrayType, cloneFunction.cloneObject]);
+        var date1 = clone(testDate1, [clone.func.date, clone.func.arrayType, clone.func.object]);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
         checkEqual(11, testDate1.getDate());
@@ -204,7 +202,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === testRegExp1.source);
         checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
 
-        var regexp1 = clone(testRegExp1, [cloneFunction.cloneObjectLike]);
+        var regexp1 = clone(testRegExp1, [clone.func.objectLike]);
         checkEqual(false, regexp1 === testRegExp1, 'test_clone_regexp clone');
         checkEqual(true, '^a' === testRegExp1.source);
         checkEqual(false, '^a' === regexp1.source); // clone
@@ -215,7 +213,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === testRegExp2.source);
         checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
 
-        var regexp1 = clone(testRegExp2, [cloneFunction.cloneObjectLike]);
+        var regexp1 = clone(testRegExp2, [clone.func.objectLike]);
         checkEqual(false, regexp1 === testRegExp2);
         checkEqual(true, '^a' === testRegExp2.source);
         checkEqual(false, '^a' === regexp1.source);
@@ -252,7 +250,7 @@ var test_execute_root = function test_execute_root(parts) {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
           source: testDate1,
-          cloneFunctionArray: [cloneFunction.cloneArrayType, cloneFunction.cloneObject]
+          cloneFuncArray: [clone.func.arrayType, clone.func.object]
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -261,7 +259,7 @@ var test_execute_root = function test_execute_root(parts) {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
           source: testDate1,
-          cloneFunctionArray: [cloneFunction.cloneDate, cloneFunction.cloneArrayType, cloneFunction.cloneObject]
+          cloneFuncArray: [clone.func.date, clone.func.arrayType, clone.func.object]
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -465,7 +463,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1, [cloneFunction.cloneArrayType, cloneFunction.cloneObject]);
+        var value2 = cloneDeep(value1, [clone.func.arrayType, clone.func.object]);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(13, value1[3].getDate());
@@ -473,7 +471,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1, [cloneFunction.cloneDate, cloneFunction.cloneArrayType, cloneFunction.cloneObject]);
+        var value2 = cloneDeep(value1, [clone.func.date, clone.func.arrayType, clone.func.object]);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(11, value1[3].getDate());
@@ -497,7 +495,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.source); // clone Deep no RegExpFunction
 
-        var regexp2 = cloneDeep(regexp1, [cloneFunction.cloneObjectLike]);
+        var regexp2 = cloneDeep(regexp1, [clone.func.objectLike]);
         checkEqual(false, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2.source); // clone Deep in Object
@@ -511,7 +509,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var regexp2 = cloneDeep({
           value: regexp1
-        }, [cloneFunction.cloneObjectLike]);
+        }, [clone.func.objectLike]);
         checkEqual(false, regexp2.value === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2.value.source); // clone Deep in Array
@@ -521,7 +519,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2[0].source); // clone Deep no RegExpFunction in Array
 
-        var regexp2 = cloneDeep([regexp1], [cloneFunction.cloneObjectLike]);
+        var regexp2 = cloneDeep([regexp1], [clone.func.objectLike]);
         checkEqual(false, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2[0].source);
@@ -532,7 +530,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.source); // clone Deep no RegExpFunction
 
-        var regexp2 = cloneDeep(regexp1, [cloneFunction.cloneObjectLike]);
+        var regexp2 = cloneDeep(regexp1, [clone.func.objectLike]);
         checkEqual(false, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2.source); // clone Deep in Object
@@ -546,7 +544,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var regexp2 = cloneDeep({
           value: regexp1
-        }, [cloneFunction.cloneObjectLike]);
+        }, [clone.func.objectLike]);
         checkEqual(false, regexp2.value === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2.value.source); // clone Deep in Array
@@ -556,7 +554,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2[0].source); // clone Deep no RegExpFunction in Array
 
-        var regexp2 = cloneDeep([regexp1], [cloneFunction.cloneObjectLike]);
+        var regexp2 = cloneDeep([regexp1], [clone.func.objectLike]);
         checkEqual(false, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2[0].source); // regexp1 clone same object
@@ -611,7 +609,7 @@ var test_execute_root = function test_execute_root(parts) {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
           source: value1,
-          cloneFunctionArray: [cloneFunction.cloneArrayType, cloneFunction.cloneObject]
+          cloneFuncArray: [clone.func.arrayType, clone.func.object]
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
@@ -622,7 +620,7 @@ var test_execute_root = function test_execute_root(parts) {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
           source: value1,
-          cloneFunctionArray: [cloneFunction.cloneDate, cloneFunction.cloneArrayType, cloneFunction.cloneObject]
+          cloneFuncArray: [clone.func.date, clone.func.arrayType, clone.func.object]
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
@@ -708,7 +706,7 @@ var test_execute_root = function test_execute_root(parts) {
     //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
     //     // but not correct
     //     // moment type cloneDeep moment clone function
-    //     cloneFunction.cloneMoment = (source, bufferWrite)  => {
+    //     clone.func.moment = (source, bufferWrite)  => {
     //       if (!moment.isMoment(source)) {
     //         return undefined;
     //       }
@@ -717,7 +715,7 @@ var test_execute_root = function test_execute_root(parts) {
     //       return cloneValue;
     //     };
     //     cloneDeep.reset();
-    //     cloneDeep.add(cloneFunction.cloneMoment);
+    //     cloneDeep.add(clone.func.moment);
     //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
     //     var testValue1 = [1, 2, 3, moment1];
     //     var value1 = cloneDeep(testValue1);
@@ -752,7 +750,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, value1[0] === value2[0]);
         checkEqual(true, symbol1 === value2[0]);
 
-        cloneFunction.cloneForceSymbol = function (source) {
+        clone.func.forceSymbol = function (source) {
           var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
           var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
@@ -770,7 +768,7 @@ var test_execute_root = function test_execute_root(parts) {
         };
 
         var value1 = [symbol1];
-        var value2 = cloneDeep(value1, [cloneFunction.cloneForceSymbol].concat(_toConsumableArray(cloneFunctionArrayDefault)));
+        var value2 = cloneDeep(value1, [clone.func.forceSymbol].concat(_toConsumableArray(clone.func.defaultArray)));
         checkEqual(true, symbol1 === value1[0]);
         checkEqual(false, value1[0] === value2[0] // cloneDeep and new symbol
         );
@@ -799,7 +797,7 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual('value1', map1.get('key1'));
         checkEqual(false, parts.isObjectAll(map1));
         checkEqual(true, parts.isObjectLikeAll(map1));
-        var map2 = clone(map1, [cloneFunction.cloneDate, cloneFunction.cloneRegExp, cloneFunction.cloneIgnoreFunction, cloneFunction.cloneObjectLike]);
+        var map2 = clone(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
 
         if (parts.platform.isInternetExplorer()) {
           checkEqual('value1', map2.get('key1')); // IE polyfill clone
@@ -811,7 +809,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         if (parts.platform.isInternetExplorer()) {// IE Error
         } else {
-          var map2 = cloneDeep(map1, [cloneFunction.cloneDate, cloneFunction.cloneRegExp, cloneFunction.cloneIgnoreFunction, cloneFunction.cloneObjectLike]);
+          var map2 = cloneDeep(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
           checkEqual(undefined, map2.get('key1')); // no clone
 
           checkEqual(false, map1 === map2);
@@ -895,13 +893,13 @@ var test_execute_root = function test_execute_root(parts) {
         }
 
         checkEqual(true, parts.isObjectLikeAll(set1));
-        var set2 = clone(set1, [cloneFunction.cloneDate, cloneFunction.cloneRegExp, cloneFunction.cloneIgnoreFunction, cloneFunction.cloneObjectLike]);
+        var set2 = clone(set1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
         checkEqual(false, set2.has('value1'));
         checkEqual(false, set1 === set2);
 
         if (parts.platform.isInternetExplorer()) {// IE Error
         } else {
-          var set2 = cloneDeep(set1, [cloneFunction.cloneDate, cloneFunction.cloneRegExp, cloneFunction.cloneIgnoreFunction, cloneFunction.cloneObjectLike]);
+          var set2 = cloneDeep(set1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
           checkEqual(false, set2.has('value1')); // no clone
 
           checkEqual(false, set1 === set2);
