@@ -28,12 +28,12 @@ import {
 export const _sort = (
   array,
   order = sort.order.ascending,
-  func = sort.valueFunction.returnValue,
+  func = sort.targetFunc.returnValue,
 ) => {
   const orderFunc =
     switch_(order)([
-      [sort.order.ascending, () => sort.orderFunction.ascending],
-      [sort.order.descending, () => sort.orderFunction.descending],
+      [sort.order.ascending, () => sort.orderFunc.ascending],
+      [sort.order.descending, () => sort.orderFunc.descending],
       [
         () => { throw new Error(
           '_sort args(order) is not ["ascending"|"descending"]',
@@ -50,16 +50,16 @@ export const _sort = (
 export const sort = (
   array,
   order = sort.order.ascending,
-  func = sort.valueFunction.returnValue,
+  func = sort.targetFunc.returnValue,
 ) => {
   if (isObjectParameter(array, 'array', 'order, func')) {
     ({
-      array, order = sort.order.ascending, func = sort.valueFunction.returnValue,
+      array, order = sort.order.ascending, func = sort.targetFunc.returnValue,
     } = array);
   } else if (isObjectParameter(order, '', 'order, func')) {
-    ({ order = sort.order.ascending, func = sort.valueFunction.returnValue } = order);
+    ({ order = sort.order.ascending, func = sort.targetFunc.returnValue } = order);
   } else if (isObjectParameter(func, 'func')) {
-    ({ func = sort.valueFunction.returnValue } = func);
+    ({ func = sort.targetFunc.returnValue } = func);
   }
 
   if (!isArray(array)) {
@@ -81,7 +81,7 @@ export const sort = (
   return _sort(array, order, func);
 };
 
-sort.orderFunction = {
+sort.orderFunc = {
   ascending: (a, b) => (
     a > b ? 1
     : a < b ? -1
@@ -99,7 +99,7 @@ sort.order = {
   descending: 'descending',
 };
 
-sort.valueFunction = {
+sort.targetFunc = {
   returnValue: v => v,
   returnValueErrorNotIsNumber: v => {
     if (!isNumber(v)) {
@@ -127,15 +127,15 @@ export const _sortNumber = (array, order) => {
 };
 
 export const sortNumber = (array, order) => {
-  return sort(array, order, sort.valueFunction.returnValueErrorNotIsNumber);
+  return sort(array, order, sort.targetFunc.returnValueErrorNotIsNumber);
 };
 
 export const _sortLength = (array, order) => {
-  return sort(array, order, sort.valueFunction.returnLength);
+  return sort(array, order, sort.targetFunc.returnLength);
 };
 
 export const sortLength = (array, order) => {
-  return sort(array, order, sort.valueFunction.returnLengthErrorNotHasLength);
+  return sort(array, order, sort.targetFunc.returnLengthErrorNotHasLength);
 };
 
 export const _sortDictionary = (array, order) => {
@@ -143,7 +143,7 @@ export const _sortDictionary = (array, order) => {
 };
 
 export const sortDictionary = (array, order) => {
-  return sort(array, order, sort.valueFunction.returnValueErrorNotIsString);
+  return sort(array, order, sort.targetFunc.returnValueErrorNotIsString);
 };
 
 export const sortNumberAscending = (array) => {
