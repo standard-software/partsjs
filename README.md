@@ -299,6 +299,8 @@ You can now use the functions of the parts.js object.
 ### 7.1.1
 #### 2020/07/23(Thu)
 - delete no use file in build folder
+- update package.json scripts
+  - clear build folder
 
 ### 7.1.0
 #### 2020/07/23(Thu)
