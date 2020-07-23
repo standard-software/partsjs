@@ -118,7 +118,6 @@ _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
 // compare
 propertyNames.COMPARE =
   'equal, equalDeep,' +
-  'equalFunction,' +
   'or,' +
   'match, matchValue, initialValue,' +
   'allMatch, indexOfMatch, someMatch,' +
@@ -420,7 +419,6 @@ export const {
   canUseMap,  canUseSet,
 
   equal,  equalDeep,
-  equalFunction,
   or,
   match,    matchValue,  initialValue,
   allMatch, indexOfMatch, someMatch,

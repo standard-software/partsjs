@@ -16,14 +16,14 @@ import {
 } from '../object/object.js';
 
 import {
-  equalFunctionArrayDefault,
-} from '../compare/equalFunction.js';
+  equal,
+} from '../compare/equal.js';
 
 /**
  * equalDeep
  */
 export const _equalDeep = (
-  value1, value2, equalFunctionArray = equalFunctionArrayDefault,
+  value1, value2, equalFuncArray = equal.func.defaultArray,
 ) => {
   const CircularReferenceBuffer = {
     v1Array: [],
@@ -37,8 +37,8 @@ export const _equalDeep = (
       }
       return value1 === value2;
     }
-    for (let i = 0, l = equalFunctionArray.length; i < l; i += 1) {
-      const result = equalFunctionArray[i](
+    for (let i = 0, l = equalFuncArray.length; i < l; i += 1) {
+      const result = equalFuncArray[i](
         value1, value2,
         (v1, v2) => {
           CircularReferenceBuffer.v1Array.push(v1);
@@ -56,19 +56,19 @@ export const _equalDeep = (
 };
 
 export const equalDeep = (
-  value1, value2, equalFunctionArray = equalFunctionArrayDefault,
+  value1, value2, equalFuncArray = equal.func.defaultArray,
 ) => {
-  if (isObjectParameter(value1, 'value1, value2', 'equalFunctionArray')) {
+  if (isObjectParameter(value1, 'value1, value2', 'equalFuncArray')) {
     ({
-      value1, value2, equalFunctionArray = equalFunctionArrayDefault,
+      value1, value2, equalFuncArray = equal.func.defaultArray,
     } = value1);
-  } else if (isObjectParameter(value2, 'value2', 'equalFunctionArray')) {
-    ({ value2, equalFunctionArray = equalFunctionArrayDefault } = value2);
-  } else if (isObjectParameter(equalFunctionArray, 'equalFunctionArray')) {
-    ({ equalFunctionArray } = equalFunctionArray);
+  } else if (isObjectParameter(value2, 'value2', 'equalFuncArray')) {
+    ({ value2, equalFuncArray = equal.func.defaultArray } = value2);
+  } else if (isObjectParameter(equalFuncArray, 'equalFuncArray')) {
+    ({ equalFuncArray } = equalFuncArray);
   }
 
-  return _equalDeep(value1, value2, equalFunctionArray);
+  return _equalDeep(value1, value2, equalFuncArray);
 };
 
 export default {

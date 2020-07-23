@@ -300,6 +300,8 @@ You can now use the functions of the parts.js object.
 #### 2020/07/22(Wed)
 - update sort
   - sort.targetFunc orderFunc
+- update equal
+  - equalFuncion >> equal.func
 
 ### 7.0.0
 #### 2020/07/22(Wed)

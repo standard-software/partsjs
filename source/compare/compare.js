@@ -21,7 +21,6 @@ import someMatchAll_js from './someMatchAll.js';
 
 import includes_js from './includes.js';
 import includes_common_js from './includes_common.js';
-import equalFunction_js from './equalFunction.js';
 import equal_js from './equal.js';
 import equalDeep_js from './equalDeep.js';
 
@@ -123,11 +122,6 @@ export const {
 } = includes_common_js;
 
 export const {
-  equalFunction,
-  equalFunctionArrayDefault,
-} = equalFunction_js;
-
-export const {
   _equal,
   equal,
 } = equal_js;
@@ -160,7 +154,7 @@ export default {
 
   ...includes_js,
   ...includes_common_js,
-  ...equalFunction_js,
+
   ...equal_js,
   ...equalDeep_js,
 };
