@@ -2,6 +2,19 @@
 
 ## Version
 
+### 7.1.0
+#### 2020/07/23(Thu)
+- update sort
+  - sort.targetFunc orderFunc
+- update equal
+  - equalFuncion >> equal.func
+  - delete equalFunction.js
+- update clone
+  - cloneFuncion >> clone.func
+  - delete cloneFunction.js
+- npm update
+  - babel / eslint / webpack-cli
+
 ### 7.0.0
 #### 2020/07/22(Wed)
 - Revive support wsh
