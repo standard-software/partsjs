@@ -24,7 +24,6 @@ const { _map } = _array;
 // root
 propertyNames.ROOT =
   'clone, cloneDeep,' +
-  'cloneFunction, cloneFunctionArrayDefault,' +
   '';
 const root = {};
 _copyProperty(_root, propertyNames.ROOT, root);
@@ -279,7 +278,6 @@ _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
 
 export const {
   clone, cloneDeep,
-  cloneFunction, cloneFunctionArrayDefault,
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,

@@ -22,15 +22,15 @@ import {
 } from '../object/isObjectParameter.js';
 
 import {
-  cloneFunctionArrayDefault,
-} from '../root/cloneFunction.js';
+  clone,
+} from '../root/clone.js';
 
 /**
  * cloneDeep
  */
 export const _cloneDeep = (
   source,
-  cloneFunctionArray = cloneFunctionArrayDefault,
+  cloneFuncArray = clone.func.defaultArray,
 ) => {
   const CircularReferenceBuffer = {
     source: [],
@@ -44,8 +44,8 @@ export const _cloneDeep = (
     if (isUndefined(value)) {
       return undefined;
     }
-    for (let i = 0, l = cloneFunctionArray.length; i < l; i += 1) {
-      const result = cloneFunctionArray[i](
+    for (let i = 0, l = cloneFuncArray.length; i < l; i += 1) {
+      const result = cloneFuncArray[i](
         value,
         (source, clone) => {
           CircularReferenceBuffer.source.push(source);
@@ -64,21 +64,21 @@ export const _cloneDeep = (
 
 export const cloneDeep = (
   source,
-  cloneFunctionArray = cloneFunctionArrayDefault,
+  cloneFuncArray = clone.func.defaultArray,
 ) => {
-  if (isObjectParameter(source, 'source', 'cloneFunctionArray')) {
-    ({ source, cloneFunctionArray = cloneFunctionArrayDefault } = source);
-  } else if (isObjectParameter(cloneFunctionArray, 'cloneFunctionArray')) {
-    ({ cloneFunctionArray } = cloneFunctionArray);
+  if (isObjectParameter(source, 'source', 'cloneFuncArray')) {
+    ({ source, cloneFuncArray = clone.func.defaultArray } = source);
+  } else if (isObjectParameter(cloneFuncArray, 'cloneFuncArray')) {
+    ({ cloneFuncArray } = cloneFuncArray);
   }
 
-  if (!isArray(cloneFunctionArray)) {
+  if (!isArray(cloneFuncArray)) {
     throw new TypeError(
-      'cloneDeep args(cloneFunctionArray) is not array',
+      'cloneDeep args(cloneFuncArray) is not array',
     );
   }
 
-  return _cloneDeep(source, cloneFunctionArray);
+  return _cloneDeep(source, cloneFuncArray);
 };
 
 export default {
