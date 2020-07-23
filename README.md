@@ -306,6 +306,8 @@ You can now use the functions of the parts.js object.
 - update clone
   - cloneFuncion >> clone.func
   - delete cloneFunction.js
+- npm update
+  - babel / eslint / webpack-cli
 
 ### 7.0.0
 #### 2020/07/22(Wed)
