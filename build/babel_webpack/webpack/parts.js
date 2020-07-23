@@ -113,8 +113,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotObjType = exports.isObjType = exports.isNotArrayType = exports.isNotObjectType = exports.isArrayType = exports.isObjectType = exports.isNotEmptyObj = exports.isNotExcept = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotException = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyObj = exports.isExcept = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isEmptyArray = exports.isEmptyObject = exports.isException = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.cloneFunctionArrayDefault = exports.cloneFunction = exports.cloneDeep = exports.clone = void 0;
 exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotObjTypeAll = exports.isObjTypeAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotEmptyObjAll = exports.isNotExceptAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isEmptyObjAll = exports.isExceptAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = void 0;
-exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.indexOfMatchAll = exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalFunction = exports.equalDeep = exports.equal = exports.canUseSet = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.isNotObjTypeArray = exports.isObjTypeArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotEmptyObjArray = exports.isNotExceptArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isEmptyObjArray = exports.isExceptArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = void 0;
-exports["default"] = exports.parts = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.type = exports.platform = exports.root = exports.VERSION = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.objectToString = exports.setProp = exports.getProp = exports.inProp = exports.propCount = exports.copyProp = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = void 0;
+exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.indexOfMatchAll = exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalDeep = exports.equal = exports.canUseSet = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.isNotObjTypeArray = exports.isObjTypeArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotEmptyObjArray = exports.isNotExceptArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isEmptyObjArray = exports.isExceptArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = void 0;
+exports["default"] = exports.parts = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.type = exports.platform = exports.root = exports.VERSION = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.objectToString = exports.setProp = exports.getProp = exports.inProp = exports.propCount = exports.copyProp = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = void 0;
 
 var _polyfill2 = _interopRequireDefault(__webpack_require__(2));
 
@@ -130,7 +130,7 @@ var _syntax2 = _interopRequireDefault(__webpack_require__(33));
 
 var _compare2 = _interopRequireDefault(__webpack_require__(55));
 
-var _convert2 = _interopRequireDefault(__webpack_require__(74));
+var _convert2 = _interopRequireDefault(__webpack_require__(73));
 
 var _number2 = _interopRequireDefault(__webpack_require__(31));
 
@@ -140,7 +140,7 @@ var _object2 = _interopRequireDefault(__webpack_require__(16));
 
 var _array2 = _interopRequireDefault(__webpack_require__(37));
 
-var _consoleHook2 = _interopRequireDefault(__webpack_require__(75));
+var _consoleHook2 = _interopRequireDefault(__webpack_require__(74));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -150,7 +150,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '7.0.0';
+var VERSION = '7.1.0 beta';
 exports.VERSION = VERSION;
 var rootNames = {};
 var propertyNames = {};
@@ -211,7 +211,7 @@ exports.syntax = syntax;
 _copyProperty(_syntax2["default"], propertyNames.SYNTAX, rootNames); // compare
 
 
-propertyNames.COMPARE = 'equal, equalDeep,' + 'equalFunction,' + 'or,' + 'match, matchValue, initialValue,' + 'allMatch, indexOfMatch, someMatch,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + 'includes, includesSome, includesAll,' + '';
+propertyNames.COMPARE = 'equal, equalDeep,' + 'or,' + 'match, matchValue, initialValue,' + 'allMatch, indexOfMatch, someMatch,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + 'includes, includesSome, includesAll,' + '';
 var compare = {};
 exports.compare = compare;
 
@@ -554,7 +554,6 @@ var clone = rootNames.clone,
     canUseSet = rootNames.canUseSet,
     equal = rootNames.equal,
     equalDeep = rootNames.equalDeep,
-    equalFunction = rootNames.equalFunction,
     or = rootNames.or,
     match = rootNames.match,
     matchValue = rootNames.matchValue,
@@ -713,7 +712,6 @@ exports.initialValue = initialValue;
 exports.matchValue = matchValue;
 exports.match = match;
 exports.or = or;
-exports.equalFunction = equalFunction;
 exports.equalDeep = equalDeep;
 exports.equal = equal;
 exports.canUseSet = canUseSet;
@@ -8586,13 +8584,11 @@ var _isObjectParameter = __webpack_require__(9);
  */
 var _sort = function _sort(array) {
   var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sort.order.ascending;
-  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v) {
-    return v;
-  };
+  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : sort.targetFunc.returnValue;
   var orderFunc = (0, _syntax.switch_)(order)([[sort.order.ascending, function () {
-    return sort.orderFunction.ascending;
+    return sort.orderFunc.ascending;
   }], [sort.order.descending, function () {
-    return sort.orderFunction.descending;
+    return sort.orderFunc.descending;
   }], [function () {
     throw new Error('_sort args(order) is not ["ascending"|"descending"]');
   }]]);
@@ -8606,9 +8602,7 @@ exports._sort = _sort;
 
 var sort = function sort(array) {
   var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sort.order.ascending;
-  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (v) {
-    return v;
-  };
+  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : sort.targetFunc.returnValue;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'order, func')) {
     var _array = array;
@@ -8616,23 +8610,17 @@ var sort = function sort(array) {
     var _array$order = _array.order;
     order = _array$order === void 0 ? sort.order.ascending : _array$order;
     var _array$func = _array.func;
-    func = _array$func === void 0 ? function (v) {
-      return v;
-    } : _array$func;
+    func = _array$func === void 0 ? sort.targetFunc.returnValue : _array$func;
   } else if ((0, _isObjectParameter.isObjectParameter)(order, '', 'order, func')) {
     var _order = order;
     var _order$order = _order.order;
     order = _order$order === void 0 ? sort.order.ascending : _order$order;
     var _order$func = _order.func;
-    func = _order$func === void 0 ? function (v) {
-      return v;
-    } : _order$func;
+    func = _order$func === void 0 ? sort.targetFunc.returnValue : _order$func;
   } else if ((0, _isObjectParameter.isObjectParameter)(func, 'func')) {
     var _func = func;
     var _func$func = _func.func;
-    func = _func$func === void 0 ? function (v) {
-      return v;
-    } : _func$func;
+    func = _func$func === void 0 ? sort.targetFunc.returnValue : _func$func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -8651,7 +8639,7 @@ var sort = function sort(array) {
 };
 
 exports.sort = sort;
-sort.orderFunction = {
+sort.orderFunc = {
   ascending: function ascending(a, b) {
     return a > b ? 1 : a < b ? -1 : 0;
   },
@@ -8663,6 +8651,35 @@ sort.order = {
   ascending: 'ascending',
   descending: 'descending'
 };
+sort.targetFunc = {
+  returnValue: function returnValue(v) {
+    return v;
+  },
+  returnValueErrorNotIsNumber: function returnValueErrorNotIsNumber(v) {
+    if (!(0, _type.isNumber)(v)) {
+      throw new TypeError('sortNumber args(array) element is not number');
+    }
+
+    return v;
+  },
+  returnValueErrorNotIsString: function returnValueErrorNotIsString(v) {
+    if (!(0, _type.isString)(v)) {
+      throw new TypeError('sortDictionary args(array) element is not string');
+    }
+
+    return v;
+  },
+  returnLength: function returnLength(v) {
+    return v.length;
+  },
+  returnLengthErrorNotHasLength: function returnLengthErrorNotHasLength(v) {
+    if (!((0, _type.isString)(v) || 'length' in v)) {
+      throw new TypeError('sortLength args(array) element must have length property');
+    }
+
+    return v.length;
+  }
+};
 
 var _sortNumber = function _sortNumber(array, order) {
   return _sort(array, order);
@@ -8671,33 +8688,19 @@ var _sortNumber = function _sortNumber(array, order) {
 exports._sortNumber = _sortNumber;
 
 var sortNumber = function sortNumber(array, order) {
-  return sort(array, order, function (v) {
-    if (!(0, _type.isNumber)(v)) {
-      throw new TypeError('sortLength args(array) element is not number');
-    }
-
-    return v;
-  });
+  return sort(array, order, sort.targetFunc.returnValueErrorNotIsNumber);
 };
 
 exports.sortNumber = sortNumber;
 
 var _sortLength = function _sortLength(array, order) {
-  return sort(array, order, function (v) {
-    return v.length;
-  });
+  return sort(array, order, sort.targetFunc.returnLength);
 };
 
 exports._sortLength = _sortLength;
 
 var sortLength = function sortLength(array, order) {
-  return sort(array, order, function (v) {
-    if (!((0, _type.isString)(v) || 'length' in v)) {
-      throw new TypeError('sortLength args(array) element must have length property');
-    }
-
-    return v.length;
-  });
+  return sort(array, order, sort.targetFunc.returnLengthErrorNotHasLength);
 };
 
 exports.sortLength = sortLength;
@@ -8709,13 +8712,7 @@ var _sortDictionary = function _sortDictionary(array, order) {
 exports._sortDictionary = _sortDictionary;
 
 var sortDictionary = function sortDictionary(array, order) {
-  return sort(array, order, function (v) {
-    if (!(0, _type.isString)(v)) {
-      throw new TypeError('sortLength args(array) element is not string');
-    }
-
-    return v;
-  });
+  return sort(array, order, sort.targetFunc.returnValueErrorNotIsString);
 };
 
 exports.sortDictionary = sortDictionary;
@@ -11059,7 +11056,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.equalDeep = exports._equalDeep = exports.equal = exports._equal = exports.equalFunctionArrayDefault = exports.equalFunction = exports.includesAll = exports.includesSome = exports._includesAll = exports._includesSome = exports.includes = exports._includes = exports.someMatchAll = exports._someMatchAll = exports.allMatchAll = exports._allMatchAll = exports.indexOfMatchAll = exports._indexOfMatchAll = exports.matchAllValue = exports._matchAllValue = exports.matchAll = exports._matchAll = exports.someMatchSome = exports._someMatchSome = exports.allMatchSome = exports._allMatchSome = exports.indexOfMatchSome = exports._indexOfMatchSome = exports.matchSomeValue = exports._matchSomeValue = exports.matchSome = exports._matchSome = exports.someMatch = exports._someMatch = exports.allMatch = exports._allMatch = exports.indexOfMatch = exports._indexOfMatch = exports.initialValue = exports._initialValue = exports.matchValue = exports._matchValue = exports.match = exports._match = exports.or = exports._or = void 0;
+exports["default"] = exports.equalDeep = exports._equalDeep = exports.equal = exports._equal = exports.includesAll = exports.includesSome = exports._includesAll = exports._includesSome = exports.includes = exports._includes = exports.someMatchAll = exports._someMatchAll = exports.allMatchAll = exports._allMatchAll = exports.indexOfMatchAll = exports._indexOfMatchAll = exports.matchAllValue = exports._matchAllValue = exports.matchAll = exports._matchAll = exports.someMatchSome = exports._someMatchSome = exports.allMatchSome = exports._allMatchSome = exports.indexOfMatchSome = exports._indexOfMatchSome = exports.matchSomeValue = exports._matchSomeValue = exports.matchSome = exports._matchSome = exports.someMatch = exports._someMatch = exports.allMatch = exports._allMatch = exports.indexOfMatch = exports._indexOfMatch = exports.initialValue = exports._initialValue = exports.matchValue = exports._matchValue = exports.match = exports._match = exports.or = exports._or = void 0;
 
 var _or2 = _interopRequireDefault(__webpack_require__(42));
 
@@ -11099,11 +11096,9 @@ var _includes2 = _interopRequireDefault(__webpack_require__(27));
 
 var _includes_common = _interopRequireDefault(__webpack_require__(29));
 
-var _equalFunction = _interopRequireDefault(__webpack_require__(71));
+var _equal2 = _interopRequireDefault(__webpack_require__(71));
 
-var _equal2 = _interopRequireDefault(__webpack_require__(72));
-
-var _equalDeep2 = _interopRequireDefault(__webpack_require__(73));
+var _equalDeep2 = _interopRequireDefault(__webpack_require__(72));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -11193,10 +11188,6 @@ exports.includesAll = includesAll;
 exports.includesSome = includesSome;
 exports._includesAll = _includesAll;
 exports._includesSome = _includesSome;
-var equalFunction = _equalFunction["default"].equalFunction,
-    equalFunctionArrayDefault = _equalFunction["default"].equalFunctionArrayDefault;
-exports.equalFunctionArrayDefault = equalFunctionArrayDefault;
-exports.equalFunction = equalFunction;
 var _equal = _equal2["default"]._equal,
     equal = _equal2["default"].equal;
 exports.equal = equal;
@@ -11206,7 +11197,7 @@ var _equalDeep = _equalDeep2["default"]._equalDeep,
 exports.equalDeep = equalDeep;
 exports._equalDeep = _equalDeep;
 
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _or2["default"]), _match2["default"]), _matchValue2["default"]), _initialValue2["default"]), _indexOfMatch2["default"]), _allMatch2["default"]), _someMatch2["default"]), _matchSome2["default"]), _matchSomeValue2["default"]), _indexOfMatchSome2["default"]), _allMatchSome2["default"]), _someMatchSome2["default"]), _matchAll2["default"]), _matchAllValue2["default"]), _indexOfMatchAll2["default"]), _allMatchAll2["default"]), _someMatchAll2["default"]), _includes2["default"]), _includes_common["default"]), _equalFunction["default"]), _equal2["default"]), _equalDeep2["default"]);
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _or2["default"]), _match2["default"]), _matchValue2["default"]), _initialValue2["default"]), _indexOfMatch2["default"]), _allMatch2["default"]), _someMatch2["default"]), _matchSome2["default"]), _matchSomeValue2["default"]), _indexOfMatchSome2["default"]), _allMatchSome2["default"]), _someMatchSome2["default"]), _matchAll2["default"]), _matchAllValue2["default"]), _indexOfMatchAll2["default"]), _allMatchAll2["default"]), _someMatchAll2["default"]), _includes2["default"]), _includes_common["default"]), _equal2["default"]), _equalDeep2["default"]);
 
 exports["default"] = _default;
 
@@ -12078,7 +12069,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.equalFunctionArrayDefault = exports.equalFunction = void 0;
+exports["default"] = exports.equal = exports._equal = void 0;
 
 var _type = __webpack_require__(5);
 
@@ -12099,12 +12090,62 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 /**
- * equalFunction
+ * equal
  */
-var equalFunction = {};
-exports.equalFunction = equalFunction;
+var _equal = function _equal(value1, value2) {
+  var equalFuncArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : equal.func.defaultArray;
 
-equalFunction.equalValue = function (value1, value2) {
+  var __equal = function __equal(value1, value2) {
+    for (var i = 0, l = equalFuncArray.length; i < l; i += 1) {
+      var result = equalFuncArray[i](value1, value2);
+
+      if (!(0, _type.isUndefined)(result)) {
+        return result;
+      }
+    }
+
+    return false;
+  };
+
+  return __equal(value1, value2);
+};
+
+exports._equal = _equal;
+
+var equal = function equal(value1, value2) {
+  var equalFuncArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : equal.func.defaultArray;
+
+  if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFuncArray')) {
+    var _value = value1;
+    value1 = _value.value1;
+    value2 = _value.value2;
+    var _value$equalFuncArray = _value.equalFuncArray;
+    equalFuncArray = _value$equalFuncArray === void 0 ? equal.func.defaultArray : _value$equalFuncArray;
+  } else if ((0, _object.isObjectParameter)(value2, 'value2', 'equalFuncArray')) {
+    var _value2 = value2;
+    value2 = _value2.value2;
+    var _value2$equalFuncArra = _value2.equalFuncArray;
+    equalFuncArray = _value2$equalFuncArra === void 0 ? equal.func.defaultArray : _value2$equalFuncArra;
+  } else if ((0, _object.isObjectParameter)(equalFuncArray, 'equalFuncArray')) {
+    var _equalFuncArray = equalFuncArray;
+    equalFuncArray = _equalFuncArray.equalFuncArray;
+  }
+
+  if (!(0, _type.isFunctionArray)(equalFuncArray)) {
+    throw new TypeError('equal args(equalFuncArray) is not function array');
+  }
+
+  return _equal(value1, value2, equalFuncArray);
+};
+/**
+ * equal.func
+ */
+
+
+exports.equal = equal;
+equal.func = {};
+
+equal.func.value = function (value1, value2) {
   if ((0, _type.isNaNStrict)(value1) && (0, _type.isNaNStrict)(value2)) {
     return true;
   }
@@ -12113,7 +12154,7 @@ equalFunction.equalValue = function (value1, value2) {
 }; // function is no recursive call
 
 
-equalFunction.equalFunction = function (value1, value2) {
+equal.func["function"] = function (value1, value2) {
   if (!(0, _type.isFunctionAll)(value1, value2)) {
     return;
   }
@@ -12121,7 +12162,7 @@ equalFunction.equalFunction = function (value1, value2) {
   return value1 === value2;
 };
 
-equalFunction.equalObject = function (value1, value2) {
+equal.func.object = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
@@ -12152,7 +12193,7 @@ equalFunction.equalObject = function (value1, value2) {
   return true;
 };
 
-equalFunction.equalArrayType = function (value1, value2) {
+equal.func.arrayType = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
@@ -12178,7 +12219,7 @@ equalFunction.equalArrayType = function (value1, value2) {
   return true;
 };
 
-equalFunction.equalDate = function (value1, value2) {
+equal.func.date = function (value1, value2) {
   if (!(0, _type.isDateAll)(value1, value2)) {
     return;
   }
@@ -12186,7 +12227,7 @@ equalFunction.equalDate = function (value1, value2) {
   return value1.getTime() === value2.getTime();
 };
 
-equalFunction.equalRegExp = function (value1, value2) {
+equal.func.regExp = function (value1, value2) {
   if (!(0, _type.isRegExpAll)(value1, value2)) {
     return;
   }
@@ -12194,7 +12235,7 @@ equalFunction.equalRegExp = function (value1, value2) {
   return value1.source === value2.source;
 };
 
-equalFunction.equalMap = function (value1, value2) {
+equal.func.map = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
@@ -12233,7 +12274,7 @@ equalFunction.equalMap = function (value1, value2) {
   return true;
 };
 
-equalFunction.equalWeakMap = function (value1, value2) {
+equal.func.weakMap = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
@@ -12272,7 +12313,7 @@ equalFunction.equalWeakMap = function (value1, value2) {
   return true;
 };
 
-equalFunction.equalSet = function (value1, value2) {
+equal.func.set = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
@@ -12327,7 +12368,7 @@ equalFunction.equalSet = function (value1, value2) {
   return true;
 };
 
-equalFunction.equalWeakSet = function (value1, value2) {
+equal.func.weakSet = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
@@ -12382,82 +12423,7 @@ equalFunction.equalWeakSet = function (value1, value2) {
   return true;
 };
 
-var equalFunctionArrayDefault = [equalFunction.equalDate, equalFunction.equalRegExp, equalFunction.equalFunction, equalFunction.equalMap, equalFunction.equalWeakMap, equalFunction.equalSet, equalFunction.equalWeakSet, equalFunction.equalArrayType, equalFunction.equalObject, equalFunction.equalValue];
-exports.equalFunctionArrayDefault = equalFunctionArrayDefault;
-var _default = {
-  equalFunction: equalFunction,
-  equalFunctionArrayDefault: equalFunctionArrayDefault
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.equal = exports._equal = void 0;
-
-var _type = __webpack_require__(5);
-
-var _object = __webpack_require__(16);
-
-var _equalFunction = __webpack_require__(71);
-
-/**
- * equal
- */
-var _equal = function _equal(value1, value2) {
-  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
-
-  var __equal = function __equal(value1, value2) {
-    for (var i = 0, l = equalFunctionArray.length; i < l; i += 1) {
-      var result = equalFunctionArray[i](value1, value2);
-
-      if (!(0, _type.isUndefined)(result)) {
-        return result;
-      }
-    }
-
-    return false;
-  };
-
-  return __equal(value1, value2);
-};
-
-exports._equal = _equal;
-
-var equal = function equal(value1, value2) {
-  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
-
-  if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFunctionArray')) {
-    var _value = value1;
-    value1 = _value.value1;
-    value2 = _value.value2;
-    var _value$equalFunctionA = _value.equalFunctionArray;
-    equalFunctionArray = _value$equalFunctionA === void 0 ? _equalFunction.equalFunctionArrayDefault : _value$equalFunctionA;
-  } else if ((0, _object.isObjectParameter)(value2, 'value2', 'equalFunctionArray')) {
-    var _value2 = value2;
-    value2 = _value2.value2;
-    var _value2$equalFunction = _value2.equalFunctionArray;
-    equalFunctionArray = _value2$equalFunction === void 0 ? _equalFunction.equalFunctionArrayDefault : _value2$equalFunction;
-  } else if ((0, _object.isObjectParameter)(equalFunctionArray, 'equalFunctionArray')) {
-    var _equalFunctionArray = equalFunctionArray;
-    equalFunctionArray = _equalFunctionArray.equalFunctionArray;
-  }
-
-  if (!(0, _type.isFunctionArray)(equalFunctionArray)) {
-    throw new TypeError('equal args(equalFunctionArray) is not function array');
-  }
-
-  return _equal(value1, value2, equalFunctionArray);
-};
-
-exports.equal = equal;
+equal.func.defaultArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.map, equal.func.weakMap, equal.func.set, equal.func.weakSet, equal.func.arrayType, equal.func.object, equal.func.value];
 var _default = {
   _equal: _equal,
   equal: equal
@@ -12465,7 +12431,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 73 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12480,13 +12446,13 @@ var _type = __webpack_require__(5);
 
 var _object = __webpack_require__(16);
 
-var _equalFunction = __webpack_require__(71);
+var _equal = __webpack_require__(71);
 
 /**
  * equalDeep
  */
 var _equalDeep = function _equalDeep(value1, value2) {
-  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
+  var equalFuncArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equal.equal.func.defaultArray;
   var CircularReferenceBuffer = {
     v1Array: [],
     v2Array: []
@@ -12503,8 +12469,8 @@ var _equalDeep = function _equalDeep(value1, value2) {
       return value1 === value2;
     }
 
-    for (var i = 0, l = equalFunctionArray.length; i < l; i += 1) {
-      var result = equalFunctionArray[i](value1, value2, function (v1, v2) {
+    for (var i = 0, l = equalFuncArray.length; i < l; i += 1) {
+      var result = equalFuncArray[i](value1, value2, function (v1, v2) {
         CircularReferenceBuffer.v1Array.push(v1);
         CircularReferenceBuffer.v2Array.push(v2);
       }, __equalDeep);
@@ -12523,25 +12489,25 @@ var _equalDeep = function _equalDeep(value1, value2) {
 exports._equalDeep = _equalDeep;
 
 var equalDeep = function equalDeep(value1, value2) {
-  var equalFunctionArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equalFunction.equalFunctionArrayDefault;
+  var equalFuncArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _equal.equal.func.defaultArray;
 
-  if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFunctionArray')) {
+  if ((0, _object.isObjectParameter)(value1, 'value1, value2', 'equalFuncArray')) {
     var _value = value1;
     value1 = _value.value1;
     value2 = _value.value2;
-    var _value$equalFunctionA = _value.equalFunctionArray;
-    equalFunctionArray = _value$equalFunctionA === void 0 ? _equalFunction.equalFunctionArrayDefault : _value$equalFunctionA;
-  } else if ((0, _object.isObjectParameter)(value2, 'value2', 'equalFunctionArray')) {
+    var _value$equalFuncArray = _value.equalFuncArray;
+    equalFuncArray = _value$equalFuncArray === void 0 ? _equal.equal.func.defaultArray : _value$equalFuncArray;
+  } else if ((0, _object.isObjectParameter)(value2, 'value2', 'equalFuncArray')) {
     var _value2 = value2;
     value2 = _value2.value2;
-    var _value2$equalFunction = _value2.equalFunctionArray;
-    equalFunctionArray = _value2$equalFunction === void 0 ? _equalFunction.equalFunctionArrayDefault : _value2$equalFunction;
-  } else if ((0, _object.isObjectParameter)(equalFunctionArray, 'equalFunctionArray')) {
-    var _equalFunctionArray = equalFunctionArray;
-    equalFunctionArray = _equalFunctionArray.equalFunctionArray;
+    var _value2$equalFuncArra = _value2.equalFuncArray;
+    equalFuncArray = _value2$equalFuncArra === void 0 ? _equal.equal.func.defaultArray : _value2$equalFuncArra;
+  } else if ((0, _object.isObjectParameter)(equalFuncArray, 'equalFuncArray')) {
+    var _equalFuncArray = equalFuncArray;
+    equalFuncArray = _equalFuncArray.equalFuncArray;
   }
 
-  return _equalDeep(value1, value2, equalFunctionArray);
+  return _equalDeep(value1, value2, equalFuncArray);
 };
 
 exports.equalDeep = equalDeep;
@@ -12552,7 +12518,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 74 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12967,7 +12933,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 75 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
