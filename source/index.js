@@ -12,7 +12,7 @@ import _object from './object/object.js';
 import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 
-const VERSION = '7.1.0';
+const VERSION = '7.1.1 beta';
 
 const rootNames = {};
 const propertyNames = {};
