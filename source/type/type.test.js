@@ -1103,7 +1103,6 @@ export const test_execute_type = (parts) => {
           return;
         }
 
-        if (!parts.platform.isInternetExplorer()) {
           checkEqual(false, isMapAll({}));
           checkEqual(false, isWeakMapAll({}));
           checkEqual(true,  isMapAll(new Map()));
@@ -1114,18 +1113,6 @@ export const test_execute_type = (parts) => {
           checkEqual(true,  isObjectAll({}));
           checkEqual(false, isObjectAll(new Map()));
           checkEqual(false, isObjectAll(new WeakMap()));
-        } else {
-          checkEqual(false, isMapAll({}));
-          checkEqual(false, isWeakMapAll({}));
-          checkEqual(false, isMapAll(new Map()));          // IE11 bug
-          checkEqual(false, isWeakMapAll(new Map()));
-          checkEqual(false, isMapAll(new WeakMap()));
-          checkEqual(false, isWeakMapAll(new WeakMap()));  // IE11 bug
-
-          checkEqual(true,  isObjectAll({}));
-          checkEqual(true,  isObjectAll(new Map()));        // IE11 bug
-          checkEqual(true,  isObjectAll(new WeakMap()));    // IE11 bug
-        }
       });
     };
 
@@ -1139,25 +1126,18 @@ export const test_execute_type = (parts) => {
           return;
         }
 
-        if (!parts.platform.isInternetExplorer()) {
           checkEqual(false, isSetAll({}));
           checkEqual(true,  isSetAll(new Set()));
-          checkEqual(false, isSetAll(new WeakSet()));
           checkEqual(false, isWeakSetAll({}));
           checkEqual(false, isWeakSetAll(new Set()));
-          checkEqual(true,  isWeakSetAll(new WeakSet()));
 
           checkEqual(true,  isObjectAll({}));
           checkEqual(false, isObjectAll(new Set()));
+        if (!parts.platform.isInternetExplorer()) {
+          // IE11 no exist WeakSet
+          checkEqual(false, isSetAll(new WeakSet()));
+          checkEqual(true,  isWeakSetAll(new WeakSet()));
           checkEqual(false, isObjectAll(new WeakSet()));
-        } else {
-          checkEqual(false, isSetAll({}));
-          checkEqual(false, isSetAll(new Set()));     // IE11 bug
-          checkEqual(false, isWeakSetAll({}));
-          checkEqual(false, isWeakSetAll(new Set()));
-
-          checkEqual(true,  isObjectAll({}));
-          checkEqual(true,  isObjectAll(new Set()));  // IE11 bug
         }
 
       });

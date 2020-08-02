@@ -1,11 +1,3 @@
-import {
-  _includes,
-} from '../compare/includes.js';
-
-import {
-  _includesSome,
-} from '../compare/includes_common.js';
-
 export const isWebBrowser = () => {
   return name() === 'WebBrowser';
 };
@@ -56,17 +48,17 @@ export const browserName = () => {
   }
 
   const ua = window.navigator.userAgent.toLowerCase();
-  if (_includesSome(ua, ['msie', 'trident'])) {
+  if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
     return 'InternetExplorer';
-  } else if (_includes(ua, 'edg')) {
+  } else if (ua.indexOf('edg') !== -1) {
     return 'Edge';
-  } else if (_includes(ua, 'opr')) {
+  } else if (ua.indexOf('opr') !== -1) {
     return 'Opera';
-  } else if (_includes(ua, 'chrome')) {
+  } else if (ua.indexOf('chrome') !== -1) {
     return 'Chrome';
-  } else if (_includes(ua, 'safari')) {
+  } else if (ua.indexOf('safari') !== -1) {
     return 'Safari';
-  } else if (_includes(ua, 'firefox')) {
+  } else if (ua.indexOf('firefox') !== -1) {
     return 'Firefox';
   } else {
     return 'other';

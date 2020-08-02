@@ -296,6 +296,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 7.2.0
+#### 2020/08/02(Sun)
+- update isObject 
+  - support IE11 bug Map / WeakSet / Set isObjet true >> false
+
 ### 7.1.1
 #### 2020/07/23(Thu)
 - delete no use file in build folder

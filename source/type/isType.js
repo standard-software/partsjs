@@ -2,6 +2,10 @@ import {
   _propertyCount,
 } from '../object/_propertyCount.js';
 
+import {
+  isInternetExplorer,
+} from '../platform/platform.js';
+
 export const objectToString = value => {
   return Object.prototype.toString.call(value);
 };
@@ -52,10 +56,17 @@ export const isFunction =
 export const isObject = (value) => {
   if (isNull(value)) { return false; }
   if (isUndefined(value)) { return false; }
-  if (objectToString(value) === '[object Object]') {
-    return true;
+  if (objectToString(value) !== '[object Object]') {
+    return false;
   }
-  return false;
+  if (isInternetExplorer()) {
+    // support for IE11
+    if ([Map, WeakMap, Set].indexOf(value.constructor) !== -1) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 export const isObjectNormal = (value) => {
