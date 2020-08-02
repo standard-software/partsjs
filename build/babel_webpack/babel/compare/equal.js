@@ -9,19 +9,19 @@ var _type = require("../type/type.js");
 
 var _object = require("../object/object.js");
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /**
  * equal
@@ -185,25 +185,21 @@ equal.func.map = function (value1, value2) {
   }
 
   bufferWrite(value1, value2);
+  var value1Entries = [];
+  value1.forEach(function (value, key) {
+    value1Entries.push([key, value]);
+  });
 
-  var _iterator = _createForOfIteratorHelper(value1.entries()),
-      _step;
+  for (var _i = 0, _value1Entries = value1Entries; _i < _value1Entries.length; _i++) {
+    var _value1Entries$_i = _slicedToArray(_value1Entries[_i], 2),
+        key = _value1Entries$_i[0],
+        value = _value1Entries$_i[1];
 
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var _step$value = _slicedToArray(_step.value, 2),
-          key = _step$value[0],
-          value = _step$value[1];
-
-      if (__equalDeep(value, value2.get(key)) === false) {
-        return false;
-      }
+    if (__equalDeep(value, value2.get(key)) === false) {
+      return false;
     }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
+  } // IE11 no support map.keys map.entries
+
 
   return true;
 };
@@ -224,25 +220,21 @@ equal.func.weakMap = function (value1, value2) {
   }
 
   bufferWrite(value1, value2);
+  var value1Entries = [];
+  value1.forEach(function (value, key) {
+    value1Entries.push([key, value]);
+  });
 
-  var _iterator2 = _createForOfIteratorHelper(value1.entries()),
-      _step2;
+  for (var _i2 = 0, _value1Entries2 = value1Entries; _i2 < _value1Entries2.length; _i2++) {
+    var _value1Entries2$_i = _slicedToArray(_value1Entries2[_i2], 2),
+        key = _value1Entries2$_i[0],
+        value = _value1Entries2$_i[1];
 
-  try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var _step2$value = _slicedToArray(_step2.value, 2),
-          key = _step2$value[0],
-          value = _step2$value[1];
-
-      if (__equalDeep(value, value2.get(key)) === false) {
-        return false;
-      }
+    if (__equalDeep(value, value2.get(key)) === false) {
+      return false;
     }
-  } catch (err) {
-    _iterator2.e(err);
-  } finally {
-    _iterator2.f();
-  }
+  } // IE11 no support weakmap.keys weakmap.entries
+
 
   return true;
 };
@@ -263,41 +255,46 @@ equal.func.set = function (value1, value2) {
   }
 
   bufferWrite(value1, value2);
+  var value1Entries = [];
+  value1.forEach(function (value, key) {
+    value1Entries.push([key, value]);
+  });
+  var value2Entries = [];
+  value2.forEach(function (value, key) {
+    value2Entries.push([key, value]);
+  });
 
-  var _iterator3 = _createForOfIteratorHelper(value1),
-      _step3;
+  for (var _i3 = 0, _value1Entries3 = value1Entries; _i3 < _value1Entries3.length; _i3++) {
+    var _value1Entries3$_i = _slicedToArray(_value1Entries3[_i3], 2),
+        key = _value1Entries3$_i[0],
+        v1item = _value1Entries3$_i[1];
 
-  try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var v1item = _step3.value;
-      var result = false;
+    var result = false;
 
-      var _iterator4 = _createForOfIteratorHelper(value2),
-          _step4;
+    var _iterator = _createForOfIteratorHelper(value2Entries),
+        _step;
 
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var v2item = _step4.value;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _step$value = _slicedToArray(_step.value, 2),
+            _key = _step$value[0],
+            v2item = _step$value[1];
 
-          if (__equalDeep(v1item, v2item) === true) {
-            result = true;
-          }
+        if (__equalDeep(v1item, v2item) === true) {
+          result = true;
         }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
       }
-
-      if (result === false) {
-        return false;
-      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
     }
-  } catch (err) {
-    _iterator3.e(err);
-  } finally {
-    _iterator3.f();
-  }
+
+    if (result === false) {
+      return false;
+    }
+  } // IE11 no support set.keys set.entries
+
 
   return true;
 };
@@ -319,29 +316,29 @@ equal.func.weakSet = function (value1, value2) {
 
   bufferWrite(value1, value2);
 
-  var _iterator5 = _createForOfIteratorHelper(value1),
-      _step5;
+  var _iterator2 = _createForOfIteratorHelper(value1),
+      _step2;
 
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var v1item = _step5.value;
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var v1item = _step2.value;
       var result = false;
 
-      var _iterator6 = _createForOfIteratorHelper(value2),
-          _step6;
+      var _iterator3 = _createForOfIteratorHelper(value2),
+          _step3;
 
       try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          var v2item = _step6.value;
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var v2item = _step3.value;
 
           if (__equalDeep(v1item, v2item) === true) {
             result = true;
           }
         }
       } catch (err) {
-        _iterator6.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator6.f();
+        _iterator3.f();
       }
 
       if (result === false) {
@@ -349,9 +346,9 @@ equal.func.weakSet = function (value1, value2) {
       }
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator2.e(err);
   } finally {
-    _iterator5.f();
+    _iterator2.f();
   }
 
   return true;

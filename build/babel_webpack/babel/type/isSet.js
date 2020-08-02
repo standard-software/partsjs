@@ -7,8 +7,22 @@ exports["default"] = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet
 
 var _isType = require("../type/isType.js");
 
+var _syntax = require("../syntax/syntax.js");
+
 var isSet = function isSet(value) {
-  return (0, _isType.objectToString)(value) === '[object Set]';
+  if (!(0, _isType.isObjectLike)(value)) {
+    return false;
+  }
+
+  if (!(0, _syntax.canUseSet)()) {
+    return false;
+  }
+
+  return value.constructor === Set; // IE11
+  // Object.prototype.toString.call(new Map) is [object Object]
+  // So
+  //  objectToString(value) === '[object Set]'
+  // already return false;
 };
 
 exports.isSet = isSet;

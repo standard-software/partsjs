@@ -7,14 +7,40 @@ exports["default"] = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap
 
 var _isType = require("../type/isType.js");
 
+var _syntax = require("../syntax/syntax.js");
+
 var isMap = function isMap(value) {
-  return (0, _isType.objectToString)(value) === '[object Map]';
+  if (!(0, _isType.isObjectLike)(value)) {
+    return false;
+  }
+
+  if (!(0, _syntax.canUseMap)()) {
+    return false;
+  }
+
+  return value.constructor === Map; // IE11
+  // Object.prototype.toString.call(new Map) is [object Object]
+  // So
+  //  objectToString(value) === '[object Map]'
+  // already return false;
 };
 
 exports.isMap = isMap;
 
 var isWeakMap = function isWeakMap(value) {
-  return (0, _isType.objectToString)(value) === '[object WeakMap]';
+  if (!(0, _isType.isObjectLike)(value)) {
+    return false;
+  }
+
+  if (!(0, _syntax.canUseMap)()) {
+    return false;
+  }
+
+  return value.constructor === WeakMap; // IE11
+  // Object.prototype.toString.call(new Map) is [object Object]
+  // So
+  //  objectToString(value) === '[object WeakMap]'
+  // already return false;
 };
 
 exports.isWeakMap = isWeakMap;

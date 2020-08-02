@@ -7,6 +7,8 @@ exports["default"] = exports.isNotObjType = exports.isObjType = exports.isNotEmp
 
 var _propertyCount2 = require("../object/_propertyCount.js");
 
+var _platform = require("../platform/platform.js");
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var objectToString = function objectToString(value) {
@@ -94,11 +96,18 @@ var isObject = function isObject(value) {
     return false;
   }
 
-  if (objectToString(value) === '[object Object]') {
-    return true;
+  if (objectToString(value) !== '[object Object]') {
+    return false;
   }
 
-  return false;
+  if ((0, _platform.isInternetExplorer)()) {
+    // support for IE11
+    if ([Map, WeakMap, Set].indexOf(value.constructor) !== -1) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 exports.isObject = isObject;

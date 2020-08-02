@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.isGasRhino = exports.isGasV8 = exports.googleAppScriptEngineName = exports.isOpera = exports.isSafari = exports.isInternetExplorer = exports.isEdge = exports.isFirefox = exports.isChrome = exports.browserName = exports.name = exports.isDeno = exports.isNodeJs = exports.isJest = exports.isGoogleAppsScript = exports.isWindowsScriptHost = exports.isWebBrowser = void 0;
 
-var _includes2 = require("../compare/includes.js");
-
-var _includes_common = require("../compare/includes_common.js");
-
 var isWebBrowser = function isWebBrowser() {
   return name() === 'WebBrowser';
 };
@@ -77,17 +73,17 @@ var browserName = function browserName() {
 
   var ua = window.navigator.userAgent.toLowerCase();
 
-  if ((0, _includes_common._includesSome)(ua, ['msie', 'trident'])) {
+  if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
     return 'InternetExplorer';
-  } else if ((0, _includes2._includes)(ua, 'edg')) {
+  } else if (ua.indexOf('edg') !== -1) {
     return 'Edge';
-  } else if ((0, _includes2._includes)(ua, 'opr')) {
+  } else if (ua.indexOf('opr') !== -1) {
     return 'Opera';
-  } else if ((0, _includes2._includes)(ua, 'chrome')) {
+  } else if (ua.indexOf('chrome') !== -1) {
     return 'Chrome';
-  } else if ((0, _includes2._includes)(ua, 'safari')) {
+  } else if (ua.indexOf('safari') !== -1) {
     return 'Safari';
-  } else if ((0, _includes2._includes)(ua, 'firefox')) {
+  } else if (ua.indexOf('firefox') !== -1) {
     return 'Firefox';
   } else {
     return 'other';

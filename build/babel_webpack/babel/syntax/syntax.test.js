@@ -59,7 +59,9 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         if_ = _parts$syntax.if_,
         switch_ = _parts$syntax.switch_,
         canUseMap = _parts$syntax.canUseMap,
-        canUseSet = _parts$syntax.canUseSet;
+        canUseWeakMap = _parts$syntax.canUseWeakMap,
+        canUseSet = _parts$syntax.canUseSet,
+        canUseWeakSet = _parts$syntax.canUseWeakSet;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -785,8 +787,24 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           checkEqual(false, canUseMap());
         } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseMap());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, canUseMap());
         } else {
           checkEqual(true, canUseMap());
+        }
+      });
+    };
+
+    var test_canUseWeakMap = function test_canUseWeakMap() {
+      it('test_canUseWeakMap', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseWeakMap());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseWeakMap());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, canUseWeakMap());
+        } else {
+          checkEqual(true, canUseWeakMap());
         }
       });
     };
@@ -797,8 +815,24 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           checkEqual(false, canUseSet());
         } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseSet());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, canUseSet());
         } else {
           checkEqual(true, canUseSet());
+        }
+      });
+    };
+
+    var test_canUseWeakSet = function test_canUseWeakSet() {
+      it('test_canUseWeakSet', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseWeakSet());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseWeakSet());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, canUseWeakSet());
+        } else {
+          checkEqual(true, canUseWeakSet());
         }
       });
     };
@@ -809,7 +843,9 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_switch_();
     test_loop();
     test_canUseMap();
+    test_canUseWeakMap();
     test_canUseSet();
+    test_canUseWeakSet();
   });
 };
 

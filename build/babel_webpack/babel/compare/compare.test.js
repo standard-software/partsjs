@@ -277,13 +277,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
 
         var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equal(map1, map2, equalFuncArray));
-        } else {
-          checkEqual(true, equal(map1, map2, equalFuncArray)); // IE11 bug
-        } // Map in object
-
+        checkEqual(false, equal(map1, map2, equalFuncArray)); // Map in object
 
         checkEqual(false, equal({
           map: map1
@@ -323,13 +317,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
 
         var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equal(set1, set2, equalFuncArray));
-        } else {
-          checkEqual(true, equal(set1, set2, equalFuncArray)); // IE11 bug
-        } // Set in object
-
+        checkEqual(false, equal(set1, set2, equalFuncArray)); // Set in object
 
         checkEqual(false, equal({
           set: set1
@@ -875,20 +863,11 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          }));
-        } else {
-          checkEqual(true, equalDeep({
-            map: map1
-          }, {
-            map: map2
-          })); // IE11 bug
-        }
+        checkEqual(false, equalDeep({
+          map: map1
+        }, {
+          map: map2
+        }));
       });
     };
 
@@ -972,12 +951,7 @@ var test_execute_compare = function test_execute_compare(parts) {
         map3.set('b', ['b']);
         map1.set('map', map2);
         map2.set('map', map3);
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep(map1, map2));
-        } else {
-          checkEqual(true, equalDeep(map1, map2)); // IE11 bug
-        }
+        checkEqual(false, equalDeep(map1, map2));
       });
     };
 
@@ -1107,20 +1081,11 @@ var test_execute_compare = function test_execute_compare(parts) {
           c: 3,
           b: 4
         });
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-        } else {
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          })); // IE11 bug
-        }
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }));
       });
     };
 
@@ -1220,20 +1185,11 @@ var test_execute_compare = function test_execute_compare(parts) {
         set3.add(['b']);
         set1.add(set2);
         set2.add(set3);
-
-        if (!parts.platform.isInternetExplorer()) {
-          checkEqual(false, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-        } else {
-          checkEqual(true, equalDeep({
-            set: set1
-          }, {
-            set: set2
-          }));
-        }
+        checkEqual(false, equalDeep({
+          set: set1
+        }, {
+          set: set2
+        }));
       });
     };
 

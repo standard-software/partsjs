@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.canUseSet = exports.canUseMap = exports.loop = exports._loopBase = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = void 0;
+exports["default"] = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports._loopBase = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = void 0;
 
 var _type = require("../type/type.js");
 
@@ -349,6 +349,31 @@ canUseMap.reset = function () {
   _canUseMapFlag = undefined;
 };
 /**
+ * canUseWeakMap
+ */
+
+
+var _canUseWeakMapFlag;
+
+var canUseWeakMap = function canUseWeakMap() {
+  if ((0, _type.isUndefined)(_canUseWeakMapFlag)) {
+    try {
+      new WeakMap();
+      _canUseWeakMapFlag = true;
+    } catch (e) {
+      _canUseWeakMapFlag = false;
+    }
+  }
+
+  return _canUseWeakMapFlag;
+};
+
+exports.canUseWeakMap = canUseWeakMap;
+
+canUseWeakMap.reset = function () {
+  _canUseWeakMapFlag = undefined;
+};
+/**
  * canUseSet
  */
 
@@ -373,6 +398,31 @@ exports.canUseSet = canUseSet;
 canUseSet.reset = function () {
   _canUseSetFlag = undefined;
 };
+/**
+ * canUseWeakSet
+ */
+
+
+var _canUseWeakSetFlag;
+
+var canUseWeakSet = function canUseWeakSet() {
+  if ((0, _type.isUndefined)(_canUseWeakSetFlag)) {
+    try {
+      new WeakSet();
+      _canUseWeakSetFlag = true;
+    } catch (e) {
+      _canUseWeakSetFlag = false;
+    }
+  }
+
+  return _canUseWeakSetFlag;
+};
+
+exports.canUseWeakSet = canUseWeakSet;
+
+canUseWeakSet.reset = function () {
+  _canUseWeakSetFlag = undefined;
+};
 
 var _default = {
   assert: assert,
@@ -383,6 +433,8 @@ var _default = {
   switch_: switch_,
   loop: loop,
   canUseMap: canUseMap,
-  canUseSet: canUseSet
+  canUseWeakMap: canUseWeakMap,
+  canUseSet: canUseSet,
+  canUseWeakSet: canUseWeakSet
 };
 exports["default"] = _default;

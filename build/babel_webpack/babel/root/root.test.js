@@ -783,10 +783,6 @@ var test_execute_root = function test_execute_root(parts) {
           return;
         }
 
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
-
         if (parts.platform.isGasRhino()) {
           return;
         }
@@ -798,23 +794,12 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(false, parts.isObjectAll(map1));
         checkEqual(true, parts.isObjectLikeAll(map1));
         var map2 = clone(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual('value1', map2.get('key1')); // IE polyfill clone
-        } else {
-          checkEqual(undefined, map2.get('key1')); // no clone
-        }
+        checkEqual(undefined, map2.get('key1'));
+        checkEqual(false, map1 === map2);
+        var map2 = cloneDeep(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
+        checkEqual(undefined, map2.get('key1')); // no clone
 
         checkEqual(false, map1 === map2);
-
-        if (parts.platform.isInternetExplorer()) {// IE Error
-        } else {
-          var map2 = cloneDeep(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
-          checkEqual(undefined, map2.get('key1')); // no clone
-
-          checkEqual(false, map1 === map2);
-        }
-
         var map2 = clone(map1);
         checkEqual('value1', map2.get('key1')); // clone
 
@@ -885,42 +870,21 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(true, set1.has('value1'));
         checkEqual(true, set1.has('value2'));
         checkEqual(false, set1.has('value3'));
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(true, parts.isObjectAll(set1));
-        } else {
-          checkEqual(false, parts.isObjectAll(set1));
-        }
-
+        checkEqual(false, parts.isObjectAll(set1));
         checkEqual(true, parts.isObjectLikeAll(set1));
         var set2 = clone(set1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
         checkEqual(false, set2.has('value1'));
         checkEqual(false, set1 === set2);
+        var set2 = cloneDeep(set1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
+        checkEqual(false, set2.has('value1')); // no clone
 
-        if (parts.platform.isInternetExplorer()) {// IE Error
-        } else {
-          var set2 = cloneDeep(set1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
-          checkEqual(false, set2.has('value1')); // no clone
-
-          checkEqual(false, set1 === set2);
-        }
-
+        checkEqual(false, set1 === set2);
         var set2 = clone(set1);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, set2.has('value1'));
-        } else {
-          checkEqual(true, set2.has('value1')); // clone
-        }
+        checkEqual(true, set2.has('value1')); // clone
 
         checkEqual(false, set1 === set2);
         var set2 = cloneDeep(set1);
-
-        if (parts.platform.isInternetExplorer()) {
-          checkEqual(false, set2.has('value1'));
-        } else {
-          checkEqual(true, set2.has('value1')); // clone
-        }
+        checkEqual(true, set2.has('value1')); // clone
 
         checkEqual(false, set1 === set2);
       });

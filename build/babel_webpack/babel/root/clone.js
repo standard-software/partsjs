@@ -15,15 +15,13 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /**
  * clone
@@ -209,23 +207,19 @@ clone.func.map = function (source) {
 
   var cloneValue = new Map();
   bufferWrite(source, cloneValue);
+  var sourceEntries = [];
+  source.forEach(function (value, key) {
+    sourceEntries.push([key, value]);
+  });
 
-  var _iterator = _createForOfIteratorHelper(source.entries()),
-      _step;
+  for (var _i = 0, _sourceEntries = sourceEntries; _i < _sourceEntries.length; _i++) {
+    var _sourceEntries$_i = _slicedToArray(_sourceEntries[_i], 2),
+        key = _sourceEntries$_i[0],
+        value = _sourceEntries$_i[1];
 
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var _step$value = _slicedToArray(_step.value, 2),
-          key = _step$value[0],
-          value = _step$value[1];
+    cloneValue.set(key, __cloneDeep(value));
+  } // IE11 no support map.keys map.entries
 
-      cloneValue.set(key, __cloneDeep(value));
-    }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
 
   return cloneValue;
 };
@@ -250,20 +244,19 @@ clone.func.set = function (source) {
 
   var cloneValue = new Set();
   bufferWrite(source, cloneValue);
+  var sourceEntries = [];
+  source.forEach(function (value, key) {
+    sourceEntries.push([key, value]);
+  });
 
-  var _iterator2 = _createForOfIteratorHelper(source),
-      _step2;
+  for (var _i2 = 0, _sourceEntries2 = sourceEntries; _i2 < _sourceEntries2.length; _i2++) {
+    var _sourceEntries2$_i = _slicedToArray(_sourceEntries2[_i2], 2),
+        key = _sourceEntries2$_i[0],
+        value = _sourceEntries2$_i[1];
 
-  try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var value = _step2.value;
-      cloneValue.add(value);
-    }
-  } catch (err) {
-    _iterator2.e(err);
-  } finally {
-    _iterator2.f();
-  }
+    cloneValue.add(value);
+  } // IE11 no support set.keys set.entries
+
 
   return cloneValue;
 };
