@@ -302,6 +302,7 @@ You can now use the functions of the parts.js object.
   - support IE11 bug Map / WeakSet / Set isObjet true >> false
 - update isMap isWeakMap isSet
   - support IE11 false >> true
+- add canUseWeakMap canUseWeakSet
 
 ### 7.1.1
 #### 2020/07/23(Thu)

@@ -109,7 +109,8 @@ propertyNames.SYNTAX =
   'functionValue,' +
   'sc,if_,switch_,' +
   'loop,' +
-  'canUseMap, canUseSet,' +
+  'canUseMap, canUseWeakMap,' +
+  'canUseSet, canUseWeakSet,' +
   '';
 const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
@@ -414,7 +415,8 @@ export const {
   functionValue,
   sc, if_, switch_,
   loop,
-  canUseMap,  canUseSet,
+  canUseMap,  canUseWeakMap,
+  canUseSet,  canUseWeakSet,
 
   equal,  equalDeep,
   or,

@@ -301,6 +301,27 @@ canUseMap.reset = () => {
 };
 
 /**
+ * canUseWeakMap
+ */
+let _canUseWeakMapFlag;
+
+export const canUseWeakMap = () => {
+  if (isUndefined(_canUseWeakMapFlag)) {
+    try {
+      new WeakMap();
+      _canUseWeakMapFlag = true;
+    } catch (e) {
+      _canUseWeakMapFlag = false;
+    }
+  }
+  return _canUseWeakMapFlag;
+};
+
+canUseWeakMap.reset = () => {
+  _canUseWeakMapFlag = undefined;
+};
+
+/**
  * canUseSet
  */
 let _canUseSetFlag;
@@ -321,10 +342,32 @@ canUseSet.reset = () => {
   _canUseSetFlag = undefined;
 };
 
+/**
+ * canUseWeakSet
+ */
+let _canUseWeakSetFlag;
+
+export const canUseWeakSet = () => {
+  if (isUndefined(_canUseWeakSetFlag)) {
+    try {
+      new WeakSet();
+      _canUseWeakSetFlag = true;
+    } catch (e) {
+      _canUseWeakSetFlag = false;
+    }
+  }
+  return _canUseWeakSetFlag;
+};
+
+canUseWeakSet.reset = () => {
+  _canUseWeakSetFlag = undefined;
+};
+
 export default {
   assert, guard,
   functionValue,
   sc, if_, switch_,
   loop,
-  canUseMap, canUseSet,
+  canUseMap, canUseWeakMap,
+  canUseSet, canUseWeakSet,
 };

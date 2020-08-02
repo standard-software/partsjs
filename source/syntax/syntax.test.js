@@ -30,8 +30,8 @@ export const test_execute_syntax = (parts) => {
       sc,
       if_,
       switch_,
-      canUseMap,
-      canUseSet,
+      canUseMap, canUseWeakMap,
+      canUseSet, canUseWeakSet,
     } = parts.syntax;
 
     const {
@@ -769,8 +769,24 @@ export const test_execute_syntax = (parts) => {
           checkEqual(false, canUseMap());
         } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseMap());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true,  canUseMap());
         } else {
           checkEqual(true,  canUseMap());
+        }
+      });
+    };
+
+    const test_canUseWeakMap = function() {
+      it('test_canUseWeakMap', () => {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseWeakMap());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseWeakMap());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true,  canUseWeakMap());
+        } else {
+          checkEqual(true,  canUseWeakMap());
         }
       });
     };
@@ -781,8 +797,24 @@ export const test_execute_syntax = (parts) => {
           checkEqual(false, canUseSet());
         } else if (parts.platform.isGasRhino()) {
           checkEqual(false, canUseSet());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true,  canUseSet());
         } else {
           checkEqual(true,  canUseSet());
+        }
+      });
+    };
+
+    const test_canUseWeakSet = function() {
+      it('test_canUseWeakSet', () => {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, canUseWeakSet());
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(false, canUseWeakSet());
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, canUseWeakSet());
+        } else {
+          checkEqual(true,  canUseWeakSet());
         }
       });
     };
@@ -794,7 +826,9 @@ export const test_execute_syntax = (parts) => {
     test_loop();
 
     test_canUseMap();
+    test_canUseWeakMap();
     test_canUseSet();
+    test_canUseWeakSet();
   });
 };
 
