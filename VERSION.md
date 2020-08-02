@@ -2,6 +2,20 @@
 
 ## Version
 
+### 7.2.0
+#### 2020/08/02(Sun)
+- support IE11
+  - update isObject 
+    - only IE11 bugfix
+    - args Map/WeakSet/Set return true >> false
+  - update isMap isWeakMap isSet
+    - only IE11 bugfix
+    - return false >> true
+  - update equal equalDeep clone cloneDeep
+    - only IE11 bugfix
+    - support Map WeakMap Set
+- add canUseWeakMap canUseWeakSet
+
 ### 7.1.1
 #### 2020/07/23(Thu)
 - delete no use file in build folder

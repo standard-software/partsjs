@@ -42,7 +42,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '7.2.0 beta';
+var VERSION = '7.2.0';
 exports.VERSION = VERSION;
 var rootNames = {};
 var propertyNames = {};

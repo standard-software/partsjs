@@ -298,13 +298,17 @@ You can now use the functions of the parts.js object.
 
 ### 7.2.0
 #### 2020/08/02(Sun)
-- update isObject 
-  - support IE11 bug Map / WeakSet / Set isObjet true >> false
-- update isMap isWeakMap isSet
-  - support IE11 false >> true
+- support IE11
+  - update isObject 
+    - only IE11 bugfix
+    - args Map/WeakSet/Set return true >> false
+  - update isMap isWeakMap isSet
+    - only IE11 bugfix
+    - return false >> true
+  - update equal equalDeep clone cloneDeep
+    - only IE11 bugfix
+    - support Map WeakMap Set
 - add canUseWeakMap canUseWeakSet
-- update equal equalDeep clone cloneDeep
-  - support IE11 Map WeakMap Set
 
 ### 7.1.1
 #### 2020/07/23(Thu)
