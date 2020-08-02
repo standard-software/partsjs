@@ -186,9 +186,15 @@ clone.func.map = (
   }
   const cloneValue = new Map();
   bufferWrite(source, cloneValue);
-  for (const [key, value] of source.entries()) {
+
+  const sourceEntries = [];
+  source.forEach((value, key) => {
+    sourceEntries.push([key, value]);
+  });
+  for (const [key, value] of sourceEntries) {
     cloneValue.set(key, __cloneDeep(value));
   }
+  // IE11 no support map.keys map.entries
   return cloneValue;
 };
 
@@ -213,9 +219,15 @@ clone.func.set = (
   }
   const cloneValue = new Set();
   bufferWrite(source, cloneValue);
-  for (const value of source) {
+
+  const sourceEntries = [];
+  source.forEach((value, key) => {
+    sourceEntries.push([key, value]);
+  });
+  for (const [key, value] of sourceEntries) {
     cloneValue.add(value);
   }
+  // IE11 no support set.keys set.entries
   return cloneValue;
 };
 

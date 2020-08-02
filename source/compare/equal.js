@@ -170,11 +170,17 @@ equal.func.map = (
     return false;
   }
   bufferWrite(value1, value2);
-  for (const [key, value] of value1.entries()) {
+
+  const value1Entries = [];
+  value1.forEach((value, key) => {
+    value1Entries.push([key, value]);
+  });
+  for (const [key, value] of value1Entries) {
     if (__equalDeep(value, value2.get(key)) === false) {
       return false;
     }
   }
+  // IE11 no support map.keys map.entries
   return true;
 };
 
@@ -190,11 +196,17 @@ equal.func.weakMap = (
     return false;
   }
   bufferWrite(value1, value2);
-  for (const [key, value] of value1.entries()) {
+
+  const value1Entries = [];
+  value1.forEach((value, key) => {
+    value1Entries.push([key, value]);
+  });
+  for (const [key, value] of value1Entries) {
     if (__equalDeep(value, value2.get(key)) === false) {
       return false;
     }
   }
+  // IE11 no support weakmap.keys weakmap.entries
   return true;
 };
 
@@ -210,9 +222,18 @@ equal.func.set = (
     return false;
   }
   bufferWrite(value1, value2);
-  for (const v1item of value1) {
+
+  const value1Entries = [];
+  value1.forEach((value, key) => {
+    value1Entries.push([key, value]);
+  });
+  const value2Entries = [];
+  value2.forEach((value, key) => {
+    value2Entries.push([key, value]);
+  });
+  for (const [key, v1item] of value1Entries) {
     let result = false;
-    for (const v2item of value2) {
+    for (const [key, v2item] of value2Entries) {
       if (__equalDeep(v1item, v2item) === true) {
         result = true;
       }
@@ -221,6 +242,7 @@ equal.func.set = (
       return false;
     }
   }
+  // IE11 no support set.keys set.entries
   return true;
 };
 
