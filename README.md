@@ -302,6 +302,10 @@ You can now use the functions of the parts.js object.
   - wsh
     - NewProject
     - CopyFileFolder
+- add parts.wsh namespace
+  - add FileSystemObject
+  - add Shell
+  - add forceCreateFolder
 
 ### 7.2.0
 #### 2020/08/02(Sun)

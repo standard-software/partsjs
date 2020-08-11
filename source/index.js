@@ -11,6 +11,7 @@ import _string from './string/string.js';
 import _object from './object/object.js';
 import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
+import _wsh from './wsh/wsh.js';
 
 const VERSION = '7.3.0 beta';
 
@@ -277,6 +278,14 @@ propertyNames.CONSOLE_HOOK = [
 const consoleHook = {};
 _copyProperty(_consoleHook, propertyNames.CONSOLE_HOOK, consoleHook);
 
+// wsh
+propertyNames.WSH =
+  'FileSystemObject,Shell,' +
+  'forceCreateFolder,' +
+  '';
+const wsh = {};
+_copyProperty(_wsh, propertyNames.WSH, wsh);
+
 export const {
   clone, cloneDeep,
 
@@ -478,10 +487,12 @@ export {
   object,
   array,
   consoleHook,
+  wsh,
 };
 
 export const parts = {
   VERSION,
+  root,
   platform,
   type,
   test,
@@ -490,10 +501,10 @@ export const parts = {
   convert,
   number,
   string,
-  consoleHook,
   object,
   array,
-  root,
+  consoleHook,
+  wsh,
   ...rootNames,
 };
 
