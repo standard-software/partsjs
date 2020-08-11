@@ -114,7 +114,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotObjType = exports.isObjType = exports.isNotArrayType = exports.isNotObjectType = exports.isArrayType = exports.isObjectType = exports.isNotEmptyObj = exports.isNotExcept = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotException = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyObj = exports.isExcept = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isEmptyArray = exports.isEmptyObject = exports.isException = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.cloneDeep = exports.clone = void 0;
 exports.isNumArray = exports.isBoolArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotObjTypeAll = exports.isObjTypeAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotEmptyObjAll = exports.isNotExceptAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isEmptyObjAll = exports.isExceptAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = void 0;
 exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.indexOfMatchAll = exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalDeep = exports.equal = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.isNotObjTypeArray = exports.isObjTypeArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotEmptyObjArray = exports.isNotExceptArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isEmptyObjArray = exports.isExceptArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = void 0;
-exports["default"] = exports.parts = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.type = exports.platform = exports.root = exports.VERSION = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.objectToString = exports.setProp = exports.getProp = exports.inProp = exports.propCount = exports.copyProp = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = void 0;
+exports["default"] = exports.parts = exports.wsh = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.type = exports.platform = exports.root = exports.VERSION = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.objectToString = exports.setProp = exports.getProp = exports.inProp = exports.propCount = exports.copyProp = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = void 0;
 
 var _polyfill2 = _interopRequireDefault(__webpack_require__(2));
 
@@ -142,6 +142,8 @@ var _array2 = _interopRequireDefault(__webpack_require__(30));
 
 var _consoleHook2 = _interopRequireDefault(__webpack_require__(73));
 
+var _wsh2 = _interopRequireDefault(__webpack_require__(74));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -150,7 +152,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '7.2.0';
+var VERSION = '7.3.0 beta';
 exports.VERSION = VERSION;
 var rootNames = {};
 var propertyNames = {};
@@ -281,7 +283,14 @@ propertyNames.CONSOLE_HOOK = [isPrefixSafixAdd('hook', '', propertyNames._CONSOL
 var consoleHook = {};
 exports.consoleHook = consoleHook;
 
-_copyProperty(_consoleHook2["default"], propertyNames.CONSOLE_HOOK, consoleHook);
+_copyProperty(_consoleHook2["default"], propertyNames.CONSOLE_HOOK, consoleHook); // wsh
+
+
+propertyNames.WSH = 'FileSystemObject,Shell,' + 'forceCreateFolder,' + '';
+var wsh = {};
+exports.wsh = wsh;
+
+_copyProperty(_wsh2["default"], propertyNames.WSH, wsh);
 
 var clone = rootNames.clone,
     cloneDeep = rootNames.cloneDeep,
@@ -986,6 +995,7 @@ exports.clone = clone;
 
 var parts = _objectSpread({
   VERSION: VERSION,
+  root: root,
   platform: platform,
   type: type,
   test: test,
@@ -994,10 +1004,10 @@ var parts = _objectSpread({
   convert: convert,
   number: number,
   string: string,
-  consoleHook: consoleHook,
   object: object,
   array: array,
-  root: root
+  consoleHook: consoleHook,
+  wsh: wsh
 }, rootNames);
 
 exports.parts = parts;
@@ -13215,6 +13225,175 @@ var _default = {
   acceptWarn: acceptWarn,
   acceptError: acceptError,
   acceptDebug: acceptDebug
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
+
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(75));
+
+var _wshShell = _interopRequireDefault(__webpack_require__(76));
+
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(77));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var FileSystemObject = _wshFileSystemObject["default"].FileSystemObject;
+exports.FileSystemObject = FileSystemObject;
+var Shell = _wshShell["default"].Shell;
+exports.Shell = Shell;
+var forceCreateFolder = _forceCreateFolder["default"].forceCreateFolder;
+exports.forceCreateFolder = forceCreateFolder;
+
+var _default = _objectSpread(_objectSpread(_objectSpread({}, _wshFileSystemObject["default"]), _wshShell["default"]), _forceCreateFolder["default"]);
+
+exports["default"] = _default;
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.FileSystemObject = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _platform = __webpack_require__(8);
+
+var _fso;
+
+var FileSystemObject = function FileSystemObject() {
+  if (!(0, _platform.isWindowsScriptHost)()) {
+    throw new Error('wsh.FileSystemObject can be used only in wsh platform');
+  }
+
+  if (!(this instanceof FileSystemObject)) {
+    return new FileSystemObject();
+  }
+
+  if ((0, _isType.isUndefined)(_fso)) {
+    _fso = new ActiveXObject('Scripting.FileSystemObject');
+  }
+
+  return _fso;
+};
+
+exports.FileSystemObject = FileSystemObject;
+var _default = {
+  FileSystemObject: FileSystemObject
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.Shell = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _platform = __webpack_require__(8);
+
+var _shell;
+
+var Shell = function Shell() {
+  if (!(0, _platform.isWindowsScriptHost)()) {
+    throw new Error('wsh.Shell can be used only in wsh platform');
+  }
+
+  if (!(this instanceof Shell)) {
+    return new Shell();
+  }
+
+  if ((0, _isType.isUndefined)(_shell)) {
+    _shell = new ActiveXObject('WScript.Shell');
+  }
+
+  return _shell;
+};
+
+exports.Shell = Shell;
+var _default = {
+  Shell: Shell
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.forceCreateFolder = exports._forceCreateFolder = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _platform = __webpack_require__(8);
+
+var _wshFileSystemObject = __webpack_require__(75);
+
+var _forceCreateFolder = function _forceCreateFolder(folderPath) {
+  var fso = (0, _wshFileSystemObject.FileSystemObject)();
+  var parentFolderPath = fso.GetParentFolderName(folderPath);
+
+  if (!fso.FolderExists(parentFolderPath)) {
+    _forceCreateFolder(parentFolderPath);
+  }
+
+  if (!fso.FolderExists(folderPath)) {
+    fso.CreateFolder(folderPath);
+  }
+};
+
+exports._forceCreateFolder = _forceCreateFolder;
+
+var forceCreateFolder = function forceCreateFolder(folderPath) {
+  if (!(0, _platform.isWindowsScriptHost)()) {
+    throw new Error('wsh.forceCreateFolder can be used only in wsh platform');
+  }
+
+  if (!(0, _isType.isString)(folderPath)) {
+    throw new Error('forceCreateFolder args(folderPath) is not string');
+  }
+
+  return _forceCreateFolder(folderPath);
+};
+
+exports.forceCreateFolder = forceCreateFolder;
+var _default = {
+  _forceCreateFolder: _forceCreateFolder,
+  forceCreateFolder: forceCreateFolder
 };
 exports["default"] = _default;
 
