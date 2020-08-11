@@ -12,29 +12,30 @@ export const main = (parts) => {
     ],
   ];
 
-  const fso = new ActiveXObject('Scripting.FileSystemObject');
-  const shell = new ActiveXObject('WScript.Shell');
+  const fso = parts.wsh.FileSystemObject();
+  const shell = parts.wsh.Shell();
 
   const absoluteFileFolderPath = (fso, relativeFileFolderPath) => {
     return fso.GetAbsolutePathName(relativeFileFolderPath);
   };
 
-  const forceCreateFolder = (fso, folderPath) => {
-    const parentFolderPath = fso.GetParentFolderName(folderPath);
-    if (!fso.FolderExists(parentFolderPath)) {
-      forceCreateFolder(fso, parentFolderPath);
-    }
-    if (!fso.FolderExists(folderPath)) {
-      fso.CreateFolder(folderPath);
-    }
-  };
+  // const forceCreateFolder = (fso, folderPath) => {
+  //   const parentFolderPath = fso.GetParentFolderName(folderPath);
+  //   if (!fso.FolderExists(parentFolderPath)) {
+  //     forceCreateFolder(fso, parentFolderPath);
+  //   }
+  //   if (!fso.FolderExists(folderPath)) {
+  //     fso.CreateFolder(folderPath);
+  //   }
+  // };
+  const { forceCreateFolder } = parts.wsh;
 
   for (const [fromPath, toPath] of pathFileFolders) {
     const fromFullPath = absoluteFileFolderPath(fso, fromPath);
     const toFullPath = absoluteFileFolderPath(fso, toPath);
 
     if (fso.FileExists(fromPath)) {
-      forceCreateFolder(fso, fso.GetParentFolderName(toFullPath));
+      forceCreateFolder(fso.GetParentFolderName(toFullPath));
       fso.CopyFile(fromFullPath, toFullPath, true);
     } else if (fso.FolderExists(fromPath)) {
       shell.Run(

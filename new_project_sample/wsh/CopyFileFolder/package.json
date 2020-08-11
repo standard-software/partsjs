@@ -11,21 +11,18 @@
     "build:babel":        "npm run clear:build && npm run babel",
     "build:webpack":      "npm run webpack",
     "copy:release:main":  "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/main.js', './run/CopyFileFolder/lib/main.js')\"",
-    "copy:release:parts": "node -e \"require('fs').copyFileSync('./node_modules/@standard-software/parts/release/parts.js', './run/CopyFileFolder/lib/parts.js')\"",
+    "copy:release:parts": "node -e \"require('fs').copyFileSync('./release_parts/parts.js', './run/CopyFileFolder/lib/parts.js')\"",
     "copy:release":       "npm run copy:release:main && npm run copy:release:parts",
     "test:webpack:wsh":   "cd ./run/CopyFileFolder && cscript copyfilefolder.wsf",
     "start":              "npm run build:babel && npm run build:webpack && npm run copy:release && npm run test:webpack:wsh",
     "eslint":             "eslint",
     "eslint:fix":         "eslint --fix ./source/*.js ./source/*/*.js",
-
     "": ""
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@standard-software/parts": "^7.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.0",
