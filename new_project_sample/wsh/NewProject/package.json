@@ -1,0 +1,39 @@
+{
+  "name": "newproject",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "babel":              "babel --config-file ./config/babel.config.js ./source --out-dir ./build/babel_webpack/babel",
+    "webpack":            "webpack --config ./config/webpack.config.js",
+    "clear:babel":        "node -e \"require('fs-extra').removeSync('./build/babel_webpack/babel/')\"",
+    "clear:webpack":      "node -e \"require('fs-extra').removeSync('./build/babel_webpack/webpack/')\"",
+    "clear:build":        "npm run clear:babel && npm run clear:webpack",
+    "build:babel":        "npm run clear:build && npm run babel",
+    "build:webpack":      "npm run webpack",
+    "copy:release:main":  "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/main.js', './run/NewProject/lib/main.js')\"",
+    "copy:release:parts": "node -e \"require('fs').copyFileSync('./node_modules/@standard-software/parts/release/parts.js', './run/NewProject/lib/parts.js')\"",
+    "copy:release":       "npm run copy:release:main && npm run copy:release:parts",
+    "test:webpack:wsh":   "cd ./run/NewProject && cscript NewProject.wsf",
+    "start":              "npm run build:babel && npm run build:webpack && npm run copy:release && npm run test:webpack:wsh",
+    "eslint":             "eslint",
+    "eslint:fix":         "eslint --fix ./source/*.js ./source/*/*.js",
+
+    "": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@standard-software/parts": "^7.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "fs-extra": "^9.0.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
