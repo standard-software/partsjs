@@ -128,24 +128,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var main = function main(parts) {
   // console.log('parts version is ' + parts.VERSION);
   var pathFileFolders = [['..\\..\\data\\test1\\source\\file\\test1_file.txt', '..\\..\\data\\test1\\dest\\file\\test1_file.txt'], ['..\\..\\data\\test1\\source\\folder\\test1_folder', '..\\..\\data\\test1\\dest\\folder\\test1_folder']];
-  var fso = new ActiveXObject('Scripting.FileSystemObject');
-  var shell = new ActiveXObject('WScript.Shell');
+  var fso = parts.wsh.FileSystemObject();
+  var shell = parts.wsh.Shell();
 
   var absoluteFileFolderPath = function absoluteFileFolderPath(fso, relativeFileFolderPath) {
     return fso.GetAbsolutePathName(relativeFileFolderPath);
   };
 
-  var forceCreateFolder = function forceCreateFolder(fso, folderPath) {
-    var parentFolderPath = fso.GetParentFolderName(folderPath);
-
-    if (!fso.FolderExists(parentFolderPath)) {
-      forceCreateFolder(fso, parentFolderPath);
-    }
-
-    if (!fso.FolderExists(folderPath)) {
-      fso.CreateFolder(folderPath);
-    }
-  };
+  var forceCreateFolder = parts.wsh.forceCreateFolder;
 
   for (var _i = 0, _pathFileFolders = pathFileFolders; _i < _pathFileFolders.length; _i++) {
     var _pathFileFolders$_i = _slicedToArray(_pathFileFolders[_i], 2),
@@ -156,7 +146,7 @@ var main = function main(parts) {
     var toFullPath = absoluteFileFolderPath(fso, toPath);
 
     if (fso.FileExists(fromPath)) {
-      forceCreateFolder(fso, fso.GetParentFolderName(toFullPath));
+      forceCreateFolder(fso.GetParentFolderName(toFullPath));
       fso.CopyFile(fromFullPath, toFullPath, true);
     } else if (fso.FolderExists(fromPath)) {
       shell.Run('robocopy ' + fromPath + ' ' + toPath + ' /MIR /XD node_modules', 0, true);

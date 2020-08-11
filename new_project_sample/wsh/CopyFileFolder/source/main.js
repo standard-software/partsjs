@@ -19,15 +19,6 @@ export const main = (parts) => {
     return fso.GetAbsolutePathName(relativeFileFolderPath);
   };
 
-  // const forceCreateFolder = (fso, folderPath) => {
-  //   const parentFolderPath = fso.GetParentFolderName(folderPath);
-  //   if (!fso.FolderExists(parentFolderPath)) {
-  //     forceCreateFolder(fso, parentFolderPath);
-  //   }
-  //   if (!fso.FolderExists(folderPath)) {
-  //     fso.CreateFolder(folderPath);
-  //   }
-  // };
   const { forceCreateFolder } = parts.wsh;
 
   for (const [fromPath, toPath] of pathFileFolders) {
