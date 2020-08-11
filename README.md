@@ -301,6 +301,7 @@ You can now use the functions of the parts.js object.
 - add new_project_sample
   - wsh
     - NewProject
+    - CopyFileFolder
 
 ### 7.2.0
 #### 2020/08/02(Sun)

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="shift-jis" ?>
+
+<job>
+<script language="JavaScript">
+<![CDATA[
+
+  var outputMessage = '';
+  var console = {
+    log: function() {
+      var args = Array.prototype.slice.call(arguments);
+      for (var i = 0; i < args.length; i += 1) {
+        outputMessage += args[i];
+        outputMessage += ' '
+      }
+      outputMessage += '\n'
+    }
+  };
+
+  var module = {};
+]]>
+</script>
+<script language="JavaScript" src="./lib/polyfill_Object_defineProperty.js"></script>
+<script language="JavaScript" src="./lib/parts.js"></script>
+<script language="JavaScript" src="./lib/main.js"></script>
+
+<script language="JavaScript">
+<![CDATA[
+
+  CopyFileFolder.main(parts);
+
+  console.log('CopyFileFolder finish');
+
+  WScript.Echo(outputMessage);
+
+]]>
+</script>
+</job>
