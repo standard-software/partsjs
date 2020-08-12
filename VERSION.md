@@ -2,6 +2,17 @@
 
 ## Version
 
+### 7.3.0
+#### 2020/08/12(Wed)
+- add new_project_sample
+  - wsh
+    - NewProject
+    - CopyFileFolder
+- add parts.wsh namespace
+  - add FileSystemObject
+  - add Shell
+  - add forceCreateFolder
+
 ### 7.2.0
 #### 2020/08/02(Sun)
 - support IE11
