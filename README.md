@@ -298,6 +298,7 @@ You can now use the functions of the parts.js object.
 
 ### 7.4.0
 #### 2020/08/23(Sun)
+- update package.json scripts
 
 ### 7.3.0
 #### 2020/08/12(Wed)
