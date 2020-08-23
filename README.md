@@ -296,6 +296,9 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 7.4.0
+#### 2020/08/23(Sun)
+
 ### 7.3.0
 #### 2020/08/12(Wed)
 - add new_project_sample
