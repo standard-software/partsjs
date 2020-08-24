@@ -297,8 +297,11 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 7.4.0
-#### 2020/08/23(Sun)
+#### 2020/08/24(Mon)
 - update package.json scripts
+- update assert
+  - add _assert
+  - support full object parameter
 
 ### 7.3.0
 #### 2020/08/12(Wed)

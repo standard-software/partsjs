@@ -5,7 +5,7 @@ import {
 
 import {
   canUseMap,
-} from '../syntax/syntax.js';
+} from '../syntax/syntax_common.js';
 
 export const isMap = (value) => {
   if (!isObjectLike(value)) {

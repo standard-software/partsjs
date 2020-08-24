@@ -5,7 +5,6 @@ export const test_execute_syntax = (parts) => {
   describe('test_execute_syntax', () => {
 
     const {
-      checkEqual,
       isThrown,
       isThrownValue,
       isThrownException,
@@ -26,6 +25,7 @@ export const test_execute_syntax = (parts) => {
     } = parts.type;
 
     const {
+      assert,
       guard,
       sc,
       if_,
@@ -39,7 +39,104 @@ export const test_execute_syntax = (parts) => {
       or,
     } = parts.compare;
 
-    const test_guard = function() {
+    const test_assert = () => {
+      it('test_assert', () => {
+        checkEqual(false, isThrown(() => {
+          assert(true);
+        }));
+        checkEqual(false, isThrown(() => {
+          assert(true, 'test');
+        }));
+        checkEqual(true, isThrown(() => {
+          assert(false);
+        }));
+        checkEqual(true, isThrown(() => {
+          assert(false, 'test');
+        }));
+        checkEqual(true, isThrown(() => {
+          assert(false);
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === 'Error'
+            && e.message === 'assert error value:false'
+          );
+        }));
+        checkEqual(true, isThrown(() => {
+          assert(false, 'test');
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === 'Error'
+            && e.message === 'assert error value:false message:test'
+          );
+        }));
+
+        // object parameter
+        checkEqual(false, isThrown(() => {
+          assert({ value: true });
+        }));
+        checkEqual(false, isThrown(() => {
+          assert({ value: true, message: 'test' });
+        }));
+        checkEqual(true, isThrown(() => {
+          assert({ value: false });
+        }));
+        checkEqual(true, isThrown(() => {
+          assert({ value: false, message: 'test' });
+        }));
+        checkEqual(true, isThrown(() => {
+          assert({ value: false });
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === 'Error'
+            && e.message === 'assert error value:false'
+          );
+        }));
+        checkEqual(true, isThrown(() => {
+          assert({ value: false, message: 'test' });
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === 'Error'
+            && e.message === 'assert error value:false message:test'
+          );
+        }));
+
+        // exception TypeError
+        checkEqual(true, isThrown(() => {
+          assert(0);
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === (new TypeError).name
+            && e.message === 'assert args(value) is not boolean. value:0'
+          );
+        }));
+        checkEqual(true, isThrown(() => {
+          assert(0, 'abc');
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === (new TypeError).name
+            && e.message === 'assert args(value) is not boolean. value:0 message:abc'
+          );
+        }));
+
+        checkEqual(true, isThrown(() => {
+          assert(false, 100);
+        }, (e) => {
+          // console.log(e);
+          return (
+            e.name === (new TypeError).name
+            && e.message === 'assert args(message) is not string. value:false message:100'
+          );
+        }));
+      });
+    };
+
+    const test_guard = () => {
       it('test_guard', () => {
 
         var guardFunc = () => [
@@ -310,7 +407,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_if_ = function() {
+    const test_if_ = () => {
       it('test_if_', () => {
 
         // { then: value, else: value }
@@ -504,7 +601,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_switch_ = function() {
+    const test_switch_ = () => {
       it('test_switch_', () => {
         var switchResultValue1 = [
           [1, 'number 1'],
@@ -574,7 +671,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_loop = function() {
+    const test_loop = () => {
       it('test_loop', () => {
 
         let outputConsoleText = '';
@@ -763,7 +860,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_canUseMap = function() {
+    const test_canUseMap = () => {
       it('test_canUseMap', () => {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseMap());
@@ -777,7 +874,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_canUseWeakMap = function() {
+    const test_canUseWeakMap = () => {
       it('test_canUseWeakMap', () => {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseWeakMap());
@@ -791,7 +888,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_canUseSet = function() {
+    const test_canUseSet = () => {
       it('test_canUseSet', () => {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseSet());
@@ -805,7 +902,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
-    const test_canUseWeakSet = function() {
+    const test_canUseWeakSet = () => {
       it('test_canUseWeakSet', () => {
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(false, canUseWeakSet());
@@ -819,6 +916,7 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
+    test_assert();
     test_guard();
     test_sc();
     test_if_();

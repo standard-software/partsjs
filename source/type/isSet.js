@@ -5,7 +5,7 @@ import {
 
 import {
   canUseSet,
-} from '../syntax/syntax.js';
+} from '../syntax/syntax_common.js';
 
 export const isSet = (value) => {
   if (!isObjectLike(value)) {
