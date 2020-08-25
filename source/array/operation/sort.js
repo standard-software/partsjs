@@ -22,6 +22,10 @@ import {
   isObjectParameter,
 } from '../../object/isObjectParameter.js';
 
+import {
+  _Enum,
+} from '../../syntax/Enum.js';
+
 /**
  * array.operation.sort
  */
@@ -94,10 +98,7 @@ sort.orderFunc = {
   ),
 };
 
-sort.order = {
-  ascending: 'ascending',
-  descending: 'descending',
-};
+sort.order = _Enum(['ascending', 'descending']);
 
 sort.targetFunc = {
   returnValue: v => v,

@@ -306,6 +306,7 @@ You can now use the functions of the parts.js object.
   - assert.js / guard.js / functionValue.js
   - / sc.js / if_.js / switch_.js / loop.js
   - / canUseMap.js / canUseSet.js
+- add Enum.js
 
 ### 7.3.0
 #### 2020/08/12(Wed)

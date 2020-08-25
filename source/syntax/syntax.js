@@ -7,6 +7,7 @@ import switch__js from './switch_.js';
 import loop_js from './loop.js';
 import canUseMap_js from './canUseMap.js';
 import canUseSet_js from './canUseSet.js';
+import Enum_js from './Enum.js';
 
 export const {
   _assert,
@@ -45,6 +46,11 @@ export const {
   canUseSet, canUseWeakSet,
 } = canUseSet_js;
 
+export const {
+  _Enum,
+  Enum,
+} = Enum_js;
+
 export default {
   ...assert_js,
   ...guard_js,
@@ -55,4 +61,5 @@ export default {
   ...loop_js,
   ...canUseMap_js,
   ...canUseSet_js,
+  ...Enum_js,
 };

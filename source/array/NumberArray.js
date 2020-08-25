@@ -52,7 +52,7 @@ export const _NumberArray = (start, end, increment) => {
       result.push(i);
     }
   } else {
-    for (let i = start, l = end; i >= l; i += increment) {
+    for (let i = start, l = end; l <= i; i += increment) {
       result.push(i);
     }
   }

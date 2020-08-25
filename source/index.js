@@ -112,6 +112,7 @@ propertyNames.SYNTAX =
   'loop,' +
   'canUseMap, canUseWeakMap,' +
   'canUseSet, canUseWeakSet,' +
+  'Enum,' +
   '';
 const syntax = _copyProperty(_syntax, propertyNames.SYNTAX);
 _copyProperty(_syntax, propertyNames.SYNTAX, rootNames);
@@ -426,6 +427,7 @@ export const {
   loop,
   canUseMap,  canUseWeakMap,
   canUseSet,  canUseWeakSet,
+  Enum,
 
   equal,  equalDeep,
   or,

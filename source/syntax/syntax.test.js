@@ -32,6 +32,7 @@ export const test_execute_syntax = (parts) => {
       switch_,
       canUseMap, canUseWeakMap,
       canUseSet, canUseWeakSet,
+      Enum,
     } = parts.syntax;
 
     const {
@@ -916,6 +917,37 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
+    const test_Enum = () => {
+      it('test_Enum', () => {
+        checkEqual({a: 'a', b: 'b', c: 'c'}, Enum(['a', 'b', 'c']));
+        checkEqual({a: 0, b: 1, c: 2}, Enum(['a', 'b', 'c'], true));
+        checkEqual({a: 2, b: 1, c: 0}, Enum(['c', 'b', 'a'], true));
+
+        // object parameter
+        checkEqual({a: 'a', b: 'b', c: 'c'},
+          Enum({ values: ['a', 'b', 'c'] }),
+        );
+        checkEqual({a: 0, b: 1, c: 2},
+          Enum({ values: ['a', 'b', 'c'], useIndex: true }),
+        );
+        checkEqual({a: 0, b: 1, c: 2},
+          Enum(['a', 'b', 'c'], { useIndex: true }),
+        );
+
+        checkEqual({a: 'a', b: 'b', c: 'c'}, new Enum(['a', 'b', 'c']));
+        checkEqual({a: 0, b: 1, c: 2}, new Enum(['a', 'b', 'c'], true));
+        checkEqual({a: 'a', b: 'b', c: 'c'},
+          new Enum({ values: ['a', 'b', 'c'] }),
+        );
+        checkEqual({a: 0, b: 1, c: 2},
+          new Enum({ values: ['a', 'b', 'c'], useIndex: true }),
+        );
+        checkEqual({a: 0, b: 1, c: 2},
+          new Enum(['a', 'b', 'c'], { useIndex: true }),
+        );
+      });
+    };
+
     test_assert();
     test_guard();
     test_sc();
@@ -927,6 +959,8 @@ export const test_execute_syntax = (parts) => {
     test_canUseWeakMap();
     test_canUseSet();
     test_canUseWeakSet();
+
+    test_Enum();
   });
 };
 
