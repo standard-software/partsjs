@@ -307,6 +307,7 @@ You can now use the functions of the parts.js object.
   - / sc.js / if_.js / switch_.js / loop.js
   - / canUseMap.js / canUseSet.js
 - add Enum.js
+- update checkEqual log output object
 
 ### 7.3.0
 #### 2020/08/12(Wed)

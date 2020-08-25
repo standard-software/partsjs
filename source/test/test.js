@@ -82,6 +82,16 @@ export const it = (text, func) => {
 
 export const test = it;
 
+const outputValue = (value) => {
+  if (isString(value)) {
+    return `'${value}'`;
+  }
+  if (!isWindowsScriptHost() && isObject(value)) {
+    return JSON.stringify(value);
+  }
+  return String(value);
+};
+
 export const checkCompare = (compareFunc, a, b, message = '') => {
   if (!isString(message)) {
     throw new TypeError('checkEqual args message is not string');
@@ -103,8 +113,8 @@ export const checkCompare = (compareFunc, a, b, message = '') => {
         ? ''
         : `${indent}  Message: ${message}\n`) +
     `${indent}  A !== B\n` +
-    `${indent}  A = ${isString(a) ? "'" + a + "'" : String(a)}\n` +
-    `${indent}  B = ${isString(b) ? "'" + b + "'" : String(b)}`;
+    `${indent}  A = ${outputValue(a)}\n` +
+    `${indent}  B = ${outputValue(b)}`;
   console.log(output);
   return false;
 };
