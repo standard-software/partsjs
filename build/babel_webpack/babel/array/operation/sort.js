@@ -13,6 +13,8 @@ var _or2 = require("../../compare/or.js");
 
 var _isObjectParameter = require("../../object/isObjectParameter.js");
 
+var _Enum2 = require("../../syntax/Enum.js");
+
 /**
  * array.operation.sort
  */
@@ -81,10 +83,7 @@ sort.orderFunc = {
     return a > b ? -1 : a < b ? 1 : 0;
   }
 };
-sort.order = {
-  ascending: 'ascending',
-  descending: 'descending'
-};
+sort.order = (0, _Enum2._Enum)(['ascending', 'descending']);
 sort.targetFunc = {
   returnValue: function returnValue(v) {
     return v;

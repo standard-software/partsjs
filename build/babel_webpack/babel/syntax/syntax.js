@@ -3,438 +3,65 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports._loopBase = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = void 0;
+exports["default"] = exports.Enum = exports._Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports._assert = void 0;
 
-var _type = require("../type/type.js");
+var _assert2 = _interopRequireDefault(require("./assert.js"));
 
-var _isObjectParameter = require("../object/isObjectParameter.js");
+var _guard = _interopRequireDefault(require("./guard.js"));
 
-var _IntegerArray2 = require("../array/IntegerArray.js");
+var _functionValue = _interopRequireDefault(require("./functionValue.js"));
 
-var _objectToKeyValueArray = require("../object/objectToKeyValueArray.js");
+var _sc = _interopRequireDefault(require("./sc.js"));
 
-/**
- * assert
- */
-var assert = function assert(value) {
-  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+var _if_ = _interopRequireDefault(require("./if_.js"));
 
-  if (!(0, _type.isBoolean)(value)) {
-    throw new TypeError('assert args(value) is not boolean|message:' + "|message:".concat(message));
-  }
+var _switch_ = _interopRequireDefault(require("./switch_.js"));
 
-  if (!(0, _type.isString)(message)) {
-    throw new TypeError('assert args(message) is not string|message:' + "|message:".concat(message));
-  }
+var _loop = _interopRequireDefault(require("./loop.js"));
 
-  if (!value) {
-    throw new Error("assert error|message:".concat(message));
-  }
-};
-/**
- * guard
- */
+var _canUseMap = _interopRequireDefault(require("./canUseMap.js"));
 
+var _canUseSet = _interopRequireDefault(require("./canUseSet.js"));
 
+var _Enum2 = _interopRequireDefault(require("./Enum.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _assert = _assert2["default"]._assert,
+    assert = _assert2["default"].assert;
 exports.assert = assert;
-var guard_status = true;
-var guard_message;
-
-var guard = function guard(guardFunc, runFunc) {
-  guard_message = '';
-
-  if (guard_status === false) {
-    return false;
-  }
-
-  if (!(0, _type.isFunction)(guardFunc)) {
-    throw new TypeError('guard args(guardFunc) is not function');
-  }
-
-  var result = guardFunc();
-
-  if (!(0, _type.isArray)(result)) {
-    throw new TypeError('guard args(guardFunc result) is not array');
-  }
-
-  for (var i = 0; i < result.length; i += 1) {
-    // support for wsh last comma in Array. [a,b,]
-    if (i === result.length - 1 && (0, _type.isUndefined)(result[i])) {
-      continue;
-    }
-
-    var resultValue = undefined;
-    var message = '';
-
-    if ((0, _type.isArray)(result[i])) {
-      if (!(1 <= result[i].length)) {
-        throw new TypeError('guard args(guardFunc resultArray element) is not array.length >= 1');
-      }
-
-      resultValue = result[i][0];
-
-      if (2 <= result[i].length) {
-        message = result[i][1];
-      }
-    } else {
-      resultValue = result[i];
-    }
-
-    resultValue = functionValue(resultValue);
-
-    if (!(0, _type.isBoolean)(resultValue)) {
-      throw new TypeError('guard args(guardFunc resultArray element value) is not boolean');
-    }
-
-    if (resultValue === false) {
-      guard_message = message;
-
-      if (!(0, _type.isUndefined)(runFunc)) {
-        if (!(0, _type.isFunction)(runFunc)) {
-          throw new TypeError('guard args(runFunc) is not function');
-        }
-
-        runFunc();
-      }
-
-      return true;
-    }
-  }
-
-  return false;
-};
-
+exports._assert = _assert;
+var guard = _guard["default"].guard;
 exports.guard = guard;
-
-guard.message = function () {
-  return guard_message;
-};
-
-guard.status = function (value) {
-  return guard_status = value;
-};
-
-guard.on = function () {
-  guard_status = true;
-};
-
-guard.off = function () {
-  guard_status = false;
-};
-/**
- * function Value
- */
-
-
-var functionValue = function functionValue(value) {
-  if ((0, _type.isFunction)(value)) {
-    return value();
-  } else {
-    return value;
-  }
-};
-/**
- * sc (second call)
- */
-
-
+var functionValue = _functionValue["default"].functionValue;
 exports.functionValue = functionValue;
-
-var sc = function sc(argsFirst, func) {
-  for (var _len = arguments.length, argsRest = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    argsRest[_key - 2] = arguments[_key];
-  }
-
-  return func.apply(void 0, [argsFirst].concat(argsRest));
-};
-/**
- * if_
- */
-
-
+var sc = _sc["default"].sc;
 exports.sc = sc;
-
-var if_ = function if_(condition) {
-  if (!(0, _type.isBoolean)(condition)) {
-    throw new TypeError('if_ args(condition) is not boolean');
-  }
-
-  var returnFunc = function returnFunc(then_, else_) {
-    if ((0, _isObjectParameter.isObjectParameter)(then_, '', 'then, else', 1)) {
-      var _then_ = then_;
-      then_ = _then_.then;
-      else_ = _then_["else"];
-    }
-
-    return condition ? functionValue(then_) : functionValue(else_);
-  };
-
-  if (condition) {
-    returnFunc.then = function (value) {
-      return {
-        "else": function _else() {
-          return functionValue(value);
-        }
-      };
-    };
-
-    returnFunc["else"] = function () {
-      return {
-        then: function then(value) {
-          return functionValue(value);
-        }
-      };
-    };
-  } else {
-    returnFunc.then = function () {
-      return {
-        "else": function _else(value) {
-          return functionValue(value);
-        }
-      };
-    };
-
-    returnFunc["else"] = function (value) {
-      return {
-        then: function then() {
-          return functionValue(value);
-        }
-      };
-    };
-  }
-
-  return returnFunc;
-};
-/**
- * switch_
- */
-
-
+var if_ = _if_["default"].if_;
 exports.if_ = if_;
-
-var switch_ = function switch_(expression) {
-  return function (args) {
-    if (!(0, _type.isArray)(args)) {
-      throw new TypeError('switch_() args is not array');
-    }
-
-    for (var i = 0; i < args.length; i += 1) {
-      // support for wsh last comma in Array. [a,b,]
-      if (i === args.length - 1 && (0, _type.isUndefined)(args[i])) {
-        continue;
-      }
-
-      if (!(0, _type.isArray)(args[i])) {
-        throw new TypeError('switch_() args is not array in array');
-      }
-    }
-
-    for (var _i = 0; _i < args.length; _i += 1) {
-      // support for wsh last comma in Array. [a,b,]
-      if (_i === args.length - 1 && (0, _type.isUndefined)(args[_i])) {
-        continue;
-      }
-
-      if (args[_i].length === 0) {
-        return undefined;
-      }
-
-      if (args[_i].length === 1) {
-        return functionValue(args[_i][0]);
-      }
-
-      if (args[_i][0] === expression) {
-        return functionValue(args[_i][1]);
-      }
-    }
-
-    return undefined;
-  };
-};
-/**
- * loop
- */
-
-
+var switch_ = _switch_["default"].switch_;
 exports.switch_ = switch_;
-
-var _loopBase = function _loopBase(loopArray) {
-  return function (func) {
-    if (!(0, _type.isFunction)(func)) {
-      throw new TypeError('loop()(func) func is not function');
-    }
-
-    for (var i = 0, l = loopArray.length; i < l; i += 1) {
-      var element = loopArray[i];
-      var index = i;
-      var array = loopArray;
-      var loopFirst = i === 0;
-      var loopLast = i === loopArray.length - 1;
-      var result = func(element, index, array, loopFirst, loopLast);
-
-      if (!(0, _type.isUndefined)(result) && result["break"] === true) {
-        return result;
-      }
-    }
-
-    return {};
-  };
-};
-
-exports._loopBase = _loopBase;
-
-var loop = function loop(start, end, increment) {
-  if ((0, _isObjectParameter.isObjectParameter)(start, 'count')) {
-    var _start = start;
-    start = _start.count;
-    end = undefined;
-    increment = undefined;
-  } else if ((0, _isObjectParameter.isObjectParameter)(start, 'start, end', 'increment')) {
-    var _start2 = start;
-    start = _start2.start;
-    end = _start2.end;
-    increment = _start2.increment;
-  } else if ((0, _isObjectParameter.isObjectParameter)(end, 'end', 'increment')) {
-    var _end = end;
-    end = _end.end;
-    increment = _end.increment;
-  } else if ((0, _isObjectParameter.isObjectParameter)(increment, 'increment')) {
-    var _increment = increment;
-    increment = _increment.increment;
-  } else if ((0, _type.isObject)(start)) {
-    return _loopBase((0, _objectToKeyValueArray.objectToKeyValueArray)(start));
-  } else if ((0, _type.isArray)(start)) {
-    return _loopBase(start);
-  }
-
-  if (!(0, _type.isInteger)(start)) {
-    throw new TypeError('loop args(start) is not number');
-  }
-
-  if (!(0, _type.isUndefined)(end) && !(0, _type.isInteger)(end)) {
-    throw new TypeError('loop args(end) is not number');
-  }
-
-  if (!(0, _type.isUndefined)(increment) && !(0, _type.isInteger)(increment)) {
-    throw new TypeError('loop args(increment) is not number');
-  }
-
-  return _loopBase((0, _IntegerArray2._IntegerArray)(start, end, increment));
-};
-/**
- * canUseMap
- */
-
-
+var loop = _loop["default"].loop;
 exports.loop = loop;
-
-var _canUseMapFlag;
-
-var canUseMap = function canUseMap() {
-  if ((0, _type.isUndefined)(_canUseMapFlag)) {
-    try {
-      new Map();
-      _canUseMapFlag = true;
-    } catch (e) {
-      _canUseMapFlag = false;
-    }
-  }
-
-  return _canUseMapFlag;
-};
-
-exports.canUseMap = canUseMap;
-
-canUseMap.reset = function () {
-  _canUseMapFlag = undefined;
-};
-/**
- * canUseWeakMap
- */
-
-
-var _canUseWeakMapFlag;
-
-var canUseWeakMap = function canUseWeakMap() {
-  if ((0, _type.isUndefined)(_canUseWeakMapFlag)) {
-    try {
-      new WeakMap();
-      _canUseWeakMapFlag = true;
-    } catch (e) {
-      _canUseWeakMapFlag = false;
-    }
-  }
-
-  return _canUseWeakMapFlag;
-};
-
+var canUseMap = _canUseMap["default"].canUseMap,
+    canUseWeakMap = _canUseMap["default"].canUseWeakMap;
 exports.canUseWeakMap = canUseWeakMap;
-
-canUseWeakMap.reset = function () {
-  _canUseWeakMapFlag = undefined;
-};
-/**
- * canUseSet
- */
-
-
-var _canUseSetFlag;
-
-var canUseSet = function canUseSet() {
-  if ((0, _type.isUndefined)(_canUseSetFlag)) {
-    try {
-      new Set();
-      _canUseSetFlag = true;
-    } catch (e) {
-      _canUseSetFlag = false;
-    }
-  }
-
-  return _canUseSetFlag;
-};
-
-exports.canUseSet = canUseSet;
-
-canUseSet.reset = function () {
-  _canUseSetFlag = undefined;
-};
-/**
- * canUseWeakSet
- */
-
-
-var _canUseWeakSetFlag;
-
-var canUseWeakSet = function canUseWeakSet() {
-  if ((0, _type.isUndefined)(_canUseWeakSetFlag)) {
-    try {
-      new WeakSet();
-      _canUseWeakSetFlag = true;
-    } catch (e) {
-      _canUseWeakSetFlag = false;
-    }
-  }
-
-  return _canUseWeakSetFlag;
-};
-
+exports.canUseMap = canUseMap;
+var canUseSet = _canUseSet["default"].canUseSet,
+    canUseWeakSet = _canUseSet["default"].canUseWeakSet;
 exports.canUseWeakSet = canUseWeakSet;
+exports.canUseSet = canUseSet;
+var _Enum = _Enum2["default"]._Enum,
+    Enum = _Enum2["default"].Enum;
+exports.Enum = Enum;
+exports._Enum = _Enum;
 
-canUseWeakSet.reset = function () {
-  _canUseWeakSetFlag = undefined;
-};
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _assert2["default"]), _guard["default"]), _functionValue["default"]), _sc["default"]), _if_["default"]), _switch_["default"]), _loop["default"]), _canUseMap["default"]), _canUseSet["default"]), _Enum2["default"]);
 
-var _default = {
-  assert: assert,
-  guard: guard,
-  functionValue: functionValue,
-  sc: sc,
-  if_: if_,
-  switch_: switch_,
-  loop: loop,
-  canUseMap: canUseMap,
-  canUseWeakMap: canUseWeakMap,
-  canUseSet: canUseSet,
-  canUseWeakSet: canUseWeakSet
-};
 exports["default"] = _default;

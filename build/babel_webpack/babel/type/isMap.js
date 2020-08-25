@@ -7,14 +7,14 @@ exports["default"] = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap
 
 var _isType = require("../type/isType.js");
 
-var _syntax = require("../syntax/syntax.js");
+var _canUseMap = require("../syntax/canUseMap.js");
 
 var isMap = function isMap(value) {
   if (!(0, _isType.isObjectLike)(value)) {
     return false;
   }
 
-  if (!(0, _syntax.canUseMap)()) {
+  if (!(0, _canUseMap.canUseMap)()) {
     return false;
   }
 
@@ -32,7 +32,7 @@ var isWeakMap = function isWeakMap(value) {
     return false;
   }
 
-  if (!(0, _syntax.canUseMap)()) {
+  if (!(0, _canUseMap.canUseMap)()) {
     return false;
   }
 

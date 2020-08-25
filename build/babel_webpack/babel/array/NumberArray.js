@@ -48,7 +48,7 @@ var _NumberArray = function _NumberArray(start, end, increment) {
       result.push(i);
     }
   } else {
-    for (var _i = start, _l = end; _i >= _l; _i += increment) {
+    for (var _i = start, _l = end; _l <= _i; _i += increment) {
       result.push(_i);
     }
   }

@@ -162,7 +162,7 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [364, 18, 2, 252, 11, 11, 22, 29, 7, 37, 17, 37, 32];
+        var countArray = [365, 18, 2, 252, 12, 11, 22, 29, 7, 37, 17, 37, 32];
 
         var propertyCountForParts = function propertyCountForParts(parts) {
           var result = propertyCount(parts);
@@ -2586,7 +2586,6 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       expect = _parts$test.expect;
   describe('test_execute_syntax', function () {
     var _parts$test2 = parts.test,
-        checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown,
         isThrownValue = _parts$test2.isThrownValue,
         isThrownException = _parts$test2.isThrownException,
@@ -2617,6 +2616,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         isRegExpAll = _parts$type.isRegExpAll,
         isExceptionAll = _parts$type.isExceptionAll;
     var _parts$syntax = parts.syntax,
+        assert = _parts$syntax.assert,
         guard = _parts$syntax.guard,
         sc = _parts$syntax.sc,
         if_ = _parts$syntax.if_,
@@ -2624,10 +2624,99 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         canUseMap = _parts$syntax.canUseMap,
         canUseWeakMap = _parts$syntax.canUseWeakMap,
         canUseSet = _parts$syntax.canUseSet,
-        canUseWeakSet = _parts$syntax.canUseWeakSet;
+        canUseWeakSet = _parts$syntax.canUseWeakSet,
+        Enum = _parts$syntax.Enum;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
+
+    var test_assert = function test_assert() {
+      it('test_assert', function () {
+        checkEqual(false, isThrown(function () {
+          assert(true);
+        }));
+        checkEqual(false, isThrown(function () {
+          assert(true, 'test');
+        }));
+        checkEqual(true, isThrown(function () {
+          assert(false);
+        }));
+        checkEqual(true, isThrown(function () {
+          assert(false, 'test');
+        }));
+        checkEqual(true, isThrown(function () {
+          assert(false);
+        }, function (e) {
+          // console.log(e);
+          return e.name === 'Error' && e.message === 'assert error value:false';
+        }));
+        checkEqual(true, isThrown(function () {
+          assert(false, 'test');
+        }, function (e) {
+          // console.log(e);
+          return e.name === 'Error' && e.message === 'assert error value:false message:test';
+        })); // object parameter
+
+        checkEqual(false, isThrown(function () {
+          assert({
+            value: true
+          });
+        }));
+        checkEqual(false, isThrown(function () {
+          assert({
+            value: true,
+            message: 'test'
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          assert({
+            value: false
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          assert({
+            value: false,
+            message: 'test'
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          assert({
+            value: false
+          });
+        }, function (e) {
+          // console.log(e);
+          return e.name === 'Error' && e.message === 'assert error value:false';
+        }));
+        checkEqual(true, isThrown(function () {
+          assert({
+            value: false,
+            message: 'test'
+          });
+        }, function (e) {
+          // console.log(e);
+          return e.name === 'Error' && e.message === 'assert error value:false message:test';
+        })); // exception TypeError
+
+        checkEqual(true, isThrown(function () {
+          assert(0);
+        }, function (e) {
+          // console.log(e);
+          return e.name === new TypeError().name && e.message === 'assert args(value) is not boolean. value:0';
+        }));
+        checkEqual(true, isThrown(function () {
+          assert(0, 'abc');
+        }, function (e) {
+          // console.log(e);
+          return e.name === new TypeError().name && e.message === 'assert args(value) is not boolean. value:0 message:abc';
+        }));
+        checkEqual(true, isThrown(function () {
+          assert(false, 100);
+        }, function (e) {
+          // console.log(e);
+          return e.name === new TypeError().name && e.message === 'assert args(message) is not string. value:false message:100';
+        }));
+      });
+    };
 
     var test_guard = function test_guard() {
       it('test_guard', function () {
@@ -3400,6 +3489,82 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_Enum = function test_Enum() {
+      it('test_Enum', function () {
+        checkEqual({
+          a: 'a',
+          b: 'b',
+          c: 'c'
+        }, Enum(['a', 'b', 'c']));
+        checkEqual({
+          a: 0,
+          b: 1,
+          c: 2
+        }, Enum(['a', 'b', 'c'], true));
+        checkEqual({
+          a: 2,
+          b: 1,
+          c: 0
+        }, Enum(['c', 'b', 'a'], true)); // object parameter
+
+        checkEqual({
+          a: 'a',
+          b: 'b',
+          c: 'c'
+        }, Enum({
+          values: ['a', 'b', 'c']
+        }));
+        checkEqual({
+          a: 0,
+          b: 1,
+          c: 2
+        }, Enum({
+          values: ['a', 'b', 'c'],
+          useIndex: true
+        }));
+        checkEqual({
+          a: 0,
+          b: 1,
+          c: 2
+        }, Enum(['a', 'b', 'c'], {
+          useIndex: true
+        }));
+        checkEqual({
+          a: 'a',
+          b: 'b',
+          c: 'c'
+        }, new Enum(['a', 'b', 'c']));
+        checkEqual({
+          a: 0,
+          b: 1,
+          c: 2
+        }, new Enum(['a', 'b', 'c'], true));
+        checkEqual({
+          a: 'a',
+          b: 'b',
+          c: 'c'
+        }, new Enum({
+          values: ['a', 'b', 'c']
+        }));
+        checkEqual({
+          a: 0,
+          b: 1,
+          c: 2
+        }, new Enum({
+          values: ['a', 'b', 'c'],
+          useIndex: true
+        }));
+        checkEqual({
+          a: 0,
+          b: 1,
+          c: 2
+        }, new Enum(['a', 'b', 'c'], {
+          useIndex: true
+        }));
+      });
+    };
+
+    test_assert();
     test_guard();
     test_sc();
     test_if_();
@@ -3409,6 +3574,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_canUseWeakMap();
     test_canUseSet();
     test_canUseWeakSet();
+    test_Enum();
   });
 };
 

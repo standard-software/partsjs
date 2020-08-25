@@ -7,14 +7,14 @@ exports["default"] = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet
 
 var _isType = require("../type/isType.js");
 
-var _syntax = require("../syntax/syntax.js");
+var _canUseSet = require("../syntax/canUseSet.js");
 
 var isSet = function isSet(value) {
   if (!(0, _isType.isObjectLike)(value)) {
     return false;
   }
 
-  if (!(0, _syntax.canUseSet)()) {
+  if (!(0, _canUseSet.canUseSet)()) {
     return false;
   }
 

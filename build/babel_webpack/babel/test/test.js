@@ -77,6 +77,18 @@ exports.it = it;
 var test = it;
 exports.test = test;
 
+var outputValue = function outputValue(value) {
+  if ((0, _type.isString)(value)) {
+    return "'".concat(value, "'");
+  }
+
+  if (!(0, _platform.isWindowsScriptHost)() && (0, _type.isObject)(value)) {
+    return JSON.stringify(value);
+  }
+
+  return String(value);
+};
+
 var checkCompare = function checkCompare(compareFunc, a, b) {
   var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
@@ -94,7 +106,7 @@ var checkCompare = function checkCompare(compareFunc, a, b) {
   var output = (0, _array._map)(testFrame.describeArray, function (desc, i) {
     return (0, _string._repeat)('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
-  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat((0, _type.isString)(a) ? "'" + a + "'" : String(a), "\n") + "".concat(indent, "  B = ").concat((0, _type.isString)(b) ? "'" + b + "'" : String(b));
+  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(outputValue(a), "\n") + "".concat(indent, "  B = ").concat(outputValue(b));
   console.log(output);
   return false;
 };
