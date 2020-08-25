@@ -2,6 +2,19 @@
 
 ## Version
 
+### 7.4.0
+#### 2020/08/25(Tue)
+- update package.json scripts
+- update assert
+  - add _assert
+  - support full object parameter
+- add file from syntax.js
+  - assert.js / guard.js / functionValue.js
+  - / sc.js / if_.js / switch_.js / loop.js
+  - / canUseMap.js / canUseSet.js
+- add Enum.js
+- update checkEqual log output object
+
 ### 7.3.0
 #### 2020/08/12(Wed)
 - add new_project_sample

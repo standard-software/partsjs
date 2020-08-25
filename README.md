@@ -334,32 +334,5 @@ You can now use the functions of the parts.js object.
     - support Map WeakMap Set
 - add canUseWeakMap canUseWeakSet
 
-### 7.1.1
-#### 2020/07/23(Thu)
-- delete no use file in build folder
-- update package.json scripts
-  - clear build folder
-
-### 7.1.0
-#### 2020/07/23(Thu)
-- update sort
-  - sort.targetFunc orderFunc
-- update equal
-  - equalFuncion >> equal.func
-  - delete equalFunction.js
-- update clone
-  - cloneFuncion >> clone.func
-  - delete cloneFunction.js
-- npm update
-  - babel / eslint / webpack-cli
-
-### 7.0.0
-#### 2020/07/22(Wed)
-- Revive support wsh
-  - add /test/wsh/test.wsf /run_check/wsh/index.wsf
-  - delete export * from
-  - add polyfill.js polyfill_Object_defineProperty.js
-- compare_common.js >> or.js
-
 ### More Info
 [VERSION.md](./VERSION.md)
