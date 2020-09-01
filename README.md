@@ -297,6 +297,8 @@ You can now use the functions of the parts.js object.
 #### 2020/08/31(Mon)
 - update platform.name / browserName
   - use cash var
+- update canUse Map/WeakMap/Set/Weak
+- add _global.js
 
 ### 7.4.0
 #### 2020/08/25(Tue)

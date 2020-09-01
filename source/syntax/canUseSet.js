@@ -5,46 +5,22 @@ import {
   isException,
 } from '../type/type.js';
 
+import {
+  _global,
+} from '../root/_global.js';
+
 /**
  * canUseSet
  */
-let _canUseSetFlag;
-
 export const canUseSet = () => {
-  if (isUndefined(_canUseSetFlag)) {
-    try {
-      new Set();
-      _canUseSetFlag = true;
-    } catch (e) {
-      _canUseSetFlag = false;
-    }
-  }
-  return _canUseSetFlag;
-};
-
-canUseSet.reset = () => {
-  _canUseSetFlag = undefined;
+  return 'Set' in _global;
 };
 
 /**
  * canUseWeakSet
  */
-let _canUseWeakSetFlag;
-
 export const canUseWeakSet = () => {
-  if (isUndefined(_canUseWeakSetFlag)) {
-    try {
-      new WeakSet();
-      _canUseWeakSetFlag = true;
-    } catch (e) {
-      _canUseWeakSetFlag = false;
-    }
-  }
-  return _canUseWeakSetFlag;
-};
-
-canUseWeakSet.reset = () => {
-  _canUseWeakSetFlag = undefined;
+  return 'WeakSet' in _global;
 };
 
 export default {
