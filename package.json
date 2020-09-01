@@ -27,6 +27,7 @@
     "eslint":             "eslint",
     "eslint:fix":         "eslint --fix ./source/*.js ./source/*/*.js",
     "jest":               "jest",
+    "jest:watch":         "jest --watchAll",
     "": ""
   },
   "repository": {

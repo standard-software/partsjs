@@ -299,6 +299,8 @@ You can now use the functions of the parts.js object.
   - use cash var
 - update canUse Map/WeakMap/Set/Weak
 - add _global.js
+- update package.json
+  - scripts jest:watch
 
 ### 7.4.0
 #### 2020/08/25(Tue)
