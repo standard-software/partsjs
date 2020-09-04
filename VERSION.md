@@ -2,6 +2,32 @@
 
 ## Version
 
+### 7.5.0
+#### 2020/09/04(Fri)
+- update platform.name / browserName
+  - use cash var
+- update canUse Map/WeakMap/Set/Weak
+- add _global.js
+- update package.json
+  - scripts jest:watch
+- add _hasOwn.js / hasOwn.js from has.js
+- rename objectToKeyValueArray.js >> objectEntries.js
+- add objectKeys.js / objectValues.js
+- update Enum args(values) check string array
+- update objectLike ErrorMessage
+- update inProperty Error Check
+- add fixProperty.js
+- update sort use objectValues
+- support full object parameter
+  - update array.deleteFirst / Last
+    - length default 1
+  - update array.deleteLength
+  - update string.deleteFirst / Last
+  - update string.deleteLength
+  - update array.isFirst / Last
+    - support args function
+- add split.js
+
 ### 7.4.0
 #### 2020/08/25(Tue)
 - update package.json scripts

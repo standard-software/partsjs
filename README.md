@@ -301,28 +301,22 @@ You can now use the functions of the parts.js object.
 - add _global.js
 - update package.json
   - scripts jest:watch
-- add file from has.js
-  - _hasOwn.js / hasOwn.js
+- add _hasOwn.js / hasOwn.js from has.js
 - rename objectToKeyValueArray.js >> objectEntries.js
 - add objectKeys.js / objectValues.js
-  - add testCode
 - update Enum args(values) check string array
 - update objectLike ErrorMessage
 - update inProperty Error Check
 - add fixProperty.js
 - update sort use objectValues
-- update array.deleteFirst / Last
-  - support full object parameter
-  - length default 1
-- update array.deleteLength
-  - support full object parameter
-- update string.deleteFirst / Last
-  - support full object parameter
-- update string.deleteLength
-  - support full object parameter
-- update array.isFirst / Last
-  - support args function
-  - support full object parameter
+- support full object parameter
+  - update array.deleteFirst / Last
+    - length default 1
+  - update array.deleteLength
+  - update string.deleteFirst / Last
+  - update string.deleteLength
+  - update array.isFirst / Last
+    - support args function
 - add split.js
 
 ### 7.4.0
