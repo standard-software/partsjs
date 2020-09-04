@@ -10,7 +10,7 @@ export const test_execute_object = (parts) => {
     } = parts.test;
 
     const {
-      copyProperty, inProperty,
+      copyProperty, inProperty, fixProperty,
       propertyCount,
       getProperty, setProperty,
       isEmptyObjectAll,
@@ -248,6 +248,11 @@ export const test_execute_object = (parts) => {
 
         var sourceObject = new First();
 
+        checkEqual('1', sourceObject.a);
+        checkEqual('2', sourceObject.b);
+        checkEqual('3', sourceObject.c);
+        checkEqual('4', sourceObject.d);
+
         checkEqual(false, inProperty(sourceObject, '' ));
         checkEqual(true,  inProperty(sourceObject, 'a' ));
         checkEqual(true,  inProperty(sourceObject, 'b' ));
@@ -320,6 +325,181 @@ export const test_execute_object = (parts) => {
         checkEqual(true,
           inProperty(
             sourceObject, 'b,c', { hasOwn: false },
+          ),
+        );
+
+      });
+    };
+
+    const test_fixProperty = () => {
+      it('test_fixProperty', () => {
+
+        var sourceObject = {
+          a: '1', b: '2',
+        };
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(false, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(false, fixProperty(sourceObject, 'd'));
+
+        checkEqual(true,  fixProperty(sourceObject, 'a,b'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c'));
+        checkEqual(true,  fixProperty(sourceObject, 'b,a'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d'));
+
+        checkEqual(true,  fixProperty(sourceObject, 'a,b,'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c,'));
+        checkEqual(true,  fixProperty(sourceObject, 'b,a,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d,'));
+
+        // other object function
+        checkEqual(false, fixProperty(test_fixProperty, 'constructor'));
+
+        // array
+        checkEqual(false,  fixProperty(sourceObject, ['a']));
+        checkEqual(true,  fixProperty(sourceObject, ['a', 'b']));
+        checkEqual(false, fixProperty(sourceObject, ['a', 'b', 'c']));
+
+        // Object Named Parameter
+        checkEqual(true,
+          fixProperty({
+            object: sourceObject,
+            propertyNames: 'b,a',
+          }),
+        );
+        checkEqual(false,
+          fixProperty({
+            object: sourceObject,
+            propertyNames: 'd',
+          }),
+        );
+        checkEqual(true,
+          fixProperty({
+            object: sourceObject,
+            propertyNames: ['b', 'a'],
+          }),
+        );
+        checkEqual(false,
+          fixProperty({
+            object: sourceObject,
+            propertyNames: ['d'],
+          }),
+        );
+
+        // exception
+        checkEqual(false, isThrown(() => {
+          fixProperty({}, 'a');
+        }));
+
+        checkEqual(true, isThrown(() => {
+          fixProperty(1, 'a');
+        }));
+
+        checkEqual(true, isThrown(() => {
+          fixProperty({}, 1);
+        }));
+
+        checkEqual(false, isThrown(() => {
+          fixProperty({}, ['a']);
+        }));
+
+        checkEqual(true, isThrown(() => {
+          fixProperty({}, [1]);
+        }));
+
+        // property exist value undefined
+        var sourceObject = {
+          a: '1', b: undefined,
+        };
+        testCounter();
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(false, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(true,  fixProperty(sourceObject, 'a,b'));
+
+        var sourceObject = {
+          a: '1',
+        };
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(true,  fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(false, fixProperty(sourceObject, 'a,b'));
+
+        // hasOwn
+        function First() {
+          this.a = '1';
+          this.b = '2';
+        }
+        function Second() {
+          this.c = '3';
+        }
+        First.prototype = new Second();
+        Second.prototype.d = '4';
+
+        var sourceObject = new First();
+
+        testCounter();
+        checkEqual('1', sourceObject.a);
+        checkEqual('2', sourceObject.b);
+        checkEqual('3', sourceObject.c);
+        checkEqual('4', sourceObject.d);
+
+        checkEqual(false, fixProperty(sourceObject, '' ));
+        checkEqual(false, fixProperty(sourceObject, 'a' ));
+        checkEqual(false, fixProperty(sourceObject, 'b' ));
+        checkEqual(false, fixProperty(sourceObject, 'c' ));
+        checkEqual(false, fixProperty(sourceObject, 'd' ));
+
+        checkEqual(true,  fixProperty(sourceObject, 'a,b' ));
+        checkEqual(false, fixProperty(sourceObject, 'b,c' ));
+        checkEqual(false, fixProperty(sourceObject, 'a,c' ));
+        checkEqual(true,  fixProperty(sourceObject, 'b,a' ));
+        checkEqual(false, fixProperty(sourceObject, 'a,d' ));
+
+        testCounter();
+        checkEqual(true,  fixProperty(sourceObject, 'a,b,' ));
+        checkEqual(false, fixProperty(sourceObject, 'b,c,' ));
+        checkEqual(false, fixProperty(sourceObject, 'a,c,' ));
+        checkEqual(true,  fixProperty(sourceObject, 'b,a,' ));
+        checkEqual(false, fixProperty(sourceObject, 'a,d,' ));
+
+        // property path
+        var sourceObject2 = {
+          a: '1', b: '2', c: { d: { e: 'E' } },
+        };
+        checkEqual(false, fixProperty(sourceObject2, 'a'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b'));
+        checkEqual(true,  fixProperty(sourceObject2, 'a,b,c'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.e'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.f'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,.d'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,'));
+        checkEqual(true,  fixProperty(sourceObject2, 'a,b,c,'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.e,'));
+
+        // object parameter
+        testCounter();
+        checkEqual(false,
+          fixProperty(
+            { object: sourceObject, propertyNames: 'b,c' },
+          ),
+        );
+        checkEqual(true,
+          fixProperty(
+            { object: sourceObject, propertyNames: 'a,b' },
+          ),
+        );
+        checkEqual(true,
+          fixProperty(
+            sourceObject, { propertyNames: 'a,b,' },
           ),
         );
 
@@ -629,6 +809,7 @@ export const test_execute_object = (parts) => {
 
     test_copyProperty();
     test_inProperty();
+    test_fixProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();

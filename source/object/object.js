@@ -1,6 +1,7 @@
 import object_common_js from './object_common.js';
 import isObjectParameter_js from './isObjectParameter.js';
 import inProperty_js from './inProperty.js';
+import fixProperty_js from './fixProperty.js';
 import objectEntries_js from './objectEntries.js';
 import objectKeys_js from './objectKeys.js';
 import objectValues_js from './objectValues.js';
@@ -32,6 +33,13 @@ export const {
   inProperty,
   inProp,
 } = inProperty_js;
+
+export const {
+  _fixProperty,
+
+  fixProperty,
+  fixProp,
+} = fixProperty_js;
 
 export const {
   _objectEntries,
@@ -84,6 +92,7 @@ export default {
   ...object_common_js,
   ...isObjectParameter_js,
   ...inProperty_js,
+  ...fixProperty_js,
   ...objectEntries_js,
   ...objectKeys_js,
   ...objectValues_js,

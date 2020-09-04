@@ -195,23 +195,23 @@ _copyProperty(_string, propertyNames.STRING_ROOT, rootNames);
 // object
 propertyNames.OBJECT_PUBLIC =
   'isObjectParameter,' +
-  'copyProperty, propertyCount, inProperty,' +
+  'copyProperty, propertyCount, inProperty, fixProperty,' +
   'has,hasOwn,hasPrototype,' +
   'getProperty, setProperty,' +
   'objectEntries, objectToKeyValueArray,' +
   'objectKeys, objectToKeyArray,' +
   'objectValues, objectToValueArray,' +
-  'copyProp, propCount, inProp,' +
+  'copyProp, propCount, inProp, fixProp,' +
   'getProp, setProp,' +
   '';
 propertyNames.OBJECT_ROOT =
-  'copyProperty,propertyCount,inProperty,' +
+  'copyProperty,propertyCount,inProperty, fixProperty,' +
   'has,hasOwn,hasPrototype,' +
   'getProperty,setProperty,' +
   'objectEntries, objectToKeyValueArray,' +
   'objectKeys, objectToKeyArray,' +
   'objectValues, objectToValueArray,' +
-  'copyProp,propCount,inProp,' +
+  'copyProp,propCount,inProp, fixProp,' +
   'getProp,setProp,' +
   '';
 const object = {};
@@ -469,13 +469,13 @@ export const {
   matchFormat, replaceAll,
   isLowerCase, isUpperCase,
 
-  copyProperty, propertyCount, inProperty,
+  copyProperty, propertyCount, inProperty, fixProperty,
   has, hasOwn, hasPrototype,
   getProperty, setProperty,
   objectEntries, objectToKeyValueArray,
   objectKeys, objectToKeyArray,
   objectValues, objectToValueArray,
-  copyProp, propCount, inProp,
+  copyProp, propCount, inProp, fixProp,
   getProp, setProp,
   objectToString,
 

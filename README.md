@@ -309,6 +309,7 @@ You can now use the functions of the parts.js object.
 - update Enum args(values) check string array
 - update objectLike ErrorMessage
 - update inProperty Error Check
+- add fixProperty.js
 
 ### 7.4.0
 #### 2020/08/25(Tue)
