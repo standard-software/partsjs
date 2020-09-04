@@ -307,6 +307,7 @@ You can now use the functions of the parts.js object.
 - add objectKeys.js / objectValues.js
   - add testCode
 - update Enum args(values) check string array
+- update objectLike ErrorMessage
 
 ### 7.4.0
 #### 2020/08/25(Tue)

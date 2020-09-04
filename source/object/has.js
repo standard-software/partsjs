@@ -38,7 +38,7 @@ export const has = (object, propertyName, hasOwn = false) => {
 
   if (!isObjectLike(object)) {
     throw new TypeError(
-      'has args(object) is not object type',
+      'has args(object) is not objectLike',
     );
   }
   if (!isString(propertyName)) {
@@ -74,7 +74,7 @@ export const hasPrototype = (object, propertyName) => {
 
   if (!isObjectLike(object)) {
     throw new TypeError(
-      'hasPrototype args(object) is not object type',
+      'hasPrototype args(object) is not objectLike',
     );
   }
   if (!isString(propertyName)) {

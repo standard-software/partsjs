@@ -28,7 +28,7 @@ export const propertyCount = (object, hasOwn = true) => {
 
   if (!isObjectLike(object)) {
     throw new TypeError(
-      'propertyCount args(object) is not object type',
+      'propertyCount args(object) is not objectLike',
     );
   }
   if (!isBoolean(hasOwn)) {

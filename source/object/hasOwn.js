@@ -28,7 +28,7 @@ export const hasOwn = (object, propertyName) => {
 
   if (!isObjectLike(object)) {
     throw new TypeError(
-      'hasOwn args(object) is not object type',
+      'hasOwn args(object) is not objectLike',
     );
   }
   if (!isString(propertyName)) {

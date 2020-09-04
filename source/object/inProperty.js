@@ -68,7 +68,7 @@ export const inProperty = (object, propertyPaths, hasOwn = true) => {
 
   if (!isObjectLike(object)) {
     throw new TypeError(
-      'inProperty args(object) is not object type',
+      'inProperty args(object) is not objectLike',
     );
   }
 
