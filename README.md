@@ -320,6 +320,9 @@ You can now use the functions of the parts.js object.
   - support full object parameter
 - update string.deleteLength
   - support full object parameter
+- update array.isFirst / Last
+  - support args function
+  - support full object parameter
 
 ### 7.4.0
 #### 2020/08/25(Tue)

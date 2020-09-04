@@ -568,13 +568,21 @@ export const _isFirst = (array, valueArray) => {
   }
   return _all(
     valueArray,
-    (value, index) => array[index] === value,
+    (value, index) => {
+      const firstValue = array[index];
+      if (isFunction(value)) {
+        return value(firstValue);
+      }
+      return firstValue === value;
+    },
   );
 };
 
 export const isFirst = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
+  } else if (isObjectParameter(valueArray, 'valueArray')) {
+    ({ valueArray } = valueArray);
   }
 
   if (!isArray(array)) {
@@ -600,15 +608,23 @@ export const _isLast = (array, valueArray) => {
   }
   return _all(
     valueArray,
-    (value, index) => array[
-      array.length - valueArray.length + index
-    ] === value,
+    (value, index) => {
+      const lastValue = array[
+        array.length - valueArray.length + index
+      ];
+      if (isFunction(value)) {
+        return value(lastValue);
+      }
+      return lastValue === value;
+    },
   );
 };
 
 export const isLast = (array, valueArray) => {
   if (isObjectParameter(array, 'array, valueArray')) {
     ({ array, valueArray } = array);
+  } else if (isObjectParameter(valueArray, 'valueArray')) {
+    ({ valueArray } = valueArray);
   }
 
   if (!isArray(array)) {

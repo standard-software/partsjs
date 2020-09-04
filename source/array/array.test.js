@@ -47,6 +47,10 @@ export const test_execute_array = (parts) => {
       equal,
     } = parts.compare;
 
+    const {
+      isUndefined, isNull,
+    } = parts.type;
+
     const test_array_NumberArray = () => {
       it('test_array_NumberArray', () => {
         checkEqual([0,1,2],       NumberArray(3));
@@ -730,6 +734,24 @@ export const test_execute_array = (parts) => {
         checkEqual(false, isFirst(['A', 'B', 'C'], ['a']));
         checkEqual(false, isFirst(['A', 'B', 'C'], ['B']));
 
+        checkEqual(true,  isFirst([undefined, 1, 2], [isUndefined]));
+        checkEqual(true,  isFirst([undefined, 1, 2], [undefined]));
+        checkEqual(false, isFirst([undefined, 1, 2], [isNull]));
+        checkEqual(false, isFirst([undefined, 1, 2], [null]));
+        checkEqual(false, isFirst([null, 1, 2], [isUndefined]));
+        checkEqual(false, isFirst([null, 1, 2], [undefined]));
+        checkEqual(true,  isFirst([null, 1, 2], [isNull]));
+        checkEqual(true,  isFirst([null, 1, 2], [null]));
+
+        checkEqual(true,  isFirst([undefined, 1, 2], [isUndefined, 1]));
+        checkEqual(true,  isFirst([undefined, 1, 2], [undefined, 1]));
+        checkEqual(false, isFirst([undefined, 1, 2], [isNull, 1]));
+        checkEqual(false, isFirst([undefined, 1, 2], [null, 1]));
+        checkEqual(false, isFirst([null, 1, 2], [isUndefined, 1]));
+        checkEqual(false, isFirst([null, 1, 2], [undefined, 1]));
+        checkEqual(true,  isFirst([null, 1, 2], [isNull, 1]));
+        checkEqual(true,  isFirst([null, 1, 2], [null, 1]));
+
         // Object Named Parameter
         checkEqual(true,
           isFirst({
@@ -742,6 +764,14 @@ export const test_execute_array = (parts) => {
             array: ['A', 'B', 'C'],
             valueArray: ['a'],
           })
+        );
+        checkEqual(true,
+          isFirst(
+            ['A', 'B', 'C'],
+            {
+              valueArray: ['A'],
+            }
+          )
         );
       });
     };
@@ -760,6 +790,24 @@ export const test_execute_array = (parts) => {
 
         checkEqual(false, isLast([1], [2, 3]));
 
+        checkEqual(true,  isLast([0, 1, undefined], [isUndefined]));
+        checkEqual(true,  isLast([0, 1, undefined], [undefined]));
+        checkEqual(false, isLast([0, 1, undefined], [isNull]));
+        checkEqual(false, isLast([0, 1, undefined], [null]));
+        checkEqual(false, isLast([0, 1, null], [isUndefined]));
+        checkEqual(false, isLast([0, 1, null], [undefined]));
+        checkEqual(true,  isLast([0, 1, null], [isNull]));
+        checkEqual(true,  isLast([0, 1, null], [null]));
+
+        checkEqual(true,  isLast([0, 1, undefined], [1, isUndefined]));
+        checkEqual(true,  isLast([0, 1, undefined], [1, undefined]));
+        checkEqual(false, isLast([0, 1, undefined], [1, isNull]));
+        checkEqual(false, isLast([0, 1, undefined], [1, null]));
+        checkEqual(false, isLast([0, 1, null], [1, isUndefined]));
+        checkEqual(false, isLast([0, 1, null], [1, undefined]));
+        checkEqual(true,  isLast([0, 1, null], [1, isNull]));
+        checkEqual(true,  isLast([0, 1, null], [1, null]));
+
         // Object Named Parameter
         checkEqual(true,
           isLast({
@@ -772,6 +820,14 @@ export const test_execute_array = (parts) => {
             array: ['A', 'B', 'C'],
             valueArray: ['c'],
           })
+        );
+        checkEqual(true,
+          isLast(
+            ['A', 'B', 'C'],
+            {
+              valueArray: ['C'],
+            }
+          )
         );
       });
     };
