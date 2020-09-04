@@ -1305,7 +1305,8 @@ export const test_execute_array = (parts) => {
             {
               index: 1,
               length: 2,
-            })
+            }
+          )
         );
         checkEqual([0, 3],
           deleteLength(
@@ -1313,20 +1314,23 @@ export const test_execute_array = (parts) => {
             1,
             {
               length: 2,
-            })
+            }
+          )
         );
         checkEqual([0, 1],
           deleteLength({
             array: [0, 1, 2, 3],
             index: 2,
-          })
+          }
+          )
         );
         checkEqual([0, 1],
           deleteLength(
             [0, 1, 2, 3],
             {
               index: 2,
-            })
+            }
+          )
         );
       });
     };

@@ -870,9 +870,11 @@ export const deleteLength = (
   str, index, length = str.length - index,
 ) => {
   if (isObjectParameter(str, 'str, index', 'length')) {
-    ({
-      str, index, length = str.length - index,
-    } = str);
+    ({ str, index, length = str.length - index } = str);
+  } else if (isObjectParameter(index, 'index', 'length')) {
+    ({ index, length = str.length - index } = index);
+  } else if (isObjectParameter(length, 'length')) {
+    ({ length } = length);
   }
 
   if (!isString(str)) {
@@ -917,6 +919,8 @@ export const _deleteFirst = (str, length = 1) => {
 export const deleteFirst = (str, length = 1) => {
   if (isObjectParameter(str, 'str', 'length')) {
     ({ str, length = 1 } = str);
+  } else if (isObjectParameter(length, 'length')) {
+    ({ length } = length);
   }
 
   if (!isString(str)) {
@@ -950,6 +954,8 @@ export const _deleteLast = (str, length = 1) => {
 export const deleteLast = (str, length = 1) => {
   if (isObjectParameter(str, 'str', 'length')) {
     ({ str, length = 1 } = str);
+  } else if (isObjectParameter(length, 'length')) {
+    ({ length } = length);
   }
 
   if (!isString(str)) {

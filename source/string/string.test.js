@@ -1125,6 +1125,46 @@ export const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => deleteLength('01234',  5, 6)));
         checkEqual(true,  isThrown(() => deleteLength('01234',  6, 6)));
 
+        // Object Named Parameter
+        checkEqual('03',
+          deleteLength({
+            str: '0123',
+            index: 1,
+            length: 2,
+          }),
+        );
+        checkEqual('03',
+          deleteLength(
+            '0123',
+            {
+              index: 1,
+              length: 2,
+            },
+          ),
+        );
+        checkEqual('03',
+          deleteLength(
+            '0123',
+            1,
+            {
+              length: 2,
+            },
+          ),
+        );
+        checkEqual('01',
+          deleteLength({
+            str: '0123',
+            index: 2,
+          }),
+        );
+        checkEqual('01',
+          deleteLength(
+            '0123',
+            {
+              index: 2,
+            },
+          ),
+        );
       });
     };
 
@@ -1138,7 +1178,17 @@ export const test_execute_string = (parts) => {
         checkEqual('34',    deleteFirst('01234', 3));
         checkEqual('4',     deleteFirst('01234', 4));
         checkEqual('',      deleteFirst('01234', 5));
+        checkEqual('1234',  deleteFirst('01234'));
+
         checkEqual(true,  isThrown(() => deleteFirst('01234', 6)));
+
+        // Object Named Parameter
+        checkEqual('123',
+          deleteFirst({ str: '0123', length: 1 }),
+        );
+        checkEqual('123',
+          deleteFirst('0123', { length: 1 }),
+        );
       });
     };
 
@@ -1152,7 +1202,17 @@ export const test_execute_string = (parts) => {
         checkEqual('01',    deleteLast('01234', 3));
         checkEqual('0',     deleteLast('01234', 4));
         checkEqual('',      deleteLast('01234', 5));
+        checkEqual('0123',  deleteLast('01234'));
+
         checkEqual(true,  isThrown(() => deleteLast('01234', 6)));
+
+        // Object Named Parameter
+        checkEqual('012',
+          deleteLast({ str: '0123', length: 1 }),
+        );
+        checkEqual('012',
+          deleteLast('0123', { length: 1 }),
+        );
       });
     };
 
