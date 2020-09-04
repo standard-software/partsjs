@@ -2,6 +2,8 @@ import object_common_js from './object_common.js';
 import isObjectParameter_js from './isObjectParameter.js';
 import inProperty_js from './inProperty.js';
 import objectEntries_js from './objectEntries.js';
+import objectKeys_js from './objectKeys.js';
+import objectValues_js from './objectValues.js';
 import getProperty_js from './getProperty.js';
 import _hasOwn_js from './_hasOwn.js';
 import hasOwn_js from './hasOwn.js';
@@ -34,9 +36,20 @@ export const {
 export const {
   _objectEntries,
   objectEntries,
-
   objectToKeyValueArray,
 } = objectEntries_js;
+
+export const {
+  _objectKeys,
+  objectKeys,
+  objectToKeyArray,
+} = objectKeys_js;
+
+export const {
+  _objectValues,
+  objectValues,
+  objectToValueArray,
+} = objectValues_js;
 
 export const {
   _getPropertyBase,
@@ -72,6 +85,8 @@ export default {
   ...isObjectParameter_js,
   ...inProperty_js,
   ...objectEntries_js,
+  ...objectKeys_js,
+  ...objectValues_js,
   ...getProperty_js,
   ..._hasOwn_js,
   ...hasOwn_js,

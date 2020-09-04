@@ -33,8 +33,6 @@ export const test_execute_index = (parts) => {
 
       it('test_execute_nameSpace 1', () => {
 
-        const countArray =
-          [365, 18, 2, 252, 12, 11, 22, 29, 7, 37, 17, 37, 32];
         const propertyCountForParts = (parts) => {
           let result = propertyCount(parts);
           if (parts.inProperty(parts, 'default')) {
@@ -52,6 +50,9 @@ export const test_execute_index = (parts) => {
           }
           return result;
         };
+
+        const countArray =
+          [371, 18, 2, 252, 12, 11, 22, 29, 7, 37, 21, 37, 32];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));

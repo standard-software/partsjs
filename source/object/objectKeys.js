@@ -13,36 +13,36 @@ import {
 } from '../object/_hasOwn.js';
 
 /**
- * objectEntries
+ * objectKeys
  */
-export const _objectEntries = (object) => {
+export const _objectKeys = (object) => {
   const result = [];
   for (const key in object) {
     if (_hasOwn(object, key)) {
-      result.push([key, object[key]]);
+      result.push(key);
     }
   }
   return result;
 };
 
-export const objectEntries = (object) => {
+export const objectKeys = (object) => {
   if (isObjectParameter(object, 'object')) {
     ({ object } = object);
   }
 
   if (!isObject(object)) {
     throw new TypeError(
-      'objectEntries args(object) is not object',
+      'objectKeys args(object) is not object',
     );
   }
 
-  return _objectEntries(object);
+  return _objectKeys(object);
 };
 
-export const objectToKeyValueArray = objectEntries;
+export const objectToKeyArray = objectKeys;
 
 export default {
-  _objectEntries,
-  objectEntries,
-  objectToKeyValueArray,
+  _objectKeys,
+  objectKeys,
+  objectToKeyArray,
 };

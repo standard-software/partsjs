@@ -198,7 +198,9 @@ propertyNames.OBJECT_PUBLIC =
   'copyProperty, propertyCount, inProperty,' +
   'has,hasOwn,hasPrototype,' +
   'getProperty, setProperty,' +
-  'objectToKeyValueArray, objectEntries,' +
+  'objectEntries, objectToKeyValueArray,' +
+  'objectKeys, objectToKeyArray,' +
+  'objectValues, objectToValueArray,' +
   'copyProp, propCount, inProp,' +
   'getProp, setProp,' +
   '';
@@ -206,6 +208,9 @@ propertyNames.OBJECT_ROOT =
   'copyProperty,propertyCount,inProperty,' +
   'has,hasOwn,hasPrototype,' +
   'getProperty,setProperty,' +
+  'objectEntries, objectToKeyValueArray,' +
+  'objectKeys, objectToKeyArray,' +
+  'objectValues, objectToValueArray,' +
   'copyProp,propCount,inProp,' +
   'getProp,setProp,' +
   '';
@@ -467,6 +472,9 @@ export const {
   copyProperty, propertyCount, inProperty,
   has, hasOwn, hasPrototype,
   getProperty, setProperty,
+  objectEntries, objectToKeyValueArray,
+  objectKeys, objectToKeyArray,
+  objectValues, objectToValueArray,
   copyProp, propCount, inProp,
   getProp, setProp,
   objectToString,
