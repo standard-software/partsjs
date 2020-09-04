@@ -310,6 +310,7 @@ You can now use the functions of the parts.js object.
 - update objectLike ErrorMessage
 - update inProperty Error Check
 - add fixProperty.js
+- update sort use objectValues
 
 ### 7.4.0
 #### 2020/08/25(Tue)

@@ -23,6 +23,10 @@ import {
 } from '../../object/isObjectParameter.js';
 
 import {
+  _objectValues,
+} from '../../object/objectValues.js';
+
+import {
   _Enum,
 } from '../../syntax/Enum.js';
 
@@ -39,7 +43,7 @@ export const _sort = (
       [sort.order.ascending, () => sort.orderFunc.ascending],
       [sort.order.descending, () => sort.orderFunc.descending],
       [
-        () => { throw new Error(
+        () => { throw new TypeError(
           '_sort args(order) is not ["ascending"|"descending"]',
         ); },
       ],
@@ -71,7 +75,7 @@ export const sort = (
       'sort args(array) is not array',
     );
   }
-  if (!_or(order, [sort.order.ascending, sort.order.descending])) {
+  if (!_or(order, _objectValues(sort.order))) {
     throw new TypeError(
       'sort args(order) is not ["ascending"|"descending"]',
     );
