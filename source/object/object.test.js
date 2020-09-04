@@ -15,7 +15,7 @@ export const test_execute_object = (parts) => {
       getProperty, setProperty,
       isEmptyObjectAll,
       isObjectParameter,
-      objectToKeyValueArray,
+      objectEntries, objectKeys, objectValues,
       has, hasOwn, hasPrototype,
     } = parts.object;
 
@@ -578,18 +578,49 @@ export const test_execute_object = (parts) => {
       });
     };
 
-    const test_objectToKeyValueArray = () => {
-      it('test_objectToKeyValueArray', () => {
+    const test_objectEntries = () => {
+      it('test_objectEntries', () => {
 
         const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         const object1 = {a:'1', b:'2', c:'3'};
-        checkEqual(array1, objectToKeyValueArray(object1));
+        checkEqual(array1, objectEntries(object1));
 
         // only object type
-        checkEqual(true, isThrown(() => objectToKeyValueArray(array1)));
+        checkEqual(true, isThrown(() => objectEntries(array1)));
 
         // object parameter
-        checkEqual(array1, objectToKeyValueArray({ object: object1 }));
+        checkEqual(array1, objectEntries({ object: object1 }));
+
+      });
+    };
+
+    const test_objectKeys = () => {
+      it('test_objectKeys', () => {
+
+        const array1 = ['a', 'b', 'c'];
+        const object1 = {a:'1', b:'2', c:'3'};
+        checkEqual(array1, objectKeys(object1));
+
+        // only object type
+        checkEqual(true, isThrown(() => objectKeys(array1)));
+
+        // object parameter
+        checkEqual(array1, objectKeys({ object: object1 }));
+
+      });
+    };
+    const test_objectValues = () => {
+      it('test_objectValues', () => {
+
+        const array1 = ['1', '2', '3'];
+        const object1 = {a:'1', b:'2', c:'3'};
+        checkEqual(array1, objectValues(object1));
+
+        // only object type
+        checkEqual(true, isThrown(() => objectValues(array1)));
+
+        // object parameter
+        checkEqual(array1, objectValues({ object: object1 }));
 
       });
     };
@@ -605,7 +636,9 @@ export const test_execute_object = (parts) => {
     test_isObjectParameter();
 
     test_ObjectEntries_standard();
-    test_objectToKeyValueArray();
+    test_objectEntries();
+    test_objectKeys();
+    test_objectValues();
 
   });
 };
