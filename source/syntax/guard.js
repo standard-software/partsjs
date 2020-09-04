@@ -7,7 +7,7 @@ import {
 
 import {
   functionValue,
-} from './functionValue.js';
+} from '../syntax/functionValue.js';
 
 /**
  * guard
