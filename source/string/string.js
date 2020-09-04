@@ -10,6 +10,7 @@ import tagInnerFirst_js from './tagInnerFirst.js';
 import tagOuterFirst_js from './tagOuterFirst.js';
 import tagInnerLast_js from './tagInnerLast.js';
 import tagOuterLast_js from './tagOuterLast.js';
+import split_js from './split.js';
 
 export const {
   _repeat,
@@ -88,6 +89,10 @@ export const {
   tagOuterLast,
 } = tagOuterLast_js;
 
+export const {
+  _split, split,
+} = split_js;
+
 export default {
   ...string_common_js,
   ..._replaceAll_js,
@@ -101,5 +106,6 @@ export default {
   ...tagOuterFirst_js,
   ...tagInnerLast_js,
   ...tagOuterLast_js,
+  ...split_js,
 };
 

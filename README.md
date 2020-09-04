@@ -323,6 +323,7 @@ You can now use the functions of the parts.js object.
 - update array.isFirst / Last
   - support args function
   - support full object parameter
+- add split.js
 
 ### 7.4.0
 #### 2020/08/25(Tue)

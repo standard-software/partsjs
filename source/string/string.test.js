@@ -26,6 +26,7 @@ export const test_execute_string = (parts) => {
       subLastDelimFirst, subLastDelimLast,
       tagInnerFirst, tagOuterFirst,
       tagInnerLast, tagOuterLast,
+      split,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -1480,6 +1481,163 @@ export const test_execute_string = (parts) => {
       });
     };
 
+    const test_split = () => {
+      it('test_split', () => {
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split('ABC,DEF,GHI', ','),
+        );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split('ABC.DEF.GHI', '.'),
+        );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split('ABC DEF GHI', ' '),
+        );
+
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
+          split(',,ABC,,DEF,,GHI,,', ','),
+        );
+        checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', '', ''],
+          split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.first),
+        );
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', ''],
+          split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.last),
+        );
+        checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', ''],
+          split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.bothEnds),
+        );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.all),
+        );
+
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,', ',',
+            split.excludeEmptyStr.none,
+            split.excludeSpace.none,
+          ),
+        );
+        checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,', ',',
+            split.excludeEmptyStr.none,
+            split.excludeSpace.trim,
+          ),
+        );
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,', ',',
+            split.excludeEmptyStr.none,
+            split.excludeSpace.all,
+          ),
+        );
+
+        // object parameter
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split({
+            str: ',, A B C ,, DE F ,, G HI ,,',
+            separator: ',',
+            excludeEmptyStr: split.excludeEmptyStr.all,
+            excludeSpace: split.excludeSpace.all,
+          }),
+        );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            {
+              separator: ',',
+              excludeEmptyStr: split.excludeEmptyStr.all,
+              excludeSpace: split.excludeSpace.all,
+            },
+          ),
+        );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            ',',
+            {
+              excludeEmptyStr: split.excludeEmptyStr.all,
+              excludeSpace: split.excludeSpace.all,
+            },
+          ),
+        );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            ',',
+            split.excludeEmptyStr.all,
+            {
+              excludeSpace: split.excludeSpace.all,
+            },
+          ),
+        );
+        checkEqual([' A B C ', ' DE F ', ' G HI '],
+          split({
+            str: ',, A B C ,, DE F ,, G HI ,,',
+            separator: ',',
+            excludeEmptyStr: split.excludeEmptyStr.all,
+          }),
+        );
+        checkEqual([' A B C ', ' DE F ', ' G HI '],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            {
+              separator: ',',
+              excludeEmptyStr: split.excludeEmptyStr.all,
+            },
+          ),
+        );
+        checkEqual([' A B C ', ' DE F ', ' G HI '],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            ',',
+            {
+              excludeEmptyStr: split.excludeEmptyStr.all,
+            },
+          ),
+        );
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
+          split({
+            str: ',, A B C ,, DE F ,, G HI ,,',
+            separator: ',',
+            excludeSpace: split.excludeSpace.all,
+          }),
+        );
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            {
+              separator: ',',
+              excludeSpace: split.excludeSpace.all,
+            },
+          ),
+        );
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            ',',
+            {
+              excludeSpace: split.excludeSpace.all,
+            },
+          ),
+        );
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''],
+          split({
+            str: ',, A B C ,, DE F ,, G HI ,,',
+            separator: ',',
+          }),
+        );
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''],
+          split(
+            ',, A B C ,, DE F ,, G HI ,,',
+            {
+              separator: ',',
+            },
+          ),
+        );
+
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -1527,6 +1685,7 @@ export const test_execute_string = (parts) => {
     test_tagInnerLast();
     test_tagOuterLast();
 
+    test_split();
   });
 };
 
