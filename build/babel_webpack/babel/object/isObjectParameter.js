@@ -11,6 +11,8 @@ var _replaceAll2 = require("../string/_replaceAll.js");
 
 var _propertyCount2 = require("../object/_propertyCount.js");
 
+var _hasOwn2 = require("../object/_hasOwn.js");
+
 /**
  * isObjectParameter
  */
@@ -46,7 +48,7 @@ var isObjectParameter = function isObjectParameter(object, props) {
   var optionalPropMatchCount = 0;
 
   for (var property in object) {
-    if (Object.prototype.hasOwnProperty.call(object, property)) {
+    if ((0, _hasOwn2._hasOwn)(object, property)) {
       if (props.indexOf(property) !== -1) {
         propMatchCount += 1;
       } else if (optionalProps.indexOf(property) !== -1) {

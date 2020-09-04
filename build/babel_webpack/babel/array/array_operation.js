@@ -186,6 +186,14 @@ var deleteLength = function deleteLength(array, index) {
     index = _array5.index;
     var _array5$length = _array5.length;
     length = _array5$length === void 0 ? array.length - index : _array5$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(index, 'index', 'length')) {
+    var _index = index;
+    index = _index.index;
+    var _index$length = _index.length;
+    length = _index$length === void 0 ? array.length - index : _index$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length = length;
+    length = _length.length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -219,17 +227,24 @@ var deleteLength = function deleteLength(array, index) {
 
 exports.deleteLength = deleteLength;
 
-var _deleteFirst = function _deleteFirst(array, length) {
+var _deleteFirst = function _deleteFirst(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   return _deleteLength(array, 0, length);
 };
 
 exports._deleteFirst = _deleteFirst;
 
-var deleteFirst = function deleteFirst(array, length) {
+var deleteFirst = function deleteFirst(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, length')) {
     var _array6 = array;
     array = _array6.array;
-    length = _array6.length;
+    var _array6$length = _array6.length;
+    length = _array6$length === void 0 ? 1 : _array6$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length2 = length;
+    length = _length2.length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -253,17 +268,24 @@ var deleteFirst = function deleteFirst(array, length) {
 
 exports.deleteFirst = deleteFirst;
 
-var _deleteLast = function _deleteLast(array, length) {
+var _deleteLast = function _deleteLast(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   return _deleteLength(array, array.length - length, length);
 };
 
 exports._deleteLast = _deleteLast;
 
-var deleteLast = function deleteLast(array, length) {
+var deleteLast = function deleteLast(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, length')) {
     var _array7 = array;
     array = _array7.array;
-    length = _array7.length;
+    var _array7$length = _array7.length;
+    length = _array7$length === void 0 ? 1 : _array7$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length3 = length;
+    length = _length3.length;
   }
 
   if (!(0, _type.isArray)(array)) {

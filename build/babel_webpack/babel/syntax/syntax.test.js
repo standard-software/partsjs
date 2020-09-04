@@ -997,6 +997,13 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           c: 2
         }, new Enum(['a', 'b', 'c'], {
           useIndex: true
+        })); // exception TypeError
+
+        checkEqual(false, isThrown(function () {
+          Enum(['a', 'b', 'c']);
+        }));
+        checkEqual(true, isThrown(function () {
+          Enum([0, 'b', 'c']);
         }));
       });
     };

@@ -11,7 +11,7 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _IntegerArray2 = require("../array/IntegerArray.js");
 
-var _objectToKeyValueArray = require("../object/objectToKeyValueArray.js");
+var _objectEntries = require("../object/objectEntries.js");
 
 /**
  * loop
@@ -60,7 +60,7 @@ var loop = function loop(start, end, increment) {
     var _increment = increment;
     increment = _increment.increment;
   } else if ((0, _type.isObject)(start)) {
-    return _loopBase((0, _objectToKeyValueArray.objectToKeyValueArray)(start));
+    return _loopBase((0, _objectEntries.objectEntries)(start));
   } else if ((0, _type.isArray)(start)) {
     return _loopBase(start);
   }

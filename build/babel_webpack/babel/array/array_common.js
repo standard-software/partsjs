@@ -661,7 +661,13 @@ var _isFirst = function _isFirst(array, valueArray) {
   }
 
   return _all(valueArray, function (value, index) {
-    return array[index] === value;
+    var firstValue = array[index];
+
+    if ((0, _type.isFunction)(value)) {
+      return value(firstValue);
+    }
+
+    return firstValue === value;
   });
 };
 
@@ -672,6 +678,9 @@ var isFirst = function isFirst(array, valueArray) {
     var _array10 = array;
     array = _array10.array;
     valueArray = _array10.valueArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -697,7 +706,13 @@ var _isLast = function _isLast(array, valueArray) {
   }
 
   return _all(valueArray, function (value, index) {
-    return array[array.length - valueArray.length + index] === value;
+    var lastValue = array[array.length - valueArray.length + index];
+
+    if ((0, _type.isFunction)(value)) {
+      return value(lastValue);
+    }
+
+    return lastValue === value;
   });
 };
 
@@ -708,6 +723,9 @@ var isLast = function isLast(array, valueArray) {
     var _array11 = array;
     array = _array11.array;
     valueArray = _array11.valueArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray')) {
+    var _valueArray2 = valueArray;
+    valueArray = _valueArray2.valueArray;
   }
 
   if (!(0, _type.isArray)(array)) {

@@ -50,7 +50,8 @@ var test_execute_string = function test_execute_string(parts) {
         tagInnerFirst = _parts$string.tagInnerFirst,
         tagOuterFirst = _parts$string.tagOuterFirst,
         tagInnerLast = _parts$string.tagInnerLast,
-        tagOuterLast = _parts$string.tagOuterLast;
+        tagOuterLast = _parts$string.tagOuterLast,
+        split = _parts$string.split;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -1346,6 +1347,26 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return deleteLength('01234', 6, 6);
+        })); // Object Named Parameter
+
+        checkEqual('03', deleteLength({
+          str: '0123',
+          index: 1,
+          length: 2
+        }));
+        checkEqual('03', deleteLength('0123', {
+          index: 1,
+          length: 2
+        }));
+        checkEqual('03', deleteLength('0123', 1, {
+          length: 2
+        }));
+        checkEqual('01', deleteLength({
+          str: '0123',
+          index: 2
+        }));
+        checkEqual('01', deleteLength('0123', {
+          index: 2
         }));
       });
     };
@@ -1364,8 +1385,17 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('34', deleteFirst('01234', 3));
         checkEqual('4', deleteFirst('01234', 4));
         checkEqual('', deleteFirst('01234', 5));
+        checkEqual('1234', deleteFirst('01234'));
         checkEqual(true, isThrown(function () {
           return deleteFirst('01234', 6);
+        })); // Object Named Parameter
+
+        checkEqual('123', deleteFirst({
+          str: '0123',
+          length: 1
+        }));
+        checkEqual('123', deleteFirst('0123', {
+          length: 1
         }));
       });
     };
@@ -1384,8 +1414,17 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('01', deleteLast('01234', 3));
         checkEqual('0', deleteLast('01234', 4));
         checkEqual('', deleteLast('01234', 5));
+        checkEqual('0123', deleteLast('01234'));
         checkEqual(true, isThrown(function () {
           return deleteLast('01234', 6);
+        })); // Object Named Parameter
+
+        checkEqual('012', deleteLast({
+          str: '0123',
+          length: 1
+        }));
+        checkEqual('012', deleteLast('0123', {
+          length: 1
         }));
       });
     };
@@ -1618,6 +1657,72 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_split = function test_split() {
+      it('test_split', function () {
+        checkEqual(['ABC', 'DEF', 'GHI'], split('ABC,DEF,GHI', ','));
+        checkEqual(['ABC', 'DEF', 'GHI'], split('ABC.DEF.GHI', '.'));
+        checkEqual(['ABC', 'DEF', 'GHI'], split('ABC DEF GHI', ' '));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',,ABC,,DEF,,GHI,,', ','));
+        checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.first));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.last));
+        checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.all));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.none));
+        checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.trim));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all)); // object parameter
+
+        checkEqual(['ABC', 'DEF', 'GHI'], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all,
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all,
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', ',', {
+          excludeEmptyStr: split.excludeEmptyStr.all,
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.all, {
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual([' A B C ', ' DE F ', ' G HI '], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all
+        }));
+        checkEqual([' A B C ', ' DE F ', ' G HI '], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all
+        }));
+        checkEqual([' A B C ', ' DE F ', ' G HI '], split(',, A B C ,, DE F ,, G HI ,,', ',', {
+          excludeEmptyStr: split.excludeEmptyStr.all
+        }));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ',',
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ',',
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', {
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ','
+        }));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ','
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -1656,6 +1761,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_tagOuterFirst();
     test_tagInnerLast();
     test_tagOuterLast();
+    test_split();
   });
 };
 

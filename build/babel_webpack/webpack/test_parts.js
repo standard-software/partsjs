@@ -162,8 +162,6 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [365, 18, 2, 252, 12, 11, 22, 29, 7, 37, 17, 37, 32];
-
         var propertyCountForParts = function propertyCountForParts(parts) {
           var result = propertyCount(parts);
 
@@ -186,6 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
+        var countArray = [374, 18, 2, 252, 12, 11, 22, 29, 7, 38, 23, 37, 32];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -3560,6 +3559,13 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           c: 2
         }, new Enum(['a', 'b', 'c'], {
           useIndex: true
+        })); // exception TypeError
+
+        checkEqual(false, isThrown(function () {
+          Enum(['a', 'b', 'c']);
+        }));
+        checkEqual(true, isThrown(function () {
+          Enum([0, 'b', 'c']);
         }));
       });
     };
@@ -8660,7 +8666,8 @@ var test_execute_string = function test_execute_string(parts) {
         tagInnerFirst = _parts$string.tagInnerFirst,
         tagOuterFirst = _parts$string.tagOuterFirst,
         tagInnerLast = _parts$string.tagInnerLast,
-        tagOuterLast = _parts$string.tagOuterLast;
+        tagOuterLast = _parts$string.tagOuterLast,
+        split = _parts$string.split;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -9956,6 +9963,26 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return deleteLength('01234', 6, 6);
+        })); // Object Named Parameter
+
+        checkEqual('03', deleteLength({
+          str: '0123',
+          index: 1,
+          length: 2
+        }));
+        checkEqual('03', deleteLength('0123', {
+          index: 1,
+          length: 2
+        }));
+        checkEqual('03', deleteLength('0123', 1, {
+          length: 2
+        }));
+        checkEqual('01', deleteLength({
+          str: '0123',
+          index: 2
+        }));
+        checkEqual('01', deleteLength('0123', {
+          index: 2
         }));
       });
     };
@@ -9974,8 +10001,17 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('34', deleteFirst('01234', 3));
         checkEqual('4', deleteFirst('01234', 4));
         checkEqual('', deleteFirst('01234', 5));
+        checkEqual('1234', deleteFirst('01234'));
         checkEqual(true, isThrown(function () {
           return deleteFirst('01234', 6);
+        })); // Object Named Parameter
+
+        checkEqual('123', deleteFirst({
+          str: '0123',
+          length: 1
+        }));
+        checkEqual('123', deleteFirst('0123', {
+          length: 1
         }));
       });
     };
@@ -9994,8 +10030,17 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('01', deleteLast('01234', 3));
         checkEqual('0', deleteLast('01234', 4));
         checkEqual('', deleteLast('01234', 5));
+        checkEqual('0123', deleteLast('01234'));
         checkEqual(true, isThrown(function () {
           return deleteLast('01234', 6);
+        })); // Object Named Parameter
+
+        checkEqual('012', deleteLast({
+          str: '0123',
+          length: 1
+        }));
+        checkEqual('012', deleteLast('0123', {
+          length: 1
         }));
       });
     };
@@ -10228,6 +10273,72 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_split = function test_split() {
+      it('test_split', function () {
+        checkEqual(['ABC', 'DEF', 'GHI'], split('ABC,DEF,GHI', ','));
+        checkEqual(['ABC', 'DEF', 'GHI'], split('ABC.DEF.GHI', '.'));
+        checkEqual(['ABC', 'DEF', 'GHI'], split('ABC DEF GHI', ' '));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',,ABC,,DEF,,GHI,,', ','));
+        checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.first));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.last));
+        checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.all));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.none));
+        checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.trim));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all)); // object parameter
+
+        checkEqual(['ABC', 'DEF', 'GHI'], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all,
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all,
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', ',', {
+          excludeEmptyStr: split.excludeEmptyStr.all,
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.all, {
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual([' A B C ', ' DE F ', ' G HI '], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all
+        }));
+        checkEqual([' A B C ', ' DE F ', ' G HI '], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ',',
+          excludeEmptyStr: split.excludeEmptyStr.all
+        }));
+        checkEqual([' A B C ', ' DE F ', ' G HI '], split(',, A B C ,, DE F ,, G HI ,,', ',', {
+          excludeEmptyStr: split.excludeEmptyStr.all
+        }));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ',',
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ',',
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', {
+          excludeSpace: split.excludeSpace.all
+        }));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split({
+          str: ',, A B C ,, DE F ,, G HI ,,',
+          separator: ','
+        }));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', {
+          separator: ','
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -10266,6 +10377,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_tagOuterFirst();
     test_tagInnerLast();
     test_tagOuterLast();
+    test_split();
   });
 };
 
@@ -10302,12 +10414,15 @@ var test_execute_object = function test_execute_object(parts) {
     var _parts$object = parts.object,
         copyProperty = _parts$object.copyProperty,
         inProperty = _parts$object.inProperty,
+        fixProperty = _parts$object.fixProperty,
         propertyCount = _parts$object.propertyCount,
         getProperty = _parts$object.getProperty,
         setProperty = _parts$object.setProperty,
         isEmptyObjectAll = _parts$object.isEmptyObjectAll,
         isObjectParameter = _parts$object.isObjectParameter,
-        objectToKeyValueArray = _parts$object.objectToKeyValueArray,
+        objectEntries = _parts$object.objectEntries,
+        objectKeys = _parts$object.objectKeys,
+        objectValues = _parts$object.objectValues,
         has = _parts$object.has,
         hasOwn = _parts$object.hasOwn,
         hasPrototype = _parts$object.hasPrototype;
@@ -10515,6 +10630,10 @@ var test_execute_object = function test_execute_object(parts) {
         First.prototype = new Second();
         Second.prototype.d = '4';
         var sourceObject = new First();
+        checkEqual('1', sourceObject.a);
+        checkEqual('2', sourceObject.b);
+        checkEqual('3', sourceObject.c);
+        checkEqual('4', sourceObject.d);
         checkEqual(false, inProperty(sourceObject, ''));
         checkEqual(true, inProperty(sourceObject, 'a'));
         checkEqual(true, inProperty(sourceObject, 'b'));
@@ -10583,6 +10702,157 @@ var test_execute_object = function test_execute_object(parts) {
         }));
         checkEqual(true, inProperty(sourceObject, 'b,c', {
           hasOwn: false
+        }));
+      });
+    };
+
+    var test_fixProperty = function test_fixProperty() {
+      it('test_fixProperty', function () {
+        var sourceObject = {
+          a: '1',
+          b: '2'
+        };
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(false, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(false, fixProperty(sourceObject, 'd'));
+        checkEqual(true, fixProperty(sourceObject, 'a,b'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c'));
+        checkEqual(true, fixProperty(sourceObject, 'b,a'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d'));
+        checkEqual(true, fixProperty(sourceObject, 'a,b,'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c,'));
+        checkEqual(true, fixProperty(sourceObject, 'b,a,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d,')); // other object function
+
+        checkEqual(false, fixProperty(test_fixProperty, 'constructor')); // array
+
+        checkEqual(false, fixProperty(sourceObject, ['a']));
+        checkEqual(true, fixProperty(sourceObject, ['a', 'b']));
+        checkEqual(false, fixProperty(sourceObject, ['a', 'b', 'c'])); // Object Named Parameter
+
+        checkEqual(true, fixProperty({
+          object: sourceObject,
+          propertyNames: 'b,a'
+        }));
+        checkEqual(false, fixProperty({
+          object: sourceObject,
+          propertyNames: 'd'
+        }));
+        checkEqual(true, fixProperty({
+          object: sourceObject,
+          propertyNames: ['b', 'a']
+        }));
+        checkEqual(false, fixProperty({
+          object: sourceObject,
+          propertyNames: ['d']
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          fixProperty({}, 'a');
+        }));
+        checkEqual(true, isThrown(function () {
+          fixProperty(1, 'a');
+        }));
+        checkEqual(true, isThrown(function () {
+          fixProperty({}, 1);
+        }));
+        checkEqual(false, isThrown(function () {
+          fixProperty({}, ['a']);
+        }));
+        checkEqual(true, isThrown(function () {
+          fixProperty({}, [1]);
+        })); // property exist value undefined
+
+        var sourceObject = {
+          a: '1',
+          b: undefined
+        };
+        testCounter();
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(false, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(true, fixProperty(sourceObject, 'a,b'));
+        var sourceObject = {
+          a: '1'
+        };
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(true, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(false, fixProperty(sourceObject, 'a,b')); // hasOwn
+
+        function First() {
+          this.a = '1';
+          this.b = '2';
+        }
+
+        function Second() {
+          this.c = '3';
+        }
+
+        First.prototype = new Second();
+        Second.prototype.d = '4';
+        var sourceObject = new First();
+        testCounter();
+        checkEqual('1', sourceObject.a);
+        checkEqual('2', sourceObject.b);
+        checkEqual('3', sourceObject.c);
+        checkEqual('4', sourceObject.d);
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(false, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(false, fixProperty(sourceObject, 'd'));
+        checkEqual(true, fixProperty(sourceObject, 'a,b'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c'));
+        checkEqual(true, fixProperty(sourceObject, 'b,a'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d'));
+        testCounter();
+        checkEqual(true, fixProperty(sourceObject, 'a,b,'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c,'));
+        checkEqual(true, fixProperty(sourceObject, 'b,a,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d,')); // property path
+
+        var sourceObject2 = {
+          a: '1',
+          b: '2',
+          c: {
+            d: {
+              e: 'E'
+            }
+          }
+        };
+        checkEqual(false, fixProperty(sourceObject2, 'a'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b'));
+        checkEqual(true, fixProperty(sourceObject2, 'a,b,c'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.e'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.f'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,.d'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,'));
+        checkEqual(true, fixProperty(sourceObject2, 'a,b,c,'));
+        checkEqual(false, fixProperty(sourceObject2, 'a,b,c.d.e,')); // object parameter
+
+        testCounter();
+        checkEqual(false, fixProperty({
+          object: sourceObject,
+          propertyNames: 'b,c'
+        }));
+        checkEqual(true, fixProperty({
+          object: sourceObject,
+          propertyNames: 'a,b'
+        }));
+        checkEqual(true, fixProperty(sourceObject, {
+          propertyNames: 'a,b,'
         }));
       });
     };
@@ -10966,21 +11236,61 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
-    var test_objectToKeyValueArray = function test_objectToKeyValueArray() {
-      it('test_objectToKeyValueArray', function () {
+    var test_objectEntries = function test_objectEntries() {
+      it('test_objectEntries', function () {
         var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
         var object1 = {
           a: '1',
           b: '2',
           c: '3'
         };
-        checkEqual(array1, objectToKeyValueArray(object1)); // only object type
+        checkEqual(array1, objectEntries(object1)); // only object type
 
         checkEqual(true, isThrown(function () {
-          return objectToKeyValueArray(array1);
+          return objectEntries(array1);
         })); // object parameter
 
-        checkEqual(array1, objectToKeyValueArray({
+        checkEqual(array1, objectEntries({
+          object: object1
+        }));
+      });
+    };
+
+    var test_objectKeys = function test_objectKeys() {
+      it('test_objectKeys', function () {
+        var array1 = ['a', 'b', 'c'];
+        var object1 = {
+          a: '1',
+          b: '2',
+          c: '3'
+        };
+        checkEqual(array1, objectKeys(object1)); // only object type
+
+        checkEqual(true, isThrown(function () {
+          return objectKeys(array1);
+        })); // object parameter
+
+        checkEqual(array1, objectKeys({
+          object: object1
+        }));
+      });
+    };
+
+    var test_objectValues = function test_objectValues() {
+      it('test_objectValues', function () {
+        var array1 = ['1', '2', '3'];
+        var object1 = {
+          a: '1',
+          b: '2',
+          c: '3'
+        };
+        checkEqual(array1, objectValues(object1)); // only object type
+
+        checkEqual(true, isThrown(function () {
+          return objectValues(array1);
+        })); // object parameter
+
+        checkEqual(array1, objectValues({
           object: object1
         }));
       });
@@ -10989,12 +11299,15 @@ var test_execute_object = function test_execute_object(parts) {
     test_has();
     test_copyProperty();
     test_inProperty();
+    test_fixProperty();
     test_propertyCount();
     test_getProperty();
     test_setProperty();
     test_isObjectParameter();
     test_ObjectEntries_standard();
-    test_objectToKeyValueArray();
+    test_objectEntries();
+    test_objectKeys();
+    test_objectValues();
   });
 };
 
@@ -11090,6 +11403,9 @@ var test_execute_array = function test_execute_array(parts) {
         isEven = _parts$number.isEven,
         isOdd = _parts$number.isOdd;
     var equal = parts.compare.equal;
+    var _parts$type = parts.type,
+        isUndefined = _parts$type.isUndefined,
+        isNull = _parts$type.isNull;
 
     var test_array_NumberArray = function test_array_NumberArray() {
       it('test_array_NumberArray', function () {
@@ -11781,7 +12097,23 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(true, isFirst(['A', 'B', 'C'], ['A', 'B']));
         checkEqual(false, isFirst(['A', 'B', 'C'], ['A', 'C']));
         checkEqual(false, isFirst(['A', 'B', 'C'], ['a']));
-        checkEqual(false, isFirst(['A', 'B', 'C'], ['B'])); // Object Named Parameter
+        checkEqual(false, isFirst(['A', 'B', 'C'], ['B']));
+        checkEqual(true, isFirst([undefined, 1, 2], [isUndefined]));
+        checkEqual(true, isFirst([undefined, 1, 2], [undefined]));
+        checkEqual(false, isFirst([undefined, 1, 2], [isNull]));
+        checkEqual(false, isFirst([undefined, 1, 2], [null]));
+        checkEqual(false, isFirst([null, 1, 2], [isUndefined]));
+        checkEqual(false, isFirst([null, 1, 2], [undefined]));
+        checkEqual(true, isFirst([null, 1, 2], [isNull]));
+        checkEqual(true, isFirst([null, 1, 2], [null]));
+        checkEqual(true, isFirst([undefined, 1, 2], [isUndefined, 1]));
+        checkEqual(true, isFirst([undefined, 1, 2], [undefined, 1]));
+        checkEqual(false, isFirst([undefined, 1, 2], [isNull, 1]));
+        checkEqual(false, isFirst([undefined, 1, 2], [null, 1]));
+        checkEqual(false, isFirst([null, 1, 2], [isUndefined, 1]));
+        checkEqual(false, isFirst([null, 1, 2], [undefined, 1]));
+        checkEqual(true, isFirst([null, 1, 2], [isNull, 1]));
+        checkEqual(true, isFirst([null, 1, 2], [null, 1])); // Object Named Parameter
 
         checkEqual(true, isFirst({
           array: ['A', 'B', 'C'],
@@ -11790,6 +12122,9 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, isFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['a']
+        }));
+        checkEqual(true, isFirst(['A', 'B', 'C'], {
+          valueArray: ['A']
         }));
       });
     };
@@ -11805,7 +12140,23 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, isLast(['A', 'B', 'C'], ['A', 'C']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['c']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['B']));
-        checkEqual(false, isLast([1], [2, 3])); // Object Named Parameter
+        checkEqual(false, isLast([1], [2, 3]));
+        checkEqual(true, isLast([0, 1, undefined], [isUndefined]));
+        checkEqual(true, isLast([0, 1, undefined], [undefined]));
+        checkEqual(false, isLast([0, 1, undefined], [isNull]));
+        checkEqual(false, isLast([0, 1, undefined], [null]));
+        checkEqual(false, isLast([0, 1, null], [isUndefined]));
+        checkEqual(false, isLast([0, 1, null], [undefined]));
+        checkEqual(true, isLast([0, 1, null], [isNull]));
+        checkEqual(true, isLast([0, 1, null], [null]));
+        checkEqual(true, isLast([0, 1, undefined], [1, isUndefined]));
+        checkEqual(true, isLast([0, 1, undefined], [1, undefined]));
+        checkEqual(false, isLast([0, 1, undefined], [1, isNull]));
+        checkEqual(false, isLast([0, 1, undefined], [1, null]));
+        checkEqual(false, isLast([0, 1, null], [1, isUndefined]));
+        checkEqual(false, isLast([0, 1, null], [1, undefined]));
+        checkEqual(true, isLast([0, 1, null], [1, isNull]));
+        checkEqual(true, isLast([0, 1, null], [1, null])); // Object Named Parameter
 
         checkEqual(true, isLast({
           array: ['A', 'B', 'C'],
@@ -11814,6 +12165,9 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, isLast({
           array: ['A', 'B', 'C'],
           valueArray: ['c']
+        }));
+        checkEqual(true, isLast(['A', 'B', 'C'], {
+          valueArray: ['C']
         }));
       });
     };
@@ -12473,6 +12827,20 @@ var test_execute_array = function test_execute_array(parts) {
           index: 1,
           length: 2
         }));
+        checkEqual([0, 3], deleteLength([0, 1, 2, 3], {
+          index: 1,
+          length: 2
+        }));
+        checkEqual([0, 3], deleteLength([0, 1, 2, 3], 1, {
+          length: 2
+        }));
+        checkEqual([0, 1], deleteLength({
+          array: [0, 1, 2, 3],
+          index: 2
+        }));
+        checkEqual([0, 1], deleteLength([0, 1, 2, 3], {
+          index: 2
+        }));
       });
     };
 
@@ -12493,6 +12861,7 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual([3, 4], deleteFirst([0, 1, 2, 3, 4], 3));
         checkEqual([4], deleteFirst([0, 1, 2, 3, 4], 4));
         checkEqual([], deleteFirst([0, 1, 2, 3, 4], 5));
+        checkEqual([1, 2, 3, 4], deleteFirst([0, 1, 2, 3, 4]));
         checkEqual(true, isThrown(function () {
           return deleteFirst([0, 1, 2, 3, 4], 6);
         })); // exception
@@ -12523,6 +12892,9 @@ var test_execute_array = function test_execute_array(parts) {
           array: [0, 1, 2, 3],
           length: 1
         }));
+        checkEqual([1, 2, 3], deleteFirst([0, 1, 2, 3], {
+          length: 1
+        }));
       });
     };
 
@@ -12543,6 +12915,7 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual([0, 1], deleteLast([0, 1, 2, 3, 4], 3));
         checkEqual([0], deleteLast([0, 1, 2, 3, 4], 4));
         checkEqual([], deleteLast([0, 1, 2, 3, 4], 5));
+        checkEqual([0, 1, 2, 3], deleteLast([0, 1, 2, 3, 4]));
         checkEqual(true, isThrown(function () {
           return deleteLast([0, 1, 2, 3, 4], 6);
         })); // exception
@@ -12571,6 +12944,9 @@ var test_execute_array = function test_execute_array(parts) {
 
         checkEqual([0, 1, 2], deleteLast({
           array: [0, 1, 2, 3],
+          length: 1
+        }));
+        checkEqual([0, 1, 2], deleteLast([0, 1, 2, 3], {
           length: 1
         }));
       });

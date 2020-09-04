@@ -956,6 +956,14 @@ var deleteLength = function deleteLength(str, index) {
     index = _str25.index;
     var _str25$length = _str25.length;
     length = _str25$length === void 0 ? str.length - index : _str25$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(index, 'index', 'length')) {
+    var _index = index;
+    index = _index.index;
+    var _index$length = _index.length;
+    length = _index$length === void 0 ? str.length - index : _index$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length = length;
+    length = _length.length;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -1004,6 +1012,9 @@ var deleteFirst = function deleteFirst(str) {
     str = _str26.str;
     var _str26$length = _str26.length;
     length = _str26$length === void 0 ? 1 : _str26$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length2 = length;
+    length = _length2.length;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -1042,6 +1053,9 @@ var deleteLast = function deleteLast(str) {
     str = _str27.str;
     var _str27$length = _str27.length;
     length = _str27$length === void 0 ? 1 : _str27$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length3 = length;
+    length = _length3.length;
   }
 
   if (!(0, _type.isString)(str)) {

@@ -79,6 +79,9 @@ var test_execute_array = function test_execute_array(parts) {
         isEven = _parts$number.isEven,
         isOdd = _parts$number.isOdd;
     var equal = parts.compare.equal;
+    var _parts$type = parts.type,
+        isUndefined = _parts$type.isUndefined,
+        isNull = _parts$type.isNull;
 
     var test_array_NumberArray = function test_array_NumberArray() {
       it('test_array_NumberArray', function () {
@@ -770,7 +773,23 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(true, isFirst(['A', 'B', 'C'], ['A', 'B']));
         checkEqual(false, isFirst(['A', 'B', 'C'], ['A', 'C']));
         checkEqual(false, isFirst(['A', 'B', 'C'], ['a']));
-        checkEqual(false, isFirst(['A', 'B', 'C'], ['B'])); // Object Named Parameter
+        checkEqual(false, isFirst(['A', 'B', 'C'], ['B']));
+        checkEqual(true, isFirst([undefined, 1, 2], [isUndefined]));
+        checkEqual(true, isFirst([undefined, 1, 2], [undefined]));
+        checkEqual(false, isFirst([undefined, 1, 2], [isNull]));
+        checkEqual(false, isFirst([undefined, 1, 2], [null]));
+        checkEqual(false, isFirst([null, 1, 2], [isUndefined]));
+        checkEqual(false, isFirst([null, 1, 2], [undefined]));
+        checkEqual(true, isFirst([null, 1, 2], [isNull]));
+        checkEqual(true, isFirst([null, 1, 2], [null]));
+        checkEqual(true, isFirst([undefined, 1, 2], [isUndefined, 1]));
+        checkEqual(true, isFirst([undefined, 1, 2], [undefined, 1]));
+        checkEqual(false, isFirst([undefined, 1, 2], [isNull, 1]));
+        checkEqual(false, isFirst([undefined, 1, 2], [null, 1]));
+        checkEqual(false, isFirst([null, 1, 2], [isUndefined, 1]));
+        checkEqual(false, isFirst([null, 1, 2], [undefined, 1]));
+        checkEqual(true, isFirst([null, 1, 2], [isNull, 1]));
+        checkEqual(true, isFirst([null, 1, 2], [null, 1])); // Object Named Parameter
 
         checkEqual(true, isFirst({
           array: ['A', 'B', 'C'],
@@ -779,6 +798,9 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, isFirst({
           array: ['A', 'B', 'C'],
           valueArray: ['a']
+        }));
+        checkEqual(true, isFirst(['A', 'B', 'C'], {
+          valueArray: ['A']
         }));
       });
     };
@@ -794,7 +816,23 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, isLast(['A', 'B', 'C'], ['A', 'C']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['c']));
         checkEqual(false, isLast(['A', 'B', 'C'], ['B']));
-        checkEqual(false, isLast([1], [2, 3])); // Object Named Parameter
+        checkEqual(false, isLast([1], [2, 3]));
+        checkEqual(true, isLast([0, 1, undefined], [isUndefined]));
+        checkEqual(true, isLast([0, 1, undefined], [undefined]));
+        checkEqual(false, isLast([0, 1, undefined], [isNull]));
+        checkEqual(false, isLast([0, 1, undefined], [null]));
+        checkEqual(false, isLast([0, 1, null], [isUndefined]));
+        checkEqual(false, isLast([0, 1, null], [undefined]));
+        checkEqual(true, isLast([0, 1, null], [isNull]));
+        checkEqual(true, isLast([0, 1, null], [null]));
+        checkEqual(true, isLast([0, 1, undefined], [1, isUndefined]));
+        checkEqual(true, isLast([0, 1, undefined], [1, undefined]));
+        checkEqual(false, isLast([0, 1, undefined], [1, isNull]));
+        checkEqual(false, isLast([0, 1, undefined], [1, null]));
+        checkEqual(false, isLast([0, 1, null], [1, isUndefined]));
+        checkEqual(false, isLast([0, 1, null], [1, undefined]));
+        checkEqual(true, isLast([0, 1, null], [1, isNull]));
+        checkEqual(true, isLast([0, 1, null], [1, null])); // Object Named Parameter
 
         checkEqual(true, isLast({
           array: ['A', 'B', 'C'],
@@ -803,6 +841,9 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual(false, isLast({
           array: ['A', 'B', 'C'],
           valueArray: ['c']
+        }));
+        checkEqual(true, isLast(['A', 'B', 'C'], {
+          valueArray: ['C']
         }));
       });
     };
@@ -1462,6 +1503,20 @@ var test_execute_array = function test_execute_array(parts) {
           index: 1,
           length: 2
         }));
+        checkEqual([0, 3], deleteLength([0, 1, 2, 3], {
+          index: 1,
+          length: 2
+        }));
+        checkEqual([0, 3], deleteLength([0, 1, 2, 3], 1, {
+          length: 2
+        }));
+        checkEqual([0, 1], deleteLength({
+          array: [0, 1, 2, 3],
+          index: 2
+        }));
+        checkEqual([0, 1], deleteLength([0, 1, 2, 3], {
+          index: 2
+        }));
       });
     };
 
@@ -1482,6 +1537,7 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual([3, 4], deleteFirst([0, 1, 2, 3, 4], 3));
         checkEqual([4], deleteFirst([0, 1, 2, 3, 4], 4));
         checkEqual([], deleteFirst([0, 1, 2, 3, 4], 5));
+        checkEqual([1, 2, 3, 4], deleteFirst([0, 1, 2, 3, 4]));
         checkEqual(true, isThrown(function () {
           return deleteFirst([0, 1, 2, 3, 4], 6);
         })); // exception
@@ -1512,6 +1568,9 @@ var test_execute_array = function test_execute_array(parts) {
           array: [0, 1, 2, 3],
           length: 1
         }));
+        checkEqual([1, 2, 3], deleteFirst([0, 1, 2, 3], {
+          length: 1
+        }));
       });
     };
 
@@ -1532,6 +1591,7 @@ var test_execute_array = function test_execute_array(parts) {
         checkEqual([0, 1], deleteLast([0, 1, 2, 3, 4], 3));
         checkEqual([0], deleteLast([0, 1, 2, 3, 4], 4));
         checkEqual([], deleteLast([0, 1, 2, 3, 4], 5));
+        checkEqual([0, 1, 2, 3], deleteLast([0, 1, 2, 3, 4]));
         checkEqual(true, isThrown(function () {
           return deleteLast([0, 1, 2, 3, 4], 6);
         })); // exception
@@ -1560,6 +1620,9 @@ var test_execute_array = function test_execute_array(parts) {
 
         checkEqual([0, 1, 2], deleteLast({
           array: [0, 1, 2, 3],
+          length: 1
+        }));
+        checkEqual([0, 1, 2], deleteLast([0, 1, 2, 3], {
           length: 1
         }));
       });

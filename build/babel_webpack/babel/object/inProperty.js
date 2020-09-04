@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.inProp = exports.inProperty = exports._inProperty = void 0;
 
-var _isType = require("../type/isType.js");
+var _type = require("../type/type.js");
 
 var _replaceAll2 = require("../string/_replaceAll.js");
 
@@ -19,23 +19,19 @@ var _getProperty = require("../object/getProperty.js");
 var _inProperty = function _inProperty(object, propertyPaths) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (!(0, _isType.isObjectLike)(object)) {
+  if (!(0, _type.isObjectLike)(object)) {
     return false;
   }
 
-  if ((0, _isType.isString)(propertyPaths)) {
+  if ((0, _type.isString)(propertyPaths)) {
     propertyPaths = (0, _replaceAll2._replaceAll)(propertyPaths, ' ', '').split(',');
   }
 
   for (var i = 0; i < propertyPaths.length; i += 1) {
     if (i !== 0 && i === propertyPaths.length - 1) {
-      if (propertyPaths[i] === '' || (0, _isType.isUndefined)(propertyPaths[i])) {
+      if (propertyPaths[i] === '' || (0, _type.isUndefined)(propertyPaths[i])) {
         continue;
       }
-    }
-
-    if (!(0, _isType.isString)(propertyPaths[i])) {
-      throw new TypeError('_inProperty args(propertyPaths) element is not string');
     }
 
     var result = (0, _getProperty._getPropertyBase)(object, propertyPaths[i], hasOwn);
@@ -73,15 +69,15 @@ var inProperty = function inProperty(object, propertyPaths) {
     hasOwn = _hasOwn.hasOwn;
   }
 
-  if (!(0, _isType.isObjectLike)(object)) {
-    throw new TypeError('inProperty args(object) is not object type');
+  if (!(0, _type.isObjectLike)(object)) {
+    throw new TypeError('inProperty args(object) is not objectLike');
   }
 
-  if (!((0, _isType.isString)(propertyPaths) || (0, _isType.isArray)(propertyPaths))) {
-    throw new TypeError('inProperty args(propertyPaths) is not [array|string]');
+  if (!((0, _type.isString)(propertyPaths) || (0, _type.isStringArray)(propertyPaths))) {
+    throw new TypeError('inProperty args(propertyPaths) is not [string array|string]');
   }
 
-  if (!(0, _isType.isBoolean)(hasOwn)) {
+  if (!(0, _type.isBoolean)(hasOwn)) {
     throw new TypeError('inProperty args(hasOwn) is not boolean');
   }
 

@@ -28,7 +28,7 @@ var propertyCount = function propertyCount(object) {
   }
 
   if (!(0, _type.isObjectLike)(object)) {
-    throw new TypeError('propertyCount args(object) is not object type');
+    throw new TypeError('propertyCount args(object) is not objectLike');
   }
 
   if (!(0, _type.isBoolean)(hasOwn)) {

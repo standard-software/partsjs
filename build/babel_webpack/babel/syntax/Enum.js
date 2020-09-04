@@ -47,8 +47,8 @@ var Enum = function Enum(values) {
     useIndex = _useIndex.useIndex;
   }
 
-  if (!(0, _type.isArray)(values)) {
-    throw new TypeError('Enum args(values) is not array');
+  if (!(0, _type.isStringArray)(values)) {
+    throw new TypeError('Enum args(values) is not string array');
   }
 
   if (!(0, _type.isBoolean)(useIndex)) {

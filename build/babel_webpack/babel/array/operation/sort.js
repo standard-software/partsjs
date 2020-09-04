@@ -13,6 +13,8 @@ var _or2 = require("../../compare/or.js");
 
 var _isObjectParameter = require("../../object/isObjectParameter.js");
 
+var _objectValues2 = require("../../object/objectValues.js");
+
 var _Enum2 = require("../../syntax/Enum.js");
 
 /**
@@ -26,7 +28,7 @@ var _sort = function _sort(array) {
   }], [sort.order.descending, function () {
     return sort.orderFunc.descending;
   }], [function () {
-    throw new Error('_sort args(order) is not ["ascending"|"descending"]');
+    throw new TypeError('_sort args(order) is not ["ascending"|"descending"]');
   }]]);
   array.sort(function (a, b) {
     return orderFunc(func(a), func(b));
@@ -63,7 +65,7 @@ var sort = function sort(array) {
     throw new TypeError('sort args(array) is not array');
   }
 
-  if (!(0, _or2._or)(order, [sort.order.ascending, sort.order.descending])) {
+  if (!(0, _or2._or)(order, (0, _objectValues2._objectValues)(sort.order))) {
     throw new TypeError('sort args(order) is not ["ascending"|"descending"]');
   }
 

@@ -11,6 +11,8 @@ var _object = require("../object/object.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
+var _hasOwn2 = require("../object/_hasOwn.js");
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -103,7 +105,7 @@ clone.func.object = function (source) {
   bufferWrite(source, cloneValue);
 
   for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
+    if ((0, _hasOwn2._hasOwn)(source, key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }
@@ -159,7 +161,7 @@ clone.func.objectLike = function (source) {
   bufferWrite(source, cloneValue);
 
   for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
+    if ((0, _hasOwn2._hasOwn)(source, key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }

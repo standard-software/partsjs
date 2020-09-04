@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._propertyCount = void 0;
 
+var _hasOwn2 = require("../object/_hasOwn.js");
+
 /**
  * propertyCount
  */
@@ -14,7 +16,7 @@ var _propertyCount = function _propertyCount(object) {
 
   if (hasOwn) {
     for (var property in object) {
-      if (Object.prototype.hasOwnProperty.call(object, property)) {
+      if ((0, _hasOwn2._hasOwn)(object, property)) {
         result += 1;
       }
     }

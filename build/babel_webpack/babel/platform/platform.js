@@ -41,56 +41,76 @@ var isDeno = function isDeno() {
 
 exports.isDeno = isDeno;
 
+var _name;
+
 var name = function name() {
-  var result;
+  if (typeof _name !== 'undefined') {
+    return _name;
+  }
 
   if (typeof WScript !== 'undefined') {
-    result = 'WindowsScriptHost';
+    _name = 'WindowsScriptHost';
   } else if (typeof Deno !== 'undefined') {
-    result = 'Deno';
+    _name = 'Deno';
   } else if (typeof Browser !== 'undefined') {
-    result = 'GoogleAppsScript';
+    _name = 'GoogleAppsScript';
   } else if (typeof window === 'undefined') {
-    result = 'Node.js';
+    _name = 'Node.js';
   } else if (typeof jest !== 'undefined') {
-    result = 'Jest';
+    _name = 'Jest';
   } else if (typeof process !== 'undefined') {
-    result = 'WebBrowser';
+    _name = 'WebBrowser';
   } else {
-    result = 'unknown';
+    _name = 'unknown';
   }
 
   ;
-  return result;
+  return _name;
 };
 
 exports.name = name;
 
+name.reset = function () {
+  _name = undefined;
+};
+
+var _browserName;
+
 var browserName = function browserName() {
+  if (typeof _browserName !== 'undefined') {
+    return _browserName;
+  }
+
   if (!isWebBrowser()) {
-    return '';
-  }
-
-  var ua = window.navigator.userAgent.toLowerCase();
-
-  if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
-    return 'InternetExplorer';
-  } else if (ua.indexOf('edg') !== -1) {
-    return 'Edge';
-  } else if (ua.indexOf('opr') !== -1) {
-    return 'Opera';
-  } else if (ua.indexOf('chrome') !== -1) {
-    return 'Chrome';
-  } else if (ua.indexOf('safari') !== -1) {
-    return 'Safari';
-  } else if (ua.indexOf('firefox') !== -1) {
-    return 'Firefox';
+    _browserName = '';
   } else {
-    return 'other';
+    var ua = window.navigator.userAgent.toLowerCase();
+
+    if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
+      _browserName = 'InternetExplorer';
+    } else if (ua.indexOf('edg') !== -1) {
+      _browserName = 'Edge';
+    } else if (ua.indexOf('opr') !== -1) {
+      _browserName = 'Opera';
+    } else if (ua.indexOf('chrome') !== -1) {
+      _browserName = 'Chrome';
+    } else if (ua.indexOf('safari') !== -1) {
+      _browserName = 'Safari';
+    } else if (ua.indexOf('firefox') !== -1) {
+      _browserName = 'Firefox';
+    } else {
+      _browserName = 'other';
+    }
   }
+
+  return _browserName;
 };
 
 exports.browserName = browserName;
+
+browserName.reset = function () {
+  _browserName = undefined;
+};
 
 var isChrome = function isChrome() {
   return browserName() === 'Chrome';

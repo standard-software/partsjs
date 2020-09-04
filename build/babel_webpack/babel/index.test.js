@@ -54,8 +54,6 @@ var test_execute_index = function test_execute_index(parts) {
           propertyCount = _parts$object.propertyCount,
           inProperty = _parts$object.inProperty;
       it('test_execute_nameSpace 1', function () {
-        var countArray = [365, 18, 2, 252, 12, 11, 22, 29, 7, 37, 17, 37, 32];
-
         var propertyCountForParts = function propertyCountForParts(parts) {
           var result = propertyCount(parts);
 
@@ -78,6 +76,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
+        var countArray = [374, 18, 2, 252, 12, 11, 22, 29, 7, 38, 23, 37, 32];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
