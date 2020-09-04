@@ -7,7 +7,9 @@ import {
   isError,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
-} from '../type/isType.js';
+
+  isStringArray,
+} from '../type/type.js';
 
 import {
   _replaceAll,
@@ -41,11 +43,6 @@ export const _inProperty = (object, propertyPaths, hasOwn = true) => {
         continue;
       }
     }
-    if (!isString(propertyPaths[i])) {
-      throw new TypeError(
-        '_inProperty args(propertyPaths) element is not string',
-      );
-    }
     const result = _getPropertyBase(object, propertyPaths[i], hasOwn);
     if (result.in === false) {
       return false;
@@ -72,9 +69,9 @@ export const inProperty = (object, propertyPaths, hasOwn = true) => {
     );
   }
 
-  if (!(isString(propertyPaths) || isArray(propertyPaths))) {
+  if (!(isString(propertyPaths) || isStringArray(propertyPaths))) {
     throw new TypeError(
-      'inProperty args(propertyPaths) is not [array|string]',
+      'inProperty args(propertyPaths) is not [string array|string]',
     );
   }
   if (!isBoolean(hasOwn)) {
