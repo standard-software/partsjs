@@ -5,6 +5,8 @@ import {
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
+
+  isStringArray,
 } from '../type/type.js';
 
 import {
@@ -37,9 +39,9 @@ export const Enum = function(values, useIndex = false) {
     ({ useIndex } = useIndex);
   }
 
-  if (!isArray(values)) {
+  if (!isStringArray(values)) {
     throw new TypeError(
-      'Enum args(values) is not array',
+      'Enum args(values) is not string array',
     );
   }
   if (!isBoolean(useIndex)) {

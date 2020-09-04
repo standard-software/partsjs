@@ -945,6 +945,14 @@ export const test_execute_syntax = (parts) => {
         checkEqual({a: 0, b: 1, c: 2},
           new Enum(['a', 'b', 'c'], { useIndex: true }),
         );
+
+        // exception TypeError
+        checkEqual(false, isThrown(() => {
+          Enum(['a', 'b', 'c']);
+        }));
+        checkEqual(true, isThrown(() => {
+          Enum([0, 'b', 'c']);
+        }));
       });
     };
 

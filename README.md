@@ -305,6 +305,7 @@ You can now use the functions of the parts.js object.
   - _hasOwn.js / hasOwn.js
 - rename objectToKeyValueArray.js >> objectEntries.js
 - add objectKeys.js / objectValues.js
+- update Enum args(values) check string array
 
 ### 7.4.0
 #### 2020/08/25(Tue)
