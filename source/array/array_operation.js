@@ -155,9 +155,11 @@ export const deleteLength = (
   array, index, length = array.length - index,
 ) => {
   if (isObjectParameter(array, 'array, index', 'length')) {
-    ({
-      array, index, length  = array.length - index,
-    } = array);
+    ({ array, index, length = array.length - index } = array);
+  } else if (isObjectParameter(index, 'index', 'length')) {
+    ({ index, length = array.length - index } = index);
+  } else if (isObjectParameter(length, 'length')) {
+    ({ length } = length);
   }
 
   if (!isArray(array)) {
@@ -193,13 +195,15 @@ export const deleteLength = (
 /**
  * array.operation.deleteFirst
  */
-export const _deleteFirst = (array, length) => {
+export const _deleteFirst = (array, length = 1) => {
   return _deleteLength(array, 0, length);
 };
 
-export const deleteFirst = (array, length) => {
+export const deleteFirst = (array, length = 1) => {
   if (isObjectParameter(array, 'array, length')) {
-    ({ array, length } = array);
+    ({ array, length = 1 } = array);
+  } else if (isObjectParameter(length, 'length')) {
+    ({ length } = length);
   }
 
   if (!isArray(array)) {
@@ -224,13 +228,15 @@ export const deleteFirst = (array, length) => {
 /**
  * array.operation.deleteLast
  */
-export const _deleteLast = (array, length) => {
+export const _deleteLast = (array, length = 1) => {
   return _deleteLength(array, array.length - length, length);
 };
 
-export const deleteLast = (array, length) => {
+export const deleteLast = (array, length = 1) => {
   if (isObjectParameter(array, 'array, length')) {
-    ({ array, length } = array);
+    ({ array, length = 1 } = array);
+  } else if (isObjectParameter(length, 'length')) {
+    ({ length } = length);
   }
 
   if (!isArray(array)) {

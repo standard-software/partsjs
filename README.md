@@ -311,6 +311,11 @@ You can now use the functions of the parts.js object.
 - update inProperty Error Check
 - add fixProperty.js
 - update sort use objectValues
+- update array.deleteFirst / Last
+  - support full object parameter
+  - length default 1
+- update array.deleteLength
+  - support full object parameter
 
 ### 7.4.0
 #### 2020/08/25(Tue)

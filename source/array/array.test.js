@@ -1299,6 +1299,35 @@ export const test_execute_array = (parts) => {
             length: 2,
           })
         );
+        checkEqual([0, 3],
+          deleteLength(
+            [0, 1, 2, 3],
+            {
+              index: 1,
+              length: 2,
+            })
+        );
+        checkEqual([0, 3],
+          deleteLength(
+            [0, 1, 2, 3],
+            1,
+            {
+              length: 2,
+            })
+        );
+        checkEqual([0, 1],
+          deleteLength({
+            array: [0, 1, 2, 3],
+            index: 2,
+          })
+        );
+        checkEqual([0, 1],
+          deleteLength(
+            [0, 1, 2, 3],
+            {
+              index: 2,
+            })
+        );
       });
     };
 
@@ -1311,12 +1340,13 @@ export const test_execute_array = (parts) => {
 
         checkEqual(true,  isThrown(() => deleteFirst([0,1,2,3,4], -2)));
         checkEqual(true,  isThrown(() => deleteFirst([0,1,2,3,4], -1)));
-        checkEqual([0,1,2,3,4],  deleteFirst([0,1,2,3,4], 0));
-        checkEqual([1,2,3,4],    deleteFirst([0,1,2,3,4], 1));
-        checkEqual([2,3,4],      deleteFirst([0,1,2,3,4], 2));
-        checkEqual([3,4],        deleteFirst([0,1,2,3,4], 3));
-        checkEqual([4],          deleteFirst([0,1,2,3,4], 4));
-        checkEqual([],           deleteFirst([0,1,2,3,4], 5));
+        checkEqual([0,1,2,3,4], deleteFirst([0,1,2,3,4], 0));
+        checkEqual([1,2,3,4],   deleteFirst([0,1,2,3,4], 1));
+        checkEqual([2,3,4],     deleteFirst([0,1,2,3,4], 2));
+        checkEqual([3,4],       deleteFirst([0,1,2,3,4], 3));
+        checkEqual([4],         deleteFirst([0,1,2,3,4], 4));
+        checkEqual([],          deleteFirst([0,1,2,3,4], 5));
+        checkEqual([1,2,3,4],   deleteFirst([0,1,2,3,4]));
         checkEqual(true,  isThrown(() => deleteFirst([0,1,2,3,4],  6)));
 
         // exception
@@ -1344,10 +1374,10 @@ export const test_execute_array = (parts) => {
 
         // Object Named Parameter
         checkEqual([1, 2, 3],
-          deleteFirst({
-            array: [0, 1, 2, 3],
-            length: 1,
-          })
+          deleteFirst({ array: [0, 1, 2, 3], length: 1 })
+        );
+        checkEqual([1, 2, 3],
+          deleteFirst([0, 1, 2, 3], { length: 1 })
         );
       });
     };
@@ -1361,12 +1391,13 @@ export const test_execute_array = (parts) => {
 
         checkEqual(true,  isThrown(() => deleteLast([0,1,2,3,4], -2)));
         checkEqual(true,  isThrown(() => deleteLast([0,1,2,3,4], -1)));
-        checkEqual([0,1,2,3,4],  deleteLast([0,1,2,3,4], 0));
-        checkEqual([0,1,2,3],    deleteLast([0,1,2,3,4], 1));
-        checkEqual([0,1,2],      deleteLast([0,1,2,3,4], 2));
-        checkEqual([0,1],        deleteLast([0,1,2,3,4], 3));
-        checkEqual([0],          deleteLast([0,1,2,3,4], 4));
-        checkEqual([],           deleteLast([0,1,2,3,4], 5));
+        checkEqual([0,1,2,3,4], deleteLast([0,1,2,3,4], 0));
+        checkEqual([0,1,2,3],   deleteLast([0,1,2,3,4], 1));
+        checkEqual([0,1,2],     deleteLast([0,1,2,3,4], 2));
+        checkEqual([0,1],       deleteLast([0,1,2,3,4], 3));
+        checkEqual([0],         deleteLast([0,1,2,3,4], 4));
+        checkEqual([],          deleteLast([0,1,2,3,4], 5));
+        checkEqual([0,1,2,3],   deleteLast([0,1,2,3,4]));
         checkEqual(true,  isThrown(() => deleteLast([0,1,2,3,4],  6)));
 
         // exception
@@ -1394,10 +1425,10 @@ export const test_execute_array = (parts) => {
 
         // Object Named Parameter
         checkEqual([0, 1, 2],
-          deleteLast({
-            array: [0, 1, 2, 3],
-            length: 1,
-          })
+          deleteLast({ array: [0, 1, 2, 3], length: 1 })
+        );
+        checkEqual([0, 1, 2],
+          deleteLast([0, 1, 2, 3], { length: 1 })
         );
       });
     };
