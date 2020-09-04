@@ -8,13 +8,17 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
+import {
+  _hasOwn,
+} from '../object/_hasOwn.js';
+
 /**
  * objectToKeyValueArray
  */
 export const _objectToKeyValueArray = (object) => {
   const result = [];
   for (const key in object) {
-    if (Object.prototype.hasOwnProperty.call(object, key)) {
+    if (_hasOwn(object, key)) {
       result.push([key, object[key]]);
     }
   }

@@ -1,3 +1,7 @@
+import {
+  _hasOwn,
+} from '../object/_hasOwn.js';
+
 /**
  * propertyCount
  */
@@ -8,7 +12,7 @@ export const _propertyCount = (
   let result = 0;
   if (hasOwn) {
     for (const property in object) {
-      if (Object.prototype.hasOwnProperty.call(object, property)) {
+      if (_hasOwn(object, property)) {
         result += 1;
       }
     }

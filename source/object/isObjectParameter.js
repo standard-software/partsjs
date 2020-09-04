@@ -12,6 +12,10 @@ import {
   _propertyCount,
 } from '../object/_propertyCount.js';
 
+import {
+  _hasOwn,
+} from '../object/_hasOwn.js';
+
 /**
  * isObjectParameter
  */
@@ -46,7 +50,7 @@ export const isObjectParameter = (
   let propMatchCount = 0;
   let optionalPropMatchCount = 0;
   for (const property in object) {
-    if (Object.prototype.hasOwnProperty.call(object, property)) {
+    if (_hasOwn(object, property)) {
       if (props.indexOf(property) !== -1) {
         propMatchCount += 1;
       } else if (optionalProps.indexOf(property) !== -1) {

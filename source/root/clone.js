@@ -21,6 +21,10 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
+import {
+  _hasOwn,
+} from '../object/_hasOwn.js';
+
 /**
  * clone
  */
@@ -92,7 +96,7 @@ clone.func.object = (
     : new source.constructor();
   bufferWrite(source, cloneValue);
   for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
+    if (_hasOwn(source, key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }
@@ -142,7 +146,7 @@ clone.func.objectLike = (
     : new source.constructor();
   bufferWrite(source, cloneValue);
   for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
+    if (_hasOwn(source, key)) {
       cloneValue[key] = __cloneDeep(source[key]);
     }
   }

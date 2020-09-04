@@ -294,13 +294,15 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 7.5.0
-#### 2020/08/31(Mon)
+#### 2020/09/04(Fri)
 - update platform.name / browserName
   - use cash var
 - update canUse Map/WeakMap/Set/Weak
 - add _global.js
 - update package.json
   - scripts jest:watch
+- add file from has.js
+  - _hasOwn.js / hasOwn.js
 
 ### 7.4.0
 #### 2020/08/25(Tue)
