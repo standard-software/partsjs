@@ -303,6 +303,7 @@ You can now use the functions of the parts.js object.
   - scripts jest:watch
 - add file from has.js
   - _hasOwn.js / hasOwn.js
+- rename objectToKeyValueArray.js >> objectEntries.js
 
 ### 7.4.0
 #### 2020/08/25(Tue)

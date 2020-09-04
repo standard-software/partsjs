@@ -14,8 +14,8 @@ import {
 } from '../array/IntegerArray.js';
 
 import {
-  objectToKeyValueArray,
-} from '../object/objectToKeyValueArray.js';
+  objectEntries,
+} from '../object/objectEntries.js';
 
 /**
  * loop
@@ -53,7 +53,7 @@ export const loop = (start, end, increment) => {
   } else if (isObjectParameter(increment, 'increment')) {
     ({ increment } = increment);
   } else if (isObject(start)) {
-    return _loopBase(objectToKeyValueArray(start));
+    return _loopBase(objectEntries(start));
   } else if (isArray(start)) {
     return _loopBase(start);
   }

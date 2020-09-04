@@ -13,9 +13,9 @@ import {
 } from '../object/_hasOwn.js';
 
 /**
- * objectToKeyValueArray
+ * objectEntries
  */
-export const _objectToKeyValueArray = (object) => {
+export const _objectEntries = (object) => {
   const result = [];
   for (const key in object) {
     if (_hasOwn(object, key)) {
@@ -25,25 +25,25 @@ export const _objectToKeyValueArray = (object) => {
   return result;
 };
 
-export const objectToKeyValueArray = (object) => {
+export const objectEntries = (object) => {
   if (isObjectParameter(object, 'object')) {
     ({ object } = object);
   }
 
   if (!isObject(object)) {
     throw new TypeError(
-      'objectToKeyValueArray args(object) is not object',
+      'objectEntries args(object) is not object',
     );
   }
 
-  return _objectToKeyValueArray(object);
+  return _objectEntries(object);
 };
 
-export const objectEntries = objectToKeyValueArray;
+export const objectToKeyValueArray = objectEntries;
 
 export default {
-  _objectToKeyValueArray,
-  objectToKeyValueArray,
-
+  _objectEntries,
   objectEntries,
+
+  objectToKeyValueArray,
 };
