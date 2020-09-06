@@ -1530,6 +1530,37 @@ export const test_execute_string = (parts) => {
             split.excludeSpace.all,
           ),
         );
+        checkEqual(['ABC', 'DEF', 'GHI'],
+          split(
+            ' , , A B C , , DE F ,, G HI , , ', ',',
+            split.excludeEmptyStr.all,
+            split.excludeSpace.all,
+          ),
+        );
+
+        checkEqual([''],  split('', ',',  split.excludeEmptyStr.none) );
+        checkEqual([],    split('', ',',  split.excludeEmptyStr.first) );
+        checkEqual([''],  split('', ',',  split.excludeEmptyStr.last) );
+        checkEqual([''],  split('', ',',  split.excludeEmptyStr.bothEnds) );
+        checkEqual([],    split('', ',',  split.excludeEmptyStr.all) );
+
+        checkEqual(['', ''],  split(',', ',', split.excludeEmptyStr.none) );
+        checkEqual([''],      split(',', ',', split.excludeEmptyStr.first) );
+        checkEqual([''],      split(',', ',', split.excludeEmptyStr.last) );
+        checkEqual([],        split(',', ',', split.excludeEmptyStr.bothEnds) );
+        checkEqual([],        split(',', ',', split.excludeEmptyStr.all) );
+
+        checkEqual(['', '', ''],  split(',,', ',',  split.excludeEmptyStr.none) );
+        checkEqual(['', ''],      split(',,', ',',  split.excludeEmptyStr.first) );
+        checkEqual(['', ''],      split(',,', ',',  split.excludeEmptyStr.last) );
+        checkEqual([''],          split(',,', ',',  split.excludeEmptyStr.bothEnds) );
+        checkEqual([],            split(',,', ',',  split.excludeEmptyStr.all) );
+
+        checkEqual(['', 'A', ''], split(',A,', ',',  split.excludeEmptyStr.none) );
+        checkEqual(['A', ''],     split(',A,', ',',  split.excludeEmptyStr.first) );
+        checkEqual(['', 'A'],     split(',A,', ',',  split.excludeEmptyStr.last) );
+        checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.bothEnds) );
+        checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.all) );
 
         // object parameter
         checkEqual(['ABC', 'DEF', 'GHI'],

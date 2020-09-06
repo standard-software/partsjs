@@ -42,43 +42,6 @@ export const _split = (
   excludeSpace = split.excludeSpace.none,
 ) => {
   const result = str.split(separator);
-  switch (excludeEmptyStr) {
-  case split.excludeEmptyStr.none:
-    break;
-  case split.excludeEmptyStr.first:
-    if (1 <= result.length) {
-      if (_isFirst(result, [''])) {
-        _deleteFirst(result);
-      }
-    }
-    break;
-  case split.excludeEmptyStr.last:
-    if (1 <= result.length) {
-      if (_isLast(result, [''])) {
-        _deleteLast(result);
-      }
-    }
-    break;
-  case split.excludeEmptyStr.bothEnds:
-    if (1 <= result.length) {
-      if (_isFirst(result, [''])) {
-        _deleteFirst(result);
-      }
-    }
-    if (1 <= result.length) {
-      if (_isLast(result, [''])) {
-        _deleteLast(result);
-      }
-    }
-    break;
-  case split.excludeEmptyStr.all:
-    _filter(result, element => element !== '');
-    break;
-  default:
-    throw new TypeError(
-      '_split args(excludeEmptyStr) is not ["none"|"first"|"last"|"bothEnds"|"all"]',
-    );
-  }
 
   switch (excludeSpace) {
   case split.excludeSpace.none:
@@ -96,6 +59,42 @@ export const _split = (
   default:
     throw new TypeError(
       '_split args(excludeSpace) is not ["none"|"trim"|"all"]',
+    );
+  }
+
+  switch (excludeEmptyStr) {
+  case split.excludeEmptyStr.none:
+    break;
+  case split.excludeEmptyStr.first:
+    if (1 <= result.length) {
+      if (_isFirst(result, [''])) {
+        _deleteFirst(result);
+      }
+    }
+    break;
+  case split.excludeEmptyStr.last:
+    if (2 <= result.length) {
+      if (_isLast(result, [''])) {
+        _deleteLast(result);
+      }
+    }
+    break;
+  case split.excludeEmptyStr.bothEnds:
+    if (2 <= result.length) {
+      if (_isFirst(result, [''])) {
+        _deleteFirst(result);
+      }
+      if (_isLast(result, [''])) {
+        _deleteLast(result);
+      }
+    }
+    break;
+  case split.excludeEmptyStr.all:
+    _filter(result, element => element !== '');
+    break;
+  default:
+    throw new TypeError(
+      '_split args(excludeEmptyStr) is not ["none"|"first"|"last"|"bothEnds"|"all"]',
     );
   }
 
