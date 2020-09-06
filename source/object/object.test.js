@@ -586,6 +586,49 @@ export const test_execute_object = (parts) => {
         checkEqual(undefined, getProperty(testObj1, 'b'       ) );
         checkEqual(undefined, getProperty(testObj1, 'b.c'     ) );
 
+        const testObj2 = {
+          a: {
+            b: {
+              c: undefined,
+            },
+          },
+        };
+        checkEqual(undefined, getProperty(testObj2, 'a'       ).b.c );
+        checkEqual(undefined, getProperty(testObj2, 'a.b'     ).c );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c'   ) );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d' ) );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b'   ) );
+        checkEqual(undefined, getProperty(testObj2, ''        ) );
+        checkEqual(undefined, getProperty(testObj2, '.'       ) );
+        checkEqual(undefined, getProperty(testObj2, '..'      ) );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.'  ) );
+        checkEqual(undefined, getProperty(testObj2, 'a.'      ) );
+        checkEqual(undefined, getProperty(testObj2, '.a'      ) );
+        checkEqual(undefined, getProperty(testObj2, 'a.c'     ) );
+        checkEqual(undefined, getProperty(testObj2, 'b'       ) );
+        checkEqual(undefined, getProperty(testObj2, 'b.c'     ) );
+
+        /* eslint-disable comma-spacing */
+        checkEqual(undefined, getProperty(testObj2, 'a'       ,true, false).b.c );
+        checkEqual(undefined, getProperty(testObj2, 'a.b'     ,true, false).c );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c'   ,true, false) );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d' ,true, false) );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b'   ,true, false) );
+
+        checkEqual({ b: { c: undefined} }, getProperty(testObj2, 'a'       ,true, true).value );
+        checkEqual(undefined, getProperty(testObj2, 'a.b'     ,true, true).value.c );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c'   ,true, true).value );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d' ,true, true).value );
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b'   ,true, true).value );
+
+        testCounter();
+        checkEqual(true,  getProperty(testObj2, 'a'       ,true, true).exist );
+        checkEqual(true,  getProperty(testObj2, 'a.b'     ,true, true).exist );
+        checkEqual(true,  getProperty(testObj2, 'a.b.c'   ,true, true).exist );
+        checkEqual(false, getProperty(testObj2, 'a.b.c.d' ,true, true).exist );
+        checkEqual(false, getProperty(testObj2, 'a.b.b'   ,true, true).exist );
+        /* eslint-enable comma-spacing */
+
         // object parameter
         const object1 = {
           a: {
@@ -618,6 +661,48 @@ export const test_execute_object = (parts) => {
         checkEqual(false,
           getProperty(
             object2, 'a.b.c', { hasOwn: false },
+          ),
+        );
+
+        checkEqual({ exist: false },
+          getProperty({
+            object: object2, propertyPath: 'a.b.c', hasOwn: true, detail: true,
+          }),
+        );
+        checkEqual({ exist: true, value: false },
+          getProperty({
+            object: object2, propertyPath: 'a.b.c', hasOwn: false, detail: true,
+          }),
+        );
+        checkEqual({ exist: true, value: false },
+          getProperty(
+            object2, { propertyPath: 'a.b.c', hasOwn: false, detail: true },
+          ),
+        );
+        checkEqual({ exist: true, value: false },
+          getProperty(
+            object2, 'a.b.c', { hasOwn: false, detail: true },
+          ),
+        );
+        checkEqual({ exist: true, value: false },
+          getProperty(
+            object2, 'a.b.c', false, { detail: true },
+          ),
+        );
+
+        checkEqual({ exist: false },
+          getProperty({
+            object: object2, propertyPath: 'a.b.c', detail: true,
+          }),
+        );
+        checkEqual({ exist: false },
+          getProperty(
+            object2, { propertyPath: 'a.b.c', detail: true },
+          ),
+        );
+        checkEqual({ exist: false },
+          getProperty(
+            object2, 'a.b.c', { detail: true },
           ),
         );
       });

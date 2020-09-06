@@ -293,6 +293,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 7.6.0
+#### 2020/09/06(Sun)
+- update getProperty.js
+  - rename _getProperyBase >> _getProperty
+
 ### 7.5.0
 #### 2020/09/04(Fri)
 - update platform.name / browserName

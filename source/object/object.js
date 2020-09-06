@@ -60,7 +60,6 @@ export const {
 } = objectValues_js;
 
 export const {
-  _getPropertyBase,
   _getProperty,
   getProperty,
   getProp,

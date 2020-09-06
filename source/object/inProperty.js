@@ -20,7 +20,7 @@ import {
 } from '../object/isObjectParameter.js';
 
 import {
-  _getPropertyBase,
+  _getProperty,
 } from '../object/getProperty.js';
 
 /**
@@ -43,8 +43,8 @@ export const _inProperty = (object, propertyPaths, hasOwn = true) => {
         continue;
       }
     }
-    const result = _getPropertyBase(object, propertyPaths[i], hasOwn);
-    if (result.in === false) {
+    const result = _getProperty(object, propertyPaths[i], hasOwn, true);
+    if (result.exist === false) {
       return false;
     }
   }
