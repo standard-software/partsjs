@@ -27,35 +27,36 @@ import {
   _propertyCount,
 } from '../object/_propertyCount.js';
 
+import {
+  _splitCommaItems,
+} from '../string/splitCommaItems.js';
+
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 /**
  * _fixProperty
  */
 export const _fixProperty = (object, propertyNames) => {
 
-  if (!isObjectLike(object)) {
-    return false;
-  }
-
   if (isString(propertyNames)) {
-    propertyNames = _replaceAll(propertyNames, ' ', '').split(',');
+    propertyNames = _splitCommaItems(propertyNames);
+  } else {
+    if (__includes(propertyNames, '')) {
+      throw new Error(
+        '_fixProperty args(propertyNames) element is not empty string',
+      );
+    }
   }
-
-  let propertyNamesCount = propertyNames.length;
 
   for (let i = 0; i < propertyNames.length; i += 1) {
-    if ((i !== 0) && (i === propertyNames.length - 1)) {
-      if ((propertyNames[i] === '')
-      || (isUndefined(propertyNames[i]))) {
-        propertyNamesCount -= 1;
-        continue;
-      }
-    }
     const result = _hasOwn(object, propertyNames[i]);
     if (result === false) {
       return false;
     }
   }
-  return _propertyCount(object) === propertyNamesCount;
+  return _propertyCount(object) === propertyNames.length;
 };
 
 /**

@@ -294,7 +294,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 7.6.0
-#### 2020/09/06(Sun)
+#### 2020/09/07(Mon)
 - update getProperty.js
   - rename _getProperyBase >> _getProperty
 - update split
@@ -305,6 +305,7 @@ You can now use the functions of the parts.js object.
   - args propertyArray >> propertyNames
   - support full object parameter
   - bugfix return value
+- update fixProperty
 
 ### 7.5.0
 #### 2020/09/04(Fri)
