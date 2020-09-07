@@ -33,6 +33,14 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
+import {
+  _or,
+} from '../compare/or.js';
+
+import {
+  _objectValues,
+} from '../object/objectValues.js';
+
 /**
  * split
  */
@@ -132,6 +140,23 @@ export const split = (
     isObjectParameter(excludeSpace, 'excludeSpace')
   ) {
     ({ excludeSpace } = excludeSpace);
+  }
+
+  if (!isString(str)) {
+    throw new TypeError('split args(str) is not string');
+  }
+  if (!isString(separator)) {
+    throw new TypeError('split args(separator) is not string');
+  }
+  if (!_or(excludeEmptyStr, _objectValues(split.excludeEmptyStr))) {
+    throw new TypeError(
+      'split args(excludeEmptyStr) is not ["none","first","last","bothEnds","all"]',
+    );
+  }
+  if (!_or(excludeSpace, _objectValues(split.excludeSpace))) {
+    throw new TypeError(
+      'split args(excludeSpace) is not ["none","trim","all"]',
+    );
   }
 
   return _split(str, separator, excludeEmptyStr, excludeSpace);

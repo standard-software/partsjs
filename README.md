@@ -299,6 +299,7 @@ You can now use the functions of the parts.js object.
   - rename _getProperyBase >> _getProperty
 - update split
 - add __includes.js from includes.js
+- update split throw error
 
 ### 7.5.0
 #### 2020/09/04(Fri)
