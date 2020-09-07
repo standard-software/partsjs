@@ -116,8 +116,36 @@ var test_execute_object = function test_execute_object(parts) {
         var destObject = {};
         copyProperty({
           fromObject: sourceObject,
-          propertyArray: 'a',
+          propertyNames: 'a',
           toObject: destObject
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = {};
+        copyProperty(sourceObject, {
+          propertyNames: 'a',
+          toObject: destObject
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = {};
+        copyProperty(sourceObject, 'a', {
+          toObject: destObject
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = copyProperty({
+          fromObject: sourceObject,
+          propertyNames: 'a'
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = copyProperty(sourceObject, {
+          propertyNames: 'a'
         });
         checkEqual(true, 'a' in destObject);
         checkEqual(false, 'b' in destObject);
@@ -286,8 +314,12 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject2, 'a,b,c.d'));
         checkEqual(true, inProperty(sourceObject2, 'a,b,c.d.e'));
         checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.f'));
-        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.'));
-        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(true, isThrown(function () {
+          return inProperty(sourceObject2, 'a,b,c.d.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return inProperty(sourceObject2, 'a,b,c.d..e');
+        }));
         checkEqual(false, inProperty(sourceObject2, 'a,b,.d'));
         checkEqual(true, inProperty(sourceObject2, 'a,b,'));
         checkEqual(true, inProperty(sourceObject2, 'a,b,c.d.e,')); // object parameter
@@ -534,14 +566,75 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(undefined, getProperty(testObj1, 'a.b.c.d'));
         checkEqual(undefined, getProperty(testObj1, 'a.b.b'));
         checkEqual(undefined, getProperty(testObj1, ''));
-        checkEqual(undefined, getProperty(testObj1, '.'));
-        checkEqual(undefined, getProperty(testObj1, '..'));
-        checkEqual(undefined, getProperty(testObj1, 'a.b.c.'));
-        checkEqual(undefined, getProperty(testObj1, 'a.'));
-        checkEqual(undefined, getProperty(testObj1, '.a'));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, '.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, '..');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, 'a.b.c.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, 'a.');
+        }));
+        checkEqual(false, getProperty(testObj1, '.a').b.c);
         checkEqual(undefined, getProperty(testObj1, 'a.c'));
         checkEqual(undefined, getProperty(testObj1, 'b'));
-        checkEqual(undefined, getProperty(testObj1, 'b.c')); // object parameter
+        checkEqual(undefined, getProperty(testObj1, 'b.c'));
+        var testObj2 = {
+          a: {
+            b: {
+              c: undefined
+            }
+          }
+        };
+        checkEqual(undefined, getProperty(testObj2, 'a').b.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b').c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c'));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d'));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b'));
+        checkEqual(undefined, getProperty(testObj2, ''));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, '.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, '..');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, 'a.b.c.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, 'a.');
+        }));
+        checkEqual(undefined, getProperty(testObj2, '.a').b.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.c'));
+        checkEqual(undefined, getProperty(testObj2, 'b'));
+        checkEqual(undefined, getProperty(testObj2, 'b.c'));
+        /* eslint-disable comma-spacing */
+
+        checkEqual(undefined, getProperty(testObj2, 'a', true, false).b.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b', true, false).c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c', true, false));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d', true, false));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b', true, false));
+        checkEqual({
+          b: {
+            c: undefined
+          }
+        }, getProperty(testObj2, 'a', true, true).value);
+        checkEqual(undefined, getProperty(testObj2, 'a.b', true, true).value.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c', true, true).value);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d', true, true).value);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b', true, true).value);
+        testCounter();
+        checkEqual(true, getProperty(testObj2, 'a', true, true).exist);
+        checkEqual(true, getProperty(testObj2, 'a.b', true, true).exist);
+        checkEqual(true, getProperty(testObj2, 'a.b.c', true, true).exist);
+        checkEqual(false, getProperty(testObj2, 'a.b.c.d', true, true).exist);
+        checkEqual(false, getProperty(testObj2, 'a.b.b', true, true).exist);
+        /* eslint-enable comma-spacing */
+        // object parameter
 
         var object1 = {
           a: {
@@ -573,6 +666,62 @@ var test_execute_object = function test_execute_object(parts) {
         }));
         checkEqual(false, getProperty(object2, 'a.b.c', {
           hasOwn: false
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          hasOwn: true,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          hasOwn: false,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty(object2, {
+          propertyPath: 'a.b.c',
+          hasOwn: false,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty(object2, 'a.b.c', {
+          hasOwn: false,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty(object2, 'a.b.c', false, {
+          detail: true
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          detail: true
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty(object2, {
+          propertyPath: 'a.b.c',
+          detail: true
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty(object2, 'a.b.c', {
+          detail: true
         }));
       });
     };

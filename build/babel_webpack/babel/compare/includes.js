@@ -11,6 +11,8 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _match2 = require("../compare/match.js");
 
+var _includes2 = require("../compare/__includes.js");
+
 /**
  * includes
  */
@@ -24,9 +26,9 @@ var _includes = function _includes(value, compare) {
       return (0, _match2._match)(value, compare);
     }
 
-    return value.indexOf(compare) !== -1;
+    return (0, _includes2.__includes)(value, compare);
   } else if ((0, _type.isArray)(value)) {
-    return value.indexOf(compare) !== -1;
+    return (0, _includes2.__includes)(value, compare);
   }
 };
 

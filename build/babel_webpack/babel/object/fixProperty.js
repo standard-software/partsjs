@@ -15,28 +15,23 @@ var _hasOwn2 = require("../object/_hasOwn.js");
 
 var _propertyCount2 = require("../object/_propertyCount.js");
 
+var _splitCommaItems2 = require("../string/splitCommaItems.js");
+
+var _includes = require("../compare/__includes.js");
+
 /**
  * _fixProperty
  */
 var _fixProperty = function _fixProperty(object, propertyNames) {
-  if (!(0, _type.isObjectLike)(object)) {
-    return false;
-  }
-
   if ((0, _type.isString)(propertyNames)) {
-    propertyNames = (0, _replaceAll2._replaceAll)(propertyNames, ' ', '').split(',');
+    propertyNames = (0, _splitCommaItems2._splitCommaItems)(propertyNames);
+  } else {
+    if ((0, _includes.__includes)(propertyNames, '')) {
+      throw new Error('_fixProperty args(propertyNames) element is not empty string');
+    }
   }
-
-  var propertyNamesCount = propertyNames.length;
 
   for (var i = 0; i < propertyNames.length; i += 1) {
-    if (i !== 0 && i === propertyNames.length - 1) {
-      if (propertyNames[i] === '' || (0, _type.isUndefined)(propertyNames[i])) {
-        propertyNamesCount -= 1;
-        continue;
-      }
-    }
-
     var result = (0, _hasOwn2._hasOwn)(object, propertyNames[i]);
 
     if (result === false) {
@@ -44,7 +39,7 @@ var _fixProperty = function _fixProperty(object, propertyNames) {
     }
   }
 
-  return (0, _propertyCount2._propertyCount)(object) === propertyNamesCount;
+  return (0, _propertyCount2._propertyCount)(object) === propertyNames.length;
 };
 /**
  * fixProperty

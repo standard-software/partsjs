@@ -21,6 +21,10 @@ var _replaceAll2 = require("../string/_replaceAll.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
+var _or2 = require("../compare/or.js");
+
+var _objectValues2 = require("../object/objectValues.js");
+
 /**
  * split
  */
@@ -28,53 +32,6 @@ var _split = function _split(str, separator) {
   var excludeEmptyStr = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : split.excludeEmptyStr.none;
   var excludeSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : split.excludeSpace.none;
   var result = str.split(separator);
-
-  switch (excludeEmptyStr) {
-    case split.excludeEmptyStr.none:
-      break;
-
-    case split.excludeEmptyStr.first:
-      if (1 <= result.length) {
-        if ((0, _array_common._isFirst)(result, [''])) {
-          (0, _array_operation._deleteFirst)(result);
-        }
-      }
-
-      break;
-
-    case split.excludeEmptyStr.last:
-      if (1 <= result.length) {
-        if ((0, _array_common._isLast)(result, [''])) {
-          (0, _array_operation._deleteLast)(result);
-        }
-      }
-
-      break;
-
-    case split.excludeEmptyStr.bothEnds:
-      if (1 <= result.length) {
-        if ((0, _array_common._isFirst)(result, [''])) {
-          (0, _array_operation._deleteFirst)(result);
-        }
-      }
-
-      if (1 <= result.length) {
-        if ((0, _array_common._isLast)(result, [''])) {
-          (0, _array_operation._deleteLast)(result);
-        }
-      }
-
-      break;
-
-    case split.excludeEmptyStr.all:
-      (0, _array_operation._filter)(result, function (element) {
-        return element !== '';
-      });
-      break;
-
-    default:
-      throw new TypeError('_split args(excludeEmptyStr) is not ["none"|"first"|"last"|"bothEnds"|"all"]');
-  }
 
   switch (excludeSpace) {
     case split.excludeSpace.none:
@@ -94,6 +51,51 @@ var _split = function _split(str, separator) {
 
     default:
       throw new TypeError('_split args(excludeSpace) is not ["none"|"trim"|"all"]');
+  }
+
+  switch (excludeEmptyStr) {
+    case split.excludeEmptyStr.none:
+      break;
+
+    case split.excludeEmptyStr.first:
+      if (1 <= result.length) {
+        if ((0, _array_common._isFirst)(result, [''])) {
+          (0, _array_operation._deleteFirst)(result);
+        }
+      }
+
+      break;
+
+    case split.excludeEmptyStr.last:
+      if (2 <= result.length) {
+        if ((0, _array_common._isLast)(result, [''])) {
+          (0, _array_operation._deleteLast)(result);
+        }
+      }
+
+      break;
+
+    case split.excludeEmptyStr.bothEnds:
+      if (2 <= result.length) {
+        if ((0, _array_common._isFirst)(result, [''])) {
+          (0, _array_operation._deleteFirst)(result);
+        }
+
+        if ((0, _array_common._isLast)(result, [''])) {
+          (0, _array_operation._deleteLast)(result);
+        }
+      }
+
+      break;
+
+    case split.excludeEmptyStr.all:
+      (0, _array_operation._filter)(result, function (element) {
+        return element !== '';
+      });
+      break;
+
+    default:
+      throw new TypeError('_split args(excludeEmptyStr) is not ["none"|"first"|"last"|"bothEnds"|"all"]');
   }
 
   return result;
@@ -129,6 +131,22 @@ var split = function split(str, separator) {
   } else if ((0, _isObjectParameter.isObjectParameter)(excludeSpace, 'excludeSpace')) {
     var _excludeSpace = excludeSpace;
     excludeSpace = _excludeSpace.excludeSpace;
+  }
+
+  if (!(0, _type.isString)(str)) {
+    throw new TypeError('split args(str) is not string');
+  }
+
+  if (!(0, _type.isString)(separator)) {
+    throw new TypeError('split args(separator) is not string');
+  }
+
+  if (!(0, _or2._or)(excludeEmptyStr, (0, _objectValues2._objectValues)(split.excludeEmptyStr))) {
+    throw new TypeError('split args(excludeEmptyStr) is not ["none","first","last","bothEnds","all"]');
+  }
+
+  if (!(0, _or2._or)(excludeSpace, (0, _objectValues2._objectValues)(split.excludeSpace))) {
+    throw new TypeError('split args(excludeSpace) is not ["none","trim","all"]');
   }
 
   return _split(str, separator, excludeEmptyStr, excludeSpace);

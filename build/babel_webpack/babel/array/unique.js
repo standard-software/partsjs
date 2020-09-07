@@ -11,6 +11,8 @@ var _syntax = require("../syntax/syntax.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
+var _includes = require("../compare/__includes.js");
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -33,7 +35,7 @@ var __unique = function __unique(array) {
     var result = [];
 
     for (var i = 0, l = array.length; i < l; i += 1) {
-      if (result.indexOf(array[i]) === -1) {
+      if (!(0, _includes.__includes)(result, array[i])) {
         result.push(array[i]);
       }
     }
@@ -65,9 +67,8 @@ var _unique = function _unique(array) {
   var result = [];
   array.forEach(function (v) {
     var funcResult = func(v);
-    var i = index.indexOf(funcResult);
 
-    if (i === -1) {
+    if (!(0, _includes.__includes)(index, funcResult)) {
       index.push(funcResult);
       result.push(v);
     }

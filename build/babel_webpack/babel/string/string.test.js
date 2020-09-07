@@ -51,7 +51,9 @@ var test_execute_string = function test_execute_string(parts) {
         tagOuterFirst = _parts$string.tagOuterFirst,
         tagInnerLast = _parts$string.tagInnerLast,
         tagOuterLast = _parts$string.tagOuterLast,
-        split = _parts$string.split;
+        split = _parts$string.split,
+        splitCommaItems = _parts$string.splitCommaItems,
+        splitDotItems = _parts$string.splitDotItems;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -1669,7 +1671,28 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(['ABC', 'DEF', 'GHI'], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.all));
         checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.none));
         checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.trim));
-        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all)); // object parameter
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(' , , A B C , , DE F ,, G HI , , ', ',', split.excludeEmptyStr.all, split.excludeSpace.all));
+        checkEqual([''], split('', ',', split.excludeEmptyStr.none));
+        checkEqual([], split('', ',', split.excludeEmptyStr.first));
+        checkEqual([''], split('', ',', split.excludeEmptyStr.last));
+        checkEqual([''], split('', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([], split('', ',', split.excludeEmptyStr.all));
+        checkEqual(['', ''], split(',', ',', split.excludeEmptyStr.none));
+        checkEqual([''], split(',', ',', split.excludeEmptyStr.first));
+        checkEqual([''], split(',', ',', split.excludeEmptyStr.last));
+        checkEqual([], split(',', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([], split(',', ',', split.excludeEmptyStr.all));
+        checkEqual(['', '', ''], split(',,', ',', split.excludeEmptyStr.none));
+        checkEqual(['', ''], split(',,', ',', split.excludeEmptyStr.first));
+        checkEqual(['', ''], split(',,', ',', split.excludeEmptyStr.last));
+        checkEqual([''], split(',,', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([], split(',,', ',', split.excludeEmptyStr.all));
+        checkEqual(['', 'A', ''], split(',A,', ',', split.excludeEmptyStr.none));
+        checkEqual(['A', ''], split(',A,', ',', split.excludeEmptyStr.first));
+        checkEqual(['', 'A'], split(',A,', ',', split.excludeEmptyStr.last));
+        checkEqual(['A'], split(',A,', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual(['A'], split(',A,', ',', split.excludeEmptyStr.all)); // object parameter
 
         checkEqual(['ABC', 'DEF', 'GHI'], split({
           str: ',, A B C ,, DE F ,, G HI ,,',
@@ -1723,6 +1746,57 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_splitCommaItems = function test_splitCommaItems() {
+      it('test_splitCommaItems', function () {
+        checkEqual(['A'], splitCommaItems('A'));
+        checkEqual(['A'], splitCommaItems('A,'));
+        checkEqual(['A', 'B'], splitCommaItems('A,B'));
+        checkEqual(['A', 'B'], splitCommaItems('A,B,'));
+        checkEqual([], splitCommaItems(''));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems(',A');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems(',');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems(',,');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems('A,,B');
+        }));
+      });
+    };
+
+    var test_splitDotItems = function test_splitDotItems() {
+      it('test_splitDotItems', function () {
+        checkEqual(['A'], splitDotItems('A'));
+        checkEqual(['A'], splitDotItems('.A'));
+        checkEqual(['A', 'B'], splitDotItems('A.B'));
+        checkEqual(['A', 'B'], splitDotItems('.A.B'));
+        checkEqual([' '], splitDotItems(' '));
+        checkEqual([], splitDotItems(''));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('A.');
+        }));
+        checkEqual(false, isThrown(function () {
+          splitDotItems('A. ');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('.');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('..');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('A..B');
+        }));
+        checkEqual(false, isThrown(function () {
+          splitDotItems('A. .B');
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -1762,6 +1836,8 @@ var test_execute_string = function test_execute_string(parts) {
     test_tagInnerLast();
     test_tagOuterLast();
     test_split();
+    test_splitCommaItems();
+    test_splitDotItems();
   });
 };
 

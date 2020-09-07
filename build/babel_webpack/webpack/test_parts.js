@@ -184,7 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [374, 18, 2, 252, 12, 11, 22, 29, 7, 38, 23, 37, 32];
+        var countArray = [376, 18, 2, 252, 12, 11, 22, 29, 7, 40, 23, 37, 32];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -8667,7 +8667,9 @@ var test_execute_string = function test_execute_string(parts) {
         tagOuterFirst = _parts$string.tagOuterFirst,
         tagInnerLast = _parts$string.tagInnerLast,
         tagOuterLast = _parts$string.tagOuterLast,
-        split = _parts$string.split;
+        split = _parts$string.split,
+        splitCommaItems = _parts$string.splitCommaItems,
+        splitDotItems = _parts$string.splitDotItems;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -10285,7 +10287,28 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(['ABC', 'DEF', 'GHI'], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.all));
         checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.none));
         checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.trim));
-        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all)); // object parameter
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(' , , A B C , , DE F ,, G HI , , ', ',', split.excludeEmptyStr.all, split.excludeSpace.all));
+        checkEqual([''], split('', ',', split.excludeEmptyStr.none));
+        checkEqual([], split('', ',', split.excludeEmptyStr.first));
+        checkEqual([''], split('', ',', split.excludeEmptyStr.last));
+        checkEqual([''], split('', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([], split('', ',', split.excludeEmptyStr.all));
+        checkEqual(['', ''], split(',', ',', split.excludeEmptyStr.none));
+        checkEqual([''], split(',', ',', split.excludeEmptyStr.first));
+        checkEqual([''], split(',', ',', split.excludeEmptyStr.last));
+        checkEqual([], split(',', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([], split(',', ',', split.excludeEmptyStr.all));
+        checkEqual(['', '', ''], split(',,', ',', split.excludeEmptyStr.none));
+        checkEqual(['', ''], split(',,', ',', split.excludeEmptyStr.first));
+        checkEqual(['', ''], split(',,', ',', split.excludeEmptyStr.last));
+        checkEqual([''], split(',,', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([], split(',,', ',', split.excludeEmptyStr.all));
+        checkEqual(['', 'A', ''], split(',A,', ',', split.excludeEmptyStr.none));
+        checkEqual(['A', ''], split(',A,', ',', split.excludeEmptyStr.first));
+        checkEqual(['', 'A'], split(',A,', ',', split.excludeEmptyStr.last));
+        checkEqual(['A'], split(',A,', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual(['A'], split(',A,', ',', split.excludeEmptyStr.all)); // object parameter
 
         checkEqual(['ABC', 'DEF', 'GHI'], split({
           str: ',, A B C ,, DE F ,, G HI ,,',
@@ -10339,6 +10362,57 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_splitCommaItems = function test_splitCommaItems() {
+      it('test_splitCommaItems', function () {
+        checkEqual(['A'], splitCommaItems('A'));
+        checkEqual(['A'], splitCommaItems('A,'));
+        checkEqual(['A', 'B'], splitCommaItems('A,B'));
+        checkEqual(['A', 'B'], splitCommaItems('A,B,'));
+        checkEqual([], splitCommaItems(''));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems(',A');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems(',');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems(',,');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitCommaItems('A,,B');
+        }));
+      });
+    };
+
+    var test_splitDotItems = function test_splitDotItems() {
+      it('test_splitDotItems', function () {
+        checkEqual(['A'], splitDotItems('A'));
+        checkEqual(['A'], splitDotItems('.A'));
+        checkEqual(['A', 'B'], splitDotItems('A.B'));
+        checkEqual(['A', 'B'], splitDotItems('.A.B'));
+        checkEqual([' '], splitDotItems(' '));
+        checkEqual([], splitDotItems(''));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('A.');
+        }));
+        checkEqual(false, isThrown(function () {
+          splitDotItems('A. ');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('.');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('..');
+        }));
+        checkEqual(true, isThrown(function () {
+          splitDotItems('A..B');
+        }));
+        checkEqual(false, isThrown(function () {
+          splitDotItems('A. .B');
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_indexOf_standard();
@@ -10378,6 +10452,8 @@ var test_execute_string = function test_execute_string(parts) {
     test_tagInnerLast();
     test_tagOuterLast();
     test_split();
+    test_splitCommaItems();
+    test_splitDotItems();
   });
 };
 
@@ -10510,8 +10586,36 @@ var test_execute_object = function test_execute_object(parts) {
         var destObject = {};
         copyProperty({
           fromObject: sourceObject,
-          propertyArray: 'a',
+          propertyNames: 'a',
           toObject: destObject
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = {};
+        copyProperty(sourceObject, {
+          propertyNames: 'a',
+          toObject: destObject
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = {};
+        copyProperty(sourceObject, 'a', {
+          toObject: destObject
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = copyProperty({
+          fromObject: sourceObject,
+          propertyNames: 'a'
+        });
+        checkEqual(true, 'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = copyProperty(sourceObject, {
+          propertyNames: 'a'
         });
         checkEqual(true, 'a' in destObject);
         checkEqual(false, 'b' in destObject);
@@ -10680,8 +10784,12 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, inProperty(sourceObject2, 'a,b,c.d'));
         checkEqual(true, inProperty(sourceObject2, 'a,b,c.d.e'));
         checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.f'));
-        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.'));
-        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(true, isThrown(function () {
+          return inProperty(sourceObject2, 'a,b,c.d.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return inProperty(sourceObject2, 'a,b,c.d..e');
+        }));
         checkEqual(false, inProperty(sourceObject2, 'a,b,.d'));
         checkEqual(true, inProperty(sourceObject2, 'a,b,'));
         checkEqual(true, inProperty(sourceObject2, 'a,b,c.d.e,')); // object parameter
@@ -10928,14 +11036,75 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(undefined, getProperty(testObj1, 'a.b.c.d'));
         checkEqual(undefined, getProperty(testObj1, 'a.b.b'));
         checkEqual(undefined, getProperty(testObj1, ''));
-        checkEqual(undefined, getProperty(testObj1, '.'));
-        checkEqual(undefined, getProperty(testObj1, '..'));
-        checkEqual(undefined, getProperty(testObj1, 'a.b.c.'));
-        checkEqual(undefined, getProperty(testObj1, 'a.'));
-        checkEqual(undefined, getProperty(testObj1, '.a'));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, '.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, '..');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, 'a.b.c.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj1, 'a.');
+        }));
+        checkEqual(false, getProperty(testObj1, '.a').b.c);
         checkEqual(undefined, getProperty(testObj1, 'a.c'));
         checkEqual(undefined, getProperty(testObj1, 'b'));
-        checkEqual(undefined, getProperty(testObj1, 'b.c')); // object parameter
+        checkEqual(undefined, getProperty(testObj1, 'b.c'));
+        var testObj2 = {
+          a: {
+            b: {
+              c: undefined
+            }
+          }
+        };
+        checkEqual(undefined, getProperty(testObj2, 'a').b.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b').c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c'));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d'));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b'));
+        checkEqual(undefined, getProperty(testObj2, ''));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, '.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, '..');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, 'a.b.c.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return getProperty(testObj2, 'a.');
+        }));
+        checkEqual(undefined, getProperty(testObj2, '.a').b.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.c'));
+        checkEqual(undefined, getProperty(testObj2, 'b'));
+        checkEqual(undefined, getProperty(testObj2, 'b.c'));
+        /* eslint-disable comma-spacing */
+
+        checkEqual(undefined, getProperty(testObj2, 'a', true, false).b.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b', true, false).c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c', true, false));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d', true, false));
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b', true, false));
+        checkEqual({
+          b: {
+            c: undefined
+          }
+        }, getProperty(testObj2, 'a', true, true).value);
+        checkEqual(undefined, getProperty(testObj2, 'a.b', true, true).value.c);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c', true, true).value);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.c.d', true, true).value);
+        checkEqual(undefined, getProperty(testObj2, 'a.b.b', true, true).value);
+        testCounter();
+        checkEqual(true, getProperty(testObj2, 'a', true, true).exist);
+        checkEqual(true, getProperty(testObj2, 'a.b', true, true).exist);
+        checkEqual(true, getProperty(testObj2, 'a.b.c', true, true).exist);
+        checkEqual(false, getProperty(testObj2, 'a.b.c.d', true, true).exist);
+        checkEqual(false, getProperty(testObj2, 'a.b.b', true, true).exist);
+        /* eslint-enable comma-spacing */
+        // object parameter
 
         var object1 = {
           a: {
@@ -10967,6 +11136,62 @@ var test_execute_object = function test_execute_object(parts) {
         }));
         checkEqual(false, getProperty(object2, 'a.b.c', {
           hasOwn: false
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          hasOwn: true,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          hasOwn: false,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty(object2, {
+          propertyPath: 'a.b.c',
+          hasOwn: false,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty(object2, 'a.b.c', {
+          hasOwn: false,
+          detail: true
+        }));
+        checkEqual({
+          exist: true,
+          value: false
+        }, getProperty(object2, 'a.b.c', false, {
+          detail: true
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty({
+          object: object2,
+          propertyPath: 'a.b.c',
+          detail: true
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty(object2, {
+          propertyPath: 'a.b.c',
+          detail: true
+        }));
+        checkEqual({
+          exist: false
+        }, getProperty(object2, 'a.b.c', {
+          detail: true
         }));
       });
     };

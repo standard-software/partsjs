@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.propCount = exports.propertyCount = exports._propertyCount = exports.has = exports.hasPrototype = exports._has = exports._hasPrototype = exports.hasOwn = exports._hasOwn = exports.getProp = exports.getProperty = exports._getProperty = exports._getPropertyBase = exports.objectToValueArray = exports.objectValues = exports._objectValues = exports.objectToKeyArray = exports.objectKeys = exports._objectKeys = exports.objectToKeyValueArray = exports.objectEntries = exports._objectEntries = exports.fixProp = exports.fixProperty = exports._fixProperty = exports.inProp = exports.inProperty = exports._inProperty = exports.isObjectParameter = exports.setProp = exports.copyProp = exports.setProperty = exports.copyProperty = exports._setProperty = exports._copyProperty = void 0;
+exports["default"] = exports.propCount = exports.propertyCount = exports._propertyCount = exports.has = exports.hasPrototype = exports._has = exports._hasPrototype = exports.hasOwn = exports._hasOwn = exports.getProp = exports.getProperty = exports._getProperty = exports.objectToValueArray = exports.objectValues = exports._objectValues = exports.objectToKeyArray = exports.objectKeys = exports._objectKeys = exports.objectToKeyValueArray = exports.objectEntries = exports._objectEntries = exports.fixProp = exports.fixProperty = exports._fixProperty = exports.inProp = exports.inProperty = exports._inProperty = exports.isObjectParameter = exports.setProp = exports.copyProp = exports.setProperty = exports.copyProperty = exports._setProperty = exports._copyProperty = void 0;
 
 var _object_common = _interopRequireDefault(require("./object_common.js"));
 
@@ -83,14 +83,12 @@ var _objectValues = _objectValues2["default"]._objectValues,
 exports.objectToValueArray = objectToValueArray;
 exports.objectValues = objectValues;
 exports._objectValues = _objectValues;
-var _getPropertyBase = _getProperty2["default"]._getPropertyBase,
-    _getProperty = _getProperty2["default"]._getProperty,
+var _getProperty = _getProperty2["default"]._getProperty,
     getProperty = _getProperty2["default"].getProperty,
     getProp = _getProperty2["default"].getProp;
 exports.getProp = getProp;
 exports.getProperty = getProperty;
 exports._getProperty = _getProperty;
-exports._getPropertyBase = _getPropertyBase;
 var _hasOwn = _hasOwn2["default"]._hasOwn;
 exports._hasOwn = _hasOwn;
 var hasOwn = _hasOwn3["default"].hasOwn;

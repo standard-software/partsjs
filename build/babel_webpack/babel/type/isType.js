@@ -9,6 +9,8 @@ var _propertyCount2 = require("../object/_propertyCount.js");
 
 var _platform = require("../platform/platform.js");
 
+var _includes = require("../compare/__includes.js");
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var objectToString = function objectToString(value) {
@@ -102,7 +104,7 @@ var isObject = function isObject(value) {
 
   if ((0, _platform.isInternetExplorer)()) {
     // support for IE11
-    if ([Map, WeakMap, Set].indexOf(value.constructor) !== -1) {
+    if ((0, _includes.__includes)([Map, WeakMap, Set], value.constructor)) {
       return false;
     }
   }
@@ -174,7 +176,7 @@ var isArray = function isArray(value) {
 exports.isArray = isArray;
 
 var isArraySeries = function isArraySeries(value) {
-  if (objectToString(value).indexOf('Array]') !== -1) {
+  if ((0, _includes.__includes)(objectToString(value), 'Array]')) {
     return true;
   }
 

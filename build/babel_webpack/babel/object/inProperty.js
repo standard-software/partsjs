@@ -11,7 +11,11 @@ var _replaceAll2 = require("../string/_replaceAll.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _getProperty = require("../object/getProperty.js");
+var _getProperty2 = require("../object/getProperty.js");
+
+var _splitCommaItems2 = require("../string/splitCommaItems.js");
+
+var _includes = require("../compare/__includes.js");
 
 /**
  * _inProperty
@@ -19,24 +23,22 @@ var _getProperty = require("../object/getProperty.js");
 var _inProperty = function _inProperty(object, propertyPaths) {
   var hasOwn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  if (!(0, _type.isObjectLike)(object)) {
+  if ((0, _type.isString)(propertyPaths)) {
+    propertyPaths = (0, _splitCommaItems2._splitCommaItems)(propertyPaths);
+  } else {
+    if ((0, _includes.__includes)(propertyPaths, '')) {
+      throw new Error('_inProperty args(propertyPaths) element is not empty string');
+    }
+  }
+
+  if (propertyPaths.length === 0) {
     return false;
   }
 
-  if ((0, _type.isString)(propertyPaths)) {
-    propertyPaths = (0, _replaceAll2._replaceAll)(propertyPaths, ' ', '').split(',');
-  }
-
   for (var i = 0; i < propertyPaths.length; i += 1) {
-    if (i !== 0 && i === propertyPaths.length - 1) {
-      if (propertyPaths[i] === '' || (0, _type.isUndefined)(propertyPaths[i])) {
-        continue;
-      }
-    }
+    var result = (0, _getProperty2._getProperty)(object, propertyPaths[i], hasOwn, true);
 
-    var result = (0, _getProperty._getPropertyBase)(object, propertyPaths[i], hasOwn);
-
-    if (result["in"] === false) {
+    if (result.exist === false) {
       return false;
     }
   }

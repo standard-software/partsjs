@@ -13,6 +13,8 @@ var _propertyCount2 = require("../object/_propertyCount.js");
 
 var _hasOwn2 = require("../object/_hasOwn.js");
 
+var _includes = require("../compare/__includes.js");
+
 /**
  * isObjectParameter
  */
@@ -49,9 +51,9 @@ var isObjectParameter = function isObjectParameter(object, props) {
 
   for (var property in object) {
     if ((0, _hasOwn2._hasOwn)(object, property)) {
-      if (props.indexOf(property) !== -1) {
+      if ((0, _includes.__includes)(props, property)) {
         propMatchCount += 1;
-      } else if (optionalProps.indexOf(property) !== -1) {
+      } else if ((0, _includes.__includes)(optionalProps, property)) {
         optionalPropMatchCount += 1;
       } else {
         return false;
