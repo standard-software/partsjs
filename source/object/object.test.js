@@ -338,8 +338,8 @@ export const test_execute_object = (parts) => {
         checkEqual(true,  inProperty(sourceObject2, 'a,b,c.d'));
         checkEqual(true,  inProperty(sourceObject2, 'a,b,c.d.e'));
         checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.f'));
-        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d.'));
-        checkEqual(false, inProperty(sourceObject2, 'a,b,c.d..e'));
+        checkEqual(true, isThrown(() => inProperty(sourceObject2, 'a,b,c.d.')));
+        checkEqual(true, isThrown(() => inProperty(sourceObject2, 'a,b,c.d..e')));
         checkEqual(false, inProperty(sourceObject2, 'a,b,.d'));
         checkEqual(true,  inProperty(sourceObject2, 'a,b,'));
         checkEqual(true,  inProperty(sourceObject2, 'a,b,c.d.e,'));

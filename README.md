@@ -306,6 +306,7 @@ You can now use the functions of the parts.js object.
   - support full object parameter
   - bugfix return value
 - update fixProperty
+- update inProperty
 
 ### 7.5.0
 #### 2020/09/04(Fri)

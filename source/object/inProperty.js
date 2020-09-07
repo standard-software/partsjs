@@ -23,26 +23,35 @@ import {
   _getProperty,
 } from '../object/getProperty.js';
 
+import {
+  _splitCommaItems,
+} from '../string/splitCommaItems.js';
+
+import {
+  __includes,
+} from '../compare/__includes.js';
+
+
 /**
  * _inProperty
  */
 export const _inProperty = (object, propertyPaths, hasOwn = true) => {
 
-  if (!isObjectLike(object)) {
+  if (isString(propertyPaths)) {
+    propertyPaths = _splitCommaItems(propertyPaths);
+  } else {
+    if (__includes(propertyPaths, '')) {
+      throw new Error(
+        '_inProperty args(propertyPaths) element is not empty string',
+      );
+    }
+  }
+
+  if (propertyPaths.length === 0) {
     return false;
   }
 
-  if (isString(propertyPaths)) {
-    propertyPaths = _replaceAll(propertyPaths, ' ', '').split(',');
-  }
-
   for (let i = 0; i < propertyPaths.length; i += 1) {
-    if ((i !== 0) && (i === propertyPaths.length - 1)) {
-      if ((propertyPaths[i] === '')
-      || (isUndefined(propertyPaths[i]))) {
-        continue;
-      }
-    }
     const result = _getProperty(object, propertyPaths[i], hasOwn, true);
     if (result.exist === false) {
       return false;

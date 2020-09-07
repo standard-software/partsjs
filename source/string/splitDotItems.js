@@ -20,7 +20,7 @@ export const _splitDotItems = (str) => {
 
   const result = split(str, '.', split.excludeEmptyStr.first, split.excludeSpace.none);
   if (__includes(result, '')) {
-    throw new Error('_splitDotItems args(str) is not correct format');
+    throw new Error(`_splitDotItems args(str:${str}) is not correct format`);
   }
   return result;
 };
