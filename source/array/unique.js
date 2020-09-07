@@ -13,6 +13,10 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 /**
  * uniqe
  */
@@ -22,7 +26,7 @@ export const __unique = (array) => {
   } else {
     const result = [];
     for (let i = 0, l = array.length; i < l; i += 1) {
-      if (result.indexOf(array[i]) === -1) {
+      if (!__includes(result, array[i])) {
         result.push(array[i]);
       }
     }
@@ -48,8 +52,7 @@ export const _unique = (
   const result = [];
   array.forEach(v => {
     const funcResult = func(v);
-    const i = index.indexOf(funcResult);
-    if (i === -1) {
+    if (!__includes(index, funcResult)) {
       index.push(funcResult);
       result.push(v);
     }

@@ -16,6 +16,10 @@ import {
   _hasOwn,
 } from '../object/_hasOwn.js';
 
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 /**
  * isObjectParameter
  */
@@ -51,9 +55,9 @@ export const isObjectParameter = (
   let optionalPropMatchCount = 0;
   for (const property in object) {
     if (_hasOwn(object, property)) {
-      if (props.indexOf(property) !== -1) {
+      if (__includes(props, property)) {
         propMatchCount += 1;
-      } else if (optionalProps.indexOf(property) !== -1) {
+      } else if (__includes(optionalProps, property)) {
         optionalPropMatchCount += 1;
       } else {
         return false;

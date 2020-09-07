@@ -1,3 +1,7 @@
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 export const isWebBrowser = () => {
   return name() === 'WebBrowser';
 };
@@ -60,17 +64,17 @@ export const browserName = () => {
     _browserName = '';
   } else {
     const ua = window.navigator.userAgent.toLowerCase();
-    if (ua.indexOf('msie') !== -1 || ua.indexOf('trident') !== -1) {
+    if (__includes(ua, 'msie') || __includes(ua, 'trident')) {
       _browserName = 'InternetExplorer';
-    } else if (ua.indexOf('edg') !== -1) {
+    } else if (__includes(ua, 'edg')) {
       _browserName = 'Edge';
-    } else if (ua.indexOf('opr') !== -1) {
+    } else if (__includes(ua, 'opr')) {
       _browserName = 'Opera';
-    } else if (ua.indexOf('chrome') !== -1) {
+    } else if (__includes(ua, 'chrome')) {
       _browserName = 'Chrome';
-    } else if (ua.indexOf('safari') !== -1) {
+    } else if (__includes(ua, 'safari')) {
       _browserName = 'Safari';
-    } else if (ua.indexOf('firefox') !== -1) {
+    } else if (__includes(ua, 'firefox')) {
       _browserName = 'Firefox';
     } else {
       _browserName = 'other';

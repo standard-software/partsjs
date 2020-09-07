@@ -6,6 +6,10 @@ import {
   isInternetExplorer,
 } from '../platform/platform.js';
 
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 export const objectToString = value => {
   return Object.prototype.toString.call(value);
 };
@@ -61,7 +65,7 @@ export const isObject = (value) => {
   }
   if (isInternetExplorer()) {
     // support for IE11
-    if ([Map, WeakMap, Set].indexOf(value.constructor) !== -1) {
+    if (__includes([Map, WeakMap, Set], value.constructor)) {
       return false;
     }
   }
@@ -110,7 +114,7 @@ export const isArray = (value) => {
 
 // Int8Array Uint16Array Float32Array Float64Array etc
 export const isArraySeries = (value) => {
-  if (objectToString(value).indexOf('Array]') !== -1 ) {
+  if (__includes(objectToString(value), 'Array]')) {
     return true;
   }
   return false;

@@ -17,6 +17,10 @@ import {
   _match,
 } from '../compare/match.js';
 
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 /**
  * includes
  */
@@ -28,9 +32,9 @@ export const _includes = (value, compare) => {
     if (isRegExp(compare)) {
       return _match(value, compare);
     }
-    return value.indexOf(compare) !== -1;
+    return __includes(value, compare);
   } else if (isArray(value)) {
-    return value.indexOf(compare) !== -1;
+    return __includes(value, compare);
   }
 };
 
