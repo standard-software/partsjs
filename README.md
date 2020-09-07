@@ -301,6 +301,10 @@ You can now use the functions of the parts.js object.
 - add __includes.js from includes.js
 - update split throw error
 - add splitCommaItems / splitDotItems
+- update copyProperty 
+  - args propertyArray >> propertyNames
+  - support full object parameter
+  - bugfix return value
 
 ### 7.5.0
 #### 2020/09/04(Fri)

@@ -103,9 +103,48 @@ export const test_execute_object = (parts) => {
         var destObject = {};
         copyProperty({
           fromObject: sourceObject,
-          propertyArray: 'a',
+          propertyNames: 'a',
           toObject: destObject,
         });
+        checkEqual(true,  'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = {};
+        copyProperty(
+          sourceObject,
+          {
+            propertyNames: 'a',
+            toObject: destObject,
+          },
+        );
+        checkEqual(true,  'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = {};
+        copyProperty(
+          sourceObject,
+          'a',
+          {
+            toObject: destObject,
+          },
+        );
+        checkEqual(true,  'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+
+        var destObject = copyProperty({
+          fromObject: sourceObject,
+          propertyNames: 'a',
+        });
+        checkEqual(true,  'a' in destObject);
+        checkEqual(false, 'b' in destObject);
+        checkEqual(false, 'c' in destObject);
+        var destObject = copyProperty(
+          sourceObject,
+          {
+            propertyNames: 'a',
+          },
+        );
         checkEqual(true,  'a' in destObject);
         checkEqual(false, 'b' in destObject);
         checkEqual(false, 'c' in destObject);

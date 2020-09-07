@@ -20,33 +20,42 @@ import {
   _replaceAll,
 } from '../string/_replaceAll.js';
 
+import {
+  _splitCommaItems,
+} from '../string/splitCommaItems.js';
+
+import {
+  __includes,
+} from '../compare/__includes.js';
+
 /**
  * copyProperty
  */
-export const _copyProperty = (fromObject, propertyArray, toObject = {}) => {
+export const _copyProperty = (fromObject, propertyNames, toObject = {}) => {
 
-  if (isString(propertyArray)) {
-    propertyArray = _replaceAll(propertyArray, ' ', '').split(',');
-  }
-
-  for (let i = 0; i < propertyArray.length; i += 1) {
-    if ((propertyArray[i] === '')
-    || (isUndefined(propertyArray[i]))) {
-      continue;
-    }
-    if (!isString(propertyArray[i])) {
-      throw new TypeError(
-        'copyProperty args(propertyArray) element is not string',
+  if (isString(propertyNames)) {
+    propertyNames = _splitCommaItems(propertyNames);
+  } else {
+    if (__includes(propertyNames, '')) {
+      throw new Error(
+        '_copyProperty args(propertyNames) element is not empty string',
       );
     }
-    toObject[propertyArray[i]] = fromObject[propertyArray[i]];
+  }
+
+  for (let i = 0; i < propertyNames.length; i += 1) {
+    toObject[propertyNames[i]] = fromObject[propertyNames[i]];
   }
   return toObject;
 };
 
-export const copyProperty = (fromObject, propertyArray, toObject = {}) => {
-  if (isObjectParameter(fromObject, 'fromObject,propertyArray', 'toObject')) {
-    ({ fromObject, propertyArray, toObject = {} } = fromObject);
+export const copyProperty = (fromObject, propertyNames, toObject = {}) => {
+  if (isObjectParameter(fromObject, 'fromObject, propertyNames', 'toObject')) {
+    ({ fromObject, propertyNames, toObject = {} } = fromObject);
+  } else if (isObjectParameter(propertyNames, 'propertyNames', 'toObject')) {
+    ({ propertyNames, toObject = {} } = propertyNames);
+  } else if (isObjectParameter(toObject, 'toObject')) {
+    ({ toObject } = toObject);
   }
 
   if (!isObject(fromObject)) {
@@ -54,12 +63,10 @@ export const copyProperty = (fromObject, propertyArray, toObject = {}) => {
       'copyProperty args(fromObject) is not object',
     );
   }
-  if (!isString(propertyArray)) {
-    if (!isArray(propertyArray)) {
-      throw new TypeError(
-        'copyProperty args(propertyArray) is not [array|string]',
-      );
-    }
+  if (!(isString(propertyNames) || isStringArray(propertyNames))) {
+    throw new TypeError(
+      'copyProperty args(propertyNames) is not [array|string]',
+    );
   }
   if (!isObject(toObject)) {
     throw new TypeError(
@@ -67,9 +74,9 @@ export const copyProperty = (fromObject, propertyArray, toObject = {}) => {
     );
   }
 
-  _copyProperty(
+  return _copyProperty(
     fromObject,
-    propertyArray,
+    propertyNames,
     toObject,
   );
 };
