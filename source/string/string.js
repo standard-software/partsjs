@@ -11,6 +11,8 @@ import tagOuterFirst_js from './tagOuterFirst.js';
 import tagInnerLast_js from './tagInnerLast.js';
 import tagOuterLast_js from './tagOuterLast.js';
 import split_js from './split.js';
+import splitCommaItems_js from './splitCommaItems.js';
+import splitDotItems_js from './splitDotItems.js';
 
 export const {
   _repeat,
@@ -93,6 +95,14 @@ export const {
   _split, split,
 } = split_js;
 
+export const {
+  splitCommaItems,
+} = splitCommaItems_js;
+
+export const {
+  splitDotItems,
+} = splitDotItems_js;
+
 export default {
   ...string_common_js,
   ..._replaceAll_js,
@@ -107,5 +117,7 @@ export default {
   ...tagInnerLast_js,
   ...tagOuterLast_js,
   ...split_js,
+  ...splitCommaItems_js,
+  ...splitDotItems_js,
 };
 

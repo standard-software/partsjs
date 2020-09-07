@@ -183,12 +183,12 @@ propertyNames.STRING_PUBLIC =
   'subLastDelimFirst, subLastDelimLast, ' +
   'tagInnerFirst, tagOuterFirst, ' +
   'tagInnerLast, tagOuterLast, ' +
-  'split,' +
+  'split, splitCommaItems, splitDotItems, ' +
   '';
 propertyNames.STRING_ROOT =
   'matchFormat,replaceAll,' +
   'isLowerCase,isUpperCase,' +
-  'split,' +
+  'split, splitCommaItems, splitDotItems, ' +
   '';
 const string = {};
 _copyProperty(_string, propertyNames.STRING_PUBLIC, string);
@@ -470,7 +470,7 @@ export const {
 
   matchFormat, replaceAll,
   isLowerCase, isUpperCase,
-  split,
+  split, splitCommaItems, splitDotItems,
 
   copyProperty, propertyCount, inProperty, fixProperty,
   has, hasOwn, hasPrototype,

@@ -26,7 +26,7 @@ export const test_execute_string = (parts) => {
       subLastDelimFirst, subLastDelimLast,
       tagInnerFirst, tagOuterFirst,
       tagInnerLast, tagOuterLast,
-      split,
+      split, splitCommaItems, splitDotItems,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -1669,6 +1669,59 @@ export const test_execute_string = (parts) => {
       });
     };
 
+    const test_splitCommaItems = () => {
+      it('test_splitCommaItems', () => {
+        checkEqual(['A'], splitCommaItems('A'));
+        checkEqual(['A'], splitCommaItems('A,'));
+        checkEqual(['A', 'B'], splitCommaItems('A,B'));
+        checkEqual(['A', 'B'], splitCommaItems('A,B,'));
+        checkEqual([], splitCommaItems(''));
+
+        checkEqual(true, isThrown(() => {
+          splitCommaItems(',A');
+        }));
+        checkEqual(true, isThrown(() => {
+          splitCommaItems(',');
+        }));
+        checkEqual(true, isThrown(() => {
+          splitCommaItems(',,');
+        }));
+        checkEqual(true, isThrown(() => {
+          splitCommaItems('A,,B');
+        }));
+      });
+    };
+
+    const test_splitDotItems = () => {
+      it('test_splitDotItems', () => {
+        checkEqual(['A'], splitDotItems('A'));
+        checkEqual(['A'], splitDotItems('.A'));
+        checkEqual(['A', 'B'], splitDotItems('A.B'));
+        checkEqual(['A', 'B'], splitDotItems('.A.B'));
+        checkEqual([' '], splitDotItems(' '));
+        checkEqual([], splitDotItems(''));
+
+        checkEqual(true, isThrown(() => {
+          splitDotItems('A.');
+        }));
+        checkEqual(false, isThrown(() => {
+          splitDotItems('A. ');
+        }));
+        checkEqual(true, isThrown(() => {
+          splitDotItems('.');
+        }));
+        checkEqual(true, isThrown(() => {
+          splitDotItems('..');
+        }));
+        checkEqual(true, isThrown(() => {
+          splitDotItems('A..B');
+        }));
+        checkEqual(false, isThrown(() => {
+          splitDotItems('A. .B');
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
 
@@ -1717,6 +1770,8 @@ export const test_execute_string = (parts) => {
     test_tagOuterLast();
 
     test_split();
+    test_splitCommaItems();
+    test_splitDotItems();
   });
 };
 
