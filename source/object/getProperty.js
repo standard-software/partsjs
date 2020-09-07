@@ -16,6 +16,10 @@ import {
   _has,
 } from '../object/has.js';
 
+import {
+  _splitDotItems,
+} from '../string/splitDotItems.js';
+
 /**
  * getProperty
  */
@@ -26,11 +30,13 @@ export const _getProperty = (
   detail = false,
 ) => {
   let result = object;
-  const propertyArray = propertyPath.split('.');
+  const propertyArray = _splitDotItems(propertyPath);
+
+  if (propertyArray.length === 0) {
+    return detail ? { exist: false} : undefined;
+  }
+
   for (let i = 0, l = propertyArray.length; i < l; i += 1) {
-    if (propertyArray[i] === '' ) {
-      return detail ? { exist: false } : undefined;
-    }
     if (!isObjectLike(result)) {
       return detail ? { exist: false} : undefined;
     }

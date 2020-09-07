@@ -307,6 +307,7 @@ You can now use the functions of the parts.js object.
   - bugfix return value
 - update fixProperty
 - update inProperty
+- update getProperty
 
 ### 7.5.0
 #### 2020/09/04(Fri)
