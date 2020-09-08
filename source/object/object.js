@@ -11,6 +11,7 @@ import hasOwn_js from './hasOwn.js';
 import has_js from './has.js';
 import _propertyCount_js from './_propertyCount.js';
 import propertyCount_js from './propertyCount.js';
+import propertyList_js from './propertyList.js';
 
 export const {
   _copyProperty,
@@ -87,6 +88,10 @@ export const {
   propCount,
 } = propertyCount_js;
 
+export const {
+  propertyList,
+} = propertyList_js;
+
 export default {
   ...object_common_js,
   ...isObjectParameter_js,
@@ -101,4 +106,5 @@ export default {
   ...has_js,
   ..._propertyCount_js,
   ...propertyCount_js,
+  ...propertyList_js,
 };

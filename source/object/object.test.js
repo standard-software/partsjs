@@ -17,6 +17,7 @@ export const test_execute_object = (parts) => {
       isObjectParameter,
       objectEntries, objectKeys, objectValues,
       has, hasOwn, hasPrototype,
+      propertyList,
     } = parts.object;
 
     const test_has = () => {
@@ -913,6 +914,7 @@ export const test_execute_object = (parts) => {
 
       });
     };
+
     const test_objectValues = () => {
       it('test_objectValues', () => {
 
@@ -926,6 +928,21 @@ export const test_execute_object = (parts) => {
         // object parameter
         checkEqual(array1, objectValues({ object: object1 }));
 
+      });
+    };
+
+    const test_propertyList = () => {
+      it('test_propertyList', () => {
+
+        const object1 = {a:'A', b: { b1: 'B1', b2: 'B2' }, c: { c1: { c11: 'C11' }, c2: 'C2' }, d: 'D' };
+        checkEqual(parts.string.replaceAll(parts.string.trimBothEnds(`
+          .a
+          .b.b1
+          .b.b2
+          .c.c1.c11
+          .c.c2
+          .d
+        `, ['\n']), ' ', ''), propertyList(object1));
       });
     };
 
@@ -944,6 +961,8 @@ export const test_execute_object = (parts) => {
     test_objectEntries();
     test_objectKeys();
     test_objectValues();
+
+    test_propertyList();
 
   });
 };

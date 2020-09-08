@@ -298,6 +298,7 @@ You can now use the functions of the parts.js object.
 - update platform.js
   - isNodeJs >> isNode
   - name() Node.js >> Node
+- add propertyList.js
 - update test code
   - startName
 
