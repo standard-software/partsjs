@@ -18,8 +18,8 @@ export const isJest = () => {
   return name() === 'Jest';
 };
 
-export const isNodeJs = () => {
-  return name() === 'Node.js';
+export const isNode = () => {
+  return name() === 'Node';
 };
 
 export const isDeno = () => {
@@ -39,7 +39,7 @@ export const name = () => {
   } else if (typeof Browser !== 'undefined') {
     _name = 'GoogleAppsScript';
   } else if (typeof window === 'undefined') {
-    _name = 'Node.js';
+    _name = 'Node';
   } else if (typeof jest !== 'undefined') {
     _name = 'Jest';
   } else if (typeof process !== 'undefined') {
@@ -137,7 +137,7 @@ export default {
   isWebBrowser,
   isWindowsScriptHost,
   isGoogleAppsScript,
-  isNodeJs,
+  isNode,
   isDeno,
   isJest,
 
@@ -154,4 +154,5 @@ export default {
   isGasRhino,
 
   buildMode: '',
+  startName: '',
 };

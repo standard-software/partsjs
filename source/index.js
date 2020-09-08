@@ -13,7 +13,7 @@ import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 import _wsh from './wsh/wsh.js';
 
-const VERSION = '7.6.0';
+const VERSION = '8.0.0 beta';
 
 const rootNames = {};
 const propertyNames = {};

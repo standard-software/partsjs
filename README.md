@@ -293,6 +293,12 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 8.0.0
+#### 2020/09/08(Tue)
+- update platform.js
+  - isNodeJs >> isNode
+  - name() Node.js >> Node
+
 ### 7.6.0
 #### 2020/09/07(Mon)
 - update getProperty.js
