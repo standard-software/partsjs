@@ -298,6 +298,8 @@ You can now use the functions of the parts.js object.
 - update platform.js
   - isNodeJs >> isNode
   - name() Node.js >> Node
+- update test code
+  - startName
 
 ### 7.6.0
 #### 2020/09/07(Mon)

@@ -5,6 +5,7 @@ import {
 } from '../../source/index.test.js';
 
 parts.platform.buildMode = 'source';
+parts.platform.startName = 'test_source_deno_3.js';
 
 test_execute_index(parts);
 

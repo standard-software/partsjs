@@ -20,9 +20,8 @@ export const test_execute_index = (parts) => {
     console.log(`  web browser: ${parts.platform.browserName()}`);
     console.log(`  User Agent: ${window.navigator.userAgent}`);
   }
-  if (parts.platform.buildMode !== '') {
-    console.log(`  buildMode: ${parts.platform.buildMode}`);
-  }
+  console.log(`  buildMode: ${parts.platform.buildMode}`);
+  console.log(`  startName: ${parts.platform.startName}`);
   console.log('test start');
 
   const test_execute_nameSpace = (parts) => {
@@ -52,7 +51,7 @@ export const test_execute_index = (parts) => {
         };
 
         const countArray =
-          [376, 18, 2, 252, 12, 11, 22, 29, 7, 40, 23, 37, 32];
+          [376, 19, 2, 252, 12, 11, 22, 29, 7, 40, 23, 37, 32];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));

@@ -5,6 +5,7 @@ const {
 } = require('../../../../build/babel_webpack/babel/index.test.js');
 
 parts.platform.buildMode = 'debug';
+parts.platform.startName = 'test_babel_webpack_babel_2.js';
 
 test_execute_index(parts);
 

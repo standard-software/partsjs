@@ -26,6 +26,10 @@
 <![CDATA[
 
   console.log('test_index.wsf\n');
+
+  parts.platform.buildMode = 'release';
+  parts.platform.startName = 'test.wsf';
+
   test_parts.test_execute_index(parts);
 
   WScript.Echo(outputMessage);
