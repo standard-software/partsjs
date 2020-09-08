@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isGasRhino = exports.isGasV8 = exports.googleAppScriptEngineName = exports.isOpera = exports.isSafari = exports.isInternetExplorer = exports.isEdge = exports.isFirefox = exports.isChrome = exports.browserName = exports.name = exports.isDeno = exports.isNodeJs = exports.isJest = exports.isGoogleAppsScript = exports.isWindowsScriptHost = exports.isWebBrowser = void 0;
+exports["default"] = exports.isGasRhino = exports.isGasV8 = exports.googleAppScriptEngineName = exports.isOpera = exports.isSafari = exports.isInternetExplorer = exports.isEdge = exports.isFirefox = exports.isChrome = exports.browserName = exports.name = exports.isDeno = exports.isNode = exports.isJest = exports.isGoogleAppsScript = exports.isWindowsScriptHost = exports.isWebBrowser = void 0;
 
 var _includes = require("../compare/__includes.js");
 
@@ -31,11 +31,11 @@ var isJest = function isJest() {
 
 exports.isJest = isJest;
 
-var isNodeJs = function isNodeJs() {
-  return name() === 'Node.js';
+var isNode = function isNode() {
+  return name() === 'Node';
 };
 
-exports.isNodeJs = isNodeJs;
+exports.isNode = isNode;
 
 var isDeno = function isDeno() {
   return name() === 'Deno';
@@ -57,7 +57,7 @@ var name = function name() {
   } else if (typeof Browser !== 'undefined') {
     _name = 'GoogleAppsScript';
   } else if (typeof window === 'undefined') {
-    _name = 'Node.js';
+    _name = 'Node';
   } else if (typeof jest !== 'undefined') {
     _name = 'Jest';
   } else if (typeof process !== 'undefined') {
@@ -180,7 +180,7 @@ var _default = {
   isWebBrowser: isWebBrowser,
   isWindowsScriptHost: isWindowsScriptHost,
   isGoogleAppsScript: isGoogleAppsScript,
-  isNodeJs: isNodeJs,
+  isNode: isNode,
   isDeno: isDeno,
   isJest: isJest,
   browserName: browserName,
@@ -193,6 +193,7 @@ var _default = {
   googleAppScriptEngineName: googleAppScriptEngineName,
   isGasV8: isGasV8,
   isGasRhino: isGasRhino,
-  buildMode: ''
+  buildMode: '',
+  startName: ''
 };
 exports["default"] = _default;

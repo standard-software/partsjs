@@ -31,7 +31,8 @@ var test_execute_object = function test_execute_object(parts) {
         objectValues = _parts$object.objectValues,
         has = _parts$object.has,
         hasOwn = _parts$object.hasOwn,
-        hasPrototype = _parts$object.hasPrototype;
+        hasPrototype = _parts$object.hasPrototype,
+        propertyList = _parts$object.propertyList;
 
     var test_has = function test_has() {
       it('test_has', function () {
@@ -988,6 +989,7 @@ var test_execute_object = function test_execute_object(parts) {
           c: '3'
         };
         checkEqual(array1, Object.entries(object1));
+        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], Object.entries(['a', 'b', 'c']));
       });
     };
 
@@ -999,10 +1001,11 @@ var test_execute_object = function test_execute_object(parts) {
           b: '2',
           c: '3'
         };
-        checkEqual(array1, objectEntries(object1)); // only object type
+        checkEqual(array1, objectEntries(object1));
+        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c'])); // only object type
 
         checkEqual(true, isThrown(function () {
-          return objectEntries(array1);
+          return objectEntries('ABC');
         })); // object parameter
 
         checkEqual(array1, objectEntries({
@@ -1051,6 +1054,26 @@ var test_execute_object = function test_execute_object(parts) {
       });
     };
 
+    var test_propertyList = function test_propertyList() {
+      it('test_propertyList', function () {
+        var object1 = {
+          a: 'A',
+          b: {
+            b1: 'B1',
+            b2: 'B2'
+          },
+          c: {
+            c1: {
+              c11: 'C11'
+            },
+            c2: 'C2'
+          },
+          d: 'D'
+        };
+        checkEqual(parts.string.replaceAll(parts.string.trimBothEnds("\n          .a\n          .b.b1\n          .b.b2\n          .c.c1.c11\n          .c.c2\n          .d\n        ", ['\n']), ' ', ''), propertyList(object1));
+      });
+    };
+
     test_has();
     test_copyProperty();
     test_inProperty();
@@ -1063,6 +1086,7 @@ var test_execute_object = function test_execute_object(parts) {
     test_objectEntries();
     test_objectKeys();
     test_objectValues();
+    test_propertyList();
   });
 };
 

@@ -38,10 +38,8 @@ var test_execute_index = function test_execute_index(parts) {
     console.log("  User Agent: ".concat(window.navigator.userAgent));
   }
 
-  if (parts.platform.buildMode !== '') {
-    console.log("  buildMode: ".concat(parts.platform.buildMode));
-  }
-
+  console.log("  buildMode: ".concat(parts.platform.buildMode));
+  console.log("  startName: ".concat(parts.platform.startName));
   console.log('test start');
 
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
@@ -76,7 +74,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [376, 18, 2, 252, 12, 11, 22, 29, 7, 40, 23, 37, 32];
+        var countArray = [377, 19, 2, 252, 12, 11, 22, 29, 7, 40, 24, 37, 32];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));

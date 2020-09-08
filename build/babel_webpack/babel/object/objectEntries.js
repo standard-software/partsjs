@@ -34,7 +34,7 @@ var objectEntries = function objectEntries(object) {
     object = _object.object;
   }
 
-  if (!(0, _isType.isObject)(object)) {
+  if (!(0, _isType.isObjectLike)(object)) {
     throw new TypeError('objectEntries args(object) is not object');
   }
 
