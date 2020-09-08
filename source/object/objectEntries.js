@@ -1,7 +1,13 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isArray, isDate, isRegExp,
+  isFunction,
+  isObject, isObjectNormal, isObjectFromNull,
+  isObjectLike, isModule,
+  isArray, isArraySeries,
+  isDate, isRegExp,
+  isBooleanObject, isNumberObject, isStringObject,
+  isEmptyObject, isEmptyArray,
 } from '../type/isType.js';
 
 import {
@@ -30,7 +36,7 @@ export const objectEntries = (object) => {
     ({ object } = object);
   }
 
-  if (!isObject(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'objectEntries args(object) is not object',
     );

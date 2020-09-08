@@ -880,6 +880,7 @@ export const test_execute_object = (parts) => {
         const object1 = {a:'1', b:'2', c:'3'};
         checkEqual(array1, Object.entries(object1));
 
+        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], Object.entries(['a', 'b', 'c']));
       });
     };
 
@@ -890,8 +891,10 @@ export const test_execute_object = (parts) => {
         const object1 = {a:'1', b:'2', c:'3'};
         checkEqual(array1, objectEntries(object1));
 
+        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c']));
+
         // only object type
-        checkEqual(true, isThrown(() => objectEntries(array1)));
+        checkEqual(true, isThrown(() => objectEntries('ABC')));
 
         // object parameter
         checkEqual(array1, objectEntries({ object: object1 }));

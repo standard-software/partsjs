@@ -10,6 +10,14 @@ import {
   isEmptyObject, isEmptyArray,
 } from '../type/isType.js';
 
+import {
+  loop,
+} from '../syntax/loop.js';
+
+import {
+  objectEntries,
+} from '../object/objectEntries.js';
+
 /**
  * propertyList
  */
@@ -17,13 +25,13 @@ export const _propertyList = (object) => {
   let result = '';
   const lineHead = '';
   const __propertyList = (object, lineHead) => {
-    for (const [key, value] of Object.entries(object)) {
-      if (isObject(value)) {
+    loop(objectEntries(object))(([key, value]) => {
+      if (isObjectLike(value)) {
         __propertyList(value, lineHead + '.' + key);
-        continue;
+      } else {
+        result += lineHead + '.' + key + '\n';
       }
-      result += lineHead + '.' + key + '\n';
-    }
+    });
     return result;
   };
   return __propertyList(object, '');
@@ -31,7 +39,7 @@ export const _propertyList = (object) => {
 
 export const propertyList = (object) => {
 
-  if (!isObject(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'propertyList args(object) is not object',
     );
