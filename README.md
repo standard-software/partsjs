@@ -301,6 +301,7 @@ You can now use the functions of the parts.js object.
 - add propertyList.js
 - update test code
   - startName
+  - write file root property list
 - update objectEntries
 
 ### 7.6.0
