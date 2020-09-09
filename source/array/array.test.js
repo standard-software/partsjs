@@ -2423,24 +2423,24 @@ export const test_execute_array = (parts) => {
 
     const test_operation_sortDictionary = () => {
       it('test_operation_sortDictionary', () => {
-        checkEqual(['A', 'AA', 'Aa', 'a', 'aA', 'aa'],
+        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA'],
           array.operation.sortDictionaryAscending(
-            ['a', 'A', 'Aa', 'aa', 'aA', 'AA']
+            ['Aa', 'aa', 'a', 'A', 'aA', 'AA']
           )
         );
-        checkEqual(['aa', 'aA', 'a', 'Aa', 'AA', 'A'],
+        checkEqual(['Aa', 'aa', 'aA', 'AA', 'a', 'A'],
           array.operation.sortDictionaryDescending(
-            ['a', 'A', 'aa', 'Aa', 'AA', 'aA']
+            ['Aa', 'aa', 'a', 'A', 'aA', 'AA']
           )
         );
-        checkEqual(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'],
+        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA', 'ab', 'Ab'],
           array.operation.sortDictionaryAscending(
-            ['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']
+            ['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']
           )
         );
-        checkEqual(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'],
+        checkEqual(['ab', 'Ab', 'Aa', 'aa', 'aA', 'AA', 'a', 'A'],
           array.operation.sortDictionaryDescending(
-            ['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']
+            ['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']
           )
         );
 

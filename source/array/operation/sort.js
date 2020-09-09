@@ -116,7 +116,7 @@ sort.targetFunc = {
     if (!isString(v)) {
       throw new TypeError('sortDictionary args(array) element is not string');
     }
-    return v;
+    return v.toLowerCase();
   },
   returnLength: v => v.length,
   returnLengthErrorNotHasLength: v => {

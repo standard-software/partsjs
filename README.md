@@ -294,7 +294,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.0.0
-#### 2020/09/08(Tue)
+#### 2020/09/09(Wed)
 - update platform.js
   - isNodeJs >> isNode
   - name() Node.js >> Node
@@ -309,6 +309,7 @@ You can now use the functions of the parts.js object.
     - isNot isArray isNotArray isAll isNotAll
       - ObjectType ObjectLike
       - ArrayType ArraySeries
+- update sortDictionary
 
 ### 7.6.0
 #### 2020/09/07(Mon)
