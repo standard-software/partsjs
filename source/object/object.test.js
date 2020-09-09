@@ -937,15 +937,26 @@ export const test_execute_object = (parts) => {
     const test_propertyList = () => {
       it('test_propertyList', () => {
 
+        // checkEqual('a\n b\n c', parts.string.trimBothEnds('\n a\n b\n c\n  ', ['\n', ' ']));
+        // checkEqual('a\nb\nc', 'a\n b\n c'.split('\n').map(v => parts.string.trimFirst(v, [' '])).join('\n'));
+
         const object1 = {a:'A', b: { b1: 'B1', b2: 'B2' }, c: { c1: { c11: 'C11' }, c2: 'C2' }, d: 'D' };
-        checkEqual(parts.string.replaceAll(parts.string.trimBothEnds(`
-          .a
-          .b.b1
-          .b.b2
-          .c.c1.c11
-          .c.c2
-          .d
-        `, ['\n']), ' ', ''), propertyList(object1));
+        const testPattern = parts.string.trimBothEnds(`
+          .a:[object String]:string
+          .b.b1:[object String]:string
+          .b.b2:[object String]:string
+          .c.c1.c11:[object String]:string
+          .c.c2:[object String]:string
+          .d:[object String]:string
+        `, ['\n', ' ']);
+        // checkEqual(6, testPattern.split('\n').length);
+        checkEqual(
+          parts.array.map(testPattern.split('\n'),
+            v => parts.string.trimFirst(v, [' ']),
+          ).join('\n') + '\n',
+          propertyList(object1),
+        );
+        checkEqual(false, parts.isModule(object1));
       });
     };
 

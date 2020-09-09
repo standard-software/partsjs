@@ -8,6 +8,8 @@ import {
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
+
+  objectToString,
 } from '../type/isType.js';
 
 import {
@@ -26,10 +28,10 @@ export const _propertyList = (object) => {
   const lineHead = '';
   const __propertyList = (object, lineHead) => {
     loop(objectEntries(object))(([key, value]) => {
-      if (isObjectLike(value)) {
+      if (isObject(value) || isModule(value)) {
         __propertyList(value, lineHead + '.' + key);
       } else {
-        result += lineHead + '.' + key + '\n';
+        result += `${lineHead}.${key}:${objectToString(value)}:${typeof value}\n`;
       }
     });
     return result;
@@ -39,7 +41,7 @@ export const _propertyList = (object) => {
 
 export const propertyList = (object) => {
 
-  if (!isObjectLike(object)) {
+  if (!(isObject(object) || isModule(object))) {
     throw new TypeError(
       'propertyList args(object) is not object',
     );

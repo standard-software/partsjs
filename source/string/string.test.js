@@ -703,6 +703,9 @@ export const test_execute_string = (parts) => {
         checkEqual('',        trimBothEnds('1',   ['1']));
         checkEqual('',        trimBothEnds('11',  ['1']));
 
+        checkEqual('abc',     trimBothEnds('  abc\n  \n', [' ', '\n']));
+        checkEqual('abc',     trimBothEnds('  abc\n  \n', ['\n', ' ']));
+
         // Object Named Parameter
         checkEqual('B',
           trimBothEnds({
