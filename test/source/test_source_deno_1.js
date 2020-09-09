@@ -15,8 +15,11 @@ const fileName = parts.string.subFirstDelimFirst(
   parts.platform.startName,
   '.',
 ) + '.txt';
+const text = parts.array.operation.sortDictionaryAscending(
+  parts.propertyList(parts).split('\n'),
+).join('\n');
 Deno.writeTextFile('./test/outputPropertyList/' + fileName,
-  parts.propertyList(parts),
+  text,
 );
 
 // console.log(Object.keys(parts).toString());

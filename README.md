@@ -309,6 +309,9 @@ You can now use the functions of the parts.js object.
     - isNot isArray isNotArray isAll isNotAll
       - ObjectType ObjectLike
       - ArrayType ArraySeries
+  - noexist function
+    - isNot isArray isNotArray isAll isNotAll
+      - Undef
 - update sortDictionary
 
 ### 7.6.0
