@@ -4,7 +4,7 @@ import {
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
   isObjectLike,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isException,
   isBooleanObject, isNumberObject, isStringObject,
@@ -81,7 +81,7 @@ clone.func.ignoreFunction = (
 };
 
 // support
-//  user object and user arrayType
+//  user object and user arraySeries
 //  Just good usability
 clone.func.object = (
   source,
@@ -103,12 +103,12 @@ clone.func.object = (
   return cloneValue;
 };
 
-clone.func.arrayType = (
+clone.func.arraySeries = (
   source,
   bufferWrite = () => {},
   __cloneDeep = value => value,
 ) => {
-  if (!(isArrayType(source))) {
+  if (!(isArraySeries(source))) {
     return undefined;
   }
 
@@ -252,7 +252,7 @@ clone.func.defaultArray = [
   clone.func.ignoreWeakMap,
   clone.func.set,
   clone.func.ignoreWeakSet,
-  clone.func.arrayType,
+  clone.func.arraySeries,
   clone.func.object,
 ];
 

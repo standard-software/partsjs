@@ -2,9 +2,8 @@ import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectLike,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
-  isError,
   isBooleanObject, isNumberObject, isStringObject,
 } from '../type/type.js';
 
@@ -97,7 +96,7 @@ export const _setProperty = (object, propertyPath, value) => {
     if (
       !(
         isObject(result[propertyArray[i]])
-        ||isArrayType(result[propertyArray[i]])
+        ||isArraySeries(result[propertyArray[i]])
       )
     ) {
       result[propertyArray[i]] = {};

@@ -2,7 +2,7 @@ import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectLike,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isException,
   isMap, isWeakMap,
@@ -11,7 +11,7 @@ import {
   isUndefinedArray, isNullArray, isNaNStrictArray,
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray, isObjectArray, isObjectLikeArray,
-  isArrayArray, isArrayTypeArray,
+  isArrayArray, isArraySeriesArray,
   isDateArray, isRegExpArray,
   isExceptionArray,
   isMapArray, isWeakMapArray,
@@ -20,7 +20,7 @@ import {
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
   isFunctionAll, isObjectAll, isObjectLikeAll,
-  isArrayAll, isArrayTypeAll,
+  isArrayAll, isArraySeriesAll,
   isDateAll, isRegExpAll,
   isExceptionAll,
   isMapAll, isWeakMapAll,
@@ -120,12 +120,12 @@ equal.func.object = (
   return true;
 };
 
-equal.func.arrayType = (
+equal.func.arraySeries = (
   value1, value2,
   bufferWrite = () => {},
   __equalDeep = (v1, v2) => v1 === v2,
 ) => {
-  if (!(isArrayTypeAll(value1, value2))) {
+  if (!(isArraySeriesAll(value1, value2))) {
     return;
   }
   if (value1.length !== value2.length) {
@@ -280,7 +280,7 @@ equal.func.defaultArray = [
   equal.func.weakMap,
   equal.func.set,
   equal.func.weakSet,
-  equal.func.arrayType,
+  equal.func.arraySeries,
   equal.func.object,
   equal.func.value,
 ];

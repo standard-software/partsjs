@@ -135,7 +135,7 @@ export const test_execute_root = (parts) => {
         // object array only clone
         var testDate1 = new Date('2019/10/11');
         var date1 = clone(testDate1, [
-          clone.func.arrayType,
+          clone.func.arraySeries,
           clone.func.object,
         ]);
         date1.setDate(12);
@@ -146,7 +146,7 @@ export const test_execute_root = (parts) => {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone(testDate1, [
           clone.func.date,
-          clone.func.arrayType,
+          clone.func.arraySeries,
           clone.func.object,
         ]);
         date1.setDate(12);
@@ -234,7 +234,7 @@ export const test_execute_root = (parts) => {
         var date1 = clone({
           source: testDate1,
           cloneFuncArray: [
-            clone.func.arrayType,
+            clone.func.arraySeries,
             clone.func.object,
           ],
         });
@@ -248,7 +248,7 @@ export const test_execute_root = (parts) => {
           source: testDate1,
           cloneFuncArray: [
             clone.func.date,
-            clone.func.arrayType,
+            clone.func.arraySeries,
             clone.func.object,
           ],
         });
@@ -417,7 +417,7 @@ export const test_execute_root = (parts) => {
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep(value1, [
-          clone.func.arrayType,
+          clone.func.arraySeries,
           clone.func.object,
         ]);
         value2[3].setDate(13);
@@ -430,7 +430,7 @@ export const test_execute_root = (parts) => {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep(value1, [
           clone.func.date,
-          clone.func.arrayType,
+          clone.func.arraySeries,
           clone.func.object,
         ]);
         value2[3].setDate(13);
@@ -583,7 +583,7 @@ export const test_execute_root = (parts) => {
         var value2 = cloneDeep({
           source: value1,
           cloneFuncArray: [
-            clone.func.arrayType,
+            clone.func.arraySeries,
             clone.func.object,
           ],
         });
@@ -599,7 +599,7 @@ export const test_execute_root = (parts) => {
           source: value1,
           cloneFuncArray: [
             clone.func.date,
-            clone.func.arrayType,
+            clone.func.arraySeries,
             clone.func.object,
           ],
         });

@@ -4,7 +4,7 @@ import {
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
   isObjectLike, isModule,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
@@ -13,8 +13,8 @@ import {
   isNotBoolean, isNotNumber, isNotInteger, isNotString,
   isNotFunction,
   isNotObject, isNotObjectNormal, isNotObjectFromNull,
-  isNotObjectType, isNotModule,
-  isNotArray, isNotArrayType,
+  isNotObjectLike, isNotModule,
+  isNotArray, isNotArraySeries,
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
@@ -67,7 +67,7 @@ export const isObjectFromNullArray    = _isTypeArrayCheckFunc(isObjectFromNull);
 export const isObjectLikeArray        = _isTypeArrayCheckFunc(isObjectLike);
 export const isModuleArray            = _isTypeArrayCheckFunc(isModule);
 export const isArrayArray             = _isTypeArrayCheckFunc(isArray);
-export const isArrayTypeArray         = _isTypeArrayCheckFunc(isArrayType);
+export const isArraySeriesArray       = _isTypeArrayCheckFunc(isArraySeries);
 export const isDateArray              = _isTypeArrayCheckFunc(isDate);
 export const isRegExpArray            = _isTypeArrayCheckFunc(isRegExp);
 export const isExceptionArray         = _isTypeArrayCheckFunc(isException);
@@ -93,10 +93,10 @@ export const isNotFunctionArray       = _isTypeArrayCheckFunc(isNotFunction);
 export const isNotObjectArray         = _isTypeArrayCheckFunc(isNotObject);
 export const isNotObjectNormalArray   = _isTypeArrayCheckFunc(isNotObjectNormal);
 export const isNotObjectFromNullArray = _isTypeArrayCheckFunc(isNotObjectFromNull);
-export const isNotObjectTypeArray     = _isTypeArrayCheckFunc(isNotObjectType);
+export const isNotObjectLikeArray     = _isTypeArrayCheckFunc(isNotObjectLike);
 export const isNotModuleArray         = _isTypeArrayCheckFunc(isNotModule);
 export const isNotArrayArray          = _isTypeArrayCheckFunc(isNotArray);
-export const isNotArrayTypeArray      = _isTypeArrayCheckFunc(isNotArrayType);
+export const isNotArraySeriesArray      = _isTypeArrayCheckFunc(isNotArraySeries);
 export const isNotDateArray           = _isTypeArrayCheckFunc(isNotDate);
 export const isNotRegExpArray         = _isTypeArrayCheckFunc(isNotRegExp);
 export const isNotExceptionArray      = _isTypeArrayCheckFunc(isNotException);
@@ -111,39 +111,13 @@ export const isNotWeakMapArray        = _isTypeArrayCheckFunc(isNotWeakMap);
 export const isNotSetArray            = _isTypeArrayCheckFunc(isNotSet);
 export const isNotWeakSetArray        = _isTypeArrayCheckFunc(isNotWeakSet);
 
-export const isUndefArray           = isUndefinedArray;
-export const isBoolArray            = isBooleanArray;
-export const isNumArray             = isNumberArray;
-export const isIntArray             = isIntegerArray;
-export const isStrArray             = isStringArray;
-export const isFuncArray            = isFunctionArray;
-export const isObjArray             = isObjectArray;
-export const isObjNormalArray       = isObjectNormalArray;
-export const isObjFromNullArray     = isObjectFromNullArray;
-export const isObjTypeArray         = isObjectLikeArray;
-export const isExceptArray          = isExceptionArray;
-export const isEmptyObjArray        = isEmptyObjectArray;
-
-export const isNotUndefArray        = isNotUndefinedArray;
-export const isNotBoolArray         = isNotBooleanArray;
-export const isNotNumArray          = isNotNumberArray;
-export const isNotIntArray          = isNotIntegerArray;
-export const isNotStrArray          = isNotStringArray;
-export const isNotFuncArray         = isNotFunctionArray;
-export const isNotObjArray          = isNotObjectArray;
-export const isNotObjNormalArray    = isNotObjectNormalArray;
-export const isNotObjFromNullArray  = isNotObjectFromNullArray;
-export const isNotObjTypeArray      = isNotObjectTypeArray;
-export const isNotExceptArray       = isNotExceptionArray;
-export const isNotEmptyObjArray     = isNotEmptyObjectArray;
-
 export default {
   isUndefinedArray, isNullArray, isNaNStrictArray,
   isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
   isFunctionArray,
   isObjectArray, isObjectNormalArray, isObjectFromNullArray,
   isObjectLikeArray, isModuleArray,
-  isArrayArray, isArrayTypeArray,
+  isArrayArray, isArraySeriesArray,
   isDateArray, isRegExpArray,
   isExceptionArray,
   isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
@@ -156,8 +130,8 @@ export default {
   isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
   isNotFunctionArray,
   isNotObjectArray, isNotObjectNormalArray, isNotObjectFromNullArray,
-  isNotObjectTypeArray, isNotModuleArray,
-  isNotArrayArray, isNotArrayTypeArray,
+  isNotObjectLikeArray, isNotModuleArray,
+  isNotArrayArray, isNotArraySeriesArray,
   isNotDateArray, isNotRegExpArray,
   isNotExceptionArray,
   isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
@@ -165,22 +139,6 @@ export default {
   isNotSymbolArray,
   isNotMapArray, isNotWeakMapArray,
   isNotSetArray, isNotWeakSetArray,
-
-  isUndefArray,
-  isBoolArray, isNumArray, isIntArray, isStrArray,
-  isFuncArray,
-  isObjArray, isObjNormalArray, isObjFromNullArray,
-  isObjTypeArray,
-  isExceptArray,
-  isEmptyObjArray,
-
-  isNotUndefArray,
-  isNotBoolArray, isNotNumArray, isNotIntArray, isNotStrArray,
-  isNotFuncArray,
-  isNotObjArray, isNotObjNormalArray, isNotObjFromNullArray,
-  isNotObjTypeArray,
-  isNotExceptArray,
-  isNotEmptyObjArray,
 
 };
 

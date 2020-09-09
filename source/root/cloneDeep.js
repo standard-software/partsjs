@@ -4,7 +4,7 @@ import {
   isFunction,
   isObject, isObjectNormal, isObjectFromNull,
   isObjectLike,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isException,
   isBooleanObject, isNumberObject, isStringObject,

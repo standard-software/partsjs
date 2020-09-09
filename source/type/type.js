@@ -16,7 +16,115 @@ export const {
   isObjectLike, isModule,
   isArray, isArraySeries,
   isDate, isRegExp,
-  isError,
+  isBooleanObject, isNumberObject, isStringObject,
+  isEmptyObject, isEmptyArray,
+
+  isNotUndefined, isNotNull, isNotNaNStrict,
+  isNotBoolean, isNotNumber, isNotInteger, isNotString,
+  isNotFunction,
+  isNotObject, isNotObjectNormal, isNotObjectFromNull,
+  isNotObjectLike, isNotModule,
+  isNotArray, isNotArraySeries,
+  isNotDate, isNotRegExp,
+  isNotBooleanObject, isNotNumberObject, isNotStringObject,
+  isNotEmptyObject, isNotEmptyArray,
+} = isType_js;
+
+export const {
+  isException,
+  isNotException,
+} = isException_js;
+
+export const {
+  isSymbol,
+  isNotSymbol,
+} = isSymbol_js;
+
+export const {
+  isMap, isWeakMap,
+  isNotMap, isNotWeakMap,
+} = isMap_js;
+
+export const {
+  isSet, isWeakSet,
+  isNotSet, isNotWeakSet,
+} = isSet_js;
+
+export const {
+
+  isUndefinedAll, isNullAll, isNaNStrictAll,
+  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
+  isFunctionAll,
+  isObjectAll, isObjectNormalAll, isObjectFromNullAll,
+  isObjectLikeAll, isModuleAll,
+  isArrayAll, isArraySeriesAll,
+  isDateAll, isRegExpAll,
+
+  isExceptionAll,
+
+  isBooleanObjectAll, isNumberObjectAll, isStringObjectAll,
+  isEmptyObjectAll, isEmptyArrayAll,
+  isSymbolAll,
+  isMapAll, isWeakMapAll,
+  isSetAll, isWeakSetAll,
+
+  isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
+  isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
+  isNotFunctionAll,
+  isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
+  isNotObjectLikeAll, isNotModuleAll,
+  isNotArrayAll, isNotArraySeriesAll,
+  isNotDateAll, isNotRegExpAll,
+  isNotExceptionAll,
+  isNotBooleanObjectAll, isNotNumberObjectAll, isNotStringObjectAll,
+  isNotEmptyObjectAll, isNotEmptyArrayAll,
+  isNotSymbolAll,
+  isNotMapAll, isNotWeakMapAll,
+  isNotSetAll, isNotWeakSetAll,
+
+} = isTypeAll_js;
+
+export const {
+  isUndefinedArray, isNullArray, isNaNStrictArray,
+  isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
+  isFunctionArray,
+  isObjectArray, isObjectNormalArray, isObjectFromNullArray,
+  isObjectLikeArray, isModuleArray,
+  isArrayArray, isArraySeriesArray,
+  isDateArray, isRegExpArray,
+  isExceptionArray,
+  isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
+  isEmptyObjectArray, isEmptyArrayArray,
+  isSymbolArray,
+  isMapArray, isWeakMapArray,
+  isSetArray, isWeakSetArray,
+
+  isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
+  isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
+  isNotFunctionArray,
+  isNotObjectArray, isNotObjectNormalArray, isNotObjectFromNullArray,
+  isNotObjectLikeArray, isNotModuleArray,
+  isNotArrayArray, isNotArraySeriesArray,
+  isNotDateArray, isNotRegExpArray,
+  isNotExceptionArray,
+  isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
+  isNotEmptyObjectArray, isNotEmptyArrayArray,
+  isNotSymbolArray,
+  isNotMapArray, isNotWeakMapArray,
+  isNotSetArray, isNotWeakSetArray,
+} = isTypeArray_js;
+
+export default {
+  // ...isType_js,
+  objectToString,
+
+  isUndefined, isNull, isNaNStrict,
+  isBoolean, isNumber, isInteger, isString,
+  isFunction,
+  isObject, isObjectNormal, isObjectFromNull,
+  isObjectLike, isModule,
+  isArray, isArraySeries,
+  isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
 
@@ -30,145 +138,6 @@ export const {
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
 
-  isObjectType, isArrayType,
-  isNotObjectType, isNotArrayType,
-
-  isUndef,
-  isBool, isNum, isInt, isStr,
-  isFunc,
-  isObj, isObjNormal, isObjFromNull,
-  isObjLike,
-  isEmptyObj,
-
-  isNotUndef,
-  isNotBool, isNotNum, isNotInt, isNotStr,
-  isNotFunc,
-  isNotObj, isNotObjNormal, isNotObjFromNull,
-  isNotObjLike,
-  isNotEmptyObj,
-
-  isObjType,
-  isNotObjType,
-} = isType_js;
-
-export const {
-  isException,
-  isNotException,
-
-  isExcept,
-  isNotExcept,
-} = isException_js;
-
-export const {
-  isSymbol, isNotSymbol,
-} = isSymbol_js;
-
-export const {
-  isMap, isNotMap,
-  isWeakMap, isNotWeakMap,
-} = isMap_js;
-
-export const {
-  isSet, isNotSet,
-  isWeakSet, isNotWeakSet,
-} = isSet_js;
-
-export const {
-  _isTypeArray,
-
-  isUndefinedAll, isNullAll, isNaNStrictAll,
-  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
-  isFunctionAll,
-  isObjectAll, isObjectNormalAll, isObjectFromNullAll,
-  isObjectLikeAll, isModuleAll,
-  isArrayAll, isArrayTypeAll,
-  isDateAll, isRegExpAll,
-  isExceptionAll,
-  isBooleanObjectAll, isNumberObjectAll, isStringObjectAll,
-  isEmptyObjectAll, isEmptyArrayAll,
-  isSymbolAll,
-  isMapAll, isWeakMapAll,
-  isSetAll, isWeakSetAll,
-
-  isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
-  isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
-  isNotFunctionAll,
-  isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
-  isNotObjectTypeAll, isNotModuleAll,
-  isNotArrayAll, isNotArrayTypeAll,
-  isNotDateAll, isNotRegExpAll,
-  isNotExceptionAll,
-  isNotBooleanObjectAll, isNotNumberObjectAll, isNotStringObjectAll,
-  isNotEmptyObjectAll, isNotEmptyArrayAll,
-  isNotSymbolAll,
-  isNotMapAll, isNotWeakMapAll,
-  isNotSetAll, isNotWeakSetAll,
-
-  isUndefAll,
-  isBoolAll, isNumAll, isIntAll, isStrAll,
-  isFuncAll,
-  isObjAll, isObjNormalAll, isObjFromNullAll,
-  isObjTypeAll,
-  isExceptAll,
-  isEmptyObjAll,
-
-  isNotUndefAll,
-  isNotBoolAll, isNotNumAll, isNotIntAll, isNotStrAll,
-  isNotFuncAll,
-  isNotObjAll, isNotObjNormalAll, isNotObjFromNullAll,
-  isNotObjTypeAll,
-  isNotExceptAll,
-  isNotEmptyObjAll,
-} = isTypeAll_js;
-
-export const {
-  isUndefinedArray, isNullArray, isNaNStrictArray,
-  isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
-  isFunctionArray,
-  isObjectArray, isObjectNormalArray, isObjectFromNullArray,
-  isObjectLikeArray, isModuleArray,
-  isArrayArray, isArrayTypeArray,
-  isDateArray, isRegExpArray,
-  isExceptionArray,
-  isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
-  isEmptyObjectArray, isEmptyArrayArray,
-  isSymbolArray,
-  isMapArray, isWeakMapArray,
-  isSetArray, isWeakSetArray,
-
-  isNotUndefinedArray, isNotNullArray, isNotNaNStrictArray,
-  isNotBooleanArray, isNotNumberArray, isNotIntegerArray, isNotStringArray,
-  isNotFunctionArray,
-  isNotObjectArray, isNotObjectNormalArray, isNotObjectFromNullArray,
-  isNotObjectTypeArray, isNotModuleArray,
-  isNotArrayArray, isNotArrayTypeArray,
-  isNotDateArray, isNotRegExpArray,
-  isNotExceptionArray,
-  isNotBooleanObjectArray, isNotNumberObjectArray, isNotStringObjectArray,
-  isNotEmptyObjectArray, isNotEmptyArrayArray,
-  isNotSymbolArray,
-  isNotMapArray, isNotWeakMapArray,
-  isNotSetArray, isNotWeakSetArray,
-
-  isUndefArray,
-  isBoolArray, isNumArray, isIntArray, isStrArray,
-  isFuncArray,
-  isObjArray, isObjNormalArray, isObjFromNullArray,
-  isObjTypeArray,
-  isExceptArray,
-  isEmptyObjArray,
-
-  isNotUndefArray,
-  isNotBoolArray, isNotNumArray, isNotIntArray, isNotStrArray,
-  isNotFuncArray,
-  isNotObjArray, isNotObjNormalArray, isNotObjFromNullArray,
-  isNotObjTypeArray,
-  isNotExceptArray,
-  isNotEmptyObjArray,
-} = isTypeArray_js;
-
-export default {
-  ...isType_js,
   ...isException_js,
   ...isSymbol_js,
   ...isMap_js,

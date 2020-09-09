@@ -303,6 +303,12 @@ You can now use the functions of the parts.js object.
   - startName
   - write file /test/outputPropertyList
 - update objectEntries
+- add typeAlias.js
+- bugfix
+  - undefined function
+    - isNot isArray isNotArray isAll isNotAll
+      - ObjectType ObjectLike
+      - ArrayType ArraySeries
 
 ### 7.6.0
 #### 2020/09/07(Mon)

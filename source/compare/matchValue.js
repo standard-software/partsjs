@@ -2,7 +2,7 @@ import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectLike,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
   isException,
   isMap, isWeakMap,

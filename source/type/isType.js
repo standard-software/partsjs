@@ -162,39 +162,9 @@ export const isNotStringObject    = value => !isStringObject(value);
 export const isNotEmptyObject     = value => !isEmptyObject(value);
 export const isNotEmptyArray      = value => !isEmptyArray(value);
 
-export const isObjectType     = isObjectLike;
-export const isArrayType      = isArraySeries;
-export const isNotObjectType  = isNotObjectLike;
-export const isNotArrayType   = isNotArraySeries;
-
-export const isUndef          = isUndefined;
-export const isBool           = isBoolean;
-export const isNum            = isNumber;
-export const isInt            = isInteger;
-export const isStr            = isString;
-export const isFunc           = isFunction;
-export const isObj            = isObject;
-export const isObjNormal      = isObjectNormal;
-export const isObjFromNull    = isObjectFromNull;
-export const isObjLike        = isObjectLike;
-export const isEmptyObj       = isEmptyObject;
-
-export const isNotUndef       = isNotUndefined;
-export const isNotBool        = isNotBoolean;
-export const isNotNum         = isNotNumber;
-export const isNotInt         = isNotInteger;
-export const isNotStr         = isNotString;
-export const isNotFunc        = isNotFunction;
-export const isNotObj         = isNotObject;
-export const isNotObjNormal   = isNotObjectNormal;
-export const isNotObjFromNull = isNotObjectFromNull;
-export const isNotObjLike     = isNotObjectLike;
-export const isNotEmptyObj    = isNotEmptyObject;
-
-export const isObjType        = isObjLike;
-export const isNotObjType     = isNotObjLike;
-
 export default {
+  isError,
+
   objectToString,
 
   isUndefined, isNull, isNaNStrict,
@@ -204,7 +174,6 @@ export default {
   isObjectLike, isModule,
   isArray, isArraySeries,
   isDate, isRegExp,
-  isError,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
 
@@ -218,24 +187,5 @@ export default {
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
 
-  isObjectType, isArrayType,
-  isNotObjectType, isNotArrayType,
-
-  isUndef,
-  isBool, isNum, isInt, isStr,
-  isFunc,
-  isObj, isObjNormal, isObjFromNull,
-  isObjLike,
-  isEmptyObj,
-
-  isNotUndef,
-  isNotBool, isNotNum, isNotInt, isNotStr,
-  isNotFunc,
-  isNotObj, isNotObjNormal, isNotObjFromNull,
-  isNotObjLike,
-  isNotEmptyObj,
-
-  isObjType,
-  isNotObjType,
 };
 

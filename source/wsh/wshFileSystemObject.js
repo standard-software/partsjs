@@ -6,7 +6,6 @@ import {
   isObjectLike, isModule,
   isArray, isArraySeries,
   isDate, isRegExp,
-  isError,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
 } from '../type/isType.js';

@@ -24,14 +24,8 @@ export const isException = (value) => {
 
 export const isNotException   = value => !isException(value);
 
-export const isExcept    = isException;
-export const isNotExcept   = isNotException;
-
 export default {
   isException,
   isNotException,
-
-  isExcept,
-  isNotExcept,
 };
 

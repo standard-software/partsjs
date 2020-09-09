@@ -2,9 +2,8 @@ import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isObjectLike,
-  isArray, isArrayType,
+  isArray, isArraySeries,
   isDate, isRegExp,
-  isError,
   isBooleanObject, isNumberObject, isStringObject,
 } from '../type/type.js';
 

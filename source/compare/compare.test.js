@@ -159,7 +159,7 @@ export const test_execute_compare = (parts) => {
         const equalFuncArray = [
           equal.func.regExp,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];
@@ -198,7 +198,7 @@ export const test_execute_compare = (parts) => {
         const equalFuncArray = [
           equal.func.date,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];
@@ -249,7 +249,7 @@ export const test_execute_compare = (parts) => {
           equal.func.date,
           equal.func.regExp,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];
@@ -298,7 +298,7 @@ export const test_execute_compare = (parts) => {
           equal.func.date,
           equal.func.regExp,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];
@@ -575,7 +575,7 @@ export const test_execute_compare = (parts) => {
         const equalFuncArray = [
           equal.func.regExp,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];
@@ -616,7 +616,7 @@ export const test_execute_compare = (parts) => {
         const equalFuncArray = [
           equal.func.value,
           equal.func.object,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.function,
           equal.func.date,
         ];
@@ -670,7 +670,7 @@ export const test_execute_compare = (parts) => {
           equal.func.date,
           equal.func.regExp,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];
@@ -839,7 +839,7 @@ export const test_execute_compare = (parts) => {
           equal.func.date,
           equal.func.regExp,
           equal.func.function,
-          equal.func.arrayType,
+          equal.func.arraySeries,
           equal.func.object,
           equal.func.value,
         ];

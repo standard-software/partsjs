@@ -15,7 +15,7 @@ export const test_execute_type = (parts) => {
       isFunction,
       isObject, isObjectNormal, isObjectFromNull,
       isObjectLike,
-      isArray, isArrayType,
+      isArray, isArraySeries,
       isDate, isRegExp,
       isException,
       isBooleanObject, isNumberObject, isStringObject,
@@ -43,7 +43,7 @@ export const test_execute_type = (parts) => {
       isFunctionAll,
       isObjectAll, isObjectNormalAll, isObjectFromNullAll,
       isObjectLikeAll,
-      isArrayAll, isArrayTypeAll,
+      isArrayAll, isArraySeriesAll,
       isDateAll, isRegExpAll,
       isExceptionAll,
       isBooleanObjectAll, isNumberObjectAll, isStringObjectAll,
@@ -71,7 +71,7 @@ export const test_execute_type = (parts) => {
       isFunctionArray,
       isObjectArray, isObjectNormalArray, isObjectFromNullArray,
       isObjectLikeArray,
-      isArrayArray, isArrayTypeArray,
+      isArrayArray, isArraySeriesArray,
       isDateArray, isRegExpArray,
       isExceptionArray,
       isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
@@ -955,8 +955,8 @@ export const test_execute_type = (parts) => {
       });
     };
 
-    const test_isArrayType = function() {
-      it('test_isArrayType', () => {
+    const test_isArraySeries = function() {
+      it('test_isArraySeries', () => {
 
         checkEqual(true,  Array.isArray([]));
         checkEqual(true,  Array.isArray([123]));
@@ -998,24 +998,24 @@ export const test_execute_type = (parts) => {
           checkEqual(false, isArrayAll(new Float64Array()));
         }
 
-        checkEqual(true,  isArrayTypeAll([]));
-        checkEqual(true,  isArrayTypeAll([123]));
-        checkEqual(true,  isArrayTypeAll([1, 2, 3]));
-        checkEqual(true,  isArrayTypeAll(new Array()));
-        checkEqual(true,  isArrayTypeAll(new Array(1, 2, 3)));
-        checkEqual(true,  isArrayTypeAll(new Array()));
+        checkEqual(true,  isArraySeriesAll([]));
+        checkEqual(true,  isArraySeriesAll([123]));
+        checkEqual(true,  isArraySeriesAll([1, 2, 3]));
+        checkEqual(true,  isArraySeriesAll(new Array()));
+        checkEqual(true,  isArraySeriesAll(new Array(1, 2, 3)));
+        checkEqual(true,  isArraySeriesAll(new Array()));
         if (!parts.platform.isWindowsScriptHost()
           && !parts.platform.isGasRhino()
         ) {
-          checkEqual(true,  isArrayTypeAll(new Int8Array()));
-          checkEqual(true,  isArrayTypeAll(new Uint8Array()));
-          checkEqual(true,  isArrayTypeAll(new Uint8ClampedArray()));
-          checkEqual(true,  isArrayTypeAll(new Int16Array()));
-          checkEqual(true,  isArrayTypeAll(new Uint16Array()));
-          checkEqual(true,  isArrayTypeAll(new Int32Array()));
-          checkEqual(true,  isArrayTypeAll(new Uint32Array()));
-          checkEqual(true,  isArrayTypeAll(new Float32Array()));
-          checkEqual(true,  isArrayTypeAll(new Float64Array()));
+          checkEqual(true,  isArraySeriesAll(new Int8Array()));
+          checkEqual(true,  isArraySeriesAll(new Uint8Array()));
+          checkEqual(true,  isArraySeriesAll(new Uint8ClampedArray()));
+          checkEqual(true,  isArraySeriesAll(new Int16Array()));
+          checkEqual(true,  isArraySeriesAll(new Uint16Array()));
+          checkEqual(true,  isArraySeriesAll(new Int32Array()));
+          checkEqual(true,  isArraySeriesAll(new Uint32Array()));
+          checkEqual(true,  isArraySeriesAll(new Float32Array()));
+          checkEqual(true,  isArraySeriesAll(new Float64Array()));
         }
       });
     };
@@ -1161,7 +1161,7 @@ export const test_execute_type = (parts) => {
     test_isModule();
 
     test_isArray();
-    test_isArrayType();
+    test_isArraySeries();
     test_isDate();
     test_isExcection();
     test_isEmptyObject();
