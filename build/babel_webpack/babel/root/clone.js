@@ -86,7 +86,7 @@ clone.func.ignoreFunction = function (source) {
 
   return source;
 }; // support
-//  user object and user arrayType
+//  user object and user arraySeries
 //  Just good usability
 
 
@@ -113,14 +113,14 @@ clone.func.object = function (source) {
   return cloneValue;
 };
 
-clone.func.arrayType = function (source) {
+clone.func.arraySeries = function (source) {
   var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
   var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
     return value;
   };
 
-  if (!(0, _type.isArrayType)(source)) {
+  if (!(0, _type.isArraySeries)(source)) {
     return undefined;
   }
 
@@ -271,7 +271,7 @@ clone.func.ignoreWeakSet = function (source) {
   return source;
 };
 
-clone.func.defaultArray = [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.map, clone.func.ignoreWeakMap, clone.func.set, clone.func.ignoreWeakSet, clone.func.arrayType, clone.func.object];
+clone.func.defaultArray = [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.map, clone.func.ignoreWeakMap, clone.func.set, clone.func.ignoreWeakSet, clone.func.arraySeries, clone.func.object];
 var _default = {
   _clone: _clone,
   clone: clone

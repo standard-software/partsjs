@@ -3,9 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports._isTypeArray = exports.isNotWeakSet = exports.isWeakSet = exports.isNotSet = exports.isSet = exports.isNotWeakMap = exports.isWeakMap = exports.isNotMap = exports.isMap = exports.isNotSymbol = exports.isSymbol = exports.isNotExcept = exports.isExcept = exports.isNotException = exports.isException = exports.isNotObjType = exports.isObjType = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isArrayType = exports.isObjectType = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isError = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
-exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArrayTypeArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotEmptyObjAll = exports.isNotExceptAll = exports.isNotObjTypeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isEmptyObjAll = exports.isExceptAll = exports.isObjTypeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArrayTypeAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectTypeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArrayTypeAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = void 0;
-exports["default"] = exports.isNotEmptyObjArray = exports.isNotExceptArray = exports.isNotObjTypeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isEmptyObjArray = exports.isExceptArray = exports.isObjTypeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArrayTypeArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectTypeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = void 0;
+exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet = exports.isSet = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap = exports.isMap = exports.isNotSymbol = exports.isSymbol = exports.isNotException = exports.isException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
+exports["default"] = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = void 0;
 
 var _isType = _interopRequireDefault(require("./isType.js"));
 
@@ -19,7 +18,7 @@ var _isSet = _interopRequireDefault(require("./isSet.js"));
 
 var _isTypeAll = _interopRequireDefault(require("./isTypeAll.js"));
 
-var _isTypeArray2 = _interopRequireDefault(require("./isTypeArray.js"));
+var _isTypeArray = _interopRequireDefault(require("./isTypeArray.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -47,7 +46,6 @@ var objectToString = _isType["default"].objectToString,
     isArraySeries = _isType["default"].isArraySeries,
     isDate = _isType["default"].isDate,
     isRegExp = _isType["default"].isRegExp,
-    isError = _isType["default"].isError,
     isBooleanObject = _isType["default"].isBooleanObject,
     isNumberObject = _isType["default"].isNumberObject,
     isStringObject = _isType["default"].isStringObject,
@@ -74,63 +72,7 @@ var objectToString = _isType["default"].objectToString,
     isNotNumberObject = _isType["default"].isNotNumberObject,
     isNotStringObject = _isType["default"].isNotStringObject,
     isNotEmptyObject = _isType["default"].isNotEmptyObject,
-    isNotEmptyArray = _isType["default"].isNotEmptyArray,
-    isObjectType = _isType["default"].isObjectType,
-    isArrayType = _isType["default"].isArrayType,
-    isNotObjectType = _isType["default"].isNotObjectType,
-    isNotArrayType = _isType["default"].isNotArrayType,
-    isUndef = _isType["default"].isUndef,
-    isBool = _isType["default"].isBool,
-    isNum = _isType["default"].isNum,
-    isInt = _isType["default"].isInt,
-    isStr = _isType["default"].isStr,
-    isFunc = _isType["default"].isFunc,
-    isObj = _isType["default"].isObj,
-    isObjNormal = _isType["default"].isObjNormal,
-    isObjFromNull = _isType["default"].isObjFromNull,
-    isObjLike = _isType["default"].isObjLike,
-    isEmptyObj = _isType["default"].isEmptyObj,
-    isNotUndef = _isType["default"].isNotUndef,
-    isNotBool = _isType["default"].isNotBool,
-    isNotNum = _isType["default"].isNotNum,
-    isNotInt = _isType["default"].isNotInt,
-    isNotStr = _isType["default"].isNotStr,
-    isNotFunc = _isType["default"].isNotFunc,
-    isNotObj = _isType["default"].isNotObj,
-    isNotObjNormal = _isType["default"].isNotObjNormal,
-    isNotObjFromNull = _isType["default"].isNotObjFromNull,
-    isNotObjLike = _isType["default"].isNotObjLike,
-    isNotEmptyObj = _isType["default"].isNotEmptyObj,
-    isObjType = _isType["default"].isObjType,
-    isNotObjType = _isType["default"].isNotObjType;
-exports.isNotObjType = isNotObjType;
-exports.isObjType = isObjType;
-exports.isNotEmptyObj = isNotEmptyObj;
-exports.isNotObjLike = isNotObjLike;
-exports.isNotObjFromNull = isNotObjFromNull;
-exports.isNotObjNormal = isNotObjNormal;
-exports.isNotObj = isNotObj;
-exports.isNotFunc = isNotFunc;
-exports.isNotStr = isNotStr;
-exports.isNotInt = isNotInt;
-exports.isNotNum = isNotNum;
-exports.isNotBool = isNotBool;
-exports.isNotUndef = isNotUndef;
-exports.isEmptyObj = isEmptyObj;
-exports.isObjLike = isObjLike;
-exports.isObjFromNull = isObjFromNull;
-exports.isObjNormal = isObjNormal;
-exports.isObj = isObj;
-exports.isFunc = isFunc;
-exports.isStr = isStr;
-exports.isInt = isInt;
-exports.isNum = isNum;
-exports.isBool = isBool;
-exports.isUndef = isUndef;
-exports.isNotArrayType = isNotArrayType;
-exports.isNotObjectType = isNotObjectType;
-exports.isArrayType = isArrayType;
-exports.isObjectType = isObjectType;
+    isNotEmptyArray = _isType["default"].isNotEmptyArray;
 exports.isNotEmptyArray = isNotEmptyArray;
 exports.isNotEmptyObject = isNotEmptyObject;
 exports.isNotStringObject = isNotStringObject;
@@ -158,7 +100,6 @@ exports.isEmptyObject = isEmptyObject;
 exports.isStringObject = isStringObject;
 exports.isNumberObject = isNumberObject;
 exports.isBooleanObject = isBooleanObject;
-exports.isError = isError;
 exports.isRegExp = isRegExp;
 exports.isDate = isDate;
 exports.isArraySeries = isArraySeries;
@@ -178,11 +119,7 @@ exports.isNull = isNull;
 exports.isUndefined = isUndefined;
 exports.objectToString = objectToString;
 var isException = _isException["default"].isException,
-    isNotException = _isException["default"].isNotException,
-    isExcept = _isException["default"].isExcept,
-    isNotExcept = _isException["default"].isNotExcept;
-exports.isNotExcept = isNotExcept;
-exports.isExcept = isExcept;
+    isNotException = _isException["default"].isNotException;
 exports.isNotException = isNotException;
 exports.isException = isException;
 var isSymbol = _isSymbol["default"].isSymbol,
@@ -190,23 +127,22 @@ var isSymbol = _isSymbol["default"].isSymbol,
 exports.isNotSymbol = isNotSymbol;
 exports.isSymbol = isSymbol;
 var isMap = _isMap["default"].isMap,
-    isNotMap = _isMap["default"].isNotMap,
     isWeakMap = _isMap["default"].isWeakMap,
+    isNotMap = _isMap["default"].isNotMap,
     isNotWeakMap = _isMap["default"].isNotWeakMap;
 exports.isNotWeakMap = isNotWeakMap;
-exports.isWeakMap = isWeakMap;
 exports.isNotMap = isNotMap;
+exports.isWeakMap = isWeakMap;
 exports.isMap = isMap;
 var isSet = _isSet["default"].isSet,
-    isNotSet = _isSet["default"].isNotSet,
     isWeakSet = _isSet["default"].isWeakSet,
+    isNotSet = _isSet["default"].isNotSet,
     isNotWeakSet = _isSet["default"].isNotWeakSet;
 exports.isNotWeakSet = isNotWeakSet;
-exports.isWeakSet = isWeakSet;
 exports.isNotSet = isNotSet;
+exports.isWeakSet = isWeakSet;
 exports.isSet = isSet;
-var _isTypeArray = _isTypeAll["default"]._isTypeArray,
-    isUndefinedAll = _isTypeAll["default"].isUndefinedAll,
+var isUndefinedAll = _isTypeAll["default"].isUndefinedAll,
     isNullAll = _isTypeAll["default"].isNullAll,
     isNaNStrictAll = _isTypeAll["default"].isNaNStrictAll,
     isBooleanAll = _isTypeAll["default"].isBooleanAll,
@@ -220,7 +156,7 @@ var _isTypeArray = _isTypeAll["default"]._isTypeArray,
     isObjectLikeAll = _isTypeAll["default"].isObjectLikeAll,
     isModuleAll = _isTypeAll["default"].isModuleAll,
     isArrayAll = _isTypeAll["default"].isArrayAll,
-    isArrayTypeAll = _isTypeAll["default"].isArrayTypeAll,
+    isArraySeriesAll = _isTypeAll["default"].isArraySeriesAll,
     isDateAll = _isTypeAll["default"].isDateAll,
     isRegExpAll = _isTypeAll["default"].isRegExpAll,
     isExceptionAll = _isTypeAll["default"].isExceptionAll,
@@ -245,10 +181,10 @@ var _isTypeArray = _isTypeAll["default"]._isTypeArray,
     isNotObjectAll = _isTypeAll["default"].isNotObjectAll,
     isNotObjectNormalAll = _isTypeAll["default"].isNotObjectNormalAll,
     isNotObjectFromNullAll = _isTypeAll["default"].isNotObjectFromNullAll,
-    isNotObjectTypeAll = _isTypeAll["default"].isNotObjectTypeAll,
+    isNotObjectLikeAll = _isTypeAll["default"].isNotObjectLikeAll,
     isNotModuleAll = _isTypeAll["default"].isNotModuleAll,
     isNotArrayAll = _isTypeAll["default"].isNotArrayAll,
-    isNotArrayTypeAll = _isTypeAll["default"].isNotArrayTypeAll,
+    isNotArraySeriesAll = _isTypeAll["default"].isNotArraySeriesAll,
     isNotDateAll = _isTypeAll["default"].isNotDateAll,
     isNotRegExpAll = _isTypeAll["default"].isNotRegExpAll,
     isNotExceptionAll = _isTypeAll["default"].isNotExceptionAll,
@@ -261,55 +197,7 @@ var _isTypeArray = _isTypeAll["default"]._isTypeArray,
     isNotMapAll = _isTypeAll["default"].isNotMapAll,
     isNotWeakMapAll = _isTypeAll["default"].isNotWeakMapAll,
     isNotSetAll = _isTypeAll["default"].isNotSetAll,
-    isNotWeakSetAll = _isTypeAll["default"].isNotWeakSetAll,
-    isUndefAll = _isTypeAll["default"].isUndefAll,
-    isBoolAll = _isTypeAll["default"].isBoolAll,
-    isNumAll = _isTypeAll["default"].isNumAll,
-    isIntAll = _isTypeAll["default"].isIntAll,
-    isStrAll = _isTypeAll["default"].isStrAll,
-    isFuncAll = _isTypeAll["default"].isFuncAll,
-    isObjAll = _isTypeAll["default"].isObjAll,
-    isObjNormalAll = _isTypeAll["default"].isObjNormalAll,
-    isObjFromNullAll = _isTypeAll["default"].isObjFromNullAll,
-    isObjTypeAll = _isTypeAll["default"].isObjTypeAll,
-    isExceptAll = _isTypeAll["default"].isExceptAll,
-    isEmptyObjAll = _isTypeAll["default"].isEmptyObjAll,
-    isNotUndefAll = _isTypeAll["default"].isNotUndefAll,
-    isNotBoolAll = _isTypeAll["default"].isNotBoolAll,
-    isNotNumAll = _isTypeAll["default"].isNotNumAll,
-    isNotIntAll = _isTypeAll["default"].isNotIntAll,
-    isNotStrAll = _isTypeAll["default"].isNotStrAll,
-    isNotFuncAll = _isTypeAll["default"].isNotFuncAll,
-    isNotObjAll = _isTypeAll["default"].isNotObjAll,
-    isNotObjNormalAll = _isTypeAll["default"].isNotObjNormalAll,
-    isNotObjFromNullAll = _isTypeAll["default"].isNotObjFromNullAll,
-    isNotObjTypeAll = _isTypeAll["default"].isNotObjTypeAll,
-    isNotExceptAll = _isTypeAll["default"].isNotExceptAll,
-    isNotEmptyObjAll = _isTypeAll["default"].isNotEmptyObjAll;
-exports.isNotEmptyObjAll = isNotEmptyObjAll;
-exports.isNotExceptAll = isNotExceptAll;
-exports.isNotObjTypeAll = isNotObjTypeAll;
-exports.isNotObjFromNullAll = isNotObjFromNullAll;
-exports.isNotObjNormalAll = isNotObjNormalAll;
-exports.isNotObjAll = isNotObjAll;
-exports.isNotFuncAll = isNotFuncAll;
-exports.isNotStrAll = isNotStrAll;
-exports.isNotIntAll = isNotIntAll;
-exports.isNotNumAll = isNotNumAll;
-exports.isNotBoolAll = isNotBoolAll;
-exports.isNotUndefAll = isNotUndefAll;
-exports.isEmptyObjAll = isEmptyObjAll;
-exports.isExceptAll = isExceptAll;
-exports.isObjTypeAll = isObjTypeAll;
-exports.isObjFromNullAll = isObjFromNullAll;
-exports.isObjNormalAll = isObjNormalAll;
-exports.isObjAll = isObjAll;
-exports.isFuncAll = isFuncAll;
-exports.isStrAll = isStrAll;
-exports.isIntAll = isIntAll;
-exports.isNumAll = isNumAll;
-exports.isBoolAll = isBoolAll;
-exports.isUndefAll = isUndefAll;
+    isNotWeakSetAll = _isTypeAll["default"].isNotWeakSetAll;
 exports.isNotWeakSetAll = isNotWeakSetAll;
 exports.isNotSetAll = isNotSetAll;
 exports.isNotWeakMapAll = isNotWeakMapAll;
@@ -323,10 +211,10 @@ exports.isNotBooleanObjectAll = isNotBooleanObjectAll;
 exports.isNotExceptionAll = isNotExceptionAll;
 exports.isNotRegExpAll = isNotRegExpAll;
 exports.isNotDateAll = isNotDateAll;
-exports.isNotArrayTypeAll = isNotArrayTypeAll;
+exports.isNotArraySeriesAll = isNotArraySeriesAll;
 exports.isNotArrayAll = isNotArrayAll;
 exports.isNotModuleAll = isNotModuleAll;
-exports.isNotObjectTypeAll = isNotObjectTypeAll;
+exports.isNotObjectLikeAll = isNotObjectLikeAll;
 exports.isNotObjectFromNullAll = isNotObjectFromNullAll;
 exports.isNotObjectNormalAll = isNotObjectNormalAll;
 exports.isNotObjectAll = isNotObjectAll;
@@ -351,7 +239,7 @@ exports.isBooleanObjectAll = isBooleanObjectAll;
 exports.isExceptionAll = isExceptionAll;
 exports.isRegExpAll = isRegExpAll;
 exports.isDateAll = isDateAll;
-exports.isArrayTypeAll = isArrayTypeAll;
+exports.isArraySeriesAll = isArraySeriesAll;
 exports.isArrayAll = isArrayAll;
 exports.isModuleAll = isModuleAll;
 exports.isObjectLikeAll = isObjectLikeAll;
@@ -366,111 +254,62 @@ exports.isBooleanAll = isBooleanAll;
 exports.isNaNStrictAll = isNaNStrictAll;
 exports.isNullAll = isNullAll;
 exports.isUndefinedAll = isUndefinedAll;
-exports._isTypeArray = _isTypeArray;
-var isUndefinedArray = _isTypeArray2["default"].isUndefinedArray,
-    isNullArray = _isTypeArray2["default"].isNullArray,
-    isNaNStrictArray = _isTypeArray2["default"].isNaNStrictArray,
-    isBooleanArray = _isTypeArray2["default"].isBooleanArray,
-    isNumberArray = _isTypeArray2["default"].isNumberArray,
-    isIntegerArray = _isTypeArray2["default"].isIntegerArray,
-    isStringArray = _isTypeArray2["default"].isStringArray,
-    isFunctionArray = _isTypeArray2["default"].isFunctionArray,
-    isObjectArray = _isTypeArray2["default"].isObjectArray,
-    isObjectNormalArray = _isTypeArray2["default"].isObjectNormalArray,
-    isObjectFromNullArray = _isTypeArray2["default"].isObjectFromNullArray,
-    isObjectLikeArray = _isTypeArray2["default"].isObjectLikeArray,
-    isModuleArray = _isTypeArray2["default"].isModuleArray,
-    isArrayArray = _isTypeArray2["default"].isArrayArray,
-    isArrayTypeArray = _isTypeArray2["default"].isArrayTypeArray,
-    isDateArray = _isTypeArray2["default"].isDateArray,
-    isRegExpArray = _isTypeArray2["default"].isRegExpArray,
-    isExceptionArray = _isTypeArray2["default"].isExceptionArray,
-    isBooleanObjectArray = _isTypeArray2["default"].isBooleanObjectArray,
-    isNumberObjectArray = _isTypeArray2["default"].isNumberObjectArray,
-    isStringObjectArray = _isTypeArray2["default"].isStringObjectArray,
-    isEmptyObjectArray = _isTypeArray2["default"].isEmptyObjectArray,
-    isEmptyArrayArray = _isTypeArray2["default"].isEmptyArrayArray,
-    isSymbolArray = _isTypeArray2["default"].isSymbolArray,
-    isMapArray = _isTypeArray2["default"].isMapArray,
-    isWeakMapArray = _isTypeArray2["default"].isWeakMapArray,
-    isSetArray = _isTypeArray2["default"].isSetArray,
-    isWeakSetArray = _isTypeArray2["default"].isWeakSetArray,
-    isNotUndefinedArray = _isTypeArray2["default"].isNotUndefinedArray,
-    isNotNullArray = _isTypeArray2["default"].isNotNullArray,
-    isNotNaNStrictArray = _isTypeArray2["default"].isNotNaNStrictArray,
-    isNotBooleanArray = _isTypeArray2["default"].isNotBooleanArray,
-    isNotNumberArray = _isTypeArray2["default"].isNotNumberArray,
-    isNotIntegerArray = _isTypeArray2["default"].isNotIntegerArray,
-    isNotStringArray = _isTypeArray2["default"].isNotStringArray,
-    isNotFunctionArray = _isTypeArray2["default"].isNotFunctionArray,
-    isNotObjectArray = _isTypeArray2["default"].isNotObjectArray,
-    isNotObjectNormalArray = _isTypeArray2["default"].isNotObjectNormalArray,
-    isNotObjectFromNullArray = _isTypeArray2["default"].isNotObjectFromNullArray,
-    isNotObjectTypeArray = _isTypeArray2["default"].isNotObjectTypeArray,
-    isNotModuleArray = _isTypeArray2["default"].isNotModuleArray,
-    isNotArrayArray = _isTypeArray2["default"].isNotArrayArray,
-    isNotArrayTypeArray = _isTypeArray2["default"].isNotArrayTypeArray,
-    isNotDateArray = _isTypeArray2["default"].isNotDateArray,
-    isNotRegExpArray = _isTypeArray2["default"].isNotRegExpArray,
-    isNotExceptionArray = _isTypeArray2["default"].isNotExceptionArray,
-    isNotBooleanObjectArray = _isTypeArray2["default"].isNotBooleanObjectArray,
-    isNotNumberObjectArray = _isTypeArray2["default"].isNotNumberObjectArray,
-    isNotStringObjectArray = _isTypeArray2["default"].isNotStringObjectArray,
-    isNotEmptyObjectArray = _isTypeArray2["default"].isNotEmptyObjectArray,
-    isNotEmptyArrayArray = _isTypeArray2["default"].isNotEmptyArrayArray,
-    isNotSymbolArray = _isTypeArray2["default"].isNotSymbolArray,
-    isNotMapArray = _isTypeArray2["default"].isNotMapArray,
-    isNotWeakMapArray = _isTypeArray2["default"].isNotWeakMapArray,
-    isNotSetArray = _isTypeArray2["default"].isNotSetArray,
-    isNotWeakSetArray = _isTypeArray2["default"].isNotWeakSetArray,
-    isUndefArray = _isTypeArray2["default"].isUndefArray,
-    isBoolArray = _isTypeArray2["default"].isBoolArray,
-    isNumArray = _isTypeArray2["default"].isNumArray,
-    isIntArray = _isTypeArray2["default"].isIntArray,
-    isStrArray = _isTypeArray2["default"].isStrArray,
-    isFuncArray = _isTypeArray2["default"].isFuncArray,
-    isObjArray = _isTypeArray2["default"].isObjArray,
-    isObjNormalArray = _isTypeArray2["default"].isObjNormalArray,
-    isObjFromNullArray = _isTypeArray2["default"].isObjFromNullArray,
-    isObjTypeArray = _isTypeArray2["default"].isObjTypeArray,
-    isExceptArray = _isTypeArray2["default"].isExceptArray,
-    isEmptyObjArray = _isTypeArray2["default"].isEmptyObjArray,
-    isNotUndefArray = _isTypeArray2["default"].isNotUndefArray,
-    isNotBoolArray = _isTypeArray2["default"].isNotBoolArray,
-    isNotNumArray = _isTypeArray2["default"].isNotNumArray,
-    isNotIntArray = _isTypeArray2["default"].isNotIntArray,
-    isNotStrArray = _isTypeArray2["default"].isNotStrArray,
-    isNotFuncArray = _isTypeArray2["default"].isNotFuncArray,
-    isNotObjArray = _isTypeArray2["default"].isNotObjArray,
-    isNotObjNormalArray = _isTypeArray2["default"].isNotObjNormalArray,
-    isNotObjFromNullArray = _isTypeArray2["default"].isNotObjFromNullArray,
-    isNotObjTypeArray = _isTypeArray2["default"].isNotObjTypeArray,
-    isNotExceptArray = _isTypeArray2["default"].isNotExceptArray,
-    isNotEmptyObjArray = _isTypeArray2["default"].isNotEmptyObjArray;
-exports.isNotEmptyObjArray = isNotEmptyObjArray;
-exports.isNotExceptArray = isNotExceptArray;
-exports.isNotObjTypeArray = isNotObjTypeArray;
-exports.isNotObjFromNullArray = isNotObjFromNullArray;
-exports.isNotObjNormalArray = isNotObjNormalArray;
-exports.isNotObjArray = isNotObjArray;
-exports.isNotFuncArray = isNotFuncArray;
-exports.isNotStrArray = isNotStrArray;
-exports.isNotIntArray = isNotIntArray;
-exports.isNotNumArray = isNotNumArray;
-exports.isNotBoolArray = isNotBoolArray;
-exports.isNotUndefArray = isNotUndefArray;
-exports.isEmptyObjArray = isEmptyObjArray;
-exports.isExceptArray = isExceptArray;
-exports.isObjTypeArray = isObjTypeArray;
-exports.isObjFromNullArray = isObjFromNullArray;
-exports.isObjNormalArray = isObjNormalArray;
-exports.isObjArray = isObjArray;
-exports.isFuncArray = isFuncArray;
-exports.isStrArray = isStrArray;
-exports.isIntArray = isIntArray;
-exports.isNumArray = isNumArray;
-exports.isBoolArray = isBoolArray;
-exports.isUndefArray = isUndefArray;
+var isUndefinedArray = _isTypeArray["default"].isUndefinedArray,
+    isNullArray = _isTypeArray["default"].isNullArray,
+    isNaNStrictArray = _isTypeArray["default"].isNaNStrictArray,
+    isBooleanArray = _isTypeArray["default"].isBooleanArray,
+    isNumberArray = _isTypeArray["default"].isNumberArray,
+    isIntegerArray = _isTypeArray["default"].isIntegerArray,
+    isStringArray = _isTypeArray["default"].isStringArray,
+    isFunctionArray = _isTypeArray["default"].isFunctionArray,
+    isObjectArray = _isTypeArray["default"].isObjectArray,
+    isObjectNormalArray = _isTypeArray["default"].isObjectNormalArray,
+    isObjectFromNullArray = _isTypeArray["default"].isObjectFromNullArray,
+    isObjectLikeArray = _isTypeArray["default"].isObjectLikeArray,
+    isModuleArray = _isTypeArray["default"].isModuleArray,
+    isArrayArray = _isTypeArray["default"].isArrayArray,
+    isArraySeriesArray = _isTypeArray["default"].isArraySeriesArray,
+    isDateArray = _isTypeArray["default"].isDateArray,
+    isRegExpArray = _isTypeArray["default"].isRegExpArray,
+    isExceptionArray = _isTypeArray["default"].isExceptionArray,
+    isBooleanObjectArray = _isTypeArray["default"].isBooleanObjectArray,
+    isNumberObjectArray = _isTypeArray["default"].isNumberObjectArray,
+    isStringObjectArray = _isTypeArray["default"].isStringObjectArray,
+    isEmptyObjectArray = _isTypeArray["default"].isEmptyObjectArray,
+    isEmptyArrayArray = _isTypeArray["default"].isEmptyArrayArray,
+    isSymbolArray = _isTypeArray["default"].isSymbolArray,
+    isMapArray = _isTypeArray["default"].isMapArray,
+    isWeakMapArray = _isTypeArray["default"].isWeakMapArray,
+    isSetArray = _isTypeArray["default"].isSetArray,
+    isWeakSetArray = _isTypeArray["default"].isWeakSetArray,
+    isNotUndefinedArray = _isTypeArray["default"].isNotUndefinedArray,
+    isNotNullArray = _isTypeArray["default"].isNotNullArray,
+    isNotNaNStrictArray = _isTypeArray["default"].isNotNaNStrictArray,
+    isNotBooleanArray = _isTypeArray["default"].isNotBooleanArray,
+    isNotNumberArray = _isTypeArray["default"].isNotNumberArray,
+    isNotIntegerArray = _isTypeArray["default"].isNotIntegerArray,
+    isNotStringArray = _isTypeArray["default"].isNotStringArray,
+    isNotFunctionArray = _isTypeArray["default"].isNotFunctionArray,
+    isNotObjectArray = _isTypeArray["default"].isNotObjectArray,
+    isNotObjectNormalArray = _isTypeArray["default"].isNotObjectNormalArray,
+    isNotObjectFromNullArray = _isTypeArray["default"].isNotObjectFromNullArray,
+    isNotObjectLikeArray = _isTypeArray["default"].isNotObjectLikeArray,
+    isNotModuleArray = _isTypeArray["default"].isNotModuleArray,
+    isNotArrayArray = _isTypeArray["default"].isNotArrayArray,
+    isNotArraySeriesArray = _isTypeArray["default"].isNotArraySeriesArray,
+    isNotDateArray = _isTypeArray["default"].isNotDateArray,
+    isNotRegExpArray = _isTypeArray["default"].isNotRegExpArray,
+    isNotExceptionArray = _isTypeArray["default"].isNotExceptionArray,
+    isNotBooleanObjectArray = _isTypeArray["default"].isNotBooleanObjectArray,
+    isNotNumberObjectArray = _isTypeArray["default"].isNotNumberObjectArray,
+    isNotStringObjectArray = _isTypeArray["default"].isNotStringObjectArray,
+    isNotEmptyObjectArray = _isTypeArray["default"].isNotEmptyObjectArray,
+    isNotEmptyArrayArray = _isTypeArray["default"].isNotEmptyArrayArray,
+    isNotSymbolArray = _isTypeArray["default"].isNotSymbolArray,
+    isNotMapArray = _isTypeArray["default"].isNotMapArray,
+    isNotWeakMapArray = _isTypeArray["default"].isNotWeakMapArray,
+    isNotSetArray = _isTypeArray["default"].isNotSetArray,
+    isNotWeakSetArray = _isTypeArray["default"].isNotWeakSetArray;
 exports.isNotWeakSetArray = isNotWeakSetArray;
 exports.isNotSetArray = isNotSetArray;
 exports.isNotWeakMapArray = isNotWeakMapArray;
@@ -484,10 +323,10 @@ exports.isNotBooleanObjectArray = isNotBooleanObjectArray;
 exports.isNotExceptionArray = isNotExceptionArray;
 exports.isNotRegExpArray = isNotRegExpArray;
 exports.isNotDateArray = isNotDateArray;
-exports.isNotArrayTypeArray = isNotArrayTypeArray;
+exports.isNotArraySeriesArray = isNotArraySeriesArray;
 exports.isNotArrayArray = isNotArrayArray;
 exports.isNotModuleArray = isNotModuleArray;
-exports.isNotObjectTypeArray = isNotObjectTypeArray;
+exports.isNotObjectLikeArray = isNotObjectLikeArray;
 exports.isNotObjectFromNullArray = isNotObjectFromNullArray;
 exports.isNotObjectNormalArray = isNotObjectNormalArray;
 exports.isNotObjectArray = isNotObjectArray;
@@ -512,7 +351,7 @@ exports.isBooleanObjectArray = isBooleanObjectArray;
 exports.isExceptionArray = isExceptionArray;
 exports.isRegExpArray = isRegExpArray;
 exports.isDateArray = isDateArray;
-exports.isArrayTypeArray = isArrayTypeArray;
+exports.isArraySeriesArray = isArraySeriesArray;
 exports.isArrayArray = isArrayArray;
 exports.isModuleArray = isModuleArray;
 exports.isObjectLikeArray = isObjectLikeArray;
@@ -528,6 +367,53 @@ exports.isNaNStrictArray = isNaNStrictArray;
 exports.isNullArray = isNullArray;
 exports.isUndefinedArray = isUndefinedArray;
 
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _isType["default"]), _isException["default"]), _isSymbol["default"]), _isMap["default"]), _isSet["default"]), _isTypeAll["default"]), _isTypeArray2["default"]);
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
+  // ...isType_js,
+  objectToString: objectToString,
+  isUndefined: isUndefined,
+  isNull: isNull,
+  isNaNStrict: isNaNStrict,
+  isBoolean: isBoolean,
+  isNumber: isNumber,
+  isInteger: isInteger,
+  isString: isString,
+  isFunction: isFunction,
+  isObject: isObject,
+  isObjectNormal: isObjectNormal,
+  isObjectFromNull: isObjectFromNull,
+  isObjectLike: isObjectLike,
+  isModule: isModule,
+  isArray: isArray,
+  isArraySeries: isArraySeries,
+  isDate: isDate,
+  isRegExp: isRegExp,
+  isBooleanObject: isBooleanObject,
+  isNumberObject: isNumberObject,
+  isStringObject: isStringObject,
+  isEmptyObject: isEmptyObject,
+  isEmptyArray: isEmptyArray,
+  isNotUndefined: isNotUndefined,
+  isNotNull: isNotNull,
+  isNotNaNStrict: isNotNaNStrict,
+  isNotBoolean: isNotBoolean,
+  isNotNumber: isNotNumber,
+  isNotInteger: isNotInteger,
+  isNotString: isNotString,
+  isNotFunction: isNotFunction,
+  isNotObject: isNotObject,
+  isNotObjectNormal: isNotObjectNormal,
+  isNotObjectFromNull: isNotObjectFromNull,
+  isNotObjectLike: isNotObjectLike,
+  isNotModule: isNotModule,
+  isNotArray: isNotArray,
+  isNotArraySeries: isNotArraySeries,
+  isNotDate: isNotDate,
+  isNotRegExp: isNotRegExp,
+  isNotBooleanObject: isNotBooleanObject,
+  isNotNumberObject: isNotNumberObject,
+  isNotStringObject: isNotStringObject,
+  isNotEmptyObject: isNotEmptyObject,
+  isNotEmptyArray: isNotEmptyArray
+}, _isException["default"]), _isSymbol["default"]), _isMap["default"]), _isSet["default"]), _isTypeAll["default"]), _isTypeArray["default"]);
 
 exports["default"] = _default;

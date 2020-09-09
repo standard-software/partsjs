@@ -43,7 +43,7 @@ var test_execute_type = function test_execute_type(parts) {
         isObjectFromNull = _parts$type.isObjectFromNull,
         isObjectLike = _parts$type.isObjectLike,
         isArray = _parts$type.isArray,
-        isArrayType = _parts$type.isArrayType,
+        isArraySeries = _parts$type.isArraySeries,
         isDate = _parts$type.isDate,
         isRegExp = _parts$type.isRegExp,
         isException = _parts$type.isException,
@@ -97,7 +97,7 @@ var test_execute_type = function test_execute_type(parts) {
         isObjectFromNullAll = _parts$type.isObjectFromNullAll,
         isObjectLikeAll = _parts$type.isObjectLikeAll,
         isArrayAll = _parts$type.isArrayAll,
-        isArrayTypeAll = _parts$type.isArrayTypeAll,
+        isArraySeriesAll = _parts$type.isArraySeriesAll,
         isDateAll = _parts$type.isDateAll,
         isRegExpAll = _parts$type.isRegExpAll,
         isExceptionAll = _parts$type.isExceptionAll,
@@ -151,7 +151,7 @@ var test_execute_type = function test_execute_type(parts) {
         isObjectFromNullArray = _parts$type.isObjectFromNullArray,
         isObjectLikeArray = _parts$type.isObjectLikeArray,
         isArrayArray = _parts$type.isArrayArray,
-        isArrayTypeArray = _parts$type.isArrayTypeArray,
+        isArraySeriesArray = _parts$type.isArraySeriesArray,
         isDateArray = _parts$type.isDateArray,
         isRegExpArray = _parts$type.isRegExpArray,
         isExceptionArray = _parts$type.isExceptionArray,
@@ -1099,8 +1099,8 @@ var test_execute_type = function test_execute_type(parts) {
       });
     };
 
-    var test_isArrayType = function test_isArrayType() {
-      it('test_isArrayType', function () {
+    var test_isArraySeries = function test_isArraySeries() {
+      it('test_isArraySeries', function () {
         checkEqual(true, Array.isArray([]));
         checkEqual(true, Array.isArray([123]));
         checkEqual(true, Array.isArray([1, 2, 3]));
@@ -1139,23 +1139,23 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(false, isArrayAll(new Float64Array()));
         }
 
-        checkEqual(true, isArrayTypeAll([]));
-        checkEqual(true, isArrayTypeAll([123]));
-        checkEqual(true, isArrayTypeAll([1, 2, 3]));
-        checkEqual(true, isArrayTypeAll(new Array()));
-        checkEqual(true, isArrayTypeAll(new Array(1, 2, 3)));
-        checkEqual(true, isArrayTypeAll(new Array()));
+        checkEqual(true, isArraySeriesAll([]));
+        checkEqual(true, isArraySeriesAll([123]));
+        checkEqual(true, isArraySeriesAll([1, 2, 3]));
+        checkEqual(true, isArraySeriesAll(new Array()));
+        checkEqual(true, isArraySeriesAll(new Array(1, 2, 3)));
+        checkEqual(true, isArraySeriesAll(new Array()));
 
         if (!parts.platform.isWindowsScriptHost() && !parts.platform.isGasRhino()) {
-          checkEqual(true, isArrayTypeAll(new Int8Array()));
-          checkEqual(true, isArrayTypeAll(new Uint8Array()));
-          checkEqual(true, isArrayTypeAll(new Uint8ClampedArray()));
-          checkEqual(true, isArrayTypeAll(new Int16Array()));
-          checkEqual(true, isArrayTypeAll(new Uint16Array()));
-          checkEqual(true, isArrayTypeAll(new Int32Array()));
-          checkEqual(true, isArrayTypeAll(new Uint32Array()));
-          checkEqual(true, isArrayTypeAll(new Float32Array()));
-          checkEqual(true, isArrayTypeAll(new Float64Array()));
+          checkEqual(true, isArraySeriesAll(new Int8Array()));
+          checkEqual(true, isArraySeriesAll(new Uint8Array()));
+          checkEqual(true, isArraySeriesAll(new Uint8ClampedArray()));
+          checkEqual(true, isArraySeriesAll(new Int16Array()));
+          checkEqual(true, isArraySeriesAll(new Uint16Array()));
+          checkEqual(true, isArraySeriesAll(new Int32Array()));
+          checkEqual(true, isArraySeriesAll(new Uint32Array()));
+          checkEqual(true, isArraySeriesAll(new Float32Array()));
+          checkEqual(true, isArraySeriesAll(new Float64Array()));
         }
       });
     };
@@ -1307,7 +1307,7 @@ var test_execute_type = function test_execute_type(parts) {
     test_isObjectLike();
     test_isModule();
     test_isArray();
-    test_isArrayType();
+    test_isArraySeries();
     test_isDate();
     test_isExcection();
     test_isEmptyObject();

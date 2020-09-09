@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotExcept = exports.isExcept = exports.isNotException = exports.isException = void 0;
+exports["default"] = exports.isNotException = exports.isException = void 0;
 
 var _isType = require("../type/isType.js");
 
@@ -33,14 +33,8 @@ var isNotException = function isNotException(value) {
 };
 
 exports.isNotException = isNotException;
-var isExcept = isException;
-exports.isExcept = isExcept;
-var isNotExcept = isNotException;
-exports.isNotExcept = isNotExcept;
 var _default = {
   isException: isException,
-  isNotException: isNotException,
-  isExcept: isExcept,
-  isNotExcept: isNotExcept
+  isNotException: isNotException
 };
 exports["default"] = _default;

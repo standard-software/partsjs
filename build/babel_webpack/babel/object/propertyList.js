@@ -11,6 +11,8 @@ var _loop = require("../syntax/loop.js");
 
 var _objectEntries = require("../object/objectEntries.js");
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36,10 +38,10 @@ var _propertyList = function _propertyList(object) {
           key = _ref2[0],
           value = _ref2[1];
 
-      if ((0, _isType.isObjectLike)(value)) {
+      if ((0, _isType.isObject)(value) || (0, _isType.isModule)(value)) {
         __propertyList(value, lineHead + '.' + key);
       } else {
-        result += lineHead + '.' + key + '\n';
+        result += "".concat(lineHead, ".").concat(key, ":").concat((0, _isType.objectToString)(value), ":").concat(_typeof(value), "\n");
       }
     });
     return result;
@@ -51,7 +53,7 @@ var _propertyList = function _propertyList(object) {
 exports._propertyList = _propertyList;
 
 var propertyList = function propertyList(object) {
-  if (!(0, _isType.isObjectLike)(object)) {
+  if (!((0, _isType.isObject)(object) || (0, _isType.isModule)(object))) {
     throw new TypeError('propertyList args(object) is not object');
   }
 

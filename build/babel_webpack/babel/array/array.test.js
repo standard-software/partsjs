@@ -2134,10 +2134,10 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sortDictionary = function test_operation_sortDictionary() {
       it('test_operation_sortDictionary', function () {
-        checkEqual(['A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sortDictionaryAscending(['a', 'A', 'Aa', 'aa', 'aA', 'AA']));
-        checkEqual(['aa', 'aA', 'a', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA']));
-        checkEqual(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'], array.operation.sortDictionaryAscending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']));
-        checkEqual(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab'])); // exception
+        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA'], array.operation.sortDictionaryAscending(['Aa', 'aa', 'a', 'A', 'aA', 'AA']));
+        checkEqual(['Aa', 'aa', 'aA', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['Aa', 'aa', 'a', 'A', 'aA', 'AA']));
+        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA', 'ab', 'Ab'], array.operation.sortDictionaryAscending(['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']));
+        checkEqual(['ab', 'Ab', 'Aa', 'aa', 'aA', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab'])); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.sortDictionaryAscending(1);

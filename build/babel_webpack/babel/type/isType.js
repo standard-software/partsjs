@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotObjType = exports.isObjType = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isArrayType = exports.isObjectType = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArraySeries = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
+exports["default"] = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArraySeries = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
 
 var _propertyCount2 = require("../object/_propertyCount.js");
 
@@ -344,63 +344,8 @@ var isNotEmptyArray = function isNotEmptyArray(value) {
 };
 
 exports.isNotEmptyArray = isNotEmptyArray;
-var isObjectType = isObjectLike;
-exports.isObjectType = isObjectType;
-var isArrayType = isArraySeries;
-exports.isArrayType = isArrayType;
-var isNotObjectType = isNotObjectLike;
-exports.isNotObjectType = isNotObjectType;
-var isNotArrayType = isNotArraySeries;
-exports.isNotArrayType = isNotArrayType;
-var isUndef = isUndefined;
-exports.isUndef = isUndef;
-var isBool = isBoolean;
-exports.isBool = isBool;
-var isNum = isNumber;
-exports.isNum = isNum;
-var isInt = isInteger;
-exports.isInt = isInt;
-var isStr = isString;
-exports.isStr = isStr;
-var isFunc = isFunction;
-exports.isFunc = isFunc;
-var isObj = isObject;
-exports.isObj = isObj;
-var isObjNormal = isObjectNormal;
-exports.isObjNormal = isObjNormal;
-var isObjFromNull = isObjectFromNull;
-exports.isObjFromNull = isObjFromNull;
-var isObjLike = isObjectLike;
-exports.isObjLike = isObjLike;
-var isEmptyObj = isEmptyObject;
-exports.isEmptyObj = isEmptyObj;
-var isNotUndef = isNotUndefined;
-exports.isNotUndef = isNotUndef;
-var isNotBool = isNotBoolean;
-exports.isNotBool = isNotBool;
-var isNotNum = isNotNumber;
-exports.isNotNum = isNotNum;
-var isNotInt = isNotInteger;
-exports.isNotInt = isNotInt;
-var isNotStr = isNotString;
-exports.isNotStr = isNotStr;
-var isNotFunc = isNotFunction;
-exports.isNotFunc = isNotFunc;
-var isNotObj = isNotObject;
-exports.isNotObj = isNotObj;
-var isNotObjNormal = isNotObjectNormal;
-exports.isNotObjNormal = isNotObjNormal;
-var isNotObjFromNull = isNotObjectFromNull;
-exports.isNotObjFromNull = isNotObjFromNull;
-var isNotObjLike = isNotObjectLike;
-exports.isNotObjLike = isNotObjLike;
-var isNotEmptyObj = isNotEmptyObject;
-exports.isNotEmptyObj = isNotEmptyObj;
-var isObjType = isObjLike;
-exports.isObjType = isObjType;
-var isNotObjType = isNotObjLike;
-exports.isNotObjType = isNotObjType;
 var _default = {
+  isError: isError,
   objectToString: objectToString,
   isUndefined: isUndefined,
   isNull: isNull,
@@ -419,7 +364,6 @@ var _default = {
   isArraySeries: isArraySeries,
   isDate: isDate,
   isRegExp: isRegExp,
-  isError: isError,
   isBooleanObject: isBooleanObject,
   isNumberObject: isNumberObject,
   isStringObject: isStringObject,
@@ -446,34 +390,6 @@ var _default = {
   isNotNumberObject: isNotNumberObject,
   isNotStringObject: isNotStringObject,
   isNotEmptyObject: isNotEmptyObject,
-  isNotEmptyArray: isNotEmptyArray,
-  isObjectType: isObjectType,
-  isArrayType: isArrayType,
-  isNotObjectType: isNotObjectType,
-  isNotArrayType: isNotArrayType,
-  isUndef: isUndef,
-  isBool: isBool,
-  isNum: isNum,
-  isInt: isInt,
-  isStr: isStr,
-  isFunc: isFunc,
-  isObj: isObj,
-  isObjNormal: isObjNormal,
-  isObjFromNull: isObjFromNull,
-  isObjLike: isObjLike,
-  isEmptyObj: isEmptyObj,
-  isNotUndef: isNotUndef,
-  isNotBool: isNotBool,
-  isNotNum: isNotNum,
-  isNotInt: isNotInt,
-  isNotStr: isNotStr,
-  isNotFunc: isNotFunc,
-  isNotObj: isNotObj,
-  isNotObjNormal: isNotObjNormal,
-  isNotObjFromNull: isNotObjFromNull,
-  isNotObjLike: isNotObjLike,
-  isNotEmptyObj: isNotEmptyObj,
-  isObjType: isObjType,
-  isNotObjType: isNotObjType
+  isNotEmptyArray: isNotEmptyArray
 };
 exports["default"] = _default;

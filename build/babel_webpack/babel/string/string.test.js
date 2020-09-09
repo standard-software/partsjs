@@ -720,7 +720,9 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('32', trimBothEnds('12321', ['2', '1'], ['1']));
         checkEqual('321', trimBothEnds('12321', ['2', '1'], ['2']));
         checkEqual('', trimBothEnds('1', ['1']));
-        checkEqual('', trimBothEnds('11', ['1'])); // Object Named Parameter
+        checkEqual('', trimBothEnds('11', ['1']));
+        checkEqual('abc', trimBothEnds('  abc\n  \n', [' ', '\n']));
+        checkEqual('abc', trimBothEnds('  abc\n  \n', ['\n', ' '])); // Object Named Parameter
 
         checkEqual('B', trimBothEnds({
           str: 'ABA',

@@ -208,7 +208,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
 
-        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value]; // date
+        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
         checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02'), equalFuncArray), 'test_equal date'); // date in object
 
@@ -235,7 +235,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        var equalFuncArray = [equal.func.date, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value]; // regexp
+        var equalFuncArray = [equal.func.date, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // regexp
 
         checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/), equalFuncArray), 'test_equal regexp'); // regexp in object
 
@@ -276,7 +276,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equal(map1, map2, equalFuncArray)); // Map in object
 
         checkEqual(false, equal({
@@ -316,7 +316,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equal(set1, set2, equalFuncArray)); // Set in object
 
         checkEqual(false, equal({
@@ -696,7 +696,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
 
-        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value]; // date
+        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
         checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02'), equalFuncArray), 'test_equalDeep date'); // date in object
 
@@ -723,7 +723,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        var equalFuncArray = [equal.func.value, equal.func.object, equal.func.arrayType, equal.func["function"], equal.func.date]; // regexp
+        var equalFuncArray = [equal.func.value, equal.func.object, equal.func.arraySeries, equal.func["function"], equal.func.date]; // regexp
 
         checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/), equalFuncArray), 'test_equal regexp'); // regexp in object
 
@@ -764,7 +764,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equalDeep(map1, map2, equalFuncArray)); // Map in object
 
         checkEqual(false, equalDeep({
@@ -982,7 +982,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set3'); // ignore Set
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equalDeep(set1, set2, equalFuncArray)); // Set in object
 
         checkEqual(false, equalDeep({

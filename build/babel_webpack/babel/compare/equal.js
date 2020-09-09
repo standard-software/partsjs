@@ -127,14 +127,14 @@ equal.func.object = function (value1, value2) {
   return true;
 };
 
-equal.func.arrayType = function (value1, value2) {
+equal.func.arraySeries = function (value1, value2) {
   var bufferWrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
   var __equalDeep = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (v1, v2) {
     return v1 === v2;
   };
 
-  if (!(0, _type.isArrayTypeAll)(value1, value2)) {
+  if (!(0, _type.isArraySeriesAll)(value1, value2)) {
     return;
   }
 
@@ -354,7 +354,7 @@ equal.func.weakSet = function (value1, value2) {
   return true;
 };
 
-equal.func.defaultArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.map, equal.func.weakMap, equal.func.set, equal.func.weakSet, equal.func.arrayType, equal.func.object, equal.func.value];
+equal.func.defaultArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.map, equal.func.weakMap, equal.func.set, equal.func.weakSet, equal.func.arraySeries, equal.func.object, equal.func.value];
 var _default = {
   _equal: _equal,
   equal: equal

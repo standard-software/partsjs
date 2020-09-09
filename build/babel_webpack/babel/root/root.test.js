@@ -158,13 +158,13 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(11, testDate1.getDate()); // object array only clone
 
         var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [clone.func.arrayType, clone.func.object]);
+        var date1 = clone(testDate1, [clone.func.arraySeries, clone.func.object]);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
         checkEqual(12, testDate1.getDate()); // object array date clone
 
         var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [clone.func.date, clone.func.arrayType, clone.func.object]);
+        var date1 = clone(testDate1, [clone.func.date, clone.func.arraySeries, clone.func.object]);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
         checkEqual(11, testDate1.getDate());
@@ -250,7 +250,7 @@ var test_execute_root = function test_execute_root(parts) {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
           source: testDate1,
-          cloneFuncArray: [clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.arraySeries, clone.func.object]
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -259,7 +259,7 @@ var test_execute_root = function test_execute_root(parts) {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
           source: testDate1,
-          cloneFuncArray: [clone.func.date, clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.date, clone.func.arraySeries, clone.func.object]
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -463,7 +463,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1, [clone.func.arrayType, clone.func.object]);
+        var value2 = cloneDeep(value1, [clone.func.arraySeries, clone.func.object]);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(13, value1[3].getDate());
@@ -471,7 +471,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1, [clone.func.date, clone.func.arrayType, clone.func.object]);
+        var value2 = cloneDeep(value1, [clone.func.date, clone.func.arraySeries, clone.func.object]);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(11, value1[3].getDate());
@@ -609,7 +609,7 @@ var test_execute_root = function test_execute_root(parts) {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
           source: value1,
-          cloneFuncArray: [clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.arraySeries, clone.func.object]
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
@@ -620,7 +620,7 @@ var test_execute_root = function test_execute_root(parts) {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
           source: value1,
-          cloneFuncArray: [clone.func.date, clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.date, clone.func.arraySeries, clone.func.object]
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());

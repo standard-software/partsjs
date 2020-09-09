@@ -102,7 +102,7 @@ sort.targetFunc = {
       throw new TypeError('sortDictionary args(array) element is not string');
     }
 
-    return v;
+    return v.toLowerCase();
   },
   returnLength: function returnLength(v) {
     return v.length;

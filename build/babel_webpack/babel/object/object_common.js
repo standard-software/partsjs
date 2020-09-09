@@ -92,7 +92,7 @@ var _setProperty = function _setProperty(object, propertyPath, value) {
   var result = object;
 
   for (var _i = 0, _l = propertyArray.length - 1; _i < _l; _i += 1) {
-    if (!((0, _type.isObject)(result[propertyArray[_i]]) || (0, _type.isArrayType)(result[propertyArray[_i]]))) {
+    if (!((0, _type.isObject)(result[propertyArray[_i]]) || (0, _type.isArraySeries)(result[propertyArray[_i]]))) {
       result[propertyArray[_i]] = {};
     }
 

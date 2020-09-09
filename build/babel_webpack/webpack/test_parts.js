@@ -182,7 +182,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [377, 19, 2, 252, 12, 11, 22, 29, 7, 40, 24, 37, 32];
+        var countArray = [384, 19, 2, 260, 12, 11, 22, 29, 7, 40, 24, 37, 32];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -443,13 +443,13 @@ var test_execute_root = function test_execute_root(parts) {
         checkEqual(11, testDate1.getDate()); // object array only clone
 
         var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [clone.func.arrayType, clone.func.object]);
+        var date1 = clone(testDate1, [clone.func.arraySeries, clone.func.object]);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
         checkEqual(12, testDate1.getDate()); // object array date clone
 
         var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [clone.func.date, clone.func.arrayType, clone.func.object]);
+        var date1 = clone(testDate1, [clone.func.date, clone.func.arraySeries, clone.func.object]);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
         checkEqual(11, testDate1.getDate());
@@ -535,7 +535,7 @@ var test_execute_root = function test_execute_root(parts) {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
           source: testDate1,
-          cloneFuncArray: [clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.arraySeries, clone.func.object]
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -544,7 +544,7 @@ var test_execute_root = function test_execute_root(parts) {
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
           source: testDate1,
-          cloneFuncArray: [clone.func.date, clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.date, clone.func.arraySeries, clone.func.object]
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -748,7 +748,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1, [clone.func.arrayType, clone.func.object]);
+        var value2 = cloneDeep(value1, [clone.func.arraySeries, clone.func.object]);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(13, value1[3].getDate());
@@ -756,7 +756,7 @@ var test_execute_root = function test_execute_root(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1, [clone.func.date, clone.func.arrayType, clone.func.object]);
+        var value2 = cloneDeep(value1, [clone.func.date, clone.func.arraySeries, clone.func.object]);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(11, value1[3].getDate());
@@ -894,7 +894,7 @@ var test_execute_root = function test_execute_root(parts) {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
           source: value1,
-          cloneFuncArray: [clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.arraySeries, clone.func.object]
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
@@ -905,7 +905,7 @@ var test_execute_root = function test_execute_root(parts) {
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
           source: value1,
-          cloneFuncArray: [clone.func.date, clone.func.arrayType, clone.func.object]
+          cloneFuncArray: [clone.func.date, clone.func.arraySeries, clone.func.object]
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
@@ -1272,7 +1272,7 @@ var test_execute_type = function test_execute_type(parts) {
         isObjectFromNull = _parts$type.isObjectFromNull,
         isObjectLike = _parts$type.isObjectLike,
         isArray = _parts$type.isArray,
-        isArrayType = _parts$type.isArrayType,
+        isArraySeries = _parts$type.isArraySeries,
         isDate = _parts$type.isDate,
         isRegExp = _parts$type.isRegExp,
         isException = _parts$type.isException,
@@ -1326,7 +1326,7 @@ var test_execute_type = function test_execute_type(parts) {
         isObjectFromNullAll = _parts$type.isObjectFromNullAll,
         isObjectLikeAll = _parts$type.isObjectLikeAll,
         isArrayAll = _parts$type.isArrayAll,
-        isArrayTypeAll = _parts$type.isArrayTypeAll,
+        isArraySeriesAll = _parts$type.isArraySeriesAll,
         isDateAll = _parts$type.isDateAll,
         isRegExpAll = _parts$type.isRegExpAll,
         isExceptionAll = _parts$type.isExceptionAll,
@@ -1380,7 +1380,7 @@ var test_execute_type = function test_execute_type(parts) {
         isObjectFromNullArray = _parts$type.isObjectFromNullArray,
         isObjectLikeArray = _parts$type.isObjectLikeArray,
         isArrayArray = _parts$type.isArrayArray,
-        isArrayTypeArray = _parts$type.isArrayTypeArray,
+        isArraySeriesArray = _parts$type.isArraySeriesArray,
         isDateArray = _parts$type.isDateArray,
         isRegExpArray = _parts$type.isRegExpArray,
         isExceptionArray = _parts$type.isExceptionArray,
@@ -2328,8 +2328,8 @@ var test_execute_type = function test_execute_type(parts) {
       });
     };
 
-    var test_isArrayType = function test_isArrayType() {
-      it('test_isArrayType', function () {
+    var test_isArraySeries = function test_isArraySeries() {
+      it('test_isArraySeries', function () {
         checkEqual(true, Array.isArray([]));
         checkEqual(true, Array.isArray([123]));
         checkEqual(true, Array.isArray([1, 2, 3]));
@@ -2368,23 +2368,23 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(false, isArrayAll(new Float64Array()));
         }
 
-        checkEqual(true, isArrayTypeAll([]));
-        checkEqual(true, isArrayTypeAll([123]));
-        checkEqual(true, isArrayTypeAll([1, 2, 3]));
-        checkEqual(true, isArrayTypeAll(new Array()));
-        checkEqual(true, isArrayTypeAll(new Array(1, 2, 3)));
-        checkEqual(true, isArrayTypeAll(new Array()));
+        checkEqual(true, isArraySeriesAll([]));
+        checkEqual(true, isArraySeriesAll([123]));
+        checkEqual(true, isArraySeriesAll([1, 2, 3]));
+        checkEqual(true, isArraySeriesAll(new Array()));
+        checkEqual(true, isArraySeriesAll(new Array(1, 2, 3)));
+        checkEqual(true, isArraySeriesAll(new Array()));
 
         if (!parts.platform.isWindowsScriptHost() && !parts.platform.isGasRhino()) {
-          checkEqual(true, isArrayTypeAll(new Int8Array()));
-          checkEqual(true, isArrayTypeAll(new Uint8Array()));
-          checkEqual(true, isArrayTypeAll(new Uint8ClampedArray()));
-          checkEqual(true, isArrayTypeAll(new Int16Array()));
-          checkEqual(true, isArrayTypeAll(new Uint16Array()));
-          checkEqual(true, isArrayTypeAll(new Int32Array()));
-          checkEqual(true, isArrayTypeAll(new Uint32Array()));
-          checkEqual(true, isArrayTypeAll(new Float32Array()));
-          checkEqual(true, isArrayTypeAll(new Float64Array()));
+          checkEqual(true, isArraySeriesAll(new Int8Array()));
+          checkEqual(true, isArraySeriesAll(new Uint8Array()));
+          checkEqual(true, isArraySeriesAll(new Uint8ClampedArray()));
+          checkEqual(true, isArraySeriesAll(new Int16Array()));
+          checkEqual(true, isArraySeriesAll(new Uint16Array()));
+          checkEqual(true, isArraySeriesAll(new Int32Array()));
+          checkEqual(true, isArraySeriesAll(new Uint32Array()));
+          checkEqual(true, isArraySeriesAll(new Float32Array()));
+          checkEqual(true, isArraySeriesAll(new Float64Array()));
         }
       });
     };
@@ -2536,7 +2536,7 @@ var test_execute_type = function test_execute_type(parts) {
     test_isObjectLike();
     test_isModule();
     test_isArray();
-    test_isArrayType();
+    test_isArraySeries();
     test_isDate();
     test_isExcection();
     test_isEmptyObject();
@@ -3905,7 +3905,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
 
-        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value]; // date
+        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
         checkEqual(false, equal(new Date('2019/11/02'), new Date('2019/11/02'), equalFuncArray), 'test_equal date'); // date in object
 
@@ -3932,7 +3932,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        var equalFuncArray = [equal.func.date, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value]; // regexp
+        var equalFuncArray = [equal.func.date, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // regexp
 
         checkEqual(false, equal(new RegExp(/^a/), new RegExp(/^a/), equalFuncArray), 'test_equal regexp'); // regexp in object
 
@@ -3973,7 +3973,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equal(map1, map2, equalFuncArray)); // Map in object
 
         checkEqual(false, equal({
@@ -4013,7 +4013,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(false, equal([set1], [set2]), 'test_equal Set'); // ignore Set
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equal(set1, set2, equalFuncArray)); // Set in object
 
         checkEqual(false, equal({
@@ -4393,7 +4393,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
 
-        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value]; // date
+        var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
         checkEqual(false, equalDeep(new Date('2019/11/02'), new Date('2019/11/02'), equalFuncArray), 'test_equalDeep date'); // date in object
 
@@ -4420,7 +4420,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([new RegExp(/^a/)], [new RegExp(/^a/)]), 'test_equal regexp'); // regexp ignore
 
-        var equalFuncArray = [equal.func.value, equal.func.object, equal.func.arrayType, equal.func["function"], equal.func.date]; // regexp
+        var equalFuncArray = [equal.func.value, equal.func.object, equal.func.arraySeries, equal.func["function"], equal.func.date]; // regexp
 
         checkEqual(false, equalDeep(new RegExp(/^a/), new RegExp(/^a/), equalFuncArray), 'test_equal regexp'); // regexp in object
 
@@ -4461,7 +4461,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([map1], [map2]), 'test_equal Map'); // ignore Map
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equalDeep(map1, map2, equalFuncArray)); // Map in object
 
         checkEqual(false, equalDeep({
@@ -4679,7 +4679,7 @@ var test_execute_compare = function test_execute_compare(parts) {
 
         checkEqual(true, equalDeep([set1], [set2]), 'test_equal Set3'); // ignore Set
 
-        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arrayType, equal.func.object, equal.func.value];
+        var equalFuncArray = [equal.func.date, equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value];
         checkEqual(false, equalDeep(set1, set2, equalFuncArray)); // Set in object
 
         checkEqual(false, equalDeep({
@@ -9334,7 +9334,9 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('32', trimBothEnds('12321', ['2', '1'], ['1']));
         checkEqual('321', trimBothEnds('12321', ['2', '1'], ['2']));
         checkEqual('', trimBothEnds('1', ['1']));
-        checkEqual('', trimBothEnds('11', ['1'])); // Object Named Parameter
+        checkEqual('', trimBothEnds('11', ['1']));
+        checkEqual('abc', trimBothEnds('  abc\n  \n', [' ', '\n']));
+        checkEqual('abc', trimBothEnds('  abc\n  \n', ['\n', ' '])); // Object Named Parameter
 
         checkEqual('B', trimBothEnds({
           str: 'ABA',
@@ -11524,6 +11526,8 @@ var test_execute_object = function test_execute_object(parts) {
 
     var test_propertyList = function test_propertyList() {
       it('test_propertyList', function () {
+        // checkEqual('a\n b\n c', parts.string.trimBothEnds('\n a\n b\n c\n  ', ['\n', ' ']));
+        // checkEqual('a\nb\nc', 'a\n b\n c'.split('\n').map(v => parts.string.trimFirst(v, [' '])).join('\n'));
         var object1 = {
           a: 'A',
           b: {
@@ -11538,7 +11542,12 @@ var test_execute_object = function test_execute_object(parts) {
           },
           d: 'D'
         };
-        checkEqual(parts.string.replaceAll(parts.string.trimBothEnds("\n          .a\n          .b.b1\n          .b.b2\n          .c.c1.c11\n          .c.c2\n          .d\n        ", ['\n']), ' ', ''), propertyList(object1));
+        var testPattern = parts.string.trimBothEnds("\n          .a:[object String]:string\n          .b.b1:[object String]:string\n          .b.b2:[object String]:string\n          .c.c1.c11:[object String]:string\n          .c.c2:[object String]:string\n          .d:[object String]:string\n        ", ['\n', ' ']); // checkEqual(6, testPattern.split('\n').length);
+
+        checkEqual(parts.array.map(testPattern.split('\n'), function (v) {
+          return parts.string.trimFirst(v, [' ']);
+        }).join('\n') + '\n', propertyList(object1));
+        checkEqual(false, parts.isModule(object1));
       });
     };
 
@@ -13705,10 +13714,10 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sortDictionary = function test_operation_sortDictionary() {
       it('test_operation_sortDictionary', function () {
-        checkEqual(['A', 'AA', 'Aa', 'a', 'aA', 'aa'], array.operation.sortDictionaryAscending(['a', 'A', 'Aa', 'aa', 'aA', 'AA']));
-        checkEqual(['aa', 'aA', 'a', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA']));
-        checkEqual(['A', 'AA', 'Aa', 'Ab', 'a', 'aA', 'aa', 'ab'], array.operation.sortDictionaryAscending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab']));
-        checkEqual(['ab', 'aa', 'aA', 'a', 'Ab', 'Aa', 'AA', 'A'], array.operation.sortDictionaryDescending(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'ab', 'Ab'])); // exception
+        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA'], array.operation.sortDictionaryAscending(['Aa', 'aa', 'a', 'A', 'aA', 'AA']));
+        checkEqual(['Aa', 'aa', 'aA', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['Aa', 'aa', 'a', 'A', 'aA', 'AA']));
+        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA', 'ab', 'Ab'], array.operation.sortDictionaryAscending(['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']));
+        checkEqual(['ab', 'Ab', 'Aa', 'aa', 'aA', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab'])); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.sortDictionaryAscending(1);

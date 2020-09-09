@@ -1056,6 +1056,8 @@ var test_execute_object = function test_execute_object(parts) {
 
     var test_propertyList = function test_propertyList() {
       it('test_propertyList', function () {
+        // checkEqual('a\n b\n c', parts.string.trimBothEnds('\n a\n b\n c\n  ', ['\n', ' ']));
+        // checkEqual('a\nb\nc', 'a\n b\n c'.split('\n').map(v => parts.string.trimFirst(v, [' '])).join('\n'));
         var object1 = {
           a: 'A',
           b: {
@@ -1070,7 +1072,12 @@ var test_execute_object = function test_execute_object(parts) {
           },
           d: 'D'
         };
-        checkEqual(parts.string.replaceAll(parts.string.trimBothEnds("\n          .a\n          .b.b1\n          .b.b2\n          .c.c1.c11\n          .c.c2\n          .d\n        ", ['\n']), ' ', ''), propertyList(object1));
+        var testPattern = parts.string.trimBothEnds("\n          .a:[object String]:string\n          .b.b1:[object String]:string\n          .b.b2:[object String]:string\n          .c.c1.c11:[object String]:string\n          .c.c2:[object String]:string\n          .d:[object String]:string\n        ", ['\n', ' ']); // checkEqual(6, testPattern.split('\n').length);
+
+        checkEqual(parts.array.map(testPattern.split('\n'), function (v) {
+          return parts.string.trimFirst(v, [' ']);
+        }).join('\n') + '\n', propertyList(object1));
+        checkEqual(false, parts.isModule(object1));
       });
     };
 
