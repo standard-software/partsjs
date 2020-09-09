@@ -15,7 +15,7 @@ const fileName = parts.string.subFirstDelimFirst(
   parts.platform.startName,
   '.',
 ) + '.txt';
-Deno.writeTextFile(fileName,
+Deno.writeTextFile('./test/outputPropertyList/' + fileName,
   parts.propertyList(parts),
 );
 

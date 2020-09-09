@@ -16,7 +16,7 @@ const fileName = parts.string.subFirstDelimFirst(
   '.',
 ) + '.txt';
 const fs = require('fs');
-fs.writeFileSync(fileName,
+fs.writeFileSync('./test/outputPropertyList/' + fileName,
   parts.propertyList(parts),
 );
 
