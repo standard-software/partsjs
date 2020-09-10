@@ -9694,8 +9694,6 @@ exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAs
 
 var _isType = __webpack_require__(6);
 
-var _syntax = __webpack_require__(37);
-
 var _or2 = __webpack_require__(49);
 
 var _isObjectParameter = __webpack_require__(13);
@@ -9819,18 +9817,12 @@ sortDictionary.orderFunc = {
         return 1;
       }
 
-      a = a.split(''); // support for wsh
+      if (a < b) {
+        return -1;
+      }
 
-      b = b.split('');
-
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return -1;
-        }
-
-        if (b[i] < a[i]) {
-          return 1;
-        }
+      if (b < a) {
+        return 1;
       }
 
       return 0;
@@ -9847,17 +9839,12 @@ sortDictionary.orderFunc = {
         return -1;
       }
 
-      a = a.split('');
-      b = b.split('');
+      if (a < b) {
+        return -1;
+      }
 
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return -1;
-        }
-
-        if (b[i] < a[i]) {
-          return 1;
-        }
+      if (b < a) {
+        return 1;
       }
 
       return 0;
@@ -9876,17 +9863,12 @@ sortDictionary.orderFunc = {
         return 1;
       }
 
-      a = a.split('');
-      b = b.split('');
+      if (a < b) {
+        return 1;
+      }
 
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return 1;
-        }
-
-        if (b[i] < a[i]) {
-          return -1;
-        }
+      if (b < a) {
+        return -1;
       }
 
       return 0;
@@ -9903,17 +9885,12 @@ sortDictionary.orderFunc = {
         return -1;
       }
 
-      a = a.split('');
-      b = b.split('');
+      if (a < b) {
+        return 1;
+      }
 
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return 1;
-        }
-
-        if (b[i] < a[i]) {
-          return -1;
-        }
+      if (b < a) {
+        return -1;
       }
 
       return 0;

@@ -7,8 +7,6 @@ exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAs
 
 var _isType = require("../../type/isType.js");
 
-var _syntax = require("../../syntax/syntax.js");
-
 var _or2 = require("../../compare/or.js");
 
 var _isObjectParameter = require("../../object/isObjectParameter.js");
@@ -132,18 +130,12 @@ sortDictionary.orderFunc = {
         return 1;
       }
 
-      a = a.split(''); // support for wsh
+      if (a < b) {
+        return -1;
+      }
 
-      b = b.split('');
-
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return -1;
-        }
-
-        if (b[i] < a[i]) {
-          return 1;
-        }
+      if (b < a) {
+        return 1;
       }
 
       return 0;
@@ -160,17 +152,12 @@ sortDictionary.orderFunc = {
         return -1;
       }
 
-      a = a.split('');
-      b = b.split('');
+      if (a < b) {
+        return -1;
+      }
 
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return -1;
-        }
-
-        if (b[i] < a[i]) {
-          return 1;
-        }
+      if (b < a) {
+        return 1;
       }
 
       return 0;
@@ -189,17 +176,12 @@ sortDictionary.orderFunc = {
         return 1;
       }
 
-      a = a.split('');
-      b = b.split('');
+      if (a < b) {
+        return 1;
+      }
 
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return 1;
-        }
-
-        if (b[i] < a[i]) {
-          return -1;
-        }
+      if (b < a) {
+        return -1;
       }
 
       return 0;
@@ -216,17 +198,12 @@ sortDictionary.orderFunc = {
         return -1;
       }
 
-      a = a.split('');
-      b = b.split('');
+      if (a < b) {
+        return 1;
+      }
 
-      for (var i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return 1;
-        }
-
-        if (b[i] < a[i]) {
-          return -1;
-        }
+      if (b < a) {
+        return -1;
       }
 
       return 0;

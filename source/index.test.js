@@ -104,7 +104,7 @@ export const test_execute_index = (parts) => {
           inProperty(
             parts,
             'abc,' +
-      '',
+            '',
           ),
         );
       });

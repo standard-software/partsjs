@@ -2148,67 +2148,67 @@ var test_execute_array = function test_execute_array(parts) {
         }, 'TypeError'));
         checkEqual(true, isThrownException(function () {
           array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError')); // exception
+        }, 'TypeError')); // object named parameter
 
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError')); // exception
-
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError')); // exception
-
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError')); // exception
-
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError')); // exception
-
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError')); // exception
-
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(function () {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(function () {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError'));
+        var sortDictionary = array.operation.sortDictionary;
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+          order: sortDictionary.order.ascending,
+          casePriority: sortDictionary.casePriority.upperCase,
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+          order: sortDictionary.order.ascending,
+          casePriority: sortDictionary.casePriority.upperCase
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+          order: sortDictionary.order.ascending
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB']
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+          casePriority: sortDictionary.casePriority.upperCase,
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary({
+          array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+          casePriority: sortDictionary.casePriority.upperCase
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], {
+          order: sortDictionary.order.ascending,
+          casePriority: sortDictionary.casePriority.upperCase,
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], sortDictionary.order.ascending, {
+          casePriority: sortDictionary.casePriority.upperCase,
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], sortDictionary.order.ascending, sortDictionary.casePriority.upperCase, {
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], sortDictionary.order.ascending, {
+          casePriority: sortDictionary.casePriority.upperCase
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], {
+          order: sortDictionary.order.ascending,
+          casePriority: sortDictionary.casePriority.upperCase
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], {
+          order: sortDictionary.order.ascending,
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortDictionary(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], {
+          casePriority: sortDictionary.casePriority.upperCase,
+          func: sortDictionary.targetFunc.returnValueErrorNotIsString
+        }));
       });
     };
 
@@ -2252,22 +2252,6 @@ var test_execute_array = function test_execute_array(parts) {
         var array1 = ['a', 'b', 'c'];
         var array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
         checkEqual(array2, arrayEntries(array1));
-      });
-    };
-
-    var test_ArrayEntries_standard2 = function test_ArrayEntries_standard2() {
-      it('test_ArrayEntries_standard2', function () {
-        if (parts.platform.isWindowsScriptHost()) {
-          return;
-        }
-
-        if (parts.platform.isInternetExplorer()) {
-          return;
-        }
-
-        if (parts.platform.isGasRhino()) {
-          return;
-        }
       });
     };
 
@@ -2343,7 +2327,6 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_sortLength();
     test_operation_sortDictionary();
     test_ArrayEntries_standard();
-    test_ArrayEntries_standard2();
     test_arrayToIndexValueArray();
   });
 };
