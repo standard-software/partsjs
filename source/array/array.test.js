@@ -2472,12 +2472,6 @@ export const test_execute_array = (parts) => {
           array.operation.sortDictionaryAscending([0, 'aa']);
         }, 'TypeError'));
 
-      });
-    };
-
-    const test_operation_sortDictionary2 = () => {
-      it('test_operation_sortDictionary2', () => {
-
         // object named parameter
         const { sortDictionary } = array.operation;
         checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
@@ -2545,7 +2539,52 @@ export const test_execute_array = (parts) => {
             }
           )
         );
-
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            sortDictionary.order.ascending,
+            sortDictionary.casePriority.upperCase,
+            {
+              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+            }
+          )
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            sortDictionary.order.ascending,
+            {
+              casePriority: sortDictionary.casePriority.upperCase,
+            }
+          )
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            {
+              order: sortDictionary.order.ascending,
+              casePriority: sortDictionary.casePriority.upperCase,
+            }
+          )
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            {
+              order: sortDictionary.order.ascending,
+              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+            }
+          )
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            {
+              casePriority: sortDictionary.casePriority.upperCase,
+              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+            }
+          )
+        );
 
       });
     };
@@ -2665,7 +2704,6 @@ export const test_execute_array = (parts) => {
     test_operation_sortNumber();
     test_operation_sortLength();
     test_operation_sortDictionary();
-    test_operation_sortDictionary2();
 
     test_ArrayEntries_standard();
     test_arrayToIndexValueArray();
