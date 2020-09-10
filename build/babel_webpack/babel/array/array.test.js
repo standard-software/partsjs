@@ -51,8 +51,7 @@ var test_execute_array = function test_execute_array(parts) {
         subLength = _parts$array.subLength,
         subFirst = _parts$array.subFirst,
         subLast = _parts$array.subLast,
-        arrayToIndexValueArray = _parts$array.arrayToIndexValueArray,
-        sortOrderFunction = _parts$array.sortOrderFunction;
+        arrayToIndexValueArray = _parts$array.arrayToIndexValueArray;
     var _parts$array$operatio = parts.array.operation,
         insert = _parts$array$operatio.insert,
         add = _parts$array$operatio.add,
@@ -2134,10 +2133,72 @@ var test_execute_array = function test_execute_array(parts) {
 
     var test_operation_sortDictionary = function test_operation_sortDictionary() {
       it('test_operation_sortDictionary', function () {
-        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA'], array.operation.sortDictionaryAscending(['Aa', 'aa', 'a', 'A', 'aA', 'AA']));
-        checkEqual(['Aa', 'aa', 'aA', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['Aa', 'aa', 'a', 'A', 'aA', 'AA']));
-        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA', 'ab', 'Ab'], array.operation.sortDictionaryAscending(['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']));
-        checkEqual(['ab', 'Ab', 'Aa', 'aa', 'aA', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab'])); // exception
+        checkEqual(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB', 'B', 'b'], array.operation.sortDictionaryAscending(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], array.operation.sortDictionary.casePriority.ignoreCase));
+        checkEqual(['B', 'b', 'aB', 'ab', 'Ab', 'AB', 'aa', 'Aa', 'AA', 'aA', 'a', 'A'], array.operation.sortDictionaryDescending(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], array.operation.sortDictionary.casePriority.ignoreCase));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], array.operation.sortDictionaryAscending(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], array.operation.sortDictionary.casePriority.upperCase));
+        checkEqual(['B', 'b', 'AB', 'Ab', 'aB', 'ab', 'AA', 'Aa', 'aA', 'aa', 'A', 'a'], array.operation.sortDictionaryDescending(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], array.operation.sortDictionary.casePriority.upperCase));
+        checkEqual(['a', 'A', 'aa', 'aA', 'Aa', 'AA', 'ab', 'aB', 'Ab', 'AB', 'b', 'B'], array.operation.sortDictionaryAscending(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], array.operation.sortDictionary.casePriority.lowerCase));
+        checkEqual(['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'], array.operation.sortDictionaryDescending(['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'], array.operation.sortDictionary.casePriority.lowerCase)); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError')); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError')); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError')); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError')); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError')); // exception
+
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending(1);
+        }, 'TypeError'));
+        checkEqual(false, isThrownException(function () {
+          array.operation.sortDictionaryAscending(['a', 'aa']);
+        }, 'TypeError'));
+        checkEqual(true, isThrownException(function () {
+          array.operation.sortDictionaryAscending([0, 'aa']);
+        }, 'TypeError')); // exception
 
         checkEqual(true, isThrownException(function () {
           array.operation.sortDictionaryAscending(1);
@@ -2191,6 +2252,22 @@ var test_execute_array = function test_execute_array(parts) {
         var array1 = ['a', 'b', 'c'];
         var array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
         checkEqual(array2, arrayEntries(array1));
+      });
+    };
+
+    var test_ArrayEntries_standard2 = function test_ArrayEntries_standard2() {
+      it('test_ArrayEntries_standard2', function () {
+        if (parts.platform.isWindowsScriptHost()) {
+          return;
+        }
+
+        if (parts.platform.isInternetExplorer()) {
+          return;
+        }
+
+        if (parts.platform.isGasRhino()) {
+          return;
+        }
       });
     };
 
@@ -2266,6 +2343,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_sortLength();
     test_operation_sortDictionary();
     test_ArrayEntries_standard();
+    test_ArrayEntries_standard2();
     test_arrayToIndexValueArray();
   });
 };

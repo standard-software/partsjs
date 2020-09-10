@@ -513,7 +513,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(false, isNumberAll(false));
         checkEqual(false, isNumberAll(null));
         checkEqual(false, isNumberAll(undefined));
-        checkEqual(false, isNumberAll(Infinity)); // InfinityもNumberとして許可しないことにする
+        checkEqual(false, isNumberAll(Infinity)); // Infinity is not number
 
         checkEqual(false, isNumberAll(NaN));
         checkEqual(false, isNumberAll(''));
@@ -590,7 +590,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(true, isIntegerAll(0));
         checkEqual(true, isIntegerAll(-1));
         checkEqual(false, isIntegerAll(123.4));
-        checkEqual(true, isIntegerAll(123.0)); // .0の場合は整数か小数かは判断できない
+        checkEqual(true, isIntegerAll(123.0)); // .0 equal Integer
 
         checkEqual(false, isIntegerAll(true));
         checkEqual(false, isIntegerAll(false));

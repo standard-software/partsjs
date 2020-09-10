@@ -111,10 +111,10 @@ module.exports = __webpack_require__(1);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.isError = exports.platform = exports.root = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
-exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = void 0;
-exports.indexOfMatchAll = exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalDeep = exports.equal = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = void 0;
-exports["default"] = exports.parts = exports.wsh = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.setProp = exports.getProp = exports.fixProp = exports.inProp = exports.propCount = exports.copyProp = exports.objectToValueArray = exports.objectValues = exports.objectToKeyArray = exports.objectKeys = exports.objectToKeyValueArray = exports.objectEntries = exports.propertyList = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.fixProperty = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = void 0;
+exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.platform = exports.root = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
+exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = void 0;
+exports.someMatchAll = exports.indexOfMatchAll = exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalDeep = exports.equal = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = void 0;
+exports["default"] = exports.parts = exports.wsh = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.setProp = exports.getProp = exports.fixProp = exports.inProp = exports.propCount = exports.copyProp = exports.objectToValueArray = exports.objectValues = exports.objectToKeyArray = exports.objectKeys = exports.objectToKeyValueArray = exports.objectEntries = exports.propertyList = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.fixProperty = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.includesAll = exports.includesSome = exports.includes = void 0;
 
 var _polyfill2 = _interopRequireDefault(__webpack_require__(2));
 
@@ -124,27 +124,27 @@ var _platform2 = _interopRequireDefault(__webpack_require__(9));
 
 var _type2 = _interopRequireDefault(__webpack_require__(5));
 
-var _typeAlias2 = _interopRequireDefault(__webpack_require__(60));
+var _typeAlias2 = _interopRequireDefault(__webpack_require__(61));
 
-var _test2 = _interopRequireDefault(__webpack_require__(61));
+var _test2 = _interopRequireDefault(__webpack_require__(62));
 
 var _syntax2 = _interopRequireDefault(__webpack_require__(37));
 
-var _compare2 = _interopRequireDefault(__webpack_require__(73));
+var _compare2 = _interopRequireDefault(__webpack_require__(74));
 
-var _convert2 = _interopRequireDefault(__webpack_require__(94));
+var _convert2 = _interopRequireDefault(__webpack_require__(95));
 
 var _number2 = _interopRequireDefault(__webpack_require__(33));
 
-var _string2 = _interopRequireDefault(__webpack_require__(62));
+var _string2 = _interopRequireDefault(__webpack_require__(63));
 
 var _object2 = _interopRequireDefault(__webpack_require__(23));
 
 var _array2 = _interopRequireDefault(__webpack_require__(45));
 
-var _consoleHook2 = _interopRequireDefault(__webpack_require__(95));
+var _consoleHook2 = _interopRequireDefault(__webpack_require__(96));
 
-var _wsh2 = _interopRequireDefault(__webpack_require__(96));
+var _wsh2 = _interopRequireDefault(__webpack_require__(97));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -190,8 +190,7 @@ var platform = _objectSpread({}, _platform2["default"]);
 
 
 exports.platform = platform;
-var isError = _type2["default"].isError,
-    objectToString = _type2["default"].objectToString,
+var objectToString = _type2["default"].objectToString,
     isUndefined = _type2["default"].isUndefined,
     isNull = _type2["default"].isNull,
     isNaNStrict = _type2["default"].isNaNStrict,
@@ -529,7 +528,6 @@ exports.isNaNStrict = isNaNStrict;
 exports.isNull = isNull;
 exports.isUndefined = isUndefined;
 exports.objectToString = objectToString;
-exports.isError = isError;
 var isObjectType = _typeAlias2["default"].isObjectType,
     isArrayType = _typeAlias2["default"].isArrayType,
     isUndef = _typeAlias2["default"].isUndef,
@@ -1580,8 +1578,8 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet = exports.isSet = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap = exports.isMap = exports.isNotSymbol = exports.isSymbol = exports.isNotException = exports.isException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
-exports["default"] = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = void 0;
+exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet = exports.isSet = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap = exports.isMap = exports.isNotSymbol = exports.isSymbol = exports.isNotException = exports.isException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
+exports["default"] = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = void 0;
 
 var _isType = _interopRequireDefault(__webpack_require__(6));
 
@@ -1736,12 +1734,12 @@ var isUndefinedAll = _isTypeAll["default"].isUndefinedAll,
     isArraySeriesAll = _isTypeAll["default"].isArraySeriesAll,
     isDateAll = _isTypeAll["default"].isDateAll,
     isRegExpAll = _isTypeAll["default"].isRegExpAll,
-    isExceptionAll = _isTypeAll["default"].isExceptionAll,
     isBooleanObjectAll = _isTypeAll["default"].isBooleanObjectAll,
     isNumberObjectAll = _isTypeAll["default"].isNumberObjectAll,
     isStringObjectAll = _isTypeAll["default"].isStringObjectAll,
     isEmptyObjectAll = _isTypeAll["default"].isEmptyObjectAll,
     isEmptyArrayAll = _isTypeAll["default"].isEmptyArrayAll,
+    isExceptionAll = _isTypeAll["default"].isExceptionAll,
     isSymbolAll = _isTypeAll["default"].isSymbolAll,
     isMapAll = _isTypeAll["default"].isMapAll,
     isWeakMapAll = _isTypeAll["default"].isWeakMapAll,
@@ -1764,12 +1762,12 @@ var isUndefinedAll = _isTypeAll["default"].isUndefinedAll,
     isNotArraySeriesAll = _isTypeAll["default"].isNotArraySeriesAll,
     isNotDateAll = _isTypeAll["default"].isNotDateAll,
     isNotRegExpAll = _isTypeAll["default"].isNotRegExpAll,
-    isNotExceptionAll = _isTypeAll["default"].isNotExceptionAll,
     isNotBooleanObjectAll = _isTypeAll["default"].isNotBooleanObjectAll,
     isNotNumberObjectAll = _isTypeAll["default"].isNotNumberObjectAll,
     isNotStringObjectAll = _isTypeAll["default"].isNotStringObjectAll,
     isNotEmptyObjectAll = _isTypeAll["default"].isNotEmptyObjectAll,
     isNotEmptyArrayAll = _isTypeAll["default"].isNotEmptyArrayAll,
+    isNotExceptionAll = _isTypeAll["default"].isNotExceptionAll,
     isNotSymbolAll = _isTypeAll["default"].isNotSymbolAll,
     isNotMapAll = _isTypeAll["default"].isNotMapAll,
     isNotWeakMapAll = _isTypeAll["default"].isNotWeakMapAll,
@@ -1780,12 +1778,12 @@ exports.isNotSetAll = isNotSetAll;
 exports.isNotWeakMapAll = isNotWeakMapAll;
 exports.isNotMapAll = isNotMapAll;
 exports.isNotSymbolAll = isNotSymbolAll;
+exports.isNotExceptionAll = isNotExceptionAll;
 exports.isNotEmptyArrayAll = isNotEmptyArrayAll;
 exports.isNotEmptyObjectAll = isNotEmptyObjectAll;
 exports.isNotStringObjectAll = isNotStringObjectAll;
 exports.isNotNumberObjectAll = isNotNumberObjectAll;
 exports.isNotBooleanObjectAll = isNotBooleanObjectAll;
-exports.isNotExceptionAll = isNotExceptionAll;
 exports.isNotRegExpAll = isNotRegExpAll;
 exports.isNotDateAll = isNotDateAll;
 exports.isNotArraySeriesAll = isNotArraySeriesAll;
@@ -1808,12 +1806,12 @@ exports.isSetAll = isSetAll;
 exports.isWeakMapAll = isWeakMapAll;
 exports.isMapAll = isMapAll;
 exports.isSymbolAll = isSymbolAll;
+exports.isExceptionAll = isExceptionAll;
 exports.isEmptyArrayAll = isEmptyArrayAll;
 exports.isEmptyObjectAll = isEmptyObjectAll;
 exports.isStringObjectAll = isStringObjectAll;
 exports.isNumberObjectAll = isNumberObjectAll;
 exports.isBooleanObjectAll = isBooleanObjectAll;
-exports.isExceptionAll = isExceptionAll;
 exports.isRegExpAll = isRegExpAll;
 exports.isDateAll = isDateAll;
 exports.isArraySeriesAll = isArraySeriesAll;
@@ -1944,7 +1942,7 @@ exports.isNaNStrictArray = isNaNStrictArray;
 exports.isNullArray = isNullArray;
 exports.isUndefinedArray = isUndefinedArray;
 
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
   // ...isType_js,
   objectToString: objectToString,
   isUndefined: isUndefined,
@@ -1991,7 +1989,65 @@ var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSp
   isNotStringObject: isNotStringObject,
   isNotEmptyObject: isNotEmptyObject,
   isNotEmptyArray: isNotEmptyArray
-}, _isException["default"]), _isSymbol["default"]), _isMap["default"]), _isSet["default"]), _isTypeAll["default"]), _isTypeArray["default"]);
+}, _isException["default"]), _isSymbol["default"]), _isMap["default"]), _isSet["default"]), {}, {
+  // isTypeAll
+  isUndefinedAll: isUndefinedAll,
+  isNullAll: isNullAll,
+  isNaNStrictAll: isNaNStrictAll,
+  isBooleanAll: isBooleanAll,
+  isNumberAll: isNumberAll,
+  isIntegerAll: isIntegerAll,
+  isStringAll: isStringAll,
+  isFunctionAll: isFunctionAll,
+  isObjectAll: isObjectAll,
+  isObjectNormalAll: isObjectNormalAll,
+  isObjectFromNullAll: isObjectFromNullAll,
+  isObjectLikeAll: isObjectLikeAll,
+  isModuleAll: isModuleAll,
+  isArrayAll: isArrayAll,
+  isArraySeriesAll: isArraySeriesAll,
+  isDateAll: isDateAll,
+  isRegExpAll: isRegExpAll,
+  isBooleanObjectAll: isBooleanObjectAll,
+  isNumberObjectAll: isNumberObjectAll,
+  isStringObjectAll: isStringObjectAll,
+  isEmptyObjectAll: isEmptyObjectAll,
+  isEmptyArrayAll: isEmptyArrayAll,
+  isExceptionAll: isExceptionAll,
+  isSymbolAll: isSymbolAll,
+  isMapAll: isMapAll,
+  isWeakMapAll: isWeakMapAll,
+  isSetAll: isSetAll,
+  isWeakSetAll: isWeakSetAll,
+  isNotUndefinedAll: isNotUndefinedAll,
+  isNotNullAll: isNotNullAll,
+  isNotNaNStrictAll: isNotNaNStrictAll,
+  isNotBooleanAll: isNotBooleanAll,
+  isNotNumberAll: isNotNumberAll,
+  isNotIntegerAll: isNotIntegerAll,
+  isNotStringAll: isNotStringAll,
+  isNotFunctionAll: isNotFunctionAll,
+  isNotObjectAll: isNotObjectAll,
+  isNotObjectNormalAll: isNotObjectNormalAll,
+  isNotObjectFromNullAll: isNotObjectFromNullAll,
+  isNotObjectLikeAll: isNotObjectLikeAll,
+  isNotModuleAll: isNotModuleAll,
+  isNotArrayAll: isNotArrayAll,
+  isNotArraySeriesAll: isNotArraySeriesAll,
+  isNotDateAll: isNotDateAll,
+  isNotRegExpAll: isNotRegExpAll,
+  isNotBooleanObjectAll: isNotBooleanObjectAll,
+  isNotNumberObjectAll: isNotNumberObjectAll,
+  isNotStringObjectAll: isNotStringObjectAll,
+  isNotEmptyObjectAll: isNotEmptyObjectAll,
+  isNotEmptyArrayAll: isNotEmptyArrayAll,
+  isNotExceptionAll: isNotExceptionAll,
+  isNotSymbolAll: isNotSymbolAll,
+  isNotMapAll: isNotMapAll,
+  isNotWeakMapAll: isNotWeakMapAll,
+  isNotSetAll: isNotSetAll,
+  isNotWeakSetAll: isNotWeakSetAll
+}, _isTypeArray["default"]);
 
 exports["default"] = _default;
 
@@ -3626,12 +3682,12 @@ var _default = {
   isNotArraySeriesAll: isNotArraySeriesAll,
   isNotDateAll: isNotDateAll,
   isNotRegExpAll: isNotRegExpAll,
-  isNotExceptionAll: isNotExceptionAll,
   isNotBooleanObjectAll: isNotBooleanObjectAll,
   isNotNumberObjectAll: isNotNumberObjectAll,
   isNotStringObjectAll: isNotStringObjectAll,
   isNotEmptyObjectAll: isNotEmptyObjectAll,
   isNotEmptyArrayAll: isNotEmptyArrayAll,
+  isNotExceptionAll: isNotExceptionAll,
   isNotSymbolAll: isNotSymbolAll,
   isNotMapAll: isNotMapAll,
   isNotWeakMapAll: isNotWeakMapAll,
@@ -3975,29 +4031,29 @@ var _object_common = _interopRequireDefault(__webpack_require__(24));
 
 var _isObjectParameter = _interopRequireDefault(__webpack_require__(13));
 
-var _inProperty2 = _interopRequireDefault(__webpack_require__(51));
+var _inProperty2 = _interopRequireDefault(__webpack_require__(52));
 
-var _fixProperty2 = _interopRequireDefault(__webpack_require__(55));
+var _fixProperty2 = _interopRequireDefault(__webpack_require__(56));
 
 var _objectEntries2 = _interopRequireDefault(__webpack_require__(31));
 
-var _objectKeys2 = _interopRequireDefault(__webpack_require__(56));
+var _objectKeys2 = _interopRequireDefault(__webpack_require__(57));
 
 var _objectValues2 = _interopRequireDefault(__webpack_require__(50));
 
-var _getProperty2 = _interopRequireDefault(__webpack_require__(52));
+var _getProperty2 = _interopRequireDefault(__webpack_require__(53));
 
 var _hasOwn2 = _interopRequireDefault(__webpack_require__(8));
 
-var _hasOwn3 = _interopRequireDefault(__webpack_require__(57));
+var _hasOwn3 = _interopRequireDefault(__webpack_require__(58));
 
-var _has2 = _interopRequireDefault(__webpack_require__(53));
+var _has2 = _interopRequireDefault(__webpack_require__(54));
 
 var _propertyCount2 = _interopRequireDefault(__webpack_require__(7));
 
-var _propertyCount3 = _interopRequireDefault(__webpack_require__(58));
+var _propertyCount3 = _interopRequireDefault(__webpack_require__(59));
 
-var _propertyList = _interopRequireDefault(__webpack_require__(59));
+var _propertyList = _interopRequireDefault(__webpack_require__(60));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -9021,6 +9077,8 @@ var _array_operation = _interopRequireDefault(__webpack_require__(32));
 
 var _sort = _interopRequireDefault(__webpack_require__(48));
 
+var _sortDictionary = _interopRequireDefault(__webpack_require__(51));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -9163,12 +9221,12 @@ exports._unique = _unique;
 exports.__unique = __unique;
 
 var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray2["default"]), _IntegerArray2["default"]), _arrayToIndexValueArray2["default"]), _group2["default"]), _unique2["default"]), {}, {
-  operation: _objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"])
+  operation: _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"])
 });
 
 exports["default"] = _default;
 
-var operation = _objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]);
+var operation = _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"]);
 
 exports.operation = operation;
 
@@ -9338,7 +9396,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAscending = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortDictionary = exports._sortDictionary = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = exports._sort = void 0;
+exports["default"] = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = exports._sort = void 0;
 
 var _type = __webpack_require__(5);
 
@@ -9437,7 +9495,7 @@ sort.targetFunc = {
       throw new TypeError('sortDictionary args(array) element is not string');
     }
 
-    return v.toLowerCase();
+    return v;
   },
   returnLength: function returnLength(v) {
     return v.length;
@@ -9464,7 +9522,7 @@ var sortNumber = function sortNumber(array, order) {
 exports.sortNumber = sortNumber;
 
 var _sortLength = function _sortLength(array, order) {
-  return sort(array, order, sort.targetFunc.returnLength);
+  return _sort(array, order, sort.targetFunc.returnLength);
 };
 
 exports._sortLength = _sortLength;
@@ -9474,18 +9532,6 @@ var sortLength = function sortLength(array, order) {
 };
 
 exports.sortLength = sortLength;
-
-var _sortDictionary = function _sortDictionary(array, order) {
-  return sort(array, order);
-};
-
-exports._sortDictionary = _sortDictionary;
-
-var sortDictionary = function sortDictionary(array, order) {
-  return sort(array, order, sort.targetFunc.returnValueErrorNotIsString);
-};
-
-exports.sortDictionary = sortDictionary;
 
 var sortNumberAscending = function sortNumberAscending(array) {
   return sortNumber(array, sort.order.ascending);
@@ -9510,33 +9556,17 @@ var sortLengthDescending = function sortLengthDescending(array) {
 };
 
 exports.sortLengthDescending = sortLengthDescending;
-
-var sortDictionaryAscending = function sortDictionaryAscending(array) {
-  return sortDictionary(array, sort.order.ascending);
-};
-
-exports.sortDictionaryAscending = sortDictionaryAscending;
-
-var sortDictionaryDescending = function sortDictionaryDescending(array) {
-  return sortDictionary(array, sort.order.descending);
-};
-
-exports.sortDictionaryDescending = sortDictionaryDescending;
 var _default = {
   _sort: _sort,
   _sortNumber: _sortNumber,
   _sortLength: _sortLength,
-  _sortDictionary: _sortDictionary,
   sort: sort,
   sortNumber: sortNumber,
   sortLength: sortLength,
-  sortDictionary: sortDictionary,
   sortNumberAscending: sortNumberAscending,
   sortNumberDescending: sortNumberDescending,
   sortLengthAscending: sortLengthAscending,
-  sortLengthDescending: sortLengthDescending,
-  sortDictionaryAscending: sortDictionaryAscending,
-  sortDictionaryDescending: sortDictionaryDescending
+  sortLengthDescending: sortLengthDescending
 };
 exports["default"] = _default;
 
@@ -9660,6 +9690,300 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAscending = exports.sortDictionary = exports._sortDictionary = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _syntax = __webpack_require__(37);
+
+var _or2 = __webpack_require__(49);
+
+var _isObjectParameter = __webpack_require__(13);
+
+var _objectValues2 = __webpack_require__(50);
+
+var _Enum2 = __webpack_require__(27);
+
+var _sort = __webpack_require__(48);
+
+/**
+ * array.operation.sortDictionary
+ */
+var _sortDictionary = function _sortDictionary(array) {
+  var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _sort.sort.order.ascending;
+  var casePriority = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : sortDictionary.casePriority.upperCase;
+  var func = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _sort.sort.targetFunc.returnValueErrorNotIsString;
+
+  switch (casePriority) {
+    case sortDictionary.casePriority.ignoreCase:
+      {
+        var orderFunc = order === _sort.sort.order.descending ? sortDictionary.orderFunc.ignoreCase.descending : sortDictionary.orderFunc.ignoreCase.ascending;
+        array.sort(function (a, b) {
+          return orderFunc(func(a).toLowerCase(), func(b).toLowerCase());
+        });
+        return array;
+      }
+
+    case sortDictionary.casePriority.upperCase:
+      {
+        var _orderFunc = order === _sort.sort.order.descending ? sortDictionary.orderFunc.upperCase.descending : sortDictionary.orderFunc.upperCase.ascending;
+
+        array.sort(function (a, b) {
+          return _orderFunc(func(a), func(b));
+        });
+        return array;
+      }
+
+    case sortDictionary.casePriority.lowerCase:
+      {
+        var _orderFunc2 = order === _sort.sort.order.descending ? sortDictionary.orderFunc.lowerCase.descending : sortDictionary.orderFunc.lowerCase.ascending;
+
+        array.sort(function (a, b) {
+          return _orderFunc2(func(a), func(b));
+        });
+        return array;
+      }
+  }
+
+  throw new TypeError('_sortDictionary args(casePriority) is not ["upperCase"|"lowerCase"|"ignoreCase"]');
+};
+
+exports._sortDictionary = _sortDictionary;
+
+var sortDictionary = function sortDictionary(array) {
+  var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _sort.sort.order.ascending;
+  var casePriority = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : sortDictionary.casePriority.upperCase;
+  var func = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _sort.sort.targetFunc.returnValueErrorNotIsString;
+
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'order, casePriority, func')) {
+    var _array = array;
+    array = _array.array;
+    var _array$order = _array.order;
+    order = _array$order === void 0 ? _sort.sort.order.ascending : _array$order;
+    var _array$casePriority = _array.casePriority;
+    casePriority = _array$casePriority === void 0 ? sortDictionary.casePriority.upperCase : _array$casePriority;
+    var _array$func = _array.func;
+    func = _array$func === void 0 ? _sort.sort.targetFunc.returnValue : _array$func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(order, '', 'order, casePriority, func')) {
+    var _order = order;
+    var _order$order = _order.order;
+    order = _order$order === void 0 ? _sort.sort.order.ascending : _order$order;
+    var _order$casePriority = _order.casePriority;
+    casePriority = _order$casePriority === void 0 ? sortDictionary.casePriority.upperCase : _order$casePriority;
+    var _order$func = _order.func;
+    func = _order$func === void 0 ? _sort.sort.targetFunc.returnValue : _order$func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(casePriority, '', 'casePriority, func', 1)) {
+    var _func = func;
+    var _func$casePriority = _func.casePriority;
+    casePriority = _func$casePriority === void 0 ? sortDictionary.casePriority.upperCase : _func$casePriority;
+    var _func$func = _func.func;
+    func = _func$func === void 0 ? _sort.sort.targetFunc.returnValue : _func$func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(func, 'func')) {
+    var _func2 = func;
+    var _func2$func = _func2.func;
+    func = _func2$func === void 0 ? _sort.sort.targetFunc.returnValue : _func2$func;
+  }
+
+  if (!(0, _isType.isArray)(array)) {
+    throw new TypeError('sortDictionary args(array) is not array');
+  }
+
+  if (!(0, _or2._or)(order, (0, _objectValues2._objectValues)(_sort.sort.order))) {
+    throw new TypeError('sortDictionary args(order) is not ["ascending"|"descending"]');
+  }
+
+  if (!(0, _or2._or)(casePriority, (0, _objectValues2._objectValues)(sortDictionary.casePriority))) {
+    throw new TypeError('sortDictionary args(casePriority) is not ["upperCase"|"lowerCase"|"ignoreCase"]');
+  }
+
+  if (!(0, _isType.isFunction)(func)) {
+    throw new TypeError('sortDictionary args(func) is not function');
+  }
+
+  return _sortDictionary(array, order, casePriority, func);
+};
+
+exports.sortDictionary = sortDictionary;
+sortDictionary.casePriority = (0, _Enum2._Enum)(['upperCase', 'lowerCase', 'ignoreCase']);
+sortDictionary.orderFunc = {
+  upperCase: {
+    ascending: function ascending(a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+
+      if (al < bl) {
+        return -1;
+      }
+
+      if (bl < al) {
+        return 1;
+      }
+
+      a = a.split(''); // support for wsh
+
+      b = b.split('');
+
+      for (var i = 0, l = al.length; i < l; i += 1) {
+        if (a[i] < b[i]) {
+          return -1;
+        }
+
+        if (b[i] < a[i]) {
+          return 1;
+        }
+      }
+
+      return 0;
+    },
+    descending: function descending(a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+
+      if (al < bl) {
+        return 1;
+      }
+
+      if (bl < al) {
+        return -1;
+      }
+
+      a = a.split('');
+      b = b.split('');
+
+      for (var i = 0, l = al.length; i < l; i += 1) {
+        if (a[i] < b[i]) {
+          return -1;
+        }
+
+        if (b[i] < a[i]) {
+          return 1;
+        }
+      }
+
+      return 0;
+    }
+  },
+  lowerCase: {
+    ascending: function ascending(a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+
+      if (al < bl) {
+        return -1;
+      }
+
+      if (bl < al) {
+        return 1;
+      }
+
+      a = a.split('');
+      b = b.split('');
+
+      for (var i = 0, l = al.length; i < l; i += 1) {
+        if (a[i] < b[i]) {
+          return 1;
+        }
+
+        if (b[i] < a[i]) {
+          return -1;
+        }
+      }
+
+      return 0;
+    },
+    descending: function descending(a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+
+      if (al < bl) {
+        return 1;
+      }
+
+      if (bl < al) {
+        return -1;
+      }
+
+      a = a.split('');
+      b = b.split('');
+
+      for (var i = 0, l = al.length; i < l; i += 1) {
+        if (a[i] < b[i]) {
+          return 1;
+        }
+
+        if (b[i] < a[i]) {
+          return -1;
+        }
+      }
+
+      return 0;
+    }
+  },
+  ignoreCase: {
+    ascending: function ascending(a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+
+      if (al < bl) {
+        return -1;
+      }
+
+      if (bl < al) {
+        return 1;
+      }
+
+      return 0;
+    },
+    descending: function descending(a, b) {
+      var al = a.toLowerCase();
+      var bl = b.toLowerCase();
+
+      if (al < bl) {
+        return 1;
+      }
+
+      if (bl < al) {
+        return -1;
+      }
+
+      return 0;
+    }
+  }
+};
+sortDictionary.order = _sort.sort.order;
+sortDictionary.targetFunc = _sort.sort.targetFunc;
+
+var sortDictionaryAscending = function sortDictionaryAscending(array) {
+  var casePriority = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sortDictionary.casePriority.upperCase;
+  return sortDictionary(array, _sort.sort.order.ascending, casePriority);
+};
+
+exports.sortDictionaryAscending = sortDictionaryAscending;
+
+var sortDictionaryDescending = function sortDictionaryDescending(array) {
+  var casePriority = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sortDictionary.casePriority.upperCase;
+  return sortDictionary(array, _sort.sort.order.descending, casePriority);
+};
+
+exports.sortDictionaryDescending = sortDictionaryDescending;
+var _default = {
+  _sortDictionary: _sortDictionary,
+  sortDictionary: sortDictionary,
+  sortDictionaryAscending: sortDictionaryAscending,
+  sortDictionaryDescending: sortDictionaryDescending
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.inProp = exports.inProperty = exports._inProperty = void 0;
 
 var _type = __webpack_require__(5);
@@ -9668,7 +9992,7 @@ var _replaceAll2 = __webpack_require__(14);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _getProperty2 = __webpack_require__(52);
+var _getProperty2 = __webpack_require__(53);
 
 var _splitCommaItems2 = __webpack_require__(25);
 
@@ -9754,7 +10078,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9769,9 +10093,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _has2 = __webpack_require__(53);
+var _has2 = __webpack_require__(54);
 
-var _splitDotItems2 = __webpack_require__(54);
+var _splitDotItems2 = __webpack_require__(55);
 
 /**
  * getProperty
@@ -9874,7 +10198,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9987,7 +10311,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10036,7 +10360,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10122,7 +10446,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10180,7 +10504,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10228,7 +10552,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10282,7 +10606,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10356,7 +10680,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10833,7 +11157,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10848,9 +11172,9 @@ var _type = __webpack_require__(5);
 
 var _array = __webpack_require__(45);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
-var _compare = __webpack_require__(73);
+var _compare = __webpack_require__(74);
 
 var _platform = __webpack_require__(9);
 
@@ -11087,7 +11411,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11102,31 +11426,31 @@ var _string_common = _interopRequireDefault(__webpack_require__(44));
 
 var _replaceAll2 = _interopRequireDefault(__webpack_require__(14));
 
-var _replaceAll3 = _interopRequireDefault(__webpack_require__(63));
+var _replaceAll3 = _interopRequireDefault(__webpack_require__(64));
 
-var _matchFormat2 = _interopRequireDefault(__webpack_require__(64));
+var _matchFormat2 = _interopRequireDefault(__webpack_require__(65));
 
-var _subFirstDelimFirst2 = _interopRequireDefault(__webpack_require__(65));
+var _subFirstDelimFirst2 = _interopRequireDefault(__webpack_require__(66));
 
-var _subFirstDelimLast2 = _interopRequireDefault(__webpack_require__(66));
+var _subFirstDelimLast2 = _interopRequireDefault(__webpack_require__(67));
 
-var _subLastDelimFirst2 = _interopRequireDefault(__webpack_require__(67));
+var _subLastDelimFirst2 = _interopRequireDefault(__webpack_require__(68));
 
-var _subLastDelimLast2 = _interopRequireDefault(__webpack_require__(68));
+var _subLastDelimLast2 = _interopRequireDefault(__webpack_require__(69));
 
-var _tagInnerFirst2 = _interopRequireDefault(__webpack_require__(69));
+var _tagInnerFirst2 = _interopRequireDefault(__webpack_require__(70));
 
-var _tagOuterFirst2 = _interopRequireDefault(__webpack_require__(70));
+var _tagOuterFirst2 = _interopRequireDefault(__webpack_require__(71));
 
-var _tagInnerLast2 = _interopRequireDefault(__webpack_require__(71));
+var _tagInnerLast2 = _interopRequireDefault(__webpack_require__(72));
 
-var _tagOuterLast2 = _interopRequireDefault(__webpack_require__(72));
+var _tagOuterLast2 = _interopRequireDefault(__webpack_require__(73));
 
 var _split2 = _interopRequireDefault(__webpack_require__(26));
 
 var _splitCommaItems = _interopRequireDefault(__webpack_require__(25));
 
-var _splitDotItems = _interopRequireDefault(__webpack_require__(54));
+var _splitDotItems = _interopRequireDefault(__webpack_require__(55));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -11298,7 +11622,7 @@ var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSp
 exports["default"] = _default;
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11345,7 +11669,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11576,7 +11900,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11589,7 +11913,7 @@ exports["default"] = exports.subFirstDelimFirst = exports._subFirstDelimFirst = 
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -11634,7 +11958,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11647,7 +11971,7 @@ exports["default"] = exports.subFirstDelimLast = exports._subFirstDelimLast = vo
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -11692,7 +12016,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11705,7 +12029,7 @@ exports["default"] = exports.subLastDelimFirst = exports._subLastDelimFirst = vo
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -11750,7 +12074,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11763,7 +12087,7 @@ exports["default"] = exports.subLastDelimLast = exports._subLastDelimLast = void
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -11808,7 +12132,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11821,11 +12145,11 @@ exports["default"] = exports.tagInnerFirst = exports._tagInnerFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _tagOuterFirst2 = __webpack_require__(70);
+var _tagOuterFirst2 = __webpack_require__(71);
 
 var _tagInnerFirst = function _tagInnerFirst(str, startTag, endTag) {
   var result = (0, _tagOuterFirst2._tagOuterFirst)(str, startTag, endTag);
@@ -11877,7 +12201,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11890,7 +12214,7 @@ exports["default"] = exports.tagOuterFirst = exports._tagOuterFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -11960,7 +12284,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11973,11 +12297,11 @@ exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _tagOuterLast2 = __webpack_require__(72);
+var _tagOuterLast2 = __webpack_require__(73);
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
   var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
@@ -12029,7 +12353,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12042,7 +12366,7 @@ exports["default"] = exports.tagOuterLast = exports._tagOuterLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -12112,7 +12436,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12125,45 +12449,45 @@ exports["default"] = exports.equalDeep = exports._equalDeep = exports.equal = ex
 
 var _or2 = _interopRequireDefault(__webpack_require__(49));
 
-var _match2 = _interopRequireDefault(__webpack_require__(74));
+var _match2 = _interopRequireDefault(__webpack_require__(75));
 
-var _matchValue2 = _interopRequireDefault(__webpack_require__(75));
+var _matchValue2 = _interopRequireDefault(__webpack_require__(76));
 
-var _initialValue2 = _interopRequireDefault(__webpack_require__(76));
+var _initialValue2 = _interopRequireDefault(__webpack_require__(77));
 
-var _indexOfMatch2 = _interopRequireDefault(__webpack_require__(79));
+var _indexOfMatch2 = _interopRequireDefault(__webpack_require__(80));
 
-var _allMatch2 = _interopRequireDefault(__webpack_require__(80));
+var _allMatch2 = _interopRequireDefault(__webpack_require__(81));
 
-var _someMatch2 = _interopRequireDefault(__webpack_require__(81));
+var _someMatch2 = _interopRequireDefault(__webpack_require__(82));
 
-var _matchSome2 = _interopRequireDefault(__webpack_require__(78));
+var _matchSome2 = _interopRequireDefault(__webpack_require__(79));
 
-var _matchSomeValue2 = _interopRequireDefault(__webpack_require__(77));
+var _matchSomeValue2 = _interopRequireDefault(__webpack_require__(78));
 
-var _indexOfMatchSome2 = _interopRequireDefault(__webpack_require__(82));
+var _indexOfMatchSome2 = _interopRequireDefault(__webpack_require__(83));
 
-var _allMatchSome2 = _interopRequireDefault(__webpack_require__(83));
+var _allMatchSome2 = _interopRequireDefault(__webpack_require__(84));
 
-var _someMatchSome2 = _interopRequireDefault(__webpack_require__(84));
+var _someMatchSome2 = _interopRequireDefault(__webpack_require__(85));
 
-var _matchAll2 = _interopRequireDefault(__webpack_require__(85));
+var _matchAll2 = _interopRequireDefault(__webpack_require__(86));
 
-var _matchAllValue2 = _interopRequireDefault(__webpack_require__(86));
+var _matchAllValue2 = _interopRequireDefault(__webpack_require__(87));
 
-var _indexOfMatchAll2 = _interopRequireDefault(__webpack_require__(87));
+var _indexOfMatchAll2 = _interopRequireDefault(__webpack_require__(88));
 
-var _allMatchAll2 = _interopRequireDefault(__webpack_require__(88));
+var _allMatchAll2 = _interopRequireDefault(__webpack_require__(89));
 
-var _someMatchAll2 = _interopRequireDefault(__webpack_require__(89));
+var _someMatchAll2 = _interopRequireDefault(__webpack_require__(90));
 
-var _includes2 = _interopRequireDefault(__webpack_require__(90));
+var _includes2 = _interopRequireDefault(__webpack_require__(91));
 
-var _includes_common = _interopRequireDefault(__webpack_require__(91));
+var _includes_common = _interopRequireDefault(__webpack_require__(92));
 
-var _equal2 = _interopRequireDefault(__webpack_require__(92));
+var _equal2 = _interopRequireDefault(__webpack_require__(93));
 
-var _equalDeep2 = _interopRequireDefault(__webpack_require__(93));
+var _equalDeep2 = _interopRequireDefault(__webpack_require__(94));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -12267,7 +12591,7 @@ var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSp
 exports["default"] = _default;
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12342,7 +12666,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12357,7 +12681,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _match3 = __webpack_require__(74);
+var _match3 = __webpack_require__(75);
 
 /**
  * matchValue
@@ -12419,7 +12743,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12434,7 +12758,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _matchSomeValue2 = __webpack_require__(77);
+var _matchSomeValue2 = __webpack_require__(78);
 
 /**
  * initialValue
@@ -12480,7 +12804,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12495,7 +12819,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _matchSome2 = __webpack_require__(78);
+var _matchSome2 = __webpack_require__(79);
 
 /**
  * matchSomeValue
@@ -12561,7 +12885,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12578,7 +12902,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _match2 = __webpack_require__(74);
+var _match2 = __webpack_require__(75);
 
 /**
  * matchSome
@@ -12616,7 +12940,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12633,7 +12957,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _match2 = __webpack_require__(74);
+var _match2 = __webpack_require__(75);
 
 /**
  * indexOfMatch
@@ -12671,7 +12995,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12688,7 +13012,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _match2 = __webpack_require__(74);
+var _match2 = __webpack_require__(75);
 
 /**
  * allMatch
@@ -12726,7 +13050,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12737,7 +13061,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatch = exports._someMatch = void 0;
 
-var _indexOfMatch2 = __webpack_require__(79);
+var _indexOfMatch2 = __webpack_require__(80);
 
 /**
  * someMatch
@@ -12760,7 +13084,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12777,7 +13101,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _matchSome2 = __webpack_require__(78);
+var _matchSome2 = __webpack_require__(79);
 
 /**
  * indexOfMatchSome
@@ -12819,7 +13143,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12836,7 +13160,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _matchSome2 = __webpack_require__(78);
+var _matchSome2 = __webpack_require__(79);
 
 /**
  * allMatchSome
@@ -12878,7 +13202,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12889,7 +13213,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchSome = exports._someMatchSome = void 0;
 
-var _indexOfMatchSome2 = __webpack_require__(82);
+var _indexOfMatchSome2 = __webpack_require__(83);
 
 /**
  * someMatchSome
@@ -12912,7 +13236,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12929,7 +13253,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _match2 = __webpack_require__(74);
+var _match2 = __webpack_require__(75);
 
 /**
  * matchAll
@@ -12967,7 +13291,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12982,7 +13306,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _matchAll2 = __webpack_require__(85);
+var _matchAll2 = __webpack_require__(86);
 
 /**
  * matchAllValue
@@ -13048,7 +13372,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13065,7 +13389,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _matchAll2 = __webpack_require__(85);
+var _matchAll2 = __webpack_require__(86);
 
 /**
  * indexOfMatchAll
@@ -13107,7 +13431,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13124,7 +13448,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _matchAll2 = __webpack_require__(85);
+var _matchAll2 = __webpack_require__(86);
 
 /**
  * allMatchAll
@@ -13166,7 +13490,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13177,7 +13501,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchAll = exports._someMatchAll = void 0;
 
-var _indexOfMatchAll2 = __webpack_require__(87);
+var _indexOfMatchAll2 = __webpack_require__(88);
 
 /**
  * someMatchAll
@@ -13200,7 +13524,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13215,7 +13539,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _match2 = __webpack_require__(74);
+var _match2 = __webpack_require__(75);
 
 var _includes2 = __webpack_require__(11);
 
@@ -13267,7 +13591,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13284,9 +13608,9 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _array_common = __webpack_require__(34);
 
-var _match2 = __webpack_require__(74);
+var _match2 = __webpack_require__(75);
 
-var _includes2 = __webpack_require__(90);
+var _includes2 = __webpack_require__(91);
 
 /**
  * includesSome
@@ -13351,7 +13675,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13719,7 +14043,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13734,7 +14058,7 @@ var _type = __webpack_require__(5);
 
 var _object = __webpack_require__(23);
 
-var _equal = __webpack_require__(92);
+var _equal = __webpack_require__(93);
 
 /**
  * equalDeep
@@ -13806,7 +14130,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13819,9 +14143,9 @@ exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDe
 
 var _type = __webpack_require__(5);
 
-var _compare = __webpack_require__(73);
+var _compare = __webpack_require__(74);
 
-var _string = __webpack_require__(62);
+var _string = __webpack_require__(63);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -14221,7 +14545,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14234,7 +14558,7 @@ exports["default"] = exports.acceptDebug = exports.acceptError = exports.acceptW
 
 var _type = __webpack_require__(5);
 
-var _compare = __webpack_require__(73);
+var _compare = __webpack_require__(74);
 
 var _array = __webpack_require__(45);
 
@@ -14452,7 +14776,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14463,11 +14787,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
 
-var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(97));
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(98));
 
-var _wshShell = _interopRequireDefault(__webpack_require__(98));
+var _wshShell = _interopRequireDefault(__webpack_require__(99));
 
-var _forceCreateFolder = _interopRequireDefault(__webpack_require__(99));
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(100));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -14489,7 +14813,7 @@ var _default = _objectSpread(_objectSpread(_objectSpread({}, _wshFileSystemObjec
 exports["default"] = _default;
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14529,7 +14853,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14569,7 +14893,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14584,7 +14908,7 @@ var _isType = __webpack_require__(6);
 
 var _platform = __webpack_require__(9);
 
-var _wshFileSystemObject = __webpack_require__(97);
+var _wshFileSystemObject = __webpack_require__(98);
 
 var _forceCreateFolder = function _forceCreateFolder(folderPath) {
   var fso = (0, _wshFileSystemObject.FileSystemObject)();

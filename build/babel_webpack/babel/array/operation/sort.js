@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAscending = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortDictionary = exports._sortDictionary = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = exports._sort = void 0;
+exports["default"] = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = exports._sort = void 0;
 
 var _type = require("../../type/type.js");
 
@@ -102,7 +102,7 @@ sort.targetFunc = {
       throw new TypeError('sortDictionary args(array) element is not string');
     }
 
-    return v.toLowerCase();
+    return v;
   },
   returnLength: function returnLength(v) {
     return v.length;
@@ -129,7 +129,7 @@ var sortNumber = function sortNumber(array, order) {
 exports.sortNumber = sortNumber;
 
 var _sortLength = function _sortLength(array, order) {
-  return sort(array, order, sort.targetFunc.returnLength);
+  return _sort(array, order, sort.targetFunc.returnLength);
 };
 
 exports._sortLength = _sortLength;
@@ -139,18 +139,6 @@ var sortLength = function sortLength(array, order) {
 };
 
 exports.sortLength = sortLength;
-
-var _sortDictionary = function _sortDictionary(array, order) {
-  return sort(array, order);
-};
-
-exports._sortDictionary = _sortDictionary;
-
-var sortDictionary = function sortDictionary(array, order) {
-  return sort(array, order, sort.targetFunc.returnValueErrorNotIsString);
-};
-
-exports.sortDictionary = sortDictionary;
 
 var sortNumberAscending = function sortNumberAscending(array) {
   return sortNumber(array, sort.order.ascending);
@@ -175,32 +163,16 @@ var sortLengthDescending = function sortLengthDescending(array) {
 };
 
 exports.sortLengthDescending = sortLengthDescending;
-
-var sortDictionaryAscending = function sortDictionaryAscending(array) {
-  return sortDictionary(array, sort.order.ascending);
-};
-
-exports.sortDictionaryAscending = sortDictionaryAscending;
-
-var sortDictionaryDescending = function sortDictionaryDescending(array) {
-  return sortDictionary(array, sort.order.descending);
-};
-
-exports.sortDictionaryDescending = sortDictionaryDescending;
 var _default = {
   _sort: _sort,
   _sortNumber: _sortNumber,
   _sortLength: _sortLength,
-  _sortDictionary: _sortDictionary,
   sort: sort,
   sortNumber: sortNumber,
   sortLength: sortLength,
-  sortDictionary: sortDictionary,
   sortNumberAscending: sortNumberAscending,
   sortNumberDescending: sortNumberDescending,
   sortLengthAscending: sortLengthAscending,
-  sortLengthDescending: sortLengthDescending,
-  sortDictionaryAscending: sortDictionaryAscending,
-  sortDictionaryDescending: sortDictionaryDescending
+  sortLengthDescending: sortLengthDescending
 };
 exports["default"] = _default;

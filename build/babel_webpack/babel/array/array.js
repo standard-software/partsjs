@@ -21,6 +21,8 @@ var _array_operation = _interopRequireDefault(require("./array_operation.js"));
 
 var _sort = _interopRequireDefault(require("./operation/sort.js"));
 
+var _sortDictionary = _interopRequireDefault(require("./operation/sortDictionary.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -163,11 +165,11 @@ exports._unique = _unique;
 exports.__unique = __unique;
 
 var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray2["default"]), _IntegerArray2["default"]), _arrayToIndexValueArray2["default"]), _group2["default"]), _unique2["default"]), {}, {
-  operation: _objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"])
+  operation: _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"])
 });
 
 exports["default"] = _default;
 
-var operation = _objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]);
+var operation = _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"]);
 
 exports.operation = operation;
