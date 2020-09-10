@@ -11,10 +11,6 @@ import {
 } from '../../type/isType.js';
 
 import {
-  switch_,
-} from '../../syntax/syntax.js';
-
-import {
   _or,
 } from '../../compare/or.js';
 
@@ -144,15 +140,11 @@ sortDictionary.orderFunc = {
       if (bl < al) {
         return 1;
       }
-      a = a.split('');  // support for wsh
-      b = b.split('');
-      for (let i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return -1;
-        }
-        if (b[i] < a[i]) {
-          return 1;
-        }
+      if (a < b) {
+        return -1;
+      }
+      if (b < a) {
+        return 1;
       }
       return 0;
     },
@@ -165,15 +157,11 @@ sortDictionary.orderFunc = {
       if (bl < al) {
         return -1;
       }
-      a = a.split('');
-      b = b.split('');
-      for (let i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return -1;
-        }
-        if (b[i] < a[i]) {
-          return 1;
-        }
+      if (a < b) {
+        return -1;
+      }
+      if (b < a) {
+        return 1;
       }
       return 0;
     },
@@ -188,15 +176,11 @@ sortDictionary.orderFunc = {
       if (bl < al) {
         return 1;
       }
-      a = a.split('');
-      b = b.split('');
-      for (let i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return 1;
-        }
-        if (b[i] < a[i]) {
-          return -1;
-        }
+      if (a < b) {
+        return 1;
+      }
+      if (b < a) {
+        return -1;
       }
       return 0;
     },
@@ -209,15 +193,11 @@ sortDictionary.orderFunc = {
       if (bl < al) {
         return -1;
       }
-      a = a.split('');
-      b = b.split('');
-      for (let i = 0, l = al.length; i < l; i += 1) {
-        if (a[i] < b[i]) {
-          return 1;
-        }
-        if (b[i] < a[i]) {
-          return -1;
-        }
+      if (a < b) {
+        return 1;
+      }
+      if (b < a) {
+        return -1;
       }
       return 0;
     },
