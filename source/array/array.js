@@ -6,6 +6,7 @@ import group_js from './group.js';
 import unique_js from './unique.js';
 import array_operation_js from './array_operation.js';
 import sort_js from './operation/sort.js';
+import sortDictionary_js from './operation/sortDictionary.js';
 
 export const {
   _min, _max,
@@ -75,10 +76,12 @@ export default {
   operation: {
     ...array_operation_js,
     ...sort_js,
+    ...sortDictionary_js,
   },
 };
 
 export const operation = {
   ...array_operation_js,
   ...sort_js,
+  ...sortDictionary_js,
 };

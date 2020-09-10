@@ -24,7 +24,6 @@ export const test_execute_array = (parts) => {
       subIndex, subLength,
       subFirst, subLast,
       arrayToIndexValueArray,
-      sortOrderFunction,
     } = parts.array;
 
     const {
@@ -2423,24 +2422,40 @@ export const test_execute_array = (parts) => {
 
     const test_operation_sortDictionary = () => {
       it('test_operation_sortDictionary', () => {
-        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA'],
+        checkEqual(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB', 'B', 'b'],
           array.operation.sortDictionaryAscending(
-            ['Aa', 'aa', 'a', 'A', 'aA', 'AA']
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            array.operation.sortDictionary.casePriority.ignoreCase
           )
         );
-        checkEqual(['Aa', 'aa', 'aA', 'AA', 'a', 'A'],
+        checkEqual(['B', 'b', 'aB', 'ab', 'Ab', 'AB', 'aa', 'Aa', 'AA', 'aA', 'a', 'A'],
           array.operation.sortDictionaryDescending(
-            ['Aa', 'aa', 'a', 'A', 'aA', 'AA']
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            array.operation.sortDictionary.casePriority.ignoreCase
           )
         );
-        checkEqual(['a', 'A', 'Aa', 'aa', 'aA', 'AA', 'ab', 'Ab'],
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
           array.operation.sortDictionaryAscending(
-            ['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            array.operation.sortDictionary.casePriority.upperCase
           )
         );
-        checkEqual(['ab', 'Ab', 'Aa', 'aa', 'aA', 'AA', 'a', 'A'],
+        checkEqual(['B', 'b', 'AB', 'Ab', 'aB', 'ab', 'AA', 'Aa', 'aA', 'aa', 'A', 'a'],
           array.operation.sortDictionaryDescending(
-            ['Aa', 'aa', 'a', 'A', 'aA', 'AA', 'ab', 'Ab']
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            array.operation.sortDictionary.casePriority.upperCase
+          )
+        );
+        checkEqual(['a', 'A', 'aa', 'aA', 'Aa', 'AA', 'ab', 'aB', 'Ab', 'AB', 'b', 'B'],
+          array.operation.sortDictionaryAscending(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            array.operation.sortDictionary.casePriority.lowerCase
+          )
+        );
+        checkEqual(['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'],
+          array.operation.sortDictionaryDescending(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            array.operation.sortDictionary.casePriority.lowerCase
           )
         );
 
@@ -2456,6 +2471,81 @@ export const test_execute_array = (parts) => {
         checkEqual(true, isThrownException(() => {
           array.operation.sortDictionaryAscending([0, 'aa']);
         }, 'TypeError'));
+
+      });
+    };
+
+    const test_operation_sortDictionary2 = () => {
+      it('test_operation_sortDictionary2', () => {
+
+        // object named parameter
+        const { sortDictionary } = array.operation;
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            order: sortDictionary.order.ascending,
+            casePriority: sortDictionary.casePriority.upperCase,
+            func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            order: sortDictionary.order.ascending,
+            casePriority: sortDictionary.casePriority.upperCase,
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            order: sortDictionary.order.ascending,
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB']
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            casePriority: sortDictionary.casePriority.upperCase,
+            func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary({
+            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            casePriority: sortDictionary.casePriority.upperCase,
+          })
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            {
+              order: sortDictionary.order.ascending,
+              casePriority: sortDictionary.casePriority.upperCase,
+              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+            }
+          )
+        );
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortDictionary(
+            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
+            sortDictionary.order.ascending,
+            {
+              casePriority: sortDictionary.casePriority.upperCase,
+              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
+            }
+          )
+        );
+
 
       });
     };
@@ -2575,6 +2665,7 @@ export const test_execute_array = (parts) => {
     test_operation_sortNumber();
     test_operation_sortLength();
     test_operation_sortDictionary();
+    test_operation_sortDictionary2();
 
     test_ArrayEntries_standard();
     test_arrayToIndexValueArray();

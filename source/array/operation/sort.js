@@ -116,7 +116,7 @@ sort.targetFunc = {
     if (!isString(v)) {
       throw new TypeError('sortDictionary args(array) element is not string');
     }
-    return v.toLowerCase();
+    return v;
   },
   returnLength: v => v.length,
   returnLengthErrorNotHasLength: v => {
@@ -136,19 +136,11 @@ export const sortNumber = (array, order) => {
 };
 
 export const _sortLength = (array, order) => {
-  return sort(array, order, sort.targetFunc.returnLength);
+  return _sort(array, order, sort.targetFunc.returnLength);
 };
 
 export const sortLength = (array, order) => {
   return sort(array, order, sort.targetFunc.returnLengthErrorNotHasLength);
-};
-
-export const _sortDictionary = (array, order) => {
-  return sort(array, order);
-};
-
-export const sortDictionary = (array, order) => {
-  return sort(array, order, sort.targetFunc.returnValueErrorNotIsString);
 };
 
 export const sortNumberAscending = (array) => {
@@ -167,25 +159,14 @@ export const sortLengthDescending = (array) => {
   return sortLength(array, sort.order.descending);
 };
 
-export const sortDictionaryAscending = (array) => {
-  return sortDictionary(array, sort.order.ascending);
-};
-
-export const sortDictionaryDescending = (array) => {
-  return sortDictionary(array, sort.order.descending);
-};
-
 export default {
   _sort,
   _sortNumber,
   _sortLength,
-  _sortDictionary,
 
   sort,
   sortNumber,
   sortLength,
-  sortDictionary,
   sortNumberAscending, sortNumberDescending,
   sortLengthAscending, sortLengthDescending,
-  sortDictionaryAscending, sortDictionaryDescending,
 };

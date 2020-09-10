@@ -312,7 +312,10 @@ You can now use the functions of the parts.js object.
   - noexist function
     - isNot isArray isNotArray isAll isNotAll
       - Undef
-- update sortDictionary
+- add sortDictionary.js
+  - from sort.js
+  - sortDictionary add args casePriority
+  - support full object parameter
 
 ### 7.6.0
 #### 2020/09/07(Mon)
