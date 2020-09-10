@@ -147,9 +147,10 @@ export default {
   isNotObjectLikeAll, isNotModuleAll,
   isNotArrayAll, isNotArraySeriesAll,
   isNotDateAll, isNotRegExpAll,
-  isNotExceptionAll,
   isNotBooleanObjectAll, isNotNumberObjectAll, isNotStringObjectAll,
   isNotEmptyObjectAll, isNotEmptyArrayAll,
+
+  isNotExceptionAll,
   isNotSymbolAll,
   isNotMapAll, isNotWeakMapAll,
   isNotSetAll, isNotWeakSetAll,

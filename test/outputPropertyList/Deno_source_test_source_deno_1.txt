@@ -1,5 +1,4 @@
 
-._isTypeArray:[object Function]:function
 .allMatch:[object Function]:function
 .allMatchAll:[object Function]:function
 .allMatchSome:[object Function]:function
@@ -494,7 +493,6 @@
 .objectToValueArray:[object Function]:function
 .objectValues:[object Function]:function
 .or:[object Function]:function
-.parts._isTypeArray:[object Function]:function
 .parts.allMatch:[object Function]:function
 .parts.allMatchAll:[object Function]:function
 .parts.allMatchSome:[object Function]:function
@@ -1102,7 +1100,6 @@
 .parts.test.it:[object Function]:function
 .parts.test.test:[object Function]:function
 .parts.test.testCounter:[object Function]:function
-.parts.type._isTypeArray:[object Function]:function
 .parts.type.isArray:[object Function]:function
 .parts.type.isArrayAll:[object Function]:function
 .parts.type.isArrayArray:[object Function]:function
@@ -1493,7 +1490,6 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
-.type._isTypeArray:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function
 .type.isArrayArray:[object Function]:function

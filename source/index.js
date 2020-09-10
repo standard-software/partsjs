@@ -50,8 +50,6 @@ export const platform = {
  * type
  */
 export const {
-  isError,
-  // -----
   objectToString,
   // -----
   isUndefined, isNull, isNaNStrict,

@@ -51,7 +51,6 @@ export const {
 } = isSet_js;
 
 export const {
-
   isUndefinedAll, isNullAll, isNaNStrictAll,
   isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
   isFunctionAll,
@@ -59,11 +58,10 @@ export const {
   isObjectLikeAll, isModuleAll,
   isArrayAll, isArraySeriesAll,
   isDateAll, isRegExpAll,
-
-  isExceptionAll,
-
   isBooleanObjectAll, isNumberObjectAll, isStringObjectAll,
   isEmptyObjectAll, isEmptyArrayAll,
+
+  isExceptionAll,
   isSymbolAll,
   isMapAll, isWeakMapAll,
   isSetAll, isWeakSetAll,
@@ -75,13 +73,13 @@ export const {
   isNotObjectLikeAll, isNotModuleAll,
   isNotArrayAll, isNotArraySeriesAll,
   isNotDateAll, isNotRegExpAll,
-  isNotExceptionAll,
   isNotBooleanObjectAll, isNotNumberObjectAll, isNotStringObjectAll,
   isNotEmptyObjectAll, isNotEmptyArrayAll,
+
+  isNotExceptionAll,
   isNotSymbolAll,
   isNotMapAll, isNotWeakMapAll,
   isNotSetAll, isNotWeakSetAll,
-
 } = isTypeAll_js;
 
 export const {
@@ -142,6 +140,37 @@ export default {
   ...isSymbol_js,
   ...isMap_js,
   ...isSet_js,
-  ...isTypeAll_js,
+
+  // isTypeAll
+  isUndefinedAll, isNullAll, isNaNStrictAll,
+  isBooleanAll, isNumberAll, isIntegerAll, isStringAll,
+  isFunctionAll,
+  isObjectAll, isObjectNormalAll, isObjectFromNullAll,
+  isObjectLikeAll, isModuleAll,
+  isArrayAll, isArraySeriesAll,
+  isDateAll, isRegExpAll,
+  isBooleanObjectAll, isNumberObjectAll, isStringObjectAll,
+  isEmptyObjectAll, isEmptyArrayAll,
+
+  isExceptionAll,
+  isSymbolAll,
+  isMapAll, isWeakMapAll,
+  isSetAll, isWeakSetAll,
+
+  isNotUndefinedAll, isNotNullAll, isNotNaNStrictAll,
+  isNotBooleanAll, isNotNumberAll, isNotIntegerAll, isNotStringAll,
+  isNotFunctionAll,
+  isNotObjectAll, isNotObjectNormalAll, isNotObjectFromNullAll,
+  isNotObjectLikeAll, isNotModuleAll,
+  isNotArrayAll, isNotArraySeriesAll,
+  isNotDateAll, isNotRegExpAll,
+  isNotBooleanObjectAll, isNotNumberObjectAll, isNotStringObjectAll,
+  isNotEmptyObjectAll, isNotEmptyArrayAll,
+
+  isNotExceptionAll,
+  isNotSymbolAll,
+  isNotMapAll, isNotWeakMapAll,
+  isNotSetAll, isNotWeakSetAll,
+
   ...isTypeArray_js,
 };

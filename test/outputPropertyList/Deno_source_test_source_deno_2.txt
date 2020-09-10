@@ -1,5 +1,4 @@
 
-._isTypeArray:[object Function]:function
 .allMatch:[object Function]:function
 .allMatchAll:[object Function]:function
 .allMatchSome:[object Function]:function
@@ -607,7 +606,6 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
-.type._isTypeArray:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function
 .type.isArrayArray:[object Function]:function

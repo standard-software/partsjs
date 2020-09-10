@@ -149,7 +149,6 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
-.default._isTypeArray:[object Function]:function
 .default.allMatch:[object Function]:function
 .default.allMatchAll:[object Function]:function
 .default.allMatchSome:[object Function]:function
@@ -644,7 +643,6 @@
 .default.objectToValueArray:[object Function]:function
 .default.objectValues:[object Function]:function
 .default.or:[object Function]:function
-.default.parts._isTypeArray:[object Function]:function
 .default.parts.allMatch:[object Function]:function
 .default.parts.allMatchAll:[object Function]:function
 .default.parts.allMatchSome:[object Function]:function
@@ -1252,7 +1250,6 @@
 .default.parts.test.it:[object Function]:function
 .default.parts.test.test:[object Function]:function
 .default.parts.test.testCounter:[object Function]:function
-.default.parts.type._isTypeArray:[object Function]:function
 .default.parts.type.isArray:[object Function]:function
 .default.parts.type.isArrayAll:[object Function]:function
 .default.parts.type.isArrayArray:[object Function]:function
@@ -1643,7 +1640,6 @@
 .default.test.it:[object Function]:function
 .default.test.test:[object Function]:function
 .default.test.testCounter:[object Function]:function
-.default.type._isTypeArray:[object Function]:function
 .default.type.isArray:[object Function]:function
 .default.type.isArrayAll:[object Function]:function
 .default.type.isArrayArray:[object Function]:function
@@ -1974,7 +1970,6 @@
 .isEmptyObject:[object Function]:function
 .isEmptyObjectAll:[object Function]:function
 .isEmptyObjectArray:[object Function]:function
-.isError:[object Undefined]:undefined
 .isEven:[object Function]:function
 .isExcept:[object Function]:function
 .isExceptAll:[object Function]:function
@@ -2266,7 +2261,6 @@
 .objectToValueArray:[object Function]:function
 .objectValues:[object Function]:function
 .or:[object Function]:function
-.parts._isTypeArray:[object Function]:function
 .parts.allMatch:[object Function]:function
 .parts.allMatchAll:[object Function]:function
 .parts.allMatchSome:[object Function]:function
@@ -2874,7 +2868,6 @@
 .parts.test.it:[object Function]:function
 .parts.test.test:[object Function]:function
 .parts.test.testCounter:[object Function]:function
-.parts.type._isTypeArray:[object Function]:function
 .parts.type.isArray:[object Function]:function
 .parts.type.isArrayAll:[object Function]:function
 .parts.type.isArrayArray:[object Function]:function
@@ -3265,7 +3258,6 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
-.type._isTypeArray:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function
 .type.isArrayArray:[object Function]:function
