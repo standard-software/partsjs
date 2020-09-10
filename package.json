@@ -24,11 +24,27 @@
     "start":              "npm run test:source:deno && npm run build:babel && npm run test:babel:node && npm run build:webpack && npm run test:webpack:node && npm run copy:release",
     "start:wsh":          "npm start && npm run test:webpack:wsh",
     "start:jest":         "npm start && jest",
+    "test:source:deno:watch": "npm-watch test:source:deno",
+    "start:watch":        "npm-watch start",
     "eslint":             "eslint",
     "eslint:fix":         "eslint --fix ./source/*.js ./source/*/*.js",
     "jest":               "jest",
     "jest:watch":         "jest --watchAll",
     "": ""
+  },
+  "watch": {
+    "test:source:deno": {
+      "patterns": [
+        "source"
+      ],
+      "extensions": "js"
+    },
+    "start": {
+      "patterns": [
+        "source"
+      ],
+      "extensions": "js"
+    }
   },
   "repository": {
     "type": "git",
@@ -50,6 +66,7 @@
     "fs-extra": "^9.0.1",
     "jest": "^25.5.4",
     "moment": "^2.27.0",
+    "npm-watch": "^0.7.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },

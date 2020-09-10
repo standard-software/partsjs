@@ -316,6 +316,7 @@ You can now use the functions of the parts.js object.
   - from sort.js
   - sortDictionary add args casePriority
   - support full object parameter
+- install npm-watch
 
 ### 7.6.0
 #### 2020/09/07(Mon)
