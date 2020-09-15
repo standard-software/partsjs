@@ -317,6 +317,12 @@ You can now use the functions of the parts.js object.
   - sortDictionary add args casePriority
   - support full object parameter
 - install npm-watch
+- npx @google/clasp create
+  - test/release/clasp
+    - test_parts_spreadsheet_Rhino
+    - test_parts_spreadsheet_v8
+    - test_parts_standalone_Rhino
+    - test_parts_standalone_v8
 
 ### 7.6.0
 #### 2020/09/07(Mon)
