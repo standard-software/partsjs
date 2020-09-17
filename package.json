@@ -30,6 +30,18 @@
     "eslint:fix":         "eslint --fix ./source/*.js ./source/*/*.js",
     "jest":               "jest",
     "jest:watch":         "jest --watchAll",
+    "_copy:sheet:rhino:parts":      "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/parts.js', './test/release/clasp/test_parts_spreadsheet_Rhino/parts.js')\"",
+    "_copy:sheet:rhino:test_parts": "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/test_parts.js', './test/release/clasp/test_parts_spreadsheet_Rhino/test_parts.js')\"",
+    "copy:sheet:rhino":             "npm run _copy:sheet:rhino:parts && npm run _copy:sheet:rhino:test_parts",
+    "_copy:sheet:v8:parts":         "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/parts.js', './test/release/clasp/test_parts_spreadsheet_v8/parts.js')\"",
+    "_copy:sheet:v8:test_parts":    "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/test_parts.js', './test/release/clasp/test_parts_spreadsheet_v8/test_parts.js')\"",
+    "copy:sheet:v8":                "npm run _copy:sheet:v8:parts && npm run _copy:sheet:v8:test_parts",
+    "_copy:standalone:rhino:parts":      "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/parts.js', './test/release/clasp/test_parts_standalone_Rhino/parts.js')\"",
+    "_copy:standalone:rhino:test_parts": "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/test_parts.js', './test/release/clasp/test_parts_standalone_Rhino/test_parts.js')\"",
+    "copy:standalone:rhino":             "npm run _copy:standalone:rhino:parts && npm run _copy:standalone:rhino:test_parts",
+    "_copy:standalone:v8:parts":         "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/parts.js', './test/release/clasp/test_parts_standalone_v8/parts.js')\"",
+    "_copy:standalone:v8:test_parts":    "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/test_parts.js', './test/release/clasp/test_parts_standalone_v8/test_parts.js')\"",
+    "copy:standalone:v8":                "npm run _copy:standalone:v8:parts && npm run _copy:standalone:v8:test_parts",
     "": ""
   },
   "watch": {
