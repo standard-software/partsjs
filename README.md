@@ -294,7 +294,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.0.0
-#### 2020/09/09(Wed)
+#### 2020/09/17(Thu)
 - update platform.js
   - isNodeJs >> isNode
   - name() Node.js >> Node
@@ -317,7 +317,7 @@ You can now use the functions of the parts.js object.
   - sortDictionary add args casePriority
   - support full object parameter
 - install npm-watch
-- npx @google/clasp create
+- install @google/clasp
   - test/release/clasp
     - test_parts_spreadsheet_Rhino
     - test_parts_spreadsheet_v8
