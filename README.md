@@ -294,7 +294,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.0.0
-#### 2020/09/17(Thu)
+#### 2020/09/27(Sun)
 - update platform.js
   - isNodeJs >> isNode
   - name() Node.js >> Node
@@ -323,6 +323,10 @@ You can now use the functions of the parts.js object.
     - test_parts_spreadsheet_v8
     - test_parts_standalone_Rhino
     - test_parts_standalone_v8
+- update split
+  - excludeSpace >> executeConvert
+    - all >> excludeSpace
+    - trim >> trimSpace
 
 ### 7.6.0
 #### 2020/09/07(Mon)

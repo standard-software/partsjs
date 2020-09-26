@@ -6,7 +6,7 @@ import {
 } from '../type/type.js';
 
 import {
-  split,
+  _split, split,
 } from './split.js';
 
 import {
@@ -22,7 +22,12 @@ export const _splitCommaItems = (str) => {
     return [];
   }
 
-  const result = split(str, ',', split.excludeEmptyStr.last, split.excludeSpace.trim);
+  const result = _split(
+    str,
+    ',',
+    split.excludeEmptyStr.last,
+    split.executeConvert.trimSpaceCrlf,
+  );
   if (__includes(result, '')) {
     throw new Error('_splitCommaItems args(str) is not correct format');
   }

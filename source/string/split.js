@@ -47,26 +47,45 @@ import {
 export const _split = (
   str, separator,
   excludeEmptyStr = split.excludeEmptyStr.none,
-  excludeSpace = split.excludeSpace.none,
+  executeConvert = split.executeConvert.none,
 ) => {
   const result = str.split(separator);
 
-  switch (excludeSpace) {
-  case split.excludeSpace.none:
+  switch (executeConvert) {
+  case split.executeConvert.none:
     break;
-  case split.excludeSpace.trim:
+  case split.executeConvert.trimSpace:
     loop(result)((e, i) => {
       result[i] = _trimBothEnds(e, [' ']);
     });
     break;
-  case split.excludeSpace.all:
+  case split.executeConvert.trimSpaceCrlf:
+    loop(result)((e, i) => {
+      result[i] = _trimBothEnds(e);
+    });
+    break;
+  case split.executeConvert.excludeSpace:
     loop(result)((e, i) => {
       result[i] = _replaceAll(e, ' ', '');
     });
     break;
+  case split.executeConvert.excludeSpaceCrlf:
+    loop(result)((e, i) => {
+      result[i] = _replaceAll(
+        _replaceAll(
+          _replaceAll(
+            e,
+            '\n', '',
+          ),
+          '\r', '',
+        ),
+        ' ', '',
+      );
+    });
+    break;
   default:
     throw new TypeError(
-      '_split args(excludeSpace) is not ["none"|"trim"|"all"]',
+      '_split args(executeConvert) is not ["none"|"trim"|"all"]',
     );
   }
 
@@ -112,34 +131,34 @@ export const _split = (
 export const split = (
   str, separator,
   excludeEmptyStr = split.excludeEmptyStr.none,
-  excludeSpace = split.excludeSpace.none,
+  executeConvert = split.executeConvert.none,
 ) => {
   if (
-    isObjectParameter(str, 'str, separator', 'excludeEmptyStr, excludeSpace')
+    isObjectParameter(str, 'str, separator', 'excludeEmptyStr, executeConvert')
   ) {
     ({
       str, separator,
       excludeEmptyStr = split.excludeEmptyStr.none,
-      excludeSpace = split.excludeSpace.none,
+      executeConvert = split.executeConvert.none,
     } = str);
   } else if (
-    isObjectParameter(separator, 'separator', 'excludeEmptyStr, excludeSpace')
+    isObjectParameter(separator, 'separator', 'excludeEmptyStr, executeConvert')
   ) {
     ({ separator,
       excludeEmptyStr = split.excludeEmptyStr.none,
-      excludeSpace = split.excludeSpace.none,
+      executeConvert = split.executeConvert.none,
     } = separator);
   } else if (
-    isObjectParameter(excludeEmptyStr, '', 'excludeEmptyStr, excludeSpace', 1)
+    isObjectParameter(excludeEmptyStr, '', 'excludeEmptyStr, executeConvert', 1)
   ) {
     ({
       excludeEmptyStr = split.excludeEmptyStr.none,
-      excludeSpace = split.excludeSpace.none,
+      executeConvert = split.executeConvert.none,
     } = excludeEmptyStr);
   } else if (
-    isObjectParameter(excludeSpace, 'excludeSpace')
+    isObjectParameter(executeConvert, 'executeConvert')
   ) {
-    ({ excludeSpace } = excludeSpace);
+    ({ executeConvert } = executeConvert);
   }
 
   if (!isString(str)) {
@@ -153,18 +172,22 @@ export const split = (
       'split args(excludeEmptyStr) is not ["none","first","last","bothEnds","all"]',
     );
   }
-  if (!_or(excludeSpace, _objectValues(split.excludeSpace))) {
+  if (!_or(executeConvert, _objectValues(split.executeConvert))) {
     throw new TypeError(
-      'split args(excludeSpace) is not ["none","trim","all"]',
+      'split args(executeConvert) is not ["none","trim","all"]',
     );
   }
 
-  return _split(str, separator, excludeEmptyStr, excludeSpace);
+  return _split(str, separator, excludeEmptyStr, executeConvert);
 };
 
 split.excludeEmptyStr = _Enum(['none', 'first', 'last', 'bothEnds', 'all']);
 
-split.excludeSpace = _Enum(['none', 'trim', 'all']);
+split.executeConvert = _Enum([
+  'none',
+  'trimSpace', 'trimSpaceCrlf',
+  'excludeSpace', 'excludeSpaceCrlf',
+]);
 
 export default {
   _split, split,

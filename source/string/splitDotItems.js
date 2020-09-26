@@ -18,7 +18,12 @@ export const _splitDotItems = (str) => {
     return [];
   }
 
-  const result = split(str, '.', split.excludeEmptyStr.first, split.excludeSpace.none);
+  const result = split(
+    str,
+    '.',
+    split.excludeEmptyStr.first,
+    split.executeConvert.none,
+  );
   if (__includes(result, '')) {
     throw new Error(`_splitDotItems args(str:${str}) is not correct format`);
   }

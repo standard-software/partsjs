@@ -1516,28 +1516,28 @@ export const test_execute_string = (parts) => {
           split(
             ',, A B C ,, DE F ,, G HI ,,', ',',
             split.excludeEmptyStr.none,
-            split.excludeSpace.none,
+            split.executeConvert.none,
           ),
         );
         checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''],
           split(
             ',, A B C ,, DE F ,, G HI ,,', ',',
             split.excludeEmptyStr.none,
-            split.excludeSpace.trim,
+            split.executeConvert.trimSpace,
           ),
         );
         checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
           split(
             ',, A B C ,, DE F ,, G HI ,,', ',',
             split.excludeEmptyStr.none,
-            split.excludeSpace.all,
+            split.executeConvert.excludeSpace,
           ),
         );
         checkEqual(['ABC', 'DEF', 'GHI'],
           split(
             ' , , A B C , , DE F ,, G HI , , ', ',',
             split.excludeEmptyStr.all,
-            split.excludeSpace.all,
+            split.executeConvert.excludeSpace,
           ),
         );
 
@@ -1566,12 +1566,13 @@ export const test_execute_string = (parts) => {
         checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.all) );
 
         // object parameter
+        testCounter();
         checkEqual(['ABC', 'DEF', 'GHI'],
           split({
             str: ',, A B C ,, DE F ,, G HI ,,',
             separator: ',',
             excludeEmptyStr: split.excludeEmptyStr.all,
-            excludeSpace: split.excludeSpace.all,
+            executeConvert: split.executeConvert.excludeSpace,
           }),
         );
         checkEqual(['ABC', 'DEF', 'GHI'],
@@ -1580,7 +1581,7 @@ export const test_execute_string = (parts) => {
             {
               separator: ',',
               excludeEmptyStr: split.excludeEmptyStr.all,
-              excludeSpace: split.excludeSpace.all,
+              executeConvert: split.executeConvert.excludeSpace,
             },
           ),
         );
@@ -1590,7 +1591,7 @@ export const test_execute_string = (parts) => {
             ',',
             {
               excludeEmptyStr: split.excludeEmptyStr.all,
-              excludeSpace: split.excludeSpace.all,
+              executeConvert: split.executeConvert.excludeSpace,
             },
           ),
         );
@@ -1600,7 +1601,7 @@ export const test_execute_string = (parts) => {
             ',',
             split.excludeEmptyStr.all,
             {
-              excludeSpace: split.excludeSpace.all,
+              executeConvert: split.executeConvert.excludeSpace,
             },
           ),
         );
@@ -1633,7 +1634,7 @@ export const test_execute_string = (parts) => {
           split({
             str: ',, A B C ,, DE F ,, G HI ,,',
             separator: ',',
-            excludeSpace: split.excludeSpace.all,
+            executeConvert: split.executeConvert.excludeSpace,
           }),
         );
         checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''],
@@ -1641,7 +1642,7 @@ export const test_execute_string = (parts) => {
             ',, A B C ,, DE F ,, G HI ,,',
             {
               separator: ',',
-              excludeSpace: split.excludeSpace.all,
+              executeConvert: split.executeConvert.excludeSpace,
             },
           ),
         );
@@ -1650,7 +1651,7 @@ export const test_execute_string = (parts) => {
             ',, A B C ,, DE F ,, G HI ,,',
             ',',
             {
-              excludeSpace: split.excludeSpace.all,
+              executeConvert: split.executeConvert.excludeSpace,
             },
           ),
         );
