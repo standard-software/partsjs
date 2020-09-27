@@ -591,6 +591,7 @@
 .default.isWeakSet:[object Function]:function
 .default.isWeakSetAll:[object Function]:function
 .default.isWeakSetArray:[object Function]:function
+.default.keepMinMax:[object Function]:function
 .default.loop:[object Function]:function
 .default.makeInRange:[object Function]:function
 .default.match:[object Function]:function
@@ -608,6 +609,7 @@
 .default.number.isEven:[object Function]:function
 .default.number.isMultiples:[object Function]:function
 .default.number.isOdd:[object Function]:function
+.default.number.keepMinMax:[object Function]:function
 .default.number.makeInRange:[object Function]:function
 .default.number.nearEqual:[object Function]:function
 .default.number.randomInt:[object Function]:function
@@ -1087,6 +1089,7 @@
 .default.parts.isWeakSet:[object Function]:function
 .default.parts.isWeakSetAll:[object Function]:function
 .default.parts.isWeakSetArray:[object Function]:function
+.default.parts.keepMinMax:[object Function]:function
 .default.parts.loop:[object Function]:function
 .default.parts.makeInRange:[object Function]:function
 .default.parts.match:[object Function]:function
@@ -1104,6 +1107,7 @@
 .default.parts.number.isEven:[object Function]:function
 .default.parts.number.isMultiples:[object Function]:function
 .default.parts.number.isOdd:[object Function]:function
+.default.parts.number.keepMinMax:[object Function]:function
 .default.parts.number.makeInRange:[object Function]:function
 .default.parts.number.nearEqual:[object Function]:function
 .default.parts.number.randomInt:[object Function]:function
@@ -2214,6 +2218,7 @@
 .isWeakSet:[object Function]:function
 .isWeakSetAll:[object Function]:function
 .isWeakSetArray:[object Function]:function
+.keepMinMax:[object Function]:function
 .loop:[object Function]:function
 .makeInRange:[object Function]:function
 .match:[object Function]:function
@@ -2231,6 +2236,7 @@
 .number.isEven:[object Function]:function
 .number.isMultiples:[object Function]:function
 .number.isOdd:[object Function]:function
+.number.keepMinMax:[object Function]:function
 .number.makeInRange:[object Function]:function
 .number.nearEqual:[object Function]:function
 .number.randomInt:[object Function]:function
@@ -2710,6 +2716,7 @@
 .parts.isWeakSet:[object Function]:function
 .parts.isWeakSetAll:[object Function]:function
 .parts.isWeakSetArray:[object Function]:function
+.parts.keepMinMax:[object Function]:function
 .parts.loop:[object Function]:function
 .parts.makeInRange:[object Function]:function
 .parts.match:[object Function]:function
@@ -2727,6 +2734,7 @@
 .parts.number.isEven:[object Function]:function
 .parts.number.isMultiples:[object Function]:function
 .parts.number.isOdd:[object Function]:function
+.parts.number.keepMinMax:[object Function]:function
 .parts.number.makeInRange:[object Function]:function
 .parts.number.nearEqual:[object Function]:function
 .parts.number.randomInt:[object Function]:function

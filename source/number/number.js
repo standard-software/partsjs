@@ -151,9 +151,9 @@ export const inRange = (value, from, to) => {
 };
 
 /**
- * makeInRange
+ * keepMinMax
  */
-export const _makeInRange = (value, from, to) => {
+export const _keepMinMax = (value, from, to) => {
   if (value < from) {
     return from;
   }
@@ -163,33 +163,33 @@ export const _makeInRange = (value, from, to) => {
   return value;
 };
 
-export const makeInRange = (value, from, to) => {
-  if (isObjectParameter(value, 'value, from, to')) {
-    ({ value, from, to } = value);
+export const keepMinMax = (value, min, to) => {
+  if (isObjectParameter(value, 'value, min, to')) {
+    ({ value, min, to } = value);
   }
 
   if (!isNumber(value)) {
     throw new TypeError(
-      'makeInRange args(value) is not number',
+      'keepMinMax args(value) is not number',
     );
   }
-  if (!isNumber(from)) {
+  if (!isNumber(min)) {
     throw new TypeError(
-      'makeInRange args(from) is not number',
+      'keepMinMax args(from) is not number',
     );
   }
   if (!isNumber(to)) {
     throw new TypeError(
-      'makeInRange args(to) is not number',
+      'keepMinMax args(to) is not number',
     );
   }
-  if (!(from <= to)) {
+  if (!(min <= to)) {
     throw new RangeError(
-      'makeInRange args(from,to) must be from <= to',
+      'keepMinMax args(from,to) must be from <= to',
     );
   }
 
-  return _makeinRange(value, from, to);
+  return _keepMinMax(value, min, to);
 };
 
 
@@ -219,16 +219,19 @@ export const randomInt = (min, max) => {
   return _randomInt(min, max);
 };
 
+export const makeInRange = keepMinMax;
+
 export default {
   _isMultiples,
   _round, _nearEqual,
-  _inRange, _makeInRange,
+  _inRange, _keepMinMax,
   _randomInt,
 
   isMultiples, isEven, isOdd,
   round, nearEqual,
-  inRange, makeInRange,
+  inRange, keepMinMax,
   randomInt,
 
+  makeInRange,
 };
 

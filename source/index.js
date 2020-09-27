@@ -406,22 +406,28 @@ export const convert = {
 export const {
   isMultiples, isEven, isOdd,
   round, nearEqual,
-  inRange, makeInRange,
+  inRange, keepMinMax,
   randomInt,
+
+  makeInRange,
 } = _number;
 
 rootAlias = { ...rootAlias,
   isMultiples, isEven, isOdd,
   round, nearEqual,
-  inRange, makeInRange,
+  inRange, keepMinMax,
   randomInt,
+
+  makeInRange,
 };
 
 export const number = _copyProperty(_number, `
   isMultiples, isEven, isOdd,
   round, nearEqual,
-  inRange, makeInRange,
+  inRange, keepMinMax,
   randomInt,
+
+  makeInRange,
 `);
 // export const number = {
 //   ..._number,

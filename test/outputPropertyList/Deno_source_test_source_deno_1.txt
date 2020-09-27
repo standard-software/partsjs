@@ -440,6 +440,7 @@
 .isWeakSet:[object Function]:function
 .isWeakSetAll:[object Function]:function
 .isWeakSetArray:[object Function]:function
+.keepMinMax:[object Function]:function
 .loop:[object Function]:function
 .makeInRange:[object Function]:function
 .match:[object Function]:function
@@ -457,6 +458,7 @@
 .number.isEven:[object Function]:function
 .number.isMultiples:[object Function]:function
 .number.isOdd:[object Function]:function
+.number.keepMinMax:[object Function]:function
 .number.makeInRange:[object Function]:function
 .number.nearEqual:[object Function]:function
 .number.randomInt:[object Function]:function
@@ -936,6 +938,7 @@
 .parts.isWeakSet:[object Function]:function
 .parts.isWeakSetAll:[object Function]:function
 .parts.isWeakSetArray:[object Function]:function
+.parts.keepMinMax:[object Function]:function
 .parts.loop:[object Function]:function
 .parts.makeInRange:[object Function]:function
 .parts.match:[object Function]:function
@@ -953,6 +956,7 @@
 .parts.number.isEven:[object Function]:function
 .parts.number.isMultiples:[object Function]:function
 .parts.number.isOdd:[object Function]:function
+.parts.number.keepMinMax:[object Function]:function
 .parts.number.makeInRange:[object Function]:function
 .parts.number.nearEqual:[object Function]:function
 .parts.number.randomInt:[object Function]:function

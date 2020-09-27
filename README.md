@@ -334,6 +334,7 @@ You can now use the functions of the parts.js object.
 - add _Enum.js from Enum.js
 - add _isObjectParameter
 - rename arrayToIndexValueArray.js >> arrayEntries.js
+- rename makeInRange >> keepMinMax
 - uddate index.js
   - export structural changes
 

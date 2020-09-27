@@ -6,7 +6,7 @@ import {
 } from '../type/type.js';
 
 import {
-  _inRange, _makeInRange,
+  _inRange, _keepMinMax,
 } from '../number/number.js';
 
 import {
