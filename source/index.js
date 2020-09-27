@@ -15,7 +15,7 @@ import _array from './array/array.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 import _wsh from './wsh/wsh.js';
 
-export const VERSION = '8.0.0 beta';
+export const VERSION = '8.0.0';
 
 let rootAlias = {};
 const propertyNames = {};
