@@ -1,5 +1,7 @@
 import array_common_js from './array_common.js';
+import _NumberArray_js from './_NumberArray.js';
 import NumberArray_js from './NumberArray.js';
+import _IntegerArray_js from './_IntegerArray.js';
 import IntegerArray_js from './IntegerArray.js';
 import arrayToIndexValueArray_js from './arrayToIndexValueArray.js';
 import group_js from './group.js';
@@ -41,11 +43,17 @@ export const {
 
 export const {
   _NumberArray,
+} = _NumberArray_js;
+
+export const {
   NumberArray,
 } = NumberArray_js;
 
 export const {
   _IntegerArray,
+} = _IntegerArray_js;
+
+export const {
   IntegerArray,
 } = IntegerArray_js;
 

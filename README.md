@@ -328,6 +328,11 @@ You can now use the functions of the parts.js object.
     - all >> excludeSpace
     - trim >> trimSpace
 - add _split.js from split.js
+- add _IntegerArray.js from IntegerArray.js
+- add _NumberArray.js from NumberArray.js
+- add __loop.js / _loop.js from loop.js
+- add _Enum.js from Enum.js
+- add _isObjectParameter
 
 ### 7.6.0
 #### 2020/09/07(Mon)

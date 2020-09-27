@@ -8,6 +8,10 @@ import {
   _replaceAll,
 } from '../string/_replaceAll.js';
 
+// import {
+//   _splitCommaItems,
+// } from '../string/splitCommaItems.js';
+
 import {
   _propertyCount,
 } from '../object/_propertyCount.js';
@@ -23,28 +27,21 @@ import {
 /**
  * isObjectParameter
  */
-export const isObjectParameter = (
+export const _isObjectParameter = (
   object,
   props,
   optionalProps = '',
   optionalMinCount = 0,
 ) => {
-
   if (!isObject(object)) {
-    return false;
-  }
-  if (!isString(props)) {
-    return false;
-  }
-  if (!isString(optionalProps)) {
     return false;
   }
 
   props = _replaceAll(props, ' ', '').split(',');
-  // last element === '' delete
   if (props[props.length - 1]  === '') {
     props.splice(props.length - 1, 1);
   }
+  // props = _splitCommaItems(props); // Circular reference Error
 
   optionalProps = _replaceAll(optionalProps, ' ', '').split(',');
   if (optionalProps[optionalProps.length - 1]  === '') {
@@ -74,6 +71,35 @@ export const isObjectParameter = (
   return true;
 };
 
+export const isObjectParameter = (
+  object,
+  props,
+  optionalProps = '',
+  optionalMinCount = 0,
+) => {
+
+  if (!isString(props)) {
+    throw new TypeError(
+      'isObjectParameter args(props) is not string',
+    );
+  }
+  if (!isString(optionalProps)) {
+    throw new TypeError(
+      'isObjectParameter args(optionalProps) is not string',
+    );
+  }
+  if (!isInteger(optionalMinCount)) {
+    throw new TypeError(
+      'isObjectParameter args(optionalMinCount) is not integer',
+    );
+  }
+
+  return _isObjectParameter(
+    object, props, optionalProps, optionalMinCount,
+  );
+};
+
 export default {
+  _isObjectParameter,
   isObjectParameter,
 };

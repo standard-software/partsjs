@@ -24,7 +24,7 @@ import {
 
 import {
   _Enum,
-} from '../../syntax/Enum.js';
+} from '../../syntax/_Enum.js';
 
 import {
   sort,

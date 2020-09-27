@@ -11,7 +11,7 @@ import {
 
 import {
   _IntegerArray,
-} from '../array/IntegerArray.js';
+} from '../array/_IntegerArray.js';
 
 import {
   objectEntries,

@@ -13,25 +13,13 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
+import {
+  _Enum,
+} from '../syntax/_Enum.js';
+
 /**
  * Enum
  */
-export const _Enum = function(values, useIndex = false) {
-  if (!(this instanceof _Enum)) {
-    return new _Enum(values, useIndex);
-  }
-
-  if (useIndex === false) {
-    for (let i = 0, l = values.length; i < l; i += 1) {
-      this[values[i]] = values[i];
-    }
-  } else {
-    for (let i = 0, l = values.length; i < l; i += 1) {
-      this[values[i]] = i;
-    }
-  }
-};
-
 export const Enum = function(values, useIndex = false) {
   if (isObjectParameter(values, 'values', 'useIndex')) {
     ({ values, useIndex = false } = values);

@@ -14,51 +14,13 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
+import {
+  _NumberArray,
+} from '../array/_NumberArray.js';
+
 /**
  * NumberArray
  */
-export const _NumberArray = (start, end, increment) => {
-
-  if (isUndefined(increment)) {
-    if (isUndefined(end)) {
-      increment = 1;
-      end = increment * start - 1;
-      start = 0;
-    } else {
-      if (start <= end) {
-        increment = 1;
-      } else {
-        increment = -1;
-      }
-    }
-  }
-
-  if (increment === 0) {
-    throw new RangeError('_NumberArray args(increment) is 0');
-  }
-  if (start <= end) {
-    if (increment < 0) {
-      throw new Error('_NumberArray args(increment) < 0');
-    }
-  } else {
-    if (increment > 0) {
-      throw new Error('_NumberArray args(increment) > 0');
-    }
-  }
-
-  const result = [];
-  if (start <= end) {
-    for (let i = start, l = end; i <= l; i += increment) {
-      result.push(i);
-    }
-  } else {
-    for (let i = start, l = end; l <= i; i += increment) {
-      result.push(i);
-    }
-  }
-  return result;
-};
-
 export const NumberArray = (start, end, increment) => {
 
   if (isObjectParameter(start, 'count')) {
@@ -92,7 +54,6 @@ export const NumberArray = (start, end, increment) => {
 };
 
 export default {
-  _NumberArray,
   NumberArray,
 };
 

@@ -7,11 +7,11 @@ import {
 
 import {
   _Enum,
-} from '../syntax/Enum.js';
+} from '../syntax/_Enum.js';
 
 import {
-  loop,
-} from '../syntax/loop.js';
+  __loop,
+} from '../syntax/__loop.js';
 
 import {
   _deleteFirst, _deleteLast, _filter,
@@ -28,10 +28,6 @@ import {
 import {
   _replaceAll,
 } from '../string/_replaceAll.js';
-
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
 
 import {
   _or,
@@ -55,22 +51,22 @@ export const _split = (
   case _split.executeConvert.none:
     break;
   case _split.executeConvert.trimSpace:
-    loop(result)((e, i) => {
+    __loop(result)((e, i) => {
       result[i] = _trimBothEnds(e, [' ']);
     });
     break;
   case _split.executeConvert.trimSpaceCrlf:
-    loop(result)((e, i) => {
+    __loop(result)((e, i) => {
       result[i] = _trimBothEnds(e);
     });
     break;
   case _split.executeConvert.excludeSpace:
-    loop(result)((e, i) => {
+    __loop(result)((e, i) => {
       result[i] = _replaceAll(e, ' ', '');
     });
     break;
   case _split.executeConvert.excludeSpaceCrlf:
-    loop(result)((e, i) => {
+    __loop(result)((e, i) => {
       result[i] = _replaceAll(
         _replaceAll(
           _replaceAll(

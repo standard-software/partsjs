@@ -15,16 +15,12 @@ import {
 } from '../object/isObjectParameter.js';
 
 import {
-  _NumberArray,
-} from '../array/NumberArray.js';
+  _IntegerArray,
+} from '../array/_IntegerArray.js';
 
 /**
  * IntegerArray
  */
-export const _IntegerArray = (start, end, increment) => {
-  return _NumberArray(start, end, increment);
-};
-
 export const IntegerArray = (start, end, increment) => {
 
   if (isObjectParameter(start, 'count')) {
@@ -58,7 +54,6 @@ export const IntegerArray = (start, end, increment) => {
 };
 
 export default {
-  _IntegerArray,
   IntegerArray,
 };
 

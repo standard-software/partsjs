@@ -16,7 +16,7 @@ import {
 
 import {
   _NumberArray,
-} from '../array/NumberArray.js';
+} from '../array/_NumberArray.js';
 
 /**
  * arrayToIndexValueArray
