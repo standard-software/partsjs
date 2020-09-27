@@ -6,8 +6,8 @@ import {
 } from '../type/type.js';
 
 import {
-  split,
-} from './split.js';
+  _split,
+} from './_split.js';
 
 import {
   __includes,
@@ -18,11 +18,11 @@ export const _splitDotItems = (str) => {
     return [];
   }
 
-  const result = split(
+  const result = _split(
     str,
     '.',
-    split.excludeEmptyStr.first,
-    split.executeConvert.none,
+    _split.excludeEmptyStr.first,
+    _split.executeConvert.none,
   );
   if (__includes(result, '')) {
     throw new Error(`_splitDotItems args(str:${str}) is not correct format`);

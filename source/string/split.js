@@ -41,93 +41,13 @@ import {
   _objectValues,
 } from '../object/objectValues.js';
 
+import {
+  _split,
+} from '../string/_split.js';
+
 /**
  * split
  */
-export const _split = (
-  str, separator,
-  excludeEmptyStr = split.excludeEmptyStr.none,
-  executeConvert = split.executeConvert.none,
-) => {
-  const result = str.split(separator);
-
-  switch (executeConvert) {
-  case split.executeConvert.none:
-    break;
-  case split.executeConvert.trimSpace:
-    loop(result)((e, i) => {
-      result[i] = _trimBothEnds(e, [' ']);
-    });
-    break;
-  case split.executeConvert.trimSpaceCrlf:
-    loop(result)((e, i) => {
-      result[i] = _trimBothEnds(e);
-    });
-    break;
-  case split.executeConvert.excludeSpace:
-    loop(result)((e, i) => {
-      result[i] = _replaceAll(e, ' ', '');
-    });
-    break;
-  case split.executeConvert.excludeSpaceCrlf:
-    loop(result)((e, i) => {
-      result[i] = _replaceAll(
-        _replaceAll(
-          _replaceAll(
-            e,
-            '\n', '',
-          ),
-          '\r', '',
-        ),
-        ' ', '',
-      );
-    });
-    break;
-  default:
-    throw new TypeError(
-      '_split args(executeConvert) is not ["none"|"trim"|"all"]',
-    );
-  }
-
-  switch (excludeEmptyStr) {
-  case split.excludeEmptyStr.none:
-    break;
-  case split.excludeEmptyStr.first:
-    if (1 <= result.length) {
-      if (_isFirst(result, [''])) {
-        _deleteFirst(result);
-      }
-    }
-    break;
-  case split.excludeEmptyStr.last:
-    if (2 <= result.length) {
-      if (_isLast(result, [''])) {
-        _deleteLast(result);
-      }
-    }
-    break;
-  case split.excludeEmptyStr.bothEnds:
-    if (2 <= result.length) {
-      if (_isFirst(result, [''])) {
-        _deleteFirst(result);
-      }
-      if (_isLast(result, [''])) {
-        _deleteLast(result);
-      }
-    }
-    break;
-  case split.excludeEmptyStr.all:
-    _filter(result, element => element !== '');
-    break;
-  default:
-    throw new TypeError(
-      '_split args(excludeEmptyStr) is not ["none"|"first"|"last"|"bothEnds"|"all"]',
-    );
-  }
-
-  return result;
-};
-
 export const split = (
   str, separator,
   excludeEmptyStr = split.excludeEmptyStr.none,
@@ -181,14 +101,10 @@ export const split = (
   return _split(str, separator, excludeEmptyStr, executeConvert);
 };
 
-split.excludeEmptyStr = _Enum(['none', 'first', 'last', 'bothEnds', 'all']);
+split.excludeEmptyStr = _split.excludeEmptyStr;
 
-split.executeConvert = _Enum([
-  'none',
-  'trimSpace', 'trimSpaceCrlf',
-  'excludeSpace', 'excludeSpaceCrlf',
-]);
+split.executeConvert = _split.executeConvert;
 
 export default {
-  _split, split,
+  split,
 };

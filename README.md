@@ -327,6 +327,7 @@ You can now use the functions of the parts.js object.
   - excludeSpace >> executeConvert
     - all >> excludeSpace
     - trim >> trimSpace
+- add _split.js from split.js
 
 ### 7.6.0
 #### 2020/09/07(Mon)
