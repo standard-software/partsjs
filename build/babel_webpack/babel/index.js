@@ -672,10 +672,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   Enum: Enum
 });
 
-var syntax = _copyProperty(_syntax2["default"], "\n  assert, guard,\n  functionValue,\n  sc, if_, switch_,\n  loop,\n  canUseMap, canUseWeakMap,\n  canUseSet, canUseWeakSet,\n  Enum,\n"); // export const syntax = {
-//   ..._syntax,
-// };
-
+var syntax = _objectSpread({}, _syntax2["default"]);
 /**
  * compare
  */
@@ -751,10 +748,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   includesAll: includesAll
 });
 
-var compare = _copyProperty(_compare2["default"], "\n  equal, equalDeep,\n  or,\n  match, matchValue, initialValue,\n  allMatch, indexOfMatch, someMatch,\n  matchSome, matchSomeValue,\n  allMatchSome, indexOfMatchSome, someMatchSome,\n  matchAll, matchAllValue,\n  allMatchAll, indexOfMatchAll, someMatchAll,\n  includes, includesSome, includesAll,\n"); // export const compare = {
-//   ..._compare,
-// };
-
+var compare = _objectSpread({}, _compare2["default"]);
 /**
  * convert
  */
@@ -854,11 +848,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   strToIntDef: strToIntDef
 });
 
-var convert = _objectSpread(_objectSpread({}, _copyProperty(_convert2["default"], "\n    numberToString,\n    valueToString,\n    stringToNumber, stringToNumberDefault,\n    stringToInteger, stringToIntegerDefault,\n    valueToNumber, valueToNumberDefault,\n    valueToInteger, valueToIntegerDefault,\n  ")), _copyProperty(_convertAlias2["default"], "\n    numToString,\n    valToString,\n    strToNumber, strToNumberDef,\n    strToInteger, strToIntegerDef,\n    valToNumber, valToNumberDef,\n    valToInteger, valToIntegerDef,\n\n    numToStr,\n    valToStr,\n    valToNum, valToNumDef,\n    valToInt, valToIntDef,\n\n    strToNum, strToNumDef,\n    strToInt, strToIntDef,\n  ")); // export const convert = {
-//   ..._convert,
-//   ..._convertAlias,
-// };
-
+var convert = _objectSpread(_objectSpread({}, _convert2["default"]), _convertAlias2["default"]);
 /**
  * number
  */
@@ -895,10 +885,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   makeInRange: makeInRange
 });
 
-var number = _copyProperty(_number2["default"], "\n  isMultiples, isEven, isOdd,\n  round, nearEqual,\n  inRange, keepMinMax,\n  randomInt,\n\n  makeInRange,\n"); // export const number = {
-//   ..._number,
-// };
-
+var number = _objectSpread({}, _number2["default"]);
 /**
  * string
  */
@@ -929,10 +916,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   splitDotItems: splitDotItems
 });
 
-var string = _copyProperty(_string2["default"], "\n  repeat,\n  isLowerCase, isUpperCase,\n  indexOfFirst, indexOfLast,\n  isFirst, isLast, isBothEnds,\n  includeFirst, includeLast, includeBothEnds,\n  excludeFirst, excludeLast, excludeBothEnds,\n  trimFirst, trimLast, trimBothEnds,\n  subIndex, subLength, subFirst, subLast,\n  deleteIndex, deleteLength, deleteFirst, deleteLast,\n  insert, add,\n  replaceAll,\n  matchFormat,\n  subFirstDelimFirst,\n  subFirstDelimLast,\n  subLastDelimFirst,\n  subLastDelimLast,\n  tagInnerFirst,\n  tagOuterFirst,\n  tagInnerLast,\n  tagOuterLast,\n  split,\n  splitCommaItems,\n  splitDotItems,\n"); // export const string = {
-//   ..._string,
-// };
-
+var string = _objectSpread({}, _string2["default"]);
 /**
  * object
  */
@@ -1010,10 +994,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   propCount: propCount
 });
 
-var object = _copyProperty(_object2["default"], "\n  isObjectParameter,\n\n  copyProperty,\n  getProperty,\n  setProperty,\n  inProperty,\n  fixProperty,\n  propertyCount,\n  propertyList,\n  objectEntries,\n  objectKeys,\n  objectValues,\n  hasOwn,\n  hasPrototype,\n  has,\n\n  objectToKeyValueArray,\n  objectToKeyArray,\n  objectToValueArray,\n\n  copyProp,\n  getProp,\n  setProp,\n  inProp,\n  fixProp,\n  propCount,\n"); // export const object = {
-//   ..._object,
-// };
-
+var object = _objectSpread({}, _object2["default"]);
 /**
  * array
  */
@@ -1038,16 +1019,10 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   median: median
 });
 
-var array = _copyProperty(_array2["default"], "\n  from,\n\n  min, max,\n  sum, average, median,\n  mode,\n  single, multiple,\n  filter, map, count,\n  findFirstIndex, findLastIndex,\n  findFirst, findLast,\n  some, all,\n  isFirst, isLast, isBothEnds,\n  subIndex, subLength,\n  subFirst, subLast,\n  group,\n  unique,\n\n  NumberArray,\n  IntegerArray,\n  arrayEntries,\n\n  findIndex, findBackIndex,\n  find, findBack,\n  every,\n  arrayToIndexValueArray,\n"); // export const array = {
-//   ..._array,
-// };
-
+var array = _objectSpread({}, _array2["default"]);
 
 exports.array = array;
-array.operation = _copyProperty(_array2["default"].operation, "\n  insert, add,\n  deleteLength, deleteIndex,\n  deleteFirst, deleteLast,\n  includeFirst, includeLast, includeBothEnds,\n  excludeFirst, excludeLast, excludeBothEnds,\n  trimFirst, trimLast, trimBothEnds,\n  popFirst, popLast,\n  pushFirst, pushLast,\n  remainFirst, remainLast,\n  filter,\n\n  sort,\n  sortNumber,\n  sortLength,\n  sortNumberAscending, sortNumberDescending,\n  sortLengthAscending, sortLengthDescending,\n\n  sortDictionary,\n  sortDictionaryAscending, sortDictionaryDescending,\n"); // array.operation = {
-//   ..._array.operation,
-// };
-
+array.operation = _objectSpread({}, _array2["default"].operation);
 /**
  * consoleHook
  */
