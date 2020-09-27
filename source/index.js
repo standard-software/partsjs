@@ -261,18 +261,9 @@ rootAlias = { ...rootAlias,
   Enum,
 };
 
-export const syntax = _copyProperty(_syntax, `
-  assert, guard,
-  functionValue,
-  sc, if_, switch_,
-  loop,
-  canUseMap, canUseWeakMap,
-  canUseSet, canUseWeakSet,
-  Enum,
-`);
-// export const syntax = {
-//   ..._syntax,
-// };
+export const syntax = {
+  ..._syntax,
+};
 
 /**
  * compare
@@ -301,20 +292,9 @@ rootAlias = { ...rootAlias,
   includes, includesSome, includesAll,
 };
 
-export const compare = _copyProperty(_compare, `
-  equal, equalDeep,
-  or,
-  match, matchValue, initialValue,
-  allMatch, indexOfMatch, someMatch,
-  matchSome, matchSomeValue,
-  allMatchSome, indexOfMatchSome, someMatchSome,
-  matchAll, matchAllValue,
-  allMatchAll, indexOfMatchAll, someMatchAll,
-  includes, includesSome, includesAll,
-`);
-// export const compare = {
-//   ..._compare,
-// };
+export const compare = {
+  ..._compare,
+};
 
 /**
  * convert
@@ -368,37 +348,11 @@ rootAlias = { ...rootAlias,
   strToNum, strToNumDef,
   strToInt, strToIntDef,
 };
+
 export const convert = {
-  ..._copyProperty(_convert, `
-    numberToString,
-    valueToString,
-    stringToNumber, stringToNumberDefault,
-    stringToInteger, stringToIntegerDefault,
-    valueToNumber, valueToNumberDefault,
-    valueToInteger, valueToIntegerDefault,
-  `),
-
-  ..._copyProperty(_convertAlias, `
-    numToString,
-    valToString,
-    strToNumber, strToNumberDef,
-    strToInteger, strToIntegerDef,
-    valToNumber, valToNumberDef,
-    valToInteger, valToIntegerDef,
-
-    numToStr,
-    valToStr,
-    valToNum, valToNumDef,
-    valToInt, valToIntDef,
-
-    strToNum, strToNumDef,
-    strToInt, strToIntDef,
-  `),
+  ..._convert,
+  ..._convertAlias,
 };
-// export const convert = {
-//   ..._convert,
-//   ..._convertAlias,
-// };
 
 /**
  * number
@@ -421,17 +375,9 @@ rootAlias = { ...rootAlias,
   makeInRange,
 };
 
-export const number = _copyProperty(_number, `
-  isMultiples, isEven, isOdd,
-  round, nearEqual,
-  inRange, keepMinMax,
-  randomInt,
-
-  makeInRange,
-`);
-// export const number = {
-//   ..._number,
-// };
+export const number = {
+  ..._number,
+};
 
 /**
  * string
@@ -454,34 +400,9 @@ rootAlias = { ...rootAlias,
   splitDotItems,
 };
 
-export const string = _copyProperty(_string, `
-  repeat,
-  isLowerCase, isUpperCase,
-  indexOfFirst, indexOfLast,
-  isFirst, isLast, isBothEnds,
-  includeFirst, includeLast, includeBothEnds,
-  excludeFirst, excludeLast, excludeBothEnds,
-  trimFirst, trimLast, trimBothEnds,
-  subIndex, subLength, subFirst, subLast,
-  deleteIndex, deleteLength, deleteFirst, deleteLast,
-  insert, add,
-  replaceAll,
-  matchFormat,
-  subFirstDelimFirst,
-  subFirstDelimLast,
-  subLastDelimFirst,
-  subLastDelimLast,
-  tagInnerFirst,
-  tagOuterFirst,
-  tagInnerLast,
-  tagOuterLast,
-  split,
-  splitCommaItems,
-  splitDotItems,
-`);
-// export const string = {
-//   ..._string,
-// };
+export const string = {
+  ..._string,
+};
 
 /**
  * object
@@ -544,37 +465,9 @@ rootAlias = { ...rootAlias,
   propCount,
 };
 
-export const object = _copyProperty(_object, `
-  isObjectParameter,
-
-  copyProperty,
-  getProperty,
-  setProperty,
-  inProperty,
-  fixProperty,
-  propertyCount,
-  propertyList,
-  objectEntries,
-  objectKeys,
-  objectValues,
-  hasOwn,
-  hasPrototype,
-  has,
-
-  objectToKeyValueArray,
-  objectToKeyArray,
-  objectToValueArray,
-
-  copyProp,
-  getProp,
-  setProp,
-  inProp,
-  fixProp,
-  propCount,
-`);
-// export const object = {
-//   ..._object,
-// };
+export const object = {
+  ..._object,
+};
 
 /**
  * array
@@ -589,60 +482,14 @@ rootAlias = { ...rootAlias,
   sum, average, median,
 };
 
-export const array = _copyProperty(_array, `
-  from,
+export const array = {
+  ..._array,
+};
 
-  min, max,
-  sum, average, median,
-  mode,
-  single, multiple,
-  filter, map, count,
-  findFirstIndex, findLastIndex,
-  findFirst, findLast,
-  some, all,
-  isFirst, isLast, isBothEnds,
-  subIndex, subLength,
-  subFirst, subLast,
-  group,
-  unique,
 
-  NumberArray,
-  IntegerArray,
-  arrayEntries,
-
-  findIndex, findBackIndex,
-  find, findBack,
-  every,
-  arrayToIndexValueArray,
-`);
-// export const array = {
-//   ..._array,
-// };
-
-array.operation = _copyProperty(_array.operation, `
-  insert, add,
-  deleteLength, deleteIndex,
-  deleteFirst, deleteLast,
-  includeFirst, includeLast, includeBothEnds,
-  excludeFirst, excludeLast, excludeBothEnds,
-  trimFirst, trimLast, trimBothEnds,
-  popFirst, popLast,
-  pushFirst, pushLast,
-  remainFirst, remainLast,
-  filter,
-
-  sort,
-  sortNumber,
-  sortLength,
-  sortNumberAscending, sortNumberDescending,
-  sortLengthAscending, sortLengthDescending,
-
-  sortDictionary,
-  sortDictionaryAscending, sortDictionaryDescending,
-`);
-// array.operation = {
-//   ..._array.operation,
-// };
+array.operation = {
+  ..._array.operation,
+};
 
 /**
  * consoleHook

@@ -337,6 +337,7 @@ You can now use the functions of the parts.js object.
 - rename makeInRange >> keepMinMax
 - uddate index.js
   - export structural changes
+  - publish private function
 
 ### 7.6.0
 #### 2020/09/07(Mon)
