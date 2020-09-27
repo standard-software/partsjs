@@ -3,7 +3,7 @@ import _NumberArray_js from './_NumberArray.js';
 import NumberArray_js from './NumberArray.js';
 import _IntegerArray_js from './_IntegerArray.js';
 import IntegerArray_js from './IntegerArray.js';
-import arrayToIndexValueArray_js from './arrayToIndexValueArray.js';
+import arrayEntries_js from './arrayEntries.js';
 import group_js from './group.js';
 import unique_js from './unique.js';
 import array_operation_js from './array_operation.js';
@@ -18,7 +18,7 @@ const arrayJs = {
   ...NumberArray_js,
   ..._IntegerArray_js,
   ...IntegerArray_js,
-  ...arrayToIndexValueArray_js,
+  ...arrayEntries_js,
   ...group_js,
   ...unique_js,
 };
@@ -48,7 +48,7 @@ export const {
 
   _NumberArray,
   _IntegerArray,
-  _arrayToIndexValueArray,
+  _arrayEntries,
 
   from,
 
@@ -68,13 +68,13 @@ export const {
 
   NumberArray,
   IntegerArray,
-  arrayToIndexValueArray,
+  arrayEntries,
 
   // Another name
   findIndex, findBackIndex,
   find, findBack,
   every,
-  arrayEntries,
+  arrayToIndexValueArray,
 } = arrayJs;
 
 // // Circular reference Error
@@ -137,7 +137,7 @@ export default {
 
   _NumberArray,
   _IntegerArray,
-  _arrayToIndexValueArray,
+  _arrayEntries,
 
   from,
 
@@ -157,13 +157,13 @@ export default {
 
   NumberArray,
   IntegerArray,
-  arrayToIndexValueArray,
+  arrayEntries,
 
   // Another name
   findIndex, findBackIndex,
   find, findBack,
   every,
-  arrayEntries,
+  arrayToIndexValueArray,
 
   operation,
 };

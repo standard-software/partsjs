@@ -19,9 +19,9 @@ import {
 } from '../array/_NumberArray.js';
 
 /**
- * arrayToIndexValueArray
+ * arrayEntries
  */
-export const _arrayToIndexValueArray = (array) => {
+export const _arrayEntries = (array) => {
   const result = [];
   for (let i = 0, l = array.length; i < l; i += 1) {
     result.push([i, array[i]]);
@@ -29,24 +29,24 @@ export const _arrayToIndexValueArray = (array) => {
   return result;
 };
 
-export const arrayToIndexValueArray = (array) => {
+export const arrayEntries = (array) => {
   if (isObjectParameter(array, 'array')) {
     ({ array } = array);
   }
 
   if (!isArray(array)) {
     throw new TypeError(
-      'arrayToIndexValueArray args(array) is not array',
+      'arrayEntries args(array) is not array',
     );
   }
 
-  return _arrayToIndexValueArray(array);
+  return _arrayEntries(array);
 };
 
-export const arrayEntries = arrayToIndexValueArray;
+export const arrayToIndexValueArray = arrayEntries;
 
 export default {
-  _arrayToIndexValueArray,
-  arrayToIndexValueArray,
+  _arrayEntries,
   arrayEntries,
+  arrayToIndexValueArray,
 };

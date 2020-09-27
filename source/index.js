@@ -602,12 +602,12 @@ export const array = _copyProperty(_array, `
 
   NumberArray,
   IntegerArray,
-  arrayToIndexValueArray,
+  arrayEntries,
 
   findIndex, findBackIndex,
   find, findBack,
   every,
-  arrayEntries,
+  arrayToIndexValueArray,
 `);
 // export const array = {
 //   ..._array,
