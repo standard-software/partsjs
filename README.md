@@ -333,6 +333,8 @@ You can now use the functions of the parts.js object.
 - add __loop.js / _loop.js from loop.js
 - add _Enum.js from Enum.js
 - add _isObjectParameter
+- uddate index.js
+  - export structural changes
 
 ### 7.6.0
 #### 2020/09/07(Mon)

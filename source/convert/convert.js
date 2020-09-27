@@ -12,8 +12,11 @@ import {
 
 import {
   _matchValue,
+} from '../compare/matchValue.js';
+
+import {
   _initialValue,
-} from '../compare/compare.js';
+} from '../compare/initialValue.js';
 
 import {
   _matchFormat,
@@ -102,7 +105,7 @@ export const valueToString = (
 /**
  * stringToNumber
  */
-export const _stringToNumberBase = (
+const _stringToNumberBase = (
   value,
   defaultValueFunc,
 ) => {
@@ -184,7 +187,7 @@ export const stringToNumberDefault = (
 /**
  * stringToInteger
  */
-export const _stringToIntegerBase = (
+const _stringToIntegerBase = (
   value,
   defaultValueFunc,
   radix = 10,
@@ -349,53 +352,17 @@ export const valueToIntegerDefault = (value, defaultValue) => {
   return result;
 };
 
-
-export const numToString     = numberToString;
-export const valToString     = valueToString;
-export const strToNumber     = stringToNumber;
-export const strToNumberDef  = stringToNumberDefault;
-export const strToInteger    = stringToInteger;
-export const strToIntegerDef = stringToIntegerDefault;
-
-export const valToNumber       = valueToNumber;
-export const valToNumberDef    = valueToNumberDefault;
-export const valToInteger      = valueToInteger;
-export const valToIntegerDef   = valueToIntegerDefault;
-
-export const numToStr        = numberToString;
-export const valToStr        = valueToString;
-export const strToNum        = stringToNumber;
-export const strToNumDef     = stringToNumberDefault;
-export const strToInt        = stringToInteger;
-export const strToIntDef     = stringToIntegerDefault;
-
-export const valToNum           = valueToNumber;
-export const valToNumDef        = valueToNumberDefault;
-export const valToInt           = valueToInteger;
-export const valToIntDef        = valueToIntegerDefault;
-
 export default {
+  _numberToString,
+  _stringToNumber, _stringToNumberDefault,
+  _stringToInteger, _stringToIntegerDefault,
+
   numberToString,
   valueToString,
   stringToNumber, stringToNumberDefault,
   stringToInteger, stringToIntegerDefault,
   valueToNumber, valueToNumberDefault,
   valueToInteger, valueToIntegerDefault,
-
-  numToString,
-  valToString,
-  strToNumber, strToNumberDef,
-  strToInteger, strToIntegerDef,
-  valToNumber, valToNumberDef,
-  valToInteger, valToIntegerDef,
-
-  numToStr,
-  valToStr,
-  valToNum, valToNumDef,
-  valToInt, valToIntDef,
-
-  strToNum, strToNumDef,
-  strToInt, strToIntDef,
 
 };
 

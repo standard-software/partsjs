@@ -13,86 +13,7 @@ import _propertyCount_js from './_propertyCount.js';
 import propertyCount_js from './propertyCount.js';
 import propertyList_js from './propertyList.js';
 
-export const {
-  _copyProperty,
-  _setProperty,
-
-  copyProperty,
-  setProperty,
-
-  copyProp,
-  setProp,
-} = object_common_js;
-
-export const {
-  isObjectParameter,
-} = isObjectParameter_js;
-
-export const {
-  _inProperty,
-
-  inProperty,
-  inProp,
-} = inProperty_js;
-
-export const {
-  _fixProperty,
-
-  fixProperty,
-  fixProp,
-} = fixProperty_js;
-
-export const {
-  _objectEntries,
-  objectEntries,
-  objectToKeyValueArray,
-} = objectEntries_js;
-
-export const {
-  _objectKeys,
-  objectKeys,
-  objectToKeyArray,
-} = objectKeys_js;
-
-export const {
-  _objectValues,
-  objectValues,
-  objectToValueArray,
-} = objectValues_js;
-
-export const {
-  _getProperty,
-  getProperty,
-  getProp,
-} = getProperty_js;
-
-export const {
-  _hasOwn,
-} = _hasOwn_js;
-
-export const {
-  hasOwn,
-} = hasOwn_js;
-
-export const {
-  _hasPrototype, _has,
-  hasPrototype, has,
-} = has_js;
-
-export const {
-  _propertyCount,
-} = _propertyCount_js;
-
-export const {
-  propertyCount,
-  propCount,
-} = propertyCount_js;
-
-export const {
-  propertyList,
-} = propertyList_js;
-
-export default {
+const objectJs = {
   ...object_common_js,
   ...isObjectParameter_js,
   ...inProperty_js,
@@ -107,4 +28,96 @@ export default {
   ..._propertyCount_js,
   ...propertyCount_js,
   ...propertyList_js,
+};
+
+export const {
+  _isObjectParameter,
+  _copyProperty,
+  _getProperty,
+  _setProperty,
+  _inProperty,
+  _fixProperty,
+  _propertyCount,
+  _propertyList,
+  _objectEntries,
+  _objectKeys,
+  _objectValues,
+  _hasOwn,
+  _hasPrototype,
+  _has,
+
+  isObjectParameter,
+  copyProperty,
+  getProperty,
+  setProperty,
+  inProperty,
+  fixProperty,
+  propertyCount,
+  propertyList,
+  objectEntries,
+  objectKeys,
+  objectValues,
+  hasOwn,
+  hasPrototype,
+  has,
+
+  // Another name
+  objectToKeyValueArray,
+  objectToKeyArray,
+  objectToValueArray,
+
+  // Short name
+  copyProp,
+  getProp,
+  setProp,
+  inProp,
+  fixProp,
+  propCount,
+} = objectJs;
+
+export default {
+  _isObjectParameter,
+
+  _copyProperty,
+  _getProperty,
+  _setProperty,
+  _inProperty,
+  _fixProperty,
+  _propertyCount,
+  _propertyList,
+  _objectEntries,
+  _objectKeys,
+  _objectValues,
+  _hasOwn,
+  _hasPrototype,
+  _has,
+
+  isObjectParameter,
+
+  copyProperty,
+  getProperty,
+  setProperty,
+  inProperty,
+  fixProperty,
+  propertyCount,
+  propertyList,
+  objectEntries,
+  objectKeys,
+  objectValues,
+  hasOwn,
+  hasPrototype,
+  has,
+
+  // Another name
+  objectToKeyValueArray,
+  objectToKeyArray,
+  objectToValueArray,
+
+  // Short name
+  copyProp,
+  getProp,
+  setProp,
+  inProp,
+  fixProp,
+  propCount,
 };

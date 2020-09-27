@@ -220,7 +220,7 @@ export const randomInt = (min, max) => {
 };
 
 export default {
-  isMultiples,
+  _isMultiples,
   _round, _nearEqual,
   _inRange, _makeInRange,
   _randomInt,

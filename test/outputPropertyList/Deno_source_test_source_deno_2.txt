@@ -136,11 +136,12 @@
 .convert.valToInt:[object Function]:function
 .convert.valToIntDef:[object Function]:function
 .convert.valToInteger:[object Function]:function
-.convert.valToIntegerDefault:[object Undefined]:undefined
+.convert.valToIntegerDef:[object Function]:function
 .convert.valToNum:[object Function]:function
 .convert.valToNumber:[object Function]:function
-.convert.valToNumberDefault:[object Undefined]:undefined
+.convert.valToNumberDef:[object Function]:function
 .convert.valToNumDef:[object Function]:function
+.convert.valToStr:[object Function]:function
 .convert.valToString:[object Function]:function
 .convert.valueToInteger:[object Function]:function
 .convert.valueToIntegerDefault:[object Function]:function
@@ -440,6 +441,7 @@
 .isWeakSetAll:[object Function]:function
 .isWeakSetArray:[object Function]:function
 .loop:[object Function]:function
+.makeInRange:[object Function]:function
 .match:[object Function]:function
 .matchAll:[object Function]:function
 .matchAllValue:[object Function]:function
@@ -455,6 +457,7 @@
 .number.isEven:[object Function]:function
 .number.isMultiples:[object Function]:function
 .number.isOdd:[object Function]:function
+.number.makeInRange:[object Function]:function
 .number.nearEqual:[object Function]:function
 .number.randomInt:[object Function]:function
 .number.round:[object Function]:function
@@ -477,7 +480,6 @@
 .object.objectKeys:[object Function]:function
 .object.objectToKeyArray:[object Function]:function
 .object.objectToKeyValueArray:[object Function]:function
-.object.objectToString:[object Function]:function
 .object.objectToValueArray:[object Function]:function
 .object.objectValues:[object Function]:function
 .object.propCount:[object Function]:function
@@ -868,11 +870,12 @@
 .valToInt:[object Function]:function
 .valToIntDef:[object Function]:function
 .valToInteger:[object Function]:function
-.valToIntegerDefault:[object Undefined]:undefined
+.valToIntegerDef:[object Function]:function
 .valToNum:[object Function]:function
 .valToNumber:[object Function]:function
-.valToNumberDefault:[object Undefined]:undefined
+.valToNumberDef:[object Function]:function
 .valToNumDef:[object Function]:function
+.valToStr:[object Function]:function
 .valToString:[object Function]:function
 .valueToInteger:[object Function]:function
 .valueToIntegerDefault:[object Function]:function

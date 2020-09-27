@@ -7,51 +7,10 @@ import switch__js from './switch_.js';
 import loop_js from './loop.js';
 import canUseMap_js from './canUseMap.js';
 import canUseSet_js from './canUseSet.js';
+import _Enum_js from './_Enum.js';
 import Enum_js from './Enum.js';
 
-export const {
-  _assert,
-  assert,
-} = assert_js;
-
-export const {
-  guard,
-} = guard_js;
-
-export const {
-  functionValue,
-} = functionValue_js;
-
-export const {
-  sc,
-} = sc_js;
-
-export const {
-  if_,
-} = if__js;
-
-export const {
-  switch_,
-} = switch__js;
-
-export const {
-  loop,
-} = loop_js;
-
-export const {
-  canUseMap, canUseWeakMap,
-} = canUseMap_js;
-
-export const {
-  canUseSet, canUseWeakSet,
-} = canUseSet_js;
-
-export const {
-  _Enum,
-  Enum,
-} = Enum_js;
-
-export default {
+const syntaxJs = {
   ...assert_js,
   ...guard_js,
   ...functionValue_js,
@@ -61,5 +20,34 @@ export default {
   ...loop_js,
   ...canUseMap_js,
   ...canUseSet_js,
+  ..._Enum_js,
   ...Enum_js,
+};
+
+export const {
+  _assert,
+  _Enum,
+} = syntaxJs;
+
+export const {
+  assert, guard,
+  functionValue,
+  sc, if_, switch_,
+  loop,
+  canUseMap, canUseWeakMap,
+  canUseSet, canUseWeakSet,
+  Enum,
+} = syntaxJs;
+
+export default {
+  _assert,
+  _Enum,
+
+  assert, guard,
+  functionValue,
+  sc, if_, switch_,
+  loop,
+  canUseMap, canUseWeakMap,
+  canUseSet, canUseWeakSet,
+  Enum,
 };

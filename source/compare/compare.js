@@ -24,114 +24,7 @@ import includes_common_js from './includes_common.js';
 import equal_js from './equal.js';
 import equalDeep_js from './equalDeep.js';
 
-export const {
-  _or,
-  or,
-} = or_js;
-
-export const {
-  _match,
-  match,
-} = match_js;
-
-export const {
-  _matchValue,
-  matchValue,
-} = matchValue_js;
-
-export const {
-  _initialValue,
-  initialValue,
-} = initialValue_js;
-
-export const {
-  _indexOfMatch,
-  indexOfMatch,
-} = indexOfMatch_js;
-
-export const {
-  _allMatch,
-  allMatch,
-} = allMatch_js;
-
-export const {
-  _someMatch,
-  someMatch,
-} = someMatch_js;
-
-export const {
-  _matchSome,
-  matchSome,
-} = matchSome_js;
-
-export const {
-  _matchSomeValue,
-  matchSomeValue,
-} = matchSomeValue_js;
-
-export const {
-  _indexOfMatchSome,
-  indexOfMatchSome,
-} = indexOfMatchSome_js;
-
-export const {
-  _allMatchSome,
-  allMatchSome,
-} = allMatchSome_js;
-
-export const {
-  _someMatchSome,
-  someMatchSome,
-} = someMatchSome_js;
-
-export const {
-  _matchAll,
-  matchAll,
-} = matchAll_js;
-
-export const {
-  _matchAllValue,
-  matchAllValue,
-} = matchAllValue_js;
-
-export const {
-  _indexOfMatchAll,
-  indexOfMatchAll,
-} = indexOfMatchAll_js;
-
-export const {
-  _allMatchAll,
-  allMatchAll,
-} = allMatchAll_js;
-
-export const {
-  _someMatchAll,
-  someMatchAll,
-} = someMatchAll_js;
-
-export const {
-  _includes,
-  includes,
-} = includes_js;
-
-export const {
-  _includesSome,
-  _includesAll,
-  includesSome,
-  includesAll,
-} = includes_common_js;
-
-export const {
-  _equal,
-  equal,
-} = equal_js;
-
-export const {
-  _equalDeep,
-  equalDeep,
-} = equalDeep_js;
-
-export default {
+const compareJs = {
   ...or_js,
   ...match_js,
   ...matchValue_js,
@@ -157,4 +50,102 @@ export default {
 
   ...equal_js,
   ...equalDeep_js,
+};
+
+export const {
+  _or,
+  _match,
+  _matchValue,
+  _initialValue,
+  _indexOfMatch,
+  _allMatch,
+  _someMatch,
+  _matchSome,
+  _matchSomeValue,
+  _indexOfMatchSome,
+  _allMatchSome,
+  _someMatchSome,
+  _matchAll,
+  _matchAllValue,
+  _indexOfMatchAll,
+  _allMatchAll,
+  _someMatchAll,
+  _includes,
+  _includesSome,
+  _includesAll,
+  _equal,
+  _equalDeep,
+} = compareJs;
+
+export const {
+  or,
+  match,
+  matchValue,
+  initialValue,
+  indexOfMatch,
+  allMatch,
+  someMatch,
+  matchSome,
+  matchSomeValue,
+  indexOfMatchSome,
+  allMatchSome,
+  someMatchSome,
+  matchAll,
+  matchAllValue,
+  indexOfMatchAll,
+  allMatchAll,
+  someMatchAll,
+  includes,
+  includesSome,
+  includesAll,
+  equal,
+  equalDeep,
+} = compareJs;
+
+export default {
+  _or,
+  _match,
+  _matchValue,
+  _initialValue,
+  _indexOfMatch,
+  _allMatch,
+  _someMatch,
+  _matchSome,
+  _matchSomeValue,
+  _indexOfMatchSome,
+  _allMatchSome,
+  _someMatchSome,
+  _matchAll,
+  _matchAllValue,
+  _indexOfMatchAll,
+  _allMatchAll,
+  _someMatchAll,
+  _includes,
+  _includesSome,
+  _includesAll,
+  _equal,
+  _equalDeep,
+
+  or,
+  match,
+  matchValue,
+  initialValue,
+  indexOfMatch,
+  allMatch,
+  someMatch,
+  matchSome,
+  matchSomeValue,
+  indexOfMatchSome,
+  allMatchSome,
+  someMatchSome,
+  matchAll,
+  matchAllValue,
+  indexOfMatchAll,
+  allMatchAll,
+  someMatchAll,
+  includes,
+  includesSome,
+  includesAll,
+  equal,
+  equalDeep,
 };
