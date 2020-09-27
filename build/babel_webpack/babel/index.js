@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.platform = exports.root = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
 exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = void 0;
-exports.someMatchAll = exports.indexOfMatchAll = exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalDeep = exports.equal = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = void 0;
-exports["default"] = exports.parts = exports.wsh = exports.consoleHook = exports.array = exports.object = exports.string = exports.number = exports.convert = exports.compare = exports.syntax = exports.test = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.setProp = exports.getProp = exports.fixProp = exports.inProp = exports.propCount = exports.copyProp = exports.objectToValueArray = exports.objectValues = exports.objectToKeyArray = exports.objectKeys = exports.objectToKeyValueArray = exports.objectEntries = exports.propertyList = exports.setProperty = exports.getProperty = exports.hasPrototype = exports.hasOwn = exports.has = exports.fixProperty = exports.inProperty = exports.propertyCount = exports.copyProperty = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.isUpperCase = exports.isLowerCase = exports.replaceAll = exports.matchFormat = exports.randomInt = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.numToStr = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToIntegerDefault = exports.valToInteger = exports.valToNumberDefault = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.includesAll = exports.includesSome = exports.includes = void 0;
+exports.allMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.indexOfMatchSome = exports.allMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.indexOfMatch = exports.allMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.equalDeep = exports.equal = exports.syntax = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.functionValue = exports.guard = exports.assert = exports.test = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = void 0;
+exports["default"] = exports.parts = exports.wsh = exports.consoleHook = exports.array = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.object = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.string = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.matchFormat = exports.replaceAll = exports.isUpperCase = exports.isLowerCase = exports.number = exports.makeInRange = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.convert = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.compare = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.indexOfMatchAll = void 0;
 
 var _polyfill2 = _interopRequireDefault(require("./polyfill.js"));
 
@@ -25,6 +25,8 @@ var _syntax2 = _interopRequireDefault(require("./syntax/syntax.js"));
 var _compare2 = _interopRequireDefault(require("./compare/compare.js"));
 
 var _convert2 = _interopRequireDefault(require("./convert/convert.js"));
+
+var _convertAlias2 = _interopRequireDefault(require("./convert/convertAlias.js"));
 
 var _number2 = _interopRequireDefault(require("./number/number.js"));
 
@@ -51,7 +53,7 @@ exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
 var _copyProperty = _object2["default"]._copyProperty;
-var _replaceAll = _string2["default"]._replaceAll;
+var _splitCommaItems = _string2["default"]._splitCommaItems;
 var _map = _array2["default"]._map;
 /**
  * root
@@ -603,316 +605,105 @@ exports.isObjectType = isObjectType;
 rootAlias = _objectSpread(_objectSpread(_objectSpread({}, rootAlias), _type2["default"]), _typeAlias2["default"]);
 
 var type = _objectSpread(_objectSpread({}, _type2["default"]), _typeAlias2["default"]);
-
-exports.type = type;
-propertyNames._TYPE_BASE = 'Undefined, Null, NaNStrict, ' + 'Boolean, Number, Integer, String, ' + 'Function, ' + 'Object, ObjectNormal, ObjectFromNull, ' + 'ObjectLike, Module, ' + 'Array, ArraySeries, ' + 'Date, RegExp, ' + 'Exception, ' + 'EmptyObject, EmptyArray, ' + 'Symbol, ' + 'Map, WeakMap, Set, WeakSet, ' + 'BooleanObject, NumberObject, StringObject, ' + 'ObjectType, ArrayType, ' + 'Bool, Num, Int, Str, ' + 'Func, ' + 'Obj, ObjNormal, ObjFromNull, ' + 'ObjLike, ' + 'ObjType, ' + 'Except, ' + 'EmptyObj, ' + '';
-
-var isPrefixSafixAdd = function isPrefixSafixAdd(prefix, safix, commaString) {
-  return _map(_array2["default"].filter(_replaceAll(commaString, ' ', '').split(','), function (v) {
-    return v !== '';
-  }), function (item) {
-    return prefix + item + safix;
-  }).join(',');
-}; // propertyNames.TYPE = [
-//   isPrefixSafixAdd('is',    '',     propertyNames._TYPE_BASE),
-//   isPrefixSafixAdd('isNot', '',     propertyNames._TYPE_BASE),
-//   isPrefixSafixAdd('is',    'All',  propertyNames._TYPE_BASE),
-//   isPrefixSafixAdd('isNot', 'All',  propertyNames._TYPE_BASE),
-//   isPrefixSafixAdd('is',    'Array',  propertyNames._TYPE_BASE),
-//   isPrefixSafixAdd('isNot', 'Array',  propertyNames._TYPE_BASE),
-// ].join(',');
-// const type = {};
-// _copyProperty(_type, propertyNames.TYPE, type);
-// _copyProperty(_type, propertyNames.TYPE, rootAlias);
-
 /**
  * test
  */
-// const {
-//   checkEqual, checkCompare,
-//   describe, it, test, expect,
-//   isThrown, isThrownValue, isThrownException, isNotThrown,
-//   testCounter,
-// } = _test;
 
 
-propertyNames.TEST_PUBLIC = 'checkEqual, checkCompare,' + 'describe, it, test, expect,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'testCounter,';
-propertyNames.TEST_ROOT = 'isThrown,isThrownValue,isThrownException,isNotThrown,' + '';
-var test = {};
+exports.type = type;
+var isThrown = _test2["default"].isThrown,
+    isThrownValue = _test2["default"].isThrownValue,
+    isThrownException = _test2["default"].isThrownException,
+    isNotThrown = _test2["default"].isNotThrown;
+exports.isNotThrown = isNotThrown;
+exports.isThrownException = isThrownException;
+exports.isThrownValue = isThrownValue;
+exports.isThrown = isThrown;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  isThrown: isThrown,
+  isThrownValue: isThrownValue,
+  isThrownException: isThrownException,
+  isNotThrown: isNotThrown
+});
+
+var test = _objectSpread({}, _test2["default"]);
+/**
+ * syntax
+ */
+
+
 exports.test = test;
+var assert = _syntax2["default"].assert,
+    guard = _syntax2["default"].guard,
+    functionValue = _syntax2["default"].functionValue,
+    sc = _syntax2["default"].sc,
+    if_ = _syntax2["default"].if_,
+    switch_ = _syntax2["default"].switch_,
+    loop = _syntax2["default"].loop,
+    canUseMap = _syntax2["default"].canUseMap,
+    canUseWeakMap = _syntax2["default"].canUseWeakMap,
+    canUseSet = _syntax2["default"].canUseSet,
+    canUseWeakSet = _syntax2["default"].canUseWeakSet,
+    Enum = _syntax2["default"].Enum;
+exports.Enum = Enum;
+exports.canUseWeakSet = canUseWeakSet;
+exports.canUseSet = canUseSet;
+exports.canUseWeakMap = canUseWeakMap;
+exports.canUseMap = canUseMap;
+exports.loop = loop;
+exports.switch_ = switch_;
+exports.if_ = if_;
+exports.sc = sc;
+exports.functionValue = functionValue;
+exports.guard = guard;
+exports.assert = assert;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  assert: assert,
+  guard: guard,
+  functionValue: functionValue,
+  sc: sc,
+  if_: if_,
+  switch_: switch_,
+  loop: loop,
+  canUseMap: canUseMap,
+  canUseWeakMap: canUseWeakMap,
+  canUseSet: canUseSet,
+  canUseWeakSet: canUseWeakSet,
+  Enum: Enum
+});
 
-_copyProperty(_test2["default"], propertyNames.TEST_PUBLIC, test);
+var syntax = _copyProperty(_syntax2["default"], "\n  assert, guard,\n  functionValue,\n  sc, if_, switch_,\n  loop,\n  canUseMap, canUseWeakMap,\n  canUseSet, canUseWeakSet,\n  Enum,\n"); // export const syntax = {
+//   ..._syntax,
+// };
 
-_copyProperty(_test2["default"], propertyNames.TEST_ROOT, rootAlias); // syntax
+/**
+ * compare
+ */
 
-
-propertyNames.SYNTAX = 'assert,guard,' + 'functionValue,' + 'sc,if_,switch_,' + 'loop,' + 'canUseMap, canUseWeakMap,' + 'canUseSet, canUseWeakSet,' + 'Enum,' + '';
-
-var syntax = _copyProperty(_syntax2["default"], propertyNames.SYNTAX);
 
 exports.syntax = syntax;
-
-_copyProperty(_syntax2["default"], propertyNames.SYNTAX, rootAlias); // compare
-
-
-propertyNames.COMPARE = 'equal, equalDeep,' + 'or,' + 'match, matchValue, initialValue,' + 'allMatch, indexOfMatch, someMatch,' + 'matchSome, matchSomeValue,' + 'allMatchSome, indexOfMatchSome, someMatchSome,' + 'matchAll, matchAllValue,' + 'allMatchAll, indexOfMatchAll, someMatchAll,' + 'includes, includesSome, includesAll,' + '';
-var compare = {};
-exports.compare = compare;
-
-_copyProperty(_compare2["default"], propertyNames.COMPARE, compare);
-
-_copyProperty(_compare2["default"], propertyNames.COMPARE, rootAlias); // convert
-
-
-propertyNames.CONVERT = 'numberToString, valueToString,' + 'stringToNumber,stringToNumberDefault,' + 'stringToInteger,stringToIntegerDefault,' + 'valueToNumber, valueToNumberDefault,' + 'valueToInteger, valueToIntegerDefault,' + 'numToString, valToString,' + 'strToNumber, strToNumberDef,' + 'strToInteger, strToIntegerDef,' + 'valToNumber, valToNumberDefault,' + 'valToInteger, valToIntegerDefault,' + 'valToNum, valToNumDef,' + 'valToInt, valToIntDef,' + 'numToStr,' + 'strToNum,strToNumDef,' + 'strToInt,strToIntDef,' + '';
-var convert = {};
-exports.convert = convert;
-
-_copyProperty(_convert2["default"], propertyNames.CONVERT, convert);
-
-_copyProperty(_convert2["default"], propertyNames.CONVERT, rootAlias); // number
-
-
-propertyNames.NUMBER = 'isMultiples,isEven,isOdd,' + 'round,nearEqual,inRange,randomInt,' + '';
-
-var number = _copyProperty(_number2["default"], propertyNames.NUMBER);
-
-exports.number = number;
-
-_copyProperty(_number2["default"], propertyNames.NUMBER, rootAlias); // string
-
-
-propertyNames.STRING_PUBLIC = 'matchFormat, replaceAll,' + 'repeat,' + 'isLowerCase, isUpperCase,' + 'indexOfFirst, indexOfLast,' + 'isFirst, isLast, isBothEnds,' + 'includeFirst, includeLast, includeBothEnds,' + 'excludeFirst, excludeLast, excludeBothEnds,' + 'trimFirst, trimLast, trimBothEnds,' + 'subIndex, subLength, subFirst, subLast,' + 'deleteIndex, deleteLength, deleteFirst, deleteLast,' + 'insert, add,' + 'subFirstDelimFirst, subFirstDelimLast, ' + 'subLastDelimFirst, subLastDelimLast, ' + 'tagInnerFirst, tagOuterFirst, ' + 'tagInnerLast, tagOuterLast, ' + 'split, splitCommaItems, splitDotItems, ' + '';
-propertyNames.STRING_ROOT = 'matchFormat,replaceAll,' + 'isLowerCase,isUpperCase,' + 'split, splitCommaItems, splitDotItems, ' + '';
-var string = {};
-exports.string = string;
-
-_copyProperty(_string2["default"], propertyNames.STRING_PUBLIC, string);
-
-_copyProperty(_string2["default"], propertyNames.STRING_ROOT, rootAlias); // object
-
-
-propertyNames.OBJECT_PUBLIC = 'isObjectParameter,' + 'copyProperty, propertyCount, inProperty, fixProperty,' + 'has,hasOwn,hasPrototype,' + 'getProperty, setProperty,' + 'propertyList, ' + 'objectEntries, objectToKeyValueArray,' + 'objectKeys, objectToKeyArray,' + 'objectValues, objectToValueArray,' + 'copyProp, propCount, inProp, fixProp,' + 'getProp, setProp,' + '';
-propertyNames.OBJECT_ROOT = 'copyProperty,propertyCount,inProperty, fixProperty,' + 'has,hasOwn,hasPrototype,' + 'getProperty,setProperty,' + 'propertyList, ' + 'objectEntries, objectToKeyValueArray,' + 'objectKeys, objectToKeyArray,' + 'objectValues, objectToValueArray,' + 'copyProp,propCount,inProp, fixProp,' + 'getProp,setProp,' + '';
-var object = {};
-exports.object = object;
-
-_copyProperty(_object2["default"], propertyNames.OBJECT_PUBLIC, object);
-
-_copyProperty(_object2["default"], propertyNames.OBJECT_ROOT, rootAlias);
-
-object.objectToString = _type2["default"].objectToString;
-rootAlias.objectToString = _type2["default"].objectToString; // array
-
-propertyNames.ARRAY_PUBLIC = 'NumberArray, IntegerArray,' + 'from,' + 'min, max,' + 'sum, average, median,' + 'mode,' + 'unique, single, multiple,' + 'group,' + 'filter, map, count,' + 'findFirstIndex, findLastIndex,' + 'findFirst, findLast,' + 'some, all,' + 'isFirst, isLast, isBothEnds,' + 'subIndex, subLength,' + 'subFirst, subLast,' + 'findIndex, findBackIndex,' + 'find, findBack,' + 'every,' + 'arrayToIndexValueArray, arrayEntries, ' + '';
-propertyNames.ARRAY_ROOT = 'min, max,' + 'sum, average, median,' + '';
-var array = {};
-exports.array = array;
-
-_copyProperty(_array2["default"], propertyNames.ARRAY_PUBLIC, array);
-
-_copyProperty(_array2["default"], propertyNames.ARRAY_ROOT, rootAlias); // array.operation
-
-
-propertyNames.ARRAY_OPERATION_PUBLIC = 'insert, add,' + 'deleteLength, deleteIndex,' + 'deleteFirst, deleteLast,' + 'includeFirst, includeLast, includeBothEnds,' + 'excludeFirst, excludeLast, excludeBothEnds,' + 'trimFirst, trimLast, trimBothEnds,' + 'popFirst, popLast,' + 'pushFirst, pushLast,' + 'remainFirst, remainLast,' + 'filter,' + 'sort,' + 'sortNumber,' + 'sortLength,' + 'sortDictionary,' + 'sortNumberAscending, sortNumberDescending,' + 'sortLengthAscending, sortLengthDescending,' + 'sortDictionaryAscending, sortDictionaryDescending,' + '';
-array.operation = {};
-
-_copyProperty(_array2["default"].operation, propertyNames.ARRAY_OPERATION_PUBLIC, array.operation); // consoleHook
-
-
-propertyNames._CONSOLE_HOOK_BASE = 'Log,Info,Warn,Error,Debug,';
-propertyNames.CONSOLE_HOOK = [isPrefixSafixAdd('hook', '', propertyNames._CONSOLE_HOOK_BASE), isPrefixSafixAdd('unHook', '', propertyNames._CONSOLE_HOOK_BASE), isPrefixSafixAdd('accept', '', propertyNames._CONSOLE_HOOK_BASE), 'hook', 'unHook', 'accept'].join(',');
-var consoleHook = {};
-exports.consoleHook = consoleHook;
-
-_copyProperty(_consoleHook2["default"], propertyNames.CONSOLE_HOOK, consoleHook); // wsh
-
-
-propertyNames.WSH = 'FileSystemObject,Shell,' + 'forceCreateFolder,' + '';
-var wsh = {};
-exports.wsh = wsh;
-
-_copyProperty(_wsh2["default"], propertyNames.WSH, wsh);
-
-var _rootAlias = rootAlias,
-    isThrown = _rootAlias.isThrown,
-    isThrownValue = _rootAlias.isThrownValue,
-    isThrownException = _rootAlias.isThrownException,
-    isNotThrown = _rootAlias.isNotThrown,
-    assert = _rootAlias.assert,
-    guard = _rootAlias.guard,
-    functionValue = _rootAlias.functionValue,
-    sc = _rootAlias.sc,
-    if_ = _rootAlias.if_,
-    switch_ = _rootAlias.switch_,
-    loop = _rootAlias.loop,
-    canUseMap = _rootAlias.canUseMap,
-    canUseWeakMap = _rootAlias.canUseWeakMap,
-    canUseSet = _rootAlias.canUseSet,
-    canUseWeakSet = _rootAlias.canUseWeakSet,
-    Enum = _rootAlias.Enum,
-    equal = _rootAlias.equal,
-    equalDeep = _rootAlias.equalDeep,
-    or = _rootAlias.or,
-    match = _rootAlias.match,
-    matchValue = _rootAlias.matchValue,
-    initialValue = _rootAlias.initialValue,
-    allMatch = _rootAlias.allMatch,
-    indexOfMatch = _rootAlias.indexOfMatch,
-    someMatch = _rootAlias.someMatch,
-    matchSome = _rootAlias.matchSome,
-    matchSomeValue = _rootAlias.matchSomeValue,
-    allMatchSome = _rootAlias.allMatchSome,
-    indexOfMatchSome = _rootAlias.indexOfMatchSome,
-    someMatchSome = _rootAlias.someMatchSome,
-    matchAll = _rootAlias.matchAll,
-    matchAllValue = _rootAlias.matchAllValue,
-    allMatchAll = _rootAlias.allMatchAll,
-    indexOfMatchAll = _rootAlias.indexOfMatchAll,
-    someMatchAll = _rootAlias.someMatchAll,
-    includes = _rootAlias.includes,
-    includesSome = _rootAlias.includesSome,
-    includesAll = _rootAlias.includesAll,
-    numberToString = _rootAlias.numberToString,
-    valueToString = _rootAlias.valueToString,
-    stringToNumber = _rootAlias.stringToNumber,
-    stringToNumberDefault = _rootAlias.stringToNumberDefault,
-    stringToInteger = _rootAlias.stringToInteger,
-    stringToIntegerDefault = _rootAlias.stringToIntegerDefault,
-    valueToNumber = _rootAlias.valueToNumber,
-    valueToNumberDefault = _rootAlias.valueToNumberDefault,
-    valueToInteger = _rootAlias.valueToInteger,
-    valueToIntegerDefault = _rootAlias.valueToIntegerDefault,
-    numToString = _rootAlias.numToString,
-    valToString = _rootAlias.valToString,
-    strToNumber = _rootAlias.strToNumber,
-    strToNumberDef = _rootAlias.strToNumberDef,
-    strToInteger = _rootAlias.strToInteger,
-    strToIntegerDef = _rootAlias.strToIntegerDef,
-    valToNumber = _rootAlias.valToNumber,
-    valToNumberDefault = _rootAlias.valToNumberDefault,
-    valToInteger = _rootAlias.valToInteger,
-    valToIntegerDefault = _rootAlias.valToIntegerDefault,
-    valToNum = _rootAlias.valToNum,
-    valToNumDef = _rootAlias.valToNumDef,
-    valToInt = _rootAlias.valToInt,
-    valToIntDef = _rootAlias.valToIntDef,
-    numToStr = _rootAlias.numToStr,
-    strToNum = _rootAlias.strToNum,
-    strToNumDef = _rootAlias.strToNumDef,
-    strToInt = _rootAlias.strToInt,
-    strToIntDef = _rootAlias.strToIntDef,
-    isMultiples = _rootAlias.isMultiples,
-    isEven = _rootAlias.isEven,
-    isOdd = _rootAlias.isOdd,
-    round = _rootAlias.round,
-    nearEqual = _rootAlias.nearEqual,
-    inRange = _rootAlias.inRange,
-    randomInt = _rootAlias.randomInt,
-    matchFormat = _rootAlias.matchFormat,
-    replaceAll = _rootAlias.replaceAll,
-    isLowerCase = _rootAlias.isLowerCase,
-    isUpperCase = _rootAlias.isUpperCase,
-    split = _rootAlias.split,
-    splitCommaItems = _rootAlias.splitCommaItems,
-    splitDotItems = _rootAlias.splitDotItems,
-    copyProperty = _rootAlias.copyProperty,
-    propertyCount = _rootAlias.propertyCount,
-    inProperty = _rootAlias.inProperty,
-    fixProperty = _rootAlias.fixProperty,
-    has = _rootAlias.has,
-    hasOwn = _rootAlias.hasOwn,
-    hasPrototype = _rootAlias.hasPrototype,
-    getProperty = _rootAlias.getProperty,
-    setProperty = _rootAlias.setProperty,
-    propertyList = _rootAlias.propertyList,
-    objectEntries = _rootAlias.objectEntries,
-    objectToKeyValueArray = _rootAlias.objectToKeyValueArray,
-    objectKeys = _rootAlias.objectKeys,
-    objectToKeyArray = _rootAlias.objectToKeyArray,
-    objectValues = _rootAlias.objectValues,
-    objectToValueArray = _rootAlias.objectToValueArray,
-    copyProp = _rootAlias.copyProp,
-    propCount = _rootAlias.propCount,
-    inProp = _rootAlias.inProp,
-    fixProp = _rootAlias.fixProp,
-    getProp = _rootAlias.getProp,
-    setProp = _rootAlias.setProp,
-    min = _rootAlias.min,
-    max = _rootAlias.max,
-    sum = _rootAlias.sum,
-    average = _rootAlias.average,
-    median = _rootAlias.median;
-exports.median = median;
-exports.average = average;
-exports.sum = sum;
-exports.max = max;
-exports.min = min;
-exports.setProp = setProp;
-exports.getProp = getProp;
-exports.fixProp = fixProp;
-exports.inProp = inProp;
-exports.propCount = propCount;
-exports.copyProp = copyProp;
-exports.objectToValueArray = objectToValueArray;
-exports.objectValues = objectValues;
-exports.objectToKeyArray = objectToKeyArray;
-exports.objectKeys = objectKeys;
-exports.objectToKeyValueArray = objectToKeyValueArray;
-exports.objectEntries = objectEntries;
-exports.propertyList = propertyList;
-exports.setProperty = setProperty;
-exports.getProperty = getProperty;
-exports.hasPrototype = hasPrototype;
-exports.hasOwn = hasOwn;
-exports.has = has;
-exports.fixProperty = fixProperty;
-exports.inProperty = inProperty;
-exports.propertyCount = propertyCount;
-exports.copyProperty = copyProperty;
-exports.splitDotItems = splitDotItems;
-exports.splitCommaItems = splitCommaItems;
-exports.split = split;
-exports.isUpperCase = isUpperCase;
-exports.isLowerCase = isLowerCase;
-exports.replaceAll = replaceAll;
-exports.matchFormat = matchFormat;
-exports.randomInt = randomInt;
-exports.inRange = inRange;
-exports.nearEqual = nearEqual;
-exports.round = round;
-exports.isOdd = isOdd;
-exports.isEven = isEven;
-exports.isMultiples = isMultiples;
-exports.strToIntDef = strToIntDef;
-exports.strToInt = strToInt;
-exports.strToNumDef = strToNumDef;
-exports.strToNum = strToNum;
-exports.numToStr = numToStr;
-exports.valToIntDef = valToIntDef;
-exports.valToInt = valToInt;
-exports.valToNumDef = valToNumDef;
-exports.valToNum = valToNum;
-exports.valToIntegerDefault = valToIntegerDefault;
-exports.valToInteger = valToInteger;
-exports.valToNumberDefault = valToNumberDefault;
-exports.valToNumber = valToNumber;
-exports.strToIntegerDef = strToIntegerDef;
-exports.strToInteger = strToInteger;
-exports.strToNumberDef = strToNumberDef;
-exports.strToNumber = strToNumber;
-exports.valToString = valToString;
-exports.numToString = numToString;
-exports.valueToIntegerDefault = valueToIntegerDefault;
-exports.valueToInteger = valueToInteger;
-exports.valueToNumberDefault = valueToNumberDefault;
-exports.valueToNumber = valueToNumber;
-exports.stringToIntegerDefault = stringToIntegerDefault;
-exports.stringToInteger = stringToInteger;
-exports.stringToNumberDefault = stringToNumberDefault;
-exports.stringToNumber = stringToNumber;
-exports.valueToString = valueToString;
-exports.numberToString = numberToString;
+var equal = _compare2["default"].equal,
+    equalDeep = _compare2["default"].equalDeep,
+    or = _compare2["default"].or,
+    match = _compare2["default"].match,
+    matchValue = _compare2["default"].matchValue,
+    initialValue = _compare2["default"].initialValue,
+    allMatch = _compare2["default"].allMatch,
+    indexOfMatch = _compare2["default"].indexOfMatch,
+    someMatch = _compare2["default"].someMatch,
+    matchSome = _compare2["default"].matchSome,
+    matchSomeValue = _compare2["default"].matchSomeValue,
+    allMatchSome = _compare2["default"].allMatchSome,
+    indexOfMatchSome = _compare2["default"].indexOfMatchSome,
+    someMatchSome = _compare2["default"].someMatchSome,
+    matchAll = _compare2["default"].matchAll,
+    matchAllValue = _compare2["default"].matchAllValue,
+    allMatchAll = _compare2["default"].allMatchAll,
+    indexOfMatchAll = _compare2["default"].indexOfMatchAll,
+    someMatchAll = _compare2["default"].someMatchAll,
+    includes = _compare2["default"].includes,
+    includesSome = _compare2["default"].includesSome,
+    includesAll = _compare2["default"].includesAll;
 exports.includesAll = includesAll;
 exports.includesSome = includesSome;
 exports.includes = includes;
@@ -935,22 +726,353 @@ exports.match = match;
 exports.or = or;
 exports.equalDeep = equalDeep;
 exports.equal = equal;
-exports.Enum = Enum;
-exports.canUseWeakSet = canUseWeakSet;
-exports.canUseSet = canUseSet;
-exports.canUseWeakMap = canUseWeakMap;
-exports.canUseMap = canUseMap;
-exports.loop = loop;
-exports.switch_ = switch_;
-exports.if_ = if_;
-exports.sc = sc;
-exports.functionValue = functionValue;
-exports.guard = guard;
-exports.assert = assert;
-exports.isNotThrown = isNotThrown;
-exports.isThrownException = isThrownException;
-exports.isThrownValue = isThrownValue;
-exports.isThrown = isThrown;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  equal: equal,
+  equalDeep: equalDeep,
+  or: or,
+  match: match,
+  matchValue: matchValue,
+  initialValue: initialValue,
+  allMatch: allMatch,
+  indexOfMatch: indexOfMatch,
+  someMatch: someMatch,
+  matchSome: matchSome,
+  matchSomeValue: matchSomeValue,
+  allMatchSome: allMatchSome,
+  indexOfMatchSome: indexOfMatchSome,
+  someMatchSome: someMatchSome,
+  matchAll: matchAll,
+  matchAllValue: matchAllValue,
+  allMatchAll: allMatchAll,
+  indexOfMatchAll: indexOfMatchAll,
+  someMatchAll: someMatchAll,
+  includes: includes,
+  includesSome: includesSome,
+  includesAll: includesAll
+});
+
+var compare = _copyProperty(_compare2["default"], "\n  equal, equalDeep,\n  or,\n  match, matchValue, initialValue,\n  allMatch, indexOfMatch, someMatch,\n  matchSome, matchSomeValue,\n  allMatchSome, indexOfMatchSome, someMatchSome,\n  matchAll, matchAllValue,\n  allMatchAll, indexOfMatchAll, someMatchAll,\n  includes, includesSome, includesAll,\n"); // export const compare = {
+//   ..._compare,
+// };
+
+/**
+ * convert
+ */
+
+
+exports.compare = compare;
+var numberToString = _convert2["default"].numberToString,
+    valueToString = _convert2["default"].valueToString,
+    stringToNumber = _convert2["default"].stringToNumber,
+    stringToNumberDefault = _convert2["default"].stringToNumberDefault,
+    stringToInteger = _convert2["default"].stringToInteger,
+    stringToIntegerDefault = _convert2["default"].stringToIntegerDefault,
+    valueToNumber = _convert2["default"].valueToNumber,
+    valueToNumberDefault = _convert2["default"].valueToNumberDefault,
+    valueToInteger = _convert2["default"].valueToInteger,
+    valueToIntegerDefault = _convert2["default"].valueToIntegerDefault;
+exports.valueToIntegerDefault = valueToIntegerDefault;
+exports.valueToInteger = valueToInteger;
+exports.valueToNumberDefault = valueToNumberDefault;
+exports.valueToNumber = valueToNumber;
+exports.stringToIntegerDefault = stringToIntegerDefault;
+exports.stringToInteger = stringToInteger;
+exports.stringToNumberDefault = stringToNumberDefault;
+exports.stringToNumber = stringToNumber;
+exports.valueToString = valueToString;
+exports.numberToString = numberToString;
+var numToString = _convertAlias2["default"].numToString,
+    valToString = _convertAlias2["default"].valToString,
+    strToNumber = _convertAlias2["default"].strToNumber,
+    strToNumberDef = _convertAlias2["default"].strToNumberDef,
+    strToInteger = _convertAlias2["default"].strToInteger,
+    strToIntegerDef = _convertAlias2["default"].strToIntegerDef,
+    valToNumber = _convertAlias2["default"].valToNumber,
+    valToNumberDef = _convertAlias2["default"].valToNumberDef,
+    valToInteger = _convertAlias2["default"].valToInteger,
+    valToIntegerDef = _convertAlias2["default"].valToIntegerDef,
+    numToStr = _convertAlias2["default"].numToStr,
+    valToStr = _convertAlias2["default"].valToStr,
+    valToNum = _convertAlias2["default"].valToNum,
+    valToNumDef = _convertAlias2["default"].valToNumDef,
+    valToInt = _convertAlias2["default"].valToInt,
+    valToIntDef = _convertAlias2["default"].valToIntDef,
+    strToNum = _convertAlias2["default"].strToNum,
+    strToNumDef = _convertAlias2["default"].strToNumDef,
+    strToInt = _convertAlias2["default"].strToInt,
+    strToIntDef = _convertAlias2["default"].strToIntDef;
+exports.strToIntDef = strToIntDef;
+exports.strToInt = strToInt;
+exports.strToNumDef = strToNumDef;
+exports.strToNum = strToNum;
+exports.valToIntDef = valToIntDef;
+exports.valToInt = valToInt;
+exports.valToNumDef = valToNumDef;
+exports.valToNum = valToNum;
+exports.valToStr = valToStr;
+exports.numToStr = numToStr;
+exports.valToIntegerDef = valToIntegerDef;
+exports.valToInteger = valToInteger;
+exports.valToNumberDef = valToNumberDef;
+exports.valToNumber = valToNumber;
+exports.strToIntegerDef = strToIntegerDef;
+exports.strToInteger = strToInteger;
+exports.strToNumberDef = strToNumberDef;
+exports.strToNumber = strToNumber;
+exports.valToString = valToString;
+exports.numToString = numToString;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  numberToString: numberToString,
+  valueToString: valueToString,
+  stringToNumber: stringToNumber,
+  stringToNumberDefault: stringToNumberDefault,
+  stringToInteger: stringToInteger,
+  stringToIntegerDefault: stringToIntegerDefault,
+  valueToNumber: valueToNumber,
+  valueToNumberDefault: valueToNumberDefault,
+  valueToInteger: valueToInteger,
+  valueToIntegerDefault: valueToIntegerDefault,
+  numToString: numToString,
+  valToString: valToString,
+  strToNumber: strToNumber,
+  strToNumberDef: strToNumberDef,
+  strToInteger: strToInteger,
+  strToIntegerDef: strToIntegerDef,
+  valToNumber: valToNumber,
+  valToNumberDef: valToNumberDef,
+  valToInteger: valToInteger,
+  valToIntegerDef: valToIntegerDef,
+  numToStr: numToStr,
+  valToStr: valToStr,
+  valToNum: valToNum,
+  valToNumDef: valToNumDef,
+  valToInt: valToInt,
+  valToIntDef: valToIntDef,
+  strToNum: strToNum,
+  strToNumDef: strToNumDef,
+  strToInt: strToInt,
+  strToIntDef: strToIntDef
+});
+
+var convert = _objectSpread(_objectSpread({}, _copyProperty(_convert2["default"], "\n    numberToString,\n    valueToString,\n    stringToNumber, stringToNumberDefault,\n    stringToInteger, stringToIntegerDefault,\n    valueToNumber, valueToNumberDefault,\n    valueToInteger, valueToIntegerDefault,\n  ")), _copyProperty(_convertAlias2["default"], "\n    numToString,\n    valToString,\n    strToNumber, strToNumberDef,\n    strToInteger, strToIntegerDef,\n    valToNumber, valToNumberDef,\n    valToInteger, valToIntegerDef,\n\n    numToStr,\n    valToStr,\n    valToNum, valToNumDef,\n    valToInt, valToIntDef,\n\n    strToNum, strToNumDef,\n    strToInt, strToIntDef,\n  ")); // export const convert = {
+//   ..._convert,
+//   ..._convertAlias,
+// };
+
+/**
+ * number
+ */
+
+
+exports.convert = convert;
+var isMultiples = _number2["default"].isMultiples,
+    isEven = _number2["default"].isEven,
+    isOdd = _number2["default"].isOdd,
+    round = _number2["default"].round,
+    nearEqual = _number2["default"].nearEqual,
+    inRange = _number2["default"].inRange,
+    keepMinMax = _number2["default"].keepMinMax,
+    randomInt = _number2["default"].randomInt,
+    makeInRange = _number2["default"].makeInRange;
+exports.makeInRange = makeInRange;
+exports.randomInt = randomInt;
+exports.keepMinMax = keepMinMax;
+exports.inRange = inRange;
+exports.nearEqual = nearEqual;
+exports.round = round;
+exports.isOdd = isOdd;
+exports.isEven = isEven;
+exports.isMultiples = isMultiples;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  isMultiples: isMultiples,
+  isEven: isEven,
+  isOdd: isOdd,
+  round: round,
+  nearEqual: nearEqual,
+  inRange: inRange,
+  keepMinMax: keepMinMax,
+  randomInt: randomInt,
+  makeInRange: makeInRange
+});
+
+var number = _copyProperty(_number2["default"], "\n  isMultiples, isEven, isOdd,\n  round, nearEqual,\n  inRange, keepMinMax,\n  randomInt,\n\n  makeInRange,\n"); // export const number = {
+//   ..._number,
+// };
+
+/**
+ * string
+ */
+
+
+exports.number = number;
+var isLowerCase = _string2["default"].isLowerCase,
+    isUpperCase = _string2["default"].isUpperCase,
+    replaceAll = _string2["default"].replaceAll,
+    matchFormat = _string2["default"].matchFormat,
+    split = _string2["default"].split,
+    splitCommaItems = _string2["default"].splitCommaItems,
+    splitDotItems = _string2["default"].splitDotItems;
+exports.splitDotItems = splitDotItems;
+exports.splitCommaItems = splitCommaItems;
+exports.split = split;
+exports.matchFormat = matchFormat;
+exports.replaceAll = replaceAll;
+exports.isUpperCase = isUpperCase;
+exports.isLowerCase = isLowerCase;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  isLowerCase: isLowerCase,
+  isUpperCase: isUpperCase,
+  replaceAll: replaceAll,
+  matchFormat: matchFormat,
+  split: split,
+  splitCommaItems: splitCommaItems,
+  splitDotItems: splitDotItems
+});
+
+var string = _copyProperty(_string2["default"], "\n  repeat,\n  isLowerCase, isUpperCase,\n  indexOfFirst, indexOfLast,\n  isFirst, isLast, isBothEnds,\n  includeFirst, includeLast, includeBothEnds,\n  excludeFirst, excludeLast, excludeBothEnds,\n  trimFirst, trimLast, trimBothEnds,\n  subIndex, subLength, subFirst, subLast,\n  deleteIndex, deleteLength, deleteFirst, deleteLast,\n  insert, add,\n  replaceAll,\n  matchFormat,\n  subFirstDelimFirst,\n  subFirstDelimLast,\n  subLastDelimFirst,\n  subLastDelimLast,\n  tagInnerFirst,\n  tagOuterFirst,\n  tagInnerLast,\n  tagOuterLast,\n  split,\n  splitCommaItems,\n  splitDotItems,\n"); // export const string = {
+//   ..._string,
+// };
+
+/**
+ * object
+ */
+
+
+exports.string = string;
+var copyProperty = _object2["default"].copyProperty,
+    getProperty = _object2["default"].getProperty,
+    setProperty = _object2["default"].setProperty,
+    inProperty = _object2["default"].inProperty,
+    fixProperty = _object2["default"].fixProperty,
+    propertyCount = _object2["default"].propertyCount,
+    propertyList = _object2["default"].propertyList,
+    objectEntries = _object2["default"].objectEntries,
+    objectKeys = _object2["default"].objectKeys,
+    objectValues = _object2["default"].objectValues,
+    hasOwn = _object2["default"].hasOwn,
+    hasPrototype = _object2["default"].hasPrototype,
+    has = _object2["default"].has,
+    objectToKeyValueArray = _object2["default"].objectToKeyValueArray,
+    objectToKeyArray = _object2["default"].objectToKeyArray,
+    objectToValueArray = _object2["default"].objectToValueArray,
+    copyProp = _object2["default"].copyProp,
+    getProp = _object2["default"].getProp,
+    setProp = _object2["default"].setProp,
+    inProp = _object2["default"].inProp,
+    fixProp = _object2["default"].fixProp,
+    propCount = _object2["default"].propCount;
+exports.propCount = propCount;
+exports.fixProp = fixProp;
+exports.inProp = inProp;
+exports.setProp = setProp;
+exports.getProp = getProp;
+exports.copyProp = copyProp;
+exports.objectToValueArray = objectToValueArray;
+exports.objectToKeyArray = objectToKeyArray;
+exports.objectToKeyValueArray = objectToKeyValueArray;
+exports.has = has;
+exports.hasPrototype = hasPrototype;
+exports.hasOwn = hasOwn;
+exports.objectValues = objectValues;
+exports.objectKeys = objectKeys;
+exports.objectEntries = objectEntries;
+exports.propertyList = propertyList;
+exports.propertyCount = propertyCount;
+exports.fixProperty = fixProperty;
+exports.inProperty = inProperty;
+exports.setProperty = setProperty;
+exports.getProperty = getProperty;
+exports.copyProperty = copyProperty;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  copyProperty: copyProperty,
+  getProperty: getProperty,
+  setProperty: setProperty,
+  inProperty: inProperty,
+  fixProperty: fixProperty,
+  propertyCount: propertyCount,
+  propertyList: propertyList,
+  objectEntries: objectEntries,
+  objectKeys: objectKeys,
+  objectValues: objectValues,
+  hasOwn: hasOwn,
+  hasPrototype: hasPrototype,
+  has: has,
+  // Another name
+  objectToKeyValueArray: objectToKeyValueArray,
+  objectToKeyArray: objectToKeyArray,
+  objectToValueArray: objectToValueArray,
+  // Short name
+  copyProp: copyProp,
+  getProp: getProp,
+  setProp: setProp,
+  inProp: inProp,
+  fixProp: fixProp,
+  propCount: propCount
+});
+
+var object = _copyProperty(_object2["default"], "\n  isObjectParameter,\n\n  copyProperty,\n  getProperty,\n  setProperty,\n  inProperty,\n  fixProperty,\n  propertyCount,\n  propertyList,\n  objectEntries,\n  objectKeys,\n  objectValues,\n  hasOwn,\n  hasPrototype,\n  has,\n\n  objectToKeyValueArray,\n  objectToKeyArray,\n  objectToValueArray,\n\n  copyProp,\n  getProp,\n  setProp,\n  inProp,\n  fixProp,\n  propCount,\n"); // export const object = {
+//   ..._object,
+// };
+
+/**
+ * array
+ */
+
+
+exports.object = object;
+var min = _array2["default"].min,
+    max = _array2["default"].max,
+    sum = _array2["default"].sum,
+    average = _array2["default"].average,
+    median = _array2["default"].median;
+exports.median = median;
+exports.average = average;
+exports.sum = sum;
+exports.max = max;
+exports.min = min;
+rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
+  min: min,
+  max: max,
+  sum: sum,
+  average: average,
+  median: median
+});
+
+var array = _copyProperty(_array2["default"], "\n  from,\n\n  min, max,\n  sum, average, median,\n  mode,\n  single, multiple,\n  filter, map, count,\n  findFirstIndex, findLastIndex,\n  findFirst, findLast,\n  some, all,\n  isFirst, isLast, isBothEnds,\n  subIndex, subLength,\n  subFirst, subLast,\n  group,\n  unique,\n\n  NumberArray,\n  IntegerArray,\n  arrayEntries,\n\n  findIndex, findBackIndex,\n  find, findBack,\n  every,\n  arrayToIndexValueArray,\n"); // export const array = {
+//   ..._array,
+// };
+
+
+exports.array = array;
+array.operation = _copyProperty(_array2["default"].operation, "\n  insert, add,\n  deleteLength, deleteIndex,\n  deleteFirst, deleteLast,\n  includeFirst, includeLast, includeBothEnds,\n  excludeFirst, excludeLast, excludeBothEnds,\n  trimFirst, trimLast, trimBothEnds,\n  popFirst, popLast,\n  pushFirst, pushLast,\n  remainFirst, remainLast,\n  filter,\n\n  sort,\n  sortNumber,\n  sortLength,\n  sortNumberAscending, sortNumberDescending,\n  sortLengthAscending, sortLengthDescending,\n\n  sortDictionary,\n  sortDictionaryAscending, sortDictionaryDescending,\n"); // array.operation = {
+//   ..._array.operation,
+// };
+
+/**
+ * consoleHook
+ */
+
+var isPrefixSafixAdd = function isPrefixSafixAdd(prefix, safix, commaString) {
+  return _map(_splitCommaItems(commaString), function (item) {
+    return prefix + item + safix;
+  }).join(',');
+};
+
+var consoleHook = _copyProperty(_consoleHook2["default"], [isPrefixSafixAdd('hook', '', 'Log,Info,Warn,Error,Debug,'), isPrefixSafixAdd('unHook', '', 'Log,Info,Warn,Error,Debug,'), isPrefixSafixAdd('accept', '', 'Log,Info,Warn,Error,Debug,'), 'hook', 'unHook', 'accept'].join(','));
+/**
+ * wsh
+ */
+
+
+exports.consoleHook = consoleHook;
+
+var wsh = _objectSpread({}, _wsh2["default"]);
+/**
+ * parts
+ */
+
+
+exports.wsh = wsh;
 
 var parts = _objectSpread({
   VERSION: VERSION,

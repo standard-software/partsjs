@@ -13,7 +13,7 @@ var _isObjectParameter = require("../../object/isObjectParameter.js");
 
 var _objectValues2 = require("../../object/objectValues.js");
 
-var _Enum2 = require("../../syntax/Enum.js");
+var _Enum2 = require("../../syntax/_Enum.js");
 
 var _sort = require("./sort.js");
 

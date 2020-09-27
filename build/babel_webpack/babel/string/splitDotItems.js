@@ -7,7 +7,7 @@ exports["default"] = exports.splitDotItems = exports._splitDotItems = void 0;
 
 var _type = require("../type/type.js");
 
-var _split = require("./split.js");
+var _split2 = require("./_split.js");
 
 var _includes = require("../compare/__includes.js");
 
@@ -16,7 +16,7 @@ var _splitDotItems = function _splitDotItems(str) {
     return [];
   }
 
-  var result = (0, _split.split)(str, '.', _split.split.excludeEmptyStr.first, _split.split.excludeSpace.none);
+  var result = (0, _split2._split)(str, '.', _split2._split.excludeEmptyStr.first, _split2._split.executeConvert.none);
 
   if ((0, _includes.__includes)(result, '')) {
     throw new Error("_splitDotItems args(str:".concat(str, ") is not correct format"));

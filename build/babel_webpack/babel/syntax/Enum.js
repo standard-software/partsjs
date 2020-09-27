@@ -3,37 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.Enum = exports._Enum = void 0;
+exports["default"] = exports.Enum = void 0;
 
 var _type = require("../type/type.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
+
+var _Enum2 = require("../syntax/_Enum.js");
 
 /* eslint-disable no-invalid-this */
 
 /**
  * Enum
  */
-var _Enum = function _Enum(values) {
-  var useIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  if (!(this instanceof _Enum)) {
-    return new _Enum(values, useIndex);
-  }
-
-  if (useIndex === false) {
-    for (var i = 0, l = values.length; i < l; i += 1) {
-      this[values[i]] = values[i];
-    }
-  } else {
-    for (var _i = 0, _l = values.length; _i < _l; _i += 1) {
-      this[values[_i]] = _i;
-    }
-  }
-};
-
-exports._Enum = _Enum;
-
 var Enum = function Enum(values) {
   var useIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -55,12 +37,12 @@ var Enum = function Enum(values) {
     throw new TypeError('Enum args(useIndex) is not boolean');
   }
 
-  return _Enum(values, useIndex);
+  return (0, _Enum2._Enum)(values, useIndex);
 };
 
 exports.Enum = Enum;
 var _default = {
-  _Enum: _Enum,
+  _Enum: _Enum2._Enum,
   Enum: Enum
 };
 exports["default"] = _default;

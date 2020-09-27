@@ -3,11 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports._stringToIntegerDefault = exports.stringToInteger = exports._stringToInteger = exports._stringToIntegerBase = exports.stringToNumberDefault = exports._stringToNumberDefault = exports.stringToNumber = exports._stringToNumber = exports._stringToNumberBase = exports.valueToString = exports.numberToString = exports._numberToString = void 0;
+exports["default"] = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports._stringToIntegerDefault = exports.stringToInteger = exports._stringToInteger = exports.stringToNumberDefault = exports._stringToNumberDefault = exports.stringToNumber = exports._stringToNumber = exports.valueToString = exports.numberToString = exports._numberToString = void 0;
 
 var _type = require("../type/type.js");
 
-var _compare = require("../compare/compare.js");
+var _matchValue2 = require("../compare/matchValue.js");
+
+var _initialValue2 = require("../compare/initialValue.js");
 
 var _string = require("../string/string.js");
 
@@ -105,8 +107,6 @@ var _stringToNumberBase = function _stringToNumberBase(value, defaultValueFunc) 
   return result;
 };
 
-exports._stringToNumberBase = _stringToNumberBase;
-
 var _stringToNumber = function _stringToNumber(value) {
   return _stringToNumberBase(value, function () {
     throw new RangeError('stringToNumber args(value) is not changeing number');
@@ -177,8 +177,6 @@ var _stringToIntegerBase = function _stringToIntegerBase(value, defaultValueFunc
 
   return result;
 };
-
-exports._stringToIntegerBase = _stringToIntegerBase;
 
 var _stringToInteger = function _stringToInteger(value) {
   var radix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
@@ -334,47 +332,12 @@ var valueToIntegerDefault = function valueToIntegerDefault(value, defaultValue) 
 };
 
 exports.valueToIntegerDefault = valueToIntegerDefault;
-var numToString = numberToString;
-exports.numToString = numToString;
-var valToString = valueToString;
-exports.valToString = valToString;
-var strToNumber = stringToNumber;
-exports.strToNumber = strToNumber;
-var strToNumberDef = stringToNumberDefault;
-exports.strToNumberDef = strToNumberDef;
-var strToInteger = stringToInteger;
-exports.strToInteger = strToInteger;
-var strToIntegerDef = stringToIntegerDefault;
-exports.strToIntegerDef = strToIntegerDef;
-var valToNumber = valueToNumber;
-exports.valToNumber = valToNumber;
-var valToNumberDef = valueToNumberDefault;
-exports.valToNumberDef = valToNumberDef;
-var valToInteger = valueToInteger;
-exports.valToInteger = valToInteger;
-var valToIntegerDef = valueToIntegerDefault;
-exports.valToIntegerDef = valToIntegerDef;
-var numToStr = numberToString;
-exports.numToStr = numToStr;
-var valToStr = valueToString;
-exports.valToStr = valToStr;
-var strToNum = stringToNumber;
-exports.strToNum = strToNum;
-var strToNumDef = stringToNumberDefault;
-exports.strToNumDef = strToNumDef;
-var strToInt = stringToInteger;
-exports.strToInt = strToInt;
-var strToIntDef = stringToIntegerDefault;
-exports.strToIntDef = strToIntDef;
-var valToNum = valueToNumber;
-exports.valToNum = valToNum;
-var valToNumDef = valueToNumberDefault;
-exports.valToNumDef = valToNumDef;
-var valToInt = valueToInteger;
-exports.valToInt = valToInt;
-var valToIntDef = valueToIntegerDefault;
-exports.valToIntDef = valToIntDef;
 var _default = {
+  _numberToString: _numberToString,
+  _stringToNumber: _stringToNumber,
+  _stringToNumberDefault: _stringToNumberDefault,
+  _stringToInteger: _stringToInteger,
+  _stringToIntegerDefault: _stringToIntegerDefault,
   numberToString: numberToString,
   valueToString: valueToString,
   stringToNumber: stringToNumber,
@@ -384,26 +347,6 @@ var _default = {
   valueToNumber: valueToNumber,
   valueToNumberDefault: valueToNumberDefault,
   valueToInteger: valueToInteger,
-  valueToIntegerDefault: valueToIntegerDefault,
-  numToString: numToString,
-  valToString: valToString,
-  strToNumber: strToNumber,
-  strToNumberDef: strToNumberDef,
-  strToInteger: strToInteger,
-  strToIntegerDef: strToIntegerDef,
-  valToNumber: valToNumber,
-  valToNumberDef: valToNumberDef,
-  valToInteger: valToInteger,
-  valToIntegerDef: valToIntegerDef,
-  numToStr: numToStr,
-  valToStr: valToStr,
-  valToNum: valToNum,
-  valToNumDef: valToNumDef,
-  valToInt: valToInt,
-  valToIntDef: valToIntDef,
-  strToNum: strToNum,
-  strToNumDef: strToNumDef,
-  strToInt: strToInt,
-  strToIntDef: strToIntDef
+  valueToIntegerDefault: valueToIntegerDefault
 };
 exports["default"] = _default;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isObjectParameter = void 0;
+exports["default"] = exports.isObjectParameter = exports._isObjectParameter = void 0;
 
 var _isType = require("../type/isType.js");
 
@@ -15,10 +15,14 @@ var _hasOwn2 = require("../object/_hasOwn.js");
 
 var _includes = require("../compare/__includes.js");
 
+// import {
+//   _splitCommaItems,
+// } from '../string/splitCommaItems.js';
+
 /**
  * isObjectParameter
  */
-var isObjectParameter = function isObjectParameter(object, props) {
+var _isObjectParameter = function _isObjectParameter(object, props) {
   var optionalProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var optionalMinCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
@@ -26,19 +30,12 @@ var isObjectParameter = function isObjectParameter(object, props) {
     return false;
   }
 
-  if (!(0, _isType.isString)(props)) {
-    return false;
-  }
-
-  if (!(0, _isType.isString)(optionalProps)) {
-    return false;
-  }
-
-  props = (0, _replaceAll2._replaceAll)(props, ' ', '').split(','); // last element === '' delete
+  props = (0, _replaceAll2._replaceAll)(props, ' ', '').split(',');
 
   if (props[props.length - 1] === '') {
     props.splice(props.length - 1, 1);
-  }
+  } // props = _splitCommaItems(props); // Circular reference Error
+
 
   optionalProps = (0, _replaceAll2._replaceAll)(optionalProps, ' ', '').split(',');
 
@@ -72,8 +69,30 @@ var isObjectParameter = function isObjectParameter(object, props) {
   return true;
 };
 
+exports._isObjectParameter = _isObjectParameter;
+
+var isObjectParameter = function isObjectParameter(object, props) {
+  var optionalProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var optionalMinCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+  if (!(0, _isType.isString)(props)) {
+    throw new TypeError('isObjectParameter args(props) is not string');
+  }
+
+  if (!(0, _isType.isString)(optionalProps)) {
+    throw new TypeError('isObjectParameter args(optionalProps) is not string');
+  }
+
+  if (!(0, _isType.isInteger)(optionalMinCount)) {
+    throw new TypeError('isObjectParameter args(optionalMinCount) is not integer');
+  }
+
+  return _isObjectParameter(object, props, optionalProps, optionalMinCount);
+};
+
 exports.isObjectParameter = isObjectParameter;
 var _default = {
+  _isObjectParameter: _isObjectParameter,
   isObjectParameter: isObjectParameter
 };
 exports["default"] = _default;

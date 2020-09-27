@@ -1671,10 +1671,10 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.last));
         checkEqual(['', 'ABC', '', 'DEF', '', 'GHI', ''], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.bothEnds));
         checkEqual(['ABC', 'DEF', 'GHI'], split(',,ABC,,DEF,,GHI,,', ',', split.excludeEmptyStr.all));
-        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.none));
-        checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.trim));
-        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.excludeSpace.all));
-        checkEqual(['ABC', 'DEF', 'GHI'], split(' , , A B C , , DE F ,, G HI , , ', ',', split.excludeEmptyStr.all, split.excludeSpace.all));
+        checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.executeConvert.none));
+        checkEqual(['', '', 'A B C', '', 'DE F', '', 'G HI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.executeConvert.trimSpace));
+        checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.none, split.executeConvert.excludeSpace));
+        checkEqual(['ABC', 'DEF', 'GHI'], split(' , , A B C , , DE F ,, G HI , , ', ',', split.excludeEmptyStr.all, split.executeConvert.excludeSpace));
         checkEqual([''], split('', ',', split.excludeEmptyStr.none));
         checkEqual([], split('', ',', split.excludeEmptyStr.first));
         checkEqual([''], split('', ',', split.excludeEmptyStr.last));
@@ -1696,23 +1696,24 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(['A'], split(',A,', ',', split.excludeEmptyStr.bothEnds));
         checkEqual(['A'], split(',A,', ',', split.excludeEmptyStr.all)); // object parameter
 
+        testCounter();
         checkEqual(['ABC', 'DEF', 'GHI'], split({
           str: ',, A B C ,, DE F ,, G HI ,,',
           separator: ',',
           excludeEmptyStr: split.excludeEmptyStr.all,
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', {
           separator: ',',
           excludeEmptyStr: split.excludeEmptyStr.all,
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', ',', {
           excludeEmptyStr: split.excludeEmptyStr.all,
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual(['ABC', 'DEF', 'GHI'], split(',, A B C ,, DE F ,, G HI ,,', ',', split.excludeEmptyStr.all, {
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual([' A B C ', ' DE F ', ' G HI '], split({
           str: ',, A B C ,, DE F ,, G HI ,,',
@@ -1729,14 +1730,14 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split({
           str: ',, A B C ,, DE F ,, G HI ,,',
           separator: ',',
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', {
           separator: ',',
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual(['', '', 'ABC', '', 'DEF', '', 'GHI', '', ''], split(',, A B C ,, DE F ,, G HI ,,', ',', {
-          excludeSpace: split.excludeSpace.all
+          executeConvert: split.executeConvert.excludeSpace
         }));
         checkEqual(['', '', ' A B C ', '', ' DE F ', '', ' G HI ', '', ''], split({
           str: ',, A B C ,, DE F ,, G HI ,,',

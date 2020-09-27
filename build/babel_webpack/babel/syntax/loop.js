@@ -9,7 +9,7 @@ var _type = require("../type/type.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _IntegerArray2 = require("../array/IntegerArray.js");
+var _IntegerArray2 = require("../array/_IntegerArray.js");
 
 var _objectEntries = require("../object/objectEntries.js");
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.splitDotItems = exports.splitCommaItems = exports.split = exports._split = exports.tagOuterLast = exports._tagOuterLast = exports.tagInnerLast = exports._tagInnerLast = exports.tagOuterFirst = exports._tagOuterFirst = exports.tagInnerFirst = exports._tagInnerFirst = exports.subLastDelimLast = exports._subLastDelimLast = exports.subLastDelimFirst = exports._subLastDelimFirst = exports.subFirstDelimLast = exports._subFirstDelimLast = exports.subFirstDelimFirst = exports._subFirstDelimFirst = exports.matchFormat = exports._matchFormat = exports.replaceAll = exports._replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
+exports["default"] = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.tagOuterLast = exports.tagInnerLast = exports.tagOuterFirst = exports.tagInnerFirst = exports.subLastDelimLast = exports.subLastDelimFirst = exports.subFirstDelimLast = exports.subFirstDelimFirst = exports.matchFormat = exports.replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._splitDotItems = exports._splitCommaItems = exports._split = exports._tagOuterLast = exports._tagInnerLast = exports._tagOuterFirst = exports._tagInnerFirst = exports._subLastDelimLast = exports._subLastDelimFirst = exports._subFirstDelimLast = exports._subFirstDelimFirst = exports._matchFormat = exports._replaceAll = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
 
 var _string_common = _interopRequireDefault(require("./string_common.js"));
 
@@ -29,11 +29,13 @@ var _tagInnerLast2 = _interopRequireDefault(require("./tagInnerLast.js"));
 
 var _tagOuterLast2 = _interopRequireDefault(require("./tagOuterLast.js"));
 
-var _split2 = _interopRequireDefault(require("./split.js"));
+var _split2 = _interopRequireDefault(require("./_split.js"));
 
-var _splitCommaItems = _interopRequireDefault(require("./splitCommaItems.js"));
+var _split3 = _interopRequireDefault(require("./split.js"));
 
-var _splitDotItems = _interopRequireDefault(require("./splitDotItems.js"));
+var _splitCommaItems2 = _interopRequireDefault(require("./splitCommaItems.js"));
+
+var _splitDotItems2 = _interopRequireDefault(require("./splitDotItems.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -43,87 +45,61 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _repeat = _string_common["default"]._repeat,
-    _isLowerCase = _string_common["default"]._isLowerCase,
-    _isUpperCase = _string_common["default"]._isUpperCase,
-    _indexOfFirst = _string_common["default"]._indexOfFirst,
-    _indexOfLast = _string_common["default"]._indexOfLast,
-    _isFirst = _string_common["default"]._isFirst,
-    _isLast = _string_common["default"]._isLast,
-    _isBothEnds = _string_common["default"]._isBothEnds,
-    _includeFirst = _string_common["default"]._includeFirst,
-    _includeLast = _string_common["default"]._includeLast,
-    _includeBothEnds = _string_common["default"]._includeBothEnds,
-    _excludeFirst = _string_common["default"]._excludeFirst,
-    _excludeLast = _string_common["default"]._excludeLast,
-    _excludeBothEnds = _string_common["default"]._excludeBothEnds,
-    _trimFirst = _string_common["default"]._trimFirst,
-    _trimLast = _string_common["default"]._trimLast,
-    _trimBothEnds = _string_common["default"]._trimBothEnds,
-    _subIndex = _string_common["default"]._subIndex,
-    _subLength = _string_common["default"]._subLength,
-    _subFirst = _string_common["default"]._subFirst,
-    _subLast = _string_common["default"]._subLast,
-    _deleteIndex = _string_common["default"]._deleteIndex,
-    _deleteLength = _string_common["default"]._deleteLength,
-    _deleteFirst = _string_common["default"]._deleteFirst,
-    _deleteLast = _string_common["default"]._deleteLast,
-    _insert = _string_common["default"]._insert,
-    _add = _string_common["default"]._add,
-    repeat = _string_common["default"].repeat,
-    isLowerCase = _string_common["default"].isLowerCase,
-    isUpperCase = _string_common["default"].isUpperCase,
-    indexOfFirst = _string_common["default"].indexOfFirst,
-    indexOfLast = _string_common["default"].indexOfLast,
-    isFirst = _string_common["default"].isFirst,
-    isLast = _string_common["default"].isLast,
-    isBothEnds = _string_common["default"].isBothEnds,
-    includeFirst = _string_common["default"].includeFirst,
-    includeLast = _string_common["default"].includeLast,
-    includeBothEnds = _string_common["default"].includeBothEnds,
-    excludeFirst = _string_common["default"].excludeFirst,
-    excludeLast = _string_common["default"].excludeLast,
-    excludeBothEnds = _string_common["default"].excludeBothEnds,
-    trimFirst = _string_common["default"].trimFirst,
-    trimLast = _string_common["default"].trimLast,
-    trimBothEnds = _string_common["default"].trimBothEnds,
-    subIndex = _string_common["default"].subIndex,
-    subLength = _string_common["default"].subLength,
-    subFirst = _string_common["default"].subFirst,
-    subLast = _string_common["default"].subLast,
-    deleteIndex = _string_common["default"].deleteIndex,
-    deleteLength = _string_common["default"].deleteLength,
-    deleteFirst = _string_common["default"].deleteFirst,
-    deleteLast = _string_common["default"].deleteLast,
-    insert = _string_common["default"].insert,
-    add = _string_common["default"].add;
-exports.add = add;
-exports.insert = insert;
-exports.deleteLast = deleteLast;
-exports.deleteFirst = deleteFirst;
-exports.deleteLength = deleteLength;
-exports.deleteIndex = deleteIndex;
-exports.subLast = subLast;
-exports.subFirst = subFirst;
-exports.subLength = subLength;
-exports.subIndex = subIndex;
-exports.trimBothEnds = trimBothEnds;
-exports.trimLast = trimLast;
-exports.trimFirst = trimFirst;
-exports.excludeBothEnds = excludeBothEnds;
-exports.excludeLast = excludeLast;
-exports.excludeFirst = excludeFirst;
-exports.includeBothEnds = includeBothEnds;
-exports.includeLast = includeLast;
-exports.includeFirst = includeFirst;
-exports.isBothEnds = isBothEnds;
-exports.isLast = isLast;
-exports.isFirst = isFirst;
-exports.indexOfLast = indexOfLast;
-exports.indexOfFirst = indexOfFirst;
-exports.isUpperCase = isUpperCase;
-exports.isLowerCase = isLowerCase;
-exports.repeat = repeat;
+var stringJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _matchFormat2["default"]), _subFirstDelimFirst2["default"]), _subFirstDelimLast2["default"]), _subLastDelimFirst2["default"]), _subLastDelimLast2["default"]), _tagInnerFirst2["default"]), _tagOuterFirst2["default"]), _tagInnerLast2["default"]), _tagOuterLast2["default"]), _split2["default"]), _split3["default"]), _splitCommaItems2["default"]), _splitDotItems2["default"]);
+
+var _repeat = stringJs._repeat,
+    _isLowerCase = stringJs._isLowerCase,
+    _isUpperCase = stringJs._isUpperCase,
+    _indexOfFirst = stringJs._indexOfFirst,
+    _indexOfLast = stringJs._indexOfLast,
+    _isFirst = stringJs._isFirst,
+    _isLast = stringJs._isLast,
+    _isBothEnds = stringJs._isBothEnds,
+    _includeFirst = stringJs._includeFirst,
+    _includeLast = stringJs._includeLast,
+    _includeBothEnds = stringJs._includeBothEnds,
+    _excludeFirst = stringJs._excludeFirst,
+    _excludeLast = stringJs._excludeLast,
+    _excludeBothEnds = stringJs._excludeBothEnds,
+    _trimFirst = stringJs._trimFirst,
+    _trimLast = stringJs._trimLast,
+    _trimBothEnds = stringJs._trimBothEnds,
+    _subIndex = stringJs._subIndex,
+    _subLength = stringJs._subLength,
+    _subFirst = stringJs._subFirst,
+    _subLast = stringJs._subLast,
+    _deleteIndex = stringJs._deleteIndex,
+    _deleteLength = stringJs._deleteLength,
+    _deleteFirst = stringJs._deleteFirst,
+    _deleteLast = stringJs._deleteLast,
+    _insert = stringJs._insert,
+    _add = stringJs._add,
+    _replaceAll = stringJs._replaceAll,
+    _matchFormat = stringJs._matchFormat,
+    _subFirstDelimFirst = stringJs._subFirstDelimFirst,
+    _subFirstDelimLast = stringJs._subFirstDelimLast,
+    _subLastDelimFirst = stringJs._subLastDelimFirst,
+    _subLastDelimLast = stringJs._subLastDelimLast,
+    _tagInnerFirst = stringJs._tagInnerFirst,
+    _tagOuterFirst = stringJs._tagOuterFirst,
+    _tagInnerLast = stringJs._tagInnerLast,
+    _tagOuterLast = stringJs._tagOuterLast,
+    _split = stringJs._split,
+    _splitCommaItems = stringJs._splitCommaItems,
+    _splitDotItems = stringJs._splitDotItems;
+exports._splitDotItems = _splitDotItems;
+exports._splitCommaItems = _splitCommaItems;
+exports._split = _split;
+exports._tagOuterLast = _tagOuterLast;
+exports._tagInnerLast = _tagInnerLast;
+exports._tagOuterFirst = _tagOuterFirst;
+exports._tagInnerFirst = _tagInnerFirst;
+exports._subLastDelimLast = _subLastDelimLast;
+exports._subLastDelimFirst = _subLastDelimFirst;
+exports._subFirstDelimLast = _subFirstDelimLast;
+exports._subFirstDelimFirst = _subFirstDelimFirst;
+exports._matchFormat = _matchFormat;
+exports._replaceAll = _replaceAll;
 exports._add = _add;
 exports._insert = _insert;
 exports._deleteLast = _deleteLast;
@@ -151,55 +127,166 @@ exports._indexOfFirst = _indexOfFirst;
 exports._isUpperCase = _isUpperCase;
 exports._isLowerCase = _isLowerCase;
 exports._repeat = _repeat;
-var _replaceAll = _replaceAll2["default"]._replaceAll;
-exports._replaceAll = _replaceAll;
-var replaceAll = _replaceAll3["default"].replaceAll;
-exports.replaceAll = replaceAll;
-var _matchFormat = _matchFormat2["default"]._matchFormat,
-    matchFormat = _matchFormat2["default"].matchFormat;
-exports.matchFormat = matchFormat;
-exports._matchFormat = _matchFormat;
-var _subFirstDelimFirst = _subFirstDelimFirst2["default"]._subFirstDelimFirst,
-    subFirstDelimFirst = _subFirstDelimFirst2["default"].subFirstDelimFirst;
-exports.subFirstDelimFirst = subFirstDelimFirst;
-exports._subFirstDelimFirst = _subFirstDelimFirst;
-var _subFirstDelimLast = _subFirstDelimLast2["default"]._subFirstDelimLast,
-    subFirstDelimLast = _subFirstDelimLast2["default"].subFirstDelimLast;
-exports.subFirstDelimLast = subFirstDelimLast;
-exports._subFirstDelimLast = _subFirstDelimLast;
-var _subLastDelimFirst = _subLastDelimFirst2["default"]._subLastDelimFirst,
-    subLastDelimFirst = _subLastDelimFirst2["default"].subLastDelimFirst;
-exports.subLastDelimFirst = subLastDelimFirst;
-exports._subLastDelimFirst = _subLastDelimFirst;
-var _subLastDelimLast = _subLastDelimLast2["default"]._subLastDelimLast,
-    subLastDelimLast = _subLastDelimLast2["default"].subLastDelimLast;
-exports.subLastDelimLast = subLastDelimLast;
-exports._subLastDelimLast = _subLastDelimLast;
-var _tagInnerFirst = _tagInnerFirst2["default"]._tagInnerFirst,
-    tagInnerFirst = _tagInnerFirst2["default"].tagInnerFirst;
-exports.tagInnerFirst = tagInnerFirst;
-exports._tagInnerFirst = _tagInnerFirst;
-var _tagOuterFirst = _tagOuterFirst2["default"]._tagOuterFirst,
-    tagOuterFirst = _tagOuterFirst2["default"].tagOuterFirst;
-exports.tagOuterFirst = tagOuterFirst;
-exports._tagOuterFirst = _tagOuterFirst;
-var _tagInnerLast = _tagInnerLast2["default"]._tagInnerLast,
-    tagInnerLast = _tagInnerLast2["default"].tagInnerLast;
-exports.tagInnerLast = tagInnerLast;
-exports._tagInnerLast = _tagInnerLast;
-var _tagOuterLast = _tagOuterLast2["default"]._tagOuterLast,
-    tagOuterLast = _tagOuterLast2["default"].tagOuterLast;
-exports.tagOuterLast = tagOuterLast;
-exports._tagOuterLast = _tagOuterLast;
-var _split = _split2["default"]._split,
-    split = _split2["default"].split;
-exports.split = split;
-exports._split = _split;
-var splitCommaItems = _splitCommaItems["default"].splitCommaItems;
-exports.splitCommaItems = splitCommaItems;
-var splitDotItems = _splitDotItems["default"].splitDotItems;
+var repeat = stringJs.repeat,
+    isLowerCase = stringJs.isLowerCase,
+    isUpperCase = stringJs.isUpperCase,
+    indexOfFirst = stringJs.indexOfFirst,
+    indexOfLast = stringJs.indexOfLast,
+    isFirst = stringJs.isFirst,
+    isLast = stringJs.isLast,
+    isBothEnds = stringJs.isBothEnds,
+    includeFirst = stringJs.includeFirst,
+    includeLast = stringJs.includeLast,
+    includeBothEnds = stringJs.includeBothEnds,
+    excludeFirst = stringJs.excludeFirst,
+    excludeLast = stringJs.excludeLast,
+    excludeBothEnds = stringJs.excludeBothEnds,
+    trimFirst = stringJs.trimFirst,
+    trimLast = stringJs.trimLast,
+    trimBothEnds = stringJs.trimBothEnds,
+    subIndex = stringJs.subIndex,
+    subLength = stringJs.subLength,
+    subFirst = stringJs.subFirst,
+    subLast = stringJs.subLast,
+    deleteIndex = stringJs.deleteIndex,
+    deleteLength = stringJs.deleteLength,
+    deleteFirst = stringJs.deleteFirst,
+    deleteLast = stringJs.deleteLast,
+    insert = stringJs.insert,
+    add = stringJs.add,
+    replaceAll = stringJs.replaceAll,
+    matchFormat = stringJs.matchFormat,
+    subFirstDelimFirst = stringJs.subFirstDelimFirst,
+    subFirstDelimLast = stringJs.subFirstDelimLast,
+    subLastDelimFirst = stringJs.subLastDelimFirst,
+    subLastDelimLast = stringJs.subLastDelimLast,
+    tagInnerFirst = stringJs.tagInnerFirst,
+    tagOuterFirst = stringJs.tagOuterFirst,
+    tagInnerLast = stringJs.tagInnerLast,
+    tagOuterLast = stringJs.tagOuterLast,
+    split = stringJs.split,
+    splitCommaItems = stringJs.splitCommaItems,
+    splitDotItems = stringJs.splitDotItems;
 exports.splitDotItems = splitDotItems;
-
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _matchFormat2["default"]), _subFirstDelimFirst2["default"]), _subFirstDelimLast2["default"]), _subLastDelimFirst2["default"]), _subLastDelimLast2["default"]), _tagInnerFirst2["default"]), _tagOuterFirst2["default"]), _tagInnerLast2["default"]), _tagOuterLast2["default"]), _split2["default"]), _splitCommaItems["default"]), _splitDotItems["default"]);
-
+exports.splitCommaItems = splitCommaItems;
+exports.split = split;
+exports.tagOuterLast = tagOuterLast;
+exports.tagInnerLast = tagInnerLast;
+exports.tagOuterFirst = tagOuterFirst;
+exports.tagInnerFirst = tagInnerFirst;
+exports.subLastDelimLast = subLastDelimLast;
+exports.subLastDelimFirst = subLastDelimFirst;
+exports.subFirstDelimLast = subFirstDelimLast;
+exports.subFirstDelimFirst = subFirstDelimFirst;
+exports.matchFormat = matchFormat;
+exports.replaceAll = replaceAll;
+exports.add = add;
+exports.insert = insert;
+exports.deleteLast = deleteLast;
+exports.deleteFirst = deleteFirst;
+exports.deleteLength = deleteLength;
+exports.deleteIndex = deleteIndex;
+exports.subLast = subLast;
+exports.subFirst = subFirst;
+exports.subLength = subLength;
+exports.subIndex = subIndex;
+exports.trimBothEnds = trimBothEnds;
+exports.trimLast = trimLast;
+exports.trimFirst = trimFirst;
+exports.excludeBothEnds = excludeBothEnds;
+exports.excludeLast = excludeLast;
+exports.excludeFirst = excludeFirst;
+exports.includeBothEnds = includeBothEnds;
+exports.includeLast = includeLast;
+exports.includeFirst = includeFirst;
+exports.isBothEnds = isBothEnds;
+exports.isLast = isLast;
+exports.isFirst = isFirst;
+exports.indexOfLast = indexOfLast;
+exports.indexOfFirst = indexOfFirst;
+exports.isUpperCase = isUpperCase;
+exports.isLowerCase = isLowerCase;
+exports.repeat = repeat;
+var _default = {
+  _repeat: _repeat,
+  _isLowerCase: _isLowerCase,
+  _isUpperCase: _isUpperCase,
+  _indexOfFirst: _indexOfFirst,
+  _indexOfLast: _indexOfLast,
+  _isFirst: _isFirst,
+  _isLast: _isLast,
+  _isBothEnds: _isBothEnds,
+  _includeFirst: _includeFirst,
+  _includeLast: _includeLast,
+  _includeBothEnds: _includeBothEnds,
+  _excludeFirst: _excludeFirst,
+  _excludeLast: _excludeLast,
+  _excludeBothEnds: _excludeBothEnds,
+  _trimFirst: _trimFirst,
+  _trimLast: _trimLast,
+  _trimBothEnds: _trimBothEnds,
+  _subIndex: _subIndex,
+  _subLength: _subLength,
+  _subFirst: _subFirst,
+  _subLast: _subLast,
+  _deleteIndex: _deleteIndex,
+  _deleteLength: _deleteLength,
+  _deleteFirst: _deleteFirst,
+  _deleteLast: _deleteLast,
+  _insert: _insert,
+  _add: _add,
+  _replaceAll: _replaceAll,
+  _matchFormat: _matchFormat,
+  _subFirstDelimFirst: _subFirstDelimFirst,
+  _subFirstDelimLast: _subFirstDelimLast,
+  _subLastDelimFirst: _subLastDelimFirst,
+  _subLastDelimLast: _subLastDelimLast,
+  _tagInnerFirst: _tagInnerFirst,
+  _tagOuterFirst: _tagOuterFirst,
+  _tagInnerLast: _tagInnerLast,
+  _tagOuterLast: _tagOuterLast,
+  _split: _split,
+  _splitCommaItems: _splitCommaItems,
+  _splitDotItems: _splitDotItems,
+  repeat: repeat,
+  isLowerCase: isLowerCase,
+  isUpperCase: isUpperCase,
+  indexOfFirst: indexOfFirst,
+  indexOfLast: indexOfLast,
+  isFirst: isFirst,
+  isLast: isLast,
+  isBothEnds: isBothEnds,
+  includeFirst: includeFirst,
+  includeLast: includeLast,
+  includeBothEnds: includeBothEnds,
+  excludeFirst: excludeFirst,
+  excludeLast: excludeLast,
+  excludeBothEnds: excludeBothEnds,
+  trimFirst: trimFirst,
+  trimLast: trimLast,
+  trimBothEnds: trimBothEnds,
+  subIndex: subIndex,
+  subLength: subLength,
+  subFirst: subFirst,
+  subLast: subLast,
+  deleteIndex: deleteIndex,
+  deleteLength: deleteLength,
+  deleteFirst: deleteFirst,
+  deleteLast: deleteLast,
+  insert: insert,
+  add: add,
+  replaceAll: replaceAll,
+  matchFormat: matchFormat,
+  subFirstDelimFirst: subFirstDelimFirst,
+  subFirstDelimLast: subFirstDelimLast,
+  subLastDelimFirst: subLastDelimFirst,
+  subLastDelimLast: subLastDelimLast,
+  tagInnerFirst: tagInnerFirst,
+  tagOuterFirst: tagOuterFirst,
+  tagInnerLast: tagInnerLast,
+  tagOuterLast: tagOuterLast,
+  split: split,
+  splitCommaItems: splitCommaItems,
+  splitDotItems: splitDotItems
+};
 exports["default"] = _default;

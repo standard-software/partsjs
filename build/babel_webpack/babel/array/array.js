@@ -3,15 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.operation = exports["default"] = exports.unique = exports._unique = exports.__unique = exports.group = exports._group = exports.arrayEntries = exports.arrayToIndexValueArray = exports._arrayToIndexValueArray = exports.IntegerArray = exports._IntegerArray = exports.NumberArray = exports._NumberArray = exports.every = exports.findBack = exports.find = exports.findBackIndex = exports.findIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.isBothEnds = exports.isLast = exports.isFirst = exports.all = exports.some = exports.findLast = exports.findFirst = exports.findLastIndex = exports.findFirstIndex = exports.count = exports.map = exports.filter = exports.multiple = exports.single = exports.mode = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.from = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._isBothEnds = exports._isLast = exports._isFirst = exports._all = exports._some = exports._findLast = exports._findFirst = exports._findLastIndex = exports._findFirstIndex = exports._count = exports._map = exports._filter = exports._multiple = exports._single = exports._mode = exports._median = exports._average = exports._sum = exports._max = exports._min = void 0;
+exports["default"] = exports.operation = exports.arrayToIndexValueArray = exports.every = exports.findBack = exports.find = exports.findBackIndex = exports.findIndex = exports.arrayEntries = exports.IntegerArray = exports.NumberArray = exports.unique = exports.group = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.isBothEnds = exports.isLast = exports.isFirst = exports.all = exports.some = exports.findLast = exports.findFirst = exports.findLastIndex = exports.findFirstIndex = exports.count = exports.map = exports.filter = exports.multiple = exports.single = exports.mode = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.from = exports._arrayEntries = exports._IntegerArray = exports._NumberArray = exports._unique = exports._group = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._isBothEnds = exports._isLast = exports._isFirst = exports._all = exports._some = exports._findLast = exports._findFirst = exports._findLastIndex = exports._findFirstIndex = exports._count = exports._map = exports._filter = exports._multiple = exports._single = exports._mode = exports._median = exports._average = exports._sum = exports._max = exports._min = exports.__unique = void 0;
 
 var _array_common = _interopRequireDefault(require("./array_common.js"));
 
-var _NumberArray2 = _interopRequireDefault(require("./NumberArray.js"));
+var _NumberArray2 = _interopRequireDefault(require("./_NumberArray.js"));
 
-var _IntegerArray2 = _interopRequireDefault(require("./IntegerArray.js"));
+var _NumberArray3 = _interopRequireDefault(require("./NumberArray.js"));
 
-var _arrayToIndexValueArray2 = _interopRequireDefault(require("./arrayToIndexValueArray.js"));
+var _IntegerArray2 = _interopRequireDefault(require("./_IntegerArray.js"));
+
+var _IntegerArray3 = _interopRequireDefault(require("./IntegerArray.js"));
+
+var _arrayEntries2 = _interopRequireDefault(require("./arrayEntries.js"));
 
 var _group2 = _interopRequireDefault(require("./group.js"));
 
@@ -31,65 +35,122 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _min = _array_common["default"]._min,
-    _max = _array_common["default"]._max,
-    _sum = _array_common["default"]._sum,
-    _average = _array_common["default"]._average,
-    _median = _array_common["default"]._median,
-    _mode = _array_common["default"]._mode,
-    _single = _array_common["default"]._single,
-    _multiple = _array_common["default"]._multiple,
-    _filter = _array_common["default"]._filter,
-    _map = _array_common["default"]._map,
-    _count = _array_common["default"]._count,
-    _findFirstIndex = _array_common["default"]._findFirstIndex,
-    _findLastIndex = _array_common["default"]._findLastIndex,
-    _findFirst = _array_common["default"]._findFirst,
-    _findLast = _array_common["default"]._findLast,
-    _some = _array_common["default"]._some,
-    _all = _array_common["default"]._all,
-    _isFirst = _array_common["default"]._isFirst,
-    _isLast = _array_common["default"]._isLast,
-    _isBothEnds = _array_common["default"]._isBothEnds,
-    _subIndex = _array_common["default"]._subIndex,
-    _subLength = _array_common["default"]._subLength,
-    _subFirst = _array_common["default"]._subFirst,
-    _subLast = _array_common["default"]._subLast,
-    from = _array_common["default"].from,
-    min = _array_common["default"].min,
-    max = _array_common["default"].max,
-    sum = _array_common["default"].sum,
-    average = _array_common["default"].average,
-    median = _array_common["default"].median,
-    mode = _array_common["default"].mode,
-    single = _array_common["default"].single,
-    multiple = _array_common["default"].multiple,
-    filter = _array_common["default"].filter,
-    map = _array_common["default"].map,
-    count = _array_common["default"].count,
-    findFirstIndex = _array_common["default"].findFirstIndex,
-    findLastIndex = _array_common["default"].findLastIndex,
-    findFirst = _array_common["default"].findFirst,
-    findLast = _array_common["default"].findLast,
-    some = _array_common["default"].some,
-    all = _array_common["default"].all,
-    isFirst = _array_common["default"].isFirst,
-    isLast = _array_common["default"].isLast,
-    isBothEnds = _array_common["default"].isBothEnds,
-    subIndex = _array_common["default"].subIndex,
-    subLength = _array_common["default"].subLength,
-    subFirst = _array_common["default"].subFirst,
-    subLast = _array_common["default"].subLast,
-    findIndex = _array_common["default"].findIndex,
-    findBackIndex = _array_common["default"].findBackIndex,
-    find = _array_common["default"].find,
-    findBack = _array_common["default"].findBack,
-    every = _array_common["default"].every;
+// import { _copyProperty } from './object/object_common.js';
+var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _unique2["default"]);
+
+var arrayOperationJs = _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"]);
+
+var __unique = arrayJs.__unique,
+    _min = arrayJs._min,
+    _max = arrayJs._max,
+    _sum = arrayJs._sum,
+    _average = arrayJs._average,
+    _median = arrayJs._median,
+    _mode = arrayJs._mode,
+    _single = arrayJs._single,
+    _multiple = arrayJs._multiple,
+    _filter = arrayJs._filter,
+    _map = arrayJs._map,
+    _count = arrayJs._count,
+    _findFirstIndex = arrayJs._findFirstIndex,
+    _findLastIndex = arrayJs._findLastIndex,
+    _findFirst = arrayJs._findFirst,
+    _findLast = arrayJs._findLast,
+    _some = arrayJs._some,
+    _all = arrayJs._all,
+    _isFirst = arrayJs._isFirst,
+    _isLast = arrayJs._isLast,
+    _isBothEnds = arrayJs._isBothEnds,
+    _subIndex = arrayJs._subIndex,
+    _subLength = arrayJs._subLength,
+    _subFirst = arrayJs._subFirst,
+    _subLast = arrayJs._subLast,
+    _group = arrayJs._group,
+    _unique = arrayJs._unique,
+    _NumberArray = arrayJs._NumberArray,
+    _IntegerArray = arrayJs._IntegerArray,
+    _arrayEntries = arrayJs._arrayEntries,
+    from = arrayJs.from,
+    min = arrayJs.min,
+    max = arrayJs.max,
+    sum = arrayJs.sum,
+    average = arrayJs.average,
+    median = arrayJs.median,
+    mode = arrayJs.mode,
+    single = arrayJs.single,
+    multiple = arrayJs.multiple,
+    filter = arrayJs.filter,
+    map = arrayJs.map,
+    count = arrayJs.count,
+    findFirstIndex = arrayJs.findFirstIndex,
+    findLastIndex = arrayJs.findLastIndex,
+    findFirst = arrayJs.findFirst,
+    findLast = arrayJs.findLast,
+    some = arrayJs.some,
+    all = arrayJs.all,
+    isFirst = arrayJs.isFirst,
+    isLast = arrayJs.isLast,
+    isBothEnds = arrayJs.isBothEnds,
+    subIndex = arrayJs.subIndex,
+    subLength = arrayJs.subLength,
+    subFirst = arrayJs.subFirst,
+    subLast = arrayJs.subLast,
+    group = arrayJs.group,
+    unique = arrayJs.unique,
+    NumberArray = arrayJs.NumberArray,
+    IntegerArray = arrayJs.IntegerArray,
+    arrayEntries = arrayJs.arrayEntries,
+    findIndex = arrayJs.findIndex,
+    findBackIndex = arrayJs.findBackIndex,
+    find = arrayJs.find,
+    findBack = arrayJs.findBack,
+    every = arrayJs.every,
+    arrayToIndexValueArray = arrayJs.arrayToIndexValueArray; // // Circular reference Error
+// export const operation = _copyProperty(arrayOperationJs, `
+//   _insert, _add,
+//   _deleteLength, _deleteIndex,
+//   _deleteFirst, _deleteLast,
+//   _includeFirst, _includeLast, _includeBothEnds,
+//   _excludeFirst, _excludeLast, _excludeBothEnds,
+//   _trimFirst, _trimLast, _trimBothEnds,
+//   _popFirst, _popLast,
+//   _pushFirst, _pushLast,
+//   _remainFirst, _remainLast,
+//   _filter,
+//   _sort,
+//   _sortNumber,
+//   _sortLength,
+//   _sortDictionary,
+//   insert, add,
+//   deleteLength, deleteIndex,
+//   deleteFirst, deleteLast,
+//   includeFirst, includeLast, includeBothEnds,
+//   excludeFirst, excludeLast, excludeBothEnds,
+//   trimFirst, trimLast, trimBothEnds,
+//   popFirst, popLast,
+//   pushFirst, pushLast,
+//   remainFirst, remainLast,
+//   filter,
+//   sort,
+//   sortNumber,
+//   sortLength,
+//   sortNumberAscending, sortNumberDescending,
+//   sortLengthAscending, sortLengthDescending,
+//   sortDictionary,
+//   sortDictionaryAscending, sortDictionaryDescending,
+// `);
+
+exports.arrayToIndexValueArray = arrayToIndexValueArray;
 exports.every = every;
 exports.findBack = findBack;
 exports.find = find;
 exports.findBackIndex = findBackIndex;
 exports.findIndex = findIndex;
+exports.arrayEntries = arrayEntries;
+exports.IntegerArray = IntegerArray;
+exports.NumberArray = NumberArray;
+exports.unique = unique;
+exports.group = group;
 exports.subLast = subLast;
 exports.subFirst = subFirst;
 exports.subLength = subLength;
@@ -115,6 +176,11 @@ exports.sum = sum;
 exports.max = max;
 exports.min = min;
 exports.from = from;
+exports._arrayEntries = _arrayEntries;
+exports._IntegerArray = _IntegerArray;
+exports._NumberArray = _NumberArray;
+exports._unique = _unique;
+exports._group = _group;
 exports._subLast = _subLast;
 exports._subFirst = _subFirst;
 exports._subLength = _subLength;
@@ -139,37 +205,77 @@ exports._average = _average;
 exports._sum = _sum;
 exports._max = _max;
 exports._min = _min;
-var _NumberArray = _NumberArray2["default"]._NumberArray,
-    NumberArray = _NumberArray2["default"].NumberArray;
-exports.NumberArray = NumberArray;
-exports._NumberArray = _NumberArray;
-var _IntegerArray = _IntegerArray2["default"]._IntegerArray,
-    IntegerArray = _IntegerArray2["default"].IntegerArray;
-exports.IntegerArray = IntegerArray;
-exports._IntegerArray = _IntegerArray;
-var _arrayToIndexValueArray = _arrayToIndexValueArray2["default"]._arrayToIndexValueArray,
-    arrayToIndexValueArray = _arrayToIndexValueArray2["default"].arrayToIndexValueArray,
-    arrayEntries = _arrayToIndexValueArray2["default"].arrayEntries;
-exports.arrayEntries = arrayEntries;
-exports.arrayToIndexValueArray = arrayToIndexValueArray;
-exports._arrayToIndexValueArray = _arrayToIndexValueArray;
-var _group = _group2["default"]._group,
-    group = _group2["default"].group;
-exports.group = group;
-exports._group = _group;
-var __unique = _unique2["default"].__unique,
-    _unique = _unique2["default"]._unique,
-    unique = _unique2["default"].unique;
-exports.unique = unique;
-exports._unique = _unique;
 exports.__unique = __unique;
-
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray2["default"]), _IntegerArray2["default"]), _arrayToIndexValueArray2["default"]), _group2["default"]), _unique2["default"]), {}, {
-  operation: _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"])
-});
-
-exports["default"] = _default;
-
-var operation = _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"]);
-
+var operation = arrayOperationJs;
 exports.operation = operation;
+var _default = {
+  __unique: __unique,
+  _min: _min,
+  _max: _max,
+  _sum: _sum,
+  _average: _average,
+  _median: _median,
+  _mode: _mode,
+  _single: _single,
+  _multiple: _multiple,
+  _filter: _filter,
+  _map: _map,
+  _count: _count,
+  _findFirstIndex: _findFirstIndex,
+  _findLastIndex: _findLastIndex,
+  _findFirst: _findFirst,
+  _findLast: _findLast,
+  _some: _some,
+  _all: _all,
+  _isFirst: _isFirst,
+  _isLast: _isLast,
+  _isBothEnds: _isBothEnds,
+  _subIndex: _subIndex,
+  _subLength: _subLength,
+  _subFirst: _subFirst,
+  _subLast: _subLast,
+  _group: _group,
+  _unique: _unique,
+  _NumberArray: _NumberArray,
+  _IntegerArray: _IntegerArray,
+  _arrayEntries: _arrayEntries,
+  from: from,
+  min: min,
+  max: max,
+  sum: sum,
+  average: average,
+  median: median,
+  mode: mode,
+  single: single,
+  multiple: multiple,
+  filter: filter,
+  map: map,
+  count: count,
+  findFirstIndex: findFirstIndex,
+  findLastIndex: findLastIndex,
+  findFirst: findFirst,
+  findLast: findLast,
+  some: some,
+  all: all,
+  isFirst: isFirst,
+  isLast: isLast,
+  isBothEnds: isBothEnds,
+  subIndex: subIndex,
+  subLength: subLength,
+  subFirst: subFirst,
+  subLast: subLast,
+  group: group,
+  unique: unique,
+  NumberArray: NumberArray,
+  IntegerArray: IntegerArray,
+  arrayEntries: arrayEntries,
+  // Another name
+  findIndex: findIndex,
+  findBackIndex: findBackIndex,
+  find: find,
+  findBack: findBack,
+  every: every,
+  arrayToIndexValueArray: arrayToIndexValueArray,
+  operation: operation
+};
+exports["default"] = _default;

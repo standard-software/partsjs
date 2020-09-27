@@ -3,15 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.randomInt = exports._randomInt = exports.makeInRange = exports._makeInRange = exports.inRange = exports._inRange = exports.nearEqual = exports._nearEqual = exports.round = exports._round = exports.isOdd = exports.isEven = exports.isMultiples = exports._isMultiples = void 0;
+exports["default"] = exports.makeInRange = exports.randomInt = exports._randomInt = exports.keepMinMax = exports._keepMinMax = exports.inRange = exports._inRange = exports.nearEqual = exports._nearEqual = exports.round = exports._round = exports.isOdd = exports.isEven = exports.isMultiples = exports._isMultiples = void 0;
 
 var _type = require("../type/type.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
-
-var _isMultiples$_round$_;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
  * isMultiples isEven isOdd
@@ -175,13 +171,13 @@ var inRange = function inRange(value, from, to) {
   return _inRange(value, from, to);
 };
 /**
- * makeInRange
+ * keepMinMax
  */
 
 
 exports.inRange = inRange;
 
-var _makeInRange = function _makeInRange(value, from, to) {
+var _keepMinMax = function _keepMinMax(value, from, to) {
   if (value < from) {
     return from;
   }
@@ -193,40 +189,40 @@ var _makeInRange = function _makeInRange(value, from, to) {
   return value;
 };
 
-exports._makeInRange = _makeInRange;
+exports._keepMinMax = _keepMinMax;
 
-var makeInRange = function makeInRange(value, from, to) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, from, to')) {
+var keepMinMax = function keepMinMax(value, min, to) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, min, to')) {
     var _value4 = value;
     value = _value4.value;
-    from = _value4.from;
+    min = _value4.min;
     to = _value4.to;
   }
 
   if (!(0, _type.isNumber)(value)) {
-    throw new TypeError('makeInRange args(value) is not number');
+    throw new TypeError('keepMinMax args(value) is not number');
   }
 
-  if (!(0, _type.isNumber)(from)) {
-    throw new TypeError('makeInRange args(from) is not number');
+  if (!(0, _type.isNumber)(min)) {
+    throw new TypeError('keepMinMax args(from) is not number');
   }
 
   if (!(0, _type.isNumber)(to)) {
-    throw new TypeError('makeInRange args(to) is not number');
+    throw new TypeError('keepMinMax args(to) is not number');
   }
 
-  if (!(from <= to)) {
-    throw new RangeError('makeInRange args(from,to) must be from <= to');
+  if (!(min <= to)) {
+    throw new RangeError('keepMinMax args(from,to) must be from <= to');
   }
 
-  return _makeinRange(value, from, to);
+  return _keepMinMax(value, min, to);
 };
 /**
  * randomInt
  */
 
 
-exports.makeInRange = makeInRange;
+exports.keepMinMax = keepMinMax;
 
 var _randomInt = function _randomInt(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -253,14 +249,23 @@ var randomInt = function randomInt(min, max) {
 };
 
 exports.randomInt = randomInt;
-
-var _default = (_isMultiples$_round$_ = {
-  isMultiples: isMultiples,
+var makeInRange = keepMinMax;
+exports.makeInRange = makeInRange;
+var _default = {
+  _isMultiples: _isMultiples,
   _round: _round,
   _nearEqual: _nearEqual,
   _inRange: _inRange,
-  _makeInRange: _makeInRange,
-  _randomInt: _randomInt
-}, _defineProperty(_isMultiples$_round$_, "isMultiples", isMultiples), _defineProperty(_isMultiples$_round$_, "isEven", isEven), _defineProperty(_isMultiples$_round$_, "isOdd", isOdd), _defineProperty(_isMultiples$_round$_, "round", round), _defineProperty(_isMultiples$_round$_, "nearEqual", nearEqual), _defineProperty(_isMultiples$_round$_, "inRange", inRange), _defineProperty(_isMultiples$_round$_, "makeInRange", makeInRange), _defineProperty(_isMultiples$_round$_, "randomInt", randomInt), _isMultiples$_round$_);
-
+  _keepMinMax: _keepMinMax,
+  _randomInt: _randomInt,
+  isMultiples: isMultiples,
+  isEven: isEven,
+  isOdd: isOdd,
+  round: round,
+  nearEqual: nearEqual,
+  inRange: inRange,
+  keepMinMax: keepMinMax,
+  randomInt: randomInt,
+  makeInRange: makeInRange
+};
 exports["default"] = _default;

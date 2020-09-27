@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.propertyList = exports.propCount = exports.propertyCount = exports._propertyCount = exports.has = exports.hasPrototype = exports._has = exports._hasPrototype = exports.hasOwn = exports._hasOwn = exports.getProp = exports.getProperty = exports._getProperty = exports.objectToValueArray = exports.objectValues = exports._objectValues = exports.objectToKeyArray = exports.objectKeys = exports._objectKeys = exports.objectToKeyValueArray = exports.objectEntries = exports._objectEntries = exports.fixProp = exports.fixProperty = exports._fixProperty = exports.inProp = exports.inProperty = exports._inProperty = exports.isObjectParameter = exports.setProp = exports.copyProp = exports.setProperty = exports.copyProperty = exports._setProperty = exports._copyProperty = void 0;
+exports["default"] = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.isObjectParameter = exports._has = exports._hasPrototype = exports._hasOwn = exports._objectValues = exports._objectKeys = exports._objectEntries = exports._propertyList = exports._propertyCount = exports._fixProperty = exports._inProperty = exports._setProperty = exports._getProperty = exports._copyProperty = exports._isObjectParameter = void 0;
 
 var _object_common = _interopRequireDefault(require("./object_common.js"));
 
-var _isObjectParameter = _interopRequireDefault(require("./isObjectParameter.js"));
+var _isObjectParameter2 = _interopRequireDefault(require("./isObjectParameter.js"));
 
 var _inProperty2 = _interopRequireDefault(require("./inProperty.js"));
 
@@ -31,7 +31,7 @@ var _propertyCount2 = _interopRequireDefault(require("./_propertyCount.js"));
 
 var _propertyCount3 = _interopRequireDefault(require("./propertyCount.js"));
 
-var _propertyList = _interopRequireDefault(require("./propertyList.js"));
+var _propertyList2 = _interopRequireDefault(require("./propertyList.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -41,77 +41,121 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _copyProperty = _object_common["default"]._copyProperty,
-    _setProperty = _object_common["default"]._setProperty,
-    copyProperty = _object_common["default"].copyProperty,
-    setProperty = _object_common["default"].setProperty,
-    copyProp = _object_common["default"].copyProp,
-    setProp = _object_common["default"].setProp;
-exports.setProp = setProp;
-exports.copyProp = copyProp;
-exports.setProperty = setProperty;
-exports.copyProperty = copyProperty;
-exports._setProperty = _setProperty;
-exports._copyProperty = _copyProperty;
-var isObjectParameter = _isObjectParameter["default"].isObjectParameter;
-exports.isObjectParameter = isObjectParameter;
-var _inProperty = _inProperty2["default"]._inProperty,
-    inProperty = _inProperty2["default"].inProperty,
-    inProp = _inProperty2["default"].inProp;
-exports.inProp = inProp;
-exports.inProperty = inProperty;
-exports._inProperty = _inProperty;
-var _fixProperty = _fixProperty2["default"]._fixProperty,
-    fixProperty = _fixProperty2["default"].fixProperty,
-    fixProp = _fixProperty2["default"].fixProp;
+var objectJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _object_common["default"]), _isObjectParameter2["default"]), _inProperty2["default"]), _fixProperty2["default"]), _objectEntries2["default"]), _objectKeys2["default"]), _objectValues2["default"]), _getProperty2["default"]), _hasOwn2["default"]), _hasOwn3["default"]), _has2["default"]), _propertyCount2["default"]), _propertyCount3["default"]), _propertyList2["default"]);
+
+var _isObjectParameter = objectJs._isObjectParameter,
+    _copyProperty = objectJs._copyProperty,
+    _getProperty = objectJs._getProperty,
+    _setProperty = objectJs._setProperty,
+    _inProperty = objectJs._inProperty,
+    _fixProperty = objectJs._fixProperty,
+    _propertyCount = objectJs._propertyCount,
+    _propertyList = objectJs._propertyList,
+    _objectEntries = objectJs._objectEntries,
+    _objectKeys = objectJs._objectKeys,
+    _objectValues = objectJs._objectValues,
+    _hasOwn = objectJs._hasOwn,
+    _hasPrototype = objectJs._hasPrototype,
+    _has = objectJs._has,
+    isObjectParameter = objectJs.isObjectParameter,
+    copyProperty = objectJs.copyProperty,
+    getProperty = objectJs.getProperty,
+    setProperty = objectJs.setProperty,
+    inProperty = objectJs.inProperty,
+    fixProperty = objectJs.fixProperty,
+    propertyCount = objectJs.propertyCount,
+    propertyList = objectJs.propertyList,
+    objectEntries = objectJs.objectEntries,
+    objectKeys = objectJs.objectKeys,
+    objectValues = objectJs.objectValues,
+    hasOwn = objectJs.hasOwn,
+    hasPrototype = objectJs.hasPrototype,
+    has = objectJs.has,
+    objectToKeyValueArray = objectJs.objectToKeyValueArray,
+    objectToKeyArray = objectJs.objectToKeyArray,
+    objectToValueArray = objectJs.objectToValueArray,
+    copyProp = objectJs.copyProp,
+    getProp = objectJs.getProp,
+    setProp = objectJs.setProp,
+    inProp = objectJs.inProp,
+    fixProp = objectJs.fixProp,
+    propCount = objectJs.propCount;
+exports.propCount = propCount;
 exports.fixProp = fixProp;
-exports.fixProperty = fixProperty;
-exports._fixProperty = _fixProperty;
-var _objectEntries = _objectEntries2["default"]._objectEntries,
-    objectEntries = _objectEntries2["default"].objectEntries,
-    objectToKeyValueArray = _objectEntries2["default"].objectToKeyValueArray;
-exports.objectToKeyValueArray = objectToKeyValueArray;
-exports.objectEntries = objectEntries;
-exports._objectEntries = _objectEntries;
-var _objectKeys = _objectKeys2["default"]._objectKeys,
-    objectKeys = _objectKeys2["default"].objectKeys,
-    objectToKeyArray = _objectKeys2["default"].objectToKeyArray;
-exports.objectToKeyArray = objectToKeyArray;
-exports.objectKeys = objectKeys;
-exports._objectKeys = _objectKeys;
-var _objectValues = _objectValues2["default"]._objectValues,
-    objectValues = _objectValues2["default"].objectValues,
-    objectToValueArray = _objectValues2["default"].objectToValueArray;
-exports.objectToValueArray = objectToValueArray;
-exports.objectValues = objectValues;
-exports._objectValues = _objectValues;
-var _getProperty = _getProperty2["default"]._getProperty,
-    getProperty = _getProperty2["default"].getProperty,
-    getProp = _getProperty2["default"].getProp;
+exports.inProp = inProp;
+exports.setProp = setProp;
 exports.getProp = getProp;
-exports.getProperty = getProperty;
-exports._getProperty = _getProperty;
-var _hasOwn = _hasOwn2["default"]._hasOwn;
-exports._hasOwn = _hasOwn;
-var hasOwn = _hasOwn3["default"].hasOwn;
-exports.hasOwn = hasOwn;
-var _hasPrototype = _has2["default"]._hasPrototype,
-    _has = _has2["default"]._has,
-    hasPrototype = _has2["default"].hasPrototype,
-    has = _has2["default"].has;
+exports.copyProp = copyProp;
+exports.objectToValueArray = objectToValueArray;
+exports.objectToKeyArray = objectToKeyArray;
+exports.objectToKeyValueArray = objectToKeyValueArray;
 exports.has = has;
 exports.hasPrototype = hasPrototype;
+exports.hasOwn = hasOwn;
+exports.objectValues = objectValues;
+exports.objectKeys = objectKeys;
+exports.objectEntries = objectEntries;
+exports.propertyList = propertyList;
+exports.propertyCount = propertyCount;
+exports.fixProperty = fixProperty;
+exports.inProperty = inProperty;
+exports.setProperty = setProperty;
+exports.getProperty = getProperty;
+exports.copyProperty = copyProperty;
+exports.isObjectParameter = isObjectParameter;
 exports._has = _has;
 exports._hasPrototype = _hasPrototype;
-var _propertyCount = _propertyCount2["default"]._propertyCount;
+exports._hasOwn = _hasOwn;
+exports._objectValues = _objectValues;
+exports._objectKeys = _objectKeys;
+exports._objectEntries = _objectEntries;
+exports._propertyList = _propertyList;
 exports._propertyCount = _propertyCount;
-var propertyCount = _propertyCount3["default"].propertyCount,
-    propCount = _propertyCount3["default"].propCount;
-exports.propCount = propCount;
-exports.propertyCount = propertyCount;
-var propertyList = _propertyList["default"].propertyList;
-exports.propertyList = propertyList;
-
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _object_common["default"]), _isObjectParameter["default"]), _inProperty2["default"]), _fixProperty2["default"]), _objectEntries2["default"]), _objectKeys2["default"]), _objectValues2["default"]), _getProperty2["default"]), _hasOwn2["default"]), _hasOwn3["default"]), _has2["default"]), _propertyCount2["default"]), _propertyCount3["default"]), _propertyList["default"]);
-
+exports._fixProperty = _fixProperty;
+exports._inProperty = _inProperty;
+exports._setProperty = _setProperty;
+exports._getProperty = _getProperty;
+exports._copyProperty = _copyProperty;
+exports._isObjectParameter = _isObjectParameter;
+var _default = {
+  _isObjectParameter: _isObjectParameter,
+  _copyProperty: _copyProperty,
+  _getProperty: _getProperty,
+  _setProperty: _setProperty,
+  _inProperty: _inProperty,
+  _fixProperty: _fixProperty,
+  _propertyCount: _propertyCount,
+  _propertyList: _propertyList,
+  _objectEntries: _objectEntries,
+  _objectKeys: _objectKeys,
+  _objectValues: _objectValues,
+  _hasOwn: _hasOwn,
+  _hasPrototype: _hasPrototype,
+  _has: _has,
+  isObjectParameter: isObjectParameter,
+  copyProperty: copyProperty,
+  getProperty: getProperty,
+  setProperty: setProperty,
+  inProperty: inProperty,
+  fixProperty: fixProperty,
+  propertyCount: propertyCount,
+  propertyList: propertyList,
+  objectEntries: objectEntries,
+  objectKeys: objectKeys,
+  objectValues: objectValues,
+  hasOwn: hasOwn,
+  hasPrototype: hasPrototype,
+  has: has,
+  // Another name
+  objectToKeyValueArray: objectToKeyValueArray,
+  objectToKeyArray: objectToKeyArray,
+  objectToValueArray: objectToValueArray,
+  // Short name
+  copyProp: copyProp,
+  getProp: getProp,
+  setProp: setProp,
+  inProp: inProp,
+  fixProp: fixProp,
+  propCount: propCount
+};
 exports["default"] = _default;

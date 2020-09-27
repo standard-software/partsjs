@@ -3,23 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.IntegerArray = exports._IntegerArray = void 0;
+exports["default"] = exports.IntegerArray = void 0;
 
 var _type = require("../type/type.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _NumberArray2 = require("../array/NumberArray.js");
+var _IntegerArray2 = require("../array/_IntegerArray.js");
 
 /**
  * IntegerArray
  */
-var _IntegerArray = function _IntegerArray(start, end, increment) {
-  return (0, _NumberArray2._NumberArray)(start, end, increment);
-};
-
-exports._IntegerArray = _IntegerArray;
-
 var IntegerArray = function IntegerArray(start, end, increment) {
   if ((0, _isObjectParameter.isObjectParameter)(start, 'count')) {
     var _start = start;
@@ -52,12 +46,11 @@ var IntegerArray = function IntegerArray(start, end, increment) {
     throw new TypeError('IntegerArray args(increment) is not number');
   }
 
-  return _IntegerArray(start, end, increment);
+  return (0, _IntegerArray2._IntegerArray)(start, end, increment);
 };
 
 exports.IntegerArray = IntegerArray;
 var _default = {
-  _IntegerArray: _IntegerArray,
   IntegerArray: IntegerArray
 };
 exports["default"] = _default;

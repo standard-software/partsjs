@@ -19,13 +19,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var FileSystemObject = _wshFileSystemObject["default"].FileSystemObject;
-exports.FileSystemObject = FileSystemObject;
-var Shell = _wshShell["default"].Shell;
-exports.Shell = Shell;
-var forceCreateFolder = _forceCreateFolder["default"].forceCreateFolder;
+var wshJs = _objectSpread(_objectSpread(_objectSpread({}, _wshFileSystemObject["default"]), _wshShell["default"]), _forceCreateFolder["default"]);
+
+var FileSystemObject = wshJs.FileSystemObject,
+    Shell = wshJs.Shell,
+    forceCreateFolder = wshJs.forceCreateFolder;
 exports.forceCreateFolder = forceCreateFolder;
-
-var _default = _objectSpread(_objectSpread(_objectSpread({}, _wshFileSystemObject["default"]), _wshShell["default"]), _forceCreateFolder["default"]);
-
+exports.Shell = Shell;
+exports.FileSystemObject = FileSystemObject;
+var _default = {
+  FileSystemObject: FileSystemObject,
+  Shell: Shell,
+  forceCreateFolder: forceCreateFolder
+};
 exports["default"] = _default;

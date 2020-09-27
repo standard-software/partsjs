@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.equalDeep = exports._equalDeep = exports.equal = exports._equal = exports.includesAll = exports.includesSome = exports._includesAll = exports._includesSome = exports.includes = exports._includes = exports.someMatchAll = exports._someMatchAll = exports.allMatchAll = exports._allMatchAll = exports.indexOfMatchAll = exports._indexOfMatchAll = exports.matchAllValue = exports._matchAllValue = exports.matchAll = exports._matchAll = exports.someMatchSome = exports._someMatchSome = exports.allMatchSome = exports._allMatchSome = exports.indexOfMatchSome = exports._indexOfMatchSome = exports.matchSomeValue = exports._matchSomeValue = exports.matchSome = exports._matchSome = exports.someMatch = exports._someMatch = exports.allMatch = exports._allMatch = exports.indexOfMatch = exports._indexOfMatch = exports.initialValue = exports._initialValue = exports.matchValue = exports._matchValue = exports.match = exports._match = exports.or = exports._or = void 0;
+exports["default"] = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.allMatchAll = exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports._equalDeep = exports._equal = exports._includesAll = exports._includesSome = exports._includes = exports._someMatchAll = exports._allMatchAll = exports._indexOfMatchAll = exports._matchAllValue = exports._matchAll = exports._someMatchSome = exports._allMatchSome = exports._indexOfMatchSome = exports._matchSomeValue = exports._matchSome = exports._someMatch = exports._allMatch = exports._indexOfMatch = exports._initialValue = exports._matchValue = exports._match = exports._or = void 0;
 
 var _or2 = _interopRequireDefault(require("./or.js"));
 
@@ -55,95 +55,140 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _or = _or2["default"]._or,
-    or = _or2["default"].or;
-exports.or = or;
-exports._or = _or;
-var _match = _match2["default"]._match,
-    match = _match2["default"].match;
-exports.match = match;
-exports._match = _match;
-var _matchValue = _matchValue2["default"]._matchValue,
-    matchValue = _matchValue2["default"].matchValue;
-exports.matchValue = matchValue;
-exports._matchValue = _matchValue;
-var _initialValue = _initialValue2["default"]._initialValue,
-    initialValue = _initialValue2["default"].initialValue;
-exports.initialValue = initialValue;
-exports._initialValue = _initialValue;
-var _indexOfMatch = _indexOfMatch2["default"]._indexOfMatch,
-    indexOfMatch = _indexOfMatch2["default"].indexOfMatch;
-exports.indexOfMatch = indexOfMatch;
-exports._indexOfMatch = _indexOfMatch;
-var _allMatch = _allMatch2["default"]._allMatch,
-    allMatch = _allMatch2["default"].allMatch;
-exports.allMatch = allMatch;
-exports._allMatch = _allMatch;
-var _someMatch = _someMatch2["default"]._someMatch,
-    someMatch = _someMatch2["default"].someMatch;
-exports.someMatch = someMatch;
-exports._someMatch = _someMatch;
-var _matchSome = _matchSome2["default"]._matchSome,
-    matchSome = _matchSome2["default"].matchSome;
-exports.matchSome = matchSome;
-exports._matchSome = _matchSome;
-var _matchSomeValue = _matchSomeValue2["default"]._matchSomeValue,
-    matchSomeValue = _matchSomeValue2["default"].matchSomeValue;
-exports.matchSomeValue = matchSomeValue;
-exports._matchSomeValue = _matchSomeValue;
-var _indexOfMatchSome = _indexOfMatchSome2["default"]._indexOfMatchSome,
-    indexOfMatchSome = _indexOfMatchSome2["default"].indexOfMatchSome;
-exports.indexOfMatchSome = indexOfMatchSome;
-exports._indexOfMatchSome = _indexOfMatchSome;
-var _allMatchSome = _allMatchSome2["default"]._allMatchSome,
-    allMatchSome = _allMatchSome2["default"].allMatchSome;
-exports.allMatchSome = allMatchSome;
-exports._allMatchSome = _allMatchSome;
-var _someMatchSome = _someMatchSome2["default"]._someMatchSome,
-    someMatchSome = _someMatchSome2["default"].someMatchSome;
-exports.someMatchSome = someMatchSome;
-exports._someMatchSome = _someMatchSome;
-var _matchAll = _matchAll2["default"]._matchAll,
-    matchAll = _matchAll2["default"].matchAll;
-exports.matchAll = matchAll;
-exports._matchAll = _matchAll;
-var _matchAllValue = _matchAllValue2["default"]._matchAllValue,
-    matchAllValue = _matchAllValue2["default"].matchAllValue;
-exports.matchAllValue = matchAllValue;
-exports._matchAllValue = _matchAllValue;
-var _indexOfMatchAll = _indexOfMatchAll2["default"]._indexOfMatchAll,
-    indexOfMatchAll = _indexOfMatchAll2["default"].indexOfMatchAll;
-exports.indexOfMatchAll = indexOfMatchAll;
-exports._indexOfMatchAll = _indexOfMatchAll;
-var _allMatchAll = _allMatchAll2["default"]._allMatchAll,
-    allMatchAll = _allMatchAll2["default"].allMatchAll;
-exports.allMatchAll = allMatchAll;
-exports._allMatchAll = _allMatchAll;
-var _someMatchAll = _someMatchAll2["default"]._someMatchAll,
-    someMatchAll = _someMatchAll2["default"].someMatchAll;
-exports.someMatchAll = someMatchAll;
-exports._someMatchAll = _someMatchAll;
-var _includes = _includes2["default"]._includes,
-    includes = _includes2["default"].includes;
-exports.includes = includes;
-exports._includes = _includes;
-var _includesSome = _includes_common["default"]._includesSome,
-    _includesAll = _includes_common["default"]._includesAll,
-    includesSome = _includes_common["default"].includesSome,
-    includesAll = _includes_common["default"].includesAll;
-exports.includesAll = includesAll;
-exports.includesSome = includesSome;
+var compareJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _or2["default"]), _match2["default"]), _matchValue2["default"]), _initialValue2["default"]), _indexOfMatch2["default"]), _allMatch2["default"]), _someMatch2["default"]), _matchSome2["default"]), _matchSomeValue2["default"]), _indexOfMatchSome2["default"]), _allMatchSome2["default"]), _someMatchSome2["default"]), _matchAll2["default"]), _matchAllValue2["default"]), _indexOfMatchAll2["default"]), _allMatchAll2["default"]), _someMatchAll2["default"]), _includes2["default"]), _includes_common["default"]), _equal2["default"]), _equalDeep2["default"]);
+
+var _or = compareJs._or,
+    _match = compareJs._match,
+    _matchValue = compareJs._matchValue,
+    _initialValue = compareJs._initialValue,
+    _indexOfMatch = compareJs._indexOfMatch,
+    _allMatch = compareJs._allMatch,
+    _someMatch = compareJs._someMatch,
+    _matchSome = compareJs._matchSome,
+    _matchSomeValue = compareJs._matchSomeValue,
+    _indexOfMatchSome = compareJs._indexOfMatchSome,
+    _allMatchSome = compareJs._allMatchSome,
+    _someMatchSome = compareJs._someMatchSome,
+    _matchAll = compareJs._matchAll,
+    _matchAllValue = compareJs._matchAllValue,
+    _indexOfMatchAll = compareJs._indexOfMatchAll,
+    _allMatchAll = compareJs._allMatchAll,
+    _someMatchAll = compareJs._someMatchAll,
+    _includes = compareJs._includes,
+    _includesSome = compareJs._includesSome,
+    _includesAll = compareJs._includesAll,
+    _equal = compareJs._equal,
+    _equalDeep = compareJs._equalDeep;
+exports._equalDeep = _equalDeep;
+exports._equal = _equal;
 exports._includesAll = _includesAll;
 exports._includesSome = _includesSome;
-var _equal = _equal2["default"]._equal,
-    equal = _equal2["default"].equal;
-exports.equal = equal;
-exports._equal = _equal;
-var _equalDeep = _equalDeep2["default"]._equalDeep,
-    equalDeep = _equalDeep2["default"].equalDeep;
+exports._includes = _includes;
+exports._someMatchAll = _someMatchAll;
+exports._allMatchAll = _allMatchAll;
+exports._indexOfMatchAll = _indexOfMatchAll;
+exports._matchAllValue = _matchAllValue;
+exports._matchAll = _matchAll;
+exports._someMatchSome = _someMatchSome;
+exports._allMatchSome = _allMatchSome;
+exports._indexOfMatchSome = _indexOfMatchSome;
+exports._matchSomeValue = _matchSomeValue;
+exports._matchSome = _matchSome;
+exports._someMatch = _someMatch;
+exports._allMatch = _allMatch;
+exports._indexOfMatch = _indexOfMatch;
+exports._initialValue = _initialValue;
+exports._matchValue = _matchValue;
+exports._match = _match;
+exports._or = _or;
+var or = compareJs.or,
+    match = compareJs.match,
+    matchValue = compareJs.matchValue,
+    initialValue = compareJs.initialValue,
+    indexOfMatch = compareJs.indexOfMatch,
+    allMatch = compareJs.allMatch,
+    someMatch = compareJs.someMatch,
+    matchSome = compareJs.matchSome,
+    matchSomeValue = compareJs.matchSomeValue,
+    indexOfMatchSome = compareJs.indexOfMatchSome,
+    allMatchSome = compareJs.allMatchSome,
+    someMatchSome = compareJs.someMatchSome,
+    matchAll = compareJs.matchAll,
+    matchAllValue = compareJs.matchAllValue,
+    indexOfMatchAll = compareJs.indexOfMatchAll,
+    allMatchAll = compareJs.allMatchAll,
+    someMatchAll = compareJs.someMatchAll,
+    includes = compareJs.includes,
+    includesSome = compareJs.includesSome,
+    includesAll = compareJs.includesAll,
+    equal = compareJs.equal,
+    equalDeep = compareJs.equalDeep;
 exports.equalDeep = equalDeep;
-exports._equalDeep = _equalDeep;
-
-var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _or2["default"]), _match2["default"]), _matchValue2["default"]), _initialValue2["default"]), _indexOfMatch2["default"]), _allMatch2["default"]), _someMatch2["default"]), _matchSome2["default"]), _matchSomeValue2["default"]), _indexOfMatchSome2["default"]), _allMatchSome2["default"]), _someMatchSome2["default"]), _matchAll2["default"]), _matchAllValue2["default"]), _indexOfMatchAll2["default"]), _allMatchAll2["default"]), _someMatchAll2["default"]), _includes2["default"]), _includes_common["default"]), _equal2["default"]), _equalDeep2["default"]);
-
+exports.equal = equal;
+exports.includesAll = includesAll;
+exports.includesSome = includesSome;
+exports.includes = includes;
+exports.someMatchAll = someMatchAll;
+exports.allMatchAll = allMatchAll;
+exports.indexOfMatchAll = indexOfMatchAll;
+exports.matchAllValue = matchAllValue;
+exports.matchAll = matchAll;
+exports.someMatchSome = someMatchSome;
+exports.allMatchSome = allMatchSome;
+exports.indexOfMatchSome = indexOfMatchSome;
+exports.matchSomeValue = matchSomeValue;
+exports.matchSome = matchSome;
+exports.someMatch = someMatch;
+exports.allMatch = allMatch;
+exports.indexOfMatch = indexOfMatch;
+exports.initialValue = initialValue;
+exports.matchValue = matchValue;
+exports.match = match;
+exports.or = or;
+var _default = {
+  _or: _or,
+  _match: _match,
+  _matchValue: _matchValue,
+  _initialValue: _initialValue,
+  _indexOfMatch: _indexOfMatch,
+  _allMatch: _allMatch,
+  _someMatch: _someMatch,
+  _matchSome: _matchSome,
+  _matchSomeValue: _matchSomeValue,
+  _indexOfMatchSome: _indexOfMatchSome,
+  _allMatchSome: _allMatchSome,
+  _someMatchSome: _someMatchSome,
+  _matchAll: _matchAll,
+  _matchAllValue: _matchAllValue,
+  _indexOfMatchAll: _indexOfMatchAll,
+  _allMatchAll: _allMatchAll,
+  _someMatchAll: _someMatchAll,
+  _includes: _includes,
+  _includesSome: _includesSome,
+  _includesAll: _includesAll,
+  _equal: _equal,
+  _equalDeep: _equalDeep,
+  or: or,
+  match: match,
+  matchValue: matchValue,
+  initialValue: initialValue,
+  indexOfMatch: indexOfMatch,
+  allMatch: allMatch,
+  someMatch: someMatch,
+  matchSome: matchSome,
+  matchSomeValue: matchSomeValue,
+  indexOfMatchSome: indexOfMatchSome,
+  allMatchSome: allMatchSome,
+  someMatchSome: someMatchSome,
+  matchAll: matchAll,
+  matchAllValue: matchAllValue,
+  indexOfMatchAll: indexOfMatchAll,
+  allMatchAll: allMatchAll,
+  someMatchAll: someMatchAll,
+  includes: includes,
+  includesSome: includesSome,
+  includesAll: includesAll,
+  equal: equal,
+  equalDeep: equalDeep
+};
 exports["default"] = _default;
