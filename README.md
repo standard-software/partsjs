@@ -298,6 +298,8 @@ You can now use the functions of the parts.js object.
 - add from string_common.js
   - _indexOfFirst.js/indexOfFirst.js
   - _indexOfLast.js/indexOfLast.js
+- add 
+  - _indexOfAnyFirst.js/indexOfAnyFirst.js
 - add from array_common.js
   - _min.js/min.js
   - _max.js/max.js

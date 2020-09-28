@@ -27,6 +27,8 @@ export const test_execute_string = (parts) => {
       tagInnerFirst, tagOuterFirst,
       tagInnerLast, tagOuterLast,
       split, splitCommaItems, splitDotItems,
+
+      indexOfAnyFirst,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -344,6 +346,82 @@ export const test_execute_string = (parts) => {
 
       });
     };
+
+
+    const test_indexOfAnyFirst = () => {
+      it('test_indexOfAnyFirst', () => {
+
+        // element 1
+        checkEqual(0,   indexOfAnyFirst('a', ['a']).index);
+        checkEqual(-1,  indexOfAnyFirst('a', ['']).index);   // ]not strange
+        checkEqual(-1,  indexOfAnyFirst('',  ['a']).index);
+        checkEqual(-1,  indexOfAnyFirst('',  ['']).index);  // [not strange
+
+        checkEqual( 0, indexOfAnyFirst('abc', ['a']).index);
+        checkEqual( 1, indexOfAnyFirst('abc', ['b']).index);
+        checkEqual( 2, indexOfAnyFirst('abc', ['c']).index);
+        checkEqual(-1, indexOfAnyFirst('abc', ['d']).index);
+        checkEqual(-1, indexOfAnyFirst('abc', ['']).index);      // ]not strange
+        checkEqual( 0, indexOfAnyFirst('abcabc', ['a']).index);
+        checkEqual( 1, indexOfAnyFirst('abcabc', ['b']).index);
+        checkEqual( 2, indexOfAnyFirst('abcabc', ['c']).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['d']).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['']).index);   // ]not strange
+
+        // startIndex
+        checkEqual(true,  isThrown(() => indexOfAnyFirst('abcabc', ['a'], -1)));
+        checkEqual( 0, indexOfAnyFirst('abcabc', ['a'], 0).index);
+        checkEqual( 3, indexOfAnyFirst('abcabc', ['a'], 1).index);
+        checkEqual( 3, indexOfAnyFirst('abcabc', ['a'], 2).index);
+        checkEqual( 3, indexOfAnyFirst('abcabc', ['a'], 3).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['a'], 4).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['a'], 5).index);
+        checkEqual(true,  isThrown(() => indexOfAnyFirst('abcabc', ['a'],  6)));
+        checkEqual(true,  isThrown(() => indexOfAnyFirst('abcabc', ['b'],  -1)));
+        checkEqual( 1, indexOfAnyFirst('abcabc', ['b'], 0).index);
+        checkEqual( 1, indexOfAnyFirst('abcabc', ['b'], 1).index);
+        checkEqual( 4, indexOfAnyFirst('abcabc', ['b'], 2).index);
+        checkEqual( 4, indexOfAnyFirst('abcabc', ['b'], 3).index);
+        checkEqual( 4, indexOfAnyFirst('abcabc', ['b'], 4).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['b'], 5).index);
+        checkEqual(true,  isThrown(() => indexOfAnyFirst('abcabc', ['b'],  6)));
+        checkEqual(true,  isThrown(() => indexOfAnyFirst('abcabc', ['c'],  -1)));
+        checkEqual( 2, indexOfAnyFirst('abcabc', ['c'], 0).index);
+        checkEqual( 2, indexOfAnyFirst('abcabc', ['c'], 1).index);
+        checkEqual( 2, indexOfAnyFirst('abcabc', ['c'], 2).index);
+        checkEqual( 5, indexOfAnyFirst('abcabc', ['c'], 3).index);
+        checkEqual( 5, indexOfAnyFirst('abcabc', ['c'], 4).index);
+        checkEqual( 5, indexOfAnyFirst('abcabc', ['c'], 5).index);
+        checkEqual(true,  isThrown(() => indexOfAnyFirst('abcabc', ['c'],  6)));
+
+        // element many
+        const _checkEqual = (result, functionResult) => {
+          checkEqual({ index: result[0], searchIndex: result[1] }, functionResult);
+        };
+        _checkEqual([-1, -1], indexOfAnyFirst('abc', ['d', 'e']));
+        _checkEqual([0, 0],   indexOfAnyFirst('abc', ['a', 'c']));
+        _checkEqual([0, 1],   indexOfAnyFirst('abc', ['c', 'a']));
+        _checkEqual([1, 0],   indexOfAnyFirst('abc', ['b', 'c']));
+        _checkEqual([1, 1],   indexOfAnyFirst('abc', ['c', 'b']));
+        _checkEqual([2, 1],   indexOfAnyFirst('abc', ['', 'c']));
+        _checkEqual([2, 0],   indexOfAnyFirst('abc', ['c', '']));
+        _checkEqual([-1, -1], indexOfAnyFirst('abc', ['', '']));
+        _checkEqual([-1, -1], indexOfAnyFirst('abc', ['']));
+
+        _checkEqual([0, 0], indexOfAnyFirst('abcabc', ['a', 'c'], 0));
+        _checkEqual([2, 1], indexOfAnyFirst('abcabc', ['a', 'c'], 1));
+        _checkEqual([2, 1], indexOfAnyFirst('abcabc', ['a', 'c'], 2));
+        _checkEqual([3, 0], indexOfAnyFirst('abcabc', ['a', 'c'], 3));
+        _checkEqual([1, 0], indexOfAnyFirst('abcabc', ['b'], 1));
+        _checkEqual([4, 0], indexOfAnyFirst('abcabc', ['b'], 2));
+
+        // exception
+        checkEqual(true, isThrown(() => { indexOfAnyFirst('abc', 'ab'); }));
+        checkEqual(true, isThrown(() => { indexOfAnyFirst('abc', []); }));
+        checkEqual(true, isThrown(() => { indexOfAnyFirst('abc', [123]); }));
+      });
+    };
+
 
     const test_isFirst = () => {
       it('test_isFirst', () => {
@@ -1733,6 +1811,8 @@ export const test_execute_string = (parts) => {
     test_indexOfFirst();
     test_lastIndexOf_standard();
     test_indexOfLast();
+
+    test_indexOfAnyFirst();
 
     test_isFirst();
     test_isLast();

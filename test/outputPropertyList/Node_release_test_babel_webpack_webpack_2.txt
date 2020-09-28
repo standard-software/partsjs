@@ -647,6 +647,7 @@
 .string._includeBothEnds:[object Function]:function
 .string._includeFirst:[object Function]:function
 .string._includeLast:[object Function]:function
+.string._indexOfAnyFirst:[object Function]:function
 .string._indexOfFirst:[object Function]:function
 .string._indexOfLast:[object Function]:function
 .string._insert:[object Function]:function
@@ -687,6 +688,7 @@
 .string.includeBothEnds:[object Function]:function
 .string.includeFirst:[object Function]:function
 .string.includeLast:[object Function]:function
+.string.indexOfAnyFirst:[object Function]:function
 .string.indexOfFirst:[object Function]:function
 .string.indexOfLast:[object Function]:function
 .string.insert:[object Function]:function
