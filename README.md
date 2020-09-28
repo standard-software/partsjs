@@ -293,6 +293,12 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 8.1.0
+#### 2020/09/28(Mon)
+- add from string_common.js
+  - _indexOfFirst.js/indexOfFirst.js
+  - _indexOfLast.js/indexOfLast.js
+
 ### 8.0.0
 #### 2020/09/27(Sun)
 - update platform.js

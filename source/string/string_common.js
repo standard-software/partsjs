@@ -1,8 +1,14 @@
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
-  isFunction, isObject, isArray, isDate, isRegExp,
-  isException,
+  isFunction,
+  isObject, isObjectNormal, isObjectFromNull,
+  isObjectLike, isModule,
+  isArray, isArraySeries,
+  isDate, isRegExp,
+  isBooleanObject, isNumberObject, isStringObject,
+  isEmptyObject, isEmptyArray,
+
   isStringArray,
 } from '../type/type.js';
 
@@ -18,6 +24,14 @@ import {
   _min, _max,
   _findFirst,
 } from '../array/array.js';
+
+import {
+  _indexOfFirst,
+} from '../string/_indexOfFirst.js';
+
+import {
+  _indexOfLast,
+} from '../string/_indexOfLast.js';
 
 /**
  * repeat
@@ -95,90 +109,6 @@ export const isUpperCase = (
   }
 
   return _isUpperCase(str);
-};
-
-/**
- * indexOfFirst
- */
-export const _indexOfFirst = (str, search, indexStart) => {
-  if (search === '') {
-    return -1;
-  }
-  return str.indexOf(search, indexStart);
-};
-
-export const indexOfFirst = (str, search, indexStart = 0) => {
-  if (isObjectParameter(str, 'str, search', 'indexStart')) {
-    ({ str, search, indexStart = 0 } = str);
-  }
-
-  if (!isString(str)) {
-    throw new TypeError(
-      'indexOfFirst args(str) is not string',
-    );
-  }
-  if (!isString(search)) {
-    throw new TypeError(
-      'indexOfFirst args(search) is not string',
-    );
-  }
-  if (!isInteger(indexStart)) {
-    throw new TypeError(
-      'indexOfFirst args(indexStart) is not integer',
-    );
-  }
-  if (!_inRange(indexStart, 0, _max([0, str.length - 1]))) {
-    throw new RangeError(
-      'indexOfFirst args(indexStart) must be from 0 to str.length - 1',
-    );
-  }
-
-  return _indexOfFirst(str, search, indexStart);
-};
-
-/**
- * indexOfLast
- */
-export const _indexOfLast = (
-  str, search, indexStart = _max([0, str.length - 1]),
-) => {
-  if (search === '') {
-    return -1;
-  }
-  return str.lastIndexOf(search, indexStart);
-};
-
-export const indexOfLast = (
-  str, search, indexStart = _max([0, str.length - 1]),
-) => {
-  if (isObjectParameter(str, 'str, search', 'indexStart')) {
-    ({
-      str, search, indexStart = _max([0, str.length - 1]),
-    } = str);
-  }
-
-  if (!isString(str)) {
-    throw new TypeError(
-      'indexOfLast args(str) is not string',
-    );
-  }
-  if (!isString(search)) {
-    throw new TypeError(
-      'indexOfLast args(search) is not string',
-    );
-  }
-  if (!isInteger(indexStart)) {
-    throw new TypeError(
-      'indexOfLast args(indexStart) is not integer',
-    );
-  }
-  if (!_inRange(indexStart, 0, _max([0, str.length - 1]))) {
-    throw new RangeError(
-      'indexOfLast args(indexStart) must be from 0 to str.length - 1',
-    );
-  }
-
-  return _indexOfLast(str, search, indexStart);
 };
 
 /**
@@ -1056,7 +986,6 @@ export const add = (str, value, index = str.length - 1) => {
 export default {
   _repeat,
   _isLowerCase, _isUpperCase,
-  _indexOfFirst, _indexOfLast,
   _isFirst, _isLast, _isBothEnds,
   _includeFirst, _includeLast, _includeBothEnds,
   _excludeFirst, _excludeLast, _excludeBothEnds,
@@ -1067,7 +996,6 @@ export default {
 
   repeat,
   isLowerCase, isUpperCase,
-  indexOfFirst, indexOfLast,
   isFirst, isLast, isBothEnds,
   includeFirst, includeLast, includeBothEnds,
   excludeFirst, excludeLast, excludeBothEnds,

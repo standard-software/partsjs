@@ -1,4 +1,8 @@
 import string_common_js from './string_common.js';
+import _indexOfFirst_js from './_indexOfFirst.js';
+import indexOfFirst_js from './indexOfFirst.js';
+import _indexOfLast_js from './_indexOfLast.js';
+import indexOfLast_js from './indexOfLast.js';
 import _replaceAll_js from './_replaceAll.js';
 import replaceAll_js from './replaceAll.js';
 import matchFormat_js from './matchFormat.js';
@@ -17,6 +21,10 @@ import splitDotItems_js from './splitDotItems.js';
 
 const stringJs = {
   ...string_common_js,
+  ..._indexOfFirst_js,
+  ...indexOfFirst_js,
+  ..._indexOfLast_js,
+  ...indexOfLast_js,
   ..._replaceAll_js,
   ...replaceAll_js,
   ...matchFormat_js,
