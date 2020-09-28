@@ -1483,6 +1483,7 @@
 .default.parts.string._includeFirst:[object Function]:function
 .default.parts.string._includeLast:[object Function]:function
 .default.parts.string._indexOfAnyFirst:[object Function]:function
+.default.parts.string._indexOfAnyLast:[object Function]:function
 .default.parts.string._indexOfFirst:[object Function]:function
 .default.parts.string._indexOfLast:[object Function]:function
 .default.parts.string._insert:[object Function]:function
@@ -1524,6 +1525,7 @@
 .default.parts.string.includeFirst:[object Function]:function
 .default.parts.string.includeLast:[object Function]:function
 .default.parts.string.indexOfAnyFirst:[object Function]:function
+.default.parts.string.indexOfAnyLast:[object Function]:function
 .default.parts.string.indexOfFirst:[object Function]:function
 .default.parts.string.indexOfLast:[object Function]:function
 .default.parts.string.insert:[object Function]:function
@@ -1918,6 +1920,7 @@
 .default.string._includeFirst:[object Function]:function
 .default.string._includeLast:[object Function]:function
 .default.string._indexOfAnyFirst:[object Function]:function
+.default.string._indexOfAnyLast:[object Function]:function
 .default.string._indexOfFirst:[object Function]:function
 .default.string._indexOfLast:[object Function]:function
 .default.string._insert:[object Function]:function
@@ -1959,6 +1962,7 @@
 .default.string.includeFirst:[object Function]:function
 .default.string.includeLast:[object Function]:function
 .default.string.indexOfAnyFirst:[object Function]:function
+.default.string.indexOfAnyLast:[object Function]:function
 .default.string.indexOfFirst:[object Function]:function
 .default.string.indexOfLast:[object Function]:function
 .default.string.insert:[object Function]:function
@@ -3321,6 +3325,7 @@
 .parts.string._includeFirst:[object Function]:function
 .parts.string._includeLast:[object Function]:function
 .parts.string._indexOfAnyFirst:[object Function]:function
+.parts.string._indexOfAnyLast:[object Function]:function
 .parts.string._indexOfFirst:[object Function]:function
 .parts.string._indexOfLast:[object Function]:function
 .parts.string._insert:[object Function]:function
@@ -3362,6 +3367,7 @@
 .parts.string.includeFirst:[object Function]:function
 .parts.string.includeLast:[object Function]:function
 .parts.string.indexOfAnyFirst:[object Function]:function
+.parts.string.indexOfAnyLast:[object Function]:function
 .parts.string.indexOfFirst:[object Function]:function
 .parts.string.indexOfLast:[object Function]:function
 .parts.string.insert:[object Function]:function
@@ -3756,6 +3762,7 @@
 .string._includeFirst:[object Function]:function
 .string._includeLast:[object Function]:function
 .string._indexOfAnyFirst:[object Function]:function
+.string._indexOfAnyLast:[object Function]:function
 .string._indexOfFirst:[object Function]:function
 .string._indexOfLast:[object Function]:function
 .string._insert:[object Function]:function
@@ -3797,6 +3804,7 @@
 .string.includeFirst:[object Function]:function
 .string.includeLast:[object Function]:function
 .string.indexOfAnyFirst:[object Function]:function
+.string.indexOfAnyLast:[object Function]:function
 .string.indexOfFirst:[object Function]:function
 .string.indexOfLast:[object Function]:function
 .string.insert:[object Function]:function

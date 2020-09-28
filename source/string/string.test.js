@@ -28,7 +28,7 @@ export const test_execute_string = (parts) => {
       tagInnerLast, tagOuterLast,
       split, splitCommaItems, splitDotItems,
 
-      indexOfAnyFirst,
+      indexOfAnyFirst, indexOfAnyLast,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -347,7 +347,6 @@ export const test_execute_string = (parts) => {
       });
     };
 
-
     const test_indexOfAnyFirst = () => {
       it('test_indexOfAnyFirst', () => {
 
@@ -419,6 +418,84 @@ export const test_execute_string = (parts) => {
         checkEqual(true, isThrown(() => { indexOfAnyFirst('abc', 'ab'); }));
         checkEqual(true, isThrown(() => { indexOfAnyFirst('abc', []); }));
         checkEqual(true, isThrown(() => { indexOfAnyFirst('abc', [123]); }));
+
+      });
+    };
+
+    const test_indexOfAnyLast = () => {
+      it('test_indexOfAnyLast', () => {
+        // element 1
+        checkEqual(0,   indexOfAnyLast('a', ['a']).index);
+        checkEqual(-1,  indexOfAnyLast('a', ['']).index);  // not strange
+        checkEqual(-1,  indexOfAnyLast('',  ['a']).index);
+        checkEqual(-1,  indexOfAnyLast('',  ['']).index); // not strange
+
+        checkEqual( 0, indexOfAnyLast('abc', ['a']).index);
+        checkEqual( 1, indexOfAnyLast('abc', ['b']).index);
+        checkEqual( 2, indexOfAnyLast('abc', ['c']).index);
+        checkEqual(-1, indexOfAnyLast('abc', ['d']).index);
+        checkEqual(-1, indexOfAnyLast('abc', ['']).index);     // not strange
+        checkEqual( 3, indexOfAnyLast('abcabc', ['a']).index);
+        checkEqual( 4, indexOfAnyLast('abcabc', ['b']).index);
+        checkEqual( 5, indexOfAnyLast('abcabc', ['c']).index);
+        checkEqual(-1, indexOfAnyLast('abcabc', ['d']).index);
+        checkEqual(-1, indexOfAnyLast('abcabc', ['']).index);  // not strange
+
+        checkEqual(true,  isThrown(() => indexOfAnyLast('abcabc', ['a'], -1).index));
+        checkEqual( 0, indexOfAnyLast('abcabc', ['a'], 0).index);
+        checkEqual( 0, indexOfAnyLast('abcabc', ['a'], 1).index);
+        checkEqual( 0, indexOfAnyLast('abcabc', ['a'], 2).index);
+        checkEqual( 3, indexOfAnyLast('abcabc', ['a'], 3).index);
+        checkEqual( 3, indexOfAnyLast('abcabc', ['a'], 4).index);
+        checkEqual( 3, indexOfAnyLast('abcabc', ['a'], 5).index);
+        checkEqual(true,  isThrown(() => indexOfAnyLast('abcabc', ['a'],  6).index));
+        checkEqual(true,  isThrown(() => indexOfAnyLast('abcabc', ['b'],  -1).index));
+        checkEqual(-1, indexOfAnyLast('abcabc', ['b'], 0).index);
+        checkEqual( 1, indexOfAnyLast('abcabc', ['b'], 1).index);
+        checkEqual( 1, indexOfAnyLast('abcabc', ['b'], 2).index);
+        checkEqual( 1, indexOfAnyLast('abcabc', ['b'], 3).index);
+        checkEqual( 4, indexOfAnyLast('abcabc', ['b'], 4).index);
+        checkEqual( 4, indexOfAnyLast('abcabc', ['b'], 5).index);
+        checkEqual(true,  isThrown(() => indexOfAnyLast('abcabc', ['b'],  6).index));
+        checkEqual(true,  isThrown(() => indexOfAnyLast('abcabc', ['c'],  -1).index));
+        checkEqual(-1, indexOfAnyLast('abcabc', ['c'], 0).index);
+        checkEqual(-1, indexOfAnyLast('abcabc', ['c'], 1).index);
+        checkEqual( 2, indexOfAnyLast('abcabc', ['c'], 2).index);
+        checkEqual( 2, indexOfAnyLast('abcabc', ['c'], 3).index);
+        checkEqual( 2, indexOfAnyLast('abcabc', ['c'], 4).index);
+        checkEqual( 5, indexOfAnyLast('abcabc', ['c'], 5).index);
+        checkEqual(true,  isThrown(() => indexOfAnyLast('abcabc', ['c'],  6).index));
+
+        // element many
+        testCounter();
+        const _checkEqual = (result, functionResult) => {
+          checkEqual({ index: result[0], searchIndex: result[1] }, functionResult);
+        };
+        _checkEqual([-1, -1], indexOfAnyLast('abc', ['d', 'e']));
+        _checkEqual([2, 1],   indexOfAnyLast('abc', ['a', 'c']));
+        _checkEqual([2, 0],   indexOfAnyLast('abc', ['c', 'a']));
+        _checkEqual([2, 1],   indexOfAnyLast('abc', ['b', 'c']));
+        _checkEqual([2, 0],   indexOfAnyLast('abc', ['c', 'b']));
+        _checkEqual([2, 1],   indexOfAnyLast('abc', ['', 'c']));
+        _checkEqual([2, 0],   indexOfAnyLast('abc', ['c', '']));
+        _checkEqual([-1, -1], indexOfAnyLast('abc', ['', '']));
+        _checkEqual([-1, -1], indexOfAnyLast('abc', ['']));
+
+        _checkEqual([5, 1], indexOfAnyLast('abcabc', ['a', 'c']));
+        _checkEqual([5, 1], indexOfAnyLast('abcabc', ['a', 'c'], 5));
+        _checkEqual([3, 0], indexOfAnyLast('abcabc', ['a', 'c'], 4));
+        _checkEqual([3, 0], indexOfAnyLast('abcabc', ['a', 'c'], 3));
+        _checkEqual([2, 1], indexOfAnyLast('abcabc', ['a', 'c'], 2));
+        _checkEqual([0, 0], indexOfAnyLast('abcabc', ['a', 'c'], 1));
+        _checkEqual([0, 0], indexOfAnyLast('abcabc', ['a', 'c'], 0));
+        _checkEqual([4, 0], indexOfAnyLast('abcabc', ['b'], 5));
+        _checkEqual([4, 0], indexOfAnyLast('abcabc', ['b'], 4));
+        _checkEqual([1, 0], indexOfAnyLast('abcabc', ['b'], 3));
+
+        // exception
+        checkEqual(true, isThrown(() => { indexOfAnyLast('abc', 'ab'); }));
+        checkEqual(true, isThrown(() => { indexOfAnyLast('abc', []); }));
+        checkEqual(true, isThrown(() => { indexOfAnyLast('abc', [123]); }));
       });
     };
 
@@ -1813,6 +1890,7 @@ export const test_execute_string = (parts) => {
     test_indexOfLast();
 
     test_indexOfAnyFirst();
+    test_indexOfAnyLast();
 
     test_isFirst();
     test_isLast();

@@ -300,6 +300,7 @@ You can now use the functions of the parts.js object.
   - _indexOfLast.js/indexOfLast.js
 - add 
   - _indexOfAnyFirst.js/indexOfAnyFirst.js
+  - _indexOfAnyLast.js/indexOfAnyLast.js
 - add from array_common.js
   - _min.js/min.js
   - _max.js/max.js
