@@ -13,11 +13,8 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
-import {
-  _min,
-  _some,
-  _isFirst, _isLast, _isBothEnds,
-} from '../array/array_common.js';
+import { _some, _isFirst, _isLast, _isBothEnds } from '../array/array_common.js';
+import { _min } from '../array/_min.js';
 
 /**
  * array.operation.insert

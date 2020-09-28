@@ -19,73 +19,11 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
-import {
-  _clone,
-} from '../root/clone.js';
-import {
-  _cloneDeep,
-} from '../root/cloneDeep.js';
-
-import {
-  _unique,
-} from '../array/unique.js';
-
-/**
- * array.min max
- */
-export const _min = (array) => {
-  if (array.length === 0) {
-    return null;
-  }
-  let result = array[0];
-  for (let i = 0, l = array.length; i < l; i += 1) {
-    if (array[i] < result) {
-      result = array[i];
-    }
-  }
-  return result;
-};
-
-export const min = (array) => {
-  if (!isArray(array)) {
-    throw new TypeError(
-      'min args(array) is not array',
-    );
-  }
-  if (array.length !== 0 && !isNumberArray(array)) {
-    throw new TypeError(
-      'min args(array) element is not number',
-    );
-  }
-  return _min(array);
-};
-
-export const _max = (array) => {
-  if (array.length === 0) {
-    return null;
-  }
-  let result = array[0];
-  for (let i = 0, l = array.length; i < l; i += 1) {
-    if (result < array[i]) {
-      result = array[i];
-    }
-  }
-  return result;
-};
-
-export const max = (array) => {
-  if (!isArray(array)) {
-    throw new TypeError(
-      'max args(array) is not array',
-    );
-  }
-  if (array.length !== 0 && !isNumberArray(array)) {
-    throw new TypeError(
-      'max args(array) element is not number',
-    );
-  }
-  return _max(array);
-};
+import {  _clone } from '../root/clone.js';
+import {  _cloneDeep } from '../root/cloneDeep.js';
+import { _unique } from '../array/unique.js';
+import { _min } from '../array/_min.js';
+import { _max } from '../array/_max.js';
 
 /**
  * from
@@ -848,7 +786,6 @@ export const subLast = (array, length = 1) => {
 };
 
 export default {
-  _min, _max,
   _sum, _average, _median,
   _mode,
   _single, _multiple,
@@ -861,7 +798,6 @@ export default {
   _subFirst, _subLast,
 
   from,
-  min, max,
   sum, average, median,
   mode,
   single, multiple,

@@ -1,4 +1,8 @@
 import array_common_js from './array_common.js';
+import _min_js from './_min.js';
+import min_js from './min.js';
+import _max_js from './_max.js';
+import max_js from './max.js';
 import _NumberArray_js from './_NumberArray.js';
 import NumberArray_js from './NumberArray.js';
 import _IntegerArray_js from './_IntegerArray.js';
@@ -14,6 +18,10 @@ import sortDictionary_js from './operation/sortDictionary.js';
 
 const arrayJs = {
   ...array_common_js,
+  ..._min_js,
+  ...min_js,
+  ..._max_js,
+  ...max_js,
   ..._NumberArray_js,
   ...NumberArray_js,
   ..._IntegerArray_js,
