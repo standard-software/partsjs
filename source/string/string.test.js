@@ -29,6 +29,7 @@ export const test_execute_string = (parts) => {
       split, splitCommaItems, splitDotItems,
 
       indexOfAnyFirst, indexOfAnyLast,
+      replaceAllArray,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -143,6 +144,42 @@ export const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => { replaceAll( 1212,  '12', '123'); }));
         checkEqual(true,  isThrown(() => { replaceAll('1212',  12,  '123'); }));
         checkEqual(true,  isThrown(() => { replaceAll('1212', '12',  123 ); }));
+
+      });
+    };
+
+    const test_replaceAllArray = () => {
+      it('test_replaceAllArray', () => {
+        checkEqual('aaaa',    replaceAllArray('abab', [['b', 'a']]));
+        checkEqual('aaaa',    replaceAllArray('abab', [['ab', 'aa']]));
+        checkEqual('abcabc',  replaceAllArray('abab', [['ab', 'abc']]));
+        checkEqual('baba',    replaceAllArray('abab', [['b', 'a'], ['a', 'b']]));
+        checkEqual('bbbb',    replaceAllArray('abab', [['a', 'b'], ['d', 'b']]));
+        checkEqual('cbcb',    replaceAllArray('abab', [['a', 'c'], ['d', 'b']]));
+        checkEqual('acac',    replaceAllArray('abab', [['c', 'a'], ['b', 'c']]));
+        checkEqual('abab',    replaceAllArray('abab', [['c', 'a'], ['d', 'b']]));
+        checkEqual('abab',    replaceAllArray('abcabc', [['abc', 'ab'], ['bca', 'b']]));
+        checkEqual('abab',    replaceAllArray('abcabc', [['bca', 'b'], ['abc', 'ab']]));
+        checkEqual('abbc',    replaceAllArray('abcabc', [['bca', 'b']]));
+        checkEqual('ecec',    replaceAllArray('abcabc', [['ab', 'e']]));
+        checkEqual('ecec',    replaceAllArray('abcabc', [['ab', 'e'], ['abc', 'd']]));
+        checkEqual('dd',      replaceAllArray('abcabc', [['abc', 'd'], ['ab', 'e']]));
+
+        // Object Named Parameter
+        checkEqual('abcabc',  replaceAllArray({
+          str:    'abab',
+          replaceArray: [['ab', 'abc']],
+        }));
+
+        // exception
+        checkEqual(false, isThrown(() => { replaceAllArray('1212', [['12', '123']]); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray('1212',  'a'); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray('1212',  123); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray('1212',  ['12', '123']); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray( 1212,  [['12', '123']]); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray('1212',  [['123']]); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray('1212',  [[12,  '123']]); }));
+        checkEqual(true,  isThrown(() => { replaceAllArray('1212', [['12',  123]]); }));
 
       });
     };
@@ -1883,6 +1920,7 @@ export const test_execute_string = (parts) => {
 
     test_matchFormat();
     test_replaceAll();
+    test_replaceAllArray();
 
     test_indexOf_standard();
     test_indexOfFirst();

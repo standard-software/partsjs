@@ -18,6 +18,20 @@ export const test_execute_compare = (parts) => {
       isNotArray, isNotDate, isNotRegExp,
       isNotException,
       isNotEmptyObject, isNotEmptyArray,
+
+      isUndefinedArray, isNullArray, isNaNStrictArray,
+      isBooleanArray, isNumberArray, isIntegerArray, isStringArray,
+      isFunctionArray,
+      isObjectArray, isObjectNormalArray, isObjectFromNullArray,
+      isObjectLikeArray, isModuleArray,
+      isArrayArray, isArraySeriesArray,
+      isDateArray, isRegExpArray,
+      isExceptionArray,
+      isBooleanObjectArray, isNumberObjectArray, isStringObjectArray,
+      isEmptyObjectArray, isEmptyArrayArray,
+      isSymbolArray,
+      isMapArray, isWeakMapArray,
+      isSetArray, isWeakSetArray,
     } = parts.type;
 
     const {
@@ -1386,8 +1400,8 @@ export const test_execute_compare = (parts) => {
     const test_indexOfMatch = () =>{
       it('test_indexOfMatch', () => {
         checkEqual(0,
-          indexOfMatch([10, 20, 30], value => value > 5)
-          , 'test_match');
+          indexOfMatch([10, 20, 30], value => value > 5),
+        );
         checkEqual(2,
           indexOfMatch([10, 20, 30], value => value > 25),
         );
@@ -2080,6 +2094,21 @@ export const test_execute_compare = (parts) => {
           allMatchAll([100, 105, 110], [v => 100 <= v, v => v <= 110]) );
         checkEqual(false,
           allMatchAll([100, 105, 111], [v => 100 <= v, v => v <= 110]) );
+
+        const testAllMatchAll = replaceArray =>
+          allMatchAll(replaceArray, [
+            isArray,
+            element => element.length === 2,
+            element => isStringArray(element),
+          ]);
+        testCounter();
+        checkEqual(false, testAllMatchAll([]));
+        checkEqual(false, testAllMatchAll([1, 2]));
+        checkEqual(false, testAllMatchAll(['a', 'b']));
+        checkEqual(true,  testAllMatchAll([['a', 'b']]));
+        checkEqual(true,  testAllMatchAll([['a', 'b'], ['c', 'd']]));
+        checkEqual(false, testAllMatchAll([['a', 'b'], ['c']]));
+        checkEqual(false, testAllMatchAll([['a', 'b'], ['c', 1]]));
 
         // object parameter
         checkEqual(true,

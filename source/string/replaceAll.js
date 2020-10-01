@@ -13,6 +13,9 @@ import {
   _replaceAll,
 } from '../string/_replaceAll.js';
 
+/**
+ * replaceAll
+ */
 export const replaceAll = (str, before, after) => {
   if (isObjectParameter(str, 'str, before, after')) {
     ({ str, before, after } = str);

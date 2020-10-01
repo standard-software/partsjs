@@ -9,6 +9,8 @@ import _indexOfAnyLast_js from './_indexOfAnyLast.js';
 import indexOfAnyLast_js from './indexOfAnyLast.js';
 import _replaceAll_js from './_replaceAll.js';
 import replaceAll_js from './replaceAll.js';
+import _replaceAllArray_js from './_replaceAllArray.js';
+import replaceAllArray_js from './replaceAllArray.js';
 import matchFormat_js from './matchFormat.js';
 import subFirstDelimFirst_js from './subFirstDelimFirst.js';
 import subFirstDelimLast_js from './subFirstDelimLast.js';
@@ -35,6 +37,8 @@ const stringJs = {
   ...indexOfAnyLast_js,
   ..._replaceAll_js,
   ...replaceAll_js,
+  ..._replaceAllArray_js,
+  ...replaceAllArray_js,
   ...matchFormat_js,
   ...subFirstDelimFirst_js,
   ...subFirstDelimLast_js,
@@ -63,7 +67,7 @@ export const {
   _deleteIndex, _deleteLength, _deleteFirst, _deleteLast,
   _insert, _add,
 
-  _replaceAll,
+  _replaceAll, _replaceAllArray,
   _matchFormat,
   _subFirstDelimFirst,
   _subFirstDelimLast,
@@ -91,7 +95,7 @@ export const {
   deleteIndex, deleteLength, deleteFirst, deleteLast,
   insert, add,
 
-  replaceAll,
+  replaceAll, replaceAllArray,
   matchFormat,
   subFirstDelimFirst,
   subFirstDelimLast,
@@ -119,7 +123,7 @@ export default {
   _deleteIndex, _deleteLength, _deleteFirst, _deleteLast,
   _insert, _add,
 
-  _replaceAll,
+  _replaceAll, _replaceAllArray,
   _matchFormat,
   _subFirstDelimFirst,
   _subFirstDelimLast,
@@ -145,7 +149,7 @@ export default {
   deleteIndex, deleteLength, deleteFirst, deleteLast,
   insert, add,
 
-  replaceAll,
+  replaceAll, replaceAllArray,
   matchFormat,
   subFirstDelimFirst,
   subFirstDelimLast,

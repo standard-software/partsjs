@@ -660,6 +660,7 @@
 .string._matchFormat:[object Function]:function
 .string._repeat:[object Function]:function
 .string._replaceAll:[object Function]:function
+.string._replaceAllArray:[object Function]:function
 .string._split:[object Function]:function
 .string._splitCommaItems:[object Function]:function
 .string._splitDotItems:[object Function]:function
@@ -702,6 +703,7 @@
 .string.matchFormat:[object Function]:function
 .string.repeat:[object Function]:function
 .string.replaceAll:[object Function]:function
+.string.replaceAllArray:[object Function]:function
 .string.split:[object Function]:function
 .string.splitCommaItems:[object Function]:function
 .string.splitDotItems:[object Function]:function

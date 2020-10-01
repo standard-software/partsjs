@@ -1495,6 +1495,7 @@
 .default.parts.string._matchFormat:[object Function]:function
 .default.parts.string._repeat:[object Function]:function
 .default.parts.string._replaceAll:[object Function]:function
+.default.parts.string._replaceAllArray:[object Function]:function
 .default.parts.string._split:[object Function]:function
 .default.parts.string._splitCommaItems:[object Function]:function
 .default.parts.string._splitDotItems:[object Function]:function
@@ -1537,6 +1538,7 @@
 .default.parts.string.matchFormat:[object Function]:function
 .default.parts.string.repeat:[object Function]:function
 .default.parts.string.replaceAll:[object Function]:function
+.default.parts.string.replaceAllArray:[object Function]:function
 .default.parts.string.split:[object Function]:function
 .default.parts.string.splitCommaItems:[object Function]:function
 .default.parts.string.splitDotItems:[object Function]:function
@@ -1932,6 +1934,7 @@
 .default.string._matchFormat:[object Function]:function
 .default.string._repeat:[object Function]:function
 .default.string._replaceAll:[object Function]:function
+.default.string._replaceAllArray:[object Function]:function
 .default.string._split:[object Function]:function
 .default.string._splitCommaItems:[object Function]:function
 .default.string._splitDotItems:[object Function]:function
@@ -1974,6 +1977,7 @@
 .default.string.matchFormat:[object Function]:function
 .default.string.repeat:[object Function]:function
 .default.string.replaceAll:[object Function]:function
+.default.string.replaceAllArray:[object Function]:function
 .default.string.split:[object Function]:function
 .default.string.splitCommaItems:[object Function]:function
 .default.string.splitDotItems:[object Function]:function
@@ -3337,6 +3341,7 @@
 .parts.string._matchFormat:[object Function]:function
 .parts.string._repeat:[object Function]:function
 .parts.string._replaceAll:[object Function]:function
+.parts.string._replaceAllArray:[object Function]:function
 .parts.string._split:[object Function]:function
 .parts.string._splitCommaItems:[object Function]:function
 .parts.string._splitDotItems:[object Function]:function
@@ -3379,6 +3384,7 @@
 .parts.string.matchFormat:[object Function]:function
 .parts.string.repeat:[object Function]:function
 .parts.string.replaceAll:[object Function]:function
+.parts.string.replaceAllArray:[object Function]:function
 .parts.string.split:[object Function]:function
 .parts.string.splitCommaItems:[object Function]:function
 .parts.string.splitDotItems:[object Function]:function
@@ -3774,6 +3780,7 @@
 .string._matchFormat:[object Function]:function
 .string._repeat:[object Function]:function
 .string._replaceAll:[object Function]:function
+.string._replaceAllArray:[object Function]:function
 .string._split:[object Function]:function
 .string._splitCommaItems:[object Function]:function
 .string._splitDotItems:[object Function]:function
@@ -3816,6 +3823,7 @@
 .string.matchFormat:[object Function]:function
 .string.repeat:[object Function]:function
 .string.replaceAll:[object Function]:function
+.string.replaceAllArray:[object Function]:function
 .string.split:[object Function]:function
 .string.splitCommaItems:[object Function]:function
 .string.splitDotItems:[object Function]:function
