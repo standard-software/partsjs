@@ -305,6 +305,9 @@ You can now use the functions of the parts.js object.
 - add from array_common.js
   - _min.js/min.js
   - _max.js/max.js
+- update package.json scripts
+  - clasp:delete
+  - clasp:release
 
 ### 8.0.0
 #### 2020/09/27(Sun)
