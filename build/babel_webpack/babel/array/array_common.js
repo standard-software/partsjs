@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = exports.max = exports._max = exports.min = exports._min = void 0;
+exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = void 0;
 
 var _type = require("../type/type.js");
 
@@ -17,77 +17,13 @@ var _cloneDeep2 = require("../root/cloneDeep.js");
 
 var _unique2 = require("../array/unique.js");
 
-/**
- * array.min max
- */
-var _min = function _min(array) {
-  if (array.length === 0) {
-    return null;
-  }
+var _min2 = require("../array/_min.js");
 
-  var result = array[0];
+var _max2 = require("../array/_max.js");
 
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (array[i] < result) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-exports._min = _min;
-
-var min = function min(array) {
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('min args(array) is not array');
-  }
-
-  if (array.length !== 0 && !(0, _type.isNumberArray)(array)) {
-    throw new TypeError('min args(array) element is not number');
-  }
-
-  return _min(array);
-};
-
-exports.min = min;
-
-var _max = function _max(array) {
-  if (array.length === 0) {
-    return null;
-  }
-
-  var result = array[0];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    if (result < array[i]) {
-      result = array[i];
-    }
-  }
-
-  return result;
-};
-
-exports._max = _max;
-
-var max = function max(array) {
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('max args(array) is not array');
-  }
-
-  if (array.length !== 0 && !(0, _type.isNumberArray)(array)) {
-    throw new TypeError('max args(array) element is not number');
-  }
-
-  return _max(array);
-};
 /**
  * from
  */
-
-
-exports.max = max;
-
 var from = function from(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
 };
@@ -209,8 +145,7 @@ var _mode = function _mode(array) {
     }).length;
   });
 
-  var maxValue = _max(countArray);
-
+  var maxValue = (0, _max2._max)(countArray);
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] === maxValue;
   });
@@ -876,7 +811,7 @@ var subLength = function subLength(array, index) {
     throw new TypeError('subLength args(length) is not integer');
   }
 
-  length = _min([length, array.length - index]);
+  length = (0, _min2._min)([length, array.length - index]);
 
   if (!(0, _number._inRange)(length, 0, array.length - index)) {
     throw new RangeError('subLength args(length) must be from 0 to array.length - 1');
@@ -963,8 +898,6 @@ var subLast = function subLast(array) {
 
 exports.subLast = subLast;
 var _default = {
-  _min: _min,
-  _max: _max,
   _sum: _sum,
   _average: _average,
   _median: _median,
@@ -988,8 +921,6 @@ var _default = {
   _subFirst: _subFirst,
   _subLast: _subLast,
   from: from,
-  min: min,
-  max: max,
   sum: sum,
   average: average,
   median: median,

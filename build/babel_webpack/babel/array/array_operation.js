@@ -13,6 +13,8 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _array_common = require("../array/array_common.js");
 
+var _min2 = require("../array/_min.js");
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -212,7 +214,7 @@ var deleteLength = function deleteLength(array, index) {
     throw new RangeError('deleteLength args(index) must be from 0 to array.length - 1');
   }
 
-  length = (0, _array_common._min)([length, array.length - index]);
+  length = (0, _min2._min)([length, array.length - index]);
 
   if (!(0, _number._inRange)(length, 0, array.length - index)) {
     throw new RangeError('deleteLength args(length) must be from 0 to array.length - index');
@@ -502,7 +504,7 @@ var _excludeBothEnds = function _excludeBothEnds(array, valueFirstArray) {
 
   if ((0, _array_common._isBothEnds)(array, valueFirstArray, valueLastArray)) {
     deleteFirst(array, valueFirstArray.length);
-    deleteLast(array, (0, _array_common._min)([valueLastArray.length, array.length]));
+    deleteLast(array, (0, _min2._min)([valueLastArray.length, array.length]));
   }
 
   return array;

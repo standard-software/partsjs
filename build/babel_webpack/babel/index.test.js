@@ -74,7 +74,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [386, 19, 2, 259, 14, 11, 44, 35, 15, 80, 37, 67, 58];
+        var countArray = [386, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));

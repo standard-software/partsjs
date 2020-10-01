@@ -11,6 +11,9 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _replaceAll2 = require("../string/_replaceAll.js");
 
+/**
+ * replaceAll
+ */
 var replaceAll = function replaceAll(str, before, after) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, before, after')) {
     var _str = str;

@@ -46,7 +46,35 @@ var test_execute_compare = function test_execute_compare(parts) {
         isNotRegExp = _parts$type.isNotRegExp,
         isNotException = _parts$type.isNotException,
         isNotEmptyObject = _parts$type.isNotEmptyObject,
-        isNotEmptyArray = _parts$type.isNotEmptyArray;
+        isNotEmptyArray = _parts$type.isNotEmptyArray,
+        isUndefinedArray = _parts$type.isUndefinedArray,
+        isNullArray = _parts$type.isNullArray,
+        isNaNStrictArray = _parts$type.isNaNStrictArray,
+        isBooleanArray = _parts$type.isBooleanArray,
+        isNumberArray = _parts$type.isNumberArray,
+        isIntegerArray = _parts$type.isIntegerArray,
+        isStringArray = _parts$type.isStringArray,
+        isFunctionArray = _parts$type.isFunctionArray,
+        isObjectArray = _parts$type.isObjectArray,
+        isObjectNormalArray = _parts$type.isObjectNormalArray,
+        isObjectFromNullArray = _parts$type.isObjectFromNullArray,
+        isObjectLikeArray = _parts$type.isObjectLikeArray,
+        isModuleArray = _parts$type.isModuleArray,
+        isArrayArray = _parts$type.isArrayArray,
+        isArraySeriesArray = _parts$type.isArraySeriesArray,
+        isDateArray = _parts$type.isDateArray,
+        isRegExpArray = _parts$type.isRegExpArray,
+        isExceptionArray = _parts$type.isExceptionArray,
+        isBooleanObjectArray = _parts$type.isBooleanObjectArray,
+        isNumberObjectArray = _parts$type.isNumberObjectArray,
+        isStringObjectArray = _parts$type.isStringObjectArray,
+        isEmptyObjectArray = _parts$type.isEmptyObjectArray,
+        isEmptyArrayArray = _parts$type.isEmptyArrayArray,
+        isSymbolArray = _parts$type.isSymbolArray,
+        isMapArray = _parts$type.isMapArray,
+        isWeakMapArray = _parts$type.isWeakMapArray,
+        isSetArray = _parts$type.isSetArray,
+        isWeakSetArray = _parts$type.isWeakSetArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         expect = _parts$test2.expect,
@@ -1708,7 +1736,7 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_indexOfMatch', function () {
         checkEqual(0, indexOfMatch([10, 20, 30], function (value) {
           return value > 5;
-        }), 'test_match');
+        }));
         checkEqual(2, indexOfMatch([10, 20, 30], function (value) {
           return value > 25;
         }));
@@ -2605,7 +2633,24 @@ var test_execute_compare = function test_execute_compare(parts) {
           return 100 <= v;
         }, function (v) {
           return v <= 110;
-        }])); // object parameter
+        }]));
+
+        var testAllMatchAll = function testAllMatchAll(replaceArray) {
+          return allMatchAll(replaceArray, [isArray, function (element) {
+            return element.length === 2;
+          }, function (element) {
+            return isStringArray(element);
+          }]);
+        };
+
+        testCounter();
+        checkEqual(false, testAllMatchAll([]));
+        checkEqual(false, testAllMatchAll([1, 2]));
+        checkEqual(false, testAllMatchAll(['a', 'b']));
+        checkEqual(true, testAllMatchAll([['a', 'b']]));
+        checkEqual(true, testAllMatchAll([['a', 'b'], ['c', 'd']]));
+        checkEqual(false, testAllMatchAll([['a', 'b'], ['c']]));
+        checkEqual(false, testAllMatchAll([['a', 'b'], ['c', 1]])); // object parameter
 
         checkEqual(true, allMatchAll({
           valueArray: [100, 105, 110],

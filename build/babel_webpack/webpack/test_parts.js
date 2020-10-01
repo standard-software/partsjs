@@ -182,7 +182,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [386, 19, 2, 259, 14, 11, 44, 35, 15, 80, 37, 67, 58];
+        var countArray = [386, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -3743,7 +3743,35 @@ var test_execute_compare = function test_execute_compare(parts) {
         isNotRegExp = _parts$type.isNotRegExp,
         isNotException = _parts$type.isNotException,
         isNotEmptyObject = _parts$type.isNotEmptyObject,
-        isNotEmptyArray = _parts$type.isNotEmptyArray;
+        isNotEmptyArray = _parts$type.isNotEmptyArray,
+        isUndefinedArray = _parts$type.isUndefinedArray,
+        isNullArray = _parts$type.isNullArray,
+        isNaNStrictArray = _parts$type.isNaNStrictArray,
+        isBooleanArray = _parts$type.isBooleanArray,
+        isNumberArray = _parts$type.isNumberArray,
+        isIntegerArray = _parts$type.isIntegerArray,
+        isStringArray = _parts$type.isStringArray,
+        isFunctionArray = _parts$type.isFunctionArray,
+        isObjectArray = _parts$type.isObjectArray,
+        isObjectNormalArray = _parts$type.isObjectNormalArray,
+        isObjectFromNullArray = _parts$type.isObjectFromNullArray,
+        isObjectLikeArray = _parts$type.isObjectLikeArray,
+        isModuleArray = _parts$type.isModuleArray,
+        isArrayArray = _parts$type.isArrayArray,
+        isArraySeriesArray = _parts$type.isArraySeriesArray,
+        isDateArray = _parts$type.isDateArray,
+        isRegExpArray = _parts$type.isRegExpArray,
+        isExceptionArray = _parts$type.isExceptionArray,
+        isBooleanObjectArray = _parts$type.isBooleanObjectArray,
+        isNumberObjectArray = _parts$type.isNumberObjectArray,
+        isStringObjectArray = _parts$type.isStringObjectArray,
+        isEmptyObjectArray = _parts$type.isEmptyObjectArray,
+        isEmptyArrayArray = _parts$type.isEmptyArrayArray,
+        isSymbolArray = _parts$type.isSymbolArray,
+        isMapArray = _parts$type.isMapArray,
+        isWeakMapArray = _parts$type.isWeakMapArray,
+        isSetArray = _parts$type.isSetArray,
+        isWeakSetArray = _parts$type.isWeakSetArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         expect = _parts$test2.expect,
@@ -5405,7 +5433,7 @@ var test_execute_compare = function test_execute_compare(parts) {
       it('test_indexOfMatch', function () {
         checkEqual(0, indexOfMatch([10, 20, 30], function (value) {
           return value > 5;
-        }), 'test_match');
+        }));
         checkEqual(2, indexOfMatch([10, 20, 30], function (value) {
           return value > 25;
         }));
@@ -6302,7 +6330,24 @@ var test_execute_compare = function test_execute_compare(parts) {
           return 100 <= v;
         }, function (v) {
           return v <= 110;
-        }])); // object parameter
+        }]));
+
+        var testAllMatchAll = function testAllMatchAll(replaceArray) {
+          return allMatchAll(replaceArray, [isArray, function (element) {
+            return element.length === 2;
+          }, function (element) {
+            return isStringArray(element);
+          }]);
+        };
+
+        testCounter();
+        checkEqual(false, testAllMatchAll([]));
+        checkEqual(false, testAllMatchAll([1, 2]));
+        checkEqual(false, testAllMatchAll(['a', 'b']));
+        checkEqual(true, testAllMatchAll([['a', 'b']]));
+        checkEqual(true, testAllMatchAll([['a', 'b'], ['c', 'd']]));
+        checkEqual(false, testAllMatchAll([['a', 'b'], ['c']]));
+        checkEqual(false, testAllMatchAll([['a', 'b'], ['c', 1]])); // object parameter
 
         checkEqual(true, allMatchAll({
           valueArray: [100, 105, 110],
@@ -8667,7 +8712,10 @@ var test_execute_string = function test_execute_string(parts) {
         tagOuterLast = _parts$string.tagOuterLast,
         split = _parts$string.split,
         splitCommaItems = _parts$string.splitCommaItems,
-        splitDotItems = _parts$string.splitDotItems;
+        splitDotItems = _parts$string.splitDotItems,
+        indexOfAnyFirst = _parts$string.indexOfAnyFirst,
+        indexOfAnyLast = _parts$string.indexOfAnyLast,
+        replaceAllArray = _parts$string.replaceAllArray;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -8777,6 +8825,55 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           replaceAll('1212', '12', 123);
+        }));
+      });
+    };
+
+    var test_replaceAllArray = function test_replaceAllArray() {
+      it('test_replaceAllArray', function () {
+        checkEqual('aaaa', replaceAllArray('abab', [['b', 'a']]));
+        checkEqual('aaaa', replaceAllArray('abab', [['ab', 'aa']]));
+        checkEqual('abcabc', replaceAllArray('abab', [['ab', 'abc']]));
+        checkEqual('baba', replaceAllArray('abab', [['b', 'a'], ['a', 'b']]));
+        checkEqual('bbbb', replaceAllArray('abab', [['a', 'b'], ['d', 'b']]));
+        checkEqual('cbcb', replaceAllArray('abab', [['a', 'c'], ['d', 'b']]));
+        checkEqual('acac', replaceAllArray('abab', [['c', 'a'], ['b', 'c']]));
+        checkEqual('abab', replaceAllArray('abab', [['c', 'a'], ['d', 'b']]));
+        checkEqual('abab', replaceAllArray('abcabc', [['abc', 'ab'], ['bca', 'b']]));
+        checkEqual('abab', replaceAllArray('abcabc', [['bca', 'b'], ['abc', 'ab']]));
+        checkEqual('abbc', replaceAllArray('abcabc', [['bca', 'b']]));
+        checkEqual('ecec', replaceAllArray('abcabc', [['ab', 'e']]));
+        checkEqual('ecec', replaceAllArray('abcabc', [['ab', 'e'], ['abc', 'd']]));
+        checkEqual('dd', replaceAllArray('abcabc', [['abc', 'd'], ['ab', 'e']])); // Object Named Parameter
+
+        checkEqual('abcabc', replaceAllArray({
+          str: 'abab',
+          replaceArray: [['ab', 'abc']]
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          replaceAllArray('1212', [['12', '123']]);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray('1212', 'a');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray('1212', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray('1212', ['12', '123']);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray(1212, [['12', '123']]);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray('1212', [['123']]);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray('1212', [[12, '123']]);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllArray('1212', [['12', 123]]);
         }));
       });
     };
@@ -9019,6 +9116,233 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(5, indexOfLast('abcabc', 'c', 5));
         checkEqual(true, isThrown(function () {
           return indexOfLast('abcabc', 'c', 6);
+        }));
+      });
+    };
+
+    var test_indexOfAnyFirst = function test_indexOfAnyFirst() {
+      it('test_indexOfAnyFirst', function () {
+        // element 1
+        checkEqual(0, indexOfAnyFirst('a', ['a']).index);
+        checkEqual(-1, indexOfAnyFirst('a', ['']).index); // ]not strange
+
+        checkEqual(-1, indexOfAnyFirst('', ['a']).index);
+        checkEqual(-1, indexOfAnyFirst('', ['']).index); // [not strange
+
+        checkEqual(0, indexOfAnyFirst('abc', ['a']).index);
+        checkEqual(1, indexOfAnyFirst('abc', ['b']).index);
+        checkEqual(2, indexOfAnyFirst('abc', ['c']).index);
+        checkEqual(-1, indexOfAnyFirst('abc', ['d']).index);
+        checkEqual(-1, indexOfAnyFirst('abc', ['']).index); // ]not strange
+
+        checkEqual(0, indexOfAnyFirst('abcabc', ['a']).index);
+        checkEqual(1, indexOfAnyFirst('abcabc', ['b']).index);
+        checkEqual(2, indexOfAnyFirst('abcabc', ['c']).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['d']).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['']).index); // ]not strange
+        // startIndex
+
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyFirst('abcabc', ['a'], -1);
+        }));
+        checkEqual(0, indexOfAnyFirst('abcabc', ['a'], 0).index);
+        checkEqual(3, indexOfAnyFirst('abcabc', ['a'], 1).index);
+        checkEqual(3, indexOfAnyFirst('abcabc', ['a'], 2).index);
+        checkEqual(3, indexOfAnyFirst('abcabc', ['a'], 3).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['a'], 4).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['a'], 5).index);
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyFirst('abcabc', ['a'], 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyFirst('abcabc', ['b'], -1);
+        }));
+        checkEqual(1, indexOfAnyFirst('abcabc', ['b'], 0).index);
+        checkEqual(1, indexOfAnyFirst('abcabc', ['b'], 1).index);
+        checkEqual(4, indexOfAnyFirst('abcabc', ['b'], 2).index);
+        checkEqual(4, indexOfAnyFirst('abcabc', ['b'], 3).index);
+        checkEqual(4, indexOfAnyFirst('abcabc', ['b'], 4).index);
+        checkEqual(-1, indexOfAnyFirst('abcabc', ['b'], 5).index);
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyFirst('abcabc', ['b'], 6);
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyFirst('abcabc', ['c'], -1);
+        }));
+        checkEqual(2, indexOfAnyFirst('abcabc', ['c'], 0).index);
+        checkEqual(2, indexOfAnyFirst('abcabc', ['c'], 1).index);
+        checkEqual(2, indexOfAnyFirst('abcabc', ['c'], 2).index);
+        checkEqual(5, indexOfAnyFirst('abcabc', ['c'], 3).index);
+        checkEqual(5, indexOfAnyFirst('abcabc', ['c'], 4).index);
+        checkEqual(5, indexOfAnyFirst('abcabc', ['c'], 5).index);
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyFirst('abcabc', ['c'], 6);
+        })); // element many
+
+        var _checkEqual = function _checkEqual(result, functionResult) {
+          checkEqual({
+            index: result[0],
+            searchIndex: result[1]
+          }, functionResult);
+        };
+
+        _checkEqual([-1, -1], indexOfAnyFirst('abc', ['d', 'e']));
+
+        _checkEqual([0, 0], indexOfAnyFirst('abc', ['a', 'c']));
+
+        _checkEqual([0, 1], indexOfAnyFirst('abc', ['c', 'a']));
+
+        _checkEqual([1, 0], indexOfAnyFirst('abc', ['b', 'c']));
+
+        _checkEqual([1, 1], indexOfAnyFirst('abc', ['c', 'b']));
+
+        _checkEqual([2, 1], indexOfAnyFirst('abc', ['', 'c']));
+
+        _checkEqual([2, 0], indexOfAnyFirst('abc', ['c', '']));
+
+        _checkEqual([-1, -1], indexOfAnyFirst('abc', ['', '']));
+
+        _checkEqual([-1, -1], indexOfAnyFirst('abc', ['']));
+
+        _checkEqual([0, 0], indexOfAnyFirst('abcabc', ['a', 'c'], 0));
+
+        _checkEqual([2, 1], indexOfAnyFirst('abcabc', ['a', 'c'], 1));
+
+        _checkEqual([2, 1], indexOfAnyFirst('abcabc', ['a', 'c'], 2));
+
+        _checkEqual([3, 0], indexOfAnyFirst('abcabc', ['a', 'c'], 3));
+
+        _checkEqual([1, 0], indexOfAnyFirst('abcabc', ['b'], 1));
+
+        _checkEqual([4, 0], indexOfAnyFirst('abcabc', ['b'], 2)); // exception
+
+
+        checkEqual(true, isThrown(function () {
+          indexOfAnyFirst('abc', 'ab');
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfAnyFirst('abc', []);
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfAnyFirst('abc', [123]);
+        }));
+      });
+    };
+
+    var test_indexOfAnyLast = function test_indexOfAnyLast() {
+      it('test_indexOfAnyLast', function () {
+        // element 1
+        checkEqual(0, indexOfAnyLast('a', ['a']).index);
+        checkEqual(-1, indexOfAnyLast('a', ['']).index); // not strange
+
+        checkEqual(-1, indexOfAnyLast('', ['a']).index);
+        checkEqual(-1, indexOfAnyLast('', ['']).index); // not strange
+
+        checkEqual(0, indexOfAnyLast('abc', ['a']).index);
+        checkEqual(1, indexOfAnyLast('abc', ['b']).index);
+        checkEqual(2, indexOfAnyLast('abc', ['c']).index);
+        checkEqual(-1, indexOfAnyLast('abc', ['d']).index);
+        checkEqual(-1, indexOfAnyLast('abc', ['']).index); // not strange
+
+        checkEqual(3, indexOfAnyLast('abcabc', ['a']).index);
+        checkEqual(4, indexOfAnyLast('abcabc', ['b']).index);
+        checkEqual(5, indexOfAnyLast('abcabc', ['c']).index);
+        checkEqual(-1, indexOfAnyLast('abcabc', ['d']).index);
+        checkEqual(-1, indexOfAnyLast('abcabc', ['']).index); // not strange
+
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyLast('abcabc', ['a'], -1).index;
+        }));
+        checkEqual(0, indexOfAnyLast('abcabc', ['a'], 0).index);
+        checkEqual(0, indexOfAnyLast('abcabc', ['a'], 1).index);
+        checkEqual(0, indexOfAnyLast('abcabc', ['a'], 2).index);
+        checkEqual(3, indexOfAnyLast('abcabc', ['a'], 3).index);
+        checkEqual(3, indexOfAnyLast('abcabc', ['a'], 4).index);
+        checkEqual(3, indexOfAnyLast('abcabc', ['a'], 5).index);
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyLast('abcabc', ['a'], 6).index;
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyLast('abcabc', ['b'], -1).index;
+        }));
+        checkEqual(-1, indexOfAnyLast('abcabc', ['b'], 0).index);
+        checkEqual(1, indexOfAnyLast('abcabc', ['b'], 1).index);
+        checkEqual(1, indexOfAnyLast('abcabc', ['b'], 2).index);
+        checkEqual(1, indexOfAnyLast('abcabc', ['b'], 3).index);
+        checkEqual(4, indexOfAnyLast('abcabc', ['b'], 4).index);
+        checkEqual(4, indexOfAnyLast('abcabc', ['b'], 5).index);
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyLast('abcabc', ['b'], 6).index;
+        }));
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyLast('abcabc', ['c'], -1).index;
+        }));
+        checkEqual(-1, indexOfAnyLast('abcabc', ['c'], 0).index);
+        checkEqual(-1, indexOfAnyLast('abcabc', ['c'], 1).index);
+        checkEqual(2, indexOfAnyLast('abcabc', ['c'], 2).index);
+        checkEqual(2, indexOfAnyLast('abcabc', ['c'], 3).index);
+        checkEqual(2, indexOfAnyLast('abcabc', ['c'], 4).index);
+        checkEqual(5, indexOfAnyLast('abcabc', ['c'], 5).index);
+        checkEqual(true, isThrown(function () {
+          return indexOfAnyLast('abcabc', ['c'], 6).index;
+        })); // element many
+
+        testCounter();
+
+        var _checkEqual = function _checkEqual(result, functionResult) {
+          checkEqual({
+            index: result[0],
+            searchIndex: result[1]
+          }, functionResult);
+        };
+
+        _checkEqual([-1, -1], indexOfAnyLast('abc', ['d', 'e']));
+
+        _checkEqual([2, 1], indexOfAnyLast('abc', ['a', 'c']));
+
+        _checkEqual([2, 0], indexOfAnyLast('abc', ['c', 'a']));
+
+        _checkEqual([2, 1], indexOfAnyLast('abc', ['b', 'c']));
+
+        _checkEqual([2, 0], indexOfAnyLast('abc', ['c', 'b']));
+
+        _checkEqual([2, 1], indexOfAnyLast('abc', ['', 'c']));
+
+        _checkEqual([2, 0], indexOfAnyLast('abc', ['c', '']));
+
+        _checkEqual([-1, -1], indexOfAnyLast('abc', ['', '']));
+
+        _checkEqual([-1, -1], indexOfAnyLast('abc', ['']));
+
+        _checkEqual([5, 1], indexOfAnyLast('abcabc', ['a', 'c']));
+
+        _checkEqual([5, 1], indexOfAnyLast('abcabc', ['a', 'c'], 5));
+
+        _checkEqual([3, 0], indexOfAnyLast('abcabc', ['a', 'c'], 4));
+
+        _checkEqual([3, 0], indexOfAnyLast('abcabc', ['a', 'c'], 3));
+
+        _checkEqual([2, 1], indexOfAnyLast('abcabc', ['a', 'c'], 2));
+
+        _checkEqual([0, 0], indexOfAnyLast('abcabc', ['a', 'c'], 1));
+
+        _checkEqual([0, 0], indexOfAnyLast('abcabc', ['a', 'c'], 0));
+
+        _checkEqual([4, 0], indexOfAnyLast('abcabc', ['b'], 5));
+
+        _checkEqual([4, 0], indexOfAnyLast('abcabc', ['b'], 4));
+
+        _checkEqual([1, 0], indexOfAnyLast('abcabc', ['b'], 3)); // exception
+
+
+        checkEqual(true, isThrown(function () {
+          indexOfAnyLast('abc', 'ab');
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfAnyLast('abc', []);
+        }));
+        checkEqual(true, isThrown(function () {
+          indexOfAnyLast('abc', [123]);
         }));
       });
     };
@@ -10416,10 +10740,13 @@ var test_execute_string = function test_execute_string(parts) {
 
     test_matchFormat();
     test_replaceAll();
+    test_replaceAllArray();
     test_indexOf_standard();
     test_indexOfFirst();
     test_lastIndexOf_standard();
     test_indexOfLast();
+    test_indexOfAnyFirst();
+    test_indexOfAnyLast();
     test_isFirst();
     test_isLast();
     test_isBothEnds();

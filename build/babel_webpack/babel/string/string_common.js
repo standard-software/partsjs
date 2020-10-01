@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.add = exports._add = exports.insert = exports._insert = exports.deleteLast = exports._deleteLast = exports.deleteFirst = exports._deleteFirst = exports.deleteLength = exports._deleteLength = exports.deleteIndex = exports._deleteIndex = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.trimBothEnds = exports._trimBothEnds = exports.trimLast = exports._trimLast = exports.trimFirst = exports._trimFirst = exports.excludeBothEnds = exports._excludeBothEnds = exports.excludeLast = exports._excludeLast = exports.excludeFirst = exports._excludeFirst = exports.includeBothEnds = exports._includeBothEnds = exports.includeLast = exports._includeLast = exports.includeFirst = exports._includeFirst = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.indexOfLast = exports._indexOfLast = exports.indexOfFirst = exports._indexOfFirst = exports.isUpperCase = exports._isUpperCase = exports.isLowerCase = exports._isLowerCase = exports.repeat = exports._repeat = void 0;
+exports["default"] = exports.add = exports._add = exports.insert = exports._insert = exports.deleteLast = exports._deleteLast = exports.deleteFirst = exports._deleteFirst = exports.deleteLength = exports._deleteLength = exports.deleteIndex = exports._deleteIndex = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.trimBothEnds = exports._trimBothEnds = exports.trimLast = exports._trimLast = exports.trimFirst = exports._trimFirst = exports.excludeBothEnds = exports._excludeBothEnds = exports.excludeLast = exports._excludeLast = exports.excludeFirst = exports._excludeFirst = exports.includeBothEnds = exports._includeBothEnds = exports.includeLast = exports._includeLast = exports.includeFirst = exports._includeFirst = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.isUpperCase = exports._isUpperCase = exports.isLowerCase = exports._isLowerCase = exports.repeat = exports._repeat = void 0;
 
 var _type = require("../type/type.js");
 
@@ -12,6 +12,10 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 var _number = require("../number/number.js");
 
 var _array = require("../array/array.js");
+
+var _indexOfFirst2 = require("../string/_indexOfFirst.js");
+
+var _indexOfLast2 = require("../string/_indexOfLast.js");
 
 /**
  * repeat
@@ -86,117 +90,23 @@ var isUpperCase = function isUpperCase(str) {
   return _isUpperCase(str);
 };
 /**
- * indexOfFirst
+ * isFirst
  */
 
 
 exports.isUpperCase = isUpperCase;
 
-var _indexOfFirst = function _indexOfFirst(str, search, indexStart) {
-  if (search === '') {
-    return -1;
-  }
-
-  return str.indexOf(search, indexStart);
-};
-
-exports._indexOfFirst = _indexOfFirst;
-
-var indexOfFirst = function indexOfFirst(str, search) {
-  var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search', 'indexStart')) {
-    var _str2 = str;
-    str = _str2.str;
-    search = _str2.search;
-    var _str2$indexStart = _str2.indexStart;
-    indexStart = _str2$indexStart === void 0 ? 0 : _str2$indexStart;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('indexOfFirst args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(search)) {
-    throw new TypeError('indexOfFirst args(search) is not string');
-  }
-
-  if (!(0, _type.isInteger)(indexStart)) {
-    throw new TypeError('indexOfFirst args(indexStart) is not integer');
-  }
-
-  if (!(0, _number._inRange)(indexStart, 0, (0, _array._max)([0, str.length - 1]))) {
-    throw new RangeError('indexOfFirst args(indexStart) must be from 0 to str.length - 1');
-  }
-
-  return _indexOfFirst(str, search, indexStart);
-};
-/**
- * indexOfLast
- */
-
-
-exports.indexOfFirst = indexOfFirst;
-
-var _indexOfLast = function _indexOfLast(str, search) {
-  var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (0, _array._max)([0, str.length - 1]);
-
-  if (search === '') {
-    return -1;
-  }
-
-  return str.lastIndexOf(search, indexStart);
-};
-
-exports._indexOfLast = _indexOfLast;
-
-var indexOfLast = function indexOfLast(str, search) {
-  var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (0, _array._max)([0, str.length - 1]);
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search', 'indexStart')) {
-    var _str3 = str;
-    str = _str3.str;
-    search = _str3.search;
-    var _str3$indexStart = _str3.indexStart;
-    indexStart = _str3$indexStart === void 0 ? (0, _array._max)([0, str.length - 1]) : _str3$indexStart;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('indexOfLast args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(search)) {
-    throw new TypeError('indexOfLast args(search) is not string');
-  }
-
-  if (!(0, _type.isInteger)(indexStart)) {
-    throw new TypeError('indexOfLast args(indexStart) is not integer');
-  }
-
-  if (!(0, _number._inRange)(indexStart, 0, (0, _array._max)([0, str.length - 1]))) {
-    throw new RangeError('indexOfLast args(indexStart) must be from 0 to str.length - 1');
-  }
-
-  return _indexOfLast(str, search, indexStart);
-};
-/**
- * isFirst
- */
-
-
-exports.indexOfLast = indexOfLast;
-
 var _isFirst = function _isFirst(str, search) {
-  return _indexOfFirst(str, search) === 0;
+  return (0, _indexOfFirst2._indexOfFirst)(str, search) === 0;
 };
 
 exports._isFirst = _isFirst;
 
 var isFirst = function isFirst(str, search) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
-    var _str4 = str;
-    str = _str4.str;
-    search = _str4.search;
+    var _str2 = str;
+    str = _str2.str;
+    search = _str2.search;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -217,7 +127,7 @@ var isFirst = function isFirst(str, search) {
 exports.isFirst = isFirst;
 
 var _isLast = function _isLast(str, search) {
-  var result = _indexOfLast(str, search);
+  var result = (0, _indexOfLast2._indexOfLast)(str, search);
 
   if (result === -1) {
     return false;
@@ -230,9 +140,9 @@ exports._isLast = _isLast;
 
 var isLast = function isLast(str, search) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
-    var _str5 = str;
-    str = _str5.str;
-    search = _str5.search;
+    var _str3 = str;
+    str = _str3.str;
+    search = _str3.search;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -268,15 +178,15 @@ var isBothEnds = function isBothEnds(str, searchFirst) {
   var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, searchFirst', 'searchLast')) {
-    var _str6 = str;
-    str = _str6.str;
-    searchFirst = _str6.searchFirst;
-    var _str6$searchLast = _str6.searchLast;
-    searchLast = _str6$searchLast === void 0 ? searchFirst : _str6$searchLast;
+    var _str4 = str;
+    str = _str4.str;
+    searchFirst = _str4.searchFirst;
+    var _str4$searchLast = _str4.searchLast;
+    searchLast = _str4$searchLast === void 0 ? searchFirst : _str4$searchLast;
   } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
-    var _str7 = str;
-    str = _str7.str;
-    searchFirst = _str7.search;
+    var _str5 = str;
+    str = _str5.str;
+    searchFirst = _str5.search;
     searchLast = searchFirst;
   }
 
@@ -313,9 +223,9 @@ exports._includeFirst = _includeFirst;
 
 var includeFirst = function includeFirst(str, value) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str8 = str;
-    str = _str8.str;
-    value = _str8.value;
+    var _str6 = str;
+    str = _str6.str;
+    value = _str6.value;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -347,9 +257,9 @@ exports._includeLast = _includeLast;
 
 var includeLast = function includeLast(str, value) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str9 = str;
-    str = _str9.str;
-    value = _str9.value;
+    var _str7 = str;
+    str = _str7.str;
+    value = _str7.value;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -385,15 +295,15 @@ var includeBothEnds = function includeBothEnds(str, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueFirst', 'valueLast')) {
-    var _str10 = str;
-    str = _str10.str;
-    valueFirst = _str10.valueFirst;
-    var _str10$valueLast = _str10.valueLast;
-    valueLast = _str10$valueLast === void 0 ? valueFirst : _str10$valueLast;
+    var _str8 = str;
+    str = _str8.str;
+    valueFirst = _str8.valueFirst;
+    var _str8$valueLast = _str8.valueLast;
+    valueLast = _str8$valueLast === void 0 ? valueFirst : _str8$valueLast;
   } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str11 = str;
-    str = _str11.str;
-    valueFirst = _str11.value;
+    var _str9 = str;
+    str = _str9.str;
+    valueFirst = _str9.value;
     valueLast = valueFirst;
   }
 
@@ -430,9 +340,9 @@ exports._excludeFirst = _excludeFirst;
 
 var excludeFirst = function excludeFirst(str, value) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str12 = str;
-    str = _str12.str;
-    value = _str12.value;
+    var _str10 = str;
+    str = _str10.str;
+    value = _str10.value;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -464,9 +374,9 @@ exports._excludeLast = _excludeLast;
 
 var excludeLast = function excludeLast(str, value) {
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str13 = str;
-    str = _str13.str;
-    value = _str13.value;
+    var _str11 = str;
+    str = _str11.str;
+    value = _str11.value;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -503,17 +413,17 @@ var excludeBothEnds = function excludeBothEnds(str, valueFirst) {
   var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueFirst', 'valueLast')) {
-    var _str14 = str;
-    str = _str14.str;
-    valueFirst = _str14.valueFirst;
-    var _str14$valueLast = _str14.valueLast;
-    valueLast = _str14$valueLast === void 0 ? valueFirst : _str14$valueLast;
+    var _str12 = str;
+    str = _str12.str;
+    valueFirst = _str12.valueFirst;
+    var _str12$valueLast = _str12.valueLast;
+    valueLast = _str12$valueLast === void 0 ? valueFirst : _str12$valueLast;
   } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str15 = str;
-    str = _str15.str;
-    valueFirst = _str15.value;
-    var _str15$valueLast = _str15.valueLast;
-    valueLast = _str15$valueLast === void 0 ? valueFirst : _str15$valueLast;
+    var _str13 = str;
+    str = _str13.str;
+    valueFirst = _str13.value;
+    var _str13$valueLast = _str13.valueLast;
+    valueLast = _str13$valueLast === void 0 ? valueFirst : _str13$valueLast;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -561,10 +471,10 @@ var trimFirst = function trimFirst(str) {
   var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueArray')) {
-    var _str16 = str;
-    str = _str16.str;
-    var _str16$valueArray = _str16.valueArray;
-    valueArray = _str16$valueArray === void 0 ? [' ', '\r', '\n'] : _str16$valueArray;
+    var _str14 = str;
+    str = _str14.str;
+    var _str14$valueArray = _str14.valueArray;
+    valueArray = _str14$valueArray === void 0 ? [' ', '\r', '\n'] : _str14$valueArray;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -612,10 +522,10 @@ var trimLast = function trimLast(str) {
   var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueArray')) {
-    var _str17 = str;
-    str = _str17.str;
-    var _str17$valueArray = _str17.valueArray;
-    valueArray = _str17$valueArray === void 0 ? [' ', '\r', '\n'] : _str17$valueArray;
+    var _str15 = str;
+    str = _str15.str;
+    var _str15$valueArray = _str15.valueArray;
+    valueArray = _str15$valueArray === void 0 ? [' ', '\r', '\n'] : _str15$valueArray;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -677,15 +587,15 @@ var trimBothEnds = function trimBothEnds(str) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueFirstArray', 'valueLastArray')) {
-    var _str18 = str;
-    str = _str18.str;
-    valueFirstArray = _str18.valueFirstArray;
-    var _str18$valueLastArray = _str18.valueLastArray;
-    valueLastArray = _str18$valueLastArray === void 0 ? valueFirstArray : _str18$valueLastArray;
+    var _str16 = str;
+    str = _str16.str;
+    valueFirstArray = _str16.valueFirstArray;
+    var _str16$valueLastArray = _str16.valueLastArray;
+    valueLastArray = _str16$valueLastArray === void 0 ? valueFirstArray : _str16$valueLastArray;
   } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueArray')) {
-    var _str19 = str;
-    str = _str19.str;
-    valueFirstArray = _str19.valueArray;
+    var _str17 = str;
+    str = _str17.str;
+    valueFirstArray = _str17.valueArray;
     valueLastArray = valueFirstArray;
   }
 
@@ -729,11 +639,11 @@ var subIndex = function subIndex(str, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, indexStart', 'indexEnd')) {
-    var _str20 = str;
-    str = _str20.str;
-    indexStart = _str20.indexStart;
-    var _str20$indexEnd = _str20.indexEnd;
-    indexEnd = _str20$indexEnd === void 0 ? indexStart : _str20$indexEnd;
+    var _str18 = str;
+    str = _str18.str;
+    indexStart = _str18.indexStart;
+    var _str18$indexEnd = _str18.indexEnd;
+    indexEnd = _str18$indexEnd === void 0 ? indexStart : _str18$indexEnd;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -777,11 +687,11 @@ var subLength = function subLength(str, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, index', 'length')) {
-    var _str21 = str;
-    str = _str21.str;
-    index = _str21.index;
-    var _str21$length = _str21.length;
-    length = _str21$length === void 0 ? str.length - index : _str21$length;
+    var _str19 = str;
+    str = _str19.str;
+    index = _str19.index;
+    var _str19$length = _str19.length;
+    length = _str19$length === void 0 ? str.length - index : _str19$length;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -826,10 +736,10 @@ var subFirst = function subFirst(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str22 = str;
-    str = _str22.str;
-    var _str22$length = _str22.length;
-    length = _str22$length === void 0 ? 1 : _str22$length;
+    var _str20 = str;
+    str = _str20.str;
+    var _str20$length = _str20.length;
+    length = _str20$length === void 0 ? 1 : _str20$length;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -864,10 +774,10 @@ var subLast = function subLast(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str23 = str;
-    str = _str23.str;
-    var _str23$length = _str23.length;
-    length = _str23$length === void 0 ? 1 : _str23$length;
+    var _str21 = str;
+    str = _str21.str;
+    var _str21$length = _str21.length;
+    length = _str21$length === void 0 ? 1 : _str21$length;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -904,11 +814,11 @@ var deleteIndex = function deleteIndex(str, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, indexStart', 'indexEnd')) {
-    var _str24 = str;
-    str = _str24.str;
-    indexStart = _str24.indexStart;
-    var _str24$indexEnd = _str24.indexEnd;
-    indexEnd = _str24$indexEnd === void 0 ? indexStart : _str24$indexEnd;
+    var _str22 = str;
+    str = _str22.str;
+    indexStart = _str22.indexStart;
+    var _str22$indexEnd = _str22.indexEnd;
+    indexEnd = _str22$indexEnd === void 0 ? indexStart : _str22$indexEnd;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -951,11 +861,11 @@ var deleteLength = function deleteLength(str, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, index', 'length')) {
-    var _str25 = str;
-    str = _str25.str;
-    index = _str25.index;
-    var _str25$length = _str25.length;
-    length = _str25$length === void 0 ? str.length - index : _str25$length;
+    var _str23 = str;
+    str = _str23.str;
+    index = _str23.index;
+    var _str23$length = _str23.length;
+    length = _str23$length === void 0 ? str.length - index : _str23$length;
   } else if ((0, _isObjectParameter.isObjectParameter)(index, 'index', 'length')) {
     var _index = index;
     index = _index.index;
@@ -1008,10 +918,10 @@ var deleteFirst = function deleteFirst(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str26 = str;
-    str = _str26.str;
-    var _str26$length = _str26.length;
-    length = _str26$length === void 0 ? 1 : _str26$length;
+    var _str24 = str;
+    str = _str24.str;
+    var _str24$length = _str24.length;
+    length = _str24$length === void 0 ? 1 : _str24$length;
   } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
     var _length2 = length;
     length = _length2.length;
@@ -1049,10 +959,10 @@ var deleteLast = function deleteLast(str) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str27 = str;
-    str = _str27.str;
-    var _str27$length = _str27.length;
-    length = _str27$length === void 0 ? 1 : _str27$length;
+    var _str25 = str;
+    str = _str25.str;
+    var _str25$length = _str25.length;
+    length = _str25$length === void 0 ? 1 : _str25$length;
   } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
     var _length3 = length;
     length = _length3.length;
@@ -1091,11 +1001,11 @@ var insert = function insert(str, value) {
   var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value', 'index')) {
-    var _str28 = str;
-    str = _str28.str;
-    value = _str28.value;
-    var _str28$index = _str28.index;
-    index = _str28$index === void 0 ? 0 : _str28$index;
+    var _str26 = str;
+    str = _str26.str;
+    value = _str26.value;
+    var _str26$index = _str26.index;
+    index = _str26$index === void 0 ? 0 : _str26$index;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -1135,11 +1045,11 @@ var add = function add(str, value) {
   var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value', 'index')) {
-    var _str29 = str;
-    str = _str29.str;
-    value = _str29.value;
-    var _str29$index = _str29.index;
-    index = _str29$index === void 0 ? str.length - 1 : _str29$index;
+    var _str27 = str;
+    str = _str27.str;
+    value = _str27.value;
+    var _str27$index = _str27.index;
+    index = _str27$index === void 0 ? str.length - 1 : _str27$index;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -1166,8 +1076,6 @@ var _default = {
   _repeat: _repeat,
   _isLowerCase: _isLowerCase,
   _isUpperCase: _isUpperCase,
-  _indexOfFirst: _indexOfFirst,
-  _indexOfLast: _indexOfLast,
   _isFirst: _isFirst,
   _isLast: _isLast,
   _isBothEnds: _isBothEnds,
@@ -1193,8 +1101,6 @@ var _default = {
   repeat: repeat,
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
-  indexOfFirst: indexOfFirst,
-  indexOfLast: indexOfLast,
   isFirst: isFirst,
   isLast: isLast,
   isBothEnds: isBothEnds,

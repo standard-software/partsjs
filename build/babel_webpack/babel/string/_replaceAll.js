@@ -5,6 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._replaceAll = void 0;
 
+/**
+ * replaceAll
+ */
 var _replaceAll = function _replaceAll(str, before, after) {
   return str.split(before).join(after);
 };

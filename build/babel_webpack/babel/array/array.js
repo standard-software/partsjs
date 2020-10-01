@@ -7,6 +7,14 @@ exports["default"] = exports.operation = exports.arrayToIndexValueArray = export
 
 var _array_common = _interopRequireDefault(require("./array_common.js"));
 
+var _min2 = _interopRequireDefault(require("./_min.js"));
+
+var _min3 = _interopRequireDefault(require("./min.js"));
+
+var _max2 = _interopRequireDefault(require("./_max.js"));
+
+var _max3 = _interopRequireDefault(require("./max.js"));
+
 var _NumberArray2 = _interopRequireDefault(require("./_NumberArray.js"));
 
 var _NumberArray3 = _interopRequireDefault(require("./NumberArray.js"));
@@ -36,7 +44,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // import { _copyProperty } from './object/object_common.js';
-var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _unique2["default"]);
+var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _unique2["default"]);
 
 var arrayOperationJs = _objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sortDictionary["default"]);
 
