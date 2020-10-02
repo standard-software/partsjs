@@ -263,6 +263,10 @@ export const matchFormat = (
   );
 };
 
+matchFormat.clear = _matchFormat.clear;
+matchFormat.add = _matchFormat.add;
+matchFormat.reset = _matchFormat.reset;
+
 export default {
   _matchFormat,
   matchFormat,

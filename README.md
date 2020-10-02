@@ -297,6 +297,8 @@ You can now use the functions of the parts.js object.
 #### 2020/10/03(Sat)
 - update split
   - use _replaceAllArray
+- update matchFormat
+  - clear/add/reset method publish
 
 ### 8.1.0
 #### 2020/10/01(Thu)
