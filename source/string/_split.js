@@ -30,6 +30,10 @@ import {
 } from '../string/_replaceAll.js';
 
 import {
+  _replaceAllArray,
+} from '../string/_replaceAllArray.js';
+
+import {
   _or,
 } from '../compare/or.js';
 
@@ -67,16 +71,9 @@ export const _split = (
     break;
   case _split.executeConvert.excludeSpaceCrlf:
     __loop(result)((e, i) => {
-      result[i] = _replaceAll(
-        _replaceAll(
-          _replaceAll(
-            e,
-            '\n', '',
-          ),
-          '\r', '',
-        ),
-        ' ', '',
-      );
+      result[i] = _replaceAllArray(e, [
+        [' ', ''], ['\n', ''], ['\r', ''],
+      ]);
     });
     break;
   default:

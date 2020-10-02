@@ -293,6 +293,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 8.2.0
+#### 2020/10/03(Sat)
+- update split
+  - use _replaceAllArray
+
 ### 8.1.0
 #### 2020/10/01(Thu)
 - add from string_common.js
