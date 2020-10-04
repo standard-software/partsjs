@@ -1,36 +1,36 @@
-import _polyfill from './polyfill.js';
-import _root from './root/root.js';
-import _platform from './platform/platform.js';
-import _type from './type/type.js';
-import _typeAlias from './type/typeAlias.js';
-import _test from './test/test.js';
-import _syntax from './syntax/syntax.js';
-import _compare from './compare/compare.js';
-import _convert from './convert/convert.js';
-import _convertAlias from './convert/convertAlias.js';
-import _number from './number/number.js';
-import _string from './string/string.js';
-import _object from './object/object.js';
-import _array from './array/array.js';
-import _date from './date/date.js';
-import _consoleHook from './consoleHook/consoleHook.js';
-import _wsh from './wsh/wsh.js';
+import polyfillJs from './polyfill.js';
+import rootJs from './root/root.js';
+import platformJs from './platform/platform.js';
+import typeJs from './type/type.js';
+import typeAliasJs from './type/typeAlias.js';
+import testJs from './test/test.js';
+import syntaxJs from './syntax/syntax.js';
+import compareJs from './compare/compare.js';
+import convertJs from './convert/convert.js';
+import convertAliasJs from './convert/convertAlias.js';
+import numberJs from './number/number.js';
+import stringJs from './string/string.js';
+import objectJs from './object/object.js';
+import arrayJs from './array/array.js';
+import dateJs from './date/date.js';
+import consoleHookJs from './consoleHook/consoleHook.js';
+import wshJs from './wsh/wsh.js';
 
 export const VERSION = '8.2.0 beta 1';
 
 let rootAlias = {};
 const propertyNames = {};
 
-const { _copyProperty } = _object;
-const { _splitCommaItems } = _string;
-const { _map } = _array;
+const { _copyProperty } = objectJs;
+const { _splitCommaItems } = stringJs;
+const { _map } = arrayJs;
 
 /**
  * root
  */
 export const {
   clone, cloneDeep,
-} = _root;
+} = rootJs;
 
 rootAlias = { ...rootAlias,
   clone, cloneDeep,
@@ -44,7 +44,7 @@ export const root = {
  * platform
  */
 export const platform = {
-  ..._platform,
+  ...platformJs,
 };
 
 /**
@@ -143,7 +143,7 @@ export const {
   isNotMapArray, isNotWeakMapArray,
   isNotSetArray, isNotWeakSetArray,
   // -----
-} = _type;
+} = typeJs;
 
 export const {
   isObjectType, isArrayType,
@@ -212,16 +212,16 @@ export const {
   isNotExceptArray,
   isNotObjTypeArray,
   // -----
-} = _typeAlias;
+} = typeAliasJs;
 
 rootAlias = { ...rootAlias,
-  ..._type,
-  ..._typeAlias,
+  ...typeJs,
+  ...typeAliasJs,
 };
 
 export const type = {
-  ..._type,
-  ..._typeAlias,
+  ...typeJs,
+  ...typeAliasJs,
 };
 
 /**
@@ -229,14 +229,14 @@ export const type = {
  */
 export const {
   isThrown, isThrownValue, isThrownException, isNotThrown,
-} = _test;
+} = testJs;
 
 rootAlias = { ...rootAlias,
   isThrown, isThrownValue, isThrownException, isNotThrown,
 };
 
 export const test = {
-  ..._test,
+  ...testJs,
 };
 
 /**
@@ -250,7 +250,7 @@ export const {
   canUseMap, canUseWeakMap,
   canUseSet, canUseWeakSet,
   Enum,
-} = _syntax;
+} = syntaxJs;
 
 rootAlias = { ...rootAlias,
   assert, guard,
@@ -263,7 +263,7 @@ rootAlias = { ...rootAlias,
 };
 
 export const syntax = {
-  ..._syntax,
+  ...syntaxJs,
 };
 
 /**
@@ -279,7 +279,7 @@ export const {
   matchAll, matchAllValue,
   allMatchAll, indexOfMatchAll, someMatchAll,
   includes, includesSome, includesAll,
-} = _compare;
+} = compareJs;
 
 rootAlias = { ...rootAlias,
   equal, equalDeep,
@@ -294,7 +294,7 @@ rootAlias = { ...rootAlias,
 };
 
 export const compare = {
-  ..._compare,
+  ...compareJs,
 };
 
 /**
@@ -307,7 +307,7 @@ export const {
   stringToInteger, stringToIntegerDefault,
   valueToNumber, valueToNumberDefault,
   valueToInteger, valueToIntegerDefault,
-} = _convert;
+} = convertJs;
 
 export const {
   numToString,
@@ -324,7 +324,7 @@ export const {
 
   strToNum, strToNumDef,
   strToInt, strToIntDef,
-} = _convertAlias;
+} = convertAliasJs;
 
 rootAlias = { ...rootAlias,
   numberToString,
@@ -351,8 +351,8 @@ rootAlias = { ...rootAlias,
 };
 
 export const convert = {
-  ..._convert,
-  ..._convertAlias,
+  ...convertJs,
+  ...convertAliasJs,
 };
 
 /**
@@ -365,7 +365,7 @@ export const {
   randomInt,
 
   makeInRange,
-} = _number;
+} = numberJs;
 
 rootAlias = { ...rootAlias,
   isMultiples, isEven, isOdd,
@@ -377,7 +377,7 @@ rootAlias = { ...rootAlias,
 };
 
 export const number = {
-  ..._number,
+  ...numberJs,
 };
 
 /**
@@ -390,7 +390,7 @@ export const {
   split,
   splitCommaItems,
   splitDotItems,
-} = _string;
+} = stringJs;
 
 rootAlias = { ...rootAlias,
   isLowerCase, isUpperCase,
@@ -402,7 +402,7 @@ rootAlias = { ...rootAlias,
 };
 
 export const string = {
-  ..._string,
+  ...stringJs,
 };
 
 /**
@@ -435,7 +435,7 @@ export const {
   inProp,
   fixProp,
   propCount,
-} = _object;
+} = objectJs;
 
 rootAlias = { ...rootAlias,
   copyProperty,
@@ -467,7 +467,7 @@ rootAlias = { ...rootAlias,
 };
 
 export const object = {
-  ..._object,
+  ...objectJs,
 };
 
 /**
@@ -476,7 +476,7 @@ export const object = {
 export const {
   min, max,
   sum, average, median,
-} = _array;
+} = arrayJs;
 
 rootAlias = { ...rootAlias,
   min, max,
@@ -484,11 +484,11 @@ rootAlias = { ...rootAlias,
 };
 
 export const array = {
-  ..._array,
+  ...arrayJs,
 };
 
 array.operation = {
-  ..._array.operation,
+  ...arrayJs.operation,
 };
 
 /**
@@ -496,14 +496,14 @@ array.operation = {
  */
 export const {
   Today,
-} = _date;
+} = dateJs;
 
 rootAlias = { ...rootAlias,
   Today,
 };
 
 export const date = {
-  ..._date,
+  ...dateJs,
 };
 
 /**
@@ -515,7 +515,7 @@ const isPrefixSafixAdd = (prefix, safix, commaString) => {
   ).join(',');
 };
 
-export const consoleHook = _copyProperty(_consoleHook,
+export const consoleHook = _copyProperty(consoleHookJs,
   [
     isPrefixSafixAdd('hook',    '', 'Log,Info,Warn,Error,Debug,'),
     isPrefixSafixAdd('unHook',  '', 'Log,Info,Warn,Error,Debug,'),
@@ -528,7 +528,7 @@ export const consoleHook = _copyProperty(_consoleHook,
  * wsh
  */
 export const wsh = {
-  ..._wsh,
+  ...wshJs,
 };
 
 /**

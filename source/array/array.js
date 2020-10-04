@@ -1,40 +1,40 @@
-import array_common_js from './array_common.js';
-import _min_js from './_min.js';
-import min_js from './min.js';
-import _max_js from './_max.js';
-import max_js from './max.js';
-import _NumberArray_js from './_NumberArray.js';
-import NumberArray_js from './NumberArray.js';
-import _IntegerArray_js from './_IntegerArray.js';
-import IntegerArray_js from './IntegerArray.js';
-import arrayEntries_js from './arrayEntries.js';
-import group_js from './group.js';
-import unique_js from './unique.js';
-import array_operation_js from './array_operation.js';
-import sort_js from './operation/sort.js';
-import sortDictionary_js from './operation/sortDictionary.js';
+import array_commonJs from './array_common.js';
+import _minJs from './_min.js';
+import minJs from './min.js';
+import _maxJs from './_max.js';
+import maxJs from './max.js';
+import _NumberArrayJs from './_NumberArray.js';
+import NumberArrayJs from './NumberArray.js';
+import _IntegerArrayJs from './_IntegerArray.js';
+import IntegerArrayJs from './IntegerArray.js';
+import arrayEntriesJs from './arrayEntries.js';
+import groupJs from './group.js';
+import uniqueJs from './unique.js';
+import array_operationJs from './array_operation.js';
+import sortJs from './operation/sort.js';
+import sortDictionaryJs from './operation/sortDictionary.js';
 
 // import { _copyProperty } from './object/object_common.js';
 
 const arrayJs = {
-  ...array_common_js,
-  ..._min_js,
-  ...min_js,
-  ..._max_js,
-  ...max_js,
-  ..._NumberArray_js,
-  ...NumberArray_js,
-  ..._IntegerArray_js,
-  ...IntegerArray_js,
-  ...arrayEntries_js,
-  ...group_js,
-  ...unique_js,
+  ...array_commonJs,
+  ..._minJs,
+  ...minJs,
+  ..._maxJs,
+  ...maxJs,
+  ..._NumberArrayJs,
+  ...NumberArrayJs,
+  ..._IntegerArrayJs,
+  ...IntegerArrayJs,
+  ...arrayEntriesJs,
+  ...groupJs,
+  ...uniqueJs,
 };
 
 const arrayOperationJs = {
-  ...array_operation_js,
-  ...sort_js,
-  ...sortDictionary_js,
+  ...array_operationJs,
+  ...sortJs,
+  ...sortDictionaryJs,
 };
 
 export const {

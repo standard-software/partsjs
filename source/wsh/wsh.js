@@ -1,11 +1,11 @@
-import wshFileSystemObject_js from './wshFileSystemObject.js';
-import wshShell_js from './wshShell.js';
-import forceCreateFolder_js from './forceCreateFolder.js';
+import wshFileSystemObjectJs from './wshFileSystemObject.js';
+import wshShellJs from './wshShell.js';
+import forceCreateFolderJs from './forceCreateFolder.js';
 
 const wshJs = {
-  ...wshFileSystemObject_js,
-  ...wshShell_js,
-  ...forceCreateFolder_js,
+  ...wshFileSystemObjectJs,
+  ...wshShellJs,
+  ...forceCreateFolderJs,
 };
 
 export const {

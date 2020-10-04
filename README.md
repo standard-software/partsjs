@@ -301,6 +301,7 @@ You can now use the functions of the parts.js object.
   - clear/add/reset method publish
 - add date namespace
   - add Today Function
+- rename inside var xxx_js >> xxxJs
 
 ### 8.1.0
 #### 2020/10/01(Thu)

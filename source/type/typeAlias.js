@@ -1,10 +1,10 @@
-import isType_js from './isType.js';
-import isException_js from './isException.js';
-import isSymbol_js from './isSymbol.js';
-import isMap_js from './isMap.js';
-import isSet_js from './isSet.js';
-import isTypeAll_js from './isTypeAll.js';
-import isTypeArray_js from './isTypeArray.js';
+import isTypeJs from './isType.js';
+import isExceptionJs from './isException.js';
+import isSymbolJs from './isSymbol.js';
+import isMapJs from './isMap.js';
+import isSetJs from './isSet.js';
+import isTypeAllJs from './isTypeAll.js';
+import isTypeArrayJs from './isTypeArray.js';
 
 const {
   isUndefined, isNull, isNaNStrict,
@@ -26,7 +26,7 @@ const {
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
-} = isType_js;
+} = isTypeJs;
 
 // Another name
 export const isObjectType     = isObjectLike;
@@ -67,7 +67,7 @@ export const isNotObjType     = isNotObjectType;
 const {
   isException,
   isNotException,
-} = isException_js;
+} = isExceptionJs;
 
 export const isExcept         = isException;
 export const isNotExcept      = isNotException;
@@ -102,7 +102,7 @@ const {
   isNotSymbolAll,
   isNotMapAll, isNotWeakMapAll,
   isNotSetAll, isNotWeakSetAll,
-} = isTypeAll_js;
+} = isTypeAllJs;
 
 // Another name
 export const isObjectTypeAll      = isObjectLikeAll;
@@ -170,7 +170,7 @@ const {
   isNotSymbolArray,
   isNotMapArray, isNotWeakMapArray,
   isNotSetArray, isNotWeakSetArray,
-} = isTypeArray_js;
+} = isTypeArrayJs;
 
 // Another name
 export const isObjectTypeArray      = isObjectLikeArray;

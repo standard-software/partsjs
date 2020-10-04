@@ -1,33 +1,33 @@
-import object_common_js from './object_common.js';
-import isObjectParameter_js from './isObjectParameter.js';
-import inProperty_js from './inProperty.js';
-import fixProperty_js from './fixProperty.js';
-import objectEntries_js from './objectEntries.js';
-import objectKeys_js from './objectKeys.js';
-import objectValues_js from './objectValues.js';
-import getProperty_js from './getProperty.js';
-import _hasOwn_js from './_hasOwn.js';
-import hasOwn_js from './hasOwn.js';
-import has_js from './has.js';
-import _propertyCount_js from './_propertyCount.js';
-import propertyCount_js from './propertyCount.js';
-import propertyList_js from './propertyList.js';
+import object_commonJs from './object_common.js';
+import isObjectParameterJs from './isObjectParameter.js';
+import inPropertyJs from './inProperty.js';
+import fixPropertyJs from './fixProperty.js';
+import objectEntriesJs from './objectEntries.js';
+import objectKeysJs from './objectKeys.js';
+import objectValuesJs from './objectValues.js';
+import getPropertyJs from './getProperty.js';
+import _hasOwnJs from './_hasOwn.js';
+import hasOwnJs from './hasOwn.js';
+import hasJs from './has.js';
+import _propertyCountJs from './_propertyCount.js';
+import propertyCountJs from './propertyCount.js';
+import propertyListJs from './propertyList.js';
 
 const objectJs = {
-  ...object_common_js,
-  ...isObjectParameter_js,
-  ...inProperty_js,
-  ...fixProperty_js,
-  ...objectEntries_js,
-  ...objectKeys_js,
-  ...objectValues_js,
-  ...getProperty_js,
-  ..._hasOwn_js,
-  ...hasOwn_js,
-  ...has_js,
-  ..._propertyCount_js,
-  ...propertyCount_js,
-  ...propertyList_js,
+  ...object_commonJs,
+  ...isObjectParameterJs,
+  ...inPropertyJs,
+  ...fixPropertyJs,
+  ...objectEntriesJs,
+  ...objectKeysJs,
+  ...objectValuesJs,
+  ...getPropertyJs,
+  ..._hasOwnJs,
+  ...hasOwnJs,
+  ...hasJs,
+  ..._propertyCountJs,
+  ...propertyCountJs,
+  ...propertyListJs,
 };
 
 export const {

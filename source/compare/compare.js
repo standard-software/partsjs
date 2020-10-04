@@ -1,55 +1,55 @@
-import or_js from './or.js';
+import orJs from './or.js';
 
-import match_js from './match.js';
-import matchValue_js from './matchValue.js';
-import initialValue_js from './initialValue.js';
-import indexOfMatch_js from './indexOfMatch.js';
-import allMatch_js from './allMatch.js';
-import someMatch_js from './someMatch.js';
+import matchJs from './match.js';
+import matchValueJs from './matchValue.js';
+import initialValueJs from './initialValue.js';
+import indexOfMatchJs from './indexOfMatch.js';
+import allMatchJs from './allMatch.js';
+import someMatchJs from './someMatch.js';
 
-import matchSome_js from './matchSome.js';
-import matchSomeValue_js from './matchSomeValue.js';
-import indexOfMatchSome_js from './indexOfMatchSome.js';
-import allMatchSome_js from './allMatchSome.js';
-import someMatchSome_js from './someMatchSome.js';
+import matchSomeJs from './matchSome.js';
+import matchSomeValueJs from './matchSomeValue.js';
+import indexOfMatchSomeJs from './indexOfMatchSome.js';
+import allMatchSomeJs from './allMatchSome.js';
+import someMatchSomeJs from './someMatchSome.js';
 
-import matchAll_js from './matchAll.js';
-import matchAllValue_js from './matchAllValue.js';
-import indexOfMatchAll_js from './indexOfMatchAll.js';
-import allMatchAll_js from './allMatchAll.js';
-import someMatchAll_js from './someMatchAll.js';
+import matchAllJs from './matchAll.js';
+import matchAllValueJs from './matchAllValue.js';
+import indexOfMatchAllJs from './indexOfMatchAll.js';
+import allMatchAllJs from './allMatchAll.js';
+import someMatchAllJs from './someMatchAll.js';
 
-import includes_js from './includes.js';
-import includes_common_js from './includes_common.js';
-import equal_js from './equal.js';
-import equalDeep_js from './equalDeep.js';
+import includesJs from './includes.js';
+import includes_commonJs from './includes_common.js';
+import equalJs from './equal.js';
+import equalDeepJs from './equalDeep.js';
 
 const compareJs = {
-  ...or_js,
-  ...match_js,
-  ...matchValue_js,
-  ...initialValue_js,
-  ...indexOfMatch_js,
-  ...allMatch_js,
-  ...someMatch_js,
+  ...orJs,
+  ...matchJs,
+  ...matchValueJs,
+  ...initialValueJs,
+  ...indexOfMatchJs,
+  ...allMatchJs,
+  ...someMatchJs,
 
-  ...matchSome_js,
-  ...matchSomeValue_js,
-  ...indexOfMatchSome_js,
-  ...allMatchSome_js,
-  ...someMatchSome_js,
+  ...matchSomeJs,
+  ...matchSomeValueJs,
+  ...indexOfMatchSomeJs,
+  ...allMatchSomeJs,
+  ...someMatchSomeJs,
 
-  ...matchAll_js,
-  ...matchAllValue_js,
-  ...indexOfMatchAll_js,
-  ...allMatchAll_js,
-  ...someMatchAll_js,
+  ...matchAllJs,
+  ...matchAllValueJs,
+  ...indexOfMatchAllJs,
+  ...allMatchAllJs,
+  ...someMatchAllJs,
 
-  ...includes_js,
-  ...includes_common_js,
+  ...includesJs,
+  ...includes_commonJs,
 
-  ...equal_js,
-  ...equalDeep_js,
+  ...equalJs,
+  ...equalDeepJs,
 };
 
 export const {

@@ -1,57 +1,57 @@
-import string_common_js from './string_common.js';
-import _indexOfFirst_js from './_indexOfFirst.js';
-import indexOfFirst_js from './indexOfFirst.js';
-import _indexOfLast_js from './_indexOfLast.js';
-import indexOfLast_js from './indexOfLast.js';
-import _indexOfAnyFirst_js from './_indexOfAnyFirst.js';
-import indexOfAnyFirst_js from './indexOfAnyFirst.js';
-import _indexOfAnyLast_js from './_indexOfAnyLast.js';
-import indexOfAnyLast_js from './indexOfAnyLast.js';
-import _replaceAll_js from './_replaceAll.js';
-import replaceAll_js from './replaceAll.js';
-import _replaceAllArray_js from './_replaceAllArray.js';
-import replaceAllArray_js from './replaceAllArray.js';
-import matchFormat_js from './matchFormat.js';
-import subFirstDelimFirst_js from './subFirstDelimFirst.js';
-import subFirstDelimLast_js from './subFirstDelimLast.js';
-import subLastDelimFirst_js from './subLastDelimFirst.js';
-import subLastDelimLast_js from './subLastDelimLast.js';
-import tagInnerFirst_js from './tagInnerFirst.js';
-import tagOuterFirst_js from './tagOuterFirst.js';
-import tagInnerLast_js from './tagInnerLast.js';
-import tagOuterLast_js from './tagOuterLast.js';
-import _split_js from './_split.js';
-import split_js from './split.js';
-import splitCommaItems_js from './splitCommaItems.js';
-import splitDotItems_js from './splitDotItems.js';
+import string_commonJs from './string_common.js';
+import _indexOfFirstJs from './_indexOfFirst.js';
+import indexOfFirstJs from './indexOfFirst.js';
+import _indexOfLastJs from './_indexOfLast.js';
+import indexOfLastJs from './indexOfLast.js';
+import _indexOfAnyFirstJs from './_indexOfAnyFirst.js';
+import indexOfAnyFirstJs from './indexOfAnyFirst.js';
+import _indexOfAnyLastJs from './_indexOfAnyLast.js';
+import indexOfAnyLastJs from './indexOfAnyLast.js';
+import _replaceAllJs from './_replaceAll.js';
+import replaceAllJs from './replaceAll.js';
+import _replaceAllArrayJs from './_replaceAllArray.js';
+import replaceAllArrayJs from './replaceAllArray.js';
+import matchFormatJs from './matchFormat.js';
+import subFirstDelimFirstJs from './subFirstDelimFirst.js';
+import subFirstDelimLastJs from './subFirstDelimLast.js';
+import subLastDelimFirstJs from './subLastDelimFirst.js';
+import subLastDelimLastJs from './subLastDelimLast.js';
+import tagInnerFirstJs from './tagInnerFirst.js';
+import tagOuterFirstJs from './tagOuterFirst.js';
+import tagInnerLastJs from './tagInnerLast.js';
+import tagOuterLastJs from './tagOuterLast.js';
+import _splitJs from './_split.js';
+import splitJs from './split.js';
+import splitCommaItemsJs from './splitCommaItems.js';
+import splitDotItemsJs from './splitDotItems.js';
 
 const stringJs = {
-  ...string_common_js,
-  ..._indexOfFirst_js,
-  ...indexOfFirst_js,
-  ..._indexOfLast_js,
-  ...indexOfLast_js,
-  ..._indexOfAnyFirst_js,
-  ...indexOfAnyFirst_js,
-  ..._indexOfAnyLast_js,
-  ...indexOfAnyLast_js,
-  ..._replaceAll_js,
-  ...replaceAll_js,
-  ..._replaceAllArray_js,
-  ...replaceAllArray_js,
-  ...matchFormat_js,
-  ...subFirstDelimFirst_js,
-  ...subFirstDelimLast_js,
-  ...subLastDelimFirst_js,
-  ...subLastDelimLast_js,
-  ...tagInnerFirst_js,
-  ...tagOuterFirst_js,
-  ...tagInnerLast_js,
-  ...tagOuterLast_js,
-  ..._split_js,
-  ...split_js,
-  ...splitCommaItems_js,
-  ...splitDotItems_js,
+  ...string_commonJs,
+  ..._indexOfFirstJs,
+  ...indexOfFirstJs,
+  ..._indexOfLastJs,
+  ...indexOfLastJs,
+  ..._indexOfAnyFirstJs,
+  ...indexOfAnyFirstJs,
+  ..._indexOfAnyLastJs,
+  ...indexOfAnyLastJs,
+  ..._replaceAllJs,
+  ...replaceAllJs,
+  ..._replaceAllArrayJs,
+  ...replaceAllArrayJs,
+  ...matchFormatJs,
+  ...subFirstDelimFirstJs,
+  ...subFirstDelimLastJs,
+  ...subLastDelimFirstJs,
+  ...subLastDelimLastJs,
+  ...tagInnerFirstJs,
+  ...tagOuterFirstJs,
+  ...tagInnerLastJs,
+  ...tagOuterLastJs,
+  ..._splitJs,
+  ...splitJs,
+  ...splitCommaItemsJs,
+  ...splitDotItemsJs,
 };
 
 export const {

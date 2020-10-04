@@ -1,10 +1,10 @@
-import isType_js from './isType.js';
-import isException_js from './isException.js';
-import isSymbol_js from './isSymbol.js';
-import isMap_js from './isMap.js';
-import isSet_js from './isSet.js';
-import isTypeAll_js from './isTypeAll.js';
-import isTypeArray_js from './isTypeArray.js';
+import isTypeJs from './isType.js';
+import isExceptionJs from './isException.js';
+import isSymbolJs from './isSymbol.js';
+import isMapJs from './isMap.js';
+import isSetJs from './isSet.js';
+import isTypeAllJs from './isTypeAll.js';
+import isTypeArrayJs from './isTypeArray.js';
 
 export const {
   objectToString,
@@ -28,27 +28,27 @@ export const {
   isNotDate, isNotRegExp,
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
-} = isType_js;
+} = isTypeJs;
 
 export const {
   isException,
   isNotException,
-} = isException_js;
+} = isExceptionJs;
 
 export const {
   isSymbol,
   isNotSymbol,
-} = isSymbol_js;
+} = isSymbolJs;
 
 export const {
   isMap, isWeakMap,
   isNotMap, isNotWeakMap,
-} = isMap_js;
+} = isMapJs;
 
 export const {
   isSet, isWeakSet,
   isNotSet, isNotWeakSet,
-} = isSet_js;
+} = isSetJs;
 
 export const {
   isUndefinedAll, isNullAll, isNaNStrictAll,
@@ -80,7 +80,7 @@ export const {
   isNotSymbolAll,
   isNotMapAll, isNotWeakMapAll,
   isNotSetAll, isNotWeakSetAll,
-} = isTypeAll_js;
+} = isTypeAllJs;
 
 export const {
   isUndefinedArray, isNullArray, isNaNStrictArray,
@@ -110,10 +110,10 @@ export const {
   isNotSymbolArray,
   isNotMapArray, isNotWeakMapArray,
   isNotSetArray, isNotWeakSetArray,
-} = isTypeArray_js;
+} = isTypeArrayJs;
 
 export default {
-  // ...isType_js,
+  // ...isTypeJs,
   objectToString,
 
   isUndefined, isNull, isNaNStrict,
@@ -136,10 +136,10 @@ export default {
   isNotBooleanObject, isNotNumberObject, isNotStringObject,
   isNotEmptyObject, isNotEmptyArray,
 
-  ...isException_js,
-  ...isSymbol_js,
-  ...isMap_js,
-  ...isSet_js,
+  ...isExceptionJs,
+  ...isSymbolJs,
+  ...isMapJs,
+  ...isSetJs,
 
   // isTypeAll
   isUndefinedAll, isNullAll, isNaNStrictAll,
@@ -172,5 +172,5 @@ export default {
   isNotMapAll, isNotWeakMapAll,
   isNotSetAll, isNotWeakSetAll,
 
-  ...isTypeArray_js,
+  ...isTypeArrayJs,
 };

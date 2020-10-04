@@ -1,17 +1,17 @@
-import clone_js from './clone.js';
-import cloneDeep_js from './cloneDeep.js';
+import cloneJs from './clone.js';
+import cloneDeepJs from './cloneDeep.js';
 
 export const {
   _clone,
   clone,
-} = clone_js;
+} = cloneJs;
 
 export const {
   _cloneDeep,
   cloneDeep,
-} = cloneDeep_js;
+} = cloneDeepJs;
 
 export default {
-  ...clone_js,
-  ...cloneDeep_js,
+  ...cloneJs,
+  ...cloneDeepJs,
 };
