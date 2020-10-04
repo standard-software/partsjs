@@ -133,9 +133,11 @@ var _objectTest = __webpack_require__(10);
 
 var _arrayTest = __webpack_require__(11);
 
-var _consoleHookTest = __webpack_require__(12);
+var _dateTest = __webpack_require__(12);
 
-var _otherTest = __webpack_require__(13);
+var _consoleHookTest = __webpack_require__(13);
+
+var _otherTest = __webpack_require__(14);
 
 var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
@@ -182,7 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [386, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58];
+        var countArray = [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -196,6 +198,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(countArray.shift(), propertyCount(parts.object));
         checkEqual(countArray.shift(), propertyCount(parts.array));
         checkEqual(countArray.shift(), propertyCount(parts.array.operation));
+        checkEqual(countArray.shift(), propertyCount(parts.date));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it('test_execute_nameSpace 2', function () {
@@ -264,6 +267,7 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _stringTest.test_execute_string)(parts);
     (0, _objectTest.test_execute_object)(parts);
     (0, _arrayTest.test_execute_array)(parts);
+    (0, _dateTest.test_execute_date)(parts);
     (0, _consoleHookTest.test_execute_consoleHook)(parts);
     (0, _otherTest.test_execute_other)(parts);
     test_execute_nameSpace(parts);
@@ -14259,6 +14263,44 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports.test_execute_date = void 0;
+
+var test_execute_date = function test_execute_date(parts) {
+  var _parts$test = parts.test,
+      describe = _parts$test.describe,
+      it = _parts$test.it,
+      checkEqual = _parts$test.checkEqual,
+      isThrown = _parts$test.isThrown,
+      isThrownException = _parts$test.isThrownException,
+      testCounter = _parts$test.testCounter;
+  var Today = parts.date.Today;
+  describe('test_execute_date', function () {
+    var test_Today = function test_Today() {
+      it('test_Today', function () {
+        checkEqual(new Date().toString(), Today().toString());
+      });
+    };
+
+    test_Today();
+  });
+};
+
+exports.test_execute_date = test_execute_date;
+var _default = {
+  test_execute_date: test_execute_date
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.test_execute_consoleHook = void 0;
 
 /* eslint-disable max-len */
@@ -14401,7 +14443,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

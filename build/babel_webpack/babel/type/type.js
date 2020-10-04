@@ -368,7 +368,7 @@ exports.isNullArray = isNullArray;
 exports.isUndefinedArray = isUndefinedArray;
 
 var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
-  // ...isType_js,
+  // ...isTypeJs,
   objectToString: objectToString,
   isUndefined: isUndefined,
   isNull: isNull,
