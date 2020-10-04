@@ -218,6 +218,9 @@ var matchFormat = function matchFormat(formatName, value) {
 };
 
 exports.matchFormat = matchFormat;
+matchFormat.clear = _matchFormat.clear;
+matchFormat.add = _matchFormat.add;
+matchFormat.reset = _matchFormat.reset;
 var _default = {
   _matchFormat: _matchFormat,
   matchFormat: matchFormat

@@ -19,6 +19,8 @@ var _string_common = require("../string/string_common.js");
 
 var _replaceAll2 = require("../string/_replaceAll.js");
 
+var _replaceAllArray2 = require("../string/_replaceAllArray.js");
+
 var _or2 = require("../compare/or.js");
 
 var _objectValues2 = require("../object/objectValues.js");
@@ -55,7 +57,7 @@ var _split = function _split(str, separator) {
 
     case _split.executeConvert.excludeSpaceCrlf:
       (0, _loop.__loop)(result)(function (e, i) {
-        result[i] = (0, _replaceAll2._replaceAll)((0, _replaceAll2._replaceAll)((0, _replaceAll2._replaceAll)(e, '\n', ''), '\r', ''), ' ', '');
+        result[i] = (0, _replaceAllArray2._replaceAllArray)(e, [[' ', ''], ['\n', ''], ['\r', '']]);
       });
       break;
 

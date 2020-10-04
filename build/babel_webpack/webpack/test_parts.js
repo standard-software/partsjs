@@ -8844,7 +8844,8 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('abbc', replaceAllArray('abcabc', [['bca', 'b']]));
         checkEqual('ecec', replaceAllArray('abcabc', [['ab', 'e']]));
         checkEqual('ecec', replaceAllArray('abcabc', [['ab', 'e'], ['abc', 'd']]));
-        checkEqual('dd', replaceAllArray('abcabc', [['abc', 'd'], ['ab', 'e']])); // Object Named Parameter
+        checkEqual('dd', replaceAllArray('abcabc', [['abc', 'd'], ['ab', 'e']]));
+        checkEqual('abcabcabcabc', replaceAllArray('abc\r\n abc\r abc \n a b c\r  \n', [[' ', ''], ['\n', ''], ['\r', '']])); // Object Named Parameter
 
         checkEqual('abcabc', replaceAllArray({
           str: 'abab',
@@ -10693,6 +10694,9 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual(['A'], splitCommaItems('A,'));
         checkEqual(['A', 'B'], splitCommaItems('A,B'));
         checkEqual(['A', 'B'], splitCommaItems('A,B,'));
+        checkEqual(['A', 'B'], splitCommaItems('A ,B ,'));
+        checkEqual(['A', 'B'], splitCommaItems('\r\n A \r\n, B \r ,\r\n'));
+        checkEqual(['A B', 'B'], splitCommaItems('\r\n A B\r\n, B \r ,\r\n'));
         checkEqual([], splitCommaItems(''));
         checkEqual(true, isThrown(function () {
           splitCommaItems(',A');
