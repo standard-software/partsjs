@@ -12,6 +12,7 @@ import _number from './number/number.js';
 import _string from './string/string.js';
 import _object from './object/object.js';
 import _array from './array/array.js';
+import _date from './date/date.js';
 import _consoleHook from './consoleHook/consoleHook.js';
 import _wsh from './wsh/wsh.js';
 
@@ -486,9 +487,23 @@ export const array = {
   ..._array,
 };
 
-
 array.operation = {
   ..._array.operation,
+};
+
+/**
+ * date
+ */
+export const {
+  Today,
+} = _date;
+
+rootAlias = { ...rootAlias,
+  Today,
+};
+
+export const date = {
+  ..._date,
 };
 
 /**
@@ -532,6 +547,7 @@ export const parts = {
   string,
   object,
   array,
+  date,
   consoleHook,
   wsh,
   ...rootAlias,

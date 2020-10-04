@@ -233,6 +233,7 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
+.date.Today:[object Function]:function
 .default.allMatch:[object Function]:function
 .default.allMatchAll:[object Function]:function
 .default.allMatchSome:[object Function]:function
@@ -467,6 +468,7 @@
 .default.convert.valueToString:[object Function]:function
 .default.copyProp:[object Function]:function
 .default.copyProperty:[object Function]:function
+.default.date.Today:[object Function]:function
 .default.Enum:[object Function]:function
 .default.equal:[object Function]:function
 .default.equalDeep:[object Function]:function
@@ -1068,6 +1070,7 @@
 .default.parts.convert.valueToString:[object Function]:function
 .default.parts.copyProp:[object Function]:function
 .default.parts.copyProperty:[object Function]:function
+.default.parts.date.Today:[object Function]:function
 .default.parts.Enum:[object Function]:function
 .default.parts.equal:[object Function]:function
 .default.parts.equalDeep:[object Function]:function
@@ -1596,6 +1599,7 @@
 .default.parts.test.it:[object Function]:function
 .default.parts.test.test:[object Function]:function
 .default.parts.test.testCounter:[object Function]:function
+.default.parts.Today:[object Function]:function
 .default.parts.type.isArray:[object Function]:function
 .default.parts.type.isArrayAll:[object Function]:function
 .default.parts.type.isArrayArray:[object Function]:function
@@ -2035,6 +2039,7 @@
 .default.test.it:[object Function]:function
 .default.test.test:[object Function]:function
 .default.test.testCounter:[object Function]:function
+.default.Today:[object Function]:function
 .default.type.isArray:[object Function]:function
 .default.type.isArrayAll:[object Function]:function
 .default.type.isArrayArray:[object Function]:function
@@ -2914,6 +2919,7 @@
 .parts.convert.valueToString:[object Function]:function
 .parts.copyProp:[object Function]:function
 .parts.copyProperty:[object Function]:function
+.parts.date.Today:[object Function]:function
 .parts.Enum:[object Function]:function
 .parts.equal:[object Function]:function
 .parts.equalDeep:[object Function]:function
@@ -3442,6 +3448,7 @@
 .parts.test.it:[object Function]:function
 .parts.test.test:[object Function]:function
 .parts.test.testCounter:[object Function]:function
+.parts.Today:[object Function]:function
 .parts.type.isArray:[object Function]:function
 .parts.type.isArrayAll:[object Function]:function
 .parts.type.isArrayArray:[object Function]:function
@@ -3881,6 +3888,7 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
+.Today:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function
 .type.isArrayArray:[object Function]:function

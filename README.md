@@ -294,11 +294,13 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.2.0
-#### 2020/10/03(Sat)
+#### 2020/10/05(Mon)
 - update split
   - use _replaceAllArray
 - update matchFormat
   - clear/add/reset method publish
+- add date namespace
+  - add Today Function
 
 ### 8.1.0
 #### 2020/10/01(Thu)

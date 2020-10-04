@@ -233,6 +233,7 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
+.date.Today:[object Function]:function
 .Enum:[object Function]:function
 .equal:[object Function]:function
 .equalDeep:[object Function]:function
@@ -834,6 +835,7 @@
 .parts.convert.valueToString:[object Function]:function
 .parts.copyProp:[object Function]:function
 .parts.copyProperty:[object Function]:function
+.parts.date.Today:[object Function]:function
 .parts.Enum:[object Function]:function
 .parts.equal:[object Function]:function
 .parts.equalDeep:[object Function]:function
@@ -1362,6 +1364,7 @@
 .parts.test.it:[object Function]:function
 .parts.test.test:[object Function]:function
 .parts.test.testCounter:[object Function]:function
+.parts.Today:[object Function]:function
 .parts.type.isArray:[object Function]:function
 .parts.type.isArrayAll:[object Function]:function
 .parts.type.isArrayArray:[object Function]:function
@@ -1801,6 +1804,7 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
+.Today:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function
 .type.isArrayArray:[object Function]:function

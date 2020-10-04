@@ -1,15 +1,16 @@
-import { test_execute_root         } from './root/root.test.js';
-import { test_execute_type         } from './type/type.test.js';
-import { test_execute_syntax       } from './syntax/syntax.test.js';
-import { test_execute_test         } from './test/test.test.js';
-import { test_execute_compare      } from './compare/compare.test.js';
-import { test_execute_convert      } from './convert/convert.test.js';
-import { test_execute_number       } from './number/number.test.js';
-import { test_execute_string       } from './string/string.test.js';
-import { test_execute_object       } from './object/object.test.js';
-import { test_execute_array        } from './array/array.test.js';
-import { test_execute_consoleHook  } from './consoleHook/consoleHook.test.js';
-import { test_execute_other        } from './other/other.test.js';
+import { test_execute_root        } from './root/root.test.js';
+import { test_execute_type        } from './type/type.test.js';
+import { test_execute_syntax      } from './syntax/syntax.test.js';
+import { test_execute_test        } from './test/test.test.js';
+import { test_execute_compare     } from './compare/compare.test.js';
+import { test_execute_convert     } from './convert/convert.test.js';
+import { test_execute_number      } from './number/number.test.js';
+import { test_execute_string      } from './string/string.test.js';
+import { test_execute_object      } from './object/object.test.js';
+import { test_execute_array       } from './array/array.test.js';
+import { test_execute_date        } from './date/date.test.js';
+import { test_execute_consoleHook } from './consoleHook/consoleHook.test.js';
+import { test_execute_other       } from './other/other.test.js';
 
 export const test_execute_index = (parts) => {
 
@@ -51,7 +52,7 @@ export const test_execute_index = (parts) => {
         };
 
         const countArray =
-          [386, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58];
+          [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58, 1];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.root));
@@ -65,6 +66,7 @@ export const test_execute_index = (parts) => {
         checkEqual(countArray.shift(),  propertyCount(parts.object));
         checkEqual(countArray.shift(),  propertyCount(parts.array));
         checkEqual(countArray.shift(),  propertyCount(parts.array.operation));
+        checkEqual(countArray.shift(),  propertyCount(parts.date));
 
         checkEqual(true,
           inProperty(
@@ -161,6 +163,7 @@ export const test_execute_index = (parts) => {
     test_execute_string(parts);
     test_execute_object(parts);
     test_execute_array(parts);
+    test_execute_date(parts);
     test_execute_consoleHook(parts);
     test_execute_other(parts);
     test_execute_nameSpace(parts);

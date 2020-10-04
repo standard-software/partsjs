@@ -233,6 +233,7 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
+.date.Today:[object Function]:function
 .Enum:[object Function]:function
 .equal:[object Function]:function
 .equalDeep:[object Function]:function
@@ -761,6 +762,7 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
+.Today:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function
 .type.isArrayArray:[object Function]:function
