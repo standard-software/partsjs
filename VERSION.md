@@ -2,6 +2,26 @@
 
 ## Version
 
+### 8.2.0
+#### 2020/10/10(Sat)
+- update split
+  - use _replaceAllArray
+- update matchFormat
+  - clear/add/reset method publish
+- add date namespace
+  - add Today Function
+- rename inside var xxx_js >> xxxJs
+- add github pages
+  - https://standard-software.github.io/partsjs/test/web/test.html
+  - https://standard-software.github.io/partsjs/test/web-cdn/test.html
+- update README.md
+  - GitHubPages
+  - HTML CDN link
+- update test code
+  - Chrome Reflect / Intl
+    - no update Vivaldi
+  - Firefox WebAssembly
+
 ### 8.1.0
 #### 2020/10/01(Thu)
 - add from string_common.js

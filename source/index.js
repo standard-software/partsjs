@@ -16,7 +16,7 @@ import dateJs from './date/date.js';
 import consoleHookJs from './consoleHook/consoleHook.js';
 import wshJs from './wsh/wsh.js';
 
-export const VERSION = '8.2.0 beta';
+export const VERSION = '8.2.0';
 
 let rootAlias = {};
 const propertyNames = {};
