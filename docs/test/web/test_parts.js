@@ -1432,7 +1432,7 @@ var test_execute_type = function test_execute_type(parts) {
       it('test_checkType', function () {
         var checkType = function checkType(typeofName, objectStringName, value) {
           checkEqual(typeofName, _typeof(value));
-          checkEqual(objectStringName, objectToString(value));
+          checkEqual(true, parts.includes(objectStringName, objectToString(value))); // checkEqual(objectStringName, objectToString(value));
         };
 
         if (parts.platform.isWindowsScriptHost()) {
@@ -1575,15 +1575,35 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('function', '[object AsyncFunction]', new AsyncFunction());
         }
 
-        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define Proxy
-          // no define WebAssembly
+        testCounter(); // Reflect
+
+        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
+        } else if (parts.platform.isChrome()) {
+          checkType('object', '[object Object][object Reflect]', Reflect); // 2020/10/10(Sat)
+          // Chrome   >> Object.prototype.toString.call(Reflect) === '[object Reflect]'
+          // Vivaldi  >> Object.prototype.toString.call(Reflect) === '[object Object]'
         } else {
           checkType('object', '[object Object]', Reflect);
+        } // Proxy
+
+
+        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
+        } else {
           checkType('object', '[object Object]', new Proxy({}, {}));
+        } // WebAssembly
+
+
+        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
+        } else if (parts.platform.isFirefox()) {
+          checkType('object', '[object Object]', WebAssembly);
+        } else {
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
 
-        if (!parts.platform.isDeno() && !parts.platform.isGasRhino()) {
+        if (parts.platform.isDeno() || parts.platform.isGasRhino()) {} else if (parts.platform.isChrome()) {
+          checkType('object', '[object Object][object Intl]', Intl); // Chrome   >> Object.prototype.toString.call(Intl) === '[object Intl]'
+          // Vivaldi  >> Object.prototype.toString.call(Intl) === '[object Object]'
+        } else {
           checkType('object', '[object Object]', Intl);
         }
       });

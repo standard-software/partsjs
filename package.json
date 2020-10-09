@@ -67,6 +67,9 @@
     "_delete:standalone":                 "npm run _delete:standalone:rhino && npm run _delete:standalone:v8",
     "clasp:delete":                       "npm run _delete:sheet && npm run _delete:standalone",
     "clasp:release":                      "npm run clasp:copy && npm run clasp:push && npm run clasp:delete",
+    "_copy:docs:parts":                   "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/parts.js', './docs/test/web/parts.js')\"",
+    "_copy:docs:test_parts":              "node -e \"require('fs').copyFileSync('./build/babel_webpack/webpack/test_parts.js', './docs/test/web/test_parts.js')\"",
+    "copy:docs":                          "npm run _copy:docs:parts && npm run _copy:docs:test_parts",
     "": ""
   },
   "watch": {

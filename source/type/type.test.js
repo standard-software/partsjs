@@ -217,6 +217,7 @@ export const test_execute_type = (parts) => {
         }
 
         testCounter();
+
         // Reflect
         if (parts.platform.isInternetExplorer()
           || parts.platform.isGasRhino()
