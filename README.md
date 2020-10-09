@@ -324,6 +324,8 @@ You can now use the functions of the parts.js object.
   - add Today Function
 - rename inside var xxx_js >> xxxJs
 - add github pages
+  - https://standard-software.github.io/partsjs/test/web/test.html
+  - https://standard-software.github.io/partsjs/test/web-cdn/test.html
 - update README.md
   - GitHubPages
   - HTML CDN link

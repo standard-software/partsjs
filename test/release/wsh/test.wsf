@@ -36,6 +36,7 @@
   var __stringTest =      {};
   var __objectTest =      {};
   var __arrayTest =       {};
+  var __dateTest =        {};
   var __consoleHookTest = {};
   var __otherTest =       {};
   var require = function(path) {
@@ -49,6 +50,7 @@
     if (path === './string/string.test.js')           { return __stringTest }
     if (path === './object/object.test.js')           { return __objectTest }
     if (path === './array/array.test.js')             { return __arrayTest }
+    if (path === './date/date.test.js')               { return __dateTest }
     if (path === './consoleHook/consoleHook.test.js') { return __consoleHookTest }
     if (path === './other/other.test.js')             { return __otherTest }
     return;
@@ -59,17 +61,18 @@
 
 <script language="JavaScript" src="../../../build/babel_webpack/babel/index.test.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/babel/root/root.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//type/type.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//syntax/syntax.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//test/test.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//compare/compare.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//convert/convert.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//number/number.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//string/string.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//object/object.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//array/array.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//consoleHook/consoleHook.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel//other/other.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/type/type.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/syntax/syntax.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/test/test.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/compare/compare.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/convert/convert.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/number/number.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/string/string.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/object/object.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/array/array.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/date/date.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/consoleHook/consoleHook.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/other/other.test.js"></script>
 
 <script language="JavaScript">
 <![CDATA[
@@ -84,6 +87,7 @@
   __stringTest.test_execute_string            = test_execute_string;
   __objectTest.test_execute_object            = test_execute_object;
   __arrayTest.test_execute_array              = test_execute_array;
+  __dateTest.test_execute_date                = test_execute_date;
   __consoleHookTest.test_execute_consoleHook  = test_execute_consoleHook;
   __otherTest.test_execute_other              = test_execute_other;
 
