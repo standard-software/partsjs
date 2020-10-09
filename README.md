@@ -101,10 +101,27 @@ console.log(
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>how_to_use.html</title>
 </head>
 <body>
   <script src="./release_build/parts.js"></script>
+  <script>
+    document.write('parts version is ' + parts.VERSION)
+  </script>
+</body>
+```
+
+You can now use the functions of the parts.js object.
+
+### HTML file CDN
+
+```
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@8.1.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>
@@ -117,6 +134,10 @@ You can now use the functions of the parts.js object.
 
 - partsjs/run_check/html/
 - partsjs/test/release/web/
+- partsjs/docs/test/web/test.html
+  https://standard-software.github.io/partsjs/test/web/test.html
+- partsjs/docs/test/web-cdn/test.html
+  https://standard-software.github.io/partsjs/test/web-cdn/test.html
 
 ## How to use parts.js in Google Apps Script for Rhino and V8
 
@@ -294,7 +315,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.2.0
-#### 2020/10/05(Mon)
+#### 2020/10/09(Fri)
 - update split
   - use _replaceAllArray
 - update matchFormat
@@ -302,6 +323,10 @@ You can now use the functions of the parts.js object.
 - add date namespace
   - add Today Function
 - rename inside var xxx_js >> xxxJs
+- add github pages
+- update README.md
+  - GitHubPages
+  - HTML CDN link
 
 ### 8.1.0
 #### 2020/10/01(Thu)

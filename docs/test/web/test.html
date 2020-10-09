@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>test_index.html</title>
+
+</head>
+<body>
+
+<script src="./parts.js"></script>
+<script src="./test_parts.js"></script>
+
+<script>
+
+  var outputMessage = '';
+
+  var console = {
+    log: function(value) {
+      outputMessage += value;
+      outputMessage += '\n<br>\n'
+    }
+  };
+
+  outputMessage += 'test_index.html';
+  outputMessage += '<br>\n'
+  outputMessage += '<br>\n'
+
+  parts.platform.buildMode = 'release';
+  parts.platform.startName = 'test.html';
+
+  test_parts.test_execute_index(parts);
+  // console.log(Object.keys(parts).toString());  
+
+  outputMessage = outputMessage.split('  ').join('&nbsp;&nbsp;');
+  document.write(outputMessage);
+
+
+</script>
+
+</body>
+</html>
