@@ -315,7 +315,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.2.0
-#### 2020/10/09(Fri)
+#### 2020/10/10(Sat)
 - update split
   - use _replaceAllArray
 - update matchFormat
@@ -329,6 +329,10 @@ You can now use the functions of the parts.js object.
 - update README.md
   - GitHubPages
   - HTML CDN link
+- update test code
+  - Chrome Reflect / Intl
+    - no update Vivaldi
+  - Firefox WebAssembly
 
 ### 8.1.0
 #### 2020/10/01(Thu)
