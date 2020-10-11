@@ -17,58 +17,19 @@ import {
   __includes,
 } from '../compare/__includes.js';
 
+import {
+  _unique,
+  uniqueDefaultFunc,
+} from '../array/_unique.js';
+
 /**
  * uniqe
  */
-export const __unique = (array) => {
-  if (canUseSet() && array.length > 120) {
-    return [...(new Set(array))];
-  } else {
-    const result = [];
-    for (let i = 0, l = array.length; i < l; i += 1) {
-      if (!__includes(result, array[i])) {
-        result.push(array[i]);
-      }
-    }
-    return result;
-  }
-  // node.js v8
-  // It is faster to use Set
-  // when the array.lentgh is larger than about 120
-};
-
-const defaultUniqueFunc = v => v;
-
-export const _unique = (
-  array, func = defaultUniqueFunc, detail = false,
-) => {
-  if (func === defaultUniqueFunc) {
-    if (detail === false) {
-      return __unique(array);
-    }
-  }
-
-  const index = [];
-  const result = [];
-  array.forEach(v => {
-    const funcResult = func(v);
-    if (!__includes(index, funcResult)) {
-      index.push(funcResult);
-      result.push(v);
-    }
-  });
-  func = undefined;
-  if (detail) {
-    return { index, result };
-  }
-  return result;
-};
-
-export const unique = (array, func = defaultUniqueFunc, detail = false) => {
+export const unique = (array, func = uniqueDefaultFunc, detail = false) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = defaultUniqueFunc, detail = false } = array);
+    ({ array, func = uniqueDefaultFunc, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = defaultUniqueFunc, detail = false } = func);
+    ({ func = uniqueDefaultFunc, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }
@@ -88,17 +49,10 @@ export const unique = (array, func = defaultUniqueFunc, detail = false) => {
       'group args(detail) is not boolean',
     );
   }
-  if (detail && func === defaultUniqueFunc) {
-    throw new TypeError(
-      'group args(detail) is true and args(func) must be function',
-    );
-  }
 
   return _unique(array, func, detail);
 };
 
 export default {
-  __unique,
-  _unique,
   unique,
 };

@@ -9,6 +9,7 @@ import _IntegerArrayJs from './_IntegerArray.js';
 import IntegerArrayJs from './IntegerArray.js';
 import arrayEntriesJs from './arrayEntries.js';
 import groupJs from './group.js';
+import _uniqueJs from './_unique.js';
 import uniqueJs from './unique.js';
 import array_operationJs from './array_operation.js';
 import sortJs from './operation/sort.js';
@@ -28,6 +29,7 @@ const arrayJs = {
   ...IntegerArrayJs,
   ...arrayEntriesJs,
   ...groupJs,
+  ..._uniqueJs,
   ...uniqueJs,
 };
 
@@ -38,8 +40,6 @@ const arrayOperationJs = {
 };
 
 export const {
-  __unique,
-
   _min, _max,
   _sum, _average, _median,
   _mode,
@@ -127,8 +127,6 @@ export const {
 export const operation = arrayOperationJs;
 
 export default {
-  __unique,
-
   _min, _max,
   _sum, _average, _median,
   _mode,

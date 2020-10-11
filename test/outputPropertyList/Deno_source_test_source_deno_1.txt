@@ -2,7 +2,6 @@
 .allMatch:[object Function]:function
 .allMatchAll:[object Function]:function
 .allMatchSome:[object Function]:function
-.array.__unique:[object Function]:function
 .array._all:[object Function]:function
 .array._arrayEntries:[object Function]:function
 .array._average:[object Function]:function
@@ -604,7 +603,6 @@
 .parts.allMatch:[object Function]:function
 .parts.allMatchAll:[object Function]:function
 .parts.allMatchSome:[object Function]:function
-.parts.array.__unique:[object Function]:function
 .parts.array._all:[object Function]:function
 .parts.array._arrayEntries:[object Function]:function
 .parts.array._average:[object Function]:function

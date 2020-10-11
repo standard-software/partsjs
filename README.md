@@ -320,6 +320,11 @@ You can now use the functions of the parts.js object.
   - add __min / __max
   - support args func / detail
   - support full object parameter
+- update unique
+  - defalt func parameter rename
+  - update args error
+  - no publis __unique
+  - add _unique.js __unique.js
 
 ### 8.2.0
 #### 2020/10/10(Sat)

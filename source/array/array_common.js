@@ -21,7 +21,7 @@ import {
 
 import {  _clone } from '../root/clone.js';
 import {  _cloneDeep } from '../root/cloneDeep.js';
-import { _unique } from '../array/unique.js';
+import { _unique } from '../array/_unique.js';
 import { _min } from '../array/_min.js';
 import { _max } from '../array/_max.js';
 

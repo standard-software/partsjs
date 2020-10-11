@@ -2,7 +2,6 @@
 .allMatch:[object Function]:function
 .allMatchAll:[object Function]:function
 .allMatchSome:[object Function]:function
-.array.__unique:[object Function]:function
 .array._all:[object Function]:function
 .array._arrayEntries:[object Function]:function
 .array._average:[object Function]:function
