@@ -3,26 +3,22 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._min = exports.minDefaultFunc = void 0;
+exports["default"] = exports._min = void 0;
 
 var _isType = require("../type/isType.js");
+
+var _returnValueFunction = require("../common/returnValueFunction.js");
 
 var _min2 = require("../array/__min.js");
 
 /**
  * array.min
  */
-var minDefaultFunc = function minDefaultFunc(v) {
-  return v;
-};
-
-exports.minDefaultFunc = minDefaultFunc;
-
 var _min = function _min(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : minDefaultFunc;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.returnValueFunction;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === minDefaultFunc && detail === false) {
+  if (func === _returnValueFunction.returnValueFunction && detail === false) {
     return (0, _min2.__min)(array);
   }
 
@@ -59,7 +55,6 @@ var _min = function _min(array) {
 
 exports._min = _min;
 var _default = {
-  _min: _min,
-  minDefaultFunc: minDefaultFunc
+  _min: _min
 };
 exports["default"] = _default;

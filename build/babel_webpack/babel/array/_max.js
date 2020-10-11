@@ -3,26 +3,22 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._max = exports.maxDefaultFunc = void 0;
+exports["default"] = exports._max = void 0;
 
 var _isType = require("../type/isType.js");
+
+var _returnValueFunction = require("../common/returnValueFunction.js");
 
 var _max2 = require("../array/__max.js");
 
 /**
  * array.max
  */
-var maxDefaultFunc = function maxDefaultFunc(v) {
-  return v;
-};
-
-exports.maxDefaultFunc = maxDefaultFunc;
-
 var _max = function _max(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : maxDefaultFunc;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.returnValueFunction;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === maxDefaultFunc && detail === false) {
+  if (func === _returnValueFunction.returnValueFunction && detail === false) {
     return (0, _max2.__max)(array);
   }
 
@@ -59,7 +55,6 @@ var _max = function _max(array) {
 
 exports._max = _max;
 var _default = {
-  _max: _max,
-  maxDefaultFunc: maxDefaultFunc
+  _max: _max
 };
 exports["default"] = _default;

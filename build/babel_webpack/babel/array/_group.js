@@ -3,19 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._group = exports.groupDefaultFunc = void 0;
+exports["default"] = exports._group = void 0;
+
+var _returnValueFunction = require("../common/returnValueFunction.js");
 
 /**
  * group
  */
-var groupDefaultFunc = function groupDefaultFunc(v) {
-  return v;
-};
-
-exports.groupDefaultFunc = groupDefaultFunc;
-
 var _group = function _group(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : groupDefaultFunc;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.returnValueFunction;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var index = [];
   var result = [];
@@ -43,7 +39,6 @@ var _group = function _group(array) {
 
 exports._group = _group;
 var _default = {
-  _group: _group,
-  groupDefaultFunc: groupDefaultFunc
+  _group: _group
 };
 exports["default"] = _default;
