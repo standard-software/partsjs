@@ -333,6 +333,7 @@ You can now use the functions of the parts.js object.
 - rename namespace root >> common
 - move functionValue
   - namespace syntax >> common
+- publish _clone / _cloneDeep
 
 ### 8.2.0
 #### 2020/10/10(Sat)

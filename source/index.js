@@ -39,8 +39,7 @@ rootAlias = { ...rootAlias,
 };
 
 export const common = {
-  clone, cloneDeep,
-  functionValue,
+  ...commonJs,
 };
 
 /**
@@ -271,27 +270,21 @@ export const syntax = {
  * compare
  */
 export const {
-  equal, equalDeep,
   or,
-  match, matchValue, initialValue,
-  allMatch, indexOfMatch, someMatch,
-  matchSome, matchSomeValue,
-  allMatchSome, indexOfMatchSome, someMatchSome,
-  matchAll, matchAllValue,
-  allMatchAll, indexOfMatchAll, someMatchAll,
+  match, matchValue, initialValue, indexOfMatch, allMatch, someMatch,
+  matchSome, matchSomeValue, indexOfMatchSome, allMatchSome, someMatchSome,
+  matchAll, matchAllValue, indexOfMatchAll, allMatchAll, someMatchAll,
   includes, includesSome, includesAll,
+  equal, equalDeep,
 } = compareJs;
 
 rootAlias = { ...rootAlias,
-  equal, equalDeep,
   or,
-  match, matchValue, initialValue,
-  allMatch, indexOfMatch, someMatch,
-  matchSome, matchSomeValue,
-  allMatchSome, indexOfMatchSome, someMatchSome,
-  matchAll, matchAllValue,
-  allMatchAll, indexOfMatchAll, someMatchAll,
+  match, matchValue, initialValue, indexOfMatch, allMatch, someMatch,
+  matchSome, matchSomeValue, indexOfMatchSome, allMatchSome, someMatchSome,
+  matchAll, matchAllValue, indexOfMatchAll, allMatchAll, someMatchAll,
   includes, includesSome, includesAll,
+  equal, equalDeep,
 };
 
 export const compare = {
