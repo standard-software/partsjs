@@ -3,11 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = exports._sort = void 0;
+exports["default"] = exports.sortLengthDescending = exports.sortLengthAscending = exports.sortNumberDescending = exports.sortNumberAscending = exports.sortLength = exports._sortLength = exports.sortNumber = exports._sortNumber = exports.sort = void 0;
 
 var _type = require("../../type/type.js");
-
-var _syntax = require("../../syntax/syntax.js");
 
 var _or2 = require("../../compare/or.js");
 
@@ -15,29 +13,11 @@ var _isObjectParameter = require("../../object/isObjectParameter.js");
 
 var _objectValues2 = require("../../object/objectValues.js");
 
-var _Enum2 = require("../../syntax/_Enum.js");
+var _sort2 = require("../../array/operation/_sort.js");
 
 /**
  * array.operation.sort
  */
-var _sort = function _sort(array) {
-  var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sort.order.ascending;
-  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : sort.targetFunc.returnValue;
-  var orderFunc = (0, _syntax.switch_)(order)([[sort.order.ascending, function () {
-    return sort.orderFunc.ascending;
-  }], [sort.order.descending, function () {
-    return sort.orderFunc.descending;
-  }], [function () {
-    throw new TypeError('_sort args(order) is not ["ascending"|"descending"]');
-  }]]);
-  array.sort(function (a, b) {
-    return orderFunc(func(a), func(b));
-  });
-  return array;
-};
-
-exports._sort = _sort;
-
 var sort = function sort(array) {
   var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : sort.order.ascending;
   var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : sort.targetFunc.returnValue;
@@ -73,51 +53,16 @@ var sort = function sort(array) {
     throw new TypeError('sort args(func) is not function');
   }
 
-  return _sort(array, order, func);
+  return (0, _sort2._sort)(array, order, func);
 };
 
 exports.sort = sort;
-sort.orderFunc = {
-  ascending: function ascending(a, b) {
-    return a > b ? 1 : a < b ? -1 : 0;
-  },
-  descending: function descending(a, b) {
-    return a > b ? -1 : a < b ? 1 : 0;
-  }
-};
-sort.order = (0, _Enum2._Enum)(['ascending', 'descending']);
-sort.targetFunc = {
-  returnValue: function returnValue(v) {
-    return v;
-  },
-  returnValueErrorNotIsNumber: function returnValueErrorNotIsNumber(v) {
-    if (!(0, _type.isNumber)(v)) {
-      throw new TypeError('sortNumber args(array) element is not number');
-    }
-
-    return v;
-  },
-  returnValueErrorNotIsString: function returnValueErrorNotIsString(v) {
-    if (!(0, _type.isString)(v)) {
-      throw new TypeError('sortDictionary args(array) element is not string');
-    }
-
-    return v;
-  },
-  returnLength: function returnLength(v) {
-    return v.length;
-  },
-  returnLengthErrorNotHasLength: function returnLengthErrorNotHasLength(v) {
-    if (!((0, _type.isString)(v) || 'length' in v)) {
-      throw new TypeError('sortLength args(array) element must have length property');
-    }
-
-    return v.length;
-  }
-};
+sort.orderFunc = _sort2._sort.orderFunc;
+sort.order = _sort2._sort.order;
+sort.targetFunc = _sort2._sort.targetFunc;
 
 var _sortNumber = function _sortNumber(array, order) {
-  return _sort(array, order);
+  return (0, _sort2._sort)(array, order);
 };
 
 exports._sortNumber = _sortNumber;
@@ -129,7 +74,7 @@ var sortNumber = function sortNumber(array, order) {
 exports.sortNumber = sortNumber;
 
 var _sortLength = function _sortLength(array, order) {
-  return _sort(array, order, sort.targetFunc.returnLength);
+  return (0, _sort2._sort)(array, order, sort.targetFunc.returnLength);
 };
 
 exports._sortLength = _sortLength;
@@ -164,7 +109,6 @@ var sortLengthDescending = function sortLengthDescending(array) {
 
 exports.sortLengthDescending = sortLengthDescending;
 var _default = {
-  _sort: _sort,
   _sortNumber: _sortNumber,
   _sortLength: _sortLength,
   sort: sort,

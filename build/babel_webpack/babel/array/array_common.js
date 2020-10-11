@@ -15,7 +15,7 @@ var _clone2 = require("../root/clone.js");
 
 var _cloneDeep2 = require("../root/cloneDeep.js");
 
-var _unique2 = require("../array/unique.js");
+var _unique2 = require("../array/_unique.js");
 
 var _min2 = require("../array/_min.js");
 

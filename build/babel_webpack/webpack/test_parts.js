@@ -184,7 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58, 1];
+        var countArray = [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 66, 58, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.root));
@@ -12234,6 +12234,87 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           array.min([1,, 3]);
+        })); // func
+
+        checkEqual(-5, array.min([5, 4, 3], function (v) {
+          return -1 * v;
+        }));
+        checkEqual(1, array.min([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }));
+        checkEqual({
+          index: 0,
+          element: {
+            num: 1
+          },
+          value: 1
+        }, array.min([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }, true)); // func exception
+
+        checkEqual(true, isThrown(function () {
+          array.min([{
+            num: 1
+          }, {
+            num: '2'
+          }, {
+            num: 3
+          }], function (v) {
+            return v.num;
+          }, true);
+        })); // object parameter
+
+        checkEqual(3, array.min({
+          array: [5, 4, 3]
+        }));
+        checkEqual(-5, array.min({
+          array: [5, 4, 3],
+          func: function func(v) {
+            return -1 * v;
+          }
+        }));
+        checkEqual(1, array.min({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          }
+        }));
+        checkEqual({
+          index: 0,
+          element: {
+            num: 1
+          },
+          value: 1
+        }, array.min({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          },
+          detail: true
         }));
       });
     };
@@ -12265,6 +12346,87 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           array.max([1,, 3]);
+        })); // func
+
+        checkEqual(-3, array.max([5, 4, 3], function (v) {
+          return -1 * v;
+        }));
+        checkEqual(3, array.max([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }));
+        checkEqual({
+          index: 2,
+          element: {
+            num: 3
+          },
+          value: 3
+        }, array.max([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }, true)); // func exception
+
+        checkEqual(true, isThrown(function () {
+          array.max([{
+            num: 1
+          }, {
+            num: '2'
+          }, {
+            num: 3
+          }], function (v) {
+            return v.num;
+          }, true);
+        })); // object parameter
+
+        checkEqual(5, array.max({
+          array: [5, 4, 3]
+        }));
+        checkEqual(-3, array.max({
+          array: [5, 4, 3],
+          func: function func(v) {
+            return -1 * v;
+          }
+        }));
+        checkEqual(3, array.max({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          }
+        }));
+        checkEqual({
+          index: 2,
+          element: {
+            num: 3
+          },
+          value: 3
+        }, array.max({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          },
+          detail: true
         }));
       });
     };
