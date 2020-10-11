@@ -133,8 +133,11 @@
 .canUseWeakSet:[object Function]:function
 .clone:[object Function]:function
 .cloneDeep:[object Function]:function
+.common._clone:[object Function]:function
+.common._cloneDeep:[object Function]:function
 .common.clone:[object Function]:function
 .common.cloneDeep:[object Function]:function
+.common.functionValue:[object Function]:function
 .compare._allMatch:[object Function]:function
 .compare._allMatchAll:[object Function]:function
 .compare._allMatchSome:[object Function]:function
@@ -736,8 +739,11 @@
 .parts.canUseWeakSet:[object Function]:function
 .parts.clone:[object Function]:function
 .parts.cloneDeep:[object Function]:function
+.parts.common._clone:[object Function]:function
+.parts.common._cloneDeep:[object Function]:function
 .parts.common.clone:[object Function]:function
 .parts.common.cloneDeep:[object Function]:function
+.parts.common.functionValue:[object Function]:function
 .parts.compare._allMatch:[object Function]:function
 .parts.compare._allMatchAll:[object Function]:function
 .parts.compare._allMatchSome:[object Function]:function
@@ -1347,7 +1353,6 @@
 .parts.syntax.canUseWeakMap:[object Function]:function
 .parts.syntax.canUseWeakSet:[object Function]:function
 .parts.syntax.Enum:[object Function]:function
-.parts.syntax.functionValue:[object Function]:function
 .parts.syntax.guard:[object Function]:function
 .parts.syntax.if_:[object Function]:function
 .parts.syntax.loop:[object Function]:function
@@ -1785,7 +1790,6 @@
 .syntax.canUseWeakMap:[object Function]:function
 .syntax.canUseWeakSet:[object Function]:function
 .syntax.Enum:[object Function]:function
-.syntax.functionValue:[object Function]:function
 .syntax.guard:[object Function]:function
 .syntax.if_:[object Function]:function
 .syntax.loop:[object Function]:function

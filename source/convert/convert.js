@@ -312,8 +312,10 @@ export const valueToNumber = (value) => {
 };
 
 export const valueToNumberDefault = (value, defaultValue) => {
-  if (isObjectParameter(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value, defaultValue')) {
     ({ value, defaultValue } = value);
+  } else if (isObjectParameter(defaultValue, 'defaultValue')) {
+    ({ defaultValue } = defaultValue);
   }
 
   if (isNaNStrict(value)) {
@@ -338,8 +340,10 @@ export const valueToInteger = (value) => {
 };
 
 export const valueToIntegerDefault = (value, defaultValue) => {
-  if (isObjectParameter(value, 'value,defaultValue')) {
+  if (isObjectParameter(value, 'value, defaultValue')) {
     ({ value, defaultValue } = value);
+  } else if (isObjectParameter(defaultValue, 'defaultValue')) {
+    ({ defaultValue } = defaultValue);
   }
 
   if (isNaNStrict(value)) {

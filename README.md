@@ -334,6 +334,8 @@ You can now use the functions of the parts.js object.
 - move functionValue
   - namespace syntax >> common
 - publish _clone / _cloneDeep
+- update valueToNumberDefault / valueToIntegerDefault
+  - support full object parameter
 
 ### 8.2.0
 #### 2020/10/10(Sat)

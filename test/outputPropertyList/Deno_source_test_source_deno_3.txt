@@ -133,8 +133,11 @@
 .canUseWeakSet:[object Function]:function
 .clone:[object Function]:function
 .cloneDeep:[object Function]:function
+.common._clone:[object Function]:function
+.common._cloneDeep:[object Function]:function
 .common.clone:[object Function]:function
 .common.cloneDeep:[object Function]:function
+.common.functionValue:[object Function]:function
 .compare._allMatch:[object Function]:function
 .compare._allMatchAll:[object Function]:function
 .compare._allMatchSome:[object Function]:function
@@ -369,8 +372,11 @@
 .default.canUseWeakSet:[object Function]:function
 .default.clone:[object Function]:function
 .default.cloneDeep:[object Function]:function
+.default.common._clone:[object Function]:function
+.default.common._cloneDeep:[object Function]:function
 .default.common.clone:[object Function]:function
 .default.common.cloneDeep:[object Function]:function
+.default.common.functionValue:[object Function]:function
 .default.compare._allMatch:[object Function]:function
 .default.compare._allMatchAll:[object Function]:function
 .default.compare._allMatchSome:[object Function]:function
@@ -972,8 +978,11 @@
 .default.parts.canUseWeakSet:[object Function]:function
 .default.parts.clone:[object Function]:function
 .default.parts.cloneDeep:[object Function]:function
+.default.parts.common._clone:[object Function]:function
+.default.parts.common._cloneDeep:[object Function]:function
 .default.parts.common.clone:[object Function]:function
 .default.parts.common.cloneDeep:[object Function]:function
+.default.parts.common.functionValue:[object Function]:function
 .default.parts.compare._allMatch:[object Function]:function
 .default.parts.compare._allMatchAll:[object Function]:function
 .default.parts.compare._allMatchSome:[object Function]:function
@@ -1583,7 +1592,6 @@
 .default.parts.syntax.canUseWeakMap:[object Function]:function
 .default.parts.syntax.canUseWeakSet:[object Function]:function
 .default.parts.syntax.Enum:[object Function]:function
-.default.parts.syntax.functionValue:[object Function]:function
 .default.parts.syntax.guard:[object Function]:function
 .default.parts.syntax.if_:[object Function]:function
 .default.parts.syntax.loop:[object Function]:function
@@ -2021,7 +2029,6 @@
 .default.syntax.canUseWeakMap:[object Function]:function
 .default.syntax.canUseWeakSet:[object Function]:function
 .default.syntax.Enum:[object Function]:function
-.default.syntax.functionValue:[object Function]:function
 .default.syntax.guard:[object Function]:function
 .default.syntax.if_:[object Function]:function
 .default.syntax.loop:[object Function]:function
@@ -2818,8 +2825,11 @@
 .parts.canUseWeakSet:[object Function]:function
 .parts.clone:[object Function]:function
 .parts.cloneDeep:[object Function]:function
+.parts.common._clone:[object Function]:function
+.parts.common._cloneDeep:[object Function]:function
 .parts.common.clone:[object Function]:function
 .parts.common.cloneDeep:[object Function]:function
+.parts.common.functionValue:[object Function]:function
 .parts.compare._allMatch:[object Function]:function
 .parts.compare._allMatchAll:[object Function]:function
 .parts.compare._allMatchSome:[object Function]:function
@@ -3429,7 +3439,6 @@
 .parts.syntax.canUseWeakMap:[object Function]:function
 .parts.syntax.canUseWeakSet:[object Function]:function
 .parts.syntax.Enum:[object Function]:function
-.parts.syntax.functionValue:[object Function]:function
 .parts.syntax.guard:[object Function]:function
 .parts.syntax.if_:[object Function]:function
 .parts.syntax.loop:[object Function]:function
@@ -3867,7 +3876,6 @@
 .syntax.canUseWeakMap:[object Function]:function
 .syntax.canUseWeakSet:[object Function]:function
 .syntax.Enum:[object Function]:function
-.syntax.functionValue:[object Function]:function
 .syntax.guard:[object Function]:function
 .syntax.if_:[object Function]:function
 .syntax.loop:[object Function]:function
