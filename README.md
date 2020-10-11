@@ -323,7 +323,7 @@ You can now use the functions of the parts.js object.
 - update unique
   - defalt func parameter rename
   - update args error
-  - no publis __unique
+  - no publish __unique
   - add _unique.js __unique.js
 - update group
   - defalt func parameter rename
