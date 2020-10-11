@@ -9,7 +9,7 @@ var _type = require("../type/type.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _functionValue = require("./functionValue.js");
+var _functionValue = require("../common/functionValue.js");
 
 /**
  * if_

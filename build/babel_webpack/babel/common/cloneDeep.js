@@ -11,7 +11,7 @@ var _object = require("../object/object.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _clone = require("../root/clone.js");
+var _clone = require("../common/clone.js");
 
 /**
  * cloneDeep

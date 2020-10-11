@@ -3,11 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.cloneDeep = exports._cloneDeep = exports.clone = exports._clone = void 0;
+exports["default"] = exports.functionValue = exports.cloneDeep = exports._cloneDeep = exports.clone = exports._clone = void 0;
 
 var _clone2 = _interopRequireDefault(require("./clone.js"));
 
 var _cloneDeep2 = _interopRequireDefault(require("./cloneDeep.js"));
+
+var _functionValue = _interopRequireDefault(require("./functionValue.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -25,7 +27,9 @@ var _cloneDeep = _cloneDeep2["default"]._cloneDeep,
     cloneDeep = _cloneDeep2["default"].cloneDeep;
 exports.cloneDeep = cloneDeep;
 exports._cloneDeep = _cloneDeep;
+var functionValue = _functionValue["default"].functionValue;
+exports.functionValue = functionValue;
 
-var _default = _objectSpread(_objectSpread({}, _clone2["default"]), _cloneDeep2["default"]);
+var _default = _objectSpread(_objectSpread(_objectSpread({}, _clone2["default"]), _cloneDeep2["default"]), _functionValue["default"]);
 
 exports["default"] = _default;

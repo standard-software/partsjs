@@ -274,10 +274,13 @@ var valueToNumber = function valueToNumber(value) {
 exports.valueToNumber = valueToNumber;
 
 var valueToNumberDefault = function valueToNumberDefault(value, defaultValue) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,defaultValue')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, defaultValue')) {
     var _value7 = value;
     value = _value7.value;
     defaultValue = _value7.defaultValue;
+  } else if ((0, _isObjectParameter.isObjectParameter)(defaultValue, 'defaultValue')) {
+    var _defaultValue = defaultValue;
+    defaultValue = _defaultValue.defaultValue;
   }
 
   if ((0, _type.isNaNStrict)(value)) {
@@ -312,10 +315,13 @@ var valueToInteger = function valueToInteger(value) {
 exports.valueToInteger = valueToInteger;
 
 var valueToIntegerDefault = function valueToIntegerDefault(value, defaultValue) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,defaultValue')) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, defaultValue')) {
     var _value8 = value;
     value = _value8.value;
     defaultValue = _value8.defaultValue;
+  } else if ((0, _isObjectParameter.isObjectParameter)(defaultValue, 'defaultValue')) {
+    var _defaultValue2 = defaultValue;
+    defaultValue = _defaultValue2.defaultValue;
   }
 
   if ((0, _type.isNaNStrict)(value)) {

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_index = void 0;
 
-var _rootTest = require("./root/root.test.js");
+var _commonTest = require("./common/common.test.js");
 
 var _typeTest = require("./type/type.test.js");
 
@@ -76,10 +76,10 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 66, 58, 1];
+        var countArray = [388, 19, 5, 259, 13, 11, 44, 35, 15, 86, 37, 66, 58, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
-        checkEqual(countArray.shift(), propertyCount(parts.root));
+        checkEqual(countArray.shift(), propertyCount(parts.common));
         checkEqual(countArray.shift(), propertyCount(parts.type));
         checkEqual(countArray.shift(), propertyCount(parts.syntax));
         checkEqual(countArray.shift(), propertyCount(parts.test));
@@ -94,7 +94,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it('test_execute_nameSpace 2', function () {
-        checkEqual(true, inProperty(parts, 'isUndefinedAll,isNotNullAll,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'root'));
+        checkEqual(true, inProperty(parts, 'isUndefinedAll,isNotNullAll,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'common'));
         checkEqual(false, inProperty(parts, 'abc,' + ''));
       });
     });
@@ -149,7 +149,7 @@ var test_execute_index = function test_execute_index(parts) {
 
   var describe = parts.test.describe;
   describe('test_execute_index', function () {
-    (0, _rootTest.test_execute_root)(parts);
+    (0, _commonTest.test_execute_common)(parts);
     (0, _typeTest.test_execute_type)(parts);
     (0, _syntaxTest.test_execute_syntax)(parts);
     (0, _testTest.test_execute_test)(parts);

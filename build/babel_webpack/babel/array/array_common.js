@@ -11,9 +11,9 @@ var _number = require("../number/number.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _clone2 = require("../root/clone.js");
+var _clone2 = require("../common/clone.js");
 
-var _cloneDeep2 = require("../root/cloneDeep.js");
+var _cloneDeep2 = require("../common/cloneDeep.js");
 
 var _unique2 = require("../array/_unique.js");
 

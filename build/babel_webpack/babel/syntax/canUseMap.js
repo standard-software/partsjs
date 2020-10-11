@@ -7,7 +7,7 @@ exports["default"] = exports.canUseWeakMap = exports.canUseMap = void 0;
 
 var _type = require("../type/type.js");
 
-var _global2 = require("../root/_global.js");
+var _global2 = require("../common/_global.js");
 
 /**
  * canUseMap

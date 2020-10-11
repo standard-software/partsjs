@@ -7,7 +7,7 @@ exports["default"] = exports.guard = void 0;
 
 var _type = require("../type/type.js");
 
-var _functionValue = require("../syntax/functionValue.js");
+var _functionValue = require("../common/functionValue.js");
 
 /**
  * guard

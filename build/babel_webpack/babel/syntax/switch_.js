@@ -7,7 +7,7 @@ exports["default"] = exports.switch_ = void 0;
 
 var _type = require("../type/type.js");
 
-var _functionValue = require("./functionValue.js");
+var _functionValue = require("../common/functionValue.js");
 
 /**
  * switch_

@@ -1097,7 +1097,29 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToNumber(NaN)); // Default
 
         checkEqual(null, valueToNumberDefault('', null));
-        checkEqual(NaN, valueToNumberDefault(NaN, null)); // Other
+        checkEqual(null, valueToNumberDefault({
+          value: '',
+          defaultValue: null
+        }));
+        checkEqual(null, valueToNumberDefault('', {
+          defaultValue: null
+        }));
+        checkEqual(1.5, valueToNumberDefault('1.5', null));
+        checkEqual(1.5, valueToNumberDefault({
+          value: '1.5',
+          defaultValue: null
+        }));
+        checkEqual(1.5, valueToNumberDefault('1.5', {
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToNumberDefault(NaN, null));
+        checkEqual(NaN, valueToNumberDefault({
+          value: NaN,
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToNumberDefault(NaN, {
+          defaultValue: null
+        })); // Other
 
         checkEqual(NaN, valueToNumber(null));
         checkEqual(NaN, valueToNumber(undefined));
@@ -1571,7 +1593,37 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToInteger(NaN)); // Default
 
         checkEqual(null, valueToIntegerDefault('', null));
-        checkEqual(NaN, valueToIntegerDefault(NaN, null)); // Other
+        checkEqual(null, valueToIntegerDefault({
+          value: '',
+          defaultValue: null
+        }));
+        checkEqual(null, valueToIntegerDefault('', {
+          defaultValue: null
+        }));
+        checkEqual(2, valueToIntegerDefault('1.5', null));
+        checkEqual(2, valueToIntegerDefault({
+          value: '1.5',
+          defaultValue: null
+        }));
+        checkEqual(2, valueToIntegerDefault('1.5', {
+          defaultValue: null
+        }));
+        checkEqual(1, valueToIntegerDefault('1', null));
+        checkEqual(1, valueToIntegerDefault({
+          value: '1',
+          defaultValue: null
+        }));
+        checkEqual(1, valueToIntegerDefault('1', {
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToIntegerDefault(NaN, null));
+        checkEqual(NaN, valueToIntegerDefault({
+          value: NaN,
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToIntegerDefault(NaN, {
+          defaultValue: null
+        })); // Other
 
         checkEqual(NaN, valueToInteger(null));
         checkEqual(NaN, valueToInteger(undefined));

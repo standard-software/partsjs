@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.test_execute_root = void 0;
+exports["default"] = exports.test_execute_common = void 0;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -20,14 +20,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
-var test_execute_root = function test_execute_root(parts) {
+var test_execute_common = function test_execute_common(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test,
       testCounter = _parts$test.testCounter;
-  describe('test_execute_root', function () {
+  describe('test_execute_common', function () {
     var clone = parts.clone,
         cloneDeep = parts.cloneDeep;
 
@@ -931,8 +931,8 @@ var test_execute_root = function test_execute_root(parts) {
   });
 };
 
-exports.test_execute_root = test_execute_root;
+exports.test_execute_common = test_execute_common;
 var _default = {
-  test_execute_root: test_execute_root
+  test_execute_common: test_execute_common
 };
 exports["default"] = _default;
