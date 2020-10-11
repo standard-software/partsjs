@@ -11,10 +11,6 @@ import {
 } from '../../type/type.js';
 
 import {
-  switch_,
-} from '../../syntax/syntax.js';
-
-import {
   _or,
 } from '../../compare/or.js';
 
@@ -27,34 +23,12 @@ import {
 } from '../../object/objectValues.js';
 
 import {
-  _Enum,
-} from '../../syntax/_Enum.js';
+  _sort,
+} from '../../array/operation/_sort.js';
 
 /**
  * array.operation.sort
  */
-export const _sort = (
-  array,
-  order = sort.order.ascending,
-  func = sort.targetFunc.returnValue,
-) => {
-  const orderFunc =
-    switch_(order)([
-      [sort.order.ascending, () => sort.orderFunc.ascending],
-      [sort.order.descending, () => sort.orderFunc.descending],
-      [
-        () => { throw new TypeError(
-          '_sort args(order) is not ["ascending"|"descending"]',
-        ); },
-      ],
-    ]);
-
-  array.sort((a, b) => {
-    return orderFunc(func(a), func(b));
-  });
-  return array;
-};
-
 export const sort = (
   array,
   order = sort.order.ascending,
@@ -89,43 +63,11 @@ export const sort = (
   return _sort(array, order, func);
 };
 
-sort.orderFunc = {
-  ascending: (a, b) => (
-    a > b ? 1
-    : a < b ? -1
-    : 0
-  ),
-  descending: (a, b) => (
-    a > b ? -1
-    : a < b ? 1
-    : 0
-  ),
-};
+sort.orderFunc = _sort.orderFunc;
 
-sort.order = _Enum(['ascending', 'descending']);
+sort.order = _sort.order;
 
-sort.targetFunc = {
-  returnValue: v => v,
-  returnValueErrorNotIsNumber: v => {
-    if (!isNumber(v)) {
-      throw new TypeError('sortNumber args(array) element is not number');
-    }
-    return v;
-  },
-  returnValueErrorNotIsString: v => {
-    if (!isString(v)) {
-      throw new TypeError('sortDictionary args(array) element is not string');
-    }
-    return v;
-  },
-  returnLength: v => v.length,
-  returnLengthErrorNotHasLength: v => {
-    if (!(isString(v) || ('length' in v))) {
-      throw new TypeError('sortLength args(array) element must have length property');
-    }
-    return v.length;
-  },
-};
+sort.targetFunc = _sort.targetFunc;
 
 export const _sortNumber = (array, order) => {
   return _sort(array, order);
@@ -160,7 +102,6 @@ export const sortLengthDescending = (array) => {
 };
 
 export default {
-  _sort,
   _sortNumber,
   _sortLength,
 

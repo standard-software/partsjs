@@ -13,6 +13,7 @@ import groupJs from './group.js';
 import _uniqueJs from './_unique.js';
 import uniqueJs from './unique.js';
 import array_operationJs from './array_operation.js';
+import _sortJs from './operation/_sort.js';
 import sortJs from './operation/sort.js';
 import sortDictionaryJs from './operation/sortDictionary.js';
 
@@ -37,6 +38,7 @@ const arrayJs = {
 
 const arrayOperationJs = {
   ...array_operationJs,
+  ..._sortJs,
   ...sortJs,
   ...sortDictionaryJs,
 };

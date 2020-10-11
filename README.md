@@ -328,6 +328,8 @@ You can now use the functions of the parts.js object.
 - update group
   - defalt func parameter rename
   - add _group.js
+- update sort
+  - add _sort.js
 
 ### 8.2.0
 #### 2020/10/10(Sat)
