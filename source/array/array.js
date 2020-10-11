@@ -8,6 +8,7 @@ import NumberArrayJs from './NumberArray.js';
 import _IntegerArrayJs from './_IntegerArray.js';
 import IntegerArrayJs from './IntegerArray.js';
 import arrayEntriesJs from './arrayEntries.js';
+import _groupJs from './_group.js';
 import groupJs from './group.js';
 import _uniqueJs from './_unique.js';
 import uniqueJs from './unique.js';
@@ -28,6 +29,7 @@ const arrayJs = {
   ..._IntegerArrayJs,
   ...IntegerArrayJs,
   ...arrayEntriesJs,
+  ..._groupJs,
   ...groupJs,
   ..._uniqueJs,
   ...uniqueJs,

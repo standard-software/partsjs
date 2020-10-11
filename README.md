@@ -325,6 +325,9 @@ You can now use the functions of the parts.js object.
   - update args error
   - no publis __unique
   - add _unique.js __unique.js
+- update group
+  - defalt func parameter rename
+  - add _group.js
 
 ### 8.2.0
 #### 2020/10/10(Sat)
