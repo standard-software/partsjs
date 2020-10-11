@@ -1,19 +1,46 @@
+import { isNumber } from '../type/isType.js';
+import { __max } from '../array/__max.js';
+
 /**
  * array.max
  */
-export const _max = (array) => {
-  if (array.length === 0) {
-    return null;
+export const maxDefaultFunc = v => v;
+
+export const _max = (
+  array, func = maxDefaultFunc, detail = false,
+) => {
+  if (func === maxDefaultFunc && detail === false) {
+    return __max(array);
   }
-  let result = array[0];
+
+  const result = {
+    index: -1,
+    element: null,
+    value: null,
+  };
+  if (array.length === 0) {
+    return detail ? result : result.value;
+  }
+  result.index = 0;
+  result.element = array[0];
+  result.value = -Infinity;
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (result < array[i]) {
-      result = array[i];
+    const value = func(array[i]);
+    if (!isNumber(value)) {
+      throw new TypeError(
+        '_max args(array) element is not number',
+      );
+    }
+    if (result.value < value) {
+      result.index = i;
+      result.element = array[i];
+      result.value = value;
     }
   }
-  return result;
+  return detail ? result : result.value;
 };
 
 export default {
   _max,
+  maxDefaultFunc,
 };

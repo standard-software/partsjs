@@ -134,9 +134,9 @@ You can now use the functions of the parts.js object.
 
 - partsjs/run_check/html/
 - partsjs/test/release/web/
-- partsjs/docs/test/web/test.html
+- partsjs/docs/test/web/test.html  
   https://standard-software.github.io/partsjs/test/web/test.html
-- partsjs/docs/test/web-cdn/test.html
+- partsjs/docs/test/web-cdn/test.html  
   https://standard-software.github.io/partsjs/test/web-cdn/test.html
 
 ## How to use parts.js in Google Apps Script for Rhino and V8
@@ -314,6 +314,13 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 8.3.0
+#### 2020/10/11(Sun)
+- update min/max
+  - add __min / __max
+  - support args func / detail
+  - support full object parameter
+
 ### 8.2.0
 #### 2020/10/10(Sat)
 - update split
@@ -411,32 +418,6 @@ You can now use the functions of the parts.js object.
 - update fixProperty
 - update inProperty
 - update getProperty
-
-### 7.5.0
-#### 2020/09/04(Fri)
-- update platform.name / browserName
-  - use cash var
-- update canUse Map/WeakMap/Set/Weak
-- add _global.js
-- update package.json
-  - scripts jest:watch
-- add _hasOwn.js / hasOwn.js from has.js
-- rename objectToKeyValueArray.js >> objectEntries.js
-- add objectKeys.js / objectValues.js
-- update Enum args(values) check string array
-- update objectLike ErrorMessage
-- update inProperty Error Check
-- add fixProperty.js
-- update sort use objectValues
-- support full object parameter
-  - update array.deleteFirst / Last
-    - length default 1
-  - update array.deleteLength
-  - update string.deleteFirst / Last
-  - update string.deleteLength
-  - update array.isFirst / Last
-    - support args function
-- add split.js
 
 ### More Info
 [VERSION.md](./VERSION.md)

@@ -12,23 +12,42 @@ import {
 
 import {
   _max,
+  maxDefaultFunc,
 } from '../array/_max.js';
+
+import { isObjectParameter } from '../object/isObjectParameter.js';
 
 /**
  * array.max
  */
-export const max = (array) => {
+export const max = (
+  array, func = maxDefaultFunc, detail = false,
+) => {
+  if (isObjectParameter(array, 'array', 'func, detail')) {
+    ({ array, func = maxDefaultFunc, detail = false } = array);
+  } else if (isObjectParameter(func, '', 'func, detail')) {
+    ({ func = maxDefaultFunc, detail = false } = func);
+  } else if (isObjectParameter(detail, 'detail')) {
+    ({ detail } = detail);
+  }
+
   if (!isArray(array)) {
     throw new TypeError(
       'max args(array) is not array',
     );
   }
-  if (array.length !== 0 && !isNumberArray(array)) {
+  if (!isFunction(func)) {
     throw new TypeError(
-      'max args(array) element is not number',
+      'max args(func) is not function',
     );
   }
-  return _max(array);
+  if (!isBoolean(detail)) {
+    throw new TypeError(
+      'max args(detail) is not boolean',
+    );
+  }
+
+  return _max(array, func, detail);
 };
 
 export default {

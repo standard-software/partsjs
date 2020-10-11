@@ -1,19 +1,46 @@
+import { isNumber } from '../type/isType.js';
+import { __min } from '../array/__min.js';
+
 /**
  * array.min
  */
-export const _min = (array) => {
-  if (array.length === 0) {
-    return null;
+export const minDefaultFunc = v => v;
+
+export const _min = (
+  array, func = minDefaultFunc, detail = false,
+) => {
+  if (func === minDefaultFunc && detail === false) {
+    return __min(array);
   }
-  let result = array[0];
+
+  const result = {
+    index: -1,
+    element: null,
+    value: null,
+  };
+  if (array.length === 0) {
+    return detail ? result : result.value;
+  }
+  result.index = 0;
+  result.element = array[0];
+  result.value = Infinity;
   for (let i = 0, l = array.length; i < l; i += 1) {
-    if (array[i] < result) {
-      result = array[i];
+    const value = func(array[i]);
+    if (!isNumber(value)) {
+      throw new TypeError(
+        '_min args(array) element is not number',
+      );
+    }
+    if (value < result.value) {
+      result.index = i;
+      result.element = array[i];
+      result.value = value;
     }
   }
-  return result;
+  return detail ? result : result.value;
 };
 
 export default {
   _min,
+  minDefaultFunc,
 };

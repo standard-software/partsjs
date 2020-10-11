@@ -185,6 +185,54 @@ export const test_execute_array = (parts) => {
         checkEqual(true, isThrown(() => {
           array.min([1,, 3,]);
         }));
+
+        // func
+        checkEqual(-5, array.min([5, 4, 3,], v => -1 * v));
+        checkEqual(1, array.min([
+          { num: 1},
+          { num: 2},
+          { num: 3},
+        ], v =>v.num));
+        checkEqual({ index: 0, element: { num: 1 }, value: 1 } , array.min([
+          { num: 1},
+          { num: 2},
+          { num: 3},
+        ], v =>v.num, true));
+
+        // func exception
+        checkEqual(true, isThrown(() => {
+          array.min([
+            { num: 1},
+            { num: '2'},
+            { num: 3},
+          ], v =>v.num, true);
+        }));
+
+        // object parameter
+        checkEqual(3, array.min({
+          array: [5, 4, 3,],
+        }));
+        checkEqual(-5, array.min({
+          array: [5, 4, 3,],
+          func: v => -1 * v
+        }));
+        checkEqual(1, array.min({
+          array: [
+            { num: 1},
+            { num: 2},
+            { num: 3},
+          ],
+          func: v =>v.num
+        }));
+        checkEqual({ index: 0, element: { num: 1 }, value: 1 }, array.min({
+          array: [
+            { num: 1},
+            { num: 2},
+            { num: 3},
+          ],
+          func: v =>v.num,
+          detail: true,
+        }));
       });
     };
 
@@ -216,6 +264,54 @@ export const test_execute_array = (parts) => {
         }));
         checkEqual(true, isThrown(() => {
           array.max([1,, 3,]);
+        }));
+
+        // func
+        checkEqual(-3, array.max([5, 4, 3,], v => -1 * v));
+        checkEqual(3, array.max([
+          { num: 1},
+          { num: 2},
+          { num: 3},
+        ], v =>v.num));
+        checkEqual({ index: 2, element: { num: 3 }, value: 3 } , array.max([
+          { num: 1},
+          { num: 2},
+          { num: 3},
+        ], v =>v.num, true));
+
+        // func exception
+        checkEqual(true, isThrown(() => {
+          array.max([
+            { num: 1},
+            { num: '2'},
+            { num: 3},
+          ], v =>v.num, true);
+        }));
+
+        // object parameter
+        checkEqual(5, array.max({
+          array: [5, 4, 3,],
+        }));
+        checkEqual(-3, array.max({
+          array: [5, 4, 3,],
+          func: v => -1 * v
+        }));
+        checkEqual(3, array.max({
+          array: [
+            { num: 1},
+            { num: 2},
+            { num: 3},
+          ],
+          func: v =>v.num
+        }));
+        checkEqual({ index: 2, element: { num: 3 }, value: 3 }, array.max({
+          array: [
+            { num: 1},
+            { num: 2},
+            { num: 3},
+          ],
+          func: v =>v.num,
+          detail: true,
         }));
       });
     };
