@@ -30,14 +30,17 @@ const { _map } = arrayJs;
  */
 export const {
   clone, cloneDeep,
+  functionValue,
 } = commonJs;
 
 rootAlias = { ...rootAlias,
   clone, cloneDeep,
+  functionValue,
 };
 
 export const common = {
   clone, cloneDeep,
+  functionValue,
 };
 
 /**
@@ -244,7 +247,6 @@ export const test = {
  */
 export const {
   assert, guard,
-  functionValue,
   sc, if_, switch_,
   loop,
   canUseMap, canUseWeakMap,
@@ -254,7 +256,6 @@ export const {
 
 rootAlias = { ...rootAlias,
   assert, guard,
-  functionValue,
   sc, if_, switch_,
   loop,
   canUseMap, canUseWeakMap,

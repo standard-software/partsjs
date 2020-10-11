@@ -1,5 +1,6 @@
 import cloneJs from './clone.js';
 import cloneDeepJs from './cloneDeep.js';
+import functionValueJs from './functionValue.js';
 
 export const {
   _clone,
@@ -11,7 +12,12 @@ export const {
   cloneDeep,
 } = cloneDeepJs;
 
+export const {
+  functionValue,
+} = functionValueJs;
+
 export default {
   ...cloneJs,
   ...cloneDeepJs,
+  ...functionValueJs,
 };

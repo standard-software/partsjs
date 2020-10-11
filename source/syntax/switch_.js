@@ -7,7 +7,7 @@ import {
 
 import {
   functionValue,
-} from './functionValue.js';
+} from '../common/functionValue.js';
 
 /**
  * switch_

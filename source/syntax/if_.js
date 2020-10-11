@@ -11,7 +11,7 @@ import {
 
 import {
   functionValue,
-} from './functionValue.js';
+} from '../common/functionValue.js';
 
 /**
  * if_

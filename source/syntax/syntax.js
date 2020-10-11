@@ -1,6 +1,5 @@
 import assertJs from './assert.js';
 import guardJs from './guard.js';
-import functionValueJs from './functionValue.js';
 import scJs from './sc.js';
 import if_Js from './if_.js';
 import switch_Js from './switch_.js';
@@ -13,7 +12,6 @@ import EnumJs from './Enum.js';
 const syntaxJs = {
   ...assertJs,
   ...guardJs,
-  ...functionValueJs,
   ...scJs,
   ...if_Js,
   ...switch_Js,
@@ -31,7 +29,6 @@ export const {
 
 export const {
   assert, guard,
-  functionValue,
   sc, if_, switch_,
   loop,
   canUseMap, canUseWeakMap,
@@ -44,7 +41,6 @@ export default {
   _Enum,
 
   assert, guard,
-  functionValue,
   sc, if_, switch_,
   loop,
   canUseMap, canUseWeakMap,

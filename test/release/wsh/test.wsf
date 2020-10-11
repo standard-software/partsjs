@@ -26,7 +26,7 @@
 
   var exports = {};
 
-  var __rootTest =        {};
+  var __commonTest =      {};
   var __typeTest =        {};
   var __syntaxTest =      {};
   var __testTest =        {};
@@ -40,7 +40,7 @@
   var __consoleHookTest = {};
   var __otherTest =       {};
   var require = function(path) {
-    if (path === './root/root.test.js')               { return __rootTest }
+    if (path === './common/common.test.js')           { return __commonTest }
     if (path === './type/type.test.js')               { return __typeTest }
     if (path === './syntax/syntax.test.js')           { return __syntaxTest }
     if (path === './test/test.test.js')               { return __testTest }
@@ -60,7 +60,7 @@
 </script>
 
 <script language="JavaScript" src="../../../build/babel_webpack/babel/index.test.js"></script>
-<script language="JavaScript" src="../../../build/babel_webpack/babel/root/root.test.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/babel/common/common.test.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/babel/type/type.test.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/babel/syntax/syntax.test.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/babel/test/test.test.js"></script>
@@ -77,7 +77,7 @@
 <script language="JavaScript">
 <![CDATA[
 
-  __rootTest.test_execute_root                = test_execute_root;
+  __commonTest.test_execute_common            = test_execute_common;
   __typeTest.test_execute_type                = test_execute_type;
   __syntaxTest.test_execute_syntax            = test_execute_syntax;
   __testTest.test_execute_test                = test_execute_test;

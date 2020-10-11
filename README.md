@@ -331,6 +331,8 @@ You can now use the functions of the parts.js object.
 - update sort
   - add _sort.js
 - rename namespace root >> common
+- move functionValue
+  - namespace syntax >> common
 
 ### 8.2.0
 #### 2020/10/10(Sat)
