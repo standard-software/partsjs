@@ -9,24 +9,20 @@ import {
   isFunctionArray, isObjectArray, isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
 } from '../type/type.js';
-
-import {
-  _min,
-  minDefaultFunc,
-} from '../array/_min.js';
-
 import { isObjectParameter } from '../object/isObjectParameter.js';
+import { returnValueFunction } from '../common/returnValueFunction.js';
+import { _min } from '../array/_min.js';
 
 /**
  * array.min
  */
 export const min = (
-  array, func = minDefaultFunc, detail = false,
+  array, func = returnValueFunction, detail = false,
 ) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = minDefaultFunc, detail = false } = array);
+    ({ array, func = returnValueFunction, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = minDefaultFunc, detail = false } = func);
+    ({ func = returnValueFunction, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }

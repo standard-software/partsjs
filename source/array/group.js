@@ -9,24 +9,18 @@ import {
   isFunctionArray, isObjectArray, isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
 } from '../type/type.js';
-
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import {
-  _group,
-  groupDefaultFunc,
-} from '../array/_group.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { returnValueFunction } from '../common/returnValueFunction.js';
+import { _group } from '../array/_group.js';
 
 /**
  * group
  */
-export const group = (array, func = groupDefaultFunc, detail = false) => {
+export const group = (array, func = returnValueFunction, detail = false) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = groupDefaultFunc, detail = false } = array);
+    ({ array, func = returnValueFunction, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = groupDefaultFunc, detail = false } = func);
+    ({ func = returnValueFunction, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }

@@ -1,15 +1,14 @@
 import { isNumber } from '../type/isType.js';
+import { returnValueFunction } from '../common/returnValueFunction.js';
 import { __min } from '../array/__min.js';
 
 /**
  * array.min
  */
-export const minDefaultFunc = v => v;
-
 export const _min = (
-  array, func = minDefaultFunc, detail = false,
+  array, func = returnValueFunction, detail = false,
 ) => {
-  if (func === minDefaultFunc && detail === false) {
+  if (func === returnValueFunction && detail === false) {
     return __min(array);
   }
 
@@ -42,5 +41,4 @@ export const _min = (
 
 export default {
   _min,
-  minDefaultFunc,
 };

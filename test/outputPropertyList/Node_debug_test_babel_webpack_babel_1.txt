@@ -138,6 +138,7 @@
 .common.clone:[object Function]:function
 .common.cloneDeep:[object Function]:function
 .common.functionValue:[object Function]:function
+.common.returnValueFunction:[object Function]:function
 .compare._allMatch:[object Function]:function
 .compare._allMatchAll:[object Function]:function
 .compare._allMatchSome:[object Function]:function
@@ -377,6 +378,7 @@
 .default.common.clone:[object Function]:function
 .default.common.cloneDeep:[object Function]:function
 .default.common.functionValue:[object Function]:function
+.default.common.returnValueFunction:[object Function]:function
 .default.compare._allMatch:[object Function]:function
 .default.compare._allMatchAll:[object Function]:function
 .default.compare._allMatchSome:[object Function]:function
@@ -983,6 +985,7 @@
 .default.parts.common.clone:[object Function]:function
 .default.parts.common.cloneDeep:[object Function]:function
 .default.parts.common.functionValue:[object Function]:function
+.default.parts.common.returnValueFunction:[object Function]:function
 .default.parts.compare._allMatch:[object Function]:function
 .default.parts.compare._allMatchAll:[object Function]:function
 .default.parts.compare._allMatchSome:[object Function]:function
@@ -2830,6 +2833,7 @@
 .parts.common.clone:[object Function]:function
 .parts.common.cloneDeep:[object Function]:function
 .parts.common.functionValue:[object Function]:function
+.parts.common.returnValueFunction:[object Function]:function
 .parts.compare._allMatch:[object Function]:function
 .parts.compare._allMatchAll:[object Function]:function
 .parts.compare._allMatchSome:[object Function]:function

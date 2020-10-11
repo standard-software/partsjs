@@ -1,10 +1,5 @@
-import {
-  canUseSet,
-} from '../syntax/syntax.js';
-
-import {
-  __includes,
-} from '../compare/__includes.js';
+import { canUseSet } from '../syntax/syntax.js';
+import { __includes } from '../compare/__includes.js';
 
 /**
  * uniqe

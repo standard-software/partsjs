@@ -1,23 +1,31 @@
 import cloneJs from './clone.js';
 import cloneDeepJs from './cloneDeep.js';
 import functionValueJs from './functionValue.js';
+import returnValueFunctionJs from './returnValueFunction.js';
 
-export const {
-  _clone,
-  clone,
-} = cloneJs;
-
-export const {
-  _cloneDeep,
-  cloneDeep,
-} = cloneDeepJs;
-
-export const {
-  functionValue,
-} = functionValueJs;
-
-export default {
+const commonJs = {
   ...cloneJs,
   ...cloneDeepJs,
   ...functionValueJs,
+  ...returnValueFunctionJs,
+};
+
+export const {
+  _clone,
+  _cloneDeep,
+
+  clone,
+  cloneDeep,
+  functionValue,
+  returnValueFunction,
+} = commonJs;
+
+export default {
+  _clone,
+  _cloneDeep,
+
+  clone,
+  cloneDeep,
+  functionValue,
+  returnValueFunction,
 };

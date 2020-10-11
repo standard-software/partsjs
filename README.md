@@ -336,6 +336,8 @@ You can now use the functions of the parts.js object.
 - publish _clone / _cloneDeep
 - update valueToNumberDefault / valueToIntegerDefault
   - support full object parameter
+- add returnValueFunction.js
+  - update group / max / min / unique
 
 ### 8.2.0
 #### 2020/10/10(Sat)

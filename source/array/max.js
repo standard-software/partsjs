@@ -9,24 +9,20 @@ import {
   isFunctionArray, isObjectArray, isArrayArray, isDateArray, isRegExpArray,
   isExceptionArray,
 } from '../type/type.js';
-
-import {
-  _max,
-  maxDefaultFunc,
-} from '../array/_max.js';
-
 import { isObjectParameter } from '../object/isObjectParameter.js';
+import { returnValueFunction } from '../common/returnValueFunction.js';
+import { _max } from '../array/_max.js';
 
 /**
  * array.max
  */
 export const max = (
-  array, func = maxDefaultFunc, detail = false,
+  array, func = returnValueFunction, detail = false,
 ) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = maxDefaultFunc, detail = false } = array);
+    ({ array, func = returnValueFunction, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = maxDefaultFunc, detail = false } = func);
+    ({ func = returnValueFunction, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }

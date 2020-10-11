@@ -4,32 +4,19 @@ import {
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
 } from '../type/type.js';
-
-import {
-  canUseSet,
-} from '../syntax/syntax.js';
-
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import {
-  __includes,
-} from '../compare/__includes.js';
-
-import {
-  _unique,
-  uniqueDefaultFunc,
-} from '../array/_unique.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { __includes } from '../compare/__includes.js';
+import { returnValueFunction } from '../common/returnValueFunction.js';
+import { _unique } from '../array/_unique.js';
 
 /**
  * uniqe
  */
-export const unique = (array, func = uniqueDefaultFunc, detail = false) => {
+export const unique = (array, func = returnValueFunction, detail = false) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = uniqueDefaultFunc, detail = false } = array);
+    ({ array, func = returnValueFunction, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = uniqueDefaultFunc, detail = false } = func);
+    ({ func = returnValueFunction, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }

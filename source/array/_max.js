@@ -1,15 +1,14 @@
 import { isNumber } from '../type/isType.js';
+import { returnValueFunction } from '../common/returnValueFunction.js';
 import { __max } from '../array/__max.js';
 
 /**
  * array.max
  */
-export const maxDefaultFunc = v => v;
-
 export const _max = (
-  array, func = maxDefaultFunc, detail = false,
+  array, func = returnValueFunction, detail = false,
 ) => {
-  if (func === maxDefaultFunc && detail === false) {
+  if (func === returnValueFunction && detail === false) {
     return __max(array);
   }
 
@@ -42,5 +41,4 @@ export const _max = (
 
 export default {
   _max,
-  maxDefaultFunc,
 };

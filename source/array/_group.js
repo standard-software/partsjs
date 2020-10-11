@@ -1,9 +1,9 @@
 /**
  * group
  */
-export const groupDefaultFunc = v => v;
+import { returnValueFunction } from '../common/returnValueFunction.js';
 
-export const _group = (array, func = groupDefaultFunc, detail = false) => {
+export const _group = (array, func = returnValueFunction, detail = false) => {
   const index = [];
   const result = [];
   array.forEach(v => {
@@ -25,5 +25,4 @@ export const _group = (array, func = groupDefaultFunc, detail = false) => {
 
 export default {
   _group,
-  groupDefaultFunc,
 };
