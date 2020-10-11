@@ -7,7 +7,7 @@ import {
 
 import {
   _global,
-} from '../root/_global.js';
+} from '../common/_global.js';
 
 /**
  * canUseSet

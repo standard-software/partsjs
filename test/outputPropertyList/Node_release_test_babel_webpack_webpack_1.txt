@@ -133,6 +133,8 @@
 .canUseWeakSet:[object Function]:function
 .clone:[object Function]:function
 .cloneDeep:[object Function]:function
+.common.clone:[object Function]:function
+.common.cloneDeep:[object Function]:function
 .compare._allMatch:[object Function]:function
 .compare._allMatchAll:[object Function]:function
 .compare._allMatchSome:[object Function]:function
@@ -367,6 +369,8 @@
 .default.canUseWeakSet:[object Function]:function
 .default.clone:[object Function]:function
 .default.cloneDeep:[object Function]:function
+.default.common.clone:[object Function]:function
+.default.common.cloneDeep:[object Function]:function
 .default.compare._allMatch:[object Function]:function
 .default.compare._allMatchAll:[object Function]:function
 .default.compare._allMatchSome:[object Function]:function
@@ -968,6 +972,8 @@
 .default.parts.canUseWeakSet:[object Function]:function
 .default.parts.clone:[object Function]:function
 .default.parts.cloneDeep:[object Function]:function
+.default.parts.common.clone:[object Function]:function
+.default.parts.common.cloneDeep:[object Function]:function
 .default.parts.compare._allMatch:[object Function]:function
 .default.parts.compare._allMatchAll:[object Function]:function
 .default.parts.compare._allMatchSome:[object Function]:function
@@ -1459,8 +1465,6 @@
 .default.parts.propertyList:[object Function]:function
 .default.parts.randomInt:[object Function]:function
 .default.parts.replaceAll:[object Function]:function
-.default.parts.root.clone:[object Function]:function
-.default.parts.root.cloneDeep:[object Function]:function
 .default.parts.round:[object Function]:function
 .default.parts.sc:[object Function]:function
 .default.parts.setProp:[object Function]:function
@@ -1899,8 +1903,6 @@
 .default.propertyList:[object Function]:function
 .default.randomInt:[object Function]:function
 .default.replaceAll:[object Function]:function
-.default.root.clone:[object Function]:function
-.default.root.cloneDeep:[object Function]:function
 .default.round:[object Function]:function
 .default.sc:[object Function]:function
 .default.setProp:[object Function]:function
@@ -2816,6 +2818,8 @@
 .parts.canUseWeakSet:[object Function]:function
 .parts.clone:[object Function]:function
 .parts.cloneDeep:[object Function]:function
+.parts.common.clone:[object Function]:function
+.parts.common.cloneDeep:[object Function]:function
 .parts.compare._allMatch:[object Function]:function
 .parts.compare._allMatchAll:[object Function]:function
 .parts.compare._allMatchSome:[object Function]:function
@@ -3307,8 +3311,6 @@
 .parts.propertyList:[object Function]:function
 .parts.randomInt:[object Function]:function
 .parts.replaceAll:[object Function]:function
-.parts.root.clone:[object Function]:function
-.parts.root.cloneDeep:[object Function]:function
 .parts.round:[object Function]:function
 .parts.sc:[object Function]:function
 .parts.setProp:[object Function]:function
@@ -3747,8 +3749,6 @@
 .propertyList:[object Function]:function
 .randomInt:[object Function]:function
 .replaceAll:[object Function]:function
-.root.clone:[object Function]:function
-.root.cloneDeep:[object Function]:function
 .round:[object Function]:function
 .sc:[object Function]:function
 .setProp:[object Function]:function

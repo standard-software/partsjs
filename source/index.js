@@ -1,5 +1,5 @@
 import polyfillJs from './polyfill.js';
-import rootJs from './root/root.js';
+import commonJs from './common/common.js';
 import platformJs from './platform/platform.js';
 import typeJs from './type/type.js';
 import typeAliasJs from './type/typeAlias.js';
@@ -26,17 +26,17 @@ const { _splitCommaItems } = stringJs;
 const { _map } = arrayJs;
 
 /**
- * root
+ * common
  */
 export const {
   clone, cloneDeep,
-} = rootJs;
+} = commonJs;
 
 rootAlias = { ...rootAlias,
   clone, cloneDeep,
 };
 
-export const root = {
+export const common = {
   clone, cloneDeep,
 };
 
@@ -536,7 +536,7 @@ export const wsh = {
  */
 export const parts = {
   VERSION,
-  root,
+  common,
   platform,
   type,
   test,

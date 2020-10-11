@@ -1,4 +1,4 @@
-import { test_execute_root        } from './root/root.test.js';
+import { test_execute_common      } from './common/common.test.js';
 import { test_execute_type        } from './type/type.test.js';
 import { test_execute_syntax      } from './syntax/syntax.test.js';
 import { test_execute_test        } from './test/test.test.js';
@@ -55,7 +55,7 @@ export const test_execute_index = (parts) => {
           [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 66, 58, 1];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
-        checkEqual(countArray.shift(),  propertyCount(parts.root));
+        checkEqual(countArray.shift(),  propertyCount(parts.common));
         checkEqual(countArray.shift(),  propertyCount(parts.type));
         checkEqual(countArray.shift(),  propertyCount(parts.syntax));
         checkEqual(countArray.shift(),  propertyCount(parts.test));
@@ -98,7 +98,7 @@ export const test_execute_index = (parts) => {
             'matchFormat,' +
             'copyProperty,propertyCount,inProperty,' +
             'copyProp,propCount,inProp,' +
-            'root',
+            'common',
           ),
         );
 
@@ -153,7 +153,7 @@ export const test_execute_index = (parts) => {
   const { describe } = parts.test;
   describe('test_execute_index', () => {
 
-    test_execute_root(parts);
+    test_execute_common(parts);
     test_execute_type(parts);
     test_execute_syntax(parts);
     test_execute_test(parts);

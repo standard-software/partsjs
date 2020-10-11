@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-var */
-export const test_execute_root = (parts) => {
+export const test_execute_common = (parts) => {
   const { checkEqual, describe, it, test, testCounter } = parts.test;
-  describe('test_execute_root', () => {
+  describe('test_execute_common', () => {
 
     const {
       clone, cloneDeep,
@@ -953,5 +953,5 @@ export const test_execute_root = (parts) => {
 };
 
 export default {
-  test_execute_root,
+  test_execute_common,
 };

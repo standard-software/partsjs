@@ -330,6 +330,7 @@ You can now use the functions of the parts.js object.
   - add _group.js
 - update sort
   - add _sort.js
+- rename namespace root >> common
 
 ### 8.2.0
 #### 2020/10/10(Sat)

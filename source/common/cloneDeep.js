@@ -23,7 +23,7 @@ import {
 
 import {
   clone,
-} from '../root/clone.js';
+} from '../common/clone.js';
 
 /**
  * cloneDeep

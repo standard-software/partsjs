@@ -19,8 +19,8 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
-import {  _clone } from '../root/clone.js';
-import {  _cloneDeep } from '../root/cloneDeep.js';
+import { _clone } from '../common/clone.js';
+import { _cloneDeep } from '../common/cloneDeep.js';
 import { _unique } from '../array/_unique.js';
 import { _min } from '../array/_min.js';
 import { _max } from '../array/_max.js';
