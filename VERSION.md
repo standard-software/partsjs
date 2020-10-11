@@ -2,6 +2,31 @@
 
 ## Version
 
+### 8.3.0
+#### 2020/10/11(Sun)
+- update min/max
+  - add __min / __max
+  - support args func / detail
+  - support full object parameter
+- update unique
+  - defalt func parameter rename
+  - update args error
+  - no publish __unique
+  - add _unique.js __unique.js
+- update group
+  - defalt func parameter rename
+  - add _group.js
+- update sort
+  - add _sort.js
+- rename namespace root >> common
+- move functionValue
+  - namespace syntax >> common
+- publish _clone / _cloneDeep
+- update valueToNumberDefault / valueToIntegerDefault
+  - support full object parameter
+- add returnValueFunction.js
+  - update group / max / min / unique
+
 ### 8.2.0
 #### 2020/10/10(Sat)
 - update split

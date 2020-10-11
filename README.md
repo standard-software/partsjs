@@ -421,21 +421,5 @@ You can now use the functions of the parts.js object.
   - export structural changes
   - publish private function
 
-### 7.6.0
-#### 2020/09/07(Mon)
-- update getProperty.js
-  - rename _getProperyBase >> _getProperty
-- update split
-- add __includes.js from includes.js
-- update split throw error
-- add splitCommaItems / splitDotItems
-- update copyProperty 
-  - args propertyArray >> propertyNames
-  - support full object parameter
-  - bugfix return value
-- update fixProperty
-- update inProperty
-- update getProperty
-
 ### More Info
 [VERSION.md](./VERSION.md)

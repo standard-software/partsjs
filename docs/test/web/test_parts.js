@@ -113,7 +113,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_index = void 0;
 
-var _rootTest = __webpack_require__(2);
+var _commonTest = __webpack_require__(2);
 
 var _typeTest = __webpack_require__(3);
 
@@ -184,10 +184,10 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [388, 19, 2, 259, 14, 11, 44, 35, 15, 86, 37, 67, 58, 1];
+        var countArray = [388, 19, 6, 259, 13, 11, 44, 35, 15, 86, 37, 66, 58, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
-        checkEqual(countArray.shift(), propertyCount(parts.root));
+        checkEqual(countArray.shift(), propertyCount(parts.common));
         checkEqual(countArray.shift(), propertyCount(parts.type));
         checkEqual(countArray.shift(), propertyCount(parts.syntax));
         checkEqual(countArray.shift(), propertyCount(parts.test));
@@ -202,7 +202,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
       });
       it('test_execute_nameSpace 2', function () {
-        checkEqual(true, inProperty(parts, 'isUndefinedAll,isNotNullAll,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'root'));
+        checkEqual(true, inProperty(parts, 'isUndefinedAll,isNotNullAll,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'common'));
         checkEqual(false, inProperty(parts, 'abc,' + ''));
       });
     });
@@ -257,7 +257,7 @@ var test_execute_index = function test_execute_index(parts) {
 
   var describe = parts.test.describe;
   describe('test_execute_index', function () {
-    (0, _rootTest.test_execute_root)(parts);
+    (0, _commonTest.test_execute_common)(parts);
     (0, _typeTest.test_execute_type)(parts);
     (0, _syntaxTest.test_execute_syntax)(parts);
     (0, _testTest.test_execute_test)(parts);
@@ -292,7 +292,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.test_execute_root = void 0;
+exports["default"] = exports.test_execute_common = void 0;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -309,14 +309,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
-var test_execute_root = function test_execute_root(parts) {
+var test_execute_common = function test_execute_common(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
       describe = _parts$test.describe,
       it = _parts$test.it,
       test = _parts$test.test,
       testCounter = _parts$test.testCounter;
-  describe('test_execute_root', function () {
+  describe('test_execute_common', function () {
     var clone = parts.clone,
         cloneDeep = parts.cloneDeep;
 
@@ -1220,9 +1220,9 @@ var test_execute_root = function test_execute_root(parts) {
   });
 };
 
-exports.test_execute_root = test_execute_root;
+exports.test_execute_common = test_execute_common;
 var _default = {
-  test_execute_root: test_execute_root
+  test_execute_common: test_execute_common
 };
 exports["default"] = _default;
 
@@ -7905,7 +7905,29 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToNumber(NaN)); // Default
 
         checkEqual(null, valueToNumberDefault('', null));
-        checkEqual(NaN, valueToNumberDefault(NaN, null)); // Other
+        checkEqual(null, valueToNumberDefault({
+          value: '',
+          defaultValue: null
+        }));
+        checkEqual(null, valueToNumberDefault('', {
+          defaultValue: null
+        }));
+        checkEqual(1.5, valueToNumberDefault('1.5', null));
+        checkEqual(1.5, valueToNumberDefault({
+          value: '1.5',
+          defaultValue: null
+        }));
+        checkEqual(1.5, valueToNumberDefault('1.5', {
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToNumberDefault(NaN, null));
+        checkEqual(NaN, valueToNumberDefault({
+          value: NaN,
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToNumberDefault(NaN, {
+          defaultValue: null
+        })); // Other
 
         checkEqual(NaN, valueToNumber(null));
         checkEqual(NaN, valueToNumber(undefined));
@@ -8379,7 +8401,37 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToInteger(NaN)); // Default
 
         checkEqual(null, valueToIntegerDefault('', null));
-        checkEqual(NaN, valueToIntegerDefault(NaN, null)); // Other
+        checkEqual(null, valueToIntegerDefault({
+          value: '',
+          defaultValue: null
+        }));
+        checkEqual(null, valueToIntegerDefault('', {
+          defaultValue: null
+        }));
+        checkEqual(2, valueToIntegerDefault('1.5', null));
+        checkEqual(2, valueToIntegerDefault({
+          value: '1.5',
+          defaultValue: null
+        }));
+        checkEqual(2, valueToIntegerDefault('1.5', {
+          defaultValue: null
+        }));
+        checkEqual(1, valueToIntegerDefault('1', null));
+        checkEqual(1, valueToIntegerDefault({
+          value: '1',
+          defaultValue: null
+        }));
+        checkEqual(1, valueToIntegerDefault('1', {
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToIntegerDefault(NaN, null));
+        checkEqual(NaN, valueToIntegerDefault({
+          value: NaN,
+          defaultValue: null
+        }));
+        checkEqual(NaN, valueToIntegerDefault(NaN, {
+          defaultValue: null
+        })); // Other
 
         checkEqual(NaN, valueToInteger(null));
         checkEqual(NaN, valueToInteger(undefined));
@@ -12234,6 +12286,87 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           array.min([1,, 3]);
+        })); // func
+
+        checkEqual(-5, array.min([5, 4, 3], function (v) {
+          return -1 * v;
+        }));
+        checkEqual(1, array.min([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }));
+        checkEqual({
+          index: 0,
+          element: {
+            num: 1
+          },
+          value: 1
+        }, array.min([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }, true)); // func exception
+
+        checkEqual(true, isThrown(function () {
+          array.min([{
+            num: 1
+          }, {
+            num: '2'
+          }, {
+            num: 3
+          }], function (v) {
+            return v.num;
+          }, true);
+        })); // object parameter
+
+        checkEqual(3, array.min({
+          array: [5, 4, 3]
+        }));
+        checkEqual(-5, array.min({
+          array: [5, 4, 3],
+          func: function func(v) {
+            return -1 * v;
+          }
+        }));
+        checkEqual(1, array.min({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          }
+        }));
+        checkEqual({
+          index: 0,
+          element: {
+            num: 1
+          },
+          value: 1
+        }, array.min({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          },
+          detail: true
         }));
       });
     };
@@ -12265,6 +12398,87 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           array.max([1,, 3]);
+        })); // func
+
+        checkEqual(-3, array.max([5, 4, 3], function (v) {
+          return -1 * v;
+        }));
+        checkEqual(3, array.max([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }));
+        checkEqual({
+          index: 2,
+          element: {
+            num: 3
+          },
+          value: 3
+        }, array.max([{
+          num: 1
+        }, {
+          num: 2
+        }, {
+          num: 3
+        }], function (v) {
+          return v.num;
+        }, true)); // func exception
+
+        checkEqual(true, isThrown(function () {
+          array.max([{
+            num: 1
+          }, {
+            num: '2'
+          }, {
+            num: 3
+          }], function (v) {
+            return v.num;
+          }, true);
+        })); // object parameter
+
+        checkEqual(5, array.max({
+          array: [5, 4, 3]
+        }));
+        checkEqual(-3, array.max({
+          array: [5, 4, 3],
+          func: function func(v) {
+            return -1 * v;
+          }
+        }));
+        checkEqual(3, array.max({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          }
+        }));
+        checkEqual({
+          index: 2,
+          element: {
+            num: 3
+          },
+          value: 3
+        }, array.max({
+          array: [{
+            num: 1
+          }, {
+            num: 2
+          }, {
+            num: 3
+          }],
+          func: function func(v) {
+            return v.num;
+          },
+          detail: true
         }));
       });
     };
