@@ -78,7 +78,7 @@ console.log(
 ### web
 ```
 // index.js
-import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v6.0.0/source_code/index.js';
+import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v8.3.0/source/index.js';
 
 console.log(
   'parts version is ', parts.VERSION
@@ -121,7 +121,7 @@ You can now use the functions of the parts.js object.
   <meta charset="UTF-8">
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@8.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@8.3.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>
@@ -313,6 +313,10 @@ You can now use the functions of the parts.js object.
 
 
 ## Version
+
+### 8.4.0
+#### 2020/10/12(Mon)
+- update url version info
 
 ### 8.3.0
 #### 2020/10/11(Sun)
