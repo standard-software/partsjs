@@ -317,6 +317,8 @@ You can now use the functions of the parts.js object.
 ### 8.4.0
 #### 2020/10/12(Mon)
 - update url version info
+- update _propertyList
+  - args add func
 
 ### 8.3.0
 #### 2020/10/11(Sun)
