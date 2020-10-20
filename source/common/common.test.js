@@ -6,7 +6,15 @@ export const test_execute_common = (parts) => {
 
     const {
       clone, cloneDeep,
+      merge,
+      isUndefined,
     } = parts;
+
+    const {
+      checkEqual, checkCompare,
+      isThrown, isThrownException,
+      testCounter,
+    } = parts.test;
 
     const test_clone_object = () =>{
       it('test_clone_object', () => {
@@ -927,6 +935,147 @@ export const test_execute_common = (parts) => {
       });
     };
 
+    const test_merge = () => {
+      it('test_cloneDeep_CircularReference', () => {
+
+        // object
+        const testObjectArray = [
+          { key1: 100,  key2: 200,  key3: 300},
+          { key1: 100,  key2: 150,  key3: 100},
+          { key1: 100,              key3: 200, key4: 100},
+        ];
+        checkEqual(
+          {key1: 100, key2: 150, key3: 200, key4: 100},
+          merge(testObjectArray),
+        );
+        checkEqual(
+          {key1: 300, key2: 350, key3: 600, key4: 100},
+          merge(
+            testObjectArray,
+            (v, t) => t + v,
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
+          ),
+        );
+        checkEqual(
+          {key1: 300, key2: 350, key3: 600, key4: 100},
+          merge(
+            testObjectArray,
+            (v, t) => isUndefined(t) ? v : t + v,
+          ),
+        );
+        checkEqual(
+          {key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100]},
+          merge(
+            testObjectArray,
+            (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
+          ),
+        );
+
+        // array
+        const testArrayArray = [
+          [100, 200, 300],
+          [100, 150, 100],
+          [100,    , 200, 100],
+        ];
+        checkEqual(
+          [100, 150, 200, 100],
+          merge(testArrayArray),
+        );
+        checkEqual(
+          [300, 350, 600, 100],
+          merge(
+            testArrayArray,
+            (v, t) => t + v,
+            [0, 0, 0, 0],
+          ),
+        );
+        checkEqual(
+          [300, 350, 600, 100],
+          merge(
+            testArrayArray,
+            (v, t) => isUndefined(t) ? v : t + v,
+          ),
+        );
+        checkEqual(
+          [[3, 300], [2, 350], [3, 600], [1, 100]],
+          merge(
+            testArrayArray,
+            (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
+          ),
+        );
+
+        // object parameter
+        checkEqual(
+          {key1: 300, key2: 350, key3: 600, key4: 100},
+          merge(
+            {
+              dataArray: testObjectArray,
+              func: (v, t) => t + v,
+              target: { key1: 0, key2: 0, key3: 0, key4: 0 },
+            },
+          ),
+        );
+        checkEqual(
+          {key1: 300, key2: 350, key3: 600, key4: 100},
+          merge(
+            testObjectArray,
+            {
+              func: (v, t) => t + v,
+              target: { key1: 0, key2: 0, key3: 0, key4: 0 },
+            },
+          ),
+        );
+        checkEqual(
+          {key1: 300, key2: 350, key3: 600, key4: 100},
+          merge(
+            testObjectArray,
+            (v, t) => t + v,
+            {
+              target: { key1: 0, key2: 0, key3: 0, key4: 0 },
+            },
+          ),
+        );
+
+        // exception
+        checkEqual({ key1: 0, key2: 0, key3: 0, key4: 0 },
+          merge(
+            [],
+            (v, t) => isUndefined(t) ? v : t + v,
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
+          ),
+        );
+        checkEqual(false, isThrown(() => {
+          merge(
+            [],
+            (v, t) => isUndefined(t) ? v : t + v,
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
+          );
+        }));
+        checkEqual(true, isThrown(() => {
+          merge(
+            ['123'],
+            (v, t) => isUndefined(t) ? v : t + v,
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
+          );
+        }));
+        checkEqual(true, isThrown(() => {
+          merge(
+            [],
+            123,
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
+          );
+        }));
+        checkEqual(true, isThrown(() => {
+          merge(
+            [],
+            (v, t) => isUndefined(t) ? v : t + v,
+            '123',
+          );
+        }));
+
+      });
+    };
+
     test_clone_object();
     test_clone_array();
     test_clone_date();
@@ -948,6 +1097,8 @@ export const test_execute_common = (parts) => {
     test_cloneDeep_set();
 
     test_cloneDeep_CircularReference();
+
+    test_merge();
 
   });
 };

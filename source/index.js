@@ -29,13 +29,17 @@ const { _map } = arrayJs;
  * common
  */
 export const {
-  clone, cloneDeep,
+  clone,
+  cloneDeep,
   functionValue,
+  merge,
 } = commonJs;
 
 rootAlias = { ...rootAlias,
-  clone, cloneDeep,
+  clone,
+  cloneDeep,
   functionValue,
+  merge,
 };
 
 export const common = {
