@@ -1,9 +1,9 @@
 /**
  * group
  */
-import { returnValueFunction } from '../common/returnValueFunction.js';
+import { __returnValueFunction } from '../common/__returnValueFunction.js';
 
-export const _group = (array, func = returnValueFunction, detail = false) => {
+export const _group = (array, func = __returnValueFunction, detail = false) => {
   const index = [];
   const result = [];
   array.forEach(v => {

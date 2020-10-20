@@ -315,10 +315,12 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.4.0
-#### 2020/10/12(Mon)
+#### 2020/10/20(Tue)
 - update url version info
 - update _propertyList
   - args add func
+- rename
+  - returnValueFunction >> __returnValueFunction
 
 ### 8.3.0
 #### 2020/10/11(Sun)

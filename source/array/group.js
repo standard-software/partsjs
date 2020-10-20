@@ -10,17 +10,17 @@ import {
   isExceptionArray,
 } from '../type/type.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { returnValueFunction } from '../common/returnValueFunction.js';
+import { __returnValueFunction } from '../common/__returnValueFunction.js';
 import { _group } from '../array/_group.js';
 
 /**
  * group
  */
-export const group = (array, func = returnValueFunction, detail = false) => {
+export const group = (array, func = __returnValueFunction, detail = false) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = returnValueFunction, detail = false } = array);
+    ({ array, func = __returnValueFunction, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = returnValueFunction, detail = false } = func);
+    ({ func = __returnValueFunction, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }
