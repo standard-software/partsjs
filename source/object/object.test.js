@@ -15,7 +15,9 @@ export const test_execute_object = (parts) => {
       getProperty, setProperty,
       isEmptyObjectAll,
       isObjectParameter,
-      objectEntries, objectKeys, objectValues,
+      objectEntries,
+      objectFromEntries,
+      objectKeys, objectValues,
       has, hasOwn, hasPrototype,
       propertyList,
     } = parts.object;
@@ -876,28 +878,63 @@ export const test_execute_object = (parts) => {
           return;
         }
 
-        const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
-        const object1 = {a:'1', b:'2', c:'3'};
-        checkEqual(array1, Object.entries(object1));
+        checkEqual(
+          [['a', '1'], ['b', '2'], ['c', '3']],
+          Object.entries({a:'1', b:'2', c:'3'}),
+        );
 
-        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], Object.entries(['a', 'b', 'c']));
+        checkEqual(
+          [['0', 'a'], ['1', 'b'], ['2', 'c']],
+          Object.entries(['a', 'b', 'c']),
+        );
       });
     };
 
     const test_objectEntries = () => {
       it('test_objectEntries', () => {
 
-        const array1 = [['a', '1'], ['b', '2'], ['c', '3']];
-        const object1 = {a:'1', b:'2', c:'3'};
-        checkEqual(array1, objectEntries(object1));
+        checkEqual(
+          [['a', '1'], ['b', '2'], ['c', '3']],
+          objectEntries({a:'1', b:'2', c:'3'}),
+        );
 
-        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c']));
+        // array ok
+        checkEqual(
+          [['0', 'a'], ['1', 'b'], ['2', 'c']],
+          objectEntries(['a', 'b', 'c']),
+        );
 
-        // only object type
+        // exception
         checkEqual(true, isThrown(() => objectEntries('ABC')));
 
-        // // object parameter
-        // checkEqual(array1, objectEntries({ object: object1 }));
+      });
+    };
+
+    const test_objectFromEntries = () => {
+      it('test_objectFromEntries', () => {
+
+        checkEqual(
+          {a:'1', b:'2', c:'3'},
+          objectFromEntries([['a', '1'], ['b', '2'], ['c', '3']]),
+        );
+        checkEqual(
+          {},
+          objectFromEntries([]),
+        );
+
+        checkEqual(
+          { '0': 'a', '1': 'b', '2': 'c' },
+          objectFromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']]),
+        );
+
+        // exception
+        checkEqual(true,  isThrown(() => objectFromEntries('ABC')));
+        checkEqual(false, isThrown(() => objectFromEntries([])));
+        checkEqual(false, isThrown(() => objectFromEntries([['a', 1]])));
+        checkEqual(true,  isThrown(() => objectFromEntries([['a', 1], []])));
+        checkEqual(true,  isThrown(() => objectFromEntries([['a', 1], ['b']])));
+        checkEqual(false, isThrown(() => objectFromEntries([['a', 1], ['b', 2]])));
+        checkEqual(true,  isThrown(() => objectFromEntries([['a', 1], ['b', 2, 3]])));
 
       });
     };
@@ -973,6 +1010,7 @@ export const test_execute_object = (parts) => {
 
     test_ObjectEntries_standard();
     test_objectEntries();
+    test_objectFromEntries();
     test_objectKeys();
     test_objectValues();
 

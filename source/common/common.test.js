@@ -16,6 +16,11 @@ export const test_execute_common = (parts) => {
       testCounter,
     } = parts.test;
 
+    const {
+      objectEntries,
+      objectFromEntries,
+    } = parts.object;
+
     const test_clone_object = () =>{
       it('test_clone_object', () => {
 
@@ -969,6 +974,13 @@ export const test_execute_common = (parts) => {
             testObjectArray,
             (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
           ),
+        );
+        checkEqual(
+          {key1: 100, key2: 175, key3: 200, key4: 100},
+          objectFromEntries(objectEntries(merge(
+            testObjectArray,
+            (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
+          )).map(([key, value]) => [key, value[1] / value[0]])),
         );
 
         // array

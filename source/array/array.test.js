@@ -23,7 +23,7 @@ export const test_execute_array = (parts) => {
       isFirst, isLast, isBothEnds,
       subIndex, subLength,
       subFirst, subLast,
-      arrayToIndexValueArray,
+      arrayEntries,
     } = parts.array;
 
     const {
@@ -2706,24 +2706,23 @@ export const test_execute_array = (parts) => {
           return result;
         };
 
-        const array1 = ['a', 'b', 'c'];
-        const array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
-        checkEqual(array2, arrayEntries(array1));
+        checkEqual(
+          [[0, 'a'], [1, 'b'], [2, 'c']],
+          arrayEntries(['a', 'b', 'c'])
+        );
       });
     };
 
-    const test_arrayToIndexValueArray = () => {
+    const test_arrayEntries = () => {
       it('test_arrayToIndexValueArray', () => {
 
-        const array1 = ['a', 'b', 'c'];
-        const array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
-        checkEqual(array2, arrayToIndexValueArray(array1));
+        checkEqual(
+          [[0, 'a'], [1, 'b'], [2, 'c']],
+          arrayEntries(['a', 'b', 'c'])
+        );
 
         // only array type
-        checkEqual(true, isThrown(() => objectToKeyValueArray({})));
-
-        // // object parameter
-        // checkEqual(array2, arrayToIndexValueArray({ array: array1 }));
+        checkEqual(true, isThrown(() => arrayEntries({})));
 
       });
     };
@@ -2802,7 +2801,7 @@ export const test_execute_array = (parts) => {
     test_operation_sortDictionary();
 
     test_ArrayEntries_standard();
-    test_arrayToIndexValueArray();
+    test_arrayEntries();
   });
 };
 

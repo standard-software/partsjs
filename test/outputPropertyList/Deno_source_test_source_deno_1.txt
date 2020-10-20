@@ -572,6 +572,7 @@
 .object._inProperty:[object Function]:function
 .object._isObjectParameter:[object Function]:function
 .object._objectEntries:[object Function]:function
+.object._objectFromEntries:[object Function]:function
 .object._objectKeys:[object Function]:function
 .object._objectValues:[object Function]:function
 .object._propertyCount:[object Function]:function
@@ -590,6 +591,8 @@
 .object.inProperty:[object Function]:function
 .object.isObjectParameter:[object Function]:function
 .object.objectEntries:[object Function]:function
+.object.objectFromEntries:[object Function]:function
+.object.objectFromKeyValueArray:[object Function]:function
 .object.objectKeys:[object Function]:function
 .object.objectToKeyArray:[object Function]:function
 .object.objectToKeyValueArray:[object Function]:function
@@ -601,6 +604,8 @@
 .object.setProp:[object Function]:function
 .object.setProperty:[object Function]:function
 .objectEntries:[object Function]:function
+.objectFromEntries:[object Function]:function
+.objectFromKeyValueArray:[object Function]:function
 .objectKeys:[object Function]:function
 .objectToKeyArray:[object Function]:function
 .objectToKeyValueArray:[object Function]:function
@@ -1181,6 +1186,7 @@
 .parts.object._inProperty:[object Function]:function
 .parts.object._isObjectParameter:[object Function]:function
 .parts.object._objectEntries:[object Function]:function
+.parts.object._objectFromEntries:[object Function]:function
 .parts.object._objectKeys:[object Function]:function
 .parts.object._objectValues:[object Function]:function
 .parts.object._propertyCount:[object Function]:function
@@ -1199,6 +1205,8 @@
 .parts.object.inProperty:[object Function]:function
 .parts.object.isObjectParameter:[object Function]:function
 .parts.object.objectEntries:[object Function]:function
+.parts.object.objectFromEntries:[object Function]:function
+.parts.object.objectFromKeyValueArray:[object Function]:function
 .parts.object.objectKeys:[object Function]:function
 .parts.object.objectToKeyArray:[object Function]:function
 .parts.object.objectToKeyValueArray:[object Function]:function
@@ -1210,6 +1218,8 @@
 .parts.object.setProp:[object Function]:function
 .parts.object.setProperty:[object Function]:function
 .parts.objectEntries:[object Function]:function
+.parts.objectFromEntries:[object Function]:function
+.parts.objectFromKeyValueArray:[object Function]:function
 .parts.objectKeys:[object Function]:function
 .parts.objectToKeyArray:[object Function]:function
 .parts.objectToKeyValueArray:[object Function]:function

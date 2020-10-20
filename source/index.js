@@ -415,6 +415,7 @@ export const {
   propertyCount,
   propertyList,
   objectEntries,
+  objectFromEntries,
   objectKeys,
   objectValues,
   hasOwn,
@@ -423,6 +424,7 @@ export const {
 
   // Another name
   objectToKeyValueArray,
+  objectFromKeyValueArray,
   objectToKeyArray,
   objectToValueArray,
 
@@ -444,6 +446,7 @@ rootAlias = { ...rootAlias,
   propertyCount,
   propertyList,
   objectEntries,
+  objectFromEntries,
   objectKeys,
   objectValues,
   hasOwn,
@@ -452,6 +455,7 @@ rootAlias = { ...rootAlias,
 
   // Another name
   objectToKeyValueArray,
+  objectFromKeyValueArray,
   objectToKeyArray,
   objectToValueArray,
 

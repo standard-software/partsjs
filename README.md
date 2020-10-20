@@ -323,6 +323,7 @@ You can now use the functions of the parts.js object.
   - returnValueFunction >> __returnValueFunction
 - update objectEntries arrayEntries
   - delete object parameter
+- add _objectFromEntries.js objectFromEntries.js
 - add _merge.js merge.js
 
 ### 8.3.0

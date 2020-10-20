@@ -3,6 +3,8 @@ import isObjectParameterJs from './isObjectParameter.js';
 import inPropertyJs from './inProperty.js';
 import fixPropertyJs from './fixProperty.js';
 import objectEntriesJs from './objectEntries.js';
+import _objectFromEntriesJs from './_objectFromEntries.js';
+import objectFromEntriesJs from './objectFromEntries.js';
 import objectKeysJs from './objectKeys.js';
 import objectValuesJs from './objectValues.js';
 import getPropertyJs from './getProperty.js';
@@ -19,6 +21,8 @@ const objectJs = {
   ...inPropertyJs,
   ...fixPropertyJs,
   ...objectEntriesJs,
+  ..._objectFromEntriesJs,
+  ...objectFromEntriesJs,
   ...objectKeysJs,
   ...objectValuesJs,
   ...getPropertyJs,
@@ -40,6 +44,7 @@ export const {
   _propertyCount,
   _propertyList,
   _objectEntries,
+  _objectFromEntries,
   _objectKeys,
   _objectValues,
   _hasOwn,
@@ -55,6 +60,7 @@ export const {
   propertyCount,
   propertyList,
   objectEntries,
+  objectFromEntries,
   objectKeys,
   objectValues,
   hasOwn,
@@ -63,6 +69,7 @@ export const {
 
   // Another name
   objectToKeyValueArray,
+  objectFromKeyValueArray,
   objectToKeyArray,
   objectToValueArray,
 
@@ -86,6 +93,7 @@ export default {
   _propertyCount,
   _propertyList,
   _objectEntries,
+  _objectFromEntries,
   _objectKeys,
   _objectValues,
   _hasOwn,
@@ -102,6 +110,7 @@ export default {
   propertyCount,
   propertyList,
   objectEntries,
+  objectFromEntries,
   objectKeys,
   objectValues,
   hasOwn,
@@ -110,6 +119,7 @@ export default {
 
   // Another name
   objectToKeyValueArray,
+  objectFromKeyValueArray,
   objectToKeyArray,
   objectToValueArray,
 
