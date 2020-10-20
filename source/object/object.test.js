@@ -896,8 +896,8 @@ export const test_execute_object = (parts) => {
         // only object type
         checkEqual(true, isThrown(() => objectEntries('ABC')));
 
-        // object parameter
-        checkEqual(array1, objectEntries({ object: object1 }));
+        // // object parameter
+        // checkEqual(array1, objectEntries({ object: object1 }));
 
       });
     };

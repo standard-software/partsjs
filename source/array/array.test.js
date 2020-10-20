@@ -2722,8 +2722,8 @@ export const test_execute_array = (parts) => {
         // only array type
         checkEqual(true, isThrown(() => objectToKeyValueArray({})));
 
-        // object parameter
-        checkEqual(array2, arrayToIndexValueArray({ array: array1 }));
+        // // object parameter
+        // checkEqual(array2, arrayToIndexValueArray({ array: array1 }));
 
       });
     };

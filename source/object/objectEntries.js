@@ -32,10 +32,6 @@ export const _objectEntries = (object) => {
 };
 
 export const objectEntries = (object) => {
-  if (isObjectParameter(object, 'object')) {
-    ({ object } = object);
-  }
-
   if (!isObjectLike(object)) {
     throw new TypeError(
       'objectEntries args(object) is not object',

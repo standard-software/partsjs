@@ -30,10 +30,6 @@ export const _arrayEntries = (array) => {
 };
 
 export const arrayEntries = (array) => {
-  if (isObjectParameter(array, 'array')) {
-    ({ array } = array);
-  }
-
   if (!isArray(array)) {
     throw new TypeError(
       'arrayEntries args(array) is not array',
