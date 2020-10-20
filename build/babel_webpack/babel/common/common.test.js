@@ -5,6 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_common = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -29,7 +37,18 @@ var test_execute_common = function test_execute_common(parts) {
       testCounter = _parts$test.testCounter;
   describe('test_execute_common', function () {
     var clone = parts.clone,
-        cloneDeep = parts.cloneDeep;
+        cloneDeep = parts.cloneDeep,
+        merge = parts.merge,
+        isUndefined = parts.isUndefined;
+    var _parts$test2 = parts.test,
+        checkEqual = _parts$test2.checkEqual,
+        checkCompare = _parts$test2.checkCompare,
+        isThrown = _parts$test2.isThrown,
+        isThrownException = _parts$test2.isThrownException,
+        testCounter = _parts$test2.testCounter;
+    var _parts$object = parts.object,
+        objectEntries = _parts$object.objectEntries,
+        objectFromEntries = _parts$object.objectFromEntries;
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
@@ -910,6 +929,182 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
+    var test_merge = function test_merge() {
+      it('test_cloneDeep_CircularReference', function () {
+        // object
+        var testObjectArray = [{
+          key1: 100,
+          key2: 200,
+          key3: 300
+        }, {
+          key1: 100,
+          key2: 150,
+          key3: 100
+        }, {
+          key1: 100,
+          key3: 200,
+          key4: 100
+        }];
+        checkEqual({
+          key1: 100,
+          key2: 150,
+          key3: 200,
+          key4: 100
+        }, merge(testObjectArray));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, function (v, t) {
+          return t + v;
+        }, {
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, function (v, t) {
+          return isUndefined(t) ? v : t + v;
+        }));
+        checkEqual({
+          key1: [3, 300],
+          key2: [2, 350],
+          key3: [3, 600],
+          key4: [1, 100]
+        }, merge(testObjectArray, function (v, t) {
+          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        }));
+        checkEqual({
+          key1: 100,
+          key2: 175,
+          key3: 200,
+          key4: 100
+        }, objectFromEntries(objectEntries(merge(testObjectArray, function (v, t) {
+          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        })).map(function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 2),
+              key = _ref2[0],
+              value = _ref2[1];
+
+          return [key, value[1] / value[0]];
+        }))); // array
+
+        var testArrayArray = [[100, 200, 300], [100, 150, 100], [100,, 200, 100]];
+        checkEqual([100, 150, 200, 100], merge(testArrayArray));
+        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
+          return t + v;
+        }, [0, 0, 0, 0]));
+        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
+          return isUndefined(t) ? v : t + v;
+        }));
+        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge(testArrayArray, function (v, t) {
+          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        })); // object parameter
+
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          dataArray: testObjectArray,
+          func: function func(v, t) {
+            return t + v;
+          },
+          target: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, {
+          func: function func(v, t) {
+            return t + v;
+          },
+          target: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, function (v, t) {
+          return t + v;
+        }, {
+          target: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }
+        })); // exception
+
+        checkEqual({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, merge([], function (v, t) {
+          return isUndefined(t) ? v : t + v;
+        }, {
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }));
+        checkEqual(false, isThrown(function () {
+          merge([], function (v, t) {
+            return isUndefined(t) ? v : t + v;
+          }, {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge(['123'], function (v, t) {
+            return isUndefined(t) ? v : t + v;
+          }, {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge([], 123, {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge([], function (v, t) {
+            return isUndefined(t) ? v : t + v;
+          }, '123');
+        }));
+      });
+    };
+
     test_clone_object();
     test_clone_array();
     test_clone_date();
@@ -928,6 +1123,7 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_map();
     test_cloneDeep_set();
     test_cloneDeep_CircularReference();
+    test_merge();
   });
 };
 

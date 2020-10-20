@@ -27,11 +27,6 @@ var _arrayEntries = function _arrayEntries(array) {
 exports._arrayEntries = _arrayEntries;
 
 var arrayEntries = function arrayEntries(array) {
-  if ((0, _isObjectParameter.isObjectParameter)(array, 'array')) {
-    var _array = array;
-    array = _array.array;
-  }
-
   if (!(0, _type.isArray)(array)) {
     throw new TypeError('arrayEntries args(array) is not array');
   }

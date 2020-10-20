@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.isObjectParameter = exports._has = exports._hasPrototype = exports._hasOwn = exports._objectValues = exports._objectKeys = exports._objectEntries = exports._propertyList = exports._propertyCount = exports._fixProperty = exports._inProperty = exports._setProperty = exports._getProperty = exports._copyProperty = exports._isObjectParameter = void 0;
+exports["default"] = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.isObjectParameter = exports._has = exports._hasPrototype = exports._hasOwn = exports._objectValues = exports._objectKeys = exports._objectFromEntries = exports._objectEntries = exports._propertyList = exports._propertyCount = exports._fixProperty = exports._inProperty = exports._setProperty = exports._getProperty = exports._copyProperty = exports._isObjectParameter = void 0;
 
 var _object_common = _interopRequireDefault(require("./object_common.js"));
 
@@ -14,6 +14,10 @@ var _inProperty2 = _interopRequireDefault(require("./inProperty.js"));
 var _fixProperty2 = _interopRequireDefault(require("./fixProperty.js"));
 
 var _objectEntries2 = _interopRequireDefault(require("./objectEntries.js"));
+
+var _objectFromEntries2 = _interopRequireDefault(require("./_objectFromEntries.js"));
+
+var _objectFromEntries3 = _interopRequireDefault(require("./objectFromEntries.js"));
 
 var _objectKeys2 = _interopRequireDefault(require("./objectKeys.js"));
 
@@ -41,7 +45,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var objectJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _object_common["default"]), _isObjectParameter2["default"]), _inProperty2["default"]), _fixProperty2["default"]), _objectEntries2["default"]), _objectKeys2["default"]), _objectValues2["default"]), _getProperty2["default"]), _hasOwn2["default"]), _hasOwn3["default"]), _has2["default"]), _propertyCount2["default"]), _propertyCount3["default"]), _propertyList2["default"]);
+var objectJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _object_common["default"]), _isObjectParameter2["default"]), _inProperty2["default"]), _fixProperty2["default"]), _objectEntries2["default"]), _objectFromEntries2["default"]), _objectFromEntries3["default"]), _objectKeys2["default"]), _objectValues2["default"]), _getProperty2["default"]), _hasOwn2["default"]), _hasOwn3["default"]), _has2["default"]), _propertyCount2["default"]), _propertyCount3["default"]), _propertyList2["default"]);
 
 var _isObjectParameter = objectJs._isObjectParameter,
     _copyProperty = objectJs._copyProperty,
@@ -52,6 +56,7 @@ var _isObjectParameter = objectJs._isObjectParameter,
     _propertyCount = objectJs._propertyCount,
     _propertyList = objectJs._propertyList,
     _objectEntries = objectJs._objectEntries,
+    _objectFromEntries = objectJs._objectFromEntries,
     _objectKeys = objectJs._objectKeys,
     _objectValues = objectJs._objectValues,
     _hasOwn = objectJs._hasOwn,
@@ -66,12 +71,14 @@ var _isObjectParameter = objectJs._isObjectParameter,
     propertyCount = objectJs.propertyCount,
     propertyList = objectJs.propertyList,
     objectEntries = objectJs.objectEntries,
+    objectFromEntries = objectJs.objectFromEntries,
     objectKeys = objectJs.objectKeys,
     objectValues = objectJs.objectValues,
     hasOwn = objectJs.hasOwn,
     hasPrototype = objectJs.hasPrototype,
     has = objectJs.has,
     objectToKeyValueArray = objectJs.objectToKeyValueArray,
+    objectFromKeyValueArray = objectJs.objectFromKeyValueArray,
     objectToKeyArray = objectJs.objectToKeyArray,
     objectToValueArray = objectJs.objectToValueArray,
     copyProp = objectJs.copyProp,
@@ -88,12 +95,14 @@ exports.getProp = getProp;
 exports.copyProp = copyProp;
 exports.objectToValueArray = objectToValueArray;
 exports.objectToKeyArray = objectToKeyArray;
+exports.objectFromKeyValueArray = objectFromKeyValueArray;
 exports.objectToKeyValueArray = objectToKeyValueArray;
 exports.has = has;
 exports.hasPrototype = hasPrototype;
 exports.hasOwn = hasOwn;
 exports.objectValues = objectValues;
 exports.objectKeys = objectKeys;
+exports.objectFromEntries = objectFromEntries;
 exports.objectEntries = objectEntries;
 exports.propertyList = propertyList;
 exports.propertyCount = propertyCount;
@@ -108,6 +117,7 @@ exports._hasPrototype = _hasPrototype;
 exports._hasOwn = _hasOwn;
 exports._objectValues = _objectValues;
 exports._objectKeys = _objectKeys;
+exports._objectFromEntries = _objectFromEntries;
 exports._objectEntries = _objectEntries;
 exports._propertyList = _propertyList;
 exports._propertyCount = _propertyCount;
@@ -127,6 +137,7 @@ var _default = {
   _propertyCount: _propertyCount,
   _propertyList: _propertyList,
   _objectEntries: _objectEntries,
+  _objectFromEntries: _objectFromEntries,
   _objectKeys: _objectKeys,
   _objectValues: _objectValues,
   _hasOwn: _hasOwn,
@@ -141,6 +152,7 @@ var _default = {
   propertyCount: propertyCount,
   propertyList: propertyList,
   objectEntries: objectEntries,
+  objectFromEntries: objectFromEntries,
   objectKeys: objectKeys,
   objectValues: objectValues,
   hasOwn: hasOwn,
@@ -148,6 +160,7 @@ var _default = {
   has: has,
   // Another name
   objectToKeyValueArray: objectToKeyValueArray,
+  objectFromKeyValueArray: objectFromKeyValueArray,
   objectToKeyArray: objectToKeyArray,
   objectToValueArray: objectToValueArray,
   // Short name

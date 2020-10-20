@@ -29,11 +29,6 @@ var _objectEntries = function _objectEntries(object) {
 exports._objectEntries = _objectEntries;
 
 var objectEntries = function objectEntries(object) {
-  if ((0, _isObjectParameter.isObjectParameter)(object, 'object')) {
-    var _object = object;
-    object = _object.object;
-  }
-
   if (!(0, _isType.isObjectLike)(object)) {
     throw new TypeError('objectEntries args(object) is not object');
   }

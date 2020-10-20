@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.propertyList = exports._propertyList = void 0;
+exports["default"] = exports._merge = void 0;
 
 var _isType = require("../type/isType.js");
 
-var _loop = require("../syntax/loop.js");
+var _loop = require("../syntax/__loop.js");
 
-var _objectEntries = require("../object/objectEntries.js");
+var _objectEntries2 = require("../object/objectEntries.js");
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -23,56 +23,37 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /**
- * propertyList
+ * merge
  */
-var _propertyList = function _propertyList(object) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (value) {
-    if ((0, _isType.isObject)(value) || (0, _isType.isModule)(value)) {
-      return;
-    }
-
-    return "".concat((0, _isType.objectToString)(value), ":").concat(_typeof(value));
+var _merge = function _merge(dataArray) {
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
+    return v;
   };
-  var result = '';
+  var target = arguments.length > 2 ? arguments[2] : undefined;
 
-  var __propertyList = function __propertyList(object, lineHead) {
-    (0, _loop.loop)((0, _objectEntries.objectEntries)(object))(function (_ref) {
+  if (dataArray.length === 0) {
+    return target;
+  }
+
+  if ((0, _isType.isUndefined)(target)) {
+    target = (0, _isType.isObjectFromNull)(dataArray[0]) ? Object.create(null) : new dataArray[0].constructor();
+  }
+
+  (0, _loop.__loop)(dataArray)(function (data) {
+    (0, _loop.__loop)((0, _objectEntries2._objectEntries)(data))(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 2),
           key = _ref2[0],
           value = _ref2[1];
 
-      var output = func(value);
-
-      if ((0, _isType.isString)(output)) {
-        result += "".concat(lineHead, ".").concat(key, ":").concat(output, "\n");
-      }
-
-      if ((0, _isType.isObject)(value) || (0, _isType.isModule)(value)) {
-        __propertyList(value, lineHead + '.' + key);
-      }
+      target[key] = func(value, target[key], key, data, target);
     });
-    return result;
-  };
-
-  return __propertyList(object, '');
+  });
+  return target;
 };
 
-exports._propertyList = _propertyList;
-
-var propertyList = function propertyList(object) {
-  if (!((0, _isType.isObject)(object) || (0, _isType.isModule)(object))) {
-    throw new TypeError('propertyList args(object) is not object');
-  }
-
-  return _propertyList(object);
-};
-
-exports.propertyList = propertyList;
+exports._merge = _merge;
 var _default = {
-  _propertyList: _propertyList,
-  propertyList: propertyList
+  _merge: _merge
 };
 exports["default"] = _default;

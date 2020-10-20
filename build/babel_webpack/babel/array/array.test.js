@@ -51,7 +51,7 @@ var test_execute_array = function test_execute_array(parts) {
         subLength = _parts$array.subLength,
         subFirst = _parts$array.subFirst,
         subLast = _parts$array.subLast,
-        arrayToIndexValueArray = _parts$array.arrayToIndexValueArray;
+        arrayEntries = _parts$array.arrayEntries;
     var _parts$array$operatio = parts.array.operation,
         insert = _parts$array$operatio.insert,
         add = _parts$array$operatio.add,
@@ -2411,24 +2411,16 @@ var test_execute_array = function test_execute_array(parts) {
           return result;
         };
 
-        var array1 = ['a', 'b', 'c'];
-        var array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
-        checkEqual(array2, arrayEntries(array1));
+        checkEqual([[0, 'a'], [1, 'b'], [2, 'c']], arrayEntries(['a', 'b', 'c']));
       });
     };
 
-    var test_arrayToIndexValueArray = function test_arrayToIndexValueArray() {
+    var test_arrayEntries = function test_arrayEntries() {
       it('test_arrayToIndexValueArray', function () {
-        var array1 = ['a', 'b', 'c'];
-        var array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
-        checkEqual(array2, arrayToIndexValueArray(array1)); // only array type
+        checkEqual([[0, 'a'], [1, 'b'], [2, 'c']], arrayEntries(['a', 'b', 'c'])); // only array type
 
         checkEqual(true, isThrown(function () {
-          return objectToKeyValueArray({});
-        })); // object parameter
-
-        checkEqual(array2, arrayToIndexValueArray({
-          array: array1
+          return arrayEntries({});
         }));
       });
     };
@@ -2489,7 +2481,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_sortLength();
     test_operation_sortDictionary();
     test_ArrayEntries_standard();
-    test_arrayToIndexValueArray();
+    test_arrayEntries();
   });
 };
 

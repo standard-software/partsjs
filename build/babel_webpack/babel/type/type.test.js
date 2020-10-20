@@ -345,10 +345,13 @@ var test_execute_type = function test_execute_type(parts) {
         testCounter(); // Reflect
 
         if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
-        } else if (parts.platform.isChrome()) {
-          checkType('object', '[object Object][object Reflect]', Reflect); // 2020/10/10(Sat)
-          // Chrome   >> Object.prototype.toString.call(Reflect) === '[object Reflect]'
-          // Vivaldi  >> Object.prototype.toString.call(Reflect) === '[object Object]'
+        } else if (parts.platform.isChrome() || parts.platform.isEdge()) {
+          // checkType('object',    '[object Object]',  Reflect);
+          checkType('object', '[object Reflect]', Reflect); // 2020/10/16(Fri)
+          // Chrome and Vivaldi and Edge old version
+          //  >> Object.prototype.toString.call(Reflect) === '[object Object]'
+          // Chrome and Vivaldi and Edge new version
+          //  >> Object.prototype.toString.call(Reflect) === '[object Reflect]'
         } else {
           checkType('object', '[object Object]', Reflect);
         } // Proxy
@@ -367,9 +370,13 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
 
-        if (parts.platform.isDeno() || parts.platform.isGasRhino()) {} else if (parts.platform.isChrome()) {
-          checkType('object', '[object Object][object Intl]', Intl); // Chrome   >> Object.prototype.toString.call(Intl) === '[object Intl]'
-          // Vivaldi  >> Object.prototype.toString.call(Intl) === '[object Object]'
+        if (parts.platform.isDeno() || parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge()) {
+          // checkType('object',    '[object Object]',  Intl);
+          checkType('object', '[object Intl]', Intl); // 2020/10/16(Fri)
+          // Chrome and Vivaldi and Edge old version
+          //  >> Object.prototype.toString.call(Intl) === '[object Object]'
+          // Chrome and Vivaldi and Edge new version
+          //  >> Object.prototype.toString.call(Intl) === '[object Intl]'
         } else {
           checkType('object', '[object Object]', Intl);
         }

@@ -27,6 +27,7 @@ var test_execute_object = function test_execute_object(parts) {
         isEmptyObjectAll = _parts$object.isEmptyObjectAll,
         isObjectParameter = _parts$object.isObjectParameter,
         objectEntries = _parts$object.objectEntries,
+        objectFromEntries = _parts$object.objectFromEntries,
         objectKeys = _parts$object.objectKeys,
         objectValues = _parts$object.objectValues,
         has = _parts$object.has,
@@ -982,34 +983,65 @@ var test_execute_object = function test_execute_object(parts) {
           return;
         }
 
-        var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
-        var object1 = {
+        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], Object.entries({
           a: '1',
           b: '2',
           c: '3'
-        };
-        checkEqual(array1, Object.entries(object1));
+        }));
         checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], Object.entries(['a', 'b', 'c']));
       });
     };
 
     var test_objectEntries = function test_objectEntries() {
       it('test_objectEntries', function () {
-        var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
-        var object1 = {
+        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], objectEntries({
           a: '1',
           b: '2',
           c: '3'
-        };
-        checkEqual(array1, objectEntries(object1));
-        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c'])); // only object type
+        })); // array ok
+
+        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c'])); // exception
 
         checkEqual(true, isThrown(function () {
           return objectEntries('ABC');
-        })); // object parameter
+        }));
+      });
+    };
 
-        checkEqual(array1, objectEntries({
-          object: object1
+    var test_objectFromEntries = function test_objectFromEntries() {
+      it('test_objectFromEntries', function () {
+        checkEqual({
+          a: '1',
+          b: '2',
+          c: '3'
+        }, objectFromEntries([['a', '1'], ['b', '2'], ['c', '3']]));
+        checkEqual({}, objectFromEntries([]));
+        checkEqual({
+          '0': 'a',
+          '1': 'b',
+          '2': 'c'
+        }, objectFromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']])); // exception
+
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries('ABC');
+        }));
+        checkEqual(false, isThrown(function () {
+          return objectFromEntries([]);
+        }));
+        checkEqual(false, isThrown(function () {
+          return objectFromEntries([['a', 1]]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries([['a', 1], []]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries([['a', 1], ['b']]);
+        }));
+        checkEqual(false, isThrown(function () {
+          return objectFromEntries([['a', 1], ['b', 2]]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries([['a', 1], ['b', 2, 3]]);
         }));
       });
     };
@@ -1091,6 +1123,7 @@ var test_execute_object = function test_execute_object(parts) {
     test_isObjectParameter();
     test_ObjectEntries_standard();
     test_objectEntries();
+    test_objectFromEntries();
     test_objectKeys();
     test_objectValues();
     test_propertyList();
