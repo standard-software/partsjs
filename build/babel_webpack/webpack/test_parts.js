@@ -199,7 +199,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(countArray.shift(), propertyCount(parts.array));
         checkEqual(countArray.shift(), propertyCount(parts.array.operation));
         checkEqual(countArray.shift(), propertyCount(parts.date));
-        checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
+        checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'number,string,object,array,date'));
       });
       it('test_execute_nameSpace 2', function () {
         checkEqual(true, inProperty(parts, 'isUndefinedAll,isNotNullAll,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'common'));
@@ -268,7 +268,6 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _objectTest.test_execute_object)(parts);
     (0, _arrayTest.test_execute_array)(parts);
     (0, _dateTest.test_execute_date)(parts);
-    (0, _consoleHookTest.test_execute_consoleHook)(parts);
     (0, _otherTest.test_execute_other)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
@@ -338,6 +337,7 @@ var test_execute_common = function test_execute_common(parts) {
     var _parts$object = parts.object,
         objectEntries = _parts$object.objectEntries,
         objectFromEntries = _parts$object.objectFromEntries;
+    var map = parts.array.map;
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
@@ -1219,7 +1219,7 @@ var test_execute_common = function test_execute_common(parts) {
     };
 
     var test_merge = function test_merge() {
-      it('test_cloneDeep_CircularReference', function () {
+      it('test_merge', function () {
         // object
         var testObjectArray = [{
           key1: 100,
@@ -1274,9 +1274,9 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 175,
           key3: 200,
           key4: 100
-        }, objectFromEntries(objectEntries(merge(testObjectArray, function (v, t) {
+        }, objectFromEntries(map(objectEntries(merge(testObjectArray, function (v, t) {
           return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
-        })).map(function (_ref) {
+        })), function (_ref) {
           var _ref2 = _slicedToArray(_ref, 2),
               key = _ref2[0],
               value = _ref2[1];

@@ -49,6 +49,7 @@ var test_execute_common = function test_execute_common(parts) {
     var _parts$object = parts.object,
         objectEntries = _parts$object.objectEntries,
         objectFromEntries = _parts$object.objectFromEntries;
+    var map = parts.array.map;
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
@@ -930,7 +931,7 @@ var test_execute_common = function test_execute_common(parts) {
     };
 
     var test_merge = function test_merge() {
-      it('test_cloneDeep_CircularReference', function () {
+      it('test_merge', function () {
         // object
         var testObjectArray = [{
           key1: 100,
@@ -985,9 +986,9 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 175,
           key3: 200,
           key4: 100
-        }, objectFromEntries(objectEntries(merge(testObjectArray, function (v, t) {
+        }, objectFromEntries(map(objectEntries(merge(testObjectArray, function (v, t) {
           return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
-        })).map(function (_ref) {
+        })), function (_ref) {
           var _ref2 = _slicedToArray(_ref, 2),
               key = _ref2[0],
               value = _ref2[1];
