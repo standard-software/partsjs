@@ -13,6 +13,8 @@ import stringJs from './string/string.js';
 import objectJs from './object/object.js';
 import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
+import consoleHookJs from './consoleHook/consoleHook.js';
+import wshJs from './wsh/wsh.js';
 
 export const VERSION = '8.4.0 beta 1';
 
@@ -507,6 +509,31 @@ export const date = {
 };
 
 /**
+ * consoleHook
+ */
+const isPrefixSafixAdd = (prefix, safix, commaString) => {
+  return _map(
+    _splitCommaItems(commaString),  item => prefix + item + safix,
+  ).join(',');
+};
+
+export const consoleHook = _copyProperty(consoleHookJs,
+  [
+    isPrefixSafixAdd('hook',    '', 'Log,Info,Warn,Error,Debug,'),
+    isPrefixSafixAdd('unHook',  '', 'Log,Info,Warn,Error,Debug,'),
+    isPrefixSafixAdd('accept',  '', 'Log,Info,Warn,Error,Debug,'),
+    'hook', 'unHook', 'accept',
+  ].join(','),
+);
+
+/**
+ * wsh
+ */
+export const wsh = {
+  ...wshJs,
+};
+
+/**
  * parts
  */
 export const parts = {
@@ -523,6 +550,8 @@ export const parts = {
   object,
   array,
   date,
+  consoleHook,
+  wsh,
   ...rootAlias,
 };
 

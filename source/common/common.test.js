@@ -21,6 +21,10 @@ export const test_execute_common = (parts) => {
       objectFromEntries,
     } = parts.object;
 
+    const {
+      map,
+    } = parts.array;
+
     const test_clone_object = () =>{
       it('test_clone_object', () => {
 
@@ -941,7 +945,7 @@ export const test_execute_common = (parts) => {
     };
 
     const test_merge = () => {
-      it('test_cloneDeep_CircularReference', () => {
+      it('test_merge', () => {
 
         // object
         const testObjectArray = [
@@ -977,10 +981,10 @@ export const test_execute_common = (parts) => {
         );
         checkEqual(
           {key1: 100, key2: 175, key3: 200, key4: 100},
-          objectFromEntries(objectEntries(merge(
+          objectFromEntries(map(objectEntries(merge(
             testObjectArray,
             (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
-          )).map(([key, value]) => [key, value[1] / value[0]])),
+          )), ([key, value]) => [key, value[1] / value[0]])),
         );
 
         // array
