@@ -52,7 +52,7 @@ export const test_execute_index = (parts) => {
         };
 
         const countArray =
-          [391, 19, 7, 259, 13, 11, 44, 35, 15, 86, 40, 66, 58, 1];
+          [389, 19, 7, 259, 13, 11, 44, 35, 15, 86, 40, 66, 58, 1];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.common));
@@ -72,7 +72,7 @@ export const test_execute_index = (parts) => {
           inProperty(
             parts,
             'type,syntax,test,compare,convert,' +
-            'string,object,consoleHook',
+            'number,string,object,array,date',
           ),
         );
 
@@ -164,7 +164,6 @@ export const test_execute_index = (parts) => {
     test_execute_object(parts);
     test_execute_array(parts);
     test_execute_date(parts);
-    test_execute_consoleHook(parts);
     test_execute_other(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);

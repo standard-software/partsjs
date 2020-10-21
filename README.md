@@ -315,7 +315,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 8.4.0
-#### 2020/10/20(Tue)
+#### 2020/10/21(Wed)
 - update url version info
 - update _propertyList
   - args add func
@@ -325,6 +325,8 @@ You can now use the functions of the parts.js object.
   - delete object parameter
 - add _objectFromEntries.js objectFromEntries.js
 - add _merge.js merge.js
+- delete namespace wsh
+- delete namespace consoleHook
 
 ### 8.3.0
 #### 2020/10/11(Sun)
