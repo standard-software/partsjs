@@ -184,7 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [388, 19, 6, 259, 13, 11, 44, 35, 15, 86, 37, 66, 58, 1];
+        var countArray = [391, 19, 7, 259, 13, 11, 44, 35, 15, 86, 40, 66, 58, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.common));
@@ -199,7 +199,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(countArray.shift(), propertyCount(parts.array));
         checkEqual(countArray.shift(), propertyCount(parts.array.operation));
         checkEqual(countArray.shift(), propertyCount(parts.date));
-        checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'string,object,consoleHook'));
+        checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'number,string,object,array,date'));
       });
       it('test_execute_nameSpace 2', function () {
         checkEqual(true, inProperty(parts, 'isUndefinedAll,isNotNullAll,' + 'isFunc,isNotObj,' + 'isThrown,isThrownValue,isThrownException,isNotThrown,' + 'assert,guard,' + 'sc,if_,switch_,' + 'equal,or,' + 'matchSome,matchSomeValue,initialValue,' + 'numberToString,' + 'stringToNumber,stringToInteger,' + 'numToString,' + 'strToNumber,strToInteger,' + 'numToStr,' + 'strToNum,strToInt,' + 'matchFormat,' + 'copyProperty,propertyCount,inProperty,' + 'copyProp,propCount,inProp,' + 'common'));
@@ -268,7 +268,6 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _objectTest.test_execute_object)(parts);
     (0, _arrayTest.test_execute_array)(parts);
     (0, _dateTest.test_execute_date)(parts);
-    (0, _consoleHookTest.test_execute_consoleHook)(parts);
     (0, _otherTest.test_execute_other)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
@@ -294,6 +293,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_common = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -318,7 +325,19 @@ var test_execute_common = function test_execute_common(parts) {
       testCounter = _parts$test.testCounter;
   describe('test_execute_common', function () {
     var clone = parts.clone,
-        cloneDeep = parts.cloneDeep;
+        cloneDeep = parts.cloneDeep,
+        merge = parts.merge,
+        isUndefined = parts.isUndefined;
+    var _parts$test2 = parts.test,
+        checkEqual = _parts$test2.checkEqual,
+        checkCompare = _parts$test2.checkCompare,
+        isThrown = _parts$test2.isThrown,
+        isThrownException = _parts$test2.isThrownException,
+        testCounter = _parts$test2.testCounter;
+    var _parts$object = parts.object,
+        objectEntries = _parts$object.objectEntries,
+        objectFromEntries = _parts$object.objectFromEntries;
+    var map = parts.array.map;
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
@@ -1199,6 +1218,182 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
+    var test_merge = function test_merge() {
+      it('test_merge', function () {
+        // object
+        var testObjectArray = [{
+          key1: 100,
+          key2: 200,
+          key3: 300
+        }, {
+          key1: 100,
+          key2: 150,
+          key3: 100
+        }, {
+          key1: 100,
+          key3: 200,
+          key4: 100
+        }];
+        checkEqual({
+          key1: 100,
+          key2: 150,
+          key3: 200,
+          key4: 100
+        }, merge(testObjectArray));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, function (v, t) {
+          return t + v;
+        }, {
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, function (v, t) {
+          return isUndefined(t) ? v : t + v;
+        }));
+        checkEqual({
+          key1: [3, 300],
+          key2: [2, 350],
+          key3: [3, 600],
+          key4: [1, 100]
+        }, merge(testObjectArray, function (v, t) {
+          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        }));
+        checkEqual({
+          key1: 100,
+          key2: 175,
+          key3: 200,
+          key4: 100
+        }, objectFromEntries(map(objectEntries(merge(testObjectArray, function (v, t) {
+          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        })), function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 2),
+              key = _ref2[0],
+              value = _ref2[1];
+
+          return [key, value[1] / value[0]];
+        }))); // array
+
+        var testArrayArray = [[100, 200, 300], [100, 150, 100], [100,, 200, 100]];
+        checkEqual([100, 150, 200, 100], merge(testArrayArray));
+        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
+          return t + v;
+        }, [0, 0, 0, 0]));
+        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
+          return isUndefined(t) ? v : t + v;
+        }));
+        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge(testArrayArray, function (v, t) {
+          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        })); // object parameter
+
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          dataArray: testObjectArray,
+          func: function func(v, t) {
+            return t + v;
+          },
+          target: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, {
+          func: function func(v, t) {
+            return t + v;
+          },
+          target: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge(testObjectArray, function (v, t) {
+          return t + v;
+        }, {
+          target: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }
+        })); // exception
+
+        checkEqual({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, merge([], function (v, t) {
+          return isUndefined(t) ? v : t + v;
+        }, {
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }));
+        checkEqual(false, isThrown(function () {
+          merge([], function (v, t) {
+            return isUndefined(t) ? v : t + v;
+          }, {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge(['123'], function (v, t) {
+            return isUndefined(t) ? v : t + v;
+          }, {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge([], 123, {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge([], function (v, t) {
+            return isUndefined(t) ? v : t + v;
+          }, '123');
+        }));
+      });
+    };
+
     test_clone_object();
     test_clone_array();
     test_clone_date();
@@ -1217,6 +1412,7 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_map();
     test_cloneDeep_set();
     test_cloneDeep_CircularReference();
+    test_merge();
   });
 };
 
@@ -1578,10 +1774,13 @@ var test_execute_type = function test_execute_type(parts) {
         testCounter(); // Reflect
 
         if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
-        } else if (parts.platform.isChrome()) {
-          checkType('object', '[object Object][object Reflect]', Reflect); // 2020/10/10(Sat)
-          // Chrome   >> Object.prototype.toString.call(Reflect) === '[object Reflect]'
-          // Vivaldi  >> Object.prototype.toString.call(Reflect) === '[object Object]'
+        } else if (parts.platform.isChrome() || parts.platform.isEdge()) {
+          // checkType('object',    '[object Object]',  Reflect);
+          checkType('object', '[object Reflect]', Reflect); // 2020/10/16(Fri)
+          // Chrome and Vivaldi and Edge old version
+          //  >> Object.prototype.toString.call(Reflect) === '[object Object]'
+          // Chrome and Vivaldi and Edge new version
+          //  >> Object.prototype.toString.call(Reflect) === '[object Reflect]'
         } else {
           checkType('object', '[object Object]', Reflect);
         } // Proxy
@@ -1600,9 +1799,13 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object WebAssembly]', WebAssembly);
         }
 
-        if (parts.platform.isDeno() || parts.platform.isGasRhino()) {} else if (parts.platform.isChrome()) {
-          checkType('object', '[object Object][object Intl]', Intl); // Chrome   >> Object.prototype.toString.call(Intl) === '[object Intl]'
-          // Vivaldi  >> Object.prototype.toString.call(Intl) === '[object Object]'
+        if (parts.platform.isDeno() || parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge()) {
+          // checkType('object',    '[object Object]',  Intl);
+          checkType('object', '[object Intl]', Intl); // 2020/10/16(Fri)
+          // Chrome and Vivaldi and Edge old version
+          //  >> Object.prototype.toString.call(Intl) === '[object Object]'
+          // Chrome and Vivaldi and Edge new version
+          //  >> Object.prototype.toString.call(Intl) === '[object Intl]'
         } else {
           checkType('object', '[object Object]', Intl);
         }
@@ -10905,6 +11108,7 @@ var test_execute_object = function test_execute_object(parts) {
         isEmptyObjectAll = _parts$object.isEmptyObjectAll,
         isObjectParameter = _parts$object.isObjectParameter,
         objectEntries = _parts$object.objectEntries,
+        objectFromEntries = _parts$object.objectFromEntries,
         objectKeys = _parts$object.objectKeys,
         objectValues = _parts$object.objectValues,
         has = _parts$object.has,
@@ -11860,34 +12064,65 @@ var test_execute_object = function test_execute_object(parts) {
           return;
         }
 
-        var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
-        var object1 = {
+        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], Object.entries({
           a: '1',
           b: '2',
           c: '3'
-        };
-        checkEqual(array1, Object.entries(object1));
+        }));
         checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], Object.entries(['a', 'b', 'c']));
       });
     };
 
     var test_objectEntries = function test_objectEntries() {
       it('test_objectEntries', function () {
-        var array1 = [['a', '1'], ['b', '2'], ['c', '3']];
-        var object1 = {
+        checkEqual([['a', '1'], ['b', '2'], ['c', '3']], objectEntries({
           a: '1',
           b: '2',
           c: '3'
-        };
-        checkEqual(array1, objectEntries(object1));
-        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c'])); // only object type
+        })); // array ok
+
+        checkEqual([['0', 'a'], ['1', 'b'], ['2', 'c']], objectEntries(['a', 'b', 'c'])); // exception
 
         checkEqual(true, isThrown(function () {
           return objectEntries('ABC');
-        })); // object parameter
+        }));
+      });
+    };
 
-        checkEqual(array1, objectEntries({
-          object: object1
+    var test_objectFromEntries = function test_objectFromEntries() {
+      it('test_objectFromEntries', function () {
+        checkEqual({
+          a: '1',
+          b: '2',
+          c: '3'
+        }, objectFromEntries([['a', '1'], ['b', '2'], ['c', '3']]));
+        checkEqual({}, objectFromEntries([]));
+        checkEqual({
+          '0': 'a',
+          '1': 'b',
+          '2': 'c'
+        }, objectFromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']])); // exception
+
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries('ABC');
+        }));
+        checkEqual(false, isThrown(function () {
+          return objectFromEntries([]);
+        }));
+        checkEqual(false, isThrown(function () {
+          return objectFromEntries([['a', 1]]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries([['a', 1], []]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries([['a', 1], ['b']]);
+        }));
+        checkEqual(false, isThrown(function () {
+          return objectFromEntries([['a', 1], ['b', 2]]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return objectFromEntries([['a', 1], ['b', 2, 3]]);
         }));
       });
     };
@@ -11969,6 +12204,7 @@ var test_execute_object = function test_execute_object(parts) {
     test_isObjectParameter();
     test_ObjectEntries_standard();
     test_objectEntries();
+    test_objectFromEntries();
     test_objectKeys();
     test_objectValues();
     test_propertyList();
@@ -12039,7 +12275,7 @@ var test_execute_array = function test_execute_array(parts) {
         subLength = _parts$array.subLength,
         subFirst = _parts$array.subFirst,
         subLast = _parts$array.subLast,
-        arrayToIndexValueArray = _parts$array.arrayToIndexValueArray;
+        arrayEntries = _parts$array.arrayEntries;
     var _parts$array$operatio = parts.array.operation,
         insert = _parts$array$operatio.insert,
         add = _parts$array$operatio.add,
@@ -14399,24 +14635,16 @@ var test_execute_array = function test_execute_array(parts) {
           return result;
         };
 
-        var array1 = ['a', 'b', 'c'];
-        var array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
-        checkEqual(array2, arrayEntries(array1));
+        checkEqual([[0, 'a'], [1, 'b'], [2, 'c']], arrayEntries(['a', 'b', 'c']));
       });
     };
 
-    var test_arrayToIndexValueArray = function test_arrayToIndexValueArray() {
+    var test_arrayEntries = function test_arrayEntries() {
       it('test_arrayToIndexValueArray', function () {
-        var array1 = ['a', 'b', 'c'];
-        var array2 = [[0, 'a'], [1, 'b'], [2, 'c']];
-        checkEqual(array2, arrayToIndexValueArray(array1)); // only array type
+        checkEqual([[0, 'a'], [1, 'b'], [2, 'c']], arrayEntries(['a', 'b', 'c'])); // only array type
 
         checkEqual(true, isThrown(function () {
-          return objectToKeyValueArray({});
-        })); // object parameter
-
-        checkEqual(array2, arrayToIndexValueArray({
-          array: array1
+          return arrayEntries({});
         }));
       });
     };
@@ -14477,7 +14705,7 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_sortLength();
     test_operation_sortDictionary();
     test_ArrayEntries_standard();
-    test_arrayToIndexValueArray();
+    test_arrayEntries();
   });
 };
 

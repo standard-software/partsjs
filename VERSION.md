@@ -2,6 +2,18 @@
 
 ## Version
 
+### 8.4.0
+#### 2020/10/21(Wed)
+- update url version info
+- update _propertyList
+  - args add func
+- rename
+  - returnValueFunction >> __returnValueFunction
+- update objectEntries arrayEntries
+  - delete object parameter
+- add _objectFromEntries.js objectFromEntries.js
+- add _merge.js merge.js
+
 ### 8.3.0
 #### 2020/10/11(Sun)
 - update min/max
