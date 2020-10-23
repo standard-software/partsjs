@@ -1661,9 +1661,6 @@
 .parts.valueToNumberDefault:[object Function]:function
 .parts.valueToString:[object Function]:function
 .parts.VERSION:[object String]:string
-.parts.wsh.FileSystemObject:[object Function]:function
-.parts.wsh.forceCreateFolder:[object Function]:function
-.parts.wsh.Shell:[object Function]:function
 .platform.browserName:[object Function]:function
 .platform.buildMode:[object String]:string
 .platform.googleAppScriptEngineName:[object Function]:function
@@ -2098,6 +2095,3 @@
 .valueToNumberDefault:[object Function]:function
 .valueToString:[object Function]:function
 .VERSION:[object String]:string
-.wsh.FileSystemObject:[object Function]:function
-.wsh.forceCreateFolder:[object Function]:function
-.wsh.Shell:[object Function]:function

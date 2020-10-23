@@ -14,9 +14,8 @@ import objectJs from './object/object.js';
 import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
 import consoleHookJs from './consoleHook/consoleHook.js';
-import wshJs from './wsh/wsh.js';
 
-export const VERSION = '8.4.0';
+export const VERSION = '9.0.0 beta 1';
 
 let rootAlias = {};
 const propertyNames = {};
@@ -527,13 +526,6 @@ export const consoleHook = _copyProperty(consoleHookJs,
 );
 
 /**
- * wsh
- */
-export const wsh = {
-  ...wshJs,
-};
-
-/**
  * parts
  */
 export const parts = {
@@ -551,7 +543,6 @@ export const parts = {
   array,
   date,
   consoleHook,
-  wsh,
   ...rootAlias,
 };
 

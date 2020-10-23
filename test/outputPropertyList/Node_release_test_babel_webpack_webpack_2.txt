@@ -1047,6 +1047,3 @@
 .valueToNumberDefault:[object Function]:function
 .valueToString:[object Function]:function
 .VERSION:[object String]:string
-.wsh.FileSystemObject:[object Function]:function
-.wsh.forceCreateFolder:[object Function]:function
-.wsh.Shell:[object Function]:function

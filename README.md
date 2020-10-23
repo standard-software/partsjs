@@ -314,6 +314,15 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 9.0.0
+#### 2020/10/23(Fri)
+- unsupport WSH
+  - delete namespace WSH
+  - Parts.js file 512KB over 
+    and WSH unsupport 512KB over file
+  - I feel that I can handle it if I put effort,
+    but I decided to give up already
+
 ### 8.4.0
 #### 2020/10/21(Wed)
 - update url version info
