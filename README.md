@@ -324,6 +324,8 @@ You can now use the functions of the parts.js object.
     but I decided to give up already
 - delete consoleHook
   - The reason is not convenient.
+- update isObject
+  - Speeding up
 
 ### 8.4.0
 #### 2020/10/21(Wed)

@@ -3,6 +3,8 @@ import {
 } from '../object/_propertyCount.js';
 
 import {
+  isWindowsScriptHost,
+  isGasRhino,
   isInternetExplorer,
 } from '../platform/platform.js';
 
@@ -57,21 +59,34 @@ export const isStringObject = value => {
 export const isFunction =
   (value) => typeof value === 'function';
 
-export const isObject = (value) => {
-  if (isNull(value)) { return false; }
-  if (isUndefined(value)) { return false; }
-  if (objectToString(value) !== '[object Object]') {
-    return false;
-  }
-  if (isInternetExplorer()) {
-    // support for IE11
+export let isObject;
+if (isWindowsScriptHost() || isGasRhino()) {
+  isObject = (value) => {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
+    if (isNull(value)) { return false; }
+    if (isUndefined(value)) { return false; }
+    return true;
+  };
+} else if (isInternetExplorer()) {
+  isObject = (value) => {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
     if (__includes([Map, WeakMap, Set], value.constructor)) {
       return false;
     }
-  }
-
-  return true;
-};
+    return true;
+  };
+} else {
+  isObject = (value) => {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
+    return true;
+  };
+}
 
 export const isObjectNormal = (value) => {
   if (!isObject(value)) { return false; }
