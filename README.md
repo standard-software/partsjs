@@ -322,6 +322,8 @@ You can now use the functions of the parts.js object.
     and WSH unsupport 512KB over file
   - I feel that I can handle it if I put effort,
     but I decided to give up already
+- delete consoleHook
+  - The reason is not convenient.
 
 ### 8.4.0
 #### 2020/10/21(Wed)
@@ -379,68 +381,6 @@ You can now use the functions of the parts.js object.
   - Chrome Reflect / Intl
     - no update Vivaldi
   - Firefox WebAssembly
-
-### 8.1.0
-#### 2020/10/01(Thu)
-- add from string_common.js
-  - _indexOfFirst.js/indexOfFirst.js
-  - _indexOfLast.js/indexOfLast.js
-- add
-  - _indexOfAnyFirst.js/indexOfAnyFirst.js
-  - _indexOfAnyLast.js/indexOfAnyLast.js
-  - _replaceAllArray.js/replaceAllArray.js
-- add from array_common.js
-  - _min.js/min.js
-  - _max.js/max.js
-- update package.json scripts
-  - clasp:delete
-  - clasp:release
-
-### 8.0.0
-#### 2020/09/27(Sun)
-- update platform.js
-  - isNodeJs >> isNode
-  - name() Node.js >> Node
-- add propertyList.js
-- update test code
-  - startName
-  - write file /test/outputPropertyList
-- update objectEntries
-- add typeAlias.js
-- bugfix
-  - undefined function
-    - isNot isArray isNotArray isAll isNotAll
-      - ObjectType ObjectLike
-      - ArrayType ArraySeries
-  - noexist function
-    - isNot isArray isNotArray isAll isNotAll
-      - Undef
-- add sortDictionary.js
-  - from sort.js
-  - sortDictionary add args casePriority
-  - support full object parameter
-- install npm-watch
-- install @google/clasp
-  - test/release/clasp
-    - test_parts_spreadsheet_Rhino
-    - test_parts_spreadsheet_v8
-    - test_parts_standalone_Rhino
-    - test_parts_standalone_v8
-- update split
-  - excludeSpace >> executeConvert
-    - all >> excludeSpace
-    - trim >> trimSpace
-- add _split.js from split.js
-- add _IntegerArray.js from IntegerArray.js
-- add _NumberArray.js from NumberArray.js
-- add __loop.js / _loop.js from loop.js
-- add _Enum.js from Enum.js
-- add _isObjectParameter
-- rename arrayToIndexValueArray.js >> arrayEntries.js
-- rename makeInRange >> keepMinMax
-- uddate index.js
-  - export structural changes
-  - publish private function
 
 ### More Info
 [VERSION.md](./VERSION.md)
