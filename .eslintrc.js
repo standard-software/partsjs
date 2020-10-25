@@ -45,5 +45,6 @@ module.exports = {
     'quotes':         ['warn', 'single', { 'avoidEscape': true }],
     'new-cap':        ['off'],
     'no-var':         ['off'],
+    'comma-dangle':   ['warn', 'always-multiline'],
   },
 };
