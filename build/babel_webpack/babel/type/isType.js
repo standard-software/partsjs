@@ -88,31 +88,46 @@ var isFunction = function isFunction(value) {
 };
 
 exports.isFunction = isFunction;
+var isObject;
+exports.isObject = isObject;
 
-var isObject = function isObject(value) {
-  if (isNull(value)) {
-    return false;
-  }
+if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
+  exports.isObject = isObject = function isObject(value) {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
 
-  if (isUndefined(value)) {
-    return false;
-  }
+    if (isNull(value)) {
+      return false;
+    }
 
-  if (objectToString(value) !== '[object Object]') {
-    return false;
-  }
+    if (isUndefined(value)) {
+      return false;
+    }
 
-  if ((0, _platform.isInternetExplorer)()) {
-    // support for IE11
+    return true;
+  };
+} else if ((0, _platform.isInternetExplorer)()) {
+  exports.isObject = isObject = function isObject(value) {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
+
     if ((0, _includes.__includes)([Map, WeakMap, Set], value.constructor)) {
       return false;
     }
-  }
 
-  return true;
-};
+    return true;
+  };
+} else {
+  exports.isObject = isObject = function isObject(value) {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
 
-exports.isObject = isObject;
+    return true;
+  };
+}
 
 var isObjectNormal = function isObjectNormal(value) {
   if (!isObject(value)) {

@@ -13,7 +13,7 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _clone2 = require("../common/clone.js");
 
-var _cloneDeep2 = require("../common/cloneDeep.js");
+var _cloneDeep2 = require("../common/_cloneDeep.js");
 
 var _unique2 = require("../array/_unique.js");
 

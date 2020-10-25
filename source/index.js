@@ -19,10 +19,6 @@ export const VERSION = '9.0.0 beta 1';
 let rootAlias = {};
 const propertyNames = {};
 
-const { _copyProperty } = objectJs;
-const { _splitCommaItems } = stringJs;
-const { _map } = arrayJs;
-
 /**
  * common
  */
