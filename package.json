@@ -12,7 +12,7 @@
     "clear:babel":            "node -e \"require('fs-extra').removeSync('./build/babel_webpack/babel/')\"",
     "clear:webpack":          "node -e \"require('fs-extra').removeSync('./build/babel_webpack/webpack/')\"",
     "clear:build":            "npm run clear:babel && npm run clear:webpack",
-    "build:babel":            "npm run clear:build && npm run babel",
+    "build:babel":            "npm run babel",
     "build:webpack":          "npm run webpack && npm run webpack_testcode",
     "test:source:deno:1":     "deno run --allow-write ./test/source/test_source_deno_1.js",
     "test:source:deno:2":     "deno run --allow-write ./test/source/test_source_deno_2.js",
