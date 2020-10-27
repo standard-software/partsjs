@@ -56,7 +56,9 @@ var test_execute_string = function test_execute_string(parts) {
         splitDotItems = _parts$string.splitDotItems,
         indexOfAnyFirst = _parts$string.indexOfAnyFirst,
         indexOfAnyLast = _parts$string.indexOfAnyLast,
-        replaceAllArray = _parts$string.replaceAllArray;
+        replaceAllArray = _parts$string.replaceAllArray,
+        paddingFirst = _parts$string.paddingFirst,
+        paddingLast = _parts$string.paddingLast;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -2083,6 +2085,56 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_paddingFirst = function test_paddingFirst() {
+      it('test_paddingFirst', function () {
+        checkEqual('123', paddingFirst('123', 1, '0'));
+        checkEqual('123', paddingFirst('123', 2, '0'));
+        checkEqual('123', paddingFirst('123', 3, '0'));
+        checkEqual('0123', paddingFirst('123', 4, '0'));
+        checkEqual('00123', paddingFirst('123', 5, '0'));
+        checkEqual(true, isThrown(function () {
+          paddingFirst('123', 0, '0');
+        }));
+        checkEqual('00123', paddingFirst({
+          str: '123',
+          length: 5,
+          fill: '0'
+        }));
+        checkEqual('00123', paddingFirst('123', {
+          length: 5,
+          fill: '0'
+        }));
+        checkEqual('00123', paddingFirst('123', 5, {
+          fill: '0'
+        }));
+      });
+    };
+
+    var test_paddingLast = function test_paddingLast() {
+      it('test_paddingLast', function () {
+        checkEqual('123', paddingLast('123', 1, '0'));
+        checkEqual('123', paddingLast('123', 2, '0'));
+        checkEqual('123', paddingLast('123', 3, '0'));
+        checkEqual('1230', paddingLast('123', 4, '0'));
+        checkEqual('12300', paddingLast('123', 5, '0'));
+        checkEqual(true, isThrown(function () {
+          paddingLast('123', 0, '0');
+        }));
+        checkEqual('12300', paddingLast({
+          str: '123',
+          length: 5,
+          fill: '0'
+        }));
+        checkEqual('12300', paddingLast('123', {
+          length: 5,
+          fill: '0'
+        }));
+        checkEqual('12300', paddingLast('123', 5, {
+          fill: '0'
+        }));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_replaceAllArray();
@@ -2127,6 +2179,8 @@ var test_execute_string = function test_execute_string(parts) {
     test_split();
     test_splitCommaItems();
     test_splitDotItems();
+    test_paddingFirst();
+    test_paddingLast();
   });
 };
 
