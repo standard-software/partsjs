@@ -653,6 +653,7 @@
 .string._isLowerCase:[object Function]:function
 .string._isUpperCase:[object Function]:function
 .string._matchFormat:[object Function]:function
+.string._paddingFirst:[object Function]:function
 .string._repeat:[object Function]:function
 .string._replaceAll:[object Function]:function
 .string._replaceAllArray:[object Function]:function
@@ -696,6 +697,7 @@
 .string.isLowerCase:[object Function]:function
 .string.isUpperCase:[object Function]:function
 .string.matchFormat:[object Function]:function
+.string.paddingFirst:[object Function]:function
 .string.repeat:[object Function]:function
 .string.replaceAll:[object Function]:function
 .string.replaceAllArray:[object Function]:function

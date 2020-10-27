@@ -30,6 +30,8 @@ export const test_execute_string = (parts) => {
 
       indexOfAnyFirst, indexOfAnyLast,
       replaceAllArray,
+
+      paddingFirst,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -1927,6 +1929,49 @@ export const test_execute_string = (parts) => {
       });
     };
 
+    const test_paddingFirst = () => {
+      it('test_paddingFirst', () => {
+        checkEqual('123',     paddingFirst('123', 1, '0'));
+        checkEqual('123',     paddingFirst('123', 2, '0'));
+        checkEqual('123',     paddingFirst('123', 3, '0'));
+        checkEqual('0123',    paddingFirst('123', 4, '0'));
+        checkEqual('00123',   paddingFirst('123', 5, '0'));
+
+        checkEqual(true, isThrown(() => {
+          paddingFirst('123', 0, '0');
+        }));
+
+        checkEqual('00123',
+          paddingFirst(
+            {
+              str: '123',
+              length: 5,
+              fill: '0',
+            },
+          ),
+        );
+        checkEqual('00123',
+          paddingFirst(
+            '123',
+            {
+              length: 5,
+              fill: '0',
+            },
+          ),
+        );
+        checkEqual('00123',
+          paddingFirst(
+            '123',
+            5,
+            {
+              fill: '0',
+            },
+          ),
+        );
+
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_replaceAllArray();
@@ -1981,6 +2026,8 @@ export const test_execute_string = (parts) => {
     test_split();
     test_splitCommaItems();
     test_splitDotItems();
+
+    test_paddingFirst();
   });
 };
 
