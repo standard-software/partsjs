@@ -26,6 +26,8 @@ import splitCommaItemsJs from './splitCommaItems.js';
 import splitDotItemsJs from './splitDotItems.js';
 import _paddingFirstJs from './_paddingFirst.js';
 import paddingFirstJs from './paddingFirst.js';
+import _paddingLastJs from './_paddingLast.js';
+import paddingLastJs from './paddingLast.js';
 
 const stringJs = {
   ...string_commonJs,
@@ -56,6 +58,8 @@ const stringJs = {
   ...splitDotItemsJs,
   ..._paddingFirstJs,
   ...paddingFirstJs,
+  ..._paddingLastJs,
+  ...paddingLastJs,
 };
 
 export const {
@@ -85,6 +89,7 @@ export const {
   _splitCommaItems,
   _splitDotItems,
   _paddingFirst,
+  _paddingLast,
 } = stringJs;
 
 export const {
@@ -114,6 +119,7 @@ export const {
   splitCommaItems,
   splitDotItems,
   paddingFirst,
+  paddingLast,
 } = stringJs;
 
 export default {
@@ -143,6 +149,7 @@ export default {
   _splitCommaItems,
   _splitDotItems,
   _paddingFirst,
+  _paddingLast,
 
   repeat,
   isLowerCase, isUpperCase,
@@ -170,5 +177,6 @@ export default {
   splitCommaItems,
   splitDotItems,
   paddingFirst,
+  paddingLast,
 };
 

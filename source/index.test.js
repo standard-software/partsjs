@@ -52,7 +52,7 @@ export const test_execute_index = (parts) => {
         };
 
         const countArray =
-          [390, 19, 8, 259, 13, 11, 44, 35, 15, 88, 40, 66, 58, 1];
+          [390, 19, 8, 259, 13, 11, 44, 35, 15, 90, 40, 66, 58, 1];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.common));

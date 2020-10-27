@@ -340,7 +340,7 @@ You can now use the functions of the parts.js object.
   - Close to the fastest compared to rfdc and clone-deep
 - update cloneDeep.js
   - _cloneDeep.js / cloneDeep.js
-- add paddingFirst
+- add paddingFirst / paddingLast
 
 ### 8.4.0
 #### 2020/10/21(Wed)
