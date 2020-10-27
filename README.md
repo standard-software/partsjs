@@ -27,6 +27,8 @@ https://www.npmjs.com/package/@standard-software/parts
   - V8 
   - Rhino
 - Windows Scripting Host (WSH)
+  - before ver 8.4.0
+  - no support ver 9.0.0 and later 
 
 ## How to use parts.js in Node.js
 
@@ -264,6 +266,13 @@ function myFunction() {
 same [How to use Google Apps Script]
 
 ## How to use parts.js in WSH (Windows Scripting Host .wsf file)
+
+### Caution
+
+WSH support is up to ver 8.4.0.
+Ver9 and later are not supported.
+
+The reason is that it is very difficult to remove the WSH link file size limit of 512KB.
 
 ### refer to example
 
