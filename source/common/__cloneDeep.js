@@ -1,29 +1,28 @@
 import { isObject, isArray } from '../type/isType.js';
-import { __returnValueFunction } from '../common/__returnValueFunction.js';
 
 /**
- * clone
+ * cloneDeep
  */
-export const __clone = (
+export const __cloneDeep = (
   source,
 ) => {
-  const __clone_ = (value) => {
+  const __cloneDeep_ = (value) => {
     if (isObject(value)) {
       const cloneValue = {};
       for (const key in value) {
-        cloneValue[key] = value[key];
+        cloneValue[key] = __cloneDeep_(value[key]);
       }
       return cloneValue;
     } else if (isArray(value)) {
       const cloneValue = Array(value.length);
       for (let i = 0, l = value.length; i < l; i += 1) {
-        cloneValue[i] = value[i];
+        cloneValue[i] = __cloneDeep_(value[i]);
       }
       return cloneValue;
     }
     return value;
   };
-  return __clone_(source);
+  return __cloneDeep_(source);
 };
 
-export default { __clone };
+export default { __cloneDeep };

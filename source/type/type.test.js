@@ -991,6 +991,46 @@ export const test_execute_type = (parts) => {
       });
     };
 
+    const test_ArrayisArray = function() {
+      it('test_ArrayisArray', () => {
+
+        const ArrayisArrayAll = (...values) => {
+          for (let i = 0, l = values.length; i < l; i += 1) {
+            const result = Array.isArray(values[i]);
+            if (result === false) {
+              return false;
+            }
+          }
+          return true;
+        };
+        const NotArrayisArrayAll = (...values) => {
+          for (let i = 0, l = values.length; i < l; i += 1) {
+            const result = Array.isArray(values[i]);
+            if (result === true) {
+              return false;
+            }
+          }
+          return true;
+        };
+        checkEqual(true,  ArrayisArrayAll([123]));
+        checkEqual(true,  ArrayisArrayAll([]));
+        checkEqual(true,  ArrayisArrayAll([1, 2, 3]));
+        checkEqual(false, ArrayisArrayAll(123));
+        checkEqual(false, ArrayisArrayAll('1,2,3'));
+
+        checkEqual(true,  ArrayisArrayAll([1], [2]));
+        checkEqual(true,  ArrayisArrayAll([3], [4], [5]));
+        checkEqual(true,  ArrayisArrayAll([10, 20], [30]));
+        checkEqual(false, ArrayisArrayAll([1, 2], 3));
+
+        checkEqual(true,  NotArrayisArrayAll(1, 2));
+        checkEqual(false, NotArrayisArrayAll([3], [4], 5));
+        checkEqual(true,  NotArrayisArrayAll(10, 20, 30));
+        checkEqual(false, NotArrayisArrayAll(10, 20, [30]));
+
+      });
+    };
+
     const test_isArraySeries = function() {
       it('test_isArraySeries', () => {
 
@@ -1197,6 +1237,7 @@ export const test_execute_type = (parts) => {
     test_isModule();
 
     test_isArray();
+    test_ArrayisArray();
     test_isArraySeries();
     test_isDate();
     test_isExcection();

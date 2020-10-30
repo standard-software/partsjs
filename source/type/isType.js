@@ -123,9 +123,14 @@ export const isEmptyObject = value => {
   return _propertyCount(value) === 0;
 };
 
-export const isArray = (value) => {
-  return objectToString(value) === '[object Array]';
-};
+export let isArray;
+if (Array.isArray) {
+  isArray = Array.isArray;
+} else {
+  isArray = (value) => {
+    return objectToString(value) === '[object Array]';
+  };
+}
 
 // Int8Array Uint16Array Float32Array Float64Array etc
 export const isArraySeries = (value) => {

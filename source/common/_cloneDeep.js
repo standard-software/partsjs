@@ -1,5 +1,5 @@
 import { isUndefined } from '../type/type.js';
-import { __clone } from '../common/__clone.js';
+import { __cloneDeep } from '../common/__cloneDeep.js';
 import { __cloneFunc } from '../common/__cloneFunc.js';
 
 /**
@@ -10,14 +10,14 @@ export const _cloneDeep = (
   cloneFuncArray = __cloneFunc.defaultArray,
 ) => {
   if (isUndefined(cloneFuncArray)) {
-    return __clone(source, true);
+    return __cloneDeep(source);
   }
 
   const CircularReferenceBuffer = {
     source: [],
     clone: [],
   };
-  const __cloneDeep = (value) => {
+  const _cloneDeep_ = (value) => {
     const index = CircularReferenceBuffer.source.indexOf(value);
     if (index !== -1) {
       return CircularReferenceBuffer.clone[index];
@@ -32,7 +32,7 @@ export const _cloneDeep = (
           CircularReferenceBuffer.source.push(source);
           CircularReferenceBuffer.clone.push(clone);
         },
-        __cloneDeep,
+        _cloneDeep_,
       );
       if (!isUndefined(result)) {
         return result;
@@ -40,7 +40,7 @@ export const _cloneDeep = (
     }
     return value;
   };
-  return __cloneDeep(source);
+  return _cloneDeep_(source);
 };
 
 _cloneDeep.func = __cloneFunc;

@@ -16,7 +16,7 @@
   - Speeding up
 - add cloneDeepFast.js
   - only object and array Recursive clone
-  - Close to the fastest compared to rfdc and clone-deep
+  - Equally fastest level compared to rfdc and clone-deep
 - update cloneDeep.js
   - _cloneDeep.js / cloneDeep.js
 - add paddingFirst / paddingLast
