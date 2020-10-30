@@ -142,10 +142,8 @@ export const deleteIndex = (array, indexStart, indexEnd = indexStart) => {
 export const _deleteLength = (
   array, index, length = array.length - index,
 ) => {
-  return _deleteIndex(array, index, index + length - 1);
-  // same:
-  //  array.splice(index, length);
-  //  return array;
+  array.splice(index, length);
+  return array;
 };
 
 export const deleteLength = (

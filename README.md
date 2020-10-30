@@ -324,11 +324,12 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 9.1.0
-#### 2020/10/29(Thu)
+#### 2020/10/30(Fri)
 - update clone / cloneDeep
   - clone / cloneDeep args cloneFunc is undefined
     call clone / cloneDeep Fast version
   - delete cloneFast / cloneDeep
+- update array operation deleteLength
 
 ### 9.0.0
 #### 2020/10/27(Tue)
