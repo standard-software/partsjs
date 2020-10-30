@@ -25,7 +25,6 @@ const propertyNames = {};
 export const {
   clone,
   cloneDeep,
-  cloneDeepFast,
   functionValue,
   merge,
 } = commonJs;
@@ -33,7 +32,6 @@ export const {
 rootAlias = { ...rootAlias,
   clone,
   cloneDeep,
-  cloneDeepFast,
   functionValue,
   merge,
 };

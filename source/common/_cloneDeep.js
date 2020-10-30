@@ -1,14 +1,18 @@
 import { isUndefined } from '../type/type.js';
-import { _copyProperty } from '../object/object.js';
-import { clone } from '../common/clone.js';
+import { __clone } from '../common/__clone.js';
+import { __cloneFunc } from '../common/__cloneFunc.js';
 
 /**
  * cloneDeep
  */
 export const _cloneDeep = (
   source,
-  cloneFuncArray = clone.func.defaultArray,
+  cloneFuncArray = __cloneFunc.defaultArray,
 ) => {
+  if (isUndefined(cloneFuncArray)) {
+    return __clone(source, true);
+  }
+
   const CircularReferenceBuffer = {
     source: [],
     clone: [],
@@ -38,6 +42,8 @@ export const _cloneDeep = (
   };
   return __cloneDeep(source);
 };
+
+_cloneDeep.func = __cloneFunc;
 
 export default {
   _cloneDeep,

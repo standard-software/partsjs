@@ -19,7 +19,7 @@ import {
   isObjectParameter,
 } from '../object/isObjectParameter.js';
 
-import { _clone } from '../common/clone.js';
+import { _clone } from '../common/_clone.js';
 import { _cloneDeep } from '../common/_cloneDeep.js';
 import { _unique } from '../array/_unique.js';
 import { _min } from '../array/_min.js';

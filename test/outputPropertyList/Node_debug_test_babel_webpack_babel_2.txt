@@ -133,13 +133,11 @@
 .canUseWeakSet:[object Function]:function
 .clone:[object Function]:function
 .cloneDeep:[object Function]:function
-.cloneDeepFast:[object Function]:function
 .common._clone:[object Function]:function
 .common._cloneDeep:[object Function]:function
 .common._merge:[object Function]:function
 .common.clone:[object Function]:function
 .common.cloneDeep:[object Function]:function
-.common.cloneDeepFast:[object Function]:function
 .common.functionValue:[object Function]:function
 .common.merge:[object Function]:function
 .compare._allMatch:[object Function]:function
