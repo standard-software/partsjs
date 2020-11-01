@@ -24,6 +24,7 @@ import { _cloneDeep } from '../common/_cloneDeep.js';
 import { _unique } from '../array/_unique.js';
 import { _min } from '../array/_min.js';
 import { _max } from '../array/_max.js';
+import { _map } from '../array/_map.js';
 
 /**
  * from
@@ -233,36 +234,6 @@ export const filter = (array, func) => {
     );
   }
   return _filter(array, func);
-};
-
-/**
- * map
- */
-export const _map = (array, func) => {
-  const result = [];
-  for (let i = 0, l = array.length; i < l; i += 1) {
-    const resultFunc = func(array[i], i, array);
-    result.push(resultFunc);
-  }
-  return result;
-};
-
-export const map = (array, func) => {
-  if (isObjectParameter(array, 'array, func')) {
-    ({ array, func } = array);
-  }
-
-  if (!isArray(array)) {
-    throw new TypeError(
-      'map args(array) is not array',
-    );
-  }
-  if (!isFunction(func)) {
-    throw new TypeError(
-      'map args(productFunc) is not function',
-    );
-  }
-  return _map(array, func);
 };
 
 /**
@@ -789,7 +760,7 @@ export default {
   _sum, _average, _median,
   _mode,
   _single, _multiple,
-  _filter, _map, _count,
+  _filter, _count,
   _findFirstIndex, _findLastIndex,
   _findFirst, _findLast,
   _some, _all,
@@ -801,7 +772,7 @@ export default {
   sum, average, median,
   mode,
   single, multiple,
-  filter, map, count,
+  filter, count,
   findFirstIndex, findLastIndex,
   findFirst, findLast,
   some, all,

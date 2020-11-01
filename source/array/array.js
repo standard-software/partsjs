@@ -1,4 +1,6 @@
 import array_commonJs from './array_common.js';
+import _mapJs from './_map.js';
+import mapJs from './map.js';
 import _minJs from './_min.js';
 import minJs from './min.js';
 import _maxJs from './_max.js';
@@ -21,6 +23,8 @@ import sortDictionaryJs from './operation/sortDictionary.js';
 
 const arrayJs = {
   ...array_commonJs,
+  ..._mapJs,
+  ...mapJs,
   ..._minJs,
   ...minJs,
   ..._maxJs,

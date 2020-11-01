@@ -334,6 +334,8 @@ You can now use the functions of the parts.js object.
 - update isArray
   - isArray = Array.isArray
   - Speeding up
+- add from array_common.js
+  - _map.js/map.js
 
 ### 9.0.0
 #### 2020/10/27(Tue)

@@ -1,6 +1,6 @@
 import { _indexOfAnyFirst } from '../string/_indexOfAnyFirst.js';
 import { _subIndex, _subLength } from '../string/string_common.js';
-import { _map } from '../array/array_common.js';
+import { _map } from '../array/_map.js';
 
 /**
  * replaceAllArray
