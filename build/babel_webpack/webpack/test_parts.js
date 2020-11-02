@@ -15396,6 +15396,69 @@ var test_execute_array = function test_execute_array(parts) {
           return v;
         }]]));
         checkEqual([].concat(outputVersions).reverse(), sortedVersions);
+        var items = [{
+          name: 'a',
+          version: {
+            major: '1',
+            minor: '1',
+            build: '1',
+            revision: '1'
+          }
+        }, {
+          name: 'b',
+          version: {
+            major: '1',
+            minor: '10',
+            build: '1',
+            revision: '1'
+          }
+        }, {
+          name: 'c',
+          version: {
+            major: '1',
+            minor: '2',
+            build: '1',
+            revision: '1'
+          }
+        }, {
+          name: 'd',
+          version: {
+            major: '1',
+            minor: '1',
+            build: '1',
+            revision: '1b'
+          }
+        }, {
+          name: 'e',
+          version: {
+            major: '1',
+            minor: '1',
+            build: '1',
+            revision: '1a'
+          }
+        }];
+        var sortedItems = [].concat(items).sort(SortFunc([[SortFunc.order.version.ascending, function (i) {
+          var _i$version = i.version,
+              major = _i$version.major,
+              minor = _i$version.minor,
+              build = _i$version.build,
+              revision = _i$version.revision;
+          return major + minor + build + revision;
+        }]]));
+        checkEqual(['a', 'e', 'd', 'c', 'b'], sortedItems.map(function (i) {
+          return i.name;
+        }));
+        var sortedItems = [].concat(items).sort(SortFunc([[SortFunc.order.version.descending, function (i) {
+          var _i$version2 = i.version,
+              major = _i$version2.major,
+              minor = _i$version2.minor,
+              build = _i$version2.build,
+              revision = _i$version2.revision;
+          return major + minor + build + revision;
+        }]]));
+        checkEqual(['b', 'c', 'd', 'e', 'a'], sortedItems.map(function (i) {
+          return i.name;
+        }));
       });
     };
 
