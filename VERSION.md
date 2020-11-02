@@ -2,6 +2,25 @@
 
 ## Version
 
+### 9.1.0
+#### 2020/11/02(Mon)
+- update clone / cloneDeep
+  - if clone / cloneDeep args cloneFunc is undefined
+    call clone / cloneDeep Fast version
+    __clone.js / __cloneDeep.js
+  - delete cloneFast / cloneDeepFast
+- update array operation deleteLength
+- update isArray
+  - isArray = Array.isArray
+  - Speeding up
+- add from array_common.js
+  - _map.js/map.js
+- add SortFunc
+  - _SortFunc.js / SortFunc.js
+  - __SortFuncOrder.js
+- delete array.operation.sort
+  - sort / sortNumber / sortLength / sortDictionary
+
 ### 9.0.0
 #### 2020/10/27(Tue)
 - unsupport WSH
