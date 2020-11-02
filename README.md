@@ -339,6 +339,8 @@ You can now use the functions of the parts.js object.
 - add SortFunc
   - _SortFunc.js / SortFunc.js
   - __SortFuncOrder.js
+- delete array.operation.sort
+  - sort / sortNumber / sortLength / sortDictionary
 
 ### 9.0.0
 #### 2020/10/27(Tue)

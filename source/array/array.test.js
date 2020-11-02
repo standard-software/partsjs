@@ -2387,91 +2387,34 @@ export const test_execute_array = (parts) => {
       it('test_operation_sort', () => {
 
         checkEqual([0, 1, 2],
-          array.operation.sort([1, 2, 0])
+          [1, 2, 0].sort(SortFunc.order.normal.ascending)
         );
         checkEqual([2, 1, 0],
-          array.operation.sort([1, 2, 0], 'descending')
+          [1, 2, 0].sort(SortFunc.order.normal.descending)
         );
         checkEqual(['', 'A', 'AA', 'Aa', 'a', 'aA', 'aa'],
-          array.operation.sort(
-            ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
-            'ascending'
+          ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''].sort(
+            SortFunc.order.normal.ascending
           )
         );
         checkEqual(['', 'a', 'A', 'Aa', 'aa', 'aA', 'AA'],
-          array.operation.sort(
-            ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
-            'ascending',
-            v => v.length
+          ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''].sort(
+            SortFunc([
+              [SortFunc.order.normal.ascending, v => v.length]
+            ])
           )
         );
-
-        // object named parameter
-        checkEqual([0, 1, 2],
-          array.operation.sort(
-            { array: [1, 2, 0] }
-          )
-        );
-        checkEqual([2, 1, 0],
-          array.operation.sort(
-            {
-              array: [1, 2, 0],
-              order: 'descending'
-            }
-          )
-        );
-        checkEqual(['', 'a', 'A', 'Aa', 'aa', 'aA', 'AA'],
-          array.operation.sort(
-            {
-              array: ['a', 'A', 'Aa', 'aa', 'aA', 'AA', ''],
-              order: 'ascending',
-              func: v => v.length
-            }
-          )
-        );
-
-        // exception
-        checkEqual(false, isThrownException(() => {
-          array.operation.sort([0, 1]);
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(() => {
-          array.operation.sort([0, 1], 'ascending');
-        }, 'TypeError'));
-        checkEqual(false, isThrownException(() => {
-          array.operation.sort([0, 1], 'descending');
-        }, 'TypeError'));
-
-        checkEqual(true, isThrownException(() => {
-          array.operation.sort([0, 1], 'desc');
-        }, 'TypeError'));
-        checkEqual(true, isThrownException(() => {
-          array.operation.sort([0, 1], 'ascending', null);
-        }, 'TypeError'));
-
       });
     };
 
     const test_operation_sortNumber = () => {
       it('test_operation_sortNumber', () => {
         checkEqual([0, 1, 2, 3, 4, 5],
-          array.operation.sortNumberAscending([3,4,1,2,5,0])
+          [3,4,1,2,5,0].sort(SortFunc.order.normal.ascending)
         );
         checkEqual([5, 4, 3, 2, 1, 0],
-          array.operation.sortNumberDescending([3,4,1,2,5,0])
+          [3,4,1,2,5,0].sort(SortFunc.order.normal.descending)
         );
-
-        // exception
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortNumberAscending(1);
-        }, 'TypeError'));
-
-        checkEqual(false, isThrownException(() => {
-          array.operation.sortNumberAscending([0, 1, 2]);
-        }, 'TypeError'));
-
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortNumberAscending([0, '1', 2]);
-        }, 'TypeError'));
 
       });
     };
@@ -2479,207 +2422,33 @@ export const test_execute_array = (parts) => {
     const test_operation_sortLength = () => {
       it('test_operation_sortLength', () => {
         checkEqual(['a', 'aa', 'aaa'],
-          array.operation.sortLengthAscending(['aaa', 'a', 'aa'])
+          ['aaa', 'a', 'aa'].sort(
+            SortFunc([
+              [SortFunc.order.normal.ascending, v => v.length]
+            ])
+          )
         );
         checkEqual(['aaa', 'aa', 'a'],
-          array.operation.sortLengthDescending(['aaa', 'a', 'aa'])
+          ['aaa', 'a', 'aa'].sort(
+            SortFunc([
+              [SortFunc.order.normal.descending, v => v.length]
+            ])
+          )
         );
-        checkCompare(parts.compare.equalDeep,
+        checkEqual(
           ['a', [0, 1], 'aaa'],
-          array.operation.sortLengthAscending(['aaa', 'a', [0, 1]])
+          ['aaa', 'a', [0, 1]].sort(
+            SortFunc([
+              [SortFunc.order.normal.ascending, v => v.length]
+            ])
+          )
         );
-        checkCompare(parts.compare.equalDeep,
+        checkEqual(
           ['aaa', [0, 1], 'a'],
-          array.operation.sortLengthDescending(['aaa', 'a', [0, 1]])
-        );
-
-        // exception
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortLengthAscending(1);
-        }, 'TypeError'));
-
-        checkEqual(false, isThrownException(() => {
-          array.operation.sortLengthAscending(['a', 'aa']);
-        }, 'TypeError'));
-
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortLengthAscending([0, 'aa']);
-        }, 'TypeError'));
-
-        checkEqual(false, isThrownException(() => {
-          array.operation.sortLengthAscending([[0], [1, 2]]);
-        }, 'TypeError'));
-
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortLengthAscending([0, [1, 2]]);
-        }, 'TypeError'));
-
-      });
-    };
-
-    const test_operation_sortDictionary = () => {
-      it('test_operation_sortDictionary', () => {
-        checkEqual(['a', 'A', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB', 'B', 'b'],
-          array.operation.sortDictionaryAscending(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            array.operation.sortDictionary.casePriority.ignoreCase
-          )
-        );
-        checkEqual(['B', 'b', 'aB', 'ab', 'Ab', 'AB', 'aa', 'Aa', 'AA', 'aA', 'a', 'A'],
-          array.operation.sortDictionaryDescending(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            array.operation.sortDictionary.casePriority.ignoreCase
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          array.operation.sortDictionaryAscending(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            array.operation.sortDictionary.casePriority.upperCase
-          )
-        );
-        checkEqual(['B', 'b', 'AB', 'Ab', 'aB', 'ab', 'AA', 'Aa', 'aA', 'aa', 'A', 'a'],
-          array.operation.sortDictionaryDescending(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            array.operation.sortDictionary.casePriority.upperCase
-          )
-        );
-        checkEqual(['a', 'A', 'aa', 'aA', 'Aa', 'AA', 'ab', 'aB', 'Ab', 'AB', 'b', 'B'],
-          array.operation.sortDictionaryAscending(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            array.operation.sortDictionary.casePriority.lowerCase
-          )
-        );
-        checkEqual(['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'],
-          array.operation.sortDictionaryDescending(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            array.operation.sortDictionary.casePriority.lowerCase
-          )
-        );
-
-        // exception
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortDictionaryAscending(1);
-        }, 'TypeError'));
-
-        checkEqual(false, isThrownException(() => {
-          array.operation.sortDictionaryAscending(['a', 'aa']);
-        }, 'TypeError'));
-
-        checkEqual(true, isThrownException(() => {
-          array.operation.sortDictionaryAscending([0, 'aa']);
-        }, 'TypeError'));
-
-        // object named parameter
-        const { sortDictionary } = array.operation;
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            order: sortDictionary.order.ascending,
-            casePriority: sortDictionary.casePriority.upperCase,
-            func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            order: sortDictionary.order.ascending,
-            casePriority: sortDictionary.casePriority.upperCase,
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            order: sortDictionary.order.ascending,
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB']
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            casePriority: sortDictionary.casePriority.upperCase,
-            func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary({
-            array: ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            casePriority: sortDictionary.casePriority.upperCase,
-          })
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            {
-              order: sortDictionary.order.ascending,
-              casePriority: sortDictionary.casePriority.upperCase,
-              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-            }
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            sortDictionary.order.ascending,
-            {
-              casePriority: sortDictionary.casePriority.upperCase,
-              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-            }
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            sortDictionary.order.ascending,
-            sortDictionary.casePriority.upperCase,
-            {
-              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-            }
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            sortDictionary.order.ascending,
-            {
-              casePriority: sortDictionary.casePriority.upperCase,
-            }
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            {
-              order: sortDictionary.order.ascending,
-              casePriority: sortDictionary.casePriority.upperCase,
-            }
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            {
-              order: sortDictionary.order.ascending,
-              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-            }
-          )
-        );
-        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
-          sortDictionary(
-            ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'],
-            {
-              casePriority: sortDictionary.casePriority.upperCase,
-              func: sortDictionary.targetFunc.returnValueErrorNotIsString,
-            }
+          ['aaa', 'a', [0, 1]].sort(
+            SortFunc([
+              [SortFunc.order.normal.descending, v => v.length]
+            ])
           )
         );
 
@@ -3061,7 +2830,6 @@ export const test_execute_array = (parts) => {
     test_operation_sort();
     test_operation_sortNumber();
     test_operation_sortLength();
-    test_operation_sortDictionary();
 
     test_SortFunc();
     test_SortFunc_Dictionary();

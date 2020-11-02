@@ -14,7 +14,7 @@ import objectJs from './object/object.js';
 import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
 
-export const VERSION = '9.1.0 beta 2';
+export const VERSION = '9.1.0 beta 3';
 
 let rootAlias = {};
 const propertyNames = {};

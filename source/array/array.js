@@ -15,9 +15,6 @@ import groupJs from './group.js';
 import _uniqueJs from './_unique.js';
 import uniqueJs from './unique.js';
 import array_operationJs from './array_operation.js';
-import _sortJs from './operation/_sort.js';
-import sortJs from './operation/sort.js';
-import sortDictionaryJs from './operation/sortDictionary.js';
 import __SortFuncOrderJs from './__SortFuncOrder.js';
 import _SortFuncJs from './_SortFunc.js';
 import SortFuncJs from './SortFunc.js';
@@ -46,9 +43,6 @@ const arrayJs = {
 
 const arrayOperationJs = {
   ...array_operationJs,
-  ..._sortJs,
-  ...sortJs,
-  ...sortDictionaryJs,
 };
 
 export const {
@@ -114,12 +108,6 @@ export const {
 //   _remainFirst, _remainLast,
 //   _filter,
 
-//   _sort,
-//   _sortNumber,
-//   _sortLength,
-
-//   _sortDictionary,
-
 //   insert, add,
 //   deleteLength, deleteIndex,
 //   deleteFirst, deleteLast,
@@ -131,14 +119,6 @@ export const {
 //   remainFirst, remainLast,
 //   filter,
 
-//   sort,
-//   sortNumber,
-//   sortLength,
-//   sortNumberAscending, sortNumberDescending,
-//   sortLengthAscending, sortLengthDescending,
-
-//   sortDictionary,
-//   sortDictionaryAscending, sortDictionaryDescending,
 // `);
 export const operation = arrayOperationJs;
 
