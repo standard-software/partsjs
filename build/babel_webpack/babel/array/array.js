@@ -39,12 +39,6 @@ var _unique3 = _interopRequireDefault(require("./unique.js"));
 
 var _array_operation = _interopRequireDefault(require("./array_operation.js"));
 
-var _sort = _interopRequireDefault(require("./operation/_sort.js"));
-
-var _sort2 = _interopRequireDefault(require("./operation/sort.js"));
-
-var _sortDictionary = _interopRequireDefault(require("./operation/sortDictionary.js"));
-
 var _SortFuncOrder = _interopRequireDefault(require("./__SortFuncOrder.js"));
 
 var _SortFunc2 = _interopRequireDefault(require("./_SortFunc.js"));
@@ -61,7 +55,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _map2["default"]), _map3["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _group3["default"]), _unique2["default"]), _unique3["default"]), _SortFuncOrder["default"]), _SortFunc2["default"]), _SortFunc3["default"]);
 
-var arrayOperationJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sort2["default"]), _sortDictionary["default"]);
+var arrayOperationJs = _objectSpread({}, _array_operation["default"]);
 
 var _min = arrayJs._min,
     _max = arrayJs._max,
@@ -141,10 +135,6 @@ var _min = arrayJs._min,
 //   _pushFirst, _pushLast,
 //   _remainFirst, _remainLast,
 //   _filter,
-//   _sort,
-//   _sortNumber,
-//   _sortLength,
-//   _sortDictionary,
 //   insert, add,
 //   deleteLength, deleteIndex,
 //   deleteFirst, deleteLast,
@@ -155,13 +145,6 @@ var _min = arrayJs._min,
 //   pushFirst, pushLast,
 //   remainFirst, remainLast,
 //   filter,
-//   sort,
-//   sortNumber,
-//   sortLength,
-//   sortNumberAscending, sortNumberDescending,
-//   sortLengthAscending, sortLengthDescending,
-//   sortDictionary,
-//   sortDictionaryAscending, sortDictionaryDescending,
 // `);
 
 exports.arrayToIndexValueArray = arrayToIndexValueArray;
