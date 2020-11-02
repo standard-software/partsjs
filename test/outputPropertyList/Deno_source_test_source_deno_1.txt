@@ -25,6 +25,7 @@
 .array._NumberArray:[object Function]:function
 .array._single:[object Function]:function
 .array._some:[object Function]:function
+.array._SortFunc:[object Function]:function
 .array._subFirst:[object Function]:function
 .array._subIndex:[object Function]:function
 .array._subLast:[object Function]:function
@@ -119,6 +120,7 @@
 .array.operation.trimLast:[object Function]:function
 .array.single:[object Function]:function
 .array.some:[object Function]:function
+.array.SortFunc:[object Function]:function
 .array.subFirst:[object Function]:function
 .array.subIndex:[object Function]:function
 .array.subLast:[object Function]:function
@@ -621,6 +623,7 @@
 .parts.array._NumberArray:[object Function]:function
 .parts.array._single:[object Function]:function
 .parts.array._some:[object Function]:function
+.parts.array._SortFunc:[object Function]:function
 .parts.array._subFirst:[object Function]:function
 .parts.array._subIndex:[object Function]:function
 .parts.array._subLast:[object Function]:function
@@ -715,6 +718,7 @@
 .parts.array.operation.trimLast:[object Function]:function
 .parts.array.single:[object Function]:function
 .parts.array.some:[object Function]:function
+.parts.array.SortFunc:[object Function]:function
 .parts.array.subFirst:[object Function]:function
 .parts.array.subIndex:[object Function]:function
 .parts.array.subLast:[object Function]:function

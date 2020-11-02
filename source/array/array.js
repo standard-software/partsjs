@@ -18,8 +18,9 @@ import array_operationJs from './array_operation.js';
 import _sortJs from './operation/_sort.js';
 import sortJs from './operation/sort.js';
 import sortDictionaryJs from './operation/sortDictionary.js';
-
-// import { _copyProperty } from './object/object_common.js';
+import __SortFuncOrderJs from './__SortFuncOrder.js';
+import _SortFuncJs from './_SortFunc.js';
+import SortFuncJs from './SortFunc.js';
 
 const arrayJs = {
   ...array_commonJs,
@@ -38,6 +39,9 @@ const arrayJs = {
   ...groupJs,
   ..._uniqueJs,
   ...uniqueJs,
+  ...__SortFuncOrderJs,
+  ..._SortFuncJs,
+  ...SortFuncJs,
 };
 
 const arrayOperationJs = {
@@ -66,6 +70,8 @@ export const {
   _IntegerArray,
   _arrayEntries,
 
+  _SortFunc,
+
   from,
 
   min, max,
@@ -85,6 +91,8 @@ export const {
   NumberArray,
   IntegerArray,
   arrayEntries,
+
+  SortFunc,
 
   // Another name
   findIndex, findBackIndex,
@@ -153,6 +161,8 @@ export default {
   _IntegerArray,
   _arrayEntries,
 
+  _SortFunc,
+
   from,
 
   min, max,
@@ -172,6 +182,8 @@ export default {
   NumberArray,
   IntegerArray,
   arrayEntries,
+
+  SortFunc,
 
   // Another name
   findIndex, findBackIndex,

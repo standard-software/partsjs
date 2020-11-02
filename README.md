@@ -324,7 +324,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 9.1.0
-#### 2020/10/30(Fri)
+#### 2020/11/02(Mon)
 - update clone / cloneDeep
   - if clone / cloneDeep args cloneFunc is undefined
     call clone / cloneDeep Fast version
@@ -336,6 +336,9 @@ You can now use the functions of the parts.js object.
   - Speeding up
 - add from array_common.js
   - _map.js/map.js
+- add SortFunc
+  - _SortFunc.js / SortFunc.js
+  - __SortFuncOrder.js
 
 ### 9.0.0
 #### 2020/10/27(Tue)

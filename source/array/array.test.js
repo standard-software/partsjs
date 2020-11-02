@@ -24,6 +24,7 @@ export const test_execute_array = (parts) => {
       subIndex, subLength,
       subFirst, subLast,
       arrayEntries,
+      SortFunc,
     } = parts.array;
 
     const {
@@ -2685,6 +2686,200 @@ export const test_execute_array = (parts) => {
       });
     };
 
+    const test_SortFunc = () => {
+      it('test_SortFunc', () => {
+
+        const userList = [
+          { name: 'c', age: 20 },
+          { name: 'b', age: 20 },
+          { name: 'a', age: 20 },
+          { name: 'c', age: 21 },
+        ];
+
+        var sortedUserList = [...userList]
+          .sort(SortFunc([
+            [SortFunc.order.normal.ascending, v => v.name],
+            [SortFunc.order.normal.descending, v => v.age],
+          ]));
+        checkEqual(['a', 'b', 'c', 'c'], sortedUserList.map(v => v.name));
+        checkEqual([20, 20, 21, 20], sortedUserList.map(v => v.age));
+
+        var sortedUserList = [...userList]
+          .sort(SortFunc([
+            [SortFunc.order.normal.descending, v => v.name],
+            [SortFunc.order.normal.ascending, v => v.age],
+          ]));
+        checkEqual(['c', 'c', 'b', 'a'], sortedUserList.map(v => v.name));
+        checkEqual([20, 21, 20, 20], sortedUserList.map(v => v.age));
+
+        checkEqual(false, isThrown(() => {
+          SortFunc([
+            [SortFunc.order.normal.descending, v => v.name],
+            [SortFunc.order.normal.ascending, v => v.age],
+          ]);
+        }));
+        checkEqual(false, isThrown(() => {
+          SortFunc([
+            [SortFunc.order.normal.descending, v => v.name, true],
+            [SortFunc.order.normal.ascending, v => v.age],
+          ]);
+        }));
+        checkEqual(true, isThrown(() => {
+          SortFunc([
+            [SortFunc.order.normal.descending],
+            [SortFunc.order.normal.ascending, v => v.age],
+          ]);
+        }));
+
+      });
+    };
+
+    const test_SortFunc_Dictionary = () => {
+      it('test_SortFunc_Dictionary', () => {
+
+        const unsortedList = [
+          'a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'
+        ];
+
+        var sortedList = [...unsortedList]
+          .sort(SortFunc.order.dictionaryUpperCase.ascending);
+        checkEqual(
+          ['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortedList,
+        );
+        var sortedList = [...unsortedList]
+          .sort(SortFunc.order.dictionaryUpperCase.descending, v => v);
+        checkEqual(
+          ['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'],
+          sortedList,
+        );
+
+        var sortedList = [...unsortedList]
+          .sort(SortFunc([
+            [SortFunc.order.dictionaryUpperCase.ascending, v => v],
+          ]));
+        checkEqual(
+          ['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'],
+          sortedList,
+        );
+        var sortedList = [...unsortedList]
+          .sort(SortFunc([
+            [SortFunc.order.dictionaryUpperCase.descending, v => v],
+          ]));
+        checkEqual(
+          ['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'],
+          sortedList,
+        );
+        var sortedList = [...unsortedList]
+          .sort(SortFunc([
+            [SortFunc.order.dictionaryLowerCase.ascending, v => v],
+          ]));
+        checkEqual(
+          ['a', 'A', 'aa', 'aA', 'Aa', 'AA', 'ab', 'aB', 'Ab', 'AB', 'b', 'B'],
+          sortedList,
+        );
+        var sortedList = [...unsortedList]
+          .sort(SortFunc([
+            [SortFunc.order.dictionaryLowerCase.descending, v => v],
+          ]));
+        checkEqual(
+          ['B', 'b', 'AB', 'Ab', 'aB', 'ab', 'AA', 'Aa', 'aA', 'aa', 'A', 'a'],
+          sortedList,
+        );
+
+      });
+    };
+
+    const test_SortFunc_Version = () => {
+      it('test_SortFunc_Version', () => {
+
+        const versions = [
+          '5.0.0.',
+          '1.3.0.9',
+          '0.2.0',
+          '3.1.2',
+          '0.1.6',
+          '5.0.0',
+          '3.3.3.3',
+          '3.3.3.3.3',
+          '3.10',
+          '0.2.0',
+          '0.2.0a',
+          '0.2.0aa',
+          '0.2.0AA',
+          '0.2.0Aa',
+          '0.2.0aA',
+          '0.2.0c',
+          '0.2.0b',
+          '0.2.0A',
+          '0.2.0C',
+          '0.2.0B',
+          '0.2.0.a',
+          '0.2.0.c',
+          '0.2.0.b',
+          '0.2.0.A',
+          '0.2.0.C',
+          '0.2.0.B',
+          '5.0.0.',
+          '5.0.0.0',
+        ];
+
+        const outputVersions = [
+          '5.0.0.0',
+          '5.0.0.',
+          '5.0.0.',
+          '5.0.0',
+          '3.10',
+          '3.3.3.3.3',
+          '3.3.3.3',
+          '3.1.2',
+          '1.3.0.9',
+          '0.2.0C',
+          '0.2.0c',
+          '0.2.0B',
+          '0.2.0b',
+          '0.2.0AA',
+          '0.2.0Aa',
+          '0.2.0aA',
+          '0.2.0aa',
+          '0.2.0A',
+          '0.2.0a',
+          '0.2.0.C',
+          '0.2.0.c',
+          '0.2.0.B',
+          '0.2.0.b',
+          '0.2.0.A',
+          '0.2.0.a',
+          '0.2.0',
+          '0.2.0',
+          '0.1.6',
+        ];
+
+        var sortedVersions = [
+          ...versions,
+        ].sort(SortFunc.order.version.descending);
+        checkEqual(outputVersions, sortedVersions);
+        var sortedVersions = [
+          ...versions,
+        ].sort(SortFunc.order.version.ascending);
+        checkEqual([...outputVersions].reverse(), sortedVersions);
+
+        var sortedVersions = [
+          ...versions,
+        ].sort(SortFunc([
+          [SortFunc.order.version.descending, v => v],
+        ]));
+        checkEqual(outputVersions, sortedVersions);
+        var sortedVersions = [
+          ...versions,
+        ].sort(SortFunc([
+          [SortFunc.order.version.ascending, v => v],
+        ]));
+        checkEqual([...outputVersions].reverse(), sortedVersions);
+
+      });
+    };
+
     const test_ArrayEntries_standard = () => {
       it('test_ArrayEntries_standard', () => {
 
@@ -2799,6 +2994,10 @@ export const test_execute_array = (parts) => {
     test_operation_sortNumber();
     test_operation_sortLength();
     test_operation_sortDictionary();
+
+    test_SortFunc();
+    test_SortFunc_Dictionary();
+    test_SortFunc_Version();
 
     test_ArrayEntries_standard();
     test_arrayEntries();
