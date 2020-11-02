@@ -38,7 +38,6 @@ var test_execute_common = function test_execute_common(parts) {
   describe('test_execute_common', function () {
     var clone = parts.clone,
         cloneDeep = parts.cloneDeep,
-        cloneDeepFast = parts.cloneDeepFast,
         merge = parts.merge,
         isUndefined = parts.isUndefined;
     var _parts$test2 = parts.test,
@@ -54,6 +53,196 @@ var test_execute_common = function test_execute_common(parts) {
 
     var test_clone_object = function test_clone_object() {
       it('test_clone_object', function () {
+        var testObject1 = {
+          a: 1,
+          b: 2,
+          c: 3
+        }; // no clone
+
+        var object1 = testObject1;
+        object1.a = 0;
+        checkEqual(0, object1.a);
+        checkEqual(0, testObject1.a);
+        testObject1.a = 1; // clone
+
+        var object1 = clone(testObject1, clone.func.DefaultArray());
+        object1.a = 0;
+        checkEqual(0, object1.a);
+        checkEqual(2, object1.b);
+        checkEqual(3, object1.c);
+        checkEqual(1, testObject1.a);
+        checkEqual(2, testObject1.b);
+        checkEqual(3, testObject1.c); // no clone deep
+
+        var testObject2 = {
+          a: 4,
+          b: 5,
+          c: 6
+        };
+        var testObject3 = {
+          a: 1,
+          b: 2,
+          c: 3,
+          d: testObject2
+        };
+        var object1 = clone(testObject3, clone.func.DefaultArray());
+        object1.a = 0;
+        checkEqual(0, object1.a);
+        checkEqual(1, testObject3.a);
+        checkEqual(true, object1.d === testObject3.d);
+        checkEqual(6, object1.d.c);
+        checkEqual(6, testObject3.d.c);
+        object1.d.a = 7;
+        checkEqual(7, object1.d.a);
+        checkEqual(7, testObject3.d.a); // object from null
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          var object1 = Object.create(null);
+          object1.a = 1;
+          var object2 = clone(object1, clone.func.DefaultArray());
+          object2.a = 0;
+          checkEqual(1, object1.a);
+          checkEqual(0, object2.a);
+          var object1 = Object.create(null);
+          object1.a = Object.create(null);
+          object1.a.b = 'test';
+          var object2 = clone(object1, clone.func.DefaultArray());
+          checkEqual(true, parts.isObjectFromNull(object1.a));
+          checkEqual(true, parts.isObjectFromNull(object1));
+          checkEqual(true, parts.isObjectFromNull(object2.a));
+          testCounter();
+          checkEqual(true, parts.isObjectFromNull(object2));
+          checkEqual(false, object1 === object2);
+          checkEqual(true, object1.a === object2.a);
+          checkEqual(true, object1.a.b === object2.a.b);
+        } // module object clone no support
+
+
+        if (parts.isModule(parts)) {
+          var cloneParts = parts.clone(parts, clone.func.DefaultArray());
+          checkEqual(true, cloneParts === parts);
+          checkEqual(true, parts.isModule(cloneParts));
+          checkEqual(false, parts.isObjectNormal(cloneParts));
+          checkEqual(false, parts.isObjectFromNull(cloneParts));
+        }
+      });
+    };
+
+    var test_clone_array = function test_clone_array() {
+      it('test_clone_array', function () {
+        var testArray1 = [1, 2, 3]; // no clone
+
+        var array1 = testArray1;
+        array1[0] = 0;
+        checkEqual(0, array1[0], 'test');
+        checkEqual(0, testArray1[0]);
+        testArray1[0] = 1; // clone
+
+        var array1 = clone(testArray1, clone.func.DefaultArray());
+        array1[0] = 0;
+        checkEqual(0, array1[0]);
+        checkEqual(1, testArray1[0]); // no clone deep
+
+        var testArray2 = ['a', 'b', 'c'];
+        var testArray3 = [1, 2, 3, testArray2];
+        var array1 = clone(testArray3, clone.func.DefaultArray());
+        array1[0] = 0;
+        checkEqual(0, array1[0]);
+        checkEqual(1, testArray3[0]);
+        checkEqual(true, array1[3] === testArray3[3]);
+        array1[3][0] = 'd';
+        checkEqual('d,b,c', array1[3].join(','));
+        checkEqual('d,b,c', testArray3[3].join(','));
+      });
+    };
+
+    var test_clone_date = function test_clone_date() {
+      it('test_clone_date', function () {
+        // no clone
+        var testDate1 = new Date('2019/10/11');
+        var date1 = testDate1;
+        checkEqual(2019, date1.getFullYear());
+        checkEqual(10, date1.getMonth() + 1);
+        checkEqual(11, date1.getDate());
+        date1.setDate(12);
+        checkEqual(2019, date1.getFullYear());
+        checkEqual(10, date1.getMonth() + 1);
+        checkEqual(12, date1.getDate());
+        checkEqual(2019, testDate1.getFullYear());
+        checkEqual(10, testDate1.getMonth() + 1);
+        checkEqual(12, testDate1.getDate()); // date type clone
+
+        var testDate1 = new Date('2019/10/11');
+        var date1 = clone(testDate1, clone.func.DefaultArray());
+        date1.setDate(12);
+        checkEqual(12, date1.getDate());
+        checkEqual(11, testDate1.getDate()); // object array only clone
+
+        var testDate1 = new Date('2019/10/11');
+        var date1 = clone(testDate1, [clone.func.arraySeries, clone.func.object]);
+        date1.setDate(12);
+        checkEqual(12, date1.getDate());
+        checkEqual(12, testDate1.getDate()); // object array date clone
+
+        var testDate1 = new Date('2019/10/11');
+        var date1 = clone(testDate1, [clone.func.date, clone.func.arraySeries, clone.func.object]);
+        date1.setDate(12);
+        checkEqual(12, date1.getDate());
+        checkEqual(11, testDate1.getDate());
+      });
+    };
+
+    var test_clone_function = function test_clone_function() {
+      it('test_clone_function', function () {
+        var testFunc1 = function testFunc1() {
+          return 'ABC';
+        }; // no clone
+
+
+        var func1 = testFunc1;
+        checkEqual(true, func1 === testFunc1);
+        checkEqual('ABC', func1()); // clone
+
+        var func1 = clone(testFunc1, clone.func.DefaultArray());
+        checkEqual(true, func1 === testFunc1);
+        checkEqual('ABC', func1());
+      });
+    };
+
+    var test_clone_regexp = function test_clone_regexp() {
+      it('test_clone_regexp', function () {
+        var testRegExp1 = new RegExp('^a'); // no clone
+
+        var regexp1 = testRegExp1;
+        checkEqual(true, regexp1 === testRegExp1, 'test_clone_regexp 1');
+        checkEqual(true, '^a' === testRegExp1.source);
+        checkEqual(true, '^a' === regexp1.source); // clone
+
+        var regexp1 = clone(testRegExp1, clone.func.DefaultArray());
+        checkEqual(false, regexp1 === testRegExp1);
+        checkEqual(true, '^a' === testRegExp1.source);
+        checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
+
+        var regexp1 = clone(testRegExp1, [clone.func.objectLike]);
+        checkEqual(false, regexp1 === testRegExp1, 'test_clone_regexp clone');
+        checkEqual(true, '^a' === testRegExp1.source);
+        checkEqual(false, '^a' === regexp1.source); // clone
+
+        var testRegExp2 = /^a/;
+        var regexp1 = clone(testRegExp2, clone.func.DefaultArray());
+        checkEqual(false, regexp1 === testRegExp2);
+        checkEqual(true, '^a' === testRegExp2.source);
+        checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
+
+        var regexp1 = clone(testRegExp2, [clone.func.objectLike]);
+        checkEqual(false, regexp1 === testRegExp2);
+        checkEqual(true, '^a' === testRegExp2.source);
+        checkEqual(false, '^a' === regexp1.source);
+      });
+    };
+
+    var test_clone_Fast_object = function test_clone_Fast_object() {
+      it('test_clone_Fast_object', function () {
         var testObject1 = {
           a: 1,
           b: 2,
@@ -111,7 +300,8 @@ var test_execute_common = function test_execute_common(parts) {
           checkEqual(true, parts.isObjectFromNull(object1.a));
           checkEqual(true, parts.isObjectFromNull(object1));
           checkEqual(true, parts.isObjectFromNull(object2.a));
-          checkEqual(true, parts.isObjectFromNull(object2));
+          checkEqual(true, parts.isObjectNormal(object2)); // clone Fast is no support Object.create(null)
+
           checkEqual(false, object1 === object2);
           checkEqual(true, object1.a === object2.a);
           checkEqual(true, object1.a.b === object2.a.b);
@@ -128,8 +318,8 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_clone_array = function test_clone_array() {
-      it('test_clone_array', function () {
+    var test_clone_Fast_array = function test_clone_Fast_array() {
+      it('test_clone_Fast_array', function () {
         var testArray1 = [1, 2, 3]; // no clone
 
         var array1 = testArray1;
@@ -156,8 +346,8 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_clone_date = function test_clone_date() {
-      it('test_clone_date', function () {
+    var test_clone_Fast_date = function test_clone_Fast_date() {
+      it('test_clone_Fast_date', function () {
         // no clone
         var testDate1 = new Date('2019/10/11');
         var date1 = testDate1;
@@ -176,24 +366,12 @@ var test_execute_common = function test_execute_common(parts) {
         var date1 = clone(testDate1);
         date1.setDate(12);
         checkEqual(12, date1.getDate());
-        checkEqual(11, testDate1.getDate()); // object array only clone
-
-        var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [clone.func.arraySeries, clone.func.object]);
-        date1.setDate(12);
-        checkEqual(12, date1.getDate());
-        checkEqual(12, testDate1.getDate()); // object array date clone
-
-        var testDate1 = new Date('2019/10/11');
-        var date1 = clone(testDate1, [clone.func.date, clone.func.arraySeries, clone.func.object]);
-        date1.setDate(12);
-        checkEqual(12, date1.getDate());
-        checkEqual(11, testDate1.getDate());
+        checkEqual(12, testDate1.getDate()); // clone Fast is not support date clone
       });
     };
 
-    var test_clone_function = function test_clone_function() {
-      it('test_clone_function', function () {
+    var test_clone_Fast_function = function test_clone_Fast_function() {
+      it('test_clone_Fast_function', function () {
         var testFunc1 = function testFunc1() {
           return 'ABC';
         }; // no clone
@@ -209,8 +387,8 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_clone_regexp = function test_clone_regexp() {
-      it('test_clone_regexp', function () {
+    var test_clone_Fast_regexp = function test_clone_Fast_regexp() {
+      it('test_clone_Fast_regexp', function () {
         var testRegExp1 = new RegExp('^a'); // no clone
 
         var regexp1 = testRegExp1;
@@ -219,25 +397,16 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, '^a' === regexp1.source); // clone
 
         var regexp1 = clone(testRegExp1);
-        checkEqual(false, regexp1 === testRegExp1);
+        checkEqual(true, regexp1 === testRegExp1);
         checkEqual(true, '^a' === testRegExp1.source);
-        checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
-
-        var regexp1 = clone(testRegExp1, [clone.func.objectLike]);
-        checkEqual(false, regexp1 === testRegExp1, 'test_clone_regexp clone');
-        checkEqual(true, '^a' === testRegExp1.source);
-        checkEqual(false, '^a' === regexp1.source); // clone
+        checkEqual(true, '^a' === regexp1.source); // clone Fast is not support RegExp clone
+        // clone
 
         var testRegExp2 = /^a/;
         var regexp1 = clone(testRegExp2);
-        checkEqual(false, regexp1 === testRegExp2);
+        checkEqual(true, regexp1 === testRegExp2);
         checkEqual(true, '^a' === testRegExp2.source);
-        checkEqual(true, '^a' === regexp1.source); // clone no RegExpFunction
-
-        var regexp1 = clone(testRegExp2, [clone.func.objectLike]);
-        checkEqual(false, regexp1 === testRegExp2);
-        checkEqual(true, '^a' === testRegExp2.source);
-        checkEqual(false, '^a' === regexp1.source);
+        checkEqual(true, '^a' === regexp1.source); // clone Fast is not support RegExp clone
       });
     };
 
@@ -262,7 +431,8 @@ var test_execute_common = function test_execute_common(parts) {
 
         var testDate1 = new Date('2019/10/11');
         var date1 = clone({
-          source: testDate1
+          source: testDate1,
+          cloneFuncArray: clone.func.DefaultArray()
         });
         date1.setDate(12);
         checkEqual(12, date1.getDate());
@@ -302,7 +472,7 @@ var test_execute_common = function test_execute_common(parts) {
           c: 3,
           d: testObject2
         };
-        var object1 = cloneDeep(testObject3);
+        var object1 = cloneDeep(testObject3, cloneDeep.func.DefaultArray());
         object1.a = 0;
         checkEqual(0, object1.a);
         checkEqual(1, testObject3.a);
@@ -317,7 +487,7 @@ var test_execute_common = function test_execute_common(parts) {
           var object1 = Object.create(null);
           object1.a = Object.create(null);
           object1.a.b = 'test';
-          var object2 = cloneDeep(object1);
+          var object2 = cloneDeep(object1, cloneDeep.func.DefaultArray());
           checkEqual(true, parts.isObjectFromNull(object1.a));
           checkEqual(true, parts.isObjectFromNull(object1));
           checkEqual(true, parts.isObjectFromNull(object2.a));
@@ -334,7 +504,7 @@ var test_execute_common = function test_execute_common(parts) {
         // clone deep
         var testArray2 = ['a', 'b', 'c'];
         var testArray3 = [1, 2, 3, testArray2];
-        var array1 = cloneDeep(testArray3);
+        var array1 = cloneDeep(testArray3, cloneDeep.func.DefaultArray());
         array1[0] = 0;
         checkEqual(0, array1[0]);
         checkEqual(1, testArray3[0]);
@@ -353,7 +523,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 2,
           c: 3
         }];
-        var value1 = clone(testValue1);
+        var value1 = clone(testValue1, cloneDeep.func.DefaultArray());
         value1[0] = 0;
         checkEqual(0, value1[0]);
         checkEqual(1, testValue1[0]);
@@ -366,7 +536,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 2,
           c: 3
         }];
-        var value1 = cloneDeep(testValue1);
+        var value1 = cloneDeep(testValue1, cloneDeep.func.DefaultArray());
         value1[0] = 0;
         checkEqual(0, value1[0]);
         checkEqual(1, testValue1[0]);
@@ -380,7 +550,7 @@ var test_execute_common = function test_execute_common(parts) {
           c: 3,
           d: [1, 2, 3]
         };
-        var value2 = clone(testValue2);
+        var value2 = clone(testValue2, cloneDeep.func.DefaultArray());
         value2.a = 0;
         checkEqual(0, value2.a);
         checkEqual(1, testValue2.a);
@@ -394,7 +564,7 @@ var test_execute_common = function test_execute_common(parts) {
           c: 3,
           d: [1, 2, 3]
         };
-        var value2 = cloneDeep(testValue2);
+        var value2 = cloneDeep(testValue2, cloneDeep.func.DefaultArray());
         value2.a = 0;
         checkEqual(0, value2.a);
         checkEqual(1, testValue2.a);
@@ -407,7 +577,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 2,
           c: [3, 4, 5]
         }];
-        var value1 = clone(testValue1);
+        var value1 = clone(testValue1, cloneDeep.func.DefaultArray());
         value1[3].c[0] = 6;
         checkEqual(6, value1[3].c[0]);
         checkEqual(6, testValue1[3].c[0]); // clone deep array object array
@@ -417,7 +587,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 2,
           c: [3, 4, 5]
         }];
-        var value1 = cloneDeep(testValue1);
+        var value1 = cloneDeep(testValue1, cloneDeep.func.DefaultArray());
         value1[3].c[0] = 6;
         checkEqual(6, value1[3].c[0]);
         checkEqual(3, testValue1[3].c[0]); // no clone deep object array object
@@ -432,7 +602,7 @@ var test_execute_common = function test_execute_common(parts) {
             g: 6
           }, 2, 3]
         };
-        var value2 = clone(testValue2);
+        var value2 = clone(testValue2, cloneDeep.func.DefaultArray());
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
         checkEqual(7, testValue2.d[0].e); // clone deep object array object
@@ -447,7 +617,7 @@ var test_execute_common = function test_execute_common(parts) {
             g: 6
           }, 2, 3]
         };
-        var value2 = cloneDeep(testValue2);
+        var value2 = cloneDeep(testValue2, cloneDeep.func.DefaultArray());
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
         checkEqual(4, testValue2.d[0].e);
@@ -468,7 +638,7 @@ var test_execute_common = function test_execute_common(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = clone(value1);
+        var value2 = clone(value1, cloneDeep.func.DefaultArray());
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(13, value1[3].getDate());
@@ -476,7 +646,7 @@ var test_execute_common = function test_execute_common(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeep(value1);
+        var value2 = cloneDeep(value1, cloneDeep.func.DefaultArray());
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(11, value1[3].getDate());
@@ -500,7 +670,7 @@ var test_execute_common = function test_execute_common(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1, date1];
-        var value2 = cloneDeep(value1);
+        var value2 = cloneDeep(value1, cloneDeep.func.DefaultArray());
         checkEqual(false, value1[3] === value2[3]);
         checkEqual(true, value1[3] === value1[4]);
         checkEqual(true, value2[3] === value2[4], 'date1 clone same object');
@@ -511,7 +681,7 @@ var test_execute_common = function test_execute_common(parts) {
       it('test_cloneDeep_regExp', function () {
         var regexp1 = new RegExp('^a'); // clone Deep
 
-        var regexp2 = cloneDeep(regexp1);
+        var regexp2 = cloneDeep(regexp1, cloneDeep.func.DefaultArray());
         checkEqual(false, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.source); // clone Deep no RegExpFunction
@@ -523,7 +693,7 @@ var test_execute_common = function test_execute_common(parts) {
 
         var regexp2 = cloneDeep({
           value: regexp1
-        });
+        }, cloneDeep.func.DefaultArray());
         checkEqual(false, regexp2.value === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.value.source); // clone Deep no RegExpFunction in Object
@@ -535,7 +705,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2.value.source); // clone Deep in Array
 
-        var regexp2 = cloneDeep([regexp1]);
+        var regexp2 = cloneDeep([regexp1], cloneDeep.func.DefaultArray());
         checkEqual(false, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2[0].source); // clone Deep no RegExpFunction in Array
@@ -546,7 +716,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(false, '^a' === regexp2[0].source);
         var regexp1 = /^a/; // clone Deep
 
-        var regexp2 = cloneDeep(regexp1);
+        var regexp2 = cloneDeep(regexp1, cloneDeep.func.DefaultArray());
         checkEqual(false, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.source); // clone Deep no RegExpFunction
@@ -558,7 +728,7 @@ var test_execute_common = function test_execute_common(parts) {
 
         var regexp2 = cloneDeep({
           value: regexp1
-        });
+        }, cloneDeep.func.DefaultArray());
         checkEqual(false, regexp2.value === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.value.source); // clone Deep no RegExpFunction in Object
@@ -570,7 +740,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(false, '^a' === regexp2.value.source); // clone Deep in Array
 
-        var regexp2 = cloneDeep([regexp1]);
+        var regexp2 = cloneDeep([regexp1], cloneDeep.func.DefaultArray());
         checkEqual(false, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2[0].source); // clone Deep no RegExpFunction in Array
@@ -582,7 +752,7 @@ var test_execute_common = function test_execute_common(parts) {
 
         var regexp1 = /^a/;
         var value1 = [1, 2, 3, regexp1, regexp1];
-        var value2 = cloneDeep(value1);
+        var value2 = cloneDeep(value1, cloneDeep.func.DefaultArray());
         checkEqual(false, value1[3] === value2[3]);
         checkEqual(true, value1[3] === value1[4]);
         checkEqual(true, value2[3] === value2[4], 'regexp1 clone same object');
@@ -605,7 +775,7 @@ var test_execute_common = function test_execute_common(parts) {
         };
         var object1 = cloneDeep({
           source: testObject3
-        });
+        }, cloneDeep.func.DefaultArray());
         object1.a = 0;
         checkEqual(0, object1.a);
         checkEqual(1, testObject3.a);
@@ -619,7 +789,8 @@ var test_execute_common = function test_execute_common(parts) {
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
         var value2 = cloneDeep({
-          source: value1
+          source: value1,
+          cloneFuncArray: cloneDeep.func.DefaultArray()
         });
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
@@ -651,7 +822,8 @@ var test_execute_common = function test_execute_common(parts) {
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1, date1];
         var value2 = cloneDeep({
-          source: value1
+          source: value1,
+          cloneFuncArray: cloneDeep.func.DefaultArray()
         });
         checkEqual(false, value1[3] === value2[3]);
         checkEqual(true, value1[3] === value1[4]);
@@ -766,7 +938,7 @@ var test_execute_common = function test_execute_common(parts) {
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbol(symbol1));
         var value1 = [symbol1];
-        var value2 = cloneDeep(value1);
+        var value2 = cloneDeep(value1, cloneDeep.func.DefaultArray());
         checkEqual(true, symbol1 === value1[0]);
         checkEqual(true, value1[0] === value2[0]);
         checkEqual(true, symbol1 === value2[0]);
@@ -789,7 +961,7 @@ var test_execute_common = function test_execute_common(parts) {
         };
 
         var value1 = [symbol1];
-        var value2 = cloneDeep(value1, [clone.func.forceSymbol].concat(_toConsumableArray(clone.func.defaultArray)));
+        var value2 = cloneDeep(value1, [cloneDeep.func.forceSymbol].concat(_toConsumableArray(cloneDeep.func.DefaultArray())));
         checkEqual(true, symbol1 === value1[0]);
         checkEqual(false, value1[0] === value2[0] // cloneDeep and new symbol
         );
@@ -817,15 +989,15 @@ var test_execute_common = function test_execute_common(parts) {
         var map2 = clone(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
         checkEqual(undefined, map2.get('key1'));
         checkEqual(false, map1 === map2);
-        var map2 = cloneDeep(map1, [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.objectLike]);
+        var map2 = cloneDeep(map1, [cloneDeep.func.date, cloneDeep.func.regExp, cloneDeep.func.ignoreFunction, cloneDeep.func.objectLike]);
         checkEqual(undefined, map2.get('key1')); // copy but no clone
 
         checkEqual(false, map1 === map2);
-        var map2 = clone(map1);
+        var map2 = clone(map1, clone.func.DefaultArray());
         checkEqual('value1', map2.get('key1')); // clone
 
         checkEqual(false, map1 === map2);
-        var map2 = cloneDeep(map1);
+        var map2 = cloneDeep(map1, cloneDeep.func.DefaultArray());
         checkEqual('value1', map2.get('key1')); // clone
 
         checkEqual(false, map1 === map2); // map object array
@@ -844,7 +1016,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 'c',
           d: [4, 5, 6]
         }]);
-        var map2 = cloneDeep(map1);
+        var map2 = cloneDeep(map1, cloneDeep.func.DefaultArray());
         checkEqual(false, map1 === map2);
         checkEqual('1', map2.get('a').a);
         checkEqual('b', map2.get('b')[0]);
@@ -856,7 +1028,7 @@ var test_execute_common = function test_execute_common(parts) {
         };
         var map1 = new Map();
         map1.set('a', object1);
-        var map2 = clone(map1);
+        var map2 = clone(map1, clone.func.DefaultArray());
         checkEqual(false, map1 === map2);
         checkEqual('1', map1.get('a').a);
         checkEqual('1', map2.get('a').a);
@@ -867,7 +1039,7 @@ var test_execute_common = function test_execute_common(parts) {
         };
         var map1 = new Map();
         map1.set('a', object1);
-        var map2 = cloneDeep(map1);
+        var map2 = cloneDeep(map1, cloneDeep.func.DefaultArray());
         checkEqual(false, map1 === map2);
         checkEqual('1', map1.get('a').a);
         checkEqual('1', map2.get('a').a);
@@ -900,11 +1072,11 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(false, set2.has('value1')); // no clone
 
         checkEqual(false, set1 === set2);
-        var set2 = clone(set1);
+        var set2 = clone(set1, clone.func.DefaultArray());
         checkEqual(true, set2.has('value1')); // clone
 
         checkEqual(false, set1 === set2);
-        var set2 = cloneDeep(set1);
+        var set2 = cloneDeep(set1, cloneDeep.func.DefaultArray());
         checkEqual(true, set2.has('value1')); // clone
 
         checkEqual(false, set1 === set2);
@@ -920,7 +1092,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual('test', object1.b);
         checkEqual('test', object1.a.b);
         checkEqual('test', object1.a.a.b);
-        var object2 = cloneDeep(object1);
+        var object2 = cloneDeep(object1, cloneDeep.func.DefaultArray());
         checkEqual('test', object2.b);
         checkEqual('test', object2.a.b);
         checkEqual('test', object2.a.a.b);
@@ -931,8 +1103,8 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_cloneDeepFast_object = function test_cloneDeepFast_object() {
-      it('test_cloneDeepFast_object', function () {
+    var test_cloneDeep_Fast_object = function test_cloneDeep_Fast_object() {
+      it('test_cloneDeep_Fast_object', function () {
         // clone deep
         var testObject2 = {
           a: 4,
@@ -945,7 +1117,7 @@ var test_execute_common = function test_execute_common(parts) {
           c: 3,
           d: testObject2
         };
-        var object1 = cloneDeepFast(testObject3);
+        var object1 = cloneDeep(testObject3);
         object1.a = 0;
         checkEqual(0, object1.a);
         checkEqual(1, testObject3.a);
@@ -960,7 +1132,7 @@ var test_execute_common = function test_execute_common(parts) {
           var object1 = Object.create(null);
           object1.a = Object.create(null);
           object1.a.b = 'test';
-          var object2 = cloneDeepFast(object1);
+          var object2 = cloneDeep(object1);
           checkEqual(true, parts.isObjectFromNull(object1.a));
           checkEqual(true, parts.isObjectFromNull(object1));
           checkEqual(true, parts.isObjectNormal(object2.a));
@@ -972,12 +1144,12 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_cloneDeepFast_array = function test_cloneDeepFast_array() {
-      it('test_cloneDeepFast_array', function () {
+    var test_cloneDeep_Fast_array = function test_cloneDeep_Fast_array() {
+      it('test_cloneDeep_Fast_array', function () {
         // clone deep
         var testArray2 = ['a', 'b', 'c'];
         var testArray3 = [1, 2, 3, testArray2];
-        var array1 = cloneDeepFast(testArray3);
+        var array1 = cloneDeep(testArray3);
         array1[0] = 0;
         checkEqual(0, array1[0]);
         checkEqual(1, testArray3[0]);
@@ -988,8 +1160,8 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_cloneDeepFast_object_array_mix = function test_cloneDeepFast_object_array_mix() {
-      it('test_cloneDeepFast_object_array_mix', function () {
+    var test_cloneDeep_Fast_object_array_mix = function test_cloneDeep_Fast_object_array_mix() {
+      it('test_cloneDeep_Fast_object_array_mix', function () {
         // no clone deep array object
         var testValue1 = [1, 2, 3, {
           a: 1,
@@ -1009,7 +1181,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 2,
           c: 3
         }];
-        var value1 = cloneDeepFast(testValue1);
+        var value1 = cloneDeep(testValue1);
         value1[0] = 0;
         checkEqual(0, value1[0]);
         checkEqual(1, testValue1[0]);
@@ -1037,7 +1209,7 @@ var test_execute_common = function test_execute_common(parts) {
           c: 3,
           d: [1, 2, 3]
         };
-        var value2 = cloneDeepFast(testValue2);
+        var value2 = cloneDeep(testValue2);
         value2.a = 0;
         checkEqual(0, value2.a);
         checkEqual(1, testValue2.a);
@@ -1060,7 +1232,7 @@ var test_execute_common = function test_execute_common(parts) {
           b: 2,
           c: [3, 4, 5]
         }];
-        var value1 = cloneDeepFast(testValue1);
+        var value1 = cloneDeep(testValue1);
         value1[3].c[0] = 6;
         checkEqual(6, value1[3].c[0]);
         checkEqual(3, testValue1[3].c[0]); // no clone deep object array object
@@ -1090,15 +1262,15 @@ var test_execute_common = function test_execute_common(parts) {
             g: 6
           }, 2, 3]
         };
-        var value2 = cloneDeepFast(testValue2);
+        var value2 = cloneDeep(testValue2);
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
         checkEqual(4, testValue2.d[0].e);
       });
     };
 
-    var test_cloneDeepFast_date = function test_cloneDeepFast_date() {
-      it('test_cloneDeepFast_date', function () {
+    var test_cloneDeep_Fast_date = function test_cloneDeep_Fast_date() {
+      it('test_cloneDeep_Fast_date', function () {
         // no clone
         var date1 = new Date('2019/10/11');
         checkEqual(2019, date1.getFullYear());
@@ -1115,11 +1287,11 @@ var test_execute_common = function test_execute_common(parts) {
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(13, value1[3].getDate());
-        checkEqual(true, value1[3] === value2[3]); // cloneDeepFast array date no clone
+        checkEqual(true, value1[3] === value2[3]); // cloneDeep array date no clone
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1];
-        var value2 = cloneDeepFast(value1);
+        var value2 = cloneDeep(value1);
         value2[3].setDate(13);
         checkEqual(13, value2[3].getDate());
         checkEqual(13, value1[3].getDate());
@@ -1127,63 +1299,63 @@ var test_execute_common = function test_execute_common(parts) {
 
         var date1 = new Date('2019/10/11');
         var value1 = [1, 2, 3, date1, date1];
-        var value2 = cloneDeepFast(value1);
+        var value2 = cloneDeep(value1);
         checkEqual(true, value1[3] === value2[3]);
         checkEqual(true, value1[3] === value1[4]);
         checkEqual(true, value2[3] === value2[4], 'date1 clone same object');
       });
     };
 
-    var test_cloneDeepFast_regExp = function test_cloneDeepFast_regExp() {
-      it('test_cloneDeepFast_regExp', function () {
+    var test_cloneDeep_Fast_regExp = function test_cloneDeep_Fast_regExp() {
+      it('test_cloneDeep_Fast_regExp', function () {
         var regexp1 = new RegExp('^a'); // clone Deep
 
-        var regexp2 = cloneDeepFast(regexp1);
+        var regexp2 = cloneDeep(regexp1);
         checkEqual(true, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.source); // clone Deep in Object
 
-        var regexp2 = cloneDeepFast({
+        var regexp2 = cloneDeep({
           value: regexp1
         });
         checkEqual(true, regexp2.value === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.value.source); // clone Deep in Array
 
-        var regexp2 = cloneDeepFast([regexp1]);
+        var regexp2 = cloneDeep([regexp1]);
         checkEqual(true, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2[0].source);
         var regexp1 = /^a/; // clone Deep
 
-        var regexp2 = cloneDeepFast(regexp1);
+        var regexp2 = cloneDeep(regexp1);
         checkEqual(true, regexp2 === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.source); // clone Deep in Object
 
-        var regexp2 = cloneDeepFast({
+        var regexp2 = cloneDeep({
           value: regexp1
         });
         checkEqual(true, regexp2.value === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2.value.source); // clone Deep in Array
 
-        var regexp2 = cloneDeepFast([regexp1]);
+        var regexp2 = cloneDeep([regexp1]);
         checkEqual(true, regexp2[0] === regexp1);
         checkEqual(true, '^a' === regexp1.source);
         checkEqual(true, '^a' === regexp2[0].source); // regexp1 clone same object
 
         var regexp1 = /^a/;
         var value1 = [1, 2, 3, regexp1, regexp1];
-        var value2 = cloneDeepFast(value1);
+        var value2 = cloneDeep(value1);
         checkEqual(true, value1[3] === value2[3]);
         checkEqual(true, value1[3] === value1[4]);
         checkEqual(true, value2[3] === value2[4], 'regexp1 clone same object');
       });
     };
 
-    var test_cloneDeepFast_function = function test_cloneDeepFast_function() {
-      it('test_cloneDeepFast_function', function () {
+    var test_cloneDeep_Fast_function = function test_cloneDeep_Fast_function() {
+      it('test_cloneDeep_Fast_function', function () {
         var testFunc1 = function testFunc1() {
           return 'ABC';
         }; // no clone
@@ -1201,7 +1373,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, object1.func === testFunc1);
         checkEqual('ABC', object1.func()); // clone Deep
 
-        var object1 = cloneDeepFast({
+        var object1 = cloneDeep({
           func: testFunc1
         });
         checkEqual(true, object1.func === testFunc1);
@@ -1215,14 +1387,14 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, array1[0] === testFunc1);
         checkEqual('ABC', array1[0]()); // clone Deep
 
-        var array1 = cloneDeepFast([testFunc1]);
+        var array1 = cloneDeep([testFunc1]);
         checkEqual(true, array1[0] === testFunc1);
         checkEqual('ABC', array1[0]());
       });
     };
 
-    var test_cloneDeepFast_symbol = function test_cloneDeepFast_symbol() {
-      it('test_cloneDeepFast_symbol', function () {
+    var test_cloneDeep_Fast_symbol = function test_cloneDeep_Fast_symbol() {
+      it('test_cloneDeep_Fast_symbol', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
@@ -1238,15 +1410,15 @@ var test_execute_common = function test_execute_common(parts) {
         var symbol1 = Symbol();
         checkEqual(true, parts.isSymbol(symbol1));
         var value1 = [symbol1];
-        var value2 = cloneDeepFast(value1);
+        var value2 = cloneDeep(value1);
         checkEqual(true, symbol1 === value1[0]);
         checkEqual(true, value1[0] === value2[0]);
         checkEqual(true, symbol1 === value2[0]);
       });
     };
 
-    var test_cloneDeepFast_map = function test_cloneDeepFast_map() {
-      it('test_cloneDeepFast_map', function () {
+    var test_cloneDeep_Fast_map = function test_cloneDeep_Fast_map() {
+      it('test_cloneDeep_Fast_map', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
@@ -1261,7 +1433,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual('value1', map1.get('key1'));
         checkEqual(false, parts.isObject(map1));
         checkEqual(true, parts.isObjectLike(map1));
-        var map2 = cloneDeepFast(map1);
+        var map2 = cloneDeep(map1);
         checkEqual('value1', map2.get('key1'));
         checkEqual(true, map1 === map2); // no clone
         // map object array
@@ -1280,20 +1452,20 @@ var test_execute_common = function test_execute_common(parts) {
           b: 'c',
           d: [4, 5, 6]
         }]);
-        var map2 = cloneDeepFast(map1);
+        var map2 = cloneDeep(map1);
         checkEqual(true, map1 === map2); // no clone no copy
 
         checkEqual('1', map2.get('a').a);
         checkEqual('b', map2.get('b')[0]);
         checkEqual('c', map2.get('c').a[3].b);
-        checkEqual(6, map2.get('d')[3].d[2]); // cloneDeepFast map
+        checkEqual(6, map2.get('d')[3].d[2]); // cloneDeep map
 
         var object1 = {
           a: '1'
         };
         var map1 = new Map();
         map1.set('a', object1);
-        var map2 = cloneDeepFast(map1);
+        var map2 = cloneDeep(map1);
         checkEqual(true, map1 === map2); // no clone no copy
 
         checkEqual('1', map1.get('a').a);
@@ -1302,8 +1474,8 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
-    var test_cloneDeepFast_set = function test_cloneDeepFast_set() {
-      it('test_cloneDeepFast_set', function () {
+    var test_cloneDeep_Fast_set = function test_cloneDeep_Fast_set() {
+      it('test_cloneDeep_Fast_set', function () {
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
@@ -1320,15 +1492,15 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(false, set1.has('value3'));
         checkEqual(false, parts.isObject(set1));
         checkEqual(true, parts.isObjectLike(set1));
-        var set2 = cloneDeepFast(set1);
+        var set2 = cloneDeep(set1);
         checkEqual(true, set2.has('value1')); // no copy no clone
 
         checkEqual(true, set1 === set2);
       });
     };
 
-    var test_cloneDeepFast_CircularReference = function test_cloneDeepFast_CircularReference() {
-      it('test_cloneDeepFast_CircularReference', function () {
+    var test_cloneDeep_Fast_CircularReference = function test_cloneDeep_Fast_CircularReference() {
+      it('test_cloneDeep_Fast_CircularReference', function () {
         var object1 = {
           b: 'test'
         };
@@ -1336,7 +1508,7 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual('test', object1.b);
         checkEqual('test', object1.a.b);
         checkEqual('test', object1.a.a.b); // thread 'main' has overflowed its stack
-        // const object2 = cloneDeepFast(object1);
+        // const object2 = cloneDeep(object1);
       });
     };
 
@@ -1522,6 +1694,11 @@ var test_execute_common = function test_execute_common(parts) {
     test_clone_function();
     test_clone_regexp();
     test_clone_objectParameter();
+    test_clone_Fast_object();
+    test_clone_Fast_array();
+    test_clone_Fast_date();
+    test_clone_Fast_function();
+    test_clone_Fast_regexp();
     test_cloneDeep_object();
     test_cloneDeep_array();
     test_cloneDeep_object_array_mix();
@@ -1534,16 +1711,16 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_map();
     test_cloneDeep_set();
     test_cloneDeep_CircularReference();
-    test_cloneDeepFast_object();
-    test_cloneDeepFast_array();
-    test_cloneDeepFast_object_array_mix();
-    test_cloneDeepFast_date();
-    test_cloneDeepFast_regExp();
-    test_cloneDeepFast_function();
-    test_cloneDeepFast_symbol();
-    test_cloneDeepFast_map();
-    test_cloneDeepFast_set();
-    test_cloneDeepFast_CircularReference();
+    test_cloneDeep_Fast_object();
+    test_cloneDeep_Fast_array();
+    test_cloneDeep_Fast_object_array_mix();
+    test_cloneDeep_Fast_date();
+    test_cloneDeep_Fast_regExp();
+    test_cloneDeep_Fast_function();
+    test_cloneDeep_Fast_symbol();
+    test_cloneDeep_Fast_map();
+    test_cloneDeep_Fast_set();
+    test_cloneDeep_Fast_CircularReference();
     test_merge();
   });
 };

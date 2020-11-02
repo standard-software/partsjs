@@ -172,9 +172,8 @@ exports.deleteIndex = deleteIndex;
 
 var _deleteLength = function _deleteLength(array, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
-  return _deleteIndex(array, index, index + length - 1); // same:
-  //  array.splice(index, length);
-  //  return array;
+  array.splice(index, length);
+  return array;
 };
 
 exports._deleteLength = _deleteLength;

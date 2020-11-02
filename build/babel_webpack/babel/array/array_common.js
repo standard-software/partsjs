@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = void 0;
+exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = void 0;
 
 var _type = require("../type/type.js");
 
@@ -11,7 +11,7 @@ var _number = require("../number/number.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _clone2 = require("../common/clone.js");
+var _clone2 = require("../common/_clone.js");
 
 var _cloneDeep2 = require("../common/_cloneDeep.js");
 
@@ -20,6 +20,8 @@ var _unique2 = require("../array/_unique.js");
 var _min2 = require("../array/_min.js");
 
 var _max2 = require("../array/_max.js");
+
+var _map2 = require("../array/_map.js");
 
 /**
  * from
@@ -138,13 +140,11 @@ var _mode = function _mode(array) {
   }
 
   var uniqueArray = (0, _unique2._unique)(array);
-
-  var countArray = _map(uniqueArray, function (element1) {
+  var countArray = (0, _map2._map)(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
-
   var maxValue = (0, _max2._max)(countArray);
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] === maxValue;
@@ -173,13 +173,11 @@ var _single = function _single(array) {
   }
 
   var uniqueArray = (0, _unique2._unique)(array);
-
-  var countArray = _map(uniqueArray, function (element1) {
+  var countArray = (0, _map2._map)(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
-
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] === 1;
   });
@@ -207,13 +205,11 @@ var _multiple = function _multiple(array) {
   }
 
   var uniqueArray = (0, _unique2._unique)(array);
-
-  var countArray = _map(uniqueArray, function (element1) {
+  var countArray = (0, _map2._map)(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
-
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] >= 2;
   });
@@ -273,48 +269,11 @@ var filter = function filter(array, func) {
   return _filter(array, func);
 };
 /**
- * map
- */
-
-
-exports.filter = filter;
-
-var _map = function _map(array, func) {
-  var result = [];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    var resultFunc = func(array[i], i, array);
-    result.push(resultFunc);
-  }
-
-  return result;
-};
-
-exports._map = _map;
-
-var map = function map(array, func) {
-  if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array2 = array;
-    array = _array2.array;
-    func = _array2.func;
-  }
-
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('map args(array) is not array');
-  }
-
-  if (!(0, _type.isFunction)(func)) {
-    throw new TypeError('map args(productFunc) is not function');
-  }
-
-  return _map(array, func);
-};
-/**
  * count
  */
 
 
-exports.map = map;
+exports.filter = filter;
 
 var _count = function _count(array, func) {
   var result = 0;
@@ -338,9 +297,9 @@ exports._count = _count;
 
 var count = function count(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array3 = array;
-    array = _array3.array;
-    func = _array3.func;
+    var _array2 = array;
+    array = _array2.array;
+    func = _array2.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -380,9 +339,9 @@ exports._findFirstIndex = _findFirstIndex;
 
 var findFirstIndex = function findFirstIndex(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array4 = array;
-    array = _array4.array;
-    func = _array4.func;
+    var _array3 = array;
+    array = _array3.array;
+    func = _array3.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -424,9 +383,9 @@ exports._findLastIndex = _findLastIndex;
 
 var findLastIndex = function findLastIndex(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array5 = array;
-    array = _array5.array;
-    func = _array5.func;
+    var _array4 = array;
+    array = _array4.array;
+    func = _array4.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -462,9 +421,9 @@ exports._findFirst = _findFirst;
 
 var findFirst = function findFirst(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array6 = array;
-    array = _array6.array;
-    func = _array6.func;
+    var _array5 = array;
+    array = _array5.array;
+    func = _array5.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -500,9 +459,9 @@ exports._findLast = _findLast;
 
 var findLast = function findLast(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array7 = array;
-    array = _array7.array;
-    func = _array7.func;
+    var _array6 = array;
+    array = _array6.array;
+    func = _array6.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -532,9 +491,9 @@ exports._some = _some;
 
 var some = function some(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array8 = array;
-    array = _array8.array;
-    func = _array8.func;
+    var _array7 = array;
+    array = _array7.array;
+    func = _array7.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -566,9 +525,9 @@ exports._all = _all;
 
 var all = function all(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array9 = array;
-    array = _array9.array;
-    func = _array9.func;
+    var _array8 = array;
+    array = _array8.array;
+    func = _array8.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -610,9 +569,9 @@ exports._isFirst = _isFirst;
 
 var isFirst = function isFirst(array, valueArray) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
-    var _array10 = array;
-    array = _array10.array;
-    valueArray = _array10.valueArray;
+    var _array9 = array;
+    array = _array9.array;
+    valueArray = _array9.valueArray;
   } else if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
@@ -655,9 +614,9 @@ exports._isLast = _isLast;
 
 var isLast = function isLast(array, valueArray) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
-    var _array11 = array;
-    array = _array11.array;
-    valueArray = _array11.valueArray;
+    var _array10 = array;
+    array = _array10.array;
+    valueArray = _array10.valueArray;
   } else if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray')) {
     var _valueArray2 = valueArray;
     valueArray = _valueArray2.valueArray;
@@ -696,15 +655,15 @@ var isBothEnds = function isBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueFirstArray', 'valueLastArray')) {
+    var _array11 = array;
+    array = _array11.array;
+    valueFirstArray = _array11.valueFirstArray;
+    var _array11$valueLastArr = _array11.valueLastArray;
+    valueLastArray = _array11$valueLastArr === void 0 ? valueFirstArray : _array11$valueLastArr;
+  } else if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
     var _array12 = array;
     array = _array12.array;
-    valueFirstArray = _array12.valueFirstArray;
-    var _array12$valueLastArr = _array12.valueLastArray;
-    valueLastArray = _array12$valueLastArr === void 0 ? valueFirstArray : _array12$valueLastArr;
-  } else if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
-    var _array13 = array;
-    array = _array13.array;
-    valueFirstArray = _array13.valueArray;
+    valueFirstArray = _array12.valueArray;
     valueLastArray = valueFirstArray;
   }
 
@@ -740,11 +699,11 @@ var subIndex = function subIndex(array, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, indexStart', 'indexEnd')) {
-    var _array14 = array;
-    array = _array14.array;
-    indexStart = _array14.indexStart;
-    var _array14$indexEnd = _array14.indexEnd;
-    indexEnd = _array14$indexEnd === void 0 ? indexStart : _array14$indexEnd;
+    var _array13 = array;
+    array = _array13.array;
+    indexStart = _array13.indexStart;
+    var _array13$indexEnd = _array13.indexEnd;
+    indexEnd = _array13$indexEnd === void 0 ? indexStart : _array13$indexEnd;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -788,11 +747,11 @@ var subLength = function subLength(array, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, index', 'length')) {
-    var _array15 = array;
-    array = _array15.array;
-    index = _array15.index;
-    var _array15$length = _array15.length;
-    length = _array15$length === void 0 ? array.length - index : _array15$length;
+    var _array14 = array;
+    array = _array14.array;
+    index = _array14.index;
+    var _array14$length = _array14.length;
+    length = _array14$length === void 0 ? array.length - index : _array14$length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -837,10 +796,10 @@ var subFirst = function subFirst(array) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, length')) {
-    var _array16 = array;
-    array = _array16.array;
-    var _array16$length = _array16.length;
-    length = _array16$length === void 0 ? 1 : _array16$length;
+    var _array15 = array;
+    array = _array15.array;
+    var _array15$length = _array15.length;
+    length = _array15$length === void 0 ? 1 : _array15$length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -875,10 +834,10 @@ var subLast = function subLast(array) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, length')) {
-    var _array17 = array;
-    array = _array17.array;
-    var _array17$length = _array17.length;
-    length = _array17$length === void 0 ? 1 : _array17$length;
+    var _array16 = array;
+    array = _array16.array;
+    var _array16$length = _array16.length;
+    length = _array16$length === void 0 ? 1 : _array16$length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -905,7 +864,6 @@ var _default = {
   _single: _single,
   _multiple: _multiple,
   _filter: _filter,
-  _map: _map,
   _count: _count,
   _findFirstIndex: _findFirstIndex,
   _findLastIndex: _findLastIndex,
@@ -928,7 +886,6 @@ var _default = {
   single: single,
   multiple: multiple,
   filter: filter,
-  map: map,
   count: count,
   findFirstIndex: findFirstIndex,
   findLastIndex: findLastIndex,

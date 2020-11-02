@@ -1126,6 +1126,48 @@ var test_execute_type = function test_execute_type(parts) {
       });
     };
 
+    var test_ArrayisArray = function test_ArrayisArray() {
+      it('test_ArrayisArray', function () {
+        var ArrayisArrayAll = function ArrayisArrayAll() {
+          for (var i = 0, l = arguments.length; i < l; i += 1) {
+            var result = Array.isArray(i < 0 || arguments.length <= i ? undefined : arguments[i]);
+
+            if (result === false) {
+              return false;
+            }
+          }
+
+          return true;
+        };
+
+        var NotArrayisArrayAll = function NotArrayisArrayAll() {
+          for (var i = 0, l = arguments.length; i < l; i += 1) {
+            var result = Array.isArray(i < 0 || arguments.length <= i ? undefined : arguments[i]);
+
+            if (result === true) {
+              return false;
+            }
+          }
+
+          return true;
+        };
+
+        checkEqual(true, ArrayisArrayAll([123]));
+        checkEqual(true, ArrayisArrayAll([]));
+        checkEqual(true, ArrayisArrayAll([1, 2, 3]));
+        checkEqual(false, ArrayisArrayAll(123));
+        checkEqual(false, ArrayisArrayAll('1,2,3'));
+        checkEqual(true, ArrayisArrayAll([1], [2]));
+        checkEqual(true, ArrayisArrayAll([3], [4], [5]));
+        checkEqual(true, ArrayisArrayAll([10, 20], [30]));
+        checkEqual(false, ArrayisArrayAll([1, 2], 3));
+        checkEqual(true, NotArrayisArrayAll(1, 2));
+        checkEqual(false, NotArrayisArrayAll([3], [4], 5));
+        checkEqual(true, NotArrayisArrayAll(10, 20, 30));
+        checkEqual(false, NotArrayisArrayAll(10, 20, [30]));
+      });
+    };
+
     var test_isArraySeries = function test_isArraySeries() {
       it('test_isArraySeries', function () {
         checkEqual(true, Array.isArray([]));
@@ -1334,6 +1376,7 @@ var test_execute_type = function test_execute_type(parts) {
     test_isObjectLike();
     test_isModule();
     test_isArray();
+    test_ArrayisArray();
     test_isArraySeries();
     test_isDate();
     test_isExcection();

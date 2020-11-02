@@ -7,21 +7,26 @@ exports["default"] = exports._cloneDeep = void 0;
 
 var _type = require("../type/type.js");
 
-var _object = require("../object/object.js");
+var _cloneDeep2 = require("../common/__cloneDeep.js");
 
-var _clone = require("../common/clone.js");
+var _cloneFunc = require("../common/__cloneFunc.js");
 
 /**
  * cloneDeep
  */
 var _cloneDeep = function _cloneDeep(source) {
-  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _clone.clone.func.defaultArray;
+  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _cloneFunc.__cloneFunc.defaultArray;
+
+  if ((0, _type.isUndefined)(cloneFuncArray)) {
+    return (0, _cloneDeep2.__cloneDeep)(source);
+  }
+
   var CircularReferenceBuffer = {
     source: [],
     clone: []
   };
 
-  var __cloneDeep = function __cloneDeep(value) {
+  var _cloneDeep_ = function _cloneDeep_(value) {
     var index = CircularReferenceBuffer.source.indexOf(value);
 
     if (index !== -1) {
@@ -36,7 +41,7 @@ var _cloneDeep = function _cloneDeep(source) {
       var result = cloneFuncArray[i](value, function (source, clone) {
         CircularReferenceBuffer.source.push(source);
         CircularReferenceBuffer.clone.push(clone);
-      }, __cloneDeep);
+      }, _cloneDeep_);
 
       if (!(0, _type.isUndefined)(result)) {
         return result;
@@ -46,10 +51,11 @@ var _cloneDeep = function _cloneDeep(source) {
     return value;
   };
 
-  return __cloneDeep(source);
+  return _cloneDeep_(source);
 };
 
 exports._cloneDeep = _cloneDeep;
+_cloneDeep.func = _cloneFunc.__cloneFunc;
 var _default = {
   _cloneDeep: _cloneDeep
 };

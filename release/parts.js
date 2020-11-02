@@ -111,10 +111,10 @@ module.exports = __webpack_require__(1);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.platform = exports.common = exports.merge = exports.functionValue = exports.cloneDeepFast = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
-exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = void 0;
-exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.syntax = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports.test = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = void 0;
-exports["default"] = exports.parts = exports.date = exports.Today = exports.array = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.object = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.string = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.matchFormat = exports.replaceAll = exports.isUpperCase = exports.isLowerCase = exports.number = exports.makeInRange = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.convert = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.compare = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.allMatchAll = void 0;
+exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.platform = exports.common = exports.merge = exports.functionValue = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
+exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = void 0;
+exports.allMatchAll = exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.syntax = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports.test = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = void 0;
+exports["default"] = exports.parts = exports.date = exports.Today = exports.array = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.object = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.string = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.matchFormat = exports.replaceAll = exports.isUpperCase = exports.isLowerCase = exports.number = exports.makeInRange = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.convert = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.compare = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = void 0;
 
 var _polyfill = _interopRequireDefault(__webpack_require__(2));
 
@@ -124,27 +124,27 @@ var _platform = _interopRequireDefault(__webpack_require__(9));
 
 var _type = _interopRequireDefault(__webpack_require__(5));
 
-var _typeAlias = _interopRequireDefault(__webpack_require__(86));
+var _typeAlias = _interopRequireDefault(__webpack_require__(97));
 
-var _test = _interopRequireDefault(__webpack_require__(87));
+var _test = _interopRequireDefault(__webpack_require__(98));
 
-var _syntax = _interopRequireDefault(__webpack_require__(38));
+var _syntax = _interopRequireDefault(__webpack_require__(41));
 
-var _compare = _interopRequireDefault(__webpack_require__(113));
+var _compare = _interopRequireDefault(__webpack_require__(121));
 
-var _convert = _interopRequireDefault(__webpack_require__(131));
+var _convert = _interopRequireDefault(__webpack_require__(139));
 
-var _convertAlias = _interopRequireDefault(__webpack_require__(132));
+var _convertAlias = _interopRequireDefault(__webpack_require__(140));
 
-var _number = _interopRequireDefault(__webpack_require__(32));
+var _number = _interopRequireDefault(__webpack_require__(37));
 
-var _string = _interopRequireDefault(__webpack_require__(88));
+var _string = _interopRequireDefault(__webpack_require__(99));
 
-var _object = _interopRequireDefault(__webpack_require__(23));
+var _object = _interopRequireDefault(__webpack_require__(28));
 
-var _array = _interopRequireDefault(__webpack_require__(53));
+var _array = _interopRequireDefault(__webpack_require__(57));
 
-var _date = _interopRequireDefault(__webpack_require__(133));
+var _date = _interopRequireDefault(__webpack_require__(141));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -154,7 +154,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '9.0.0';
+var VERSION = '9.1.0 beta 2';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -164,18 +164,15 @@ var propertyNames = {};
 
 var clone = _common["default"].clone,
     cloneDeep = _common["default"].cloneDeep,
-    cloneDeepFast = _common["default"].cloneDeepFast,
     functionValue = _common["default"].functionValue,
     merge = _common["default"].merge;
 exports.merge = merge;
 exports.functionValue = functionValue;
-exports.cloneDeepFast = cloneDeepFast;
 exports.cloneDeep = cloneDeep;
 exports.clone = clone;
 rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   clone: clone,
   cloneDeep: cloneDeep,
-  cloneDeepFast: cloneDeepFast,
   functionValue: functionValue,
   merge: merge
 });
@@ -1350,21 +1347,21 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.merge = exports.functionValue = exports.cloneDeepFast = exports.cloneDeep = exports.clone = exports._merge = exports._cloneDeep = exports._clone = void 0;
+exports["default"] = exports.merge = exports.functionValue = exports.cloneDeep = exports.clone = exports._merge = exports._cloneDeep = exports._clone = void 0;
 
 var _clone2 = _interopRequireDefault(__webpack_require__(4));
 
-var _cloneDeep2 = _interopRequireDefault(__webpack_require__(34));
+var _clone3 = _interopRequireDefault(__webpack_require__(93));
 
-var _cloneDeep3 = _interopRequireDefault(__webpack_require__(82));
+var _cloneDeep2 = _interopRequireDefault(__webpack_require__(25));
 
-var _cloneDeepFast = _interopRequireDefault(__webpack_require__(83));
+var _cloneDeep3 = _interopRequireDefault(__webpack_require__(94));
 
-var _functionValue = _interopRequireDefault(__webpack_require__(41));
+var _functionValue = _interopRequireDefault(__webpack_require__(44));
 
-var _merge2 = _interopRequireDefault(__webpack_require__(84));
+var _merge2 = _interopRequireDefault(__webpack_require__(95));
 
-var _merge3 = _interopRequireDefault(__webpack_require__(85));
+var _merge3 = _interopRequireDefault(__webpack_require__(96));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1374,19 +1371,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var commonJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _clone2["default"]), _cloneDeep2["default"]), _cloneDeep3["default"]), _cloneDeepFast["default"]), _functionValue["default"]), _merge2["default"]), _merge3["default"]);
+var commonJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _clone2["default"]), _clone3["default"]), _cloneDeep2["default"]), _cloneDeep3["default"]), _functionValue["default"]), _merge2["default"]), _merge3["default"]);
 
 var _clone = commonJs._clone,
     _cloneDeep = commonJs._cloneDeep,
     _merge = commonJs._merge,
     clone = commonJs.clone,
     cloneDeep = commonJs.cloneDeep,
-    cloneDeepFast = commonJs.cloneDeepFast,
     functionValue = commonJs.functionValue,
     merge = commonJs.merge;
 exports.merge = merge;
 exports.functionValue = functionValue;
-exports.cloneDeepFast = cloneDeepFast;
 exports.cloneDeep = cloneDeep;
 exports.clone = clone;
 exports._merge = _merge;
@@ -1398,7 +1393,6 @@ var _default = {
   _merge: _merge,
   clone: clone,
   cloneDeep: cloneDeep,
-  cloneDeepFast: cloneDeepFast,
   functionValue: functionValue,
   merge: merge
 };
@@ -1414,35 +1408,27 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.clone = exports._clone = void 0;
+exports["default"] = exports._clone = void 0;
 
 var _type = __webpack_require__(5);
 
-var _object = __webpack_require__(23);
-
-var _isObjectParameter = __webpack_require__(13);
-
 var _hasOwn2 = __webpack_require__(8);
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+var _clone2 = __webpack_require__(23);
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+var _cloneDeep2 = __webpack_require__(25);
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var _cloneFunc = __webpack_require__(27);
 
 /**
  * clone
  */
-var _clone = function _clone(source) {
-  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : clone.func.defaultArray;
+var _clone = function _clone(source, cloneFuncArray) {
+  if ((0, _type.isUndefined)(cloneFuncArray)) {
+    return (0, _clone2.__clone)(source, false);
+  }
 
-  var __clone = function __clone(value) {
+  var _clone_ = function _clone_(value) {
     if ((0, _type.isUndefined)(value)) {
       return undefined;
     }
@@ -1458,234 +1444,13 @@ var _clone = function _clone(source) {
     return value;
   };
 
-  return __clone(source);
+  return _clone_(source);
 };
 
 exports._clone = _clone;
-
-var clone = function clone(source) {
-  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : clone.func.defaultArray;
-
-  if ((0, _isObjectParameter.isObjectParameter)(source, 'source', 'cloneFuncArray')) {
-    var _source = source;
-    source = _source.source;
-    var _source$cloneFuncArra = _source.cloneFuncArray;
-    cloneFuncArray = _source$cloneFuncArra === void 0 ? clone.func.defaultArray : _source$cloneFuncArra;
-  } else if ((0, _isObjectParameter.isObjectParameter)(cloneFuncArray, 'cloneFuncArray')) {
-    var _cloneFuncArray = cloneFuncArray;
-    cloneFuncArray = _cloneFuncArray.cloneFuncArray;
-  }
-
-  if (!(0, _type.isArray)(cloneFuncArray)) {
-    throw new TypeError('clone args(cloneFuncArray) is not array');
-  }
-
-  return _clone(source, cloneFuncArray);
-};
-/**
- * clone.func
- */
-
-
-exports.clone = clone;
-clone.func = {}; // function is no clone
-
-clone.func.ignoreFunction = function (source) {
-  if (!(0, _type.isFunction)(source)) {
-    return undefined;
-  }
-
-  return source;
-}; // support
-//  user object and user arraySeries
-//  Just good usability
-
-
-clone.func.object = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
-  if (!(0, _type.isObject)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = (0, _type.isObjectFromNull)(source) ? Object.create(null) : new source.constructor();
-  bufferWrite(source, cloneValue);
-
-  for (var key in source) {
-    if ((0, _hasOwn2._hasOwn)(source, key)) {
-      cloneValue[key] = __cloneDeep(source[key]);
-    }
-  }
-
-  return cloneValue;
-};
-
-clone.func.arraySeries = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
-  if (!(0, _type.isArraySeries)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = new source.constructor();
-  bufferWrite(source, cloneValue);
-
-  for (var i = 0, l = source.length; i < l; i += 1) {
-    cloneValue[i] = __cloneDeep(source[i]);
-  } // // Code that does the same thing
-  // // for in array key is string.
-  // // legacy for loop is simple for array
-  // for (const key in source) {
-  //   if (source.hasOwnProperty(key)) {
-  //     cloneValue[key] = __cloneDeep(source[key]);
-  //   }
-  // }
-
-
-  return cloneValue;
-}; // support
-//  all object
-//  but Math or JSON etc clone
-//  Cloning unnecessary objects
-
-
-clone.func.objectLike = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
-  if (!(0, _type.isObjectLike)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = (0, _type.isObjectFromNull)(source) ? Object.create(null) : new source.constructor();
-  bufferWrite(source, cloneValue);
-
-  for (var key in source) {
-    if ((0, _hasOwn2._hasOwn)(source, key)) {
-      cloneValue[key] = __cloneDeep(source[key]);
-    }
-  }
-
-  return cloneValue;
-};
-
-clone.func.date = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  if (!(0, _type.isDate)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = new Date(source.getTime());
-  bufferWrite(source, cloneValue);
-  return cloneValue;
-};
-
-clone.func.regExp = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  if (!(0, _type.isRegExp)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = new RegExp(source.source);
-  bufferWrite(source, cloneValue);
-  return cloneValue;
-}; // cloneMap
-//  key not recursive call
-//  value recursive call
-
-
-clone.func.map = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
-    return value;
-  };
-
-  if (!(0, _type.isMap)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = new Map();
-  bufferWrite(source, cloneValue);
-  var sourceEntries = [];
-  source.forEach(function (value, key) {
-    sourceEntries.push([key, value]);
-  });
-
-  for (var _i = 0, _sourceEntries = sourceEntries; _i < _sourceEntries.length; _i++) {
-    var _sourceEntries$_i = _slicedToArray(_sourceEntries[_i], 2),
-        key = _sourceEntries$_i[0],
-        value = _sourceEntries$_i[1];
-
-    cloneValue.set(key, __cloneDeep(value));
-  } // IE11 no support map.keys map.entries
-
-
-  return cloneValue;
-};
-
-clone.func.ignoreWeakMap = function (source) {
-  if (!(0, _type.isWeakMap)(source)) {
-    return undefined;
-  }
-
-  return source;
-}; // cloneSet
-//  element not recursive call
-//  same map key
-
-
-clone.func.set = function (source) {
-  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-  if (!(0, _type.isSet)(source)) {
-    return undefined;
-  }
-
-  var cloneValue = new Set();
-  bufferWrite(source, cloneValue);
-  var sourceEntries = [];
-  source.forEach(function (value, key) {
-    sourceEntries.push([key, value]);
-  });
-
-  for (var _i2 = 0, _sourceEntries2 = sourceEntries; _i2 < _sourceEntries2.length; _i2++) {
-    var _sourceEntries2$_i = _slicedToArray(_sourceEntries2[_i2], 2),
-        key = _sourceEntries2$_i[0],
-        value = _sourceEntries2$_i[1];
-
-    cloneValue.add(value);
-  } // IE11 no support set.keys set.entries
-
-
-  return cloneValue;
-};
-
-clone.func.ignoreWeakSet = function (source) {
-  if (!(0, _type.isWeakSet)(source)) {
-    return undefined;
-  }
-
-  return source;
-};
-
-clone.func.defaultArray = [clone.func.date, clone.func.regExp, clone.func.ignoreFunction, clone.func.map, clone.func.ignoreWeakMap, clone.func.set, clone.func.ignoreWeakSet, clone.func.arraySeries, clone.func.object];
+_clone.func = _cloneFunc.__cloneFunc;
 var _default = {
-  _clone: _clone,
-  clone: clone
+  _clone: _clone
 };
 exports["default"] = _default;
 
@@ -2361,13 +2126,17 @@ var isEmptyObject = function isEmptyObject(value) {
 };
 
 exports.isEmptyObject = isEmptyObject;
-
-var isArray = function isArray(value) {
-  return objectToString(value) === '[object Array]';
-}; // Int8Array Uint16Array Float32Array Float64Array etc
-
-
+var isArray;
 exports.isArray = isArray;
+
+if (Array.isArray) {
+  exports.isArray = isArray = Array.isArray;
+} else {
+  exports.isArray = isArray = function isArray(value) {
+    return objectToString(value) === '[object Array]';
+  };
+} // Int8Array Uint16Array Float32Array Float64Array etc
+
 
 var isArraySeries = function isArraySeries(value) {
   if ((0, _includes.__includes)(objectToString(value), 'Array]')) {
@@ -4183,39 +3952,474 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports.__clone = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _returnValueFunction = __webpack_require__(24);
+
+/**
+ * clone
+ */
+var __clone = function __clone(source) {
+  var __clone_ = function __clone_(value) {
+    if ((0, _isType.isObject)(value)) {
+      var cloneValue = {};
+
+      for (var key in value) {
+        cloneValue[key] = value[key];
+      }
+
+      return cloneValue;
+    } else if ((0, _isType.isArray)(value)) {
+      var _cloneValue = Array(value.length);
+
+      for (var i = 0, l = value.length; i < l; i += 1) {
+        _cloneValue[i] = value[i];
+      }
+
+      return _cloneValue;
+    }
+
+    return value;
+  };
+
+  return __clone_(source);
+};
+
+exports.__clone = __clone;
+var _default = {
+  __clone: __clone
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.__returnValueFunction = void 0;
+
+/**
+ * returnValueFunction
+ */
+var __returnValueFunction = function __returnValueFunction(v) {
+  return v;
+};
+
+exports.__returnValueFunction = __returnValueFunction;
+var _default = {
+  __returnValueFunction: __returnValueFunction
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._cloneDeep = void 0;
+
+var _type = __webpack_require__(5);
+
+var _cloneDeep2 = __webpack_require__(26);
+
+var _cloneFunc = __webpack_require__(27);
+
+/**
+ * cloneDeep
+ */
+var _cloneDeep = function _cloneDeep(source) {
+  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _cloneFunc.__cloneFunc.defaultArray;
+
+  if ((0, _type.isUndefined)(cloneFuncArray)) {
+    return (0, _cloneDeep2.__cloneDeep)(source);
+  }
+
+  var CircularReferenceBuffer = {
+    source: [],
+    clone: []
+  };
+
+  var _cloneDeep_ = function _cloneDeep_(value) {
+    var index = CircularReferenceBuffer.source.indexOf(value);
+
+    if (index !== -1) {
+      return CircularReferenceBuffer.clone[index];
+    }
+
+    if ((0, _type.isUndefined)(value)) {
+      return undefined;
+    }
+
+    for (var i = 0, l = cloneFuncArray.length; i < l; i += 1) {
+      var result = cloneFuncArray[i](value, function (source, clone) {
+        CircularReferenceBuffer.source.push(source);
+        CircularReferenceBuffer.clone.push(clone);
+      }, _cloneDeep_);
+
+      if (!(0, _type.isUndefined)(result)) {
+        return result;
+      }
+    }
+
+    return value;
+  };
+
+  return _cloneDeep_(source);
+};
+
+exports._cloneDeep = _cloneDeep;
+_cloneDeep.func = _cloneFunc.__cloneFunc;
+var _default = {
+  _cloneDeep: _cloneDeep
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.__cloneDeep = void 0;
+
+var _isType = __webpack_require__(6);
+
+/**
+ * cloneDeep
+ */
+var __cloneDeep = function __cloneDeep(source) {
+  var __cloneDeep_ = function __cloneDeep_(value) {
+    if ((0, _isType.isObject)(value)) {
+      var cloneValue = {};
+
+      for (var key in value) {
+        cloneValue[key] = __cloneDeep_(value[key]);
+      }
+
+      return cloneValue;
+    } else if ((0, _isType.isArray)(value)) {
+      var _cloneValue = Array(value.length);
+
+      for (var i = 0, l = value.length; i < l; i += 1) {
+        _cloneValue[i] = __cloneDeep_(value[i]);
+      }
+
+      return _cloneValue;
+    }
+
+    return value;
+  };
+
+  return __cloneDeep_(source);
+};
+
+exports.__cloneDeep = __cloneDeep;
+var _default = {
+  __cloneDeep: __cloneDeep
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.__cloneFunc = void 0;
+
+var _type = __webpack_require__(5);
+
+var _object = __webpack_require__(28);
+
+var _hasOwn2 = __webpack_require__(8);
+
+var _clone = __webpack_require__(23);
+
+var _cloneDeep2 = __webpack_require__(25);
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * clone.func
+ */
+var __cloneFunc = {}; // function is no clone
+
+exports.__cloneFunc = __cloneFunc;
+
+__cloneFunc.ignoreFunction = function (source) {
+  if (!(0, _type.isFunction)(source)) {
+    return undefined;
+  }
+
+  return source;
+}; // support
+//  user object and user arraySeries
+//  Just good usability
+
+
+__cloneFunc.object = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!(0, _type.isObject)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = (0, _type.isObjectFromNull)(source) ? Object.create(null) : new source.constructor();
+  bufferWrite(source, cloneValue);
+
+  for (var key in source) {
+    if ((0, _hasOwn2._hasOwn)(source, key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+
+  return cloneValue;
+};
+
+__cloneFunc.arraySeries = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!(0, _type.isArraySeries)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = new source.constructor();
+  bufferWrite(source, cloneValue);
+
+  for (var i = 0, l = source.length; i < l; i += 1) {
+    cloneValue[i] = __cloneDeep(source[i]);
+  } // // Code that does the same thing
+  // // for in array key is string.
+  // // legacy for loop is simple for array
+  // for (const key in source) {
+  //   if (source.hasOwnProperty(key)) {
+  //     cloneValue[key] = __cloneDeep(source[key]);
+  //   }
+  // }
+
+
+  return cloneValue;
+}; // support
+//  all object
+//  but Math or JSON etc clone
+//  Cloning unnecessary objects
+
+
+__cloneFunc.objectLike = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!(0, _type.isObjectLike)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = (0, _type.isObjectFromNull)(source) ? Object.create(null) : new source.constructor();
+  bufferWrite(source, cloneValue);
+
+  for (var key in source) {
+    if ((0, _hasOwn2._hasOwn)(source, key)) {
+      cloneValue[key] = __cloneDeep(source[key]);
+    }
+  }
+
+  return cloneValue;
+};
+
+__cloneFunc.date = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  if (!(0, _type.isDate)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = new Date(source.getTime());
+  bufferWrite(source, cloneValue);
+  return cloneValue;
+};
+
+__cloneFunc.regExp = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  if (!(0, _type.isRegExp)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = new RegExp(source.source);
+  bufferWrite(source, cloneValue);
+  return cloneValue;
+}; // cloneMap
+//  key not recursive call
+//  value recursive call
+
+
+__cloneFunc.map = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  var __cloneDeep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (value) {
+    return value;
+  };
+
+  if (!(0, _type.isMap)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = new Map();
+  bufferWrite(source, cloneValue);
+  var sourceEntries = [];
+  source.forEach(function (value, key) {
+    sourceEntries.push([key, value]);
+  });
+
+  for (var _i = 0, _sourceEntries = sourceEntries; _i < _sourceEntries.length; _i++) {
+    var _sourceEntries$_i = _slicedToArray(_sourceEntries[_i], 2),
+        key = _sourceEntries$_i[0],
+        value = _sourceEntries$_i[1];
+
+    cloneValue.set(key, __cloneDeep(value));
+  } // IE11 no support map.keys map.entries
+
+
+  return cloneValue;
+};
+
+__cloneFunc.ignoreWeakMap = function (source) {
+  if (!(0, _type.isWeakMap)(source)) {
+    return undefined;
+  }
+
+  return source;
+}; // cloneSet
+//  element not recursive call
+//  same map key
+
+
+__cloneFunc.set = function (source) {
+  var bufferWrite = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  if (!(0, _type.isSet)(source)) {
+    return undefined;
+  }
+
+  var cloneValue = new Set();
+  bufferWrite(source, cloneValue);
+  var sourceEntries = [];
+  source.forEach(function (value, key) {
+    sourceEntries.push([key, value]);
+  });
+
+  for (var _i2 = 0, _sourceEntries2 = sourceEntries; _i2 < _sourceEntries2.length; _i2++) {
+    var _sourceEntries2$_i = _slicedToArray(_sourceEntries2[_i2], 2),
+        key = _sourceEntries2$_i[0],
+        value = _sourceEntries2$_i[1];
+
+    cloneValue.add(value);
+  } // IE11 no support set.keys set.entries
+
+
+  return cloneValue;
+};
+
+__cloneFunc.ignoreWeakSet = function (source) {
+  if (!(0, _type.isWeakSet)(source)) {
+    return undefined;
+  }
+
+  return source;
+};
+
+__cloneFunc.DefaultArray = function () {
+  return [__cloneFunc.date, __cloneFunc.regExp, __cloneFunc.ignoreFunction, __cloneFunc.map, __cloneFunc.ignoreWeakMap, __cloneFunc.set, __cloneFunc.ignoreWeakSet, __cloneFunc.arraySeries, __cloneFunc.object];
+};
+
+var _default = {
+  __cloneFunc: __cloneFunc
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.isObjectParameter = exports._has = exports._hasPrototype = exports._hasOwn = exports._objectValues = exports._objectKeys = exports._objectFromEntries = exports._objectEntries = exports._propertyList = exports._propertyCount = exports._fixProperty = exports._inProperty = exports._setProperty = exports._getProperty = exports._copyProperty = exports._isObjectParameter = void 0;
 
-var _object_common = _interopRequireDefault(__webpack_require__(24));
+var _object_common = _interopRequireDefault(__webpack_require__(29));
 
 var _isObjectParameter2 = _interopRequireDefault(__webpack_require__(13));
 
-var _inProperty2 = _interopRequireDefault(__webpack_require__(71));
+var _inProperty2 = _interopRequireDefault(__webpack_require__(82));
 
-var _fixProperty2 = _interopRequireDefault(__webpack_require__(75));
+var _fixProperty2 = _interopRequireDefault(__webpack_require__(86));
 
-var _objectEntries2 = _interopRequireDefault(__webpack_require__(46));
+var _objectEntries2 = _interopRequireDefault(__webpack_require__(49));
 
-var _objectFromEntries2 = _interopRequireDefault(__webpack_require__(76));
+var _objectFromEntries2 = _interopRequireDefault(__webpack_require__(87));
 
-var _objectFromEntries3 = _interopRequireDefault(__webpack_require__(77));
+var _objectFromEntries3 = _interopRequireDefault(__webpack_require__(88));
 
-var _objectKeys2 = _interopRequireDefault(__webpack_require__(78));
+var _objectKeys2 = _interopRequireDefault(__webpack_require__(89));
 
-var _objectValues2 = _interopRequireDefault(__webpack_require__(65));
+var _objectValues2 = _interopRequireDefault(__webpack_require__(70));
 
-var _getProperty2 = _interopRequireDefault(__webpack_require__(72));
+var _getProperty2 = _interopRequireDefault(__webpack_require__(83));
 
 var _hasOwn2 = _interopRequireDefault(__webpack_require__(8));
 
-var _hasOwn3 = _interopRequireDefault(__webpack_require__(79));
+var _hasOwn3 = _interopRequireDefault(__webpack_require__(90));
 
-var _has2 = _interopRequireDefault(__webpack_require__(73));
+var _has2 = _interopRequireDefault(__webpack_require__(84));
 
 var _propertyCount2 = _interopRequireDefault(__webpack_require__(7));
 
-var _propertyCount3 = _interopRequireDefault(__webpack_require__(80));
+var _propertyCount3 = _interopRequireDefault(__webpack_require__(91));
 
-var _propertyList2 = _interopRequireDefault(__webpack_require__(81));
+var _propertyList2 = _interopRequireDefault(__webpack_require__(92));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -4354,7 +4558,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 24 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4373,7 +4577,7 @@ var _propertyCount2 = __webpack_require__(7);
 
 var _replaceAll2 = __webpack_require__(14);
 
-var _splitCommaItems2 = __webpack_require__(25);
+var _splitCommaItems2 = __webpack_require__(30);
 
 var _includes = __webpack_require__(11);
 
@@ -4500,7 +4704,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 25 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4513,9 +4717,9 @@ exports["default"] = exports.splitCommaItems = exports._splitCommaItems = void 0
 
 var _type = __webpack_require__(5);
 
-var _split2 = __webpack_require__(26);
+var _split2 = __webpack_require__(31);
 
-var _string_common = __webpack_require__(52);
+var _string_common = __webpack_require__(56);
 
 var _includes = __webpack_require__(11);
 
@@ -4551,7 +4755,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 26 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4564,23 +4768,23 @@ exports["default"] = exports._split = void 0;
 
 var _type = __webpack_require__(5);
 
-var _Enum2 = __webpack_require__(27);
+var _Enum2 = __webpack_require__(32);
 
-var _loop = __webpack_require__(28);
+var _loop = __webpack_require__(33);
 
-var _array_operation = __webpack_require__(31);
+var _array_operation = __webpack_require__(36);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _string_common = __webpack_require__(52);
+var _string_common = __webpack_require__(56);
 
 var _replaceAll2 = __webpack_require__(14);
 
-var _replaceAllArray2 = __webpack_require__(69);
+var _replaceAllArray2 = __webpack_require__(80);
 
-var _or2 = __webpack_require__(64);
+var _or2 = __webpack_require__(69);
 
-var _objectValues2 = __webpack_require__(65);
+var _objectValues2 = __webpack_require__(70);
 
 /**
  * split
@@ -4679,7 +4883,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4720,7 +4924,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4733,7 +4937,7 @@ exports["default"] = exports.__loop = void 0;
 
 var _type = __webpack_require__(5);
 
-var _IntegerArray2 = __webpack_require__(29);
+var _IntegerArray2 = __webpack_require__(34);
 
 /**
  * loop
@@ -4768,7 +4972,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 29 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4781,7 +4985,7 @@ exports["default"] = exports._IntegerArray = void 0;
 
 var _type = __webpack_require__(5);
 
-var _NumberArray2 = __webpack_require__(30);
+var _NumberArray2 = __webpack_require__(35);
 
 /**
  * IntegerArray
@@ -4797,7 +5001,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 30 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4864,7 +5068,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 31 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4877,13 +5081,13 @@ exports["default"] = exports.filter = exports._filter = exports.remainLast = exp
 
 var _type = __webpack_require__(5);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _min2 = __webpack_require__(48);
+var _min2 = __webpack_require__(51);
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -5042,9 +5246,8 @@ exports.deleteIndex = deleteIndex;
 
 var _deleteLength = function _deleteLength(array, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
-  return _deleteIndex(array, index, index + length - 1); // same:
-  //  array.splice(index, length);
-  //  return array;
+  array.splice(index, length);
+  return array;
 };
 
 exports._deleteLength = _deleteLength;
@@ -5811,7 +6014,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 32 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6088,7 +6291,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 33 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6097,23 +6300,25 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.map = exports._map = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = void 0;
+exports["default"] = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.every = exports.all = exports._all = exports.some = exports._some = exports.findBack = exports.findLast = exports._findLast = exports.find = exports.findFirst = exports._findFirst = exports.findBackIndex = exports.findLastIndex = exports._findLastIndex = exports.findIndex = exports.findFirstIndex = exports._findFirstIndex = exports.count = exports._count = exports.filter = exports._filter = exports.multiple = exports._multiple = exports.single = exports._single = exports.mode = exports._mode = exports.median = exports._median = exports.average = exports._average = exports.sum = exports._sum = exports.from = void 0;
 
 var _type = __webpack_require__(5);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
 var _isObjectParameter = __webpack_require__(13);
 
 var _clone2 = __webpack_require__(4);
 
-var _cloneDeep2 = __webpack_require__(34);
+var _cloneDeep2 = __webpack_require__(25);
 
-var _unique2 = __webpack_require__(35);
+var _unique2 = __webpack_require__(39);
 
-var _min2 = __webpack_require__(48);
+var _min2 = __webpack_require__(51);
 
-var _max2 = __webpack_require__(50);
+var _max2 = __webpack_require__(53);
+
+var _map2 = __webpack_require__(55);
 
 /**
  * from
@@ -6232,13 +6437,11 @@ var _mode = function _mode(array) {
   }
 
   var uniqueArray = (0, _unique2._unique)(array);
-
-  var countArray = _map(uniqueArray, function (element1) {
+  var countArray = (0, _map2._map)(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
-
   var maxValue = (0, _max2._max)(countArray);
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] === maxValue;
@@ -6267,13 +6470,11 @@ var _single = function _single(array) {
   }
 
   var uniqueArray = (0, _unique2._unique)(array);
-
-  var countArray = _map(uniqueArray, function (element1) {
+  var countArray = (0, _map2._map)(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
-
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] === 1;
   });
@@ -6301,13 +6502,11 @@ var _multiple = function _multiple(array) {
   }
 
   var uniqueArray = (0, _unique2._unique)(array);
-
-  var countArray = _map(uniqueArray, function (element1) {
+  var countArray = (0, _map2._map)(uniqueArray, function (element1) {
     return _filter(array, function (element2) {
       return element1 === element2;
     }).length;
   });
-
   return _filter(uniqueArray, function (element, index) {
     return countArray[index] >= 2;
   });
@@ -6367,48 +6566,11 @@ var filter = function filter(array, func) {
   return _filter(array, func);
 };
 /**
- * map
- */
-
-
-exports.filter = filter;
-
-var _map = function _map(array, func) {
-  var result = [];
-
-  for (var i = 0, l = array.length; i < l; i += 1) {
-    var resultFunc = func(array[i], i, array);
-    result.push(resultFunc);
-  }
-
-  return result;
-};
-
-exports._map = _map;
-
-var map = function map(array, func) {
-  if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array2 = array;
-    array = _array2.array;
-    func = _array2.func;
-  }
-
-  if (!(0, _type.isArray)(array)) {
-    throw new TypeError('map args(array) is not array');
-  }
-
-  if (!(0, _type.isFunction)(func)) {
-    throw new TypeError('map args(productFunc) is not function');
-  }
-
-  return _map(array, func);
-};
-/**
  * count
  */
 
 
-exports.map = map;
+exports.filter = filter;
 
 var _count = function _count(array, func) {
   var result = 0;
@@ -6432,9 +6594,9 @@ exports._count = _count;
 
 var count = function count(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array3 = array;
-    array = _array3.array;
-    func = _array3.func;
+    var _array2 = array;
+    array = _array2.array;
+    func = _array2.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6474,9 +6636,9 @@ exports._findFirstIndex = _findFirstIndex;
 
 var findFirstIndex = function findFirstIndex(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array4 = array;
-    array = _array4.array;
-    func = _array4.func;
+    var _array3 = array;
+    array = _array3.array;
+    func = _array3.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6518,9 +6680,9 @@ exports._findLastIndex = _findLastIndex;
 
 var findLastIndex = function findLastIndex(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array5 = array;
-    array = _array5.array;
-    func = _array5.func;
+    var _array4 = array;
+    array = _array4.array;
+    func = _array4.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6556,9 +6718,9 @@ exports._findFirst = _findFirst;
 
 var findFirst = function findFirst(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array6 = array;
-    array = _array6.array;
-    func = _array6.func;
+    var _array5 = array;
+    array = _array5.array;
+    func = _array5.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6594,9 +6756,9 @@ exports._findLast = _findLast;
 
 var findLast = function findLast(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array7 = array;
-    array = _array7.array;
-    func = _array7.func;
+    var _array6 = array;
+    array = _array6.array;
+    func = _array6.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6626,9 +6788,9 @@ exports._some = _some;
 
 var some = function some(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array8 = array;
-    array = _array8.array;
-    func = _array8.func;
+    var _array7 = array;
+    array = _array7.array;
+    func = _array7.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6660,9 +6822,9 @@ exports._all = _all;
 
 var all = function all(array, func) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
-    var _array9 = array;
-    array = _array9.array;
-    func = _array9.func;
+    var _array8 = array;
+    array = _array8.array;
+    func = _array8.func;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6704,9 +6866,9 @@ exports._isFirst = _isFirst;
 
 var isFirst = function isFirst(array, valueArray) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
-    var _array10 = array;
-    array = _array10.array;
-    valueArray = _array10.valueArray;
+    var _array9 = array;
+    array = _array9.array;
+    valueArray = _array9.valueArray;
   } else if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray')) {
     var _valueArray = valueArray;
     valueArray = _valueArray.valueArray;
@@ -6749,9 +6911,9 @@ exports._isLast = _isLast;
 
 var isLast = function isLast(array, valueArray) {
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
-    var _array11 = array;
-    array = _array11.array;
-    valueArray = _array11.valueArray;
+    var _array10 = array;
+    array = _array10.array;
+    valueArray = _array10.valueArray;
   } else if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray')) {
     var _valueArray2 = valueArray;
     valueArray = _valueArray2.valueArray;
@@ -6790,15 +6952,15 @@ var isBothEnds = function isBothEnds(array, valueFirstArray) {
   var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueFirstArray', 'valueLastArray')) {
+    var _array11 = array;
+    array = _array11.array;
+    valueFirstArray = _array11.valueFirstArray;
+    var _array11$valueLastArr = _array11.valueLastArray;
+    valueLastArray = _array11$valueLastArr === void 0 ? valueFirstArray : _array11$valueLastArr;
+  } else if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
     var _array12 = array;
     array = _array12.array;
-    valueFirstArray = _array12.valueFirstArray;
-    var _array12$valueLastArr = _array12.valueLastArray;
-    valueLastArray = _array12$valueLastArr === void 0 ? valueFirstArray : _array12$valueLastArr;
-  } else if ((0, _isObjectParameter.isObjectParameter)(array, 'array, valueArray')) {
-    var _array13 = array;
-    array = _array13.array;
-    valueFirstArray = _array13.valueArray;
+    valueFirstArray = _array12.valueArray;
     valueLastArray = valueFirstArray;
   }
 
@@ -6834,11 +6996,11 @@ var subIndex = function subIndex(array, indexStart) {
   var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, indexStart', 'indexEnd')) {
-    var _array14 = array;
-    array = _array14.array;
-    indexStart = _array14.indexStart;
-    var _array14$indexEnd = _array14.indexEnd;
-    indexEnd = _array14$indexEnd === void 0 ? indexStart : _array14$indexEnd;
+    var _array13 = array;
+    array = _array13.array;
+    indexStart = _array13.indexStart;
+    var _array13$indexEnd = _array13.indexEnd;
+    indexEnd = _array13$indexEnd === void 0 ? indexStart : _array13$indexEnd;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6882,11 +7044,11 @@ var subLength = function subLength(array, index) {
   var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : array.length - index;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, index', 'length')) {
-    var _array15 = array;
-    array = _array15.array;
-    index = _array15.index;
-    var _array15$length = _array15.length;
-    length = _array15$length === void 0 ? array.length - index : _array15$length;
+    var _array14 = array;
+    array = _array14.array;
+    index = _array14.index;
+    var _array14$length = _array14.length;
+    length = _array14$length === void 0 ? array.length - index : _array14$length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6931,10 +7093,10 @@ var subFirst = function subFirst(array) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, length')) {
-    var _array16 = array;
-    array = _array16.array;
-    var _array16$length = _array16.length;
-    length = _array16$length === void 0 ? 1 : _array16$length;
+    var _array15 = array;
+    array = _array15.array;
+    var _array15$length = _array15.length;
+    length = _array15$length === void 0 ? 1 : _array15$length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6969,10 +7131,10 @@ var subLast = function subLast(array) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array, length')) {
-    var _array17 = array;
-    array = _array17.array;
-    var _array17$length = _array17.length;
-    length = _array17$length === void 0 ? 1 : _array17$length;
+    var _array16 = array;
+    array = _array16.array;
+    var _array16$length = _array16.length;
+    length = _array16$length === void 0 ? 1 : _array16$length;
   }
 
   if (!(0, _type.isArray)(array)) {
@@ -6999,7 +7161,6 @@ var _default = {
   _single: _single,
   _multiple: _multiple,
   _filter: _filter,
-  _map: _map,
   _count: _count,
   _findFirstIndex: _findFirstIndex,
   _findLastIndex: _findLastIndex,
@@ -7022,7 +7183,6 @@ var _default = {
   single: single,
   multiple: multiple,
   filter: filter,
-  map: map,
   count: count,
   findFirstIndex: findFirstIndex,
   findLastIndex: findLastIndex,
@@ -7046,69 +7206,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports._cloneDeep = void 0;
-
-var _type = __webpack_require__(5);
-
-var _object = __webpack_require__(23);
-
-var _clone = __webpack_require__(4);
-
-/**
- * cloneDeep
- */
-var _cloneDeep = function _cloneDeep(source) {
-  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _clone.clone.func.defaultArray;
-  var CircularReferenceBuffer = {
-    source: [],
-    clone: []
-  };
-
-  var __cloneDeep = function __cloneDeep(value) {
-    var index = CircularReferenceBuffer.source.indexOf(value);
-
-    if (index !== -1) {
-      return CircularReferenceBuffer.clone[index];
-    }
-
-    if ((0, _type.isUndefined)(value)) {
-      return undefined;
-    }
-
-    for (var i = 0, l = cloneFuncArray.length; i < l; i += 1) {
-      var result = cloneFuncArray[i](value, function (source, clone) {
-        CircularReferenceBuffer.source.push(source);
-        CircularReferenceBuffer.clone.push(clone);
-      }, __cloneDeep);
-
-      if (!(0, _type.isUndefined)(result)) {
-        return result;
-      }
-    }
-
-    return value;
-  };
-
-  return __cloneDeep(source);
-};
-
-exports._cloneDeep = _cloneDeep;
-var _default = {
-  _cloneDeep: _cloneDeep
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 35 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7121,9 +7219,9 @@ exports["default"] = exports._unique = void 0;
 
 var _includes = __webpack_require__(11);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _unique2 = __webpack_require__(37);
+var _unique2 = __webpack_require__(40);
 
 /**
  * uniqe
@@ -7167,32 +7265,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.__returnValueFunction = void 0;
-
-/**
- * returnValueFunction
- */
-var __returnValueFunction = function __returnValueFunction(v) {
-  return v;
-};
-
-exports.__returnValueFunction = __returnValueFunction;
-var _default = {
-  __returnValueFunction: __returnValueFunction
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7203,7 +7276,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.__unique = void 0;
 
-var _syntax = __webpack_require__(38);
+var _syntax = __webpack_require__(41);
 
 var _includes = __webpack_require__(11);
 
@@ -7248,7 +7321,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7259,25 +7332,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports._Enum = exports._assert = void 0;
 
-var _assert2 = _interopRequireDefault(__webpack_require__(39));
+var _assert2 = _interopRequireDefault(__webpack_require__(42));
 
-var _guard = _interopRequireDefault(__webpack_require__(40));
+var _guard = _interopRequireDefault(__webpack_require__(43));
 
-var _sc = _interopRequireDefault(__webpack_require__(42));
+var _sc = _interopRequireDefault(__webpack_require__(45));
 
-var _if_ = _interopRequireDefault(__webpack_require__(43));
+var _if_ = _interopRequireDefault(__webpack_require__(46));
 
-var _switch_ = _interopRequireDefault(__webpack_require__(44));
+var _switch_ = _interopRequireDefault(__webpack_require__(47));
 
-var _loop = _interopRequireDefault(__webpack_require__(45));
+var _loop = _interopRequireDefault(__webpack_require__(48));
 
 var _canUseMap = _interopRequireDefault(__webpack_require__(17));
 
 var _canUseSet = _interopRequireDefault(__webpack_require__(20));
 
-var _Enum2 = _interopRequireDefault(__webpack_require__(27));
+var _Enum2 = _interopRequireDefault(__webpack_require__(32));
 
-var _Enum3 = _interopRequireDefault(__webpack_require__(47));
+var _Enum3 = _interopRequireDefault(__webpack_require__(50));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -7333,7 +7406,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7393,7 +7466,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7406,7 +7479,7 @@ exports["default"] = exports.guard = void 0;
 
 var _type = __webpack_require__(5);
 
-var _functionValue = __webpack_require__(41);
+var _functionValue = __webpack_require__(44);
 
 /**
  * guard
@@ -7502,7 +7575,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7533,7 +7606,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7562,7 +7635,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7577,7 +7650,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _functionValue = __webpack_require__(41);
+var _functionValue = __webpack_require__(44);
 
 /**
  * if_
@@ -7641,7 +7714,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7654,7 +7727,7 @@ exports["default"] = exports.switch_ = void 0;
 
 var _type = __webpack_require__(5);
 
-var _functionValue = __webpack_require__(41);
+var _functionValue = __webpack_require__(44);
 
 /**
  * switch_
@@ -7706,7 +7779,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7721,9 +7794,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _IntegerArray2 = __webpack_require__(29);
+var _IntegerArray2 = __webpack_require__(34);
 
-var _objectEntries = __webpack_require__(46);
+var _objectEntries = __webpack_require__(49);
 
 /**
  * loop
@@ -7799,7 +7872,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7852,7 +7925,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7867,7 +7940,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _Enum2 = __webpack_require__(27);
+var _Enum2 = __webpack_require__(32);
 
 /* eslint-disable no-invalid-this */
 
@@ -7906,7 +7979,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7919,9 +7992,9 @@ exports["default"] = exports._min = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _min2 = __webpack_require__(49);
+var _min2 = __webpack_require__(52);
 
 /**
  * array.min
@@ -7972,7 +8045,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8015,7 +8088,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8028,9 +8101,9 @@ exports["default"] = exports._max = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _max2 = __webpack_require__(51);
+var _max2 = __webpack_require__(54);
 
 /**
  * array.max
@@ -8081,7 +8154,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8124,7 +8197,39 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 52 */
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._map = void 0;
+
+/**
+ * map
+ */
+var _map = function _map(array, func) {
+  var result = [];
+
+  for (var i = 0, l = array.length; i < l; i += 1) {
+    var resultFunc = func(array[i], i, array);
+    result.push(resultFunc);
+  }
+
+  return result;
+};
+
+exports._map = _map;
+var _default = {
+  _map: _map
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8139,13 +8244,13 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
-var _indexOfFirst2 = __webpack_require__(67);
+var _indexOfFirst2 = __webpack_require__(78);
 
-var _indexOfLast2 = __webpack_require__(68);
+var _indexOfLast2 = __webpack_require__(79);
 
 /**
  * repeat
@@ -9257,7 +9362,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9266,43 +9371,53 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.operation = exports.arrayToIndexValueArray = exports.every = exports.findBack = exports.find = exports.findBackIndex = exports.findIndex = exports.arrayEntries = exports.IntegerArray = exports.NumberArray = exports.unique = exports.group = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.isBothEnds = exports.isLast = exports.isFirst = exports.all = exports.some = exports.findLast = exports.findFirst = exports.findLastIndex = exports.findFirstIndex = exports.count = exports.map = exports.filter = exports.multiple = exports.single = exports.mode = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.from = exports._arrayEntries = exports._IntegerArray = exports._NumberArray = exports._unique = exports._group = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._isBothEnds = exports._isLast = exports._isFirst = exports._all = exports._some = exports._findLast = exports._findFirst = exports._findLastIndex = exports._findFirstIndex = exports._count = exports._map = exports._filter = exports._multiple = exports._single = exports._mode = exports._median = exports._average = exports._sum = exports._max = exports._min = void 0;
+exports["default"] = exports.operation = exports.arrayToIndexValueArray = exports.every = exports.findBack = exports.find = exports.findBackIndex = exports.findIndex = exports.SortFunc = exports.arrayEntries = exports.IntegerArray = exports.NumberArray = exports.unique = exports.group = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.isBothEnds = exports.isLast = exports.isFirst = exports.all = exports.some = exports.findLast = exports.findFirst = exports.findLastIndex = exports.findFirstIndex = exports.count = exports.map = exports.filter = exports.multiple = exports.single = exports.mode = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.from = exports._SortFunc = exports._arrayEntries = exports._IntegerArray = exports._NumberArray = exports._unique = exports._group = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._isBothEnds = exports._isLast = exports._isFirst = exports._all = exports._some = exports._findLast = exports._findFirst = exports._findLastIndex = exports._findFirstIndex = exports._count = exports._map = exports._filter = exports._multiple = exports._single = exports._mode = exports._median = exports._average = exports._sum = exports._max = exports._min = void 0;
 
-var _array_common = _interopRequireDefault(__webpack_require__(33));
+var _array_common = _interopRequireDefault(__webpack_require__(38));
 
-var _min2 = _interopRequireDefault(__webpack_require__(48));
+var _map2 = _interopRequireDefault(__webpack_require__(55));
 
-var _min3 = _interopRequireDefault(__webpack_require__(54));
+var _map3 = _interopRequireDefault(__webpack_require__(58));
 
-var _max2 = _interopRequireDefault(__webpack_require__(50));
+var _min2 = _interopRequireDefault(__webpack_require__(51));
 
-var _max3 = _interopRequireDefault(__webpack_require__(55));
+var _min3 = _interopRequireDefault(__webpack_require__(59));
 
-var _NumberArray2 = _interopRequireDefault(__webpack_require__(30));
+var _max2 = _interopRequireDefault(__webpack_require__(53));
 
-var _NumberArray3 = _interopRequireDefault(__webpack_require__(56));
+var _max3 = _interopRequireDefault(__webpack_require__(60));
 
-var _IntegerArray2 = _interopRequireDefault(__webpack_require__(29));
+var _NumberArray2 = _interopRequireDefault(__webpack_require__(35));
 
-var _IntegerArray3 = _interopRequireDefault(__webpack_require__(57));
+var _NumberArray3 = _interopRequireDefault(__webpack_require__(61));
 
-var _arrayEntries2 = _interopRequireDefault(__webpack_require__(58));
+var _IntegerArray2 = _interopRequireDefault(__webpack_require__(34));
 
-var _group2 = _interopRequireDefault(__webpack_require__(59));
+var _IntegerArray3 = _interopRequireDefault(__webpack_require__(62));
 
-var _group3 = _interopRequireDefault(__webpack_require__(60));
+var _arrayEntries2 = _interopRequireDefault(__webpack_require__(63));
 
-var _unique2 = _interopRequireDefault(__webpack_require__(35));
+var _group2 = _interopRequireDefault(__webpack_require__(64));
 
-var _unique3 = _interopRequireDefault(__webpack_require__(61));
+var _group3 = _interopRequireDefault(__webpack_require__(65));
 
-var _array_operation = _interopRequireDefault(__webpack_require__(31));
+var _unique2 = _interopRequireDefault(__webpack_require__(39));
 
-var _sort = _interopRequireDefault(__webpack_require__(62));
+var _unique3 = _interopRequireDefault(__webpack_require__(66));
 
-var _sort2 = _interopRequireDefault(__webpack_require__(63));
+var _array_operation = _interopRequireDefault(__webpack_require__(36));
 
-var _sortDictionary = _interopRequireDefault(__webpack_require__(66));
+var _sort = _interopRequireDefault(__webpack_require__(67));
+
+var _sort2 = _interopRequireDefault(__webpack_require__(68));
+
+var _sortDictionary = _interopRequireDefault(__webpack_require__(71));
+
+var _SortFuncOrder = _interopRequireDefault(__webpack_require__(72));
+
+var _SortFunc2 = _interopRequireDefault(__webpack_require__(73));
+
+var _SortFunc3 = _interopRequireDefault(__webpack_require__(74));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -9312,8 +9427,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// import { _copyProperty } from './object/object_common.js';
-var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _group3["default"]), _unique2["default"]), _unique3["default"]);
+var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _map2["default"]), _map3["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _group3["default"]), _unique2["default"]), _unique3["default"]), _SortFuncOrder["default"]), _SortFunc2["default"]), _SortFunc3["default"]);
 
 var arrayOperationJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sort2["default"]), _sortDictionary["default"]);
 
@@ -9346,6 +9460,7 @@ var _min = arrayJs._min,
     _NumberArray = arrayJs._NumberArray,
     _IntegerArray = arrayJs._IntegerArray,
     _arrayEntries = arrayJs._arrayEntries,
+    _SortFunc = arrayJs._SortFunc,
     from = arrayJs.from,
     min = arrayJs.min,
     max = arrayJs.max,
@@ -9376,6 +9491,7 @@ var _min = arrayJs._min,
     NumberArray = arrayJs.NumberArray,
     IntegerArray = arrayJs.IntegerArray,
     arrayEntries = arrayJs.arrayEntries,
+    SortFunc = arrayJs.SortFunc,
     findIndex = arrayJs.findIndex,
     findBackIndex = arrayJs.findBackIndex,
     find = arrayJs.find,
@@ -9422,6 +9538,7 @@ exports.findBack = findBack;
 exports.find = find;
 exports.findBackIndex = findBackIndex;
 exports.findIndex = findIndex;
+exports.SortFunc = SortFunc;
 exports.arrayEntries = arrayEntries;
 exports.IntegerArray = IntegerArray;
 exports.NumberArray = NumberArray;
@@ -9452,6 +9569,7 @@ exports.sum = sum;
 exports.max = max;
 exports.min = min;
 exports.from = from;
+exports._SortFunc = _SortFunc;
 exports._arrayEntries = _arrayEntries;
 exports._IntegerArray = _IntegerArray;
 exports._NumberArray = _NumberArray;
@@ -9513,6 +9631,7 @@ var _default = {
   _NumberArray: _NumberArray,
   _IntegerArray: _IntegerArray,
   _arrayEntries: _arrayEntries,
+  _SortFunc: _SortFunc,
   from: from,
   min: min,
   max: max,
@@ -9543,6 +9662,7 @@ var _default = {
   NumberArray: NumberArray,
   IntegerArray: IntegerArray,
   arrayEntries: arrayEntries,
+  SortFunc: SortFunc,
   // Another name
   findIndex: findIndex,
   findBackIndex: findBackIndex,
@@ -9555,7 +9675,52 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 54 */
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.map = void 0;
+
+var _type = __webpack_require__(5);
+
+var _map2 = __webpack_require__(55);
+
+var _isObjectParameter = __webpack_require__(13);
+
+/**
+ * map
+ */
+var map = function map(array, func) {
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array, func')) {
+    var _array = array;
+    array = _array.array;
+    func = _array.func;
+  }
+
+  if (!(0, _type.isArray)(array)) {
+    throw new TypeError('map args(array) is not array');
+  }
+
+  if (!(0, _type.isFunction)(func)) {
+    throw new TypeError('map args(productFunc) is not function');
+  }
+
+  return (0, _map2._map)(array, func);
+};
+
+exports.map = map;
+var _default = {
+  map: map
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9570,9 +9735,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _min2 = __webpack_require__(48);
+var _min2 = __webpack_require__(51);
 
 /**
  * array.min
@@ -9621,7 +9786,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 55 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9636,9 +9801,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _max2 = __webpack_require__(50);
+var _max2 = __webpack_require__(53);
 
 /**
  * array.max
@@ -9687,7 +9852,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 56 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9702,7 +9867,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _NumberArray2 = __webpack_require__(30);
+var _NumberArray2 = __webpack_require__(35);
 
 /**
  * NumberArray
@@ -9749,7 +9914,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 57 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9764,7 +9929,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _IntegerArray2 = __webpack_require__(29);
+var _IntegerArray2 = __webpack_require__(34);
 
 /**
  * IntegerArray
@@ -9811,7 +9976,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 58 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9826,7 +9991,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _NumberArray2 = __webpack_require__(30);
+var _NumberArray2 = __webpack_require__(35);
 
 /**
  * arrayEntries
@@ -9862,7 +10027,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 59 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9873,7 +10038,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._group = void 0;
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
 /**
  * group
@@ -9912,7 +10077,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 60 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9927,9 +10092,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _group2 = __webpack_require__(59);
+var _group2 = __webpack_require__(64);
 
 /**
  * group
@@ -9978,7 +10143,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 61 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9995,9 +10160,9 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _includes = __webpack_require__(11);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _unique2 = __webpack_require__(35);
+var _unique2 = __webpack_require__(39);
 
 /**
  * uniqe
@@ -10046,7 +10211,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 62 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10059,9 +10224,9 @@ exports["default"] = exports._sort = void 0;
 
 var _type = __webpack_require__(5);
 
-var _syntax = __webpack_require__(38);
+var _syntax = __webpack_require__(41);
 
-var _Enum2 = __webpack_require__(27);
+var _Enum2 = __webpack_require__(32);
 
 /**
  * array.operation.sort
@@ -10127,7 +10292,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 63 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10140,13 +10305,13 @@ exports["default"] = exports.sortLengthDescending = exports.sortLengthAscending 
 
 var _type = __webpack_require__(5);
 
-var _or2 = __webpack_require__(64);
+var _or2 = __webpack_require__(69);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _objectValues2 = __webpack_require__(65);
+var _objectValues2 = __webpack_require__(70);
 
-var _sort2 = __webpack_require__(62);
+var _sort2 = __webpack_require__(67);
 
 /**
  * array.operation.sort
@@ -10255,7 +10420,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 64 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10307,7 +10472,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 65 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10365,7 +10530,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 66 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10378,15 +10543,15 @@ exports["default"] = exports.sortDictionaryDescending = exports.sortDictionaryAs
 
 var _isType = __webpack_require__(6);
 
-var _or2 = __webpack_require__(64);
+var _or2 = __webpack_require__(69);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _objectValues2 = __webpack_require__(65);
+var _objectValues2 = __webpack_require__(70);
 
-var _Enum2 = __webpack_require__(27);
+var _Enum2 = __webpack_require__(32);
 
-var _sort = __webpack_require__(63);
+var _sort = __webpack_require__(68);
 
 /**
  * array.operation.sortDictionary
@@ -10636,7 +10801,412 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 67 */
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.__SortFuncOrder = void 0;
+
+/**
+ * SortFunc.order
+ */
+var __SortFuncOrder = {};
+exports.__SortFuncOrder = __SortFuncOrder;
+__SortFuncOrder.normal = {};
+
+__SortFuncOrder.normal.ascending = function (a, b) {
+  return a < b ? -1 : a > b ? 1 : 0;
+};
+
+__SortFuncOrder.normal.descending = function (a, b) {
+  return -1 * __SortFuncOrder.normal.ascending(a, b);
+};
+
+__SortFuncOrder.dictionaryUpperCase = {};
+
+__SortFuncOrder.dictionaryUpperCase.ascending = function (a, b) {
+  var al = a.toLowerCase();
+  var bl = b.toLowerCase();
+  return al < bl ? -1 : al > bl ? 1 : a < b ? -1 : a > b ? 1 : 0;
+};
+
+__SortFuncOrder.dictionaryUpperCase.descending = function (a, b) {
+  return -1 * __SortFuncOrder.dictionaryUpperCase.ascending(a, b);
+};
+
+__SortFuncOrder.dictionaryLowerCase = {};
+
+__SortFuncOrder.dictionaryLowerCase.ascending = function (a, b) {
+  var al = a.toLowerCase();
+  var bl = b.toLowerCase();
+  return al < bl ? -1 : al > bl ? 1 : a < b ? 1 : a > b ? -1 : 0;
+};
+
+__SortFuncOrder.dictionaryLowerCase.descending = function (a, b) {
+  return -1 * __SortFuncOrder.dictionaryLowerCase.ascending(a, b);
+};
+
+__SortFuncOrder.version = {};
+
+__SortFuncOrder.version.ascending = function (a, b) {
+  var arrayA = a.split('.');
+  var arrayB = b.split('.');
+  var length = Math.min(arrayA.length, arrayB.length);
+
+  for (var i = 0; i < length; i += 1) {
+    var numberA = parseInt(arrayA[i], 10);
+    var numberB = parseInt(arrayB[i], 10);
+
+    if (numberA < numberB) {
+      return -1;
+    }
+
+    if (numberA > numberB) {
+      return 1;
+    }
+
+    var valueA = arrayA[i];
+    var valueB = arrayB[i];
+    var lowerA = valueA.toLowerCase();
+    var lowerB = valueB.toLowerCase();
+
+    if (lowerA < lowerB) {
+      return -1;
+    }
+
+    if (lowerA > lowerB) {
+      return 1;
+    }
+
+    if (valueA < valueB) {
+      return 1;
+    }
+
+    if (valueA > valueB) {
+      return -1;
+    } // lowerCase < upperCase
+
+  }
+
+  if (arrayA.length < arrayB.length) {
+    return -1;
+  }
+
+  if (arrayA.length > arrayB.length) {
+    return 1;
+  }
+
+  return 0;
+};
+
+__SortFuncOrder.version.descending = function (a, b) {
+  return -1 * __SortFuncOrder.version.ascending(a, b);
+};
+
+var _default = {
+  __SortFuncOrder: __SortFuncOrder
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._SortFunc = void 0;
+
+var _map2 = __webpack_require__(55);
+
+var _returnValueFunction = __webpack_require__(24);
+
+var _SortFuncOrder = __webpack_require__(72);
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * SortFunc
+ */
+var _SortFunc = function _SortFunc(orderSettingArray) {
+  var sortFuncArray = orderSettingArray.map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        orderFunc = _ref2[0],
+        _ref2$ = _ref2[1],
+        valueFunc = _ref2$ === void 0 ? _returnValueFunction.__returnValueFunction : _ref2$;
+
+    return function (a, b) {
+      return orderFunc(valueFunc(a), valueFunc(b));
+    };
+  });
+  return function (a, b) {
+    for (var i = 0, l = sortFuncArray.length; i < l; i += 1) {
+      var result = sortFuncArray[i](a, b);
+
+      if (result !== 0) {
+        return result;
+      }
+    }
+
+    return 0;
+  };
+};
+
+exports._SortFunc = _SortFunc;
+_SortFunc.order = _SortFuncOrder.__SortFuncOrder;
+var _default = {
+  _SortFunc: _SortFunc
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.SortFunc = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _allMatchAll2 = __webpack_require__(75);
+
+var _SortFunc2 = __webpack_require__(73);
+
+var SortFunc = function SortFunc(orderSettingArray) {
+  if (!(0, _isType.isArray)(orderSettingArray)) {
+    throw new TypeError('SortFunc args(orderSettingArray) is not array');
+  }
+
+  if (!(0, _allMatchAll2._allMatchAll)(orderSettingArray, [_isType.isArray, function (element) {
+    return (0, _isType.isFunction)(element[0]) && (0, _isType.isFunction)(element[1]);
+  }])) {
+    throw new TypeError('SortFunc args(orderSettingArray) element[0|1] is not function ');
+  }
+
+  return (0, _SortFunc2._SortFunc)(orderSettingArray);
+};
+
+exports.SortFunc = SortFunc;
+SortFunc.order = _SortFunc2._SortFunc.order;
+var _default = {
+  SortFunc: SortFunc
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.allMatchAll = exports._allMatchAll = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter = __webpack_require__(13);
+
+var _array_common = __webpack_require__(38);
+
+var _matchAll2 = __webpack_require__(76);
+
+/**
+ * allMatchAll
+ */
+var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
+  return (0, _array_common._all)(valueArray, function (value) {
+    return (0, _matchAll2._matchAll)(value, compareArray);
+  });
+};
+
+exports._allMatchAll = _allMatchAll;
+
+var allMatchAll = function allMatchAll(valueArray, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
+    var _valueArray = valueArray;
+    valueArray = _valueArray.valueArray;
+    compareArray = _valueArray.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(valueArray)) {
+    throw new TypeError('allMatchAll args(valueArray) is not array');
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('allMatchAll args(compareArray) is not array');
+  }
+
+  return _allMatchAll(valueArray, compareArray);
+};
+
+exports.allMatchAll = allMatchAll;
+var _default = {
+  _allMatchAll: _allMatchAll,
+  allMatchAll: allMatchAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.matchAll = exports._matchAll = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter = __webpack_require__(13);
+
+var _array_common = __webpack_require__(38);
+
+var _match2 = __webpack_require__(77);
+
+/**
+ * matchAll
+ */
+var _matchAll = function _matchAll(value, compareArray) {
+  return (0, _array_common._all)(compareArray, function (compare) {
+    return (0, _match2._match)(value, compare);
+  });
+};
+
+exports._matchAll = _matchAll;
+
+var matchAll = function matchAll(value, compareArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
+    var _value = value;
+    value = _value.value;
+    compareArray = _value.compareArray;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
+    var _compareArray = compareArray;
+    compareArray = _compareArray.compareArray;
+  }
+
+  if (!(0, _type.isArray)(compareArray)) {
+    throw new TypeError('matchAll args(compareArray) is not array');
+  }
+
+  return _matchAll(value, compareArray);
+};
+
+exports.matchAll = matchAll;
+var _default = {
+  _matchAll: _matchAll,
+  matchAll: matchAll
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.match = exports._match = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter = __webpack_require__(13);
+
+/**
+ * match
+ */
+var _match = function _match(value, compare) {
+  if ((0, _type.isString)(value)) {
+    var result;
+
+    if ((0, _type.isRegExp)(compare)) {
+      result = value.match(compare) !== null;
+    } else if ((0, _type.isFunction)(compare)) {
+      result = compare(value);
+
+      if (!(0, _type.isBoolean)(result)) {
+        throw new TypeError('_match args(compareArray element function result) is not boolean');
+      }
+    } else {
+      result = value === compare;
+    }
+
+    return result;
+  } else {
+    var _result;
+
+    if ((0, _type.isFunction)(compare)) {
+      _result = compare(value);
+
+      if (!(0, _type.isBoolean)(_result)) {
+        throw new TypeError('_match args(compareArray element function result) is not boolean');
+      }
+    } else {
+      _result = value === compare;
+    }
+
+    return _result;
+  }
+};
+
+exports._match = _match;
+
+var match = function match(value, compare) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compare')) {
+    var _value = value;
+    value = _value.value;
+    compare = _value.compare;
+  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
+    var _compare = compare;
+    compare = _compare.compare;
+  }
+
+  return _match(value, compare);
+};
+
+exports.match = match;
+var _default = {
+  _match: _match,
+  match: match
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10665,7 +11235,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 68 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10676,7 +11246,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._indexOfLast = void 0;
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
 /**
  * indexOfLast
@@ -10698,7 +11268,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 69 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10709,17 +11279,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._replaceAllArray = void 0;
 
-var _indexOfAnyFirst2 = __webpack_require__(70);
+var _indexOfAnyFirst2 = __webpack_require__(81);
 
-var _string_common = __webpack_require__(52);
+var _string_common = __webpack_require__(56);
 
-var _array_common = __webpack_require__(33);
+var _map2 = __webpack_require__(55);
 
 /**
  * replaceAllArray
  */
 var _replaceAllArray = function _replaceAllArray(str, replaceArray) {
-  var searchArray = (0, _array_common._map)(replaceArray, function (element) {
+  var searchArray = (0, _map2._map)(replaceArray, function (element) {
     return element[0];
   });
   var start = 0;
@@ -10752,7 +11322,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 70 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10763,9 +11333,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._indexOfAnyFirst = void 0;
 
-var _indexOfFirst2 = __webpack_require__(67);
+var _indexOfFirst2 = __webpack_require__(78);
 
-var _loop = __webpack_require__(28);
+var _loop = __webpack_require__(33);
 
 var _indexOfAnyFirst = function _indexOfAnyFirst(str, searchArray) {
   var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
@@ -10802,7 +11372,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 71 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10819,9 +11389,9 @@ var _replaceAll2 = __webpack_require__(14);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _getProperty2 = __webpack_require__(72);
+var _getProperty2 = __webpack_require__(83);
 
-var _splitCommaItems2 = __webpack_require__(25);
+var _splitCommaItems2 = __webpack_require__(30);
 
 var _includes = __webpack_require__(11);
 
@@ -10905,7 +11475,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 72 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10920,9 +11490,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _has2 = __webpack_require__(73);
+var _has2 = __webpack_require__(84);
 
-var _splitDotItems2 = __webpack_require__(74);
+var _splitDotItems2 = __webpack_require__(85);
 
 /**
  * getProperty
@@ -11025,7 +11595,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 73 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11138,7 +11708,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 74 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11151,7 +11721,7 @@ exports["default"] = exports.splitDotItems = exports._splitDotItems = void 0;
 
 var _type = __webpack_require__(5);
 
-var _split2 = __webpack_require__(26);
+var _split2 = __webpack_require__(31);
 
 var _includes = __webpack_require__(11);
 
@@ -11187,7 +11757,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 75 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11208,7 +11778,7 @@ var _hasOwn2 = __webpack_require__(8);
 
 var _propertyCount2 = __webpack_require__(7);
 
-var _splitCommaItems2 = __webpack_require__(25);
+var _splitCommaItems2 = __webpack_require__(30);
 
 var _includes = __webpack_require__(11);
 
@@ -11273,7 +11843,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 76 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11320,7 +11890,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 77 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11333,9 +11903,9 @@ exports["default"] = exports.objectFromKeyValueArray = exports.objectFromEntries
 
 var _isType = __webpack_require__(6);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _objectFromEntries2 = __webpack_require__(76);
+var _objectFromEntries2 = __webpack_require__(87);
 
 /**
  * objectFromEntries
@@ -11364,7 +11934,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 78 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11422,7 +11992,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 79 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11470,7 +12040,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 80 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11524,7 +12094,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 81 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11537,9 +12107,9 @@ exports["default"] = exports.propertyList = exports._propertyList = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _loop = __webpack_require__(45);
+var _loop = __webpack_require__(48);
 
-var _objectEntries = __webpack_require__(46);
+var _objectEntries = __webpack_require__(49);
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -11608,7 +12178,57 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 82 */
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.clone = void 0;
+
+var _type = __webpack_require__(5);
+
+var _object = __webpack_require__(28);
+
+var _isObjectParameter = __webpack_require__(13);
+
+var _clone2 = __webpack_require__(4);
+
+var _cloneFunc = __webpack_require__(27);
+
+/**
+ * clone
+ */
+var clone = function clone(source, cloneFuncArray) {
+  if ((0, _isObjectParameter.isObjectParameter)(source, 'source', 'cloneFuncArray')) {
+    var _source = source;
+    source = _source.source;
+    var _source$cloneFuncArra = _source.cloneFuncArray;
+    cloneFuncArray = _source$cloneFuncArra === void 0 ? clone.func.defaultArray : _source$cloneFuncArra;
+  } else if ((0, _isObjectParameter.isObjectParameter)(cloneFuncArray, 'cloneFuncArray')) {
+    var _cloneFuncArray = cloneFuncArray;
+    cloneFuncArray = _cloneFuncArray.cloneFuncArray;
+  }
+
+  if (!((0, _type.isUndefined)(cloneFuncArray) || (0, _type.isArray)(cloneFuncArray))) {
+    throw new TypeError('clone args(cloneFuncArray) is not array');
+  }
+
+  return (0, _clone2._clone)(source, cloneFuncArray);
+};
+
+exports.clone = clone;
+clone.func = _cloneFunc.__cloneFunc;
+var _default = {
+  clone: clone
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11621,28 +12241,26 @@ exports["default"] = exports.cloneDeep = void 0;
 
 var _type = __webpack_require__(5);
 
-var _object = __webpack_require__(23);
+var _object = __webpack_require__(28);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _clone = __webpack_require__(4);
+var _cloneDeep2 = __webpack_require__(25);
 
-var _cloneDeep2 = __webpack_require__(34);
+var _cloneFunc = __webpack_require__(27);
 
-var cloneDeep = function cloneDeep(source) {
-  var cloneFuncArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _clone.clone.func.defaultArray;
-
+var cloneDeep = function cloneDeep(source, cloneFuncArray) {
   if ((0, _isObjectParameter.isObjectParameter)(source, 'source', 'cloneFuncArray')) {
     var _source = source;
     source = _source.source;
     var _source$cloneFuncArra = _source.cloneFuncArray;
-    cloneFuncArray = _source$cloneFuncArra === void 0 ? _clone.clone.func.defaultArray : _source$cloneFuncArra;
+    cloneFuncArray = _source$cloneFuncArra === void 0 ? cloneDeep.func.defaultArray : _source$cloneFuncArra;
   } else if ((0, _isObjectParameter.isObjectParameter)(cloneFuncArray, 'cloneFuncArray')) {
     var _cloneFuncArray = cloneFuncArray;
     cloneFuncArray = _cloneFuncArray.cloneFuncArray;
   }
 
-  if (!(0, _type.isArray)(cloneFuncArray)) {
+  if (!((0, _type.isUndefined)(cloneFuncArray) || (0, _type.isArray)(cloneFuncArray))) {
     throw new TypeError('cloneDeep args(cloneFuncArray) is not array');
   }
 
@@ -11650,63 +12268,14 @@ var cloneDeep = function cloneDeep(source) {
 };
 
 exports.cloneDeep = cloneDeep;
+cloneDeep.func = _cloneFunc.__cloneFunc;
 var _default = {
   cloneDeep: cloneDeep
 };
 exports["default"] = _default;
 
 /***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _isType = __webpack_require__(6);
-
-/**
- * cloneDeepFast
- */
-var cloneDeepFast = function cloneDeepFast(source) {
-  var __cloneDeepFast = function __cloneDeepFast(value) {
-    var cloneValue;
-
-    if ((0, _isType.isObject)(value)) {
-      cloneValue = {};
-
-      for (var key in value) {
-        cloneValue[key] = __cloneDeepFast(value[key]);
-      }
-
-      return cloneValue;
-    } else if ((0, _isType.isArray)(value)) {
-      cloneValue = Array(value.length);
-
-      for (var i = 0, l = value.length; i < l; i += 1) {
-        cloneValue[i] = __cloneDeepFast(value[i]);
-      }
-
-      return cloneValue;
-    }
-
-    return value;
-  };
-
-  return __cloneDeepFast(source);
-};
-
-var _default = {
-  cloneDeepFast: cloneDeepFast
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 84 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11719,9 +12288,9 @@ exports["default"] = exports._merge = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _loop = __webpack_require__(28);
+var _loop = __webpack_require__(33);
 
-var _objectEntries2 = __webpack_require__(46);
+var _objectEntries2 = __webpack_require__(49);
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -11771,7 +12340,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 85 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11788,9 +12357,9 @@ var _isTypeArray = __webpack_require__(22);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _returnValueFunction = __webpack_require__(36);
+var _returnValueFunction = __webpack_require__(24);
 
-var _merge2 = __webpack_require__(84);
+var _merge2 = __webpack_require__(95);
 
 /**
  * merge
@@ -11841,7 +12410,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 86 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12318,7 +12887,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 87 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12331,11 +12900,11 @@ exports["default"] = exports.isNotThrown = exports.isThrownException = exports.i
 
 var _type = __webpack_require__(5);
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
-var _compare = __webpack_require__(113);
+var _compare = __webpack_require__(121);
 
 var _platform = __webpack_require__(9);
 
@@ -12572,7 +13141,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 88 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12583,65 +13152,65 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.paddingLast = exports.paddingFirst = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.tagOuterLast = exports.tagInnerLast = exports.tagOuterFirst = exports.tagInnerFirst = exports.subLastDelimLast = exports.subLastDelimFirst = exports.subFirstDelimLast = exports.subFirstDelimFirst = exports.matchFormat = exports.replaceAllArray = exports.replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.indexOfAnyLast = exports.indexOfAnyFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._paddingLast = exports._paddingFirst = exports._splitDotItems = exports._splitCommaItems = exports._split = exports._tagOuterLast = exports._tagInnerLast = exports._tagOuterFirst = exports._tagInnerFirst = exports._subLastDelimLast = exports._subLastDelimFirst = exports._subFirstDelimLast = exports._subFirstDelimFirst = exports._matchFormat = exports._replaceAllArray = exports._replaceAll = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._indexOfAnyLast = exports._indexOfAnyFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
 
-var _string_common = _interopRequireDefault(__webpack_require__(52));
+var _string_common = _interopRequireDefault(__webpack_require__(56));
 
-var _indexOfFirst2 = _interopRequireDefault(__webpack_require__(67));
+var _indexOfFirst2 = _interopRequireDefault(__webpack_require__(78));
 
-var _indexOfFirst3 = _interopRequireDefault(__webpack_require__(89));
+var _indexOfFirst3 = _interopRequireDefault(__webpack_require__(100));
 
-var _indexOfLast2 = _interopRequireDefault(__webpack_require__(68));
+var _indexOfLast2 = _interopRequireDefault(__webpack_require__(79));
 
-var _indexOfLast3 = _interopRequireDefault(__webpack_require__(90));
+var _indexOfLast3 = _interopRequireDefault(__webpack_require__(101));
 
-var _indexOfAnyFirst2 = _interopRequireDefault(__webpack_require__(70));
+var _indexOfAnyFirst2 = _interopRequireDefault(__webpack_require__(81));
 
-var _indexOfAnyFirst3 = _interopRequireDefault(__webpack_require__(91));
+var _indexOfAnyFirst3 = _interopRequireDefault(__webpack_require__(102));
 
-var _indexOfAnyLast2 = _interopRequireDefault(__webpack_require__(92));
+var _indexOfAnyLast2 = _interopRequireDefault(__webpack_require__(103));
 
-var _indexOfAnyLast3 = _interopRequireDefault(__webpack_require__(93));
+var _indexOfAnyLast3 = _interopRequireDefault(__webpack_require__(104));
 
 var _replaceAll2 = _interopRequireDefault(__webpack_require__(14));
 
-var _replaceAll3 = _interopRequireDefault(__webpack_require__(94));
+var _replaceAll3 = _interopRequireDefault(__webpack_require__(105));
 
-var _replaceAllArray2 = _interopRequireDefault(__webpack_require__(69));
+var _replaceAllArray2 = _interopRequireDefault(__webpack_require__(80));
 
-var _replaceAllArray3 = _interopRequireDefault(__webpack_require__(95));
+var _replaceAllArray3 = _interopRequireDefault(__webpack_require__(106));
 
-var _matchFormat2 = _interopRequireDefault(__webpack_require__(99));
+var _matchFormat2 = _interopRequireDefault(__webpack_require__(107));
 
-var _subFirstDelimFirst2 = _interopRequireDefault(__webpack_require__(100));
+var _subFirstDelimFirst2 = _interopRequireDefault(__webpack_require__(108));
 
-var _subFirstDelimLast2 = _interopRequireDefault(__webpack_require__(101));
+var _subFirstDelimLast2 = _interopRequireDefault(__webpack_require__(109));
 
-var _subLastDelimFirst2 = _interopRequireDefault(__webpack_require__(102));
+var _subLastDelimFirst2 = _interopRequireDefault(__webpack_require__(110));
 
-var _subLastDelimLast2 = _interopRequireDefault(__webpack_require__(103));
+var _subLastDelimLast2 = _interopRequireDefault(__webpack_require__(111));
 
-var _tagInnerFirst2 = _interopRequireDefault(__webpack_require__(104));
+var _tagInnerFirst2 = _interopRequireDefault(__webpack_require__(112));
 
-var _tagOuterFirst2 = _interopRequireDefault(__webpack_require__(105));
+var _tagOuterFirst2 = _interopRequireDefault(__webpack_require__(113));
 
-var _tagInnerLast2 = _interopRequireDefault(__webpack_require__(106));
+var _tagInnerLast2 = _interopRequireDefault(__webpack_require__(114));
 
-var _tagOuterLast2 = _interopRequireDefault(__webpack_require__(107));
+var _tagOuterLast2 = _interopRequireDefault(__webpack_require__(115));
 
-var _split2 = _interopRequireDefault(__webpack_require__(26));
+var _split2 = _interopRequireDefault(__webpack_require__(31));
 
-var _split3 = _interopRequireDefault(__webpack_require__(108));
+var _split3 = _interopRequireDefault(__webpack_require__(116));
 
-var _splitCommaItems2 = _interopRequireDefault(__webpack_require__(25));
+var _splitCommaItems2 = _interopRequireDefault(__webpack_require__(30));
 
-var _splitDotItems2 = _interopRequireDefault(__webpack_require__(74));
+var _splitDotItems2 = _interopRequireDefault(__webpack_require__(85));
 
-var _paddingFirst2 = _interopRequireDefault(__webpack_require__(109));
+var _paddingFirst2 = _interopRequireDefault(__webpack_require__(117));
 
-var _paddingFirst3 = _interopRequireDefault(__webpack_require__(110));
+var _paddingFirst3 = _interopRequireDefault(__webpack_require__(118));
 
-var _paddingLast2 = _interopRequireDefault(__webpack_require__(111));
+var _paddingLast2 = _interopRequireDefault(__webpack_require__(119));
 
-var _paddingLast3 = _interopRequireDefault(__webpack_require__(112));
+var _paddingLast3 = _interopRequireDefault(__webpack_require__(120));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -12928,7 +13497,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 89 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12943,11 +13512,11 @@ var _isType = __webpack_require__(6);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
-var _indexOfFirst2 = __webpack_require__(67);
+var _indexOfFirst2 = __webpack_require__(78);
 
 /**
  * indexOfFirst
@@ -12989,7 +13558,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 90 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13004,11 +13573,11 @@ var _isType = __webpack_require__(6);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
-var _indexOfLast2 = __webpack_require__(68);
+var _indexOfLast2 = __webpack_require__(79);
 
 /**
  * indexOfLast
@@ -13050,7 +13619,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 91 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13067,11 +13636,11 @@ var _isTypeArray = __webpack_require__(22);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
-var _indexOfAnyFirst2 = __webpack_require__(70);
+var _indexOfAnyFirst2 = __webpack_require__(81);
 
 /**
  * indexOfAnyFirst
@@ -13113,7 +13682,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 92 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13124,9 +13693,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._indexOfAnyLast = void 0;
 
-var _indexOfLast2 = __webpack_require__(68);
+var _indexOfLast2 = __webpack_require__(79);
 
-var _loop = __webpack_require__(28);
+var _loop = __webpack_require__(33);
 
 var _indexOfAnyLast = function _indexOfAnyLast(str, searchArray) {
   var indexStart = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _max([0, str.length - 1]);
@@ -13163,7 +13732,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 93 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13180,11 +13749,11 @@ var _isTypeArray = __webpack_require__(22);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
-var _array = __webpack_require__(53);
+var _array = __webpack_require__(57);
 
-var _indexOfAnyLast2 = __webpack_require__(92);
+var _indexOfAnyLast2 = __webpack_require__(103);
 
 /**
  * indexOfAnyLast
@@ -13226,7 +13795,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 94 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13276,7 +13845,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 95 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13291,9 +13860,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _replaceAllArray2 = __webpack_require__(69);
+var _replaceAllArray2 = __webpack_require__(80);
 
-var _allMatchAll = __webpack_require__(96);
+var _allMatchAll = __webpack_require__(75);
 
 /**
  * replaceAllArray
@@ -13330,196 +13899,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.allMatchAll = exports._allMatchAll = void 0;
-
-var _type = __webpack_require__(5);
-
-var _isObjectParameter = __webpack_require__(13);
-
-var _array_common = __webpack_require__(33);
-
-var _matchAll2 = __webpack_require__(97);
-
-/**
- * allMatchAll
- */
-var _allMatchAll = function _allMatchAll(valueArray, compareArray) {
-  return (0, _array_common._all)(valueArray, function (value) {
-    return (0, _matchAll2._matchAll)(value, compareArray);
-  });
-};
-
-exports._allMatchAll = _allMatchAll;
-
-var allMatchAll = function allMatchAll(valueArray, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(valueArray, 'valueArray, compareArray')) {
-    var _valueArray = valueArray;
-    valueArray = _valueArray.valueArray;
-    compareArray = _valueArray.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('allMatchAll args(valueArray) is not array');
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('allMatchAll args(compareArray) is not array');
-  }
-
-  return _allMatchAll(valueArray, compareArray);
-};
-
-exports.allMatchAll = allMatchAll;
-var _default = {
-  _allMatchAll: _allMatchAll,
-  allMatchAll: allMatchAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.matchAll = exports._matchAll = void 0;
-
-var _type = __webpack_require__(5);
-
-var _isObjectParameter = __webpack_require__(13);
-
-var _array_common = __webpack_require__(33);
-
-var _match2 = __webpack_require__(98);
-
-/**
- * matchAll
- */
-var _matchAll = function _matchAll(value, compareArray) {
-  return (0, _array_common._all)(compareArray, function (compare) {
-    return (0, _match2._match)(value, compare);
-  });
-};
-
-exports._matchAll = _matchAll;
-
-var matchAll = function matchAll(value, compareArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,compareArray')) {
-    var _value = value;
-    value = _value.value;
-    compareArray = _value.compareArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compareArray, 'compareArray')) {
-    var _compareArray = compareArray;
-    compareArray = _compareArray.compareArray;
-  }
-
-  if (!(0, _type.isArray)(compareArray)) {
-    throw new TypeError('matchAll args(compareArray) is not array');
-  }
-
-  return _matchAll(value, compareArray);
-};
-
-exports.matchAll = matchAll;
-var _default = {
-  _matchAll: _matchAll,
-  matchAll: matchAll
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.match = exports._match = void 0;
-
-var _type = __webpack_require__(5);
-
-var _isObjectParameter = __webpack_require__(13);
-
-/**
- * match
- */
-var _match = function _match(value, compare) {
-  if ((0, _type.isString)(value)) {
-    var result;
-
-    if ((0, _type.isRegExp)(compare)) {
-      result = value.match(compare) !== null;
-    } else if ((0, _type.isFunction)(compare)) {
-      result = compare(value);
-
-      if (!(0, _type.isBoolean)(result)) {
-        throw new TypeError('_match args(compareArray element function result) is not boolean');
-      }
-    } else {
-      result = value === compare;
-    }
-
-    return result;
-  } else {
-    var _result;
-
-    if ((0, _type.isFunction)(compare)) {
-      _result = compare(value);
-
-      if (!(0, _type.isBoolean)(_result)) {
-        throw new TypeError('_match args(compareArray element function result) is not boolean');
-      }
-    } else {
-      _result = value === compare;
-    }
-
-    return _result;
-  }
-};
-
-exports._match = _match;
-
-var match = function match(value, compare) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, compare')) {
-    var _value = value;
-    value = _value.value;
-    compare = _value.compare;
-  } else if ((0, _isObjectParameter.isObjectParameter)(compare, 'compare')) {
-    var _compare = compare;
-    compare = _compare.compare;
-  }
-
-  return _match(value, compare);
-};
-
-exports.match = match;
-var _default = {
-  _match: _match,
-  match: match
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 99 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13753,7 +14133,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 100 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13766,7 +14146,7 @@ exports["default"] = exports.subFirstDelimFirst = exports._subFirstDelimFirst = 
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -13811,7 +14191,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 101 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13824,7 +14204,7 @@ exports["default"] = exports.subFirstDelimLast = exports._subFirstDelimLast = vo
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -13869,7 +14249,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 102 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13882,7 +14262,7 @@ exports["default"] = exports.subLastDelimFirst = exports._subLastDelimFirst = vo
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -13927,7 +14307,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 103 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13940,7 +14320,7 @@ exports["default"] = exports.subLastDelimLast = exports._subLastDelimLast = void
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -13985,7 +14365,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 104 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13998,11 +14378,11 @@ exports["default"] = exports.tagInnerFirst = exports._tagInnerFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _tagOuterFirst2 = __webpack_require__(105);
+var _tagOuterFirst2 = __webpack_require__(113);
 
 var _tagInnerFirst = function _tagInnerFirst(str, startTag, endTag) {
   var result = (0, _tagOuterFirst2._tagOuterFirst)(str, startTag, endTag);
@@ -14054,7 +14434,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 105 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14067,7 +14447,7 @@ exports["default"] = exports.tagOuterFirst = exports._tagOuterFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -14137,7 +14517,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 106 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14150,11 +14530,11 @@ exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _tagOuterLast2 = __webpack_require__(107);
+var _tagOuterLast2 = __webpack_require__(115);
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
   var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
@@ -14206,7 +14586,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 107 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14219,7 +14599,7 @@ exports["default"] = exports.tagOuterLast = exports._tagOuterLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -14289,7 +14669,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 108 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14302,25 +14682,25 @@ exports["default"] = exports.split = void 0;
 
 var _type = __webpack_require__(5);
 
-var _Enum2 = __webpack_require__(27);
+var _Enum2 = __webpack_require__(32);
 
-var _loop = __webpack_require__(45);
+var _loop = __webpack_require__(48);
 
-var _array_operation = __webpack_require__(31);
+var _array_operation = __webpack_require__(36);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _string_common = __webpack_require__(52);
+var _string_common = __webpack_require__(56);
 
 var _replaceAll2 = __webpack_require__(14);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _or2 = __webpack_require__(64);
+var _or2 = __webpack_require__(69);
 
-var _objectValues2 = __webpack_require__(65);
+var _objectValues2 = __webpack_require__(70);
 
-var _split2 = __webpack_require__(26);
+var _split2 = __webpack_require__(31);
 
 /**
  * split
@@ -14383,7 +14763,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 109 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14394,7 +14774,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._paddingFirst = void 0;
 
-var _string_common = __webpack_require__(52);
+var _string_common = __webpack_require__(56);
 
 /**
  * paddingFirst
@@ -14415,7 +14795,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 110 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14430,7 +14810,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _isType = __webpack_require__(6);
 
-var _paddingFirst2 = __webpack_require__(109);
+var _paddingFirst2 = __webpack_require__(117);
 
 /**
  * paddingFirst
@@ -14472,7 +14852,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 111 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14483,7 +14863,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._paddingLast = void 0;
 
-var _string_common = __webpack_require__(52);
+var _string_common = __webpack_require__(56);
 
 /**
  * paddingLast
@@ -14504,7 +14884,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 112 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14519,7 +14899,7 @@ var _isObjectParameter = __webpack_require__(13);
 
 var _isType = __webpack_require__(6);
 
-var _paddingLast2 = __webpack_require__(111);
+var _paddingLast2 = __webpack_require__(119);
 
 /**
  * paddingLast
@@ -14561,7 +14941,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 113 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14572,47 +14952,47 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.allMatchAll = exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports._equalDeep = exports._equal = exports._includesAll = exports._includesSome = exports._includes = exports._someMatchAll = exports._allMatchAll = exports._indexOfMatchAll = exports._matchAllValue = exports._matchAll = exports._someMatchSome = exports._allMatchSome = exports._indexOfMatchSome = exports._matchSomeValue = exports._matchSome = exports._someMatch = exports._allMatch = exports._indexOfMatch = exports._initialValue = exports._matchValue = exports._match = exports._or = void 0;
 
-var _or2 = _interopRequireDefault(__webpack_require__(64));
+var _or2 = _interopRequireDefault(__webpack_require__(69));
 
-var _match2 = _interopRequireDefault(__webpack_require__(98));
+var _match2 = _interopRequireDefault(__webpack_require__(77));
 
-var _matchValue2 = _interopRequireDefault(__webpack_require__(114));
+var _matchValue2 = _interopRequireDefault(__webpack_require__(122));
 
-var _initialValue2 = _interopRequireDefault(__webpack_require__(115));
+var _initialValue2 = _interopRequireDefault(__webpack_require__(123));
 
-var _indexOfMatch2 = _interopRequireDefault(__webpack_require__(118));
+var _indexOfMatch2 = _interopRequireDefault(__webpack_require__(126));
 
-var _allMatch2 = _interopRequireDefault(__webpack_require__(119));
+var _allMatch2 = _interopRequireDefault(__webpack_require__(127));
 
-var _someMatch2 = _interopRequireDefault(__webpack_require__(120));
+var _someMatch2 = _interopRequireDefault(__webpack_require__(128));
 
-var _matchSome2 = _interopRequireDefault(__webpack_require__(117));
+var _matchSome2 = _interopRequireDefault(__webpack_require__(125));
 
-var _matchSomeValue2 = _interopRequireDefault(__webpack_require__(116));
+var _matchSomeValue2 = _interopRequireDefault(__webpack_require__(124));
 
-var _indexOfMatchSome2 = _interopRequireDefault(__webpack_require__(121));
+var _indexOfMatchSome2 = _interopRequireDefault(__webpack_require__(129));
 
-var _allMatchSome2 = _interopRequireDefault(__webpack_require__(122));
+var _allMatchSome2 = _interopRequireDefault(__webpack_require__(130));
 
-var _someMatchSome2 = _interopRequireDefault(__webpack_require__(123));
+var _someMatchSome2 = _interopRequireDefault(__webpack_require__(131));
 
-var _matchAll2 = _interopRequireDefault(__webpack_require__(97));
+var _matchAll2 = _interopRequireDefault(__webpack_require__(76));
 
-var _matchAllValue2 = _interopRequireDefault(__webpack_require__(124));
+var _matchAllValue2 = _interopRequireDefault(__webpack_require__(132));
 
-var _indexOfMatchAll2 = _interopRequireDefault(__webpack_require__(125));
+var _indexOfMatchAll2 = _interopRequireDefault(__webpack_require__(133));
 
-var _allMatchAll2 = _interopRequireDefault(__webpack_require__(96));
+var _allMatchAll2 = _interopRequireDefault(__webpack_require__(75));
 
-var _someMatchAll2 = _interopRequireDefault(__webpack_require__(126));
+var _someMatchAll2 = _interopRequireDefault(__webpack_require__(134));
 
-var _includes2 = _interopRequireDefault(__webpack_require__(127));
+var _includes2 = _interopRequireDefault(__webpack_require__(135));
 
-var _includes_common = _interopRequireDefault(__webpack_require__(128));
+var _includes_common = _interopRequireDefault(__webpack_require__(136));
 
-var _equal2 = _interopRequireDefault(__webpack_require__(129));
+var _equal2 = _interopRequireDefault(__webpack_require__(137));
 
-var _equalDeep2 = _interopRequireDefault(__webpack_require__(130));
+var _equalDeep2 = _interopRequireDefault(__webpack_require__(138));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -14761,7 +15141,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 114 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14776,7 +15156,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _match3 = __webpack_require__(98);
+var _match3 = __webpack_require__(77);
 
 /**
  * matchValue
@@ -14838,7 +15218,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 115 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14853,7 +15233,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _matchSomeValue2 = __webpack_require__(116);
+var _matchSomeValue2 = __webpack_require__(124);
 
 /**
  * initialValue
@@ -14899,7 +15279,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 116 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14914,7 +15294,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _matchSome2 = __webpack_require__(117);
+var _matchSome2 = __webpack_require__(125);
 
 /**
  * matchSomeValue
@@ -14980,7 +15360,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 117 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14995,9 +15375,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _match2 = __webpack_require__(98);
+var _match2 = __webpack_require__(77);
 
 /**
  * matchSome
@@ -15035,7 +15415,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 118 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15050,9 +15430,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _match2 = __webpack_require__(98);
+var _match2 = __webpack_require__(77);
 
 /**
  * indexOfMatch
@@ -15090,7 +15470,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 119 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15105,9 +15485,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _match2 = __webpack_require__(98);
+var _match2 = __webpack_require__(77);
 
 /**
  * allMatch
@@ -15145,7 +15525,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 120 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15156,7 +15536,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatch = exports._someMatch = void 0;
 
-var _indexOfMatch2 = __webpack_require__(118);
+var _indexOfMatch2 = __webpack_require__(126);
 
 /**
  * someMatch
@@ -15179,7 +15559,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 121 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15194,9 +15574,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _matchSome2 = __webpack_require__(117);
+var _matchSome2 = __webpack_require__(125);
 
 /**
  * indexOfMatchSome
@@ -15238,7 +15618,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 122 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15253,9 +15633,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _matchSome2 = __webpack_require__(117);
+var _matchSome2 = __webpack_require__(125);
 
 /**
  * allMatchSome
@@ -15297,7 +15677,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 123 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15308,7 +15688,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchSome = exports._someMatchSome = void 0;
 
-var _indexOfMatchSome2 = __webpack_require__(121);
+var _indexOfMatchSome2 = __webpack_require__(129);
 
 /**
  * someMatchSome
@@ -15331,7 +15711,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 124 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15346,7 +15726,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _matchAll2 = __webpack_require__(97);
+var _matchAll2 = __webpack_require__(76);
 
 /**
  * matchAllValue
@@ -15412,7 +15792,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 125 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15427,9 +15807,9 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _matchAll2 = __webpack_require__(97);
+var _matchAll2 = __webpack_require__(76);
 
 /**
  * indexOfMatchAll
@@ -15471,7 +15851,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 126 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15482,7 +15862,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchAll = exports._someMatchAll = void 0;
 
-var _indexOfMatchAll2 = __webpack_require__(125);
+var _indexOfMatchAll2 = __webpack_require__(133);
 
 /**
  * someMatchAll
@@ -15505,7 +15885,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 127 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15520,7 +15900,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _match2 = __webpack_require__(98);
+var _match2 = __webpack_require__(77);
 
 var _includes2 = __webpack_require__(11);
 
@@ -15572,7 +15952,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 128 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15587,11 +15967,11 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _array_common = __webpack_require__(33);
+var _array_common = __webpack_require__(38);
 
-var _match2 = __webpack_require__(98);
+var _match2 = __webpack_require__(77);
 
-var _includes2 = __webpack_require__(127);
+var _includes2 = __webpack_require__(135);
 
 /**
  * includesSome
@@ -15656,7 +16036,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 129 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15669,7 +16049,7 @@ exports["default"] = exports.equal = exports._equal = void 0;
 
 var _type = __webpack_require__(5);
 
-var _object = __webpack_require__(23);
+var _object = __webpack_require__(28);
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
@@ -16024,7 +16404,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 130 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16037,9 +16417,9 @@ exports["default"] = exports.equalDeep = exports._equalDeep = void 0;
 
 var _type = __webpack_require__(5);
 
-var _object = __webpack_require__(23);
+var _object = __webpack_require__(28);
 
-var _equal = __webpack_require__(129);
+var _equal = __webpack_require__(137);
 
 /**
  * equalDeep
@@ -16111,7 +16491,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 131 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16124,15 +16504,15 @@ exports["default"] = exports.valueToIntegerDefault = exports.valueToInteger = ex
 
 var _type = __webpack_require__(5);
 
-var _matchValue2 = __webpack_require__(114);
+var _matchValue2 = __webpack_require__(122);
 
-var _initialValue2 = __webpack_require__(115);
+var _initialValue2 = __webpack_require__(123);
 
-var _string = __webpack_require__(88);
+var _string = __webpack_require__(99);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _number = __webpack_require__(32);
+var _number = __webpack_require__(37);
 
 /**
  * numberToString
@@ -16475,7 +16855,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 132 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16486,7 +16866,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = void 0;
 
-var _convert = __webpack_require__(131);
+var _convert = __webpack_require__(139);
 
 var numToString = _convert.numberToString;
 exports.numToString = numToString;
@@ -16553,7 +16933,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 133 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16564,7 +16944,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.Today = void 0;
 
-var _Today = _interopRequireDefault(__webpack_require__(134));
+var _Today = _interopRequireDefault(__webpack_require__(142));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -16576,7 +16956,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 134 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

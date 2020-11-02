@@ -3,9 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.operation = exports.arrayToIndexValueArray = exports.every = exports.findBack = exports.find = exports.findBackIndex = exports.findIndex = exports.arrayEntries = exports.IntegerArray = exports.NumberArray = exports.unique = exports.group = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.isBothEnds = exports.isLast = exports.isFirst = exports.all = exports.some = exports.findLast = exports.findFirst = exports.findLastIndex = exports.findFirstIndex = exports.count = exports.map = exports.filter = exports.multiple = exports.single = exports.mode = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.from = exports._arrayEntries = exports._IntegerArray = exports._NumberArray = exports._unique = exports._group = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._isBothEnds = exports._isLast = exports._isFirst = exports._all = exports._some = exports._findLast = exports._findFirst = exports._findLastIndex = exports._findFirstIndex = exports._count = exports._map = exports._filter = exports._multiple = exports._single = exports._mode = exports._median = exports._average = exports._sum = exports._max = exports._min = void 0;
+exports["default"] = exports.operation = exports.arrayToIndexValueArray = exports.every = exports.findBack = exports.find = exports.findBackIndex = exports.findIndex = exports.SortFunc = exports.arrayEntries = exports.IntegerArray = exports.NumberArray = exports.unique = exports.group = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.isBothEnds = exports.isLast = exports.isFirst = exports.all = exports.some = exports.findLast = exports.findFirst = exports.findLastIndex = exports.findFirstIndex = exports.count = exports.map = exports.filter = exports.multiple = exports.single = exports.mode = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.from = exports._SortFunc = exports._arrayEntries = exports._IntegerArray = exports._NumberArray = exports._unique = exports._group = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._isBothEnds = exports._isLast = exports._isFirst = exports._all = exports._some = exports._findLast = exports._findFirst = exports._findLastIndex = exports._findFirstIndex = exports._count = exports._map = exports._filter = exports._multiple = exports._single = exports._mode = exports._median = exports._average = exports._sum = exports._max = exports._min = void 0;
 
 var _array_common = _interopRequireDefault(require("./array_common.js"));
+
+var _map2 = _interopRequireDefault(require("./_map.js"));
+
+var _map3 = _interopRequireDefault(require("./map.js"));
 
 var _min2 = _interopRequireDefault(require("./_min.js"));
 
@@ -41,6 +45,12 @@ var _sort2 = _interopRequireDefault(require("./operation/sort.js"));
 
 var _sortDictionary = _interopRequireDefault(require("./operation/sortDictionary.js"));
 
+var _SortFuncOrder = _interopRequireDefault(require("./__SortFuncOrder.js"));
+
+var _SortFunc2 = _interopRequireDefault(require("./_SortFunc.js"));
+
+var _SortFunc3 = _interopRequireDefault(require("./SortFunc.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -49,8 +59,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// import { _copyProperty } from './object/object_common.js';
-var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _group3["default"]), _unique2["default"]), _unique3["default"]);
+var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _map2["default"]), _map3["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _group3["default"]), _unique2["default"]), _unique3["default"]), _SortFuncOrder["default"]), _SortFunc2["default"]), _SortFunc3["default"]);
 
 var arrayOperationJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _sort["default"]), _sort2["default"]), _sortDictionary["default"]);
 
@@ -83,6 +92,7 @@ var _min = arrayJs._min,
     _NumberArray = arrayJs._NumberArray,
     _IntegerArray = arrayJs._IntegerArray,
     _arrayEntries = arrayJs._arrayEntries,
+    _SortFunc = arrayJs._SortFunc,
     from = arrayJs.from,
     min = arrayJs.min,
     max = arrayJs.max,
@@ -113,6 +123,7 @@ var _min = arrayJs._min,
     NumberArray = arrayJs.NumberArray,
     IntegerArray = arrayJs.IntegerArray,
     arrayEntries = arrayJs.arrayEntries,
+    SortFunc = arrayJs.SortFunc,
     findIndex = arrayJs.findIndex,
     findBackIndex = arrayJs.findBackIndex,
     find = arrayJs.find,
@@ -159,6 +170,7 @@ exports.findBack = findBack;
 exports.find = find;
 exports.findBackIndex = findBackIndex;
 exports.findIndex = findIndex;
+exports.SortFunc = SortFunc;
 exports.arrayEntries = arrayEntries;
 exports.IntegerArray = IntegerArray;
 exports.NumberArray = NumberArray;
@@ -189,6 +201,7 @@ exports.sum = sum;
 exports.max = max;
 exports.min = min;
 exports.from = from;
+exports._SortFunc = _SortFunc;
 exports._arrayEntries = _arrayEntries;
 exports._IntegerArray = _IntegerArray;
 exports._NumberArray = _NumberArray;
@@ -250,6 +263,7 @@ var _default = {
   _NumberArray: _NumberArray,
   _IntegerArray: _IntegerArray,
   _arrayEntries: _arrayEntries,
+  _SortFunc: _SortFunc,
   from: from,
   min: min,
   max: max,
@@ -280,6 +294,7 @@ var _default = {
   NumberArray: NumberArray,
   IntegerArray: IntegerArray,
   arrayEntries: arrayEntries,
+  SortFunc: SortFunc,
   // Another name
   findIndex: findIndex,
   findBackIndex: findBackIndex,

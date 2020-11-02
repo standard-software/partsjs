@@ -9,13 +9,13 @@ var _indexOfAnyFirst2 = require("../string/_indexOfAnyFirst.js");
 
 var _string_common = require("../string/string_common.js");
 
-var _array_common = require("../array/array_common.js");
+var _map2 = require("../array/_map.js");
 
 /**
  * replaceAllArray
  */
 var _replaceAllArray = function _replaceAllArray(str, replaceArray) {
-  var searchArray = (0, _array_common._map)(replaceArray, function (element) {
+  var searchArray = (0, _map2._map)(replaceArray, function (element) {
     return element[0];
   });
   var start = 0;

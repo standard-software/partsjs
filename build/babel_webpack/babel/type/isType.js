@@ -182,13 +182,17 @@ var isEmptyObject = function isEmptyObject(value) {
 };
 
 exports.isEmptyObject = isEmptyObject;
-
-var isArray = function isArray(value) {
-  return objectToString(value) === '[object Array]';
-}; // Int8Array Uint16Array Float32Array Float64Array etc
-
-
+var isArray;
 exports.isArray = isArray;
+
+if (Array.isArray) {
+  exports.isArray = isArray = Array.isArray;
+} else {
+  exports.isArray = isArray = function isArray(value) {
+    return objectToString(value) === '[object Array]';
+  };
+} // Int8Array Uint16Array Float32Array Float64Array etc
+
 
 var isArraySeries = function isArraySeries(value) {
   if ((0, _includes.__includes)(objectToString(value), 'Array]')) {

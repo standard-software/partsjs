@@ -51,7 +51,8 @@ var test_execute_array = function test_execute_array(parts) {
         subLength = _parts$array.subLength,
         subFirst = _parts$array.subFirst,
         subLast = _parts$array.subLast,
-        arrayEntries = _parts$array.arrayEntries;
+        arrayEntries = _parts$array.arrayEntries,
+        SortFunc = _parts$array.SortFunc;
     var _parts$array$operatio = parts.array.operation,
         insert = _parts$array$operatio.insert,
         add = _parts$array$operatio.add,
@@ -2374,6 +2375,112 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_SortFunc = function test_SortFunc() {
+      it('test_SortFunc', function () {
+        var userList = [{
+          name: 'c',
+          age: 20
+        }, {
+          name: 'b',
+          age: 20
+        }, {
+          name: 'a',
+          age: 20
+        }, {
+          name: 'c',
+          age: 21
+        }];
+        var sortedUserList = [].concat(userList).sort(SortFunc([[SortFunc.order.normal.ascending, function (v) {
+          return v.name;
+        }], [SortFunc.order.normal.descending, function (v) {
+          return v.age;
+        }]]));
+        checkEqual(['a', 'b', 'c', 'c'], sortedUserList.map(function (v) {
+          return v.name;
+        }));
+        checkEqual([20, 20, 21, 20], sortedUserList.map(function (v) {
+          return v.age;
+        }));
+        var sortedUserList = [].concat(userList).sort(SortFunc([[SortFunc.order.normal.descending, function (v) {
+          return v.name;
+        }], [SortFunc.order.normal.ascending, function (v) {
+          return v.age;
+        }]]));
+        checkEqual(['c', 'c', 'b', 'a'], sortedUserList.map(function (v) {
+          return v.name;
+        }));
+        checkEqual([20, 21, 20, 20], sortedUserList.map(function (v) {
+          return v.age;
+        }));
+        checkEqual(false, isThrown(function () {
+          SortFunc([[SortFunc.order.normal.descending, function (v) {
+            return v.name;
+          }], [SortFunc.order.normal.ascending, function (v) {
+            return v.age;
+          }]]);
+        }));
+        checkEqual(false, isThrown(function () {
+          SortFunc([[SortFunc.order.normal.descending, function (v) {
+            return v.name;
+          }, true], [SortFunc.order.normal.ascending, function (v) {
+            return v.age;
+          }]]);
+        }));
+        checkEqual(true, isThrown(function () {
+          SortFunc([[SortFunc.order.normal.descending], [SortFunc.order.normal.ascending, function (v) {
+            return v.age;
+          }]]);
+        }));
+      });
+    };
+
+    var test_SortFunc_Dictionary = function test_SortFunc_Dictionary() {
+      it('test_SortFunc_Dictionary', function () {
+        var unsortedList = ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'];
+        var sortedList = [].concat(unsortedList).sort(SortFunc.order.dictionaryUpperCase.ascending);
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortedList);
+        var sortedList = [].concat(unsortedList).sort(SortFunc.order.dictionaryUpperCase.descending, function (v) {
+          return v;
+        });
+        checkEqual(['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'], sortedList);
+        var sortedList = [].concat(unsortedList).sort(SortFunc([[SortFunc.order.dictionaryUpperCase.ascending, function (v) {
+          return v;
+        }]]));
+        checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortedList);
+        var sortedList = [].concat(unsortedList).sort(SortFunc([[SortFunc.order.dictionaryUpperCase.descending, function (v) {
+          return v;
+        }]]));
+        checkEqual(['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'], sortedList);
+        var sortedList = [].concat(unsortedList).sort(SortFunc([[SortFunc.order.dictionaryLowerCase.ascending, function (v) {
+          return v;
+        }]]));
+        checkEqual(['a', 'A', 'aa', 'aA', 'Aa', 'AA', 'ab', 'aB', 'Ab', 'AB', 'b', 'B'], sortedList);
+        var sortedList = [].concat(unsortedList).sort(SortFunc([[SortFunc.order.dictionaryLowerCase.descending, function (v) {
+          return v;
+        }]]));
+        checkEqual(['B', 'b', 'AB', 'Ab', 'aB', 'ab', 'AA', 'Aa', 'aA', 'aa', 'A', 'a'], sortedList);
+      });
+    };
+
+    var test_SortFunc_Version = function test_SortFunc_Version() {
+      it('test_SortFunc_Version', function () {
+        var versions = ['5.0.0.', '1.3.0.9', '0.2.0', '3.1.2', '0.1.6', '5.0.0', '3.3.3.3', '3.3.3.3.3', '3.10', '0.2.0', '0.2.0a', '0.2.0aa', '0.2.0AA', '0.2.0Aa', '0.2.0aA', '0.2.0c', '0.2.0b', '0.2.0A', '0.2.0C', '0.2.0B', '0.2.0.a', '0.2.0.c', '0.2.0.b', '0.2.0.A', '0.2.0.C', '0.2.0.B', '5.0.0.', '5.0.0.0'];
+        var outputVersions = ['5.0.0.0', '5.0.0.', '5.0.0.', '5.0.0', '3.10', '3.3.3.3.3', '3.3.3.3', '3.1.2', '1.3.0.9', '0.2.0C', '0.2.0c', '0.2.0B', '0.2.0b', '0.2.0AA', '0.2.0Aa', '0.2.0aA', '0.2.0aa', '0.2.0A', '0.2.0a', '0.2.0.C', '0.2.0.c', '0.2.0.B', '0.2.0.b', '0.2.0.A', '0.2.0.a', '0.2.0', '0.2.0', '0.1.6'];
+        var sortedVersions = [].concat(versions).sort(SortFunc.order.version.descending);
+        checkEqual(outputVersions, sortedVersions);
+        var sortedVersions = [].concat(versions).sort(SortFunc.order.version.ascending);
+        checkEqual([].concat(outputVersions).reverse(), sortedVersions);
+        var sortedVersions = [].concat(versions).sort(SortFunc([[SortFunc.order.version.descending, function (v) {
+          return v;
+        }]]));
+        checkEqual(outputVersions, sortedVersions);
+        var sortedVersions = [].concat(versions).sort(SortFunc([[SortFunc.order.version.ascending, function (v) {
+          return v;
+        }]]));
+        checkEqual([].concat(outputVersions).reverse(), sortedVersions);
+      });
+    };
+
     var test_ArrayEntries_standard = function test_ArrayEntries_standard() {
       it('test_ArrayEntries_standard', function () {
         if (parts.platform.isWindowsScriptHost()) {
@@ -2480,6 +2587,9 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_sortNumber();
     test_operation_sortLength();
     test_operation_sortDictionary();
+    test_SortFunc();
+    test_SortFunc_Dictionary();
+    test_SortFunc_Version();
     test_ArrayEntries_standard();
     test_arrayEntries();
   });
