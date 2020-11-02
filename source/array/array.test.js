@@ -2877,6 +2877,74 @@ export const test_execute_array = (parts) => {
         ]));
         checkEqual([...outputVersions].reverse(), sortedVersions);
 
+        const items = [
+          {
+            name: 'a',
+            version: {
+              major: '1',
+              minor: '1',
+              build: '1',
+              revision: '1',
+            }
+          },
+          {
+            name: 'b',
+            version: {
+              major: '1',
+              minor: '10',
+              build: '1',
+              revision: '1',
+            }
+          },
+          {
+            name: 'c',
+            version: {
+              major: '1',
+              minor: '2',
+              build: '1',
+              revision: '1',
+            }
+          },
+          {
+            name: 'd',
+            version: {
+              major: '1',
+              minor: '1',
+              build: '1',
+              revision: '1b',
+            }
+          },
+          {
+            name: 'e',
+            version: {
+              major: '1',
+              minor: '1',
+              build: '1',
+              revision: '1a',
+            }
+          },
+        ];
+
+        var sortedItems = [
+          ...items,
+        ].sort(SortFunc([
+          [SortFunc.order.version.ascending, i => {
+            const { major, minor, build, revision } = i.version;
+            return major + minor + build + revision;
+          }],
+        ]));
+        checkEqual(['a', 'e', 'd', 'c', 'b'], sortedItems.map(i => i.name));
+
+        var sortedItems = [
+          ...items,
+        ].sort(SortFunc([
+          [SortFunc.order.version.descending, i => {
+            const { major, minor, build, revision } = i.version;
+            return major + minor + build + revision;
+          }],
+        ]));
+        checkEqual(['b', 'c', 'd', 'e', 'a'], sortedItems.map(i => i.name));
+
       });
     };
 
