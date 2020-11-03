@@ -15,7 +15,7 @@ import {
 
 import {
   _deleteFirst, _deleteLast, _filter,
-} from '../array/array_operation.js';
+} from '../array/operation/array_operation.js';
 
 import {
   _isFirst, _isLast,
