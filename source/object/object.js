@@ -2,6 +2,7 @@ import object_commonJs from './object_common.js';
 import isObjectParameterJs from './isObjectParameter.js';
 import inPropertyJs from './inProperty.js';
 import fixPropertyJs from './fixProperty.js';
+import _objectEntriesJs from './_objectEntries.js';
 import objectEntriesJs from './objectEntries.js';
 import _objectFromEntriesJs from './_objectFromEntries.js';
 import objectFromEntriesJs from './objectFromEntries.js';
@@ -20,6 +21,7 @@ const objectJs = {
   ...isObjectParameterJs,
   ...inPropertyJs,
   ...fixPropertyJs,
+  ..._objectEntriesJs,
   ...objectEntriesJs,
   ..._objectFromEntriesJs,
   ...objectFromEntriesJs,

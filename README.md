@@ -326,6 +326,7 @@ You can now use the functions of the parts.js object.
 ### 9.2.0
 #### 2020/11/03(Tue)
 - add popArrayFirst / popArrayLast
+- add _objectEntries.js from objectEntries.js
 
 ### 9.1.0
 #### 2020/11/02(Mon)

@@ -1,6 +1,6 @@
 import { isUndefined, isObjectFromNull } from '../type/isType.js';
 import { __loop } from '../syntax/__loop.js';
-import { _objectEntries } from '../object/objectEntries.js';
+import { _objectEntries } from '../object/_objectEntries.js';
 
 /**
  * merge
