@@ -327,6 +327,8 @@ You can now use the functions of the parts.js object.
 #### 2020/11/03(Tue)
 - add popArrayFirst / popArrayLast
 - add _objectEntries.js from objectEntries.js
+- update loop.js
+  - delete _loopBase
 
 ### 9.1.0
 #### 2020/11/02(Mon)

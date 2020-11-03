@@ -5,41 +5,14 @@ import {
   isException,
 } from '../type/type.js';
 
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import {
-  _IntegerArray,
-} from '../array/_IntegerArray.js';
-
-import {
-  objectEntries,
-} from '../object/objectEntries.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { _IntegerArray } from '../array/_IntegerArray.js';
+import { _objectEntries } from '../object/_objectEntries.js';
+import { __loop } from '../syntax/__loop.js';
 
 /**
  * loop
  */
-export const _loopBase = (loopArray) => {
-  return (func) => {
-    if (!isFunction(func)) {
-      throw new TypeError('loop()(func) func is not function');
-    }
-    for (let i = 0, l = loopArray.length; i < l; i += 1) {
-      const element = loopArray[i];
-      const index = i;
-      const array = loopArray;
-      const loopFirst = i === 0;
-      const loopLast = i === loopArray.length - 1;
-      const result = func(element, index, array, loopFirst, loopLast);
-      if (!isUndefined(result) && result.break === true) {
-        return result;
-      }
-    }
-    return {};
-  };
-};
-
 export const loop = (start, end, increment) => {
 
   if (isObjectParameter(start, 'count')) {
@@ -53,9 +26,9 @@ export const loop = (start, end, increment) => {
   } else if (isObjectParameter(increment, 'increment')) {
     ({ increment } = increment);
   } else if (isObject(start)) {
-    return _loopBase(objectEntries(start));
+    return __loop(_objectEntries(start));
   } else if (isArray(start)) {
-    return _loopBase(start);
+    return __loop(start);
   }
 
   if (!isInteger(start)) {
@@ -74,7 +47,7 @@ export const loop = (start, end, increment) => {
     );
   }
 
-  return _loopBase(_IntegerArray(start, end, increment));
+  return __loop(_IntegerArray(start, end, increment));
 };
 
 export default {
