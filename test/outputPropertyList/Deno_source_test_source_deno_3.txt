@@ -73,6 +73,8 @@
 .array.operation._includeFirst:[object Function]:function
 .array.operation._includeLast:[object Function]:function
 .array.operation._insert:[object Function]:function
+.array.operation._popArrayFirst:[object Function]:function
+.array.operation._popArrayLast:[object Function]:function
 .array.operation._popFirst:[object Function]:function
 .array.operation._popLast:[object Function]:function
 .array.operation._pushFirst:[object Function]:function
@@ -95,6 +97,8 @@
 .array.operation.includeFirst:[object Function]:function
 .array.operation.includeLast:[object Function]:function
 .array.operation.insert:[object Function]:function
+.array.operation.popArrayFirst:[object Function]:function
+.array.operation.popArrayLast:[object Function]:function
 .array.operation.popFirst:[object Function]:function
 .array.operation.popLast:[object Function]:function
 .array.operation.pushFirst:[object Function]:function
@@ -284,6 +288,8 @@
 .default.array.operation._includeFirst:[object Function]:function
 .default.array.operation._includeLast:[object Function]:function
 .default.array.operation._insert:[object Function]:function
+.default.array.operation._popArrayFirst:[object Function]:function
+.default.array.operation._popArrayLast:[object Function]:function
 .default.array.operation._popFirst:[object Function]:function
 .default.array.operation._popLast:[object Function]:function
 .default.array.operation._pushFirst:[object Function]:function
@@ -306,6 +312,8 @@
 .default.array.operation.includeFirst:[object Function]:function
 .default.array.operation.includeLast:[object Function]:function
 .default.array.operation.insert:[object Function]:function
+.default.array.operation.popArrayFirst:[object Function]:function
+.default.array.operation.popArrayLast:[object Function]:function
 .default.array.operation.popFirst:[object Function]:function
 .default.array.operation.popLast:[object Function]:function
 .default.array.operation.pushFirst:[object Function]:function
@@ -868,6 +876,8 @@
 .default.parts.array.operation._includeFirst:[object Function]:function
 .default.parts.array.operation._includeLast:[object Function]:function
 .default.parts.array.operation._insert:[object Function]:function
+.default.parts.array.operation._popArrayFirst:[object Function]:function
+.default.parts.array.operation._popArrayLast:[object Function]:function
 .default.parts.array.operation._popFirst:[object Function]:function
 .default.parts.array.operation._popLast:[object Function]:function
 .default.parts.array.operation._pushFirst:[object Function]:function
@@ -890,6 +900,8 @@
 .default.parts.array.operation.includeFirst:[object Function]:function
 .default.parts.array.operation.includeLast:[object Function]:function
 .default.parts.array.operation.insert:[object Function]:function
+.default.parts.array.operation.popArrayFirst:[object Function]:function
+.default.parts.array.operation.popArrayLast:[object Function]:function
 .default.parts.array.operation.popFirst:[object Function]:function
 .default.parts.array.operation.popLast:[object Function]:function
 .default.parts.array.operation.pushFirst:[object Function]:function
@@ -2701,6 +2713,8 @@
 .parts.array.operation._includeFirst:[object Function]:function
 .parts.array.operation._includeLast:[object Function]:function
 .parts.array.operation._insert:[object Function]:function
+.parts.array.operation._popArrayFirst:[object Function]:function
+.parts.array.operation._popArrayLast:[object Function]:function
 .parts.array.operation._popFirst:[object Function]:function
 .parts.array.operation._popLast:[object Function]:function
 .parts.array.operation._pushFirst:[object Function]:function
@@ -2723,6 +2737,8 @@
 .parts.array.operation.includeFirst:[object Function]:function
 .parts.array.operation.includeLast:[object Function]:function
 .parts.array.operation.insert:[object Function]:function
+.parts.array.operation.popArrayFirst:[object Function]:function
+.parts.array.operation.popArrayLast:[object Function]:function
 .parts.array.operation.popFirst:[object Function]:function
 .parts.array.operation.popLast:[object Function]:function
 .parts.array.operation.pushFirst:[object Function]:function

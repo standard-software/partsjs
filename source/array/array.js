@@ -14,10 +14,19 @@ import _groupJs from './_group.js';
 import groupJs from './group.js';
 import _uniqueJs from './_unique.js';
 import uniqueJs from './unique.js';
-import array_operationJs from './array_operation.js';
 import __SortFuncOrderJs from './__SortFuncOrder.js';
 import _SortFuncJs from './_SortFunc.js';
 import SortFuncJs from './SortFunc.js';
+import array_operationJs from './operation/array_operation.js';
+import _popFirstJs from './operation/_popFirst.js';
+import popFirstJs from './operation/popFirst.js';
+import _popLastJs from './operation/_popLast.js';
+import popLastJs from './operation/popLast.js';
+import _popArrayFirstJs from './operation/_popArrayFirst.js';
+import popArrayFirstJs from './operation/popArrayFirst.js';
+import _popArrayLastJs from './operation/_popArrayLast.js';
+import popArrayLastJs from './operation/popArrayLast.js';
+
 
 const arrayJs = {
   ...array_commonJs,
@@ -43,6 +52,14 @@ const arrayJs = {
 
 const arrayOperationJs = {
   ...array_operationJs,
+  ..._popFirstJs,
+  ...popFirstJs,
+  ..._popLastJs,
+  ...popLastJs,
+  ..._popArrayFirstJs,
+  ...popArrayFirstJs,
+  ..._popArrayLastJs,
+  ...popArrayLastJs,
 };
 
 export const {

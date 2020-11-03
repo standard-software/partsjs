@@ -323,6 +323,10 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 9.2.0
+#### 2020/11/03(Tue)
+- add popArrayFirst / popArrayLast
+
 ### 9.1.0
 #### 2020/11/02(Mon)
 - update clone / cloneDeep

@@ -73,6 +73,8 @@
 .array.operation._includeFirst:[object Function]:function
 .array.operation._includeLast:[object Function]:function
 .array.operation._insert:[object Function]:function
+.array.operation._popArrayFirst:[object Function]:function
+.array.operation._popArrayLast:[object Function]:function
 .array.operation._popFirst:[object Function]:function
 .array.operation._popLast:[object Function]:function
 .array.operation._pushFirst:[object Function]:function
@@ -95,6 +97,8 @@
 .array.operation.includeFirst:[object Function]:function
 .array.operation.includeLast:[object Function]:function
 .array.operation.insert:[object Function]:function
+.array.operation.popArrayFirst:[object Function]:function
+.array.operation.popArrayLast:[object Function]:function
 .array.operation.popFirst:[object Function]:function
 .array.operation.popLast:[object Function]:function
 .array.operation.pushFirst:[object Function]:function

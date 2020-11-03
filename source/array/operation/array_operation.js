@@ -3,18 +3,12 @@ import {
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} from '../type/type.js';
+} from '../../type/type.js';
 
-import {
-  _inRange, _keepMinMax,
-} from '../number/number.js';
-
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import { _some, _isFirst, _isLast, _isBothEnds } from '../array/array_common.js';
-import { _min } from '../array/_min.js';
+import { _inRange, _keepMinMax } from '../../number/number.js';
+import { isObjectParameter } from '../../object/isObjectParameter.js';
+import { _some, _isFirst, _isLast, _isBothEnds } from '../../array/array_common.js';
+import { _min } from '../../array/_min.js';
 
 /**
  * array.operation.insert
@@ -575,44 +569,6 @@ export const trimBothEnds = (
 };
 
 /**
- * array.operation.popFirst
- */
-export const _popFirst = (array) => {
-  return array.shift();
-};
-
-export const popFirst = (array) => {
-  if (!isArray(array)) {
-    throw new TypeError(
-      'popFirst args(array) is not array',
-    );
-  }
-
-  return _popFirst(array);
-};
-
-/**
- * array.operation.popLast
- */
-export const _popLast = (array, value) => {
-  return array.pop();
-};
-
-export const popLast = (array, value) => {
-  if (isObjectParameter(array, 'array, value')) {
-    ({ array, value } = array);
-  }
-
-  if (!isArray(array)) {
-    throw new TypeError(
-      'popLast args(array) is not array',
-    );
-  }
-
-  return _popLast(array, value);
-};
-
-/**
  * array.operation.pushFirst
  */
 export const _pushFirst = (array, value) => {
@@ -768,7 +724,6 @@ export default {
   _includeFirst, _includeLast, _includeBothEnds,
   _excludeFirst, _excludeLast, _excludeBothEnds,
   _trimFirst, _trimLast, _trimBothEnds,
-  _popFirst, _popLast,
   _pushFirst, _pushLast,
   _remainFirst, _remainLast,
   _filter,
@@ -779,7 +734,6 @@ export default {
   includeFirst, includeLast, includeBothEnds,
   excludeFirst, excludeLast, excludeBothEnds,
   trimFirst, trimLast, trimBothEnds,
-  popFirst, popLast,
   pushFirst, pushLast,
   remainFirst, remainLast,
   filter,

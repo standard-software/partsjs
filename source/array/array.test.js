@@ -35,6 +35,7 @@ export const test_execute_array = (parts) => {
       excludeFirst, excludeLast, excludeBothEnds,
       trimFirst, trimLast, trimBothEnds,
       popFirst, popLast,
+      popArrayFirst, popArrayLast,
       pushFirst, pushLast,
       remainFirst, remainLast,
     } = parts.array.operation;
@@ -2296,6 +2297,42 @@ export const test_execute_array = (parts) => {
       });
     };
 
+    const test_operation_popArrayFirst = () => {
+      it('test_operation_popArrayFirst', () => {
+        var array1 = [1, 2, 3];
+        checkEqual([1], popArrayFirst(array1));
+        checkEqual([2, 3], array1);
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2], popArrayFirst(array1, 2));
+        checkEqual([3], array1);
+
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['A'], popArrayFirst(array1));
+        checkEqual(['B', 'C'], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['A', 'B'], popArrayFirst(array1, 2));
+        checkEqual(['C'], array1);
+      });
+    };
+
+    const test_operation_popArrayLast = () => {
+      it('test_operation_popArrayLast', () => {
+        var array1 = [1, 2, 3];
+        checkEqual([3], popArrayLast(array1));
+        checkEqual([1, 2], array1);
+        var array1 = [1, 2, 3];
+        checkEqual([2, 3], popArrayLast(array1, 2));
+        checkEqual([1], array1);
+
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['C'], popArrayLast(array1));
+        checkEqual(['A', 'B'], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['B', 'C'], popArrayLast(array1, 2));
+        checkEqual(['A'], array1);
+      });
+    };
+
     const test_operation_remainFirst = () => {
       it('test_operation_remainFirst', () => {
         var array1 = [1, 2, 3];
@@ -2821,6 +2858,8 @@ export const test_execute_array = (parts) => {
     test_operation_popLast();
     test_operation_pushFirst();
     test_operation_pushLast();
+    test_operation_popArrayFirst();
+    test_operation_popArrayLast();
 
     test_operation_remainFirst();
     test_operation_remainLast();
