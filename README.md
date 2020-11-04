@@ -324,11 +324,13 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 9.2.0
-#### 2020/11/03(Tue)
+#### 2020/11/04(Wed)
 - add popArrayFirst / popArrayLast
 - add _objectEntries.js from objectEntries.js
 - update loop.js
   - delete _loopBase
+- add syntax.recursiveCall
+  - add _recursiveCall.js / recursiveCall.js
 
 ### 9.1.0
 #### 2020/11/02(Mon)

@@ -249,6 +249,7 @@ export const {
   canUseMap, canUseWeakMap,
   canUseSet, canUseWeakSet,
   Enum,
+  recursiveCall,
 } = syntaxJs;
 
 rootAlias = { ...rootAlias,
@@ -258,6 +259,7 @@ rootAlias = { ...rootAlias,
   canUseMap, canUseWeakMap,
   canUseSet, canUseWeakSet,
   Enum,
+  recursiveCall,
 };
 
 export const syntax = {

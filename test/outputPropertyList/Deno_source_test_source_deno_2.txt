@@ -610,6 +610,7 @@
 .propertyCount:[object Function]:function
 .propertyList:[object Function]:function
 .randomInt:[object Function]:function
+.recursiveCall:[object Function]:function
 .replaceAll:[object Function]:function
 .round:[object Function]:function
 .sc:[object Function]:function
@@ -727,6 +728,7 @@
 .switch_:[object Function]:function
 .syntax._assert:[object Function]:function
 .syntax._Enum:[object Function]:function
+.syntax._recursiveCall:[object Function]:function
 .syntax.assert:[object Function]:function
 .syntax.canUseMap:[object Function]:function
 .syntax.canUseSet:[object Function]:function
@@ -736,6 +738,7 @@
 .syntax.guard:[object Function]:function
 .syntax.if_:[object Function]:function
 .syntax.loop:[object Function]:function
+.syntax.recursiveCall:[object Function]:function
 .syntax.sc:[object Function]:function
 .syntax.switch_:[object Function]:function
 .test.checkCompare:[object Function]:function

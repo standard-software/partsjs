@@ -1413,6 +1413,7 @@
 .default.parts.propertyCount:[object Function]:function
 .default.parts.propertyList:[object Function]:function
 .default.parts.randomInt:[object Function]:function
+.default.parts.recursiveCall:[object Function]:function
 .default.parts.replaceAll:[object Function]:function
 .default.parts.round:[object Function]:function
 .default.parts.sc:[object Function]:function
@@ -1530,6 +1531,7 @@
 .default.parts.switch_:[object Function]:function
 .default.parts.syntax._assert:[object Function]:function
 .default.parts.syntax._Enum:[object Function]:function
+.default.parts.syntax._recursiveCall:[object Function]:function
 .default.parts.syntax.assert:[object Function]:function
 .default.parts.syntax.canUseMap:[object Function]:function
 .default.parts.syntax.canUseSet:[object Function]:function
@@ -1539,6 +1541,7 @@
 .default.parts.syntax.guard:[object Function]:function
 .default.parts.syntax.if_:[object Function]:function
 .default.parts.syntax.loop:[object Function]:function
+.default.parts.syntax.recursiveCall:[object Function]:function
 .default.parts.syntax.sc:[object Function]:function
 .default.parts.syntax.switch_:[object Function]:function
 .default.parts.test.checkCompare:[object Function]:function
@@ -1851,6 +1854,7 @@
 .default.propertyCount:[object Function]:function
 .default.propertyList:[object Function]:function
 .default.randomInt:[object Function]:function
+.default.recursiveCall:[object Function]:function
 .default.replaceAll:[object Function]:function
 .default.round:[object Function]:function
 .default.sc:[object Function]:function
@@ -1968,6 +1972,7 @@
 .default.switch_:[object Function]:function
 .default.syntax._assert:[object Function]:function
 .default.syntax._Enum:[object Function]:function
+.default.syntax._recursiveCall:[object Function]:function
 .default.syntax.assert:[object Function]:function
 .default.syntax.canUseMap:[object Function]:function
 .default.syntax.canUseSet:[object Function]:function
@@ -1977,6 +1982,7 @@
 .default.syntax.guard:[object Function]:function
 .default.syntax.if_:[object Function]:function
 .default.syntax.loop:[object Function]:function
+.default.syntax.recursiveCall:[object Function]:function
 .default.syntax.sc:[object Function]:function
 .default.syntax.switch_:[object Function]:function
 .default.test.checkCompare:[object Function]:function
@@ -3250,6 +3256,7 @@
 .parts.propertyCount:[object Function]:function
 .parts.propertyList:[object Function]:function
 .parts.randomInt:[object Function]:function
+.parts.recursiveCall:[object Function]:function
 .parts.replaceAll:[object Function]:function
 .parts.round:[object Function]:function
 .parts.sc:[object Function]:function
@@ -3367,6 +3374,7 @@
 .parts.switch_:[object Function]:function
 .parts.syntax._assert:[object Function]:function
 .parts.syntax._Enum:[object Function]:function
+.parts.syntax._recursiveCall:[object Function]:function
 .parts.syntax.assert:[object Function]:function
 .parts.syntax.canUseMap:[object Function]:function
 .parts.syntax.canUseSet:[object Function]:function
@@ -3376,6 +3384,7 @@
 .parts.syntax.guard:[object Function]:function
 .parts.syntax.if_:[object Function]:function
 .parts.syntax.loop:[object Function]:function
+.parts.syntax.recursiveCall:[object Function]:function
 .parts.syntax.sc:[object Function]:function
 .parts.syntax.switch_:[object Function]:function
 .parts.test.checkCompare:[object Function]:function
@@ -3688,6 +3697,7 @@
 .propertyCount:[object Function]:function
 .propertyList:[object Function]:function
 .randomInt:[object Function]:function
+.recursiveCall:[object Function]:function
 .replaceAll:[object Function]:function
 .round:[object Function]:function
 .sc:[object Function]:function
@@ -3805,6 +3815,7 @@
 .switch_:[object Function]:function
 .syntax._assert:[object Function]:function
 .syntax._Enum:[object Function]:function
+.syntax._recursiveCall:[object Function]:function
 .syntax.assert:[object Function]:function
 .syntax.canUseMap:[object Function]:function
 .syntax.canUseSet:[object Function]:function
@@ -3814,6 +3825,7 @@
 .syntax.guard:[object Function]:function
 .syntax.if_:[object Function]:function
 .syntax.loop:[object Function]:function
+.syntax.recursiveCall:[object Function]:function
 .syntax.sc:[object Function]:function
 .syntax.switch_:[object Function]:function
 .test.checkCompare:[object Function]:function

@@ -33,6 +33,7 @@ export const test_execute_syntax = (parts) => {
       canUseMap, canUseWeakMap,
       canUseSet, canUseWeakSet,
       Enum,
+      recursiveCall,
     } = parts.syntax;
 
     const {
@@ -956,6 +957,182 @@ export const test_execute_syntax = (parts) => {
       });
     };
 
+    const test_recursiveCall = () => {
+      it('test_recursiveCall', () => {
+        var data = [
+          {
+            'id': 1,
+            'name': 'folderA',
+            'folder':[
+              {
+                'id':2,
+                'name':'folderA-2',
+              },
+              {
+                'id':3,
+                'name':'folderA-3',
+              }],
+          },
+          {
+            'id': 4,
+            'name': 'folderB',
+          },
+          {
+            'id': 5,
+            'name': 'folderC',
+            'folder':[
+              {
+                'id':6,
+                'name':'folderC-1',
+                'folder':[
+                  {
+                    'id': 7,
+                    'name': 'folderC-1-1',
+                  }],
+              }],
+          },
+        ];
+
+        var message = '';
+        recursiveCall(data,
+          (value, key) => {
+            if ('folder' in value) {
+              return value.folder;
+            }
+          },
+          (value, key) => {
+            message += `${key}:${value.name} `;
+          },
+        );
+        checkEqual('0:folderA 0:folderA-2 1:folderA-3 '
+          + '1:folderB 2:folderC 0:folderC-1 0:folderC-1-1 ', message,
+        );
+
+        var testObject = {
+          a: 1,
+          b: 2,
+          c: {
+            d: 3,
+            e: {
+              f: 4,
+            },
+          },
+          g: [
+            5,
+            [
+              {
+                h: 6,
+              },
+            ],
+          ],
+        };
+        var message = '';
+        recursiveCall(testObject,
+          (value, key) => {
+            if (isObject(value)) {
+              return value;
+            }
+          },
+          (value, key) => {
+            message += `${key}:${typeof value} `;
+          },
+        );
+        checkEqual(
+          'a:number b:number c:object d:number e:object f:number g:object ',
+          message,
+        );
+        var message = '';
+        recursiveCall(testObject,
+          (value, key) => {
+            if (isObject(value)) {
+              return value;
+            } else if (Array.isArray(value)) {
+              return value;
+            }
+          },
+          (value, key) => {
+            message += `${key}:${typeof value} `;
+          },
+        );
+        checkEqual(
+          'a:number b:number c:object d:number e:object f:number ' +
+          'g:object 0:number 1:object 0:object h:number ',
+          message,
+        );
+
+        var data = {
+          'children': [
+            {
+              'contents': {
+                'A': 0,
+                'B': 1,
+                'C': 2,
+              },
+              'children': [
+                {
+                  'children': [],
+                  'name': 'test03',
+                  'id': 3,
+                },
+                {
+                  'children': [],
+                  'name': 'test04',
+                  'id': 4,
+                },
+              ],
+              'name': 'test01',
+              'id': 1,
+            },
+            {
+              'contents': {
+                'A': 0,
+                'B': 1,
+                'C': 2,
+              },
+              'children': [
+                {
+                  'children': [],
+                  'name': 'test05',
+                  'id': 5,
+                },
+                {
+                  'children': [],
+                  'name': 'test06',
+                  'id': 6,
+                },
+              ],
+              'name': 'test02',
+              'id': 2,
+            },
+          ],
+        };
+        var messages = [];
+        recursiveCall(data.children,
+          (value, key) => {
+            if ('children' in value) {
+              return value.children;
+            }
+          },
+          (value, key, level) => {
+            messages.push({
+              name: value.name,
+              level: level,
+            });
+          },
+        );
+        const { SortFunc } = parts.array;
+        messages.sort(SortFunc([
+          [SortFunc.order.normal.ascending, v => v.level],
+        ]));
+        var message = messages.map(v => `name:${v.name}`).join(' ');
+        checkEqual(
+          'name:test01 name:test02 name:test03 name:test04 name:test05 name:test06',
+          message,
+        );
+
+      });
+    };
+
     test_assert();
     test_guard();
     test_sc();
@@ -969,6 +1146,8 @@ export const test_execute_syntax = (parts) => {
     test_canUseWeakSet();
 
     test_Enum();
+
+    test_recursiveCall();
   });
 };
 
