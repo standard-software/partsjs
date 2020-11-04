@@ -71,6 +71,8 @@ var test_execute_array = function test_execute_array(parts) {
         trimBothEnds = _parts$array$operatio.trimBothEnds,
         popFirst = _parts$array$operatio.popFirst,
         popLast = _parts$array$operatio.popLast,
+        popArrayFirst = _parts$array$operatio.popArrayFirst,
+        popArrayLast = _parts$array$operatio.popArrayLast,
         pushFirst = _parts$array$operatio.pushFirst,
         pushLast = _parts$array$operatio.pushLast,
         remainFirst = _parts$array$operatio.remainFirst,
@@ -2143,6 +2145,40 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_operation_popArrayFirst = function test_operation_popArrayFirst() {
+      it('test_operation_popArrayFirst', function () {
+        var array1 = [1, 2, 3];
+        checkEqual([1], popArrayFirst(array1));
+        checkEqual([2, 3], array1);
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2], popArrayFirst(array1, 2));
+        checkEqual([3], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['A'], popArrayFirst(array1));
+        checkEqual(['B', 'C'], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['A', 'B'], popArrayFirst(array1, 2));
+        checkEqual(['C'], array1);
+      });
+    };
+
+    var test_operation_popArrayLast = function test_operation_popArrayLast() {
+      it('test_operation_popArrayLast', function () {
+        var array1 = [1, 2, 3];
+        checkEqual([3], popArrayLast(array1));
+        checkEqual([1, 2], array1);
+        var array1 = [1, 2, 3];
+        checkEqual([2, 3], popArrayLast(array1, 2));
+        checkEqual([1], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['C'], popArrayLast(array1));
+        checkEqual(['A', 'B'], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['B', 'C'], popArrayLast(array1, 2));
+        checkEqual(['A'], array1);
+      });
+    };
+
     var test_operation_remainFirst = function test_operation_remainFirst() {
       it('test_operation_remainFirst', function () {
         var array1 = [1, 2, 3];
@@ -2513,6 +2549,8 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_popLast();
     test_operation_pushFirst();
     test_operation_pushLast();
+    test_operation_popArrayFirst();
+    test_operation_popArrayLast();
     test_operation_remainFirst();
     test_operation_remainLast();
     test_operation_filter();

@@ -37,13 +37,29 @@ var _unique2 = _interopRequireDefault(require("./_unique.js"));
 
 var _unique3 = _interopRequireDefault(require("./unique.js"));
 
-var _array_operation = _interopRequireDefault(require("./array_operation.js"));
-
 var _SortFuncOrder = _interopRequireDefault(require("./__SortFuncOrder.js"));
 
 var _SortFunc2 = _interopRequireDefault(require("./_SortFunc.js"));
 
 var _SortFunc3 = _interopRequireDefault(require("./SortFunc.js"));
+
+var _array_operation = _interopRequireDefault(require("./operation/array_operation.js"));
+
+var _popFirst = _interopRequireDefault(require("./operation/_popFirst.js"));
+
+var _popFirst2 = _interopRequireDefault(require("./operation/popFirst.js"));
+
+var _popLast = _interopRequireDefault(require("./operation/_popLast.js"));
+
+var _popLast2 = _interopRequireDefault(require("./operation/popLast.js"));
+
+var _popArrayFirst = _interopRequireDefault(require("./operation/_popArrayFirst.js"));
+
+var _popArrayFirst2 = _interopRequireDefault(require("./operation/popArrayFirst.js"));
+
+var _popArrayLast = _interopRequireDefault(require("./operation/_popArrayLast.js"));
+
+var _popArrayLast2 = _interopRequireDefault(require("./operation/popArrayLast.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -55,7 +71,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var arrayJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_common["default"]), _map2["default"]), _map3["default"]), _min2["default"]), _min3["default"]), _max2["default"]), _max3["default"]), _NumberArray2["default"]), _NumberArray3["default"]), _IntegerArray2["default"]), _IntegerArray3["default"]), _arrayEntries2["default"]), _group2["default"]), _group3["default"]), _unique2["default"]), _unique3["default"]), _SortFuncOrder["default"]), _SortFunc2["default"]), _SortFunc3["default"]);
 
-var arrayOperationJs = _objectSpread({}, _array_operation["default"]);
+var arrayOperationJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _array_operation["default"]), _popFirst["default"]), _popFirst2["default"]), _popLast["default"]), _popLast2["default"]), _popArrayFirst["default"]), _popArrayFirst2["default"]), _popArrayLast["default"]), _popArrayLast2["default"]);
 
 var _min = arrayJs._min,
     _max = arrayJs._max,

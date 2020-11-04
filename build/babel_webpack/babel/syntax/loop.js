@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.loop = exports._loopBase = void 0;
+exports["default"] = exports.loop = void 0;
 
 var _type = require("../type/type.js");
 
@@ -11,36 +11,13 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _IntegerArray2 = require("../array/_IntegerArray.js");
 
-var _objectEntries = require("../object/objectEntries.js");
+var _objectEntries2 = require("../object/_objectEntries.js");
+
+var _loop = require("../syntax/__loop.js");
 
 /**
  * loop
  */
-var _loopBase = function _loopBase(loopArray) {
-  return function (func) {
-    if (!(0, _type.isFunction)(func)) {
-      throw new TypeError('loop()(func) func is not function');
-    }
-
-    for (var i = 0, l = loopArray.length; i < l; i += 1) {
-      var element = loopArray[i];
-      var index = i;
-      var array = loopArray;
-      var loopFirst = i === 0;
-      var loopLast = i === loopArray.length - 1;
-      var result = func(element, index, array, loopFirst, loopLast);
-
-      if (!(0, _type.isUndefined)(result) && result["break"] === true) {
-        return result;
-      }
-    }
-
-    return {};
-  };
-};
-
-exports._loopBase = _loopBase;
-
 var loop = function loop(start, end, increment) {
   if ((0, _isObjectParameter.isObjectParameter)(start, 'count')) {
     var _start = start;
@@ -60,9 +37,9 @@ var loop = function loop(start, end, increment) {
     var _increment = increment;
     increment = _increment.increment;
   } else if ((0, _type.isObject)(start)) {
-    return _loopBase((0, _objectEntries.objectEntries)(start));
+    return (0, _loop.__loop)((0, _objectEntries2._objectEntries)(start));
   } else if ((0, _type.isArray)(start)) {
-    return _loopBase(start);
+    return (0, _loop.__loop)(start);
   }
 
   if (!(0, _type.isInteger)(start)) {
@@ -77,7 +54,7 @@ var loop = function loop(start, end, increment) {
     throw new TypeError('loop args(increment) is not number');
   }
 
-  return _loopBase((0, _IntegerArray2._IntegerArray)(start, end, increment));
+  return (0, _loop.__loop)((0, _IntegerArray2._IntegerArray)(start, end, increment));
 };
 
 exports.loop = loop;

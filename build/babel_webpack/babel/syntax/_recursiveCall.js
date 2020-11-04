@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._merge = void 0;
+exports["default"] = exports._recursiveCall = void 0;
 
 var _isType = require("../type/isType.js");
 
@@ -23,37 +23,38 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-/**
- * merge
- */
-var _merge = function _merge(dataArray) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
-    return v;
+var _recursiveCall = function _recursiveCall(source, callFunc, runFunc) {
+  var recursiveCall_ = function recursiveCall_(source, level) {
+    if ((0, _isType.isObject)(source)) {
+      (0, _loop.__loop)((0, _objectEntries2._objectEntries)(source))(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            value = _ref2[1];
+
+        runFunc(value, key, level);
+        var result = callFunc(value, key);
+
+        if (!(0, _isType.isUndefined)(result)) {
+          recursiveCall_(result, level + 1);
+        }
+      });
+    } else if ((0, _isType.isArray)(source)) {
+      (0, _loop.__loop)(source)(function (value, index) {
+        runFunc(value, index, level);
+        var result = callFunc(value, index);
+
+        if (!(0, _isType.isUndefined)(result)) {
+          recursiveCall_(result, level + 1);
+        }
+      });
+    }
   };
-  var target = arguments.length > 2 ? arguments[2] : undefined;
 
-  if (dataArray.length === 0) {
-    return target;
-  }
-
-  if ((0, _isType.isUndefined)(target)) {
-    target = (0, _isType.isObjectFromNull)(dataArray[0]) ? Object.create(null) : new dataArray[0].constructor();
-  }
-
-  (0, _loop.__loop)(dataArray)(function (data) {
-    (0, _loop.__loop)((0, _objectEntries2._objectEntries)(data))(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2),
-          key = _ref2[0],
-          value = _ref2[1];
-
-      target[key] = func(value, target[key], key, data, target);
-    });
-  });
-  return target;
+  recursiveCall_(source, 0);
 };
 
-exports._merge = _merge;
+exports._recursiveCall = _recursiveCall;
 var _default = {
-  _merge: _merge
+  _recursiveCall: _recursiveCall
 };
 exports["default"] = _default;

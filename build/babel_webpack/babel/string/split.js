@@ -11,7 +11,7 @@ var _Enum2 = require("../syntax/_Enum.js");
 
 var _loop = require("../syntax/loop.js");
 
-var _array_operation = require("../array/array_operation.js");
+var _array_operation = require("../array/operation/array_operation.js");
 
 var _array_common = require("../array/array_common.js");
 

@@ -1,0 +1,51 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.popArrayFirst = void 0;
+
+var _isType = require("../../type/isType.js");
+
+var _number = require("../../number/number.js");
+
+var _isObjectParameter = require("../../object/isObjectParameter.js");
+
+var _popArrayFirst2 = require("./_popArrayFirst.js");
+
+/**
+ * array.operation.popArrayFirst
+ */
+var popArrayFirst = function popArrayFirst(array) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+  if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'length')) {
+    var _array = array;
+    array = _array.array;
+    var _array$length = _array.length;
+    length = _array$length === void 0 ? 1 : _array$length;
+  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
+    var _length = length;
+    length = _length.length;
+  }
+
+  if (!(0, _isType.isArray)(array)) {
+    throw new TypeError('popArrayFirst args(array) is not array');
+  }
+
+  if (!(0, _isType.isInteger)(length)) {
+    throw new TypeError('popArrayFirst args(length) is not integer');
+  }
+
+  if (!(0, _number._inRange)(length, 1, array.length)) {
+    throw new RangeError('popArrayFirst args(length) must be from 0 to array.length');
+  }
+
+  return (0, _popArrayFirst2._popArrayFirst)(array, length);
+};
+
+exports.popArrayFirst = popArrayFirst;
+var _default = {
+  popArrayFirst: popArrayFirst
+};
+exports["default"] = _default;
