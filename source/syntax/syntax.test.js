@@ -995,12 +995,14 @@ export const test_execute_syntax = (parts) => {
 
         var message = '';
         recursiveCall(data,
-          (value, key) => {
+          (value, key, level, source) => {
+            checkEqual(data, source);
             if ('folder' in value) {
               return value.folder;
             }
           },
-          (value, key) => {
+          (value, key, level, source) => {
+            checkEqual(data, source);
             message += `${key}:${value.name} `;
           },
         );
@@ -1057,6 +1059,25 @@ export const test_execute_syntax = (parts) => {
         checkEqual(
           'a:number b:number c:object d:number e:object f:number ' +
           'g:object 0:number 1:object 0:object h:number ',
+          message,
+        );
+        var message = '';
+        recursiveCall(testObject,
+          (value, key, level) => {
+            if (1 <= level) { return; }
+            if (isObject(value)) {
+              return value;
+            } else if (Array.isArray(value)) {
+              return value;
+            }
+          },
+          (value, key) => {
+            message += `${key}:${typeof value} `;
+          },
+        );
+        checkEqual(
+          'a:number b:number c:object d:number e:object ' +
+          'g:object 0:number 1:object ',
           message,
         );
 
