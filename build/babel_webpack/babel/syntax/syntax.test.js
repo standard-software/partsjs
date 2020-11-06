@@ -1039,11 +1039,14 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]
         }];
         var message = '';
-        recursiveCall(data, function (value, key) {
+        recursiveCall(data, function (value, key, level, source) {
+          checkEqual(data, source);
+
           if ('folder' in value) {
             return value.folder;
           }
-        }, function (value, key) {
+        }, function (value, key, level, source) {
+          checkEqual(data, source);
           message += "".concat(key, ":").concat(value.name, " ");
         });
         checkEqual('0:folderA 0:folderA-2 1:folderA-3 ' + '1:folderB 2:folderC 0:folderC-1 0:folderC-1-1 ', message);
@@ -1080,6 +1083,21 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           message += "".concat(key, ":").concat(_typeof(value), " ");
         });
         checkEqual('a:number b:number c:object d:number e:object f:number ' + 'g:object 0:number 1:object 0:object h:number ', message);
+        var message = '';
+        recursiveCall(testObject, function (value, key, level) {
+          if (1 <= level) {
+            return;
+          }
+
+          if (isObject(value)) {
+            return value;
+          } else if (Array.isArray(value)) {
+            return value;
+          }
+        }, function (value, key) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+        });
+        checkEqual('a:number b:number c:object d:number e:object ' + 'g:object 0:number 1:object ', message);
         var data = {
           'children': [{
             'contents': {

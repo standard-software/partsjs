@@ -7933,24 +7933,24 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var _recursiveCall = function _recursiveCall(source, callFunc, runFunc) {
-  var recursiveCall_ = function recursiveCall_(source, level) {
-    if ((0, _isType.isObject)(source)) {
-      (0, _loop.__loop)((0, _objectEntries2._objectEntries)(source))(function (_ref) {
+  var recursiveCall_ = function recursiveCall_(value, level) {
+    if ((0, _isType.isObject)(value)) {
+      (0, _loop.__loop)((0, _objectEntries2._objectEntries)(value))(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             value = _ref2[1];
 
-        runFunc(value, key, level);
-        var result = callFunc(value, key);
+        runFunc(value, key, level, source);
+        var result = callFunc(value, key, level, source);
 
         if (!(0, _isType.isUndefined)(result)) {
           recursiveCall_(result, level + 1);
         }
       });
-    } else if ((0, _isType.isArray)(source)) {
-      (0, _loop.__loop)(source)(function (value, index) {
-        runFunc(value, index, level);
-        var result = callFunc(value, index);
+    } else if ((0, _isType.isArray)(value)) {
+      (0, _loop.__loop)(value)(function (value, index) {
+        runFunc(value, index, level, source);
+        var result = callFunc(value, index, level, source);
 
         if (!(0, _isType.isUndefined)(result)) {
           recursiveCall_(result, level + 1);
