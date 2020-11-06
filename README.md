@@ -123,7 +123,7 @@ You can now use the functions of the parts.js object.
   <meta charset="UTF-8">
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@8.4.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@9.2.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>
@@ -324,7 +324,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 9.2.0
-#### 2020/11/04(Wed)
+#### 2020/11/06(Fri)
 - add popArrayFirst / popArrayLast
 - add _objectEntries.js from objectEntries.js
 - update loop.js

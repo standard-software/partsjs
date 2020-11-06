@@ -184,7 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [389, 19, 7, 259, 13, 11, 44, 35, 15, 90, 40, 68, 44, 1];
+        var countArray = [390, 19, 7, 259, 15, 11, 44, 35, 15, 90, 40, 68, 48, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.common));
@@ -3432,6 +3432,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_syntax = void 0;
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -3489,7 +3491,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         canUseWeakMap = _parts$syntax.canUseWeakMap,
         canUseSet = _parts$syntax.canUseSet,
         canUseWeakSet = _parts$syntax.canUseWeakSet,
-        Enum = _parts$syntax.Enum;
+        Enum = _parts$syntax.Enum,
+        recursiveCall = _parts$syntax.recursiveCall;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -4435,6 +4438,152 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_recursiveCall = function test_recursiveCall() {
+      it('test_recursiveCall', function () {
+        var data = [{
+          'id': 1,
+          'name': 'folderA',
+          'folder': [{
+            'id': 2,
+            'name': 'folderA-2'
+          }, {
+            'id': 3,
+            'name': 'folderA-3'
+          }]
+        }, {
+          'id': 4,
+          'name': 'folderB'
+        }, {
+          'id': 5,
+          'name': 'folderC',
+          'folder': [{
+            'id': 6,
+            'name': 'folderC-1',
+            'folder': [{
+              'id': 7,
+              'name': 'folderC-1-1'
+            }]
+          }]
+        }];
+        var message = '';
+        recursiveCall(data, function (value, key, level, source) {
+          checkEqual(data, source);
+
+          if ('folder' in value) {
+            return value.folder;
+          }
+        }, function (value, key, level, source) {
+          checkEqual(data, source);
+          message += "".concat(key, ":").concat(value.name, " ");
+        });
+        checkEqual('0:folderA 0:folderA-2 1:folderA-3 ' + '1:folderB 2:folderC 0:folderC-1 0:folderC-1-1 ', message);
+        var testObject = {
+          a: 1,
+          b: 2,
+          c: {
+            d: 3,
+            e: {
+              f: 4
+            }
+          },
+          g: [5, [{
+            h: 6
+          }]]
+        };
+        var message = '';
+        recursiveCall(testObject, function (value, key) {
+          if (isObject(value)) {
+            return value;
+          }
+        }, function (value, key) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+        });
+        checkEqual('a:number b:number c:object d:number e:object f:number g:object ', message);
+        var message = '';
+        recursiveCall(testObject, function (value, key) {
+          if (isObject(value)) {
+            return value;
+          } else if (Array.isArray(value)) {
+            return value;
+          }
+        }, function (value, key) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+        });
+        checkEqual('a:number b:number c:object d:number e:object f:number ' + 'g:object 0:number 1:object 0:object h:number ', message);
+        var message = '';
+        recursiveCall(testObject, function (value, key, level) {
+          if (1 <= level) {
+            return;
+          }
+
+          if (isObject(value)) {
+            return value;
+          } else if (Array.isArray(value)) {
+            return value;
+          }
+        }, function (value, key) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+        });
+        checkEqual('a:number b:number c:object d:number e:object ' + 'g:object 0:number 1:object ', message);
+        var data = {
+          'children': [{
+            'contents': {
+              'A': 0,
+              'B': 1,
+              'C': 2
+            },
+            'children': [{
+              'children': [],
+              'name': 'test03',
+              'id': 3
+            }, {
+              'children': [],
+              'name': 'test04',
+              'id': 4
+            }],
+            'name': 'test01',
+            'id': 1
+          }, {
+            'contents': {
+              'A': 0,
+              'B': 1,
+              'C': 2
+            },
+            'children': [{
+              'children': [],
+              'name': 'test05',
+              'id': 5
+            }, {
+              'children': [],
+              'name': 'test06',
+              'id': 6
+            }],
+            'name': 'test02',
+            'id': 2
+          }]
+        };
+        var messages = [];
+        recursiveCall(data.children, function (value, key) {
+          if ('children' in value) {
+            return value.children;
+          }
+        }, function (value, key, level) {
+          messages.push({
+            name: value.name,
+            level: level
+          });
+        });
+        var SortFunc = parts.array.SortFunc;
+        messages.sort(SortFunc([[SortFunc.order.normal.ascending, function (v) {
+          return v.level;
+        }]]));
+        var message = messages.map(function (v) {
+          return "name:".concat(v.name);
+        }).join(' ');
+        checkEqual('name:test01 name:test02 name:test03 name:test04 name:test05 name:test06', message);
+      });
+    };
+
     test_assert();
     test_guard();
     test_sc();
@@ -4446,6 +4595,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_canUseSet();
     test_canUseWeakSet();
     test_Enum();
+    test_recursiveCall();
   });
 };
 
@@ -12989,6 +13139,8 @@ var test_execute_array = function test_execute_array(parts) {
         trimBothEnds = _parts$array$operatio.trimBothEnds,
         popFirst = _parts$array$operatio.popFirst,
         popLast = _parts$array$operatio.popLast,
+        popArrayFirst = _parts$array$operatio.popArrayFirst,
+        popArrayLast = _parts$array$operatio.popArrayLast,
         pushFirst = _parts$array$operatio.pushFirst,
         pushLast = _parts$array$operatio.pushLast,
         remainFirst = _parts$array$operatio.remainFirst,
@@ -15061,6 +15213,40 @@ var test_execute_array = function test_execute_array(parts) {
       });
     };
 
+    var test_operation_popArrayFirst = function test_operation_popArrayFirst() {
+      it('test_operation_popArrayFirst', function () {
+        var array1 = [1, 2, 3];
+        checkEqual([1], popArrayFirst(array1));
+        checkEqual([2, 3], array1);
+        var array1 = [1, 2, 3];
+        checkEqual([1, 2], popArrayFirst(array1, 2));
+        checkEqual([3], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['A'], popArrayFirst(array1));
+        checkEqual(['B', 'C'], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['A', 'B'], popArrayFirst(array1, 2));
+        checkEqual(['C'], array1);
+      });
+    };
+
+    var test_operation_popArrayLast = function test_operation_popArrayLast() {
+      it('test_operation_popArrayLast', function () {
+        var array1 = [1, 2, 3];
+        checkEqual([3], popArrayLast(array1));
+        checkEqual([1, 2], array1);
+        var array1 = [1, 2, 3];
+        checkEqual([2, 3], popArrayLast(array1, 2));
+        checkEqual([1], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['C'], popArrayLast(array1));
+        checkEqual(['A', 'B'], array1);
+        var array1 = ['A', 'B', 'C'];
+        checkEqual(['B', 'C'], popArrayLast(array1, 2));
+        checkEqual(['A'], array1);
+      });
+    };
+
     var test_operation_remainFirst = function test_operation_remainFirst() {
       it('test_operation_remainFirst', function () {
         var array1 = [1, 2, 3];
@@ -15431,6 +15617,8 @@ var test_execute_array = function test_execute_array(parts) {
     test_operation_popLast();
     test_operation_pushFirst();
     test_operation_pushLast();
+    test_operation_popArrayFirst();
+    test_operation_popArrayLast();
     test_operation_remainFirst();
     test_operation_remainLast();
     test_operation_filter();

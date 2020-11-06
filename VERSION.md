@@ -2,6 +2,15 @@
 
 ## Version
 
+### 9.2.0
+#### 2020/11/06(Fri)
+- add popArrayFirst / popArrayLast
+- add _objectEntries.js from objectEntries.js
+- update loop.js
+  - delete _loopBase
+- add syntax.recursiveCall
+  - add _recursiveCall.js / recursiveCall.js
+
 ### 9.1.0
 #### 2020/11/02(Mon)
 - update clone / cloneDeep
