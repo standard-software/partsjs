@@ -332,6 +332,7 @@ You can now use the functions of the parts.js object.
   - update test_parts.js
     - Same simple description as v7.6.0
 - update npm scripts
+- update run_check wsh index.wsf
 
 ### 9.2.0
 #### 2020/11/06(Fri)

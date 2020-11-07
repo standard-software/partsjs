@@ -19,7 +19,9 @@
 ]]>
 </script>
 <script language="JavaScript" src="./polyfill_Object_defineProperty.js"></script>
-<script language="JavaScript" src="../../release/parts.js"></script>
+<script language="JavaScript" src="../../release_wsh/1.parts.js"></script>
+<script language="JavaScript" src="../../release_wsh/2.parts.js"></script>
+<script language="JavaScript" src="../../release_wsh/parts.js"></script>
 
 <script language="JavaScript">
 <![CDATA[
