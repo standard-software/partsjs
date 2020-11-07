@@ -331,6 +331,7 @@ You can now use the functions of the parts.js object.
   - use webpack.optimize.AggressiveSplittingPlugin
   - update test_parts.js
     - Same simple description as v7.6.0
+- update npm scripts
 
 ### 9.2.0
 #### 2020/11/06(Fri)
