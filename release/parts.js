@@ -154,7 +154,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '9.2.0';
+var VERSION = '10.0.0 beta 1';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -10400,7 +10400,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  * SortFunc
  */
 var _SortFunc = function _SortFunc(orderSettingArray) {
-  var sortFuncArray = orderSettingArray.map(function (_ref) {
+  var sortFuncArray = (0, _map2._map)(orderSettingArray, function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         orderFunc = _ref2[0],
         _ref2$ = _ref2[1],
@@ -13009,6 +13009,7 @@ var isNotThrown = function isNotThrown(targetFunc) {
 
 exports.isNotThrown = isNotThrown;
 var _default = {
+  testFrame: testFrame,
   checkEqual: checkEqual,
   checkCompare: checkCompare,
   describe: describe,

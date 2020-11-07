@@ -27,7 +27,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  * SortFunc
  */
 var _SortFunc = function _SortFunc(orderSettingArray) {
-  var sortFuncArray = orderSettingArray.map(function (_ref) {
+  var sortFuncArray = (0, _map2._map)(orderSettingArray, function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         orderFunc = _ref2[0],
         _ref2$ = _ref2[1],

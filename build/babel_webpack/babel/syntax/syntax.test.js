@@ -1150,7 +1150,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         messages.sort(SortFunc([[SortFunc.order.normal.ascending, function (v) {
           return v.level;
         }]]));
-        var message = messages.map(function (v) {
+        var message = parts.array.map(messages, function (v) {
           return "name:".concat(v.name);
         }).join(' ');
         checkEqual('name:test01 name:test02 name:test03 name:test04 name:test05 name:test06', message);

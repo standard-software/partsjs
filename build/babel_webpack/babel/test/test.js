@@ -233,6 +233,7 @@ var isNotThrown = function isNotThrown(targetFunc) {
 
 exports.isNotThrown = isNotThrown;
 var _default = {
+  testFrame: testFrame,
   checkEqual: checkEqual,
   checkCompare: checkCompare,
   describe: describe,

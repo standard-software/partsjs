@@ -519,7 +519,13 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(0, propertyCount({}, false)); // other object function
 
         checkEqual(0, propertyCount(test_propertyCount));
-        checkEqual(0, propertyCount(test_propertyCount, false)); // other object Module
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, propertyCount(test_propertyCount, false));
+        } else {
+          checkEqual(1, propertyCount(test_propertyCount, false));
+        } // other object Module
+
 
         if (parts.isModule(parts)) {
           checkEqual(true, 0 !== propertyCount(parts));

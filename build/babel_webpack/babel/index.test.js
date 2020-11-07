@@ -76,7 +76,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [390, 19, 7, 259, 15, 11, 44, 35, 15, 90, 40, 68, 48, 1];
+        var countArray = [390, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.common));
@@ -147,7 +147,10 @@ var test_execute_index = function test_execute_index(parts) {
     });
   };
 
-  var describe = parts.test.describe;
+  var _parts$test3 = parts.test,
+      describe = _parts$test3.describe,
+      testFrame = _parts$test3.testFrame;
+  testFrame.outputDescribe = false;
   describe('test_execute_index', function () {
     (0, _commonTest.test_execute_common)(parts);
     (0, _typeTest.test_execute_type)(parts);
