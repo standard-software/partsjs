@@ -6,7 +6,7 @@ import { __SortFuncOrder } from '../array/__SortFuncOrder.js';
  * SortFunc
  */
 export const _SortFunc = (orderSettingArray) => {
-  const sortFuncArray = orderSettingArray.map(
+  const sortFuncArray = _map(orderSettingArray,
     ([orderFunc, valueFunc = __returnValueFunction]) => {
       return (a, b) => orderFunc(valueFunc(a), valueFunc(b));
     },

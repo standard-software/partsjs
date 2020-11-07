@@ -2507,16 +2507,16 @@ export const test_execute_array = (parts) => {
             [SortFunc.order.normal.ascending, v => v.name],
             [SortFunc.order.normal.descending, v => v.age],
           ]));
-        checkEqual(['a', 'b', 'c', 'c'], sortedUserList.map(v => v.name));
-        checkEqual([20, 20, 21, 20], sortedUserList.map(v => v.age));
+        checkEqual(['a', 'b', 'c', 'c'], parts.array.map(sortedUserList, v => v.name));
+        checkEqual([20, 20, 21, 20], parts.array.map(sortedUserList, v => v.age));
 
         var sortedUserList = [...userList]
           .sort(SortFunc([
             [SortFunc.order.normal.descending, v => v.name],
             [SortFunc.order.normal.ascending, v => v.age],
           ]));
-        checkEqual(['c', 'c', 'b', 'a'], sortedUserList.map(v => v.name));
-        checkEqual([20, 21, 20, 20], sortedUserList.map(v => v.age));
+        checkEqual(['c', 'c', 'b', 'a'], parts.array.map(sortedUserList, v => v.name));
+        checkEqual([20, 21, 20, 20], parts.array.map(sortedUserList, v => v.age));
 
         checkEqual(false, isThrown(() => {
           SortFunc([
@@ -2554,7 +2554,7 @@ export const test_execute_array = (parts) => {
           sortedList,
         );
         var sortedList = [...unsortedList]
-          .sort(SortFunc.order.dictionaryUpperCase.descending, v => v);
+          .sort(SortFunc.order.dictionaryUpperCase.descending);
         checkEqual(
           ['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'],
           sortedList,
@@ -2739,7 +2739,7 @@ export const test_execute_array = (parts) => {
             return major + minor + build + revision;
           }],
         ]));
-        checkEqual(['a', 'e', 'd', 'c', 'b'], sortedItems.map(i => i.name));
+        checkEqual(['a', 'e', 'd', 'c', 'b'], parts.array.map(sortedItems, i => i.name));
 
         var sortedItems = [
           ...items,
@@ -2749,7 +2749,7 @@ export const test_execute_array = (parts) => {
             return major + minor + build + revision;
           }],
         ]));
-        checkEqual(['b', 'c', 'd', 'e', 'a'], sortedItems.map(i => i.name));
+        checkEqual(['b', 'c', 'd', 'e', 'a'], parts.array.map(sortedItems, i => i.name));
 
       });
     };
@@ -2769,9 +2769,12 @@ export const test_execute_array = (parts) => {
 
         const arrayEntries = (array) => {
           const result = [];
-          for (const [i, v] of array.entries()) {
-            result.push([i,v]);
-          }
+          // for (const [i, v] of array.entries()) {
+          //   result.push([i,v]);
+          // }
+          parts.loop(array)((v, i) => {
+            result.push([i, v]);
+          });
           return result;
         };
 

@@ -1145,7 +1145,7 @@ export const test_execute_syntax = (parts) => {
         messages.sort(SortFunc([
           [SortFunc.order.normal.ascending, v => v.level],
         ]));
-        var message = messages.map(v => `name:${v.name}`).join(' ');
+        var message = parts.array.map(messages, v => `name:${v.name}`).join(' ');
         checkEqual(
           'name:test01 name:test02 name:test03 name:test04 name:test05 name:test06',
           message,

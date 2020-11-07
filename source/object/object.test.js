@@ -567,7 +567,11 @@ export const test_execute_object = (parts) => {
 
         // other object function
         checkEqual(0, propertyCount(test_propertyCount));
-        checkEqual(0, propertyCount(test_propertyCount, false));
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, propertyCount(test_propertyCount, false));
+        } else {
+          checkEqual(1, propertyCount(test_propertyCount, false));
+        }
 
         // other object Module
         if (parts.isModule(parts)) {
