@@ -329,6 +329,8 @@ You can now use the functions of the parts.js object.
   - add testFrame
 - Revive support wsh
   - use webpack.optimize.AggressiveSplittingPlugin
+  - update test_parts.js
+    - Same simple description as v7.6.0
 
 ### 9.2.0
 #### 2020/11/06(Fri)
