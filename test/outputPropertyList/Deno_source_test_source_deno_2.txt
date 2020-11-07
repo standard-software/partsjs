@@ -752,6 +752,11 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
+.test.testFrame.counter:[object Number]:number
+.test.testFrame.describeArray:[object Array]:object
+.test.testFrame.outputDescribe:[object Boolean]:boolean
+.test.testFrame.outputIt:[object Boolean]:boolean
+.test.testFrame.testName:[object String]:string
 .Today:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function

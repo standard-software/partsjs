@@ -223,6 +223,7 @@ export const isNotThrown = (targetFunc) => {
 };
 
 export default {
+  testFrame,
   checkEqual, checkCompare,
   describe, it, test, expect,
   isThrown, isThrownValue, isThrownException, isNotThrown,

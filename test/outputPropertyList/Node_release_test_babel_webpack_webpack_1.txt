@@ -1555,6 +1555,11 @@
 .default.parts.test.it:[object Function]:function
 .default.parts.test.test:[object Function]:function
 .default.parts.test.testCounter:[object Function]:function
+.default.parts.test.testFrame.counter:[object Number]:number
+.default.parts.test.testFrame.describeArray:[object Array]:object
+.default.parts.test.testFrame.outputDescribe:[object Boolean]:boolean
+.default.parts.test.testFrame.outputIt:[object Boolean]:boolean
+.default.parts.test.testFrame.testName:[object String]:string
 .default.parts.Today:[object Function]:function
 .default.parts.type.isArray:[object Function]:function
 .default.parts.type.isArrayAll:[object Function]:function
@@ -1996,6 +2001,11 @@
 .default.test.it:[object Function]:function
 .default.test.test:[object Function]:function
 .default.test.testCounter:[object Function]:function
+.default.test.testFrame.counter:[object Number]:number
+.default.test.testFrame.describeArray:[object Array]:object
+.default.test.testFrame.outputDescribe:[object Boolean]:boolean
+.default.test.testFrame.outputIt:[object Boolean]:boolean
+.default.test.testFrame.testName:[object String]:string
 .default.Today:[object Function]:function
 .default.type.isArray:[object Function]:function
 .default.type.isArrayAll:[object Function]:function
@@ -3398,6 +3408,11 @@
 .parts.test.it:[object Function]:function
 .parts.test.test:[object Function]:function
 .parts.test.testCounter:[object Function]:function
+.parts.test.testFrame.counter:[object Number]:number
+.parts.test.testFrame.describeArray:[object Array]:object
+.parts.test.testFrame.outputDescribe:[object Boolean]:boolean
+.parts.test.testFrame.outputIt:[object Boolean]:boolean
+.parts.test.testFrame.testName:[object String]:string
 .parts.Today:[object Function]:function
 .parts.type.isArray:[object Function]:function
 .parts.type.isArrayAll:[object Function]:function
@@ -3839,6 +3854,11 @@
 .test.it:[object Function]:function
 .test.test:[object Function]:function
 .test.testCounter:[object Function]:function
+.test.testFrame.counter:[object Number]:number
+.test.testFrame.describeArray:[object Array]:object
+.test.testFrame.outputDescribe:[object Boolean]:boolean
+.test.testFrame.outputIt:[object Boolean]:boolean
+.test.testFrame.testName:[object String]:string
 .Today:[object Function]:function
 .type.isArray:[object Function]:function
 .type.isArrayAll:[object Function]:function

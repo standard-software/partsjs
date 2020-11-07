@@ -52,7 +52,7 @@ export const test_execute_index = (parts) => {
         };
 
         const countArray =
-          [390, 19, 7, 259, 15, 11, 44, 35, 15, 90, 40, 68, 48, 1];
+          [390, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.common));
@@ -150,7 +150,8 @@ export const test_execute_index = (parts) => {
     });
   };
 
-  const { describe } = parts.test;
+  const { describe, testFrame } = parts.test;
+  testFrame.outputDescribe = false;
   describe('test_execute_index', () => {
 
     test_execute_common(parts);

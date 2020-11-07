@@ -325,6 +325,8 @@ You can now use the functions of the parts.js object.
 
 ### 10.0.0
 #### 2020/11/07(Sat)
+- update test output
+  - add testFrame
 
 ### 9.2.0
 #### 2020/11/06(Fri)
