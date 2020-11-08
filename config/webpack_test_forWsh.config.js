@@ -10,11 +10,6 @@ module.exports = {
     libraryTarget: 'umd',
     globalObject: 'this',
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
   plugins: [
     new webpack.optimize.AggressiveSplittingPlugin({
       minSize: 1000,
