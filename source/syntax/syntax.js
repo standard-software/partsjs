@@ -8,8 +8,8 @@ import canUseMapJs from './canUseMap.js';
 import canUseSetJs from './canUseSet.js';
 import _EnumJs from './_Enum.js';
 import EnumJs from './Enum.js';
-import _recursiveCallJs from './_recursiveCall.js';
-import recursiveCallJs from './recursiveCall.js';
+import _recursiveJs from './_recursive.js';
+import recursiveJs from './recursive.js';
 
 const syntaxJs = {
   ...assertJs,
@@ -22,8 +22,8 @@ const syntaxJs = {
   ...canUseSetJs,
   ..._EnumJs,
   ...EnumJs,
-  ..._recursiveCallJs,
-  ...recursiveCallJs,
+  ..._recursiveJs,
+  ...recursiveJs,
 };
 
 export const {
@@ -37,7 +37,7 @@ export const {
   canUseMap, canUseWeakMap,
   canUseSet, canUseWeakSet,
   Enum,
-  recursiveCall,
+  recursive,
 } = syntaxJs;
 
 export default {
@@ -51,5 +51,5 @@ export default {
   canUseMap, canUseWeakMap,
   canUseSet, canUseWeakSet,
   Enum,
-  recursiveCall,
+  recursive,
 };
