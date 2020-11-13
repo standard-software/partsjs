@@ -364,7 +364,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 107:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -842,7 +842,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 108:
+/***/ 106:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,11 +855,11 @@ exports["default"] = exports.isNotThrown = exports.isThrownException = exports.i
 
 var _type = __webpack_require__(5);
 
-var _array = __webpack_require__(61);
+var _array = __webpack_require__(59);
 
-var _string = __webpack_require__(109);
+var _string = __webpack_require__(107);
 
-var _compare = __webpack_require__(131);
+var _compare = __webpack_require__(129);
 
 var _platform = __webpack_require__(9);
 
@@ -1145,7 +1145,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 123:
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1158,7 +1158,7 @@ exports["default"] = exports.tagOuterFirst = exports._tagOuterFirst = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(109);
+var _string = __webpack_require__(107);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -1229,7 +1229,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 124:
+/***/ 122:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1242,11 +1242,11 @@ exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(109);
+var _string = __webpack_require__(107);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _tagOuterLast2 = __webpack_require__(125);
+var _tagOuterLast2 = __webpack_require__(123);
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
   var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
@@ -1299,7 +1299,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 125:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1312,7 +1312,7 @@ exports["default"] = exports.tagOuterLast = exports._tagOuterLast = void 0;
 
 var _isType = __webpack_require__(6);
 
-var _string = __webpack_require__(109);
+var _string = __webpack_require__(107);
 
 var _isObjectParameter = __webpack_require__(13);
 
@@ -2392,7 +2392,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.recursive = exports.recursiveCall = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports._recursiveCall = exports._Enum = exports._assert = void 0;
+exports["default"] = exports.recursive = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports._recursiveCall = exports._Enum = exports._assert = void 0;
 
 var _assert2 = _interopRequireDefault(__webpack_require__(42));
 
@@ -2414,13 +2414,9 @@ var _Enum2 = _interopRequireDefault(__webpack_require__(32));
 
 var _Enum3 = _interopRequireDefault(__webpack_require__(50));
 
-var _recursiveCall2 = _interopRequireDefault(__webpack_require__(51));
+var _recursive = _interopRequireDefault(__webpack_require__(51));
 
-var _recursiveCall3 = _interopRequireDefault(__webpack_require__(52));
-
-var _recursive = _interopRequireDefault(__webpack_require__(53));
-
-var _recursive2 = _interopRequireDefault(__webpack_require__(54));
+var _recursive2 = _interopRequireDefault(__webpack_require__(52));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -2430,7 +2426,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var syntaxJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _assert2["default"]), _guard["default"]), _sc["default"]), _if_["default"]), _switch_["default"]), _loop["default"]), _canUseMap["default"]), _canUseSet["default"]), _Enum2["default"]), _Enum3["default"]), _recursiveCall2["default"]), _recursiveCall3["default"]), _recursive["default"]), _recursive2["default"]);
+var syntaxJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _assert2["default"]), _guard["default"]), _sc["default"]), _if_["default"]), _switch_["default"]), _loop["default"]), _canUseMap["default"]), _canUseSet["default"]), _Enum2["default"]), _Enum3["default"]), _recursive["default"]), _recursive2["default"]);
 
 var _assert = syntaxJs._assert,
     _Enum = syntaxJs._Enum,
@@ -2446,10 +2442,8 @@ var _assert = syntaxJs._assert,
     canUseSet = syntaxJs.canUseSet,
     canUseWeakSet = syntaxJs.canUseWeakSet,
     Enum = syntaxJs.Enum,
-    recursiveCall = syntaxJs.recursiveCall,
     recursive = syntaxJs.recursive;
 exports.recursive = recursive;
-exports.recursiveCall = recursiveCall;
 exports.Enum = Enum;
 exports.canUseWeakSet = canUseWeakSet;
 exports.canUseSet = canUseSet;
@@ -2479,7 +2473,6 @@ var _default = {
   canUseSet: canUseSet,
   canUseWeakSet: canUseWeakSet,
   Enum: Enum,
-  recursiveCall: recursiveCall,
   recursive: recursive
 };
 exports["default"] = _default;
@@ -3452,128 +3445,6 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._recursiveCall = void 0;
-
-var _isType = __webpack_require__(6);
-
-var _loop = __webpack_require__(33);
-
-var _objectEntries2 = __webpack_require__(49);
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var _recursiveCall = function _recursiveCall(source, callFunc, runFunc) {
-  var recursiveCall_ = function recursiveCall_(value, level) {
-    if ((0, _isType.isObject)(value)) {
-      (0, _loop.__loop)((0, _objectEntries2._objectEntries)(value))(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            key = _ref2[0],
-            value = _ref2[1];
-
-        runFunc(value, key, level, source);
-        var result = callFunc(value, key, level, source);
-
-        if (!(0, _isType.isUndefined)(result)) {
-          recursiveCall_(result, level + 1);
-        }
-      });
-    } else if ((0, _isType.isArray)(value)) {
-      (0, _loop.__loop)(value)(function (value, index) {
-        runFunc(value, index, level, source);
-        var result = callFunc(value, index, level, source);
-
-        if (!(0, _isType.isUndefined)(result)) {
-          recursiveCall_(result, level + 1);
-        }
-      });
-    }
-  };
-
-  recursiveCall_(source, 0);
-};
-
-exports._recursiveCall = _recursiveCall;
-var _default = {
-  _recursiveCall: _recursiveCall
-};
-exports["default"] = _default;
-
-/***/ }),
-
-/***/ 52:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.recursiveCall = void 0;
-
-var _isType = __webpack_require__(6);
-
-var _isObjectParameter = __webpack_require__(13);
-
-var _recursiveCall2 = __webpack_require__(51);
-
-var recursiveCall = function recursiveCall(source, callFunc, runFunc) {
-  if ((0, _isObjectParameter.isObjectParameter)(source, 'source, callFunc, runFunc')) {
-    var _source = source;
-    source = _source.source;
-    callFunc = _source.callFunc;
-    runFunc = _source.runFunc;
-  } else if ((0, _isObjectParameter.isObjectParameter)(callFunc, 'callFunc, runFunc')) {
-    var _callFunc = callFunc;
-    callFunc = _callFunc.callFunc;
-    runFunc = _callFunc.runFunc;
-  } else if ((0, _isObjectParameter.isObjectParameter)(runFunc, 'runFunc')) {
-    var _runFunc = runFunc;
-    runFunc = _runFunc.runFunc;
-  }
-
-  if (!((0, _isType.isObject)(source) || (0, _isType.isArray)(source))) {
-    throw new TypeError('recursiveCall args source is not [object|array]');
-  }
-
-  if (!(0, _isType.isFunction)(callFunc)) {
-    throw new TypeError('recursiveCall args callFunc is not function');
-  }
-
-  if (!(0, _isType.isFunction)(runFunc)) {
-    throw new TypeError('recursiveCall args runFunc is not function');
-  }
-
-  return (0, _recursiveCall2._recursiveCall)(source, callFunc, runFunc);
-};
-
-exports.recursiveCall = recursiveCall;
-var _default = {
-  recursiveCall: recursiveCall
-};
-exports["default"] = _default;
-
-/***/ }),
-
-/***/ 53:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports["default"] = exports._recursive = void 0;
 
 var _isType = __webpack_require__(6);
@@ -3630,7 +3501,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 54:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3645,7 +3516,7 @@ var _isType = __webpack_require__(6);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _recursive2 = __webpack_require__(53);
+var _recursive2 = __webpack_require__(51);
 
 var recursive = function recursive(source, func) {
   if ((0, _isObjectParameter.isObjectParameter)(source, 'source, func')) {
