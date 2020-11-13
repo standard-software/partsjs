@@ -113,7 +113,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.platform = exports.common = exports.merge = exports.functionValue = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
 exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = void 0;
-exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.syntax = exports.recursiveCall = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports.test = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = void 0;
+exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.syntax = exports.recursive = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports.test = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = void 0;
 exports["default"] = exports.parts = exports.date = exports.Today = exports.array = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.object = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.string = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.matchFormat = exports.replaceAll = exports.isUpperCase = exports.isLowerCase = exports.number = exports.makeInRange = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.convert = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.compare = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.allMatchAll = void 0;
 
 var _polyfill = _interopRequireDefault(__webpack_require__(2));
@@ -154,7 +154,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '9.2.0';
+var VERSION = '10.0.0';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -752,8 +752,8 @@ var assert = _syntax["default"].assert,
     canUseSet = _syntax["default"].canUseSet,
     canUseWeakSet = _syntax["default"].canUseWeakSet,
     Enum = _syntax["default"].Enum,
-    recursiveCall = _syntax["default"].recursiveCall;
-exports.recursiveCall = recursiveCall;
+    recursive = _syntax["default"].recursive;
+exports.recursive = recursive;
 exports.Enum = Enum;
 exports.canUseWeakSet = canUseWeakSet;
 exports.canUseSet = canUseSet;
@@ -777,7 +777,7 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   canUseSet: canUseSet,
   canUseWeakSet: canUseWeakSet,
   Enum: Enum,
-  recursiveCall: recursiveCall
+  recursive: recursive
 });
 
 var syntax = _objectSpread({}, _syntax["default"]);
@@ -7285,7 +7285,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.recursiveCall = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports._recursiveCall = exports._Enum = exports._assert = void 0;
+exports["default"] = exports.recursive = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports._recursiveCall = exports._Enum = exports._assert = void 0;
 
 var _assert2 = _interopRequireDefault(__webpack_require__(42));
 
@@ -7307,9 +7307,9 @@ var _Enum2 = _interopRequireDefault(__webpack_require__(32));
 
 var _Enum3 = _interopRequireDefault(__webpack_require__(50));
 
-var _recursiveCall2 = _interopRequireDefault(__webpack_require__(51));
+var _recursive = _interopRequireDefault(__webpack_require__(51));
 
-var _recursiveCall3 = _interopRequireDefault(__webpack_require__(52));
+var _recursive2 = _interopRequireDefault(__webpack_require__(52));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -7319,7 +7319,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var syntaxJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _assert2["default"]), _guard["default"]), _sc["default"]), _if_["default"]), _switch_["default"]), _loop["default"]), _canUseMap["default"]), _canUseSet["default"]), _Enum2["default"]), _Enum3["default"]), _recursiveCall2["default"]), _recursiveCall3["default"]);
+var syntaxJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _assert2["default"]), _guard["default"]), _sc["default"]), _if_["default"]), _switch_["default"]), _loop["default"]), _canUseMap["default"]), _canUseSet["default"]), _Enum2["default"]), _Enum3["default"]), _recursive["default"]), _recursive2["default"]);
 
 var _assert = syntaxJs._assert,
     _Enum = syntaxJs._Enum,
@@ -7335,8 +7335,8 @@ var _assert = syntaxJs._assert,
     canUseSet = syntaxJs.canUseSet,
     canUseWeakSet = syntaxJs.canUseWeakSet,
     Enum = syntaxJs.Enum,
-    recursiveCall = syntaxJs.recursiveCall;
-exports.recursiveCall = recursiveCall;
+    recursive = syntaxJs.recursive;
+exports.recursive = recursive;
 exports.Enum = Enum;
 exports.canUseWeakSet = canUseWeakSet;
 exports.canUseSet = canUseSet;
@@ -7366,7 +7366,7 @@ var _default = {
   canUseSet: canUseSet,
   canUseWeakSet: canUseWeakSet,
   Enum: Enum,
-  recursiveCall: recursiveCall
+  recursive: recursive
 };
 exports["default"] = _default;
 
@@ -7912,7 +7912,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._recursiveCall = void 0;
+exports["default"] = exports._recursive = void 0;
 
 var _isType = __webpack_require__(6);
 
@@ -7932,39 +7932,37 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var _recursiveCall = function _recursiveCall(source, callFunc, runFunc) {
-  var recursiveCall_ = function recursiveCall_(value, level) {
+var _recursive = function _recursive(source, func) {
+  var recursive_ = function recursive_(value, level) {
     if ((0, _isType.isObject)(value)) {
       (0, _loop.__loop)((0, _objectEntries2._objectEntries)(value))(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             value = _ref2[1];
 
-        runFunc(value, key, level, source);
-        var result = callFunc(value, key, level, source);
+        var result = func(value, key, level, source);
 
-        if (!(0, _isType.isUndefined)(result)) {
-          recursiveCall_(result, level + 1);
+        if (!((0, _isType.isUndefined)(result) || result === false)) {
+          recursive_(result, level + 1);
         }
       });
     } else if ((0, _isType.isArray)(value)) {
       (0, _loop.__loop)(value)(function (value, index) {
-        runFunc(value, index, level, source);
-        var result = callFunc(value, index, level, source);
+        var result = func(value, index, level, source);
 
-        if (!(0, _isType.isUndefined)(result)) {
-          recursiveCall_(result, level + 1);
+        if (!((0, _isType.isUndefined)(result) || result === false)) {
+          recursive_(result, level + 1);
         }
       });
     }
   };
 
-  recursiveCall_(source, 0);
+  recursive_(source, 0);
 };
 
-exports._recursiveCall = _recursiveCall;
+exports._recursive = _recursive;
 var _default = {
-  _recursiveCall: _recursiveCall
+  _recursive: _recursive
 };
 exports["default"] = _default;
 
@@ -7978,47 +7976,38 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.recursiveCall = void 0;
+exports["default"] = exports.recursive = void 0;
 
 var _isType = __webpack_require__(6);
 
 var _isObjectParameter = __webpack_require__(13);
 
-var _recursiveCall2 = __webpack_require__(51);
+var _recursive2 = __webpack_require__(51);
 
-var recursiveCall = function recursiveCall(source, callFunc, runFunc) {
-  if ((0, _isObjectParameter.isObjectParameter)(source, 'source, callFunc, runFunc')) {
+var recursive = function recursive(source, func) {
+  if ((0, _isObjectParameter.isObjectParameter)(source, 'source, func')) {
     var _source = source;
     source = _source.source;
-    callFunc = _source.callFunc;
-    runFunc = _source.runFunc;
-  } else if ((0, _isObjectParameter.isObjectParameter)(callFunc, 'callFunc, runFunc')) {
-    var _callFunc = callFunc;
-    callFunc = _callFunc.callFunc;
-    runFunc = _callFunc.runFunc;
-  } else if ((0, _isObjectParameter.isObjectParameter)(runFunc, 'runFunc')) {
-    var _runFunc = runFunc;
-    runFunc = _runFunc.runFunc;
+    func = _source.func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(func, 'func')) {
+    var _func = func;
+    func = _func.func;
   }
 
   if (!((0, _isType.isObject)(source) || (0, _isType.isArray)(source))) {
-    throw new TypeError('recursiveCall args source is not [object|array]');
+    throw new TypeError('recursive args source is not [object|array]');
   }
 
-  if (!(0, _isType.isFunction)(callFunc)) {
-    throw new TypeError('recursiveCall args callFunc is not function');
+  if (!(0, _isType.isFunction)(func)) {
+    throw new TypeError('recursive args func is not function');
   }
 
-  if (!(0, _isType.isFunction)(runFunc)) {
-    throw new TypeError('recursiveCall args runFunc is not function');
-  }
-
-  return (0, _recursiveCall2._recursiveCall)(source, callFunc, runFunc);
+  return (0, _recursive2._recursive)(source, func);
 };
 
-exports.recursiveCall = recursiveCall;
+exports.recursive = recursive;
 var _default = {
-  recursiveCall: recursiveCall
+  recursive: recursive
 };
 exports["default"] = _default;
 
@@ -10400,7 +10389,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  * SortFunc
  */
 var _SortFunc = function _SortFunc(orderSettingArray) {
-  var sortFuncArray = orderSettingArray.map(function (_ref) {
+  var sortFuncArray = (0, _map2._map)(orderSettingArray, function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         orderFunc = _ref2[0],
         _ref2$ = _ref2[1],
@@ -13009,6 +12998,7 @@ var isNotThrown = function isNotThrown(targetFunc) {
 
 exports.isNotThrown = isNotThrown;
 var _default = {
+  testFrame: testFrame,
   checkEqual: checkEqual,
   checkCompare: checkCompare,
   describe: describe,

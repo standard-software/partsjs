@@ -184,7 +184,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [390, 19, 7, 259, 15, 11, 44, 35, 15, 90, 40, 68, 48, 1];
+        var countArray = [390, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.common));
@@ -255,7 +255,10 @@ var test_execute_index = function test_execute_index(parts) {
     });
   };
 
-  var describe = parts.test.describe;
+  var _parts$test3 = parts.test,
+      describe = _parts$test3.describe,
+      testFrame = _parts$test3.testFrame;
+  testFrame.outputDescribe = false;
   describe('test_execute_index', function () {
     (0, _commonTest.test_execute_common)(parts);
     (0, _typeTest.test_execute_type)(parts);
@@ -3492,7 +3495,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         canUseSet = _parts$syntax.canUseSet,
         canUseWeakSet = _parts$syntax.canUseWeakSet,
         Enum = _parts$syntax.Enum,
-        recursiveCall = _parts$syntax.recursiveCall;
+        recursive = _parts$syntax.recursive;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -4438,8 +4441,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
-    var test_recursiveCall = function test_recursiveCall() {
-      it('test_recursiveCall', function () {
+    var test_recursive = function test_recursive() {
+      it('test_recursive', function () {
         var data = [{
           'id': 1,
           'name': 'folderA',
@@ -4466,15 +4469,13 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]
         }];
         var message = '';
-        recursiveCall(data, function (value, key, level, source) {
+        recursive(data, function (value, key, level, source) {
           checkEqual(data, source);
+          message += "".concat(key, ":").concat(value.name, " ");
 
           if ('folder' in value) {
             return value.folder;
           }
-        }, function (value, key, level, source) {
-          checkEqual(data, source);
-          message += "".concat(key, ":").concat(value.name, " ");
         });
         checkEqual('0:folderA 0:folderA-2 1:folderA-3 ' + '1:folderB 2:folderC 0:folderC-1 0:folderC-1-1 ', message);
         var testObject = {
@@ -4491,27 +4492,29 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]]
         };
         var message = '';
-        recursiveCall(testObject, function (value, key) {
+        recursive(testObject, function (value, key) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+
           if (isObject(value)) {
             return value;
           }
-        }, function (value, key) {
-          message += "".concat(key, ":").concat(_typeof(value), " ");
         });
         checkEqual('a:number b:number c:object d:number e:object f:number g:object ', message);
         var message = '';
-        recursiveCall(testObject, function (value, key) {
+        recursive(testObject, function (value, key) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+
           if (isObject(value)) {
             return value;
           } else if (Array.isArray(value)) {
             return value;
           }
-        }, function (value, key) {
-          message += "".concat(key, ":").concat(_typeof(value), " ");
         });
         checkEqual('a:number b:number c:object d:number e:object f:number ' + 'g:object 0:number 1:object 0:object h:number ', message);
         var message = '';
-        recursiveCall(testObject, function (value, key, level) {
+        recursive(testObject, function (value, key, level) {
+          message += "".concat(key, ":").concat(_typeof(value), " ");
+
           if (1 <= level) {
             return;
           }
@@ -4521,8 +4524,6 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           } else if (Array.isArray(value)) {
             return value;
           }
-        }, function (value, key) {
-          message += "".concat(key, ":").concat(_typeof(value), " ");
         });
         checkEqual('a:number b:number c:object d:number e:object ' + 'g:object 0:number 1:object ', message);
         var data = {
@@ -4563,24 +4564,147 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]
         };
         var messages = [];
-        recursiveCall(data.children, function (value, key) {
-          if ('children' in value) {
-            return value.children;
-          }
-        }, function (value, key, level) {
+        recursive(data.children, function (value, key, level) {
           messages.push({
             name: value.name,
             level: level
           });
+
+          if ('children' in value) {
+            return value.children;
+          }
         });
         var SortFunc = parts.array.SortFunc;
         messages.sort(SortFunc([[SortFunc.order.normal.ascending, function (v) {
           return v.level;
         }]]));
-        var message = messages.map(function (v) {
+        var message = parts.array.map(messages, function (v) {
           return "name:".concat(v.name);
         }).join(' ');
         checkEqual('name:test01 name:test02 name:test03 name:test04 name:test05 name:test06', message);
+        var data = [{
+          id: 0,
+          parent: null
+        }, {
+          id: 1,
+          parent: 0
+        }, {
+          id: 2,
+          parent: 0
+        }, {
+          id: 3,
+          parent: 1
+        }, {
+          id: 4,
+          parent: 1
+        }, {
+          id: 5,
+          parent: 2
+        }];
+        var output = [{
+          id: 0,
+          children: [{
+            id: 1,
+            children: [{
+              id: 3,
+              children: []
+            }, {
+              id: 4,
+              children: []
+            }]
+          }, {
+            id: 2,
+            children: [{
+              id: 5,
+              children: []
+            }]
+          }]
+        }];
+        var result = [];
+        result.push({
+          id: data[0].id,
+          children: []
+        });
+
+        var _iterator2 = _createForOfIteratorHelper(data),
+            _step2;
+
+        try {
+          var _loop = function _loop() {
+            var dataItem = _step2.value;
+            parts.syntax.recursive(result, function (item) {
+              if (item.id === dataItem.parent) {
+                item.children.push({
+                  id: dataItem.id,
+                  children: []
+                });
+              } else {
+                return item.children;
+              }
+            });
+          };
+
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            _loop();
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+
+        checkEqual(output, result); // same logic no use parts.syntax.recursive
+
+        var result = [];
+        result.push({
+          id: data[0].id,
+          children: []
+        });
+
+        var _iterator3 = _createForOfIteratorHelper(data),
+            _step3;
+
+        try {
+          var _loop2 = function _loop2() {
+            var dataItem = _step3.value;
+
+            var f = function f(array) {
+              var _iterator4 = _createForOfIteratorHelper(array),
+                  _step4;
+
+              try {
+                for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                  var item = _step4.value;
+
+                  if (item.id === dataItem.parent) {
+                    item.children.push({
+                      id: dataItem.id,
+                      children: []
+                    });
+                  } else {
+                    f(item.children);
+                  }
+                }
+              } catch (err) {
+                _iterator4.e(err);
+              } finally {
+                _iterator4.f();
+              }
+            };
+
+            f(result);
+          };
+
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            _loop2();
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+
+        checkEqual(output, result);
       });
     };
 
@@ -4595,7 +4719,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_canUseSet();
     test_canUseWeakSet();
     test_Enum();
-    test_recursiveCall();
+    test_recursive();
   });
 };
 
@@ -12444,7 +12568,13 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(0, propertyCount({}, false)); // other object function
 
         checkEqual(0, propertyCount(test_propertyCount));
-        checkEqual(0, propertyCount(test_propertyCount, false)); // other object Module
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, propertyCount(test_propertyCount, false));
+        } else {
+          checkEqual(1, propertyCount(test_propertyCount, false));
+        } // other object Module
+
 
         if (parts.isModule(parts)) {
           checkEqual(true, 0 !== propertyCount(parts));
@@ -13072,20 +13202,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = exports.test_execute_array = void 0;
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 /* eslint-disable max-len */
 
@@ -15369,10 +15485,10 @@ var test_execute_array = function test_execute_array(parts) {
         }], [SortFunc.order.normal.descending, function (v) {
           return v.age;
         }]]));
-        checkEqual(['a', 'b', 'c', 'c'], sortedUserList.map(function (v) {
+        checkEqual(['a', 'b', 'c', 'c'], parts.array.map(sortedUserList, function (v) {
           return v.name;
         }));
-        checkEqual([20, 20, 21, 20], sortedUserList.map(function (v) {
+        checkEqual([20, 20, 21, 20], parts.array.map(sortedUserList, function (v) {
           return v.age;
         }));
         var sortedUserList = [].concat(userList).sort(SortFunc([[SortFunc.order.normal.descending, function (v) {
@@ -15380,10 +15496,10 @@ var test_execute_array = function test_execute_array(parts) {
         }], [SortFunc.order.normal.ascending, function (v) {
           return v.age;
         }]]));
-        checkEqual(['c', 'c', 'b', 'a'], sortedUserList.map(function (v) {
+        checkEqual(['c', 'c', 'b', 'a'], parts.array.map(sortedUserList, function (v) {
           return v.name;
         }));
-        checkEqual([20, 21, 20, 20], sortedUserList.map(function (v) {
+        checkEqual([20, 21, 20, 20], parts.array.map(sortedUserList, function (v) {
           return v.age;
         }));
         checkEqual(false, isThrown(function () {
@@ -15413,9 +15529,7 @@ var test_execute_array = function test_execute_array(parts) {
         var unsortedList = ['a', 'B', 'A', 'b', 'aa', 'Aa', 'AA', 'aA', 'aB', 'ab', 'Ab', 'AB'];
         var sortedList = [].concat(unsortedList).sort(SortFunc.order.dictionaryUpperCase.ascending);
         checkEqual(['A', 'a', 'AA', 'Aa', 'aA', 'aa', 'AB', 'Ab', 'aB', 'ab', 'B', 'b'], sortedList);
-        var sortedList = [].concat(unsortedList).sort(SortFunc.order.dictionaryUpperCase.descending, function (v) {
-          return v;
-        });
+        var sortedList = [].concat(unsortedList).sort(SortFunc.order.dictionaryUpperCase.descending);
         checkEqual(['b', 'B', 'ab', 'aB', 'Ab', 'AB', 'aa', 'aA', 'Aa', 'AA', 'a', 'A'], sortedList);
         var sortedList = [].concat(unsortedList).sort(SortFunc([[SortFunc.order.dictionaryUpperCase.ascending, function (v) {
           return v;
@@ -15501,7 +15615,7 @@ var test_execute_array = function test_execute_array(parts) {
               revision = _i$version.revision;
           return major + minor + build + revision;
         }]]));
-        checkEqual(['a', 'e', 'd', 'c', 'b'], sortedItems.map(function (i) {
+        checkEqual(['a', 'e', 'd', 'c', 'b'], parts.array.map(sortedItems, function (i) {
           return i.name;
         }));
         var sortedItems = [].concat(items).sort(SortFunc([[SortFunc.order.version.descending, function (i) {
@@ -15512,7 +15626,7 @@ var test_execute_array = function test_execute_array(parts) {
               revision = _i$version2.revision;
           return major + minor + build + revision;
         }]]));
-        checkEqual(['b', 'c', 'd', 'e', 'a'], sortedItems.map(function (i) {
+        checkEqual(['b', 'c', 'd', 'e', 'a'], parts.array.map(sortedItems, function (i) {
           return i.name;
         }));
       });
@@ -15533,25 +15647,13 @@ var test_execute_array = function test_execute_array(parts) {
         }
 
         var arrayEntries = function arrayEntries(array) {
-          var result = [];
+          var result = []; // for (const [i, v] of array.entries()) {
+          //   result.push([i,v]);
+          // }
 
-          var _iterator = _createForOfIteratorHelper(array.entries()),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var _step$value = _slicedToArray(_step.value, 2),
-                  i = _step$value[0],
-                  v = _step$value[1];
-
-              result.push([i, v]);
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-
+          parts.loop(array)(function (v, i) {
+            result.push([i, v]);
+          });
           return result;
         };
 
