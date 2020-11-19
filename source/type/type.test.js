@@ -154,6 +154,7 @@ export const test_execute_type = (parts) => {
         checkType('object',    '[object Array]',      new Array());
         checkType('object',    '[object RegExp]',     /^a/);
         checkType('object',    '[object RegExp]',     new RegExp('^a'));
+        checkType('object',    '[object Date]',       new Date());
         checkType('object',    '[object Math]',       Math);
 
         if (parts.platform.isWindowsScriptHost()) {
