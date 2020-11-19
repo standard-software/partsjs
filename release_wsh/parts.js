@@ -1415,6 +1415,444 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ 151:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.wsh = exports.consoleHook = void 0;
+
+var _consoleHook = _interopRequireDefault(__webpack_require__(152));
+
+var _wsh = _interopRequireDefault(__webpack_require__(153));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var consoleHook = _consoleHook["default"];
+exports.consoleHook = consoleHook;
+var wsh = _wsh["default"];
+exports.wsh = wsh;
+var _default = {
+  consoleHook: consoleHook,
+  wsh: wsh
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 152:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.acceptDebug = exports.acceptError = exports.acceptWarn = exports.acceptInfo = exports.acceptLog = exports.accept = exports._accept = exports.unHookDebug = exports.unHookError = exports.unHookWarn = exports.unHookInfo = exports.unHookLog = exports.unHook = exports._unHook = exports.hookDebug = exports.hookError = exports.hookWarn = exports.hookInfo = exports.hookLog = exports.hook = exports._hook = exports.original = void 0;
+
+var _type = __webpack_require__(5);
+
+var _compare = __webpack_require__(129);
+
+var _array = __webpack_require__(59);
+
+var original = {};
+exports.original = original;
+original.log = console.log;
+original.info = console.info;
+original.warn = console.warn;
+original.error = console.error;
+original.debug = console.debug;
+
+var _hook = function _hook(methodName, hookFunc) {
+  console[methodName] = hookFunc;
+};
+
+exports._hook = _hook;
+
+var hook = function hook(methodName) {
+  var hookFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  if (!(0, _compare._or)(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new TypeError('hook args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  if (!(0, _type.isFunction)(hookFunc)) {
+    throw new TypeError('hook args(hookFunc) is not function');
+  }
+
+  _hook(methodName, hookFunc);
+};
+
+exports.hook = hook;
+
+var hookLog = function hookLog(hookFunc) {
+  hook('log', hookFunc);
+};
+
+exports.hookLog = hookLog;
+
+var hookInfo = function hookInfo(hookFunc) {
+  hook('info', hookFunc);
+};
+
+exports.hookInfo = hookInfo;
+
+var hookWarn = function hookWarn(hookFunc) {
+  hook('warn', hookFunc);
+};
+
+exports.hookWarn = hookWarn;
+
+var hookError = function hookError(hookFunc) {
+  hook('error', hookFunc);
+};
+
+exports.hookError = hookError;
+
+var hookDebug = function hookDebug(hookFunc) {
+  hook('debug', hookFunc);
+};
+
+exports.hookDebug = hookDebug;
+
+var _unHook = function _unHook(methodName) {
+  console[methodName] = original[methodName];
+};
+
+exports._unHook = _unHook;
+
+var unHook = function unHook(methodName) {
+  if (!(0, _compare._or)(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new TypeError('unHook args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  _unHook(methodName);
+};
+
+exports.unHook = unHook;
+
+var unHookLog = function unHookLog() {
+  unHook('log');
+};
+
+exports.unHookLog = unHookLog;
+
+var unHookInfo = function unHookInfo() {
+  unHook('info');
+};
+
+exports.unHookInfo = unHookInfo;
+
+var unHookWarn = function unHookWarn() {
+  unHook('warn');
+};
+
+exports.unHookWarn = unHookWarn;
+
+var unHookError = function unHookError() {
+  unHook('error');
+};
+
+exports.unHookError = unHookError;
+
+var unHookDebug = function unHookDebug() {
+  unHook('debug');
+};
+
+exports.unHookDebug = unHookDebug;
+
+var _accept = function _accept(methodName, acceptArray, rejectArray, hookFunc) {
+  _hook(methodName, function () {
+    for (var _len = arguments.length, messageArgs = new Array(_len), _key = 0; _key < _len; _key++) {
+      messageArgs[_key] = arguments[_key];
+    }
+
+    var messageArgsAll = (0, _array.map)(messageArgs, function (value) {
+      return String(value);
+    }).join(' ');
+    var acceptFlag = acceptArray.length === 0;
+
+    if (acceptFlag === false) {
+      acceptFlag = (0, _compare._includesSome)(messageArgsAll, acceptArray);
+    }
+
+    if (acceptFlag && (0, _type.isArray)(rejectArray)) {
+      acceptFlag = !(0, _compare._includesSome)(messageArgsAll, rejectArray);
+    }
+
+    if (acceptFlag) {
+      hookFunc.apply(void 0, messageArgs);
+    }
+  });
+};
+
+exports._accept = _accept;
+
+var accept = function accept(methodName, acceptArray, rejectArray, hookFunc) {
+  if (!(0, _compare._or)(methodName, ['log', 'info', 'warn', 'error', 'debug'])) {
+    throw new TypeError('accept args(methodName) is not [log|info|warn|error|debug]');
+  }
+
+  if (!(0, _type.isArray)(acceptArray)) {
+    throw new TypeError('accept args(acceptArray) is not array');
+  }
+
+  if (!((0, _type.isUndefined)(rejectArray) || (0, _type.isArray)(rejectArray))) {
+    throw new TypeError('accept args(rejectArray) is not array');
+  }
+
+  if (!(0, _type.isFunction)(hookFunc)) {
+    throw new TypeError('accept args(hookFunc) is not function');
+  }
+
+  _accept(methodName, acceptArray, rejectArray, hookFunc);
+};
+
+exports.accept = accept;
+
+var acceptLog = function acceptLog(acceptArray, rejectArray) {
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.log;
+  accept('log', acceptArray, rejectArray, hookFunc);
+};
+
+exports.acceptLog = acceptLog;
+
+var acceptInfo = function acceptInfo(acceptArray, rejectArray) {
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.info;
+  accept('info', acceptArray, rejectArray, hookFunc);
+};
+
+exports.acceptInfo = acceptInfo;
+
+var acceptWarn = function acceptWarn(acceptArray, rejectArray) {
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.warn;
+  accept('warn', acceptArray, rejectArray, hookFunc);
+};
+
+exports.acceptWarn = acceptWarn;
+
+var acceptError = function acceptError(acceptArray, rejectArray) {
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.error;
+  accept('error', acceptArray, rejectArray, hookFunc);
+};
+
+exports.acceptError = acceptError;
+
+var acceptDebug = function acceptDebug(acceptArray, rejectArray) {
+  var hookFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : original.debug;
+  accept('debug', acceptArray, rejectArray, hookFunc);
+};
+
+exports.acceptDebug = acceptDebug;
+var _default = {
+  _hook: _hook,
+  hook: hook,
+  hookLog: hookLog,
+  hookInfo: hookInfo,
+  hookWarn: hookWarn,
+  hookError: hookError,
+  hookDebug: hookDebug,
+  _unHook: _unHook,
+  unHook: unHook,
+  unHookLog: unHookLog,
+  unHookInfo: unHookInfo,
+  unHookWarn: unHookWarn,
+  unHookError: unHookError,
+  unHookDebug: unHookDebug,
+  accept: accept,
+  acceptLog: acceptLog,
+  acceptInfo: acceptInfo,
+  acceptWarn: acceptWarn,
+  acceptError: acceptError,
+  acceptDebug: acceptDebug
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 153:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
+
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(154));
+
+var _wshShell = _interopRequireDefault(__webpack_require__(155));
+
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(156));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var wshJs = _objectSpread(_objectSpread(_objectSpread({}, _wshFileSystemObject["default"]), _wshShell["default"]), _forceCreateFolder["default"]);
+
+var FileSystemObject = wshJs.FileSystemObject,
+    Shell = wshJs.Shell,
+    forceCreateFolder = wshJs.forceCreateFolder;
+exports.forceCreateFolder = forceCreateFolder;
+exports.Shell = Shell;
+exports.FileSystemObject = FileSystemObject;
+var _default = {
+  FileSystemObject: FileSystemObject,
+  Shell: Shell,
+  forceCreateFolder: forceCreateFolder
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 154:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.FileSystemObject = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _platform = __webpack_require__(9);
+
+var _fso;
+
+var FileSystemObject = function FileSystemObject() {
+  if (!(0, _platform.isWindowsScriptHost)()) {
+    throw new Error('wsh.FileSystemObject can be used only in wsh platform');
+  }
+
+  if (!(this instanceof FileSystemObject)) {
+    return new FileSystemObject();
+  }
+
+  if ((0, _isType.isUndefined)(_fso)) {
+    _fso = new ActiveXObject('Scripting.FileSystemObject');
+  }
+
+  return _fso;
+};
+
+exports.FileSystemObject = FileSystemObject;
+var _default = {
+  FileSystemObject: FileSystemObject
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 155:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.Shell = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _platform = __webpack_require__(9);
+
+var _shell;
+
+var Shell = function Shell() {
+  if (!(0, _platform.isWindowsScriptHost)()) {
+    throw new Error('wsh.Shell can be used only in wsh platform');
+  }
+
+  if (!(this instanceof Shell)) {
+    return new Shell();
+  }
+
+  if ((0, _isType.isUndefined)(_shell)) {
+    _shell = new ActiveXObject('WScript.Shell');
+  }
+
+  return _shell;
+};
+
+exports.Shell = Shell;
+var _default = {
+  Shell: Shell
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 156:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.forceCreateFolder = exports._forceCreateFolder = void 0;
+
+var _isType = __webpack_require__(6);
+
+var _platform = __webpack_require__(9);
+
+var _wshFileSystemObject = __webpack_require__(154);
+
+var _forceCreateFolder = function _forceCreateFolder(folderPath) {
+  var fso = (0, _wshFileSystemObject.FileSystemObject)();
+  var parentFolderPath = fso.GetParentFolderName(folderPath);
+
+  if (!fso.FolderExists(parentFolderPath)) {
+    _forceCreateFolder(parentFolderPath);
+  }
+
+  if (!fso.FolderExists(folderPath)) {
+    fso.CreateFolder(folderPath);
+  }
+};
+
+exports._forceCreateFolder = _forceCreateFolder;
+
+var forceCreateFolder = function forceCreateFolder(folderPath) {
+  if (!(0, _platform.isWindowsScriptHost)()) {
+    throw new Error('wsh.forceCreateFolder can be used only in wsh platform');
+  }
+
+  if (!(0, _isType.isString)(folderPath)) {
+    throw new Error('forceCreateFolder args(folderPath) is not string');
+  }
+
+  return _forceCreateFolder(folderPath);
+};
+
+exports.forceCreateFolder = forceCreateFolder;
+var _default = {
+  _forceCreateFolder: _forceCreateFolder,
+  forceCreateFolder: forceCreateFolder
+};
+exports["default"] = _default;
+
+/***/ }),
+
 /***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 

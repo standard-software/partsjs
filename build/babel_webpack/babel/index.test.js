@@ -27,7 +27,7 @@ var _arrayTest = require("./array/array.test.js");
 
 var _dateTest = require("./date/date.test.js");
 
-var _consoleHookTest = require("./consoleHook/consoleHook.test.js");
+var _consoleHookTest = require("./system/consoleHook/consoleHook.test.js");
 
 var _otherTest = require("./other/other.test.js");
 
@@ -76,7 +76,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [390, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
+        var countArray = [391, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
         checkEqual(countArray.shift(), propertyCountForParts(parts));
         checkEqual(countArray.shift(), propertyCount(parts.platform));
         checkEqual(countArray.shift(), propertyCount(parts.common));
@@ -164,6 +164,7 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _arrayTest.test_execute_array)(parts);
     (0, _dateTest.test_execute_date)(parts);
     (0, _otherTest.test_execute_other)(parts);
+    (0, _consoleHookTest.test_execute_consoleHook)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
     console.log('test finish');
