@@ -3,15 +3,15 @@ import {
   isBoolean, isNumber, isInteger, isString,
   isFunction, isObject, isArray, isDate, isRegExp,
   isException,
-} from '../type/type.js';
+} from '../../type/type.js';
 
 import {
   _or, _includes, _includesSome, _includesAll,
-} from '../compare/compare.js';
+} from '../../compare/compare.js';
 
 import {
   map,
-} from '../array/array.js';
+} from '../../array/array.js';
 
 export const original = {};
 original.log = console.log;

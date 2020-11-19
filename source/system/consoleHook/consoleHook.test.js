@@ -11,7 +11,7 @@ export const test_execute_consoleHook = (parts) => {
 
     const {
       consoleHook,
-    } = parts;
+    } = parts.system;
 
     const test_consoleHook = (methodName) => {
       it('test_consoleHook' + ' ' + methodName, () => {

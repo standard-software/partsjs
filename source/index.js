@@ -13,6 +13,7 @@ import stringJs from './string/string.js';
 import objectJs from './object/object.js';
 import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
+import systemJs from './system/system.js';
 
 export const VERSION = '10.1.0 beta 1';
 
@@ -505,6 +506,13 @@ export const date = {
 };
 
 /**
+ * system
+ */
+export const system = {
+  ...systemJs,
+};
+
+/**
  * parts
  */
 export const parts = {
@@ -521,6 +529,7 @@ export const parts = {
   object,
   array,
   date,
+  system,
   ...rootAlias,
 };
 

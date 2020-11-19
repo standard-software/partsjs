@@ -325,6 +325,12 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 10.1.0
+#### 2020/11/19(Thu)
+- add namespace system
+  - revive system.consoleHook
+  - revive system.wsh
+
 ### 10.0.0
 #### 2020/11/13(Fri)
 - update test output
@@ -385,18 +391,6 @@ You can now use the functions of the parts.js object.
 - update cloneDeep.js
   - _cloneDeep.js / cloneDeep.js
 - add paddingFirst / paddingLast
-
-### 8.4.0
-#### 2020/10/21(Wed)
-- update url version info
-- update _propertyList
-  - args add func
-- rename
-  - returnValueFunction >> __returnValueFunction
-- update objectEntries arrayEntries
-  - delete object parameter
-- add _objectFromEntries.js objectFromEntries.js
-- add _merge.js merge.js
 
 ### More Info
 [VERSION.md](./VERSION.md)

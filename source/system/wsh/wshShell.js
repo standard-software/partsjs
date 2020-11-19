@@ -8,11 +8,11 @@ import {
   isDate, isRegExp,
   isBooleanObject, isNumberObject, isStringObject,
   isEmptyObject, isEmptyArray,
-} from '../type/isType.js';
+} from '../../type/isType.js';
 
 import {
   isWindowsScriptHost,
-} from '../platform/platform.js';
+} from '../../platform/platform.js';
 
 let _shell;
 

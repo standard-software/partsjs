@@ -9,7 +9,7 @@ import { test_execute_string      } from './string/string.test.js';
 import { test_execute_object      } from './object/object.test.js';
 import { test_execute_array       } from './array/array.test.js';
 import { test_execute_date        } from './date/date.test.js';
-import { test_execute_consoleHook } from './consoleHook/consoleHook.test.js';
+import { test_execute_consoleHook } from './system/consoleHook/consoleHook.test.js';
 import { test_execute_other       } from './other/other.test.js';
 
 export const test_execute_index = (parts) => {
@@ -52,7 +52,7 @@ export const test_execute_index = (parts) => {
         };
 
         const countArray =
-          [390, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
+          [391, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
         checkEqual(countArray.shift(),  propertyCountForParts(parts));
         checkEqual(countArray.shift(),  propertyCount(parts.platform));
         checkEqual(countArray.shift(),  propertyCount(parts.common));
@@ -166,6 +166,7 @@ export const test_execute_index = (parts) => {
     test_execute_array(parts);
     test_execute_date(parts);
     test_execute_other(parts);
+    test_execute_consoleHook(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
 
