@@ -17,7 +17,7 @@ import {
 /**
  * IntegerArray
  */
-export const _IntegerArray = (start, end, increment) => {
+export const _IntegerArray = function(start, end, increment) {
   return _NumberArray(start, end, increment);
 };
 

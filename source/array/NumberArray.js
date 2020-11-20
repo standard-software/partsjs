@@ -21,7 +21,7 @@ import {
 /**
  * NumberArray
  */
-export const NumberArray = (start, end, increment) => {
+export const NumberArray = function(start, end, increment) {
 
   if (isObjectParameter(start, 'count')) {
     ({ count: start } = start);

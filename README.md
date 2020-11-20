@@ -326,10 +326,12 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.1.0
-#### 2020/11/19(Thu)
+#### 2020/11/21(Sat)
 - add namespace system
   - revive system.consoleHook
   - revive system.wsh
+- update NumberArray IntegerArray
+  - can new NumberArray
 
 ### 10.0.0
 #### 2020/11/13(Fri)

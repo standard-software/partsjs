@@ -83,6 +83,10 @@ export const test_execute_array = (parts) => {
         checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0)));
         checkEqual(true,  isThrown(() => NumberArray(0.3,0, 0.1)));
 
+        // new
+        checkEqual([0,1,2],       new NumberArray(3));
+        checkEqual([1,2,3],       new NumberArray(1,3));
+
         // object parameter
         checkEqual([0,1,2],       NumberArray({ count: 3 }));
         checkEqual([1,2,3],       NumberArray({ start: 1, end: 3 }));
@@ -91,6 +95,7 @@ export const test_execute_array = (parts) => {
         checkEqual([7,9],         NumberArray(7, { end: 10, increment: 2 }));
         checkEqual([7,9],         NumberArray(7, 10, { increment: 2 }));
 
+        // exception
         checkEqual(true,  isThrown(() => NumberArray({ count: 3, start: 0 })));
         checkEqual(true,  isThrown(() => NumberArray({ end: 10 })));
         checkEqual(true,  isThrown(() => NumberArray(5, { start: 0, end: 10, increment: 3 })));
@@ -131,6 +136,10 @@ export const test_execute_array = (parts) => {
         checkEqual(true,  isThrown(() => IntegerArray(0.3,0, 0)));
         checkEqual(true,  isThrown(() => IntegerArray(0.3,0, 0.1)));
 
+        // new
+        checkEqual([0,1,2],       new IntegerArray(3));
+        checkEqual([1,2,3],       new IntegerArray(1,3));
+
         // object parameter
         checkEqual([0,1,2],       IntegerArray({ count: 3 }));
         checkEqual([1,2,3],       IntegerArray({ start: 1, end: 3 }));
@@ -139,6 +148,7 @@ export const test_execute_array = (parts) => {
         checkEqual([7,9],         IntegerArray(7, { end: 10, increment: 2 }));
         checkEqual([7,9],         IntegerArray(7, 10, { increment: 2 }));
 
+        // exception
         checkEqual(true,  isThrown(() => IntegerArray({ count: 3, start: 0 })));
         checkEqual(true,  isThrown(() => IntegerArray({ end: 10 })));
         checkEqual(true,  isThrown(() => IntegerArray(5, { start: 0, end: 10, increment: 3 })));

@@ -13,7 +13,11 @@ import {
 /**
  * NumberArray
  */
-export const _NumberArray = (start, end, increment) => {
+export const _NumberArray = function(start, end, increment) {
+
+  if (!(this instanceof _NumberArray)) {
+    return new _NumberArray(start, end, increment);
+  }
 
   if (isUndefined(increment)) {
     if (isUndefined(end)) {
