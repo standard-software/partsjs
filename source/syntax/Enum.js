@@ -1,5 +1,3 @@
-/* eslint-disable no-invalid-this */
-
 import {
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
@@ -41,6 +39,5 @@ export const Enum = function(values, useIndex = false) {
 };
 
 export default {
-  _Enum,
   Enum,
 };
