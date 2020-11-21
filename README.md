@@ -337,6 +337,8 @@ You can now use the functions of the parts.js object.
 - add isInvalidDate
   - isInvalidDate.js
   - add Polifill Date.prototype.toISOString for WSH
+- update setProperty
+  - first piriod accept
 
 ### 10.0.0
 #### 2020/11/13(Fri)

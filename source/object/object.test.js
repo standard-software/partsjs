@@ -762,6 +762,8 @@ export const test_execute_object = (parts) => {
         checkEqual(true, testObj1.a.b);
         setProperty(testObj1, 'a',      true);
         checkEqual(true, testObj1.a);
+        setProperty(testObj1, '.a',     'A');
+        checkEqual('A', testObj1.a);
         setProperty(testObj1, 'a.b.c',  true);
         checkEqual(true, testObj1.a.b.c);
         setProperty(testObj1, 'a.c',    true);
@@ -773,7 +775,7 @@ export const test_execute_object = (parts) => {
 
         checkEqual(true,  isThrown(() => setProperty(testObj1, '', true)));
         checkEqual(true,  isThrown(() => setProperty(testObj1, 'a.', true)));
-        checkEqual(true,  isThrown(() => setProperty(testObj1, '.a', true)));
+        checkEqual(false, isThrown(() => setProperty(testObj1, '.a', true)));
         checkEqual(false, isThrown(() => setProperty(testObj1, 'a', true)));
 
         var testObj1 = { a: ['abc', { b: 'b' }] };

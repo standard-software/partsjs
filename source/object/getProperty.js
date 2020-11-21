@@ -7,17 +7,9 @@ import {
   isBooleanObject, isNumberObject, isStringObject,
 } from '../type/type.js';
 
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import {
-  _has,
-} from '../object/has.js';
-
-import {
-  _splitDotItems,
-} from '../string/splitDotItems.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { _has } from '../object/has.js';
+import { _splitDotItems } from '../string/splitDotItems.js';
 
 /**
  * getProperty
