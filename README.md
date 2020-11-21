@@ -334,6 +334,9 @@ You can now use the functions of the parts.js object.
   - can new NumberArray
 - add DateTime
   - _DateTime.js / DateTime.js
+- add isInvalidDate
+  - isInvalidDate.js
+  - add Polifill Date.prototype.toISOString for WSH
 
 ### 10.0.0
 #### 2020/11/13(Fri)

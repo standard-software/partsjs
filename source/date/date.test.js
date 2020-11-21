@@ -10,8 +10,13 @@ export const test_execute_date = (parts) => {
 
   const {
     Today,
+    isInvalidDate,
     DateTime,
   } = parts.date;
+
+  const {
+    isDate,
+  } = parts;
 
   describe('test_execute_date', () => {
 
@@ -21,14 +26,32 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_isInvalidDate = () => {
+      it('test_isInvalidDate', () => {
+        checkEqual(true,  isDate(new Date(2020, 11, 21)));
+        checkEqual(true,  isDate(new Date('ABC')));
+
+        checkEqual(false, isInvalidDate(new Date(2020, 11, 21)));
+        checkEqual(true,  isInvalidDate(new Date('ABC')));
+      });
+    };
+
     const test_Date_standard = () => {
       it('test_Date_standard', () => {
         checkEqual(0, new Date(0).getTime());
 
-        checkEqual(
-          'Thu, 01 Jan 1970 00:00:00 GMT',
-          new Date(0).toUTCString(),
-        );
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(
+            'Thu, 01 Jan 1970 00:00:00 GMT',
+            new Date(0).toUTCString(),
+          );
+        } else {
+          checkEqual(
+            'Thu, 1 Jan 1970 00:00:00 UTC',
+            new Date(0).toUTCString(),
+          );
+        }
+
         checkEqual(
           '1970-01-01T00:00:00.000Z',
           new Date(0).toISOString(),
@@ -261,6 +284,7 @@ export const test_execute_date = (parts) => {
     };
 
     test_Today();
+    test_isInvalidDate();
 
     test_Date_standard();
     test_DateTime();

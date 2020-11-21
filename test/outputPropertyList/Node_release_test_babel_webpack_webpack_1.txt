@@ -215,6 +215,7 @@
 .copyProperty:[object Function]:function
 .date._DateTime:[object Function]:function
 .date.DateTime:[object Function]:function
+.date.isInvalidDate:[object Function]:function
 .date.Today:[object Function]:function
 .default.allMatch:[object Function]:function
 .default.allMatchAll:[object Function]:function
@@ -432,6 +433,7 @@
 .default.copyProperty:[object Function]:function
 .default.date._DateTime:[object Function]:function
 .default.date.DateTime:[object Function]:function
+.default.date.isInvalidDate:[object Function]:function
 .default.date.Today:[object Function]:function
 .default.Enum:[object Function]:function
 .default.equal:[object Function]:function
@@ -1022,6 +1024,7 @@
 .default.parts.copyProperty:[object Function]:function
 .default.parts.date._DateTime:[object Function]:function
 .default.parts.date.DateTime:[object Function]:function
+.default.parts.date.isInvalidDate:[object Function]:function
 .default.parts.date.Today:[object Function]:function
 .default.parts.Enum:[object Function]:function
 .default.parts.equal:[object Function]:function
@@ -2923,6 +2926,7 @@
 .parts.copyProperty:[object Function]:function
 .parts.date._DateTime:[object Function]:function
 .parts.date.DateTime:[object Function]:function
+.parts.date.isInvalidDate:[object Function]:function
 .parts.date.Today:[object Function]:function
 .parts.Enum:[object Function]:function
 .parts.equal:[object Function]:function
