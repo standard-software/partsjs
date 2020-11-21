@@ -213,6 +213,8 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
+.date._DateTime:[object Function]:function
+.date.DateTime:[object Function]:function
 .date.Today:[object Function]:function
 .Enum:[object Function]:function
 .equal:[object Function]:function
@@ -801,6 +803,8 @@
 .parts.convert.valueToString:[object Function]:function
 .parts.copyProp:[object Function]:function
 .parts.copyProperty:[object Function]:function
+.parts.date._DateTime:[object Function]:function
+.parts.date.DateTime:[object Function]:function
 .parts.date.Today:[object Function]:function
 .parts.Enum:[object Function]:function
 .parts.equal:[object Function]:function

@@ -1,5 +1,3 @@
-/* eslint-disable no-invalid-this */
-
 /**
  * Enum
  */

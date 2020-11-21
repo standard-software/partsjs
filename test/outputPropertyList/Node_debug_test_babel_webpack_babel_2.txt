@@ -213,6 +213,8 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
+.date._DateTime:[object Function]:function
+.date.DateTime:[object Function]:function
 .date.Today:[object Function]:function
 .Enum:[object Function]:function
 .equal:[object Function]:function

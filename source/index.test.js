@@ -51,22 +51,23 @@ export const test_execute_index = (parts) => {
           return result;
         };
 
-        const countArray =
-          [391, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
-        checkEqual(countArray.shift(),  propertyCountForParts(parts));
-        checkEqual(countArray.shift(),  propertyCount(parts.platform));
-        checkEqual(countArray.shift(),  propertyCount(parts.common));
-        checkEqual(countArray.shift(),  propertyCount(parts.type));
-        checkEqual(countArray.shift(),  propertyCount(parts.syntax));
-        checkEqual(countArray.shift(),  propertyCount(parts.test));
-        checkEqual(countArray.shift(),  propertyCount(parts.compare));
-        checkEqual(countArray.shift(),  propertyCount(parts.convert));
-        checkEqual(countArray.shift(),  propertyCount(parts.number));
-        checkEqual(countArray.shift(),  propertyCount(parts.string));
-        checkEqual(countArray.shift(),  propertyCount(parts.object));
-        checkEqual(countArray.shift(),  propertyCount(parts.array));
-        checkEqual(countArray.shift(),  propertyCount(parts.array.operation));
-        checkEqual(countArray.shift(),  propertyCount(parts.date));
+        checkEqual(391, propertyCountForParts(parts));
+        checkEqual(19,  propertyCount(parts.platform));
+        checkEqual(7,   propertyCount(parts.common));
+        checkEqual(259, propertyCount(parts.type));
+        checkEqual(15,  propertyCount(parts.syntax));
+        checkEqual(12,  propertyCount(parts.test));
+        checkEqual(44,  propertyCount(parts.compare));
+        checkEqual(35,  propertyCount(parts.convert));
+        checkEqual(15,  propertyCount(parts.number));
+        checkEqual(90,  propertyCount(parts.string));
+        checkEqual(40,  propertyCount(parts.object));
+        checkEqual(68,  propertyCount(parts.array));
+        checkEqual(48,  propertyCount(parts.array.operation));
+        checkEqual(3,   propertyCount(parts.date));
+        checkEqual(2,   propertyCount(parts.system));
+        checkEqual(3,   propertyCount(parts.system.wsh));
+        checkEqual(20,  propertyCount(parts.system.consoleHook));
 
         checkEqual(true,
           inProperty(

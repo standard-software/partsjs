@@ -332,6 +332,8 @@ You can now use the functions of the parts.js object.
   - revive system.wsh
 - update NumberArray IntegerArray
   - can new NumberArray
+- add DateTime
+  - _DateTime.js / DateTime.js
 
 ### 10.0.0
 #### 2020/11/13(Fri)
