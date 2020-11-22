@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.1.0
-#### 2020/11/21(Sat)
+#### 2020/11/22(Sun)
 - add namespace system
   - revive system.consoleHook
   - revive system.wsh
@@ -339,6 +339,7 @@ You can now use the functions of the parts.js object.
   - add Polifill Date.prototype.toISOString for WSH
 - update setProperty
   - first piriod accept
+- add _arrayEntries.js from arrayEntries.js
 
 ### 10.0.0
 #### 2020/11/13(Fri)

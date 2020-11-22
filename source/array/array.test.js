@@ -2779,12 +2779,12 @@ export const test_execute_array = (parts) => {
 
         const arrayEntries = (array) => {
           const result = [];
-          // for (const [i, v] of array.entries()) {
-          //   result.push([i,v]);
-          // }
-          parts.loop(array)((v, i) => {
-            result.push([i, v]);
-          });
+          for (const [i, v] of array.entries()) {
+            result.push([i,v]);
+          }
+          // parts.loop(array)((v, i) => {
+          //   result.push([i, v]);
+          // });
           return result;
         };
 

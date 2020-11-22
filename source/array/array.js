@@ -9,6 +9,7 @@ import _NumberArrayJs from './_NumberArray.js';
 import NumberArrayJs from './NumberArray.js';
 import _IntegerArrayJs from './_IntegerArray.js';
 import IntegerArrayJs from './IntegerArray.js';
+import _arrayEntriesJs from './_arrayEntries.js';
 import arrayEntriesJs from './arrayEntries.js';
 import _groupJs from './_group.js';
 import groupJs from './group.js';
@@ -40,6 +41,7 @@ const arrayJs = {
   ...NumberArrayJs,
   ..._IntegerArrayJs,
   ...IntegerArrayJs,
+  ..._arrayEntriesJs,
   ...arrayEntriesJs,
   ..._groupJs,
   ...groupJs,
