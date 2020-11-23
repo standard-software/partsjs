@@ -340,6 +340,8 @@ You can now use the functions of the parts.js object.
 - update setProperty
   - first piriod accept
 - add _arrayEntries.js from arrayEntries.js
+- update recursive
+  - add args property path
 
 ### 10.0.0
 #### 2020/11/13(Fri)

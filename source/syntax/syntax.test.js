@@ -995,7 +995,7 @@ export const test_execute_syntax = (parts) => {
 
         var message = '';
         recursive(data,
-          (value, key, level, source) => {
+          (value, key, level, path, source) => {
             checkEqual(data, source);
             message += `${key}:${value.name} `;
             if ('folder' in value) {
