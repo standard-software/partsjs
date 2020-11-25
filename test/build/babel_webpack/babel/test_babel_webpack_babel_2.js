@@ -5,14 +5,14 @@ const {
 } = require('../../../../build/babel_webpack/babel/index.test.js');
 
 parts.platform.buildMode = 'debug';
-parts.platform.startName = 'test_babel_webpack_babel_2.js';
+parts.platform.testStartFileName = 'test_babel_webpack_babel_2.js';
 
 test_execute_index(parts);
 
 const fileName = parts.string.subFirstDelimFirst(
   parts.platform.name() + '_' +
   parts.platform.buildMode + '_' +
-  parts.platform.startName,
+  parts.platform.testStartFileName,
   '.',
 ) + '.txt';
 const fs = require('fs');

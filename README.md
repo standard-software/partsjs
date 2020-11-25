@@ -344,6 +344,10 @@ You can now use the functions of the parts.js object.
   - add args property path
 - update getProperty
   - support objectLike (array function etc)
+- update platform.js
+  - delete browserName()
+  - update name()
+  - update startName >> testStartFileName
 
 ### 10.0.0
 #### 2020/11/13(Fri)

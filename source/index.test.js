@@ -18,11 +18,10 @@ export const test_execute_index = (parts) => {
 
   console.log(`platform: ${parts.platform.name()}`);
   if (parts.platform.isWebBrowser()) {
-    console.log(`  web browser: ${parts.platform.browserName()}`);
     console.log(`  User Agent: ${window.navigator.userAgent}`);
   }
   console.log(`  buildMode: ${parts.platform.buildMode}`);
-  console.log(`  startName: ${parts.platform.startName}`);
+  console.log(`  testStartFileName: ${parts.platform.testStartFileName}`);
   console.log('test start');
 
   const test_execute_nameSpace = (parts) => {
@@ -52,7 +51,7 @@ export const test_execute_index = (parts) => {
         };
 
         checkEqual(391, propertyCountForParts(parts));
-        checkEqual(19,  propertyCount(parts.platform));
+        checkEqual(17,  propertyCount(parts.platform));
         checkEqual(7,   propertyCount(parts.common));
         checkEqual(259, propertyCount(parts.type));
         checkEqual(15,  propertyCount(parts.syntax));

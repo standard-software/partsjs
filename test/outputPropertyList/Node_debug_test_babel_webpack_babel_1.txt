@@ -1399,9 +1399,7 @@
 .default.parts.objectToValueArray:[object Function]:function
 .default.parts.objectValues:[object Function]:function
 .default.parts.or:[object Function]:function
-.default.parts.platform.browserName:[object Function]:function
 .default.parts.platform.buildMode:[object String]:string
-.default.parts.platform.googleAppScriptEngineName:[object Function]:function
 .default.parts.platform.isChrome:[object Function]:function
 .default.parts.platform.isDeno:[object Function]:function
 .default.parts.platform.isEdge:[object Function]:function
@@ -1417,7 +1415,7 @@
 .default.parts.platform.isWebBrowser:[object Function]:function
 .default.parts.platform.isWindowsScriptHost:[object Function]:function
 .default.parts.platform.name:[object Function]:function
-.default.parts.platform.startName:[object String]:string
+.default.parts.platform.testStartFileName:[object String]:string
 .default.parts.propCount:[object Function]:function
 .default.parts.propertyCount:[object Function]:function
 .default.parts.propertyList:[object Function]:function
@@ -1868,9 +1866,7 @@
 .default.parts.valueToNumberDefault:[object Function]:function
 .default.parts.valueToString:[object Function]:function
 .default.parts.VERSION:[object String]:string
-.default.platform.browserName:[object Function]:function
 .default.platform.buildMode:[object String]:string
-.default.platform.googleAppScriptEngineName:[object Function]:function
 .default.platform.isChrome:[object Function]:function
 .default.platform.isDeno:[object Function]:function
 .default.platform.isEdge:[object Function]:function
@@ -1886,7 +1882,7 @@
 .default.platform.isWebBrowser:[object Function]:function
 .default.platform.isWindowsScriptHost:[object Function]:function
 .default.platform.name:[object Function]:function
-.default.platform.startName:[object String]:string
+.default.platform.testStartFileName:[object String]:string
 .default.propCount:[object Function]:function
 .default.propertyCount:[object Function]:function
 .default.propertyList:[object Function]:function
@@ -3301,9 +3297,7 @@
 .parts.objectToValueArray:[object Function]:function
 .parts.objectValues:[object Function]:function
 .parts.or:[object Function]:function
-.parts.platform.browserName:[object Function]:function
 .parts.platform.buildMode:[object String]:string
-.parts.platform.googleAppScriptEngineName:[object Function]:function
 .parts.platform.isChrome:[object Function]:function
 .parts.platform.isDeno:[object Function]:function
 .parts.platform.isEdge:[object Function]:function
@@ -3319,7 +3313,7 @@
 .parts.platform.isWebBrowser:[object Function]:function
 .parts.platform.isWindowsScriptHost:[object Function]:function
 .parts.platform.name:[object Function]:function
-.parts.platform.startName:[object String]:string
+.parts.platform.testStartFileName:[object String]:string
 .parts.propCount:[object Function]:function
 .parts.propertyCount:[object Function]:function
 .parts.propertyList:[object Function]:function
@@ -3770,9 +3764,7 @@
 .parts.valueToNumberDefault:[object Function]:function
 .parts.valueToString:[object Function]:function
 .parts.VERSION:[object String]:string
-.platform.browserName:[object Function]:function
 .platform.buildMode:[object String]:string
-.platform.googleAppScriptEngineName:[object Function]:function
 .platform.isChrome:[object Function]:function
 .platform.isDeno:[object Function]:function
 .platform.isEdge:[object Function]:function
@@ -3788,7 +3780,7 @@
 .platform.isWebBrowser:[object Function]:function
 .platform.isWindowsScriptHost:[object Function]:function
 .platform.name:[object Function]:function
-.platform.startName:[object String]:string
+.platform.testStartFileName:[object String]:string
 .propCount:[object Function]:function
 .propertyCount:[object Function]:function
 .propertyList:[object Function]:function

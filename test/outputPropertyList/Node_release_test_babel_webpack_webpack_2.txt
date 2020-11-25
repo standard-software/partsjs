@@ -590,9 +590,7 @@
 .objectToValueArray:[object Function]:function
 .objectValues:[object Function]:function
 .or:[object Function]:function
-.platform.browserName:[object Function]:function
 .platform.buildMode:[object String]:string
-.platform.googleAppScriptEngineName:[object Function]:function
 .platform.isChrome:[object Function]:function
 .platform.isDeno:[object Function]:function
 .platform.isEdge:[object Function]:function
@@ -608,7 +606,7 @@
 .platform.isWebBrowser:[object Function]:function
 .platform.isWindowsScriptHost:[object Function]:function
 .platform.name:[object Function]:function
-.platform.startName:[object String]:string
+.platform.testStartFileName:[object String]:string
 .propCount:[object Function]:function
 .propertyCount:[object Function]:function
 .propertyList:[object Function]:function

@@ -2,8 +2,64 @@ import {
   __includes,
 } from '../compare/__includes.js';
 
+let _name;
+export const name = () => {
+  if (typeof _name !== 'undefined') {
+    return _name;
+  }
+
+  if (typeof WScript !== 'undefined') {
+    _name = 'WindowsScriptHost';
+  } else if (typeof Deno !== 'undefined') {
+    _name = 'Deno';
+  } else if (typeof Browser !== 'undefined') {
+    if (typeof Object.toSource === 'undefined') {
+      _name = 'GoogleAppsScriptV8';
+    } else {
+      _name = 'GoogleAppsScriptRhino';
+    }
+  } else if (typeof window === 'undefined') {
+    _name = 'Node';
+  } else if (typeof jest !== 'undefined') {
+    _name = 'Jest';
+  } else if (typeof process !== 'undefined') {
+    // WebBrowser
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (__includes(ua, 'msie') || __includes(ua, 'trident')) {
+      _name = 'InternetExplorer';
+    } else if (__includes(ua, 'edg')) {
+      _name = 'Edge';
+    } else if (__includes(ua, 'opr')) {
+      _name = 'Opera';
+    } else if (__includes(ua, 'chrome')) {
+      _name = 'Chrome';
+    } else if (__includes(ua, 'safari')) {
+      _name = 'Safari';
+    } else if (__includes(ua, 'firefox')) {
+      _name = 'Firefox';
+    } else {
+      _name = 'OtherBrowser';
+    }
+  } else {
+    _name = 'Unknown';
+  };
+  return _name;
+};
+
+name.reset = () => {
+  _name = undefined;
+};
+
 export const isWebBrowser = () => {
-  return name() === 'WebBrowser';
+  return __includes([
+    'InternetExplorer',
+    'Edge',
+    'Opera',
+    'Chrome',
+    'Safari',
+    'Firefox',
+    'OtherBrowser',
+  ], name());
 };
 
 export const isWindowsScriptHost = () => {
@@ -11,7 +67,18 @@ export const isWindowsScriptHost = () => {
 };
 
 export const isGoogleAppsScript = () => {
-  return name() === 'GoogleAppsScript';
+  return __includes([
+    'GoogleAppsScriptV8',
+    'GoogleAppsScriptRhino',
+  ], name());
+};
+
+export const isGasV8 = () => {
+  return name() === 'GoogleAppsScriptV8';
+};
+
+export const isGasRhino = () => {
+  return name() === 'GoogleAppsScriptRhino';
 };
 
 export const isJest = () => {
@@ -26,110 +93,28 @@ export const isDeno = () => {
   return name() === 'Deno';
 };
 
-let _name;
-export const name = () => {
-  if (typeof _name !== 'undefined') {
-    return _name;
-  }
-
-  if (typeof WScript !== 'undefined') {
-    _name = 'WindowsScriptHost';
-  } else if (typeof Deno !== 'undefined') {
-    _name = 'Deno';
-  } else if (typeof Browser !== 'undefined') {
-    _name = 'GoogleAppsScript';
-  } else if (typeof window === 'undefined') {
-    _name = 'Node';
-  } else if (typeof jest !== 'undefined') {
-    _name = 'Jest';
-  } else if (typeof process !== 'undefined') {
-    _name = 'WebBrowser';
-  } else {
-    _name = 'unknown';
-  };
-  return _name;
-};
-
-name.reset = () => {
-  _name = undefined;
-};
-
-let _browserName;
-export const browserName = () => {
-  if (typeof _browserName !== 'undefined') {
-    return _browserName;
-  }
-
-  if (!isWebBrowser()) {
-    _browserName = '';
-  } else {
-    const ua = window.navigator.userAgent.toLowerCase();
-    if (__includes(ua, 'msie') || __includes(ua, 'trident')) {
-      _browserName = 'InternetExplorer';
-    } else if (__includes(ua, 'edg')) {
-      _browserName = 'Edge';
-    } else if (__includes(ua, 'opr')) {
-      _browserName = 'Opera';
-    } else if (__includes(ua, 'chrome')) {
-      _browserName = 'Chrome';
-    } else if (__includes(ua, 'safari')) {
-      _browserName = 'Safari';
-    } else if (__includes(ua, 'firefox')) {
-      _browserName = 'Firefox';
-    } else {
-      _browserName = 'other';
-    }
-  }
-
-  return _browserName;
-};
-
-browserName.reset = () => {
-  _browserName = undefined;
-};
-
-
 export const isChrome = () => {
-  return browserName() === 'Chrome';
+  return name() === 'Chrome';
 };
 
 export const isFirefox = () => {
-  return browserName() === 'Firefox';
+  return name() === 'Firefox';
 };
 
 export const isEdge = () => {
-  return browserName() === 'Edge';
+  return name() === 'Edge';
 };
 
 export const isInternetExplorer = () => {
-  return browserName() === 'InternetExplorer';
+  return name() === 'InternetExplorer';
 };
 
 export const isSafari = () => {
-  return browserName() === 'Safari';
+  return name() === 'Safari';
 };
 
 export const isOpera = () => {
-  return browserName() === 'Opera';
-};
-
-export const googleAppScriptEngineName = () => {
-  if (!isGoogleAppsScript()) {
-    return '';
-  }
-  if (typeof Object.toSource === 'undefined') {
-    return 'V8';
-  } else {
-    return 'Rhino';
-  }
-};
-
-export const isGasV8 = () => {
-  return googleAppScriptEngineName() === 'V8';
-};
-
-export const isGasRhino = () => {
-  return googleAppScriptEngineName() === 'Rhino';
+  return name() === 'Opera';
 };
 
 export default {
@@ -141,7 +126,6 @@ export default {
   isDeno,
   isJest,
 
-  browserName,
   isChrome,
   isFirefox,
   isEdge,
@@ -149,10 +133,9 @@ export default {
   isSafari,
   isOpera,
 
-  googleAppScriptEngineName,
   isGasV8,
   isGasRhino,
 
   buildMode: '',
-  startName: '',
+  testStartFileName: '',
 };

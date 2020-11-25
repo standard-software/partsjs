@@ -33,7 +33,7 @@
   console.log('test_index.wsf\n');
 
   parts.platform.buildMode = 'release';
-  parts.platform.startName = 'test.wsf';
+  parts.platform.testStartFileName = 'test.wsf';
 
   test_parts.test_execute_index(parts);
 

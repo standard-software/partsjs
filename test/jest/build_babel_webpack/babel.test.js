@@ -12,7 +12,7 @@ parts.test.it = it;
 parts.test.describe = describe;
 parts.test.expect = expect;
 
-parts.consoleHook.hook('log');
+parts.system.consoleHook.hook('log');
 
 test_execute_index(parts);
 
