@@ -24,7 +24,7 @@ export const __loop = (loopArray) => {
       const loopFirst = i === 0;
       const loopLast = i === loopArray.length - 1;
       const result = func(element, index, array, loopFirst, loopLast);
-      if (!isUndefined(result) && result.break === true) {
+      if (isObject(result) && result.break === true) {
         return result;
       }
     }
