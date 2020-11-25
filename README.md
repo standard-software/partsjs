@@ -342,6 +342,8 @@ You can now use the functions of the parts.js object.
 - add _arrayEntries.js from arrayEntries.js
 - update recursive
   - add args property path
+- update getProperty
+  - support objectLike (array function etc)
 
 ### 10.0.0
 #### 2020/11/13(Fri)

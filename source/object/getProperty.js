@@ -51,7 +51,7 @@ export const getProperty = (object, propertyPath, hasOwn = true, detail = false)
     ({ detail } = detail);
   }
 
-  if (!isObject(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'getProperty args(object) is not object',
     );

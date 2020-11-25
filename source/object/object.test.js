@@ -661,7 +661,9 @@ export const test_execute_object = (parts) => {
         checkEqual(undefined, getProperty(testObj2, 'a.b.c.d' ,true, false) );
         checkEqual(undefined, getProperty(testObj2, 'a.b.b'   ,true, false) );
 
-        checkEqual({ b: { c: undefined} }, getProperty(testObj2, 'a'       ,true, true).value );
+        checkEqual({ b: { c: undefined} },
+          getProperty(testObj2, 'a'       ,true, true).value,
+        );
         checkEqual(undefined, getProperty(testObj2, 'a.b'     ,true, true).value.c );
         checkEqual(undefined, getProperty(testObj2, 'a.b.c'   ,true, true).value );
         checkEqual(undefined, getProperty(testObj2, 'a.b.c.d' ,true, true).value );
@@ -674,6 +676,33 @@ export const test_execute_object = (parts) => {
         checkEqual(false, getProperty(testObj2, 'a.b.c.d' ,true, true).exist );
         checkEqual(false, getProperty(testObj2, 'a.b.b'   ,true, true).exist );
         /* eslint-enable comma-spacing */
+
+        const testObj3 = {
+          a: [
+            { b: 'B' },
+            { c: 'C' },
+          ],
+        };
+        checkEqual(
+          [{ b: 'B' }, { c: 'C' }],
+          getProperty(testObj3, 'a'),
+        );
+        checkEqual(
+          { b: 'B' },
+          getProperty(testObj3, 'a.0'),
+        );
+        checkEqual(
+          { c: 'C' },
+          getProperty(testObj3, 'a.1'),
+        );
+        checkEqual(
+          'B',
+          getProperty(testObj3, 'a.0.b'),
+        );
+        checkEqual(
+          'C',
+          getProperty(testObj3, 'a.1.c'),
+        );
 
         // object parameter
         const object1 = {
