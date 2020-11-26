@@ -2,6 +2,31 @@
 
 ## Version
 
+### 10.1.0
+#### 2020/11/26(Thu)
+- add namespace system
+  - revive system.consoleHook
+  - revive system.wsh
+- update NumberArray IntegerArray
+  - can new NumberArray
+- add DateTime
+  - _DateTime.js / DateTime.js
+- add isInvalidDate
+  - isInvalidDate.js
+  - add Polifill Date.prototype.toISOString for WSH
+- update setProperty
+  - first piriod accept
+- add _arrayEntries.js from arrayEntries.js
+- update recursive
+  - add args property path
+- update getProperty
+  - support objectLike (array function etc)
+- update platform.js
+  - delete browserName()
+  - update and rename name() >> platformName()
+  - update startName >> testStartFileName
+- add typeName.js
+
 ### 10.0.0
 #### 2020/11/13(Fri)
 - update test output
