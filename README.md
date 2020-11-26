@@ -348,6 +348,7 @@ You can now use the functions of the parts.js object.
   - delete browserName()
   - update and rename name() >> platformName()
   - update startName >> testStartFileName
+- add typeName.js
 
 ### 10.0.0
 #### 2020/11/13(Fri)

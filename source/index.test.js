@@ -22,7 +22,7 @@ export const test_execute_index = (parts) => {
   }
   console.log(`  buildMode: ${parts.platform.buildMode}`);
   console.log(`  testStartFileName: ${parts.platform.testStartFileName}`);
-  console.log('test start');
+  console.log(`test start datetime: ${(new Date()).toString()}`);
 
   const test_execute_nameSpace = (parts) => {
     const { describe, it, checkEqual } = parts.test;
@@ -50,10 +50,10 @@ export const test_execute_index = (parts) => {
           return result;
         };
 
-        checkEqual(391, propertyCountForParts(parts));
+        checkEqual(392, propertyCountForParts(parts));
         checkEqual(17,  propertyCount(parts.platform));
         checkEqual(7,   propertyCount(parts.common));
-        checkEqual(259, propertyCount(parts.type));
+        checkEqual(260, propertyCount(parts.type));
         checkEqual(15,  propertyCount(parts.syntax));
         checkEqual(12,  propertyCount(parts.test));
         checkEqual(44,  propertyCount(parts.compare));

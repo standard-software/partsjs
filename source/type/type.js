@@ -1,3 +1,4 @@
+import typeNameJs from './typeName.js';
 import isTypeJs from './isType.js';
 import isExceptionJs from './isException.js';
 import isSymbolJs from './isSymbol.js';
@@ -5,6 +6,10 @@ import isMapJs from './isMap.js';
 import isSetJs from './isSet.js';
 import isTypeAllJs from './isTypeAll.js';
 import isTypeArrayJs from './isTypeArray.js';
+
+export const {
+  typeName,
+} = typeNameJs;
 
 export const {
   objectToString,
@@ -113,8 +118,9 @@ export const {
 } = isTypeArrayJs;
 
 export default {
-  // ...isTypeJs,
   objectToString,
+
+  typeName,
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,

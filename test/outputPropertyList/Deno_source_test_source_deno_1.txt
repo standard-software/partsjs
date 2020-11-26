@@ -1196,7 +1196,7 @@
 .parts.platform.isSafari:[object Function]:function
 .parts.platform.isWebBrowser:[object Function]:function
 .parts.platform.isWindowsScriptHost:[object Function]:function
-.parts.platform.name:[object Function]:function
+.parts.platform.platformName:[object Function]:function
 .parts.platform.testStartFileName:[object String]:string
 .parts.propCount:[object Function]:function
 .parts.propertyCount:[object Function]:function
@@ -1632,6 +1632,8 @@
 .parts.type.isWeakSetAll:[object Function]:function
 .parts.type.isWeakSetArray:[object Function]:function
 .parts.type.objectToString:[object Function]:function
+.parts.type.typeName:[object Function]:function
+.parts.typeName:[object Function]:function
 .parts.valToInt:[object Function]:function
 .parts.valToIntDef:[object Function]:function
 .parts.valToInteger:[object Function]:function
@@ -1663,7 +1665,7 @@
 .platform.isSafari:[object Function]:function
 .platform.isWebBrowser:[object Function]:function
 .platform.isWindowsScriptHost:[object Function]:function
-.platform.name:[object Function]:function
+.platform.platformName:[object Function]:function
 .platform.testStartFileName:[object String]:string
 .propCount:[object Function]:function
 .propertyCount:[object Function]:function
@@ -2099,6 +2101,8 @@
 .type.isWeakSetAll:[object Function]:function
 .type.isWeakSetArray:[object Function]:function
 .type.objectToString:[object Function]:function
+.type.typeName:[object Function]:function
+.typeName:[object Function]:function
 .valToInt:[object Function]:function
 .valToIntDef:[object Function]:function
 .valToInteger:[object Function]:function
