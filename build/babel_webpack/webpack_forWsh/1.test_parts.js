@@ -39,16 +39,15 @@ var _otherTest = __webpack_require__(14);
 
 var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
-  console.log("platform: ".concat(parts.platform.name()));
+  console.log("platform: ".concat(parts.platform.platformName()));
 
   if (parts.platform.isWebBrowser()) {
-    console.log("  web browser: ".concat(parts.platform.browserName()));
     console.log("  User Agent: ".concat(window.navigator.userAgent));
   }
 
   console.log("  buildMode: ".concat(parts.platform.buildMode));
-  console.log("  startName: ".concat(parts.platform.startName));
-  console.log('test start');
+  console.log("  testStartFileName: ".concat(parts.platform.testStartFileName));
+  console.log("test start datetime: ".concat(new Date().toString()));
 
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var _parts$test = parts.test,
@@ -82,21 +81,23 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [391, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
-        checkEqual(countArray.shift(), propertyCountForParts(parts));
-        checkEqual(countArray.shift(), propertyCount(parts.platform));
-        checkEqual(countArray.shift(), propertyCount(parts.common));
-        checkEqual(countArray.shift(), propertyCount(parts.type));
-        checkEqual(countArray.shift(), propertyCount(parts.syntax));
-        checkEqual(countArray.shift(), propertyCount(parts.test));
-        checkEqual(countArray.shift(), propertyCount(parts.compare));
-        checkEqual(countArray.shift(), propertyCount(parts.convert));
-        checkEqual(countArray.shift(), propertyCount(parts.number));
-        checkEqual(countArray.shift(), propertyCount(parts.string));
-        checkEqual(countArray.shift(), propertyCount(parts.object));
-        checkEqual(countArray.shift(), propertyCount(parts.array));
-        checkEqual(countArray.shift(), propertyCount(parts.array.operation));
-        checkEqual(countArray.shift(), propertyCount(parts.date));
+        checkEqual(392, propertyCountForParts(parts));
+        checkEqual(17, propertyCount(parts.platform));
+        checkEqual(7, propertyCount(parts.common));
+        checkEqual(260, propertyCount(parts.type));
+        checkEqual(15, propertyCount(parts.syntax));
+        checkEqual(12, propertyCount(parts.test));
+        checkEqual(44, propertyCount(parts.compare));
+        checkEqual(35, propertyCount(parts.convert));
+        checkEqual(15, propertyCount(parts.number));
+        checkEqual(90, propertyCount(parts.string));
+        checkEqual(40, propertyCount(parts.object));
+        checkEqual(68, propertyCount(parts.array));
+        checkEqual(48, propertyCount(parts.array.operation));
+        checkEqual(4, propertyCount(parts.date));
+        checkEqual(2, propertyCount(parts.system));
+        checkEqual(3, propertyCount(parts.system.wsh));
+        checkEqual(20, propertyCount(parts.system.consoleHook));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'number,string,object,array,date'));
       });
       it('test_execute_nameSpace 2', function () {
@@ -1231,7 +1232,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]
         }];
         var message = '';
-        recursive(data, function (value, key, level, source) {
+        recursive(data, function (value, key, level, path, source) {
           checkEqual(data, source);
           message += "".concat(key, ":").concat(value.name, " ");
 
@@ -6367,7 +6368,27 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, getProperty(testObj2, 'a.b.c.d', true, true).exist);
         checkEqual(false, getProperty(testObj2, 'a.b.b', true, true).exist);
         /* eslint-enable comma-spacing */
-        // object parameter
+
+        var testObj3 = {
+          a: [{
+            b: 'B'
+          }, {
+            c: 'C'
+          }]
+        };
+        checkEqual([{
+          b: 'B'
+        }, {
+          c: 'C'
+        }], getProperty(testObj3, 'a'));
+        checkEqual({
+          b: 'B'
+        }, getProperty(testObj3, 'a.0'));
+        checkEqual({
+          c: 'C'
+        }, getProperty(testObj3, 'a.1'));
+        checkEqual('B', getProperty(testObj3, 'a.0.b'));
+        checkEqual('C', getProperty(testObj3, 'a.1.c')); // object parameter
 
         var object1 = {
           a: {
@@ -6466,6 +6487,8 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, testObj1.a.b);
         setProperty(testObj1, 'a', true);
         checkEqual(true, testObj1.a);
+        setProperty(testObj1, '.a', 'A');
+        checkEqual('A', testObj1.a);
         setProperty(testObj1, 'a.b.c', true);
         checkEqual(true, testObj1.a.b.c);
         setProperty(testObj1, 'a.c', true);
@@ -6480,7 +6503,7 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, isThrown(function () {
           return setProperty(testObj1, 'a.', true);
         }));
-        checkEqual(true, isThrown(function () {
+        checkEqual(false, isThrown(function () {
           return setProperty(testObj1, '.a', true);
         }));
         checkEqual(false, isThrown(function () {
@@ -6888,7 +6911,11 @@ var test_execute_date = function test_execute_date(parts) {
       isThrown = _parts$test.isThrown,
       isThrownException = _parts$test.isThrownException,
       testCounter = _parts$test.testCounter;
-  var Today = parts.date.Today;
+  var _parts$date = parts.date,
+      Today = _parts$date.Today,
+      isInvalidDate = _parts$date.isInvalidDate,
+      DateTime = _parts$date.DateTime;
+  var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Today = function test_Today() {
       it('test_Today', function () {
@@ -6896,7 +6923,182 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_isInvalidDate = function test_isInvalidDate() {
+      it('test_isInvalidDate', function () {
+        checkEqual(true, isDate(new Date(2020, 11, 21)));
+        checkEqual(true, isDate(new Date('ABC')));
+        checkEqual(false, isInvalidDate(new Date(2020, 11, 21)));
+        checkEqual(true, isInvalidDate(new Date('ABC')));
+      });
+    };
+
+    var test_Date_standard = function test_Date_standard() {
+      it('test_Date_standard', function () {
+        checkEqual(0, new Date(0).getTime());
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('Thu, 01 Jan 1970 00:00:00 GMT', new Date(0).toUTCString());
+        } else {
+          checkEqual('Thu, 1 Jan 1970 00:00:00 UTC', new Date(0).toUTCString());
+        }
+
+        checkEqual('1970-01-01T00:00:00.000Z', new Date(0).toISOString());
+        var dt = new Date(Date.UTC(2020, 10, 21, 11, 35, 10));
+        checkEqual('2020-11-21T11:35:10.000Z', dt.toISOString());
+      });
+    };
+
+    var test_DateTime = function test_DateTime() {
+      it('test_DateTime', function () {
+        checkEqual(0, new Date(0).getTime());
+        var dt = DateTime(undefined, undefined, undefined, undefined, undefined, undefined, undefined, false);
+        checkEqual(0, dt.getTime());
+        checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime();
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual(0, dt.getTime());
+        checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-11-21T11:35:10.400Z', dt.toISOString());
+        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        checkEqual(new Date(2020, 10, 21, 11, 35, 10, 400).toISOString(), dt.toISOString());
+        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400, false);
+        checkEqual(new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400)).toISOString(), dt.toISOString());
+        var dt = DateTime(2020);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, false);
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // zero
+
+        var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
+        checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 3, 0, 4, 5, 6, 7, false);
+        checkEqual('2020-02-29T04:05:06.007Z', dt.toISOString()); // minus
+
+        var dt = DateTime(2020, -1, 3, 4, 5, 6, 7, false);
+        checkEqual('2019-11-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 3, -1, 4, 5, 6, 7, false);
+        checkEqual('2020-02-28T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 3, 4, -2, 5, 6, 7, false);
+        checkEqual('2020-03-03T22:05:06.007Z', dt.toISOString()); // object parameter
+
+        var dt = DateTime({
+          year: 2020
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime({
+          year: 2020,
+          isLocal: false
+        });
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime({
+          year: 2020,
+          month: 2,
+          hour: 13,
+          second: 59,
+          isLocal: false
+        });
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime({
+          year: 2020,
+          month: 2,
+          hour: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, {
+          hour: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-01-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, {
+          hour: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, {
+          minute: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T00:13:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, {
+          isLocal: false
+        });
+        checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, {
+          minute: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:13:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, {
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, {
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, {
+          isLocal: false
+        });
+        checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, {
+          isLocal: false
+        });
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // exception
+
+        checkEqual(false, isThrown(function () {
+          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
+            isLocal: false
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
+            isLocal: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return DateTime(2020, '2', 3, 4, 5, 6, 7, {
+            isLocal: true
+          });
+        }));
+      });
+    };
+
     test_Today();
+    test_isInvalidDate();
+    test_Date_standard();
+    test_DateTime();
   });
 };
 

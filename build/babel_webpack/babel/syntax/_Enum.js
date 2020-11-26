@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._Enum = void 0;
 
-/* eslint-disable no-invalid-this */
-
 /**
  * Enum
  */

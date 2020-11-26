@@ -82,7 +82,6 @@ var test_execute_compare = function test_execute_compare(parts) {
         isThrownException = _parts$test2.isThrownException;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
-        equalDeep = _parts$compare.equalDeep,
         or = _parts$compare.or,
         match = _parts$compare.match,
         matchValue = _parts$compare.matchValue,
@@ -358,6 +357,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep = function test_equalDeep() {
+      var objectParameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       it('test_equalDeep', function () {
         // Primitive value
         checkEqual(true, equalDeep(1, 1));
@@ -368,7 +368,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep(undefined, undefined));
         checkEqual(true, equalDeep(undefined));
         checkEqual(false, equalDeep(null, undefined));
-        checkEqual(false, equalDeep(null)); // named argument
+        checkEqual(false, equalDeep(null));
+
+        if (objectParameter === false) {
+          return;
+        } // named argument
+
 
         checkEqual(true, equalDeep({
           value1: 1,
@@ -400,14 +405,14 @@ var test_execute_compare = function test_execute_compare(parts) {
         }, {
           a: '1',
           b: '2'
-        }), 'test_equalDeep object 1');
+        }));
         checkEqual(false, equalDeep({
           a: '2',
           b: '2'
         }, {
           a: '1',
           b: '2'
-        }), 'test_equalDeep object 2');
+        }));
         checkEqual(true, equalDeep({
           a: '1',
           b: '2',
@@ -416,7 +421,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           a: '1',
           b: '2',
           c: {}
-        }), 'test_equalDeep object 3');
+        }));
         checkEqual(true, equalDeep({
           a: '1',
           b: '2',
@@ -425,7 +430,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           a: '1',
           b: '2',
           c: []
-        }), 'test_equalDeep object 4');
+        }));
         checkEqual(false, equalDeep({
           a: '1',
           b: '2',
@@ -435,7 +440,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: '2',
           c: {},
           d: ''
-        }), 'test_equalDeep object 5');
+        }));
         checkEqual(false, equalDeep({
           a: '1',
           b: '2',
@@ -445,7 +450,69 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: '2',
           c: [],
           d: ''
-        }), 'test_equalDeep object 6');
+        }));
+        checkEqual(false, equalDeep({
+          a: '1',
+          b: '2',
+          c: {},
+          d: ''
+        }, {
+          a: '1',
+          b: '2',
+          c: {}
+        }));
+        checkEqual(false, equalDeep({
+          a: '1',
+          b: '2',
+          c: [],
+          d: ''
+        }, {
+          a: '1',
+          b: '2',
+          c: []
+        }));
+        checkEqual(true, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'c'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }));
       });
     };
 
@@ -599,6 +666,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_array = function test_equalDeep_array() {
+      var objectParameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       it('test_equalDeep_array', function () {
         checkEqual(true, equalDeep([1, 2, {}], [1, 2, {}]));
         checkEqual(true, equalDeep([1, 2, [3]], [1, 2, [3]]));
@@ -633,7 +701,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([[undefined, null], undefined], [[undefined, null], undefined]));
         checkEqual(false, equalDeep([[undefined, null], undefined], [undefined, [null, undefined]]));
         checkEqual(true, equalDeep([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
-        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // Object Named Parameter
+        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
+
+        if (objectParameter === false) {
+          return;
+        } // Object Named Parameter
+
 
         checkEqual(true, equalDeep({
           value1: [1, 2, 3, 4],
@@ -3030,6 +3103,73 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
+    var getProperty = parts.getProperty,
+        recursive = parts.syntax.recursive,
+        typeName = parts.typeName;
+
+    var equalDeepUseRecursive = function equalDeepUseRecursive(source, target) {
+      var equalType = function equalType(value1, value2) {
+        return typeName(value1) === typeName(value2);
+      };
+
+      var notEqualLength = function notEqualLength(value1, value2) {
+        if (!equalType(value1, value2)) {
+          return true;
+        }
+
+        if (isObject(value1)) {
+          if (Object.keys(value1).length !== Object.keys(value2).length) {
+            return true;
+          }
+        } else if (isArray(value1)) {
+          if (value1.length !== value2.length) {
+            return true;
+          }
+        }
+
+        return false;
+      };
+
+      var result = true;
+
+      if (source === target) {
+        return true;
+      }
+
+      if (notEqualLength(source, target)) {
+        return false;
+      }
+
+      if (!isObject(source) && !isArray(source)) {
+        return false;
+      }
+
+      recursive(source, function (value, key, level, path) {
+        var targetValue = getProperty(target, path + '.' + key);
+
+        if (notEqualLength(value, targetValue)) {
+          result = false;
+          return false;
+        }
+
+        if (isObject(value)) {
+          return value;
+        }
+
+        if (isArray(value)) {
+          return value;
+        }
+
+        if (targetValue !== value) {
+          result = false;
+          return false;
+        }
+
+        ;
+      });
+      return result;
+    };
+
     test_equal();
     test_equal_object();
     test_equal_array();
@@ -3037,6 +3177,13 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_equal_regexp();
     test_equal_map();
     test_equal_set();
+    var equalDeep;
+    equalDeep = equalDeepUseRecursive;
+    test_equalDeep(false);
+    test_equalDeep_object();
+    test_equalDeep_array(false);
+    test_equalDeep_object_array_mix();
+    equalDeep = parts.compare.equalDeep;
     test_equalDeep();
     test_equalDeep_object();
     test_equalDeep_object_array_mix();

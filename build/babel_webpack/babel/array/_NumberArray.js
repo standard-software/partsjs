@@ -11,6 +11,10 @@ var _type = require("../type/type.js");
  * NumberArray
  */
 var _NumberArray = function _NumberArray(start, end, increment) {
+  if (!(this instanceof _NumberArray)) {
+    return new _NumberArray(start, end, increment);
+  }
+
   if ((0, _type.isUndefined)(increment)) {
     if ((0, _type.isUndefined)(end)) {
       increment = 1;

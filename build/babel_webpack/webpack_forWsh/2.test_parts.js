@@ -11,6 +11,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_array = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -111,7 +125,10 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return NumberArray(0.3, 0, 0.1);
-        })); // object parameter
+        })); // new
+
+        checkEqual([0, 1, 2], new NumberArray(3));
+        checkEqual([1, 2, 3], new NumberArray(1, 3)); // object parameter
 
         checkEqual([0, 1, 2], NumberArray({
           count: 3
@@ -134,7 +151,8 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual([7, 9], NumberArray(7, 10, {
           increment: 2
-        }));
+        })); // exception
+
         checkEqual(true, isThrown(function () {
           return NumberArray({
             count: 3,
@@ -202,7 +220,10 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return IntegerArray(0.3, 0, 0.1);
-        })); // object parameter
+        })); // new
+
+        checkEqual([0, 1, 2], new IntegerArray(3));
+        checkEqual([1, 2, 3], new IntegerArray(1, 3)); // object parameter
 
         checkEqual([0, 1, 2], IntegerArray({
           count: 3
@@ -225,7 +246,8 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual([7, 9], IntegerArray(7, 10, {
           increment: 2
-        }));
+        })); // exception
+
         checkEqual(true, isThrown(function () {
           return IntegerArray({
             count: 3,
@@ -2455,13 +2477,28 @@ var test_execute_array = function test_execute_array(parts) {
         }
 
         var arrayEntries = function arrayEntries(array) {
-          var result = []; // for (const [i, v] of array.entries()) {
-          //   result.push([i,v]);
-          // }
+          var result = [];
 
-          parts.loop(array)(function (v, i) {
-            result.push([i, v]);
-          });
+          var _iterator = _createForOfIteratorHelper(array.entries()),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var _step$value = _slicedToArray(_step.value, 2),
+                  i = _step$value[0],
+                  v = _step$value[1];
+
+              result.push([i, v]);
+            } // parts.loop(array)((v, i) => {
+            //   result.push([i, v]);
+            // });
+
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
           return result;
         };
 
@@ -4378,7 +4415,6 @@ var test_execute_compare = function test_execute_compare(parts) {
         isThrownException = _parts$test2.isThrownException;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
-        equalDeep = _parts$compare.equalDeep,
         or = _parts$compare.or,
         match = _parts$compare.match,
         matchValue = _parts$compare.matchValue,
@@ -4654,6 +4690,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep = function test_equalDeep() {
+      var objectParameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       it('test_equalDeep', function () {
         // Primitive value
         checkEqual(true, equalDeep(1, 1));
@@ -4664,7 +4701,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep(undefined, undefined));
         checkEqual(true, equalDeep(undefined));
         checkEqual(false, equalDeep(null, undefined));
-        checkEqual(false, equalDeep(null)); // named argument
+        checkEqual(false, equalDeep(null));
+
+        if (objectParameter === false) {
+          return;
+        } // named argument
+
 
         checkEqual(true, equalDeep({
           value1: 1,
@@ -4696,14 +4738,14 @@ var test_execute_compare = function test_execute_compare(parts) {
         }, {
           a: '1',
           b: '2'
-        }), 'test_equalDeep object 1');
+        }));
         checkEqual(false, equalDeep({
           a: '2',
           b: '2'
         }, {
           a: '1',
           b: '2'
-        }), 'test_equalDeep object 2');
+        }));
         checkEqual(true, equalDeep({
           a: '1',
           b: '2',
@@ -4712,7 +4754,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           a: '1',
           b: '2',
           c: {}
-        }), 'test_equalDeep object 3');
+        }));
         checkEqual(true, equalDeep({
           a: '1',
           b: '2',
@@ -4721,7 +4763,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           a: '1',
           b: '2',
           c: []
-        }), 'test_equalDeep object 4');
+        }));
         checkEqual(false, equalDeep({
           a: '1',
           b: '2',
@@ -4731,7 +4773,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: '2',
           c: {},
           d: ''
-        }), 'test_equalDeep object 5');
+        }));
         checkEqual(false, equalDeep({
           a: '1',
           b: '2',
@@ -4741,7 +4783,69 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: '2',
           c: [],
           d: ''
-        }), 'test_equalDeep object 6');
+        }));
+        checkEqual(false, equalDeep({
+          a: '1',
+          b: '2',
+          c: {},
+          d: ''
+        }, {
+          a: '1',
+          b: '2',
+          c: {}
+        }));
+        checkEqual(false, equalDeep({
+          a: '1',
+          b: '2',
+          c: [],
+          d: ''
+        }, {
+          a: '1',
+          b: '2',
+          c: []
+        }));
+        checkEqual(true, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'c'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }));
       });
     };
 
@@ -4895,6 +4999,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_array = function test_equalDeep_array() {
+      var objectParameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       it('test_equalDeep_array', function () {
         checkEqual(true, equalDeep([1, 2, {}], [1, 2, {}]));
         checkEqual(true, equalDeep([1, 2, [3]], [1, 2, [3]]));
@@ -4929,7 +5034,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([[undefined, null], undefined], [[undefined, null], undefined]));
         checkEqual(false, equalDeep([[undefined, null], undefined], [undefined, [null, undefined]]));
         checkEqual(true, equalDeep([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
-        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // Object Named Parameter
+        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
+
+        if (objectParameter === false) {
+          return;
+        } // Object Named Parameter
+
 
         checkEqual(true, equalDeep({
           value1: [1, 2, 3, 4],
@@ -7326,6 +7436,73 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
+    var getProperty = parts.getProperty,
+        recursive = parts.syntax.recursive,
+        typeName = parts.typeName;
+
+    var equalDeepUseRecursive = function equalDeepUseRecursive(source, target) {
+      var equalType = function equalType(value1, value2) {
+        return typeName(value1) === typeName(value2);
+      };
+
+      var notEqualLength = function notEqualLength(value1, value2) {
+        if (!equalType(value1, value2)) {
+          return true;
+        }
+
+        if (isObject(value1)) {
+          if (Object.keys(value1).length !== Object.keys(value2).length) {
+            return true;
+          }
+        } else if (isArray(value1)) {
+          if (value1.length !== value2.length) {
+            return true;
+          }
+        }
+
+        return false;
+      };
+
+      var result = true;
+
+      if (source === target) {
+        return true;
+      }
+
+      if (notEqualLength(source, target)) {
+        return false;
+      }
+
+      if (!isObject(source) && !isArray(source)) {
+        return false;
+      }
+
+      recursive(source, function (value, key, level, path) {
+        var targetValue = getProperty(target, path + '.' + key);
+
+        if (notEqualLength(value, targetValue)) {
+          result = false;
+          return false;
+        }
+
+        if (isObject(value)) {
+          return value;
+        }
+
+        if (isArray(value)) {
+          return value;
+        }
+
+        if (targetValue !== value) {
+          result = false;
+          return false;
+        }
+
+        ;
+      });
+      return result;
+    };
+
     test_equal();
     test_equal_object();
     test_equal_array();
@@ -7333,6 +7510,13 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_equal_regexp();
     test_equal_map();
     test_equal_set();
+    var equalDeep;
+    equalDeep = equalDeepUseRecursive;
+    test_equalDeep(false);
+    test_equalDeep_object();
+    test_equalDeep_array(false);
+    test_equalDeep_object_array_mix();
+    equalDeep = parts.compare.equalDeep;
     test_equalDeep();
     test_equalDeep_object();
     test_equalDeep_object_array_mix();

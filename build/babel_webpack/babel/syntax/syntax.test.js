@@ -1039,7 +1039,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]
         }];
         var message = '';
-        recursive(data, function (value, key, level, source) {
+        recursive(data, function (value, key, level, path, source) {
           checkEqual(data, source);
           message += "".concat(key, ":").concat(value.name, " ");
 

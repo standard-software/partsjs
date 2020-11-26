@@ -11,6 +11,8 @@ var _loop = require("../syntax/__loop.js");
 
 var _objectEntries2 = require("../object/_objectEntries.js");
 
+var _arrayEntries2 = require("../array/_arrayEntries.js");
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -24,31 +26,44 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var _recursive = function _recursive(source, func) {
-  var recursive_ = function recursive_(value, level) {
+  var continueFlag = true;
+
+  var _recursive_ = function _recursive_(value, level, path) {
+    var loopArray;
+
     if ((0, _isType.isObject)(value)) {
-      (0, _loop.__loop)((0, _objectEntries2._objectEntries)(value))(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            key = _ref2[0],
-            value = _ref2[1];
-
-        var result = func(value, key, level, source);
-
-        if (!((0, _isType.isUndefined)(result) || result === false)) {
-          recursive_(result, level + 1);
-        }
-      });
+      loopArray = (0, _objectEntries2._objectEntries)(value);
     } else if ((0, _isType.isArray)(value)) {
-      (0, _loop.__loop)(value)(function (value, index) {
-        var result = func(value, index, level, source);
-
-        if (!((0, _isType.isUndefined)(result) || result === false)) {
-          recursive_(result, level + 1);
-        }
-      });
+      loopArray = (0, _arrayEntries2._arrayEntries)(value);
+    } else {
+      return;
     }
+
+    (0, _loop.__loop)(loopArray)(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          key = _ref2[0],
+          value = _ref2[1];
+
+      var result = func(value, key, level, path, source);
+
+      if (result === false) {
+        continueFlag = false;
+        return {
+          "break": true
+        };
+      }
+
+      _recursive_(result, level + 1, path + '.' + key);
+
+      if (continueFlag === false) {
+        return {
+          "break": true
+        };
+      }
+    });
   };
 
-  recursive_(source, 0);
+  _recursive_(source, 0, '');
 };
 
 exports._recursive = _recursive;

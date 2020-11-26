@@ -33,16 +33,15 @@ var _otherTest = require("./other/other.test.js");
 
 var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
-  console.log("platform: ".concat(parts.platform.name()));
+  console.log("platform: ".concat(parts.platform.platformName()));
 
   if (parts.platform.isWebBrowser()) {
-    console.log("  web browser: ".concat(parts.platform.browserName()));
     console.log("  User Agent: ".concat(window.navigator.userAgent));
   }
 
   console.log("  buildMode: ".concat(parts.platform.buildMode));
-  console.log("  startName: ".concat(parts.platform.startName));
-  console.log('test start');
+  console.log("  testStartFileName: ".concat(parts.platform.testStartFileName));
+  console.log("test start datetime: ".concat(new Date().toString()));
 
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var _parts$test = parts.test,
@@ -76,21 +75,23 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [391, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
-        checkEqual(countArray.shift(), propertyCountForParts(parts));
-        checkEqual(countArray.shift(), propertyCount(parts.platform));
-        checkEqual(countArray.shift(), propertyCount(parts.common));
-        checkEqual(countArray.shift(), propertyCount(parts.type));
-        checkEqual(countArray.shift(), propertyCount(parts.syntax));
-        checkEqual(countArray.shift(), propertyCount(parts.test));
-        checkEqual(countArray.shift(), propertyCount(parts.compare));
-        checkEqual(countArray.shift(), propertyCount(parts.convert));
-        checkEqual(countArray.shift(), propertyCount(parts.number));
-        checkEqual(countArray.shift(), propertyCount(parts.string));
-        checkEqual(countArray.shift(), propertyCount(parts.object));
-        checkEqual(countArray.shift(), propertyCount(parts.array));
-        checkEqual(countArray.shift(), propertyCount(parts.array.operation));
-        checkEqual(countArray.shift(), propertyCount(parts.date));
+        checkEqual(392, propertyCountForParts(parts));
+        checkEqual(17, propertyCount(parts.platform));
+        checkEqual(7, propertyCount(parts.common));
+        checkEqual(260, propertyCount(parts.type));
+        checkEqual(15, propertyCount(parts.syntax));
+        checkEqual(12, propertyCount(parts.test));
+        checkEqual(44, propertyCount(parts.compare));
+        checkEqual(35, propertyCount(parts.convert));
+        checkEqual(15, propertyCount(parts.number));
+        checkEqual(90, propertyCount(parts.string));
+        checkEqual(40, propertyCount(parts.object));
+        checkEqual(68, propertyCount(parts.array));
+        checkEqual(48, propertyCount(parts.array.operation));
+        checkEqual(4, propertyCount(parts.date));
+        checkEqual(2, propertyCount(parts.system));
+        checkEqual(3, propertyCount(parts.system.wsh));
+        checkEqual(20, propertyCount(parts.system.consoleHook));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'number,string,object,array,date'));
       });
       it('test_execute_nameSpace 2', function () {

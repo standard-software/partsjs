@@ -84,7 +84,7 @@ var getProperty = function getProperty(object, propertyPath) {
     detail = _detail.detail;
   }
 
-  if (!(0, _type.isObject)(object)) {
+  if (!(0, _type.isObjectLike)(object)) {
     throw new TypeError('getProperty args(object) is not object');
   }
 

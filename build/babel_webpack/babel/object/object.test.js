@@ -642,7 +642,27 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, getProperty(testObj2, 'a.b.c.d', true, true).exist);
         checkEqual(false, getProperty(testObj2, 'a.b.b', true, true).exist);
         /* eslint-enable comma-spacing */
-        // object parameter
+
+        var testObj3 = {
+          a: [{
+            b: 'B'
+          }, {
+            c: 'C'
+          }]
+        };
+        checkEqual([{
+          b: 'B'
+        }, {
+          c: 'C'
+        }], getProperty(testObj3, 'a'));
+        checkEqual({
+          b: 'B'
+        }, getProperty(testObj3, 'a.0'));
+        checkEqual({
+          c: 'C'
+        }, getProperty(testObj3, 'a.1'));
+        checkEqual('B', getProperty(testObj3, 'a.0.b'));
+        checkEqual('C', getProperty(testObj3, 'a.1.c')); // object parameter
 
         var object1 = {
           a: {
@@ -741,6 +761,8 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, testObj1.a.b);
         setProperty(testObj1, 'a', true);
         checkEqual(true, testObj1.a);
+        setProperty(testObj1, '.a', 'A');
+        checkEqual('A', testObj1.a);
         setProperty(testObj1, 'a.b.c', true);
         checkEqual(true, testObj1.a.b.c);
         setProperty(testObj1, 'a.c', true);
@@ -755,7 +777,7 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, isThrown(function () {
           return setProperty(testObj1, 'a.', true);
         }));
-        checkEqual(true, isThrown(function () {
+        checkEqual(false, isThrown(function () {
           return setProperty(testObj1, '.a', true);
         }));
         checkEqual(false, isThrown(function () {

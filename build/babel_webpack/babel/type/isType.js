@@ -88,11 +88,11 @@ var isFunction = function isFunction(value) {
 };
 
 exports.isFunction = isFunction;
-var isObject;
-exports.isObject = isObject;
+
+var _isObject;
 
 if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
-  exports.isObject = isObject = function isObject(value) {
+  _isObject = function _isObject(value) {
     if (objectToString(value) !== '[object Object]') {
       return false;
     }
@@ -108,7 +108,7 @@ if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
     return true;
   };
 } else if ((0, _platform.isInternetExplorer)()) {
-  exports.isObject = isObject = function isObject(value) {
+  _isObject = function _isObject(value) {
     if (objectToString(value) !== '[object Object]') {
       return false;
     }
@@ -120,7 +120,7 @@ if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
     return true;
   };
 } else {
-  exports.isObject = isObject = function isObject(value) {
+  _isObject = function _isObject(value) {
     if (objectToString(value) !== '[object Object]') {
       return false;
     }
@@ -128,6 +128,9 @@ if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
     return true;
   };
 }
+
+var isObject = _isObject;
+exports.isObject = isObject;
 
 var isObjectNormal = function isObjectNormal(value) {
   if (!isObject(value)) {
@@ -182,17 +185,20 @@ var isEmptyObject = function isEmptyObject(value) {
 };
 
 exports.isEmptyObject = isEmptyObject;
-var isArray;
-exports.isArray = isArray;
+
+var _isArray;
 
 if (Array.isArray) {
-  exports.isArray = isArray = Array.isArray;
+  _isArray = Array.isArray;
 } else {
-  exports.isArray = isArray = function isArray(value) {
+  _isArray = function _isArray(value) {
     return objectToString(value) === '[object Array]';
   };
-} // Int8Array Uint16Array Float32Array Float64Array etc
+}
 
+var isArray = _isArray; // Int8Array Uint16Array Float32Array Float64Array etc
+
+exports.isArray = isArray;
 
 var isArraySeries = function isArraySeries(value) {
   if ((0, _includes.__includes)(objectToString(value), 'Array]')) {

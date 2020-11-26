@@ -15,7 +15,11 @@ var _replaceAll2 = require("../string/_replaceAll.js");
 
 var _splitCommaItems2 = require("../string/splitCommaItems.js");
 
+var _splitDotItems2 = require("../string/splitDotItems.js");
+
 var _includes = require("../compare/__includes.js");
+
+var _string_common = require("../string/string_common.js");
 
 /**
  * copyProperty
@@ -81,7 +85,11 @@ var copyProperty = function copyProperty(fromObject, propertyNames) {
 exports.copyProperty = copyProperty;
 
 var _setProperty = function _setProperty(object, propertyPath, value) {
-  var propertyArray = propertyPath.split('.');
+  var propertyArray = (0, _splitDotItems2._splitDotItems)(propertyPath);
+
+  if (propertyArray.length === 0) {
+    throw new Error('setProperty args(propertyPath) is empty string');
+  }
 
   for (var i = 0, l = propertyArray.length; i < l; i += 1) {
     if (propertyArray[i] === '') {

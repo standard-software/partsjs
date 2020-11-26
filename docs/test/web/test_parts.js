@@ -141,16 +141,15 @@ var _otherTest = __webpack_require__(14);
 
 var test_execute_index = function test_execute_index(parts) {
   console.log("parts.js version: ".concat(parts.VERSION));
-  console.log("platform: ".concat(parts.platform.name()));
+  console.log("platform: ".concat(parts.platform.platformName()));
 
   if (parts.platform.isWebBrowser()) {
-    console.log("  web browser: ".concat(parts.platform.browserName()));
     console.log("  User Agent: ".concat(window.navigator.userAgent));
   }
 
   console.log("  buildMode: ".concat(parts.platform.buildMode));
-  console.log("  startName: ".concat(parts.platform.startName));
-  console.log('test start');
+  console.log("  testStartFileName: ".concat(parts.platform.testStartFileName));
+  console.log("test start datetime: ".concat(new Date().toString()));
 
   var test_execute_nameSpace = function test_execute_nameSpace(parts) {
     var _parts$test = parts.test,
@@ -184,21 +183,23 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        var countArray = [390, 19, 7, 259, 15, 12, 44, 35, 15, 90, 40, 68, 48, 1];
-        checkEqual(countArray.shift(), propertyCountForParts(parts));
-        checkEqual(countArray.shift(), propertyCount(parts.platform));
-        checkEqual(countArray.shift(), propertyCount(parts.common));
-        checkEqual(countArray.shift(), propertyCount(parts.type));
-        checkEqual(countArray.shift(), propertyCount(parts.syntax));
-        checkEqual(countArray.shift(), propertyCount(parts.test));
-        checkEqual(countArray.shift(), propertyCount(parts.compare));
-        checkEqual(countArray.shift(), propertyCount(parts.convert));
-        checkEqual(countArray.shift(), propertyCount(parts.number));
-        checkEqual(countArray.shift(), propertyCount(parts.string));
-        checkEqual(countArray.shift(), propertyCount(parts.object));
-        checkEqual(countArray.shift(), propertyCount(parts.array));
-        checkEqual(countArray.shift(), propertyCount(parts.array.operation));
-        checkEqual(countArray.shift(), propertyCount(parts.date));
+        checkEqual(392, propertyCountForParts(parts));
+        checkEqual(17, propertyCount(parts.platform));
+        checkEqual(7, propertyCount(parts.common));
+        checkEqual(260, propertyCount(parts.type));
+        checkEqual(15, propertyCount(parts.syntax));
+        checkEqual(12, propertyCount(parts.test));
+        checkEqual(44, propertyCount(parts.compare));
+        checkEqual(35, propertyCount(parts.convert));
+        checkEqual(15, propertyCount(parts.number));
+        checkEqual(90, propertyCount(parts.string));
+        checkEqual(40, propertyCount(parts.object));
+        checkEqual(68, propertyCount(parts.array));
+        checkEqual(48, propertyCount(parts.array.operation));
+        checkEqual(4, propertyCount(parts.date));
+        checkEqual(2, propertyCount(parts.system));
+        checkEqual(3, propertyCount(parts.system.wsh));
+        checkEqual(20, propertyCount(parts.system.consoleHook));
         checkEqual(true, inProperty(parts, 'type,syntax,test,compare,convert,' + 'number,string,object,array,date'));
       });
       it('test_execute_nameSpace 2', function () {
@@ -272,6 +273,7 @@ var test_execute_index = function test_execute_index(parts) {
     (0, _arrayTest.test_execute_array)(parts);
     (0, _dateTest.test_execute_date)(parts);
     (0, _otherTest.test_execute_other)(parts);
+    (0, _consoleHookTest.test_execute_consoleHook)(parts);
     test_execute_nameSpace(parts);
     test_execute_SelfReference(parts);
     console.log('test finish');
@@ -2058,7 +2060,9 @@ var test_execute_type = function test_execute_type(parts) {
       it = _parts$test.it,
       testCounter = _parts$test.testCounter;
   describe('test_execute_type', function () {
+    var isThrown = parts.test.isThrown;
     var _parts$type = parts.type,
+        typeName = _parts$type.typeName,
         isUndefined = _parts$type.isUndefined,
         isNull = _parts$type.isNull,
         isNaNStrict = _parts$type.isNaNStrict,
@@ -2227,8 +2231,9 @@ var test_execute_type = function test_execute_type(parts) {
     var test_checkType = function test_checkType() {
       it('test_checkType', function () {
         var checkType = function checkType(typeofName, objectStringName, value) {
-          checkEqual(typeofName, _typeof(value));
-          checkEqual(true, parts.includes(objectStringName, objectToString(value))); // checkEqual(objectStringName, objectToString(value));
+          checkEqual(typeofName, _typeof(value)); // checkEqual(true, parts.includes(objectStringName, objectToString(value)));
+
+          checkEqual(objectStringName, objectToString(value));
         };
 
         if (parts.platform.isWindowsScriptHost()) {
@@ -2271,13 +2276,18 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Array]', new Array());
         checkType('object', '[object RegExp]', /^a/);
         checkType('object', '[object RegExp]', new RegExp('^a'));
+        checkType('object', '[object Date]', new Date());
         checkType('object', '[object Math]', Math);
 
         if (parts.platform.isWindowsScriptHost()) {
           return;
         }
 
-        if (!parts.platform.isGasRhino()) {
+        if (parts.platform.isWindowsScriptHost()) {} else {
+          checkType('object', '[object JSON]', JSON);
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
           checkType('object', '[object Int8Array]', new Int8Array());
           checkType('object', '[object Uint8Array]', new Uint8Array());
           checkType('object', '[object Uint8ClampedArray]', new Uint8ClampedArray());
@@ -2289,7 +2299,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object Float64Array]', new Float64Array());
         }
 
-        if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new Map());
           checkType('object', '[object Object]', new WeakMap());
           checkType('object', '[object Object]', new Set());
@@ -2301,26 +2311,23 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('symbol', '[object Symbol]', Symbol());
         }
 
-        if (!parts.platform.isGasRhino()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
           checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
         }
 
-        if (parts.platform.isChrome() || parts.platform.isSafari() || parts.platform.isOpera()) {
-          checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8)); // firefox no support
-
-          checkType('object', '[object Atomics]', Atomics); // firefox no support
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
+          checkType('object', '[object Atomics]', Atomics);
         }
 
-        checkType('object', '[object JSON]', JSON);
-
-        if (parts.platform.isGasRhino()) {} else if (!parts.platform.isInternetExplorer()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+          checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
+        } else {
           checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
           checkType('function', '[object Function]', Promise);
-        } else {
-          checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
         }
 
-        if (parts.platform.buildMode === 'source') {
+        if (parts.platform.isDeno()) {
           var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
             return regeneratorRuntime.wrap(function Generator$(_context) {
               while (1) {
@@ -2369,45 +2376,208 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object Generator]', Generator());
           checkType('function', '[object GeneratorFunction]', new GeneratorFunction());
           checkType('function', '[object AsyncFunction]', new AsyncFunction());
-        }
-
-        testCounter(); // Reflect
-
-        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
-        } else if (parts.platform.isChrome() || parts.platform.isEdge()) {
-          // checkType('object',    '[object Object]',  Reflect);
-          checkType('object', '[object Reflect]', Reflect); // 2020/10/16(Fri)
-          // Chrome and Vivaldi and Edge old version
-          //  >> Object.prototype.toString.call(Reflect) === '[object Object]'
-          // Chrome and Vivaldi and Edge new version
-          //  >> Object.prototype.toString.call(Reflect) === '[object Reflect]'
-        } else {
-          checkType('object', '[object Object]', Reflect);
         } // Proxy
 
 
-        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
           checkType('object', '[object Object]', new Proxy({}, {}));
         } // WebAssembly
 
 
-        if (parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {// no define
-        } else if (parts.platform.isFirefox()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
           checkType('object', '[object Object]', WebAssembly);
         } else {
           checkType('object', '[object WebAssembly]', WebAssembly);
-        }
+        } // Reflect
 
-        if (parts.platform.isDeno() || parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge()) {
-          // checkType('object',    '[object Object]',  Intl);
-          checkType('object', '[object Intl]', Intl); // 2020/10/16(Fri)
-          // Chrome and Vivaldi and Edge old version
-          //  >> Object.prototype.toString.call(Intl) === '[object Object]'
-          // Chrome and Vivaldi and Edge new version
-          //  >> Object.prototype.toString.call(Intl) === '[object Intl]'
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkType('object', '[object Reflect]', Reflect);
+        } else {
+          checkType('object', '[object Object]', Reflect);
+        } // Intl
+
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkType('object', '[object Intl]', Intl);
         } else {
           checkType('object', '[object Object]', Intl);
+        }
+      });
+    };
+
+    var test_typeName = function test_typeName() {
+      it('test_typeName', function () {
+        checkEqual('Undefined', typeName(undefined));
+        checkEqual('Null', typeName(null));
+        checkEqual('Boolean', typeName(true));
+        checkEqual('Boolean', typeName(false));
+        checkEqual('BooleanObject', typeName(new Boolean()));
+        checkEqual('Number', typeName(1));
+        checkEqual('NaN', typeName(NaN));
+        checkEqual('Infinity', typeName(Infinity));
+        checkEqual('Infinity', typeName(-Infinity));
+        checkEqual('Infinity', typeName(Infinity / 2));
+        checkEqual('NaN', typeName(Infinity / Infinity));
+        checkEqual('NumberObject', typeName(new Number(0)));
+        checkEqual('NumberObject', typeName(new Number(1)));
+        checkEqual('NumberObject', typeName(new Number(NaN)));
+        checkEqual('NumberObject', typeName(new Number(Infinity)));
+        checkEqual('NumberObject', typeName(new Number(-Infinity)));
+        checkEqual('NumberObject', typeName(new Number('')));
+        checkEqual('NumberObject', typeName(new Number('0')));
+        checkEqual('NumberObject', typeName(new Number('1')));
+        checkEqual('NumberObject', typeName(new Number(null)));
+        checkEqual('NumberObject', typeName(new Number()));
+        checkEqual('String', typeName(''));
+        checkEqual('String', typeName('a'));
+        checkEqual('StringObject', typeName(new String('')));
+        checkEqual('StringObject', typeName(new String('a')));
+        checkEqual('StringObject', typeName(new String(1)));
+        checkEqual('StringObject', typeName(new String(null)));
+        checkEqual('StringObject', typeName(new String()));
+        checkEqual('Object', typeName({}));
+        checkEqual('Object', typeName(new Object()));
+        checkEqual('Object', typeName(new Object(null)));
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('Object', typeName(Object.create({})));
+          checkEqual('Object', typeName(Object.create({
+            a: 'A'
+          })));
+          checkEqual('ObjectFromNull', typeName(Object.create(null)));
+        }
+
+        function testFunc() {}
+
+        checkEqual('Function', typeName(testFunc));
+        checkEqual('Function', typeName(function () {}));
+        checkEqual('Function', typeName(function () {}));
+        checkEqual('Array', typeName([]));
+        checkEqual('Array', typeName([0, 1, 2]));
+        checkEqual('Array', typeName(new Array()));
+        checkEqual('RegExp', typeName(/^a/));
+        checkEqual('RegExp', typeName(new RegExp('^a')));
+        checkEqual('Date', typeName(new Date()));
+        checkEqual('Math', typeName(Math));
+
+        if (parts.platform.isWindowsScriptHost()) {} else {
+          checkEqual('JSON', typeName(JSON));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual('Int8Array', typeName(new Int8Array()));
+          checkEqual('Uint8Array', typeName(new Uint8Array()));
+          checkEqual('Uint8ClampedArray', typeName(new Uint8ClampedArray()));
+          checkEqual('Int16Array', typeName(new Int16Array()));
+          checkEqual('Uint16Array', typeName(new Uint16Array()));
+          checkEqual('Int32Array', typeName(new Int32Array()));
+          checkEqual('Uint32Array', typeName(new Uint32Array()));
+          checkEqual('Float32Array', typeName(new Float32Array()));
+          checkEqual('Float64Array', typeName(new Float64Array()));
+          checkEqual('ArrayBuffer', typeName(new ArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual('Map', typeName(new Map()));
+          checkEqual('WeakMap', typeName(new WeakMap()));
+          checkEqual('Set', typeName(new Set()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual('WeakSet', typeName(new WeakSet()));
+          checkEqual('Symbol', typeName(Symbol()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual('SharedArrayBuffer', typeName(new SharedArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual('Atomics', typeName(Atomics));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+          checkEqual('Object', typeName(new DataView(new ArrayBuffer(1))));
+        } else {
+          checkEqual('DataView', typeName(new DataView(new ArrayBuffer(1))));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual('Function', typeName(Promise));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isGasV8()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isNode()) {} else if (parts.platform.isChrome()) {} else if (parts.platform.isEdge()) {} else if (parts.platform.isFirefox()) {} else if (parts.platform.isOpera()) {} else if (parts.platform.isJest()) {} else {
+          var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
+            return regeneratorRuntime.wrap(function Generator$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    _context4.next = 2;
+                    return 1;
+
+                  case 2:
+                    _context4.next = 4;
+                    return 2;
+
+                  case 4:
+                    _context4.next = 6;
+                    return 3;
+
+                  case 6:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, Generator);
+          });
+          var GeneratorFunction = Object.getPrototypeOf( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return regeneratorRuntime.wrap(function _callee3$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee3);
+          })).constructor;
+          var AsyncFunction = Object.getPrototypeOf( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            return regeneratorRuntime.wrap(function _callee4$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                  case "end":
+                    return _context6.stop();
+                }
+              }
+            }, _callee4);
+          }))).constructor;
+          checkEqual('Generator', typeName(Generator()));
+          checkEqual('GeneratorFunction', typeName(new GeneratorFunction()));
+          checkEqual('AsyncFunction', typeName(new AsyncFunction()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual('Object', typeName(new Proxy({}, {})));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
+          checkEqual('Object', typeName(WebAssembly));
+        } else {
+          checkEqual('WebAssembly', typeName(WebAssembly));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual('Reflect', typeName(Reflect));
+        } else {
+          checkEqual('Object', typeName(Reflect));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual('Intl', typeName(Intl));
+        } else {
+          checkEqual('Object', typeName(Intl));
         }
       });
     };
@@ -2801,6 +2971,25 @@ var test_execute_type = function test_execute_type(parts) {
       if (!parts.platform.isWindowsScriptHost()) {
         checkEqual(false, 'hasOwnProperty' in Object.create(null));
         checkEqual(false, 'constructor' in Object.create(null));
+        checkEqual(false, isThrown(function () {
+          typeName(Object.create({}));
+        }));
+        checkEqual(false, isThrown(function () {
+          typeName(Object.create(null));
+        }));
+        checkEqual(true, isThrown(function () {
+          typeName(Object.create());
+        }));
+      } else {
+        checkEqual(true, isThrown(function () {
+          typeName(Object.create({}));
+        }));
+        checkEqual(true, isThrown(function () {
+          typeName(Object.create(null));
+        }));
+        checkEqual(true, isThrown(function () {
+          typeName(Object.create());
+        }));
       }
     };
 
@@ -3391,6 +3580,7 @@ var test_execute_type = function test_execute_type(parts) {
     };
 
     test_checkType();
+    test_typeName();
     test_isUndefinedAll();
     test_isNull();
     test_isBoolean();
@@ -4469,7 +4659,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
           }]
         }];
         var message = '';
-        recursive(data, function (value, key, level, source) {
+        recursive(data, function (value, key, level, path, source) {
           checkEqual(data, source);
           message += "".concat(key, ":").concat(value.name, " ");
 
@@ -4920,7 +5110,6 @@ var test_execute_compare = function test_execute_compare(parts) {
         isThrownException = _parts$test2.isThrownException;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
-        equalDeep = _parts$compare.equalDeep,
         or = _parts$compare.or,
         match = _parts$compare.match,
         matchValue = _parts$compare.matchValue,
@@ -5196,6 +5385,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep = function test_equalDeep() {
+      var objectParameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       it('test_equalDeep', function () {
         // Primitive value
         checkEqual(true, equalDeep(1, 1));
@@ -5206,7 +5396,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep(undefined, undefined));
         checkEqual(true, equalDeep(undefined));
         checkEqual(false, equalDeep(null, undefined));
-        checkEqual(false, equalDeep(null)); // named argument
+        checkEqual(false, equalDeep(null));
+
+        if (objectParameter === false) {
+          return;
+        } // named argument
+
 
         checkEqual(true, equalDeep({
           value1: 1,
@@ -5238,14 +5433,14 @@ var test_execute_compare = function test_execute_compare(parts) {
         }, {
           a: '1',
           b: '2'
-        }), 'test_equalDeep object 1');
+        }));
         checkEqual(false, equalDeep({
           a: '2',
           b: '2'
         }, {
           a: '1',
           b: '2'
-        }), 'test_equalDeep object 2');
+        }));
         checkEqual(true, equalDeep({
           a: '1',
           b: '2',
@@ -5254,7 +5449,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           a: '1',
           b: '2',
           c: {}
-        }), 'test_equalDeep object 3');
+        }));
         checkEqual(true, equalDeep({
           a: '1',
           b: '2',
@@ -5263,7 +5458,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           a: '1',
           b: '2',
           c: []
-        }), 'test_equalDeep object 4');
+        }));
         checkEqual(false, equalDeep({
           a: '1',
           b: '2',
@@ -5273,7 +5468,7 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: '2',
           c: {},
           d: ''
-        }), 'test_equalDeep object 5');
+        }));
         checkEqual(false, equalDeep({
           a: '1',
           b: '2',
@@ -5283,7 +5478,69 @@ var test_execute_compare = function test_execute_compare(parts) {
           b: '2',
           c: [],
           d: ''
-        }), 'test_equalDeep object 6');
+        }));
+        checkEqual(false, equalDeep({
+          a: '1',
+          b: '2',
+          c: {},
+          d: ''
+        }, {
+          a: '1',
+          b: '2',
+          c: {}
+        }));
+        checkEqual(false, equalDeep({
+          a: '1',
+          b: '2',
+          c: [],
+          d: ''
+        }, {
+          a: '1',
+          b: '2',
+          c: []
+        }));
+        checkEqual(true, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'c'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }, {
+          a: {
+            b: 'B'
+          }
+        }));
+        checkEqual(false, equalDeep({
+          a: {
+            b: 'B'
+          }
+        }, {
+          a: {
+            b: 'B',
+            c: 'C'
+          }
+        }));
       });
     };
 
@@ -5437,6 +5694,7 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var test_equalDeep_array = function test_equalDeep_array() {
+      var objectParameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       it('test_equalDeep_array', function () {
         checkEqual(true, equalDeep([1, 2, {}], [1, 2, {}]));
         checkEqual(true, equalDeep([1, 2, [3]], [1, 2, [3]]));
@@ -5471,7 +5729,12 @@ var test_execute_compare = function test_execute_compare(parts) {
         checkEqual(true, equalDeep([[undefined, null], undefined], [[undefined, null], undefined]));
         checkEqual(false, equalDeep([[undefined, null], undefined], [undefined, [null, undefined]]));
         checkEqual(true, equalDeep([[undefined, [null], undefined]], [[undefined, [null], undefined]]));
-        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]])); // Object Named Parameter
+        checkEqual(false, equalDeep([[undefined, [null], undefined]], [[undefined, ['a'], undefined]]));
+
+        if (objectParameter === false) {
+          return;
+        } // Object Named Parameter
+
 
         checkEqual(true, equalDeep({
           value1: [1, 2, 3, 4],
@@ -7868,6 +8131,73 @@ var test_execute_compare = function test_execute_compare(parts) {
       });
     };
 
+    var getProperty = parts.getProperty,
+        recursive = parts.syntax.recursive,
+        typeName = parts.typeName;
+
+    var equalDeepUseRecursive = function equalDeepUseRecursive(source, target) {
+      var equalType = function equalType(value1, value2) {
+        return typeName(value1) === typeName(value2);
+      };
+
+      var notEqualLength = function notEqualLength(value1, value2) {
+        if (!equalType(value1, value2)) {
+          return true;
+        }
+
+        if (isObject(value1)) {
+          if (Object.keys(value1).length !== Object.keys(value2).length) {
+            return true;
+          }
+        } else if (isArray(value1)) {
+          if (value1.length !== value2.length) {
+            return true;
+          }
+        }
+
+        return false;
+      };
+
+      var result = true;
+
+      if (source === target) {
+        return true;
+      }
+
+      if (notEqualLength(source, target)) {
+        return false;
+      }
+
+      if (!isObject(source) && !isArray(source)) {
+        return false;
+      }
+
+      recursive(source, function (value, key, level, path) {
+        var targetValue = getProperty(target, path + '.' + key);
+
+        if (notEqualLength(value, targetValue)) {
+          result = false;
+          return false;
+        }
+
+        if (isObject(value)) {
+          return value;
+        }
+
+        if (isArray(value)) {
+          return value;
+        }
+
+        if (targetValue !== value) {
+          result = false;
+          return false;
+        }
+
+        ;
+      });
+      return result;
+    };
+
     test_equal();
     test_equal_object();
     test_equal_array();
@@ -7875,6 +8205,13 @@ var test_execute_compare = function test_execute_compare(parts) {
     test_equal_regexp();
     test_equal_map();
     test_equal_set();
+    var equalDeep;
+    equalDeep = equalDeepUseRecursive;
+    test_equalDeep(false);
+    test_equalDeep_object();
+    test_equalDeep_array(false);
+    test_equalDeep_object_array_mix();
+    equalDeep = parts.compare.equalDeep;
     test_equalDeep();
     test_equalDeep_object();
     test_equalDeep_object_array_mix();
@@ -12691,7 +13028,27 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, getProperty(testObj2, 'a.b.c.d', true, true).exist);
         checkEqual(false, getProperty(testObj2, 'a.b.b', true, true).exist);
         /* eslint-enable comma-spacing */
-        // object parameter
+
+        var testObj3 = {
+          a: [{
+            b: 'B'
+          }, {
+            c: 'C'
+          }]
+        };
+        checkEqual([{
+          b: 'B'
+        }, {
+          c: 'C'
+        }], getProperty(testObj3, 'a'));
+        checkEqual({
+          b: 'B'
+        }, getProperty(testObj3, 'a.0'));
+        checkEqual({
+          c: 'C'
+        }, getProperty(testObj3, 'a.1'));
+        checkEqual('B', getProperty(testObj3, 'a.0.b'));
+        checkEqual('C', getProperty(testObj3, 'a.1.c')); // object parameter
 
         var object1 = {
           a: {
@@ -12790,6 +13147,8 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, testObj1.a.b);
         setProperty(testObj1, 'a', true);
         checkEqual(true, testObj1.a);
+        setProperty(testObj1, '.a', 'A');
+        checkEqual('A', testObj1.a);
         setProperty(testObj1, 'a.b.c', true);
         checkEqual(true, testObj1.a.b.c);
         setProperty(testObj1, 'a.c', true);
@@ -12804,7 +13163,7 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(true, isThrown(function () {
           return setProperty(testObj1, 'a.', true);
         }));
-        checkEqual(true, isThrown(function () {
+        checkEqual(false, isThrown(function () {
           return setProperty(testObj1, '.a', true);
         }));
         checkEqual(false, isThrown(function () {
@@ -13203,6 +13562,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_array = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -13303,7 +13676,10 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return NumberArray(0.3, 0, 0.1);
-        })); // object parameter
+        })); // new
+
+        checkEqual([0, 1, 2], new NumberArray(3));
+        checkEqual([1, 2, 3], new NumberArray(1, 3)); // object parameter
 
         checkEqual([0, 1, 2], NumberArray({
           count: 3
@@ -13326,7 +13702,8 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual([7, 9], NumberArray(7, 10, {
           increment: 2
-        }));
+        })); // exception
+
         checkEqual(true, isThrown(function () {
           return NumberArray({
             count: 3,
@@ -13394,7 +13771,10 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return IntegerArray(0.3, 0, 0.1);
-        })); // object parameter
+        })); // new
+
+        checkEqual([0, 1, 2], new IntegerArray(3));
+        checkEqual([1, 2, 3], new IntegerArray(1, 3)); // object parameter
 
         checkEqual([0, 1, 2], IntegerArray({
           count: 3
@@ -13417,7 +13797,8 @@ var test_execute_array = function test_execute_array(parts) {
         }));
         checkEqual([7, 9], IntegerArray(7, 10, {
           increment: 2
-        }));
+        })); // exception
+
         checkEqual(true, isThrown(function () {
           return IntegerArray({
             count: 3,
@@ -15647,13 +16028,28 @@ var test_execute_array = function test_execute_array(parts) {
         }
 
         var arrayEntries = function arrayEntries(array) {
-          var result = []; // for (const [i, v] of array.entries()) {
-          //   result.push([i,v]);
-          // }
+          var result = [];
 
-          parts.loop(array)(function (v, i) {
-            result.push([i, v]);
-          });
+          var _iterator = _createForOfIteratorHelper(array.entries()),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var _step$value = _slicedToArray(_step.value, 2),
+                  i = _step$value[0],
+                  v = _step$value[1];
+
+              result.push([i, v]);
+            } // parts.loop(array)((v, i) => {
+            //   result.push([i, v]);
+            // });
+
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
           return result;
         };
 
@@ -15761,7 +16157,11 @@ var test_execute_date = function test_execute_date(parts) {
       isThrown = _parts$test.isThrown,
       isThrownException = _parts$test.isThrownException,
       testCounter = _parts$test.testCounter;
-  var Today = parts.date.Today;
+  var _parts$date = parts.date,
+      Today = _parts$date.Today,
+      isInvalidDate = _parts$date.isInvalidDate,
+      DateTime = _parts$date.DateTime;
+  var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Today = function test_Today() {
       it('test_Today', function () {
@@ -15769,7 +16169,182 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_isInvalidDate = function test_isInvalidDate() {
+      it('test_isInvalidDate', function () {
+        checkEqual(true, isDate(new Date(2020, 11, 21)));
+        checkEqual(true, isDate(new Date('ABC')));
+        checkEqual(false, isInvalidDate(new Date(2020, 11, 21)));
+        checkEqual(true, isInvalidDate(new Date('ABC')));
+      });
+    };
+
+    var test_Date_standard = function test_Date_standard() {
+      it('test_Date_standard', function () {
+        checkEqual(0, new Date(0).getTime());
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('Thu, 01 Jan 1970 00:00:00 GMT', new Date(0).toUTCString());
+        } else {
+          checkEqual('Thu, 1 Jan 1970 00:00:00 UTC', new Date(0).toUTCString());
+        }
+
+        checkEqual('1970-01-01T00:00:00.000Z', new Date(0).toISOString());
+        var dt = new Date(Date.UTC(2020, 10, 21, 11, 35, 10));
+        checkEqual('2020-11-21T11:35:10.000Z', dt.toISOString());
+      });
+    };
+
+    var test_DateTime = function test_DateTime() {
+      it('test_DateTime', function () {
+        checkEqual(0, new Date(0).getTime());
+        var dt = DateTime(undefined, undefined, undefined, undefined, undefined, undefined, undefined, false);
+        checkEqual(0, dt.getTime());
+        checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime();
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual(0, dt.getTime());
+        checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-11-21T11:35:10.400Z', dt.toISOString());
+        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        checkEqual(new Date(2020, 10, 21, 11, 35, 10, 400).toISOString(), dt.toISOString());
+        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400, false);
+        checkEqual(new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400)).toISOString(), dt.toISOString());
+        var dt = DateTime(2020);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, false);
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // zero
+
+        var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
+        checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 3, 0, 4, 5, 6, 7, false);
+        checkEqual('2020-02-29T04:05:06.007Z', dt.toISOString()); // minus
+
+        var dt = DateTime(2020, -1, 3, 4, 5, 6, 7, false);
+        checkEqual('2019-11-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 3, -1, 4, 5, 6, 7, false);
+        checkEqual('2020-02-28T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 3, 4, -2, 5, 6, 7, false);
+        checkEqual('2020-03-03T22:05:06.007Z', dt.toISOString()); // object parameter
+
+        var dt = DateTime({
+          year: 2020
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime({
+          year: 2020,
+          isLocal: false
+        });
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime({
+          year: 2020,
+          month: 2,
+          hour: 13,
+          second: 59,
+          isLocal: false
+        });
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime({
+          year: 2020,
+          month: 2,
+          hour: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, {
+          hour: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-01-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, {
+          hour: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, {
+          minute: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T00:13:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, {
+          isLocal: false
+        });
+        checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, {
+          minute: 13,
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:13:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, {
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, {
+          second: 59
+        });
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, {
+          isLocal: false
+        });
+        checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, {
+          isLocal: false
+        });
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // exception
+
+        checkEqual(false, isThrown(function () {
+          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
+            isLocal: false
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
+            isLocal: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return DateTime(2020, '2', 3, 4, 5, 6, 7, {
+            isLocal: true
+          });
+        }));
+      });
+    };
+
     test_Today();
+    test_isInvalidDate();
+    test_Date_standard();
+    test_DateTime();
   });
 };
 
@@ -15802,7 +16377,7 @@ var test_execute_consoleHook = function test_execute_consoleHook(parts) {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         isThrown = _parts$test2.isThrown;
-    var consoleHook = parts.consoleHook;
+    var consoleHook = parts.system.consoleHook;
 
     var test_consoleHook = function test_consoleHook(methodName) {
       it('test_consoleHook' + ' ' + methodName, function () {

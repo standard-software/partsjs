@@ -173,198 +173,7 @@ module.exports = __webpack_require__(1);
 
 /***/ }),
 
-/***/ 10:
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-
-/***/ 105:
+/***/ 107:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -375,19 +184,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.isNotExceptArray = exports.isNotObjTypeArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isExceptArray = exports.isObjTypeArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotExceptAll = exports.isNotObjTypeAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isExceptAll = exports.isObjTypeAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotExcept = exports.isExcept = exports.isNotObjType = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = void 0;
 
-var _isType = _interopRequireDefault(__webpack_require__(6));
+var _isType = _interopRequireDefault(__webpack_require__(11));
 
-var _isException = _interopRequireDefault(__webpack_require__(12));
+var _isException = _interopRequireDefault(__webpack_require__(14));
 
-var _isSymbol = _interopRequireDefault(__webpack_require__(15));
+var _isSymbol = _interopRequireDefault(__webpack_require__(16));
 
-var _isMap = _interopRequireDefault(__webpack_require__(16));
+var _isMap = _interopRequireDefault(__webpack_require__(17));
 
-var _isSet = _interopRequireDefault(__webpack_require__(19));
+var _isSet = _interopRequireDefault(__webpack_require__(20));
 
-var _isTypeAll = _interopRequireDefault(__webpack_require__(21));
+var _isTypeAll = _interopRequireDefault(__webpack_require__(22));
 
-var _isTypeArray = _interopRequireDefault(__webpack_require__(22));
+var _isTypeArray = _interopRequireDefault(__webpack_require__(23));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -842,7 +651,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 106:
+/***/ 108:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,13 +664,13 @@ exports["default"] = exports.isNotThrown = exports.isThrownException = exports.i
 
 var _type = __webpack_require__(5);
 
-var _array = __webpack_require__(59);
+var _array = __webpack_require__(61);
 
-var _string = __webpack_require__(107);
+var _string = __webpack_require__(109);
 
-var _compare = __webpack_require__(129);
+var _compare = __webpack_require__(131);
 
-var _platform = __webpack_require__(9);
+var _platform = __webpack_require__(7);
 
 /**
  * test framework
@@ -1098,7 +907,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1107,45 +916,425 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotException = exports.isException = void 0;
+exports["default"] = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArraySeries = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
 
-var _isType = __webpack_require__(6);
+var _propertyCount2 = __webpack_require__(12);
 
-var _isObjectParameter = __webpack_require__(13);
+var _platform = __webpack_require__(7);
 
-/**
- *isException
- * description:
- * isException can determine standard Error objects
- *  and user-specific exception objects.
- *  Only whether the object has name and message properties.
- */
-var isException = function isException(value) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'name,message')) {
+var _includes = __webpack_require__(9);
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var objectToString = function objectToString(value) {
+  return Object.prototype.toString.call(value);
+};
+
+exports.objectToString = objectToString;
+
+var isUndefined = function isUndefined(value) {
+  return typeof value === 'undefined';
+};
+
+exports.isUndefined = isUndefined;
+
+var isNull = function isNull(value) {
+  return value === null;
+};
+
+exports.isNull = isNull;
+
+var isNaNStrict = function isNaNStrict(value) {
+  return value !== value;
+};
+
+exports.isNaNStrict = isNaNStrict;
+
+var isBoolean = function isBoolean(value) {
+  return typeof value === 'boolean';
+};
+
+exports.isBoolean = isBoolean;
+
+var isBooleanObject = function isBooleanObject(value) {
+  return objectToString(value) === '[object Boolean]' && !isBoolean(value);
+};
+
+exports.isBooleanObject = isBooleanObject;
+
+var isNumber = function isNumber(value) {
+  return typeof value === 'number' && isFinite(value);
+};
+
+exports.isNumber = isNumber;
+
+var isNumberObject = function isNumberObject(value) {
+  return objectToString(value) === '[object Number]' && typeof value !== 'number';
+};
+
+exports.isNumberObject = isNumberObject;
+
+var isInteger = function isInteger(value) {
+  if (!isNumber(value)) {
+    return false;
+  }
+
+  return Math.round(value) === value;
+};
+
+exports.isInteger = isInteger;
+
+var isString = function isString(value) {
+  return typeof value === 'string';
+};
+
+exports.isString = isString;
+
+var isStringObject = function isStringObject(value) {
+  return objectToString(value) === '[object String]' && typeof value !== 'string';
+};
+
+exports.isStringObject = isStringObject;
+
+var isFunction = function isFunction(value) {
+  return typeof value === 'function';
+};
+
+exports.isFunction = isFunction;
+
+var _isObject;
+
+if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
+  _isObject = function _isObject(value) {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
+
+    if (isNull(value)) {
+      return false;
+    }
+
+    if (isUndefined(value)) {
+      return false;
+    }
+
     return true;
-  } else if ((0, _isType.isError)(value)) {
+  };
+} else if ((0, _platform.isInternetExplorer)()) {
+  _isObject = function _isObject(value) {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
+
+    if ((0, _includes.__includes)([Map, WeakMap, Set], value.constructor)) {
+      return false;
+    }
+
+    return true;
+  };
+} else {
+  _isObject = function _isObject(value) {
+    if (objectToString(value) !== '[object Object]') {
+      return false;
+    }
+
+    return true;
+  };
+}
+
+var isObject = _isObject;
+exports.isObject = isObject;
+
+var isObjectNormal = function isObjectNormal(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  if ('constructor' in value) {
     return true;
   }
 
   return false;
 };
 
-exports.isException = isException;
+exports.isObjectNormal = isObjectNormal;
 
-var isNotException = function isNotException(value) {
-  return !isException(value);
+var isObjectFromNull = function isObjectFromNull(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  if ('constructor' in value) {
+    return false;
+  }
+
+  return true;
 };
 
-exports.isNotException = isNotException;
+exports.isObjectFromNull = isObjectFromNull;
+
+var isObjectLike = function isObjectLike(value) {
+  if (isNull(value)) {
+    return false;
+  }
+
+  return _typeof(value) === 'object' || typeof value === 'function';
+};
+
+exports.isObjectLike = isObjectLike;
+
+var isModule = function isModule(value) {
+  return objectToString(value) === '[object Module]';
+};
+
+exports.isModule = isModule;
+
+var isEmptyObject = function isEmptyObject(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  return (0, _propertyCount2._propertyCount)(value) === 0;
+};
+
+exports.isEmptyObject = isEmptyObject;
+
+var _isArray;
+
+if (Array.isArray) {
+  _isArray = Array.isArray;
+} else {
+  _isArray = function _isArray(value) {
+    return objectToString(value) === '[object Array]';
+  };
+}
+
+var isArray = _isArray; // Int8Array Uint16Array Float32Array Float64Array etc
+
+exports.isArray = isArray;
+
+var isArraySeries = function isArraySeries(value) {
+  if ((0, _includes.__includes)(objectToString(value), 'Array]')) {
+    return true;
+  }
+
+  return false;
+};
+
+exports.isArraySeries = isArraySeries;
+
+var isEmptyArray = function isEmptyArray(value) {
+  if (!isArraySeries(value)) {
+    return false;
+  }
+
+  return value.length === 0;
+};
+
+exports.isEmptyArray = isEmptyArray;
+
+var isDate = function isDate(value) {
+  return objectToString(value) === '[object Date]';
+};
+
+exports.isDate = isDate;
+
+var isRegExp = function isRegExp(value) {
+  return objectToString(value) === '[object RegExp]';
+};
+
+exports.isRegExp = isRegExp;
+
+var isError = function isError(value) {
+  return objectToString(value) === '[object Error]';
+};
+
+exports.isError = isError;
+
+var isNotUndefined = function isNotUndefined(value) {
+  return !isUndefined(value);
+};
+
+exports.isNotUndefined = isNotUndefined;
+
+var isNotNull = function isNotNull(value) {
+  return !isNull(value);
+};
+
+exports.isNotNull = isNotNull;
+
+var isNotNaNStrict = function isNotNaNStrict(value) {
+  return !isNaNStrict(value);
+};
+
+exports.isNotNaNStrict = isNotNaNStrict;
+
+var isNotBoolean = function isNotBoolean(value) {
+  return !isBoolean(value);
+};
+
+exports.isNotBoolean = isNotBoolean;
+
+var isNotNumber = function isNotNumber(value) {
+  return !isNumber(value);
+};
+
+exports.isNotNumber = isNotNumber;
+
+var isNotInteger = function isNotInteger(value) {
+  return !isInteger(value);
+};
+
+exports.isNotInteger = isNotInteger;
+
+var isNotString = function isNotString(value) {
+  return !isString(value);
+};
+
+exports.isNotString = isNotString;
+
+var isNotFunction = function isNotFunction(value) {
+  return !isFunction(value);
+};
+
+exports.isNotFunction = isNotFunction;
+
+var isNotObject = function isNotObject(value) {
+  return !isObject(value);
+};
+
+exports.isNotObject = isNotObject;
+
+var isNotObjectNormal = function isNotObjectNormal(value) {
+  return !isObjectNormal(value);
+};
+
+exports.isNotObjectNormal = isNotObjectNormal;
+
+var isNotObjectFromNull = function isNotObjectFromNull(value) {
+  return !isObjectFromNull(value);
+};
+
+exports.isNotObjectFromNull = isNotObjectFromNull;
+
+var isNotObjectLike = function isNotObjectLike(value) {
+  return !isObjectLike(value);
+};
+
+exports.isNotObjectLike = isNotObjectLike;
+
+var isNotModule = function isNotModule(value) {
+  return !isModule(value);
+};
+
+exports.isNotModule = isNotModule;
+
+var isNotArray = function isNotArray(value) {
+  return !isArray(value);
+};
+
+exports.isNotArray = isNotArray;
+
+var isNotArraySeries = function isNotArraySeries(value) {
+  return !isArraySeries(value);
+};
+
+exports.isNotArraySeries = isNotArraySeries;
+
+var isNotDate = function isNotDate(value) {
+  return !isDate(value);
+};
+
+exports.isNotDate = isNotDate;
+
+var isNotRegExp = function isNotRegExp(value) {
+  return !isRegExp(value);
+};
+
+exports.isNotRegExp = isNotRegExp;
+
+var isNotBooleanObject = function isNotBooleanObject(value) {
+  return !isBooleanObject(value);
+};
+
+exports.isNotBooleanObject = isNotBooleanObject;
+
+var isNotNumberObject = function isNotNumberObject(value) {
+  return !isNumberObject(value);
+};
+
+exports.isNotNumberObject = isNotNumberObject;
+
+var isNotStringObject = function isNotStringObject(value) {
+  return !isStringObject(value);
+};
+
+exports.isNotStringObject = isNotStringObject;
+
+var isNotEmptyObject = function isNotEmptyObject(value) {
+  return !isEmptyObject(value);
+};
+
+exports.isNotEmptyObject = isNotEmptyObject;
+
+var isNotEmptyArray = function isNotEmptyArray(value) {
+  return !isEmptyArray(value);
+};
+
+exports.isNotEmptyArray = isNotEmptyArray;
 var _default = {
-  isException: isException,
-  isNotException: isNotException
+  isError: isError,
+  objectToString: objectToString,
+  isUndefined: isUndefined,
+  isNull: isNull,
+  isNaNStrict: isNaNStrict,
+  isBoolean: isBoolean,
+  isNumber: isNumber,
+  isInteger: isInteger,
+  isString: isString,
+  isFunction: isFunction,
+  isObject: isObject,
+  isObjectNormal: isObjectNormal,
+  isObjectFromNull: isObjectFromNull,
+  isObjectLike: isObjectLike,
+  isModule: isModule,
+  isArray: isArray,
+  isArraySeries: isArraySeries,
+  isDate: isDate,
+  isRegExp: isRegExp,
+  isBooleanObject: isBooleanObject,
+  isNumberObject: isNumberObject,
+  isStringObject: isStringObject,
+  isEmptyObject: isEmptyObject,
+  isEmptyArray: isEmptyArray,
+  isNotUndefined: isNotUndefined,
+  isNotNull: isNotNull,
+  isNotNaNStrict: isNotNaNStrict,
+  isNotBoolean: isNotBoolean,
+  isNotNumber: isNotNumber,
+  isNotInteger: isNotInteger,
+  isNotString: isNotString,
+  isNotFunction: isNotFunction,
+  isNotObject: isNotObject,
+  isNotObjectNormal: isNotObjectNormal,
+  isNotObjectFromNull: isNotObjectFromNull,
+  isNotObjectLike: isNotObjectLike,
+  isNotModule: isNotModule,
+  isNotArray: isNotArray,
+  isNotArraySeries: isNotArraySeries,
+  isNotDate: isNotDate,
+  isNotRegExp: isNotRegExp,
+  isNotBooleanObject: isNotBooleanObject,
+  isNotNumberObject: isNotNumberObject,
+  isNotStringObject: isNotStringObject,
+  isNotEmptyObject: isNotEmptyObject,
+  isNotEmptyArray: isNotEmptyArray
 };
 exports["default"] = _default;
 
 /***/ }),
 
-/***/ 121:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1156,11 +1345,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.tagOuterFirst = exports._tagOuterFirst = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _string = __webpack_require__(107);
+var _string = __webpack_require__(109);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
 var _tagOuterFirst = function _tagOuterFirst(str, startTag, endTag) {
   if (str === '') {
@@ -1229,7 +1418,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 122:
+/***/ 124:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1240,13 +1429,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.tagInnerLast = exports._tagInnerLast = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _string = __webpack_require__(107);
+var _string = __webpack_require__(109);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
-var _tagOuterLast2 = __webpack_require__(123);
+var _tagOuterLast2 = __webpack_require__(125);
 
 var _tagInnerLast = function _tagInnerLast(str, startTag, endTag) {
   var result = (0, _tagOuterLast2._tagOuterLast)(str, startTag, endTag);
@@ -1299,7 +1488,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 123:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1310,11 +1499,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.tagOuterLast = exports._tagOuterLast = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _string = __webpack_require__(107);
+var _string = __webpack_require__(109);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
 var _tagOuterLast = function _tagOuterLast(str, startTag, endTag) {
   if (str === '') {
@@ -1383,7 +1572,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 15:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1392,30 +1581,45 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotSymbol = exports.isSymbol = void 0;
+exports["default"] = exports.isNotException = exports.isException = void 0;
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+var _isType = __webpack_require__(11);
 
-var isSymbol = function isSymbol(value) {
-  return _typeof(value) === 'symbol';
+var _isObjectParameter = __webpack_require__(15);
+
+/**
+ *isException
+ * description:
+ * isException can determine standard Error objects
+ *  and user-specific exception objects.
+ *  Only whether the object has name and message properties.
+ */
+var isException = function isException(value) {
+  if ((0, _isObjectParameter.isObjectParameter)(value, 'name,message')) {
+    return true;
+  } else if ((0, _isType.isError)(value)) {
+    return true;
+  }
+
+  return false;
 };
 
-exports.isSymbol = isSymbol;
+exports.isException = isException;
 
-var isNotSymbol = function isNotSymbol(value) {
-  return !isSymbol(value);
+var isNotException = function isNotException(value) {
+  return !isException(value);
 };
 
-exports.isNotSymbol = isNotSymbol;
+exports.isNotException = isNotException;
 var _default = {
-  isSymbol: isSymbol,
-  isNotSymbol: isNotSymbol
+  isException: isException,
+  isNotException: isNotException
 };
 exports["default"] = _default;
 
 /***/ }),
 
-/***/ 151:
+/***/ 156:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1426,9 +1630,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.wsh = exports.consoleHook = void 0;
 
-var _consoleHook = _interopRequireDefault(__webpack_require__(152));
+var _consoleHook = _interopRequireDefault(__webpack_require__(157));
 
-var _wsh = _interopRequireDefault(__webpack_require__(153));
+var _wsh = _interopRequireDefault(__webpack_require__(158));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1444,7 +1648,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 152:
+/***/ 157:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1457,9 +1661,9 @@ exports["default"] = exports.acceptDebug = exports.acceptError = exports.acceptW
 
 var _type = __webpack_require__(5);
 
-var _compare = __webpack_require__(129);
+var _compare = __webpack_require__(131);
 
-var _array = __webpack_require__(59);
+var _array = __webpack_require__(61);
 
 var original = {};
 exports.original = original;
@@ -1676,7 +1880,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 153:
+/***/ 158:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1687,11 +1891,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
 
-var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(154));
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(159));
 
-var _wshShell = _interopRequireDefault(__webpack_require__(155));
+var _wshShell = _interopRequireDefault(__webpack_require__(160));
 
-var _forceCreateFolder = _interopRequireDefault(__webpack_require__(156));
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(161));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1718,7 +1922,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 154:
+/***/ 159:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1729,9 +1933,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.FileSystemObject = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _platform = __webpack_require__(9);
+var _platform = __webpack_require__(7);
 
 var _fso;
 
@@ -1759,7 +1963,39 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 155:
+/***/ 16:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.isNotSymbol = exports.isSymbol = void 0;
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var isSymbol = function isSymbol(value) {
+  return _typeof(value) === 'symbol';
+};
+
+exports.isSymbol = isSymbol;
+
+var isNotSymbol = function isNotSymbol(value) {
+  return !isSymbol(value);
+};
+
+exports.isNotSymbol = isNotSymbol;
+var _default = {
+  isSymbol: isSymbol,
+  isNotSymbol: isNotSymbol
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 160:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1770,9 +2006,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.Shell = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _platform = __webpack_require__(9);
+var _platform = __webpack_require__(7);
 
 var _shell;
 
@@ -1800,7 +2036,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 156:
+/***/ 161:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1811,11 +2047,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.forceCreateFolder = exports._forceCreateFolder = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _platform = __webpack_require__(9);
+var _platform = __webpack_require__(7);
 
-var _wshFileSystemObject = __webpack_require__(154);
+var _wshFileSystemObject = __webpack_require__(159);
 
 var _forceCreateFolder = function _forceCreateFolder(folderPath) {
   var fso = (0, _wshFileSystemObject.FileSystemObject)();
@@ -1853,7 +2089,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1864,9 +2100,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap = exports.isMap = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _canUseMap = __webpack_require__(17);
+var _canUseMap = __webpack_require__(18);
 
 var isMap = function isMap(value) {
   if (!(0, _isType.isObjectLike)(value)) {
@@ -1925,7 +2161,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 17:
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1938,7 +2174,7 @@ exports["default"] = exports.canUseWeakMap = exports.canUseMap = void 0;
 
 var _type = __webpack_require__(5);
 
-var _global2 = __webpack_require__(18);
+var _global2 = __webpack_require__(19);
 
 /**
  * canUseMap
@@ -1966,7 +2202,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 19:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1977,9 +2213,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet = exports.isSet = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _canUseSet = __webpack_require__(20);
+var _canUseSet = __webpack_require__(21);
 
 var isSet = function isSet(value) {
   if (!(0, _isType.isObjectLike)(value)) {
@@ -2026,7 +2262,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2039,7 +2275,7 @@ exports["default"] = exports.canUseWeakSet = exports.canUseSet = void 0;
 
 var _type = __webpack_require__(5);
 
-var _global2 = __webpack_require__(18);
+var _global2 = __webpack_require__(19);
 
 /**
  * canUseSet
@@ -2067,7 +2303,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2078,15 +2314,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotExceptionAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isExceptionAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports._isTypeAllCheckFunc = exports._isTypeArray = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _isException = __webpack_require__(12);
+var _isException = __webpack_require__(14);
 
-var _isSymbol = __webpack_require__(15);
+var _isSymbol = __webpack_require__(16);
 
-var _isMap = __webpack_require__(16);
+var _isMap = __webpack_require__(17);
 
-var _isSet = __webpack_require__(19);
+var _isSet = __webpack_require__(20);
 
 /**
  * _isTypeArray
@@ -2410,7 +2646,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2421,17 +2657,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports._isTypeArrayCheckFunc = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _isException = __webpack_require__(12);
+var _isException = __webpack_require__(14);
 
-var _isSymbol = __webpack_require__(15);
+var _isSymbol = __webpack_require__(16);
 
-var _isMap = __webpack_require__(16);
+var _isMap = __webpack_require__(17);
 
-var _isSet = __webpack_require__(19);
+var _isSet = __webpack_require__(20);
 
-var _isTypeAll = __webpack_require__(21);
+var _isTypeAll = __webpack_require__(22);
 
 var _isTypeArrayCheckFunc = function _isTypeArrayCheckFunc(func) {
   return function (array) {
@@ -2730,7 +2966,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2740,8 +2976,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = exports._Enum = void 0;
-
-/* eslint-disable no-invalid-this */
 
 /**
  * Enum
@@ -2772,7 +3006,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2785,7 +3019,7 @@ exports["default"] = exports.__loop = void 0;
 
 var _type = __webpack_require__(5);
 
-var _IntegerArray2 = __webpack_require__(34);
+var _IntegerArray2 = __webpack_require__(35);
 
 /**
  * loop
@@ -2804,7 +3038,7 @@ var __loop = function __loop(loopArray) {
       var loopLast = i === loopArray.length - 1;
       var result = func(element, index, array, loopFirst, loopLast);
 
-      if (!(0, _type.isUndefined)(result) && result["break"] === true) {
+      if ((0, _type.isObject)(result) && result["break"] === true) {
         return result;
       }
     }
@@ -2821,7 +3055,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 41:
+/***/ 42:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2832,29 +3066,29 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.recursive = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports._recursiveCall = exports._Enum = exports._assert = void 0;
 
-var _assert2 = _interopRequireDefault(__webpack_require__(42));
+var _assert2 = _interopRequireDefault(__webpack_require__(43));
 
-var _guard = _interopRequireDefault(__webpack_require__(43));
+var _guard = _interopRequireDefault(__webpack_require__(44));
 
-var _sc = _interopRequireDefault(__webpack_require__(45));
+var _sc = _interopRequireDefault(__webpack_require__(46));
 
-var _if_ = _interopRequireDefault(__webpack_require__(46));
+var _if_ = _interopRequireDefault(__webpack_require__(47));
 
-var _switch_ = _interopRequireDefault(__webpack_require__(47));
+var _switch_ = _interopRequireDefault(__webpack_require__(48));
 
-var _loop = _interopRequireDefault(__webpack_require__(48));
+var _loop = _interopRequireDefault(__webpack_require__(49));
 
-var _canUseMap = _interopRequireDefault(__webpack_require__(17));
+var _canUseMap = _interopRequireDefault(__webpack_require__(18));
 
-var _canUseSet = _interopRequireDefault(__webpack_require__(20));
+var _canUseSet = _interopRequireDefault(__webpack_require__(21));
 
-var _Enum2 = _interopRequireDefault(__webpack_require__(32));
+var _Enum2 = _interopRequireDefault(__webpack_require__(33));
 
-var _Enum3 = _interopRequireDefault(__webpack_require__(50));
+var _Enum3 = _interopRequireDefault(__webpack_require__(51));
 
-var _recursive = _interopRequireDefault(__webpack_require__(51));
+var _recursive = _interopRequireDefault(__webpack_require__(52));
 
-var _recursive2 = _interopRequireDefault(__webpack_require__(52));
+var _recursive2 = _interopRequireDefault(__webpack_require__(54));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -2917,7 +3151,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 42:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2930,7 +3164,7 @@ exports["default"] = exports.assert = exports._assert = void 0;
 
 var _type = __webpack_require__(5);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
 /**
  * assert
@@ -2978,7 +3212,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2991,7 +3225,7 @@ exports["default"] = exports.guard = void 0;
 
 var _type = __webpack_require__(5);
 
-var _functionValue = __webpack_require__(44);
+var _functionValue = __webpack_require__(45);
 
 /**
  * guard
@@ -3088,7 +3322,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 45:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3118,7 +3352,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 46:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3131,9 +3365,9 @@ exports["default"] = exports.if_ = void 0;
 
 var _type = __webpack_require__(5);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
-var _functionValue = __webpack_require__(44);
+var _functionValue = __webpack_require__(45);
 
 /**
  * if_
@@ -3198,7 +3432,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 47:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3211,7 +3445,7 @@ exports["default"] = exports.switch_ = void 0;
 
 var _type = __webpack_require__(5);
 
-var _functionValue = __webpack_require__(44);
+var _functionValue = __webpack_require__(45);
 
 /**
  * switch_
@@ -3264,7 +3498,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3277,13 +3511,13 @@ exports["default"] = exports.loop = void 0;
 
 var _type = __webpack_require__(5);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
-var _IntegerArray2 = __webpack_require__(34);
+var _IntegerArray2 = __webpack_require__(35);
 
-var _objectEntries2 = __webpack_require__(49);
+var _objectEntries2 = __webpack_require__(50);
 
-var _loop = __webpack_require__(33);
+var _loop = __webpack_require__(34);
 
 /**
  * loop
@@ -3344,22 +3578,24 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet = exports.isSet = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap = exports.isMap = exports.isNotSymbol = exports.isSymbol = exports.isNotException = exports.isException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
-exports["default"] = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = void 0;
+exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isWeakSet = exports.isSet = exports.isNotWeakMap = exports.isNotMap = exports.isWeakMap = exports.isMap = exports.isNotSymbol = exports.isSymbol = exports.isNotException = exports.isException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = exports.typeName = void 0;
+exports["default"] = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotExceptionArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isExceptionArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = void 0;
 
-var _isType = _interopRequireDefault(__webpack_require__(6));
+var _typeName = _interopRequireDefault(__webpack_require__(6));
 
-var _isException = _interopRequireDefault(__webpack_require__(12));
+var _isType = _interopRequireDefault(__webpack_require__(11));
 
-var _isSymbol = _interopRequireDefault(__webpack_require__(15));
+var _isException = _interopRequireDefault(__webpack_require__(14));
 
-var _isMap = _interopRequireDefault(__webpack_require__(16));
+var _isSymbol = _interopRequireDefault(__webpack_require__(16));
 
-var _isSet = _interopRequireDefault(__webpack_require__(19));
+var _isMap = _interopRequireDefault(__webpack_require__(17));
 
-var _isTypeAll = _interopRequireDefault(__webpack_require__(21));
+var _isSet = _interopRequireDefault(__webpack_require__(20));
 
-var _isTypeArray = _interopRequireDefault(__webpack_require__(22));
+var _isTypeAll = _interopRequireDefault(__webpack_require__(22));
+
+var _isTypeArray = _interopRequireDefault(__webpack_require__(23));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -3369,6 +3605,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var typeName = _typeName["default"].typeName;
+exports.typeName = typeName;
 var objectToString = _isType["default"].objectToString,
     isUndefined = _isType["default"].isUndefined,
     isNull = _isType["default"].isNull,
@@ -3709,8 +3947,8 @@ exports.isNullArray = isNullArray;
 exports.isUndefinedArray = isUndefinedArray;
 
 var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
-  // ...isTypeJs,
   objectToString: objectToString,
+  typeName: typeName,
   isUndefined: isUndefined,
   isNull: isNull,
   isNaNStrict: isNaNStrict,
@@ -3819,7 +4057,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 50:
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3832,11 +4070,9 @@ exports["default"] = exports.Enum = void 0;
 
 var _type = __webpack_require__(5);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
-var _Enum2 = __webpack_require__(32);
-
-/* eslint-disable no-invalid-this */
+var _Enum2 = __webpack_require__(33);
 
 /**
  * Enum
@@ -3867,73 +4103,7 @@ var Enum = function Enum(values) {
 
 exports.Enum = Enum;
 var _default = {
-  _Enum: _Enum2._Enum,
   Enum: Enum
-};
-exports["default"] = _default;
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports._recursive = void 0;
-
-var _isType = __webpack_require__(6);
-
-var _loop = __webpack_require__(33);
-
-var _objectEntries2 = __webpack_require__(49);
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var _recursive = function _recursive(source, func) {
-  var recursive_ = function recursive_(value, level) {
-    if ((0, _isType.isObject)(value)) {
-      (0, _loop.__loop)((0, _objectEntries2._objectEntries)(value))(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            key = _ref2[0],
-            value = _ref2[1];
-
-        var result = func(value, key, level, source);
-
-        if (!((0, _isType.isUndefined)(result) || result === false)) {
-          recursive_(result, level + 1);
-        }
-      });
-    } else if ((0, _isType.isArray)(value)) {
-      (0, _loop.__loop)(value)(function (value, index) {
-        var result = func(value, index, level, source);
-
-        if (!((0, _isType.isUndefined)(result) || result === false)) {
-          recursive_(result, level + 1);
-        }
-      });
-    }
-  };
-
-  recursive_(source, 0);
-};
-
-exports._recursive = _recursive;
-var _default = {
-  _recursive: _recursive
 };
 exports["default"] = _default;
 
@@ -3948,13 +4118,93 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports._recursive = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _loop = __webpack_require__(34);
+
+var _objectEntries2 = __webpack_require__(50);
+
+var _arrayEntries2 = __webpack_require__(53);
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var _recursive = function _recursive(source, func) {
+  var continueFlag = true;
+
+  var _recursive_ = function _recursive_(value, level, path) {
+    var loopArray;
+
+    if ((0, _isType.isObject)(value)) {
+      loopArray = (0, _objectEntries2._objectEntries)(value);
+    } else if ((0, _isType.isArray)(value)) {
+      loopArray = (0, _arrayEntries2._arrayEntries)(value);
+    } else {
+      return;
+    }
+
+    (0, _loop.__loop)(loopArray)(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          key = _ref2[0],
+          value = _ref2[1];
+
+      var result = func(value, key, level, path, source);
+
+      if (result === false) {
+        continueFlag = false;
+        return {
+          "break": true
+        };
+      }
+
+      _recursive_(result, level + 1, path + '.' + key);
+
+      if (continueFlag === false) {
+        return {
+          "break": true
+        };
+      }
+    });
+  };
+
+  _recursive_(source, 0, '');
+};
+
+exports._recursive = _recursive;
+var _default = {
+  _recursive: _recursive
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.recursive = void 0;
 
-var _isType = __webpack_require__(6);
+var _isType = __webpack_require__(11);
 
-var _isObjectParameter = __webpack_require__(13);
+var _isObjectParameter = __webpack_require__(15);
 
-var _recursive2 = __webpack_require__(51);
+var _recursive2 = __webpack_require__(52);
 
 var recursive = function recursive(source, func) {
   if ((0, _isObjectParameter.isObjectParameter)(source, 'source, func')) {
@@ -3994,415 +4244,484 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isError = exports.isRegExp = exports.isDate = exports.isEmptyArray = exports.isArraySeries = exports.isArray = exports.isEmptyObject = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isStringObject = exports.isString = exports.isInteger = exports.isNumberObject = exports.isNumber = exports.isBooleanObject = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.objectToString = void 0;
+exports["default"] = exports.typeName = void 0;
 
-var _propertyCount2 = __webpack_require__(7);
+var _platform = __webpack_require__(7);
 
-var _platform = __webpack_require__(9);
+var _includes = __webpack_require__(9);
 
-var _includes = __webpack_require__(11);
+var _replaceAll2 = __webpack_require__(10);
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var objectToString = function objectToString(value) {
-  return Object.prototype.toString.call(value);
+var _objectToStr = function _objectToStr(value) {
+  return (0, _replaceAll2._replaceAll)((0, _replaceAll2._replaceAll)(Object.prototype.toString.call(value), '[object ', ''), ']', '');
 };
 
-exports.objectToString = objectToString;
+var _booleanType = function _booleanType(typeofValue, objectToStrValue) {
+  if (objectToStrValue === 'Boolean') {
+    if (typeofValue === 'boolean') {
+      return 'Boolean';
+    } else if (typeofValue === 'object') {
+      return 'BooleanObject';
+    }
 
-var isUndefined = function isUndefined(value) {
-  return typeof value === 'undefined';
-};
-
-exports.isUndefined = isUndefined;
-
-var isNull = function isNull(value) {
-  return value === null;
-};
-
-exports.isNull = isNull;
-
-var isNaNStrict = function isNaNStrict(value) {
-  return value !== value;
-};
-
-exports.isNaNStrict = isNaNStrict;
-
-var isBoolean = function isBoolean(value) {
-  return typeof value === 'boolean';
-};
-
-exports.isBoolean = isBoolean;
-
-var isBooleanObject = function isBooleanObject(value) {
-  return objectToString(value) === '[object Boolean]' && !isBoolean(value);
-};
-
-exports.isBooleanObject = isBooleanObject;
-
-var isNumber = function isNumber(value) {
-  return typeof value === 'number' && isFinite(value);
-};
-
-exports.isNumber = isNumber;
-
-var isNumberObject = function isNumberObject(value) {
-  return objectToString(value) === '[object Number]' && typeof value !== 'number';
-};
-
-exports.isNumberObject = isNumberObject;
-
-var isInteger = function isInteger(value) {
-  if (!isNumber(value)) {
-    return false;
+    throw new Error('typeName');
   }
-
-  return Math.round(value) === value;
 };
 
-exports.isInteger = isInteger;
+var _numberType = function _numberType(typeofValue, objectToStrValue, value) {
+  if (objectToStrValue === 'Number') {
+    if (typeofValue === 'number') {
+      if (value !== value) {
+        return 'NaN';
+      }
 
-var isString = function isString(value) {
-  return typeof value === 'string';
+      if (value === Infinity || value == -Infinity) {
+        return 'Infinity';
+      }
+
+      return 'Number';
+    } else if (typeofValue === 'object') {
+      return 'NumberObject';
+    }
+
+    throw new Error('typeName');
+  }
 };
 
-exports.isString = isString;
+var _stringType = function _stringType(typeofValue, objectToStrValue) {
+  if (objectToStrValue === 'String') {
+    if (typeofValue === 'string') {
+      return 'String';
+    } else if (typeofValue === 'object') {
+      return 'StringObject';
+    }
 
-var isStringObject = function isStringObject(value) {
-  return objectToString(value) === '[object String]' && typeof value !== 'string';
+    throw new Error('typeName');
+  }
 };
 
-exports.isStringObject = isStringObject;
+var _typeName;
 
-var isFunction = function isFunction(value) {
-  return typeof value === 'function';
-};
+switch ((0, _platform.platformName)()) {
+  case 'WindowsScriptHost':
+    _typeName = function _typeName(value) {
+      var typeofValue = _typeof(value);
 
-exports.isFunction = isFunction;
-var isObject;
-exports.isObject = isObject;
+      var objectToStrValue = _objectToStr(value);
 
-if ((0, _platform.isWindowsScriptHost)() || (0, _platform.isGasRhino)()) {
-  exports.isObject = isObject = function isObject(value) {
-    if (objectToString(value) !== '[object Object]') {
-      return false;
-    }
+      if (typeofValue === 'undefined') {
+        return 'Undefined';
+      }
 
-    if (isNull(value)) {
-      return false;
-    }
+      if (value === null) {
+        return 'Null';
+      }
 
-    if (isUndefined(value)) {
-      return false;
-    }
+      var result;
+      result = _booleanType(typeofValue, objectToStrValue);
 
-    return true;
-  };
-} else if ((0, _platform.isInternetExplorer)()) {
-  exports.isObject = isObject = function isObject(value) {
-    if (objectToString(value) !== '[object Object]') {
-      return false;
-    }
+      if (result) {
+        return result;
+      }
 
-    if ((0, _includes.__includes)([Map, WeakMap, Set], value.constructor)) {
-      return false;
-    }
+      result = _numberType(typeofValue, objectToStrValue, value);
 
-    return true;
-  };
-} else {
-  exports.isObject = isObject = function isObject(value) {
-    if (objectToString(value) !== '[object Object]') {
-      return false;
-    }
+      if (result) {
+        return result;
+      }
 
-    return true;
-  };
+      result = _stringType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      if (objectToStrValue === 'Object') {
+        return 'Object';
+      }
+
+      if ((0, _includes.__includes)(['Function', 'Array', 'RegExp', 'Date', 'Math'], objectToStrValue)) {
+        return objectToStrValue;
+      }
+
+      throw new Error("typeName:".concat(typeofValue, ":").concat(objectToStrValue));
+    };
+
+    break;
+
+  case 'GoogleAppsScriptRhino':
+    _typeName = function _typeName(value) {
+      var typeofValue = _typeof(value);
+
+      var objectToStrValue = _objectToStr(value);
+
+      if (typeofValue === 'undefined') {
+        return 'Undefined';
+      }
+
+      if (value === null) {
+        return 'Null';
+      }
+
+      var result;
+      result = _booleanType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      result = _numberType(typeofValue, objectToStrValue, value);
+
+      if (result) {
+        return result;
+      }
+
+      result = _stringType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      if (objectToStrValue === 'Object') {
+        if ('constructor' in value) {
+          return 'Object';
+        } else {
+          return 'ObjectFromNull';
+        }
+      }
+
+      if ((0, _includes.__includes)(['Function', 'Array', 'RegExp', 'Date', 'Math', 'JSON'], objectToStrValue)) {
+        return objectToStrValue;
+      }
+
+      throw new Error("typeName:".concat(typeofValue, ":").concat(objectToStrValue));
+    };
+
+    break;
+
+  case 'InternetExplorer':
+    _typeName = function _typeName(value) {
+      var typeofValue = _typeof(value);
+
+      var objectToStrValue = _objectToStr(value);
+
+      if (typeofValue === 'undefined') {
+        return 'Undefined';
+      }
+
+      if (objectToStrValue === 'Null') {
+        return objectToStrValue;
+      }
+
+      var result;
+      result = _booleanType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      result = _numberType(typeofValue, objectToStrValue, value);
+
+      if (result) {
+        return result;
+      }
+
+      result = _stringType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      if (objectToStrValue === 'Object') {
+        if ('constructor' in value) {
+          if (value.constructor === Map) {
+            return 'Map';
+          }
+
+          if (value.constructor === WeakMap) {
+            return 'WeakMap';
+          }
+
+          if (value.constructor === Set) {
+            return 'Set';
+          }
+
+          return 'Object';
+        } else {
+          return 'ObjectFromNull';
+        }
+      }
+
+      if ((0, _includes.__includes)(['Function', 'Array', 'RegExp', 'Date', 'Math', 'JSON', 'Int8Array', 'Uint8Array', 'Uint8ClampedArray', 'Int16Array', 'Uint16Array', 'Int32Array', 'Uint32Array', 'Float32Array', 'Float64Array', 'Map', 'WeakMap', 'Set', 'WeakSet', 'Symbol', 'ArrayBuffer', 'SharedArrayBuffer', 'Atomics', 'DataView', 'Generator', 'GeneratorFunction', 'AsyncFunction', 'Reflect', 'WebAssembly', 'Intl', 'Module'], objectToStrValue)) {
+        return objectToStrValue;
+      }
+
+      throw new Error("typeName:".concat(typeofValue, ":").concat(objectToStrValue));
+    };
+
+    break;
+
+  case 'Deno':
+  case 'Node':
+  case 'GoogleAppsScriptV8':
+  case 'Jest':
+  case 'Chrome':
+  case 'Edge':
+  case 'Firefox':
+  case 'Safari':
+  case 'Opera':
+    _typeName = function _typeName(value) {
+      var typeofValue = _typeof(value);
+
+      var objectToStrValue = _objectToStr(value);
+
+      if (typeofValue === 'undefined') {
+        return 'Undefined';
+      }
+
+      if (objectToStrValue === 'Null') {
+        return objectToStrValue;
+      }
+
+      var result;
+      result = _booleanType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      result = _numberType(typeofValue, objectToStrValue, value);
+
+      if (result) {
+        return result;
+      }
+
+      result = _stringType(typeofValue, objectToStrValue);
+
+      if (result) {
+        return result;
+      }
+
+      if (objectToStrValue === 'Object') {
+        if ('constructor' in value) {
+          return 'Object';
+        } else {
+          return 'ObjectFromNull';
+        }
+      }
+
+      if ((0, _includes.__includes)(['Function', 'Array', 'RegExp', 'Date', 'Math', 'JSON', 'Int8Array', 'Uint8Array', 'Uint8ClampedArray', 'Int16Array', 'Uint16Array', 'Int32Array', 'Uint32Array', 'Float32Array', 'Float64Array', 'Map', 'WeakMap', 'Set', 'WeakSet', 'Symbol', 'ArrayBuffer', 'SharedArrayBuffer', 'Atomics', 'DataView', 'Generator', 'GeneratorFunction', 'AsyncFunction', 'Reflect', 'WebAssembly', 'Intl', 'Module'], objectToStrValue)) {
+        return objectToStrValue;
+      }
+
+      throw new Error("typeName:".concat(typeofValue, ":").concat(objectToStrValue));
+    };
+
+    break;
+
+  default:
+    throw new Error("typeName:".concat((0, _platform.platformName)()));
 }
 
-var isObjectNormal = function isObjectNormal(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-
-  if ('constructor' in value) {
-    return true;
-  }
-
-  return false;
-};
-
-exports.isObjectNormal = isObjectNormal;
-
-var isObjectFromNull = function isObjectFromNull(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-
-  if ('constructor' in value) {
-    return false;
-  }
-
-  return true;
-};
-
-exports.isObjectFromNull = isObjectFromNull;
-
-var isObjectLike = function isObjectLike(value) {
-  if (isNull(value)) {
-    return false;
-  }
-
-  return _typeof(value) === 'object' || typeof value === 'function';
-};
-
-exports.isObjectLike = isObjectLike;
-
-var isModule = function isModule(value) {
-  return objectToString(value) === '[object Module]';
-};
-
-exports.isModule = isModule;
-
-var isEmptyObject = function isEmptyObject(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-
-  return (0, _propertyCount2._propertyCount)(value) === 0;
-};
-
-exports.isEmptyObject = isEmptyObject;
-var isArray;
-exports.isArray = isArray;
-
-if (Array.isArray) {
-  exports.isArray = isArray = Array.isArray;
-} else {
-  exports.isArray = isArray = function isArray(value) {
-    return objectToString(value) === '[object Array]';
-  };
-} // Int8Array Uint16Array Float32Array Float64Array etc
-
-
-var isArraySeries = function isArraySeries(value) {
-  if ((0, _includes.__includes)(objectToString(value), 'Array]')) {
-    return true;
-  }
-
-  return false;
-};
-
-exports.isArraySeries = isArraySeries;
-
-var isEmptyArray = function isEmptyArray(value) {
-  if (!isArraySeries(value)) {
-    return false;
-  }
-
-  return value.length === 0;
-};
-
-exports.isEmptyArray = isEmptyArray;
-
-var isDate = function isDate(value) {
-  return objectToString(value) === '[object Date]';
-};
-
-exports.isDate = isDate;
-
-var isRegExp = function isRegExp(value) {
-  return objectToString(value) === '[object RegExp]';
-};
-
-exports.isRegExp = isRegExp;
-
-var isError = function isError(value) {
-  return objectToString(value) === '[object Error]';
-};
-
-exports.isError = isError;
-
-var isNotUndefined = function isNotUndefined(value) {
-  return !isUndefined(value);
-};
-
-exports.isNotUndefined = isNotUndefined;
-
-var isNotNull = function isNotNull(value) {
-  return !isNull(value);
-};
-
-exports.isNotNull = isNotNull;
-
-var isNotNaNStrict = function isNotNaNStrict(value) {
-  return !isNaNStrict(value);
-};
-
-exports.isNotNaNStrict = isNotNaNStrict;
-
-var isNotBoolean = function isNotBoolean(value) {
-  return !isBoolean(value);
-};
-
-exports.isNotBoolean = isNotBoolean;
-
-var isNotNumber = function isNotNumber(value) {
-  return !isNumber(value);
-};
-
-exports.isNotNumber = isNotNumber;
-
-var isNotInteger = function isNotInteger(value) {
-  return !isInteger(value);
-};
-
-exports.isNotInteger = isNotInteger;
-
-var isNotString = function isNotString(value) {
-  return !isString(value);
-};
-
-exports.isNotString = isNotString;
-
-var isNotFunction = function isNotFunction(value) {
-  return !isFunction(value);
-};
-
-exports.isNotFunction = isNotFunction;
-
-var isNotObject = function isNotObject(value) {
-  return !isObject(value);
-};
-
-exports.isNotObject = isNotObject;
-
-var isNotObjectNormal = function isNotObjectNormal(value) {
-  return !isObjectNormal(value);
-};
-
-exports.isNotObjectNormal = isNotObjectNormal;
-
-var isNotObjectFromNull = function isNotObjectFromNull(value) {
-  return !isObjectFromNull(value);
-};
-
-exports.isNotObjectFromNull = isNotObjectFromNull;
-
-var isNotObjectLike = function isNotObjectLike(value) {
-  return !isObjectLike(value);
-};
-
-exports.isNotObjectLike = isNotObjectLike;
-
-var isNotModule = function isNotModule(value) {
-  return !isModule(value);
-};
-
-exports.isNotModule = isNotModule;
-
-var isNotArray = function isNotArray(value) {
-  return !isArray(value);
-};
-
-exports.isNotArray = isNotArray;
-
-var isNotArraySeries = function isNotArraySeries(value) {
-  return !isArraySeries(value);
-};
-
-exports.isNotArraySeries = isNotArraySeries;
-
-var isNotDate = function isNotDate(value) {
-  return !isDate(value);
-};
-
-exports.isNotDate = isNotDate;
-
-var isNotRegExp = function isNotRegExp(value) {
-  return !isRegExp(value);
-};
-
-exports.isNotRegExp = isNotRegExp;
-
-var isNotBooleanObject = function isNotBooleanObject(value) {
-  return !isBooleanObject(value);
-};
-
-exports.isNotBooleanObject = isNotBooleanObject;
-
-var isNotNumberObject = function isNotNumberObject(value) {
-  return !isNumberObject(value);
-};
-
-exports.isNotNumberObject = isNotNumberObject;
-
-var isNotStringObject = function isNotStringObject(value) {
-  return !isStringObject(value);
-};
-
-exports.isNotStringObject = isNotStringObject;
-
-var isNotEmptyObject = function isNotEmptyObject(value) {
-  return !isEmptyObject(value);
-};
-
-exports.isNotEmptyObject = isNotEmptyObject;
-
-var isNotEmptyArray = function isNotEmptyArray(value) {
-  return !isEmptyArray(value);
-};
-
-exports.isNotEmptyArray = isNotEmptyArray;
+var typeName = _typeName;
+exports.typeName = typeName;
 var _default = {
-  isError: isError,
-  objectToString: objectToString,
-  isUndefined: isUndefined,
-  isNull: isNull,
-  isNaNStrict: isNaNStrict,
-  isBoolean: isBoolean,
-  isNumber: isNumber,
-  isInteger: isInteger,
-  isString: isString,
-  isFunction: isFunction,
-  isObject: isObject,
-  isObjectNormal: isObjectNormal,
-  isObjectFromNull: isObjectFromNull,
-  isObjectLike: isObjectLike,
-  isModule: isModule,
-  isArray: isArray,
-  isArraySeries: isArraySeries,
-  isDate: isDate,
-  isRegExp: isRegExp,
-  isBooleanObject: isBooleanObject,
-  isNumberObject: isNumberObject,
-  isStringObject: isStringObject,
-  isEmptyObject: isEmptyObject,
-  isEmptyArray: isEmptyArray,
-  isNotUndefined: isNotUndefined,
-  isNotNull: isNotNull,
-  isNotNaNStrict: isNotNaNStrict,
-  isNotBoolean: isNotBoolean,
-  isNotNumber: isNotNumber,
-  isNotInteger: isNotInteger,
-  isNotString: isNotString,
-  isNotFunction: isNotFunction,
-  isNotObject: isNotObject,
-  isNotObjectNormal: isNotObjectNormal,
-  isNotObjectFromNull: isNotObjectFromNull,
-  isNotObjectLike: isNotObjectLike,
-  isNotModule: isNotModule,
-  isNotArray: isNotArray,
-  isNotArraySeries: isNotArraySeries,
-  isNotDate: isNotDate,
-  isNotRegExp: isNotRegExp,
-  isNotBooleanObject: isNotBooleanObject,
-  isNotNumberObject: isNotNumberObject,
-  isNotStringObject: isNotStringObject,
-  isNotEmptyObject: isNotEmptyObject,
-  isNotEmptyArray: isNotEmptyArray
+  typeName: typeName
 };
 exports["default"] = _default;
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
 
 /***/ })
 

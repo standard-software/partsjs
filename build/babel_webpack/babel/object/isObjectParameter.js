@@ -15,10 +15,6 @@ var _hasOwn2 = require("../object/_hasOwn.js");
 
 var _includes = require("../compare/__includes.js");
 
-// import {
-//   _splitCommaItems,
-// } from '../string/splitCommaItems.js';
-
 /**
  * isObjectParameter
  */

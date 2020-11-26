@@ -26,7 +26,7 @@ var __loop = function __loop(loopArray) {
       var loopLast = i === loopArray.length - 1;
       var result = func(element, index, array, loopFirst, loopLast);
 
-      if (!(0, _type.isUndefined)(result) && result["break"] === true) {
+      if ((0, _type.isObject)(result) && result["break"] === true) {
         return result;
       }
     }

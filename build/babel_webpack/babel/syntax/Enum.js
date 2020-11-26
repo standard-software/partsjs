@@ -11,8 +11,6 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _Enum2 = require("../syntax/_Enum.js");
 
-/* eslint-disable no-invalid-this */
-
 /**
  * Enum
  */
@@ -42,7 +40,6 @@ var Enum = function Enum(values) {
 
 exports.Enum = Enum;
 var _default = {
-  _Enum: _Enum2._Enum,
   Enum: Enum
 };
 exports["default"] = _default;

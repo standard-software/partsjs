@@ -89,7 +89,7 @@ var polyfillDefine = function polyfillDefine() {
         return -1; // if the value was not found, then return -1
       };
     }(Object, Math.max, Math.min);
-  } // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 
 
   if (!Object.keys) {
@@ -147,6 +147,23 @@ var polyfillDefine = function polyfillDefine() {
         };
       }
     };
+  } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+
+
+  if (!Date.prototype.toISOString) {
+    (function () {
+      function pad(number) {
+        if (number < 10) {
+          return '0' + number;
+        }
+
+        return number;
+      }
+
+      Date.prototype.toISOString = function () {
+        return this.getUTCFullYear() + '-' + pad(this.getUTCMonth() + 1) + '-' + pad(this.getUTCDate()) + 'T' + pad(this.getUTCHours()) + ':' + pad(this.getUTCMinutes()) + ':' + pad(this.getUTCSeconds()) + '.' + (this.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) + 'Z';
+      };
+    })();
   }
 };
 
