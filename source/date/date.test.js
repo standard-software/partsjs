@@ -206,7 +206,9 @@ export const test_execute_date = (parts) => {
           '2020-01-01T00:00:00.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime({year: 2020, month: 2, hour: 13, second: 59, isLocal: false});
+        var dt = DateTime({
+          year: 2020, month: 2, hour: 13, second: 59, isLocal: false,
+        });
         checkEqual(
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),

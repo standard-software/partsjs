@@ -18,6 +18,7 @@ export const _DateTime = function(
 
   if (isLocal === true) {
     self.setFullYear(year);
+    self.setDate(1);
     self.setMonth(month - 1);
     self.setDate(day);
     self.setHours(hour);
@@ -26,6 +27,7 @@ export const _DateTime = function(
     self.setMilliseconds(millisecond);
   } else {
     self.setUTCFullYear(year);
+    self.setUTCDate(1);
     self.setUTCMonth(month - 1);
     self.setUTCDate(day);
     self.setUTCHours(hour);
