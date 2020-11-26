@@ -346,7 +346,7 @@ You can now use the functions of the parts.js object.
   - support objectLike (array function etc)
 - update platform.js
   - delete browserName()
-  - update name()
+  - update and rename name() >> platformName()
   - update startName >> testStartFileName
 
 ### 10.0.0

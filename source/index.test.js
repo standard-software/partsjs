@@ -16,7 +16,7 @@ export const test_execute_index = (parts) => {
 
   console.log(`parts.js version: ${parts.VERSION}`);
 
-  console.log(`platform: ${parts.platform.name()}`);
+  console.log(`platform: ${parts.platform.platformName()}`);
   if (parts.platform.isWebBrowser()) {
     console.log(`  User Agent: ${window.navigator.userAgent}`);
   }

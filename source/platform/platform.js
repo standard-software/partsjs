@@ -2,52 +2,52 @@ import {
   __includes,
 } from '../compare/__includes.js';
 
-let _name;
-export const name = () => {
-  if (typeof _name !== 'undefined') {
-    return _name;
+let _platformName;
+export const platformName = () => {
+  if (typeof _platformName !== 'undefined') {
+    return _platformName;
   }
 
   if (typeof WScript !== 'undefined') {
-    _name = 'WindowsScriptHost';
+    _platformName = 'WindowsScriptHost';
   } else if (typeof Deno !== 'undefined') {
-    _name = 'Deno';
+    _platformName = 'Deno';
   } else if (typeof Browser !== 'undefined') {
     if (typeof Object.toSource === 'undefined') {
-      _name = 'GoogleAppsScriptV8';
+      _platformName = 'GoogleAppsScriptV8';
     } else {
-      _name = 'GoogleAppsScriptRhino';
+      _platformName = 'GoogleAppsScriptRhino';
     }
   } else if (typeof window === 'undefined') {
-    _name = 'Node';
+    _platformName = 'Node';
   } else if (typeof jest !== 'undefined') {
-    _name = 'Jest';
+    _platformName = 'Jest';
   } else if (typeof process !== 'undefined') {
     // WebBrowser
     const ua = window.navigator.userAgent.toLowerCase();
     if (__includes(ua, 'msie') || __includes(ua, 'trident')) {
-      _name = 'InternetExplorer';
+      _platformName = 'InternetExplorer';
     } else if (__includes(ua, 'edg')) {
-      _name = 'Edge';
+      _platformName = 'Edge';
     } else if (__includes(ua, 'opr')) {
-      _name = 'Opera';
+      _platformName = 'Opera';
     } else if (__includes(ua, 'chrome')) {
-      _name = 'Chrome';
+      _platformName = 'Chrome';
     } else if (__includes(ua, 'safari')) {
-      _name = 'Safari';
+      _platformName = 'Safari';
     } else if (__includes(ua, 'firefox')) {
-      _name = 'Firefox';
+      _platformName = 'Firefox';
     } else {
-      _name = 'OtherBrowser';
+      _platformName = 'OtherBrowser';
     }
   } else {
-    _name = 'Unknown';
+    _platformName = 'Unknown';
   };
-  return _name;
+  return _platformName;
 };
 
-name.reset = () => {
-  _name = undefined;
+platformName.reset = () => {
+  _platformName = undefined;
 };
 
 export const isWebBrowser = () => {
@@ -59,66 +59,66 @@ export const isWebBrowser = () => {
     'Safari',
     'Firefox',
     'OtherBrowser',
-  ], name());
+  ], platformName());
 };
 
 export const isWindowsScriptHost = () => {
-  return name() === 'WindowsScriptHost';
+  return platformName() === 'WindowsScriptHost';
 };
 
 export const isGoogleAppsScript = () => {
   return __includes([
     'GoogleAppsScriptV8',
     'GoogleAppsScriptRhino',
-  ], name());
+  ], platformName());
 };
 
 export const isGasV8 = () => {
-  return name() === 'GoogleAppsScriptV8';
+  return platformName() === 'GoogleAppsScriptV8';
 };
 
 export const isGasRhino = () => {
-  return name() === 'GoogleAppsScriptRhino';
+  return platformName() === 'GoogleAppsScriptRhino';
 };
 
 export const isJest = () => {
-  return name() === 'Jest';
+  return platformName() === 'Jest';
 };
 
 export const isNode = () => {
-  return name() === 'Node';
+  return platformName() === 'Node';
 };
 
 export const isDeno = () => {
-  return name() === 'Deno';
+  return platformName() === 'Deno';
 };
 
 export const isChrome = () => {
-  return name() === 'Chrome';
+  return platformName() === 'Chrome';
 };
 
 export const isFirefox = () => {
-  return name() === 'Firefox';
+  return platformName() === 'Firefox';
 };
 
 export const isEdge = () => {
-  return name() === 'Edge';
+  return platformName() === 'Edge';
 };
 
 export const isInternetExplorer = () => {
-  return name() === 'InternetExplorer';
+  return platformName() === 'InternetExplorer';
 };
 
 export const isSafari = () => {
-  return name() === 'Safari';
+  return platformName() === 'Safari';
 };
 
 export const isOpera = () => {
-  return name() === 'Opera';
+  return platformName() === 'Opera';
 };
 
 export default {
-  name,
+  platformName,
   isWebBrowser,
   isWindowsScriptHost,
   isGoogleAppsScript,

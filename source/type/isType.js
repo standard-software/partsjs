@@ -59,9 +59,9 @@ export const isStringObject = value => {
 export const isFunction =
   (value) => typeof value === 'function';
 
-export let isObject;
+let _isObject;
 if (isWindowsScriptHost() || isGasRhino()) {
-  isObject = (value) => {
+  _isObject = (value) => {
     if (objectToString(value) !== '[object Object]') {
       return false;
     }
@@ -70,7 +70,7 @@ if (isWindowsScriptHost() || isGasRhino()) {
     return true;
   };
 } else if (isInternetExplorer()) {
-  isObject = (value) => {
+  _isObject = (value) => {
     if (objectToString(value) !== '[object Object]') {
       return false;
     }
@@ -80,13 +80,14 @@ if (isWindowsScriptHost() || isGasRhino()) {
     return true;
   };
 } else {
-  isObject = (value) => {
+  _isObject = (value) => {
     if (objectToString(value) !== '[object Object]') {
       return false;
     }
     return true;
   };
 }
+export const isObject = _isObject;
 
 export const isObjectNormal = (value) => {
   if (!isObject(value)) { return false; }
@@ -123,14 +124,15 @@ export const isEmptyObject = value => {
   return _propertyCount(value) === 0;
 };
 
-export let isArray;
+let _isArray;
 if (Array.isArray) {
-  isArray = Array.isArray;
+  _isArray = Array.isArray;
 } else {
-  isArray = (value) => {
+  _isArray = (value) => {
     return objectToString(value) === '[object Array]';
   };
 }
+export const isArray = _isArray;
 
 // Int8Array Uint16Array Float32Array Float64Array etc
 export const isArraySeries = (value) => {

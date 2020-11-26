@@ -10,7 +10,7 @@ parts.platform.testStartFileName = 'test_babel_webpack_babel_2.js';
 test_execute_index(parts);
 
 const fileName = parts.string.subFirstDelimFirst(
-  parts.platform.name() + '_' +
+  parts.platform.platformName() + '_' +
   parts.platform.buildMode + '_' +
   parts.platform.testStartFileName,
   '.',
