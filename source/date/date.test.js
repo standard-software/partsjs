@@ -33,6 +33,20 @@ export const test_execute_date = (parts) => {
 
         checkEqual(false, isInvalidDate(new Date(2020, 11, 21)));
         checkEqual(true,  isInvalidDate(new Date('ABC')));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual('NaN',  (new Date('ABC')).toString());
+          checkEqual(
+            'NaN-NaN-NaNTNaN:NaN:NaN.NZ',
+            (new Date('ABC')).toISOString(),
+          );
+        } else {
+          checkEqual('Invalid Date',  (new Date('ABC')).toString());
+          checkEqual(true, isThrown(() => {
+            (new Date('ABC')).toISOString();
+          }));
+        }
+
       });
     };
 
