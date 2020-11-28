@@ -50,7 +50,7 @@ export const test_execute_index = (parts) => {
           return result;
         };
 
-        checkEqual(392, propertyCountForParts(parts));
+        checkEqual(394, propertyCountForParts(parts));
         checkEqual(17,  propertyCount(parts.platform));
         checkEqual(7,   propertyCount(parts.common));
         checkEqual(260, propertyCount(parts.type));

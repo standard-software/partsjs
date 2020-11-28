@@ -230,10 +230,12 @@ export const type = {
  * test
  */
 export const {
+  checkEqual, checkCompare,
   isThrown, isThrownValue, isThrownException, isNotThrown,
 } = testJs;
 
 rootAlias = { ...rootAlias,
+  checkEqual, checkCompare,
   isThrown, isThrownValue, isThrownException, isNotThrown,
 };
 

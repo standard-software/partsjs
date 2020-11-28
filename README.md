@@ -330,6 +330,7 @@ You can now use the functions of the parts.js object.
 - update _unique
   - add detail count
 - update testCode outputPropertyList format
+- publish parts root checkEqual, checkCompare
 
 ### 10.1.0
 #### 2020/11/26(Thu)
