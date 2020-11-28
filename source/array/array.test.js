@@ -396,7 +396,9 @@ export const test_execute_array = (parts) => {
             { x: 1, y: 1 },
             { x: undefined, y: 4 },
             { x: 2, y: 2 },
-          ], index: [1, undefined, 2]
+          ],
+          index: [1, undefined, 2],
+          count: [2, 2, 1]
           },
           array.unique([
             { x: 1, y: 1 },
@@ -406,52 +408,86 @@ export const test_execute_array = (parts) => {
             { y: 5 },
           ], v => v.x, true)
         );
-      });
 
-      // Object Named Parameter
-      checkEqual([1, 2, 3, 4, 0],
-        array.unique({ array: [1, 2, 3, 4, 4, 4, 3, 2, 0] })
-      );
-      checkEqual([1, 2],
-        array.unique(
+        const data = [
+          {name: 'aaa', age: 18,},
+          {name: 'bbb', age: 20,},
+          {name: 'bbb', age: 21,},
+          {name: 'ccc', age: 21,},
+          {name: 'bbb', age: 20,},
+        ];
+        checkEqual(
+          array.unique(data, d => d.name, {detail: true}),
           {
-            array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
-            func: v => parts.isEven(v)
+            index: ['aaa', 'bbb', 'ccc'],
+            result: [
+              { name: 'aaa', age: 18 },
+              { name: 'bbb', age: 20 },
+              { name: 'ccc', age: 21 }
+            ],
+            count: [1, 3, 1]
           }
-        )
-      );
-      checkEqual([1, 2],
-        array.unique(
-          [1, 2, 3, 4, 4, 4, 3, 2, 0],
+        );
+        checkEqual(
+          array.unique(data, d => d.name + d.age.toString(), {detail: true}),
           {
-            func: v => parts.isEven(v)
+            index: ['aaa18', 'bbb20', 'bbb21', 'ccc21'],
+            result: [
+              { name: 'aaa', age: 18 },
+              { name: 'bbb', age: 20 },
+              { name: 'bbb', age: 21 },
+              { name: 'ccc', age: 21 }
+            ],
+            count: [1, 2, 1, 1]
           }
-        )
-      );
-      checkEqual({ result: [1, 2], index: [false, true] },
-        array.unique(
-          {
-            array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
-            func: v => parts.isEven(v),
-            detail: true
-          })
-      );
-      checkEqual({ result: [1, 2], index: [false, true] },
-        array.unique(
-          [1, 2, 3, 4, 4, 4, 3, 2, 0],
-          {
-            func: v => parts.isEven(v),
-            detail: true
-          })
-      );
-      checkEqual({ result: [1, 2], index: [false, true] },
-        array.unique(
-          [1, 2, 3, 4, 4, 4, 3, 2, 0],
-          v => parts.isEven(v),
-          {
-            detail: true
-          })
-      );
+        );
+
+        // Object Named Parameter
+        checkEqual([1, 2, 3, 4, 0],
+          array.unique({ array: [1, 2, 3, 4, 4, 4, 3, 2, 0] })
+        );
+        checkEqual([1, 2],
+          array.unique(
+            {
+              array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+              func: v => parts.isEven(v)
+            }
+          )
+        );
+        checkEqual([1, 2],
+          array.unique(
+            [1, 2, 3, 4, 4, 4, 3, 2, 0],
+            {
+              func: v => parts.isEven(v)
+            }
+          )
+        );
+        checkEqual({ result: [1, 2], index: [false, true], count: [3, 6] },
+          array.unique(
+            {
+              array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+              func: v => parts.isEven(v),
+              detail: true
+            })
+        );
+        checkEqual({ result: [1, 2], index: [false, true], count: [3, 6] },
+          array.unique(
+            [1, 2, 3, 4, 4, 4, 3, 2, 0],
+            {
+              func: v => parts.isEven(v),
+              detail: true
+            })
+        );
+        checkEqual({ result: [1, 2], index: [false, true], count: [3, 6] },
+          array.unique(
+            [1, 2, 3, 4, 4, 4, 3, 2, 0],
+            v => parts.isEven(v),
+            {
+              detail: true
+            })
+        );
+
+      });
     };
 
     const test_single = () => {
@@ -480,13 +516,74 @@ export const test_execute_array = (parts) => {
             v => parts.isEven(v)
           )
         );
-        checkEqual({
-          result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
-          index: [false, true]
-        },
-        array.group([1, 2, 3, 4, 4, 4, 3, 2, 0],
-          v => parts.isEven(v), true
-        )
+        checkEqual(
+          {
+            result: [[1, 3, 3], [2, 4, 4, 4, 2, 0]],
+            index: [false, true]
+          },
+          array.group([1, 2, 3, 4, 4, 4, 3, 2, 0],
+            v => parts.isEven(v), true
+          )
+        );
+
+        const data = [
+          {name: 'aaa', age: 18,},
+          {name: 'bbb', age: 20,},
+          {name: 'bbb', age: 21,},
+          {name: 'ccc', age: 21,},
+          {name: 'bbb', age: 20,},
+        ];
+        checkEqual(
+          array.group(data, d => d.name, {detail: true}),
+          {
+            index: ['aaa', 'bbb', 'ccc'],
+            result: [
+              [{ name: 'aaa', age: 18 }],
+              [
+                { name: 'bbb', age: 20 },
+                { name: 'bbb', age: 21 },
+                { name: 'bbb', age: 20 },
+              ],
+              [{ name: 'ccc', age: 21 }]
+            ],
+          }
+        );
+        checkEqual(
+          array.group(data, d => d.name, {detail: true})
+            .result.map(e => ({ name: e[0].name, count: e.length })),
+          [
+            { name: 'aaa', count: 1 },
+            { name: 'bbb', count: 3 },
+            { name: 'ccc', count: 1 },
+          ],
+
+        );
+        checkEqual(
+          array.group(data, d => d.name + d.age.toString(), {detail: true}),
+          {
+            index: ['aaa18', 'bbb20', 'bbb21', 'ccc21'],
+            result: [
+              [{ name: 'aaa', age: 18 }],
+              [
+                { name: 'bbb', age: 20 },
+                { name: 'bbb', age: 20 },
+              ],
+              [
+                { name: 'bbb', age: 21 },
+              ],
+              [{ name: 'ccc', age: 21 }],
+            ],
+          }
+        );
+        checkEqual(
+          array.group(data, d => d.name + d.age.toString(), {detail: true})
+            .result.map(e => ({ name: e[0].name, age: e[0].age, count: e.length })),
+          [
+            { name: 'aaa', age: 18, count: 1 },
+            { name: 'bbb', age: 20, count: 2 },
+            { name: 'bbb', age: 21, count: 1 },
+            { name: 'ccc', age: 21, count: 1 },
+          ],
         );
 
         // Object Named Parameter

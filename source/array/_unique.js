@@ -16,16 +16,21 @@ export const _unique = (
 
   const index = [];
   const result = [];
+  const count = [];
   array.forEach(v => {
     const funcResult = func(v);
-    if (!__includes(index, funcResult)) {
+    const indexResult = index.indexOf(funcResult);
+    if (indexResult === -1) {
       index.push(funcResult);
       result.push(v);
+      count.push(1);
+    } else {
+      count[indexResult] += 1;
     }
   });
   func = undefined;
   if (detail) {
-    return { index, result };
+    return { index, result, count };
   }
   return result;
 };

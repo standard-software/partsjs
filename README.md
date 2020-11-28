@@ -325,6 +325,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 10.2.0
+#### 2020/11/28(Sat)
+- update _unique
+  - add detail count
+
 ### 10.1.0
 #### 2020/11/26(Thu)
 - add namespace system
