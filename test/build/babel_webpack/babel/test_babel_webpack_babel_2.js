@@ -16,9 +16,15 @@ const fileName = parts.string.subFirstDelimFirst(
   '.',
 ) + '.txt';
 const fs = require('fs');
-const text = parts.propertyList(parts).split('\n').sort(
+const text = parts.array.unique(parts.propertyList(parts).split('\n').map(
+  line => {
+    line = parts.string.excludeFirst(line, '.default');
+    line = parts.string.excludeFirst(line, '.parts');
+    return line;
+  },
+).sort(
   parts.array.SortFunc.order.dictionaryUpperCase.ascending,
-).join('\n');
+)).join('\n');
 fs.writeFileSync('./test/outputPropertyList/' + fileName,
   text,
 );

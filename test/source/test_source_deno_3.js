@@ -15,9 +15,15 @@ const fileName = parts.string.subFirstDelimFirst(
   parts.platform.testStartFileName,
   '.',
 ) + '.txt';
-const text = parts.propertyList(parts).split('\n').sort(
-  parts.array.SortFunc.order.version.ascending,
-).join('\n');
+const text = parts.array.unique(parts.propertyList(parts).split('\n').map(
+  line => {
+    line = parts.string.excludeFirst(line, '.default');
+    line = parts.string.excludeFirst(line, '.parts');
+    return line;
+  },
+).sort(
+  parts.array.SortFunc.order.dictionaryUpperCase.ascending,
+)).join('\n');
 Deno.writeTextFile('./test/outputPropertyList/' + fileName,
   text,
 );

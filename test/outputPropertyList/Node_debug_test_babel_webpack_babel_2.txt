@@ -123,6 +123,8 @@
 .canUseSet:[object Function]:function
 .canUseWeakMap:[object Function]:function
 .canUseWeakSet:[object Function]:function
+.checkCompare:[object Function]:function
+.checkEqual:[object Function]:function
 .clone:[object Function]:function
 .cloneDeep:[object Function]:function
 .common._clone:[object Function]:function

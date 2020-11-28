@@ -329,6 +329,7 @@ You can now use the functions of the parts.js object.
 #### 2020/11/28(Sat)
 - update _unique
   - add detail count
+- update testCode outputPropertyList format
 
 ### 10.1.0
 #### 2020/11/26(Thu)
