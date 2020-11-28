@@ -331,6 +331,7 @@ You can now use the functions of the parts.js object.
   - add detail count
 - update testCode outputPropertyList format
 - publish parts root checkEqual, checkCompare
+- add polyfill Array.prototype.map
 
 ### 10.1.0
 #### 2020/11/26(Thu)
