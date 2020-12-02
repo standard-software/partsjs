@@ -430,7 +430,7 @@ export const some = (array, func) => {
   }
   if (!isFunction(func)) {
     throw new TypeError(
-      'some args(compareFunc) is not function',
+      'some args(func) is not function',
     );
   }
   return _some(array, func);
