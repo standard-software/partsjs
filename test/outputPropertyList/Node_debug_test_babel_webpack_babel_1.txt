@@ -731,7 +731,8 @@
 .switch_:[object Function]:function
 .syntax._assert:[object Function]:function
 .syntax._Enum:[object Function]:function
-.syntax._recursiveCall:[object Undefined]:undefined
+.syntax._partial:[object Function]:function
+.syntax._recursive:[object Function]:function
 .syntax.assert:[object Function]:function
 .syntax.canUseMap:[object Function]:function
 .syntax.canUseSet:[object Function]:function
@@ -741,6 +742,7 @@
 .syntax.guard:[object Function]:function
 .syntax.if_:[object Function]:function
 .syntax.loop:[object Function]:function
+.syntax.partial:[object Function]:function
 .syntax.recursive:[object Function]:function
 .syntax.sc:[object Function]:function
 .syntax.switch_:[object Function]:function

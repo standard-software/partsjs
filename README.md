@@ -326,12 +326,14 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.2.0
-#### 2020/11/28(Sat)
+#### 2020/12/02(Wed)
 - update _unique
   - add detail count
 - update testCode outputPropertyList format
 - publish parts root checkEqual, checkCompare
 - add polyfill Array.prototype.map
+- add partial
+  - add _partial.js / partial.js
 
 ### 10.1.0
 #### 2020/11/26(Thu)

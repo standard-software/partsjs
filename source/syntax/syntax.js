@@ -10,6 +10,8 @@ import _EnumJs from './_Enum.js';
 import EnumJs from './Enum.js';
 import _recursiveJs from './_recursive.js';
 import recursiveJs from './recursive.js';
+import _partialJs from './_partial.js';
+import partialJs from './partial.js';
 
 const syntaxJs = {
   ...assertJs,
@@ -24,12 +26,15 @@ const syntaxJs = {
   ...EnumJs,
   ..._recursiveJs,
   ...recursiveJs,
+  ..._partialJs,
+  ...partialJs,
 };
 
 export const {
   _assert,
   _Enum,
-  _recursiveCall,
+  _recursive,
+  _partial,
 
   assert, guard,
   sc, if_, switch_,
@@ -38,12 +43,14 @@ export const {
   canUseSet, canUseWeakSet,
   Enum,
   recursive,
+  partial,
 } = syntaxJs;
 
 export default {
   _assert,
   _Enum,
-  _recursiveCall,
+  _recursive,
+  _partial,
 
   assert, guard,
   sc, if_, switch_,
@@ -52,4 +59,5 @@ export default {
   canUseSet, canUseWeakSet,
   Enum,
   recursive,
+  partial,
 };
