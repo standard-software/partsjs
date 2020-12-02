@@ -3420,7 +3420,7 @@ var partial = function partial(func, applyArgs) {
     throw new TypeError("partial args(applyArgs:".concat(applyArgs, ") is not array"));
   }
 
-  return _partial2._partial;
+  return (0, _partial2._partial)(func, applyArgs);
 };
 
 exports.partial = partial;

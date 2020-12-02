@@ -183,11 +183,11 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        checkEqual(392, propertyCountForParts(parts));
+        checkEqual(394, propertyCountForParts(parts));
         checkEqual(17, propertyCount(parts.platform));
         checkEqual(7, propertyCount(parts.common));
         checkEqual(260, propertyCount(parts.type));
-        checkEqual(15, propertyCount(parts.syntax));
+        checkEqual(17, propertyCount(parts.syntax));
         checkEqual(12, propertyCount(parts.test));
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
@@ -3685,7 +3685,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         canUseSet = _parts$syntax.canUseSet,
         canUseWeakSet = _parts$syntax.canUseWeakSet,
         Enum = _parts$syntax.Enum,
-        recursive = _parts$syntax.recursive;
+        recursive = _parts$syntax.recursive,
+        partial = _parts$syntax.partial;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -4898,6 +4899,26 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_partial = function test_partial() {
+      it('test_partial', function () {
+        var testFunc = function testFunc(value1, value2, value3) {
+          return "1:".concat(value1, " 2:").concat(value2, " 3:").concat(value3);
+        };
+
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B1', partial.empty]);
+        checkEqual('1:a 2:B1 3:c', partialTestFunc('a', 'c'));
+        checkEqual('1:a 2:B1 3:undefined', partialTestFunc('a'));
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B2']);
+        checkEqual('1:a 2:B2 3:c', partialTestFunc('a', 'c'));
+        var partialTestFunc = partial(testFunc, ['A3', 'B3']);
+        checkEqual('1:A3 2:B3 3:undefined', partialTestFunc());
+        checkEqual('1:A3 2:B3 3:c', partialTestFunc('c'));
+        var partialTestFunc = partial(testFunc, ['A4', 'B4', 'C4']);
+        checkEqual('1:A4 2:B4 3:C4', partialTestFunc());
+        checkEqual('1:A4 2:B4 3:C4', partialTestFunc('a'));
+      });
+    };
+
     test_assert();
     test_guard();
     test_sc();
@@ -4910,6 +4931,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_canUseWeakSet();
     test_Enum();
     test_recursive();
+    test_partial();
   });
 };
 
@@ -14129,7 +14151,8 @@ var test_execute_array = function test_execute_array(parts) {
             x: 2,
             y: 2
           }],
-          index: [1, undefined, 2]
+          index: [1, undefined, 2],
+          count: [2, 2, 1]
         }, array.unique([{
           x: 1,
           y: 1
@@ -14147,49 +14170,155 @@ var test_execute_array = function test_execute_array(parts) {
         }], function (v) {
           return v.x;
         }, true));
-      }); // Object Named Parameter
+        var data = [{
+          name: 'aaa',
+          age: 18
+        }, {
+          name: 'bbb',
+          age: 20
+        }, {
+          name: 'bbb',
+          age: 21
+        }, {
+          name: 'ccc',
+          age: 21
+        }, {
+          name: 'bbb',
+          age: 20
+        }];
+        checkEqual(array.unique(data, function (d) {
+          return d.name;
+        }, {
+          detail: true
+        }), {
+          index: ['aaa', 'bbb', 'ccc'],
+          result: [{
+            name: 'aaa',
+            age: 18
+          }, {
+            name: 'bbb',
+            age: 20
+          }, {
+            name: 'ccc',
+            age: 21
+          }],
+          count: [1, 3, 1]
+        });
+        var result = array.unique(data, function (d) {
+          return d.name;
+        }, {
+          detail: true
+        });
+        checkEqual(result.result.map(function (e, i) {
+          return {
+            name: e.name,
+            count: result.count[i]
+          };
+        }), [{
+          name: 'aaa',
+          count: 1
+        }, {
+          name: 'bbb',
+          count: 3
+        }, {
+          name: 'ccc',
+          count: 1
+        }]);
+        checkEqual(array.unique(data, function (d) {
+          return d.name + d.age.toString();
+        }, {
+          detail: true
+        }), {
+          index: ['aaa18', 'bbb20', 'bbb21', 'ccc21'],
+          result: [{
+            name: 'aaa',
+            age: 18
+          }, {
+            name: 'bbb',
+            age: 20
+          }, {
+            name: 'bbb',
+            age: 21
+          }, {
+            name: 'ccc',
+            age: 21
+          }],
+          count: [1, 2, 1, 1]
+        });
+        var result = array.unique(data, function (d) {
+          return d.name + d.age.toString();
+        }, {
+          detail: true
+        });
+        checkEqual(result.result.map(function (e, i) {
+          return {
+            name: e.name,
+            age: e.age,
+            count: result.count[i]
+          };
+        }), [{
+          name: 'aaa',
+          age: 18,
+          count: 1
+        }, {
+          name: 'bbb',
+          age: 20,
+          count: 2
+        }, {
+          name: 'bbb',
+          age: 21,
+          count: 1
+        }, {
+          name: 'ccc',
+          age: 21,
+          count: 1
+        }]); // Object Named Parameter
 
-      checkEqual([1, 2, 3, 4, 0], array.unique({
-        array: [1, 2, 3, 4, 4, 4, 3, 2, 0]
-      }));
-      checkEqual([1, 2], array.unique({
-        array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
-        func: function func(v) {
+        checkEqual([1, 2, 3, 4, 0], array.unique({
+          array: [1, 2, 3, 4, 4, 4, 3, 2, 0]
+        }));
+        checkEqual([1, 2], array.unique({
+          array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          func: function func(v) {
+            return parts.isEven(v);
+          }
+        }));
+        checkEqual([1, 2], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+          func: function func(v) {
+            return parts.isEven(v);
+          }
+        }));
+        checkEqual({
+          result: [1, 2],
+          index: [false, true],
+          count: [3, 6]
+        }, array.unique({
+          array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
+          func: function func(v) {
+            return parts.isEven(v);
+          },
+          detail: true
+        }));
+        checkEqual({
+          result: [1, 2],
+          index: [false, true],
+          count: [3, 6]
+        }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], {
+          func: function func(v) {
+            return parts.isEven(v);
+          },
+          detail: true
+        }));
+        checkEqual({
+          result: [1, 2],
+          index: [false, true],
+          count: [3, 6]
+        }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
           return parts.isEven(v);
-        }
-      }));
-      checkEqual([1, 2], array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], {
-        func: function func(v) {
-          return parts.isEven(v);
-        }
-      }));
-      checkEqual({
-        result: [1, 2],
-        index: [false, true]
-      }, array.unique({
-        array: [1, 2, 3, 4, 4, 4, 3, 2, 0],
-        func: function func(v) {
-          return parts.isEven(v);
-        },
-        detail: true
-      }));
-      checkEqual({
-        result: [1, 2],
-        index: [false, true]
-      }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], {
-        func: function func(v) {
-          return parts.isEven(v);
-        },
-        detail: true
-      }));
-      checkEqual({
-        result: [1, 2],
-        index: [false, true]
-      }, array.unique([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
-        return parts.isEven(v);
-      }, {
-        detail: true
-      }));
+        }, {
+          detail: true
+        }));
+      });
     };
 
     var test_single = function test_single() {
@@ -14215,7 +14344,115 @@ var test_execute_array = function test_execute_array(parts) {
           index: [false, true]
         }, array.group([1, 2, 3, 4, 4, 4, 3, 2, 0], function (v) {
           return parts.isEven(v);
-        }, true)); // Object Named Parameter
+        }, true));
+        var data = [{
+          name: 'aaa',
+          age: 18
+        }, {
+          name: 'bbb',
+          age: 20
+        }, {
+          name: 'bbb',
+          age: 21
+        }, {
+          name: 'ccc',
+          age: 21
+        }, {
+          name: 'bbb',
+          age: 20
+        }];
+        checkEqual(array.group(data, function (d) {
+          return d.name;
+        }, {
+          detail: true
+        }), {
+          index: ['aaa', 'bbb', 'ccc'],
+          result: [[{
+            name: 'aaa',
+            age: 18
+          }], [{
+            name: 'bbb',
+            age: 20
+          }, {
+            name: 'bbb',
+            age: 21
+          }, {
+            name: 'bbb',
+            age: 20
+          }], [{
+            name: 'ccc',
+            age: 21
+          }]]
+        });
+        checkEqual(array.group(data, function (d) {
+          return d.name;
+        }, {
+          detail: true
+        }).result.map(function (e) {
+          return {
+            name: e[0].name,
+            count: e.length
+          };
+        }), [{
+          name: 'aaa',
+          count: 1
+        }, {
+          name: 'bbb',
+          count: 3
+        }, {
+          name: 'ccc',
+          count: 1
+        }]);
+        checkEqual(array.group(data, function (d) {
+          return d.name + d.age.toString();
+        }, {
+          detail: true
+        }), {
+          index: ['aaa18', 'bbb20', 'bbb21', 'ccc21'],
+          result: [[{
+            name: 'aaa',
+            age: 18
+          }], [{
+            name: 'bbb',
+            age: 20
+          }, {
+            name: 'bbb',
+            age: 20
+          }], [{
+            name: 'bbb',
+            age: 21
+          }], [{
+            name: 'ccc',
+            age: 21
+          }]]
+        });
+        checkEqual(array.group(data, function (d) {
+          return d.name + d.age.toString();
+        }, {
+          detail: true
+        }).result.map(function (e) {
+          return {
+            name: e[0].name,
+            age: e[0].age,
+            count: e.length
+          };
+        }), [{
+          name: 'aaa',
+          age: 18,
+          count: 1
+        }, {
+          name: 'bbb',
+          age: 20,
+          count: 2
+        }, {
+          name: 'bbb',
+          age: 21,
+          count: 1
+        }, {
+          name: 'ccc',
+          age: 21,
+          count: 1
+        }]); // Object Named Parameter
 
         checkEqual([[1], [2, 2], [3, 3], [4, 4, 4], [0]], array.group({
           array: [1, 2, 3, 4, 4, 4, 3, 2, 0]
@@ -16175,6 +16412,16 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual(true, isDate(new Date('ABC')));
         checkEqual(false, isInvalidDate(new Date(2020, 11, 21)));
         checkEqual(true, isInvalidDate(new Date('ABC')));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual('NaN', new Date('ABC').toString());
+          checkEqual('NaN-NaN-NaNTNaN:NaN:NaN.NZ', new Date('ABC').toISOString());
+        } else {
+          checkEqual('Invalid Date', new Date('ABC').toString());
+          checkEqual(true, isThrown(function () {
+            new Date('ABC').toISOString();
+          }));
+        }
       });
     };
 

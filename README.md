@@ -39,8 +39,8 @@ Normal
     npm i @standard-software/parts
 
 When specifying the version
+    npm i @standard-software/parts@10.2.0
     npm i @standard-software/parts@9.2.0
-    npm i @standard-software/parts@10.1.0
 
 ### type CommonJS
 
@@ -87,7 +87,7 @@ console.log(
 ### web
 ```
 // index.js
-import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.1.0/source/index.js';
+import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.2.0/source/index.js';
 
 console.log(
   'parts version is ', parts.VERSION
@@ -130,7 +130,7 @@ You can now use the functions of the parts.js object.
   <meta charset="UTF-8">
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.2.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>
@@ -382,44 +382,6 @@ You can now use the functions of the parts.js object.
   - delete _loopBase
 - add syntax.recursiveCall
   - add _recursiveCall.js / recursiveCall.js
-
-### 9.1.0
-#### 2020/11/02(Mon)
-- update clone / cloneDeep
-  - if clone / cloneDeep args cloneFunc is undefined
-    call clone / cloneDeep Fast version
-    __clone.js / __cloneDeep.js
-  - delete cloneFast / cloneDeepFast
-- update array operation deleteLength
-- update isArray
-  - isArray = Array.isArray
-  - Speeding up
-- add from array_common.js
-  - _map.js/map.js
-- add SortFunc
-  - _SortFunc.js / SortFunc.js
-  - __SortFuncOrder.js
-- delete array.operation.sort
-  - sort / sortNumber / sortLength / sortDictionary
-
-### 9.0.0
-#### 2020/10/27(Tue)
-- unsupport WSH
-  - delete namespace WSH
-  - Parts.js file 512KB over 
-    and WSH unsupport 512KB over file
-  - I feel that I can handle it if I put effort,
-    but I decided to give up already
-- delete consoleHook
-  - The reason is not convenient.
-- update isObject
-  - Speeding up
-- add cloneDeepFast.js
-  - only object and array Recursive clone
-  - Equally fastest level compared to rfdc and clone-deep
-- update cloneDeep.js
-  - _cloneDeep.js / cloneDeep.js
-- add paddingFirst / paddingLast
 
 ### More Info
 [VERSION.md](./VERSION.md)
