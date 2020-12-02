@@ -81,11 +81,11 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        checkEqual(392, propertyCountForParts(parts));
+        checkEqual(394, propertyCountForParts(parts));
         checkEqual(17, propertyCount(parts.platform));
         checkEqual(7, propertyCount(parts.common));
         checkEqual(260, propertyCount(parts.type));
-        checkEqual(15, propertyCount(parts.syntax));
+        checkEqual(17, propertyCount(parts.syntax));
         checkEqual(12, propertyCount(parts.test));
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
@@ -258,7 +258,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         canUseSet = _parts$syntax.canUseSet,
         canUseWeakSet = _parts$syntax.canUseWeakSet,
         Enum = _parts$syntax.Enum,
-        recursive = _parts$syntax.recursive;
+        recursive = _parts$syntax.recursive,
+        partial = _parts$syntax.partial;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -1471,6 +1472,21 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_partial = function test_partial() {
+      it('test_partial', function () {
+        var testFunc = function testFunc(value1, value2, value3) {
+          return "1:".concat(value1, " 2:").concat(value2, " 3:").concat(value3);
+        };
+
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B1', partial.empty]);
+        checkEqual('1:a 2:B1 3:c', partialTestFunc('a', 'c'));
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B2']);
+        checkEqual('1:a 2:B2 3:c', partialTestFunc('a', 'c'));
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B3', partial.empty]);
+        checkEqual('1:a 2:B3 3:undefined', partialTestFunc('a'));
+      });
+    };
+
     test_assert();
     test_guard();
     test_sc();
@@ -1483,6 +1499,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_canUseWeakSet();
     test_Enum();
     test_recursive();
+    test_partial();
   });
 };
 
@@ -6929,6 +6946,16 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual(true, isDate(new Date('ABC')));
         checkEqual(false, isInvalidDate(new Date(2020, 11, 21)));
         checkEqual(true, isInvalidDate(new Date('ABC')));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual('NaN', new Date('ABC').toString());
+          checkEqual('NaN-NaN-NaNTNaN:NaN:NaN.NZ', new Date('ABC').toISOString());
+        } else {
+          checkEqual('Invalid Date', new Date('ABC').toString());
+          checkEqual(true, isThrown(function () {
+            new Date('ABC').toISOString();
+          }));
+        }
       });
     };
 

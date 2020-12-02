@@ -26,12 +26,17 @@ var _unique = function _unique(array) {
 
   var index = [];
   var result = [];
+  var count = [];
   array.forEach(function (v) {
     var funcResult = func(v);
+    var indexResult = index.indexOf(funcResult);
 
-    if (!(0, _includes.__includes)(index, funcResult)) {
+    if (indexResult === -1) {
       index.push(funcResult);
       result.push(v);
+      count.push(1);
+    } else {
+      count[indexResult] += 1;
     }
   });
   func = undefined;
@@ -39,7 +44,8 @@ var _unique = function _unique(array) {
   if (detail) {
     return {
       index: index,
-      result: result
+      result: result,
+      count: count
     };
   }
 

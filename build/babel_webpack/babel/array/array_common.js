@@ -501,7 +501,7 @@ var some = function some(array, func) {
   }
 
   if (!(0, _type.isFunction)(func)) {
-    throw new TypeError('some args(compareFunc) is not function');
+    throw new TypeError('some args(func) is not function');
   }
 
   return _some(array, func);

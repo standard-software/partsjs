@@ -65,7 +65,8 @@ var test_execute_syntax = function test_execute_syntax(parts) {
         canUseSet = _parts$syntax.canUseSet,
         canUseWeakSet = _parts$syntax.canUseWeakSet,
         Enum = _parts$syntax.Enum,
-        recursive = _parts$syntax.recursive;
+        recursive = _parts$syntax.recursive,
+        partial = _parts$syntax.partial;
     var _parts$compare = parts.compare,
         equal = _parts$compare.equal,
         or = _parts$compare.or;
@@ -1278,6 +1279,26 @@ var test_execute_syntax = function test_execute_syntax(parts) {
       });
     };
 
+    var test_partial = function test_partial() {
+      it('test_partial', function () {
+        var testFunc = function testFunc(value1, value2, value3) {
+          return "1:".concat(value1, " 2:").concat(value2, " 3:").concat(value3);
+        };
+
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B1', partial.empty]);
+        checkEqual('1:a 2:B1 3:c', partialTestFunc('a', 'c'));
+        checkEqual('1:a 2:B1 3:undefined', partialTestFunc('a'));
+        var partialTestFunc = partial(testFunc, [partial.empty, 'B2']);
+        checkEqual('1:a 2:B2 3:c', partialTestFunc('a', 'c'));
+        var partialTestFunc = partial(testFunc, ['A3', 'B3']);
+        checkEqual('1:A3 2:B3 3:undefined', partialTestFunc());
+        checkEqual('1:A3 2:B3 3:c', partialTestFunc('c'));
+        var partialTestFunc = partial(testFunc, ['A4', 'B4', 'C4']);
+        checkEqual('1:A4 2:B4 3:C4', partialTestFunc());
+        checkEqual('1:A4 2:B4 3:C4', partialTestFunc('a'));
+      });
+    };
+
     test_assert();
     test_guard();
     test_sc();
@@ -1290,6 +1311,7 @@ var test_execute_syntax = function test_execute_syntax(parts) {
     test_canUseWeakSet();
     test_Enum();
     test_recursive();
+    test_partial();
   });
 };
 
