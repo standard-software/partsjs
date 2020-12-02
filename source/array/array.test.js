@@ -428,6 +428,15 @@ export const test_execute_array = (parts) => {
             count: [1, 3, 1]
           }
         );
+        var result = array.unique(data, d => d.name, {detail: true});
+        checkEqual(
+          result.result.map((e, i) => ({ name: e.name, count: result.count[i]})),
+          [
+            { name: 'aaa', count: 1 },
+            { name: 'bbb', count: 3 },
+            { name: 'ccc', count: 1 },
+          ],
+        );
         checkEqual(
           array.unique(data, d => d.name + d.age.toString(), {detail: true}),
           {
@@ -440,6 +449,18 @@ export const test_execute_array = (parts) => {
             ],
             count: [1, 2, 1, 1]
           }
+        );
+        var result = array.unique(
+          data, d => d.name + d.age.toString(), {detail: true}
+        );
+        checkEqual(
+          result.result.map((e, i) => ({ name: e.name, age: e.age, count: result.count[i] })),
+          [
+            { name: 'aaa', age: 18, count: 1 },
+            { name: 'bbb', age: 20, count: 2 },
+            { name: 'bbb', age: 21, count: 1 },
+            { name: 'ccc', age: 21, count: 1 },
+          ],
         );
 
         // Object Named Parameter
