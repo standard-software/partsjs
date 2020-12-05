@@ -326,6 +326,11 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.2.0
+#### 2020/12/06(Sun)
+- add isPrimitiveType / isReferenceType
+  - add isPrimitiveType.js / isReferenceType.js
+
+### 10.2.0
 #### 2020/12/02(Wed)
 - update _unique
   - add detail count

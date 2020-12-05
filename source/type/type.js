@@ -6,6 +6,8 @@ import isMapJs from './isMap.js';
 import isSetJs from './isSet.js';
 import isTypeAllJs from './isTypeAll.js';
 import isTypeArrayJs from './isTypeArray.js';
+import isPrimitiveTypeJs from './isPrimitiveType.js';
+import isReferenceTypeJs from './isReferenceType.js';
 
 export const {
   typeName,
@@ -117,10 +119,18 @@ export const {
   isNotSetArray, isNotWeakSetArray,
 } = isTypeArrayJs;
 
+export const {
+  isPrimitiveType,
+} = isPrimitiveTypeJs;
+
+export const {
+  isReferenceType,
+} = isReferenceTypeJs;
+
 export default {
   objectToString,
-
   typeName,
+  isPrimitiveType, isReferenceType,
 
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,

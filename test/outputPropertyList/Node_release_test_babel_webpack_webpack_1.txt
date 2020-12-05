@@ -475,6 +475,8 @@
 .isObjTypeAll:[object Function]:function
 .isObjTypeArray:[object Function]:function
 .isOdd:[object Function]:function
+.isPrimitiveType:[object Function]:function
+.isReferenceType:[object Function]:function
 .isRegExp:[object Function]:function
 .isRegExpAll:[object Function]:function
 .isRegExpArray:[object Function]:function
@@ -1014,6 +1016,8 @@
 .type.isObjType:[object Function]:function
 .type.isObjTypeAll:[object Function]:function
 .type.isObjTypeArray:[object Function]:function
+.type.isPrimitiveType:[object Function]:function
+.type.isReferenceType:[object Function]:function
 .type.isRegExp:[object Function]:function
 .type.isRegExpAll:[object Function]:function
 .type.isRegExpArray:[object Function]:function

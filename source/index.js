@@ -15,7 +15,7 @@ import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
 import systemJs from './system/system.js';
 
-export const VERSION = '10.2.0';
+export const VERSION = '10.3.0 beta 1';
 
 let rootAlias = {};
 const propertyNames = {};
@@ -54,6 +54,7 @@ export const platform = {
 export const {
   objectToString,
   typeName,
+  isPrimitiveType, isReferenceType,
   // -----
   isUndefined, isNull, isNaNStrict,
   isBoolean, isNumber, isInteger, isString,
