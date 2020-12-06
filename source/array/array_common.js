@@ -472,7 +472,7 @@ export const every = all;
  * isFirst
  */
 export const _isFirst = (array, valueArray) => {
-  if (array.length < valueArray.length ) {
+  if (array.length < valueArray.length) {
     return false;
   }
   return _all(
@@ -512,7 +512,7 @@ export const isFirst = (array, valueArray) => {
  * isLast
  */
 export const _isLast = (array, valueArray) => {
-  if (array.length < valueArray.length ) {
+  if (array.length < valueArray.length) {
     return false;
   }
   return _all(

@@ -1,3 +1,4 @@
+/* eslint-disable space-in-parens */
 /* eslint-disable max-len */
 export const test_execute_string = (parts) => {
   const { describe, it } = parts.test;
@@ -1741,29 +1742,29 @@ export const test_execute_string = (parts) => {
           ),
         );
 
-        checkEqual([''],  split('', ',',  split.excludeEmptyStr.none) );
-        checkEqual([],    split('', ',',  split.excludeEmptyStr.first) );
-        checkEqual([''],  split('', ',',  split.excludeEmptyStr.last) );
-        checkEqual([''],  split('', ',',  split.excludeEmptyStr.bothEnds) );
-        checkEqual([],    split('', ',',  split.excludeEmptyStr.all) );
+        checkEqual([''],  split('', ',',  split.excludeEmptyStr.none));
+        checkEqual([],    split('', ',',  split.excludeEmptyStr.first));
+        checkEqual([''],  split('', ',',  split.excludeEmptyStr.last));
+        checkEqual([''],  split('', ',',  split.excludeEmptyStr.bothEnds));
+        checkEqual([],    split('', ',',  split.excludeEmptyStr.all));
 
-        checkEqual(['', ''],  split(',', ',', split.excludeEmptyStr.none) );
-        checkEqual([''],      split(',', ',', split.excludeEmptyStr.first) );
-        checkEqual([''],      split(',', ',', split.excludeEmptyStr.last) );
-        checkEqual([],        split(',', ',', split.excludeEmptyStr.bothEnds) );
-        checkEqual([],        split(',', ',', split.excludeEmptyStr.all) );
+        checkEqual(['', ''],  split(',', ',', split.excludeEmptyStr.none));
+        checkEqual([''],      split(',', ',', split.excludeEmptyStr.first));
+        checkEqual([''],      split(',', ',', split.excludeEmptyStr.last));
+        checkEqual([],        split(',', ',', split.excludeEmptyStr.bothEnds));
+        checkEqual([],        split(',', ',', split.excludeEmptyStr.all));
 
-        checkEqual(['', '', ''],  split(',,', ',',  split.excludeEmptyStr.none) );
-        checkEqual(['', ''],      split(',,', ',',  split.excludeEmptyStr.first) );
-        checkEqual(['', ''],      split(',,', ',',  split.excludeEmptyStr.last) );
-        checkEqual([''],          split(',,', ',',  split.excludeEmptyStr.bothEnds) );
-        checkEqual([],            split(',,', ',',  split.excludeEmptyStr.all) );
+        checkEqual(['', '', ''],  split(',,', ',',  split.excludeEmptyStr.none));
+        checkEqual(['', ''],      split(',,', ',',  split.excludeEmptyStr.first));
+        checkEqual(['', ''],      split(',,', ',',  split.excludeEmptyStr.last));
+        checkEqual([''],          split(',,', ',',  split.excludeEmptyStr.bothEnds));
+        checkEqual([],            split(',,', ',',  split.excludeEmptyStr.all));
 
-        checkEqual(['', 'A', ''], split(',A,', ',',  split.excludeEmptyStr.none) );
-        checkEqual(['A', ''],     split(',A,', ',',  split.excludeEmptyStr.first) );
-        checkEqual(['', 'A'],     split(',A,', ',',  split.excludeEmptyStr.last) );
-        checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.bothEnds) );
-        checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.all) );
+        checkEqual(['', 'A', ''], split(',A,', ',',  split.excludeEmptyStr.none));
+        checkEqual(['A', ''],     split(',A,', ',',  split.excludeEmptyStr.first));
+        checkEqual(['', 'A'],     split(',A,', ',',  split.excludeEmptyStr.last));
+        checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.bothEnds));
+        checkEqual(['A'],         split(',A,', ',',  split.excludeEmptyStr.all));
 
         // object parameter
         testCounter();

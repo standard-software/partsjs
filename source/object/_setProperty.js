@@ -23,7 +23,7 @@ export const _setProperty = (object, propertyPath, value) => {
     throw new Error('setProperty args(propertyPath) is empty string');
   }
   for (let i = 0, l = propertyArray.length; i < l; i += 1) {
-    if (propertyArray[i] === '' ) {
+    if (propertyArray[i] === '') {
       throw new Error('setProperty args(propertyPath) is empty string');
     }
   }

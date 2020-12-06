@@ -9,7 +9,7 @@ export const recursive = (source, func) => {
     ({ func } = func);
   }
 
-  if (!(isObject(source) || isArray(source) )) {
+  if (!(isObject(source) || isArray(source))) {
     throw new TypeError(
       'recursive args source is not [object|array]',
     );

@@ -74,7 +74,7 @@ export const round = (value, digit = 0) => {
  * nearEqual
  */
 export const _nearEqual = (value1, value2, diff) => {
-  if ( Math.abs(value1 - value2) <= diff ) {
+  if (Math.abs(value1 - value2) <= diff) {
     return true;
   } else {
     return false;
@@ -197,7 +197,7 @@ export const keepMinMax = (value, min, to) => {
  * randomInt
  */
 export const _randomInt = (min, max) => {
-  return Math.floor( Math.random() * (max + 1 - min) ) + min;
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
 
 export const randomInt = (min, max) => {

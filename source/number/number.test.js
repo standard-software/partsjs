@@ -1,3 +1,4 @@
+/* eslint-disable space-in-parens */
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 export const test_execute_number = (parts) => {

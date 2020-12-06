@@ -1,3 +1,4 @@
+/* eslint-disable space-in-parens */
 /* eslint-disable no-var */
 export const test_execute_convert = (parts) => {
   const { checkEqual, describe, it, test } = parts.test;
@@ -111,8 +112,8 @@ export const test_execute_convert = (parts) => {
         checkEqual('a.4',             10.25.toString(16));
 
         // other type
-        checkEqual(true,              isThrown(() => (null).toString()) );
-        checkEqual(true,              isThrown(() => (undefined).toString()) );
+        checkEqual(true,              isThrown(() => (null).toString()));
+        checkEqual(true,              isThrown(() => (undefined).toString()));
 
         checkEqual('[object Object]', {}.toString());
         checkEqual('',                [].toString());

@@ -31,6 +31,7 @@ module.exports = {
         'ImportDeclaration': true,
       },
     }],
+    'space-in-parens': ['warn', 'never'],
     'no-unused-vars': ['off'],
     'indent': ['warn', 2, {
       'flatTernaryExpressions': true,

@@ -195,7 +195,7 @@ const _stringToIntegerBase = (
   if (value === '') {
     return defaultValueFunc();
   }
-  if (!_matchFormat(String(radix)+'_base_number', value )) {
+  if (!_matchFormat(String(radix)+'_base_number', value)) {
     return defaultValueFunc();
   }
 

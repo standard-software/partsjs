@@ -62,8 +62,8 @@ export const test_execute_compare = (parts) => {
     const test_equal = () => {
       it('test_equal', () => {
         // Primitive value
-        checkEqual(true,  equal(  1,   1));
-        checkEqual(false, equal(  1,   2));
+        checkEqual(true,  equal(1,   1));
+        checkEqual(false, equal(1,   2));
         checkEqual(true,  equal('1', '1'));
         checkEqual(false, equal('1',   1));
         checkEqual(true,  equal(null, null));
@@ -84,31 +84,31 @@ export const test_execute_compare = (parts) => {
       it('test_equal_object', () => {
         // object
         checkEqual(true,
-          equal( { },   { }),
+          equal({ },   { }),
         );
         checkEqual(false,
-          equal( { a: {} },   { a: {} }),
+          equal({ a: {} },   { a: {} }),
         );
         checkEqual(true,
-          equal( { a: '1', b: '2' },   { a: '1', b: '2' }),
+          equal({ a: '1', b: '2' },   { a: '1', b: '2' }),
           'test_equal object 1');
         checkEqual(false,
-          equal( { a: '2', b: '2' },   { a: '1', b: '2' }),
+          equal({ a: '2', b: '2' },   { a: '1', b: '2' }),
           'test_equal object 2');
 
         checkEqual(false,
-          equal( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {} }),
+          equal({ a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {} }),
           'test_equal object 3');
         checkEqual(false,
-          equal( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
+          equal({ a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
           'test_equal object 4');
       });
     };
 
     const test_equal_array = () => {
       it('test_equal_array', () => {
-        checkEqual(true,  equal( [],   []));
-        checkEqual(false, equal( [[]],   [[]])    );
+        checkEqual(true,  equal([],   []));
+        checkEqual(false, equal([[]],   [[]]));
 
         checkEqual(true,  equal([1], [1]));
         checkEqual(false, equal([1], [2]));
@@ -159,15 +159,15 @@ export const test_execute_compare = (parts) => {
       it('test_equal_date', () => {
         // date
         checkEqual(true,
-          equal( new Date('2019/11/02'),  new Date('2019/11/02')),
+          equal(new Date('2019/11/02'),  new Date('2019/11/02')),
           'test_equal date');
         // date in object
         checkEqual(false,
-          equal( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
+          equal({ date: new Date('2019/11/02') },  { date: new Date('2019/11/02') }),
           'test_equal date');
         // date in array
         checkEqual(false,
-          equal( [new Date('2019/11/02')],  [new Date('2019/11/02')] ),
+          equal([new Date('2019/11/02')],  [new Date('2019/11/02')]),
           'test_equal date');
 
         // date ignore
@@ -181,15 +181,15 @@ export const test_execute_compare = (parts) => {
 
         // date
         checkEqual(false,
-          equal( new Date('2019/11/02'),  new Date('2019/11/02'), equalFuncArray),
+          equal(new Date('2019/11/02'),  new Date('2019/11/02'), equalFuncArray),
           'test_equal date');
         // date in object
         checkEqual(false,
-          equal( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') }, equalFuncArray),
+          equal({ date: new Date('2019/11/02') },  { date: new Date('2019/11/02') }, equalFuncArray),
           'test_equal date');
         // date in array
         checkEqual(false,
-          equal( [new Date('2019/11/02')],  [new Date('2019/11/02')], equalFuncArray),
+          equal([new Date('2019/11/02')],  [new Date('2019/11/02')], equalFuncArray),
           'test_equal date');
       });
     };
@@ -198,15 +198,15 @@ export const test_execute_compare = (parts) => {
       it('test_equal_regexp', () => {
         // regexp
         checkEqual(true,
-          equal( new RegExp(/^a/),  new RegExp(/^a/) ),
+          equal(new RegExp(/^a/),  new RegExp(/^a/)),
           'test_equal regexp');
         // regexp in object
         checkEqual(false,
-          equal( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) } ),
+          equal({ reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) }),
           'test_equal regexp');
         // regexp in array
         checkEqual(false,
-          equal( [new RegExp(/^a/)],  [new RegExp(/^a/)] ),
+          equal([new RegExp(/^a/)],  [new RegExp(/^a/)]),
           'test_equal regexp');
 
         // regexp ignore
@@ -220,15 +220,15 @@ export const test_execute_compare = (parts) => {
 
         // regexp
         checkEqual(false,
-          equal( new RegExp(/^a/),  new RegExp(/^a/), equalFuncArray),
+          equal(new RegExp(/^a/),  new RegExp(/^a/), equalFuncArray),
           'test_equal regexp');
         // regexp in object
         checkEqual(false,
-          equal( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) }, equalFuncArray),
+          equal({ reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) }, equalFuncArray),
           'test_equal regexp');
         // regexp in array
         checkEqual(false,
-          equal( [new RegExp(/^a/)],  [new RegExp(/^a/)], equalFuncArray ),
+          equal([new RegExp(/^a/)],  [new RegExp(/^a/)], equalFuncArray),
           'test_equal regexp');
       });
     };
@@ -248,15 +248,15 @@ export const test_execute_compare = (parts) => {
         var map2 = new Map();
         map2.set('a', 1); map2.set('b', 2);
         checkEqual(true,
-          equal( map1,  map2 ),
+          equal(map1,  map2),
           'test_equal Map');
         // Map in object
         checkEqual(false,
-          equal( { map: map1 }, { map: map2 } ),
+          equal({ map: map1 }, { map: map2 }),
           'test_equal Map');
         // Map in array
         checkEqual(false,
-          equal( [map1],  [map2] ),
+          equal([map1],  [map2]),
           'test_equal Map');
 
         // ignore Map
@@ -268,15 +268,15 @@ export const test_execute_compare = (parts) => {
           equal.func.object,
           equal.func.value,
         ];
-        checkEqual(false, equal( map1,  map2, equalFuncArray ));
+        checkEqual(false, equal(map1,  map2, equalFuncArray));
 
         // Map in object
         checkEqual(false,
-          equal( { map: map1 }, { map: map2 } ),
+          equal({ map: map1 }, { map: map2 }),
           'test_equal Map');
         // Map in array
         checkEqual(false,
-          equal( [map1],  [map2] ),
+          equal([map1],  [map2]),
           'test_equal Map');
       });
 
@@ -297,15 +297,15 @@ export const test_execute_compare = (parts) => {
         var set2 = new Set();
         set2.add('a'); set2.add('b');
         checkEqual(true,
-          equal( set1,  set2 ),
+          equal(set1,  set2),
           'test_equal Set');
         // Set in object
         checkEqual(false,
-          equal( { set: set1 }, { set: set2 } ),
+          equal({ set: set1 }, { set: set2 }),
           'test_equal Set');
         // Set in array
         checkEqual(false,
-          equal( [set1],  [set2] ),
+          equal([set1],  [set2]),
           'test_equal Set');
 
         // ignore Set
@@ -317,15 +317,15 @@ export const test_execute_compare = (parts) => {
           equal.func.object,
           equal.func.value,
         ];
-        checkEqual(false, equal( set1,  set2, equalFuncArray ));
+        checkEqual(false, equal(set1,  set2, equalFuncArray));
 
         // Set in object
         checkEqual(false,
-          equal( { set: set1 }, { set: set2 } ),
+          equal({ set: set1 }, { set: set2 }),
           'test_equal Set');
         // Set in array
         checkEqual(false,
-          equal( [set1],  [set2] ),
+          equal([set1],  [set2]),
           'test_equal Set');
 
       });
@@ -335,8 +335,8 @@ export const test_execute_compare = (parts) => {
     const test_equalDeep = (objectParameter = true) => {
       it('test_equalDeep', () => {
         // Primitive value
-        checkEqual(true,  equalDeep(  1,   1));
-        checkEqual(false, equalDeep(  1,   2));
+        checkEqual(true,  equalDeep(1,   1));
+        checkEqual(false, equalDeep(1,   2));
         checkEqual(true,  equalDeep('1', '1'));
         checkEqual(false, equalDeep('1',   1));
         checkEqual(true,  equalDeep(null, null));
@@ -360,50 +360,50 @@ export const test_execute_compare = (parts) => {
       it('test_equalDeep_object', () => {
         // object
         checkEqual(true,
-          equalDeep( { },   { }),
+          equalDeep({ },   { }),
         );
         checkEqual(true,
-          equalDeep( { a: {} },   { a: {} }),
+          equalDeep({ a: {} },   { a: {} }),
         );
         checkEqual(true,
-          equalDeep( { a: '1', b: '2' },   { a: '1', b: '2' }),
+          equalDeep({ a: '1', b: '2' },   { a: '1', b: '2' }),
         );
         checkEqual(false,
-          equalDeep( { a: '2', b: '2' },   { a: '1', b: '2' }),
+          equalDeep({ a: '2', b: '2' },   { a: '1', b: '2' }),
         );
 
         checkEqual(true,
-          equalDeep( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {} }),
+          equalDeep({ a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {} }),
         );
         checkEqual(true,
-          equalDeep( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
+          equalDeep({ a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [] }),
         );
 
         checkEqual(false,
-          equalDeep( { a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {}, d: '' }),
+          equalDeep({ a: '1', b: '2', c: {} },   { a: '1', b: '2', c: {}, d: '' }),
         );
         checkEqual(false,
-          equalDeep( { a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [], d: '' }),
+          equalDeep({ a: '1', b: '2', c: [] },   { a: '1', b: '2', c: [], d: '' }),
         );
 
         checkEqual(false,
-          equalDeep( { a: '1', b: '2', c: {}, d: '' },   { a: '1', b: '2', c: {} }),
+          equalDeep({ a: '1', b: '2', c: {}, d: '' },   { a: '1', b: '2', c: {} }),
         );
         checkEqual(false,
-          equalDeep( { a: '1', b: '2', c: [], d: '' },   { a: '1', b: '2', c: [] }),
+          equalDeep({ a: '1', b: '2', c: [], d: '' },   { a: '1', b: '2', c: [] }),
         );
 
         checkEqual(true,
-          equalDeep( { a: { b: 'B', c: 'C' } }, { a: { b: 'B', c: 'C' } } ),
+          equalDeep({ a: { b: 'B', c: 'C' } }, { a: { b: 'B', c: 'C' } }),
         );
         checkEqual(false,
-          equalDeep( { a: { b: 'B', c: 'C' } }, { a: { b: 'B', c: 'c' } } ),
+          equalDeep({ a: { b: 'B', c: 'C' } }, { a: { b: 'B', c: 'c' } }),
         );
         checkEqual(false,
-          equalDeep( { a: { b: 'B', c: 'C' } }, { a: { b: 'B' } } ),
+          equalDeep({ a: { b: 'B', c: 'C' } }, { a: { b: 'B' } }),
         );
         checkEqual(false,
-          equalDeep( { a: { b: 'B' } }, { a: { b: 'B', c: 'C' } } ),
+          equalDeep({ a: { b: 'B' } }, { a: { b: 'B', c: 'C' } }),
         );
 
       });
@@ -453,7 +453,7 @@ export const test_execute_compare = (parts) => {
         object1.obj = object1;
         object2.obj = object2;
         checkEqual(true,
-          equalDeep( object1,  object2 ),
+          equalDeep(object1,  object2),
           'test_equalDeep CircularReference 1');
 
         var object1 = { a: '1', b: '2', c: {} };
@@ -461,7 +461,7 @@ export const test_execute_compare = (parts) => {
         object1.obj = object1;
         object2.obj = object1;
         checkEqual(true,
-          equalDeep( object1,  object2 ),
+          equalDeep(object1,  object2),
           'test_equalDeep CircularReference 2');
 
         var object1 = { a: '1', b: '2', c: {} };
@@ -469,7 +469,7 @@ export const test_execute_compare = (parts) => {
         object1.obj = object2;
         object2.obj = object1;
         checkEqual(true,
-          equalDeep( object1,  object2 ),
+          equalDeep(object1,  object2),
           'test_equalDeep CircularReference 3');
 
         var object1 = { a: '1', b: '2', c: {} };
@@ -477,7 +477,7 @@ export const test_execute_compare = (parts) => {
         object1.obj = object2;
         object2.obj = object2;
         checkEqual(true,
-          equalDeep( object1,  object2 ),
+          equalDeep(object1,  object2),
           'test_equalDeep CircularReference 4');
 
         var object1 = { a: '1', b: '2', c: {} };
@@ -486,7 +486,7 @@ export const test_execute_compare = (parts) => {
         object1.obj = object2;
         object2.obj = object3;
         checkEqual(false,
-          equalDeep( object1,  object2 ),
+          equalDeep(object1,  object2),
           'test_equalDeep CircularReference 5');
       });
 
@@ -494,11 +494,11 @@ export const test_execute_compare = (parts) => {
 
     const test_equalDeep_array = (objectParameter = true) => {
       it('test_equalDeep_array', () => {
-        checkEqual(true,  equalDeep( [1, 2, {}],   [1, 2, {}]));
-        checkEqual(true,  equalDeep( [1, 2, [3]],   [1, 2, [3]]));
+        checkEqual(true,  equalDeep([1, 2, {}],   [1, 2, {}]));
+        checkEqual(true,  equalDeep([1, 2, [3]],   [1, 2, [3]]));
 
-        checkEqual(true,  equalDeep( [],   []));
-        checkEqual(true,  equalDeep( [[]],   [[]])    );
+        checkEqual(true,  equalDeep([],   []));
+        checkEqual(true,  equalDeep([[]],   [[]]));
 
         checkEqual(true,  equalDeep([1], [1]));
         checkEqual(false, equalDeep([1], [2]));
@@ -558,7 +558,7 @@ export const test_execute_compare = (parts) => {
         array1.push(array1);
         array2.push(array2);
         checkEqual(true,
-          equalDeep( array1,  array2 ),
+          equalDeep(array1,  array2),
           'test_equalDeep array CircularReference 1');
 
         var array1 = [{ a: '1', b: '2' }, 1, 2];
@@ -566,7 +566,7 @@ export const test_execute_compare = (parts) => {
         array1.push(array1);
         array2.push(array1);
         checkEqual(true,
-          equalDeep( array1,  array2 ),
+          equalDeep(array1,  array2),
           'test_equalDeep array CircularReference 2');
 
         var array1 = [{ a: '1', b: '2' }, 1, 2];
@@ -574,7 +574,7 @@ export const test_execute_compare = (parts) => {
         array1.push(array2);
         array2.push(array1);
         checkEqual(true,
-          equalDeep( array1,  array2 ),
+          equalDeep(array1,  array2),
           'test_equalDeep array CircularReference 3');
 
         var array1 = [{ a: '1', b: '2' }, 1, 2];
@@ -582,7 +582,7 @@ export const test_execute_compare = (parts) => {
         array1.push(array2);
         array2.push(array2);
         checkEqual(true,
-          equalDeep( array1,  array2 ),
+          equalDeep(array1,  array2),
           'test_equalDeep array CircularReference 4');
 
         var array1 = [{ a: '1', b: '2' }, 1, 2];
@@ -591,7 +591,7 @@ export const test_execute_compare = (parts) => {
         array1.push(array2);
         array2.push(array3);
         checkEqual(false,
-          equalDeep( array1,  array2 ),
+          equalDeep(array1,  array2),
           'test_equalDeep array CircularReference 5');
       });
 
@@ -601,15 +601,15 @@ export const test_execute_compare = (parts) => {
       it('test_equalDeep_date', () => {
         // date
         checkEqual(true,
-          equalDeep( new Date('2019/11/02'),  new Date('2019/11/02')),
+          equalDeep(new Date('2019/11/02'),  new Date('2019/11/02')),
           'test_equalDeep date');
         // date in object
         checkEqual(true,
-          equalDeep( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') } ),
+          equalDeep({ date: new Date('2019/11/02') },  { date: new Date('2019/11/02') }),
           'test_equalDeep date');
         // date in array
         checkEqual(true,
-          equalDeep( [new Date('2019/11/02')],  [new Date('2019/11/02')] ),
+          equalDeep([new Date('2019/11/02')],  [new Date('2019/11/02')]),
           'test_equalDeep date');
 
         // date ignore
@@ -623,15 +623,15 @@ export const test_execute_compare = (parts) => {
 
         // date
         checkEqual(false,
-          equalDeep( new Date('2019/11/02'),  new Date('2019/11/02'), equalFuncArray),
+          equalDeep(new Date('2019/11/02'),  new Date('2019/11/02'), equalFuncArray),
           'test_equalDeep date');
         // date in object
         checkEqual(false,
-          equalDeep( { date: new Date('2019/11/02') },  { date: new Date('2019/11/02') }, equalFuncArray),
+          equalDeep({ date: new Date('2019/11/02') },  { date: new Date('2019/11/02') }, equalFuncArray),
           'test_equalDeep date in object');
         // date in array
         checkEqual(false,
-          equalDeep( [new Date('2019/11/02')],  [new Date('2019/11/02')], equalFuncArray),
+          equalDeep([new Date('2019/11/02')],  [new Date('2019/11/02')], equalFuncArray),
           'test_equalDeep date');
 
       });
@@ -642,15 +642,15 @@ export const test_execute_compare = (parts) => {
       it('test_equalDeep_regexp', () => {
         // regexp
         checkEqual(true,
-          equalDeep( new RegExp(/^a/),  new RegExp(/^a/) ),
+          equalDeep(new RegExp(/^a/),  new RegExp(/^a/)),
           'test_equal regexp');
         // regexp in object
         checkEqual(true,
-          equalDeep( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) } ),
+          equalDeep({ reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) }),
           'test_equal regexp');
         // regexp in array
         checkEqual(true,
-          equalDeep( [new RegExp(/^a/)],  [new RegExp(/^a/)] ),
+          equalDeep([new RegExp(/^a/)],  [new RegExp(/^a/)]),
           'test_equal regexp');
 
         // regexp ignore
@@ -664,15 +664,15 @@ export const test_execute_compare = (parts) => {
 
         // regexp
         checkEqual(false,
-          equalDeep( new RegExp(/^a/),  new RegExp(/^a/), equalFuncArray ),
+          equalDeep(new RegExp(/^a/),  new RegExp(/^a/), equalFuncArray),
           'test_equal regexp');
         // regexp in object
         checkEqual(false,
-          equalDeep( { reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) }, equalFuncArray ),
+          equalDeep({ reg: new RegExp(/^a/) }, { reg: new RegExp(/^a/) }, equalFuncArray),
           'test_equal regexp');
         // regexp in array
         checkEqual(false,
-          equalDeep( [new RegExp(/^a/)],  [new RegExp(/^a/)], equalFuncArray ),
+          equalDeep([new RegExp(/^a/)],  [new RegExp(/^a/)], equalFuncArray),
           'test_equal regexp');
 
       });
@@ -695,15 +695,15 @@ export const test_execute_compare = (parts) => {
         var map2 = new Map();
         map2.set('a', 1); map2.set('b', 2);
         checkEqual(true,
-          equalDeep( map1,  map2 ),
+          equalDeep(map1,  map2),
           'test_equal Map');
         // Map in object
         checkEqual(true,
-          equalDeep( { map: map1 }, { map: map2 } ),
+          equalDeep({ map: map1 }, { map: map2 }),
           'test_equal Map');
         // Map in array
         checkEqual(true,
-          equalDeep( [map1],  [map2] ),
+          equalDeep([map1],  [map2]),
           'test_equal Map');
 
         // ignore Map
@@ -717,15 +717,15 @@ export const test_execute_compare = (parts) => {
         ];
 
         checkEqual(false,
-          equalDeep( map1,  map2, equalFuncArray ),
+          equalDeep(map1,  map2, equalFuncArray),
         );
         // Map in object
         checkEqual(false,
-          equalDeep( { map: map1 }, { map: map2 }, equalFuncArray ),
+          equalDeep({ map: map1 }, { map: map2 }, equalFuncArray),
         );
         // Map in array
         checkEqual(false,
-          equalDeep( [map1],  [map2], equalFuncArray ),
+          equalDeep([map1],  [map2], equalFuncArray),
         );
 
       });
@@ -748,15 +748,15 @@ export const test_execute_compare = (parts) => {
         var map2 = new Map();
         map2.set('a', { a: '1' }); map2.set('b', ['b']);
         checkEqual(true,
-          equalDeep( map1,  map2 ),
+          equalDeep(map1,  map2),
           'test_equal Map object array');
         // Map in object
         checkEqual(true,
-          equalDeep( { map: map1 }, { map: map2 } ),
+          equalDeep({ map: map1 }, { map: map2 }),
           'test_equal Map object array');
         // Map in array
         checkEqual(true,
-          equalDeep( [map1],  [map2] ),
+          equalDeep([map1],  [map2]),
           'test_equal Map object array');
 
         // more map add object
@@ -767,7 +767,7 @@ export const test_execute_compare = (parts) => {
         map2.set('a', { a: 1, b: 2, c: { c1: 10 } });
         map2.set('b', { c: 3, b: 4 });
         checkEqual(true,
-          equalDeep( { map: map1 }, { map: map2 } ),
+          equalDeep({ map: map1 }, { map: map2 }),
           'test_equal Map set object');
 
         // more map set object
@@ -778,7 +778,7 @@ export const test_execute_compare = (parts) => {
         map2.set('a', { a: 1, b: 2, c: { c1: 10 }, d: '' });
         map2.set('b', { c: 3, b: 4 });
 
-        checkEqual(false, equalDeep( { map: map1 }, { map: map2 } ));
+        checkEqual(false, equalDeep({ map: map1 }, { map: map2 }));
       });
 
     };
@@ -801,7 +801,7 @@ export const test_execute_compare = (parts) => {
         map1.set('map', map1);
         map2.set('map', map2);
         checkEqual(true,
-          equalDeep( map1,  map2 ),
+          equalDeep(map1,  map2),
         );
 
         var map1 = new Map();
@@ -811,7 +811,7 @@ export const test_execute_compare = (parts) => {
         map1.set('map', map1);
         map2.set('map', map1);
         checkEqual(true,
-          equalDeep( map1,  map2 ),
+          equalDeep(map1,  map2),
         );
 
         var map1 = new Map();
@@ -821,7 +821,7 @@ export const test_execute_compare = (parts) => {
         map1.set('map', map2);
         map2.set('map', map2);
         checkEqual(true,
-          equalDeep( map1,  map2 ),
+          equalDeep(map1,  map2),
         );
 
         var map1 = new Map();
@@ -831,7 +831,7 @@ export const test_execute_compare = (parts) => {
         map1.set('map', map2);
         map2.set('map', map1);
         checkEqual(true,
-          equalDeep( map1,  map2 ),
+          equalDeep(map1,  map2),
         );
 
         var map1 = new Map();
@@ -843,7 +843,7 @@ export const test_execute_compare = (parts) => {
         map1.set('map', map2);
         map2.set('map', map3);
 
-        checkEqual(false, equalDeep( map1,  map2 ));
+        checkEqual(false, equalDeep(map1,  map2));
       });
 
     };
@@ -864,15 +864,15 @@ export const test_execute_compare = (parts) => {
         var set2 = new Set();
         set2.add('a'); set2.add('b');
         checkEqual(true,
-          equalDeep( set1,  set2 ),
+          equalDeep(set1,  set2),
           'test_equal Set1');
         // Set in object
         checkEqual(true,
-          equalDeep( { set: set1 }, { set: set2 } ),
+          equalDeep({ set: set1 }, { set: set2 }),
           'test_equal Set2');
         // Set in array
         checkEqual(true,
-          equalDeep( [set1],  [set2] ),
+          equalDeep([set1],  [set2]),
           'test_equal Set3');
 
         // ignore Set
@@ -886,15 +886,15 @@ export const test_execute_compare = (parts) => {
         ];
 
         checkEqual(false,
-          equalDeep( set1,  set2, equalFuncArray ),
+          equalDeep(set1,  set2, equalFuncArray),
         );
         // Set in object
         checkEqual(false,
-          equalDeep( { set: set1 }, { set: set2 }, equalFuncArray ),
+          equalDeep({ set: set1 }, { set: set2 }, equalFuncArray),
         );
         // Set in array
         checkEqual(false,
-          equalDeep( [set1],  [set2], equalFuncArray ),
+          equalDeep([set1],  [set2], equalFuncArray),
         );
 
       });
@@ -917,15 +917,15 @@ export const test_execute_compare = (parts) => {
         var set2 = new Set();
         set2.add({ a: '1' }); set2.add(['b']);
         checkEqual(true,
-          equalDeep( set1,  set2 ),
+          equalDeep(set1,  set2),
           'test_equal Set object array');
         // Set in object
         checkEqual(true,
-          equalDeep( { map: set1 }, { map: set2 } ),
+          equalDeep({ map: set1 }, { map: set2 }),
           'test_equal Set object array');
         // Set in array
         checkEqual(true,
-          equalDeep( [set1],  [set2] ),
+          equalDeep([set1],  [set2]),
           'test_equal Set object array');
 
         // more set add object object
@@ -936,7 +936,7 @@ export const test_execute_compare = (parts) => {
         set2.add({ a: 1, b: 2, c: { c1: 10 } });
         set2.add({ c: 3, b: 4 });
 
-        checkEqual(true, equalDeep( { set: set1 }, { set: set2 } ));
+        checkEqual(true, equalDeep({ set: set1 }, { set: set2 }));
 
         // more set add object object
         var set1 = new Set();
@@ -946,7 +946,7 @@ export const test_execute_compare = (parts) => {
         set2.add({ a: 1, b: 2, c: { c1: 10 }, d: '' });
         set2.add({ c: 3, b: 4 });
 
-        checkEqual(false, equalDeep( { set: set1 }, { set: set2 } ));
+        checkEqual(false, equalDeep({ set: set1 }, { set: set2 }));
 
       });
 
@@ -970,7 +970,7 @@ export const test_execute_compare = (parts) => {
         set1.add(set1);
         set2.add(set2);
         checkEqual(true,
-          equalDeep( { set: set1 }, { set: set2 } ),
+          equalDeep({ set: set1 }, { set: set2 }),
         );
 
         var set1 = new Set();
@@ -980,7 +980,7 @@ export const test_execute_compare = (parts) => {
         set1.add(set1);
         set2.add(set1);
         checkEqual(true,
-          equalDeep( { set: set1 }, { set: set2 } ),
+          equalDeep({ set: set1 }, { set: set2 }),
         );
 
         var set1 = new Set();
@@ -990,7 +990,7 @@ export const test_execute_compare = (parts) => {
         set1.add(set2);
         set2.add(set2);
         checkEqual(true,
-          equalDeep( { set: set1 }, { set: set2 } ),
+          equalDeep({ set: set1 }, { set: set2 }),
         );
 
         var set1 = new Set();
@@ -1000,7 +1000,7 @@ export const test_execute_compare = (parts) => {
         set1.add(set2);
         set2.add(set1);
         checkEqual(true,
-          equalDeep( { set: set1 }, { set: set2 } ),
+          equalDeep({ set: set1 }, { set: set2 }),
         );
 
         var set1 = new Set();
@@ -1012,7 +1012,7 @@ export const test_execute_compare = (parts) => {
         set1.add(set2);
         set2.add(set3);
 
-        checkEqual(false, equalDeep( { set: set1 }, { set: set2 } ));
+        checkEqual(false, equalDeep({ set: set1 }, { set: set2 }));
       });
 
     };
@@ -2118,9 +2118,9 @@ export const test_execute_compare = (parts) => {
         );
 
         checkEqual(true,
-          allMatchAll([100, 105, 110], [v => 100 <= v, v => v <= 110]) );
+          allMatchAll([100, 105, 110], [v => 100 <= v, v => v <= 110]));
         checkEqual(false,
-          allMatchAll([100, 105, 111], [v => 100 <= v, v => v <= 110]) );
+          allMatchAll([100, 105, 111], [v => 100 <= v, v => v <= 110]));
 
         const testAllMatchAll = replaceArray =>
           allMatchAll(replaceArray, [
@@ -2140,16 +2140,16 @@ export const test_execute_compare = (parts) => {
         // object parameter
         checkEqual(true,
           allMatchAll(
-            { valueArray: [100, 105, 110], compareArray: [v => 100 <= v, v => v <= 110] }) );
+            { valueArray: [100, 105, 110], compareArray: [v => 100 <= v, v => v <= 110] }));
         checkEqual(false,
           allMatchAll(
-            { valueArray: [100, 105, 111], compareArray: [v => 100 <= v, v => v <= 110] }) );
+            { valueArray: [100, 105, 111], compareArray: [v => 100 <= v, v => v <= 110] }));
         checkEqual(true,
           allMatchAll(
-            [100, 105, 110], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+            [100, 105, 110], { compareArray: [v => 100 <= v, v => v <= 110] }));
         checkEqual(false,
           allMatchAll(
-            [100, 105, 111], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+            [100, 105, 111], { compareArray: [v => 100 <= v, v => v <= 110] }));
       });
     };
 
@@ -2177,19 +2177,19 @@ export const test_execute_compare = (parts) => {
         );
 
         checkEqual(true,
-          someMatchAll([111, 110, 120], [v => 100 <= v, v => v <= 110]) );
+          someMatchAll([111, 110, 120], [v => 100 <= v, v => v <= 110]));
         checkEqual(false,
-          someMatchAll([111, 115, 120], [v => 100 <= v, v => v <= 110]) );
+          someMatchAll([111, 115, 120], [v => 100 <= v, v => v <= 110]));
 
         // object parameter
         checkEqual(true,
-          someMatchAll({ valueArray: [111, 110, 120], compareArray: [v => 100 <= v, v => v <= 110] }) );
+          someMatchAll({ valueArray: [111, 110, 120], compareArray: [v => 100 <= v, v => v <= 110] }));
         checkEqual(false,
-          someMatchAll({ valueArray: [111, 115, 120], compareArray: [v => 100 <= v, v => v <= 110] }) );
+          someMatchAll({ valueArray: [111, 115, 120], compareArray: [v => 100 <= v, v => v <= 110] }));
         checkEqual(true,
-          someMatchAll([111, 110, 120], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+          someMatchAll([111, 110, 120], { compareArray: [v => 100 <= v, v => v <= 110] }));
         checkEqual(false,
-          someMatchAll([111, 115, 120], { compareArray: [v => 100 <= v, v => v <= 110] }) );
+          someMatchAll([111, 115, 120], { compareArray: [v => 100 <= v, v => v <= 110] }));
 
       });
     };
@@ -2565,7 +2565,7 @@ export const test_execute_compare = (parts) => {
           return false;
         }
         if (isObject(source)) {
-          if (Object.keys(source).length !== Object.keys(target).length ) {
+          if (Object.keys(source).length !== Object.keys(target).length) {
             return false;
           }
         }

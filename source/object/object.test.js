@@ -1,3 +1,4 @@
+/* eslint-disable space-in-parens */
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 export const test_execute_object = (parts) => {
@@ -295,24 +296,24 @@ export const test_execute_object = (parts) => {
         checkEqual('3', sourceObject.c);
         checkEqual('4', sourceObject.d);
 
-        checkEqual(false, inProperty(sourceObject, '' ));
-        checkEqual(true,  inProperty(sourceObject, 'a' ));
-        checkEqual(true,  inProperty(sourceObject, 'b' ));
-        checkEqual(false, inProperty(sourceObject, 'c' ));
-        checkEqual(false, inProperty(sourceObject, 'd' ));
+        checkEqual(false, inProperty(sourceObject, ''));
+        checkEqual(true,  inProperty(sourceObject, 'a'));
+        checkEqual(true,  inProperty(sourceObject, 'b'));
+        checkEqual(false, inProperty(sourceObject, 'c'));
+        checkEqual(false, inProperty(sourceObject, 'd'));
 
-        checkEqual(true,  inProperty(sourceObject, 'a,b' ));
-        checkEqual(false, inProperty(sourceObject, 'b,c' ));
-        checkEqual(false, inProperty(sourceObject, 'a,c' ));
-        checkEqual(true,  inProperty(sourceObject, 'b,a' ));
-        checkEqual(false, inProperty(sourceObject, 'a,d' ));
+        checkEqual(true,  inProperty(sourceObject, 'a,b'));
+        checkEqual(false, inProperty(sourceObject, 'b,c'));
+        checkEqual(false, inProperty(sourceObject, 'a,c'));
+        checkEqual(true,  inProperty(sourceObject, 'b,a'));
+        checkEqual(false, inProperty(sourceObject, 'a,d'));
 
         testCounter();
-        checkEqual(true,  inProperty(sourceObject, 'a,b,' ));
-        checkEqual(false, inProperty(sourceObject, 'b,c,' ));
-        checkEqual(false, inProperty(sourceObject, 'a,c,' ));
-        checkEqual(true,  inProperty(sourceObject, 'b,a,' ));
-        checkEqual(false, inProperty(sourceObject, 'a,d,' ));
+        checkEqual(true,  inProperty(sourceObject, 'a,b,'));
+        checkEqual(false, inProperty(sourceObject, 'b,c,'));
+        checkEqual(false, inProperty(sourceObject, 'a,c,'));
+        checkEqual(true,  inProperty(sourceObject, 'b,a,'));
+        checkEqual(false, inProperty(sourceObject, 'a,d,'));
 
         checkEqual(true,  inProperty(sourceObject, 'a', false));
         checkEqual(true,  inProperty(sourceObject, 'b', false));
@@ -491,24 +492,24 @@ export const test_execute_object = (parts) => {
         checkEqual('3', sourceObject.c);
         checkEqual('4', sourceObject.d);
 
-        checkEqual(false, fixProperty(sourceObject, '' ));
-        checkEqual(false, fixProperty(sourceObject, 'a' ));
-        checkEqual(false, fixProperty(sourceObject, 'b' ));
-        checkEqual(false, fixProperty(sourceObject, 'c' ));
-        checkEqual(false, fixProperty(sourceObject, 'd' ));
+        checkEqual(false, fixProperty(sourceObject, ''));
+        checkEqual(false, fixProperty(sourceObject, 'a'));
+        checkEqual(false, fixProperty(sourceObject, 'b'));
+        checkEqual(false, fixProperty(sourceObject, 'c'));
+        checkEqual(false, fixProperty(sourceObject, 'd'));
 
-        checkEqual(true,  fixProperty(sourceObject, 'a,b' ));
-        checkEqual(false, fixProperty(sourceObject, 'b,c' ));
-        checkEqual(false, fixProperty(sourceObject, 'a,c' ));
-        checkEqual(true,  fixProperty(sourceObject, 'b,a' ));
-        checkEqual(false, fixProperty(sourceObject, 'a,d' ));
+        checkEqual(true,  fixProperty(sourceObject, 'a,b'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c'));
+        checkEqual(true,  fixProperty(sourceObject, 'b,a'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d'));
 
         testCounter();
-        checkEqual(true,  fixProperty(sourceObject, 'a,b,' ));
-        checkEqual(false, fixProperty(sourceObject, 'b,c,' ));
-        checkEqual(false, fixProperty(sourceObject, 'a,c,' ));
-        checkEqual(true,  fixProperty(sourceObject, 'b,a,' ));
-        checkEqual(false, fixProperty(sourceObject, 'a,d,' ));
+        checkEqual(true,  fixProperty(sourceObject, 'a,b,'));
+        checkEqual(false, fixProperty(sourceObject, 'b,c,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,c,'));
+        checkEqual(true,  fixProperty(sourceObject, 'b,a,'));
+        checkEqual(false, fixProperty(sourceObject, 'a,d,'));
 
         // property path
         var sourceObject2 = {
