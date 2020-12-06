@@ -339,6 +339,7 @@ You can now use the functions of the parts.js object.
 - from object_common.js
   - add _setProperty.js / setProperty.js
   - add _copyProperty.js / copyProperty.js
+- update package.json scripts
 
 ### 10.2.0
 #### 2020/12/02(Wed)
