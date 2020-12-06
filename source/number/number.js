@@ -47,7 +47,7 @@ export const isOdd = (number) => {
  * round
  */
 export const _round = (value, digit = 0) => {
-  const plusFlag = 0 <= value ? true: false;
+  const plusFlag = 0 <= value ? true : false;
   const powResult = Math.pow(10, digit);
   if (plusFlag) {
     return Math.round(value * powResult) / powResult;

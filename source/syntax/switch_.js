@@ -19,7 +19,7 @@ export const switch_ = (expression) => {
     }
     for (let i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if ((i === args.length - 1) &&isUndefined(args[i])) {
+      if ((i === args.length - 1) && isUndefined(args[i])) {
         continue;
       }
       if (!isArray(args[i])) {
@@ -28,7 +28,7 @@ export const switch_ = (expression) => {
     }
     for (let i = 0; i < args.length; i += 1) {
       // support for wsh last comma in Array. [a,b,]
-      if ((i === args.length - 1) &&isUndefined(args[i])) {
+      if ((i === args.length - 1) && isUndefined(args[i])) {
         continue;
       }
       if (args[i].length === 0) {

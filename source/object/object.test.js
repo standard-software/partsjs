@@ -871,9 +871,9 @@ export const test_execute_object = (parts) => {
     const test_isObjectParameter = () => {
       it('test_isObjectParameter', () => {
 
-        const testFunction01 = (a, b, c='', d='') => {
+        const testFunction01 = (a, b, c = '', d = '') => {
           if (isObjectParameter(a, 'a, b', 'c, d')) {
-            ({ a, b, c='', d='' } = a);
+            ({ a, b, c = '', d = '' } = a);
           }
           return a + b + c + d;
         };
@@ -887,15 +887,15 @@ export const test_execute_object = (parts) => {
         checkEqual('ABD',   testFunction01({ a:'A', b:'B', d:'D' }));
         checkEqual('AB',    testFunction01({ a:'A', b:'B' }));
 
-        const testFunction02 = (a, b, c='', d='') => {
+        const testFunction02 = (a, b, c = '', d = '') => {
           if (isObjectParameter(a, 'a, b', 'c, d')) {
-            ({ a, b, c='', d='' } = a);
+            ({ a, b, c = '', d = '' } = a);
           } else if (isObjectParameter(b, 'b', 'c, d')) {
-            ({ b, c='', d='' } = b);
+            ({ b, c = '', d = '' } = b);
           } else if (isObjectParameter(c, '', 'c, d', 1)) {
-            ({ c='', d='' } = c);
+            ({ c = '', d = '' } = c);
           } else if (isObjectParameter(d, '', 'd', 1)) {
-            ({ d='' } = d);
+            ({ d = '' } = d);
           }
           return a + b + c + d;
         };

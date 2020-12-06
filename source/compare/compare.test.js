@@ -1976,7 +1976,7 @@ export const test_execute_compare = (parts) => {
         // Object Named Parameter number
         checkEqual(true, matchAll({
           value: 100, compareArray: [
-            10*10,
+            10 * 10,
           ],
         }));
         checkEqual(false, matchAll({

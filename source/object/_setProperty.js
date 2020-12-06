@@ -33,7 +33,7 @@ export const _setProperty = (object, propertyPath, value) => {
     if (
       !(
         isObject(result[propertyArray[i]])
-        ||isArraySeries(result[propertyArray[i]])
+        || isArraySeries(result[propertyArray[i]])
       )
     ) {
       result[propertyArray[i]] = {};

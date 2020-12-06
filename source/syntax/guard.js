@@ -33,7 +33,7 @@ export const guard = (guardFunc, runFunc) => {
   }
   for (let i = 0; i < result.length; i += 1) {
     // support for wsh last comma in Array. [a,b,]
-    if ((i === result.length - 1) &&isUndefined(result[i])) {
+    if ((i === result.length - 1) && isUndefined(result[i])) {
       continue;
     }
     let resultValue = undefined;

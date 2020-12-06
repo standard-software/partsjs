@@ -33,6 +33,8 @@ module.exports = {
     }],
     'space-in-parens': ['warn', 'never'],
     'object-curly-spacing': ['warn', 'always'],
+    'no-spaced-func': 'warn',
+    'space-infix-ops': 'warn',
     'no-unused-vars': ['off'],
     'indent': ['warn', 2, {
       'flatTernaryExpressions': true,

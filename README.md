@@ -325,7 +325,7 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
-### 10.2.0
+### 10.3.0
 #### 2020/12/07(Mon)
 - add isPrimitiveType / isReferenceType
   - add isPrimitiveType.js / isReferenceType.js
@@ -340,6 +340,7 @@ You can now use the functions of the parts.js object.
   - add _setProperty.js / setProperty.js
   - add _copyProperty.js / copyProperty.js
 - update package.json scripts
+- update .eslintrc.js
 
 ### 10.2.0
 #### 2020/12/02(Wed)
