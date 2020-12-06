@@ -13,8 +13,8 @@ import {
   isSet, isWeakSet,
 } from '../type/type.js';
 
-import {  _copyProperty } from '../object/object.js';
-import {  isObjectParameter } from '../object/isObjectParameter.js';
+import { _copyProperty } from '../object/object.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _clone } from '../common/_clone.js';
 import { __cloneFunc } from '../common/__cloneFunc.js';
 

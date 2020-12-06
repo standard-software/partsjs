@@ -30,7 +30,7 @@ export const paddingFirst = (str, length, fill) => {
     );
   }
 
-  return _paddingFirst(str, length, fill)
+  return _paddingFirst(str, length, fill);
 };
 
 export default {

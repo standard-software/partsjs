@@ -18,7 +18,19 @@ module.exports = {
   'rules': {
     'camelcase': ['off'],
     'object-curly-spacing': ['off'],
-    'no-multi-spaces': ['off'],
+    'no-multi-spaces': ['warn', {
+      'ignoreEOLComments': true,
+      'exceptions': {
+        'ArrayExpression': true,
+        'Property': true,
+        // 'ObjectPattern': true,
+        'ObjectExpression': true,
+        'CallExpression': true,
+        'IfStatement': false,
+        'VariableDeclarator': true,
+        'ImportDeclaration': true,
+      },
+    }],
     'no-unused-vars': ['off'],
     'indent': ['warn', 2, {
       'flatTernaryExpressions': true,

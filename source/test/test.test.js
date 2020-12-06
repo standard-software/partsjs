@@ -45,7 +45,7 @@ export const test_execute_test = (parts) => {
         checkEqual(true,  isThrown(
           function() { throw '1'; }));
         checkEqual(false, isThrown(
-          function() {  }));
+          function() { }));
       });
     };
 

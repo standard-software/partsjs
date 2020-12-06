@@ -34,13 +34,13 @@ export const _isObjectParameter = (
   }
 
   props = _replaceAll(props, ' ', '').split(',');
-  if (props[props.length - 1]  === '') {
+  if (props[props.length - 1] === '') {
     props.splice(props.length - 1, 1);
   }
   // props = _splitCommaItems(props); // Circular reference Error
 
   optionalProps = _replaceAll(optionalProps, ' ', '').split(',');
-  if (optionalProps[optionalProps.length - 1]  === '') {
+  if (optionalProps[optionalProps.length - 1] === '') {
     optionalProps.splice(optionalProps.length - 1, 1);
   }
 
