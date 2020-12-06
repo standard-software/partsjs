@@ -1,6 +1,9 @@
 import { __includes } from '../compare/__includes.js';
 import { typeName } from '../type/typeName.js';
 
+/**
+ * isPrimitiveType
+ */
 export const isPrimitiveType = (value) => {
   const name = typeName(value);
   if (__includes([
