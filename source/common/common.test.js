@@ -5,9 +5,12 @@ export const test_execute_common = (parts) => {
   describe('test_execute_common', () => {
 
     const {
-      clone, cloneDeep,
+      clone,
+      // cloneDeep,
       merge,
       isUndefined,
+      isObject,
+      isArray,
     } = parts;
 
     const {
@@ -1651,6 +1654,36 @@ export const test_execute_common = (parts) => {
       });
     };
 
+
+    const { setProperty, recursive } = parts;
+
+    const cloneDeepUseRecursive = (source) => {
+
+      let result;
+      if (isObject(source)) {
+        result = {};
+      } else if (isArray(source)) {
+        result = [];
+      } else {
+        return source;
+      }
+      recursive(source,
+        (value, key, level, path) => {
+          if (isObject(value)) {
+            setProperty(result, path + '.' + key, {});
+            return value;
+          } else if (isArray(value)) {
+            setProperty(result, path + '.' + key, []);
+            return value;
+          } else {
+            setProperty(result, path + '.' + key, value);
+          }
+        },
+      );
+      return result;
+    };
+
+
     test_clone_object();
     test_clone_array();
     test_clone_date();
@@ -1663,6 +1696,9 @@ export const test_execute_common = (parts) => {
     test_clone_Fast_date();
     test_clone_Fast_function();
     test_clone_Fast_regexp();
+
+    let cloneDeep;
+    cloneDeep = parts.common.cloneDeep;
 
     test_cloneDeep_object();
     test_cloneDeep_array();
@@ -1677,6 +1713,19 @@ export const test_execute_common = (parts) => {
     test_cloneDeep_set();
     test_cloneDeep_CircularReference();
 
+    cloneDeep = cloneDeepUseRecursive;
+    test_cloneDeep_Fast_object();
+    test_cloneDeep_Fast_array();
+    test_cloneDeep_Fast_object_array_mix();
+    test_cloneDeep_Fast_date();
+    test_cloneDeep_Fast_regExp();
+    test_cloneDeep_Fast_function();
+    test_cloneDeep_Fast_symbol();
+    test_cloneDeep_Fast_map();
+    test_cloneDeep_Fast_set();
+    test_cloneDeep_Fast_CircularReference();
+
+    cloneDeep = parts.common.cloneDeep;
     test_cloneDeep_Fast_object();
     test_cloneDeep_Fast_array();
     test_cloneDeep_Fast_object_array_mix();
