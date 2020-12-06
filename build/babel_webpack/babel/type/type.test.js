@@ -32,6 +32,8 @@ var test_execute_type = function test_execute_type(parts) {
     var isThrown = parts.test.isThrown;
     var _parts$type = parts.type,
         typeName = _parts$type.typeName,
+        isPrimitiveType = _parts$type.isPrimitiveType,
+        isReferenceType = _parts$type.isReferenceType,
         isUndefined = _parts$type.isUndefined,
         isNull = _parts$type.isNull,
         isNaNStrict = _parts$type.isNaNStrict,
@@ -547,6 +549,551 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual('Intl', typeName(Intl));
         } else {
           checkEqual('Object', typeName(Intl));
+        }
+
+        if (parts.isModule(parts)) {
+          checkEqual('Module', typeName(parts));
+        }
+      });
+    };
+
+    var test_isObjectLike2 = function test_isObjectLike2() {
+      it('test_isObjectLike2', function () {
+        checkEqual(false, isObjectLike(undefined));
+        checkEqual(false, isObjectLike(null));
+        checkEqual(false, isObjectLike(true));
+        checkEqual(false, isObjectLike(false));
+        checkEqual(true, isObjectLike(new Boolean()));
+        checkEqual(false, isObjectLike(1));
+        checkEqual(false, isObjectLike(NaN));
+        checkEqual(false, isObjectLike(Infinity));
+        checkEqual(false, isObjectLike(-Infinity));
+        checkEqual(false, isObjectLike(Infinity / 2));
+        checkEqual(false, isObjectLike(Infinity / Infinity));
+        checkEqual(true, isObjectLike(new Number(0)));
+        checkEqual(true, isObjectLike(new Number(1)));
+        checkEqual(true, isObjectLike(new Number(NaN)));
+        checkEqual(true, isObjectLike(new Number(Infinity)));
+        checkEqual(true, isObjectLike(new Number(-Infinity)));
+        checkEqual(true, isObjectLike(new Number('')));
+        checkEqual(true, isObjectLike(new Number('0')));
+        checkEqual(true, isObjectLike(new Number('1')));
+        checkEqual(true, isObjectLike(new Number(null)));
+        checkEqual(true, isObjectLike(new Number()));
+        checkEqual(false, isObjectLike(''));
+        checkEqual(false, isObjectLike('a'));
+        checkEqual(true, isObjectLike(new String('')));
+        checkEqual(true, isObjectLike(new String('a')));
+        checkEqual(true, isObjectLike(new String(1)));
+        checkEqual(true, isObjectLike(new String(null)));
+        checkEqual(true, isObjectLike(new String()));
+        checkEqual(true, isObjectLike({}));
+        checkEqual(true, isObjectLike(new Object()));
+        checkEqual(true, isObjectLike(new Object(null)));
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isObjectLike(Object.create({})));
+          checkEqual(true, isObjectLike(Object.create({
+            a: 'A'
+          })));
+          checkEqual(true, isObjectLike(Object.create(null)));
+        }
+
+        function testFunc() {}
+
+        checkEqual(true, isObjectLike(testFunc));
+        checkEqual(true, isObjectLike(function () {}));
+        checkEqual(true, isObjectLike(function () {}));
+        checkEqual(true, isObjectLike([]));
+        checkEqual(true, isObjectLike([0, 1, 2]));
+        checkEqual(true, isObjectLike(new Array()));
+        checkEqual(true, isObjectLike(/^a/));
+        checkEqual(true, isObjectLike(new RegExp('^a')));
+        checkEqual(true, isObjectLike(new Date()));
+        checkEqual(true, isObjectLike(Math));
+
+        if (parts.platform.isWindowsScriptHost()) {} else {
+          checkEqual(true, isObjectLike(JSON));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual(true, isObjectLike(new Int8Array()));
+          checkEqual(true, isObjectLike(new Uint8Array()));
+          checkEqual(true, isObjectLike(new Uint8ClampedArray()));
+          checkEqual(true, isObjectLike(new Int16Array()));
+          checkEqual(true, isObjectLike(new Uint16Array()));
+          checkEqual(true, isObjectLike(new Int32Array()));
+          checkEqual(true, isObjectLike(new Uint32Array()));
+          checkEqual(true, isObjectLike(new Float32Array()));
+          checkEqual(true, isObjectLike(new Float64Array()));
+          checkEqual(true, isObjectLike(new ArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual(true, isObjectLike(new Map()));
+          checkEqual(true, isObjectLike(new WeakMap()));
+          checkEqual(true, isObjectLike(new Set()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(true, isObjectLike(new WeakSet()));
+          checkEqual(false, isObjectLike(Symbol()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual(true, isObjectLike(new SharedArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual(true, isObjectLike(Atomics));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isObjectLike(new DataView(new ArrayBuffer(1))));
+        } else {
+          checkEqual(true, isObjectLike(new DataView(new ArrayBuffer(1))));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(true, isObjectLike(Promise));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isGasV8()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isNode()) {} else if (parts.platform.isChrome()) {} else if (parts.platform.isEdge()) {} else if (parts.platform.isFirefox()) {} else if (parts.platform.isOpera()) {} else if (parts.platform.isJest()) {} else {
+          var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
+            return regeneratorRuntime.wrap(function Generator$(_context7) {
+              while (1) {
+                switch (_context7.prev = _context7.next) {
+                  case 0:
+                    _context7.next = 2;
+                    return 1;
+
+                  case 2:
+                    _context7.next = 4;
+                    return 2;
+
+                  case 4:
+                    _context7.next = 6;
+                    return 3;
+
+                  case 6:
+                  case "end":
+                    return _context7.stop();
+                }
+              }
+            }, Generator);
+          });
+          var GeneratorFunction = Object.getPrototypeOf( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return regeneratorRuntime.wrap(function _callee5$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee5);
+          })).constructor;
+          var AsyncFunction = Object.getPrototypeOf( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            return regeneratorRuntime.wrap(function _callee6$(_context9) {
+              while (1) {
+                switch (_context9.prev = _context9.next) {
+                  case 0:
+                  case "end":
+                    return _context9.stop();
+                }
+              }
+            }, _callee6);
+          }))).constructor;
+          checkEqual(true, isObjectLike(Generator()));
+          checkEqual(true, isObjectLike(new GeneratorFunction()));
+          checkEqual(true, isObjectLike(new AsyncFunction()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(true, isObjectLike(new Proxy({}, {})));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
+          checkEqual(true, isObjectLike(WebAssembly));
+        } else {
+          checkEqual(true, isObjectLike(WebAssembly));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual(true, isObjectLike(Reflect));
+        } else {
+          checkEqual(true, isObjectLike(Reflect));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual(true, isObjectLike(Intl));
+        } else {
+          checkEqual(true, isObjectLike(Intl));
+        }
+
+        if (parts.isModule(parts)) {
+          checkEqual(true, isObjectLike(parts));
+        }
+      });
+    };
+
+    var test_isPrimitiveType = function test_isPrimitiveType() {
+      it('test_isPrimitiveType', function () {
+        checkEqual(true, isPrimitiveType(undefined));
+        checkEqual(true, isPrimitiveType(null));
+        checkEqual(true, isPrimitiveType(true));
+        checkEqual(true, isPrimitiveType(false));
+        checkEqual(false, isPrimitiveType(new Boolean()));
+        checkEqual(true, isPrimitiveType(1));
+        checkEqual(true, isPrimitiveType(NaN));
+        checkEqual(true, isPrimitiveType(Infinity));
+        checkEqual(true, isPrimitiveType(-Infinity));
+        checkEqual(true, isPrimitiveType(Infinity / 2));
+        checkEqual(true, isPrimitiveType(Infinity / Infinity));
+        checkEqual(false, isPrimitiveType(new Number(0)));
+        checkEqual(false, isPrimitiveType(new Number(1)));
+        checkEqual(false, isPrimitiveType(new Number(NaN)));
+        checkEqual(false, isPrimitiveType(new Number(Infinity)));
+        checkEqual(false, isPrimitiveType(new Number(-Infinity)));
+        checkEqual(false, isPrimitiveType(new Number('')));
+        checkEqual(false, isPrimitiveType(new Number('0')));
+        checkEqual(false, isPrimitiveType(new Number('1')));
+        checkEqual(false, isPrimitiveType(new Number(null)));
+        checkEqual(false, isPrimitiveType(new Number()));
+        checkEqual(true, isPrimitiveType(''));
+        checkEqual(true, isPrimitiveType('a'));
+        checkEqual(false, isPrimitiveType(new String('')));
+        checkEqual(false, isPrimitiveType(new String('a')));
+        checkEqual(false, isPrimitiveType(new String(1)));
+        checkEqual(false, isPrimitiveType(new String(null)));
+        checkEqual(false, isPrimitiveType(new String()));
+        checkEqual(false, isPrimitiveType({}));
+        checkEqual(false, isPrimitiveType(new Object()));
+        checkEqual(false, isPrimitiveType(new Object(null)));
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(false, isPrimitiveType(Object.create({})));
+          checkEqual(false, isPrimitiveType(Object.create({
+            a: 'A'
+          })));
+          checkEqual(false, isPrimitiveType(Object.create(null)));
+        }
+
+        function testFunc() {}
+
+        checkEqual(false, isPrimitiveType(testFunc));
+        checkEqual(false, isPrimitiveType(function () {}));
+        checkEqual(false, isPrimitiveType(function () {}));
+        checkEqual(false, isPrimitiveType([]));
+        checkEqual(false, isPrimitiveType([0, 1, 2]));
+        checkEqual(false, isPrimitiveType(new Array()));
+        checkEqual(false, isPrimitiveType(/^a/));
+        checkEqual(false, isPrimitiveType(new RegExp('^a')));
+        checkEqual(false, isPrimitiveType(new Date()));
+        checkEqual(false, isPrimitiveType(Math));
+
+        if (parts.platform.isWindowsScriptHost()) {} else {
+          checkEqual(false, isPrimitiveType(JSON));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual(false, isPrimitiveType(new Int8Array()));
+          checkEqual(false, isPrimitiveType(new Uint8Array()));
+          checkEqual(false, isPrimitiveType(new Uint8ClampedArray()));
+          checkEqual(false, isPrimitiveType(new Int16Array()));
+          checkEqual(false, isPrimitiveType(new Uint16Array()));
+          checkEqual(false, isPrimitiveType(new Int32Array()));
+          checkEqual(false, isPrimitiveType(new Uint32Array()));
+          checkEqual(false, isPrimitiveType(new Float32Array()));
+          checkEqual(false, isPrimitiveType(new Float64Array()));
+          checkEqual(false, isPrimitiveType(new ArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual(false, isPrimitiveType(new Map()));
+          checkEqual(false, isPrimitiveType(new WeakMap()));
+          checkEqual(false, isPrimitiveType(new Set()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(false, isPrimitiveType(new WeakSet()));
+          checkEqual(true, isPrimitiveType(Symbol()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual(false, isPrimitiveType(new SharedArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual(false, isPrimitiveType(Atomics));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+          checkEqual(false, isPrimitiveType(new DataView(new ArrayBuffer(1))));
+        } else {
+          checkEqual(false, isPrimitiveType(new DataView(new ArrayBuffer(1))));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(false, isPrimitiveType(Promise));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isGasV8()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isNode()) {} else if (parts.platform.isChrome()) {} else if (parts.platform.isEdge()) {} else if (parts.platform.isFirefox()) {} else if (parts.platform.isOpera()) {} else if (parts.platform.isJest()) {} else {
+          var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
+            return regeneratorRuntime.wrap(function Generator$(_context10) {
+              while (1) {
+                switch (_context10.prev = _context10.next) {
+                  case 0:
+                    _context10.next = 2;
+                    return 1;
+
+                  case 2:
+                    _context10.next = 4;
+                    return 2;
+
+                  case 4:
+                    _context10.next = 6;
+                    return 3;
+
+                  case 6:
+                  case "end":
+                    return _context10.stop();
+                }
+              }
+            }, Generator);
+          });
+          var GeneratorFunction = Object.getPrototypeOf( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            return regeneratorRuntime.wrap(function _callee7$(_context11) {
+              while (1) {
+                switch (_context11.prev = _context11.next) {
+                  case 0:
+                  case "end":
+                    return _context11.stop();
+                }
+              }
+            }, _callee7);
+          })).constructor;
+          var AsyncFunction = Object.getPrototypeOf( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            return regeneratorRuntime.wrap(function _callee8$(_context12) {
+              while (1) {
+                switch (_context12.prev = _context12.next) {
+                  case 0:
+                  case "end":
+                    return _context12.stop();
+                }
+              }
+            }, _callee8);
+          }))).constructor;
+          checkEqual(false, isPrimitiveType(Generator()));
+          checkEqual(false, isPrimitiveType(new GeneratorFunction()));
+          checkEqual(false, isPrimitiveType(new AsyncFunction()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(false, isPrimitiveType(new Proxy({}, {})));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
+          checkEqual(false, isPrimitiveType(WebAssembly));
+        } else {
+          checkEqual(false, isPrimitiveType(WebAssembly));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual(false, isPrimitiveType(Reflect));
+        } else {
+          checkEqual(false, isPrimitiveType(Reflect));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual(false, isPrimitiveType(Intl));
+        } else {
+          checkEqual(false, isPrimitiveType(Intl));
+        }
+
+        if (parts.isModule(parts)) {
+          checkEqual(false, isPrimitiveType(parts));
+        }
+      });
+    };
+
+    var test_isReferenceType = function test_isReferenceType() {
+      it('test_isReferenceType', function () {
+        // return value exactly matches isObjectLike
+        checkEqual(false, isReferenceType(undefined));
+        checkEqual(false, isReferenceType(null));
+        checkEqual(false, isReferenceType(true));
+        checkEqual(false, isReferenceType(false));
+        checkEqual(true, isReferenceType(new Boolean()));
+        checkEqual(false, isReferenceType(1));
+        checkEqual(false, isReferenceType(NaN));
+        checkEqual(false, isReferenceType(Infinity));
+        checkEqual(false, isReferenceType(-Infinity));
+        checkEqual(false, isReferenceType(Infinity / 2));
+        checkEqual(false, isReferenceType(Infinity / Infinity));
+        checkEqual(true, isReferenceType(new Number(0)));
+        checkEqual(true, isReferenceType(new Number(1)));
+        checkEqual(true, isReferenceType(new Number(NaN)));
+        checkEqual(true, isReferenceType(new Number(Infinity)));
+        checkEqual(true, isReferenceType(new Number(-Infinity)));
+        checkEqual(true, isReferenceType(new Number('')));
+        checkEqual(true, isReferenceType(new Number('0')));
+        checkEqual(true, isReferenceType(new Number('1')));
+        checkEqual(true, isReferenceType(new Number(null)));
+        checkEqual(true, isReferenceType(new Number()));
+        checkEqual(false, isReferenceType(''));
+        checkEqual(false, isReferenceType('a'));
+        checkEqual(true, isReferenceType(new String('')));
+        checkEqual(true, isReferenceType(new String('a')));
+        checkEqual(true, isReferenceType(new String(1)));
+        checkEqual(true, isReferenceType(new String(null)));
+        checkEqual(true, isReferenceType(new String()));
+        checkEqual(true, isReferenceType({}));
+        checkEqual(true, isReferenceType(new Object()));
+        checkEqual(true, isReferenceType(new Object(null)));
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isReferenceType(Object.create({})));
+          checkEqual(true, isReferenceType(Object.create({
+            a: 'A'
+          })));
+          checkEqual(true, isReferenceType(Object.create(null)));
+        }
+
+        function testFunc() {}
+
+        checkEqual(true, isReferenceType(testFunc));
+        checkEqual(true, isReferenceType(function () {}));
+        checkEqual(true, isReferenceType(function () {}));
+        checkEqual(true, isReferenceType([]));
+        checkEqual(true, isReferenceType([0, 1, 2]));
+        checkEqual(true, isReferenceType(new Array()));
+        checkEqual(true, isReferenceType(/^a/));
+        checkEqual(true, isReferenceType(new RegExp('^a')));
+        checkEqual(true, isReferenceType(new Date()));
+        checkEqual(true, isReferenceType(Math));
+
+        if (parts.platform.isWindowsScriptHost()) {} else {
+          checkEqual(true, isReferenceType(JSON));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual(true, isReferenceType(new Int8Array()));
+          checkEqual(true, isReferenceType(new Uint8Array()));
+          checkEqual(true, isReferenceType(new Uint8ClampedArray()));
+          checkEqual(true, isReferenceType(new Int16Array()));
+          checkEqual(true, isReferenceType(new Uint16Array()));
+          checkEqual(true, isReferenceType(new Int32Array()));
+          checkEqual(true, isReferenceType(new Uint32Array()));
+          checkEqual(true, isReferenceType(new Float32Array()));
+          checkEqual(true, isReferenceType(new Float64Array()));
+          checkEqual(true, isReferenceType(new ArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+          checkEqual(true, isReferenceType(new Map()));
+          checkEqual(true, isReferenceType(new WeakMap()));
+          checkEqual(true, isReferenceType(new Set()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(true, isReferenceType(new WeakSet()));
+          checkEqual(false, isReferenceType(Symbol()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual(true, isReferenceType(new SharedArrayBuffer(1)));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+          checkEqual(true, isReferenceType(Atomics));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isReferenceType(new DataView(new ArrayBuffer(1))));
+        } else {
+          checkEqual(true, isReferenceType(new DataView(new ArrayBuffer(1))));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(true, isReferenceType(Promise));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isGasV8()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isNode()) {} else if (parts.platform.isChrome()) {} else if (parts.platform.isEdge()) {} else if (parts.platform.isFirefox()) {} else if (parts.platform.isOpera()) {} else if (parts.platform.isJest()) {} else {
+          var Generator = /*#__PURE__*/regeneratorRuntime.mark(function Generator() {
+            return regeneratorRuntime.wrap(function Generator$(_context13) {
+              while (1) {
+                switch (_context13.prev = _context13.next) {
+                  case 0:
+                    _context13.next = 2;
+                    return 1;
+
+                  case 2:
+                    _context13.next = 4;
+                    return 2;
+
+                  case 4:
+                    _context13.next = 6;
+                    return 3;
+
+                  case 6:
+                  case "end":
+                    return _context13.stop();
+                }
+              }
+            }, Generator);
+          });
+          var GeneratorFunction = Object.getPrototypeOf( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            return regeneratorRuntime.wrap(function _callee9$(_context14) {
+              while (1) {
+                switch (_context14.prev = _context14.next) {
+                  case 0:
+                  case "end":
+                    return _context14.stop();
+                }
+              }
+            }, _callee9);
+          })).constructor;
+          var AsyncFunction = Object.getPrototypeOf( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            return regeneratorRuntime.wrap(function _callee10$(_context15) {
+              while (1) {
+                switch (_context15.prev = _context15.next) {
+                  case 0:
+                  case "end":
+                    return _context15.stop();
+                }
+              }
+            }, _callee10);
+          }))).constructor;
+          checkEqual(true, isReferenceType(Generator()));
+          checkEqual(true, isReferenceType(new GeneratorFunction()));
+          checkEqual(true, isReferenceType(new AsyncFunction()));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+          checkEqual(true, isReferenceType(new Proxy({}, {})));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
+          checkEqual(true, isReferenceType(WebAssembly));
+        } else {
+          checkEqual(true, isReferenceType(WebAssembly));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual(true, isReferenceType(Reflect));
+        } else {
+          checkEqual(true, isReferenceType(Reflect));
+        }
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+          checkEqual(true, isReferenceType(Intl));
+        } else {
+          checkEqual(true, isReferenceType(Intl));
+        }
+
+        if (parts.isModule(parts)) {
+          checkEqual(true, isReferenceType(parts));
         }
       });
     };
@@ -1212,8 +1759,8 @@ var test_execute_type = function test_execute_type(parts) {
       });
     };
 
-    var test_isObjectLike = function test_isObjectLike() {
-      it('test_isObjectLike', function () {
+    var test_isObjectLike1 = function test_isObjectLike1() {
+      it('test_isObjectLike1', function () {
         // object other value
         checkEqual(false, isObjectLike(null));
         checkEqual(false, isObjectLike(undefined));
@@ -1550,6 +2097,9 @@ var test_execute_type = function test_execute_type(parts) {
 
     test_checkType();
     test_typeName();
+    test_isObjectLike2();
+    test_isPrimitiveType();
+    test_isReferenceType();
     test_isUndefinedAll();
     test_isNull();
     test_isBoolean();
@@ -1561,7 +2111,7 @@ var test_execute_type = function test_execute_type(parts) {
     test_isObject();
     test_isObjectNormal();
     test_isObjectFromNull();
-    test_isObjectLike();
+    test_isObjectLike1();
     test_isModule();
     test_isArray();
     test_ArrayisArray();

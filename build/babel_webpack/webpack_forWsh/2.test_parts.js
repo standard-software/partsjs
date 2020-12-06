@@ -2846,9 +2846,10 @@ var test_execute_common = function test_execute_common(parts) {
       testCounter = _parts$test.testCounter;
   describe('test_execute_common', function () {
     var clone = parts.clone,
-        cloneDeep = parts.cloneDeep,
         merge = parts.merge,
-        isUndefined = parts.isUndefined;
+        isUndefined = parts.isUndefined,
+        isObject = parts.isObject,
+        isArray = parts.isArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         checkCompare = _parts$test2.checkCompare,
@@ -4497,6 +4498,34 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
+    var setProperty = parts.setProperty,
+        recursive = parts.recursive;
+
+    var cloneDeepUseRecursive = function cloneDeepUseRecursive(source) {
+      var result;
+
+      if (isObject(source)) {
+        result = {};
+      } else if (isArray(source)) {
+        result = [];
+      } else {
+        return source;
+      }
+
+      recursive(source, function (value, key, level, path) {
+        if (isObject(value)) {
+          setProperty(result, path + '.' + key, {});
+          return value;
+        } else if (isArray(value)) {
+          setProperty(result, path + '.' + key, []);
+          return value;
+        } else {
+          setProperty(result, path + '.' + key, value);
+        }
+      });
+      return result;
+    };
+
     test_clone_object();
     test_clone_array();
     test_clone_date();
@@ -4508,6 +4537,8 @@ var test_execute_common = function test_execute_common(parts) {
     test_clone_Fast_date();
     test_clone_Fast_function();
     test_clone_Fast_regexp();
+    var cloneDeep;
+    cloneDeep = parts.common.cloneDeep;
     test_cloneDeep_object();
     test_cloneDeep_array();
     test_cloneDeep_object_array_mix();
@@ -4520,6 +4551,18 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_map();
     test_cloneDeep_set();
     test_cloneDeep_CircularReference();
+    cloneDeep = cloneDeepUseRecursive;
+    test_cloneDeep_Fast_object();
+    test_cloneDeep_Fast_array();
+    test_cloneDeep_Fast_object_array_mix();
+    test_cloneDeep_Fast_date();
+    test_cloneDeep_Fast_regExp();
+    test_cloneDeep_Fast_function();
+    test_cloneDeep_Fast_symbol();
+    test_cloneDeep_Fast_map();
+    test_cloneDeep_Fast_set();
+    test_cloneDeep_Fast_CircularReference();
+    cloneDeep = parts.common.cloneDeep;
     test_cloneDeep_Fast_object();
     test_cloneDeep_Fast_array();
     test_cloneDeep_Fast_object_array_mix();
@@ -7652,68 +7695,72 @@ var test_execute_compare = function test_execute_compare(parts) {
     };
 
     var getProperty = parts.getProperty,
-        recursive = parts.syntax.recursive,
-        typeName = parts.typeName;
+        recursive = parts.recursive,
+        typeName = parts.typeName,
+        isPrimitiveType = parts.isPrimitiveType;
 
     var equalDeepUseRecursive = function equalDeepUseRecursive(source, target) {
       var equalType = function equalType(value1, value2) {
         return typeName(value1) === typeName(value2);
       };
 
-      var notEqualLength = function notEqualLength(value1, value2) {
-        if (!equalType(value1, value2)) {
+      var equalAccept = function equalAccept(source, target) {
+        if (isPrimitiveType(source)) {
+          if (source !== target) {
+            return false;
+          }
+
           return true;
         }
 
-        if (isObject(value1)) {
-          if (Object.keys(value1).length !== Object.keys(value2).length) {
-            return true;
-          }
-        } else if (isArray(value1)) {
-          if (value1.length !== value2.length) {
-            return true;
+        if (!equalType(source, target)) {
+          return false;
+        }
+
+        if (!(isObject(source) || isArray(source))) {
+          return false;
+        }
+
+        if (isObject(source)) {
+          if (Object.keys(source).length !== Object.keys(target).length) {
+            return false;
           }
         }
 
-        return false;
+        if (isArray(source)) {
+          if (source.length !== target.length) {
+            return false;
+          }
+        }
+
+        return;
       };
 
-      var result = true;
+      var accept = equalAccept(source, target);
 
-      if (source === target) {
+      if (accept === true) {
         return true;
       }
 
-      if (notEqualLength(source, target)) {
+      if (accept === false) {
         return false;
       }
 
-      if (!isObject(source) && !isArray(source)) {
-        return false;
-      }
-
+      var result = true;
       recursive(source, function (value, key, level, path) {
         var targetValue = getProperty(target, path + '.' + key);
+        var accept = equalAccept(value, targetValue);
 
-        if (notEqualLength(value, targetValue)) {
+        if (accept === true) {
+          return;
+        }
+
+        if (accept === false) {
           result = false;
           return false;
         }
 
-        if (isObject(value)) {
-          return value;
-        }
-
-        if (isArray(value)) {
-          return value;
-        }
-
-        if (targetValue !== value) {
-          result = false;
-          return false;
-        }
-
-        ;
+        return value;
       });
       return result;
     };

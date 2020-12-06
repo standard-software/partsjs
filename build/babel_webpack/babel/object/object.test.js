@@ -642,6 +642,7 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual(false, getProperty(testObj2, 'a.b.c.d', true, true).exist);
         checkEqual(false, getProperty(testObj2, 'a.b.b', true, true).exist);
         /* eslint-enable comma-spacing */
+        // include array
 
         var testObj3 = {
           a: [{
@@ -655,6 +656,33 @@ var test_execute_object = function test_execute_object(parts) {
         }, {
           c: 'C'
         }], getProperty(testObj3, 'a'));
+        checkEqual({
+          b: 'B'
+        }, getProperty(testObj3, 'a.0'));
+        checkEqual({
+          c: 'C'
+        }, getProperty(testObj3, 'a.1'));
+        checkEqual('B', getProperty(testObj3, 'a.0.b'));
+        checkEqual('C', getProperty(testObj3, 'a.1.c')); // same test include array
+
+        var testObj3 = {
+          a: {
+            0: {
+              b: 'B'
+            },
+            1: {
+              c: 'C'
+            }
+          }
+        };
+        checkEqual({
+          0: {
+            b: 'B'
+          },
+          1: {
+            c: 'C'
+          }
+        }, getProperty(testObj3, 'a'));
         checkEqual({
           b: 'B'
         }, getProperty(testObj3, 'a.0'));
@@ -793,7 +821,29 @@ var test_execute_object = function test_execute_object(parts) {
         checkEqual('def', testObj1.a[0]);
         checkEqual('b', testObj1.a[1].b);
         setProperty(testObj1, 'a.1.b', 'c');
-        checkEqual('c', testObj1.a[1].b);
+        checkEqual('c', testObj1.a[1].b); // array
+
+        var array1 = [];
+        setProperty(array1, '1.a', 'A');
+        checkEqual([, {
+          a: 'A'
+        }], array1);
+        checkEqual([undefined, {
+          a: 'A'
+        }], array1);
+        var array1 = [];
+        setProperty(array1, 'a.1', 'one');
+        var array2 = [];
+        array2.a = {
+          '1': 'one'
+        };
+        checkEqual(array2, array1);
+        var array1 = [];
+        array1.a = [];
+        setProperty(array1, 'a.1', 'one');
+        var array2 = [];
+        array2.a = [, 'one'];
+        checkEqual(array2, array1);
       });
     };
 

@@ -11,7 +11,7 @@ var _replaceAll2 = require("../string/_replaceAll.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _getProperty2 = require("../object/getProperty.js");
+var _getProperty2 = require("../object/_getProperty.js");
 
 var _splitCommaItems2 = require("../string/splitCommaItems.js");
 

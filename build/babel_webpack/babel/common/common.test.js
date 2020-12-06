@@ -37,9 +37,10 @@ var test_execute_common = function test_execute_common(parts) {
       testCounter = _parts$test.testCounter;
   describe('test_execute_common', function () {
     var clone = parts.clone,
-        cloneDeep = parts.cloneDeep,
         merge = parts.merge,
-        isUndefined = parts.isUndefined;
+        isUndefined = parts.isUndefined,
+        isObject = parts.isObject,
+        isArray = parts.isArray;
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
         checkCompare = _parts$test2.checkCompare,
@@ -1688,6 +1689,34 @@ var test_execute_common = function test_execute_common(parts) {
       });
     };
 
+    var setProperty = parts.setProperty,
+        recursive = parts.recursive;
+
+    var cloneDeepUseRecursive = function cloneDeepUseRecursive(source) {
+      var result;
+
+      if (isObject(source)) {
+        result = {};
+      } else if (isArray(source)) {
+        result = [];
+      } else {
+        return source;
+      }
+
+      recursive(source, function (value, key, level, path) {
+        if (isObject(value)) {
+          setProperty(result, path + '.' + key, {});
+          return value;
+        } else if (isArray(value)) {
+          setProperty(result, path + '.' + key, []);
+          return value;
+        } else {
+          setProperty(result, path + '.' + key, value);
+        }
+      });
+      return result;
+    };
+
     test_clone_object();
     test_clone_array();
     test_clone_date();
@@ -1699,6 +1728,8 @@ var test_execute_common = function test_execute_common(parts) {
     test_clone_Fast_date();
     test_clone_Fast_function();
     test_clone_Fast_regexp();
+    var cloneDeep;
+    cloneDeep = parts.common.cloneDeep;
     test_cloneDeep_object();
     test_cloneDeep_array();
     test_cloneDeep_object_array_mix();
@@ -1711,6 +1742,18 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_map();
     test_cloneDeep_set();
     test_cloneDeep_CircularReference();
+    cloneDeep = cloneDeepUseRecursive;
+    test_cloneDeep_Fast_object();
+    test_cloneDeep_Fast_array();
+    test_cloneDeep_Fast_object_array_mix();
+    test_cloneDeep_Fast_date();
+    test_cloneDeep_Fast_regExp();
+    test_cloneDeep_Fast_function();
+    test_cloneDeep_Fast_symbol();
+    test_cloneDeep_Fast_map();
+    test_cloneDeep_Fast_set();
+    test_cloneDeep_Fast_CircularReference();
+    cloneDeep = parts.common.cloneDeep;
     test_cloneDeep_Fast_object();
     test_cloneDeep_Fast_array();
     test_cloneDeep_Fast_object_array_mix();

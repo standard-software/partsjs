@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.isObjectParameter = exports._has = exports._hasPrototype = exports._hasOwn = exports._objectValues = exports._objectKeys = exports._objectFromEntries = exports._objectEntries = exports._propertyList = exports._propertyCount = exports._fixProperty = exports._inProperty = exports._setProperty = exports._getProperty = exports._copyProperty = exports._isObjectParameter = void 0;
 
-var _object_common = _interopRequireDefault(require("./object_common.js"));
-
 var _isObjectParameter2 = _interopRequireDefault(require("./isObjectParameter.js"));
 
 var _inProperty2 = _interopRequireDefault(require("./inProperty.js"));
@@ -25,7 +23,17 @@ var _objectKeys2 = _interopRequireDefault(require("./objectKeys.js"));
 
 var _objectValues2 = _interopRequireDefault(require("./objectValues.js"));
 
-var _getProperty2 = _interopRequireDefault(require("./getProperty.js"));
+var _getProperty2 = _interopRequireDefault(require("./_getProperty.js"));
+
+var _getProperty3 = _interopRequireDefault(require("./getProperty.js"));
+
+var _setProperty2 = _interopRequireDefault(require("./_setProperty.js"));
+
+var _setProperty3 = _interopRequireDefault(require("./setProperty.js"));
+
+var _copyProperty2 = _interopRequireDefault(require("./_copyProperty.js"));
+
+var _copyProperty3 = _interopRequireDefault(require("./copyProperty.js"));
 
 var _hasOwn2 = _interopRequireDefault(require("./_hasOwn.js"));
 
@@ -47,7 +55,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var objectJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _object_common["default"]), _isObjectParameter2["default"]), _inProperty2["default"]), _fixProperty2["default"]), _objectEntries2["default"]), _objectEntries3["default"]), _objectFromEntries2["default"]), _objectFromEntries3["default"]), _objectKeys2["default"]), _objectValues2["default"]), _getProperty2["default"]), _hasOwn2["default"]), _hasOwn3["default"]), _has2["default"]), _propertyCount2["default"]), _propertyCount3["default"]), _propertyList2["default"]);
+var objectJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _isObjectParameter2["default"]), _inProperty2["default"]), _fixProperty2["default"]), _objectEntries2["default"]), _objectEntries3["default"]), _objectFromEntries2["default"]), _objectFromEntries3["default"]), _objectKeys2["default"]), _objectValues2["default"]), _getProperty2["default"]), _getProperty3["default"]), _setProperty2["default"]), _setProperty3["default"]), _copyProperty2["default"]), _copyProperty3["default"]), _hasOwn2["default"]), _hasOwn3["default"]), _has2["default"]), _propertyCount2["default"]), _propertyCount3["default"]), _propertyList2["default"]);
 
 var _isObjectParameter = objectJs._isObjectParameter,
     _copyProperty = objectJs._copyProperty,
