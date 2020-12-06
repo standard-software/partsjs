@@ -326,10 +326,11 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.2.0
-#### 2020/12/06(Sun)
+#### 2020/12/07(Mon)
 - add isPrimitiveType / isReferenceType
   - add isPrimitiveType.js / isReferenceType.js
 - update setProperty
+  - support objectLike (array function etc)
 - update testCode 
   - update equalDeepUseRecursive
   - update cloneDeepUseRecursive
