@@ -20,7 +20,7 @@ import {
 
 import {
   _getProperty,
-} from '../object/getProperty.js';
+} from '../object/_getProperty.js';
 
 import {
   _splitCommaItems,

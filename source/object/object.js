@@ -1,4 +1,3 @@
-import object_commonJs from './object_common.js';
 import isObjectParameterJs from './isObjectParameter.js';
 import inPropertyJs from './inProperty.js';
 import fixPropertyJs from './fixProperty.js';
@@ -8,7 +7,12 @@ import _objectFromEntriesJs from './_objectFromEntries.js';
 import objectFromEntriesJs from './objectFromEntries.js';
 import objectKeysJs from './objectKeys.js';
 import objectValuesJs from './objectValues.js';
+import _getPropertyJs from './_getProperty.js';
 import getPropertyJs from './getProperty.js';
+import _setPropertyJs from './_setProperty.js';
+import setPropertyJs from './setProperty.js';
+import _copyPropertyJs from './_copyProperty.js';
+import copyPropertyJs from './copyProperty.js';
 import _hasOwnJs from './_hasOwn.js';
 import hasOwnJs from './hasOwn.js';
 import hasJs from './has.js';
@@ -17,7 +21,6 @@ import propertyCountJs from './propertyCount.js';
 import propertyListJs from './propertyList.js';
 
 const objectJs = {
-  ...object_commonJs,
   ...isObjectParameterJs,
   ...inPropertyJs,
   ...fixPropertyJs,
@@ -27,7 +30,12 @@ const objectJs = {
   ...objectFromEntriesJs,
   ...objectKeysJs,
   ...objectValuesJs,
+  ..._getPropertyJs,
   ...getPropertyJs,
+  ..._setPropertyJs,
+  ...setPropertyJs,
+  ..._copyPropertyJs,
+  ...copyPropertyJs,
   ..._hasOwnJs,
   ...hasOwnJs,
   ...hasJs,

@@ -333,6 +333,11 @@ You can now use the functions of the parts.js object.
 - update testCode 
   - update equalDeepUseRecursive
   - update cloneDeepUseRecursive
+- from getProperty.js
+  add _getProperty.js 
+- from object_common.js
+  - add _setProperty.js / setProperty.js
+  - add _copyProperty.js / copyProperty.js
 
 ### 10.2.0
 #### 2020/12/02(Wed)

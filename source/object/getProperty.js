@@ -10,36 +10,11 @@ import {
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _has } from '../object/has.js';
 import { _splitDotItems } from '../string/splitDotItems.js';
+import { _getProperty } from '../object/_getProperty.js';
 
 /**
  * getProperty
  */
-export const _getProperty = (
-  object,
-  propertyPath,
-  hasOwn = true,
-  detail = false,
-) => {
-  let result = object;
-  const propertyArray = _splitDotItems(propertyPath);
-
-  if (propertyArray.length === 0) {
-    return detail ? { exist: false} : undefined;
-  }
-
-  for (let i = 0, l = propertyArray.length; i < l; i += 1) {
-    if (!isObjectLike(result)) {
-      return detail ? { exist: false} : undefined;
-    }
-    const hasResult = _has(result, propertyArray[i], hasOwn);
-    if (!hasResult) {
-      return detail ? { exist: false} : undefined;
-    }
-    result = result[propertyArray[i]];
-  }
-  return detail ? { exist: true, value: result} : result;
-};
-
 export const getProperty = (object, propertyPath, hasOwn = true, detail = false) => {
   if (isObjectParameter(object, 'object, propertyPath', 'hasOwn, detail')) {
     ({ object, propertyPath, hasOwn = true, detail = false } = object);
@@ -78,7 +53,6 @@ export const getProperty = (object, propertyPath, hasOwn = true, detail = false)
 export const getProp = getProperty;
 
 export default {
-  _getProperty,
   getProperty,
   getProp,
 };
