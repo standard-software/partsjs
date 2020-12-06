@@ -7,13 +7,13 @@ import {
   isBooleanObject, isNumberObject, isStringObject,
 } from '../type/type.js';
 
-import {  isObjectParameter } from '../object/isObjectParameter.js';
-import {  _propertyCount } from '../object/_propertyCount.js';
-import {  _replaceAll } from '../string/_replaceAll.js';
-import {  _splitCommaItems } from '../string/splitCommaItems.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { _propertyCount } from '../object/_propertyCount.js';
+import { _replaceAll } from '../string/_replaceAll.js';
+import { _splitCommaItems } from '../string/splitCommaItems.js';
 import { _splitDotItems } from '../string/splitDotItems.js';
-import {  __includes } from '../compare/__includes.js';
-import {  _excludeFirst } from '../string/string_common.js';
+import { __includes } from '../compare/__includes.js';
+import { _excludeFirst } from '../string/string_common.js';
 
 /**
  * copyProperty
@@ -103,7 +103,7 @@ export const setProperty = (object, propertyPath, value) => {
     ({ object, propertyPath, value } = object);
   }
 
-  if (!isObject(object)) {
+  if (!isObjectLike(object)) {
     throw new TypeError(
       'setProperty args(object) is not object',
     );

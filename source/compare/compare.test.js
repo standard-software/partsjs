@@ -2552,6 +2552,12 @@ export const test_execute_compare = (parts) => {
       };
 
       const equalAccept = (source, target) => {
+        if (isPrimitiveType(source)) {
+          if (source !== target) {
+            return false;
+          }
+          return true;
+        }
         if (!equalType(source, target)) {
           return false;
         }
@@ -2568,32 +2574,20 @@ export const test_execute_compare = (parts) => {
             return false;
           }
         }
-        return true;
+        return;
       };
 
-      // console.log('isPrimitiveType', isPrimitiveType(source), source);
-      if (isPrimitiveType(source)) {
-        if (source !== target) {
-          return false;
-        }
-        return true;
-      }
-      if (!equalAccept(source, target)) {
-        return false;
-      }
+      const accept = equalAccept(source, target);
+      if (accept === true) { return true; }
+      if (accept === false) { return false; }
 
       let result = true;
       recursive(source,
         (value, key, level, path) => {
           const targetValue = getProperty(target, path + '.' + key);
-          if (isPrimitiveType(value)) {
-            if (value !== targetValue) {
-              result = false;
-              return false;
-            }
-            return;
-          }
-          if (!equalAccept(value, targetValue)) {
+          const accept = equalAccept(value, targetValue);
+          if (accept === true) { return; }
+          if (accept === false) {
             result = false;
             return false;
           }
