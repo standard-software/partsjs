@@ -2543,62 +2543,61 @@ export const test_execute_compare = (parts) => {
       });
     };
 
-    const { getProperty, syntax: { recursive }, typeName } = parts;
+    const { getProperty, recursive, typeName, isPrimitiveType } = parts;
+
     const equalDeepUseRecursive = (source, target) => {
 
       const equalType = (value1, value2) => {
         return typeName(value1) === typeName(value2);
       };
 
-      const notEqualLength = (value1, value2) => {
-        if (!equalType(value1, value2)) {
-          return true;
+      const equalAccept = (source, target) => {
+        if (!equalType(source, target)) {
+          return false;
         }
-        if (isObject(value1)) {
-          if (
-            Object.keys(value1).length
-            !== Object.keys(value2).length
-          ) {
-            return true;
-          }
-        } else if (isArray(value1)) {
-          if (
-            value1.length
-            !== value2.length
-          ) {
-            return true;
+        if (!(isObject(source) || isArray(source))) {
+          return false;
+        }
+        if (isObject(source)) {
+          if (Object.keys(source).length !== Object.keys(target).length ) {
+            return false;
           }
         }
-        return false;
+        if (isArray(source)) {
+          if (source.length !== target.length) {
+            return false;
+          }
+        }
+        return true;
       };
 
-      let result = true;
-      if (source === target) {
+      // console.log('isPrimitiveType', isPrimitiveType(source), source);
+      if (isPrimitiveType(source)) {
+        if (source !== target) {
+          return false;
+        }
         return true;
       }
-      if (notEqualLength(source, target)) {
+      if (!equalAccept(source, target)) {
         return false;
       }
-      if (!isObject(source) && !isArray(source)) {
-        return false;
-      }
+
+      let result = true;
       recursive(source,
         (value, key, level, path) => {
           const targetValue = getProperty(target, path + '.' + key);
-          if (notEqualLength(value, targetValue)) {
+          if (isPrimitiveType(value)) {
+            if (value !== targetValue) {
+              result = false;
+              return false;
+            }
+            return;
+          }
+          if (!equalAccept(value, targetValue)) {
             result = false;
             return false;
           }
-          if (isObject(value)) {
-            return value;
-          }
-          if (isArray(value)) {
-            return value;
-          }
-          if (targetValue !== value) {
-            result = false;
-            return false;
-          };
+          return value;
         },
       );
       return result;
