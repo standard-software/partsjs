@@ -320,7 +320,7 @@ export const test_execute_type = (parts) => {
         checkEqual('Object',              typeName(new Object(null)));
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual('Object',            typeName(Object.create({})));
-          checkEqual('Object',            typeName(Object.create({a: 'A'})));
+          checkEqual('Object',            typeName(Object.create({ a: 'A' })));
           checkEqual('ObjectFromNull',    typeName(Object.create(null)));
         }
 
@@ -515,7 +515,7 @@ export const test_execute_type = (parts) => {
         checkEqual(true,                  isObjectLike(new Object(null)));
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(true,                isObjectLike(Object.create({})));
-          checkEqual(true,                isObjectLike(Object.create({a: 'A'})));
+          checkEqual(true,                isObjectLike(Object.create({ a: 'A' })));
           checkEqual(true,                isObjectLike(Object.create(null)));
         }
 
@@ -710,7 +710,7 @@ export const test_execute_type = (parts) => {
         checkEqual(false,                  isPrimitiveType(new Object(null)));
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(false,                isPrimitiveType(Object.create({})));
-          checkEqual(false,                isPrimitiveType(Object.create({a: 'A'})));
+          checkEqual(false,                isPrimitiveType(Object.create({ a: 'A' })));
           checkEqual(false,                isPrimitiveType(Object.create(null)));
         }
 
@@ -906,7 +906,7 @@ export const test_execute_type = (parts) => {
         checkEqual(true,                  isReferenceType(new Object(null)));
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(true,                isReferenceType(Object.create({})));
-          checkEqual(true,                isReferenceType(Object.create({a: 'A'})));
+          checkEqual(true,                isReferenceType(Object.create({ a: 'A' })));
           checkEqual(true,                isReferenceType(Object.create(null)));
         }
 
@@ -1928,7 +1928,7 @@ export const test_execute_type = (parts) => {
     const test_isEmptyObject = () =>{
       it('test_isEmptyObject', () => {
         checkEqual(true,  isEmptyObjectAll({}));
-        checkEqual(false, isEmptyObjectAll({a:1}));
+        checkEqual(false, isEmptyObjectAll({ a: 1 }));
         checkEqual(false, isEmptyObjectAll(null));
         checkEqual(false, isEmptyObjectAll(undefined));
         checkEqual(false, isEmptyObjectAll(123));
@@ -1940,7 +1940,7 @@ export const test_execute_type = (parts) => {
     const test_isEmptyArray = () =>{
       it('test_isEmptyArray', () => {
         checkEqual(false, isEmptyArrayAll({}));
-        checkEqual(false, isEmptyArrayAll({a:1}));
+        checkEqual(false, isEmptyArrayAll({ a: 1 }));
         checkEqual(false, isEmptyArrayAll(null));
         checkEqual(false, isEmptyArrayAll(undefined));
         checkEqual(false, isEmptyArrayAll(123));

@@ -530,7 +530,7 @@ export const test_execute_common = (parts) => {
         checkEqual(1, testValue1[3].a);
 
         // no clone deep object array
-        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3] };
         var value2 = clone(testValue2, cloneDeep.func.DefaultArray());
         value2.a = 0;
         checkEqual(0, value2.a);
@@ -540,7 +540,7 @@ export const test_execute_common = (parts) => {
         checkEqual(4, testValue2.d[0]);
 
         // clone deep object array
-        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3] };
         var value2 = cloneDeep(testValue2, cloneDeep.func.DefaultArray());
         value2.a = 0;
         checkEqual(0, value2.a);
@@ -564,14 +564,14 @@ export const test_execute_common = (parts) => {
         checkEqual(3, testValue1[3].c[0]);
 
         // no clone deep object array object
-        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3] };
         var value2 = clone(testValue2, cloneDeep.func.DefaultArray());
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
         checkEqual(7, testValue2.d[0].e);
 
         // clone deep object array object
-        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3] };
         var value2 = cloneDeep(testValue2, cloneDeep.func.DefaultArray());
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
@@ -1035,7 +1035,7 @@ export const test_execute_common = (parts) => {
         var map1 = new Map();
         map1.set('a', { a: '1' });
         map1.set('b', ['b']);
-        map1.set('c', { a: [1, 2, 3, { b: 'c'}] });
+        map1.set('c', { a: [1, 2, 3, { b: 'c' }] });
         map1.set('d', [1, 2, 3, { b: 'c', d: [4, 5, 6] }]);
         var map2 = cloneDeep(map1, cloneDeep.func.DefaultArray());
         checkEqual(false, map1 === map2);
@@ -1208,7 +1208,7 @@ export const test_execute_common = (parts) => {
         checkEqual(1, testValue1[3].a);
 
         // no clone deep object array
-        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3] };
         var value2 = clone(testValue2);
         value2.a = 0;
         checkEqual(0, value2.a);
@@ -1218,7 +1218,7 @@ export const test_execute_common = (parts) => {
         checkEqual(4, testValue2.d[0]);
 
         // clone deep object array
-        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3] };
         var value2 = cloneDeep(testValue2);
         value2.a = 0;
         checkEqual(0, value2.a);
@@ -1242,14 +1242,14 @@ export const test_execute_common = (parts) => {
         checkEqual(3, testValue1[3].c[0]);
 
         // no clone deep object array object
-        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3] };
         var value2 = clone(testValue2);
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
         checkEqual(7, testValue2.d[0].e);
 
         // clone deep object array object
-        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
+        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3] };
         var value2 = cloneDeep(testValue2);
         value2.d[0].e = 7;
         checkEqual(7, value2.d[0].e);
@@ -1444,7 +1444,7 @@ export const test_execute_common = (parts) => {
         var map1 = new Map();
         map1.set('a', { a: '1' });
         map1.set('b', ['b']);
-        map1.set('c', { a: [1, 2, 3, { b: 'c'}] });
+        map1.set('c', { a: [1, 2, 3, { b: 'c' }] });
         map1.set('d', [1, 2, 3, { b: 'c', d: [4, 5, 6] }]);
         var map2 = cloneDeep(map1);
         checkEqual(true, map1 === map2);        // no clone no copy
@@ -1511,16 +1511,16 @@ export const test_execute_common = (parts) => {
 
         // object
         const testObjectArray = [
-          { key1: 100,  key2: 200,  key3: 300},
-          { key1: 100,  key2: 150,  key3: 100},
-          { key1: 100,              key3: 200, key4: 100},
+          { key1: 100,  key2: 200,  key3: 300 },
+          { key1: 100,  key2: 150,  key3: 100 },
+          { key1: 100,              key3: 200, key4: 100 },
         ];
         checkEqual(
-          {key1: 100, key2: 150, key3: 200, key4: 100},
+          { key1: 100, key2: 150, key3: 200, key4: 100 },
           merge(testObjectArray),
         );
         checkEqual(
-          {key1: 300, key2: 350, key3: 600, key4: 100},
+          { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
             testObjectArray,
             (v, t) => t + v,
@@ -1528,21 +1528,21 @@ export const test_execute_common = (parts) => {
           ),
         );
         checkEqual(
-          {key1: 300, key2: 350, key3: 600, key4: 100},
+          { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
             testObjectArray,
             (v, t) => isUndefined(t) ? v : t + v,
           ),
         );
         checkEqual(
-          {key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100]},
+          { key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100] },
           merge(
             testObjectArray,
             (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
           ),
         );
         checkEqual(
-          {key1: 100, key2: 175, key3: 200, key4: 100},
+          { key1: 100, key2: 175, key3: 200, key4: 100 },
           objectFromEntries(map(objectEntries(merge(
             testObjectArray,
             (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
@@ -1584,7 +1584,7 @@ export const test_execute_common = (parts) => {
 
         // object parameter
         checkEqual(
-          {key1: 300, key2: 350, key3: 600, key4: 100},
+          { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
             {
               dataArray: testObjectArray,
@@ -1594,7 +1594,7 @@ export const test_execute_common = (parts) => {
           ),
         );
         checkEqual(
-          {key1: 300, key2: 350, key3: 600, key4: 100},
+          { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
             testObjectArray,
             {
@@ -1604,7 +1604,7 @@ export const test_execute_common = (parts) => {
           ),
         );
         checkEqual(
-          {key1: 300, key2: 350, key3: 600, key4: 100},
+          { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
             testObjectArray,
             (v, t) => t + v,

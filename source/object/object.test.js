@@ -662,7 +662,7 @@ export const test_execute_object = (parts) => {
         checkEqual(undefined, getProperty(testObj2, 'a.b.c.d' ,true, false) );
         checkEqual(undefined, getProperty(testObj2, 'a.b.b'   ,true, false) );
 
-        checkEqual({ b: { c: undefined} },
+        checkEqual({ b: { c: undefined } },
           getProperty(testObj2, 'a'       ,true, true).value,
         );
         checkEqual(undefined, getProperty(testObj2, 'a.b'     ,true, true).value.c );
@@ -714,7 +714,7 @@ export const test_execute_object = (parts) => {
           },
         };
         checkEqual(
-          { 0: { b: 'B' }, 1: { c: 'C' }},
+          { 0: { b: 'B' }, 1: { c: 'C' } },
           getProperty(testObj3, 'a'),
         );
         checkEqual(
@@ -849,8 +849,8 @@ export const test_execute_object = (parts) => {
         // array
         var array1 = [];
         setProperty(array1, '1.a', 'A');
-        checkEqual([, {a:'A'}], array1);
-        checkEqual([undefined, {a:'A'}], array1);
+        checkEqual([, { a: 'A' }], array1);
+        checkEqual([undefined, { a: 'A' }], array1);
 
         var array1 = [];
         setProperty(array1, 'a.1', 'one');
@@ -882,10 +882,10 @@ export const test_execute_object = (parts) => {
         checkEqual('ABC',   testFunction01('A', 'B', 'C'));
         checkEqual('AB',    testFunction01('A', 'B'));
 
-        checkEqual('ABCD',  testFunction01({a:'A', b:'B', c:'C', d:'D'}));
-        checkEqual('ABC',   testFunction01({a:'A', b:'B', c:'C'}));
-        checkEqual('ABD',   testFunction01({a:'A', b:'B', d:'D'}));
-        checkEqual('AB',    testFunction01({a:'A', b:'B'}));
+        checkEqual('ABCD',  testFunction01({ a:'A', b:'B', c:'C', d:'D' }));
+        checkEqual('ABC',   testFunction01({ a:'A', b:'B', c:'C' }));
+        checkEqual('ABD',   testFunction01({ a:'A', b:'B', d:'D' }));
+        checkEqual('AB',    testFunction01({ a:'A', b:'B' }));
 
         const testFunction02 = (a, b, c='', d='') => {
           if (isObjectParameter(a, 'a, b', 'c, d')) {
@@ -905,47 +905,47 @@ export const test_execute_object = (parts) => {
         checkEqual('AB',    testFunction02('A', 'B'));
 
         // object parameter a
-        checkEqual('ABCD',  testFunction02({a:'A', b:'B', c:'C', d:'D'}));
-        checkEqual('ABC',   testFunction02({a:'A', b:'B', c:'C'}));
-        checkEqual('ABD',   testFunction02({a:'A', b:'B', d:'D'}));
-        checkEqual('AB',    testFunction02({a:'A', b:'B'}));
+        checkEqual('ABCD',  testFunction02({ a:'A', b:'B', c:'C', d:'D' }));
+        checkEqual('ABC',   testFunction02({ a:'A', b:'B', c:'C' }));
+        checkEqual('ABD',   testFunction02({ a:'A', b:'B', d:'D' }));
+        checkEqual('AB',    testFunction02({ a:'A', b:'B' }));
 
         // object parameter b
-        checkEqual('ABCD',  testFunction02('A', {b:'B', c:'C', d:'D'}));
-        checkEqual('ABC',   testFunction02('A', {b:'B', c:'C'}));
-        checkEqual('ABD',   testFunction02('A', {b:'B', d:'D'}));
-        checkEqual('AB',    testFunction02('A', {b:'B'}));
+        checkEqual('ABCD',  testFunction02('A', { b:'B', c:'C', d:'D' }));
+        checkEqual('ABC',   testFunction02('A', { b:'B', c:'C' }));
+        checkEqual('ABD',   testFunction02('A', { b:'B', d:'D' }));
+        checkEqual('AB',    testFunction02('A', { b:'B' }));
 
         // object parameter c
-        checkEqual('ABCD',  testFunction02('A', 'B', { c:'C', d:'D'}));
-        checkEqual('ABC',   testFunction02('A', 'B', { c:'C'}));
-        checkEqual('ABD',   testFunction02('A', 'B', { d:'D'}));
+        checkEqual('ABCD',  testFunction02('A', 'B', { c:'C', d:'D' }));
+        checkEqual('ABC',   testFunction02('A', 'B', { c:'C' }));
+        checkEqual('ABD',   testFunction02('A', 'B', { d:'D' }));
 
         // object parameter c
-        checkEqual('ABCD',  testFunction02('A', 'B', 'C', { d:'D'}));
+        checkEqual('ABCD',  testFunction02('A', 'B', 'C', { d:'D' }));
 
         // miss patern
-        checkEqual('[object Object]undefined',    testFunction02({a:'A'}));
-        checkEqual('[object Object]undefined',    testFunction02({b:'A'}));
-        checkEqual('[object Object]undefined',    testFunction02({a:'A', c:'C'}));
-        checkEqual('[object Object]undefined',    testFunction02({a:'A', d:'D'}));
-        checkEqual('[object Object]undefined',    testFunction02({b:'B', c:'C'}));
-        checkEqual('[object Object]undefined',    testFunction02({b:'B', d:'D'}));
-        checkEqual('[object Object]undefined',    testFunction02({a:'A', b:'B', c:'C', d:'D', e:'E'}));
-        checkEqual('[object Object]undefined',    testFunction02({a:'A', b:'B', e:'E'}));
+        checkEqual('[object Object]undefined',    testFunction02({ a:'A' }));
+        checkEqual('[object Object]undefined',    testFunction02({ b:'A' }));
+        checkEqual('[object Object]undefined',    testFunction02({ a:'A', c:'C' }));
+        checkEqual('[object Object]undefined',    testFunction02({ a:'A', d:'D' }));
+        checkEqual('[object Object]undefined',    testFunction02({ b:'B', c:'C' }));
+        checkEqual('[object Object]undefined',    testFunction02({ b:'B', d:'D' }));
+        checkEqual('[object Object]undefined',    testFunction02({ a:'A', b:'B', c:'C', d:'D', e:'E' }));
+        checkEqual('[object Object]undefined',    testFunction02({ a:'A', b:'B', e:'E' }));
 
         checkEqual('A[object Object]',    testFunction02('A', {}));
-        checkEqual('A[object Object]',    testFunction02('A', {b:'B', e:'E'}));
-        checkEqual('A[object Object]',    testFunction02('A', {a:'A', b:'B'}));
-        checkEqual('A[object Object]',    testFunction02('A', {c:'C', d:'D'}));
+        checkEqual('A[object Object]',    testFunction02('A', { b:'B', e:'E' }));
+        checkEqual('A[object Object]',    testFunction02('A', { a:'A', b:'B' }));
+        checkEqual('A[object Object]',    testFunction02('A', { c:'C', d:'D' }));
 
         checkEqual('AB[object Object]',   testFunction02('A', 'B', {}));
-        checkEqual('AB[object Object]',   testFunction02('A', 'B', {a:'A'}));
-        checkEqual('AB[object Object]',   testFunction02('A', 'B', {b:'B'}));
-        checkEqual('AB[object Object]',   testFunction02('A', 'B', {e:'D'}));
+        checkEqual('AB[object Object]',   testFunction02('A', 'B', { a:'A' }));
+        checkEqual('AB[object Object]',   testFunction02('A', 'B', { b:'B' }));
+        checkEqual('AB[object Object]',   testFunction02('A', 'B', { e:'D' }));
 
-        checkEqual('ABC[object Object]',  testFunction02('A', 'B', 'C', {c:'C'}));
-        checkEqual('ABC[object Object]',  testFunction02('A', 'B', 'C', {e:'E'}));
+        checkEqual('ABC[object Object]',  testFunction02('A', 'B', 'C', { c:'C' }));
+        checkEqual('ABC[object Object]',  testFunction02('A', 'B', 'C', { e:'E' }));
       });
     };
 
@@ -964,7 +964,7 @@ export const test_execute_object = (parts) => {
 
         checkEqual(
           [['a', '1'], ['b', '2'], ['c', '3']],
-          Object.entries({a:'1', b:'2', c:'3'}),
+          Object.entries({ a:'1', b:'2', c:'3' }),
         );
 
         checkEqual(
@@ -979,7 +979,7 @@ export const test_execute_object = (parts) => {
 
         checkEqual(
           [['a', '1'], ['b', '2'], ['c', '3']],
-          objectEntries({a:'1', b:'2', c:'3'}),
+          objectEntries({ a:'1', b:'2', c:'3' }),
         );
 
         // array ok
@@ -998,7 +998,7 @@ export const test_execute_object = (parts) => {
       it('test_objectFromEntries', () => {
 
         checkEqual(
-          {a:'1', b:'2', c:'3'},
+          { a:'1', b:'2', c:'3' },
           objectFromEntries([['a', '1'], ['b', '2'], ['c', '3']]),
         );
         checkEqual(
@@ -1027,7 +1027,7 @@ export const test_execute_object = (parts) => {
       it('test_objectKeys', () => {
 
         const array1 = ['a', 'b', 'c'];
-        const object1 = {a:'1', b:'2', c:'3'};
+        const object1 = { a:'1', b:'2', c:'3' };
         checkEqual(array1, objectKeys(object1));
 
         // only object type
@@ -1043,7 +1043,7 @@ export const test_execute_object = (parts) => {
       it('test_objectValues', () => {
 
         const array1 = ['1', '2', '3'];
-        const object1 = {a:'1', b:'2', c:'3'};
+        const object1 = { a:'1', b:'2', c:'3' };
         checkEqual(array1, objectValues(object1));
 
         // only object type
@@ -1061,7 +1061,7 @@ export const test_execute_object = (parts) => {
         // checkEqual('a\n b\n c', parts.string.trimBothEnds('\n a\n b\n c\n  ', ['\n', ' ']));
         // checkEqual('a\nb\nc', 'a\n b\n c'.split('\n').map(v => parts.string.trimFirst(v, [' '])).join('\n'));
 
-        const object1 = {a:'A', b: { b1: 'B1', b2: 'B2' }, c: { c1: { c11: 'C11' }, c2: 'C2' }, d: 'D' };
+        const object1 = { a:'A', b: { b1: 'B1', b2: 'B2' }, c: { c1: { c11: 'C11' }, c2: 'C2' }, d: 'D' };
         const testPattern = parts.string.trimBothEnds(`
           .a:[object String]:string
           .b.b1:[object String]:string

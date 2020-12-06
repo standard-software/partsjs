@@ -32,6 +32,7 @@ module.exports = {
       },
     }],
     'space-in-parens': ['warn', 'never'],
+    'object-curly-spacing': ['warn', 'always'],
     'no-unused-vars': ['off'],
     'indent': ['warn', 2, {
       'flatTernaryExpressions': true,

@@ -73,9 +73,9 @@ export const test_execute_compare = (parts) => {
         checkEqual(false, equal(null));
 
         // named argument
-        checkEqual(true,  equal({value1:  1, value2:  1}));
-        checkEqual(true,  equal({value1:'1', value2:'1'}));
-        checkEqual(false, equal({value1:'1', value2:  1}));
+        checkEqual(true,  equal({ value1:  1, value2:  1 }));
+        checkEqual(true,  equal({ value1:'1', value2:'1' }));
+        checkEqual(false, equal({ value1:'1', value2:  1 }));
       });
 
     };
@@ -349,9 +349,9 @@ export const test_execute_compare = (parts) => {
           return;
         }
         // named argument
-        checkEqual(true,  equalDeep({value1:  1, value2:  1}));
-        checkEqual(true,  equalDeep({value1:'1', value2:'1'}));
-        checkEqual(false, equalDeep({value1:'1', value2:  1}));
+        checkEqual(true,  equalDeep({ value1:  1, value2:  1 }));
+        checkEqual(true,  equalDeep({ value1:'1', value2:'1' }));
+        checkEqual(false, equalDeep({ value1:'1', value2:  1 }));
       });
 
     };
@@ -421,8 +421,8 @@ export const test_execute_compare = (parts) => {
         checkEqual(true,  equalDeep(testValue1, testValue2));
 
         // equal false object array
-        var testValue1 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
-        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3]};
+        var testValue1 = { a: 1, b: 2, c: 3, d: [1, 2, 3] };
+        var testValue2 = { a: 1, b: 2, c: 3, d: [1, 2, 3] };
         checkEqual(false, equal(testValue1, testValue2));
         // equalDeep true object array
         checkEqual(true,  equalDeep(testValue1, testValue2));
@@ -435,8 +435,8 @@ export const test_execute_compare = (parts) => {
         checkEqual(true,  equalDeep(testValue1, testValue2));
 
         // equal false object array object
-        var testValue1 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
-        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3]};
+        var testValue1 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3] };
+        var testValue2 = { a: 1, b: 2, c: 3, d: [{ e: 4, f: 5, g: 6 }, 2, 3] };
         checkEqual(false, equal(testValue1, testValue2));
         // equalDeep true object array object
         checkEqual(true,  equalDeep(testValue1, testValue2));
@@ -1057,29 +1057,29 @@ export const test_execute_compare = (parts) => {
           ),
         ));
 
-        checkEqual(true,  or({value: 1, compareArray: [1, 2]}));
-        checkEqual(false, or({value: 0, compareArray: [1, 2]}));
+        checkEqual(true,  or({ value: 1, compareArray: [1, 2] }));
+        checkEqual(false, or({ value: 0, compareArray: [1, 2] }));
 
         // exception
         checkEqual(false, isThrown(
-          () => { or({value: 1, compareArray: [1, 2]}); },
+          () => { or({ value: 1, compareArray: [1, 2] }); },
         ));
         checkEqual(true, isThrown(
-          () => { or({value: 1, array: [1, 2]}); },
+          () => { or({ value: 1, array: [1, 2] }); },
           (e) => (e.name === (new TypeError).name) && (
             e.message ===
         'or args(compareArray) is not array'
           ),
         ));
         checkEqual(true, isThrown(
-          () => { or({value1: 1, compareArray: [1, 2]}); },
+          () => { or({ value1: 1, compareArray: [1, 2] }); },
           (e) => (e.name === (new TypeError).name) && (
             e.message ===
         'or args(compareArray) is not array'
           ),
         ));
         checkEqual(false, isThrown(
-          () => { or({value1: 1, compareArray: [1, 2]}, []); },
+          () => { or({ value1: 1, compareArray: [1, 2] }, []); },
           (e) => (e.name === (new TypeError).name) && (
             e.message ===
         'or args(compareArray) is not array'
@@ -1109,7 +1109,7 @@ export const test_execute_compare = (parts) => {
         checkEqual(false,   match(undefined, isString));
 
         checkEqual(true,    match({},    isEmptyObject));
-        checkEqual(false,   match({a:1}, isEmptyObject));
+        checkEqual(false,   match({ a:1 }, isEmptyObject));
 
         checkEqual(true,    match('100', '100'));
         checkEqual(false,   match('200', '100'));
@@ -1199,7 +1199,7 @@ export const test_execute_compare = (parts) => {
         checkEqual(undefined,   matchValue(undefined, isString, stringToInteger));
 
         checkEqual('test',      matchValue({},    isEmptyObject, 'test'));
-        checkEqual({a:1},       matchValue({a:1}, isEmptyObject, 'test'));
+        checkEqual({ a:1 },       matchValue({ a:1 }, isEmptyObject, 'test'));
 
         checkEqual('$100',      matchValue('100', '100', (v) => '$' + v));
         checkEqual('200',       matchValue('200', '100', (v) => '$' + v));

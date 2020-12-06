@@ -848,7 +848,7 @@ export const test_execute_syntax = (parts) => {
         outputConsoleText = '';
         {
           // loop object
-          parts.loop({a: 'A', b: 'B', c: 'C'})((
+          parts.loop({ a: 'A', b: 'B', c: 'C' })((
             e, i, array, first, last,
           ) => {
             console_log(e, i, array, first, last);
@@ -921,30 +921,30 @@ export const test_execute_syntax = (parts) => {
 
     const test_Enum = () => {
       it('test_Enum', () => {
-        checkEqual({a: 'a', b: 'b', c: 'c'}, Enum(['a', 'b', 'c']));
-        checkEqual({a: 0, b: 1, c: 2}, Enum(['a', 'b', 'c'], true));
-        checkEqual({a: 2, b: 1, c: 0}, Enum(['c', 'b', 'a'], true));
+        checkEqual({ a: 'a', b: 'b', c: 'c' }, Enum(['a', 'b', 'c']));
+        checkEqual({ a: 0, b: 1, c: 2 }, Enum(['a', 'b', 'c'], true));
+        checkEqual({ a: 2, b: 1, c: 0 }, Enum(['c', 'b', 'a'], true));
 
         // object parameter
-        checkEqual({a: 'a', b: 'b', c: 'c'},
+        checkEqual({ a: 'a', b: 'b', c: 'c' },
           Enum({ values: ['a', 'b', 'c'] }),
         );
-        checkEqual({a: 0, b: 1, c: 2},
+        checkEqual({ a: 0, b: 1, c: 2 },
           Enum({ values: ['a', 'b', 'c'], useIndex: true }),
         );
-        checkEqual({a: 0, b: 1, c: 2},
+        checkEqual({ a: 0, b: 1, c: 2 },
           Enum(['a', 'b', 'c'], { useIndex: true }),
         );
 
-        checkEqual({a: 'a', b: 'b', c: 'c'}, new Enum(['a', 'b', 'c']));
-        checkEqual({a: 0, b: 1, c: 2}, new Enum(['a', 'b', 'c'], true));
-        checkEqual({a: 'a', b: 'b', c: 'c'},
+        checkEqual({ a: 'a', b: 'b', c: 'c' }, new Enum(['a', 'b', 'c']));
+        checkEqual({ a: 0, b: 1, c: 2 }, new Enum(['a', 'b', 'c'], true));
+        checkEqual({ a: 'a', b: 'b', c: 'c' },
           new Enum({ values: ['a', 'b', 'c'] }),
         );
-        checkEqual({a: 0, b: 1, c: 2},
+        checkEqual({ a: 0, b: 1, c: 2 },
           new Enum({ values: ['a', 'b', 'c'], useIndex: true }),
         );
-        checkEqual({a: 0, b: 1, c: 2},
+        checkEqual({ a: 0, b: 1, c: 2 },
           new Enum(['a', 'b', 'c'], { useIndex: true }),
         );
 

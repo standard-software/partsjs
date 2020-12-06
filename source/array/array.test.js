@@ -201,22 +201,22 @@ export const test_execute_array = (parts) => {
         // func
         checkEqual(-5, array.min([5, 4, 3,], v => -1 * v));
         checkEqual(1, array.min([
-          { num: 1},
-          { num: 2},
-          { num: 3},
+          { num: 1 },
+          { num: 2 },
+          { num: 3 },
         ], v =>v.num));
         checkEqual({ index: 0, element: { num: 1 }, value: 1 } , array.min([
-          { num: 1},
-          { num: 2},
-          { num: 3},
+          { num: 1 },
+          { num: 2 },
+          { num: 3 },
         ], v =>v.num, true));
 
         // func exception
         checkEqual(true, isThrown(() => {
           array.min([
-            { num: 1},
-            { num: '2'},
-            { num: 3},
+            { num: 1 },
+            { num: '2' },
+            { num: 3 },
           ], v =>v.num, true);
         }));
 
@@ -230,17 +230,17 @@ export const test_execute_array = (parts) => {
         }));
         checkEqual(1, array.min({
           array: [
-            { num: 1},
-            { num: 2},
-            { num: 3},
+            { num: 1 },
+            { num: 2 },
+            { num: 3 },
           ],
           func: v =>v.num
         }));
         checkEqual({ index: 0, element: { num: 1 }, value: 1 }, array.min({
           array: [
-            { num: 1},
-            { num: 2},
-            { num: 3},
+            { num: 1 },
+            { num: 2 },
+            { num: 3 },
           ],
           func: v =>v.num,
           detail: true,
@@ -281,22 +281,22 @@ export const test_execute_array = (parts) => {
         // func
         checkEqual(-3, array.max([5, 4, 3,], v => -1 * v));
         checkEqual(3, array.max([
-          { num: 1},
-          { num: 2},
-          { num: 3},
+          { num: 1 },
+          { num: 2 },
+          { num: 3 },
         ], v =>v.num));
         checkEqual({ index: 2, element: { num: 3 }, value: 3 } , array.max([
-          { num: 1},
-          { num: 2},
-          { num: 3},
+          { num: 1 },
+          { num: 2 },
+          { num: 3 },
         ], v =>v.num, true));
 
         // func exception
         checkEqual(true, isThrown(() => {
           array.max([
-            { num: 1},
-            { num: '2'},
-            { num: 3},
+            { num: 1 },
+            { num: '2' },
+            { num: 3 },
           ], v =>v.num, true);
         }));
 
@@ -310,17 +310,17 @@ export const test_execute_array = (parts) => {
         }));
         checkEqual(3, array.max({
           array: [
-            { num: 1},
-            { num: 2},
-            { num: 3},
+            { num: 1 },
+            { num: 2 },
+            { num: 3 },
           ],
           func: v =>v.num
         }));
         checkEqual({ index: 2, element: { num: 3 }, value: 3 }, array.max({
           array: [
-            { num: 1},
-            { num: 2},
-            { num: 3},
+            { num: 1 },
+            { num: 2 },
+            { num: 3 },
           ],
           func: v =>v.num,
           detail: true,
@@ -410,14 +410,14 @@ export const test_execute_array = (parts) => {
         );
 
         const data = [
-          {name: 'aaa', age: 18,},
-          {name: 'bbb', age: 20,},
-          {name: 'bbb', age: 21,},
-          {name: 'ccc', age: 21,},
-          {name: 'bbb', age: 20,},
+          { name: 'aaa', age: 18, },
+          { name: 'bbb', age: 20, },
+          { name: 'bbb', age: 21, },
+          { name: 'ccc', age: 21, },
+          { name: 'bbb', age: 20, },
         ];
         checkEqual(
-          array.unique(data, d => d.name, {detail: true}),
+          array.unique(data, d => d.name, { detail: true }),
           {
             index: ['aaa', 'bbb', 'ccc'],
             result: [
@@ -428,9 +428,9 @@ export const test_execute_array = (parts) => {
             count: [1, 3, 1]
           }
         );
-        var result = array.unique(data, d => d.name, {detail: true});
+        var result = array.unique(data, d => d.name, { detail: true });
         checkEqual(
-          result.result.map((e, i) => ({ name: e.name, count: result.count[i]})),
+          result.result.map((e, i) => ({ name: e.name, count: result.count[i] })),
           [
             { name: 'aaa', count: 1 },
             { name: 'bbb', count: 3 },
@@ -438,7 +438,7 @@ export const test_execute_array = (parts) => {
           ],
         );
         checkEqual(
-          array.unique(data, d => d.name + d.age.toString(), {detail: true}),
+          array.unique(data, d => d.name + d.age.toString(), { detail: true }),
           {
             index: ['aaa18', 'bbb20', 'bbb21', 'ccc21'],
             result: [
@@ -451,7 +451,7 @@ export const test_execute_array = (parts) => {
           }
         );
         var result = array.unique(
-          data, d => d.name + d.age.toString(), {detail: true}
+          data, d => d.name + d.age.toString(), { detail: true }
         );
         checkEqual(
           result.result.map((e, i) => ({ name: e.name, age: e.age, count: result.count[i] })),
@@ -548,14 +548,14 @@ export const test_execute_array = (parts) => {
         );
 
         const data = [
-          {name: 'aaa', age: 18,},
-          {name: 'bbb', age: 20,},
-          {name: 'bbb', age: 21,},
-          {name: 'ccc', age: 21,},
-          {name: 'bbb', age: 20,},
+          { name: 'aaa', age: 18, },
+          { name: 'bbb', age: 20, },
+          { name: 'bbb', age: 21, },
+          { name: 'ccc', age: 21, },
+          { name: 'bbb', age: 20, },
         ];
         checkEqual(
-          array.group(data, d => d.name, {detail: true}),
+          array.group(data, d => d.name, { detail: true }),
           {
             index: ['aaa', 'bbb', 'ccc'],
             result: [
@@ -570,7 +570,7 @@ export const test_execute_array = (parts) => {
           }
         );
         checkEqual(
-          array.group(data, d => d.name, {detail: true})
+          array.group(data, d => d.name, { detail: true })
             .result.map(e => ({ name: e[0].name, count: e.length })),
           [
             { name: 'aaa', count: 1 },
@@ -580,7 +580,7 @@ export const test_execute_array = (parts) => {
 
         );
         checkEqual(
-          array.group(data, d => d.name + d.age.toString(), {detail: true}),
+          array.group(data, d => d.name + d.age.toString(), { detail: true }),
           {
             index: ['aaa18', 'bbb20', 'bbb21', 'ccc21'],
             result: [
@@ -597,7 +597,7 @@ export const test_execute_array = (parts) => {
           }
         );
         checkEqual(
-          array.group(data, d => d.name + d.age.toString(), {detail: true})
+          array.group(data, d => d.name + d.age.toString(), { detail: true })
             .result.map(e => ({ name: e[0].name, age: e[0].age, count: e.length })),
           [
             { name: 'aaa', age: 18, count: 1 },

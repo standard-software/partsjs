@@ -209,13 +209,13 @@ export const test_execute_date = (parts) => {
         );
 
         // object parameter
-        var dt = DateTime({year: 2020});
+        var dt = DateTime({ year: 2020 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-01-01T00:00:00.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime({year: 2020, isLocal: false});
+        var dt = DateTime({ year: 2020, isLocal: false });
         checkEqual(
           '2020-01-01T00:00:00.000Z',
           dt.toISOString(),
@@ -227,25 +227,25 @@ export const test_execute_date = (parts) => {
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime({year: 2020, month: 2, hour: 13, second: 59});
+        var dt = DateTime({ year: 2020, month: 2, hour: 13, second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, {hour: 13, second: 59});
+        var dt = DateTime(2020, { hour: 13, second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-01-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, {hour: 13, second: 59});
+        var dt = DateTime(2020, 2, { hour: 13, second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, 3, {minute: 13, second: 59});
+        var dt = DateTime(2020, 2, 3, { minute: 13, second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T00:13:59.000Z',
@@ -256,30 +256,30 @@ export const test_execute_date = (parts) => {
           '2020-02-03T00:00:00.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, 3, 4, {minute: 13, second: 59});
+        var dt = DateTime(2020, 2, 3, 4, { minute: 13, second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:13:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, 3, 4, 5, {second: 59});
+        var dt = DateTime(2020, 2, 3, 4, 5, { second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:05:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, 3, 4, 5, {second: 59});
+        var dt = DateTime(2020, 2, 3, 4, 5, { second: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:05:59.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, {isLocal: false});
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, { isLocal: false });
         checkEqual(
           '2020-02-03T04:05:06.000Z',
           dt.toISOString(),
         );
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, {isLocal: false});
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, { isLocal: false });
         checkEqual(
           '2020-02-03T04:05:06.007Z',
           dt.toISOString(),
@@ -287,13 +287,13 @@ export const test_execute_date = (parts) => {
 
         // exception
         checkEqual(false,
-          isThrown(() => DateTime(2020, 2, 3, 4, 5, 6, 7, {isLocal: false})),
+          isThrown(() => DateTime(2020, 2, 3, 4, 5, 6, 7, { isLocal: false })),
         );
         checkEqual(true,
-          isThrown(() => DateTime(2020, 2, 3, 4, 5, 6, 7, {isLocal: 1})),
+          isThrown(() => DateTime(2020, 2, 3, 4, 5, 6, 7, { isLocal: 1 })),
         );
         checkEqual(true,
-          isThrown(() => DateTime(2020, '2', 3, 4, 5, 6, 7, {isLocal: true})),
+          isThrown(() => DateTime(2020, '2', 3, 4, 5, 6, 7, { isLocal: true })),
         );
 
       });

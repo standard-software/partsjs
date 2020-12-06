@@ -1,6 +1,6 @@
 import { isArray, isFunction } from '../type/isType.js';
 import { _allMatchAll } from '../compare/allMatchAll.js';
-import { _SortFunc} from '../array/_SortFunc.js';
+import { _SortFunc } from '../array/_SortFunc.js';
 
 export const SortFunc = (orderSettingArray) => {
 
