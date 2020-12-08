@@ -9,47 +9,50 @@ var _isType = require("../type/isType.js");
 
 var _loop = require("../syntax/__loop.js");
 
-var _objectEntries2 = require("../object/_objectEntries.js");
+var _recursive2 = require("../syntax/_recursive.js");
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+var _getProperty2 = require("../object/_getProperty.js");
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var _setProperty2 = require("../object/_setProperty.js");
 
 /**
  * merge
  */
-var _merge = function _merge(dataArray) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
+var _merge = function _merge() {
+  var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var targetArray = arguments.length > 1 ? arguments[1] : undefined;
+  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (_, v) {
     return v;
   };
-  var target = arguments.length > 2 ? arguments[2] : undefined;
+  (0, _loop.__loop)(targetArray)(function (target, targetIndex) {
+    (0, _recursive2._recursive)(target, function (targetValue, key, level, path) {
+      var propPath = path + '.' + key;
+      var sourceValue = (0, _getProperty2._getProperty)(source, propPath);
 
-  if (dataArray.length === 0) {
-    return target;
-  }
+      if ((0, _isType.isObject)(targetValue)) {
+        if (!(0, _isType.isObject)(sourceValue)) {
+          (0, _setProperty2._setProperty)(source, propPath, {});
+        }
 
-  if ((0, _isType.isUndefined)(target)) {
-    target = (0, _isType.isObjectFromNull)(dataArray[0]) ? Object.create(null) : new dataArray[0].constructor();
-  }
+        return targetValue;
+      } else if ((0, _isType.isArray)(targetValue)) {
+        if (!(0, _isType.isArray)(sourceValue)) {
+          (0, _setProperty2._setProperty)(source, propPath, []);
+        }
 
-  (0, _loop.__loop)(dataArray)(function (data) {
-    (0, _loop.__loop)((0, _objectEntries2._objectEntries)(data))(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2),
-          key = _ref2[0],
-          value = _ref2[1];
-
-      target[key] = func(value, target[key], key, data, target);
+        return targetValue;
+      } else {
+        if ((0, _isType.isUndefined)(sourceValue)) {
+          (0, _setProperty2._setProperty)(source, propPath, targetValue);
+        } else if ((0, _isType.isUndefined)(targetValue)) {// no set value
+        } else {
+          var setValue = func(sourceValue, targetValue, key, level, path, source, targetIndex, targetArray);
+          (0, _setProperty2._setProperty)(source, propPath, setValue);
+        }
+      }
     });
   });
-  return target;
+  return source;
 };
 
 exports._merge = _merge;

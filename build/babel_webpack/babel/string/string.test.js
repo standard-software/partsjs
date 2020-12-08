@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_string = void 0;
 
+/* eslint-disable space-in-parens */
+
 /* eslint-disable max-len */
 var test_execute_string = function test_execute_string(parts) {
   var _parts$test = parts.test,

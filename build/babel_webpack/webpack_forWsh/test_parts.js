@@ -430,14 +430,88 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Math]', Math);
 
         if (parts.platform.isWindowsScriptHost()) {
-          return;
+          checkEqual(true, isThrown(function () {
+            BigInt(100);
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            BigInt(100);
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(function () {
+            BigInt(100);
+          }));
+        } else {
+          // checkType('bigint',       '[object BigInt]', 100n);
+          //  BigInt[n](for example 999n), it is compile error for wsh
+          checkType('bigint', '[object BigInt]', BigInt(100));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            JSON.stringify({});
+          }));
+        } else {
           checkType('object', '[object JSON]', JSON);
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new Int8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8ClampedArray();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float64Array();
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new Int8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8ClampedArray();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float64Array();
+          }));
+        } else {
           checkType('object', '[object Int8Array]', new Int8Array());
           checkType('object', '[object Uint8Array]', new Uint8Array());
           checkType('object', '[object Uint8ClampedArray]', new Uint8ClampedArray());
@@ -449,7 +523,39 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object Float64Array]', new Float64Array());
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new Map();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakMap();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Set();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakSet();
+          }));
+          checkEqual(true, isThrown(function () {
+            Symbol();
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new Map();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakMap();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Set();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakSet();
+          }));
+          checkEqual(true, isThrown(function () {
+            Symbol();
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new Map());
           checkType('object', '[object Object]', new WeakMap());
           checkType('object', '[object Object]', new Set());
@@ -461,16 +567,54 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('symbol', '[object Symbol]', Symbol());
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new ArrayBuffer(8);
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new ArrayBuffer(8);
+          }));
+        } else {
           checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else if (parts.platform.isFirefox()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else {
           checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
           checkType('object', '[object Atomics]', Atomics);
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new DataView();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Promise();
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new DataView();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Promise();
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
         } else {
           checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
@@ -529,26 +673,56 @@ var test_execute_type = function test_execute_type(parts) {
         } // Proxy
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new Proxy({}, {});
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new Proxy({}, {});
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(function () {
+            new Proxy({}, {});
+          }));
+        } else {
           checkType('object', '[object Object]', new Proxy({}, {}));
         } // WebAssembly
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, typeof WebAssembly === 'undefined');
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, typeof WebAssembly === 'undefined');
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, typeof WebAssembly === 'undefined');
+        } else if (parts.platform.isFirefox()) {
           checkType('object', '[object Object]', WebAssembly);
         } else {
           checkType('object', '[object WebAssembly]', WebAssembly);
         } // Reflect
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, typeof Reflect === 'undefined');
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, typeof Reflect === 'undefined');
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, typeof Reflect === 'undefined');
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
           checkType('object', '[object Reflect]', Reflect);
         } else {
           checkType('object', '[object Object]', Reflect);
         } // Intl
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, typeof Intl === 'undefined');
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, typeof Intl === 'undefined');
+        } else if (parts.platform.isDeno()) {
+          checkEqual(true, typeof Intl === 'undefined');
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
           checkType('object', '[object Intl]', Intl);
         } else {
           checkType('object', '[object Object]', Intl);

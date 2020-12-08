@@ -156,7 +156,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '10.3.0 beta 1';
+var VERSION = '10.3.0 beta 3';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -12923,47 +12923,52 @@ var _isType = __webpack_require__(11);
 
 var _loop = __webpack_require__(38);
 
-var _objectEntries2 = __webpack_require__(54);
+var _recursive2 = __webpack_require__(56);
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+var _getProperty2 = __webpack_require__(33);
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+var _setProperty2 = __webpack_require__(104);
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+// import { _objectEntries } from '../object/_objectEntries.js';
 
 /**
  * merge
  */
-var _merge = function _merge(dataArray) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
+var _merge = function _merge() {
+  var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var targetArray = arguments.length > 1 ? arguments[1] : undefined;
+  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (_, v) {
     return v;
   };
-  var target = arguments.length > 2 ? arguments[2] : undefined;
+  (0, _loop.__loop)(targetArray)(function (target, targetIndex) {
+    (0, _recursive2._recursive)(target, function (targetValue, key, level, path) {
+      var propPath = path + '.' + key;
+      var sourceValue = (0, _getProperty2._getProperty)(source, propPath);
 
-  if (dataArray.length === 0) {
-    return target;
-  }
+      if ((0, _isType.isObject)(targetValue)) {
+        if (!(0, _isType.isObject)(sourceValue)) {
+          (0, _setProperty2._setProperty)(source, propPath, {});
+        }
 
-  if ((0, _isType.isUndefined)(target)) {
-    target = (0, _isType.isObjectFromNull)(dataArray[0]) ? Object.create(null) : new dataArray[0].constructor();
-  }
+        return targetValue;
+      } else if ((0, _isType.isArray)(targetValue)) {
+        if (!(0, _isType.isArray)(sourceValue)) {
+          (0, _setProperty2._setProperty)(source, propPath, []);
+        }
 
-  (0, _loop.__loop)(dataArray)(function (data) {
-    (0, _loop.__loop)((0, _objectEntries2._objectEntries)(data))(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2),
-          key = _ref2[0],
-          value = _ref2[1];
-
-      target[key] = func(value, target[key], key, data, target);
+        return targetValue;
+      } else {
+        if ((0, _isType.isUndefined)(sourceValue)) {
+          (0, _setProperty2._setProperty)(source, propPath, targetValue);
+        } else if ((0, _isType.isUndefined)(targetValue)) {// no set value
+        } else {
+          var setValue = func(sourceValue, targetValue, key, level, path, source, targetIndex, targetArray);
+          (0, _setProperty2._setProperty)(source, propPath, setValue);
+        }
+      }
     });
   });
-  return target;
+  return source;
 };
 
 exports._merge = _merge;
@@ -12997,43 +13002,38 @@ var _merge2 = __webpack_require__(113);
 /**
  * merge
  */
-var merge = function merge(dataArray) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
-  var target = arguments.length > 2 ? arguments[2] : undefined;
-
-  if ((0, _isObjectParameter.isObjectParameter)(dataArray, 'dataArray, func', 'target')) {
-    var _dataArray = dataArray;
-    dataArray = _dataArray.dataArray;
-    var _dataArray$func = _dataArray.func;
-    func = _dataArray$func === void 0 ? _returnValueFunction.__returnValueFunction : _dataArray$func;
-    target = _dataArray.target;
-  } else if ((0, _isObjectParameter.isObjectParameter)(func, 'func', 'target')) {
+var merge = function merge(source, targetArray, func) {
+  if ((0, _isObjectParameter.isObjectParameter)(source, 'source, targetArray', 'func')) {
+    var _source = source;
+    source = _source.source;
+    targetArray = _source.targetArray;
+    func = _source.func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(targetArray, 'targetArray', 'func')) {
+    var _targetArray = targetArray;
+    targetArray = _targetArray.targetArray;
+    func = _targetArray.func;
+  } else if ((0, _isObjectParameter.isObjectParameter)(func, 'func')) {
     var _func = func;
-    var _func$func = _func.func;
-    func = _func$func === void 0 ? _returnValueFunction.__returnValueFunction : _func$func;
-    target = _func.target;
-  } else if ((0, _isObjectParameter.isObjectParameter)(target, 'target')) {
-    var _target = target;
-    target = _target.target;
+    func = _func.func;
   }
 
-  if (!(0, _isType.isArray)(dataArray)) {
-    throw new TypeError('merge args(dataArray) is not array');
+  if (!((0, _isType.isObject)(source) || (0, _isType.isArray)(source))) {
+    throw new TypeError('merge args(source) is not [Object|Array]');
   }
 
-  if (!(dataArray.length === 0 || (0, _isTypeArray.isObjectLikeArray)(dataArray) || (0, _isTypeArray.isArraySeriesArray)(dataArray))) {
-    throw new TypeError('merge args(dataArray) element is not [ObjectLike|ArraySeries]');
+  if (!(0, _isType.isArray)(targetArray)) {
+    throw new TypeError('merge args(targetArray) is not array');
   }
 
-  if (!(0, _isType.isFunction)(func)) {
+  if (!(targetArray.length === 0 || (0, _isTypeArray.isObjectArray)(targetArray) || (0, _isTypeArray.isArrayArray)(targetArray))) {
+    throw new TypeError('merge args(targetArray) element is not [Object|Array]');
+  }
+
+  if (!((0, _isType.isUndefined)(func) || (0, _isType.isFunction)(func))) {
     throw new TypeError('merge args(func) is not function');
   }
 
-  if (!((0, _isType.isUndefined)(target) || (0, _isType.isObjectLike)(target) || (0, _isType.isArraySeries)(target))) {
-    throw new TypeError('merge args(target) is not [undefined|ObjectLike|ArraySeries]');
-  }
-
-  return (0, _merge2._merge)(dataArray, func, target);
+  return (0, _merge2._merge)(source, targetArray, func);
 };
 
 exports.merge = merge;

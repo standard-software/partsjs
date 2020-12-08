@@ -28,6 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
+// import moment from 'moment';
 var test_execute_common = function test_execute_common(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
@@ -869,58 +870,61 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, array1[0] === testFunc1);
         checkEqual('ABC', array1[0]());
       });
-    }; // const test_cloneDeep_moment = () => {
-    //   it('test_cloneDeep_moment', () => {
-    //     if (parts.platform.isWindowsScriptHost()) {
-    //       return;
-    //     }
-    //     if (parts.platform.isWebBrowser()) {
-    //       return;
-    //     }
-    //     import moment from 'moment';
-    //     // moment type clone no
-    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    //     var testValue1 = [1, 2, 3, moment1];
-    //     var value1 = clone(testValue1);
-    //     value1[3].set('year', 2018);
-    //     checkEqual(true, value1[3] === testValue1[3]);
-    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
-    //     // moment object fail
-    //     // const cloneValue = new source.constructor();
-    //     // moment type cloneDeep
-    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    //     var testValue1 = [1, 2, 3, moment1];
-    //     // initialise
-    //     cloneDeep.clear();
-    //     var value1 = cloneDeep(testValue1);
-    //     value1[3].set('year', 2018);
-    //     checkEqual(true, value1[3] === testValue1[3]); // clone
-    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
-    //     // but not correct
-    //     // moment type cloneDeep moment clone function
-    //     clone.func.moment = (source, bufferWrite)  => {
-    //       if (!moment.isMoment(source)) {
-    //         return undefined;
-    //       }
-    //       const cloneValue = moment(source);
-    //       bufferWrite(source, cloneValue);
-    //       return cloneValue;
-    //     };
-    //     cloneDeep.reset();
-    //     cloneDeep.add(clone.func.moment);
-    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    //     var testValue1 = [1, 2, 3, moment1];
-    //     var value1 = cloneDeep(testValue1);
-    //     value1[3].set('year', 2018);
-    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    //     checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
-    //     // correct
-    //     cloneDeep.reset();
-    //   });
-    // };
+    };
 
+    var test_cloneDeep_moment = function test_cloneDeep_moment() {// it('test_cloneDeep_moment', () => {
+      //   if (parts.platform.isWindowsScriptHost()) {
+      //     return;
+      //   }
+      //   if (parts.platform.isWebBrowser()) {
+      //     return;
+      //   }
+      //   // moment type clone no
+      //   var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+      //   var testValue1 = [1, 2, 3, moment1];
+      //   var value1 = clone(testValue1);
+      //   value1[3].set('year', 2018);
+      //   checkEqual(true, value1[3] === testValue1[3]);
+      //   checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+      //   checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
+      //   // moment type cloneDeep
+      //   var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+      //   var testValue1 = [1, 2, 3, moment1];
+      //   // moment object fail
+      //   // const cloneValue = new source.constructor();
+      //   checkEqual(true,  isThrown(() => { cloneDeep(testValue1, cloneDeep.func.DefaultArray()); }));
+      //   checkEqual(false, isThrown(() => { cloneDeep(testValue1); }));
+      //   var value1 = cloneDeep(testValue1);
+      //   value1[3].set('year', 2018);
+      //   checkEqual(false, value1[3] === testValue1[3]); // clone
+      //   checkEqual(true,  moment.isMoment(value1[3]));  // moment is simple clone OK
+      //   checkEqual(true,  moment.isMoment(testValue1[3]));
+      //   checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+      //   checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
+      //   // but not correct
+      //   // moment type cloneDeep moment clone function
+      //   clone.func.moment = (source, bufferWrite) => {
+      //     if (!moment.isMoment(source)) {
+      //       return undefined;
+      //     }
+      //     const cloneValue = moment(source);
+      //     bufferWrite(source, cloneValue);
+      //     return cloneValue;
+      //   };
+      //   var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+      //   var testValue1 = [1, 2, 3, moment1];
+      //   var value1 = cloneDeep(testValue1, [
+      //     cloneDeep.func.moment,
+      //     ...cloneDeep.func.DefaultArray(),
+      //   ]);
+      //   value1[3].set('year', 2018);
+      //   checkEqual(false, value1[3] === testValue1[3]); // clone
+      //   checkEqual(true,  moment.isMoment(value1[3]));
+      //   checkEqual(true,  moment.isMoment(testValue1[3]));
+      //   checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+      //   checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
+      // });
+    };
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
       it('test_cloneDeep_symbol', function () {
@@ -1534,61 +1538,79 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 150,
           key3: 200,
           key4: 100
-        }, merge(testObjectArray));
+        }, merge({}, testObjectArray));
         checkEqual({
           key1: 300,
           key2: 350,
           key3: 600,
           key4: 100
-        }, merge(testObjectArray, function (v, t) {
-          return t + v;
-        }, {
-          key1: 0,
-          key2: 0,
-          key3: 0,
-          key4: 0
-        }));
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge(testObjectArray, function (v, t) {
-          return isUndefined(t) ? v : t + v;
+        }, merge({}, testObjectArray, function (source, target) {
+          return source + target;
         }));
         checkEqual({
           key1: [3, 300],
           key2: [2, 350],
           key3: [3, 600],
           key4: [1, 100]
-        }, merge(testObjectArray, function (v, t) {
-          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        }, merge({
+          key1: [0, 0],
+          key2: [0, 0],
+          key3: [0, 0],
+          key4: [0, 0]
+        }, testObjectArray, function (source, target) {
+          return [source[0] + 1, source[1] + target];
         }));
         checkEqual({
           key1: 100,
           key2: 175,
           key3: 200,
           key4: 100
-        }, objectFromEntries(map(objectEntries(merge(testObjectArray, function (v, t) {
-          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        }, objectFromEntries(map(objectEntries(merge({
+          key1: [0, 0],
+          key2: [0, 0],
+          key3: [0, 0],
+          key4: [0, 0]
+        }, testObjectArray, function (source, target) {
+          return [source[0] + 1, source[1] + target];
         })), function (_ref) {
           var _ref2 = _slicedToArray(_ref, 2),
               key = _ref2[0],
               value = _ref2[1];
 
           return [key, value[1] / value[0]];
-        }))); // array
+        }))); // deep merge
+
+        var names = {
+          'characters': [{
+            'name': 'Haru39'
+          }, {
+            'name': 'yutapon'
+          }]
+        };
+        var ages = {
+          'characters': [{
+            'age': 26
+          }, {
+            'age': 18
+          }]
+        };
+        checkEqual({
+          characters: [{
+            age: 26,
+            name: 'Haru39'
+          }, {
+            age: 18,
+            name: 'yutapon'
+          }]
+        }, merge({}, [names, ages])); // array
 
         var testArrayArray = [[100, 200, 300], [100, 150, 100], [100,, 200, 100]];
-        checkEqual([100, 150, 200, 100], merge(testArrayArray));
-        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
-          return t + v;
-        }, [0, 0, 0, 0]));
-        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
-          return isUndefined(t) ? v : t + v;
+        checkEqual([100, 150, 200, 100], merge([], testArrayArray));
+        checkEqual([300, 350, 600, 100], merge([], testArrayArray, function (source, target) {
+          return source + target;
         }));
-        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge(testArrayArray, function (v, t) {
-          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
+        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge([[0, 0], [0, 0], [0, 0], [0, 0]], testArrayArray, function (source, target) {
+          return [source[0] + 1, source[1] + target];
         })); // object parameter
 
         checkEqual({
@@ -1597,15 +1619,15 @@ var test_execute_common = function test_execute_common(parts) {
           key3: 600,
           key4: 100
         }, merge({
-          dataArray: testObjectArray,
-          func: function func(v, t) {
-            return t + v;
-          },
-          target: {
+          source: {
             key1: 0,
             key2: 0,
             key3: 0,
             key4: 0
+          },
+          targetArray: testObjectArray,
+          func: function func(source, target) {
+            return source + target;
           }
         }));
         checkEqual({
@@ -1613,30 +1635,30 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 350,
           key3: 600,
           key4: 100
-        }, merge(testObjectArray, {
-          func: function func(v, t) {
-            return t + v;
-          },
-          target: {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          }
-        }));
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge(testObjectArray, function (v, t) {
-          return t + v;
+        }, merge({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
         }, {
-          target: {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
+          targetArray: testObjectArray,
+          func: function func(source, target) {
+            return source + target;
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, testObjectArray, {
+          func: function func(source, target) {
+            return source + target;
           }
         })); // exception
 
@@ -1645,46 +1667,46 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 0,
           key3: 0,
           key4: 0
-        }, merge([], function (v, t) {
-          return isUndefined(t) ? v : t + v;
-        }, {
+        }, merge({}, [{
           key1: 0,
           key2: 0,
           key3: 0,
           key4: 0
+        }], function (source, target) {
+          return source + target;
         }));
         checkEqual(false, isThrown(function () {
-          merge([], function (v, t) {
-            return isUndefined(t) ? v : t + v;
-          }, {
+          merge({}, [{
             key1: 0,
             key2: 0,
             key3: 0,
             key4: 0
+          }], function (source, target) {
+            return source + target;
           });
         }));
         checkEqual(true, isThrown(function () {
-          merge(['123'], function (v, t) {
-            return isUndefined(t) ? v : t + v;
-          }, {
+          merge({}, ['123'], function (source, target) {
+            return source + target;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge({}, [{
             key1: 0,
             key2: 0,
             key3: 0,
             key4: 0
-          });
+          }], 123);
         }));
         checkEqual(true, isThrown(function () {
-          merge([], 123, {
+          merge(123, [{
             key1: 0,
             key2: 0,
             key3: 0,
             key4: 0
+          }], function (source, target) {
+            return source + target;
           });
-        }));
-        checkEqual(true, isThrown(function () {
-          merge([], function (v, t) {
-            return isUndefined(t) ? v : t + v;
-          }, '123');
         }));
       });
     };
@@ -1736,8 +1758,8 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_date();
     test_cloneDeep_regExp();
     test_cloneDeep_objectParameter();
-    test_cloneDeep_function(); // test_cloneDeep_moment();
-
+    test_cloneDeep_function();
+    test_cloneDeep_moment();
     test_cloneDeep_symbol();
     test_cloneDeep_map();
     test_cloneDeep_set();

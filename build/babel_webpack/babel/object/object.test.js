@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_object = void 0;
 
+/* eslint-disable space-in-parens */
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */

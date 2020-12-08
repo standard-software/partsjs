@@ -298,14 +298,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_common = void 0;
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -321,6 +313,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
+// import moment from 'moment';
 var test_execute_common = function test_execute_common(parts) {
   var _parts$test = parts.test,
       checkEqual = _parts$test.checkEqual,
@@ -1162,58 +1155,61 @@ var test_execute_common = function test_execute_common(parts) {
         checkEqual(true, array1[0] === testFunc1);
         checkEqual('ABC', array1[0]());
       });
-    }; // const test_cloneDeep_moment = () => {
-    //   it('test_cloneDeep_moment', () => {
-    //     if (parts.platform.isWindowsScriptHost()) {
-    //       return;
-    //     }
-    //     if (parts.platform.isWebBrowser()) {
-    //       return;
-    //     }
-    //     import moment from 'moment';
-    //     // moment type clone no
-    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    //     var testValue1 = [1, 2, 3, moment1];
-    //     var value1 = clone(testValue1);
-    //     value1[3].set('year', 2018);
-    //     checkEqual(true, value1[3] === testValue1[3]);
-    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
-    //     // moment object fail
-    //     // const cloneValue = new source.constructor();
-    //     // moment type cloneDeep
-    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    //     var testValue1 = [1, 2, 3, moment1];
-    //     // initialise
-    //     cloneDeep.clear();
-    //     var value1 = cloneDeep(testValue1);
-    //     value1[3].set('year', 2018);
-    //     checkEqual(true, value1[3] === testValue1[3]); // clone
-    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    //     checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
-    //     // but not correct
-    //     // moment type cloneDeep moment clone function
-    //     clone.func.moment = (source, bufferWrite)  => {
-    //       if (!moment.isMoment(source)) {
-    //         return undefined;
-    //       }
-    //       const cloneValue = moment(source);
-    //       bufferWrite(source, cloneValue);
-    //       return cloneValue;
-    //     };
-    //     cloneDeep.reset();
-    //     cloneDeep.add(clone.func.moment);
-    //     var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
-    //     var testValue1 = [1, 2, 3, moment1];
-    //     var value1 = cloneDeep(testValue1);
-    //     value1[3].set('year', 2018);
-    //     checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
-    //     checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
-    //     // correct
-    //     cloneDeep.reset();
-    //   });
-    // };
+    };
 
+    var test_cloneDeep_moment = function test_cloneDeep_moment() {// it('test_cloneDeep_moment', () => {
+      //   if (parts.platform.isWindowsScriptHost()) {
+      //     return;
+      //   }
+      //   if (parts.platform.isWebBrowser()) {
+      //     return;
+      //   }
+      //   // moment type clone no
+      //   var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+      //   var testValue1 = [1, 2, 3, moment1];
+      //   var value1 = clone(testValue1);
+      //   value1[3].set('year', 2018);
+      //   checkEqual(true, value1[3] === testValue1[3]);
+      //   checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+      //   checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
+      //   // moment type cloneDeep
+      //   var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+      //   var testValue1 = [1, 2, 3, moment1];
+      //   // moment object fail
+      //   // const cloneValue = new source.constructor();
+      //   checkEqual(true,  isThrown(() => { cloneDeep(testValue1, cloneDeep.func.DefaultArray()); }));
+      //   checkEqual(false, isThrown(() => { cloneDeep(testValue1); }));
+      //   var value1 = cloneDeep(testValue1);
+      //   value1[3].set('year', 2018);
+      //   checkEqual(false, value1[3] === testValue1[3]); // clone
+      //   checkEqual(true,  moment.isMoment(value1[3]));  // moment is simple clone OK
+      //   checkEqual(true,  moment.isMoment(testValue1[3]));
+      //   checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+      //   checkEqual('2018/10/11', testValue1[3].format('YYYY/MM/DD'));
+      //   // but not correct
+      //   // moment type cloneDeep moment clone function
+      //   clone.func.moment = (source, bufferWrite) => {
+      //     if (!moment.isMoment(source)) {
+      //       return undefined;
+      //     }
+      //     const cloneValue = moment(source);
+      //     bufferWrite(source, cloneValue);
+      //     return cloneValue;
+      //   };
+      //   var moment1 = moment('2019/10/11', 'YYYY/MM/DD');
+      //   var testValue1 = [1, 2, 3, moment1];
+      //   var value1 = cloneDeep(testValue1, [
+      //     cloneDeep.func.moment,
+      //     ...cloneDeep.func.DefaultArray(),
+      //   ]);
+      //   value1[3].set('year', 2018);
+      //   checkEqual(false, value1[3] === testValue1[3]); // clone
+      //   checkEqual(true,  moment.isMoment(value1[3]));
+      //   checkEqual(true,  moment.isMoment(testValue1[3]));
+      //   checkEqual('2018/10/11', value1[3].format('YYYY/MM/DD'));
+      //   checkEqual('2019/10/11', testValue1[3].format('YYYY/MM/DD'));
+      // });
+    };
 
     var test_cloneDeep_symbol = function test_cloneDeep_symbol() {
       it('test_cloneDeep_symbol', function () {
@@ -1827,158 +1823,140 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 150,
           key3: 200,
           key4: 100
-        }, merge(testObjectArray));
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge(testObjectArray, function (v, t) {
-          return t + v;
-        }, {
-          key1: 0,
-          key2: 0,
-          key3: 0,
-          key4: 0
-        }));
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge(testObjectArray, function (v, t) {
-          return isUndefined(t) ? v : t + v;
-        }));
-        checkEqual({
-          key1: [3, 300],
-          key2: [2, 350],
-          key3: [3, 600],
-          key4: [1, 100]
-        }, merge(testObjectArray, function (v, t) {
-          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
-        }));
-        checkEqual({
-          key1: 100,
-          key2: 175,
-          key3: 200,
-          key4: 100
-        }, objectFromEntries(map(objectEntries(merge(testObjectArray, function (v, t) {
-          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
-        })), function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              key = _ref2[0],
-              value = _ref2[1];
-
-          return [key, value[1] / value[0]];
-        }))); // array
-
-        var testArrayArray = [[100, 200, 300], [100, 150, 100], [100,, 200, 100]];
-        checkEqual([100, 150, 200, 100], merge(testArrayArray));
-        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
-          return t + v;
-        }, [0, 0, 0, 0]));
-        checkEqual([300, 350, 600, 100], merge(testArrayArray, function (v, t) {
-          return isUndefined(t) ? v : t + v;
-        }));
-        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge(testArrayArray, function (v, t) {
-          return isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v];
-        })); // object parameter
-
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge({
-          dataArray: testObjectArray,
-          func: function func(v, t) {
-            return t + v;
-          },
-          target: {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          }
-        }));
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge(testObjectArray, {
-          func: function func(v, t) {
-            return t + v;
-          },
-          target: {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          }
-        }));
-        checkEqual({
-          key1: 300,
-          key2: 350,
-          key3: 600,
-          key4: 100
-        }, merge(testObjectArray, function (v, t) {
-          return t + v;
-        }, {
-          target: {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          }
-        })); // exception
-
-        checkEqual({
-          key1: 0,
-          key2: 0,
-          key3: 0,
-          key4: 0
-        }, merge([], function (v, t) {
-          return isUndefined(t) ? v : t + v;
-        }, {
-          key1: 0,
-          key2: 0,
-          key3: 0,
-          key4: 0
-        }));
-        checkEqual(false, isThrown(function () {
-          merge([], function (v, t) {
-            return isUndefined(t) ? v : t + v;
-          }, {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          });
-        }));
-        checkEqual(true, isThrown(function () {
-          merge(['123'], function (v, t) {
-            return isUndefined(t) ? v : t + v;
-          }, {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          });
-        }));
-        checkEqual(true, isThrown(function () {
-          merge([], 123, {
-            key1: 0,
-            key2: 0,
-            key3: 0,
-            key4: 0
-          });
-        }));
-        checkEqual(true, isThrown(function () {
-          merge([], function (v, t) {
-            return isUndefined(t) ? v : t + v;
-          }, '123');
-        }));
+        }, merge({}, testObjectArray)); // checkEqual(
+        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
+        //   merge(
+        //     {},
+        //     testObjectArray,
+        //     (source, target) => source + target,
+        //   ),
+        // );
+        // checkEqual(
+        //   { key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100] },
+        //   merge(
+        //     { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
+        //     testObjectArray,
+        //     (source, target) => [source[0] + 1, source[1] + target],
+        //   ),
+        // );
+        // checkEqual(
+        //   { key1: 100, key2: 175, key3: 200, key4: 100 },
+        //   objectFromEntries(map(objectEntries(merge(
+        //     { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
+        //     testObjectArray,
+        //     (source, target) => [source[0] + 1, source[1] + target],
+        //   )), ([key, value]) => [key, value[1] / value[0]])),
+        // );
+        // // deep merge
+        // const names = {
+        //   'characters': [
+        //     { 'name': 'Haru39' },
+        //     { 'name': 'yutapon' },
+        //   ],
+        // };
+        // const ages = {
+        //   'characters': [
+        //     { 'age': 26 },
+        //     { 'age': 18 },
+        //   ],
+        // };
+        // checkEqual({ characters:[
+        //   { age: 26, name: 'Haru39' },
+        //   { age: 18, name: 'yutapon' },
+        // ] }, merge({}, [names, ages]));
+        // // array
+        // const testArrayArray = [
+        //   [100, 200, 300],
+        //   [100, 150, 100],
+        //   [100,    , 200, 100],
+        // ];
+        // checkEqual(
+        //   [100, 150, 200, 100],
+        //   merge([], testArrayArray),
+        // );
+        // checkEqual(
+        //   [300, 350, 600, 100],
+        //   merge(
+        //     [],
+        //     testArrayArray,
+        //     (source, target) => source + target,
+        //   ),
+        // );
+        // checkEqual(
+        //   [[3, 300], [2, 350], [3, 600], [1, 100]],
+        //   merge(
+        //     [[0, 0], [0, 0], [0, 0], [0, 0]],
+        //     testArrayArray,
+        //     (source, target) => [source[0] + 1, source[1] + target],
+        //   ),
+        // );
+        // // object parameter
+        // checkEqual(
+        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
+        //   merge(
+        //     {
+        //       source: { key1: 0, key2: 0, key3: 0, key4: 0 },
+        //       targetArray: testObjectArray,
+        //       func: (source, target) => source + target,
+        //     },
+        //   ),
+        // );
+        // checkEqual(
+        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
+        //   merge(
+        //     { key1: 0, key2: 0, key3: 0, key4: 0 },
+        //     {
+        //       targetArray: testObjectArray,
+        //       func: (source, target) => source + target,
+        //     },
+        //   ),
+        // );
+        // checkEqual(
+        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
+        //   merge(
+        //     { key1: 0, key2: 0, key3: 0, key4: 0 },
+        //     testObjectArray,
+        //     {
+        //       func: (source, target) => source + target,
+        //     },
+        //   ),
+        // );
+        // // exception
+        // checkEqual({ key1: 0, key2: 0, key3: 0, key4: 0 },
+        //   merge(
+        //     {},
+        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+        //     (source, target) => source + target,
+        //   ),
+        // );
+        // checkEqual(false, isThrown(() => {
+        //   merge(
+        //     {},
+        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+        //     (source, target) => source + target,
+        //   );
+        // }));
+        // checkEqual(true, isThrown(() => {
+        //   merge(
+        //     {},
+        //     ['123'],
+        //     (source, target) => source + target,
+        //   );
+        // }));
+        // checkEqual(true, isThrown(() => {
+        //   merge(
+        //     {},
+        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+        //     123,
+        //   );
+        // }));
+        // checkEqual(true, isThrown(() => {
+        //   merge(
+        //     123,
+        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+        //     (source, target) => source + target,
+        //   );
+        // }));
       });
     };
 
@@ -2029,8 +2007,8 @@ var test_execute_common = function test_execute_common(parts) {
     test_cloneDeep_date();
     test_cloneDeep_regExp();
     test_cloneDeep_objectParameter();
-    test_cloneDeep_function(); // test_cloneDeep_moment();
-
+    test_cloneDeep_function();
+    test_cloneDeep_moment();
     test_cloneDeep_symbol();
     test_cloneDeep_map();
     test_cloneDeep_set();
@@ -2325,14 +2303,88 @@ var test_execute_type = function test_execute_type(parts) {
         checkType('object', '[object Math]', Math);
 
         if (parts.platform.isWindowsScriptHost()) {
-          return;
+          checkEqual(true, isThrown(function () {
+            BigInt(100);
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            BigInt(100);
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(function () {
+            BigInt(100);
+          }));
+        } else {
+          // checkType('bigint',       '[object BigInt]', 100n);
+          //  BigInt[n](for example 999n), it is compile error for wsh
+          checkType('bigint', '[object BigInt]', BigInt(100));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            JSON.stringify({});
+          }));
+        } else {
           checkType('object', '[object JSON]', JSON);
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new Int8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8ClampedArray();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float64Array();
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new Int8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint8ClampedArray();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint16Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Int32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Uint32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float32Array();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Float64Array();
+          }));
+        } else {
           checkType('object', '[object Int8Array]', new Int8Array());
           checkType('object', '[object Uint8Array]', new Uint8Array());
           checkType('object', '[object Uint8ClampedArray]', new Uint8ClampedArray());
@@ -2344,7 +2396,39 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('object', '[object Float64Array]', new Float64Array());
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new Map();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakMap();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Set();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakSet();
+          }));
+          checkEqual(true, isThrown(function () {
+            Symbol();
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new Map();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakMap();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Set();
+          }));
+          checkEqual(true, isThrown(function () {
+            new WeakSet();
+          }));
+          checkEqual(true, isThrown(function () {
+            Symbol();
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new Map());
           checkType('object', '[object Object]', new WeakMap());
           checkType('object', '[object Object]', new Set());
@@ -2356,16 +2440,54 @@ var test_execute_type = function test_execute_type(parts) {
           checkType('symbol', '[object Symbol]', Symbol());
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new ArrayBuffer(8);
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new ArrayBuffer(8);
+          }));
+        } else {
           checkType('object', '[object ArrayBuffer]', new ArrayBuffer(8));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else if (parts.platform.isFirefox()) {
+          checkEqual(true, isThrown(function () {
+            new SharedArrayBuffer(8);
+          }));
+        } else {
           checkType('object', '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
           checkType('object', '[object Atomics]', Atomics);
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new DataView();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Promise();
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new DataView();
+          }));
+          checkEqual(true, isThrown(function () {
+            new Promise();
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
           checkType('object', '[object Object]', new DataView(new ArrayBuffer(16)));
         } else {
           checkType('object', '[object DataView]', new DataView(new ArrayBuffer(16)));
@@ -2424,26 +2546,56 @@ var test_execute_type = function test_execute_type(parts) {
         } // Proxy
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(function () {
+            new Proxy({}, {});
+          }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(function () {
+            new Proxy({}, {});
+          }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(function () {
+            new Proxy({}, {});
+          }));
+        } else {
           checkType('object', '[object Object]', new Proxy({}, {}));
         } // WebAssembly
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isFirefox()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, typeof WebAssembly === 'undefined');
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, typeof WebAssembly === 'undefined');
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, typeof WebAssembly === 'undefined');
+        } else if (parts.platform.isFirefox()) {
           checkType('object', '[object Object]', WebAssembly);
         } else {
           checkType('object', '[object WebAssembly]', WebAssembly);
         } // Reflect
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, typeof Reflect === 'undefined');
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, typeof Reflect === 'undefined');
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, typeof Reflect === 'undefined');
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
           checkType('object', '[object Reflect]', Reflect);
         } else {
           checkType('object', '[object Object]', Reflect);
         } // Intl
 
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, typeof Intl === 'undefined');
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, typeof Intl === 'undefined');
+        } else if (parts.platform.isDeno()) {
+          checkEqual(true, typeof Intl === 'undefined');
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
           checkType('object', '[object Intl]', Intl);
         } else {
           checkType('object', '[object Object]', Intl);
@@ -8886,6 +9038,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_convert = void 0;
 
+/* eslint-disable space-in-parens */
+
 /* eslint-disable no-var */
 var test_execute_convert = function test_execute_convert(parts) {
   var _parts$test = parts.test,
@@ -10552,6 +10706,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_number = void 0;
 
+/* eslint-disable space-in-parens */
+
 /* eslint-disable max-len */
 
 /* eslint-disable no-var */
@@ -10812,6 +10968,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = exports.test_execute_string = void 0;
+
+/* eslint-disable space-in-parens */
 
 /* eslint-disable max-len */
 var test_execute_string = function test_execute_string(parts) {
@@ -13009,6 +13167,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = exports.test_execute_object = void 0;
+
+/* eslint-disable space-in-parens */
 
 /* eslint-disable max-len */
 
