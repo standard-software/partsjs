@@ -1519,37 +1519,50 @@ export const test_execute_common = (parts) => {
         ];
         checkEqual(
           { key1: 100, key2: 150, key3: 200, key4: 100 },
-          merge(testObjectArray),
+          merge({}, testObjectArray),
         );
         checkEqual(
           { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
+            {},
             testObjectArray,
-            (v, t) => t + v,
-            { key1: 0, key2: 0, key3: 0, key4: 0 },
-          ),
-        );
-        checkEqual(
-          { key1: 300, key2: 350, key3: 600, key4: 100 },
-          merge(
-            testObjectArray,
-            (v, t) => isUndefined(t) ? v : t + v,
+            (source, target) => source + target,
           ),
         );
         checkEqual(
           { key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100] },
           merge(
+            { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
             testObjectArray,
-            (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
+            (source, target) => [source[0] + 1, source[1] + target],
           ),
         );
         checkEqual(
           { key1: 100, key2: 175, key3: 200, key4: 100 },
           objectFromEntries(map(objectEntries(merge(
+            { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
             testObjectArray,
-            (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
+            (source, target) => [source[0] + 1, source[1] + target],
           )), ([key, value]) => [key, value[1] / value[0]])),
         );
+
+        // deep merge
+        const names = {
+          'characters': [
+            { 'name': 'Haru39' },
+            { 'name': 'yutapon' },
+          ],
+        };
+        const ages = {
+          'characters': [
+            { 'age': 26 },
+            { 'age': 18 },
+          ],
+        };
+        checkEqual({ characters:[
+          { age: 26, name: 'Haru39' },
+          { age: 18, name: 'yutapon' },
+        ] }, merge({}, [names, ages]));
 
         // array
         const testArrayArray = [
@@ -1559,28 +1572,22 @@ export const test_execute_common = (parts) => {
         ];
         checkEqual(
           [100, 150, 200, 100],
-          merge(testArrayArray),
+          merge([], testArrayArray),
         );
         checkEqual(
           [300, 350, 600, 100],
           merge(
+            [],
             testArrayArray,
-            (v, t) => t + v,
-            [0, 0, 0, 0],
-          ),
-        );
-        checkEqual(
-          [300, 350, 600, 100],
-          merge(
-            testArrayArray,
-            (v, t) => isUndefined(t) ? v : t + v,
+            (source, target) => source + target,
           ),
         );
         checkEqual(
           [[3, 300], [2, 350], [3, 600], [1, 100]],
           merge(
+            [[0, 0], [0, 0], [0, 0], [0, 0]],
             testArrayArray,
-            (v, t) => isUndefined(t) ? [1, v] : [t[0] + 1, t[1] + v],
+            (source, target) => [source[0] + 1, source[1] + target],
           ),
         );
 
@@ -1589,29 +1596,29 @@ export const test_execute_common = (parts) => {
           { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
             {
-              dataArray: testObjectArray,
-              func: (v, t) => t + v,
-              target: { key1: 0, key2: 0, key3: 0, key4: 0 },
+              source: { key1: 0, key2: 0, key3: 0, key4: 0 },
+              targetArray: testObjectArray,
+              func: (source, target) => source + target,
             },
           ),
         );
         checkEqual(
           { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
-            testObjectArray,
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
             {
-              func: (v, t) => t + v,
-              target: { key1: 0, key2: 0, key3: 0, key4: 0 },
+              targetArray: testObjectArray,
+              func: (source, target) => source + target,
             },
           ),
         );
         checkEqual(
           { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
             testObjectArray,
-            (v, t) => t + v,
             {
-              target: { key1: 0, key2: 0, key3: 0, key4: 0 },
+              func: (source, target) => source + target,
             },
           ),
         );
@@ -1619,37 +1626,37 @@ export const test_execute_common = (parts) => {
         // exception
         checkEqual({ key1: 0, key2: 0, key3: 0, key4: 0 },
           merge(
-            [],
-            (v, t) => isUndefined(t) ? v : t + v,
-            { key1: 0, key2: 0, key3: 0, key4: 0 },
+            {},
+            [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+            (source, target) => source + target,
           ),
         );
         checkEqual(false, isThrown(() => {
           merge(
-            [],
-            (v, t) => isUndefined(t) ? v : t + v,
-            { key1: 0, key2: 0, key3: 0, key4: 0 },
+            {},
+            [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+            (source, target) => source + target,
           );
         }));
         checkEqual(true, isThrown(() => {
           merge(
+            {},
             ['123'],
-            (v, t) => isUndefined(t) ? v : t + v,
-            { key1: 0, key2: 0, key3: 0, key4: 0 },
+            (source, target) => source + target,
           );
         }));
         checkEqual(true, isThrown(() => {
           merge(
-            [],
+            {},
+            [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
             123,
-            { key1: 0, key2: 0, key3: 0, key4: 0 },
           );
         }));
         checkEqual(true, isThrown(() => {
           merge(
-            [],
-            (v, t) => isUndefined(t) ? v : t + v,
-            '123',
+            123,
+            [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
+            (source, target) => source + target,
           );
         }));
 
@@ -1660,7 +1667,6 @@ export const test_execute_common = (parts) => {
     const { setProperty, recursive } = parts;
 
     const cloneDeepUseRecursive = (source) => {
-
       let result;
       if (isObject(source)) {
         result = {};
@@ -1684,7 +1690,6 @@ export const test_execute_common = (parts) => {
       );
       return result;
     };
-
 
     test_clone_object();
     test_clone_array();

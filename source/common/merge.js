@@ -11,8 +11,8 @@ import {
 } from '../type/isType.js';
 
 import {
-  isObjectLikeArray,
-  isArraySeriesArray,
+  isObjectArray,
+  isArrayArray,
 } from '../type/isTypeArray.js';
 
 import {
@@ -25,41 +25,41 @@ import { _merge } from '../common/_merge.js';
 /**
  * merge
  */
-export const merge = (dataArray, func = __returnValueFunction, target) => {
-  if (isObjectParameter(dataArray, 'dataArray, func', 'target')) {
-    ({ dataArray, func = __returnValueFunction, target } = dataArray);
-  } else if (isObjectParameter(func, 'func', 'target')) {
-    ({ func = __returnValueFunction, target } = func);
-  } else if (isObjectParameter(target, 'target')) {
-    ({ target } = target);
+export const merge = (source, targetArray, func) => {
+  if (isObjectParameter(source, 'source, targetArray', 'func')) {
+    ({ source, targetArray, func } = source);
+  } else if (isObjectParameter(targetArray, 'targetArray', 'func')) {
+    ({ targetArray, func } = targetArray);
+  } else if (isObjectParameter(func, 'func')) {
+    ({ func } = func);
   }
 
-  if (!isArray(dataArray)) {
+  if (!(isObject(source) || isArray(source))) {
     throw new TypeError(
-      'merge args(dataArray) is not array',
+      'merge args(source) is not [Object|Array]',
+    );
+  }
+  if (!isArray(targetArray)) {
+    throw new TypeError(
+      'merge args(targetArray) is not array',
     );
   }
   if (!(
-    dataArray.length === 0
-    || isObjectLikeArray(dataArray)
-    || isArraySeriesArray(dataArray)
+    targetArray.length === 0
+    || isObjectArray(targetArray)
+    || isArrayArray(targetArray)
   )) {
     throw new TypeError(
-      'merge args(dataArray) element is not [ObjectLike|ArraySeries]',
+      'merge args(targetArray) element is not [Object|Array]',
     );
   }
-  if (!isFunction(func)) {
+  if (!(isUndefined(func) || isFunction(func))) {
     throw new TypeError(
       'merge args(func) is not function',
     );
   }
-  if (!(isUndefined(target) || isObjectLike(target) || isArraySeries(target))) {
-    throw new TypeError(
-      'merge args(target) is not [undefined|ObjectLike|ArraySeries]',
-    );
-  }
 
-  return _merge(dataArray, func, target);
+  return _merge(source, targetArray, func);
 };
 
 export default {

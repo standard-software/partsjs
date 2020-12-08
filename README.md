@@ -342,6 +342,8 @@ You can now use the functions of the parts.js object.
 - update package.json scripts
 - update .eslintrc.js
 - update testcode bigint etc
+- update merge
+  - support deep merge
 
 ### 10.2.0
 #### 2020/12/02(Wed)
