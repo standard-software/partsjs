@@ -2607,14 +2607,12 @@ export const test_execute_compare = (parts) => {
 
     let equalDeep;
     equalDeep = equalDeepUseRecursive;
-
     test_equalDeep(false);
     test_equalDeep_object();
     test_equalDeep_array(false);
     test_equalDeep_object_array_mix();
 
     equalDeep = parts.compare.equalDeep;
-
     test_equalDeep();
     test_equalDeep_object();
     test_equalDeep_object_array_mix();
