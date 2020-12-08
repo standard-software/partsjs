@@ -163,16 +163,43 @@ export const test_execute_type = (parts) => {
         checkType('object',    '[object Math]',       Math);
 
         if (parts.platform.isWindowsScriptHost()) {
-          return;
+          checkEqual(true, isThrown(() => { BigInt(100); }));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { BigInt(100); }));
+        } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(() => { BigInt(100); }));
+        } else {
+          // checkType('bigint',       '[object BigInt]', 100n);
+          //  BigInt[n](for example 999n), it is compile error for wsh
+          checkType('bigint',       '[object BigInt]', BigInt(100));
         }
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { JSON.stringify({}); }));
         } else {
           checkType('object',    '[object JSON]',               JSON);
         }
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { new Int8Array(); }));
+          checkEqual(true, isThrown(() => { new Uint8Array(); }));
+          checkEqual(true, isThrown(() => { new Uint8ClampedArray(); }));
+          checkEqual(true, isThrown(() => { new Int16Array(); }));
+          checkEqual(true, isThrown(() => { new Uint16Array(); }));
+          checkEqual(true, isThrown(() => { new Int32Array(); }));
+          checkEqual(true, isThrown(() => { new Uint32Array(); }));
+          checkEqual(true, isThrown(() => { new Float32Array(); }));
+          checkEqual(true, isThrown(() => { new Float64Array(); }));
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { new Int8Array(); }));
+          checkEqual(true, isThrown(() => { new Uint8Array(); }));
+          checkEqual(true, isThrown(() => { new Uint8ClampedArray(); }));
+          checkEqual(true, isThrown(() => { new Int16Array(); }));
+          checkEqual(true, isThrown(() => { new Uint16Array(); }));
+          checkEqual(true, isThrown(() => { new Int32Array(); }));
+          checkEqual(true, isThrown(() => { new Uint32Array(); }));
+          checkEqual(true, isThrown(() => { new Float32Array(); }));
+          checkEqual(true, isThrown(() => { new Float64Array(); }));
         } else {
           checkType('object',    '[object Int8Array]',          new Int8Array());
           checkType('object',    '[object Uint8Array]',         new Uint8Array());
@@ -186,7 +213,17 @@ export const test_execute_type = (parts) => {
         }
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { new Map(); }));
+          checkEqual(true, isThrown(() => { new WeakMap(); }));
+          checkEqual(true, isThrown(() => { new Set(); }));
+          checkEqual(true, isThrown(() => { new WeakSet(); }));
+          checkEqual(true, isThrown(() => { Symbol(); }));
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { new Map(); }));
+          checkEqual(true, isThrown(() => { new WeakMap(); }));
+          checkEqual(true, isThrown(() => { new Set(); }));
+          checkEqual(true, isThrown(() => { new WeakSet(); }));
+          checkEqual(true, isThrown(() => { Symbol(); }));
         } else if (parts.platform.isInternetExplorer()) {
           checkType('object',    '[object Object]',             new Map());
           checkType('object',    '[object Object]',             new WeakMap());
@@ -200,22 +237,32 @@ export const test_execute_type = (parts) => {
         }
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { new ArrayBuffer(8); }));
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { new ArrayBuffer(8); }));
         } else {
           checkType('object',    '[object ArrayBuffer]',        new ArrayBuffer(8));
         }
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { new SharedArrayBuffer(8); }));
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { new SharedArrayBuffer(8); }));
         } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(() => { new SharedArrayBuffer(8); }));
         } else if (parts.platform.isFirefox()) {
+          checkEqual(true, isThrown(() => { new SharedArrayBuffer(8); }));
         } else {
           checkType('object',    '[object SharedArrayBuffer]', new SharedArrayBuffer(8));
           checkType('object',    '[object Atomics]', Atomics);
         }
 
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { new DataView(); }));
+          checkEqual(true, isThrown(() => { new Promise(); }));
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { new DataView(); }));
+          checkEqual(true, isThrown(() => { new Promise(); }));
         } else if (parts.platform.isInternetExplorer()) {
           checkType('object',    '[object Object]',             new DataView(new ArrayBuffer(16)));
         } else {
@@ -234,16 +281,22 @@ export const test_execute_type = (parts) => {
 
         // Proxy
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, isThrown(() => { new Proxy({}, {}); }));
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, isThrown(() => { new Proxy({}, {}); }));
         } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, isThrown(() => { new Proxy({}, {}); }));
         } else {
           checkType('object',    '[object Object]',             new Proxy({}, {}));
         }
 
         // WebAssembly
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, (typeof WebAssembly) === 'undefined');
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, (typeof WebAssembly) === 'undefined');
         } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, (typeof WebAssembly) === 'undefined');
         } else if (parts.platform.isFirefox()) {
           checkType('object',    '[object Object]',             WebAssembly);
         } else {
@@ -252,8 +305,11 @@ export const test_execute_type = (parts) => {
 
         // Reflect
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, (typeof Reflect) === 'undefined');
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, (typeof Reflect) === 'undefined');
         } else if (parts.platform.isInternetExplorer()) {
+          checkEqual(true, (typeof Reflect) === 'undefined');
         } else if (parts.platform.isChrome()
         || parts.platform.isEdge()
         || parts.platform.isFirefox()
@@ -266,8 +322,11 @@ export const test_execute_type = (parts) => {
 
         // Intl
         if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, (typeof Intl) === 'undefined');
         } else if (parts.platform.isGasRhino()) {
+          checkEqual(true, (typeof Intl) === 'undefined');
         } else if (parts.platform.isDeno()) {
+          checkEqual(true, (typeof Intl) === 'undefined');
         } else if (parts.platform.isChrome()
         || parts.platform.isEdge()
         || parts.platform.isFirefox()
