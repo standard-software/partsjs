@@ -298,6 +298,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_common = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1823,140 +1831,212 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 150,
           key3: 200,
           key4: 100
-        }, merge({}, testObjectArray)); // checkEqual(
-        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
-        //   merge(
-        //     {},
-        //     testObjectArray,
-        //     (source, target) => source + target,
-        //   ),
-        // );
-        // checkEqual(
-        //   { key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100] },
-        //   merge(
-        //     { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
-        //     testObjectArray,
-        //     (source, target) => [source[0] + 1, source[1] + target],
-        //   ),
-        // );
-        // checkEqual(
-        //   { key1: 100, key2: 175, key3: 200, key4: 100 },
-        //   objectFromEntries(map(objectEntries(merge(
-        //     { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
-        //     testObjectArray,
-        //     (source, target) => [source[0] + 1, source[1] + target],
-        //   )), ([key, value]) => [key, value[1] / value[0]])),
-        // );
-        // // deep merge
-        // const names = {
-        //   'characters': [
-        //     { 'name': 'Haru39' },
-        //     { 'name': 'yutapon' },
-        //   ],
-        // };
-        // const ages = {
-        //   'characters': [
-        //     { 'age': 26 },
-        //     { 'age': 18 },
-        //   ],
-        // };
-        // checkEqual({ characters:[
-        //   { age: 26, name: 'Haru39' },
-        //   { age: 18, name: 'yutapon' },
-        // ] }, merge({}, [names, ages]));
-        // // array
-        // const testArrayArray = [
-        //   [100, 200, 300],
-        //   [100, 150, 100],
-        //   [100,    , 200, 100],
-        // ];
-        // checkEqual(
-        //   [100, 150, 200, 100],
-        //   merge([], testArrayArray),
-        // );
-        // checkEqual(
-        //   [300, 350, 600, 100],
-        //   merge(
-        //     [],
-        //     testArrayArray,
-        //     (source, target) => source + target,
-        //   ),
-        // );
-        // checkEqual(
-        //   [[3, 300], [2, 350], [3, 600], [1, 100]],
-        //   merge(
-        //     [[0, 0], [0, 0], [0, 0], [0, 0]],
-        //     testArrayArray,
-        //     (source, target) => [source[0] + 1, source[1] + target],
-        //   ),
-        // );
-        // // object parameter
-        // checkEqual(
-        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
-        //   merge(
-        //     {
-        //       source: { key1: 0, key2: 0, key3: 0, key4: 0 },
-        //       targetArray: testObjectArray,
-        //       func: (source, target) => source + target,
-        //     },
-        //   ),
-        // );
-        // checkEqual(
-        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
-        //   merge(
-        //     { key1: 0, key2: 0, key3: 0, key4: 0 },
-        //     {
-        //       targetArray: testObjectArray,
-        //       func: (source, target) => source + target,
-        //     },
-        //   ),
-        // );
-        // checkEqual(
-        //   { key1: 300, key2: 350, key3: 600, key4: 100 },
-        //   merge(
-        //     { key1: 0, key2: 0, key3: 0, key4: 0 },
-        //     testObjectArray,
-        //     {
-        //       func: (source, target) => source + target,
-        //     },
-        //   ),
-        // );
-        // // exception
-        // checkEqual({ key1: 0, key2: 0, key3: 0, key4: 0 },
-        //   merge(
-        //     {},
-        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-        //     (source, target) => source + target,
-        //   ),
-        // );
-        // checkEqual(false, isThrown(() => {
-        //   merge(
-        //     {},
-        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-        //     (source, target) => source + target,
-        //   );
-        // }));
-        // checkEqual(true, isThrown(() => {
-        //   merge(
-        //     {},
-        //     ['123'],
-        //     (source, target) => source + target,
-        //   );
-        // }));
-        // checkEqual(true, isThrown(() => {
-        //   merge(
-        //     {},
-        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-        //     123,
-        //   );
-        // }));
-        // checkEqual(true, isThrown(() => {
-        //   merge(
-        //     123,
-        //     [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-        //     (source, target) => source + target,
-        //   );
-        // }));
+        }, merge({}, testObjectArray));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, testObjectArray, function (source, target) {
+          return source + target;
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({}, testObjectArray, function (source, target) {
+          return isUndefined(source) ? target : source + target;
+        }));
+        checkEqual({
+          key1: [3, 300],
+          key2: [2, 350],
+          key3: [3, 600],
+          key4: [1, 100]
+        }, merge({
+          key1: [0, 0],
+          key2: [0, 0],
+          key3: [0, 0],
+          key4: [0, 0]
+        }, testObjectArray, function (source, target) {
+          return [source[0] + 1, source[1] + target];
+        }));
+        checkEqual({
+          key1: [3, 300],
+          key2: [2, 350],
+          key3: [3, 600],
+          key4: [1, 100]
+        }, merge({}, testObjectArray, function (source, target) {
+          return isUndefined(source) ? [1, target] : [source[0] + 1, source[1] + target];
+        }));
+        checkEqual({
+          key1: 100,
+          key2: 175,
+          key3: 200,
+          key4: 100
+        }, objectFromEntries(map(objectEntries(merge({
+          key1: [0, 0],
+          key2: [0, 0],
+          key3: [0, 0],
+          key4: [0, 0]
+        }, testObjectArray, function (source, target) {
+          return [source[0] + 1, source[1] + target];
+        })), function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 2),
+              key = _ref2[0],
+              value = _ref2[1];
+
+          return [key, value[1] / value[0]];
+        }))); // deep merge
+
+        var names = {
+          'characters': [{
+            'name': 'Haru39'
+          }, {
+            'name': 'yutapon'
+          }]
+        };
+        var ages = {
+          'characters': [{
+            'age': 26
+          }, {
+            'age': 18
+          }]
+        };
+        checkEqual({
+          characters: [{
+            age: 26,
+            name: 'Haru39'
+          }, {
+            age: 18,
+            name: 'yutapon'
+          }]
+        }, merge({}, [names, ages])); // array
+
+        var testArrayArray = [[100, 200, 300], [100, 150, 100], [100,, 200, 100]];
+        checkEqual([100, 150, 200, 100], merge([], testArrayArray));
+        checkEqual([300, 350, 600, 100], merge([], testArrayArray, function (source, target) {
+          if (isUndefined(target)) {
+            return;
+          }
+
+          return isUndefined(source) ? target : source + target;
+        }));
+        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge([[0, 0], [0, 0], [0, 0], [0, 0]], testArrayArray, function (source, target) {
+          if (isUndefined(target)) {
+            return;
+          }
+
+          return [source[0] + 1, source[1] + target];
+        }));
+        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge([], testArrayArray, function (source, target) {
+          if (isUndefined(target)) {
+            return;
+          }
+
+          return isUndefined(source) ? [1, target] : [source[0] + 1, source[1] + target];
+        })); // object parameter
+
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          source: {
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          },
+          targetArray: testObjectArray,
+          func: function func(source, target) {
+            return source + target;
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, {
+          targetArray: testObjectArray,
+          func: function func(source, target) {
+            return source + target;
+          }
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, testObjectArray, {
+          func: function func(source, target) {
+            return source + target;
+          }
+        })); // exception
+
+        checkEqual({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, merge({}, [{
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }], function (source, target) {
+          return target;
+        }));
+        checkEqual(false, isThrown(function () {
+          merge({}, [{
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }], function (source, target) {
+            return target;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge({}, ['123'], function (source, target) {
+            return target;
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          merge({}, [{
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }], 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          merge(123, [{
+            key1: 0,
+            key2: 0,
+            key3: 0,
+            key4: 0
+          }], function (source, target) {
+            return target;
+          });
+        }));
       });
     };
 

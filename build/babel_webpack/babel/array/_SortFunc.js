@@ -7,7 +7,7 @@ exports["default"] = exports._SortFunc = void 0;
 
 var _map2 = require("../array/_map.js");
 
-var _returnValueFunction = require("../common/__returnValueFunction.js");
+var _returnFirstArgFunc = require("../common/__returnFirstArgFunc.js");
 
 var _SortFuncOrder = require("../array/__SortFuncOrder.js");
 
@@ -31,7 +31,7 @@ var _SortFunc = function _SortFunc(orderSettingArray) {
     var _ref2 = _slicedToArray(_ref, 2),
         orderFunc = _ref2[0],
         _ref2$ = _ref2[1],
-        valueFunc = _ref2$ === void 0 ? _returnValueFunction.__returnValueFunction : _ref2$;
+        valueFunc = _ref2$ === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _ref2$;
 
     return function (a, b) {
       return orderFunc(valueFunc(a), valueFunc(b));

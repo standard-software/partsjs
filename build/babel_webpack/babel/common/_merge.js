@@ -7,6 +7,8 @@ exports["default"] = exports._merge = void 0;
 
 var _isType = require("../type/isType.js");
 
+var _isTypeAll = require("../type/isTypeAll.js");
+
 var _loop = require("../syntax/__loop.js");
 
 var _recursive2 = require("../syntax/_recursive.js");
@@ -15,15 +17,15 @@ var _getProperty2 = require("../object/_getProperty.js");
 
 var _setProperty2 = require("../object/_setProperty.js");
 
+var _returnSecondArgFunc = require("./__returnSecondArgFunc.js");
+
 /**
  * merge
  */
 var _merge = function _merge() {
   var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var targetArray = arguments.length > 1 ? arguments[1] : undefined;
-  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (_, v) {
-    return v;
-  };
+  var func = arguments.length > 2 ? arguments[2] : undefined;
   (0, _loop.__loop)(targetArray)(function (target, targetIndex) {
     (0, _recursive2._recursive)(target, function (targetValue, key, level, path) {
       var propPath = path + '.' + key;
@@ -42,12 +44,16 @@ var _merge = function _merge() {
 
         return targetValue;
       } else {
-        if ((0, _isType.isUndefined)(sourceValue)) {
-          (0, _setProperty2._setProperty)(source, propPath, targetValue);
-        } else if ((0, _isType.isUndefined)(targetValue)) {// no set value
+        if ((0, _isType.isUndefined)(func)) {
+          if (!(0, _isType.isUndefined)(targetValue)) {
+            (0, _setProperty2._setProperty)(source, propPath, targetValue);
+          }
         } else {
           var setValue = func(sourceValue, targetValue, key, level, path, source, targetIndex, targetArray);
-          (0, _setProperty2._setProperty)(source, propPath, setValue);
+
+          if (!(0, _isType.isUndefined)(setValue)) {
+            (0, _setProperty2._setProperty)(source, propPath, setValue);
+          }
         }
       }
     });

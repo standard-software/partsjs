@@ -11,7 +11,7 @@ var _isTypeArray = require("../type/isTypeArray.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _returnValueFunction = require("./__returnValueFunction.js");
+var _returnFirstArgFunc = require("./__returnFirstArgFunc.js");
 
 var _merge2 = require("../common/_merge.js");
 

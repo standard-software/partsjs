@@ -25,7 +25,7 @@ var _functionValue = _interopRequireDefault(__webpack_require__(49));
 
 var _merge2 = _interopRequireDefault(__webpack_require__(113));
 
-var _merge3 = _interopRequireDefault(__webpack_require__(114));
+var _merge3 = _interopRequireDefault(__webpack_require__(115));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -196,7 +196,7 @@ exports["default"] = exports.__clone = void 0;
 
 var _isType = __webpack_require__(11);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 /**
  * clone
@@ -243,18 +243,18 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.__returnValueFunction = void 0;
+exports["default"] = exports.__returnFirstArgFunc = void 0;
 
 /**
- * returnValueFunction
+ * returnFirstArgFunc
  */
-var __returnValueFunction = function __returnValueFunction(v) {
+var __returnFirstArgFunc = function __returnFirstArgFunc(v) {
   return v;
 };
 
-exports.__returnValueFunction = __returnValueFunction;
+exports.__returnFirstArgFunc = __returnFirstArgFunc;
 var _default = {
-  __returnValueFunction: __returnValueFunction
+  __returnFirstArgFunc: __returnFirstArgFunc
 };
 exports["default"] = _default;
 
@@ -2551,7 +2551,7 @@ exports["default"] = exports._unique = void 0;
 
 var _includes = __webpack_require__(9);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _unique2 = __webpack_require__(45);
 
@@ -2559,10 +2559,10 @@ var _unique2 = __webpack_require__(45);
  * uniqe
  */
 var _unique = function _unique(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === _returnValueFunction.__returnValueFunction) {
+  if (func === _returnFirstArgFunc.__returnFirstArgFunc) {
     if (detail === false) {
       return (0, _unique2.__unique)(array);
     }
@@ -2747,7 +2747,7 @@ exports["default"] = exports._min = void 0;
 
 var _isType = __webpack_require__(11);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _min2 = __webpack_require__(62);
 
@@ -2755,10 +2755,10 @@ var _min2 = __webpack_require__(62);
  * array.min
  */
 var _min = function _min(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === _returnValueFunction.__returnValueFunction && detail === false) {
+  if (func === _returnFirstArgFunc.__returnFirstArgFunc && detail === false) {
     return (0, _min2.__min)(array);
   }
 
@@ -2856,7 +2856,7 @@ exports["default"] = exports._max = void 0;
 
 var _isType = __webpack_require__(11);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _max2 = __webpack_require__(64);
 
@@ -2864,10 +2864,10 @@ var _max2 = __webpack_require__(64);
  * array.max
  */
 var _max = function _max(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === _returnValueFunction.__returnValueFunction && detail === false) {
+  if (func === _returnFirstArgFunc.__returnFirstArgFunc && detail === false) {
     return (0, _max2.__max)(array);
   }
 
@@ -3359,7 +3359,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(15);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _min2 = __webpack_require__(61);
 
@@ -3367,20 +3367,20 @@ var _min2 = __webpack_require__(61);
  * array.min
  */
 var min = function min(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
     var _array = array;
     array = _array.array;
     var _array$func = _array.func;
-    func = _array$func === void 0 ? _returnValueFunction.__returnValueFunction : _array$func;
+    func = _array$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _array$func;
     var _array$detail = _array.detail;
     detail = _array$detail === void 0 ? false : _array$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
     var _func = func;
     var _func$func = _func.func;
-    func = _func$func === void 0 ? _returnValueFunction.__returnValueFunction : _func$func;
+    func = _func$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _func$func;
     var _func$detail = _func.detail;
     detail = _func$detail === void 0 ? false : _func$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
@@ -3425,7 +3425,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(15);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _max2 = __webpack_require__(63);
 
@@ -3433,20 +3433,20 @@ var _max2 = __webpack_require__(63);
  * array.max
  */
 var max = function max(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
     var _array = array;
     array = _array.array;
     var _array$func = _array.func;
-    func = _array$func === void 0 ? _returnValueFunction.__returnValueFunction : _array$func;
+    func = _array$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _array$func;
     var _array$detail = _array.detail;
     detail = _array$detail === void 0 ? false : _array$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
     var _func = func;
     var _func$func = _func.func;
-    func = _func$func === void 0 ? _returnValueFunction.__returnValueFunction : _func$func;
+    func = _func$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _func$func;
     var _func$detail = _func.detail;
     detail = _func$detail === void 0 ? false : _func$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
@@ -3647,13 +3647,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._group = void 0;
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 /**
  * group
  */
 var _group = function _group(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var index = [];
   var result = [];
@@ -3701,7 +3701,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(15);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _group2 = __webpack_require__(74);
 
@@ -3709,20 +3709,20 @@ var _group2 = __webpack_require__(74);
  * group
  */
 var group = function group(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
     var _array = array;
     array = _array.array;
     var _array$func = _array.func;
-    func = _array$func === void 0 ? _returnValueFunction.__returnValueFunction : _array$func;
+    func = _array$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _array$func;
     var _array$detail = _array.detail;
     detail = _array$detail === void 0 ? false : _array$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
     var _func = func;
     var _func$func = _func.func;
-    func = _func$func === void 0 ? _returnValueFunction.__returnValueFunction : _func$func;
+    func = _func$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _func$func;
     var _func$detail = _func.detail;
     detail = _func$detail === void 0 ? false : _func$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
@@ -3769,7 +3769,7 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _includes = __webpack_require__(9);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _unique2 = __webpack_require__(44);
 
@@ -3777,20 +3777,20 @@ var _unique2 = __webpack_require__(44);
  * uniqe
  */
 var unique = function unique(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if ((0, _isObjectParameter.isObjectParameter)(array, 'array', 'func, detail')) {
     var _array = array;
     array = _array.array;
     var _array$func = _array.func;
-    func = _array$func === void 0 ? _returnValueFunction.__returnValueFunction : _array$func;
+    func = _array$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _array$func;
     var _array$detail = _array.detail;
     detail = _array$detail === void 0 ? false : _array$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(func, '', 'func, detail')) {
     var _func = func;
     var _func$func = _func.func;
-    func = _func$func === void 0 ? _returnValueFunction.__returnValueFunction : _func$func;
+    func = _func$func === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _func$func;
     var _func$detail = _func.detail;
     detail = _func$detail === void 0 ? false : _func$detail;
   } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
@@ -3946,7 +3946,7 @@ exports["default"] = exports._SortFunc = void 0;
 
 var _map2 = __webpack_require__(65);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _SortFuncOrder = __webpack_require__(77);
 
@@ -3970,7 +3970,7 @@ var _SortFunc = function _SortFunc(orderSettingArray) {
     var _ref2 = _slicedToArray(_ref, 2),
         orderFunc = _ref2[0],
         _ref2$ = _ref2[1],
-        valueFunc = _ref2$ === void 0 ? _returnValueFunction.__returnValueFunction : _ref2$;
+        valueFunc = _ref2$ === void 0 ? _returnFirstArgFunc.__returnFirstArgFunc : _ref2$;
 
     return function (a, b) {
       return orderFunc(valueFunc(a), valueFunc(b));
@@ -4688,6 +4688,8 @@ exports["default"] = exports._merge = void 0;
 
 var _isType = __webpack_require__(11);
 
+var _isTypeAll = __webpack_require__(22);
+
 var _loop = __webpack_require__(38);
 
 var _recursive2 = __webpack_require__(56);
@@ -4696,15 +4698,15 @@ var _getProperty2 = __webpack_require__(33);
 
 var _setProperty2 = __webpack_require__(104);
 
+var _returnSecondArgFunc = __webpack_require__(114);
+
 /**
  * merge
  */
 var _merge = function _merge() {
   var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var targetArray = arguments.length > 1 ? arguments[1] : undefined;
-  var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (_, v) {
-    return v;
-  };
+  var func = arguments.length > 2 ? arguments[2] : undefined;
   (0, _loop.__loop)(targetArray)(function (target, targetIndex) {
     (0, _recursive2._recursive)(target, function (targetValue, key, level, path) {
       var propPath = path + '.' + key;
@@ -4723,12 +4725,16 @@ var _merge = function _merge() {
 
         return targetValue;
       } else {
-        if ((0, _isType.isUndefined)(sourceValue)) {
-          (0, _setProperty2._setProperty)(source, propPath, targetValue);
-        } else if ((0, _isType.isUndefined)(targetValue)) {// no set value
+        if ((0, _isType.isUndefined)(func)) {
+          if (!(0, _isType.isUndefined)(targetValue)) {
+            (0, _setProperty2._setProperty)(source, propPath, targetValue);
+          }
         } else {
           var setValue = func(sourceValue, targetValue, key, level, path, source, targetIndex, targetArray);
-          (0, _setProperty2._setProperty)(source, propPath, setValue);
+
+          if (!(0, _isType.isUndefined)(setValue)) {
+            (0, _setProperty2._setProperty)(source, propPath, setValue);
+          }
         }
       }
     });
@@ -4752,6 +4758,31 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports.__returnSecondArgFunc = void 0;
+
+/**
+ * returnSecondArgFunc
+ */
+var __returnSecondArgFunc = function __returnSecondArgFunc(_, v) {
+  return v;
+};
+
+exports.__returnSecondArgFunc = __returnSecondArgFunc;
+var _default = {
+  __returnSecondArgFunc: __returnSecondArgFunc
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.merge = void 0;
 
 var _isType = __webpack_require__(11);
@@ -4760,7 +4791,7 @@ var _isTypeArray = __webpack_require__(23);
 
 var _isObjectParameter = __webpack_require__(15);
 
-var _returnValueFunction = __webpack_require__(27);
+var _returnFirstArgFunc = __webpack_require__(27);
 
 var _merge2 = __webpack_require__(113);
 
@@ -4808,7 +4839,6 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 115 */,
 /* 116 */,
 /* 117 */,
 /* 118 */,
@@ -4832,7 +4862,8 @@ exports["default"] = _default;
 /* 136 */,
 /* 137 */,
 /* 138 */,
-/* 139 */
+/* 139 */,
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4847,43 +4878,43 @@ var _or2 = _interopRequireDefault(__webpack_require__(95));
 
 var _match2 = _interopRequireDefault(__webpack_require__(82));
 
-var _matchValue2 = _interopRequireDefault(__webpack_require__(140));
+var _matchValue2 = _interopRequireDefault(__webpack_require__(141));
 
-var _initialValue2 = _interopRequireDefault(__webpack_require__(141));
+var _initialValue2 = _interopRequireDefault(__webpack_require__(142));
 
-var _indexOfMatch2 = _interopRequireDefault(__webpack_require__(144));
+var _indexOfMatch2 = _interopRequireDefault(__webpack_require__(145));
 
-var _allMatch2 = _interopRequireDefault(__webpack_require__(145));
+var _allMatch2 = _interopRequireDefault(__webpack_require__(146));
 
-var _someMatch2 = _interopRequireDefault(__webpack_require__(146));
+var _someMatch2 = _interopRequireDefault(__webpack_require__(147));
 
-var _matchSome2 = _interopRequireDefault(__webpack_require__(143));
+var _matchSome2 = _interopRequireDefault(__webpack_require__(144));
 
-var _matchSomeValue2 = _interopRequireDefault(__webpack_require__(142));
+var _matchSomeValue2 = _interopRequireDefault(__webpack_require__(143));
 
-var _indexOfMatchSome2 = _interopRequireDefault(__webpack_require__(147));
+var _indexOfMatchSome2 = _interopRequireDefault(__webpack_require__(148));
 
-var _allMatchSome2 = _interopRequireDefault(__webpack_require__(148));
+var _allMatchSome2 = _interopRequireDefault(__webpack_require__(149));
 
-var _someMatchSome2 = _interopRequireDefault(__webpack_require__(149));
+var _someMatchSome2 = _interopRequireDefault(__webpack_require__(150));
 
 var _matchAll2 = _interopRequireDefault(__webpack_require__(81));
 
-var _matchAllValue2 = _interopRequireDefault(__webpack_require__(150));
+var _matchAllValue2 = _interopRequireDefault(__webpack_require__(151));
 
-var _indexOfMatchAll2 = _interopRequireDefault(__webpack_require__(151));
+var _indexOfMatchAll2 = _interopRequireDefault(__webpack_require__(152));
 
 var _allMatchAll2 = _interopRequireDefault(__webpack_require__(80));
 
-var _someMatchAll2 = _interopRequireDefault(__webpack_require__(152));
+var _someMatchAll2 = _interopRequireDefault(__webpack_require__(153));
 
-var _includes2 = _interopRequireDefault(__webpack_require__(153));
+var _includes2 = _interopRequireDefault(__webpack_require__(154));
 
-var _includes_common = _interopRequireDefault(__webpack_require__(154));
+var _includes_common = _interopRequireDefault(__webpack_require__(155));
 
-var _equal2 = _interopRequireDefault(__webpack_require__(155));
+var _equal2 = _interopRequireDefault(__webpack_require__(156));
 
-var _equalDeep2 = _interopRequireDefault(__webpack_require__(156));
+var _equalDeep2 = _interopRequireDefault(__webpack_require__(157));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -5032,7 +5063,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5109,7 +5140,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5124,7 +5155,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(15);
 
-var _matchSomeValue2 = __webpack_require__(142);
+var _matchSomeValue2 = __webpack_require__(143);
 
 /**
  * initialValue
@@ -5170,7 +5201,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5185,7 +5216,7 @@ var _type = __webpack_require__(5);
 
 var _isObjectParameter = __webpack_require__(15);
 
-var _matchSome2 = __webpack_require__(143);
+var _matchSome2 = __webpack_require__(144);
 
 /**
  * matchSomeValue
@@ -5251,7 +5282,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5306,7 +5337,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5361,7 +5392,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5416,7 +5447,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5427,7 +5458,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatch = exports._someMatch = void 0;
 
-var _indexOfMatch2 = __webpack_require__(144);
+var _indexOfMatch2 = __webpack_require__(145);
 
 /**
  * someMatch
@@ -5450,7 +5481,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5467,7 +5498,7 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _array_common = __webpack_require__(43);
 
-var _matchSome2 = __webpack_require__(143);
+var _matchSome2 = __webpack_require__(144);
 
 /**
  * indexOfMatchSome
@@ -5509,7 +5540,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5526,7 +5557,7 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _array_common = __webpack_require__(43);
 
-var _matchSome2 = __webpack_require__(143);
+var _matchSome2 = __webpack_require__(144);
 
 /**
  * allMatchSome
@@ -5568,7 +5599,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5579,7 +5610,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchSome = exports._someMatchSome = void 0;
 
-var _indexOfMatchSome2 = __webpack_require__(147);
+var _indexOfMatchSome2 = __webpack_require__(148);
 
 /**
  * someMatchSome
@@ -5602,7 +5633,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5683,7 +5714,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5742,7 +5773,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5753,7 +5784,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.someMatchAll = exports._someMatchAll = void 0;
 
-var _indexOfMatchAll2 = __webpack_require__(151);
+var _indexOfMatchAll2 = __webpack_require__(152);
 
 /**
  * someMatchAll
@@ -5776,7 +5807,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5843,7 +5874,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5862,7 +5893,7 @@ var _array_common = __webpack_require__(43);
 
 var _match2 = __webpack_require__(82);
 
-var _includes2 = __webpack_require__(153);
+var _includes2 = __webpack_require__(154);
 
 /**
  * includesSome
@@ -5927,7 +5958,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6295,7 +6326,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6310,7 +6341,7 @@ var _type = __webpack_require__(5);
 
 var _object = __webpack_require__(31);
 
-var _equal = __webpack_require__(155);
+var _equal = __webpack_require__(156);
 
 /**
  * equalDeep
@@ -6382,7 +6413,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6395,11 +6426,11 @@ exports["default"] = exports.valueToIntegerDefault = exports.valueToInteger = ex
 
 var _type = __webpack_require__(5);
 
-var _matchValue2 = __webpack_require__(140);
+var _matchValue2 = __webpack_require__(141);
 
-var _initialValue2 = __webpack_require__(141);
+var _initialValue2 = __webpack_require__(142);
 
-var _string = __webpack_require__(117);
+var _string = __webpack_require__(118);
 
 var _isObjectParameter = __webpack_require__(15);
 
@@ -6746,7 +6777,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6757,7 +6788,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = void 0;
 
-var _convert = __webpack_require__(157);
+var _convert = __webpack_require__(158);
 
 var numToString = _convert.numberToString;
 exports.numToString = numToString;
@@ -6824,7 +6855,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6835,13 +6866,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.DateTime = exports.isInvalidDate = exports.Today = exports._DateTime = void 0;
 
-var _Today = _interopRequireDefault(__webpack_require__(160));
+var _Today = _interopRequireDefault(__webpack_require__(161));
 
-var _isInvalidDate = _interopRequireDefault(__webpack_require__(161));
+var _isInvalidDate = _interopRequireDefault(__webpack_require__(162));
 
-var _DateTime2 = _interopRequireDefault(__webpack_require__(162));
+var _DateTime2 = _interopRequireDefault(__webpack_require__(163));
 
-var _DateTime3 = _interopRequireDefault(__webpack_require__(163));
+var _DateTime3 = _interopRequireDefault(__webpack_require__(164));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -6870,7 +6901,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6892,7 +6923,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6920,7 +6951,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6980,7 +7011,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6997,7 +7028,7 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _number = __webpack_require__(42);
 
-var _DateTime2 = __webpack_require__(162);
+var _DateTime2 = __webpack_require__(163);
 
 /* eslint-disable max-len */
 

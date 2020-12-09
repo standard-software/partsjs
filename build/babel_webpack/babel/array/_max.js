@@ -7,7 +7,7 @@ exports["default"] = exports._max = void 0;
 
 var _isType = require("../type/isType.js");
 
-var _returnValueFunction = require("../common/__returnValueFunction.js");
+var _returnFirstArgFunc = require("../common/__returnFirstArgFunc.js");
 
 var _max2 = require("../array/__max.js");
 
@@ -15,10 +15,10 @@ var _max2 = require("../array/__max.js");
  * array.max
  */
 var _max = function _max(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === _returnValueFunction.__returnValueFunction && detail === false) {
+  if (func === _returnFirstArgFunc.__returnFirstArgFunc && detail === false) {
     return (0, _max2.__max)(array);
   }
 

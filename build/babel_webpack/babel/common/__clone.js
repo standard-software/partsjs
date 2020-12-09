@@ -7,7 +7,7 @@ exports["default"] = exports.__clone = void 0;
 
 var _isType = require("../type/isType.js");
 
-var _returnValueFunction = require("../common/__returnValueFunction.js");
+var _returnFirstArgFunc = require("../common/__returnFirstArgFunc.js");
 
 /**
  * clone

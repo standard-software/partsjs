@@ -1544,8 +1544,21 @@ var test_execute_common = function test_execute_common(parts) {
           key2: 350,
           key3: 600,
           key4: 100
-        }, merge({}, testObjectArray, function (source, target) {
+        }, merge({
+          key1: 0,
+          key2: 0,
+          key3: 0,
+          key4: 0
+        }, testObjectArray, function (source, target) {
           return source + target;
+        }));
+        checkEqual({
+          key1: 300,
+          key2: 350,
+          key3: 600,
+          key4: 100
+        }, merge({}, testObjectArray, function (source, target) {
+          return isUndefined(source) ? target : source + target;
         }));
         checkEqual({
           key1: [3, 300],
@@ -1559,6 +1572,14 @@ var test_execute_common = function test_execute_common(parts) {
           key4: [0, 0]
         }, testObjectArray, function (source, target) {
           return [source[0] + 1, source[1] + target];
+        }));
+        checkEqual({
+          key1: [3, 300],
+          key2: [2, 350],
+          key3: [3, 600],
+          key4: [1, 100]
+        }, merge({}, testObjectArray, function (source, target) {
+          return isUndefined(source) ? [1, target] : [source[0] + 1, source[1] + target];
         }));
         checkEqual({
           key1: 100,
@@ -1607,10 +1628,25 @@ var test_execute_common = function test_execute_common(parts) {
         var testArrayArray = [[100, 200, 300], [100, 150, 100], [100,, 200, 100]];
         checkEqual([100, 150, 200, 100], merge([], testArrayArray));
         checkEqual([300, 350, 600, 100], merge([], testArrayArray, function (source, target) {
-          return source + target;
+          if (isUndefined(target)) {
+            return;
+          }
+
+          return isUndefined(source) ? target : source + target;
         }));
         checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge([[0, 0], [0, 0], [0, 0], [0, 0]], testArrayArray, function (source, target) {
+          if (isUndefined(target)) {
+            return;
+          }
+
           return [source[0] + 1, source[1] + target];
+        }));
+        checkEqual([[3, 300], [2, 350], [3, 600], [1, 100]], merge([], testArrayArray, function (source, target) {
+          if (isUndefined(target)) {
+            return;
+          }
+
+          return isUndefined(source) ? [1, target] : [source[0] + 1, source[1] + target];
         })); // object parameter
 
         checkEqual({
@@ -1673,7 +1709,7 @@ var test_execute_common = function test_execute_common(parts) {
           key3: 0,
           key4: 0
         }], function (source, target) {
-          return source + target;
+          return target;
         }));
         checkEqual(false, isThrown(function () {
           merge({}, [{
@@ -1682,12 +1718,12 @@ var test_execute_common = function test_execute_common(parts) {
             key3: 0,
             key4: 0
           }], function (source, target) {
-            return source + target;
+            return target;
           });
         }));
         checkEqual(true, isThrown(function () {
           merge({}, ['123'], function (source, target) {
-            return source + target;
+            return target;
           });
         }));
         checkEqual(true, isThrown(function () {
@@ -1705,7 +1741,7 @@ var test_execute_common = function test_execute_common(parts) {
             key3: 0,
             key4: 0
           }], function (source, target) {
-            return source + target;
+            return target;
           });
         }));
       });

@@ -7,7 +7,7 @@ exports["default"] = exports._unique = void 0;
 
 var _includes = require("../compare/__includes.js");
 
-var _returnValueFunction = require("../common/__returnValueFunction.js");
+var _returnFirstArgFunc = require("../common/__returnFirstArgFunc.js");
 
 var _unique2 = require("../array/__unique.js");
 
@@ -15,10 +15,10 @@ var _unique2 = require("../array/__unique.js");
  * uniqe
  */
 var _unique = function _unique(array) {
-  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnValueFunction.__returnValueFunction;
+  var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _returnFirstArgFunc.__returnFirstArgFunc;
   var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  if (func === _returnValueFunction.__returnValueFunction) {
+  if (func === _returnFirstArgFunc.__returnFirstArgFunc) {
     if (detail === false) {
       return (0, _unique2.__unique)(array);
     }
