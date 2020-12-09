@@ -10,22 +10,17 @@ import {
   isEmptyObject, isEmptyArray,
 } from '../type/isType.js';
 
-import {
-  isObjectArray,
-  isArrayArray,
-} from '../type/isTypeArray.js';
-
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import { __returnValueFunction } from './__returnValueFunction.js';
+import { isObjectArray, isArrayArray } from '../type/isTypeArray.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { __returnFirstArgFunc } from './__returnFirstArgFunc.js';
 import { _merge } from '../common/_merge.js';
 
 /**
  * merge
  */
-export const merge = (source, targetArray, func) => {
+export const merge = (
+  source, targetArray, func,
+) => {
   if (isObjectParameter(source, 'source, targetArray', 'func')) {
     ({ source, targetArray, func } = source);
   } else if (isObjectParameter(targetArray, 'targetArray', 'func')) {

@@ -6,17 +6,17 @@ import {
 } from '../type/type.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { __includes } from '../compare/__includes.js';
-import { __returnValueFunction } from '../common/__returnValueFunction.js';
+import { __returnFirstArgFunc } from '../common/__returnFirstArgFunc.js';
 import { _unique } from '../array/_unique.js';
 
 /**
  * uniqe
  */
-export const unique = (array, func = __returnValueFunction, detail = false) => {
+export const unique = (array, func = __returnFirstArgFunc, detail = false) => {
   if (isObjectParameter(array, 'array', 'func, detail')) {
-    ({ array, func = __returnValueFunction, detail = false } = array);
+    ({ array, func = __returnFirstArgFunc, detail = false } = array);
   } else if (isObjectParameter(func, '', 'func, detail')) {
-    ({ func = __returnValueFunction, detail = false } = func);
+    ({ func = __returnFirstArgFunc, detail = false } = func);
   } else if (isObjectParameter(detail, 'detail')) {
     ({ detail } = detail);
   }

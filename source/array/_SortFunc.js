@@ -1,5 +1,5 @@
 import { _map } from '../array/_map.js';
-import { __returnValueFunction } from '../common/__returnValueFunction.js';
+import { __returnFirstArgFunc } from '../common/__returnFirstArgFunc.js';
 import { __SortFuncOrder } from '../array/__SortFuncOrder.js';
 
 /**
@@ -7,7 +7,7 @@ import { __SortFuncOrder } from '../array/__SortFuncOrder.js';
  */
 export const _SortFunc = (orderSettingArray) => {
   const sortFuncArray = _map(orderSettingArray,
-    ([orderFunc, valueFunc = __returnValueFunction]) => {
+    ([orderFunc, valueFunc = __returnFirstArgFunc]) => {
       return (a, b) => orderFunc(valueFunc(a), valueFunc(b));
     },
   );

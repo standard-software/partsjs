@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.3.0
-#### 2020/12/08(Tue)
+#### 2020/12/09(Wed)
 - add isPrimitiveType / isReferenceType
   - add isPrimitiveType.js / isReferenceType.js
 - update setProperty
@@ -344,6 +344,9 @@ You can now use the functions of the parts.js object.
 - update testcode bigint etc
 - update merge
   - support deep merge
+  - update testcode
+- rename __returnValueFunction >> __returnFirstArgFunc
+  - add __returnSecondArgFunc
 
 ### 10.2.0
 #### 2020/12/02(Wed)

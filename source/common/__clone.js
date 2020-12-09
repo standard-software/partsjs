@@ -1,5 +1,5 @@
 import { isObject, isArray } from '../type/isType.js';
-import { __returnValueFunction } from '../common/__returnValueFunction.js';
+import { __returnFirstArgFunc } from '../common/__returnFirstArgFunc.js';
 
 /**
  * clone

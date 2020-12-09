@@ -1,14 +1,14 @@
 import { isNumber } from '../type/isType.js';
-import { __returnValueFunction } from '../common/__returnValueFunction.js';
+import { __returnFirstArgFunc } from '../common/__returnFirstArgFunc.js';
 import { __min } from '../array/__min.js';
 
 /**
  * array.min
  */
 export const _min = (
-  array, func = __returnValueFunction, detail = false,
+  array, func = __returnFirstArgFunc, detail = false,
 ) => {
-  if (func === __returnValueFunction && detail === false) {
+  if (func === __returnFirstArgFunc && detail === false) {
     return __min(array);
   }
 

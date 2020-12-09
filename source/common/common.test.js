@@ -1524,9 +1524,17 @@ export const test_execute_common = (parts) => {
         checkEqual(
           { key1: 300, key2: 350, key3: 600, key4: 100 },
           merge(
-            {},
+            { key1: 0, key2: 0, key3: 0, key4: 0 },
             testObjectArray,
             (source, target) => source + target,
+          ),
+        );
+        checkEqual(
+          { key1: 300, key2: 350, key3: 600, key4: 100 },
+          merge(
+            {},
+            testObjectArray,
+            (source, target) => isUndefined(source) ? target : source + target,
           ),
         );
         checkEqual(
@@ -1535,6 +1543,16 @@ export const test_execute_common = (parts) => {
             { key1: [0, 0],  key2: [0, 0],  key3: [0, 0], key4: [0, 0] },
             testObjectArray,
             (source, target) => [source[0] + 1, source[1] + target],
+          ),
+        );
+        checkEqual(
+          { key1: [3, 300], key2: [2, 350], key3: [3, 600], key4: [1, 100] },
+          merge(
+            {},
+            testObjectArray,
+            (source, target) => isUndefined(source)
+              ? [1, target]
+              : [source[0] + 1, source[1] + target],
           ),
         );
         checkEqual(
@@ -1579,7 +1597,10 @@ export const test_execute_common = (parts) => {
           merge(
             [],
             testArrayArray,
-            (source, target) => source + target,
+            (source, target) => {
+              if (isUndefined(target)) { return; }
+              return isUndefined(source) ? target : source + target;
+            },
           ),
         );
         checkEqual(
@@ -1587,8 +1608,23 @@ export const test_execute_common = (parts) => {
           merge(
             [[0, 0], [0, 0], [0, 0], [0, 0]],
             testArrayArray,
-            (source, target) => [source[0] + 1, source[1] + target],
+            (source, target) => {
+              if (isUndefined(target)) { return; }
+              return [source[0] + 1, source[1] + target];
+            },
           ),
+        );
+        checkEqual(
+          [[3, 300], [2, 350], [3, 600], [1, 100]],
+          merge(
+            [],
+            testArrayArray,
+            (source, target) => {
+              if (isUndefined(target)) { return; }
+              return isUndefined(source)
+                ? [1, target]
+                : [source[0] + 1, source[1] + target];
+            }),
         );
 
         // object parameter
@@ -1628,21 +1664,21 @@ export const test_execute_common = (parts) => {
           merge(
             {},
             [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-            (source, target) => source + target,
+            (source, target) => target,
           ),
         );
         checkEqual(false, isThrown(() => {
           merge(
             {},
             [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-            (source, target) => source + target,
+            (source, target) => target,
           );
         }));
         checkEqual(true, isThrown(() => {
           merge(
             {},
             ['123'],
-            (source, target) => source + target,
+            (source, target) => target,
           );
         }));
         checkEqual(true, isThrown(() => {
@@ -1656,7 +1692,7 @@ export const test_execute_common = (parts) => {
           merge(
             123,
             [{ key1: 0, key2: 0, key3: 0, key4: 0 }],
-            (source, target) => source + target,
+            (source, target) => target,
           );
         }));
 

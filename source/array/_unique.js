@@ -1,14 +1,14 @@
 import { __includes } from '../compare/__includes.js';
-import { __returnValueFunction } from '../common/__returnValueFunction.js';
+import { __returnFirstArgFunc } from '../common/__returnFirstArgFunc.js';
 import { __unique } from '../array/__unique.js';
 
 /**
  * uniqe
  */
 export const _unique = (
-  array, func = __returnValueFunction, detail = false,
+  array, func = __returnFirstArgFunc, detail = false,
 ) => {
-  if (func === __returnValueFunction) {
+  if (func === __returnFirstArgFunc) {
     if (detail === false) {
       return __unique(array);
     }

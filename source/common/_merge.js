@@ -1,14 +1,16 @@
 import { isUndefined, isObject, isArray } from '../type/isType.js';
+import { isNotUndefinedAll } from '../type/isTypeAll.js';
 import { __loop } from '../syntax/__loop.js';
 import { _recursive } from '../syntax/_recursive.js';
 import { _getProperty } from '../object/_getProperty.js';
 import { _setProperty } from '../object/_setProperty.js';
+import { __returnSecondArgFunc } from './__returnSecondArgFunc.js';
 
 /**
  * merge
  */
 export const _merge = (
-  source = {}, targetArray, func = (_, v) => v,
+  source = {}, targetArray, func,
 ) => {
   __loop(targetArray)((target, targetIndex) => {
     _recursive(target,
@@ -26,16 +28,18 @@ export const _merge = (
           }
           return targetValue;
         } else {
-          if (isUndefined(sourceValue)) {
-            _setProperty(source, propPath, targetValue);
-          } else if (isUndefined(targetValue)) {
-            // no set value
+          if (isUndefined(func)) {
+            if (!isUndefined(targetValue)) {
+              _setProperty(source, propPath, targetValue);
+            }
           } else {
             const setValue = func(
               sourceValue, targetValue, key, level, path,
               source, targetIndex, targetArray,
             );
-            _setProperty(source, propPath, setValue);
+            if (!isUndefined(setValue)) {
+              _setProperty(source, propPath, setValue);
+            }
           }
         }
       },
@@ -44,6 +48,4 @@ export const _merge = (
   return source;
 };
 
-export default {
-  _merge,
-};
+export default { _merge };
