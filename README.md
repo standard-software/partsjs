@@ -39,7 +39,7 @@ Normal
     npm i @standard-software/parts
 
 When specifying the version
-    npm i @standard-software/parts@10.2.0
+    npm i @standard-software/parts@10.3.0
     npm i @standard-software/parts@9.2.0
 
 ### type CommonJS
@@ -87,7 +87,7 @@ console.log(
 ### web
 ```
 // index.js
-import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.2.0/source/index.js';
+import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.3.0/source/index.js';
 
 console.log(
   'parts version is ', parts.VERSION
@@ -130,7 +130,7 @@ You can now use the functions of the parts.js object.
   <meta charset="UTF-8">
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.3.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>

@@ -2,6 +2,29 @@
 
 ## Version
 
+### 10.3.0
+#### 2020/12/09(Wed)
+- add isPrimitiveType / isReferenceType
+  - add isPrimitiveType.js / isReferenceType.js
+- update setProperty
+  - support objectLike (array function etc)
+- update testCode 
+  - update equalDeepUseRecursive
+  - update cloneDeepUseRecursive
+- from getProperty.js
+  add _getProperty.js 
+- from object_common.js
+  - add _setProperty.js / setProperty.js
+  - add _copyProperty.js / copyProperty.js
+- update package.json scripts
+- update .eslintrc.js
+- update testcode bigint etc
+- update merge
+  - support deep merge
+  - update testcode
+- rename __returnValueFunction >> __returnFirstArgFunc
+  - add __returnSecondArgFunc
+
 ### 10.2.0
 #### 2020/12/02(Wed)
 - update _unique
