@@ -12,7 +12,7 @@ export const test_execute_string = (parts) => {
     } = parts.test;
 
     const {
-      matchFormat, replaceAll,
+      matchFormat, replaceAll, replaceAllRepeat, replaceAllArray,
       indexOfFirst, indexOfLast,
       isFirst, isLast, isBothEnds,
       includeFirst, includeLast, includeBothEnds,
@@ -30,7 +30,6 @@ export const test_execute_string = (parts) => {
       split, splitCommaItems, splitDotItems,
 
       indexOfAnyFirst, indexOfAnyLast,
-      replaceAllArray,
 
       paddingFirst, paddingLast,
     } = parts.string;
@@ -134,19 +133,79 @@ export const test_execute_string = (parts) => {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
         checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));
+        checkEqual('acccb', replaceAll('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAll('abc', 'b', ''));
 
         // Object Named Parameter
-        checkEqual('abcabc',  replaceAll({
+        checkEqual('aaaa',  replaceAll({
           str:    'abab',
-          before: 'ab',
-          after:  'abc',
+          before: 'b',
+          after:  'a',
         }));
+        checkEqual('aaaa',  replaceAll(
+          'abab',
+          {
+            before: 'b',
+            after:  'a',
+          },
+        ));
+        checkEqual('aaaa',  replaceAll(
+          'abab',
+          'b',
+          {
+            after:  'a',
+          },
+        ));
 
         // exception
+        checkEqual(false, isThrown(() => { replaceAllRepeat('1212', '2', '3'); }));
         checkEqual(false, isThrown(() => { replaceAll('1212', '12', '123'); }));
         checkEqual(true,  isThrown(() => { replaceAll( 1212,  '12', '123'); }));
         checkEqual(true,  isThrown(() => { replaceAll('1212',  12,  '123'); }));
         checkEqual(true,  isThrown(() => { replaceAll('1212', '12',  123 ); }));
+        checkEqual(true, isThrown(() => { replaceAll('abc', '', 'c'); }));
+        checkEqual(true, isThrown(() => { replaceAll('', 'a', 'c'); }));
+
+      });
+    };
+
+    const test_replaceAllRepeat = () => {
+      it('test_replaceAllRepeat', () => {
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', 'a'));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'ab', 'aa'));
+        checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAllRepeat('abc', 'b', ''));
+
+        // Object Named Parameter
+        checkEqual('aaaa',  replaceAllRepeat({
+          str:    'abab',
+          before: 'b',
+          after:  'a',
+        }));
+        checkEqual('aaaa',  replaceAllRepeat(
+          'abab',
+          {
+            before: 'b',
+            after:  'a',
+          },
+        ));
+        checkEqual('aaaa',  replaceAllRepeat(
+          'abab',
+          'b',
+          {
+            after:  'a',
+          },
+        ));
+
+        // exception
+        checkEqual(false, isThrown(() => { replaceAllRepeat('1212', '2', '3'); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat('1212', '12', '123'); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat( 1212,  '12', '123'); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat('1212',  12,  '123'); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat('1212', '12',  123 ); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat('abc', '', 'c'); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat('', 'a', 'c'); }));
+        checkEqual(true,  isThrown(() => { replaceAllRepeat('abab', 'ab', 'abc'); }));
 
       });
     };
@@ -2018,6 +2077,7 @@ export const test_execute_string = (parts) => {
 
     test_matchFormat();
     test_replaceAll();
+    test_replaceAllRepeat();
     test_replaceAllArray();
 
     test_indexOf_standard();

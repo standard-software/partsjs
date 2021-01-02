@@ -50,7 +50,7 @@ export const test_execute_index = (parts) => {
           return result;
         };
 
-        checkEqual(396, propertyCountForParts(parts));
+        checkEqual(398, propertyCountForParts(parts));
         checkEqual(17,  propertyCount(parts.platform));
         checkEqual(7,   propertyCount(parts.common));
         checkEqual(262, propertyCount(parts.type));
@@ -59,7 +59,7 @@ export const test_execute_index = (parts) => {
         checkEqual(44,  propertyCount(parts.compare));
         checkEqual(35,  propertyCount(parts.convert));
         checkEqual(15,  propertyCount(parts.number));
-        checkEqual(90,  propertyCount(parts.string));
+        checkEqual(92,  propertyCount(parts.string));
         checkEqual(40,  propertyCount(parts.object));
         checkEqual(68,  propertyCount(parts.array));
         checkEqual(48,  propertyCount(parts.array.operation));

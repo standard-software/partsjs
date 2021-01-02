@@ -15,7 +15,7 @@ import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
 import systemJs from './system/system.js';
 
-export const VERSION = '10.3.0';
+export const VERSION = '10.4.0 beta';
 
 let rootAlias = {};
 const propertyNames = {};
@@ -384,7 +384,7 @@ export const number = {
  */
 export const {
   isLowerCase, isUpperCase,
-  replaceAll,
+  replaceAll, replaceAllRepeat, replaceAllArray,
   matchFormat,
   split,
   splitCommaItems,
@@ -393,7 +393,7 @@ export const {
 
 rootAlias = { ...rootAlias,
   isLowerCase, isUpperCase,
-  replaceAll,
+  replaceAll, replaceAllRepeat, replaceAllArray,
   matchFormat,
   split,
   splitCommaItems,

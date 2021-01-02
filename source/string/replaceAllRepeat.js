@@ -6,12 +6,13 @@ import {
 } from '../type/type.js';
 
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { _replaceAll } from '../string/_replaceAll.js';
+import { __includes } from '../compare/__includes.js';
+import { _replaceAllRepeat } from '../string/_replaceAllRepeat.js';
 
 /**
- * replaceAll
+ * replaceAllRepeat
  */
-export const replaceAll = (str, before, after) => {
+export const replaceAllRepeat = (str, before, after) => {
   if (isObjectParameter(str, 'str, before, after')) {
     ({ str, before, after } = str);
   } else if (isObjectParameter(before, 'before, after')) {
@@ -22,33 +23,38 @@ export const replaceAll = (str, before, after) => {
 
   if (!isString(str)) {
     throw new TypeError(
-      `replaceAll args(str:${str}) is not string`,
+      `replaceAllRepeat args(str:${str}) is not string`,
     );
   }
   if (str === '') {
     throw new TypeError(
-      `replaceAll args(str) is empty string`,
+      'replaceAllRepeat args(str) is empty string',
     );
   }
   if (!isString(before)) {
     throw new TypeError(
-      `replaceAll args(before:${before}) is not string`,
+      `replaceAllRepeat args(before:${before}) is not string`,
     );
   }
   if (before === '') {
     throw new TypeError(
-      `replaceAll args(before) is empty string`,
+      'replaceAllRepeat args(before) is empty string',
     );
   }
   if (!isString(after)) {
     throw new TypeError(
-      `replaceAll args(after:${after}) is not string`,
+      `replaceAllRepeat args(after:${after}) is not string`,
+    );
+  }
+  if (__includes(after, before)) {
+    throw new TypeError(
+      'replaceAllRepeat args(before) is includes args(after)',
     );
   }
 
-  return _replaceAll(str, before, after);
+  return _replaceAllRepeat(str, before, after);
 };
 
 export default {
-  replaceAll,
+  replaceAllRepeat,
 };

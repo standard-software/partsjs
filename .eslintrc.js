@@ -58,7 +58,9 @@ module.exports = {
     'key-spacing':          ['off'],
     'guard-for-in':         ['off'],
     'max-len':              ['error', { 'code': 90 }],
-    'quotes':               ['warn', 'single', { 'avoidEscape': true }],
+    'quotes':               ['warn', 'single', {
+      'avoidEscape': true, 'allowTemplateLiterals': true,
+    }],
     'new-cap':              ['off'],
     'no-var':               ['off'],
     'comma-dangle':         ['warn', 'always-multiline'],

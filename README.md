@@ -325,6 +325,13 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 0.4.0
+#### 2020/12/26(Sat)
+- update replaceAll
+  - support full object parameter
+- add replaceAllRepeat
+  - add _replaceAllRepeat.js replaceAllRepeat.js
+
 ### 10.3.0
 #### 2020/12/09(Wed)
 - add isPrimitiveType / isReferenceType

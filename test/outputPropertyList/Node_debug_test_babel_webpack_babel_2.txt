@@ -617,6 +617,8 @@
 .randomInt:[object Function]:function
 .recursive:[object Function]:function
 .replaceAll:[object Function]:function
+.replaceAllArray:[object Function]:function
+.replaceAllRepeat:[object Function]:function
 .round:[object Function]:function
 .sc:[object Function]:function
 .setProp:[object Function]:function
@@ -654,6 +656,7 @@
 .string._repeat:[object Function]:function
 .string._replaceAll:[object Function]:function
 .string._replaceAllArray:[object Function]:function
+.string._replaceAllRepeat:[object Function]:function
 .string._split:[object Function]:function
 .string._splitCommaItems:[object Function]:function
 .string._splitDotItems:[object Function]:function
@@ -699,6 +702,7 @@
 .string.repeat:[object Function]:function
 .string.replaceAll:[object Function]:function
 .string.replaceAllArray:[object Function]:function
+.string.replaceAllRepeat:[object Function]:function
 .string.split:[object Function]:function
 .string.splitCommaItems:[object Function]:function
 .string.splitDotItems:[object Function]:function
