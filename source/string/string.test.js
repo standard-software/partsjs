@@ -14,6 +14,7 @@ export const test_execute_string = (parts) => {
     const {
       matchFormat, replaceAll, replaceAllRepeat, replaceAllArray,
       indexOfFirst, indexOfLast,
+      includeCount,
       isFirst, isLast, isBothEnds,
       includeFirst, includeLast, includeBothEnds,
       excludeFirst, excludeLast, excludeBothEnds,
@@ -2074,6 +2075,14 @@ export const test_execute_string = (parts) => {
 
       });
     };
+    const test_includeCount = () => {
+      it('test_includeCount', () => {
+        checkEqual(0,   includeCount('a', ''));
+        checkEqual(3,   includeCount('aaa', 'a'));
+        checkEqual(1,   includeCount('aaa', 'aa'));
+        checkEqual(2,   includeCount('aaaa', 'aa'));
+      });
+    };
 
     test_matchFormat();
     test_replaceAll();
@@ -2133,6 +2142,8 @@ export const test_execute_string = (parts) => {
 
     test_paddingFirst();
     test_paddingLast();
+
+    test_includeCount();
   });
 };
 

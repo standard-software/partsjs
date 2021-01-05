@@ -7,6 +7,8 @@ import _indexOfAnyFirstJs from './_indexOfAnyFirst.js';
 import indexOfAnyFirstJs from './indexOfAnyFirst.js';
 import _indexOfAnyLastJs from './_indexOfAnyLast.js';
 import indexOfAnyLastJs from './indexOfAnyLast.js';
+import _includeCountJs from './_includeCount.js';
+import includeCountJs from './includeCount.js';
 import _replaceAllJs from './_replaceAll.js';
 import replaceAllJs from './replaceAll.js';
 import _replaceAllRepeatJs from './_replaceAllRepeat.js';
@@ -41,6 +43,8 @@ const stringJs = {
   ...indexOfAnyFirstJs,
   ..._indexOfAnyLastJs,
   ...indexOfAnyLastJs,
+  ..._includeCountJs,
+  ...includeCountJs,
   ..._replaceAllJs,
   ...replaceAllJs,
   ..._replaceAllRepeatJs,
@@ -71,6 +75,7 @@ export const {
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
   _indexOfAnyFirst, _indexOfAnyLast,
+  _includeCount,
   _isFirst, _isLast, _isBothEnds,
   _includeFirst, _includeLast, _includeBothEnds,
   _excludeFirst, _excludeLast, _excludeBothEnds,
@@ -101,6 +106,7 @@ export const {
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
   indexOfAnyFirst, indexOfAnyLast,
+  includeCount,
   isFirst, isLast, isBothEnds,
   includeFirst, includeLast, includeBothEnds,
   excludeFirst, excludeLast, excludeBothEnds,
@@ -131,6 +137,7 @@ export default {
   _isLowerCase, _isUpperCase,
   _indexOfFirst, _indexOfLast,
   _indexOfAnyFirst, _indexOfAnyLast,
+  _includeCount,
   _isFirst, _isLast, _isBothEnds,
   _includeFirst, _includeLast, _includeBothEnds,
   _excludeFirst, _excludeLast, _excludeBothEnds,
@@ -159,6 +166,7 @@ export default {
   isLowerCase, isUpperCase,
   indexOfFirst, indexOfLast,
   indexOfAnyFirst, indexOfAnyLast,
+  includeCount,
   isFirst, isLast, isBothEnds,
   includeFirst, includeLast, includeBothEnds,
   excludeFirst, excludeLast, excludeBothEnds,
