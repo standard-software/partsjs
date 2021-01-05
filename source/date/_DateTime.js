@@ -39,6 +39,4 @@ export const _DateTime = function(
   return self;
 };
 
-export default {
-  _DateTime,
-};
+export default { _DateTime };

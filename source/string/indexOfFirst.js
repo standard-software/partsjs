@@ -10,21 +10,10 @@ import {
   isEmptyObject, isEmptyArray,
 } from '../type/isType.js';
 
-import {
-  isObjectParameter,
-} from '../object/isObjectParameter.js';
-
-import {
-  _inRange,
-} from '../number/number.js';
-
-import {
-  _max,
-} from '../array/array.js';
-
-import {
-  _indexOfFirst,
-} from '../string/_indexOfFirst.js';
+import { isObjectParameter } from '../object/isObjectParameter.js';
+import { _inRange } from '../number/number.js';
+import { _max } from '../array/array.js';
+import { _indexOfFirst } from '../string/_indexOfFirst.js';
 
 /**
  * indexOfFirst

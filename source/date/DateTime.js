@@ -104,6 +104,4 @@ export const DateTime = function(
   );
 };
 
-export default {
-  DateTime,
-};
+export default { DateTime };
