@@ -12,6 +12,7 @@ export const test_execute_date = (parts) => {
     Today,
     isInvalidDate,
     DateTime,
+    datetimeToString,
   } = parts.date;
 
   const {
@@ -299,11 +300,111 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_datetimeToString = () => {
+      it('test_datetimeToString', () => {
+
+        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
+        checkEqual(
+          '2001/02/04 09:05:08.045',
+          datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'),
+        );
+        checkEqual(
+          '2001/02/04 09:05:08.04',
+          datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'),
+        );
+        checkEqual(
+          '2001/02/04 09:05:08.0',
+          datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'),
+        );
+        checkEqual(
+          '01/2/4 9:5:8 am',
+          datetimeToString(dt, 'YY/M/D H:m:s aa'),
+        );
+        checkEqual(
+          '01/2/4 9:5:8 a',
+          datetimeToString(dt, 'YY/M/D H:m:s a'),
+        );
+        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
+        checkEqual(
+          '01/2/4 16:5:8 PM',
+          datetimeToString(dt, 'YY/M/D H:m:s AA'),
+        );
+        checkEqual(
+          '01/2/4 16:5:8 P',
+          datetimeToString(dt, 'YY/M/D H:m:s A'),
+        );
+        checkEqual(
+          '01/2/4 16:5:8 Sun',
+          datetimeToString(dt, 'YY/M/D H:m:s DDD'),
+        );
+        checkEqual(
+          '01/2/4 16:5:8 Sunday',
+          datetimeToString(dt, 'YY/M/D H:m:s DDDD'),
+        );
+        checkEqual(
+          '01/2/4 16:5:8 Feb',
+          datetimeToString(dt, 'YY/M/D H:m:s MMM'),
+        );
+        checkEqual(
+          '01/2/4 16:5:8 Feb.',
+          datetimeToString(dt, 'YY/M/D H:m:s MMMM'),
+        );
+        checkEqual(
+          '01/2/4 16:5:8 February',
+          datetimeToString(dt, 'YY/M/D H:m:s MMMMM'),
+        );
+
+        // quote
+        var dt = DateTime(2021, 1, 6);
+        checkEqual(
+          'YYYYMMDD = 20210106',
+          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'),
+        );
+        checkEqual(
+          'YYYYMMDD = 20210106',
+          datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD"),
+        );
+
+        // timezone
+        const timezoneOffset = -1 * new Date().getTimezoneOffset();
+        const timezoneOffsetHour = (0 < timezoneOffset
+          ? '+' : ''
+        ) + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
+        const timezoneOffsetMin = parts.string.paddingFirst(
+          String(timezoneOffset % 60), 2, '0',
+        );
+
+        checkEqual(
+          timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ'),
+        );
+        // '+0900' etc
+
+        checkEqual(
+          timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z'),
+        );
+        // '+09:00' etc
+
+        // exception
+        // quote
+        var dt = DateTime(2021, 1, 6);
+        checkEqual(false, isThrown(() => {
+          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(() => {
+          datetimeToString(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+
+      });
+    };
+
+
     test_Today();
     test_isInvalidDate();
 
     test_Date_standard();
     test_DateTime();
+
+    test_datetimeToString();
 
   });
 };

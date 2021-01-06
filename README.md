@@ -326,13 +326,14 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 0.4.0
-#### 2021/01/05(Tue)
+#### 2021/01/06(Wed)
 - update replaceAll
   - support full object parameter
 - add replaceAllRepeat
   - add _replaceAllRepeat.js replaceAllRepeat.js
 - add string.includeCount
   - add _includeCount.js includeCount.js
+- add datetimeToString
 
 ### 10.3.0
 #### 2020/12/09(Wed)
