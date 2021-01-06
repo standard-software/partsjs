@@ -21,8 +21,11 @@ var test_execute_string = function test_execute_string(parts) {
     var _parts$string = parts.string,
         matchFormat = _parts$string.matchFormat,
         replaceAll = _parts$string.replaceAll,
+        replaceAllRepeat = _parts$string.replaceAllRepeat,
+        replaceAllArray = _parts$string.replaceAllArray,
         indexOfFirst = _parts$string.indexOfFirst,
         indexOfLast = _parts$string.indexOfLast,
+        includeCount = _parts$string.includeCount,
         isFirst = _parts$string.isFirst,
         isLast = _parts$string.isLast,
         isBothEnds = _parts$string.isBothEnds,
@@ -58,7 +61,6 @@ var test_execute_string = function test_execute_string(parts) {
         splitDotItems = _parts$string.splitDotItems,
         indexOfAnyFirst = _parts$string.indexOfAnyFirst,
         indexOfAnyLast = _parts$string.indexOfAnyLast,
-        replaceAllArray = _parts$string.replaceAllArray,
         paddingFirst = _parts$string.paddingFirst,
         paddingLast = _parts$string.paddingLast;
 
@@ -151,14 +153,26 @@ var test_execute_string = function test_execute_string(parts) {
       it('test_replaceAll', function () {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
-        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // Object Named Parameter
+        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));
+        checkEqual('acccb', replaceAll('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAll('abc', 'b', '')); // Object Named Parameter
 
-        checkEqual('abcabc', replaceAll({
+        checkEqual('aaaa', replaceAll({
           str: 'abab',
-          before: 'ab',
-          after: 'abc'
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAll('abab', {
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAll('abab', 'b', {
+          after: 'a'
         })); // exception
 
+        checkEqual(false, isThrown(function () {
+          replaceAllRepeat('1212', '2', '3');
+        }));
         checkEqual(false, isThrown(function () {
           replaceAll('1212', '12', '123');
         }));
@@ -170,6 +184,59 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           replaceAll('1212', '12', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAll('abc', '', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAll('', 'a', 'c');
+        }));
+      });
+    };
+
+    var test_replaceAllRepeat = function test_replaceAllRepeat() {
+      it('test_replaceAllRepeat', function () {
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', 'a'));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'ab', 'aa'));
+        checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAllRepeat('abc', 'b', '')); // Object Named Parameter
+
+        checkEqual('aaaa', replaceAllRepeat({
+          str: 'abab',
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAllRepeat('abab', {
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', {
+          after: 'a'
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          replaceAllRepeat('1212', '2', '3');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', '12', '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat(1212, '12', '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', 12, '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', '12', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('abc', '', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('', 'a', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('abab', 'ab', 'abc');
         }));
       });
     };
@@ -2137,8 +2204,18 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_includeCount = function test_includeCount() {
+      it('test_includeCount', function () {
+        checkEqual(0, includeCount('a', ''));
+        checkEqual(3, includeCount('aaa', 'a'));
+        checkEqual(1, includeCount('aaa', 'aa'));
+        checkEqual(2, includeCount('aaaa', 'aa'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
+    test_replaceAllRepeat();
     test_replaceAllArray();
     test_indexOf_standard();
     test_indexOfFirst();
@@ -2183,6 +2260,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_splitDotItems();
     test_paddingFirst();
     test_paddingLast();
+    test_includeCount();
   });
 };
 

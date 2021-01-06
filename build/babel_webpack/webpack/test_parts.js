@@ -183,7 +183,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        checkEqual(396, propertyCountForParts(parts));
+        checkEqual(399, propertyCountForParts(parts));
         checkEqual(17, propertyCount(parts.platform));
         checkEqual(7, propertyCount(parts.common));
         checkEqual(262, propertyCount(parts.type));
@@ -192,11 +192,11 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
         checkEqual(15, propertyCount(parts.number));
-        checkEqual(90, propertyCount(parts.string));
+        checkEqual(94, propertyCount(parts.string));
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
         checkEqual(48, propertyCount(parts.array.operation));
-        checkEqual(4, propertyCount(parts.date));
+        checkEqual(6, propertyCount(parts.date));
         checkEqual(2, propertyCount(parts.system));
         checkEqual(3, propertyCount(parts.system.wsh));
         checkEqual(20, propertyCount(parts.system.consoleHook));
@@ -11065,8 +11065,11 @@ var test_execute_string = function test_execute_string(parts) {
     var _parts$string = parts.string,
         matchFormat = _parts$string.matchFormat,
         replaceAll = _parts$string.replaceAll,
+        replaceAllRepeat = _parts$string.replaceAllRepeat,
+        replaceAllArray = _parts$string.replaceAllArray,
         indexOfFirst = _parts$string.indexOfFirst,
         indexOfLast = _parts$string.indexOfLast,
+        includeCount = _parts$string.includeCount,
         isFirst = _parts$string.isFirst,
         isLast = _parts$string.isLast,
         isBothEnds = _parts$string.isBothEnds,
@@ -11102,7 +11105,6 @@ var test_execute_string = function test_execute_string(parts) {
         splitDotItems = _parts$string.splitDotItems,
         indexOfAnyFirst = _parts$string.indexOfAnyFirst,
         indexOfAnyLast = _parts$string.indexOfAnyLast,
-        replaceAllArray = _parts$string.replaceAllArray,
         paddingFirst = _parts$string.paddingFirst,
         paddingLast = _parts$string.paddingLast;
 
@@ -11195,14 +11197,26 @@ var test_execute_string = function test_execute_string(parts) {
       it('test_replaceAll', function () {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
-        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // Object Named Parameter
+        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));
+        checkEqual('acccb', replaceAll('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAll('abc', 'b', '')); // Object Named Parameter
 
-        checkEqual('abcabc', replaceAll({
+        checkEqual('aaaa', replaceAll({
           str: 'abab',
-          before: 'ab',
-          after: 'abc'
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAll('abab', {
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAll('abab', 'b', {
+          after: 'a'
         })); // exception
 
+        checkEqual(false, isThrown(function () {
+          replaceAllRepeat('1212', '2', '3');
+        }));
         checkEqual(false, isThrown(function () {
           replaceAll('1212', '12', '123');
         }));
@@ -11214,6 +11228,59 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           replaceAll('1212', '12', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAll('abc', '', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAll('', 'a', 'c');
+        }));
+      });
+    };
+
+    var test_replaceAllRepeat = function test_replaceAllRepeat() {
+      it('test_replaceAllRepeat', function () {
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', 'a'));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'ab', 'aa'));
+        checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAllRepeat('abc', 'b', '')); // Object Named Parameter
+
+        checkEqual('aaaa', replaceAllRepeat({
+          str: 'abab',
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAllRepeat('abab', {
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', {
+          after: 'a'
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          replaceAllRepeat('1212', '2', '3');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', '12', '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat(1212, '12', '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', 12, '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', '12', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('abc', '', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('', 'a', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('abab', 'ab', 'abc');
         }));
       });
     };
@@ -13181,8 +13248,18 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_includeCount = function test_includeCount() {
+      it('test_includeCount', function () {
+        checkEqual(0, includeCount('a', ''));
+        checkEqual(3, includeCount('aaa', 'a'));
+        checkEqual(1, includeCount('aaa', 'aa'));
+        checkEqual(2, includeCount('aaaa', 'aa'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
+    test_replaceAllRepeat();
     test_replaceAllArray();
     test_indexOf_standard();
     test_indexOfFirst();
@@ -13227,6 +13304,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_splitDotItems();
     test_paddingFirst();
     test_paddingLast();
+    test_includeCount();
   });
 };
 
@@ -17284,7 +17362,8 @@ var test_execute_date = function test_execute_date(parts) {
   var _parts$date = parts.date,
       Today = _parts$date.Today,
       isInvalidDate = _parts$date.isInvalidDate,
-      DateTime = _parts$date.DateTime;
+      DateTime = _parts$date.DateTime,
+      datetimeToString = _parts$date.datetimeToString;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Today = function test_Today() {
@@ -17475,10 +17554,51 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_datetimeToString = function test_datetimeToString() {
+      it('test_datetimeToString', function () {
+        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
+        checkEqual('2001/02/04 09:05:08.045', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', datetimeToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 9:5:8 a', datetimeToString(dt, 'YY/M/D H:m:s a'));
+        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
+        checkEqual('01/2/4 16:5:8 PM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 16:5:8 P', datetimeToString(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', datetimeToString(dt, 'YY/M/D H:m:s DDD'));
+        checkEqual('01/2/4 16:5:8 Sunday', datetimeToString(dt, 'YY/M/D H:m:s DDDD'));
+        checkEqual('01/2/4 16:5:8 Feb', datetimeToString(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 Feb.', datetimeToString(dt, 'YY/M/D H:m:s MMMM'));
+        checkEqual('01/2/4 16:5:8 February', datetimeToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
+
+        var dt = DateTime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+
+        var timezoneOffset = -1 * new Date().getTimezoneOffset();
+        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '') + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
+        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0');
+        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ')); // '+0900' etc
+
+        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // '+09:00' etc
+        // exception
+        // quote
+
+        var dt = DateTime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          datetimeToString(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+      });
+    };
+
     test_Today();
     test_isInvalidDate();
     test_Date_standard();
     test_DateTime();
+    test_datetimeToString();
   });
 };
 

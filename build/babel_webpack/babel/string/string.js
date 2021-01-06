@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.paddingLast = exports.paddingFirst = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.tagOuterLast = exports.tagInnerLast = exports.tagOuterFirst = exports.tagInnerFirst = exports.subLastDelimLast = exports.subLastDelimFirst = exports.subFirstDelimLast = exports.subFirstDelimFirst = exports.matchFormat = exports.replaceAllArray = exports.replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.indexOfAnyLast = exports.indexOfAnyFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._paddingLast = exports._paddingFirst = exports._splitDotItems = exports._splitCommaItems = exports._split = exports._tagOuterLast = exports._tagInnerLast = exports._tagOuterFirst = exports._tagInnerFirst = exports._subLastDelimLast = exports._subLastDelimFirst = exports._subFirstDelimLast = exports._subFirstDelimFirst = exports._matchFormat = exports._replaceAllArray = exports._replaceAll = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._indexOfAnyLast = exports._indexOfAnyFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
+exports["default"] = exports.paddingLast = exports.paddingFirst = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.tagOuterLast = exports.tagInnerLast = exports.tagOuterFirst = exports.tagInnerFirst = exports.subLastDelimLast = exports.subLastDelimFirst = exports.subFirstDelimLast = exports.subFirstDelimFirst = exports.matchFormat = exports.replaceAllArray = exports.replaceAllRepeat = exports.replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.includeCount = exports.indexOfAnyLast = exports.indexOfAnyFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._paddingLast = exports._paddingFirst = exports._splitDotItems = exports._splitCommaItems = exports._split = exports._tagOuterLast = exports._tagInnerLast = exports._tagOuterFirst = exports._tagInnerFirst = exports._subLastDelimLast = exports._subLastDelimFirst = exports._subFirstDelimLast = exports._subFirstDelimFirst = exports._matchFormat = exports._replaceAllArray = exports._replaceAllRepeat = exports._replaceAll = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._includeCount = exports._indexOfAnyLast = exports._indexOfAnyFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
 
 var _string_common = _interopRequireDefault(require("./string_common.js"));
 
@@ -23,9 +23,17 @@ var _indexOfAnyLast2 = _interopRequireDefault(require("./_indexOfAnyLast.js"));
 
 var _indexOfAnyLast3 = _interopRequireDefault(require("./indexOfAnyLast.js"));
 
+var _includeCount2 = _interopRequireDefault(require("./_includeCount.js"));
+
+var _includeCount3 = _interopRequireDefault(require("./includeCount.js"));
+
 var _replaceAll2 = _interopRequireDefault(require("./_replaceAll.js"));
 
 var _replaceAll3 = _interopRequireDefault(require("./replaceAll.js"));
+
+var _replaceAllRepeat2 = _interopRequireDefault(require("./_replaceAllRepeat.js"));
+
+var _replaceAllRepeat3 = _interopRequireDefault(require("./replaceAllRepeat.js"));
 
 var _replaceAllArray2 = _interopRequireDefault(require("./_replaceAllArray.js"));
 
@@ -73,7 +81,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var stringJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _indexOfFirst2["default"]), _indexOfFirst3["default"]), _indexOfLast2["default"]), _indexOfLast3["default"]), _indexOfAnyFirst2["default"]), _indexOfAnyFirst3["default"]), _indexOfAnyLast2["default"]), _indexOfAnyLast3["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _replaceAllArray2["default"]), _replaceAllArray3["default"]), _matchFormat2["default"]), _subFirstDelimFirst2["default"]), _subFirstDelimLast2["default"]), _subLastDelimFirst2["default"]), _subLastDelimLast2["default"]), _tagInnerFirst2["default"]), _tagOuterFirst2["default"]), _tagInnerLast2["default"]), _tagOuterLast2["default"]), _split2["default"]), _split3["default"]), _splitCommaItems2["default"]), _splitDotItems2["default"]), _paddingFirst2["default"]), _paddingFirst3["default"]), _paddingLast2["default"]), _paddingLast3["default"]);
+var stringJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _indexOfFirst2["default"]), _indexOfFirst3["default"]), _indexOfLast2["default"]), _indexOfLast3["default"]), _indexOfAnyFirst2["default"]), _indexOfAnyFirst3["default"]), _indexOfAnyLast2["default"]), _indexOfAnyLast3["default"]), _includeCount2["default"]), _includeCount3["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _replaceAllRepeat2["default"]), _replaceAllRepeat3["default"]), _replaceAllArray2["default"]), _replaceAllArray3["default"]), _matchFormat2["default"]), _subFirstDelimFirst2["default"]), _subFirstDelimLast2["default"]), _subLastDelimFirst2["default"]), _subLastDelimLast2["default"]), _tagInnerFirst2["default"]), _tagOuterFirst2["default"]), _tagInnerLast2["default"]), _tagOuterLast2["default"]), _split2["default"]), _split3["default"]), _splitCommaItems2["default"]), _splitDotItems2["default"]), _paddingFirst2["default"]), _paddingFirst3["default"]), _paddingLast2["default"]), _paddingLast3["default"]);
 
 var _repeat = stringJs._repeat,
     _isLowerCase = stringJs._isLowerCase,
@@ -82,6 +90,7 @@ var _repeat = stringJs._repeat,
     _indexOfLast = stringJs._indexOfLast,
     _indexOfAnyFirst = stringJs._indexOfAnyFirst,
     _indexOfAnyLast = stringJs._indexOfAnyLast,
+    _includeCount = stringJs._includeCount,
     _isFirst = stringJs._isFirst,
     _isLast = stringJs._isLast,
     _isBothEnds = stringJs._isBothEnds,
@@ -105,6 +114,7 @@ var _repeat = stringJs._repeat,
     _insert = stringJs._insert,
     _add = stringJs._add,
     _replaceAll = stringJs._replaceAll,
+    _replaceAllRepeat = stringJs._replaceAllRepeat,
     _replaceAllArray = stringJs._replaceAllArray,
     _matchFormat = stringJs._matchFormat,
     _subFirstDelimFirst = stringJs._subFirstDelimFirst,
@@ -135,6 +145,7 @@ exports._subFirstDelimLast = _subFirstDelimLast;
 exports._subFirstDelimFirst = _subFirstDelimFirst;
 exports._matchFormat = _matchFormat;
 exports._replaceAllArray = _replaceAllArray;
+exports._replaceAllRepeat = _replaceAllRepeat;
 exports._replaceAll = _replaceAll;
 exports._add = _add;
 exports._insert = _insert;
@@ -158,6 +169,7 @@ exports._includeFirst = _includeFirst;
 exports._isBothEnds = _isBothEnds;
 exports._isLast = _isLast;
 exports._isFirst = _isFirst;
+exports._includeCount = _includeCount;
 exports._indexOfAnyLast = _indexOfAnyLast;
 exports._indexOfAnyFirst = _indexOfAnyFirst;
 exports._indexOfLast = _indexOfLast;
@@ -172,6 +184,7 @@ var repeat = stringJs.repeat,
     indexOfLast = stringJs.indexOfLast,
     indexOfAnyFirst = stringJs.indexOfAnyFirst,
     indexOfAnyLast = stringJs.indexOfAnyLast,
+    includeCount = stringJs.includeCount,
     isFirst = stringJs.isFirst,
     isLast = stringJs.isLast,
     isBothEnds = stringJs.isBothEnds,
@@ -195,6 +208,7 @@ var repeat = stringJs.repeat,
     insert = stringJs.insert,
     add = stringJs.add,
     replaceAll = stringJs.replaceAll,
+    replaceAllRepeat = stringJs.replaceAllRepeat,
     replaceAllArray = stringJs.replaceAllArray,
     matchFormat = stringJs.matchFormat,
     subFirstDelimFirst = stringJs.subFirstDelimFirst,
@@ -225,6 +239,7 @@ exports.subFirstDelimLast = subFirstDelimLast;
 exports.subFirstDelimFirst = subFirstDelimFirst;
 exports.matchFormat = matchFormat;
 exports.replaceAllArray = replaceAllArray;
+exports.replaceAllRepeat = replaceAllRepeat;
 exports.replaceAll = replaceAll;
 exports.add = add;
 exports.insert = insert;
@@ -248,6 +263,7 @@ exports.includeFirst = includeFirst;
 exports.isBothEnds = isBothEnds;
 exports.isLast = isLast;
 exports.isFirst = isFirst;
+exports.includeCount = includeCount;
 exports.indexOfAnyLast = indexOfAnyLast;
 exports.indexOfAnyFirst = indexOfAnyFirst;
 exports.indexOfLast = indexOfLast;
@@ -263,6 +279,7 @@ var _default = {
   _indexOfLast: _indexOfLast,
   _indexOfAnyFirst: _indexOfAnyFirst,
   _indexOfAnyLast: _indexOfAnyLast,
+  _includeCount: _includeCount,
   _isFirst: _isFirst,
   _isLast: _isLast,
   _isBothEnds: _isBothEnds,
@@ -286,6 +303,7 @@ var _default = {
   _insert: _insert,
   _add: _add,
   _replaceAll: _replaceAll,
+  _replaceAllRepeat: _replaceAllRepeat,
   _replaceAllArray: _replaceAllArray,
   _matchFormat: _matchFormat,
   _subFirstDelimFirst: _subFirstDelimFirst,
@@ -308,6 +326,7 @@ var _default = {
   indexOfLast: indexOfLast,
   indexOfAnyFirst: indexOfAnyFirst,
   indexOfAnyLast: indexOfAnyLast,
+  includeCount: includeCount,
   isFirst: isFirst,
   isLast: isLast,
   isBothEnds: isBothEnds,
@@ -331,6 +350,7 @@ var _default = {
   insert: insert,
   add: add,
   replaceAll: replaceAll,
+  replaceAllRepeat: replaceAllRepeat,
   replaceAllArray: replaceAllArray,
   matchFormat: matchFormat,
   subFirstDelimFirst: subFirstDelimFirst,
