@@ -9,6 +9,7 @@
 /* eslint-disable no-var */
 /* eslint-disable prefer-rest-params */
 /* eslint-disable no-extend-native */
+/* eslint-disable no-plusplus */
 const polyfillDefine = () => {
 
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray

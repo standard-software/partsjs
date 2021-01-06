@@ -66,5 +66,6 @@ module.exports = {
     'comma-dangle':         ['warn', 'always-multiline'],
     'no-invalid-this':      ['off'],
     'no-fallthrough':       ['error'],
+    'no-plusplus':          ['error'],
   },
 };
