@@ -9,104 +9,150 @@ var _paddingFirst2 = require("../string/_paddingFirst.js");
 
 var _string_common = require("../string/string_common.js");
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+var _dayOfWeekEnglishShort2 = require("../date/_dayOfWeekEnglishShort.js");
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _dayOfWeekEnglishLong2 = require("../date/_dayOfWeekEnglishLong.js");
 
 var __detetimeToStringFunc = {};
 exports.__detetimeToStringFunc = __detetimeToStringFunc;
 
-__detetimeToStringFunc.YYYY = function (date) {
-  return date.getFullYear().toString();
+var year4 = function year4(date, isLocal) {
+  if (isLocal) {
+    return date.getFullYear().toString();
+  } else {
+    return date.getUTCFullYear().toString();
+  }
 };
 
-__detetimeToStringFunc.YY = function (date) {
-  return (0, _string_common._subLast)(date.getFullYear().toString(), 2);
+var year2 = function year2(date, isLocal) {
+  return (0, _string_common._subLast)(year4(date, isLocal), 2);
 };
 
-__detetimeToStringFunc.MM = function (date) {
-  return (0, _paddingFirst2._paddingFirst)((date.getMonth() + 1).toString(), 2, '0');
+var month1 = function month1(date, isLocal) {
+  if (isLocal) {
+    return (date.getMonth() + 1).toString();
+  } else {
+    return (date.getUTCMonth() + 1).toString();
+  }
 };
 
-__detetimeToStringFunc.M = function (date) {
-  return (date.getMonth() + 1).toString();
+var month2 = function month2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(month1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.DD = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getDate().toString(), 2, '0');
+var date1 = function date1(date, isLocal) {
+  if (isLocal) {
+    return date.getDate().toString();
+  } else {
+    return date.getUTCMonth().toString();
+  }
 };
 
-__detetimeToStringFunc.D = function (date) {
-  return date.getDate().toString();
+var date2 = function date2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(date1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.hh = function (date) {
-  // 00-12
-  return (0, _paddingFirst2._paddingFirst)((date.getHours() % 12).toString(), 2, '0');
+var hour12_1 = function hour12_1(date, isLocal) {
+  // 0-11
+  if (isLocal) {
+    return (date.getHours() % 12).toString();
+  } else {
+    return (date.getUTCHours() % 12).toString();
+  }
 };
 
-__detetimeToStringFunc.h = function (date) {
-  // 0-12
-  return (date.getHours() % 12).toString();
+var hour12_2 = function hour12_2(date, isLocal) {
+  // 00-11
+  return (0, _paddingFirst2._paddingFirst)(hour12_1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.HH = function (date) {
-  // 00-23
-  return (0, _paddingFirst2._paddingFirst)(date.getHours().toString(), 2, '0');
-};
-
-__detetimeToStringFunc.H = function (date) {
+var hour24_1 = function hour24_1(date, isLocal) {
   // 0-23
-  return date.getHours().toString();
+  if (isLocal) {
+    return date.getHours().toString();
+  } else {
+    return date.getUTCHours().toString();
+  }
 };
 
-__detetimeToStringFunc.mm = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getMinutes().toString(), 2, '0');
+var hour24_2 = function hour24_2(date, isLocal) {
+  // 00-23
+  return (0, _paddingFirst2._paddingFirst)(hour24_1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.m = function (date) {
-  return date.getMinutes().toString();
+var minute1 = function minute1(date, isLocal) {
+  if (isLocal) {
+    return date.getMinutes().toString();
+  } else {
+    return date.getUTCMinutes().toString();
+  }
 };
 
-__detetimeToStringFunc.ss = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getSeconds().toString(), 2, '0');
+var minute2 = function minute2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(minute1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.s = function (date) {
-  return date.getSeconds().toString();
+var second1 = function second1(date, isLocal) {
+  if (isLocal) {
+    return date.getSeconds().toString();
+  } else {
+    return date.getUTCSeconds().toString();
+  }
 };
 
-__detetimeToStringFunc.SSS = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getMilliseconds().toString(), 3, '0');
+var second2 = function second2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(second1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.SS = function (date) {
-  return (0, _string_common._subFirst)(__detetimeToStringFunc.SSS(date), 2);
+var millisecond3 = function millisecond3(date, isLocal) {
+  if (isLocal) {
+    return (0, _paddingFirst2._paddingFirst)(date.getMilliseconds().toString(), 3, '0');
+  } else {
+    return (0, _paddingFirst2._paddingFirst)(date.getUTCMilliseconds().toString(), 3, '0');
+  }
 };
 
-__detetimeToStringFunc.S = function (date) {
-  return (0, _string_common._subFirst)(__detetimeToStringFunc.SSS(date), 1);
+var millisecond2 = function millisecond2(date, isLocal) {
+  return (0, _string_common._subFirst)(millisecond3(date, isLocal), 2);
 };
 
-__detetimeToStringFunc.aa = function (date) {
-  return date.getHours() < 12 ? 'am' : 'pm';
+var millisecond1 = function millisecond1(date, isLocal) {
+  return (0, _string_common._subFirst)(millisecond3(date, isLocal), 1);
 };
 
-__detetimeToStringFunc.AA = function (date) {
-  return date.getHours() < 12 ? 'AM' : 'PM';
+var am_pm = function am_pm(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'am' : 'pm';
+  } else {
+    return date.getUTCHours() < 12 ? 'am' : 'pm';
+  }
 };
 
-__detetimeToStringFunc.a = function (date) {
-  return date.getHours() < 12 ? 'a' : 'p';
+var AM_PM = function AM_PM(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'AM' : 'PM';
+  } else {
+    return date.getUTCHours() < 12 ? 'AM' : 'PM';
+  }
 };
 
-__detetimeToStringFunc.A = function (date) {
-  return date.getHours() < 12 ? 'A' : 'P';
+var a_p = function a_p(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'a' : 'p';
+  } else {
+    return date.getUTCHours() < 12 ? 'a' : 'p';
+  }
 };
 
-var _Z = function _Z(date) {
+var A_P = function A_P(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'A' : 'P';
+  } else {
+    return date.getUTCHours() < 12 ? 'A' : 'P';
+  }
+};
+
+var timezone = function timezone(date) {
   var minutes = -1 * date.getTimezoneOffset();
   var offsetHourStr = (0, _paddingFirst2._paddingFirst)(String(Math.floor(minutes / 60)), 2, '0');
   offsetHourStr = 0 < minutes ? '+' + offsetHourStr : offsetHourStr;
@@ -117,28 +163,93 @@ var _Z = function _Z(date) {
   };
 };
 
-__detetimeToStringFunc.ZZ = function (date) {
-  var _Z2 = _Z(date),
-      offsetHourStr = _Z2.offsetHourStr,
-      offsetMinStr = _Z2.offsetMinStr;
+var timezoneHHMM = function timezoneHHMM(date) {
+  var _timezone = timezone(date),
+      offsetHourStr = _timezone.offsetHourStr,
+      offsetMinStr = _timezone.offsetMinStr;
 
   return offsetHourStr + offsetMinStr;
 };
 
-__detetimeToStringFunc.Z = function (date) {
-  var _Z3 = _Z(date),
-      offsetHourStr = _Z3.offsetHourStr,
-      offsetMinStr = _Z3.offsetMinStr;
+var timezoneHH_MM = function timezoneHH_MM(date) {
+  var _timezone2 = timezone(date),
+      offsetHourStr = _timezone2.offsetHourStr,
+      offsetMinStr = _timezone2.offsetMinStr;
 
   return offsetHourStr + ':' + offsetMinStr;
 };
 
-__detetimeToStringFunc.DDD = function (date) {
-  return dayOfWeekEnglishShort(date);
+__detetimeToStringFunc.year4 = year4;
+__detetimeToStringFunc.year2 = year2;
+__detetimeToStringFunc.month2 = month2;
+__detetimeToStringFunc.month1 = month1;
+__detetimeToStringFunc.date2 = date2;
+__detetimeToStringFunc.date1 = date1;
+__detetimeToStringFunc.hour12_2 = hour12_2;
+__detetimeToStringFunc.hour12_1 = hour12_1;
+__detetimeToStringFunc.hour24_2 = hour24_2;
+__detetimeToStringFunc.hour24_1 = hour24_1;
+__detetimeToStringFunc.minute2 = minute2;
+__detetimeToStringFunc.minute1 = minute1;
+__detetimeToStringFunc.second2 = second2;
+__detetimeToStringFunc.second1 = second1;
+__detetimeToStringFunc.millisecond3 = millisecond3;
+__detetimeToStringFunc.millisecond2 = millisecond2;
+__detetimeToStringFunc.millisecond1 = millisecond1;
+__detetimeToStringFunc.am_pm = am_pm;
+__detetimeToStringFunc.AM_PM = AM_PM;
+__detetimeToStringFunc.a_p = a_p;
+__detetimeToStringFunc.A_P = A_P;
+var _DefaultObject = {
+  YYYY: year4,
+  YY: year2,
+  MM: month2,
+  M: month1,
+  DD: date2,
+  D: date1,
+  hh: hour12_2,
+  h: hour12_1,
+  HH: hour24_2,
+  H: hour24_1,
+  mm: minute2,
+  m: minute1,
+  ss: second2,
+  s: second1,
+  SSS: millisecond3,
+  SS: millisecond2,
+  S: millisecond1,
+  aa: am_pm,
+  AA: AM_PM,
+  a: a_p,
+  A: A_P,
+  ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  Z: timezoneHH_MM,
+  ZZ: timezoneHHMM
 };
-
-__detetimeToStringFunc.DDDD = function (date) {
-  return dayOfWeekEnglishLong(date);
+var _MomentLikeObject = {
+  YYYY: year4,
+  YY: year2,
+  MM: month2,
+  M: month1,
+  DD: date2,
+  D: date1,
+  hh: hour12_2,
+  h: hour12_1,
+  HH: hour24_2,
+  H: hour24_1,
+  mm: minute2,
+  m: minute1,
+  ss: second2,
+  s: second1,
+  SSS: millisecond3,
+  SS: millisecond2,
+  S: millisecond1,
+  a: a_p,
+  ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  Z: timezoneHH_MM,
+  ZZ: timezoneHHMM
 };
 
 __detetimeToStringFunc.MMM = function (date) {
@@ -151,39 +262,38 @@ __detetimeToStringFunc.MMMM = function (date) {
 
 __detetimeToStringFunc.MMMMM = function (date) {
   return nameOfMonthEnglishLong(date);
-};
+}; // const _DefaultObject = { ...__detetimeToStringFunc };
 
-var _DefaultObject = _objectSpread({}, __detetimeToStringFunc);
 
 __detetimeToStringFunc.DefaultObject = function () {
   return _DefaultObject;
-};
+}; // const dayOfWeek = (date, dayOfWeekNames) => {
+//   // c.assert(t.isDate(date));
+//   // if (t.isNullOrUndefined(dayOfWeekNames)) {
+//   //   return date.getDay();
+//   // }
+//   // c.assert(t.isArray(dayOfWeekNames));
+//   // c.assert(dayOfWeekNames.length === 7);
+//   return dayOfWeekNames[date.getDay()];
+// };
+// const dayOfWeekEnglishShort = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishShort());
+// };
+// const dayOfWeekEnglishLong = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishLong());
+// };
+// const dayOfWeekNamesEnglishShort = () => {
+//   return [
+//     'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+//   ];
+// };
+// const dayOfWeekNamesEnglishLong = () => {
+//   return [
+//     'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+//     'Thursday', 'Friday', 'Saturday',
+//   ];
+// };
 
-var dayOfWeek = function dayOfWeek(date, dayOfWeekNames) {
-  // c.assert(t.isDate(date));
-  // if (t.isNullOrUndefined(dayOfWeekNames)) {
-  //   return date.getDay();
-  // }
-  // c.assert(t.isArray(dayOfWeekNames));
-  // c.assert(dayOfWeekNames.length === 7);
-  return dayOfWeekNames[date.getDay()];
-};
-
-var dayOfWeekEnglishShort = function dayOfWeekEnglishShort(date) {
-  return dayOfWeek(date, dayOfWeekNamesEnglishShort());
-};
-
-var dayOfWeekEnglishLong = function dayOfWeekEnglishLong(date) {
-  return dayOfWeek(date, dayOfWeekNamesEnglishLong());
-};
-
-var dayOfWeekNamesEnglishShort = function dayOfWeekNamesEnglishShort() {
-  return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-};
-
-var dayOfWeekNamesEnglishLong = function dayOfWeekNamesEnglishLong() {
-  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-};
 
 var nameOfMonth = function nameOfMonth(date, monthNames) {
   // c.assert(t.isDate(date));

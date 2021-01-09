@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.isNotNumberAll = exports.isNotBooleanAll = exports.isNotNaNStrictAll = exports.isNotNullAll = exports.isNotUndefinedAll = exports.isWeakSetAll = exports.isSetAll = exports.isWeakMapAll = exports.isMapAll = exports.isSymbolAll = exports.isExceptionAll = exports.isEmptyArrayAll = exports.isEmptyObjectAll = exports.isStringObjectAll = exports.isNumberObjectAll = exports.isBooleanObjectAll = exports.isRegExpAll = exports.isDateAll = exports.isArraySeriesAll = exports.isArrayAll = exports.isModuleAll = exports.isObjectLikeAll = exports.isObjectFromNullAll = exports.isObjectNormalAll = exports.isObjectAll = exports.isFunctionAll = exports.isStringAll = exports.isIntegerAll = exports.isNumberAll = exports.isBooleanAll = exports.isNaNStrictAll = exports.isNullAll = exports.isUndefinedAll = exports.isNotWeakSet = exports.isNotSet = exports.isNotWeakMap = exports.isNotMap = exports.isNotSymbol = exports.isNotException = exports.isNotEmptyArray = exports.isNotEmptyObject = exports.isNotStringObject = exports.isNotNumberObject = exports.isNotBooleanObject = exports.isNotRegExp = exports.isNotDate = exports.isNotArraySeries = exports.isNotArray = exports.isNotModule = exports.isNotObjectLike = exports.isNotObjectFromNull = exports.isNotObjectNormal = exports.isNotObject = exports.isNotFunction = exports.isNotString = exports.isNotInteger = exports.isNotNumber = exports.isNotBoolean = exports.isNotNaNStrict = exports.isNotNull = exports.isNotUndefined = exports.isWeakSet = exports.isSet = exports.isWeakMap = exports.isMap = exports.isSymbol = exports.isException = exports.isEmptyArray = exports.isEmptyObject = exports.isStringObject = exports.isNumberObject = exports.isBooleanObject = exports.isRegExp = exports.isDate = exports.isArraySeries = exports.isArray = exports.isModule = exports.isObjectLike = exports.isObjectFromNull = exports.isObjectNormal = exports.isObject = exports.isFunction = exports.isString = exports.isInteger = exports.isNumber = exports.isBoolean = exports.isNaNStrict = exports.isNull = exports.isUndefined = exports.isReferenceType = exports.isPrimitiveType = exports.typeName = exports.objectToString = exports.platform = exports.common = exports.merge = exports.functionValue = exports.cloneDeep = exports.clone = exports.VERSION = void 0;
 exports.isNotInt = exports.isNotNum = exports.isNotBool = exports.isNotUndef = exports.isNotArrayType = exports.isNotObjectType = exports.isObjType = exports.isExcept = exports.isEmptyObj = exports.isObjLike = exports.isObjFromNull = exports.isObjNormal = exports.isObj = exports.isFunc = exports.isStr = exports.isInt = exports.isNum = exports.isBool = exports.isUndef = exports.isArrayType = exports.isObjectType = exports.isNotWeakSetArray = exports.isNotSetArray = exports.isNotWeakMapArray = exports.isNotMapArray = exports.isNotSymbolArray = exports.isNotExceptionArray = exports.isNotEmptyArrayArray = exports.isNotEmptyObjectArray = exports.isNotStringObjectArray = exports.isNotNumberObjectArray = exports.isNotBooleanObjectArray = exports.isNotRegExpArray = exports.isNotDateArray = exports.isNotArraySeriesArray = exports.isNotArrayArray = exports.isNotModuleArray = exports.isNotObjectLikeArray = exports.isNotObjectFromNullArray = exports.isNotObjectNormalArray = exports.isNotObjectArray = exports.isNotFunctionArray = exports.isNotStringArray = exports.isNotIntegerArray = exports.isNotNumberArray = exports.isNotBooleanArray = exports.isNotNaNStrictArray = exports.isNotNullArray = exports.isNotUndefinedArray = exports.isWeakSetArray = exports.isSetArray = exports.isWeakMapArray = exports.isMapArray = exports.isSymbolArray = exports.isExceptionArray = exports.isEmptyArrayArray = exports.isEmptyObjectArray = exports.isStringObjectArray = exports.isNumberObjectArray = exports.isBooleanObjectArray = exports.isRegExpArray = exports.isDateArray = exports.isArraySeriesArray = exports.isArrayArray = exports.isModuleArray = exports.isObjectLikeArray = exports.isObjectFromNullArray = exports.isObjectNormalArray = exports.isObjectArray = exports.isFunctionArray = exports.isStringArray = exports.isIntegerArray = exports.isNumberArray = exports.isBooleanArray = exports.isNaNStrictArray = exports.isNullArray = exports.isUndefinedArray = exports.isNotWeakSetAll = exports.isNotSetAll = exports.isNotWeakMapAll = exports.isNotMapAll = exports.isNotSymbolAll = exports.isNotExceptionAll = exports.isNotEmptyArrayAll = exports.isNotEmptyObjectAll = exports.isNotStringObjectAll = exports.isNotNumberObjectAll = exports.isNotBooleanObjectAll = exports.isNotRegExpAll = exports.isNotDateAll = exports.isNotArraySeriesAll = exports.isNotArrayAll = exports.isNotModuleAll = exports.isNotObjectLikeAll = exports.isNotObjectFromNullAll = exports.isNotObjectNormalAll = exports.isNotObjectAll = exports.isNotFunctionAll = exports.isNotStringAll = exports.isNotIntegerAll = void 0;
 exports.indexOfMatchSome = exports.matchSomeValue = exports.matchSome = exports.someMatch = exports.allMatch = exports.indexOfMatch = exports.initialValue = exports.matchValue = exports.match = exports.or = exports.syntax = exports.recursive = exports.Enum = exports.canUseWeakSet = exports.canUseSet = exports.canUseWeakMap = exports.canUseMap = exports.loop = exports.switch_ = exports.if_ = exports.sc = exports.guard = exports.assert = exports.test = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.checkCompare = exports.checkEqual = exports.type = exports.isNotObjTypeArray = exports.isNotExceptArray = exports.isNotEmptyObjArray = exports.isNotObjLikeArray = exports.isNotObjFromNullArray = exports.isNotObjNormalArray = exports.isNotObjArray = exports.isNotFuncArray = exports.isNotStrArray = exports.isNotIntArray = exports.isNotNumArray = exports.isNotBoolArray = exports.isNotUndefArray = exports.isNotArrayTypeArray = exports.isNotObjectTypeArray = exports.isObjTypeArray = exports.isExceptArray = exports.isEmptyObjArray = exports.isObjLikeArray = exports.isObjFromNullArray = exports.isObjNormalArray = exports.isObjArray = exports.isFuncArray = exports.isStrArray = exports.isIntArray = exports.isNumArray = exports.isBoolArray = exports.isUndefArray = exports.isArrayTypeArray = exports.isObjectTypeArray = exports.isNotObjTypeAll = exports.isNotExceptAll = exports.isNotEmptyObjAll = exports.isNotObjLikeAll = exports.isNotObjFromNullAll = exports.isNotObjNormalAll = exports.isNotObjAll = exports.isNotFuncAll = exports.isNotStrAll = exports.isNotIntAll = exports.isNotNumAll = exports.isNotBoolAll = exports.isNotUndefAll = exports.isNotArrayTypeAll = exports.isNotObjectTypeAll = exports.isObjTypeAll = exports.isExceptAll = exports.isEmptyObjAll = exports.isObjLikeAll = exports.isObjFromNullAll = exports.isObjNormalAll = exports.isObjAll = exports.isFuncAll = exports.isStrAll = exports.isIntAll = exports.isNumAll = exports.isBoolAll = exports.isUndefAll = exports.isArrayTypeAll = exports.isObjectTypeAll = exports.isNotObjType = exports.isNotExcept = exports.isNotEmptyObj = exports.isNotObjLike = exports.isNotObjFromNull = exports.isNotObjNormal = exports.isNotObj = exports.isNotFunc = exports.isNotStr = void 0;
-exports["default"] = exports.parts = exports.system = exports.date = exports.Today = exports.array = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.object = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.string = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.matchFormat = exports.replaceAll = exports.isUpperCase = exports.isLowerCase = exports.number = exports.makeInRange = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.convert = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.compare = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.allMatchAll = exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = void 0;
+exports.parts = exports.system = exports.date = exports.datetimeToString = exports.Today = exports.array = exports.median = exports.average = exports.sum = exports.max = exports.min = exports.object = exports.propCount = exports.fixProp = exports.inProp = exports.setProp = exports.getProp = exports.copyProp = exports.objectToValueArray = exports.objectToKeyArray = exports.objectFromKeyValueArray = exports.objectToKeyValueArray = exports.has = exports.hasPrototype = exports.hasOwn = exports.objectValues = exports.objectKeys = exports.objectFromEntries = exports.objectEntries = exports.propertyList = exports.propertyCount = exports.fixProperty = exports.inProperty = exports.setProperty = exports.getProperty = exports.copyProperty = exports.string = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.matchFormat = exports.replaceAllArray = exports.replaceAllRepeat = exports.replaceAll = exports.isUpperCase = exports.isLowerCase = exports.number = exports.makeInRange = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.round = exports.isOdd = exports.isEven = exports.isMultiples = exports.convert = exports.strToIntDef = exports.strToInt = exports.strToNumDef = exports.strToNum = exports.valToIntDef = exports.valToInt = exports.valToNumDef = exports.valToNum = exports.valToStr = exports.numToStr = exports.valToIntegerDef = exports.valToInteger = exports.valToNumberDef = exports.valToNumber = exports.strToIntegerDef = exports.strToInteger = exports.strToNumberDef = exports.strToNumber = exports.valToString = exports.numToString = exports.valueToIntegerDefault = exports.valueToInteger = exports.valueToNumberDefault = exports.valueToNumber = exports.stringToIntegerDefault = exports.stringToInteger = exports.stringToNumberDefault = exports.stringToNumber = exports.valueToString = exports.numberToString = exports.compare = exports.equalDeep = exports.equal = exports.includesAll = exports.includesSome = exports.includes = exports.someMatchAll = exports.allMatchAll = exports.indexOfMatchAll = exports.matchAllValue = exports.matchAll = exports.someMatchSome = exports.allMatchSome = void 0;
+exports["default"] = void 0;
 
 var _polyfill = _interopRequireDefault(__webpack_require__(2));
 
@@ -28,11 +29,11 @@ var _test = _interopRequireDefault(__webpack_require__(117));
 
 var _syntax = _interopRequireDefault(__webpack_require__(46));
 
-var _compare = _interopRequireDefault(__webpack_require__(140));
+var _compare = _interopRequireDefault(__webpack_require__(144));
 
-var _convert = _interopRequireDefault(__webpack_require__(158));
+var _convert = _interopRequireDefault(__webpack_require__(162));
 
-var _convertAlias = _interopRequireDefault(__webpack_require__(159));
+var _convertAlias = _interopRequireDefault(__webpack_require__(163));
 
 var _number = _interopRequireDefault(__webpack_require__(42));
 
@@ -42,9 +43,9 @@ var _object = _interopRequireDefault(__webpack_require__(31));
 
 var _array = _interopRequireDefault(__webpack_require__(67));
 
-var _date = _interopRequireDefault(__webpack_require__(160));
+var _date = _interopRequireDefault(__webpack_require__(164));
 
-var _system = _interopRequireDefault(__webpack_require__(165));
+var _system = _interopRequireDefault(__webpack_require__(179));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -54,7 +55,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '10.3.0';
+var VERSION = '10.4.0 beta';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -915,6 +916,8 @@ exports.number = number;
 var isLowerCase = _string["default"].isLowerCase,
     isUpperCase = _string["default"].isUpperCase,
     replaceAll = _string["default"].replaceAll,
+    replaceAllRepeat = _string["default"].replaceAllRepeat,
+    replaceAllArray = _string["default"].replaceAllArray,
     matchFormat = _string["default"].matchFormat,
     split = _string["default"].split,
     splitCommaItems = _string["default"].splitCommaItems,
@@ -923,6 +926,8 @@ exports.splitDotItems = splitDotItems;
 exports.splitCommaItems = splitCommaItems;
 exports.split = split;
 exports.matchFormat = matchFormat;
+exports.replaceAllArray = replaceAllArray;
+exports.replaceAllRepeat = replaceAllRepeat;
 exports.replaceAll = replaceAll;
 exports.isUpperCase = isUpperCase;
 exports.isLowerCase = isLowerCase;
@@ -930,6 +935,8 @@ rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
   isLowerCase: isLowerCase,
   isUpperCase: isUpperCase,
   replaceAll: replaceAll,
+  replaceAllRepeat: replaceAllRepeat,
+  replaceAllArray: replaceAllArray,
   matchFormat: matchFormat,
   split: split,
   splitCommaItems: splitCommaItems,
@@ -1053,10 +1060,13 @@ array.operation = _objectSpread({}, _array["default"].operation);
  * date
  */
 
-var Today = _date["default"].Today;
+var Today = _date["default"].Today,
+    datetimeToString = _date["default"].datetimeToString;
+exports.datetimeToString = datetimeToString;
 exports.Today = Today;
 rootAlias = _objectSpread(_objectSpread({}, rootAlias), {}, {
-  Today: Today
+  Today: Today,
+  datetimeToString: datetimeToString
 });
 
 var date = _objectSpread({}, _date["default"]);
@@ -1135,6 +1145,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* eslint-disable prefer-rest-params */
 
 /* eslint-disable no-extend-native */
+
+/* eslint-disable no-plusplus */
 var polyfillDefine = function polyfillDefine() {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
   if (!Array.isArray) {
@@ -2733,1139 +2745,7 @@ exports["default"] = _default;
 /* 63 */,
 /* 64 */,
 /* 65 */,
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.add = exports._add = exports.insert = exports._insert = exports.deleteLast = exports._deleteLast = exports.deleteFirst = exports._deleteFirst = exports.deleteLength = exports._deleteLength = exports.deleteIndex = exports._deleteIndex = exports.subLast = exports._subLast = exports.subFirst = exports._subFirst = exports.subLength = exports._subLength = exports.subIndex = exports._subIndex = exports.trimBothEnds = exports._trimBothEnds = exports.trimLast = exports._trimLast = exports.trimFirst = exports._trimFirst = exports.excludeBothEnds = exports._excludeBothEnds = exports.excludeLast = exports._excludeLast = exports.excludeFirst = exports._excludeFirst = exports.includeBothEnds = exports._includeBothEnds = exports.includeLast = exports._includeLast = exports.includeFirst = exports._includeFirst = exports.isBothEnds = exports._isBothEnds = exports.isLast = exports._isLast = exports.isFirst = exports._isFirst = exports.isUpperCase = exports._isUpperCase = exports.isLowerCase = exports._isLowerCase = exports.repeat = exports._repeat = void 0;
-
-var _type = __webpack_require__(5);
-
-var _isObjectParameter = __webpack_require__(15);
-
-var _number = __webpack_require__(42);
-
-var _array = __webpack_require__(67);
-
-var _indexOfFirst2 = __webpack_require__(91);
-
-var _indexOfLast2 = __webpack_require__(92);
-
-/**
- * repeat
- */
-var _repeat = function _repeat(str, count) {
-  var result = '';
-
-  for (var i = 0; i < count; i += 1) {
-    result += str;
-  }
-
-  return result;
-};
-
-exports._repeat = _repeat;
-
-var repeat = function repeat(str, count) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, count')) {
-    var _str = str;
-    str = _str.str;
-    count = _str.count;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('repeat args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(count)) {
-    throw new TypeError('repeat args(count) is not integer');
-  }
-
-  return _repeat(str, count);
-};
-/**
- * isLowerCase
- */
-
-
-exports.repeat = repeat;
-
-var _isLowerCase = function _isLowerCase(str) {
-  return str.toLowerCase() === str;
-};
-
-exports._isLowerCase = _isLowerCase;
-
-var isLowerCase = function isLowerCase(str) {
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('isLowerCase args(str) is not string');
-  }
-
-  return _isLowerCase(str);
-};
-/**
- * isUpperCase
- */
-
-
-exports.isLowerCase = isLowerCase;
-
-var _isUpperCase = function _isUpperCase(str) {
-  return str.toUpperCase() === str;
-};
-
-exports._isUpperCase = _isUpperCase;
-
-var isUpperCase = function isUpperCase(str) {
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('isUpperCase args(str) is not string');
-  }
-
-  return _isUpperCase(str);
-};
-/**
- * isFirst
- */
-
-
-exports.isUpperCase = isUpperCase;
-
-var _isFirst = function _isFirst(str, search) {
-  return (0, _indexOfFirst2._indexOfFirst)(str, search) === 0;
-};
-
-exports._isFirst = _isFirst;
-
-var isFirst = function isFirst(str, search) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
-    var _str2 = str;
-    str = _str2.str;
-    search = _str2.search;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('isFirst args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(search)) {
-    throw new TypeError('isFirst args(search) is not string');
-  }
-
-  return _isFirst(str, search);
-};
-/**
- * isLast
- */
-
-
-exports.isFirst = isFirst;
-
-var _isLast = function _isLast(str, search) {
-  var result = (0, _indexOfLast2._indexOfLast)(str, search);
-
-  if (result === -1) {
-    return false;
-  }
-
-  return result === str.length - search.length;
-};
-
-exports._isLast = _isLast;
-
-var isLast = function isLast(str, search) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
-    var _str3 = str;
-    str = _str3.str;
-    search = _str3.search;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('isLast args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(search)) {
-    throw new TypeError('isLast args(search) is not string');
-  }
-
-  return _isLast(str, search);
-};
-/**
- * isBothEnds
- */
-
-
-exports.isLast = isLast;
-
-var _isBothEnds = function _isBothEnds(str, searchFirst) {
-  var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
-
-  if (str.length <= 1) {
-    return false;
-  }
-
-  return _isFirst(str, searchFirst) && _isLast(str, searchLast);
-};
-
-exports._isBothEnds = _isBothEnds;
-
-var isBothEnds = function isBothEnds(str, searchFirst) {
-  var searchLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : searchFirst;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, searchFirst', 'searchLast')) {
-    var _str4 = str;
-    str = _str4.str;
-    searchFirst = _str4.searchFirst;
-    var _str4$searchLast = _str4.searchLast;
-    searchLast = _str4$searchLast === void 0 ? searchFirst : _str4$searchLast;
-  } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
-    var _str5 = str;
-    str = _str5.str;
-    searchFirst = _str5.search;
-    searchLast = searchFirst;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('isBothEnds args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(searchFirst)) {
-    throw new TypeError('isBothEnds args(searchFirst) is not string');
-  }
-
-  if (!(0, _type.isString)(searchLast)) {
-    throw new TypeError('isBothEnds args(searchLast) is not string');
-  }
-
-  return _isBothEnds(str, searchFirst, searchLast);
-};
-/**
- * string.includeFirst
- */
-
-
-exports.isBothEnds = isBothEnds;
-
-var _includeFirst = function _includeFirst(str, value) {
-  if (!_isFirst(str, value)) {
-    return value + str;
-  }
-
-  return str;
-};
-
-exports._includeFirst = _includeFirst;
-
-var includeFirst = function includeFirst(str, value) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str6 = str;
-    str = _str6.str;
-    value = _str6.value;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('includeFirst args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('includeFirst args(value) is not string');
-  }
-
-  return _includeFirst(str, value);
-};
-/**
- * string.includeLast
- */
-
-
-exports.includeFirst = includeFirst;
-
-var _includeLast = function _includeLast(str, value) {
-  if (!_isLast(str, value)) {
-    return str + value;
-  }
-
-  return str;
-};
-
-exports._includeLast = _includeLast;
-
-var includeLast = function includeLast(str, value) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str7 = str;
-    str = _str7.str;
-    value = _str7.value;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('includeLast args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('includeLast args(value) is not string');
-  }
-
-  return _includeLast(str, value);
-};
-/**
- * string.includeBothEnds
- */
-
-
-exports.includeLast = includeLast;
-
-var _includeBothEnds = function _includeBothEnds(str, valueFirst) {
-  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
-
-  if (!_isBothEnds(str, valueFirst, valueLast)) {
-    return valueFirst + str + valueLast;
-  }
-
-  return str;
-};
-
-exports._includeBothEnds = _includeBothEnds;
-
-var includeBothEnds = function includeBothEnds(str, valueFirst) {
-  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueFirst', 'valueLast')) {
-    var _str8 = str;
-    str = _str8.str;
-    valueFirst = _str8.valueFirst;
-    var _str8$valueLast = _str8.valueLast;
-    valueLast = _str8$valueLast === void 0 ? valueFirst : _str8$valueLast;
-  } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str9 = str;
-    str = _str9.str;
-    valueFirst = _str9.value;
-    valueLast = valueFirst;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('includeBothEnds args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(valueFirst)) {
-    throw new TypeError('includeBothEnds args(valueFirst) is not string');
-  }
-
-  if (!(0, _type.isString)(valueLast)) {
-    throw new TypeError('includeBothEnds args(valueLast) is not string');
-  }
-
-  return _includeBothEnds(str, valueFirst, valueLast);
-};
-/**
- * string.excludeFirst
- */
-
-
-exports.includeBothEnds = includeBothEnds;
-
-var _excludeFirst = function _excludeFirst(str, value) {
-  if (_isFirst(str, value)) {
-    return _deleteFirst(str, value.length);
-  }
-
-  return str;
-};
-
-exports._excludeFirst = _excludeFirst;
-
-var excludeFirst = function excludeFirst(str, value) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str10 = str;
-    str = _str10.str;
-    value = _str10.value;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('excludeFirst args(array) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('excludeFirst args(value) is not string');
-  }
-
-  return _excludeFirst(str, value);
-};
-/**
- * string.excludeLast
- */
-
-
-exports.excludeFirst = excludeFirst;
-
-var _excludeLast = function _excludeLast(str, value) {
-  if (_isLast(str, value)) {
-    return _deleteLast(str, value.length);
-  }
-
-  return str;
-};
-
-exports._excludeLast = _excludeLast;
-
-var excludeLast = function excludeLast(str, value) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str11 = str;
-    str = _str11.str;
-    value = _str11.value;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('excludeLast args(array) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('excludeLast args(value) is not string');
-  }
-
-  return _excludeLast(str, value);
-};
-/**
- * string.excludeBothEnds
- */
-
-
-exports.excludeLast = excludeLast;
-
-var _excludeBothEnds = function _excludeBothEnds(str, valueFirst) {
-  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
-
-  if (_isBothEnds(str, valueFirst, valueLast)) {
-    str = deleteFirst(str, valueFirst.length);
-    return deleteLast(str, (0, _array._min)([valueLast.length, str.length]));
-  }
-
-  return str;
-};
-
-exports._excludeBothEnds = _excludeBothEnds;
-
-var excludeBothEnds = function excludeBothEnds(str, valueFirst) {
-  var valueLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirst;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueFirst', 'valueLast')) {
-    var _str12 = str;
-    str = _str12.str;
-    valueFirst = _str12.valueFirst;
-    var _str12$valueLast = _str12.valueLast;
-    valueLast = _str12$valueLast === void 0 ? valueFirst : _str12$valueLast;
-  } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value')) {
-    var _str13 = str;
-    str = _str13.str;
-    valueFirst = _str13.value;
-    var _str13$valueLast = _str13.valueLast;
-    valueLast = _str13$valueLast === void 0 ? valueFirst : _str13$valueLast;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('excludeBothEnds args(array) is not string');
-  }
-
-  if (!(0, _type.isString)(valueFirst)) {
-    throw new TypeError('excludeBothEnds args(valueFirst) is not string');
-  }
-
-  if (!(0, _type.isString)(valueLast)) {
-    throw new TypeError('excludeBothEnds args(valueLast) is not string');
-  }
-
-  return _excludeBothEnds(str, valueFirst, valueLast);
-};
-/**
- * string.trimFirst
- */
-
-
-exports.excludeBothEnds = excludeBothEnds;
-
-var _trimFirst = function _trimFirst(str) {
-  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
-
-  while (true) {
-    var value = (0, _array._findFirst)(valueArray, function (value) {
-      return _isFirst(str, value);
-    });
-
-    if ((0, _type.isUndefined)(value)) {
-      break;
-    }
-
-    str = _deleteFirst(str, value.length);
-  }
-
-  return str;
-};
-
-exports._trimFirst = _trimFirst;
-
-var trimFirst = function trimFirst(str) {
-  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueArray')) {
-    var _str14 = str;
-    str = _str14.str;
-    var _str14$valueArray = _str14.valueArray;
-    valueArray = _str14$valueArray === void 0 ? [' ', '\r', '\n'] : _str14$valueArray;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('trimFirst args(str) is not string');
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('trimFirst args(valueArray) is not array');
-  }
-
-  if (valueArray.length > 0 && !(0, _type.isStringArray)(valueArray)) {
-    throw new TypeError('trimFirst args(valueArray) is not string array');
-  }
-
-  return _trimFirst(str, valueArray);
-};
-/**
- * string.trimLast
- */
-
-
-exports.trimFirst = trimFirst;
-
-var _trimLast = function _trimLast(str) {
-  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
-
-  while (true) {
-    var value = (0, _array._findFirst)(valueArray, function (value) {
-      return _isLast(str, value);
-    });
-
-    if ((0, _type.isUndefined)(value)) {
-      break;
-    }
-
-    str = _deleteLast(str, value.length);
-  }
-
-  return str;
-};
-
-exports._trimLast = _trimLast;
-
-var trimLast = function trimLast(str) {
-  var valueArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueArray')) {
-    var _str15 = str;
-    str = _str15.str;
-    var _str15$valueArray = _str15.valueArray;
-    valueArray = _str15$valueArray === void 0 ? [' ', '\r', '\n'] : _str15$valueArray;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('trimLast args(string) is not string');
-  }
-
-  if (!(0, _type.isArray)(valueArray)) {
-    throw new TypeError('trimLast args(valueArray) is not array');
-  }
-
-  if (valueArray.length > 0 && !(0, _type.isStringArray)(valueArray)) {
-    throw new TypeError('trimLast args(valueArray) element is not string array');
-  }
-
-  return _trimLast(str, valueArray);
-};
-/**
- * string.trimBothEnds
- */
-
-
-exports.trimLast = trimLast;
-
-var _trimBothEnds = function _trimBothEnds(str) {
-  var valueFirstArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
-  var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
-
-  while (true) {
-    var value = (0, _array._findFirst)(valueFirstArray, function (value) {
-      return _isFirst(str, value);
-    });
-
-    if ((0, _type.isUndefined)(value)) {
-      break;
-    }
-
-    str = _deleteFirst(str, value.length);
-  }
-
-  while (true) {
-    var _value = (0, _array._findFirst)(valueLastArray, function (value) {
-      return _isLast(str, value);
-    });
-
-    if ((0, _type.isUndefined)(_value)) {
-      break;
-    }
-
-    str = _deleteLast(str, _value.length);
-  }
-
-  return str;
-};
-
-exports._trimBothEnds = _trimBothEnds;
-
-var trimBothEnds = function trimBothEnds(str) {
-  var valueFirstArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [' ', '\r', '\n'];
-  var valueLastArray = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : valueFirstArray;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueFirstArray', 'valueLastArray')) {
-    var _str16 = str;
-    str = _str16.str;
-    valueFirstArray = _str16.valueFirstArray;
-    var _str16$valueLastArray = _str16.valueLastArray;
-    valueLastArray = _str16$valueLastArray === void 0 ? valueFirstArray : _str16$valueLastArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(str, 'str, valueArray')) {
-    var _str17 = str;
-    str = _str17.str;
-    valueFirstArray = _str17.valueArray;
-    valueLastArray = valueFirstArray;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('trimBothEnds args(string) is not string');
-  }
-
-  if (!(0, _type.isArray)(valueFirstArray)) {
-    throw new TypeError('trimBothEnds args(valueFirstArray) is not array');
-  }
-
-  if (valueFirstArray.length > 0 && !(0, _type.isStringArray)(valueFirstArray)) {
-    throw new TypeError('trimBothEnds args(valueFirstArray) is not string array');
-  }
-
-  if (!(0, _type.isArray)(valueLastArray)) {
-    throw new TypeError('trimBothEnds args(valueLastArray) is not array');
-  }
-
-  if (valueLastArray.length > 0 && !(0, _type.isStringArray)(valueLastArray)) {
-    throw new TypeError('trimBothEnds args(valueLastArray) is not string array');
-  }
-
-  return _trimBothEnds(str, valueFirstArray, valueLastArray);
-};
-/**
- * subIndex
- */
-
-
-exports.trimBothEnds = trimBothEnds;
-
-var _subIndex = function _subIndex(str, indexStart) {
-  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
-  return str.substring(indexStart, indexEnd + 1);
-};
-
-exports._subIndex = _subIndex;
-
-var subIndex = function subIndex(str, indexStart) {
-  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, indexStart', 'indexEnd')) {
-    var _str18 = str;
-    str = _str18.str;
-    indexStart = _str18.indexStart;
-    var _str18$indexEnd = _str18.indexEnd;
-    indexEnd = _str18$indexEnd === void 0 ? indexStart : _str18$indexEnd;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('subIndex args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(indexStart)) {
-    throw new TypeError('subIndex args(indexStart) is not integer');
-  }
-
-  if (!(0, _number._inRange)(indexStart, 0, str.length - 1)) {
-    throw new RangeError('subIndex args(indexStart) must be from 0 to str.length - 1');
-  }
-
-  if (!(0, _type.isInteger)(indexEnd)) {
-    throw new TypeError('subIndex args(indexEnd) is not integer');
-  }
-
-  if (!(0, _number._inRange)(indexEnd, indexStart, str.length - 1)) {
-    throw new RangeError('subIndex args(indexEnd) must be from indexStart to str.length - 1');
-  }
-
-  return _subIndex(str, indexStart, indexEnd);
-};
-/**
- * subLength
- */
-
-
-exports.subIndex = subIndex;
-
-var _subLength = function _subLength(str, index) {
-  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
-  return _subIndex(str, index, index + length - 1); // same:
-  //  return str.substring(index, index + length);
-};
-
-exports._subLength = _subLength;
-
-var subLength = function subLength(str, index) {
-  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, index', 'length')) {
-    var _str19 = str;
-    str = _str19.str;
-    index = _str19.index;
-    var _str19$length = _str19.length;
-    length = _str19$length === void 0 ? str.length - index : _str19$length;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('subLength args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(index)) {
-    throw new TypeError('subLength args(indexStart) is not integer');
-  }
-
-  if (!(0, _number._inRange)(index, 0, str.length - 1)) {
-    throw new RangeError('subLength args(indexStart) must be from 0 to str.length - 1');
-  }
-
-  if (!(0, _type.isInteger)(length)) {
-    throw new TypeError('subLength args(length) is not integer');
-  }
-
-  length = (0, _array._min)([length, str.length - index]);
-
-  if (!(0, _number._inRange)(length, 0, str.length - index)) {
-    throw new RangeError('subLength args(length) must be from 0 to str.length - indexStart');
-  }
-
-  return _subLength(str, index, length);
-};
-/**
- * subFirst
- */
-
-
-exports.subLength = subLength;
-
-var _subFirst = function _subFirst(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return _subLength(str, 0, length);
-};
-
-exports._subFirst = _subFirst;
-
-var subFirst = function subFirst(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str20 = str;
-    str = _str20.str;
-    var _str20$length = _str20.length;
-    length = _str20$length === void 0 ? 1 : _str20$length;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('subFirst args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(length)) {
-    throw new TypeError('subFirst args(length) is not integer');
-  }
-
-  if (!(0, _number._inRange)(length, 0, str.length)) {
-    throw new RangeError('subFirst args(length) must be from 0 to str.length');
-  }
-
-  return _subFirst(str, length);
-};
-/**
- * subLast
- */
-
-
-exports.subFirst = subFirst;
-
-var _subLast = function _subLast(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return _subLength(str, str.length - length, length);
-};
-
-exports._subLast = _subLast;
-
-var subLast = function subLast(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str21 = str;
-    str = _str21.str;
-    var _str21$length = _str21.length;
-    length = _str21$length === void 0 ? 1 : _str21$length;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('subLast args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(length)) {
-    throw new TypeError('subLast args(length) is not integer');
-  }
-
-  if (!(0, _number._inRange)(length, 0, str.length)) {
-    throw new RangeError('subLast args(length) must be from 0 to str.length');
-  }
-
-  return _subLast(str, length);
-};
-/**
- * deleteIndex
- */
-
-
-exports.subLast = subLast;
-
-var _deleteIndex = function _deleteIndex(str, indexStart) {
-  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
-  var startStr = str.slice(0, indexStart);
-  var endStr = str.slice(indexEnd + 1, str.length);
-  return startStr + endStr;
-};
-
-exports._deleteIndex = _deleteIndex;
-
-var deleteIndex = function deleteIndex(str, indexStart) {
-  var indexEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : indexStart;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, indexStart', 'indexEnd')) {
-    var _str22 = str;
-    str = _str22.str;
-    indexStart = _str22.indexStart;
-    var _str22$indexEnd = _str22.indexEnd;
-    indexEnd = _str22$indexEnd === void 0 ? indexStart : _str22$indexEnd;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('deleteIndex args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(indexStart)) {
-    throw new TypeError('deleteIndex args(indexStart) is not integer');
-  }
-
-  if (!(0, _number._inRange)(indexStart, 0, str.length - 1)) {
-    throw new RangeError('deleteIndex args(indexStart) must be from 0 to str.length - 1');
-  }
-
-  if (!(0, _type.isInteger)(indexEnd)) {
-    throw new TypeError('deleteIndex args(indexEnd) is not integer');
-  }
-
-  if (!(0, _number._inRange)(indexEnd, indexStart, str.length - 1)) {
-    throw new RangeError('deleteIndex args(indexEnd) must be from indexStart to str.length - 1');
-  }
-
-  return _deleteIndex(str, indexStart, indexEnd);
-};
-/**
- * deleteLength
- */
-
-
-exports.deleteIndex = deleteIndex;
-
-var _deleteLength = function _deleteLength(str, index) {
-  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
-  return _deleteIndex(str, index, index + length - 1);
-};
-
-exports._deleteLength = _deleteLength;
-
-var deleteLength = function deleteLength(str, index) {
-  var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - index;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, index', 'length')) {
-    var _str23 = str;
-    str = _str23.str;
-    index = _str23.index;
-    var _str23$length = _str23.length;
-    length = _str23$length === void 0 ? str.length - index : _str23$length;
-  } else if ((0, _isObjectParameter.isObjectParameter)(index, 'index', 'length')) {
-    var _index = index;
-    index = _index.index;
-    var _index$length = _index.length;
-    length = _index$length === void 0 ? str.length - index : _index$length;
-  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
-    var _length = length;
-    length = _length.length;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('deleteLength args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(index)) {
-    throw new TypeError('deleteLength args(indexStart) is not integer');
-  }
-
-  if (!(0, _number._inRange)(index, 0, str.length - 1)) {
-    throw new RangeError('deleteLength args(indexStart) must be from 0 to str.length - 1');
-  }
-
-  if (!(0, _type.isInteger)(length)) {
-    throw new TypeError('deleteLength args(length) is not integer');
-  }
-
-  length = (0, _array._min)([length, str.length - index]);
-
-  if (!(0, _number._inRange)(length, 0, str.length - index)) {
-    throw new RangeError('deleteLength args(length) must be from 0 to str.length - indexStart');
-  }
-
-  return _deleteLength(str, index, length);
-};
-/**
- * deleteFirst
- */
-
-
-exports.deleteLength = deleteLength;
-
-var _deleteFirst = function _deleteFirst(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return _deleteLength(str, 0, length);
-};
-
-exports._deleteFirst = _deleteFirst;
-
-var deleteFirst = function deleteFirst(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str24 = str;
-    str = _str24.str;
-    var _str24$length = _str24.length;
-    length = _str24$length === void 0 ? 1 : _str24$length;
-  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
-    var _length2 = length;
-    length = _length2.length;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('deleteFirst args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(length)) {
-    throw new TypeError('deleteFirst args(length) is not integer');
-  }
-
-  if (!(0, _number._inRange)(length, 0, str.length)) {
-    throw new RangeError('deleteFirst args(length) must be from 0 to str.length');
-  }
-
-  return _deleteFirst(str, length);
-};
-/**
- * deleteLast
- */
-
-
-exports.deleteFirst = deleteFirst;
-
-var _deleteLast = function _deleteLast(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return _deleteLength(str, str.length - length, length);
-};
-
-exports._deleteLast = _deleteLast;
-
-var deleteLast = function deleteLast(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str', 'length')) {
-    var _str25 = str;
-    str = _str25.str;
-    var _str25$length = _str25.length;
-    length = _str25$length === void 0 ? 1 : _str25$length;
-  } else if ((0, _isObjectParameter.isObjectParameter)(length, 'length')) {
-    var _length3 = length;
-    length = _length3.length;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('deleteLast args(str) is not string');
-  }
-
-  if (!(0, _type.isInteger)(length)) {
-    throw new TypeError('deleteLast args(length) is not integer');
-  }
-
-  if (!(0, _number._inRange)(length, 0, str.length)) {
-    throw new RangeError('deleteLast args(length) must be from 0 to str.length');
-  }
-
-  return _deleteLast(str, length);
-};
-/**
- * string.insert
- */
-
-
-exports.deleteLast = deleteLast;
-
-var _insert = function _insert(str, value) {
-  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  str = _subFirst(str, index) + value + _subLast(str, str.length - index);
-  return str;
-};
-
-exports._insert = _insert;
-
-var insert = function insert(str, value) {
-  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value', 'index')) {
-    var _str26 = str;
-    str = _str26.str;
-    value = _str26.value;
-    var _str26$index = _str26.index;
-    index = _str26$index === void 0 ? 0 : _str26$index;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('insert args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('insert args(value) is not string');
-  }
-
-  if (!(0, _type.isInteger)(index)) {
-    throw new TypeError('insert args(index) is not integer');
-  }
-
-  if (!(0, _number._inRange)(index, 0, str.length)) {
-    throw new RangeError('insert args(index) must be from 0 to str.length');
-  }
-
-  return _insert(str, value, index);
-};
-/**
- * string.add
- */
-
-
-exports.insert = insert;
-
-var _add = function _add(str, value) {
-  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - 1;
-  str = _subFirst(str, index + 1) + value + _subLast(str, str.length - index - 1);
-  return str;
-};
-
-exports._add = _add;
-
-var add = function add(str, value) {
-  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : str.length - 1;
-
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, value', 'index')) {
-    var _str27 = str;
-    str = _str27.str;
-    value = _str27.value;
-    var _str27$index = _str27.index;
-    index = _str27$index === void 0 ? str.length - 1 : _str27$index;
-  }
-
-  if (!(0, _type.isString)(str)) {
-    throw new TypeError('add args(str) is not string');
-  }
-
-  if (!(0, _type.isString)(value)) {
-    throw new TypeError('add args(value) is not string');
-  }
-
-  if (!(0, _type.isInteger)(index)) {
-    throw new TypeError('add args(index) is not integer');
-  }
-
-  if (!(0, _number._inRange)(index, -1, str.length - 1)) {
-    throw new RangeError('add args(index) must be from -1 to str.length - 1');
-  }
-
-  return _add(str, value, index);
-};
-
-exports.add = add;
-var _default = {
-  _repeat: _repeat,
-  _isLowerCase: _isLowerCase,
-  _isUpperCase: _isUpperCase,
-  _isFirst: _isFirst,
-  _isLast: _isLast,
-  _isBothEnds: _isBothEnds,
-  _includeFirst: _includeFirst,
-  _includeLast: _includeLast,
-  _includeBothEnds: _includeBothEnds,
-  _excludeFirst: _excludeFirst,
-  _excludeLast: _excludeLast,
-  _excludeBothEnds: _excludeBothEnds,
-  _trimFirst: _trimFirst,
-  _trimLast: _trimLast,
-  _trimBothEnds: _trimBothEnds,
-  _subIndex: _subIndex,
-  _subLength: _subLength,
-  _subFirst: _subFirst,
-  _subLast: _subLast,
-  _deleteIndex: _deleteIndex,
-  _deleteLength: _deleteLength,
-  _deleteFirst: _deleteFirst,
-  _deleteLast: _deleteLast,
-  _insert: _insert,
-  _add: _add,
-  repeat: repeat,
-  isLowerCase: isLowerCase,
-  isUpperCase: isUpperCase,
-  isFirst: isFirst,
-  isLast: isLast,
-  isBothEnds: isBothEnds,
-  includeFirst: includeFirst,
-  includeLast: includeLast,
-  includeBothEnds: includeBothEnds,
-  excludeFirst: excludeFirst,
-  excludeLast: excludeLast,
-  excludeBothEnds: excludeBothEnds,
-  trimFirst: trimFirst,
-  trimLast: trimLast,
-  trimBothEnds: trimBothEnds,
-  subIndex: subIndex,
-  subLength: subLength,
-  subFirst: subFirst,
-  subLast: subLast,
-  deleteIndex: deleteIndex,
-  deleteLength: deleteLength,
-  deleteFirst: deleteFirst,
-  deleteLast: deleteLast,
-  insert: insert,
-  add: add
-};
-exports["default"] = _default;
-
-/***/ }),
+/* 66 */,
 /* 67 */,
 /* 68 */,
 /* 69 */,
@@ -4983,7 +3863,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.paddingLast = exports.paddingFirst = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.tagOuterLast = exports.tagInnerLast = exports.tagOuterFirst = exports.tagInnerFirst = exports.subLastDelimLast = exports.subLastDelimFirst = exports.subFirstDelimLast = exports.subFirstDelimFirst = exports.matchFormat = exports.replaceAllArray = exports.replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.indexOfAnyLast = exports.indexOfAnyFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._paddingLast = exports._paddingFirst = exports._splitDotItems = exports._splitCommaItems = exports._split = exports._tagOuterLast = exports._tagInnerLast = exports._tagOuterFirst = exports._tagInnerFirst = exports._subLastDelimLast = exports._subLastDelimFirst = exports._subFirstDelimLast = exports._subFirstDelimFirst = exports._matchFormat = exports._replaceAllArray = exports._replaceAll = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._indexOfAnyLast = exports._indexOfAnyFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
+exports["default"] = exports.paddingLast = exports.paddingFirst = exports.splitDotItems = exports.splitCommaItems = exports.split = exports.tagOuterLast = exports.tagInnerLast = exports.tagOuterFirst = exports.tagInnerFirst = exports.subLastDelimLast = exports.subLastDelimFirst = exports.subFirstDelimLast = exports.subFirstDelimFirst = exports.matchFormat = exports.replaceAllArray = exports.replaceAllRepeat = exports.replaceAll = exports.add = exports.insert = exports.deleteLast = exports.deleteFirst = exports.deleteLength = exports.deleteIndex = exports.subLast = exports.subFirst = exports.subLength = exports.subIndex = exports.trimBothEnds = exports.trimLast = exports.trimFirst = exports.excludeBothEnds = exports.excludeLast = exports.excludeFirst = exports.includeBothEnds = exports.includeLast = exports.includeFirst = exports.isBothEnds = exports.isLast = exports.isFirst = exports.includeCount = exports.indexOfAnyLast = exports.indexOfAnyFirst = exports.indexOfLast = exports.indexOfFirst = exports.isUpperCase = exports.isLowerCase = exports.repeat = exports._paddingLast = exports._paddingFirst = exports._splitDotItems = exports._splitCommaItems = exports._split = exports._tagOuterLast = exports._tagInnerLast = exports._tagOuterFirst = exports._tagInnerFirst = exports._subLastDelimLast = exports._subLastDelimFirst = exports._subFirstDelimLast = exports._subFirstDelimFirst = exports._matchFormat = exports._replaceAllArray = exports._replaceAllRepeat = exports._replaceAll = exports._add = exports._insert = exports._deleteLast = exports._deleteFirst = exports._deleteLength = exports._deleteIndex = exports._subLast = exports._subFirst = exports._subLength = exports._subIndex = exports._trimBothEnds = exports._trimLast = exports._trimFirst = exports._excludeBothEnds = exports._excludeLast = exports._excludeFirst = exports._includeBothEnds = exports._includeLast = exports._includeFirst = exports._isBothEnds = exports._isLast = exports._isFirst = exports._includeCount = exports._indexOfAnyLast = exports._indexOfAnyFirst = exports._indexOfLast = exports._indexOfFirst = exports._isUpperCase = exports._isLowerCase = exports._repeat = void 0;
 
 var _string_common = _interopRequireDefault(__webpack_require__(66));
 
@@ -5003,47 +3883,55 @@ var _indexOfAnyLast2 = _interopRequireDefault(__webpack_require__(122));
 
 var _indexOfAnyLast3 = _interopRequireDefault(__webpack_require__(123));
 
+var _includeCount2 = _interopRequireDefault(__webpack_require__(124));
+
+var _includeCount3 = _interopRequireDefault(__webpack_require__(125));
+
 var _replaceAll2 = _interopRequireDefault(__webpack_require__(10));
 
-var _replaceAll3 = _interopRequireDefault(__webpack_require__(124));
+var _replaceAll3 = _interopRequireDefault(__webpack_require__(126));
+
+var _replaceAllRepeat2 = _interopRequireDefault(__webpack_require__(127));
+
+var _replaceAllRepeat3 = _interopRequireDefault(__webpack_require__(128));
 
 var _replaceAllArray2 = _interopRequireDefault(__webpack_require__(93));
 
-var _replaceAllArray3 = _interopRequireDefault(__webpack_require__(125));
+var _replaceAllArray3 = _interopRequireDefault(__webpack_require__(129));
 
-var _matchFormat2 = _interopRequireDefault(__webpack_require__(126));
+var _matchFormat2 = _interopRequireDefault(__webpack_require__(130));
 
-var _subFirstDelimFirst2 = _interopRequireDefault(__webpack_require__(127));
+var _subFirstDelimFirst2 = _interopRequireDefault(__webpack_require__(131));
 
-var _subFirstDelimLast2 = _interopRequireDefault(__webpack_require__(128));
+var _subFirstDelimLast2 = _interopRequireDefault(__webpack_require__(132));
 
-var _subLastDelimFirst2 = _interopRequireDefault(__webpack_require__(129));
+var _subLastDelimFirst2 = _interopRequireDefault(__webpack_require__(133));
 
-var _subLastDelimLast2 = _interopRequireDefault(__webpack_require__(130));
+var _subLastDelimLast2 = _interopRequireDefault(__webpack_require__(134));
 
-var _tagInnerFirst2 = _interopRequireDefault(__webpack_require__(131));
+var _tagInnerFirst2 = _interopRequireDefault(__webpack_require__(135));
 
-var _tagOuterFirst2 = _interopRequireDefault(__webpack_require__(132));
+var _tagOuterFirst2 = _interopRequireDefault(__webpack_require__(136));
 
-var _tagInnerLast2 = _interopRequireDefault(__webpack_require__(133));
+var _tagInnerLast2 = _interopRequireDefault(__webpack_require__(137));
 
-var _tagOuterLast2 = _interopRequireDefault(__webpack_require__(134));
+var _tagOuterLast2 = _interopRequireDefault(__webpack_require__(138));
 
 var _split2 = _interopRequireDefault(__webpack_require__(36));
 
-var _split3 = _interopRequireDefault(__webpack_require__(135));
+var _split3 = _interopRequireDefault(__webpack_require__(139));
 
 var _splitCommaItems2 = _interopRequireDefault(__webpack_require__(97));
 
 var _splitDotItems2 = _interopRequireDefault(__webpack_require__(35));
 
-var _paddingFirst2 = _interopRequireDefault(__webpack_require__(136));
+var _paddingFirst2 = _interopRequireDefault(__webpack_require__(140));
 
-var _paddingFirst3 = _interopRequireDefault(__webpack_require__(137));
+var _paddingFirst3 = _interopRequireDefault(__webpack_require__(141));
 
-var _paddingLast2 = _interopRequireDefault(__webpack_require__(138));
+var _paddingLast2 = _interopRequireDefault(__webpack_require__(142));
 
-var _paddingLast3 = _interopRequireDefault(__webpack_require__(139));
+var _paddingLast3 = _interopRequireDefault(__webpack_require__(143));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -5053,7 +3941,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var stringJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _indexOfFirst2["default"]), _indexOfFirst3["default"]), _indexOfLast2["default"]), _indexOfLast3["default"]), _indexOfAnyFirst2["default"]), _indexOfAnyFirst3["default"]), _indexOfAnyLast2["default"]), _indexOfAnyLast3["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _replaceAllArray2["default"]), _replaceAllArray3["default"]), _matchFormat2["default"]), _subFirstDelimFirst2["default"]), _subFirstDelimLast2["default"]), _subLastDelimFirst2["default"]), _subLastDelimLast2["default"]), _tagInnerFirst2["default"]), _tagOuterFirst2["default"]), _tagInnerLast2["default"]), _tagOuterLast2["default"]), _split2["default"]), _split3["default"]), _splitCommaItems2["default"]), _splitDotItems2["default"]), _paddingFirst2["default"]), _paddingFirst3["default"]), _paddingLast2["default"]), _paddingLast3["default"]);
+var stringJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _string_common["default"]), _indexOfFirst2["default"]), _indexOfFirst3["default"]), _indexOfLast2["default"]), _indexOfLast3["default"]), _indexOfAnyFirst2["default"]), _indexOfAnyFirst3["default"]), _indexOfAnyLast2["default"]), _indexOfAnyLast3["default"]), _includeCount2["default"]), _includeCount3["default"]), _replaceAll2["default"]), _replaceAll3["default"]), _replaceAllRepeat2["default"]), _replaceAllRepeat3["default"]), _replaceAllArray2["default"]), _replaceAllArray3["default"]), _matchFormat2["default"]), _subFirstDelimFirst2["default"]), _subFirstDelimLast2["default"]), _subLastDelimFirst2["default"]), _subLastDelimLast2["default"]), _tagInnerFirst2["default"]), _tagOuterFirst2["default"]), _tagInnerLast2["default"]), _tagOuterLast2["default"]), _split2["default"]), _split3["default"]), _splitCommaItems2["default"]), _splitDotItems2["default"]), _paddingFirst2["default"]), _paddingFirst3["default"]), _paddingLast2["default"]), _paddingLast3["default"]);
 
 var _repeat = stringJs._repeat,
     _isLowerCase = stringJs._isLowerCase,
@@ -5062,6 +3950,7 @@ var _repeat = stringJs._repeat,
     _indexOfLast = stringJs._indexOfLast,
     _indexOfAnyFirst = stringJs._indexOfAnyFirst,
     _indexOfAnyLast = stringJs._indexOfAnyLast,
+    _includeCount = stringJs._includeCount,
     _isFirst = stringJs._isFirst,
     _isLast = stringJs._isLast,
     _isBothEnds = stringJs._isBothEnds,
@@ -5085,6 +3974,7 @@ var _repeat = stringJs._repeat,
     _insert = stringJs._insert,
     _add = stringJs._add,
     _replaceAll = stringJs._replaceAll,
+    _replaceAllRepeat = stringJs._replaceAllRepeat,
     _replaceAllArray = stringJs._replaceAllArray,
     _matchFormat = stringJs._matchFormat,
     _subFirstDelimFirst = stringJs._subFirstDelimFirst,
@@ -5115,6 +4005,7 @@ exports._subFirstDelimLast = _subFirstDelimLast;
 exports._subFirstDelimFirst = _subFirstDelimFirst;
 exports._matchFormat = _matchFormat;
 exports._replaceAllArray = _replaceAllArray;
+exports._replaceAllRepeat = _replaceAllRepeat;
 exports._replaceAll = _replaceAll;
 exports._add = _add;
 exports._insert = _insert;
@@ -5138,6 +4029,7 @@ exports._includeFirst = _includeFirst;
 exports._isBothEnds = _isBothEnds;
 exports._isLast = _isLast;
 exports._isFirst = _isFirst;
+exports._includeCount = _includeCount;
 exports._indexOfAnyLast = _indexOfAnyLast;
 exports._indexOfAnyFirst = _indexOfAnyFirst;
 exports._indexOfLast = _indexOfLast;
@@ -5152,6 +4044,7 @@ var repeat = stringJs.repeat,
     indexOfLast = stringJs.indexOfLast,
     indexOfAnyFirst = stringJs.indexOfAnyFirst,
     indexOfAnyLast = stringJs.indexOfAnyLast,
+    includeCount = stringJs.includeCount,
     isFirst = stringJs.isFirst,
     isLast = stringJs.isLast,
     isBothEnds = stringJs.isBothEnds,
@@ -5175,6 +4068,7 @@ var repeat = stringJs.repeat,
     insert = stringJs.insert,
     add = stringJs.add,
     replaceAll = stringJs.replaceAll,
+    replaceAllRepeat = stringJs.replaceAllRepeat,
     replaceAllArray = stringJs.replaceAllArray,
     matchFormat = stringJs.matchFormat,
     subFirstDelimFirst = stringJs.subFirstDelimFirst,
@@ -5205,6 +4099,7 @@ exports.subFirstDelimLast = subFirstDelimLast;
 exports.subFirstDelimFirst = subFirstDelimFirst;
 exports.matchFormat = matchFormat;
 exports.replaceAllArray = replaceAllArray;
+exports.replaceAllRepeat = replaceAllRepeat;
 exports.replaceAll = replaceAll;
 exports.add = add;
 exports.insert = insert;
@@ -5228,6 +4123,7 @@ exports.includeFirst = includeFirst;
 exports.isBothEnds = isBothEnds;
 exports.isLast = isLast;
 exports.isFirst = isFirst;
+exports.includeCount = includeCount;
 exports.indexOfAnyLast = indexOfAnyLast;
 exports.indexOfAnyFirst = indexOfAnyFirst;
 exports.indexOfLast = indexOfLast;
@@ -5243,6 +4139,7 @@ var _default = {
   _indexOfLast: _indexOfLast,
   _indexOfAnyFirst: _indexOfAnyFirst,
   _indexOfAnyLast: _indexOfAnyLast,
+  _includeCount: _includeCount,
   _isFirst: _isFirst,
   _isLast: _isLast,
   _isBothEnds: _isBothEnds,
@@ -5266,6 +4163,7 @@ var _default = {
   _insert: _insert,
   _add: _add,
   _replaceAll: _replaceAll,
+  _replaceAllRepeat: _replaceAllRepeat,
   _replaceAllArray: _replaceAllArray,
   _matchFormat: _matchFormat,
   _subFirstDelimFirst: _subFirstDelimFirst,
@@ -5288,6 +4186,7 @@ var _default = {
   indexOfLast: indexOfLast,
   indexOfAnyFirst: indexOfAnyFirst,
   indexOfAnyLast: indexOfAnyLast,
+  includeCount: includeCount,
   isFirst: isFirst,
   isLast: isLast,
   isBothEnds: isBothEnds,
@@ -5311,6 +4210,7 @@ var _default = {
   insert: insert,
   add: add,
   replaceAll: replaceAll,
+  replaceAllRepeat: replaceAllRepeat,
   replaceAllArray: replaceAllArray,
   matchFormat: matchFormat,
   subFirstDelimFirst: subFirstDelimFirst,
@@ -5637,6 +4537,95 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports._includeCount = void 0;
+
+var _indexOfFirst2 = __webpack_require__(91);
+
+/**
+ * includeCount
+ */
+var _includeCount = function _includeCount(str, search) {
+  var result = 0;
+  var index = 0;
+
+  do {
+    index = (0, _indexOfFirst2._indexOfFirst)(str, search, index);
+
+    if (index === -1) {
+      break;
+    }
+
+    index += search.length;
+    result += 1;
+  } while (true);
+
+  return result;
+};
+
+exports._includeCount = _includeCount;
+var _default = {
+  _includeCount: _includeCount
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.includeCount = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _includeCount2 = __webpack_require__(124);
+
+/**
+ * includeCount
+ */
+var includeCount = function includeCount(str, search) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, search')) {
+    var _str = str;
+    str = _str.str;
+    search = _str.search;
+  } else if ((0, _isObjectParameter.isObjectParameter)(search, 'search')) {
+    var _search = search;
+    search = _search.search;
+  }
+
+  if (!(0, _isType.isString)(str)) {
+    throw new TypeError("includeCount args(str:".concat(str, ") is not string"));
+  }
+
+  if (!(0, _isType.isString)(search)) {
+    throw new TypeError("includeCount args(search:".concat(search, ") is not string"));
+  }
+
+  return (0, _includeCount2._includeCount)(str, search);
+};
+
+exports.includeCount = includeCount;
+var _default = {
+  includeCount: includeCount
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.replaceAll = void 0;
 
 var _type = __webpack_require__(5);
@@ -5654,18 +4643,33 @@ var replaceAll = function replaceAll(str, before, after) {
     str = _str.str;
     before = _str.before;
     after = _str.after;
+  } else if ((0, _isObjectParameter.isObjectParameter)(before, 'before, after')) {
+    var _before = before;
+    before = _before.before;
+    after = _before.after;
+  } else if ((0, _isObjectParameter.isObjectParameter)(after, 'after')) {
+    var _after = after;
+    after = _after.after;
   }
 
   if (!(0, _type.isString)(str)) {
-    throw new TypeError('replaceAll args(str) is not string');
+    throw new TypeError("replaceAll args(str:".concat(str, ") is not string"));
+  }
+
+  if (str === '') {
+    throw new TypeError("replaceAll args(str) is empty string");
   }
 
   if (!(0, _type.isString)(before)) {
-    throw new TypeError('replaceAll args(before) is not string');
+    throw new TypeError("replaceAll args(before:".concat(before, ") is not string"));
+  }
+
+  if (before === '') {
+    throw new TypeError("replaceAll args(before) is empty string");
   }
 
   if (!(0, _type.isString)(after)) {
-    throw new TypeError('replaceAll args(after) is not string');
+    throw new TypeError("replaceAll args(after:".concat(after, ") is not string"));
   }
 
   return (0, _replaceAll2._replaceAll)(str, before, after);
@@ -5678,7 +4682,117 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 125 */
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._replaceAllRepeat = void 0;
+
+var _includes = __webpack_require__(9);
+
+var _replaceAll2 = __webpack_require__(10);
+
+/**
+ * replaceAllRepeat
+ */
+var _replaceAllRepeat = function _replaceAllRepeat(str, before, after) {
+  var result = str;
+
+  if (before === '') {
+    return result;
+  }
+
+  while ((0, _includes.__includes)(result, before)) {
+    result = (0, _replaceAll2._replaceAll)(result, before, after);
+  }
+
+  return result;
+};
+
+exports._replaceAllRepeat = _replaceAllRepeat;
+var _default = {
+  _replaceAllRepeat: _replaceAllRepeat
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.replaceAllRepeat = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _includes = __webpack_require__(9);
+
+var _replaceAllRepeat2 = __webpack_require__(127);
+
+/**
+ * replaceAllRepeat
+ */
+var replaceAllRepeat = function replaceAllRepeat(str, before, after) {
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, before, after')) {
+    var _str = str;
+    str = _str.str;
+    before = _str.before;
+    after = _str.after;
+  } else if ((0, _isObjectParameter.isObjectParameter)(before, 'before, after')) {
+    var _before = before;
+    before = _before.before;
+    after = _before.after;
+  } else if ((0, _isObjectParameter.isObjectParameter)(after, 'after')) {
+    var _after = after;
+    after = _after.after;
+  }
+
+  if (!(0, _type.isString)(str)) {
+    throw new TypeError("replaceAllRepeat args(str:".concat(str, ") is not string"));
+  }
+
+  if (str === '') {
+    throw new TypeError('replaceAllRepeat args(str) is empty string');
+  }
+
+  if (!(0, _type.isString)(before)) {
+    throw new TypeError("replaceAllRepeat args(before:".concat(before, ") is not string"));
+  }
+
+  if (before === '') {
+    throw new TypeError('replaceAllRepeat args(before) is empty string');
+  }
+
+  if (!(0, _type.isString)(after)) {
+    throw new TypeError("replaceAllRepeat args(after:".concat(after, ") is not string"));
+  }
+
+  if ((0, _includes.__includes)(after, before)) {
+    throw new TypeError('replaceAllRepeat args(before) is includes args(after)');
+  }
+
+  return (0, _replaceAllRepeat2._replaceAllRepeat)(str, before, after);
+};
+
+exports.replaceAllRepeat = replaceAllRepeat;
+var _default = {
+  replaceAllRepeat: replaceAllRepeat
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5732,7 +4846,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 126 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5966,72 +5080,15 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 127 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.subFirstDelimFirst = exports._subFirstDelimFirst = void 0;
-
-var _isType = __webpack_require__(11);
-
-var _string = __webpack_require__(118);
-
-var _isObjectParameter = __webpack_require__(15);
-
-var _subFirstDelimFirst = function _subFirstDelimFirst(str, delimiter) {
-  var index = (0, _string._indexOfFirst)(str, delimiter);
-
-  if (index === -1) {
-    return '';
-  } else {
-    return (0, _string._subIndex)(str, 0, index - 1);
-  }
-};
-
-exports._subFirstDelimFirst = _subFirstDelimFirst;
-
-var subFirstDelimFirst = function subFirstDelimFirst(str, delimiter) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, delimiter')) {
-    var _str = str;
-    str = _str.str;
-    delimiter = _str.delimiter;
-  } else if ((0, _isObjectParameter.isObjectParameter)(delimiter, 'delimiter')) {
-    var _delimiter = delimiter;
-    delimiter = _delimiter.delimiter;
-  }
-
-  if (!(0, _isType.isString)(str)) {
-    throw new TypeError('subFirstDelimFirst args(str) is not string');
-  }
-
-  if (!(0, _isType.isString)(delimiter)) {
-    throw new TypeError('subFirstDelimFirst args(delimiter) is not string');
-  }
-
-  return _subFirstDelimFirst(str, delimiter);
-};
-
-exports.subFirstDelimFirst = subFirstDelimFirst;
-var _default = {
-  _subFirstDelimFirst: _subFirstDelimFirst,
-  subFirstDelimFirst: subFirstDelimFirst
-};
-exports["default"] = _default;
-
-/***/ }),
-/* 128 */,
-/* 129 */,
-/* 130 */,
 /* 131 */,
 /* 132 */,
 /* 133 */,
 /* 134 */,
-/* 135 */
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6125,7 +5182,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 136 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6157,7 +5214,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 137 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6172,7 +5229,7 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _isType = __webpack_require__(11);
 
-var _paddingFirst2 = __webpack_require__(136);
+var _paddingFirst2 = __webpack_require__(140);
 
 /**
  * paddingFirst
@@ -6214,7 +5271,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 138 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6246,7 +5303,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 139 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6261,7 +5318,7 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _isType = __webpack_require__(11);
 
-var _paddingLast2 = __webpack_require__(138);
+var _paddingLast2 = __webpack_require__(142);
 
 /**
  * paddingLast
@@ -6299,6 +5356,874 @@ var paddingLast = function paddingLast(str, length, fill) {
 exports.paddingLast = paddingLast;
 var _default = {
   paddingLast: paddingLast
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._DateTime = void 0;
+
+var _Today = _interopRequireDefault(__webpack_require__(165));
+
+var _isInvalidDate = _interopRequireDefault(__webpack_require__(166));
+
+var _DateTime2 = _interopRequireDefault(__webpack_require__(167));
+
+var _DateTime3 = _interopRequireDefault(__webpack_require__(168));
+
+var _datetimeToString2 = _interopRequireDefault(__webpack_require__(169));
+
+var _datetimeToString3 = _interopRequireDefault(__webpack_require__(175));
+
+var _dayOfWeek2 = _interopRequireDefault(__webpack_require__(172));
+
+var _dayOfWeek3 = _interopRequireDefault(__webpack_require__(176));
+
+var _dayOfWeekEnglishShort2 = _interopRequireDefault(__webpack_require__(171));
+
+var _dayOfWeekEnglishShort3 = _interopRequireDefault(__webpack_require__(177));
+
+var _dayOfWeekEnglishLong2 = _interopRequireDefault(__webpack_require__(174));
+
+var _dayOfWeekEnglishLong3 = _interopRequireDefault(__webpack_require__(178));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]);
+
+var _DateTime = dateJs._DateTime,
+    _datetimeToString = dateJs._datetimeToString,
+    _dayOfWeek = dateJs._dayOfWeek,
+    _dayOfWeekEnglishShort = dateJs._dayOfWeekEnglishShort,
+    _dayOfWeekEnglishLong = dateJs._dayOfWeekEnglishLong,
+    Today = dateJs.Today,
+    isInvalidDate = dateJs.isInvalidDate,
+    DateTime = dateJs.DateTime,
+    datetimeToString = dateJs.datetimeToString,
+    dayOfWeek = dateJs.dayOfWeek,
+    dayOfWeekEnglishShort = dateJs.dayOfWeekEnglishShort,
+    dayOfWeekEnglishLong = dateJs.dayOfWeekEnglishLong;
+exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
+exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
+exports.dayOfWeek = dayOfWeek;
+exports.datetimeToString = datetimeToString;
+exports.DateTime = DateTime;
+exports.isInvalidDate = isInvalidDate;
+exports.Today = Today;
+exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
+exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
+exports._dayOfWeek = _dayOfWeek;
+exports._datetimeToString = _datetimeToString;
+exports._DateTime = _DateTime;
+var _default = {
+  _DateTime: _DateTime,
+  _datetimeToString: _datetimeToString,
+  _dayOfWeek: _dayOfWeek,
+  _dayOfWeekEnglishShort: _dayOfWeekEnglishShort,
+  _dayOfWeekEnglishLong: _dayOfWeekEnglishLong,
+  Today: Today,
+  isInvalidDate: isInvalidDate,
+  DateTime: DateTime,
+  datetimeToString: datetimeToString,
+  dayOfWeek: dayOfWeek,
+  dayOfWeekEnglishShort: dayOfWeekEnglishShort,
+  dayOfWeekEnglishLong: dayOfWeekEnglishLong
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 165 */,
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.isInvalidDate = void 0;
+
+var _isType = __webpack_require__(11);
+
+/**
+ * isInvalidDate
+ */
+var isInvalidDate = function isInvalidDate(value) {
+  return (0, _isType.isDate)(value) && (0, _isType.isNaNStrict)(value.getTime()); // WSH
+  //  value.toString() !== 'Invalid Date'
+};
+
+exports.isInvalidDate = isInvalidDate;
+var _default = {
+  isInvalidDate: isInvalidDate
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 167 */,
+/* 168 */,
+/* 169 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._datetimeToString = void 0;
+
+var _includes = __webpack_require__(9);
+
+var _objectKeys2 = __webpack_require__(102);
+
+var _SortFunc2 = __webpack_require__(78);
+
+var _loop = __webpack_require__(38);
+
+var _replaceAllArray2 = __webpack_require__(93);
+
+var _number = __webpack_require__(42);
+
+var _includeCount2 = __webpack_require__(124);
+
+var _detetimeToStringFunc = __webpack_require__(170);
+
+/**
+ * datetimeToString
+ */
+var _datetimeToString = function _datetimeToString(date, format) {
+  var ruleObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  var existSingleQuote = (0, _includes.__includes)(format, "'");
+  var existDoubleQuote = (0, _includes.__includes)(format, '"');
+
+  if (existSingleQuote && existDoubleQuote) {
+    throw new Error("_datetimeToString args(format:".concat(format, ") exists both singleQuote and doubleQuote"));
+  }
+
+  var keys = (0, _objectKeys2._objectKeys)(ruleObject);
+  keys.sort((0, _SortFunc2._SortFunc)([[_SortFunc2._SortFunc.order.normal.descending, function (v) {
+    return v.length;
+  }]]));
+  var replaceArray = [];
+  (0, _loop.__loop)(keys)(function (value, index) {
+    replaceArray.push([value, ruleObject[value](date, isLocal)]);
+  });
+  var quoteChar;
+
+  if (existSingleQuote === false && existDoubleQuote === false) {
+    return (0, _replaceAllArray2._replaceAllArray)(format, replaceArray);
+  } else if (existSingleQuote === false) {
+    quoteChar = '"';
+  } else if (existDoubleQuote === false) {
+    quoteChar = "'";
+  }
+
+  if ((0, _number.isOdd)((0, _includeCount2._includeCount)(format, quoteChar))) {
+    throw new Error("_datetimeToString args(format:".concat(format, ") exists odd Quotes"));
+  }
+
+  var formatStrs = format.split(quoteChar);
+
+  for (var i = 0, l = formatStrs.length; i < l; i += 2) {
+    formatStrs[i] = (0, _replaceAllArray2._replaceAllArray)(formatStrs[i], replaceArray);
+  }
+
+  return formatStrs.join('');
+};
+
+exports._datetimeToString = _datetimeToString;
+var _default = {
+  _datetimeToString: _datetimeToString
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.__detetimeToStringFunc = void 0;
+
+var _paddingFirst2 = __webpack_require__(140);
+
+var _string_common = __webpack_require__(66);
+
+var _dayOfWeekEnglishShort2 = __webpack_require__(171);
+
+var _dayOfWeekEnglishLong2 = __webpack_require__(174);
+
+var __detetimeToStringFunc = {};
+exports.__detetimeToStringFunc = __detetimeToStringFunc;
+
+var year4 = function year4(date, isLocal) {
+  if (isLocal) {
+    return date.getFullYear().toString();
+  } else {
+    return date.getUTCFullYear().toString();
+  }
+};
+
+var year2 = function year2(date, isLocal) {
+  return (0, _string_common._subLast)(year4(date, isLocal), 2);
+};
+
+var month1 = function month1(date, isLocal) {
+  if (isLocal) {
+    return (date.getMonth() + 1).toString();
+  } else {
+    return (date.getUTCMonth() + 1).toString();
+  }
+};
+
+var month2 = function month2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(month1(date, isLocal), 2, '0');
+};
+
+var date1 = function date1(date, isLocal) {
+  if (isLocal) {
+    return date.getDate().toString();
+  } else {
+    return date.getUTCMonth().toString();
+  }
+};
+
+var date2 = function date2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(date1(date, isLocal), 2, '0');
+};
+
+var hour12_1 = function hour12_1(date, isLocal) {
+  // 0-11
+  if (isLocal) {
+    return (date.getHours() % 12).toString();
+  } else {
+    return (date.getUTCHours() % 12).toString();
+  }
+};
+
+var hour12_2 = function hour12_2(date, isLocal) {
+  // 00-11
+  return (0, _paddingFirst2._paddingFirst)(hour12_1(date, isLocal), 2, '0');
+};
+
+var hour24_1 = function hour24_1(date, isLocal) {
+  // 0-23
+  if (isLocal) {
+    return date.getHours().toString();
+  } else {
+    return date.getUTCHours().toString();
+  }
+};
+
+var hour24_2 = function hour24_2(date, isLocal) {
+  // 00-23
+  return (0, _paddingFirst2._paddingFirst)(hour24_1(date, isLocal), 2, '0');
+};
+
+var minute1 = function minute1(date, isLocal) {
+  if (isLocal) {
+    return date.getMinutes().toString();
+  } else {
+    return date.getUTCMinutes().toString();
+  }
+};
+
+var minute2 = function minute2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(minute1(date, isLocal), 2, '0');
+};
+
+var second1 = function second1(date, isLocal) {
+  if (isLocal) {
+    return date.getSeconds().toString();
+  } else {
+    return date.getUTCSeconds().toString();
+  }
+};
+
+var second2 = function second2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(second1(date, isLocal), 2, '0');
+};
+
+var millisecond3 = function millisecond3(date, isLocal) {
+  if (isLocal) {
+    return (0, _paddingFirst2._paddingFirst)(date.getMilliseconds().toString(), 3, '0');
+  } else {
+    return (0, _paddingFirst2._paddingFirst)(date.getUTCMilliseconds().toString(), 3, '0');
+  }
+};
+
+var millisecond2 = function millisecond2(date, isLocal) {
+  return (0, _string_common._subFirst)(millisecond3(date, isLocal), 2);
+};
+
+var millisecond1 = function millisecond1(date, isLocal) {
+  return (0, _string_common._subFirst)(millisecond3(date, isLocal), 1);
+};
+
+var am_pm = function am_pm(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'am' : 'pm';
+  } else {
+    return date.getUTCHours() < 12 ? 'am' : 'pm';
+  }
+};
+
+var AM_PM = function AM_PM(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'AM' : 'PM';
+  } else {
+    return date.getUTCHours() < 12 ? 'AM' : 'PM';
+  }
+};
+
+var a_p = function a_p(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'a' : 'p';
+  } else {
+    return date.getUTCHours() < 12 ? 'a' : 'p';
+  }
+};
+
+var A_P = function A_P(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'A' : 'P';
+  } else {
+    return date.getUTCHours() < 12 ? 'A' : 'P';
+  }
+};
+
+var timezone = function timezone(date) {
+  var minutes = -1 * date.getTimezoneOffset();
+  var offsetHourStr = (0, _paddingFirst2._paddingFirst)(String(Math.floor(minutes / 60)), 2, '0');
+  offsetHourStr = 0 < minutes ? '+' + offsetHourStr : offsetHourStr;
+  var offsetMinStr = (0, _paddingFirst2._paddingFirst)(String(minutes % 60), 2, '0');
+  return {
+    offsetHourStr: offsetHourStr,
+    offsetMinStr: offsetMinStr
+  };
+};
+
+var timezoneHHMM = function timezoneHHMM(date) {
+  var _timezone = timezone(date),
+      offsetHourStr = _timezone.offsetHourStr,
+      offsetMinStr = _timezone.offsetMinStr;
+
+  return offsetHourStr + offsetMinStr;
+};
+
+var timezoneHH_MM = function timezoneHH_MM(date) {
+  var _timezone2 = timezone(date),
+      offsetHourStr = _timezone2.offsetHourStr,
+      offsetMinStr = _timezone2.offsetMinStr;
+
+  return offsetHourStr + ':' + offsetMinStr;
+};
+
+__detetimeToStringFunc.year4 = year4;
+__detetimeToStringFunc.year2 = year2;
+__detetimeToStringFunc.month2 = month2;
+__detetimeToStringFunc.month1 = month1;
+__detetimeToStringFunc.date2 = date2;
+__detetimeToStringFunc.date1 = date1;
+__detetimeToStringFunc.hour12_2 = hour12_2;
+__detetimeToStringFunc.hour12_1 = hour12_1;
+__detetimeToStringFunc.hour24_2 = hour24_2;
+__detetimeToStringFunc.hour24_1 = hour24_1;
+__detetimeToStringFunc.minute2 = minute2;
+__detetimeToStringFunc.minute1 = minute1;
+__detetimeToStringFunc.second2 = second2;
+__detetimeToStringFunc.second1 = second1;
+__detetimeToStringFunc.millisecond3 = millisecond3;
+__detetimeToStringFunc.millisecond2 = millisecond2;
+__detetimeToStringFunc.millisecond1 = millisecond1;
+__detetimeToStringFunc.am_pm = am_pm;
+__detetimeToStringFunc.AM_PM = AM_PM;
+__detetimeToStringFunc.a_p = a_p;
+__detetimeToStringFunc.A_P = A_P;
+var _DefaultObject = {
+  YYYY: year4,
+  YY: year2,
+  MM: month2,
+  M: month1,
+  DD: date2,
+  D: date1,
+  hh: hour12_2,
+  h: hour12_1,
+  HH: hour24_2,
+  H: hour24_1,
+  mm: minute2,
+  m: minute1,
+  ss: second2,
+  s: second1,
+  SSS: millisecond3,
+  SS: millisecond2,
+  S: millisecond1,
+  aa: am_pm,
+  AA: AM_PM,
+  a: a_p,
+  A: A_P,
+  ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  Z: timezoneHH_MM,
+  ZZ: timezoneHHMM
+};
+var _MomentLikeObject = {
+  YYYY: year4,
+  YY: year2,
+  MM: month2,
+  M: month1,
+  DD: date2,
+  D: date1,
+  hh: hour12_2,
+  h: hour12_1,
+  HH: hour24_2,
+  H: hour24_1,
+  mm: minute2,
+  m: minute1,
+  ss: second2,
+  s: second1,
+  SSS: millisecond3,
+  SS: millisecond2,
+  S: millisecond1,
+  a: a_p,
+  ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  Z: timezoneHH_MM,
+  ZZ: timezoneHHMM
+};
+
+__detetimeToStringFunc.MMM = function (date) {
+  return nameOfMonthEnglish3Char(date);
+};
+
+__detetimeToStringFunc.MMMM = function (date) {
+  return nameOfMonthEnglish4Char(date);
+};
+
+__detetimeToStringFunc.MMMMM = function (date) {
+  return nameOfMonthEnglishLong(date);
+}; // const _DefaultObject = { ...__detetimeToStringFunc };
+
+
+__detetimeToStringFunc.DefaultObject = function () {
+  return _DefaultObject;
+}; // const dayOfWeek = (date, dayOfWeekNames) => {
+//   // c.assert(t.isDate(date));
+//   // if (t.isNullOrUndefined(dayOfWeekNames)) {
+//   //   return date.getDay();
+//   // }
+//   // c.assert(t.isArray(dayOfWeekNames));
+//   // c.assert(dayOfWeekNames.length === 7);
+//   return dayOfWeekNames[date.getDay()];
+// };
+// const dayOfWeekEnglishShort = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishShort());
+// };
+// const dayOfWeekEnglishLong = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishLong());
+// };
+// const dayOfWeekNamesEnglishShort = () => {
+//   return [
+//     'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+//   ];
+// };
+// const dayOfWeekNamesEnglishLong = () => {
+//   return [
+//     'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+//     'Thursday', 'Friday', 'Saturday',
+//   ];
+// };
+
+
+var nameOfMonth = function nameOfMonth(date, monthNames) {
+  // c.assert(t.isDate(date));
+  // c.assert(t.isArray(monthNames));
+  // c.assert(monthNames.length === 12);
+  return monthNames[date.getMonth()];
+};
+
+var nameOfMonthEnglish3Char = function nameOfMonthEnglish3Char(date) {
+  return nameOfMonth(date, monthNamesEnglish3Char());
+};
+
+var nameOfMonthEnglish4Char = function nameOfMonthEnglish4Char(date) {
+  return nameOfMonth(date, monthNamesEnglish4Char());
+};
+
+var nameOfMonthEnglishLong = function nameOfMonthEnglishLong(date) {
+  return nameOfMonth(date, monthNamesEnglishLong());
+};
+
+var monthNamesEnglish3Char = function monthNamesEnglish3Char() {
+  return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+};
+
+var monthNamesEnglish4Char = function monthNamesEnglish4Char() {
+  return ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+};
+
+var monthNamesEnglishLong = function monthNamesEnglishLong() {
+  return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+};
+
+var _default = {
+  __detetimeToStringFunc: __detetimeToStringFunc
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._dayOfWeekEnglishShort = void 0;
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var _dayOfWeekEnglishShort = function _dayOfWeekEnglishShort(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishShort());
+};
+
+exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
+var _default = {
+  _dayOfWeekEnglishShort: _dayOfWeekEnglishShort
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._dayOfWeek = void 0;
+
+var _dayOfWeekNames = __webpack_require__(173);
+
+var _dayOfWeek = function _dayOfWeek(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var dayOfWeekNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _dayOfWeekNames.__dayOfWeekNames.EnglishShort;
+
+  if (isLocal) {
+    return dayOfWeekNames[date.getDay()];
+  } else {
+    return dayOfWeekNames[date.getUTCDay()];
+  }
+};
+
+exports._dayOfWeek = _dayOfWeek;
+_dayOfWeek.names = _dayOfWeekNames.__dayOfWeekNames;
+var _default = {
+  _dayOfWeek: _dayOfWeek
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 173 */,
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._dayOfWeekEnglishLong = void 0;
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var _dayOfWeekEnglishLong = function _dayOfWeekEnglishLong(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishLong());
+};
+
+exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
+var _default = {
+  _dayOfWeekEnglishLong: _dayOfWeekEnglishLong
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.datetimeToString = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _detetimeToStringFunc = __webpack_require__(170);
+
+var _datetimeToString2 = __webpack_require__(169);
+
+var datetimeToString = function datetimeToString(date, format) {
+  var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule, isLocal')) {
+    var _date = date;
+    date = _date.date;
+    format = _date.format;
+    var _date$rule = _date.rule;
+    rule = _date$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _date$rule;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule, isLocal')) {
+    var _format = format;
+    format = _format.format;
+    var _format$rule = _format.rule;
+    rule = _format$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _format$rule;
+    var _format$isLocal = _format.isLocal;
+    isLocal = _format$isLocal === void 0 ? true : _format$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule', 'isLocal')) {
+    var _rule = rule;
+    rule = _rule.rule;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("datetimeToString args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isString)(format)) {
+    throw new TypeError("datetimeToString args(format:".concat(format, ") is not string"));
+  }
+
+  if (!(0, _isType.isObject)(rule)) {
+    throw new TypeError("datetimeToString args(rule:".concat(rule, ") is not object"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("datetimeToString args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _datetimeToString2._datetimeToString)(date, format, rule, isLocal);
+};
+
+exports.datetimeToString = datetimeToString;
+var _default = {
+  datetimeToString: datetimeToString
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeek = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isTypeArray = __webpack_require__(23);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeek = function dayOfWeek(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var dayOfWeekNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _dayOfWeek2._dayOfWeek.names.EnglishShort();
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal, dayOfWeekNames')) {
+    var _date = date;
+    date = _date.date;
+    var _date$dayOfWeekNames = _date.dayOfWeekNames;
+    dayOfWeekNames = _date$dayOfWeekNames === void 0 ? _dayOfWeek2._dayOfWeek.names.EnglishShort() : _date$dayOfWeekNames;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, '', 'dayOfWeekNames, isLocal', 1)) {
+    var _isLocal = isLocal;
+    var _isLocal$isLocal = _isLocal.isLocal;
+    isLocal = _isLocal$isLocal === void 0 ? true : _isLocal$isLocal;
+    var _isLocal$dayOfWeekNam = _isLocal.dayOfWeekNames;
+    dayOfWeekNames = _isLocal$dayOfWeekNam === void 0 ? _dayOfWeek2._dayOfWeek.names.EnglishShort() : _isLocal$dayOfWeekNam;
+  } else if ((0, _isObjectParameter.isObjectParameter)(dayOfWeekNames, 'dayOfWeekNames')) {
+    var _dayOfWeekNames = dayOfWeekNames;
+    dayOfWeekNames = _dayOfWeekNames.dayOfWeekNames;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeek args(date:".concat(date, ") is not date"));
+  }
+
+  if (!((0, _isTypeArray.isStringArray)(dayOfWeekNames) && dayOfWeekNames.length === 7)) {
+    throw new TypeError("dayOfWeek args(dayOfWeekNames:".concat(dayOfWeekNames, ")") + " is not stringArray.length is 7");
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeek args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, dayOfWeekNames);
+};
+
+exports.dayOfWeek = dayOfWeek;
+dayOfWeek.names = _dayOfWeek2._dayOfWeek.names;
+var _default = {
+  dayOfWeek: dayOfWeek
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekEnglishShort = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeekEnglishShort = function dayOfWeekEnglishShort(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal')) {
+    var _date = date;
+    date = _date.date;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeekEnglishShort args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeekEnglishShort args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishShort());
+};
+
+exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
+var _default = {
+  dayOfWeekEnglishShort: dayOfWeekEnglishShort
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekEnglishLong = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeekEnglishLong = function dayOfWeekEnglishLong(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal')) {
+    var _date = date;
+    date = _date.date;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeekEnglishLong args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeekEnglishLong args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishLong());
+};
+
+exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
+var _default = {
+  dayOfWeekEnglishLong: dayOfWeekEnglishLong
 };
 exports["default"] = _default;
 

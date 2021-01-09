@@ -28,6 +28,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* eslint-disable prefer-rest-params */
 
 /* eslint-disable no-extend-native */
+
+/* eslint-disable no-plusplus */
 var polyfillDefine = function polyfillDefine() {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
   if (!Array.isArray) {

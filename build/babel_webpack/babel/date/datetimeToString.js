@@ -15,21 +15,29 @@ var _datetimeToString2 = require("./_datetimeToString.js");
 
 var datetimeToString = function datetimeToString(date, format) {
   var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
-  if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule')) {
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule, isLocal')) {
     var _date = date;
     date = _date.date;
     format = _date.format;
     var _date$rule = _date.rule;
     rule = _date$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _date$rule;
-  } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule')) {
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule, isLocal')) {
     var _format = format;
     format = _format.format;
     var _format$rule = _format.rule;
     rule = _format$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _format$rule;
-  } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule')) {
+    var _format$isLocal = _format.isLocal;
+    isLocal = _format$isLocal === void 0 ? true : _format$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule', 'isLocal')) {
     var _rule = rule;
     rule = _rule.rule;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
   }
 
   if (!(0, _isType.isDate)(date)) {
@@ -44,7 +52,11 @@ var datetimeToString = function datetimeToString(date, format) {
     throw new TypeError("datetimeToString args(rule:".concat(rule, ") is not object"));
   }
 
-  return (0, _datetimeToString2._datetimeToString)(date, format, rule);
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("datetimeToString args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _datetimeToString2._datetimeToString)(date, format, rule, isLocal);
 };
 
 exports.datetimeToString = datetimeToString;

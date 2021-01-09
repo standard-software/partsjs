@@ -1,17 +1,27 @@
-import { isDate, isString, isObject } from '../type/isType.js';
+import { isDate, isString, isObject, isBoolean } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { __detetimeToStringFunc } from '../date/__detetimeToStringFunc.js';
 import { _datetimeToString } from './_datetimeToString.js';
 
 export const datetimeToString = (
-  date, format, rule = __detetimeToStringFunc.DefaultObject(),
+  date,
+  format,
+  rule = __detetimeToStringFunc.DefaultObject(),
+  isLocal = true,
 ) => {
-  if (isObjectParameter(date, 'date, format', 'rule')) {
-    ({ date, format, rule = __detetimeToStringFunc.DefaultObject() } = date);
-  } else if (isObjectParameter(format, 'format', 'rule')) {
-    ({ format, rule = __detetimeToStringFunc.DefaultObject() } = format);
-  } else if (isObjectParameter(rule, 'rule')) {
+  if (isObjectParameter(date, 'date, format', 'rule, isLocal')) {
+    ({
+      date, format, rule = __detetimeToStringFunc.DefaultObject(),
+      isLocal = true,
+    } = date);
+  } else if (isObjectParameter(format, 'format', 'rule, isLocal')) {
+    ({ format, rule = __detetimeToStringFunc.DefaultObject(),
+      isLocal = true,
+    } = format);
+  } else if (isObjectParameter(rule, 'rule', 'isLocal')) {
     ({ rule } = rule);
+  } else if (isObjectParameter(isLocal, 'isLocal')) {
+    ({ isLocal } = isLocal);
   }
 
   if (!isDate(date)) {
@@ -29,9 +39,14 @@ export const datetimeToString = (
       `datetimeToString args(rule:${rule}) is not object`,
     );
   }
+  if (!isBoolean(isLocal)) {
+    throw new TypeError(
+      `datetimeToString args(isLocal:${isLocal}) is not boolean`,
+    );
+  }
 
   return _datetimeToString(
-    date, format, rule,
+    date, format, rule, isLocal,
   );
 };
 

@@ -26,6 +26,7 @@ var _detetimeToStringFunc = require("../date/__detetimeToStringFunc.js");
  */
 var _datetimeToString = function _datetimeToString(date, format) {
   var ruleObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var existSingleQuote = (0, _includes.__includes)(format, "'");
   var existDoubleQuote = (0, _includes.__includes)(format, '"');
 
@@ -34,12 +35,12 @@ var _datetimeToString = function _datetimeToString(date, format) {
   }
 
   var keys = (0, _objectKeys2._objectKeys)(ruleObject);
-  keys.sort(_SortFunc2._SortFunc.order.normal.descending, function (v) {
+  keys.sort((0, _SortFunc2._SortFunc)([[_SortFunc2._SortFunc.order.normal.descending, function (v) {
     return v.length;
-  });
+  }]]));
   var replaceArray = [];
   (0, _loop.__loop)(keys)(function (value, index) {
-    replaceArray.push([value, ruleObject[value](date)]);
+    replaceArray.push([value, ruleObject[value](date, isLocal)]);
   });
   var quoteChar;
 

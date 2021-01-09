@@ -147,7 +147,7 @@ var _array = _interopRequireDefault(__webpack_require__(67));
 
 var _date = _interopRequireDefault(__webpack_require__(164));
 
-var _system = _interopRequireDefault(__webpack_require__(172));
+var _system = _interopRequireDefault(__webpack_require__(179));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1247,6 +1247,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* eslint-disable prefer-rest-params */
 
 /* eslint-disable no-extend-native */
+
+/* eslint-disable no-plusplus */
 var polyfillDefine = function polyfillDefine() {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
   if (!Array.isArray) {
@@ -17849,7 +17851,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._datetimeToString = exports._DateTime = void 0;
+exports["default"] = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._DateTime = void 0;
 
 var _Today = _interopRequireDefault(__webpack_require__(165));
 
@@ -17861,7 +17863,19 @@ var _DateTime3 = _interopRequireDefault(__webpack_require__(168));
 
 var _datetimeToString2 = _interopRequireDefault(__webpack_require__(169));
 
-var _datetimeToString3 = _interopRequireDefault(__webpack_require__(171));
+var _datetimeToString3 = _interopRequireDefault(__webpack_require__(175));
+
+var _dayOfWeek2 = _interopRequireDefault(__webpack_require__(172));
+
+var _dayOfWeek3 = _interopRequireDefault(__webpack_require__(176));
+
+var _dayOfWeekEnglishShort2 = _interopRequireDefault(__webpack_require__(171));
+
+var _dayOfWeekEnglishShort3 = _interopRequireDefault(__webpack_require__(177));
+
+var _dayOfWeekEnglishLong2 = _interopRequireDefault(__webpack_require__(174));
+
+var _dayOfWeekEnglishLong3 = _interopRequireDefault(__webpack_require__(178));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -17871,27 +17885,45 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]);
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]);
 
 var _DateTime = dateJs._DateTime,
     _datetimeToString = dateJs._datetimeToString,
+    _dayOfWeek = dateJs._dayOfWeek,
+    _dayOfWeekEnglishShort = dateJs._dayOfWeekEnglishShort,
+    _dayOfWeekEnglishLong = dateJs._dayOfWeekEnglishLong,
     Today = dateJs.Today,
     isInvalidDate = dateJs.isInvalidDate,
     DateTime = dateJs.DateTime,
-    datetimeToString = dateJs.datetimeToString;
+    datetimeToString = dateJs.datetimeToString,
+    dayOfWeek = dateJs.dayOfWeek,
+    dayOfWeekEnglishShort = dateJs.dayOfWeekEnglishShort,
+    dayOfWeekEnglishLong = dateJs.dayOfWeekEnglishLong;
+exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
+exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
+exports.dayOfWeek = dayOfWeek;
 exports.datetimeToString = datetimeToString;
 exports.DateTime = DateTime;
 exports.isInvalidDate = isInvalidDate;
 exports.Today = Today;
+exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
+exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
+exports._dayOfWeek = _dayOfWeek;
 exports._datetimeToString = _datetimeToString;
 exports._DateTime = _DateTime;
 var _default = {
   _DateTime: _DateTime,
   _datetimeToString: _datetimeToString,
+  _dayOfWeek: _dayOfWeek,
+  _dayOfWeekEnglishShort: _dayOfWeekEnglishShort,
+  _dayOfWeekEnglishLong: _dayOfWeekEnglishLong,
   Today: Today,
   isInvalidDate: isInvalidDate,
   DateTime: DateTime,
-  datetimeToString: datetimeToString
+  datetimeToString: datetimeToString,
+  dayOfWeek: dayOfWeek,
+  dayOfWeekEnglishShort: dayOfWeekEnglishShort,
+  dayOfWeekEnglishLong: dayOfWeekEnglishLong
 };
 exports["default"] = _default;
 
@@ -18204,6 +18236,7 @@ var _detetimeToStringFunc = __webpack_require__(170);
  */
 var _datetimeToString = function _datetimeToString(date, format) {
   var ruleObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var existSingleQuote = (0, _includes.__includes)(format, "'");
   var existDoubleQuote = (0, _includes.__includes)(format, '"');
 
@@ -18212,12 +18245,12 @@ var _datetimeToString = function _datetimeToString(date, format) {
   }
 
   var keys = (0, _objectKeys2._objectKeys)(ruleObject);
-  keys.sort(_SortFunc2._SortFunc.order.normal.descending, function (v) {
+  keys.sort((0, _SortFunc2._SortFunc)([[_SortFunc2._SortFunc.order.normal.descending, function (v) {
     return v.length;
-  });
+  }]]));
   var replaceArray = [];
   (0, _loop.__loop)(keys)(function (value, index) {
-    replaceArray.push([value, ruleObject[value](date)]);
+    replaceArray.push([value, ruleObject[value](date, isLocal)]);
   });
   var quoteChar;
 
@@ -18264,104 +18297,150 @@ var _paddingFirst2 = __webpack_require__(140);
 
 var _string_common = __webpack_require__(66);
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+var _dayOfWeekEnglishShort2 = __webpack_require__(171);
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _dayOfWeekEnglishLong2 = __webpack_require__(174);
 
 var __detetimeToStringFunc = {};
 exports.__detetimeToStringFunc = __detetimeToStringFunc;
 
-__detetimeToStringFunc.YYYY = function (date) {
-  return date.getFullYear().toString();
+var year4 = function year4(date, isLocal) {
+  if (isLocal) {
+    return date.getFullYear().toString();
+  } else {
+    return date.getUTCFullYear().toString();
+  }
 };
 
-__detetimeToStringFunc.YY = function (date) {
-  return (0, _string_common._subLast)(date.getFullYear().toString(), 2);
+var year2 = function year2(date, isLocal) {
+  return (0, _string_common._subLast)(year4(date, isLocal), 2);
 };
 
-__detetimeToStringFunc.MM = function (date) {
-  return (0, _paddingFirst2._paddingFirst)((date.getMonth() + 1).toString(), 2, '0');
+var month1 = function month1(date, isLocal) {
+  if (isLocal) {
+    return (date.getMonth() + 1).toString();
+  } else {
+    return (date.getUTCMonth() + 1).toString();
+  }
 };
 
-__detetimeToStringFunc.M = function (date) {
-  return (date.getMonth() + 1).toString();
+var month2 = function month2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(month1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.DD = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getDate().toString(), 2, '0');
+var date1 = function date1(date, isLocal) {
+  if (isLocal) {
+    return date.getDate().toString();
+  } else {
+    return date.getUTCMonth().toString();
+  }
 };
 
-__detetimeToStringFunc.D = function (date) {
-  return date.getDate().toString();
+var date2 = function date2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(date1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.hh = function (date) {
-  // 00-12
-  return (0, _paddingFirst2._paddingFirst)((date.getHours() % 12).toString(), 2, '0');
+var hour12_1 = function hour12_1(date, isLocal) {
+  // 0-11
+  if (isLocal) {
+    return (date.getHours() % 12).toString();
+  } else {
+    return (date.getUTCHours() % 12).toString();
+  }
 };
 
-__detetimeToStringFunc.h = function (date) {
-  // 0-12
-  return (date.getHours() % 12).toString();
+var hour12_2 = function hour12_2(date, isLocal) {
+  // 00-11
+  return (0, _paddingFirst2._paddingFirst)(hour12_1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.HH = function (date) {
-  // 00-23
-  return (0, _paddingFirst2._paddingFirst)(date.getHours().toString(), 2, '0');
-};
-
-__detetimeToStringFunc.H = function (date) {
+var hour24_1 = function hour24_1(date, isLocal) {
   // 0-23
-  return date.getHours().toString();
+  if (isLocal) {
+    return date.getHours().toString();
+  } else {
+    return date.getUTCHours().toString();
+  }
 };
 
-__detetimeToStringFunc.mm = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getMinutes().toString(), 2, '0');
+var hour24_2 = function hour24_2(date, isLocal) {
+  // 00-23
+  return (0, _paddingFirst2._paddingFirst)(hour24_1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.m = function (date) {
-  return date.getMinutes().toString();
+var minute1 = function minute1(date, isLocal) {
+  if (isLocal) {
+    return date.getMinutes().toString();
+  } else {
+    return date.getUTCMinutes().toString();
+  }
 };
 
-__detetimeToStringFunc.ss = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getSeconds().toString(), 2, '0');
+var minute2 = function minute2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(minute1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.s = function (date) {
-  return date.getSeconds().toString();
+var second1 = function second1(date, isLocal) {
+  if (isLocal) {
+    return date.getSeconds().toString();
+  } else {
+    return date.getUTCSeconds().toString();
+  }
 };
 
-__detetimeToStringFunc.SSS = function (date) {
-  return (0, _paddingFirst2._paddingFirst)(date.getMilliseconds().toString(), 3, '0');
+var second2 = function second2(date, isLocal) {
+  return (0, _paddingFirst2._paddingFirst)(second1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.SS = function (date) {
-  return (0, _string_common._subFirst)(__detetimeToStringFunc.SSS(date), 2);
+var millisecond3 = function millisecond3(date, isLocal) {
+  if (isLocal) {
+    return (0, _paddingFirst2._paddingFirst)(date.getMilliseconds().toString(), 3, '0');
+  } else {
+    return (0, _paddingFirst2._paddingFirst)(date.getUTCMilliseconds().toString(), 3, '0');
+  }
 };
 
-__detetimeToStringFunc.S = function (date) {
-  return (0, _string_common._subFirst)(__detetimeToStringFunc.SSS(date), 1);
+var millisecond2 = function millisecond2(date, isLocal) {
+  return (0, _string_common._subFirst)(millisecond3(date, isLocal), 2);
 };
 
-__detetimeToStringFunc.aa = function (date) {
-  return date.getHours() < 12 ? 'am' : 'pm';
+var millisecond1 = function millisecond1(date, isLocal) {
+  return (0, _string_common._subFirst)(millisecond3(date, isLocal), 1);
 };
 
-__detetimeToStringFunc.AA = function (date) {
-  return date.getHours() < 12 ? 'AM' : 'PM';
+var am_pm = function am_pm(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'am' : 'pm';
+  } else {
+    return date.getUTCHours() < 12 ? 'am' : 'pm';
+  }
 };
 
-__detetimeToStringFunc.a = function (date) {
-  return date.getHours() < 12 ? 'a' : 'p';
+var AM_PM = function AM_PM(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'AM' : 'PM';
+  } else {
+    return date.getUTCHours() < 12 ? 'AM' : 'PM';
+  }
 };
 
-__detetimeToStringFunc.A = function (date) {
-  return date.getHours() < 12 ? 'A' : 'P';
+var a_p = function a_p(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'a' : 'p';
+  } else {
+    return date.getUTCHours() < 12 ? 'a' : 'p';
+  }
 };
 
-var _Z = function _Z(date) {
+var A_P = function A_P(date, isLocal) {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'A' : 'P';
+  } else {
+    return date.getUTCHours() < 12 ? 'A' : 'P';
+  }
+};
+
+var timezone = function timezone(date) {
   var minutes = -1 * date.getTimezoneOffset();
   var offsetHourStr = (0, _paddingFirst2._paddingFirst)(String(Math.floor(minutes / 60)), 2, '0');
   offsetHourStr = 0 < minutes ? '+' + offsetHourStr : offsetHourStr;
@@ -18372,28 +18451,93 @@ var _Z = function _Z(date) {
   };
 };
 
-__detetimeToStringFunc.ZZ = function (date) {
-  var _Z2 = _Z(date),
-      offsetHourStr = _Z2.offsetHourStr,
-      offsetMinStr = _Z2.offsetMinStr;
+var timezoneHHMM = function timezoneHHMM(date) {
+  var _timezone = timezone(date),
+      offsetHourStr = _timezone.offsetHourStr,
+      offsetMinStr = _timezone.offsetMinStr;
 
   return offsetHourStr + offsetMinStr;
 };
 
-__detetimeToStringFunc.Z = function (date) {
-  var _Z3 = _Z(date),
-      offsetHourStr = _Z3.offsetHourStr,
-      offsetMinStr = _Z3.offsetMinStr;
+var timezoneHH_MM = function timezoneHH_MM(date) {
+  var _timezone2 = timezone(date),
+      offsetHourStr = _timezone2.offsetHourStr,
+      offsetMinStr = _timezone2.offsetMinStr;
 
   return offsetHourStr + ':' + offsetMinStr;
 };
 
-__detetimeToStringFunc.DDD = function (date) {
-  return dayOfWeekEnglishShort(date);
+__detetimeToStringFunc.year4 = year4;
+__detetimeToStringFunc.year2 = year2;
+__detetimeToStringFunc.month2 = month2;
+__detetimeToStringFunc.month1 = month1;
+__detetimeToStringFunc.date2 = date2;
+__detetimeToStringFunc.date1 = date1;
+__detetimeToStringFunc.hour12_2 = hour12_2;
+__detetimeToStringFunc.hour12_1 = hour12_1;
+__detetimeToStringFunc.hour24_2 = hour24_2;
+__detetimeToStringFunc.hour24_1 = hour24_1;
+__detetimeToStringFunc.minute2 = minute2;
+__detetimeToStringFunc.minute1 = minute1;
+__detetimeToStringFunc.second2 = second2;
+__detetimeToStringFunc.second1 = second1;
+__detetimeToStringFunc.millisecond3 = millisecond3;
+__detetimeToStringFunc.millisecond2 = millisecond2;
+__detetimeToStringFunc.millisecond1 = millisecond1;
+__detetimeToStringFunc.am_pm = am_pm;
+__detetimeToStringFunc.AM_PM = AM_PM;
+__detetimeToStringFunc.a_p = a_p;
+__detetimeToStringFunc.A_P = A_P;
+var _DefaultObject = {
+  YYYY: year4,
+  YY: year2,
+  MM: month2,
+  M: month1,
+  DD: date2,
+  D: date1,
+  hh: hour12_2,
+  h: hour12_1,
+  HH: hour24_2,
+  H: hour24_1,
+  mm: minute2,
+  m: minute1,
+  ss: second2,
+  s: second1,
+  SSS: millisecond3,
+  SS: millisecond2,
+  S: millisecond1,
+  aa: am_pm,
+  AA: AM_PM,
+  a: a_p,
+  A: A_P,
+  ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  Z: timezoneHH_MM,
+  ZZ: timezoneHHMM
 };
-
-__detetimeToStringFunc.DDDD = function (date) {
-  return dayOfWeekEnglishLong(date);
+var _MomentLikeObject = {
+  YYYY: year4,
+  YY: year2,
+  MM: month2,
+  M: month1,
+  DD: date2,
+  D: date1,
+  hh: hour12_2,
+  h: hour12_1,
+  HH: hour24_2,
+  H: hour24_1,
+  mm: minute2,
+  m: minute1,
+  ss: second2,
+  s: second1,
+  SSS: millisecond3,
+  SS: millisecond2,
+  S: millisecond1,
+  a: a_p,
+  ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  Z: timezoneHH_MM,
+  ZZ: timezoneHHMM
 };
 
 __detetimeToStringFunc.MMM = function (date) {
@@ -18406,39 +18550,38 @@ __detetimeToStringFunc.MMMM = function (date) {
 
 __detetimeToStringFunc.MMMMM = function (date) {
   return nameOfMonthEnglishLong(date);
-};
+}; // const _DefaultObject = { ...__detetimeToStringFunc };
 
-var _DefaultObject = _objectSpread({}, __detetimeToStringFunc);
 
 __detetimeToStringFunc.DefaultObject = function () {
   return _DefaultObject;
-};
+}; // const dayOfWeek = (date, dayOfWeekNames) => {
+//   // c.assert(t.isDate(date));
+//   // if (t.isNullOrUndefined(dayOfWeekNames)) {
+//   //   return date.getDay();
+//   // }
+//   // c.assert(t.isArray(dayOfWeekNames));
+//   // c.assert(dayOfWeekNames.length === 7);
+//   return dayOfWeekNames[date.getDay()];
+// };
+// const dayOfWeekEnglishShort = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishShort());
+// };
+// const dayOfWeekEnglishLong = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishLong());
+// };
+// const dayOfWeekNamesEnglishShort = () => {
+//   return [
+//     'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+//   ];
+// };
+// const dayOfWeekNamesEnglishLong = () => {
+//   return [
+//     'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+//     'Thursday', 'Friday', 'Saturday',
+//   ];
+// };
 
-var dayOfWeek = function dayOfWeek(date, dayOfWeekNames) {
-  // c.assert(t.isDate(date));
-  // if (t.isNullOrUndefined(dayOfWeekNames)) {
-  //   return date.getDay();
-  // }
-  // c.assert(t.isArray(dayOfWeekNames));
-  // c.assert(dayOfWeekNames.length === 7);
-  return dayOfWeekNames[date.getDay()];
-};
-
-var dayOfWeekEnglishShort = function dayOfWeekEnglishShort(date) {
-  return dayOfWeek(date, dayOfWeekNamesEnglishShort());
-};
-
-var dayOfWeekEnglishLong = function dayOfWeekEnglishLong(date) {
-  return dayOfWeek(date, dayOfWeekNamesEnglishLong());
-};
-
-var dayOfWeekNamesEnglishShort = function dayOfWeekNamesEnglishShort() {
-  return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-};
-
-var dayOfWeekNamesEnglishLong = function dayOfWeekNamesEnglishLong() {
-  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-};
 
 var nameOfMonth = function nameOfMonth(date, monthNames) {
   // c.assert(t.isDate(date));
@@ -18486,6 +18629,119 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports._dayOfWeekEnglishShort = void 0;
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var _dayOfWeekEnglishShort = function _dayOfWeekEnglishShort(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishShort());
+};
+
+exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
+var _default = {
+  _dayOfWeekEnglishShort: _dayOfWeekEnglishShort
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._dayOfWeek = void 0;
+
+var _dayOfWeekNames = __webpack_require__(173);
+
+var _dayOfWeek = function _dayOfWeek(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var dayOfWeekNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _dayOfWeekNames.__dayOfWeekNames.EnglishShort;
+
+  if (isLocal) {
+    return dayOfWeekNames[date.getDay()];
+  } else {
+    return dayOfWeekNames[date.getUTCDay()];
+  }
+};
+
+exports._dayOfWeek = _dayOfWeek;
+_dayOfWeek.names = _dayOfWeekNames.__dayOfWeekNames;
+var _default = {
+  _dayOfWeek: _dayOfWeek
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.__dayOfWeekNames = void 0;
+
+/**
+ * dayOfWeek.names
+ */
+var __dayOfWeekNames = {};
+exports.__dayOfWeekNames = __dayOfWeekNames;
+
+__dayOfWeekNames.EnglishShort = function () {
+  return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+};
+
+__dayOfWeekNames.EnglishLong = function () {
+  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+};
+
+var _default = {
+  __dayOfWeekNames: __dayOfWeekNames
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._dayOfWeekEnglishLong = void 0;
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var _dayOfWeekEnglishLong = function _dayOfWeekEnglishLong(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishLong());
+};
+
+exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
+var _default = {
+  _dayOfWeekEnglishLong: _dayOfWeekEnglishLong
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.datetimeToString = void 0;
 
 var _isType = __webpack_require__(11);
@@ -18498,21 +18754,29 @@ var _datetimeToString2 = __webpack_require__(169);
 
 var datetimeToString = function datetimeToString(date, format) {
   var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
-  if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule')) {
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule, isLocal')) {
     var _date = date;
     date = _date.date;
     format = _date.format;
     var _date$rule = _date.rule;
     rule = _date$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _date$rule;
-  } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule')) {
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule, isLocal')) {
     var _format = format;
     format = _format.format;
     var _format$rule = _format.rule;
     rule = _format$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _format$rule;
-  } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule')) {
+    var _format$isLocal = _format.isLocal;
+    isLocal = _format$isLocal === void 0 ? true : _format$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule', 'isLocal')) {
     var _rule = rule;
     rule = _rule.rule;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
   }
 
   if (!(0, _isType.isDate)(date)) {
@@ -18527,7 +18791,11 @@ var datetimeToString = function datetimeToString(date, format) {
     throw new TypeError("datetimeToString args(rule:".concat(rule, ") is not object"));
   }
 
-  return (0, _datetimeToString2._datetimeToString)(date, format, rule);
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("datetimeToString args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _datetimeToString2._datetimeToString)(date, format, rule, isLocal);
 };
 
 exports.datetimeToString = datetimeToString;
@@ -18537,7 +18805,167 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 172 */
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeek = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isTypeArray = __webpack_require__(23);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeek = function dayOfWeek(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var dayOfWeekNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _dayOfWeek2._dayOfWeek.names.EnglishShort();
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal, dayOfWeekNames')) {
+    var _date = date;
+    date = _date.date;
+    var _date$dayOfWeekNames = _date.dayOfWeekNames;
+    dayOfWeekNames = _date$dayOfWeekNames === void 0 ? _dayOfWeek2._dayOfWeek.names.EnglishShort() : _date$dayOfWeekNames;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, '', 'dayOfWeekNames, isLocal', 1)) {
+    var _isLocal = isLocal;
+    var _isLocal$isLocal = _isLocal.isLocal;
+    isLocal = _isLocal$isLocal === void 0 ? true : _isLocal$isLocal;
+    var _isLocal$dayOfWeekNam = _isLocal.dayOfWeekNames;
+    dayOfWeekNames = _isLocal$dayOfWeekNam === void 0 ? _dayOfWeek2._dayOfWeek.names.EnglishShort() : _isLocal$dayOfWeekNam;
+  } else if ((0, _isObjectParameter.isObjectParameter)(dayOfWeekNames, 'dayOfWeekNames')) {
+    var _dayOfWeekNames = dayOfWeekNames;
+    dayOfWeekNames = _dayOfWeekNames.dayOfWeekNames;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeek args(date:".concat(date, ") is not date"));
+  }
+
+  if (!((0, _isTypeArray.isStringArray)(dayOfWeekNames) && dayOfWeekNames.length === 7)) {
+    throw new TypeError("dayOfWeek args(dayOfWeekNames:".concat(dayOfWeekNames, ")") + " is not stringArray.length is 7");
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeek args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, dayOfWeekNames);
+};
+
+exports.dayOfWeek = dayOfWeek;
+dayOfWeek.names = _dayOfWeek2._dayOfWeek.names;
+var _default = {
+  dayOfWeek: dayOfWeek
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekEnglishShort = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeekEnglishShort = function dayOfWeekEnglishShort(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal')) {
+    var _date = date;
+    date = _date.date;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeekEnglishShort args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeekEnglishShort args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishShort());
+};
+
+exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
+var _default = {
+  dayOfWeekEnglishShort: dayOfWeekEnglishShort
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekEnglishLong = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeekEnglishLong = function dayOfWeekEnglishLong(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal')) {
+    var _date = date;
+    date = _date.date;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeekEnglishLong args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeekEnglishLong args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.EnglishLong());
+};
+
+exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
+var _default = {
+  dayOfWeekEnglishLong: dayOfWeekEnglishLong
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18548,9 +18976,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.wsh = exports.consoleHook = void 0;
 
-var _consoleHook = _interopRequireDefault(__webpack_require__(173));
+var _consoleHook = _interopRequireDefault(__webpack_require__(180));
 
-var _wsh = _interopRequireDefault(__webpack_require__(174));
+var _wsh = _interopRequireDefault(__webpack_require__(181));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -18565,7 +18993,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 173 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18796,7 +19224,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 174 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18807,11 +19235,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
 
-var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(175));
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(182));
 
-var _wshShell = _interopRequireDefault(__webpack_require__(176));
+var _wshShell = _interopRequireDefault(__webpack_require__(183));
 
-var _forceCreateFolder = _interopRequireDefault(__webpack_require__(177));
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(184));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -18837,7 +19265,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 175 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18877,7 +19305,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 176 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18917,7 +19345,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 177 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18932,7 +19360,7 @@ var _isType = __webpack_require__(11);
 
 var _platform = __webpack_require__(7);
 
-var _wshFileSystemObject = __webpack_require__(175);
+var _wshFileSystemObject = __webpack_require__(182);
 
 var _forceCreateFolder = function _forceCreateFolder(folderPath) {
   var fso = (0, _wshFileSystemObject.FileSystemObject)();

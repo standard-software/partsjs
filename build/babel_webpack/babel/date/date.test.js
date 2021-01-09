@@ -17,7 +17,10 @@ var test_execute_date = function test_execute_date(parts) {
       Today = _parts$date.Today,
       isInvalidDate = _parts$date.isInvalidDate,
       DateTime = _parts$date.DateTime,
-      datetimeToString = _parts$date.datetimeToString;
+      datetimeToString = _parts$date.datetimeToString,
+      dayOfWeek = _parts$date.dayOfWeek,
+      dayOfWeekEnglishShort = _parts$date.dayOfWeekEnglishShort,
+      dayOfWeekEnglishLong = _parts$date.dayOfWeekEnglishLong;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Today = function test_Today() {
@@ -103,7 +106,9 @@ var test_execute_date = function test_execute_date(parts) {
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
         var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, false);
-        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // zero
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        checkEqual('2020-02-02T19:05:06.007Z', dt.toISOString()); // zero
 
         var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
         checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
@@ -219,11 +224,20 @@ var test_execute_date = function test_execute_date(parts) {
         var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
         checkEqual('01/2/4 16:5:8 PM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
         checkEqual('01/2/4 16:5:8 P', datetimeToString(dt, 'YY/M/D H:m:s A'));
-        checkEqual('01/2/4 16:5:8 Sun', datetimeToString(dt, 'YY/M/D H:m:s DDD'));
-        checkEqual('01/2/4 16:5:8 Sunday', datetimeToString(dt, 'YY/M/D H:m:s DDDD'));
-        checkEqual('01/2/4 16:5:8 Feb', datetimeToString(dt, 'YY/M/D H:m:s MMM'));
-        checkEqual('01/2/4 16:5:8 Feb.', datetimeToString(dt, 'YY/M/D H:m:s MMMM'));
-        checkEqual('01/2/4 16:5:8 February', datetimeToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
+        checkEqual('01/2/4 16:5:8 Sun', datetimeToString(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', datetimeToString(dt, 'YY/M/D H:m:s dddd')); // checkEqual(
+        //   '01/2/4 16:5:8 Feb',
+        //   datetimeToString(dt, 'YY/M/D H:m:s MMM'),
+        // );
+        // checkEqual(
+        //   '01/2/4 16:5:8 Feb.',
+        //   datetimeToString(dt, 'YY/M/D H:m:s MMMM'),
+        // );
+        // checkEqual(
+        //   '01/2/4 16:5:8 February',
+        //   datetimeToString(dt, 'YY/M/D H:m:s MMMMM'),
+        // );
+        // quote
 
         var dt = DateTime(2021, 1, 6);
         checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
@@ -248,10 +262,139 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_dayOfWeek = function test_dayOfWeek() {
+      it('test_dayOfWeek', function () {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeek(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, true)); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeek(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeek(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeek(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekEnglishShort = function test_dayOfWeekEnglishShort() {
+      it('test_dayOfWeekEnglishShort', function () {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeekEnglishShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, true)); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeekEnglishShort(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeekEnglishShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeekEnglishShort(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekEnglishLong = function test_dayOfWeekEnglishLong() {
+      it('test_dayOfWeekEnglishLong', function () {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, true)); // local Sat UTC Fri
+
+        checkEqual('Friday', dayOfWeekEnglishLong(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('Friday', dayOfWeekEnglishLong(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
     test_Today();
     test_isInvalidDate();
     test_Date_standard();
     test_DateTime();
+    test_dayOfWeek();
+    test_dayOfWeekEnglishShort();
+    test_dayOfWeekEnglishLong();
     test_datetimeToString();
   });
 };
