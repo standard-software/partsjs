@@ -3608,13 +3608,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(0, Number(new Number()));
         checkEqual(0, Number(new Number('')));
         checkEqual(0, Number(new Number(' ')));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number(new Number('　')));
-        } else {
-          checkEqual(0, Number(new Number('　')));
-        }
-
+        checkEqual(0, Number(new Number('　')));
         checkEqual(1, Number(new Number('1')));
         checkEqual(1.1, Number(new Number('1.1')));
         checkEqual(NaN, Number(new Number(NaN)));
@@ -9476,7 +9470,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_NumberCast_standard = function test_NumberCast_standard() {
-      it('test_NumberCast', function () {
+      it('test_NumberCast_standard', function () {
         // Integer
         checkEqual(123, Number('123'));
         checkEqual(123, Number('0123'));
@@ -9485,17 +9479,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, Number(' 123'), '1');
         checkEqual(123, Number('123 '), '2');
         checkEqual(123, Number(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　123'), '4');
-          checkEqual(NaN, Number('123　'), '5');
-          checkEqual(NaN, Number('　123　'), '6');
-        } else {
-          checkEqual(123, Number('　123'), '4');
-          checkEqual(123, Number('123　'), '5');
-          checkEqual(123, Number('　123　'), '6');
-        }
-
+        checkEqual(123, Number('　123'), '4');
+        checkEqual(123, Number('123　'), '5');
+        checkEqual(123, Number('　123　'), '6');
         checkEqual(NaN, Number('123 0'));
         checkEqual(NaN, Number('0 123'));
         checkEqual(NaN, Number('1 123'));
@@ -9513,17 +9499,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, Number(' 123.4'));
         checkEqual(123.4, Number('123.4 '));
         checkEqual(123.4, Number(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　123.4'));
-          checkEqual(NaN, Number('123.4　'));
-          checkEqual(NaN, Number('　123.4　'));
-        } else {
-          checkEqual(123.4, Number('　123.4'));
-          checkEqual(123.4, Number('123.4　'));
-          checkEqual(123.4, Number('　123.4　'));
-        }
-
+        checkEqual(123.4, Number('　123.4'));
+        checkEqual(123.4, Number('123.4　'));
+        checkEqual(123.4, Number('　123.4　'));
         checkEqual(NaN, Number('123.4 0'));
         checkEqual(NaN, Number('0 123.4'));
         checkEqual(NaN, Number('1 123.4'));
@@ -9540,12 +9518,8 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         checkEqual(0, Number(' ')); // ?
 
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　'));
-        } else {
-          checkEqual(0, Number('　')); // ?
-        } // exponential notation
-
+        checkEqual(0, Number('　')); // ?
+        // exponential notation
 
         checkEqual(3.14, Number(3.14));
         checkEqual(3.14, Number('3.14'));
@@ -9617,7 +9591,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_parseFloat_standard = function test_parseFloat_standard() {
-      it('test_parseFloat', function () {
+      it('test_parseFloat_standard', function () {
         // Integer
         checkEqual(123, parseFloat('123'));
         checkEqual(123, parseFloat('0123'));
@@ -9626,17 +9600,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseFloat(' 123'), '1');
         checkEqual(123, parseFloat('123 '), '2');
         checkEqual(123, parseFloat(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　123'), '4');
-          checkEqual(123, parseFloat('123　'), '5');
-          checkEqual(NaN, parseFloat('　123　'), '6');
-        } else {
-          checkEqual(123, parseFloat('　123'), '4');
-          checkEqual(123, parseFloat('123　'), '5');
-          checkEqual(123, parseFloat('　123　'), '6');
-        }
-
+        checkEqual(123, parseFloat('　123'), '4');
+        checkEqual(123, parseFloat('123　'), '5');
+        checkEqual(123, parseFloat('　123　'), '6');
         checkEqual(123, parseFloat('123 0'));
         checkEqual(0, parseFloat('0 123'));
         checkEqual(1, parseFloat('1 123'));
@@ -9654,17 +9620,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, parseFloat(' 123.4'));
         checkEqual(123.4, parseFloat('123.4 '));
         checkEqual(123.4, parseFloat(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　123.4'));
-          checkEqual(123.4, parseFloat('123.4　'));
-          checkEqual(NaN, parseFloat('　123.4　'));
-        } else {
-          checkEqual(123.4, parseFloat('　123.4'));
-          checkEqual(123.4, parseFloat('123.4　'));
-          checkEqual(123.4, parseFloat('　123.4　'));
-        }
-
+        checkEqual(123.4, parseFloat('　123.4'));
+        checkEqual(123.4, parseFloat('123.4　'));
+        checkEqual(123.4, parseFloat('　123.4　'));
         checkEqual(123.4, parseFloat('123.4 0'));
         checkEqual(0, parseFloat('0 123.4'));
         checkEqual(1, parseFloat('1 123.4'));
@@ -9737,7 +9695,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_parseInt_standard = function test_parseInt_standard() {
-      it('test_parseInt', function () {
+      it('test_parseInt_standard', function () {
         var parseInt10 = function parseInt10(value) {
           return parseInt(value, 10);
         }; // Integer
@@ -9750,17 +9708,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseInt10(' 123'), '1');
         checkEqual(123, parseInt10('123 '), '2');
         checkEqual(123, parseInt10(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　123'), '4');
-          checkEqual(123, parseInt10('123　'), '5');
-          checkEqual(NaN, parseInt10('　123　'), '6');
-        } else {
-          checkEqual(123, parseInt10('　123'), '4');
-          checkEqual(123, parseInt10('123　'), '5');
-          checkEqual(123, parseInt10('　123　'), '6');
-        }
-
+        checkEqual(123, parseInt10('　123'), '4');
+        checkEqual(123, parseInt10('123　'), '5');
+        checkEqual(123, parseInt10('　123　'), '6');
         checkEqual(123, parseInt10('123 0'));
         checkEqual(0, parseInt10('0 123'));
         checkEqual(1, parseInt10('1 123'));
@@ -9778,17 +9728,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseInt10(' 123.4'));
         checkEqual(123, parseInt10('123.4 '));
         checkEqual(123, parseInt10(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　123.4'));
-          checkEqual(123, parseInt10('123.4　'));
-          checkEqual(NaN, parseInt10('　123.4　'));
-        } else {
-          checkEqual(123, parseInt10('　123.4'));
-          checkEqual(123, parseInt10('123.4　'));
-          checkEqual(123, parseInt10('　123.4　'));
-        }
-
+        checkEqual(123, parseInt10('　123.4'));
+        checkEqual(123, parseInt10('123.4　'));
+        checkEqual(123, parseInt10('　123.4　'));
         checkEqual(123, parseInt10('123.4 0'));
         checkEqual(0, parseInt10('0 123.4'));
         checkEqual(1, parseInt10('1 123.4'));

@@ -67,7 +67,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		0: 0
+/******/ 		1: 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -158,7 +158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([0,2,1]);
+/******/ 	deferredModules.push([0,3,2,0]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -1655,13 +1655,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(0, Number(new Number()));
         checkEqual(0, Number(new Number('')));
         checkEqual(0, Number(new Number(' ')));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number(new Number('„ÄÄ')));
-        } else {
-          checkEqual(0, Number(new Number('„ÄÄ')));
-        }
-
+        checkEqual(0, Number(new Number('Å@')));
         checkEqual(1, Number(new Number('1')));
         checkEqual(1.1, Number(new Number('1.1')));
         checkEqual(NaN, Number(new Number(NaN)));
@@ -1787,7 +1781,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual('', String(new String()));
         checkEqual('', String(new String('')));
         checkEqual(' ', String(new String(' ')));
-        checkEqual('„ÄÄ', String(new String('„ÄÄ')));
+        checkEqual('Å@', String(new String('Å@')));
         checkEqual('1', String(new String('1')));
         checkEqual('1.1', String(new String('1.1')));
         checkEqual('1', String(new String(1)));
