@@ -325,7 +325,7 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
-### 0.4.0
+### 10.4.0
 #### 2021/01/06(Wed)
 - update replaceAll
   - support full object parameter
@@ -334,6 +334,10 @@ You can now use the functions of the parts.js object.
 - add string.includeCount
   - add _includeCount.js includeCount.js
 - add datetimeToString
+- add dayOfWeek
+  - _dayOfWeek.js / dayOfWeek.js
+  - / _dayOfWeekEnglishShort.js / dayOfWeekEnglishShort.js
+  - / _dayOfWeekEnglishLong.js / dayOfWeekEnglishLong.js
 
 ### 10.3.0
 #### 2020/12/09(Wed)

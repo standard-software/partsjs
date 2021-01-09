@@ -13,6 +13,8 @@ export const test_execute_date = (parts) => {
     isInvalidDate,
     DateTime,
     datetimeToString,
+    dayOfWeek,
+    dayOfWeekEnglishShort, dayOfWeekEnglishLong,
   } = parts.date;
 
   const {
@@ -397,6 +399,146 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_dayOfWeek = () => {
+      it('test_dayOfWeek', () => {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeek(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeek(dt, true));
+
+        // local Sat UTC Fri
+        checkEqual('Fri', dayOfWeek(dt, false));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeek(dt, false));
+
+        // Object Parameter
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeek(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeek(dt, { isLocal: true }));
+
+        // local Sat UTC Fri
+        checkEqual('Fri', dayOfWeek(dt, { isLocal: false }));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeek(dt, { isLocal: false }));
+      });
+    };
+
+    const test_dayOfWeekEnglishShort = () => {
+      it('test_dayOfWeekEnglishShort', () => {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeekEnglishShort(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, true));
+
+        // local Sat UTC Fri
+        checkEqual('Fri', dayOfWeekEnglishShort(dt, false));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, false));
+
+        // Object Parameter
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeekEnglishShort(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, { isLocal: true }));
+
+        // local Sat UTC Fri
+        checkEqual('Fri', dayOfWeekEnglishShort(dt, { isLocal: false }));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, { isLocal: false }));
+      });
+    };
+
+    const test_dayOfWeekEnglishLong = () => {
+      it('test_dayOfWeekEnglishLong', () => {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, true));
+
+        // local Sat UTC Fri
+        checkEqual('Friday', dayOfWeekEnglishLong(dt, false));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, false));
+
+        // Object Parameter
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, { isLocal: true }));
+
+        // local Sat UTC Fri
+        checkEqual('Friday', dayOfWeekEnglishLong(dt, { isLocal: false }));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, { isLocal: false }));
+      });
+    };
 
     test_Today();
     test_isInvalidDate();
@@ -404,7 +546,10 @@ export const test_execute_date = (parts) => {
     test_Date_standard();
     test_DateTime();
 
-    test_datetimeToString();
+    test_dayOfWeek();
+    test_dayOfWeekEnglishShort();
+    test_dayOfWeekEnglishLong();
+
 
   });
 };

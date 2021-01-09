@@ -217,8 +217,14 @@
 .copyProperty:[object Function]:function
 .date._DateTime:[object Function]:function
 .date._datetimeToString:[object Function]:function
+.date._dayOfWeek:[object Function]:function
+.date._dayOfWeekEnglishLong:[object Function]:function
+.date._dayOfWeekEnglishShort:[object Function]:function
 .date.DateTime:[object Function]:function
 .date.datetimeToString:[object Function]:function
+.date.dayOfWeek:[object Function]:function
+.date.dayOfWeekEnglishLong:[object Function]:function
+.date.dayOfWeekEnglishShort:[object Function]:function
 .date.isInvalidDate:[object Function]:function
 .date.Today:[object Function]:function
 .datetimeToString:[object Function]:function
