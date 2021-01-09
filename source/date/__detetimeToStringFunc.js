@@ -1,103 +1,153 @@
 import { _paddingFirst } from '../string/_paddingFirst.js';
 import { _subFirst, _subLast, _trimFirst } from '../string/string_common.js';
+import { _dayOfWeekEnglishShort } from '../date/_dayOfWeekEnglishShort.js';
+import { _dayOfWeekEnglishLong } from '../date/_dayOfWeekEnglishLong.js';
 
 export const __detetimeToStringFunc = {};
 
-__detetimeToStringFunc.YYYY = (date) => {
-  return date.getFullYear().toString();
+const year4 = (date, isLocal) => {
+  if (isLocal) {
+    return date.getFullYear().toString();
+  } else {
+    return date.getUTCFullYear().toString();
+  }
 };
 
-__detetimeToStringFunc.YY = (date) => {
-  return _subLast(date.getFullYear().toString(), 2);
+const year2 = (date, isLocal) => {
+  return _subLast(year4(date, isLocal), 2);
 };
 
-__detetimeToStringFunc.MM = (date) => {
-  return _paddingFirst((date.getMonth() + 1).toString(), 2, '0');
+const month1 = (date, isLocal) => {
+  if (isLocal) {
+    return (date.getMonth() + 1).toString();
+  } else {
+    return (date.getUTCMonth() + 1).toString();
+  }
 };
 
-__detetimeToStringFunc.M = (date) => {
-  return (date.getMonth() + 1).toString();
+const month2 = (date, isLocal) => {
+  return _paddingFirst(month1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.DD = (date) => {
-  return _paddingFirst(date.getDate().toString(), 2, '0');
+const date1 = (date, isLocal) => {
+  if (isLocal) {
+    return (date.getDate()).toString();
+  } else {
+    return (date.getUTCMonth()).toString();
+  }
 };
 
-__detetimeToStringFunc.D = (date) => {
-  return date.getDate().toString();
+const date2 = (date, isLocal) => {
+  return _paddingFirst(date1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.hh = (date) => {
-  // 00-12
-  return _paddingFirst((date.getHours() % 12).toString(), 2, '0');
+const hour12_1 = (date, isLocal) => {
+  // 0-11
+  if (isLocal) {
+    return (date.getHours() % 12).toString();
+  } else {
+    return (date.getUTCHours() % 12).toString();
+  }
 };
 
-__detetimeToStringFunc.h = (date) => {
-  // 0-12
-  return (date.getHours() % 12).toString();
+const hour12_2 = (date, isLocal) => {
+  // 00-11
+  return _paddingFirst(hour12_1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.HH = (date) => {
-  // 00-23
-  return _paddingFirst(date.getHours().toString(), 2, '0');
-};
-
-__detetimeToStringFunc.H = (date) => {
+const hour24_1 = (date, isLocal) => {
   // 0-23
-  return date.getHours().toString();
+  if (isLocal) {
+    return (date.getHours()).toString();
+  } else {
+    return (date.getUTCHours()).toString();
+  }
 };
 
-__detetimeToStringFunc.mm = (date) => {
-  return _paddingFirst(date.getMinutes().toString(), 2, '0');
+const hour24_2 = (date, isLocal) => {
+  // 00-23
+  return _paddingFirst(hour24_1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.m = (date) => {
-  return date.getMinutes().toString();
+const minute1 = (date, isLocal) => {
+  if (isLocal) {
+    return date.getMinutes().toString();
+  } else {
+    return (date.getUTCMinutes()).toString();
+  }
 };
 
-__detetimeToStringFunc.ss = (date) => {
-  return _paddingFirst(date.getSeconds().toString(), 2, '0');
+const minute2 = (date, isLocal) => {
+  return _paddingFirst(minute1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.s = (date) => {
-  return date.getSeconds().toString();
+const second1 = (date, isLocal) => {
+  if (isLocal) {
+    return date.getSeconds().toString();
+  } else {
+    return (date.getUTCSeconds()).toString();
+  }
 };
 
-__detetimeToStringFunc.SSS = (date) => {
-  return _paddingFirst(date.getMilliseconds().toString(), 3, '0');
+const second2 = (date, isLocal) => {
+  return _paddingFirst(second1(date, isLocal), 2, '0');
 };
 
-__detetimeToStringFunc.SS = (date) => {
+const millisecond3 = (date, isLocal) => {
+  if (isLocal) {
+    return _paddingFirst(date.getMilliseconds().toString(), 3, '0');
+  } else {
+    return _paddingFirst(date.getUTCMilliseconds().toString(), 3, '0');
+  }
+};
+
+const millisecond2 = (date, isLocal) => {
   return _subFirst(
-    __detetimeToStringFunc.SSS(date),
+    millisecond3(date, isLocal),
     2,
   );
 };
 
-__detetimeToStringFunc.S = (date) => {
+const millisecond1 = (date, isLocal) => {
   return _subFirst(
-    __detetimeToStringFunc.SSS(date),
+    millisecond3(date, isLocal),
     1,
   );
 };
 
-__detetimeToStringFunc.aa = (date) => {
-  return date.getHours() < 12 ? 'am' : 'pm';
+const am_pm = (date, isLocal) => {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'am' : 'pm';
+  } else {
+    return date.getUTCHours() < 12 ? 'am' : 'pm';
+  }
 };
 
-__detetimeToStringFunc.AA = (date) => {
-  return date.getHours() < 12 ? 'AM' : 'PM';
+const AM_PM = (date, isLocal) => {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'AM' : 'PM';
+  } else {
+    return date.getUTCHours() < 12 ? 'AM' : 'PM';
+  }
 };
 
-__detetimeToStringFunc.a = (date) => {
-  return date.getHours() < 12 ? 'a' : 'p';
+const a_p = (date, isLocal) => {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'a' : 'p';
+  } else {
+    return date.getUTCHours() < 12 ? 'a' : 'p';
+  }
 };
 
-__detetimeToStringFunc.A = (date) => {
-  return date.getHours() < 12 ? 'A' : 'P';
+const A_P = (date, isLocal) => {
+  if (isLocal) {
+    return date.getHours() < 12 ? 'A' : 'P';
+  } else {
+    return date.getUTCHours() < 12 ? 'A' : 'P';
+  }
 };
 
-const _Z = (date) => {
+const timezone = (date) => {
   const minutes = -1 * date.getTimezoneOffset();
   let offsetHourStr = _paddingFirst(String(Math.floor(minutes / 60)), 2, '0');
   offsetHourStr = 0 < minutes ? '+' + offsetHourStr : offsetHourStr;
@@ -105,22 +155,89 @@ const _Z = (date) => {
   return { offsetHourStr, offsetMinStr };
 };
 
-__detetimeToStringFunc.ZZ = (date) => {
-  const { offsetHourStr, offsetMinStr } = _Z(date);
+const timezoneHHMM = (date) => {
+  const { offsetHourStr, offsetMinStr } = timezone(date);
   return offsetHourStr + offsetMinStr;
 };
 
-__detetimeToStringFunc.Z = (date) => {
-  const { offsetHourStr, offsetMinStr } = _Z(date);
+const timezoneHH_MM = (date) => {
+  const { offsetHourStr, offsetMinStr } = timezone(date);
   return offsetHourStr + ':' + offsetMinStr;
 };
 
-__detetimeToStringFunc.DDD = (date) => {
-  return dayOfWeekEnglishShort(date);
+__detetimeToStringFunc.year4 = year4;
+__detetimeToStringFunc.year2 = year2;
+__detetimeToStringFunc.month2 = month2;
+__detetimeToStringFunc.month1 = month1;
+__detetimeToStringFunc.date2 = date2;
+__detetimeToStringFunc.date1 = date1;
+__detetimeToStringFunc.hour12_2 = hour12_2;
+__detetimeToStringFunc.hour12_1 = hour12_1;
+__detetimeToStringFunc.hour24_2 = hour24_2;
+__detetimeToStringFunc.hour24_1 = hour24_1;
+__detetimeToStringFunc.minute2 = minute2;
+__detetimeToStringFunc.minute1 = minute1;
+__detetimeToStringFunc.second2 = second2;
+__detetimeToStringFunc.second1 = second1;
+__detetimeToStringFunc.millisecond3 = millisecond3;
+__detetimeToStringFunc.millisecond2 = millisecond2;
+__detetimeToStringFunc.millisecond1 = millisecond1;
+__detetimeToStringFunc.am_pm = am_pm;
+__detetimeToStringFunc.AM_PM = AM_PM;
+__detetimeToStringFunc.a_p = a_p;
+__detetimeToStringFunc.A_P = A_P;
+
+const _DefaultObject = {
+  YYYY: year4,
+  YY:   year2,
+  MM:   month2,
+  M:    month1,
+  DD:   date2,
+  D:    date1,
+  hh:   hour12_2,
+  h:    hour12_1,
+  HH:   hour24_2,
+  H:    hour24_1,
+  mm:   minute2,
+  m:    minute1,
+  ss:   second2,
+  s:    second1,
+  SSS:  millisecond3,
+  SS:   millisecond2,
+  S:    millisecond1,
+  aa:   am_pm,
+  AA:   AM_PM,
+  a:    a_p,
+  A:    A_P,
+  ddd:  _dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong,
+  Z:    timezoneHH_MM,
+  ZZ:   timezoneHHMM,
 };
 
-__detetimeToStringFunc.DDDD = (date) => {
-  return dayOfWeekEnglishLong(date);
+const _MomentLikeObject = {
+  YYYY: year4,
+  YY:   year2,
+  MM:   month2,
+  M:    month1,
+  DD:   date2,
+  D:    date1,
+  hh:   hour12_2,
+  h:    hour12_1,
+  HH:   hour24_2,
+  H:    hour24_1,
+  mm:   minute2,
+  m:    minute1,
+  ss:   second2,
+  s:    second1,
+  SSS:  millisecond3,
+  SS:   millisecond2,
+  S:    millisecond1,
+  a:    a_p,
+  ddd:  _dayOfWeekEnglishShort,
+  dddd: _dayOfWeekEnglishLong,
+  Z:    timezoneHH_MM,
+  ZZ:   timezoneHHMM,
 };
 
 __detetimeToStringFunc.MMM = (date) => {
@@ -135,39 +252,39 @@ __detetimeToStringFunc.MMMMM = (date) => {
   return nameOfMonthEnglishLong(date);
 };
 
-const _DefaultObject = { ...__detetimeToStringFunc };
+// const _DefaultObject = { ...__detetimeToStringFunc };
 __detetimeToStringFunc.DefaultObject = () => _DefaultObject;
 
-const dayOfWeek = (date, dayOfWeekNames) => {
-  // c.assert(t.isDate(date));
-  // if (t.isNullOrUndefined(dayOfWeekNames)) {
-  //   return date.getDay();
-  // }
-  // c.assert(t.isArray(dayOfWeekNames));
-  // c.assert(dayOfWeekNames.length === 7);
-  return dayOfWeekNames[date.getDay()];
-};
+// const dayOfWeek = (date, dayOfWeekNames) => {
+//   // c.assert(t.isDate(date));
+//   // if (t.isNullOrUndefined(dayOfWeekNames)) {
+//   //   return date.getDay();
+//   // }
+//   // c.assert(t.isArray(dayOfWeekNames));
+//   // c.assert(dayOfWeekNames.length === 7);
+//   return dayOfWeekNames[date.getDay()];
+// };
 
-const dayOfWeekEnglishShort = (date) => {
-  return dayOfWeek(date, dayOfWeekNamesEnglishShort());
-};
+// const dayOfWeekEnglishShort = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishShort());
+// };
 
-const dayOfWeekEnglishLong = (date) => {
-  return dayOfWeek(date, dayOfWeekNamesEnglishLong());
-};
+// const dayOfWeekEnglishLong = (date) => {
+//   return dayOfWeek(date, dayOfWeekNamesEnglishLong());
+// };
 
-const dayOfWeekNamesEnglishShort = () => {
-  return [
-    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-  ];
-};
+// const dayOfWeekNamesEnglishShort = () => {
+//   return [
+//     'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+//   ];
+// };
 
-const dayOfWeekNamesEnglishLong = () => {
-  return [
-    'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-    'Thursday', 'Friday', 'Saturday',
-  ];
-};
+// const dayOfWeekNamesEnglishLong = () => {
+//   return [
+//     'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+//     'Thursday', 'Friday', 'Saturday',
+//   ];
+// };
 
 const nameOfMonth = (date, monthNames) => {
   // c.assert(t.isDate(date));

@@ -21,6 +21,7 @@
 <script language="JavaScript" src="./polyfill_Object_defineProperty.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/1.parts.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/2.parts.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/3.parts.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/parts.js"></script>
 
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/1.test_parts.js"></script>

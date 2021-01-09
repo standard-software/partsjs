@@ -181,6 +181,11 @@ export const test_execute_date = (parts) => {
           '2020-02-03T04:05:06.007Z',
           dt.toISOString(),
         );
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        checkEqual(
+          '2020-02-02T19:05:06.007Z',
+          dt.toISOString(),
+        );
 
         // zero
         var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
@@ -337,24 +342,24 @@ export const test_execute_date = (parts) => {
         );
         checkEqual(
           '01/2/4 16:5:8 Sun',
-          datetimeToString(dt, 'YY/M/D H:m:s DDD'),
+          datetimeToString(dt, 'YY/M/D H:m:s ddd'),
         );
         checkEqual(
           '01/2/4 16:5:8 Sunday',
-          datetimeToString(dt, 'YY/M/D H:m:s DDDD'),
+          datetimeToString(dt, 'YY/M/D H:m:s dddd'),
         );
-        checkEqual(
-          '01/2/4 16:5:8 Feb',
-          datetimeToString(dt, 'YY/M/D H:m:s MMM'),
-        );
-        checkEqual(
-          '01/2/4 16:5:8 Feb.',
-          datetimeToString(dt, 'YY/M/D H:m:s MMMM'),
-        );
-        checkEqual(
-          '01/2/4 16:5:8 February',
-          datetimeToString(dt, 'YY/M/D H:m:s MMMMM'),
-        );
+        // checkEqual(
+        //   '01/2/4 16:5:8 Feb',
+        //   datetimeToString(dt, 'YY/M/D H:m:s MMM'),
+        // );
+        // checkEqual(
+        //   '01/2/4 16:5:8 Feb.',
+        //   datetimeToString(dt, 'YY/M/D H:m:s MMMM'),
+        // );
+        // checkEqual(
+        //   '01/2/4 16:5:8 February',
+        //   datetimeToString(dt, 'YY/M/D H:m:s MMMMM'),
+        // );
 
         // quote
         var dt = DateTime(2021, 1, 6);
@@ -550,6 +555,7 @@ export const test_execute_date = (parts) => {
     test_dayOfWeekEnglishShort();
     test_dayOfWeekEnglishLong();
 
+    test_datetimeToString();
 
   });
 };

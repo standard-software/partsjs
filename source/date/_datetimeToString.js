@@ -12,6 +12,7 @@ import { __detetimeToStringFunc } from '../date/__detetimeToStringFunc.js';
 
 export const _datetimeToString = (
   date, format, ruleObject = __detetimeToStringFunc.DefaultObject(),
+  isLocal = true,
 ) => {
   const existSingleQuote = __includes(format, "'");
   const existDoubleQuote = __includes(format, '"');
@@ -22,10 +23,15 @@ export const _datetimeToString = (
   }
 
   const keys = _objectKeys(ruleObject);
-  keys.sort(_SortFunc.order.normal.descending, v => v.length);
+  keys.sort(
+    _SortFunc([
+      [_SortFunc.order.normal.descending, v => v.length],
+    ]),
+  );
+
   const replaceArray = [];
   __loop(keys)((value, index) => {
-    replaceArray.push([value, ruleObject[value](date)]);
+    replaceArray.push([value, ruleObject[value](date, isLocal)]);
   });
 
   let quoteChar;
