@@ -17,8 +17,8 @@ module.exports = {
       maxSize: 200000,
     }),
     new EncodingPlugin({
-      encoding: 'Shift JIS',
-      // encoding: 'UTF-16LE',
+      // encoding: 'Shift JIS',
+      encoding: 'UTF-16LE',
     }),
   ],
 };
