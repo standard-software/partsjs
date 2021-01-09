@@ -338,6 +338,11 @@ You can now use the functions of the parts.js object.
   - _dayOfWeek.js / dayOfWeek.js
   - / _dayOfWeekEnglishShort.js / dayOfWeekEnglishShort.js
   - / _dayOfWeekEnglishLong.js / dayOfWeekEnglishLong.js
+- add nameOfMonth
+  - _ nameOfMonth.js /  nameOfMonth.js
+  - / _ nameOfMonthEnglishChar3.js /  nameOfMonthEnglishChar3.js
+  - / _ nameOfMonthEnglishChar4.js /  nameOfMonthEnglishChar4.js
+  - / _ nameOfMonthEnglishLong.js /  nameOfMonthEnglishLong.js
 
 ### 10.3.0
 #### 2020/12/09(Wed)

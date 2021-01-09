@@ -10,6 +10,14 @@ import _dayOfWeekEnglishShortJs from './_dayOfWeekEnglishShort.js';
 import dayOfWeekEnglishShortJs from './dayOfWeekEnglishShort.js';
 import _dayOfWeekEnglishLongJs from './_dayOfWeekEnglishLong.js';
 import dayOfWeekEnglishLongJs from './dayOfWeekEnglishLong.js';
+import _nameOfMonthJs from './_nameOfMonth.js';
+import nameOfMonthJs from './nameOfMonth.js';
+import _nameOfMonthEnglishChar3Js from './_nameOfMonthEnglishChar3.js';
+import nameOfMonthEnglishChar3Js from './nameOfMonthEnglishChar3.js';
+import _nameOfMonthEnglishChar4Js from './_nameOfMonthEnglishChar4.js';
+import nameOfMonthEnglishChar4Js from './nameOfMonthEnglishChar4.js';
+import _nameOfMonthEnglishLongJs from './_nameOfMonthEnglishLong.js';
+import nameOfMonthEnglishLongJs from './nameOfMonthEnglishLong.js';
 
 const dateJs = {
   ...TodayJs,
@@ -24,6 +32,14 @@ const dateJs = {
   ...dayOfWeekEnglishShortJs,
   ..._dayOfWeekEnglishLongJs,
   ...dayOfWeekEnglishLongJs,
+  ..._nameOfMonthJs,
+  ...nameOfMonthJs,
+  ..._nameOfMonthEnglishChar3Js,
+  ...nameOfMonthEnglishChar3Js,
+  ..._nameOfMonthEnglishChar4Js,
+  ...nameOfMonthEnglishChar4Js,
+  ..._nameOfMonthEnglishLongJs,
+  ...nameOfMonthEnglishLongJs,
 };
 
 export const {
@@ -32,6 +48,10 @@ export const {
   _dayOfWeek,
   _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong,
+  _nameOfMonth,
+  _nameOfMonthEnglishChar3,
+  _nameOfMonthEnglishChar4,
+  _nameOfMonthEnglishLong,
 
   Today,
   isInvalidDate,
@@ -40,6 +60,10 @@ export const {
   dayOfWeek,
   dayOfWeekEnglishShort,
   dayOfWeekEnglishLong,
+  nameOfMonth,
+  nameOfMonthEnglishChar3,
+  nameOfMonthEnglishChar4,
+  nameOfMonthEnglishLong,
 } = dateJs;
 
 export default {
@@ -48,6 +72,10 @@ export default {
   _dayOfWeek,
   _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong,
+  _nameOfMonth,
+  _nameOfMonthEnglishChar3,
+  _nameOfMonthEnglishChar4,
+  _nameOfMonthEnglishLong,
 
   Today,
   isInvalidDate,
@@ -56,4 +84,8 @@ export default {
   dayOfWeek,
   dayOfWeekEnglishShort,
   dayOfWeekEnglishLong,
+  nameOfMonth,
+  nameOfMonthEnglishChar3,
+  nameOfMonthEnglishChar4,
+  nameOfMonthEnglishLong,
 };

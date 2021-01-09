@@ -2,6 +2,9 @@ import { _paddingFirst } from '../string/_paddingFirst.js';
 import { _subFirst, _subLast, _trimFirst } from '../string/string_common.js';
 import { _dayOfWeekEnglishShort } from '../date/_dayOfWeekEnglishShort.js';
 import { _dayOfWeekEnglishLong } from '../date/_dayOfWeekEnglishLong.js';
+import { _nameOfMonthEnglishChar3 } from '../date/_nameOfMonthEnglishChar3.js';
+import { _nameOfMonthEnglishChar4 } from '../date/_nameOfMonthEnglishChar4.js';
+import { _nameOfMonthEnglishLong } from '../date/_nameOfMonthEnglishLong.js';
 
 export const __detetimeToStringFunc = {};
 
@@ -211,6 +214,9 @@ const _DefaultObject = {
   A:    A_P,
   ddd:  _dayOfWeekEnglishShort,
   dddd: _dayOfWeekEnglishLong,
+  MMM:  _nameOfMonthEnglishChar3,
+  MMMM: _nameOfMonthEnglishChar4,
+  MMMMM:_nameOfMonthEnglishLong,
   Z:    timezoneHH_MM,
   ZZ:   timezoneHHMM,
 };
@@ -233,98 +239,18 @@ const _MomentLikeObject = {
   SSS:  millisecond3,
   SS:   millisecond2,
   S:    millisecond1,
-  a:    a_p,
+  a:    am_pm,
+  A:    AM_PM,
   ddd:  _dayOfWeekEnglishShort,
   dddd: _dayOfWeekEnglishLong,
+  MMM:  _nameOfMonthEnglishChar3,
+  MMMM: _nameOfMonthEnglishLong,
   Z:    timezoneHH_MM,
   ZZ:   timezoneHHMM,
 };
 
-__detetimeToStringFunc.MMM = (date) => {
-  return nameOfMonthEnglish3Char(date);
-};
-
-__detetimeToStringFunc.MMMM = (date) => {
-  return nameOfMonthEnglish4Char(date);
-};
-
-__detetimeToStringFunc.MMMMM = (date) => {
-  return nameOfMonthEnglishLong(date);
-};
-
-// const _DefaultObject = { ...__detetimeToStringFunc };
 __detetimeToStringFunc.DefaultObject = () => _DefaultObject;
-
-// const dayOfWeek = (date, dayOfWeekNames) => {
-//   // c.assert(t.isDate(date));
-//   // if (t.isNullOrUndefined(dayOfWeekNames)) {
-//   //   return date.getDay();
-//   // }
-//   // c.assert(t.isArray(dayOfWeekNames));
-//   // c.assert(dayOfWeekNames.length === 7);
-//   return dayOfWeekNames[date.getDay()];
-// };
-
-// const dayOfWeekEnglishShort = (date) => {
-//   return dayOfWeek(date, dayOfWeekNamesEnglishShort());
-// };
-
-// const dayOfWeekEnglishLong = (date) => {
-//   return dayOfWeek(date, dayOfWeekNamesEnglishLong());
-// };
-
-// const dayOfWeekNamesEnglishShort = () => {
-//   return [
-//     'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-//   ];
-// };
-
-// const dayOfWeekNamesEnglishLong = () => {
-//   return [
-//     'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-//     'Thursday', 'Friday', 'Saturday',
-//   ];
-// };
-
-const nameOfMonth = (date, monthNames) => {
-  // c.assert(t.isDate(date));
-  // c.assert(t.isArray(monthNames));
-  // c.assert(monthNames.length === 12);
-  return monthNames[date.getMonth()];
-};
-
-const nameOfMonthEnglish3Char = (date) => {
-  return nameOfMonth(date, monthNamesEnglish3Char());
-};
-
-const nameOfMonthEnglish4Char = (date) => {
-  return nameOfMonth(date, monthNamesEnglish4Char());
-};
-
-const nameOfMonthEnglishLong = (date) => {
-  return nameOfMonth(date, monthNamesEnglishLong());
-};
-
-const monthNamesEnglish3Char = () => {
-  return [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-  ];
-};
-
-const monthNamesEnglish4Char = () => {
-  return [
-    'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June',
-    'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.',
-  ];
-};
-
-const monthNamesEnglishLong = () => {
-  return [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
-  ];
-};
+__detetimeToStringFunc.MomentLikeObject = () => _MomentLikeObject;
 
 export default { __detetimeToStringFunc };
 

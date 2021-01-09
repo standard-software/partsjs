@@ -55,4 +55,6 @@ export const _datetimeToString = (
   return formatStrs.join('');
 };
 
+_datetimeToString.func = __detetimeToStringFunc;
+
 export default { _datetimeToString };
