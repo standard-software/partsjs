@@ -121,7 +121,8 @@
     "moment": "^2.27.0",
     "npm-watch": "^0.7.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-encoding-plugin": "^0.3.1"
   },
   "dependencies": {}
 }

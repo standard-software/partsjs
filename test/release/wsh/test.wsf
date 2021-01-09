@@ -24,8 +24,9 @@
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/3.parts.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/parts.js"></script>
 
-<script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/1.test_parts.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/0.test_parts.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/2.test_parts.js"></script>
+<script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/3.test_parts.js"></script>
 <script language="JavaScript" src="../../../build/babel_webpack/webpack_forWsh/test_parts.js"></script>
 
 <script language="JavaScript">

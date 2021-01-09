@@ -343,6 +343,9 @@ You can now use the functions of the parts.js object.
   - / _ nameOfMonthEnglishChar3.js /  nameOfMonthEnglishChar3.js
   - / _ nameOfMonthEnglishChar4.js /  nameOfMonthEnglishChar4.js
   - / _ nameOfMonthEnglishLong.js /  nameOfMonthEnglishLong.js
+- update build for WSH
+  - EncodingPlugin Shift JIS for Japanese Support
+  - update testCode about Zenkaku Space
 
 ### 10.3.0
 #### 2020/12/09(Wed)

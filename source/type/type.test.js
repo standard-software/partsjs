@@ -1348,11 +1348,7 @@ export const test_execute_type = (parts) => {
         checkEqual(0,   Number(new Number()));
         checkEqual(0,   Number(new Number('')));
         checkEqual(0,   Number(new Number(' ')));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,   Number(new Number('　')));
-        } else {
-          checkEqual(0,   Number(new Number('　')));
-        }
+        checkEqual(0,   Number(new Number('　')));
         checkEqual(1,   Number(new Number('1')));
         checkEqual(1.1, Number(new Number('1.1')));
         checkEqual(NaN,       Number(new Number(NaN)));

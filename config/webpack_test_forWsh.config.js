@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const EncodingPlugin = require('webpack-encoding-plugin');
 
 module.exports = {
   mode: 'none',
@@ -13,7 +14,11 @@ module.exports = {
   plugins: [
     new webpack.optimize.AggressiveSplittingPlugin({
       minSize: 1000,
-      maxSize: 300000,
+      maxSize: 200000,
+    }),
+    new EncodingPlugin({
+      encoding: 'Shift JIS',
+      // encoding: 'UTF-16LE',
     }),
   ],
 };

@@ -333,7 +333,7 @@ export const test_execute_convert = (parts) => {
     };
 
     const test_NumberCast_standard = () => {
-      it('test_NumberCast', () => {
+      it('test_NumberCast_standard', () => {
         // Integer
         checkEqual(123,       Number('123'));
         checkEqual(123,       Number('0123'));
@@ -342,15 +342,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,       Number(' 123'), '1');
         checkEqual(123,       Number('123 '), '2');
         checkEqual(123,       Number(' 123 '), '3');
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       Number('　123'), '4');
-          checkEqual(NaN,       Number('123　'), '5');
-          checkEqual(NaN,       Number('　123　'), '6');
-        } else {
-          checkEqual(123,       Number('　123'), '4');
-          checkEqual(123,       Number('123　'), '5');
-          checkEqual(123,       Number('　123　'), '6');
-        }
+        checkEqual(123,       Number('　123'), '4');
+        checkEqual(123,       Number('123　'), '5');
+        checkEqual(123,       Number('　123　'), '6');
         checkEqual(NaN,       Number('123 0'));
         checkEqual(NaN,       Number('0 123'));
         checkEqual(NaN,       Number('1 123'));
@@ -369,15 +363,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.4,     Number(' 123.4'));
         checkEqual(123.4,     Number('123.4 '));
         checkEqual(123.4,     Number(' 123.4 '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       Number('　123.4'));
-          checkEqual(NaN,       Number('123.4　'));
-          checkEqual(NaN,       Number('　123.4　'));
-        } else {
-          checkEqual(123.4,     Number('　123.4'));
-          checkEqual(123.4,     Number('123.4　'));
-          checkEqual(123.4,     Number('　123.4　'));
-        }
+        checkEqual(123.4,     Number('　123.4'));
+        checkEqual(123.4,     Number('123.4　'));
+        checkEqual(123.4,     Number('　123.4　'));
         checkEqual(NaN,       Number('123.4 0'));
         checkEqual(NaN,       Number('0 123.4'));
         checkEqual(NaN,       Number('1 123.4'));
@@ -394,11 +382,7 @@ export const test_execute_convert = (parts) => {
         // space string
         checkEqual(0,         Number(''));      // ?
         checkEqual(0,         Number(' '));     // ?
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       Number('　'));
-        } else {
-          checkEqual(0,         Number('　'));    // ?
-        }
+        checkEqual(0,         Number('　'));    // ?
 
         // exponential notation
         checkEqual(3.14,  Number(3.14));
@@ -469,7 +453,7 @@ export const test_execute_convert = (parts) => {
     };
 
     const test_parseFloat_standard = () => {
-      it('test_parseFloat', () => {
+      it('test_parseFloat_standard', () => {
         // Integer
         checkEqual(123,       parseFloat('123'));
         checkEqual(123,       parseFloat('0123'));
@@ -478,15 +462,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,       parseFloat(' 123'), '1');
         checkEqual(123,       parseFloat('123 '), '2');
         checkEqual(123,       parseFloat(' 123 '), '3');
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseFloat('　123'), '4');
-          checkEqual(123,       parseFloat('123　'), '5');
-          checkEqual(NaN,       parseFloat('　123　'), '6');
-        } else {
-          checkEqual(123,       parseFloat('　123'), '4');
-          checkEqual(123,       parseFloat('123　'), '5');
-          checkEqual(123,       parseFloat('　123　'), '6');
-        }
+        checkEqual(123,       parseFloat('　123'), '4');
+        checkEqual(123,       parseFloat('123　'), '5');
+        checkEqual(123,       parseFloat('　123　'), '6');
         checkEqual(123,       parseFloat('123 0'));
         checkEqual(0,         parseFloat('0 123'));
         checkEqual(1,         parseFloat('1 123'));
@@ -505,15 +483,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.4,     parseFloat(' 123.4'));
         checkEqual(123.4,     parseFloat('123.4 '));
         checkEqual(123.4,     parseFloat(' 123.4 '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseFloat('　123.4'));
-          checkEqual(123.4,     parseFloat('123.4　'));
-          checkEqual(NaN,       parseFloat('　123.4　'));
-        } else {
-          checkEqual(123.4,     parseFloat('　123.4'));
-          checkEqual(123.4,     parseFloat('123.4　'));
-          checkEqual(123.4,     parseFloat('　123.4　'));
-        }
+        checkEqual(123.4,     parseFloat('　123.4'));
+        checkEqual(123.4,     parseFloat('123.4　'));
+        checkEqual(123.4,     parseFloat('　123.4　'));
         checkEqual(123.4,       parseFloat('123.4 0'));
         checkEqual(0,           parseFloat('0 123.4'));
         checkEqual(1,           parseFloat('1 123.4'));
@@ -592,7 +564,7 @@ export const test_execute_convert = (parts) => {
     };
 
     const test_parseInt_standard = () => {
-      it('test_parseInt', () => {
+      it('test_parseInt_standard', () => {
 
         const parseInt10 = value => parseInt(value, 10);
 
@@ -604,15 +576,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,       parseInt10(' 123'), '1');
         checkEqual(123,       parseInt10('123 '), '2');
         checkEqual(123,       parseInt10(' 123 '), '3');
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseInt10('　123'), '4');
-          checkEqual(123,       parseInt10('123　'), '5');
-          checkEqual(NaN,       parseInt10('　123　'), '6');
-        } else {
-          checkEqual(123,       parseInt10('　123'), '4');
-          checkEqual(123,       parseInt10('123　'), '5');
-          checkEqual(123,       parseInt10('　123　'), '6');
-        }
+        checkEqual(123,       parseInt10('　123'), '4');
+        checkEqual(123,       parseInt10('123　'), '5');
+        checkEqual(123,       parseInt10('　123　'), '6');
         checkEqual(123,       parseInt10('123 0'));
         checkEqual(0,         parseInt10('0 123'));
         checkEqual(1,         parseInt10('1 123'));
@@ -631,15 +597,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,     parseInt10(' 123.4'));
         checkEqual(123,     parseInt10('123.4 '));
         checkEqual(123,     parseInt10(' 123.4 '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,       parseInt10('　123.4'));
-          checkEqual(123,       parseInt10('123.4　'));
-          checkEqual(NaN,       parseInt10('　123.4　'));
-        } else {
-          checkEqual(123,     parseInt10('　123.4'));
-          checkEqual(123,     parseInt10('123.4　'));
-          checkEqual(123,     parseInt10('　123.4　'));
-        }
+        checkEqual(123,     parseInt10('　123.4'));
+        checkEqual(123,     parseInt10('123.4　'));
+        checkEqual(123,     parseInt10('　123.4　'));
         checkEqual(123,         parseInt10('123.4 0'));
         checkEqual(0,           parseInt10('0 123.4'));
         checkEqual(1,           parseInt10('1 123.4'));
