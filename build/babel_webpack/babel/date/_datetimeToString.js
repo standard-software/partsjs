@@ -66,6 +66,7 @@ var _datetimeToString = function _datetimeToString(date, format) {
 };
 
 exports._datetimeToString = _datetimeToString;
+_datetimeToString.func = _detetimeToStringFunc.__detetimeToStringFunc;
 var _default = {
   _datetimeToString: _datetimeToString
 };

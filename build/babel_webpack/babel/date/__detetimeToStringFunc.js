@@ -13,6 +13,12 @@ var _dayOfWeekEnglishShort2 = require("../date/_dayOfWeekEnglishShort.js");
 
 var _dayOfWeekEnglishLong2 = require("../date/_dayOfWeekEnglishLong.js");
 
+var _nameOfMonthEnglishChar = require("../date/_nameOfMonthEnglishChar3.js");
+
+var _nameOfMonthEnglishChar2 = require("../date/_nameOfMonthEnglishChar4.js");
+
+var _nameOfMonthEnglishLong2 = require("../date/_nameOfMonthEnglishLong.js");
+
 var __detetimeToStringFunc = {};
 exports.__detetimeToStringFunc = __detetimeToStringFunc;
 
@@ -224,6 +230,9 @@ var _DefaultObject = {
   A: A_P,
   ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
   dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  MMM: _nameOfMonthEnglishChar._nameOfMonthEnglishChar3,
+  MMMM: _nameOfMonthEnglishChar2._nameOfMonthEnglishChar4,
+  MMMMM: _nameOfMonthEnglishLong2._nameOfMonthEnglishLong,
   Z: timezoneHH_MM,
   ZZ: timezoneHHMM
 };
@@ -245,85 +254,22 @@ var _MomentLikeObject = {
   SSS: millisecond3,
   SS: millisecond2,
   S: millisecond1,
-  a: a_p,
+  a: am_pm,
+  A: AM_PM,
   ddd: _dayOfWeekEnglishShort2._dayOfWeekEnglishShort,
   dddd: _dayOfWeekEnglishLong2._dayOfWeekEnglishLong,
+  MMM: _nameOfMonthEnglishChar._nameOfMonthEnglishChar3,
+  MMMM: _nameOfMonthEnglishLong2._nameOfMonthEnglishLong,
   Z: timezoneHH_MM,
   ZZ: timezoneHHMM
 };
 
-__detetimeToStringFunc.MMM = function (date) {
-  return nameOfMonthEnglish3Char(date);
-};
-
-__detetimeToStringFunc.MMMM = function (date) {
-  return nameOfMonthEnglish4Char(date);
-};
-
-__detetimeToStringFunc.MMMMM = function (date) {
-  return nameOfMonthEnglishLong(date);
-}; // const _DefaultObject = { ...__detetimeToStringFunc };
-
-
 __detetimeToStringFunc.DefaultObject = function () {
   return _DefaultObject;
-}; // const dayOfWeek = (date, dayOfWeekNames) => {
-//   // c.assert(t.isDate(date));
-//   // if (t.isNullOrUndefined(dayOfWeekNames)) {
-//   //   return date.getDay();
-//   // }
-//   // c.assert(t.isArray(dayOfWeekNames));
-//   // c.assert(dayOfWeekNames.length === 7);
-//   return dayOfWeekNames[date.getDay()];
-// };
-// const dayOfWeekEnglishShort = (date) => {
-//   return dayOfWeek(date, dayOfWeekNamesEnglishShort());
-// };
-// const dayOfWeekEnglishLong = (date) => {
-//   return dayOfWeek(date, dayOfWeekNamesEnglishLong());
-// };
-// const dayOfWeekNamesEnglishShort = () => {
-//   return [
-//     'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-//   ];
-// };
-// const dayOfWeekNamesEnglishLong = () => {
-//   return [
-//     'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-//     'Thursday', 'Friday', 'Saturday',
-//   ];
-// };
-
-
-var nameOfMonth = function nameOfMonth(date, monthNames) {
-  // c.assert(t.isDate(date));
-  // c.assert(t.isArray(monthNames));
-  // c.assert(monthNames.length === 12);
-  return monthNames[date.getMonth()];
 };
 
-var nameOfMonthEnglish3Char = function nameOfMonthEnglish3Char(date) {
-  return nameOfMonth(date, monthNamesEnglish3Char());
-};
-
-var nameOfMonthEnglish4Char = function nameOfMonthEnglish4Char(date) {
-  return nameOfMonth(date, monthNamesEnglish4Char());
-};
-
-var nameOfMonthEnglishLong = function nameOfMonthEnglishLong(date) {
-  return nameOfMonth(date, monthNamesEnglishLong());
-};
-
-var monthNamesEnglish3Char = function monthNamesEnglish3Char() {
-  return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-};
-
-var monthNamesEnglish4Char = function monthNamesEnglish4Char() {
-  return ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-};
-
-var monthNamesEnglishLong = function monthNamesEnglishLong() {
-  return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+__detetimeToStringFunc.MomentLikeObject = function () {
+  return _MomentLikeObject;
 };
 
 var _default = {

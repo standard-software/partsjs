@@ -9,12 +9,10 @@ var _isType = require("../type/isType.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _detetimeToStringFunc = require("../date/__detetimeToStringFunc.js");
-
 var _datetimeToString2 = require("./_datetimeToString.js");
 
 var datetimeToString = function datetimeToString(date, format) {
-  var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
+  var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _datetimeToString2._datetimeToString.func.DefaultObject();
   var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
   if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule, isLocal')) {
@@ -22,14 +20,14 @@ var datetimeToString = function datetimeToString(date, format) {
     date = _date.date;
     format = _date.format;
     var _date$rule = _date.rule;
-    rule = _date$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _date$rule;
+    rule = _date$rule === void 0 ? _datetimeToString2._datetimeToString.func.DefaultObject() : _date$rule;
     var _date$isLocal = _date.isLocal;
     isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
   } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule, isLocal')) {
     var _format = format;
     format = _format.format;
     var _format$rule = _format.rule;
-    rule = _format$rule === void 0 ? _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject() : _format$rule;
+    rule = _format$rule === void 0 ? _datetimeToString2._datetimeToString.func.DefaultObject() : _format$rule;
     var _format$isLocal = _format.isLocal;
     isLocal = _format$isLocal === void 0 ? true : _format$isLocal;
   } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule', 'isLocal')) {
@@ -60,6 +58,7 @@ var datetimeToString = function datetimeToString(date, format) {
 };
 
 exports.datetimeToString = datetimeToString;
+datetimeToString.func = _datetimeToString2._datetimeToString.func;
 var _default = {
   datetimeToString: datetimeToString
 };
