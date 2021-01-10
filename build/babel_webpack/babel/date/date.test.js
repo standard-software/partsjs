@@ -21,6 +21,8 @@ var test_execute_date = function test_execute_date(parts) {
       dayOfWeek = _parts$date.dayOfWeek,
       dayOfWeekEnglishShort = _parts$date.dayOfWeekEnglishShort,
       dayOfWeekEnglishLong = _parts$date.dayOfWeekEnglishLong,
+      dayOfWeekJapaneseShort = _parts$date.dayOfWeekJapaneseShort,
+      dayOfWeekJapaneseLong = _parts$date.dayOfWeekJapaneseLong,
       nameOfMonth = _parts$date.nameOfMonth,
       nameOfMonthEnglishChar3 = _parts$date.nameOfMonthEnglishChar3,
       nameOfMonthEnglishChar4 = _parts$date.nameOfMonthEnglishChar4,
@@ -424,6 +426,90 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_dayOfWeekJapaneseShort = function test_dayOfWeekJapaneseShort() {
+      it('test_dayOfWeekJapaneseShort', function () {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土', dayOfWeekJapaneseShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, true)); // local Sat UTC Fri
+
+        checkEqual('金', dayOfWeekJapaneseShort(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土', dayOfWeekJapaneseShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('金', dayOfWeekJapaneseShort(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekJapaneseLong = function test_dayOfWeekJapaneseLong() {
+      it('test_dayOfWeekJapaneseLong', function () {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, true)); // local Sat UTC Fri
+
+        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
     var test_nameOfMonth = function test_nameOfMonth() {
       it('test_nameOfMonth', function () {
         var dt = DateTime(2021, 1, 1);
@@ -591,6 +677,8 @@ var test_execute_date = function test_execute_date(parts) {
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
     test_dayOfWeekEnglishLong();
+    test_dayOfWeekJapaneseShort();
+    test_dayOfWeekJapaneseLong();
     test_nameOfMonth();
     test_nameOfMonthEnglishChar3();
     test_nameOfMonthEnglishChar4();

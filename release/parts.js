@@ -147,7 +147,7 @@ var _array = _interopRequireDefault(__webpack_require__(67));
 
 var _date = _interopRequireDefault(__webpack_require__(164));
 
-var _system = _interopRequireDefault(__webpack_require__(188));
+var _system = _interopRequireDefault(__webpack_require__(192));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -17851,7 +17851,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._DateTime = void 0;
+exports["default"] = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekJapaneseLong = exports.dayOfWeekJapaneseShort = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekJapaneseLong = exports._dayOfWeekJapaneseShort = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._DateTime = void 0;
 
 var _Today = _interopRequireDefault(__webpack_require__(165));
 
@@ -17877,21 +17877,29 @@ var _dayOfWeekEnglishLong2 = _interopRequireDefault(__webpack_require__(174));
 
 var _dayOfWeekEnglishLong3 = _interopRequireDefault(__webpack_require__(183));
 
+var _dayOfWeekJapaneseShort2 = _interopRequireDefault(__webpack_require__(184));
+
+var _dayOfWeekJapaneseShort3 = _interopRequireDefault(__webpack_require__(185));
+
+var _dayOfWeekJapaneseLong2 = _interopRequireDefault(__webpack_require__(186));
+
+var _dayOfWeekJapaneseLong3 = _interopRequireDefault(__webpack_require__(187));
+
 var _nameOfMonth2 = _interopRequireDefault(__webpack_require__(176));
 
-var _nameOfMonth3 = _interopRequireDefault(__webpack_require__(184));
+var _nameOfMonth3 = _interopRequireDefault(__webpack_require__(188));
 
 var _nameOfMonthEnglishChar = _interopRequireDefault(__webpack_require__(175));
 
-var _nameOfMonthEnglishChar2 = _interopRequireDefault(__webpack_require__(185));
+var _nameOfMonthEnglishChar2 = _interopRequireDefault(__webpack_require__(189));
 
 var _nameOfMonthEnglishChar5 = _interopRequireDefault(__webpack_require__(178));
 
-var _nameOfMonthEnglishChar6 = _interopRequireDefault(__webpack_require__(186));
+var _nameOfMonthEnglishChar6 = _interopRequireDefault(__webpack_require__(190));
 
 var _nameOfMonthEnglishLong2 = _interopRequireDefault(__webpack_require__(179));
 
-var _nameOfMonthEnglishLong3 = _interopRequireDefault(__webpack_require__(187));
+var _nameOfMonthEnglishLong3 = _interopRequireDefault(__webpack_require__(191));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -17901,13 +17909,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]);
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _dayOfWeekJapaneseShort2["default"]), _dayOfWeekJapaneseShort3["default"]), _dayOfWeekJapaneseLong2["default"]), _dayOfWeekJapaneseLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]);
 
 var _DateTime = dateJs._DateTime,
     _datetimeToString = dateJs._datetimeToString,
     _dayOfWeek = dateJs._dayOfWeek,
     _dayOfWeekEnglishShort = dateJs._dayOfWeekEnglishShort,
     _dayOfWeekEnglishLong = dateJs._dayOfWeekEnglishLong,
+    _dayOfWeekJapaneseShort = dateJs._dayOfWeekJapaneseShort,
+    _dayOfWeekJapaneseLong = dateJs._dayOfWeekJapaneseLong,
     _nameOfMonth = dateJs._nameOfMonth,
     _nameOfMonthEnglishChar3 = dateJs._nameOfMonthEnglishChar3,
     _nameOfMonthEnglishChar4 = dateJs._nameOfMonthEnglishChar4,
@@ -17919,6 +17929,8 @@ var _DateTime = dateJs._DateTime,
     dayOfWeek = dateJs.dayOfWeek,
     dayOfWeekEnglishShort = dateJs.dayOfWeekEnglishShort,
     dayOfWeekEnglishLong = dateJs.dayOfWeekEnglishLong,
+    dayOfWeekJapaneseShort = dateJs.dayOfWeekJapaneseShort,
+    dayOfWeekJapaneseLong = dateJs.dayOfWeekJapaneseLong,
     nameOfMonth = dateJs.nameOfMonth,
     nameOfMonthEnglishChar3 = dateJs.nameOfMonthEnglishChar3,
     nameOfMonthEnglishChar4 = dateJs.nameOfMonthEnglishChar4,
@@ -17927,6 +17939,8 @@ exports.nameOfMonthEnglishLong = nameOfMonthEnglishLong;
 exports.nameOfMonthEnglishChar4 = nameOfMonthEnglishChar4;
 exports.nameOfMonthEnglishChar3 = nameOfMonthEnglishChar3;
 exports.nameOfMonth = nameOfMonth;
+exports.dayOfWeekJapaneseLong = dayOfWeekJapaneseLong;
+exports.dayOfWeekJapaneseShort = dayOfWeekJapaneseShort;
 exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
 exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
 exports.dayOfWeek = dayOfWeek;
@@ -17938,6 +17952,8 @@ exports._nameOfMonthEnglishLong = _nameOfMonthEnglishLong;
 exports._nameOfMonthEnglishChar4 = _nameOfMonthEnglishChar4;
 exports._nameOfMonthEnglishChar3 = _nameOfMonthEnglishChar3;
 exports._nameOfMonth = _nameOfMonth;
+exports._dayOfWeekJapaneseLong = _dayOfWeekJapaneseLong;
+exports._dayOfWeekJapaneseShort = _dayOfWeekJapaneseShort;
 exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
 exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
 exports._dayOfWeek = _dayOfWeek;
@@ -17949,6 +17965,8 @@ var _default = {
   _dayOfWeek: _dayOfWeek,
   _dayOfWeekEnglishShort: _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong: _dayOfWeekEnglishLong,
+  _dayOfWeekJapaneseShort: _dayOfWeekJapaneseShort,
+  _dayOfWeekJapaneseLong: _dayOfWeekJapaneseLong,
   _nameOfMonth: _nameOfMonth,
   _nameOfMonthEnglishChar3: _nameOfMonthEnglishChar3,
   _nameOfMonthEnglishChar4: _nameOfMonthEnglishChar4,
@@ -17960,6 +17978,8 @@ var _default = {
   dayOfWeek: dayOfWeek,
   dayOfWeekEnglishShort: dayOfWeekEnglishShort,
   dayOfWeekEnglishLong: dayOfWeekEnglishLong,
+  dayOfWeekJapaneseShort: dayOfWeekJapaneseShort,
+  dayOfWeekJapaneseLong: dayOfWeekJapaneseLong,
   nameOfMonth: nameOfMonth,
   nameOfMonthEnglishChar3: nameOfMonthEnglishChar3,
   nameOfMonthEnglishChar4: nameOfMonthEnglishChar4,
@@ -18689,6 +18709,14 @@ __dayOfWeekNames.EnglishLong = function () {
   return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 };
 
+__dayOfWeekNames.JapaneseShort = function () {
+  return ['日', '月', '火', '水', '木', '金', '土'];
+};
+
+__dayOfWeekNames.JapaneseLong = function () {
+  return ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
+};
+
 var _default = {
   __dayOfWeekNames: __dayOfWeekNames
 };
@@ -19102,6 +19130,152 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = exports._dayOfWeekJapaneseShort = void 0;
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var _dayOfWeekJapaneseShort = function _dayOfWeekJapaneseShort(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.JapaneseShort());
+};
+
+exports._dayOfWeekJapaneseShort = _dayOfWeekJapaneseShort;
+var _default = {
+  _dayOfWeekJapaneseShort: _dayOfWeekJapaneseShort
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekJapaneseShort = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeekJapaneseShort = function dayOfWeekJapaneseShort(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal')) {
+    var _date = date;
+    date = _date.date;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeekJapaneseShort args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeekJapaneseShort args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.JapaneseShort());
+};
+
+exports.dayOfWeekJapaneseShort = dayOfWeekJapaneseShort;
+var _default = {
+  dayOfWeekJapaneseShort: dayOfWeekJapaneseShort
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports._dayOfWeekJapaneseLong = void 0;
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var _dayOfWeekJapaneseLong = function _dayOfWeekJapaneseLong(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.JapaneseLong());
+};
+
+exports._dayOfWeekJapaneseLong = _dayOfWeekJapaneseLong;
+var _default = {
+  _dayOfWeekJapaneseLong: _dayOfWeekJapaneseLong
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.dayOfWeekJapaneseLong = void 0;
+
+var _isType = __webpack_require__(11);
+
+var _isObjectParameter = __webpack_require__(15);
+
+var _dayOfWeek2 = __webpack_require__(172);
+
+var dayOfWeekJapaneseLong = function dayOfWeekJapaneseLong(date) {
+  var isLocal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  if ((0, _isObjectParameter.isObjectParameter)(date, 'date', 'isLocal')) {
+    var _date = date;
+    date = _date.date;
+    var _date$isLocal = _date.isLocal;
+    isLocal = _date$isLocal === void 0 ? true : _date$isLocal;
+  } else if ((0, _isObjectParameter.isObjectParameter)(isLocal, 'isLocal')) {
+    var _isLocal = isLocal;
+    isLocal = _isLocal.isLocal;
+  }
+
+  if (!(0, _isType.isDate)(date)) {
+    throw new TypeError("dayOfWeekJapaneseLong args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _isType.isBoolean)(isLocal)) {
+    throw new TypeError("dayOfWeekJapaneseLong args(isLocal:".concat(isLocal, ") is not boolean"));
+  }
+
+  return (0, _dayOfWeek2._dayOfWeek)(date, isLocal, _dayOfWeek2._dayOfWeek.names.JapaneseLong());
+};
+
+exports.dayOfWeekJapaneseLong = dayOfWeekJapaneseLong;
+var _default = {
+  dayOfWeekJapaneseLong: dayOfWeekJapaneseLong
+};
+exports["default"] = _default;
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.nameOfMonth = void 0;
 
 var _isType = __webpack_require__(11);
@@ -19157,7 +19331,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 185 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19205,7 +19379,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 186 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19253,7 +19427,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 187 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19301,7 +19475,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 188 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19312,9 +19486,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.wsh = exports.consoleHook = void 0;
 
-var _consoleHook = _interopRequireDefault(__webpack_require__(189));
+var _consoleHook = _interopRequireDefault(__webpack_require__(193));
 
-var _wsh = _interopRequireDefault(__webpack_require__(190));
+var _wsh = _interopRequireDefault(__webpack_require__(194));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -19329,7 +19503,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 189 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19560,7 +19734,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 190 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19571,11 +19745,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
 
-var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(191));
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(195));
 
-var _wshShell = _interopRequireDefault(__webpack_require__(192));
+var _wshShell = _interopRequireDefault(__webpack_require__(196));
 
-var _forceCreateFolder = _interopRequireDefault(__webpack_require__(193));
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(197));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -19601,7 +19775,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 191 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19641,7 +19815,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 192 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19681,7 +19855,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 193 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19696,7 +19870,7 @@ var _isType = __webpack_require__(11);
 
 var _platform = __webpack_require__(7);
 
-var _wshFileSystemObject = __webpack_require__(191);
+var _wshFileSystemObject = __webpack_require__(195);
 
 var _forceCreateFolder = function _forceCreateFolder(folderPath) {
   var fso = (0, _wshFileSystemObject.FileSystemObject)();
