@@ -2,6 +2,26 @@
 
 ## Version
 
+### 10.4.0
+#### 2021/01/10(Sun)
+- update replaceAll
+  - support full object parameter
+- add replaceAllRepeat
+  - add _replaceAllRepeat.js replaceAllRepeat.js
+- add string.includeCount
+  - add _includeCount.js includeCount.js
+- add datetimeToString
+- add dayOfWeek
+  - dayOfWeek
+  - dayOfWeekEnglishShort / dayOfWeekEnglishLong
+  - dayOfWeekJapaneseShort / dayOfWeekJapaneseLong
+- add nameOfMonth
+  - nameOfMonth.js
+  - nameOfMonthEnglishChar3 / Char4 / Long
+- update build for WSH
+  - EncodingPlugin UTF-16LE for Japanese Support
+  - update testCode about Zenkaku Space
+
 ### 10.3.0
 #### 2020/12/09(Wed)
 - add isPrimitiveType / isReferenceType

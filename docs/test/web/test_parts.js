@@ -183,7 +183,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        checkEqual(396, propertyCountForParts(parts));
+        checkEqual(399, propertyCountForParts(parts));
         checkEqual(17, propertyCount(parts.platform));
         checkEqual(7, propertyCount(parts.common));
         checkEqual(262, propertyCount(parts.type));
@@ -192,11 +192,11 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
         checkEqual(15, propertyCount(parts.number));
-        checkEqual(90, propertyCount(parts.string));
+        checkEqual(94, propertyCount(parts.string));
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
         checkEqual(48, propertyCount(parts.array.operation));
-        checkEqual(4, propertyCount(parts.date));
+        checkEqual(24, propertyCount(parts.date));
         checkEqual(2, propertyCount(parts.system));
         checkEqual(3, propertyCount(parts.system.wsh));
         checkEqual(20, propertyCount(parts.system.consoleHook));
@@ -3608,13 +3608,7 @@ var test_execute_type = function test_execute_type(parts) {
         checkEqual(0, Number(new Number()));
         checkEqual(0, Number(new Number('')));
         checkEqual(0, Number(new Number(' ')));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number(new Number('　')));
-        } else {
-          checkEqual(0, Number(new Number('　')));
-        }
-
+        checkEqual(0, Number(new Number('　')));
         checkEqual(1, Number(new Number('1')));
         checkEqual(1.1, Number(new Number('1.1')));
         checkEqual(NaN, Number(new Number(NaN)));
@@ -9476,7 +9470,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_NumberCast_standard = function test_NumberCast_standard() {
-      it('test_NumberCast', function () {
+      it('test_NumberCast_standard', function () {
         // Integer
         checkEqual(123, Number('123'));
         checkEqual(123, Number('0123'));
@@ -9485,17 +9479,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, Number(' 123'), '1');
         checkEqual(123, Number('123 '), '2');
         checkEqual(123, Number(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　123'), '4');
-          checkEqual(NaN, Number('123　'), '5');
-          checkEqual(NaN, Number('　123　'), '6');
-        } else {
-          checkEqual(123, Number('　123'), '4');
-          checkEqual(123, Number('123　'), '5');
-          checkEqual(123, Number('　123　'), '6');
-        }
-
+        checkEqual(123, Number('　123'), '4');
+        checkEqual(123, Number('123　'), '5');
+        checkEqual(123, Number('　123　'), '6');
         checkEqual(NaN, Number('123 0'));
         checkEqual(NaN, Number('0 123'));
         checkEqual(NaN, Number('1 123'));
@@ -9513,17 +9499,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, Number(' 123.4'));
         checkEqual(123.4, Number('123.4 '));
         checkEqual(123.4, Number(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　123.4'));
-          checkEqual(NaN, Number('123.4　'));
-          checkEqual(NaN, Number('　123.4　'));
-        } else {
-          checkEqual(123.4, Number('　123.4'));
-          checkEqual(123.4, Number('123.4　'));
-          checkEqual(123.4, Number('　123.4　'));
-        }
-
+        checkEqual(123.4, Number('　123.4'));
+        checkEqual(123.4, Number('123.4　'));
+        checkEqual(123.4, Number('　123.4　'));
         checkEqual(NaN, Number('123.4 0'));
         checkEqual(NaN, Number('0 123.4'));
         checkEqual(NaN, Number('1 123.4'));
@@ -9540,12 +9518,8 @@ var test_execute_convert = function test_execute_convert(parts) {
 
         checkEqual(0, Number(' ')); // ?
 
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('　'));
-        } else {
-          checkEqual(0, Number('　')); // ?
-        } // exponential notation
-
+        checkEqual(0, Number('　')); // ?
+        // exponential notation
 
         checkEqual(3.14, Number(3.14));
         checkEqual(3.14, Number('3.14'));
@@ -9617,7 +9591,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_parseFloat_standard = function test_parseFloat_standard() {
-      it('test_parseFloat', function () {
+      it('test_parseFloat_standard', function () {
         // Integer
         checkEqual(123, parseFloat('123'));
         checkEqual(123, parseFloat('0123'));
@@ -9626,17 +9600,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseFloat(' 123'), '1');
         checkEqual(123, parseFloat('123 '), '2');
         checkEqual(123, parseFloat(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　123'), '4');
-          checkEqual(123, parseFloat('123　'), '5');
-          checkEqual(NaN, parseFloat('　123　'), '6');
-        } else {
-          checkEqual(123, parseFloat('　123'), '4');
-          checkEqual(123, parseFloat('123　'), '5');
-          checkEqual(123, parseFloat('　123　'), '6');
-        }
-
+        checkEqual(123, parseFloat('　123'), '4');
+        checkEqual(123, parseFloat('123　'), '5');
+        checkEqual(123, parseFloat('　123　'), '6');
         checkEqual(123, parseFloat('123 0'));
         checkEqual(0, parseFloat('0 123'));
         checkEqual(1, parseFloat('1 123'));
@@ -9654,17 +9620,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, parseFloat(' 123.4'));
         checkEqual(123.4, parseFloat('123.4 '));
         checkEqual(123.4, parseFloat(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　123.4'));
-          checkEqual(123.4, parseFloat('123.4　'));
-          checkEqual(NaN, parseFloat('　123.4　'));
-        } else {
-          checkEqual(123.4, parseFloat('　123.4'));
-          checkEqual(123.4, parseFloat('123.4　'));
-          checkEqual(123.4, parseFloat('　123.4　'));
-        }
-
+        checkEqual(123.4, parseFloat('　123.4'));
+        checkEqual(123.4, parseFloat('123.4　'));
+        checkEqual(123.4, parseFloat('　123.4　'));
         checkEqual(123.4, parseFloat('123.4 0'));
         checkEqual(0, parseFloat('0 123.4'));
         checkEqual(1, parseFloat('1 123.4'));
@@ -9737,7 +9695,7 @@ var test_execute_convert = function test_execute_convert(parts) {
     };
 
     var test_parseInt_standard = function test_parseInt_standard() {
-      it('test_parseInt', function () {
+      it('test_parseInt_standard', function () {
         var parseInt10 = function parseInt10(value) {
           return parseInt(value, 10);
         }; // Integer
@@ -9750,17 +9708,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseInt10(' 123'), '1');
         checkEqual(123, parseInt10('123 '), '2');
         checkEqual(123, parseInt10(' 123 '), '3');
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　123'), '4');
-          checkEqual(123, parseInt10('123　'), '5');
-          checkEqual(NaN, parseInt10('　123　'), '6');
-        } else {
-          checkEqual(123, parseInt10('　123'), '4');
-          checkEqual(123, parseInt10('123　'), '5');
-          checkEqual(123, parseInt10('　123　'), '6');
-        }
-
+        checkEqual(123, parseInt10('　123'), '4');
+        checkEqual(123, parseInt10('123　'), '5');
+        checkEqual(123, parseInt10('　123　'), '6');
         checkEqual(123, parseInt10('123 0'));
         checkEqual(0, parseInt10('0 123'));
         checkEqual(1, parseInt10('1 123'));
@@ -9778,17 +9728,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseInt10(' 123.4'));
         checkEqual(123, parseInt10('123.4 '));
         checkEqual(123, parseInt10(' 123.4 '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseInt10('　123.4'));
-          checkEqual(123, parseInt10('123.4　'));
-          checkEqual(NaN, parseInt10('　123.4　'));
-        } else {
-          checkEqual(123, parseInt10('　123.4'));
-          checkEqual(123, parseInt10('123.4　'));
-          checkEqual(123, parseInt10('　123.4　'));
-        }
-
+        checkEqual(123, parseInt10('　123.4'));
+        checkEqual(123, parseInt10('123.4　'));
+        checkEqual(123, parseInt10('　123.4　'));
         checkEqual(123, parseInt10('123.4 0'));
         checkEqual(0, parseInt10('0 123.4'));
         checkEqual(1, parseInt10('1 123.4'));
@@ -11065,8 +11007,11 @@ var test_execute_string = function test_execute_string(parts) {
     var _parts$string = parts.string,
         matchFormat = _parts$string.matchFormat,
         replaceAll = _parts$string.replaceAll,
+        replaceAllRepeat = _parts$string.replaceAllRepeat,
+        replaceAllArray = _parts$string.replaceAllArray,
         indexOfFirst = _parts$string.indexOfFirst,
         indexOfLast = _parts$string.indexOfLast,
+        includeCount = _parts$string.includeCount,
         isFirst = _parts$string.isFirst,
         isLast = _parts$string.isLast,
         isBothEnds = _parts$string.isBothEnds,
@@ -11102,7 +11047,6 @@ var test_execute_string = function test_execute_string(parts) {
         splitDotItems = _parts$string.splitDotItems,
         indexOfAnyFirst = _parts$string.indexOfAnyFirst,
         indexOfAnyLast = _parts$string.indexOfAnyLast,
-        replaceAllArray = _parts$string.replaceAllArray,
         paddingFirst = _parts$string.paddingFirst,
         paddingLast = _parts$string.paddingLast;
 
@@ -11195,14 +11139,26 @@ var test_execute_string = function test_execute_string(parts) {
       it('test_replaceAll', function () {
         checkEqual('aaaa', replaceAll('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAll('abab', 'ab', 'aa'));
-        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc')); // Object Named Parameter
+        checkEqual('abcabc', replaceAll('abab', 'ab', 'abc'));
+        checkEqual('acccb', replaceAll('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAll('abc', 'b', '')); // Object Named Parameter
 
-        checkEqual('abcabc', replaceAll({
+        checkEqual('aaaa', replaceAll({
           str: 'abab',
-          before: 'ab',
-          after: 'abc'
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAll('abab', {
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAll('abab', 'b', {
+          after: 'a'
         })); // exception
 
+        checkEqual(false, isThrown(function () {
+          replaceAllRepeat('1212', '2', '3');
+        }));
         checkEqual(false, isThrown(function () {
           replaceAll('1212', '12', '123');
         }));
@@ -11214,6 +11170,59 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           replaceAll('1212', '12', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAll('abc', '', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAll('', 'a', 'c');
+        }));
+      });
+    };
+
+    var test_replaceAllRepeat = function test_replaceAllRepeat() {
+      it('test_replaceAllRepeat', function () {
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', 'a'));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'ab', 'aa'));
+        checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
+        checkEqual('ac', replaceAllRepeat('abc', 'b', '')); // Object Named Parameter
+
+        checkEqual('aaaa', replaceAllRepeat({
+          str: 'abab',
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAllRepeat('abab', {
+          before: 'b',
+          after: 'a'
+        }));
+        checkEqual('aaaa', replaceAllRepeat('abab', 'b', {
+          after: 'a'
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          replaceAllRepeat('1212', '2', '3');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', '12', '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat(1212, '12', '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', 12, '123');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('1212', '12', 123);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('abc', '', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('', 'a', 'c');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('abab', 'ab', 'abc');
         }));
       });
     };
@@ -13181,8 +13190,18 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_includeCount = function test_includeCount() {
+      it('test_includeCount', function () {
+        checkEqual(0, includeCount('a', ''));
+        checkEqual(3, includeCount('aaa', 'a'));
+        checkEqual(1, includeCount('aaa', 'aa'));
+        checkEqual(2, includeCount('aaaa', 'aa'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
+    test_replaceAllRepeat();
     test_replaceAllArray();
     test_indexOf_standard();
     test_indexOfFirst();
@@ -13227,6 +13246,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_splitDotItems();
     test_paddingFirst();
     test_paddingLast();
+    test_includeCount();
   });
 };
 
@@ -17284,7 +17304,17 @@ var test_execute_date = function test_execute_date(parts) {
   var _parts$date = parts.date,
       Today = _parts$date.Today,
       isInvalidDate = _parts$date.isInvalidDate,
-      DateTime = _parts$date.DateTime;
+      DateTime = _parts$date.DateTime,
+      datetimeToString = _parts$date.datetimeToString,
+      dayOfWeek = _parts$date.dayOfWeek,
+      dayOfWeekEnglishShort = _parts$date.dayOfWeekEnglishShort,
+      dayOfWeekEnglishLong = _parts$date.dayOfWeekEnglishLong,
+      dayOfWeekJapaneseShort = _parts$date.dayOfWeekJapaneseShort,
+      dayOfWeekJapaneseLong = _parts$date.dayOfWeekJapaneseLong,
+      nameOfMonth = _parts$date.nameOfMonth,
+      nameOfMonthEnglishChar3 = _parts$date.nameOfMonthEnglishChar3,
+      nameOfMonthEnglishChar4 = _parts$date.nameOfMonthEnglishChar4,
+      nameOfMonthEnglishLong = _parts$date.nameOfMonthEnglishLong;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Today = function test_Today() {
@@ -17370,7 +17400,13 @@ var test_execute_date = function test_execute_date(parts) {
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
         var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, false);
-        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // zero
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+
+        if (dt.getTimezoneOffset() === -540) {
+          checkEqual('2020-02-02T19:05:06.007Z', dt.toISOString());
+        } // zero
+
 
         var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
         checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
@@ -17475,10 +17511,508 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_datetimeToString = function test_datetimeToString() {
+      it('test_datetimeToString', function () {
+        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
+        checkEqual('2001/02/04 09:05:08.045', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', datetimeToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 9:5:8 a', datetimeToString(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 9:5:8 AM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 9:5:8 A', datetimeToString(dt, 'YY/M/D H:m:s A'));
+        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
+        checkEqual('01/2/4 16:5:8 pm', datetimeToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 16:5:8 p', datetimeToString(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 16:5:8 PM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 16:5:8 P', datetimeToString(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', datetimeToString(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', datetimeToString(dt, 'YY/M/D H:m:s dddd'));
+        checkEqual('01/2/4 16:5:8 Feb', datetimeToString(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 Feb.', datetimeToString(dt, 'YY/M/D H:m:s MMMM'));
+        checkEqual('01/2/4 16:5:8 February', datetimeToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
+
+        var dt = DateTime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+
+        var timezoneOffset = -1 * new Date().getTimezoneOffset();
+        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '') + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
+        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0');
+        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ')); // '+0900' etc
+
+        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // '+09:00' etc
+        // exception
+        // quote
+
+        var dt = DateTime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          datetimeToString(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+      });
+    };
+
+    var test_datetimeToString_MomemtLike = function test_datetimeToString_MomemtLike() {
+      it('test_datetimeToString_MomemtLike', function () {
+        var datetimeToStringMoment = function datetimeToStringMoment(date, format, isLocal) {
+          return datetimeToString(date, format, datetimeToString.func.MomentLikeObject(), isLocal);
+        };
+
+        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
+        checkEqual('2001/02/04 09:05:08.045', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 9:5:8 AM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
+        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
+        checkEqual('01/2/4 16:5:8 pm', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 16:5:8 PM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', datetimeToStringMoment(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', datetimeToStringMoment(dt, 'YY/M/D H:m:s dddd'));
+        checkEqual('01/2/4 16:5:8 Feb', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 February', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMMM')); // quote
+
+        var dt = DateTime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+
+        var timezoneOffset = -1 * new Date().getTimezoneOffset();
+        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '') + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
+        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0');
+        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ')); // '+0900' etc
+
+        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z')); // '+09:00' etc
+        // exception
+        // quote
+
+        var dt = DateTime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          datetimeToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+      });
+    };
+
+    var test_dayOfWeek = function test_dayOfWeek() {
+      it('test_dayOfWeek', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeek(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, true)); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeek(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeek(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeek(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekEnglishShort = function test_dayOfWeekEnglishShort() {
+      it('test_dayOfWeekEnglishShort', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Sat', dayOfWeekEnglishShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, true)); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeekEnglishShort(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('Fri', dayOfWeekEnglishShort(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekEnglishLong = function test_dayOfWeekEnglishLong() {
+      it('test_dayOfWeekEnglishLong', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, true)); // local Sat UTC Fri
+
+        checkEqual('Friday', dayOfWeekEnglishLong(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('Friday', dayOfWeekEnglishLong(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekJapaneseShort = function test_dayOfWeekJapaneseShort() {
+      it('test_dayOfWeekJapaneseShort', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土', dayOfWeekJapaneseShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, true)); // local Sat UTC Fri
+
+        checkEqual('金', dayOfWeekJapaneseShort(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土', dayOfWeekJapaneseShort(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('金', dayOfWeekJapaneseShort(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土', dayOfWeekJapaneseShort(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_dayOfWeekJapaneseLong = function test_dayOfWeekJapaneseLong() {
+      it('test_dayOfWeekJapaneseLong', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, true)); // local Sat UTC Fri
+
+        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, false)); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: true
+        });
+        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, {
+          isLocal: true
+        })); // local Sat UTC Fri
+
+        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, {
+          isLocal: false
+        })); // UTC Sat
+
+        var dt = DateTime(2021, 1, 9, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_nameOfMonth = function test_nameOfMonth() {
+      it('test_nameOfMonth', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 1);
+        checkEqual('Jan', nameOfMonth(dt));
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonth(dt, true)); // local Jan UTC Dec
+
+        checkEqual('Dec', nameOfMonth(dt, false)); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonth(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonth(dt, {
+          isLocal: true
+        })); // local Jan UTC Dec
+
+        checkEqual('Dec', nameOfMonth(dt, {
+          isLocal: false
+        })); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonth(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_nameOfMonthEnglishChar3 = function test_nameOfMonthEnglishChar3() {
+      it('test_nameOfMonthEnglishChar3', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 1);
+        checkEqual('Jan', nameOfMonthEnglishChar3(dt));
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonthEnglishChar3(dt, true)); // local Jan UTC Dec
+
+        checkEqual('Dec', nameOfMonthEnglishChar3(dt, false)); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonthEnglishChar3(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonthEnglishChar3(dt, {
+          isLocal: true
+        })); // local Jan UTC Dec
+
+        checkEqual('Dec', nameOfMonthEnglishChar3(dt, {
+          isLocal: false
+        })); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('Jan', nameOfMonthEnglishChar3(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_nameOfMonthEnglishChar4 = function test_nameOfMonthEnglishChar4() {
+      it('test_nameOfMonthEnglishChar4', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 1);
+        checkEqual('Jan.', nameOfMonthEnglishChar4(dt));
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, true)); // local Jan UTC Dec
+
+        checkEqual('Dec.', nameOfMonthEnglishChar4(dt, false)); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, {
+          isLocal: true
+        })); // local Jan UTC Dec
+
+        checkEqual('Dec.', nameOfMonthEnglishChar4(dt, {
+          isLocal: false
+        })); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_nameOfMonthEnglishLong = function test_nameOfMonthEnglishLong() {
+      it('test_nameOfMonthEnglishLong', function () {
+        if (new Date().getTimezoneOffset() !== -540) {
+          return;
+        }
+
+        var dt = DateTime(2021, 1, 1);
+        checkEqual('January', nameOfMonthEnglishLong(dt));
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('January', nameOfMonthEnglishLong(dt, true)); // local Jan UTC Dec
+
+        checkEqual('December', nameOfMonthEnglishLong(dt, false)); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('January', nameOfMonthEnglishLong(dt, false)); // Object Parameter
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: true
+        });
+        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
+        checkEqual('January', nameOfMonthEnglishLong(dt, {
+          isLocal: true
+        })); // local Jan UTC Dec
+
+        checkEqual('December', nameOfMonthEnglishLong(dt, {
+          isLocal: false
+        })); // UTC
+
+        var dt = DateTime(2021, 1, 1, 8, {
+          isLocal: false
+        });
+        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
+        checkEqual('January', nameOfMonthEnglishLong(dt, {
+          isLocal: false
+        }));
+      });
+    };
+
     test_Today();
     test_isInvalidDate();
     test_Date_standard();
     test_DateTime();
+    test_dayOfWeek();
+    test_dayOfWeekEnglishShort();
+    test_dayOfWeekEnglishLong();
+    test_dayOfWeekJapaneseShort();
+    test_dayOfWeekJapaneseLong();
+    test_nameOfMonth();
+    test_nameOfMonthEnglishChar3();
+    test_nameOfMonthEnglishChar4();
+    test_nameOfMonthEnglishLong();
+    test_datetimeToString();
+    test_datetimeToString_MomemtLike();
   });
 };
 
