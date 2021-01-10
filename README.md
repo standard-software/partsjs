@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.4.0
-#### 2021/01/06(Wed)
+#### 2021/01/10(Sun)
 - update replaceAll
   - support full object parameter
 - add replaceAllRepeat
@@ -335,14 +335,12 @@ You can now use the functions of the parts.js object.
   - add _includeCount.js includeCount.js
 - add datetimeToString
 - add dayOfWeek
-  - _dayOfWeek.js / dayOfWeek.js
-  - / _dayOfWeekEnglishShort.js / dayOfWeekEnglishShort.js
-  - / _dayOfWeekEnglishLong.js / dayOfWeekEnglishLong.js
+  - dayOfWeek
+  - dayOfWeekEnglishShort / dayOfWeekEnglishLong
+  - dayOfWeekJapaneseShort / dayOfWeekJapaneseLong
 - add nameOfMonth
-  - _ nameOfMonth.js /  nameOfMonth.js
-  - / _ nameOfMonthEnglishChar3.js /  nameOfMonthEnglishChar3.js
-  - / _ nameOfMonthEnglishChar4.js /  nameOfMonthEnglishChar4.js
-  - / _ nameOfMonthEnglishLong.js /  nameOfMonthEnglishLong.js
+  - nameOfMonth.js
+  - nameOfMonthEnglishChar3 / Char4 / Long
 - update build for WSH
   - EncodingPlugin UTF-16LE for Japanese Support
   - update testCode about Zenkaku Space

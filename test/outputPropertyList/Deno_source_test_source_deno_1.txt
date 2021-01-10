@@ -220,6 +220,8 @@
 .date._dayOfWeek:[object Function]:function
 .date._dayOfWeekEnglishLong:[object Function]:function
 .date._dayOfWeekEnglishShort:[object Function]:function
+.date._dayOfWeekJapaneseLong:[object Function]:function
+.date._dayOfWeekJapaneseShort:[object Function]:function
 .date._nameOfMonth:[object Function]:function
 .date._nameOfMonthEnglishChar3:[object Function]:function
 .date._nameOfMonthEnglishChar4:[object Function]:function
@@ -229,6 +231,8 @@
 .date.dayOfWeek:[object Function]:function
 .date.dayOfWeekEnglishLong:[object Function]:function
 .date.dayOfWeekEnglishShort:[object Function]:function
+.date.dayOfWeekJapaneseLong:[object Function]:function
+.date.dayOfWeekJapaneseShort:[object Function]:function
 .date.isInvalidDate:[object Function]:function
 .date.nameOfMonth:[object Function]:function
 .date.nameOfMonthEnglishChar3:[object Function]:function

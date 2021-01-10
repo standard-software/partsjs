@@ -15,6 +15,7 @@ export const test_execute_date = (parts) => {
     datetimeToString,
     dayOfWeek,
     dayOfWeekEnglishShort, dayOfWeekEnglishLong,
+    dayOfWeekJapaneseShort, dayOfWeekJapaneseLong,
     nameOfMonth,
     nameOfMonthEnglishChar3, nameOfMonthEnglishChar4, nameOfMonthEnglishLong,
   } = parts.date;
@@ -653,6 +654,100 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_dayOfWeekJapaneseShort = () => {
+      it('test_dayOfWeekJapaneseShort', () => {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土', dayOfWeekJapaneseShort(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土', dayOfWeekJapaneseShort(dt, true));
+
+        // local Sat UTC Fri
+        checkEqual('金', dayOfWeekJapaneseShort(dt, false));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土', dayOfWeekJapaneseShort(dt, false));
+
+        // Object Parameter
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土', dayOfWeekJapaneseShort(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土', dayOfWeekJapaneseShort(dt, { isLocal: true }));
+
+        // local Sat UTC Fri
+        checkEqual('金', dayOfWeekJapaneseShort(dt, { isLocal: false }));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土', dayOfWeekJapaneseShort(dt, { isLocal: false }));
+      });
+    };
+
+    const test_dayOfWeekJapaneseLong = () => {
+      it('test_dayOfWeekJapaneseLong', () => {
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, true));
+
+        // local Sat UTC Fri
+        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, false));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false));
+
+        // Object Parameter
+        var dt = DateTime(2021, 1, 9);
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
+
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: true });
+        checkEqual(
+          '2021-01-08T23:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, { isLocal: true }));
+
+        // local Sat UTC Fri
+        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, { isLocal: false }));
+
+        // UTC Sat
+        var dt = DateTime(2021, 1, 9, 8, { isLocal: false });
+        checkEqual(
+          '2021-01-09T08:00:00.000Z',
+          dt.toISOString(),
+        );
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, { isLocal: false }));
+      });
+    };
+
     const test_nameOfMonth = () => {
       it('test_nameOfMonth', () => {
         var dt = DateTime(2021, 1, 1);
@@ -838,6 +933,8 @@ export const test_execute_date = (parts) => {
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
     test_dayOfWeekEnglishLong();
+    test_dayOfWeekJapaneseShort();
+    test_dayOfWeekJapaneseLong();
 
     test_nameOfMonth();
     test_nameOfMonthEnglishChar3();

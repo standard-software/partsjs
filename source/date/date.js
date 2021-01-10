@@ -10,6 +10,10 @@ import _dayOfWeekEnglishShortJs from './_dayOfWeekEnglishShort.js';
 import dayOfWeekEnglishShortJs from './dayOfWeekEnglishShort.js';
 import _dayOfWeekEnglishLongJs from './_dayOfWeekEnglishLong.js';
 import dayOfWeekEnglishLongJs from './dayOfWeekEnglishLong.js';
+import _dayOfWeekJapaneseShortJs from './_dayOfWeekJapaneseShort.js';
+import dayOfWeekJapaneseShortJs from './dayOfWeekJapaneseShort.js';
+import _dayOfWeekJapaneseLongJs from './_dayOfWeekJapaneseLong.js';
+import dayOfWeekJapaneseLongJs from './dayOfWeekJapaneseLong.js';
 import _nameOfMonthJs from './_nameOfMonth.js';
 import nameOfMonthJs from './nameOfMonth.js';
 import _nameOfMonthEnglishChar3Js from './_nameOfMonthEnglishChar3.js';
@@ -32,6 +36,10 @@ const dateJs = {
   ...dayOfWeekEnglishShortJs,
   ..._dayOfWeekEnglishLongJs,
   ...dayOfWeekEnglishLongJs,
+  ..._dayOfWeekJapaneseShortJs,
+  ...dayOfWeekJapaneseShortJs,
+  ..._dayOfWeekJapaneseLongJs,
+  ...dayOfWeekJapaneseLongJs,
   ..._nameOfMonthJs,
   ...nameOfMonthJs,
   ..._nameOfMonthEnglishChar3Js,
@@ -48,6 +56,8 @@ export const {
   _dayOfWeek,
   _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong,
+  _dayOfWeekJapaneseShort,
+  _dayOfWeekJapaneseLong,
   _nameOfMonth,
   _nameOfMonthEnglishChar3,
   _nameOfMonthEnglishChar4,
@@ -60,6 +70,8 @@ export const {
   dayOfWeek,
   dayOfWeekEnglishShort,
   dayOfWeekEnglishLong,
+  dayOfWeekJapaneseShort,
+  dayOfWeekJapaneseLong,
   nameOfMonth,
   nameOfMonthEnglishChar3,
   nameOfMonthEnglishChar4,
@@ -72,6 +84,8 @@ export default {
   _dayOfWeek,
   _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong,
+  _dayOfWeekJapaneseShort,
+  _dayOfWeekJapaneseLong,
   _nameOfMonth,
   _nameOfMonthEnglishChar3,
   _nameOfMonthEnglishChar4,
@@ -84,6 +98,8 @@ export default {
   dayOfWeek,
   dayOfWeekEnglishShort,
   dayOfWeekEnglishLong,
+  dayOfWeekJapaneseShort,
+  dayOfWeekJapaneseLong,
   nameOfMonth,
   nameOfMonthEnglishChar3,
   nameOfMonthEnglishChar4,
