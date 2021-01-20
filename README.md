@@ -325,6 +325,14 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 10.4.1
+#### 2021/01/20(Wed)
+- update testcode build
+- update package
+  - babel
+  - webpack
+  - etc...
+
 ### 10.4.0
 #### 2021/01/10(Sun)
 - update replaceAll
