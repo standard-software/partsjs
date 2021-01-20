@@ -1,4 +1,4 @@
-import { VERSION } from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.4.0/source/index.js';
+import { VERSION } from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.4.1/source/index.js';
 
 const parts = { VERSION };
 
