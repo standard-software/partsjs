@@ -325,6 +325,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 10.5.0
+#### 2021/03/29(Mon)
+- update round
+  - support full object parameter
+
 ### 10.4.1
 #### 2021/01/20(Wed)
 - update testcode build
