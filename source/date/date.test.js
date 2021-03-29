@@ -394,23 +394,48 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        const timezoneOffset = -1 * new Date().getTimezoneOffset();
+        var dt = new Date();
+        var dt = DateTime(
+          dt.getFullYear(), dt.getMonth() + 1, dt.getDate(),
+        );
+        const timezoneOffset = -1 * dt.getTimezoneOffset();
         const timezoneOffsetHour = (0 < timezoneOffset
-          ? '+' : ''
-        ) + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
+          ? '+' : '-'
+        ) +
+        parts.string.paddingFirst(
+          String(
+            Math.floor(Math.abs(timezoneOffset / 60)),
+          ),
+          2, '0',
+        );
         const timezoneOffsetMin = parts.string.paddingFirst(
           String(timezoneOffset % 60), 2, '0',
         );
+        // console.log('timezone', timezoneOffset, timezoneOffset / 60,
+        //   parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0'),
+        //   (new Date).getTimezoneOffset(),
+        // );
 
+        // '+0900' etc
         checkEqual(
           timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ'),
         );
-        // '+0900' etc
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(
+            true,
+            dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1,
+          );
+        } else {
+          checkEqual(
+            true,
+            dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1,
+          );
+        }
 
+        // '+09:00' etc
         checkEqual(
           timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z'),
         );
-        // '+09:00' etc
 
         // exception
         // quote
@@ -493,23 +518,43 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        const timezoneOffset = -1 * new Date().getTimezoneOffset();
+        var dt = new Date();
+        var dt = DateTime(
+          dt.getFullYear(), dt.getMonth() + 1, dt.getDate(),
+        );
+        const timezoneOffset = -1 * dt.getTimezoneOffset();
         const timezoneOffsetHour = (0 < timezoneOffset
-          ? '+' : ''
-        ) + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
+          ? '+' : '-'
+        ) +
+        parts.string.paddingFirst(
+          String(
+            Math.floor(Math.abs(timezoneOffset / 60)),
+          ), 2, '0',
+        );
         const timezoneOffsetMin = parts.string.paddingFirst(
           String(timezoneOffset % 60), 2, '0',
         );
 
+        // '+0900' etc
         checkEqual(
           timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ'),
         );
-        // '+0900' etc
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(
+            true,
+            dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1,
+          );
+        } else {
+          checkEqual(
+            true,
+            dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1,
+          );
+        }
 
+        // '+09:00' etc
         checkEqual(
           timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z'),
         );
-        // '+09:00' etc
 
         // exception
         // quote

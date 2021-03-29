@@ -152,8 +152,12 @@ const A_P = (date, isLocal) => {
 
 const timezone = (date) => {
   const minutes = -1 * date.getTimezoneOffset();
-  let offsetHourStr = _paddingFirst(String(Math.floor(minutes / 60)), 2, '0');
-  offsetHourStr = 0 < minutes ? '+' + offsetHourStr : offsetHourStr;
+  let offsetHourStr = _paddingFirst(
+    String(
+      Math.floor(Math.abs(minutes / 60)),
+    ), 2, '0',
+  );
+  offsetHourStr = 0 < minutes ? '+' + offsetHourStr : '-' + offsetHourStr;
   const offsetMinStr = _paddingFirst(String(minutes % 60), 2, '0');
   return { offsetHourStr, offsetMinStr };
 };

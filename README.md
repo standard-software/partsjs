@@ -333,6 +333,7 @@ You can now use the functions of the parts.js object.
   - webpack for wsh build size change
 - update replaceAllRepeat
   - support args maxCount repeat
+- update bugfix datetimeToString timezone string
 
 ### 10.4.1
 #### 2021/01/20(Wed)
