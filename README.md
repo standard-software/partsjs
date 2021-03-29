@@ -329,6 +329,8 @@ You can now use the functions of the parts.js object.
 #### 2021/03/29(Mon)
 - update round
   - support full object parameter
+- add roundUp / roundDown
+  - webpack for wsh build size change
 
 ### 10.4.1
 #### 2021/01/20(Wed)

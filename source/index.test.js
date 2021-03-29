@@ -58,7 +58,7 @@ export const test_execute_index = (parts) => {
         checkEqual(12,  propertyCount(parts.test));
         checkEqual(44,  propertyCount(parts.compare));
         checkEqual(35,  propertyCount(parts.convert));
-        checkEqual(15,  propertyCount(parts.number));
+        checkEqual(19,  propertyCount(parts.number));
         checkEqual(94,  propertyCount(parts.string));
         checkEqual(40,  propertyCount(parts.object));
         checkEqual(68,  propertyCount(parts.array));

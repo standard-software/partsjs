@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.AggressiveSplittingPlugin({
       minSize: 1000,
-      maxSize: 200000,
+      maxSize: 150000,
     }),
     new EncodingPlugin({
       // encoding: 'Shift JIS',

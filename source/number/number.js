@@ -1,11 +1,19 @@
 import number_commonJs from './number_common.js';
 import _roundJs from './_round.js';
 import roundJs from './round.js';
+import _roundUpJs from './_roundUp.js';
+import roundUpJs from './roundUp.js';
+import _roundDownJs from './_roundDown.js';
+import roundDownJs from './roundDown.js';
 
 const numberJs = {
   ...number_commonJs,
   ..._roundJs,
   ...roundJs,
+  ..._roundUpJs,
+  ...roundUpJs,
+  ..._roundDownJs,
+  ...roundDownJs,
 };
 
 export const {
@@ -13,7 +21,7 @@ export const {
   _nearEqual,
   _inRange, _keepMinMax,
   _randomInt,
-  _round,
+  _round, _roundUp, _roundDown,
 } = numberJs;
 
 export const {
@@ -31,13 +39,13 @@ export default {
   _nearEqual,
   _inRange, _keepMinMax,
   _randomInt,
-  _round,
+  _round, _roundUp, _roundDown,
 
   isMultiples, isEven, isOdd,
   nearEqual,
   inRange, keepMinMax,
   randomInt,
-  round,
+  round, roundUp, roundDown,
 
   makeInRange,
 };

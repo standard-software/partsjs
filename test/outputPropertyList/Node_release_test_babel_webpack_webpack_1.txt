@@ -553,6 +553,8 @@
 .number._nearEqual:[object Function]:function
 .number._randomInt:[object Function]:function
 .number._round:[object Function]:function
+.number._roundDown:[object Function]:function
+.number._roundUp:[object Function]:function
 .number.inRange:[object Function]:function
 .number.isEven:[object Function]:function
 .number.isMultiples:[object Function]:function
@@ -562,6 +564,8 @@
 .number.nearEqual:[object Function]:function
 .number.randomInt:[object Function]:function
 .number.round:[object Function]:function
+.number.roundDown:[object Function]:function
+.number.roundUp:[object Function]:function
 .numberToString:[object Function]:function
 .numToStr:[object Function]:function
 .numToString:[object Function]:function
