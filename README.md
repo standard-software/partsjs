@@ -39,7 +39,7 @@ Normal
     npm i @standard-software/parts
 
 When specifying the version
-    npm i @standard-software/parts@10.4.1
+    npm i @standard-software/parts@10.5.0
     npm i @standard-software/parts@9.2.0
 
 ### type CommonJS
@@ -87,7 +87,7 @@ console.log(
 ### web
 ```
 // index.js
-import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.4.1/source/index.js';
+import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.5.0/source/index.js';
 
 console.log(
   'parts version is ', parts.VERSION
@@ -130,7 +130,7 @@ You can now use the functions of the parts.js object.
   <meta charset="UTF-8">
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.5.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>
@@ -385,64 +385,6 @@ You can now use the functions of the parts.js object.
   - update testcode
 - rename __returnValueFunction >> __returnFirstArgFunc
   - add __returnSecondArgFunc
-
-### 10.2.0
-#### 2020/12/02(Wed)
-- update _unique
-  - add detail count
-- update testCode outputPropertyList format
-- publish parts root checkEqual, checkCompare
-- add polyfill Array.prototype.map
-- add partial
-  - add _partial.js / partial.js
-
-### 10.1.0
-#### 2020/11/26(Thu)
-- add namespace system
-  - revive system.consoleHook
-  - revive system.wsh
-- update NumberArray IntegerArray
-  - can new NumberArray
-- add DateTime
-  - _DateTime.js / DateTime.js
-- add isInvalidDate
-  - isInvalidDate.js
-  - add Polifill Date.prototype.toISOString for WSH
-- update setProperty
-  - first piriod accept
-- add _arrayEntries.js from arrayEntries.js
-- update recursive
-  - add args property path
-- update getProperty
-  - support objectLike (array function etc)
-- update platform.js
-  - delete browserName()
-  - update and rename name() >> platformName()
-  - update startName >> testStartFileName
-- add typeName.js
-
-### 10.0.0
-#### 2020/11/13(Fri)
-- update test output
-  - add testFrame
-- Revive support wsh
-  - use webpack.optimize.AggressiveSplittingPlugin
-  - update test_parts.js
-    - Same simple description as v7.6.0
-- update npm scripts
-- update run_check wsh index.wsf
-- update syntax.recursiveCall >> syntax.recursive
-  - delete _recursiveCall.js / recursiveCall.js
-  - add _recursive.js / recursive.js
-
-### 9.2.0
-#### 2020/11/06(Fri)
-- add popArrayFirst / popArrayLast
-- add _objectEntries.js from objectEntries.js
-- update loop.js
-  - delete _loopBase
-- add syntax.recursiveCall
-  - add _recursiveCall.js / recursiveCall.js
 
 ### More Info
 [VERSION.md](./VERSION.md)

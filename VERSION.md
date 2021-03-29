@@ -2,6 +2,16 @@
 
 ## Version
 
+### 10.5.0
+#### 2021/03/29(Mon)
+- update round
+  - support full object parameter
+- add roundUp / roundDown
+  - webpack for wsh build size change
+- update replaceAllRepeat
+  - support args maxCount repeat
+- update bugfix datetimeToString timezone string
+
 ### 10.4.1
 #### 2021/01/20(Wed)
 - update testcode build
