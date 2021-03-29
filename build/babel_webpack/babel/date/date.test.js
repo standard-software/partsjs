@@ -248,13 +248,26 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
         checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
-        var timezoneOffset = -1 * new Date().getTimezoneOffset();
-        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '') + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
-        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0');
-        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ')); // '+0900' etc
+        var dt = new Date();
+        var dt = DateTime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
+        var timezoneOffset = -1 * dt.getTimezoneOffset();
+        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
+        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // console.log('timezone', timezoneOffset, timezoneOffset / 60,
+        //   parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0'),
+        //   (new Date).getTimezoneOffset(),
+        // );
+        // '+0900' etc
 
-        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // '+09:00' etc
-        // exception
+        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ'));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1);
+        } else {
+          checkEqual(true, dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1);
+        } // '+09:00' etc
+
+
+        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // exception
         // quote
 
         var dt = DateTime(2021, 1, 6);
@@ -291,13 +304,22 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
         checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
-        var timezoneOffset = -1 * new Date().getTimezoneOffset();
-        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '') + parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0');
-        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0');
-        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ')); // '+0900' etc
+        var dt = new Date();
+        var dt = DateTime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
+        var timezoneOffset = -1 * dt.getTimezoneOffset();
+        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
+        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // '+0900' etc
 
-        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z')); // '+09:00' etc
-        // exception
+        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ'));
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(true, dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1);
+        } else {
+          checkEqual(true, dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1);
+        } // '+09:00' etc
+
+
+        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z')); // exception
         // quote
 
         var dt = DateTime(2021, 1, 6);

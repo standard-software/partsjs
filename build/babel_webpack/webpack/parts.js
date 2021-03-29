@@ -18850,8 +18850,8 @@ var A_P = function A_P(date, isLocal) {
 
 var timezone = function timezone(date) {
   var minutes = -1 * date.getTimezoneOffset();
-  var offsetHourStr = (0, _paddingFirst2._paddingFirst)(String(Math.floor(minutes / 60)), 2, '0');
-  offsetHourStr = 0 < minutes ? '+' + offsetHourStr : offsetHourStr;
+  var offsetHourStr = (0, _paddingFirst2._paddingFirst)(String(Math.floor(Math.abs(minutes / 60))), 2, '0');
+  offsetHourStr = 0 < minutes ? '+' + offsetHourStr : '-' + offsetHourStr;
   var offsetMinStr = (0, _paddingFirst2._paddingFirst)(String(minutes % 60), 2, '0');
   return {
     offsetHourStr: offsetHourStr,
