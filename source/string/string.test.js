@@ -177,6 +177,40 @@ export const test_execute_string = (parts) => {
         checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
         checkEqual('ac', replaceAllRepeat('abc', 'b', ''));
 
+        checkEqual(
+          'AABBAABB',
+          replaceAllRepeat('AAABBB', 'AB', 'BBAA', 1),
+        );
+        checkEqual(
+          'ABBAABABBAAB',
+          replaceAllRepeat('AAABBB', 'AB', 'BBAA', 2),
+        );
+        checkEqual(
+          'BBAABABBAABBAABABBAA',
+          replaceAllRepeat('AAABBB', 'AB', 'BBAA', 3),
+        );
+
+        checkEqual(
+          'A     B',
+          replaceAllRepeat('A         B', '  ', ' ', 1),
+        );
+        checkEqual(
+          'A   B',
+          replaceAllRepeat('A         B', '  ', ' ', 2),
+        );
+        checkEqual(
+          'A  B',
+          replaceAllRepeat('A         B', '  ', ' ', 3),
+        );
+        checkEqual(
+          'A B',
+          replaceAllRepeat('A         B', '  ', ' ', 4),
+        );
+        checkEqual(
+          'A B',
+          replaceAllRepeat('A         B', '  ', ' '),
+        );
+
         // Object Named Parameter
         checkEqual('aaaa',  replaceAllRepeat({
           str:    'abab',
@@ -197,6 +231,36 @@ export const test_execute_string = (parts) => {
             after:  'a',
           },
         ));
+        checkEqual('A  B',  replaceAllRepeat({
+          str:    'A         B',
+          before: '  ',
+          after:  ' ',
+          maxCount: 3,
+        }));
+        checkEqual('A  B',  replaceAllRepeat(
+          'A         B',
+          {
+            before: '  ',
+            after:  ' ',
+            maxCount: 3,
+          },
+        ));
+        checkEqual('A  B',  replaceAllRepeat(
+          'A         B',
+          '  ',
+          {
+            after:  ' ',
+            maxCount: 3,
+          },
+        ));
+        checkEqual('A  B',  replaceAllRepeat(
+          'A         B',
+          '  ',
+          ' ',
+          {
+            maxCount: 3,
+          },
+        ));
 
         // exception
         checkEqual(false, isThrown(() => { replaceAllRepeat('1212', '2', '3'); }));
@@ -207,6 +271,12 @@ export const test_execute_string = (parts) => {
         checkEqual(true,  isThrown(() => { replaceAllRepeat('abc', '', 'c'); }));
         checkEqual(true,  isThrown(() => { replaceAllRepeat('', 'a', 'c'); }));
         checkEqual(true,  isThrown(() => { replaceAllRepeat('abab', 'ab', 'abc'); }));
+        checkEqual(true,  isThrown(() => {
+          replaceAllRepeat('A         B', '  ', ' ', -1);
+        }));
+        checkEqual(true,  isThrown(() => {
+          replaceAllRepeat('A         B', '  ', ' ', '');
+        }));
 
       });
     };

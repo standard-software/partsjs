@@ -12,13 +12,15 @@ import { _replaceAllRepeat } from '../string/_replaceAllRepeat.js';
 /**
  * replaceAllRepeat
  */
-export const replaceAllRepeat = (str, before, after) => {
-  if (isObjectParameter(str, 'str, before, after')) {
-    ({ str, before, after } = str);
-  } else if (isObjectParameter(before, 'before, after')) {
-    ({ before, after } = before);
-  } else if (isObjectParameter(after, 'after')) {
-    ({ after } = after);
+export const replaceAllRepeat = (str, before, after, maxCount = 0) => {
+  if (isObjectParameter(str, 'str, before, after', 'maxCount')) {
+    ({ str, before, after, maxCount = 0 } = str);
+  } else if (isObjectParameter(before, 'before, after', 'maxCount')) {
+    ({ before, after, maxCount = 0 } = before);
+  } else if (isObjectParameter(after, 'after', 'maxCount')) {
+    ({ after, maxCount = 0 } = after);
+  } else if (isObjectParameter(maxCount, 'maxCount')) {
+    ({ maxCount } = maxCount);
   }
 
   if (!isString(str)) {
@@ -51,8 +53,18 @@ export const replaceAllRepeat = (str, before, after) => {
       'replaceAllRepeat args(before) is includes args(after)',
     );
   }
+  if (!isInteger(maxCount)) {
+    throw new TypeError(
+      'replaceAllRepeat args(maxCount) is not integer',
+    );
+  }
+  if (!(0 <= maxCount)) {
+    throw new TypeError(
+      'replaceAllRepeat args(maxCount) is not 0 <= maxCount',
+    );
+  }
 
-  return _replaceAllRepeat(str, before, after);
+  return _replaceAllRepeat(str, before, after, maxCount);
 };
 
 export default {

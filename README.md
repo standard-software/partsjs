@@ -331,6 +331,8 @@ You can now use the functions of the parts.js object.
   - support full object parameter
 - add roundUp / roundDown
   - webpack for wsh build size change
+- update replaceAllRepeat
+  - support args maxCount repeat
 
 ### 10.4.1
 #### 2021/01/20(Wed)
