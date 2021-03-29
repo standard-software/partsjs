@@ -3,269 +3,89 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.makeInRange = exports.randomInt = exports._randomInt = exports.keepMinMax = exports._keepMinMax = exports.inRange = exports._inRange = exports.nearEqual = exports._nearEqual = exports.round = exports._round = exports.isOdd = exports.isEven = exports.isMultiples = exports._isMultiples = void 0;
+exports["default"] = exports.makeInRange = exports.roundDown = exports.roundUp = exports.round = exports.randomInt = exports.keepMinMax = exports.inRange = exports.nearEqual = exports.isOdd = exports.isEven = exports.isMultiples = exports._roundDown = exports._roundUp = exports._round = exports._randomInt = exports._keepMinMax = exports._inRange = exports._nearEqual = exports._isMultiples = void 0;
 
-var _type = require("../type/type.js");
+var _number_common = _interopRequireDefault(require("./number_common.js"));
 
-var _isObjectParameter = require("../object/isObjectParameter.js");
+var _round2 = _interopRequireDefault(require("./_round.js"));
 
-/**
- * isMultiples isEven isOdd
- */
-var _isMultiples = function _isMultiples(number, radix) {
-  return number % radix === 0;
-};
+var _round3 = _interopRequireDefault(require("./round.js"));
 
-exports._isMultiples = _isMultiples;
+var _roundUp2 = _interopRequireDefault(require("./_roundUp.js"));
 
-var isMultiples = function isMultiples(number, radix) {
-  if ((0, _isObjectParameter.isObjectParameter)(number, 'number,radix')) {
-    var _number = number;
-    number = _number.number;
-    radix = _number.radix;
-  }
+var _roundUp3 = _interopRequireDefault(require("./roundUp.js"));
 
-  if (!(0, _type.isInteger)(number)) {
-    throw new TypeError('isMultiples args(number) is not integer');
-  }
+var _roundDown2 = _interopRequireDefault(require("./_roundDown.js"));
 
-  if (!(0, _type.isInteger)(radix)) {
-    throw new TypeError('isMultiples args(radix) is not integer');
-  }
+var _roundDown3 = _interopRequireDefault(require("./roundDown.js"));
 
-  return _isMultiples(number, radix);
-};
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-exports.isMultiples = isMultiples;
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-var isEven = function isEven(number) {
-  return isMultiples(number, 2);
-};
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-exports.isEven = isEven;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var isOdd = function isOdd(number) {
-  return !isMultiples(number, 2);
-};
-/**
- * round
- */
+var numberJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _number_common["default"]), _round2["default"]), _round3["default"]), _roundUp2["default"]), _roundUp3["default"]), _roundDown2["default"]), _roundDown3["default"]);
 
-
-exports.isOdd = isOdd;
-
-var _round = function _round(value) {
-  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var plusFlag = 0 <= value ? true : false;
-  var powResult = Math.pow(10, digit);
-
-  if (plusFlag) {
-    return Math.round(value * powResult) / powResult;
-  } else {
-    return -1 * Math.round(-1 * value * powResult) / powResult;
-  }
-};
-
+var _isMultiples = numberJs._isMultiples,
+    _nearEqual = numberJs._nearEqual,
+    _inRange = numberJs._inRange,
+    _keepMinMax = numberJs._keepMinMax,
+    _randomInt = numberJs._randomInt,
+    _round = numberJs._round,
+    _roundUp = numberJs._roundUp,
+    _roundDown = numberJs._roundDown;
+exports._roundDown = _roundDown;
+exports._roundUp = _roundUp;
 exports._round = _round;
-
-var round = function round(value) {
-  var digit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'digit')) {
-    var _value = value;
-    value = _value.value;
-    var _value$digit = _value.digit;
-    digit = _value$digit === void 0 ? 0 : _value$digit;
-  }
-
-  if (!(0, _type.isInteger)(digit)) {
-    throw new TypeError('round args(value) is not integer');
-  }
-
-  return _round(value, digit);
-};
-/**
- * nearEqual
- */
-
-
-exports.round = round;
-
-var _nearEqual = function _nearEqual(value1, value2, diff) {
-  if (Math.abs(value1 - value2) <= diff) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-exports._nearEqual = _nearEqual;
-
-var nearEqual = function nearEqual(value1, value2, diff) {
-  if ((0, _isObjectParameter.isObjectParameter)(value1, 'value1,value2,diff')) {
-    var _value2 = value1;
-    value1 = _value2.value1;
-    value2 = _value2.value2;
-    diff = _value2.diff;
-  }
-
-  if (!(0, _type.isNumber)(value1)) {
-    throw new TypeError('nearEqual args(value1) is not number');
-  }
-
-  if (!(0, _type.isNumber)(value2)) {
-    throw new TypeError('nearEqual args(value2) is not number');
-  }
-
-  if (!(0, _type.isNumber)(diff)) {
-    throw new TypeError('nearEqual args(diff) is not number');
-  }
-
-  if (diff < 0) {
-    throw new RangeError('nearEqual args(diff) must be < 0');
-  }
-
-  return _nearEqual(value1, value2, diff);
-};
-/**
- * inRange
- */
-
-
-exports.nearEqual = nearEqual;
-
-var _inRange = function _inRange(value, from, to) {
-  if (from <= value && value <= to) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-exports._inRange = _inRange;
-
-var inRange = function inRange(value, from, to) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value,from,to')) {
-    var _value3 = value;
-    value = _value3.value;
-    from = _value3.from;
-    to = _value3.to;
-  }
-
-  if (!(0, _type.isNumber)(value)) {
-    throw new TypeError('inRange args(value) is not number');
-  }
-
-  if (!(0, _type.isNumber)(from)) {
-    throw new TypeError('inRange args(from) is not number');
-  }
-
-  if (!(0, _type.isNumber)(to)) {
-    throw new TypeError('inRange args(to) is not number');
-  }
-
-  if (!(from <= to)) {
-    throw new RangeError('inRange args(from,to) must be from <= to');
-  }
-
-  return _inRange(value, from, to);
-};
-/**
- * keepMinMax
- */
-
-
-exports.inRange = inRange;
-
-var _keepMinMax = function _keepMinMax(value, from, to) {
-  if (value < from) {
-    return from;
-  }
-
-  if (to < value) {
-    return to;
-  }
-
-  return value;
-};
-
-exports._keepMinMax = _keepMinMax;
-
-var keepMinMax = function keepMinMax(value, min, to) {
-  if ((0, _isObjectParameter.isObjectParameter)(value, 'value, min, to')) {
-    var _value4 = value;
-    value = _value4.value;
-    min = _value4.min;
-    to = _value4.to;
-  }
-
-  if (!(0, _type.isNumber)(value)) {
-    throw new TypeError('keepMinMax args(value) is not number');
-  }
-
-  if (!(0, _type.isNumber)(min)) {
-    throw new TypeError('keepMinMax args(from) is not number');
-  }
-
-  if (!(0, _type.isNumber)(to)) {
-    throw new TypeError('keepMinMax args(to) is not number');
-  }
-
-  if (!(min <= to)) {
-    throw new RangeError('keepMinMax args(from,to) must be from <= to');
-  }
-
-  return _keepMinMax(value, min, to);
-};
-/**
- * randomInt
- */
-
-
-exports.keepMinMax = keepMinMax;
-
-var _randomInt = function _randomInt(min, max) {
-  return Math.floor(Math.random() * (max + 1 - min)) + min;
-};
-
 exports._randomInt = _randomInt;
-
-var randomInt = function randomInt(min, max) {
-  if ((0, _isObjectParameter.isObjectParameter)(min, 'min,max')) {
-    var _min = min;
-    min = _min.min;
-    max = _min.max;
-  }
-
-  if (!(0, _type.isInteger)(min)) {
-    throw new TypeError('randomInt args(min) is not integer');
-  }
-
-  if (!(0, _type.isInteger)(max)) {
-    throw new TypeError('randomInt args(max) is not integer');
-  }
-
-  return _randomInt(min, max);
-};
-
-exports.randomInt = randomInt;
-var makeInRange = keepMinMax;
+exports._keepMinMax = _keepMinMax;
+exports._inRange = _inRange;
+exports._nearEqual = _nearEqual;
+exports._isMultiples = _isMultiples;
+var isMultiples = numberJs.isMultiples,
+    isEven = numberJs.isEven,
+    isOdd = numberJs.isOdd,
+    nearEqual = numberJs.nearEqual,
+    inRange = numberJs.inRange,
+    keepMinMax = numberJs.keepMinMax,
+    randomInt = numberJs.randomInt,
+    round = numberJs.round,
+    roundUp = numberJs.roundUp,
+    roundDown = numberJs.roundDown,
+    makeInRange = numberJs.makeInRange;
 exports.makeInRange = makeInRange;
+exports.roundDown = roundDown;
+exports.roundUp = roundUp;
+exports.round = round;
+exports.randomInt = randomInt;
+exports.keepMinMax = keepMinMax;
+exports.inRange = inRange;
+exports.nearEqual = nearEqual;
+exports.isOdd = isOdd;
+exports.isEven = isEven;
+exports.isMultiples = isMultiples;
 var _default = {
   _isMultiples: _isMultiples,
-  _round: _round,
   _nearEqual: _nearEqual,
   _inRange: _inRange,
   _keepMinMax: _keepMinMax,
   _randomInt: _randomInt,
+  _round: _round,
+  _roundUp: _roundUp,
+  _roundDown: _roundDown,
   isMultiples: isMultiples,
   isEven: isEven,
   isOdd: isOdd,
-  round: round,
   nearEqual: nearEqual,
   inRange: inRange,
   keepMinMax: keepMinMax,
   randomInt: randomInt,
+  round: round,
+  roundUp: roundUp,
+  roundDown: roundDown,
   makeInRange: makeInRange
 };
 exports["default"] = _default;

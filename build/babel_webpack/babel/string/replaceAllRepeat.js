@@ -17,18 +17,29 @@ var _replaceAllRepeat2 = require("../string/_replaceAllRepeat.js");
  * replaceAllRepeat
  */
 var replaceAllRepeat = function replaceAllRepeat(str, before, after) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, before, after')) {
+  var maxCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, before, after', 'maxCount')) {
     var _str = str;
     str = _str.str;
     before = _str.before;
     after = _str.after;
-  } else if ((0, _isObjectParameter.isObjectParameter)(before, 'before, after')) {
+    var _str$maxCount = _str.maxCount;
+    maxCount = _str$maxCount === void 0 ? 0 : _str$maxCount;
+  } else if ((0, _isObjectParameter.isObjectParameter)(before, 'before, after', 'maxCount')) {
     var _before = before;
     before = _before.before;
     after = _before.after;
-  } else if ((0, _isObjectParameter.isObjectParameter)(after, 'after')) {
+    var _before$maxCount = _before.maxCount;
+    maxCount = _before$maxCount === void 0 ? 0 : _before$maxCount;
+  } else if ((0, _isObjectParameter.isObjectParameter)(after, 'after', 'maxCount')) {
     var _after = after;
     after = _after.after;
+    var _after$maxCount = _after.maxCount;
+    maxCount = _after$maxCount === void 0 ? 0 : _after$maxCount;
+  } else if ((0, _isObjectParameter.isObjectParameter)(maxCount, 'maxCount')) {
+    var _maxCount = maxCount;
+    maxCount = _maxCount.maxCount;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -55,7 +66,15 @@ var replaceAllRepeat = function replaceAllRepeat(str, before, after) {
     throw new TypeError('replaceAllRepeat args(before) is includes args(after)');
   }
 
-  return (0, _replaceAllRepeat2._replaceAllRepeat)(str, before, after);
+  if (!(0, _type.isInteger)(maxCount)) {
+    throw new TypeError('replaceAllRepeat args(maxCount) is not integer');
+  }
+
+  if (!(0 <= maxCount)) {
+    throw new TypeError('replaceAllRepeat args(maxCount) is not 0 <= maxCount');
+  }
+
+  return (0, _replaceAllRepeat2._replaceAllRepeat)(str, before, after, maxCount);
 };
 
 exports.replaceAllRepeat = replaceAllRepeat;

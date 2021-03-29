@@ -191,7 +191,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(12, propertyCount(parts.test));
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
-        checkEqual(15, propertyCount(parts.number));
+        checkEqual(19, propertyCount(parts.number));
         checkEqual(94, propertyCount(parts.string));
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
@@ -10740,12 +10740,15 @@ var test_execute_number = function test_execute_number(parts) {
   describe('test_execute_number', function () {
     var _parts$test2 = parts.test,
         checkEqual = _parts$test2.checkEqual,
-        isThrown = _parts$test2.isThrown;
+        isThrown = _parts$test2.isThrown,
+        testCounter = _parts$test2.testCounter;
     var _parts$number = parts.number,
         isMultiples = _parts$number.isMultiples,
         isEven = _parts$number.isEven,
         isOdd = _parts$number.isOdd,
         round = _parts$number.round,
+        roundUp = _parts$number.roundUp,
+        roundDown = _parts$number.roundDown,
         nearEqual = _parts$number.nearEqual,
         inRange = _parts$number.inRange,
         randomInt = _parts$number.randomInt;
@@ -10851,6 +10854,9 @@ var test_execute_number = function test_execute_number(parts) {
         checkEqual(5600, round({
           value: 5550,
           digit: -2
+        }));
+        checkEqual(5600, round(5550, {
+          digit: -2
         })); // exception
 
         checkEqual(false, isThrown(function () {
@@ -10858,6 +10864,153 @@ var test_execute_number = function test_execute_number(parts) {
         }));
         checkEqual(true, isThrown(function () {
           round(5.5, 2.2);
+        }));
+        checkEqual(true, isThrown(function () {
+          round('a');
+        }));
+      });
+    };
+
+    var test_roundUp = function test_roundUp() {
+      it('test_roundUp', function () {
+        checkEqual(5, roundUp(5));
+        checkEqual(6, roundUp(5.4));
+        checkEqual(6, roundUp(5.5));
+        checkEqual(5, roundUp(5, 0));
+        checkEqual(6, roundUp(5.4, 0));
+        checkEqual(6, roundUp(5.5, 0));
+        checkEqual(5.5, roundUp(5.44, 1));
+        checkEqual(5.5, roundUp(5.45, 1));
+        checkEqual(5.6, roundUp(5.54, 1));
+        checkEqual(5.6, roundUp(5.55, 1));
+        checkEqual(5.05, roundUp(5.044, 2));
+        checkEqual(5.05, roundUp(5.045, 2));
+        checkEqual(5.06, roundUp(5.054, 2));
+        checkEqual(5.06, roundUp(5.055, 2));
+        checkEqual(550, roundUp(544, -1));
+        checkEqual(550, roundUp(545, -1));
+        checkEqual(560, roundUp(554, -1));
+        checkEqual(560, roundUp(555, -1));
+        checkEqual(5500, roundUp(5440, -2));
+        checkEqual(5500, roundUp(5450, -2));
+        checkEqual(5600, roundUp(5540, -2));
+        checkEqual(5600, roundUp(5550, -2));
+        testCounter();
+        checkEqual(-5, roundUp(-5));
+        checkEqual(-6, roundUp(-5.4));
+        checkEqual(-6, roundUp(-5.5));
+        checkEqual(-5, roundUp(-5, 0));
+        checkEqual(-6, roundUp(-5.4, 0));
+        checkEqual(-6, roundUp(-5.5, 0));
+        checkEqual(-5.5, roundUp(-5.44, 1));
+        checkEqual(-5.5, roundUp(-5.45, 1));
+        checkEqual(-5.6, roundUp(-5.54, 1));
+        checkEqual(-5.6, roundUp(-5.55, 1));
+        checkEqual(-5.05, roundUp(-5.044, 2));
+        checkEqual(-5.05, roundUp(-5.045, 2));
+        checkEqual(-5.06, roundUp(-5.054, 2));
+        checkEqual(-5.06, roundUp(-5.055, 2));
+        checkEqual(-550, roundUp(-544, -1));
+        checkEqual(-550, roundUp(-545, -1));
+        checkEqual(-560, roundUp(-554, -1));
+        checkEqual(-560, roundUp(-555, -1));
+        checkEqual(-5500, roundUp(-5440, -2));
+        checkEqual(-5500, roundUp(-5450, -2));
+        checkEqual(-5600, roundUp(-5540, -2));
+        checkEqual(-5600, roundUp(-5550, -2)); // Object Named Parameter
+
+        checkEqual(6, roundUp({
+          value: 5.5
+        }));
+        checkEqual(5.06, roundUp({
+          value: 5.055,
+          digit: 2
+        }));
+        checkEqual(5600, roundUp({
+          value: 5550,
+          digit: -2
+        }));
+        checkEqual(5600, roundUp(5550, {
+          digit: -2
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          roundUp(5.5, 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          roundUp(5.5, 2.2);
+        }));
+      });
+    };
+
+    var test_roundDown = function test_roundDown() {
+      it('test_roundDown', function () {
+        checkEqual(5, roundDown(5));
+        checkEqual(5, roundDown(5.4));
+        checkEqual(5, roundDown(5.5));
+        checkEqual(5, roundDown(5, 0));
+        checkEqual(5, roundDown(5.4, 0));
+        checkEqual(5, roundDown(5.5, 0));
+        checkEqual(5.4, roundDown(5.44, 1));
+        checkEqual(5.4, roundDown(5.45, 1));
+        checkEqual(5.5, roundDown(5.54, 1));
+        checkEqual(5.5, roundDown(5.55, 1));
+        checkEqual(5.04, roundDown(5.044, 2));
+        checkEqual(5.04, roundDown(5.045, 2));
+        checkEqual(5.05, roundDown(5.054, 2));
+        checkEqual(5.05, roundDown(5.055, 2));
+        checkEqual(540, roundDown(544, -1));
+        checkEqual(540, roundDown(545, -1));
+        checkEqual(550, roundDown(554, -1));
+        checkEqual(550, roundDown(555, -1));
+        checkEqual(5400, roundDown(5440, -2));
+        checkEqual(5400, roundDown(5450, -2));
+        checkEqual(5500, roundDown(5540, -2));
+        checkEqual(5500, roundDown(5550, -2));
+        testCounter();
+        checkEqual(-5, roundDown(-5));
+        checkEqual(-5, roundDown(-5.4));
+        checkEqual(-5, roundDown(-5.5));
+        checkEqual(-5, roundDown(-5, 0));
+        checkEqual(-5, roundDown(-5.4, 0));
+        checkEqual(-5, roundDown(-5.5, 0));
+        checkEqual(-5.4, roundDown(-5.44, 1));
+        checkEqual(-5.4, roundDown(-5.45, 1));
+        checkEqual(-5.5, roundDown(-5.54, 1));
+        checkEqual(-5.5, roundDown(-5.55, 1));
+        checkEqual(-5.04, roundDown(-5.044, 2));
+        checkEqual(-5.04, roundDown(-5.045, 2));
+        checkEqual(-5.05, roundDown(-5.054, 2));
+        checkEqual(-5.05, roundDown(-5.055, 2));
+        checkEqual(-540, roundDown(-544, -1));
+        checkEqual(-540, roundDown(-545, -1));
+        checkEqual(-550, roundDown(-554, -1));
+        checkEqual(-550, roundDown(-555, -1));
+        checkEqual(-5400, roundDown(-5440, -2));
+        checkEqual(-5400, roundDown(-5450, -2));
+        checkEqual(-5500, roundDown(-5540, -2));
+        checkEqual(-5500, roundDown(-5550, -2)); // Object Named Parameter
+
+        checkEqual(5, roundDown({
+          value: 5.5
+        }));
+        checkEqual(5.05, roundDown({
+          value: 5.055,
+          digit: 2
+        }));
+        checkEqual(5500, roundDown({
+          value: 5550,
+          digit: -2
+        }));
+        checkEqual(5500, roundDown(5550, {
+          digit: -2
+        })); // exception
+
+        checkEqual(false, isThrown(function () {
+          roundDown(5.5, 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          roundDown(5.5, 2.2);
         }));
       });
     };
@@ -10967,6 +11120,8 @@ var test_execute_number = function test_execute_number(parts) {
     test_isMultiples();
     test_Math_round();
     test_round();
+    test_roundUp();
+    test_roundDown();
     test_nearEqual();
     test_inRange();
     test_randomInt();
@@ -11185,7 +11340,15 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('aaaa', replaceAllRepeat('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAllRepeat('abab', 'ab', 'aa'));
         checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
-        checkEqual('ac', replaceAllRepeat('abc', 'b', '')); // Object Named Parameter
+        checkEqual('ac', replaceAllRepeat('abc', 'b', ''));
+        checkEqual('AABBAABB', replaceAllRepeat('AAABBB', 'AB', 'BBAA', 1));
+        checkEqual('ABBAABABBAAB', replaceAllRepeat('AAABBB', 'AB', 'BBAA', 2));
+        checkEqual('BBAABABBAABBAABABBAA', replaceAllRepeat('AAABBB', 'AB', 'BBAA', 3));
+        checkEqual('A     B', replaceAllRepeat('A         B', '  ', ' ', 1));
+        checkEqual('A   B', replaceAllRepeat('A         B', '  ', ' ', 2));
+        checkEqual('A  B', replaceAllRepeat('A         B', '  ', ' ', 3));
+        checkEqual('A B', replaceAllRepeat('A         B', '  ', ' ', 4));
+        checkEqual('A B', replaceAllRepeat('A         B', '  ', ' ')); // Object Named Parameter
 
         checkEqual('aaaa', replaceAllRepeat({
           str: 'abab',
@@ -11198,6 +11361,24 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual('aaaa', replaceAllRepeat('abab', 'b', {
           after: 'a'
+        }));
+        checkEqual('A  B', replaceAllRepeat({
+          str: 'A         B',
+          before: '  ',
+          after: ' ',
+          maxCount: 3
+        }));
+        checkEqual('A  B', replaceAllRepeat('A         B', {
+          before: '  ',
+          after: ' ',
+          maxCount: 3
+        }));
+        checkEqual('A  B', replaceAllRepeat('A         B', '  ', {
+          after: ' ',
+          maxCount: 3
+        }));
+        checkEqual('A  B', replaceAllRepeat('A         B', '  ', ' ', {
+          maxCount: 3
         })); // exception
 
         checkEqual(false, isThrown(function () {
@@ -11223,6 +11404,12 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           replaceAllRepeat('abab', 'ab', 'abc');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('A         B', '  ', ' ', -1);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('A         B', '  ', ' ', '');
         }));
       });
     };

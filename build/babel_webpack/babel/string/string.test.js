@@ -199,7 +199,15 @@ var test_execute_string = function test_execute_string(parts) {
         checkEqual('aaaa', replaceAllRepeat('abab', 'b', 'a'));
         checkEqual('aaaa', replaceAllRepeat('abab', 'ab', 'aa'));
         checkEqual('acb', replaceAllRepeat('accccccb', 'cc', 'c'));
-        checkEqual('ac', replaceAllRepeat('abc', 'b', '')); // Object Named Parameter
+        checkEqual('ac', replaceAllRepeat('abc', 'b', ''));
+        checkEqual('AABBAABB', replaceAllRepeat('AAABBB', 'AB', 'BBAA', 1));
+        checkEqual('ABBAABABBAAB', replaceAllRepeat('AAABBB', 'AB', 'BBAA', 2));
+        checkEqual('BBAABABBAABBAABABBAA', replaceAllRepeat('AAABBB', 'AB', 'BBAA', 3));
+        checkEqual('A     B', replaceAllRepeat('A         B', '  ', ' ', 1));
+        checkEqual('A   B', replaceAllRepeat('A         B', '  ', ' ', 2));
+        checkEqual('A  B', replaceAllRepeat('A         B', '  ', ' ', 3));
+        checkEqual('A B', replaceAllRepeat('A         B', '  ', ' ', 4));
+        checkEqual('A B', replaceAllRepeat('A         B', '  ', ' ')); // Object Named Parameter
 
         checkEqual('aaaa', replaceAllRepeat({
           str: 'abab',
@@ -212,6 +220,24 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual('aaaa', replaceAllRepeat('abab', 'b', {
           after: 'a'
+        }));
+        checkEqual('A  B', replaceAllRepeat({
+          str: 'A         B',
+          before: '  ',
+          after: ' ',
+          maxCount: 3
+        }));
+        checkEqual('A  B', replaceAllRepeat('A         B', {
+          before: '  ',
+          after: ' ',
+          maxCount: 3
+        }));
+        checkEqual('A  B', replaceAllRepeat('A         B', '  ', {
+          after: ' ',
+          maxCount: 3
+        }));
+        checkEqual('A  B', replaceAllRepeat('A         B', '  ', ' ', {
+          maxCount: 3
         })); // exception
 
         checkEqual(false, isThrown(function () {
@@ -237,6 +263,12 @@ var test_execute_string = function test_execute_string(parts) {
         }));
         checkEqual(true, isThrown(function () {
           replaceAllRepeat('abab', 'ab', 'abc');
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('A         B', '  ', ' ', -1);
+        }));
+        checkEqual(true, isThrown(function () {
+          replaceAllRepeat('A         B', '  ', ' ', '');
         }));
       });
     };
