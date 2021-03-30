@@ -215,7 +215,7 @@
 .convert.valueToString:[object Function]:function
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
-.date._DateTime:[object Function]:function
+.date._Datetime:[object Function]:function
 .date._datetimeToString:[object Function]:function
 .date._dayOfWeek:[object Function]:function
 .date._dayOfWeekEnglishLong:[object Function]:function
@@ -226,7 +226,7 @@
 .date._nameOfMonthEnglishChar3:[object Function]:function
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
-.date.DateTime:[object Function]:function
+.date.Datetime:[object Function]:function
 .date.datetimeToString:[object Function]:function
 .date.dayOfWeek:[object Function]:function
 .date.dayOfWeekEnglishLong:[object Function]:function

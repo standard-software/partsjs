@@ -3,15 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekJapaneseLong = exports.dayOfWeekJapaneseShort = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekJapaneseLong = exports._dayOfWeekJapaneseShort = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._DateTime = void 0;
+exports["default"] = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekJapaneseLong = exports.dayOfWeekJapaneseShort = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.Datetime = exports.isInvalidDate = exports.Today = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekJapaneseLong = exports._dayOfWeekJapaneseShort = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._Datetime = void 0;
 
 var _Today = _interopRequireDefault(require("./Today.js"));
 
 var _isInvalidDate = _interopRequireDefault(require("./isInvalidDate.js"));
 
-var _DateTime2 = _interopRequireDefault(require("./_DateTime.js"));
+var _Datetime2 = _interopRequireDefault(require("./_Datetime.js"));
 
-var _DateTime3 = _interopRequireDefault(require("./DateTime.js"));
+var _Datetime3 = _interopRequireDefault(require("./Datetime.js"));
 
 var _datetimeToString2 = _interopRequireDefault(require("./_datetimeToString.js"));
 
@@ -61,9 +61,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _dayOfWeekJapaneseShort2["default"]), _dayOfWeekJapaneseShort3["default"]), _dayOfWeekJapaneseLong2["default"]), _dayOfWeekJapaneseLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]);
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _Datetime2["default"]), _Datetime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _dayOfWeekJapaneseShort2["default"]), _dayOfWeekJapaneseShort3["default"]), _dayOfWeekJapaneseLong2["default"]), _dayOfWeekJapaneseLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]);
 
-var _DateTime = dateJs._DateTime,
+var _Datetime = dateJs._Datetime,
     _datetimeToString = dateJs._datetimeToString,
     _dayOfWeek = dateJs._dayOfWeek,
     _dayOfWeekEnglishShort = dateJs._dayOfWeekEnglishShort,
@@ -76,7 +76,7 @@ var _DateTime = dateJs._DateTime,
     _nameOfMonthEnglishLong = dateJs._nameOfMonthEnglishLong,
     Today = dateJs.Today,
     isInvalidDate = dateJs.isInvalidDate,
-    DateTime = dateJs.DateTime,
+    Datetime = dateJs.Datetime,
     datetimeToString = dateJs.datetimeToString,
     dayOfWeek = dateJs.dayOfWeek,
     dayOfWeekEnglishShort = dateJs.dayOfWeekEnglishShort,
@@ -97,7 +97,7 @@ exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
 exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
 exports.dayOfWeek = dayOfWeek;
 exports.datetimeToString = datetimeToString;
-exports.DateTime = DateTime;
+exports.Datetime = Datetime;
 exports.isInvalidDate = isInvalidDate;
 exports.Today = Today;
 exports._nameOfMonthEnglishLong = _nameOfMonthEnglishLong;
@@ -110,9 +110,9 @@ exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
 exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
 exports._dayOfWeek = _dayOfWeek;
 exports._datetimeToString = _datetimeToString;
-exports._DateTime = _DateTime;
+exports._Datetime = _Datetime;
 var _default = {
-  _DateTime: _DateTime,
+  _Datetime: _Datetime,
   _datetimeToString: _datetimeToString,
   _dayOfWeek: _dayOfWeek,
   _dayOfWeekEnglishShort: _dayOfWeekEnglishShort,
@@ -125,7 +125,7 @@ var _default = {
   _nameOfMonthEnglishLong: _nameOfMonthEnglishLong,
   Today: Today,
   isInvalidDate: isInvalidDate,
-  DateTime: DateTime,
+  Datetime: Datetime,
   datetimeToString: datetimeToString,
   dayOfWeek: dayOfWeek,
   dayOfWeekEnglishShort: dayOfWeekEnglishShort,

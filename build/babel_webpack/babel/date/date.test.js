@@ -16,7 +16,7 @@ var test_execute_date = function test_execute_date(parts) {
   var _parts$date = parts.date,
       Today = _parts$date.Today,
       isInvalidDate = _parts$date.isInvalidDate,
-      DateTime = _parts$date.DateTime,
+      Datetime = _parts$date.Datetime,
       datetimeToString = _parts$date.datetimeToString,
       dayOfWeek = _parts$date.dayOfWeek,
       dayOfWeekEnglishShort = _parts$date.dayOfWeekEnglishShort,
@@ -70,79 +70,79 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
-    var test_DateTime = function test_DateTime() {
-      it('test_DateTime', function () {
+    var test_Datetime = function test_Datetime() {
+      it('test_Datetime', function () {
         checkEqual(0, new Date(0).getTime());
-        var dt = DateTime(undefined, undefined, undefined, undefined, undefined, undefined, undefined, false);
+        var dt = Datetime(undefined, undefined, undefined, undefined, undefined, undefined, undefined, false);
         checkEqual(0, dt.getTime());
         checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime();
+        var dt = Datetime();
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(0, dt.getTime());
         checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-11-21T11:35:10.400Z', dt.toISOString());
-        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400);
         checkEqual(new Date(2020, 10, 21, 11, 35, 10, 400).toISOString(), dt.toISOString());
-        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400, false);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400, false);
         checkEqual(new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400)).toISOString(), dt.toISOString());
-        var dt = DateTime(2020);
+        var dt = Datetime(2020);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2);
+        var dt = Datetime(2020, 2);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3);
+        var dt = Datetime(2020, 2, 3);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4);
+        var dt = Datetime(2020, 2, 3, 4);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5);
+        var dt = Datetime(2020, 2, 3, 4, 5);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, true);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, false);
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, true);
 
         if (dt.getTimezoneOffset() === -540) {
           checkEqual('2020-02-02T19:05:06.007Z', dt.toISOString());
         } // zero
 
 
-        var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 0, 3, 4, 5, 6, 7, false);
         checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 3, 0, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 3, 0, 4, 5, 6, 7, false);
         checkEqual('2020-02-29T04:05:06.007Z', dt.toISOString()); // minus
 
-        var dt = DateTime(2020, -1, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, -1, 3, 4, 5, 6, 7, false);
         checkEqual('2019-11-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 3, -1, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 3, -1, 4, 5, 6, 7, false);
         checkEqual('2020-02-28T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 3, 4, -2, 5, 6, 7, false);
+        var dt = Datetime(2020, 3, 4, -2, 5, 6, 7, false);
         checkEqual('2020-03-03T22:05:06.007Z', dt.toISOString()); // object parameter
 
-        var dt = DateTime({
+        var dt = Datetime({
           year: 2020
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime({
+        var dt = Datetime({
           year: 2020,
           isLocal: false
         });
         checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime({
+        var dt = Datetime({
           year: 2020,
           month: 2,
           hour: 13,
@@ -150,7 +150,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         });
         checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime({
+        var dt = Datetime({
           year: 2020,
           month: 2,
           hour: 13,
@@ -158,65 +158,65 @@ var test_execute_date = function test_execute_date(parts) {
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, {
+        var dt = Datetime(2020, {
           hour: 13,
           second: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-01-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, {
+        var dt = Datetime(2020, 2, {
           hour: 13,
           second: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, {
+        var dt = Datetime(2020, 2, 3, {
           minute: 13,
           second: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T00:13:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, {
+        var dt = Datetime(2020, 2, 3, {
           isLocal: false
         });
         checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, {
+        var dt = Datetime(2020, 2, 3, 4, {
           minute: 13,
           second: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:13:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, {
+        var dt = Datetime(2020, 2, 3, 4, 5, {
           second: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, {
+        var dt = Datetime(2020, 2, 3, 4, 5, {
           second: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, {
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, {
           isLocal: false
         });
         checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, {
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, {
           isLocal: false
         });
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // exception
 
         checkEqual(false, isThrown(function () {
-          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
+          return Datetime(2020, 2, 3, 4, 5, 6, 7, {
             isLocal: false
           });
         }));
         checkEqual(true, isThrown(function () {
-          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
+          return Datetime(2020, 2, 3, 4, 5, 6, 7, {
             isLocal: 1
           });
         }));
         checkEqual(true, isThrown(function () {
-          return DateTime(2020, '2', 3, 4, 5, 6, 7, {
+          return Datetime(2020, '2', 3, 4, 5, 6, 7, {
             isLocal: true
           });
         }));
@@ -225,7 +225,7 @@ var test_execute_date = function test_execute_date(parts) {
 
     var test_datetimeToString = function test_datetimeToString() {
       it('test_datetimeToString', function () {
-        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
+        var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
         checkEqual('2001/02/04 09:05:08.045', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
         checkEqual('2001/02/04 09:05:08.04', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
         checkEqual('2001/02/04 09:05:08.0', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
@@ -233,7 +233,7 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual('01/2/4 9:5:8 a', datetimeToString(dt, 'YY/M/D H:m:s a'));
         checkEqual('01/2/4 9:5:8 AM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
         checkEqual('01/2/4 9:5:8 A', datetimeToString(dt, 'YY/M/D H:m:s A'));
-        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
+        var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
         checkEqual('01/2/4 16:5:8 pm', datetimeToString(dt, 'YY/M/D H:m:s aa'));
         checkEqual('01/2/4 16:5:8 p', datetimeToString(dt, 'YY/M/D H:m:s a'));
         checkEqual('01/2/4 16:5:8 PM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
@@ -244,12 +244,12 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual('01/2/4 16:5:8 Feb.', datetimeToString(dt, 'YY/M/D H:m:s MMMM'));
         checkEqual('01/2/4 16:5:8 February', datetimeToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
 
-        var dt = DateTime(2021, 1, 6);
+        var dt = Datetime(2021, 1, 6);
         checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
         checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
         var dt = new Date();
-        var dt = DateTime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
+        var dt = Datetime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
         var timezoneOffset = -1 * dt.getTimezoneOffset();
         var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
         var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // console.log('timezone', timezoneOffset, timezoneOffset / 60,
@@ -270,7 +270,7 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // exception
         // quote
 
-        var dt = DateTime(2021, 1, 6);
+        var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(function () {
           datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
@@ -286,13 +286,13 @@ var test_execute_date = function test_execute_date(parts) {
           return datetimeToString(date, format, datetimeToString.func.MomentLikeObject(), isLocal);
         };
 
-        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
+        var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
         checkEqual('2001/02/04 09:05:08.045', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
         checkEqual('2001/02/04 09:05:08.04', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
         checkEqual('2001/02/04 09:05:08.0', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'));
         checkEqual('01/2/4 9:5:8 am', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
         checkEqual('01/2/4 9:5:8 AM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
-        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
+        var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
         checkEqual('01/2/4 16:5:8 pm', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
         checkEqual('01/2/4 16:5:8 PM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
         checkEqual('01/2/4 16:5:8 Sun', datetimeToStringMoment(dt, 'YY/M/D H:m:s ddd'));
@@ -300,12 +300,12 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual('01/2/4 16:5:8 Feb', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMM'));
         checkEqual('01/2/4 16:5:8 February', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMMM')); // quote
 
-        var dt = DateTime(2021, 1, 6);
+        var dt = Datetime(2021, 1, 6);
         checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
         checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
         var dt = new Date();
-        var dt = DateTime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
+        var dt = Datetime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
         var timezoneOffset = -1 * dt.getTimezoneOffset();
         var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
         var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // '+0900' etc
@@ -322,7 +322,7 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z')); // exception
         // quote
 
-        var dt = DateTime(2021, 1, 6);
+        var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(function () {
           datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
@@ -338,9 +338,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeek(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -348,13 +348,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('Fri', dayOfWeek(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeek(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -366,7 +366,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
@@ -382,9 +382,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeekEnglishShort(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -392,13 +392,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('Fri', dayOfWeekEnglishShort(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeekEnglishShort(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -410,7 +410,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
@@ -426,9 +426,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('Saturday', dayOfWeekEnglishLong(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -436,13 +436,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('Friday', dayOfWeekEnglishLong(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('Saturday', dayOfWeekEnglishLong(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -454,7 +454,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
@@ -470,9 +470,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('土', dayOfWeekJapaneseShort(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -480,15 +480,15 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('金', dayOfWeekJapaneseShort(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('土', dayOfWeekJapaneseShort(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('土', dayOfWeekJapaneseShort(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -500,7 +500,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
@@ -516,9 +516,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -526,15 +526,15 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('金曜日', dayOfWeekJapaneseLong(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: true
         });
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
@@ -546,7 +546,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
+        var dt = Datetime(2021, 1, 9, 8, {
           isLocal: false
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
@@ -562,9 +562,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonth(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -572,13 +572,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('Dec', nameOfMonth(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonth(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -590,7 +590,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
@@ -606,9 +606,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonthEnglishChar3(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -616,13 +616,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('Dec', nameOfMonthEnglishChar3(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonthEnglishChar3(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -634,7 +634,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
@@ -650,9 +650,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var dt = Datetime(2021, 1, 1);
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -660,13 +660,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('Dec.', nameOfMonthEnglishChar4(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -678,7 +678,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
@@ -694,9 +694,9 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var dt = Datetime(2021, 1, 1);
         checkEqual('January', nameOfMonthEnglishLong(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -704,13 +704,13 @@ var test_execute_date = function test_execute_date(parts) {
 
         checkEqual('December', nameOfMonthEnglishLong(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
         checkEqual('January', nameOfMonthEnglishLong(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: true
         });
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
@@ -722,7 +722,7 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
+        var dt = Datetime(2021, 1, 1, 8, {
           isLocal: false
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
@@ -735,7 +735,7 @@ var test_execute_date = function test_execute_date(parts) {
     test_Today();
     test_isInvalidDate();
     test_Date_standard();
-    test_DateTime();
+    test_Datetime();
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
     test_dayOfWeekEnglishLong();

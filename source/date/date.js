@@ -1,7 +1,7 @@
 import TodayJs from './Today.js';
 import isInvalidDateJs from './isInvalidDate.js';
-import _DateTimeJs from './_DateTime.js';
-import DateTimeJs from './DateTime.js';
+import _DatetimeJs from './_Datetime.js';
+import DatetimeJs from './Datetime.js';
 import _datetimeToStringJs from './_datetimeToString.js';
 import datetimeToStringJs from './datetimeToString.js';
 import _dayOfWeekJs from './_dayOfWeek.js';
@@ -26,8 +26,8 @@ import nameOfMonthEnglishLongJs from './nameOfMonthEnglishLong.js';
 const dateJs = {
   ...TodayJs,
   ...isInvalidDateJs,
-  ..._DateTimeJs,
-  ...DateTimeJs,
+  ..._DatetimeJs,
+  ...DatetimeJs,
   ..._datetimeToStringJs,
   ...datetimeToStringJs,
   ..._dayOfWeekJs,
@@ -51,7 +51,7 @@ const dateJs = {
 };
 
 export const {
-  _DateTime,
+  _Datetime,
   _datetimeToString,
   _dayOfWeek,
   _dayOfWeekEnglishShort,
@@ -65,7 +65,7 @@ export const {
 
   Today,
   isInvalidDate,
-  DateTime,
+  Datetime,
   datetimeToString,
   dayOfWeek,
   dayOfWeekEnglishShort,
@@ -79,7 +79,7 @@ export const {
 } = dateJs;
 
 export default {
-  _DateTime,
+  _Datetime,
   _datetimeToString,
   _dayOfWeek,
   _dayOfWeekEnglishShort,
@@ -93,7 +93,7 @@ export default {
 
   Today,
   isInvalidDate,
-  DateTime,
+  Datetime,
   datetimeToString,
   dayOfWeek,
   dayOfWeekEnglishShort,

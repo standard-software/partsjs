@@ -157,7 +157,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '10.5.0';
+var VERSION = '10.6.0 beta';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -18192,15 +18192,15 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekJapaneseLong = exports.dayOfWeekJapaneseShort = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.DateTime = exports.isInvalidDate = exports.Today = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekJapaneseLong = exports._dayOfWeekJapaneseShort = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._DateTime = void 0;
+exports["default"] = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekJapaneseLong = exports.dayOfWeekJapaneseShort = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.datetimeToString = exports.Datetime = exports.isInvalidDate = exports.Today = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekJapaneseLong = exports._dayOfWeekJapaneseShort = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._datetimeToString = exports._Datetime = void 0;
 
 var _Today = _interopRequireDefault(__webpack_require__(172));
 
 var _isInvalidDate = _interopRequireDefault(__webpack_require__(173));
 
-var _DateTime2 = _interopRequireDefault(__webpack_require__(174));
+var _Datetime2 = _interopRequireDefault(__webpack_require__(174));
 
-var _DateTime3 = _interopRequireDefault(__webpack_require__(175));
+var _Datetime3 = _interopRequireDefault(__webpack_require__(175));
 
 var _datetimeToString2 = _interopRequireDefault(__webpack_require__(176));
 
@@ -18250,9 +18250,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _DateTime2["default"]), _DateTime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _dayOfWeekJapaneseShort2["default"]), _dayOfWeekJapaneseShort3["default"]), _dayOfWeekJapaneseLong2["default"]), _dayOfWeekJapaneseLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]);
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Today["default"]), _isInvalidDate["default"]), _Datetime2["default"]), _Datetime3["default"]), _datetimeToString2["default"]), _datetimeToString3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _dayOfWeekJapaneseShort2["default"]), _dayOfWeekJapaneseShort3["default"]), _dayOfWeekJapaneseLong2["default"]), _dayOfWeekJapaneseLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]);
 
-var _DateTime = dateJs._DateTime,
+var _Datetime = dateJs._Datetime,
     _datetimeToString = dateJs._datetimeToString,
     _dayOfWeek = dateJs._dayOfWeek,
     _dayOfWeekEnglishShort = dateJs._dayOfWeekEnglishShort,
@@ -18265,7 +18265,7 @@ var _DateTime = dateJs._DateTime,
     _nameOfMonthEnglishLong = dateJs._nameOfMonthEnglishLong,
     Today = dateJs.Today,
     isInvalidDate = dateJs.isInvalidDate,
-    DateTime = dateJs.DateTime,
+    Datetime = dateJs.Datetime,
     datetimeToString = dateJs.datetimeToString,
     dayOfWeek = dateJs.dayOfWeek,
     dayOfWeekEnglishShort = dateJs.dayOfWeekEnglishShort,
@@ -18286,7 +18286,7 @@ exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
 exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
 exports.dayOfWeek = dayOfWeek;
 exports.datetimeToString = datetimeToString;
-exports.DateTime = DateTime;
+exports.Datetime = Datetime;
 exports.isInvalidDate = isInvalidDate;
 exports.Today = Today;
 exports._nameOfMonthEnglishLong = _nameOfMonthEnglishLong;
@@ -18299,9 +18299,9 @@ exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
 exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
 exports._dayOfWeek = _dayOfWeek;
 exports._datetimeToString = _datetimeToString;
-exports._DateTime = _DateTime;
+exports._Datetime = _Datetime;
 var _default = {
-  _DateTime: _DateTime,
+  _Datetime: _Datetime,
   _datetimeToString: _datetimeToString,
   _dayOfWeek: _dayOfWeek,
   _dayOfWeekEnglishShort: _dayOfWeekEnglishShort,
@@ -18314,7 +18314,7 @@ var _default = {
   _nameOfMonthEnglishLong: _nameOfMonthEnglishLong,
   Today: Today,
   isInvalidDate: isInvalidDate,
-  DateTime: DateTime,
+  Datetime: Datetime,
   datetimeToString: datetimeToString,
   dayOfWeek: dayOfWeek,
   dayOfWeekEnglishShort: dayOfWeekEnglishShort,
@@ -18388,12 +18388,12 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._DateTime = void 0;
+exports["default"] = exports._Datetime = void 0;
 
 /**
- * DateTime
+ * Datetime
  */
-var _DateTime = function _DateTime() {
+var _Datetime = function _Datetime() {
   var year = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1970;
   var month = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var day = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
@@ -18403,8 +18403,8 @@ var _DateTime = function _DateTime() {
   var millisecond = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var isLocal = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
 
-  if (!(this instanceof _DateTime)) {
-    return new _DateTime(year, month, day, hour, minute, second, millisecond, isLocal);
+  if (!(this instanceof _Datetime)) {
+    return new _Datetime(year, month, day, hour, minute, second, millisecond, isLocal);
   }
 
   var self = new Date(0);
@@ -18432,9 +18432,9 @@ var _DateTime = function _DateTime() {
   return self;
 };
 
-exports._DateTime = _DateTime;
+exports._Datetime = _Datetime;
 var _default = {
-  _DateTime: _DateTime
+  _Datetime: _Datetime
 };
 exports["default"] = _default;
 
@@ -18448,7 +18448,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.DateTime = void 0;
+exports["default"] = exports.Datetime = void 0;
 
 var _isType = __webpack_require__(11);
 
@@ -18456,14 +18456,14 @@ var _isObjectParameter = __webpack_require__(15);
 
 var _number = __webpack_require__(42);
 
-var _DateTime2 = __webpack_require__(174);
+var _Datetime2 = __webpack_require__(174);
 
 /* eslint-disable max-len */
 
 /**
- * DateTime
+ * Datetime
  */
-var DateTime = function DateTime() {
+var Datetime = function Datetime() {
   var year = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1970;
   var month = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var day = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
@@ -18564,43 +18564,43 @@ var DateTime = function DateTime() {
   }
 
   if (!(0, _isType.isInteger)(year)) {
-    throw new TypeError("DateTime args(year:".concat(year, ") is not integer"));
+    throw new TypeError("Datetime args(year:".concat(year, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(month)) {
-    throw new TypeError("DateTime args(month:".concat(month, ") is not integer"));
+    throw new TypeError("Datetime args(month:".concat(month, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(day)) {
-    throw new TypeError("DateTime args(day:".concat(day, ") is not integer"));
+    throw new TypeError("Datetime args(day:".concat(day, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(hour)) {
-    throw new TypeError("DateTime args(hour:".concat(hour, ") is not integer"));
+    throw new TypeError("Datetime args(hour:".concat(hour, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(minute)) {
-    throw new TypeError("DateTime args(minute:".concat(minute, ") is not integer"));
+    throw new TypeError("Datetime args(minute:".concat(minute, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(second)) {
-    throw new TypeError("DateTime args(second:".concat(second, ") is not integer"));
+    throw new TypeError("Datetime args(second:".concat(second, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(millisecond)) {
-    throw new TypeError("DateTime args(millisecond:".concat(millisecond, ") is not integer"));
+    throw new TypeError("Datetime args(millisecond:".concat(millisecond, ") is not integer"));
   }
 
   if (!(0, _isType.isBoolean)(isLocal)) {
-    throw new TypeError("DateTime args(isLocal:".concat(isLocal, ") is not boolean"));
+    throw new TypeError("Datetime args(isLocal:".concat(isLocal, ") is not boolean"));
   }
 
-  return (0, _DateTime2._DateTime)(year, month, day, hour, minute, second, millisecond, isLocal);
+  return (0, _Datetime2._Datetime)(year, month, day, hour, minute, second, millisecond, isLocal);
 };
 
-exports.DateTime = DateTime;
+exports.Datetime = Datetime;
 var _default = {
-  DateTime: DateTime
+  Datetime: Datetime
 };
 exports["default"] = _default;
 
