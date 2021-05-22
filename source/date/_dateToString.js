@@ -8,10 +8,10 @@ import { __loop } from '../syntax/__loop.js';
 import { _replaceAllArray } from '../string/_replaceAllArray.js';
 import { isOdd } from '../number/number.js';
 import { _includeCount } from '../string/_includeCount.js';
-import { __detetimeToStringFunc } from './__detetimeToStringFunc.js';
+import { __dateToStringFunc } from './__dateToStringFunc.js';
 
 export const _dateToString = (
-  date, format, ruleObject = __detetimeToStringFunc.DefaultObject(),
+  date, format, ruleObject = __dateToStringFunc.DefaultObject(),
   isLocal = true,
 ) => {
   const existSingleQuote = __includes(format, "'");
@@ -55,6 +55,6 @@ export const _dateToString = (
   return formatStrs.join('');
 };
 
-_dateToString.func = __detetimeToStringFunc;
+_dateToString.func = __dateToStringFunc;
 
 export default { _dateToString };

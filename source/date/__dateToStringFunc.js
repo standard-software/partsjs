@@ -1,12 +1,12 @@
 import { _paddingFirst } from '../string/_paddingFirst.js';
 import { _subFirst, _subLast, _trimFirst } from '../string/string_common.js';
-import { _dayOfWeekEnglishShort } from '../date/_dayOfWeekEnglishShort.js';
-import { _dayOfWeekEnglishLong } from '../date/_dayOfWeekEnglishLong.js';
-import { _nameOfMonthEnglishChar3 } from '../date/_nameOfMonthEnglishChar3.js';
-import { _nameOfMonthEnglishChar4 } from '../date/_nameOfMonthEnglishChar4.js';
-import { _nameOfMonthEnglishLong } from '../date/_nameOfMonthEnglishLong.js';
+import { _dayOfWeekEnglishShort } from './_dayOfWeekEnglishShort.js';
+import { _dayOfWeekEnglishLong } from './_dayOfWeekEnglishLong.js';
+import { _nameOfMonthEnglishChar3 } from './_nameOfMonthEnglishChar3.js';
+import { _nameOfMonthEnglishChar4 } from './_nameOfMonthEnglishChar4.js';
+import { _nameOfMonthEnglishLong } from './_nameOfMonthEnglishLong.js';
 
-export const __detetimeToStringFunc = {};
+export const __dateToStringFunc = {};
 
 const year4 = (date, isLocal) => {
   if (isLocal) {
@@ -172,27 +172,27 @@ const timezoneHH_MM = (date) => {
   return offsetHourStr + ':' + offsetMinStr;
 };
 
-__detetimeToStringFunc.year4 = year4;
-__detetimeToStringFunc.year2 = year2;
-__detetimeToStringFunc.month2 = month2;
-__detetimeToStringFunc.month1 = month1;
-__detetimeToStringFunc.date2 = date2;
-__detetimeToStringFunc.date1 = date1;
-__detetimeToStringFunc.hour12_2 = hour12_2;
-__detetimeToStringFunc.hour12_1 = hour12_1;
-__detetimeToStringFunc.hour24_2 = hour24_2;
-__detetimeToStringFunc.hour24_1 = hour24_1;
-__detetimeToStringFunc.minute2 = minute2;
-__detetimeToStringFunc.minute1 = minute1;
-__detetimeToStringFunc.second2 = second2;
-__detetimeToStringFunc.second1 = second1;
-__detetimeToStringFunc.millisecond3 = millisecond3;
-__detetimeToStringFunc.millisecond2 = millisecond2;
-__detetimeToStringFunc.millisecond1 = millisecond1;
-__detetimeToStringFunc.am_pm = am_pm;
-__detetimeToStringFunc.AM_PM = AM_PM;
-__detetimeToStringFunc.a_p = a_p;
-__detetimeToStringFunc.A_P = A_P;
+__dateToStringFunc.year4 = year4;
+__dateToStringFunc.year2 = year2;
+__dateToStringFunc.month2 = month2;
+__dateToStringFunc.month1 = month1;
+__dateToStringFunc.date2 = date2;
+__dateToStringFunc.date1 = date1;
+__dateToStringFunc.hour12_2 = hour12_2;
+__dateToStringFunc.hour12_1 = hour12_1;
+__dateToStringFunc.hour24_2 = hour24_2;
+__dateToStringFunc.hour24_1 = hour24_1;
+__dateToStringFunc.minute2 = minute2;
+__dateToStringFunc.minute1 = minute1;
+__dateToStringFunc.second2 = second2;
+__dateToStringFunc.second1 = second1;
+__dateToStringFunc.millisecond3 = millisecond3;
+__dateToStringFunc.millisecond2 = millisecond2;
+__dateToStringFunc.millisecond1 = millisecond1;
+__dateToStringFunc.am_pm = am_pm;
+__dateToStringFunc.AM_PM = AM_PM;
+__dateToStringFunc.a_p = a_p;
+__dateToStringFunc.A_P = A_P;
 
 const _DefaultObject = {
   YYYY: year4,
@@ -253,8 +253,8 @@ const _MomentLikeObject = {
   ZZ:   timezoneHHMM,
 };
 
-__detetimeToStringFunc.DefaultObject = () => _DefaultObject;
-__detetimeToStringFunc.MomentLikeObject = () => _MomentLikeObject;
+__dateToStringFunc.DefaultObject = () => _DefaultObject;
+__dateToStringFunc.MomentLikeObject = () => _MomentLikeObject;
 
-export default { __detetimeToStringFunc };
+export default { __dateToStringFunc };
 

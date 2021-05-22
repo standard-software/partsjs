@@ -25,22 +25,22 @@ export const dateToString = (
 
   if (!isDate(date)) {
     throw new TypeError(
-      `datetimeToString args(date:${date}) is not date`,
+      `dateToString args(date:${date}) is not date`,
     );
   }
   if (!isString(format)) {
     throw new TypeError(
-      `datetimeToString args(format:${format}) is not string`,
+      `dateToString args(format:${format}) is not string`,
     );
   }
   if (!isObject(rule)) {
     throw new TypeError(
-      `datetimeToString args(rule:${rule}) is not object`,
+      `dateToString args(rule:${rule}) is not object`,
     );
   }
   if (!isBoolean(isLocal)) {
     throw new TypeError(
-      `datetimeToString args(isLocal:${isLocal}) is not boolean`,
+      `dateToString args(isLocal:${isLocal}) is not boolean`,
     );
   }
 

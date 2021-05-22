@@ -332,6 +332,7 @@ You can now use the functions of the parts.js object.
   - Reflect
   - Intl
 - rename datetimeToString >> dateToString
+- rename detetomeToStringFunc >> dateToStringFunc
 - update replaceAllArray add args detail
 
 ### 10.5.0
