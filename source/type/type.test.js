@@ -304,6 +304,7 @@ export const test_execute_type = (parts) => {
         }
 
         // Reflect
+        testCounter();
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(true, (typeof Reflect) === 'undefined');
         } else if (parts.platform.isGasRhino()) {
@@ -314,6 +315,8 @@ export const test_execute_type = (parts) => {
         || parts.platform.isEdge()
         || parts.platform.isFirefox()
         || parts.platform.isOpera()
+        || parts.platform.isDeno()
+        || parts.platform.isNode()
         ) {
           checkType('object',    '[object Reflect]',  Reflect);
         } else {
@@ -325,12 +328,12 @@ export const test_execute_type = (parts) => {
           checkEqual(true, (typeof Intl) === 'undefined');
         } else if (parts.platform.isGasRhino()) {
           checkEqual(true, (typeof Intl) === 'undefined');
-        } else if (parts.platform.isDeno()) {
-          checkEqual(true, (typeof Intl) === 'undefined');
         } else if (parts.platform.isChrome()
         || parts.platform.isEdge()
         || parts.platform.isFirefox()
         || parts.platform.isOpera()
+        || parts.platform.isDeno()
+        || parts.platform.isNode()
         ) {
           checkType('object',    '[object Intl]',   Intl);
         } else {
@@ -501,6 +504,7 @@ export const test_execute_type = (parts) => {
           checkEqual('WebAssembly',       typeName(WebAssembly));
         }
 
+        testCounter();
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isInternetExplorer()) {
@@ -508,6 +512,8 @@ export const test_execute_type = (parts) => {
         || parts.platform.isEdge()
         || parts.platform.isFirefox()
         || parts.platform.isOpera()
+        || parts.platform.isDeno()
+        || parts.platform.isNode()
         ) {
           checkEqual('Reflect',           typeName(Reflect));
         } else {
@@ -516,11 +522,12 @@ export const test_execute_type = (parts) => {
 
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
-        } else if (parts.platform.isDeno()) {
         } else if (parts.platform.isChrome()
         || parts.platform.isEdge()
         || parts.platform.isFirefox()
         || parts.platform.isOpera()
+        || parts.platform.isDeno()
+        || parts.platform.isNode()
         ) {
           checkEqual('Intl',              typeName(Intl));
         } else {
