@@ -331,6 +331,7 @@ You can now use the functions of the parts.js object.
 - update test for deno for node
   - Reflect
   - Intl
+- rename datetimeToString >> dateToString
 
 ### 10.5.0
 #### 2021/03/29(Mon)

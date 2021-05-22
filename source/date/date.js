@@ -2,8 +2,8 @@ import TodayJs from './Today.js';
 import isInvalidDateJs from './isInvalidDate.js';
 import _DatetimeJs from './_Datetime.js';
 import DatetimeJs from './Datetime.js';
-import _datetimeToStringJs from './_datetimeToString.js';
-import datetimeToStringJs from './datetimeToString.js';
+import _dateToStringJs from './_dateToString.js';
+import dateToStringJs from './dateToString.js';
 import _dayOfWeekJs from './_dayOfWeek.js';
 import dayOfWeekJs from './dayOfWeek.js';
 import _dayOfWeekEnglishShortJs from './_dayOfWeekEnglishShort.js';
@@ -28,8 +28,8 @@ const dateJs = {
   ...isInvalidDateJs,
   ..._DatetimeJs,
   ...DatetimeJs,
-  ..._datetimeToStringJs,
-  ...datetimeToStringJs,
+  ..._dateToStringJs,
+  ...dateToStringJs,
   ..._dayOfWeekJs,
   ...dayOfWeekJs,
   ..._dayOfWeekEnglishShortJs,
@@ -52,7 +52,7 @@ const dateJs = {
 
 export const {
   _Datetime,
-  _datetimeToString,
+  _dateToString,
   _dayOfWeek,
   _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong,
@@ -66,7 +66,7 @@ export const {
   Today,
   isInvalidDate,
   Datetime,
-  datetimeToString,
+  dateToString,
   dayOfWeek,
   dayOfWeekEnglishShort,
   dayOfWeekEnglishLong,
@@ -80,7 +80,7 @@ export const {
 
 export default {
   _Datetime,
-  _datetimeToString,
+  _dateToString,
   _dayOfWeek,
   _dayOfWeekEnglishShort,
   _dayOfWeekEnglishLong,
@@ -94,7 +94,7 @@ export default {
   Today,
   isInvalidDate,
   Datetime,
-  datetimeToString,
+  dateToString,
   dayOfWeek,
   dayOfWeekEnglishShort,
   dayOfWeekEnglishLong,

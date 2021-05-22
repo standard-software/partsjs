@@ -1,20 +1,20 @@
 import { isDate, isString, isObject, isBoolean } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { _datetimeToString } from './_datetimeToString.js';
+import { _dateToString } from './_dateToString.js';
 
-export const datetimeToString = (
+export const dateToString = (
   date,
   format,
-  rule = _datetimeToString.func.DefaultObject(),
+  rule = _dateToString.func.DefaultObject(),
   isLocal = true,
 ) => {
   if (isObjectParameter(date, 'date, format', 'rule, isLocal')) {
     ({
-      date, format, rule = _datetimeToString.func.DefaultObject(),
+      date, format, rule = _dateToString.func.DefaultObject(),
       isLocal = true,
     } = date);
   } else if (isObjectParameter(format, 'format', 'rule, isLocal')) {
-    ({ format, rule = _datetimeToString.func.DefaultObject(),
+    ({ format, rule = _dateToString.func.DefaultObject(),
       isLocal = true,
     } = format);
   } else if (isObjectParameter(rule, 'rule', 'isLocal')) {
@@ -44,11 +44,11 @@ export const datetimeToString = (
     );
   }
 
-  return _datetimeToString(
+  return _dateToString(
     date, format, rule, isLocal,
   );
 };
 
-datetimeToString.func = _datetimeToString.func;
+dateToString.func = _dateToString.func;
 
-export default { datetimeToString };
+export default { dateToString };

@@ -216,7 +216,7 @@
 .copyProp:[object Function]:function
 .copyProperty:[object Function]:function
 .date._Datetime:[object Function]:function
-.date._datetimeToString:[object Function]:function
+.date._dateToString:[object Function]:function
 .date._dayOfWeek:[object Function]:function
 .date._dayOfWeekEnglishLong:[object Function]:function
 .date._dayOfWeekEnglishShort:[object Function]:function
@@ -227,7 +227,7 @@
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
 .date.Datetime:[object Function]:function
-.date.datetimeToString:[object Function]:function
+.date.dateToString:[object Function]:function
 .date.dayOfWeek:[object Function]:function
 .date.dayOfWeekEnglishLong:[object Function]:function
 .date.dayOfWeekEnglishShort:[object Function]:function
@@ -239,7 +239,7 @@
 .date.nameOfMonthEnglishChar4:[object Function]:function
 .date.nameOfMonthEnglishLong:[object Function]:function
 .date.Today:[object Function]:function
-.datetimeToString:[object Function]:function
+.dateToString:[object Function]:function
 .Enum:[object Function]:function
 .equal:[object Function]:function
 .equalDeep:[object Function]:function

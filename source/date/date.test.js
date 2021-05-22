@@ -12,7 +12,7 @@ export const test_execute_date = (parts) => {
     Today,
     isInvalidDate,
     Datetime,
-    datetimeToString,
+    dateToString,
     dayOfWeek,
     dayOfWeekEnglishShort, dayOfWeekEnglishLong,
     dayOfWeekJapaneseShort, dayOfWeekJapaneseLong,
@@ -312,85 +312,85 @@ export const test_execute_date = (parts) => {
       });
     };
 
-    const test_datetimeToString = () => {
-      it('test_datetimeToString', () => {
+    const test_dateToString = () => {
+      it('test_dateToString', () => {
 
         var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
         checkEqual(
           '2001/02/04 09:05:08.045',
-          datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'),
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'),
         );
         checkEqual(
           '2001/02/04 09:05:08.04',
-          datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'),
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'),
         );
         checkEqual(
           '2001/02/04 09:05:08.0',
-          datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'),
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss.S'),
         );
         checkEqual(
           '01/2/4 9:5:8 am',
-          datetimeToString(dt, 'YY/M/D H:m:s aa'),
+          dateToString(dt, 'YY/M/D H:m:s aa'),
         );
         checkEqual(
           '01/2/4 9:5:8 a',
-          datetimeToString(dt, 'YY/M/D H:m:s a'),
+          dateToString(dt, 'YY/M/D H:m:s a'),
         );
         checkEqual(
           '01/2/4 9:5:8 AM',
-          datetimeToString(dt, 'YY/M/D H:m:s AA'),
+          dateToString(dt, 'YY/M/D H:m:s AA'),
         );
         checkEqual(
           '01/2/4 9:5:8 A',
-          datetimeToString(dt, 'YY/M/D H:m:s A'),
+          dateToString(dt, 'YY/M/D H:m:s A'),
         );
         var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
         checkEqual(
           '01/2/4 16:5:8 pm',
-          datetimeToString(dt, 'YY/M/D H:m:s aa'),
+          dateToString(dt, 'YY/M/D H:m:s aa'),
         );
         checkEqual(
           '01/2/4 16:5:8 p',
-          datetimeToString(dt, 'YY/M/D H:m:s a'),
+          dateToString(dt, 'YY/M/D H:m:s a'),
         );
         checkEqual(
           '01/2/4 16:5:8 PM',
-          datetimeToString(dt, 'YY/M/D H:m:s AA'),
+          dateToString(dt, 'YY/M/D H:m:s AA'),
         );
         checkEqual(
           '01/2/4 16:5:8 P',
-          datetimeToString(dt, 'YY/M/D H:m:s A'),
+          dateToString(dt, 'YY/M/D H:m:s A'),
         );
         checkEqual(
           '01/2/4 16:5:8 Sun',
-          datetimeToString(dt, 'YY/M/D H:m:s ddd'),
+          dateToString(dt, 'YY/M/D H:m:s ddd'),
         );
         checkEqual(
           '01/2/4 16:5:8 Sunday',
-          datetimeToString(dt, 'YY/M/D H:m:s dddd'),
+          dateToString(dt, 'YY/M/D H:m:s dddd'),
         );
         checkEqual(
           '01/2/4 16:5:8 Feb',
-          datetimeToString(dt, 'YY/M/D H:m:s MMM'),
+          dateToString(dt, 'YY/M/D H:m:s MMM'),
         );
         checkEqual(
           '01/2/4 16:5:8 Feb.',
-          datetimeToString(dt, 'YY/M/D H:m:s MMMM'),
+          dateToString(dt, 'YY/M/D H:m:s MMMM'),
         );
         checkEqual(
           '01/2/4 16:5:8 February',
-          datetimeToString(dt, 'YY/M/D H:m:s MMMMM'),
+          dateToString(dt, 'YY/M/D H:m:s MMMMM'),
         );
 
         // quote
         var dt = Datetime(2021, 1, 6);
         checkEqual(
           'YYYYMMDD = 20210106',
-          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'),
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD'),
         );
         checkEqual(
           'YYYYMMDD = 20210106',
-          datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD"),
+          dateToString(dt, "'YYYYMMDD = 'YYYYMMDD"),
         );
 
         // timezone
@@ -418,103 +418,103 @@ export const test_execute_date = (parts) => {
 
         // '+0900' etc
         checkEqual(
-          timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ'),
+          timezoneOffsetHour + timezoneOffsetMin, dateToString(dt, 'ZZ'),
         );
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(
             true,
-            dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1,
+            dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1,
           );
         } else {
           checkEqual(
             true,
-            dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1,
+            dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1,
           );
         }
 
         // '+09:00' etc
         checkEqual(
-          timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z'),
+          timezoneOffsetHour + ':' + timezoneOffsetMin, dateToString(dt, 'Z'),
         );
 
         // exception
         // quote
         var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(() => {
-          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
         checkEqual(true, isThrown(() => {
-          datetimeToString(dt, '"YYYY"MMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYY"MMDD = "YYYYMMDD');
         }));
 
       });
     };
 
-    const test_datetimeToString_MomemtLike = () => {
-      it('test_datetimeToString_MomemtLike', () => {
+    const test_dateToString_MomemtLike = () => {
+      it('test_dateToString_MomemtLike', () => {
 
-        const datetimeToStringMoment = (date, format, isLocal) => {
-          return datetimeToString(
-            date, format, datetimeToString.func.MomentLikeObject(), isLocal,
+        const dateToStringMoment = (date, format, isLocal) => {
+          return dateToString(
+            date, format, dateToString.func.MomentLikeObject(), isLocal,
           );
         };
 
         var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
         checkEqual(
           '2001/02/04 09:05:08.045',
-          datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'),
+          dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'),
         );
         checkEqual(
           '2001/02/04 09:05:08.04',
-          datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'),
+          dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'),
         );
         checkEqual(
           '2001/02/04 09:05:08.0',
-          datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'),
+          dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'),
         );
         checkEqual(
           '01/2/4 9:5:8 am',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s a'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s a'),
         );
         checkEqual(
           '01/2/4 9:5:8 AM',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s A'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s A'),
         );
         var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
         checkEqual(
           '01/2/4 16:5:8 pm',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s a'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s a'),
         );
         checkEqual(
           '01/2/4 16:5:8 PM',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s A'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s A'),
         );
         checkEqual(
           '01/2/4 16:5:8 Sun',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s ddd'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s ddd'),
         );
         checkEqual(
           '01/2/4 16:5:8 Sunday',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s dddd'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s dddd'),
         );
         checkEqual(
           '01/2/4 16:5:8 Feb',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s MMM'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s MMM'),
         );
         checkEqual(
           '01/2/4 16:5:8 February',
-          datetimeToStringMoment(dt, 'YY/M/D H:m:s MMMM'),
+          dateToStringMoment(dt, 'YY/M/D H:m:s MMMM'),
         );
 
         // quote
         var dt = Datetime(2021, 1, 6);
         checkEqual(
           'YYYYMMDD = 20210106',
-          datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'),
+          dateToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'),
         );
         checkEqual(
           'YYYYMMDD = 20210106',
-          datetimeToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD"),
+          dateToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD"),
         );
 
         // timezone
@@ -537,33 +537,33 @@ export const test_execute_date = (parts) => {
 
         // '+0900' etc
         checkEqual(
-          timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ'),
+          timezoneOffsetHour + timezoneOffsetMin, dateToStringMoment(dt, 'ZZ'),
         );
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(
             true,
-            dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1,
+            dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1,
           );
         } else {
           checkEqual(
             true,
-            dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1,
+            dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1,
           );
         }
 
         // '+09:00' etc
         checkEqual(
-          timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z'),
+          timezoneOffsetHour + ':' + timezoneOffsetMin, dateToStringMoment(dt, 'Z'),
         );
 
         // exception
         // quote
         var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(() => {
-          datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
+          dateToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
         checkEqual(true, isThrown(() => {
-          datetimeToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
+          dateToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
         }));
 
       });
@@ -1006,8 +1006,8 @@ export const test_execute_date = (parts) => {
     test_nameOfMonthEnglishChar4();
     test_nameOfMonthEnglishLong();
 
-    test_datetimeToString();
-    test_datetimeToString_MomemtLike();
+    test_dateToString();
+    test_dateToString_MomemtLike();
 
   });
 };

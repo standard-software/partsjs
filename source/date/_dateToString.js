@@ -1,5 +1,5 @@
 /**
- * datetimeToString
+ * dateToString
  */
 import { __includes } from '../compare/__includes.js';
 import { _objectKeys } from '../object/objectKeys.js';
@@ -8,9 +8,9 @@ import { __loop } from '../syntax/__loop.js';
 import { _replaceAllArray } from '../string/_replaceAllArray.js';
 import { isOdd } from '../number/number.js';
 import { _includeCount } from '../string/_includeCount.js';
-import { __detetimeToStringFunc } from '../date/__detetimeToStringFunc.js';
+import { __detetimeToStringFunc } from './__detetimeToStringFunc.js';
 
-export const _datetimeToString = (
+export const _dateToString = (
   date, format, ruleObject = __detetimeToStringFunc.DefaultObject(),
   isLocal = true,
 ) => {
@@ -18,7 +18,7 @@ export const _datetimeToString = (
   const existDoubleQuote = __includes(format, '"');
   if ((existSingleQuote) && (existDoubleQuote)) {
     throw new Error(
-      `_datetimeToString args(format:${format}) exists both singleQuote and doubleQuote`,
+      `_dateToString args(format:${format}) exists both singleQuote and doubleQuote`,
     );
   }
 
@@ -44,7 +44,7 @@ export const _datetimeToString = (
   }
   if (isOdd(_includeCount(format, quoteChar))) {
     throw new Error(
-      `_datetimeToString args(format:${format}) exists odd Quotes`,
+      `_dateToString args(format:${format}) exists odd Quotes`,
     );
   }
 
@@ -55,6 +55,6 @@ export const _datetimeToString = (
   return formatStrs.join('');
 };
 
-_datetimeToString.func = __detetimeToStringFunc;
+_dateToString.func = __detetimeToStringFunc;
 
-export default { _datetimeToString };
+export default { _dateToString };

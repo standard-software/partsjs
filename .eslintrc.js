@@ -67,5 +67,6 @@ module.exports = {
     'no-invalid-this':      ['off'],
     'no-fallthrough':       ['error'],
     'no-plusplus':          ['error'],
+    'object-shorthand':     ['warn'],
   },
 };
