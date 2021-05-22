@@ -20,11 +20,13 @@ import { allMatchAll } from '../compare/allMatchAll.js';
 /**
  * replaceAllArray
  */
-export const replaceAllArray = (str, replaceArray) => {
-  if (isObjectParameter(str, 'str, replaceArray')) {
-    ({ str, replaceArray } = str);
-  } else if (isObjectParameter(replaceArray, 'replaceArray')) {
-    ({ replaceArray } = replaceArray);
+export const replaceAllArray = (str, replaceArray, detail = false) => {
+  if (isObjectParameter(str, 'str, replaceArray', 'detail')) {
+    ({ str, replaceArray, detail = false } = str);
+  } else if (isObjectParameter(replaceArray, 'replaceArray', 'detail')) {
+    ({ replaceArray, detail = false } = replaceArray);
+  } else if (isObjectParameter(detail, 'detail')) {
+    ({ detail } = detail);
   }
 
   if (!isString(str)) {
@@ -41,8 +43,13 @@ export const replaceAllArray = (str, replaceArray) => {
       'replaceAllArray args(replaceArray) element is not string array(length is 2)',
     );
   }
+  if (!isBoolean(detail)) {
+    throw new TypeError(
+      'replaceAllArray args(detail) is not boolean',
+    );
+  }
 
-  return _replaceAllArray(str, replaceArray);
+  return _replaceAllArray(str, replaceArray, detail);
 };
 
 export default {
