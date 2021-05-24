@@ -676,6 +676,21 @@ export const test_execute_convert = (parts) => {
         checkEqual(10,        parseInt('12', 8));
         checkEqual(10,        parseInt('a', 16));
         checkEqual(10,        parseInt('A', 16));
+
+        // Do not specify radix
+        if (
+          parts.platform.isWindowsScriptHost()
+        ) {
+          checkEqual(6,         parseInt('06'));
+          checkEqual(7,         parseInt('07'));
+          checkEqual(0,         parseInt('08'));
+          checkEqual(0,         parseInt('09'));
+        } else {
+          checkEqual(6,         parseInt('06'));
+          checkEqual(7,         parseInt('07'));
+          checkEqual(8,         parseInt('08'));
+          checkEqual(9,         parseInt('09'));
+        }
       });
     };
 

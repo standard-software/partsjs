@@ -338,6 +338,7 @@ You can now use the functions of the parts.js object.
 - update equal support Invalid Date
 - add date.strintToDate
 - add date.INVALID_DATE
+- update parseInt testCode
 
 ### 10.5.0
 #### 2021/03/29(Mon)
