@@ -170,6 +170,19 @@ export const test_execute_compare = (parts) => {
           equal([new Date('2019/11/02')],  [new Date('2019/11/02')]),
           'test_equal date');
 
+        // invalid date
+        checkEqual(true,
+          equal(new Date(''),  new Date('')),
+          'test_equal date');
+        // invalid date in object
+        checkEqual(false,
+          equal({ date: new Date('') },  { date: new Date('') }),
+          'test_equal date');
+        // invalid date in array
+        checkEqual(false,
+          equal([new Date('')],  [new Date('')]),
+          'test_equal date');
+
         // date ignore
         const equalFuncArray = [
           equal.func.regExp,
@@ -611,6 +624,20 @@ export const test_execute_compare = (parts) => {
         checkEqual(true,
           equalDeep([new Date('2019/11/02')],  [new Date('2019/11/02')]),
           'test_equalDeep date');
+
+        // invalid date
+        checkEqual(true,
+          equalDeep(new Date(''),  new Date('')),
+          'test_equal date');
+        // invalid date in object
+        checkEqual(true,
+          equalDeep({ date: new Date('') },  { date: new Date('') }),
+          'test_equal date');
+        // invalid date in array
+        checkEqual(true,
+          equalDeep([new Date('')],  [new Date('')]),
+          'test_equal date');
+
 
         // date ignore
         const equalFuncArray = [
