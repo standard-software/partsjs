@@ -18,6 +18,7 @@ export const test_execute_date = (parts) => {
     dayOfWeekJapaneseShort, dayOfWeekJapaneseLong,
     nameOfMonth,
     nameOfMonthEnglishChar3, nameOfMonthEnglishChar4, nameOfMonthEnglishLong,
+    stringToDate,
   } = parts.date;
 
   const {
@@ -569,6 +570,46 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_stringToDate = () => {
+      it('test_stringToDate', () => {
+
+        checkEqual(new Date(2021, 4, 1),    stringToDate('2021/05/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2021, 3, 30),   stringToDate('2021/04/30', 'YYYY/MM/DD'));
+        checkEqual(new Date(''),            stringToDate('2021/05/00', 'YYYY/MM/DD'));
+        checkEqual(new Date(''),            stringToDate('2021/04/31', 'YYYY/MM/DD'));
+        checkEqual(new Date(''),            stringToDate('2021/5/01',  'YYYY/MM/DD'));
+        checkEqual(new Date(2021, 4, 1),    stringToDate('2021/5/01',  'YYYY/M/DD'));
+        checkEqual(new Date(''),            stringToDate('2021/05/01', 'YYYY/M/DD'));
+        checkEqual(new Date(2021, 10, 1),   stringToDate('2021/11/01', 'YYYY/M/DD'));
+        checkEqual(new Date(2021, 10, 1),   stringToDate('2021/11/01', 'YYYY/MM/DD'));
+
+        checkEqual(new Date(2020, 11, 1),   stringToDate('1-12-20', 'D-M-YY'));
+        checkEqual(new Date(2020, 11, 1),   stringToDate('12-1-20', 'M-D-YY'));
+        checkEqual(new Date(2020, 0, 21),   stringToDate('21-1-20', 'D-M-YY'));
+        checkEqual(new Date(2020, 0, 21),   stringToDate('1-21-20', 'M-D-YY'));
+        checkEqual(new Date(2020, 0, 12),   stringToDate('1-12-20', 'M-D-YY'));
+        checkEqual(new Date(''),            stringToDate('21-1-20', 'M-D-YY'));
+
+        checkEqual(
+          new Date(2021, 4, 1, 3, 4, 5),
+          stringToDate('2021/05/01 03:04:05', 'YYYY/MM/DD HH:mm:ss'),
+        );
+        checkEqual(
+          dateToString(new Date(2021, 4, 1, 11, 8, 9), 'YYYY/MM/DD HH:mm:ss(ddd)'),
+          '2021/05/01 11:08:09(Sat)',
+        );
+        checkEqual(
+          new Date(2021, 4, 1, 11, 8, 9),
+          stringToDate('2021/05/01 11:08:09(Sat)', 'YYYY/MM/DD HH:mm:ss(ddd)'),
+        );
+        checkEqual(
+          new Date(''),
+          stringToDate('2021/05/01 11:08:09(Mon)', 'YYYY/MM/DD HH:mm:ss(ddd)'),
+        );
+
+      });
+    };
+
     const test_dayOfWeek = () => {
       it('test_dayOfWeek', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
@@ -1008,6 +1049,8 @@ export const test_execute_date = (parts) => {
 
     test_dateToString();
     test_dateToString_MomemtLike();
+
+    test_stringToDate();
 
   });
 };

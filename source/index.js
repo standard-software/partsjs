@@ -500,11 +500,13 @@ array.operation = {
 export const {
   Today,
   dateToString,
+  stringToDate,
 } = dateJs;
 
 rootAlias = { ...rootAlias,
   Today,
   dateToString,
+  stringToDate,
 };
 
 export const date = {

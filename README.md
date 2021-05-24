@@ -336,6 +336,8 @@ You can now use the functions of the parts.js object.
 - update replaceAllArray add args detail
 - update number string convert testcode
 - update equal support Invalid Date
+- add date.strintToDate
+- add date.INVALID_DATE
 
 ### 10.5.0
 #### 2021/03/29(Mon)

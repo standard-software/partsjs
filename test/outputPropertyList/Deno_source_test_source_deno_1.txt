@@ -226,6 +226,7 @@
 .date._nameOfMonthEnglishChar3:[object Function]:function
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
+.date._stringToDate:[object Function]:function
 .date.Datetime:[object Function]:function
 .date.dateToString:[object Function]:function
 .date.dayOfWeek:[object Function]:function
@@ -233,11 +234,13 @@
 .date.dayOfWeekEnglishShort:[object Function]:function
 .date.dayOfWeekJapaneseLong:[object Function]:function
 .date.dayOfWeekJapaneseShort:[object Function]:function
+.date.INVALID_DATE:[object Date]:object
 .date.isInvalidDate:[object Function]:function
 .date.nameOfMonth:[object Function]:function
 .date.nameOfMonthEnglishChar3:[object Function]:function
 .date.nameOfMonthEnglishChar4:[object Function]:function
 .date.nameOfMonthEnglishLong:[object Function]:function
+.date.stringToDate:[object Function]:function
 .date.Today:[object Function]:function
 .dateToString:[object Function]:function
 .Enum:[object Function]:function
@@ -748,6 +751,7 @@
 .string.trimBothEnds:[object Function]:function
 .string.trimFirst:[object Function]:function
 .string.trimLast:[object Function]:function
+.stringToDate:[object Function]:function
 .stringToInteger:[object Function]:function
 .stringToIntegerDefault:[object Function]:function
 .stringToNumber:[object Function]:function

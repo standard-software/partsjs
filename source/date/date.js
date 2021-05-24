@@ -1,5 +1,6 @@
 import TodayJs from './Today.js';
 import isInvalidDateJs from './isInvalidDate.js';
+import INVALID_DATE_Js from './INVALID_DATE.js';
 import _DatetimeJs from './_Datetime.js';
 import DatetimeJs from './Datetime.js';
 import _dateToStringJs from './_dateToString.js';
@@ -22,10 +23,13 @@ import _nameOfMonthEnglishChar4Js from './_nameOfMonthEnglishChar4.js';
 import nameOfMonthEnglishChar4Js from './nameOfMonthEnglishChar4.js';
 import _nameOfMonthEnglishLongJs from './_nameOfMonthEnglishLong.js';
 import nameOfMonthEnglishLongJs from './nameOfMonthEnglishLong.js';
+import _stringToDateJs from './_stringToDate.js';
+import stringToDateJs from './stringToDate.js';
 
 const dateJs = {
   ...TodayJs,
   ...isInvalidDateJs,
+  ...INVALID_DATE_Js,
   ..._DatetimeJs,
   ...DatetimeJs,
   ..._dateToStringJs,
@@ -48,6 +52,8 @@ const dateJs = {
   ...nameOfMonthEnglishChar4Js,
   ..._nameOfMonthEnglishLongJs,
   ...nameOfMonthEnglishLongJs,
+  ..._stringToDateJs,
+  ...stringToDateJs,
 };
 
 export const {
@@ -62,6 +68,7 @@ export const {
   _nameOfMonthEnglishChar3,
   _nameOfMonthEnglishChar4,
   _nameOfMonthEnglishLong,
+  _stringToDate,
 
   Today,
   isInvalidDate,
@@ -76,6 +83,10 @@ export const {
   nameOfMonthEnglishChar3,
   nameOfMonthEnglishChar4,
   nameOfMonthEnglishLong,
+  stringToDate,
+
+  INVALID_DATE,
+
 } = dateJs;
 
 export default {
@@ -90,6 +101,7 @@ export default {
   _nameOfMonthEnglishChar3,
   _nameOfMonthEnglishChar4,
   _nameOfMonthEnglishLong,
+  _stringToDate,
 
   Today,
   isInvalidDate,
@@ -104,4 +116,8 @@ export default {
   nameOfMonthEnglishChar3,
   nameOfMonthEnglishChar4,
   nameOfMonthEnglishLong,
+  stringToDate,
+
+  INVALID_DATE,
+
 };
