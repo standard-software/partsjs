@@ -337,6 +337,7 @@ You can now use the functions of the parts.js object.
 - update number string convert testcode
 - update equal support Invalid Date
 - add date.strintToDate
+  - add stringToDateRule
 - add date.INVALID_DATE
 - update parseInt testCode
 
