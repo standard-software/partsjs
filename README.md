@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.6.0 beta
-#### 2021/05/23(Sun)
+#### 2021/05/24(Mon)
 - rename DateTime to Datetime
 - update test for deno for node
   - Reflect
@@ -334,6 +334,7 @@ You can now use the functions of the parts.js object.
 - rename datetimeToString >> dateToString
 - rename detetomeToStringFunc >> dateToStringFunc
 - update replaceAllArray add args detail
+- update number string convert testcode
 
 ### 10.5.0
 #### 2021/03/29(Mon)

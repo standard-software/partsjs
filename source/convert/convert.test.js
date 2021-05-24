@@ -48,25 +48,23 @@ export const test_execute_convert = (parts) => {
         checkEqual('-100000',    String(-1e+5));
         checkEqual('-0.00001',   String(-1e-5));
 
-        // spacial number value
+        // Spacial number
         checkEqual('NaN',         String(NaN));
         checkEqual('Infinity',    String(Infinity));
         checkEqual('-Infinity',   String(-Infinity));
 
-        // other type
+        // Other than number type
         checkEqual('null',            String(null));
         checkEqual('undefined',       String(undefined));
-
         checkEqual('[object Object]', String({}));
         checkEqual('',                String([]));
         checkEqual('1',               String([1]));
         checkEqual('1,2,3',           String([1, 2, 3]));
-
         checkEqual('',                String(''));
         checkEqual('a',               String('a'));
-
         checkEqual('true',            String(true));
         checkEqual('false',           String(false));
+
       });
     };
 
@@ -97,7 +95,7 @@ export const test_execute_convert = (parts) => {
         checkEqual('-100000',   (-1e+5).toString());
         checkEqual('-0.00001',  (-1e-5).toString());
 
-        // spacial number value
+        // Spacial number
         checkEqual('NaN',           NaN.toString());
         checkEqual('Infinity',      Infinity.toString());
         checkEqual('-Infinity',     (-Infinity).toString());
@@ -105,24 +103,21 @@ export const test_execute_convert = (parts) => {
         checkEqual(-Infinity,       -(Infinity.toString()));
         checkEqual(-Infinity,       -('Infinity'));
 
-        // Decimal number other
+        // Non-decimal number
         checkEqual('1010.01',         10.25.toString(2));
         checkEqual('22.1',            10.25.toString(4));
         checkEqual('12.2',            10.25.toString(8));
         checkEqual('a.4',             10.25.toString(16));
 
-        // other type
+        // Other than number type
         checkEqual(true,              isThrown(() => (null).toString()));
         checkEqual(true,              isThrown(() => (undefined).toString()));
-
         checkEqual('[object Object]', {}.toString());
         checkEqual('',                [].toString());
         checkEqual('1',               [1].toString());
         checkEqual('1,2,3',           [1, 2, 3].toString());
-
         checkEqual('',                ''.toString());
         checkEqual('a',               'a'.toString());
-
         checkEqual('true',            true.toString());
         checkEqual('false',           false.toString());
 
@@ -188,10 +183,22 @@ export const test_execute_convert = (parts) => {
         checkEqual('-11',       numberToString(-3,      2));
         checkEqual('-1111',     numberToString(-15,     2));
 
-        // spacial value
+        // Spacial number
         checkEqual(true,    isThrown(() => numberToString(NaN)));
         checkEqual(true,    isThrown(() => numberToString(Infinity)));
         checkEqual(true,    isThrown(() => numberToString(-Infinity)));
+
+        // Other than number type
+        checkEqual(true,    isThrown(() => numberToString( null )));
+        checkEqual(true,    isThrown(() => numberToString( undefined )));
+        checkEqual(true,    isThrown(() => numberToString( {} )));
+        checkEqual(true,    isThrown(() => numberToString( [] )));
+        checkEqual(true,    isThrown(() => numberToString( [1] )));
+        checkEqual(true,    isThrown(() => numberToString( [1, 2, 3] )));
+        checkEqual(true,    isThrown(() => numberToString( '' )));
+        checkEqual(true,    isThrown(() => numberToString( 'a' )));
+        checkEqual(true,    isThrown(() => numberToString( true )));
+        checkEqual(true,    isThrown(() => numberToString( false )));
 
         // Exception
         checkEqual(true,    isThrown(() => numberToString('123', 10)));
@@ -210,20 +217,6 @@ export const test_execute_convert = (parts) => {
           radix: 2,
         }));
 
-        // other type
-        checkEqual(true,    isThrown(() => numberToString( null )));
-        checkEqual(true,    isThrown(() => numberToString( undefined )));
-
-        checkEqual(true,    isThrown(() => numberToString( {} )));
-        checkEqual(true,    isThrown(() => numberToString( [] )));
-        checkEqual(true,    isThrown(() => numberToString( [1] )));
-        checkEqual(true,    isThrown(() => numberToString( [1, 2, 3] )));
-
-        checkEqual(true,    isThrown(() => numberToString( '' )));
-        checkEqual(true,    isThrown(() => numberToString( 'a' )));
-
-        checkEqual(true,    isThrown(() => numberToString( true )));
-        checkEqual(true,    isThrown(() => numberToString( false )));
       });
     };
 
@@ -286,11 +279,29 @@ export const test_execute_convert = (parts) => {
         checkEqual('-11',       valueToString(-3,      2));
         checkEqual('-1111',     valueToString(-15,     2));
 
-        // spacial number value
+        // Spacial number
         testCounter(0);
         checkEqual('NaN',         valueToString(NaN));
         checkEqual('Infinity',    valueToString(Infinity));
         checkEqual('-Infinity',  valueToString(-Infinity));
+
+        // Non-decimal number
+        checkEqual('1010.01',         valueToString(10.25, 2));
+        checkEqual('22.1',            valueToString(10.25, 4));
+        checkEqual('12.2',            valueToString(10.25, 8));
+        checkEqual('a.4',             valueToString(10.25, 16));
+
+        // Other than number type
+        checkEqual('null',            valueToString(null));
+        checkEqual('undefined',       valueToString(undefined));
+        checkEqual('[object Object]', valueToString({}));
+        checkEqual('',                valueToString([]));
+        checkEqual('1',               valueToString([1]));
+        checkEqual('1,2,3',           valueToString([1, 2, 3]));
+        checkEqual('',                valueToString(''));
+        checkEqual('a',               valueToString('a'));
+        checkEqual('true',            valueToString(true));
+        checkEqual('false',           valueToString(false));
 
         // Exception
         checkEqual(false,   isThrown(() => valueToString('123', 10)));
@@ -309,26 +320,6 @@ export const test_execute_convert = (parts) => {
           radix: 2,
         }));
 
-        // Decimal number other
-        checkEqual('1010.01',         valueToString(10.25, 2));
-        checkEqual('22.1',            valueToString(10.25, 4));
-        checkEqual('12.2',            valueToString(10.25, 8));
-        checkEqual('a.4',             valueToString(10.25, 16));
-
-        // other type
-        checkEqual('null',            valueToString(null));
-        checkEqual('undefined',       valueToString(undefined));
-
-        checkEqual('[object Object]', valueToString({}));
-        checkEqual('',                valueToString([]));
-        checkEqual('1',               valueToString([1]));
-        checkEqual('1,2,3',           valueToString([1, 2, 3]));
-
-        checkEqual('',                valueToString(''));
-        checkEqual('a',               valueToString('a'));
-
-        checkEqual('true',            valueToString(true));
-        checkEqual('false',           valueToString(false));
       });
     };
 
@@ -376,7 +367,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.45,    Number('123.45'));
         checkEqual(NaN,       Number('123.4.5'));
 
-        // string default value
+        // string
         checkEqual(NaN,       Number('abc'));
 
         // space string
@@ -385,25 +376,25 @@ export const test_execute_convert = (parts) => {
         checkEqual(0,         Number('　'));    // ?
 
         // exponential notation
-        checkEqual(3.14,  Number(3.14));
-        checkEqual(3.14,  Number('3.14'));
-        checkEqual(3.14,  Number('314e-2'));
-        checkEqual(3.14,  Number('0.0314E+2'));
-        checkEqual(0.14,  Number('.14'));
+        checkEqual(3.14,                Number(3.14));
+        checkEqual(3.14,                Number('3.14'));
+        checkEqual(3.14,                Number('314e-2'));
+        checkEqual(3.14,                Number('0.0314E+2'));
+        checkEqual(0.14,                Number('.14'));
         checkEqual(0.00000000000000001, Number('1e-17'));
-        checkEqual(1e-17, Number('1e-17'));
+        checkEqual(1e-17,               Number('1e-17'));
 
         // exponential notation detail
-        checkEqual(1,       Number('1.'));
-        checkEqual(NaN,     Number('1.1e'));
-        checkEqual(NaN,     Number('1.1e+'));
-        checkEqual(100000,  Number('1e+5'));
-        checkEqual(0.00001, Number('1e-5'));
-        checkEqual(NaN,     Number('1.e'));
-        checkEqual(NaN,     Number('1.e+'));
-        checkEqual(100000,  Number('1.e+5'));
+        checkEqual(1,                   Number('1.'));
+        checkEqual(NaN,                 Number('1.1e'));
+        checkEqual(NaN,                 Number('1.1e+'));
+        checkEqual(100000,              Number('1e+5'));
+        checkEqual(0.00001,             Number('1e-5'));
+        checkEqual(NaN,                 Number('1.e'));
+        checkEqual(NaN,                 Number('1.e+'));
+        checkEqual(100000,              Number('1.e+5'));
 
-        // Number different
+        // Non-decimal number
         checkEqual(291,       Number('0x123'));
         if (parts.platform.isGasRhino()) {
           checkEqual(291,       Number('+0x123'));
@@ -412,24 +403,26 @@ export const test_execute_convert = (parts) => {
           checkEqual(NaN,       Number('+0x123'));
           checkEqual(NaN,       Number('-0x123'));
         }
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,        Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN,        Number('0o123'));
-        } else if (parts.platform.isGasRhino()) {
+        if (
+          parts.platform.isWindowsScriptHost()
+          || parts.platform.isInternetExplorer()
+          || parts.platform.isGasRhino()
+        ) {
           checkEqual(NaN,        Number('0o123'));
         } else {
           checkEqual(83,        Number('0o123'));
         }
-
         checkEqual(NaN,       Number('+0o123'));
         checkEqual(NaN,       Number('-0o123'));
 
+        // Spacial number
         checkEqual(Infinity,  Number('Infinity'));
         checkEqual(NaN,       Number('infinity'));
         checkEqual(NaN,       Number('inf'));
         checkEqual(NaN,       Number('info'));
+        checkEqual(NaN,       Number('NaN'));
+        checkEqual(NaN,       Number('nan'));
+        checkEqual(NaN,       Number('na'));
 
         // Number
         checkEqual(123,       Number(123));
@@ -440,7 +433,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(-Infinity, Number(-Infinity));
         checkEqual(NaN,       Number(NaN));
 
-        // Other
+        // Other than number type
         checkEqual(0,         Number(null));        // !
         checkEqual(NaN,       Number(undefined));
         checkEqual(NaN,       Number({}));
@@ -449,6 +442,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(1,         Number([1]));         // ?
         checkEqual(123,       Number([123]));       // ?
         checkEqual(NaN,       Number([1, 2]));
+
       });
     };
 
@@ -486,63 +480,62 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.4,     parseFloat('　123.4'));
         checkEqual(123.4,     parseFloat('123.4　'));
         checkEqual(123.4,     parseFloat('　123.4　'));
-        checkEqual(123.4,       parseFloat('123.4 0'));
-        checkEqual(0,           parseFloat('0 123.4'));
-        checkEqual(1,           parseFloat('1 123.4'));
-        checkEqual(123,         parseFloat('123 .4'));
-        checkEqual(123,         parseFloat('123. 4'));
-        checkEqual(123.4,       parseFloat('123.4a'));
-        checkEqual(NaN,         parseFloat('a123.4'));
-        checkEqual(123.45,      parseFloat('123.45'));
-        checkEqual(123.4,       parseFloat('123.4.5'));
+        checkEqual(123.4,     parseFloat('123.4 0'));
+        checkEqual(0,         parseFloat('0 123.4'));
+        checkEqual(1,         parseFloat('1 123.4'));
+        checkEqual(123,       parseFloat('123 .4'));
+        checkEqual(123,       parseFloat('123. 4'));
+        checkEqual(123.4,     parseFloat('123.4a'));
+        checkEqual(NaN,       parseFloat('a123.4'));
+        checkEqual(123.45,    parseFloat('123.45'));
+        checkEqual(123.4,     parseFloat('123.4.5'));
 
-        // string default value
-        checkEqual(NaN,         parseFloat('abc'));
+        // string
+        checkEqual(NaN,       parseFloat('abc'));
 
         // space string
-        checkEqual(NaN,         parseFloat(''));
-        checkEqual(NaN,         parseFloat(' '));
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN,         parseFloat('　'));
-        } else {
-          checkEqual(NaN,         parseFloat('　'));
-        }
+        checkEqual(NaN,       parseFloat(''));
+        checkEqual(NaN,       parseFloat(' '));
+        checkEqual(NaN,       parseFloat('　'));
 
         // exponential notation
-        checkEqual(3.14,  parseFloat(3.14));
-        checkEqual(3.14,  parseFloat('3.14'));
-        checkEqual(3.14,  parseFloat('314e-2'));
-        checkEqual(3.14,  parseFloat('0.0314E+2'));
-        checkEqual(0.14,  parseFloat('.14'));
+        checkEqual(3.14,                parseFloat(3.14));
+        checkEqual(3.14,                parseFloat('3.14'));
+        checkEqual(3.14,                parseFloat('314e-2'));
+        checkEqual(3.14,                parseFloat('0.0314E+2'));
+        checkEqual(0.14,                parseFloat('.14'));
         checkEqual(0.00000000000000001, parseFloat('1e-17'));
-        checkEqual(1e-17, parseFloat('1e-17'));
+        checkEqual('1e-17',   0.00000000000000001.toString());
+        checkEqual(1e-17,               parseFloat('1e-17'));
 
         // exponential notation detail
-        checkEqual(1,       parseFloat('1.'));
-        checkEqual(1.1,     parseFloat('1.1e'));
-        checkEqual(1.1,     parseFloat('1.1e+'));
-        checkEqual(100000,  parseFloat('1e+5'));
-        checkEqual(0.00001, parseFloat('1e-5'));
-        checkEqual(1,       parseFloat('1.e'));
-        checkEqual(1,       parseFloat('1.e+'));
-        checkEqual(100000,  parseFloat('1.e+5'));
+        checkEqual(1,                   parseFloat('1.'));
+        checkEqual(1.1,                 parseFloat('1.1e'));
+        checkEqual(1.1,                 parseFloat('1.1e+'));
+        checkEqual(100000,              parseFloat('1e+5'));
+        checkEqual(0.00001,             parseFloat('1e-5'));
+        checkEqual(1,                   parseFloat('1.e'));
+        checkEqual(1,                   parseFloat('1.e+'));
+        checkEqual(100000,              parseFloat('1.e+5'));
 
-        // parseFloat different
+        // Non-decimal number
         checkEqual(0,         parseFloat('0x123'));
         checkEqual(0,         parseFloat('+0x123'));
-        checkEqual(-0,         parseFloat('-0x123'));
-
+        checkEqual(-0,        parseFloat('-0x123'));
         checkEqual(0,         parseFloat('0o123'));
-
         checkEqual(0,         parseFloat('+0o123'));
         checkEqual(-0,        parseFloat('-0o123'));
 
+        // Spacial number
         checkEqual(Infinity,  parseFloat('Infinity'));
         checkEqual(NaN,       parseFloat('infinity'));
         checkEqual(NaN,       parseFloat('inf'));
         checkEqual(NaN,       parseFloat('info'));
+        checkEqual(NaN,       parseFloat('NaN'));
+        checkEqual(NaN,       parseFloat('nan'));
+        checkEqual(NaN,       parseFloat('na'));
 
-        // parseFloat
+        // Number
         checkEqual(123,       parseFloat(123));
         checkEqual(-123,      parseFloat(-123));
         checkEqual(1.23,      parseFloat(1.23));
@@ -551,7 +544,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(-Infinity, parseFloat(-Infinity));
         checkEqual(NaN,       parseFloat(NaN));
 
-        // Other
+        // Other than number type
         checkEqual(NaN,       parseFloat(null));
         checkEqual(NaN,       parseFloat(undefined));
         checkEqual(NaN,       parseFloat({}));
@@ -586,31 +579,31 @@ export const test_execute_convert = (parts) => {
         checkEqual(NaN,       parseInt10('a123'));
 
         // Decimal
-        checkEqual(123,     parseInt10('123.4'));
-        checkEqual(123,     parseInt10('0123.4'));
-        checkEqual(123,     parseInt10('+123.4'));
-        checkEqual(-123,    parseInt10('-0123.4'));
-        checkEqual(123,     parseInt10('123.5'));
-        checkEqual(123,     parseInt10('0123.5'));
-        checkEqual(123,     parseInt10('+123.5'));
-        checkEqual(-123,    parseInt10('-0123.5'));
-        checkEqual(123,     parseInt10(' 123.4'));
-        checkEqual(123,     parseInt10('123.4 '));
-        checkEqual(123,     parseInt10(' 123.4 '));
-        checkEqual(123,     parseInt10('　123.4'));
-        checkEqual(123,     parseInt10('123.4　'));
-        checkEqual(123,     parseInt10('　123.4　'));
-        checkEqual(123,         parseInt10('123.4 0'));
-        checkEqual(0,           parseInt10('0 123.4'));
-        checkEqual(1,           parseInt10('1 123.4'));
-        checkEqual(123,         parseInt10('123 .4'));
-        checkEqual(123,         parseInt10('123. 4'));
-        checkEqual(123,         parseInt10('123.4a'));
-        checkEqual(NaN,         parseInt10('a123.4'));
-        checkEqual(123,         parseInt10('123.45'));
-        checkEqual(123,         parseInt10('123.4.5'));
+        checkEqual(123,       parseInt10('123.4'));
+        checkEqual(123,       parseInt10('0123.4'));
+        checkEqual(123,       parseInt10('+123.4'));
+        checkEqual(-123,      parseInt10('-0123.4'));
+        checkEqual(123,       parseInt10('123.5'));
+        checkEqual(123,       parseInt10('0123.5'));
+        checkEqual(123,       parseInt10('+123.5'));
+        checkEqual(-123,      parseInt10('-0123.5'));
+        checkEqual(123,       parseInt10(' 123.4'));
+        checkEqual(123,       parseInt10('123.4 '));
+        checkEqual(123,       parseInt10(' 123.4 '));
+        checkEqual(123,       parseInt10('　123.4'));
+        checkEqual(123,       parseInt10('123.4　'));
+        checkEqual(123,       parseInt10('　123.4　'));
+        checkEqual(123,       parseInt10('123.4 0'));
+        checkEqual(0,         parseInt10('0 123.4'));
+        checkEqual(1,         parseInt10('1 123.4'));
+        checkEqual(123,       parseInt10('123 .4'));
+        checkEqual(123,       parseInt10('123. 4'));
+        checkEqual(123,       parseInt10('123.4a'));
+        checkEqual(NaN,       parseInt10('a123.4'));
+        checkEqual(123,       parseInt10('123.45'));
+        checkEqual(123,       parseInt10('123.4.5'));
 
-        // string default value
+        // string
         checkEqual(NaN,         parseInt10('abc'));
 
         // space string
@@ -641,22 +634,24 @@ export const test_execute_convert = (parts) => {
         checkEqual(1,       parseInt10('1.e+'));
         checkEqual(1,       parseInt10('1.e+5'));
 
-        // parseFloat different
+        // Non-decimal number
         checkEqual(0,         parseInt10('0x123'));
         checkEqual(0,         parseInt10('+0x123'));
         checkEqual(-0,        parseInt10('-0x123'));
-
         checkEqual(0,         parseInt10('0o123'));
-
         checkEqual(0,         parseInt10('+0o123'));
         checkEqual(-0,        parseInt10('-0o123'));
 
+        // Spacial number
         checkEqual(NaN,       parseInt10('Infinity'));     // ?
         checkEqual(NaN,       parseInt10('infinity'));
         checkEqual(NaN,       parseInt10('inf'));
         checkEqual(NaN,       parseInt10('info'));
+        checkEqual(NaN,       parseInt10('NaN'));
+        checkEqual(NaN,       parseInt10('nan'));
+        checkEqual(NaN,       parseInt10('na'));
 
-        // parseFloat
+        // Number
         checkEqual(123,       parseInt10(123));
         checkEqual(-123,      parseInt10(-123));
         checkEqual(1,         parseInt10(1.23));
@@ -665,7 +660,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(NaN,       parseInt10(-Infinity));
         checkEqual(NaN,       parseInt10(NaN));
 
-        // Other
+        // Other than number type
         checkEqual(NaN,       parseInt10(null));
         checkEqual(NaN,       parseInt10(undefined));
         checkEqual(NaN,       parseInt10({}));
@@ -675,7 +670,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,       parseInt10([123]));
         checkEqual(1,         parseInt10([1, 2]));
 
-        // Decimal number other
+        // Non-decimal number only parseInt
         checkEqual(10,        parseInt('1010', 2));
         checkEqual(10,        parseInt('22', 4));
         checkEqual(10,        parseInt('12', 8));
@@ -725,34 +720,34 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.45,    stringToNumber('123.45'));
         checkEqual(true,      isThrown(() => stringToNumber('123.4.5')));
 
-        // // string  value
+        // string
         checkEqual(true,      isThrown(() => stringToNumber('abc')));
 
-        // // space string
+        // space string
         checkEqual(true,      isThrown(() => stringToNumber('')));
         checkEqual(true,      isThrown(() => stringToNumber(' ')));
         checkEqual(true,      isThrown(() => stringToNumber('　')));
 
-        // // exponential notation
-        checkEqual(3.14,      stringToNumber('3.14'));
-        checkEqual(3.14,      stringToNumber('314e-2'));
-        checkEqual(3.14,      stringToNumber('0.0314E+2'));
-        checkEqual(0.14,      stringToNumber('.14'));
+        // exponential notation
+        checkEqual(3.14,                     stringToNumber('3.14'));
+        checkEqual(3.14,                     stringToNumber('314e-2'));
+        checkEqual(3.14,                     stringToNumber('0.0314E+2'));
+        checkEqual(0.14,                     stringToNumber('.14'));
+        checkEqual(0.00000000000000001,      stringToNumber('1e-17'));
         checkEqual('1e-17',   0.00000000000000001.toString());
-        checkEqual(0.00000000000000001, stringToNumber('1e-17'));
-        checkEqual(1e-17, stringToNumber('1e-17'));
+        checkEqual(1e-17,                    stringToNumber('1e-17'));
 
         // exponential notation detail
-        checkEqual(1,         stringToNumber('1.'));
+        checkEqual(1,                        stringToNumber('1.'));
         checkEqual(true,      isThrown(() => stringToNumber('1.1e')));
         checkEqual(true,      isThrown(() => stringToNumber('1.1e+')));
-        checkEqual(100000,    stringToNumber('1e+5'));
-        checkEqual(0.00001,   stringToNumber('1e-5'));
+        checkEqual(100000,                   stringToNumber('1e+5'));
+        checkEqual(0.00001,                  stringToNumber('1e-5'));
         checkEqual(true,      isThrown(() => stringToNumber('1.e')));
         checkEqual(true,      isThrown(() => stringToNumber('1.e+')));
         checkEqual(100000,    stringToNumber('1.e+5'));
 
-        // Number different
+        // Non-decimal number
         checkEqual(true,      isThrown(() => stringToNumber('0x123')));
         checkEqual(true,      isThrown(() => stringToNumber('+0x123')));
         checkEqual(true,      isThrown(() => stringToNumber('-0x123')));
@@ -760,10 +755,33 @@ export const test_execute_convert = (parts) => {
         checkEqual(true,      isThrown(() => stringToNumber('+0x123')));
         checkEqual(true,      isThrown(() => stringToNumber('-0x123')));
 
+        // Spacial number
         checkEqual(true,      isThrown(() => stringToNumber('Infinity')));
         checkEqual(true,      isThrown(() => stringToNumber('infinity')));
         checkEqual(true,      isThrown(() => stringToNumber('inf')));
         checkEqual(true,      isThrown(() => stringToNumber('info')));
+        checkEqual(true,      isThrown(() => stringToNumber('NaN')));
+        checkEqual(true,      isThrown(() => stringToNumber('nan')));
+        checkEqual(true,      isThrown(() => stringToNumber('na')));
+
+        // Number
+        checkEqual(true,      isThrown(() => stringToNumber(123)));
+        checkEqual(true,      isThrown(() => stringToNumber(-123)));
+        checkEqual(true,      isThrown(() => stringToNumber(1.23)));
+        checkEqual(true,      isThrown(() => stringToNumber(-1.23)));
+        checkEqual(true,      isThrown(() => stringToNumber(Infinity)));
+        checkEqual(true,      isThrown(() => stringToNumber(-Infinity)));
+        checkEqual(true,      isThrown(() => stringToNumber(NaN)));
+
+        // Other than number type
+        checkEqual(true,      isThrown(() => stringToNumber(null)));
+        checkEqual(true,      isThrown(() => stringToNumber(undefined)));
+        checkEqual(true,      isThrown(() => stringToNumber({})));
+        checkEqual(true,      isThrown(() => stringToNumber({ a: 1 })));
+        checkEqual(true,      isThrown(() => stringToNumber([])));
+        checkEqual(true,      isThrown(() => stringToNumber([1])));
+        checkEqual(true,      isThrown(() => stringToNumber([123])));
+        checkEqual(true,      isThrown(() => stringToNumber([1, 2])));
 
         // Exception
         let i = 0;
@@ -821,7 +839,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.45,    stringToNumberDefault('123.45'));
         checkEqual(undefined, stringToNumberDefault('123.4.5'));
 
-        // string default value
+        // string
         checkEqual(undefined, stringToNumberDefault('abc'));
         checkEqual(null,      stringToNumberDefault('abc', null));
         checkEqual(NaN,       stringToNumberDefault('abc', NaN));
@@ -832,13 +850,13 @@ export const test_execute_convert = (parts) => {
         checkEqual(undefined, stringToNumberDefault('　'));
 
         // exponential notation
-        checkEqual(3.14,      stringToNumberDefault('3.14'));
-        checkEqual(3.14,      stringToNumberDefault('314e-2'));
-        checkEqual(3.14,      stringToNumberDefault('0.0314E+2'));
-        checkEqual(0.14,      stringToNumberDefault('.14'));
-        checkEqual('1e-17',   0.00000000000000001.toString());
+        checkEqual(3.14,                stringToNumberDefault('3.14'));
+        checkEqual(3.14,                stringToNumberDefault('314e-2'));
+        checkEqual(3.14,                stringToNumberDefault('0.0314E+2'));
+        checkEqual(0.14,                stringToNumberDefault('.14'));
         checkEqual(0.00000000000000001, stringToNumberDefault('1e-17'));
-        checkEqual(1e-17, stringToNumberDefault('1e-17'));
+        checkEqual('1e-17',   0.00000000000000001.toString());
+        checkEqual(1e-17,               stringToNumberDefault('1e-17'));
 
         // exponential notation detail
         checkEqual(1,         stringToNumberDefault('1.'));
@@ -850,7 +868,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(undefined, stringToNumberDefault('1.e+'));
         checkEqual(100000,    stringToNumberDefault('1.e+5'));
 
-        // Number different
+        // Non-decimal number
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
         checkEqual(undefined, stringToNumberDefault('-0x123'));
@@ -858,10 +876,33 @@ export const test_execute_convert = (parts) => {
         checkEqual(undefined, stringToNumberDefault('+0x123'));
         checkEqual(undefined, stringToNumberDefault('-0x123'));
 
+        // Spacial number
         checkEqual(undefined, stringToNumberDefault('Infinity'));
         checkEqual(undefined, stringToNumberDefault('infinity'));
         checkEqual(undefined, stringToNumberDefault('inf'));
         checkEqual(undefined, stringToNumberDefault('info'));
+        checkEqual(undefined, stringToNumberDefault('NaN'));
+        checkEqual(undefined, stringToNumberDefault('nan'));
+        checkEqual(undefined, stringToNumberDefault('na'));
+
+        // Number
+        checkEqual(true,      isThrown(() => stringToNumberDefault(123)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(-123)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(1.23)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(-1.23)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(Infinity)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(-Infinity)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(NaN)));
+
+        // Other than number type
+        checkEqual(true,      isThrown(() => stringToNumberDefault(null)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault(undefined)));
+        checkEqual(true,      isThrown(() => stringToNumberDefault({})));
+        checkEqual(true,      isThrown(() => stringToNumberDefault({ a: 1 })));
+        checkEqual(true,      isThrown(() => stringToNumberDefault([])));
+        checkEqual(true,      isThrown(() => stringToNumberDefault([1])));
+        checkEqual(true,      isThrown(() => stringToNumberDefault([123])));
+        checkEqual(true,      isThrown(() => stringToNumberDefault([1, 2])));
 
         // Exception
         let i = 0;
@@ -884,6 +925,7 @@ export const test_execute_convert = (parts) => {
 
     const test_valueToNumber = () => {
       it('test_valueToNumber', () => {
+
         // Integer
         checkEqual(123,       valueToNumber('123'));
         checkEqual(123,       valueToNumber('0123'));
@@ -926,6 +968,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123.45,    valueToNumber('123.45'));
         checkEqual(NaN,       valueToNumber('123.4.5'));
 
+        // string
+        checkEqual(NaN,      valueToNumber('abc'));
+
         // space string
         checkEqual(NaN,       valueToNumber(''));
         checkEqual(NaN,       valueToNumber(' '));
@@ -937,6 +982,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(3.14,      valueToNumber('314e-2'));
         checkEqual(3.14,      valueToNumber('0.0314E+2'));
         checkEqual(0.14,      valueToNumber('.14'));
+        checkEqual(0.00000000000000001,      valueToNumber('1e-17'));
+        checkEqual('1e-17',   0.00000000000000001.toString());
+        checkEqual(1e-17,                    valueToNumber('1e-17'));
 
         // exponential notation detail
         checkEqual(1,         valueToNumber('1.'));
@@ -948,7 +996,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(NaN,       valueToNumber('1.e+'));
         checkEqual(100000,    valueToNumber('1.e+5'));
 
-        // Number different
+        // Non-decimal number
         checkEqual(NaN,       valueToNumber('0x123'));
         checkEqual(NaN,       valueToNumber('+0x123'));
         checkEqual(NaN,       valueToNumber('-0x123'));
@@ -956,10 +1004,14 @@ export const test_execute_convert = (parts) => {
         checkEqual(NaN,       valueToNumber('+0o123'));
         checkEqual(NaN,       valueToNumber('-0o123'));
 
+        // Spacial number
         checkEqual(NaN,       valueToNumber('Infinity'));
         checkEqual(NaN,       valueToNumber('infinity'));
         checkEqual(NaN,       valueToNumber('inf'));
         checkEqual(NaN,       valueToNumber('info'));
+        checkEqual(NaN,       valueToNumber('NaN'));
+        checkEqual(NaN,       valueToNumber('nan'));
+        checkEqual(NaN,       valueToNumber('na'));
 
         // Number
         checkEqual(123,       valueToNumber(123));
@@ -969,6 +1021,16 @@ export const test_execute_convert = (parts) => {
         checkEqual(Infinity,  valueToNumber(Infinity));
         checkEqual(-Infinity, valueToNumber(-Infinity));
         checkEqual(NaN,       valueToNumber(NaN));
+
+        // Other than number type
+        checkEqual(NaN,       valueToNumber(null));
+        checkEqual(NaN,       valueToNumber(undefined));
+        checkEqual(NaN,       valueToNumber({}));
+        checkEqual(NaN,       valueToNumber({ a: 1 }));
+        checkEqual(NaN,       valueToNumber([]));
+        checkEqual(NaN,       valueToNumber([1]));
+        checkEqual(NaN,       valueToNumber([123]));
+        checkEqual(NaN,       valueToNumber([1, 2]));
 
         // Default
         checkEqual(null,      valueToNumberDefault('', null));
@@ -999,15 +1061,6 @@ export const test_execute_convert = (parts) => {
           },
         ));
 
-        // Other
-        checkEqual(NaN,       valueToNumber(null));
-        checkEqual(NaN,       valueToNumber(undefined));
-        checkEqual(NaN,       valueToNumber({}));
-        checkEqual(NaN,       valueToNumber({ a: 1 }));
-        checkEqual(NaN,       valueToNumber([]));
-        checkEqual(NaN,       valueToNumber([1]));
-        checkEqual(NaN,       valueToNumber([123]));
-        checkEqual(NaN,       valueToNumber([1, 2]));
       });
     };
 
@@ -1019,9 +1072,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,       stringToInteger('0123'));
         checkEqual(123,       stringToInteger('+123'));
         checkEqual(-123,      stringToInteger('-0123'));
-
         checkEqual(true,      isThrown(() => stringToInteger(' 123')));
-
         checkEqual(true,      isThrown(() => stringToInteger(' 123')));
         checkEqual(true,      isThrown(() => stringToInteger('123 ')));
         checkEqual(true,      isThrown(() => stringToInteger(' 123 ')));
@@ -1103,21 +1154,65 @@ export const test_execute_convert = (parts) => {
         checkEqual(-3,        stringToInteger('-11',        2   ));
         checkEqual(-15,       stringToInteger('-1111',      2   ));
 
-        // // Default Value
+        // string
         checkEqual(true,      isThrown(() => stringToInteger('abc')));
-        // checkEqual(null,      stringToInteger('abc', null,  10));
-        // checkEqual(NaN,       stringToInteger('abc', NaN,   10));
 
+        // space string
+        checkEqual(true,      isThrown(() => stringToInteger('')));
+        checkEqual(true,      isThrown(() => stringToInteger(' ')));
+        checkEqual(true,      isThrown(() => stringToInteger('　')));
+
+        // exponential notation
+        checkEqual(true,      isThrown(() => stringToInteger('3.14')));
+        checkEqual(true,      isThrown(() => stringToInteger('314e-2')));
+        checkEqual(true,      isThrown(() => stringToInteger('0.0314E+2')));
+        checkEqual(true,      isThrown(() => stringToInteger('.14')));
+        checkEqual(true,      isThrown(() => stringToInteger('1e-17')));
+
+        // exponential notation detail
+        checkEqual(true,      isThrown(() => stringToInteger('1.')));
+        checkEqual(true,      isThrown(() => stringToInteger('1.1e')));
+        checkEqual(true,      isThrown(() => stringToInteger('1.1e+')));
+        checkEqual(true,      isThrown(() => stringToInteger('1e+5')));
+        checkEqual(true,      isThrown(() => stringToInteger('1e-5')));
+        checkEqual(true,      isThrown(() => stringToInteger('1.e')));
+        checkEqual(true,      isThrown(() => stringToInteger('1.e+')));
+
+        // Non-decimal number
         checkEqual(true,      isThrown(() => stringToInteger('0x123')));
         checkEqual(true,      isThrown(() => stringToInteger('+0x123')));
         checkEqual(true,      isThrown(() => stringToInteger('-0x123')));
         checkEqual(true,      isThrown(() => stringToInteger('0x123')));
         checkEqual(true,      isThrown(() => stringToInteger('+0x123')));
         checkEqual(true,      isThrown(() => stringToInteger('-0x123')));
+
+        // Spacial number
         checkEqual(true,      isThrown(() => stringToInteger('Infinity')));
         checkEqual(true,      isThrown(() => stringToInteger('infinity')));
         checkEqual(true,      isThrown(() => stringToInteger('inf')));
         checkEqual(true,      isThrown(() => stringToInteger('info')));
+        checkEqual(true,      isThrown(() => stringToInteger('NaN')));
+        checkEqual(true,      isThrown(() => stringToInteger('nan')));
+        checkEqual(true,      isThrown(() => stringToInteger('na')));
+
+        // Number
+        checkEqual(true,      isThrown(() => stringToInteger(123)));
+        checkEqual(true,      isThrown(() => stringToInteger(-123)));
+        checkEqual(true,      isThrown(() => stringToInteger(1.23)));
+        checkEqual(true,      isThrown(() => stringToInteger(-1.23)));
+        checkEqual(true,      isThrown(() => stringToInteger(Infinity)));
+        checkEqual(true,      isThrown(() => stringToInteger(-Infinity)));
+        checkEqual(true,      isThrown(() => stringToInteger(NaN)));
+
+        // Other than number type
+        checkEqual(true,      isThrown(() => stringToInteger(null)));
+        checkEqual(true,      isThrown(() => stringToInteger(undefined)));
+        checkEqual(true,      isThrown(() => stringToInteger({})));
+        checkEqual(true,      isThrown(() => stringToInteger({ a: 1 })));
+        checkEqual(true,      isThrown(() => stringToInteger([])));
+        checkEqual(true,      isThrown(() => stringToInteger([1])));
+        checkEqual(true,      isThrown(() => stringToInteger([123])));
+        checkEqual(true,      isThrown(() => stringToInteger([1, 2])));
 
         // Exception
         let i = 0;
@@ -1249,21 +1344,64 @@ export const test_execute_convert = (parts) => {
         checkEqual(-3,        stringToIntegerDefault('-11',       undefined, 2   ));
         checkEqual(-15,       stringToIntegerDefault('-1111',     undefined, 2   ));
 
-        // Default Value
+        // string
         checkEqual(undefined, stringToIntegerDefault('abc'));
         checkEqual(null,      stringToIntegerDefault('abc', null,  10));
         checkEqual(NaN,       stringToIntegerDefault('abc', NaN,   10));
 
+        // space string
+        checkEqual(undefined, stringToIntegerDefault(''));
+        checkEqual(undefined, stringToIntegerDefault(' '));
+        checkEqual(undefined, stringToIntegerDefault('　'));
+
+        // exponential notation
+        checkEqual(undefined, stringToIntegerDefault('3.14'));
+        checkEqual(undefined, stringToIntegerDefault('314e-2'));
+        checkEqual(undefined, stringToIntegerDefault('0.0314E+2'));
+        checkEqual(undefined, stringToIntegerDefault('.14'));
+        checkEqual(undefined, stringToIntegerDefault('1e-17'));
+
+        // exponential notation detail
+        checkEqual(undefined, stringToIntegerDefault('1.'));
+        checkEqual(undefined, stringToIntegerDefault('1.1e'));
+        checkEqual(undefined, stringToIntegerDefault('1.1e+'));
+        checkEqual(undefined, stringToIntegerDefault('1e+5'));
+        checkEqual(undefined, stringToIntegerDefault('1e-5'));
+        checkEqual(undefined, stringToIntegerDefault('1.e'));
+        checkEqual(undefined, stringToIntegerDefault('1.e+'));
+
+        // Non-decimal number
         checkEqual(undefined, stringToIntegerDefault('0x123'));
         checkEqual(undefined, stringToIntegerDefault('+0x123'));
         checkEqual(undefined, stringToIntegerDefault('-0x123'));
         checkEqual(undefined, stringToIntegerDefault('0x123'));
         checkEqual(undefined, stringToIntegerDefault('+0x123'));
         checkEqual(undefined, stringToIntegerDefault('-0x123'));
+
+        // Spacial number
         checkEqual(undefined, stringToIntegerDefault('Infinity'));
         checkEqual(undefined, stringToIntegerDefault('infinity'));
         checkEqual(undefined, stringToIntegerDefault('inf'));
         checkEqual(undefined, stringToIntegerDefault('info'));
+
+        // Number
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(123)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(-123)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(1.23)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(-1.23)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(Infinity)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(-Infinity)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(NaN)));
+
+        // Other than number type
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(null)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault(undefined)));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault({})));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault({ a: 1 })));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault([])));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault([1])));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault([123])));
+        checkEqual(true,      isThrown(() => stringToIntegerDefault([1, 2])));
 
         // Exception
         let i = 0;
@@ -1355,6 +1493,9 @@ export const test_execute_convert = (parts) => {
         checkEqual(123,       valueToInteger('123.45'));
         checkEqual(NaN,       valueToInteger('123.4.5'));
 
+        // string
+        checkEqual(NaN,       valueToInteger('abc'));
+
         // space string
         checkEqual(NaN,       valueToInteger(''));
         checkEqual(NaN,       valueToInteger(' '));
@@ -1377,7 +1518,7 @@ export const test_execute_convert = (parts) => {
         checkEqual(NaN,       valueToInteger('1.e+'));
         checkEqual(100000,    valueToInteger('1.e+5'));
 
-        // Number different
+        // Non-decimal number
         checkEqual(NaN,       valueToInteger('0x123'));
         checkEqual(NaN,       valueToInteger('+0x123'));
         checkEqual(NaN,       valueToInteger('-0x123'));
@@ -1385,10 +1526,14 @@ export const test_execute_convert = (parts) => {
         checkEqual(NaN,       valueToInteger('+0o123'));
         checkEqual(NaN,       valueToInteger('-0o123'));
 
+        // Spacial number
         checkEqual(NaN,       valueToInteger('Infinity'));
         checkEqual(NaN,       valueToInteger('infinity'));
         checkEqual(NaN,       valueToInteger('inf'));
         checkEqual(NaN,       valueToInteger('info'));
+        checkEqual(NaN,       valueToInteger('NaN'));
+        checkEqual(NaN,       valueToInteger('nan'));
+        checkEqual(NaN,       valueToInteger('na'));
 
         // Number
         checkEqual(123,       valueToInteger(123));
@@ -1400,6 +1545,16 @@ export const test_execute_convert = (parts) => {
         checkEqual(Infinity,  valueToInteger(Infinity));
         checkEqual(-Infinity, valueToInteger(-Infinity));
         checkEqual(NaN,       valueToInteger(NaN));
+
+        // Other than number type
+        checkEqual(NaN,       valueToInteger(null));
+        checkEqual(NaN,       valueToInteger(undefined));
+        checkEqual(NaN,       valueToInteger({}));
+        checkEqual(NaN,       valueToInteger({ a: 1 }));
+        checkEqual(NaN,       valueToInteger([]));
+        checkEqual(NaN,       valueToInteger([1]));
+        checkEqual(NaN,       valueToInteger([123]));
+        checkEqual(NaN,       valueToInteger([1, 2]));
 
         // Default
         checkEqual(null,      valueToIntegerDefault('', null));
@@ -1439,28 +1594,18 @@ export const test_execute_convert = (parts) => {
           },
         ));
 
-        // Other
-        checkEqual(NaN,       valueToInteger(null));
-        checkEqual(NaN,       valueToInteger(undefined));
-        checkEqual(NaN,       valueToInteger({}));
-        checkEqual(NaN,       valueToInteger({ a: 1 }));
-        checkEqual(NaN,       valueToInteger([]));
-        checkEqual(NaN,       valueToInteger([1]));
-        checkEqual(NaN,       valueToInteger([123]));
 
       });
     };
 
-    test_numberToString();
-    test_valueToString();
-
     test_StringCast_standard();
     test_toString_standard();
+    test_numberToString();
+    test_valueToString();
 
     test_NumberCast_standard();
     test_parseFloat_standard();
     test_parseInt_standard();
-
     test_stringToNumber();
     test_stringToNumberDefault();
     test_valueToNumber();
