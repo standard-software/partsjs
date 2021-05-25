@@ -1,14 +1,16 @@
-const setYear4        = (date, value) => date.setFullYear(Number(value));
+const setYear4        = (date, value) => { date.setFullYear(Number(value)); };
 const setYear2        = (date, value) => {
   const plusValue = Math.floor((new Date()).getFullYear() / 100) * 100;
   date.setFullYear(Number(value) + plusValue);
 };
-const setMonth        = (date, value) => date.setMonth(Number(value) - 1);
-const setDate         = (date, value) => date.setDate(Number(value));
-const setHours        = (date, value) => date.setHours(Number(value));
-const setMinutes      = (date, value) => date.setMinutes(Number(value));
-const setSeconds      = (date, value) => date.setSeconds(Number(value));
-const setMilliseconds = (date, value) => date.setMilliseconds(Number(value));
+const setMonth        = (date, value) => { date.setMonth(Number(value) - 1); };
+const setDate         = (date, value) => { date.setDate(Number(value)); };
+const setHours        = (date, value) => { date.setHours(Number(value)); };
+const setMinutes      = (date, value) => { date.setMinutes(Number(value)); };
+const setSec          = (date, value) => { date.setSeconds(Number(value)); };
+const setMsec         = (date, value) => { date.setMilliseconds(Number(value)); };
+const setMsecX10      = (date, value) => { date.setMilliseconds(Number(value) * 10); };
+const setMsecX100     = (date, value) => { date.setMilliseconds(Number(value) * 100); };
 
 export const __stringToDateRule = {};
 
@@ -30,11 +32,11 @@ __stringToDateRule.default = [
   ['H',     '(\\d{1,2})',   4, setHours],
   ['mm',    '(\\d{2})',     5, setMinutes],
   ['m',     '(\\d{1,2})',   5, setMinutes],
-  ['ss',    '(\\d{2})',     6, setSeconds],
-  ['s',     '(\\d{1,2})',   6, setSeconds],
-  ['SSS',   '(\\d{3})',     7, setMilliseconds],
-  ['SS',    '(\\d{2})',     7, setMilliseconds],
-  ['S',     '(\\d{1})',     7, setMilliseconds],
+  ['ss',    '(\\d{2})',     6, setSec],
+  ['s',     '(\\d{1,2})',   6, setSec],
+  ['SSS',   '(\\d{3})',     7, setMsec],
+  ['SS',    '(\\d{2})',     7, setMsecX10],
+  ['S',     '(\\d{1})',     7, setMsecX100],
   ['aa',    '',   -1, () => {}],
   ['AA',    '',   -1, () => {}],
   ['a',     '',   -1, () => {}],

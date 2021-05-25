@@ -595,16 +595,26 @@ export const test_execute_date = (parts) => {
           stringToDate('2021/05/01 03:04:05', 'YYYY/MM/DD HH:mm:ss'),
         );
         checkEqual(
-          dateToString(new Date(2021, 4, 1, 11, 8, 9), 'YYYY/MM/DD HH:mm:ss(ddd)'),
-          '2021/05/01 11:08:09(Sat)',
-        );
-        checkEqual(
           new Date(2021, 4, 1, 11, 8, 9),
           stringToDate('2021/05/01 11:08:09(Sat)', 'YYYY/MM/DD HH:mm:ss(ddd)'),
         );
         checkEqual(
           new Date(''),
           stringToDate('2021/05/01 11:08:09(Mon)', 'YYYY/MM/DD HH:mm:ss(ddd)'),
+        );
+
+        testCounter();
+        checkEqual(
+          Datetime(2001, 2, 4, 9, 5, 8, 45),
+          stringToDate('2001/02/04 09:05:08.045', 'YYYY/MM/DD HH:mm:ss.SSS'),
+        );
+        checkEqual(
+          Datetime(2001, 2, 4, 9, 5, 8, 40),
+          stringToDate('2001/02/04 09:05:08.04', 'YYYY/MM/DD HH:mm:ss.SS'),
+        );
+        checkEqual(
+          Datetime(2001, 2, 4, 9, 5, 8, 0),
+          stringToDate('2001/02/04 09:05:08.0', 'YYYY/MM/DD HH:mm:ss.S'),
         );
 
       });
