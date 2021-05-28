@@ -227,6 +227,7 @@
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
 .date._stringToDate:[object Function]:function
+.date._Today:[object Function]:function
 .date.Datetime:[object Function]:function
 .date.dateToString:[object Function]:function
 .date.dayOfWeek:[object Function]:function
