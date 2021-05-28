@@ -28,6 +28,8 @@ import _stringToDateJs from './_stringToDate.js';
 import stringToDateJs from './stringToDate.js';
 import _minutesToTextsJs from './_minutesToTexts.js';
 import minutesToTextsJs from './minutesToTexts.js';
+import _textsToMinutesJs from './_textsToMinutes.js';
+import textsToMinutesJs from './textsToMinutes.js';
 
 const dateJs = {
   ..._TodayJs,
@@ -60,6 +62,8 @@ const dateJs = {
   ...stringToDateJs,
   ..._minutesToTextsJs,
   ...minutesToTextsJs,
+  ..._textsToMinutesJs,
+  ...textsToMinutesJs,
 };
 
 export const {
@@ -77,6 +81,7 @@ export const {
   _nameOfMonthEnglishLong,
   _stringToDate,
   _minutesToTexts,
+  _textsToMinutes,
 
   Today,
   isInvalidDate,
@@ -93,6 +98,7 @@ export const {
   nameOfMonthEnglishLong,
   stringToDate,
   minutesToTexts,
+  textsToMinutes,
 
   INVALID_DATE,
 
@@ -113,6 +119,7 @@ export default {
   _nameOfMonthEnglishLong,
   _stringToDate,
   _minutesToTexts,
+  _textsToMinutes,
 
   Today,
   isInvalidDate,
@@ -129,6 +136,7 @@ export default {
   nameOfMonthEnglishLong,
   stringToDate,
   minutesToTexts,
+  textsToMinutes,
 
   INVALID_DATE,
 

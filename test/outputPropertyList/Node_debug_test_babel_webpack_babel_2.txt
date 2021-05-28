@@ -228,6 +228,7 @@
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
 .date._stringToDate:[object Function]:function
+.date._textsToMinutes:[object Function]:function
 .date._Today:[object Function]:function
 .date.Datetime:[object Function]:function
 .date.dateToString:[object Function]:function
@@ -244,6 +245,7 @@
 .date.nameOfMonthEnglishChar4:[object Function]:function
 .date.nameOfMonthEnglishLong:[object Function]:function
 .date.stringToDate:[object Function]:function
+.date.textsToMinutes:[object Function]:function
 .date.Today:[object Function]:function
 .dateToString:[object Function]:function
 .Enum:[object Function]:function

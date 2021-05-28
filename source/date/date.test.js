@@ -20,6 +20,7 @@ export const test_execute_date = (parts) => {
     nameOfMonthEnglishChar3, nameOfMonthEnglishChar4, nameOfMonthEnglishLong,
     stringToDate,
     minutesToTexts,
+    textsToMinutes,
   } = parts.date;
 
   const {
@@ -1069,6 +1070,13 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_textsToMinutes = () => {
+      it('test_textsToMinutes', () => {
+        checkEqual(540, textsToMinutes(['+', '09', '00']));
+        checkEqual(-540, textsToMinutes('-:09:00'.split(':')));
+      });
+    };
+
     test_Today();
     test_isInvalidDate();
 
@@ -1090,6 +1098,7 @@ export const test_execute_date = (parts) => {
     test_nameOfMonthEnglishLong();
 
     test_minutesToTexts();
+    test_textsToMinutes();
 
   });
 };
