@@ -5,6 +5,7 @@ import { _dayOfWeekEnglishLong } from './_dayOfWeekEnglishLong.js';
 import { _nameOfMonthEnglishChar3 } from './_nameOfMonthEnglishChar3.js';
 import { _nameOfMonthEnglishChar4 } from './_nameOfMonthEnglishChar4.js';
 import { _nameOfMonthEnglishLong } from './_nameOfMonthEnglishLong.js';
+import { _minutesToTexts } from './_minutesToTexts.js';
 
 export const __dateToStringFunc = {};
 
@@ -150,26 +151,14 @@ const A_P = (date, isLocal) => {
   }
 };
 
-const timezone = (date) => {
-  const minutes = -1 * date.getTimezoneOffset();
-  let offsetHourStr = _paddingFirst(
-    String(
-      Math.floor(Math.abs(minutes / 60)),
-    ), 2, '0',
-  );
-  offsetHourStr = 0 < minutes ? '+' + offsetHourStr : '-' + offsetHourStr;
-  const offsetMinStr = _paddingFirst(String(minutes % 60), 2, '0');
-  return { offsetHourStr, offsetMinStr };
-};
-
 const timezoneHHMM = (date) => {
-  const { offsetHourStr, offsetMinStr } = timezone(date);
-  return offsetHourStr + offsetMinStr;
+  const [sign, hour, min] = _minutesToTexts(-1 * date.getTimezoneOffset());
+  return sign + hour + min;
 };
 
 const timezoneHH_MM = (date) => {
-  const { offsetHourStr, offsetMinStr } = timezone(date);
-  return offsetHourStr + ':' + offsetMinStr;
+  const [sign, hour, min] = _minutesToTexts(-1 * date.getTimezoneOffset());
+  return sign + hour + ':' + min;
 };
 
 __dateToStringFunc.year4 = year4;

@@ -19,6 +19,7 @@ export const test_execute_date = (parts) => {
     nameOfMonth,
     nameOfMonthEnglishChar3, nameOfMonthEnglishChar4, nameOfMonthEnglishLong,
     stringToDate,
+    minutesToTexts,
   } = parts.date;
 
   const {
@@ -382,6 +383,27 @@ export const test_execute_date = (parts) => {
           '01/2/4 16:5:8 February',
           dateToString(dt, 'YY/M/D H:m:s MMMMM'),
         );
+
+        // same date.toString
+        // checkEqual(
+        //   'Sun Feb 04 2001 16:05:08 GMT+0900',
+        //   dateToString(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ'),
+        // );
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(
+            0,
+            dt.toString().indexOf(
+              dateToString(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ'),
+            ),
+          );
+        } else {
+          checkEqual(
+            0,
+            dt.toString().indexOf(
+              dateToString(dt, 'ddd MMM D HH:mm:ss "UTC"ZZ YYYY'),
+            ),
+          );
+        }
 
         // quote
         var dt = Datetime(2021, 1, 6);
@@ -1040,11 +1062,21 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_minutesToTexts = () => {
+      it('test_minutesToTexts', () => {
+        checkEqual('+0900', minutesToTexts(540).join(''));
+        checkEqual('-:09:00', minutesToTexts(-540).join(':'));
+      });
+    };
+
     test_Today();
     test_isInvalidDate();
 
     test_Date_standard();
     test_Datetime();
+
+    test_dateToString();
+    test_dateToString_MomemtLike();
 
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
@@ -1057,10 +1089,7 @@ export const test_execute_date = (parts) => {
     test_nameOfMonthEnglishChar4();
     test_nameOfMonthEnglishLong();
 
-    test_dateToString();
-    test_dateToString_MomemtLike();
-
-    test_stringToDate();
+    test_minutesToTexts();
 
   });
 };

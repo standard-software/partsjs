@@ -344,6 +344,7 @@ You can now use the functions of the parts.js object.
   - delete time info
   - support UTC
 - add string.escapeRegExp
+- add date.minutesToTexts
 
 ### 10.5.0
 #### 2021/03/29(Mon)

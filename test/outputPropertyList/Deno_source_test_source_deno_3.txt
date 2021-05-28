@@ -222,11 +222,13 @@
 .date._dayOfWeekEnglishShort:[object Function]:function
 .date._dayOfWeekJapaneseLong:[object Function]:function
 .date._dayOfWeekJapaneseShort:[object Function]:function
+.date._minutesToTexts:[object Function]:function
 .date._nameOfMonth:[object Function]:function
 .date._nameOfMonthEnglishChar3:[object Function]:function
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
 .date._stringToDate:[object Function]:function
+.date._Today:[object Function]:function
 .date.Datetime:[object Function]:function
 .date.dateToString:[object Function]:function
 .date.dayOfWeek:[object Function]:function
@@ -236,6 +238,7 @@
 .date.dayOfWeekJapaneseShort:[object Function]:function
 .date.INVALID_DATE:[object Date]:object
 .date.isInvalidDate:[object Function]:function
+.date.minutesToTexts:[object Function]:function
 .date.nameOfMonth:[object Function]:function
 .date.nameOfMonthEnglishChar3:[object Function]:function
 .date.nameOfMonthEnglishChar4:[object Function]:function
@@ -662,6 +665,7 @@
 .string._deleteIndex:[object Function]:function
 .string._deleteLast:[object Function]:function
 .string._deleteLength:[object Function]:function
+.string._escapeRegExp:[object Function]:function
 .string._excludeBothEnds:[object Function]:function
 .string._excludeFirst:[object Function]:function
 .string._excludeLast:[object Function]:function
@@ -709,6 +713,7 @@
 .string.deleteIndex:[object Function]:function
 .string.deleteLast:[object Function]:function
 .string.deleteLength:[object Function]:function
+.string.escapeRegExp:[object Function]:function
 .string.excludeBothEnds:[object Function]:function
 .string.excludeFirst:[object Function]:function
 .string.excludeLast:[object Function]:function
