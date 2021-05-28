@@ -343,6 +343,7 @@ You can now use the functions of the parts.js object.
 - update Today
   - delete time info
   - support UTC
+- add string.escapeRegExp
 
 ### 10.5.0
 #### 2021/03/29(Mon)

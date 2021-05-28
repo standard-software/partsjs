@@ -33,6 +33,7 @@ export const test_execute_string = (parts) => {
       indexOfAnyFirst, indexOfAnyLast,
 
       paddingFirst, paddingLast,
+      escapeRegExp,
     } = parts.string;
 
     const test_matchFormat = () => {
@@ -2145,12 +2146,21 @@ export const test_execute_string = (parts) => {
 
       });
     };
+
     const test_includeCount = () => {
       it('test_includeCount', () => {
         checkEqual(0,   includeCount('a', ''));
         checkEqual(3,   includeCount('aaa', 'a'));
         checkEqual(1,   includeCount('aaa', 'aa'));
         checkEqual(2,   includeCount('aaaa', 'aa'));
+      });
+    };
+
+    const test_escapeRegExp = () => {
+      it('test_escapeRegExp', () => {
+        checkEqual('a',           escapeRegExp('a'));
+        checkEqual('\\\\\\^\\$\\.ABC\\*\\+\\-\\?',    escapeRegExp('\\^$.ABC*+-?'));
+        checkEqual('\\(\\)\\{\\}\\[\\]ABC\\|\\/',    escapeRegExp('(){}[\]ABC\|\/'));
       });
     };
 
@@ -2214,6 +2224,8 @@ export const test_execute_string = (parts) => {
     test_paddingLast();
 
     test_includeCount();
+
+    test_escapeRegExp();
   });
 };
 

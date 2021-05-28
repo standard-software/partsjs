@@ -32,6 +32,8 @@ import _paddingFirstJs from './_paddingFirst.js';
 import paddingFirstJs from './paddingFirst.js';
 import _paddingLastJs from './_paddingLast.js';
 import paddingLastJs from './paddingLast.js';
+import _escapeRegExpJs from './_escapeRegExp.js';
+import escapeRegExpJs from './escapeRegExp.js';
 
 const stringJs = {
   ...string_commonJs,
@@ -68,6 +70,8 @@ const stringJs = {
   ...paddingFirstJs,
   ..._paddingLastJs,
   ...paddingLastJs,
+  ..._escapeRegExpJs,
+  ...escapeRegExpJs,
 };
 
 export const {
@@ -99,6 +103,7 @@ export const {
   _splitDotItems,
   _paddingFirst,
   _paddingLast,
+  _escapeRegExp,
 } = stringJs;
 
 export const {
@@ -130,6 +135,7 @@ export const {
   splitDotItems,
   paddingFirst,
   paddingLast,
+  escapeRegExp,
 } = stringJs;
 
 export default {
@@ -161,6 +167,7 @@ export default {
   _splitDotItems,
   _paddingFirst,
   _paddingLast,
+  _escapeRegExp,
 
   repeat,
   isLowerCase, isUpperCase,
@@ -190,5 +197,6 @@ export default {
   splitDotItems,
   paddingFirst,
   paddingLast,
+  escapeRegExp,
 };
 
