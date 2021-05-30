@@ -214,7 +214,7 @@ export const _stringToInteger = (
     value,
     () => {
       throw new RangeError(
-        'stringToInteger args(value) is not changeing integer',
+        `stringToInteger args(value:${value}) is not changeing integer`,
       );
     },
     radix,

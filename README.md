@@ -326,8 +326,9 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.6.0 beta
-#### 2021/05/28(Fri)
+#### 2021/05/30(Sun)
 - rename DateTime to Datetime
+  - update inside
 - update test for deno for node
   - Reflect
   - Intl

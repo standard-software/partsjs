@@ -63,6 +63,27 @@ export const test_execute_date = (parts) => {
       it('test_Date_standard', () => {
         checkEqual(0, new Date(0).getTime());
 
+        const [s, h, m] = minutesToTexts(-1 * (new Date()).getTimezoneOffset());
+        if (s === '+') {
+          if (!parts.platform.isWindowsScriptHost()) {
+            checkEqual(
+              0,
+              new Date(0).toString().indexOf(
+                `Thu Jan 01 1970 ${h}:${m}:00 GMT${s + h + m}`,
+              ),
+            );
+            // checkEqual(
+            //   new Date(0).toString(),
+            //   `Thu Jan 01 1970 ${h}:${m}:00 GMT${s + h + m}`,
+            // );
+          } else {
+            checkEqual(
+              `Thu Jan 1 ${h}:${m}:00 UTC${s + h + m} 1970`,
+              new Date(0).toString(),
+            );
+          }
+        }
+
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(
             'Thu, 01 Jan 1970 00:00:00 GMT',

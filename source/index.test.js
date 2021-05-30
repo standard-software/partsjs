@@ -152,6 +152,7 @@ export const test_execute_index = (parts) => {
 
   const { describe, testFrame } = parts.test;
   testFrame.outputDescribe = false;
+  testFrame.outputIt = false;
   describe('test_execute_index', () => {
 
     test_execute_common(parts);
