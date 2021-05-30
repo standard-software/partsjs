@@ -27,11 +27,17 @@ export const test_execute_date = (parts) => {
     isDate,
   } = parts;
 
+  const getTimezoneText = (datetime, delimiter = '') => {
+    const [sign, hour, min] = minutesToTexts(-1 * datetime.getTimezoneOffset());
+    return sign + hour + delimiter + min;
+  };
+
   describe('test_execute_date', () => {
 
     const test_Today = () => {
       it('test_Today', () => {
-        checkEqual((new Date()).toString(), Today().toString());
+        const now = new Date();
+        checkEqual(new Date(now.getFullYear(), now.getMonth(), now.getDate()), Today());
       });
     };
 
@@ -439,31 +445,12 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        var dt = new Date();
-        var dt = Datetime(
-          dt.getFullYear(), dt.getMonth() + 1, dt.getDate(),
-        );
-        const timezoneOffset = -1 * dt.getTimezoneOffset();
-        const timezoneOffsetHour = (0 < timezoneOffset
-          ? '+' : '-'
-        ) +
-        parts.string.paddingFirst(
-          String(
-            Math.floor(Math.abs(timezoneOffset / 60)),
-          ),
-          2, '0',
-        );
-        const timezoneOffsetMin = parts.string.paddingFirst(
-          String(timezoneOffset % 60), 2, '0',
-        );
-        // console.log('timezone', timezoneOffset, timezoneOffset / 60,
-        //   parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0'),
-        //   (new Date).getTimezoneOffset(),
-        // );
+        const [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
+        const timezoneText = s + h + m;
 
         // '+0900' etc
         checkEqual(
-          timezoneOffsetHour + timezoneOffsetMin, dateToString(dt, 'ZZ'),
+          timezoneText, dateToString(dt, 'ZZ'),
         );
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(
@@ -479,7 +466,8 @@ export const test_execute_date = (parts) => {
 
         // '+09:00' etc
         checkEqual(
-          timezoneOffsetHour + ':' + timezoneOffsetMin, dateToString(dt, 'Z'),
+          getTimezoneText(dt, ':'),
+          dateToString(dt, 'Z'),
         );
 
         // exception
@@ -563,26 +551,11 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        var dt = new Date();
-        var dt = Datetime(
-          dt.getFullYear(), dt.getMonth() + 1, dt.getDate(),
-        );
-        const timezoneOffset = -1 * dt.getTimezoneOffset();
-        const timezoneOffsetHour = (0 < timezoneOffset
-          ? '+' : '-'
-        ) +
-        parts.string.paddingFirst(
-          String(
-            Math.floor(Math.abs(timezoneOffset / 60)),
-          ), 2, '0',
-        );
-        const timezoneOffsetMin = parts.string.paddingFirst(
-          String(timezoneOffset % 60), 2, '0',
-        );
+        const timezoneText = getTimezoneText(dt);
 
         // '+0900' etc
         checkEqual(
-          timezoneOffsetHour + timezoneOffsetMin, dateToStringMoment(dt, 'ZZ'),
+          timezoneText, dateToStringMoment(dt, 'ZZ'),
         );
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(
@@ -598,7 +571,8 @@ export const test_execute_date = (parts) => {
 
         // '+09:00' etc
         checkEqual(
-          timezoneOffsetHour + ':' + timezoneOffsetMin, dateToStringMoment(dt, 'Z'),
+          getTimezoneText(new Date(), ':'),
+          dateToStringMoment(dt, 'Z'),
         );
 
         // exception
@@ -660,6 +634,64 @@ export const test_execute_date = (parts) => {
           Datetime(2001, 2, 4, 9, 5, 8, 0),
           stringToDate('2001/02/04 09:05:08.0', 'YYYY/MM/DD HH:mm:ss.S'),
         );
+
+        checkEqual(
+          Datetime(2001, 2, 4),
+          stringToDate('Sun, 04 Feb 2001', 'ddd, DD MMM YYYY'),
+        );
+        checkEqual(
+          Datetime(2001, 2, 4),
+          stringToDate('[Sun]|/\\ 04 Feb 2001', '[ddd]|/\\ DD MMM YYYY'),
+        );
+
+        checkEqual(
+          Datetime(2001, 9, 4),
+          stringToDate('September4 2001', 'MMMMMD YYYY'),
+        );
+
+        checkEqual(
+          '20210526 8 59 40 p',
+          dateToString(Datetime(2021, 5, 26, 20, 59, 40), 'YYYYMMDD h mm ss a'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 8, 59, 40),
+          stringToDate('20210526 8 59 40 a', 'YYYYMMDD h mm ss a'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 8, 59, 40),
+          stringToDate('20210526 8 59 40 AM', 'YYYYMMDD h mm ss AA'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 20, 59, 40),
+          stringToDate('20210526 8 59 40 p', 'YYYYMMDD h mm ss a'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 20, 59, 40),
+          stringToDate('20210526 08 59 40 P', 'YYYYMMDD hh mm ss A'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 23, 59, 40),
+          stringToDate('20210526 11 59 40 PM', 'YYYYMMDD h mm ss AA'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 23, 59, 40),
+          stringToDate('20210526 11 59 40 pm', 'YYYYMMDD hh mm ss aa'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 23, 59, 40),
+          stringToDate('20210526 11 59 40 p p p', 'YYYYMMDD hh mm ss a a a'),
+        );
+
+        // timezone
+        checkEqual(
+          dateToString(Datetime(2021, 5, 26, 23, 59, 40), 'YYYYMMDD HH mm ss Z'),
+          '20210526 23 59 40 +09:00',
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 23, 59, 40),
+          stringToDate('20210526 23 59 40 +09:00', 'YYYYMMDD HH mm ss Z'),
+        );
+
 
       });
     };
@@ -1106,6 +1138,8 @@ export const test_execute_date = (parts) => {
 
     test_dateToString();
     test_dateToString_MomemtLike();
+
+    test_stringToDate();
 
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
