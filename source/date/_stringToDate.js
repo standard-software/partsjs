@@ -12,13 +12,14 @@ import { __stringToDateRule } from './__stringToDateRule.js';
 import { INVALID_DATE } from './INVALID_DATE.js';
 import { _dateToString } from './_dateToString.js';
 import { _escapeRegExp } from '../string/_escapeRegExp.js';
+import { _Today } from './_Today.js';
 
 export const _stringToDate = (
   str, format,
-  source = new Date(),
+  source = _Today(),
   formatRule = __stringToDateRule.default,
 ) => {
-  __stringToDateRule.initialize();
+  __stringToDateRule.initialize(source);
   const col = __stringToDateRule.ruleColumnIndex;
 
   const replaceTextSortFunc = (a, b) => b[col.format].length - a[col.format].length;
@@ -52,16 +53,16 @@ export const _stringToDate = (
   replaceInfoItems.sort(setDatePrioritySortFunc);
   // console.log({ replaceInfoItems });
 
-  const now = source;
-  const result = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+  const result = new Date(source.getTime());
   for (const replaceInfoItem of replaceInfoItems) {
     const setDateFunc = replaceInfoItem[col.function];
     const setValue = replaceInfoItem[col.value];
     setDateFunc(result, setValue);
     // console.log(result.toString());
   }
-  __stringToDateRule.finalize();
+  __stringToDateRule.finalize(result);
 
+  // return result;
   // console.log(
   //   _dateToString(result, format),
   //   str,

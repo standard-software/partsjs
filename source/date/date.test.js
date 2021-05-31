@@ -643,6 +643,10 @@ export const test_execute_date = (parts) => {
           Datetime(2001, 2, 4),
           stringToDate('[Sun]|/\\ 04 Feb 2001', '[ddd]|/\\ DD MMM YYYY'),
         );
+        checkEqual(
+          Datetime(2001, 2, 4),
+          stringToDate('Sunday, 04 Feb 2001', 'dddd, DD MMM YYYY'),
+        );
 
         checkEqual(
           Datetime(2001, 9, 4),
@@ -683,6 +687,7 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
+        testCounter();
         checkEqual(
           dateToString(Datetime(2021, 5, 26, 23, 59, 40), 'YYYYMMDD HH mm ss Z'),
           '20210526 23 59 40 +09:00',
@@ -691,6 +696,18 @@ export const test_execute_date = (parts) => {
           Datetime(2021, 5, 26, 23, 59, 40),
           stringToDate('20210526 23 59 40 +09:00', 'YYYYMMDD HH mm ss Z'),
         );
+        checkEqual(
+          Datetime(2021, 5, 31, 9, 10, 20, 30, true),
+          stringToDate('2021/05/31 09:10:20.030 +09:00', 'YYYY/MM/DD HH:mm:ss.SSS Z'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 31, 0, 10, 20, 30, false),
+          stringToDate('2021/05/31 09:10:20.030 +09:00', 'YYYY/MM/DD HH:mm:ss.SSS Z'),
+        );
+        // checkEqual(
+        //   Datetime(2021, 5, 31, 0, 10, 20, 30, false),
+        //   stringToDate('2021/05/31 08:10:20.030 +08:00', 'YYYY/MM/DD HH:mm:ss.SSS Z'),
+        // );
 
 
       });

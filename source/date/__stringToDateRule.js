@@ -1,12 +1,15 @@
+import { isNull } from '../type/type.js';
 import { __monthNames } from '../date/__monthNames.js';
+import { __dayOfWeekNames } from '../date/__dayOfWeekNames.js';
 import { __includes } from '../compare/__includes.js';
 import { _subLength } from '../string/string_common.js';
 import { _textsToMinutes } from './_textsToMinutes.js';
 
-let flagTimezone = false;
+// let flagTimezone = false;
+let flagPM = false;
 
 const datetimeInfo = {
-  timezoneMin: 0,
+  timezoneMin: null,
   year: null,
   month: null,
   date: null,
@@ -21,60 +24,73 @@ const setTimezone     = (date, value) => {
     _subLength(value, 0, 1), _subLength(value, 1, 2), _subLength(value, 4, 2),
   ];
   // console.log(_textsToMinutes([s, h, m]));
-  flagTimezone = true;
+  // flagTimezone = true;
   datetimeInfo.timezoneMin = _textsToMinutes([s, h, m]);
   // timezone = 540
 };
+
 const setYear4        = (date, value) => {
-  date.setFullYear(Number(value));
+  datetimeInfo.year = Number(value);
 };
 const setYear2        = (date, value) => {
-  const plusValue = Math.floor((new Date()).getFullYear() / 100) * 100;
-  date.setFullYear(Number(value) + plusValue);
+  const plusValue = Math.floor(date.getFullYear() / 100) * 100;
+  datetimeInfo.year = Number(value) + plusValue;
 };
-const _setMonth        = (date, value) => {
-  date.setMonth(value);
-  if (date.getMonth() !== value) {
-    date.setMonth(value);
-  }
-};
-const setMonth        = (date, value) => {
-  _setMonth(date, Number(value) - 1);
+
+const setMonth = (date, value) => {
+  datetimeInfo.month = Number(value) - 1;
 };
 const setMonthEnglishChar3 = (date, value) => {
-  _setMonth(date, __monthNames.EnglishChar3().indexOf(value));
+  datetimeInfo.month = __monthNames.EnglishChar3().indexOf(value);
 };
 const setMonthEnglishChar4 = (date, value) => {
-  _setMonth(date, __monthNames.EnglishChar4().indexOf(value));
+  datetimeInfo.month = __monthNames.EnglishChar4().indexOf(value);
 };
 const setMonthEnglishLong = (date, value) => {
-  _setMonth(date, __monthNames.EnglishLong().indexOf(value));
+  datetimeInfo.month = __monthNames.EnglishLong().indexOf(value);
 };
-const setDate         = (date, value) => { date.setDate(Number(value)); };
-const setHours        = (date, value) => { date.setHours(Number(value)); };
 
-let flagPM = false;
-const setAMPM         = (date, value) => {
+const setDate = (date, value) => {
+  datetimeInfo.date = Number(value);
+};
+
+const setHours = (date, value) => {
+  datetimeInfo.hours = Number(value);
+};
+
+const setAMPM = (date, value) => {
   // console.log({ date, value, flagPM, if: value.toLowerCase().includes('p') });
   if (__includes(value.toLowerCase(), 'p')) {
     flagPM = true;
-  } else {
-    flagPM = false;
   }
 };
+
 const setHours12      = (date, value) => {
   // console.log({ date, value, flagPM });
   if (flagPM) {
-    date.setHours(Number(value) + 12);
+    datetimeInfo.hours = Number(value) + 12;
   } else {
-    date.setHours(Number(value));
+    datetimeInfo.hours = Number(value);
   }
 };
-const setMinutes      = (date, value) => { date.setMinutes(Number(value)); };
-const setSec          = (date, value) => { date.setSeconds(Number(value)); };
-const setMsec         = (date, value) => { date.setMilliseconds(Number(value)); };
-const setMsecX10      = (date, value) => { date.setMilliseconds(Number(value) * 10); };
-const setMsecX100     = (date, value) => { date.setMilliseconds(Number(value) * 100); };
+
+const setMinutes = (date, value) => {
+  datetimeInfo.minutes = Number(value);
+};
+
+const setSec = (date, value) => {
+  datetimeInfo.seconds = Number(value);
+};
+
+const setMsec = (date, value) => {
+  datetimeInfo.milliseconds = Number(value);
+};
+const setMsecX10 = (date, value) => {
+  datetimeInfo.milliseconds = Number(value) * 10;
+};
+const setMsecX100 = (date, value) => {
+  datetimeInfo.milliseconds = Number(value) * 100;
+};
 
 export const __stringToDateRule = {};
 
@@ -85,23 +101,32 @@ __stringToDateRule.ruleColumnIndex = {
   value: 4,
 };
 
-__stringToDateRule.initialize = (date) => {
+__stringToDateRule.initialize = (dateSource) => {
   flagPM = false;
-  flagTimezone = false;
-  // datetimeInfo.timezoneMin = date.getTimezoneOffset();
-  // datetimeInfo.year = date.getFullYear();
-  // datetimeInfo.month = date.getMonth();
-  // datetimeInfo.date = date.getDate();
-  // datetimeInfo.hours = date.getHours();
-  // datetimeInfo.minutes = date.getMinutes();
-  // datetimeInfo.seconds = date.getSeconds();
-  // datetimeInfo.milliseconds = date.getMilliseconds();
+  // flagTimezone = false;
+  // datetimeInfo.timezoneMin = dateSource.getTimezoneOffset();
+  datetimeInfo.year = dateSource.getFullYear();
+  datetimeInfo.month = dateSource.getMonth();
+  datetimeInfo.date = dateSource.getDate();
+  datetimeInfo.hours = dateSource.getHours();
+  datetimeInfo.minutes = dateSource.getMinutes();
+  datetimeInfo.seconds = dateSource.getSeconds();
+  datetimeInfo.milliseconds = dateSource.getMilliseconds();
 
 };
 
-__stringToDateRule.finalize = (date) => {
-  // date.setFullYear(yearValue, monthValue, dateValue);
-  // date.setHours(hoursValue, minutesValue, secondsValue, millisecondsValue);
+__stringToDateRule.finalize = (dateSource) => {
+  const { year, month, date, hours, minutes, seconds, milliseconds } = datetimeInfo;
+  // console.log({ year, month, date, hours, minutes, seconds, milliseconds });
+
+  if (!isNull(datetimeInfo.timezoneMin)) {
+    dateSource.setUTCFullYear(year, month, date);
+    dateSource.setUTCHours(hours, minutes, seconds, milliseconds);
+    dateSource.setMinutes(dateSource.getMinutes() - datetimeInfo.timezoneMin);
+  } else {
+    dateSource.setFullYear(year, month, date);
+    dateSource.setHours(hours, minutes, seconds, milliseconds);
+  }
 };
 
 __stringToDateRule.default = [
@@ -127,8 +152,8 @@ __stringToDateRule.default = [
   ['a',     '(a|p)',        4, setAMPM],
   ['A',     '(A|P)',        4, setAMPM],
   ['Z',     '([+|-]\\d{2}:\\d{2})',        0, setTimezone],
-  ['ddd',   '([a-zA-Z]{3})',  -1, () => {}],
-  ['dddd',  '',   -1, () => {}],
+  ['ddd',   `(${__dayOfWeekNames.EnglishShort().join('|')})`,  -1, () => {}],
+  ['dddd',  `(${__dayOfWeekNames.EnglishLong().join('|')})`,  -1, () => {}],
   ['MMM',   `(${__monthNames.EnglishChar3().join('|')})`,   2, setMonthEnglishChar3],
   ['MMMM',  `(${__monthNames.EnglishChar4().join('|')})`,   2, setMonthEnglishChar4],
   ['MMMMM', `(${__monthNames.EnglishLong().join('|')})`,    2, setMonthEnglishLong],
