@@ -64,6 +64,7 @@ export const _stringToDate = (
 
   // return result;
   // console.log(
+  //   result.toString(),
   //   _dateToString(result, format),
   //   str,
   //   _dateToString(result, format) === str,

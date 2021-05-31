@@ -661,7 +661,7 @@ export const test_execute_date = (parts) => {
           stringToDate('2021/05/01 11:08:09(Mon)', 'YYYY/MM/DD HH:mm:ss(ddd)'),
         );
 
-        testCounter();
+        // testCounter();
         checkEqual(
           Datetime(2001, 2, 4, 9, 5, 8, 45),
           stringToDate('2001/02/04 09:05:08.045', 'YYYY/MM/DD HH:mm:ss.SSS'),
@@ -727,7 +727,7 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        testCounter();
+        // testCounter();
         checkEqual(
           dateToString(Datetime(2021, 5, 26, 23, 59, 40), 'YYYYMMDD HH mm ss Z'),
           '20210526 23 59 40 +09:00',

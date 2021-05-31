@@ -10,15 +10,19 @@ import { _minutesToTexts } from './_minutesToTexts.js';
 
 export const __dateToStringRule = {};
 
+const cloneDate = (date) => new Date(date.getTime());
+const setDateOffsetMin = (date, offsetMin) => {
+  const result = cloneDate(date);
+  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
+  // console.log({ date, offsetMin, result });
+  return result;
+};
+
 const year4 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return date.getUTCFullYear().toString();
-  } else if (timezoneOffsetMin !== date.getTimezoneOffset()) {
-    const date1 = new Date(date.getTime());
-    date1.setMinutes(date1.getMinutes + timezoneOffsetMin);
-    return date1.getUTCFullYear().toString();
   } else {
-    return date.getFullYear().toString();
+    return setDateOffsetMin(date, timezoneOffsetMin).getUTCFullYear().toString();
   }
 };
 
@@ -30,7 +34,7 @@ const month1 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return (date.getUTCMonth() + 1).toString();
   } else {
-    return (date.getMonth() + 1).toString();
+    return (setDateOffsetMin(date, timezoneOffsetMin).getUTCMonth() + 1).toString();
   }
 };
 
@@ -42,7 +46,7 @@ const date1 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return (date.getUTCMonth()).toString();
   } else {
-    return (date.getDate()).toString();
+    return (setDateOffsetMin(date, timezoneOffsetMin).getUTCDate()).toString();
   }
 };
 
@@ -55,7 +59,7 @@ const hour12_1 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return (date.getUTCHours() % 12).toString();
   } else {
-    return (date.getHours() % 12).toString();
+    return (setDateOffsetMin(date, timezoneOffsetMin).getUTCHours() % 12).toString();
   }
 };
 
@@ -69,7 +73,7 @@ const hour24_1 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return (date.getUTCHours()).toString();
   } else {
-    return (date.getHours()).toString();
+    return (setDateOffsetMin(date, timezoneOffsetMin).getUTCHours()).toString();
   }
 };
 
@@ -82,7 +86,7 @@ const minute1 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return (date.getUTCMinutes()).toString();
   } else {
-    return date.getMinutes().toString();
+    return setDateOffsetMin(date, timezoneOffsetMin).getUTCMinutes().toString();
   }
 };
 
@@ -94,7 +98,7 @@ const second1 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
     return (date.getUTCSeconds()).toString();
   } else {
-    return date.getSeconds().toString();
+    return setDateOffsetMin(date, timezoneOffsetMin).getUTCSeconds().toString();
   }
 };
 
@@ -104,9 +108,15 @@ const second2 = (date, timezoneOffsetMin) => {
 
 const millisecond3 = (date, timezoneOffsetMin) => {
   if (isNull(timezoneOffsetMin)) {
-    return _paddingFirst(date.getUTCMilliseconds().toString(), 3, '0');
+    return _paddingFirst(
+      date.getUTCMilliseconds().toString(),
+      3, '0',
+    );
   } else {
-    return _paddingFirst(date.getMilliseconds().toString(), 3, '0');
+    return _paddingFirst(
+      setDateOffsetMin(date, timezoneOffsetMin).getUTCMilliseconds().toString(),
+      3, '0',
+    );
   }
 };
 
