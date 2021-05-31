@@ -9,6 +9,8 @@ export const test_execute_date = (parts) => {
   } = parts.test;
 
   const {
+    ThisYear,
+    ThisMonth,
     Today,
     isInvalidDate,
     Datetime,
@@ -34,10 +36,48 @@ export const test_execute_date = (parts) => {
 
   describe('test_execute_date', () => {
 
+    const test_ThisYear = () => {
+      it('test_ThisYear', () => {
+        const now = new Date();
+        checkEqual(new Date(now.getFullYear(), 0, 1), ThisYear());
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), 0, 1)),
+          ThisYear(false),
+        );
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), 0, 1)),
+          ThisYear({ isLocal: false }),
+        );
+      });
+    };
+
+    const test_ThisMonth = () => {
+      it('test_ThisMonth', () => {
+        const now = new Date();
+        checkEqual(new Date(now.getFullYear(), now.getMonth(), 1), ThisMonth());
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), now.getMonth(), 1)),
+          ThisMonth(false),
+        );
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)),
+          ThisMonth({ isLocal: false }),
+        );
+      });
+    };
+
     const test_Today = () => {
       it('test_Today', () => {
         const now = new Date();
         checkEqual(new Date(now.getFullYear(), now.getMonth(), now.getDate()), Today());
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())),
+          Today(false),
+        );
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())),
+          Today({ isLocal: false }),
+        );
       });
     };
 
@@ -1147,6 +1187,8 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    test_ThisYear();
+    test_ThisMonth();
     test_Today();
     test_isInvalidDate();
 

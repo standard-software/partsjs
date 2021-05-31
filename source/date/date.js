@@ -1,3 +1,7 @@
+import _ThisYearJs from './_ThisYear.js';
+import ThisYearJs from './ThisYear.js';
+import _ThisMonthJs from './_ThisMonth.js';
+import ThisMonthJs from './ThisMonth.js';
 import _TodayJs from './_Today.js';
 import TodayJs from './Today.js';
 import isInvalidDateJs from './isInvalidDate.js';
@@ -32,6 +36,10 @@ import _textsToMinutesJs from './_textsToMinutes.js';
 import textsToMinutesJs from './textsToMinutes.js';
 
 const dateJs = {
+  ..._ThisYearJs,
+  ...ThisYearJs,
+  ..._ThisMonthJs,
+  ...ThisMonthJs,
   ..._TodayJs,
   ...TodayJs,
   ...isInvalidDateJs,
@@ -67,6 +75,8 @@ const dateJs = {
 };
 
 export const {
+  _ThisYear,
+  _ThisMonth,
   _Today,
   _Datetime,
   _dateToString,
@@ -83,6 +93,8 @@ export const {
   _minutesToTexts,
   _textsToMinutes,
 
+  ThisYear,
+  ThisMonth,
   Today,
   isInvalidDate,
   Datetime,
@@ -105,6 +117,8 @@ export const {
 } = dateJs;
 
 export default {
+  _ThisYear,
+  _ThisMonth,
   _Today,
   _Datetime,
   _dateToString,
@@ -121,6 +135,8 @@ export default {
   _minutesToTexts,
   _textsToMinutes,
 
+  ThisYear,
+  ThisMonth,
   Today,
   isInvalidDate,
   Datetime,

@@ -16,10 +16,10 @@ import { _Today } from './_Today.js';
 
 export const _stringToDate = (
   str, format,
-  source = _Today(),
+  sourceDate = _Today(),
   formatRule = __stringToDateRule.default,
 ) => {
-  __stringToDateRule.initialize(source);
+  __stringToDateRule.initialize(sourceDate);
   const col = __stringToDateRule.ruleColumnIndex;
 
   const replaceTextSortFunc = (a, b) => b[col.format].length - a[col.format].length;
@@ -53,7 +53,7 @@ export const _stringToDate = (
   replaceInfoItems.sort(setDatePrioritySortFunc);
   // console.log({ replaceInfoItems });
 
-  const result = new Date(source.getTime());
+  const result = new Date(sourceDate.getTime());
   for (const replaceInfoItem of replaceInfoItems) {
     const setDateFunc = replaceInfoItem[col.function];
     const setValue = replaceInfoItem[col.value];
