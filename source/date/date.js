@@ -8,7 +8,7 @@ import isInvalidDateJs from './isInvalidDate.js';
 import INVALID_DATE_Js from './INVALID_DATE.js';
 import _DatetimeJs from './_Datetime.js';
 import DatetimeJs from './Datetime.js';
-import _dateToStringJs from './_dateToString.js';
+import _dateToStringJs from './__dateToString.js';
 import dateToStringJs from './dateToString.js';
 import _dayOfWeekJs from './_dayOfWeek.js';
 import dayOfWeekJs from './dayOfWeek.js';

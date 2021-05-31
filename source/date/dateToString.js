@@ -1,6 +1,6 @@
 import { isDate, isString, isObject, isBoolean } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { _dateToString } from './_dateToString.js';
+import { _dateToString } from './__dateToString.js';
 
 export const dateToString = (
   date,

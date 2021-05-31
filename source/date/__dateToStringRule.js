@@ -1,12 +1,7 @@
 import { isNull } from '../type/type.js';
 import { _paddingFirst } from '../string/_paddingFirst.js';
 import { _subFirst, _subLast, _trimFirst } from '../string/string_common.js';
-// import { _dayOfWeekEnglishShort } from './_dayOfWeekEnglishShort.js';
-// import { _dayOfWeekEnglishLong } from './_dayOfWeekEnglishLong.js';
 import { _dayOfWeek } from './_dayOfWeek.js';
-// import { _nameOfMonthEnglishChar3 } from './_nameOfMonthEnglishChar3.js';
-// import { _nameOfMonthEnglishChar4 } from './_nameOfMonthEnglishChar4.js';
-// import { _nameOfMonthEnglishLong } from './_nameOfMonthEnglishLong.js';
 import { _nameOfMonth } from './_nameOfMonth.js';
 import { _minutesToTexts } from './_minutesToTexts.js';
 

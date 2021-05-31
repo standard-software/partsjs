@@ -10,7 +10,7 @@ import { isOdd } from '../number/number.js';
 import { _includeCount } from '../string/_includeCount.js';
 import { __dateToStringRule } from './__dateToStringRule.js';
 
-export const _dateToString = (
+export const __dateToString = (
   date, format, formatRule = __dateToStringRule.Default(),
   isLocal = true,
 ) => {
@@ -18,7 +18,7 @@ export const _dateToString = (
   const existDoubleQuote = __includes(format, '"');
   if ((existSingleQuote) && (existDoubleQuote)) {
     throw new Error(
-      `_dateToString args(format:${format}) exists both singleQuote and doubleQuote`,
+      `__dateToString args(format:${format}) exists both singleQuote and doubleQuote`,
     );
   }
 
@@ -46,7 +46,7 @@ export const _dateToString = (
   }
   if (isOdd(_includeCount(format, quoteChar))) {
     throw new Error(
-      `_dateToString args(format:${format}) exists odd Quotes`,
+      `__dateToString args(format:${format}) exists odd Quotes`,
     );
   }
 
@@ -57,6 +57,8 @@ export const _dateToString = (
   return formatStrs.join('');
 };
 
-_dateToString.func = __dateToStringRule;
+__dateToString.func = __dateToStringRule;
 
-export default { _dateToString };
+export const _dateToString = __dateToString;
+
+export default { _dateToString, __dateToString };

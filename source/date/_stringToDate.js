@@ -10,7 +10,7 @@ import { isOdd } from '../number/number.js';
 import { _includeCount } from '../string/_includeCount.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
 import { INVALID_DATE } from './INVALID_DATE.js';
-import { _dateToString } from './_dateToString.js';
+import { __dateToString } from './__dateToString.js';
 import { _escapeRegExp } from '../string/_escapeRegExp.js';
 import { _ThisYear } from './_ThisYear.js';
 
@@ -69,7 +69,7 @@ export const _stringToDate = (
   //   str,
   //   _dateToString(result, format) === str,
   // );
-  if (_dateToString(result, format) === str) {
+  if (__dateToString(result, format) === str) {
     return result;
   } else {
     return INVALID_DATE;
