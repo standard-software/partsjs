@@ -8,10 +8,10 @@ import { __loop } from '../syntax/__loop.js';
 import { _replaceAllArray } from '../string/_replaceAllArray.js';
 import { isOdd } from '../number/number.js';
 import { _includeCount } from '../string/_includeCount.js';
-import { __dateToStringFunc } from './__dateToStringFunc.js';
+import { __dateToStringRule } from './__dateToStringRule.js';
 
 export const _dateToString = (
-  date, format, ruleObject = __dateToStringFunc.DefaultObject(),
+  date, format, formatRule = __dateToStringRule.Default(),
   isLocal = true,
 ) => {
   const existSingleQuote = __includes(format, "'");
@@ -22,7 +22,9 @@ export const _dateToString = (
     );
   }
 
-  const keys = _objectKeys(ruleObject);
+  const timezoneOffsetMin = isLocal === true ? date.getTimezoneOffset() : null;
+
+  const keys = _objectKeys(formatRule);
   keys.sort(
     _SortFunc([
       [_SortFunc.order.normal.descending, v => v.length],
@@ -31,7 +33,7 @@ export const _dateToString = (
 
   const replaceArray = [];
   __loop(keys)((value, index) => {
-    replaceArray.push([value, ruleObject[value](date, isLocal)]);
+    replaceArray.push([value, formatRule[value](date, timezoneOffsetMin)]);
   });
 
   let quoteChar;
@@ -55,6 +57,6 @@ export const _dateToString = (
   return formatStrs.join('');
 };
 
-_dateToString.func = __dateToStringFunc;
+_dateToString.func = __dateToStringRule;
 
 export default { _dateToString };

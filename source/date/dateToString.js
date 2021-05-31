@@ -5,16 +5,16 @@ import { _dateToString } from './_dateToString.js';
 export const dateToString = (
   date,
   format,
-  rule = _dateToString.func.DefaultObject(),
+  rule = _dateToString.func.Default(),
   isLocal = true,
 ) => {
   if (isObjectParameter(date, 'date, format', 'rule, isLocal')) {
     ({
-      date, format, rule = _dateToString.func.DefaultObject(),
+      date, format, rule = _dateToString.func.Default(),
       isLocal = true,
     } = date);
   } else if (isObjectParameter(format, 'format', 'rule, isLocal')) {
-    ({ format, rule = _dateToString.func.DefaultObject(),
+    ({ format, rule = _dateToString.func.Default(),
       isLocal = true,
     } = format);
   } else if (isObjectParameter(rule, 'rule', 'isLocal')) {

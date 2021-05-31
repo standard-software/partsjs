@@ -12,11 +12,11 @@ import { __stringToDateRule } from './__stringToDateRule.js';
 import { INVALID_DATE } from './INVALID_DATE.js';
 import { _dateToString } from './_dateToString.js';
 import { _escapeRegExp } from '../string/_escapeRegExp.js';
-import { _Today } from './_Today.js';
+import { _ThisYear } from './_ThisYear.js';
 
 export const _stringToDate = (
   str, format,
-  sourceDate = _Today(),
+  sourceDate = _ThisYear(),
   formatRule = __stringToDateRule.default,
 ) => {
   __stringToDateRule.initialize(sourceDate);
