@@ -1,6 +1,7 @@
 /**
  * stringToDate
  */
+import { isNull } from '../type/type.js';
 import { __includes } from '../compare/__includes.js';
 import { _objectKeys } from '../object/objectKeys.js';
 import { _SortFunc } from '../array/_SortFunc.js';
@@ -60,20 +61,30 @@ export const _stringToDate = (
     setDateFunc(result, setValue);
     // console.log(result.toString());
   }
-  __stringToDateRule.finalize(result);
+  const { timezoneOffset } = __stringToDateRule.finalize(result);
 
   // return result;
   // console.log(
-  //   result.toString(),
+  //   timezoneOffset,
   //   _dateToString(result, format),
+  //   _dateToString(result, format, timezoneOffset),
   //   str,
-  //   _dateToString(result, format) === str,
   // );
-  if (_dateToString(result, format) === str) {
-    return result;
+
+  if (isNull(timezoneOffset)) {
+    if (_dateToString(result, format) === str) {
+      return result;
+    } else {
+      return INVALID_DATE;
+    }
   } else {
-    return INVALID_DATE;
+    if (_dateToString(result, format, timezoneOffset) === str) {
+      return result;
+    } else {
+      return INVALID_DATE;
+    }
   }
+
 };
 
 export default { _stringToDate };

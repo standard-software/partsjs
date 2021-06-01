@@ -880,10 +880,12 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        // testCounter();
+        testCounter();
+        var dt = Datetime(2021, 5, 26, 23, 59, 40);
+        var [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
         checkEqual(
-          dateToString(Datetime(2021, 5, 26, 23, 59, 40), 'YYYYMMDD HH mm ss Z'),
-          '20210526 23 59 40 +09:00',
+          dateToString(dt, 'YYYYMMDD HH mm ss Z'),
+          '20210526 23 59 40 ' + s + h + ':' + m,
         );
         checkEqual(
           Datetime(2021, 5, 26, 23, 59, 40),

@@ -5,11 +5,10 @@ import { __includes } from '../compare/__includes.js';
 import { _subLength } from '../string/string_common.js';
 import { _textsToMinutes } from './_textsToMinutes.js';
 
-// let flagTimezone = false;
 let flagPM = false;
 
 const datetimeInfo = {
-  timezoneMin: null,
+  timezoneOffset: null,
   year: null,
   month: null,
   date: null,
@@ -23,10 +22,7 @@ const setTimezone     = (date, value) => {
   const [s, h, m] = [
     _subLength(value, 0, 1), _subLength(value, 1, 2), _subLength(value, 4, 2),
   ];
-  // console.log(_textsToMinutes([s, h, m]));
-  // flagTimezone = true;
-  datetimeInfo.timezoneMin = _textsToMinutes([s, h, m]);
-  // timezone = 540
+  datetimeInfo.timezoneOffset = -1 * _textsToMinutes([s, h, m]);
 };
 
 const setYear4        = (date, value) => {
@@ -103,8 +99,6 @@ __stringToDateRule.ruleColumnIndex = {
 
 __stringToDateRule.initialize = (dateSource) => {
   flagPM = false;
-  // flagTimezone = false;
-  // datetimeInfo.timezoneMin = dateSource.getTimezoneOffset();
   datetimeInfo.year = dateSource.getFullYear();
   datetimeInfo.month = dateSource.getMonth();
   datetimeInfo.date = dateSource.getDate();
@@ -112,21 +106,25 @@ __stringToDateRule.initialize = (dateSource) => {
   datetimeInfo.minutes = dateSource.getMinutes();
   datetimeInfo.seconds = dateSource.getSeconds();
   datetimeInfo.milliseconds = dateSource.getMilliseconds();
-
 };
 
 __stringToDateRule.finalize = (dateSource) => {
-  const { year, month, date, hours, minutes, seconds, milliseconds } = datetimeInfo;
+  const {
+    year, month, date,
+    hours, minutes, seconds, milliseconds,
+    timezoneOffset,
+  } = datetimeInfo;
   // console.log({ year, month, date, hours, minutes, seconds, milliseconds });
 
-  if (!isNull(datetimeInfo.timezoneMin)) {
+  if (!isNull(timezoneOffset)) {
     dateSource.setUTCFullYear(year, month, date);
     dateSource.setUTCHours(hours, minutes, seconds, milliseconds);
-    dateSource.setMinutes(dateSource.getMinutes() - datetimeInfo.timezoneMin);
+    dateSource.setMinutes(dateSource.getMinutes() + datetimeInfo.timezoneOffset);
   } else {
     dateSource.setFullYear(year, month, date);
     dateSource.setHours(hours, minutes, seconds, milliseconds);
   }
+  return { timezoneOffset };
 };
 
 __stringToDateRule.default = [
