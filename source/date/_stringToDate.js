@@ -64,6 +64,7 @@ export const _stringToDate = (
   const { timezoneOffset } = __stringToDateRule.finalize(result);
 
   // return result;
+
   // console.log(
   //   timezoneOffset,
   //   _dateToString(result, format),
@@ -71,18 +72,10 @@ export const _stringToDate = (
   //   str,
   // );
 
-  if (isNull(timezoneOffset)) {
-    if (_dateToString(result, format) === str) {
-      return result;
-    } else {
-      return INVALID_DATE;
-    }
+  if (_dateToString(result, format, timezoneOffset) === str) {
+    return result;
   } else {
-    if (_dateToString(result, format, timezoneOffset) === str) {
-      return result;
-    } else {
-      return INVALID_DATE;
-    }
+    return INVALID_DATE;
   }
 
 };

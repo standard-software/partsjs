@@ -18,11 +18,25 @@ const datetimeInfo = {
   milliseconds: null,
 };
 
-const setTimezone     = (date, value) => {
-  const [s, h, m] = [
-    _subLength(value, 0, 1), _subLength(value, 1, 2), _subLength(value, 4, 2),
-  ];
-  datetimeInfo.timezoneOffset = -1 * _textsToMinutes([s, h, m]);
+const setTimezoneHH_MM     = (UTCText) => (date, value) => {
+  if (value === UTCText) {
+    datetimeInfo.timezoneOffset = null;
+  } else {
+    const [s, h, m] = [
+      _subLength(value, 0, 1), _subLength(value, 1, 2), _subLength(value, 4, 2),
+    ];
+    datetimeInfo.timezoneOffset = -1 * _textsToMinutes([s, h, m]);
+  }
+};
+const setTimezoneHHMM     = (UTCText) => (date, value) => {
+  if (value === UTCText) {
+    datetimeInfo.timezoneOffset = null;
+  } else {
+    const [s, h, m] = [
+      _subLength(value, 0, 1), _subLength(value, 1, 2), _subLength(value, 3, 2),
+    ];
+    datetimeInfo.timezoneOffset = -1 * _textsToMinutes([s, h, m]);
+  }
 };
 
 const setYear4        = (date, value) => {
@@ -106,6 +120,7 @@ __stringToDateRule.initialize = (dateSource) => {
   datetimeInfo.minutes = dateSource.getMinutes();
   datetimeInfo.seconds = dateSource.getSeconds();
   datetimeInfo.milliseconds = dateSource.getMilliseconds();
+  datetimeInfo.timezoneOffset = dateSource.getTimezoneOffset();
 };
 
 __stringToDateRule.finalize = (dateSource) => {
@@ -116,13 +131,10 @@ __stringToDateRule.finalize = (dateSource) => {
   } = datetimeInfo;
   // console.log({ year, month, date, hours, minutes, seconds, milliseconds });
 
-  if (!isNull(timezoneOffset)) {
-    dateSource.setUTCFullYear(year, month, date);
-    dateSource.setUTCHours(hours, minutes, seconds, milliseconds);
+  dateSource.setUTCFullYear(year, month, date);
+  dateSource.setUTCHours(hours, minutes, seconds, milliseconds);
+  if (!isNull(datetimeInfo.timezoneOffset)) {
     dateSource.setMinutes(dateSource.getMinutes() + datetimeInfo.timezoneOffset);
-  } else {
-    dateSource.setFullYear(year, month, date);
-    dateSource.setHours(hours, minutes, seconds, milliseconds);
   }
   return { timezoneOffset };
 };
@@ -149,12 +161,13 @@ __stringToDateRule.default = [
   ['AA',    '(AM|PM)',      4, setAMPM],
   ['a',     '(a|p)',        4, setAMPM],
   ['A',     '(A|P)',        4, setAMPM],
-  ['Z',     '([+|-]\\d{2}:\\d{2})',        0, setTimezone],
   ['ddd',   `(${__dayOfWeekNames.EnglishShort().join('|')})`,  -1, () => {}],
   ['dddd',  `(${__dayOfWeekNames.EnglishLong().join('|')})`,  -1, () => {}],
   ['MMM',   `(${__monthNames.EnglishChar3().join('|')})`,   2, setMonthEnglishChar3],
   ['MMMM',  `(${__monthNames.EnglishChar4().join('|')})`,   2, setMonthEnglishChar4],
   ['MMMMM', `(${__monthNames.EnglishLong().join('|')})`,    2, setMonthEnglishLong],
+  ['Z',     '(Z|[+|-]\\d{2}:\\d{2})', 0, setTimezoneHH_MM('Z')],
+  ['ZZ',     '(Z|[+|-]\\d{2}\\d{2})', 0, setTimezoneHHMM('Z')],
 ];
 
 __stringToDateRule.momentLike = [

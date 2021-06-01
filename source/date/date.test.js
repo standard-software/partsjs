@@ -881,29 +881,56 @@ export const test_execute_date = (parts) => {
 
         // timezone
         testCounter();
-        var dt = Datetime(2021, 5, 26, 23, 59, 40);
+        var dt = Datetime(2021, 6, 1, 23, 45, 6);
         var [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
+        var timezoneText = s + h + ':' + m;
         checkEqual(
-          dateToString(dt, 'YYYYMMDD HH mm ss Z'),
-          '20210526 23 59 40 ' + s + h + ':' + m,
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z'),
+          '2021/06/01 23:45:06 ' + timezoneText,
         );
-        checkEqual(
-          Datetime(2021, 5, 26, 23, 59, 40),
-          stringToDate('20210526 23 59 40 +09:00', 'YYYYMMDD HH mm ss Z'),
-        );
-        checkEqual(
-          Datetime(2021, 5, 31, 9, 10, 20, 30, true),
-          stringToDate('2021/05/31 09:10:20.030 +09:00', 'YYYY/MM/DD HH:mm:ss.SSS Z'),
-        );
-        checkEqual(
-          Datetime(2021, 5, 31, 0, 10, 20, 30, false),
-          stringToDate('2021/05/31 09:10:20.030 +09:00', 'YYYY/MM/DD HH:mm:ss.SSS Z'),
-        );
-        // checkEqual(
-        //   Datetime(2021, 5, 31, 0, 10, 20, 30, false),
-        //   stringToDate('2021/05/31 08:10:20.030 +08:00', 'YYYY/MM/DD HH:mm:ss.SSS Z'),
-        // );
 
+        var dt = Datetime(2021, 6, 1, 0, 12, 34, 0, false);
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 09:12:34 +09:00', 'YYYY/MM/DD HH:mm:ss Z'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 08:12:34 +08:00', 'YYYY/MM/DD HH:mm:ss Z'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 00:12:34 +00:00', 'YYYY/MM/DD HH:mm:ss Z'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/05/31 23:12:34 -01:00', 'YYYY/MM/DD HH:mm:ss Z'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss Z'),
+        );
+
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 09:12:34 +0900', 'YYYY/MM/DD HH:mm:ss ZZ'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 08:12:34 +0800', 'YYYY/MM/DD HH:mm:ss ZZ'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 00:12:34 +0000', 'YYYY/MM/DD HH:mm:ss ZZ'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/05/31 23:12:34 -0100', 'YYYY/MM/DD HH:mm:ss ZZ'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss ZZ'),
+        );
 
       });
     };
