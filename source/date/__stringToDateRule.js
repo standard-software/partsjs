@@ -18,7 +18,7 @@ const datetimeInfo = {
   milliseconds: null,
 };
 
-const setTimezoneHH_MM     = (UTCText) => (date, value) => {
+const setTimezoneHH_MM     = (UTCText) => (value) => {
   if (value === UTCText) {
     datetimeInfo.timezoneOffset = null;
   } else {
@@ -28,7 +28,7 @@ const setTimezoneHH_MM     = (UTCText) => (date, value) => {
     datetimeInfo.timezoneOffset = -1 * _textsToMinutes([s, h, m]);
   }
 };
-const setTimezoneHHMM     = (UTCText) => (date, value) => {
+const setTimezoneHHMM     = (UTCText) => (value) => {
   if (value === UTCText) {
     datetimeInfo.timezoneOffset = null;
   } else {
@@ -39,61 +39,61 @@ const setTimezoneHHMM     = (UTCText) => (date, value) => {
   }
 };
 
-const setYear4        = (date, value) => {
+const setYear4        = (value) => {
   datetimeInfo.year = Number(value);
 };
-const setYear2        = (date, value) => {
+const setYear2        = (value) => {
   const plusValue = Math.floor(datetimeInfo.year / 100) * 100;
   datetimeInfo.year = Number(value) + plusValue;
 };
 
-const setMonth = (date, value) => {
+const setMonth = (value) => {
   datetimeInfo.month = Number(value) - 1;
 };
-const setMonthEnglishChar3 = (date, value) => {
+const setMonthEnglishChar3 = (value) => {
   datetimeInfo.month = __monthNames.EnglishChar3().indexOf(value);
 };
-const setMonthEnglishChar4 = (date, value) => {
+const setMonthEnglishChar4 = (value) => {
   datetimeInfo.month = __monthNames.EnglishChar4().indexOf(value);
 };
-const setMonthEnglishLong = (date, value) => {
+const setMonthEnglishLong = (value) => {
   datetimeInfo.month = __monthNames.EnglishLong().indexOf(value);
 };
 
-const setDate = (date, value) => {
+const setDate = (value) => {
   datetimeInfo.date = Number(value);
 };
 
-const setHours = (date, value) => {
+const setHours = (value) => {
   datetimeInfo.hours = Number(value);
 };
 
-const setAMPM = (date, value) => {
-  // console.log({ date, value, flagPM, if: value.toLowerCase().includes('p') });
+const setAMPM = (value) => {
+  // console.log({ date, value, flagPM });
   if (__includes(value.toLowerCase(), 'p')) {
     flagPM = true;
   }
 };
 
-const setHours12      = (date, value) => {
+const setHours12      = (value) => {
   datetimeInfo.hours = Number(value);
 };
 
-const setMinutes = (date, value) => {
+const setMinutes = (value) => {
   datetimeInfo.minutes = Number(value);
 };
 
-const setSec = (date, value) => {
+const setSec = (value) => {
   datetimeInfo.seconds = Number(value);
 };
 
-const setMsec = (date, value) => {
+const setMsec = (value) => {
   datetimeInfo.milliseconds = Number(value);
 };
-const setMsecX10 = (date, value) => {
+const setMsecX10 = (value) => {
   datetimeInfo.milliseconds = Number(value) * 10;
 };
-const setMsecX100 = (date, value) => {
+const setMsecX100 = (value) => {
   datetimeInfo.milliseconds = Number(value) * 100;
 };
 
@@ -101,35 +101,20 @@ export const __stringToDateRule = {
   setYear4,
   setYear2,
   setMonth,
-  setMonth,
-  setDate,
   setDate,
   setHours,
-  setHours,
-  setHours12,
   setHours12,
   setMinutes,
-  setMinutes,
-  setSec,
   setSec,
   setMsec,
   setMsecX10,
   setMsecX100,
-  setAMPM,
-  setAMPM,
-  setAMPM,
   setAMPM,
   setMonthEnglishChar3,
   setMonthEnglishChar4,
   setMonthEnglishLong,
   setTimezoneHH_MM,
   setTimezoneHHMM,
-};
-
-__stringToDateRule.ruleColumnIndex = {
-  format: 0,
-  function: 2,
-  value: 3,
 };
 
 __stringToDateRule.initialize = (dateSource) => {
@@ -165,36 +150,42 @@ __stringToDateRule.finalize = (dateSource) => {
 
 const r = __stringToDateRule;
 
-const defaultRule = [
-  ['YYYY',  '(\\d{4})',                                       r.setYear4],
-  ['YY',    '(\\d{2})',                                       r.setYear2],
-  ['MM',    '(\\d{2})',                                       r.setMonth],
-  ['M',     '(\\d{1,2})',                                     r.setMonth],
-  ['DD',    '(\\d{2})',                                       r.setDate],
-  ['D',     '(\\d{1,2})',                                     r.setDate],
-  ['HH',    '(\\d{2})',                                       r.setHours],
-  ['H',     '(\\d{1,2})',                                     r.setHours],
-  ['hh',    '(\\d{2})',                                       r.setHours12],
-  ['h',     '(\\d{1,2})',                                     r.setHours12],
-  ['mm',    '(\\d{2})',                                       r.setMinutes],
-  ['m',     '(\\d{1,2})',                                     r.setMinutes],
-  ['ss',    '(\\d{2})',                                       r.setSec],
-  ['s',     '(\\d{1,2})',                                     r.setSec],
-  ['SSS',   '(\\d{3})',                                       r.setMsec],
-  ['SS',    '(\\d{2})',                                       r.setMsecX10],
-  ['S',     '(\\d{1})',                                       r.setMsecX100],
-  ['aa',    '(am|pm)',                                        r.setAMPM],
-  ['AA',    '(AM|PM)',                                        r.setAMPM],
-  ['a',     '(a|p)',                                          r.setAMPM],
-  ['A',     '(A|P)',                                          r.setAMPM],
-  ['ddd',   `(${__dayOfWeekNames.EnglishShort().join('|')})`, () => {}],
-  ['dddd',  `(${__dayOfWeekNames.EnglishLong().join('|')})`,  () => {}],
-  ['MMM',   `(${__monthNames.EnglishChar3().join('|')})`,     r.setMonthEnglishChar3],
-  ['MMMM',  `(${__monthNames.EnglishChar4().join('|')})`,     r.setMonthEnglishChar4],
-  ['MMMMM', `(${__monthNames.EnglishLong().join('|')})`,      r.setMonthEnglishLong],
-  ['Z',     '(Z|[+|-]\\d{2}:\\d{2})',                         r.setTimezoneHH_MM('Z')],
-  ['ZZ',    '(Z|[+|-]\\d{2}\\d{2})',                          r.setTimezoneHHMM('Z')],
-];
+const regDayOfWeekEnglishShort  = `(${__dayOfWeekNames.EnglishShort().join('|')})`;
+const regDayOfWeekEnglishLong   = `(${__dayOfWeekNames.EnglishLong().join('|')})`;
+const regMonthNameEnglishChar3  = `(${__monthNames.EnglishChar3().join('|')})`;
+const regMonthNameEnglishChar4  = `(${__monthNames.EnglishChar4().join('|')})`;
+const regMonthNameEnglishLong   = `(${__monthNames.EnglishLong().join('|')})`;
+
+const defaultRule = {
+  ['YYYY']:  { reg: '(\\d{4})',               func: r.setYear4 },
+  ['YY']:    { reg: '(\\d{2})',               func: r.setYear2 },
+  ['MM']:    { reg: '(\\d{2})',               func: r.setMonth },
+  ['M']:     { reg: '(\\d{1,2})',             func: r.setMonth },
+  ['DD']:    { reg: '(\\d{2})',               func: r.setDate },
+  ['D']:     { reg: '(\\d{1,2})',             func: r.setDate },
+  ['HH']:    { reg: '(\\d{2})',               func: r.setHours },
+  ['H']:     { reg: '(\\d{1,2})',             func: r.setHours },
+  ['hh']:    { reg: '(\\d{2})',               func: r.setHours12 },
+  ['h']:     { reg: '(\\d{1,2})',             func: r.setHours12 },
+  ['mm']:    { reg: '(\\d{2})',               func: r.setMinutes },
+  ['m']:     { reg: '(\\d{1,2})',             func: r.setMinutes },
+  ['ss']:    { reg: '(\\d{2})',               func: r.setSec },
+  ['s']:     { reg: '(\\d{1,2})',             func: r.setSec },
+  ['SSS']:   { reg: '(\\d{3})',               func: r.setMsec },
+  ['SS']:    { reg: '(\\d{2})',               func: r.setMsecX10 },
+  ['S']:     { reg: '(\\d{1})',               func: r.setMsecX100 },
+  ['aa']:    { reg: '(am|pm)',                func: r.setAMPM },
+  ['AA']:    { reg: '(AM|PM)',                func: r.setAMPM },
+  ['a']:     { reg: '(a|p)',                  func: r.setAMPM },
+  ['A']:     { reg: '(A|P)',                  func: r.setAMPM },
+  ['ddd']:   { reg: regDayOfWeekEnglishShort, func: () => {} },
+  ['dddd']:  { reg: regDayOfWeekEnglishLong,  func: () => {} },
+  ['MMM']:   { reg: regMonthNameEnglishChar3, func: r.setMonthEnglishChar3 },
+  ['MMMM']:  { reg: regMonthNameEnglishChar4, func: r.setMonthEnglishChar4 },
+  ['MMMMM']: { reg: regMonthNameEnglishLong,  func: r.setMonthEnglishLong },
+  ['Z']:     { reg: '(Z|[+|-]\\d{2}:\\d{2})', func: r.setTimezoneHH_MM('Z') },
+  ['ZZ']:    { reg: '(Z|[+|-]\\d{2}\\d{2})',  func: r.setTimezoneHHMM('Z') },
+};
 
 const momentLikeRule = [
 

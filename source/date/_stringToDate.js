@@ -21,20 +21,22 @@ export const _stringToDate = (
   rule = __stringToDateRule.Default(),
 ) => {
   __stringToDateRule.initialize(sourceDate);
-  const col = __stringToDateRule.ruleColumnIndex;
 
-  const replaceTextSortFunc = (a, b) => b[col.format].length - a[col.format].length;
-
-  const table = [...rule];
-  table.sort(replaceTextSortFunc);
+  const keys = _objectKeys(rule);
+  keys.sort(
+    _SortFunc([
+      [_SortFunc.order.normal.descending, v => v.length],
+    ]),
+  );
   const escapeRegExpFormat = _escapeRegExp(format);
   // console.log({ escapeRegExpFormat });
   const replaceResult = _replaceAllArray(
     escapeRegExpFormat,
-    table.map(([text, reg]) => [text, reg]),
+    keys.map(key => [key, rule[key].reg]),
     true,
   );
-  const replaceInfoItems = replaceResult.replaceInfo.map(e => [...table[e.searchIndex]]);
+  // console.log({ replaceResult });
+  const replaceInfoItems = replaceResult.replaceInfo.map(e => rule[keys[e.searchIndex]]);
 
   const matchResult = str.match(new RegExp(`${replaceResult.result}`));
   // console.log({ escapeRegExpFormat, replaceInfoItems, replaceResult, matchResult });
@@ -47,16 +49,14 @@ export const _stringToDate = (
   if (replaceInfoItems.length !== valueItems.length) {
     return INVALID_DATE;
   }
-  replaceInfoItems.forEach((e, i) => {
-    e.push(valueItems[i]);
+  replaceInfoItems.forEach((item, i) => {
+    item.value = valueItems[i];
   });
   // console.log({ replaceInfoItems });
 
   const result = new Date(sourceDate.getTime());
-  for (const replaceInfoItem of replaceInfoItems) {
-    const setDateFunc = replaceInfoItem[col.function];
-    const setValue = replaceInfoItem[col.value];
-    setDateFunc(result, setValue);
+  for (const infoItem of replaceInfoItems) {
+    infoItem.func(infoItem.value);
     // console.log(result.toString());
   }
   const { timezoneOffset } = __stringToDateRule.finalize(result);
