@@ -97,7 +97,34 @@ const setMsecX100 = (date, value) => {
   datetimeInfo.milliseconds = Number(value) * 100;
 };
 
-export const __stringToDateRule = {};
+export const __stringToDateRule = {
+  setYear4,
+  setYear2,
+  setMonth,
+  setMonth,
+  setDate,
+  setDate,
+  setHours,
+  setHours,
+  setHours12,
+  setHours12,
+  setMinutes,
+  setMinutes,
+  setSec,
+  setSec,
+  setMsec,
+  setMsecX10,
+  setMsecX100,
+  setAMPM,
+  setAMPM,
+  setAMPM,
+  setAMPM,
+  setMonthEnglishChar3,
+  setMonthEnglishChar4,
+  setMonthEnglishLong,
+  setTimezoneHH_MM,
+  setTimezoneHHMM,
+};
 
 __stringToDateRule.ruleColumnIndex = {
   format: 0,
@@ -136,38 +163,43 @@ __stringToDateRule.finalize = (dateSource) => {
   return { timezoneOffset };
 };
 
-__stringToDateRule.default = [
-  ['YYYY',  '(\\d{4})',                                       setYear4],
-  ['YY',    '(\\d{2})',                                       setYear2],
-  ['MM',    '(\\d{2})',                                       setMonth],
-  ['M',     '(\\d{1,2})',                                     setMonth],
-  ['DD',    '(\\d{2})',                                       setDate],
-  ['D',     '(\\d{1,2})',                                     setDate],
-  ['HH',    '(\\d{2})',                                       setHours],
-  ['H',     '(\\d{1,2})',                                     setHours],
-  ['hh',    '(\\d{2})',                                       setHours12],
-  ['h',     '(\\d{1,2})',                                     setHours12],
-  ['mm',    '(\\d{2})',                                       setMinutes],
-  ['m',     '(\\d{1,2})',                                     setMinutes],
-  ['ss',    '(\\d{2})',                                       setSec],
-  ['s',     '(\\d{1,2})',                                     setSec],
-  ['SSS',   '(\\d{3})',                                       setMsec],
-  ['SS',    '(\\d{2})',                                       setMsecX10],
-  ['S',     '(\\d{1})',                                       setMsecX100],
-  ['aa',    '(am|pm)',                                        setAMPM],
-  ['AA',    '(AM|PM)',                                        setAMPM],
-  ['a',     '(a|p)',                                          setAMPM],
-  ['A',     '(A|P)',                                          setAMPM],
+const r = __stringToDateRule;
+
+const defaultRule = [
+  ['YYYY',  '(\\d{4})',                                       r.setYear4],
+  ['YY',    '(\\d{2})',                                       r.setYear2],
+  ['MM',    '(\\d{2})',                                       r.setMonth],
+  ['M',     '(\\d{1,2})',                                     r.setMonth],
+  ['DD',    '(\\d{2})',                                       r.setDate],
+  ['D',     '(\\d{1,2})',                                     r.setDate],
+  ['HH',    '(\\d{2})',                                       r.setHours],
+  ['H',     '(\\d{1,2})',                                     r.setHours],
+  ['hh',    '(\\d{2})',                                       r.setHours12],
+  ['h',     '(\\d{1,2})',                                     r.setHours12],
+  ['mm',    '(\\d{2})',                                       r.setMinutes],
+  ['m',     '(\\d{1,2})',                                     r.setMinutes],
+  ['ss',    '(\\d{2})',                                       r.setSec],
+  ['s',     '(\\d{1,2})',                                     r.setSec],
+  ['SSS',   '(\\d{3})',                                       r.setMsec],
+  ['SS',    '(\\d{2})',                                       r.setMsecX10],
+  ['S',     '(\\d{1})',                                       r.setMsecX100],
+  ['aa',    '(am|pm)',                                        r.setAMPM],
+  ['AA',    '(AM|PM)',                                        r.setAMPM],
+  ['a',     '(a|p)',                                          r.setAMPM],
+  ['A',     '(A|P)',                                          r.setAMPM],
   ['ddd',   `(${__dayOfWeekNames.EnglishShort().join('|')})`, () => {}],
   ['dddd',  `(${__dayOfWeekNames.EnglishLong().join('|')})`,  () => {}],
-  ['MMM',   `(${__monthNames.EnglishChar3().join('|')})`,     setMonthEnglishChar3],
-  ['MMMM',  `(${__monthNames.EnglishChar4().join('|')})`,     setMonthEnglishChar4],
-  ['MMMMM', `(${__monthNames.EnglishLong().join('|')})`,      setMonthEnglishLong],
-  ['Z',     '(Z|[+|-]\\d{2}:\\d{2})',                         setTimezoneHH_MM('Z')],
-  ['ZZ',    '(Z|[+|-]\\d{2}\\d{2})',                          setTimezoneHHMM('Z')],
+  ['MMM',   `(${__monthNames.EnglishChar3().join('|')})`,     r.setMonthEnglishChar3],
+  ['MMMM',  `(${__monthNames.EnglishChar4().join('|')})`,     r.setMonthEnglishChar4],
+  ['MMMMM', `(${__monthNames.EnglishLong().join('|')})`,      r.setMonthEnglishLong],
+  ['Z',     '(Z|[+|-]\\d{2}:\\d{2})',                         r.setTimezoneHH_MM('Z')],
+  ['ZZ',    '(Z|[+|-]\\d{2}\\d{2})',                          r.setTimezoneHHMM('Z')],
 ];
 
-__stringToDateRule.momentLike = [
+const momentLikeRule = [
 
 ];
 
+__stringToDateRule.Default = () => defaultRule;
+
+export default { __stringToDateRule };

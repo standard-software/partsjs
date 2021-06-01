@@ -18,14 +18,14 @@ import { _ThisYear } from './_ThisYear.js';
 export const _stringToDate = (
   str, format,
   sourceDate = _ThisYear(),
-  formatRule = __stringToDateRule.default,
+  rule = __stringToDateRule.Default(),
 ) => {
   __stringToDateRule.initialize(sourceDate);
   const col = __stringToDateRule.ruleColumnIndex;
 
   const replaceTextSortFunc = (a, b) => b[col.format].length - a[col.format].length;
 
-  const table = [...formatRule];
+  const table = [...rule];
   table.sort(replaceTextSortFunc);
   const escapeRegExpFormat = _escapeRegExp(format);
   // console.log({ escapeRegExpFormat });

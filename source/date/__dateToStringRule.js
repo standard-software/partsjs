@@ -5,7 +5,7 @@ import { _dayOfWeek } from './_dayOfWeek.js';
 import { _nameOfMonth } from './_nameOfMonth.js';
 import { _minutesToTexts } from './_minutesToTexts.js';
 
-export const __dateToStringRule = {};
+const rule = {};
 
 const cloneDate = (date) => new Date(date.getTime());
 const setDateOffsetMin = (date, offsetMin) => {
@@ -15,40 +15,40 @@ const setDateOffsetMin = (date, offsetMin) => {
   return result;
 };
 
-__dateToStringRule.year4 = (date, timezoneOffset) => {
+const year4 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCFullYear().toString();
 };
 
-__dateToStringRule.year2 = (date, timezoneOffset) => {
+const year2 = (date, timezoneOffset) => {
   return _subLast(year4(date, timezoneOffset), 2);
 };
 
-__dateToStringRule.month1 = (date, timezoneOffset) => {
+const month1 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return (setDateOffsetMin(date, timezoneOffset).getUTCMonth() + 1).toString();
 };
 
-__dateToStringRule.month2 = (date, timezoneOffset) => {
+const month2 = (date, timezoneOffset) => {
   return _paddingFirst(month1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.date1 = (date, timezoneOffset) => {
+const date1 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return (setDateOffsetMin(date, timezoneOffset).getUTCDate()).toString();
 };
 
-__dateToStringRule.date2 = (date, timezoneOffset) => {
+const date2 = (date, timezoneOffset) => {
   return _paddingFirst(date1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.hour12_1 = (date, timezoneOffset) => {
+const hour12_1 = (date, timezoneOffset) => {
   // 0-11
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
@@ -56,12 +56,12 @@ __dateToStringRule.hour12_1 = (date, timezoneOffset) => {
   return (setDateOffsetMin(date, timezoneOffset).getUTCHours() % 12).toString();
 };
 
-__dateToStringRule.hour12_2 = (date, timezoneOffset) => {
+const hour12_2 = (date, timezoneOffset) => {
   // 00-11
   return _paddingFirst(hour12_1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.hour24_1 = (date, timezoneOffset) => {
+const hour24_1 = (date, timezoneOffset) => {
   // 0-23
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
@@ -69,34 +69,34 @@ __dateToStringRule.hour24_1 = (date, timezoneOffset) => {
   return (setDateOffsetMin(date, timezoneOffset).getUTCHours()).toString();
 };
 
-__dateToStringRule.hour24_2 = (date, timezoneOffset) => {
+const hour24_2 = (date, timezoneOffset) => {
   // 00-23
   return _paddingFirst(hour24_1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.minute1 = (date, timezoneOffset) => {
+const minute1 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCMinutes().toString();
 };
 
-__dateToStringRule.minute2 = (date, timezoneOffset) => {
+const minute2 = (date, timezoneOffset) => {
   return _paddingFirst(minute1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.second1 = (date, timezoneOffset) => {
+const second1 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCSeconds().toString();
 };
 
-__dateToStringRule.second2 = (date, timezoneOffset) => {
+const second2 = (date, timezoneOffset) => {
   return _paddingFirst(second1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.millisecond3 = (date, timezoneOffset) => {
+const millisecond3 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
@@ -106,49 +106,49 @@ __dateToStringRule.millisecond3 = (date, timezoneOffset) => {
   );
 };
 
-__dateToStringRule.millisecond2 = (date, timezoneOffset) => {
+const millisecond2 = (date, timezoneOffset) => {
   return _subFirst(
     millisecond3(date, timezoneOffset),
     2,
   );
 };
 
-__dateToStringRule.millisecond1 = (date, timezoneOffset) => {
+const millisecond1 = (date, timezoneOffset) => {
   return _subFirst(
     millisecond3(date, timezoneOffset),
     1,
   );
 };
 
-__dateToStringRule.am_pm = (date, timezoneOffset) => {
+const am_pm = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'am' : 'pm';
 };
 
-__dateToStringRule.AM_PM = (date, timezoneOffset) => {
+const AM_PM = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'AM' : 'PM';
 };
 
-__dateToStringRule.a_p = (date, timezoneOffset) => {
+const a_p = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'a' : 'p';
 };
 
-__dateToStringRule.A_P = (date, timezoneOffset) => {
+const A_P = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
   return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'A' : 'P';
 };
 
-__dateToStringRule.dayOfWeekEnglishShort = (date, timezoneOffset) => {
+const dayOfWeekEnglishShort = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
@@ -157,7 +157,7 @@ __dateToStringRule.dayOfWeekEnglishShort = (date, timezoneOffset) => {
   ];
 };
 
-__dateToStringRule.dayOfWeekEnglishLong = (date, timezoneOffset) => {
+const dayOfWeekEnglishLong = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
@@ -166,7 +166,7 @@ __dateToStringRule.dayOfWeekEnglishLong = (date, timezoneOffset) => {
   ];
 };
 
-__dateToStringRule.nameOfMonthEnglishChar3 = (date, timezoneOffset) => {
+const nameOfMonthEnglishChar3 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
@@ -175,7 +175,7 @@ __dateToStringRule.nameOfMonthEnglishChar3 = (date, timezoneOffset) => {
   ];
 };
 
-__dateToStringRule.nameOfMonthEnglishChar4 = (date, timezoneOffset) => {
+const nameOfMonthEnglishChar4 = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
@@ -184,7 +184,7 @@ __dateToStringRule.nameOfMonthEnglishChar4 = (date, timezoneOffset) => {
   ];
 };
 
-__dateToStringRule.nameOfMonthEnglishLong = (date, timezoneOffset) => {
+const nameOfMonthEnglishLong = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     timezoneOffset = 0;
   }
@@ -193,7 +193,7 @@ __dateToStringRule.nameOfMonthEnglishLong = (date, timezoneOffset) => {
   ];
 };
 
-__dateToStringRule.timezoneHHMM = (date, timezoneOffset) => {
+const timezoneHHMM = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     return 'Z';
   }
@@ -201,7 +201,7 @@ __dateToStringRule.timezoneHHMM = (date, timezoneOffset) => {
   return sign + hour + min;
 };
 
-__dateToStringRule.timezoneHH_MM = (date, timezoneOffset) => {
+const timezoneHH_MM = (date, timezoneOffset) => {
   if (isNull(timezoneOffset)) {
     return 'Z';
   }
@@ -209,7 +209,7 @@ __dateToStringRule.timezoneHH_MM = (date, timezoneOffset) => {
   return sign + hour + ':' + min;
 };
 
-const {
+export const __dateToStringRule = {
   year4,
   year2,
   month2,
@@ -238,69 +238,71 @@ const {
   nameOfMonthEnglishLong,
   timezoneHH_MM,
   timezoneHHMM,
-} = __dateToStringRule;
-
-const _DefaultRule = {
-  YYYY:   year4,
-  YY:     year2,
-  MM:     month2,
-  M:      month1,
-  DD:     date2,
-  D:      date1,
-  hh:     hour12_2,
-  h:      hour12_1,
-  HH:     hour24_2,
-  H:      hour24_1,
-  mm:     minute2,
-  m:      minute1,
-  ss:     second2,
-  s:      second1,
-  SSS:    millisecond3,
-  SS:     millisecond2,
-  S:      millisecond1,
-  aa:     am_pm,
-  AA:     AM_PM,
-  a:      a_p,
-  A:      A_P,
-  ddd:    dayOfWeekEnglishShort,
-  dddd:   dayOfWeekEnglishLong,
-  MMM:    nameOfMonthEnglishChar3,
-  MMMM:   nameOfMonthEnglishChar4,
-  MMMMM:  nameOfMonthEnglishLong,
-  Z:      timezoneHH_MM,
-  ZZ:     timezoneHHMM,
 };
 
-const _MomentLikeRule = {
-  YYYY: year4,
-  YY:   year2,
-  MM:   month2,
-  M:    month1,
-  DD:   date2,
-  D:    date1,
-  hh:   hour12_2,
-  h:    hour12_1,
-  HH:   hour24_2,
-  H:    hour24_1,
-  mm:   minute2,
-  m:    minute1,
-  ss:   second2,
-  s:    second1,
-  SSS:  millisecond3,
-  SS:   millisecond2,
-  S:    millisecond1,
-  a:    am_pm,
-  A:    AM_PM,
-  ddd:  dayOfWeekEnglishShort,
-  dddd: dayOfWeekEnglishLong,
-  MMM:  nameOfMonthEnglishChar3,
-  MMMM: nameOfMonthEnglishLong,
-  Z:    timezoneHH_MM,
-  ZZ:   timezoneHHMM,
+const r = __dateToStringRule;
+
+const defaultRule = {
+  ['YYYY']:   { func: r.year4 },
+  ['YY']:     { func: r.year2 },
+  ['MM']:     { func: r.month2 },
+  ['M']:      { func: r.month1 },
+  ['DD']:     { func: r.date2 },
+  ['D']:      { func: r.date1 },
+  ['hh']:     { func: r.hour12_2 },
+  ['h']:      { func: r.hour12_1 },
+  ['HH']:     { func: r.hour24_2 },
+  ['H']:      { func: r.hour24_1 },
+  ['mm']:     { func: r.minute2 },
+  ['m']:      { func: r.minute1 },
+  ['ss']:     { func: r.second2 },
+  ['s']:      { func: r.second1 },
+  ['SSS']:    { func: r.millisecond3 },
+  ['SS']:     { func: r.millisecond2 },
+  ['S']:      { func: r.millisecond1 },
+  ['aa']:     { func: r.am_pm },
+  ['AA']:     { func: r.AM_PM },
+  ['a']:      { func: r.a_p },
+  ['A']:      { func: r.A_P },
+  ['ddd']:    { func: r.dayOfWeekEnglishShort },
+  ['dddd']:   { func: r.dayOfWeekEnglishLong },
+  ['MMM']:    { func: r.nameOfMonthEnglishChar3 },
+  ['MMMM']:   { func: r.nameOfMonthEnglishChar4 },
+  ['MMMMM']:  { func: r.nameOfMonthEnglishLong },
+  ['Z']:      { func: r.timezoneHH_MM },
+  ['ZZ']:     { func: r.timezoneHHMM },
 };
 
-__dateToStringRule.Default = () => _DefaultRule;
-__dateToStringRule.MomentLike = () => _MomentLikeRule;
+const momentLikeRule = {
+  ['YYYY']:   { func: r.year4 },
+  ['YY']:     { func: r.year2 },
+  ['MM']:     { func: r.month2 },
+  ['M']:      { func: r.month1 },
+  ['DD']:     { func: r.date2 },
+  ['D']:      { func: r.date1 },
+  ['hh']:     { func: r.hour12_2 },
+  ['h']:      { func: r.hour12_1 },
+  ['HH']:     { func: r.hour24_2 },
+  ['H']:      { func: r.hour24_1 },
+  ['mm']:     { func: r.minute2 },
+  ['m']:      { func: r.minute1 },
+  ['ss']:     { func: r.second2 },
+  ['s']:      { func: r.second1 },
+  ['SSS']:    { func: r.millisecond3 },
+  ['SS']:     { func: r.millisecond2 },
+  ['S']:      { func: r.millisecond1 },
+  ['a']:      { func: r.am_pm },
+  ['A']:      { func: r.AM_PM },
+  ['ddd']:    { func: r.dayOfWeekEnglishShort },
+  ['dddd']:   { func: r.dayOfWeekEnglishLong },
+  ['MMM']:    { func: r.nameOfMonthEnglishChar3 },
+  ['MMMM']:   { func: r.nameOfMonthEnglishLong },
+  ['Z']:      { func: r.timezoneHH_MM },
+  ['ZZ']:     { func: r.timezoneHHMM },
+};
+
+__dateToStringRule.Default = () => defaultRule;
+__dateToStringRule.MomentLike = () => momentLikeRule;
 
 export default { __dateToStringRule };
 

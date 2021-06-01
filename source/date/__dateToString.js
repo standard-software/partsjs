@@ -29,8 +29,8 @@ export const __dateToString = (
   );
 
   const replaceArray = [];
-  __loop(keys)((value, index) => {
-    replaceArray.push([value, rule[value](date, timezoneOffset)]);
+  __loop(keys)(value => {
+    replaceArray.push([value, rule[value].func(date, timezoneOffset)]);
   });
 
   let quoteChar;
