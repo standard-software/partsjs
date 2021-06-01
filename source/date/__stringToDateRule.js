@@ -69,7 +69,6 @@ const setHours = (value) => {
 };
 
 const setAMPM = (value) => {
-  // console.log({ date, value, flagPM });
   if (__includes(value.toLowerCase(), 'p')) {
     flagPM = true;
   }
@@ -135,7 +134,6 @@ __stringToDateRule.finalize = (dateSource) => {
     hours, minutes, seconds, milliseconds,
     timezoneOffset,
   } = datetimeInfo;
-  // console.log({ year, month, date, hours, minutes, seconds, milliseconds });
 
   dateSource.setUTCFullYear(year, month, date);
   dateSource.setUTCHours(

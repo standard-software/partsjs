@@ -29,45 +29,31 @@ export const _stringToDate = (
     ]),
   );
   const escapeRegExpFormat = _escapeRegExp(format);
-  // console.log({ escapeRegExpFormat });
   const replaceResult = _replaceAllArray(
     escapeRegExpFormat,
     keys.map(key => [key, rule[key].reg]),
     true,
   );
-  // console.log({ replaceResult });
   const replaceInfoItems = replaceResult.replaceInfo.map(e => rule[keys[e.searchIndex]]);
 
   const matchResult = str.match(new RegExp(`${replaceResult.result}`));
-  // console.log({ escapeRegExpFormat, replaceInfoItems, replaceResult, matchResult });
   if (!Array.isArray(matchResult)) {
     return INVALID_DATE;
   }
   const [match, ...valueItems] = matchResult;
 
-  // console.log(replaceInfoItems.length, valueItems.length);
   if (replaceInfoItems.length !== valueItems.length) {
     return INVALID_DATE;
   }
   replaceInfoItems.forEach((item, i) => {
     item.value = valueItems[i];
   });
-  // console.log({ replaceInfoItems });
 
   const result = new Date(sourceDate.getTime());
   for (const infoItem of replaceInfoItems) {
     infoItem.func(infoItem.value);
-    // console.log(result.toString());
   }
   const { timezoneOffset } = __stringToDateRule.finalize(result);
-
-  // return result;
-
-  // console.log(
-  //   timezoneOffset,
-  //   _dateToString(result, format, timezoneOffset),
-  //   str,
-  // );
 
   if (_dateToString(result, format, timezoneOffset) === str) {
     return result;

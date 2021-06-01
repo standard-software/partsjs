@@ -11,7 +11,6 @@ const cloneDate = (date) => new Date(date.getTime());
 const setDateOffsetMin = (date, offsetMin) => {
   const result = cloneDate(date);
   result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
-  // console.log({ date, offsetMin, result });
   return result;
 };
 
