@@ -15,191 +15,197 @@ const setDateOffsetMin = (date, offsetMin) => {
   return result;
 };
 
-__dateToStringRule.year4 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.year4 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCFullYear().toString();
+  return setDateOffsetMin(date, timezoneOffset).getUTCFullYear().toString();
 };
 
-__dateToStringRule.year2 = (date, timezoneOffsetMin) => {
-  return _subLast(year4(date, timezoneOffsetMin), 2);
+__dateToStringRule.year2 = (date, timezoneOffset) => {
+  return _subLast(year4(date, timezoneOffset), 2);
 };
 
-__dateToStringRule.month1 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.month1 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return (setDateOffsetMin(date, timezoneOffsetMin).getUTCMonth() + 1).toString();
+  return (setDateOffsetMin(date, timezoneOffset).getUTCMonth() + 1).toString();
 };
 
-__dateToStringRule.month2 = (date, timezoneOffsetMin) => {
-  return _paddingFirst(month1(date, timezoneOffsetMin), 2, '0');
+__dateToStringRule.month2 = (date, timezoneOffset) => {
+  return _paddingFirst(month1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.date1 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.date1 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return (setDateOffsetMin(date, timezoneOffsetMin).getUTCDate()).toString();
+  return (setDateOffsetMin(date, timezoneOffset).getUTCDate()).toString();
 };
 
-__dateToStringRule.date2 = (date, timezoneOffsetMin) => {
-  return _paddingFirst(date1(date, timezoneOffsetMin), 2, '0');
+__dateToStringRule.date2 = (date, timezoneOffset) => {
+  return _paddingFirst(date1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.hour12_1 = (date, timezoneOffsetMin) => {
+__dateToStringRule.hour12_1 = (date, timezoneOffset) => {
   // 0-11
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return (setDateOffsetMin(date, timezoneOffsetMin).getUTCHours() % 12).toString();
+  return (setDateOffsetMin(date, timezoneOffset).getUTCHours() % 12).toString();
 };
 
-__dateToStringRule.hour12_2 = (date, timezoneOffsetMin) => {
+__dateToStringRule.hour12_2 = (date, timezoneOffset) => {
   // 00-11
-  return _paddingFirst(hour12_1(date, timezoneOffsetMin), 2, '0');
+  return _paddingFirst(hour12_1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.hour24_1 = (date, timezoneOffsetMin) => {
+__dateToStringRule.hour24_1 = (date, timezoneOffset) => {
   // 0-23
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return (setDateOffsetMin(date, timezoneOffsetMin).getUTCHours()).toString();
+  return (setDateOffsetMin(date, timezoneOffset).getUTCHours()).toString();
 };
 
-__dateToStringRule.hour24_2 = (date, timezoneOffsetMin) => {
+__dateToStringRule.hour24_2 = (date, timezoneOffset) => {
   // 00-23
-  return _paddingFirst(hour24_1(date, timezoneOffsetMin), 2, '0');
+  return _paddingFirst(hour24_1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.minute1 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.minute1 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCMinutes().toString();
+  return setDateOffsetMin(date, timezoneOffset).getUTCMinutes().toString();
 };
 
-__dateToStringRule.minute2 = (date, timezoneOffsetMin) => {
-  return _paddingFirst(minute1(date, timezoneOffsetMin), 2, '0');
+__dateToStringRule.minute2 = (date, timezoneOffset) => {
+  return _paddingFirst(minute1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.second1 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.second1 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCSeconds().toString();
+  return setDateOffsetMin(date, timezoneOffset).getUTCSeconds().toString();
 };
 
-__dateToStringRule.second2 = (date, timezoneOffsetMin) => {
-  return _paddingFirst(second1(date, timezoneOffsetMin), 2, '0');
+__dateToStringRule.second2 = (date, timezoneOffset) => {
+  return _paddingFirst(second1(date, timezoneOffset), 2, '0');
 };
 
-__dateToStringRule.millisecond3 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.millisecond3 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
   return _paddingFirst(
-    setDateOffsetMin(date, timezoneOffsetMin).getUTCMilliseconds().toString(),
+    setDateOffsetMin(date, timezoneOffset).getUTCMilliseconds().toString(),
     3, '0',
   );
 };
 
-__dateToStringRule.millisecond2 = (date, timezoneOffsetMin) => {
+__dateToStringRule.millisecond2 = (date, timezoneOffset) => {
   return _subFirst(
-    millisecond3(date, timezoneOffsetMin),
+    millisecond3(date, timezoneOffset),
     2,
   );
 };
 
-__dateToStringRule.millisecond1 = (date, timezoneOffsetMin) => {
+__dateToStringRule.millisecond1 = (date, timezoneOffset) => {
   return _subFirst(
-    millisecond3(date, timezoneOffsetMin),
+    millisecond3(date, timezoneOffset),
     1,
   );
 };
 
-__dateToStringRule.am_pm = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.am_pm = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCHours() < 12 ? 'am' : 'pm';
+  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'am' : 'pm';
 };
 
-__dateToStringRule.AM_PM = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.AM_PM = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCHours() < 12 ? 'AM' : 'PM';
+  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'AM' : 'PM';
 };
 
-__dateToStringRule.a_p = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.a_p = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCHours() < 12 ? 'a' : 'p';
+  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'a' : 'p';
 };
 
-__dateToStringRule.A_P = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.A_P = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
-  return setDateOffsetMin(date, timezoneOffsetMin).getUTCHours() < 12 ? 'A' : 'P';
+  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'A' : 'P';
 };
 
-__dateToStringRule.dayOfWeekEnglishShort = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.dayOfWeekEnglishShort = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
   return _dayOfWeek.names.EnglishShort()[
-    setDateOffsetMin(date, timezoneOffsetMin).getUTCDay()
+    setDateOffsetMin(date, timezoneOffset).getUTCDay()
   ];
 };
 
-__dateToStringRule.dayOfWeekEnglishLong = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.dayOfWeekEnglishLong = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
   return _dayOfWeek.names.EnglishLong()[
-    setDateOffsetMin(date, timezoneOffsetMin).getUTCDay()
+    setDateOffsetMin(date, timezoneOffset).getUTCDay()
   ];
 };
 
-__dateToStringRule.nameOfMonthEnglishChar3 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.nameOfMonthEnglishChar3 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
   return _nameOfMonth.names.EnglishChar3()[
-    setDateOffsetMin(date, timezoneOffsetMin).getUTCMonth()
+    setDateOffsetMin(date, timezoneOffset).getUTCMonth()
   ];
 };
 
-__dateToStringRule.nameOfMonthEnglishChar4 = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.nameOfMonthEnglishChar4 = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
   return _nameOfMonth.names.EnglishChar4()[
-    setDateOffsetMin(date, timezoneOffsetMin).getUTCMonth()
+    setDateOffsetMin(date, timezoneOffset).getUTCMonth()
   ];
 };
 
-__dateToStringRule.nameOfMonthEnglishLong = (date, timezoneOffsetMin) => {
-  if (isNull(timezoneOffsetMin)) {
-    timezoneOffsetMin = 0;
+__dateToStringRule.nameOfMonthEnglishLong = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    timezoneOffset = 0;
   }
   return _nameOfMonth.names.EnglishLong()[
-    setDateOffsetMin(date, timezoneOffsetMin).getUTCMonth()
+    setDateOffsetMin(date, timezoneOffset).getUTCMonth()
   ];
 };
 
-__dateToStringRule.timezoneHHMM = (date) => {
-  const [sign, hour, min] = _minutesToTexts(-1 * date.getTimezoneOffset());
+__dateToStringRule.timezoneHHMM = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    return 'Z';
+  }
+  const [sign, hour, min] = _minutesToTexts(-1 * timezoneOffset);
   return sign + hour + min;
 };
 
-__dateToStringRule.timezoneHH_MM = (date) => {
-  const [sign, hour, min] = _minutesToTexts(-1 * date.getTimezoneOffset());
+__dateToStringRule.timezoneHH_MM = (date, timezoneOffset) => {
+  if (isNull(timezoneOffset)) {
+    return 'Z';
+  }
+  const [sign, hour, min] = _minutesToTexts(-1 * timezoneOffset);
   return sign + hour + ':' + min;
 };
 

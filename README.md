@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.6.0 beta
-#### 2021/05/31(Mon)
+#### 2021/06/01(Tue)
 - rename DateTime to Datetime
   - update inside
 - update test for deno for node
@@ -348,6 +348,9 @@ You can now use the functions of the parts.js object.
 - add date.minutesToTexts
 - add date.textsToMinutes
 - add function ThisYear ThisMonth
+- add function dateToStringUTC
+- update dateToString
+  - support timezone
 
 ### 10.5.0
 #### 2021/03/29(Mon)

@@ -15,6 +15,7 @@ export const test_execute_date = (parts) => {
     isInvalidDate,
     Datetime,
     dateToString,
+    dateToStringUTC,
     dayOfWeek,
     dayOfWeekEnglishShort, dayOfWeekEnglishLong,
     dayOfWeekJapaneseShort, dayOfWeekJapaneseLong,
@@ -28,11 +29,6 @@ export const test_execute_date = (parts) => {
   const {
     isDate,
   } = parts;
-
-  const getTimezoneText = (datetime, delimiter = '') => {
-    const [sign, hour, min] = minutesToTexts(-1 * datetime.getTimezoneOffset());
-    return sign + hour + delimiter + min;
-  };
 
   describe('test_execute_date', () => {
 
@@ -54,9 +50,12 @@ export const test_execute_date = (parts) => {
     const test_ThisMonth = () => {
       it('test_ThisMonth', () => {
         const now = new Date();
-        checkEqual(new Date(now.getFullYear(), now.getMonth(), 1), ThisMonth());
         checkEqual(
-          new Date(Date.UTC(now.getUTCFullYear(), now.getMonth(), 1)),
+          new Date(now.getFullYear(), now.getMonth(), 1),
+          ThisMonth(),
+        );
+        checkEqual(
+          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)),
           ThisMonth(false),
         );
         checkEqual(
@@ -452,11 +451,39 @@ export const test_execute_date = (parts) => {
           dateToString(dt, 'YY/M/D H:m:s MMMMM'),
         );
 
-        // same date.toString
-        // checkEqual(
-        //   'Sun Feb 04 2001 16:05:08 GMT+0900',
-        //   dateToString(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ'),
-        // );
+        // quote
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(
+          'YYYYMMDD = 20210106',
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD'),
+        );
+        checkEqual(
+          'YYYYMMDD = 20210106',
+          dateToString(dt, "'YYYYMMDD = 'YYYYMMDD"),
+        );
+
+        // timezone
+        const [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
+
+        // '+0900' etc
+        checkEqual(
+          s + h + ':' + m,
+          dateToString(dt, 'Z'),
+        );
+        checkEqual(
+          s + h + m, dateToString(dt, 'ZZ'),
+        );
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(
+            true,
+            dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1,
+          );
+        } else {
+          checkEqual(
+            true,
+            dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1,
+          );
+        }
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual(
             0,
@@ -472,43 +499,6 @@ export const test_execute_date = (parts) => {
             ),
           );
         }
-
-        // quote
-        var dt = Datetime(2021, 1, 6);
-        checkEqual(
-          'YYYYMMDD = 20210106',
-          dateToString(dt, '"YYYYMMDD = "YYYYMMDD'),
-        );
-        checkEqual(
-          'YYYYMMDD = 20210106',
-          dateToString(dt, "'YYYYMMDD = 'YYYYMMDD"),
-        );
-
-        // timezone
-        const [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
-        const timezoneText = s + h + m;
-
-        // '+0900' etc
-        checkEqual(
-          timezoneText, dateToString(dt, 'ZZ'),
-        );
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(
-            true,
-            dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1,
-          );
-        } else {
-          checkEqual(
-            true,
-            dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1,
-          );
-        }
-
-        // '+09:00' etc
-        checkEqual(
-          getTimezoneText(dt, ':'),
-          dateToString(dt, 'Z'),
-        );
 
         // exception
         // quote
@@ -526,9 +516,9 @@ export const test_execute_date = (parts) => {
     const test_dateToString_MomemtLike = () => {
       it('test_dateToString_MomemtLike', () => {
 
-        const dateToStringMoment = (date, format, isLocal) => {
+        const dateToStringMoment = (date, format) => {
           return dateToString(
-            date, format, dateToString.func.MomentLike(), isLocal,
+            date, format, undefined, dateToString.func.MomentLike(),
           );
         };
 
@@ -591,29 +581,42 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        const timezoneText = getTimezoneText(dt);
+        const [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
 
-        // '+0900' etc
         checkEqual(
-          timezoneText, dateToStringMoment(dt, 'ZZ'),
+          s + h + ':' + m,
+          dateToStringMoment(dt, 'Z'),
+        );
+        checkEqual(
+          s + h + m,
+          dateToStringMoment(dt, 'ZZ'),
         );
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(
             true,
-            dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1,
+            dt.toString().indexOf('UTC' + dateToStringMoment(dt, 'ZZ')) !== -1,
           );
         } else {
           checkEqual(
             true,
-            dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1,
+            dt.toString().indexOf('GMT' + dateToStringMoment(dt, 'ZZ')) !== -1,
           );
         }
-
-        // '+09:00' etc
-        checkEqual(
-          getTimezoneText(new Date(), ':'),
-          dateToStringMoment(dt, 'Z'),
-        );
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(
+            0,
+            dt.toString().indexOf(
+              dateToStringMoment(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ'),
+            ),
+          );
+        } else {
+          checkEqual(
+            0,
+            dt.toString().indexOf(
+              dateToStringMoment(dt, 'ddd MMM D HH:mm:ss "UTC"ZZ YYYY'),
+            ),
+          );
+        }
 
         // exception
         // quote
@@ -623,6 +626,156 @@ export const test_execute_date = (parts) => {
         }));
         checkEqual(true, isThrown(() => {
           dateToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+
+      });
+    };
+
+
+    const test_dateToString_timezoneOffset = () => {
+      it('test_dateToString', () => {
+
+        var dt = Datetime(2021, 6, 1, 0, 20, 30);
+        checkEqual(
+          '2021/06/01 00:20:30',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss'),
+        );
+        checkEqual(
+          '2021/06/01 00:20:30',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss'),
+        );
+
+        checkEqual(
+          '2021/06/01 00:20:30',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss', dt.getTimezoneOffset()),
+        );
+
+        var dt = Datetime(2021, 6, 1, 0, 20, 30, 0, false);
+        checkEqual(
+          '2021/06/01 09:20:30 +09:00',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 9 * 60),
+        );
+        checkEqual(
+          '2021/06/01 08:20:30 +0800',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss ZZ', -1 * 8 * 60),
+        );
+        checkEqual(
+          '2021/06/01 07:20:30 +07:00',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 7 * 60),
+        );
+        checkEqual(
+          '2021/06/01 01:20:30 +01:00',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 1 * 60),
+        );
+        checkEqual(
+          '2021/06/01 00:20:30 +00:00',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 0),
+        );
+        checkEqual(
+          '2021/05/31 23:20:30 -01:00',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 1 * 60),
+        );
+        checkEqual(
+          '2021/05/31 12:20:30 -12:00',
+          dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 12 * 60),
+        );
+
+        checkEqual(
+          '2021/06/01 00:20:30 Z',
+          dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss Z'),
+        );
+
+        // quote
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(
+          'YYYYMMDD = 20210106',
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD', dt.getTimezoneOffset()),
+        );
+        checkEqual(
+          'YYYYMMDD = 20210106',
+          dateToString(dt, "'YYYYMMDD = 'YYYYMMDD", dt.getTimezoneOffset()),
+        );
+
+        // exception
+        // quote
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(() => {
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD', dt.getTimezoneOffset());
+        }));
+        checkEqual(true, isThrown(() => {
+          dateToString(dt, '"YYYY"MMDD = "YYYYMMDD', dt.getTimezoneOffset());
+        }));
+
+      });
+    };
+
+    const test_dateToStringUTC = () => {
+      it('test_dateToStringUTC', () => {
+
+        var dt = new Date(Date.UTC(2021, 1, 3, 4, 5, 6, 789));
+        checkEqual(
+          '2021/02/03 04:05:06.789',
+          dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.SSS'),
+        );
+        checkEqual(
+          '2021/02/03 04:05:06.78',
+          dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.SS'),
+        );
+        checkEqual(
+          '2021/02/03 04:05:06.7',
+          dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.S'),
+        );
+
+        var dt = new Date(Date.UTC(2021, 4, 31, 13, 2, 3));
+        checkEqual(
+          '21/5/31 1:2:3 pm',
+          dateToStringUTC(dt, 'YY/M/D h:m:s aa'),
+        );
+        checkEqual(
+          '21/5/31 13:2:3',
+          dateToStringUTC(dt, 'YY/M/D H:m:s'),
+        );
+
+        var dt = new Date(2021, 4, 31, 9, 10, 11);
+        checkEqual(
+          '21/5/31 0:10:11',
+          dateToStringUTC(dt, 'YY/M/D h:m:s'),
+        );
+
+        // timezone
+        var dt = new Date(2021, 4, 31, 9, 10, 11);
+        checkEqual(
+          '21/5/31 0:10:11',
+          dateToStringUTC(dt, 'YY/M/D h:m:s'),
+        );
+        checkEqual(
+          '21/5/31 0:10:11 Z',
+          dateToStringUTC(dt, 'YY/M/D h:m:s Z'),
+        );
+        checkEqual(
+          '21/5/31 0:10:11 Z',
+          dateToStringUTC(dt, 'YY/M/D h:m:s ZZ'),
+        );
+
+        // quote
+        var dt = new Date(Date.UTC(2021, 4, 31));
+        checkEqual(
+          'YYYYMMDD = 20210531',
+          dateToStringUTC(dt, '"YYYYMMDD = "YYYYMMDD'),
+        );
+        checkEqual(
+          'YYYYMMDD = 20210531',
+          dateToStringUTC(dt, "'YYYYMMDD = 'YYYYMMDD"),
+        );
+
+        // exception
+        // quote
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(() => {
+          dateToStringUTC(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(() => {
+          dateToStringUTC(dt, '"YYYY"MMDD = "YYYYMMDD');
         }));
 
       });
@@ -1197,6 +1350,8 @@ export const test_execute_date = (parts) => {
 
     test_dateToString();
     test_dateToString_MomemtLike();
+    test_dateToString_timezoneOffset();
+    test_dateToStringUTC();
 
     test_stringToDate();
 

@@ -1,26 +1,32 @@
-import { isDate, isString, isObject, isBoolean } from '../type/isType.js';
+import { isDate, isString, isObject, isInteger } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { _dateToString } from './__dateToString.js';
+import { _dateToString } from './_dateToString.js';
 
 export const dateToString = (
   date,
   format,
+  timezoneOffset = date.getTimezoneOffset(),
   rule = _dateToString.func.Default(),
-  isLocal = true,
 ) => {
-  if (isObjectParameter(date, 'date, format', 'rule, isLocal')) {
+  if (isObjectParameter(date, 'date, format', 'timezoneOffset, rule')) {
     ({
-      date, format, rule = _dateToString.func.Default(),
-      isLocal = true,
+      date, format,
+      timezoneOffset = date.getTimezoneOffset(),
+      rule = _dateToString.func.Default(),
     } = date);
-  } else if (isObjectParameter(format, 'format', 'rule, isLocal')) {
-    ({ format, rule = _dateToString.func.Default(),
-      isLocal = true,
+  } else if (isObjectParameter(format, 'format', 'timezoneOffset, rule')) {
+    ({
+      format,
+      timezoneOffset = date.getTimezoneOffset(),
+      rule = _dateToString.func.Default(),
     } = format);
-  } else if (isObjectParameter(rule, 'rule', 'isLocal')) {
+  } else if (isObjectParameter(rule, 'timezoneOffset', 'rule')) {
+    ({
+      timezoneOffset,
+      rule = _dateToString.func.Default(),
+    } = rule);
+  } else if (isObjectParameter(rule, 'rule')) {
     ({ rule } = rule);
-  } else if (isObjectParameter(isLocal, 'isLocal')) {
-    ({ isLocal } = isLocal);
   }
 
   if (!isDate(date)) {
@@ -33,19 +39,19 @@ export const dateToString = (
       `dateToString args(format:${format}) is not string`,
     );
   }
+  if (!isInteger(timezoneOffset)) {
+    throw new TypeError(
+      `dateToString args(timezoneOffset:${timezoneOffset}) is not integer`,
+    );
+  }
   if (!isObject(rule)) {
     throw new TypeError(
       `dateToString args(rule:${rule}) is not object`,
     );
   }
-  if (!isBoolean(isLocal)) {
-    throw new TypeError(
-      `dateToString args(isLocal:${isLocal}) is not boolean`,
-    );
-  }
 
   return _dateToString(
-    date, format, rule, isLocal,
+    date, format, timezoneOffset, rule,
   );
 };
 

@@ -11,8 +11,7 @@ import { _includeCount } from '../string/_includeCount.js';
 import { __dateToStringRule } from './__dateToStringRule.js';
 
 export const __dateToString = (
-  date, format, formatRule = __dateToStringRule.Default(),
-  isLocal = true,
+  date, format, timezoneOffset = null, rule = __dateToStringRule.Default(),
 ) => {
   const existSingleQuote = __includes(format, "'");
   const existDoubleQuote = __includes(format, '"');
@@ -22,9 +21,7 @@ export const __dateToString = (
     );
   }
 
-  const timezoneOffsetMin = isLocal === true ? date.getTimezoneOffset() : null;
-
-  const keys = _objectKeys(formatRule);
+  const keys = _objectKeys(rule);
   keys.sort(
     _SortFunc([
       [_SortFunc.order.normal.descending, v => v.length],
@@ -33,7 +30,7 @@ export const __dateToString = (
 
   const replaceArray = [];
   __loop(keys)((value, index) => {
-    replaceArray.push([value, formatRule[value](date, timezoneOffsetMin)]);
+    replaceArray.push([value, rule[value](date, timezoneOffset)]);
   });
 
   let quoteChar;
@@ -59,6 +56,4 @@ export const __dateToString = (
 
 __dateToString.func = __dateToStringRule;
 
-export const _dateToString = __dateToString;
-
-export default { _dateToString, __dateToString };
+export default { __dateToString };
