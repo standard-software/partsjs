@@ -24,7 +24,6 @@ export const _stringToDate = (
   const col = __stringToDateRule.ruleColumnIndex;
 
   const replaceTextSortFunc = (a, b) => b[col.format].length - a[col.format].length;
-  const setDatePrioritySortFunc = (a, b) => a[col.priority] - b[col.priority];
 
   const table = [...formatRule];
   table.sort(replaceTextSortFunc);
@@ -51,7 +50,6 @@ export const _stringToDate = (
   replaceInfoItems.forEach((e, i) => {
     e.push(valueItems[i]);
   });
-  replaceInfoItems.sort(setDatePrioritySortFunc);
   // console.log({ replaceInfoItems });
 
   const result = new Date(sourceDate.getTime());
@@ -67,7 +65,6 @@ export const _stringToDate = (
 
   // console.log(
   //   timezoneOffset,
-  //   _dateToString(result, format),
   //   _dateToString(result, format, timezoneOffset),
   //   str,
   // );
