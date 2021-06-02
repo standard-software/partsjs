@@ -17,10 +17,11 @@ import { _ThisYear } from './_ThisYear.js';
 
 export const _stringToDate = (
   str, format,
-  sourceDate = _ThisYear(),
+  timezoneOffset = (new Date()).getTimezoneOffset(),
+  sourceDate = _ThisYear(true),
   rule = __stringToDateRule.Default(),
 ) => {
-  __stringToDateRule.initialize(sourceDate);
+  __stringToDateRule.initialize(sourceDate, timezoneOffset);
 
   const keys = _objectKeys(rule);
   keys.sort(
@@ -53,9 +54,9 @@ export const _stringToDate = (
   for (const infoItem of replaceInfoItems) {
     infoItem.func(infoItem.value);
   }
-  const { timezoneOffset } = __stringToDateRule.finalize(result);
+  const { timezoneOffset: timezoneOffsetMin } = __stringToDateRule.finalize(result);
 
-  if (_dateToString(result, format, timezoneOffset) === str) {
+  if (_dateToString(result, format, timezoneOffsetMin) === str) {
     return result;
   } else {
     return INVALID_DATE;

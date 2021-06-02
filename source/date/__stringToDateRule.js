@@ -116,32 +116,32 @@ export const __stringToDateRule = {
   setTimezoneHHMM,
 };
 
-__stringToDateRule.initialize = (dateSource) => {
+__stringToDateRule.initialize = (sourceDate, timezoneOffset) => {
   flagPM = false;
-  datetimeInfo.year = dateSource.getFullYear();
-  datetimeInfo.month = dateSource.getMonth();
-  datetimeInfo.date = dateSource.getDate();
-  datetimeInfo.hours = dateSource.getHours();
-  datetimeInfo.minutes = dateSource.getMinutes();
-  datetimeInfo.seconds = dateSource.getSeconds();
-  datetimeInfo.milliseconds = dateSource.getMilliseconds();
-  datetimeInfo.timezoneOffset = dateSource.getTimezoneOffset();
+  datetimeInfo.year = sourceDate.getFullYear();
+  datetimeInfo.month = sourceDate.getMonth();
+  datetimeInfo.date = sourceDate.getDate();
+  datetimeInfo.hours = sourceDate.getHours();
+  datetimeInfo.minutes = sourceDate.getMinutes();
+  datetimeInfo.seconds = sourceDate.getSeconds();
+  datetimeInfo.milliseconds = sourceDate.getMilliseconds();
+  datetimeInfo.timezoneOffset = timezoneOffset;
 };
 
-__stringToDateRule.finalize = (dateSource) => {
+__stringToDateRule.finalize = (targetDate) => {
   const {
     year, month, date,
     hours, minutes, seconds, milliseconds,
     timezoneOffset,
   } = datetimeInfo;
 
-  dateSource.setUTCFullYear(year, month, date);
-  dateSource.setUTCHours(
+  targetDate.setUTCFullYear(year, month, date);
+  targetDate.setUTCHours(
     flagPM === true ? hours + 12 : hours,
     minutes, seconds, milliseconds,
   );
   if (!isNull(datetimeInfo.timezoneOffset)) {
-    dateSource.setMinutes(dateSource.getMinutes() + datetimeInfo.timezoneOffset);
+    targetDate.setMinutes(targetDate.getMinutes() + datetimeInfo.timezoneOffset);
   }
   return { timezoneOffset };
 };

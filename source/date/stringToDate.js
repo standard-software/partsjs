@@ -2,8 +2,8 @@
 // import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _stringToDate } from './_stringToDate.js';
 
-export const stringToDate = (str, format) => {
-  return _stringToDate(str, format);
+export const stringToDate = (str, format, timezoneOffset, sourceDate) => {
+  return _stringToDate(str, format, timezoneOffset, sourceDate);
 };
 
 export default { stringToDate };

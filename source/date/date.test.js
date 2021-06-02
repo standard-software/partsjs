@@ -951,19 +951,34 @@ export const test_execute_date = (parts) => {
           stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss ZZ'),
         );
 
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss', -540),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 08:12:34', 'YYYY/MM/DD HH:mm:ss', -480),
+        );
+        checkEqual(
+          dt,
+          stringToDate('2021/06/01 08:12:34 +08:00', 'YYYY/MM/DD HH:mm:ss Z', -540),
+        );
+
+
         // init
-        checkEqual(
-          new Date(2021, 0, 1),
-          stringToDate('2021', 'YYYY'),
-        );
-        checkEqual(
-          new Date(2021, 5, 1),
-          stringToDate('2021/06', 'YYYY/MM'),
-        );
-        checkEqual(
-          new Date(2021, 5, 2),
-          stringToDate('06/02', 'MM/DD'),
-        );
+        checkEqual(new Date(2021, 0, 1), stringToDate('2021', 'YYYY'));
+        checkEqual(new Date(2021, 5, 1), stringToDate('2021/06', 'YYYY/MM'));
+        checkEqual(new Date(2021, 5, 2), stringToDate('06/02', 'MM/DD'));
+
+        // sourceDate
+        checkEqual(new Date(2021, 0, 1), stringToDate('21', 'YY'));
+        checkEqual(new Date(2085, 0, 1), stringToDate('85', 'YY'));
+        checkEqual(new Date(1921, 0, 1),
+          stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)));
+        checkEqual(new Date(1985, 0, 1),
+          stringToDate('85', 'YY', undefined, new Date(1990, 0, 1)));
+        checkEqual(new Date(2019, 5, 2),
+          stringToDate('06/02', 'MM/DD', undefined, new Date(2019, 0, 1)));
 
       });
     };
