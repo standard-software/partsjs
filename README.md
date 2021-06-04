@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.6.0 beta
-#### 2021/06/01(Tue)
+#### 2021/06/04(Fri)
 - rename DateTime to Datetime
   - update inside
 - update test for deno for node
@@ -339,6 +339,7 @@ You can now use the functions of the parts.js object.
 - update equal support Invalid Date
 - add date.strintToDate
   - add stringToDateRule
+  - support full object parameter
 - add date.INVALID_DATE
 - update parseInt testCode
 - update Today

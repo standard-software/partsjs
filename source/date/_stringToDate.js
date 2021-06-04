@@ -7,7 +7,6 @@ import { _objectKeys } from '../object/objectKeys.js';
 import { _SortFunc } from '../array/_SortFunc.js';
 import { __loop } from '../syntax/__loop.js';
 import { _replaceAllArray } from '../string/_replaceAllArray.js';
-import { isOdd } from '../number/number.js';
 import { _includeCount } from '../string/_includeCount.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
 import { INVALID_DATE } from './INVALID_DATE.js';

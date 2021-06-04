@@ -5,7 +5,7 @@ import { _dateToString } from './_dateToString.js';
 export const dateToString = (
   date,
   format,
-  timezoneOffset = date.getTimezoneOffset(),
+  timezoneOffset = (new Date()).getTimezoneOffset(),
   rule = _dateToString.func.Default(),
 ) => {
   if (isObjectParameter(date, 'date, format', 'timezoneOffset, rule')) {
@@ -20,11 +20,11 @@ export const dateToString = (
       timezoneOffset = date.getTimezoneOffset(),
       rule = _dateToString.func.Default(),
     } = format);
-  } else if (isObjectParameter(rule, 'timezoneOffset', 'rule')) {
+  } else if (isObjectParameter(timezoneOffset, 'timezoneOffset', 'rule')) {
     ({
       timezoneOffset,
       rule = _dateToString.func.Default(),
-    } = rule);
+    } = timezoneOffset);
   } else if (isObjectParameter(rule, 'rule')) {
     ({ rule } = rule);
   }
