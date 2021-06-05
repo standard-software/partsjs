@@ -6,24 +6,24 @@ export const dateToString = (
   date,
   format,
   timezoneOffset = (new Date()).getTimezoneOffset(),
-  rule = _dateToString.func.Default(),
+  rule = _dateToString.rule.Default(),
 ) => {
   if (isObjectParameter(date, 'date, format', 'timezoneOffset, rule')) {
     ({
       date, format,
       timezoneOffset = date.getTimezoneOffset(),
-      rule = _dateToString.func.Default(),
+      rule = _dateToString.rule.Default(),
     } = date);
   } else if (isObjectParameter(format, 'format', 'timezoneOffset, rule')) {
     ({
       format,
       timezoneOffset = date.getTimezoneOffset(),
-      rule = _dateToString.func.Default(),
+      rule = _dateToString.rule.Default(),
     } = format);
   } else if (isObjectParameter(timezoneOffset, 'timezoneOffset', 'rule')) {
     ({
       timezoneOffset,
-      rule = _dateToString.func.Default(),
+      rule = _dateToString.rule.Default(),
     } = timezoneOffset);
   } else if (isObjectParameter(rule, 'rule')) {
     ({ rule } = rule);
@@ -55,6 +55,6 @@ export const dateToString = (
   );
 };
 
-dateToString.func = _dateToString.func;
+dateToString.rule = _dateToString.rule;
 
 export default { dateToString };

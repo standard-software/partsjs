@@ -54,6 +54,6 @@ export const __dateToString = (
   return formatStrs.join('');
 };
 
-__dateToString.func = __dateToStringRule;
+__dateToString.rule = __dateToStringRule;
 
 export default { __dateToString };

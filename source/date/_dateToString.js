@@ -11,6 +11,6 @@ export const _dateToString = (
   );
 };
 
-_dateToString.func = __dateToString.func;
+_dateToString.rule = __dateToString.rule;
 
 export default { _dateToString };

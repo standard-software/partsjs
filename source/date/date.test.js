@@ -518,7 +518,7 @@ export const test_execute_date = (parts) => {
 
         const dateToStringMoment = (date, format) => {
           return dateToString(
-            date, format, undefined, dateToString.func.MomentLike(),
+            date, format, undefined, dateToString.rule.MomentLike(),
           );
         };
 
