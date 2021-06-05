@@ -229,6 +229,7 @@
 .date._nameOfMonthEnglishChar4:[object Function]:function
 .date._nameOfMonthEnglishLong:[object Function]:function
 .date._stringToDate:[object Function]:function
+.date._stringToDateUTC:[object Function]:function
 .date._textsToMinutes:[object Function]:function
 .date._ThisMonth:[object Function]:function
 .date._ThisYear:[object Function]:function
@@ -249,11 +250,13 @@
 .date.nameOfMonthEnglishChar4:[object Function]:function
 .date.nameOfMonthEnglishLong:[object Function]:function
 .date.stringToDate:[object Function]:function
+.date.stringToDateUTC:[object Function]:function
 .date.textsToMinutes:[object Function]:function
 .date.ThisMonth:[object Function]:function
 .date.ThisYear:[object Function]:function
 .date.Today:[object Function]:function
 .dateToString:[object Function]:function
+.dateToStringUTC:[object Function]:function
 .Enum:[object Function]:function
 .equal:[object Function]:function
 .equalDeep:[object Function]:function
@@ -765,6 +768,7 @@
 .string.trimFirst:[object Function]:function
 .string.trimLast:[object Function]:function
 .stringToDate:[object Function]:function
+.stringToDateUTC:[object Function]:function
 .stringToInteger:[object Function]:function
 .stringToIntegerDefault:[object Function]:function
 .stringToNumber:[object Function]:function
@@ -821,6 +825,7 @@
 .system.wsh.Shell:[object Function]:function
 .test.checkCompare:[object Function]:function
 .test.checkEqual:[object Function]:function
+.test.checkNotEqual:[object Function]:function
 .test.describe:[object Function]:function
 .test.expect:[object Function]:function
 .test.isNotThrown:[object Function]:function

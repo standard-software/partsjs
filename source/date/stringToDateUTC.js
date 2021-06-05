@@ -4,7 +4,7 @@ import { _ThisYear } from './_ThisYear.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
 import { _stringToDateUTC } from './_stringToDateUTC.js';
 
-export const stringToDate = (
+export const stringToDateUTC = (
   str, format,
   sourceDate = _ThisYear(true),
   rule = __stringToDateRule.Default(),
@@ -12,14 +12,12 @@ export const stringToDate = (
   if (isObjectParameter(str, 'str, format', 'sourceDate, rule')) {
     ({
       str, format,
-      timezoneOffset = (new Date()).getTimezoneOffset(),
       sourceDate = _ThisYear(),
       rule = __stringToDateRule.Default(),
     } = str);
   } else if (isObjectParameter(format, 'format', 'sourceDate, rule')) {
     ({
       format,
-      timezoneOffset = (new Date()).getTimezoneOffset(),
       sourceDate = _ThisYear(),
       rule = __stringToDateRule.Default(),
     } = format);
@@ -34,33 +32,28 @@ export const stringToDate = (
 
   if (!isString(str)) {
     throw new TypeError(
-      `stringToDate args(str:${str}) is not string`,
+      `stringToDateUTC args(str:${str}) is not string`,
     );
   }
   if (!isString(format)) {
     throw new TypeError(
-      `stringToDate args(format:${format}) is not string`,
-    );
-  }
-  if (!isInteger(timezoneOffset)) {
-    throw new TypeError(
-      `stringToDate args(timezoneOffset:${timezoneOffset}) is not integer`,
+      `stringToDateUTC args(format:${format}) is not string`,
     );
   }
   if (!isDate(sourceDate)) {
     throw new TypeError(
-      `stringToDate args(sourceDate:${sourceDate}) is not date`,
+      `stringToDateUTC args(sourceDate:${sourceDate}) is not date`,
     );
   }
   if (!isObject(rule)) {
     throw new TypeError(
-      `stringToDate args(rule:${rule}) is not object`,
+      `stringToDateUTC args(rule:${rule}) is not object`,
     );
   }
 
   return _stringToDateUTC(str, format, sourceDate, rule);
 };
 
-stringToDate.rule = _stringToDateUTC.rule;
+stringToDateUTC.rule = _stringToDateUTC.rule;
 
-export default { stringToDate };
+export default { stringToDateUTC };

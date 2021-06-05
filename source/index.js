@@ -499,14 +499,14 @@ array.operation = {
  */
 export const {
   Today,
-  dateToString,
-  stringToDate,
+  dateToString, dateToStringUTC,
+  stringToDate, stringToDateUTC,
 } = dateJs;
 
 rootAlias = { ...rootAlias,
   Today,
-  dateToString,
-  stringToDate,
+  dateToString, dateToStringUTC,
+  stringToDate, stringToDateUTC,
 };
 
 export const date = {

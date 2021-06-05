@@ -91,13 +91,13 @@ const outputValue = (value) => {
   return String(value);
 };
 
-export const checkCompare = (compareFunc, a, b, message = '') => {
+export const checkCompare = (compareFunc, a, b, result, message = '') => {
   if (!isString(message)) {
     throw new TypeError('checkEqual args message is not string');
   }
 
   testFrame.counter += 1;
-  if (compareFunc(a, b) === true) {
+  if (compareFunc(a, b) === result) {
     return true;
   }
 
@@ -119,22 +119,26 @@ export const checkCompare = (compareFunc, a, b, message = '') => {
 };
 
 export const checkEqual = (a, b, message = '') => {
-  return checkCompare(equalDeep, a, b, message);
+  return checkCompare(equalDeep, a, b, true, message);
+};
+
+export const checkNotEqual = (a, b, message = '') => {
+  return checkCompare(equalDeep, a, b, false, message);
 };
 
 export const expect = a => {
   const toBe = b => checkCompare(
     (v1, v2) => v1 === v2,
-    a, b,
+    a, b, true,
   );
   const toEqual = b => checkEqual(a, b);
   const notToBe = b => checkCompare(
     (v1, v2) => v1 !== v2,
-    a, b,
+    a, b, true,
   );
   const notToEqual = b => checkCompare(
     (v1, v2) => !equalDeep(v1, v2),
-    a, b,
+    a, b, true,
   );
   return {
     toBe,
@@ -224,7 +228,8 @@ export const isNotThrown = (targetFunc) => {
 
 export default {
   testFrame,
-  checkEqual, checkCompare,
+  checkCompare,
+  checkEqual, checkNotEqual,
   describe, it, test, expect,
   isThrown, isThrownValue, isThrownException, isNotThrown,
   testCounter,

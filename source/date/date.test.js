@@ -3,6 +3,7 @@ export const test_execute_date = (parts) => {
     describe,
     it,
     checkEqual,
+    checkNotEqual,
     isThrown,
     isThrownException,
     testCounter,
@@ -22,6 +23,7 @@ export const test_execute_date = (parts) => {
     nameOfMonth,
     nameOfMonthEnglishChar3, nameOfMonthEnglishChar4, nameOfMonthEnglishLong,
     stringToDate,
+    stringToDateUTC,
     minutesToTexts,
     textsToMinutes,
   } = parts.date;
@@ -885,10 +887,10 @@ export const test_execute_date = (parts) => {
           Datetime(2021, 5, 26, 8, 59, 40),
           stringToDate('20210526 8 59 40', 'YYYYMMDD h mm ss'),
         );
-        // checkNotEqual(
-        //   Datetime(2021, 5, 26, 13, 59, 40),
-        //   stringToDate('20210526 13 59 40', 'YYYYMMDD h mm ss'),
-        // );
+        checkNotEqual(
+          Datetime(2021, 5, 26, 13, 59, 40),
+          stringToDate('20210526 13 59 40', 'YYYYMMDD h mm ss'),
+        );
         checkEqual(
           Datetime(2021, 5, 26, 13, 59, 40),
           stringToDate('20210526 1 59 40 p', 'YYYYMMDD h mm ss a'),
@@ -963,7 +965,6 @@ export const test_execute_date = (parts) => {
           dt,
           stringToDate('2021/06/01 08:12:34 +08:00', 'YYYY/MM/DD HH:mm:ss Z', -540),
         );
-
 
         // init
         checkEqual(new Date(2021, 0, 1), stringToDate('2021', 'YYYY'));
@@ -1081,6 +1082,30 @@ export const test_execute_date = (parts) => {
             { rule: stringToDate.rule.MomentLike() },
           ),
         );
+
+      });
+    };
+
+    const test_stringToDateUTC = () => {
+      it('test_stringToDateUTC', () => {
+        checkEqual(
+          Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+          stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss', -540),
+        );
+        checkEqual(
+          Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+          stringToDate('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss', 0),
+        );
+        if ((new Date).getTimezoneOffset !== 0) {
+          checkEqual(
+            Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+            stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
+          );
+          checkNotEqual(
+            Datetime(2021, 6, 1, 0, 12, 34, 0, true),
+            stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
+          );
+        }
 
       });
     };
@@ -1534,6 +1559,7 @@ export const test_execute_date = (parts) => {
 
     test_stringToDate();
     test_stringToDate_MomentLike();
+    test_stringToDateUTC();
 
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();

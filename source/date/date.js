@@ -32,6 +32,8 @@ import _nameOfMonthEnglishLongJs from './_nameOfMonthEnglishLong.js';
 import nameOfMonthEnglishLongJs from './nameOfMonthEnglishLong.js';
 import _stringToDateJs from './_stringToDate.js';
 import stringToDateJs from './stringToDate.js';
+import _stringToDateUTCJs from './_stringToDateUTC.js';
+import stringToDateUTCJs from './stringToDateUTC.js';
 import _minutesToTextsJs from './_minutesToTexts.js';
 import minutesToTextsJs from './minutesToTexts.js';
 import _textsToMinutesJs from './_textsToMinutes.js';
@@ -72,6 +74,8 @@ const dateJs = {
   ...nameOfMonthEnglishLongJs,
   ..._stringToDateJs,
   ...stringToDateJs,
+  ..._stringToDateUTCJs,
+  ...stringToDateUTCJs,
   ..._minutesToTextsJs,
   ...minutesToTextsJs,
   ..._textsToMinutesJs,
@@ -95,6 +99,7 @@ export const {
   _nameOfMonthEnglishChar4,
   _nameOfMonthEnglishLong,
   _stringToDate,
+  _stringToDateUTC,
   _minutesToTexts,
   _textsToMinutes,
 
@@ -115,6 +120,7 @@ export const {
   nameOfMonthEnglishChar4,
   nameOfMonthEnglishLong,
   stringToDate,
+  stringToDateUTC,
   minutesToTexts,
   textsToMinutes,
 
@@ -139,6 +145,7 @@ export default {
   _nameOfMonthEnglishChar4,
   _nameOfMonthEnglishLong,
   _stringToDate,
+  _stringToDateUTC,
   _minutesToTexts,
   _textsToMinutes,
 
@@ -159,6 +166,7 @@ export default {
   nameOfMonthEnglishChar4,
   nameOfMonthEnglishLong,
   stringToDate,
+  stringToDateUTC,
   minutesToTexts,
   textsToMinutes,
 
