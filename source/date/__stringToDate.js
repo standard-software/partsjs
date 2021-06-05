@@ -1,7 +1,6 @@
 /**
  * stringToDate
  */
-import { isNull } from '../type/type.js';
 import { __includes } from '../compare/__includes.js';
 import { _objectKeys } from '../object/objectKeys.js';
 import { _SortFunc } from '../array/_SortFunc.js';

@@ -2,7 +2,7 @@ import { isDate, isString, isObject, isInteger } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _ThisYear } from './_ThisYear.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
-import { _stringToDate } from './_stringToDate.js';
+import { _stringToDate } from './__stringToDate.js';
 
 export const stringToDate = (
   str, format,
