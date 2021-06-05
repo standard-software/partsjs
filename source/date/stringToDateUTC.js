@@ -2,36 +2,27 @@ import { isDate, isString, isObject, isInteger } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _ThisYear } from './_ThisYear.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
-import { _stringToDate } from './_stringToDate.js';
+import { _stringToDateUTC } from './_stringToDateUTC.js';
 
 export const stringToDate = (
   str, format,
-  timezoneOffset = (new Date()).getTimezoneOffset(),
   sourceDate = _ThisYear(true),
   rule = __stringToDateRule.Default(),
 ) => {
-  if (isObjectParameter(str, 'str, format', 'timezoneOffset, sourceDate, rule')) {
+  if (isObjectParameter(str, 'str, format', 'sourceDate, rule')) {
     ({
       str, format,
       timezoneOffset = (new Date()).getTimezoneOffset(),
       sourceDate = _ThisYear(),
       rule = __stringToDateRule.Default(),
     } = str);
-  } else if (isObjectParameter(format, 'format', 'timezoneOffset, sourceDate, rule')) {
+  } else if (isObjectParameter(format, 'format', 'sourceDate, rule')) {
     ({
       format,
       timezoneOffset = (new Date()).getTimezoneOffset(),
       sourceDate = _ThisYear(),
       rule = __stringToDateRule.Default(),
     } = format);
-  } else if (isObjectParameter(
-    timezoneOffset, '', 'timezoneOffset, sourceDate, rule', 1,
-  )) {
-    ({
-      timezoneOffset = (new Date()).getTimezoneOffset(),
-      sourceDate = _ThisYear(),
-      rule = __stringToDateRule.Default(),
-    } = timezoneOffset);
   } else if (isObjectParameter(sourceDate, '', 'sourceDate, rule', 1)) {
     ({
       sourceDate = _ThisYear(),
@@ -67,9 +58,9 @@ export const stringToDate = (
     );
   }
 
-  return _stringToDate(str, format, timezoneOffset, sourceDate, rule);
+  return _stringToDateUTC(str, format, sourceDate, rule);
 };
 
-stringToDate.rule = _stringToDate.rule;
+stringToDate.rule = _stringToDateUTC.rule;
 
 export default { stringToDate };

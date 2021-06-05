@@ -13,7 +13,7 @@ import { _dateToString } from './_dateToString.js';
 import { _escapeRegExp } from '../string/_escapeRegExp.js';
 import { _ThisYear } from './_ThisYear.js';
 
-export const _stringToDate = (
+export const __stringToDate = (
   str, format,
   timezoneOffset = (new Date()).getTimezoneOffset(),
   sourceDate = _ThisYear(true),
@@ -64,6 +64,6 @@ export const _stringToDate = (
 
 };
 
-_stringToDate.rule = __stringToDateRule;
+__stringToDate.rule = __stringToDateRule;
 
-export default { _stringToDate };
+export default { __stringToDate };
