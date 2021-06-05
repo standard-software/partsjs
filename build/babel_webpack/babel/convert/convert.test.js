@@ -55,11 +55,11 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-255', String(-0xFF));
         checkEqual('-16', String(-16));
         checkEqual('-100000', String(-1e+5));
-        checkEqual('-0.00001', String(-1e-5)); // spacial number value
+        checkEqual('-0.00001', String(-1e-5)); // Spacial number
 
         checkEqual('NaN', String(NaN));
         checkEqual('Infinity', String(Infinity));
-        checkEqual('-Infinity', String(-Infinity)); // other type
+        checkEqual('-Infinity', String(-Infinity)); // Other than number type
 
         checkEqual('null', String(null));
         checkEqual('undefined', String(undefined));
@@ -97,19 +97,19 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-255', (-0xFF).toString());
         checkEqual('-16', (-16).toString());
         checkEqual('-100000', (-1e+5).toString());
-        checkEqual('-0.00001', (-1e-5).toString()); // spacial number value
+        checkEqual('-0.00001', (-1e-5).toString()); // Spacial number
 
         checkEqual('NaN', NaN.toString());
         checkEqual('Infinity', Infinity.toString());
         checkEqual('-Infinity', (-Infinity).toString());
         checkEqual(-Infinity, -Infinity.toString());
         checkEqual(-Infinity, -Infinity.toString());
-        checkEqual(-Infinity, -'Infinity'); // Decimal number other
+        checkEqual(-Infinity, -'Infinity'); // Non-decimal number
 
         checkEqual('1010.01', 10.25.toString(2));
         checkEqual('22.1', 10.25.toString(4));
         checkEqual('12.2', 10.25.toString(8));
-        checkEqual('a.4', 10.25.toString(16)); // other type
+        checkEqual('a.4', 10.25.toString(16)); // Other than number type
 
         checkEqual(true, isThrown(function () {
           return null.toString();
@@ -183,7 +183,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-177', numberToString(-127, 8));
         checkEqual('-12', numberToString(-10, 8));
         checkEqual('-11', numberToString(-3, 2));
-        checkEqual('-1111', numberToString(-15, 2)); // spacial value
+        checkEqual('-1111', numberToString(-15, 2)); // Spacial number
 
         checkEqual(true, isThrown(function () {
           return numberToString(NaN);
@@ -193,34 +193,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return numberToString(-Infinity);
-        })); // Exception
-
-        checkEqual(true, isThrown(function () {
-          return numberToString('123', 10);
-        }));
-        checkEqual(false, isThrown(function () {
-          return numberToString(32, 2);
-        }));
-        checkEqual(true, isThrown(function () {
-          return numberToString(32, 2.5);
-        }));
-        checkEqual(true, isThrown(function () {
-          return numberToString(32, 1);
-        }));
-        checkEqual(false, isThrown(function () {
-          return numberToString(32, 36);
-        }));
-        checkEqual(true, isThrown(function () {
-          return numberToString(32, 37);
-        })); // Object Named Parameter
-
-        checkEqual('-32', numberToString({
-          value: -32
-        }));
-        checkEqual('-100000', numberToString({
-          value: -32,
-          radix: 2
-        })); // other type
+        })); // Other than number type
 
         checkEqual(true, isThrown(function () {
           return numberToString(null);
@@ -251,6 +224,33 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return numberToString(false);
+        })); // Exception
+
+        checkEqual(true, isThrown(function () {
+          return numberToString('123', 10);
+        }));
+        checkEqual(false, isThrown(function () {
+          return numberToString(32, 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return numberToString(32, 2.5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return numberToString(32, 1);
+        }));
+        checkEqual(false, isThrown(function () {
+          return numberToString(32, 36);
+        }));
+        checkEqual(true, isThrown(function () {
+          return numberToString(32, 37);
+        })); // Object Named Parameter
+
+        checkEqual('-32', numberToString({
+          value: -32
+        }));
+        checkEqual('-100000', numberToString({
+          value: -32,
+          radix: 2
         }));
       });
     };
@@ -310,12 +310,28 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-177', valueToString(-127, 8));
         checkEqual('-12', valueToString(-10, 8));
         checkEqual('-11', valueToString(-3, 2));
-        checkEqual('-1111', valueToString(-15, 2)); // spacial number value
+        checkEqual('-1111', valueToString(-15, 2)); // Spacial number
 
         testCounter(0);
         checkEqual('NaN', valueToString(NaN));
         checkEqual('Infinity', valueToString(Infinity));
-        checkEqual('-Infinity', valueToString(-Infinity)); // Exception
+        checkEqual('-Infinity', valueToString(-Infinity)); // Non-decimal number
+
+        checkEqual('1010.01', valueToString(10.25, 2));
+        checkEqual('22.1', valueToString(10.25, 4));
+        checkEqual('12.2', valueToString(10.25, 8));
+        checkEqual('a.4', valueToString(10.25, 16)); // Other than number type
+
+        checkEqual('null', valueToString(null));
+        checkEqual('undefined', valueToString(undefined));
+        checkEqual('[object Object]', valueToString({}));
+        checkEqual('', valueToString([]));
+        checkEqual('1', valueToString([1]));
+        checkEqual('1,2,3', valueToString([1, 2, 3]));
+        checkEqual('', valueToString(''));
+        checkEqual('a', valueToString('a'));
+        checkEqual('true', valueToString(true));
+        checkEqual('false', valueToString(false)); // Exception
 
         checkEqual(false, isThrown(function () {
           return valueToString('123', 10);
@@ -342,23 +358,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-100000', valueToString({
           value: -32,
           radix: 2
-        })); // Decimal number other
-
-        checkEqual('1010.01', valueToString(10.25, 2));
-        checkEqual('22.1', valueToString(10.25, 4));
-        checkEqual('12.2', valueToString(10.25, 8));
-        checkEqual('a.4', valueToString(10.25, 16)); // other type
-
-        checkEqual('null', valueToString(null));
-        checkEqual('undefined', valueToString(undefined));
-        checkEqual('[object Object]', valueToString({}));
-        checkEqual('', valueToString([]));
-        checkEqual('1', valueToString([1]));
-        checkEqual('1,2,3', valueToString([1, 2, 3]));
-        checkEqual('', valueToString(''));
-        checkEqual('a', valueToString('a'));
-        checkEqual('true', valueToString(true));
-        checkEqual('false', valueToString(false));
+        }));
       });
     };
 
@@ -403,7 +403,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, Number('123.4a'));
         checkEqual(NaN, Number('a123.4'));
         checkEqual(123.45, Number('123.45'));
-        checkEqual(NaN, Number('123.4.5')); // string default value
+        checkEqual(NaN, Number('123.4.5')); // string
 
         checkEqual(NaN, Number('abc')); // space string
 
@@ -429,7 +429,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, Number('1e-5'));
         checkEqual(NaN, Number('1.e'));
         checkEqual(NaN, Number('1.e+'));
-        checkEqual(100000, Number('1.e+5')); // Number different
+        checkEqual(100000, Number('1.e+5')); // Non-decimal number
 
         checkEqual(291, Number('0x123'));
 
@@ -441,22 +441,22 @@ var test_execute_convert = function test_execute_convert(parts) {
           checkEqual(NaN, Number('-0x123'));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isGasRhino()) {
+        if (parts.platform.isWindowsScriptHost() || parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {
           checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));
         }
 
         checkEqual(NaN, Number('+0o123'));
-        checkEqual(NaN, Number('-0o123'));
+        checkEqual(NaN, Number('-0o123')); // Spacial number
+
         checkEqual(Infinity, Number('Infinity'));
         checkEqual(NaN, Number('infinity'));
         checkEqual(NaN, Number('inf'));
-        checkEqual(NaN, Number('info')); // Number
+        checkEqual(NaN, Number('info'));
+        checkEqual(NaN, Number('NaN'));
+        checkEqual(NaN, Number('nan'));
+        checkEqual(NaN, Number('na')); // Number
 
         checkEqual(123, Number(123));
         checkEqual(-123, Number(-123));
@@ -464,7 +464,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1.23, Number(-1.23));
         checkEqual(Infinity, Number(Infinity));
         checkEqual(-Infinity, Number(-Infinity));
-        checkEqual(NaN, Number(NaN)); // Other
+        checkEqual(NaN, Number(NaN)); // Other than number type
 
         checkEqual(0, Number(null)); // !
 
@@ -524,19 +524,13 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, parseFloat('123.4a'));
         checkEqual(NaN, parseFloat('a123.4'));
         checkEqual(123.45, parseFloat('123.45'));
-        checkEqual(123.4, parseFloat('123.4.5')); // string default value
+        checkEqual(123.4, parseFloat('123.4.5')); // string
 
         checkEqual(NaN, parseFloat('abc')); // space string
 
         checkEqual(NaN, parseFloat(''));
         checkEqual(NaN, parseFloat(' '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　'));
-        } else {
-          checkEqual(NaN, parseFloat('　'));
-        } // exponential notation
-
+        checkEqual(NaN, parseFloat('　')); // exponential notation
 
         checkEqual(3.14, parseFloat(3.14));
         checkEqual(3.14, parseFloat('3.14'));
@@ -544,6 +538,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(3.14, parseFloat('0.0314E+2'));
         checkEqual(0.14, parseFloat('.14'));
         checkEqual(0.00000000000000001, parseFloat('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(1e-17, parseFloat('1e-17')); // exponential notation detail
 
         checkEqual(1, parseFloat('1.'));
@@ -553,18 +548,22 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, parseFloat('1e-5'));
         checkEqual(1, parseFloat('1.e'));
         checkEqual(1, parseFloat('1.e+'));
-        checkEqual(100000, parseFloat('1.e+5')); // parseFloat different
+        checkEqual(100000, parseFloat('1.e+5')); // Non-decimal number
 
         checkEqual(0, parseFloat('0x123'));
         checkEqual(0, parseFloat('+0x123'));
         checkEqual(-0, parseFloat('-0x123'));
         checkEqual(0, parseFloat('0o123'));
         checkEqual(0, parseFloat('+0o123'));
-        checkEqual(-0, parseFloat('-0o123'));
+        checkEqual(-0, parseFloat('-0o123')); // Spacial number
+
         checkEqual(Infinity, parseFloat('Infinity'));
         checkEqual(NaN, parseFloat('infinity'));
         checkEqual(NaN, parseFloat('inf'));
-        checkEqual(NaN, parseFloat('info')); // parseFloat
+        checkEqual(NaN, parseFloat('info'));
+        checkEqual(NaN, parseFloat('NaN'));
+        checkEqual(NaN, parseFloat('nan'));
+        checkEqual(NaN, parseFloat('na')); // Number
 
         checkEqual(123, parseFloat(123));
         checkEqual(-123, parseFloat(-123));
@@ -572,7 +571,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1.23, parseFloat(-1.23));
         checkEqual(Infinity, parseFloat(Infinity));
         checkEqual(-Infinity, parseFloat(-Infinity));
-        checkEqual(NaN, parseFloat(NaN)); // Other
+        checkEqual(NaN, parseFloat(NaN)); // Other than number type
 
         checkEqual(NaN, parseFloat(null));
         checkEqual(NaN, parseFloat(undefined));
@@ -632,7 +631,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseInt10('123.4a'));
         checkEqual(NaN, parseInt10('a123.4'));
         checkEqual(123, parseInt10('123.45'));
-        checkEqual(123, parseInt10('123.4.5')); // string default value
+        checkEqual(123, parseInt10('123.4.5')); // string
 
         checkEqual(NaN, parseInt10('abc')); // space string
 
@@ -662,19 +661,23 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(1, parseInt10('1e-5'));
         checkEqual(1, parseInt10('1.e'));
         checkEqual(1, parseInt10('1.e+'));
-        checkEqual(1, parseInt10('1.e+5')); // parseFloat different
+        checkEqual(1, parseInt10('1.e+5')); // Non-decimal number
 
         checkEqual(0, parseInt10('0x123'));
         checkEqual(0, parseInt10('+0x123'));
         checkEqual(-0, parseInt10('-0x123'));
         checkEqual(0, parseInt10('0o123'));
         checkEqual(0, parseInt10('+0o123'));
-        checkEqual(-0, parseInt10('-0o123'));
+        checkEqual(-0, parseInt10('-0o123')); // Spacial number
+
         checkEqual(NaN, parseInt10('Infinity')); // ?
 
         checkEqual(NaN, parseInt10('infinity'));
         checkEqual(NaN, parseInt10('inf'));
-        checkEqual(NaN, parseInt10('info')); // parseFloat
+        checkEqual(NaN, parseInt10('info'));
+        checkEqual(NaN, parseInt10('NaN'));
+        checkEqual(NaN, parseInt10('nan'));
+        checkEqual(NaN, parseInt10('na')); // Number
 
         checkEqual(123, parseInt10(123));
         checkEqual(-123, parseInt10(-123));
@@ -682,7 +685,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1, parseInt10(-1.23));
         checkEqual(NaN, parseInt10(Infinity));
         checkEqual(NaN, parseInt10(-Infinity));
-        checkEqual(NaN, parseInt10(NaN)); // Other
+        checkEqual(NaN, parseInt10(NaN)); // Other than number type
 
         checkEqual(NaN, parseInt10(null));
         checkEqual(NaN, parseInt10(undefined));
@@ -693,13 +696,25 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, parseInt10([]));
         checkEqual(1, parseInt10([1]));
         checkEqual(123, parseInt10([123]));
-        checkEqual(1, parseInt10([1, 2])); // Decimal number other
+        checkEqual(1, parseInt10([1, 2])); // Non-decimal number only parseInt
 
         checkEqual(10, parseInt('1010', 2));
         checkEqual(10, parseInt('22', 4));
         checkEqual(10, parseInt('12', 8));
         checkEqual(10, parseInt('a', 16));
-        checkEqual(10, parseInt('A', 16));
+        checkEqual(10, parseInt('A', 16)); // Do not specify radix
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(6, parseInt('06'));
+          checkEqual(7, parseInt('07'));
+          checkEqual(0, parseInt('08'));
+          checkEqual(0, parseInt('09'));
+        } else {
+          checkEqual(6, parseInt('06'));
+          checkEqual(7, parseInt('07'));
+          checkEqual(8, parseInt('08'));
+          checkEqual(9, parseInt('09'));
+        }
       });
     };
 
@@ -790,11 +805,11 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.45, stringToNumber('123.45'));
         checkEqual(true, isThrown(function () {
           return stringToNumber('123.4.5');
-        })); // // string  value
+        })); // string
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('abc');
-        })); // // space string
+        })); // space string
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('');
@@ -804,14 +819,14 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToNumber('　');
-        })); // // exponential notation
+        })); // exponential notation
 
         checkEqual(3.14, stringToNumber('3.14'));
         checkEqual(3.14, stringToNumber('314e-2'));
         checkEqual(3.14, stringToNumber('0.0314E+2'));
         checkEqual(0.14, stringToNumber('.14'));
-        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(0.00000000000000001, stringToNumber('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(1e-17, stringToNumber('1e-17')); // exponential notation detail
 
         checkEqual(1, stringToNumber('1.'));
@@ -829,7 +844,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(true, isThrown(function () {
           return stringToNumber('1.e+');
         }));
-        checkEqual(100000, stringToNumber('1.e+5')); // Number different
+        checkEqual(100000, stringToNumber('1.e+5')); // Non-decimal number
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('0x123');
@@ -848,7 +863,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToNumber('-0x123');
-        }));
+        })); // Spacial number
+
         checkEqual(true, isThrown(function () {
           return stringToNumber('Infinity');
         }));
@@ -860,6 +876,64 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToNumber('info');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('NaN');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('nan');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('na');
+        })); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([1, 2]);
         })); // Exception
 
         var i = 0;
@@ -911,7 +985,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(undefined, stringToNumberDefault('123.4a'));
         checkEqual(undefined, stringToNumberDefault('a123.4'));
         checkEqual(123.45, stringToNumberDefault('123.45'));
-        checkEqual(undefined, stringToNumberDefault('123.4.5')); // string default value
+        checkEqual(undefined, stringToNumberDefault('123.4.5')); // string
 
         checkEqual(undefined, stringToNumberDefault('abc'));
         checkEqual(null, stringToNumberDefault('abc', null));
@@ -925,8 +999,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(3.14, stringToNumberDefault('314e-2'));
         checkEqual(3.14, stringToNumberDefault('0.0314E+2'));
         checkEqual(0.14, stringToNumberDefault('.14'));
-        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(0.00000000000000001, stringToNumberDefault('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(1e-17, stringToNumberDefault('1e-17')); // exponential notation detail
 
         checkEqual(1, stringToNumberDefault('1.'));
@@ -936,18 +1010,71 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, stringToNumberDefault('1e-5'));
         checkEqual(undefined, stringToNumberDefault('1.e'));
         checkEqual(undefined, stringToNumberDefault('1.e+'));
-        checkEqual(100000, stringToNumberDefault('1.e+5')); // Number different
+        checkEqual(100000, stringToNumberDefault('1.e+5')); // Non-decimal number
 
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
         checkEqual(undefined, stringToNumberDefault('-0x123'));
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
-        checkEqual(undefined, stringToNumberDefault('-0x123'));
+        checkEqual(undefined, stringToNumberDefault('-0x123')); // Spacial number
+
         checkEqual(undefined, stringToNumberDefault('Infinity'));
         checkEqual(undefined, stringToNumberDefault('infinity'));
         checkEqual(undefined, stringToNumberDefault('inf'));
-        checkEqual(undefined, stringToNumberDefault('info')); // Exception
+        checkEqual(undefined, stringToNumberDefault('info'));
+        checkEqual(undefined, stringToNumberDefault('NaN'));
+        checkEqual(undefined, stringToNumberDefault('nan'));
+        checkEqual(undefined, stringToNumberDefault('na')); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([1, 2]);
+        })); // Exception
 
         var i = 0;
         i += 1;
@@ -1006,7 +1133,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToNumber('123.4a'));
         checkEqual(NaN, valueToNumber('a123.4'));
         checkEqual(123.45, valueToNumber('123.45'));
-        checkEqual(NaN, valueToNumber('123.4.5')); // space string
+        checkEqual(NaN, valueToNumber('123.4.5')); // string
+
+        checkEqual(NaN, valueToNumber('abc')); // space string
 
         checkEqual(NaN, valueToNumber(''));
         checkEqual(NaN, valueToNumber(' '));
@@ -1016,7 +1145,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(3.14, valueToNumber('3.14'));
         checkEqual(3.14, valueToNumber('314e-2'));
         checkEqual(3.14, valueToNumber('0.0314E+2'));
-        checkEqual(0.14, valueToNumber('.14')); // exponential notation detail
+        checkEqual(0.14, valueToNumber('.14'));
+        checkEqual(0.00000000000000001, valueToNumber('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
+        checkEqual(1e-17, valueToNumber('1e-17')); // exponential notation detail
 
         checkEqual(1, valueToNumber('1.'));
         checkEqual(NaN, valueToNumber('1.1e'));
@@ -1025,18 +1157,22 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, valueToNumber('1e-5'));
         checkEqual(NaN, valueToNumber('1.e'));
         checkEqual(NaN, valueToNumber('1.e+'));
-        checkEqual(100000, valueToNumber('1.e+5')); // Number different
+        checkEqual(100000, valueToNumber('1.e+5')); // Non-decimal number
 
         checkEqual(NaN, valueToNumber('0x123'));
         checkEqual(NaN, valueToNumber('+0x123'));
         checkEqual(NaN, valueToNumber('-0x123'));
         checkEqual(NaN, valueToNumber('0o123'));
         checkEqual(NaN, valueToNumber('+0o123'));
-        checkEqual(NaN, valueToNumber('-0o123'));
+        checkEqual(NaN, valueToNumber('-0o123')); // Spacial number
+
         checkEqual(NaN, valueToNumber('Infinity'));
         checkEqual(NaN, valueToNumber('infinity'));
         checkEqual(NaN, valueToNumber('inf'));
-        checkEqual(NaN, valueToNumber('info')); // Number
+        checkEqual(NaN, valueToNumber('info'));
+        checkEqual(NaN, valueToNumber('NaN'));
+        checkEqual(NaN, valueToNumber('nan'));
+        checkEqual(NaN, valueToNumber('na')); // Number
 
         checkEqual(123, valueToNumber(123));
         checkEqual(-123, valueToNumber(-123));
@@ -1044,7 +1180,18 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1.23, valueToNumber(-1.23));
         checkEqual(Infinity, valueToNumber(Infinity));
         checkEqual(-Infinity, valueToNumber(-Infinity));
-        checkEqual(NaN, valueToNumber(NaN)); // Default
+        checkEqual(NaN, valueToNumber(NaN)); // Other than number type
+
+        checkEqual(NaN, valueToNumber(null));
+        checkEqual(NaN, valueToNumber(undefined));
+        checkEqual(NaN, valueToNumber({}));
+        checkEqual(NaN, valueToNumber({
+          a: 1
+        }));
+        checkEqual(NaN, valueToNumber([]));
+        checkEqual(NaN, valueToNumber([1]));
+        checkEqual(NaN, valueToNumber([123]));
+        checkEqual(NaN, valueToNumber([1, 2])); // Default
 
         checkEqual(null, valueToNumberDefault('', null));
         checkEqual(null, valueToNumberDefault({
@@ -1069,18 +1216,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(NaN, valueToNumberDefault(NaN, {
           defaultValue: null
-        })); // Other
-
-        checkEqual(NaN, valueToNumber(null));
-        checkEqual(NaN, valueToNumber(undefined));
-        checkEqual(NaN, valueToNumber({}));
-        checkEqual(NaN, valueToNumber({
-          a: 1
         }));
-        checkEqual(NaN, valueToNumber([]));
-        checkEqual(NaN, valueToNumber([1]));
-        checkEqual(NaN, valueToNumber([123]));
-        checkEqual(NaN, valueToNumber([1, 2]));
       });
     };
 
@@ -1238,12 +1374,59 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-127, stringToInteger('-177', 8));
         checkEqual(-10, stringToInteger('-12', 8));
         checkEqual(-3, stringToInteger('-11', 2));
-        checkEqual(-15, stringToInteger('-1111', 2)); // // Default Value
+        checkEqual(-15, stringToInteger('-1111', 2)); // string
 
         checkEqual(true, isThrown(function () {
           return stringToInteger('abc');
-        })); // checkEqual(null,      stringToInteger('abc', null,  10));
-        // checkEqual(NaN,       stringToInteger('abc', NaN,   10));
+        })); // space string
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('　');
+        })); // exponential notation
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('3.14');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('314e-2');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0.0314E+2');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('.14');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1e-17');
+        })); // exponential notation detail
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.1e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.1e+');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1e+5');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1e-5');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.e+');
+        })); // Non-decimal number
 
         checkEqual(true, isThrown(function () {
           return stringToInteger('0x123');
@@ -1262,7 +1445,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToInteger('-0x123');
-        }));
+        })); // Spacial number
+
         checkEqual(true, isThrown(function () {
           return stringToInteger('Infinity');
         }));
@@ -1274,6 +1458,64 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToInteger('info');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('NaN');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('nan');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('na');
+        })); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([1, 2]);
         })); // Exception
 
         var i = 0;
@@ -1400,21 +1642,90 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-127, stringToIntegerDefault('-177', undefined, 8));
         checkEqual(-10, stringToIntegerDefault('-12', undefined, 8));
         checkEqual(-3, stringToIntegerDefault('-11', undefined, 2));
-        checkEqual(-15, stringToIntegerDefault('-1111', undefined, 2)); // Default Value
+        checkEqual(-15, stringToIntegerDefault('-1111', undefined, 2)); // string
 
         checkEqual(undefined, stringToIntegerDefault('abc'));
         checkEqual(null, stringToIntegerDefault('abc', null, 10));
-        checkEqual(NaN, stringToIntegerDefault('abc', NaN, 10));
+        checkEqual(NaN, stringToIntegerDefault('abc', NaN, 10)); // space string
+
+        checkEqual(undefined, stringToIntegerDefault(''));
+        checkEqual(undefined, stringToIntegerDefault(' '));
+        checkEqual(undefined, stringToIntegerDefault('　')); // exponential notation
+
+        checkEqual(undefined, stringToIntegerDefault('3.14'));
+        checkEqual(undefined, stringToIntegerDefault('314e-2'));
+        checkEqual(undefined, stringToIntegerDefault('0.0314E+2'));
+        checkEqual(undefined, stringToIntegerDefault('.14'));
+        checkEqual(undefined, stringToIntegerDefault('1e-17')); // exponential notation detail
+
+        checkEqual(undefined, stringToIntegerDefault('1.'));
+        checkEqual(undefined, stringToIntegerDefault('1.1e'));
+        checkEqual(undefined, stringToIntegerDefault('1.1e+'));
+        checkEqual(undefined, stringToIntegerDefault('1e+5'));
+        checkEqual(undefined, stringToIntegerDefault('1e-5'));
+        checkEqual(undefined, stringToIntegerDefault('1.e'));
+        checkEqual(undefined, stringToIntegerDefault('1.e+')); // Non-decimal number
+
         checkEqual(undefined, stringToIntegerDefault('0x123'));
         checkEqual(undefined, stringToIntegerDefault('+0x123'));
         checkEqual(undefined, stringToIntegerDefault('-0x123'));
         checkEqual(undefined, stringToIntegerDefault('0x123'));
         checkEqual(undefined, stringToIntegerDefault('+0x123'));
-        checkEqual(undefined, stringToIntegerDefault('-0x123'));
+        checkEqual(undefined, stringToIntegerDefault('-0x123')); // Spacial number
+
         checkEqual(undefined, stringToIntegerDefault('Infinity'));
         checkEqual(undefined, stringToIntegerDefault('infinity'));
         checkEqual(undefined, stringToIntegerDefault('inf'));
-        checkEqual(undefined, stringToIntegerDefault('info')); // Exception
+        checkEqual(undefined, stringToIntegerDefault('info')); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([1, 2]);
+        })); // Exception
 
         var i = 0;
         i += 1;
@@ -1500,7 +1811,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToInteger('123.4a'));
         checkEqual(NaN, valueToInteger('a123.4'));
         checkEqual(123, valueToInteger('123.45'));
-        checkEqual(NaN, valueToInteger('123.4.5')); // space string
+        checkEqual(NaN, valueToInteger('123.4.5')); // string
+
+        checkEqual(NaN, valueToInteger('abc')); // space string
 
         checkEqual(NaN, valueToInteger(''));
         checkEqual(NaN, valueToInteger(' '));
@@ -1519,18 +1832,22 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0, valueToInteger('1e-5'));
         checkEqual(NaN, valueToInteger('1.e'));
         checkEqual(NaN, valueToInteger('1.e+'));
-        checkEqual(100000, valueToInteger('1.e+5')); // Number different
+        checkEqual(100000, valueToInteger('1.e+5')); // Non-decimal number
 
         checkEqual(NaN, valueToInteger('0x123'));
         checkEqual(NaN, valueToInteger('+0x123'));
         checkEqual(NaN, valueToInteger('-0x123'));
         checkEqual(NaN, valueToInteger('0o123'));
         checkEqual(NaN, valueToInteger('+0o123'));
-        checkEqual(NaN, valueToInteger('-0o123'));
+        checkEqual(NaN, valueToInteger('-0o123')); // Spacial number
+
         checkEqual(NaN, valueToInteger('Infinity'));
         checkEqual(NaN, valueToInteger('infinity'));
         checkEqual(NaN, valueToInteger('inf'));
-        checkEqual(NaN, valueToInteger('info')); // Number
+        checkEqual(NaN, valueToInteger('info'));
+        checkEqual(NaN, valueToInteger('NaN'));
+        checkEqual(NaN, valueToInteger('nan'));
+        checkEqual(NaN, valueToInteger('na')); // Number
 
         checkEqual(123, valueToInteger(123));
         checkEqual(-123, valueToInteger(-123));
@@ -1540,7 +1857,18 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-2, valueToInteger(-1.67));
         checkEqual(Infinity, valueToInteger(Infinity));
         checkEqual(-Infinity, valueToInteger(-Infinity));
-        checkEqual(NaN, valueToInteger(NaN)); // Default
+        checkEqual(NaN, valueToInteger(NaN)); // Other than number type
+
+        checkEqual(NaN, valueToInteger(null));
+        checkEqual(NaN, valueToInteger(undefined));
+        checkEqual(NaN, valueToInteger({}));
+        checkEqual(NaN, valueToInteger({
+          a: 1
+        }));
+        checkEqual(NaN, valueToInteger([]));
+        checkEqual(NaN, valueToInteger([1]));
+        checkEqual(NaN, valueToInteger([123]));
+        checkEqual(NaN, valueToInteger([1, 2])); // Default
 
         checkEqual(null, valueToIntegerDefault('', null));
         checkEqual(null, valueToIntegerDefault({
@@ -1573,24 +1901,14 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(NaN, valueToIntegerDefault(NaN, {
           defaultValue: null
-        })); // Other
-
-        checkEqual(NaN, valueToInteger(null));
-        checkEqual(NaN, valueToInteger(undefined));
-        checkEqual(NaN, valueToInteger({}));
-        checkEqual(NaN, valueToInteger({
-          a: 1
         }));
-        checkEqual(NaN, valueToInteger([]));
-        checkEqual(NaN, valueToInteger([1]));
-        checkEqual(NaN, valueToInteger([123]));
       });
     };
 
-    test_numberToString();
-    test_valueToString();
     test_StringCast_standard();
     test_toString_standard();
+    test_numberToString();
+    test_valueToString();
     test_NumberCast_standard();
     test_parseFloat_standard();
     test_parseInt_standard();

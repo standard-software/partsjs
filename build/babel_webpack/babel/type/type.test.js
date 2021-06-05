@@ -524,13 +524,15 @@ var test_execute_type = function test_execute_type(parts) {
         } // Reflect
 
 
+        testCounter();
+
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(true, typeof Reflect === 'undefined');
         } else if (parts.platform.isGasRhino()) {
           checkEqual(true, typeof Reflect === 'undefined');
         } else if (parts.platform.isInternetExplorer()) {
           checkEqual(true, typeof Reflect === 'undefined');
-        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkType('object', '[object Reflect]', Reflect);
         } else {
           checkType('object', '[object Object]', Reflect);
@@ -541,9 +543,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(true, typeof Intl === 'undefined');
         } else if (parts.platform.isGasRhino()) {
           checkEqual(true, typeof Intl === 'undefined');
-        } else if (parts.platform.isDeno()) {
-          checkEqual(true, typeof Intl === 'undefined');
-        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkType('object', '[object Intl]', Intl);
         } else {
           checkType('object', '[object Object]', Intl);
@@ -713,13 +713,15 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual('WebAssembly', typeName(WebAssembly));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        testCounter();
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkEqual('Reflect', typeName(Reflect));
         } else {
           checkEqual('Object', typeName(Reflect));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkEqual('Intl', typeName(Intl));
         } else {
           checkEqual('Object', typeName(Intl));

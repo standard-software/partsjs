@@ -15,11 +15,13 @@ var _map2 = require("../array/_map.js");
  * replaceAllArray
  */
 var _replaceAllArray = function _replaceAllArray(str, replaceArray) {
+  var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var searchArray = (0, _map2._map)(replaceArray, function (element) {
     return element[0];
   });
   var start = 0;
   var result = '';
+  var replaceInfo = [];
 
   while (true) {
     var searchResult = (0, _indexOfAnyFirst2._indexOfAnyFirst)(str, searchArray, start);
@@ -35,7 +37,18 @@ var _replaceAllArray = function _replaceAllArray(str, replaceArray) {
     }
 
     result += replaceArray[searchResult.searchIndex][1];
+    replaceInfo.push({
+      index: searchResult.index,
+      searchIndex: searchResult.searchIndex
+    });
     start += searchArray[searchResult.searchIndex].length;
+  }
+
+  if (detail) {
+    return {
+      result: result,
+      replaceInfo: replaceInfo
+    };
   }
 
   return result;

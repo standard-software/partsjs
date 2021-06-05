@@ -233,7 +233,17 @@ var test_execute_compare = function test_execute_compare(parts) {
           date: new Date('2019/11/02')
         }), 'test_equal date'); // date in array
 
-        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
+        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // invalid date
+
+        checkEqual(true, equal(new Date(''), new Date('')), 'test_equal date'); // invalid date in object
+
+        checkEqual(false, equal({
+          date: new Date('')
+        }, {
+          date: new Date('')
+        }), 'test_equal date'); // invalid date in array
+
+        checkEqual(false, equal([new Date('')], [new Date('')]), 'test_equal date'); // date ignore
 
         var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
@@ -795,7 +805,17 @@ var test_execute_compare = function test_execute_compare(parts) {
           date: new Date('2019/11/02')
         }), 'test_equalDeep date'); // date in array
 
-        checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
+        checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // invalid date
+
+        checkEqual(true, equalDeep(new Date(''), new Date('')), 'test_equal date'); // invalid date in object
+
+        checkEqual(true, equalDeep({
+          date: new Date('')
+        }, {
+          date: new Date('')
+        }), 'test_equal date'); // invalid date in array
+
+        checkEqual(true, equalDeep([new Date('')], [new Date('')]), 'test_equal date'); // date ignore
 
         var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 

@@ -980,6 +980,108 @@ export const test_execute_date = (parts) => {
         checkEqual(new Date(2019, 5, 2),
           stringToDate('06/02', 'MM/DD', undefined, new Date(2019, 0, 1)));
 
+        // object parameter
+        checkEqual(new Date(2021, 4, 1),
+          stringToDate(
+            {
+              str: '2021/05/01',
+              format: 'YYYY/MM/DD',
+            },
+          ),
+        );
+        checkEqual(new Date(2021, 4, 1),
+          stringToDate(
+            '2021/05/01',
+            {
+              format: 'YYYY/MM/DD',
+            },
+          ),
+        );
+        checkEqual(new Date(2021, 4, 1),
+          stringToDate(
+            '2021/05/01',
+            {
+              format: 'YYYY/MM/DD',
+            },
+          ),
+        );
+        checkEqual(
+          Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+          stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss',
+            {
+              timezoneOffset: -540,
+            },
+          ),
+        );
+        checkEqual(
+          new Date(1921, 0, 1),
+          stringToDate('21', 'YY',
+            {
+              sourceDate: new Date(1990, 0, 1),
+            },
+          ),
+        );
+        checkEqual(
+          new Date(1921, 0, 1),
+          stringToDate('21', 'YY',
+            undefined,
+            {
+              sourceDate: new Date(1990, 0, 1),
+            },
+          ),
+        );
+      });
+    };
+
+    const test_stringToDate_MomentLike = () => {
+      it('test_stringToDate_MomentLike', () => {
+
+        const stringToDateMoment = (str, format) => {
+          return stringToDate(
+            str, format, { rule: stringToDate.rule.MomentLike() },
+          );
+        };
+
+        checkEqual(
+          Datetime(2001, 9, 4),
+          stringToDateMoment('September4 2001', 'MMMMD YYYY'),
+        );
+
+        // am pm
+        checkEqual(
+          Datetime(2021, 5, 26, 8, 59, 40),
+          stringToDateMoment('20210526 8 59 40 am', 'YYYYMMDD h mm ss a'),
+        );
+        checkEqual(
+          Datetime(2021, 5, 26, 8, 59, 40),
+          stringToDateMoment('20210526 8 59 40 AM', 'YYYYMMDD h mm ss A'),
+        );
+        checkEqual(
+          true,
+          isInvalidDate(
+            stringToDateMoment('20210526 8 59 40 AM', 'YYYYMMDD h mm ss AA'),
+          ),
+        );
+
+        // object parameter
+        checkEqual(
+          Datetime(2001, 9, 4),
+          stringToDate(
+            'September4 2001', 'MMMMD YYYY',
+            undefined,
+            { rule: stringToDate.rule.MomentLike() },
+          ),
+        );
+        checkEqual(
+          Datetime(2001, 9, 4),
+          stringToDate(
+            'September4 2001', 'MMMMD YYYY',
+            undefined,
+            undefined,
+            { rule: stringToDate.rule.MomentLike() },
+          ),
+        );
+
       });
     };
 
@@ -1431,6 +1533,7 @@ export const test_execute_date = (parts) => {
     test_dateToStringUTC();
 
     test_stringToDate();
+    test_stringToDate_MomentLike();
 
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();

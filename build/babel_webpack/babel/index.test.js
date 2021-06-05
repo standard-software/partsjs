@@ -75,7 +75,7 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        checkEqual(399, propertyCountForParts(parts));
+        checkEqual(400, propertyCountForParts(parts));
         checkEqual(17, propertyCount(parts.platform));
         checkEqual(7, propertyCount(parts.common));
         checkEqual(262, propertyCount(parts.type));
@@ -84,11 +84,11 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
         checkEqual(19, propertyCount(parts.number));
-        checkEqual(94, propertyCount(parts.string));
+        checkEqual(96, propertyCount(parts.string));
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
         checkEqual(48, propertyCount(parts.array.operation));
-        checkEqual(24, propertyCount(parts.date));
+        checkEqual(38, propertyCount(parts.date));
         checkEqual(2, propertyCount(parts.system));
         checkEqual(3, propertyCount(parts.system.wsh));
         checkEqual(20, propertyCount(parts.system.consoleHook));
@@ -152,6 +152,7 @@ var test_execute_index = function test_execute_index(parts) {
       describe = _parts$test3.describe,
       testFrame = _parts$test3.testFrame;
   testFrame.outputDescribe = false;
+  testFrame.outputIt = false;
   describe('test_execute_index', function () {
     (0, _commonTest.test_execute_common)(parts);
     (0, _typeTest.test_execute_type)(parts);

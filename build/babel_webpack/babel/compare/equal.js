@@ -158,7 +158,7 @@ equal.func.date = function (value1, value2) {
     return;
   }
 
-  return value1.getTime() === value2.getTime();
+  return equal.func.value(value1.getTime(), value2.getTime());
 };
 
 equal.func.regExp = function (value1, value2) {

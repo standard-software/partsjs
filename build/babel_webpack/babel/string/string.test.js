@@ -62,7 +62,8 @@ var test_execute_string = function test_execute_string(parts) {
         indexOfAnyFirst = _parts$string.indexOfAnyFirst,
         indexOfAnyLast = _parts$string.indexOfAnyLast,
         paddingFirst = _parts$string.paddingFirst,
-        paddingLast = _parts$string.paddingLast;
+        paddingLast = _parts$string.paddingLast,
+        escapeRegExp = _parts$string.escapeRegExp;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -2245,6 +2246,14 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_escapeRegExp = function test_escapeRegExp() {
+      it('test_escapeRegExp', function () {
+        checkEqual('a', escapeRegExp('a'));
+        checkEqual('\\\\\\^\\$\\.ABC\\*\\+\\-\\?', escapeRegExp('\\^$.ABC*+-?'));
+        checkEqual('\\(\\)\\{\\}\\[\\]ABC\\|\\/', escapeRegExp('(){}[\]ABC\|\/'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_replaceAllRepeat();
@@ -2293,6 +2302,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_paddingFirst();
     test_paddingLast();
     test_includeCount();
+    test_escapeRegExp();
   });
 };
 

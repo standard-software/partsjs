@@ -4,6 +4,7 @@ import { __dayOfWeekNames } from '../date/__dayOfWeekNames.js';
 import { __includes } from '../compare/__includes.js';
 import { _subLength } from '../string/string_common.js';
 import { _textsToMinutes } from './_textsToMinutes.js';
+import { __dateToStringRule } from './__dateToStringRule.js';
 
 let flagPM = false;
 
@@ -183,6 +184,7 @@ const defaultRule = {
   ['MMMMM']:  { reg: regMonthNameEnglishLong,   func: r.setMonthEnglishLong },
   ['Z']:      { reg: '(Z|[+|-]\\d{2}:\\d{2})',  func: r.setTimezoneHH_MM('Z') },
   ['ZZ']:     { reg: '(Z|[+|-]\\d{2}\\d{2})',   func: r.setTimezoneHHMM('Z') },
+  toStringRule: __dateToStringRule.Default(),
 };
 
 const momentLikeRule = {
@@ -203,14 +205,15 @@ const momentLikeRule = {
   ['SSS']:    { reg: '(\\d{3})',                func: r.setMsec },
   ['SS']:     { reg: '(\\d{2})',                func: r.setMsecX10 },
   ['S']:      { reg: '(\\d{1})',                func: r.setMsecX100 },
-  ['a']:      { reg: '(a|p)',                   func: r.setAMPM },
-  ['A']:      { reg: '(A|P)',                   func: r.setAMPM },
+  ['a']:      { reg: '(am|pm)',                 func: r.setAMPM },
+  ['A']:      { reg: '(AM|PM)',                 func: r.setAMPM },
   ['ddd']:    { reg: regDayOfWeekEnglishShort,  func: () => {} },
   ['dddd']:   { reg: regDayOfWeekEnglishLong,   func: () => {} },
   ['MMM']:    { reg: regMonthNameEnglishChar3,  func: r.setMonthEnglishChar3 },
   ['MMMM']:   { reg: regMonthNameEnglishLong,   func: r.setMonthEnglishLong },
   ['Z']:      { reg: '(Z|[+|-]\\d{2}:\\d{2})',  func: r.setTimezoneHH_MM('Z') },
   ['ZZ']:     { reg: '(Z|[+|-]\\d{2}\\d{2})',   func: r.setTimezoneHHMM('Z') },
+  toStringRule: __dateToStringRule.MomentLike(),
 };
 
 __stringToDateRule.Default = () => defaultRule;

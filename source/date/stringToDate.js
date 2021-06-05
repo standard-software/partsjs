@@ -24,17 +24,17 @@ export const stringToDate = (
       sourceDate = _ThisYear(),
       rule = __stringToDateRule.Default(),
     } = format);
-  } else if (isObjectParameter(timezoneOffset, 'timezoneOffset', 'sourceDate, rule')) {
+  } else if (isObjectParameter(timezoneOffset, '', 'timezoneOffset, sourceDate, rule')) {
     ({
-      timezoneOffset,
+      timezoneOffset = (new Date()).getTimezoneOffset(),
       sourceDate = _ThisYear(),
-      rule = _dateToString.func.Default(),
-    } = timezoneOffset);
-  } else if (isObjectParameter(sourceDate, 'sourceDate', 'rule')) {
-    ({
-      sourceDate,
       rule = __stringToDateRule.Default(),
-    } = rule);
+    } = timezoneOffset);
+  } else if (isObjectParameter(sourceDate, '', 'sourceDate, rule')) {
+    ({
+      sourceDate = _ThisYear(),
+      rule = __stringToDateRule.Default(),
+    } = sourceDate);
   } else if (isObjectParameter(rule, 'rule')) {
     ({ rule } = rule);
   }
@@ -65,7 +65,9 @@ export const stringToDate = (
     );
   }
 
-  return _stringToDate(str, format, timezoneOffset, sourceDate);
+  return _stringToDate(str, format, timezoneOffset, sourceDate, rule);
 };
+
+stringToDate.rule = _stringToDate.rule;
 
 export default { stringToDate };

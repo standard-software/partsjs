@@ -3,15 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.Today = void 0;
+exports["default"] = exports.ThisMonth = void 0;
 
 var _isType = require("../type/isType.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _Today2 = require("./_Today.js");
+var _ThisMonth2 = require("./_ThisMonth.js");
 
-var Today = function Today() {
+var ThisMonth = function ThisMonth() {
   var isLocal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
   if ((0, _isObjectParameter.isObjectParameter)(isLocal, '', 'isLocal')) {
@@ -21,14 +21,14 @@ var Today = function Today() {
   }
 
   if (!(0, _isType.isBoolean)(isLocal)) {
-    throw new TypeError("Today args(isLocal:".concat(isLocal, ") is not boolean"));
+    throw new TypeError("ThisMonth args(isLocal:".concat(isLocal, ") is not boolean"));
   }
 
-  return (0, _Today2._Today)(isLocal);
+  return (0, _ThisMonth2._ThisMonth)(isLocal);
 };
 
-exports.Today = Today;
+exports.ThisMonth = ThisMonth;
 var _default = {
-  Today: Today
+  ThisMonth: ThisMonth
 };
 exports["default"] = _default;

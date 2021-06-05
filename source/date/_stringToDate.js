@@ -55,12 +55,16 @@ export const _stringToDate = (
   }
   const { timezoneOffset: timezoneOffsetMin } = __stringToDateRule.finalize(result);
 
-  if (_dateToString(result, format, timezoneOffsetMin) === str) {
+  if (_dateToString(
+    result, format, timezoneOffsetMin, rule.toStringRule,
+  ) === str) {
     return result;
   } else {
     return INVALID_DATE;
   }
 
 };
+
+_stringToDate.rule = __stringToDateRule;
 
 export default { _stringToDate };

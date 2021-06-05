@@ -25,23 +25,11 @@ var _Datetime = function _Datetime() {
   var self = new Date(0);
 
   if (isLocal === true) {
-    self.setFullYear(year);
-    self.setDate(1);
-    self.setMonth(month - 1);
-    self.setDate(day);
-    self.setHours(hour);
-    self.setMinutes(minute);
-    self.setSeconds(second);
-    self.setMilliseconds(millisecond);
+    self.setFullYear(year, month - 1, day);
+    self.setHours(hour, minute, second, millisecond);
   } else {
-    self.setUTCFullYear(year);
-    self.setUTCDate(1);
-    self.setUTCMonth(month - 1);
-    self.setUTCDate(day);
-    self.setUTCHours(hour);
-    self.setUTCMinutes(minute);
-    self.setUTCSeconds(second);
-    self.setUTCMilliseconds(millisecond);
+    self.setUTCFullYear(year, month - 1, day);
+    self.setUTCHours(hour, minute, second, millisecond);
   }
 
   return self;

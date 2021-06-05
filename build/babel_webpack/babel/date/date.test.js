@@ -5,6 +5,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_date = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var test_execute_date = function test_execute_date(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
@@ -14,10 +26,13 @@ var test_execute_date = function test_execute_date(parts) {
       isThrownException = _parts$test.isThrownException,
       testCounter = _parts$test.testCounter;
   var _parts$date = parts.date,
+      ThisYear = _parts$date.ThisYear,
+      ThisMonth = _parts$date.ThisMonth,
       Today = _parts$date.Today,
       isInvalidDate = _parts$date.isInvalidDate,
       Datetime = _parts$date.Datetime,
-      datetimeToString = _parts$date.datetimeToString,
+      dateToString = _parts$date.dateToString,
+      dateToStringUTC = _parts$date.dateToStringUTC,
       dayOfWeek = _parts$date.dayOfWeek,
       dayOfWeekEnglishShort = _parts$date.dayOfWeekEnglishShort,
       dayOfWeekEnglishLong = _parts$date.dayOfWeekEnglishLong,
@@ -26,12 +41,42 @@ var test_execute_date = function test_execute_date(parts) {
       nameOfMonth = _parts$date.nameOfMonth,
       nameOfMonthEnglishChar3 = _parts$date.nameOfMonthEnglishChar3,
       nameOfMonthEnglishChar4 = _parts$date.nameOfMonthEnglishChar4,
-      nameOfMonthEnglishLong = _parts$date.nameOfMonthEnglishLong;
+      nameOfMonthEnglishLong = _parts$date.nameOfMonthEnglishLong,
+      stringToDate = _parts$date.stringToDate,
+      minutesToTexts = _parts$date.minutesToTexts,
+      textsToMinutes = _parts$date.textsToMinutes;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
+    var test_ThisYear = function test_ThisYear() {
+      it('test_ThisYear', function () {
+        var now = new Date();
+        checkEqual(new Date(now.getFullYear(), 0, 1), ThisYear());
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), 0, 1)), ThisYear(false));
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), 0, 1)), ThisYear({
+          isLocal: false
+        }));
+      });
+    };
+
+    var test_ThisMonth = function test_ThisMonth() {
+      it('test_ThisMonth', function () {
+        var now = new Date();
+        checkEqual(new Date(now.getFullYear(), now.getMonth(), 1), ThisMonth());
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)), ThisMonth(false));
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)), ThisMonth({
+          isLocal: false
+        }));
+      });
+    };
+
     var test_Today = function test_Today() {
       it('test_Today', function () {
-        checkEqual(new Date().toString(), Today().toString());
+        var now = new Date();
+        checkEqual(new Date(now.getFullYear(), now.getMonth(), now.getDate()), Today());
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())), Today(false));
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())), Today({
+          isLocal: false
+        }));
       });
     };
 
@@ -57,6 +102,23 @@ var test_execute_date = function test_execute_date(parts) {
     var test_Date_standard = function test_Date_standard() {
       it('test_Date_standard', function () {
         checkEqual(0, new Date(0).getTime());
+
+        var _minutesToTexts = minutesToTexts(-1 * new Date().getTimezoneOffset()),
+            _minutesToTexts2 = _slicedToArray(_minutesToTexts, 3),
+            s = _minutesToTexts2[0],
+            h = _minutesToTexts2[1],
+            m = _minutesToTexts2[2];
+
+        if (s === '+') {
+          if (!parts.platform.isWindowsScriptHost()) {
+            checkEqual(0, new Date(0).toString().indexOf("Thu Jan 01 1970 ".concat(h, ":").concat(m, ":00 GMT").concat(s + h + m))); // checkEqual(
+            //   new Date(0).toString(),
+            //   `Thu Jan 01 1970 ${h}:${m}:00 GMT${s + h + m}`,
+            // );
+          } else {
+            checkEqual("Thu Jan 1 ".concat(h, ":").concat(m, ":00 UTC").concat(s + h + m, " 1970"), new Date(0).toString());
+          }
+        }
 
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual('Thu, 01 Jan 1970 00:00:00 GMT', new Date(0).toUTCString());
@@ -223,112 +285,257 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
-    var test_datetimeToString = function test_datetimeToString() {
-      it('test_datetimeToString', function () {
+    var test_dateToString = function test_dateToString() {
+      it('test_dateToString', function () {
         var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
-        checkEqual('2001/02/04 09:05:08.045', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
-        checkEqual('2001/02/04 09:05:08.04', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
-        checkEqual('2001/02/04 09:05:08.0', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
-        checkEqual('01/2/4 9:5:8 am', datetimeToString(dt, 'YY/M/D H:m:s aa'));
-        checkEqual('01/2/4 9:5:8 a', datetimeToString(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 9:5:8 AM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
-        checkEqual('01/2/4 9:5:8 A', datetimeToString(dt, 'YY/M/D H:m:s A'));
+        checkEqual('2001/02/04 09:05:08.045', dateToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', dateToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', dateToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', dateToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 9:5:8 a', dateToString(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 9:5:8 AM', dateToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 9:5:8 A', dateToString(dt, 'YY/M/D H:m:s A'));
         var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
-        checkEqual('01/2/4 16:5:8 pm', datetimeToString(dt, 'YY/M/D H:m:s aa'));
-        checkEqual('01/2/4 16:5:8 p', datetimeToString(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 16:5:8 PM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
-        checkEqual('01/2/4 16:5:8 P', datetimeToString(dt, 'YY/M/D H:m:s A'));
-        checkEqual('01/2/4 16:5:8 Sun', datetimeToString(dt, 'YY/M/D H:m:s ddd'));
-        checkEqual('01/2/4 16:5:8 Sunday', datetimeToString(dt, 'YY/M/D H:m:s dddd'));
-        checkEqual('01/2/4 16:5:8 Feb', datetimeToString(dt, 'YY/M/D H:m:s MMM'));
-        checkEqual('01/2/4 16:5:8 Feb.', datetimeToString(dt, 'YY/M/D H:m:s MMMM'));
-        checkEqual('01/2/4 16:5:8 February', datetimeToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
+        checkEqual('01/2/4 16:5:8 pm', dateToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 16:5:8 p', dateToString(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 16:5:8 PM', dateToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 16:5:8 P', dateToString(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', dateToString(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', dateToString(dt, 'YY/M/D H:m:s dddd'));
+        checkEqual('01/2/4 16:5:8 Feb', dateToString(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 Feb.', dateToString(dt, 'YY/M/D H:m:s MMMM'));
+        checkEqual('01/2/4 16:5:8 February', dateToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
 
         var dt = Datetime(2021, 1, 6);
-        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
-        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
-        var dt = new Date();
-        var dt = Datetime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
-        var timezoneOffset = -1 * dt.getTimezoneOffset();
-        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
-        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // console.log('timezone', timezoneOffset, timezoneOffset / 60,
-        //   parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0'),
-        //   (new Date).getTimezoneOffset(),
-        // );
-        // '+0900' etc
+        var _minutesToTexts3 = minutesToTexts(-1 * dt.getTimezoneOffset()),
+            _minutesToTexts4 = _slicedToArray(_minutesToTexts3, 3),
+            s = _minutesToTexts4[0],
+            h = _minutesToTexts4[1],
+            m = _minutesToTexts4[2]; // '+0900' etc
 
-        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ'));
+
+        checkEqual(s + h + ':' + m, dateToString(dt, 'Z'));
+        checkEqual(s + h + m, dateToString(dt, 'ZZ'));
 
         if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(true, dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1);
+          checkEqual(true, dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1);
         } else {
-          checkEqual(true, dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1);
-        } // '+09:00' etc
+          checkEqual(true, dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1);
+        }
 
-
-        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // exception
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, dt.toString().indexOf(dateToString(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ')));
+        } else {
+          checkEqual(0, dt.toString().indexOf(dateToString(dt, 'ddd MMM D HH:mm:ss "UTC"ZZ YYYY')));
+        } // exception
         // quote
+
 
         var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(function () {
-          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
         checkEqual(true, isThrown(function () {
-          datetimeToString(dt, '"YYYY"MMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYY"MMDD = "YYYYMMDD');
         }));
       });
     };
 
-    var test_datetimeToString_MomemtLike = function test_datetimeToString_MomemtLike() {
-      it('test_datetimeToString_MomemtLike', function () {
-        var datetimeToStringMoment = function datetimeToStringMoment(date, format, isLocal) {
-          return datetimeToString(date, format, datetimeToString.func.MomentLikeObject(), isLocal);
+    var test_dateToString_MomemtLike = function test_dateToString_MomemtLike() {
+      it('test_dateToString_MomemtLike', function () {
+        var dateToStringMoment = function dateToStringMoment(date, format) {
+          return dateToString(date, format, undefined, dateToString.func.MomentLike());
         };
 
         var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
-        checkEqual('2001/02/04 09:05:08.045', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
-        checkEqual('2001/02/04 09:05:08.04', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
-        checkEqual('2001/02/04 09:05:08.0', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'));
-        checkEqual('01/2/4 9:5:8 am', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 9:5:8 AM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
+        checkEqual('2001/02/04 09:05:08.045', dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', dateToStringMoment(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 9:5:8 AM', dateToStringMoment(dt, 'YY/M/D H:m:s A'));
         var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
-        checkEqual('01/2/4 16:5:8 pm', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 16:5:8 PM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
-        checkEqual('01/2/4 16:5:8 Sun', datetimeToStringMoment(dt, 'YY/M/D H:m:s ddd'));
-        checkEqual('01/2/4 16:5:8 Sunday', datetimeToStringMoment(dt, 'YY/M/D H:m:s dddd'));
-        checkEqual('01/2/4 16:5:8 Feb', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMM'));
-        checkEqual('01/2/4 16:5:8 February', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMMM')); // quote
+        checkEqual('01/2/4 16:5:8 pm', dateToStringMoment(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 16:5:8 PM', dateToStringMoment(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', dateToStringMoment(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', dateToStringMoment(dt, 'YY/M/D H:m:s dddd'));
+        checkEqual('01/2/4 16:5:8 Feb', dateToStringMoment(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 February', dateToStringMoment(dt, 'YY/M/D H:m:s MMMM')); // quote
 
         var dt = Datetime(2021, 1, 6);
-        checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
-        checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+        checkEqual('YYYYMMDD = 20210106', dateToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', dateToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
-        var dt = new Date();
-        var dt = Datetime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
-        var timezoneOffset = -1 * dt.getTimezoneOffset();
-        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
-        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // '+0900' etc
+        var _minutesToTexts5 = minutesToTexts(-1 * dt.getTimezoneOffset()),
+            _minutesToTexts6 = _slicedToArray(_minutesToTexts5, 3),
+            s = _minutesToTexts6[0],
+            h = _minutesToTexts6[1],
+            m = _minutesToTexts6[2];
 
-        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ'));
+        checkEqual(s + h + ':' + m, dateToStringMoment(dt, 'Z'));
+        checkEqual(s + h + m, dateToStringMoment(dt, 'ZZ'));
 
         if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(true, dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1);
+          checkEqual(true, dt.toString().indexOf('UTC' + dateToStringMoment(dt, 'ZZ')) !== -1);
         } else {
-          checkEqual(true, dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1);
-        } // '+09:00' etc
+          checkEqual(true, dt.toString().indexOf('GMT' + dateToStringMoment(dt, 'ZZ')) !== -1);
+        }
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, dt.toString().indexOf(dateToStringMoment(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ')));
+        } else {
+          checkEqual(0, dt.toString().indexOf(dateToStringMoment(dt, 'ddd MMM D HH:mm:ss "UTC"ZZ YYYY')));
+        } // exception
+        // quote
 
 
-        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z')); // exception
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          dateToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          dateToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+      });
+    };
+
+    var test_dateToString_timezoneOffset = function test_dateToString_timezoneOffset() {
+      it('test_dateToString', function () {
+        var dt = Datetime(2021, 6, 1, 0, 20, 30);
+        checkEqual('2021/06/01 00:20:30', dateToString(dt, 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual('2021/06/01 00:20:30', dateToString(dt, 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual('2021/06/01 00:20:30', dateToString(dt, 'YYYY/MM/DD HH:mm:ss', dt.getTimezoneOffset()));
+        var dt = Datetime(2021, 6, 1, 0, 20, 30, 0, false);
+        checkEqual('2021/06/01 09:20:30 +09:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 9 * 60));
+        checkEqual('2021/06/01 08:20:30 +0800', dateToString(dt, 'YYYY/MM/DD HH:mm:ss ZZ', -1 * 8 * 60));
+        checkEqual('2021/06/01 07:20:30 +07:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 7 * 60));
+        checkEqual('2021/06/01 01:20:30 +01:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 1 * 60));
+        checkEqual('2021/06/01 00:20:30 +00:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 0));
+        checkEqual('2021/05/31 23:20:30 -01:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 1 * 60));
+        checkEqual('2021/05/31 12:20:30 -12:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 12 * 60));
+        checkEqual('2021/06/01 00:20:30 Z', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss Z')); // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, '"YYYYMMDD = "YYYYMMDD', dt.getTimezoneOffset()));
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, "'YYYYMMDD = 'YYYYMMDD", dt.getTimezoneOffset())); // exception
         // quote
 
         var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(function () {
-          datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD', dt.getTimezoneOffset());
         }));
         checkEqual(true, isThrown(function () {
-          datetimeToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYY"MMDD = "YYYYMMDD', dt.getTimezoneOffset());
         }));
+      });
+    };
+
+    var test_dateToStringUTC = function test_dateToStringUTC() {
+      it('test_dateToStringUTC', function () {
+        var dt = new Date(Date.UTC(2021, 1, 3, 4, 5, 6, 789));
+        checkEqual('2021/02/03 04:05:06.789', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2021/02/03 04:05:06.78', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2021/02/03 04:05:06.7', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        var dt = new Date(Date.UTC(2021, 4, 31, 13, 2, 3));
+        checkEqual('21/5/31 1:2:3 pm', dateToStringUTC(dt, 'YY/M/D h:m:s aa'));
+        checkEqual('21/5/31 13:2:3', dateToStringUTC(dt, 'YY/M/D H:m:s'));
+        var dt = new Date(2021, 4, 31, 9, 10, 11);
+        checkEqual('21/5/31 0:10:11', dateToStringUTC(dt, 'YY/M/D h:m:s')); // timezone
+
+        var dt = new Date(2021, 4, 31, 9, 10, 11);
+        checkEqual('21/5/31 0:10:11', dateToStringUTC(dt, 'YY/M/D h:m:s'));
+        checkEqual('21/5/31 0:10:11 Z', dateToStringUTC(dt, 'YY/M/D h:m:s Z'));
+        checkEqual('21/5/31 0:10:11 Z', dateToStringUTC(dt, 'YY/M/D h:m:s ZZ')); // quote
+
+        var dt = new Date(Date.UTC(2021, 4, 31));
+        checkEqual('YYYYMMDD = 20210531', dateToStringUTC(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210531', dateToStringUTC(dt, "'YYYYMMDD = 'YYYYMMDD")); // exception
+        // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          dateToStringUTC(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          dateToStringUTC(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+      });
+    };
+
+    var test_stringToDate = function test_stringToDate() {
+      it('test_stringToDate', function () {
+        checkEqual(new Date(2021, 4, 1), stringToDate('2021/05/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2021, 3, 30), stringToDate('2021/04/30', 'YYYY/MM/DD'));
+        checkEqual(new Date(''), stringToDate('2021/05/00', 'YYYY/MM/DD'));
+        checkEqual(new Date(''), stringToDate('2021/04/31', 'YYYY/MM/DD'));
+        checkEqual(new Date(''), stringToDate('2021/5/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2021, 4, 1), stringToDate('2021/5/01', 'YYYY/M/DD'));
+        checkEqual(new Date(''), stringToDate('2021/05/01', 'YYYY/M/DD'));
+        checkEqual(new Date(2021, 10, 1), stringToDate('2021/11/01', 'YYYY/M/DD'));
+        checkEqual(new Date(2021, 10, 1), stringToDate('2021/11/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2020, 11, 1), stringToDate('1-12-20', 'D-M-YY'));
+        checkEqual(new Date(2020, 11, 1), stringToDate('12-1-20', 'M-D-YY'));
+        checkEqual(new Date(2020, 0, 21), stringToDate('21-1-20', 'D-M-YY'));
+        checkEqual(new Date(2020, 0, 21), stringToDate('1-21-20', 'M-D-YY'));
+        checkEqual(new Date(2020, 0, 12), stringToDate('1-12-20', 'M-D-YY'));
+        checkEqual(new Date(''), stringToDate('21-1-20', 'M-D-YY'));
+        checkEqual(new Date(2021, 4, 1, 3, 4, 5), stringToDate('2021/05/01 03:04:05', 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual(new Date(2021, 4, 1, 11, 8, 9), stringToDate('2021/05/01 11:08:09(Sat)', 'YYYY/MM/DD HH:mm:ss(ddd)'));
+        checkEqual(new Date(''), stringToDate('2021/05/01 11:08:09(Mon)', 'YYYY/MM/DD HH:mm:ss(ddd)')); // testCounter();
+
+        checkEqual(Datetime(2001, 2, 4, 9, 5, 8, 45), stringToDate('2001/02/04 09:05:08.045', 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual(Datetime(2001, 2, 4, 9, 5, 8, 40), stringToDate('2001/02/04 09:05:08.04', 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual(Datetime(2001, 2, 4, 9, 5, 8, 0), stringToDate('2001/02/04 09:05:08.0', 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual(Datetime(2001, 2, 4), stringToDate('Sun, 04 Feb 2001', 'ddd, DD MMM YYYY'));
+        checkEqual(Datetime(2001, 2, 4), stringToDate('[Sun]|/\\ 04 Feb 2001', '[ddd]|/\\ DD MMM YYYY'));
+        checkEqual(Datetime(2001, 2, 4), stringToDate('Sunday, 04 Feb 2001', 'dddd, DD MMM YYYY'));
+        checkEqual(Datetime(2001, 9, 4), stringToDate('September4 2001', 'MMMMMD YYYY')); // am pm
+
+        testCounter();
+        checkEqual('20210526 8 59 40 p', dateToString(Datetime(2021, 5, 26, 20, 59, 40), 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDate('20210526 8 59 40 a', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDate('20210526 8 59 40 AM', 'YYYYMMDD h mm ss AA'));
+        checkEqual(Datetime(2021, 5, 26, 20, 59, 40), stringToDate('20210526 8 59 40 p', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 20, 59, 40), stringToDate('20210526 08 59 40 P', 'YYYYMMDD hh mm ss A'));
+        checkEqual(Datetime(2021, 5, 26, 23, 59, 40), stringToDate('20210526 11 59 40 PM', 'YYYYMMDD h mm ss AA'));
+        checkEqual(Datetime(2021, 5, 26, 23, 59, 40), stringToDate('20210526 11 59 40 pm', 'YYYYMMDD hh mm ss aa'));
+        checkEqual(Datetime(2021, 5, 26, 23, 59, 40), stringToDate('20210526 11 59 40 p p p', 'YYYYMMDD hh mm ss a a a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDate('20210526 8 59 40', 'YYYYMMDD h mm ss')); // checkNotEqual(
+        //   Datetime(2021, 5, 26, 13, 59, 40),
+        //   stringToDate('20210526 13 59 40', 'YYYYMMDD h mm ss'),
+        // );
+
+        checkEqual(Datetime(2021, 5, 26, 13, 59, 40), stringToDate('20210526 1 59 40 p', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 13, 59, 40), stringToDate('20210526 13 59 40', 'YYYYMMDD H mm ss')); // timezone
+
+        testCounter();
+        var dt = Datetime(2021, 6, 1, 23, 45, 6);
+
+        var _minutesToTexts7 = minutesToTexts(-1 * dt.getTimezoneOffset()),
+            _minutesToTexts8 = _slicedToArray(_minutesToTexts7, 3),
+            s = _minutesToTexts8[0],
+            h = _minutesToTexts8[1],
+            m = _minutesToTexts8[2];
+
+        var timezoneText = s + h + ':' + m;
+        checkEqual(dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z'), '2021/06/01 23:45:06 ' + timezoneText);
+        var dt = Datetime(2021, 6, 1, 0, 12, 34, 0, false);
+        checkEqual(dt, stringToDate('2021/06/01 09:12:34 +09:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 08:12:34 +08:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 +00:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/05/31 23:12:34 -01:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 09:12:34 +0900', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 08:12:34 +0800', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 +0000', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/05/31 23:12:34 -0100', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss ZZ')); // init
+
+        checkEqual(new Date(2021, 0, 1), stringToDate('2021', 'YYYY'));
+        checkEqual(new Date(2021, 5, 1), stringToDate('2021/06', 'YYYY/MM'));
+        checkEqual(new Date(2021, 5, 2), stringToDate('06/02', 'MM/DD'));
       });
     };
 
@@ -732,10 +939,31 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_minutesToTexts = function test_minutesToTexts() {
+      it('test_minutesToTexts', function () {
+        checkEqual('+0900', minutesToTexts(540).join(''));
+        checkEqual('-:09:00', minutesToTexts(-540).join(':'));
+      });
+    };
+
+    var test_textsToMinutes = function test_textsToMinutes() {
+      it('test_textsToMinutes', function () {
+        checkEqual(540, textsToMinutes(['+', '09', '00']));
+        checkEqual(-540, textsToMinutes('-:09:00'.split(':')));
+      });
+    };
+
+    test_ThisYear();
+    test_ThisMonth();
     test_Today();
     test_isInvalidDate();
     test_Date_standard();
     test_Datetime();
+    test_dateToString();
+    test_dateToString_MomemtLike();
+    test_dateToString_timezoneOffset();
+    test_dateToStringUTC();
+    test_stringToDate();
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
     test_dayOfWeekEnglishLong();
@@ -745,8 +973,8 @@ var test_execute_date = function test_execute_date(parts) {
     test_nameOfMonthEnglishChar3();
     test_nameOfMonthEnglishChar4();
     test_nameOfMonthEnglishLong();
-    test_datetimeToString();
-    test_datetimeToString_MomemtLike();
+    test_minutesToTexts();
+    test_textsToMinutes();
   });
 };
 

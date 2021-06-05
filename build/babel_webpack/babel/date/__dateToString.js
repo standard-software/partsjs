@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports._datetimeToString = void 0;
+exports["default"] = exports.__dateToString = void 0;
 
 var _includes = require("../compare/__includes.js");
 
@@ -19,28 +19,28 @@ var _number = require("../number/number.js");
 
 var _includeCount2 = require("../string/_includeCount.js");
 
-var _detetimeToStringFunc = require("../date/__detetimeToStringFunc.js");
+var _dateToStringRule = require("./__dateToStringRule.js");
 
 /**
- * datetimeToString
+ * dateToString
  */
-var _datetimeToString = function _datetimeToString(date, format) {
-  var ruleObject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _detetimeToStringFunc.__detetimeToStringFunc.DefaultObject();
-  var isLocal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+var __dateToString = function __dateToString(date, format) {
+  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var rule = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _dateToStringRule.__dateToStringRule.Default();
   var existSingleQuote = (0, _includes.__includes)(format, "'");
   var existDoubleQuote = (0, _includes.__includes)(format, '"');
 
   if (existSingleQuote && existDoubleQuote) {
-    throw new Error("_datetimeToString args(format:".concat(format, ") exists both singleQuote and doubleQuote"));
+    throw new Error("__dateToString args(format:".concat(format, ") exists both singleQuote and doubleQuote"));
   }
 
-  var keys = (0, _objectKeys2._objectKeys)(ruleObject);
+  var keys = (0, _objectKeys2._objectKeys)(rule);
   keys.sort((0, _SortFunc2._SortFunc)([[_SortFunc2._SortFunc.order.normal.descending, function (v) {
     return v.length;
   }]]));
   var replaceArray = [];
-  (0, _loop.__loop)(keys)(function (value, index) {
-    replaceArray.push([value, ruleObject[value](date, isLocal)]);
+  (0, _loop.__loop)(keys)(function (value) {
+    replaceArray.push([value, rule[value].func(date, timezoneOffset)]);
   });
   var quoteChar;
 
@@ -53,7 +53,7 @@ var _datetimeToString = function _datetimeToString(date, format) {
   }
 
   if ((0, _number.isOdd)((0, _includeCount2._includeCount)(format, quoteChar))) {
-    throw new Error("_datetimeToString args(format:".concat(format, ") exists odd Quotes"));
+    throw new Error("__dateToString args(format:".concat(format, ") exists odd Quotes"));
   }
 
   var formatStrs = format.split(quoteChar);
@@ -65,9 +65,9 @@ var _datetimeToString = function _datetimeToString(date, format) {
   return formatStrs.join('');
 };
 
-exports._datetimeToString = _datetimeToString;
-_datetimeToString.func = _detetimeToStringFunc.__detetimeToStringFunc;
+exports.__dateToString = __dateToString;
+__dateToString.func = _dateToStringRule.__dateToStringRule;
 var _default = {
-  _datetimeToString: _datetimeToString
+  __dateToString: __dateToString
 };
 exports["default"] = _default;

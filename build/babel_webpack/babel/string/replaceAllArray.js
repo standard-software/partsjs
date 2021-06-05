@@ -17,13 +17,22 @@ var _allMatchAll = require("../compare/allMatchAll.js");
  * replaceAllArray
  */
 var replaceAllArray = function replaceAllArray(str, replaceArray) {
-  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, replaceArray')) {
+  var detail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  if ((0, _isObjectParameter.isObjectParameter)(str, 'str, replaceArray', 'detail')) {
     var _str = str;
     str = _str.str;
     replaceArray = _str.replaceArray;
-  } else if ((0, _isObjectParameter.isObjectParameter)(replaceArray, 'replaceArray')) {
+    var _str$detail = _str.detail;
+    detail = _str$detail === void 0 ? false : _str$detail;
+  } else if ((0, _isObjectParameter.isObjectParameter)(replaceArray, 'replaceArray', 'detail')) {
     var _replaceArray = replaceArray;
     replaceArray = _replaceArray.replaceArray;
+    var _replaceArray$detail = _replaceArray.detail;
+    detail = _replaceArray$detail === void 0 ? false : _replaceArray$detail;
+  } else if ((0, _isObjectParameter.isObjectParameter)(detail, 'detail')) {
+    var _detail = detail;
+    detail = _detail.detail;
   }
 
   if (!(0, _type.isString)(str)) {
@@ -38,7 +47,11 @@ var replaceAllArray = function replaceAllArray(str, replaceArray) {
     throw new TypeError('replaceAllArray args(replaceArray) element is not string array(length is 2)');
   }
 
-  return (0, _replaceAllArray2._replaceAllArray)(str, replaceArray);
+  if (!(0, _type.isBoolean)(detail)) {
+    throw new TypeError('replaceAllArray args(detail) is not boolean');
+  }
+
+  return (0, _replaceAllArray2._replaceAllArray)(str, replaceArray, detail);
 };
 
 exports.replaceAllArray = replaceAllArray;
