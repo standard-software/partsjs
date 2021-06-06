@@ -19,10 +19,7 @@ export const test_execute_date = (parts) => {
     dateToString,
     dateToStringUTC,
     dayOfWeek,
-    dayOfWeekEnglishShort, dayOfWeekEnglishLong,
-    dayOfWeekJapaneseShort, dayOfWeekJapaneseLong,
     nameOfMonth,
-    nameOfMonthEnglishChar3, nameOfMonthEnglishChar4, nameOfMonthEnglishLong,
     stringToDate,
     stringToDateUTC,
     minutesToTexts,
@@ -1213,6 +1210,10 @@ export const test_execute_date = (parts) => {
       it('test_dayOfWeekEnglishShort', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
 
+        const dayOfWeekEnglishShort = (date, isLocal) => {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.EnglishShort());
+        };
+
         var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeekEnglishShort(dt));
 
@@ -1234,30 +1235,16 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('Sat', dayOfWeekEnglishShort(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 9, 8);
-        checkEqual(
-          '2021-01-08T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Sat', dayOfWeekEnglishShort(dt, { isLocal: true }));
-
-        // local Sat UTC Fri
-        checkEqual('Fri', dayOfWeekEnglishShort(dt, { isLocal: false }));
-
-        // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-09T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Sat', dayOfWeekEnglishShort(dt, { isLocal: false }));
       });
     };
 
     const test_dayOfWeekEnglishLong = () => {
       it('test_dayOfWeekEnglishLong', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
+
+        const dayOfWeekEnglishLong = (date, isLocal) => {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.EnglishLong());
+        };
 
         var dt = Datetime(2021, 1, 9);
         checkEqual('Saturday', dayOfWeekEnglishLong(dt));
@@ -1280,30 +1267,16 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('Saturday', dayOfWeekEnglishLong(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 9, 8);
-        checkEqual(
-          '2021-01-08T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Saturday', dayOfWeekEnglishLong(dt, { isLocal: true }));
-
-        // local Sat UTC Fri
-        checkEqual('Friday', dayOfWeekEnglishLong(dt, { isLocal: false }));
-
-        // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-09T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Saturday', dayOfWeekEnglishLong(dt, { isLocal: false }));
       });
     };
 
     const test_dayOfWeekJapaneseShort = () => {
       it('test_dayOfWeekJapaneseShort', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
+
+        const dayOfWeekJapaneseShort = (date, isLocal) => {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.JapaneseShort());
+        };
 
         var dt = Datetime(2021, 1, 9);
         checkEqual('土', dayOfWeekJapaneseShort(dt));
@@ -1326,33 +1299,16 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('土', dayOfWeekJapaneseShort(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 9);
-        checkEqual('土', dayOfWeekJapaneseShort(dt));
-
-        var dt = Datetime(2021, 1, 9, 8);
-        checkEqual(
-          '2021-01-08T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('土', dayOfWeekJapaneseShort(dt, { isLocal: true }));
-
-        // local Sat UTC Fri
-        checkEqual('金', dayOfWeekJapaneseShort(dt, { isLocal: false }));
-
-        // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-09T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('土', dayOfWeekJapaneseShort(dt, { isLocal: false }));
       });
     };
 
     const test_dayOfWeekJapaneseLong = () => {
       it('test_dayOfWeekJapaneseLong', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
+
+        const dayOfWeekJapaneseLong = (date, isLocal) => {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.JapaneseLong());
+        };
 
         var dt = Datetime(2021, 1, 9);
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
@@ -1375,27 +1331,6 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 9);
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
-
-        var dt = Datetime(2021, 1, 9, 8);
-        checkEqual(
-          '2021-01-08T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, { isLocal: true }));
-
-        // local Sat UTC Fri
-        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, { isLocal: false }));
-
-        // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-09T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, { isLocal: false }));
       });
     };
 
@@ -1449,6 +1384,10 @@ export const test_execute_date = (parts) => {
       it('test_nameOfMonthEnglishChar3', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
 
+        const nameOfMonthEnglishChar3 = (date, isLocal) => {
+          return nameOfMonth(date, isLocal, nameOfMonth.names.EnglishChar3());
+        };
+
         var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonthEnglishChar3(dt));
 
@@ -1470,30 +1409,16 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('Jan', nameOfMonthEnglishChar3(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8);
-        checkEqual(
-          '2020-12-31T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Jan', nameOfMonthEnglishChar3(dt, { isLocal: true }));
-
-        // local Jan UTC Dec
-        checkEqual('Dec', nameOfMonthEnglishChar3(dt, { isLocal: false }));
-
-        // UTC
-        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-01T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Jan', nameOfMonthEnglishChar3(dt, { isLocal: false }));
       });
     };
 
     const test_nameOfMonthEnglishChar4 = () => {
       it('test_nameOfMonthEnglishChar4', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
+
+        const nameOfMonthEnglishChar4 = (date, isLocal) => {
+          return nameOfMonth(date, isLocal, nameOfMonth.names.EnglishChar4());
+        };
 
         var dt = Datetime(2021, 1, 1);
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt));
@@ -1516,30 +1441,16 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8);
-        checkEqual(
-          '2020-12-31T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, { isLocal: true }));
-
-        // local Jan UTC Dec
-        checkEqual('Dec.', nameOfMonthEnglishChar4(dt, { isLocal: false }));
-
-        // UTC
-        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-01T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, { isLocal: false }));
       });
     };
 
     const test_nameOfMonthEnglishLong = () => {
       it('test_nameOfMonthEnglishLong', () => {
         if ((new Date()).getTimezoneOffset() !== -540) { return; }
+
+        const nameOfMonthEnglishLong = (date, isLocal) => {
+          return nameOfMonth(date, isLocal, nameOfMonth.names.EnglishLong());
+        };
 
         var dt = Datetime(2021, 1, 1);
         checkEqual('January', nameOfMonthEnglishLong(dt));
@@ -1562,24 +1473,6 @@ export const test_execute_date = (parts) => {
         );
         checkEqual('January', nameOfMonthEnglishLong(dt, false));
 
-        // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8);
-        checkEqual(
-          '2020-12-31T23:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('January', nameOfMonthEnglishLong(dt, { isLocal: true }));
-
-        // local Jan UTC Dec
-        checkEqual('December', nameOfMonthEnglishLong(dt, { isLocal: false }));
-
-        // UTC
-        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
-        checkEqual(
-          '2021-01-01T08:00:00.000Z',
-          dt.toISOString(),
-        );
-        checkEqual('January', nameOfMonthEnglishLong(dt, { isLocal: false }));
       });
     };
 
