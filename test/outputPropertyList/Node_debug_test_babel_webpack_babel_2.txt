@@ -242,7 +242,7 @@
 .date.dayOfWeekEnglishShort:[object Function]:function
 .date.dayOfWeekJapaneseLong:[object Function]:function
 .date.dayOfWeekJapaneseShort:[object Function]:function
-.date.INVALID_DATE:[object Date]:object
+.date.InvalidDate:[object Function]:function
 .date.isInvalidDate:[object Function]:function
 .date.minutesToTexts:[object Function]:function
 .date.nameOfMonth:[object Function]:function
@@ -825,6 +825,7 @@
 .system.wsh.Shell:[object Function]:function
 .test.checkCompare:[object Function]:function
 .test.checkEqual:[object Function]:function
+.test.checkNotEqual:[object Function]:function
 .test.describe:[object Function]:function
 .test.expect:[object Function]:function
 .test.isNotThrown:[object Function]:function

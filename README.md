@@ -340,7 +340,7 @@ You can now use the functions of the parts.js object.
 - add date.strintToDate date.stringToDateUTC
   - add stringToDateRule
   - support full object parameter
-- add date.INVALID_DATE
+- add date.InvalidDate()
 - update parseInt testCode
 - update Today
   - delete time info

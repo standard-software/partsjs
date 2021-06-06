@@ -8,7 +8,7 @@ import { __loop } from '../syntax/__loop.js';
 import { _replaceAllArray } from '../string/_replaceAllArray.js';
 import { _includeCount } from '../string/_includeCount.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
-import { INVALID_DATE } from './INVALID_DATE.js';
+import { InvalidDate } from './InvalidDate.js';
 import { _dateToString } from './_dateToString.js';
 import { _escapeRegExp } from '../string/_escapeRegExp.js';
 import { _ThisYear } from './_ThisYear.js';
@@ -37,12 +37,12 @@ export const __stringToDate = (
 
   const matchResult = str.match(new RegExp(`${replaceResult.result}`));
   if (!Array.isArray(matchResult)) {
-    return INVALID_DATE;
+    return InvalidDate();
   }
   const [match, ...valueItems] = matchResult;
 
   if (replaceInfoItems.length !== valueItems.length) {
-    return INVALID_DATE;
+    return InvalidDate();
   }
   replaceInfoItems.forEach((item, i) => {
     item.value = valueItems[i];
@@ -59,7 +59,7 @@ export const __stringToDate = (
   ) === str) {
     return result;
   } else {
-    return INVALID_DATE;
+    return InvalidDate();
   }
 
 };

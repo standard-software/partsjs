@@ -242,7 +242,7 @@
 .date.dayOfWeekEnglishShort:[object Function]:function
 .date.dayOfWeekJapaneseLong:[object Function]:function
 .date.dayOfWeekJapaneseShort:[object Function]:function
-.date.INVALID_DATE:[object Date]:object
+.date.InvalidDate:[object Function]:function
 .date.isInvalidDate:[object Function]:function
 .date.minutesToTexts:[object Function]:function
 .date.nameOfMonth:[object Function]:function
