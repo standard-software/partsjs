@@ -329,11 +329,15 @@ You can now use the functions of the parts.js object.
 #### 2021/06/06(Sun)
 - rename DateTime to Datetime
   - update inside
+- add DatetimeUTC
 - update test for deno for node
   - Reflect
   - Intl
 - rename datetimeToString >> dateToString
-- rename detetomeToStringFunc >> dateToStringFunc
+  - rename detetomeToStringFunc >> dateToStringRule
+  - add function dateToStringUTC
+  - support timezone
+  - rename dateToString.func >> dateToString.rule
 - update replaceAllArray add args detail
 - update number string convert testcode
 - update equal support Invalid Date
@@ -349,10 +353,6 @@ You can now use the functions of the parts.js object.
 - add date.minutesToTexts
 - add date.textsToMinutes
 - add function ThisYear ThisMonth
-- add function dateToStringUTC
-- update dateToString
-  - support timezone
-  - rename dateToString.func >> dateToString.rule
 - add checkNotEqual
 
 ### 10.5.0
