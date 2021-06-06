@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { isInteger, isBoolean } from '../type/isType.js';
+import { isInteger } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _inRange } from '../number/number.js';
 import { _Datetime } from './_Datetime.js';
@@ -9,47 +9,47 @@ import { _Datetime } from './_Datetime.js';
  */
 export const Datetime = function(
   year = 1970, month = 1, day = 1,
-  hour = 0, minute = 0, second = 0, millisecond = 0,
+  hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
   timezoneOffset = (new Date()).getTimezoneOffset(),
 ) {
-  if (isObjectParameter(year, '', 'year, month, day, hour, minute, second, millisecond, timezoneOffset', 1)) {
+  if (isObjectParameter(year, '', 'year, month, day, hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     ({
       year = 1970, month = 1, day = 1,
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
     } = year);
-  } else if (isObjectParameter(month, '', 'month, day, hour, minute, second, millisecond, timezoneOffset', 1)) {
+  } else if (isObjectParameter(month, '', 'month, day, hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     ({
       month = 1, day = 1,
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
     } = month);
-  } else if (isObjectParameter(day, '', 'day, hour, minute, second, millisecond, timezoneOffset', 1)) {
+  } else if (isObjectParameter(day, '', 'day, hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     ({
       day = 1,
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
     } = day);
-  } else if (isObjectParameter(hour, '', 'hour, minute, second, millisecond, timezoneOffset', 1)) {
+  } else if (isObjectParameter(hours, '', 'hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     ({
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
-    } = hour);
-  } else if (isObjectParameter(minute, '', 'minute, second, millisecond, timezoneOffset', 1)) {
+    } = hours);
+  } else if (isObjectParameter(minutes, '', 'minutes, seconds, milliseconds, timezoneOffset', 1)) {
     ({
-      minute = 0, second = 0, millisecond = 0,
+      minutes = 0, seconds = 0, milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
-    } = minute);
-  } else if (isObjectParameter(second, '', 'second, millisecond, timezoneOffset', 1)) {
+    } = minutes);
+  } else if (isObjectParameter(seconds, '', 'seconds, milliseconds, timezoneOffset', 1)) {
     ({
-      second = 0, millisecond = 0,
+      seconds = 0, milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
-    } = second);
-  } else if (isObjectParameter(millisecond, '', 'millisecond, timezoneOffset', 1)) {
+    } = seconds);
+  } else if (isObjectParameter(milliseconds, '', 'milliseconds, timezoneOffset', 1)) {
     ({
-      millisecond = 0,
+      milliseconds = 0,
       timezoneOffset = (new Date()).getTimezoneOffset(),
-    } = millisecond);
+    } = milliseconds);
   } else if (isObjectParameter(timezoneOffset, '', 'timezoneOffset', 1)) {
     ({
       timezoneOffset = (new Date()).getTimezoneOffset(),
@@ -71,24 +71,24 @@ export const Datetime = function(
       `Datetime args(day:${day}) is not integer`,
     );
   }
-  if (!isInteger(hour)) {
+  if (!isInteger(hours)) {
     throw new TypeError(
-      `Datetime args(hour:${hour}) is not integer`,
+      `Datetime args(hour:${hours}) is not integer`,
     );
   }
-  if (!isInteger(minute)) {
+  if (!isInteger(minutes)) {
     throw new TypeError(
-      `Datetime args(minute:${minute}) is not integer`,
+      `Datetime args(minute:${minutes}) is not integer`,
     );
   }
-  if (!isInteger(second)) {
+  if (!isInteger(seconds)) {
     throw new TypeError(
-      `Datetime args(second:${second}) is not integer`,
+      `Datetime args(second:${seconds}) is not integer`,
     );
   }
-  if (!isInteger(millisecond)) {
+  if (!isInteger(milliseconds)) {
     throw new TypeError(
-      `Datetime args(millisecond:${millisecond}) is not integer`,
+      `Datetime args(millisecond:${milliseconds}) is not integer`,
     );
   }
   if (!isInteger(timezoneOffset)) {
@@ -99,7 +99,7 @@ export const Datetime = function(
 
   return _Datetime(
     year, month, day,
-    hour, minute, second, millisecond,
+    hours, minutes, seconds, milliseconds,
     timezoneOffset,
   );
 };

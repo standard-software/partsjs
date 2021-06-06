@@ -8,6 +8,8 @@ import isInvalidDateJs from './isInvalidDate.js';
 import InvalidDateJs from './InvalidDate.js';
 import _DatetimeJs from './_Datetime.js';
 import DatetimeJs from './Datetime.js';
+import _DatetimeUTCJs from './_DatetimeUTC.js';
+import DatetimeUTCJs from './DatetimeUTC.js';
 import _dateToStringJs from './_dateToString.js';
 import dateToStringJs from './dateToString.js';
 import _dateToStringUTCJs from './_dateToStringUTC.js';
@@ -41,6 +43,7 @@ import textsToMinutesJs from './textsToMinutes.js';
 
 const dateJs = {
   ..._DatetimeJs,
+  ..._DatetimeUTCJs,
   ..._dateToStringJs,
   ..._dateToStringUTCJs,
   ..._dayOfWeekEnglishLongJs,
@@ -61,6 +64,7 @@ const dateJs = {
   ..._TodayJs,
 
   ...DatetimeJs,
+  ...DatetimeUTCJs,
   ...dateToStringJs,
   ...dateToStringUTCJs,
   ...dayOfWeekEnglishLongJs,
@@ -85,6 +89,7 @@ const dateJs = {
 
 export const {
   _Datetime,
+  _DatetimeUTC,
   _dateToString,
   _dateToStringUTC,
   _dayOfWeek,
@@ -105,6 +110,7 @@ export const {
   _Today,
 
   Datetime,
+  DatetimeUTC,
   dateToString,
   dateToStringUTC,
   dayOfWeek,
@@ -130,6 +136,7 @@ export const {
 
 export default {
   _Datetime,
+  _DatetimeUTC,
   _dateToString,
   _dateToStringUTC,
   _dayOfWeek,
@@ -150,6 +157,7 @@ export default {
   _Today,
 
   Datetime,
+  DatetimeUTC,
   dateToString,
   dateToStringUTC,
   dayOfWeek,

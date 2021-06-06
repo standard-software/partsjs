@@ -15,6 +15,7 @@ export const test_execute_date = (parts) => {
     Today,
     isInvalidDate,
     Datetime,
+    DatetimeUTC,
     dateToString,
     dateToStringUTC,
     dayOfWeek,
@@ -161,10 +162,10 @@ export const test_execute_date = (parts) => {
       it('test_Datetime', () => {
         checkEqual(0, new Date(0).getTime());
 
-        var dt = Datetime(
+        var dt = DatetimeUTC(
           undefined, undefined, undefined,
           undefined, undefined, undefined, undefined,
-          false);
+        );
         checkEqual(
           0,
           dt.getTime(),
@@ -196,7 +197,12 @@ export const test_execute_date = (parts) => {
           (new Date(2020, 10, 21, 11, 35, 10, 400)).toISOString(),
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400, false);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400, 0);
+        checkEqual(
+          (new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400))).toISOString(),
+          dt.toISOString(),
+        );
+        var dt = DatetimeUTC(2020, 11, 21, 11, 35, 10, 400);
         checkEqual(
           (new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400))).toISOString(),
           dt.toISOString(),
@@ -244,18 +250,23 @@ export const test_execute_date = (parts) => {
           '2020-02-03T04:05:06.007Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, true);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:05:06.007Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, 0);
         checkEqual(
           '2020-02-03T04:05:06.007Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, true);
+        var dt = DatetimeUTC(2020, 2, 3, 4, 5, 6, 7);
+        checkEqual(
+          '2020-02-03T04:05:06.007Z',
+          dt.toISOString(),
+        );
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7);
         if (dt.getTimezoneOffset() === -540) {
           checkEqual(
             '2020-02-02T19:05:06.007Z',
@@ -264,29 +275,54 @@ export const test_execute_date = (parts) => {
         }
 
         // zero
-        var dt = Datetime(2020, 0, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 0, 3, 4, 5, 6, 7, 0);
         checkEqual(
           '2019-12-03T04:05:06.007Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 3, 0, 4, 5, 6, 7, false);
+        var dt = DatetimeUTC(2020, 0, 3, 4, 5, 6, 7);
+        checkEqual(
+          '2019-12-03T04:05:06.007Z',
+          dt.toISOString(),
+        );
+        var dt = Datetime(2020, 3, 0, 4, 5, 6, 7, 0);
+        checkEqual(
+          '2020-02-29T04:05:06.007Z',
+          dt.toISOString(),
+        );
+        var dt = DatetimeUTC(2020, 3, 0, 4, 5, 6, 7);
         checkEqual(
           '2020-02-29T04:05:06.007Z',
           dt.toISOString(),
         );
 
         // minus
-        var dt = Datetime(2020, -1, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, -1, 3, 4, 5, 6, 7, 0);
         checkEqual(
           '2019-11-03T04:05:06.007Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 3, -1, 4, 5, 6, 7, false);
+        var dt = DatetimeUTC(2020, -1, 3, 4, 5, 6, 7);
+        checkEqual(
+          '2019-11-03T04:05:06.007Z',
+          dt.toISOString(),
+        );
+        var dt = Datetime(2020, 3, -1, 4, 5, 6, 7, 0);
         checkEqual(
           '2020-02-28T04:05:06.007Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 3, 4, -2, 5, 6, 7, false);
+        var dt = DatetimeUTC(2020, 3, -1, 4, 5, 6, 7);
+        checkEqual(
+          '2020-02-28T04:05:06.007Z',
+          dt.toISOString(),
+        );
+        var dt = Datetime(2020, 3, 4, -2, 5, 6, 7, 0);
+        checkEqual(
+          '2020-03-03T22:05:06.007Z',
+          dt.toISOString(),
+        );
+        var dt = DatetimeUTC(2020, 3, 4, -2, 5, 6, 7);
         checkEqual(
           '2020-03-03T22:05:06.007Z',
           dt.toISOString(),
@@ -299,71 +335,83 @@ export const test_execute_date = (parts) => {
           '2020-01-01T00:00:00.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime({ year: 2020, isLocal: false });
+        var dt = Datetime({ year: 2020, timezoneOffset: 0 });
+        checkEqual(
+          '2020-01-01T00:00:00.000Z',
+          dt.toISOString(),
+        );
+        var dt = DatetimeUTC({ year: 2020 });
         checkEqual(
           '2020-01-01T00:00:00.000Z',
           dt.toISOString(),
         );
         var dt = Datetime({
-          year: 2020, month: 2, hour: 13, second: 59, isLocal: false,
+          year: 2020, month: 2, hours: 13, seconds: 59, timezoneOffset: 0,
         });
         checkEqual(
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime({ year: 2020, month: 2, hour: 13, second: 59 });
+        var dt = DatetimeUTC({
+          year: 2020, month: 2, hours: 13, seconds: 59,
+        });
+        checkEqual(
+          '2020-02-01T13:00:59.000Z',
+          dt.toISOString(),
+        );
+        var dt = Datetime({ year: 2020, month: 2, hours: 13, seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, { hour: 13, second: 59 });
+        var dt = Datetime(2020, { hours: 13, seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-01-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, { hour: 13, second: 59 });
+        var dt = Datetime(2020, 2, { hours: 13, seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-01T13:00:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, { minute: 13, second: 59 });
+        var dt = Datetime(2020, 2, 3, { minutes: 13, seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T00:13:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, { isLocal: false });
+        var dt = Datetime(2020, 2, 3, { timezoneOffset: 0 });
         checkEqual(
           '2020-02-03T00:00:00.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, { minute: 13, second: 59 });
+        var dt = Datetime(2020, 2, 3, 4, { minutes: 13, seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:13:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, { second: 59 });
+        var dt = Datetime(2020, 2, 3, 4, 5, { seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:05:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, { second: 59 });
+        var dt = Datetime(2020, 2, 3, 4, 5, { seconds: 59 });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(
           '2020-02-03T04:05:59.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, 6, { isLocal: false });
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, { timezoneOffset: 0 });
         checkEqual(
           '2020-02-03T04:05:06.000Z',
           dt.toISOString(),
         );
-        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, { isLocal: false });
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, { timezoneOffset: 0 });
         checkEqual(
           '2020-02-03T04:05:06.007Z',
           dt.toISOString(),
@@ -371,13 +419,13 @@ export const test_execute_date = (parts) => {
 
         // exception
         checkEqual(false,
-          isThrown(() => Datetime(2020, 2, 3, 4, 5, 6, 7, { isLocal: false })),
+          isThrown(() => Datetime(2020, 2, 3, 4, 5, 6, 7, { timezoneOffset: 0 })),
         );
         checkEqual(true,
-          isThrown(() => Datetime(2020, 2, 3, 4, 5, 6, 7, { isLocal: 1 })),
+          isThrown(() => Datetime(2020, 2, 3, 4, 5, 6, 7, { timezoneOffset: null })),
         );
         checkEqual(true,
-          isThrown(() => Datetime(2020, '2', 3, 4, 5, 6, 7, { isLocal: true })),
+          isThrown(() => Datetime(2020, '2', 3, 4, 5, 6, 7, { timezoneOffset: 0 })),
         );
 
       });
@@ -652,7 +700,7 @@ export const test_execute_date = (parts) => {
           dateToString(dt, 'YYYY/MM/DD HH:mm:ss', dt.getTimezoneOffset()),
         );
 
-        var dt = Datetime(2021, 6, 1, 0, 20, 30, 0, false);
+        var dt = Datetime(2021, 6, 1, 0, 20, 30, 0, 0);
         checkEqual(
           '2021/06/01 09:20:30 +09:00',
           dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 9 * 60),
@@ -910,7 +958,7 @@ export const test_execute_date = (parts) => {
           '2021/06/01 23:45:06 ' + timezoneText,
         );
 
-        var dt = Datetime(2021, 6, 1, 0, 12, 34, 0, false);
+        var dt = Datetime(2021, 6, 1, 0, 12, 34, 0, 0);
         checkEqual(
           dt,
           stringToDate('2021/06/01 09:12:34 +09:00', 'YYYY/MM/DD HH:mm:ss Z'),
@@ -1007,7 +1055,7 @@ export const test_execute_date = (parts) => {
           ),
         );
         checkEqual(
-          Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+          Datetime(2021, 6, 1, 0, 12, 34, 0, 0),
           stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss',
             {
               timezoneOffset: -540,
@@ -1089,20 +1137,25 @@ export const test_execute_date = (parts) => {
     const test_stringToDateUTC = () => {
       it('test_stringToDateUTC', () => {
         checkEqual(
-          Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+          Datetime(2021, 6, 1, 0, 12, 34, 0, 0),
           stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss', -540),
         );
         checkEqual(
-          Datetime(2021, 6, 1, 0, 12, 34, 0, false),
+          Datetime(2021, 6, 1, 0, 12, 34, 0, 0),
           stringToDate('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss', 0),
         );
+
+        checkEqual(
+          Datetime(2021, 6, 1, 0, 12, 34, 0, 0),
+          stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
+        );
+        checkEqual(
+          DatetimeUTC(2021, 6, 1, 0, 12, 34, 0, 0),
+          stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
+        );
         if ((new Date).getTimezoneOffset !== 0) {
-          checkEqual(
-            Datetime(2021, 6, 1, 0, 12, 34, 0, false),
-            stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
-          );
           checkNotEqual(
-            Datetime(2021, 6, 1, 0, 12, 34, 0, true),
+            Datetime(2021, 6, 1, 0, 12, 34, 0),
             stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
           );
         }
@@ -1117,7 +1170,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeek(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1128,7 +1181,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Fri', dayOfWeek(dt, false));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1136,7 +1189,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Sat', dayOfWeek(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1147,7 +1200,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Fri', dayOfWeek(dt, { isLocal: false }));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1163,7 +1216,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeekEnglishShort(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1174,7 +1227,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Fri', dayOfWeekEnglishShort(dt, false));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1182,7 +1235,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Sat', dayOfWeekEnglishShort(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1193,7 +1246,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Fri', dayOfWeekEnglishShort(dt, { isLocal: false }));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1209,7 +1262,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('Saturday', dayOfWeekEnglishLong(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1220,7 +1273,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Friday', dayOfWeekEnglishLong(dt, false));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1228,7 +1281,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Saturday', dayOfWeekEnglishLong(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1239,7 +1292,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Friday', dayOfWeekEnglishLong(dt, { isLocal: false }));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1255,7 +1308,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('土', dayOfWeekJapaneseShort(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1266,7 +1319,7 @@ export const test_execute_date = (parts) => {
         checkEqual('金', dayOfWeekJapaneseShort(dt, false));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1277,7 +1330,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('土', dayOfWeekJapaneseShort(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1288,7 +1341,7 @@ export const test_execute_date = (parts) => {
         checkEqual('金', dayOfWeekJapaneseShort(dt, { isLocal: false }));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1304,7 +1357,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1315,7 +1368,7 @@ export const test_execute_date = (parts) => {
         checkEqual('金曜日', dayOfWeekJapaneseLong(dt, false));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1326,7 +1379,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 9);
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
 
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual(
           '2021-01-08T23:00:00.000Z',
           dt.toISOString(),
@@ -1337,7 +1390,7 @@ export const test_execute_date = (parts) => {
         checkEqual('金曜日', dayOfWeekJapaneseLong(dt, { isLocal: false }));
 
         // UTC Sat
-        var dt = Datetime(2021, 1, 9, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 9, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-09T08:00:00.000Z',
           dt.toISOString(),
@@ -1353,7 +1406,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonth(dt));
 
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1364,7 +1417,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Dec', nameOfMonth(dt, false));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1372,7 +1425,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Jan', nameOfMonth(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1383,7 +1436,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Dec', nameOfMonth(dt, { isLocal: false }));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1399,7 +1452,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonthEnglishChar3(dt));
 
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1410,7 +1463,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Dec', nameOfMonthEnglishChar3(dt, false));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1418,7 +1471,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Jan', nameOfMonthEnglishChar3(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1429,7 +1482,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Dec', nameOfMonthEnglishChar3(dt, { isLocal: false }));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1445,7 +1498,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 1);
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt));
 
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1456,7 +1509,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Dec.', nameOfMonthEnglishChar4(dt, false));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1464,7 +1517,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1475,7 +1528,7 @@ export const test_execute_date = (parts) => {
         checkEqual('Dec.', nameOfMonthEnglishChar4(dt, { isLocal: false }));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1491,7 +1544,7 @@ export const test_execute_date = (parts) => {
         var dt = Datetime(2021, 1, 1);
         checkEqual('January', nameOfMonthEnglishLong(dt));
 
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1502,7 +1555,7 @@ export const test_execute_date = (parts) => {
         checkEqual('December', nameOfMonthEnglishLong(dt, false));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),
@@ -1510,7 +1563,7 @@ export const test_execute_date = (parts) => {
         checkEqual('January', nameOfMonthEnglishLong(dt, false));
 
         // Object Parameter
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: true });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual(
           '2020-12-31T23:00:00.000Z',
           dt.toISOString(),
@@ -1521,7 +1574,7 @@ export const test_execute_date = (parts) => {
         checkEqual('December', nameOfMonthEnglishLong(dt, { isLocal: false }));
 
         // UTC
-        var dt = Datetime(2021, 1, 1, 8, { isLocal: false });
+        var dt = Datetime(2021, 1, 1, 8, { timezoneOffset: 0 });
         checkEqual(
           '2021-01-01T08:00:00.000Z',
           dt.toISOString(),

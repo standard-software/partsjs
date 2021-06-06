@@ -2,87 +2,87 @@
 import { isInteger, isBoolean } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _inRange } from '../number/number.js';
-import { _Datetime } from './_Datetime.js';
+import { _DatetimeUTC } from './_DatetimeUTC.js';
 
 /**
  * Datetime
  */
 export const DatetimeUTC = function(
   year = 1970, month = 1, day = 1,
-  hour = 0, minute = 0, second = 0, millisecond = 0,
+  hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
 ) {
-  if (isObjectParameter(year, '', 'year, month, day, hour, minute, second, millisecond', 1)) {
+  if (isObjectParameter(year, '', 'year, month, day, hours, minutes, seconds, milliseconds', 1)) {
     ({
       year = 1970, month = 1, day = 1,
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
     } = year);
-  } else if (isObjectParameter(month, '', 'month, day, hour, minute, second, millisecond', 1)) {
+  } else if (isObjectParameter(month, '', 'month, day, hours, minutes, seconds, milliseconds', 1)) {
     ({
       month = 1, day = 1,
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
     } = month);
-  } else if (isObjectParameter(day, '', 'day, hour, minute, second, millisecond', 1)) {
+  } else if (isObjectParameter(day, '', 'day, hours, minutes, seconds, milliseconds', 1)) {
     ({
       day = 1,
-      hour = 0, minute = 0, second = 0, millisecond = 0,
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
     } = day);
-  } else if (isObjectParameter(hour, '', 'hour, minute, second, millisecond', 1)) {
+  } else if (isObjectParameter(hours, '', 'hours, minutes, seconds, milliseconds', 1)) {
     ({
-      hour = 0, minute = 0, second = 0, millisecond = 0,
-    } = hour);
-  } else if (isObjectParameter(minute, '', 'minute, second, millisecond', 1)) {
+      hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
+    } = hours);
+  } else if (isObjectParameter(minutes, '', 'minutes, seconds, milliseconds', 1)) {
     ({
-      minute = 0, second = 0, millisecond = 0,
-    } = minute);
-  } else if (isObjectParameter(second, '', 'second, millisecond', 1)) {
+      minutes = 0, seconds = 0, milliseconds = 0,
+    } = minutes);
+  } else if (isObjectParameter(seconds, '', 'seconds, milliseconds', 1)) {
     ({
-      second = 0, millisecond = 0,
-    } = second);
-  } else if (isObjectParameter(millisecond, '', 'millisecond', 1)) {
+      seconds = 0, milliseconds = 0,
+    } = seconds);
+  } else if (isObjectParameter(milliseconds, '', 'milliseconds', 1)) {
     ({
-      millisecond = 0,
-    } = millisecond);
+      milliseconds = 0,
+    } = milliseconds);
   }
 
   if (!isInteger(year)) {
     throw new TypeError(
-      `Datetime args(year:${year}) is not integer`,
+      `DatetimeUTC args(year:${year}) is not integer`,
     );
   }
   if (!isInteger(month)) {
     throw new TypeError(
-      `Datetime args(month:${month}) is not integer`,
+      `DatetimeUTC args(month:${month}) is not integer`,
     );
   }
   if (!isInteger(day)) {
     throw new TypeError(
-      `Datetime args(day:${day}) is not integer`,
+      `DatetimeUTC args(day:${day}) is not integer`,
     );
   }
-  if (!isInteger(hour)) {
+  if (!isInteger(hours)) {
     throw new TypeError(
-      `Datetime args(hour:${hour}) is not integer`,
+      `DatetimeUTC args(hour:${hours}) is not integer`,
     );
   }
-  if (!isInteger(minute)) {
+  if (!isInteger(minutes)) {
     throw new TypeError(
-      `Datetime args(minute:${minute}) is not integer`,
+      `DatetimeUTC args(minute:${minutes}) is not integer`,
     );
   }
-  if (!isInteger(second)) {
+  if (!isInteger(seconds)) {
     throw new TypeError(
-      `Datetime args(second:${second}) is not integer`,
+      `DatetimeUTC args(second:${seconds}) is not integer`,
     );
   }
-  if (!isInteger(millisecond)) {
+  if (!isInteger(milliseconds)) {
     throw new TypeError(
-      `Datetime args(millisecond:${millisecond}) is not integer`,
+      `DatetimeUTC args(millisecond:${milliseconds}) is not integer`,
     );
   }
 
   return _DatetimeUTC(
     year, month, day,
-    hour, minute, second, millisecond,
+    hours, minutes, seconds, milliseconds,
   );
 };
 
