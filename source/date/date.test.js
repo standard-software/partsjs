@@ -508,6 +508,14 @@ export const test_execute_date = (parts) => {
           'YYYYMMDD = 20210106',
           dateToString(dt, "'YYYYMMDD = 'YYYYMMDD"),
         );
+        checkEqual(
+          'YYYY = 2021 / MM = 01 / DD = 06',
+          dateToString(dt, "'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD"),
+        );
+        checkEqual(
+          '--YYYY = 2021 / MM = 01 / DD = 06--',
+          dateToString(dt, "--'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD--"),
+        );
 
         // timezone
         const [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
@@ -1026,6 +1034,41 @@ export const test_execute_date = (parts) => {
         checkEqual(new Date(2019, 5, 2),
           stringToDate('06/02', 'MM/DD', undefined, new Date(2019, 0, 1)));
 
+        // quote
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(
+          dt,
+          stringToDate('YYYYMMDD = 20210106', '"YYYYMMDD = "YYYYMMDD'),
+        );
+        checkEqual(
+          dt,
+          stringToDate('YYYYMMDD = 20210106', "'YYYYMMDD = 'YYYYMMDD"),
+        );
+        checkEqual(
+          dt,
+          stringToDate(
+            'YYYY = 2021 / MM = 01 / DD = 06',
+            "'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD",
+          ),
+        );
+        checkEqual(
+          dt,
+          stringToDate(
+            '--YYYY = 2021 / MM = 01 / DD = 06--',
+            "--'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD--",
+          ),
+        );
+
+        // exception
+        // quote
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(() => {
+          stringToDate('YYYYMMDD = 20210106', '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(() => {
+          stringToDate('YYYYMMDD = 20210106', '"YYYY"MMDD = "YYYYMMDD');
+        }));
+
         // object parameter
         checkEqual(new Date(2021, 4, 1),
           stringToDate(
@@ -1076,6 +1119,7 @@ export const test_execute_date = (parts) => {
             },
           ),
         );
+
       });
     };
 

@@ -15,7 +15,7 @@ export const __dateToString = (
 ) => {
   const existSingleQuote = __includes(format, "'");
   const existDoubleQuote = __includes(format, '"');
-  if ((existSingleQuote) && (existDoubleQuote)) {
+  if (existSingleQuote && existDoubleQuote) {
     throw new Error(
       `__dateToString args(format:${format}) exists both singleQuote and doubleQuote`,
     );
@@ -28,10 +28,9 @@ export const __dateToString = (
     ]),
   );
 
-  const replaceArray = [];
-  __loop(keys)(value => {
-    replaceArray.push([value, rule[value].func(date, timezoneOffset)]);
-  });
+  const replaceArray = keys.map(
+    key => [key, rule[key].func(date, timezoneOffset)],
+  );
 
   let quoteChar;
   if ((existSingleQuote === false) && (existDoubleQuote === false)) {

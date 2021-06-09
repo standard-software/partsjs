@@ -144,7 +144,7 @@ __stringToDateRule.finalize = (targetDate) => {
   if (!isNull(datetimeInfo.timezoneOffset)) {
     targetDate.setMinutes(targetDate.getMinutes() + datetimeInfo.timezoneOffset);
   }
-  return { timezoneOffset };
+  return timezoneOffset;
 };
 
 const r = __stringToDateRule;
