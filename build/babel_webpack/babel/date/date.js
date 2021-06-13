@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.InvalidDate = exports.isInvalidDate = exports.Today = exports.ThisMonth = exports.YearUTC = exports.Year = exports.textsToMinutes = exports.stringToDateUTC = exports.stringToDate = exports.nameOfMonth = exports.minutesToTexts = exports.dayOfWeek = exports.dateToStringUTC = exports.dateToString = exports.DatetimeUTC = exports.Datetime = exports._Today = exports._ThisMonth = exports._YearUTC = exports._Year = exports._textsToMinutes = exports._stringToDateUTC = exports._stringToDate = exports._nameOfMonth = exports._minutesToTexts = exports._dayOfWeek = exports._dateToStringUTC = exports._dateToString = exports._DatetimeUTC = exports._Datetime = void 0;
+exports["default"] = exports.InvalidDate = exports.isInvalidDate = exports.DayUTC = exports.Day = exports.MonthUTC = exports.Month = exports.YearUTC = exports.Year = exports.textsToMinutes = exports.stringToDateUTC = exports.stringToDate = exports.nameOfMonth = exports.minutesToTexts = exports.dayOfWeek = exports.dateToStringUTC = exports.dateToString = exports.DatetimeUTC = exports.Datetime = exports._DayUTC = exports._Day = exports._MonthUTC = exports._Month = exports._YearUTC = exports._Year = exports._textsToMinutes = exports._stringToDateUTC = exports._stringToDate = exports._nameOfMonth = exports._minutesToTexts = exports._dayOfWeek = exports._dateToStringUTC = exports._dateToString = exports._DatetimeUTC = exports._Datetime = void 0;
 
 var _Year2 = _interopRequireDefault(require("./_Year.js"));
 
@@ -13,13 +13,21 @@ var _YearUTC2 = _interopRequireDefault(require("./_YearUTC.js"));
 
 var _YearUTC3 = _interopRequireDefault(require("./YearUTC.js"));
 
-var _ThisMonth2 = _interopRequireDefault(require("./_ThisMonth.js"));
+var _Month2 = _interopRequireDefault(require("./_Month.js"));
 
-var _ThisMonth3 = _interopRequireDefault(require("./ThisMonth.js"));
+var _Month3 = _interopRequireDefault(require("./Month.js"));
 
-var _Today2 = _interopRequireDefault(require("./_Today.js"));
+var _MonthUTC2 = _interopRequireDefault(require("./_MonthUTC.js"));
 
-var _Today3 = _interopRequireDefault(require("./Today.js"));
+var _MonthUTC3 = _interopRequireDefault(require("./MonthUTC.js"));
+
+var _Day2 = _interopRequireDefault(require("./_Day.js"));
+
+var _Day3 = _interopRequireDefault(require("./Day.js"));
+
+var _DayUTC2 = _interopRequireDefault(require("./_DayUTC.js"));
+
+var _DayUTC3 = _interopRequireDefault(require("./DayUTC.js"));
 
 var _isInvalidDate = _interopRequireDefault(require("./isInvalidDate.js"));
 
@@ -73,7 +81,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Datetime2["default"]), _DatetimeUTC2["default"]), _dateToString2["default"]), _dateToStringUTC2["default"]), _dayOfWeek2["default"]), _minutesToTexts2["default"]), _nameOfMonth2["default"]), _stringToDate2["default"]), _stringToDateUTC2["default"]), _textsToMinutes2["default"]), _Year2["default"]), _YearUTC2["default"]), _ThisMonth2["default"]), _Today2["default"]), _Datetime3["default"]), _DatetimeUTC3["default"]), _dateToString3["default"]), _dateToStringUTC3["default"]), _dayOfWeek3["default"]), _InvalidDate["default"]), _isInvalidDate["default"]), _minutesToTexts3["default"]), _nameOfMonth3["default"]), _stringToDate3["default"]), _stringToDateUTC3["default"]), _textsToMinutes3["default"]), _Year3["default"]), _YearUTC3["default"]), _ThisMonth3["default"]), _Today3["default"]);
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Datetime2["default"]), _DatetimeUTC2["default"]), _dateToString2["default"]), _dateToStringUTC2["default"]), _dayOfWeek2["default"]), _minutesToTexts2["default"]), _nameOfMonth2["default"]), _stringToDate2["default"]), _stringToDateUTC2["default"]), _textsToMinutes2["default"]), _Year2["default"]), _YearUTC2["default"]), _Month2["default"]), _MonthUTC2["default"]), _Day2["default"]), _DayUTC2["default"]), _Datetime3["default"]), _DatetimeUTC3["default"]), _dateToString3["default"]), _dateToStringUTC3["default"]), _dayOfWeek3["default"]), _InvalidDate["default"]), _isInvalidDate["default"]), _minutesToTexts3["default"]), _nameOfMonth3["default"]), _stringToDate3["default"]), _stringToDateUTC3["default"]), _textsToMinutes3["default"]), _Year3["default"]), _YearUTC3["default"]), _Month3["default"]), _MonthUTC3["default"]), _Day3["default"]), _DayUTC3["default"]);
 
 var _Datetime = dateJs._Datetime,
     _DatetimeUTC = dateJs._DatetimeUTC,
@@ -87,8 +95,10 @@ var _Datetime = dateJs._Datetime,
     _textsToMinutes = dateJs._textsToMinutes,
     _Year = dateJs._Year,
     _YearUTC = dateJs._YearUTC,
-    _ThisMonth = dateJs._ThisMonth,
-    _Today = dateJs._Today,
+    _Month = dateJs._Month,
+    _MonthUTC = dateJs._MonthUTC,
+    _Day = dateJs._Day,
+    _DayUTC = dateJs._DayUTC,
     Datetime = dateJs.Datetime,
     DatetimeUTC = dateJs.DatetimeUTC,
     dateToString = dateJs.dateToString,
@@ -101,14 +111,18 @@ var _Datetime = dateJs._Datetime,
     textsToMinutes = dateJs.textsToMinutes,
     Year = dateJs.Year,
     YearUTC = dateJs.YearUTC,
-    ThisMonth = dateJs.ThisMonth,
-    Today = dateJs.Today,
+    Month = dateJs.Month,
+    MonthUTC = dateJs.MonthUTC,
+    Day = dateJs.Day,
+    DayUTC = dateJs.DayUTC,
     isInvalidDate = dateJs.isInvalidDate,
     InvalidDate = dateJs.InvalidDate;
 exports.InvalidDate = InvalidDate;
 exports.isInvalidDate = isInvalidDate;
-exports.Today = Today;
-exports.ThisMonth = ThisMonth;
+exports.DayUTC = DayUTC;
+exports.Day = Day;
+exports.MonthUTC = MonthUTC;
+exports.Month = Month;
 exports.YearUTC = YearUTC;
 exports.Year = Year;
 exports.textsToMinutes = textsToMinutes;
@@ -121,8 +135,10 @@ exports.dateToStringUTC = dateToStringUTC;
 exports.dateToString = dateToString;
 exports.DatetimeUTC = DatetimeUTC;
 exports.Datetime = Datetime;
-exports._Today = _Today;
-exports._ThisMonth = _ThisMonth;
+exports._DayUTC = _DayUTC;
+exports._Day = _Day;
+exports._MonthUTC = _MonthUTC;
+exports._Month = _Month;
 exports._YearUTC = _YearUTC;
 exports._Year = _Year;
 exports._textsToMinutes = _textsToMinutes;
@@ -148,8 +164,10 @@ var _default = {
   _textsToMinutes: _textsToMinutes,
   _Year: _Year,
   _YearUTC: _YearUTC,
-  _ThisMonth: _ThisMonth,
-  _Today: _Today,
+  _Month: _Month,
+  _MonthUTC: _MonthUTC,
+  _Day: _Day,
+  _DayUTC: _DayUTC,
   Datetime: Datetime,
   DatetimeUTC: DatetimeUTC,
   dateToString: dateToString,
@@ -162,8 +180,10 @@ var _default = {
   textsToMinutes: textsToMinutes,
   Year: Year,
   YearUTC: YearUTC,
-  ThisMonth: ThisMonth,
-  Today: Today,
+  Month: Month,
+  MonthUTC: MonthUTC,
+  Day: Day,
+  DayUTC: DayUTC,
   isInvalidDate: isInvalidDate,
   InvalidDate: InvalidDate
 };

@@ -3,20 +3,20 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.YearUTC = void 0;
+exports["default"] = exports.DayUTC = void 0;
 
 var _isType = require("../type/isType.js");
 
 var _isObjectParameter = require("../object/isObjectParameter.js");
 
-var _YearUTC2 = require("./_YearUTC.js");
+var _DayUTC2 = require("./_DayUTC.js");
 
 var _includes = require("../compare/__includes.js");
 
 /**
- * YearUTC
+ * Day
  */
-var YearUTC = function YearUTC(value) {
+var DayUTC = function DayUTC(value) {
   var sourceDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Date();
 
   if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'sourceDate')) {
@@ -31,22 +31,22 @@ var YearUTC = function YearUTC(value) {
   }
 
   if ((0, _isType.isString)(value)) {
-    if (!(0, _includes.__includes)(['this', 'last', 'next'], value.toLowerCase())) {
-      throw new TypeError("YearUTC args(value:".concat(value, ") is not this | last | next"));
+    if (!(0, _includes.__includes)(['this', 'last', 'next', 'today', 'yesterday', 'tomorrow'], value.toLowerCase())) {
+      throw new TypeError("DayUTC args(value:".concat(value, ") is not this | last | next"));
     }
   } else if (!(0, _isType.isInteger)(value)) {
-    throw new TypeError("YearUTC args(value:".concat(value, ") is not integer"));
+    throw new TypeError("DayUTC args(value:".concat(value, ") is not integer"));
   }
 
   if (!(0, _isType.isDate)(sourceDate)) {
-    throw new TypeError("YearUTC args(sourceDate:".concat(sourceDate, ") is not date"));
+    throw new TypeError("DayUTC args(sourceDate:".concat(sourceDate, ") is not date"));
   }
 
-  return (0, _YearUTC2._YearUTC)(value, sourceDate);
+  return (0, _DayUTC2._DayUTC)(value, sourceDate);
 };
 
-exports.YearUTC = YearUTC;
+exports.DayUTC = DayUTC;
 var _default = {
-  YearUTC: YearUTC
+  DayUTC: DayUTC
 };
 exports["default"] = _default;

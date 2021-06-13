@@ -88,7 +88,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
         checkEqual(48, propertyCount(parts.array.operation));
-        checkEqual(30, propertyCount(parts.date));
+        checkEqual(34, propertyCount(parts.date));
         checkEqual(2, propertyCount(parts.system));
         checkEqual(3, propertyCount(parts.system.wsh));
         checkEqual(20, propertyCount(parts.system.consoleHook));
