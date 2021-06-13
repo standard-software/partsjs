@@ -38,9 +38,8 @@ var __dateToString = function __dateToString(date, format) {
   keys.sort((0, _SortFunc2._SortFunc)([[_SortFunc2._SortFunc.order.normal.descending, function (v) {
     return v.length;
   }]]));
-  var replaceArray = [];
-  (0, _loop.__loop)(keys)(function (value) {
-    replaceArray.push([value, rule[value].func(date, timezoneOffset)]);
+  var replaceArray = keys.map(function (key) {
+    return [key, rule[key].func(date, timezoneOffset)];
   });
   var quoteChar;
 
@@ -66,7 +65,7 @@ var __dateToString = function __dateToString(date, format) {
 };
 
 exports.__dateToString = __dateToString;
-__dateToString.func = _dateToStringRule.__dateToStringRule;
+__dateToString.rule = _dateToStringRule.__dateToStringRule;
 var _default = {
   __dateToString: __dateToString
 };

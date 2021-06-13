@@ -16,7 +16,7 @@ var _dateToString = function _dateToString(date, format) {
 };
 
 exports._dateToString = _dateToString;
-_dateToString.func = _dateToString2.__dateToString.func;
+_dateToString.rule = _dateToString2.__dateToString.rule;
 var _default = {
   _dateToString: _dateToString
 };

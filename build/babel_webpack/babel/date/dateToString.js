@@ -12,8 +12,8 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 var _dateToString2 = require("./_dateToString.js");
 
 var dateToString = function dateToString(date, format) {
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : date.getTimezoneOffset();
-  var rule = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _dateToString2._dateToString.func.Default();
+  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date().getTimezoneOffset();
+  var rule = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _dateToString2._dateToString.rule.Default();
 
   if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'timezoneOffset, rule')) {
     var _date = date;
@@ -22,22 +22,22 @@ var dateToString = function dateToString(date, format) {
     var _date$timezoneOffset = _date.timezoneOffset;
     timezoneOffset = _date$timezoneOffset === void 0 ? date.getTimezoneOffset() : _date$timezoneOffset;
     var _date$rule = _date.rule;
-    rule = _date$rule === void 0 ? _dateToString2._dateToString.func.Default() : _date$rule;
+    rule = _date$rule === void 0 ? _dateToString2._dateToString.rule.Default() : _date$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'timezoneOffset, rule')) {
     var _format = format;
     format = _format.format;
     var _format$timezoneOffse = _format.timezoneOffset;
     timezoneOffset = _format$timezoneOffse === void 0 ? date.getTimezoneOffset() : _format$timezoneOffse;
     var _format$rule = _format.rule;
-    rule = _format$rule === void 0 ? _dateToString2._dateToString.func.Default() : _format$rule;
-  } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'timezoneOffset', 'rule')) {
-    var _rule = rule;
-    timezoneOffset = _rule.timezoneOffset;
-    var _rule$rule = _rule.rule;
-    rule = _rule$rule === void 0 ? _dateToString2._dateToString.func.Default() : _rule$rule;
+    rule = _format$rule === void 0 ? _dateToString2._dateToString.rule.Default() : _format$rule;
+  } else if ((0, _isObjectParameter.isObjectParameter)(timezoneOffset, 'timezoneOffset', 'rule')) {
+    var _timezoneOffset = timezoneOffset;
+    timezoneOffset = _timezoneOffset.timezoneOffset;
+    var _timezoneOffset$rule = _timezoneOffset.rule;
+    rule = _timezoneOffset$rule === void 0 ? _dateToString2._dateToString.rule.Default() : _timezoneOffset$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule')) {
-    var _rule2 = rule;
-    rule = _rule2.rule;
+    var _rule = rule;
+    rule = _rule.rule;
   }
 
   if (!(0, _isType.isDate)(date)) {
@@ -60,7 +60,7 @@ var dateToString = function dateToString(date, format) {
 };
 
 exports.dateToString = dateToString;
-dateToString.func = _dateToString2._dateToString.func;
+dateToString.rule = _dateToString2._dateToString.rule;
 var _default = {
   dateToString: dateToString
 };

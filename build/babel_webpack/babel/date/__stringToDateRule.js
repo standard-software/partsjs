@@ -17,7 +17,9 @@ var _string_common = require("../string/string_common.js");
 
 var _textsToMinutes2 = require("./_textsToMinutes.js");
 
-var _defaultRule;
+var _dateToStringRule = require("./__dateToStringRule.js");
+
+var _defaultRule, _momentLikeRule;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -95,7 +97,6 @@ var setHours = function setHours(value) {
 };
 
 var setAMPM = function setAMPM(value) {
-  // console.log({ date, value, flagPM });
   if ((0, _includes.__includes)(value.toLowerCase(), 'p')) {
     flagPM = true;
   }
@@ -146,19 +147,19 @@ var __stringToDateRule = {
 };
 exports.__stringToDateRule = __stringToDateRule;
 
-__stringToDateRule.initialize = function (dateSource) {
+__stringToDateRule.initialize = function (sourceDate, timezoneOffset) {
   flagPM = false;
-  datetimeInfo.year = dateSource.getFullYear();
-  datetimeInfo.month = dateSource.getMonth();
-  datetimeInfo.date = dateSource.getDate();
-  datetimeInfo.hours = dateSource.getHours();
-  datetimeInfo.minutes = dateSource.getMinutes();
-  datetimeInfo.seconds = dateSource.getSeconds();
-  datetimeInfo.milliseconds = dateSource.getMilliseconds();
-  datetimeInfo.timezoneOffset = dateSource.getTimezoneOffset();
+  datetimeInfo.year = sourceDate.getFullYear();
+  datetimeInfo.month = sourceDate.getMonth();
+  datetimeInfo.date = sourceDate.getDate();
+  datetimeInfo.hours = sourceDate.getHours();
+  datetimeInfo.minutes = sourceDate.getMinutes();
+  datetimeInfo.seconds = sourceDate.getSeconds();
+  datetimeInfo.milliseconds = sourceDate.getMilliseconds();
+  datetimeInfo.timezoneOffset = timezoneOffset;
 };
 
-__stringToDateRule.finalize = function (dateSource) {
+__stringToDateRule.finalize = function (targetDate) {
   var year = datetimeInfo.year,
       month = datetimeInfo.month,
       date = datetimeInfo.date,
@@ -166,18 +167,15 @@ __stringToDateRule.finalize = function (dateSource) {
       minutes = datetimeInfo.minutes,
       seconds = datetimeInfo.seconds,
       milliseconds = datetimeInfo.milliseconds,
-      timezoneOffset = datetimeInfo.timezoneOffset; // console.log({ year, month, date, hours, minutes, seconds, milliseconds });
-
-  dateSource.setUTCFullYear(year, month, date);
-  dateSource.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
+      timezoneOffset = datetimeInfo.timezoneOffset;
+  targetDate.setUTCFullYear(year, month, date);
+  targetDate.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
 
   if (!(0, _type.isNull)(datetimeInfo.timezoneOffset)) {
-    dateSource.setMinutes(dateSource.getMinutes() + datetimeInfo.timezoneOffset);
+    targetDate.setMinutes(targetDate.getMinutes() + datetimeInfo.timezoneOffset);
   }
 
-  return {
-    timezoneOffset: timezoneOffset
-  };
+  return timezoneOffset;
 };
 
 var r = __stringToDateRule;
@@ -270,11 +268,90 @@ var defaultRule = (_defaultRule = {}, _defineProperty(_defaultRule, 'YYYY', {
 }), _defineProperty(_defaultRule, 'ZZ', {
   reg: '(Z|[+|-]\\d{2}\\d{2})',
   func: r.setTimezoneHHMM('Z')
-}), _defaultRule);
-var momentLikeRule = [];
+}), _defineProperty(_defaultRule, "toStringRule", _dateToStringRule.__dateToStringRule.Default()), _defaultRule);
+var momentLikeRule = (_momentLikeRule = {}, _defineProperty(_momentLikeRule, 'YYYY', {
+  reg: '(\\d{4})',
+  func: r.setYear4
+}), _defineProperty(_momentLikeRule, 'YY', {
+  reg: '(\\d{2})',
+  func: r.setYear2
+}), _defineProperty(_momentLikeRule, 'MM', {
+  reg: '(\\d{2})',
+  func: r.setMonth
+}), _defineProperty(_momentLikeRule, 'M', {
+  reg: '(\\d{1,2})',
+  func: r.setMonth
+}), _defineProperty(_momentLikeRule, 'DD', {
+  reg: '(\\d{2})',
+  func: r.setDate
+}), _defineProperty(_momentLikeRule, 'D', {
+  reg: '(\\d{1,2})',
+  func: r.setDate
+}), _defineProperty(_momentLikeRule, 'HH', {
+  reg: '(\\d{2})',
+  func: r.setHours
+}), _defineProperty(_momentLikeRule, 'H', {
+  reg: '(\\d{1,2})',
+  func: r.setHours
+}), _defineProperty(_momentLikeRule, 'hh', {
+  reg: '(\\d{2})',
+  func: r.setHours12
+}), _defineProperty(_momentLikeRule, 'h', {
+  reg: '(\\d{1,2})',
+  func: r.setHours12
+}), _defineProperty(_momentLikeRule, 'mm', {
+  reg: '(\\d{2})',
+  func: r.setMinutes
+}), _defineProperty(_momentLikeRule, 'm', {
+  reg: '(\\d{1,2})',
+  func: r.setMinutes
+}), _defineProperty(_momentLikeRule, 'ss', {
+  reg: '(\\d{2})',
+  func: r.setSec
+}), _defineProperty(_momentLikeRule, 's', {
+  reg: '(\\d{1,2})',
+  func: r.setSec
+}), _defineProperty(_momentLikeRule, 'SSS', {
+  reg: '(\\d{3})',
+  func: r.setMsec
+}), _defineProperty(_momentLikeRule, 'SS', {
+  reg: '(\\d{2})',
+  func: r.setMsecX10
+}), _defineProperty(_momentLikeRule, 'S', {
+  reg: '(\\d{1})',
+  func: r.setMsecX100
+}), _defineProperty(_momentLikeRule, 'a', {
+  reg: '(am|pm)',
+  func: r.setAMPM
+}), _defineProperty(_momentLikeRule, 'A', {
+  reg: '(AM|PM)',
+  func: r.setAMPM
+}), _defineProperty(_momentLikeRule, 'ddd', {
+  reg: regDayOfWeekEnglishShort,
+  func: function func() {}
+}), _defineProperty(_momentLikeRule, 'dddd', {
+  reg: regDayOfWeekEnglishLong,
+  func: function func() {}
+}), _defineProperty(_momentLikeRule, 'MMM', {
+  reg: regMonthNameEnglishChar3,
+  func: r.setMonthEnglishChar3
+}), _defineProperty(_momentLikeRule, 'MMMM', {
+  reg: regMonthNameEnglishLong,
+  func: r.setMonthEnglishLong
+}), _defineProperty(_momentLikeRule, 'Z', {
+  reg: '(Z|[+|-]\\d{2}:\\d{2})',
+  func: r.setTimezoneHH_MM('Z')
+}), _defineProperty(_momentLikeRule, 'ZZ', {
+  reg: '(Z|[+|-]\\d{2}\\d{2})',
+  func: r.setTimezoneHHMM('Z')
+}), _defineProperty(_momentLikeRule, "toStringRule", _dateToStringRule.__dateToStringRule.MomentLike()), _momentLikeRule);
 
 __stringToDateRule.Default = function () {
   return defaultRule;
+};
+
+__stringToDateRule.MomentLike = function () {
+  return momentLikeRule;
 };
 
 var _default = {

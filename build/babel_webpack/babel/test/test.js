@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.testCounter = exports.expect = exports.checkEqual = exports.checkCompare = exports.test = exports.it = exports.describe = exports.testFrame = void 0;
+exports["default"] = exports.isNotThrown = exports.isThrownException = exports.isThrownValue = exports.isThrown = exports.testCounter = exports.expect = exports.checkNotEqual = exports.checkEqual = exports.checkCompare = exports.test = exports.it = exports.describe = exports.testFrame = void 0;
 
 var _type = require("../type/type.js");
 
@@ -89,8 +89,8 @@ var outputValue = function outputValue(value) {
   return String(value);
 };
 
-var checkCompare = function checkCompare(compareFunc, a, b) {
-  var message = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+var checkCompare = function checkCompare(compareFunc, a, b, result) {
+  var message = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
 
   if (!(0, _type.isString)(message)) {
     throw new TypeError('checkEqual args message is not string');
@@ -98,7 +98,7 @@ var checkCompare = function checkCompare(compareFunc, a, b) {
 
   testFrame.counter += 1;
 
-  if (compareFunc(a, b) === true) {
+  if (compareFunc(a, b) === result) {
     return true;
   }
 
@@ -115,16 +115,23 @@ exports.checkCompare = checkCompare;
 
 var checkEqual = function checkEqual(a, b) {
   var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  return checkCompare(_compare.equalDeep, a, b, message);
+  return checkCompare(_compare.equalDeep, a, b, true, message);
 };
 
 exports.checkEqual = checkEqual;
+
+var checkNotEqual = function checkNotEqual(a, b) {
+  var message = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  return checkCompare(_compare.equalDeep, a, b, false, message);
+};
+
+exports.checkNotEqual = checkNotEqual;
 
 var expect = function expect(a) {
   var toBe = function toBe(b) {
     return checkCompare(function (v1, v2) {
       return v1 === v2;
-    }, a, b);
+    }, a, b, true);
   };
 
   var toEqual = function toEqual(b) {
@@ -134,13 +141,13 @@ var expect = function expect(a) {
   var notToBe = function notToBe(b) {
     return checkCompare(function (v1, v2) {
       return v1 !== v2;
-    }, a, b);
+    }, a, b, true);
   };
 
   var notToEqual = function notToEqual(b) {
     return checkCompare(function (v1, v2) {
       return !(0, _compare.equalDeep)(v1, v2);
-    }, a, b);
+    }, a, b, true);
   };
 
   return {
@@ -234,8 +241,9 @@ var isNotThrown = function isNotThrown(targetFunc) {
 exports.isNotThrown = isNotThrown;
 var _default = {
   testFrame: testFrame,
-  checkEqual: checkEqual,
   checkCompare: checkCompare,
+  checkEqual: checkEqual,
+  checkNotEqual: checkNotEqual,
   describe: describe,
   it: it,
   test: test,

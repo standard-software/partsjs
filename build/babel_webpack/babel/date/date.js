@@ -3,11 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.INVALID_DATE = exports.textsToMinutes = exports.minutesToTexts = exports.stringToDate = exports.nameOfMonthEnglishLong = exports.nameOfMonthEnglishChar4 = exports.nameOfMonthEnglishChar3 = exports.nameOfMonth = exports.dayOfWeekJapaneseLong = exports.dayOfWeekJapaneseShort = exports.dayOfWeekEnglishLong = exports.dayOfWeekEnglishShort = exports.dayOfWeek = exports.dateToStringUTC = exports.dateToString = exports.Datetime = exports.isInvalidDate = exports.Today = exports.ThisMonth = exports.ThisYear = exports._textsToMinutes = exports._minutesToTexts = exports._stringToDate = exports._nameOfMonthEnglishLong = exports._nameOfMonthEnglishChar4 = exports._nameOfMonthEnglishChar3 = exports._nameOfMonth = exports._dayOfWeekJapaneseLong = exports._dayOfWeekJapaneseShort = exports._dayOfWeekEnglishLong = exports._dayOfWeekEnglishShort = exports._dayOfWeek = exports._dateToStringUTC = exports._dateToString = exports._Datetime = exports._Today = exports._ThisMonth = exports._ThisYear = void 0;
+exports["default"] = exports.InvalidDate = exports.isInvalidDate = exports.Today = exports.ThisMonth = exports.YearUTC = exports.Year = exports.textsToMinutes = exports.stringToDateUTC = exports.stringToDate = exports.nameOfMonth = exports.minutesToTexts = exports.dayOfWeek = exports.dateToStringUTC = exports.dateToString = exports.DatetimeUTC = exports.Datetime = exports._Today = exports._ThisMonth = exports._YearUTC = exports._Year = exports._textsToMinutes = exports._stringToDateUTC = exports._stringToDate = exports._nameOfMonth = exports._minutesToTexts = exports._dayOfWeek = exports._dateToStringUTC = exports._dateToString = exports._DatetimeUTC = exports._Datetime = void 0;
 
-var _ThisYear2 = _interopRequireDefault(require("./_ThisYear.js"));
+var _Year2 = _interopRequireDefault(require("./_Year.js"));
 
-var _ThisYear3 = _interopRequireDefault(require("./ThisYear.js"));
+var _Year3 = _interopRequireDefault(require("./Year.js"));
+
+var _YearUTC2 = _interopRequireDefault(require("./_YearUTC.js"));
+
+var _YearUTC3 = _interopRequireDefault(require("./YearUTC.js"));
 
 var _ThisMonth2 = _interopRequireDefault(require("./_ThisMonth.js"));
 
@@ -19,11 +23,15 @@ var _Today3 = _interopRequireDefault(require("./Today.js"));
 
 var _isInvalidDate = _interopRequireDefault(require("./isInvalidDate.js"));
 
-var _INVALID_DATE = _interopRequireDefault(require("./INVALID_DATE.js"));
+var _InvalidDate = _interopRequireDefault(require("./InvalidDate.js"));
 
 var _Datetime2 = _interopRequireDefault(require("./_Datetime.js"));
 
 var _Datetime3 = _interopRequireDefault(require("./Datetime.js"));
+
+var _DatetimeUTC2 = _interopRequireDefault(require("./_DatetimeUTC.js"));
+
+var _DatetimeUTC3 = _interopRequireDefault(require("./DatetimeUTC.js"));
 
 var _dateToString2 = _interopRequireDefault(require("./_dateToString.js"));
 
@@ -37,41 +45,17 @@ var _dayOfWeek2 = _interopRequireDefault(require("./_dayOfWeek.js"));
 
 var _dayOfWeek3 = _interopRequireDefault(require("./dayOfWeek.js"));
 
-var _dayOfWeekEnglishShort2 = _interopRequireDefault(require("./_dayOfWeekEnglishShort.js"));
-
-var _dayOfWeekEnglishShort3 = _interopRequireDefault(require("./dayOfWeekEnglishShort.js"));
-
-var _dayOfWeekEnglishLong2 = _interopRequireDefault(require("./_dayOfWeekEnglishLong.js"));
-
-var _dayOfWeekEnglishLong3 = _interopRequireDefault(require("./dayOfWeekEnglishLong.js"));
-
-var _dayOfWeekJapaneseShort2 = _interopRequireDefault(require("./_dayOfWeekJapaneseShort.js"));
-
-var _dayOfWeekJapaneseShort3 = _interopRequireDefault(require("./dayOfWeekJapaneseShort.js"));
-
-var _dayOfWeekJapaneseLong2 = _interopRequireDefault(require("./_dayOfWeekJapaneseLong.js"));
-
-var _dayOfWeekJapaneseLong3 = _interopRequireDefault(require("./dayOfWeekJapaneseLong.js"));
-
 var _nameOfMonth2 = _interopRequireDefault(require("./_nameOfMonth.js"));
 
 var _nameOfMonth3 = _interopRequireDefault(require("./nameOfMonth.js"));
 
-var _nameOfMonthEnglishChar = _interopRequireDefault(require("./_nameOfMonthEnglishChar3.js"));
-
-var _nameOfMonthEnglishChar2 = _interopRequireDefault(require("./nameOfMonthEnglishChar3.js"));
-
-var _nameOfMonthEnglishChar5 = _interopRequireDefault(require("./_nameOfMonthEnglishChar4.js"));
-
-var _nameOfMonthEnglishChar6 = _interopRequireDefault(require("./nameOfMonthEnglishChar4.js"));
-
-var _nameOfMonthEnglishLong2 = _interopRequireDefault(require("./_nameOfMonthEnglishLong.js"));
-
-var _nameOfMonthEnglishLong3 = _interopRequireDefault(require("./nameOfMonthEnglishLong.js"));
-
 var _stringToDate2 = _interopRequireDefault(require("./_stringToDate.js"));
 
 var _stringToDate3 = _interopRequireDefault(require("./stringToDate.js"));
+
+var _stringToDateUTC2 = _interopRequireDefault(require("./_stringToDateUTC.js"));
+
+var _stringToDateUTC3 = _interopRequireDefault(require("./stringToDateUTC.js"));
 
 var _minutesToTexts2 = _interopRequireDefault(require("./_minutesToTexts.js"));
 
@@ -89,122 +73,98 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _ThisYear2["default"]), _ThisYear3["default"]), _ThisMonth2["default"]), _ThisMonth3["default"]), _Today2["default"]), _Today3["default"]), _isInvalidDate["default"]), _INVALID_DATE["default"]), _Datetime2["default"]), _Datetime3["default"]), _dateToString2["default"]), _dateToString3["default"]), _dateToStringUTC2["default"]), _dateToStringUTC3["default"]), _dayOfWeek2["default"]), _dayOfWeek3["default"]), _dayOfWeekEnglishShort2["default"]), _dayOfWeekEnglishShort3["default"]), _dayOfWeekEnglishLong2["default"]), _dayOfWeekEnglishLong3["default"]), _dayOfWeekJapaneseShort2["default"]), _dayOfWeekJapaneseShort3["default"]), _dayOfWeekJapaneseLong2["default"]), _dayOfWeekJapaneseLong3["default"]), _nameOfMonth2["default"]), _nameOfMonth3["default"]), _nameOfMonthEnglishChar["default"]), _nameOfMonthEnglishChar2["default"]), _nameOfMonthEnglishChar5["default"]), _nameOfMonthEnglishChar6["default"]), _nameOfMonthEnglishLong2["default"]), _nameOfMonthEnglishLong3["default"]), _stringToDate2["default"]), _stringToDate3["default"]), _minutesToTexts2["default"]), _minutesToTexts3["default"]), _textsToMinutes2["default"]), _textsToMinutes3["default"]);
+var dateJs = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _Datetime2["default"]), _DatetimeUTC2["default"]), _dateToString2["default"]), _dateToStringUTC2["default"]), _dayOfWeek2["default"]), _minutesToTexts2["default"]), _nameOfMonth2["default"]), _stringToDate2["default"]), _stringToDateUTC2["default"]), _textsToMinutes2["default"]), _Year2["default"]), _YearUTC2["default"]), _ThisMonth2["default"]), _Today2["default"]), _Datetime3["default"]), _DatetimeUTC3["default"]), _dateToString3["default"]), _dateToStringUTC3["default"]), _dayOfWeek3["default"]), _InvalidDate["default"]), _isInvalidDate["default"]), _minutesToTexts3["default"]), _nameOfMonth3["default"]), _stringToDate3["default"]), _stringToDateUTC3["default"]), _textsToMinutes3["default"]), _Year3["default"]), _YearUTC3["default"]), _ThisMonth3["default"]), _Today3["default"]);
 
-var _ThisYear = dateJs._ThisYear,
-    _ThisMonth = dateJs._ThisMonth,
-    _Today = dateJs._Today,
-    _Datetime = dateJs._Datetime,
+var _Datetime = dateJs._Datetime,
+    _DatetimeUTC = dateJs._DatetimeUTC,
     _dateToString = dateJs._dateToString,
     _dateToStringUTC = dateJs._dateToStringUTC,
     _dayOfWeek = dateJs._dayOfWeek,
-    _dayOfWeekEnglishShort = dateJs._dayOfWeekEnglishShort,
-    _dayOfWeekEnglishLong = dateJs._dayOfWeekEnglishLong,
-    _dayOfWeekJapaneseShort = dateJs._dayOfWeekJapaneseShort,
-    _dayOfWeekJapaneseLong = dateJs._dayOfWeekJapaneseLong,
-    _nameOfMonth = dateJs._nameOfMonth,
-    _nameOfMonthEnglishChar3 = dateJs._nameOfMonthEnglishChar3,
-    _nameOfMonthEnglishChar4 = dateJs._nameOfMonthEnglishChar4,
-    _nameOfMonthEnglishLong = dateJs._nameOfMonthEnglishLong,
-    _stringToDate = dateJs._stringToDate,
     _minutesToTexts = dateJs._minutesToTexts,
+    _nameOfMonth = dateJs._nameOfMonth,
+    _stringToDate = dateJs._stringToDate,
+    _stringToDateUTC = dateJs._stringToDateUTC,
     _textsToMinutes = dateJs._textsToMinutes,
-    ThisYear = dateJs.ThisYear,
-    ThisMonth = dateJs.ThisMonth,
-    Today = dateJs.Today,
-    isInvalidDate = dateJs.isInvalidDate,
+    _Year = dateJs._Year,
+    _YearUTC = dateJs._YearUTC,
+    _ThisMonth = dateJs._ThisMonth,
+    _Today = dateJs._Today,
     Datetime = dateJs.Datetime,
+    DatetimeUTC = dateJs.DatetimeUTC,
     dateToString = dateJs.dateToString,
     dateToStringUTC = dateJs.dateToStringUTC,
     dayOfWeek = dateJs.dayOfWeek,
-    dayOfWeekEnglishShort = dateJs.dayOfWeekEnglishShort,
-    dayOfWeekEnglishLong = dateJs.dayOfWeekEnglishLong,
-    dayOfWeekJapaneseShort = dateJs.dayOfWeekJapaneseShort,
-    dayOfWeekJapaneseLong = dateJs.dayOfWeekJapaneseLong,
-    nameOfMonth = dateJs.nameOfMonth,
-    nameOfMonthEnglishChar3 = dateJs.nameOfMonthEnglishChar3,
-    nameOfMonthEnglishChar4 = dateJs.nameOfMonthEnglishChar4,
-    nameOfMonthEnglishLong = dateJs.nameOfMonthEnglishLong,
-    stringToDate = dateJs.stringToDate,
     minutesToTexts = dateJs.minutesToTexts,
+    nameOfMonth = dateJs.nameOfMonth,
+    stringToDate = dateJs.stringToDate,
+    stringToDateUTC = dateJs.stringToDateUTC,
     textsToMinutes = dateJs.textsToMinutes,
-    INVALID_DATE = dateJs.INVALID_DATE;
-exports.INVALID_DATE = INVALID_DATE;
-exports.textsToMinutes = textsToMinutes;
-exports.minutesToTexts = minutesToTexts;
-exports.stringToDate = stringToDate;
-exports.nameOfMonthEnglishLong = nameOfMonthEnglishLong;
-exports.nameOfMonthEnglishChar4 = nameOfMonthEnglishChar4;
-exports.nameOfMonthEnglishChar3 = nameOfMonthEnglishChar3;
-exports.nameOfMonth = nameOfMonth;
-exports.dayOfWeekJapaneseLong = dayOfWeekJapaneseLong;
-exports.dayOfWeekJapaneseShort = dayOfWeekJapaneseShort;
-exports.dayOfWeekEnglishLong = dayOfWeekEnglishLong;
-exports.dayOfWeekEnglishShort = dayOfWeekEnglishShort;
-exports.dayOfWeek = dayOfWeek;
-exports.dateToStringUTC = dateToStringUTC;
-exports.dateToString = dateToString;
-exports.Datetime = Datetime;
+    Year = dateJs.Year,
+    YearUTC = dateJs.YearUTC,
+    ThisMonth = dateJs.ThisMonth,
+    Today = dateJs.Today,
+    isInvalidDate = dateJs.isInvalidDate,
+    InvalidDate = dateJs.InvalidDate;
+exports.InvalidDate = InvalidDate;
 exports.isInvalidDate = isInvalidDate;
 exports.Today = Today;
 exports.ThisMonth = ThisMonth;
-exports.ThisYear = ThisYear;
+exports.YearUTC = YearUTC;
+exports.Year = Year;
+exports.textsToMinutes = textsToMinutes;
+exports.stringToDateUTC = stringToDateUTC;
+exports.stringToDate = stringToDate;
+exports.nameOfMonth = nameOfMonth;
+exports.minutesToTexts = minutesToTexts;
+exports.dayOfWeek = dayOfWeek;
+exports.dateToStringUTC = dateToStringUTC;
+exports.dateToString = dateToString;
+exports.DatetimeUTC = DatetimeUTC;
+exports.Datetime = Datetime;
+exports._Today = _Today;
+exports._ThisMonth = _ThisMonth;
+exports._YearUTC = _YearUTC;
+exports._Year = _Year;
 exports._textsToMinutes = _textsToMinutes;
-exports._minutesToTexts = _minutesToTexts;
+exports._stringToDateUTC = _stringToDateUTC;
 exports._stringToDate = _stringToDate;
-exports._nameOfMonthEnglishLong = _nameOfMonthEnglishLong;
-exports._nameOfMonthEnglishChar4 = _nameOfMonthEnglishChar4;
-exports._nameOfMonthEnglishChar3 = _nameOfMonthEnglishChar3;
 exports._nameOfMonth = _nameOfMonth;
-exports._dayOfWeekJapaneseLong = _dayOfWeekJapaneseLong;
-exports._dayOfWeekJapaneseShort = _dayOfWeekJapaneseShort;
-exports._dayOfWeekEnglishLong = _dayOfWeekEnglishLong;
-exports._dayOfWeekEnglishShort = _dayOfWeekEnglishShort;
+exports._minutesToTexts = _minutesToTexts;
 exports._dayOfWeek = _dayOfWeek;
 exports._dateToStringUTC = _dateToStringUTC;
 exports._dateToString = _dateToString;
+exports._DatetimeUTC = _DatetimeUTC;
 exports._Datetime = _Datetime;
-exports._Today = _Today;
-exports._ThisMonth = _ThisMonth;
-exports._ThisYear = _ThisYear;
 var _default = {
-  _ThisYear: _ThisYear,
-  _ThisMonth: _ThisMonth,
-  _Today: _Today,
   _Datetime: _Datetime,
+  _DatetimeUTC: _DatetimeUTC,
   _dateToString: _dateToString,
   _dateToStringUTC: _dateToStringUTC,
   _dayOfWeek: _dayOfWeek,
-  _dayOfWeekEnglishShort: _dayOfWeekEnglishShort,
-  _dayOfWeekEnglishLong: _dayOfWeekEnglishLong,
-  _dayOfWeekJapaneseShort: _dayOfWeekJapaneseShort,
-  _dayOfWeekJapaneseLong: _dayOfWeekJapaneseLong,
-  _nameOfMonth: _nameOfMonth,
-  _nameOfMonthEnglishChar3: _nameOfMonthEnglishChar3,
-  _nameOfMonthEnglishChar4: _nameOfMonthEnglishChar4,
-  _nameOfMonthEnglishLong: _nameOfMonthEnglishLong,
-  _stringToDate: _stringToDate,
   _minutesToTexts: _minutesToTexts,
+  _nameOfMonth: _nameOfMonth,
+  _stringToDate: _stringToDate,
+  _stringToDateUTC: _stringToDateUTC,
   _textsToMinutes: _textsToMinutes,
-  ThisYear: ThisYear,
-  ThisMonth: ThisMonth,
-  Today: Today,
-  isInvalidDate: isInvalidDate,
+  _Year: _Year,
+  _YearUTC: _YearUTC,
+  _ThisMonth: _ThisMonth,
+  _Today: _Today,
   Datetime: Datetime,
+  DatetimeUTC: DatetimeUTC,
   dateToString: dateToString,
   dateToStringUTC: dateToStringUTC,
   dayOfWeek: dayOfWeek,
-  dayOfWeekEnglishShort: dayOfWeekEnglishShort,
-  dayOfWeekEnglishLong: dayOfWeekEnglishLong,
-  dayOfWeekJapaneseShort: dayOfWeekJapaneseShort,
-  dayOfWeekJapaneseLong: dayOfWeekJapaneseLong,
-  nameOfMonth: nameOfMonth,
-  nameOfMonthEnglishChar3: nameOfMonthEnglishChar3,
-  nameOfMonthEnglishChar4: nameOfMonthEnglishChar4,
-  nameOfMonthEnglishLong: nameOfMonthEnglishLong,
-  stringToDate: stringToDate,
   minutesToTexts: minutesToTexts,
+  nameOfMonth: nameOfMonth,
+  stringToDate: stringToDate,
+  stringToDateUTC: stringToDateUTC,
   textsToMinutes: textsToMinutes,
-  INVALID_DATE: INVALID_DATE
+  Year: Year,
+  YearUTC: YearUTC,
+  ThisMonth: ThisMonth,
+  Today: Today,
+  isInvalidDate: isInvalidDate,
+  InvalidDate: InvalidDate
 };
 exports["default"] = _default;

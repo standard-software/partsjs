@@ -41,8 +41,7 @@ var cloneDate = function cloneDate(date) {
 
 var setDateOffsetMin = function setDateOffsetMin(date, offsetMin) {
   var result = cloneDate(date);
-  result.setUTCMinutes(result.getUTCMinutes() - offsetMin); // console.log({ date, offsetMin, result });
-
+  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
   return result;
 };
 
@@ -294,14 +293,14 @@ var defaultRule = (_defaultRule = {}, _defineProperty(_defaultRule, 'YYYY', {
   func: r.date2
 }), _defineProperty(_defaultRule, 'D', {
   func: r.date1
-}), _defineProperty(_defaultRule, 'hh', {
-  func: r.hour12_2
-}), _defineProperty(_defaultRule, 'h', {
-  func: r.hour12_1
 }), _defineProperty(_defaultRule, 'HH', {
   func: r.hour24_2
 }), _defineProperty(_defaultRule, 'H', {
   func: r.hour24_1
+}), _defineProperty(_defaultRule, 'hh', {
+  func: r.hour12_2
+}), _defineProperty(_defaultRule, 'h', {
+  func: r.hour12_1
 }), _defineProperty(_defaultRule, 'mm', {
   func: r.minute2
 }), _defineProperty(_defaultRule, 'm', {
@@ -351,14 +350,14 @@ var momentLikeRule = (_momentLikeRule = {}, _defineProperty(_momentLikeRule, 'YY
   func: r.date2
 }), _defineProperty(_momentLikeRule, 'D', {
   func: r.date1
-}), _defineProperty(_momentLikeRule, 'hh', {
-  func: r.hour12_2
-}), _defineProperty(_momentLikeRule, 'h', {
-  func: r.hour12_1
 }), _defineProperty(_momentLikeRule, 'HH', {
   func: r.hour24_2
 }), _defineProperty(_momentLikeRule, 'H', {
   func: r.hour24_1
+}), _defineProperty(_momentLikeRule, 'hh', {
+  func: r.hour12_2
+}), _defineProperty(_momentLikeRule, 'h', {
+  func: r.hour12_1
 }), _defineProperty(_momentLikeRule, 'mm', {
   func: r.minute2
 }), _defineProperty(_momentLikeRule, 'm', {

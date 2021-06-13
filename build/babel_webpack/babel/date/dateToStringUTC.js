@@ -12,19 +12,19 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 var _dateToStringUTC2 = require("./_dateToStringUTC.js");
 
 var dateToStringUTC = function dateToStringUTC(date, format) {
-  var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _dateToStringUTC2._dateToStringUTC.func.Default();
+  var rule = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _dateToStringUTC2._dateToStringUTC.rule.Default();
 
   if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'rule')) {
     var _date = date;
     date = _date.date;
     format = _date.format;
     var _date$rule = _date.rule;
-    rule = _date$rule === void 0 ? _dateToString.func.Default() : _date$rule;
+    rule = _date$rule === void 0 ? _dateToStringUTC2._dateToStringUTC.rule.Default() : _date$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'rule')) {
     var _format = format;
     format = _format.format;
     var _format$rule = _format.rule;
-    rule = _format$rule === void 0 ? _dateToString.func.Default() : _format$rule;
+    rule = _format$rule === void 0 ? _dateToStringUTC2._dateToStringUTC.rule.Default() : _format$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(rule, 'rule', '')) {
     var _rule = rule;
     rule = _rule.rule;
@@ -46,7 +46,7 @@ var dateToStringUTC = function dateToStringUTC(date, format) {
 };
 
 exports.dateToStringUTC = dateToStringUTC;
-dateToStringUTC.func = _dateToStringUTC2._dateToStringUTC.func;
+dateToStringUTC.rule = _dateToStringUTC2._dateToStringUTC.rule;
 var _default = {
   dateToStringUTC: dateToStringUTC
 };
