@@ -12,12 +12,12 @@ import { __stringToDateRule } from './__stringToDateRule.js';
 import { InvalidDate } from './InvalidDate.js';
 import { _dateToString } from './_dateToString.js';
 import { _escapeRegExp } from '../string/_escapeRegExp.js';
-import { _ThisYear } from './_ThisYear.js';
+import { _Year } from './_Year.js';
 
 export const __stringToDate = (
   str, format,
   timezoneOffset = (new Date()).getTimezoneOffset(),
-  sourceDate = _ThisYear(true),
+  sourceDate = _Year(true),
   rule = __stringToDateRule.Default(),
 ) => {
   const existSingleQuote = __includes(format, "'");

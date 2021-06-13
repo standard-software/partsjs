@@ -1,5 +1,7 @@
-import _ThisYearJs from './_ThisYear.js';
-import ThisYearJs from './ThisYear.js';
+import _YearJs from './_Year.js';
+import YearJs from './Year.js';
+import _YearUTCJs from './_YearUTC.js';
+import YearUTCJs from './YearUTC.js';
 import _ThisMonthJs from './_ThisMonth.js';
 import ThisMonthJs from './ThisMonth.js';
 import _TodayJs from './_Today.js';
@@ -38,8 +40,9 @@ const dateJs = {
   ..._stringToDateJs,
   ..._stringToDateUTCJs,
   ..._textsToMinutesJs,
+  ..._YearJs,
+  ..._YearUTCJs,
   ..._ThisMonthJs,
-  ..._ThisYearJs,
   ..._TodayJs,
 
   ...DatetimeJs,
@@ -54,8 +57,9 @@ const dateJs = {
   ...stringToDateJs,
   ...stringToDateUTCJs,
   ...textsToMinutesJs,
+  ...YearJs,
+  ...YearUTCJs,
   ...ThisMonthJs,
-  ...ThisYearJs,
   ...TodayJs,
 };
 
@@ -70,8 +74,9 @@ export const {
   _stringToDate,
   _stringToDateUTC,
   _textsToMinutes,
+  _Year,
+  _YearUTC,
   _ThisMonth,
-  _ThisYear,
   _Today,
 
   Datetime,
@@ -84,8 +89,9 @@ export const {
   stringToDate,
   stringToDateUTC,
   textsToMinutes,
+  Year,
+  YearUTC,
   ThisMonth,
-  ThisYear,
   Today,
 
   isInvalidDate,
@@ -103,8 +109,9 @@ export default {
   _stringToDate,
   _stringToDateUTC,
   _textsToMinutes,
+  _Year,
+  _YearUTC,
   _ThisMonth,
-  _ThisYear,
   _Today,
 
   Datetime,
@@ -117,8 +124,9 @@ export default {
   stringToDate,
   stringToDateUTC,
   textsToMinutes,
+  Year,
+  YearUTC,
   ThisMonth,
-  ThisYear,
   Today,
 
   isInvalidDate,

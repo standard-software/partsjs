@@ -326,7 +326,7 @@ You can now use the functions of the parts.js object.
 ## Version
 
 ### 10.6.0 beta
-#### 2021/06/06(Sun)
+#### 2021/06/13(Sun)
 - rename DateTime to Datetime
   - update inside
 - add DatetimeUTC
@@ -352,9 +352,9 @@ You can now use the functions of the parts.js object.
 - add string.escapeRegExp
 - add date.minutesToTexts
 - add date.textsToMinutes
-- add function ThisYear ThisMonth
 - add checkNotEqual
 - update instanceof code
+- add function Year
 
 ### 10.5.0
 #### 2021/03/29(Mon)

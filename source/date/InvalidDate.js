@@ -1,4 +1,4 @@
-export const InvalidDate = function() {
+export const InvalidDate = () => {
   return new Date('');
 };
 

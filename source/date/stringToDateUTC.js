@@ -1,29 +1,29 @@
 import { isDate, isString, isObject, isInteger } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { _ThisYear } from './_ThisYear.js';
+import { _Year } from './_Year.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
 import { _stringToDateUTC } from './_stringToDateUTC.js';
 
 export const stringToDateUTC = (
   str, format,
-  sourceDate = _ThisYear(true),
+  sourceDate = _Year('this'),
   rule = __stringToDateRule.Default(),
 ) => {
   if (isObjectParameter(str, 'str, format', 'sourceDate, rule')) {
     ({
       str, format,
-      sourceDate = _ThisYear(),
+      sourceDate = _Year('this'),
       rule = __stringToDateRule.Default(),
     } = str);
   } else if (isObjectParameter(format, 'format', 'sourceDate, rule')) {
     ({
       format,
-      sourceDate = _ThisYear(),
+      sourceDate = _Year('this'),
       rule = __stringToDateRule.Default(),
     } = format);
   } else if (isObjectParameter(sourceDate, '', 'sourceDate, rule', 1)) {
     ({
-      sourceDate = _ThisYear(),
+      sourceDate = _Year('this'),
       rule = __stringToDateRule.Default(),
     } = sourceDate);
   } else if (isObjectParameter(rule, 'rule')) {

@@ -226,8 +226,9 @@
 .date._stringToDateUTC:[object Function]:function
 .date._textsToMinutes:[object Function]:function
 .date._ThisMonth:[object Function]:function
-.date._ThisYear:[object Function]:function
 .date._Today:[object Function]:function
+.date._Year:[object Function]:function
+.date._YearUTC:[object Function]:function
 .date.Datetime:[object Function]:function
 .date.DatetimeUTC:[object Function]:function
 .date.dateToString:[object Function]:function
@@ -241,8 +242,9 @@
 .date.stringToDateUTC:[object Function]:function
 .date.textsToMinutes:[object Function]:function
 .date.ThisMonth:[object Function]:function
-.date.ThisYear:[object Function]:function
 .date.Today:[object Function]:function
+.date.Year:[object Function]:function
+.date.YearUTC:[object Function]:function
 .dateToString:[object Function]:function
 .dateToStringUTC:[object Function]:function
 .Enum:[object Function]:function
