@@ -1,6 +1,7 @@
 import { isString, isInteger, isDate } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _YearUTC } from './_YearUTC.js';
+import { __includes } from '../compare/__includes.js';
 
 /**
  * YearUTC
@@ -21,7 +22,7 @@ export const YearUTC = (
   }
 
   if (isString(value)) {
-    if (!['this', 'last', 'next'].includes(value.toLowerCase())) {
+    if (!__includes(['this', 'last', 'next'], value.toLowerCase())) {
       throw new TypeError(
         `YearUTC args(value:${value}) is not this | last | next`,
       );

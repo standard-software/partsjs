@@ -1,6 +1,7 @@
 import { isString, isInteger, isDate } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _DayUTC } from './_DayUTC.js';
+import { __includes } from '../compare/__includes.js';
 
 /**
  * Day
@@ -21,10 +22,9 @@ export const DayUTC = (
   }
 
   if (isString(value)) {
-    if (![
+    if (!__includes([
       'this', 'last', 'next', 'today', 'yesterday', 'tomorrow',
-    ].includes(value.toLowerCase())) {
-
+    ], value.toLowerCase())) {
       throw new TypeError(
         `DayUTC args(value:${value}) is not this | last | next`,
       );

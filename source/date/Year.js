@@ -1,6 +1,7 @@
 import { isString, isInteger, isDate } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Year } from './_Year.js';
+import { __includes } from '../compare/__includes.js';
 
 /**
  * Year
@@ -26,7 +27,7 @@ export const Year = (
   }
 
   if (isString(value)) {
-    if (!['this', 'last', 'next'].includes(value.toLowerCase())) {
+    if (!__includes(['this', 'last', 'next'], value.toLowerCase())) {
       throw new TypeError(
         `Year args(value:${value}) is not this | last | next`,
       );

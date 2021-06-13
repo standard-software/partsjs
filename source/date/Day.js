@@ -1,6 +1,7 @@
 import { isString, isInteger, isDate } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Day } from './_Day.js';
+import { __includes } from '../compare/__includes.js';
 
 /**
  * Day
@@ -26,9 +27,9 @@ export const Day = (
   }
 
   if (isString(value)) {
-    if (![
+    if (!__includes([
       'this', 'last', 'next', 'today', 'yesterday', 'tomorrow',
-    ].includes(value.toLowerCase())) {
+    ], value.toLowerCase())) {
       throw new TypeError(
         `Day args(value:${value}) is not this | last | next`,
       );
