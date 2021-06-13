@@ -346,15 +346,14 @@ You can now use the functions of the parts.js object.
   - support full object parameter
 - add date.InvalidDate()
 - update parseInt testCode
-- update Today
-  - delete time info
-  - support UTC
+- delete Today
+  - replace Day('today')
 - add string.escapeRegExp
 - add date.minutesToTexts
 - add date.textsToMinutes
 - add checkNotEqual
 - update instanceof code
-- add function Year
+- add function Year/YearUTC/Month/MonthUTC/Day/DayUTC
 
 ### 10.5.0
 #### 2021/03/29(Mon)

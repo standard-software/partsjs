@@ -1,7 +1,7 @@
 import { _Year } from './_Year.js';
 
 /**
- * Year
+ * YearUTC
  */
 export const _YearUTC = (
   value,

@@ -2,10 +2,14 @@ import _YearJs from './_Year.js';
 import YearJs from './Year.js';
 import _YearUTCJs from './_YearUTC.js';
 import YearUTCJs from './YearUTC.js';
-import _ThisMonthJs from './_ThisMonth.js';
-import ThisMonthJs from './ThisMonth.js';
-import _TodayJs from './_Today.js';
-import TodayJs from './Today.js';
+import _MonthJs from './_Month.js';
+import MonthJs from './Month.js';
+import _MonthUTCJs from './_MonthUTC.js';
+import MonthUTCJs from './MonthUTC.js';
+import _DayJs from './_Day.js';
+import DayJs from './Day.js';
+import _DayUTCJs from './_DayUTC.js';
+import DayUTCJs from './DayUTC.js';
 import isInvalidDateJs from './isInvalidDate.js';
 import InvalidDateJs from './InvalidDate.js';
 import _DatetimeJs from './_Datetime.js';
@@ -42,8 +46,10 @@ const dateJs = {
   ..._textsToMinutesJs,
   ..._YearJs,
   ..._YearUTCJs,
-  ..._ThisMonthJs,
-  ..._TodayJs,
+  ..._MonthJs,
+  ..._MonthUTCJs,
+  ..._DayJs,
+  ..._DayUTCJs,
 
   ...DatetimeJs,
   ...DatetimeUTCJs,
@@ -59,8 +65,10 @@ const dateJs = {
   ...textsToMinutesJs,
   ...YearJs,
   ...YearUTCJs,
-  ...ThisMonthJs,
-  ...TodayJs,
+  ...MonthJs,
+  ...MonthUTCJs,
+  ...DayJs,
+  ...DayUTCJs,
 };
 
 export const {
@@ -76,8 +84,10 @@ export const {
   _textsToMinutes,
   _Year,
   _YearUTC,
-  _ThisMonth,
-  _Today,
+  _Month,
+  _MonthUTC,
+  _Day,
+  _DayUTC,
 
   Datetime,
   DatetimeUTC,
@@ -91,8 +101,10 @@ export const {
   textsToMinutes,
   Year,
   YearUTC,
-  ThisMonth,
-  Today,
+  Month,
+  MonthUTC,
+  Day,
+  DayUTC,
 
   isInvalidDate,
   InvalidDate,
@@ -111,8 +123,10 @@ export default {
   _textsToMinutes,
   _Year,
   _YearUTC,
-  _ThisMonth,
-  _Today,
+  _Month,
+  _MonthUTC,
+  _Day,
+  _DayUTC,
 
   Datetime,
   DatetimeUTC,
@@ -126,8 +140,10 @@ export default {
   textsToMinutes,
   Year,
   YearUTC,
-  ThisMonth,
-  Today,
+  Month,
+  MonthUTC,
+  Day,
+  DayUTC,
 
   isInvalidDate,
   InvalidDate,

@@ -1,11 +1,11 @@
 import { isString, isInteger, isDate } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
-import { _YearUTC } from './_YearUTC.js';
+import { _DayUTC } from './_DayUTC.js';
 
 /**
- * YearUTC
+ * Day
  */
-export const YearUTC = (
+export const DayUTC = (
   value,
   sourceDate = (new Date()),
 ) => {
@@ -21,23 +21,26 @@ export const YearUTC = (
   }
 
   if (isString(value)) {
-    if (!['this', 'last', 'next'].includes(value.toLowerCase())) {
+    if (![
+      'this', 'last', 'next', 'today', 'yesterday', 'tomorrow',
+    ].includes(value.toLowerCase())) {
+
       throw new TypeError(
-        `YearUTC args(value:${value}) is not this | last | next`,
+        `DayUTC args(value:${value}) is not this | last | next`,
       );
     }
   } else if (!isInteger(value)) {
     throw new TypeError(
-      `YearUTC args(value:${value}) is not integer`,
+      `DayUTC args(value:${value}) is not integer`,
     );
   }
   if (!isDate(sourceDate)) {
     throw new TypeError(
-      `YearUTC args(sourceDate:${sourceDate}) is not date`,
+      `DayUTC args(sourceDate:${sourceDate}) is not date`,
     );
   }
 
-  return _YearUTC(value, sourceDate);
+  return _DayUTC(value, sourceDate);
 };
 
-export default { YearUTC };
+export default { DayUTC };
