@@ -354,6 +354,7 @@ You can now use the functions of the parts.js object.
 - add date.textsToMinutes
 - add function ThisYear ThisMonth
 - add checkNotEqual
+- update instanceof code
 
 ### 10.5.0
 #### 2021/03/29(Mon)

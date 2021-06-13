@@ -8,7 +8,7 @@ export const _Datetime = function(
   hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
   timezoneOffset = (new Date()).getTimezoneOffset(),
 ) {
-  return new __Datetime(
+  return __Datetime(
     year, month, date,
     hours, minutes, seconds, milliseconds,
     timezoneOffset,

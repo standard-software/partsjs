@@ -14,6 +14,7 @@ export const test_execute_date = (parts) => {
     ThisMonth,
     Today,
     isInvalidDate,
+    InvalidDate,
     Datetime,
     DatetimeUTC,
     dateToString,
@@ -77,6 +78,25 @@ export const test_execute_date = (parts) => {
           new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())),
           Today({ isLocal: false }),
         );
+      });
+    };
+
+    const test_InvalidDate = () => {
+      it('test_InvalidDate', () => {
+
+        checkEqual(true,  isInvalidDate(InvalidDate()));
+        checkEqual(true,  isInvalidDate(new InvalidDate()));
+
+        checkEqual(true,  (new Date()) instanceof Date);
+        checkEqual(false, InvalidDate() instanceof InvalidDate);
+        checkEqual(false, (new InvalidDate()) instanceof InvalidDate);
+        checkEqual(true,  InvalidDate() instanceof Date);
+        checkEqual(true,  (new InvalidDate()) instanceof Date);
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('Date',  (new InvalidDate()).constructor.name);
+          checkEqual('Date',  InvalidDate().constructor.name);
+        }
+
       });
     };
 
@@ -1537,6 +1557,7 @@ export const test_execute_date = (parts) => {
     test_ThisYear();
     test_ThisMonth();
     test_Today();
+    test_InvalidDate();
     test_isInvalidDate();
 
     test_Date_standard();
