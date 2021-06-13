@@ -50,77 +50,77 @@ export const test_execute_date = (parts) => {
           Year('this'),
         );
 
-        // checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year('next'));
-        // checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year('last'));
-        // checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year(1));
-        // checkEqual(new Date(now.getFullYear() + 5, 0, 1, 0, 0, 0, 0), Year(5));
-        // checkEqual(new Date(now.getFullYear() + 10, 0, 1, 0, 0, 0, 0), Year(10));
-        // checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year(-1));
-        // checkEqual(new Date(now.getFullYear() - 5, 0, 1, 0, 0, 0, 0), Year(-5));
-        // checkEqual(new Date(now.getFullYear() - 10, 0, 1, 0, 0, 0, 0), Year(-10));
+        checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year('next'));
+        checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year('last'));
+        checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year(1));
+        checkEqual(new Date(now.getFullYear() + 5, 0, 1, 0, 0, 0, 0), Year(5));
+        checkEqual(new Date(now.getFullYear() + 10, 0, 1, 0, 0, 0, 0), Year(10));
+        checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year(-1));
+        checkEqual(new Date(now.getFullYear() - 5, 0, 1, 0, 0, 0, 0), Year(-5));
+        checkEqual(new Date(now.getFullYear() - 10, 0, 1, 0, 0, 0, 0), Year(-10));
 
-        // checkEqual(new Date(2021, 0, 1), Year('this', new Date(2021, 5, 1)));
-        // checkEqual(new Date(2020, 0, 1), Year('this', new Date(2020, 5, 1)));
+        checkEqual(new Date(2021, 0, 1), Year('this', new Date(2021, 5, 1)));
+        checkEqual(new Date(2020, 0, 1), Year('this', new Date(2020, 5, 1)));
 
-        // var dt = new Date(2021, 0, 1, 0, 0, 0, 0);
-        // checkEqual(new Date(2021, 0, 1, 0, 0, 0, 0), Year('this', dt));
-        // dt.setMinutes(dt.getMinutes() - 1);
-        // checkEqual(new Date(2020, 0, 1, 0, 0, 0, 0), Year('this', dt));
+        var dt = new Date(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(new Date(2021, 0, 1, 0, 0, 0, 0), Year('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(new Date(2020, 0, 1, 0, 0, 0, 0), Year('this', dt));
 
-        // testCounter(100);
-        // var dt = new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0));
-        // checkEqual(new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
-        // checkEqual(new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0)), Year('this', dt, 0));
-        // checkEqual(new Date(Date.UTC(2020, 0, 1, 1, 0, 0, 0)), Year('this', dt, 60));
+        testCounter(100);
+        var dt = new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
+        checkEqual(new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0)), Year('this', dt, 0));
+        checkEqual(new Date(Date.UTC(2020, 0, 1, 1, 0, 0, 0)), Year('this', dt, 60));
 
-        // var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
-        // checkEqual(
-        //   new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)),
-        //   Year('this', dt, -540),
-        // );
-        // checkEqual(
-        //   2021,
-        //   Year('this', dt, -540).getFullYear(),
-        // );
-        // checkEqual(
-        //   new Date(Date.UTC(2019, 11, 31, 16, 0, 0, 0)),
-        //   Year('this', dt, -480),
-        // );
-        // checkEqual(
-        //   2020,
-        //   Year('this', dt, -480).getFullYear(),
-        // );
+        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        checkEqual(
+          new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)),
+          Year('this', dt, -540),
+        );
+        checkEqual(
+          2021,
+          Year('this', dt, -540).getFullYear(),
+        );
+        checkEqual(
+          new Date(Date.UTC(2019, 11, 31, 16, 0, 0, 0)),
+          Year('this', dt, -480),
+        );
+        checkEqual(
+          2020,
+          Year('this', dt, -480).getFullYear(),
+        );
 
-        // // object parameter
-        // var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
-        // checkEqual(
-        //   2020,
-        //   Year({
-        //     value: 'this',
-        //     sourceDate: dt,
-        //     timezoneOffset: -480,
-        //   }).getFullYear(),
-        // );
-        // checkEqual(
-        //   2020,
-        //   Year(
-        //     'this',
-        //     {
-        //       sourceDate: dt,
-        //       timezoneOffset: -480,
-        //     },
-        //   ).getFullYear(),
-        // );
-        // checkEqual(
-        //   2020,
-        //   Year(
-        //     'this',
-        //     dt,
-        //     {
-        //       timezoneOffset: -480,
-        //     },
-        //   ).getFullYear(),
-        // );
+        // object parameter
+        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        checkEqual(
+          2020,
+          Year({
+            value: 'this',
+            sourceDate: dt,
+            timezoneOffset: -480,
+          }).getFullYear(),
+        );
+        checkEqual(
+          2020,
+          Year(
+            'this',
+            {
+              sourceDate: dt,
+              timezoneOffset: -480,
+            },
+          ).getFullYear(),
+        );
+        checkEqual(
+          2020,
+          Year(
+            'this',
+            dt,
+            {
+              timezoneOffset: -480,
+            },
+          ).getFullYear(),
+        );
 
       });
     };
@@ -1978,17 +1978,11 @@ export const test_execute_date = (parts) => {
     };
 
     test_Year();
-<<<<<<< Updated upstream
-    // test_YearUTC();
-    test_ThisMonth();
-    test_Today();
-=======
     test_YearUTC();
     test_Month();
     test_MonthUTC();
     test_Day();
     test_DayUTC();
->>>>>>> Stashed changes
     test_InvalidDate();
     test_isInvalidDate();
 
