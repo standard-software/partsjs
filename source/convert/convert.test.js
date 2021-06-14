@@ -685,6 +685,11 @@ export const test_execute_convert = (parts) => {
           checkEqual(7,         parseInt('07'));
           checkEqual(0,         parseInt('08'));
           checkEqual(0,         parseInt('09'));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(6,         parseInt('06'));
+          checkEqual(7,         parseInt('07'));
+          checkEqual(NaN,       parseInt('08'));
+          checkEqual(NaN,       parseInt('09'));
         } else {
           checkEqual(6,         parseInt('06'));
           checkEqual(7,         parseInt('07'));
