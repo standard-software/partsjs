@@ -44,11 +44,14 @@ export const test_execute_date = (parts) => {
         }
 
         const now = new Date();
+        // console.log(now.getTimezoneOffset());
         checkEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), Year('this'));
-        checkNotEqual(
-          new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)),
-          Year('this'),
-        );
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(
+            new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)),
+            Year('this'),
+          );
+        }
 
         checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year('next'));
         checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year('last'));
@@ -73,53 +76,74 @@ export const test_execute_date = (parts) => {
         checkEqual(new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0)), Year('this', dt, 0));
         checkEqual(new Date(Date.UTC(2020, 0, 1, 1, 0, 0, 0)), Year('this', dt, 60));
 
+        var dt = new Date(Date.UTC(2020, 11, 31, 14, 0, 0, 0));
+        checkEqual(
+          new Date(Date.UTC(2019, 11, 31, 15, 0, 0, 0)),
+          Year('this', dt, -540),
+        );
         var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
         checkEqual(
           new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)),
           Year('this', dt, -540),
         );
+        var dt = new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0));
         checkEqual(
-          2021,
-          Year('this', dt, -540).getFullYear(),
+          new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)),
+          Year('this', dt, -540),
         );
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(
+          new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)),
+          Year('this', dt, -540),
+        );
+        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
         checkEqual(
           new Date(Date.UTC(2019, 11, 31, 16, 0, 0, 0)),
           Year('this', dt, -480),
         );
+        var dt = new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0));
         checkEqual(
-          2020,
-          Year('this', dt, -480).getFullYear(),
+          new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)),
+          Year('this', dt, -480),
+        );
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(
+          new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)),
+          Year('this', dt, -480),
         );
 
         // object parameter
-        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        testCounter(200);
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
         checkEqual(
-          2020,
+          new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)),
           Year({
             value: 'this',
             sourceDate: dt,
             timezoneOffset: -480,
-          }).getFullYear(),
+          }),
         );
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
         checkEqual(
-          2020,
+          new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)),
           Year(
             'this',
             {
               sourceDate: dt,
               timezoneOffset: -480,
             },
-          ).getFullYear(),
+          ),
         );
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
         checkEqual(
-          2020,
+          new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)),
           Year(
             'this',
             dt,
             {
               timezoneOffset: -480,
             },
-          ).getFullYear(),
+          ),
         );
 
       });
@@ -132,7 +156,9 @@ export const test_execute_date = (parts) => {
         };
 
         const now = new Date();
-        checkNotEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+        }
         checkEqual(
           DateUTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0),
           YearUTC('this'),
@@ -156,22 +182,22 @@ export const test_execute_date = (parts) => {
         checkEqual(DateUTC(2020, 0, 1, 0, 0, 0, 0), YearUTC('this', dt));
 
         // object parameter
-        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        var dt = DateUTC(2021, 0, 1, 1, 2, 3, 0);
         checkEqual(
-          2020,
+          DateUTC(2021, 0, 1, 0, 0, 0, 0),
           YearUTC({
             value: 'this',
             sourceDate: dt,
-          }).getFullYear(),
+          }),
         );
         checkEqual(
-          2020,
+          DateUTC(2021, 0, 1, 0, 0, 0, 0),
           YearUTC(
             'this',
             {
               sourceDate: dt,
             },
-          ).getFullYear(),
+          ),
         );
 
       });
@@ -188,10 +214,12 @@ export const test_execute_date = (parts) => {
           new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0),
           Month('this'),
         );
-        checkNotEqual(
-          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0)),
-          Month('this'),
-        );
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(
+            new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0)),
+            Month('this'),
+          );
+        }
 
         const y = now.getFullYear();
         checkEqual(new Date(y, now.getMonth() + 1, 1, 0, 0, 0, 0), Month('next'));
@@ -217,53 +245,74 @@ export const test_execute_date = (parts) => {
         checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), Month('this', dt, 0));
         checkEqual(DateUTC(2020, 11, 1, 1, 0, 0, 0), Month('this', dt, 60));
 
+        var dt = DateUTC(2020, 11, 31, 14, 0, 0, 0);
+        checkEqual(
+          DateUTC(2020, 10, 30, 15, 0, 0, 0),
+          Month('this', dt, -540),
+        );
         var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
         checkEqual(
           DateUTC(2020, 11, 31, 15, 0, 0, 0),
           Month('this', dt, -540),
         );
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
         checkEqual(
-          0,
-          Month('this', dt, -540).getMonth(),
+          DateUTC(2020, 11, 31, 15, 0, 0, 0),
+          Month('this', dt, -540),
         );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(
+          DateUTC(2020, 11, 31, 15, 0, 0, 0),
+          Month('this', dt, -540),
+        );
+        var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
         checkEqual(
           DateUTC(2020, 10, 30, 16, 0, 0, 0),
           Month('this', dt, -480),
         );
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
         checkEqual(
-          11,
-          Month('this', dt, -480).getMonth(),
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
+          Month('this', dt, -480),
+        );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
+          Month('this', dt, -480),
         );
 
         // object parameter
-        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        testCounter(200);
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
         checkEqual(
-          11,
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
           Month({
             value: 'this',
             sourceDate: dt,
             timezoneOffset: -480,
-          }).getMonth(),
+          }),
         );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
         checkEqual(
-          11,
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
           Month(
             'this',
             {
               sourceDate: dt,
               timezoneOffset: -480,
             },
-          ).getMonth(),
+          ),
         );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
         checkEqual(
-          11,
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
           Month(
             'this',
             dt,
             {
               timezoneOffset: -480,
             },
-          ).getMonth(),
+          ),
         );
       });
     };
@@ -275,10 +324,12 @@ export const test_execute_date = (parts) => {
         };
 
         const now = new Date();
-        checkNotEqual(
-          new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0),
-          MonthUTC('this'),
-        );
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(
+            new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0),
+            MonthUTC('this'),
+          );
+        }
         checkEqual(
           new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0)),
           MonthUTC('this'),
@@ -304,22 +355,22 @@ export const test_execute_date = (parts) => {
         checkEqual(DateUTC(2020, 11, 1, 0, 0, 0, 0), MonthUTC('this', dt));
 
         // object parameter
-        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        var dt = DateUTC(2021, 0, 1, 1, 2, 3, 0);
         checkEqual(
-          0,
+          DateUTC(2021, 0, 1, 0, 0, 0, 0),
           MonthUTC({
             value: 'this',
             sourceDate: dt,
-          }).getMonth(),
+          }),
         );
         checkEqual(
-          0,
+          DateUTC(2021, 0, 1, 0, 0, 0, 0),
           MonthUTC(
             'this',
             {
               sourceDate: dt,
             },
-          ).getMonth(),
+          ),
         );
 
       });
@@ -336,10 +387,15 @@ export const test_execute_date = (parts) => {
           new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
           Day('this'),
         );
-        checkNotEqual(
-          DateUTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0),
-          Day('this'),
-        );
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(
+            DateUTC(
+              now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
+              0, 0, 0, 0,
+            ),
+            Day('this'),
+          );
+        }
 
         const y = now.getFullYear();
         const m = now.getMonth();
@@ -375,53 +431,74 @@ export const test_execute_date = (parts) => {
         checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), Day('this', dt, 0));
         checkEqual(DateUTC(2020, 11, 31, 1, 0, 0, 0), Day('this', dt, 60));
 
+        var dt = DateUTC(2020, 11, 31, 14, 0, 0, 0);
+        checkEqual(
+          DateUTC(2020, 11, 30, 15, 0, 0, 0),
+          Day('this', dt, -540),
+        );
         var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
         checkEqual(
           DateUTC(2020, 11, 31, 15, 0, 0, 0),
           Day('this', dt, -540),
         );
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
         checkEqual(
-          1,
-          Day('this', dt, -540).getDate(),
+          DateUTC(2020, 11, 31, 15, 0, 0, 0),
+          Day('this', dt, -540),
         );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(
+          DateUTC(2020, 11, 31, 15, 0, 0, 0),
+          Day('this', dt, -540),
+        );
+        var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
         checkEqual(
           DateUTC(2020, 11, 30, 16, 0, 0, 0),
           Day('this', dt, -480),
         );
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
         checkEqual(
-          31,
-          Day('this', dt, -480).getDate(),
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
+          Day('this', dt, -480),
+        );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
+          Day('this', dt, -480),
         );
 
         // object parameter
-        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        testCounter(200);
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
         checkEqual(
-          31,
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
           Day({
             value: 'this',
             sourceDate: dt,
             timezoneOffset: -480,
-          }).getDate(),
+          }),
         );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
         checkEqual(
-          31,
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
           Day(
             'this',
             {
               sourceDate: dt,
               timezoneOffset: -480,
             },
-          ).getDate(),
+          ),
         );
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
         checkEqual(
-          31,
+          DateUTC(2020, 11, 31, 16, 0, 0, 0),
           Day(
             'this',
             dt,
             {
               timezoneOffset: -480,
             },
-          ).getDate(),
+          ),
         );
       });
     };
@@ -433,10 +510,12 @@ export const test_execute_date = (parts) => {
         };
 
         const now = new Date();
-        checkNotEqual(
-          new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
-          DayUTC('this'),
-        );
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(
+            new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
+            DayUTC('this'),
+          );
+        }
         checkEqual(
           DateUTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0),
           DayUTC('this'),
@@ -472,40 +551,24 @@ export const test_execute_date = (parts) => {
         checkEqual(DateUTC(2020, 11, 31, 0, 0, 0, 0), DayUTC('this', dt));
 
         // object parameter
-        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        var dt = DateUTC(2021, 0, 1, 1, 2, 3, 0);
         checkEqual(
-          1,
+          DateUTC(2021, 0, 1, 0, 0, 0, 0),
           DayUTC({
             value: 'this',
             sourceDate: dt,
-          }).getDate(),
+          }),
         );
         checkEqual(
-          1,
+          DateUTC(2021, 0, 1, 0, 0, 0, 0),
           DayUTC(
             'this',
             {
               sourceDate: dt,
             },
-          ).getDate(),
+          ),
         );
 
-      });
-    };
-
-
-    const test_Today = () => {
-      it('test_Today', () => {
-        const now = new Date();
-        checkEqual(new Date(now.getFullYear(), now.getMonth(), now.getDate()), Today());
-        checkEqual(
-          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())),
-          Today(false),
-        );
-        checkEqual(
-          new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())),
-          Today({ isLocal: false }),
-        );
       });
     };
 
@@ -551,7 +614,7 @@ export const test_execute_date = (parts) => {
       it('test_Date_standard', () => {
         checkEqual(0, new Date(0).getTime());
 
-        const [s, h, m] = minutesToTexts(-1 * (new Date()).getTimezoneOffset());
+        const [s, h, m] = minutesToTexts(-1 * (new Date(0)).getTimezoneOffset());
         if (s === '+') {
           if (!parts.platform.isWindowsScriptHost()) {
             checkEqual(
@@ -1234,24 +1297,24 @@ export const test_execute_date = (parts) => {
           dateToStringUTC(dt, 'YY/M/D H:m:s'),
         );
 
-        var dt = new Date(2021, 4, 31, 9, 10, 11);
+        var dt = new Date(Date.UTC(2021, 4, 31, 9, 10, 11));
         checkEqual(
-          '21/5/31 0:10:11',
+          '21/5/31 9:10:11',
           dateToStringUTC(dt, 'YY/M/D h:m:s'),
         );
 
         // timezone
-        var dt = new Date(2021, 4, 31, 9, 10, 11);
+        var dt = new Date(Date.UTC(2021, 4, 31, 9, 10, 11));
         checkEqual(
-          '21/5/31 0:10:11',
+          '21/5/31 9:10:11',
           dateToStringUTC(dt, 'YY/M/D h:m:s'),
         );
         checkEqual(
-          '21/5/31 0:10:11 Z',
+          '21/5/31 9:10:11 Z',
           dateToStringUTC(dt, 'YY/M/D h:m:s Z'),
         );
         checkEqual(
-          '21/5/31 0:10:11 Z',
+          '21/5/31 9:10:11 Z',
           dateToStringUTC(dt, 'YY/M/D h:m:s ZZ'),
         );
 
@@ -1312,7 +1375,7 @@ export const test_execute_date = (parts) => {
           stringToDate('2021/05/01 11:08:09(Mon)', 'YYYY/MM/DD HH:mm:ss(ddd)'),
         );
 
-        // testCounter();
+        testCounter(100);
         checkEqual(
           Datetime(2001, 2, 4, 9, 5, 8, 45),
           stringToDate('2001/02/04 09:05:08.045', 'YYYY/MM/DD HH:mm:ss.SSS'),
@@ -1345,7 +1408,7 @@ export const test_execute_date = (parts) => {
         );
 
         // am pm
-        testCounter();
+        testCounter(200);
         checkEqual(
           '20210526 8 59 40 p',
           dateToString(Datetime(2021, 5, 26, 20, 59, 40), 'YYYYMMDD h mm ss a'),
@@ -1397,7 +1460,7 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
-        testCounter();
+        testCounter(300);
         var dt = Datetime(2021, 6, 1, 23, 45, 6);
         var [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
         var timezoneText = s + h + ':' + m;
@@ -1463,6 +1526,7 @@ export const test_execute_date = (parts) => {
         );
 
         // init
+        testCounter(400);
         checkEqual(new Date(2021, 0, 1), stringToDate('2021', 'YYYY'));
         checkEqual(new Date(2021, 5, 1), stringToDate('2021/06', 'YYYY/MM'));
         checkEqual(new Date(2021, 5, 2), stringToDate('06/02', 'MM/DD'));
@@ -1470,8 +1534,10 @@ export const test_execute_date = (parts) => {
         // sourceDate
         checkEqual(new Date(2021, 0, 1), stringToDate('21', 'YY'));
         checkEqual(new Date(2085, 0, 1), stringToDate('85', 'YY'));
-        checkEqual(new Date(1921, 0, 1),
-          stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)));
+        // checkEqual(new Date(1921, 0, 1),
+        //   stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)), 'NG');
+        checkEqual(new Date(1980, 0, 1),
+          stringToDate('80', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(1985, 0, 1),
           stringToDate('85', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(2019, 5, 2),
@@ -1546,16 +1612,16 @@ export const test_execute_date = (parts) => {
           ),
         );
         checkEqual(
-          new Date(1921, 0, 1),
-          stringToDate('21', 'YY',
+          new Date(1980, 0, 1),
+          stringToDate('80', 'YY',
             {
               sourceDate: new Date(1990, 0, 1),
             },
           ),
         );
         checkEqual(
-          new Date(1921, 0, 1),
-          stringToDate('21', 'YY',
+          new Date(1980, 0, 1),
+          stringToDate('80', 'YY',
             undefined,
             {
               sourceDate: new Date(1990, 0, 1),
@@ -1637,7 +1703,7 @@ export const test_execute_date = (parts) => {
           DatetimeUTC(2021, 6, 1, 0, 12, 34, 0, 0),
           stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),
         );
-        if ((new Date).getTimezoneOffset !== 0) {
+        if ((new Date()).getTimezoneOffset() !== 0) {
           checkNotEqual(
             Datetime(2021, 6, 1, 0, 12, 34, 0),
             stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'),

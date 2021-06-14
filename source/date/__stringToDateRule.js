@@ -1,4 +1,4 @@
-import { isNull } from '../type/type.js';
+import { isNull, isUndefined } from '../type/type.js';
 import { __monthNames } from '../date/__monthNames.js';
 import { __dayOfWeekNames } from '../date/__dayOfWeekNames.js';
 import { __includes } from '../compare/__includes.js';
@@ -136,14 +136,27 @@ __stringToDateRule.finalize = (targetDate) => {
     timezoneOffset,
   } = datetimeInfo;
 
-  targetDate.setUTCFullYear(year, month, date);
-  targetDate.setUTCHours(
-    flagPM === true ? hours + 12 : hours,
-    minutes, seconds, milliseconds,
-  );
-  if (!isNull(datetimeInfo.timezoneOffset)) {
-    targetDate.setMinutes(targetDate.getMinutes() + datetimeInfo.timezoneOffset);
+  if (isUndefined(timezoneOffset)) {
+    targetDate.setFullYear(year, month, date);
+    targetDate.setHours(
+      flagPM === true ? hours + 12 : hours,
+      minutes, seconds, milliseconds,
+    );
+  } else if (isNull(timezoneOffset)) {
+    targetDate.setUTCFullYear(year, month, date);
+    targetDate.setUTCHours(
+      flagPM === true ? hours + 12 : hours,
+      minutes, seconds, milliseconds,
+    );
+  } else {
+    targetDate.setUTCFullYear(year, month, date);
+    targetDate.setUTCHours(
+      flagPM === true ? hours + 12 : hours,
+      minutes, seconds, milliseconds,
+    );
+    targetDate.setMinutes(targetDate.getMinutes() + timezoneOffset);
   }
+
   return timezoneOffset;
 };
 

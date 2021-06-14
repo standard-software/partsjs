@@ -93,7 +93,15 @@ const outputValue = (value) => {
 
 export const checkCompare = (compareFunc, a, b, result, message = '') => {
   if (!isString(message)) {
-    throw new TypeError('checkEqual args message is not string');
+    throw new TypeError(`checkCompare args:message(=${message}) is not string`);
+  }
+  let conditionExpressText = '';
+  if (result === true) {
+    conditionExpressText = 'A !== B';
+  } else if (result === false) {
+    conditionExpressText = 'A === B';
+  } else {
+    throw new Error(`checkCompare args:result(=${result}) is not boolean`);
   }
 
   testFrame.counter += 1;
@@ -111,7 +119,7 @@ export const checkCompare = (compareFunc, a, b, result, message = '') => {
       (message === ''
         ? ''
         : `${indent}  Message: ${message}\n`) +
-    `${indent}  A !== B\n` +
+    `${indent}  ${conditionExpressText}\n` +
     `${indent}  A = ${outputValue(a)}\n` +
     `${indent}  B = ${outputValue(b)}`;
   console.log(output);

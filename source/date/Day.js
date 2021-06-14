@@ -1,4 +1,4 @@
-import { isString, isInteger, isDate } from '../type/isType.js';
+import { isString, isInteger, isDate, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Day } from './_Day.js';
 import { __includes } from '../compare/__includes.js';
@@ -9,18 +9,18 @@ import { __includes } from '../compare/__includes.js';
 export const Day = (
   value,
   sourceDate = (new Date()),
-  timezoneOffset = (new Date()).getTimezoneOffset(),
+  timezoneOffset,
 ) => {
   if (isObjectParameter(value, 'value', 'sourceDate, timezoneOffset')) {
     ({
       value,
       sourceDate = (new Date()),
-      timezoneOffset = (new Date()).getTimezoneOffset(),
+      timezoneOffset,
     } = value);
   } else if (isObjectParameter(sourceDate, '', 'sourceDate, timezoneOffset', 1)) {
     ({
       sourceDate = (new Date()),
-      timezoneOffset = (new Date()).getTimezoneOffset(),
+      timezoneOffset,
     } = sourceDate);
   } else if (isObjectParameter(timezoneOffset, 'timezoneOffset', '')) {
     ({ timezoneOffset } = timezoneOffset);
@@ -44,7 +44,7 @@ export const Day = (
       `Day args(sourceDate:${sourceDate}) is not date`,
     );
   }
-  if (!isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
     throw new TypeError(
       `Day args(timezoneOffset:${timezoneOffset}) is not integer`,
     );

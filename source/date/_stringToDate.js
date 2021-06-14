@@ -16,7 +16,7 @@ import { _Year } from './_Year.js';
 
 export const _stringToDate = (
   str, format,
-  timezoneOffset = (new Date()).getTimezoneOffset(),
+  timezoneOffset,
   sourceDate = _Year('this'),
   rule = __stringToDateRule.Default(),
 ) => {
@@ -29,6 +29,7 @@ export const _stringToDate = (
   }
 
   __stringToDateRule.initialize(sourceDate, timezoneOffset);
+  // console.log({ sourceDate, timezoneOffset });
 
   const keys = _objectKeys(rule);
   keys.sort(
@@ -76,6 +77,7 @@ export const _stringToDate = (
   );
 
   const matchResult = str.match(new RegExp(`${replaceResult.result}`));
+  // console.log({ matchResult, replaceResult });
   if (!Array.isArray(matchResult)) {
     return InvalidDate();
   }
@@ -94,9 +96,14 @@ export const _stringToDate = (
   }
   const timezoneOffsetMin = __stringToDateRule.finalize(result);
 
-  if (_dateToString(
-    result, format, timezoneOffsetMin, rule.toStringRule,
-  ) === str) {
+  // console.log(
+  //   result, timezoneOffsetMin,
+  //   _dateToString(result, format, timezoneOffsetMin, rule.toStringRule),
+  // );
+  if (
+    _dateToString(result, format, timezoneOffsetMin, rule.toStringRule)
+    === str
+  ) {
     return result;
   } else {
     return InvalidDate();

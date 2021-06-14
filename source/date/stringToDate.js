@@ -1,4 +1,4 @@
-import { isDate, isString, isObject, isInteger } from '../type/isType.js';
+import { isDate, isString, isObject, isInteger, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Year } from './_Year.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
@@ -6,21 +6,21 @@ import { _stringToDate } from './_stringToDate.js';
 
 export const stringToDate = (
   str, format,
-  timezoneOffset = (new Date()).getTimezoneOffset(),
+  timezoneOffset,
   sourceDate = _Year('this'),
   rule = __stringToDateRule.Default(),
 ) => {
   if (isObjectParameter(str, 'str, format', 'timezoneOffset, sourceDate, rule')) {
     ({
       str, format,
-      timezoneOffset = (new Date()).getTimezoneOffset(),
+      timezoneOffset,
       sourceDate = _Year('this'),
       rule = __stringToDateRule.Default(),
     } = str);
   } else if (isObjectParameter(format, 'format', 'timezoneOffset, sourceDate, rule')) {
     ({
       format,
-      timezoneOffset = (new Date()).getTimezoneOffset(),
+      timezoneOffset,
       sourceDate = _Year('this'),
       rule = __stringToDateRule.Default(),
     } = format);
@@ -28,7 +28,7 @@ export const stringToDate = (
     timezoneOffset, '', 'timezoneOffset, sourceDate, rule', 1,
   )) {
     ({
-      timezoneOffset = (new Date()).getTimezoneOffset(),
+      timezoneOffset,
       sourceDate = _Year('this'),
       rule = __stringToDateRule.Default(),
     } = timezoneOffset);
@@ -51,7 +51,7 @@ export const stringToDate = (
       `stringToDate args(format:${format}) is not string`,
     );
   }
-  if (!isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
     throw new TypeError(
       `stringToDate args(timezoneOffset:${timezoneOffset}) is not integer`,
     );

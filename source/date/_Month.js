@@ -1,4 +1,4 @@
-import { isNull, isString } from '../type/isType.js';
+import { isNull, isString, isUndefined } from '../type/isType.js';
 
 /**
  * Month
@@ -13,7 +13,7 @@ const setDateOffsetMin = (date, offsetMin) => {
 export const _Month = (
   value,
   sourceDate = (new Date()),
-  timezoneOffset = (new Date()).getTimezoneOffset(),
+  timezoneOffset,
 ) => {
   if (isString(value)) {
     value = value.toLowerCase();
@@ -26,15 +26,18 @@ export const _Month = (
     }
   }
 
-  const _sourceDate = setDateOffsetMin(sourceDate, timezoneOffset);
+  const s = sourceDate;
   let self;
   if (isNull(timezoneOffset)) {
     self = new Date(Date.UTC(
-      sourceDate.getUTCFullYear(), sourceDate.getUTCMonth() + value, 1, 0, 0, 0, 0,
+      s.getUTCFullYear(), s.getUTCMonth() + value, 1, 0, 0, 0, 0,
     ));
+  } else if (isUndefined(timezoneOffset)) {
+    self = new Date(s.getFullYear(), s.getMonth() + value, 1, 0, 0, 0, 0);
   } else {
+    const _s = setDateOffsetMin(s, timezoneOffset);
     self = new Date(Date.UTC(
-      _sourceDate.getUTCFullYear(), _sourceDate.getUTCMonth() + value, 1, 0, 0, 0, 0,
+      _s.getUTCFullYear(), _s.getUTCMonth() + value, 1, 0, 0, 0, 0,
     ));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }

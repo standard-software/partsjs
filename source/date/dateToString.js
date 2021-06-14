@@ -1,23 +1,23 @@
-import { isDate, isString, isObject, isInteger } from '../type/isType.js';
+import { isDate, isString, isObject, isInteger, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _dateToString } from './_dateToString.js';
 
 export const dateToString = (
   date,
   format,
-  timezoneOffset = (new Date()).getTimezoneOffset(),
+  timezoneOffset,
   rule = _dateToString.rule.Default(),
 ) => {
   if (isObjectParameter(date, 'date, format', 'timezoneOffset, rule')) {
     ({
       date, format,
-      timezoneOffset = date.getTimezoneOffset(),
+      timezoneOffset,
       rule = _dateToString.rule.Default(),
     } = date);
   } else if (isObjectParameter(format, 'format', 'timezoneOffset, rule')) {
     ({
       format,
-      timezoneOffset = date.getTimezoneOffset(),
+      timezoneOffset,
       rule = _dateToString.rule.Default(),
     } = format);
   } else if (isObjectParameter(timezoneOffset, 'timezoneOffset', 'rule')) {
@@ -39,7 +39,7 @@ export const dateToString = (
       `dateToString args(format:${format}) is not string`,
     );
   }
-  if (!isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
     throw new TypeError(
       `dateToString args(timezoneOffset:${timezoneOffset}) is not integer`,
     );

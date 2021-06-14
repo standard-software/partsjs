@@ -1,4 +1,4 @@
-import { isNull, isString } from '../type/isType.js';
+import { isNull, isString, isUndefined } from '../type/isType.js';
 
 /**
  * Year
@@ -13,7 +13,7 @@ const setDateOffsetMin = (date, offsetMin) => {
 export const _Year = (
   value,
   sourceDate = (new Date()),
-  timezoneOffset = (new Date()).getTimezoneOffset(),
+  timezoneOffset,
 ) => {
   if (isString(value)) {
     value = value.toLowerCase();
@@ -26,12 +26,15 @@ export const _Year = (
     }
   }
 
-  const _sourceDate = setDateOffsetMin(sourceDate, timezoneOffset);
+  const s = sourceDate;
   let self;
   if (isNull(timezoneOffset)) {
-    self = new Date(Date.UTC(sourceDate.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+    self = new Date(Date.UTC(s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+  } else if (isUndefined(timezoneOffset)) {
+    self = new Date(s.getFullYear() + value, 0, 1, 0, 0, 0, 0);
   } else {
-    self = new Date(Date.UTC(_sourceDate.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+    const _s = setDateOffsetMin(s, timezoneOffset);
+    self = new Date(Date.UTC(_s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }
   return self;

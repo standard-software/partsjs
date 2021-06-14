@@ -325,35 +325,40 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
-### 10.6.0 beta
-#### 2021/06/13(Sun)
-- rename DateTime to Datetime
-  - update inside
-- add DatetimeUTC
-- update test for deno for node
-  - Reflect
-  - Intl
-- rename datetimeToString >> dateToString
-  - rename detetomeToStringFunc >> dateToStringRule
-  - add function dateToStringUTC
-  - support timezone
-  - rename dateToString.func >> dateToString.rule
-- update replaceAllArray add args detail
-- update number string convert testcode
-- update equal support Invalid Date
+### 10.6.0
+#### 2021/06/14(Mon)
 - add date.strintToDate date.stringToDateUTC
   - add stringToDateRule
   - support full object parameter
+- rename DateTime to Datetime
+  - update inside
+- add DatetimeUTC
+- rename datetimeToString >> dateToString
+  - rename detetomeToStringFunc >> dateToStringRule
+  - rename dateToString.func >> dateToString.rule
+  - add function dateToStringUTC
+  - support timezone
+- update equal support Invalid Date
 - add date.InvalidDate()
-- update parseInt testCode
 - delete Today
   - replace Day('today')
-- add string.escapeRegExp
+- add function
+  - Year/YearUTC
+  - Month/MonthUTC
+  - Day/DayUTC
+- update test code date
+  - support timezone
 - add date.minutesToTexts
 - add date.textsToMinutes
+- update replaceAllArray add args detail
+- update number string convert testcode
+- update parseInt testCode
+- add string.escapeRegExp
 - add checkNotEqual
 - update instanceof code
-- add function Year/YearUTC/Month/MonthUTC/Day/DayUTC
+- update test for deno for node
+  - Reflect
+  - Intl
 
 ### 10.5.0
 #### 2021/03/29(Mon)
