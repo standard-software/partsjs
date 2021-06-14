@@ -1,15 +1,9 @@
 import { isNull, isString, isUndefined } from '../type/isType.js';
+import { __cloneDate } from '../common/__cloneDate.js';
 
 /**
  * Year
  */
-const cloneDate = (date) => new Date(date.getTime());
-const setDateOffsetMin = (date, offsetMin) => {
-  const result = cloneDate(date);
-  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
-  return result;
-};
-
 export const _Year = (
   value,
   sourceDate = (new Date()),
@@ -28,12 +22,13 @@ export const _Year = (
 
   const s = sourceDate;
   let self;
-  if (isNull(timezoneOffset)) {
-    self = new Date(Date.UTC(s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
-  } else if (isUndefined(timezoneOffset)) {
+  if (isUndefined(timezoneOffset)) {
     self = new Date(s.getFullYear() + value, 0, 1, 0, 0, 0, 0);
+  } else if (isNull(timezoneOffset)) {
+    self = new Date(Date.UTC(s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
   } else {
-    const _s = setDateOffsetMin(s, timezoneOffset);
+    const _s = __cloneDate(s);
+    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
     self = new Date(Date.UTC(_s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }

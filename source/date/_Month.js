@@ -1,15 +1,9 @@
 import { isNull, isString, isUndefined } from '../type/isType.js';
+import { __cloneDate } from '../common/__cloneDate.js';
 
 /**
  * Month
  */
-const cloneDate = (date) => new Date(date.getTime());
-const setDateOffsetMin = (date, offsetMin) => {
-  const result = cloneDate(date);
-  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
-  return result;
-};
-
 export const _Month = (
   value,
   sourceDate = (new Date()),
@@ -28,14 +22,15 @@ export const _Month = (
 
   const s = sourceDate;
   let self;
-  if (isNull(timezoneOffset)) {
+  if (isUndefined(timezoneOffset)) {
+    self = new Date(s.getFullYear(), s.getMonth() + value, 1, 0, 0, 0, 0);
+  } else if (isNull(timezoneOffset)) {
     self = new Date(Date.UTC(
       s.getUTCFullYear(), s.getUTCMonth() + value, 1, 0, 0, 0, 0,
     ));
-  } else if (isUndefined(timezoneOffset)) {
-    self = new Date(s.getFullYear(), s.getMonth() + value, 1, 0, 0, 0, 0);
   } else {
-    const _s = setDateOffsetMin(s, timezoneOffset);
+    const _s = __cloneDate(s);
+    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
     self = new Date(Date.UTC(
       _s.getUTCFullYear(), _s.getUTCMonth() + value, 1, 0, 0, 0, 0,
     ));

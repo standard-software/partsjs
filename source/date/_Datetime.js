@@ -1,18 +1,28 @@
-import { __Datetime } from './__Datetime.js';
+import { isNull, isUndefined } from '../type/type.js';
 
 /**
  * Datetime
  */
 export const _Datetime = function(
   year = 1970, month = 1, date = 1,
-  hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
+  hour = 0, minute = 0, second = 0, millisecond = 0,
   timezoneOffset,
 ) {
-  return __Datetime(
-    year, month, date,
-    hours, minutes, seconds, milliseconds,
-    timezoneOffset,
-  );
+  const self = new Date(0);
+
+  if (isUndefined(timezoneOffset)) {
+    self.setFullYear(year, month - 1, date);
+    self.setHours(hour, minute, second, millisecond);
+  } else if (isNull(timezoneOffset)) {
+    self.setUTCFullYear(year, month - 1, date);
+    self.setUTCHours(hour, minute, second, millisecond);
+  } else {
+    self.setUTCFullYear(year, month - 1, date);
+    self.setUTCHours(hour, minute, second, millisecond);
+    self.setMinutes(self.getMinutes() + timezoneOffset);
+  }
+
+  return self;
 };
 
 export default { _Datetime };
