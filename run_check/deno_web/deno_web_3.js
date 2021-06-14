@@ -1,4 +1,5 @@
-import { VERSION } from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.5.0/source/index.js';
+// eslint-disable-next-line max-len
+import { VERSION } from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.6.0/source/index.js';
 
 const parts = { VERSION };
 

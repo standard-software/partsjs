@@ -183,20 +183,20 @@ var test_execute_index = function test_execute_index(parts) {
           return result;
         };
 
-        checkEqual(399, propertyCountForParts(parts));
+        checkEqual(402, propertyCountForParts(parts));
         checkEqual(17, propertyCount(parts.platform));
         checkEqual(7, propertyCount(parts.common));
         checkEqual(262, propertyCount(parts.type));
         checkEqual(17, propertyCount(parts.syntax));
-        checkEqual(12, propertyCount(parts.test));
+        checkEqual(13, propertyCount(parts.test));
         checkEqual(44, propertyCount(parts.compare));
         checkEqual(35, propertyCount(parts.convert));
         checkEqual(19, propertyCount(parts.number));
-        checkEqual(94, propertyCount(parts.string));
+        checkEqual(96, propertyCount(parts.string));
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
         checkEqual(48, propertyCount(parts.array.operation));
-        checkEqual(24, propertyCount(parts.date));
+        checkEqual(34, propertyCount(parts.date));
         checkEqual(2, propertyCount(parts.system));
         checkEqual(3, propertyCount(parts.system.wsh));
         checkEqual(20, propertyCount(parts.system.consoleHook));
@@ -260,6 +260,7 @@ var test_execute_index = function test_execute_index(parts) {
       describe = _parts$test3.describe,
       testFrame = _parts$test3.testFrame;
   testFrame.outputDescribe = false;
+  testFrame.outputIt = false;
   describe('test_execute_index', function () {
     (0, _commonTest.test_execute_common)(parts);
     (0, _typeTest.test_execute_type)(parts);
@@ -2656,13 +2657,15 @@ var test_execute_type = function test_execute_type(parts) {
         } // Reflect
 
 
+        testCounter();
+
         if (parts.platform.isWindowsScriptHost()) {
           checkEqual(true, typeof Reflect === 'undefined');
         } else if (parts.platform.isGasRhino()) {
           checkEqual(true, typeof Reflect === 'undefined');
         } else if (parts.platform.isInternetExplorer()) {
           checkEqual(true, typeof Reflect === 'undefined');
-        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkType('object', '[object Reflect]', Reflect);
         } else {
           checkType('object', '[object Object]', Reflect);
@@ -2673,9 +2676,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(true, typeof Intl === 'undefined');
         } else if (parts.platform.isGasRhino()) {
           checkEqual(true, typeof Intl === 'undefined');
-        } else if (parts.platform.isDeno()) {
-          checkEqual(true, typeof Intl === 'undefined');
-        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkType('object', '[object Intl]', Intl);
         } else {
           checkType('object', '[object Object]', Intl);
@@ -2845,13 +2846,15 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual('WebAssembly', typeName(WebAssembly));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        testCounter();
+
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkEqual('Reflect', typeName(Reflect));
         } else {
           checkEqual('Object', typeName(Reflect));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
           checkEqual('Intl', typeName(Intl));
         } else {
           checkEqual('Object', typeName(Intl));
@@ -6102,7 +6105,17 @@ var test_execute_compare = function test_execute_compare(parts) {
           date: new Date('2019/11/02')
         }), 'test_equal date'); // date in array
 
-        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // date ignore
+        checkEqual(false, equal([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equal date'); // invalid date
+
+        checkEqual(true, equal(new Date(''), new Date('')), 'test_equal date'); // invalid date in object
+
+        checkEqual(false, equal({
+          date: new Date('')
+        }, {
+          date: new Date('')
+        }), 'test_equal date'); // invalid date in array
+
+        checkEqual(false, equal([new Date('')], [new Date('')]), 'test_equal date'); // date ignore
 
         var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
@@ -6664,7 +6677,17 @@ var test_execute_compare = function test_execute_compare(parts) {
           date: new Date('2019/11/02')
         }), 'test_equalDeep date'); // date in array
 
-        checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // date ignore
+        checkEqual(true, equalDeep([new Date('2019/11/02')], [new Date('2019/11/02')]), 'test_equalDeep date'); // invalid date
+
+        checkEqual(true, equalDeep(new Date(''), new Date('')), 'test_equal date'); // invalid date in object
+
+        checkEqual(true, equalDeep({
+          date: new Date('')
+        }, {
+          date: new Date('')
+        }), 'test_equal date'); // invalid date in array
+
+        checkEqual(true, equalDeep([new Date('')], [new Date('')]), 'test_equal date'); // date ignore
 
         var equalFuncArray = [equal.func.regExp, equal.func["function"], equal.func.arraySeries, equal.func.object, equal.func.value]; // date
 
@@ -9162,11 +9185,11 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-255', String(-0xFF));
         checkEqual('-16', String(-16));
         checkEqual('-100000', String(-1e+5));
-        checkEqual('-0.00001', String(-1e-5)); // spacial number value
+        checkEqual('-0.00001', String(-1e-5)); // Spacial number
 
         checkEqual('NaN', String(NaN));
         checkEqual('Infinity', String(Infinity));
-        checkEqual('-Infinity', String(-Infinity)); // other type
+        checkEqual('-Infinity', String(-Infinity)); // Other than number type
 
         checkEqual('null', String(null));
         checkEqual('undefined', String(undefined));
@@ -9204,19 +9227,19 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-255', (-0xFF).toString());
         checkEqual('-16', (-16).toString());
         checkEqual('-100000', (-1e+5).toString());
-        checkEqual('-0.00001', (-1e-5).toString()); // spacial number value
+        checkEqual('-0.00001', (-1e-5).toString()); // Spacial number
 
         checkEqual('NaN', NaN.toString());
         checkEqual('Infinity', Infinity.toString());
         checkEqual('-Infinity', (-Infinity).toString());
         checkEqual(-Infinity, -Infinity.toString());
         checkEqual(-Infinity, -Infinity.toString());
-        checkEqual(-Infinity, -'Infinity'); // Decimal number other
+        checkEqual(-Infinity, -'Infinity'); // Non-decimal number
 
         checkEqual('1010.01', 10.25.toString(2));
         checkEqual('22.1', 10.25.toString(4));
         checkEqual('12.2', 10.25.toString(8));
-        checkEqual('a.4', 10.25.toString(16)); // other type
+        checkEqual('a.4', 10.25.toString(16)); // Other than number type
 
         checkEqual(true, isThrown(function () {
           return null.toString();
@@ -9290,7 +9313,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-177', numberToString(-127, 8));
         checkEqual('-12', numberToString(-10, 8));
         checkEqual('-11', numberToString(-3, 2));
-        checkEqual('-1111', numberToString(-15, 2)); // spacial value
+        checkEqual('-1111', numberToString(-15, 2)); // Spacial number
 
         checkEqual(true, isThrown(function () {
           return numberToString(NaN);
@@ -9300,34 +9323,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return numberToString(-Infinity);
-        })); // Exception
-
-        checkEqual(true, isThrown(function () {
-          return numberToString('123', 10);
-        }));
-        checkEqual(false, isThrown(function () {
-          return numberToString(32, 2);
-        }));
-        checkEqual(true, isThrown(function () {
-          return numberToString(32, 2.5);
-        }));
-        checkEqual(true, isThrown(function () {
-          return numberToString(32, 1);
-        }));
-        checkEqual(false, isThrown(function () {
-          return numberToString(32, 36);
-        }));
-        checkEqual(true, isThrown(function () {
-          return numberToString(32, 37);
-        })); // Object Named Parameter
-
-        checkEqual('-32', numberToString({
-          value: -32
-        }));
-        checkEqual('-100000', numberToString({
-          value: -32,
-          radix: 2
-        })); // other type
+        })); // Other than number type
 
         checkEqual(true, isThrown(function () {
           return numberToString(null);
@@ -9358,6 +9354,33 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return numberToString(false);
+        })); // Exception
+
+        checkEqual(true, isThrown(function () {
+          return numberToString('123', 10);
+        }));
+        checkEqual(false, isThrown(function () {
+          return numberToString(32, 2);
+        }));
+        checkEqual(true, isThrown(function () {
+          return numberToString(32, 2.5);
+        }));
+        checkEqual(true, isThrown(function () {
+          return numberToString(32, 1);
+        }));
+        checkEqual(false, isThrown(function () {
+          return numberToString(32, 36);
+        }));
+        checkEqual(true, isThrown(function () {
+          return numberToString(32, 37);
+        })); // Object Named Parameter
+
+        checkEqual('-32', numberToString({
+          value: -32
+        }));
+        checkEqual('-100000', numberToString({
+          value: -32,
+          radix: 2
         }));
       });
     };
@@ -9417,12 +9440,28 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-177', valueToString(-127, 8));
         checkEqual('-12', valueToString(-10, 8));
         checkEqual('-11', valueToString(-3, 2));
-        checkEqual('-1111', valueToString(-15, 2)); // spacial number value
+        checkEqual('-1111', valueToString(-15, 2)); // Spacial number
 
         testCounter(0);
         checkEqual('NaN', valueToString(NaN));
         checkEqual('Infinity', valueToString(Infinity));
-        checkEqual('-Infinity', valueToString(-Infinity)); // Exception
+        checkEqual('-Infinity', valueToString(-Infinity)); // Non-decimal number
+
+        checkEqual('1010.01', valueToString(10.25, 2));
+        checkEqual('22.1', valueToString(10.25, 4));
+        checkEqual('12.2', valueToString(10.25, 8));
+        checkEqual('a.4', valueToString(10.25, 16)); // Other than number type
+
+        checkEqual('null', valueToString(null));
+        checkEqual('undefined', valueToString(undefined));
+        checkEqual('[object Object]', valueToString({}));
+        checkEqual('', valueToString([]));
+        checkEqual('1', valueToString([1]));
+        checkEqual('1,2,3', valueToString([1, 2, 3]));
+        checkEqual('', valueToString(''));
+        checkEqual('a', valueToString('a'));
+        checkEqual('true', valueToString(true));
+        checkEqual('false', valueToString(false)); // Exception
 
         checkEqual(false, isThrown(function () {
           return valueToString('123', 10);
@@ -9449,23 +9488,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual('-100000', valueToString({
           value: -32,
           radix: 2
-        })); // Decimal number other
-
-        checkEqual('1010.01', valueToString(10.25, 2));
-        checkEqual('22.1', valueToString(10.25, 4));
-        checkEqual('12.2', valueToString(10.25, 8));
-        checkEqual('a.4', valueToString(10.25, 16)); // other type
-
-        checkEqual('null', valueToString(null));
-        checkEqual('undefined', valueToString(undefined));
-        checkEqual('[object Object]', valueToString({}));
-        checkEqual('', valueToString([]));
-        checkEqual('1', valueToString([1]));
-        checkEqual('1,2,3', valueToString([1, 2, 3]));
-        checkEqual('', valueToString(''));
-        checkEqual('a', valueToString('a'));
-        checkEqual('true', valueToString(true));
-        checkEqual('false', valueToString(false));
+        }));
       });
     };
 
@@ -9510,7 +9533,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, Number('123.4a'));
         checkEqual(NaN, Number('a123.4'));
         checkEqual(123.45, Number('123.45'));
-        checkEqual(NaN, Number('123.4.5')); // string default value
+        checkEqual(NaN, Number('123.4.5')); // string
 
         checkEqual(NaN, Number('abc')); // space string
 
@@ -9536,7 +9559,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, Number('1e-5'));
         checkEqual(NaN, Number('1.e'));
         checkEqual(NaN, Number('1.e+'));
-        checkEqual(100000, Number('1.e+5')); // Number different
+        checkEqual(100000, Number('1.e+5')); // Non-decimal number
 
         checkEqual(291, Number('0x123'));
 
@@ -9548,22 +9571,22 @@ var test_execute_convert = function test_execute_convert(parts) {
           checkEqual(NaN, Number('-0x123'));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isInternetExplorer()) {
-          checkEqual(NaN, Number('0o123'));
-        } else if (parts.platform.isGasRhino()) {
+        if (parts.platform.isWindowsScriptHost() || parts.platform.isInternetExplorer() || parts.platform.isGasRhino()) {
           checkEqual(NaN, Number('0o123'));
         } else {
           checkEqual(83, Number('0o123'));
         }
 
         checkEqual(NaN, Number('+0o123'));
-        checkEqual(NaN, Number('-0o123'));
+        checkEqual(NaN, Number('-0o123')); // Spacial number
+
         checkEqual(Infinity, Number('Infinity'));
         checkEqual(NaN, Number('infinity'));
         checkEqual(NaN, Number('inf'));
-        checkEqual(NaN, Number('info')); // Number
+        checkEqual(NaN, Number('info'));
+        checkEqual(NaN, Number('NaN'));
+        checkEqual(NaN, Number('nan'));
+        checkEqual(NaN, Number('na')); // Number
 
         checkEqual(123, Number(123));
         checkEqual(-123, Number(-123));
@@ -9571,7 +9594,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1.23, Number(-1.23));
         checkEqual(Infinity, Number(Infinity));
         checkEqual(-Infinity, Number(-Infinity));
-        checkEqual(NaN, Number(NaN)); // Other
+        checkEqual(NaN, Number(NaN)); // Other than number type
 
         checkEqual(0, Number(null)); // !
 
@@ -9631,19 +9654,13 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.4, parseFloat('123.4a'));
         checkEqual(NaN, parseFloat('a123.4'));
         checkEqual(123.45, parseFloat('123.45'));
-        checkEqual(123.4, parseFloat('123.4.5')); // string default value
+        checkEqual(123.4, parseFloat('123.4.5')); // string
 
         checkEqual(NaN, parseFloat('abc')); // space string
 
         checkEqual(NaN, parseFloat(''));
         checkEqual(NaN, parseFloat(' '));
-
-        if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(NaN, parseFloat('　'));
-        } else {
-          checkEqual(NaN, parseFloat('　'));
-        } // exponential notation
-
+        checkEqual(NaN, parseFloat('　')); // exponential notation
 
         checkEqual(3.14, parseFloat(3.14));
         checkEqual(3.14, parseFloat('3.14'));
@@ -9651,6 +9668,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(3.14, parseFloat('0.0314E+2'));
         checkEqual(0.14, parseFloat('.14'));
         checkEqual(0.00000000000000001, parseFloat('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(1e-17, parseFloat('1e-17')); // exponential notation detail
 
         checkEqual(1, parseFloat('1.'));
@@ -9660,18 +9678,22 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, parseFloat('1e-5'));
         checkEqual(1, parseFloat('1.e'));
         checkEqual(1, parseFloat('1.e+'));
-        checkEqual(100000, parseFloat('1.e+5')); // parseFloat different
+        checkEqual(100000, parseFloat('1.e+5')); // Non-decimal number
 
         checkEqual(0, parseFloat('0x123'));
         checkEqual(0, parseFloat('+0x123'));
         checkEqual(-0, parseFloat('-0x123'));
         checkEqual(0, parseFloat('0o123'));
         checkEqual(0, parseFloat('+0o123'));
-        checkEqual(-0, parseFloat('-0o123'));
+        checkEqual(-0, parseFloat('-0o123')); // Spacial number
+
         checkEqual(Infinity, parseFloat('Infinity'));
         checkEqual(NaN, parseFloat('infinity'));
         checkEqual(NaN, parseFloat('inf'));
-        checkEqual(NaN, parseFloat('info')); // parseFloat
+        checkEqual(NaN, parseFloat('info'));
+        checkEqual(NaN, parseFloat('NaN'));
+        checkEqual(NaN, parseFloat('nan'));
+        checkEqual(NaN, parseFloat('na')); // Number
 
         checkEqual(123, parseFloat(123));
         checkEqual(-123, parseFloat(-123));
@@ -9679,7 +9701,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1.23, parseFloat(-1.23));
         checkEqual(Infinity, parseFloat(Infinity));
         checkEqual(-Infinity, parseFloat(-Infinity));
-        checkEqual(NaN, parseFloat(NaN)); // Other
+        checkEqual(NaN, parseFloat(NaN)); // Other than number type
 
         checkEqual(NaN, parseFloat(null));
         checkEqual(NaN, parseFloat(undefined));
@@ -9739,7 +9761,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123, parseInt10('123.4a'));
         checkEqual(NaN, parseInt10('a123.4'));
         checkEqual(123, parseInt10('123.45'));
-        checkEqual(123, parseInt10('123.4.5')); // string default value
+        checkEqual(123, parseInt10('123.4.5')); // string
 
         checkEqual(NaN, parseInt10('abc')); // space string
 
@@ -9769,19 +9791,23 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(1, parseInt10('1e-5'));
         checkEqual(1, parseInt10('1.e'));
         checkEqual(1, parseInt10('1.e+'));
-        checkEqual(1, parseInt10('1.e+5')); // parseFloat different
+        checkEqual(1, parseInt10('1.e+5')); // Non-decimal number
 
         checkEqual(0, parseInt10('0x123'));
         checkEqual(0, parseInt10('+0x123'));
         checkEqual(-0, parseInt10('-0x123'));
         checkEqual(0, parseInt10('0o123'));
         checkEqual(0, parseInt10('+0o123'));
-        checkEqual(-0, parseInt10('-0o123'));
+        checkEqual(-0, parseInt10('-0o123')); // Spacial number
+
         checkEqual(NaN, parseInt10('Infinity')); // ?
 
         checkEqual(NaN, parseInt10('infinity'));
         checkEqual(NaN, parseInt10('inf'));
-        checkEqual(NaN, parseInt10('info')); // parseFloat
+        checkEqual(NaN, parseInt10('info'));
+        checkEqual(NaN, parseInt10('NaN'));
+        checkEqual(NaN, parseInt10('nan'));
+        checkEqual(NaN, parseInt10('na')); // Number
 
         checkEqual(123, parseInt10(123));
         checkEqual(-123, parseInt10(-123));
@@ -9789,7 +9815,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1, parseInt10(-1.23));
         checkEqual(NaN, parseInt10(Infinity));
         checkEqual(NaN, parseInt10(-Infinity));
-        checkEqual(NaN, parseInt10(NaN)); // Other
+        checkEqual(NaN, parseInt10(NaN)); // Other than number type
 
         checkEqual(NaN, parseInt10(null));
         checkEqual(NaN, parseInt10(undefined));
@@ -9800,13 +9826,30 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, parseInt10([]));
         checkEqual(1, parseInt10([1]));
         checkEqual(123, parseInt10([123]));
-        checkEqual(1, parseInt10([1, 2])); // Decimal number other
+        checkEqual(1, parseInt10([1, 2])); // Non-decimal number only parseInt
 
         checkEqual(10, parseInt('1010', 2));
         checkEqual(10, parseInt('22', 4));
         checkEqual(10, parseInt('12', 8));
         checkEqual(10, parseInt('a', 16));
-        checkEqual(10, parseInt('A', 16));
+        checkEqual(10, parseInt('A', 16)); // Do not specify radix
+
+        if (parts.platform.isWindowsScriptHost()) {
+          checkEqual(6, parseInt('06'));
+          checkEqual(7, parseInt('07'));
+          checkEqual(0, parseInt('08'));
+          checkEqual(0, parseInt('09'));
+        } else if (parts.platform.isGasRhino()) {
+          checkEqual(6, parseInt('06'));
+          checkEqual(7, parseInt('07'));
+          checkEqual(NaN, parseInt('08'));
+          checkEqual(NaN, parseInt('09'));
+        } else {
+          checkEqual(6, parseInt('06'));
+          checkEqual(7, parseInt('07'));
+          checkEqual(8, parseInt('08'));
+          checkEqual(9, parseInt('09'));
+        }
       });
     };
 
@@ -9897,11 +9940,11 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(123.45, stringToNumber('123.45'));
         checkEqual(true, isThrown(function () {
           return stringToNumber('123.4.5');
-        })); // // string  value
+        })); // string
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('abc');
-        })); // // space string
+        })); // space string
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('');
@@ -9911,14 +9954,14 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToNumber('　');
-        })); // // exponential notation
+        })); // exponential notation
 
         checkEqual(3.14, stringToNumber('3.14'));
         checkEqual(3.14, stringToNumber('314e-2'));
         checkEqual(3.14, stringToNumber('0.0314E+2'));
         checkEqual(0.14, stringToNumber('.14'));
-        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(0.00000000000000001, stringToNumber('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(1e-17, stringToNumber('1e-17')); // exponential notation detail
 
         checkEqual(1, stringToNumber('1.'));
@@ -9936,7 +9979,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(true, isThrown(function () {
           return stringToNumber('1.e+');
         }));
-        checkEqual(100000, stringToNumber('1.e+5')); // Number different
+        checkEqual(100000, stringToNumber('1.e+5')); // Non-decimal number
 
         checkEqual(true, isThrown(function () {
           return stringToNumber('0x123');
@@ -9955,7 +9998,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToNumber('-0x123');
-        }));
+        })); // Spacial number
+
         checkEqual(true, isThrown(function () {
           return stringToNumber('Infinity');
         }));
@@ -9967,6 +10011,64 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToNumber('info');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('NaN');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('nan');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber('na');
+        })); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumber([1, 2]);
         })); // Exception
 
         var i = 0;
@@ -10018,7 +10120,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(undefined, stringToNumberDefault('123.4a'));
         checkEqual(undefined, stringToNumberDefault('a123.4'));
         checkEqual(123.45, stringToNumberDefault('123.45'));
-        checkEqual(undefined, stringToNumberDefault('123.4.5')); // string default value
+        checkEqual(undefined, stringToNumberDefault('123.4.5')); // string
 
         checkEqual(undefined, stringToNumberDefault('abc'));
         checkEqual(null, stringToNumberDefault('abc', null));
@@ -10032,8 +10134,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(3.14, stringToNumberDefault('314e-2'));
         checkEqual(3.14, stringToNumberDefault('0.0314E+2'));
         checkEqual(0.14, stringToNumberDefault('.14'));
-        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(0.00000000000000001, stringToNumberDefault('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
         checkEqual(1e-17, stringToNumberDefault('1e-17')); // exponential notation detail
 
         checkEqual(1, stringToNumberDefault('1.'));
@@ -10043,18 +10145,71 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, stringToNumberDefault('1e-5'));
         checkEqual(undefined, stringToNumberDefault('1.e'));
         checkEqual(undefined, stringToNumberDefault('1.e+'));
-        checkEqual(100000, stringToNumberDefault('1.e+5')); // Number different
+        checkEqual(100000, stringToNumberDefault('1.e+5')); // Non-decimal number
 
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
         checkEqual(undefined, stringToNumberDefault('-0x123'));
         checkEqual(undefined, stringToNumberDefault('0x123'));
         checkEqual(undefined, stringToNumberDefault('+0x123'));
-        checkEqual(undefined, stringToNumberDefault('-0x123'));
+        checkEqual(undefined, stringToNumberDefault('-0x123')); // Spacial number
+
         checkEqual(undefined, stringToNumberDefault('Infinity'));
         checkEqual(undefined, stringToNumberDefault('infinity'));
         checkEqual(undefined, stringToNumberDefault('inf'));
-        checkEqual(undefined, stringToNumberDefault('info')); // Exception
+        checkEqual(undefined, stringToNumberDefault('info'));
+        checkEqual(undefined, stringToNumberDefault('NaN'));
+        checkEqual(undefined, stringToNumberDefault('nan'));
+        checkEqual(undefined, stringToNumberDefault('na')); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToNumberDefault([1, 2]);
+        })); // Exception
 
         var i = 0;
         i += 1;
@@ -10113,7 +10268,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToNumber('123.4a'));
         checkEqual(NaN, valueToNumber('a123.4'));
         checkEqual(123.45, valueToNumber('123.45'));
-        checkEqual(NaN, valueToNumber('123.4.5')); // space string
+        checkEqual(NaN, valueToNumber('123.4.5')); // string
+
+        checkEqual(NaN, valueToNumber('abc')); // space string
 
         checkEqual(NaN, valueToNumber(''));
         checkEqual(NaN, valueToNumber(' '));
@@ -10123,7 +10280,10 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(3.14, valueToNumber('3.14'));
         checkEqual(3.14, valueToNumber('314e-2'));
         checkEqual(3.14, valueToNumber('0.0314E+2'));
-        checkEqual(0.14, valueToNumber('.14')); // exponential notation detail
+        checkEqual(0.14, valueToNumber('.14'));
+        checkEqual(0.00000000000000001, valueToNumber('1e-17'));
+        checkEqual('1e-17', 0.00000000000000001.toString());
+        checkEqual(1e-17, valueToNumber('1e-17')); // exponential notation detail
 
         checkEqual(1, valueToNumber('1.'));
         checkEqual(NaN, valueToNumber('1.1e'));
@@ -10132,18 +10292,22 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0.00001, valueToNumber('1e-5'));
         checkEqual(NaN, valueToNumber('1.e'));
         checkEqual(NaN, valueToNumber('1.e+'));
-        checkEqual(100000, valueToNumber('1.e+5')); // Number different
+        checkEqual(100000, valueToNumber('1.e+5')); // Non-decimal number
 
         checkEqual(NaN, valueToNumber('0x123'));
         checkEqual(NaN, valueToNumber('+0x123'));
         checkEqual(NaN, valueToNumber('-0x123'));
         checkEqual(NaN, valueToNumber('0o123'));
         checkEqual(NaN, valueToNumber('+0o123'));
-        checkEqual(NaN, valueToNumber('-0o123'));
+        checkEqual(NaN, valueToNumber('-0o123')); // Spacial number
+
         checkEqual(NaN, valueToNumber('Infinity'));
         checkEqual(NaN, valueToNumber('infinity'));
         checkEqual(NaN, valueToNumber('inf'));
-        checkEqual(NaN, valueToNumber('info')); // Number
+        checkEqual(NaN, valueToNumber('info'));
+        checkEqual(NaN, valueToNumber('NaN'));
+        checkEqual(NaN, valueToNumber('nan'));
+        checkEqual(NaN, valueToNumber('na')); // Number
 
         checkEqual(123, valueToNumber(123));
         checkEqual(-123, valueToNumber(-123));
@@ -10151,7 +10315,18 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-1.23, valueToNumber(-1.23));
         checkEqual(Infinity, valueToNumber(Infinity));
         checkEqual(-Infinity, valueToNumber(-Infinity));
-        checkEqual(NaN, valueToNumber(NaN)); // Default
+        checkEqual(NaN, valueToNumber(NaN)); // Other than number type
+
+        checkEqual(NaN, valueToNumber(null));
+        checkEqual(NaN, valueToNumber(undefined));
+        checkEqual(NaN, valueToNumber({}));
+        checkEqual(NaN, valueToNumber({
+          a: 1
+        }));
+        checkEqual(NaN, valueToNumber([]));
+        checkEqual(NaN, valueToNumber([1]));
+        checkEqual(NaN, valueToNumber([123]));
+        checkEqual(NaN, valueToNumber([1, 2])); // Default
 
         checkEqual(null, valueToNumberDefault('', null));
         checkEqual(null, valueToNumberDefault({
@@ -10176,18 +10351,7 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(NaN, valueToNumberDefault(NaN, {
           defaultValue: null
-        })); // Other
-
-        checkEqual(NaN, valueToNumber(null));
-        checkEqual(NaN, valueToNumber(undefined));
-        checkEqual(NaN, valueToNumber({}));
-        checkEqual(NaN, valueToNumber({
-          a: 1
         }));
-        checkEqual(NaN, valueToNumber([]));
-        checkEqual(NaN, valueToNumber([1]));
-        checkEqual(NaN, valueToNumber([123]));
-        checkEqual(NaN, valueToNumber([1, 2]));
       });
     };
 
@@ -10345,12 +10509,59 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-127, stringToInteger('-177', 8));
         checkEqual(-10, stringToInteger('-12', 8));
         checkEqual(-3, stringToInteger('-11', 2));
-        checkEqual(-15, stringToInteger('-1111', 2)); // // Default Value
+        checkEqual(-15, stringToInteger('-1111', 2)); // string
 
         checkEqual(true, isThrown(function () {
           return stringToInteger('abc');
-        })); // checkEqual(null,      stringToInteger('abc', null,  10));
-        // checkEqual(NaN,       stringToInteger('abc', NaN,   10));
+        })); // space string
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(' ');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('　');
+        })); // exponential notation
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('3.14');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('314e-2');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('0.0314E+2');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('.14');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1e-17');
+        })); // exponential notation detail
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.1e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.1e+');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1e+5');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1e-5');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.e');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('1.e+');
+        })); // Non-decimal number
 
         checkEqual(true, isThrown(function () {
           return stringToInteger('0x123');
@@ -10369,7 +10580,8 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToInteger('-0x123');
-        }));
+        })); // Spacial number
+
         checkEqual(true, isThrown(function () {
           return stringToInteger('Infinity');
         }));
@@ -10381,6 +10593,64 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(true, isThrown(function () {
           return stringToInteger('info');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('NaN');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('nan');
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger('na');
+        })); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToInteger([1, 2]);
         })); // Exception
 
         var i = 0;
@@ -10507,21 +10777,90 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-127, stringToIntegerDefault('-177', undefined, 8));
         checkEqual(-10, stringToIntegerDefault('-12', undefined, 8));
         checkEqual(-3, stringToIntegerDefault('-11', undefined, 2));
-        checkEqual(-15, stringToIntegerDefault('-1111', undefined, 2)); // Default Value
+        checkEqual(-15, stringToIntegerDefault('-1111', undefined, 2)); // string
 
         checkEqual(undefined, stringToIntegerDefault('abc'));
         checkEqual(null, stringToIntegerDefault('abc', null, 10));
-        checkEqual(NaN, stringToIntegerDefault('abc', NaN, 10));
+        checkEqual(NaN, stringToIntegerDefault('abc', NaN, 10)); // space string
+
+        checkEqual(undefined, stringToIntegerDefault(''));
+        checkEqual(undefined, stringToIntegerDefault(' '));
+        checkEqual(undefined, stringToIntegerDefault('　')); // exponential notation
+
+        checkEqual(undefined, stringToIntegerDefault('3.14'));
+        checkEqual(undefined, stringToIntegerDefault('314e-2'));
+        checkEqual(undefined, stringToIntegerDefault('0.0314E+2'));
+        checkEqual(undefined, stringToIntegerDefault('.14'));
+        checkEqual(undefined, stringToIntegerDefault('1e-17')); // exponential notation detail
+
+        checkEqual(undefined, stringToIntegerDefault('1.'));
+        checkEqual(undefined, stringToIntegerDefault('1.1e'));
+        checkEqual(undefined, stringToIntegerDefault('1.1e+'));
+        checkEqual(undefined, stringToIntegerDefault('1e+5'));
+        checkEqual(undefined, stringToIntegerDefault('1e-5'));
+        checkEqual(undefined, stringToIntegerDefault('1.e'));
+        checkEqual(undefined, stringToIntegerDefault('1.e+')); // Non-decimal number
+
         checkEqual(undefined, stringToIntegerDefault('0x123'));
         checkEqual(undefined, stringToIntegerDefault('+0x123'));
         checkEqual(undefined, stringToIntegerDefault('-0x123'));
         checkEqual(undefined, stringToIntegerDefault('0x123'));
         checkEqual(undefined, stringToIntegerDefault('+0x123'));
-        checkEqual(undefined, stringToIntegerDefault('-0x123'));
+        checkEqual(undefined, stringToIntegerDefault('-0x123')); // Spacial number
+
         checkEqual(undefined, stringToIntegerDefault('Infinity'));
         checkEqual(undefined, stringToIntegerDefault('infinity'));
         checkEqual(undefined, stringToIntegerDefault('inf'));
-        checkEqual(undefined, stringToIntegerDefault('info')); // Exception
+        checkEqual(undefined, stringToIntegerDefault('info')); // Number
+
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(-123);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(-1.23);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(-Infinity);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(NaN);
+        })); // Other than number type
+
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(null);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault(undefined);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault({});
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault({
+            a: 1
+          });
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([1]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([123]);
+        }));
+        checkEqual(true, isThrown(function () {
+          return stringToIntegerDefault([1, 2]);
+        })); // Exception
 
         var i = 0;
         i += 1;
@@ -10607,7 +10946,9 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(NaN, valueToInteger('123.4a'));
         checkEqual(NaN, valueToInteger('a123.4'));
         checkEqual(123, valueToInteger('123.45'));
-        checkEqual(NaN, valueToInteger('123.4.5')); // space string
+        checkEqual(NaN, valueToInteger('123.4.5')); // string
+
+        checkEqual(NaN, valueToInteger('abc')); // space string
 
         checkEqual(NaN, valueToInteger(''));
         checkEqual(NaN, valueToInteger(' '));
@@ -10626,18 +10967,22 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(0, valueToInteger('1e-5'));
         checkEqual(NaN, valueToInteger('1.e'));
         checkEqual(NaN, valueToInteger('1.e+'));
-        checkEqual(100000, valueToInteger('1.e+5')); // Number different
+        checkEqual(100000, valueToInteger('1.e+5')); // Non-decimal number
 
         checkEqual(NaN, valueToInteger('0x123'));
         checkEqual(NaN, valueToInteger('+0x123'));
         checkEqual(NaN, valueToInteger('-0x123'));
         checkEqual(NaN, valueToInteger('0o123'));
         checkEqual(NaN, valueToInteger('+0o123'));
-        checkEqual(NaN, valueToInteger('-0o123'));
+        checkEqual(NaN, valueToInteger('-0o123')); // Spacial number
+
         checkEqual(NaN, valueToInteger('Infinity'));
         checkEqual(NaN, valueToInteger('infinity'));
         checkEqual(NaN, valueToInteger('inf'));
-        checkEqual(NaN, valueToInteger('info')); // Number
+        checkEqual(NaN, valueToInteger('info'));
+        checkEqual(NaN, valueToInteger('NaN'));
+        checkEqual(NaN, valueToInteger('nan'));
+        checkEqual(NaN, valueToInteger('na')); // Number
 
         checkEqual(123, valueToInteger(123));
         checkEqual(-123, valueToInteger(-123));
@@ -10647,7 +10992,18 @@ var test_execute_convert = function test_execute_convert(parts) {
         checkEqual(-2, valueToInteger(-1.67));
         checkEqual(Infinity, valueToInteger(Infinity));
         checkEqual(-Infinity, valueToInteger(-Infinity));
-        checkEqual(NaN, valueToInteger(NaN)); // Default
+        checkEqual(NaN, valueToInteger(NaN)); // Other than number type
+
+        checkEqual(NaN, valueToInteger(null));
+        checkEqual(NaN, valueToInteger(undefined));
+        checkEqual(NaN, valueToInteger({}));
+        checkEqual(NaN, valueToInteger({
+          a: 1
+        }));
+        checkEqual(NaN, valueToInteger([]));
+        checkEqual(NaN, valueToInteger([1]));
+        checkEqual(NaN, valueToInteger([123]));
+        checkEqual(NaN, valueToInteger([1, 2])); // Default
 
         checkEqual(null, valueToIntegerDefault('', null));
         checkEqual(null, valueToIntegerDefault({
@@ -10680,24 +11036,14 @@ var test_execute_convert = function test_execute_convert(parts) {
         }));
         checkEqual(NaN, valueToIntegerDefault(NaN, {
           defaultValue: null
-        })); // Other
-
-        checkEqual(NaN, valueToInteger(null));
-        checkEqual(NaN, valueToInteger(undefined));
-        checkEqual(NaN, valueToInteger({}));
-        checkEqual(NaN, valueToInteger({
-          a: 1
         }));
-        checkEqual(NaN, valueToInteger([]));
-        checkEqual(NaN, valueToInteger([1]));
-        checkEqual(NaN, valueToInteger([123]));
       });
     };
 
-    test_numberToString();
-    test_valueToString();
     test_StringCast_standard();
     test_toString_standard();
+    test_numberToString();
+    test_valueToString();
     test_NumberCast_standard();
     test_parseFloat_standard();
     test_parseInt_standard();
@@ -11203,7 +11549,8 @@ var test_execute_string = function test_execute_string(parts) {
         indexOfAnyFirst = _parts$string.indexOfAnyFirst,
         indexOfAnyLast = _parts$string.indexOfAnyLast,
         paddingFirst = _parts$string.paddingFirst,
-        paddingLast = _parts$string.paddingLast;
+        paddingLast = _parts$string.paddingLast,
+        escapeRegExp = _parts$string.escapeRegExp;
 
     var test_matchFormat = function test_matchFormat() {
       it('test_matchFormat', function () {
@@ -13386,6 +13733,14 @@ var test_execute_string = function test_execute_string(parts) {
       });
     };
 
+    var test_escapeRegExp = function test_escapeRegExp() {
+      it('test_escapeRegExp', function () {
+        checkEqual('a', escapeRegExp('a'));
+        checkEqual('\\\\\\^\\$\\.ABC\\*\\+\\-\\?', escapeRegExp('\\^$.ABC*+-?'));
+        checkEqual('\\(\\)\\{\\}\\[\\]ABC\\|\\/', escapeRegExp('(){}[\]ABC\|\/'));
+      });
+    };
+
     test_matchFormat();
     test_replaceAll();
     test_replaceAllRepeat();
@@ -13434,6 +13789,7 @@ var test_execute_string = function test_execute_string(parts) {
     test_paddingFirst();
     test_paddingLast();
     test_includeCount();
+    test_escapeRegExp();
   });
 };
 
@@ -17480,33 +17836,387 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.test_execute_date = void 0;
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var test_execute_date = function test_execute_date(parts) {
   var _parts$test = parts.test,
       describe = _parts$test.describe,
       it = _parts$test.it,
       checkEqual = _parts$test.checkEqual,
+      checkNotEqual = _parts$test.checkNotEqual,
       isThrown = _parts$test.isThrown,
       isThrownException = _parts$test.isThrownException,
       testCounter = _parts$test.testCounter;
   var _parts$date = parts.date,
-      Today = _parts$date.Today,
+      Year = _parts$date.Year,
+      YearUTC = _parts$date.YearUTC,
+      Month = _parts$date.Month,
+      MonthUTC = _parts$date.MonthUTC,
+      Day = _parts$date.Day,
+      DayUTC = _parts$date.DayUTC,
       isInvalidDate = _parts$date.isInvalidDate,
-      DateTime = _parts$date.DateTime,
-      datetimeToString = _parts$date.datetimeToString,
+      InvalidDate = _parts$date.InvalidDate,
+      Datetime = _parts$date.Datetime,
+      DatetimeUTC = _parts$date.DatetimeUTC,
+      dateToString = _parts$date.dateToString,
+      dateToStringUTC = _parts$date.dateToStringUTC,
       dayOfWeek = _parts$date.dayOfWeek,
-      dayOfWeekEnglishShort = _parts$date.dayOfWeekEnglishShort,
-      dayOfWeekEnglishLong = _parts$date.dayOfWeekEnglishLong,
-      dayOfWeekJapaneseShort = _parts$date.dayOfWeekJapaneseShort,
-      dayOfWeekJapaneseLong = _parts$date.dayOfWeekJapaneseLong,
       nameOfMonth = _parts$date.nameOfMonth,
-      nameOfMonthEnglishChar3 = _parts$date.nameOfMonthEnglishChar3,
-      nameOfMonthEnglishChar4 = _parts$date.nameOfMonthEnglishChar4,
-      nameOfMonthEnglishLong = _parts$date.nameOfMonthEnglishLong;
+      stringToDate = _parts$date.stringToDate,
+      stringToDateUTC = _parts$date.stringToDateUTC,
+      minutesToTexts = _parts$date.minutesToTexts,
+      textsToMinutes = _parts$date.textsToMinutes;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
-    var test_Today = function test_Today() {
-      it('test_Today', function () {
-        checkEqual(new Date().toString(), Today().toString());
+    var test_Year = function test_Year() {
+      it('test_Year', function () {
+        if (new Date().getTimezoneOffset() === -540) {
+          checkEqual(new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0)), new Date(2021, 0, 1, 9, 0, 0, 0));
+        }
+
+        var now = new Date(); // console.log(now.getTimezoneOffset());
+
+        checkEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), Year('this'));
+
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)), Year('this'));
+        }
+
+        checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year('next'));
+        checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year('last'));
+        checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year(1));
+        checkEqual(new Date(now.getFullYear() + 5, 0, 1, 0, 0, 0, 0), Year(5));
+        checkEqual(new Date(now.getFullYear() + 10, 0, 1, 0, 0, 0, 0), Year(10));
+        checkEqual(new Date(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), Year(-1));
+        checkEqual(new Date(now.getFullYear() - 5, 0, 1, 0, 0, 0, 0), Year(-5));
+        checkEqual(new Date(now.getFullYear() - 10, 0, 1, 0, 0, 0, 0), Year(-10));
+        checkEqual(new Date(2021, 0, 1), Year('this', new Date(2021, 5, 1)));
+        checkEqual(new Date(2020, 0, 1), Year('this', new Date(2020, 5, 1)));
+        var dt = new Date(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(new Date(2021, 0, 1, 0, 0, 0, 0), Year('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(new Date(2020, 0, 1, 0, 0, 0, 0), Year('this', dt));
+        testCounter(100);
+        var dt = new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
+        checkEqual(new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0)), Year('this', dt, 0));
+        checkEqual(new Date(Date.UTC(2020, 0, 1, 1, 0, 0, 0)), Year('this', dt, 60));
+        var dt = new Date(Date.UTC(2020, 11, 31, 14, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2019, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
+        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
+        var dt = new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0)), Year('this', dt, -540));
+        var dt = new Date(Date.UTC(2020, 11, 31, 15, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2019, 11, 31, 16, 0, 0, 0)), Year('this', dt, -480));
+        var dt = new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)), Year('this', dt, -480));
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)), Year('this', dt, -480)); // object parameter
+
+        testCounter(200);
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)), Year({
+          value: 'this',
+          sourceDate: dt,
+          timezoneOffset: -480
+        }));
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)), Year('this', {
+          sourceDate: dt,
+          timezoneOffset: -480
+        }));
+        var dt = new Date(Date.UTC(2020, 11, 31, 17, 0, 0, 0));
+        checkEqual(new Date(Date.UTC(2020, 11, 31, 16, 0, 0, 0)), Year('this', dt, {
+          timezoneOffset: -480
+        }));
+      });
+    };
+
+    var test_YearUTC = function test_YearUTC() {
+      it('test_YearUTC', function () {
+        var DateUTC = function DateUTC() {
+          return new Date(Date.UTC.apply(Date, arguments));
+        };
+
+        var now = new Date();
+
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+        }
+
+        checkEqual(DateUTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+        checkEqual(DateUTC(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), YearUTC('next'));
+        checkEqual(DateUTC(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), YearUTC('last'));
+        checkEqual(DateUTC(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), YearUTC(1));
+        checkEqual(DateUTC(now.getFullYear() + 5, 0, 1, 0, 0, 0, 0), YearUTC(5));
+        checkEqual(DateUTC(now.getFullYear() + 10, 0, 1, 0, 0, 0, 0), YearUTC(10));
+        checkEqual(DateUTC(now.getFullYear() - 1, 0, 1, 0, 0, 0, 0), YearUTC(-1));
+        checkEqual(DateUTC(now.getFullYear() - 5, 0, 1, 0, 0, 0, 0), YearUTC(-5));
+        checkEqual(DateUTC(now.getFullYear() - 10, 0, 1, 0, 0, 0, 0), YearUTC(-10));
+        checkEqual(DateUTC(2021, 0, 1), YearUTC('this', DateUTC(2021, 5, 1)));
+        checkEqual(DateUTC(2020, 0, 1), YearUTC('this', DateUTC(2020, 5, 1)));
+        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), YearUTC('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(DateUTC(2020, 0, 1, 0, 0, 0, 0), YearUTC('this', dt)); // object parameter
+
+        var dt = DateUTC(2021, 0, 1, 1, 2, 3, 0);
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), YearUTC({
+          value: 'this',
+          sourceDate: dt
+        }));
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), YearUTC('this', {
+          sourceDate: dt
+        }));
+      });
+    };
+
+    var test_Month = function test_Month() {
+      it('test_Month', function () {
+        var DateUTC = function DateUTC() {
+          return new Date(Date.UTC.apply(Date, arguments));
+        };
+
+        var now = new Date();
+        checkEqual(new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0), Month('this'));
+
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0)), Month('this'));
+        }
+
+        var y = now.getFullYear();
+        checkEqual(new Date(y, now.getMonth() + 1, 1, 0, 0, 0, 0), Month('next'));
+        checkEqual(new Date(y, now.getMonth() - 1, 1, 0, 0, 0, 0), Month('last'));
+        checkEqual(new Date(y, now.getMonth() + 1, 1, 0, 0, 0, 0), Month(1));
+        checkEqual(new Date(y, now.getMonth() + 5, 1, 0, 0, 0, 0), Month(5));
+        checkEqual(new Date(y, now.getMonth() + 10, 1, 0, 0, 0, 0), Month(10));
+        checkEqual(new Date(y, now.getMonth() - 1, 1, 0, 0, 0, 0), Month(-1));
+        checkEqual(new Date(y, now.getMonth() - 5, 1, 0, 0, 0, 0), Month(-5));
+        checkEqual(new Date(y, now.getMonth() - 10, 1, 0, 0, 0, 0), Month(-10));
+        checkEqual(new Date(2021, 5, 1), Month('this', new Date(2021, 5, 1)));
+        checkEqual(new Date(2020, 5, 1), Month('this', new Date(2020, 5, 1)));
+        var dt = new Date(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(new Date(2021, 0, 1, 0, 0, 0, 0), Month('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(new Date(2020, 11, 1, 0, 0, 0, 0), Month('this', dt));
+        testCounter(100);
+        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Month('this', dt, -540));
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), Month('this', dt, 0));
+        checkEqual(DateUTC(2020, 11, 1, 1, 0, 0, 0), Month('this', dt, 60));
+        var dt = DateUTC(2020, 11, 31, 14, 0, 0, 0);
+        checkEqual(DateUTC(2020, 10, 30, 15, 0, 0, 0), Month('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Month('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Month('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Month('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
+        checkEqual(DateUTC(2020, 10, 30, 16, 0, 0, 0), Month('this', dt, -480));
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Month('this', dt, -480));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Month('this', dt, -480)); // object parameter
+
+        testCounter(200);
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Month({
+          value: 'this',
+          sourceDate: dt,
+          timezoneOffset: -480
+        }));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Month('this', {
+          sourceDate: dt,
+          timezoneOffset: -480
+        }));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Month('this', dt, {
+          timezoneOffset: -480
+        }));
+      });
+    };
+
+    var test_MonthUTC = function test_MonthUTC() {
+      it('test_MonthUTC', function () {
+        var DateUTC = function DateUTC() {
+          return new Date(Date.UTC.apply(Date, arguments));
+        };
+
+        var now = new Date();
+
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0), MonthUTC('this'));
+        }
+
+        checkEqual(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0)), MonthUTC('this'));
+        var y = now.getUTCFullYear();
+        checkEqual(DateUTC(y, now.getUTCMonth() + 1, 1, 0, 0, 0, 0), MonthUTC('next'));
+        checkEqual(DateUTC(y, now.getUTCMonth() - 1, 1, 0, 0, 0, 0), MonthUTC('last'));
+        checkEqual(DateUTC(y, now.getUTCMonth() + 1, 1, 0, 0, 0, 0), MonthUTC(1));
+        checkEqual(DateUTC(y, now.getUTCMonth() + 5, 1, 0, 0, 0, 0), MonthUTC(5));
+        checkEqual(DateUTC(y, now.getUTCMonth() + 10, 1, 0, 0, 0, 0), MonthUTC(10));
+        checkEqual(DateUTC(y, now.getUTCMonth() - 1, 1, 0, 0, 0, 0), MonthUTC(-1));
+        checkEqual(DateUTC(y, now.getUTCMonth() - 5, 1, 0, 0, 0, 0), MonthUTC(-5));
+        checkEqual(DateUTC(y, now.getUTCMonth() - 10, 1, 0, 0, 0, 0), MonthUTC(-10));
+        testCounter(100);
+        checkEqual(DateUTC(2021, 5, 1), MonthUTC('this', DateUTC(2021, 5, 1)));
+        checkEqual(DateUTC(2020, 5, 1), MonthUTC('this', DateUTC(2020, 5, 1)));
+        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), MonthUTC('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(DateUTC(2020, 11, 1, 0, 0, 0, 0), MonthUTC('this', dt)); // object parameter
+
+        var dt = DateUTC(2021, 0, 1, 1, 2, 3, 0);
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), MonthUTC({
+          value: 'this',
+          sourceDate: dt
+        }));
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), MonthUTC('this', {
+          sourceDate: dt
+        }));
+      });
+    };
+
+    var test_Day = function test_Day() {
+      it('test_Day', function () {
+        var DateUTC = function DateUTC() {
+          return new Date(Date.UTC.apply(Date, arguments));
+        };
+
+        var now = new Date();
+        checkEqual(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0), Day('this'));
+
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(DateUTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0), Day('this'));
+        }
+
+        var y = now.getFullYear();
+        var m = now.getMonth();
+        checkEqual(new Date(y, m, now.getDate() + 0, 0, 0, 0, 0), Day('today'));
+        checkEqual(new Date(y, m, now.getDate() + 1, 0, 0, 0, 0), Day('next'));
+        checkEqual(new Date(y, m, now.getDate() + 1, 0, 0, 0, 0), Day('tomorrow'));
+        checkEqual(new Date(y, m, now.getDate() - 1, 0, 0, 0, 0), Day('last'));
+        checkEqual(new Date(y, m, now.getDate() - 1, 0, 0, 0, 0), Day('yesterday'));
+        checkEqual(new Date(y, m, now.getDate() + 1, 0, 0, 0, 0), Day(1));
+        checkEqual(new Date(y, m, now.getDate() + 5, 0, 0, 0, 0), Day(5));
+        checkEqual(new Date(y, m, now.getDate() + 10, 0, 0, 0, 0), Day(10));
+        checkEqual(new Date(y, m, now.getDate() - 1, 0, 0, 0, 0), Day(-1));
+        checkEqual(new Date(y, m, now.getDate() - 5, 0, 0, 0, 0), Day(-5));
+        checkEqual(new Date(y, m, now.getDate() - 10, 0, 0, 0, 0), Day(-10));
+        checkEqual(new Date(2021, 5, 1, 0, 0, 0, 0), Day('this', new Date(2021, 5, 1, 1, 2, 3)));
+        checkEqual(new Date(2020, 5, 1, 0, 0, 0, 0), Day('this', new Date(2020, 5, 1, 1, 2, 3)));
+        var dt = new Date(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(new Date(2021, 0, 1, 0, 0, 0, 0), Day('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(new Date(2020, 11, 31, 0, 0, 0, 0), Day('this', dt));
+        testCounter(100);
+        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Day('this', dt, -540));
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), Day('this', dt, 0));
+        checkEqual(DateUTC(2020, 11, 31, 1, 0, 0, 0), Day('this', dt, 60));
+        var dt = DateUTC(2020, 11, 31, 14, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 30, 15, 0, 0, 0), Day('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Day('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Day('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 15, 0, 0, 0), Day('this', dt, -540));
+        var dt = DateUTC(2020, 11, 31, 15, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 30, 16, 0, 0, 0), Day('this', dt, -480));
+        var dt = DateUTC(2020, 11, 31, 16, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Day('this', dt, -480));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Day('this', dt, -480)); // object parameter
+
+        testCounter(200);
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Day({
+          value: 'this',
+          sourceDate: dt,
+          timezoneOffset: -480
+        }));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Day('this', {
+          sourceDate: dt,
+          timezoneOffset: -480
+        }));
+        var dt = DateUTC(2020, 11, 31, 17, 0, 0, 0);
+        checkEqual(DateUTC(2020, 11, 31, 16, 0, 0, 0), Day('this', dt, {
+          timezoneOffset: -480
+        }));
+      });
+    };
+
+    var test_DayUTC = function test_DayUTC() {
+      it('test_DayUTC', function () {
+        var DateUTC = function DateUTC() {
+          return new Date(Date.UTC.apply(Date, arguments));
+        };
+
+        var now = new Date();
+
+        if (now.getTimezoneOffset() !== 0) {
+          checkNotEqual(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0), DayUTC('this'));
+        }
+
+        checkEqual(DateUTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0), DayUTC('this'));
+        var y = now.getUTCFullYear();
+        var m = now.getUTCMonth();
+        checkEqual(DateUTC(y, m, now.getUTCDate() + 0, 0, 0, 0, 0), DayUTC('today'));
+        checkEqual(DateUTC(y, m, now.getUTCDate() + 1, 0, 0, 0, 0), DayUTC('next'));
+        checkEqual(DateUTC(y, m, now.getUTCDate() + 1, 0, 0, 0, 0), DayUTC('tomorrow'));
+        checkEqual(DateUTC(y, m, now.getUTCDate() - 1, 0, 0, 0, 0), DayUTC('last'));
+        checkEqual(DateUTC(y, m, now.getUTCDate() - 1, 0, 0, 0, 0), DayUTC('yesterday'));
+        checkEqual(DateUTC(y, m, now.getUTCDate() + 1, 0, 0, 0, 0), DayUTC(1));
+        checkEqual(DateUTC(y, m, now.getUTCDate() + 5, 0, 0, 0, 0), DayUTC(5));
+        checkEqual(DateUTC(y, m, now.getUTCDate() + 10, 0, 0, 0, 0), DayUTC(10));
+        checkEqual(DateUTC(y, m, now.getUTCDate() - 1, 0, 0, 0, 0), DayUTC(-1));
+        checkEqual(DateUTC(y, m, now.getUTCDate() - 5, 0, 0, 0, 0), DayUTC(-5));
+        checkEqual(DateUTC(y, m, now.getUTCDate() - 10, 0, 0, 0, 0), DayUTC(-10));
+        testCounter(100);
+        checkEqual(DateUTC(2021, 5, 1, 0, 0, 0, 0), DayUTC('this', DateUTC(2021, 5, 1, 1, 2, 3)));
+        checkEqual(DateUTC(2020, 5, 1, 0, 0, 0, 0), DayUTC('this', DateUTC(2020, 5, 1, 1, 2, 3)));
+        var dt = DateUTC(2021, 0, 1, 0, 0, 0, 0);
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), DayUTC('this', dt));
+        dt.setMinutes(dt.getMinutes() - 1);
+        checkEqual(DateUTC(2020, 11, 31, 0, 0, 0, 0), DayUTC('this', dt)); // object parameter
+
+        var dt = DateUTC(2021, 0, 1, 1, 2, 3, 0);
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), DayUTC({
+          value: 'this',
+          sourceDate: dt
+        }));
+        checkEqual(DateUTC(2021, 0, 1, 0, 0, 0, 0), DayUTC('this', {
+          sourceDate: dt
+        }));
+      });
+    };
+
+    var test_InvalidDate = function test_InvalidDate() {
+      it('test_InvalidDate', function () {
+        checkEqual(true, isInvalidDate(InvalidDate()));
+        checkEqual(true, new Date() instanceof Date);
+        checkEqual(true, InvalidDate() instanceof Date);
+
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual('Date', InvalidDate().constructor.name);
+        }
       });
     };
 
@@ -17533,6 +18243,23 @@ var test_execute_date = function test_execute_date(parts) {
       it('test_Date_standard', function () {
         checkEqual(0, new Date(0).getTime());
 
+        var _minutesToTexts = minutesToTexts(-1 * new Date(0).getTimezoneOffset()),
+            _minutesToTexts2 = _slicedToArray(_minutesToTexts, 3),
+            s = _minutesToTexts2[0],
+            h = _minutesToTexts2[1],
+            m = _minutesToTexts2[2];
+
+        if (s === '+') {
+          if (!parts.platform.isWindowsScriptHost()) {
+            checkEqual(0, new Date(0).toString().indexOf("Thu Jan 01 1970 ".concat(h, ":").concat(m, ":00 GMT").concat(s + h + m))); // checkEqual(
+            //   new Date(0).toString(),
+            //   `Thu Jan 01 1970 ${h}:${m}:00 GMT${s + h + m}`,
+            // );
+          } else {
+            checkEqual("Thu Jan 1 ".concat(h, ":").concat(m, ":00 UTC").concat(s + h + m, " 1970"), new Date(0).toString());
+          }
+        }
+
         if (!parts.platform.isWindowsScriptHost()) {
           checkEqual('Thu, 01 Jan 1970 00:00:00 GMT', new Date(0).toUTCString());
         } else {
@@ -17545,265 +18272,517 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
-    var test_DateTime = function test_DateTime() {
-      it('test_DateTime', function () {
+    var test_Datetime = function test_Datetime() {
+      it('test_Datetime', function () {
         checkEqual(0, new Date(0).getTime());
-        var dt = DateTime(undefined, undefined, undefined, undefined, undefined, undefined, undefined, false);
+        var dt = DatetimeUTC(undefined, undefined, undefined, undefined, undefined, undefined, undefined);
         checkEqual(0, dt.getTime());
         checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime();
+        var dt = Datetime();
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual(0, dt.getTime());
         checkEqual('1970-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-11-21T11:35:10.400Z', dt.toISOString());
-        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400);
         checkEqual(new Date(2020, 10, 21, 11, 35, 10, 400).toISOString(), dt.toISOString());
-        var dt = DateTime(2020, 11, 21, 11, 35, 10, 400, false);
+        var dt = Datetime(2020, 11, 21, 11, 35, 10, 400, 0);
         checkEqual(new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400)).toISOString(), dt.toISOString());
-        var dt = DateTime(2020);
+        var dt = DatetimeUTC(2020, 11, 21, 11, 35, 10, 400);
+        checkEqual(new Date(Date.UTC(2020, 10, 21, 11, 35, 10, 400)).toISOString(), dt.toISOString());
+        var dt = Datetime(2020);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2);
+        var dt = Datetime(2020, 2);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3);
+        var dt = Datetime(2020, 2, 3);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4);
+        var dt = Datetime(2020, 2, 3, 4);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5);
+        var dt = Datetime(2020, 2, 3, 4, 5);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, 0);
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, true);
+        var dt = DatetimeUTC(2020, 2, 3, 4, 5, 6, 7);
+        checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString());
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7);
 
         if (dt.getTimezoneOffset() === -540) {
           checkEqual('2020-02-02T19:05:06.007Z', dt.toISOString());
         } // zero
 
 
-        var dt = DateTime(2020, 0, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, 0, 3, 4, 5, 6, 7, 0);
         checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 3, 0, 4, 5, 6, 7, false);
+        var dt = DatetimeUTC(2020, 0, 3, 4, 5, 6, 7);
+        checkEqual('2019-12-03T04:05:06.007Z', dt.toISOString());
+        var dt = Datetime(2020, 3, 0, 4, 5, 6, 7, 0);
+        checkEqual('2020-02-29T04:05:06.007Z', dt.toISOString());
+        var dt = DatetimeUTC(2020, 3, 0, 4, 5, 6, 7);
         checkEqual('2020-02-29T04:05:06.007Z', dt.toISOString()); // minus
 
-        var dt = DateTime(2020, -1, 3, 4, 5, 6, 7, false);
+        var dt = Datetime(2020, -1, 3, 4, 5, 6, 7, 0);
         checkEqual('2019-11-03T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 3, -1, 4, 5, 6, 7, false);
+        var dt = DatetimeUTC(2020, -1, 3, 4, 5, 6, 7);
+        checkEqual('2019-11-03T04:05:06.007Z', dt.toISOString());
+        var dt = Datetime(2020, 3, -1, 4, 5, 6, 7, 0);
         checkEqual('2020-02-28T04:05:06.007Z', dt.toISOString());
-        var dt = DateTime(2020, 3, 4, -2, 5, 6, 7, false);
+        var dt = DatetimeUTC(2020, 3, -1, 4, 5, 6, 7);
+        checkEqual('2020-02-28T04:05:06.007Z', dt.toISOString());
+        var dt = Datetime(2020, 3, 4, -2, 5, 6, 7, 0);
+        checkEqual('2020-03-03T22:05:06.007Z', dt.toISOString());
+        var dt = DatetimeUTC(2020, 3, 4, -2, 5, 6, 7);
         checkEqual('2020-03-03T22:05:06.007Z', dt.toISOString()); // object parameter
 
-        var dt = DateTime({
+        var dt = Datetime({
           year: 2020
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime({
+        var dt = Datetime({
           year: 2020,
-          isLocal: false
+          timezoneOffset: 0
         });
         checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime({
+        var dt = DatetimeUTC({
+          year: 2020
+        });
+        checkEqual('2020-01-01T00:00:00.000Z', dt.toISOString());
+        var dt = Datetime({
           year: 2020,
           month: 2,
-          hour: 13,
-          second: 59,
-          isLocal: false
+          hours: 13,
+          seconds: 59,
+          timezoneOffset: 0
         });
         checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime({
+        var dt = DatetimeUTC({
           year: 2020,
           month: 2,
-          hour: 13,
-          second: 59
+          hours: 13,
+          seconds: 59
+        });
+        checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
+        var dt = Datetime({
+          year: 2020,
+          month: 2,
+          hours: 13,
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, {
-          hour: 13,
-          second: 59
+        var dt = Datetime(2020, {
+          hours: 13,
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-01-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, {
-          hour: 13,
-          second: 59
+        var dt = Datetime(2020, 2, {
+          hours: 13,
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-01T13:00:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, {
-          minute: 13,
-          second: 59
+        var dt = Datetime(2020, 2, 3, {
+          minutes: 13,
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T00:13:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, {
-          isLocal: false
+        var dt = Datetime(2020, 2, 3, {
+          timezoneOffset: 0
         });
         checkEqual('2020-02-03T00:00:00.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, {
-          minute: 13,
-          second: 59
+        var dt = Datetime(2020, 2, 3, 4, {
+          minutes: 13,
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:13:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, {
-          second: 59
+        var dt = Datetime(2020, 2, 3, 4, 5, {
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, {
-          second: 59
+        var dt = Datetime(2020, 2, 3, 4, 5, {
+          seconds: 59
         });
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         checkEqual('2020-02-03T04:05:59.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, {
-          isLocal: false
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, {
+          timezoneOffset: 0
         });
         checkEqual('2020-02-03T04:05:06.000Z', dt.toISOString());
-        var dt = DateTime(2020, 2, 3, 4, 5, 6, 7, {
-          isLocal: false
+        var dt = Datetime(2020, 2, 3, 4, 5, 6, 7, {
+          timezoneOffset: 0
         });
         checkEqual('2020-02-03T04:05:06.007Z', dt.toISOString()); // exception
 
         checkEqual(false, isThrown(function () {
-          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
-            isLocal: false
+          return Datetime(2020, 2, 3, 4, 5, 6, 7, {
+            timezoneOffset: 0
           });
         }));
         checkEqual(true, isThrown(function () {
-          return DateTime(2020, 2, 3, 4, 5, 6, 7, {
-            isLocal: 1
+          return Datetime(2020, 2, 3, 4, 5, 6, 7, {
+            timezoneOffset: null
           });
         }));
         checkEqual(true, isThrown(function () {
-          return DateTime(2020, '2', 3, 4, 5, 6, 7, {
-            isLocal: true
+          return Datetime(2020, '2', 3, 4, 5, 6, 7, {
+            timezoneOffset: 0
           });
         }));
       });
     };
 
-    var test_datetimeToString = function test_datetimeToString() {
-      it('test_datetimeToString', function () {
-        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
-        checkEqual('2001/02/04 09:05:08.045', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
-        checkEqual('2001/02/04 09:05:08.04', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
-        checkEqual('2001/02/04 09:05:08.0', datetimeToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
-        checkEqual('01/2/4 9:5:8 am', datetimeToString(dt, 'YY/M/D H:m:s aa'));
-        checkEqual('01/2/4 9:5:8 a', datetimeToString(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 9:5:8 AM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
-        checkEqual('01/2/4 9:5:8 A', datetimeToString(dt, 'YY/M/D H:m:s A'));
-        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
-        checkEqual('01/2/4 16:5:8 pm', datetimeToString(dt, 'YY/M/D H:m:s aa'));
-        checkEqual('01/2/4 16:5:8 p', datetimeToString(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 16:5:8 PM', datetimeToString(dt, 'YY/M/D H:m:s AA'));
-        checkEqual('01/2/4 16:5:8 P', datetimeToString(dt, 'YY/M/D H:m:s A'));
-        checkEqual('01/2/4 16:5:8 Sun', datetimeToString(dt, 'YY/M/D H:m:s ddd'));
-        checkEqual('01/2/4 16:5:8 Sunday', datetimeToString(dt, 'YY/M/D H:m:s dddd'));
-        checkEqual('01/2/4 16:5:8 Feb', datetimeToString(dt, 'YY/M/D H:m:s MMM'));
-        checkEqual('01/2/4 16:5:8 Feb.', datetimeToString(dt, 'YY/M/D H:m:s MMMM'));
-        checkEqual('01/2/4 16:5:8 February', datetimeToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
+    var test_dateToString = function test_dateToString() {
+      it('test_dateToString', function () {
+        var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
+        checkEqual('2001/02/04 09:05:08.045', dateToString(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', dateToString(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', dateToString(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', dateToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 9:5:8 a', dateToString(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 9:5:8 AM', dateToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 9:5:8 A', dateToString(dt, 'YY/M/D H:m:s A'));
+        var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
+        checkEqual('01/2/4 16:5:8 pm', dateToString(dt, 'YY/M/D H:m:s aa'));
+        checkEqual('01/2/4 16:5:8 p', dateToString(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 16:5:8 PM', dateToString(dt, 'YY/M/D H:m:s AA'));
+        checkEqual('01/2/4 16:5:8 P', dateToString(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', dateToString(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', dateToString(dt, 'YY/M/D H:m:s dddd'));
+        checkEqual('01/2/4 16:5:8 Feb', dateToString(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 Feb.', dateToString(dt, 'YY/M/D H:m:s MMMM'));
+        checkEqual('01/2/4 16:5:8 February', dateToString(dt, 'YY/M/D H:m:s MMMMM')); // quote
 
-        var dt = DateTime(2021, 1, 6);
-        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD'));
-        checkEqual('YYYYMMDD = 20210106', datetimeToString(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+        var dt = Datetime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, "'YYYYMMDD = 'YYYYMMDD"));
+        checkEqual('YYYY = 2021 / MM = 01 / DD = 06', dateToString(dt, "'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD"));
+        checkEqual('--YYYY = 2021 / MM = 01 / DD = 06--', dateToString(dt, "--'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD--")); // timezone
 
-        var dt = new Date();
-        var dt = DateTime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
-        var timezoneOffset = -1 * dt.getTimezoneOffset();
-        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
-        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // console.log('timezone', timezoneOffset, timezoneOffset / 60,
-        //   parts.string.paddingFirst(String(Math.floor(timezoneOffset / 60)), 2, '0'),
-        //   (new Date).getTimezoneOffset(),
-        // );
-        // '+0900' etc
+        var _minutesToTexts3 = minutesToTexts(-1 * dt.getTimezoneOffset()),
+            _minutesToTexts4 = _slicedToArray(_minutesToTexts3, 3),
+            s = _minutesToTexts4[0],
+            h = _minutesToTexts4[1],
+            m = _minutesToTexts4[2]; // '+0900' etc
 
-        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToString(dt, 'ZZ'));
+
+        checkEqual(s + h + ':' + m, dateToString(dt, 'Z'));
+        checkEqual(s + h + m, dateToString(dt, 'ZZ'));
 
         if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(true, dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1);
+          checkEqual(true, dt.toString().indexOf('UTC' + dateToString(dt, 'ZZ')) !== -1);
         } else {
-          checkEqual(true, dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1);
-        } // '+09:00' etc
+          checkEqual(true, dt.toString().indexOf('GMT' + dateToString(dt, 'ZZ')) !== -1);
+        }
 
-
-        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToString(dt, 'Z')); // exception
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, dt.toString().indexOf(dateToString(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ')));
+        } else {
+          checkEqual(0, dt.toString().indexOf(dateToString(dt, 'ddd MMM D HH:mm:ss "UTC"ZZ YYYY')));
+        } // exception
         // quote
 
-        var dt = DateTime(2021, 1, 6);
+
+        var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(function () {
-          datetimeToString(dt, '"YYYYMMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
         checkEqual(true, isThrown(function () {
-          datetimeToString(dt, '"YYYY"MMDD = "YYYYMMDD');
+          dateToString(dt, '"YYYY"MMDD = "YYYYMMDD');
         }));
       });
     };
 
-    var test_datetimeToString_MomemtLike = function test_datetimeToString_MomemtLike() {
-      it('test_datetimeToString_MomemtLike', function () {
-        var datetimeToStringMoment = function datetimeToStringMoment(date, format, isLocal) {
-          return datetimeToString(date, format, datetimeToString.func.MomentLikeObject(), isLocal);
+    var test_dateToString_MomemtLike = function test_dateToString_MomemtLike() {
+      it('test_dateToString_MomemtLike', function () {
+        var dateToStringMoment = function dateToStringMoment(date, format) {
+          return dateToString(date, format, undefined, dateToString.rule.MomentLike());
         };
 
-        var dt = DateTime(2001, 2, 4, 9, 5, 8, 45);
-        checkEqual('2001/02/04 09:05:08.045', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
-        checkEqual('2001/02/04 09:05:08.04', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
-        checkEqual('2001/02/04 09:05:08.0', datetimeToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'));
-        checkEqual('01/2/4 9:5:8 am', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 9:5:8 AM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
-        var dt = DateTime(2001, 2, 4, 16, 5, 8, 45);
-        checkEqual('01/2/4 16:5:8 pm', datetimeToStringMoment(dt, 'YY/M/D H:m:s a'));
-        checkEqual('01/2/4 16:5:8 PM', datetimeToStringMoment(dt, 'YY/M/D H:m:s A'));
-        checkEqual('01/2/4 16:5:8 Sun', datetimeToStringMoment(dt, 'YY/M/D H:m:s ddd'));
-        checkEqual('01/2/4 16:5:8 Sunday', datetimeToStringMoment(dt, 'YY/M/D H:m:s dddd'));
-        checkEqual('01/2/4 16:5:8 Feb', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMM'));
-        checkEqual('01/2/4 16:5:8 February', datetimeToStringMoment(dt, 'YY/M/D H:m:s MMMM')); // quote
+        var dt = Datetime(2001, 2, 4, 9, 5, 8, 45);
+        checkEqual('2001/02/04 09:05:08.045', dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2001/02/04 09:05:08.04', dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2001/02/04 09:05:08.0', dateToStringMoment(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual('01/2/4 9:5:8 am', dateToStringMoment(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 9:5:8 AM', dateToStringMoment(dt, 'YY/M/D H:m:s A'));
+        var dt = Datetime(2001, 2, 4, 16, 5, 8, 45);
+        checkEqual('01/2/4 16:5:8 pm', dateToStringMoment(dt, 'YY/M/D H:m:s a'));
+        checkEqual('01/2/4 16:5:8 PM', dateToStringMoment(dt, 'YY/M/D H:m:s A'));
+        checkEqual('01/2/4 16:5:8 Sun', dateToStringMoment(dt, 'YY/M/D H:m:s ddd'));
+        checkEqual('01/2/4 16:5:8 Sunday', dateToStringMoment(dt, 'YY/M/D H:m:s dddd'));
+        checkEqual('01/2/4 16:5:8 Feb', dateToStringMoment(dt, 'YY/M/D H:m:s MMM'));
+        checkEqual('01/2/4 16:5:8 February', dateToStringMoment(dt, 'YY/M/D H:m:s MMMM')); // quote
 
-        var dt = DateTime(2021, 1, 6);
-        checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
-        checkEqual('YYYYMMDD = 20210106', datetimeToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
+        var dt = Datetime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', dateToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210106', dateToStringMoment(dt, "'YYYYMMDD = 'YYYYMMDD")); // timezone
 
-        var dt = new Date();
-        var dt = DateTime(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
-        var timezoneOffset = -1 * dt.getTimezoneOffset();
-        var timezoneOffsetHour = (0 < timezoneOffset ? '+' : '-') + parts.string.paddingFirst(String(Math.floor(Math.abs(timezoneOffset / 60))), 2, '0');
-        var timezoneOffsetMin = parts.string.paddingFirst(String(timezoneOffset % 60), 2, '0'); // '+0900' etc
+        var _minutesToTexts5 = minutesToTexts(-1 * dt.getTimezoneOffset()),
+            _minutesToTexts6 = _slicedToArray(_minutesToTexts5, 3),
+            s = _minutesToTexts6[0],
+            h = _minutesToTexts6[1],
+            m = _minutesToTexts6[2];
 
-        checkEqual(timezoneOffsetHour + timezoneOffsetMin, datetimeToStringMoment(dt, 'ZZ'));
+        checkEqual(s + h + ':' + m, dateToStringMoment(dt, 'Z'));
+        checkEqual(s + h + m, dateToStringMoment(dt, 'ZZ'));
 
         if (parts.platform.isWindowsScriptHost()) {
-          checkEqual(true, dt.toString().indexOf('UTC' + datetimeToString(dt, 'ZZ')) !== -1);
+          checkEqual(true, dt.toString().indexOf('UTC' + dateToStringMoment(dt, 'ZZ')) !== -1);
         } else {
-          checkEqual(true, dt.toString().indexOf('GMT' + datetimeToString(dt, 'ZZ')) !== -1);
-        } // '+09:00' etc
+          checkEqual(true, dt.toString().indexOf('GMT' + dateToStringMoment(dt, 'ZZ')) !== -1);
+        }
 
-
-        checkEqual(timezoneOffsetHour + ':' + timezoneOffsetMin, datetimeToStringMoment(dt, 'Z')); // exception
+        if (!parts.platform.isWindowsScriptHost()) {
+          checkEqual(0, dt.toString().indexOf(dateToStringMoment(dt, 'ddd MMM DD YYYY HH:mm:ss "GMT"ZZ')));
+        } else {
+          checkEqual(0, dt.toString().indexOf(dateToStringMoment(dt, 'ddd MMM D HH:mm:ss "UTC"ZZ YYYY')));
+        } // exception
         // quote
 
-        var dt = DateTime(2021, 1, 6);
+
+        var dt = Datetime(2021, 1, 6);
         checkEqual(false, isThrown(function () {
-          datetimeToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
+          dateToStringMoment(dt, '"YYYYMMDD = "YYYYMMDD');
         }));
         checkEqual(true, isThrown(function () {
-          datetimeToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
+          dateToStringMoment(dt, '"YYYY"MMDD = "YYYYMMDD');
         }));
+      });
+    };
+
+    var test_dateToString_timezoneOffset = function test_dateToString_timezoneOffset() {
+      it('test_dateToString', function () {
+        var dt = Datetime(2021, 6, 1, 0, 20, 30);
+        checkEqual('2021/06/01 00:20:30', dateToString(dt, 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual('2021/06/01 00:20:30', dateToString(dt, 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual('2021/06/01 00:20:30', dateToString(dt, 'YYYY/MM/DD HH:mm:ss', dt.getTimezoneOffset()));
+        var dt = DatetimeUTC(2021, 6, 1, 0, 20, 30, 0);
+        checkEqual('2021/06/01 09:20:30 +09:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 9 * 60));
+        checkEqual('2021/06/01 08:20:30 +0800', dateToString(dt, 'YYYY/MM/DD HH:mm:ss ZZ', -1 * 8 * 60));
+        checkEqual('2021/06/01 07:20:30 +07:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 7 * 60));
+        checkEqual('2021/06/01 01:20:30 +01:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', -1 * 1 * 60));
+        checkEqual('2021/06/01 00:20:30 +00:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 0));
+        checkEqual('2021/05/31 23:20:30 -01:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 1 * 60));
+        checkEqual('2021/05/31 12:20:30 -12:00', dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z', 12 * 60));
+        checkEqual('2021/06/01 00:20:30 Z', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss Z')); // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, '"YYYYMMDD = "YYYYMMDD', dt.getTimezoneOffset()));
+        checkEqual('YYYYMMDD = 20210106', dateToString(dt, "'YYYYMMDD = 'YYYYMMDD", dt.getTimezoneOffset())); // exception
+        // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          dateToString(dt, '"YYYYMMDD = "YYYYMMDD', dt.getTimezoneOffset());
+        }));
+        checkEqual(true, isThrown(function () {
+          dateToString(dt, '"YYYY"MMDD = "YYYYMMDD', dt.getTimezoneOffset());
+        }));
+      });
+    };
+
+    var test_dateToStringUTC = function test_dateToStringUTC() {
+      it('test_dateToStringUTC', function () {
+        var dt = new Date(Date.UTC(2021, 1, 3, 4, 5, 6, 789));
+        checkEqual('2021/02/03 04:05:06.789', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual('2021/02/03 04:05:06.78', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual('2021/02/03 04:05:06.7', dateToStringUTC(dt, 'YYYY/MM/DD HH:mm:ss.S'));
+        var dt = new Date(Date.UTC(2021, 4, 31, 13, 2, 3));
+        checkEqual('21/5/31 1:2:3 pm', dateToStringUTC(dt, 'YY/M/D h:m:s aa'));
+        checkEqual('21/5/31 13:2:3', dateToStringUTC(dt, 'YY/M/D H:m:s'));
+        var dt = new Date(Date.UTC(2021, 4, 31, 9, 10, 11));
+        checkEqual('21/5/31 9:10:11', dateToStringUTC(dt, 'YY/M/D h:m:s')); // timezone
+
+        var dt = new Date(Date.UTC(2021, 4, 31, 9, 10, 11));
+        checkEqual('21/5/31 9:10:11', dateToStringUTC(dt, 'YY/M/D h:m:s'));
+        checkEqual('21/5/31 9:10:11 Z', dateToStringUTC(dt, 'YY/M/D h:m:s Z'));
+        checkEqual('21/5/31 9:10:11 Z', dateToStringUTC(dt, 'YY/M/D h:m:s ZZ')); // quote
+
+        var dt = new Date(Date.UTC(2021, 4, 31));
+        checkEqual('YYYYMMDD = 20210531', dateToStringUTC(dt, '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual('YYYYMMDD = 20210531', dateToStringUTC(dt, "'YYYYMMDD = 'YYYYMMDD")); // exception
+        // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          dateToStringUTC(dt, '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          dateToStringUTC(dt, '"YYYY"MMDD = "YYYYMMDD');
+        }));
+      });
+    };
+
+    var test_stringToDate = function test_stringToDate() {
+      it('test_stringToDate', function () {
+        checkEqual(new Date(2021, 4, 1), stringToDate('2021/05/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2021, 3, 30), stringToDate('2021/04/30', 'YYYY/MM/DD'));
+        checkEqual(new Date(''), stringToDate('2021/05/00', 'YYYY/MM/DD'));
+        checkEqual(new Date(''), stringToDate('2021/04/31', 'YYYY/MM/DD'));
+        checkEqual(new Date(''), stringToDate('2021/5/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2021, 4, 1), stringToDate('2021/5/01', 'YYYY/M/DD'));
+        checkEqual(new Date(''), stringToDate('2021/05/01', 'YYYY/M/DD'));
+        checkEqual(new Date(2021, 10, 1), stringToDate('2021/11/01', 'YYYY/M/DD'));
+        checkEqual(new Date(2021, 10, 1), stringToDate('2021/11/01', 'YYYY/MM/DD'));
+        checkEqual(new Date(2020, 11, 1), stringToDate('1-12-20', 'D-M-YY'));
+        checkEqual(new Date(2020, 11, 1), stringToDate('12-1-20', 'M-D-YY'));
+        checkEqual(new Date(2020, 0, 21), stringToDate('21-1-20', 'D-M-YY'));
+        checkEqual(new Date(2020, 0, 21), stringToDate('1-21-20', 'M-D-YY'));
+        checkEqual(new Date(2020, 0, 12), stringToDate('1-12-20', 'M-D-YY'));
+        checkEqual(new Date(''), stringToDate('21-1-20', 'M-D-YY'));
+        checkEqual(new Date(2021, 4, 1, 3, 4, 5), stringToDate('2021/05/01 03:04:05', 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual(new Date(2021, 4, 1, 11, 8, 9), stringToDate('2021/05/01 11:08:09(Sat)', 'YYYY/MM/DD HH:mm:ss(ddd)'));
+        checkEqual(new Date(''), stringToDate('2021/05/01 11:08:09(Mon)', 'YYYY/MM/DD HH:mm:ss(ddd)'));
+        testCounter(100);
+        checkEqual(Datetime(2001, 2, 4, 9, 5, 8, 45), stringToDate('2001/02/04 09:05:08.045', 'YYYY/MM/DD HH:mm:ss.SSS'));
+        checkEqual(Datetime(2001, 2, 4, 9, 5, 8, 40), stringToDate('2001/02/04 09:05:08.04', 'YYYY/MM/DD HH:mm:ss.SS'));
+        checkEqual(Datetime(2001, 2, 4, 9, 5, 8, 0), stringToDate('2001/02/04 09:05:08.0', 'YYYY/MM/DD HH:mm:ss.S'));
+        checkEqual(Datetime(2001, 2, 4), stringToDate('Sun, 04 Feb 2001', 'ddd, DD MMM YYYY'));
+        checkEqual(Datetime(2001, 2, 4), stringToDate('[Sun]|/\\ 04 Feb 2001', '[ddd]|/\\ DD MMM YYYY'));
+        checkEqual(Datetime(2001, 2, 4), stringToDate('Sunday, 04 Feb 2001', 'dddd, DD MMM YYYY'));
+        checkEqual(Datetime(2001, 9, 4), stringToDate('September4 2001', 'MMMMMD YYYY')); // am pm
+
+        testCounter(200);
+        checkEqual('20210526 8 59 40 p', dateToString(Datetime(2021, 5, 26, 20, 59, 40), 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDate('20210526 8 59 40 a', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDate('20210526 8 59 40 AM', 'YYYYMMDD h mm ss AA'));
+        checkEqual(Datetime(2021, 5, 26, 20, 59, 40), stringToDate('20210526 8 59 40 p', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 20, 59, 40), stringToDate('20210526 08 59 40 P', 'YYYYMMDD hh mm ss A'));
+        checkEqual(Datetime(2021, 5, 26, 23, 59, 40), stringToDate('20210526 11 59 40 PM', 'YYYYMMDD h mm ss AA'));
+        checkEqual(Datetime(2021, 5, 26, 23, 59, 40), stringToDate('20210526 11 59 40 pm', 'YYYYMMDD hh mm ss aa'));
+        checkEqual(Datetime(2021, 5, 26, 23, 59, 40), stringToDate('20210526 11 59 40 p p p', 'YYYYMMDD hh mm ss a a a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDate('20210526 8 59 40', 'YYYYMMDD h mm ss'));
+        checkNotEqual(Datetime(2021, 5, 26, 13, 59, 40), stringToDate('20210526 13 59 40', 'YYYYMMDD h mm ss'));
+        checkEqual(Datetime(2021, 5, 26, 13, 59, 40), stringToDate('20210526 1 59 40 p', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 13, 59, 40), stringToDate('20210526 13 59 40', 'YYYYMMDD H mm ss')); // timezone
+
+        testCounter(300);
+        var dt = Datetime(2021, 6, 1, 23, 45, 6);
+
+        var _minutesToTexts7 = minutesToTexts(-1 * dt.getTimezoneOffset()),
+            _minutesToTexts8 = _slicedToArray(_minutesToTexts7, 3),
+            s = _minutesToTexts8[0],
+            h = _minutesToTexts8[1],
+            m = _minutesToTexts8[2];
+
+        var timezoneText = s + h + ':' + m;
+        checkEqual(dateToString(dt, 'YYYY/MM/DD HH:mm:ss Z'), '2021/06/01 23:45:06 ' + timezoneText);
+        var dt = Datetime(2021, 6, 1, 0, 12, 34, 0, 0);
+        checkEqual(dt, stringToDate('2021/06/01 09:12:34 +09:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 08:12:34 +08:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 +00:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/05/31 23:12:34 -01:00', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss Z'));
+        checkEqual(dt, stringToDate('2021/06/01 09:12:34 +0900', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 08:12:34 +0800', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 +0000', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/05/31 23:12:34 -0100', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 00:12:34 Z', 'YYYY/MM/DD HH:mm:ss ZZ'));
+        checkEqual(dt, stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss', -540));
+        checkEqual(dt, stringToDate('2021/06/01 08:12:34', 'YYYY/MM/DD HH:mm:ss', -480));
+        checkEqual(dt, stringToDate('2021/06/01 08:12:34 +08:00', 'YYYY/MM/DD HH:mm:ss Z', -540)); // init
+
+        testCounter(400);
+        checkEqual(new Date(2021, 0, 1), stringToDate('2021', 'YYYY'));
+        checkEqual(new Date(2021, 5, 1), stringToDate('2021/06', 'YYYY/MM'));
+        checkEqual(new Date(2021, 5, 2), stringToDate('06/02', 'MM/DD')); // sourceDate
+
+        checkEqual(new Date(2021, 0, 1), stringToDate('21', 'YY'));
+        checkEqual(new Date(2085, 0, 1), stringToDate('85', 'YY')); // checkEqual(new Date(1921, 0, 1),
+        //   stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)), 'NG');
+
+        checkEqual(new Date(1980, 0, 1), stringToDate('80', 'YY', undefined, new Date(1990, 0, 1)));
+        checkEqual(new Date(1985, 0, 1), stringToDate('85', 'YY', undefined, new Date(1990, 0, 1)));
+        checkEqual(new Date(2019, 5, 2), stringToDate('06/02', 'MM/DD', undefined, new Date(2019, 0, 1))); // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(dt, stringToDate('YYYYMMDD = 20210106', '"YYYYMMDD = "YYYYMMDD'));
+        checkEqual(dt, stringToDate('YYYYMMDD = 20210106', "'YYYYMMDD = 'YYYYMMDD"));
+        checkEqual(dt, stringToDate('YYYY = 2021 / MM = 01 / DD = 06', "'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD"));
+        checkEqual(dt, stringToDate('--YYYY = 2021 / MM = 01 / DD = 06--', "--'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD--")); // exception
+        // quote
+
+        var dt = Datetime(2021, 1, 6);
+        checkEqual(false, isThrown(function () {
+          stringToDate('YYYYMMDD = 20210106', '"YYYYMMDD = "YYYYMMDD');
+        }));
+        checkEqual(true, isThrown(function () {
+          stringToDate('YYYYMMDD = 20210106', '"YYYY"MMDD = "YYYYMMDD');
+        })); // object parameter
+
+        checkEqual(new Date(2021, 4, 1), stringToDate({
+          str: '2021/05/01',
+          format: 'YYYY/MM/DD'
+        }));
+        checkEqual(new Date(2021, 4, 1), stringToDate('2021/05/01', {
+          format: 'YYYY/MM/DD'
+        }));
+        checkEqual(new Date(2021, 4, 1), stringToDate('2021/05/01', {
+          format: 'YYYY/MM/DD'
+        }));
+        checkEqual(Datetime(2021, 6, 1, 0, 12, 34, 0, 0), stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss', {
+          timezoneOffset: -540
+        }));
+        checkEqual(new Date(1980, 0, 1), stringToDate('80', 'YY', {
+          sourceDate: new Date(1990, 0, 1)
+        }));
+        checkEqual(new Date(1980, 0, 1), stringToDate('80', 'YY', undefined, {
+          sourceDate: new Date(1990, 0, 1)
+        }));
+      });
+    };
+
+    var test_stringToDate_MomentLike = function test_stringToDate_MomentLike() {
+      it('test_stringToDate_MomentLike', function () {
+        var stringToDateMoment = function stringToDateMoment(str, format) {
+          return stringToDate(str, format, {
+            rule: stringToDate.rule.MomentLike()
+          });
+        };
+
+        checkEqual(Datetime(2001, 9, 4), stringToDateMoment('September4 2001', 'MMMMD YYYY')); // am pm
+
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDateMoment('20210526 8 59 40 am', 'YYYYMMDD h mm ss a'));
+        checkEqual(Datetime(2021, 5, 26, 8, 59, 40), stringToDateMoment('20210526 8 59 40 AM', 'YYYYMMDD h mm ss A'));
+        checkEqual(true, isInvalidDate(stringToDateMoment('20210526 8 59 40 AM', 'YYYYMMDD h mm ss AA'))); // object parameter
+
+        checkEqual(Datetime(2001, 9, 4), stringToDate('September4 2001', 'MMMMD YYYY', undefined, {
+          rule: stringToDate.rule.MomentLike()
+        }));
+        checkEqual(Datetime(2001, 9, 4), stringToDate('September4 2001', 'MMMMD YYYY', undefined, undefined, {
+          rule: stringToDate.rule.MomentLike()
+        }));
+      });
+    };
+
+    var test_stringToDateUTC = function test_stringToDateUTC() {
+      it('test_stringToDateUTC', function () {
+        checkEqual(Datetime(2021, 6, 1, 0, 12, 34, 0, 0), stringToDate('2021/06/01 09:12:34', 'YYYY/MM/DD HH:mm:ss', -540));
+        checkEqual(Datetime(2021, 6, 1, 0, 12, 34, 0, 0), stringToDate('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss', 0));
+        checkEqual(Datetime(2021, 6, 1, 0, 12, 34, 0, 0), stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'));
+        checkEqual(DatetimeUTC(2021, 6, 1, 0, 12, 34, 0, 0), stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'));
+
+        if (new Date().getTimezoneOffset() !== 0) {
+          checkNotEqual(Datetime(2021, 6, 1, 0, 12, 34, 0), stringToDateUTC('2021/06/01 00:12:34', 'YYYY/MM/DD HH:mm:ss'));
+        }
       });
     };
 
@@ -17813,25 +18792,21 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeek(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeek(dt, true)); // local Sat UTC Fri
 
         checkEqual('Fri', dayOfWeek(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 9, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeek(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeek(dt, {
           isLocal: true
@@ -17841,8 +18816,8 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 9, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeek(dt, {
@@ -17857,41 +18832,23 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dayOfWeekEnglishShort = function dayOfWeekEnglishShort(date, isLocal) {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.EnglishShort());
+        };
+
+        var dt = Datetime(2021, 1, 9);
         checkEqual('Sat', dayOfWeekEnglishShort(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
         checkEqual('Sat', dayOfWeekEnglishShort(dt, true)); // local Sat UTC Fri
 
         checkEqual('Fri', dayOfWeekEnglishShort(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 9, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('Sat', dayOfWeekEnglishShort(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
-        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
-        checkEqual('Sat', dayOfWeekEnglishShort(dt, {
-          isLocal: true
-        })); // local Sat UTC Fri
-
-        checkEqual('Fri', dayOfWeekEnglishShort(dt, {
-          isLocal: false
-        })); // UTC Sat
-
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('Sat', dayOfWeekEnglishShort(dt, {
-          isLocal: false
-        }));
+        checkEqual('Sat', dayOfWeekEnglishShort(dt, false));
       });
     };
 
@@ -17901,41 +18858,23 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dayOfWeekEnglishLong = function dayOfWeekEnglishLong(date, isLocal) {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.EnglishLong());
+        };
+
+        var dt = Datetime(2021, 1, 9);
         checkEqual('Saturday', dayOfWeekEnglishLong(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
         checkEqual('Saturday', dayOfWeekEnglishLong(dt, true)); // local Sat UTC Fri
 
         checkEqual('Friday', dayOfWeekEnglishLong(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 9, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('Saturday', dayOfWeekEnglishLong(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
-        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
-        checkEqual('Saturday', dayOfWeekEnglishLong(dt, {
-          isLocal: true
-        })); // local Sat UTC Fri
-
-        checkEqual('Friday', dayOfWeekEnglishLong(dt, {
-          isLocal: false
-        })); // UTC Sat
-
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('Saturday', dayOfWeekEnglishLong(dt, {
-          isLocal: false
-        }));
+        checkEqual('Saturday', dayOfWeekEnglishLong(dt, false));
       });
     };
 
@@ -17945,43 +18884,23 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dayOfWeekJapaneseShort = function dayOfWeekJapaneseShort(date, isLocal) {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.JapaneseShort());
+        };
+
+        var dt = Datetime(2021, 1, 9);
         checkEqual('土', dayOfWeekJapaneseShort(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
         checkEqual('土', dayOfWeekJapaneseShort(dt, true)); // local Sat UTC Fri
 
         checkEqual('金', dayOfWeekJapaneseShort(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 9, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('土', dayOfWeekJapaneseShort(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 9);
-        checkEqual('土', dayOfWeekJapaneseShort(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
-        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
-        checkEqual('土', dayOfWeekJapaneseShort(dt, {
-          isLocal: true
-        })); // local Sat UTC Fri
-
-        checkEqual('金', dayOfWeekJapaneseShort(dt, {
-          isLocal: false
-        })); // UTC Sat
-
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('土', dayOfWeekJapaneseShort(dt, {
-          isLocal: false
-        }));
+        checkEqual('土', dayOfWeekJapaneseShort(dt, false));
       });
     };
 
@@ -17991,43 +18910,23 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 9);
+        var dayOfWeekJapaneseLong = function dayOfWeekJapaneseLong(date, isLocal) {
+          return dayOfWeek(date, isLocal, dayOfWeek.names.JapaneseLong());
+        };
+
+        var dt = Datetime(2021, 1, 9);
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 9, 8);
         checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
         checkEqual('土曜日', dayOfWeekJapaneseLong(dt, true)); // local Sat UTC Fri
 
         checkEqual('金曜日', dayOfWeekJapaneseLong(dt, false)); // UTC Sat
 
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 9, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 9);
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt));
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: true
-        });
-        checkEqual('2021-01-08T23:00:00.000Z', dt.toISOString());
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, {
-          isLocal: true
-        })); // local Sat UTC Fri
-
-        checkEqual('金曜日', dayOfWeekJapaneseLong(dt, {
-          isLocal: false
-        })); // UTC Sat
-
-        var dt = DateTime(2021, 1, 9, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-09T08:00:00.000Z', dt.toISOString());
-        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, {
-          isLocal: false
-        }));
+        checkEqual('土曜日', dayOfWeekJapaneseLong(dt, false));
       });
     };
 
@@ -18037,25 +18936,21 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonth(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonth(dt, true)); // local Jan UTC Dec
 
         checkEqual('Dec', nameOfMonth(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 1, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonth(dt, false)); // Object Parameter
 
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonth(dt, {
           isLocal: true
@@ -18065,8 +18960,8 @@ var test_execute_date = function test_execute_date(parts) {
           isLocal: false
         })); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 1, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonth(dt, {
@@ -18081,41 +18976,23 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var nameOfMonthEnglishChar3 = function nameOfMonthEnglishChar3(date, isLocal) {
+          return nameOfMonth(date, isLocal, nameOfMonth.names.EnglishChar3());
+        };
+
+        var dt = Datetime(2021, 1, 1);
         checkEqual('Jan', nameOfMonthEnglishChar3(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
         checkEqual('Jan', nameOfMonthEnglishChar3(dt, true)); // local Jan UTC Dec
 
         checkEqual('Dec', nameOfMonthEnglishChar3(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 1, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
-        checkEqual('Jan', nameOfMonthEnglishChar3(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
-        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
-        checkEqual('Jan', nameOfMonthEnglishChar3(dt, {
-          isLocal: true
-        })); // local Jan UTC Dec
-
-        checkEqual('Dec', nameOfMonthEnglishChar3(dt, {
-          isLocal: false
-        })); // UTC
-
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
-        checkEqual('Jan', nameOfMonthEnglishChar3(dt, {
-          isLocal: false
-        }));
+        checkEqual('Jan', nameOfMonthEnglishChar3(dt, false));
       });
     };
 
@@ -18125,41 +19002,23 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var nameOfMonthEnglishChar4 = function nameOfMonthEnglishChar4(date, isLocal) {
+          return nameOfMonth(date, isLocal, nameOfMonth.names.EnglishChar4());
+        };
+
+        var dt = Datetime(2021, 1, 1);
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
         checkEqual('Jan.', nameOfMonthEnglishChar4(dt, true)); // local Jan UTC Dec
 
         checkEqual('Dec.', nameOfMonthEnglishChar4(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 1, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
-        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
-        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
-        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, {
-          isLocal: true
-        })); // local Jan UTC Dec
-
-        checkEqual('Dec.', nameOfMonthEnglishChar4(dt, {
-          isLocal: false
-        })); // UTC
-
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
-        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, {
-          isLocal: false
-        }));
+        checkEqual('Jan.', nameOfMonthEnglishChar4(dt, false));
       });
     };
 
@@ -18169,48 +19028,57 @@ var test_execute_date = function test_execute_date(parts) {
           return;
         }
 
-        var dt = DateTime(2021, 1, 1);
+        var nameOfMonthEnglishLong = function nameOfMonthEnglishLong(date, isLocal) {
+          return nameOfMonth(date, isLocal, nameOfMonth.names.EnglishLong());
+        };
+
+        var dt = Datetime(2021, 1, 1);
         checkEqual('January', nameOfMonthEnglishLong(dt));
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
+        var dt = Datetime(2021, 1, 1, 8);
         checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
         checkEqual('January', nameOfMonthEnglishLong(dt, true)); // local Jan UTC Dec
 
         checkEqual('December', nameOfMonthEnglishLong(dt, false)); // UTC
 
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
+        var dt = Datetime(2021, 1, 1, 8, {
+          timezoneOffset: 0
         });
         checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
-        checkEqual('January', nameOfMonthEnglishLong(dt, false)); // Object Parameter
-
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: true
-        });
-        checkEqual('2020-12-31T23:00:00.000Z', dt.toISOString());
-        checkEqual('January', nameOfMonthEnglishLong(dt, {
-          isLocal: true
-        })); // local Jan UTC Dec
-
-        checkEqual('December', nameOfMonthEnglishLong(dt, {
-          isLocal: false
-        })); // UTC
-
-        var dt = DateTime(2021, 1, 1, 8, {
-          isLocal: false
-        });
-        checkEqual('2021-01-01T08:00:00.000Z', dt.toISOString());
-        checkEqual('January', nameOfMonthEnglishLong(dt, {
-          isLocal: false
-        }));
+        checkEqual('January', nameOfMonthEnglishLong(dt, false));
       });
     };
 
-    test_Today();
+    var test_minutesToTexts = function test_minutesToTexts() {
+      it('test_minutesToTexts', function () {
+        checkEqual('+0900', minutesToTexts(540).join(''));
+        checkEqual('-:09:00', minutesToTexts(-540).join(':'));
+      });
+    };
+
+    var test_textsToMinutes = function test_textsToMinutes() {
+      it('test_textsToMinutes', function () {
+        checkEqual(540, textsToMinutes(['+', '09', '00']));
+        checkEqual(-540, textsToMinutes('-:09:00'.split(':')));
+      });
+    };
+
+    test_Year();
+    test_YearUTC();
+    test_Month();
+    test_MonthUTC();
+    test_Day();
+    test_DayUTC();
+    test_InvalidDate();
     test_isInvalidDate();
     test_Date_standard();
-    test_DateTime();
+    test_Datetime();
+    test_dateToString();
+    test_dateToString_MomemtLike();
+    test_dateToString_timezoneOffset();
+    test_dateToStringUTC();
+    test_stringToDate();
+    test_stringToDate_MomentLike();
+    test_stringToDateUTC();
     test_dayOfWeek();
     test_dayOfWeekEnglishShort();
     test_dayOfWeekEnglishLong();
@@ -18220,8 +19088,8 @@ var test_execute_date = function test_execute_date(parts) {
     test_nameOfMonthEnglishChar3();
     test_nameOfMonthEnglishChar4();
     test_nameOfMonthEnglishLong();
-    test_datetimeToString();
-    test_datetimeToString_MomemtLike();
+    test_minutesToTexts();
+    test_textsToMinutes();
   });
 };
 
