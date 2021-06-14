@@ -15,8 +15,7 @@ var _stringToDateRule = require("./__stringToDateRule.js");
 
 var _stringToDate2 = require("./_stringToDate.js");
 
-var stringToDate = function stringToDate(str, format) {
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date().getTimezoneOffset();
+var stringToDate = function stringToDate(str, format, timezoneOffset) {
   var sourceDate = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : (0, _Year2._Year)('this');
   var rule = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _stringToDateRule.__stringToDateRule.Default();
 
@@ -24,8 +23,7 @@ var stringToDate = function stringToDate(str, format) {
     var _str = str;
     str = _str.str;
     format = _str.format;
-    var _str$timezoneOffset = _str.timezoneOffset;
-    timezoneOffset = _str$timezoneOffset === void 0 ? new Date().getTimezoneOffset() : _str$timezoneOffset;
+    timezoneOffset = _str.timezoneOffset;
     var _str$sourceDate = _str.sourceDate;
     sourceDate = _str$sourceDate === void 0 ? (0, _Year2._Year)('this') : _str$sourceDate;
     var _str$rule = _str.rule;
@@ -33,16 +31,14 @@ var stringToDate = function stringToDate(str, format) {
   } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'timezoneOffset, sourceDate, rule')) {
     var _format = format;
     format = _format.format;
-    var _format$timezoneOffse = _format.timezoneOffset;
-    timezoneOffset = _format$timezoneOffse === void 0 ? new Date().getTimezoneOffset() : _format$timezoneOffse;
+    timezoneOffset = _format.timezoneOffset;
     var _format$sourceDate = _format.sourceDate;
     sourceDate = _format$sourceDate === void 0 ? (0, _Year2._Year)('this') : _format$sourceDate;
     var _format$rule = _format.rule;
     rule = _format$rule === void 0 ? _stringToDateRule.__stringToDateRule.Default() : _format$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(timezoneOffset, '', 'timezoneOffset, sourceDate, rule', 1)) {
     var _timezoneOffset = timezoneOffset;
-    var _timezoneOffset$timez = _timezoneOffset.timezoneOffset;
-    timezoneOffset = _timezoneOffset$timez === void 0 ? new Date().getTimezoneOffset() : _timezoneOffset$timez;
+    timezoneOffset = _timezoneOffset.timezoneOffset;
     var _timezoneOffset$sourc = _timezoneOffset.sourceDate;
     sourceDate = _timezoneOffset$sourc === void 0 ? (0, _Year2._Year)('this') : _timezoneOffset$sourc;
     var _timezoneOffset$rule = _timezoneOffset.rule;
@@ -66,7 +62,7 @@ var stringToDate = function stringToDate(str, format) {
     throw new TypeError("stringToDate args(format:".concat(format, ") is not string"));
   }
 
-  if (!(0, _isType.isInteger)(timezoneOffset)) {
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
     throw new TypeError("stringToDate args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
   }
 

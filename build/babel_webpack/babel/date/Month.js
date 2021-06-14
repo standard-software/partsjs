@@ -18,21 +18,19 @@ var _includes = require("../compare/__includes.js");
  */
 var Month = function Month(value) {
   var sourceDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Date();
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date().getTimezoneOffset();
+  var timezoneOffset = arguments.length > 2 ? arguments[2] : undefined;
 
   if ((0, _isObjectParameter.isObjectParameter)(value, 'value', 'sourceDate, timezoneOffset')) {
     var _value = value;
     value = _value.value;
     var _value$sourceDate = _value.sourceDate;
     sourceDate = _value$sourceDate === void 0 ? new Date() : _value$sourceDate;
-    var _value$timezoneOffset = _value.timezoneOffset;
-    timezoneOffset = _value$timezoneOffset === void 0 ? new Date().getTimezoneOffset() : _value$timezoneOffset;
+    timezoneOffset = _value.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(sourceDate, '', 'sourceDate, timezoneOffset', 1)) {
     var _sourceDate = sourceDate;
     var _sourceDate$sourceDat = _sourceDate.sourceDate;
     sourceDate = _sourceDate$sourceDat === void 0 ? new Date() : _sourceDate$sourceDat;
-    var _sourceDate$timezoneO = _sourceDate.timezoneOffset;
-    timezoneOffset = _sourceDate$timezoneO === void 0 ? new Date().getTimezoneOffset() : _sourceDate$timezoneO;
+    timezoneOffset = _sourceDate.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(timezoneOffset, 'timezoneOffset', '')) {
     var _timezoneOffset = timezoneOffset;
     timezoneOffset = _timezoneOffset.timezoneOffset;
@@ -50,7 +48,7 @@ var Month = function Month(value) {
     throw new TypeError("Month args(sourceDate:".concat(sourceDate, ") is not date"));
   }
 
-  if (!(0, _isType.isInteger)(timezoneOffset)) {
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
     throw new TypeError("Month args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
   }
 

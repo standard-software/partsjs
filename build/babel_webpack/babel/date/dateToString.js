@@ -11,23 +11,20 @@ var _isObjectParameter = require("../object/isObjectParameter.js");
 
 var _dateToString2 = require("./_dateToString.js");
 
-var dateToString = function dateToString(date, format) {
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date().getTimezoneOffset();
+var dateToString = function dateToString(date, format, timezoneOffset) {
   var rule = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _dateToString2._dateToString.rule.Default();
 
   if ((0, _isObjectParameter.isObjectParameter)(date, 'date, format', 'timezoneOffset, rule')) {
     var _date = date;
     date = _date.date;
     format = _date.format;
-    var _date$timezoneOffset = _date.timezoneOffset;
-    timezoneOffset = _date$timezoneOffset === void 0 ? date.getTimezoneOffset() : _date$timezoneOffset;
+    timezoneOffset = _date.timezoneOffset;
     var _date$rule = _date.rule;
     rule = _date$rule === void 0 ? _dateToString2._dateToString.rule.Default() : _date$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(format, 'format', 'timezoneOffset, rule')) {
     var _format = format;
     format = _format.format;
-    var _format$timezoneOffse = _format.timezoneOffset;
-    timezoneOffset = _format$timezoneOffse === void 0 ? date.getTimezoneOffset() : _format$timezoneOffse;
+    timezoneOffset = _format.timezoneOffset;
     var _format$rule = _format.rule;
     rule = _format$rule === void 0 ? _dateToString2._dateToString.rule.Default() : _format$rule;
   } else if ((0, _isObjectParameter.isObjectParameter)(timezoneOffset, 'timezoneOffset', 'rule')) {
@@ -48,7 +45,7 @@ var dateToString = function dateToString(date, format) {
     throw new TypeError("dateToString args(format:".concat(format, ") is not string"));
   }
 
-  if (!(0, _isType.isInteger)(timezoneOffset)) {
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
     throw new TypeError("dateToString args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
   }
 

@@ -168,11 +168,17 @@ __stringToDateRule.finalize = function (targetDate) {
       seconds = datetimeInfo.seconds,
       milliseconds = datetimeInfo.milliseconds,
       timezoneOffset = datetimeInfo.timezoneOffset;
-  targetDate.setUTCFullYear(year, month, date);
-  targetDate.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
 
-  if (!(0, _type.isNull)(datetimeInfo.timezoneOffset)) {
-    targetDate.setMinutes(targetDate.getMinutes() + datetimeInfo.timezoneOffset);
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    targetDate.setFullYear(year, month, date);
+    targetDate.setHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    targetDate.setUTCFullYear(year, month, date);
+    targetDate.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
+  } else {
+    targetDate.setUTCFullYear(year, month, date);
+    targetDate.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
+    targetDate.setMinutes(targetDate.getMinutes() + timezoneOffset);
   }
 
   return timezoneOffset;

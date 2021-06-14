@@ -49,8 +49,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var _stringToDate = function _stringToDate(str, format) {
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date().getTimezoneOffset();
+var _stringToDate = function _stringToDate(str, format, timezoneOffset) {
   var sourceDate = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : (0, _Year2._Year)('this');
   var rule = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _stringToDateRule.__stringToDateRule.Default();
   var existSingleQuote = (0, _includes.__includes)(format, "'");
@@ -60,7 +59,8 @@ var _stringToDate = function _stringToDate(str, format) {
     throw new Error("__stringToDate args(format:".concat(format, ") exists both singleQuote and doubleQuote"));
   }
 
-  _stringToDateRule.__stringToDateRule.initialize(sourceDate, timezoneOffset);
+  _stringToDateRule.__stringToDateRule.initialize(sourceDate, timezoneOffset); // console.log({ sourceDate, timezoneOffset });
+
 
   var keys = (0, _objectKeys2._objectKeys)(rule);
   keys.sort((0, _SortFunc2._SortFunc)([[_SortFunc2._SortFunc.order.normal.descending, function (v) {
@@ -103,7 +103,7 @@ var _stringToDate = function _stringToDate(str, format) {
   var replaceInfoItems = replaceResult.replaceInfo.map(function (e) {
     return rule[keys[e.searchIndex]];
   });
-  var matchResult = str.match(new RegExp("".concat(replaceResult.result)));
+  var matchResult = str.match(new RegExp("".concat(replaceResult.result))); // console.log({ matchResult, replaceResult });
 
   if (!Array.isArray(matchResult)) {
     return (0, _InvalidDate.InvalidDate)();
@@ -136,7 +136,11 @@ var _stringToDate = function _stringToDate(str, format) {
     _iterator.f();
   }
 
-  var timezoneOffsetMin = _stringToDateRule.__stringToDateRule.finalize(result);
+  var timezoneOffsetMin = _stringToDateRule.__stringToDateRule.finalize(result); // console.log(
+  //   result, timezoneOffsetMin,
+  //   _dateToString(result, format, timezoneOffsetMin, rule.toStringRule),
+  // );
+
 
   if ((0, _dateToString2._dateToString)(result, format, timezoneOffsetMin, rule.toStringRule) === str) {
     return result;

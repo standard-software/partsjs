@@ -26,7 +26,7 @@ var Datetime = function Datetime() {
   var minutes = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
   var seconds = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
   var milliseconds = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  var timezoneOffset = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new Date().getTimezoneOffset();
+  var timezoneOffset = arguments.length > 7 ? arguments[7] : undefined;
 
   if ((0, _isObjectParameter.isObjectParameter)(year, '', 'year, month, day, hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     var _year = year;
@@ -44,8 +44,7 @@ var Datetime = function Datetime() {
     seconds = _year$seconds === void 0 ? 0 : _year$seconds;
     var _year$milliseconds = _year.milliseconds;
     milliseconds = _year$milliseconds === void 0 ? 0 : _year$milliseconds;
-    var _year$timezoneOffset = _year.timezoneOffset;
-    timezoneOffset = _year$timezoneOffset === void 0 ? new Date().getTimezoneOffset() : _year$timezoneOffset;
+    timezoneOffset = _year.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(month, '', 'month, day, hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     var _month = month;
     var _month$month = _month.month;
@@ -60,8 +59,7 @@ var Datetime = function Datetime() {
     seconds = _month$seconds === void 0 ? 0 : _month$seconds;
     var _month$milliseconds = _month.milliseconds;
     milliseconds = _month$milliseconds === void 0 ? 0 : _month$milliseconds;
-    var _month$timezoneOffset = _month.timezoneOffset;
-    timezoneOffset = _month$timezoneOffset === void 0 ? new Date().getTimezoneOffset() : _month$timezoneOffset;
+    timezoneOffset = _month.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(day, '', 'day, hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     var _day = day;
     var _day$day = _day.day;
@@ -74,8 +72,7 @@ var Datetime = function Datetime() {
     seconds = _day$seconds === void 0 ? 0 : _day$seconds;
     var _day$milliseconds = _day.milliseconds;
     milliseconds = _day$milliseconds === void 0 ? 0 : _day$milliseconds;
-    var _day$timezoneOffset = _day.timezoneOffset;
-    timezoneOffset = _day$timezoneOffset === void 0 ? new Date().getTimezoneOffset() : _day$timezoneOffset;
+    timezoneOffset = _day.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(hours, '', 'hours, minutes, seconds, milliseconds, timezoneOffset', 1)) {
     var _hours = hours;
     var _hours$hours = _hours.hours;
@@ -86,8 +83,7 @@ var Datetime = function Datetime() {
     seconds = _hours$seconds === void 0 ? 0 : _hours$seconds;
     var _hours$milliseconds = _hours.milliseconds;
     milliseconds = _hours$milliseconds === void 0 ? 0 : _hours$milliseconds;
-    var _hours$timezoneOffset = _hours.timezoneOffset;
-    timezoneOffset = _hours$timezoneOffset === void 0 ? new Date().getTimezoneOffset() : _hours$timezoneOffset;
+    timezoneOffset = _hours.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(minutes, '', 'minutes, seconds, milliseconds, timezoneOffset', 1)) {
     var _minutes = minutes;
     var _minutes$minutes = _minutes.minutes;
@@ -96,26 +92,22 @@ var Datetime = function Datetime() {
     seconds = _minutes$seconds === void 0 ? 0 : _minutes$seconds;
     var _minutes$milliseconds = _minutes.milliseconds;
     milliseconds = _minutes$milliseconds === void 0 ? 0 : _minutes$milliseconds;
-    var _minutes$timezoneOffs = _minutes.timezoneOffset;
-    timezoneOffset = _minutes$timezoneOffs === void 0 ? new Date().getTimezoneOffset() : _minutes$timezoneOffs;
+    timezoneOffset = _minutes.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(seconds, '', 'seconds, milliseconds, timezoneOffset', 1)) {
     var _seconds = seconds;
     var _seconds$seconds = _seconds.seconds;
     seconds = _seconds$seconds === void 0 ? 0 : _seconds$seconds;
     var _seconds$milliseconds = _seconds.milliseconds;
     milliseconds = _seconds$milliseconds === void 0 ? 0 : _seconds$milliseconds;
-    var _seconds$timezoneOffs = _seconds.timezoneOffset;
-    timezoneOffset = _seconds$timezoneOffs === void 0 ? new Date().getTimezoneOffset() : _seconds$timezoneOffs;
+    timezoneOffset = _seconds.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(milliseconds, '', 'milliseconds, timezoneOffset', 1)) {
     var _milliseconds = milliseconds;
     var _milliseconds$millise = _milliseconds.milliseconds;
     milliseconds = _milliseconds$millise === void 0 ? 0 : _milliseconds$millise;
-    var _milliseconds$timezon = _milliseconds.timezoneOffset;
-    timezoneOffset = _milliseconds$timezon === void 0 ? new Date().getTimezoneOffset() : _milliseconds$timezon;
+    timezoneOffset = _milliseconds.timezoneOffset;
   } else if ((0, _isObjectParameter.isObjectParameter)(timezoneOffset, '', 'timezoneOffset', 1)) {
     var _timezoneOffset = timezoneOffset;
-    var _timezoneOffset$timez = _timezoneOffset.timezoneOffset;
-    timezoneOffset = _timezoneOffset$timez === void 0 ? new Date().getTimezoneOffset() : _timezoneOffset$timez;
+    timezoneOffset = _timezoneOffset.timezoneOffset;
   }
 
   if (!(0, _isType.isInteger)(year)) {
@@ -146,7 +138,7 @@ var Datetime = function Datetime() {
     throw new TypeError("Datetime args(millisecond:".concat(milliseconds, ") is not integer"));
   }
 
-  if (!(0, _isType.isInteger)(timezoneOffset)) {
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
     throw new TypeError("Datetime args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
   }
 

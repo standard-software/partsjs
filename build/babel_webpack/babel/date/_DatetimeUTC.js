@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports._DatetimeUTC = void 0;
 
-var _Datetime = require("./__Datetime.js");
+var _Datetime2 = require("./_Datetime.js");
 
 /**
  * Datetime
@@ -18,7 +18,7 @@ var _DatetimeUTC = function _DatetimeUTC() {
   var minutes = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
   var seconds = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
   var milliseconds = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  return new _Datetime.__Datetime(year, month, date, hours, minutes, seconds, milliseconds, null);
+  return new _Datetime2._Datetime(year, month, date, hours, minutes, seconds, milliseconds, null);
 };
 
 exports._DatetimeUTC = _DatetimeUTC;

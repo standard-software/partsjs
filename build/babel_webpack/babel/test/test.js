@@ -93,7 +93,17 @@ var checkCompare = function checkCompare(compareFunc, a, b, result) {
   var message = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
 
   if (!(0, _type.isString)(message)) {
-    throw new TypeError('checkEqual args message is not string');
+    throw new TypeError("checkCompare args:message(=".concat(message, ") is not string"));
+  }
+
+  var conditionExpressText = '';
+
+  if (result === true) {
+    conditionExpressText = 'A !== B';
+  } else if (result === false) {
+    conditionExpressText = 'A === B';
+  } else {
+    throw new Error("checkCompare args:result(=".concat(result, ") is not boolean"));
   }
 
   testFrame.counter += 1;
@@ -106,7 +116,7 @@ var checkCompare = function checkCompare(compareFunc, a, b, result) {
   var output = (0, _array._map)(testFrame.describeArray, function (desc, i) {
     return (0, _string._repeat)('  ', i) + "describe: ".concat(desc);
   }).join('\n') + '\n';
-  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  A !== B\n") + "".concat(indent, "  A = ").concat(outputValue(a), "\n") + "".concat(indent, "  B = ").concat(outputValue(b));
+  output += "".concat(indent, "Test: ").concat(testFrame.testName, "\n") + "".concat(indent, "  Counter: ").concat(testFrame.counter, "\n") + (message === '' ? '' : "".concat(indent, "  Message: ").concat(message, "\n")) + "".concat(indent, "  ").concat(conditionExpressText, "\n") + "".concat(indent, "  A = ").concat(outputValue(a), "\n") + "".concat(indent, "  B = ").concat(outputValue(b));
   console.log(output);
   return false;
 };
