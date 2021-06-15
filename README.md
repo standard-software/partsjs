@@ -36,15 +36,17 @@ https://www.npmjs.com/package/@standard-software/parts
 ### npm install
 
 Normal
+
     npm i @standard-software/parts
 
 When specifying the version
+
     npm i @standard-software/parts@10.6.1
     npm i @standard-software/parts@9.2.0
 
 ### type CommonJS
 
-```
+```js
 // index.js
 const parts = require("@standard-software/parts");
 
@@ -56,7 +58,7 @@ console.log(
 
 ### type ES Modules
 
-```
+```js
 // index.mjs
 import parts from '@standard-software/parts';
 
@@ -74,7 +76,8 @@ console.log(
 ## How to use parts.js in Deno
 
 ### local
-```
+
+```js
 // index.js
 import parts from './source/index.js';
 
@@ -85,7 +88,8 @@ console.log(
     deno run index.js
 
 ### web
-```
+
+```js
 // index.js
 import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.6.1/source/index.js';
 
@@ -105,7 +109,7 @@ console.log(
 
 ### HTML file
 
-```
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -123,7 +127,7 @@ You can now use the functions of the parts.js object.
 
 ### HTML file CDN
 
-```
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -147,6 +151,38 @@ You can now use the functions of the parts.js object.
   https://standard-software.github.io/partsjs/test/web/test.html
 - partsjs/docs/test/web-cdn/test.html  
   https://standard-software.github.io/partsjs/test/web-cdn/test.html
+
+## RunKit + npm
+
+https://npm.runkit.com/%40standard-software%2Fparts
+
+```js
+var parts = require("@standard-software/parts")
+console.log('parts version is ', parts.VERSION);
+```
+
+## JSBin CDN
+
+https://jsbin.com/popuhog/edit?html,js,console
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.6.1"></script>
+
+</body>
+</html>
+```
+
+```js
+console.log('parts version is ' + parts.VERSION)
+```
 
 ## How to use parts.js in Google Apps Script for Rhino and V8
 
