@@ -203,7 +203,7 @@ https://script.google.com/home
 
 ### code.gs
 
-```
+```js
 // code.gs
 function myFunction() {
   console.log('parts version is ' + parts.VERSION);
@@ -222,7 +222,8 @@ Google Apps Script Home
 - menu [view][show manifest file]
 
 update manifest file
-```
+
+```json
 // appsscript.json
 {
   "timeZone": "Asia/Tokyo",
@@ -233,7 +234,7 @@ update manifest file
 }
 ```
 
-```
+```js
 // code.gs
 function myFunction() {
   outputFunction = () => {
@@ -272,7 +273,7 @@ You can copy and paste ./release_build/parts.js code into parts.gs
 
 ### code.gs
 
-```
+```js
 // code.gs
 function myFunction() {
   console.log('parts version is ' + parts.VERSION);
@@ -284,7 +285,7 @@ run and see sheet page.
 
 more write add code.gs
 
-```
+```js
 function onOpen() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
   var entries = [
@@ -317,7 +318,7 @@ same [How to use Google Apps Script]
 
 ### wsf file (ex. index.wsf)
 
-```
+```html
 <?xml version="1.0" encoding="shift-jis" ?>
 
 <job>
