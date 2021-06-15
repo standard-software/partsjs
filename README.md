@@ -327,8 +327,10 @@ You can now use the functions of the parts.js object.
 
 ### 10.6.1
 #### 2021/06/15(Tue)
-- update dateToString default timezone
+- update dateToString
+  - update default timezone
   - update __dateToStringRule.js
+  - bugfix _minutesToTexts GMT-0230 or GMT-0930
 
 ### 10.6.0
 #### 2021/06/14(Mon)

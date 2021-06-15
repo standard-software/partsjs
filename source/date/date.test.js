@@ -44,13 +44,18 @@ export const test_execute_date = (parts) => {
         }
 
         const now = new Date();
-        // console.log(now.getTimezoneOffset());
         checkEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), Year('this'));
         if (now.getTimezoneOffset() !== 0) {
-          checkNotEqual(
-            new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)),
-            Year('this'),
-          );
+          if (
+            (
+              new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0))
+            ).getTimezoneOffset() !== 0
+          ) {
+            checkNotEqual(
+              new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)),
+              Year('this', undefined, now.getTimezoneOffset()),
+            );
+          }
         }
 
         checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year('next'));
@@ -157,7 +162,12 @@ export const test_execute_date = (parts) => {
 
         const now = new Date();
         if (now.getTimezoneOffset() !== 0) {
-          checkNotEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+          if ((new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)).getTimezoneOffset() !== 0) {
+            checkNotEqual(
+              new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0),
+              YearUTC('this'),
+            );
+          }
         }
         checkEqual(
           DateUTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0),
@@ -1027,6 +1037,7 @@ export const test_execute_date = (parts) => {
         );
 
         // timezone
+        testCounter(100);
         const [s, h, m] = minutesToTexts(-1 * dt.getTimezoneOffset());
 
         // '+0900' etc

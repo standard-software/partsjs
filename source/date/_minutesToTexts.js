@@ -9,7 +9,7 @@ export const _minutesToTexts = (minutes) => {
     Math.floor(Math.abs(minutes / 60)),
   ), 2, '0');
   const minStr = _paddingFirst(String(
-    minutes % 60,
+    Math.abs(minutes % 60),
   ), 2, '0');
   return [sign, hourStr, minStr];
 };
