@@ -5,20 +5,20 @@ import { isNull, isUndefined } from '../type/type.js';
  */
 export const _Datetime = function(
   year = 1970, month = 1, date = 1,
-  hour = 0, minute = 0, second = 0, millisecond = 0,
+  hours = 0, minutes = 0, seconds = 0, milliseconds = 0,
   timezoneOffset,
 ) {
   const self = new Date(0);
 
   if (isUndefined(timezoneOffset)) {
     self.setFullYear(year, month - 1, date);
-    self.setHours(hour, minute, second, millisecond);
+    self.setHours(hours, minutes, seconds, milliseconds);
   } else if (isNull(timezoneOffset)) {
     self.setUTCFullYear(year, month - 1, date);
-    self.setUTCHours(hour, minute, second, millisecond);
+    self.setUTCHours(hours, minutes, seconds, milliseconds);
   } else {
     self.setUTCFullYear(year, month - 1, date);
-    self.setUTCHours(hour, minute, second, millisecond);
+    self.setUTCHours(hours, minutes, seconds, milliseconds);
     self.setMinutes(self.getMinutes() + timezoneOffset);
   }
 

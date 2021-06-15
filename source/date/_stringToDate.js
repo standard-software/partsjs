@@ -96,7 +96,7 @@ export const _stringToDate = (
   }
   const timezoneOffsetMin = __stringToDateRule.finalize(result);
 
-  // console.log(
+  // console.log('compare _dateToString',
   //   result, timezoneOffsetMin,
   //   _dateToString(result, format, timezoneOffsetMin, rule.toStringRule),
   // );

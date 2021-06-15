@@ -325,6 +325,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 10.6.1
+#### 2021/06/15(Tue)
+- update dateToString default timezone
+  - update __dateToStringRule.js
+
 ### 10.6.0
 #### 2021/06/14(Mon)
 - add date.strintToDate date.stringToDateUTC

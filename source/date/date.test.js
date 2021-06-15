@@ -579,7 +579,10 @@ export const test_execute_date = (parts) => {
 
         checkEqual(true,  (new Date()) instanceof Date);
         checkEqual(true,  InvalidDate() instanceof Date);
-        if (!parts.platform.isWindowsScriptHost()) {
+        if (
+          !parts.platform.isWindowsScriptHost()
+          && !parts.platform.isInternetExplorer()
+        ) {
           checkEqual('Date',  InvalidDate().constructor.name);
         }
 
@@ -1534,8 +1537,8 @@ export const test_execute_date = (parts) => {
         // sourceDate
         checkEqual(new Date(2021, 0, 1), stringToDate('21', 'YY'));
         checkEqual(new Date(2085, 0, 1), stringToDate('85', 'YY'));
-        // checkEqual(new Date(1921, 0, 1),
-        //   stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)), 'NG');
+        checkEqual(new Date(1921, 0, 1),
+          stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(1980, 0, 1),
           stringToDate('80', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(1985, 0, 1),

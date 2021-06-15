@@ -73,22 +73,22 @@ export const Datetime = function(
   }
   if (!isInteger(hours)) {
     throw new TypeError(
-      `Datetime args(hour:${hours}) is not integer`,
+      `Datetime args(hours:${hours}) is not integer`,
     );
   }
   if (!isInteger(minutes)) {
     throw new TypeError(
-      `Datetime args(minute:${minutes}) is not integer`,
+      `Datetime args(minutes:${minutes}) is not integer`,
     );
   }
   if (!isInteger(seconds)) {
     throw new TypeError(
-      `Datetime args(second:${seconds}) is not integer`,
+      `Datetime args(seconds:${seconds}) is not integer`,
     );
   }
   if (!isInteger(milliseconds)) {
     throw new TypeError(
-      `Datetime args(millisecond:${milliseconds}) is not integer`,
+      `Datetime args(milliseconds:${milliseconds}) is not integer`,
     );
   }
   if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {

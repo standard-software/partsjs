@@ -61,22 +61,22 @@ export const DatetimeUTC = function(
   }
   if (!isInteger(hours)) {
     throw new TypeError(
-      `DatetimeUTC args(hour:${hours}) is not integer`,
+      `DatetimeUTC args(hours:${hours}) is not integer`,
     );
   }
   if (!isInteger(minutes)) {
     throw new TypeError(
-      `DatetimeUTC args(minute:${minutes}) is not integer`,
+      `DatetimeUTC args(minutes:${minutes}) is not integer`,
     );
   }
   if (!isInteger(seconds)) {
     throw new TypeError(
-      `DatetimeUTC args(second:${seconds}) is not integer`,
+      `DatetimeUTC args(seconds:${seconds}) is not integer`,
     );
   }
   if (!isInteger(milliseconds)) {
     throw new TypeError(
-      `DatetimeUTC args(millisecond:${milliseconds}) is not integer`,
+      `DatetimeUTC args(milliseconds:${milliseconds}) is not integer`,
     );
   }
 

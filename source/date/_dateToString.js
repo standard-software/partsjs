@@ -12,7 +12,7 @@ import { __dateToStringRule } from './__dateToStringRule.js';
 import { _map } from '../array/_map.js';
 
 export const _dateToString = (
-  date, format, timezoneOffset = date.getTimezoneOffset(),
+  date, format, timezoneOffset,
   rule = __dateToStringRule.Default(),
 ) => {
   const existSingleQuote = __includes(format, "'");
