@@ -112,19 +112,19 @@ var DatetimeUTC = function DatetimeUTC() {
   }
 
   if (!(0, _isType.isInteger)(hours)) {
-    throw new TypeError("DatetimeUTC args(hour:".concat(hours, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(hours:".concat(hours, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(minutes)) {
-    throw new TypeError("DatetimeUTC args(minute:".concat(minutes, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(minutes:".concat(minutes, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(seconds)) {
-    throw new TypeError("DatetimeUTC args(second:".concat(seconds, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(seconds:".concat(seconds, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(milliseconds)) {
-    throw new TypeError("DatetimeUTC args(millisecond:".concat(milliseconds, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(milliseconds:".concat(milliseconds, ") is not integer"));
   }
 
   return (0, _DatetimeUTC2._DatetimeUTC)(year, month, day, hours, minutes, seconds, milliseconds);

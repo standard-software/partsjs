@@ -53,12 +53,13 @@ var test_execute_date = function test_execute_date(parts) {
           checkEqual(new Date(Date.UTC(2021, 0, 1, 0, 0, 0, 0)), new Date(2021, 0, 1, 9, 0, 0, 0));
         }
 
-        var now = new Date(); // console.log(now.getTimezoneOffset());
-
+        var now = new Date();
         checkEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), Year('this'));
 
         if (now.getTimezoneOffset() !== 0) {
-          checkNotEqual(new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)), Year('this'));
+          if (new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)).getTimezoneOffset() !== 0) {
+            checkNotEqual(new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0)), Year('this', undefined, now.getTimezoneOffset()));
+          }
         }
 
         checkEqual(new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0), Year('next'));
@@ -123,7 +124,9 @@ var test_execute_date = function test_execute_date(parts) {
         var now = new Date();
 
         if (now.getTimezoneOffset() !== 0) {
-          checkNotEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+          if (new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0).getTimezoneOffset() !== 0) {
+            checkNotEqual(new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
+          }
         }
 
         checkEqual(DateUTC(now.getUTCFullYear(), 0, 1, 0, 0, 0, 0), YearUTC('this'));
@@ -383,7 +386,7 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual(true, new Date() instanceof Date);
         checkEqual(true, InvalidDate() instanceof Date);
 
-        if (!parts.platform.isWindowsScriptHost()) {
+        if (!parts.platform.isWindowsScriptHost() && !parts.platform.isInternetExplorer()) {
           checkEqual('Date', InvalidDate().constructor.name);
         }
       });
@@ -646,6 +649,8 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual('YYYY = 2021 / MM = 01 / DD = 06', dateToString(dt, "'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD"));
         checkEqual('--YYYY = 2021 / MM = 01 / DD = 06--', dateToString(dt, "--'YYYY = 'YYYY / 'MM = 'MM / 'DD = 'DD--")); // timezone
 
+        testCounter(100);
+
         var _minutesToTexts3 = minutesToTexts(-1 * dt.getTimezoneOffset()),
             _minutesToTexts4 = _slicedToArray(_minutesToTexts3, 3),
             s = _minutesToTexts4[0],
@@ -875,9 +880,8 @@ var test_execute_date = function test_execute_date(parts) {
         checkEqual(new Date(2021, 5, 2), stringToDate('06/02', 'MM/DD')); // sourceDate
 
         checkEqual(new Date(2021, 0, 1), stringToDate('21', 'YY'));
-        checkEqual(new Date(2085, 0, 1), stringToDate('85', 'YY')); // checkEqual(new Date(1921, 0, 1),
-        //   stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)), 'NG');
-
+        checkEqual(new Date(2085, 0, 1), stringToDate('85', 'YY'));
+        checkEqual(new Date(1921, 0, 1), stringToDate('21', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(1980, 0, 1), stringToDate('80', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(1985, 0, 1), stringToDate('85', 'YY', undefined, new Date(1990, 0, 1)));
         checkEqual(new Date(2019, 5, 2), stringToDate('06/02', 'MM/DD', undefined, new Date(2019, 0, 1))); // quote

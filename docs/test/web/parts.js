@@ -157,7 +157,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '10.6.0 beta 2';
+var VERSION = '10.6.1';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -19231,22 +19231,22 @@ var _Datetime = function _Datetime() {
   var year = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1970;
   var month = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var date = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  var hour = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  var minute = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-  var second = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-  var millisecond = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var hours = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var minutes = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+  var seconds = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var milliseconds = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var timezoneOffset = arguments.length > 7 ? arguments[7] : undefined;
   var self = new Date(0);
 
   if ((0, _type.isUndefined)(timezoneOffset)) {
     self.setFullYear(year, month - 1, date);
-    self.setHours(hour, minute, second, millisecond);
+    self.setHours(hours, minutes, seconds, milliseconds);
   } else if ((0, _type.isNull)(timezoneOffset)) {
     self.setUTCFullYear(year, month - 1, date);
-    self.setUTCHours(hour, minute, second, millisecond);
+    self.setUTCHours(hours, minutes, seconds, milliseconds);
   } else {
     self.setUTCFullYear(year, month - 1, date);
-    self.setUTCHours(hour, minute, second, millisecond);
+    self.setUTCHours(hours, minutes, seconds, milliseconds);
     self.setMinutes(self.getMinutes() + timezoneOffset);
   }
 
@@ -19389,19 +19389,19 @@ var Datetime = function Datetime() {
   }
 
   if (!(0, _isType.isInteger)(hours)) {
-    throw new TypeError("Datetime args(hour:".concat(hours, ") is not integer"));
+    throw new TypeError("Datetime args(hours:".concat(hours, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(minutes)) {
-    throw new TypeError("Datetime args(minute:".concat(minutes, ") is not integer"));
+    throw new TypeError("Datetime args(minutes:".concat(minutes, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(seconds)) {
-    throw new TypeError("Datetime args(second:".concat(seconds, ") is not integer"));
+    throw new TypeError("Datetime args(seconds:".concat(seconds, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(milliseconds)) {
-    throw new TypeError("Datetime args(millisecond:".concat(milliseconds, ") is not integer"));
+    throw new TypeError("Datetime args(milliseconds:".concat(milliseconds, ") is not integer"));
   }
 
   if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
@@ -19570,19 +19570,19 @@ var DatetimeUTC = function DatetimeUTC() {
   }
 
   if (!(0, _isType.isInteger)(hours)) {
-    throw new TypeError("DatetimeUTC args(hour:".concat(hours, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(hours:".concat(hours, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(minutes)) {
-    throw new TypeError("DatetimeUTC args(minute:".concat(minutes, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(minutes:".concat(minutes, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(seconds)) {
-    throw new TypeError("DatetimeUTC args(second:".concat(seconds, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(seconds:".concat(seconds, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(milliseconds)) {
-    throw new TypeError("DatetimeUTC args(millisecond:".concat(milliseconds, ") is not integer"));
+    throw new TypeError("DatetimeUTC args(milliseconds:".concat(milliseconds, ") is not integer"));
   }
 
   return (0, _DatetimeUTC2._DatetimeUTC)(year, month, day, hours, minutes, seconds, milliseconds);
@@ -19627,8 +19627,7 @@ var _map2 = __webpack_require__(72);
 /**
  * dateToString
  */
-var _dateToString = function _dateToString(date, format) {
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : date.getTimezoneOffset();
+var _dateToString = function _dateToString(date, format, timezoneOffset) {
   var rule = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _dateToStringRule.__dateToStringRule.Default();
   var existSingleQuote = (0, _includes.__includes)(format, "'");
   var existDoubleQuote = (0, _includes.__includes)(format, '"');
@@ -19698,6 +19697,8 @@ var _nameOfMonth2 = __webpack_require__(197);
 
 var _minutesToTexts6 = __webpack_require__(199);
 
+var _cloneDate = __webpack_require__(175);
+
 var _defaultRule, _momentLikeRule;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -19727,23 +19728,43 @@ var setDateOffsetMin = function setDateOffsetMin(date, offsetMin) {
 };
 
 var year4 = function year4(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getFullYear();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCFullYear();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCFullYear();
   }
 
-  return setDateOffsetMin(date, timezoneOffset).getUTCFullYear().toString();
+  return result.toString();
 };
 
 var year2 = function year2(date, timezoneOffset) {
   return (0, _string_common._subLast)(year4(date, timezoneOffset), 2);
 };
 
-var month1 = function month1(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+var month = function month(date, timezoneOffset) {
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getMonth();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCMonth();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCMonth();
   }
 
-  return (setDateOffsetMin(date, timezoneOffset).getUTCMonth() + 1).toString();
+  return result;
+};
+
+var month1 = function month1(date, timezoneOffset) {
+  return (month(date, timezoneOffset) + 1).toString();
 };
 
 var month2 = function month2(date, timezoneOffset) {
@@ -19751,24 +19772,44 @@ var month2 = function month2(date, timezoneOffset) {
 };
 
 var date1 = function date1(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getDate();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCDate();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCDate();
   }
 
-  return setDateOffsetMin(date, timezoneOffset).getUTCDate().toString();
+  return result.toString();
 };
 
 var date2 = function date2(date, timezoneOffset) {
   return (0, _paddingFirst2._paddingFirst)(date1(date, timezoneOffset), 2, '0');
 };
 
-var hour12_1 = function hour12_1(date, timezoneOffset) {
-  // 0-11
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+var hours = function hours(date, timezoneOffset) {
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getHours();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCHours();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCHours();
   }
 
-  return (setDateOffsetMin(date, timezoneOffset).getUTCHours() % 12).toString();
+  return result;
+};
+
+var hour12_1 = function hour12_1(date, timezoneOffset) {
+  // 0-11
+  return (hours(date, timezoneOffset) % 12).toString();
 };
 
 var hour12_2 = function hour12_2(date, timezoneOffset) {
@@ -19778,11 +19819,7 @@ var hour12_2 = function hour12_2(date, timezoneOffset) {
 
 var hour24_1 = function hour24_1(date, timezoneOffset) {
   // 0-23
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return setDateOffsetMin(date, timezoneOffset).getUTCHours().toString();
+  return hours(date, timezoneOffset).toString();
 };
 
 var hour24_2 = function hour24_2(date, timezoneOffset) {
@@ -19790,120 +19827,135 @@ var hour24_2 = function hour24_2(date, timezoneOffset) {
   return (0, _paddingFirst2._paddingFirst)(hour24_1(date, timezoneOffset), 2, '0');
 };
 
-var minute1 = function minute1(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+var minutes1 = function minutes1(date, timezoneOffset) {
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getMinutes();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCMinutes();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCMinutes();
   }
 
-  return setDateOffsetMin(date, timezoneOffset).getUTCMinutes().toString();
+  return result.toString();
 };
 
-var minute2 = function minute2(date, timezoneOffset) {
-  return (0, _paddingFirst2._paddingFirst)(minute1(date, timezoneOffset), 2, '0');
+var minutes2 = function minutes2(date, timezoneOffset) {
+  return (0, _paddingFirst2._paddingFirst)(minutes1(date, timezoneOffset), 2, '0');
 };
 
-var second1 = function second1(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+var seconds1 = function seconds1(date, timezoneOffset) {
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getSeconds();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCSeconds();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCSeconds();
   }
 
-  return setDateOffsetMin(date, timezoneOffset).getUTCSeconds().toString();
+  return result.toString();
 };
 
-var second2 = function second2(date, timezoneOffset) {
-  return (0, _paddingFirst2._paddingFirst)(second1(date, timezoneOffset), 2, '0');
+var seconds2 = function seconds2(date, timezoneOffset) {
+  return (0, _paddingFirst2._paddingFirst)(seconds1(date, timezoneOffset), 2, '0');
 };
 
-var millisecond3 = function millisecond3(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+var milliseconds3 = function milliseconds3(date, timezoneOffset) {
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getMilliseconds();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCMilliseconds();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCMilliseconds();
   }
 
-  return (0, _paddingFirst2._paddingFirst)(setDateOffsetMin(date, timezoneOffset).getUTCMilliseconds().toString(), 3, '0');
+  return (0, _paddingFirst2._paddingFirst)(result.toString(), 3, '0');
 };
 
-var millisecond2 = function millisecond2(date, timezoneOffset) {
-  return (0, _string_common._subFirst)(millisecond3(date, timezoneOffset), 2);
+var milliseconds2 = function milliseconds2(date, timezoneOffset) {
+  return (0, _string_common._subFirst)(milliseconds3(date, timezoneOffset), 2);
 };
 
-var millisecond1 = function millisecond1(date, timezoneOffset) {
-  return (0, _string_common._subFirst)(millisecond3(date, timezoneOffset), 1);
+var milliseconds1 = function milliseconds1(date, timezoneOffset) {
+  return (0, _string_common._subFirst)(milliseconds3(date, timezoneOffset), 1);
 };
 
 var am_pm = function am_pm(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'am' : 'pm';
+  return hours(date, timezoneOffset) < 12 ? 'am' : 'pm';
 };
 
 var AM_PM = function AM_PM(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'AM' : 'PM';
+  return am_pm(date, timezoneOffset).toUpperCase();
 };
 
 var a_p = function a_p(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
+  switch (am_pm(date, timezoneOffset)) {
+    case 'am':
+      return 'a';
 
-  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'a' : 'p';
+    case 'pm':
+      return 'p';
+
+    default:
+      throw new Error('a_p');
+  }
 };
 
 var A_P = function A_P(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
+  return a_p(date, timezoneOffset).toUpperCase();
+};
+
+var dayOfWeek = function dayOfWeek(date, timezoneOffset) {
+  var result;
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    result = date.getDay();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    result = date.getUTCDay();
+  } else {
+    var d = (0, _cloneDate.__cloneDate)(date);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    result = d.getUTCDay();
   }
 
-  return setDateOffsetMin(date, timezoneOffset).getUTCHours() < 12 ? 'A' : 'P';
+  return result;
 };
 
 var dayOfWeekEnglishShort = function dayOfWeekEnglishShort(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return _dayOfWeek2._dayOfWeek.names.EnglishShort()[setDateOffsetMin(date, timezoneOffset).getUTCDay()];
+  return _dayOfWeek2._dayOfWeek.names.EnglishShort()[dayOfWeek(date, timezoneOffset)];
 };
 
 var dayOfWeekEnglishLong = function dayOfWeekEnglishLong(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return _dayOfWeek2._dayOfWeek.names.EnglishLong()[setDateOffsetMin(date, timezoneOffset).getUTCDay()];
+  return _dayOfWeek2._dayOfWeek.names.EnglishLong()[dayOfWeek(date, timezoneOffset)];
 };
 
 var nameOfMonthEnglishChar3 = function nameOfMonthEnglishChar3(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return _nameOfMonth2._nameOfMonth.names.EnglishChar3()[setDateOffsetMin(date, timezoneOffset).getUTCMonth()];
+  return _nameOfMonth2._nameOfMonth.names.EnglishChar3()[month(date, timezoneOffset)];
 };
 
 var nameOfMonthEnglishChar4 = function nameOfMonthEnglishChar4(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return _nameOfMonth2._nameOfMonth.names.EnglishChar4()[setDateOffsetMin(date, timezoneOffset).getUTCMonth()];
+  return _nameOfMonth2._nameOfMonth.names.EnglishChar4()[month(date, timezoneOffset)];
 };
 
 var nameOfMonthEnglishLong = function nameOfMonthEnglishLong(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
-    timezoneOffset = 0;
-  }
-
-  return _nameOfMonth2._nameOfMonth.names.EnglishLong()[setDateOffsetMin(date, timezoneOffset).getUTCMonth()];
+  return _nameOfMonth2._nameOfMonth.names.EnglishLong()[month(date, timezoneOffset)];
 };
 
 var timezoneHHMM = function timezoneHHMM(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    timezoneOffset = date.getTimezoneOffset();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
     return 'Z';
   }
 
@@ -19917,7 +19969,9 @@ var timezoneHHMM = function timezoneHHMM(date, timezoneOffset) {
 };
 
 var timezoneHH_MM = function timezoneHH_MM(date, timezoneOffset) {
-  if ((0, _type.isNull)(timezoneOffset)) {
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    timezoneOffset = date.getTimezoneOffset();
+  } else if ((0, _type.isNull)(timezoneOffset)) {
     return 'Z';
   }
 
@@ -19941,13 +19995,13 @@ var __dateToStringRule = {
   hour12_1: hour12_1,
   hour24_2: hour24_2,
   hour24_1: hour24_1,
-  minute2: minute2,
-  minute1: minute1,
-  second2: second2,
-  second1: second1,
-  millisecond3: millisecond3,
-  millisecond2: millisecond2,
-  millisecond1: millisecond1,
+  minutes2: minutes2,
+  minutes1: minutes1,
+  seconds2: seconds2,
+  seconds1: seconds1,
+  milliseconds3: milliseconds3,
+  milliseconds2: milliseconds2,
+  milliseconds1: milliseconds1,
   am_pm: am_pm,
   AM_PM: AM_PM,
   a_p: a_p,
@@ -19983,19 +20037,19 @@ var defaultRule = (_defaultRule = {}, _defineProperty(_defaultRule, 'YYYY', {
 }), _defineProperty(_defaultRule, 'h', {
   func: r.hour12_1
 }), _defineProperty(_defaultRule, 'mm', {
-  func: r.minute2
+  func: r.minutes2
 }), _defineProperty(_defaultRule, 'm', {
-  func: r.minute1
+  func: r.minutes1
 }), _defineProperty(_defaultRule, 'ss', {
-  func: r.second2
+  func: r.seconds2
 }), _defineProperty(_defaultRule, 's', {
-  func: r.second1
+  func: r.seconds1
 }), _defineProperty(_defaultRule, 'SSS', {
-  func: r.millisecond3
+  func: r.milliseconds3
 }), _defineProperty(_defaultRule, 'SS', {
-  func: r.millisecond2
+  func: r.milliseconds2
 }), _defineProperty(_defaultRule, 'S', {
-  func: r.millisecond1
+  func: r.milliseconds1
 }), _defineProperty(_defaultRule, 'aa', {
   func: r.am_pm
 }), _defineProperty(_defaultRule, 'AA', {
@@ -20040,19 +20094,19 @@ var momentLikeRule = (_momentLikeRule = {}, _defineProperty(_momentLikeRule, 'YY
 }), _defineProperty(_momentLikeRule, 'h', {
   func: r.hour12_1
 }), _defineProperty(_momentLikeRule, 'mm', {
-  func: r.minute2
+  func: r.minutes2
 }), _defineProperty(_momentLikeRule, 'm', {
-  func: r.minute1
+  func: r.minutes1
 }), _defineProperty(_momentLikeRule, 'ss', {
-  func: r.second2
+  func: r.seconds2
 }), _defineProperty(_momentLikeRule, 's', {
-  func: r.second1
+  func: r.seconds1
 }), _defineProperty(_momentLikeRule, 'SSS', {
-  func: r.millisecond3
+  func: r.milliseconds3
 }), _defineProperty(_momentLikeRule, 'SS', {
-  func: r.millisecond2
+  func: r.milliseconds2
 }), _defineProperty(_momentLikeRule, 'S', {
-  func: r.millisecond1
+  func: r.milliseconds1
 }), _defineProperty(_momentLikeRule, 'a', {
   func: r.am_pm
 }), _defineProperty(_momentLikeRule, 'A', {
@@ -20242,7 +20296,7 @@ var _paddingFirst2 = __webpack_require__(147);
 var _minutesToTexts = function _minutesToTexts(minutes) {
   var sign = 0 <= minutes ? '+' : '-';
   var hourStr = (0, _paddingFirst2._paddingFirst)(String(Math.floor(Math.abs(minutes / 60))), 2, '0');
-  var minStr = (0, _paddingFirst2._paddingFirst)(String(minutes % 60), 2, '0');
+  var minStr = (0, _paddingFirst2._paddingFirst)(String(Math.abs(minutes % 60)), 2, '0');
   return [sign, hourStr, minStr];
 };
 
@@ -20680,7 +20734,7 @@ var _stringToDate = function _stringToDate(str, format, timezoneOffset) {
     _iterator.f();
   }
 
-  var timezoneOffsetMin = _stringToDateRule.__stringToDateRule.finalize(result); // console.log(
+  var timezoneOffsetMin = _stringToDateRule.__stringToDateRule.finalize(result); // console.log('compare _dateToString',
   //   result, timezoneOffsetMin,
   //   _dateToString(result, format, timezoneOffsetMin, rule.toStringRule),
   // );

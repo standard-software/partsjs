@@ -26,8 +26,7 @@ var _map2 = require("../array/_map.js");
 /**
  * dateToString
  */
-var _dateToString = function _dateToString(date, format) {
-  var timezoneOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : date.getTimezoneOffset();
+var _dateToString = function _dateToString(date, format, timezoneOffset) {
   var rule = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _dateToStringRule.__dateToStringRule.Default();
   var existSingleQuote = (0, _includes.__includes)(format, "'");
   var existDoubleQuote = (0, _includes.__includes)(format, '"');

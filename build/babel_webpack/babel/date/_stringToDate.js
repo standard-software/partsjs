@@ -136,7 +136,7 @@ var _stringToDate = function _stringToDate(str, format, timezoneOffset) {
     _iterator.f();
   }
 
-  var timezoneOffsetMin = _stringToDateRule.__stringToDateRule.finalize(result); // console.log(
+  var timezoneOffsetMin = _stringToDateRule.__stringToDateRule.finalize(result); // console.log('compare _dateToString',
   //   result, timezoneOffsetMin,
   //   _dateToString(result, format, timezoneOffsetMin, rule.toStringRule),
   // );

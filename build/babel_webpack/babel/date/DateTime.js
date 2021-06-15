@@ -123,19 +123,19 @@ var Datetime = function Datetime() {
   }
 
   if (!(0, _isType.isInteger)(hours)) {
-    throw new TypeError("Datetime args(hour:".concat(hours, ") is not integer"));
+    throw new TypeError("Datetime args(hours:".concat(hours, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(minutes)) {
-    throw new TypeError("Datetime args(minute:".concat(minutes, ") is not integer"));
+    throw new TypeError("Datetime args(minutes:".concat(minutes, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(seconds)) {
-    throw new TypeError("Datetime args(second:".concat(seconds, ") is not integer"));
+    throw new TypeError("Datetime args(seconds:".concat(seconds, ") is not integer"));
   }
 
   if (!(0, _isType.isInteger)(milliseconds)) {
-    throw new TypeError("Datetime args(millisecond:".concat(milliseconds, ") is not integer"));
+    throw new TypeError("Datetime args(milliseconds:".concat(milliseconds, ") is not integer"));
   }
 
   if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
