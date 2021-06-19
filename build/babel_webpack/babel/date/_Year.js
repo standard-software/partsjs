@@ -9,6 +9,8 @@ var _isType = require("../type/isType.js");
 
 var _cloneDate = require("../common/__cloneDate.js");
 
+var _roundDown2 = require("../number/_roundDown.js");
+
 /**
  * Year
  */
@@ -25,22 +27,24 @@ var _Year = function _Year(value) {
       value = -1;
     } else if (value === 'next') {
       value = 1;
+    } else {
+      throw new TypeError("_Year args(value:".concat(value, ") is not this | last | next"));
     }
   }
 
-  var s = sourceDate;
+  var date = sourceDate;
   var self;
 
   if ((0, _isType.isUndefined)(timezoneOffset)) {
-    self = new Date(s.getFullYear() + value, 0, 1, 0, 0, 0, 0);
+    self = new Date(date.getFullYear() + value, 0, 1, 0, 0, 0, 0);
   } else if ((0, _isType.isNull)(timezoneOffset)) {
-    self = new Date(Date.UTC(s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+    self = new Date(Date.UTC(date.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
   } else {
-    var _s = (0, _cloneDate.__cloneDate)(s);
-
-    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
-
-    self = new Date(Date.UTC(_s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+    var d = (0, _cloneDate.__cloneDate)(sourceDate);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+    self = new Date(Date.UTC(d.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }
 

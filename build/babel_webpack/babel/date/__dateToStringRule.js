@@ -19,6 +19,8 @@ var _minutesToTexts6 = require("./_minutesToTexts.js");
 
 var _cloneDate = require("../common/__cloneDate.js");
 
+var _roundDown2 = require("../number/_roundDown.js");
+
 var _defaultRule, _momentLikeRule;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -35,18 +37,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var rule = {};
-
-var cloneDate = function cloneDate(date) {
-  return new Date(date.getTime());
-};
-
-var setDateOffsetMin = function setDateOffsetMin(date, offsetMin) {
-  var result = cloneDate(date);
-  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
-  return result;
-};
-
 var year4 = function year4(date, timezoneOffset) {
   var result;
 
@@ -56,7 +46,9 @@ var year4 = function year4(date, timezoneOffset) {
     result = date.getUTCFullYear();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCFullYear();
   }
 
@@ -76,7 +68,9 @@ var month = function month(date, timezoneOffset) {
     result = date.getUTCMonth();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCMonth();
   }
 
@@ -100,7 +94,9 @@ var date1 = function date1(date, timezoneOffset) {
     result = date.getUTCDate();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCDate();
   }
 
@@ -120,7 +116,9 @@ var hours = function hours(date, timezoneOffset) {
     result = date.getUTCHours();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCHours();
   }
 
@@ -156,7 +154,9 @@ var minutes1 = function minutes1(date, timezoneOffset) {
     result = date.getUTCMinutes();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCMinutes();
   }
 
@@ -176,7 +176,9 @@ var seconds1 = function seconds1(date, timezoneOffset) {
     result = date.getUTCSeconds();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCSeconds();
   }
 
@@ -196,7 +198,9 @@ var milliseconds3 = function milliseconds3(date, timezoneOffset) {
     result = date.getUTCMilliseconds();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCMilliseconds();
   }
 
@@ -245,7 +249,9 @@ var dayOfWeek = function dayOfWeek(date, timezoneOffset) {
     result = date.getUTCDay();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCDay();
   }
 

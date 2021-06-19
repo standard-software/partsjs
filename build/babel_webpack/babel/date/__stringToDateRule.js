@@ -19,6 +19,8 @@ var _textsToMinutes2 = require("./_textsToMinutes.js");
 
 var _dateToStringRule = require("./__dateToStringRule.js");
 
+var _roundDown2 = require("../number/_roundDown.js");
+
 var _defaultRule, _momentLikeRule;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -178,7 +180,9 @@ __stringToDateRule.finalize = function (targetDate) {
   } else {
     targetDate.setUTCFullYear(year, month, date);
     targetDate.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
-    targetDate.setMinutes(targetDate.getMinutes() + timezoneOffset);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    targetDate.setUTCMinutes(targetDate.getUTCMinutes() + timezoneOffset);
+    targetDate.setUTCSeconds(targetDate.getUTCSeconds() + timezoneOffsetSeconds);
   }
 
   return timezoneOffset;

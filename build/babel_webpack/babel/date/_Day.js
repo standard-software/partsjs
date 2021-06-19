@@ -9,6 +9,8 @@ var _isType = require("../type/isType.js");
 
 var _cloneDate = require("../common/__cloneDate.js");
 
+var _roundDown2 = require("../number/_roundDown.js");
+
 /**
  * Day
  */
@@ -34,19 +36,19 @@ var _Day = function _Day(value) {
     }
   }
 
-  var s = sourceDate;
+  var date = sourceDate;
   var self;
 
   if ((0, _isType.isUndefined)(timezoneOffset)) {
-    self = new Date(s.getFullYear(), s.getMonth(), s.getDate() + value, 0, 0, 0, 0);
+    self = new Date(date.getFullYear(), date.getMonth(), date.getDate() + value, 0, 0, 0, 0);
   } else if ((0, _isType.isNull)(timezoneOffset)) {
-    self = new Date(Date.UTC(s.getUTCFullYear(), s.getUTCMonth(), s.getUTCDate() + value, 0, 0, 0, 0));
+    self = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + value, 0, 0, 0, 0));
   } else {
-    var _s = (0, _cloneDate.__cloneDate)(s);
-
-    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
-
-    self = new Date(Date.UTC(_s.getUTCFullYear(), _s.getUTCMonth(), _s.getUTCDate() + value, 0, 0, 0, 0));
+    var d = (0, _cloneDate.__cloneDate)(sourceDate);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+    self = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + value, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }
 

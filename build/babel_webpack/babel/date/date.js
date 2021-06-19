@@ -73,6 +73,18 @@ var _textsToMinutes2 = _interopRequireDefault(require("./_textsToMinutes.js"));
 
 var _textsToMinutes3 = _interopRequireDefault(require("./textsToMinutes.js"));
 
+var _getDatetime2 = require("./_getDatetime.js");
+
+var _getDatetime3 = require("./getDatetime.js");
+
+var _getDatetimeUTC2 = require("./_getDatetimeUTC.js");
+
+var _getDatetimeUTC3 = require("./getDatetimeUTC.js");
+
+var _getTimezoneOffset2 = require("./_getTimezoneOffset.js");
+
+var _getTimezoneOffset3 = require("./getTimezoneOffset.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -185,6 +197,12 @@ var _default = {
   Day: Day,
   DayUTC: DayUTC,
   isInvalidDate: isInvalidDate,
-  InvalidDate: InvalidDate
+  InvalidDate: InvalidDate,
+  _getDatetime: _getDatetime2._getDatetime,
+  getDatetime: _getDatetime3.getDatetime,
+  _getDatetimeUTC: _getDatetimeUTC2._getDatetimeUTC,
+  getDatetimeUTC: _getDatetimeUTC3.getDatetimeUTC,
+  _getTimezoneOffset: _getTimezoneOffset2._getTimezoneOffset,
+  getTimezoneOffset: _getTimezoneOffset3.getTimezoneOffset
 };
 exports["default"] = _default;

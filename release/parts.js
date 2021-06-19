@@ -147,7 +147,7 @@ var _array = _interopRequireDefault(__webpack_require__(74));
 
 var _date = _interopRequireDefault(__webpack_require__(173));
 
-var _system = _interopRequireDefault(__webpack_require__(213));
+var _system = _interopRequireDefault(__webpack_require__(219));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -157,7 +157,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var VERSION = '10.6.1';
+var VERSION = '10.7.0 beta';
 exports.VERSION = VERSION;
 var rootAlias = {};
 var propertyNames = {};
@@ -18378,6 +18378,18 @@ var _textsToMinutes2 = _interopRequireDefault(__webpack_require__(207));
 
 var _textsToMinutes3 = _interopRequireDefault(__webpack_require__(212));
 
+var _getDatetime2 = __webpack_require__(213);
+
+var _getDatetime3 = __webpack_require__(214);
+
+var _getDatetimeUTC2 = __webpack_require__(215);
+
+var _getDatetimeUTC3 = __webpack_require__(216);
+
+var _getTimezoneOffset2 = __webpack_require__(217);
+
+var _getTimezoneOffset3 = __webpack_require__(218);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -18490,7 +18502,13 @@ var _default = {
   Day: Day,
   DayUTC: DayUTC,
   isInvalidDate: isInvalidDate,
-  InvalidDate: InvalidDate
+  InvalidDate: InvalidDate,
+  _getDatetime: _getDatetime2._getDatetime,
+  getDatetime: _getDatetime3.getDatetime,
+  _getDatetimeUTC: _getDatetimeUTC2._getDatetimeUTC,
+  getDatetimeUTC: _getDatetimeUTC3.getDatetimeUTC,
+  _getTimezoneOffset: _getTimezoneOffset2._getTimezoneOffset,
+  getTimezoneOffset: _getTimezoneOffset3.getTimezoneOffset
 };
 exports["default"] = _default;
 
@@ -18510,6 +18528,8 @@ var _isType = __webpack_require__(11);
 
 var _cloneDate = __webpack_require__(175);
 
+var _roundDown2 = __webpack_require__(48);
+
 /**
  * Year
  */
@@ -18526,22 +18546,24 @@ var _Year = function _Year(value) {
       value = -1;
     } else if (value === 'next') {
       value = 1;
+    } else {
+      throw new TypeError("_Year args(value:".concat(value, ") is not this | last | next"));
     }
   }
 
-  var s = sourceDate;
+  var date = sourceDate;
   var self;
 
   if ((0, _isType.isUndefined)(timezoneOffset)) {
-    self = new Date(s.getFullYear() + value, 0, 1, 0, 0, 0, 0);
+    self = new Date(date.getFullYear() + value, 0, 1, 0, 0, 0, 0);
   } else if ((0, _isType.isNull)(timezoneOffset)) {
-    self = new Date(Date.UTC(s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+    self = new Date(Date.UTC(date.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
   } else {
-    var _s = (0, _cloneDate.__cloneDate)(s);
-
-    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
-
-    self = new Date(Date.UTC(_s.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
+    var d = (0, _cloneDate.__cloneDate)(sourceDate);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+    self = new Date(Date.UTC(d.getUTCFullYear() + value, 0, 1, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }
 
@@ -18627,8 +18649,8 @@ var Year = function Year(value) {
     throw new TypeError("Year args(sourceDate:".concat(sourceDate, ") is not date"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("Year args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("Year args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   return (0, _Year2._Year)(value, sourceDate, timezoneOffset);
@@ -18742,6 +18764,8 @@ var _isType = __webpack_require__(11);
 
 var _cloneDate = __webpack_require__(175);
 
+var _roundDown2 = __webpack_require__(48);
+
 /**
  * Month
  */
@@ -18761,19 +18785,19 @@ var _Month = function _Month(value) {
     }
   }
 
-  var s = sourceDate;
+  var date = sourceDate;
   var self;
 
   if ((0, _isType.isUndefined)(timezoneOffset)) {
-    self = new Date(s.getFullYear(), s.getMonth() + value, 1, 0, 0, 0, 0);
+    self = new Date(date.getFullYear(), date.getMonth() + value, 1, 0, 0, 0, 0);
   } else if ((0, _isType.isNull)(timezoneOffset)) {
-    self = new Date(Date.UTC(s.getUTCFullYear(), s.getUTCMonth() + value, 1, 0, 0, 0, 0));
+    self = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + value, 1, 0, 0, 0, 0));
   } else {
-    var _s = (0, _cloneDate.__cloneDate)(s);
-
-    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
-
-    self = new Date(Date.UTC(_s.getUTCFullYear(), _s.getUTCMonth() + value, 1, 0, 0, 0, 0));
+    var d = (0, _cloneDate.__cloneDate)(sourceDate);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+    self = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + value, 1, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }
 
@@ -18841,8 +18865,8 @@ var Month = function Month(value) {
     throw new TypeError("Month args(sourceDate:".concat(sourceDate, ") is not date"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("Month args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("Month args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   return (0, _Month2._Month)(value, sourceDate, timezoneOffset);
@@ -18956,6 +18980,8 @@ var _isType = __webpack_require__(11);
 
 var _cloneDate = __webpack_require__(175);
 
+var _roundDown2 = __webpack_require__(48);
+
 /**
  * Day
  */
@@ -18981,19 +19007,19 @@ var _Day = function _Day(value) {
     }
   }
 
-  var s = sourceDate;
+  var date = sourceDate;
   var self;
 
   if ((0, _isType.isUndefined)(timezoneOffset)) {
-    self = new Date(s.getFullYear(), s.getMonth(), s.getDate() + value, 0, 0, 0, 0);
+    self = new Date(date.getFullYear(), date.getMonth(), date.getDate() + value, 0, 0, 0, 0);
   } else if ((0, _isType.isNull)(timezoneOffset)) {
-    self = new Date(Date.UTC(s.getUTCFullYear(), s.getUTCMonth(), s.getUTCDate() + value, 0, 0, 0, 0));
+    self = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + value, 0, 0, 0, 0));
   } else {
-    var _s = (0, _cloneDate.__cloneDate)(s);
-
-    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
-
-    self = new Date(Date.UTC(_s.getUTCFullYear(), _s.getUTCMonth(), _s.getUTCDate() + value, 0, 0, 0, 0));
+    var d = (0, _cloneDate.__cloneDate)(sourceDate);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+    self = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + value, 0, 0, 0, 0));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }
 
@@ -19061,8 +19087,8 @@ var Day = function Day(value) {
     throw new TypeError("Day args(sourceDate:".concat(sourceDate, ") is not date"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("Day args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("Day args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   return (0, _Day2._Day)(value, sourceDate, timezoneOffset);
@@ -19224,6 +19250,8 @@ exports["default"] = exports._Datetime = void 0;
 
 var _type = __webpack_require__(5);
 
+var _roundDown2 = __webpack_require__(48);
+
 /**
  * Datetime
  */
@@ -19245,9 +19273,11 @@ var _Datetime = function _Datetime() {
     self.setUTCFullYear(year, month - 1, date);
     self.setUTCHours(hours, minutes, seconds, milliseconds);
   } else {
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     self.setUTCFullYear(year, month - 1, date);
     self.setUTCHours(hours, minutes, seconds, milliseconds);
-    self.setMinutes(self.getMinutes() + timezoneOffset);
+    self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
+    self.setUTCSeconds(self.getUTCSeconds() + timezoneOffsetSeconds);
   }
 
   return self;
@@ -19404,8 +19434,8 @@ var Datetime = function Datetime() {
     throw new TypeError("Datetime args(milliseconds:".concat(milliseconds, ") is not integer"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("Datetime args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("Datetime args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   return (0, _Datetime2._Datetime)(year, month, day, hours, minutes, seconds, milliseconds, timezoneOffset);
@@ -19699,6 +19729,8 @@ var _minutesToTexts6 = __webpack_require__(199);
 
 var _cloneDate = __webpack_require__(175);
 
+var _roundDown2 = __webpack_require__(48);
+
 var _defaultRule, _momentLikeRule;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -19715,18 +19747,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var rule = {};
-
-var cloneDate = function cloneDate(date) {
-  return new Date(date.getTime());
-};
-
-var setDateOffsetMin = function setDateOffsetMin(date, offsetMin) {
-  var result = cloneDate(date);
-  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
-  return result;
-};
-
 var year4 = function year4(date, timezoneOffset) {
   var result;
 
@@ -19736,7 +19756,9 @@ var year4 = function year4(date, timezoneOffset) {
     result = date.getUTCFullYear();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCFullYear();
   }
 
@@ -19756,7 +19778,9 @@ var month = function month(date, timezoneOffset) {
     result = date.getUTCMonth();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCMonth();
   }
 
@@ -19780,7 +19804,9 @@ var date1 = function date1(date, timezoneOffset) {
     result = date.getUTCDate();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCDate();
   }
 
@@ -19800,7 +19826,9 @@ var hours = function hours(date, timezoneOffset) {
     result = date.getUTCHours();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCHours();
   }
 
@@ -19836,7 +19864,9 @@ var minutes1 = function minutes1(date, timezoneOffset) {
     result = date.getUTCMinutes();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCMinutes();
   }
 
@@ -19856,7 +19886,9 @@ var seconds1 = function seconds1(date, timezoneOffset) {
     result = date.getUTCSeconds();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCSeconds();
   }
 
@@ -19876,7 +19908,9 @@ var milliseconds3 = function milliseconds3(date, timezoneOffset) {
     result = date.getUTCMilliseconds();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCMilliseconds();
   }
 
@@ -19925,7 +19959,9 @@ var dayOfWeek = function dayOfWeek(date, timezoneOffset) {
     result = date.getUTCDay();
   } else {
     var d = (0, _cloneDate.__cloneDate)(date);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     result = d.getUTCDay();
   }
 
@@ -20358,8 +20394,8 @@ var dateToString = function dateToString(date, format, timezoneOffset) {
     throw new TypeError("dateToString args(format:".concat(format, ") is not string"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("dateToString args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("dateToString args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   if (!(0, _isType.isObject)(rule)) {
@@ -20780,6 +20816,8 @@ var _textsToMinutes2 = __webpack_require__(207);
 
 var _dateToStringRule = __webpack_require__(194);
 
+var _roundDown2 = __webpack_require__(48);
+
 var _defaultRule, _momentLikeRule;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -20939,7 +20977,9 @@ __stringToDateRule.finalize = function (targetDate) {
   } else {
     targetDate.setUTCFullYear(year, month, date);
     targetDate.setUTCHours(flagPM === true ? hours + 12 : hours, minutes, seconds, milliseconds);
-    targetDate.setMinutes(targetDate.getMinutes() + timezoneOffset);
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    targetDate.setUTCMinutes(targetDate.getUTCMinutes() + timezoneOffset);
+    targetDate.setUTCSeconds(targetDate.getUTCSeconds() + timezoneOffsetSeconds);
   }
 
   return timezoneOffset;
@@ -21243,8 +21283,8 @@ var stringToDate = function stringToDate(str, format, timezoneOffset) {
     throw new TypeError("stringToDate args(format:".concat(format, ") is not string"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("stringToDate args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("stringToDate args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   if (!(0, _isType.isDate)(sourceDate)) {
@@ -21454,11 +21494,226 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports._getDatetime = void 0;
+
+var _type = __webpack_require__(5);
+
+var _cloneDate = __webpack_require__(175);
+
+var _roundDown2 = __webpack_require__(48);
+
+var _getDatetime = function _getDatetime(date, timezoneOffset) {
+  var d = (0, _cloneDate.__cloneDate)(date);
+
+  if ((0, _type.isUndefined)(timezoneOffset)) {
+    return {
+      year: d.getFullYear(),
+      month: d.getMonth() + 1,
+      date: d.getDate(),
+      hours: d.getHours(),
+      minutes: d.getMinutes(),
+      seconds: d.getSeconds(),
+      milliseconds: d.getMilliseconds()
+    };
+  } else if ((0, _type.isNull)(timezoneOffset)) {
+    return {
+      year: d.getUTCFullYear(),
+      month: d.getUTCMonth() + 1,
+      date: d.getUTCDate(),
+      hours: d.getUTCHours(),
+      minutes: d.getUTCMinutes(),
+      seconds: d.getUTCSeconds(),
+      milliseconds: d.getUTCMilliseconds()
+    };
+  } else {
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+    return {
+      year: d.getUTCFullYear(),
+      month: d.getUTCMonth() + 1,
+      date: d.getUTCDate(),
+      hours: d.getUTCHours(),
+      minutes: d.getUTCMinutes(),
+      seconds: d.getUTCSeconds(),
+      milliseconds: d.getUTCMilliseconds()
+    };
+  }
+};
+
+exports._getDatetime = _getDatetime;
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getDatetime = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter2 = __webpack_require__(15);
+
+var _getDatetime2 = __webpack_require__(213);
+
+var getDatetime = function getDatetime(date, timezoneOffset) {
+  if ((0, _isObjectParameter2._isObjectParameter)(date, 'date', 'timezoneOffset')) {
+    var _date = date;
+    date = _date.date;
+    timezoneOffset = _date.timezoneOffset;
+  } else if ((0, _isObjectParameter2._isObjectParameter)(timezoneOffset, 'timezoneOffset')) {
+    var _timezoneOffset = timezoneOffset;
+    timezoneOffset = _timezoneOffset.timezoneOffset;
+  }
+
+  if (!(0, _type.isDate)(date)) {
+    throw new TypeError("getDatetime args(date:".concat(date, ") is not date"));
+  }
+
+  if (!(0, _type.isUndefined)(timezoneOffset) && !(0, _type.isNumber)(timezoneOffset)) {
+    throw new TypeError("getDatetime args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
+  }
+
+  return (0, _getDatetime2._getDatetime)(date, timezoneOffset);
+};
+
+exports.getDatetime = getDatetime;
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports._getDatetimeUTC = void 0;
+
+var _getDatetime2 = __webpack_require__(213);
+
+var _getDatetimeUTC = function _getDatetimeUTC(date) {
+  return (0, _getDatetime2._getDatetime)(date, null);
+};
+
+exports._getDatetimeUTC = _getDatetimeUTC;
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getDatetimeUTC = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter2 = __webpack_require__(15);
+
+var _getDatetimeUTC2 = __webpack_require__(215);
+
+var getDatetimeUTC = function getDatetimeUTC(date) {
+  if ((0, _isObjectParameter2._isObjectParameter)(date, 'date')) {
+    var _date = date;
+    date = _date.date;
+  }
+
+  if (!(0, _type.isDate)(date)) {
+    throw new TypeError("getDatetimeUTC args(date:".concat(date, ") is not date"));
+  }
+
+  return (0, _getDatetimeUTC2._getDatetimeUTC)(date, null);
+};
+
+exports.getDatetimeUTC = getDatetimeUTC;
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports._getTimezoneOffset = void 0;
+
+var _roundDown2 = __webpack_require__(48);
+
+var _getTimezoneOffset = function _getTimezoneOffset(date) {
+  var _date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+
+  var diffMsec = date.getTime() - _date.getTime();
+
+  var minutes = (0, _roundDown2._roundDown)(diffMsec / 60 / 1000);
+  var seconds = diffMsec / 1000;
+  return {
+    minutes: minutes,
+    seconds: seconds
+  };
+};
+
+exports._getTimezoneOffset = _getTimezoneOffset;
+
+/***/ }),
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getTimezoneOffset = void 0;
+
+var _type = __webpack_require__(5);
+
+var _isObjectParameter2 = __webpack_require__(15);
+
+var _getTimezoneOffset2 = __webpack_require__(217);
+
+var getTimezoneOffset = function getTimezoneOffset(date) {
+  if ((0, _isObjectParameter2._isObjectParameter)(date, 'date')) {
+    var _date = date;
+    date = _date.date;
+  }
+
+  if (!(0, _type.isDate)(date)) {
+    throw new TypeError("getTimezoneOffset args(date:".concat(date, ") is not date"));
+  }
+
+  return (0, _getTimezoneOffset2._getTimezoneOffset)(date);
+};
+
+exports.getTimezoneOffset = getTimezoneOffset;
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports["default"] = exports.wsh = exports.consoleHook = void 0;
 
-var _consoleHook = _interopRequireDefault(__webpack_require__(214));
+var _consoleHook = _interopRequireDefault(__webpack_require__(220));
 
-var _wsh = _interopRequireDefault(__webpack_require__(215));
+var _wsh = _interopRequireDefault(__webpack_require__(221));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -21473,7 +21728,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 214 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21704,7 +21959,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 215 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21715,11 +21970,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.forceCreateFolder = exports.Shell = exports.FileSystemObject = void 0;
 
-var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(216));
+var _wshFileSystemObject = _interopRequireDefault(__webpack_require__(222));
 
-var _wshShell = _interopRequireDefault(__webpack_require__(217));
+var _wshShell = _interopRequireDefault(__webpack_require__(223));
 
-var _forceCreateFolder = _interopRequireDefault(__webpack_require__(218));
+var _forceCreateFolder = _interopRequireDefault(__webpack_require__(224));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -21745,7 +22000,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 216 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21785,7 +22040,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 217 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21825,7 +22080,7 @@ var _default = {
 exports["default"] = _default;
 
 /***/ }),
-/* 218 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21840,7 +22095,7 @@ var _isType = __webpack_require__(11);
 
 var _platform = __webpack_require__(7);
 
-var _wshFileSystemObject = __webpack_require__(216);
+var _wshFileSystemObject = __webpack_require__(222);
 
 var _forceCreateFolder = function _forceCreateFolder(folderPath) {
   var fso = (0, _wshFileSystemObject.FileSystemObject)();

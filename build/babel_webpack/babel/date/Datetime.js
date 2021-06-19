@@ -138,8 +138,8 @@ var Datetime = function Datetime() {
     throw new TypeError("Datetime args(milliseconds:".concat(milliseconds, ") is not integer"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("Datetime args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("Datetime args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   return (0, _Datetime2._Datetime)(year, month, day, hours, minutes, seconds, milliseconds, timezoneOffset);

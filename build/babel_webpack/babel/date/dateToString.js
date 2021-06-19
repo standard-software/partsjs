@@ -45,8 +45,8 @@ var dateToString = function dateToString(date, format, timezoneOffset) {
     throw new TypeError("dateToString args(format:".concat(format, ") is not string"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("dateToString args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("dateToString args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   if (!(0, _isType.isObject)(rule)) {

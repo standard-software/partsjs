@@ -196,7 +196,7 @@ var test_execute_index = function test_execute_index(parts) {
         checkEqual(40, propertyCount(parts.object));
         checkEqual(68, propertyCount(parts.array));
         checkEqual(48, propertyCount(parts.array.operation));
-        checkEqual(34, propertyCount(parts.date));
+        checkEqual(40, propertyCount(parts.date));
         checkEqual(2, propertyCount(parts.system));
         checkEqual(3, propertyCount(parts.system.wsh));
         checkEqual(20, propertyCount(parts.system.consoleHook));
@@ -2665,7 +2665,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(true, typeof Reflect === 'undefined');
         } else if (parts.platform.isInternetExplorer()) {
           checkEqual(true, typeof Reflect === 'undefined');
-        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode() || parts.platform.isJest()) {
           checkType('object', '[object Reflect]', Reflect);
         } else {
           checkType('object', '[object Object]', Reflect);
@@ -2676,7 +2676,7 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(true, typeof Intl === 'undefined');
         } else if (parts.platform.isGasRhino()) {
           checkEqual(true, typeof Intl === 'undefined');
-        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
+        } else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode() || parts.platform.isJest()) {
           checkType('object', '[object Intl]', Intl);
         } else {
           checkType('object', '[object Object]', Intl);
@@ -2848,13 +2848,13 @@ var test_execute_type = function test_execute_type(parts) {
 
         testCounter();
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode() || parts.platform.isJest()) {
           checkEqual('Reflect', typeName(Reflect));
         } else {
           checkEqual('Object', typeName(Reflect));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode()) {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera() || parts.platform.isDeno() || parts.platform.isNode() || parts.platform.isJest()) {
           checkEqual('Intl', typeName(Intl));
         } else {
           checkEqual('Object', typeName(Intl));
@@ -3028,15 +3028,11 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(true, isObjectLike(WebAssembly));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
-          checkEqual(true, isObjectLike(Reflect));
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
           checkEqual(true, isObjectLike(Reflect));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
-          checkEqual(true, isObjectLike(Intl));
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else {
           checkEqual(true, isObjectLike(Intl));
         }
 
@@ -3208,15 +3204,11 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(false, isPrimitiveType(WebAssembly));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
-          checkEqual(false, isPrimitiveType(Reflect));
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
           checkEqual(false, isPrimitiveType(Reflect));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
-          checkEqual(false, isPrimitiveType(Intl));
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else {
           checkEqual(false, isPrimitiveType(Intl));
         }
 
@@ -3389,15 +3381,11 @@ var test_execute_type = function test_execute_type(parts) {
           checkEqual(true, isReferenceType(WebAssembly));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
-          checkEqual(true, isReferenceType(Reflect));
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isInternetExplorer()) {} else {
           checkEqual(true, isReferenceType(Reflect));
         }
 
-        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else if (parts.platform.isChrome() || parts.platform.isEdge() || parts.platform.isFirefox() || parts.platform.isOpera()) {
-          checkEqual(true, isReferenceType(Intl));
-        } else {
+        if (parts.platform.isWindowsScriptHost()) {} else if (parts.platform.isGasRhino()) {} else if (parts.platform.isDeno()) {} else {
           checkEqual(true, isReferenceType(Intl));
         }
 
@@ -17875,7 +17863,10 @@ var test_execute_date = function test_execute_date(parts) {
       stringToDate = _parts$date.stringToDate,
       stringToDateUTC = _parts$date.stringToDateUTC,
       minutesToTexts = _parts$date.minutesToTexts,
-      textsToMinutes = _parts$date.textsToMinutes;
+      textsToMinutes = _parts$date.textsToMinutes,
+      getDatetime = _parts$date.getDatetime,
+      getDatetimeUTC = _parts$date.getDatetimeUTC,
+      getTimezoneOffset = _parts$date.getTimezoneOffset;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Year = function test_Year() {
@@ -19066,6 +19057,34 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_getDatetime = function test_getDatetime() {
+      it('test_getDatetime', function () {
+        checkEqual(getDatetime(new Date(1920, 0, 1), 0), getDatetimeUTC(new Date(1920, 0, 1)));
+        checkEqual(getDatetime(new Date(1920, 0, 1), 0), getDatetime(new Date(Date.UTC(1920, 0, 1)), -1 * getTimezoneOffset(new Date(Date.UTC(1920, 0, 1))).seconds / 60));
+        checkEqual(getDatetime(new Date(2021, 0, 1), 0), getDatetimeUTC(new Date(2021, 0, 1)));
+        checkEqual(getDatetime(new Date(2021, 0, 1), 0), getDatetime(new Date(Date.UTC(2021, 0, 1)), -1 * getTimezoneOffset(new Date(Date.UTC(2021, 0, 1))).seconds / 60)); // object parameter
+
+        checkEqual(getDatetimeUTC(new Date(1920, 0, 1)), getDatetime({
+          date: new Date(1920, 0, 1),
+          timezoneOffset: 0
+        }));
+        checkEqual(getDatetimeUTC(new Date(1920, 0, 1)), getDatetime(new Date(1920, 0, 1), {
+          timezoneOffset: 0
+        }));
+      });
+    };
+
+    var test_getTimezoneOffset = function test_getTimezoneOffset() {
+      it('test_getTimezoneOffset', function () {
+        checkEqual(new Date(1920, 0, 1).getTimezoneOffset(), getTimezoneOffset(new Date(1920, 0, 1)).minutes);
+        checkEqual(new Date(2021, 0, 1).getTimezoneOffset(), getTimezoneOffset(new Date(2021, 0, 1)).minutes); // object parameter
+
+        checkEqual(new Date(2021, 0, 1).getTimezoneOffset(), getTimezoneOffset({
+          date: new Date(2021, 0, 1)
+        }).minutes);
+      });
+    };
+
     test_Year();
     test_YearUTC();
     test_Month();
@@ -19094,6 +19113,8 @@ var test_execute_date = function test_execute_date(parts) {
     test_nameOfMonthEnglishLong();
     test_minutesToTexts();
     test_textsToMinutes();
+    test_getDatetime();
+    test_getTimezoneOffset();
   });
 };
 

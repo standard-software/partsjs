@@ -44,7 +44,10 @@ var test_execute_date = function test_execute_date(parts) {
       stringToDate = _parts$date.stringToDate,
       stringToDateUTC = _parts$date.stringToDateUTC,
       minutesToTexts = _parts$date.minutesToTexts,
-      textsToMinutes = _parts$date.textsToMinutes;
+      textsToMinutes = _parts$date.textsToMinutes,
+      getDatetime = _parts$date.getDatetime,
+      getDatetimeUTC = _parts$date.getDatetimeUTC,
+      getTimezoneOffset = _parts$date.getTimezoneOffset;
   var isDate = parts.isDate;
   describe('test_execute_date', function () {
     var test_Year = function test_Year() {
@@ -1235,6 +1238,34 @@ var test_execute_date = function test_execute_date(parts) {
       });
     };
 
+    var test_getDatetime = function test_getDatetime() {
+      it('test_getDatetime', function () {
+        checkEqual(getDatetime(new Date(1920, 0, 1), 0), getDatetimeUTC(new Date(1920, 0, 1)));
+        checkEqual(getDatetime(new Date(1920, 0, 1), 0), getDatetime(new Date(Date.UTC(1920, 0, 1)), -1 * getTimezoneOffset(new Date(Date.UTC(1920, 0, 1))).seconds / 60));
+        checkEqual(getDatetime(new Date(2021, 0, 1), 0), getDatetimeUTC(new Date(2021, 0, 1)));
+        checkEqual(getDatetime(new Date(2021, 0, 1), 0), getDatetime(new Date(Date.UTC(2021, 0, 1)), -1 * getTimezoneOffset(new Date(Date.UTC(2021, 0, 1))).seconds / 60)); // object parameter
+
+        checkEqual(getDatetimeUTC(new Date(1920, 0, 1)), getDatetime({
+          date: new Date(1920, 0, 1),
+          timezoneOffset: 0
+        }));
+        checkEqual(getDatetimeUTC(new Date(1920, 0, 1)), getDatetime(new Date(1920, 0, 1), {
+          timezoneOffset: 0
+        }));
+      });
+    };
+
+    var test_getTimezoneOffset = function test_getTimezoneOffset() {
+      it('test_getTimezoneOffset', function () {
+        checkEqual(new Date(1920, 0, 1).getTimezoneOffset(), getTimezoneOffset(new Date(1920, 0, 1)).minutes);
+        checkEqual(new Date(2021, 0, 1).getTimezoneOffset(), getTimezoneOffset(new Date(2021, 0, 1)).minutes); // object parameter
+
+        checkEqual(new Date(2021, 0, 1).getTimezoneOffset(), getTimezoneOffset({
+          date: new Date(2021, 0, 1)
+        }).minutes);
+      });
+    };
+
     test_Year();
     test_YearUTC();
     test_Month();
@@ -1263,6 +1294,8 @@ var test_execute_date = function test_execute_date(parts) {
     test_nameOfMonthEnglishLong();
     test_minutesToTexts();
     test_textsToMinutes();
+    test_getDatetime();
+    test_getTimezoneOffset();
   });
 };
 

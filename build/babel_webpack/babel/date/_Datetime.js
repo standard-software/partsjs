@@ -7,6 +7,8 @@ exports["default"] = exports._Datetime = void 0;
 
 var _type = require("../type/type.js");
 
+var _roundDown2 = require("../number/_roundDown.js");
+
 /**
  * Datetime
  */
@@ -28,9 +30,11 @@ var _Datetime = function _Datetime() {
     self.setUTCFullYear(year, month - 1, date);
     self.setUTCHours(hours, minutes, seconds, milliseconds);
   } else {
+    var timezoneOffsetSeconds = timezoneOffset * 60 - (0, _roundDown2._roundDown)(timezoneOffset) * 60;
     self.setUTCFullYear(year, month - 1, date);
     self.setUTCHours(hours, minutes, seconds, milliseconds);
-    self.setMinutes(self.getMinutes() + timezoneOffset);
+    self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
+    self.setUTCSeconds(self.getUTCSeconds() + timezoneOffsetSeconds);
   }
 
   return self;

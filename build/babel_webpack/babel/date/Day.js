@@ -48,8 +48,8 @@ var Day = function Day(value) {
     throw new TypeError("Day args(sourceDate:".concat(sourceDate, ") is not date"));
   }
 
-  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isInteger)(timezoneOffset)) {
-    throw new TypeError("Day args(timezoneOffset:".concat(timezoneOffset, ") is not integer"));
+  if (!(0, _isType.isUndefined)(timezoneOffset) && !(0, _isType.isNumber)(timezoneOffset)) {
+    throw new TypeError("Day args(timezoneOffset:".concat(timezoneOffset, ") is not number"));
   }
 
   return (0, _Day2._Day)(value, sourceDate, timezoneOffset);
