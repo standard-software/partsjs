@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { isInteger, isUndefined } from '../type/isType.js';
+import { isNumber, isInteger, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _inRange } from '../number/number.js';
 import { _Datetime } from './_Datetime.js';
@@ -91,9 +91,9 @@ export const Datetime = function(
       `Datetime args(milliseconds:${milliseconds}) is not integer`,
     );
   }
-  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isNumber(timezoneOffset)) {
     throw new TypeError(
-      `Datetime args(timezoneOffset:${timezoneOffset}) is not integer`,
+      `Datetime args(timezoneOffset:${timezoneOffset}) is not number`,
     );
   }
 

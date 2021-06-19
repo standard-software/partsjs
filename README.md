@@ -366,6 +366,9 @@ You can now use the functions of the parts.js object.
 #### 2021/06/19(Sat)
 - add getDatetime / getDatetimeUTC
 - add getTimezoneOffset
+- update Year() / Month() / Day()
+  / dateToString() / stringToDate() / Datetime()
+  - support timezoneOffset seconds
 
 ### 10.6.1
 #### 2021/06/15(Tue)

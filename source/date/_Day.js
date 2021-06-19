@@ -1,5 +1,6 @@
 import { isNull, isString, isUndefined } from '../type/isType.js';
 import { __cloneDate } from '../common/__cloneDate.js';
+import { _roundDown } from '../number/_roundDown.js';
 
 /**
  * Day
@@ -26,19 +27,23 @@ export const _Day = (
     }
   }
 
-  const s = sourceDate;
+  const date = sourceDate;
   let self;
   if (isUndefined(timezoneOffset)) {
-    self = new Date(s.getFullYear(), s.getMonth(), s.getDate() + value, 0, 0, 0, 0);
+    self = new Date(
+      date.getFullYear(), date.getMonth(), date.getDate() + value, 0, 0, 0, 0,
+    );
   } else if (isNull(timezoneOffset)) {
     self = new Date(Date.UTC(
-      s.getUTCFullYear(), s.getUTCMonth(), s.getUTCDate() + value, 0, 0, 0, 0,
+      date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + value, 0, 0, 0, 0,
     ));
   } else {
-    const _s = __cloneDate(s);
-    _s.setUTCMinutes(_s.getUTCMinutes() - timezoneOffset);
+    const d = __cloneDate(sourceDate);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     self = new Date(Date.UTC(
-      _s.getUTCFullYear(), _s.getUTCMonth(), _s.getUTCDate() + value, 0, 0, 0, 0,
+      d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + value, 0, 0, 0, 0,
     ));
     self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
   }

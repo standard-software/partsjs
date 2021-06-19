@@ -5,6 +5,7 @@ import { __includes } from '../compare/__includes.js';
 import { _subLength } from '../string/string_common.js';
 import { _textsToMinutes } from './_textsToMinutes.js';
 import { __dateToStringRule } from './__dateToStringRule.js';
+import { _roundDown } from '../number/_roundDown.js';
 
 let flagPM = false;
 
@@ -154,7 +155,9 @@ __stringToDateRule.finalize = (targetDate) => {
       flagPM === true ? hours + 12 : hours,
       minutes, seconds, milliseconds,
     );
-    targetDate.setMinutes(targetDate.getMinutes() + timezoneOffset);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
+    targetDate.setUTCMinutes(targetDate.getUTCMinutes() + timezoneOffset);
+    targetDate.setUTCSeconds(targetDate.getUTCSeconds() + timezoneOffsetSeconds);
   }
 
   return timezoneOffset;

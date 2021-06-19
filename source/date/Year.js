@@ -1,4 +1,4 @@
-import { isString, isInteger, isDate, isUndefined } from '../type/isType.js';
+import { isString, isNumber, isInteger, isDate, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Year } from './_Year.js';
 import { __includes } from '../compare/__includes.js';
@@ -42,9 +42,9 @@ export const Year = (
       `Year args(sourceDate:${sourceDate}) is not date`,
     );
   }
-  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isNumber(timezoneOffset)) {
     throw new TypeError(
-      `Year args(timezoneOffset:${timezoneOffset}) is not integer`,
+      `Year args(timezoneOffset:${timezoneOffset}) is not number`,
     );
   }
 

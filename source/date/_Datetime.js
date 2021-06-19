@@ -1,4 +1,5 @@
 import { isNull, isUndefined } from '../type/type.js';
+import { _roundDown } from '../number/_roundDown.js';
 
 /**
  * Datetime
@@ -17,9 +18,11 @@ export const _Datetime = function(
     self.setUTCFullYear(year, month - 1, date);
     self.setUTCHours(hours, minutes, seconds, milliseconds);
   } else {
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     self.setUTCFullYear(year, month - 1, date);
     self.setUTCHours(hours, minutes, seconds, milliseconds);
-    self.setMinutes(self.getMinutes() + timezoneOffset);
+    self.setUTCMinutes(self.getUTCMinutes() + timezoneOffset);
+    self.setUTCSeconds(self.getUTCSeconds() + timezoneOffsetSeconds);
   }
 
   return self;

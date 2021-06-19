@@ -222,6 +222,9 @@
 .date._Day:[object Function]:function
 .date._dayOfWeek:[object Function]:function
 .date._DayUTC:[object Function]:function
+.date._getDatetime:[object Function]:function
+.date._getDatetimeUTC:[object Function]:function
+.date._getTimezoneOffset:[object Function]:function
 .date._minutesToTexts:[object Function]:function
 .date._Month:[object Function]:function
 .date._MonthUTC:[object Function]:function
@@ -238,6 +241,9 @@
 .date.Day:[object Function]:function
 .date.dayOfWeek:[object Function]:function
 .date.DayUTC:[object Function]:function
+.date.getDatetime:[object Function]:function
+.date.getDatetimeUTC:[object Function]:function
+.date.getTimezoneOffset:[object Function]:function
 .date.InvalidDate:[object Function]:function
 .date.isInvalidDate:[object Function]:function
 .date.minutesToTexts:[object Function]:function

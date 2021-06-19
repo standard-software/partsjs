@@ -1,4 +1,4 @@
-import { isDate, isString, isObject, isInteger, isUndefined } from '../type/isType.js';
+import { isDate, isString, isObject, isNumber, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Year } from './_Year.js';
 import { __stringToDateRule } from './__stringToDateRule.js';
@@ -51,9 +51,9 @@ export const stringToDate = (
       `stringToDate args(format:${format}) is not string`,
     );
   }
-  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isNumber(timezoneOffset)) {
     throw new TypeError(
-      `stringToDate args(timezoneOffset:${timezoneOffset}) is not integer`,
+      `stringToDate args(timezoneOffset:${timezoneOffset}) is not number`,
     );
   }
   if (!isDate(sourceDate)) {

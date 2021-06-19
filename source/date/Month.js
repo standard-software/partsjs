@@ -1,4 +1,4 @@
-import { isString, isInteger, isDate, isUndefined } from '../type/isType.js';
+import { isString, isNumber, isInteger, isDate, isUndefined } from '../type/isType.js';
 import { isObjectParameter } from '../object/isObjectParameter.js';
 import { _Month } from './_Month.js';
 import { __includes } from '../compare/__includes.js';
@@ -42,9 +42,9 @@ export const Month = (
       `Month args(sourceDate:${sourceDate}) is not date`,
     );
   }
-  if (!isUndefined(timezoneOffset) && !isInteger(timezoneOffset)) {
+  if (!isUndefined(timezoneOffset) && !isNumber(timezoneOffset)) {
     throw new TypeError(
-      `Month args(timezoneOffset:${timezoneOffset}) is not integer`,
+      `Month args(timezoneOffset:${timezoneOffset}) is not number`,
     );
   }
 

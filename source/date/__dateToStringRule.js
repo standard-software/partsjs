@@ -5,15 +5,7 @@ import { _dayOfWeek } from './_dayOfWeek.js';
 import { _nameOfMonth } from './_nameOfMonth.js';
 import { _minutesToTexts } from './_minutesToTexts.js';
 import { __cloneDate } from '../common/__cloneDate.js';
-
-const rule = {};
-
-const cloneDate = (date) => new Date(date.getTime());
-const setDateOffsetMin = (date, offsetMin) => {
-  const result = cloneDate(date);
-  result.setUTCMinutes(result.getUTCMinutes() - offsetMin);
-  return result;
-};
+import { _roundDown } from '../number/_roundDown.js';
 
 const year4 = (date, timezoneOffset) => {
   let result;
@@ -23,7 +15,10 @@ const year4 = (date, timezoneOffset) => {
     result = date.getUTCFullYear();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCFullYear();
   }
   return result.toString();
@@ -41,7 +36,10 @@ const month = (date, timezoneOffset) => {
     result = date.getUTCMonth();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCMonth();
   }
   return result;
@@ -63,7 +61,10 @@ const date1 = (date, timezoneOffset) => {
     result = date.getUTCDate();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCDate();
   }
   return result.toString();
@@ -81,7 +82,10 @@ const hours = (date, timezoneOffset) => {
     result = date.getUTCHours();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCHours();
   }
   return result;
@@ -114,7 +118,10 @@ const minutes1 = (date, timezoneOffset) => {
     result = date.getUTCMinutes();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCMinutes();
   }
   return result.toString();
@@ -132,7 +139,10 @@ const seconds1 = (date, timezoneOffset) => {
     result = date.getUTCSeconds();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCSeconds();
   }
   return result.toString();
@@ -150,7 +160,10 @@ const milliseconds3 = (date, timezoneOffset) => {
     result = date.getUTCMilliseconds();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCMilliseconds();
   }
   return _paddingFirst(
@@ -204,7 +217,10 @@ const dayOfWeek = (date, timezoneOffset) => {
     result = date.getUTCDay();
   } else {
     const d = __cloneDate(date);
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
     d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
+
     result = d.getUTCDay();
   }
   return result;

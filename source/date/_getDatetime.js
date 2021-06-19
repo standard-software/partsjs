@@ -6,43 +6,39 @@ export const _getDatetime = (
   date,
   timezoneOffset,
 ) => {
-  const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
-  const _date = __cloneDate(date);
+  const d = __cloneDate(date);
   if (isUndefined(timezoneOffset)) {
     return {
-      year:         _date.getFullYear(),
-      month:        _date.getMonth() + 1,
-      date:         _date.getDate(),
-      hours:        _date.getHours(),
-      minutes:      _date.getMinutes(),
-      seconds:      _date.getSeconds(),
-      milliseconds: _date.getMilliseconds(),
+      year:         d.getFullYear(),
+      month:        d.getMonth() + 1,
+      date:         d.getDate(),
+      hours:        d.getHours(),
+      minutes:      d.getMinutes(),
+      seconds:      d.getSeconds(),
+      milliseconds: d.getMilliseconds(),
     };
   } else if (isNull(timezoneOffset)) {
     return {
-      year:         _date.getUTCFullYear(),
-      month:        _date.getUTCMonth() + 1,
-      date:         _date.getUTCDate(),
-      hours:        _date.getUTCHours(),
-      minutes:      _date.getUTCMinutes(),
-      seconds:      _date.getUTCSeconds(),
-      milliseconds: _date.getUTCMilliseconds(),
+      year:         d.getUTCFullYear(),
+      month:        d.getUTCMonth() + 1,
+      date:         d.getUTCDate(),
+      hours:        d.getUTCHours(),
+      minutes:      d.getUTCMinutes(),
+      seconds:      d.getUTCSeconds(),
+      milliseconds: d.getUTCMilliseconds(),
     };
   } else {
-    _date.setUTCMinutes(
-      _date.getUTCMinutes() - timezoneOffset,
-    );
-    _date.setUTCSeconds(
-      _date.getUTCSeconds() - timezoneOffsetSeconds,
-    );
+    const timezoneOffsetSeconds = (timezoneOffset * 60 - _roundDown(timezoneOffset) * 60);
+    d.setUTCMinutes(d.getUTCMinutes() - timezoneOffset);
+    d.setUTCSeconds(d.getUTCSeconds() - timezoneOffsetSeconds);
     return {
-      year:         _date.getUTCFullYear(),
-      month:        _date.getUTCMonth() + 1,
-      date:         _date.getUTCDate(),
-      hours:        _date.getUTCHours(),
-      minutes:      _date.getUTCMinutes(),
-      seconds:      _date.getUTCSeconds(),
-      milliseconds: _date.getUTCMilliseconds(),
+      year:         d.getUTCFullYear(),
+      month:        d.getUTCMonth() + 1,
+      date:         d.getUTCDate(),
+      hours:        d.getUTCHours(),
+      minutes:      d.getUTCMinutes(),
+      seconds:      d.getUTCSeconds(),
+      milliseconds: d.getUTCMilliseconds(),
     };
   }
 };
