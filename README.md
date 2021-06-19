@@ -362,6 +362,11 @@ You can now use the functions of the parts.js object.
 
 ## Version
 
+### 10.7.0
+#### 2021/06/19(Sat)
+- add getDatetime / getDatetimeUTC
+- add getTimezoneOffset
+
 ### 10.6.1
 #### 2021/06/15(Tue)
 - update dateToString
@@ -386,14 +391,17 @@ You can now use the functions of the parts.js object.
   - support timezone
 - update equal support Invalid Date
 - add date.InvalidDate()
-- delete Today
-  - replace Day('today')
 - add function
   - Year/YearUTC
   - Month/MonthUTC
   - Day/DayUTC
 - update test code date
   - support timezone
+- delete
+  - Today >> replace Day('today')
+  - dayOfWeekEnglishShort / dayOfWeekEnglishLong
+  - dayOfWeekJapaneseShort / dayOfWeekJapaneseLong
+  - nameOfMonthEnglishChar3 / Char4 / Long
 - add date.minutesToTexts
 - add date.textsToMinutes
 - update replaceAllArray add args detail

@@ -15,7 +15,7 @@ import arrayJs from './array/array.js';
 import dateJs from './date/date.js';
 import systemJs from './system/system.js';
 
-export const VERSION = '10.6.1';
+export const VERSION = '10.7.0 beta';
 
 let rootAlias = {};
 const propertyNames = {};

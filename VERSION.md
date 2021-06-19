@@ -26,14 +26,17 @@
   - support timezone
 - update equal support Invalid Date
 - add date.InvalidDate()
-- delete Today
-  - replace Day('today')
 - add function
   - Year/YearUTC
   - Month/MonthUTC
   - Day/DayUTC
 - update test code date
   - support timezone
+- delete
+  - Today >> replace Day('today')
+  - dayOfWeekEnglishShort / dayOfWeekEnglishLong
+  - dayOfWeekJapaneseShort / dayOfWeekJapaneseLong
+  - nameOfMonthEnglishChar3 / Char4 / Long
 - add date.minutesToTexts
 - add date.textsToMinutes
 - update replaceAllArray add args detail

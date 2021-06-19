@@ -25,6 +25,8 @@ export const test_execute_date = (parts) => {
     stringToDateUTC,
     minutesToTexts,
     textsToMinutes,
+    getDatetime, getDatetimeUTC,
+    getTimezoneOffset,
   } = parts.date;
 
   const {
@@ -2057,6 +2059,68 @@ export const test_execute_date = (parts) => {
       });
     };
 
+    const test_getDatetime = () => {
+      it('test_getDatetime', () => {
+        checkEqual(
+          getDatetime(new Date(1920, 0, 1), 0),
+          getDatetimeUTC(new Date(1920, 0, 1)),
+        );
+        checkEqual(
+          getDatetime(new Date(1920, 0, 1), 0),
+          getDatetime(new Date(Date.UTC(1920, 0, 1)),
+            -1 * getTimezoneOffset(new Date(Date.UTC(1920, 0, 1))).seconds / 60),
+        );
+        checkEqual(
+          getDatetime(new Date(2021, 0, 1), 0),
+          getDatetimeUTC(new Date(2021, 0, 1)),
+        );
+        checkEqual(
+          getDatetime(new Date(2021, 0, 1), 0),
+          getDatetime(new Date(Date.UTC(2021, 0, 1)),
+            -1 * getTimezoneOffset(new Date(Date.UTC(2021, 0, 1))).seconds / 60),
+        );
+
+        // object parameter
+        checkEqual(
+          getDatetimeUTC(new Date(1920, 0, 1)),
+          getDatetime({
+            date: new Date(1920, 0, 1),
+            timezoneOffset: 0,
+          }),
+        );
+        checkEqual(
+          getDatetimeUTC(new Date(1920, 0, 1)),
+          getDatetime(
+            new Date(1920, 0, 1),
+            {
+              timezoneOffset: 0,
+            },
+          ),
+        );
+      });
+    };
+
+    const test_getTimezoneOffset = () => {
+      it('test_getTimezoneOffset', () => {
+        checkEqual(
+          (new Date(1920, 0, 1)).getTimezoneOffset(),
+          getTimezoneOffset(new Date(1920, 0, 1)).minutes,
+        );
+        checkEqual(
+          (new Date(2021, 0, 1)).getTimezoneOffset(),
+          getTimezoneOffset(new Date(2021, 0, 1)).minutes,
+        );
+
+        // object parameter
+        checkEqual(
+          (new Date(2021, 0, 1)).getTimezoneOffset(),
+          getTimezoneOffset(
+            { date: new Date(2021, 0, 1) },
+          ).minutes,
+        );
+      });
+    };
+
     test_Year();
     test_YearUTC();
     test_Month();
@@ -2091,6 +2155,9 @@ export const test_execute_date = (parts) => {
 
     test_minutesToTexts();
     test_textsToMinutes();
+
+    test_getDatetime();
+    test_getTimezoneOffset();
 
   });
 };

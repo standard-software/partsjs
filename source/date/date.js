@@ -32,6 +32,12 @@ import _minutesToTextsJs from './_minutesToTexts.js';
 import minutesToTextsJs from './minutesToTexts.js';
 import _textsToMinutesJs from './_textsToMinutes.js';
 import textsToMinutesJs from './textsToMinutes.js';
+import { _getDatetime } from './_getDatetime.js';
+import { getDatetime } from './getDatetime.js';
+import { _getDatetimeUTC } from './_getDatetimeUTC.js';
+import { getDatetimeUTC } from './getDatetimeUTC.js';
+import { _getTimezoneOffset } from './_getTimezoneOffset.js';
+import { getTimezoneOffset } from './getTimezoneOffset.js';
 
 const dateJs = {
   ..._DatetimeJs,
@@ -147,4 +153,11 @@ export default {
 
   isInvalidDate,
   InvalidDate,
+
+  _getDatetime,
+  getDatetime,
+  _getDatetimeUTC,
+  getDatetimeUTC,
+  _getTimezoneOffset,
+  getTimezoneOffset,
 };
