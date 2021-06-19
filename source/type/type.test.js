@@ -317,6 +317,7 @@ export const test_execute_type = (parts) => {
         || parts.platform.isOpera()
         || parts.platform.isDeno()
         || parts.platform.isNode()
+        || parts.platform.isJest()
         ) {
           checkType('object',    '[object Reflect]',  Reflect);
         } else {
@@ -334,6 +335,7 @@ export const test_execute_type = (parts) => {
         || parts.platform.isOpera()
         || parts.platform.isDeno()
         || parts.platform.isNode()
+        || parts.platform.isJest()
         ) {
           checkType('object',    '[object Intl]',   Intl);
         } else {
@@ -514,6 +516,7 @@ export const test_execute_type = (parts) => {
         || parts.platform.isOpera()
         || parts.platform.isDeno()
         || parts.platform.isNode()
+        || parts.platform.isJest()
         ) {
           checkEqual('Reflect',           typeName(Reflect));
         } else {
@@ -528,6 +531,7 @@ export const test_execute_type = (parts) => {
         || parts.platform.isOpera()
         || parts.platform.isDeno()
         || parts.platform.isNode()
+        || parts.platform.isJest()
         ) {
           checkEqual('Intl',              typeName(Intl));
         } else {
@@ -706,12 +710,6 @@ export const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isInternetExplorer()) {
-        } else if (parts.platform.isChrome()
-        || parts.platform.isEdge()
-        || parts.platform.isFirefox()
-        || parts.platform.isOpera()
-        ) {
-          checkEqual(true,                isObjectLike(Reflect));
         } else {
           checkEqual(true,                isObjectLike(Reflect));
         }
@@ -719,12 +717,6 @@ export const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isDeno()) {
-        } else if (parts.platform.isChrome()
-        || parts.platform.isEdge()
-        || parts.platform.isFirefox()
-        || parts.platform.isOpera()
-        ) {
-          checkEqual(true,                isObjectLike(Intl));
         } else {
           checkEqual(true,                isObjectLike(Intl));
         }
@@ -901,12 +893,6 @@ export const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isInternetExplorer()) {
-        } else if (parts.platform.isChrome()
-        || parts.platform.isEdge()
-        || parts.platform.isFirefox()
-        || parts.platform.isOpera()
-        ) {
-          checkEqual(false,                isPrimitiveType(Reflect));
         } else {
           checkEqual(false,                isPrimitiveType(Reflect));
         }
@@ -914,12 +900,6 @@ export const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isDeno()) {
-        } else if (parts.platform.isChrome()
-        || parts.platform.isEdge()
-        || parts.platform.isFirefox()
-        || parts.platform.isOpera()
-        ) {
-          checkEqual(false,                isPrimitiveType(Intl));
         } else {
           checkEqual(false,                isPrimitiveType(Intl));
         }
@@ -1097,12 +1077,6 @@ export const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isInternetExplorer()) {
-        } else if (parts.platform.isChrome()
-        || parts.platform.isEdge()
-        || parts.platform.isFirefox()
-        || parts.platform.isOpera()
-        ) {
-          checkEqual(true,                isReferenceType(Reflect));
         } else {
           checkEqual(true,                isReferenceType(Reflect));
         }
@@ -1110,12 +1084,6 @@ export const test_execute_type = (parts) => {
         if (parts.platform.isWindowsScriptHost()) {
         } else if (parts.platform.isGasRhino()) {
         } else if (parts.platform.isDeno()) {
-        } else if (parts.platform.isChrome()
-        || parts.platform.isEdge()
-        || parts.platform.isFirefox()
-        || parts.platform.isOpera()
-        ) {
-          checkEqual(true,                isReferenceType(Intl));
         } else {
           checkEqual(true,                isReferenceType(Intl));
         }

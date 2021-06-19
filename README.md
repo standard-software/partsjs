@@ -369,6 +369,8 @@ You can now use the functions of the parts.js object.
 - update Year() / Month() / Day()
   / dateToString() / stringToDate() / Datetime()
   - support timezoneOffset seconds
+- update Jest test code
+  - support invalid date
 
 ### 10.6.1
 #### 2021/06/15(Tue)

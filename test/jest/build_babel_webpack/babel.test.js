@@ -5,7 +5,12 @@ const {
 } = require('../../../build/babel_webpack/babel/index.test.js');
 
 parts.test.checkEqual = (a, b) => {
-  expect(a).toEqual(b);
+  const { isInvalidDate } = parts.date;
+  if (isInvalidDate(a) && isInvalidDate(b)) {
+    expect(true).toBe(true);
+  } else {
+    expect(a).toEqual(b);
+  }
   // jest expect().toEqual is deep equal
 };
 parts.test.it = it;
