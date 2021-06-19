@@ -371,6 +371,7 @@ You can now use the functions of the parts.js object.
   - support timezoneOffset seconds
 - update Jest test code
   - support invalid date
+  - update jest.config.js
 
 ### 10.6.1
 #### 2021/06/15(Tue)

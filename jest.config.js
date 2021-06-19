@@ -1,4 +1,6 @@
-module.exports = {
-  verbose: true,
-  rootDir: 'test/jest',
+module.exports = async () => {
+  return {
+    verbose: true,
+    rootDir: 'test/jest',
+  };
 };
