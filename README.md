@@ -41,7 +41,7 @@ Normal
 
 When specifying the version
 
-    npm i @standard-software/parts@10.6.1
+    npm i @standard-software/parts@10.7.0
     npm i @standard-software/parts@9.2.0
 
 ### type CommonJS
@@ -91,7 +91,7 @@ console.log(
 
 ```js
 // index.js
-import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.6.1/source/index.js';
+import parts from 'https://raw.githubusercontent.com/standard-software/partsjs/v10.7.0/source/index.js';
 
 console.log(
   'parts version is ', parts.VERSION
@@ -134,7 +134,7 @@ You can now use the functions of the parts.js object.
   <meta charset="UTF-8">
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.6.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.7.0"></script>
   <script>
     document.write('parts version is ' + parts.VERSION)
   </script>
@@ -174,7 +174,7 @@ https://jsbin.com/popuhog/edit?html,js,console
   <title>JS Bin</title>
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.6.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@standard-software/parts@10.7.0"></script>
 
 </body>
 </html>

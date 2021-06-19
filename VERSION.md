@@ -2,6 +2,17 @@
 
 ## Version
 
+### 10.7.0
+#### 2021/06/19(Sat)
+- add getDatetime / getDatetimeUTC
+- add getTimezoneOffset
+- update Year() / Month() / Day()
+  / dateToString() / stringToDate() / Datetime()
+  - support timezoneOffset seconds
+- update Jest test code
+  - support invalid date
+  - update jest.config.js
+
 ### 10.6.1
 #### 2021/06/15(Tue)
 - update dateToString
